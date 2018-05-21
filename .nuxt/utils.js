@@ -113,14 +113,14 @@ export async function setContext(app, context) {
         return process.client
       },
       isStatic: process.static,
-      isDev: true,
+      isDev: false,
       isHMR: false,
       app,
       store: app.store,
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {"VERSION":"1.0.0"}
+      env: {"VERSION":"1.0.0","NODE_ENV":"development","BASE_URL":"/","BASE_ROUTER":"/","API_STARDUST_BASE_URL":"https://server.startask.net","API_STARDUST_TIMEOUT":"30000"}
     }
     // Only set once
     if (context.req) app.context.req = context.req
