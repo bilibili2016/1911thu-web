@@ -1,0 +1,48 @@
+/**
+ * 当前元素垂直居中
+ *
+ * param $height 被居中元素高度，知道更好，不知道也行
+ *
+ * 使用条件：parent 必须是 position: relative
+ * 使用场景：被居中元素为 block 元素
+ */
+@mixin center-vertical($height: 0) {
+  @if ($height == 0) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  } @else {
+    position: absolute;
+    top: 50%;
+    height: $height;
+    margin-top: $height / 2;
+  }
+}
+
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+@mixin float-left {
+  float: left !important;
+}
+@mixin float-right {
+  float: right !important;
+}
+@mixin float-none {
+  float: none !important;
+}
+
+@mixin align-left {
+  text-align: left !important;
+}
+@mixin align-right {
+  text-align: right !important;
+}
+@mixin align-center {
+  text-align: center !important;
+}
