@@ -11,7 +11,8 @@
     "generate": "nuxt generate -c build/prod.conf.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "status": "webpack --profile --json"
   },
   "dependencies": {
     "@nuxtjs/proxy": "^1.1.3",
