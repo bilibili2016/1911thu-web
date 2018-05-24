@@ -1,17 +1,19 @@
 <template>
   <el-main class="index">
+
   </el-main>
 </template>
 
 <script>
+// import  from ''
 export default {
-  computed: {
-  },
-  methods: {
+  data () {
+    return {
+    }
   }
 }
 </script>
 
 <style lang="scss">
-@import "~assets/style/config";
+@import "~assets/style/main";
 </style>

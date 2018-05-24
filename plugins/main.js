@@ -3,7 +3,6 @@
  */
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-// import VCharts from 'v-charts'
 import Holder from 'holderjs'
 
 import { log } from '../lib/core/logger'
@@ -12,12 +11,11 @@ log.info('%cStartask Frontend Version: ' + process.env.VERSION, 'background: #72
 
 Vue.config.productionTip = process.env.NODE_ENV !== 'production'
 Vue.use(ElementUI)
-// Vue.use(VCharts)
 
 /**
  * 增加 v-holder 指令
  *
- *
+ * 参数跟 HolderJS 一样，只能是字符串，详见 https://github.com/imsky/holder
  */
 Vue.directive('holder', {
   bind (el, binding) {
