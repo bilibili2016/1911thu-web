@@ -23,8 +23,8 @@
 
         <el-form-item label="生日">
             <el-date-picker
-            @change="col"
-            v-model="formLabelAlign.date"
+            @click="col"
+            v-model="formLabelAlign.dateNew"
             type="date"
             placeholder="选择日期">
             </el-date-picker>
@@ -43,22 +43,27 @@
             <el-input v-model="formLabelAlign.company"></el-input>
         </el-form-item>
 
+        <el-form-item>
+            <el-button type="primary" @click="submitForm">立即创建</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+
     </el-form>
         
 </template>
 
 <script>
+import Header from '../components/common/Header'
+import Footer from '../components/common/Footer'
 export default{
+    components : {Footer,Header},
     methods: {
         col(){
             console.log(this.ruleForm.date)
         },
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
-        },
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-        }
+        submitForm() {
+            console.log(this.formLabelAlign);
+      },
     },
     data(){
         return{
@@ -67,12 +72,12 @@ export default{
                 showError: false,
                 nickName: '',
                 radio:'',
-                date: '',
+                dateNew: '',
                 position: '',
                 position: '',
                 email: '',
-                tel:'',
-                company:'',
+                tel:'19510326565',
+                company:'北京分分分形科技有限公司',
                 dialogImageUrl: '',
                 dialogVisible: false
             },
@@ -87,7 +92,7 @@ export default{
                 ],
                 email:[
                     { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-                    { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+                    { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
                 ]
             }
         }

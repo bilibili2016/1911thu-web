@@ -22,3 +22,61 @@
 .el-menu-item--text {
   pointer-events: none;
 }
+
+// banner
+.el-carousel__container{
+  height: 636px;
+}
+.el-carousel__indicators{
+  bottom: 145px;
+  left: auto;
+  right: 0;
+}
+.el-carousel__button{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+// tab切换
+.el-tabs--left .el-tabs__header.is-left {
+  width: 178px;
+  margin: 0;
+}
+.el-tabs--left .el-tabs__nav-wrap.is-left{
+  margin: 0;
+}
+.el-tabs--left .el-tabs__item.is-left{
+  text-align: center;
+}
+.el-tabs__nav {
+  background-color: #6417a6;
+  height: 636px;
+}
+.el-tabs__header.is-left {
+  margin-right: 40px;
+}
+.el-tabs__active-bar.is-left {
+  display: none;
+}
+.el-tabs__item {
+  height: 76px;
+  line-height: 76px;
+  color: #fff;
+  font-weight: 400;
+}
+.el-tabs__item.is-active {
+  color: #6417A6;
+  background-color: #fff;
+  opacity: .9;
+}
+.el-tabs__content {
+  width: 1022px;
+  z-index: 2;
+  height: 456px;
+  padding: 25px 0 25px 42px;
+  overflow-y: auto;
+  background-color: #eee;
+  opacity: 0.94;
+}
+
