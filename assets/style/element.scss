@@ -28,9 +28,13 @@
   height: 636px;
 }
 .el-carousel__indicators{
+  width: 1100px;
+  text-align: right;
+  margin: 0 auto;
   bottom: 145px;
-  left: auto;
-  right: 0;
+  left: 50%;
+  margin-left: -550px;
+  
 }
 .el-carousel__button{
   width: 10px;
@@ -72,7 +76,7 @@
     opacity: .9;
   }
   .el-tabs__content {
-    width: 1022px;
+    width: 922px;
     z-index: 2;
     height: 456px;
     padding: 25px 0 25px 42px;
@@ -115,6 +119,7 @@
     background-color: transparent;
   }
 
+  // 登录表单
   .el-form-item__content{
     text-align: center;
     position: relative;
@@ -151,6 +156,29 @@
       background-color: #6417A6;
       font-size: 14px;
       color: #fff;
+    }
+  }
+
+  // 注册表单
+  #pane-register {
+    .start .el-form-item__content{
+      text-align: left;
+      padding-left: 50px;
+    }
+    .el-form-item.el-form-item--feedback {
+      margin-bottom: 18px;
+    }
+    .captcha{
+      width: 132px;
+    }
+    // 用户注册协议
+    .el-checkbox__label{
+      color: #6417A6;
+      font-size: 12px;
+    }
+    .el-checkbox__input.is-checked .el-checkbox__inner{
+      background-color: #6417a6;
+      border-color: #6417a6;
     }
   }
 

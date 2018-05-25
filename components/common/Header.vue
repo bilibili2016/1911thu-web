@@ -10,11 +10,11 @@
       </div>
       <div class="HREntry">
         <span>Hr入口</span>
-        <i class="phone" :style="bgi"></i>
+        <i class="phone"></i>
       </div>
       <div class="lrBtn">
         <span class="login" @click="login">登录</span>
-        <span class="register">注册</span>
+        <span class="register" @click="register">注册</span>
       </div>
     </div>
 
@@ -26,12 +26,12 @@
           <el-tab-pane label="登录" name="login">
             <!-- 登录 -->
             <el-form :model="loginData" status-icon :rules="rules2" ref="loginData" class="demo-ruleForm">
-              <el-form-item prop="age">
+              <el-form-item prop="tel">
                 <el-input v-model.number="loginData.tel" placeholder="请输入登录手机号"></el-input>
               </el-form-item>
               <el-form-item prop="pass">
                 <el-input :type="loginData.pwdType" v-model="loginData.pass" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格"></el-input>
-                <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
+                <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
                 <div>忘记密码?</div>
@@ -42,16 +42,20 @@
           </el-tab-pane>
           <el-tab-pane label="注册" name="register">
             <!-- 注册 -->
-            <el-form :model="loginData" status-icon :rules="rules2" ref="loginData" class="demo-ruleForm">
-              <el-form-item prop="age">
-                <el-input v-model.number="loginData.tel" placeholder="请输入登录手机号"></el-input>
+            <el-form :model="registerData" status-icon :rules="rules2" ref="registerData" class="demo-ruleForm">
+              <el-form-item prop="tel"> <!-- 手机号 -->
+                <el-input v-model.number="registerData.tel" placeholder="请输入登录手机号"></el-input>
               </el-form-item>
-              <el-form-item prop="pass">
-                <el-input :type="loginData.pwdType" v-model="loginData.pass" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格"></el-input>
-                <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
+              <el-form-item prop="code"> <!-- 验证码 -->
+                <el-input class="captcha" v-model.number="registerData.code" placeholder="请输入验证码"></el-input>
+                <div class="getCode">{{registerData.getCode}}</div>
+              </el-form-item>
+              <el-form-item> <!-- 手机号 -->
+                <el-input v-model="registerData.company" placeholder="绑定企业"></el-input>
+                <span class="bindCompany">(可选)</span>
               </el-form-item>
               <el-row>
-                <div>忘记密码?</div>
+                <el-checkbox v-model="registerData.checked">同意用户注册协议</el-checkbox>
                 <el-button>登录</el-button>
               </el-row>
             </el-form>
@@ -85,6 +89,7 @@
         }
       },
       register(){
+        console.log(this.activeName);
         this.start=true;
         this.activeName = 'register';
       },
@@ -119,21 +124,28 @@
         start:false,
         search:'',
         activeName: '',
-        showPwd: false,
-        pwdType:'password',
-        bgi:{
-          backgroundImage: "url(" + require("../../assets/images/phone.png") + ")",
-        },
         loginData:{
           pass:'',
-          tel: ''
+          tel: '',
+          showPwd: false,
+          pwdType:'password'
+        },
+        registerData:{
+          tel:'',
+          code:'',
+          getCode:'获取验证码',
+          checked:false
         },
         rules2:{
           pass: [
             { validator: validatePass, trigger: 'blur' }
           ],
           tel: [
-            { validator: checkTel, trigger: 'blur' }
+            { validator: checkTel, trigger: 'blur' },
+            { type: 'number', message: '年龄必须为数字值', trigger: 'blur'}
+          ],
+          code: [
+            { required: true, message: '验证码不能为空', trigger: 'blur'}
           ]
         }
       }
