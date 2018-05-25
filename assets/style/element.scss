@@ -38,45 +38,120 @@
   border-radius: 50%;
 }
 
-// tab切换
-.el-tabs--left .el-tabs__header.is-left {
-  width: 178px;
-  margin: 0;
-}
-.el-tabs--left .el-tabs__nav-wrap.is-left{
-  margin: 0;
-}
-.el-tabs--left .el-tabs__item.is-left{
-  text-align: center;
-}
-.el-tabs__nav {
-  background-color: #6417a6;
-  height: 636px;
-}
-.el-tabs__header.is-left {
-  margin-right: 40px;
-}
-.el-tabs__active-bar.is-left {
-  display: none;
-}
-.el-tabs__item {
-  height: 76px;
-  line-height: 76px;
-  color: #fff;
-  font-weight: 400;
-}
-.el-tabs__item.is-active {
-  color: #6417A6;
-  background-color: #fff;
-  opacity: .9;
-}
-.el-tabs__content {
-  width: 1022px;
-  z-index: 2;
-  height: 456px;
-  padding: 25px 0 25px 42px;
-  overflow-y: auto;
-  background-color: #eee;
-  opacity: 0.94;
+// 首页tab切换
+.classify{
+  .el-tabs--left .el-tabs__header.is-left {
+    width: 178px;
+    margin: 0;
+  }
+  .el-tabs--left .el-tabs__nav-wrap.is-left{
+    margin: 0;
+  }
+  .el-tabs--left .el-tabs__item.is-left{
+    text-align: center;
+  }
+  .el-tabs__nav {
+    background-color: #6417a6;
+    height: 636px;
+  }
+  .el-tabs__header.is-left {
+    margin-right: 40px;
+  }
+  .el-tabs__active-bar.is-left {
+    display: none;
+  }
+  .el-tabs__item {
+    height: 76px;
+    line-height: 76px;
+    color: #fff;
+    font-weight: 400;
+  }
+  .el-tabs__item.is-active {
+    color: #6417A6;
+    background-color: #fff;
+    opacity: .9;
+  }
+  .el-tabs__content {
+    width: 1022px;
+    z-index: 2;
+    height: 456px;
+    padding: 25px 0 25px 42px;
+    overflow-y: auto;
+    background-color: #eee;
+    opacity: 0.94;
+  }
 }
 
+// 登录注册 tab切换
+.start{
+  .el-tabs__header {
+    margin: 0 0 18px;
+  }
+  .el-tabs__nav{
+    width: 100%;
+    text-align: center;
+  }
+  .el-tabs__active-bar.is-top{
+    display: none;
+  }
+  .el-tabs__item{
+    height: 55px;
+    line-height: 70px;
+    font-weight: 400;
+    padding: 0 16px !important;
+    border-bottom: 2px solid transparent;
+    &.is-active{
+      font-weight: 500;
+    }
+  }
+  .el-tabs__item#tab-login {
+    margin-right:60px;
+  }
+  .el-tabs__item.is-active{
+    border-color: #6417A6;
+    color: #6417A6;
+  }
+  .el-tabs__nav-wrap::after{
+    background-color: transparent;
+  }
+
+  .el-form-item__content{
+    text-align: center;
+    position: relative;
+  }
+  .el-form-item__error{
+    left:63px;
+  }
+  .el-input__suffix{
+    display: none;
+  }
+  .el-input{
+    width: 264px;
+  }
+  .el-input__inner{
+    border: none;
+    border-bottom:1px solid #bbb;
+    &::-webkit-input-placeholder{
+      font-size: 12px;
+    }
+  }
+  .el-tab-pane .el-row{
+    width: 264px;
+    margin: 0 auto;
+    div{
+      display: inline-block;
+      float: right;
+      margin-bottom: 30px;
+      color: #6417A6;
+    }
+    button{
+      width: 100%;
+      height: 40px;
+      border-radius: 6px;
+      background-color: #6417A6;
+      font-size: 14px;
+      color: #fff;
+    }
+  }
+
+}
