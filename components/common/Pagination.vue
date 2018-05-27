@@ -5,16 +5,15 @@
 </template>
 
 <script>
-    export default {
-       props: ['data'],
-       methods: {
-         handleCurrentChange(val) {
-           this.$emit('page', val)
-         }
-       }
+export default {
+  props: ["data"],
+  methods: {
+    handleCurrentChange(val) {
+      this.$emit("page", val);
     }
+  }
+};
 </script>
 
 <style scoped>
-
 </style>

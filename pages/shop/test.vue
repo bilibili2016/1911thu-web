@@ -1,6 +1,6 @@
 <template>
   <div>
-
+<el-input type="text"></el-input>
   </div>
 </template>
 

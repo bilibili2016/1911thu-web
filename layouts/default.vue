@@ -1,25 +1,26 @@
 <template>
   <el-container class="is-vertical layout-default">
-    <el-container class="main">
+     <Header></Header>
+    <el-container>
       <el-main>
          <nuxt/>
       </el-main>
     </el-container>
+   <Footer></Footer>
   </el-container>
 </template>
-
 <script>
-
+import Header from '~/components/common/Header'
+import Footer from '~/components/common/Footer'
 export default {
   components: {
-  },
-  data () {
-    return {
-    }
+    Header,
+    Footer
   }
 }
 </script>
-
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~assets/style/config";
+// @import "~assets/style/default";
+
 </style>
