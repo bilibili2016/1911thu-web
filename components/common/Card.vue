@@ -85,7 +85,7 @@
 
 <script>
 export default {
-  props: ["data", "config", "infoArticle", "infoDesc", "dingData"],
+  props: ["data", "config", "infoArticle", "infoDesc", "dingData", 'searchData'],
   data() {
     return {
       numSrc: require("@/assets/images/home_num.png"),

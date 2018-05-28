@@ -282,5 +282,17 @@
 }
 
 
+//分页
+.pagination{
+  .el-pagination.is-background .el-pager li{
+    border-radius: 15px;
+  }
+  .el-pagination.is-background .btn-prev,
+  .el-pagination.is-background .btn-next{
+    background-color: #fff;
+  }
+}
+
+
 
 
