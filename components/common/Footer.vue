@@ -33,7 +33,6 @@
           </div>
         </div>
       </div>
-      
     </div>
     <div class="copyright">
       京ICP证 98278361836726381号 一九一一（北京）教育科技有限公司 版权所有
@@ -42,12 +41,10 @@
 </template>
 
 <script>
-  export default {
-
-  }
+export default {};
 </script>
 
 <style lang="scss">
-@import '~assets/style/reset';
-@import '~assets/style/footer';
+@import "~assets/style/reset";
+@import "~assets/style/footer";
 </style>

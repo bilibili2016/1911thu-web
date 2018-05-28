@@ -1,11 +1,18 @@
 const webpack = require('webpack')
 const pkg = require('../package.json')
+// 注意，所有语言的 dotenv 默认都不会覆盖 process.env
 const dotenvConfig = require('dotenv').config()
-// const I18N = require('../lib/core/lang')
+const I18N = require('../lib/core/lang')
 let env = process.env
+// if (dotenvConfig.error) {
+//   throw env.error
+// }
 let dotenv = dotenvConfig.parsed
 
 /**
+ * 检查值是否为 true
+ *
+ * 因为 process.env 中只有字符串一种数据类型
  *
  * @param {*} value
  */
@@ -13,15 +20,19 @@ function isTrue(value) {
   return value === 'true'
 }
 
+// process.env.DEBUG 在 nuxt 中也有使用，所以这里只用 dotenv 中的
+// const DEBUG = isTrue(dotenv.DEBUG)
 const baseRouter = env.BASE_ROUTER
 const config = {
   mode: 'spa',
   env: {
     VERSION: pkg.version,
-    NODE_ENV: env.NODE_ENV,
+    NODE_ENV: env.NODE_ENV, // TODO 这里本地总是 development
+    // DEBUG: DEBUG,
     BASE_URL: env.BASE_URL,
     BASE_ROUTER: baseRouter,
-    // 接口配置
+
+    // stardust 接口配置
     API_STARDUST_BASE_URL: env.API_STARDUST_BASE_URL,
     API_STARDUST_TIMEOUT: env.API_STARDUST_TIMEOUT,
   },
@@ -32,10 +43,12 @@ const config = {
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'renderer', content: 'webkit' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: 'xxxx' }
+      { hid: 'description', name: 'description', content: '星尘数据是为人工智能研发机构服务的训练数据标注平台。' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // 需要直接加载的 CSS
+      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
     ],
     // 需要直接加载的 JS
     // script: [
@@ -62,23 +75,25 @@ const config = {
     vendor: [
       'axios',
       'loglevel'
-    ]
-    // extend (config, { isDev, isClient }) {
-    //   // 可以在此观察、修改 webpack 配置
-    //   if (isDev && isClient) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     })
-    //   }
-    // }
+    ],
+    extend (config, { isDev, isClient }) {
+      // 可以在此观察、修改 webpack 配置
+
+      // if (isDev && isClient) {
+      //   config.module.rules.push({
+      //     enforce: 'pre',
+      //   test: /\.(js|vue)$/,
+      //     loader: 'eslint-loader',
+      //     exclude: /(node_modules)/
+      //   })
+      // }
+    }
   }
 }
 
 if (env.API_PROXY === 'true') {
   // 可配置是否开启 proxy
+  // 关于代理的配置方法详见： https://github.com/chimurai/http-proxy-middleware
   config.modules.push([
     '@nuxtjs/proxy',
     {
@@ -92,6 +107,7 @@ if (env.API_PROXY === 'true') {
   config.proxy = {}
 
   if (isTrue(env.API_STARDUST_PROXY)) {
+    // 可配置是否开启 stardust 接口的 proxy
     config.proxy[env.API_STARDUST_BASE_URL] = env.API_STARDUST_PROXY_TARGET
   }
 }

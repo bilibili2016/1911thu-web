@@ -1,7 +1,7 @@
 <template>
   <el-container class="is-vertical layout-default">
      <Header></Header>
-    <el-container class="main">
+    <el-container>
       <el-main>
          <nuxt/>
       </el-main>
@@ -19,6 +19,13 @@ export default {
   }
 }
 </script>
+<<<<<<< HEAD
 <style lang="scss">
 @import "~assets/style/main";
+=======
+<style lang="scss" scoped>
+@import "~assets/style/config";
+// @import "~assets/style/default";
+
+>>>>>>> master
 </style>

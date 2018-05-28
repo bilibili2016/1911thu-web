@@ -1,4 +1,11 @@
-
+/*
+ * @Author: Allasm98.zhaoliang
+ * @Date: 2018-04-26 18:06:23
+ * @Last Modified by: Allasm98.zhaoliang
+ * @Last Modified time: 2018-05-23 18:14:03
+  * @File Type:  登陆的store
+ * @Describe:
+ */
 
 import { isNull } from 'lodash'
 import { storeLog as log } from '~/lib/core/logger'
@@ -13,7 +20,9 @@ let user = persistStore.get('user')
 let token = persistStore.get('token')
 export const MUTATION = {
   signIn: 'sign-in',
-  signOut: 'sign-out'
+  signOut: 'sign-out',
+  refresh: 'refresh',
+  me: 'me'
 }
 export const state = () => ({
   user,
@@ -32,6 +41,12 @@ export const mutations = {
   [MUTATION.signOut] (state) {
     state.user = null
     state.token = null
+  },
+  [MUTATION.refresh] (state, { token }) {
+    state.token = token
+  },
+  [MUTATION.me] (state, { user }) {
+    state.user = user
   }
 }
 export const actions = {
@@ -54,13 +69,21 @@ export const actions = {
     }
     return user
   },
-  async signOut ({ commit, state }) {
+  async companySignIn ({ commit, state }, { email, password }) {
+    let user
     try {
-      await auth.signOut()
-      persistStore.set('token', null)
-      commit(MUTATION.signOut)
+      let tokens = await auth.companySignIn({ email, password })
+      token = 'JWT ' + tokens.token
+      persistStore.set('token', token)
+      commit(MUTATION.signIn, { token, user })
+      return tokens
     } catch (e) {
-      log.error(e)
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
     }
+    return user
   }
 }
