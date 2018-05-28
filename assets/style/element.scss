@@ -292,7 +292,27 @@
     background-color: #fff;
   }
 }
+// category页面
+.banner{
+  .center{
+    .el-button{
+      padding: 8px 10px;
+      border-radius:6px;
+      color: rgba(34, 34, 34, 1);
+      background-color:rgba(235, 231, 237, 1);
+      border: none;
+    }
+    .el-button--primary{
+      // background-color: rgba(235, 231, 237, 1);
+      border:none;
+    }
+  }
+}
+.bg{
+  .el-button {
+    background-color: red;
+  }
 
-
+}
 
 

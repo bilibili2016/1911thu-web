@@ -7,6 +7,7 @@
       </div>
       <v-card :data="searchData" :config="config"></v-card>
       <v-page :data= "pagemsg"></v-page>
+      <v-backtotop></v-backtotop>
     </div>
 
 </div>
@@ -18,11 +19,13 @@
 import Search from "@/pages/home/search/list.vue";
 import CustomCard from "@/components/common/Card.vue";
 import CustomPagination from "@/components/common/Pagination.vue";
+import BackToTop from "@/components/common/BackToTop.vue";
 export default {
   components: {
     "v-search": Search,
     "v-card": CustomCard,
-    "v-page": CustomPagination
+    "v-page": CustomPagination,
+    "v-backtotop":BackToTop
   },
   data() {
     return {
