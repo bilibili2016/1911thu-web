@@ -37,7 +37,7 @@ const config = {
     API_STARDUST_TIMEOUT: env.API_STARDUST_TIMEOUT,
   },
   head: {
-    title: 'Stardust',
+    title: '1911Thu',
     meta: [
       { charset: 'utf-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
