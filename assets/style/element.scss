@@ -55,10 +55,10 @@
   text-align: center;
 }
 
-.el-tabs__nav {
+// .el-tabs__nav {
   // background-color: #6417a6;
   // height: 636px;
-}
+// }
 
 .el-tabs__header.is-left {
   margin-right: 40px;
@@ -82,7 +82,7 @@
 }
 .bg{
   .el-tabs__content {
-    width: 1022px;
+    width: 922px;
     z-index: 2;
     height: 456px;
     padding: 25px 0 25px 42px;
@@ -125,7 +125,7 @@
 }
   .el-carousel__indicators {
     // display: none;
-    margin-bootom: 22px!important;
+    margin-bottom: 22px!important;
   }
   .home-evaluate{
     .el-carousel__indicators{
@@ -228,7 +228,7 @@
     width: 264px;
     margin: 0 auto;
     div {
-      display: inline-block;
+      // display: inline-block;
       float: right;
       margin-bottom: 30px;
       color: #6417A6;
