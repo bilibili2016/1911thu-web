@@ -68,7 +68,7 @@ const config = {
     '~/plugins/main'
   ],
   modules: [
-    ['nuxt-i18n', I18N.I18N]
+    // ['nuxt-i18n', I18N.I18N]
   ],
   build: {
     extractCSS: true,
