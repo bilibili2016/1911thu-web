@@ -19,11 +19,7 @@
     </div>
 
     <!-- 登录注册 -->
-<<<<<<< HEAD
-    <div class="start" v-show="start">
-=======
     <div class="start" v-if="start" @touchmove.prevent>
->>>>>>> master
       <div class="bgt" @click="close"></div>
       <div class="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -67,11 +63,6 @@
           </el-tab-pane>
         </el-tabs>
         <div class="form">
-<<<<<<< HEAD
-          
-=======
-
->>>>>>> master
         </div>
       </div>
     </div>
@@ -83,10 +74,6 @@
   export default {
     methods:{
       login(){
-<<<<<<< HEAD
-        this.start=true;
-        this.activeName = 'login';
-=======
         this.start=!this.start;
         this.activeName = 'login';
         if(this.start === true){
@@ -94,7 +81,6 @@
         } else {
           this.move()
         }
->>>>>>> master
       },
       changePwd(){
         console.log(this.showPwd);
@@ -114,10 +100,6 @@
       close(){
         this.start=false;
       },
-<<<<<<< HEAD
-      handleClick(){
-        
-=======
       handleClick(tab, event) {
         console.log(tab, event);
       },
@@ -131,7 +113,6 @@
         var mo=function(e){e.preventDefault();};
         document.body.style.overflow='';//出现滚动条
         document.removeEventListener("touchmove",mo,false);
->>>>>>> master
       }
     },
     data(){
@@ -156,14 +137,9 @@
       };
       return{
         start:false,
-<<<<<<< HEAD
-        search:'',
-        activeName: '',
-=======
         activeName: 'second',
         search:'',
         activeName: 'login',
->>>>>>> master
         loginData:{
           pass:'',
           tel: '',
@@ -196,9 +172,6 @@
 <style lang="scss">
 @import '~assets/style/reset';
 @import '~assets/style/header';
-<<<<<<< HEAD
-</style>
-=======
 .headerBox{
     width: 100%;
     height: 90px;
@@ -390,4 +363,3 @@
     }
 }
 </style>
->>>>>>> master

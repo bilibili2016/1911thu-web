@@ -25,21 +25,6 @@
 }
 
 // banner
-<<<<<<< HEAD
-.el-carousel__container{
-  height: 636px;
-}
-.el-carousel__indicators{
-  width: 1100px;
-  text-align: right;
-  margin: 0 auto;
-  bottom: 145px;
-  left: 50%;
-  margin-left: -550px;
-  
-}
-.el-carousel__button{
-=======
 .el-carousel__container {
   height: 636px;
 }
@@ -51,16 +36,11 @@
 }
 
 .el-carousel__button {
->>>>>>> master
   width: 10px;
   height: 10px;
   border-radius: 50%;
 }
 
-<<<<<<< HEAD
-// 首页tab切换
-.classify{
-=======
 // tab切换
 .el-tabs--left .el-tabs__header.is-left {
   width: 178px;
@@ -158,22 +138,14 @@
 
 // 首页tab切换
 .classify {
->>>>>>> master
   .el-tabs--left .el-tabs__header.is-left {
     width: 178px;
     margin: 0;
   }
-<<<<<<< HEAD
-  .el-tabs--left .el-tabs__nav-wrap.is-left{
-    margin: 0;
-  }
-  .el-tabs--left .el-tabs__item.is-left{
-=======
   .el-tabs--left .el-tabs__nav-wrap.is-left {
     margin: 0;
   }
   .el-tabs--left .el-tabs__item.is-left {
->>>>>>> master
     text-align: center;
   }
   .el-tabs__nav {
@@ -197,32 +169,6 @@
     background-color: #fff;
     opacity: .9;
   }
-<<<<<<< HEAD
-  .el-tabs__content {
-    width: 922px;
-    z-index: 2;
-    height: 456px;
-    padding: 25px 0 25px 42px;
-    overflow-y: auto;
-    background-color: #eee;
-    opacity: 0.94;
-  }
-}
-
-// 登录注册 tab切换
-.start{
-  .el-tabs__header {
-    margin: 0 0 18px;
-  }
-  .el-tabs__nav{
-    width: 100%;
-    text-align: center;
-  }
-  .el-tabs__active-bar.is-top{
-    display: none;
-  }
-  .el-tabs__item{
-=======
 
 }
 
@@ -239,58 +185,16 @@
     display: none;
   }
   .el-tabs__item {
->>>>>>> master
     height: 55px;
     line-height: 70px;
     font-weight: 400;
     padding: 0 16px !important;
     border-bottom: 2px solid transparent;
-<<<<<<< HEAD
-    &.is-active{
-=======
     &.is-active {
->>>>>>> master
       font-weight: 500;
     }
   }
   .el-tabs__item#tab-login {
-<<<<<<< HEAD
-    margin-right:60px;
-  }
-  .el-tabs__item.is-active{
-    border-color: #6417A6;
-    color: #6417A6;
-  }
-  .el-tabs__nav-wrap::after{
-    background-color: transparent;
-  }
-
-  // 登录表单
-  .el-form-item__content{
-    text-align: center;
-    position: relative;
-  }
-  .el-form-item__error{
-    left:63px;
-  }
-  .el-input__suffix{
-    display: none;
-  }
-  .el-input{
-    width: 264px;
-  }
-  .el-input__inner{
-    border: none;
-    border-bottom:1px solid #bbb;
-    &::-webkit-input-placeholder{
-      font-size: 12px;
-    }
-  }
-  .el-tab-pane .el-row{
-    width: 264px;
-    margin: 0 auto;
-    div{
-=======
     margin-right: 60px;
   }
   .el-tabs__item.is-active {
@@ -324,17 +228,12 @@
     width: 264px;
     margin: 0 auto;
     div {
->>>>>>> master
       display: inline-block;
       float: right;
       margin-bottom: 30px;
       color: #6417A6;
     }
-<<<<<<< HEAD
-    button{
-=======
     button {
->>>>>>> master
       width: 100%;
       height: 40px;
       border-radius: 6px;
@@ -342,34 +241,15 @@
       font-size: 14px;
       color: #fff;
     }
-<<<<<<< HEAD
-  }
-
-  // 注册表单
-  #pane-register {
-    .start .el-form-item__content{
-=======
   } // 注册表单
   #pane-register {
     .start .el-form-item__content {
->>>>>>> master
       text-align: left;
       padding-left: 50px;
     }
     .el-form-item.el-form-item--feedback {
       margin-bottom: 18px;
     }
-<<<<<<< HEAD
-    .captcha{
-      width: 132px;
-    }
-    // 用户注册协议
-    .el-checkbox__label{
-      color: #6417A6;
-      font-size: 12px;
-    }
-    .el-checkbox__input.is-checked .el-checkbox__inner{
-=======
     .captcha {
       width: 132px;
     } // 用户注册协议
@@ -378,18 +258,12 @@
       font-size: 12px;
     }
     .el-checkbox__input.is-checked .el-checkbox__inner {
->>>>>>> master
       background-color: #6417a6;
       border-color: #6417a6;
     }
   }
-<<<<<<< HEAD
-
-}
-=======
 }
 
 
 
 
->>>>>>> master
