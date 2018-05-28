@@ -264,6 +264,23 @@
   }
 }
 
+// search 
+.searchWord{
+  .el-autocomplete.inline-input{
+    width: 100%;
+    .el-input{
+      width: 100%;
+      input {
+        border: none;
+        width: 80%;
+        margin: 0 0 0 24px;
+        padding: 0;
+        height: 48px;
+      }
+    }
+  }
+}
+
 
 
 
