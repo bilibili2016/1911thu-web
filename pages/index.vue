@@ -20,13 +20,13 @@
 </template>
 
 <script>
-import Partner from "@/pages/home/pages/Partner.vue";
-import Info from "@/pages/home/pages/Info.vue";
-import Evaluate from "@/pages/home/pages/Evaluate.vue";
-import Famous from "@/pages/home/pages/Famous.vue";
-import Classic from "@/pages/home/pages/Classic.vue";
-import New from "@/pages/home/pages/New.vue";
-import Tab from "@/pages/home/pages/Tab.vue";
+import Partner from "@/pages/home/pages/partner.vue";
+import Info from "@/pages/home/pages/info.vue";
+import Evaluate from "@/pages/home/pages/evaluate.vue";
+import Famous from "@/pages/home/pages/famous.vue";
+import Classic from "@/pages/home/pages/classic.vue";
+import New from "@/pages/home/pages/new.vue";
+import Tab from "@/pages/home/pages/tab.vue";
 export default {
   components: {
     "v-partner": Partner,
