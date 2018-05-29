@@ -4,9 +4,9 @@
      <!-- 头部导航 -->
   <v-tab :items="items" :classify ="classify" :courses="courses" :tabmsg="tabmsg" :activeName="activeName"  :dingData="dingData" :config = "ding"></v-tab>
     <!-- 新上好课 -->
-    <v-new :config="config" :newData="newData" :titleOne="titleOne"></v-new>
+    <v-new :config="config" :newData="newData" :titleOne="titleOne" :linkone="linkone"></v-new>
     <!-- 经典好课 -->
-    <v-classic :config="config" :classicData="classicData" :titleTwo="titleTwo"></v-classic>
+    <v-classic :config="config" :classicData="classicData" :titleTwo="titleTwo" :linktwo="linktwo"></v-classic>
     <!-- 名师大咖秀 -->
     <v-famous :teachers ="teachers" :titleThree = "titleThree"></v-famous>
     <!-- 用户评价 -->
@@ -15,6 +15,7 @@
     <v-info :infoDesc = "infoDesc" :infoArticle= "infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive= "titleFive"></v-info>
     <!-- 合作伙伴 -->
     <v-partner :data="partnerList"></v-partner>
+    <v-backtotop></v-backtotop>
   </el-main>
 </div>
 </template>
@@ -27,6 +28,7 @@ import Famous from "@/pages/home/pages/famous.vue";
 import Classic from "@/pages/home/pages/classic.vue";
 import New from "@/pages/home/pages/new.vue";
 import Tab from "@/pages/home/pages/tab.vue";
+import BackToTop from "@/components/common/BackToTop.vue";
 export default {
   components: {
     "v-partner": Partner,
@@ -35,10 +37,13 @@ export default {
     "v-famous": Famous,
     "v-classic": Classic,
     "v-new": New,
-    "v-tab": Tab
+    "v-tab": Tab,
+    'v-backtotop': BackToTop
   },
   data() {
     return {
+      linkone:'/home/goodLesson',
+      linktwo: '/home/classify',
       tabmsg: false,
       newData: [
         {
