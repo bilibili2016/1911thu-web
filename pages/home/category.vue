@@ -5,338 +5,279 @@
         <div class="college">
           <ul>
             <li class="title">
-               学院:
-              </li>
-            <li  v-for="(item,index) in data" :index="index" :key = "index" :class="{bgs: bgmsg === index ? true : false }"><el-button  @click="handleItemOne(item,index)">{{item.name}}</el-button></li>
+              学院:
+            </li>
+            <li v-for="(item,index) in data" :index="index" :key="index" :class="{bgs: bgmsg === index ? true : false }">
+              <el-button @click="handleItemOne(item,index)">{{item.name}}</el-button>
+            </li>
           </ul>
         </div>
         <div class="classification">
-           <ul>
-            <li  class="title">
-               分类:
-              </li>
-            <li v-for="(card,index) in data2" :index="index" :key = "index" :class="{bgs: bgmsgs === index ? true : false }"><el-button  @click="handleItemTwo(item,index)">{{card.name}}</el-button></li>
+          <ul>
+            <li class="title">
+              分类:
+            </li>
+            <li v-for="(card,index) in data2" :index="index" :key="index" :class="{bgs: bgmsgs === index ? true : false }">
+              <el-button @click="handleItemTwo(item,index)">{{card.name}}</el-button>
+            </li>
           </ul>
         </div>
       </div>
     </div>
     <div class="center">
-      <div class="">
+      <div class="header">
         <el-tabs v-model="activeName" @tab-click="handleClick" class="tabStyle">
           <el-tab-pane label="最新" name="first"></el-tab-pane>
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
-        <el-switch
-          v-model="value3"
-          active-text="按月付费"
-          inactive-text="按年付费">
+        <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch">
         </el-switch>
       </div>
       <div class="carlist">
-          <v-card :data="categoryData" :config="config"></v-card>
+        <v-card :data="categoryData" :config="config"></v-card>
       </div>
     </div>
-
+    <!-- <v-filter></v-filter> -->
+    <div>
+      <v-page :data="pagemsg"></v-page>
+    </div>
   </div>
 </template>
 
 <script>
-import CustomCard from "@/components/common/Card.vue";
-export default {
-  components: {
-    "v-card": CustomCard
-  },
-  data() {
-    return {
-      bgmsg: null,
-      bgmsgs: null,
-      activeName: 'second',
-      value3: true,
+  import CustomCard from "@/components/common/Card.vue";
+  import CustomHot2 from "@/components/common/Hot2.vue";
+  import CustomPagination from "@/components/common/Pagination.vue";
+  export default {
+    components: {
+      "v-card": CustomCard,
+      "v-filter": CustomHot2,
+      "v-page": CustomPagination
+    },
+    data() {
+      return {
+        bgmsg: null,
+        bgmsgs: null,
+        activeName: 'second',
+        value3: true,
         value4: true,
-      config: {
-        card_type: "home"
+        config: {
+          card_type: "home"
+        },
+         pagemsg: {
+          page: 1,
+          pagesize: 8,
+          total: 12
+        },
+        categoryData: [{
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 123,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 129,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 131,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 161,
+            rate: 2
+          },
+          {
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 141,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 122,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 134,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 166,
+            rate: 2
+          },
+          {
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 146,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 622,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 174,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 186,
+            rate: 2
+          }
+        ],
+        data: [{
+            name: "全部",
+            id: 1
+          },
+          {
+            name: "干部通用学院",
+            id: 2
+          },
+          {
+            name: "党政系统学院",
+            id: 3
+          },
+          {
+            name: "在线商学院",
+            id: 4
+          },
+          {
+            name: "行业学院",
+            id: 5
+          },
+          {
+            name: "职场学院",
+            id: 6
+          },
+          {
+            name: "直播学院",
+            id: 7
+          },
+          {
+            name: "学位学院",
+            id: 8
+          }
+        ],
+        data2: [{
+            name: "全部",
+            id: 1999
+          },
+          {
+            name: "公共管理/履职能力",
+            id: 9
+          },
+          {
+            name: "时政解读",
+            id: 10
+          },
+          {
+            name: "法律法规",
+            id: 11
+          },
+          {
+            name: "政府绩效管理",
+            id: 12
+          },
+          {
+            name: "经济治理与城市规划",
+            id: 13
+          },
+          {
+            name: "城市管理",
+            id: 14
+          },
+          {
+            name: "新闻宣传国际形式及安全治理",
+            id: 15
+          },
+          {
+            name: "创新驱动发展",
+            id: 16
+          },
+          {
+            name: "一带一路与国际合作",
+            id: 17
+          },
+          {
+            name: "乡村振兴",
+            id: 18
+          },
+          {
+            name: "人文素养",
+            id: 19
+          },
+          {
+            name: "社会治理",
+            id: 20
+          }
+        ]
+      };
+    },
+    methods: {
+      handleItemOne(item, index) {
+        this.bgmsg = index;
       },
-      categoryData: [
-        {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 123,
-          rate: 3
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 129,
-          rate: 5
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 131,
-          rate: 1
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 161,
-          rate: 2
-        },
-        {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 141,
-          rate: 3
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 122,
-          rate: 5
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 134,
-          rate: 1
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 166,
-          rate: 2
-        },
-        {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 146,
-          rate: 3
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 622,
-          rate: 5
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 174,
-          rate: 1
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 186,
-          rate: 2
-        }
-      ],
-      data: [
-        {
-          name: "全部",
-          id: 1
-        },
-        {
-          name: "干部通用学院",
-          id: 2
-        },
-        {
-          name: "党政系统学院",
-          id: 3
-        },
-        {
-          name: "在线商学院",
-          id: 4
-        },
-        {
-          name: "行业学院",
-          id: 5
-        },
-        {
-          name: "职场学院",
-          id: 6
-        },
-        {
-          name: "直播学院",
-          id: 7
-        },
-        {
-          name: "学位学院",
-          id: 8
-        }
-      ],
-      data2: [
-        {
-          name: "全部",
-          id: 1999
-        },
-        {
-          name: "公共管理/履职能力",
-          id: 9
-        },
-        {
-          name: "时政解读",
-          id: 10
-        },
-        {
-          name: "法律法规",
-          id: 11
-        },
-        {
-          name: "政府绩效管理",
-          id: 12
-        },
-        {
-          name: "经济治理与城市规划",
-          id: 13
-        },
-        {
-          name: "城市管理",
-          id: 14
-        },
-        {
-          name: "新闻宣传国际形式及安全治理",
-          id: 15
-        },
-        {
-          name: "创新驱动发展",
-          id: 16
-        },
-        {
-          name: "一带一路与国际合作",
-          id: 17
-        },
-        {
-          name: "乡村振兴",
-          id: 18
-        },
-        {
-          name: "人文素养",
-          id: 19
-        },
-        {
-          name: "社会治理",
-          id: 20
-        }
-      ]
-    };
-  },
-  methods: {
-    handleItemOne(item, index) {
-      console.log(item, "这是item");
-      console.log(index, "这是item");
-      this.bgmsg = index;
-    },
-    handleItemTwo(item, index) {
-      this.bgmsgs = index;
-    },
-    handleClick(tab, event) {
-        console.log(tab, event);
+      handleItemTwo(item, index) {
+        this.bgmsgs = index;
+      },
+      handleClick(tab, event) {}
     }
-  }
-};
+  };
 </script>
 
 <style scoped lang="scss">
-.center{
-   width: 1100px;
-    margin: 0 auto;
-}
-.banner {
-  width: 100%;
-  // height: 194px;
-  background: rgba(235, 231, 237, 1);
-  .center {
-    width: 1100px;
-    margin: 0 auto;
-    .college {
-      height: 78px;
-      border-bottom: 1px rgba(232, 214, 247, 1) solid;
-      ul {
-        li {
-          list-style: none;
-          display: inline-block;
-          line-height: 78px;
-          font-size: 14px;
-          padding-right: 17px;
-          cursor: pointer;
-
-          span {
-            // padding: 10px 20px;
-            background-color: #8f4acb;
-          }
-        }
-      }
-      .title {
-        font-size: 14px;
-        font-family: MicrosoftYaHei;
-        color: rgba(34, 34, 34, 1);
-      }
-    }
-    .classification {
-      ul {
-        li {
-          list-style: none;
-          display: inline-block;
-          line-height: 50px;
-          font-size: 14px;
-          padding-right: 17px;
-          cursor: pointer;
-          span {
-            background-color: #8f4acb;
-          }
-        }
-      }
-    }
-    .carlist{
-      height: 1400px;
-    }
-  }
-}
-.bgs {
-  .el-button {
-    background-color: rgba(143, 74, 203, 1);
-    color: #fff;
-    border: none;
-  }
-}
-.tabStyle{
-  width: 121px;
-  display: inline-block;
-}
+  @import "~assets/style/category";
 </style>

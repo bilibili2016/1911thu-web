@@ -4,9 +4,9 @@
      <!-- 头部导航 -->
   <v-tab :items="items" :classify ="classify" :courses="courses" :tabmsg="tabmsg" :activeName="activeName"  :dingData="dingData" :config = "ding"></v-tab>
     <!-- 新上好课 -->
-    <v-new :config="config" :newData="newData" :titleOne="titleOne"></v-new>
+    <v-new :config="config" :newData="newData" :titleOne="titleOne" :linkone="linkone"></v-new>
     <!-- 经典好课 -->
-    <v-classic :config="config" :classicData="classicData" :titleTwo="titleTwo"></v-classic>
+    <v-classic :config="config" :classicData="classicData" :titleTwo="titleTwo" :linktwo="linktwo"></v-classic>
     <!-- 名师大咖秀 -->
     <v-famous :teachers ="teachers" :titleThree = "titleThree"></v-famous>
     <!-- 用户评价 -->
@@ -42,6 +42,8 @@ export default {
   },
   data() {
     return {
+      linkone:'/home/goodLesson',
+      linktwo: '/home/classify',
       tabmsg: false,
       newData: [
         {

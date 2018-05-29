@@ -315,4 +315,27 @@
 
 }
 
+// tab切换
+.clsTitle{
+  .el-switch{
+        // line-height: 100px;
+        // height: 97px;
+        // margin-right: 10px;
+
+  }
+}
+
+.el-tabs__nav-wrap::after{
+  height:0px;
+}
+
+.el-tabs__item{
+  height: 47px;
+  line-height: 55px;
+  padding: 0 0px;
+  margin: 10px 20px 0px 0px;
+}
+.el-tabs__active-bar{
+  width: 30px!important;
+}
 

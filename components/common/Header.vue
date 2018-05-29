@@ -1,16 +1,16 @@
 <template>
   <div class="headerBox">
     <div class="main">
-      <div class="headerLogo fl">
-        <img src="../../assets/images/1911xt.png" alt="">
+      <div class="headerLogo fl" @click="goSearch('/')">
+        <img src="../../assets/images/1911xt.png" alt="" >
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search">
-        <img src="../../assets/images/search.png" alt="">
+        <img :src="searchImg" alt="" @click="goSearch('home/search')">
       </div>
       <div class="HREntry">
         <span>Hr入口</span>
-        <i class="phone"></i>
+        <i class="phone" ></i>
       </div>
       <div class="lrBtn">
         <span class="login" @click="login">登录</span>
@@ -115,6 +115,9 @@
         var mo=function(e){e.preventDefault();};
         document.body.style.overflow='';//出现滚动条
         document.removeEventListener("touchmove",mo,false);
+      },
+      goSearch (item) {
+        this.$router.push(item)
       }
     },
     data(){
@@ -138,6 +141,7 @@
         }
       };
       return{
+      searchImg: require('~/assets/images/search.png'),
         start:false,
         activeName: 'second',
         search:'',
