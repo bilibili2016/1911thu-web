@@ -6,7 +6,7 @@
           <div class="subClass">
             <h4>全部<span><i></i></span></h4>
             <p>
-              <span>{{item}}</span>
+              <span @click="golink('home/category')">{{item}}</span>
               <span>{{item}}</span>
               <span>{{item}}</span>
             </p>
@@ -33,6 +33,9 @@ export default {
   methods: {
     handleClick() {
       this.tabmsg = true;
+    },
+    golink(linedata) {
+      this.$router.push(linedata)
     }
   }
 };

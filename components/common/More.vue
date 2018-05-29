@@ -1,13 +1,23 @@
 <template>
   <div>
      <div class="card-button">
-        <el-button type="primary">查看更多</el-button>
+        <el-button type="primary" @click='getMore()'>查看更多</el-button>
      </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['linkdata'],
+  methods: {
+    getMore() {
+      this.$router.push(this.linkdata)
+    }
+  },
+  mounted () {
+    console.log(this.linkdata)
+  }
+};
 </script>
 
 <style scoped lang="scss">

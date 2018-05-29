@@ -1,50 +1,174 @@
 <template>
+  <div>
     <div class="classification">
-        <div class="clsTitle clearfix">
-            <div class="fl">
-                <span :class="{checked:checked}">最新</span>
-                <span>最热</span>
-            </div>
-            <div class="fr">
-                <el-switch class="fl"
-                    v-model="onOff"
-                    active-color="#8F4ACB"
-                    inactive-color="#999">
-                </el-switch>隐藏已参加课程
-                <el-pagination class="fr"
-                    small 
-                    layout="pager, prev, next"
-                    :total="20">
-                </el-pagination>
-            </div>
-        </div>
-        <div class="classList">
-            <ul>
-                <li v-for="(item,index) in classList" :key="index" @click="bind(index)">{{item}}</li>
-            </ul>
-        </div>
+      <v-hots></v-hots>
+      <div class="classList">
+        <ul>
+          <li v-for="(item,index) in classList" :key="index" @click="bind(index)">{{item}}</li>
+        </ul>
+      </div>
+      <div class="center">
+        <v-card :data="categoryData" :config="config"></v-card>
+      </div>
     </div>
+    <div>
+      <v-page :data="pagemsg"></v-page>
+    </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        methods:{
-            bind(index){
-                $(".classList ul li").removeClass("checked");
-                $(".classList ul li").eq(index).addClass("checked");
-            }
+  import CustomCard from "@/components/common/Card.vue";
+  import CustomHots from "@/components/common/Hot.vue";
+  import CustomPagination from "@/components/common/Pagination.vue";
+  export default {
+    components: {
+      "v-hots": CustomHots,
+      "v-card": CustomCard,
+      "v-page": CustomPagination
+    },
+    methods: {
+      bind(index) {
+        $(".classList ul li").removeClass("checked");
+        $(".classList ul li")
+          .eq(index)
+          .addClass("checked");
+      }
+    },
+    data() {
+      return {
+        checked: true,
+        onOff: true,
+        classList: [
+          "干部通用",
+          "党政系统学院",
+          "在线商学院",
+          "行业学院",
+          "职场学院",
+          "热点学院"
+        ],
+        categoryData: [{
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 123,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 129,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 131,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 161,
+            rate: 2
+          },
+          {
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 141,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 122,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 134,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 166,
+            rate: 2
+          },
+          {
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 146,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 622,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 174,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 186,
+            rate: 2
+          }
+        ],
+        config: {
+          card_type: "home"
         },
-        data() {
-            return {
-                checked:true,
-                onOff: true,
-                classList:["干部通用","党政系统学院","在线商学院","行业学院","职场学院","热点学院"]
-            }
+        pagemsg: {
+          page: 1,
+          pagesize: 8,
+          total: 12
         }
+      };
     }
+  };
 </script>
 
 <style scoped lang="scss">
-@import "~assets/style/config";
-@import "~assets/style/classify";
+  @import "~assets/style/classify";
 </style>
