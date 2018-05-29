@@ -37,7 +37,11 @@ const config = {
     API_STARDUST_TIMEOUT: env.API_STARDUST_TIMEOUT,
   },
   head: {
+<<<<<<< HEAD
     title: '1911学堂',
+=======
+    title: '1911Thu',
+>>>>>>> 462735224884b1a764d6afe58aff3c9cfbc25141
     meta: [
       { charset: 'utf-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
