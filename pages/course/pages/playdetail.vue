@@ -1,35 +1,62 @@
 <template>
-    <div class="main">
-        <div class="content fl">
-
-        </div>
-        <!-- 讲师介绍 -->
-        <div class="teacher">
-            <h4>导师介绍</h4>
-            <div class="personal">
-                <img :src="teacher.headImg" alt="">
-                <h5>{{teacher.teacherName}}</h5>
-                <h6>{{teacher.degree}}</h6>
-                <p>{{teacher.abstract}}</p>
-            </div>
-        </div>
-
-        <!-- 用户评论 -->
-        <div class="evaluate">
-            <h4>用户评价 <span>查看更多></span></h4>
-            <div class="score">
-                <span class="fl">{{evaluate.score}}</span>
-                <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
-                <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
-            </div>
-            <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
-                <img class="fl" :src="item.headImg" alt="">
-                <div class="fl">
-                    <p>{{item.name}}</p>
-                    <p>{{item.time}}</p>
+    <div class="container">
+        <div class="main clearfix">
+            <div class="content fl">
+                <el-tabs v-model="activeName" @tab-click="handleClick">
+                    <el-tab-pane label="介绍" name="first"></el-tab-pane>
+                    <el-tab-pane label="目录" name="second"></el-tab-pane>
+                </el-tabs>
+                <div class="catalog">
+                    <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
+                        <h4>{{catalog.chapterName}}</h4>
+                        <div class="bar clearfix" v-for="(bar,index) in catalog.barList" :key="index" @click="checked(index)">
+                            <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
+                            <span class="fl barName">{{bar.number}} {{bar.barName}} （{{bar.duration}}）</span>
+                            <span class="fl free" v-if="bar.isFree">免费</span>
+                            <span class="fr freePlay" v-if="bar.isFree || catalog.isLogin">立即观看</span>
+                            <span class="fr freePlay" v-else>购买课程</span>
+                            <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
+                        </div>
+                    </div>
                 </div>
-                <el-rate disabled v-model="item.rate" class="itemBox-rate fr"></el-rate>
-                <h5>{{item.content}}</h5>
+                <div class="attention">
+                    <h4>关注我们</h4>
+                    <div class="code">
+                        <img src="../../../assets/images/attentionWechat.png" alt="">
+                        <h5>扫描二维码或关注“1911学堂”微信公众号</h5>
+                        <p>精彩好课，第一时间了解</p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- 讲师介绍 -->
+            <div class="teacher">
+                <h4>导师介绍</h4>
+                <div class="personal">
+                    <img :src="teacher.headImg" alt="">
+                    <h5>{{teacher.teacherName}}</h5>
+                    <h6>{{teacher.degree}}</h6>
+                    <p>{{teacher.abstract}}</p>
+                </div>
+            </div>
+
+            <!-- 用户评论 -->
+            <div class="evaluate">
+                <h4>用户评价 <span>查看更多></span></h4>
+                <div class="score">
+                    <span class="fl">{{evaluate.score}}</span>
+                    <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
+                    <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
+                </div>
+                <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
+                    <img class="fl" :src="item.headImg" alt="">
+                    <div class="fl">
+                        <p>{{item.name}}</p>
+                        <p>{{item.time}}</p>
+                    </div>
+                    <el-rate disabled v-model="item.rate" class="itemBox-rate fr"></el-rate>
+                    <h5>{{item.content}}</h5>
+                </div>
             </div>
         </div>
     </div>
@@ -37,8 +64,40 @@
 
 <script>
     export default {
+        methods:{
+            handleClick(){
+
+            },
+            checked(index){
+                $(".catalog .chapter .bar").removeClass("checked");
+                $(".catalog .chapter .bar").eq(index).addClass("checked");
+            }
+        },
         data(){
             return{
+                activeName:'second',
+                catalogs:[
+                    {
+                        isLogin:false,
+                        chapterName:"第一章 图的基本概念",
+                        barList:[
+                            {
+                                number:"1-1",
+                                barName:"课程概述",
+                                duration:"32分钟",
+                                percentage:30,
+                                isFree:true,
+                            },
+                            {
+                                number:"1-2",
+                                barName:"图怎么画",
+                                duration:"35分钟",
+                                percentage: 10,
+                                isFree:false,
+                            }
+                        ]
+                    }
+                ],
                 teacher:{
                     headImg:require("../../../assets/images/headImg.png"),
                     teacherName:"莎良朋",
@@ -73,6 +132,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "~assets/style/config";
 @import "~assets/style/playDetail";
 </style>
