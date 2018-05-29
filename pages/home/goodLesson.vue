@@ -3,7 +3,7 @@
     <div class="topImg">
       <img :src="atopImg" alt="">
     </div>
-    <v-card :courseList="courseList" :config="config"></v-card>
+    <v-card :courseList="courseList" :config="config" :linkdata="linkdata"></v-card>
     <v-more></v-more>
   </div>
 </template>
@@ -19,6 +19,7 @@
     data() {
       return {
         atopImg: require("@/assets/images/banner2.png"),
+        linkdata: '../course/pages/playdetail',
         config: {
           card_type: "goodlesson"
         },

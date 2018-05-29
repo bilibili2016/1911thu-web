@@ -2,15 +2,15 @@
   <div class="card">
     <!-- 定制 -->
     <template v-if="config.card_type === 'ding'">
-          <div class="customization">
-            <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
-              <img :src="pro.src" alt="" class="fl">
-              <div class="fr con">
-                <h5>{{pro.title}}</h5>
-                <p>{{pro.content}}</p>
+            <div class="customization">
+              <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
+                <img :src="pro.src" alt="" class="fl">
+                <div class="fr con">
+                  <h5>{{pro.title}}</h5>
+                  <p>{{pro.content}}</p>
+                </div>
               </div>
             </div>
-          </div>
 </template>
     <!-- 新上好课 -->
 <template v-if="config.card_type === 'home'">
@@ -24,12 +24,10 @@
               <span>{{card.name}}</span>
             </p>
             <p class="itemBox-info">
-              <span>
-                          {{card.cnum}}课时
-                        </span>
+              <span>{{card.cnum}}课时</span>
               <span class="itemBox-num">
-                          <img :src="numSrc" alt="">
-                          <span>{{card.pnum}}</span>
+                  <img :src="numSrc" alt="">
+                  <span>{{card.pnum}}</span>
               <el-rate v-model="card.rate" class="itemBox-rate"></el-rate>
               </span>
             </p>
@@ -72,7 +70,40 @@
         </div>
         <div class="study clearfix">
           <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.styduNumber}}人加入学习</span>
-          <span class="fr">立即学习</span>
+          <span class="fr" @click="goLink(linkdata)" ></span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- 新上好课详情 页面 -->
+<template v-if="config.card_type === 'goodplay'">
+  <div class="courseList-play">
+    <div class="course clearfix" v-for="(course,index) in courseList" :key="index">
+      <el-card class="fl" :body-style="{ padding: '0px' }">
+        <div style="position:relative;">
+          <img :src="course.bgImg" class="image">
+          <div class="mask" style="position:absolute;top:0;left:0;width:480px;height:312px;background:rgba(100,23,166,1);opacity:0.5"></div>
+          <div class="common-button" style="position:absolute;top:50%;left:50%;margin-left:-70px;margin-top:-20px;">
+             <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+          </div>
+        </div>
+      </el-card>
+      <div class="particulars fr">
+        <div class="currentclum">
+          <h4 style="margin-bottom:30px;">{{course.title}}</h4>
+          <div>
+              <span class="fl" style="width:auto;padding-top:12px;"><span style="display:inline-block;margin-right:15px;">52课时</span><img src="../../assets/images/ren.png" alt=""> 1021</span>
+              <span style="padding-top:10px;"><el-rate v-model="one"></el-rate></span>
+          </div>
+        </div>
+        <div class="study clearfix">
+          <p>日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。以自己的亲身经历帮助学员做好在日本旅游的一切准备。尽量避免专业的语法知识介绍，帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。</p>
+          <div class="common-button">
+             <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -126,13 +157,20 @@ export default {
     "infoDesc",
     "dingData",
     "searchData",
-    "courseList"
+    "courseList",
+    "linkdata"
   ],
   data() {
     return {
       numSrc: require("@/assets/images/home_num.png"),
-      avator: require("@/assets/images/home_avator.png")
+      avator: require("@/assets/images/home_avator.png"),
+      one: 1
     };
+  },
+  methods: {
+    goLink(item) {
+      this.$router.push(item);
+    }
   },
   mounted() {}
 };
@@ -483,6 +521,7 @@ export default {
           line-height: 30px;
           color: #222;
         }
+
       }
       .comment {
         height: 134px;
@@ -511,6 +550,8 @@ export default {
         span {
           font-size: 14px;
           color: #888888;
+            margin-top: 21px;
+            display:inline-block;
           &:nth-child(2) {
             width: 140px;
             height: 36px;
@@ -520,6 +561,7 @@ export default {
             text-align: center;
             border-radius: 18px;
             cursor: pointer;
+
           }
           img {
             width: 14px;
@@ -530,5 +572,178 @@ export default {
       }
     }
   }
+}
+
+// 新上好课详情 页面
+.courseList-play {
+  width: 1100px;
+  margin: 0 auto;
+  .course {
+    width: 100%;
+    padding: 40px 0 40px 40px;
+    // margin-bottom: 40px;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    .el-card {
+      width: 480px;
+      height: 312px;
+      font-size: 0;
+      & > img {
+        width: 400px;
+        height: 260px;
+      }
+      .personInfo {
+        width: 100%;
+        height: 132px;
+        background-color: #6417a6;
+        img {
+          float: left;
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          margin: 31px 26px;
+        }
+        h5,
+        p {
+          float: left;
+          width: 278px;
+          color: #fff;
+        }
+        h5 {
+          margin-top: 41px;
+          font-size: 18px;
+        }
+        p {
+          font-weight: 400;
+          height: 36px;
+          line-height: 36px;
+          font-size: 14px;
+        }
+      }
+    }
+    .particulars {
+      width: 510px;
+      margin-right:30px;
+      .currentclum {
+        // padding-left: 40px;
+        // margin-right: 40px;
+        font-size: 16px;
+        font-family: MicrosoftYaHei;
+        color: rgba(34, 34, 34, 1);
+        line-height: 0px;
+        h4 {
+          font-size: 16px;
+          color: #222;
+          height: 54px;
+          line-height: 54px;
+          margin-bottom: 8px;
+        }
+        p {
+          font-size: 14px;
+          line-height: 30px;
+          color: #222;
+        }
+        span {
+          font-size: 14px;
+          color: #888888;
+          &:nth-child(2) {
+            width: 140px;
+            height: 36px;
+            line-height: 36px;
+            // border: 1px solid #6417a6;
+            // color: #6417a6;
+            text-align: center;
+            border-radius: 18px;
+            cursor: pointer;
+          }
+          img {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+          }
+        }
+        .itemBox-info {
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(176, 174, 184, 1);
+          line-height: 0px;
+          margin: 0px 0px 13px 15px;
+          .itemBox-num {
+            font-size: 12px;
+            font-family: MicrosoftYaHei;
+            color: rgba(176, 174, 184, 1);
+            line-height: 0px;
+            padding-left: 8px;
+            img {
+              width: 12px;
+              height: 12px;
+              margin: 0px 5px;
+            }
+            .itemBox-rate {
+              display: inline;
+              font-size: 12px;
+              line-height: 13px;
+              margin-left: 57px;
+            }
+          }
+        }
+      }
+      .comment {
+        height: 134px;
+        margin-top: 40px;
+        padding: 0 40px 10px;
+        background-color: #fafafa;
+        color: #888;
+        h5 {
+          line-height: 40px;
+          .itemBox-rate {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 20px;
+            vertical-align: middle;
+          }
+        }
+        p {
+          font-size: 14px;
+          color: #888888;
+          line-height: 30px;
+        }
+      }
+      .study {
+        // padding: 30px 40px 0;
+        padding: 20px 38px 0px 0px;
+        border-top: 1px rgba(232, 214, 247, 1) solid;
+        // margin-top: 65px;
+        p {
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(34, 34, 34, 1);
+          line-height: 30px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+.btn{
+
+  width: 140px;
+    height: 36px;
+    line-height: 36px;
+    border: 1px solid #6417a6;
+    color: #6417a6;
+    text-align: center;
+    border-radius: 18px;
+    cursor: pointer;
+}
+.btn:hover{
+  color: #fff;
+  background-color: #6417a6;
+}
+.btn-class{
+  width: 140px;
+  border-radius:20px;
 }
 </style>
