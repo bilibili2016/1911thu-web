@@ -35,8 +35,6 @@ export default {
   height: 740px;
   position: relative;
   margin: 20px 0;
-  border: 1px rgba(250, 250, 250, 1) solid;
-
   background-color: rgba(250, 250, 250, 1);
 
   .align-center {
@@ -52,7 +50,7 @@ export default {
     height: 200px;
     background-color: #6417a6;
     position: absolute;
-    bottom: 20px;
+    bottom: 0;
     left: 0;
     z-index: 1;
   }
@@ -76,7 +74,7 @@ export default {
         width: 300px;
         height: 450px;
         position: absolute;
-        bottom: 20px;
+        bottom: 0;
         left: 50%;
         margin-left: -150px;
       }
@@ -88,7 +86,7 @@ export default {
         border-radius: 6px;
         overflow: hidden;
         position: absolute;
-        top: 0;
+        bottom: -20px;
         left: 0;
         .octImg {
           width: 100%;
