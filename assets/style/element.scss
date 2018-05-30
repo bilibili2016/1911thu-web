@@ -25,19 +25,35 @@
 }
 
 // banner
-.el-carousel__container {
-  height: 636px;
+.banner {
+  .el-carousel__container {
+    height: 636px;
+  }
+
+  .el-carousel__indicators {
+    bottom: 145px;
+  }
+
+  .el-carousel__button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .el-carousel__indicators {
+    width: 1100px;
+    text-align: right;
+    margin: 0 auto;
+  }
+  .home-evaluate {
+    .el-carousel__indicators {
+      bottom: 50px;
+      left: 50%;
+      right: auto;
+    }
+  }
 }
 
-.el-carousel__indicators {
-  bottom: 145px;
-}
 
-.el-carousel__button {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
 
 // tab切换
 .el-tabs--left .el-tabs__header.is-left {
@@ -52,11 +68,6 @@
 .el-tabs--left .el-tabs__item.is-left {
   text-align: center;
 }
-
-// .el-tabs__nav {
-  // background-color: #6417a6;
-  // height: 636px;
-// }
 
 .el-tabs__header.is-left {
   margin-right: 40px;
@@ -78,6 +89,7 @@
   background-color: #fff;
   opacity: .9;
 }
+
 .bg{
   .el-tabs__content {
     width: 922px;
@@ -89,6 +101,16 @@
     opacity: 0.94;
   }
 
+}
+.bg-none{
+  .el-carousel__indicators{
+    bottom: 52px;
+    .el-carousel__button{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+  }
 }
 
 
@@ -121,18 +143,8 @@
   }
 
 }
-  .el-carousel__indicators {
-    width: 1100px;
-    text-align: right;
-    margin: 0 auto;
-  }
-  .home-evaluate{
-    .el-carousel__indicators{
-      bottom: 50px;
-      left: 50%;
-      right: auto;
-    }
-  }
+
+  
 
 
 // 首页tab切换
@@ -162,6 +174,7 @@
     line-height: 76px;
     color: #fff;
     font-weight: 400;
+    margin: 0;
   }
   .el-tabs__item.is-active {
     color: #6417A6;
@@ -348,6 +361,20 @@
     .el-progress-bar__outer{
       background-color: #FFDB5F;
     }
+  }
+  
+  
+}
+
+// player页
+.playerBox {
+  .el-textarea .el-textarea__inner {
+    width: 100%;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 4px;
+    resize: none;
+    border: 1px solid #bbbbbb;
   }
   
 }

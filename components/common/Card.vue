@@ -30,7 +30,7 @@
               <span class="itemBox-num">
                           <img :src="numSrc" alt="">
                           <span>{{card.pnum}}</span>
-              <el-rate v-model="card.rate" class="itemBox-rate"></el-rate>
+              <el-rate v-model="card.rate" disabled class="itemBox-rate"></el-rate>
               </span>
             </p>
           </div>
@@ -144,8 +144,14 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  position: relative;
   .card-list {
     margin-bottom: 50px;
+    border-radius: 16px;
+    &:hover{
+      box-shadow: 0 6px 18px 0 rgba(73,28,156,0.36);
+      transition: all 300ms;
+    }
     .itemBox {
       cursor: pointer;
       width: 260px;

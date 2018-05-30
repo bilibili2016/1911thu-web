@@ -6,12 +6,12 @@
     </div>
   </transition>
      <transition :name="transitionName">
-      <div class="back-to-ceiling" v-show="visible" :style="customStyleTwo">
+      <div class="back-to-ceiling hasColor" v-show="visible" :style="customStyleTwo">
        <img :src="wxSrc" alt="" class="wxSrc">
     </div>
   </transition>
   <transition :name="transitionName">
-     <div class="back-to-ceiling"  v-show="visible" :style="customStyleOne">
+     <div class="back-to-ceiling hasColor"  v-show="visible" :style="customStyleOne">
       <img :src="ceilSrc" alt="" class="ceilSrc">
     </div>
    </transition>
@@ -65,7 +65,7 @@ export default {
         height: '50px',
         'border-radius': '4px',
         'line-height': '45px',
-        background: 'rgba(100,23,166,1)'
+        background: '#d800ff'
       }
     },
     customStyleTwo: {
@@ -77,7 +77,7 @@ export default {
         height: '50px',
         'border-radius': '4px',
         'line-height': '45px',
-        background: 'rgba(100,23,166,1)'
+        background: '#d800ff'
       }
     },
     customStyleThree: {
@@ -148,10 +148,14 @@ export default {
     display: inline-block;
     text-align: center;
     cursor: pointer;
+    z-index: 9;
   }
 
-  .back-to-ceiling:hover {
-    background: #d5dbe7;
+  // .back-to-ceiling:hover {
+  //   background: #d5dbe7;
+  // }
+  .hasColor:hover {
+    background-color: #8f4acb;
   }
 
   .fade-enter-active,
