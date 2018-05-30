@@ -372,7 +372,7 @@
 
 }
 
-// button按钮
+// 修改默认button按钮 颜色
 .common-button{
 
   .el-button--primary.is-plain {
@@ -393,4 +393,29 @@
     color: #fff;
   }
 }
+// profile页面修改tab
+.center-tab{
+  .el-tabs__item{
+    margin: 0px 30px 0px 0px;
+    background-color: rgba(100, 23, 166, 1);
+    color: #fff;
+    height: 76px;
+    padding: 12px;
+    font-size: 16px;
+
+  }
+  .el-tabs--left .el-tabs__header.is-left{
+    width: 193px;
+  }
+  .el-card__header{
+    border-bottom: 1px solid rgba(232, 214, 247, 1);
+    color: #222;
+    font-size: 16px;
+  }
+  .el-card__body{
+    padding:50px 40px 30px 40px;
+  }
+}
+
+
 
