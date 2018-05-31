@@ -45,29 +45,31 @@
                   <v-card :data ="newData" :config="config"></v-card>
                 </el-tab-pane>
               </el-tabs>
-               <!-- <el-dropdown>
-                  <span class="el-dropdown-link">
-                    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-                  </span>
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>黄金糕</el-dropdown-item>
-                    <el-dropdown-item>狮子头</el-dropdown-item>
-                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                    <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-                    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown> -->
             </el-card>
           </el-tab-pane>
-          <el-tab-pane>
+          <el-tab-pane class="my-info">
             <span slot="label"><i class="el-icon-date"></i> 我的消息</span>
-
+            <el-card class="card-style">
+                <div slot="header" class="clearfix">
+                <span>我的消息</span>
+              </div>
+              <div class="content" v-for="(card,index) in infoList" :index="index" :key="card.id">
+                <div class="text fl">
+                    {{card.title}}
+                </div>
+                <div class="time fr">
+                  2018-05-20 11：04
+                </div>
+              </div>
+            </el-card>
             </el-tab-pane>
           <el-tab-pane>
             <span slot="label"><i class="el-icon-date"></i> 个人设置</span>
+            <v-info></v-info>
             </el-tab-pane>
           <el-tab-pane>
              <span slot="label"><i class="el-icon-date"></i> 绑定课程ID</span>
+             <v-bind></v-bind>
             </el-tab-pane>
         </el-tabs>
       </div>
@@ -76,13 +78,17 @@
 
 <script>
   import CustomCard from "@/components/common/Card.vue";
+   import PersonalSet from "@/pages/personal/personalSet.vue";
+    import Binding from "@/pages/personal/binding.vue";
   export default {
     components: {
-      'v-card': CustomCard
+      'v-card': CustomCard,
+      'v-info': PersonalSet,
+      'v-bind': Binding
     },
     data() {
       return {
-        avator: require('~/assets/images/attentionWechat.png'),
+        avator: require('~/assets/images/profile_avator01.png'),
         tabPosition: 'left',
         activeName: 'first',
         config: {
@@ -95,115 +101,122 @@
            card_type: "profileready"
         },
         newData: [
-        {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 14,
-          rate: 3
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 12,
-          rate: 5
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 13,
-          rate: 1
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 16,
-          rate: 2
-        },
-        {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 154,
-          rate: 3
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 152,
-          rate: 5
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 153,
-          rate: 1
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 156,
-          rate: 2
-        },
-        {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 1514,
-          rate: 3
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 1512,
-          rate: 5
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 1513,
-          rate: 1
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 1516,
-          rate: 2
-        }
-      ]
+          {
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 14,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 12,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 13,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 16,
+            rate: 2
+          },
+          {
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 154,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 152,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 153,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 156,
+            rate: 2
+          },
+          {
+            bg: require("@/assets/images/home_new01.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 899,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 1514,
+            rate: 3
+          },
+          {
+            bg: require("@/assets/images/home_new02.png"),
+            name: "H5和小程序直播开发",
+            cnum: 34,
+            pnum: 2312,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 1512,
+            rate: 5
+          },
+          {
+            bg: require("@/assets/images/home_new03.png"),
+            name: "H5和小程序直播开发",
+            cnum: 26,
+            pnum: 799,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 1513,
+            rate: 1
+          },
+          {
+            bg: require("@/assets/images/home_new04.png"),
+            name: "H5和小程序直播开发",
+            cnum: 12,
+            pnum: 4399,
+            avator: require("@/assets/images/home_avator.png"),
+            id: 1516,
+            rate: 2
+          }
+        ],
+        infoList: [{
+          title: '恭喜成为1911学堂会员】 恭喜，你已成功加入1911学院会员的队伍，这里有一份1911学 堂会员学习指导手册，请查收【立即查看】'
+        },{
+          title: '【新上好课】一大批新上好课上架，欢迎查看'
+        },{
+            title: '恭喜成为1911学堂会员】 恭喜，你已成功加入1911学院会员的队伍，这里有一份1911学 堂会员学习指导手册，请查收【立即查看】'
+        }]
       }
     },
   }
@@ -225,7 +238,7 @@
       height: 136px;
       // vertical-align: middle;
       border-radius: 68px;
-      border: 1px red solid;
+      // border: 1px red solid;
       margin-top: 30px;
     }
   }
@@ -272,6 +285,34 @@
     :nth-child(2){
       font-size: 17px;
       margin-right: 55px;
+    }
+  }
+}
+.my-info{
+  .content{
+    width: 806px;
+    height: 106px;
+    border-bottom: 1px solid rgba(232,214,247,1);
+    position: relative;
+    margin: 0 auto;
+    .text{
+      width: 630px;
+      font-size:16px;
+      font-family:MicrosoftYaHei;
+      color:rgba(34,34,34,1);
+      line-height:30px;
+      position:absolute;
+      bottom: 10px;
+    }
+    .time{
+      // width: 128px;
+      font-size:14px;
+      font-family:MicrosoftYaHei;
+      color:rgba(136,136,136,1);
+      line-height:30px;
+      position:absolute;
+      bottom: 10px;
+      right: 30px;
     }
   }
 }

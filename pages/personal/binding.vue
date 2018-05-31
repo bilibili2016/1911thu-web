@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <div class="binding">
+        <div class="binding" style="display: none;">
             <div class="title">
                 <h4>绑定课程ID</h4>
             </div>
@@ -15,7 +15,7 @@
                 <p>2.绑定成功后，不可更改。</p>
             </div>
             <div :class="{presentAble:binding.presentAble,present:binding.present}">
-                <el-button :disabled="!binding.presentAble" round>提交</el-button>
+                <el-button :disabled="!binding.presentAble" round @click="doSubmit">提交</el-button>
             </div>
             <div class="success" v-show="binding.success">
                 <img src="../../assets/images/bindingSuccess.png" alt="">
@@ -46,7 +46,7 @@
                     <p>2.绑定成功后，不可更改。</p>
                 </div>
                 <div :class="{presentAble:!courseList.showErr,present:courseList.present}">
-                    <el-button :disabled="courseList.presentAble" round>提交</el-button>
+                    <el-button :disabled="courseList.presentAble" round @click="doSubmit">提交</el-button>
                 </div>
             </div>
             <div class="success" v-show="courseList.success">
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        
+
     </div>
 </template>
 
@@ -73,6 +73,10 @@
             },
             addID(){
                 this.courseList.addNewID=true;
+            },
+            doSubmit () {
+              this.binding.success = true;
+              this.courseList.success = true;
             }
         },
         data(){

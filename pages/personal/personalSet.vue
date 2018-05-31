@@ -2,83 +2,87 @@
     <div class="main">
         <div class="personalSet">
             <el-tabs v-model="activeName" @tab-click="handleClick">
-                <el-tab-pane label="基础信息" name="first"></el-tab-pane>
-                <el-tab-pane label="修改密码" name="second"></el-tab-pane>
+                <el-tab-pane label="基础信息" name="first">
+                   <!-- 填写个人信息 -->
+                    <el-form v-if="hasPersonalInfo" :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
+                        <el-form-item label="昵称" prop="name">
+                            <el-input v-model="psnForm.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="性别"  prop="sex">
+                            <el-radio-group v-model="psnForm.sex">
+                            <el-radio label="男"></el-radio>
+                            <el-radio label="女"></el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                        <el-form-item label="生日" prop="birthday">
+                            <el-date-picker v-model="psnForm.birthday" type="date"></el-date-picker>
+                        </el-form-item>
+                        <el-form-item label="所在地区" prop="address">
+                            <el-select v-model="psnForm.province" placeholder="省">
+                            <el-option label="北京" value="beijing"></el-option>
+                            <el-option label="上海" value="shanghai"></el-option>
+                            </el-select>
+                            <el-select v-model="psnForm.city" placeholder="市">
+                            <el-option label="区域一" value="shanghai"></el-option>
+                            <el-option label="区域二" value="beijing"></el-option>
+                            </el-select>
+                            <el-select v-model="psnForm.district" placeholder="区">
+                            <el-option label="区域一" value="shanghai"></el-option>
+                            <el-option label="区域二" value="beijing"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="职位" prop="position">
+                            <el-input v-model="psnForm.position"></el-input>
+                        </el-form-item>
+                        <el-form-item label="邮箱" prop="email">
+                            <el-input v-model="psnForm.email"></el-input>
+                        </el-form-item>
+                        <el-form-item disable label="手机号" prop="name">
+                            <el-input v-model="psnForm.tel" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="公司信息" prop="name">
+                            <el-input v-model="psnForm.company" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item size="large" class="submit">
+                            <el-button type="primary" @click="onSubmit" round>提交</el-button>
+                        </el-form-item>
+                    </el-form>
+                    <!-- 展示个人信息 -->
+                    <div v-else class="psnInfo">
+                        <ul>
+                            <li><span>昵称：</span><span>{{psnInfo.name}}</span></li>
+                            <li><span>性别：</span><span>{{psnInfo.sex}}</span></li>
+                            <li><span>生日：</span><span>{{psnInfo.birthday}}</span></li>
+                            <li><span>所在地区：</span><span>{{psnInfo.address}}</span></li>
+                            <li><span>职位：</span><span>{{psnInfo.position}}</span></li>
+                            <li><span>邮箱：</span><span>{{psnInfo.email}}</span></li>
+                            <li><span>手机号：</span><span class="default">{{psnInfo.tel}}</span></li>
+                            <li><span>公司信息：</span><span class="default">{{psnInfo.company}}</span></li>
+                        </ul>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="修改密码" name="second">
+                  <!-- 修改密码 -->
+                  <div v-show="showPwd" class="changePwd">
+                    <el-form :model="changePwd" status-icon :rules="pwdRules" ref="ruleForm2" label-width="135px" class="demo-ruleForm">
+                        <el-form-item label="原密码：" prop="oldPass">
+                        <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="新密码：" prop="newPass">
+                        <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认新密码：" prop="checkPass">
+                            <el-input type="password" v-model="changePwd.checkPass" auto-complete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
+                        </el-form-item>
+                    </el-form>
+                  </div>
+                </el-tab-pane>
             </el-tabs>
-            <!-- 填写个人信息 -->
-            <el-form v-if="hasPersonalInfo" :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
-                <el-form-item label="昵称" prop="name">
-                    <el-input v-model="psnForm.name"></el-input>
-                </el-form-item>
-                <el-form-item label="性别"  prop="sex">
-                    <el-radio-group v-model="psnForm.sex">
-                    <el-radio label="男"></el-radio>
-                    <el-radio label="女"></el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="生日" prop="birthday">
-                    <el-date-picker v-model="psnForm.birthday" type="date"></el-date-picker> 
-                </el-form-item>
-                <el-form-item label="所在地区" prop="address">
-                    <el-select v-model="psnForm.province" placeholder="省">
-                    <el-option label="北京" value="beijing"></el-option>
-                    <el-option label="上海" value="shanghai"></el-option>
-                    </el-select>
-                    <el-select v-model="psnForm.city" placeholder="市">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                    </el-select>
-                    <el-select v-model="psnForm.district" placeholder="区">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="职位" prop="position">
-                    <el-input v-model="psnForm.position"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input v-model="psnForm.email"></el-input>
-                </el-form-item>
-                <el-form-item disable label="手机号" prop="name">
-                    <el-input v-model="psnForm.tel" disabled></el-input>
-                </el-form-item>
-                <el-form-item label="公司信息" prop="name">
-                    <el-input v-model="psnForm.company" disabled></el-input>
-                </el-form-item>
-                <el-form-item size="large" class="submit">
-                    <el-button type="primary" @click="onSubmit" round>提交</el-button>
-                </el-form-item>
-            </el-form>
-            <!-- 展示个人信息 -->
-            <div v-else class="psnInfo">
-                <ul>
-                    <li><span>昵称：</span><span>{{psnInfo.name}}</span></li>
-                    <li><span>性别：</span><span>{{psnInfo.sex}}</span></li>
-                    <li><span>生日：</span><span>{{psnInfo.birthday}}</span></li>
-                    <li><span>所在地区：</span><span>{{psnInfo.address}}</span></li>
-                    <li><span>职位：</span><span>{{psnInfo.position}}</span></li>
-                    <li><span>邮箱：</span><span>{{psnInfo.email}}</span></li>
-                    <li><span>手机号：</span><span class="default">{{psnInfo.tel}}</span></li>
-                    <li><span>公司信息：</span><span class="default">{{psnInfo.company}}</span></li>
-                </ul>
-            </div>
-            <!-- 修改密码 -->
-            <div v-show="showPwd" class="changePwd">
-                <el-form :model="changePwd" status-icon :rules="pwdRules" ref="ruleForm2" label-width="135px" class="demo-ruleForm">
-                    <el-form-item label="原密码：" prop="oldPass">
-                    <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="新密码：" prop="newPass">
-                    <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="确认新密码：" prop="checkPass">
-                        <el-input type="password" v-model="changePwd.checkPass" auto-complete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
-                    </el-form-item>
-                </el-form>
-            </div>
+
+
         </div>
     </div>
 </template>
@@ -126,8 +130,8 @@
             };
             return{
                 activeName:"first",
-                hasPersonalInfo:false,
-                showPwd:false,
+                hasPersonalInfo:true,
+                showPwd:true,
                 changePwd: {
                     oldPass: '',
                     newPass:'',
