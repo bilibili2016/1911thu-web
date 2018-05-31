@@ -458,6 +458,28 @@
     }
   }
 }
+.changePwd{
+  .el-form-item__label{
+    color: #222;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .el-input{
+    text-align: left;
+    .el-input__inner {
+      width: 670px;
+      height: 50px;
+      border-radius: 4px;
+      background-color: #F1E9F8;
+      border: none;
+      font-size: 20px;
+      color: #000;
+    }
+  }
+  .el-form-item__content{
+    text-align: center;
+  }
+}
 
 
 

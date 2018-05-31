@@ -51,7 +51,25 @@
                 &:nth-child(2){
                     margin-left: 40px;
                 }
+                &.default{
+                    color:#6417A6;
+                }
             }
+        }
+    }
+    .changePwd{
+        .el-form{
+            margin-top: 35px;
+        }
+        .el-form-item__content .el-button {
+            width: 174px;
+            height: 56px;
+            line-height: 56px;
+            padding: 0;
+            margin: 80px 0 50px -135px;
+            background-color: #9A5CD0;
+            border: none;
+            border-radius: 28px;
         }
     }
 }

@@ -50,7 +50,7 @@
                 </el-form-item>
             </el-form>
             <!-- 展示个人信息 -->
-            <div v-if="hasPersonalInfo" class="psnInfo">
+            <div v-else class="psnInfo">
                 <ul>
                     <li><span>昵称：</span><span>{{psnInfo.name}}</span></li>
                     <li><span>性别：</span><span>{{psnInfo.sex}}</span></li>
@@ -58,21 +58,24 @@
                     <li><span>所在地区：</span><span>{{psnInfo.address}}</span></li>
                     <li><span>职位：</span><span>{{psnInfo.position}}</span></li>
                     <li><span>邮箱：</span><span>{{psnInfo.email}}</span></li>
-                    <li><span>手机号：</span><span>{{psnInfo.tel}}</span></li>
-                    <li><span>公司信息：</span><span>{{psnInfo.company}}</span></li>
+                    <li><span>手机号：</span><span class="default">{{psnInfo.tel}}</span></li>
+                    <li><span>公司信息：</span><span class="default">{{psnInfo.company}}</span></li>
                 </ul>
             </div>
             <!-- 修改密码 -->
-            <div class="changePwd">
-                <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="135px" class="demo-ruleForm">
-                    <el-form-item label="原密码" prop="pass">
-                    <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+            <div v-show="showPwd" class="changePwd">
+                <el-form :model="changePwd" status-icon :rules="pwdRules" ref="ruleForm2" label-width="135px" class="demo-ruleForm">
+                    <el-form-item label="原密码：" prop="oldPass">
+                    <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="新密码" prop="pass">
-                    <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+                    <el-form-item label="新密码：" prop="newPass">
+                    <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="确认密码" prop="checkPass">
-                        <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+                    <el-form-item label="确认新密码：" prop="checkPass">
+                        <el-input type="password" v-model="changePwd.checkPass" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -92,15 +95,13 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                 if (valid) {
+                    console.log(valid)
                     alert('submit!');
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
                 });
-            },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
             }
         },
         data(){
@@ -108,8 +109,8 @@
                 if (value === '') {
                 callback(new Error('请输入密码'));
                 } else {
-                if (this.ruleForm2.checkPass !== '') {
-                    this.$refs.ruleForm2.validateField('checkPass');
+                if (this.changePwd.checkPass !== '') {
+                    this.$refs.changePwd.validateField('checkPass');
                 }
                 callback();
                 }
@@ -117,7 +118,7 @@
             var validatePass2 = (rule, value, callback) => {
                 if (value === '') {
                 callback(new Error('请再次输入密码'));
-                } else if (value !== this.ruleForm2.pass) {
+                } else if (value !== this.changePwd.newPass) {
                 callback(new Error('两次输入密码不一致!'));
                 } else {
                 callback();
@@ -126,13 +127,17 @@
             return{
                 activeName:"first",
                 hasPersonalInfo:false,
-                ruleForm2: {
-                    pass: '',
-                    checkPass: '',
-                    age: ''
+                showPwd:false,
+                changePwd: {
+                    oldPass: '',
+                    newPass:'',
+                    checkPass: ''
                 },
-                rules2: {
-                    pass: [
+                pwdRules: {
+                    oldPass: [
+                        { validator: validatePass, trigger: 'blur' }
+                    ],
+                    newPass: [
                         { validator: validatePass, trigger: 'blur' }
                     ],
                     checkPass: [
