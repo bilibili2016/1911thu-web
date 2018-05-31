@@ -1,0 +1,74 @@
+<template>
+    <div class="notLogin" v-show="notLogin">
+        <div class="tip">
+            <i class="el-icon-close" @click="close"></i>
+            <img :src="tipSrc" alt="">
+            <p>未登录，请您先<span>登录</span></p>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+  props: ["notLogin"],
+  data(){
+      return{
+          tipSrc: require('@/assets/images/tips.png'),
+      }
+  },
+  methods:{
+      close(){
+          this.notLogin=false;
+      }
+  }
+};
+</script>
+
+<style scoped lang="scss">
+.notLogin{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(130,68,183,.8);
+  z-index: 10;
+  .tip{
+    width: 360px;
+    height: auto;
+    border-radius: 10px;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    text-align: center;
+    margin-left: -180px;
+    background-color: #fff;
+    i {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 30px;
+        color: #6417a6;
+        position: absolute;
+    }
+    img {
+      width: 88px;
+      height: 138px;
+      margin-top: 62px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 16px;
+      color: #222;
+      padding: 27px 0 60px;
+      span {
+        font-size: 20px;
+        color: #6417a6;
+        text-decoration: underline;
+        margin-left: 10px;
+      }
+    }
+  }
+} 
+</style>
