@@ -68,7 +68,8 @@ export default {
       position: relative;
       cursor: pointer;
       &:hover .diaphaneity {
-        display: block;
+        transition: all 450ms;
+        opacity: 1;
       }
       img {
         width: 300px;
@@ -79,7 +80,8 @@ export default {
         margin-left: -150px;
       }
       .diaphaneity {
-        display: none;
+        // display: none;
+        opacity: 0;
         width: 366px;
         height: 500px;
         box-shadow: 4px 0px 18px rgba(73, 28, 156, 0.36);

@@ -38,7 +38,6 @@
             <v-line :catalogs="catalogs"></v-line>
           </el-tab-pane>
         </el-tabs>
-
         <div class="attention">
           <h4>关注我们</h4>
           <div class="code">

@@ -1,0 +1,75 @@
+.main{
+    width: 1100px;
+    height: 1000px;
+    margin: 0 auto;
+    .personalSet{
+        float: right;
+        margin: 30px 0;
+        width: 905px;
+        border-radius: 6px;
+        box-shadow:0px 0px 14px rgba(198, 194, 210, 0.36);
+        .el-form.psnForm{
+            width: 100%;
+            .submit{
+                padding: 80px 0 50px;
+                text-align: center;
+                .el-button{
+                    width: 174px;
+                    height: 56px;
+                    line-height: 56px;
+                    padding: 0;
+                    margin: 0;
+                    margin-left: -135px;
+                    border-radius: 28px;
+                    font-size: 16px;
+                    color: #fff;
+                    background-color: #ccc;
+                    border: none;
+                    &.submitAble{
+                        background-color: #6417A6;
+                    }
+                }
+
+            }
+            
+        }
+    }
+    .psnInfo{
+        padding-bottom: 50px;
+        ul li{
+            height: 76px;
+            line-height: 76px;
+            margin-top: 10px;
+            span{
+                font-size: 16px;
+                color: #222;
+                font-weight: 700;
+                &:first-child{
+                    width: 135px;
+                    text-align: right;
+                }
+                &:nth-child(2){
+                    margin-left: 40px;
+                }
+                &.default{
+                    color:#6417A6;
+                }
+            }
+        }
+    }
+    .changePwd{
+        .el-form{
+            margin-top: 35px;
+        }
+        .el-form-item__content .el-button {
+            width: 174px;
+            height: 56px;
+            line-height: 56px;
+            padding: 0;
+            margin: 80px 0 50px -135px;
+            background-color: #9A5CD0;
+            border: none;
+            border-radius: 28px;
+        }
+    }
+}

@@ -40,18 +40,14 @@ export default {
 .home-evaluate {
   height: 740px;
   .evaluate-carousel {
+    background: url("~/assets/images/home_bgc01.png") no-repeat center;
+    background-size: 1100px 400px;
     .el-carousel__item h3 {
       color: #475669;
       font-size: 14px;
       opacity: 0.75;
       line-height: 150px;
       margin: 0;
-    }
-    .el-carousel__item:nth-child(2n) {
-      background-image: url("~/assets/images/home_bgc01.png");
-    }
-    .el-carousel__item:nth-child(2n + 1) {
-      background-image: url("~/assets/images/home_bgc01.png");
     }
     .evaluate-center {
       width: 750px;

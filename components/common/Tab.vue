@@ -33,6 +33,7 @@ export default {
   methods: {
     handleClick() {
       this.tabmsg = true;
+      
     },
     golink(linedata) {
       this.$router.push(linedata)
