@@ -16,6 +16,7 @@
     <!-- 合作伙伴 -->
     <v-partner :data="partnerList"></v-partner>
     <v-backtotop></v-backtotop>
+    <v-notlogin></v-notlogin>
   </el-main>
 </div>
 </template>
@@ -29,6 +30,7 @@ import Classic from "@/pages/home/pages/classic.vue";
 import New from "@/pages/home/pages/new.vue";
 import Tab from "@/pages/home/pages/tab.vue";
 import BackToTop from "@/components/common/BackToTop.vue";
+import NotLogin from "@/components/common/NotLogin.vue";
 export default {
   components: {
     "v-partner": Partner,
@@ -38,7 +40,8 @@ export default {
     "v-classic": Classic,
     "v-new": New,
     "v-tab": Tab,
-    'v-backtotop': BackToTop
+    'v-backtotop': BackToTop,
+    'v-notlogin': NotLogin
   },
   data() {
     return {
@@ -336,7 +339,8 @@ export default {
           title: "高效团队与卓越执行力 高效团队",
           author: "王建林 清华大学电子工程系教授"
         }
-      ]
+      ],
+      notLogin:false
     };
   }
 };

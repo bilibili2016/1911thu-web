@@ -481,10 +481,6 @@
   }
 }
 
-
-
-
-
 // player页
 .playerBox {
   .el-textarea .el-textarea__inner {
@@ -497,6 +493,52 @@
   }
   
 }
+
+// 新闻详情页
+.news{
+  .el-breadcrumb__item.current{
+    span{
+      color: #6417A6;
+    }
+    &:hover span{
+      color: #6417A6;
+    }
+  }
+}
+
+// 购物车页
+.companyInfo {
+  .el-form-item {
+    .el-form-item__label:before{
+      content:"";
+    }
+    .el-form-item__content{
+      width: 264px;
+      .el-autocomplete{
+        width: 100%;
+      }
+      .el-input__inner {
+        color: #222222;
+        font-size: 14px;
+        font-weight: 400;
+        border: none;
+        padding: 0;
+        border-bottom: 1px solid #bbb;
+        &::-webkit-input-placeholder{
+          font-size: 12px;
+        }
+      }
+      
+    }
+    &.btnCommit .el-form-item__content {
+      text-align: center;
+    }
+    &.code .el-form-item__content .el-input {
+      width: 132px;
+    }
+  }
+}
+
 
 // .el-tabs__nav-wrap::after{
 //   height:0px;
