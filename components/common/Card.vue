@@ -109,6 +109,34 @@
         </div>
       </div>
     </template>
+      <!-- 新上好课详情 页面  资讯详情页面-->
+    <template v-if="config.card_type === 'goodplayTwo'">
+      <div class="courseList-play">
+
+        <div class="course clearfix boxshadow-none" v-for="(course,index) in newsList" :key="index" style="box-shadow:none;position:relative;">
+          <el-card class="fl" :body-style="{ padding: '0px' }">
+            <div style="position:relative;">
+              <img :src="course.bgImg" class="image">
+            </div>
+          </el-card>
+          <div class="particulars fr">
+            <div class="currentclum">
+              <h4>{{course.title}}</h4>
+            </div>
+            <div class="study clearfix bordernone" style="border:none;padding-top:0px;">
+              <p>日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。以自己的亲身经历帮助学员做好在日本旅游的一切准备。尽量避免专业的语法知识介绍，帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。。</p>
+            </div>
+            <div>
+              <p class="fl" style="color:rgba(136,136,136,1)">2018-05-20</p>
+              <p class="fr" style="font-size:16px;color:rgba(100,23,166,1);margin-right:40px;">阅读全文 >> </p>
+            </div>
+          </div>
+          <div class="lines" v-if="index !== 0">
+
+          </div>
+        </div>
+      </div>
+    </template>
     <!-- 学堂资讯 -->
     <template v-if="config.card_type === 'infoOne'">
       <div class="info-list">
@@ -122,7 +150,7 @@
             </div>
           </el-card>
         </div>
-        <div class="more">查看更多>></div>
+        <div class="more" @click = "getMore(linkfour)">查看更多>></div>
       </div>
     </template>
 
@@ -247,7 +275,9 @@ export default {
     "dingData",
     "searchData",
     "courseList",
-    "linkdata"
+    "linkdata",
+    'newsList',
+    'linkfour'
   ],
   data() {
     return {
@@ -259,6 +289,9 @@ export default {
   },
   methods: {
     goLink(item) {
+      this.$router.push(item);
+    },
+    getMore(item) {
       this.$router.push(item);
     }
   },
@@ -715,6 +748,9 @@ export default {
           line-height: 30px;
         }
       }
+      .bordernone{
+        border: none;
+      }
       .study {
         padding: 30px 40px 0;
         span {
@@ -740,6 +776,10 @@ export default {
           }
         }
       }
+      .date {
+        color:rgba(136,136,136,1);
+        font-size:14px;
+      }
     }
   }
 }
@@ -748,6 +788,7 @@ export default {
 .courseList-play {
   width: 1100px;
   margin: 0 auto;
+
   .course {
     width: 100%;
     padding: 40px 0 40px 40px;
@@ -923,4 +964,26 @@ export default {
   position:absolute;top:30%;left:50%;margin-left:-70px;margin-top:-20px;
   color: #732EAF;
 }
+.boxshadow-none{
+  box-shadow:none;
+}
+.lines{
+  width: 1000px;
+  height: 1px;
+  background-color: #E8D6F7;
+  margin: 0 auto;
+  position: absolute;
+  top: 0px;
+  z-index: 100;
+  left: 45px;
+
+}
+// .courseList-play{
+//   .line:nth-child(1){
+//     display: none;
+//   }
+// }
+  // :nth-child(3){
+
+  // }
 </style>

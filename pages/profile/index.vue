@@ -231,14 +231,11 @@
   background-size: 100% 100%;
   .avator {
     line-height: 148px;
-    // display: inline;
     float: left;
     .img{
       width: 136px;
       height: 136px;
-      // vertical-align: middle;
       border-radius: 68px;
-      // border: 1px red solid;
       margin-top: 30px;
     }
   }

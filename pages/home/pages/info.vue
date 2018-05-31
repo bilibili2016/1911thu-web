@@ -4,7 +4,7 @@
         <v-title :data = "titleFive"></v-title>
 
         <v-card ref="card" :infoDesc="infoDesc" :config = "infoTwo"></v-card>
-        <v-card ref="card" :infoArticle="infoArticle" :config = "infoOne"></v-card>
+        <v-card ref="card" :infoArticle="infoArticle" :config = "infoOne" :linkfour="linkfour"></v-card>
 
       </el-row>
     </div>
@@ -18,13 +18,14 @@ export default {
     "v-card": CustomCard,
     "v-title": CustomTitle
   },
-  props: ["infoDesc", "infoArticle", "infoTwo", "infoOne", "titleFive"],
+  props: ["infoDesc", "infoArticle", "infoTwo", "infoOne", "titleFive", 'linkfour'],
   data() {
     return {
       infoDescs: null,
       infoArticles: null,
       infoTwos: null,
-      infoOnes: null
+      infoOnes: null,
+      linkfour: null
     };
   }
 };
