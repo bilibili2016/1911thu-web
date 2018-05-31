@@ -99,9 +99,9 @@
   font-size: 15px;
 }
 
-.el-card{
-  border: none;
-}
+// .el-card{
+//   border: none;
+// }
 // 去掉边框20px
 .el-main {
   padding: 0px;
@@ -362,9 +362,9 @@
   padding: 0 0px;
   margin: 10px 20px 0px 0px;
 }
-.el-tabs__active-bar{
-  width: 30px!important;
-}
+// .el-tabs__active-bar{
+//   width: 30px!important;
+// }
 .collect{
   .el-rate__icon{
     font-size: 18px;
@@ -396,24 +396,83 @@
 // profile页面修改tab
 .center-tab{
   .el-tabs__item{
-    margin: 0px 30px 0px 0px;
-    background-color: rgba(100, 23, 166, 1);
-    color: #fff;
+    margin: 0px 0px 0px 0px;
+    // background-color: red;
+    color: #696A70;
     height: 76px;
     padding: 12px;
     font-size: 16px;
 
   }
   .el-tabs--left .el-tabs__header.is-left{
-    width: 193px;
+    width: 165px;
   }
   .el-card__header{
     border-bottom: 1px solid rgba(232, 214, 247, 1);
     color: #222;
     font-size: 16px;
   }
-  .el-card__body{
-    padding:50px 40px 30px 40px;
+  .my-home{
+    .el-card__body {
+      padding: 50px 40px 0px 40px;
+    }
+  }
+  .el-tabs__nav-wrap::after{
+    background: #fff;
+  }
+  .el-card.is-always-shadow {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)!important;
+  }
+  .el-tabs__content{
+    margin-bottom: 80px;
+  }
+  .el-tabs__header{
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    margin: 1px 20px 0px 20px!important;
+
+  }
+  .el-tabs__item.is-active{
+    background-color: #8F4ACB;
+    color: #fff;
+  }
+  .my-course{
+    .center-tab .el-card__body{
+      padding: 0px!important;
+    }
+    .el-card__body{
+      padding: 0px;
+      // padding-left: 20px;
+    }
+    .el-tabs__header{
+      margin: 0px!important;
+    }
+    .el-tabs__item.is-active{
+      background: #fff;
+      font-size:16px;
+      font-family:MicrosoftYaHei;
+      color:rgba(154, 92, 208, 1);
+      // padding: 4px 20px 4px 20px;
+
+    }
+    .el-tabs__item{
+      height: 57px;
+      // margin-left: 20px;
+      padding: 4px 20px 4px 20px;
+    }
+    .el-tab-pane{
+      padding: 50px 41px 80px 44px;
+    }
+    .el-progress-bar__outer{
+      background-color: #FFDB5F;
+    }
+    .el-tabs__nav-scroll{
+      padding:0px 30px;
+    }
+    .el-tabs__active-bar{
+      width: 50px;
+      color: #8F4ACB;
+
+    }
   }
 }
 

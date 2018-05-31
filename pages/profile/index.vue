@@ -17,21 +17,58 @@
 
     </div>
      <div class="center-tab">
-        <el-tabs :tab-position="tabPosition" style="height: 380px;">
-          <el-tab-pane label="我的首页" class="my-home">
-            <el-card>
-              <div slot="header" class="clearfix">
+        <el-tabs :tab-position="tabPosition">
+          <el-tab-pane class="my-home">
+            <span slot="label"><i class="el-icon-date"></i> 我的行程</span>
+            <el-card class="card-style">
+                <div slot="header" class="clearfix">
                 <span>最近学习</span>
-                <el-button style="float: right; padding: 3px 0" type="text">查看全部</el-button>
+                <!-- <el-button style="float: right; padding: 3px 0" type="text">查看全部</el-button> -->
               </div>
               <div class="content">
                 <v-card :data ="newData" :config="config"></v-card>
               </div>
             </el-card>
+
           </el-tab-pane>
-          <el-tab-pane label="我的课程"></el-tab-pane>
-          <el-tab-pane label="我的消息">角色管理</el-tab-pane>
-          <el-tab-pane label="个人设置">定时任务补偿</el-tab-pane>
+          <el-tab-pane class="my-course">
+            <span slot="label"><i class="el-icon-date"></i> 我的课程</span>
+            <el-card>
+              <el-tabs v-model="activeName">
+                <el-tab-pane label="学习中" name="first">
+                  <v-card :data ="newData" :config="configOne"></v-card>
+                </el-tab-pane>
+                <el-tab-pane label="已完成" name="second">
+                  <v-card :data ="newData" :config="configTwo"></v-card>
+                </el-tab-pane>
+                <el-tab-pane label="我的收藏" name="third">
+                  <v-card :data ="newData" :config="config"></v-card>
+                </el-tab-pane>
+              </el-tabs>
+               <!-- <el-dropdown>
+                  <span class="el-dropdown-link">
+                    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>黄金糕</el-dropdown-item>
+                    <el-dropdown-item>狮子头</el-dropdown-item>
+                    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+                    <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+                    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown> -->
+            </el-card>
+          </el-tab-pane>
+          <el-tab-pane>
+            <span slot="label"><i class="el-icon-date"></i> 我的消息</span>
+
+            </el-tab-pane>
+          <el-tab-pane>
+            <span slot="label"><i class="el-icon-date"></i> 个人设置</span>
+            </el-tab-pane>
+          <el-tab-pane>
+             <span slot="label"><i class="el-icon-date"></i> 绑定课程ID</span>
+            </el-tab-pane>
         </el-tabs>
       </div>
   </div>
@@ -40,7 +77,6 @@
 <script>
   import CustomCard from "@/components/common/Card.vue";
   export default {
-    name: '个人信息入口',
     components: {
       'v-card': CustomCard
     },
@@ -48,8 +84,15 @@
       return {
         avator: require('~/assets/images/attentionWechat.png'),
         tabPosition: 'left',
+        activeName: 'first',
         config: {
-           card_type: "home"
+           card_type: "profile"
+        },
+        configOne: {
+           card_type: "profilelearn"
+        },
+        configTwo: {
+           card_type: "profileready"
         },
         newData: [
         {
@@ -87,6 +130,78 @@
           avator: require("@/assets/images/home_avator.png"),
           id: 16,
           rate: 2
+        },
+        {
+          bg: require("@/assets/images/home_new01.png"),
+          name: "H5和小程序直播开发",
+          cnum: 12,
+          pnum: 899,
+          avator: require("@/assets/images/home_avator.png"),
+          id: 154,
+          rate: 3
+        },
+        {
+          bg: require("@/assets/images/home_new02.png"),
+          name: "H5和小程序直播开发",
+          cnum: 34,
+          pnum: 2312,
+          avator: require("@/assets/images/home_avator.png"),
+          id: 152,
+          rate: 5
+        },
+        {
+          bg: require("@/assets/images/home_new03.png"),
+          name: "H5和小程序直播开发",
+          cnum: 26,
+          pnum: 799,
+          avator: require("@/assets/images/home_avator.png"),
+          id: 153,
+          rate: 1
+        },
+        {
+          bg: require("@/assets/images/home_new04.png"),
+          name: "H5和小程序直播开发",
+          cnum: 12,
+          pnum: 4399,
+          avator: require("@/assets/images/home_avator.png"),
+          id: 156,
+          rate: 2
+        },
+        {
+          bg: require("@/assets/images/home_new01.png"),
+          name: "H5和小程序直播开发",
+          cnum: 12,
+          pnum: 899,
+          avator: require("@/assets/images/home_avator.png"),
+          id: 1514,
+          rate: 3
+        },
+        {
+          bg: require("@/assets/images/home_new02.png"),
+          name: "H5和小程序直播开发",
+          cnum: 34,
+          pnum: 2312,
+          avator: require("@/assets/images/home_avator.png"),
+          id: 1512,
+          rate: 5
+        },
+        {
+          bg: require("@/assets/images/home_new03.png"),
+          name: "H5和小程序直播开发",
+          cnum: 26,
+          pnum: 799,
+          avator: require("@/assets/images/home_avator.png"),
+          id: 1513,
+          rate: 1
+        },
+        {
+          bg: require("@/assets/images/home_new04.png"),
+          name: "H5和小程序直播开发",
+          cnum: 12,
+          pnum: 4399,
+          avator: require("@/assets/images/home_avator.png"),
+          id: 1516,
+          rate: 2
         }
       ]
       }
@@ -99,6 +214,8 @@
   width: 100%;
   height: 148px;
   background: rgba(100,23,166,1);
+  background-image: url('~/assets/images/profile_banner01.png');
+  background-size: 100% 100%;
   .avator {
     line-height: 148px;
     // display: inline;
@@ -120,9 +237,6 @@
     margin: 0 auto;
     margin-top: 64px;
     .my-home{
-      // .content{
-      //   padding: 50px 40px 30px 40px;
-      // }
     }
   }
 .center-box{

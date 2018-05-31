@@ -2,149 +2,238 @@
   <div class="card">
     <!-- 定制 -->
     <template v-if="config.card_type === 'ding'">
-            <div class="customization">
-              <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
-                <img :src="pro.src" alt="" class="fl">
-                <div class="fr con">
-                  <h5>{{pro.title}}</h5>
-                  <p>{{pro.content}}</p>
+      <div class="customization">
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
+          <img :src="pro.src" alt="" class="fl">
+          <div class="fr con">
+            <h5>{{pro.title}}</h5>
+            <p>{{pro.content}}</p>
+          </div>
+        </div>
+      </div>
+    </template>
+    <!-- 新上好课 -->
+    <template v-if="config.card_type === 'home'">
+      <div class="card-category">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox">
+            <img :src="card.bg" alt="">
+            <el-row>
+              <div class="item">
+                <p class="itemBox-name">
+                  <span>{{card.name}}</span>
+                </p>
+                <p class="itemBox-info" >
+                  <span>{{card.cnum}}课时</span>
+                  <span class="itemBox-num">
+                      <img :src="numSrc" alt="">
+                      <span>{{card.pnum}}</span>
+                  <el-rate v-model="card.rate" class="itemBox-rate"></el-rate>
+                  </span>
+                </p>
+              </div>
+              <div class="line-wrap">
+                <div class="line-center">
+                  <img :src="card.avator" alt="">
+                  <span>王建中</span>
+                  <span class="title">华中科技大学博士</span>
                 </div>
               </div>
-            </div>
-</template>
-    <!-- 新上好课 -->
-<template v-if="config.card_type === 'home'">
-  <div class="card-category">
-    <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-      <el-card shadow="never" body-style="padding: 0;" class="itemBox">
-        <img :src="card.bg" alt="">
-        <el-row>
-          <div class="item">
-            <p class="itemBox-name">
-              <span>{{card.name}}</span>
-            </p>
-            <p class="itemBox-info">
-              <span>{{card.cnum}}课时</span>
-              <span class="itemBox-num">
-                  <img :src="numSrc" alt="">
-                  <span>{{card.pnum}}</span>
-              <el-rate v-model="card.rate" class="itemBox-rate"></el-rate>
-              </span>
-            </p>
-          </div>
-          <div class="line-wrap">
-            <div class="line-center">
-              <img :src="card.avator" alt="">
-              <span>王建中</span>
-              <span class="title">华中科技大学博士</span>
-            </div>
-          </div>
-        </el-row>
-      </el-card>
-    </div>
-  </div>
-</template>
+            </el-row>
+          </el-card>
+        </div>
+      </div>
+    </template>
     <!-- 新上好课详情 -->
-<template v-if="config.card_type === 'goodlesson'">
-  <div class="courseList">
-    <div class="course clearfix" v-for="(course,index) in courseList" :key="index">
-      <el-card class="fl" :body-style="{ padding: '0px' }">
-        <img :src="course.bgImg" class="image">
-        <div class="personInfo clearfix">
-          <img :src="course.headImg" alt="">
-          <h5>{{course.grade}}：{{course.teacher}}</h5>
-          <p>{{course.school}}</p>
-        </div>
-      </el-card>
-      <div class="particulars fr">
-        <div class="currentclum">
-          <h4>{{course.title}}</h4>
-          <p>{{course.synopsis}}</p>
-        </div>
-        <div class="comment">
-          <h5>
-            <span>{{course.observer}}的评论</span>
-            <el-rate disabled v-model="course.rate" class="itemBox-rate"></el-rate>
-          </h5>
-          <p>{{course.comment}}</p>
-        </div>
-        <div class="study clearfix">
-          <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.styduNumber}}人加入学习</span>
-          <span class="fr" @click="goLink(linkdata)" ></span>
+    <template v-if="config.card_type === 'goodlesson'">
+      <div class="courseList">
+        <div class="course clearfix" v-for="(course,index) in courseList" :key="index">
+          <el-card class="fl" :body-style="{ padding: '0px' }">
+            <img :src="course.bgImg" class="image">
+            <div class="personInfo clearfix">
+              <img :src="course.headImg" alt="">
+              <h5>{{course.grade}}：{{course.teacher}}</h5>
+              <p>{{course.school}}</p>
+            </div>
+          </el-card>
+          <div class="particulars fr">
+            <div class="currentclum">
+              <h4>{{course.title}}</h4>
+              <p>{{course.synopsis}}</p>
+            </div>
+            <div class="comment">
+              <h5>
+                <span>{{course.observer}}的评论</span>
+                <el-rate disabled v-model="course.rate" class="itemBox-rate"></el-rate>
+              </h5>
+              <p>{{course.comment}}</p>
+            </div>
+            <div class="study clearfix">
+              <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.styduNumber}}人加入学习</span>
+              <span class="fr" @click="goLink(linkdata)" ></span>
 
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<!-- 新上好课详情 页面 -->
-<template v-if="config.card_type === 'goodplay'">
-  <div class="courseList-play">
-    <div class="course clearfix" v-for="(course,index) in courseList" :key="index">
-      <el-card class="fl" :body-style="{ padding: '0px' }">
-        <div style="position:relative;">
-          <img :src="course.bgImg" class="image">
-          <div class="mask" style="position:absolute;top:0;left:0;width:480px;height:312px;background:rgba(100,23,166,1);opacity:0.5"></div>
-          <div class="common-button" style="position:absolute;top:50%;left:50%;margin-left:-70px;margin-top:-20px;">
-             <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
-          </div>
-        </div>
-      </el-card>
-      <div class="particulars fr">
-        <div class="currentclum">
-          <h4 style="margin-bottom:30px;">{{course.title}}</h4>
-          <div>
-              <span class="fl" style="width:auto;padding-top:12px;"><span style="display:inline-block;margin-right:15px;">52课时</span><img src="../../assets/images/ren.png" alt=""> 1021</span>
-              <span style="padding-top:10px;"><el-rate v-model="one"></el-rate></span>
-          </div>
-        </div>
-        <div class="study clearfix">
-          <p>日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。以自己的亲身经历帮助学员做好在日本旅游的一切准备。尽量避免专业的语法知识介绍，帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。</p>
-          <div class="common-button">
-             <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</template>
+    </template>
+
+    <!-- 新上好课详情 页面 -->
+    <template v-if="config.card_type === 'goodplay'">
+      <div class="courseList-play">
+        <div class="course clearfix" v-for="(course,index) in courseList" :key="index">
+          <el-card class="fl" :body-style="{ padding: '0px' }">
+            <div style="position:relative;">
+              <img :src="course.bgImg" class="image">
+              <div class="mask" style="position:absolute;top:0;left:0;width:480px;height:312px;background:rgba(100,23,166,1);opacity:0.5"></div>
+              <div class="common-button btn-bg" style="">
+                <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+              </div>
+            </div>
+          </el-card>
+          <div class="particulars fr">
+            <div class="currentclum">
+              <h4 style="margin-bottom:30px;">{{course.title}}</h4>
+              <div>
+                  <span class="fl" style="width:auto;padding-top:12px;"><span style="display:inline-block;margin-right:15px;">52课时</span><img src="../../assets/images/ren.png" alt=""> 1021</span>
+                  <span style="padding-top:10px;"><el-rate v-model="one"></el-rate></span>
+              </div>
+            </div>
+            <div class="study clearfix">
+              <p>日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。以自己的亲身经历帮助学员做好在日本旅游的一切准备。尽量避免专业的语法知识介绍，帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。</p>
+              <div class="common-button">
+                <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
     <!-- 学堂资讯 -->
-<template v-if="config.card_type === 'infoOne'">
-  <div class="info-list">
-    <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info">
-      <el-card shadow="never" body-style="padding: 0;">
-        <div class="info-box">
-          <div class="info-wrap">
-            <img :src="card.avatar" alt="">
-            <span>从区块链到生命，许知远和王小川在1911主题餐厅聊了什么？</span>
-          </div>
+    <template v-if="config.card_type === 'infoOne'">
+      <div class="info-list">
+        <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info">
+          <el-card shadow="never" body-style="padding: 0;">
+            <div class="info-box">
+              <div class="info-wrap">
+                <img :src="card.avatar" alt="">
+                <span>从区块链到生命，许知远和王小川在1911主题餐厅聊了什么？</span>
+              </div>
+            </div>
+          </el-card>
         </div>
-      </el-card>
-    </div>
-    <div class="more">查看更多>></div>
-  </div>
-</template>
+        <div class="more">查看更多>></div>
+      </div>
+    </template>
 
-<template v-if="config.card_type === 'infoTwo'">
-  <div class="card-categorys">
-    <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list">
-      <el-card shadow="never" body-style="padding: 0;" class="itemBox">
-        <div class="img-box">
-          <img :src="card.avatar" alt="">
-          <div>
-            <span>学校党委理论学习中心组召开会议</span>
-          </div>
+    <template v-if="config.card_type === 'infoTwo'">
+      <div class="card-categorys">
+        <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox">
+            <div class="img-box">
+              <img :src="card.avatar" alt="">
+              <div>
+                <span>学校党委理论学习中心组召开会议</span>
+              </div>
+            </div>
+            <div class="item">
+              5月22日上午，中国人民大学召开党委理论学习中心组（扩大）会议，学习《中央巡视工作规划（2018-2022年）》（以下简称《规划》）精神。中央巡视工作领导小组办公室副主任夏立忠应邀作《深入贯彻党的十九大精神巩固深化发展新时代巡视工作》专题报告5月22日上午，中国人民大学召开党委理论学习中心组（扩大）会议.....
+            </div>
+          </el-card>
         </div>
-        <div class="item">
-          5月22日上午，中国人民大学召开党委理论学习中心组（扩大）会议，学习《中央巡视工作规划（2018-2022年）》（以下简称《规划》）精神。中央巡视工作领导小组办公室副主任夏立忠应邀作《深入贯彻党的十九大精神巩固深化发展新时代巡视工作》专题报告5月22日上午，中国人民大学召开党委理论学习中心组（扩大）会议.....
+      </div>
+    </template>
+    <!-- profile个人信息模板 -->
+    <template v-if="config.card_type === 'profile'">
+      <div class="card-category">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" style="height:267px;">
+            <img :src="card.bg" alt="">
+            <div class="tag">
+              <span>新闻宣传</span>
+              <span>时政</span>
+            </div>
+            <el-row>
+              <div class="item">
+                <p class="itemBox-name">
+                  <span>{{card.name}}</span>
+                </p>
+              </div>
+              <div class="line-wrap">
+                <div class="line-center">
+                  <img :src="card.avator" alt="">
+                  <span>王建中</span>
+                  <span class="title">华中科技大学博士</span>
+                </div>
+              </div>
+            </el-row>
+          </el-card>
         </div>
-      </el-card>
-    </div>
-
-  </div>
-</template>
-
+      </div>
+    </template>
+    <!-- profile 学习中-->
+    <template v-if="config.card_type === 'profilelearn'">
+      <div class="card-category">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" style="height:267px;">
+            <img :src="card.bg" alt="">
+            <div class="tag">
+              <span>新闻宣传</span>
+              <span>时政</span>
+            </div>
+             <div class="common-button btn-bgs ">
+                <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+              </div>
+            <el-row>
+              <div class="items">
+                <p class="itemBox-name">
+                  <span>{{card.name}}</span>
+                </p>
+              </div>
+              <div class="line-wrap">
+                <div class="line-centers">
+                  <!-- <span>已学习100%</span> -->
+                  <p>已学习100%</p>
+                  <el-progress :percentage="50"></el-progress>
+                </div>
+              </div>
+            </el-row>
+          </el-card>
+        </div>
+      </div>
+    </template>
+    <!-- profile 已完成-->
+    <template v-if="config.card_type === 'profileready'">
+      <div class="card-category">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" style="height:255px;">
+            <img :src="card.bg" alt="">
+            <div class="tag">
+              <span>新闻宣传</span>
+              <span>时政</span>
+            </div>
+            <div class="common-button btn-bgs">
+              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+            </div>
+            <el-row>
+              <div class="items">
+                <p class="itemBox-name">
+                  <span>{{card.name}}</span>
+                </p>
+              </div>
+              <div class="line-wrap">
+                <div class="line-centers">
+                  <p>已学习100%</p>
+                </div>
+              </div>
+              <div class="readyImg">
+                <img :src="readyImg" alt="">
+              </div>
+            </el-row>
+          </el-card>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -164,7 +253,8 @@ export default {
     return {
       numSrc: require("@/assets/images/home_num.png"),
       avator: require("@/assets/images/home_avator.png"),
-      one: 1
+      one: 1,
+      readyImg: require("@/assets/images/ready.png")
     };
   },
   methods: {
@@ -193,9 +283,25 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
       img {
         width: 260px;
         height: 160px;
+        // position: relative;
+      }
+      .tag{
+        position: absolute;
+        top: 126px;
+        left: 4px;
+        span{
+          display:inline-block;
+          padding: 6px 11px 5px 10px;
+          background:rgba(37,55,163,1);
+          opacity:0.6;
+          border-radius:6px;
+          color: #fff;
+          margin-left: 8px;
+        }
       }
       .item {
         border-bottom: 1px rgba(228, 228, 244, 1) solid;
@@ -232,6 +338,54 @@ export default {
           }
         }
       }
+      .items {
+        // border-bottom: 1px rgba(228, 228, 244, 1) solid;
+        .itemBox-name {
+          font-size: 16px;
+          font-family: MicrosoftYaHei;
+          color: rgba(51, 42, 81, 1);
+          line-height: 0px;
+          padding: 26px 15px;
+        }
+        .itemBox-info {
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(176, 174, 184, 1);
+          line-height: 0px;
+          margin: 0px 0px 13px 15px;
+          .itemBox-num {
+            font-size: 12px;
+            font-family: MicrosoftYaHei;
+            color: rgba(176, 174, 184, 1);
+            line-height: 0px;
+            padding-left: 8px;
+            img {
+              width: 12px;
+              height: 12px;
+              margin: 0px 5px;
+            }
+            .itemBox-rate {
+              display: inline;
+              font-size: 12px;
+              line-height: 13px;
+              margin-left: 57px;
+            }
+          }
+        }
+      }
+      .readyImg {
+        width: 75px;
+        height: 49px;
+        position: absolute;
+        top: 40%;
+        left: 94%;
+        margin-left: -70px;
+        margin-top: -20px;
+        img{
+          width: 75px;
+          height: 49px;
+        }
+      }
       .line-wrap {
         height: 50px;
       }
@@ -248,6 +402,16 @@ export default {
           display: inline-block;
           margin-left: 46px;
           color: rgba(109, 104, 127, 1);
+        }
+      }
+      .line-centers{
+        padding: 0px 14px 0px 13px;
+        p{
+          margin-bottom: 10px;
+          font-size:14px;
+          font-family:MicrosoftYaHei;
+          color:rgba(136,136,136,1);
+          // line-height:0px;
         }
       }
       .line-center img {
@@ -745,5 +909,12 @@ export default {
 .btn-class{
   width: 140px;
   border-radius:20px;
+}
+.btn-bg {
+  position:absolute;top:50%;left:50%;margin-left:-70px;margin-top:-20px;
+}
+.btn-bgs {
+  position:absolute;top:30%;left:50%;margin-left:-70px;margin-top:-20px;
+  color: #732EAF;
 }
 </style>
