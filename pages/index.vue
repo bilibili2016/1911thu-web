@@ -16,7 +16,7 @@
     <!-- 合作伙伴 -->
     <v-partner :data="partnerList"></v-partner>
     <v-backtotop></v-backtotop>
-    <v-notlogin></v-notlogin>
+    <v-notlogin :notLogin="notLogin"></v-notlogin>
   </el-main>
 </div>
 </template>
@@ -42,6 +42,11 @@ export default {
     "v-tab": Tab,
     'v-backtotop': BackToTop,
     'v-notlogin': NotLogin
+  },
+  methods:{
+    change(){
+
+    }
   },
   data() {
     return {

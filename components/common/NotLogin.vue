@@ -1,5 +1,5 @@
 <template>
-    <div class="notLogin" v-show="notLogin">
+    <div class="notLogin" :data="notLogin" v-show="notLogin">
         <div class="tip">
             <i class="el-icon-close" @click="close"></i>
             <img :src="tipSrc" alt="">
@@ -13,7 +13,7 @@ export default {
   props: ["notLogin"],
   data(){
       return{
-          tipSrc: require('@/assets/images/tips.png'),
+        tipSrc: require('@/assets/images/tips.png'),
       }
   },
   methods:{
