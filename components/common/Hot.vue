@@ -1,30 +1,27 @@
 
 <template>
   <div class="classification">
-        <div class="clsTitle clearfix">
-             <div class="fl">
-                <span :class="{checked:checked}">最新</span>
-                <span>最热</span>
-            </div>
-            <div class="fr">
-                <el-switch class="fl"
-                    v-model="onOff"
-                    active-color="#8F4ACB"
-                    inactive-color="#999">
-                </el-switch>隐藏已参加课程
-                <!-- <el-pagination class="fr"
-                    small
-                    layout="pager, prev, next"
-                    :total="20">
-                </el-pagination> -->
-            </div>
+    <div class="clsTitle clearfix">
+      <div class="fl">
+        <span :class="{checked:checked}">最新</span>
+        <span>最热</span>
+      </div>
+      <div class="fr">
+        <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
+        </el-switch>隐藏已参加课程
+        <!-- <el-pagination class="fr"
+                      small
+                      layout="pager, prev, next"
+                      :total="20">
+                  </el-pagination> -->
+      </div>
 
-        </div>
+    </div>
   </div>
 </template>
 
 <script>
-import CustomPagination from "@/components/common/Pagination.vue";
+  import CustomPagination from "@/components/common/Pagination.vue";
   export default {
     methods: {
       bind(index) {
@@ -51,7 +48,3 @@ import CustomPagination from "@/components/common/Pagination.vue";
   }
 </script>
 
-<style scoped lang="scss">
-@import "~assets/style/config";
-@import "~assets/style/classify";
-</style>

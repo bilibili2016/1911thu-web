@@ -20,7 +20,6 @@
                 </el-carousel-item>
               </el-carousel>
            </div>
-
        </el-row>
     </div>
 </template>
@@ -34,57 +33,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-// 用户评价
-.home-evaluate {
-  height: 740px;
-  .evaluate-carousel {
-    background: url("~/assets/images/home_bgc01.png") no-repeat center;
-    background-size: 1100px 400px;
-    .el-carousel__item h3 {
-      color: #475669;
-      font-size: 14px;
-      opacity: 0.75;
-      line-height: 150px;
-      margin: 0;
-    }
-    .evaluate-center {
-      width: 750px;
-      margin: 0 auto;
-      .three {
-        display: inline-block;
-        img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50px;
-          margin-top: 120px;
-        }
-      }
-      .evaluate-box {
-        display: inline-block;
-        float: right;
-        width: 574px;
-        margin-top: 100px;
-        .one {
-          width: 574px;
-          height: 77px;
-          font-size: 16px;
-          font-family: MicrosoftYaHei;
-          color: rgba(255, 255, 255, 1);
-          line-height: 30px;
-        }
-        .two {
-          width: 574px;
-          height: 21px;
-          font-size: 20px;
-          font-family: MicrosoftYaHei;
-          color: rgba(255, 255, 255, 1);
-          line-height: 30px;
-          margin-top: 50px;
-        }
-      }
-    }
-  }
-}
-</style>

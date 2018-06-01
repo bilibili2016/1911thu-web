@@ -37,13 +37,13 @@ const config = {
     API_STARDUST_TIMEOUT: env.API_STARDUST_TIMEOUT,
   },
   head: {
-    title: 'Stardust',
+    title: '1911学堂',
     meta: [
       { charset: 'utf-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'renderer', content: 'webkit' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: '星尘数据是为人工智能研发机构服务的训练数据标注平台。' }
+      { hid: 'description', name: 'description', content: '1911学堂' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

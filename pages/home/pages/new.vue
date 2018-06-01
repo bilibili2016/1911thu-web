@@ -25,16 +25,3 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.center {
-  width: 1100px;
-  margin: 0 auto;
-}
-.bg {
-  background: rgba(250, 250, 250, 1);
-  width: 100%;
-}
-.bg-none {
-  width: 100%;
-}
-</style>

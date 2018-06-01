@@ -29,11 +29,9 @@
   .el-carousel__container {
     height: 636px;
   }
-
   .el-carousel__indicators {
     bottom: 145px;
   }
-
   .el-carousel__button {
     width: 10px;
     height: 10px;
@@ -52,8 +50,6 @@
     }
   }
 }
-
-
 
 // tab切换
 .el-tabs--left .el-tabs__header.is-left {
@@ -79,8 +75,7 @@
 
 .el-tabs__item {
   height: 76px;
-  line-height: 76px;
-  // color: #fff;
+  line-height: 76px; // color: #fff;
   font-weight: 400;
 }
 
@@ -90,7 +85,7 @@
   opacity: .9;
 }
 
-.bg{
+.bg {
   .el-tabs__content {
     width: 922px;
     z-index: 2;
@@ -100,12 +95,12 @@
     background-color: #eee;
     opacity: 0.94;
   }
-
 }
-.bg-none{
-  .el-carousel__indicators{
+
+.bg-none {
+  .el-carousel__indicators {
     bottom: 52px;
-    .el-carousel__button{
+    .el-carousel__button {
       width: 10px;
       height: 10px;
       border-radius: 50%;
@@ -113,27 +108,26 @@
   }
 }
 
-
-
 // 设置rate组件start距离
-.el-rate__icon{
+.el-rate__icon {
   margin-right: 0px;
   font-size: 15px;
 }
 
-.el-card{
-  border: none;
-}
+// .el-card{
+//   border: none;
+// }
 // 去掉边框20px
 .el-main {
   padding: 0px;
 }
-.el-carousel__item--card{
+
+.el-carousel__item--card {
   width: 320px;
 }
-// 设置走马灯的高度
 
-.home-evaluate{
+// 设置走马灯的高度
+.home-evaluate {
   .el-carousel__container {
     width: 1100px; // margin-left: 114px;
     margin: 0 auto;
@@ -141,11 +135,7 @@
   .el-carousel__item {
     width: 1100px; // margin-right: 100px;
   }
-
 }
-
-  
-
 
 // 首页tab切换
 .classify {
@@ -181,7 +171,6 @@
     background-color: #fff;
     opacity: .9;
   }
-
 }
 
 // 登录注册 tab切换
@@ -277,10 +266,10 @@
 }
 
 // search
-.searchWord{
-  .el-autocomplete.inline-input{
+.searchWord {
+  .el-autocomplete.inline-input {
     width: 100%;
-    .el-input{
+    .el-input {
       width: 100%;
       input {
         border: none;
@@ -293,49 +282,51 @@
   }
 }
 
-
 //分页
-.pagination{
-  .el-pagination.is-background .el-pager li{
+.pagination {
+  .el-pagination.is-background .el-pager li {
     border-radius: 15px;
   }
   .el-pagination.is-background .btn-prev,
-  .el-pagination.is-background .btn-next{
+  .el-pagination.is-background .btn-next {
     background-color: #fff;
   }
 }
+
 // category页面
-.banner{
-  .center{
-    .el-button{
+.banner {
+  .center {
+    .el-button {
       padding: 8px 10px;
-      border-radius:6px;
+      border-radius: 6px;
       color: rgba(34, 34, 34, 1);
-      background-color:rgba(235, 231, 237, 1);
+      background-color: rgba(235, 231, 237, 1);
       border: none;
     }
-    .el-button--primary{
+    .el-button--primary {
       // background-color: rgba(235, 231, 237, 1);
-      border:none;
+      border: none;
     }
   }
 }
-.bg{
+
+.bg {
   .el-button {
     background-color: red;
   }
 }
+
 // 课程详情
-.container{
-  .el-tabs__active-bar.is-top{
+.container {
+  .el-tabs__active-bar.is-top {
     display: none;
   }
-  .el-tabs__item{
+  .el-tabs__item {
     height: 56px;
     line-height: 56px;
     width: 40px;
     text-align: center;
-    margin-left: 25px;
+    margin-left: 38px;
     padding: 0;
   }
   .el-tabs__item.is-active {
@@ -344,13 +335,12 @@
     border-bottom: 2px solid #6417A6;
     opacity: .9;
   }
-  .el-tabs__nav-wrap::after{
+  .el-tabs__nav-wrap::after {
     height: 1px;
     background-color: #E8D6F7;
-
   }
-  .catalog .chapter{
-    .el-progress.el-progress--line.el-progress--without-text.el-progress--text-inside{
+  .catalog .chapter {
+    .el-progress.el-progress--line.el-progress--without-text.el-progress--text-inside {
       width: 160px;
       display: inline-block;
       margin: 19px 129px 0 0;
@@ -358,16 +348,16 @@
     .el-progress-bar {
       width: 160px;
     }
-    .el-progress-bar__outer{
+    .el-progress-bar__outer {
       background-color: #FFDB5F;
     }
   }
 }
 
 // personialSet页
-.personalSet{
+.personalSet {
   // tab切换
-  .el-tabs__nav-wrap{
+  .el-tabs__nav-wrap {
     margin: 0;
     .el-tabs__nav-scroll {
       border-bottom: 1px solid #E8D6F7;
@@ -389,12 +379,12 @@
     .el-tabs__active-bar.is-top {
       display: none;
     }
-    &:after{
+    &:after {
       height: 0;
     }
   }
   .el-form.psnForm {
-    .el-form-item__label{
+    .el-form-item__label {
       font-size: 16px;
       color: #222;
     }
@@ -403,13 +393,13 @@
       height: 50px;
       border-radius: 4px;
       background-color: #F1E9F8;
-      border:none;
-      &:disabled{
-        color:#6417A6;
+      border: none;
+      &:disabled {
+        color: #6417A6;
         font-weight: 700;
       }
     }
-    .el-radio-group{
+    .el-radio-group {
       width: 670px;
       height: 50px;
       border-radius: 4px;
@@ -417,11 +407,11 @@
       .el-radio {
         margin-top: 17px;
         margin-left: 26px;
-        &:last-child{
+        &:last-child {
           margin-left: 61px;
         }
         .el-radio__input {
-          .el-radio__inner{
+          .el-radio__inner {
             width: 16px;
             height: 16px;
             border-color: #9E32E4;
@@ -429,7 +419,7 @@
           }
           &.is-checked .el-radio__inner {
             background-color: #9E32E4;
-            &:after{
+            &:after {
               width: 0;
             }
           }
@@ -442,29 +432,30 @@
         left: auto;
         color: #6417A6;
         font-size: 16px;
-        .el-input__icon{
+        .el-input__icon {
           font-weight: 700;
         }
       }
     }
     .el-select {
-        margin-right: 28px;
+      margin-right: 28px;
       .el-input .el-input__inner {
         width: 205px;
-        &::-webkit-input-placeholder{
+        &::-webkit-input-placeholder {
           color: #222;
         }
       }
     }
   }
 }
-.changePwd{
-  .el-form-item__label{
+
+.changePwd {
+  .el-form-item__label {
     color: #222;
     font-size: 16px;
     font-weight: 700;
   }
-  .el-input{
+  .el-input {
     text-align: left;
     .el-input__inner {
       width: 670px;
@@ -476,8 +467,117 @@
       color: #000;
     }
   }
-  .el-form-item__content{
+  .el-form-item__content {
     text-align: center;
+  }
+}
+
+// .el-tabs__active-bar{
+//   width: 30px!important;
+// }
+.collect {
+  .el-rate__icon {
+    font-size: 18px;
+  }
+}
+
+// 修改默认button按钮 颜色
+.common-button {
+  .el-button--primary.is-plain {
+    background: #fff;
+  }
+  .el-button {
+    width: 140px;
+    border-radius: 18px;
+    float: right;
+  }
+  .el-button--primary.is-plain:hover,
+  .el-button--primary.is-plain:focus {
+    background: #8F4ACB;
+    border-color: #8F4ACB;
+    color: #fff;
+  }
+}
+
+// profile页面修改tab
+.center-tab {
+  .el-tabs__item {
+    margin: 0px 0px 0px 0px; // background-color: red;
+    color: #696A70;
+    height: 76px;
+    padding: 12px;
+    font-size: 16px;
+    line-height: 60px;
+  }
+  .el-tabs--left .el-tabs__header.is-left {
+    width: 165px;
+  }
+  .el-card__header {
+    border-bottom: 1px solid rgba(232, 214, 247, 1);
+    color: #222;
+    font-size: 16px;
+  }
+  .my-home {
+    .el-card__body {
+      padding: 50px 40px 0px 40px;
+    }
+  }
+  .el-tabs__nav-wrap::after {
+    background: #fff;
+  }
+  .el-card.is-always-shadow {
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1) !important;
+  }
+  .el-tabs__content {
+    margin-bottom: 80px;
+  }
+  .el-tabs__header {
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    margin: 1px 20px 0px 20px !important;
+  }
+  .el-tabs__item.is-active {
+    background-color: #8F4ACB;
+    color: #fff;
+  }
+  .my-course {
+    .center-tab .el-card__body {
+      padding: 0px !important;
+    }
+    .el-card__body {
+      padding: 0px; // padding-left: 20px;
+    }
+    .el-tabs__header {
+      margin: 0px !important;
+    }
+    .el-tabs__item.is-active {
+      background: #fff;
+      font-size: 16px;
+      font-family: MicrosoftYaHei;
+      color: rgba(154, 92, 208, 1); // padding: 4px 20px 4px 20px;
+    }
+    .el-tabs__item {
+      height: 57px;
+      line-height: 57px;
+      padding: 4px 20px 4px 20px;
+    }
+    .el-tab-pane {
+      padding: 50px 41px 80px 44px;
+    }
+    .el-progress-bar__outer {
+      background-color: #FFDB5F;
+    }
+    .el-tabs__nav-scroll {
+      padding: 0px 30px;
+    }
+    .el-tabs__active-bar {
+      width: 50px;
+      color: #8F4ACB;
+    }
+  }
+  .personalSet {
+    .el-tabs__header {
+      margin: 0px !important;
+    }
   }
 }
 
@@ -491,16 +591,15 @@
     resize: none;
     border: 1px solid #bbbbbb;
   }
-  
 }
 
 // 新闻详情页
-.news{
-  .el-breadcrumb__item.current{
-    span{
+.news {
+  .el-breadcrumb__item.current {
+    span {
       color: #6417A6;
     }
-    &:hover span{
+    &:hover span {
       color: #6417A6;
     }
   }
@@ -509,12 +608,12 @@
 // 购物车页
 .companyInfo {
   .el-form-item {
-    .el-form-item__label:before{
-      content:"";
+    .el-form-item__label:before {
+      content: "";
     }
-    .el-form-item__content{
+    .el-form-item__content {
       width: 264px;
-      .el-autocomplete{
+      .el-autocomplete {
         width: 100%;
       }
       .el-input__inner {
@@ -524,11 +623,10 @@
         border: none;
         padding: 0;
         border-bottom: 1px solid #bbb;
-        &::-webkit-input-placeholder{
+        &::-webkit-input-placeholder {
           font-size: 12px;
         }
       }
-      
     }
     &.btnCommit .el-form-item__content {
       text-align: center;
@@ -539,17 +637,10 @@
   }
 }
 
-
-// .el-tabs__nav-wrap::after{
-//   height:0px;
-// }
-// .el-tabs__item{
-//   height: 47px;
-//   line-height: 55px;
-//   padding: 0 0px;
-//   margin: 10px 20px 0px 0px;
-// }
-// .el-tabs__active-bar{
-//   width: 30px!important;
-// }
-
+// 设置card 的goodLesson 左边的大小
+.goodLesson {
+  .el-card {
+    width: 400px;
+    height: 392px;
+  }
+}

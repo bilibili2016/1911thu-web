@@ -1,9 +1,6 @@
 <template>
   <div class="newsDetail">
-    <!-- 头图 -->
-    <div class="headImg">
-      <img src="../../assets/images/newsBanner.png" alt="">
-    </div>
+    <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <!-- 面包屑 -->
     <el-breadcrumb class="news" separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>当前位置</el-breadcrumb-item>
@@ -14,9 +11,9 @@
     <div class="detail">
       <div class="topbar">
         <span>分享：</span>
-        <img src="../../assets/images/share-wx.png" alt="">
-        <img src="../../assets/images/share-wb.png" alt="">
-        <img src="../../assets/images/share-kj.png" alt="">
+        <img :src = "sharewx" alt="">
+        <img :src = "sharewb" alt="">
+        <img :src = "sharekj" alt="">
       </div>
       <div class="newsContent">
         <h3>{{newsDetail.title}}</h3>
@@ -40,9 +37,20 @@
 </template>
 
 <script>
+import CustomBanner from "@/components/common/Banner.vue";
   export default {
+     components: {
+      'v-banner': CustomBanner
+    },
     data(){
       return{
+        bannerImg: require('~/assets/images/profile_banner03.png'),
+        sharewx: require('~/assets/images/share-wx.png'),
+        sharewb: require('~/assets/images/share-wb.png'),
+        sharekj: require('~/assets/images/share-kj.png'),
+        configs: {
+          banner_type: "news"
+        },
         newsDetail:{
           title:"新的中央经济工作会议精神解读——2018年经济工作思路和重点",
           time:"2018-05-20",
@@ -50,12 +58,8 @@
           prePiece:"清华大学成立 “青年教师骨干领航工作站”",
           nextPiece:"清华大学成立 “青年教师骨干领航工作站”",
         }
-        
+
       }
     }
   }
 </script>
-
-<style scoped lang="scss">
-@import "~assets/style/newsDetail";
-</style>
