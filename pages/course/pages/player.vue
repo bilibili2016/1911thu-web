@@ -1,32 +1,32 @@
 <template>
   <div class="playerBox clearfix">
-    <div class="mediaL fl">
+    <div class="mediaL fl" ref="mediaL">
       <div class="playTop">
         <i @click="goLink()">＜</i>新的中央经济工作会议精神解读
       </div>
-      <div class="playInner">
+      <div class="playInner" ref="playInner">
         <video src=""></video>
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
-                      <div class="ewCode">
-                          <img src="../../../assets/images/attentionWechat2.png" alt="">
-                          <i></i>
-                      </div>
-                  </span>
+          <div class="ewCode">
+            <img src="../../../assets/images/attentionWechat2.png" alt="">
+            <i></i>
+          </div>
+        </span>
         <span class="fl problem" @click="showRpt">报告问题</span>
         <span class="fr share">
-                      <i class="el-icon-share"></i>分享
-                  </span>
+          <i class="el-icon-share"></i>分享
+        </span>
         <span class="fr collection">
-                      <i class="el-icon-star-on"></i>收藏
-                  </span>
+          <i class="el-icon-star-on"></i>收藏
+        </span>
         <span class="fr elt" @click="showElt">
-                      <i class="el-icon-edit"></i>课程评价
-                  </span>
+          <i class="el-icon-edit"></i>课程评价
+        </span>
       </div>
     </div>
-    <div class="mediaR fr" :style="{ width: mediaRW+'px' }">
+    <div class="mediaR fr" ref="mediaR" :style="{ width: mediaRW+'px' }">
       <div v-show="mediaRInner" class="inner">
         <h5 class="title">{{player.courseName}}</h5>
         <div class="teacher clearfix">
@@ -37,7 +37,9 @@
         <div class="courseList" v-for="(section,index) in player.courseList" :key="index">
           <h4>{{section.section}}</h4>
           <div class="knobble clearfix" v-for="(bar,index) in section.knobbles" :key="index">
-            <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
+            <span class="fl playIcon">
+              <i class="el-icon-caret-right"></i>
+            </span>
             <span class="fl barName">{{bar.number}} {{bar.barName}}（{{bar.duration}})</span>
           </div>
         </div>
@@ -49,7 +51,9 @@
 
     <div class="reportBug" v-show="showReportBug">
       <div class="note">
-        <h4>报告问题 <img @click="closeReport" class="fr" src="../../../assets/images/close.png" alt=""></h4>
+        <h4>报告问题
+          <img @click="closeReport" class="fr" src="../../../assets/images/close.png" alt="">
+        </h4>
         <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem">
         </el-input>
         <div class="commitBug">
@@ -59,7 +63,9 @@
     </div>
     <div class="evaluate" v-show="showEvaluate">
       <div class="note">
-        <h4>课程评价 <img @click="closeEvaluate" class="fr" src="../../../assets/images/close.png" alt=""></h4>
+        <h4>课程评价
+          <img @click="closeEvaluate" class="fr" src="../../../assets/images/close.png" alt="">
+        </h4>
         <h5>请问该课程对您有帮忙吗？快来评个分吧！</h5>
         <h6>课程评分：
           <el-rate v-model="evaluate.eltnum"></el-rate>
@@ -77,6 +83,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
   export default {
@@ -101,13 +108,14 @@
       resize() {
         const w = window.screen.width;
         const h = window.screen.availHeight;
-        let mediaRW = $(".mediaR").width();
-        $(".mediaL").width(w - mediaRW);
-        $(".mediaL,.mediaR").height(h);
-        $(".mediaL .playInner").height(h - 100);
+        let mediaRW = this.$refs.mediaR.offsetWidth;
+        this.$refs.mediaL.style.width=w - mediaRW+"px";
+        this.$refs.mediaL.style.height= h+"px";
+        this.$refs.mediaR.style.height= h+"px";
+        this.$refs.playInner.style.height=h-100+"px";
       },
       fold() {
-        if ($(".mediaR").width() != 0) {
+        if (this.$refs.mediaR.offsetWidth != 0) {
           this.mediaRW = 0;
           this.mediaRInner = false;
           this.mediaRIcon = "el-icon-arrow-left";
