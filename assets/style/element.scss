@@ -658,6 +658,13 @@
   }
 }
 
+// 设置card 的goodLesson 左边的大小
+.goodLesson {
+  .el-card{
+    width: 400px;
+    height: 392px;
+  }
+}
 
 // .el-tabs__nav-wrap::after{
 //   height:0px;

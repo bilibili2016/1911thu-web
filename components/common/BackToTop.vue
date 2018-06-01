@@ -45,52 +45,40 @@ export default {
       default: 0
     },
     customStyle: {
-      type: Object,
-      default: {
-        right: '30px',
+      right: '30px',
         bottom: '320px',
         width: '50px',
         height: '50px',
         'border-radius': '4px',
         'line-height': '45px',
         background: '#e7eaf1'
-      }
     },
     customStyleOne: {
-      type: Object,
-      default: {
-        right: '30px',
+      right: '30px',
         bottom: '200px',
         width: '50px',
         height: '50px',
         'border-radius': '4px',
         'line-height': '45px',
         background: '#d800ff'
-      }
     },
     customStyleTwo: {
-      type: Object,
-      default: {
-        right: '30px',
+      right: '30px',
         bottom: '260px',
         width: '50px',
         height: '50px',
         'border-radius': '4px',
         'line-height': '45px',
         background: '#d800ff'
-      }
     },
     customStyleThree: {
-      type: Object,
-      default: {
-        right: '30px',
+      right: '30px',
         bottom: '100px',
         width: '110px',
         height: '50px',
         'border-radius': '4px',
         'line-height': '45px',
         background: 'rgba(252,210,63,1)'
-      }
     },
     transitionName: {
       type: String,

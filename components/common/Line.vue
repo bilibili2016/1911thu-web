@@ -21,7 +21,7 @@
 </script>
 
 <style scoped lang="scss">
-  @import "~assets/style/playDetail";
+  // @import "~assets/style/playDetail";
   .main-crumb {
     height: 85px;
     .main-crumbs {

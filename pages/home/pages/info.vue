@@ -4,7 +4,7 @@
         <v-title :data = "titleFive"></v-title>
 
         <v-card ref="card" :infoDesc="infoDesc" :config = "infoTwo"></v-card>
-        <v-card ref="card" :infoArticle="infoArticle" :config = "infoOne" :linkfour="linkfour"></v-card>
+        <v-card ref="card" :infoArticle="infoArticle" :config = "infoOne" :linkdata="linkfour"></v-card>
 
       </el-row>
     </div>
@@ -24,25 +24,9 @@ export default {
       infoDescs: null,
       infoArticles: null,
       infoTwos: null,
-      infoOnes: null,
-      linkfour: null
+      infoOnes: null
     };
   }
 };
 </script>
 
-<style scoped lang="scss">
-.home-info {
-  .info-center {
-    height: 830px;
-  }
-}
-.center {
-  width: 1100px;
-  margin: 0 auto;
-}
-.bg {
-  background: rgba(250, 250, 250, 1);
-  width: 100%;
-}
-</style>

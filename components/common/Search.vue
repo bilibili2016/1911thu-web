@@ -54,6 +54,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "~assets/style/config";
-@import "~assets/style/search";
+@import "~assets/style/components/search";
 </style>

@@ -2,7 +2,7 @@
   <div>
     <v-search></v-search>
     <div class="center">
-      <div class="cnum">
+      <div class="cnums">
         共找到30门“冲突管理”相关课程
       </div>
       <v-card :data="searchData" :config="config"></v-card>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import Search from "@/pages/home/search/list.vue";
+  import Search from "@/components/common/Search.vue";
   import CustomCard from "@/components/common/Card.vue";
   import CustomPagination from "@/components/common/Pagination.vue";
   import BackToTop from "@/components/common/BackToTop.vue";
@@ -137,7 +137,8 @@
           }
         ],
         config: {
-          card_type: "home"
+          card_type: "profile",
+          card: 'home'
         },
         pagemsg: {
           page: 1,
@@ -149,6 +150,3 @@
   };
 </script>
 
-<style scoped lang="scss">
-  @import "~assets/style/search";
-</style>

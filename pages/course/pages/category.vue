@@ -1,16 +1,43 @@
 <template>
   <div>
-    <div class="classification">
-      <v-hots></v-hots>
-      <div class="classList">
-        <ul>
-          <li v-for="(item,index) in classList" :key="index" @click="bind(index)">{{item}}</li>
-        </ul>
-      </div>
+    <div class="banner">
       <div class="center">
+        <div class="college">
+          <ul>
+            <li class="title">
+              学院:
+            </li>
+            <li v-for="(item,index) in data" :index="index" :key="index" :class="{bgs: bgmsg === index ? true : false }">
+              <el-button @click="handleItemOne(item,index)">{{item.name}}</el-button>
+            </li>
+          </ul>
+        </div>
+        <div class="classification">
+          <ul>
+            <li class="title">
+              分类:
+            </li>
+            <li v-for="(card,index) in data2" :index="index" :key="index" :class="{bgs: bgmsgs === index ? true : false }">
+              <el-button @click="handleItemTwo(item,index)">{{card.name}}</el-button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="center">
+      <div class="header">
+        <el-tabs v-model="activeName" @tab-click="handleClick" class="tabStyle">
+          <el-tab-pane label="最新" name="first"></el-tab-pane>
+          <el-tab-pane label="最热" name="second"></el-tab-pane>
+        </el-tabs>
+        <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch">
+        </el-switch>
+      </div>
+      <div class="carlist">
         <v-card :data="categoryData" :config="config"></v-card>
       </div>
     </div>
+    <!-- <v-filter></v-filter> -->
     <div>
       <v-page :data="pagemsg"></v-page>
     </div>
@@ -19,34 +46,30 @@
 
 <script>
   import CustomCard from "@/components/common/Card.vue";
-  import CustomHots from "@/components/common/Hot.vue";
+  import CustomHot2 from "@/components/common/Hot2.vue";
   import CustomPagination from "@/components/common/Pagination.vue";
   export default {
     components: {
-      "v-hots": CustomHots,
       "v-card": CustomCard,
+      "v-filter": CustomHot2,
       "v-page": CustomPagination
-    },
-    methods: {
-      bind(index) {
-        $(".classList ul li").removeClass("checked");
-        $(".classList ul li")
-          .eq(index)
-          .addClass("checked");
-      }
     },
     data() {
       return {
-        checked: true,
-        onOff: true,
-        classList: [
-          "干部通用",
-          "党政系统学院",
-          "在线商学院",
-          "行业学院",
-          "职场学院",
-          "热点学院"
-        ],
+        bgmsg: null,
+        bgmsgs: null,
+        activeName: 'second',
+        value3: true,
+        value4: true,
+        config: {
+          card_type: "profile",
+          card: 'home'
+        },
+         pagemsg: {
+          page: 1,
+          pagesize: 8,
+          total: 12
+        },
         categoryData: [{
             bg: require("@/assets/images/home_new01.png"),
             name: "H5和小程序直播开发",
@@ -156,19 +179,106 @@
             rate: 2
           }
         ],
-        config: {
-          card_type: "home"
-        },
-        pagemsg: {
-          page: 1,
-          pagesize: 8,
-          total: 12
-        }
+        data: [{
+            name: "全部",
+            id: 1
+          },
+          {
+            name: "干部通用学院",
+            id: 2
+          },
+          {
+            name: "党政系统学院",
+            id: 3
+          },
+          {
+            name: "在线商学院",
+            id: 4
+          },
+          {
+            name: "行业学院",
+            id: 5
+          },
+          {
+            name: "职场学院",
+            id: 6
+          },
+          {
+            name: "直播学院",
+            id: 7
+          },
+          {
+            name: "学位学院",
+            id: 8
+          }
+        ],
+        data2: [{
+            name: "全部",
+            id: 1999
+          },
+          {
+            name: "公共管理/履职能力",
+            id: 9
+          },
+          {
+            name: "时政解读",
+            id: 10
+          },
+          {
+            name: "法律法规",
+            id: 11
+          },
+          {
+            name: "政府绩效管理",
+            id: 12
+          },
+          {
+            name: "经济治理与城市规划",
+            id: 13
+          },
+          {
+            name: "城市管理",
+            id: 14
+          },
+          {
+            name: "新闻宣传国际形式及安全治理",
+            id: 15
+          },
+          {
+            name: "创新驱动发展",
+            id: 16
+          },
+          {
+            name: "一带一路与国际合作",
+            id: 17
+          },
+          {
+            name: "乡村振兴",
+            id: 18
+          },
+          {
+            name: "人文素养",
+            id: 19
+          },
+          {
+            name: "社会治理",
+            id: 20
+          }
+        ]
       };
+    },
+    methods: {
+      handleItemOne(item, index) {
+        this.bgmsg = index;
+      },
+      handleItemTwo(item, index) {
+        this.bgmsgs = index;
+      },
+      handleClick(tab, event) {}
     }
   };
 </script>
 
 <style scoped lang="scss">
-  @import "~assets/style/classify";
+  @import "~assets/style/course/category";
 </style>

@@ -18,14 +18,3 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-@import "~assets/style/config";
-@import "~assets/style/index";
-.center {
-  width: 1100px;
-  margin: 0 auto;
-}
-.bg-none {
-  width: 100%;
-}
-</style>

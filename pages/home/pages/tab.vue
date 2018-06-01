@@ -27,14 +27,7 @@ export default {
     "v-carousel": Carousel,
     "v-card": Card,
     "v-tab": Tab
-  },
-  data() {
-    return {};
   }
 };
 </script>
 
-<style scoped lang="scss">
-@import "~assets/style/config";
-@import "~assets/style/index";
-</style>

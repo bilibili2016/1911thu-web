@@ -53,5 +53,5 @@ import CustomPagination from "@/components/common/Pagination.vue";
 
 <style scoped lang="scss">
 @import "~assets/style/config";
-@import "~assets/style/classify";
+// @import "~assets/style/classify";
 </style>

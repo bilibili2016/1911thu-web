@@ -19,7 +19,7 @@
     data() {
       return {
         atopImg: require("@/assets/images/banner2.png"),
-        linkdata: '../course/pages/playdetail',
+        linkdata: 'coursedetail',
         config: {
           card_type: "goodlesson"
         },
@@ -81,6 +81,3 @@
   };
 </script>
 
-<style scoped lang="scss">
-  @import "~assets/style/goodLesson";
-</style>

@@ -6,16 +6,12 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>分类列表</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/course/pages/newlesson' }">分类列表</el-breadcrumb-item>
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
         <div class="fr">
           <div class="collect">
-            <!-- <span>
-                    <el-rate v-model="value1" max="1"></el-rate>
-                </span>
-              <span class="c">收藏</span> -->
             <div class="line-center">
               <img :src="shareImgc" alt="">
               <span> 收藏 </span>
@@ -27,12 +23,11 @@
         </div>
       </div>
       <div class="main-header">
-        <v-card :courseList="courseList" :config="config"></v-card>
+        <v-card :courseList="courseList" :config="config" :linkdata="linkseven"></v-card>
       </div>
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="介绍" name="first">
-
           </el-tab-pane>
           <el-tab-pane label="目录" name="second">
             <v-line :catalogs="catalogs"></v-line>
@@ -45,7 +40,6 @@
             <h5>扫描二维码或关注“1911学堂”微信公众号</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
-
         </div>
       </div>
       <!-- 讲师介绍 -->
@@ -97,6 +91,7 @@
         shareImg: require('~/assets/images/f.png'),
         shareImgc: require('~/assets/images/c.png'),
         value1: 1,
+        linkseven: 'player',
         catalogs: [{
           isLogin: false,
           chapterName: "第一章 图的基本概念",
@@ -173,44 +168,4 @@
   }
 </script>
 
-<style scoped lang="scss">
-  @import "~assets/style/playDetail";
-  .main-crumb {
-    height: 85px;
-    .main-crumbs {
-      display: inline-block;
-      line-height: 85px;
-      height: 85px;
-    }
-    .fr {
-      .collect {
-        height: 85px;
-        // margin-left: 40px;
-        // .c {
-        //   display: inline-block;
-        //   padding-left: 10px;
-        // }
-        .line-center {
-          line-height: 85px;
-          img {
-            width: 18px;
-            height: 18px;
-            display: inline-block;
-            padding: 0px;
-            margin: 0px;
-            margin-right: 4px;
-            vertical-align: middle;
-          }
-          span {
-            font-size: 14px;
-            font-family: MicrosoftYaHei;
-            color: rgba(136, 136, 136, 1);
-            line-height: 0px;
-            display: inline;
-            padding-right: 10px;
-          }
-        }
-      }
-    }
-  }
-</style>
+
