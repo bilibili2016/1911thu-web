@@ -2,21 +2,21 @@
   <div class="card">
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
-        <div class="customization">
-          <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
-            <img :src="pro.src" alt="" class="fl">
-            <div class="fr con">
-              <h5>{{pro.title}}</h5>
-              <p>{{pro.content}}</p>
+            <div class="customization">
+              <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
+                <img :src="pro.src" alt="" class="fl">
+                <div class="fr con">
+                  <h5>{{pro.title}}</h5>
+                  <p>{{pro.content}}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 </template>
      <!-- profile个人信息模板 新上好课模板-->
 <template v-if="config.card_type === 'profile'">
   <div class="card-category">
     <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="goLink(linkdata)">
-      <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
+      <el-card shadow="never" body-style="padding: 0;" class="itemBox">
         <img :src="card.bg" alt="">
         <div class="tag">
           <span>新闻宣传</span>

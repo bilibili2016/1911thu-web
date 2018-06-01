@@ -110,7 +110,3 @@
     }
   }
 </script>
-
-<style scoped lang="scss">
-@import "~assets/style/shopCart";
-</style>

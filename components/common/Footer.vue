@@ -41,10 +41,5 @@
 </template>
 
 <script>
-export default {};
+  export default {};
 </script>
-
-<style lang="scss">
-@import "~assets/style/reset";
-@import "~assets/style/footer";
-</style>

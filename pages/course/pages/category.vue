@@ -65,7 +65,7 @@
           card_type: "profile",
           card: 'home'
         },
-         pagemsg: {
+        pagemsg: {
           page: 1,
           pagesize: 8,
           total: 12

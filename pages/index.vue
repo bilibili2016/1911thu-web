@@ -13,7 +13,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "~assets/style/config";
-@import "~assets/style/index";
-</style>
