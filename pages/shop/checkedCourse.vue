@@ -38,13 +38,13 @@
                 time:"2018-06-05 09：30：05",
                 courseList:[
                     {
-                        src:require("../../assets/images/4.png"),
+                        src:require("~/assets/images/ke-3.png"),
                         title:"H5和小程序直播开发",
                         period:"52",
                         teacher:"王建中",
                     },
                     {
-                        src:require("../../assets/images/4.png"),
+                        src:require("~/assets/images/ke-3.png"),
                         title:"H5和小程序直播开发",
                         period:"23",
                         teacher:"王建中",

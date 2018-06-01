@@ -146,14 +146,14 @@
         number:1,
         courseList:[
           {
-            src: require("../../assets/images/4.png"),
+            src: require("@/assets/images/ke-3.png"),
             title:"H5和小程序直播开发",
             period:52,
             teacher:"王建中",
             price:23.56
           },
           {
-            src: require("../../assets/images/4.png"),
+            src: require("~/assets/images/ke-3.png"),
             title:"H5和小程序直播开发",
             period:52,
             teacher:"王建中",
