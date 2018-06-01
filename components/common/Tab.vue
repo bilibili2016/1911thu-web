@@ -1,6 +1,6 @@
 <template>
   <div class="classify" :class="{ bg: tabmsg}">
-    <el-tabs v-model="activeName" @tab-click="handleClick" tabPosition="left">
+    <el-tabs v-model="activeName" @tab-click="handleClick" tabPosition="left" @mouseenter="handleClick">
       <el-tab-pane v-for="item in classify" :key="item.id" :label="item">
         <div class="subClass">
           <h4>全部<span><i></i></span></h4>
@@ -30,7 +30,6 @@
     methods: {
       handleClick() {
         this.tabmsg = true;
-
       },
       golink(linedata) {
         this.$router.push(linedata)

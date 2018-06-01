@@ -32,6 +32,16 @@
             <p class="itemBox-name">
               <span>{{card.name}}</span>
             </p>
+            <p class="itemBox-info">
+              <span>
+                {{card.cnum}}课时
+              </span>
+              <span class="itemBox-num">
+                <img :src="numSrc" alt="">
+                <span>{{card.pnum}}</span>
+                <el-rate v-model="card.rate" class="itemBox-rate"></el-rate>
+              </span>
+            </p>
           </div>
           <!-- 作者和头衔 -->
           <div class="line-wrap" v-if="config.card === 'home'">
