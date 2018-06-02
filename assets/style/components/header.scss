@@ -56,13 +56,21 @@
       }
     }
     .HREntry {
-      margin-left: 62px;
+      margin-left: 40px;
+      &.islogined{
+        margin-left: 126px;
+      }
       span {
         color: #222;
-        width: 56px;
-        border-right: 2px solid #ccc;
+        width: 78px;
+        padding: 0 10px;
+        text-align: right;
         vertical-align: top;
         cursor: pointer;
+        transition: all 300ms;
+        &.hrin{
+          border-right: 2px solid #ccc;
+        }
       }
       span:hover {
         color: #8F4ACB;
@@ -74,6 +82,7 @@
         margin: 0 31px;
         cursor: pointer;
         background: url('~assets/images/phone.png') no-repeat;
+        transition: all 300ms;
         &:hover {
           background: url('~assets/images/phone2.png') no-repeat;
         }
@@ -108,6 +117,12 @@
         }
       }
     }
+    .headImg{
+      img{
+        width: 34px;
+        height: 34px;
+      }
+    }
   }
   .start {
     width: 100%;
@@ -118,8 +133,7 @@
     .bgt {
       width: 100%;
       height: 100%;
-      opacity: 0.8;
-      background-color: #6417A6;
+      background-color: rgba(0,0,0,.6);
     }
     .lrFrame {
       width: 364px;

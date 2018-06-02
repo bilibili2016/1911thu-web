@@ -321,13 +321,13 @@
       .itemBox {
         cursor: pointer;
         width: 260px;
-        // height: 300px;
+        display: flex;
         border-radius: 16px;
         background: #fff;
-        display: flex;
         flex-direction: column;
         align-items: center;
         position: relative;
+        border: none;
         img {
           width: 260px;
           height: 160px;
