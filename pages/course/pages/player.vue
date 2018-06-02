@@ -10,7 +10,7 @@
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
           <div class="ewCode">
-            <img src="../../../assets/images/attentionWechat2.png" alt="">
+            <img src="~/assets/images/attentionWechat2.png" alt="">
             <i></i>
           </div>
         </span>
@@ -30,7 +30,7 @@
       <div v-show="mediaRInner" class="inner">
         <h5 class="title">{{player.courseName}}</h5>
         <div class="teacher clearfix">
-          <img class="fl" src="../../../assets/images/headImg.png" alt="">
+        <img class="fl" src="~/assets/images/headImg.png" alt="">
           <p class="fl">{{player.teacher.name}}</p>
           <p class="fl">{{player.teacher.school}}</p>
         </div>
@@ -52,7 +52,7 @@
     <div class="reportBug" v-show="showReportBug">
       <div class="note">
         <h4>报告问题
-          <img @click="closeReport" class="fr" src="../../../assets/images/close.png" alt="">
+          <i @click="closeReport" class="el-icon-close fr"></i>
         </h4>
         <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem">
         </el-input>
@@ -64,7 +64,7 @@
     <div class="evaluate" v-show="showEvaluate">
       <div class="note">
         <h4>课程评价
-          <img @click="closeEvaluate" class="fr" src="../../../assets/images/close.png" alt="">
+          <i class="el-icon-close fr" @click="closeEvaluate"></i>
         </h4>
         <h5>请问该课程对您有帮忙吗？快来评个分吧！</h5>
         <h6>课程评分：
@@ -168,7 +168,7 @@
         },
         problem: "",
         evaluate: {
-          eltnum: "5",
+          eltnum: 5,
           btnList: ["内容精彩", "内容生涩", "音质不好", "讲解详细", "很有帮助", "点赞老师"]
         }
       }

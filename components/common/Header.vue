@@ -2,19 +2,23 @@
   <div class="headerBox">
     <div class="main">
       <div class="headerLogo fl" @click="goSearch('/')">
-        <img src="../../assets/images/1911xt.png" alt="">
+        <img src="~/assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search">
         <img :src="searchImg" alt="" @click="goSearch('home/search')">
       </div>
-      <div class="HREntry">
-        <span>Hr入口</span>
+      <div :class="{HREntry:true,islogined:islogin}">
+        <span class="hrin">Hr入口</span>
+        <span v-if="islogin">我的课程</span>
         <i class="phone"></i>
       </div>
-      <div class="lrBtn">
+      <div class="lrBtn" v-if="!islogin">
         <span class="login" @click="login">登录</span>
         <span class="register" @click="register">注册</span>
+      </div>
+      <div class="headImg" v-else>
+        <img :src="user.userImg" alt="">
       </div>
     </div>
 
@@ -150,8 +154,12 @@
       return {
         searchImg: require('~/assets/images/search.png'),
         start: false,
+        islogin:false,
         activeName: 'second',
         search: '',
+        user:{
+          userImg:require("~/assets/images/headImg.png"),
+        },
         activeName: 'login',
         loginData: {
           pass: '',
