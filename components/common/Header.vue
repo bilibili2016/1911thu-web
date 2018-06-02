@@ -1,15 +1,16 @@
 <template>
   <div class="headerBox">
     <div class="main">
-      <div class="headerLogo fl" @click="goSearch('/')">
+      <div class="headerLogo fl" @click="backHome">
         <img src="../../assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search">
-        <img :src="searchImg" alt="" @click="goSearch('home/search')">
+        <img :src="searchImg" alt="" @click="goSearch('course/pages/search')">
       </div>
       <div class="HREntry">
         <span>Hr入口</span>
+        <!-- <span>我的课程</span> -->
         <i class="phone"></i>
       </div>
       <div class="lrBtn">
@@ -75,58 +76,8 @@
 </template>
 
 <script>
+import { getQueryString } from '@/lib/util/helper'
   export default {
-    methods: {
-      login() {
-        this.start = !this.start;
-        this.activeName = 'login';
-        if (this.start === true) {
-          this.stop()
-        } else {
-          this.move()
-        }
-      },
-      changePwd() {
-
-        console.log(this.showPwd);
-        if (this.showPwd) {
-          this.showPwd = false;
-          this.loginData.pwdType = 'password';
-        } else {
-          this.showPwd = true;
-          this.loginData.pwdType = 'text';
-        }
-      },
-      register() {
-        console.log(this.activeName);
-        this.start = true;
-        this.activeName = 'register';
-      },
-      close() {
-        this.start = false;
-      },
-      handleClick(tab, event) {
-        console.log(tab, event);
-      },
-      stop() {
-        var mo = function(e) {
-          e.preventDefault();
-        };
-        document.body.style.overflow = 'hidden';
-        document.addEventListener("touchmove", mo, false); //禁止页面滑动
-      },
-      /***取消滑动限制***/
-      move() {
-        var mo = function(e) {
-          e.preventDefault();
-        };
-        document.body.style.overflow = ''; //出现滚动条
-        document.removeEventListener("touchmove", mo, false);
-      },
-      goSearch(item) {
-        this.$router.push(item)
-      }
-    },
     data() {
       var checkTel = (rule, value, callback) => {
         if (!value) {
@@ -185,8 +136,66 @@
             message: '验证码不能为空',
             trigger: 'blur'
           }]
+        },
+
+      }
+    },
+    methods: {
+      login() {
+        this.start = !this.start;
+        this.activeName = 'login';
+        if (this.start === true) {
+          this.stop()
+        } else {
+          this.move()
         }
+      },
+      changePwd() {
+        console.log(this.showPwd);
+        if (this.showPwd) {
+          this.showPwd = false;
+          this.loginData.pwdType = 'password';
+        } else {
+          this.showPwd = true;
+          this.loginData.pwdType = 'text';
+        }
+      },
+      register() {
+        console.log(this.activeName);
+        this.start = true;
+        this.activeName = 'register';
+      },
+      close() {
+        this.start = false;
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+      stop() {
+        var mo = function(e) {
+          e.preventDefault();
+        };
+        document.body.style.overflow = 'hidden';
+        document.addEventListener("touchmove", mo, false); //禁止页面滑动
+      },
+      /***取消滑动限制***/
+      move() {
+        var mo = function(e) {
+          e.preventDefault();
+        };
+        document.body.style.overflow = ''; //出现滚动条
+        document.removeEventListener("touchmove", mo, false);
+      },
+      goSearch(item) {
+        if (window.location.pathname === '/') {
+          this.$router.push(item)
+        } else {
+        }
+      },
+      backHome () {
+        this.$router.push('/')
       }
     }
+
   }
 </script>

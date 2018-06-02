@@ -107,6 +107,10 @@
     }
   }
 }
+// 输入框变小手
+ .el-input__inner {
+   cursor: pointer;
+ }
 
 // 设置rate组件start距离
 .el-rate__icon {
@@ -277,6 +281,7 @@
         margin: 0 0 0 24px;
         padding: 0;
         height: 48px;
+        cursor: pointer;
       }
     }
   }
@@ -291,6 +296,10 @@
   .el-pagination.is-background .btn-next {
     background-color: #fff;
   }
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #8F4ACB;
+  color: #fff;
 }
 
 // category页面
@@ -644,3 +653,10 @@
     height: 392px;
   }
 }
+// 修改轮播
+.particulars{
+  .el-carousel__container{
+    background-color: #fafafa;
+  }
+}
+

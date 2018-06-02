@@ -17,14 +17,12 @@
     </transition>
     <transition :name="transitionName">
       <div class="back-to-ceiling" v-show="visible" :style="customStyleThree">
-
         <div class="line-wrap">
           <div class="line-center">
             <img :src="choiceSrc" alt="" class="ceilSrc">
             <span>我要选课</span>
           </div>
         </div>
-
       </div>
     </transition>
 

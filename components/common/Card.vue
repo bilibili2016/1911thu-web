@@ -2,75 +2,75 @@
   <div class="card">
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
-            <div class="customization">
-              <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
-                <img :src="pro.src" alt="" class="fl">
-                <div class="fr con">
-                  <h5>{{pro.title}}</h5>
-                  <p>{{pro.content}}</p>
+      <div class="customization">
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
+          <img :src="pro.src" alt="" class="fl">
+          <div class="fr con">
+            <h5>{{pro.title}}</h5>
+            <p>{{pro.content}}</p>
+          </div>
+        </div>
+      </div>
+    </template>
+     <!-- profile个人信息模板 新上好课模板-->
+    <template v-if="config.card_type === 'profile'">
+      <div class="card-category">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="goLink(linkdata)">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox">
+            <img :src="card.bg" alt="">
+            <div class="tag">
+              <span>新闻宣传</span>
+              <span>时政</span>
+            </div>
+            <div v-if="config.card === 'home'"></div>
+            <div class="common-button btn-bgs " v-else>
+              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+            </div>
+            <el-row>
+              <!-- 名字 -->
+              <div class="item">
+                <p class="itemBox-name">
+                  <span>{{card.name}}</span>
+                </p>
+                <p class="itemBox-info">
+                  <span>
+                    {{card.cnum}}课时
+                  </span>
+                  <span class="itemBox-num">
+                    <img :src="numSrc" alt="">
+                    <span>{{card.pnum}}</span>
+                    <el-rate v-model="card.rate" class="itemBox-rate"></el-rate>
+                  </span>
+                </p>
+              </div>
+              <!-- 作者和头衔 -->
+              <div class="line-wrap" v-if="config.card === 'home'">
+                <div class="line-center">
+                  <img :src="card.avator" alt="">
+                  <span>王建中</span>
+                  <span class="title">华中科技大学博士</span>
                 </div>
               </div>
-            </div>
-</template>
-     <!-- profile个人信息模板 新上好课模板-->
-<template v-if="config.card_type === 'profile'">
-  <div class="card-category">
-    <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="goLink(linkdata)">
-      <el-card shadow="never" body-style="padding: 0;" class="itemBox">
-        <img :src="card.bg" alt="">
-        <div class="tag">
-          <span>新闻宣传</span>
-          <span>时政</span>
+              <!-- 学习进度 -->
+              <div class="line-wraps" v-if="config.card === 'learning'">
+                <div class="line-centers">
+                  <p>已学习100%</p>
+                  <el-progress :percentage="50"></el-progress>
+                </div>
+              </div>
+              <div v-if="config.card === 'already'">
+                <div class="line-centers">
+                  <div>已学习100%</div>
+                </div>
+              </div>
+              <div class="readyImg" v-if="config.card === 'already'">
+                <img :src="readyImg" alt="">
+              </div>
+            </el-row>
+          </el-card>
         </div>
-        <div v-if="config.card === 'home'"></div>
-        <div class="common-button btn-bgs " v-else>
-          <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
-        </div>
-        <el-row>
-          <!-- 名字 -->
-          <div class="item">
-            <p class="itemBox-name">
-              <span>{{card.name}}</span>
-            </p>
-            <p class="itemBox-info">
-              <span>
-                {{card.cnum}}课时
-              </span>
-              <span class="itemBox-num">
-                <img :src="numSrc" alt="">
-                <span>{{card.pnum}}</span>
-                <el-rate v-model="card.rate" class="itemBox-rate"></el-rate>
-              </span>
-            </p>
-          </div>
-          <!-- 作者和头衔 -->
-          <div class="line-wrap" v-if="config.card === 'home'">
-            <div class="line-center">
-              <img :src="card.avator" alt="">
-              <span>王建中</span>
-              <span class="title">华中科技大学博士</span>
-            </div>
-          </div>
-          <!-- 学习进度 -->
-          <div class="line-wraps" v-if="config.card === 'learning'">
-            <div class="line-centers">
-              <p>已学习100%</p>
-              <el-progress :percentage="50"></el-progress>
-            </div>
-          </div>
-          <div v-if="config.card === 'already'">
-            <div class="line-centers">
-              <div>已学习100%</div>
-            </div>
-          </div>
-          <div class="readyImg" v-if="config.card === 'already'">
-            <img :src="readyImg" alt="">
-          </div>
-        </el-row>
-      </el-card>
-    </div>
-  </div>
-</template>
+      </div>
+    </template>
 
 
     <!-- 新上好课详情 -->
@@ -79,10 +79,13 @@
     <div class="course clearfix bottom" v-for="(course,index) in courseList" :key="index">
       <el-card class="fl" :body-style="{ padding: '0px' }">
         <img :src="course.bgImg" class="image">
-        <div class="personInfo clearfix">
+        <div class="personInfo clearfix ">
           <img :src="course.headImg" alt="">
-          <h5>{{course.grade}}：{{course.teacher}}</h5>
-          <p>{{course.school}}</p>
+          <h5 class="fr">{{course.grade}}：{{course.teacher}}</h5>
+          <p class="fr">{{course.school}}</p>
+        </div>
+        <div class="play-btn">
+          <img :src="playbtn" alt="">
         </div>
       </el-card>
       <div class="particulars fr">
@@ -90,17 +93,23 @@
           <h4>{{course.title}}</h4>
           <p>{{course.synopsis}}</p>
         </div>
-        <div class="comment">
-          <h5>
-            <span>{{course.observer}}的评论</span>
-            <el-rate disabled v-model="course.rate" class="itemBox-rate"></el-rate>
-          </h5>
-          <p>{{course.comment}}</p>
-        </div>
+
+        <el-carousel trigger="click" height="120px">
+          <el-carousel-item v-for="item in 4" :key="item">
+            <div class="comment">
+              <h5>
+                <span>{{course.observer}}的评论</span>
+                <el-rate disabled v-model="course.rate" class="itemBox-rate"></el-rate>
+              </h5>
+              <p>{{course.comment}}</p>
+            </div>
+          </el-carousel-item>
+        </el-carousel>
         <div class="study clearfix">
           <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.styduNumber}}人加入学习</span>
-          <div class=" fr common-button">
-            <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+          <span class="coin">￥ 300.00</span>
+          <div class="fr common-button">
+            <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
           </div>
         </div>
       </div>
@@ -223,7 +232,8 @@
         numSrc: require("@/assets/images/home_num.png"),
         avator: require("@/assets/images/home_avator.png"),
         one: 1,
-        readyImg: require("@/assets/images/ready.png")
+        readyImg: require("@/assets/images/ready.png"),
+        playbtn: require('@/assets/images/play.png')
       };
     },
     methods: {
@@ -634,9 +644,11 @@
         // width: 400px;
         // height: 392px;
         font-size: 0;
+        position: relative;
         &>img {
           width: 400px;
           height: 260px;
+
         }
         .personInfo {
           width: 100%;
@@ -652,7 +664,7 @@
           h5,
           p {
             float: left;
-            width: 278px;
+            width: 274px;
             color: #fff;
           }
           h5 {
@@ -666,12 +678,24 @@
             font-size: 14px;
           }
         }
+        .play-btn{
+            width: 76px;
+            height: 76px;
+            border-radius: 38px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -43px;
+            margin-top: -89px;
+            cursor:pointer;
+        }
       }
       .goodplay {
         position: relative;
         .image {
           width: 480px;
           height: 312px;
+
         }
         .mask {
           position: absolute;
@@ -688,6 +712,7 @@
         .currentclum {
           padding-left: 40px;
           margin-right: 40px;
+          margin-bottom: 40px;
           h4 {
             font-size: 18px;
             color: #222;
@@ -703,7 +728,7 @@
         }
         .comment {
           height: 134px;
-          margin-top: 40px;
+          margin-top: 5px;
           padding: 0 40px 10px;
           background-color: #fafafa;
           color: #888;
@@ -733,13 +758,18 @@
           padding: 0px 40px;
         }
         .study {
-          padding: 30px 40px 0;
+          padding: 15px 40px 0;
+          .coin{
+            color:red;
+            font-size: 17px;
+            padding-left: 20px;
+          }
           span {
             font-size: 14px;
             color: #888888;
             margin-top: 21px;
             display: inline-block;
-            &:nth-child(2) {
+            &:nth-child(3) {
               width: 140px;
               height: 36px;
               line-height: 36px;
@@ -754,6 +784,9 @@
               height: 14px;
               vertical-align: middle;
             }
+          }
+          div {
+            margin-top: 10px;
           }
         }
         .date {
