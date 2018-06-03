@@ -1,0 +1,232 @@
+body {
+  background-color: #fafafa;
+}
+
+.main {
+  // width: 1100px;
+  margin: 0 auto;
+  .binding {
+    width: 886px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36); // margin-top: 64px;
+    // margin-bottom: 30px;
+    float: right;
+    position: relative;
+    margin-top: 1px;
+    margin: 3px 3px 0px 0px;
+    .title {
+      border-bottom: 1px solid #E8D6F7;
+      padding-left: 30px;
+      h4 {
+        height: 56px;
+        line-height: 56px;
+        font-size: 16px;
+        color: #222;
+        font-weight: 700;
+      }
+    }
+    .courseID {
+      margin-top: 50px;
+      margin-left: 50px;
+      position: relative;
+      span {
+        font-size: 16px;
+        font-weight: 700;
+        color: #222;
+      }
+      .error {
+        font-size: 12px;
+        color: #FF5F5F;
+        position: absolute;
+        bottom: -20px;
+        left: 122px;
+        font-weight: 400;
+      }
+      input {
+        width: 670px;
+        height: 50px;
+        margin-left: 18px;
+        padding-left: 20px;
+        background: rgba(241, 233, 248, 1);
+        border-radius: 4px;
+        &::-webkit-input-placeholder {
+          color: #C897F2;
+          font-weight: 700;
+        }
+      }
+    }
+    .bindInfo {
+      margin-top: 50px;
+      padding-left: 175px;
+      p {
+        font-size: 12px;
+        color: #aaa;
+        font-weight: 700;
+        line-height: 24px;
+      }
+    }
+    .present {
+      text-align: center;
+      margin-top: 80px;
+      padding-bottom: 50px;
+      .el-button.el-button--default.is-round {
+        width: 174px;
+        height: 56px;
+        color: #fff;
+        background: rgba(204, 204, 204, 1);
+        border-radius: 28px;
+      }
+      &.presentAble .el-button.el-button--default.is-round {
+        background: #8F4ACB;
+      }
+    }
+    .success {
+      width: 364px;
+      height: 316px;
+      border-radius: 10px;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      margin-left: -182px;
+      img {
+        width: 120px;
+        height: 120px;
+        margin: 69px 0 37px;
+      }
+      p {
+        font-size: 20px;
+        color: #6417A6;
+        line-height: 25px;
+      }
+    }
+  }
+  .courseList {
+    width: 886px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36); // margin-top: 64px;
+    margin-bottom: 30px;
+    float: right;
+    position: relative;
+    margin: 3px 3px;
+    .title {
+      border-bottom: 1px solid #E8D6F7;
+      padding: 0 30px;
+      span {
+        height: 56px;
+        line-height: 56px;
+        font-size: 16px;
+        color: #222;
+        font-weight: 700;
+      }
+      .el-button.is-round {
+        width: 140px;
+        height: 36px;
+        padding: 0;
+        line-height: 36px;
+        margin-top: 10px;
+        color: #6417A6;
+        border: 1px solid #6417A6;
+        font-weight: 400;
+        &:hover {
+          background-color: #6417A6;
+          color: #fff;
+        }
+      }
+    }
+    .courseIDList .oneID {
+      padding-left: 50px;
+      span {
+        display: inline-block;
+        height: 96px;
+        line-height: 96px;
+        color: #222;
+        font-weight: 700;
+        margin-right: 38px;
+        font-size: 16px;
+      }
+    }
+    .courseID {
+      padding-top: 30px;
+      margin: 0 50px;
+      position: relative;
+      border-top: 1px solid #E8D6F7;
+      span {
+        font-size: 16px;
+        font-weight: 700;
+        color: #222;
+      }
+      .error {
+        font-size: 12px;
+        color: #FF5F5F;
+        position: absolute;
+        bottom: -20px;
+        left: 122px;
+        font-weight: 400;
+      }
+      input {
+        width: 670px;
+        height: 50px;
+        margin-left: 18px;
+        padding-left: 20px;
+        background: rgba(241, 233, 248, 1);
+        border-radius: 4px;
+        &::-webkit-input-placeholder {
+          color: #C897F2;
+          font-weight: 700;
+        }
+      }
+    }
+    .bindInfo {
+      margin-top: 50px;
+      padding-left: 175px;
+      p {
+        font-size: 12px;
+        color: #aaa;
+        font-weight: 700;
+        line-height: 24px;
+      }
+    }
+    .present {
+      text-align: center;
+      margin-top: 80px;
+      padding-bottom: 50px;
+      .el-button.el-button--default.is-round {
+        width: 174px;
+        height: 56px;
+        color: #fff;
+        background: rgba(204, 204, 204, 1);
+        border-radius: 28px;
+      }
+      &.presentAble .el-button.el-button--default.is-round {
+        background: #8F4ACB;
+      }
+    }
+    .success {
+      width: 364px;
+      height: 316px;
+      border-radius: 10px;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      margin-left: -182px;
+      img {
+        width: 120px;
+        height: 120px;
+        margin: 69px 0 37px;
+      }
+      p {
+        font-size: 20px;
+        color: #6417A6;
+        line-height: 25px;
+      }
+    }
+  }
+}
