@@ -9,6 +9,7 @@
     align-items: center;
     .headerLogo {
       width: 177px;
+      cursor: pointer;
       img {
         width: 177px;
         height: 44px;
@@ -25,18 +26,24 @@
         height: 28px;
         margin-left: 14px;
         font-size: 14px;
+        cursor: pointer;
+
+
       }
       input::-webkit-input-placeholder {
-        color: #6417a6;
+        color: #C897F2;
+        cursor: pointer;
       }
       input:-moz-placeholder {
-        color: #6417a6;
+        color: #C897F2
       }
       input::-moz-placeholder {
-        color: #6417a6;
+       color: #C897F2
+
       }
       input:-ms-input-placeholder {
-        color: #6417a6;
+       color: #C897F2
+
       }
       img {
         width: 16px;
@@ -44,6 +51,8 @@
         position: absolute;
         top: 6px;
         right: 18px;
+        cursor: pointer;
+
       }
     }
     .HREntry {
@@ -71,6 +80,7 @@
         width: 14px;
         height: 20px;
         margin: 0 31px;
+        cursor: pointer;
         background: url('~assets/images/phone.png') no-repeat;
         transition: all 300ms;
         &:hover {

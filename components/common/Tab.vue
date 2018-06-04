@@ -1,11 +1,13 @@
 <template>
-  <div class="classify" :class="{ bg: tabmsg}">
-    <el-tabs v-model="activeName" @tab-click="handleClick" tabPosition="left">
+<!-- :class="{ bg: tab}" -->
+  <div class="classify" :class="{ bg: tabd}">
+    <el-tabs v-model="actived" @tab-click="handleClick" tabPosition="left" @mouseenter="handleClick">
       <el-tab-pane v-for="item in classify" :key="item.id" :label="item">
         <div class="subClass">
           <h4>全部<span><i></i></span></h4>
           <p>
-            <span @click="golink('home/category')">{{item}}</span>
+            <!-- @click="golink('home/category')" -->
+            <span @click="golink('course/pages/category')">{{item}}</span>
             <span>{{item}}</span>
             <span>{{item}}</span>
           </p>
@@ -26,15 +28,25 @@
 
 <script>
   export default {
-    props: ["classify", "courses", "tabmsg", "activeName"],
+    props: ["classify", "courses", "tab", "active"],
+    data() {
+      return {
+        actived: null,
+        tabd: null
+      }
+    },
     methods: {
       handleClick() {
-        this.tabmsg = true;
-
+        this.tabd = true;
       },
       golink(linedata) {
         this.$router.push(linedata)
       }
+    },
+    mounted () {
+      this.actived = this.active
+      this.tabd = this.tab
+
     }
   };
 </script>

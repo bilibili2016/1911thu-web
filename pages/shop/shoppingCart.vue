@@ -11,7 +11,7 @@
         </div>
         <div class="tableBody">
           <div v-for="(course,index) in courseList" :key="index">
-            <el-checkbox v-model="checked" @change="handleSelectChange"></el-checkbox>
+            <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">
               <img class="fl" :src="course.src" alt="">
               <div class="fl">
@@ -51,7 +51,7 @@
             <el-button>提交</el-button>
           </span>
           <span class="allPrice fr">￥94.00</span>
-          
+
         </div>
       </div>
     </div>
@@ -97,46 +97,6 @@
 <script>
 // 总价 多选
   export default {
-    methods:{
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      close(){
-        this.shwoInfo=false;
-      },
-      querySearch(queryString, cb) {
-        var restaurants = this.restaurants;
-        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-        // 调用 callback 返回建议列表的数据
-        cb(results);
-      },
-      createFilter(queryString) {
-        return (restaurant) => {
-          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      handleSelect(item) {
-        console.log(item);
-      },
-      handleSelectAllChange(val) {
-        
-      },
-      handleSelectChange(value) {
-        
-      },
-      changeNumber (){
-        if(typeof this.number !== "number" || this.number<1){
-          this.number=1;
-        }
-      }
-    },
     data(){
       return{
         shwoInfo: false,
@@ -144,20 +104,31 @@
         checked:[],
         isIndeterminate:true,
         number:1,
+        money: [],
         courseList:[
           {
             src: require("@/assets/images/ke-3.png"),
             title:"H5和小程序直播开发",
             period:52,
             teacher:"王建中",
-            price:23.56
+            price:23.56,
+            checkMsg: false
           },
           {
             src: require("~/assets/images/ke-3.png"),
             title:"H5和小程序直播开发",
             period:52,
             teacher:"王建中",
-            price: 40.60
+            price: 40.60,
+            checkMsg: false
+          },
+          {
+            src: require("~/assets/images/ke-3.png"),
+            title:"H5和小程序直播开发",
+            period:52,
+            teacher:"王建中",
+            price: 40.60,
+            checkMsg: false
           }
         ],
         restaurants: [
@@ -191,8 +162,56 @@
           code: [
             { required: true, message: '请填写短信验证码', trigger: 'blur' }
           ],
+        },
+        arraySum: 0
+      }
+    },
+    methods:{
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      close(){
+        this.shwoInfo=false;
+      },
+      querySearch(queryString, cb) {
+        var restaurants = this.restaurants;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (restaurant) => {
+          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      handleSelect(item, index) {
+        console.log(item);
+        console.log(index);
+
+      },
+      handleSelectAllChange(item,index) {
+        console.log(index)
+        console.log(item)
+
+      },
+      handleSelectChange(item,index) {
+        this.$set(this.courseList[index], 'checkMsg', true)
+        this.arraySum =this.arraySum + Number(this.courseList[index].price)
+        console.log(this.arraySum.toFixed(2))
+      },
+      changeNumber (){
+        if(typeof this.number !== "number" || this.number<1){
+          this.number=1;
         }
       }
-    }
+    },
+
   }
 </script>

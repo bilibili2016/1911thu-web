@@ -20,7 +20,7 @@ export default {
     "v-more": CustomMore
   },
   mounted () {
-    console.log(this.linkone)
+    // console.log(this.linkone)
   }
 };
 </script>
