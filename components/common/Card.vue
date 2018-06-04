@@ -820,11 +820,16 @@
             height: 54px;
             line-height: 54px;
             margin-bottom: 8px;
+            cursor: pointer;
+          }
+          h4:hover {
+            color: #8f4acb
           }
           p {
             font-size: 14px;
             line-height: 30px;
             color: #222;
+            cursor: pointer;
           }
         }
         .comment {
