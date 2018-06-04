@@ -1,6 +1,60 @@
 <template>
   <div class="shopCart">
     <!-- 购物车列表 -->
+    <div class="main">
+      <div class="table">
+        <div class="tableHeader">
+          <el-checkbox v-model="selectAll" @change="handleSelectAllChange">全选</el-checkbox>
+          <span class="courseName">课程名称</span>
+          <span class="price">单价</span>
+          <span class="operation">操作</span>
+        </div>
+        <div class="tableBody">
+          <div v-for="(course,index) in courseList" :key="index">
+            <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
+            <div class="courseInfo clearfix">
+              <img class="fl" :src="course.src" alt="">
+              <div class="fl">
+                <h4>{{course.title}}</h4>
+                <h6>{{course.period}}学时</h6>
+                <p>讲师：{{course.teacher}}</p>
+              </div>
+            </div>
+            <div class="coursePrice">
+              ￥{{course.price}}
+            </div>
+            <div class="courseOperation">
+              删除
+            </div>
+          </div>
+        </div>
+        <div class="pagination">
+          <span>首页</span>
+          <el-pagination
+            :page-size="20"
+            layout="prev, pager, next"
+            :total="20">
+          </el-pagination>
+          <span>尾页</span>
+        </div>
+        <div class="tableFooter">
+          <el-checkbox v-model="selectAll">全选</el-checkbox>
+          <span class="courseNumber clearfix">
+            <span class="deleteChecked">删除选中的课程</span>
+            <span class="number clearfix">
+              <i class="fl minus el-icon-minus"  @click="number>1?number--: 1"></i>
+              <input type="text" class="fl num" v-model.number="number" @blur="changeNumber">
+              <i class="fl add el-icon-plus" @click="number++"></i>
+            </span>
+          </span>
+          <span class="commitOrder fr">
+            <el-button>提交</el-button>
+          </span>
+          <span class="allPrice fr">￥94.00</span>
+
+        </div>
+      </div>
+    </div>
 
     <!-- 提交公司信息 -->
     <div class="information" @click.self="close" v-show="shwoInfo">
@@ -41,39 +95,42 @@
 </template>
 
 <script>
+// 总价 多选
   export default {
-    methods:{
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      close(){
-        this.shwoInfo=false;
-      },
-      querySearch(queryString, cb) {
-        var restaurants = this.restaurants;
-        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-        // 调用 callback 返回建议列表的数据
-        cb(results);
-      },
-      createFilter(queryString) {
-        return (restaurant) => {
-          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      handleSelect(item) {
-        console.log(item);
-      }
-    },
     data(){
       return{
-        shwoInfo: true,
+        shwoInfo: false,
+        selectAll:false,
+        checked:[],
+        isIndeterminate:true,
+        number:1,
+        money: [],
+        courseList:[
+          {
+            src: require("@/assets/images/ke-3.png"),
+            title:"H5和小程序直播开发",
+            period:52,
+            teacher:"王建中",
+            price:23.56,
+            checkMsg: false
+          },
+          {
+            src: require("~/assets/images/ke-3.png"),
+            title:"H5和小程序直播开发",
+            period:52,
+            teacher:"王建中",
+            price: 40.60,
+            checkMsg: false
+          },
+          {
+            src: require("~/assets/images/ke-3.png"),
+            title:"H5和小程序直播开发",
+            period:52,
+            teacher:"王建中",
+            price: 40.60,
+            checkMsg: false
+          }
+        ],
         restaurants: [
           {"value":"11111"},
           {"value":"22"},
@@ -105,8 +162,56 @@
           code: [
             { required: true, message: '请填写短信验证码', trigger: 'blur' }
           ],
+        },
+        arraySum: 0
+      }
+    },
+    methods:{
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      close(){
+        this.shwoInfo=false;
+      },
+      querySearch(queryString, cb) {
+        var restaurants = this.restaurants;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
+        cb(results);
+      },
+      createFilter(queryString) {
+        return (restaurant) => {
+          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      handleSelect(item, index) {
+        console.log(item);
+        console.log(index);
+
+      },
+      handleSelectAllChange(item,index) {
+        console.log(index)
+        console.log(item)
+
+      },
+      handleSelectChange(item,index) {
+        this.$set(this.courseList[index], 'checkMsg', true)
+        this.arraySum =this.arraySum + Number(this.courseList[index].price)
+        console.log(this.arraySum.toFixed(2))
+      },
+      changeNumber (){
+        if(typeof this.number !== "number" || this.number<1){
+          this.number=1;
         }
       }
-    }
+    },
+
   }
 </script>

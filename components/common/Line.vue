@@ -6,7 +6,7 @@
         <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
         <span class="fl barName">{{bar.number}} {{bar.barName}} （{{bar.duration}}）</span>
         <span class="fl free" v-if="bar.isFree">免费</span>
-        <span class="fr freePlay" v-if="bar.isFree || catalog.isLogin">立即观看</span>
+        <span class="fr freePlay" v-if="bar.isFree || catalog.isLogin" @click="goLink('player')">立即观看</span>
         <span class="fr freePlay" v-else>购买课程</span>
         <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
       </div>
@@ -16,7 +16,16 @@
 
 <script>
 export default {
-  props: ["catalogs"]
+  props: ["catalogs"],
+  methods: {
+    goLink(item) {
+      this.$router.push(item);
+    },
+    checked(index) {
+        $(".catalog .chapter .bar").removeClass("checked");
+        $(".catalog .chapter .bar").eq(index).addClass("checked");
+      }
+  }
 };
 </script>
 

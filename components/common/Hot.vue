@@ -2,9 +2,14 @@
 <template>
   <div class="classification">
     <div class="clsTitle clearfix">
-      <div class="fl">
-        <span :class="{checked:checked}">最新</span>
-        <span>最热</span>
+      <div class="fl hotBtn">
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="最新" name="first"></el-tab-pane>
+          <el-tab-pane label="最热" name="second"></el-tab-pane>
+        </el-tabs>
+
+        <!-- <span :class="{checked:checked}">最新</span>
+        <span>最热</span> -->
       </div>
       <div class="fr">
         <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
@@ -23,16 +28,9 @@
 <script>
   import CustomPagination from "@/components/common/Pagination.vue";
   export default {
-    methods: {
-      bind(index) {
-        $(".classList ul li").removeClass("checked");
-        $(".classList ul li")
-          .eq(index)
-          .addClass("checked");
-      }
-    },
     data() {
       return {
+        activeName:"first",
         checked: true,
         onOff: true,
         pagemsg: {
@@ -40,6 +38,17 @@
           pagesize: 8,
           total: 12
         }
+      }
+    },
+    methods: {
+      bind(index) {
+        $(".classList ul li").removeClass("checked");
+        $(".classList ul li")
+          .eq(index)
+          .addClass("checked");
+      },
+      handleClick(){
+
       }
     },
     components: {

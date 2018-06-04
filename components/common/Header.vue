@@ -1,20 +1,24 @@
 <template>
   <div class="headerBox">
     <div class="main">
-      <div class="headerLogo fl" @click="goSearch('/')">
-        <img src="../../assets/images/1911xt.png" alt="">
+      <div class="headerLogo fl" @click="goSearchd('/')">
+        <img src="~/assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search">
-        <img :src="searchImg" alt="" @click="goSearch('home/search')">
+        <img :src="searchImg" alt="" @click="goSearch('course/pages/search')">
       </div>
-      <div class="HREntry">
-        <span>Hr入口</span>
+      <div :class="{HREntry:true,islogined:islogin}">
+        <span class="hrin">Hr入口</span>
+        <span v-if="islogin">我的课程</span>
         <i class="phone"></i>
       </div>
-      <div class="lrBtn">
+      <div class="lrBtn" v-if="!islogin">
         <span class="login" @click="login">登录</span>
         <span class="register" @click="register">注册</span>
+      </div>
+      <div class="headImg" v-else>
+        <img :src="user.userImg" alt="">
       </div>
     </div>
 
@@ -75,7 +79,74 @@
 </template>
 
 <script>
+import { getQueryString } from '@/lib/util/helper'
   export default {
+    data() {
+      var checkTel = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('手机号不能为空'));
+        }
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('请输入正确手机号'));
+          }
+        }, 1000);
+      };
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+          return false;
+        } else if (value.length < 6 || value.length > 10) {
+          callback(new Error('请输入6-10位密码'));
+          return false;
+        }
+      };
+      return {
+        searchImg: require('~/assets/images/search.png'),
+        start: false,
+        islogin:false,
+        activeName: 'second',
+        search: '',
+        user:{
+          userImg:require("~/assets/images/headImg.png"),
+        },
+        activeName: 'login',
+        loginData: {
+          pass: '',
+          tel: '',
+          showPwd: false,
+          pwdType: 'password'
+        },
+        registerData: {
+          tel: '',
+          code: '',
+          getCode: '获取验证码',
+          checked: false
+        },
+        rules2: {
+          pass: [{
+            validator: validatePass,
+            trigger: 'blur'
+          }],
+          tel: [{
+              validator: checkTel,
+              trigger: 'blur'
+            },
+            {
+              type: 'number',
+              message: '年龄必须为数字值',
+              trigger: 'blur'
+            }
+          ],
+          code: [{
+            required: true,
+            message: '验证码不能为空',
+            trigger: 'blur'
+          }]
+        },
+
+      }
+    },
     methods: {
       login() {
         this.start = !this.start;
@@ -87,7 +158,6 @@
         }
       },
       changePwd() {
-
         console.log(this.showPwd);
         if (this.showPwd) {
           this.showPwd = false;
@@ -124,69 +194,18 @@
         document.removeEventListener("touchmove", mo, false);
       },
       goSearch(item) {
+        if (window.location.pathname === '/') {
+          this.$router.push(item)
+        } else {
+        }
+      },
+      goSearchd (item) {
         this.$router.push(item)
-      }
-    },
-    data() {
-      var checkTel = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('手机号不能为空'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('请输入正确手机号'));
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-          return false;
-        } else if (value.length < 6 || value.length > 10) {
-          callback(new Error('请输入6-10位密码'));
-          return false;
-        }
-      };
-      return {
-        searchImg: require('~/assets/images/search.png'),
-        start: false,
-        activeName: 'second',
-        search: '',
-        activeName: 'login',
-        loginData: {
-          pass: '',
-          tel: '',
-          showPwd: false,
-          pwdType: 'password'
-        },
-        registerData: {
-          tel: '',
-          code: '',
-          getCode: '获取验证码',
-          checked: false
-        },
-        rules2: {
-          pass: [{
-            validator: validatePass,
-            trigger: 'blur'
-          }],
-          tel: [{
-              validator: checkTel,
-              trigger: 'blur'
-            },
-            {
-              type: 'number',
-              message: '年龄必须为数字值',
-              trigger: 'blur'
-            }
-          ],
-          code: [{
-            required: true,
-            message: '验证码不能为空',
-            trigger: 'blur'
-          }]
-        }
+      },
+      backHome () {
+        this.$router.push('/')
       }
     }
+
   }
 </script>

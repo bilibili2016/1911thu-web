@@ -21,16 +21,27 @@
       position: absolute;
       top: 15px;
       right: 27px;
+      cursor: pointer;
     }
+
   }
   .hotWord {
     height: 44px;
     line-height: 44px;
     padding-left: 23px;
+    cursor: pointer;
     span {
       font-size: 12px;
       color: #222;
       margin-right: 15px;
+
     }
+    span:hover{
+      color: #8F4ACB;
+    }
+    span:nth-child(1):hover {
+      color: #000;
+    }
+
   }
 }

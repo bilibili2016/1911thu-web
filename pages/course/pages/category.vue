@@ -34,7 +34,7 @@
         </el-switch>
       </div>
       <div class="carlist">
-        <v-card :data="categoryData" :config="config"></v-card>
+        <v-card :data="categoryData" :config="configSevent"></v-card>
       </div>
     </div>
     <!-- <v-filter></v-filter> -->
@@ -61,7 +61,7 @@
         activeName: 'second',
         value3: true,
         value4: true,
-        config: {
+        configSevent: {
           card_type: "profile",
           card: 'home'
         },
