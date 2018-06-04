@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-04 14:34:09
+ * @Last Modified time: 2018-06-04 20:49:06
   * @File Type:  登陆的store
  * @Describe:
  */
@@ -46,8 +46,7 @@ export const getters = {
   }
 }
 export const mutations = {
-  [MUTATION.signIn] (state, { token, user }) {
-    state.user = user
+  [MUTATION.signIn] (state, { token }) {
     state.token = token
   },
   [MUTATION.signOut] (state) {
@@ -68,16 +67,37 @@ export const mutations = {
   },
 }
 export const actions = {
-  async workSignIn ({ commit, state }, { username, password }) {
+  async signIn ({ commit, state }, { tokens }) {
     let user
     try {
-      let tokens = await auth.workerSignIn({ username, password })
-      token = 'JWT ' + tokens.token
+      // let tokens = await auth.workerSignIn({ username, password })
+      // token = 'JWT ' + tokens.token
+      let token = tokens
+      console.log(token, '这是token')
+      persistStore.set('token', token)
+
+      // 更新 state
+      commit(MUTATION.signIn, { token })
+
+
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return user
+  },
+  async signOut ({ commit, state }, { tokens }) {
+    let user
+    try {
+      // let tokens = await auth.workerSignIn({ username, password })
+      // token = 'JWT ' + tokens.tokenken
+      let token = tokens
       persistStore.set('token', token)
       // 更新 state
-      commit(MUTATION.signIn, { token, user })
-      return tokens
-
+      commit(MUTATION.signIn, { token })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -118,7 +138,7 @@ export const actions = {
     }
     return cid
   },
-  async setPid({ commit, state }, { pids }) {
+  async setPid ({ commit, state }, { pids }) {
     try {
       let pid = pids
       persistStore.set('pid', pid)
@@ -131,5 +151,5 @@ export const actions = {
       }
     }
     return pid
-  },
+  }
 }
