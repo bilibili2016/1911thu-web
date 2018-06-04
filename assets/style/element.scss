@@ -267,6 +267,23 @@
       border-color: #6417a6;
     }
   }
+  .wechatLogin {
+    .captcha {
+      width: 132px;
+    }
+
+  }
+}
+
+// forgotPassword 页
+.forgot {
+  .el-form-item__error {
+    left: 16px;
+  }
+  .captcha {
+    width: 132px;
+    float: left;
+  }
 }
 
 // search
@@ -333,7 +350,7 @@
   .el-tabs__item {
     height: 56px;
     line-height: 56px;
-    width: 40px;
+    // width: 40px;
     text-align: center;
     margin-left: 38px;
     padding: 0;
@@ -519,7 +536,7 @@
     line-height: 60px;
   }
   .el-tabs--left .el-tabs__header.is-left {
-    width: 165px;
+    // width: 165px;
   }
   .el-card__header {
     border-bottom: 1px solid rgba(232, 214, 247, 1);
@@ -548,41 +565,7 @@
     background-color: #8F4ACB;
     color: #fff;
   }
-  .my-course {
-    .center-tab .el-card__body {
-      padding: 0px !important;
-    }
-    .el-card__body {
-      padding: 0px; // padding-left: 20px;
-    }
-    .el-tabs__header {
-      margin: 0px !important;
-    }
-    .el-tabs__item.is-active {
-      background: #fff;
-      font-size: 16px;
-      font-family: MicrosoftYaHei;
-      color: rgba(154, 92, 208, 1); // padding: 4px 20px 4px 20px;
-    }
-    .el-tabs__item {
-      height: 57px;
-      line-height: 57px;
-      padding: 4px 20px 4px 20px;
-    }
-    .el-tab-pane {
-      padding: 50px 41px 80px 44px;
-    }
-    .el-progress-bar__outer {
-      background-color: #FFDB5F;
-    }
-    .el-tabs__nav-scroll {
-      padding: 0px 30px;
-    }
-    .el-tabs__active-bar {
-      width: 50px;
-      color: #8F4ACB;
-    }
-  }
+
   .personalSet {
     .el-tabs__header {
       margin: 0px !important;
@@ -658,24 +641,26 @@
         .el-tabs__active-bar.is-top {
           display: none;
         }
-        .el-tabs__item {
-          width: 40px;
-          height: 55px;
-          padding: 0;
-          text-align: center;
-          &.is-active {
-            background-color: transparent;
-            border-bottom: 2px solid #6417a6;
-          }
-          &:last-child {
-            margin-left: 20px;
-          }
-          &:hover {
-            color: #6417a6;
-          }
-        }
+
       }
     }
+    .el-tabs__item {
+      // width: 40px;
+      height: 55px;
+      padding: 0;
+      text-align: center;
+      &.is-active {
+        background-color: transparent;
+        border-bottom: 2px solid #6417a6;
+      }
+      &:last-child {
+        margin-left: 20px;
+      }
+      &:hover {
+        color: #6417a6;
+      }
+    }
+
   }
   .rightPages{
     .el-pagination{
@@ -801,7 +786,8 @@
   }
 }
 // category页
-.center {
+.category-style {
+
   .pages{
     .el-pagination {
       .btn-prev,
@@ -829,7 +815,7 @@
         display: none;
       }
       .el-tabs__item {
-        width: 40px;
+        // width: 40px;
         height: 55px;
         padding: 0;
         text-align: center;
@@ -860,3 +846,62 @@
     }
   }
 }
+.el-breadcrumb__inner.is-link {
+
+  font-weight: normal;
+}
+.el-breadcrumb__separator[class*=icon]{
+  margin: 0px;
+}
+.el-breadcrumb__item:last-child .el-breadcrumb__inner {
+
+  color: #8F4ACB!important;
+}
+.center-tab {
+  .el-tabs__item{
+    // width: 165px!important;
+  }
+  .el-tabs__item.is-active{
+    // background-color: #8F4ACB!important;
+    // border-bottom:none!important;
+  }
+  .el-tabs__header .el-tabs__item:last-child{
+    // margin-left: 0px!important;
+  }
+}
+
+ .my-course {
+   .center-tab .el-card__body {
+     padding: 0px !important;
+   }
+   .el-card__body {
+     padding: 0px; // padding-left: 20px;
+   }
+   .el-tabs__header {
+     margin: 0px !important;
+   }
+   .el-tabs__item.is-active {
+     background: #fff;
+     font-size: 16px;
+     font-family: MicrosoftYaHei;
+     color: rgba(154, 92, 208, 1); // padding: 4px 20px 4px 20px;
+   }
+   .el-tabs__item {
+     height: 57px;
+     line-height: 57px;
+     padding: 4px 20px 4px 20px;
+   }
+   .el-tab-pane {
+     padding: 50px 41px 80px 44px;
+   }
+   .el-progress-bar__outer {
+     background-color: #FFDB5F;
+   }
+   .el-tabs__nav-scroll {
+     padding: 0px 30px;
+   }
+   .el-tabs__active-bar {
+     width: 50px;
+     color: #8F4ACB;
+   }
+ }

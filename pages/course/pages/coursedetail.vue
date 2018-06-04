@@ -28,9 +28,18 @@
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="介绍" name="first">
+            <!-- <div class="title">
+              使用人群
+            </div>
+            <div>
+              <p>想在职场获得老板青睐，让自己PPT演示更加出彩！</p>
+              <p>想成为PPT大神，学习制作各种酷炫PPT动画的学员们</p>
+            </div> -->
           </el-tab-pane>
           <el-tab-pane label="目录" name="second">
             <v-line :catalogs="catalogs"></v-line>
+             <v-line :catalogs="catalogsd"></v-line>
+              <v-line :catalogs="catalogsdd"></v-line>
           </el-tab-pane>
         </el-tabs>
         <div class="attention">
@@ -42,90 +51,93 @@
           </div>
         </div>
       </div>
-      <div class="rightBox fr">
-        <!-- 讲师介绍 -->
-        <div class="teacher">
-          <h4>讲师介绍</h4>
-          <div class="personal">
-            <img :src="teacher.headImg" alt="">
-            <h5>{{teacher.teacherName}}</h5>
-            <h6>{{teacher.degree}}</h6>
-            <p>{{teacher.abstract}}</p>
-          </div>
-        </div>
-        <!-- 课程评价 -->
-        <div class="evaluate-tag">
-          <h4>课程评价</h4>
-          <div class="personal">
-            <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
 
-              <span class="rate">课程评分:</span>
-              <span class ="ratem">
-                <el-rate v-model="rateModel"></el-rate>
-              </span>
-              <div class="bthgrop">
-                <el-button plain>内容精彩</el-button>
-                <el-button plain>内容生涩</el-button>
-                <el-button plain>音质不好</el-button>
-                <el-button plain>很有帮助</el-button>
-                <el-button plain>点赞老师</el-button>
-                <el-button plain>讲解详细</el-button>
-              </div>
-              <div class="area">
-                <el-input
-                  type="textarea"
-                  :rows="3"
-                  placeholder="请输入内容"
-                  v-model="textarea">
-                </el-input>
-              </div>
-              <div class="submit">
-                <el-button type="primary" @click="dialogVisible = true">提交</el-button>
-              </div>
-              <!-- 弹窗 -->
-              <el-dialog
-                title="报告问题"
-                :visible.sync="dialogVisible"
-                width="30%"
-                :before-close="handleClose">
+      <!-- 讲师介绍 -->
+      <div style="width:345px" class="fr">
 
-                <div  v-for="(item,index) in commentator" :key="index" class="dialog-line">
-                    <div class="commentator clearfix">
-                      <img class="fl" :src="item.headImg" alt="">
-                      <div class="fl">
-                        <p style="margin-top:5px;">{{item.name}}</p>
-                        <p>{{item.time}}</p>
-                      </div>
-                      <div class="rates">
-                        <el-rate disabled v-model="item.rate" class="itemBox-rate fl"></el-rate>
-                      </div>
-                      <h5>{{item.content}}</h5>
-                    </div>
-                </div>
-              </el-dialog>
-          </div>
-        </div>
-        <!-- 用户评论 -->
-        <div class="evaluate">
-          <h4>用户评价 <span>查看更多></span></h4>
-          <div class="score">
-            <span class="fl">{{evaluate.score}}</span>
-            <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
-            <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
-          </div>
-          <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
-            <img class="fl" :src="item.headImg" alt="">
-            <div class="fl">
-              <p style="margin-top:5px;">{{item.name}}</p>
-              <p>{{item.time}}</p>
-            </div>
-            <div style="margin-top:10px;">
-              <el-rate disabled v-model="item.rate" class="itemBox-rate fr"></el-rate>
-            </div>
-            <h5>{{item.content}}</h5>
-          </div>
+
+      <div class="teacher ">
+        <h4>讲师介绍</h4>
+        <div class="personal">
+          <img :src="teacher.headImg" alt="">
+          <h5>{{teacher.teacherName}}</h5>
+          <h6>{{teacher.degree}}</h6>
+          <p>{{teacher.abstract}}</p>
         </div>
       </div>
+      <div class="evaluate-tag ">
+        <h4>课程评价</h4>
+        <div class="personal">
+          <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
+
+            <span class="rate">课程评分:</span>
+            <span class ="ratem">
+              <el-rate v-model="rateModel"></el-rate>
+            </span>
+            <div class="bthgrop">
+              <el-button plain>内容精彩</el-button>
+              <el-button plain>内容生涩</el-button>
+              <el-button plain>音质不好</el-button>
+              <el-button plain>很有帮助</el-button>
+              <el-button plain>点赞老师</el-button>
+              <el-button plain>讲解详细</el-button>
+            </div>
+            <div class="area">
+              <el-input
+                type="textarea"
+                :rows="3"
+                placeholder="请输入内容"
+                v-model="textarea">
+              </el-input>
+            </div>
+            <div class="submit">
+              <el-button type="primary" @click="dialogVisible = true">提交</el-button>
+            </div>
+             <!-- 弹窗 -->
+            <el-dialog
+              title="报告问题"
+              :visible.sync="dialogVisible"
+              width="30%"
+              :before-close="handleClose">
+
+              <div  v-for="(item,index) in commentator" :key="index" class="dialog-line">
+                  <div class="commentator clearfix">
+                    <img class="fl" :src="item.headImg" alt="">
+                    <div class="fl">
+                      <p style="margin-top:5px;">{{item.name}}</p>
+                      <p>{{item.time}}</p>
+                    </div>
+                    <div class="rates">
+                      <el-rate disabled v-model="item.rate" class="itemBox-rate fl"></el-rate>
+                    </div>
+                    <h5>{{item.content}}</h5>
+                  </div>
+              </div>
+            </el-dialog>
+        </div>
+      </div>
+
+      <!-- 用户评论 -->
+      <div class="evaluate">
+        <h4>用户评价 <span>查看更多></span></h4>
+        <div class="score">
+          <span class="fl">{{evaluate.score}}</span>
+          <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
+          <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
+        </div>
+        <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
+          <img class="fl" :src="item.headImg" alt="">
+          <div class="fl">
+            <p style="margin-top:5px;">{{item.name}}</p>
+            <p>{{item.time}}</p>
+          </div>
+          <div style="margin-top:10px;">
+            <el-rate disabled v-model="item.rate" class="itemBox-rate fr"></el-rate>
+          </div>
+          <h5>{{item.content}}</h5>
+        </div>
+      </div>
+          </div>
     </div>
   </div>
 </template>
@@ -146,21 +158,101 @@
         rateModel: 5,
         shareImg: require('~/assets/images/f.png'),
         shareImgc: require('~/assets/images/c.png'),
-        value1: 1,
+        value1: 5,
         linkseven: 'player',
         catalogs: [{
           isLogin: false,
-          chapterName: "第一章 图的基本概念",
+          chapterName: " 章节1    :   S01 【本节免费】购前必读",
           barList: [{
               number: "1-1",
-              barName: "课程概述",
+              barName: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT，不加班？",
               duration: "32分钟",
               percentage: 30,
               isFree: true,
             },
             {
               number: "1-2",
-              barName: "图怎么画",
+              barName: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "1-3",
+              barName: "【素材下载】S01-3 课程参考资料在哪里下载？",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "1-4",
+              barName: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            }
+          ]
+        }],
+        catalogsd: [{
+          isLogin: false,
+          chapterName: " 章节2    :   S02 只需一招，图片冲击力Max！",
+          barList: [{
+              number: "2-1",
+              barName: "【视频讲解】S02 图片太平淡？因为你不会裁剪！（上）",
+              duration: "32分钟",
+              percentage: 30,
+              isFree: true,
+            },
+            {
+              number: "2-2",
+              barName: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "2-3",
+              barName: "【素材下载】S01-3 课程参考资料在哪里下载？",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "2-4",
+              barName: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            }
+          ]
+        }],
+        catalogsdd: [{
+          isLogin: false,
+          chapterName: " 章节3    :   S03 10分钟做出老板满意的PPT！",
+          barList: [{
+              number: "3-1",
+              barName: "【视频讲解】S03-1 只用不到5分钟，Word文档快速变PPT！",
+              duration: "32分钟",
+              percentage: 30,
+              isFree: true,
+            },
+            {
+              number: "3-2",
+              barName: "【图文教材】S03-1 只用不到5分钟，Word文档迅速变PPT",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "3-3",
+              barName: "【配套练习】S03-1 只用不到5分钟，Word文档迅速变PPT",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "4-4",
+              barName: "【视频讲解】S03-2 只用5分钟，美化出老板认可的PPT！",
               duration: "35分钟",
               percentage: 10,
               isFree: false,
@@ -184,13 +276,13 @@
           headImg: require("../../../assets/images/headImg.png"),
           name: "小萝卜头",
           time: "2018-05-30",
-          rate: 3,
+          rate: 2,
           content: "你的工作较认真负责，能协助老师做好工作，能尊敬老师,希望你能团结更多的同学。保持良好的学习心态，激发学习热情，是当务之急。愿你永远孜孜以求，铸造一个强者的形象。记住，有些事情不是单凭兴趣就可以的，彩虹是经历风雨后才能得见的美景。"
         }, {
           headImg: require("../../../assets/images/headImg.png"),
           name: "小萝卜头",
           time: "2018-05-30",
-          rate: 3,
+          rate: 4,
           content: "你的工作较认真负责，能协助老师做好工作，能尊敬老师,希望你能团结更多的同学。保持良好的学习心态，激发学习热情，是当务之急。愿你永远孜孜以求，铸造一个强者的形象。记住，有些事情不是单凭兴趣就可以的，彩虹是经历风雨后才能得见的美景。"
         }, {
           headImg: require("../../../assets/images/headImg.png"),
@@ -202,7 +294,7 @@
           headImg: require("../../../assets/images/headImg.png"),
           name: "小萝卜头",
           time: "2018-05-30",
-          rate: 3,
+          rate: 5,
           content: "你的工作较认真负责，能协助老师做好工作，能尊敬老师,希望你能团结更多的同学。保持良好的学习心态，激发学习热情，是当务之急。愿你永远孜孜以求，铸造一个强者的形象。记住，有些事情不是单凭兴趣就可以的，彩虹是经历风雨后才能得见的美景。"
         }],
         config: {
@@ -227,10 +319,7 @@
       handleClick() {
 
       },
-      checked(index) {
-        $(".catalog .chapter .bar").removeClass("checked");
-        $(".catalog .chapter .bar").eq(index).addClass("checked");
-      },
+
       handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
@@ -243,4 +332,6 @@
   }
 </script>
 
+<style scoped>
 
+</style>

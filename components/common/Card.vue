@@ -149,6 +149,7 @@
           <div>
             <span class="fl coursenum"><span>52课时</span><img src="../../assets/images/ren.png" alt=""> 1021</span>
             <span class="rate"><el-rate v-model="one"></el-rate></span>
+            <span class="coins">￥ 108.00</span>
           </div>
         </div>
         <div class="study clearfix">
@@ -820,11 +821,16 @@
             height: 54px;
             line-height: 54px;
             margin-bottom: 8px;
+            cursor: pointer;
+          }
+          h4:hover {
+            color: #8f4acb
           }
           p {
             font-size: 14px;
             line-height: 30px;
             color: #222;
+            cursor: pointer;
           }
         }
         .comment {
@@ -913,6 +919,7 @@
           font-family: MicrosoftYaHei;
           color: rgba(34, 34, 34, 1);
           line-height: 0px;
+           cursor: pointer;
           h4 {
             font-size: 16px;
             color: #222;
@@ -920,13 +927,25 @@
             line-height: 54px;
             margin-bottom: 30px;
           }
+          h4:hover {
+            color: #8F4ACB;
+            cursor: pointer;
+          }
           .coursenum {
             width: auto;
             padding-top: 12px;
+             cursor: pointer;
             span {
               display: inline-block;
               margin-right: 15px;
             }
+          }
+          .coins{
+            float: right;
+            color: #FF5F5F;
+            padding-top: 17px;
+            font-size: 16px;
+            padding-right: 20px;
           }
           .rate {
             padding-top: 10px;
