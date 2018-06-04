@@ -172,7 +172,7 @@
           if (valid) {
             alert('submit!');
           } else {
-            console.log('error submit!!');
+
             return false;
           }
         });
@@ -192,13 +192,8 @@
         };
       },
       handleSelect(item, index) {
-        console.log(item);
-        console.log(index);
-
       },
       handleSelectAllChange(item,index) {
-        console.log(index)
-        console.log(item)
 
       },
       handleSelectChange(item,index) {

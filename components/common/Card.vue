@@ -3,7 +3,7 @@
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
       <div class="customization">
-        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link)">
           <img :src="pro.src" alt="" class="fl">
           <div class="fr con">
             <h5>{{pro.title}}</h5>
@@ -167,7 +167,7 @@
         </div>
         <div>
           <p class="fl time">2018-05-20</p>
-          <p class="fr more" @click="goLink(linksix)">阅读全文 >> </p>
+          <p class="fr more" @click="getMore(linksix)">阅读全文 >></p>
         </div>
       </div>
       <div class="lines" v-if="index !== 0">
@@ -180,7 +180,7 @@
   <div class="info-list">
     <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info">
       <el-card shadow="never" body-style="padding: 0;">
-        <div class="info-box">
+        <div class="info-box" @click="getMore('news/detail')">
           <div class="info-wrap">
             <img :src="card.avatar" alt="">
             <span>从区块链到生命，许知远和王小川在1911主题餐厅聊了什么？</span>
@@ -188,7 +188,7 @@
         </div>
       </el-card>
     </div>
-    <div class="more" @click="getMore(linkfour)">查看更多>></div>
+    <div class="more" @click="getMore(linkdata)">查看更多>></div>
   </div>
 </template>
 
@@ -238,8 +238,6 @@
     },
     methods: {
       goLink(item) {
-        console.log(window.location.pathname, 'url')
-        // this.$router.push(item);
          switch (window.location.pathname) {
           case '/course/pages/category':
            this.$router.push('coursedetail');
@@ -254,6 +252,9 @@
             this.$router.push('coursedetail');
             break
           case '/course/pages/search':
+            this.$router.push('coursedetail');
+            break
+          case '/course/pages/newlesson':
             this.$router.push('coursedetail');
             break
           default:

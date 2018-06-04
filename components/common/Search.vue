@@ -34,7 +34,7 @@
         };
       },
       handleSelect(item) {
-        console.log(item);
+
       },
     },
     data() {

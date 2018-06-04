@@ -27,7 +27,7 @@
           <p>获得2017年“福布斯30岁以下杰出创业者”、2009级新闻学院本科毕业生蔡珩是清华与南加大的校友，他从个人成长方面介绍了从学校到创业的经历与感悟。原美国新闻俱乐部主任、新闻学院全球财经新闻项目主任里克·邓纳姆（Rick Dunham）则介绍了他长期在清华从事国际化教学的经验。</p>
           <p>在讨论环节，清华新闻学院助理教授吴璟薇等交流了自己在国际教育中的心得与体会。</p>
         </div>
-       <div class="next clearfix">
+        <div class="next clearfix">
           <span class="fl" v-if="newsDetail.prePiece" @click ="getMore('detailone')">上一篇  {{newsDetail.prePiece}}</span>
           <span class="fr" v-if="newsDetail.nextPiece" @click ="getMore('detailtwo')">下一篇  {{newsDetail.nextPiece}}</span>
         </div>
@@ -61,7 +61,7 @@ import CustomBanner from "@/components/common/Banner.vue";
 
       }
     },
-    methods :{
+    methods: {
       getMore(item) {
         this.$router.push(item);
       }

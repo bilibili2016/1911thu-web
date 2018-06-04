@@ -71,7 +71,8 @@
           <el-rate v-model="evaluate.eltnum"></el-rate>
         </h6>
         <div class="btnList">
-          <el-radio v-for="(btn,index) in evaluate.btnList" :key="index" v-model="radioBtn" label="index" border>{{btn}}</el-radio>
+          <el-radio v-for="(btn,index) in evaluate.btnList" :key="index" v-model="radioBtn" :label="index" border @change="selTypeChange(index)">{{btn}}</el-radio>
+          <!-- <el-radio  :label="index" v-for="(item,index) in data" :key="index" v-model="datype" @change="selTypeChange(index)">{{item.name}}</el-radio> -->
           <!-- <el-button v-for="(btn,index) in evaluate.btnList" :key="index" plain>{{btn}}</el-button> -->
         </div>
         <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem">
@@ -138,6 +139,9 @@
       window.addEventListener("resize", this.resize);
     },
     methods: {
+      selTypeChange (index){
+        this.radioBtn = index
+      },
       showRpt() {
         this.showReportBug = true;
       },

@@ -2,14 +2,16 @@
 <!-- :class="{ bg: tab}" -->
   <div class="classify" :class="{ bg: tabd}">
     <el-tabs v-model="actived" @tab-click="handleClick" tabPosition="left" @mouseenter="handleClick">
-      <el-tab-pane v-for="item in classify" :key="item.id" :label="item">
+      <el-tab-pane v-for="(item,index) in classify" :key="item.id" :label="item" @click="handleClick(item,index)">
         <div class="subClass">
           <h4>全部<span><i></i></span></h4>
           <p>
             <!-- @click="golink('home/category')" -->
-            <span @click="golink('course/pages/category')">{{item}}</span>
-            <span>{{item}}</span>
-            <span>{{item}}</span>
+            <span  v-for="(items,index) in classtext" :key="items.id" @click="handlePid(item,index)">
+              <span>
+                {{items.name}}
+              </span>
+            </span>
           </p>
         </div>
         <div class="courseMsg">
@@ -27,20 +29,41 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
   export default {
-    props: ["classify", "courses", "tab", "active"],
+    props: ["classify", "courses", "tab", "active", 'classtext'],
     data() {
       return {
         actived: null,
-        tabd: null
+        tabd: null,
+        cidform: {
+          cids: ''
+        },
+         pidform: {
+          pids: ''
+        }
       }
     },
     methods: {
-      handleClick() {
+      ...mapActions('auth', [
+        'setCid',
+        'setPid'
+      ]),
+      handleClick(item,index) {
         this.tabd = true;
+        console.log(item.index, '这是index')
+        this.cidform.cids = Number(item.index)
+        this.setCid(this.cidform)
       },
+
       golink(linedata) {
-        this.$router.push(linedata)
+
+      },
+      handlePid(item,index) {
+        this.$router.push('course/pages/category')
+        console.log(index)
+        this.pidform.pids = index
+        this.setPid(this.pidform)
       }
     },
     mounted () {

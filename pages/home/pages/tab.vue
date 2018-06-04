@@ -3,7 +3,7 @@
     <!-- banner -->
     <v-carousel :items="items"></v-carousel>
     <!-- 分类 -->
-    <v-tab :classify ="classify" :courses="courses" :tab="tabmsg" :active="activeName"></v-tab>
+    <v-tab :classify ="classify" :classtext="classtext" :courses="courses" :tab="tabmsg" :active="activeName"></v-tab>
     <!-- 定制 -->
    <v-card :dingData="dingData" :config = "config"></v-card>
   </div>
@@ -16,6 +16,7 @@ import Tab from "@/components/common/Tab.vue";
 export default {
   props: [
     "classify",
+    'classtext',
     "courses",
     "tabmsg",
     "activeName",
