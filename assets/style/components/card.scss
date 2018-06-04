@@ -283,12 +283,12 @@
        cursor: pointer;
        width: 472px;
        height: 492px;
-       border-radius: 16px;
-       background: #fff; // margin-top: 50px;
        display: flex;
        flex-direction: column;
+       border: none;
+       border-radius: 16px;
+       background: #fff; // margin-top: 50px;
        align-items: center; // border:1px #999 solid;
-       border-radius: 6px;
        box-shadow: 4px 0px 18px rgba(73, 28, 156, 0.36);
        .img-box {
          width: 472px;
@@ -353,10 +353,6 @@
          color: rgba(109, 104, 127, 1);
        }
      }
-   }
-   .el-card {
-     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-     border-radius: 16px;
    }
  } // 新上好课详情
  .courseList {

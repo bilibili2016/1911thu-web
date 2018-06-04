@@ -3,6 +3,7 @@
   .main {
     width: 1100px;
     margin: 0 auto;
+    position: relative;
     .content {
       width: 720px;
       margin-top: 42px;
@@ -109,8 +110,11 @@
         }
       }
     }
-    .teacher {
+    .rightBox{
       float: right;
+      width: 340px;
+    }
+    .teacher {
       width: 340px;
       margin: 42px 0 20px;
       padding-bottom: 20px;
@@ -155,8 +159,6 @@
       }
     }
     .evaluate-tag {
-
-      float: right;
       width: 340px;
       margin: 42px 0 20px;
       padding-bottom: 20px;
@@ -228,7 +230,6 @@
       }
     }
     .evaluate {
-      float: right;
       width: 340px;
       background-color: #fff;
       border-radius: 6px;

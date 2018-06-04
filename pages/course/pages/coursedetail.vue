@@ -42,86 +42,88 @@
           </div>
         </div>
       </div>
-      <!-- 讲师介绍 -->
-      <div class="teacher">
-        <h4>讲师介绍</h4>
-        <div class="personal">
-          <img :src="teacher.headImg" alt="">
-          <h5>{{teacher.teacherName}}</h5>
-          <h6>{{teacher.degree}}</h6>
-          <p>{{teacher.abstract}}</p>
+      <div class="rightBox fr">
+        <!-- 讲师介绍 -->
+        <div class="teacher">
+          <h4>讲师介绍</h4>
+          <div class="personal">
+            <img :src="teacher.headImg" alt="">
+            <h5>{{teacher.teacherName}}</h5>
+            <h6>{{teacher.degree}}</h6>
+            <p>{{teacher.abstract}}</p>
+          </div>
         </div>
-      </div>
-      <div class="evaluate-tag">
-        <h4>课程评价</h4>
-        <div class="personal">
-          <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
+        <!-- 课程评价 -->
+        <div class="evaluate-tag">
+          <h4>课程评价</h4>
+          <div class="personal">
+            <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
 
-            <span class="rate">课程评分:</span>
-            <span class ="ratem">
-              <el-rate v-model="rateModel"></el-rate>
-            </span>
-            <div class="bthgrop">
-              <el-button plain>内容精彩</el-button>
-              <el-button plain>内容生涩</el-button>
-              <el-button plain>音质不好</el-button>
-              <el-button plain>很有帮助</el-button>
-              <el-button plain>点赞老师</el-button>
-              <el-button plain>讲解详细</el-button>
-            </div>
-            <div class="area">
-              <el-input
-                type="textarea"
-                :rows="3"
-                placeholder="请输入内容"
-                v-model="textarea">
-              </el-input>
-            </div>
-            <div class="submit">
-              <el-button type="primary" @click="dialogVisible = true">提交</el-button>
-            </div>
-             <!-- 弹窗 -->
-            <el-dialog
-              title="报告问题"
-              :visible.sync="dialogVisible"
-              width="30%"
-              :before-close="handleClose">
-
-              <div  v-for="(item,index) in commentator" :key="index" class="dialog-line">
-                  <div class="commentator clearfix">
-                    <img class="fl" :src="item.headImg" alt="">
-                    <div class="fl">
-                      <p style="margin-top:5px;">{{item.name}}</p>
-                      <p>{{item.time}}</p>
-                    </div>
-                    <div class="rates">
-                      <el-rate disabled v-model="item.rate" class="itemBox-rate fl"></el-rate>
-                    </div>
-                    <h5>{{item.content}}</h5>
-                  </div>
+              <span class="rate">课程评分:</span>
+              <span class ="ratem">
+                <el-rate v-model="rateModel"></el-rate>
+              </span>
+              <div class="bthgrop">
+                <el-button plain>内容精彩</el-button>
+                <el-button plain>内容生涩</el-button>
+                <el-button plain>音质不好</el-button>
+                <el-button plain>很有帮助</el-button>
+                <el-button plain>点赞老师</el-button>
+                <el-button plain>讲解详细</el-button>
               </div>
-            </el-dialog>
-        </div>
-      </div>
+              <div class="area">
+                <el-input
+                  type="textarea"
+                  :rows="3"
+                  placeholder="请输入内容"
+                  v-model="textarea">
+                </el-input>
+              </div>
+              <div class="submit">
+                <el-button type="primary" @click="dialogVisible = true">提交</el-button>
+              </div>
+              <!-- 弹窗 -->
+              <el-dialog
+                title="报告问题"
+                :visible.sync="dialogVisible"
+                width="30%"
+                :before-close="handleClose">
 
-      <!-- 用户评论 -->
-      <div class="evaluate">
-        <h4>用户评价 <span>查看更多></span></h4>
-        <div class="score">
-          <span class="fl">{{evaluate.score}}</span>
-          <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
-          <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
+                <div  v-for="(item,index) in commentator" :key="index" class="dialog-line">
+                    <div class="commentator clearfix">
+                      <img class="fl" :src="item.headImg" alt="">
+                      <div class="fl">
+                        <p style="margin-top:5px;">{{item.name}}</p>
+                        <p>{{item.time}}</p>
+                      </div>
+                      <div class="rates">
+                        <el-rate disabled v-model="item.rate" class="itemBox-rate fl"></el-rate>
+                      </div>
+                      <h5>{{item.content}}</h5>
+                    </div>
+                </div>
+              </el-dialog>
+          </div>
         </div>
-        <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
-          <img class="fl" :src="item.headImg" alt="">
-          <div class="fl">
-            <p style="margin-top:5px;">{{item.name}}</p>
-            <p>{{item.time}}</p>
+        <!-- 用户评论 -->
+        <div class="evaluate">
+          <h4>用户评价 <span>查看更多></span></h4>
+          <div class="score">
+            <span class="fl">{{evaluate.score}}</span>
+            <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
+            <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
           </div>
-          <div style="margin-top:10px;">
-            <el-rate disabled v-model="item.rate" class="itemBox-rate fr"></el-rate>
+          <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
+            <img class="fl" :src="item.headImg" alt="">
+            <div class="fl">
+              <p style="margin-top:5px;">{{item.name}}</p>
+              <p>{{item.time}}</p>
+            </div>
+            <div style="margin-top:10px;">
+              <el-rate disabled v-model="item.rate" class="itemBox-rate fr"></el-rate>
+            </div>
+            <h5>{{item.content}}</h5>
           </div>
-          <h5>{{item.content}}</h5>
         </div>
       </div>
     </div>

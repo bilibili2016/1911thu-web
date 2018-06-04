@@ -56,7 +56,12 @@
     }
   }
 }
-
+.header {
+  .pages {
+    float: right;
+    margin-top: 26px;
+  }
+}
 .bgs {
   .el-button {
     background-color: rgba(143, 74, 203, 1);
@@ -72,6 +77,8 @@
 
 .switch {
   margin-top: 30px;
-  display: inline-block;
   float: right;
+  .el-switch__label {
+    color: #888;
+  }
 }
