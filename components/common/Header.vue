@@ -6,7 +6,7 @@
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search">
-        <img :src="searchImg" alt="" @click="goSearch('course/pages/search')">
+        <img :src="searchImg" alt=""  @keyup.enter="goSearch('course/pages/search')" @click="goSearch('course/pages/search')">
       </div>
       <div :class="{HREntry:true,islogined:islogin}">
         <span class="hrin">Hr入口</span>
@@ -168,12 +168,17 @@ import { getQueryString } from '@/lib/util/helper'
         }
       },
       register() {
-        console.log(this.activeName);
         this.start = true;
         this.activeName = 'register';
+        if (this.start === true) {
+          this.stop()
+        } else {
+          this.move()
+        }
       },
       close() {
         this.start = false;
+        document.body.style.overflow = 'auto';
       },
       handleClick(tab, event) {
         console.log(tab, event);
@@ -190,7 +195,7 @@ import { getQueryString } from '@/lib/util/helper'
         var mo = function(e) {
           e.preventDefault();
         };
-        document.body.style.overflow = ''; //出现滚动条
+        document.body.style.overflow = 'auto'; //出现滚动条
         document.removeEventListener("touchmove", mo, false);
       },
       goSearch(item) {

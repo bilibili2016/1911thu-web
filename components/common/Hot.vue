@@ -7,18 +7,11 @@
           <el-tab-pane label="最新" name="first"></el-tab-pane>
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
-
-        <!-- <span :class="{checked:checked}">最新</span>
-        <span>最热</span> -->
       </div>
-      <div class="fr">
+      <div class="fr rightPages">
         <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
         </el-switch>隐藏已参加课程
-        <!-- <el-pagination class="fr"
-                      small
-                      layout="pager, prev, next"
-                      :total="20">
-                  </el-pagination> -->
+        <el-pagination class="fr" small layout="pager, prev, next" :total="20"></el-pagination>
       </div>
 
     </div>
