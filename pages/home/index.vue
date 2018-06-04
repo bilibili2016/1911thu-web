@@ -2,7 +2,7 @@
 <div>
   <el-main class="home">
      <!-- 头部导航 -->
-  <v-tab :items="items" :classify ="classify" :courses="courses" :tabmsg="tabmsg" :activeName="activeName"  :dingData="dingData" :config = "ding"></v-tab>
+  <v-tab :items="items" :classify ="classify" :classtext = "classtext" :courses="courses" :tabmsg="tabmsg" :activeName="activeName"  :dingData="dingData" :config = "ding"></v-tab>
     <!-- 新上好课 -->
     <v-new :config="configZero" :newData="newData" :titleOne="titleOne" :linkone="linkone"></v-new>
     <!-- 经典好课 -->
@@ -275,20 +275,22 @@ export default {
         {
           src: require("@/assets/images/pro1.png"),
           title: "面授、线下活动",
-          content:
-            "中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办..."
+          content: "中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...",
+          link: 'activity/faceteach'
         },
         {
           src: require("@/assets/images/pro2.png"),
           title: "企业课程定制",
           content:
-            "中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办..."
+            "中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...",
+            link: 'activity/enterpriseCustom'
         },
         {
           src: require("@/assets/images/pro3.png"),
           title: "学位项目",
           content:
-            "中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办..."
+            "中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...",
+            link: 'activity/enterpriseCustom'
         }
       ],
       numSrc: require("@/assets/images/home_num.png"),
@@ -319,6 +321,54 @@ export default {
         "职场学院",
         "热点学院"
       ],
+      classtext: [ {
+            name: "公共管理/履职能力",
+            id: 9
+          },
+          {
+            name: "时政解读",
+            id: 10
+          },
+          {
+            name: "法律法规",
+            id: 11
+          },
+          {
+            name: "政府绩效管理",
+            id: 12
+          },
+          {
+            name: "经济治理与城市规划",
+            id: 13
+          },
+          {
+            name: "城市管理",
+            id: 14
+          },
+          {
+            name: "新闻宣传国际形式及安全治理",
+            id: 15
+          },
+          {
+            name: "创新驱动发展",
+            id: 16
+          },
+          {
+            name: "一带一路与国际合作",
+            id: 17
+          },
+          {
+            name: "乡村振兴",
+            id: 18
+          },
+          {
+            name: "人文素养",
+            id: 19
+          },
+          {
+            name: "社会治理",
+            id: 20
+          }],
       activeName: "00",
       courses: [
         {

@@ -3,7 +3,7 @@
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
       <div class="customization">
-        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index">
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="goLink(pro.link)">
           <img :src="pro.src" alt="" class="fl">
           <div class="fr con">
             <h5>{{pro.title}}</h5>
@@ -238,8 +238,6 @@
     },
     methods: {
       goLink(item) {
-        console.log(window.location.pathname, 'url')
-        // this.$router.push(item);
          switch (window.location.pathname) {
           case '/course/pages/category':
            this.$router.push('coursedetail');

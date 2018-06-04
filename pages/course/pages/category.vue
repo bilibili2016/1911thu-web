@@ -48,12 +48,20 @@
   import CustomCard from "@/components/common/Card.vue";
   import CustomHot2 from "@/components/common/Hot2.vue";
   import CustomPagination from "@/components/common/Pagination.vue";
+  import { auth } from '~/lib/v1_sdk/index'
+  import { mapState, mapActions, mapGetters } from 'vuex'
   export default {
     components: {
       "v-card": CustomCard,
       "v-filter": CustomHot2,
       "v-page": CustomPagination
     },
+    computed: {
+    ...mapState('auth', [
+      'pid',
+      'cid'
+    ])
+  },
     data() {
       return {
         bgmsg: 0,
@@ -275,6 +283,11 @@
         this.bgmsgs = index;
       },
       handleClick(tab, event) {}
+    },
+    mounted () {
+
+      this.bgmsg = Number(this.cid) + Number(1)
+      this.bgmsgs = Number(this.pid) + Number(1)
     }
   };
 </script>
