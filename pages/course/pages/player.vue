@@ -71,10 +71,9 @@
           <el-rate v-model="evaluate.eltnum"></el-rate>
         </h6>
         <div class="btnList">
-          <el-radio v-for="(btn,index) in evaluate.btnList" :key="index" v-model="radioBtn" label="index" border>{{btn}}</el-radio>
-          <!-- <el-button v-for="(btn,index) in evaluate.btnList" :key="index" plain>{{btn}}</el-button> -->
+          <el-radio v-for="(btn,index) in evaluate.btnList" :key="index" v-model="radioBtn" :label="index" border @change="selTypeChange(index)">{{btn}}</el-radio>
         </div>
-        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem">
+        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="word">
         </el-input>
         <div class="commitBug">
           <el-button round>提交</el-button>
@@ -126,6 +125,7 @@
 
         },
         problem: "",
+        word:"",
         evaluate: {
           eltnum: 5,
           btnList: ["内容精彩", "内容生涩", "音质不好", "讲解详细", "很有帮助", "点赞老师"]
@@ -138,6 +138,9 @@
       window.addEventListener("resize", this.resize);
     },
     methods: {
+      selTypeChange (index){
+        this.radioBtn = index
+      },
       showRpt() {
         this.showReportBug = true;
       },
@@ -149,6 +152,8 @@
       },
       closeEvaluate() {
         this.showEvaluate = false;
+        this.radioBtn="";
+        this.word="";
       },
       resize() {
         console.log(123);

@@ -5,8 +5,15 @@
         <img src="~/assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search">
-        <img :src="searchImg" alt=""  @keyup.enter="goSearch('course/pages/search')" @click="goSearch('course/pages/search')">
+        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="gokey">
+<!-- <el-input v-model="search" placeholder="请输入内容">
+  <i
+    class="el-icon-edit el-input__icon"
+    slot="suffix"
+    @click="goSearch">
+  </i>
+</el-input> -->
+        <img :src="searchImg" alt="" @click="goSearch">
       </div>
       <div :class="{HREntry:true,islogined:islogin}">
         <span class="hrin">Hr入口</span>
@@ -158,7 +165,7 @@ import { getQueryString } from '@/lib/util/helper'
         }
       },
       changePwd() {
-        console.log(this.showPwd);
+
         if (this.showPwd) {
           this.showPwd = false;
           this.loginData.pwdType = 'password';
@@ -181,7 +188,6 @@ import { getQueryString } from '@/lib/util/helper'
         document.body.style.overflow = 'auto';
       },
       handleClick(tab, event) {
-        console.log(tab, event);
       },
       stop() {
         var mo = function(e) {
@@ -199,9 +205,23 @@ import { getQueryString } from '@/lib/util/helper'
         document.removeEventListener("touchmove", mo, false);
       },
       goSearch(item) {
-        if (window.location.pathname === '/') {
-          this.$router.push(item)
-        } else {
+        switch (window.location.pathname) {
+          case '/course/pages/search':
+            break
+          default:
+            this.$router.push('/course/pages/search')
+            break
+        }
+      },
+      gokey () {
+        if(event.keyCode==13){
+          switch (window.location.pathname) {
+          case '/course/pages/search':
+            break
+          default:
+            this.$router.push('/course/pages/search')
+            break
+        }
         }
       },
       goSearchd (item) {

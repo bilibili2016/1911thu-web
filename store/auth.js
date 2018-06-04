@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-05-23 18:14:03
+ * @Last Modified time: 2018-06-04 14:34:09
   * @File Type:  登陆的store
  * @Describe:
  */
@@ -14,19 +14,31 @@ import { auth, ServerError } from '~/lib/v1_sdk'
 // import { message } from '~/lib/core/message'
 persistStore.defaults({
   user: null,
-  token: null
+  token: null,
+  cid: null,
+  pid: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
+let cid = persistStore.get('cid')
+let pid = persistStore.get('pid')
+
+
 export const MUTATION = {
   signIn: 'sign-in',
   signOut: 'sign-out',
   refresh: 'refresh',
-  me: 'me'
+  me: 'me',
+  setCid: 'set-cid',
+  setPid: 'set-pid'
+
+
 }
 export const state = () => ({
   user,
-  token
+  token,
+  cid,
+  pid
 })
 export const getters = {
   isAuthenticated (state) {
@@ -47,7 +59,13 @@ export const mutations = {
   },
   [MUTATION.me] (state, { user }) {
     state.user = user
-  }
+  },
+  [MUTATION.setCid](state, { cid }) {
+    state.cid = cid
+  },
+  [MUTATION.setPid](state, { pid }) {
+    state.pid = pid
+  },
 }
 export const actions = {
   async workSignIn ({ commit, state }, { username, password }) {
@@ -85,5 +103,33 @@ export const actions = {
       }
     }
     return user
-  }
+  },
+  async setCid ({ commit, state }, { cids }) {
+    try {
+      let cid = cids
+      persistStore.set('cid', cid)
+      commit(MUTATION.setCid, { cid })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return cid
+  },
+  async setPid({ commit, state }, { pids }) {
+    try {
+      let pid = pids
+      persistStore.set('pid', pid)
+      commit(MUTATION.setPid, { pid })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return pid
+  },
 }
