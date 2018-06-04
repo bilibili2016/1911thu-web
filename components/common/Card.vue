@@ -3,7 +3,7 @@
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
       <div class="customization">
-        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="goLink(pro.link)">
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link)">
           <img :src="pro.src" alt="" class="fl">
           <div class="fr con">
             <h5>{{pro.title}}</h5>
