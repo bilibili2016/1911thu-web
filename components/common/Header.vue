@@ -175,12 +175,17 @@ import { getQueryString } from '@/lib/util/helper'
         }
       },
       register() {
-
         this.start = true;
         this.activeName = 'register';
+        if (this.start === true) {
+          this.stop()
+        } else {
+          this.move()
+        }
       },
       close() {
         this.start = false;
+        document.body.style.overflow = 'auto';
       },
       handleClick(tab, event) {
       },
@@ -196,7 +201,7 @@ import { getQueryString } from '@/lib/util/helper'
         var mo = function(e) {
           e.preventDefault();
         };
-        document.body.style.overflow = ''; //出现滚动条
+        document.body.style.overflow = 'auto'; //出现滚动条
         document.removeEventListener("touchmove", mo, false);
       },
       goSearch(item) {
