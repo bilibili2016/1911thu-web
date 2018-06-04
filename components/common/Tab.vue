@@ -15,9 +15,9 @@
           </p>
         </div>
         <div class="courseMsg">
-          <div class="courseOne clearfix" v-for="(cus,index) in courses" :key="index">
+          <div class="courseOne clearfix" v-for="(cus,index) in courses" :key="index" @click="getMore">
             <img class="fl" :src="cus.src" alt="">
-            <div class="fl">
+            <div class="fl mousehover">
               <h5>{{cus.title}}</h5>
               <p>{{cus.author}}</p>
             </div>
@@ -56,8 +56,8 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         this.setCid(this.cidform)
       },
 
-      golink(linedata) {
-
+      getMore(linedata) {
+         this.$router.push('course/pages/coursedetail')
       },
       handlePid(item,index) {
         this.$router.push('course/pages/category')
