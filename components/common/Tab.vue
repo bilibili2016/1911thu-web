@@ -17,7 +17,7 @@
         <div class="courseMsg">
           <div class="courseOne clearfix" v-for="(cus,index) in courses" :key="index" @click="getMore">
             <img class="fl" :src="cus.src" alt="">
-            <div class="fl mousehover">
+            <div class="fl hover">
               <h5>{{cus.title}}</h5>
               <p>{{cus.author}}</p>
             </div>
@@ -51,7 +51,6 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       ]),
       handleClick(item,index) {
         this.tabd = true;
-        console.log(item.index, '这是index')
         this.cidform.cids = Number(item.index)
         this.setCid(this.cidform)
       },
@@ -61,7 +60,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       },
       handlePid(item,index) {
         this.$router.push('course/pages/category')
-        console.log(index)
+
         this.pidform.pids = index
         this.setPid(this.pidform)
       }
@@ -73,5 +72,15 @@ import { mapState, mapActions, mapGetters } from 'vuex'
     }
   };
 </script>
+<style lang="scss" scoped>
+.hover{
+  h5:hover {
+    color: #8F4ACB
+  }
+  p:hover {
+    color: #8F4ACB
+  }
+}
+</style>
 
 

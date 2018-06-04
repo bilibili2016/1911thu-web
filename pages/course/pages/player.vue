@@ -155,7 +155,7 @@
         this.showEvaluate = false;
       },
       resize() {
-        console.log(123);
+
         const w = window.screen.width;
         const h = window.screen.availHeight;
         this.$refs.mediaL.style.width=w - this.mediaRW+"px";
