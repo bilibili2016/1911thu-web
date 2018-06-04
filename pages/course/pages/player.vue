@@ -2,10 +2,10 @@
   <div class="playerBox clearfix">
     <div class="mediaL fl" ref="mediaL">
       <div class="playTop">
-        <i @click="goLink()">＜</i>新的中央经济工作会议精神解读
+        <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
       </div>
       <div class="playInner" ref="playInner">
-        <video src=""></video>
+        <video src="@/assets/images/piano.mp4" controls="controls"></video>
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
@@ -71,7 +71,8 @@
           <el-rate v-model="evaluate.eltnum"></el-rate>
         </h6>
         <div class="btnList">
-          <el-button v-for="(btn,index) in evaluate.btnList" :key="index" plain>{{btn}}</el-button>
+          <el-radio v-for="(btn,index) in evaluate.btnList" :key="index" v-model="radioBtn" label="index" border>{{btn}}</el-radio>
+          <!-- <el-button v-for="(btn,index) in evaluate.btnList" :key="index" plain>{{btn}}</el-button> -->
         </div>
         <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem">
         </el-input>
@@ -87,49 +88,6 @@
 
 <script>
   export default {
-    mounted: function() {
-      this.resize();
-      // window.addEventListener("onload",this.resize);
-      window.addEventListener("resize", this.resize);
-    },
-    methods: {
-      showRpt() {
-        this.showReportBug = true;
-      },
-      showElt() {
-        this.showEvaluate = true;
-      },
-      closeReport() {
-        this.showReportBug = false;
-      },
-      closeEvaluate() {
-        this.showEvaluate = false;
-      },
-      resize() {
-        const w = window.screen.width;
-        const h = window.screen.availHeight;
-        let mediaRW = this.$refs.mediaR.offsetWidth;
-        this.$refs.mediaL.style.width=w - mediaRW+"px";
-        this.$refs.mediaL.style.height= h+"px";
-        this.$refs.mediaR.style.height= h+"px";
-        this.$refs.playInner.style.height=h-100+"px";
-      },
-      fold() {
-        if (this.$refs.mediaR.offsetWidth != 0) {
-          this.mediaRW = 0;
-          this.mediaRInner = false;
-          this.mediaRIcon = "el-icon-arrow-left";
-        } else {
-          this.mediaRW = 340;
-          this.mediaRInner = true;
-          this.mediaRIcon = "el-icon-arrow-right";
-        }
-        this.resize();
-      },
-      goLink () {
-        this.$router.back(-1)
-      }
-    },
     data() {
       return {
         showReportBug: false,
@@ -137,6 +95,7 @@
         mediaRW: 340,
         mediaRInner: true,
         mediaRIcon: "el-icon-arrow-right",
+        radioBtn:"",
         player: {
           courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
           video: "",
@@ -171,6 +130,49 @@
           eltnum: 5,
           btnList: ["内容精彩", "内容生涩", "音质不好", "讲解详细", "很有帮助", "点赞老师"]
         }
+      }
+    },
+    mounted: function() {
+      this.resize();
+      // window.addEventListener("onload",this.resize);
+      window.addEventListener("resize", this.resize);
+    },
+    methods: {
+      showRpt() {
+        this.showReportBug = true;
+      },
+      showElt() {
+        this.showEvaluate = true;
+      },
+      closeReport() {
+        this.showReportBug = false;
+      },
+      closeEvaluate() {
+        this.showEvaluate = false;
+      },
+      resize() {
+        console.log(123);
+        const w = window.screen.width;
+        const h = window.screen.availHeight;
+        this.$refs.mediaL.style.width=w - this.mediaRW+"px";
+        this.$refs.mediaL.style.height= h+"px";
+        this.$refs.mediaR.style.height= h+"px";
+        this.$refs.playInner.style.height=h-100+"px";
+      },
+      fold() {
+        if (this.$refs.mediaR.offsetWidth != 0) {
+          this.mediaRW = 0;
+          this.mediaRInner = false;
+          this.mediaRIcon = "el-icon-arrow-left";
+        } else {
+          this.mediaRW = 340;
+          this.mediaRInner = true;
+          this.mediaRIcon = "el-icon-arrow-right";
+        }
+        this.resize();
+      },
+      goLink () {
+        this.$router.back(-1)
       }
     }
   }

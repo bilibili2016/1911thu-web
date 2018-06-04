@@ -1,7 +1,6 @@
 .playerBox {
   width: 100%;
   height: auto;
-  margin-bottom: 50px;
   color: #C0BACC;
   .mediaL {
     // width: 940px;
@@ -17,7 +16,8 @@
       font-size: 18px;
       overflow: hidden;
       i {
-        margin: 0 20px 0 30px
+        margin: 0 10px 0 20px;
+        cursor: pointer;
       }
     }
     .playBottom {
@@ -98,6 +98,11 @@
     .playInner {
       width: 100%;
       height: 620px;
+      background-color: #000;
+      video{
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   .mediaR {
