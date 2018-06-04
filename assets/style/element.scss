@@ -267,6 +267,23 @@
       border-color: #6417a6;
     }
   }
+  .wechatLogin {
+    .captcha {
+      width: 132px;
+    }
+
+  }
+}
+
+// forgotPassword 页
+.forgot {
+  .el-form-item__error {
+    left: 16px;
+  }
+  .captcha {
+    width: 132px;
+    float: left;
+  }
 }
 
 // search
