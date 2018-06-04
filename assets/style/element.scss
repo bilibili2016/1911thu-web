@@ -730,4 +730,54 @@
     background-color: #fafafa;
   }
 }
+.evaluate-tag{
+  .el-rate__icon {
+    margin-right: 0px;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .bthgrop{
+    .el-button {
+      padding: 6px 11px;
+      font-size: 12px; // background:rgba(100, 23, 166, 1);
+      border-radius: 4px;
+      margin: 10px 7px 0px 0px;
+    }
 
+  }
+  .submit{
+    margin: 41px auto 20px;
+    width: 160px;
+    .el-button {
+      font-size: 14px;
+          padding: 12px 65px;
+border-radius: 6px;
+    }
+    .el-button--primary {
+      color: #fff;
+      background-color: #6417A6;
+      border-color: #6417A6;
+    }
+
+  }
+  .el-dialog{
+    width: 1000px!important;
+    height: 644px;
+    background:rgba(255, 255, 255, 1);
+    border-radius:10px;
+    overflow: hidden;
+  }
+  .el-dialog__header{
+    border: 1px #E8D6F7 solid;
+
+  }
+  .el-dialog__title {
+    line-height: 24px;
+    font-size: 16px;
+    font-family: MicrosoftYaHei;
+    color: rgba(34, 34, 34, 1);
+  }
+  .el-dialog__body{
+    padding: 0px 20px;
+  }
+}

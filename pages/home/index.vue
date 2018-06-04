@@ -186,7 +186,7 @@ export default {
         { src: require("@/assets/images/ptn7.png") },
         { src: require("@/assets/images/ptn8.png") },
         { src: require("@/assets/images/ptn9.png") },
-        { src: require("@/assets/images/ptn10.png") }
+        { src: require("~/assets/images/ptn10.png") }
       ],
       teachers: [
         {

@@ -3,7 +3,7 @@
     <!-- banner -->
     <v-carousel :items="items"></v-carousel>
     <!-- 分类 -->
-    <v-tab :classify ="classify" :courses="courses" :tabmsg="tabmsg" :activeName="activeName"></v-tab>
+    <v-tab :classify ="classify" :courses="courses" :tab="tabmsg" :active="activeName"></v-tab>
     <!-- 定制 -->
    <v-card :dingData="dingData" :config = "config"></v-card>
   </div>
@@ -27,7 +27,15 @@ export default {
     "v-carousel": Carousel,
     "v-card": Card,
     "v-tab": Tab
-  }
+  },
+  data() {
+    return {
+      // tabmsgs: null
+    }
+  },
+  // mounted () {
+  //   this.tabmsgs = this.tabmsg
+  // }
 };
 </script>
 
