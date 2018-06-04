@@ -1,7 +1,7 @@
 <template>
   <div class="headerBox">
     <div class="main">
-      <div class="headerLogo fl" @click="goSearch('/')">
+      <div class="headerLogo fl" @click="goSearchd('/')">
         <img src="~/assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
@@ -198,6 +198,9 @@ import { getQueryString } from '@/lib/util/helper'
           this.$router.push(item)
         } else {
         }
+      },
+      goSearchd (item) {
+        this.$router.push(item)
       },
       backHome () {
         this.$router.push('/')

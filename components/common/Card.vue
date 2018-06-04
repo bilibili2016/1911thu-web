@@ -15,7 +15,7 @@
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
       <div class="card-category">
-        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="goLink(linkdata)">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="goLink('course/pages/coursedetail')">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox">
             <img :src="card.bg" alt="">
             <div class="tag">
@@ -78,14 +78,14 @@
   <div class="courseList center goodLesson">
     <div class="course clearfix bottom" v-for="(course,index) in courseList" :key="index">
       <el-card class="fl" :body-style="{ padding: '0px' }">
-        <img :src="course.bgImg" class="image">
+        <img :src="course.bgImg" class="image" >
         <div class="personInfo clearfix ">
-          <img :src="course.headImg" alt="">
+          <img :src="course.headImg" alt="" >
           <h5 class="fr">{{course.grade}}：{{course.teacher}}</h5>
           <p class="fr">{{course.school}}</p>
         </div>
         <div class="play-btn">
-          <img :src="playbtn" alt="">
+          <img :src="playbtn" alt="" @click="goLink('coursedetail')">
         </div>
       </el-card>
       <div class="particulars fr">
@@ -238,7 +238,27 @@
     },
     methods: {
       goLink(item) {
-        this.$router.push(item);
+        console.log(window.location.pathname, 'url')
+        // this.$router.push(item);
+         switch (window.location.pathname) {
+          case '/course/pages/category':
+           this.$router.push('coursedetail');
+            break
+          case '/':
+           this.$router.push(item);
+            break
+          case '/course/pages/coursedetail':
+            this.$router.push('player');
+            break
+          case '/course/pages/classify':
+            this.$router.push('coursedetail');
+            break
+          case '/course/pages/search':
+            this.$router.push('coursedetail');
+            break
+          default:
+            break
+        }
       },
       getMore(item) {
         this.$router.push(item);
