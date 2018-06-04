@@ -28,9 +28,18 @@
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="介绍" name="first">
+            <!-- <div class="title">
+              使用人群
+            </div>
+            <div>
+              <p>想在职场获得老板青睐，让自己PPT演示更加出彩！</p>
+              <p>想成为PPT大神，学习制作各种酷炫PPT动画的学员们</p>
+            </div> -->
           </el-tab-pane>
           <el-tab-pane label="目录" name="second">
             <v-line :catalogs="catalogs"></v-line>
+             <v-line :catalogs="catalogsd"></v-line>
+              <v-line :catalogs="catalogsdd"></v-line>
           </el-tab-pane>
         </el-tabs>
         <div class="attention">
@@ -42,8 +51,12 @@
           </div>
         </div>
       </div>
+
       <!-- 讲师介绍 -->
-      <div class="teacher">
+      <div style="width:345px" class="fr">
+
+
+      <div class="teacher ">
         <h4>讲师介绍</h4>
         <div class="personal">
           <img :src="teacher.headImg" alt="">
@@ -52,7 +65,7 @@
           <p>{{teacher.abstract}}</p>
         </div>
       </div>
-      <div class="evaluate-tag">
+      <div class="evaluate-tag ">
         <h4>课程评价</h4>
         <div class="personal">
           <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
@@ -124,6 +137,7 @@
           <h5>{{item.content}}</h5>
         </div>
       </div>
+          </div>
     </div>
   </div>
 </template>
@@ -148,17 +162,97 @@
         linkseven: 'player',
         catalogs: [{
           isLogin: false,
-          chapterName: "第一章 图的基本概念",
+          chapterName: " 章节1    :   S01 【本节免费】购前必读",
           barList: [{
               number: "1-1",
-              barName: "课程概述",
+              barName: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT，不加班？",
               duration: "32分钟",
               percentage: 30,
               isFree: true,
             },
             {
               number: "1-2",
-              barName: "图怎么画",
+              barName: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "1-3",
+              barName: "【素材下载】S01-3 课程参考资料在哪里下载？",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "1-4",
+              barName: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            }
+          ]
+        }],
+        catalogsd: [{
+          isLogin: false,
+          chapterName: " 章节2    :   S02 只需一招，图片冲击力Max！",
+          barList: [{
+              number: "2-1",
+              barName: "【视频讲解】S02 图片太平淡？因为你不会裁剪！（上）",
+              duration: "32分钟",
+              percentage: 30,
+              isFree: true,
+            },
+            {
+              number: "2-2",
+              barName: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "2-3",
+              barName: "【素材下载】S01-3 课程参考资料在哪里下载？",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "2-4",
+              barName: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            }
+          ]
+        }],
+        catalogsdd: [{
+          isLogin: false,
+          chapterName: " 章节3    :   S03 10分钟做出老板满意的PPT！",
+          barList: [{
+              number: "3-1",
+              barName: "【视频讲解】S03-1 只用不到5分钟，Word文档快速变PPT！",
+              duration: "32分钟",
+              percentage: 30,
+              isFree: true,
+            },
+            {
+              number: "3-2",
+              barName: "【图文教材】S03-1 只用不到5分钟，Word文档迅速变PPT",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "3-3",
+              barName: "【配套练习】S03-1 只用不到5分钟，Word文档迅速变PPT",
+              duration: "35分钟",
+              percentage: 10,
+              isFree: false,
+            },
+            {
+              number: "4-4",
+              barName: "【视频讲解】S03-2 只用5分钟，美化出老板认可的PPT！",
               duration: "35分钟",
               percentage: 10,
               isFree: false,
@@ -238,4 +332,6 @@
   }
 </script>
 
+<style scoped>
 
+</style>
