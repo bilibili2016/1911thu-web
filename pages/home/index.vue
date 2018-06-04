@@ -6,7 +6,7 @@
     <!-- 新上好课 -->
     <v-new :config="configZero" :newData="newData" :titleOne="titleOne" :linkone="linkone"></v-new>
     <!-- 经典好课 -->
-    <v-classic :config="configZero" :classicData="classicData" :titleTwo="titleTwo" :linktwo="linktwo"></v-classic>
+    <v-classic :config="configZ" :classicData="classicData" :titleTwo="titleTwo" :linktwo="linktwo"></v-classic>
     <!-- 名师大咖秀 -->
     <v-famous :teachers ="teachers" :titleThree = "titleThree"></v-famous>
     <!-- 用户评价 -->
@@ -163,7 +163,13 @@ export default {
       ],
        configZero: {
           card_type: "profile",
-          card: 'home'
+          card: 'home',
+          new: 'true'
+        },
+        configZ: {
+          card_type: "profile",
+          card: 'home',
+          new: 'false'
         },
       infoOne: {
         card_type: "infoOne"
