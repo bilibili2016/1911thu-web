@@ -15,7 +15,7 @@
       }
     },
     mounted() {
-      console.log(this.linkdata)
+
     }
   };
 </script>

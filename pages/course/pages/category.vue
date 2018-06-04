@@ -17,8 +17,8 @@
             <li class="title">
               分类:
             </li>
-            <li v-for="(card,index) in data2" :index="index" :key="index" :class="{bgs: bgmsgs === index ? true : false }">
-              <el-button @click="handleItemTwo(item,index)">{{card.name}}</el-button>
+            <li v-for="(item,index) in data2" :index="index" :key="index" :class="{bgs: bgmsgs === index ? true : false }">
+              <el-button @click="handleItemTwo(item,index)">{{item.name}}</el-button>
             </li>
           </ul>
         </div>
@@ -56,8 +56,8 @@
     },
     data() {
       return {
-        bgmsg: null,
-        bgmsgs: null,
+        bgmsg: 0,
+        bgmsgs: 0,
         activeName: 'second',
         value3: true,
         value4: true,

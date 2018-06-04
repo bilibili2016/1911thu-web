@@ -286,7 +286,7 @@ export default {
         },
         {
           src: require("@/assets/images/pro3.png"),
-          title: "企业课程定制",
+          title: "学位项目",
           content:
             "中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办..."
         }

@@ -256,6 +256,9 @@
           case '/course/pages/search':
             this.$router.push('coursedetail');
             break
+          case '/course/pages/newlesson':
+            this.$router.push('coursedetail');
+            break
           default:
             break
         }
