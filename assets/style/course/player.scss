@@ -2,6 +2,7 @@
   width: 100%;
   height: auto;
   color: #C0BACC;
+  overflow: hidden;
   .mediaL {
     // width: 940px;
     transition: width 300ms;
@@ -298,7 +299,7 @@
         }
       }
       .btnList {
-        button {
+        .el-radio{
           width: 74px;
           height: 26px;
           line-height: 26px;
@@ -310,6 +311,15 @@
           &:hover {
             color: #6417A6;
             border: 1px solid #6417A6;
+          }
+          &.is-bordered.is-checked{
+            border-color: #6417A6;
+          }
+          .el-radio__input.is-checked+.el-radio__label{
+            color: #6417A6;
+          }
+          .el-radio__input{
+            display: none;
           }
         }
       }
