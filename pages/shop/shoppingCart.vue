@@ -40,7 +40,7 @@
         <div class="tableFooter">
           <el-checkbox v-model="selectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
-            <span class="deleteChecked">删除选中的课程</span>
+            <!-- <span class="deleteChecked">删除选中的课程</span> -->
             <span class="number clearfix">
               <i class="fl minus el-icon-minus"  @click="number>1?number--: 1"></i>
               <input type="text" class="fl num" v-model.number="number" @blur="changeNumber">
