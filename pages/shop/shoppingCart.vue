@@ -48,7 +48,7 @@
             </span>
           </span>
           <span class="commitOrder fr">
-            <el-button>提交</el-button>
+            <el-button @click="showCommit">提交</el-button>
           </span>
           <span class="allPrice fr">￥94.00</span>
 
@@ -57,7 +57,7 @@
     </div>
 
     <!-- 提交公司信息 -->
-    <div class="information" @click.self="close" v-show="shwoInfo">
+    <div class="information" @click.self="close" v-show="showInfo">
       <div class="info">
         <div class="infoTitle">
           <h4>为方便我们的沟通，请填写下列信息</h4>
@@ -86,7 +86,8 @@
             <span>获取验证码</span>
           </el-form-item>
           <el-form-item class="btnCommit">
-            <el-button type="primary" @click="submitForm('companyInfo')">提交</el-button>
+            <el-button type="primary">提交</el-button>
+            <!-- <el-button type="primary" @click="submitForm('companyInfo')">提交</el-button> -->
           </el-form-item>
         </el-form>
       </div>
@@ -99,7 +100,7 @@
   export default {
     data(){
       return{
-        shwoInfo: false,
+        showInfo: false,
         selectAll:false,
         checked:[],
         isIndeterminate:true,
@@ -177,8 +178,11 @@
           }
         });
       },
+      showCommit(){
+        this.showInfo=true;
+      },
       close(){
-        this.shwoInfo=false;
+        this.showInfo=false;
       },
       querySearch(queryString, cb) {
         var restaurants = this.restaurants;

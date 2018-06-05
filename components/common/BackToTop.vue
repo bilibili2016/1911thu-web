@@ -16,7 +16,7 @@
       </div>
     </transition>
     <transition :name="transitionName">
-      <div class="back-to-ceiling customStyleThree" v-show="visible">
+      <div class="back-to-ceiling customStyleThree" v-show="visible" @click="checkCourse">
         <div class="line-wrap">
           <div class="line-center">
             <img :src="choiceSrc" alt="" class="ceilSrc">
@@ -50,6 +50,7 @@
     data() {
       return {
         visible: false,
+        token:true,
         interval: null,
         ceilSrc: require("@/assets/images/home_backtop01.png"),
         wxSrc: require("@/assets/images/home_backtop02.png"),
@@ -70,6 +71,13 @@
       handleScroll() {
         this.visible = window.pageYOffset > this.visibilityHeight;
       },
+      checkCourse(){
+        if(this.token){
+          this.goLink("/course/pages/category");
+        }else{
+          this.notLogin=true;
+        }
+      },
       backToTop() {
         const start = window.pageYOffset;
         let i = 0;
@@ -83,6 +91,9 @@
           }
           i++;
         }, 16.7);
+      },
+      goLink(item) {
+        this.$router.push(item);
       },
       easeInOutQuad(t, b, c, d) {
         if ((t /= d / 2) < 1) return c / 2 * t * t + b;
