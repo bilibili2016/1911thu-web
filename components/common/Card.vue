@@ -403,13 +403,13 @@
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         transition: all 300ms;
         .jin-style{
-    display: block;
-     transition: all 300ms;
-  }
-  .mask-style {
-    display: block;
-     transition: all 300ms;
-  }
+          display: block;
+          transition: all 300ms;
+        }
+        .mask-style {
+          display: block;
+          transition: all 3000ms;
+        }
       }
 
       .itemBox {
