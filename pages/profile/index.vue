@@ -52,6 +52,10 @@
           <span slot="label"><i class="el-icon-date"></i> 绑定课程ID</span>
           <v-bind></v-bind>
         </el-tab-pane>
+        <!-- 我的选课 -->
+        <el-tab-pane name="fifth" @click="goLink('/')">
+          <span slot="label"><i class="el-icon-date"></i> 我的选课</span>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -210,6 +214,11 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       ...mapState('auth', [
         'gid'
       ])
+    },
+    methods:{
+      goLink(item) {
+        this.$router.push(item);
+      }
     },
     mounted () {
       this.activeName = this.gid

@@ -42,8 +42,8 @@
          overflow: hidden;
          text-overflow: ellipsis;
          display: -webkit-box;
-         -webkit-line-clamp: 2;
-         -webkit-box-orient: vertical;
+         line-clamp: 2;
+         box-orient: vertical;
        }
      }
    }
@@ -471,6 +471,13 @@
          color: rgba(34, 34, 34, 1);
          line-height: 30px;
          padding: 0px 40px;
+         p{
+           overflow: hidden;
+           text-overflow: ellipsis;
+           display: -webkit-box;
+           line-clamp: 4;
+           box-orient: vertical;
+         }
        }
        .study {
          padding: 25px 40px 0;
@@ -509,6 +516,7 @@
          color: #6417A6;
          font-size: 14px;
          margin: 10px 40px;
+         cursor: pointer;
        }
      }
      .particularss {

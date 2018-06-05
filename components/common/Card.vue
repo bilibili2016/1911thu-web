@@ -16,13 +16,12 @@
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
 
-        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="goLink('course/pages/coursedetail')">
-
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
             <div  class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <div class="mask-style">
+            <div class="mask-style" @click="goLink('course/pages/coursedetail')">
               <img :src="jinImg" alt="" class="jin-style">
             </div>
             <div  class="bgImgs">
@@ -148,7 +147,7 @@
         <div class="currentclum">
           <h4>{{course.title}}</h4>
           <div>
-            <span class="fl coursenum"><span>52课时</span><img src="../../assets/images/ren.png" alt=""> 1021</span>
+            <span class="fl coursenum"><span>52课时</span><img src="@/assets/images/ren.png" alt=""> 1021</span>
             <span class="rate"><el-rate disabled v-model="one"></el-rate></span>
             <span class="coins">￥ 108.00</span>
           </div>
@@ -169,13 +168,13 @@
 
     <div class="course clearfix boxshadow-none" v-for="(course,index) in newsList" :key="index" style="box-shadow:none;">
       <el-card class="fl" :body-style="{ padding: '0px' }">
-        <div style="position:relative;" class="img-wrap">
+        <div style="position:relative;" class="img-wrap" @click="getMore(linksix)">
           <img :src="course.bgImg" class="image">
         </div>
       </el-card>
       <div class="particulars fr" style="width:640px;">
         <div class="currentclum">
-          <h4>{{course.title}}</h4>
+          <h4 @click="getMore(linksix)">{{course.title}}</h4>
         </div>
         <div class="bordernone">
           <p>日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。以自己的亲身经历帮助学员做好在日本旅游的一切准备。尽量避免专业的语法知识介绍，帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。。</p>
@@ -316,8 +315,8 @@
   position: absolute;
   border-top-left-radius:16px;
   border-top-right-radius:16px;
-  display: none;
-   transition: all 300ms;
+  opacity: 0;
+  transition: all 300ms;
 }
 .mask{
   display: none;
@@ -407,8 +406,8 @@
           transition: all 300ms;
         }
         .mask-style {
-          display: block;
-          transition: all 3000ms;
+          opacity: 0.5;
+          transition: all 300ms;
         }
       }
 
@@ -749,11 +748,25 @@
       border-radius: 6px;
       background-color: #fff;
       box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+      &:hover .img-wrap img{
+        margin-top: -2px;
+        margin-left: -1.3px;
+        width: 404px;
+        height: 262.6px;
+      }
       .el-card {
         // width: 400px;
         // height: 392px;
         font-size: 0;
         position: relative;
+        .img-wrap{
+          width: 400px;
+          height: 260px;
+          overflow: hidden;
+          img{
+            transition: all 400ms;
+          }
+        }
         &>img {
           width: 400px;
           height: 260px;
@@ -870,6 +883,13 @@
           color: rgba(34, 34, 34, 1);
           line-height: 30px;
           padding: 0px 40px;
+          p{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+          }
         }
         .study {
           padding: 15px 40px 0;
@@ -916,6 +936,7 @@
           color: #6417A6;
           font-size: 14px;
           margin: 10px 40px;
+          cursor: pointer;
         }
       }
       .particularss {
@@ -1040,6 +1061,7 @@
             color: rgba(34, 34, 34, 1);
             line-height: 30px;
             margin-bottom: 20px;
+            
           }
         }
       }

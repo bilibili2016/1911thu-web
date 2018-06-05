@@ -1,0 +1,194 @@
+.allInfo{
+    height: auto;
+}
+.topImg{
+    width: 100%;
+    height: 360px;
+    position: relative;
+    overflow: hidden;
+    img{
+        width: 1920px;
+        height: 360px;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        margin-left: -960px;
+    }
+}
+.why{
+    height: 603px;
+    padding-bottom: 100px;
+    background-color: #fff;
+    h3{
+        padding: 98px 0 78px;
+        text-align: center;
+        font-size: 36px;
+        color: #222;
+    }
+    p{
+        line-height: 36px;
+        text-align: center;
+    }
+}
+.course{
+    background-color: #fafafa;
+    padding-bottom: 60px;
+    h3{
+        padding: 98px 0 78px;
+        text-align: center;
+        font-size: 36px;
+        color: #222;
+    }
+    &>p{
+        width: 1100px;
+        margin: 0 auto;
+        line-height: 36px;
+        font-size: 16px;
+        color: #222;
+    }
+    ul{
+        padding-top: 60px;
+        width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        li{
+            width: 340px;
+            height: 212px;
+            background-color: #fff;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            padding: 20px 30px 30px 30px;
+            box-shadow:0px 0px 12px rgba(198, 194, 210, 0.28);
+            h5{
+                color: #4e4b5f;
+                font-size: 16px;
+                line-height: 56px;
+                margin-top: 10px;
+            }
+            h6{
+                font-size: 14px;
+                color: #B0AEB8;
+            }
+            img{
+                width: 54px;
+                height: 78px;
+            }
+            &:nth-child(7),
+            &:nth-child(8),
+            &:nth-child(9){
+                img{
+                    width: 50px;
+                    height: 69px;
+                    margin-top: 10px;
+                }
+            }
+            h4{
+                color:#4F4C60;
+                font-size: 18px;
+                margin-top: 30px;
+                span{
+                    color: #6417A6;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+.psrocess{
+    background-color: #fff;
+    padding-bottom: 100px;
+    h3{
+        padding: 98px 0 78px;
+        text-align: center;
+        font-size: 36px;
+        color: #222;
+    }
+    .route{
+        width: 1100px;
+        margin: 0 auto;
+        p{
+            height: 76px;
+            line-height: 76px;
+            font-size: 20px;
+            color: #222;
+            img{
+                width: 25px;
+                height: 20px;
+            }
+            &:nth-child(3) img{
+                width: 20px;
+                margin-right: 10px;
+            }
+        }
+        h5{
+            height: 34px;
+            line-height: 34px;
+            span{
+                margin-right: 20px;
+                background-color: #F1E9F8;
+                padding: 0 10px;
+            }
+        }
+    }
+}
+.bottomForm{
+    height: 561px;
+    position: relative;
+    img{
+        width: 1920px;
+        height: 561px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -960px;
+    }
+    .word{
+        width: 1100px;
+        position: absolute;
+        top: 80px;
+        left: 50%;
+        margin-left: -550px;
+        p {
+          float: right;
+          width: 640px;
+          line-height: 30px;
+          color: #fff;
+        }
+
+    }
+
+    
+    .el-form{
+        width: 640px;
+        padding-top: 100px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        .el-button.el-button--primary{
+            float: right;
+            width: 264px;
+            height: 40px;
+            background-color: #6417A6;
+            font-size: 14px;
+            margin-right: 80px;
+            color: #fff;
+            border-radius: 6px;
+        }
+        .code{
+            width: 140px;
+            height: 38px;
+            line-height: 38px;
+            background-color: #fff;
+            text-align: center;
+            border-top-right-radius:4px; 
+            border-bottom-right-radius:4px; 
+            position: absolute;
+            right: 1px;
+            top: 1px;
+            color: #6417A6;
+            cursor: pointer;
+        }
+    }
+}
