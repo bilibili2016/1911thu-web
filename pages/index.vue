@@ -9,7 +9,11 @@ import Home from "@/pages/home/index.vue";
 export default {
   components: {
     "v-home": Home
-  }
+  },
+   mounted () {
+      document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("footerBox")[0].style.display="inline"
+    }
 };
 </script>
 

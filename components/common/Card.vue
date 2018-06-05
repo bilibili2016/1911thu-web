@@ -45,14 +45,14 @@
                   <span>{{card.name}}</span>
                 </p>
                 <p class="itemBox-info">
-                  <span>
+                  <span v-if="config.card === 'home'">
                     {{card.cnum}}课时
                   </span>
-                  <span class="itemBox-num">
+                  <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
                     <span>{{card.pnum}}</span>
 
-                    <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === !'already'"></el-rate>
+                    <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
 
                   </span>
                 </p>

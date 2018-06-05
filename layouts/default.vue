@@ -1,6 +1,6 @@
 <template>
   <el-container class="is-vertical layout-default">
-     <Header ></Header>
+     <Header :class="{ showMsg : this.hsg }"></Header>
     <el-container>
       <el-main>
          <nuxt/>
@@ -25,6 +25,12 @@ export default {
       //   hsgs: true
       // }
     }
+  },
+
+  computed: {
+    ...mapState('auth', [
+      'hsg'
+    ])
   }
   // methods: {
   //   ...mapActions('auth', [
@@ -41,4 +47,7 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/style/config";
 // @import "~assets/style/default";
+.headerBox{
+  display: block
+}
 </style>

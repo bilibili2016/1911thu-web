@@ -4,6 +4,7 @@
     <div class="clsTitle clearfix">
       <div class="fl hotBtn">
         <el-tabs v-model="activeName" @tab-click="handleClick">
+          <!-- <el-tab-pane label="全部" name="first"></el-tab-pane> -->
           <el-tab-pane label="最新" name="first"></el-tab-pane>
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>

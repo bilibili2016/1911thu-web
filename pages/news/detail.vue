@@ -65,6 +65,10 @@ import CustomBanner from "@/components/common/Banner.vue";
       getMore(item) {
         this.$router.push(item);
       }
+    },
+    mounted () {
+      document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("footerBox")[0].style.display="inline"
     }
   }
 </script>
