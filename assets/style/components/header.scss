@@ -77,10 +77,13 @@
           border-right: 2px solid #ccc;
         }
       }
-      span.shoppingCart{
+      .shoppingCart{
+        display: inline-block;
         padding: 0;
         width: auto;
+        margin-right: 14px;
         position: relative;
+        cursor: pointer;
         img{
           width: 20px;
           height: 20px;
@@ -106,7 +109,7 @@
         height: 40px;
         display: inline-block;
         position: relative;
-        padding: 0 31px;
+        padding: 0 25px;
         cursor: pointer;
         &:hover .downApp {
           opacity: 1;   
