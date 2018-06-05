@@ -1,6 +1,6 @@
 <template>
   <div class="playerBox clearfix">
-    <div class="mediaL fl" ref="mediaL">
+    <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <div class="playTop">
         <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
       </div>
@@ -26,7 +26,7 @@
         </span>
       </div>
     </div>
-    <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'px' }">
+    <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
       <div v-show="mediaRInner" class="inner">
         <h5 class="title">{{player.courseName}}</h5>
         <div class="teacher clearfix">
@@ -91,7 +91,8 @@
       return {
         showReportBug: false,
         showEvaluate: false,
-        mediaRW: 325,
+        mediaRW: 28,
+        mediaLW: 72,
         mediaRInner: true,
         mediaRIcon: "el-icon-arrow-right",
         radioBtn:"",
@@ -156,9 +157,9 @@
         this.word="";
       },
       resize() {
-        const w = window.screen.width;
+        // const w = window.screen.width;
         const h = window.screen.availHeight;
-        this.$refs.mediaL.style.width=w - this.mediaRW-15+"px";
+        // this.$refs.mediaL.style.width=w - this.mediaR+"px";
         this.$refs.mediaL.style.height= h+"px";
         this.$refs.mediaR.style.height= h+"px";
         this.$refs.playInner.style.height=h-100+"px";
@@ -168,12 +169,14 @@
           this.mediaRW = 0;
           this.mediaRInner = false;
           this.mediaRIcon = "el-icon-arrow-left";
+          this.mediaLW = 100;
         } else {
-          this.mediaRW = 340;
+          this.mediaRW = 28;
           this.mediaRInner = true;
           this.mediaRIcon = "el-icon-arrow-right";
+          this.mediaLW = 72;
         }
-        this.resize();
+        // this.resize();
       },
       goLink () {
         this.$router.back(-1)
