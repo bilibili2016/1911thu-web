@@ -2,10 +2,10 @@
   <div>
     <v-banner :config = "bconfig"></v-banner>
     <div class="center-tab center">
-      <el-tabs :tab-position="tabPosition">
+      <el-tabs :tab-position="tabPosition" v-model="activeName">
         <!-- 我的信息 -->
-        <el-tab-pane class="my-home">
-          <span slot="label"><i class="el-icon-date"></i> 我的行程</span>
+        <el-tab-pane class="my-home" name="first">
+          <span slot="label"><i class="el-icon-date"></i> 我的首页</span>
           <el-card class="card-style">
             <div slot="header" class="clearfix">
               <span>最近学习</span>
@@ -16,10 +16,10 @@
           </el-card>
         </el-tab-pane>
         <!-- 我的课程 -->
-        <el-tab-pane class="my-course">
+        <el-tab-pane class="my-course" name="second">
           <span slot="label"><i class="el-icon-date"></i> 我的课程</span>
           <el-card>
-            <el-tabs v-model="activeName">
+            <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
                 <v-card :data="newData" :config="configOne"></v-card>
               </el-tab-pane>
@@ -33,7 +33,7 @@
           </el-card>
         </el-tab-pane>
         <!-- 我的消息 -->
-        <el-tab-pane class="my-info">
+        <el-tab-pane class="my-info" name="third">
           <span slot="label"><i class="el-icon-date"></i> 我的消息</span>
           <el-card class="card-style">
             <div slot="header" class="clearfix">
@@ -43,12 +43,12 @@
           </el-card>
         </el-tab-pane>
         <!-- 个人设置 -->
-        <el-tab-pane>
+        <el-tab-pane name="fourth">
           <span slot="label"><i class="el-icon-date"></i> 个人设置</span>
           <v-person></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
-        <el-tab-pane>
+        <el-tab-pane name="fifth">
           <span slot="label"><i class="el-icon-date"></i> 绑定课程ID</span>
           <v-bind></v-bind>
         </el-tab-pane>
@@ -63,7 +63,8 @@
   import PersonalSet from "@/pages/profile/pages/personalSet.vue";
   import Binding from "@/pages/profile/pages/bindId";
   import Info from "@/pages/profile/pages/info";
-
+import { other, auth } from '~/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from 'vuex'
   export default {
     components: {
       "v-card": CustomCard,
@@ -77,12 +78,14 @@
         avator: require("~/assets/images/profile_avator01.png"),
         tabPosition: "left",
         activeName: "first",
+        activeNames: "first",
         bconfig: {
           banner_type: "profile"
         },
         configZero: {
           card_type: "profile",
-          card: 'home'
+          card: 'home',
+
         },
         configOne: {
           card_type: "profile",
@@ -202,6 +205,15 @@
           }
         ]
       };
+    },
+    computed: {
+      ...mapState('auth', [
+        'gid'
+      ])
+    },
+    mounted () {
+      this.activeName = this.gid
+      console.log(this.gid)
     }
   };
 </script>

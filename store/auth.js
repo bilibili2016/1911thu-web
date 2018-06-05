@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-04 20:49:06
+ * @Last Modified time: 2018-06-05 10:22:58
   * @File Type:  登陆的store
  * @Describe:
  */
@@ -16,12 +16,16 @@ persistStore.defaults({
   user: null,
   token: null,
   cid: null,
-  pid: null
+  pid: null,
+  gid: null,
+  hsg: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
 let cid = persistStore.get('cid')
 let pid = persistStore.get('pid')
+let gid = persistStore.get('gid')
+let hsg = persistStore.get('hsg')
 
 
 export const MUTATION = {
@@ -30,15 +34,18 @@ export const MUTATION = {
   refresh: 'refresh',
   me: 'me',
   setCid: 'set-cid',
-  setPid: 'set-pid'
-
+  setPid: 'set-pid',
+  setGid: 'set-gid',
+  setHsg: 'set-hsg'
 
 }
 export const state = () => ({
   user,
   token,
   cid,
-  pid
+  pid,
+  gid,
+  hsg
 })
 export const getters = {
   isAuthenticated (state) {
@@ -65,6 +72,17 @@ export const mutations = {
   [MUTATION.setPid](state, { pid }) {
     state.pid = pid
   },
+  [MUTATION.setGid](state, {
+    gid
+  }) {
+    state.gid = gid
+  },
+  [MUTATION.setHsg](state, {
+    hsg
+  }) {
+    state.hsg = hsg
+  },
+
 }
 export const actions = {
   async signIn ({ commit, state }, { tokens }) {
@@ -151,5 +169,40 @@ export const actions = {
       }
     }
     return pid
+  },
+  async setGid ({ commit, state }, { gids }) {
+    try {
+      let gid = gids
+      persistStore.set('gid', gid)
+      commit(MUTATION.setGid, { gid })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return gid
+  },
+   async setHsg ({ commit, state }, { hsgs }) {
+    try {
+      let hsg = hsgs
+
+
+      persistStore.set('hsg', hsg)
+
+
+      commit(MUTATION.setHsg, {
+        hsg
+      })
+
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return gid
   }
 }

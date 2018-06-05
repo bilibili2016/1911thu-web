@@ -24,7 +24,6 @@
             </div>
             <div class="mask-style">
               <img :src="jinImg" alt="" class="jin-style">
-
             </div>
             <div  class="bgImgs">
               <img :src="card.bg" alt=""
@@ -52,7 +51,9 @@
                   <span class="itemBox-num">
                     <img :src="numSrc" alt="">
                     <span>{{card.pnum}}</span>
-                    <el-rate v-model="card.rate" class="itemBox-rate"></el-rate>
+
+                    <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === !'already'"></el-rate>
+
                   </span>
                 </p>
               </div>
@@ -274,6 +275,9 @@
           case '/course/pages/newlesson':
             this.$router.push('coursedetail');
             break
+          case '/profile':
+            this.$router.push('/course/pages/coursedetail');
+            break
           default:
             break
         }
@@ -285,7 +289,10 @@
       this.isShow = !this.isShow
     }
     },
-    mounted() {}
+
+    mounted() {
+
+    }
   };
 </script>
 
@@ -1073,7 +1080,7 @@
     top: 30%;
     left: 50%;
     margin-left: -70px;
-    margin-top: -20px;
+    margin-top: -29px;
     color: #732EAF;
   }
 
