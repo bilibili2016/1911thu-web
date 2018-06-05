@@ -149,7 +149,7 @@
           <h4>{{course.title}}</h4>
           <div>
             <span class="fl coursenum"><span>52课时</span><img src="../../assets/images/ren.png" alt=""> 1021</span>
-            <span class="rate"><el-rate v-model="one"></el-rate></span>
+            <span class="rate"><el-rate disabled v-model="one"></el-rate></span>
             <span class="coins">￥ 108.00</span>
           </div>
         </div>
@@ -403,13 +403,13 @@
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         transition: all 300ms;
         .jin-style{
-    display: block;
-     transition: all 300ms;
-  }
-  .mask-style {
-    display: block;
-     transition: all 300ms;
-  }
+          display: block;
+          transition: all 300ms;
+        }
+        .mask-style {
+          display: block;
+          transition: all 3000ms;
+        }
       }
 
       .itemBox {

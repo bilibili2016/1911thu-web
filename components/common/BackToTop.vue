@@ -1,22 +1,22 @@
 <template>
   <div>
     <transition :name="transitionName">
-      <div class="back-to-ceiling" @click="backToTop" v-show="visible" :style="customStyle">
+      <div class="back-to-ceiling customStyle" @click="backToTop" v-show="visible">
         <img :src="topSrc" alt="" class="topSrc">
       </div>
     </transition>
     <transition :name="transitionName">
-      <div class="back-to-ceiling hasColor" v-show="visible" :style="customStyleTwo">
+      <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
         <img :src="wxSrc" alt="" class="wxSrc">
       </div>
     </transition>
     <transition :name="transitionName">
-      <div class="back-to-ceiling hasColor" v-show="visible" :style="customStyleOne">
+      <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
         <img :src="ceilSrc" alt="" class="ceilSrc">
       </div>
     </transition>
     <transition :name="transitionName">
-      <div class="back-to-ceiling" v-show="visible" :style="customStyleThree">
+      <div class="back-to-ceiling customStyleThree" v-show="visible">
         <div class="line-wrap">
           <div class="line-center">
             <img :src="choiceSrc" alt="" class="ceilSrc">
@@ -41,42 +41,6 @@
       backPosition: {
         type: Number,
         default: 0
-      },
-      customStyle: {
-        right: "30px",
-        bottom: "320px",
-        width: "50px",
-        height: "50px",
-        "border-radius": "4px",
-        "line-height": "45px",
-        background: "#e7eaf1"
-      },
-      customStyleOne: {
-        right: "30px",
-        bottom: "200px",
-        width: "50px",
-        height: "50px",
-        "border-radius": "4px",
-        "line-height": "45px",
-        background: "#d800ff"
-      },
-      customStyleTwo: {
-        right: "30px",
-        bottom: "260px",
-        width: "50px",
-        height: "50px",
-        "border-radius": "4px",
-        "line-height": "45px",
-        background: "#d800ff"
-      },
-      customStyleThree: {
-        right: "30px",
-        bottom: "100px",
-        width: "110px",
-        height: "50px",
-        "border-radius": "4px",
-        "line-height": "45px",
-        background: "rgba(252,210,63,1)"
       },
       transitionName: {
         type: String,
@@ -135,13 +99,46 @@
     text-align: center;
     cursor: pointer;
     z-index: 9;
-  }
-
-  // .back-to-ceiling:hover {
-  //   background: #d5dbe7;
-  // }
-  .hasColor:hover {
-    background-color: #8f4acb;
+    &.customStyle{
+      right: 30px;
+      bottom: 320px;
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+      line-height: 45px;
+      background: #e7eaf1;
+    }
+    &.customStyleOne{
+      right: 30px;
+      bottom: 200px;
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+      line-height: 45px;
+      background: #d800ff
+    }
+    &.customStyleTwo{
+      right: 30px;
+      bottom: 260px;
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+      line-height: 45px;
+      background: #d800ff;
+    };
+    &.customStyleThree{
+      right: 30px;
+      bottom: 100px;
+      width: 110px;
+      height: 50px;
+      border-radius: 4px;
+      line-height: 45px;
+      background: rgba(252,210,63,1);
+    }
+    &.hasColor:hover{
+      transition: all 400ms;
+      background: #8f4acb;
+    }
   }
 
   .fade-enter-active,
