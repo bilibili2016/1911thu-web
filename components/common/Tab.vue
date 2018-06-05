@@ -2,7 +2,7 @@
 <!-- :class="{ bg: tab}" -->
   <div class="classify" :class="{ bg: tabd}">
     <el-tabs v-model="actived" @tab-click="handleClick" tabPosition="left" @mouseenter="handleClick">
-      <el-tab-pane v-for="(item,index) in classify" :key="item.id" :label="item" @click="handleClick(item,index)">
+      <el-tab-pane v-for="(item,index) in classify" :key="item.id" :label="item" @click="handleClick(item,index)" style="opacity:0.7">
         <div class="subClass">
           <h4>全部<span><i></i></span></h4>
           <p>

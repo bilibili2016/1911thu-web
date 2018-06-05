@@ -75,15 +75,15 @@
           </el-tab-pane>
           <el-tab-pane label="注册" name="register">
             <!-- 注册 -->
-            <el-form :model="registerData" status-icon :rules="rules2" ref="registerData" class="demo-ruleForm">
-              <el-form-item prop="tel">
+            <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
+              <el-form-item prop="phones">
                 <!-- 手机号 -->
-                <el-input v-model.number="registerData.tel" placeholder="请输入登录手机号"></el-input>
+                <el-input v-model="registerData.phones" placeholder="请输入登录手机号"></el-input>
               </el-form-item>
               <el-form-item prop="code">
                 <!-- 验证码 -->
-                <el-input class="captcha" v-model.number="registerData.code" placeholder="请输入验证码"></el-input>
-                <div class="getCode">{{registerData.getCode}}</div>
+                <el-input class="captcha" v-model="registerData.code" placeholder="请输入验证码"></el-input>
+                <div class="getCode" @click="getCode">获取验证码</div>
               </el-form-item>
               <el-form-item>
                 <!-- 手机号 -->
@@ -92,7 +92,7 @@
               </el-form-item>
               <el-row>
                 <el-checkbox v-model="registerData.checked">同意用户注册协议</el-checkbox>
-                <el-button>登录</el-button>
+                <el-button @click.native="signUp">注册</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="scanCode">其它方式登录</div>
@@ -143,6 +143,7 @@
 import { getQueryString } from '@/lib/util/helper'
 import { other, auth } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { checkPhone, checkCode } from '~/lib/util/validatefn'
   export default {
     data() {
       var checkTel = (rule, value, callback) => {
@@ -165,6 +166,10 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         }
       };
       return {
+        smsCode: {
+          phones: '',
+          types: 1
+        },
         searchImg: require('~/assets/images/search.png'),
         start: false,
         lrFrame:false,
@@ -186,10 +191,8 @@ import { mapState, mapActions, mapGetters } from 'vuex'
           pwdType: 'password'
         },
         registerData: {
-          tel: '',
-          code: '',
-          getCode: '获取验证码',
-          checked: false
+          phones: '',
+          types: 1
         },
         QRcode:require("~/assets/images/wechatLogin.png"),
         wechatLogin:false,
@@ -223,9 +226,21 @@ import { mapState, mapActions, mapGetters } from 'vuex'
             trigger: 'blur'
           }]
         },
+        registRules: {
+          phones: [
+            { required: true, message: '请输入手机号', trigger: 'blur' },
+            { validator: checkPhone, trigger: 'blur' }
+          ],
+          code: [
+            { required: true, message: '请输入验证码', trigger: 'blur' },
+            { validator: checkCode, trigger: 'blur' }
+          ]
+        },
         gidForm: {
           gids: null
-        }
+        },
+        // ipone code
+
       }
     },
     computed: {
@@ -238,9 +253,14 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       'signIn',
       'setGid'
       ]),
+      signUp () {
+
+      },
+      getCode () {
+        auth.smsCode(this.registerData)
+      },
       goMycourse () {
         this.$router.push('/profile')
-
       },
       goLinks () {
          this.$router.push('/shop/shoppingCart');

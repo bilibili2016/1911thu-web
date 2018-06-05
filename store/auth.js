@@ -184,14 +184,10 @@ export const actions = {
     }
     return gid
   },
-   async setHsg ({ commit, state }, { hsgs }) {
+  async setHsg ({ commit, state }, { hsgs }) {
     try {
       let hsg = hsgs
-
-
       persistStore.set('hsg', hsg)
-
-
       commit(MUTATION.setHsg, {
         hsg
       })
