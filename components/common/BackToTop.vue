@@ -16,7 +16,7 @@
       </div>
     </transition>
     <transition :name="transitionName">
-      <div class="back-to-ceiling customStyleThree" v-show="visible">
+      <div class="back-to-ceiling customStyleThree" v-show="visible" @click="goLink('')">
         <div class="line-wrap">
           <div class="line-center">
             <img :src="choiceSrc" alt="" class="ceilSrc">
@@ -83,6 +83,9 @@
           }
           i++;
         }, 16.7);
+      },
+      goLink(item) {
+        this.$router.push(item);
       },
       easeInOutQuad(t, b, c, d) {
         if ((t /= d / 2) < 1) return c / 2 * t * t + b;
