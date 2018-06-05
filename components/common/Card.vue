@@ -86,7 +86,79 @@
       </div>
     </template>
 
+    <!-- 购物车页面 -->
+    <template v-if="config.card_type === 'profiled'">
+      <div class="card-category profile">
 
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="handleCheck(card,index)">
+
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
+            <div  class="new-style" v-if="config.new === 'true'">
+              <img :src="newTag" alt="">
+            </div>
+            <div class="mask-style">
+              <img :src="jinImg" alt="" class="jin-style">
+            </div>
+            <div  class="bgImgs">
+              <img :src="card.bg" alt=""
+             >
+            </div>
+              <el-checkbox v-model="card.checkmsg" style="position:absolute;top:10px;right:10px;"></el-checkbox>
+            <div class="tag">
+              <span>新闻宣传</span>
+              <span>时政</span>
+            </div>
+            <div v-if="config.card === 'home'"></div>
+            <div class="common-button btn-bgs " v-else>
+              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+            </div>
+            <el-row>
+              <!-- 名字 -->
+              <div class="item">
+                <p class="itemBox-name">
+                  <span>{{card.name}}</span>
+                </p>
+                <p class="itemBox-info">
+                  <span v-if="config.card === 'home'">
+                    {{card.cnum}}课时
+                  </span>
+                  <span class="itemBox-num" v-if="config.card === 'home'">
+                    <img :src="numSrc" alt="">
+                    <span>{{card.pnum}}</span>
+
+                    <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+
+                  </span>
+                </p>
+              </div>
+              <!-- 作者和头衔 -->
+              <div class="line-wrap" v-if="config.card === 'home'">
+                <div class="line-center">
+                  <img :src="card.avator" alt="">
+                  <span>王建中</span>
+                  <span class="title">华中科技大学博士</span>
+                </div>
+              </div>
+              <!-- 学习进度 -->
+              <div class="line-wraps" v-if="config.card === 'learning'">
+                <div class="line-centers">
+                  <p>已学习100%</p>
+                  <el-progress :percentage="50"></el-progress>
+                </div>
+              </div>
+              <div v-if="config.card === 'already'">
+                <div class="line-centers">
+                  <div>已学习100%</div>
+                </div>
+              </div>
+              <div class="readyImg" v-if="config.card === 'already'">
+                <img :src="readyImg" alt="">
+              </div>
+            </el-row>
+          </el-card>
+        </div>
+      </div>
+    </template>
     <!-- 新上好课详情 -->
 <template v-if="config.card_type === 'goodlesson'">
   <div class="courseList center goodLesson">
@@ -251,7 +323,9 @@
         playbtn: require('@/assets/images/play.png'),
         newTag: require('@/assets/images/new.png'),
         jinImg: require('@/assets/images/jin.png'),
-        isShow: false
+        isShow: false,
+        checked: false,
+        numberArr: []
       };
     },
     methods: {
@@ -282,14 +356,23 @@
             break
         }
       },
+      handleCheck (item, index) {
+        console.log(index)
+        this.checked = true
+        for (var i=0; i<this.data.length; i++){
+        if(i === index){
+          // this.nextmsg = true
+          this.$set(this.data[i], 'checkmsg', true)
+        }
+      }
+      },
       getMore(item) {
         this.$router.push(item);
       },
       toggleShow: function() {
-      this.isShow = !this.isShow
-    }
+        this.isShow = !this.isShow
+      }
     },
-
     mounted() {
 
     }

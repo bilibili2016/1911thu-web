@@ -73,7 +73,7 @@
       },
       checkCourse(){
         if(this.token){
-          this.goLink("/course/pages/category");
+          this.goLink("/course/pages/categoryd");
         }else{
           this.notLogin=true;
         }
