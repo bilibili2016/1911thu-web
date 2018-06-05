@@ -61,7 +61,7 @@
       margin-left: 40px;
       margin-top: 20px;
       &.islogined{
-        margin-left: 126px;
+        margin-left: 106px;
         height: 40px;
         margin-top: 20px;
       }
@@ -77,6 +77,31 @@
           border-right: 2px solid #ccc;
         }
       }
+      .shoppingCart{
+        display: inline-block;
+        padding: 0;
+        width: auto;
+        margin-right: 14px;
+        position: relative;
+        cursor: pointer;
+        img{
+          width: 20px;
+          height: 20px;
+        }
+        i{
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          width: 12px;
+          height: 12px;
+          line-height: 12px;
+          text-align: center;
+          border-radius: 50%;
+          background-color: #ff5f5f;
+          color: #fff;
+          font-size: 12px;
+        }
+      }
       span:hover {
         color: #8F4ACB;
       }
@@ -84,7 +109,7 @@
         height: 40px;
         display: inline-block;
         position: relative;
-        padding: 0 31px;
+        padding: 0 25px;
         cursor: pointer;
         &:hover .downApp {
           opacity: 1;   

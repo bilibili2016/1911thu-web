@@ -29,6 +29,9 @@
             </div>
           </div>
         </div>
+        <div class="shoppingCart" v-if="this.token === '123' ? true : false"  >
+          <img src="@/assets/images/shoppingCart.png" alt="" @click="goLinks"><i>2</i>
+        </div>
       </div>
       <div class="lrBtn" v-if="this.token === '123' ? false : true">
         <span class="login" @click="login">登录</span>
@@ -238,6 +241,9 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       goMycourse () {
         this.$router.push('/profile')
 
+      },
+      goLinks () {
+         this.$router.push('/shop/shoppingCart');
       },
       goLink(item) {
         this.$router.push(item);

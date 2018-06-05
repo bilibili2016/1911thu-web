@@ -180,6 +180,7 @@
       },
       showCommit(){
         this.showInfo=true;
+        this.$router.push('/shop/checkedCourse');
       },
       close(){
         this.showInfo=false;
