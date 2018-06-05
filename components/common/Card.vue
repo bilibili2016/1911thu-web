@@ -52,7 +52,8 @@
                     <img :src="numSrc" alt="">
                     <span>{{card.pnum}}</span>
 
-                    <el-rate v-model="card.rate" class="itemBox-rate" v-if="config.card === !'already'"></el-rate>
+                    <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === !'already'"></el-rate>
+
                   </span>
                 </p>
               </div>
