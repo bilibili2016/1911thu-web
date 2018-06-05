@@ -86,6 +86,8 @@
 
 
 <script>
+import { other, auth } from '~/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -130,15 +132,24 @@
         evaluate: {
           eltnum: 5,
           btnList: ["内容精彩", "内容生涩", "音质不好", "讲解详细", "很有帮助", "点赞老师"]
+        },
+        hsgForm: {
+          hsgs: true
         }
       }
     },
-    mounted: function() {
+    mounted () {
       this.resize();
       // window.addEventListener("onload",this.resize);
       window.addEventListener("resize", this.resize);
+      // this.setHsg(this.hsgForm)
+      document.getElementsByClassName("headerBox")[0].style.display="none"
+      document.getElementsByClassName("footerBox")[0].style.display="none"
     },
     methods: {
+      ...mapActions('auth', [
+        'setHsg',
+      ]),
       selTypeChange (index){
         this.radioBtn = index
       },

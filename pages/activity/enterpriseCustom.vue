@@ -79,7 +79,11 @@
                     }
                 ]
             }
-        }
+        },
+        mounted () {
+      document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("footerBox")[0].style.display="inline"
+    }
     }
 </script>
 

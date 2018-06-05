@@ -45,7 +45,7 @@
         <div class="attention">
           <h4>关注我们</h4>
           <div class="code">
-            <img src="../../../assets/images/attentionWechat.png" alt="">
+            <img src="@/assets/images/attentionWechat.png" alt="">
             <h5>扫描二维码或关注“1911学堂”微信公众号</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
@@ -328,7 +328,10 @@
           .catch(_ => {});
       }
     },
-
+    mounted () {
+      document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("footerBox")[0].style.display="inline"
+    }
   }
 </script>
 

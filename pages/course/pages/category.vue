@@ -31,7 +31,8 @@
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
         <div class="pages"><el-pagination layout=" pager, prev, next" :total="1"></el-pagination></div>
-        <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch">
+        <!-- <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch"> -->
+        <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch">
         </el-switch>
       </div>
       <div class="carlist">
@@ -286,7 +287,8 @@
       handleClick(tab, event) {}
     },
     mounted () {
-
+      document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("footerBox")[0].style.display="inline"
       this.bgmsg = Number(this.cid) + Number(1)
       this.bgmsgs = Number(this.pid) + Number(1)
     }
