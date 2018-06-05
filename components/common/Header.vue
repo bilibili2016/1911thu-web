@@ -64,7 +64,7 @@
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
-                <div>忘记密码?</div>
+                <div @click="goSearchd('/home/pages/forgotPassword')">忘记密码?</div>
                 <el-button @click="signIns">登录</el-button>
               </el-row>
             </el-form>
@@ -92,7 +92,7 @@
                 <el-button>登录</el-button>
               </el-row>
             </el-form>
-            <div class="otherLogin">其它方式登录</div>
+            <div class="otherLogin" @click="scanCode">其它方式登录</div>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -272,8 +272,8 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         }
       },
       close() {
-        // this.start = false;
         this.move()
+        this.start = false;
         this.lrFrame = false;
         this.bgMsg = false;
         // document.body.style.overflow = 'auto';
