@@ -5,7 +5,7 @@
         <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
       </div>
       <div class="playInner" ref="playInner">
-        <video src="@/assets/images/piano.mp4" controls="controls"></video>
+        <video src="@/assets/images/piano.mp4" preload="auto" controls="controls"></video>
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
@@ -26,7 +26,7 @@
         </span>
       </div>
     </div>
-    <div class="mediaR fr" ref="mediaR" :style="{ width: mediaRW+'px' }">
+    <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'px' }">
       <div v-show="mediaRInner" class="inner">
         <h5 class="title">{{player.courseName}}</h5>
         <div class="teacher clearfix">
@@ -91,7 +91,7 @@
       return {
         showReportBug: false,
         showEvaluate: false,
-        mediaRW: 340,
+        mediaRW: 325,
         mediaRInner: true,
         mediaRIcon: "el-icon-arrow-right",
         radioBtn:"",
@@ -156,10 +156,9 @@
         this.word="";
       },
       resize() {
-        console.log(123);
         const w = window.screen.width;
         const h = window.screen.availHeight;
-        this.$refs.mediaL.style.width=w - this.mediaRW+"px";
+        this.$refs.mediaL.style.width=w - this.mediaRW-15+"px";
         this.$refs.mediaL.style.height= h+"px";
         this.$refs.mediaR.style.height= h+"px";
         this.$refs.playInner.style.height=h-100+"px";
