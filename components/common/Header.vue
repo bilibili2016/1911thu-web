@@ -17,7 +17,7 @@
       </div>
       <div :class="{ HREntry : true , islogined : this.token === '123' ? true : false }">
         <span class="hrin">Hr入口</span>
-        <span v-if="islogin">我的课程</span>
+        <span v-if="this.token === '123' ? true : false" @click="goLink('second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -235,6 +235,10 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       'signIn',
       'setGid'
       ]),
+      goMycourse () {
+        this.$router.push('/profile')
+
+      },
       goLink(item) {
         this.$router.push(item);
       },
