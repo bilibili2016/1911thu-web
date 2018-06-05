@@ -287,7 +287,8 @@
       handleClick(tab, event) {}
     },
     mounted () {
-
+      document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("footerBox")[0].style.display="inline"
       this.bgmsg = Number(this.cid) + Number(1)
       this.bgmsgs = Number(this.pid) + Number(1)
     }

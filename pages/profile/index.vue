@@ -214,6 +214,8 @@ import { mapState, mapActions, mapGetters } from 'vuex'
     mounted () {
       this.activeName = this.gid
       console.log(this.gid)
+       document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("footerBox")[0].style.display="inline"
     }
   };
 </script>

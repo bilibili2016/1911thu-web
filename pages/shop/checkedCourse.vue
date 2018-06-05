@@ -54,6 +54,10 @@
         allPrice: "69.00",
         status: "等待审核",
       }
+    },
+     mounted () {
+      document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("footerBox")[0].style.display="inline"
     }
   }
 </script>
