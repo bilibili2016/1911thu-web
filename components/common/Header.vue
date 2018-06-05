@@ -37,11 +37,11 @@
       <div class="headImg" v-else>
         <img :src="user.userImg" alt="">
         <ul class="subPages">
-          <li class="cli">我的首页</li>
-          <li @click="goLink('profile')">我的课程</li>
-          <li>我的消息</li>
-          <li>个人设置</li>
-          <li>绑定课程</li>
+          <li class="cli" @click="goLink('first')">我的首页</li>
+          <li @click="goLink('second')">我的课程</li>
+          <li @click="goLink('third')">我的消息</li>
+          <li @click="goLink('fourth')">个人设置</li>
+          <li @click="goLink('fifth')">绑定课程</li>
           <li @click="signOut">退出</li>
         </ul>
       </div>
@@ -220,7 +220,9 @@ import { mapState, mapActions, mapGetters } from 'vuex'
             trigger: 'blur'
           }]
         },
-
+        gidForm: {
+          gids: null
+        }
       }
     },
     computed: {
@@ -231,8 +233,9 @@ import { mapState, mapActions, mapGetters } from 'vuex'
     methods: {
       ...mapActions('auth', [
       'signIn',
-    ]),
-    goLink(item) {
+      'setGid'
+      ]),
+      goLink(item) {
         this.$router.push(item);
       },
       login() {
@@ -333,7 +336,23 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       },
       backHome () {
         this.$router.push('/')
+      },
+      goLink (item) {
+        this.gidForm.gids = item
+        this.setGid(this.gidForm)
+        this.$router.push('/profile')
+        // switch (window.location.pathname) {
+        //   case '/':
+        //     this.$router.push('/profile');
+        //     break
+        //   default:
+
+        //     break
+        // }
       }
+    },
+    mounted () {
+
     }
 
   }
