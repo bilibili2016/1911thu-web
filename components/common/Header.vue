@@ -15,7 +15,7 @@
 </el-input> -->
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
-      <div :class="{HREntry:true,islogined:islogin}">
+      <div :class="{ HREntry : true , islogined : this.token === '123' ? true : false }">
         <span class="hrin">Hr入口</span>
         <span v-if="islogin">我的课程</span>
         <div class="downLoad">
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-      <div class="lrBtn" v-if="!islogin">
+      <div class="lrBtn" v-if="this.token === '123' ? false : true">
         <span class="login" @click="login">登录</span>
         <span class="register" @click="register">注册</span>
       </div>
@@ -38,17 +38,19 @@
         <img :src="user.userImg" alt="">
         <ul class="subPages">
           <li class="cli">我的首页</li>
-          <li>我的课程</li>
+          <li @click="goLink('profile')">我的课程</li>
           <li>我的消息</li>
           <li>个人设置</li>
           <li>绑定课程</li>
+          <li @click="signOut">退出</li>
         </ul>
       </div>
     </div>
 
     <!-- 登录注册 -->
     <div class="start" v-if="start" @touchmove.prevent>
-      <div class="bgt" @click="close"></div>
+      <div class="bgt"  v-if="bgMsg"></div>
+      <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="登录" name="login">
@@ -63,7 +65,7 @@
               </el-form-item>
               <el-row>
                 <div>忘记密码?</div>
-                <el-button>登录</el-button>
+                <el-button @click="signIns">登录</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="scanCode">其它方式登录</div>
@@ -136,6 +138,8 @@
 
 <script>
 import { getQueryString } from '@/lib/util/helper'
+import { other, auth } from '~/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from 'vuex'
   export default {
     data() {
       var checkTel = (rule, value, callback) => {
@@ -164,6 +168,10 @@ import { getQueryString } from '@/lib/util/helper'
         islogin:false,
         activeName: 'second',
         search: '',
+        tokenForm: {
+          tokens: '123'
+        },
+        bgMsg: false,
         user:{
           userImg:require("~/assets/images/headImg.png"),
         },
@@ -215,16 +223,34 @@ import { getQueryString } from '@/lib/util/helper'
 
       }
     },
+    computed: {
+    ...mapState('auth', [
+      'token'
+    ])
+  },
     methods: {
+      ...mapActions('auth', [
+      'signIn',
+    ]),
+    goLink(item) {
+        this.$router.push(item);
+      },
       login() {
         this.start = !this.start;
         this.lrFrame = this.start;
         this.activeName = 'login';
-        if (this.start === true) {
-          this.stop()
-        } else {
-          this.move()
-        }
+        this.stop()
+        this.bgMsg = true
+        this.tokenForm.tokens = '123'
+      },
+      signIns () {
+        this.signIn(this.tokenForm)
+        this.start = false
+        this.move()
+      },
+      signOut () {
+        this.tokenForm.tokens = ''
+        this.signIn(this.tokenForm)
       },
       changePwd() {
         if (this.showPwd) {
@@ -246,9 +272,11 @@ import { getQueryString } from '@/lib/util/helper'
         }
       },
       close() {
-        this.start = false;
+        // this.start = false;
+        this.move()
         this.lrFrame = false;
-        document.body.style.overflow = 'auto';
+        this.bgMsg = false;
+        // document.body.style.overflow = 'auto';
       },
       closeWechat(){
         this.start = false;
@@ -310,3 +338,8 @@ import { getQueryString } from '@/lib/util/helper'
 
   }
 </script>
+<style lang="scss" scoped>
+.cli{
+  cursor: pointer;
+}
+</style>

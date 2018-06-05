@@ -14,10 +14,23 @@
     </template>
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
-      <div class="card-category">
+      <div class="card-category profile">
+
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="goLink('course/pages/coursedetail')">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBox">
-            <img :src="card.bg" alt="">
+
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
+            <div  class="new-style" v-if="config.new === 'true'">
+              <img :src="newTag" alt="">
+            </div>
+            <div class="mask-style">
+              <img :src="jinImg" alt="" class="jin-style">
+
+            </div>
+            <div  class="bgImgs">
+              <img :src="card.bg" alt=""
+             >
+            </div>
+
             <div class="tag">
               <span>新闻宣传</span>
               <span>时政</span>
@@ -136,6 +149,7 @@
           <div>
             <span class="fl coursenum"><span>52课时</span><img src="../../assets/images/ren.png" alt=""> 1021</span>
             <span class="rate"><el-rate v-model="one"></el-rate></span>
+            <span class="coins">￥ 108.00</span>
           </div>
         </div>
         <div class="study clearfix">
@@ -233,7 +247,10 @@
         avator: require("@/assets/images/home_avator.png"),
         one: 1,
         readyImg: require("@/assets/images/ready.png"),
-        playbtn: require('@/assets/images/play.png')
+        playbtn: require('@/assets/images/play.png'),
+        newTag: require('@/assets/images/new.png'),
+        jinImg: require('@/assets/images/jin.png'),
+        isShow: false
       };
     },
     methods: {
@@ -263,13 +280,53 @@
       },
       getMore(item) {
         this.$router.push(item);
-      }
+      },
+      toggleShow: function() {
+      this.isShow = !this.isShow
+    }
     },
     mounted() {}
   };
 </script>
 
 <style scoped lang="scss">
+.new-style{
+  img{
+    width: 48px!important;
+    height: 28px!important;
+    // margin-top: -20px;
+    position: absolute;
+    top: -13px;
+    left: -10px;
+    z-index: 1000;
+  }
+}
+.mask-style{
+  width: 260px;
+  height: 160px;
+  background-color: #6417A6;
+  opacity: 0.5;
+  position: absolute;
+  border-top-left-radius:16px;
+  border-top-right-radius:16px;
+  display: none;
+   transition: all 300ms;
+}
+.mask{
+  display: none;
+  transition: all 3000ms;
+}
+.jin-style{
+  width: 38px!important;
+  height: 38px!important;
+  position: absolute;
+  top: 60px;
+  left: 110px;
+  z-index: 1000;
+  display: none;
+   transition: all 300ms;
+
+}
   // banner定制
   .customization {
     width: 1100px;
@@ -338,7 +395,16 @@
       &:hover {
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         transition: all 300ms;
+        .jin-style{
+    display: block;
+     transition: all 300ms;
+  }
+  .mask-style {
+    display: block;
+     transition: all 300ms;
+  }
       }
+
       .itemBox {
         cursor: pointer;
         width: 260px;
@@ -352,6 +418,9 @@
         img {
           width: 260px;
           height: 160px;
+          // border-radius: 16px;
+          border-top-left-radius:16px;
+           border-top-right-radius:16px;
           // position: relative;
         }
         .tag {
@@ -517,6 +586,11 @@
       border-radius: 6px;
       box-shadow: 4px 0px 18px rgba(73, 28, 156, 0.36);
       margin-bottom: 30px;
+      cursor: pointer;
+       &:hover {
+        box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+        transition: all 300ms;
+       }
       .info-box {
         height: 126px;
         .info-wrap {
@@ -541,6 +615,9 @@
             margin-top: 28px;
             margin-left: 15px;
           }
+          span:hover {
+            color: #8f4acb;
+          }
         }
       }
     }
@@ -562,6 +639,10 @@
     flex-wrap: wrap;
     float: left;
     .card-list {
+       &:hover {
+        box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+        transition: all 300ms;
+        }
       .itemBox {
         cursor: pointer;
         width: 472px;
@@ -740,11 +821,16 @@
             height: 54px;
             line-height: 54px;
             margin-bottom: 8px;
+            cursor: pointer;
+          }
+          h4:hover {
+            color: #8f4acb
           }
           p {
             font-size: 14px;
             line-height: 30px;
             color: #222;
+            cursor: pointer;
           }
         }
         .comment {
@@ -833,6 +919,7 @@
           font-family: MicrosoftYaHei;
           color: rgba(34, 34, 34, 1);
           line-height: 0px;
+           cursor: pointer;
           h4 {
             font-size: 16px;
             color: #222;
@@ -840,13 +927,25 @@
             line-height: 54px;
             margin-bottom: 30px;
           }
+          h4:hover {
+            color: #8F4ACB;
+            cursor: pointer;
+          }
           .coursenum {
             width: auto;
             padding-top: 12px;
+             cursor: pointer;
             span {
               display: inline-block;
               margin-right: 15px;
             }
+          }
+          .coins{
+            float: right;
+            color: #FF5F5F;
+            padding-top: 17px;
+            font-size: 16px;
+            padding-right: 20px;
           }
           .rate {
             padding-top: 10px;

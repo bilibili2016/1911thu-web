@@ -117,18 +117,19 @@ body {
       border-bottom: 1px solid #E8D6F7;
       padding: 0 30px;
       span {
-        height: 56px;
-        line-height: 56px;
-        font-size: 16px;
-        color: #222;
-        font-weight: 700;
+            height: 50px;
+            line-height: 50px;
+            font-size: 16px;
+            color: #222;
+            font-weight: 700;
+
       }
       .el-button.is-round {
         width: 140px;
-        height: 36px;
+        height: 50px;
         padding: 0;
         line-height: 36px;
-        margin-top: 10px;
+        margin-top: 3px;
         color: #6417A6;
         border: 1px solid #6417A6;
         font-weight: 400;

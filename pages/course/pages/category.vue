@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <div class="center">
+      <div class="center category-style">
         <div class="college">
           <ul>
             <li class="title">
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="center">
+    <div class="center category-style">
       <div class="header">
         <el-tabs v-model="activeName" @tab-click="handleClick" class="tabStyle">
           <el-tab-pane label="最新" name="first"></el-tab-pane>

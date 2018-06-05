@@ -199,7 +199,6 @@
       handleSelectChange(item,index) {
         this.$set(this.courseList[index], 'checkMsg', true)
         this.arraySum =this.arraySum + Number(this.courseList[index].price)
-        console.log(this.arraySum.toFixed(2))
       },
       changeNumber (){
         if(typeof this.number !== "number" || this.number<1){
