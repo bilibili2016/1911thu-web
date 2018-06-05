@@ -29,6 +29,9 @@
             </div>
           </div>
         </div>
+        <div class="shoppingCart" v-if="this.token === '123' ? true : false"  @click="goLink('/news/detail')">
+          <img src="@/assets/images/shoppingCart.png" alt=""><i>2</i>
+        </div>
       </div>
       <div class="lrBtn" v-if="this.token === '123' ? false : true">
         <span class="login" @click="login">登录</span>
