@@ -72,7 +72,7 @@
 
             <span class="rate">课程评分:</span>
             <span class ="ratem">
-              <el-rate v-model="rateModel"></el-rate>
+              <el-rate disabled v-model="rateModel"></el-rate>
             </span>
             <div class="bthgrop">
               <el-button plain>内容精彩</el-button>
