@@ -165,7 +165,7 @@
           chapterName: " 章节1    :   S01 【本节免费】购前必读",
           barList: [{
               number: "1-1",
-              barName: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT，不加班？",
+              barName: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT？",
               duration: "32分钟",
               percentage: 30,
               isFree: true,

@@ -235,6 +235,7 @@
     div {
       // display: inline-block;
       float: right;
+      cursor: pointer;
       margin-bottom: 30px;
       color: #6417A6;
     }
@@ -519,6 +520,7 @@
   }
   .el-button--primary.is-plain:hover,
   .el-button--primary.is-plain:focus {
+    transition: all 300ms;
     background: #8F4ACB;
     border-color: #8F4ACB;
     color: #fff;
@@ -534,9 +536,6 @@
     padding: 12px;
     font-size: 16px;
     line-height: 60px;
-  }
-  .el-tabs--left .el-tabs__header.is-left {
-    // width: 165px;
   }
   .el-card__header {
     border-bottom: 1px solid rgba(232, 214, 247, 1);
@@ -857,18 +856,18 @@
 
   color: #8F4ACB!important;
 }
-.center-tab {
-  .el-tabs__item{
-    // width: 165px!important;
-  }
-  .el-tabs__item.is-active{
-    // background-color: #8F4ACB!important;
-    // border-bottom:none!important;
-  }
-  .el-tabs__header .el-tabs__item:last-child{
-    // margin-left: 0px!important;
-  }
-}
+// .center-tab {
+//   .el-tabs__item{
+//     width: 165px!important;
+//   }
+//   .el-tabs__item.is-active{
+//     background-color: #8F4ACB!important;
+//     border-bottom:none!important;
+//   }
+//   .el-tabs__header .el-tabs__item:last-child{
+//     margin-left: 0px!important;
+//   }
+// }
 
  .my-course {
    .center-tab .el-card__body {
