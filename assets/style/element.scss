@@ -550,6 +550,9 @@
   .el-tabs__nav-wrap::after {
     background: #fff;
   }
+  .el-tabs--left .el-tabs__nav-wrap.is-left::after{
+    width: 0;
+  }
   .el-card.is-always-shadow {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1) !important;
   }
