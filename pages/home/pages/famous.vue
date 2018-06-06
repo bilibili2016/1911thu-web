@@ -3,7 +3,7 @@
       <v-title :data = "titleThree"></v-title>
       <div class="blueBar"></div>
       <div class="cardList">
-        <div class="card" v-for="(teacher,index) in teachers" :key="index">
+        <div class="card" v-for="(teacher,index) in teachers" :key="index" @click="goLink('/home/pages/teacher')">
           <img :src="teacher.src" class="image">
           <div class="diaphaneity">
             <div class="octImg"></div>
@@ -24,6 +24,11 @@ export default {
   props: ["teachers", "titleThree"],
   components: {
     "v-title": CustomTitle
+  },
+  methods:{
+    goLink(item){
+      this.$router.push(item);
+    }
   }
 };
 </script>

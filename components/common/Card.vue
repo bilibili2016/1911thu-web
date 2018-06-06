@@ -14,7 +14,7 @@
     </template>
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
-      <div class="card-category profile">
+      <div class="card-category">
 
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
@@ -310,13 +310,24 @@
 .mask-style{
   width: 260px;
   height: 160px;
-  background-color: #6417A6;
-  opacity: 0.5;
+  background-color: rgba(100,23,166,.5);
   position: absolute;
   border-top-left-radius:16px;
   border-top-right-radius:16px;
   opacity: 0;
   transition: all 300ms;
+}
+.bgImgs{
+  width: 260px;
+  height: 160px;
+  overflow: hidden;
+  border-top-left-radius:16px;
+  border-top-right-radius:16px;
+  img{
+    width: 260px;
+    height: 160px;
+    transition: all 300ms;
+  }
 }
 .mask{
   display: none;
@@ -406,8 +417,13 @@
           transition: all 300ms;
         }
         .mask-style {
-          opacity: 0.5;
-          transition: all 300ms;
+          opacity: 1;
+        }
+        .bgImgs img{
+          width: 264px;
+          height: 162.2px;
+          margin-top: -2px;
+          margin-left: -1.1px;
         }
       }
 

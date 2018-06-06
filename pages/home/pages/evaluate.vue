@@ -3,7 +3,7 @@
        <el-row class="home-evaluate center">
          <v-title :data = "titleFour"></v-title>
            <div class="evaluate-carousel">
-             <el-carousel height="400px" arrow="never">
+             <el-carousel height="400px" arrow="never" @change="changeItem()">
                 <el-carousel-item v-for="item in 4" :key="item" >
                   <div class="evaluate-center">
                     <div class="three">
@@ -30,6 +30,12 @@ export default {
   props: ["titleFour", "carouselSrc"],
   components: {
     "v-title": CustomTitle
+  },
+  methods:{
+    changeItem(){
+      // console.log(1);
+      
+    }
   }
 };
 </script>
