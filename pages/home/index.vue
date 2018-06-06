@@ -4,7 +4,9 @@
      <!-- 头部导航 -->
   <v-tab :items="items" :classify ="classify" :classtext = "classtext" :courses="courses" :tabmsg="tabmsg" :activeName="activeName"  :dingData="dingData" :config = "ding"></v-tab>
     <!-- 新上好课 -->
+    <div @click="getNewCourseList">123</div>
     <v-new :config="configZero" :newData="newData" :titleOne="titleOne" :linkone="linkone"></v-new>
+
     <!-- 经典好课 -->
     <v-classic :config="configZ" :classicData="classicData" :titleTwo="titleTwo" :linktwo="linktwo"></v-classic>
     <!-- 名师大咖秀 -->
@@ -31,6 +33,10 @@ import New from "@/pages/home/pages/new.vue";
 import Tab from "@/pages/home/pages/tab.vue";
 import BackToTop from "@/components/common/BackToTop.vue";
 import NotLogin from "@/components/common/NotLogin.vue";
+  import {
+    other,
+    home
+  } from "~/lib/v1_sdk/index";
 export default {
   components: {
     "v-partner": Partner,
@@ -398,13 +404,35 @@ export default {
           author: "王建林 清华大学电子工程系教授"
         }
       ],
-      notLogin:false
+      notLogin:false,
+      curruntForm: {
+        pages: null,
+        limits: null,
+        evaluateLimit: null
+      }
     };
   },
   mounted () {
-      document.getElementsByClassName("headerBox")[0].style.display="inline"
-      document.getElementsByClassName("footerBox")[0].style.display="inline"
+    document.getElementsByClassName("headerBox")[0].style.display="inline"
+    document.getElementsByClassName("footerBox")[0].style.display="inline"
+    // this.getNewCourseList()
+  },
+  methods: {
+    getNewCourseList() {
+       this.curruntForm.pages = 1;
+       this.curruntForm.limits = 4;
+       return new Promise((resolve, reject) => {
+           home.getNewCourseList(this.curruntForm).then(response => {
+            console.log(response, '这是response')
+            // this.$message({
+            //   type: response.status === '1' ? 'success' : 'error',
+            //   message: response.msg
+            // })
+
+          })
+        })
     }
+  }
 };
 </script>
 
