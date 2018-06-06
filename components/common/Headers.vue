@@ -46,8 +46,8 @@
     </div>
 
     <!-- 登录注册 -->
-    <div class="start" v-if="start">
-      <div class="bgt"></div>
+    <div class="start">
+      <div class="bgt" ></div>
       <!-- @click="close" -->
       <div class="lrFrame" >
         <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -285,7 +285,7 @@
       ...mapActions("auth", ["signIn", "setGid"]),
       // 登录显示card
       async loginCardShow () {
-        this.start = true;
+        this.start = !this.start;
         this.lrFrame = this.start;
         this.activeName = "login";
         this.stop();
@@ -300,10 +300,10 @@
             this.$message({
               type: response.status === '1' ? 'success' : 'error',
               message: response.msg
-            })
+                })
           })
         })
-        // console.log('获取验证码被点击')
+        console.log('获取验证码被点击')
       },
       // 注册 请求
       signUp(formName) {
@@ -330,16 +330,16 @@
         this.$refs[formName].validate(valid => {
           if (valid) {
             console.log(this.loginData, '678')
-
-             return new Promise((resolve, reject) => {
-                this.signIn(this.loginData).then(response => {
-                  console.log(response, '这是response')
-                  this.$message({
-                        type: response.status === '1' ? 'success' : 'error',
-                        message: response.msg
-                      })
-                })
-              })
+            this.signIn(this.loginData)
+            //  return new Promise((resolve, reject) => {
+            //     auth.signIns(this.loginData).then(response => {
+            //       console.log(response, '这是response')
+            //       this.$message({
+            //             type: response.status === '1' ? 'success' : 'error',
+            //             message: response.msg
+            //           })
+            //     })
+            //   })
           } else {
             console.log("error submit!!");
             return false;
