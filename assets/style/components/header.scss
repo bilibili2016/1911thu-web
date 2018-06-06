@@ -112,8 +112,8 @@
         padding: 0 25px;
         cursor: pointer;
         &:hover .downApp {
-          opacity: 1;   
-          z-index: 9;    
+          opacity: 1;
+          z-index: 9;
         }
         .phone {
           display: inline-block;
@@ -181,7 +181,7 @@
           }
         }
       }
-      
+
     }
     .lrBtn {
       span {
@@ -333,7 +333,9 @@
         cursor: pointer;
       }
       .el-checkbox {
-        margin-bottom: 30px;
+        // margin-bottom: 30px;
+        margin-right: 130px;
+        // margin-top: -5px;
       }
       .bindCompany {
         height: 39px;
@@ -422,7 +424,7 @@
           text-align: center;
           font-size: 14px;
           color: #555;
-          padding:19px 0 88px; 
+          padding:19px 0 88px;
         }
       }
     }

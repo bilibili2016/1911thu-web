@@ -6,13 +6,6 @@
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="gokey">
-<!-- <el-input v-model="search" placeholder="请输入内容">
-  <i
-    class="el-icon-edit el-input__icon"
-    slot="suffix"
-    @click="goSearch">
-  </i>
-</el-input> -->
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
       <div :class="{ HREntry : true , islogined : this.token === '123' ? true : false }">
@@ -29,7 +22,7 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-if="this.token === '123' ? true : false"  >
+        <div class="shoppingCart" v-if="this.token === '123' ? true : false">
           <img src="@/assets/images/shoppingCart.png" alt="" @click="goLinks"><i>2</i>
         </div>
       </div>
@@ -52,47 +45,52 @@
 
     <!-- 登录注册 -->
     <div class="start" v-if="start" @touchmove.prevent>
-      <div class="bgt"  v-if="bgMsg"></div>
+      <div class="bgt" v-if="bgMsg"></div>
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="登录" name="login">
-            <!-- 登录 -->
-            <el-form :model="loginData" status-icon :rules="rules2" ref="loginData" class="demo-ruleForm">
-              <el-form-item prop="tel">
-                <el-input v-model.number="loginData.tel" placeholder="请输入登录手机号"></el-input>
+            <!-- 登录 表单-->
+            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm">
+              <el-form-item prop="phonenum">
+                <el-input v-model.number="loginData.phonenum" placeholder="请输入登录手机号"></el-input>
               </el-form-item>
-              <el-form-item prop="pass">
-                <el-input :type="loginData.pwdType" v-model="loginData.pass" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格"></el-input>
+              <el-form-item prop="password">
+                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格"></el-input>
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
-                <div @click="goSearchd('/home/pages/forgotPassword')">忘记密码?</div>
-                <el-button @click="signIns">登录</el-button>
+                 <!-- @click="goSearchd('/home/pages/forgotPassword')"  -->
+                <div @click="forget">忘记密码?</div>
+                <el-button @click.native="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="scanCode">其它方式登录</div>
           </el-tab-pane>
+          <!-- 注册表单 -->
           <el-tab-pane label="注册" name="register">
-            <!-- 注册 -->
             <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
               <el-form-item prop="phones">
-                <!-- 手机号 -->
                 <el-input v-model="registerData.phones" placeholder="请输入登录手机号"></el-input>
               </el-form-item>
-              <el-form-item prop="code">
-                <!-- 验证码 -->
-                <el-input class="captcha" v-model="registerData.code" placeholder="请输入验证码"></el-input>
+              <el-form-item prop="codes">
+                <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
                 <div class="getCode" @click="getCode">获取验证码</div>
               </el-form-item>
-              <el-form-item>
-                <!-- 手机号 -->
-                <el-input v-model="registerData.company" placeholder="绑定企业"></el-input>
+               <el-form-item prop="passwords">
+                <el-input v-model="registerData.passwords" placeholder="请输入密码"></el-input>
+              </el-form-item>
+              <el-form-item prop="companyCodes">
+                <el-input v-model="registerData.companyCodes" placeholder="绑定企业"></el-input>
                 <span class="bindCompany">(可选)</span>
               </el-form-item>
+              <el-form-item prop="checked">
+                <el-checkbox-group v-model="registerData.checked">
+                  <el-checkbox label="同意用户注册协议" name="checked"></el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
               <el-row>
-                <el-checkbox v-model="registerData.checked">同意用户注册协议</el-checkbox>
-                <el-button @click.native="signUp">注册</el-button>
+                <el-button @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="scanCode">其它方式登录</div>
@@ -102,7 +100,7 @@
 
       <!-- 微信登录 -->
       <div class="lrFrame wechatLogin" v-show="wechatLogin">
-        <el-form :model="bindTelData" status-icon :rules="rules2" ref="bindTelData" class="demo-ruleForm" v-show="bindTelShow">
+        <el-form :model="bindTelData" status-icon ref="bindTelData" class="demo-ruleForm" v-show="bindTelShow">
           <h4 class="clearfix"><span>绑定手机账号</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
           <el-form-item prop="tel">
             <!-- 手机号 -->
@@ -140,130 +138,187 @@
 </template>
 
 <script>
-import { getQueryString } from '@/lib/util/helper'
-import { other, auth } from '~/lib/v1_sdk/index'
-import { mapState, mapActions, mapGetters } from 'vuex'
-import { checkPhone, checkCode } from '~/lib/util/validatefn'
+  import {
+    getQueryString
+  } from "@/lib/util/helper";
+  import {
+    other,
+    auth
+  } from "~/lib/v1_sdk/index";
+  import {
+    mapState,
+    mapActions,
+    mapGetters
+  } from "vuex";
+  import {
+    checkPhone,
+    checkCode
+  } from "~/lib/util/validatefn";
   export default {
     data() {
       var checkTel = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('手机号不能为空'));
+          return callback(new Error("手机号不能为空"));
         }
         setTimeout(() => {
           if (!Number.isInteger(value)) {
-            callback(new Error('请输入正确手机号'));
+            callback(new Error("请输入正确手机号"));
           }
         }, 1000);
       };
       var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
+        if (value === "") {
+          callback(new Error("请输入密码"));
           return false;
-        } else if (value.length < 6 || value.length > 10){
-          callback(new Error('请输入6-10位密码'));
+        } else if (value.length < 6 || value.length > 10) {
+          callback(new Error("请输入6-10位密码"));
           return false;
         }
       };
       return {
-        smsCode: {
-          phones: '',
-          types: 1
-        },
-        searchImg: require('~/assets/images/search.png'),
+        searchImg: require("~/assets/images/search.png"),
         start: false,
-        lrFrame:false,
-        islogin:false,
-        activeName: 'second',
-        search: '',
+        lrFrame: false,
+        islogin: false,
+        activeName: "second",
+        search: "",
         tokenForm: {
-          tokens: '123'
+          tokens: "123"
         },
         bgMsg: false,
-        user:{
-          userImg:require("~/assets/images/headImg.png"),
+        user: {
+          userImg: require("~/assets/images/headImg.png")
         },
-        activeName: 'login',
-        loginData: {
-          pass: '',
-          tel: '',
-          showPwd: false,
-          pwdType: 'password'
-        },
-        registerData: {
-          phones: '',
-          types: 1
-        },
-        QRcode:require("~/assets/images/wechatLogin.png"),
-        wechatLogin:false,
-        bindTelShow:false,
-        scanCodeShow:false,
-        bindSuccessShow:false,
+        activeName: "login",
+
+        QRcode: require("~/assets/images/wechatLogin.png"),
+        wechatLogin: false,
+        bindTelShow: false,
+        scanCodeShow: false,
+        bindSuccessShow: false,
         bindTelData: {
-          tel: '',
-          code: '',
-          getCode: '获取验证码',
+          tel: "",
+          code: "",
+          getCode: "获取验证码",
           checked: false
         },
-        rules2: {
-          pass: [{
-            validator: validatePass,
-            trigger: 'blur'
-          }],
-          tel: [{
-              validator: checkTel,
-              trigger: 'blur'
+        // 登录数据
+        loginData: {
+          password: "",
+          phonenumber: "",
+          showPwd: false,
+          pwdType: "password",
+          loginTypes: 1
+        },
+        // 注册数据
+        registerData: {
+          phones: '',
+          passwords: '',
+          types: 1,
+          codes: "",
+          checked: [],
+          companyCodes: ''
+        },
+        // 注册表单验证
+        registRules: {
+          phones: [{
+              required: true,
+              message: "请输入手机号",
+              trigger: "blur"
             },
             {
-              type: 'number',
-              message: '年龄必须为数字值',
-              trigger: 'blur'
+              validator: checkPhone,
+              trigger: "blur"
             }
           ],
-          code: [{
+          passwords: [
+            { required: true, message: '请输入账户密码', trigger: 'blur' },
+            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
+          ],
+          codes: [{
+              required: true,
+              message: "请输入验证码",
+              trigger: "blur"
+            },
+            {
+              validator: checkCode,
+              trigger: "blur"
+            }
+          ],
+          checked: [{
+            type: "array",
             required: true,
-            message: '验证码不能为空',
-            trigger: 'blur'
+            message: "请勾选同意用户协议",
+            trigger: "change"
           }]
         },
-        registRules: {
-          phones: [
-            { required: true, message: '请输入手机号', trigger: 'blur' },
-            { validator: checkPhone, trigger: 'blur' }
+        // 登录表单验证
+        loginRules: {
+          phonenum: [{
+              required: true,
+              message: "请输入手机号",
+              trigger: "blur"
+            },
+            {
+              validator: checkPhone,
+              trigger: "blur"
+            }
           ],
-          code: [
-            { required: true, message: '请输入验证码', trigger: 'blur' },
-            { validator: checkCode, trigger: 'blur' }
+          password: [
+            { required: true, message: '请输入账户密码', trigger: 'blur' },
+            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
           ]
         },
         gidForm: {
           gids: null
-        },
+        }
         // ipone code
-
-      }
+      };
     },
     computed: {
-    ...mapState('auth', [
-      'token'
-    ])
-  },
+      ...mapState("auth", ["token"])
+    },
     methods: {
-      ...mapActions('auth', [
-      'signIn',
-      'setGid'
-      ]),
-      signUp () {
-
+      ...mapActions("auth", ["signIn", "setGid"]),
+      // 获取验证码
+      getCode() {
+        auth.smsCode(this.registerData);
       },
-      getCode () {
-        auth.smsCode(this.registerData)
+      // 注册 请求
+      signUp(formName) {
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            console.log(this.registerData, '123')
+            auth.signUp(this.registerData)
+          } else {
+            console.log("error submit!!");
+            return false;
+          }
+        });
       },
-      goMycourse () {
-        this.$router.push('/profile')
+      // 登录 请求
+      signIns(formName) {
+        this.signIn(this.tokenForm);
+        this.start = false;
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            console.log(this.loginData, '678')
+            auth.signIns(this.loginData)
+          } else {
+            console.log("error submit!!");
+            return false;
+          }
+        })
+        this.move();
       },
-      goLinks () {
-         this.$router.push('/shop/shoppingCart');
+      // 忘记密码
+      forget () {
+      },
+      goMycourse() {
+        this.$router.push("/profile");
+      },
+      goLinks() {
+        this.$router.push("/shop/shoppingCart");
       },
       goLink(item) {
         this.$router.push(item);
@@ -271,58 +326,54 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
       login() {
         this.start = !this.start;
         this.lrFrame = this.start;
-        this.activeName = 'login';
-        this.stop()
-        this.bgMsg = true
-        this.tokenForm.tokens = '123'
+        this.activeName = "login";
+        this.stop();
+        this.bgMsg = true;
+        this.tokenForm.tokens = "123";
       },
-      signIns () {
-        this.signIn(this.tokenForm)
-        this.start = false
-        this.move()
-      },
-      signOut () {
-        this.tokenForm.tokens = ''
-        this.signIn(this.tokenForm)
+
+      signOut() {
+        this.tokenForm.tokens = "";
+        this.signIn(this.tokenForm);
       },
       changePwd() {
         if (this.showPwd) {
           this.showPwd = false;
-          this.loginData.pwdType = 'password';
+          this.loginData.pwdType = "password";
         } else {
           this.showPwd = true;
-          this.loginData.pwdType = 'text';
+          this.loginData.pwdType = "text";
         }
       },
       register() {
         this.start = true;
         this.lrFrame = true;
-        this.activeName = 'register';
+        this.activeName = "register";
         if (this.start === true) {
-          this.stop()
+          this.stop();
         } else {
-          this.move()
+          this.move();
         }
       },
       close() {
-        this.move()
+        this.move();
         this.start = false;
         this.lrFrame = false;
         this.bgMsg = false;
         // document.body.style.overflow = 'auto';
       },
-      closeWechat(){
+      closeWechat() {
         this.start = false;
         this.lrFrame = false;
         this.wechatLogin = false;
-        document.body.style.overflow = 'auto';
+        document.body.style.overflow = "auto";
       },
-      handleClick(tab, event) {
-      },
-      scanCode(){ //微信登录
+      handleClick(tab, event) {},
+      scanCode() {
+        //微信登录
         this.lrFrame = false;
-        this.wechatLogin=true;
-        this.scanCodeShow=true; //微信扫码
+        this.wechatLogin = true;
+        this.scanCodeShow = true; //微信扫码
         // this.bindTelShow=true; //绑定手机号
         // this.bindSuccessShow=true; // 登录成功
       },
@@ -330,7 +381,7 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
         var mo = function(e) {
           e.preventDefault();
         };
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
         document.addEventListener("touchmove", mo, false); //禁止页面滑动
       },
       /***取消滑动限制***/
@@ -338,39 +389,39 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
         var mo = function(e) {
           e.preventDefault();
         };
-        document.body.style.overflow = 'auto'; //出现滚动条
+        document.body.style.overflow = "auto"; //出现滚动条
         document.removeEventListener("touchmove", mo, false);
       },
       goSearch(item) {
         switch (window.location.pathname) {
-          case '/course/pages/search':
-            break
+          case "/course/pages/search":
+            break;
           default:
-            this.$router.push('/course/pages/search')
-            break
+            this.$router.push("/course/pages/search");
+            break;
         }
       },
-      gokey () {
-        if(event.keyCode==13){
+      gokey() {
+        if (event.keyCode == 13) {
           switch (window.location.pathname) {
-          case '/course/pages/search':
-            break
-          default:
-            this.$router.push('/course/pages/search')
-            break
+            case "/course/pages/search":
+              break;
+            default:
+              this.$router.push("/course/pages/search");
+              break;
+          }
         }
-        }
       },
-      goSearchd (item) {
-        this.$router.push(item)
+      goSearchd(item) {
+        this.$router.push(item);
       },
-      backHome () {
-        this.$router.push('/')
+      backHome() {
+        this.$router.push("/");
       },
-      goLink (item) {
-        this.gidForm.gids = item
-        this.setGid(this.gidForm)
-        this.$router.push('/profile')
+      goLink(item) {
+        this.gidForm.gids = item;
+        this.setGid(this.gidForm);
+        this.$router.push("/profile");
         // switch (window.location.pathname) {
         //   case '/':
         //     this.$router.push('/profile');
@@ -381,14 +432,12 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
         // }
       }
     },
-    mounted () {
-
-    }
-
-  }
+    mounted() {}
+  };
 </script>
+
 <style lang="scss" scoped>
-.cli{
-  cursor: pointer;
-}
+  .cli {
+    cursor: pointer;
+  }
 </style>
