@@ -2,15 +2,24 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-06 11:54:45
-  * @File Type:  登陆的store
+ * @Last Modified time: 2018-06-06 17:46:29
+ * @File Type:  登陆的store
  * @Describe:
  */
 
-import { isNull } from 'lodash'
-import { storeLog as log } from '~/lib/core/logger'
-import { store as persistStore } from '~/lib/core/store'
-import { auth, ServerError } from '~/lib/v1_sdk'
+import {
+  isNull
+} from 'lodash'
+import {
+  storeLog as log
+} from '~/lib/core/logger'
+import {
+  store as persistStore
+} from '~/lib/core/store'
+import {
+  auth,
+  ServerError
+} from '~/lib/v1_sdk'
 // import { message } from '~/lib/core/message'
 persistStore.defaults({
   user: null,
@@ -18,7 +27,9 @@ persistStore.defaults({
   cid: null,
   pid: null,
   gid: null,
-  hsg: null
+  hsg: null,
+  nid: null,
+  kid: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -26,8 +37,8 @@ let cid = persistStore.get('cid')
 let pid = persistStore.get('pid')
 let gid = persistStore.get('gid')
 let hsg = persistStore.get('hsg')
-
-
+let nid = persistStore.get('nid')
+let kid = persistStore.get('kid')
 export const MUTATION = {
   signIn: 'sign-in',
   signOut: 'sign-out',
@@ -36,7 +47,10 @@ export const MUTATION = {
   setCid: 'set-cid',
   setPid: 'set-pid',
   setGid: 'set-gid',
-  setHsg: 'set-hsg'
+  setHsg: 'set-hsg',
+  setNid: 'set-nid',
+  setKid: 'set-kid'
+
 
 }
 export const state = () => ({
@@ -45,31 +59,43 @@ export const state = () => ({
   cid,
   pid,
   gid,
-  hsg
+  hsg,
+  nid,
+  kid
 })
 export const getters = {
-  isAuthenticated (state) {
+  isAuthenticated(state) {
     return !isNull(state.token)
   }
 }
 export const mutations = {
-  [MUTATION.signIn] (state, { token }) {
+  [MUTATION.signIn](state, {
+    token
+  }) {
     state.token = token
   },
-  [MUTATION.signOut] (state) {
+  [MUTATION.signOut](state) {
     state.user = null
     state.token = null
   },
-  [MUTATION.refresh] (state, { token }) {
+  [MUTATION.refresh](state, {
+    token
+  }) {
     state.token = token
   },
-  [MUTATION.me] (state, { user }) {
+  [MUTATION.me](state, {
+    user
+  }) {
     state.user = user
   },
-  [MUTATION.setCid](state, { cid }) {
+  [MUTATION.setCid](state, {
+    cid
+  }) {
     state.cid = cid
   },
-  [MUTATION.setPid](state, { pid }) {
+  [MUTATION.setPid](state, {
+    pid
+  }) {
     state.pid = pid
   },
   [MUTATION.setGid](state, {
@@ -82,37 +108,34 @@ export const mutations = {
   }) {
     state.hsg = hsg
   },
+  [MUTATION.setNid](state, {
+    nid
+  }) {
+    state.nid = nid
+  },
+  [MUTATION.setKid](state, {
+    kid
+  }) {
+    state.kid = kid
+  }
 
 }
 export const actions = {
-  // async signIn ({ commit, state }, { tokens }) {
-  //   let user
-  //   try {
-  //     // let tokens = await auth.workerSignIn({ username, password })
-  //     // token = 'JWT ' + tokens.token
-  //     let token = tokens
-  //     console.log(token, '这是token')
-  //     persistStore.set('token', token)
-
-  //     // 更新 state
-  //     commit(MUTATION.signIn, { token })
-
-
-  //   } catch (e) {
-  //     if (e instanceof ServerError) {
-  //       log.error(e)
-  //     } else {
-  //       throw e
-  //     }
-  //   }
-  //   return user
-  // },
-  async signIn ({ commit, state }, { phonenum, password, loginTypes }) {
+  async signIn({
+    commit,
+    state
+  }, {
+    phonenum,
+    password,
+    loginTypes
+  }) {
     let user
     try {
       let tokens = await auth.signIns({
 
-        phonenum, password, loginTypes
+        phonenum,
+        password,
+        loginTypes
 
       })
       // if (!tokens.data.token) {
@@ -137,7 +160,12 @@ export const actions = {
     return user
   },
 
-  async signOut ({ commit, state }, { tokens }) {
+  async signOut({
+    commit,
+    state
+  }, {
+    tokens
+  }) {
     let user
     try {
       // let tokens = await auth.workerSignIn({ username, password })
@@ -145,7 +173,9 @@ export const actions = {
       let token = tokens
       persistStore.set('token', token)
       // 更新 state
-      commit(MUTATION.signIn, { token })
+      commit(MUTATION.signIn, {
+        token
+      })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -155,13 +185,25 @@ export const actions = {
     }
     return user
   },
-  async companySignIn ({ commit, state }, { email, password }) {
+  async companySignIn({
+    commit,
+    state
+  }, {
+    email,
+    password
+  }) {
     let user
     try {
-      let tokens = await auth.companySignIn({ email, password })
+      let tokens = await auth.companySignIn({
+        email,
+        password
+      })
       token = 'JWT ' + tokens.token
       persistStore.set('token', token)
-      commit(MUTATION.signIn, { token, user })
+      commit(MUTATION.signIn, {
+        token,
+        user
+      })
       return tokens
     } catch (e) {
       if (e instanceof ServerError) {
@@ -172,11 +214,18 @@ export const actions = {
     }
     return user
   },
-  async setCid ({ commit, state }, { cids }) {
+  async setCid({
+    commit,
+    state
+  }, {
+    cids
+  }) {
     try {
       let cid = cids
       persistStore.set('cid', cid)
-      commit(MUTATION.setCid, { cid })
+      commit(MUTATION.setCid, {
+        cid
+      })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -186,11 +235,18 @@ export const actions = {
     }
     return cid
   },
-  async setPid ({ commit, state }, { pids }) {
+  async setPid({
+    commit,
+    state
+  }, {
+    pids
+  }) {
     try {
       let pid = pids
       persistStore.set('pid', pid)
-      commit(MUTATION.setPid, { pid })
+      commit(MUTATION.setPid, {
+        pid
+      })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -200,11 +256,18 @@ export const actions = {
     }
     return pid
   },
-  async setGid ({ commit, state }, { gids }) {
+  async setGid({
+    commit,
+    state
+  }, {
+    gids
+  }) {
     try {
       let gid = gids
       persistStore.set('gid', gid)
-      commit(MUTATION.setGid, { gid })
+      commit(MUTATION.setGid, {
+        gid
+      })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -214,7 +277,12 @@ export const actions = {
     }
     return gid
   },
-  async setHsg ({ commit, state }, { hsgs }) {
+  async setHsg({
+    commit,
+    state
+  }, {
+    hsgs
+  }) {
     try {
       let hsg = hsgs
       persistStore.set('hsg', hsg)
@@ -230,5 +298,51 @@ export const actions = {
       }
     }
     return gid
+  },
+  async setNid({
+    commit,
+    state
+  }, {
+    nids
+  }) {
+    try {
+      let nid = nids
+      persistStore.set('nid', nid)
+      commit(MUTATION.setNid, {
+        nid
+      })
+
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return gid
+  },
+  async setKid({
+    commit,
+    state
+  }, {
+    kids
+  }) {
+    try {
+      console.log(kids, '这是kids')
+      let kid = kids
+      persistStore.set('kid', kid)
+      commit(MUTATION.setKid, {
+        kid
+      })
+
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return kid
   }
+
 }

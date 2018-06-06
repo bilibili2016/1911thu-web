@@ -13,6 +13,15 @@
         searchi: require('@/assets/images/searchi.png')
       }
     },
+    methods: {
+        // async smsCodes ({ phones, types }) {
+        //   let data = await this.http.post('Publics/PhoneSms/appSendSms?', {
+        //     phone: phones,
+        //     type: types
+        //   })
+        //   return data
+        // }
+    }
   }
 </script>
 

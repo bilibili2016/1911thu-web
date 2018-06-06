@@ -38,7 +38,17 @@
 
 <script>
 import CustomBanner from "@/components/common/Banner.vue";
+import { mapState, mapActions, mapGetters } from "vuex";
+ import {
+    other,
+    home
+  } from "~/lib/v1_sdk/index";
   export default {
+    computed: {
+      ...mapState('auth', [
+        'nid'
+      ])
+    },
      components: {
       'v-banner': CustomBanner
     },
@@ -52,11 +62,15 @@ import CustomBanner from "@/components/common/Banner.vue";
           banner_type: "news"
         },
         newsDetail:{
-          title:"新的中央经济工作会议精神解读——2018年经济工作思路和重点",
+          title:"1911广场旗下1911咖啡获香港文利国际餐饮300万天使轮投资",
           time:"2018-05-20",
           detail:"",
           prePiece:"清华大学成立 “青年教师骨干领航工作站”",
           nextPiece:"清华大学成立 “青年教师骨干领航工作站”",
+        },
+
+        nidForm: {
+          ids: null
         }
 
       }
@@ -64,11 +78,22 @@ import CustomBanner from "@/components/common/Banner.vue";
     methods :{
       getMore(item) {
         this.$router.push(item);
+      },
+      getNewInfoDetail () {
+        return new Promise((resolve, reject) => {
+          home.getNewInfoDetail(this.nidForm).then(response => {
+            console.log(response, '这是返回的')
+            // this.newsDetail = response.data.newDetail
+          })
+        })
       }
     },
     mounted () {
+      console.log(this.nid, '这是nid')
+      this.nidForm.ids = this.nid
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+      this.getNewInfoDetail()
     }
   }
 </script>

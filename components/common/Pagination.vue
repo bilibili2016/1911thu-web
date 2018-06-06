@@ -1,7 +1,7 @@
 <template>
   <div class="center">
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="8" :page-count="data.pagesize" :current-page="data.page" @current-change="handleCurrentChange" :total="data.total"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :page-size="2" :page-count="data.pagesize" :current-page="data.page" @current-change="handleCurrentChange" :total="data.total"></el-pagination>
     </div>
   </div>
 </template>
@@ -11,6 +11,7 @@
     props: ["data"],
     methods: {
       handleCurrentChange(val) {
+        console.log(val, '这是val')
         this.$emit("page", val);
       }
     }
