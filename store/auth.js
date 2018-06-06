@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-05 10:22:58
+ * @Last Modified time: 2018-06-06 11:54:45
   * @File Type:  登陆的store
  * @Describe:
  */
@@ -85,19 +85,48 @@ export const mutations = {
 
 }
 export const actions = {
-  async signIn ({ commit, state }, { tokens }) {
+  // async signIn ({ commit, state }, { tokens }) {
+  //   let user
+  //   try {
+  //     // let tokens = await auth.workerSignIn({ username, password })
+  //     // token = 'JWT ' + tokens.token
+  //     let token = tokens
+  //     console.log(token, '这是token')
+  //     persistStore.set('token', token)
+
+  //     // 更新 state
+  //     commit(MUTATION.signIn, { token })
+
+
+  //   } catch (e) {
+  //     if (e instanceof ServerError) {
+  //       log.error(e)
+  //     } else {
+  //       throw e
+  //     }
+  //   }
+  //   return user
+  // },
+  async signIn ({ commit, state }, { phonenum, password, loginTypes }) {
     let user
     try {
-      // let tokens = await auth.workerSignIn({ username, password })
-      // token = 'JWT ' + tokens.token
-      let token = tokens
-      console.log(token, '这是token')
-      persistStore.set('token', token)
+      let tokens = await auth.signIns({
 
-      // 更新 state
-      commit(MUTATION.signIn, { token })
+        phonenum, password, loginTypes
 
-
+      })
+      // if (!tokens.data.token) {
+      //   return tokens
+      // }
+      if (tokens.status === 0) {
+        token = tokens.data.token
+        persistStore.set('token', token)
+        // 更新 state
+        commit(MUTATION.signIn, {
+          token
+        })
+      }
+      return tokens
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -107,6 +136,7 @@ export const actions = {
     }
     return user
   },
+
   async signOut ({ commit, state }, { tokens }) {
     let user
     try {
