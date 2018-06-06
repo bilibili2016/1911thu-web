@@ -40,7 +40,6 @@
 <style scoped lang="scss">
   .news-banner {
     height: 360px;
-    margin-bottom: 80px;
     img {
       height: 100%;
     }
