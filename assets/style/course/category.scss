@@ -16,7 +16,15 @@
     .college {
       height: 78px;
       border-bottom: 1px rgba(232, 214, 247, 1) solid;
+      &>li{
+        display: inline-block;
+        height: 78px;
+        line-height: 78px;
+      }
       ul {
+        width: 1050px;
+        display: inline-block;
+        vertical-align: top;
         li {
           list-style: none;
           display: inline-block;
@@ -37,7 +45,15 @@
       }
     }
     .classification {
+      &>li{
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+      }
       ul {
+        width: 1050px;
+        display: inline-block;
+        vertical-align: top;
         li {
           list-style: none;
           display: inline-block;

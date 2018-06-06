@@ -32,6 +32,9 @@
   .el-carousel__indicators {
     bottom: 145px;
   }
+  .el-carousel__indicator.is-active button{
+    opacity: 0.9;
+  }
   .el-carousel__button {
     width: 10px;
     height: 10px;
@@ -912,11 +915,28 @@
      color: #8F4ACB;
    }
  }
-.lrFrame {
-   .el-checkbox-group {
 
-     margin-top: -20px;
-     height:31px;
-   }
-
+//  hr入口
+.bottomForm {
+  .el-form {
+    .el-form-item__label {
+      color: #fff;
+      text-align: left;
+    }
+    .el-form-item.is-required .el-form-item__label:before{
+      content: "";
+    }
+    .el-form-item__content {
+      width: 420px;
+      border-radius: 4px;
+      .el-input__inner {
+        overflow: hidden;
+        border-radius: 4px;
+      }
+      .el-autocomplete{
+        width: 100%;
+      }
+    }
+  }
 }
+

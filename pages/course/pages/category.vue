@@ -3,20 +3,16 @@
     <div class="banner">
       <div class="center category-style">
         <div class="college">
+          <li class="title">学院：</li>
           <ul>
-            <li class="title">
-              学院:
-            </li>
             <li v-for="(item,index) in data" :index="index" :key="index" :class="{bgs: bgmsg === index ? true : false }">
               <el-button @click="handleItemOne(item,index)">{{item.name}}</el-button>
             </li>
           </ul>
         </div>
         <div class="classification">
+          <li class="title">分类：</li>
           <ul>
-            <li class="title">
-              分类:
-            </li>
             <li v-for="(item,index) in data2" :index="index" :key="index" :class="{bgs: bgmsgs === index ? true : false }">
               <el-button @click="handleItemTwo(item,index)">{{item.name}}</el-button>
             </li>
