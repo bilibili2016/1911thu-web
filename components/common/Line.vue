@@ -17,7 +17,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  props: ["catalogs"],
+  props: ["catalogs", 'privileMsg'],
   methods: {
     goLink(item) {
       this.$router.push(item);
@@ -26,15 +26,15 @@ export default {
       this.$router.push('/shop/shoppingCart');
     },
     checked(index) {
-        $(".catalog .chapter .bar").removeClass("checked");
-        $(".catalog .chapter .bar").eq(index).addClass("checked");
-      },
-      handleCatalog(index, item) {
-        let curriculum_id = item.childList[index].curriculum_id
-        let catalog_id = item.childList[index].id
-        persistStore.set('curriculumId', curriculum_id)
-        persistStore.set('catalogId', curriculum_id)
-      }
+      $(".catalog .chapter .bar").removeClass("checked");
+      $(".catalog .chapter .bar").eq(index).addClass("checked");
+    },
+    handleCatalog(index, item) {
+      let curriculum_id = item.childList[index].curriculum_id
+      let catalog_id = item.childList[index].id
+      persistStore.set('curriculumId', curriculum_id)
+      persistStore.set('catalogId', catalog_id)
+    }
   }
 };
 </script>
