@@ -1,10 +1,10 @@
 <template>
     <div>
-        <!-- 登录注册 -->
+        <!-- 忘记密码 -->
         <div class="start forgot">
             <div class="lrFrame">
                 <div class="logo">
-                    <img src="../../../assets/images/1911xt.png" alt="">
+                    <img src="@/assets/images/1911xt.png" alt="">
                 </div>
                 <div class="pwd">
                     <span>忘记密码</span>
@@ -91,11 +91,11 @@
         methods:{
             changePwd() {
                 if (this.showPwd) {
-                this.showPwd = false;
-                this.pwdType = 'password';
+                    this.showPwd = false;
+                    this.pwdType = 'password';
                 } else {
-                this.showPwd = true;
-                this.pwdType = 'text';
+                    this.showPwd = true;
+                    this.pwdType = 'text';
                 }
             },
         }

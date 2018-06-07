@@ -686,6 +686,9 @@
 
 // profile页面修改tab
 .profile {
+  .el-card {
+    overflow: visible
+  }
   .el-tabs__item {
     margin: 0px 0px 0px 0px; // background-color: red;
     color: #696A70;

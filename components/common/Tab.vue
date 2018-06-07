@@ -2,23 +2,23 @@
   <div class="classify">
         <div class="starters">
             <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="showItem(index)" @mouseleave="leave">
-                <div class="tabs-title">{{item}}</div>
+                <div class="tabs-title">{{item.category_name}}</div>
                 <div class="tabs-content" v-show="index===itemID">
                     <div class="subClass">
                         <h4>全部<span><i></i></span></h4>
                         <p>
-                            <span  v-for="(items,index) in classtext" :key="items.id" @click="handlePid(item,index)">
-                                <span>{{items.name}}</span>
+                            <span  v-for="(child,index) in item._child" :key="child.id" @click="handlePid(child,index)">
+                                <span>{{child.category_name}}</span>
                             </span>
                         </p>
                     </div>
 
                     <div class="courseMsg">
-                        <div class="courseOne clearfix" v-for="(cus,index) in courses" :key="index" @click="getMore">
-                            <img class="fl" :src="cus.src" alt="">
+                        <div class="courseOne clearfix" v-for="(curriculum,index) in item.curriculumList" :key="index" @click="getMore">
+                            <img class="fl" :src="curriculum.picture" alt="">
                             <div class="fl hover">
-                                <h5>{{cus.title}}</h5>
-                                <p>{{cus.author}}</p>
+                                <h5>{{curriculum.title}}</h5>
+                                <p>{{curriculum.teacher_name}}</p>
                             </div>
                         </div>
                     </div>

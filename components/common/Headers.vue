@@ -8,7 +8,7 @@
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="gokey">
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
-      <div :class="{ HREntry : true , islogined : this.token === '123' ? true : false }">
+      <div :class="{ HREntry : true , islogined : this.islogin === '123' ? true : false }">
         <span class="hrin" @click="goLink('home/pages/hrEntry')">Hr入口</span>
         <span v-if="this.token === '123' ? true : false" @click="goLink('second')">我的课程</span>
         <div class="downLoad">

@@ -17,8 +17,8 @@
       </div>
       <div class="newsContent">
         <h3>{{newsDetail.title}}</h3>
-        <p class="time">{{newsDetail.time}}</p>
-        <div class="newsInner">
+        <p class="time">{{newsDetail.create_time}}</p>
+        <div class="newsInner" v-html="newsDetail.content">
           <p>胡钰代表清华大学新闻学院介绍了与南加大进行跨院系、跨领域国际化培养的思路以及合作推进的情况。他说，这是面向学校建设世界一流大学目标，顺应数据时代要求的培养方式创新，未来将有利于清华新闻学院进一步保持其在新闻教育国际化发展中的领先优势，更好地培养融合媒体时代的跨界复合型人才。</p>
           <p>在随后召开的“传媒创新创业教育与实践论坛”中，新闻学院副院长杭敏介绍了两校三院国际双学位合作的具体方案。文化创意发展研究院副院长张铮介绍了推进文化创意产业创新发展方面的理念与实践。新闻学院副教授曾繁旭分享了他在管理传媒创业硕士项目和讲授创业课程中的经验。</p>
           <p>获得2017年“福布斯30岁以下杰出创业者”、2009级新闻学院本科毕业生蔡珩是清华与南加大的校友，他从个人成长方面介绍了从学校到创业的经历与感悟。原美国新闻俱乐部主任、新闻学院全球财经新闻项目主任里克·邓纳姆（Rick Dunham）则介绍了他长期在清华从事国际化教学的经验。</p>
@@ -79,17 +79,18 @@ import { mapState, mapActions, mapGetters } from "vuex";
       getMore(item) {
         this.$router.push(item);
       },
+      // 获取资讯详情
       getNewInfoDetail () {
         return new Promise((resolve, reject) => {
           home.getNewInfoDetail(this.nidForm).then(response => {
-            console.log(response, '这是返回的')
-            // this.newsDetail = response.data.newDetail
+            console.log(response.data.newDetail, '这是返回的')
+            this.newsDetail = response.data.newDetail
           })
         })
-      }
+      },
     },
     mounted () {
-      console.log(this.nid, '这是nid')
+      // console.log(this.nid, '这是nid')
       this.nidForm.ids = this.nid
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"

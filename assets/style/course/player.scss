@@ -1,5 +1,6 @@
 .playerBox {
   width: 100%;
+  height: 100%;
   height: auto;
   color: #C0BACC;
   background-color: #050223;
@@ -7,6 +8,7 @@
   .mediaL {
     // width: 940px;
     width: 72%;
+    height: 100%;
     transition: all 300ms;
     overflow: hidden;
     .playTop,
@@ -106,11 +108,15 @@
     }
     .playInner {
       width: 100%;
-      height: 620px;
+      height: 100%;
       background-color: #000;
-      video{
+      #movd {
         width: 100%;
         height: 100%;
+        video {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }
