@@ -14,7 +14,7 @@
     </template>
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
-      <div class="card-category">
+      <div class="card-category profile">
 
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" >

@@ -7,7 +7,8 @@
     </transition>
     <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
-        <img :src="wxSrc" alt="" class="wxSrc">
+        <span></span>
+        <!-- <img :src="wxSrc" alt="" class="wxSrc"> -->
         <div class="showCode">
           <img src="@/assets/images/wechatLogin.png" alt="">
           <h4>1911学堂官方微信</h4>
@@ -17,7 +18,8 @@
     </transition>
     <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
-        <img :src="ceilSrc" alt="" class="ceilSrc">
+        <span></span>
+        <!-- <img :src="ceilSrc" alt="" class="ceilSrc"> -->
         <div class="telShow">
           <p>咨询电话：010-6270 1911</p>
         </div>
@@ -59,8 +61,8 @@
         visible: false,
         token:true,
         interval: null,
-        ceilSrc: require("@/assets/images/home_backtop01.png"),
-        wxSrc: require("@/assets/images/home_backtop02.png"),
+        ceilSrc: require("@/assets/images/home_backtop11.png"),
+        wxSrc: require("@/assets/images/home_backtop22.png"),
         topSrc: require("@/assets/images/home_backtop03.png")
       };
     },
@@ -132,10 +134,27 @@
       height: 50px;
       border-radius: 4px;
       line-height: 45px;
-      background: #d800ff;
-      &:hover .showCode{
-        opacity: 1;
-        right: 62px;
+      background-color: #FCD23F;
+      transition: all 300ms;
+      span{
+        width: 23px;
+        height: 19px;
+        margin-top: 15.5px;
+        transition: all 300ms;
+        background: url('~assets/images/home_backtop22.png') no-repeat;
+        background-size: 23px 19px;
+      }
+      &:hover {
+        background-color: #8F4ACB;
+        span{
+          background: url('~assets/images/home_backtop02.png') no-repeat;
+          background-size: 23px 19px;
+        }
+        
+        .showCode{
+          opacity: 1;
+          right: 62px;
+        }
       }
     }
     &.customStyleTwo{
@@ -145,10 +164,26 @@
       height: 50px;
       border-radius: 4px;
       line-height: 45px;
-      background: #d800ff;
-      &:hover .telShow{
-        opacity: 1;
-        right: 62px;
+      background-color: #FCD23F;
+      transition: all 300ms;
+      span{
+        width: 24px;
+        height: 24px;
+        margin-top: 13px;
+        transition: all 300ms;
+        background: url('~assets/images/home_backtop11.png') no-repeat;
+        background-size: 24px 24px;
+      }
+      &:hover {
+        background-color: #8F4ACB;
+        span{
+          background: url('~assets/images/home_backtop01.png') no-repeat;
+          background-size: 24px 24px;
+        }
+        .telShow{
+          opacity: 1;
+          right: 62px;
+        }
       }
     };
     &.customStyleThree{
@@ -162,10 +197,10 @@
       transition: all 500ms;
       z-index: 3;
       &:hover{
-        background-color: #6417a6;
+        background-color: #8F4ACB;
         .line-center{
           color:#FCD23F;
-          background: url('~assets/images/home_backtop05.png') no-repeat 16px 17px;
+          background: url('~assets/images/home_backtop44.png') no-repeat 16px 17px;
           background-size: 18px 18px;
         }
       }
