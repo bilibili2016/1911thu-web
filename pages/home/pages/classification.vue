@@ -1,9 +1,9 @@
 <template>
     <div class="classification">
         <div class="starters">
-            <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseover="showItem(index)">
+            <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="showItem(index)" @mouseleave="leave">
                 <div class="tabs-title">{{item}}</div>
-                <div class="tabs-content" v-show="tabsContent">
+                <div class="tabs-content" v-show="index===itemID">
                     <div class="subClass">
                         <h4>全部<span><i></i></span></h4>
                         <p>
@@ -12,8 +12,9 @@
                             </span>
                         </p>
                     </div>
+
                     <div class="courseMsg">
-                        <div class="courseOne clearfix" v-for="(cus,index) in courses" :key="index">
+                        <div class="courseOne clearfix" v-for="(cus,index) in courses" :key="index" @click="getMore">
                             <img class="fl" :src="cus.src" alt="">
                             <div class="fl hover">
                                 <h5>{{cus.title}}</h5>
@@ -33,6 +34,7 @@
         data(){
             return{
                 tabsContent:false,
+                itemID:null,
                 classify: [
                     "干部通用",
                     "党政系统学院",
@@ -117,8 +119,11 @@
         },
         methods:{
             showItem(index){
-                
+                this.itemID = index;
             },
+            leave(){
+                this.itemID = null;
+            }
             
         }
     }
