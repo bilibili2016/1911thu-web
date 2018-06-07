@@ -1,6 +1,6 @@
 <template>
   <div class="catalog">
-    <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
+    <div class="chapter" v-for="(catalog,index) in catalogs" :key="index" @click="handleCatalog(index,catalog)">
       <h4>{{catalog.title}}</h4>
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="checked(index)">
         <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ["catalogs"],
   methods: {
@@ -27,6 +28,12 @@ export default {
     checked(index) {
         $(".catalog .chapter .bar").removeClass("checked");
         $(".catalog .chapter .bar").eq(index).addClass("checked");
+      },
+      handleCatalog(index, item) {
+        let curriculum_id = item.childList[index].curriculum_id
+        let catalog_id = item.childList[index].id
+        persistStore.set('curriculumId', curriculum_id)
+        persistStore.set('catalogId', curriculum_id)
       }
   }
 };
