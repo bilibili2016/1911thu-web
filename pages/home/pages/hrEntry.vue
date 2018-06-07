@@ -66,12 +66,12 @@
                     <el-form-item label="验证码：" prop="code">
                         <el-input v-model="company.code"></el-input>
                         <span class="code">获取验证码</span>
-                    </el-form-item>  
+                    </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
                     </el-form-item>
-                </el-form> 
-            </div>        
+                </el-form>
+            </div>
         </div>
 
     </div>
@@ -163,7 +163,7 @@
                 });
             },
             handleSelect(item) {
-                console.log(item);
+                // console.log(item);
             },
             querySearch(queryString, cb) {
                 var restaurants = this.restaurants;
