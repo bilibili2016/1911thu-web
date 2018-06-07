@@ -265,7 +265,7 @@
   <div class="info-list">
     <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index>0">
       <el-card shadow="never" body-style="padding: 0;">
-        <div class="info-box" @click="getMore('news/detail')">
+        <div class="info-box" @click="selectDetail(index,card,linksix)">
           <div class="info-wrap">
             <img :src="card.picture" alt="">
             <span>{{card.title}}</span>

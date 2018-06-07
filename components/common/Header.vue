@@ -8,9 +8,9 @@
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="gokey">
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
-      <div :class="{ HREntry : true , islogined : this.token === '123' ? true : false }">
+      <div :class="{ HREntry : true , islogined : isAuthenticated }">
         <span class="hrin" @click="goSearchd('home/pages/hrEntry')">Hr入口</span>
-        <span v-if="this.token === '123' ? true : false" @click="goLink('second')">我的课程</span>
+        <span v-show="isAuthenticated" @click="goLink('second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -22,8 +22,8 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-if="this.token === '123' ? true : false"  @click="goSearchd('/shop/shoppingCart')">
-          <img src="@/assets/images/shoppingCart.png" alt=""><i>2</i>
+        <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
+          <img src="@/assets/images/shoppingCart.png" alt=""><i v-show="shoppingCartNum>0">{{shoppingCartNum}}</i>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -47,7 +47,7 @@
 
     <!-- 登录注册 -->
     <div class="start" v-if="start">
-      <div class="bgt"></div>
+      <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -186,6 +186,7 @@ import { store as persistStore } from '~/lib/core/store'
         islogin: false,
         activeName: "second",
         search: "",
+        shoppingCartNum:1,
         tokenForm: {
           tokens: "123"
         },
@@ -333,7 +334,8 @@ import { store as persistStore } from '~/lib/core/store'
              return new Promise((resolve, reject) => {
                 this.signIn(this.loginData).then(response => {
                   if(response.status === 0) {
-                    this.start = false
+                    this.start = false;
+                    this.islogin = true;
                   }
                   this.$message({
                     type: response.status === '0' ? 'error' : 'success',
@@ -359,7 +361,8 @@ import { store as persistStore } from '~/lib/core/store'
       },
       // 忘记密码
       forget () {
-
+        this.$router.push("/home/pages/forgotPassword");
+        this.close();
       },
       goMycourse() {
         this.$router.push("/profile");
@@ -400,7 +403,6 @@ import { store as persistStore } from '~/lib/core/store'
         this.start = false;
         this.lrFrame = false;
         this.bgMsg = false;
-        // document.body.style.overflow = 'auto';
       },
       closeWechat() {
         this.start = false;
@@ -472,7 +474,11 @@ import { store as persistStore } from '~/lib/core/store'
         //     break
         // }
       }
-    }
+    },
+    mounted () {
+      document.getElementsByClassName("headerBox")[0].style.display="none";
+      document.getElementsByClassName("footerBox")[0].style.display="none";
+    },
   };
 </script>
 
