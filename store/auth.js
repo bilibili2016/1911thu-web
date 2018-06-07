@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-06 17:46:29
+ * @Last Modified time: 2018-06-07 10:11:14
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -64,7 +64,7 @@ export const state = () => ({
   kid
 })
 export const getters = {
-  isAuthenticated(state) {
+  isAuthenticated (state) {
     return !isNull(state.token)
   }
 }
@@ -75,7 +75,6 @@ export const mutations = {
     state.token = token
   },
   [MUTATION.signOut](state) {
-    state.user = null
     state.token = null
   },
   [MUTATION.refresh](state, {
@@ -160,31 +159,21 @@ export const actions = {
     return user
   },
 
-  async signOut({
-    commit,
-    state
-  }, {
-    tokens
-  }) {
-    let user
-    try {
-      // let tokens = await auth.workerSignIn({ username, password })
-      // token = 'JWT ' + tokens.tokenken
-      let token = tokens
-      persistStore.set('token', token)
-      // 更新 state
-      commit(MUTATION.signIn, {
-        token
-      })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return user
-  },
+   async signOut({
+     commit,
+     state
+   }) {
+     try {
+       await auth.signOut()
+       persistStore.set('token', null)
+
+       commit(MUTATION.signOut)
+     } catch (e) {
+       log.error(e)
+     }
+   },
+
+
   async companySignIn({
     commit,
     state

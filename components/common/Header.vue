@@ -10,7 +10,7 @@
       </div>
       <div :class="{ HREntry : true , islogined : this.token === '123' ? true : false }">
         <span class="hrin" @click="goLink('home/pages/hrEntry')">Hr入口</span>
-        <span v-if="this.token === '123' ? true : false" @click="goLink('second')">我的课程</span>
+        <span v-if="isAuthenticated" @click="goLink('second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -26,7 +26,7 @@
           <img src="@/assets/images/shoppingCart.png" alt=""><i>2</i>
         </div>
       </div>
-      <div class="lrBtn" v-if="this.token.length=== '' ">
+      <div class="lrBtn" v-if="!isAuthenticated">
         <!-- @click="login" -->
         <span @click ="loginCardShow" >登录</span>
         <!-- @click="register" -->
@@ -280,7 +280,10 @@ import { store as persistStore } from '~/lib/core/store'
       };
     },
     computed: {
-      ...mapState("auth", ["token"])
+      ...mapState("auth", ["token"]),
+      ...mapGetters('auth', [
+      'isAuthenticated'
+      ])
     },
     methods: {
       ...mapActions("auth", ["signIn", "setGid", 'signOut']),
@@ -362,7 +365,7 @@ import { store as persistStore } from '~/lib/core/store'
       },
 
       signOuts() {
-        persistStore.set('token', '')
+        this.signOut()
       },
       changePwd() {
         if (this.showPwd) {

@@ -713,9 +713,9 @@
             height: 126px;
             padding: 0px;
             margin: 0px;
-            vertical-align: middle;
+            // vertical-align: middle;
             overflow: hidden;
-            margin-top: -40px;
+            // margin-top: -40px;
           }
           span {
             display: inline-block;
@@ -724,8 +724,9 @@
             font-family: MicrosoftYaHei;
             color: rgba(34, 34, 34, 1);
             line-height: 35px;
-            margin-top: 28px;
+            margin-top: -111px;
             margin-left: 15px;
+            vertical-align: middle;
           }
           span:hover {
             color: #8f4acb;

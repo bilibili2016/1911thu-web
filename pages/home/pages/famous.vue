@@ -4,7 +4,7 @@
       <div class="blueBar"></div>
       <div class="cardList">
         <div class="card" v-for="(teacher,index) in teachers" :key="index">
-          <img :src="teacher.head_img" class="image">
+          <img :src="teacher.picture" class="image">
           <div class="diaphaneity">
             <div class="octImg"></div>
             <div class="abstract">

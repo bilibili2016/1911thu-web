@@ -8,13 +8,10 @@
     <!-- 经典好课 -->
     <v-classic :config="configZ" :classicData="classicData" :titleTwo="titleTwo" :linktwo="linktwo"></v-classic>
     <!-- 名师大咖秀 -->
-    <div @click="getTeacherList">名师</div>
     <v-famous :teachers ="teachers" :titleThree = "titleThree"></v-famous>
     <!-- 用户评价 -->
-    <div @click="getEvaluateList">评论</div>
     <v-evaluate :titleFour="titleFour" :carouselSrc = "carouselSrc" :evaluateData="evaluateData"></v-evaluate>
     <!-- 学堂资讯 -->
-    <div @click="getNewInfoList">资讯</div>
     <v-info :infoDesc = "infoDesc" :infoArticle= "infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive= "titleFive" :linkfour="linkfours"></v-info>
     <!-- 合作伙伴 -->
     <v-partner :data="partnerList"></v-partner>
@@ -226,7 +223,7 @@ export default {
         evaluateLimit: null
       },
       classicForm: {
-        pages: 1,
+        pages: 0,
         limits: 4,
         categoryId: null,
         sortBy: null
