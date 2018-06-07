@@ -15,7 +15,7 @@
             </div>
             <div class="culture">
               <h3>1911集团文化</h3>
-              <div class="cultureInfo">
+              <div class="cultureInfo clearfix">
                 <div class="fl">
                   <p>1911口号：以校友之力，成校友之事，圆校友之梦。</p>
                   <p>1911宗旨：为人正直谦和，工作一丝不苟，产品卓越精良。</p>
@@ -110,7 +110,7 @@
 
 <style scoped>
   .second {
-    height: 1030px;
+    /* height: 1030px; */
   }
   .first{
     width: 1000px;
@@ -121,6 +121,7 @@
   .timeline {
     height: 106px;
     width: 1000px;
+    margin: 0 auto;
     border-bottom: 1px #DCDCDC dashed;
     line-height: 106px;
   }
@@ -165,8 +166,7 @@
   }
 
   .more p {
-    display: inline-block;
-    margin-left: 340px;
+    text-align: center;
   }
 
   .more p span {
@@ -197,23 +197,11 @@
 
   .main {
     width: 1100px;
-    height: 930px;
     margin: -40px auto 80px;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-    padding: 85px 50px 0 50px;
     background-color: #fff;
     z-index: 3;
     position: relative;
-  }
-
-  .topBar {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 85px;
-    line-height: 85px;
-    border-bottom: 1px solid #E8D6F7;
   }
 
   .aboutUs h3 {
@@ -222,7 +210,6 @@
     padding-bottom: 61px;
     text-align: center;
   }
-
   .group,
   culture,
   business {
@@ -259,6 +246,7 @@
   .business {
     margin-top: 150px;
     padding-bottom: 90px;
+
   }
 
   .business>p {
@@ -268,6 +256,7 @@
   }
 
   .businessInfo {
+    height: 270px;
     display: flex;
     justify-content: space-around;
   }

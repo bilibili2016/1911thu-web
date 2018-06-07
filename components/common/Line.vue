@@ -1,12 +1,12 @@
 <template>
   <div class="catalog">
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
-      <h4>{{catalog.chapterName}}</h4>
-      <div class="bar clearfix" v-for="(bar,index) in catalog.barList" :key="index" @click="checked(index)">
+      <h4>{{catalog.title}}</h4>
+      <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="checked(index)">
         <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
-        <span class="fl barName">{{bar.number}} {{bar.barName}} （{{bar.duration}}）</span>
-        <span class="fl free" v-if="bar.isFree">免费</span>
-        <span class="fr freePlay" v-if="bar.isFree || catalog.isLogin" @click="goLink('player')">立即观看</span>
+        <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}）</span>
+        <span class="fl free" v-if="bar.look_at === '2'">免费</span>
+        <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
         <span class="fr freePlay" v-else @click="goBuy">购买课程</span>
         <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
       </div>

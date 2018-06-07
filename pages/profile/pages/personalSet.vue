@@ -31,8 +31,15 @@
                 <el-option label="区域二" value="beijing"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="职位" prop="position">
-              <el-input v-model="psnForm.position"></el-input>
+            <el-form-item label="职业" prop="position">
+              <el-select v-model="psnForm.position" placeholder="请选择" class="profession">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
               <el-input v-model="psnForm.email"></el-input>
@@ -132,6 +139,22 @@
         activeName: "first",
         hasPersonalInfo: true,
         showPwd: true,
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
         changePwd: {
           oldPass: '',
           newPass: '',

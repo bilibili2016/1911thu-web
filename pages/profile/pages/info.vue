@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="content" v-for="(card,index) in infoList" :index="index" :key="card.id">
+    <div class="content clearfix" v-for="(card,index) in infoList" :index="index" :key="card.id">
       <div class="text fl fc16-222 flh-30">
         {{card.title}}
       </div>

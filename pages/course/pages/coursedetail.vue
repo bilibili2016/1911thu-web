@@ -28,18 +28,9 @@
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="介绍" name="first">
-            <!-- <div class="title">
-              使用人群
-            </div>
-            <div>
-              <p>想在职场获得老板青睐，让自己PPT演示更加出彩！</p>
-              <p>想成为PPT大神，学习制作各种酷炫PPT动画的学员们</p>
-            </div> -->
           </el-tab-pane>
           <el-tab-pane label="目录" name="second">
             <v-line :catalogs="catalogs"></v-line>
-             <v-line :catalogs="catalogsd"></v-line>
-              <v-line :catalogs="catalogsdd"></v-line>
           </el-tab-pane>
         </el-tabs>
         <div class="attention">
@@ -54,15 +45,13 @@
 
       <!-- 讲师介绍 -->
       <div style="width:345px" class="fr">
-
-
       <div class="teacher ">
         <h4>讲师介绍</h4>
         <div class="personal">
-          <img :src="teacher.headImg" alt="">
-          <h5>{{teacher.teacherName}}</h5>
-          <h6>{{teacher.degree}}</h6>
-          <p>{{teacher.abstract}}</p>
+          <img :src="courseList.head_img" alt="">
+          <h5>{{courseList.teacher_name}}</h5>
+          <h6>{{courseList.graduate}}</h6>
+          <p>{{courseList.teacher_content}}</p>
         </div>
       </div>
       <div class="evaluate-tag ">
@@ -126,10 +115,10 @@
           <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
         </div>
         <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
-          <img class="fl" :src="item.headImg" alt="">
+          <img class="fl" :src="item.head_img" alt="">
           <div class="fl">
-            <p style="margin-top:5px;">{{item.name}}</p>
-            <p>{{item.time}}</p>
+            <p style="margin-top:5px;">{{item.nick_name}}</p>
+            <p>{{item.create_time}}</p>
           </div>
           <div style="margin-top:10px;">
             <el-rate disabled v-model="item.rate" class="itemBox-rate fr"></el-rate>
@@ -145,7 +134,14 @@
 <script>
   import CustomCard from "@/components/common/Card.vue";
   import CustomLine from "@/components/common/Line.vue";
+  import { other, home } from "~/lib/v1_sdk/index";
+  import { mapState, mapGetters, mapActions } from 'vuex'
   export default {
+    computed: {
+      ...mapState('auth', [
+        'kid'
+      ])
+    },
     components: {
       'v-card': CustomCard,
       'v-line': CustomLine
@@ -160,100 +156,68 @@
         shareImgc: require('~/assets/images/c.png'),
         value1: 5,
         linkseven: 'player',
-        catalogs: [{
+        catalogs: [
+        {
           isLogin: false,
-          chapterName: " 章节1    :   S01 【本节免费】购前必读",
-          barList: [{
-              number: "1-1",
-              barName: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT？",
-              duration: "32分钟",
+          title: " 章节1    :   S01 【本节免费】购前必读",
+          childList: [{
+              video_number: "1-1",
+              title: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT？",
+              video_time: "32分钟",
               percentage: 30,
               isFree: true,
             },
             {
-              number: "1-2",
-              barName: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
-              duration: "35分钟",
+              video_number: "1-2",
+              title: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
+              video_time: "35分钟",
               percentage: 10,
               isFree: false,
             },
             {
-              number: "1-3",
-              barName: "【素材下载】S01-3 课程参考资料在哪里下载？",
-              duration: "35分钟",
+              video_number: "1-3",
+              title: "【素材下载】S01-3 课程参考资料在哪里下载？",
+              video_time: "35分钟",
               percentage: 10,
               isFree: false,
             },
             {
-              number: "1-4",
-              barName: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
-              duration: "35分钟",
+              video_number: "1-4",
+              title: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
+              video_time: "35分钟",
               percentage: 10,
               isFree: false,
             }
           ]
-        }],
-        catalogsd: [{
+        },
+        {
           isLogin: false,
-          chapterName: " 章节2    :   S02 只需一招，图片冲击力Max！",
-          barList: [{
-              number: "2-1",
-              barName: "【视频讲解】S02 图片太平淡？因为你不会裁剪！（上）",
-              duration: "32分钟",
+          title: " 章节1    :   S01 【本节免费】购前必读",
+          childList: [{
+              video_number: "1-1",
+              title: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT？",
+              video_time: "32分钟",
               percentage: 30,
               isFree: true,
             },
             {
-              number: "2-2",
-              barName: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
-              duration: "35分钟",
+              video_number: "1-2",
+              title: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
+              video_time: "35分钟",
               percentage: 10,
               isFree: false,
             },
             {
-              number: "2-3",
-              barName: "【素材下载】S01-3 课程参考资料在哪里下载？",
-              duration: "35分钟",
+              video_number: "1-3",
+              title: "【素材下载】S01-3 课程参考资料在哪里下载？",
+              video_time: "35分钟",
               percentage: 10,
               isFree: false,
             },
             {
-              number: "2-4",
-              barName: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
-              duration: "35分钟",
-              percentage: 10,
-              isFree: false,
-            }
-          ]
-        }],
-        catalogsdd: [{
-          isLogin: false,
-          chapterName: " 章节3    :   S03 10分钟做出老板满意的PPT！",
-          barList: [{
-              number: "3-1",
-              barName: "【视频讲解】只用不到5分钟，Word文档快速变PPT！",
-              duration: "32分钟",
-              percentage: 30,
-              isFree: true,
-            },
-            {
-              number: "3-2",
-              barName: "【图文教材】只用不到5分钟，Word文档迅速变PPT",
-              duration: "35分钟",
-              percentage: 10,
-              isFree: false,
-            },
-            {
-              number: "3-3",
-              barName: "【配套练习】只用不到5分钟，Word文档迅速变PPT",
-              duration: "35分钟",
-              percentage: 10,
-              isFree: false,
-            },
-            {
-              number: "4-4",
-              barName: "【视频讲解】只用5分钟，美化出老板认可的PPT！",
-              duration: "35分钟",
+              video_number: "1-4",
+              title: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
+              video_time: "35分钟",
               percentage: 10,
               isFree: false,
             }
@@ -300,37 +264,71 @@
         config: {
           card_type: "goodplay"
         },
-        courseList: [{
-          bgImg: require("@/assets/images/ke-1.png"),
-          headImg: require("@/assets/images/headImg.png"),
-          grade: "特约讲师", //级别：特约讲师，金牌讲师
-          teacher: "莎良朋",
-          school: "华中科技大学博士",
-          title: "新的中央经济工作会议精神解读——2018年经济工作思路和重点",
-          synopsis: "日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。以自己的亲身经历帮助学员做好在日本旅游的一切准备。尽量避免专业的语法知识介绍，帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。",
-          observer: "李大民",
-          rate: 5,
-          comment: "啦十分考究的，拉萨孔家店官，方的感觉冰冷。的大山里的风景大师，浪费空间萨芬啊收到。了罚款决定，书范德萨了科技大，厦飞拉萨的空间菲，拉斯发撒法丽达，刷卡积分阿斯蒂芬。",
-          styduNumber: "234"
-        }]
+        courseList: {
+
+        },
+        kidForm: {
+          ids: null
+        },
+        evaluateListForm: {
+          pages: 1,
+          limits: 4,
+          ids: '',
+          types: 1,
+          isRecommend: 2
+        }
       }
     },
     methods: {
       handleClick() {
 
       },
-
       handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
             done();
           })
           .catch(_ => {});
+      },
+      getCourseDetail () {
+
+        return new Promise((resolve, reject) => {
+          home.getCourseDetail(this.kidForm).then(response => {
+            // this.pagemsg.total = Number(response.data.pageCount) - 1;
+            // this.newsList = response.data.newsList;
+            // console.log(response, '这是response')
+            this.courseList = response.data.curriculumDetail
+          });
+        });
+      },
+      getEvaluateList () {
+        return new Promise((resolve, reject) => {
+          home.getEvaluateLists(this.evaluateListForm).then(response => {
+            // console.log(response, '这是response333333')
+            // this.courseList = response.data.curriculumDetail
+            this.commentator = response.data.evaluateList
+          });
+        });
+      },
+      getCourseList () {
+        return new Promise((resolve, reject) => {
+
+          home.getCourseList(this.kidForm).then(response => {
+            console.log(response, '这是课程列表')
+            // this.courseList = response.data.curriculumDetail
+            this.catalogs = response.data.curriculumCatalogList
+          });
+        });
       }
     },
     mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+      this.kidForm.ids = this.kid
+      this.evaluateListForm.ids = this.kid
+      this.getCourseDetail()
+      this.getEvaluateList()
+      this.getCourseList()
     }
   }
 </script>

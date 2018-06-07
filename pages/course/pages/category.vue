@@ -64,7 +64,7 @@
       return {
         bgmsg: 0,
         bgmsgs: 0,
-        activeName: 'second',
+        activeName: '',
         value3: true,
         value4: true,
         configSevent: {

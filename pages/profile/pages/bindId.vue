@@ -30,7 +30,7 @@
       </div>
       <div class="courseIDList">
         <div class="oneID" v-for="(id,index) in courseList.courseID" :key="index">
-          <span>绑定课程ID:</span>
+          <span>课程ID:</span>
           <span>{{id}}</span>
         </div>
       </div>

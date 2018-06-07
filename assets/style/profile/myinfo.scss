@@ -1,18 +1,16 @@
 .my-info {
   .content {
     width: 806px;
-    height: 106px;
+    padding: 20px 0;
     border-bottom: 1px solid rgba(232, 214, 247, 1);
     position: relative;
-    margin: 0 auto;
     .text {
       width: 630px;
-      position: absolute;
-      bottom: 10px;
+      height: auto;
     }
     .time {
       position: absolute;
-      bottom: 10px;
+      bottom: 20px;
       right: 30px;
     }
   }

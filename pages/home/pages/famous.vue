@@ -4,12 +4,12 @@
       <div class="blueBar"></div>
       <div class="cardList">
         <div class="card" v-for="(teacher,index) in teachers" :key="index">
-          <img :src="teacher.src" class="image">
+          <img :src="teacher.picture" class="image">
           <div class="diaphaneity">
             <div class="octImg"></div>
             <div class="abstract">
-              <h4>{{teacher.name}}</h4>
-              <p>{{teacher.abstract}}</p>
+              <h4>{{teacher.teacher_name}}</h4>
+              <p>{{teacher.content}}</p>
             </div>
           </div>
         </div>
@@ -24,6 +24,11 @@ export default {
   props: ["teachers", "titleThree"],
   components: {
     "v-title": CustomTitle
+  },
+  methods:{
+    goLink(item){
+      this.$router.push(item);
+    }
   }
 };
 </script>

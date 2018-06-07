@@ -14,10 +14,10 @@
     </template>
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
-      <div class="card-category profile">
+      <div class="card-category">
 
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
             <div  class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
@@ -25,7 +25,7 @@
               <img :src="jinImg" alt="" class="jin-style">
             </div>
             <div  class="bgImgs">
-              <img :src="card.bg" alt=""
+              <img :src="card.picture" alt=""
              >
             </div>
 
@@ -41,27 +41,25 @@
               <!-- 名字 -->
               <div class="item">
                 <p class="itemBox-name">
-                  <span>{{card.name}}</span>
+                  <span>{{card.title}}</span>
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
-                    {{card.cnum}}课时
+                    {{card.curriculum_time}}课时
                   </span>
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
-                    <span>{{card.pnum}}</span>
-
-                    <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
-
+                    <span>{{card.study_number}}</span>
+                    <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
                   </span>
                 </p>
               </div>
               <!-- 作者和头衔 -->
               <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
-                  <img :src="card.avator" alt="">
-                  <span>王建中</span>
-                  <span class="title">华中科技大学博士</span>
+                  <img :src="card.head_img" alt="">
+                  <span>{{card.teacher_name}}</span>
+                  <span class="title">{{card.graduate}}</span>
                 </div>
               </div>
               <!-- 学习进度 -->
@@ -205,10 +203,11 @@
     <!-- 新上好课详情 页面 -->
 <template v-if="config.card_type === 'goodplay'">
   <div class="courseList center">
-    <div class="course clearfix " v-for="(course,index) in courseList" :key="index">
+    <!-- v-for="(course,index) in courseList -->
+    <div class="course clearfix  " >
       <el-card class="fl" :body-style="{ padding: '0px' }">
         <div class="goodplay">
-          <img :src="course.bgImg" class="image">
+          <img :src="courseList.picture" class="image">
           <div class="mask"></div>
           <div class="common-button btn-bg">
             <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
@@ -217,15 +216,15 @@
       </el-card>
       <div class="particularss fr">
         <div class="currentclum">
-          <h4>{{course.title}}</h4>
+          <h4>{{courseList.title}}</h4>
           <div>
-            <span class="fl coursenum"><span>52课时</span><img src="@/assets/images/ren.png" alt=""> 1021</span>
+            <span class="fl coursenum"><span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/ren.png" alt=""> {{courseList.study_number}}</span>
             <span class="rate"><el-rate disabled v-model="one"></el-rate></span>
-            <span class="coins">￥ 108.00</span>
+            <span class="coins">￥ {{courseList.present_price}}</span>
           </div>
         </div>
         <div class="study clearfix">
-          <p>日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。以自己的亲身经历帮助学员做好在日本旅游的一切准备。尽量避免专业的语法知识介绍，帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。</p>
+          <p>{{courseList.introduction}}</p>
           <div class="common-button">
             <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
           </div>
@@ -241,7 +240,7 @@
     <div class="course clearfix boxshadow-none" v-for="(course,index) in newsList" :key="index" style="box-shadow:none;">
       <el-card class="fl" :body-style="{ padding: '0px' }">
         <div style="position:relative;" class="img-wrap" @click="getMore(linksix)">
-          <img :src="course.bgImg" class="image">
+          <img :src="course.picture" class="image">
         </div>
       </el-card>
       <div class="particulars fr" style="width:640px;">
@@ -249,11 +248,11 @@
           <h4 @click="getMore(linksix)">{{course.title}}</h4>
         </div>
         <div class="bordernone">
-          <p>日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。以自己的亲身经历帮助学员做好在日本旅游的一切准备。尽量避免专业的语法知识介绍，帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。日本外籍教师全中文讲解，以最标准的东京音带领大家领略日语的魅力之所在。帮助学员轻松掌握旅游途中所需要使用的语言。设置各种旅游途中可能遇到的场景，帮助学员一一解决问题。。</p>
+          <p>{{course.introduce}}</p>
         </div>
         <div>
-          <p class="fl time">2018-05-20</p>
-          <p class="fr more" @click="getMore(linksix)">阅读全文 >></p>
+          <p class="fl time">{{course.create_time}}</p>
+          <p class="fr more" @click="selectDetail(index,course,linksix)">阅读全文 >></p>
         </div>
       </div>
       <div class="lines" v-if="index !== 0">
@@ -264,12 +263,12 @@
     <!-- 学堂资讯 -->
 <template v-if="config.card_type === 'infoOne'">
   <div class="info-list">
-    <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info">
+    <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index>0">
       <el-card shadow="never" body-style="padding: 0;">
         <div class="info-box" @click="getMore('news/detail')">
           <div class="info-wrap">
-            <img :src="card.avatar" alt="">
-            <span>从区块链到生命，许知远和王小川在1911主题餐厅聊了什么？</span>
+            <img :src="card.picture" alt="">
+            <span>{{card.title}}</span>
           </div>
         </div>
       </el-card>
@@ -280,16 +279,16 @@
 
 <template v-if="config.card_type === 'infoTwo'">
   <div class="card-categorys">
-    <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list">
+    <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 1">
       <el-card shadow="never" body-style="padding: 0;" class="itemBox">
         <div class="img-box">
-          <img :src="card.avatar" alt="">
+          <img :src="card.picture" alt="">
           <div>
-            <span>学校党委理论学习中心组召开会议</span>
+            <span>{{card.title}}</span>
           </div>
         </div>
         <div class="item">
-          5月22日上午，中国人民大学召开党委理论学习中心组（扩大）会议，学习《中央巡视工作规划（2018-2022年）》（以下简称《规划》）精神。中央巡视工作领导小组办公室副主任夏立忠应邀作《深入贯彻党的十九大精神巩固深化发展新时代巡视工作》专题报告5月22日上午，中国人民大学召开党委理论学习中心组（扩大）会议.....
+          {{card.introduce}}
         </div>
       </el-card>
     </div>
@@ -370,6 +369,14 @@
       },
       toggleShow: function() {
         this.isShow = !this.isShow
+      },
+      selectDetail (index,course,linksix) {
+        console.log(course, '这是course')
+         this.$emit('checkdetail', course.id)
+      },
+      selectCid (item,index) {
+        console.log(item, '这是item')
+        this.$emit('selectCid', item.id)
       }
     },
     mounted() {
@@ -393,13 +400,24 @@
 .mask-style{
   width: 260px;
   height: 160px;
-  background-color: #6417A6;
-  opacity: 0.5;
+  background-color: rgba(100,23,166,.5);
   position: absolute;
   border-top-left-radius:16px;
   border-top-right-radius:16px;
   opacity: 0;
   transition: all 300ms;
+}
+.bgImgs{
+  width: 260px;
+  height: 160px;
+  overflow: hidden;
+  border-top-left-radius:16px;
+  border-top-right-radius:16px;
+  img{
+    width: 260px;
+    height: 160px;
+    transition: all 300ms;
+  }
 }
 .mask{
   display: none;
@@ -489,8 +507,13 @@
           transition: all 300ms;
         }
         .mask-style {
-          opacity: 0.5;
-          transition: all 300ms;
+          opacity: 1;
+        }
+        .bgImgs img{
+          width: 264px;
+          height: 162.2px;
+          margin-top: -2px;
+          margin-left: -1.1px;
         }
       }
 
@@ -690,9 +713,9 @@
             height: 126px;
             padding: 0px;
             margin: 0px;
-            vertical-align: middle;
+            // vertical-align: middle;
             overflow: hidden;
-            margin-top: -40px;
+            // margin-top: -40px;
           }
           span {
             display: inline-block;
@@ -701,8 +724,9 @@
             font-family: MicrosoftYaHei;
             color: rgba(34, 34, 34, 1);
             line-height: 35px;
-            margin-top: 28px;
+            margin-top: -111px;
             margin-left: 15px;
+            vertical-align: middle;
           }
           span:hover {
             color: #8f4acb;
@@ -1144,7 +1168,7 @@
             color: rgba(34, 34, 34, 1);
             line-height: 30px;
             margin-bottom: 20px;
-            
+
           }
         }
       }
