@@ -5,9 +5,13 @@
         <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
       </div>
       <div class="playInner" ref="playInner">
+<<<<<<< HEAD
         <!-- 播放器 -->
         <video id="player-container-id" preload="auto" playsinline webkit-playinline x5-playinline></video>
         <video src="@/assets/images/piano.mp4" preload="auto" controls="controls"></video>
+=======
+        <div id="movd"></div>
+>>>>>>> 489561cabb5cb4e5a1e7baf977db4002e75cb2a2
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
@@ -88,8 +92,9 @@
 
 
 <script>
-import { other, auth } from '~/lib/v1_sdk/index'
+import { other, auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
   export default {
     data() {
       return {
@@ -139,6 +144,10 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         },
         hsgForm: {
           hsgs: true
+        },
+        playerForm: {
+          curriculumId: null,
+          catalogId: null
         }
       }
     },
@@ -149,11 +158,24 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       // this.setHsg(this.hsgForm)
       document.getElementsByClassName("headerBox")[0].style.display="none";
       document.getElementsByClassName("footerBox")[0].style.display="none";
+<<<<<<< HEAD
       // 初始化播放器
       // var player = TCPlayer('player-container-id', {
       //   fileID: this.fileID, 
       //   appID: this.appID // 
       // });
+=======
+      this.$nextTick(function () {
+        const player = new TcPlayer('movd' , {
+          "m3u8": "http://2157.liveplay.myqcloud.com/2157_358535a.m3u8", //请替换成实际可用的播放地址
+          "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+          "coverpic" : "http://www.test.com/myimage.jpg",
+          "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
+          "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+        });
+      }),
+      this.getPlayerInfo()
+>>>>>>> 489561cabb5cb4e5a1e7baf977db4002e75cb2a2
     },
     methods: {
       ...mapActions('auth', [
@@ -199,6 +221,15 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       },
       goLink () {
         this.$router.back(-1)
+      },
+      getPlayerInfo () {
+        this.playerForm.curriculumId = persistStore.get('curriculumId')
+        this.playerForm.catalogId = persistStore.get('catalogId')
+        return new Promise((resolve, reject) => {
+          home.getPlayerInfo(this.playerForm).then(response => {
+            console.log(response)
+          });
+        });
       }
     }
   }

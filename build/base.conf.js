@@ -50,6 +50,16 @@ const config = {
       // 需要直接加载的 CSS
       // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
     ],
+    script: [
+      {
+        src: 'https://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js',
+
+
+        async: true
+      }
+
+    ]
+
     // 需要直接加载的 JS
     // script: [
     //   { src: 'https://cdn.bootcss.com/holder/2.9.4/holder.min.js', async: true }

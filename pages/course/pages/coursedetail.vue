@@ -304,8 +304,6 @@
       getEvaluateList () {
         return new Promise((resolve, reject) => {
           home.getEvaluateLists(this.evaluateListForm).then(response => {
-            // console.log(response, '这是response333333')
-            // this.courseList = response.data.curriculumDetail
             this.commentator = response.data.evaluateList
           });
         });
