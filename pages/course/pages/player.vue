@@ -150,10 +150,7 @@ import { store as persistStore } from '~/lib/core/store'
           "m3u8": 'h', //请替换成实际可用的播放地址
           "autoplay" : false,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
           "fileID": '7447',
-          "appID": '1256',
-          "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-          "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
-          "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+          "appID": '1256'
         }
       }
     },
@@ -215,15 +212,12 @@ import { store as persistStore } from '~/lib/core/store'
         this.playerForm.catalogId = persistStore.get('catalogId')
         return new Promise((resolve, reject) => {
           home.getPlayerInfo(this.playerForm).then(response => {
-            console.log(response.data.playAuthInfo.video_address, '这是播放信111息')
-             console.log(response, '这是播放信息')
-              console.log(response, '这是播放信息')
 
             this.tcplayer.m3u8 = response.data.playurl
             this.tcplayer.fileID = response.data.playAuthInfo.fileID
             this.tcplayer.appID = response.data.playAuthInfo.appID
              const player = new TcPlayer('movd' , this.tcplayer);
-             console.log(this.tcplayer, '这是12345')
+
           });
         });
       }
