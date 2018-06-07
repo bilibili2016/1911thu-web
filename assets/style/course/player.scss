@@ -104,19 +104,19 @@
           background-size: 22px 18px;
           color: #8F4ACB;
         }
-        #player-container-id{
-          width: 100%;
-          height: 100%;
-        }
       }
     }
     .playInner {
       width: 100%;
       height: 100%;
       background-color: #000;
-      video{
+      #movd {
         width: 100%;
         height: 100%;
+        video {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }

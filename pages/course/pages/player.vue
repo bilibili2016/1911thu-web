@@ -5,7 +5,7 @@
         <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
       </div>
       <div class="playInner" ref="playInner">
-        <div id="movd"></div>
+        <div id="movd" ref="movd"></div>
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
@@ -147,7 +147,6 @@ import { store as persistStore } from '~/lib/core/store'
     },
     mounted () {
       this.resize();
-      // window.addEventListener("onload",this.resize);
       window.addEventListener("resize", this.resize);
       // this.setHsg(this.hsgForm)
       document.getElementsByClassName("headerBox")[0].style.display="none";
@@ -157,8 +156,8 @@ import { store as persistStore } from '~/lib/core/store'
           "m3u8": "http://2157.liveplay.myqcloud.com/2157_358535a.m3u8", //请替换成实际可用的播放地址
           "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
           "coverpic" : "http://www.test.com/myimage.jpg",
-          "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
-          "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+          //"width" :  '100%',//视频的显示宽度，请尽量使用视频分辨率宽度
+          //"height" : '100%'//视频的显示高度，请尽量使用视频分辨率高度
         });
       }),
       this.getPlayerInfo()
@@ -186,7 +185,6 @@ import { store as persistStore } from '~/lib/core/store'
       },
       resize() {
         const h = window.screen.availHeight;
-        console.log(h);
         this.$refs.mediaL.style.height= h+"px";
         this.$refs.mediaR.style.height= h+"px";
         this.$refs.playInner.style.height=h-100+"px";
@@ -197,6 +195,7 @@ import { store as persistStore } from '~/lib/core/store'
           this.mediaRInner = false;
           this.mediaRIcon = "el-icon-arrow-left";
           this.mediaLW = 100;
+          this.$refs.movd.children[0].style.width=this.mediaLW+"%";
         } else {
           this.mediaRW = 28;
           this.mediaRInner = true;
