@@ -9,8 +9,8 @@
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
       <div :class="{ HREntry : true , islogined : this.token === '123' ? true : false }">
-        <span class="hrin" @click="goLink('home/pages/hrEntry')">Hr入口</span>
-        <span v-if="isAuthenticated" @click="goLink('second')">我的课程</span>
+        <span class="hrin" @click="goSearchd('home/pages/hrEntry')">Hr入口</span>
+        <span v-if="this.token === '123' ? true : false" @click="goLink('second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -22,7 +22,7 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-if="this.token === '123' ? true : false"  @click="goLink('/shop/shoppingCart')">
+        <div class="shoppingCart" v-if="this.token === '123' ? true : false"  @click="goSearchd('/shop/shoppingCart')">
           <img src="@/assets/images/shoppingCart.png" alt=""><i>2</i>
         </div>
       </div>
