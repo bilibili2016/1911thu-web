@@ -57,7 +57,7 @@
               <!-- 作者和头衔 -->
               <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
-                  <img :src="card.avator" alt="">
+                  <img :src="card.head_img" alt="">
                   <span>{{card.teacher_name}}</span>
                   <span class="title">{{card.graduate}}</span>
                 </div>

@@ -26,9 +26,9 @@
           <img src="@/assets/images/shoppingCart.png" alt=""><i>2</i>
         </div>
       </div>
-      <div class="lrBtn" v-if="this.token === '123' ? false : true">
+      <div class="lrBtn" v-if="this.token.length=== '' ">
         <!-- @click="login" -->
-        <span @click ="loginCardShow">登录</span>
+        <span @click ="loginCardShow" >登录</span>
         <!-- @click="register" -->
         <span class="register" >注册</span>
       </div>
@@ -40,7 +40,7 @@
           <li @click="goLink('third')">我的消息</li>
           <li @click="goLink('fourth')">个人设置</li>
           <li @click="goLink('fifth')">绑定课程</li>
-          <li @click="signOut">退出</li>
+          <li @click="signOuts">退出</li>
         </ul>
       </div>
     </div>
@@ -64,7 +64,7 @@
               <el-row>
                  <!-- @click="goSearchd('/home/pages/forgotPassword')"  -->
                 <div @click="forget">忘记密码?</div>
-                <el-button @click="signIns('loginData')">登录</el-button>
+                <el-button @click="signIns('loginData')">登录{{this.token}}</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="scanCode">其它方式登录</div>
@@ -141,6 +141,7 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
   import {
     getQueryString
   } from "@/lib/util/helper";
@@ -282,7 +283,7 @@
       ...mapState("auth", ["token"])
     },
     methods: {
-      ...mapActions("auth", ["signIn", "setGid"]),
+      ...mapActions("auth", ["signIn", "setGid", 'signOut']),
       // 登录显示card
       async loginCardShow () {
         this.start = true;
@@ -290,7 +291,6 @@
         this.activeName = "login";
         this.stop();
         this.bgMsg = true;
-        // this.tokenForm.tokens = "123";
       },
       // // 获取验证码
       async handleGetCode() {
@@ -303,7 +303,6 @@
             })
           })
         })
-        // console.log('获取验证码被点击')
       },
       // 注册 请求
       signUp(formName) {
@@ -318,7 +317,6 @@
               })
             })
           } else {
-            console.log("error submit!!");
             return false;
           }
         });
@@ -329,19 +327,19 @@
         // this.start = false;
         this.$refs[formName].validate(valid => {
           if (valid) {
-            console.log(this.loginData, '678')
-
              return new Promise((resolve, reject) => {
                 this.signIn(this.loginData).then(response => {
-                  console.log(response, '这是response')
+                  if(response.status === 0) {
+                    this.start = false
+                  }
                   this.$message({
-                        type: response.status === '1' ? 'success' : 'error',
-                        message: response.msg
-                      })
+                    type: response.status === '0' ? 'error' : 'success',
+                    message: response.msg
+                  })
+
                 })
               })
           } else {
-            console.log("error submit!!");
             return false;
           }
         })
@@ -363,9 +361,8 @@
 
       },
 
-      signOut() {
-        this.tokenForm.tokens = "";
-        // this.signIn(this.tokenForm);
+      signOuts() {
+        persistStore.set('token', '')
       },
       changePwd() {
         if (this.showPwd) {
