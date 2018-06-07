@@ -5,13 +5,7 @@
         <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
       </div>
       <div class="playInner" ref="playInner">
-<<<<<<< HEAD
-        <!-- 播放器 -->
-        <video id="player-container-id" preload="auto" playsinline webkit-playinline x5-playinline></video>
-        <video src="@/assets/images/piano.mp4" preload="auto" controls="controls"></video>
-=======
         <div id="movd"></div>
->>>>>>> 489561cabb5cb4e5a1e7baf977db4002e75cb2a2
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
@@ -158,13 +152,6 @@ import { store as persistStore } from '~/lib/core/store'
       // this.setHsg(this.hsgForm)
       document.getElementsByClassName("headerBox")[0].style.display="none";
       document.getElementsByClassName("footerBox")[0].style.display="none";
-<<<<<<< HEAD
-      // 初始化播放器
-      // var player = TCPlayer('player-container-id', {
-      //   fileID: this.fileID, 
-      //   appID: this.appID // 
-      // });
-=======
       this.$nextTick(function () {
         const player = new TcPlayer('movd' , {
           "m3u8": "http://2157.liveplay.myqcloud.com/2157_358535a.m3u8", //请替换成实际可用的播放地址
@@ -175,7 +162,6 @@ import { store as persistStore } from '~/lib/core/store'
         });
       }),
       this.getPlayerInfo()
->>>>>>> 489561cabb5cb4e5a1e7baf977db4002e75cb2a2
     },
     methods: {
       ...mapActions('auth', [
