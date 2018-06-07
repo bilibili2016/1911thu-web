@@ -30,7 +30,7 @@
         <!-- @click="login" -->
         <span @click ="loginCardShow" >登录</span>
         <!-- @click="register" -->
-        <span class="register" >注册</span>
+        <span class="register" @click="register">注册</span>
       </div>
       <div class="headImg" v-else>
         <img :src="user.userImg" alt="">
@@ -49,7 +49,7 @@
     <div class="start" v-if="start">
       <div class="bgt"></div>
       <!-- @click="close" -->
-      <div class="lrFrame" >
+      <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
@@ -67,7 +67,7 @@
                 <el-button @click="signIns('loginData')">登录{{this.token}}</el-button>
               </el-row>
             </el-form>
-            <div class="otherLogin" @click="scanCode">其它方式登录</div>
+            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
           <!-- 注册表单 -->
           <el-tab-pane label="注册" name="register">
@@ -96,13 +96,13 @@
                 <el-button @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
-            <div class="otherLogin" @click="scanCode">其它方式登录</div>
+            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
         </el-tabs>
       </div>
 
       <!-- 微信登录 -->
-      <!-- <div class="lrFrame wechatLogin" v-show="wechatLogin">
+      <div class="lrFrame wechatLogin" v-show="wechatLogin">
         <el-form :model="bindTelData" status-icon ref="bindTelData" class="demo-ruleForm" v-show="bindTelShow">
           <h4 class="clearfix"><span>绑定手机账号</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
           <el-form-item prop="tel">
@@ -135,7 +135,7 @@
           <h5>手机账号绑定成功</h5>
           <p>返回登录 3S</p>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -339,7 +339,6 @@ import { store as persistStore } from '~/lib/core/store'
                     type: response.status === '0' ? 'error' : 'success',
                     message: response.msg
                   })
-
                 })
               })
           } else {
@@ -348,8 +347,19 @@ import { store as persistStore } from '~/lib/core/store'
         })
         this.move();
       },
+      // 获取微信登录二维码 请求
+      async wxLogin() {
+        return new Promise((resolve, reject) => {
+          auth.wechat(this.QRcode).then(response => {
+            window.location.href = response.data.wxurl;
+            console.log(response.data.wxurl);
+            
+          })
+        })
+      },
       // 忘记密码
       forget () {
+
       },
       goMycourse() {
         this.$router.push("/profile");
@@ -363,7 +373,6 @@ import { store as persistStore } from '~/lib/core/store'
       login() {
 
       },
-
       signOuts() {
         this.signOut()
       },
@@ -400,13 +409,14 @@ import { store as persistStore } from '~/lib/core/store'
         document.body.style.overflow = "auto";
       },
       handleClick(tab, event) {},
-      scanCode() {
+      wechatLogined() {
         //微信登录
         this.lrFrame = false;
         this.wechatLogin = true;
-        this.scanCodeShow = true; //微信扫码
+        //this.scanCodeShow = true; //微信扫码
         // this.bindTelShow=true; //绑定手机号
         // this.bindSuccessShow=true; // 登录成功
+        this.wxLogin();
       },
       stop() {
         var mo = function(e) {
@@ -462,8 +472,7 @@ import { store as persistStore } from '~/lib/core/store'
         //     break
         // }
       }
-    },
-    mounted() {}
+    }
   };
 </script>
 

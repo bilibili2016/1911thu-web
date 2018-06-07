@@ -5,6 +5,8 @@
         <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
       </div>
       <div class="playInner" ref="playInner">
+        <!-- 播放器 -->
+        <video id="player-container-id" preload="auto" playsinline webkit-playinline x5-playinline></video>
         <video src="@/assets/images/piano.mp4" preload="auto" controls="controls"></video>
       </div>
       <div class="playBottom clearfix">
@@ -96,12 +98,14 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         mediaRW: 28,
         mediaLW: 72,
         mediaRInner: true,
+        fileID:"",
+        appID:"",
         mediaRIcon: "el-icon-arrow-right",
         radioBtn:"",
         player: {
           courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
           video: "",
-          ewCode: require("../../../assets/images/attentionWechat2.png"),
+          ewCode: require("@/assets/images/attentionWechat2.png"),
           teacher: {
             name: "莎良朋",
             school: "华中科技大学博士"
@@ -143,8 +147,13 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       // window.addEventListener("onload",this.resize);
       window.addEventListener("resize", this.resize);
       // this.setHsg(this.hsgForm)
-      document.getElementsByClassName("headerBox")[0].style.display="none"
-      document.getElementsByClassName("footerBox")[0].style.display="none"
+      document.getElementsByClassName("headerBox")[0].style.display="none";
+      document.getElementsByClassName("footerBox")[0].style.display="none";
+      // 初始化播放器
+      // var player = TCPlayer('player-container-id', {
+      //   fileID: this.fileID, 
+      //   appID: this.appID // 
+      // });
     },
     methods: {
       ...mapActions('auth', [
@@ -168,9 +177,8 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         this.word="";
       },
       resize() {
-        // const w = window.screen.width;
         const h = window.screen.availHeight;
-        // this.$refs.mediaL.style.width=w - this.mediaR+"px";
+        console.log(h);
         this.$refs.mediaL.style.height= h+"px";
         this.$refs.mediaR.style.height= h+"px";
         this.$refs.playInner.style.height=h-100+"px";

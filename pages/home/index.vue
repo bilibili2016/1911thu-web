@@ -248,6 +248,7 @@ export default {
   mounted () {
     document.getElementsByClassName("headerBox")[0].style.display="inline"
     document.getElementsByClassName("footerBox")[0].style.display="inline"
+    this.getClassifyList()
     this.getNewCourseList()
     this.getClassicCourseList()
     this.getTeacherList()
@@ -255,6 +256,14 @@ export default {
     this.getNewInfoList()
   },
   methods: {
+    // 获取分类列表
+    getClassifyList() {
+      return new Promise((resolve, reject) => {
+           home.getClassifyList(this.curruntForm).then(response => {
+            this.classify = response.data.categoryList;
+          })
+        })
+    },
     // 获取新上好课列表
     getNewCourseList() {
       return new Promise((resolve, reject) => {
@@ -298,7 +307,7 @@ export default {
           this.infoArticle = response.data.newsList
         })
       })
-    }
+    },
   }
 };
 </script>
