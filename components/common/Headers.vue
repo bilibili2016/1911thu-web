@@ -303,7 +303,7 @@
                 })
           })
         })
-        console.log('获取验证码被点击')
+        // console.log('获取验证码被点击')
       },
       // 注册 请求
       signUp(formName) {
@@ -318,7 +318,7 @@
               })
             })
           } else {
-            console.log("error submit!!");
+            // console.log("error submit!!");
             return false;
           }
         });
@@ -329,7 +329,7 @@
         // this.start = false;
         this.$refs[formName].validate(valid => {
           if (valid) {
-            console.log(this.loginData, '678')
+            // console.log(this.loginData, '678')
             this.signIn(this.loginData)
             //  return new Promise((resolve, reject) => {
             //     auth.signIns(this.loginData).then(response => {
@@ -341,7 +341,7 @@
             //     })
             //   })
           } else {
-            console.log("error submit!!");
+            // console.log("error submit!!");
             return false;
           }
         })

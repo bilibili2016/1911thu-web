@@ -382,7 +382,7 @@
         }
       },
       handleCheck (item, index) {
-        console.log(index)
+        // console.log(index)
         this.checked = true
         for (var i=0; i<this.data.length; i++){
         if(i === index){
@@ -398,12 +398,12 @@
         this.isShow = !this.isShow
       },
       selectDetail (index,course,linksix) {
-        console.log(course, '这是course')
+        // console.log(course, '这是course')
         this.$emit('checkdetail', course.id)
         this.getMore(linksix);
       },
       selectCid (item,index) {
-        console.log(item, '这是item')
+        // console.log(item, '这是item')
         this.$emit('selectCid', item.id)
       }
     },
