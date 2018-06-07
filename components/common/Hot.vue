@@ -5,8 +5,9 @@
       <div class="fl hotBtn">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <!-- <el-tab-pane label="全部" name="first"></el-tab-pane> -->
-          <el-tab-pane label="最新" name="first"></el-tab-pane>
-          <el-tab-pane label="最热" name="second"></el-tab-pane>
+          <el-tab-pane label="全部" name="first"></el-tab-pane>
+          <el-tab-pane label="最新" name="second"></el-tab-pane>
+          <el-tab-pane label="最热" name="third"></el-tab-pane>
         </el-tabs>
       </div>
       <div class="fr rightPages">
@@ -24,7 +25,7 @@
   export default {
     data() {
       return {
-        activeName:"first",
+        activeName:"",
         checked: true,
         onOff: true,
         pagemsg: {

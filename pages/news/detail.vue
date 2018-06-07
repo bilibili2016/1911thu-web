@@ -4,7 +4,7 @@
     <!-- 面包屑 -->
     <el-breadcrumb class="news" separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>当前位置</el-breadcrumb-item>
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item class="home" @click="getMore('/')">首页</el-breadcrumb-item>
       <el-breadcrumb-item class="current">新闻资讯</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 新闻内容 -->
@@ -28,8 +28,8 @@
           <p>在讨论环节，清华新闻学院助理教授吴璟薇等交流了自己在国际教育中的心得与体会。</p>
         </div>
        <div class="next clearfix">
-          <span class="fl" v-if="newsDetail.prePiece" @click ="getMore('detailone')">上一篇  {{newsDetail.prePiece}}</span>
-          <span class="fr" v-if="newsDetail.nextPiece" @click ="getMore('detailtwo')">下一篇  {{newsDetail.nextPiece}}</span>
+          <span class="fl" v-if="newsDetail.prePiece" @click ="getMore('detailone')">上一篇 <i>{{newsDetail.prePiece}}</i></span>
+          <span class="fr" v-if="newsDetail.nextPiece" @click ="getMore('detailtwo')">下一篇 <i>{{newsDetail.nextPiece}}</i></span>
         </div>
       </div>
     </div>

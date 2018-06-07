@@ -4,7 +4,7 @@
     <!-- 面包屑 -->
     <el-breadcrumb class="news" separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>当前位置</el-breadcrumb-item>
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item class="home" @click="getMore('/')">首页</el-breadcrumb-item>
       <el-breadcrumb-item class="current">新闻资讯</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 新闻内容 -->

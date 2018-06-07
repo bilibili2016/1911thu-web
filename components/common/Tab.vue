@@ -1,31 +1,32 @@
 <template>
-<!-- :class="{ bg: tab}" -->
-  <div class="classify" :class="{ bg: tabd}">
-    <el-tabs v-model="actived" @tab-click="handleClick" tabPosition="left" @mouseenter="handleClick">
-      <el-tab-pane v-for="(item,index) in classify" :key="item.id" :label="item" @click="handleClick(item,index)" style="opacity:0.7">
-        <div class="subClass">
-          <h4>全部<span><i></i></span></h4>
-          <p>
-            <!-- @click="golink('home/category')" -->
-            <span  v-for="(items,index) in classtext" :key="items.id" @click="handlePid(item,index)">
-              <span>
-                {{items.name}}
-              </span>
-            </span>
-          </p>
-        </div>
-        <div class="courseMsg">
-          <div class="courseOne clearfix" v-for="(cus,index) in courses" :key="index" @click="getMore">
-            <img class="fl" :src="cus.src" alt="">
-            <div class="fl hover">
-              <h5>{{cus.title}}</h5>
-              <p>{{cus.author}}</p>
+  <div class="classify">
+        <div class="starters">
+            <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="showItem(index)" @mouseleave="leave">
+                <div class="tabs-title">{{item}}</div>
+                <div class="tabs-content" v-show="index===itemID">
+                    <div class="subClass">
+                        <h4>全部<span><i></i></span></h4>
+                        <p>
+                            <span  v-for="(items,index) in classtext" :key="items.id" @click="handlePid(item,index)">
+                                <span>{{items.name}}</span>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="courseMsg">
+                        <div class="courseOne clearfix" v-for="(cus,index) in courses" :key="index" @click="getMore">
+                            <img class="fl" :src="cus.src" alt="">
+                            <div class="fl hover">
+                                <h5>{{cus.title}}</h5>
+                                <p>{{cus.author}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
         </div>
-      </el-tab-pane>
-    </el-tabs>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -34,8 +35,8 @@ import { mapState, mapActions, mapGetters } from 'vuex'
     props: ["classify", "courses", "tab", "active", 'classtext'],
     data() {
       return {
+        itemID:null,
         actived: null,
-        tabd: null,
         cidform: {
           cids: ''
         },
@@ -50,7 +51,6 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         'setPid'
       ]),
       handleClick(item,index) {
-        this.tabd = true;
         this.cidform.cids = Number(item.index)
         this.setCid(this.cidform)
       },
@@ -63,12 +63,16 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 
         this.pidform.pids = index
         this.setPid(this.pidform)
+      },
+      showItem(index){
+        this.itemID = index;
+      },
+      leave(){
+        this.itemID = null;
       }
     },
     mounted () {
       this.actived = this.active
-      this.tabd = this.tab
-
     }
   };
 </script>

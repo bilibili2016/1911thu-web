@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-banner :config = "bconfig"></v-banner>
-    <div class="center-tab center">
-      <el-tabs :tab-position="tabPosition" v-model="activeName">
+    <div class="center-tab center profile" style="min-height:800px;">
+      <el-tabs :tab-position="tabPosition" v-model="activeTab">
         <!-- 我的信息 -->
-        <el-tab-pane class="my-home" name="first">
+        <el-tab-pane class="my-home" name="tab-first">
           <span slot="label"><i class="el-icon-date"></i> 我的首页</span>
           <el-card class="card-style">
             <div slot="header" class="clearfix">
@@ -16,7 +16,7 @@
           </el-card>
         </el-tab-pane>
         <!-- 我的课程 -->
-        <el-tab-pane class="my-course" name="second">
+        <el-tab-pane class="my-course" name="tab-second">
           <span slot="label"><i class="el-icon-date"></i> 我的课程</span>
           <el-card>
             <el-tabs v-model="activeNames">
@@ -30,10 +30,18 @@
                 <v-card :data="newData" :config="configZero"></v-card>
               </el-tab-pane>
             </el-tabs>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>黄金糕</el-dropdown-item>
+              <el-dropdown-item>狮子头</el-dropdown-item>
+              <el-dropdown-item>螺蛳粉</el-dropdown-item>
+              <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+              <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+            </el-dropdown-menu>
           </el-card>
+          
         </el-tab-pane>
         <!-- 我的消息 -->
-        <el-tab-pane class="my-info" name="third">
+        <el-tab-pane class="my-info" name="tab-third">
           <span slot="label"><i class="el-icon-date"></i> 我的消息</span>
           <el-card class="card-style">
             <div slot="header" class="clearfix">
@@ -43,17 +51,18 @@
           </el-card>
         </el-tab-pane>
         <!-- 个人设置 -->
-        <el-tab-pane name="fourth">
+        <el-tab-pane name="tab-fourth">
           <span slot="label"><i class="el-icon-date"></i> 个人设置</span>
           <v-person></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
-        <el-tab-pane name="fifth">
+        <el-tab-pane name="tab-fifth">
           <span slot="label"><i class="el-icon-date"></i> 绑定课程ID</span>
           <v-bind></v-bind>
         </el-tab-pane>
         <!-- 我的选课 -->
-        <el-tab-pane name="fifth" @click="goLink('/')">
+        <el-tab-pane name="tab-sixth" @tab-click="goShop">
+        <!-- <el-tab-pane name="tab-sixth" @click="goLink('/shop/checkedCourse')"> -->
           <span slot="label"><i class="el-icon-date"></i> 我的选课</span>
         </el-tab-pane>
       </el-tabs>
@@ -63,12 +72,12 @@
 
 <script>
   import CustomCard from "@/components/common/Card.vue";
-    import Banner from "@/components/common/Banner.vue";
+  import Banner from "@/components/common/Banner.vue";
   import PersonalSet from "@/pages/profile/pages/personalSet.vue";
   import Binding from "@/pages/profile/pages/bindId";
   import Info from "@/pages/profile/pages/info";
-import { other, auth } from '~/lib/v1_sdk/index'
-import { mapState, mapActions, mapGetters } from 'vuex'
+  import { other, auth } from '~/lib/v1_sdk/index'
+  import { mapState, mapActions, mapGetters } from 'vuex'
   export default {
     components: {
       "v-card": CustomCard,
@@ -81,7 +90,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       return {
         avator: require("~/assets/images/profile_avator01.png"),
         tabPosition: "left",
-        activeName: "first",
+        activeTab: "tab-first",
         activeNames: "first",
         bconfig: {
           banner_type: "profile"
@@ -218,13 +227,22 @@ import { mapState, mapActions, mapGetters } from 'vuex'
     methods:{
       goLink(item) {
         this.$router.push(item);
+      },
+      goShop(tab){
+        console.log(tab);
+        // this.goLink('/shop/checkedCourse');
       }
     },
     mounted () {
       this.activeName = this.gid
       console.log(this.gid)
-       document.getElementsByClassName("headerBox")[0].style.display="inline"
+      document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
     }
   };
 </script>
+<style>
+  .profile{
+    width: 1120px;
+  }
+</style>

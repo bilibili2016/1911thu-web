@@ -14,8 +14,8 @@
         <div class="aboutUs clearfix">
           <dl>
             <dt>关于我们</dt>
-            <dd>关于集团</dd>
-            <dd>发展历程</dd>
+            <dd @click="goLink('/home/pages/aboutUs')">关于集团</dd>
+            <dd @click="goLink('/home/pages/aboutUs')">发展历程</dd>
           </dl>
           <dl>
             <dt>加入我们</dt>
@@ -41,5 +41,11 @@
 </template>
 
 <script>
-  export default {};
+  export default {
+    methods:{
+      goLink(link){
+        this.$router.push(link);
+      }
+    }
+  };
 </script>

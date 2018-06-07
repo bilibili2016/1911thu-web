@@ -24,6 +24,11 @@ export default {
   props: ["teachers", "titleThree"],
   components: {
     "v-title": CustomTitle
+  },
+  methods:{
+    goLink(item){
+      this.$router.push(item);
+    }
   }
 };
 </script>

@@ -6,20 +6,27 @@
       </div>
     </transition>
     <transition :name="transitionName">
-      <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
+      <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
         <img :src="wxSrc" alt="" class="wxSrc">
+        <div class="showCode">
+          <img src="@/assets/images/wechatLogin.png" alt="">
+          <h4>1911学堂官方微信</h4>
+          <p>微信号：12yu169</p>
+        </div>
       </div>
     </transition>
     <transition :name="transitionName">
-      <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
+      <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
         <img :src="ceilSrc" alt="" class="ceilSrc">
+        <div class="telShow">
+          <p>咨询电话：010-6270 1911</p>
+        </div>
       </div>
     </transition>
     <transition :name="transitionName">
       <div class="back-to-ceiling customStyleThree" v-show="visible" @click="checkCourse">
         <div class="line-wrap">
           <div class="line-center">
-            <img :src="choiceSrc" alt="" class="ceilSrc">
             <span>我要选课</span>
           </div>
         </div>
@@ -54,8 +61,7 @@
         interval: null,
         ceilSrc: require("@/assets/images/home_backtop01.png"),
         wxSrc: require("@/assets/images/home_backtop02.png"),
-        topSrc: require("@/assets/images/home_backtop03.png"),
-        choiceSrc: require("@/assets/images/home_backtop04.png")
+        topSrc: require("@/assets/images/home_backtop03.png")
       };
     },
     mounted() {
@@ -109,7 +115,7 @@
     display: inline-block;
     text-align: center;
     cursor: pointer;
-    z-index: 9;
+    z-index: 4;
     &.customStyle{
       right: 30px;
       bottom: 320px;
@@ -121,21 +127,29 @@
     }
     &.customStyleOne{
       right: 30px;
-      bottom: 200px;
-      width: 50px;
-      height: 50px;
-      border-radius: 4px;
-      line-height: 45px;
-      background: #d800ff
-    }
-    &.customStyleTwo{
-      right: 30px;
       bottom: 260px;
       width: 50px;
       height: 50px;
       border-radius: 4px;
       line-height: 45px;
       background: #d800ff;
+      &:hover .showCode{
+        opacity: 1;
+        right: 62px;
+      }
+    }
+    &.customStyleTwo{
+      right: 30px;
+      bottom: 200px;
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+      line-height: 45px;
+      background: #d800ff;
+      &:hover .telShow{
+        opacity: 1;
+        right: 62px;
+      }
     };
     &.customStyleThree{
       right: 30px;
@@ -145,10 +159,67 @@
       border-radius: 4px;
       line-height: 45px;
       background: rgba(252,210,63,1);
+      transition: all 500ms;
+      z-index: 3;
+      &:hover{
+        background-color: #6417a6;
+        .line-center{
+          color:#FCD23F;
+          background: url('~assets/images/home_backtop05.png') no-repeat 16px 17px;
+          background-size: 18px 18px;
+        }
+      }
     }
-    &.hasColor:hover{
-      transition: all 400ms;
-      background: #8f4acb;
+    
+    // &.hasColor:hover{
+    //   transition: all 400ms;
+    //   background: #8f4acb;
+    // }
+    .showCode{
+      opacity: 0;
+      width: 170px;
+      height: 212px;
+      background-color: #fff;
+      border-radius: 4px;
+      position: absolute;
+      top: 0;
+      right: -1000px;
+      z-index: 5;
+      box-shadow:0px 0px 12px rgba(198,194,210,0.28);
+      transition: opacity 400ms;
+      img{
+        margin: 20px 25px 0;
+        width: 120px;
+        height: 120px;
+      }
+      h4{
+        text-align: center;
+        line-height: 20px;
+        font-size: 14px;
+        color:#050223
+      }
+      p{
+        text-align: center;
+        font-size: 12px;
+        line-height: 20px;
+        color: #888888;
+      }
+    }
+    .telShow{
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      right: -1000px;
+      height: 54px;
+      width: 205px;
+      line-height: 54px;
+      font-size: 14px;
+      border-radius: 4px;
+      color: #222;
+      text-align: center;
+      background-color: #fff;
+      box-shadow:0px 0px 12px rgba(198,194,210,0.28);
+      transition: opacity 400ms;
     }
   }
 
@@ -194,10 +265,12 @@
 
   .line-center {
     line-height: 50px;
-    font-family: MicrosoftYaHei;
-    color: rgba(100, 23, 166, 1);
+    color: #6417a6;
+    background: url('~assets/images/home_backtop04.png') no-repeat 16px 17px;
+    background-size: 18px 18px;
+    transition: all 500ms;
     span {
-      padding-left: 10px;
+      padding-left: 35px;
     }
   }
 

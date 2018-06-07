@@ -30,6 +30,12 @@ export default {
   props: ["titleFour", "carouselSrc", "evaluateData"],
   components: {
     "v-title": CustomTitle
+  },
+  methods:{
+    changeItem(){
+      // console.log(1);
+
+    }
   }
 };
 </script>
