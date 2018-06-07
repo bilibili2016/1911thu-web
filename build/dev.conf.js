@@ -6,7 +6,12 @@ config.analyze = {
 }
 
 config.head.script = [
-  { src: '/script/jquery.js', async: true }
+  { src: '/script/jquery.js', async: true },
+  {
+    src: 'https://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js',
+    async: true
+  }
+
 ]
 
 module.exports = config

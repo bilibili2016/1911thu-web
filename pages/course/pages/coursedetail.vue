@@ -18,19 +18,18 @@
               <img :src="shareImg" alt="">
               <span> 分享 </span>
             </div>
-
           </div>
         </div>
       </div>
       <div class="main-header">
-        <v-card :courseList="courseList" :config="config" :linkdata="linkseven"></v-card>
+        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg"></v-card>
       </div>
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="介绍" name="first">
           </el-tab-pane>
           <el-tab-pane label="目录" name="second">
-            <v-line :catalogs="catalogs"></v-line>
+            <v-line :catalogs="catalogs" :privileMsg="privileMsg"></v-line>
           </el-tab-pane>
         </el-tabs>
         <div class="attention">
@@ -126,7 +125,7 @@
           <h5>{{item.content}}</h5>
         </div>
       </div>
-          </div>
+    </div>
     </div>
   </div>
 </template>
@@ -276,7 +275,8 @@
           ids: '',
           types: 1,
           isRecommend: 2
-        }
+        },
+        privileMsg: true
       }
     },
     methods: {
@@ -291,21 +291,16 @@
           .catch(_ => {});
       },
       getCourseDetail () {
-
         return new Promise((resolve, reject) => {
           home.getCourseDetail(this.kidForm).then(response => {
-            // this.pagemsg.total = Number(response.data.pageCount) - 1;
-            // this.newsList = response.data.newsList;
-            // console.log(response, '这是response')
             this.courseList = response.data.curriculumDetail
+            this.privileMsg = response.data.curriculumPrivilege
           });
         });
       },
       getEvaluateList () {
         return new Promise((resolve, reject) => {
           home.getEvaluateLists(this.evaluateListForm).then(response => {
-            // console.log(response, '这是response333333')
-            // this.courseList = response.data.curriculumDetail
             this.commentator = response.data.evaluateList
           });
         });

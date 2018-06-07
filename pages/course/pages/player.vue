@@ -5,7 +5,7 @@
         <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
       </div>
       <div class="playInner" ref="playInner">
-        <video src="@/assets/images/piano.mp4" preload="auto" controls="controls"></video>
+        <div id="movd" ref="movd"></div>
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
@@ -86,8 +86,9 @@
 
 
 <script>
-import { other, auth } from '~/lib/v1_sdk/index'
+import { other, auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
   export default {
     data() {
       return {
@@ -96,12 +97,14 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         mediaRW: 28,
         mediaLW: 72,
         mediaRInner: true,
+        fileID:"",
+        appID:"",
         mediaRIcon: "el-icon-arrow-right",
         radioBtn:"",
         player: {
           courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
           video: "",
-          ewCode: require("../../../assets/images/attentionWechat2.png"),
+          ewCode: require("@/assets/images/attentionWechat2.png"),
           teacher: {
             name: "莎良朋",
             school: "华中科技大学博士"
@@ -135,16 +138,29 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         },
         hsgForm: {
           hsgs: true
+        },
+        playerForm: {
+          curriculumId: null,
+          catalogId: null
+        },
+        m3u8Url: null,
+        fileID: null,
+        appID: null,
+        tcplayer: {
+          "m3u8": 'h', //请替换成实际可用的播放地址
+          "autoplay" : false,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+          "fileID": '7447',
+          "appID": '1256'
         }
       }
     },
     mounted () {
       this.resize();
-      // window.addEventListener("onload",this.resize);
       window.addEventListener("resize", this.resize);
       // this.setHsg(this.hsgForm)
-      document.getElementsByClassName("headerBox")[0].style.display="none"
-      document.getElementsByClassName("footerBox")[0].style.display="none"
+      document.getElementsByClassName("headerBox")[0].style.display="none";
+      document.getElementsByClassName("footerBox")[0].style.display="none";
+      this.getPlayerInfo()
     },
     methods: {
       ...mapActions('auth', [
@@ -168,9 +184,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         this.word="";
       },
       resize() {
-        // const w = window.screen.width;
         const h = window.screen.availHeight;
-        // this.$refs.mediaL.style.width=w - this.mediaR+"px";
         this.$refs.mediaL.style.height= h+"px";
         this.$refs.mediaR.style.height= h+"px";
         this.$refs.playInner.style.height=h-100+"px";
@@ -181,6 +195,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
           this.mediaRInner = false;
           this.mediaRIcon = "el-icon-arrow-left";
           this.mediaLW = 100;
+          this.$refs.movd.children[0].style.width=this.mediaLW+"%";
         } else {
           this.mediaRW = 28;
           this.mediaRInner = true;
@@ -191,6 +206,20 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       },
       goLink () {
         this.$router.back(-1)
+      },
+      getPlayerInfo () {
+        this.playerForm.curriculumId = persistStore.get('curriculumId')
+        this.playerForm.catalogId = persistStore.get('catalogId')
+        return new Promise((resolve, reject) => {
+          home.getPlayerInfo(this.playerForm).then(response => {
+
+            this.tcplayer.m3u8 = response.data.playurl
+            this.tcplayer.fileID = response.data.playAuthInfo.fileID
+            this.tcplayer.appID = response.data.playAuthInfo.appID
+             const player = new TcPlayer('movd' , this.tcplayer);
+
+          });
+        });
       }
     }
   }

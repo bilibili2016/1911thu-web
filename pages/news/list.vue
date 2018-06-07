@@ -2,7 +2,7 @@
   <div class="news-list">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow">
-      <div @click="getNewInfoList">123</div>
+      <div @click="getNewInfoList"></div>
       <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail"></v-card>
     </div>
     <v-page :data="pagemsg" @page="selectPages"></v-page>

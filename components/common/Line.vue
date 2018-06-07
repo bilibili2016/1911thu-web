@@ -1,13 +1,28 @@
 <template>
   <div class="catalog">
-    <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
-      <h4>{{catalog.title}}</h4>
+    <div class="chapter" v-for="(catalog,index) in catalogs" :key="index" @click="handleCatalog(index,catalog)">
+      <h4>{{catalog.title}}{{privileMsg}}  1{{isAuthenticated}}</h4>
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="checked(index)">
         <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
         <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}）</span>
-        <span class="fl free" v-if="bar.look_at === '2'">免费</span>
-        <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
-        <span class="fr freePlay" v-else @click="goBuy">购买课程</span>
+        <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
+        <span v-if="isAuthenticated">
+          <span v-if="privileMsg === false">
+            <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
+            <span class="fr freePlay" v-else @click="goBuy">购买课程</span>
+          </span>
+          <span v-if="privileMsg === true">
+            <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+            <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+          </span>
+        </span>
+        <span v-else>
+            <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="buyMask">立即试看</span>
+            <span class="fr freePlay" v-else @click="goBuy">购买课程</span>
+        </span>
+
+
+
         <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
       </div>
     </div>
@@ -15,8 +30,23 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
+  import {
+    mapState,
+    mapActions,
+    mapGetters
+  } from "vuex";
+  import {
+    other,
+    auth
+  } from "~/lib/v1_sdk/index";
 export default {
-  props: ["catalogs"],
+  props: ["catalogs", 'privileMsg'],
+  computed: {
+      ...mapGetters('auth', [
+      'isAuthenticated'
+      ])
+    },
   methods: {
     goLink(item) {
       this.$router.push(item);
@@ -25,9 +55,21 @@ export default {
       this.$router.push('/shop/shoppingCart');
     },
     checked(index) {
-        $(".catalog .chapter .bar").removeClass("checked");
-        $(".catalog .chapter .bar").eq(index).addClass("checked");
-      }
+      $(".catalog .chapter .bar").removeClass("checked");
+      $(".catalog .chapter .bar").eq(index).addClass("checked");
+    },
+    handleCatalog(index, item) {
+      let curriculum_id = item.childList[index].curriculum_id
+      let catalog_id = item.childList[index].id
+      persistStore.set('curriculumId', curriculum_id)
+      persistStore.set('catalogId', catalog_id)
+    },
+    buyMask () {
+       this.$message({
+           message: '请登录后,进行试看',
+          type: 'success'
+        });
+    }
   }
 };
 </script>

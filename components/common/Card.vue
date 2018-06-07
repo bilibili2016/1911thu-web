@@ -14,7 +14,7 @@
     </template>
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
-      <div class="card-category">
+      <div class="card-category profile">
 
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
@@ -210,7 +210,13 @@
           <img :src="courseList.picture" class="image">
           <div class="mask"></div>
           <div class="common-button btn-bg">
-            <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+            <div v-if="isAuthenticated">
+              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
+              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+            </div>
+            <div v-else>
+              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+            </div>
           </div>
         </div>
       </el-card>
@@ -226,7 +232,13 @@
         <div class="study clearfix">
           <p>{{courseList.introduction}}</p>
           <div class="common-button">
-            <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+            <div v-if="isAuthenticated">
+              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
+              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+            </div>
+            <div v-else>
+              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -239,13 +251,13 @@
 
     <div class="course clearfix boxshadow-none" v-for="(course,index) in newsList" :key="index" style="box-shadow:none;">
       <el-card class="fl" :body-style="{ padding: '0px' }">
-        <div style="position:relative;" class="img-wrap" @click="getMore(linksix)">
+        <div style="position:relative;" class="img-wrap" @click="selectDetail(index,course,linksix)">
           <img :src="course.picture" class="image">
         </div>
       </el-card>
       <div class="particulars fr" style="width:640px;">
         <div class="currentclum">
-          <h4 @click="getMore(linksix)">{{course.title}}</h4>
+          <h4 @click="selectDetail(index,course,linksix)">{{course.title}}</h4>
         </div>
         <div class="bordernone">
           <p>{{course.introduce}}</p>
@@ -265,7 +277,7 @@
   <div class="info-list">
     <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index>0">
       <el-card shadow="never" body-style="padding: 0;">
-        <div class="info-box" @click="getMore('news/detail')">
+        <div class="info-box" @click="selectDetail(index,card,linksix)">
           <div class="info-wrap">
             <img :src="card.picture" alt="">
             <span>{{card.title}}</span>
@@ -279,7 +291,7 @@
 
 <template v-if="config.card_type === 'infoTwo'">
   <div class="card-categorys">
-    <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 1">
+    <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 1" @click="">
       <el-card shadow="never" body-style="padding: 0;" class="itemBox">
         <div class="img-box">
           <img :src="card.picture" alt="">
@@ -298,6 +310,15 @@
 </template>
 
 <script>
+  import {
+    other,
+    auth
+  } from "~/lib/v1_sdk/index";
+  import {
+    mapState,
+    mapActions,
+    mapGetters
+  } from "vuex";
   export default {
     props: [
       "data",
@@ -310,7 +331,8 @@
       "linkdata",
       'newsList',
       'linkfour',
-      'linksix'
+      'linksix',
+      'privileMsg'
     ],
     data() {
       return {
@@ -325,6 +347,11 @@
         checked: false,
         numberArr: []
       };
+    },
+    computed: {
+      ...mapGetters('auth', [
+      'isAuthenticated'
+      ])
     },
     methods: {
       goLink(item) {
@@ -372,7 +399,8 @@
       },
       selectDetail (index,course,linksix) {
         console.log(course, '这是course')
-         this.$emit('checkdetail', course.id)
+        this.$emit('checkdetail', course.id)
+        this.getMore(linksix);
       },
       selectCid (item,index) {
         console.log(item, '这是item')
@@ -679,6 +707,7 @@
           vertical-align: middle;
           font-family: MicrosoftYaHei;
           color: rgba(109, 104, 127, 1);
+          border-radius: 50%;
         }
       }
     }
@@ -855,12 +884,6 @@
       border-radius: 6px;
       background-color: #fff;
       box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-      &:hover .img-wrap img{
-        margin-top: -2px;
-        margin-left: -1.3px;
-        width: 404px;
-        height: 262.6px;
-      }
       .el-card {
         // width: 400px;
         // height: 392px;
@@ -871,7 +894,8 @@
           height: 260px;
           overflow: hidden;
           img{
-            transition: all 400ms;
+            width: 100%;
+            height: 100%;
           }
         }
         &>img {

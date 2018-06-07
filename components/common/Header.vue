@@ -8,9 +8,9 @@
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="gokey">
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
-      <div :class="{ HREntry : true , islogined : this.token === '123' ? true : false }">
-        <span class="hrin" @click="goLink('home/pages/hrEntry')">Hr入口</span>
-        <span v-if="isAuthenticated" @click="goLink('second')">我的课程</span>
+      <div :class="{ HREntry : true , islogined : isAuthenticated }">
+        <span class="hrin" @click="goSearchd('home/pages/hrEntry')">Hr入口</span>
+        <span v-show="isAuthenticated" @click="goLink('second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -22,15 +22,15 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-if="this.token === '123' ? true : false"  @click="goLink('/shop/shoppingCart')">
-          <img src="@/assets/images/shoppingCart.png" alt=""><i>2</i>
+        <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
+          <img src="@/assets/images/shoppingCart.png" alt=""><i v-show="shoppingCartNum>0">{{shoppingCartNum}}</i>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
         <!-- @click="login" -->
         <span @click ="loginCardShow" >登录</span>
         <!-- @click="register" -->
-        <span class="register" >注册</span>
+        <span class="register" @click="register">注册</span>
       </div>
       <div class="headImg" v-else>
         <img :src="user.userImg" alt="">
@@ -47,9 +47,9 @@
 
     <!-- 登录注册 -->
     <div class="start" v-if="start">
-      <div class="bgt"></div>
+      <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
-      <div class="lrFrame" >
+      <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
@@ -67,7 +67,7 @@
                 <el-button @click="signIns('loginData')">登录{{this.token}}</el-button>
               </el-row>
             </el-form>
-            <div class="otherLogin" @click="scanCode">其它方式登录</div>
+            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
           <!-- 注册表单 -->
           <el-tab-pane label="注册" name="register">
@@ -96,13 +96,13 @@
                 <el-button @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
-            <div class="otherLogin" @click="scanCode">其它方式登录</div>
+            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
         </el-tabs>
       </div>
 
       <!-- 微信登录 -->
-      <!-- <div class="lrFrame wechatLogin" v-show="wechatLogin">
+      <div class="lrFrame wechatLogin" v-show="wechatLogin">
         <el-form :model="bindTelData" status-icon ref="bindTelData" class="demo-ruleForm" v-show="bindTelShow">
           <h4 class="clearfix"><span>绑定手机账号</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
           <el-form-item prop="tel">
@@ -135,7 +135,7 @@
           <h5>手机账号绑定成功</h5>
           <p>返回登录 3S</p>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -186,6 +186,7 @@ import { store as persistStore } from '~/lib/core/store'
         islogin: false,
         activeName: "second",
         search: "",
+        shoppingCartNum:1,
         tokenForm: {
           tokens: "123"
         },
@@ -333,13 +334,13 @@ import { store as persistStore } from '~/lib/core/store'
              return new Promise((resolve, reject) => {
                 this.signIn(this.loginData).then(response => {
                   if(response.status === 0) {
-                    this.start = false
+                    this.start = false;
+                    this.islogin = true;
                   }
                   this.$message({
                     type: response.status === '0' ? 'error' : 'success',
                     message: response.msg
                   })
-
                 })
               })
           } else {
@@ -348,8 +349,20 @@ import { store as persistStore } from '~/lib/core/store'
         })
         this.move();
       },
+      // 获取微信登录二维码 请求
+      async wxLogin() {
+        return new Promise((resolve, reject) => {
+          auth.wechat(this.QRcode).then(response => {
+            window.location.href = response.data.wxurl;
+            console.log(response.data.wxurl);
+            
+          })
+        })
+      },
       // 忘记密码
       forget () {
+        this.$router.push("/home/pages/forgotPassword");
+        this.close();
       },
       goMycourse() {
         this.$router.push("/profile");
@@ -363,7 +376,6 @@ import { store as persistStore } from '~/lib/core/store'
       login() {
 
       },
-
       signOuts() {
         this.signOut()
       },
@@ -391,7 +403,6 @@ import { store as persistStore } from '~/lib/core/store'
         this.start = false;
         this.lrFrame = false;
         this.bgMsg = false;
-        // document.body.style.overflow = 'auto';
       },
       closeWechat() {
         this.start = false;
@@ -400,13 +411,14 @@ import { store as persistStore } from '~/lib/core/store'
         document.body.style.overflow = "auto";
       },
       handleClick(tab, event) {},
-      scanCode() {
+      wechatLogined() {
         //微信登录
         this.lrFrame = false;
         this.wechatLogin = true;
-        this.scanCodeShow = true; //微信扫码
+        //this.scanCodeShow = true; //微信扫码
         // this.bindTelShow=true; //绑定手机号
         // this.bindSuccessShow=true; // 登录成功
+        this.wxLogin();
       },
       stop() {
         var mo = function(e) {
@@ -463,7 +475,10 @@ import { store as persistStore } from '~/lib/core/store'
         // }
       }
     },
-    mounted() {}
+    mounted () {
+      document.getElementsByClassName("headerBox")[0].style.display="none";
+      document.getElementsByClassName("footerBox")[0].style.display="none";
+    },
   };
 </script>
 

@@ -60,6 +60,13 @@
         right: 0px;
         top: 151px;
       }
+      img{
+        opacity: 1;
+        transition: opacity .2s linear;
+      }
+      img:hover{
+        opacity: .75;
+      }
     }
   }
 }

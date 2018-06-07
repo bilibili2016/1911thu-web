@@ -3,8 +3,9 @@
   <v-home></v-home>
 </div>
 </template>
-
+ <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
 <script>
+
 import Home from "@/pages/home/index.vue";
 export default {
   components: {
