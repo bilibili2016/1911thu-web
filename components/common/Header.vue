@@ -164,6 +164,9 @@ import { store as persistStore } from '~/lib/core/store'
         if (!value) {
           return callback(new Error("手机号不能为空"));
         }
+        if(!(/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value))){
+          return callback(new Error("请输入正确手机号"));
+        }
         setTimeout(() => {
           if (!Number.isInteger(value)) {
             callback(new Error("请输入正确手机号"));
@@ -232,7 +235,7 @@ import { store as persistStore } from '~/lib/core/store'
               trigger: "blur"
             },
             {
-              validator: checkPhone,
+              validator: checkTel,
               trigger: "blur"
             }
           ],
@@ -265,7 +268,7 @@ import { store as persistStore } from '~/lib/core/store'
               trigger: "blur"
             },
             {
-              validator: checkPhone,
+              validator: checkTel,
               trigger: "blur"
             }
           ],
