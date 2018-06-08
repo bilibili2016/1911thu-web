@@ -16,8 +16,6 @@ config.head.script = [
   { src: 'https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js', async: true },
   {
     src: 'https://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js',
-
-
     async: true
   }
 ]

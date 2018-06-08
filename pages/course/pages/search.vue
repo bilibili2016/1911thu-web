@@ -1,11 +1,12 @@
 <template>
   <div>
-    <v-search></v-search>
+    <v-search @Search="handleSearchs"></v-search>
     <div class="center">
       <div class="cnums">
         共找到30门“冲突管理”相关课程
       </div>
-      <v-card :data="searchData" :config="config"></v-card>
+      <v-card :data="searchData" :config="config"  v-loading="loading" element-loading-text="拼命加载中"
+    element-loading-background="rgba(0, 0, 0, 0.8)"></v-card>
       <v-page :data="pagemsg"></v-page>
       <v-backtotop></v-backtotop>
     </div>
@@ -18,6 +19,7 @@
   import CustomCard from "@/components/common/Card.vue";
   import CustomPagination from "@/components/common/Pagination.vue";
   import BackToTop from "@/components/common/BackToTop.vue";
+  import { home } from '~/lib/v1_sdk/index'
   export default {
     components: {
       "v-search": Search,
@@ -27,125 +29,46 @@
     },
     data() {
       return {
-        searchData: [{
-            bg: require("@/assets/images/home_new01.png"),
-            name: "H5和小程序直播开发",
-            cnum: 12,
-            pnum: 899,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 123,
-            rate: 3
-          },
-          {
-            bg: require("@/assets/images/home_new02.png"),
-            name: "H5和小程序直播开发",
-            cnum: 34,
-            pnum: 2312,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 129,
-            rate: 5
-          },
-          {
-            bg: require("@/assets/images/home_new03.png"),
-            name: "H5和小程序直播开发",
-            cnum: 26,
-            pnum: 799,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 131,
-            rate: 1
-          },
-          {
-            bg: require("@/assets/images/home_new04.png"),
-            name: "H5和小程序直播开发",
-            cnum: 12,
-            pnum: 4399,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 161,
-            rate: 2
-          },
-          {
-            bg: require("@/assets/images/home_new01.png"),
-            name: "H5和小程序直播开发",
-            cnum: 12,
-            pnum: 899,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 141,
-            rate: 3
-          },
-          {
-            bg: require("@/assets/images/home_new02.png"),
-            name: "H5和小程序直播开发",
-            cnum: 34,
-            pnum: 2312,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 122,
-            rate: 5
-          },
-          {
-            bg: require("@/assets/images/home_new03.png"),
-            name: "H5和小程序直播开发",
-            cnum: 26,
-            pnum: 799,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 134,
-            rate: 1
-          },
-          {
-            bg: require("@/assets/images/home_new04.png"),
-            name: "H5和小程序直播开发",
-            cnum: 12,
-            pnum: 4399,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 166,
-            rate: 2
-          },
-          {
-            bg: require("@/assets/images/home_new01.png"),
-            name: "H5和小程序直播开发",
-            cnum: 12,
-            pnum: 899,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 146,
-            rate: 3
-          },
-          {
-            bg: require("@/assets/images/home_new02.png"),
-            name: "H5和小程序直播开发",
-            cnum: 34,
-            pnum: 2312,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 622,
-            rate: 5
-          },
-          {
-            bg: require("@/assets/images/home_new03.png"),
-            name: "H5和小程序直播开发",
-            cnum: 26,
-            pnum: 799,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 174,
-            rate: 1
-          },
-          {
-            bg: require("@/assets/images/home_new04.png"),
-            name: "H5和小程序直播开发",
-            cnum: 12,
-            pnum: 4399,
-            avator: require("@/assets/images/home_avator.png"),
-            id: 186,
-            rate: 2
-          }
-        ],
+        searchData: [],
         config: {
           card_type: "profile",
           card: 'home'
         },
         pagemsg: {
           page: 1,
-          pagesize: 8,
-          total: 12
-        }
+          pagesize: 2,
+          total: null
+        },
+        searchForm: {
+          pages: 0,
+          limits: 2,
+          searchword: null,
+          categoryid: null,
+          sortby: 2
+        },
+        loading: false
       };
+    },
+    methods: {
+      handleSearchs(val) {
+        console.log(val, '这是val')
+        this.searchForm.searchword = val
+
+        this.loading = true
+        this.searchCurriculumList()
+      },
+      searchCurriculumList () {
+        return new Promise((resolve, reject) => {
+          home.searchCurriculumList(this.searchForm).then(response => {
+            console.log(response, '这是response')
+            this.searchData = response.data.curriculumList
+            console.log(this.searchData, '123456')
+            this.pagemsg.total = response.data.pageCount
+            this.loading = false
+            resolve(true)
+          })
+        })
+      }
     },
     mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"

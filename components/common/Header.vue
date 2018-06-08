@@ -55,10 +55,10 @@
             <!-- 登录 表单-->
             <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm">
               <el-form-item prop="phonenum">
-                <el-input v-model.number="loginData.phonenum" placeholder="请输入登录手机号"></el-input>
+                <el-input v-model.number="loginData.phonenum" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格"></el-input>
+                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
@@ -73,15 +73,15 @@
           <el-tab-pane label="注册" name="register">
             <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
               <el-form-item prop="phones">
-                <el-input v-model="registerData.phones" placeholder="请输入登录手机号"></el-input>
+                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                <div class="getCode" @click="handleGetCode">获取验证码</div>
+                <div class="getCode" @click="handleGetCode">{{bindTelData.getCode}}</div>
                 <!--  -->
               </el-form-item>
                <el-form-item prop="passwords">
-                <el-input v-model="registerData.passwords" placeholder="请输入密码"></el-input>
+                <el-input v-model="registerData.passwords" type="password" placeholder="请输入密码"></el-input>
               </el-form-item>
               <el-form-item prop="companyCodes">
                 <el-input v-model="registerData.companyCodes" placeholder="绑定企业"></el-input>
@@ -125,9 +125,10 @@
         </el-form>
 
         <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"><span>微信登录</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
-          <img :src="QRcode" alt="">
-          <p>请使用微信扫描“1911学堂”二维码登录</p>
+          <h4 class="clearfix"><span>微信登录</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4> <!-- el-icon-loading -->
+          <img :src="getWXLoginImg.isget" alt="">
+          <h5>请使用微信扫描“1911学堂”二维码登录</h5>
+          <p>二维码将在5分钟后失效！<i @click="getWXCode">重新获取二维码</i></p>
         </div>
 
         <div class="bindSuccess" v-show="bindSuccessShow">
@@ -141,301 +142,377 @@
 </template>
 
 <script>
-import { store as persistStore } from '~/lib/core/store'
-  import {
-    getQueryString
-  } from "@/lib/util/helper";
-  import {
-    other,
-    auth
-  } from "~/lib/v1_sdk/index";
-  import {
-    mapState,
-    mapActions,
-    mapGetters
-  } from "vuex";
-  import {
-    checkPhone,
-    checkCode
-  } from "~/lib/util/validatefn";
-  export default {
-    data() {
-      var checkTel = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error("手机号不能为空"));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error("请输入正确手机号"));
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === "") {
-          callback(new Error("请输入密码"));
-          return false;
-        } else if (value.length < 6 || value.length > 10) {
-          callback(new Error("请输入6-10位密码"));
-          return false;
-        }
-      };
-      return {
-        searchImg: require("~/assets/images/search.png"),
-        start: false,
-        lrFrame: false,
-        islogin: false,
-        activeName: "second",
-        search: "",
-        shoppingCartNum:1,
-        tokenForm: {
-          tokens: "123"
-        },
-        bgMsg: false,
-        user: {
-          userImg: require("~/assets/images/headImg.png")
-        },
-        activeName: "login",
+import { store as persistStore } from "~/lib/core/store";
+import { getQueryString } from "@/lib/util/helper";
+import { other, auth } from "~/lib/v1_sdk/index";
+import { mapState, mapActions, mapGetters } from "vuex";
+import { checkPhone, checkCode } from "~/lib/util/validatefn";
+export default {
+  data() {
+    var checkTel = (rule, value, callback) => {
+      console.log(value); 
+      
+      if (!value) {
+        return callback(new Error("手机号不能为空"));
+      }
+      if (value.toString().length != 11) {
+        return callback(new Error("请输入正确手机号"));
+      }
+      if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
+        return callback(new Error("请输入正确手机号"));
+      }
+    };
+    var checkRgTel = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("手机号不能为空"));
+      }
+      if (value.toString().length != 11) {
+        return callback(new Error("请输入正确手机号"));
+      }
+      if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
+        return callback(new Error("请输入正确手机号"));
+      }
+    };
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+        return false;
+      } else if (value.length < 6 || value.length > 10) {
+        callback(new Error("请输入6-10位密码"));
+        return false;
+      }
+    };
+    var checkCompanyCodes = (rule, value, callback) => {
+      if (!/^[A-Za-z0-9]+$/.test(value)) {
+        return callback(new Error("请输入正确企业ID"));
+      }
+    };
+    return {
+      searchImg: require("~/assets/images/search.png"),
+      start: false,
+      lrFrame: false,
+      islogin: false,
+      activeName: "second",
+      search: "",
+      shoppingCartNum: 1,
+      tokenForm: {
+        tokens: "123"
+      },
+      bgMsg: false,
+      user: {
+        userImg: require("~/assets/images/headImg.png")
+      },
+      activeName: "login",
+      QRcode: require("~/assets/images/wechatLogin.png"),
+      wechatLogin: false,
+      bindTelShow: false,
+      scanCodeShow: false,
+      bindSuccessShow: false,
+      bindTelData: {
+        tel: "",
+        code: "",
+        getCode: "获取验证码",
+        seconds: 60,
+        captchaDisable: false,
+        checked: false
+      },
+      getWXLoginImg: {
+        time: 300,
+        isget: "",
+        WXverify:false
 
-        QRcode: require("~/assets/images/wechatLogin.png"),
-        wechatLogin: false,
-        bindTelShow: false,
-        scanCodeShow: false,
-        bindSuccessShow: false,
-        bindTelData: {
-          tel: "",
-          code: "",
-          getCode: "获取验证码",
-          checked: false
-        },
-        // 登录数据
-        loginData: {
-          password: "",
-          phonenumber: "",
-          showPwd: false,
-          pwdType: "password",
-          loginTypes: 1
-        },
-        // 注册数据
-        registerData: {
-          phones: '',
-          passwords: '',
-          types: 1,
-          codes: "",
-          checked: [],
-          companyCodes: ''
-        },
-        // 注册表单验证
-        registRules: {
-          phones: [{
-              required: true,
-              message: "请输入手机号",
-              trigger: "blur"
-            },
-            {
-              validator: checkPhone,
-              trigger: "blur"
-            }
-          ],
-          passwords: [
-            { required: true, message: '请输入账户密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
-          ],
-          codes: [{
-              required: true,
-              message: "请输入验证码",
-              trigger: "blur"
-            },
-            {
-              validator: checkCode,
-              trigger: "blur"
-            }
-          ],
-          checked: [{
+      },
+      // 登录数据
+      loginData: {
+        password: "",
+        phonenum: "",
+        showPwd: false,
+        pwdType: "password",
+        loginTypes: 1
+      },
+      // 注册数据
+      registerData: {
+        phones: "",
+        passwords: "",
+        types: 1,
+        codes: "",
+        checked: [],
+        companyCodes: ""
+      },
+      // 注册表单验证
+      registRules: {
+        phones: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          { validator: checkRgTel, trigger: "blur" }
+        ],
+        passwords: [
+          { required: true, message: "请输入账户密码", trigger: "blur" },
+          {
+            type: "string",
+            min: 8,
+            max: 16,
+            message: "密码长度为8-16位",
+            trigger: "blur"
+          }
+        ],
+        codes: [{ required: true, message: "请输入验证码", trigger: "blur" }],
+        companyCodes: [
+          { min: 9, max: 9, message: "请输入正确的企业ID", trigger: "blur" },
+          { validator: checkCompanyCodes, trigger: "blur" }
+        ],
+        checked: [
+          {
             type: "array",
             required: true,
             message: "请勾选同意用户协议",
             trigger: "change"
-          }]
-        },
-        // 登录表单验证
-        loginRules: {
-          phonenum: [{
-              required: true,
-              message: "请输入手机号",
-              trigger: "blur"
-            },
-            {
-              validator: checkPhone,
-              trigger: "blur"
+          }
+        ]
+      },
+      // 登录表单验证
+      loginRules: {
+        phonenum: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          { validator: checkTel, trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "请输入账户密码", trigger: "blur" }
+        ]
+      },
+      gidForm: {
+        gids: null
+      }
+      // ipone code
+    };
+  },
+  computed: {
+    ...mapState("auth", ["token"]),
+    ...mapGetters("auth", ["isAuthenticated"])
+  },
+  methods: {
+    ...mapActions("auth", ["signIn", "setGid", "signOut"]),
+    // 登录显示card
+    async loginCardShow() {
+      this.start = true;
+      this.lrFrame = this.start;
+      this.activeName = "login";
+      this.stop();
+      this.bgMsg = true;
+    },
+    // 获取验证码
+    async handleGetCode() {
+      return new Promise((resolve, reject) => {
+        auth.smsCodes(this.registerData).then(response => {
+          this.$message({
+            type: response.status === "0" ? "success" : "error",
+            message: response.msg
+          });
+          this.captchaDisable = true;
+          this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
+          let interval = setInterval(() => {
+            if (this.bindTelData.seconds <= 0) {
+              this.bindTelData.getCode = "获取验证码";
+              this.bindTelData.seconds = 60;
+              this.captchaDisable = false;
+              clearInterval(interval);
+            } else {
+              this.bindTelData.getCode =
+                --this.bindTelData.seconds + "秒后重新发送";
             }
-          ],
-          password: [
-            { required: true, message: '请输入账户密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
-          ]
-        },
-        gidForm: {
-          gids: null
-        }
-        // ipone code
-      };
-    },
-    computed: {
-      ...mapState("auth", ["token"]),
-      ...mapGetters('auth', [
-      'isAuthenticated'
-      ])
-    },
-    methods: {
-      ...mapActions("auth", ["signIn", "setGid", 'signOut']),
-      // 登录显示card
-      async loginCardShow () {
-        this.start = true;
-        this.lrFrame = this.start;
-        this.activeName = "login";
-        this.stop();
-        this.bgMsg = true;
-      },
-      // // 获取验证码
-      async handleGetCode() {
-        return new Promise((resolve, reject) => {
-           auth.smsCodes(this.registerData).then(response => {
-            // console.log(response, '这是response')
-            this.$message({
-              type: response.status === '1' ? 'success' : 'error',
-              message: response.msg
-            })
-          })
-        })
-      },
-      // 注册 请求
-      signUp(formName) {
-        this.$refs[formName].validate(valid => {
-          if (valid) {
-            return new Promise((resolve, reject) => {
-              auth.signUp(this.registerData).then(response => {
-                this.$message({
-                  type: response.status === '1' ? 'success' : 'error',
-                  message: response.msg
-                })
-              })
-            })
-          } else {
-            return false;
-          }
+          }, 1000);
         });
-      },
-      // 登录 请求
-      signIns(formName) {
-        // this.signIn(this.tokenForm);
-        // this.start = false;
-        this.$refs[formName].validate(valid => {
-          if (valid) {
-             return new Promise((resolve, reject) => {
-                this.signIn(this.loginData).then(response => {
-                  if(response.status === 0) {
-                    this.start = false;
-                    this.islogin = true;
-                  }
-                  this.$message({
-                    type: response.status === '0' ? 'error' : 'success',
-                    message: response.msg
-                  })
-                })
-              })
-          } else {
-            return false;
+      });
+    },
+    // 验证手机号是否存在
+    verifyTel(tel) {
+      return new Promise((resolve, reject) => {
+        this.verifyPhone(this.registerData.phones).then(response => {
+          this.$message({
+            type: response.status === "0" ? "success" : "error",
+            message: response.msg
+          });
+        });
+      });
+    },
+    // 注册 请求
+    signUp(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          return new Promise((resolve, reject) => {
+            auth.signUp(this.registerData).then(response => {
+              this.$message({
+                type: response.status === "0" ? "success" : "error",
+                message: response.msg
+              });
+            });
+          });
+        } else {
+          return false;
+        }
+      });
+    },
+    // 登录 请求
+    signIns(formName) {
+      // this.signIn(this.tokenForm);
+      // this.start = false;
+      console.log(1);
+      this.$refs[formName].validate(valid => {
+        console.log(2);
+        if (valid) {
+          console.log(3);
+          return new Promise((resolve, reject) => {
+            this.signIn(this.loginData).then(response => {
+              console.log("dl");
+              if (response.status === 0) {
+                this.start = false;
+                this.islogin = true;
+              }
+              this.$message({
+                type: response.status === "0" ? "error" : "success",
+                message: response.msg
+              });
+            });
+          });
+        } else {
+          return false;
+        }
+      });
+      this.move();
+    },
+    // 获取微信登录二维码
+    async wxLogin() {
+      return new Promise((resolve, reject) => {
+        auth.wechat(this.getWXLoginImg.isget).then(response => {
+          this.getWXLoginImg.isget = response.data.url;
+          var timewx = setInterval(() => {
+            this.getWXLoginImg.time--;
+            this.getWXLogin();
+          }, 1000);
+        });
+      });
+    },
+    // 获取微信登录权限
+    async getWXLogin() {
+      return new Promise((resolve, reject) => {
+        auth.verifyPhone(this.getWXLoginImg.WXverify).then(response => {
+          console.log(response.data);
+          if(response.status === "100100"){
+              clearInterval(timewx);
+              this.$message({
+                type: "error",
+                message: response.msg
+              });
           }
-        })
+          if(response.status === "0"){
+             clearInterval(timewx);
+            console.log(response.data,"已有账号直接登录，返回token");
+          }
+          if(response.status === "100102"){
+             clearInterval(timewx);
+            console.log(response.data,"未绑定手机");
+          }
+          
+        });
+      });
+    },
+    // 忘记密码
+    forget() {
+      this.$router.push("/home/pages/forgotPassword");
+      this.close();
+    },
+    goMycourse() {
+      this.$router.push("/profile");
+    },
+    goLinks() {
+      this.$router.push("/shop/shoppingCart");
+    },
+    goLink(item) {
+      this.$router.push(item);
+    },
+    login() {},
+    signOuts() {
+      this.signOut();
+    },
+    changePwd() {
+      if (this.loginData.showPwd) {
+        this.loginData.showPwd = false;
+        this.loginData.pwdType = "password";
+      } else {
+        this.loginData.showPwd = true;
+        this.loginData.pwdType = "text";
+      }
+    },
+    register() {
+      this.start = true;
+      this.lrFrame = true;
+      this.activeName = "register";
+      if (this.start === true) {
+        this.stop();
+      } else {
         this.move();
-      },
-      // 获取微信登录二维码 请求
-      async wxLogin() {
-        return new Promise((resolve, reject) => {
-          auth.wechat(this.QRcode).then(response => {
-            window.location.href = response.data.wxurl;
-            // console.log(response.data.wxurl);
-
-          })
-        })
-      },
-      // 忘记密码
-      forget () {
-        this.$router.push("/home/pages/forgotPassword");
-        this.close();
-      },
-      goMycourse() {
-        this.$router.push("/profile");
-      },
-      goLinks() {
-        this.$router.push("/shop/shoppingCart");
-      },
-      goLink(item) {
-        this.$router.push(item);
-      },
-      login() {
-
-      },
-      signOuts() {
-        this.signOut()
-      },
-      changePwd() {
-        if (this.showPwd) {
-          this.showPwd = false;
-          this.loginData.pwdType = "password";
-        } else {
-          this.showPwd = true;
-          this.loginData.pwdType = "text";
-        }
-      },
-      register() {
-        this.start = true;
-        this.lrFrame = true;
-        this.activeName = "register";
-        if (this.start === true) {
-          this.stop();
-        } else {
-          this.move();
-        }
-      },
-      close() {
-        this.move();
-        this.start = false;
-        this.lrFrame = false;
-        this.bgMsg = false;
-      },
-      closeWechat() {
-        this.start = false;
-        this.lrFrame = false;
-        this.wechatLogin = false;
-        document.body.style.overflow = "auto";
-      },
-      handleClick(tab, event) {},
-      wechatLogined() {
-        //微信登录
-        this.lrFrame = false;
-        this.wechatLogin = true;
-        //this.scanCodeShow = true; //微信扫码
-        // this.bindTelShow=true; //绑定手机号
-        // this.bindSuccessShow=true; // 登录成功
+      }
+    },
+    close() {
+      this.move();
+      this.start = false;
+      this.lrFrame = false;
+      this.bgMsg = false;
+    },
+    closeWechat() {
+      this.start = false;
+      this.lrFrame = false;
+      this.wechatLogin = false;
+      clearInterval(timewx);
+      // document.body.style.overflow = "auto";
+    },
+    handleClick(tab, event) {},
+    wechatLogined() {
+      //微信登录
+      this.lrFrame = false;
+      this.wechatLogin = true;
+      this.scanCodeShow = true; //微信扫码
+      // this.bindTelShow=true; //绑定手机号
+      // this.bindSuccessShow=true; // 登录成功
+      this.wxLogin();
+    },
+    getWXCode() {
+      console.log(this.getWXLoginImg.time);
+      if (this.getWXLoginImg.time < 1) {
+        clearInterval(timewx);
         this.wxLogin();
-      },
-      stop() {
-        var mo = function(e) {
-          e.preventDefault();
-        };
-        document.body.style.overflow = "hidden";
-        document.addEventListener("touchmove", mo, false); //禁止页面滑动
-      },
-      /***取消滑动限制***/
-      move() {
-        var mo = function(e) {
-          e.preventDefault();
-        };
-        document.body.style.overflow = "auto"; //出现滚动条
-        document.removeEventListener("touchmove", mo, false);
-      },
-      goSearch(item) {
+      } else {
+        this.$message({
+          message: "请勿重复获取！",
+          type: "warning"
+        });
+      }
+    },
+    stop() {
+      var mo = function(e) {
+        e.preventDefault();
+      };
+      document.body.style.overflow = "hidden";
+      document.addEventListener("touchmove", mo, false); //禁止页面滑动
+    },
+    /***取消滑动限制***/
+    move() {
+      var mo = function(e) {
+        e.preventDefault();
+      };
+      document.body.style.overflow = "auto"; //出现滚动条
+      document.removeEventListener("touchmove", mo, false);
+    },
+    goSearch(item) {
+      switch (window.location.pathname) {
+        case "/course/pages/search":
+          break;
+        default:
+          this.$router.push("/course/pages/search");
+          break;
+      }
+    },
+    gokey() {
+      if (event.keyCode == 13) {
         switch (window.location.pathname) {
           case "/course/pages/search":
             break;
@@ -443,47 +520,33 @@ import { store as persistStore } from '~/lib/core/store'
             this.$router.push("/course/pages/search");
             break;
         }
-      },
-      gokey() {
-        if (event.keyCode == 13) {
-          switch (window.location.pathname) {
-            case "/course/pages/search":
-              break;
-            default:
-              this.$router.push("/course/pages/search");
-              break;
-          }
-        }
-      },
-      goSearchd(item) {
-        this.$router.push(item);
-      },
-      backHome() {
-        this.$router.push("/");
-      },
-      goLink(item) {
-        this.gidForm.gids = item;
-        this.setGid(this.gidForm);
-        this.$router.push("/profile");
-        // switch (window.location.pathname) {
-        //   case '/':
-        //     this.$router.push('/profile');
-        //     break
-        //   default:
-
-        //     break
-        // }
       }
     },
-    mounted () {
-      document.getElementsByClassName("headerBox")[0].style.display="none";
-      document.getElementsByClassName("footerBox")[0].style.display="none";
+    goSearchd(item) {
+      this.$router.push(item);
     },
-  };
+    backHome() {
+      this.$router.push("/");
+    },
+    goLink(item) {
+      this.gidForm.gids = item;
+      this.setGid(this.gidForm);
+      this.$router.push("/profile");
+      // switch (window.location.pathname) {
+      //   case '/':
+      //     this.$router.push('/profile');
+      //     break
+      //   default:
+
+      //     break
+      // }
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  .cli {
-    cursor: pointer;
-  }
+.cli {
+  cursor: pointer;
+}
 </style>

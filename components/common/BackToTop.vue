@@ -12,7 +12,7 @@
         <div class="showCode">
           <img src="@/assets/images/wechatLogin.png" alt="">
           <h4>1911学堂官方微信</h4>
-          <p>微信号：12yu169</p>
+          <p>微信号：xuetang1911</p>
         </div>
       </div>
     </transition>

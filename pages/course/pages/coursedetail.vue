@@ -13,8 +13,11 @@
         <div class="fr">
           <div class="collect">
             <div class="line-center">
-              <img :src="shareImgc" alt="">
-              <span> 收藏 </span>
+              <span @click="collection" :class=" { bag: this.collectMsg === 1 }" >
+                <i class="el-icon-star-on" style="font-size:16px;"></i>
+                <span :class=" { bag: this.collectMsg === 1 }">收藏 </span>
+              </span>
+
               <img :src="shareImg" alt="">
               <span> 分享 </span>
             </div>
@@ -135,6 +138,7 @@
   import CustomLine from "@/components/common/Line.vue";
   import { other, home } from "~/lib/v1_sdk/index";
   import { mapState, mapGetters, mapActions } from 'vuex'
+  import { store as persistStore } from '~/lib/core/store'
   export default {
     computed: {
       ...mapState('auth', [
@@ -156,72 +160,7 @@
         value1: 5,
         linkseven: 'player',
         catalogs: [
-        {
-          isLogin: false,
-          title: " 章节1    :   S01 【本节免费】购前必读",
-          childList: [{
-              video_number: "1-1",
-              title: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT？",
-              video_time: "32分钟",
-              percentage: 30,
-              isFree: true,
-            },
-            {
-              video_number: "1-2",
-              title: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
-              video_time: "35分钟",
-              percentage: 10,
-              isFree: false,
-            },
-            {
-              video_number: "1-3",
-              title: "【素材下载】S01-3 课程参考资料在哪里下载？",
-              video_time: "35分钟",
-              percentage: 10,
-              isFree: false,
-            },
-            {
-              video_number: "1-4",
-              title: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
-              video_time: "35分钟",
-              percentage: 10,
-              isFree: false,
-            }
-          ]
-        },
-        {
-          isLogin: false,
-          title: " 章节1    :   S01 【本节免费】购前必读",
-          childList: [{
-              video_number: "1-1",
-              title: "【课程介绍】S01-1 如何又快又好搞定你的工作型PPT？",
-              video_time: "32分钟",
-              percentage: 30,
-              isFree: true,
-            },
-            {
-              video_number: "1-2",
-              title: "【惊喜福利】S01-2 工作型PPT必备超值大礼包，快来领取！",
-              video_time: "35分钟",
-              percentage: 10,
-              isFree: false,
-            },
-            {
-              video_number: "1-3",
-              title: "【素材下载】S01-3 课程参考资料在哪里下载？",
-              video_time: "35分钟",
-              percentage: 10,
-              isFree: false,
-            },
-            {
-              video_number: "1-4",
-              title: "【软件版本】s01-4 有时候打败你的不是ppt技术，而是版本！",
-              video_time: "35分钟",
-              percentage: 10,
-              isFree: false,
-            }
-          ]
-        }],
+       ],
         teacher: {
           headImg: require("../../../assets/images/headImg.png"),
           teacherName: "莎良朋",
@@ -276,7 +215,11 @@
           types: 1,
           isRecommend: 2
         },
-        privileMsg: true
+        privileMsg: true,
+        collectMsg: 1,
+        addCollectionForm: {
+          curriculumId: null
+        }
       }
     },
     methods: {
@@ -293,6 +236,7 @@
       getCourseDetail () {
         return new Promise((resolve, reject) => {
           home.getCourseDetail(this.kidForm).then(response => {
+            console.log(response, '这是课程详情')
             this.courseList = response.data.curriculumDetail
             this.privileMsg = response.data.curriculumPrivilege
           });
@@ -307,13 +251,53 @@
       },
       getCourseList () {
         return new Promise((resolve, reject) => {
-
           home.getCourseList(this.kidForm).then(response => {
             console.log(response, '这是课程列表')
             // this.courseList = response.data.curriculumDetail
             this.catalogs = response.data.curriculumCatalogList
           });
         });
+      },
+      // 判断是收藏还是为收藏
+      collection () {
+        console.log(this.collectMsg, '1234')
+        if(this.collectMsg === 1){
+          this.deleteCollection()
+        } else {
+          this.addCollection()
+        }
+      },
+      // 添加收藏
+      addCollection () {
+        console.log('增加收藏')
+        this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+        return new Promise((resolve, reject) => {
+          home.addCollection(this.addCollectionForm).then(response => {
+            console.log(response, '增加收藏')
+            // this.collectMsg = response.data.curriculumDetail.is_collection
+            this.$message({
+              type: 'success',
+              message: '添加收藏成功'
+            })
+            this.collectMsg = 1
+          });
+        });
+      },
+      // 删除收藏
+      deleteCollection () {
+
+        this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+        return new Promise((resolve, reject) => {
+          home.deleteCollection(this.addCollectionForm).then(response => {
+
+            // this.collectMsg = response.data.curriculumDetail.is_collection
+            this.$message({
+              type: 'success',
+              message: '取消收藏成功'
+            })
+            this.collectMsg = 0
+          });
+        })
       }
     },
     mounted () {
@@ -329,5 +313,7 @@
 </script>
 
 <style scoped>
-
+.bag {
+  color:#732eaf!important;
+}
 </style>

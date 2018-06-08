@@ -1,7 +1,8 @@
 <template>
   <div class="catalog">
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index" @click="handleCatalog(index,catalog)">
-      <h4>{{catalog.title}}{{privileMsg}}  1{{isAuthenticated}}</h4>
+      <h4>{{catalog.title}}</h4>
+      <!-- {{privileMsg}}  1{{isAuthenticated}} -->
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="checked(index)">
         <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
         <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}）</span>
