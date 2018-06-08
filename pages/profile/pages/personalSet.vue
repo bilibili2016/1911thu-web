@@ -71,7 +71,7 @@
         <el-tab-pane label="修改密码" name="second">
           <!-- 修改密码 -->
           <div v-show="showPwd" class="changePwd">
-            <el-form :model="changePwd" status-icon :rules="pwdRules" ref="ruleForm2" label-width="135px" class="demo-ruleForm">
+            <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm">
               <el-form-item label="原密码：" prop="oldPass">
                 <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input>
               </el-form-item>
@@ -89,155 +89,198 @@
         </el-tab-pane>
       </el-tabs>
 
-
     </div>
+    <transition name="fade">
+      <div class="success" v-show="updateSuccess">
+        <img src="@/assets/images/bindingSuccess.png">
+        <p>恭喜您操作成功</p>
+    </div>
+    </transition>
   </div>
 </template>
 
 <script>
-  export default {
-    methods: {
-      handleClick() {
-
-      },
-      onSubmit() {
-
-      },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-
-            alert('submit!');
-          } else {
-
-            return false;
-          }
-        });
-      }
-    },
-    data() {
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
+import { home } from "~/lib/v1_sdk/index";
+export default {
+  methods: {
+    handleClick() {},
+    onSubmit() {},
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          let tmp = {
+            oldps: this.changePwd.oldPass,
+            newpass: this.changePwd.newPass,
+            newpasso: this.changePwd.checkPass
+          };
+          return new Promise((resolve, reject) => {
+            home.editPassWord(tmp).then(res=>{
+              this.changePwd={
+                oldPass:'',
+                newPass:'',
+                checkPass:''
+              }
+              this.updateSuccess = true;
+              setTimeout(()=>{
+                this.updateSuccess = false;
+              },1000)
+            })
+          });
         } else {
-          if (this.changePwd.checkPass !== '') {
-            this.$refs.changePwd.validateField('checkPass');
-          }
-          callback();
+          return false;
         }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.changePwd.newPass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
-      return {
-        activeName: "first",
-        hasPersonalInfo: true,
-        showPwd: true,
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        changePwd: {
-          oldPass: '',
-          newPass: '',
-          checkPass: ''
-        },
-        pwdRules: {
-          oldPass: [{
-            validator: validatePass,
-            trigger: 'blur'
-          }],
-          newPass: [{
-            validator: validatePass,
-            trigger: 'blur'
-          }],
-          checkPass: [{
-            validator: validatePass2,
-            trigger: 'blur'
-          }]
-        },
-        psnInfo: {
-          name: "王大锤丢了锤",
-          sex: "男",
-          birthday: "2018-05-31",
-          address: "河南省郑州市郑东新区",
-          position: "技术",
-          email: "163735467@qq.com",
-          tel: "19728166173",
-          company: "北京那么大科技有限公司"
-        },
-        psnForm: {
-          name: "",
-          sex: "",
-          birthday: "",
-          province: "",
-          city: "",
-          district: "",
-          position: "",
-          email: "",
-          tel: "19728166173",
-          company: "北京那么大科技有限公司"
-        },
-        rules: {
-          name: [{
-              message: '请输入昵称',
-              trigger: 'blur'
-            },
-            {
-              min: 3,
-              max: 8,
-              message: '长度在 3 到 5 个字符',
-              trigger: 'blur'
-            }
-          ],
-          sex: [{
-            message: '请选择性别',
-            trigger: 'change'
-          }],
-          birthday: [{
-            type: 'date',
-            message: '请选择生日',
-            trigger: 'change'
-          }],
-          address: [{
-            message: '请选择您的所在地',
-            trigger: 'change'
-          }],
-          position: [{
-            message: '请填写您的职位',
-            trigger: 'blur'
-          }],
-          email: [{
-              message: '请输入邮箱地址',
-              trigger: 'blur'
-            },
-            {
-              type: 'email',
-              message: '请输入正确的邮箱地址',
-              trigger: ['blur', 'change']
-            }
-          ]
-        }
-      }
+      });
     }
+  },
+  data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.changePwd.checkPass !== "") {
+          this.$refs.changePwd.validateField("checkPass");
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.changePwd.newPass) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
+    return {
+      activeName: "first",
+      hasPersonalInfo: true,
+      showPwd: true,
+      updateSuccess: false,
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕"
+        },
+        {
+          value: "选项2",
+          label: "双皮奶"
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎"
+        },
+        {
+          value: "选项4",
+          label: "龙须面"
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭"
+        }
+      ],
+      changePwd: {
+        oldPass: "",
+        newPass: "",
+        checkPass: ""
+      },
+      pwdRules: {
+        oldPass: [
+          {
+            validator: validatePass,
+            trigger: "blur",
+            message: "请输入旧密码"
+          }
+        ],
+        newPass: [
+          {
+            validator: validatePass,
+            trigger: "blur",
+            message: "请输入至少6位的密码"
+          }
+        ],
+        checkPass: [
+          {
+            validator: validatePass2,
+            trigger: "blur",
+            message: "请再次输入密码"
+          }
+        ]
+      },
+      psnInfo: {
+        name: "王大锤丢了锤",
+        sex: "男",
+        birthday: "2018-05-31",
+        address: "河南省郑州市郑东新区",
+        position: "技术",
+        email: "163735467@qq.com",
+        tel: "19728166173",
+        company: "北京那么大科技有限公司"
+      },
+      psnForm: {
+        name: "",
+        sex: "",
+        birthday: "",
+        province: "",
+        city: "",
+        district: "",
+        position: "",
+        email: "",
+        tel: "19728166173",
+        company: "北京那么大科技有限公司"
+      },
+      rules: {
+        name: [
+          {
+            message: "请输入昵称",
+            trigger: "blur"
+          },
+          {
+            min: 3,
+            max: 8,
+            message: "长度在 3 到 5 个字符",
+            trigger: "blur"
+          }
+        ],
+        sex: [
+          {
+            message: "请选择性别",
+            trigger: "change"
+          }
+        ],
+        birthday: [
+          {
+            type: "date",
+            message: "请选择生日",
+            trigger: "change"
+          }
+        ],
+        address: [
+          {
+            message: "请选择您的所在地",
+            trigger: "change"
+          }
+        ],
+        position: [
+          {
+            message: "请填写您的职位",
+            trigger: "blur"
+          }
+        ],
+        email: [
+          {
+            message: "请输入邮箱地址",
+            trigger: "blur"
+          },
+          {
+            type: "email",
+            message: "请输入正确的邮箱地址",
+            trigger: ["blur", "change"]
+          }
+        ]
+      }
+    };
   }
+};
 </script>
 
