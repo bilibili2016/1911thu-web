@@ -395,6 +395,7 @@ export default {
     async getWXLogin() {
       return new Promise((resolve, reject) => {
         auth.verifyPhone(this.getWXLoginImg.WXverify).then(response => {
+          console.log(response.data);
           if(response.status === "100100"){
               clearInterval(timewx);
               this.$message({
@@ -461,6 +462,7 @@ export default {
       this.start = false;
       this.lrFrame = false;
       this.wechatLogin = false;
+      clearInterval(timewx);
       // document.body.style.overflow = "auto";
     },
     handleClick(tab, event) {},
