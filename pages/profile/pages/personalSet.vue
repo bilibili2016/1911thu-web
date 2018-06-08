@@ -99,7 +99,8 @@ export default {
     "psnForm.province"(val) {
       this.city = [];
       this.psnForm.city = "";
-      for (let item of this.mapregionList) {
+      if(this.mapregionList){
+        for (let item of this.mapregionList) {
         if (item.region_code == val) {
           for (let cit of item.city) {
             this.city.push(
@@ -107,6 +108,7 @@ export default {
             );
           }
         }
+      }
       }
     },
     "psnForm.city"(val) {
@@ -177,7 +179,7 @@ export default {
       home.positionList().then(res => {
         let tmp = res.data;
         this.options = tmp.map(item => {
-          return { label: item.position_name, value: item.position_target };
+          return { label: item.position_name, value: item.id };
         });
       });
     }
