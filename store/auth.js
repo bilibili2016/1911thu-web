@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-07 10:11:14
+ * @Last Modified time: 2018-06-08 22:38:52
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -31,7 +31,8 @@ persistStore.defaults({
   nid: null,
   kid: null,
   isShowTip: null,
-  productsNum:null
+  productsNum: null,
+  number: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -43,6 +44,7 @@ let nid = persistStore.get('nid')
 let kid = persistStore.get('kid')
 let isShowTip = persistStore.get('isShowTip')
 let productsNum = persistStore.get('productsNum')
+let number = persistStore.get('number')
 
 export const MUTATION = {
   signIn: 'sign-in',
@@ -56,7 +58,9 @@ export const MUTATION = {
   setNid: 'set-nid',
   setKid: 'set-kid',
   setIsShowTip: 'set-isShowTip',
-  productsNum:'set-productsNum'
+  productsNum:'set-productsNum',
+  setNumber:'set-number'
+
 
 }
 export const state = () => ({
@@ -69,7 +73,8 @@ export const state = () => ({
   nid,
   kid,
   isShowTip,
-  productsNum
+  productsNum,
+  number
 })
 export const getters = {
   isAuthenticated(state) {
@@ -141,7 +146,15 @@ export const mutations = {
     productsNum
   }) {
     state.productsNum = productsNum
+  },
+  [MUTATION.setNumber](state, {
+
+    number
+
+  }) {
+    state.number = number
   }
+
 }
 export const actions = {
   async signIn({
@@ -398,6 +411,30 @@ export const actions = {
       }
     }
     return productsNum
+  },
+  async setNumber ({
+    commit,
+    state
+  }, {
+    numbers
+  }) {
+    try {
+      console.log(numbers)
+
+      let number = numbers
+      persistStore.set('number', number)
+      commit(MUTATION.setNumber, {
+        number
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return productsNum
   }
+
 
 }

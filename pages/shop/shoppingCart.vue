@@ -13,15 +13,15 @@
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">
-              <img class="fl" :src="course.src" alt="">
+              <img class="fl" :src="course.picture" alt="">
               <div class="fl">
                 <h4>{{course.title}}</h4>
-                <h6>{{course.period}}学时</h6>
+                <h6>{{course.curriculum_time}}学时</h6>
                 <p>讲师：{{course.teacher}}</p>
               </div>
             </div>
             <div class="coursePrice">
-              ￥{{course.price}}
+              ￥{{course.present_price}}
             </div>
             <div class="courseOperation">
               删除
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import { home } from '@/lib/v1_sdk/index'
 // 总价 多选
   export default {
     data(){
@@ -108,30 +109,7 @@
         number:1,
         money: [],
         courseList:[
-          {
-            src: require("@/assets/images/ke-3.png"),
-            title:"H5和小程序直播开发",
-            period:52,
-            teacher:"王建中",
-            price:23.56,
-            checkMsg: false
-          },
-          {
-            src: require("~/assets/images/ke-3.png"),
-            title:"H5和小程序直播开发",
-            period:52,
-            teacher:"王建中",
-            price: 40.60,
-            checkMsg: false
-          },
-          {
-            src: require("~/assets/images/ke-3.png"),
-            title:"H5和小程序直播开发",
-            period:52,
-            teacher:"王建中",
-            price: 40.60,
-            checkMsg: false
-          }
+
         ],
         restaurants: [
           {"value":"11111"},
@@ -210,11 +188,20 @@
         if(typeof this.number !== "number" || this.number<1){
           this.number=1;
         }
+      },
+      shopCartList (){
+        return new Promise((resolve, reject) => {
+          home.shopCartList().then(response => {
+            console.log(response, '这是response')
+            this.courseList = response.data.curriculumCartList
+          })
+        })
       }
     },
     mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+      this.shopCartList()
     }
   }
 </script>

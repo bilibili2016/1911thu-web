@@ -27,7 +27,7 @@
               <img :src="card.picture" alt=""
              >
             </div>
-
+            <el-checkbox v-model="card.checkmsg" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
               <span>新闻宣传</span>
               <span>时政</span>
@@ -97,7 +97,7 @@
               <img :src="card.bg" alt=""
              >
             </div>
-              <el-checkbox v-model="card.checkmsg" style="position:absolute;top:10px;right:10px;"></el-checkbox>
+
             <div class="tag">
               <span>新闻宣传</span>
               <span>时政</span>
@@ -315,6 +315,9 @@
     mapActions,
     mapGetters
   } from "vuex";
+  import {
+  store as persistStore
+} from '~/lib/core/store'
   export default {
     props: [
       "data",
@@ -341,17 +344,28 @@
         jinImg: require('@/assets/images/jin.png'),
         isShow: false,
         checked: false,
-        numberArr: []
+        numberArr: [],
+        number: null,
+        numberForm:{
+          numbers: null
+        },
+        curriculumcartid:{
+          numberArr: []
+        },
+        curriculumcartids: {
+          cartid: null
+        }
       };
     },
     computed: {
       ...mapGetters('auth', [
-      'isAuthenticated'
+      'isAuthenticated',
+
       ]),
       ...mapState("auth", ["token","productsNum"]),
     },
     methods: {
-      ...mapActions("auth", ["setProductsNum"]),
+      ...mapActions("auth", ["setProductsNum",'setNumber']),
       goLink(item) {
          switch (window.location.pathname) {
           case '/course/pages/category':
@@ -408,13 +422,30 @@
       this.isShow = !this.isShow;
     },
     selectDetail(index, course, linksix) {
-      // console.log(course, '这是course')
       this.$emit("checkdetail", course.id);
       this.getMore(linksix);
     },
     selectCid(item, index) {
-      // console.log(item, '这是item')
-      this.$emit("selectCid", item.id);
+        console.log(item)
+        this.curriculumcartids.cartid = item.id
+      if(item.checkmsg === false){
+        item.checkmsg = true
+        this.curriculumcartid.numberArr.push(item.id)
+      } else {
+        item.checkmsg = false
+        this.curriculumcartid.numberArr.pop()
+      }
+      this.numberForm.numbers = this.curriculumcartid.numberArr.length
+      // persistStore.set('number', this.number)
+      this.setNumber(this.numberForm)
+      this.addChecked()
+    },
+    addChecked(){
+      return new Promise((resolve, reject) => {
+        home.addChecked(this.curriculumcartids).then(response => {
+            console.log(response)
+          })
+        })
     }
   },
   mounted() {}
