@@ -27,7 +27,7 @@
               <img :src="card.picture" alt=""
              >
             </div>
-            <el-checkbox v-model="card.checkmsg" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
+            <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
               <span>新闻宣传</span>
               <span>时政</span>
@@ -411,7 +411,7 @@
         for (var i=0; i<this.data.length; i++){
         if(i === index){
           // this.nextmsg = true
-          this.$set(this.data[i], "checkmsg", true);
+          this.$set(this.data[i], "is_checked", true);
         }
       }
     },
@@ -428,21 +428,30 @@
     selectCid(item, index) {
         console.log(item)
         this.curriculumcartids.cartid = item.id
-      if(item.checkmsg === false){
-        item.checkmsg = true
+      if(item.is_checked === false){
+        item.is_checked = true
         this.curriculumcartid.numberArr.push(item.id)
+        this.addChecked()
       } else {
-        item.checkmsg = false
+        item.is_checked = false
         this.curriculumcartid.numberArr.pop()
+        this.delShopCart()
       }
       this.numberForm.numbers = this.curriculumcartid.numberArr.length
       // persistStore.set('number', this.number)
       this.setNumber(this.numberForm)
-      this.addChecked()
+
     },
     addChecked(){
       return new Promise((resolve, reject) => {
         home.addChecked(this.curriculumcartids).then(response => {
+            console.log(response)
+          })
+        })
+    },
+    delShopCart (){
+       return new Promise((resolve, reject) => {
+        home.delShopCart(this.curriculumcartids).then(response => {
             console.log(response)
           })
         })

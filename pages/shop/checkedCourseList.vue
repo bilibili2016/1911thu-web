@@ -34,6 +34,7 @@
 
 <script>
 // 总价 多选
+import { home } from '@/lib/v1_sdk/index'
   export default {
     data(){
       return{
@@ -92,9 +93,20 @@
         }
       }
     },
+    methods: {
+      curriculumPayApply() {
+        return new Promise((resolve, reject) => {
+          home.curriculumPayApply().then(response => {
+            console.log(response, '123')
+            resolve(true)
+          })
+        })
+      }
+    },
      mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+      this.curriculumPayApply()
     }
   }
 </script>
