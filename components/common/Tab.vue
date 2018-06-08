@@ -1,15 +1,15 @@
 <template>
   <div class="classify">
         <div class="starters">
-            <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="showItem(index)" @mouseleave="leave">
+            <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="showItem(index,item)" @mouseleave="leave">
                 <div class="tabs-title">{{item.category_name}}</div>
                 <div class="tabs-content" v-show="index===itemID">
                     <div class="subClass">
                         <h4>全部<span><i></i></span></h4>
                         <p>
-                            <span  v-for="(child,index) in item._child" :key="child.id" @click="handlePid(child,index)">
-                                <span>{{child.category_name}}</span>
-                            </span>
+                          <span  v-for="(child,index) in item._child" :key="child.id" @click="handlePid(child,index)">
+                              <span>{{child.category_name}}</span>
+                          </span>
                         </p>
                     </div>
 
@@ -40,7 +40,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
         cidform: {
           cids: ''
         },
-         pidform: {
+        pidform: {
           pids: ''
         }
       }
@@ -60,12 +60,15 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       },
       handlePid(item,index) {
         this.$router.push('course/pages/category')
-
-        this.pidform.pids = index
+        this.pidform.pids = item.id
+        console.log(this.pidform, '这是this.pidform')
         this.setPid(this.pidform)
       },
-      showItem(index){
+      showItem(index,item){
+        console.log(item.id)
         this.itemID = index;
+        this.cidform.cids = item.id
+        this.setCid(this.cidform)
       },
       leave(){
         this.itemID = null;

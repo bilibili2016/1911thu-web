@@ -22,8 +22,8 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-if="isAuthenticated"  @click="goLink('/shop/shoppingCart')">
-          <img src="@/assets/images/shoppingCart.png" alt=""><i>{{getProductsNum}}</i>
+        <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
+          <img src="@/assets/images/shoppingCart.png" alt=""><i v-show="shoppingCartNum>0">{{shoppingCartNum}}</i>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -142,160 +142,61 @@
 </template>
 
 <script>
-import { store as persistStore } from '~/lib/core/store'
-  import {
-    getQueryString
-  } from "@/lib/util/helper";
-  import {
-    other,
-    auth
-  } from "~/lib/v1_sdk/index";
-  import {
-    mapState,
-    mapActions,
-    mapGetters
-  } from "vuex";
-  import {
-    checkPhone,
-    checkCode
-  } from "~/lib/util/validatefn";
-  export default {
-    data() {
-      var checkTel = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error("手机号不能为空"));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error("请输入正确手机号"));
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
-        if (value === "") {
-          callback(new Error("请输入密码"));
-          return false;
-        } else if (value.length < 6 || value.length > 10) {
-          callback(new Error("请输入6-10位密码"));
-          return false;
-        }
-      };
-      return {
-        searchImg: require("~/assets/images/search.png"),
-        start: false,
-        lrFrame: false,
-        islogin: false,
-        activeName: "second",
-        search: "",
-        tokenForm: {
-          tokens: "123"
-        },
-        bgMsg: false,
-        user: {
-          userImg: require("~/assets/images/headImg.png")
-        },
-        activeName: "login",
+import { store as persistStore } from "~/lib/core/store";
+import { getQueryString } from "@/lib/util/helper";
+import { other, auth } from "~/lib/v1_sdk/index";
+import { mapState, mapActions, mapGetters } from "vuex";
+import { checkPhone, checkCode } from "~/lib/util/validatefn";
+export default {
+  data() {
+    var checkTel = (rule, value, callback) => {
+      console.log(value);
 
-        QRcode: require("~/assets/images/wechatLogin.png"),
-        wechatLogin: false,
-        bindTelShow: false,
-        scanCodeShow: false,
-        bindSuccessShow: false,
-        bindTelData: {
-          tel: "",
-          code: "",
-          getCode: "获取验证码",
-          checked: false
-        },
-        // 登录数据
-        loginData: {
-          password: "",
-          phonenumber: "",
-          showPwd: false,
-          pwdType: "password",
-          loginTypes: 1
-        },
-        // 注册数据
-        registerData: {
-          phones: '',
-          passwords: '',
-          types: 1,
-          codes: "",
-          checked: [],
-          companyCodes: ''
-        },
-        // 注册表单验证
-        registRules: {
-          phones: [{
-              required: true,
-              message: "请输入手机号",
-              trigger: "blur"
-            },
-            {
-              validator: checkPhone,
-              trigger: "blur"
-            }
-          ],
-          passwords: [
-            { required: true, message: '请输入账户密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
-          ],
-          codes: [{
-              required: true,
-              message: "请输入验证码",
-              trigger: "blur"
-            },
-            {
-              validator: checkCode,
-              trigger: "blur"
-            }
-          ],
-          checked: [{
-            type: "array",
-            required: true,
-            message: "请勾选同意用户协议",
-            trigger: "change"
-          }]
-        },
-        // 登录表单验证
-        loginRules: {
-          phonenum: [{
-              required: true,
-              message: "请输入手机号",
-              trigger: "blur"
-            },
-            {
-              validator: checkPhone,
-              trigger: "blur"
-            }
-          ],
-          password: [
-            { required: true, message: '请输入账户密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
-          ]
-        },
-        gidForm: {
-          gids: null
-        }
-        // ipone code
-      };
-    },
-    computed: {
-      ...mapState("auth", ["token"]),
-      ...mapGetters('auth', [
-      'isAuthenticated',
-      'getProductsNum'
-      ])
-    },
-    methods: {
-      ...mapActions("auth", ["signIn", "setGid", 'signOut',"setIsShowTip"]),
-      // 登录显示card
-      async loginCardShow () {
-        this.start = true;
-        this.lrFrame = this.start;
-        this.activeName = "login";
-        this.stop();
-        this.bgMsg = true;
+      if (!value) {
+        return callback(new Error("手机号不能为空"));
+      }
+      if (value.toString().length != 11) {
+        return callback(new Error("请输入正确手机号"));
+      }
+      if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
+        return callback(new Error("请输入正确手机号"));
+      }
+    };
+    var checkRgTel = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("手机号不能为空"));
+      }
+      if (value.toString().length != 11) {
+        return callback(new Error("请输入正确手机号"));
+      }
+      if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
+        return callback(new Error("请输入正确手机号"));
+      }
+    };
+    var validatePass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+        return false;
+      } else if (value.length < 6 || value.length > 10) {
+        callback(new Error("请输入6-10位密码"));
+        return false;
+      }
+    };
+    var checkCompanyCodes = (rule, value, callback) => {
+      if (!/^[A-Za-z0-9]+$/.test(value)) {
+        return callback(new Error("请输入正确企业ID"));
+      }
+    };
+    return {
+      searchImg: require("~/assets/images/search.png"),
+      start: false,
+      lrFrame: false,
+      islogin: false,
+      activeName: "second",
+      search: "",
+      shoppingCartNum: 1,
+      tokenForm: {
+        tokens: "123"
       },
       bgMsg: false,
       user: {
@@ -377,9 +278,6 @@ import { store as persistStore } from '~/lib/core/store'
         password: [
           { required: true, message: "请输入账户密码", trigger: "blur" }
         ]
-      signOuts() {
-        this.setIsShowTip({isShowTips:false})
-        this.signOut()
       },
       gidForm: {
         gids: null

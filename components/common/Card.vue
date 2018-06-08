@@ -161,11 +161,11 @@
   <div class="courseList center goodLesson">
     <div class="course clearfix bottom" v-for="(course,index) in courseList" :key="index">
       <el-card class="fl" :body-style="{ padding: '0px' }">
-        <img :src="course.bgImg" class="image" >
+        <img :src="course.picture" class="image" >
         <div class="personInfo clearfix ">
-          <img :src="course.headImg" alt="" >
-          <h5 class="fr">{{course.grade}}：{{course.teacher}}</h5>
-          <p class="fr">{{course.school}}</p>
+          <img :src="course.head_img" alt="" >
+          <h5 class="fr">特约讲师：{{course.teacher_name}}</h5>
+          <p class="fr">{{course.graduate}}</p>
         </div>
         <div class="play-btn">
           <img :src="playbtn" alt="" @click="goLink('coursedetail')">
@@ -174,23 +174,23 @@
       <div class="particulars fr">
         <div class="currentclum">
           <h4>{{course.title}}</h4>
-          <p>{{course.synopsis}}</p>
+          <p>{{course.introduction}}</p>
         </div>
 
         <el-carousel trigger="click" height="120px">
-          <el-carousel-item v-for="item in 4" :key="item">
+          <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
             <div class="comment">
               <h5>
-                <span>{{course.observer}}的评论</span>
-                <el-rate disabled v-model="course.rate" class="itemBox-rate"></el-rate>
+                <span>{{item.nick_name}}的评论</span>
+                <el-rate disabled v-model="item.score" class="itemBox-rate"></el-rate>
               </h5>
-              <p>{{course.comment}}</p>
+              <p>{{item.evaluate_content}}</p>
             </div>
           </el-carousel-item>
         </el-carousel>
         <div class="study clearfix">
-          <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.styduNumber}}人加入学习</span>
-          <span class="coin">￥ 300.00</span>
+          <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
+          <span class="coin">￥ {{course.present_price}}</span>
           <div class="fr common-button">
             <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
           </div>
@@ -315,7 +315,8 @@
   } from "~/lib/v1_sdk/index";
   import {
     mapState,
-    mapActions
+    mapActions,
+    mapGetters
   } from "vuex";
   export default {
     props: [
