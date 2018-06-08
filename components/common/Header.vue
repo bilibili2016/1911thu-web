@@ -58,7 +58,7 @@
                 <el-input v-model.number="loginData.phonenum" placeholder="请输入登录手机号"></el-input>
               </el-form-item>
               <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格"></el-input>
+                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格" @keyup.enter.native="signIns('loginData')"></el-input>
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
@@ -73,11 +73,11 @@
           <el-tab-pane label="注册" name="register">
             <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
               <el-form-item prop="phones">
-                <el-input v-model="registerData.phones" placeholder="请输入登录手机号"></el-input>
+                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号"></el-input>
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                <div class="getCode" @click="handleGetCode">获取验证码</div>
+                <div class="getCode" @click="handleGetCode">{{bindTelData.getCode}}</div>
                 <!--  -->
               </el-form-item>
                <el-form-item prop="passwords">
@@ -164,14 +164,12 @@ import { store as persistStore } from '~/lib/core/store'
         if (!value) {
           return callback(new Error("手机号不能为空"));
         }
+        if (value.toString().length!=11) {
+          return callback(new Error("请输入正确手机号"));
+        }
         if(!(/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value))){
           return callback(new Error("请输入正确手机号"));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error("请输入正确手机号"));
-          }
-        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === "") {
@@ -208,6 +206,8 @@ import { store as persistStore } from '~/lib/core/store'
           tel: "",
           code: "",
           getCode: "获取验证码",
+          seconds: 60,
+          captchaDisable: false,
           checked: false
         },
         // 登录数据
@@ -229,19 +229,13 @@ import { store as persistStore } from '~/lib/core/store'
         },
         // 注册表单验证
         registRules: {
-          phones: [{
-              required: true,
-              message: "请输入手机号",
-              trigger: "blur"
-            },
-            {
-              validator: checkTel,
-              trigger: "blur"
-            }
+          phones: [
+            { required: true, message: "请输入手机号", trigger: "blur"},
+            { validator: checkTel, trigger: "blur" }
           ],
           passwords: [
             { required: true, message: '请输入账户密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
+            { type: 'string', min: 8, max: 16,  message: '密码长度为8-16位', trigger: 'blur' },
           ],
           codes: [{
               required: true,
@@ -262,19 +256,12 @@ import { store as persistStore } from '~/lib/core/store'
         },
         // 登录表单验证
         loginRules: {
-          phonenum: [{
-              required: true,
-              message: "请输入手机号",
-              trigger: "blur"
-            },
-            {
-              validator: checkTel,
-              trigger: "blur"
-            }
+          phonenum: [
+            { required: true, message: "请输入手机号", trigger: "blur"},
+            { validator: checkTel, trigger: "blur" }
           ],
           password: [
             { required: true, message: '请输入账户密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
           ]
         },
         gidForm: {
@@ -299,17 +286,29 @@ import { store as persistStore } from '~/lib/core/store'
         this.stop();
         this.bgMsg = true;
       },
-      // // 获取验证码
+      // 获取验证码
       async handleGetCode() {
-        return new Promise((resolve, reject) => {
-           auth.smsCodes(this.registerData).then(response => {
-            // console.log(response, '这是response')
-            this.$message({
-              type: response.status === '1' ? 'success' : 'error',
-              message: response.msg
+          return new Promise((resolve, reject) => {
+            auth.smsCodes(this.registerData).then(response => {
+              this.$message({
+                type: response.status === '1' ? 'success' : 'error',
+                message: response.msg
+              })
+              this.captchaDisable = true
+              this.bindTelData.getCode = this.bindTelData.seconds + '秒后重新发送'
+              let interval = setInterval(() => {
+                if (this.bindTelData.seconds <= 0) {
+                  this.bindTelData.getCode = '获取验证码'
+                  this.bindTelData.seconds = 60
+                  this.captchaDisable = false
+                  clearInterval(interval)
+                } else {
+                  this.bindTelData.getCode = --this.bindTelData.seconds + '秒后重新发送'
+                }
+              }, 1000)
             })
           })
-        })
+        
       },
       // 注册 请求
       signUp(formName) {
@@ -357,8 +356,6 @@ import { store as persistStore } from '~/lib/core/store'
         return new Promise((resolve, reject) => {
           auth.wechat(this.QRcode).then(response => {
             window.location.href = response.data.wxurl;
-            console.log(response.data.wxurl);
-            
           })
         })
       },
@@ -383,11 +380,11 @@ import { store as persistStore } from '~/lib/core/store'
         this.signOut()
       },
       changePwd() {
-        if (this.showPwd) {
-          this.showPwd = false;
+        if (this.loginData.showPwd) {
+          this.loginData.showPwd = false;
           this.loginData.pwdType = "password";
         } else {
-          this.showPwd = true;
+          this.loginData.showPwd = true;
           this.loginData.pwdType = "text";
         }
       },
@@ -411,7 +408,7 @@ import { store as persistStore } from '~/lib/core/store'
         this.start = false;
         this.lrFrame = false;
         this.wechatLogin = false;
-        document.body.style.overflow = "auto";
+        // document.body.style.overflow = "auto";
       },
       handleClick(tab, event) {},
       wechatLogined() {
@@ -478,10 +475,7 @@ import { store as persistStore } from '~/lib/core/store'
         // }
       }
     },
-    mounted () {
-      document.getElementsByClassName("headerBox")[0].style.display="none";
-      document.getElementsByClassName("footerBox")[0].style.display="none";
-    },
+    
   };
 </script>
 

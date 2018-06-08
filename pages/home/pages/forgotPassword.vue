@@ -98,7 +98,11 @@
                     this.pwdType = 'text';
                 }
             },
-        }
+        },
+        mounted () {
+            document.getElementsByClassName("headerBox")[0].style.display="none";
+            document.getElementsByClassName("footerBox")[0].style.display="none";
+        },
 
     }
 </script>
