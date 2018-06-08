@@ -150,6 +150,8 @@ import { checkPhone, checkCode } from "~/lib/util/validatefn";
 export default {
   data() {
     var checkTel = (rule, value, callback) => {
+      console.log(value); 
+      
       if (!value) {
         return callback(new Error("手机号不能为空"));
       }
@@ -216,12 +218,14 @@ export default {
       },
       getWXLoginImg: {
         time: 300,
-        isget: ""
+        isget: "",
+        WXverify:false
+
       },
       // 登录数据
       loginData: {
         password: "",
-        phonenumber: "",
+        phonenum: "",
         showPwd: false,
         pwdType: "password",
         loginTypes: 1
@@ -351,10 +355,14 @@ export default {
     signIns(formName) {
       // this.signIn(this.tokenForm);
       // this.start = false;
+      console.log(1);
       this.$refs[formName].validate(valid => {
+        console.log(2);
         if (valid) {
+          console.log(3);
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
+              console.log("dl");
               if (response.status === 0) {
                 this.start = false;
                 this.islogin = true;
@@ -371,14 +379,38 @@ export default {
       });
       this.move();
     },
-    // 获取微信登录二维码 请求
+    // 获取微信登录二维码
     async wxLogin() {
       return new Promise((resolve, reject) => {
         auth.wechat(this.getWXLoginImg.isget).then(response => {
           this.getWXLoginImg.isget = response.data.url;
           var timewx = setInterval(() => {
             this.getWXLoginImg.time--;
+            this.getWXLogin();
           }, 1000);
+        });
+      });
+    },
+    // 获取微信登录权限
+    async getWXLogin() {
+      return new Promise((resolve, reject) => {
+        auth.verifyPhone(this.getWXLoginImg.WXverify).then(response => {
+          if(response.status === "100100"){
+              clearInterval(timewx);
+              this.$message({
+                type: "error",
+                message: response.msg
+              });
+          }
+          if(response.status === "0"){
+             clearInterval(timewx);
+            console.log(response.data,"已有账号直接登录，返回token");
+          }
+          if(response.status === "100102"){
+             clearInterval(timewx);
+            console.log(response.data,"未绑定手机");
+          }
+          
         });
       });
     },
