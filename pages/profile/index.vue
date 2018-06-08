@@ -11,7 +11,7 @@
               <span>最近学习</span>
             </div>
             <div class="content">
-              <v-card :data="newData" :config="configZero"></v-card>
+              <v-card :data="newDataing" :config="configZero"></v-card>
             </div>
           </el-card>
         </el-tab-pane>
@@ -27,7 +27,7 @@
                 <v-card :data="newDataReady" :config="configTwo"></v-card>
               </el-tab-pane>
               <el-tab-pane label="我的收藏" name="third">
-                <v-card :data="newData" :config="configZero"></v-card>
+                <v-card :data="collectionData" :config="configZero"></v-card>
               </el-tab-pane>
             </el-tabs>
             <el-dropdown-menu slot="dropdown">
@@ -227,7 +227,8 @@
         collectionForm: {
           pages: 1,
           limits: 12
-        }
+        },
+        collectionData: []
       };
     },
     computed: {
@@ -271,7 +272,7 @@
         return new Promise((resolve, reject) => {
           home.collectionList(this.collectionForm).then(response => {
             console.log(response, '收藏返回')
-
+            this.collectionData = response.data.curriculumList
             resolve(true)
           })
         })
