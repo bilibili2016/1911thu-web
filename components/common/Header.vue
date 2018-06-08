@@ -150,16 +150,15 @@ import { checkPhone, checkCode } from "~/lib/util/validatefn";
 export default {
   data() {
     var checkTel = (rule, value, callback) => {
-      console.log(1);
-      console.log(3);
+      if (!value) {
+        return callback(new Error("手机号不能为空"));
+      }
       if (value.toString().length != 11) {
         return callback(new Error("请输入正确手机号"));
       }
-      console.log(4);
       if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
         return callback(new Error("请输入正确手机号"));
       }
-      console.log(5);
     };
     var checkRgTel = (rule, value, callback) => {
       if (!value) {
@@ -334,7 +333,7 @@ export default {
             type: response.status === "0" ? "success" : "error",
             message: response.msg
           });
-          // this.checkRgTel();
+          this.checkRgTel();
         });
       });
     },
@@ -359,9 +358,7 @@ export default {
     signIns(formName) {
       // this.signIn(this.tokenForm);
       // this.start = false;
-      console.log(formName);
       this.$refs[formName].validate(valid => {
-        console.log(11111);
         if (valid) {
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
