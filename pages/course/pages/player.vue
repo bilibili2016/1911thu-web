@@ -2,7 +2,7 @@
   <div class="playerBox clearfix">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <div class="playTop">
-        <i class="el-icon-arrow-left" @click="goLink()"></i>新的中央经济工作会议精神解读
+        <i class="el-icon-arrow-left" @click="goLink()"></i>{{player.title}}
       </div>
       <div class="playInner" ref="playInner">
         <div id="movd" ref="movd"></div>
@@ -18,29 +18,34 @@
         <span class="fr share">
           <i class="el-icon-share"></i>分享
         </span>
-        <span class="fr collection">
-          <i class="el-icon-star-on"></i>收藏
+        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }" >
+          <i class="el-icon-star-on"></i>
+          <span>收藏</span>
+
         </span>
-        <span class="fr elt" @click="showElt">
+        <span class="fr elt" @click="showElt" v-if="this.iseve === 0">
           <i class="el-icon-edit"></i>课程评价
+        </span>
+         <span class="fr elt" v-else :class=" { bag: this.iseve === 1 }">
+          <i class="el-icon-edit"></i>已评价
         </span>
       </div>
     </div>
     <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
       <div v-show="mediaRInner" class="inner">
-        <h5 class="title">{{player.courseName}}</h5>
+        <h5 class="title">{{player.title}}</h5>
         <div class="teacher clearfix">
-        <img class="fl" src="~/assets/images/headImg.png" alt="">
-          <p class="fl">{{player.teacher.name}}</p>
-          <p class="fl">{{player.teacher.school}}</p>
+        <img class="fl" :src="player.head_img" alt="">
+          <p class="fl">{{player.teacher_name}}</p>
+          <p class="fl">{{player.graduate}}</p>
         </div>
-        <div class="courseList" v-for="(section,index) in player.courseList" :key="index">
-          <h4>{{section.section}}</h4>
-          <div class="knobble clearfix" v-for="(bar,index) in section.knobbles" :key="index">
+        <div class="courseList" v-for="(section,index) in courseList" :key="index">
+          <h4>{{section.title}}</h4>
+          <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index">
             <span class="fl playIcon">
               <i class="el-icon-caret-right"></i>
             </span>
-            <span class="fl barName">{{bar.number}} {{bar.barName}}（{{bar.duration}})</span>
+            <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}分钟)</span>
           </div>
         </div>
       </div>
@@ -76,7 +81,7 @@
         <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="word">
         </el-input>
         <div class="commitBug">
-          <el-button round>提交</el-button>
+          <el-button round @click.native="collection">提交</el-button>
         </div>
       </div>
 
@@ -102,14 +107,15 @@ import { store as persistStore } from '~/lib/core/store'
         mediaRIcon: "el-icon-arrow-right",
         radioBtn:"",
         player: {
-          courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
-          video: "",
-          ewCode: require("@/assets/images/attentionWechat2.png"),
-          teacher: {
-            name: "莎良朋",
-            school: "华中科技大学博士"
-          },
-          courseList: [{
+          // courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
+          // video: "",
+          // ewCode: require("@/assets/images/attentionWechat2.png"),
+          // teacher: {
+          //   name: "莎良朋",
+          //   school: "华中科技大学博士"
+          // },
+        },
+         courseList: [{
             section: "第一章 图的基本概念",
             knobbles: [{
                 number: "1-1",
@@ -127,9 +133,7 @@ import { store as persistStore } from '~/lib/core/store'
               },
 
             ]
-          }]
-
-        },
+          }],
         problem: "",
         word:"",
         evaluate: {
@@ -151,17 +155,24 @@ import { store as persistStore } from '~/lib/core/store'
           "autoplay" : false,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
           "fileID": '7447',
           "appID": '1256'
-        }
+        },
+        playerDetailForm: {
+          curriculumId: null
+        },
+        addEvaluateForm: {
+          ids: null,
+          evaluatecontent: null,
+          scores: null,
+          types: 1
+        },
+        addCollectionForm: {
+          curriculumId: null
+        },
+        collectMsg: 1,
+        iseve: 1
       }
     },
-    mounted () {
-      this.resize();
-      window.addEventListener("resize", this.resize);
-      // this.setHsg(this.hsgForm)
-      document.getElementsByClassName("headerBox")[0].style.display="none";
-      document.getElementsByClassName("footerBox")[0].style.display="none";
-      this.getPlayerInfo()
-    },
+
     methods: {
       ...mapActions('auth', [
         'setHsg',
@@ -220,11 +231,91 @@ import { store as persistStore } from '~/lib/core/store'
 
           });
         });
+      },
+      getCurriculumPlayInfo () {
+        this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
+        return new Promise((resolve, reject) => {
+          home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+            console.log(response, '345678')
+            this.player = response.data.curriculumDetail
+            this.courseList = response.data.curriculumCatalogList
+            this.collectMsg = response.data.curriculumDetail.is_collection
+          });
+        });
+      },
+      // 增加评论
+      addEvaluate () {
+        this.addEvaluateForm.ids = persistStore.get('curriculumId')
+        this.addEvaluateForm.evaluatecontent = this.word
+        this.addEvaluateForm.scores = this.evaluate.eltnum
+        return new Promise((resolve, reject) => {
+          home.addEvaluate(this.addEvaluateForm).then(response => {
+            console.log(response, '345678')
+            this.$message({
+              type: 'success',
+              message: response.msg
+            })
+          });
+        });
+      },
+      // 判断是收藏还是为收藏
+      collection () {
+        console.log(this.collectMsg, '1234')
+        if(this.collectMsg === 1){
+          this.deleteCollection()
+        } else {
+          this.addCollection()
+        }
+      },
+      // 添加收藏
+      addCollection () {
+        console.log('增加收藏')
+        this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+        return new Promise((resolve, reject) => {
+          home.addCollection(this.addCollectionForm).then(response => {
+            console.log(response, '增加收藏')
+            // this.collectMsg = response.data.curriculumDetail.is_collection
+            this.$message({
+              type: 'success',
+              message: '添加收藏成功'
+            })
+            this.collectMsg = 1
+          });
+        });
+      },
+      // 删除收藏
+      deleteCollection () {
+
+        this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+        return new Promise((resolve, reject) => {
+          home.deleteCollection(this.addCollectionForm).then(response => {
+
+            // this.collectMsg = response.data.curriculumDetail.is_collection
+            this.$message({
+              type: 'success',
+              message: '取消收藏成功'
+            })
+            this.collectMsg = 0
+          });
+        })
       }
-    }
+    },
+    mounted () {
+      this.resize();
+      window.addEventListener("resize", this.resize);
+      // this.setHsg(this.hsgForm)
+      document.getElementsByClassName("headerBox")[0].style.display="none";
+      document.getElementsByClassName("footerBox")[0].style.display="none";
+      this.getPlayerInfo()
+      this.getCurriculumPlayInfo()
+
+    },
   }
 </script>
 <style scoped>
+.bag {
+  color:#732eaf
+}
 video::-internal-media-controls-download-button {
     display:none;
 }
