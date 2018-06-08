@@ -58,13 +58,13 @@
                 <el-input v-model.number="loginData.phonenum" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格"></el-input>
+                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
                  <!-- @click="goSearchd('/home/pages/forgotPassword')"  -->
                 <div @click="forget">忘记密码?</div>
-                <el-button @click="signIn('loginData')">登录{{this.token}}</el-button>
+                <el-button @click="signIns('loginData')">登录{{this.token}}</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -170,7 +170,6 @@ export default {
       if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
         return callback(new Error("请输入正确手机号"));
       }
-      
     };
     var validatePass = (rule, value, callback) => {
       if (value === "") {
@@ -215,9 +214,9 @@ export default {
         captchaDisable: false,
         checked: false
       },
-      getWXLoginImg:{
-        time:300,
-        isget:"",
+      getWXLoginImg: {
+        time: 300,
+        isget: ""
       },
       // 登录数据
       loginData: {
@@ -321,13 +320,13 @@ export default {
       });
     },
     // 验证手机号是否存在
-    verifyTel(tel){
+    verifyTel(tel) {
       return new Promise((resolve, reject) => {
         this.verifyPhone(this.registerData.phones).then(response => {
           this.$message({
-                type: response.status === "0" ? "success" : "error",
-                message: response.msg
-              });
+            type: response.status === "0" ? "success" : "error",
+            message: response.msg
+          });
         });
       });
     },
@@ -349,19 +348,19 @@ export default {
       });
     },
     // 登录 请求
-    signIn(formName) {
+    signIns(formName) {
       // this.signIn(this.tokenForm);
       // this.start = false;
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
-            this.signIns(this.loginData).then(response => {
+            this.signIn(this.loginData).then(response => {
               if (response.status === 0) {
                 this.start = false;
                 this.islogin = true;
               }
               this.$message({
-                type: response.status === "0" ? "success" : "error",
+                type: response.status === "0" ? "error" : "success",
                 message: response.msg
               });
             });
@@ -377,9 +376,9 @@ export default {
       return new Promise((resolve, reject) => {
         auth.wechat(this.getWXLoginImg.isget).then(response => {
           this.getWXLoginImg.isget = response.data.url;
-          var timewx=setInterval(()=>{
+          var timewx = setInterval(() => {
             this.getWXLoginImg.time--;
-          },1000)
+          }, 1000);
         });
       });
     },
@@ -444,16 +443,15 @@ export default {
     },
     getWXCode() {
       console.log(this.getWXLoginImg.time);
-      if(this.getWXLoginImg.time <1){
+      if (this.getWXLoginImg.time < 1) {
         clearInterval(timewx);
         this.wxLogin();
-      }else{
+      } else {
         this.$message({
-          message: '请勿重复获取！',
-          type: 'warning'
+          message: "请勿重复获取！",
+          type: "warning"
         });
       }
-      
     },
     stop() {
       var mo = function(e) {
