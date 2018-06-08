@@ -29,9 +29,9 @@
         <el-button class="fr" @click="addID" round>新增课程ID</el-button>
       </div>
       <div class="courseIDList">
-        <div class="oneID" v-for="(id,index) in courseList.courseID" :key="index">
+        <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
           <span>课程ID:</span>
-          <span>{{id}}</span>
+          <span>{{item.invitation_code}}</span>
         </div>
       </div>
       <div v-show="courseList.addNewID">
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+ import { home } from "~/lib/v1_sdk/index";
   export default {
     methods: {
       verify() {
@@ -75,8 +76,23 @@
         this.courseList.addNewID = true;
       },
       doSubmit() {
-        this.binding.success = true;
-        this.courseList.success = true;
+        // this.binding.success = true;
+        return new Promise((resolve, reject) => {
+           home.bindingCurriculumPrivate({invitation_code: this.courseList.inputID}).then(res=>{
+             if(res.status ==0){
+               this.getUsedInvitationCodeList()
+             }
+             this.courseList.showErr = res.status !=0 ? true : false
+             this.courseList.success = res.status !=0 ? false : true
+           })
+        })
+      },
+      getUsedInvitationCodeList(){
+        return new Promise((resolve, reject) => {
+           home.getUsedInvitationCodeList(this.curruntForm).then(response => {
+            this.courseList.courseID = response.data.usedInvitationCodeList
+          })
+        })
       }
     },
     data() {
@@ -95,12 +111,13 @@
           presentAble: false,
           present: true,
           success: false,
-          courseID: ["A02817633", "A30257682", "A74219360"]
+          courseID: []
         },
         bindImg: require('~/assets/images/bindingSuccess.png')
       };
     },
     mounted () {
+      this.getUsedInvitationCodeList()
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
     }
