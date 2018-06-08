@@ -90,128 +90,146 @@ export default {
         pagesize: 8,
         total: 12
       },
-      categoryData: [
+      categoryData:[
         {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 123,
-          rate: 3,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 129,
-          rate: 5,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 131,
-          rate: 1,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 161,
-          rate: 2,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 141,
-          rate: 3,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 122,
-          rate: 5,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 134,
-          rate: 1,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 166,
-          rate: 2,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new01.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 899,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 146,
-          rate: 3,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new02.png"),
-          name: "H5和小程序直播开发",
-          cnum: 34,
-          pnum: 2312,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 622,
-          rate: 5,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new03.png"),
-          name: "H5和小程序直播开发",
-          cnum: 26,
-          pnum: 799,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 174,
-          rate: 1,
-          checkmsg: false
-        },
-        {
-          bg: require("@/assets/images/home_new04.png"),
-          name: "H5和小程序直播开发",
-          cnum: 12,
-          pnum: 4399,
-          avator: require("@/assets/images/home_avator.png"),
-          id: 186,
-          rate: 2,
-          checkmsg: false
+          "id": "4",
+          "title": "日本式人际沟通术【日语中字】",
+          "picture": "http:\/\/p8p47jzeo.bkt.clouddn.com\/1526956685",
+          "introduction": "一个人的成功,约有 15%取决于知识和技能,85%取决于沟通。",
+          "curriculum_time": "1000",
+          "teacher_id": "3",
+          "tag": "",
+          "score": 4,
+          "study_number": "50",
+          "teacher_name": "1911教师3",
+          "head_img": "http:\/\/p8p47jzeo.bkt.clouddn.com\/1528265696",
+          "graduate": "某某大学教授",
+          "teacher_content": "大是的撒的撒的撒的撒的撒的",
+          "evaluateList": []
         }
       ],
+      // categoryData: [
+      //   {
+      //     bg: require("@/assets/images/home_new01.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 12,
+      //     pnum: 899,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 123,
+      //     rate: 3,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new02.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 34,
+      //     pnum: 2312,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 129,
+      //     rate: 5,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new03.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 26,
+      //     pnum: 799,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 131,
+      //     rate: 1,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new04.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 12,
+      //     pnum: 4399,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 161,
+      //     rate: 2,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new01.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 12,
+      //     pnum: 899,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 141,
+      //     rate: 3,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new02.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 34,
+      //     pnum: 2312,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 122,
+      //     rate: 5,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new03.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 26,
+      //     pnum: 799,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 134,
+      //     rate: 1,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new04.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 12,
+      //     pnum: 4399,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 166,
+      //     rate: 2,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new01.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 12,
+      //     pnum: 899,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 146,
+      //     rate: 3,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new02.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 34,
+      //     pnum: 2312,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 622,
+      //     rate: 5,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new03.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 26,
+      //     pnum: 799,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 174,
+      //     rate: 1,
+      //     checkmsg: false
+      //   },
+      //   {
+      //     bg: require("@/assets/images/home_new04.png"),
+      //     name: "H5和小程序直播开发",
+      //     cnum: 12,
+      //     pnum: 4399,
+      //     avator: require("@/assets/images/home_avator.png"),
+      //     id: 186,
+      //     rate: 2,
+      //     checkmsg: false
+      //   }
+      // ],
       data: [
         {
           name: "全部",

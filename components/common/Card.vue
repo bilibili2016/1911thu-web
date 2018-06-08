@@ -298,6 +298,13 @@
 </template>
 
 <script>
+ import {
+    home
+  } from "~/lib/v1_sdk/index";
+  import {
+    mapState,
+    mapActions
+  } from "vuex";
   export default {
     props: [
       "data",
@@ -326,7 +333,11 @@
         numberArr: []
       };
     },
+    computed: {
+      ...mapState("auth", ["token","productsNum"]),
+    },
     methods: {
+      ...mapActions("auth", ["setProductsNum"]),
       goLink(item) {
          switch (window.location.pathname) {
           case '/course/pages/category':
@@ -355,8 +366,20 @@
         }
       },
       handleCheck (item, index) {
-        console.log(index)
         this.checked = true
+        // let tmp = {curriculumId:item.id}
+
+        let pronum = this.productsNum
+        pronum = pronum+1
+        this.setProductsNum({productsNums:pronum})
+
+        return new Promise((resolve, reject) => {
+           home.addShopCart(tmp).then(response => {
+            let newData = response.data.data
+            console.log(this.newData )
+          })
+        })
+
         for (var i=0; i<this.data.length; i++){
         if(i === index){
           // this.nextmsg = true

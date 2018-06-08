@@ -30,7 +30,8 @@ persistStore.defaults({
   hsg: null,
   nid: null,
   kid: null,
-  isShowTip: null
+  isShowTip: null,
+  productsNum:null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -41,6 +42,7 @@ let hsg = persistStore.get('hsg')
 let nid = persistStore.get('nid')
 let kid = persistStore.get('kid')
 let isShowTip = persistStore.get('isShowTip')
+let productsNum = persistStore.get('productsNum')
 
 export const MUTATION = {
   signIn: 'sign-in',
@@ -53,7 +55,8 @@ export const MUTATION = {
   setHsg: 'set-hsg',
   setNid: 'set-nid',
   setKid: 'set-kid',
-  setIsShowTip: 'set-isShowTip'
+  setIsShowTip: 'set-isShowTip',
+  productsNum:'set-productsNum'
 
 }
 export const state = () => ({
@@ -65,11 +68,15 @@ export const state = () => ({
   hsg,
   nid,
   kid,
-  isShowTip
+  isShowTip,
+  productsNum
 })
 export const getters = {
   isAuthenticated(state) {
     return !isNull(state.token)
+  },
+  getProductsNum(state){
+    return state.productsNum
   },
   isShowTip(state) {
     return state.isShowTip
@@ -129,8 +136,12 @@ export const mutations = {
     isShowTip
   }) {
     state.isShowTip = isShowTip
+  },
+  [MUTATION.setProductsNum](state, {
+    productsNum
+  }) {
+    state.productsNum = productsNum
   }
-
 }
 export const actions = {
   async signIn({
@@ -354,7 +365,6 @@ export const actions = {
   }) {
     try {
       let isShowTip = isShowTips
-      console.log(isShowTip)
       persistStore.set('isShowTip', isShowTip)
       commit(MUTATION.setIsShowTip, {
         isShowTip
@@ -367,6 +377,27 @@ export const actions = {
       }
     }
     return isShowTip
+  },
+  async setProductsNum({
+    commit,
+    state
+  }, {
+    productsNums
+  }) {
+    try {
+      let productsNum = productsNums
+      persistStore.set('productsNum', productsNum)
+      commit(MUTATION.setProductsNum, {
+        productsNum
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return productsNum
   }
 
 }
