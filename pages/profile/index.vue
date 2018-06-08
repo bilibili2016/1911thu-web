@@ -231,6 +231,26 @@
       goShop(tab){
         // console.log(tab);
         // this.goLink('/shop/checkedCourse');
+      },
+      studyCurriculumList () {
+        return new Promise((resolve, reject) => {
+          auth.workerSignUp(this.workerForm).then(response => {
+            this.workerForm.fullname = this.workerForm.username
+            if (response.id) {
+              this.$message({
+                type: 'success',
+                message: '注册成功'
+              })
+              this.$router.push('/auth/v1/signin')
+            } else {
+              this.$message({
+                type: 'error',
+                message: response.message
+              })
+            }
+            resolve(true)
+          })
+        })
       }
     },
     mounted () {
