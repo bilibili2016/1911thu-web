@@ -11,7 +11,12 @@
               <span>最近学习</span>
             </div>
             <div class="content">
-              <v-card :data="newDataing" :config="configZero"></v-card>
+              <v-card v-if="study" :data="newDataing" :config="configZero"></v-card>
+              <div v-else class="noCourse">
+                <img :src="noMsgImg" alt="">
+                <h4>抱歉，现在还没有学习过的课程呦~</h4>
+                <!-- <p>去学习</p> -->
+              </div>
             </div>
           </el-card>
         </el-tab-pane>
@@ -21,22 +26,36 @@
           <el-card>
             <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
-                <v-card :data="newDataing" :config="configOne"></v-card>
+                <v-card v-if="newDataing" :data="newDataing" :config="configOne"></v-card>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有学习中的课程呦~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
               </el-tab-pane>
               <el-tab-pane label="已完成" name="second">
-                <v-card :data="newDataReady" :config="configTwo"></v-card>
+                <v-card v-if="newDataReady" :data="newDataReady" :config="configTwo"></v-card>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有已经完成的课程呦~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
               </el-tab-pane>
               <el-tab-pane label="我的收藏" name="third">
-                <v-card :data="collectionData" :config="configZero"></v-card>
+                <v-card v-if="collectionData" :data="collectionData" :config="configZero"></v-card>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有已经收藏的课程呦~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
               </el-tab-pane>
             </el-tabs>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>黄金糕</el-dropdown-item>
-              <el-dropdown-item>狮子头</el-dropdown-item>
-              <el-dropdown-item>螺蛳粉</el-dropdown-item>
-              <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-              <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
-            </el-dropdown-menu>
           </el-card>
 
         </el-tab-pane>
@@ -59,6 +78,13 @@
         <el-tab-pane name="tab-fifth">
           <span slot="label"><i class="el-icon-date"></i> 绑定课程ID</span>
           <v-bind></v-bind>
+          <div class="content">
+            <div class="noCourse">
+              <img :src="noMsgImg" alt="">
+              <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
+              <!-- <p>去学习</p> -->
+            </div>
+          </div>
         </el-tab-pane>
         <!-- 我的选课 -->
         <el-tab-pane name="tab-sixth" @tab-click="goShop">
@@ -88,7 +114,9 @@
     },
     data() {
       return {
+        study:false,
         avator: require("~/assets/images/profile_avator01.png"),
+        noMsgImg:require("~/assets/images/noMsg.png"),
         tabPosition: "left",
         activeTab: "tab-first",
         activeNames: "first",
@@ -242,7 +270,7 @@
       },
       goShop(tab){
         // console.log(tab);
-        // this.goLink('/shop/checkedCourse');
+        this.goLink('/shop/checkedCourse');
       },
       studyCurriculumList () {
         this.styleForm.types =  1
@@ -289,8 +317,42 @@
     }
   };
 </script>
-<style>
+<style scope lang="scss">
   .profile{
     width: 1120px;
+    /* 我的首页 没有课程 */
+    .content .noCourse{
+      width: 100%;
+      height: 600px;
+      background-color: #fff;
+      text-align: center;
+      img{
+        width: 316px;
+        height: 274px;
+        margin-top: 35px;
+      }
+      h4{
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        color: #999;
+        font-size: 20px;
+      }
+      p{
+        width: 140px;
+        height: 36px;
+        line-height: 36px;
+        margin: 0 auto;
+        border-radius: 18px;
+        background: #6417a6;
+        color: #fff;
+        transition: all 300ms;
+        font-size: 14px;
+        &:hover{
+          background-color: #8f4acb;
+        }
+      }
+    }
   }
+
 </style>

@@ -7,7 +7,7 @@
         <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
         <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}）</span>
         <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
-        <span v-if="isAuthenticated">
+        <span v-if="isAuthenticated" class="fr">
           <span v-if="privileMsg === false">
             <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
             <span class="fr freePlay" v-else @click="goBuy">购买课程</span>
@@ -17,7 +17,7 @@
             <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
           </span>
         </span>
-        <span v-else>
+        <span v-else class="fr clearfix">
             <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="buyMask">立即试看</span>
             <span class="fr freePlay" v-else @click="goBuy">购买课程</span>
         </span>

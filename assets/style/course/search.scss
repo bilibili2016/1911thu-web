@@ -1,7 +1,41 @@
- .cnums {
-   font-size: 14px;
-   font-family: MicrosoftYaHei;
-   color: rgba(51, 42, 81, 1);
-   line-height: 0px;
-   margin: 40px 0px;
- }
+.center{
+  .cnums {
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    color: rgba(51, 42, 81, 1);
+    line-height: 0px;
+    margin: 40px 0px;
+  }
+  .searchFalse{
+    .noMsg {
+      padding: 100px 0;
+      text-align: center;
+      img {
+        width: 244px;
+        height: 203px;
+      }
+      p {
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        font-size: 16px;
+        color: #999999;
+      }
+    }
+    .doYouLike{
+      padding:0 0 80px;
+      .title{
+        height: 76px;
+        line-height: 76px;
+        p{
+          font-size: 18px;
+          color: #222;
+          &.fr{
+            color: #6417a6;
+          }
+        }
+      }
+    }
+  }
+  
+}

@@ -23,6 +23,16 @@
       right: 27px;
       cursor: pointer;
     }
+    .inline-input{
+      width: 90%;
+      height: 48px;
+      line-height: 48px;
+      padding-left: 20px;
+      .el-input__inner{
+        background-color: transparent;
+        border: none;
+      }
+    }
 
   }
   .hotWord {
