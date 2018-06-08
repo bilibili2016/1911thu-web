@@ -18,7 +18,7 @@
   .title {
     h1 {
       color: #222;
-      margin: 100px 0px;
+      margin: 70px 0px 60px;
     }
   }
 </style>

@@ -103,7 +103,7 @@
 
       <!-- 微信登录 -->
       <div class="lrFrame wechatLogin" v-show="wechatLogin">
-        <el-form :model="bindTelData" status-icon ref="bindTelData" class="demo-ruleForm" v-show="bindTelShow">
+        <el-form :model="bindTelData" status-icon :rules="registRules" class="demo-ruleForm" v-show="bindTelShow">
           <h4 class="clearfix"><span>绑定手机账号</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
           <el-form-item prop="tel">
 
@@ -112,10 +112,10 @@
           <el-form-item prop="code">
 
             <el-input class="captcha" v-model.number="bindTelData.code" placeholder="请输入验证码"></el-input>
-            <div class="getCode">{{bindTelData.getCode}}</div>
+            <div class="getCode" @click="handleGetCode">{{bindTelData.getCode}}</div>
           </el-form-item>
-          <el-form-item>
 
+          <el-form-item prop="companyCodes">
             <el-input v-model="bindTelData.company" placeholder="绑定企业"></el-input>
             <span class="bindCompany">(可选)</span>
           </el-form-item>
@@ -150,17 +150,18 @@ import { checkPhone, checkCode } from "~/lib/util/validatefn";
 export default {
   data() {
     var checkTel = (rule, value, callback) => {
-      console.log(value); 
-      
-      if (!value) {
+      if (value === '') {
         return callback(new Error("手机号不能为空"));
+
       }
       if (value.toString().length != 11) {
-        return callback(new Error("请输入正确手机号"));
+        return callback(new Error("请输入正确手机号123"));
       }
-      if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
-        return callback(new Error("请输入正确手机号"));
-      }
+      // console.log(4);
+      // if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
+      //   return false;
+      // }
+      // console.log(5);
     };
     var checkRgTel = (rule, value, callback) => {
       if (!value) {
@@ -172,6 +173,7 @@ export default {
       if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
         return callback(new Error("请输入正确手机号"));
       }
+      this.verifyRgTel();
     };
     var validatePass = (rule, value, callback) => {
       if (value === "") {
@@ -183,9 +185,12 @@ export default {
       }
     };
     var checkCompanyCodes = (rule, value, callback) => {
-      if (!/^[A-Za-z0-9]+$/.test(value)) {
-        return callback(new Error("请输入正确企业ID"));
+      if(value){
+        if (!/^[A-Za-z0-9]+$/.test(value)){
+          return callback(new Error("请输入正确企业ID"));
+        }
       }
+
     };
     return {
       searchImg: require("~/assets/images/search.png"),
@@ -272,8 +277,8 @@ export default {
       // 登录表单验证
       loginRules: {
         phonenum: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
-          { validator: checkTel, trigger: "blur" }
+          // { required: true, message: "请输入手机号", trigger: "blur" },
+          { validator: checkPhone, trigger: "blur" }
         ],
         password: [
           { required: true, message: "请输入账户密码", trigger: "blur" }
@@ -324,13 +329,14 @@ export default {
       });
     },
     // 验证手机号是否存在
-    verifyTel(tel) {
+    verifyRgTel() {
       return new Promise((resolve, reject) => {
-        this.verifyPhone(this.registerData.phones).then(response => {
+        auth.verifyPhone(this.registerData).then(response => {
           this.$message({
             type: response.status === "0" ? "success" : "error",
             message: response.msg
           });
+          // this.checkRgTel();
         });
       });
     },
@@ -355,14 +361,13 @@ export default {
     signIns(formName) {
       // this.signIn(this.tokenForm);
       // this.start = false;
-      console.log(1);
+      // console.log(formName);
       this.$refs[formName].validate(valid => {
-        console.log(2);
+        // console.log(11111);
         if (valid) {
-          console.log(3);
+          //  console.log(13243434);
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
-              console.log("dl");
               if (response.status === 0) {
                 this.start = false;
                 this.islogin = true;
@@ -394,7 +399,7 @@ export default {
     // 获取微信登录权限
     async getWXLogin() {
       return new Promise((resolve, reject) => {
-        auth.verifyPhone(this.getWXLoginImg.WXverify).then(response => {
+        auth.verifyWX(this.getWXLoginImg.WXverify).then(response => {
           console.log(response.data);
           if(response.status === "100100"){
               clearInterval(timewx);
@@ -411,7 +416,7 @@ export default {
              clearInterval(timewx);
             console.log(response.data,"未绑定手机");
           }
-          
+
         });
       });
     },
@@ -457,6 +462,7 @@ export default {
       this.start = false;
       this.lrFrame = false;
       this.bgMsg = false;
+      this.emptyForm();
     },
     closeWechat() {
       this.start = false;
@@ -464,6 +470,18 @@ export default {
       this.wechatLogin = false;
       clearInterval(timewx);
       // document.body.style.overflow = "auto";
+    },
+    emptyForm(){
+      this.loginData.phonenum="";
+      this.loginData.password="";
+      this.loginData.pwdType="password";
+      this.loginData.loginTypes=1;
+      this.registerData.phones="";
+      this.registerData.passwords="";
+      this.registerData.types=1;
+      this.registerData.codes="";
+      this.registerData.checked=[];
+      this.registerData.companyCodes="";
     },
     handleClick(tab, event) {},
     wechatLogined() {

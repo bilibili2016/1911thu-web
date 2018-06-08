@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
   /* eslint-disable */
   export default {
     name: "BackToTop",
@@ -76,11 +78,13 @@
       }
     },
     methods: {
+    ...mapActions('auth', ['setIsShowTip']),
       handleScroll() {
         this.visible = window.pageYOffset > this.visibilityHeight;
       },
       checkCourse(){
         if(this.token){
+          this.setIsShowTip({isShowTips:true})
           this.goLink("/course/pages/categoryd");
         }else{
           this.notLogin=true;

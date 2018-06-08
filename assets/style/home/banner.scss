@@ -13,7 +13,7 @@
 .banner {
   width: 100%;
   position: relative;
-  height: 636px;
+  height: 555px;
   .el-carousel__item img {
     width: 1920px;
     margin: 0 auto;
@@ -44,16 +44,16 @@
     z-index: 2;
     .starters {
       width: 178px;
-      height: 636px;
-      background-color: #6417A6;
+      height: 555px;
+      background-color: rgba(100, 23, 166, .9);
       position: relative;
       .classItem {
         .tabs-title {
           width: 178px;
-          height: 76px;
-          line-height: 76px;
+          height: 66px;
+          line-height: 66px;
           text-align: center;
-          color: #fff;
+          color: #E9D0FF;
           font-size: 16px;
           font-family: 'microsoft YaHei';
           cursor: pointer;
@@ -61,18 +61,17 @@
         }
         &:hover .tabs-title {
           color: #6417A6;
-          background: rgba(240, 233, 247, 0.9);
+          background:rgba(233, 208, 255, 1);
         }
         .tabs-content {
-          opacity: 0.92;
           position: absolute;
           left: 178px;
           top: 0;
           width: 922px;
-          height: 456px;
+          height: 396px;
           padding: 25px 0 25px 42px;
           overflow-y: auto;
-          background-color: #eee;
+          background-color: #fff;
           z-index: 2;
           .subClass {
             font-size: 14px;
@@ -105,9 +104,9 @@
           }
           .courseMsg {
             width: 100%;
-            height: 254px;
+            height: 193px;
             padding: 20px 0;
-            background-color: #fff;
+            background-color: #F7FAFC;
             display: flex;
             flex-wrap: wrap;
             position: absolute;
@@ -115,7 +114,8 @@
             left: 0;
             .courseOne {
               width: 414px;
-              margin: 20px 0 20px 44px;
+              margin: 0 0 20px 44px;
+              height: 66px;
               cursor: pointer;
               img {
                 width: 104px;
@@ -133,7 +133,7 @@
               }
               p {
                 color: #666;
-                line-height: 34px;
+                line-height: 28px;
                 font-size: 14px;
                 overflow: hidden;
                 white-space: nowrap;
@@ -152,10 +152,7 @@
     bottom: 30px;
     left: 50%;
     margin-left: -550px;
-    display: flex;
     z-index: 3;
-    align-items: center;
-    justify-content: space-between;
     div.pro {
       width: 350px;
       height: 112px;
