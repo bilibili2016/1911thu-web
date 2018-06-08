@@ -133,9 +133,9 @@ export default {
       ],
       carouselSrc: require("@/assets/images/home_avator02.png"),
       items: [
-        { src: require("@/assets/images/banner.png") },
-        { src: require("@/assets/images/banner.png") },
-        { src: require("@/assets/images/banner.png") }
+        { src: require("@/assets/images/banner_1.png") },
+        { src: require("@/assets/images/banner_2.png") },
+        { src: require("@/assets/images/banner_3.png") }
       ],
       classify: [
         "干部通用",
@@ -237,7 +237,7 @@ export default {
         limits: null,
         ids: null,
         types: null,
-        isRecommend: null
+        isRecommend: 1
       },
       newsInfoForm: {
         page: 1,

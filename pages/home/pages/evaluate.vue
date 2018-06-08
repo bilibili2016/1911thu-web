@@ -7,7 +7,7 @@
                 <el-carousel-item v-for="(item,index) in evaluateData" :key="index" >
                   <div class="evaluate-center">
                     <div class="three">
-                      <img :src="carouselSrc" alt="">
+                      <img :src="item.head_img" alt="">
                     </div>
                     <div class="evaluate-box">
                       <span>
