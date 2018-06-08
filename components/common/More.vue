@@ -12,6 +12,7 @@
     methods: {
       getMore() {
         this.$router.push(this.linkdata)
+        this.$emit('getMoreData')
       }
     },
     mounted() {

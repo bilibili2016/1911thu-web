@@ -11,7 +11,7 @@
               <span>最近学习</span>
             </div>
             <div class="content">
-              <v-card :data="newData" :config="configZero"></v-card>
+              <v-card :data="newDataing" :config="configZero"></v-card>
             </div>
           </el-card>
         </el-tab-pane>
@@ -21,13 +21,13 @@
           <el-card>
             <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
-                <v-card :data="newData" :config="configOne"></v-card>
+                <v-card :data="newDataing" :config="configOne"></v-card>
               </el-tab-pane>
               <el-tab-pane label="已完成" name="second">
-                <v-card :data="newData" :config="configTwo"></v-card>
+                <v-card :data="newDataReady" :config="configTwo"></v-card>
               </el-tab-pane>
               <el-tab-pane label="我的收藏" name="third">
-                <v-card :data="newData" :config="configZero"></v-card>
+                <v-card :data="collectionData" :config="configZero"></v-card>
               </el-tab-pane>
             </el-tabs>
             <el-dropdown-menu slot="dropdown">
@@ -76,7 +76,7 @@
   import PersonalSet from "@/pages/profile/pages/personalSet.vue";
   import Binding from "@/pages/profile/pages/bindId";
   import Info from "@/pages/profile/pages/info";
-  import { other, auth } from '~/lib/v1_sdk/index'
+  import { other, home } from '~/lib/v1_sdk/index'
   import { mapState, mapActions, mapGetters } from 'vuex'
   export default {
     components: {
@@ -216,7 +216,19 @@
             id: 1516,
             rate: 2
           }
-        ]
+        ],
+        styleForm: {
+          types: 1,
+          pages: 0,
+          limits: 12
+        },
+        newDataing: [],
+        newDataReady: [],
+        collectionForm: {
+          pages: 1,
+          limits: 12
+        },
+        collectionData: []
       };
     },
     computed: {
@@ -231,9 +243,45 @@
       goShop(tab){
         // console.log(tab);
         // this.goLink('/shop/checkedCourse');
+      },
+      studyCurriculumList () {
+        this.styleForm.types =  1
+        this.styleForm.pages = 0
+        this.styleForm.limits = 12
+        return new Promise((resolve, reject) => {
+          home.studyCurriculumList(this.styleForm).then(response => {
+            console.log(response, '学习中返回')
+            this.newDataing = response.data.curriculumList
+            resolve(true)
+          })
+        })
+      },
+      readyStudyCurriculumList () {
+         this.styleForm.types =  2
+        this.styleForm.pages = 0
+        this.styleForm.limits = 12
+        return new Promise((resolve, reject) => {
+          home.studyCurriculumList(this.styleForm).then(response => {
+            console.log(response, '学习中返回')
+            this.newDataReady = response.data.curriculumList
+            resolve(true)
+          })
+        })
+      },
+      collectionList () {
+        return new Promise((resolve, reject) => {
+          home.collectionList(this.collectionForm).then(response => {
+            console.log(response, '收藏返回')
+            this.collectionData = response.data.curriculumList
+            resolve(true)
+          })
+        })
       }
     },
     mounted () {
+      this.studyCurriculumList()
+      this.readyStudyCurriculumList()
+      this.collectionList()
       this.activeName = this.gid
       // console.log(this.gid)
       document.getElementsByClassName("headerBox")[0].style.display="inline"

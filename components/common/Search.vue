@@ -2,9 +2,10 @@
   <div class="search">
     <div class="main">
       <div class="searchWord">
-        <el-autocomplete class="inline-input" v-model="search" :fetch-suggestions="querySearch" placeholder="领导干部法治思维" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
-        <!-- <input type="text" placeholder="领导干部法治思维"> -->
-        <img :src="searchImg" alt="">
+        <!-- <el-autocomplete class="inline-input" v-model="search" :fetch-suggestions="querySearch" placeholder="领导干部法治思维" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete> -->
+        <!-- <input type="text" placeholder="领导干部法治思维" class="inline-input"> -->
+        <el-input v-model="searchMsg" placeholder="请输入内容" class="inline-input"></el-input>
+        <img :src="searchImg" alt="" @click="search">
       </div>
       <div class="hotWord">
         <span>热搜关键词：</span>
@@ -36,10 +37,13 @@
       handleSelect(item) {
 
       },
+      search () {
+        this.$emit('Search', this.searchMsg)
+      }
     },
     data() {
       return {
-        search: '',
+        searchMsg: '',
         searchImg: require('~/assets/images/search.png')
       }
     }
