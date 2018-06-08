@@ -32,7 +32,7 @@ export default {
       'setKid'
     ]),
     selectCid(val) {
-      console.log(val, '这是选择cid')
+      // console.log(val, '这是选择cid')
       this.kidForm.kids = val
       this.setKid(this.kidForm)
     },

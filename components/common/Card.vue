@@ -210,7 +210,13 @@
           <img :src="courseList.picture" class="image">
           <div class="mask"></div>
           <div class="common-button btn-bg">
-            <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+            <div v-if="isAuthenticated">
+              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
+              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+            </div>
+            <div v-else>
+              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+            </div>
           </div>
         </div>
       </el-card>
@@ -226,7 +232,13 @@
         <div class="study clearfix">
           <p>{{courseList.introduction}}</p>
           <div class="common-button">
-            <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+            <div v-if="isAuthenticated">
+              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
+              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+            </div>
+            <div v-else>
+              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -298,6 +310,15 @@
 </template>
 
 <script>
+  import {
+    other,
+    auth
+  } from "~/lib/v1_sdk/index";
+  import {
+    mapState,
+    mapActions,
+    mapGetters
+  } from "vuex";
   export default {
     props: [
       "data",
@@ -310,7 +331,8 @@
       "linkdata",
       'newsList',
       'linkfour',
-      'linksix'
+      'linksix',
+      'privileMsg'
     ],
     data() {
       return {
@@ -325,6 +347,11 @@
         checked: false,
         numberArr: []
       };
+    },
+    computed: {
+      ...mapGetters('auth', [
+      'isAuthenticated'
+      ])
     },
     methods: {
       goLink(item) {
@@ -355,7 +382,7 @@
         }
       },
       handleCheck (item, index) {
-        console.log(index)
+        // console.log(index)
         this.checked = true
         for (var i=0; i<this.data.length; i++){
         if(i === index){
@@ -371,12 +398,12 @@
         this.isShow = !this.isShow
       },
       selectDetail (index,course,linksix) {
-        console.log(course, '这是course')
+        // console.log(course, '这是course')
         this.$emit('checkdetail', course.id)
         this.getMore(linksix);
       },
       selectCid (item,index) {
-        console.log(item, '这是item')
+        // console.log(item, '这是item')
         this.$emit('selectCid', item.id)
       }
     },

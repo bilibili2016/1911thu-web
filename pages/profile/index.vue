@@ -38,7 +38,7 @@
               <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
             </el-dropdown-menu>
           </el-card>
-          
+
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-third">
@@ -229,13 +229,13 @@
         this.$router.push(item);
       },
       goShop(tab){
-        console.log(tab);
+        // console.log(tab);
         // this.goLink('/shop/checkedCourse');
       }
     },
     mounted () {
       this.activeName = this.gid
-      console.log(this.gid)
+      // console.log(this.gid)
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
     }

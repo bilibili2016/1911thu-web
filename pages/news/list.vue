@@ -77,7 +77,7 @@ export default {
       });
     },
     checkdetail (index) {
-      console.log(index, '这是index')
+      // console.log(index, '这是index')
       this.nidForm.nids = index
       this.setNid(this.nidForm)
     }

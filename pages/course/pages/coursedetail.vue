@@ -18,12 +18,11 @@
               <img :src="shareImg" alt="">
               <span> 分享 </span>
             </div>
-
           </div>
         </div>
       </div>
       <div class="main-header">
-        <v-card :courseList="courseList" :config="config" :linkdata="linkseven"></v-card>
+        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg"></v-card>
       </div>
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -126,7 +125,7 @@
           <h5>{{item.content}}</h5>
         </div>
       </div>
-          </div>
+    </div>
     </div>
   </div>
 </template>

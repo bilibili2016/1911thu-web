@@ -142,6 +142,15 @@ import { store as persistStore } from '~/lib/core/store'
         playerForm: {
           curriculumId: null,
           catalogId: null
+        },
+        m3u8Url: null,
+        fileID: null,
+        appID: null,
+        tcplayer: {
+          "m3u8": 'h', //请替换成实际可用的播放地址
+          "autoplay" : false,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+          "fileID": '7447',
+          "appID": '1256'
         }
       }
     },
@@ -151,16 +160,6 @@ import { store as persistStore } from '~/lib/core/store'
       // this.setHsg(this.hsgForm)
       document.getElementsByClassName("headerBox")[0].style.display="none";
       document.getElementsByClassName("footerBox")[0].style.display="none";
-      this.$nextTick(function () {
-        const player = new TcPlayer('movd' , {
-          "mp4": "http://1256678727.vod2.myqcloud.com/19d7e632vodgzp1256678727/c5fa1a887447398156030629513/MGfFOzr2SDkA.mp4", //请替换成实际可用的播放地址
-          "autoplay" : true,  //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-          "playbackRates":[0.75,1,1.25,1.5,2],
-          "coverpic" : "http://www.test.com/myimage.jpg",
-          //"width" :  '100%',//视频的显示宽度，请尽量使用视频分辨率宽度
-          //"height" : '100%'//视频的显示高度，请尽量使用视频分辨率高度
-        });
-      }),
       this.getPlayerInfo()
     },
     methods: {
@@ -213,7 +212,12 @@ import { store as persistStore } from '~/lib/core/store'
         this.playerForm.catalogId = persistStore.get('catalogId')
         return new Promise((resolve, reject) => {
           home.getPlayerInfo(this.playerForm).then(response => {
-            console.log(response)
+
+            this.tcplayer.m3u8 = response.data.playurl
+            this.tcplayer.fileID = response.data.playAuthInfo.fileID
+            this.tcplayer.appID = response.data.playAuthInfo.appID
+             const player = new TcPlayer('movd' , this.tcplayer);
+
           });
         });
       }

@@ -83,7 +83,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
       getNewInfoDetail () {
         return new Promise((resolve, reject) => {
           home.getNewInfoDetail(this.nidForm).then(response => {
-            console.log(response.data.newDetail, '这是返回的')
+            // console.log(response.data.newDetail, '这是返回的')
             this.newsDetail = response.data.newDetail
           })
         })

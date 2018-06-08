@@ -356,6 +356,11 @@ import { store as persistStore } from '~/lib/core/store'
         return new Promise((resolve, reject) => {
           auth.wechat(this.QRcode).then(response => {
             window.location.href = response.data.wxurl;
+<<<<<<< HEAD
+=======
+            // console.log(response.data.wxurl);
+
+>>>>>>> master
           })
         })
       },
