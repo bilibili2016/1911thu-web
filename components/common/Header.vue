@@ -150,17 +150,18 @@ import { checkPhone, checkCode } from "~/lib/util/validatefn";
 export default {
   data() {
     var checkTel = (rule, value, callback) => {
-      if (!value) {
+      if (value === '') {
         return callback(new Error("手机号不能为空"));
+
       }
       if (value.toString().length != 11) {
-        return callback(new Error("请输入正确手机号"));
+        return callback(new Error("请输入正确手机号123"));
       }
-      console.log(4);
-      if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
-        return callback(new Error("请输入正确手机号"));
-      }
-      console.log(5);
+      // console.log(4);
+      // if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
+      //   return false;
+      // }
+      // console.log(5);
     };
     var checkRgTel = (rule, value, callback) => {
       if (!value) {
@@ -276,8 +277,8 @@ export default {
       // 登录表单验证
       loginRules: {
         phonenum: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
-          { validator: checkTel, trigger: "blur" }
+          // { required: true, message: "请输入手机号", trigger: "blur" },
+          { validator: checkPhone, trigger: "blur" }
         ],
         password: [
           { required: true, message: "请输入账户密码", trigger: "blur" }
@@ -360,10 +361,11 @@ export default {
     signIns(formName) {
       // this.signIn(this.tokenForm);
       // this.start = false;
-      console.log(formName);
+      // console.log(formName);
       this.$refs[formName].validate(valid => {
-        console.log(11111);
+        // console.log(11111);
         if (valid) {
+          //  console.log(13243434);
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               if (response.status === 0) {
