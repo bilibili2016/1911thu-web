@@ -306,7 +306,8 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
-      return new Promise((resolve, reject) => {
+      if(!this.captchaDisable){
+        return new Promise((resolve, reject) => {
         auth.smsCodes(this.registerData).then(response => {
           this.$message({
             type: response.status === "0" ? "success" : "error",
@@ -327,6 +328,7 @@ export default {
           }, 1000);
         });
       });
+      }
     },
     // 验证手机号是否存在
     verifyRgTel() {
@@ -336,7 +338,6 @@ export default {
             type: response.status === "0" ? "success" : "error",
             message: response.msg
           });
-          // this.checkRgTel();
         });
       });
     },
@@ -359,13 +360,8 @@ export default {
     },
     // 登录 请求
     signIns(formName) {
-      // this.signIn(this.tokenForm);
-      // this.start = false;
-      // console.log(formName);
       this.$refs[formName].validate(valid => {
-        // console.log(11111);
         if (valid) {
-          //  console.log(13243434);
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               if (response.status === 0) {

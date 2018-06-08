@@ -13,17 +13,17 @@
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">
-              <img class="fl" :src="course.src" alt="">
+              <img class="fl" :src="course.picture" alt="">
               <div class="fl">
                 <h4>{{course.title}}</h4>
-                <h6>{{course.period}}学时</h6>
+                <h6>{{course.curriculum_time}}学时</h6>
                 <p>讲师：{{course.teacher}}</p>
               </div>
             </div>
             <div class="coursePrice">
-              ￥{{course.price}}
+              ￥{{course.present_price}}
             </div>
-            <div class="courseOperation">
+            <div class="courseOperation" @click="handleDelete(course,index)">
               删除
             </div>
           </div>
@@ -43,15 +43,15 @@
             <span class="deleteChecked">删除选中的课程</span>
             <span class="person">购买人数：</span>
             <span class="number clearfix">
-              <i class="fl minus el-icon-minus"  @click="number>1?number--: 1"></i>
-              <input type="text" class="fl num" v-model.number="number" @blur="changeNumber">
-              <i class="fl add el-icon-plus" @click="number++"></i>
+              <i class="fl minus el-icon-minus"  @click="delNumber"></i>
+              <input type="text" class="fl num" v-model.number="numForm.number" @blur="changeNumber">
+              <i class="fl add el-icon-plus" @click="addNumber"></i>
             </span>
           </span>
           <span class="commitOrder fr">
             <el-button @click="showCommit">提交</el-button>
           </span>
-          <span class="allPrice fr">￥94.00</span>
+          <span class="allPrice fr">{{prices}}￥</span>
 
         </div>
       </div>
@@ -66,7 +66,7 @@
         <el-form :model="companyInfo" :rules="rules" ref="ruleForm" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="name">
             <el-autocomplete
-              v-model="companyInfo.name"
+              v-model="companyInfo.companyname"
               :fetch-suggestions="querySearch"
               placeholder="请输入公司名称"
               :trigger-on-focus="false"
@@ -74,20 +74,20 @@
             ></el-autocomplete>
           </el-form-item>
           <el-form-item label="公司地址：" prop="address">
-            <el-input placeholder="请输入公司地址" v-model="companyInfo.address"></el-input>
+            <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
           </el-form-item>
           <el-form-item label="联系人：" prop="contacts">
-            <el-input placeholder="请输入联系人姓名" v-model="companyInfo.contacts"></el-input>
+            <el-input placeholder="请输入联系人姓名" v-model="companyInfo.contactperson"></el-input>
           </el-form-item>
           <el-form-item label="联系方法：" prop="tel">
-            <el-input placeholder="请输入手机号" v-model="companyInfo.tel"></el-input>
+            <el-input placeholder="请输入手机号" v-model="companyInfo.phones"></el-input>
           </el-form-item>
           <el-form-item class="code" label="验证码：" prop="code">
-            <el-input placeholder="请输入短信验证码" v-model="companyInfo.code"></el-input>
-            <span>获取验证码</span>
+            <el-input placeholder="请输入短信验证码" v-model="companyInfo.codes"></el-input>
+            <span @click="handleGetCode">获取验证码</span>
           </el-form-item>
           <el-form-item class="btnCommit">
-            <el-button type="primary">提交</el-button>
+            <el-button type="primary" @click="addPaySubmit">提交</el-button>
             <!-- <el-button type="primary" @click="submitForm('companyInfo')">提交</el-button> -->
           </el-form-item>
         </el-form>
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import { home,auth } from '@/lib/v1_sdk/index'
 // 总价 多选
   export default {
     data(){
@@ -105,33 +106,13 @@
         selectAll:false,
         checked:[],
         isIndeterminate:true,
-        number:1,
+        numForm:{
+          number:1,
+        },
+
         money: [],
         courseList:[
-          {
-            src: require("@/assets/images/ke-3.png"),
-            title:"H5和小程序直播开发",
-            period:52,
-            teacher:"王建中",
-            price:23.56,
-            checkMsg: false
-          },
-          {
-            src: require("~/assets/images/ke-3.png"),
-            title:"H5和小程序直播开发",
-            period:52,
-            teacher:"王建中",
-            price: 40.60,
-            checkMsg: false
-          },
-          {
-            src: require("~/assets/images/ke-3.png"),
-            title:"H5和小程序直播开发",
-            period:52,
-            teacher:"王建中",
-            price: 40.60,
-            checkMsg: false
-          }
+
         ],
         restaurants: [
           {"value":"11111"},
@@ -141,11 +122,12 @@
           {"value":"111"}
         ],
         companyInfo:{
-          name:"",
-          address:"",
-          contacts:"",
-          tel:"",
-          code:""
+          companyname:"",
+          companyaddress:"",
+          contactperson:"",
+          phones:"",
+          codes:"",
+          types: 6,
         },
         rules: {
           name: [
@@ -165,7 +147,14 @@
             { required: true, message: '请填写短信验证码', trigger: 'blur' }
           ],
         },
-        arraySum: 0
+        arraySum: 0,
+        curriculumcartids: {
+          cartid: null
+        },
+        prices: null,
+        addArray:{
+          curriculumcartid: []
+        }
       }
     },
     methods:{
@@ -181,7 +170,13 @@
       },
       showCommit(){
         this.showInfo=true;
-        this.$router.push('/shop/checkedCourse');
+        // this.$router.push('/shop/checkedCourse');
+        return new Promise((resolve, reject) => {
+          home.addChecked(this.addArray).then(response => {
+            console.log(response, '这是curriculumcartids')
+            resolve(true)
+          })
+        })
       },
       close(){
         this.showInfo=false;
@@ -205,16 +200,96 @@
       handleSelectChange(item,index) {
         this.$set(this.courseList[index], 'checkMsg', true)
         this.arraySum =this.arraySum + Number(this.courseList[index].price)
+        console.log(item,'1231323123')
+        console.log(item.present_price, '价钱')
+        this.prices = Number(this.prices) + Number(item.present_price)
+        this.addArray.curriculumcartid.push(item.id)
+        console.log( this.addArray)
+      },
+      addNumber(){
+        this.numForm.number= Number(this.numForm.number) + Number(1)
+        this.prices = (this.numForm.number)* this.prices
+        this.changeCartNumber()
+      },
+      delNumber(){
+         this.numForm.number= Number(this.numForm.number) - Number(1)
+         this.changeCartNumber()
+      },
+      changeCartNumber(){
+        return new Promise((resolve, reject) => {
+          home.changeCartNumber(this.numForm).then(response => {
+            console.log(response)
+            resolve(true)
+          })
+        })
       },
       changeNumber (){
         if(typeof this.number !== "number" || this.number<1){
           this.number=1;
         }
-      }
+      },
+      addPaySubmit (){
+        return new Promise((resolve, reject) => {
+          home.addPaySubmit(this.companyInfo).then(response => {
+            console.log(response)
+            this.$router.push('/shop/checkedCourseList')
+            resolve(true)
+          })
+        })
+      },
+      shopCartList (){
+        return new Promise((resolve, reject) => {
+          home.shopCartList().then(response => {
+            console.log(response, '这是response')
+            this.courseList = response.data.curriculumCartList
+          })
+        })
+      },
+      handleDelete (item,index){
+        this.curriculumcartids.cartid = item.id
+        return new Promise((resolve, reject) => {
+        home.delShopCart(this.curriculumcartids).then(response => {
+            console.log(response, '898989')
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+            this.shopCartList()
+          })
+        })
+        // console.log(this.curriculumcartids, '787878787')
+      },
+     delShopCart (){
+
+      },
+       async handleGetCode() {
+      return new Promise((resolve, reject) => {
+        auth.smsCodes(this.companyInfo).then(response => {
+          this.$message({
+            type: response.status === "0" ? "success" : "error",
+            message: response.msg
+          });
+          // this.captchaDisable = true;
+          // this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
+          // let interval = setInterval(() => {
+          //   if (this.bindTelData.seconds <= 0) {
+          //     this.bindTelData.getCode = "获取验证码";
+          //     this.bindTelData.seconds = 60;
+          //     this.captchaDisable = false;
+          //     clearInterval(interval);
+          //   } else {
+          //     this.bindTelData.getCode =
+          //       --this.bindTelData.seconds + "秒后重新发送";
+          //   }
+          // }, 1000);
+        });
+      });
+    },
     },
     mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+      this.shopCartList()
     }
   }
 </script>

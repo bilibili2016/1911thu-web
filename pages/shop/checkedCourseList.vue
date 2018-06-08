@@ -34,6 +34,7 @@
 
 <script>
 // 总价 多选
+import { home } from '@/lib/v1_sdk/index'
   export default {
     data(){
       return{
@@ -43,20 +44,7 @@
         isIndeterminate:true,
         number:1,
         courseList:[
-          {
-            src: require("~/assets/images/ke-3.png"),
-            title:"H5和小程序直播开发",
-            period:52,
-            teacher:"王建中",
-            price:23.56
-          },
-          {
-            src: require("~/assets/images/ke-3.png"),
-            title:"H5和小程序直播开发",
-            period:52,
-            teacher:"王建中",
-            price: 40.60
-          }
+
         ],
         restaurants: [
           {"value":"11111"},
@@ -92,9 +80,21 @@
         }
       }
     },
+    methods: {
+      curriculumPayApply() {
+        return new Promise((resolve, reject) => {
+          home.curriculumPayApply().then(response => {
+            console.log(response, '123')
+            this.courseList = response.data.curriculumPayApply
+            resolve(true)
+          })
+        })
+      }
+    },
      mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+      this.curriculumPayApply()
     }
   }
 </script>

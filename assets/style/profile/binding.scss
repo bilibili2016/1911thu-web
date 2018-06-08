@@ -3,27 +3,23 @@ body {
 }
 
 .main {
-  // width: 1100px;
   margin: 0 auto;
   .binding {
-    width: 886px;
+    width: 100%;
     height: auto;
-    border-radius: 6px;
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36); // margin-top: 64px;
-    // margin-bottom: 30px;
     float: right;
     position: relative;
-    margin-top: 1px;
-    margin: 3px 3px 0px 0px;
+    background-color: #fff;
     .title {
+      height: 58px;
+      line-height: 58px;
       border-bottom: 1px solid #E8D6F7;
-      padding-left: 30px;
+      padding: 0 30px;
       h4 {
-        height: 56px;
-        line-height: 56px;
+        height: 58px;
+        line-height: 58px;
         font-size: 16px;
         color: #222;
-        font-weight: 700;
       }
     }
     .courseID {
@@ -105,26 +101,21 @@ body {
     }
   }
   .courseList {
-    width: 877px;
+    width: 100%;
     height: auto;
-    border-radius: 6px;
-    // box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36); // margin-top: 64px;
-    margin-bottom: 30px;
     float: right;
+    background-color: #fff;
     position: relative;
-    margin: 3px 3px;
-    border: 1px solid #ebeef5;
-
     .title {
+      height: 58px;
+      line-height: 58px;
       border-bottom: 1px solid #E8D6F7;
       padding: 0 30px;
       &>span {
-        height: 50px;
-        line-height: 50px;
+        height: 58px;
+        line-height: 58px;
         font-size: 16px;
         color: #222;
-        font-weight: 700;
-
       }
       .el-button.is-round {
         width: 91px;
@@ -132,7 +123,7 @@ body {
         padding: 0;
         line-height: 30px;
         border-radius: 6px;
-        margin-top: 10px;
+        margin-top: 13px;
         color: #6417A6;
         border: 1px solid #6417A6;
         font-weight: 400;
