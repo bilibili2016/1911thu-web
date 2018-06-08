@@ -4,6 +4,9 @@
     padding: 20px 0;
     border-bottom: 1px solid rgba(232, 214, 247, 1);
     position: relative;
+    &:last-child{
+      border-bottom: none;
+    }
     .text {
       width: 630px;
       height: auto;

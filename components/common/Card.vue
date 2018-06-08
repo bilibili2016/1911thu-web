@@ -656,7 +656,7 @@
               margin: 0px 5px;
             }
             .itemBox-rate {
-              display: inline;
+              // display: inline;
               font-size: 12px;
               line-height: 13px;
               float: right;
@@ -694,7 +694,7 @@
               margin: 0px 5px;
             }
             .itemBox-rate {
-              display: inline;
+              // display: inline;
               font-size: 12px;
               line-height: 13px;
               float: right;
@@ -807,13 +807,15 @@
         }
         span {
           display: inline-block;
-          width: 396px;
+          width: 413px;
+          height: 72px;
+          line-height: 36px;
+          margin-top: 17px;
           font-size: 18px;
+          padding: 0 15px;
           color: rgba(34, 34, 34, 1);
-          line-height: 35px;
-          margin-top: -111px;
-          margin-left: 15px;
-          vertical-align: middle;
+          overflow: hidden;
+          vertical-align: top;
         }
         span:hover {
           color: #8f4acb;
@@ -874,17 +876,14 @@
           left: 0px;
           display: inline-block;
           span {
-            // width: 308px;
-            // height: 20px;
+            height: 60px;
+            padding: 0 10px;
             font-size: 20px;
             line-height: 64px !important;
             font-family: MicrosoftYaHei;
             color: rgba(255, 255, 255, 1);
-            line-height: 0px;
             display: inline-block;
-            text-indent: 20px;
-            // margin: 23px 153px 21px 29px;
-            // height: 20px;
+            overflow: hidden;
           }
         }
       }
@@ -1210,7 +1209,7 @@
               margin: 0px 5px;
             }
             .itemBox-rate {
-              display: inline;
+              // display: inline;
               font-size: 12px;
               line-height: 13px;
               float: right;
@@ -1252,6 +1251,17 @@
           line-height: 30px;
           margin-bottom: 20px;
         }
+        .common-button .is-plain{
+          border-radius: 20px;
+          border-color:#6417a6;
+          color:#6417a6;
+          font-weight: 400;
+          transition: all 300ms;
+          &:hover{
+            color: #fff;
+            border-color: #8f4acb;
+          }
+        }
       }
     }
   }
@@ -1284,6 +1294,18 @@
   left: 50%;
   margin-left: -70px;
   margin-top: -20px;
+  .el-button{
+    width: 174px;
+    height: 56px;
+    line-height: 56px;
+    border-radius: 28px;
+    color:#6417a6;
+    padding: 0;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: rgba(255,255,255,.9);
+  }
 }
 
 .btn-bgs {
