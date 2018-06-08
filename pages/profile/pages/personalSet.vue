@@ -6,12 +6,12 @@
           <!-- 填写个人信息 -->
           <el-form v-if="hasPersonalInfo" :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
             <el-form-item label="昵称" prop="name">
-              <el-input v-model="psnForm.name"></el-input>
+              <el-input v-model="psnForm.nick_name"></el-input>
             </el-form-item>
             <el-form-item label="性别" prop="sex">
               <el-radio-group v-model="psnForm.sex">
-                <el-radio label="男"></el-radio>
-                <el-radio label="女"></el-radio>
+                <el-radio label="男" :value="1"></el-radio>
+                <el-radio label="女" :value="2"></el-radio>
               </el-radio-group>
             </el-form-item>
             <el-form-item label="生日" prop="birthday">
@@ -19,36 +19,28 @@
             </el-form-item>
             <el-form-item label="所在地区" prop="address">
               <el-select v-model="psnForm.province" placeholder="省">
-                <el-option label="北京" value="beijing"></el-option>
-                <el-option label="上海" value="shanghai"></el-option>
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
               </el-select>
               <el-select v-model="psnForm.city" placeholder="市">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
               </el-select>
-              <el-select v-model="psnForm.district" placeholder="区">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
+              <el-select v-model="psnForm.area" placeholder="区">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="职业" prop="position">
               <el-select v-model="psnForm.position" placeholder="请选择" class="profession">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
               <el-input v-model="psnForm.email"></el-input>
             </el-form-item>
             <el-form-item disable label="手机号" prop="name">
-              <el-input v-model="psnForm.tel" disabled></el-input>
+              <el-input v-model="psnForm.user_name" disabled></el-input>
             </el-form-item>
             <el-form-item label="公司信息" prop="name">
-              <el-input v-model="psnForm.company" disabled></el-input>
+              <el-input v-model="psnForm.company_name" disabled></el-input>
             </el-form-item>
             <el-form-item size="large" class="submit">
               <el-button type="primary" @click="onSubmit" round>提交</el-button>
@@ -100,11 +92,61 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 import { home } from "~/lib/v1_sdk/index";
 export default {
+  watch: {
+    "psnForm.province"(val) {
+      this.city = [];
+      this.psnForm.city = "";
+      for (let item of this.mapregionList) {
+        if (item.region_code == val) {
+          for (let cit of item.city) {
+            this.city.push(
+              Object.assign({},cit,{ label: cit.name, value: cit.region_code })
+            );
+          }
+        }
+      }
+    },
+    "psnForm.city"(val) {
+      this.area = [];
+      for (let item of this.city) {
+        if (item.region_code == val) {
+          for (let cit of item.city) {
+            this.area.push(
+              Object.assign({},cit,{ label: cit.name, value: cit.region_code })
+            );
+          }
+        }
+      }
+    }
+  },
   methods: {
-    handleClick() {},
-    onSubmit() {},
+    handleClick(tab, event) {
+      if (tab == "first") {
+        this.getUserInfo();
+      }
+    },
+    getUserInfo() {
+      home.getUserInfo().then(res => {
+        this.psnForm = res.data.userInfo;
+        this.getRegionList(this.psnForm.region_code);
+      });
+    },
+    onSubmit() {
+      home.perInformation(this.psnForm).then(res => {
+        persistStore.set('personInfo',this.psnForm)
+      });
+    },
+    getRegionList(regionCode) {
+      home.getRegionList({ region_code: regionCode }).then(res => {
+        this.mapregionList = res.data.regionList;
+        this.province = this.mapregionList.map(item => {
+          return { label: item.name, value: item.region_code };
+        });
+      });
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -114,23 +156,35 @@ export default {
             newpasso: this.changePwd.checkPass
           };
           return new Promise((resolve, reject) => {
-            home.editPassWord(tmp).then(res=>{
-              this.changePwd={
-                oldPass:'',
-                newPass:'',
-                checkPass:''
-              }
+            home.editPassWord(tmp).then(res => {
+              this.changePwd = {
+                oldPass: "",
+                newPass: "",
+                checkPass: ""
+              };
               this.updateSuccess = true;
-              setTimeout(()=>{
+              setTimeout(() => {
                 this.updateSuccess = false;
-              },1000)
-            })
+              }, 1000);
+            });
           });
         } else {
           return false;
         }
       });
+    },
+    getPositionList(){
+      home.positionList().then(res => {
+        let tmp = res.data;
+        this.options = tmp.map(item => {
+          return { label: item.position_name, value: item.position_target };
+        });
+      });
     }
+  },
+  mounted() {
+    this.getUserInfo();
+    this.getPositionList()
   },
   data() {
     var validatePass = (rule, value, callback) => {
@@ -153,32 +207,15 @@ export default {
       }
     };
     return {
+      regionList: [],
+      area: [],
+      province: [],
+      city: [],
       activeName: "first",
       hasPersonalInfo: true,
       showPwd: true,
       updateSuccess: false,
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
+      options: [],
       changePwd: {
         oldPass: "",
         newPass: "",
@@ -218,16 +255,20 @@ export default {
         company: "北京那么大科技有限公司"
       },
       psnForm: {
-        name: "",
-        sex: "",
-        birthday: "",
-        province: "",
-        city: "",
-        district: "",
-        position: "",
-        email: "",
-        tel: "19728166173",
-        company: "北京那么大科技有限公司"
+        user_name: "", //用户名
+        head_img: "", //头像
+        nick_name: "", //昵称
+        real_name: "", //真实姓名
+        birthday: "", //生日
+        sex: "1", //性别
+        position: "", //公司职位
+        province: "", //所在省编码
+        province_name: "", //所在省名称
+        city: "", //所在市编码
+        city_name: "", //所在市名称
+        area: "", //所在区编码
+        area_name: "", //区名称
+        company_name: "" //所在公司名称
       },
       rules: {
         name: [
