@@ -286,7 +286,7 @@ import { store as persistStore } from '~/lib/core/store'
       ])
     },
     methods: {
-      ...mapActions("auth", ["signIn", "setGid", 'signOut']),
+      ...mapActions("auth", ["signIn", "setGid", 'signOut',"setIsShowTip"]),
       // 登录显示card
       async loginCardShow () {
         this.start = true;
@@ -363,8 +363,8 @@ import { store as persistStore } from '~/lib/core/store'
       login() {
 
       },
-
       signOuts() {
+        this.setIsShowTip({isShowTips:false})
         this.signOut()
       },
       changePwd() {

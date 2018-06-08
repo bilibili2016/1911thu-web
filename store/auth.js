@@ -29,7 +29,8 @@ persistStore.defaults({
   gid: null,
   hsg: null,
   nid: null,
-  kid: null
+  kid: null,
+  isShowTip: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -39,6 +40,8 @@ let gid = persistStore.get('gid')
 let hsg = persistStore.get('hsg')
 let nid = persistStore.get('nid')
 let kid = persistStore.get('kid')
+let isShowTip = persistStore.get('isShowTip')
+
 export const MUTATION = {
   signIn: 'sign-in',
   signOut: 'sign-out',
@@ -49,8 +52,8 @@ export const MUTATION = {
   setGid: 'set-gid',
   setHsg: 'set-hsg',
   setNid: 'set-nid',
-  setKid: 'set-kid'
-
+  setKid: 'set-kid',
+  setIsShowTip: 'set-isShowTip'
 
 }
 export const state = () => ({
@@ -61,13 +64,18 @@ export const state = () => ({
   gid,
   hsg,
   nid,
-  kid
+  kid,
+  isShowTip
 })
 export const getters = {
-  isAuthenticated (state) {
+  isAuthenticated(state) {
     return !isNull(state.token)
+  },
+  isShowTip(state) {
+    return state.isShowTip
   }
 }
+
 export const mutations = {
   [MUTATION.signIn](state, {
     token
@@ -116,6 +124,11 @@ export const mutations = {
     kid
   }) {
     state.kid = kid
+  },
+  [MUTATION.setIsShowTip](state, {
+    isShowTip
+  }) {
+    state.isShowTip = isShowTip
   }
 
 }
@@ -159,19 +172,19 @@ export const actions = {
     return user
   },
 
-   async signOut({
-     commit,
-     state
-   }) {
-     try {
-       await auth.signOut()
-       persistStore.set('token', null)
+  async signOut({
+    commit,
+    state
+  }) {
+    try {
+      await auth.signOut()
+      persistStore.set('token', null)
 
-       commit(MUTATION.signOut)
-     } catch (e) {
-       log.error(e)
-     }
-   },
+      commit(MUTATION.signOut)
+    } catch (e) {
+      log.error(e)
+    }
+  },
 
 
   async companySignIn({
@@ -332,6 +345,28 @@ export const actions = {
       }
     }
     return kid
+  },
+  async setIsShowTip({
+    commit,
+    state
+  }, {
+    isShowTips
+  }) {
+    try {
+      let isShowTip = isShowTips
+      console.log(isShowTip)
+      persistStore.set('isShowTip', isShowTip)
+      commit(MUTATION.setIsShowTip, {
+        isShowTip
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return isShowTip
   }
 
 }
