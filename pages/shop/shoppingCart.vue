@@ -64,7 +64,7 @@
           <h4>为方便我们的沟通，请填写下列信息</h4>
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="ruleForm" label-width="136px" class="companyInfo">
-          <el-form-item label="公司名称：" prop="name">
+          <el-form-item label="公司名称：" prop="companyname">
             <el-autocomplete
               v-model="companyInfo.companyname"
               :fetch-suggestions="querySearch"
@@ -73,16 +73,16 @@
               @select="handleSelect"
             ></el-autocomplete>
           </el-form-item>
-          <el-form-item label="公司地址：" prop="address">
+          <el-form-item label="公司地址：" prop="companyaddress">
             <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
           </el-form-item>
-          <el-form-item label="联系人：" prop="contacts">
+          <el-form-item label="联系人：" prop="contactperson">
             <el-input placeholder="请输入联系人姓名" v-model="companyInfo.contactperson"></el-input>
           </el-form-item>
-          <el-form-item label="联系方法：" prop="tel">
-            <el-input placeholder="请输入手机号" v-model="companyInfo.phones"></el-input>
+          <el-form-item label="联系方法：" prop="phones">
+            <el-input placeholder="请输入手机号" v-model.number="companyInfo.phones"></el-input>
           </el-form-item>
-          <el-form-item class="code" label="验证码：" prop="code">
+          <el-form-item class="code" label="验证码：" prop="codes">
             <el-input placeholder="请输入短信验证码" v-model="companyInfo.codes"></el-input>
             <span @click="handleGetCode">获取验证码</span>
           </el-form-item>
@@ -130,28 +130,28 @@ import { home,auth } from '@/lib/v1_sdk/index'
           types: 6,
         },
         rules: {
-          name: [
+          companyname: [
             { required: true, message: '请输入公司名称', trigger: 'blur' }
           ],
-          address: [
+          companyaddress: [
             { required: true, message: '请填写公司地址', trigger: 'blur' }
           ],
-          contacts: [
+          contactperson: [
             { required: true, message: '请填写联系人姓名', trigger: 'blur' }
           ],
-          tel: [
+          phones: [
             { required: true, message: '请填写手机号', trigger: 'blur' },
             { type: 'number', message: '请填写正确手机号', trigger: 'blur' }
           ],
-          code: [
+          codes: [
             { required: true, message: '请填写短信验证码', trigger: 'blur' }
-          ],
+          ]
         },
         arraySum: 0,
         curriculumcartids: {
           cartid: null
         },
-        prices: null,
+        prices: 0.00,
         addArray:{
           curriculumcartid: []
         }
@@ -209,6 +209,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
       addNumber(){
         this.numForm.number= Number(this.numForm.number) + Number(1)
         this.prices = (this.numForm.number)* this.prices
+
         this.changeCartNumber()
       },
       delNumber(){
@@ -229,13 +230,21 @@ import { home,auth } from '@/lib/v1_sdk/index'
         }
       },
       addPaySubmit (){
-        return new Promise((resolve, reject) => {
-          home.addPaySubmit(this.companyInfo).then(response => {
-            // console.log(response)
-            this.$router.push('/shop/checkedCourse')
-            resolve(true)
+        console.log('-------')
+      this.$refs.ruleForm.validate(valid => {
+        console.log('eeeeeee',valid)
+        if (valid) {
+          return new Promise((resolve, reject) => {
+            home.addPaySubmit(this.companyInfo).then(response => {
+              // console.log(response)
+              this.$router.push('/shop/checkedCourse')
+              resolve(true)
+            })
           })
-        })
+        }else{
+          return false
+        }
+      })
       },
       shopCartList (){
         return new Promise((resolve, reject) => {

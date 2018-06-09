@@ -23,7 +23,9 @@
           </div>
         </div>
         <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
-          <img src="@/assets/images/shoppingCart.png" alt=""><i v-show="shoppingCartNum>0">{{shoppingCartNum}}</i>
+        <!-- {{shoppingCartNum}} -->
+        <!-- <i v-show="shoppingCartNum>0"></i> -->
+          <img src="@/assets/images/shoppingCart.png" alt="">
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -498,7 +500,7 @@ export default {
       this.wxLogin();
     },
     getWXCode() {
-      console.log(this.getWXLoginImg.time);
+      // console.log(this.getWXLoginImg.time);
       if (this.getWXLoginImg.time < 1) {
         clearInterval(timewx);
         this.wxLogin();
