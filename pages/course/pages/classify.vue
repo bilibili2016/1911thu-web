@@ -38,7 +38,6 @@
       recommendCurriculumList (){
         return new Promise((resolve, reject) => {
           home.getClassicCourseList(this.newsCurriculumForm).then(response => {
-            // console.log(response, '经典好课列表')
             this.categoryData = response.data.curriculumList
             resolve(true)
           })
