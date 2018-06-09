@@ -241,7 +241,7 @@ export default {
     getCourseDetail() {
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
-          // console.log(response, "这是课程详情");
+          console.log(response, "这是课程详情");
           this.courseList = response.data.curriculumDetail;
           this.privileMsg = response.data.curriculumPrivilege;
           this.content = response.data.curriculumPrivilege;
