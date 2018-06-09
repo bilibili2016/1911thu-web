@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-08 22:38:52
+ * @Last Modified time: 2018-06-09 10:21:53
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -354,7 +354,7 @@ export const actions = {
     kids
   }) {
     try {
-      console.log(kids, '这是kids')
+      // console.log(kids, '这是kids')
       let kid = kids
       persistStore.set('kid', kid)
       commit(MUTATION.setKid, {
@@ -419,7 +419,7 @@ export const actions = {
     numbers
   }) {
     try {
-      console.log(numbers)
+      // console.log(numbers)
 
       let number = numbers
       persistStore.set('number', number)

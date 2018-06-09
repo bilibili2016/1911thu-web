@@ -241,7 +241,7 @@ export default {
     getCourseDetail() {
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
-          console.log(response, "这是课程详情");
+          // console.log(response, "这是课程详情");
           this.courseList = response.data.curriculumDetail;
           this.privileMsg = response.data.curriculumPrivilege;
           this.content = response.data.curriculumPrivilege;
@@ -258,7 +258,7 @@ export default {
     getCourseList() {
       return new Promise((resolve, reject) => {
         home.getCourseList(this.kidForm).then(response => {
-          console.log(response, "这是课程列表");
+          // console.log(response, "这是课程列表");
           // this.courseList = response.data.curriculumDetail
           this.catalogs = response.data.curriculumCatalogList;
         });
@@ -266,7 +266,7 @@ export default {
     },
     // 判断是收藏还是为收藏
     collection() {
-      console.log(this.collectMsg, "1234");
+      // console.log(this.collectMsg, "1234");
       if (this.collectMsg === 1) {
         this.deleteCollection();
       } else {

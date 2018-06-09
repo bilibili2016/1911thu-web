@@ -3,7 +3,7 @@
     <v-search @Search="handleSearchs"></v-search>
     <div class="center">
       <div class="cnums">
-        共找到30门“冲突管理”相关课程
+        共找到{{courseNumber}}门“冲突管理”相关课程
       </div>
       <div v-if="result">
         <v-card :data="searchData" :config="config"  v-loading="loading" element-loading-text="拼命加载中"
@@ -54,7 +54,7 @@
         },
         pagemsg: {
           page: 1,
-          pagesize: 2,
+          pagesize: 1,
           total: null
         },
         searchForm: {
@@ -64,12 +64,14 @@
           categoryid: null,
           sortby: 2
         },
-        loading: false
+        loading: false,
+        result: true,
+        courseNumber: 0
       };
     },
     methods: {
       handleSearchs(val) {
-        console.log(val, '这是val')
+        // console.log(val, '这是val')
         this.searchForm.searchword = val
 
         this.loading = true
@@ -78,10 +80,15 @@
       searchCurriculumList () {
         return new Promise((resolve, reject) => {
           home.searchCurriculumList(this.searchForm).then(response => {
-            console.log(response, '这是response')
+            // console.log(response, '这是response')
             this.searchData = response.data.curriculumList
-            console.log(this.searchData, '123456')
+            // console.log(this.searchData, '123456')
             this.pagemsg.total = response.data.pageCount
+            if(response.data.curriculumList.length === 0){
+              this.result = false
+            }
+            this.pagemsg.total = response.data.curriculumList.length
+            this.courseNumber = response.data.curriculumList.length
             this.loading = false
             resolve(true)
           })

@@ -404,7 +404,7 @@
         return new Promise((resolve, reject) => {
            home.addShopCart(tmp).then(response => {
             let newData = response.data.data
-            console.log(this.newData )
+
           })
         })
 
@@ -426,7 +426,7 @@
       this.getMore(linksix);
     },
     selectCid(item, index) {
-        console.log(item)
+
         this.curriculumcartids.cartid = item.id
       if(item.is_checked === false){
         item.is_checked = true
@@ -445,14 +445,14 @@
     addChecked(){
       return new Promise((resolve, reject) => {
         home.addChecked(this.curriculumcartids).then(response => {
-            console.log(response)
+            // console.log(response)
           })
         })
     },
     delShopCart (){
        return new Promise((resolve, reject) => {
         home.delShopCart(this.curriculumcartids).then(response => {
-            console.log(response)
+            // console.log(response)
           })
         })
     }

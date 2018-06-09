@@ -173,7 +173,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
         // this.$router.push('/shop/checkedCourse');
         return new Promise((resolve, reject) => {
           home.addChecked(this.addArray).then(response => {
-            console.log(response, '这是curriculumcartids')
+            // console.log(response, '这是curriculumcartids')
             resolve(true)
           })
         })
@@ -200,11 +200,11 @@ import { home,auth } from '@/lib/v1_sdk/index'
       handleSelectChange(item,index) {
         this.$set(this.courseList[index], 'checkMsg', true)
         this.arraySum =this.arraySum + Number(this.courseList[index].price)
-        console.log(item,'1231323123')
-        console.log(item.present_price, '价钱')
+        // console.log(item,'1231323123')
+        // console.log(item.present_price, '价钱')
         this.prices = Number(this.prices) + Number(item.present_price)
         this.addArray.curriculumcartid.push(item.id)
-        console.log( this.addArray)
+        // console.log( this.addArray)
       },
       addNumber(){
         this.numForm.number= Number(this.numForm.number) + Number(1)
@@ -218,7 +218,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
       changeCartNumber(){
         return new Promise((resolve, reject) => {
           home.changeCartNumber(this.numForm).then(response => {
-            console.log(response)
+            // console.log(response)
             resolve(true)
           })
         })
@@ -231,7 +231,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
       addPaySubmit (){
         return new Promise((resolve, reject) => {
           home.addPaySubmit(this.companyInfo).then(response => {
-            console.log(response)
+            // console.log(response)
             this.$router.push('/shop/checkedCourse')
             resolve(true)
           })
@@ -240,7 +240,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
       shopCartList (){
         return new Promise((resolve, reject) => {
           home.shopCartList().then(response => {
-            console.log(response, '这是response')
+            // console.log(response, '这是response')
             this.courseList = response.data.curriculumCartList
           })
         })
@@ -249,7 +249,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
         this.curriculumcartids.cartid = item.id
         return new Promise((resolve, reject) => {
         home.delShopCart(this.curriculumcartids).then(response => {
-            console.log(response, '898989')
+            // console.log(response, '898989')
             this.$message({
               type: 'success',
               message: '删除成功'

@@ -42,7 +42,7 @@
       </div>
     </div>
     <!-- <v-filter></v-filter> -->
-    <div>
+    <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="total"></el-pagination>
     </div>
   </div>
@@ -137,7 +137,7 @@
         this.curriculumList()
       },
       handleClick(tab, event) {
-        console.log(tab, '这是tab')
+        // console.log(tab, '这是tab')
         if(tab.name === 'first'){
           this.curriculumListForm.sortBy = 1
           this.curriculumList()
@@ -167,7 +167,7 @@
         // this.curriculumListForm.sortBy = 1
         return new Promise((resolve, reject) => {
           home.curriculumList(this.curriculumListForm).then(response => {
-            console.log(response, '99999')
+            // console.log(response, '99999')
             this.categoryData = response.data.curriculumList
             this.pagemsg.total = response.data.pageCount
             resolve(true)
@@ -178,7 +178,7 @@
     mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
-      console.log(Number(this.cid), '123')
+      // console.log(Number(this.cid), '123')
       this.bgmsg = this.cid
       this.bgmsgs = this.pid
       this.childCategoryList()

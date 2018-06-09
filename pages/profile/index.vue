@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config = "bconfig"></v-banner>
+    <v-banner :config = "bconfig" :isUpdate="isUpdate"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab">
         <!-- 我的信息 -->
@@ -72,7 +72,7 @@
         <!-- 个人设置 -->
         <el-tab-pane name="tab-fourth">
           <span slot="label"><i class="el-icon-date"></i> 个人设置</span>
-          <v-person></v-person>
+          <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
         <el-tab-pane name="tab-fifth">
@@ -256,7 +256,8 @@
           pages: 1,
           limits: 12
         },
-        collectionData: []
+        collectionData: [],
+        isUpdate:false
       };
     },
     computed: {
@@ -265,6 +266,10 @@
       ])
     },
     methods:{
+      updateUserInfo(flag){
+        this.isUpdate = flag
+        console.log('flag---', flag)
+      },
       goLink(item) {
         this.$router.push(item);
       },
@@ -278,7 +283,7 @@
         this.styleForm.limits = 12
         return new Promise((resolve, reject) => {
           home.studyCurriculumList(this.styleForm).then(response => {
-            console.log(response, '学习中返回')
+            // console.log(response, '学习中返回')
             this.newDataing = response.data.curriculumList
             resolve(true)
           })
@@ -290,7 +295,7 @@
         this.styleForm.limits = 12
         return new Promise((resolve, reject) => {
           home.studyCurriculumList(this.styleForm).then(response => {
-            console.log(response, '学习中返回')
+            // console.log(response, '学习中返回')
             this.newDataReady = response.data.curriculumList
             resolve(true)
           })
@@ -299,7 +304,7 @@
       collectionList () {
         return new Promise((resolve, reject) => {
           home.collectionList(this.collectionForm).then(response => {
-            console.log(response, '收藏返回')
+            // console.log(response, '收藏返回')
             this.collectionData = response.data.curriculumList
             resolve(true)
           })

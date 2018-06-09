@@ -1,35 +1,48 @@
 <template>
   <div>
-    <div class="content clearfix" v-for="(card,index) in infoList" :index="index" :key="card.id">
-      <div class="text fl fc16-222 flh-30">
-        {{card.title}}
+    <template v-if="hasmsg">
+      <div class="content clearfix" v-for="(card,index) in infoList" :index="index" :key="card.id">
+        <div class="text fl fc16-222 flh-30">
+          {{card.message}}
+        </div>
+        <div class="time fr f14-888 flh-30">
+          {{card.send_time}}
+        </div>
       </div>
-      <div class="time fr f14-888 flh-30">
-        2018-05-20 11：04
-      </div>
-    </div>
+    </template>
+    <template v-else>
+      <v-nomsg></v-nomsg>
+    </template>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        infoList: [{
-            title: "恭喜成为1911学堂会员】 恭喜，你已成功加入1911学院会员的队伍，这里有一份1911学 堂会员学习指导手册，请查收【立即查看】"
-          },
-          {
-            title: "【新上好课】一大批新上好课上架，欢迎查看"
-          },
-          {
-            title: "恭喜成为1911学堂会员】 恭喜，你已成功加入1911学院会员的队伍，这里有一份1911学 堂会员学习指导手册，请查收【立即查看】"
-          }
-        ]
-      };
-    },
-    mounted () {
-      document.getElementsByClassName("headerBox")[0].style.display="inline"
-      document.getElementsByClassName("footerBox")[0].style.display="inline"
+import { home } from "~/lib/v1_sdk/index";
+import noMsg from "@/pages/profile/pages/noMsg.vue";
+export default {
+  components: {
+    "v-nomsg": noMsg
+  },
+  data() {
+    return {
+      infoList: [],
+      hasmsg: true
+    };
+  },
+  methods: {
+    getInfo() {
+      return new Promise((resolve, reject) => {
+        home.userMessage(this.curruntForm).then(res => {
+          this.infoList = res.data.userMessage;
+          this.hasmsg = this.infoList.length > 0 ? true : false;
+        });
+      });
     }
-  };
+  },
+  mounted() {
+    this.getInfo();
+    document.getElementsByClassName("headerBox")[0].style.display = "inline";
+    document.getElementsByClassName("footerBox")[0].style.display = "inline";
+  }
+};
 </script>

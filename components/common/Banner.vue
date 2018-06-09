@@ -4,44 +4,82 @@
           <div class="news-banner">
             <img :src="bannerImg" alt="">
           </div>
-</template>
-
-<template v-if="config.banner_type === 'profile'">
-  <div class="profile-banner">
-    <div class="center-box">
-      <div class="avator">
-        <img :src="avator" alt="" class="img">
+    </template>
+    <template v-if="config.banner_type === 'profile'">
+      <div class="profile-banner">
+        <div class="center-box">
+          <div class="avator">
+            <div class="img">
+              <img :src="avator" alt="">
+              <el-upload class="up-user-avtor" 
+                action="http://www.1911edu.com/Publics/Upload/leafletsUpload" 
+                accept='image/*'
+                :on-success="upSuccess"
+                :on-error="failUp"
+                :show-file-list="false">
+                <el-button size="medium" type="primary">更换图片</el-button>
+              </el-upload>
+            </div>
+          </div>
+          <div class="name">
+            <p>{{userInfo.nick_name}}</p>
+            <p>{{userInfo.company_name}}</p>
+          </div>
+          <div class="time">
+            <p class="fr">18小时32分钟</p>
+            <p class="fr">总学习时长</p>
+          </div>
+        </div>
       </div>
-      <div class="name">
-        <p>扶摇1006</p>
-        <p>北京某某某科技有限公司</p>
-      </div>
-      <div class="time">
-        <p class="fr">18小时32分钟</p>
-        <p class="fr">总学习时长</p>
-      </div>
-    </div>
-  </div>
-</template>
+    </template>
   </div>
 </template>
 
 <script>
-  export default {
-    props: ["bannerImg", "config"],
-    data() {
-      return {
-        avator: require("~/assets/images/profile_avator01.png")
+import { home } from "~/lib/v1_sdk/index";
+export default {
+  props: ["bannerImg", "config", "isUpdate"],
+  data() {
+    return {
+      avator: require("~/assets/images/profile_avator01.png"),
+      userInfo: {
+        nick_name: "",
+        company_name: ""
       }
+    };
+  },
+  mounted() {
+    this.getUserInfo();
+  },
+  watch: {
+    isUpdate(val) {
+      if (val) {
+        this.getUserInfo();
+      }
+    }
+  },
+  methods: {
+    getUserInfo() {
+      home.getUserInfo().then(res => {
+        this.userInfo = res.data.userInfo;
+      });
     },
-  };
+    upSuccess(res,file){
+      this.avator = res.data.full_path
+      console.log('file-----', file)
+    },
+    failUp(){
+
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  .news-banner {
-    height: 360px;
-    img {
-      height: 100%;
-    }
+.news-banner {
+  height: 360px;
+  img {
+    height: 100%;
   }
+}
 </style>

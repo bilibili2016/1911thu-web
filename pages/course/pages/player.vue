@@ -59,10 +59,10 @@
         <h4>报告问题
           <i @click="closeReport" class="el-icon-close fr"></i>
         </h4>
-        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem">
+        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem.content">
         </el-input>
         <div class="commitBug">
-          <el-button round>提交</el-button>
+          <el-button @click="reportProblem">提交</el-button>
         </div>
       </div>
     </div>
@@ -134,7 +134,10 @@ import { store as persistStore } from '~/lib/core/store'
 
             ]
           }],
-        problem: "",
+        problem: {
+          curriculumId:null,
+          content:'',
+        },
         word:"",
         evaluate: {
           eltnum: 5,
@@ -236,10 +239,23 @@ import { store as persistStore } from '~/lib/core/store'
         this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
         return new Promise((resolve, reject) => {
           home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-            console.log(response, '345678')
+            // console.log(response, '345678')
             this.player = response.data.curriculumDetail
             this.courseList = response.data.curriculumCatalogList
             this.collectMsg = response.data.curriculumDetail.is_collection
+          });
+        });
+      },
+      // 反馈问题
+      reportProblem(){
+        this.problem.curriculumId = persistStore.get('curriculumId')
+        return new Promise((resolve, reject) => {
+          home.reportProblem(this.problem).then(response => {
+            this.$message({
+              type: 'success',
+              message: response.msg
+            })
+            this.closeReport();
           });
         });
       },
@@ -250,7 +266,7 @@ import { store as persistStore } from '~/lib/core/store'
         this.addEvaluateForm.scores = this.evaluate.eltnum
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
-            console.log(response, '345678')
+            // console.log(response, '345678')
             this.$message({
               type: 'success',
               message: response.msg
