@@ -481,19 +481,12 @@ this.delShopCart()
 
           })
         })
-<<<<<<< HEAD
-        for (var i=0; i<this.data.length; i++){
-        if(i === index){
-          // this.nextmsg = true
-          this.$set(this.data[i], "is_checked", true);
-=======
 
         for (var i = 0; i < this.data.length; i++) {
           if (i === index) {
             // this.nextmsg = true
             this.$set(this.data[i], "is_checked", true);
           }
->>>>>>> master
         }
       },
       getMore(item) {
@@ -584,36 +577,9 @@ this.delShopCart()
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     img {
-<<<<<<< HEAD
-      width: 60px;
-      height: 60px;
-      margin: 20px 11px;
-    }
-    div {
-      width: 178px;
-      h5 {
-        color: #6417a6;
-        // line-height: 40px;
-        margin: 15px 0px 10px 0px;
-        &:hover {
-          color: #8f4acb;
-        }
-      }
-      p {
-        color: #93999f;
-        font-size: 12px;
-        line-height: 22px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-      }
-=======
       width: 250px;
       height: 160px;
       transition: all 300ms;
->>>>>>> master
     }
   }
 
@@ -1393,23 +1359,6 @@ this.delShopCart()
       }
     }
   }
-<<<<<<< HEAD
-}
-.goodLesson{
-  .common-button{
-    .el-button{
-      border-color: #6417a6;
-      color: #6417a6;
-      font-size: 14px;
-      &:hover{
-        border-color: #8F4ACB;
-        color: #fff;
-      }
-    }
-  }
-}
-=======
->>>>>>> master
 
   .btn {
     width: 140px;
