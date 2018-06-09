@@ -85,7 +85,7 @@ export default {
       value3: true,
       value4: true,
       configSevent: {
-        card_type: "profile",
+        card_type: "shoucang",
         card: "home",
         types: "buy"
       },
@@ -199,9 +199,12 @@ export default {
     this.bgmsg = Number(this.cid) + Number(1);
     this.bgmsgs = Number(this.pid) + Number(1);
     this.cidform.cids = "";
+    this.pidform.pids = "";
     this.bgmsg = 0;
 
     this.setCid(this.cidform);
+   this.pidform.pids = "";
+      this.setPid(this.pidform);
     this.curriculumList();
     this.childCategoryList();
   }
