@@ -11,11 +11,11 @@
         <div class="tableBody">
           <div v-for="(course,index) in courseList" :key="index">
             <div class="courseInfo clearfix">
-              <img class="fl" :src="course.src" alt="">
+              <img class="fl" :src="course.curriculum_picture" alt="">
               <div class="fl">
-                <h4>{{course.title}}</h4>
-                <h6>{{course.period}}学时</h6>
-                <p>讲师：{{course.teacher}}</p>
+                <h4>{{course.curriculum_title}}</h4>
+                <h6>{{course.number}}学时</h6>
+                <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
             <div class="coursePrice">
@@ -35,6 +35,7 @@
 <script>
 // 总价 多选
 import { home } from '@/lib/v1_sdk/index'
+import { store as persistStore } from '~/lib/core/store'
   export default {
     data(){
       return{
@@ -58,7 +59,8 @@ import { home } from '@/lib/v1_sdk/index'
           address:"",
           contacts:"",
           tel:"",
-          code:""
+          code:"",
+          payIndex: null
         },
         rules: {
           name: [
@@ -85,7 +87,8 @@ import { home } from '@/lib/v1_sdk/index'
         return new Promise((resolve, reject) => {
           home.curriculumPayApply().then(response => {
             console.log(response, '123')
-            this.courseList = response.data.curriculumPayApply
+            this.courseList = response.data.curriculumPayApply[this.payIndex].CurriculumPayApplyList
+            console.log(this.courseList, '123')
             resolve(true)
           })
         })
@@ -94,6 +97,7 @@ import { home } from '@/lib/v1_sdk/index'
      mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+      this.payIndex = persistStore.get('pay')
       this.curriculumPayApply()
     }
   }
