@@ -275,11 +275,11 @@ export default {
     },
     // 添加收藏
     addCollection() {
-      console.log("增加收藏");
+      // console.log("增加收藏");
       this.addCollectionForm.curriculumId = persistStore.get("curriculumId");
       return new Promise((resolve, reject) => {
         home.addCollection(this.addCollectionForm).then(response => {
-          console.log(response, "增加收藏");
+          // console.log(response, "增加收藏");
           // this.collectMsg = response.data.curriculumDetail.is_collection
           this.$message({
             type: "success",
