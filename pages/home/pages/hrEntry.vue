@@ -36,7 +36,7 @@
                 <p><img src="@/assets/images/cartIcon.png" alt=""> 购买流程</p>
                 <h5>
                     <span v-for="(one,index) in buyList" :key="index"><i class="icon before el-icon-caret-right"></i><i class="word">{{one}}</i><i class="icon after el-icon-caret-right"></i></span>
-                   
+
                 </h5>
                 <p><img src="@/assets/images/studyIcon.png" alt="">学习流程</p>
                 <h5>
@@ -160,7 +160,7 @@
                 if (valid) {
                     alert('submit!');
                 } else {
-                    console.log('error submit!!');
+                    // console.log('error submit!!');
                     return false;
                 }
                 });

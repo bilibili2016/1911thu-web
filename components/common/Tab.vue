@@ -61,11 +61,11 @@ import { mapState, mapActions, mapGetters } from 'vuex'
       handlePid(item,index) {
         this.$router.push('course/pages/category')
         this.pidform.pids = item.id
-        console.log(this.pidform, '这是this.pidform')
+        // console.log(this.pidform, '这是this.pidform')
         this.setPid(this.pidform)
       },
       showItem(index,item){
-        console.log(item.id)
+        // console.log(item.id)
         this.itemID = index;
         this.cidform.cids = item.id
         this.setCid(this.cidform)

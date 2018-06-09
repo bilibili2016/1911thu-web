@@ -40,7 +40,7 @@
       getNewCourseList (){
         return new Promise((resolve, reject) => {
           home.getNewCourseList(this.newsCurriculumForm).then(response => {
-            console.log(response, '新上好课列表')
+            // console.log(response, '新上好课列表')
             this.courseList = response.data.curriculumList
             resolve(true)
           })

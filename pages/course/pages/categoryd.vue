@@ -326,7 +326,7 @@ export default {
         // this.curriculumListForm.sortBy = 1
         return new Promise((resolve, reject) => {
           home.curriculumList(this.curriculumListForm).then(response => {
-            console.log(response, '99999')
+            // console.log(response, '99999')
             this.categoryData = response.data.curriculumList
             this.pagemsg.total = response.data.pageCount
             for(let item of response.data.curriculumList){
@@ -337,7 +337,7 @@ export default {
         })
       },
       selectCid (val) {
-        console.log(val)
+        // console.log(val)
       }
   },
   mounted() {

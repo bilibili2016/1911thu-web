@@ -56,7 +56,7 @@ import { store as persistStore } from '~/lib/core/store'
       curriculumPayApply() {
         return new Promise((resolve, reject) => {
           home.curriculumPayApply().then(response => {
-            console.log(response, '123')
+            // console.log(response, '123')
             this.curriculumPayData = response.data.curriculumPayApply
 
             resolve(true)
@@ -64,8 +64,8 @@ import { store as persistStore } from '~/lib/core/store'
         })
       },
       selectPayApply(item,index){
-        console.log(item, 'item')
-        console.log(index, 'index')
+        // console.log(item, 'item')
+        // console.log(index, 'index')
          persistStore.set('pay', index)
          this.$router.push('/shop/checkedCourseList')
       },

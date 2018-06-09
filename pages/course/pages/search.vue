@@ -69,7 +69,7 @@
     },
     methods: {
       handleSearchs(val) {
-        console.log(val, '这是val')
+        // console.log(val, '这是val')
         this.searchForm.searchword = val
 
         this.loading = true
@@ -78,9 +78,9 @@
       searchCurriculumList () {
         return new Promise((resolve, reject) => {
           home.searchCurriculumList(this.searchForm).then(response => {
-            console.log(response, '这是response')
+            // console.log(response, '这是response')
             this.searchData = response.data.curriculumList
-            console.log(this.searchData, '123456')
+            // console.log(this.searchData, '123456')
             this.pagemsg.total = response.data.pageCount
             this.loading = false
             resolve(true)

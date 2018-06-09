@@ -278,7 +278,7 @@
         this.styleForm.limits = 12
         return new Promise((resolve, reject) => {
           home.studyCurriculumList(this.styleForm).then(response => {
-            console.log(response, '学习中返回')
+            // console.log(response, '学习中返回')
             this.newDataing = response.data.curriculumList
             resolve(true)
           })
@@ -290,7 +290,7 @@
         this.styleForm.limits = 12
         return new Promise((resolve, reject) => {
           home.studyCurriculumList(this.styleForm).then(response => {
-            console.log(response, '学习中返回')
+            // console.log(response, '学习中返回')
             this.newDataReady = response.data.curriculumList
             resolve(true)
           })
@@ -299,7 +299,7 @@
       collectionList () {
         return new Promise((resolve, reject) => {
           home.collectionList(this.collectionForm).then(response => {
-            console.log(response, '收藏返回')
+            // console.log(response, '收藏返回')
             this.collectionData = response.data.curriculumList
             resolve(true)
           })

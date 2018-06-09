@@ -10,10 +10,10 @@
                     <span>忘记密码</span>
                 </div>
                 <!-- 忘记密码 -->
-                <el-form :model="fpData" status-icon :rules="rules2" ref="registerData" class="demo-ruleForm">
+                <el-form :model="fpData" status-icon :rules="rules2" ref="fpData" class="demo-ruleForm">
                     <el-form-item prop="tel">
                         <!-- 手机号 -->
-                        <el-input v-model.number="fpData.tel" placeholder="请输入登录手机号"></el-input>
+                        <el-input v-model.number="fpData.tel" placeholder="请输入手机号"></el-input>
                     </el-form-item>
                     <el-form-item prop="code" class="clearfix">
                         <!-- 验证码 -->
