@@ -73,7 +73,7 @@
           <el-tab-pane label="注册" name="register">
             <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
               <el-form-item prop="phones">
-                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
+                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable @blur="verifyRgTel"></el-input>
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
@@ -164,7 +164,7 @@ export default {
       // console.log(5);
     };
     var checkRgTel = (rule, value, callback) => {
-      if (!value) {
+      if (value === '') {
         return callback(new Error("手机号不能为空"));
       }
       if (value.toString().length != 11) {
@@ -173,7 +173,7 @@ export default {
       if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
         return callback(new Error("请输入正确手机号"));
       }
-      this.verifyRgTel();
+      // this.verifyRgTel();
     };
     var validatePass = (rule, value, callback) => {
       if (value === "") {
@@ -185,12 +185,10 @@ export default {
       }
     };
     var checkCompanyCodes = (rule, value, callback) => {
-      if(value){
-        if (!/^[A-Za-z0-9]+$/.test(value)){
-          return callback(new Error("请输入正确企业ID"));
-        }
+      if(value == "" && /^[A-Za-z0-9]+$/.test(value)){
+        return callback(new Error("请输入正确企业ID"));
       }
-
+      callback();
     };
     return {
       searchImg: require("~/assets/images/search.png"),
@@ -248,7 +246,7 @@ export default {
       registRules: {
         phones: [
           { required: true, message: "请输入手机号", trigger: "blur" },
-          { validator: checkRgTel, trigger: "blur" }
+          { validator: checkPhone, trigger: "blur" }
         ],
         passwords: [
           { required: true, message: "请输入账户密码", trigger: "blur" },
@@ -262,7 +260,7 @@ export default {
         ],
         codes: [{ required: true, message: "请输入验证码", trigger: "blur" }],
         companyCodes: [
-          { min: 9, max: 9, message: "请输入正确的企业ID", trigger: "blur" },
+          { min: 6, max: 6, message: "请输入正确的企业ID", trigger: "blur" },
           { validator: checkCompanyCodes, trigger: "blur" }
         ],
         checked: [
@@ -287,7 +285,6 @@ export default {
       gidForm: {
         gids: null
       }
-      // ipone code
     };
   },
   computed: {
@@ -306,20 +303,20 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
-      if(!this.captchaDisable){
+      if(!this.bindTelData.captchaDisable){
         return new Promise((resolve, reject) => {
         auth.smsCodes(this.registerData).then(response => {
           this.$message({
-            type: 'success',
+            type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          this.captchaDisable = true;
+          this.bindTelData.captchaDisable = true;
           this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
           let interval = setInterval(() => {
             if (this.bindTelData.seconds <= 0) {
               this.bindTelData.getCode = "获取验证码";
               this.bindTelData.seconds = 60;
-              this.captchaDisable = false;
+              this.bindTelData.captchaDisable = false;
               clearInterval(interval);
             } else {
               this.bindTelData.getCode =
@@ -335,9 +332,14 @@ export default {
       return new Promise((resolve, reject) => {
         auth.verifyPhone(this.registerData).then(response => {
           this.$message({
-            type: response.status === "0" ? "success" : "error",
+            type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
+          if(response.status != "0"){
+            this.bindTelData.captchaDisable=true;
+          }else{
+            this.bindTelData.captchaDisable=false;
+          }
         });
       });
     },
@@ -348,9 +350,12 @@ export default {
           return new Promise((resolve, reject) => {
             auth.signUp(this.registerData).then(response => {
               this.$message({
-                type: response.status === "0" ? "success" : "error",
+                type: response.status === 0 ? "success" : "error",
                 message: response.msg
               });
+              if(response.status === 0){
+                this.close();
+              }
             });
           });
         } else {
@@ -461,6 +466,7 @@ export default {
       this.emptyForm();
     },
     closeWechat() {
+      this.move();
       this.start = false;
       this.lrFrame = false;
       this.wechatLogin = false;
@@ -476,10 +482,12 @@ export default {
       this.registerData.passwords="";
       this.registerData.types=1;
       this.registerData.codes="";
-      this.registerData.checked=[];
+      this.registerData.checked=[false];
       this.registerData.companyCodes="";
     },
-    handleClick(tab, event) {},
+    handleClick(tab, event) {
+      this.emptyForm();
+    },
     wechatLogined() {
       //微信登录
       this.lrFrame = false;
