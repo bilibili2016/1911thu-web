@@ -590,9 +590,9 @@
       margin-right: 20px;
     }
     img {
-      width: 50px;
-      height: 50px;
-      margin: 25px 16px;
+      width: 60px;
+      height: 60px;
+      margin: 20px 11px;
     }
     div {
       width: 178px;
