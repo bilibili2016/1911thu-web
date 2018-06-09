@@ -20,7 +20,7 @@
               <el-button @click="getPidList">全部</el-button>
             </li>
             <li v-for="(items,index) in data2.childList" :index="index" :key="index" :class="{bgs: bgmsgs === items.id ? true : false }">
-              <el-button @click="handleItemTwo(items,index)">{{items.category_name}}{{items.id}}</el-button>
+              <el-button @click="handleItemTwo(items,index)">{{items.category_name}}</el-button>
             </li>
           </ul>
         </div>
@@ -43,7 +43,7 @@
     </div>
     <!-- <v-filter></v-filter> -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="total"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
     </div>
   </div>
 </template>
@@ -79,8 +79,8 @@
         },
         pagemsg: {
           page: 1,
-          pagesize: 1,
-          total:3
+          pagesize: 5,
+          total:5
         },
         categoryData: [
         ],

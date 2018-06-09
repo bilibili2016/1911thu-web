@@ -15,6 +15,7 @@
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
+        {{data}}
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
             <div  class="new-style" v-if="config.new === 'true'">
@@ -73,6 +74,50 @@
               </div>
               <div class="readyImg" v-if="config.card === 'already'">
                 <img :src="readyImg" alt="">
+              </div>
+            </el-row>
+          </el-card>
+        </div>
+      </div>
+    </template>
+    <!-- 我的收藏 -->
+        <!-- profile个人信息模板 新上好课模板-->
+    <template v-if="config.card_type === 'shoucang'">
+      <div class="card-category profile">
+        {{data}}
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
+            <div  class="new-style" v-if="config.new === 'true'">
+              <img :src="newTag" alt="">
+            </div>
+            <div class="mask-style" @click="goLink('course/pages/coursedetail')">
+              <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+            </div>
+            <div  class="bgImgs">
+              <img :src="card.picture" alt=""
+             >
+            </div>
+            <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
+            <div class="tag">
+              <span>新闻宣传</span>
+              <span>时政</span>
+            </div>
+            <div v-if="config.card === 'home'"></div>
+            <div class="common-button btn-bgs " v-else>
+              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+            </div>
+            <el-row>
+              <!-- 名字 -->
+              <div class="item">
+                <p class="itemBox-name">
+                  <span>{{card.title}}</span>
+                </p>
+              </div>
+              <!-- 作者和头衔    金额 -->
+              <div class="line-wrap" v-if="config.card === 'home'">
+                <div class="line-center">
+                 <img src="" alt="">
+                </div>
               </div>
             </el-row>
           </el-card>

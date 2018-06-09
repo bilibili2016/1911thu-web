@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config = "bconfig"></v-banner>
+    <v-banner :config = "bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fourth'"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab">
         <!-- 我的信息 -->
@@ -72,7 +72,7 @@
         <!-- 个人设置 -->
         <el-tab-pane name="tab-fourth">
           <span slot="label"><i class="el-icon-date"></i> 个人设置</span>
-          <v-person></v-person>
+          <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
         <el-tab-pane name="tab-fifth">
@@ -88,7 +88,7 @@
         </el-tab-pane>
         <!-- 我的选课 -->
         <el-tab-pane name="tab-sixth" @tab-click="goShop">
-        <!-- <el-tab-pane name="tab-sixth" @click="goLink('/shop/checkedCourse')"> -->
+        <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
           <span slot="label"><i class="el-icon-date"></i> 我的选课</span>
         </el-tab-pane>
       </el-tabs>
@@ -124,7 +124,7 @@
           banner_type: "profile"
         },
         configZero: {
-          card_type: "profile",
+          card_type: "shoucang",
           card: 'home',
 
         },
@@ -256,7 +256,8 @@
           pages: 1,
           limits: 12
         },
-        collectionData: []
+        collectionData: [],
+        isUpdate:false
       };
     },
     computed: {
@@ -265,6 +266,9 @@
       ])
     },
     methods:{
+      updateUserInfo(flag){
+        this.isUpdate = flag
+      },
       goLink(item) {
         this.$router.push(item);
       },
@@ -299,11 +303,14 @@
       collectionList () {
         return new Promise((resolve, reject) => {
           home.collectionList(this.collectionForm).then(response => {
-            // console.log(response, '收藏返回')
+            console.log(response, '收藏返回')
             this.collectionData = response.data.curriculumList
+            console.log(response.data.curriculumList, '请求返回')
             resolve(true)
           })
         })
+        console.log('tab-------------------', tab);
+        this.goLink('/course/pages/categoryd');
       }
     },
     mounted () {

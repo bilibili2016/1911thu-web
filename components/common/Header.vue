@@ -525,7 +525,9 @@ export default {
       document.removeEventListener("touchmove", mo, false);
     },
     goSearch(item) {
+      persistStore.set('key', this.search)
       switch (window.location.pathname) {
+
         case "/course/pages/search":
           break;
         default:
@@ -535,6 +537,7 @@ export default {
     },
     gokey() {
       if (event.keyCode == 13) {
+        persistStore.set('key', this.search)
         switch (window.location.pathname) {
           case "/course/pages/search":
             break;
