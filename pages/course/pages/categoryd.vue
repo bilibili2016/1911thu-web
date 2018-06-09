@@ -206,6 +206,10 @@ export default {
     document.getElementsByClassName("footerBox")[0].style.display = "inline";
     this.bgmsg = Number(this.cid) + Number(1);
     this.bgmsgs = Number(this.pid) + Number(1);
+     this.cidform.cids = ''
+         this.bgmsg = 0
+
+        this.setCid(this.cidform)
     this.curriculumList()
     this.childCategoryList()
   }
