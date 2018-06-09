@@ -14,7 +14,7 @@
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
-            <img class="fl" src="@/assets/images/downApp.png" alt="">
+            <img class="fl" src="@/assets/images/wechatLogin.png" alt="">
             <div class="changeType fr">
               <span>下载1911学堂APP</span>
               <span><img src="@/assets/images/iphone.png" alt=""> App Store下载</span>

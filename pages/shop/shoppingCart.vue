@@ -237,7 +237,13 @@ import { home,auth } from '@/lib/v1_sdk/index'
           return new Promise((resolve, reject) => {
             home.addPaySubmit(this.companyInfo).then(response => {
               // console.log(response)
-              this.$router.push('/shop/checkedCourse')
+              this.$message({
+                type: response.status === 0 ? "success" : "error",
+                message: response.msg
+              });
+              if(response.status === 0){
+                this.$router.push('/shop/checkedCourse')
+              }
               resolve(true)
             })
           })
@@ -275,7 +281,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
       return new Promise((resolve, reject) => {
         auth.smsCodes(this.companyInfo).then(response => {
           this.$message({
-            type: response.status === "0" ? "success" : "error",
+            type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
           // this.captchaDisable = true;
