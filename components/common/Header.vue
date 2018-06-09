@@ -500,7 +500,7 @@ export default {
       this.wxLogin();
     },
     getWXCode() {
-      console.log(this.getWXLoginImg.time);
+      // console.log(this.getWXLoginImg.time);
       if (this.getWXLoginImg.time < 1) {
         clearInterval(timewx);
         this.wxLogin();

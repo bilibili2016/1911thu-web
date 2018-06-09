@@ -12,8 +12,8 @@
             <div class="img">
               <img :src="userInfo.head_img" alt="" v-if="userInfo.head_img">
               <img :src="avator" alt="" v-else>
-              <el-upload v-show="isShowUpAvtor" class="up-user-avtor" 
-                action="http://www.1911edu.com/Wapi/MyInfo/uploadHeadImg" 
+              <el-upload v-show="isShowUpAvtor" class="up-user-avtor"
+                action="http://www.1911edu.com/Wapi/MyInfo/uploadHeadImg"
                 accept='image/*'
                 :on-success="upSuccess"
                 :on-error="failUp"
@@ -70,7 +70,7 @@ export default {
       this.userInfo.head_img= res.data.full_path
     },
     failUp(){
-      console.log('失败')
+
     }
   }
 };

@@ -177,7 +177,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList;
-          console.log(response, "返回的response");
+          // console.log(response, "返回的response");
           if (this.cid === "50") {
             this.data2 = this.data[0];
           } else if (this.cid === "51") {

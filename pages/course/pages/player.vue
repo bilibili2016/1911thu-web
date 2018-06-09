@@ -276,7 +276,7 @@ import { store as persistStore } from '~/lib/core/store'
       },
       // 判断是收藏还是为收藏
       collection () {
-        console.log(this.collectMsg, '1234')
+        // console.log(this.collectMsg, '1234')
         if(this.collectMsg === 1){
           this.deleteCollection()
         } else {
@@ -285,7 +285,7 @@ import { store as persistStore } from '~/lib/core/store'
       },
       // 添加收藏
       addCollection () {
-        console.log('增加收藏')
+        // console.log('增加收藏')
         this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
         return new Promise((resolve, reject) => {
           home.addCollection(this.addCollectionForm).then(response => {

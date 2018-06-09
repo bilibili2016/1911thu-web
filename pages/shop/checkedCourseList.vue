@@ -86,7 +86,7 @@ import { store as persistStore } from '~/lib/core/store'
       curriculumPayApply() {
         return new Promise((resolve, reject) => {
           home.curriculumPayApply().then(response => {
-            console.log(response, '123')
+            // console.log(response, '123')
             this.courseList = response.data.curriculumPayApply[this.payIndex].CurriculumPayApplyList
             resolve(true)
           })

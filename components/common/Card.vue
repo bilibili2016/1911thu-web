@@ -471,8 +471,8 @@
       this.getMore(linksix);
     },
     selectCid(item, index) {
-        console.log(item.id, '这是item.id')
-        console.log(item, '这是item')
+        // console.log(item.id, '这是item.id')
+        // console.log(item, '这是item')
         this.curriculumcartids.cartid = item.id
       if(item.is_checked === false){
         item.is_checked = true
@@ -490,9 +490,9 @@
     },
     addShopCart(){
       return new Promise((resolve, reject) => {
-        console.log(this.curriculumcartids, '添加成功123')
+        // console.log(this.curriculumcartids, '添加成功123')
         home.addShopCart(this.curriculumcartids).then(response => {
-            console.log(response, '添加成功')
+            // console.log(response, '添加成功')
           })
         })
     },
@@ -505,7 +505,7 @@
     }
   },
   mounted() {
-    console.log(this.data, '返回的数据')
+    // console.log(this.data, '返回的数据')
   }
 };
 </script>
