@@ -51,7 +51,7 @@ export default {
         getCode: "获取验证码",
         captchaDisable: false,
         checked: false,
-        types: 5
+        types: 2
       },
       formRules: {
         password: [
