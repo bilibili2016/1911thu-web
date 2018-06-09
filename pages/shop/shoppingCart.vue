@@ -156,7 +156,7 @@ export default {
   },
   computed: {
     prices() {
-      return this.arraySum * this.numForm.number
+      return this.arraySum * this.numForm.number;
     }
   },
   watch: {
@@ -165,9 +165,9 @@ export default {
     }
   },
   methods: {
-    deleteChecked(){
+    deleteChecked() {
       this.courseList.forEach(item => {
-        if(item.checkMsg){
+        if (item.checkMsg) {
           let shopIndex = indexOf(this.addArray.curriculumcartid, item.id);
           this.addArray.curriculumcartid.splice(shopIndex, 1);
           this.arraySum = this.arraySum - Number(item.present_price);
@@ -213,17 +213,19 @@ export default {
     },
     handleSelect(item, index) {},
     handleSelectAllChange(val) {
-      this.courseList.forEach(item => {
-        item.checkMsg = val;
-      });
-      if(!val){
-        this.addArray.curriculumcartid = []
-        this.arraySum = 0
-      }else{
+      if (this.courseList || this.courseList.length > 0) {
         this.courseList.forEach(item => {
-          this.addArray.curriculumcartid.push(item.id)
-          this.arraySum = this.arraySum + Number(item.present_price);
-        })
+          item.checkMsg = val;
+        });
+        if (!val) {
+          this.addArray.curriculumcartid = [];
+          this.arraySum = 0;
+        } else {
+          this.courseList.forEach(item => {
+            this.addArray.curriculumcartid.push(item.id);
+            this.arraySum = this.arraySum + Number(item.present_price);
+          });
+        }
       }
     },
     handleSelectChange(item, index) {
@@ -292,7 +294,7 @@ export default {
             type: "success",
             message: "删除成功"
           });
-          this.courseList.splice(index,1)
+          this.courseList.splice(index, 1);
           // this.shopCartList();
         });
       });
