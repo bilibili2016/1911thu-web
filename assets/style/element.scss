@@ -311,6 +311,9 @@
 
 //分页
 .pagination {
+  .is-background{
+    text-align: center;
+  }
   .el-pagination.is-background .el-pager li {
     border-radius: 15px;
   }
