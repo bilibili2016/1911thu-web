@@ -456,7 +456,6 @@
 
           })
         })
-
         for (var i=0; i<this.data.length; i++){
         if(i === index){
           // this.nextmsg = true
@@ -1318,6 +1317,19 @@
             border-color: #8f4acb;
           }
         }
+      }
+    }
+  }
+}
+.goodLesson{
+  .common-button{
+    .el-button{
+      border-color: #6417a6;
+      color: #6417a6;
+      font-size: 14px;
+      &:hover{
+        border-color: #8F4ACB;
+        color: #fff;
       }
     }
   }

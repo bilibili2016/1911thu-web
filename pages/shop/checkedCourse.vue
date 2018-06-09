@@ -1,7 +1,7 @@
 <template>
   <div class="checkedCourse">
     <div class="main">
-      {{curriculumPayData}}
+      <!-- {{curriculumPayData}} -->
       <div class="company" v-for="(courseList, index ) in curriculumPayData" :key="index">
         <!-- v-if="courseList.CurriculumPayApplyList.length<3"  -->
         <div class="title clearfix">
@@ -18,12 +18,12 @@
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
-            <div class="more" v-show="courseList.CurriculumPayApplyList.length>1" @click="selectPayApply(courseList, index)">
+            <div class="more" v-show="courseList.CurriculumPayApplyList.length>3" @click="selectPayApply(courseList, index)">
               查看更多课程>
             </div>
           </div>
           <div class="price height" :style="{height:courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+'px'}">¥{{courseList.totalPresentPrice}}</div>
-          <div class="telephone height" :style="{height: courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140 + 'px' }">
+          <div class="telephone height" :style="{height: courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+'px'}">
             <p>客服电话</p>
             <p>010-6270 1911</p>
           </div>

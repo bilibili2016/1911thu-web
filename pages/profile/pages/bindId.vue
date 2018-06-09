@@ -37,7 +37,7 @@
       <div v-show="courseList.addNewID">
         <div class="courseID">
           <span>绑定课程ID:</span>
-          <input v-model="courseList.inputID" @blur.stop="verify" placeholder="请输入您的课程ID">
+          <input v-model="courseList.inputID" @blur.stop="courseVerify" placeholder="请输入您的课程ID">
           <span class="error" v-show="courseList.showErr">请输入正确的企业ID</span>
         </div>
         <div class="bindInfo">
@@ -70,6 +70,15 @@
         } else {
           this.binding.showErr = false;
           this.binding.presentAble = true;
+        }
+      },
+      courseVerify(){
+        if (this.courseList.inputID == "") {
+          this.courseList.showErr = true;
+          this.courseList.presentAble = false;
+        } else {
+          this.courseList.showErr = false;
+          this.courseList.presentAble = true;
         }
       },
       addID() {

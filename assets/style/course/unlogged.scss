@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     z-index: 999;
-    background:rgba(100, 23, 166, .8);
+    background:rgba(0, 0, 0, .6);
     .unloginner{
         position: absolute;
         width: 360px;
@@ -24,6 +24,7 @@
             font-size: 30px;
             color: #6417a6;
             position: absolute;
+            cursor: pointer;
         }
         &>img{
             display: block;
