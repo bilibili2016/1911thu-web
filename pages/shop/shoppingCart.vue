@@ -28,16 +28,13 @@
             </div>
           </div>
         </div>
-        <div class="pagination">
-          <span>首页</span>
-          <el-pagination
-            :page-size="20"
-            layout="prev, pager, next"
-            :total="20">
-          </el-pagination>
-          <span>尾页</span>
+        <div class="noMsg-con" v-if="courseList.length === 0">
+          <div class="noMsg-img">
+            <img :src="noMsg" alt="">
+            <p>您的购物车为空</p>
+          </div>
         </div>
-        <div class="tableFooter">
+        <div class="tableFooter" v-if="courseList.length > 0">
           <el-checkbox v-model="selectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
@@ -103,6 +100,7 @@ import { home, auth } from "@/lib/v1_sdk/index";
 export default {
   data() {
     return {
+       noMsg: require('~/assets/images/noMsg.png'),
       showInfo: false,
       selectAll: false,
       checked: [],
@@ -297,13 +295,13 @@ export default {
             message: "删除成功"
           });
           this.courseList.splice(index, 1);
+          console.log(this.courseList, '123')
           this.handleSelectChange(item,index)
           // this.shopCartList();
         });
       });
       // console.log(this.curriculumcartids, '787878787')
     },
-    delShopCart() {},
     async handleGetCode() {
       return new Promise((resolve, reject) => {
         auth.smsCodes(this.companyInfo).then(response => {

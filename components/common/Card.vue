@@ -325,7 +325,7 @@
   <div class="info-list">
     <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index>0">
       <el-card shadow="never" body-style="padding: 0;">
-        <div class="info-box" @click="selectDetail(index,card,linksix)">
+        <div class="info-box" @click="selectDetail(index,card,linkfive)">
           <div class="info-wrap">
             <img :src="card.picture" alt="">
             <span>{{card.title}}</span>
@@ -381,6 +381,7 @@
       "linkdata",
       'newsList',
       'linkfour',
+      'linkfive',
       'linksix',
       'privileMsg'
     ],
@@ -496,7 +497,9 @@ this.delShopCart()
         this.isShow = !this.isShow;
       },
       selectDetail(index, course, linksix) {
+        console.log(course, '787878')
         this.$emit("checkdetail", course.id);
+        console.log(linksix, '99999')
         this.getMore(linksix);
       },
       selectCid(item, index) {
