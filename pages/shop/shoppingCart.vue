@@ -213,7 +213,7 @@ export default {
     },
     handleSelect(item, index) {},
     handleSelectAllChange(val) {
-      if (this.courseList || this.courseList.length > 0) {
+      if (this.courseList && this.courseList.length > 0) {
         this.courseList.forEach(item => {
           item.checkMsg = val;
         });
