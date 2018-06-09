@@ -15,7 +15,6 @@
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
-        {{data}}
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
             <div  class="new-style" v-if="config.new === 'true'">
@@ -84,7 +83,6 @@
         <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'shoucang'">
       <div class="card-category profile">
-        {{data}}
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
             <div  class="new-style" v-if="config.new === 'true'">
@@ -114,9 +112,16 @@
                 </p>
               </div>
               <!-- 作者和头衔    金额 -->
-              <div class="line-wrap" v-if="config.card === 'home'">
+              <!-- <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
                  <img src="" alt="">
+                </div>
+              </div> -->
+              <div class="line-wrap" v-if="config.card === 'home'">
+                <div class="line-center">
+                  <img :src="card.head_img" alt="">
+                  <span>王建中</span>
+                  <span class="title">华中科技大学博士</span>
                 </div>
               </div>
             </el-row>
@@ -128,7 +133,6 @@
     <!-- 购物车页面 -->
     <template v-if="config.card_type === 'profiled'">
       <div class="card-category profile">
-
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="handleCheck(card,index)">
 
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
@@ -769,6 +773,9 @@
         // border-top: 1px #e4e4f4 solid;
       }
       .line-center {
+        overflow: hidden;
+        height: 35px;
+        padding: 0 15px;
         p.price {
           color: #332a51;
           padding: 0 15px;
@@ -781,13 +788,12 @@
           display: inline-block;
         }
         .title {
-          display: inline-block;
-          margin-left: 46px;
+          float: right;
           color: rgba(109, 104, 127, 1);
         }
       }
       .line-centers {
-        padding: 0px 14px 0px 13px;
+        padding: 0px 14px 0px 0;
         p {
           margin-bottom: 10px;
           font-size: 14px;

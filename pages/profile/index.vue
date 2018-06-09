@@ -26,7 +26,7 @@
           <el-card>
             <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
-                <v-card v-if="newDataing" :data="newDataing" :config="configOne"></v-card>
+                <v-card v-if="newDataing.length" :data="newDataing" :config="configOne"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -36,7 +36,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="已完成" name="second">
-                <v-card v-if="newDataReady" :data="newDataReady" :config="configTwo"></v-card>
+                <v-card v-if="newDataReady.length" :data="newDataReady" :config="configTwo"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -46,7 +46,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="我的收藏" name="third">
-                <v-card v-if="collectionData" :data="collectionData" :config="configZero"></v-card>
+                <v-card v-if="collectionData.length" :data="collectionData" :config="configZero"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -82,7 +82,6 @@
             <div class="noCourse">
               <img :src="noMsgImg" alt="">
               <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
-              <!-- <p>去学习</p> -->
             </div>
           </div>
         </el-tab-pane>
