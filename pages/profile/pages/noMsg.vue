@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      noMsg: require('@/assets/images/nomsg.png')
+      noMsg: require('~/assets/images/nomsg.png')
     };
   }
 };
