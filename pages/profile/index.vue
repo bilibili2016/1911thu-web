@@ -77,9 +77,9 @@
         <!-- 绑定Id -->
         <el-tab-pane name="tab-fifth">
           <span slot="label"><i class="el-icon-date"></i> 绑定课程ID</span>
-          <v-bind></v-bind>
+          <v-bind @isShowMsg = "isShowMsg"></v-bind>
           <div class="content">
-            <div class="noCourse">
+            <div class="noCourse" v-if="isShowNoCourse">
               <img :src="noMsgImg" alt="">
               <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
             </div>
@@ -113,6 +113,7 @@
     },
     data() {
       return {
+        isShowNoCourse:false,
         study:false,
         avator: require("~/assets/images/profile_avator01.png"),
         noMsgImg:require("~/assets/images/noMsg.png"),
@@ -265,6 +266,9 @@
       ])
     },
     methods:{
+      isShowMsg(isShow){
+        this.isShowNoCourse  = isShow
+      },
       updateUserInfo(flag){
         this.isUpdate = flag
       },
@@ -308,7 +312,6 @@
             resolve(true)
           })
         })
-        // console.log('tab-------------------', tab);
         this.goLink('/course/pages/categoryd');
       }
     },
