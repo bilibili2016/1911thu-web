@@ -124,7 +124,7 @@
           banner_type: "profile"
         },
         configZero: {
-          card_type: "profile",
+          card_type: "shoucang",
           card: 'home',
 
         },
@@ -303,8 +303,9 @@
       collectionList () {
         return new Promise((resolve, reject) => {
           home.collectionList(this.collectionForm).then(response => {
-            // console.log(response, '收藏返回')
+            console.log(response, '收藏返回')
             this.collectionData = response.data.curriculumList
+            console.log(response.data.curriculumList, '请求返回')
             resolve(true)
           })
         })
