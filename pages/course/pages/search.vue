@@ -64,7 +64,8 @@
           categoryid: null,
           sortby: 2
         },
-        loading: false
+        loading: false,
+        result: false,
       };
     },
     methods: {
