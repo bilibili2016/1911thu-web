@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       noMsg: require('~/assets/images/noMsg.png')
+
     };
   }
 };
