@@ -306,20 +306,20 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
-      if(!this.captchaDisable){
+      if(!this.bindTelData.captchaDisable){
         return new Promise((resolve, reject) => {
         auth.smsCodes(this.registerData).then(response => {
           this.$message({
-            type: response.status === "0" ? "success" : "error",
+            type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          this.captchaDisable = true;
+          this.bindTelData.captchaDisable = true;
           this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
           let interval = setInterval(() => {
             if (this.bindTelData.seconds <= 0) {
               this.bindTelData.getCode = "获取验证码";
               this.bindTelData.seconds = 60;
-              this.captchaDisable = false;
+              this.bindTelData.captchaDisable = false;
               clearInterval(interval);
             } else {
               this.bindTelData.getCode =
@@ -335,9 +335,14 @@ export default {
       return new Promise((resolve, reject) => {
         auth.verifyPhone(this.registerData).then(response => {
           this.$message({
-            type: response.status === "0" ? "success" : "error",
+            type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
+          if(response.status != "0"){
+            this.bindTelData.captchaDisable=true;
+          }else{
+            this.bindTelData.captchaDisable=false;
+          }
         });
       });
     },
@@ -476,10 +481,12 @@ export default {
       this.registerData.passwords="";
       this.registerData.types=1;
       this.registerData.codes="";
-      this.registerData.checked=[];
+      this.registerData.checked=[false];
       this.registerData.companyCodes="";
     },
-    handleClick(tab, event) {},
+    handleClick(tab, event) {
+      this.emptyForm();
+    },
     wechatLogined() {
       //微信登录
       this.lrFrame = false;

@@ -430,7 +430,7 @@
     position: absolute;
     top: -13px;
     left: -10px;
-    z-index: 1000;
+    z-index: 1;
   }
 }
 .mask-style {
@@ -746,7 +746,7 @@
     height: 106px;
     background: rgba(255, 255, 255, 1);
     border-radius: 6px;
-    box-shadow: 4px 0px 18px rgba(73, 28, 156, 0.36);
+    box-shadow: 0px 0px 12px rgba(198, 194, 210, .28);
     margin-bottom: 20px;
     cursor: pointer;
     &:hover {
@@ -801,7 +801,6 @@
   flex-wrap: wrap;
   float: left;
   .card-list {
-
     .itemBoxs {
       cursor: pointer;
       width: 472px;
@@ -812,7 +811,7 @@
       flex-direction: column;
       align-items: center; // border:1px #999 solid;
       border-radius: 6px;
-      box-shadow: 4px 0px 18px rgba(73, 28, 156, 0.36);
+      box-shadow: 0px 0px 12px rgba(198, 194, 210, .28);
       &:hover {
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         transition: all 300ms;
@@ -849,16 +848,18 @@
       }
       .item {
         font-size: 14px;
-        font-family: MicrosoftYaHei;
-        color: rgba(34, 34, 34, 1);
+        color: #222;;
         line-height: 30px;
-        padding: 20px;
+        padding: 20px 15px 0;
         text-indent: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
       }
       .line-wrap {
         height: 40px;
-        // width: 300px;
-        // border: 1px red solid;
       }
       .line-center {
         line-height: 40px;
