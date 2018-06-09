@@ -4,7 +4,7 @@
     <div class="main">
       <div class="table">
         <div class="tableHeader">
-          <el-checkbox v-model="selectAll" @change="handleSelectAllChange">全选</el-checkbox>
+          <el-checkbox v-model="selectAll">全选</el-checkbox>
           <span class="courseName">课程名称</span>
           <span class="price">单价</span>
           <span class="operation">操作</span>
@@ -13,7 +13,7 @@
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">
-              <img class="fl" :src="course.picture" alt="">
+              <img class="fl" :src="course.picture">
               <div class="fl">
                 <h4>{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
@@ -40,7 +40,7 @@
         <div class="tableFooter">
           <el-checkbox v-model="selectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
-            <span class="deleteChecked">删除选中的课程</span>
+            <!-- <span class="deleteChecked">删除选中的课程</span> -->
             <span class="person">购买人数：</span>
             <span class="number clearfix">
               <i class="fl minus el-icon-minus"  @click="delNumber"></i>
@@ -97,180 +97,209 @@
 </template>
 
 <script>
-import { home,auth } from '@/lib/v1_sdk/index'
+import { indexOf } from "lodash";
+import { home, auth } from "@/lib/v1_sdk/index";
 // 总价 多选
-  export default {
-    data(){
-      return{
-        showInfo: false,
-        selectAll:false,
-        checked:[],
-        isIndeterminate:true,
-        numForm:{
-          number:1,
-        },
-
-        money: [],
-        courseList:[
-
+export default {
+  data() {
+    return {
+      showInfo: false,
+      selectAll: false,
+      checked: [],
+      isIndeterminate: true,
+      numForm: {
+        number: 1
+      },
+      money: [],
+      courseList: "",
+      restaurants: [
+        { value: "11111" },
+        { value: "22" },
+        { value: "222" },
+        { value: "1" },
+        { value: "111" }
+      ],
+      companyInfo: {
+        companyname: "",
+        companyaddress: "",
+        contactperson: "",
+        phones: "",
+        codes: "",
+        types: 6
+      },
+      rules: {
+        companyname: [
+          { required: true, message: "请输入公司名称", trigger: "blur" }
         ],
-        restaurants: [
-          {"value":"11111"},
-          {"value":"22"},
-          {"value":"222"},
-          {"value":"1"},
-          {"value":"111"}
+        companyaddress: [
+          { required: true, message: "请填写公司地址", trigger: "blur" }
         ],
-        companyInfo:{
-          companyname:"",
-          companyaddress:"",
-          contactperson:"",
-          phones:"",
-          codes:"",
-          types: 6,
-        },
-        rules: {
-          companyname: [
-            { required: true, message: '请输入公司名称', trigger: 'blur' }
-          ],
-          companyaddress: [
-            { required: true, message: '请填写公司地址', trigger: 'blur' }
-          ],
-          contactperson: [
-            { required: true, message: '请填写联系人姓名', trigger: 'blur' }
-          ],
-          phones: [
-            { required: true, message: '请填写手机号', trigger: 'blur' },
-            { type: 'number', message: '请填写正确手机号', trigger: 'blur' }
-          ],
-          codes: [
-            { required: true, message: '请填写短信验证码', trigger: 'blur' }
-          ]
-        },
-        arraySum: 0,
-        curriculumcartids: {
-          cartid: null
-        },
-        prices: null,
-        addArray:{
-          curriculumcartid: []
+        contactperson: [
+          { required: true, message: "请填写联系人姓名", trigger: "blur" }
+        ],
+        phones: [
+          { required: true, message: "请填写手机号", trigger: "blur" },
+          { type: "number", message: "请填写正确手机号", trigger: "blur" }
+        ],
+        codes: [
+          { required: true, message: "请填写短信验证码", trigger: "blur" }
+        ]
+      },
+      arraySum: 0,
+      curriculumcartids: {
+        cartid: null
+      },
+      addArray: {
+        curriculumcartid: []
+      }
+    };
+  },
+  computed: {
+    prices() {
+      return this.arraySum * this.numForm.number
+    }
+  },
+  watch: {
+    selectAll(val) {
+      this.handleSelectAllChange(val);
+    }
+  },
+  methods: {
+    deleteChecked(){
+      this.courseList.forEach(item => {
+        if(item.checkMsg){
+          let shopIndex = indexOf(this.addArray.curriculumcartid, item.id);
+          this.addArray.curriculumcartid.splice(shopIndex, 1);
+          this.arraySum = this.arraySum - Number(item.present_price);
         }
+      });
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          return false;
+        }
+      });
+    },
+    showCommit() {
+      this.showInfo = true;
+      // this.$router.push('/shop/checkedCourse');
+      return new Promise((resolve, reject) => {
+        home.addChecked(this.addArray).then(response => {
+          resolve(true);
+        });
+      });
+    },
+    close() {
+      this.showInfo = false;
+    },
+    querySearch(queryString, cb) {
+      var restaurants = this.restaurants;
+      var results = queryString
+        ? restaurants.filter(this.createFilter(queryString))
+        : restaurants;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter(queryString) {
+      return restaurant => {
+        return (
+          restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) ===
+          0
+        );
+      };
+    },
+    handleSelect(item, index) {},
+    handleSelectAllChange(val) {
+      this.courseList.forEach(item => {
+        item.checkMsg = val;
+      });
+      if(!val){
+        this.addArray.curriculumcartid = []
+        this.arraySum = 0
+      }else{
+        this.courseList.forEach(item => {
+          this.addArray.curriculumcartid.push(item.id)
+          this.arraySum = this.arraySum + Number(item.present_price);
+        })
       }
     },
-    methods:{
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-
-            return false;
-          }
+    handleSelectChange(item, index) {
+      let shopIndex = indexOf(this.addArray.curriculumcartid, item.id);
+      if (shopIndex >= 0) {
+        this.addArray.curriculumcartid.splice(shopIndex, 1);
+        this.arraySum = this.arraySum - Number(item.present_price);
+      } else {
+        this.addArray.curriculumcartid.push(item.id);
+        this.arraySum = this.arraySum + Number(item.present_price);
+      }
+    },
+    addNumber() {
+      this.numForm.number = Number(this.numForm.number) + Number(1);
+      this.changeCartNumber();
+    },
+    delNumber() {
+      if (this.numForm.number > 1) {
+        this.numForm.number = Number(this.numForm.number) - Number(1);
+      } else {
+        this.numForm.number = Number(1);
+      }
+      this.changeCartNumber();
+    },
+    changeCartNumber() {
+      return new Promise((resolve, reject) => {
+        home.changeCartNumber(this.numForm).then(response => {
+          resolve(true);
         });
-      },
-      showCommit(){
-        this.showInfo=true;
-        // this.$router.push('/shop/checkedCourse');
-        return new Promise((resolve, reject) => {
-          home.addChecked(this.addArray).then(response => {
-            // console.log(response, '这是curriculumcartids')
-            resolve(true)
-          })
-        })
-      },
-      close(){
-        this.showInfo=false;
-      },
-      querySearch(queryString, cb) {
-        var restaurants = this.restaurants;
-        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
-        // 调用 callback 返回建议列表的数据
-        cb(results);
-      },
-      createFilter(queryString) {
-        return (restaurant) => {
-          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      handleSelect(item, index) {
-      },
-      handleSelectAllChange(item,index) {
-
-      },
-      handleSelectChange(item,index) {
-        this.$set(this.courseList[index], 'checkMsg', true)
-        this.arraySum =this.arraySum + Number(this.courseList[index].price)
-        // console.log(item,'1231323123')
-        // console.log(item.present_price, '价钱')
-        this.prices = Number(this.prices) + Number(item.present_price)
-        this.addArray.curriculumcartid.push(item.id)
-        // console.log( this.addArray)
-      },
-      addNumber(){
-        this.numForm.number= Number(this.numForm.number) + Number(1)
-        this.prices = (this.numForm.number)* this.prices
-        this.changeCartNumber()
-      },
-      delNumber(){
-         this.numForm.number= Number(this.numForm.number) - Number(1)
-         this.changeCartNumber()
-      },
-      changeCartNumber(){
-        return new Promise((resolve, reject) => {
-          home.changeCartNumber(this.numForm).then(response => {
-            // console.log(response)
-            resolve(true)
-          })
-        })
-      },
-      changeNumber (){
-        if(typeof this.number !== "number" || this.number<1){
-          this.number=1;
-        }
-      },
-      addPaySubmit (){
-        console.log('-------')
+      });
+    },
+    changeNumber() {
+      if (typeof this.number !== "number" || this.number < 1) {
+        this.number = 1;
+      }
+    },
+    addPaySubmit() {
       this.$refs.ruleForm.validate(valid => {
-        console.log('eeeeeee',valid)
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addPaySubmit(this.companyInfo).then(response => {
-              // console.log(response)
-              this.$router.push('/shop/checkedCourse')
-              resolve(true)
-            })
-          })
-        }else{
-          return false
+              this.$router.push("/shop/checkedCourse");
+              resolve(true);
+            });
+          });
+        } else {
+          return false;
         }
-      })
-      },
-      shopCartList (){
-        return new Promise((resolve, reject) => {
-          home.shopCartList().then(response => {
-            // console.log(response, '这是response')
-            this.courseList = response.data.curriculumCartList
-          })
-        })
-      },
-      handleDelete (item,index){
-        this.curriculumcartids.cartid = item.id
-        return new Promise((resolve, reject) => {
+      });
+    },
+    shopCartList() {
+      return new Promise((resolve, reject) => {
+        home.shopCartList().then(response => {
+          let body = response.data.curriculumCartList.map(item => {
+            return Object.assign({}, item, { checkMsg: false });
+          });
+          this.courseList = body;
+        });
+      });
+    },
+    handleDelete(item, index) {
+      this.curriculumcartids.cartid = item.id;
+      return new Promise((resolve, reject) => {
         home.delShopCart(this.curriculumcartids).then(response => {
-            // console.log(response, '898989')
-            this.$message({
-              type: 'success',
-              message: '删除成功'
-            })
-            this.shopCartList()
-          })
-        })
-        // console.log(this.curriculumcartids, '787878787')
-      },
-     delShopCart (){
-
-      },
-       async handleGetCode() {
+          this.$message({
+            type: "success",
+            message: "删除成功"
+          });
+          this.courseList.splice(index,1)
+          // this.shopCartList();
+        });
+      });
+      // console.log(this.curriculumcartids, '787878787')
+    },
+    delShopCart() {},
+    async handleGetCode() {
       return new Promise((resolve, reject) => {
         auth.smsCodes(this.companyInfo).then(response => {
           this.$message({
@@ -292,12 +321,12 @@ import { home,auth } from '@/lib/v1_sdk/index'
           // }, 1000);
         });
       });
-    },
-    },
-    mounted () {
-      document.getElementsByClassName("headerBox")[0].style.display="inline"
-      document.getElementsByClassName("footerBox")[0].style.display="inline"
-      this.shopCartList()
     }
+  },
+  mounted() {
+    document.getElementsByClassName("headerBox")[0].style.display = "inline";
+    document.getElementsByClassName("footerBox")[0].style.display = "inline";
+    this.shopCartList();
   }
+};
 </script>
