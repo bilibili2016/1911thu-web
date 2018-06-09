@@ -79,11 +79,60 @@
         </div>
       </div>
     </template>
+    <!-- 我的收藏 -->
+        <!-- profile个人信息模板 新上好课模板-->
+    <template v-if="config.card_type === 'shoucang'">
+      <div class="card-category profile">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
+            <div  class="new-style" v-if="config.new === 'true'">
+              <img :src="newTag" alt="">
+            </div>
+            <div class="mask-style" @click="goLink('course/pages/coursedetail')">
+              <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+            </div>
+            <div  class="bgImgs">
+              <img :src="card.picture" alt=""
+             >
+            </div>
+            <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
+            <div class="tag">
+              <span>新闻宣传</span>
+              <span>时政</span>
+            </div>
+            <div v-if="config.card === 'home'"></div>
+            <div class="common-button btn-bgs " v-else>
+              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+            </div>
+            <el-row>
+              <!-- 名字 -->
+              <div class="item">
+                <p class="itemBox-name">
+                  <span>{{card.title}}</span>
+                </p>
+              </div>
+              <!-- 作者和头衔    金额 -->
+              <!-- <div class="line-wrap" v-if="config.card === 'home'">
+                <div class="line-center">
+                 <img src="" alt="">
+                </div>
+              </div> -->
+              <div class="line-wrap" v-if="config.card === 'home'">
+                <div class="line-center">
+                  <img :src="card.head_img" alt="">
+                  <span>王建中</span>
+                  <span class="title">华中科技大学博士</span>
+                </div>
+              </div>
+            </el-row>
+          </el-card>
+        </div>
+      </div>
+    </template>
 
     <!-- 购物车页面 -->
     <template v-if="config.card_type === 'profiled'">
       <div class="card-category profile">
-
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="handleCheck(card,index)">
 
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
@@ -426,12 +475,13 @@
       this.getMore(linksix);
     },
     selectCid(item, index) {
-
+        // console.log(item.id, '这是item.id')
+        // console.log(item, '这是item')
         this.curriculumcartids.cartid = item.id
       if(item.is_checked === false){
         item.is_checked = true
         this.curriculumcartid.numberArr.push(item.id)
-        this.addChecked()
+        this.addShopCart()
       } else {
         item.is_checked = false
         this.curriculumcartid.numberArr.pop()
@@ -442,10 +492,11 @@
       this.setNumber(this.numberForm)
 
     },
-    addChecked(){
+    addShopCart(){
       return new Promise((resolve, reject) => {
-        home.addChecked(this.curriculumcartids).then(response => {
-            // console.log(response)
+        // console.log(this.curriculumcartids, '添加成功123')
+        home.addShopCart(this.curriculumcartids).then(response => {
+            // console.log(response, '添加成功')
           })
         })
     },
@@ -457,7 +508,9 @@
         })
     }
   },
-  mounted() {}
+  mounted() {
+    // console.log(this.data, '返回的数据')
+  }
 };
 </script>
 
@@ -470,7 +523,7 @@
     position: absolute;
     top: -13px;
     left: -10px;
-    z-index: 1000;
+    z-index: 1;
   }
 }
 .mask-style {
@@ -724,6 +777,9 @@
         // border-top: 1px #e4e4f4 solid;
       }
       .line-center {
+        overflow: hidden;
+        height: 35px;
+        padding: 0 15px;
         p.price {
           color: #332a51;
           padding: 0 15px;
@@ -736,13 +792,12 @@
           display: inline-block;
         }
         .title {
-          display: inline-block;
-          margin-left: 46px;
+          float: right;
           color: rgba(109, 104, 127, 1);
         }
       }
       .line-centers {
-        padding: 0px 14px 0px 13px;
+        padding: 0px 14px 0px 0;
         p {
           margin-bottom: 10px;
           font-size: 14px;
@@ -786,7 +841,7 @@
     height: 106px;
     background: rgba(255, 255, 255, 1);
     border-radius: 6px;
-    box-shadow: 4px 0px 18px rgba(73, 28, 156, 0.36);
+    box-shadow: 0px 0px 12px rgba(198, 194, 210, .28);
     margin-bottom: 20px;
     cursor: pointer;
     &:hover {
@@ -841,7 +896,6 @@
   flex-wrap: wrap;
   float: left;
   .card-list {
-
     .itemBoxs {
       cursor: pointer;
       width: 472px;
@@ -852,7 +906,7 @@
       flex-direction: column;
       align-items: center; // border:1px #999 solid;
       border-radius: 6px;
-      box-shadow: 4px 0px 18px rgba(73, 28, 156, 0.36);
+      box-shadow: 0px 0px 12px rgba(198, 194, 210, .28);
       &:hover {
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         transition: all 300ms;
@@ -889,16 +943,18 @@
       }
       .item {
         font-size: 14px;
-        font-family: MicrosoftYaHei;
-        color: rgba(34, 34, 34, 1);
-        line-height: 30px;
-        padding: 20px;
+        color: #222;;
+        line-height: 28px;
+        padding: 20px 15px 0;
         text-indent: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
       }
       .line-wrap {
         height: 40px;
-        // width: 300px;
-        // border: 1px red solid;
       }
       .line-center {
         line-height: 40px;

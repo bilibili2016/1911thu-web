@@ -111,6 +111,7 @@
           presentAble: false,
           present: true,
           success: false,
+          addCourse:true,
           courseID: []
         },
         bindImg: require('~/assets/images/bindingSuccess.png')

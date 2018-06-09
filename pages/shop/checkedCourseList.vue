@@ -88,7 +88,6 @@ import { store as persistStore } from '~/lib/core/store'
           home.curriculumPayApply().then(response => {
             // console.log(response, '123')
             this.courseList = response.data.curriculumPayApply[this.payIndex].CurriculumPayApplyList
-            // console.log(this.courseList, '123')
             resolve(true)
           })
         })

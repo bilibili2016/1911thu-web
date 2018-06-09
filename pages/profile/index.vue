@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config = "bconfig" :isUpdate="isUpdate"></v-banner>
+    <v-banner :config = "bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fourth'"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab">
         <!-- 我的信息 -->
@@ -26,7 +26,7 @@
           <el-card>
             <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
-                <v-card v-if="newDataing" :data="newDataing" :config="configOne"></v-card>
+                <v-card v-if="newDataing.length" :data="newDataing" :config="configOne"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -36,7 +36,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="已完成" name="second">
-                <v-card v-if="newDataReady" :data="newDataReady" :config="configTwo"></v-card>
+                <v-card v-if="newDataReady.length" :data="newDataReady" :config="configTwo"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -46,7 +46,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="我的收藏" name="third">
-                <v-card v-if="collectionData" :data="collectionData" :config="configZero"></v-card>
+                <v-card v-if="collectionData.length" :data="collectionData" :config="configZero"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -82,13 +82,12 @@
             <div class="noCourse">
               <img :src="noMsgImg" alt="">
               <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
-              <!-- <p>去学习</p> -->
             </div>
           </div>
         </el-tab-pane>
         <!-- 我的选课 -->
         <el-tab-pane name="tab-sixth" @tab-click="goShop">
-        <!-- <el-tab-pane name="tab-sixth" @click="goLink('/shop/checkedCourse')"> -->
+        <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
           <span slot="label"><i class="el-icon-date"></i> 我的选课</span>
         </el-tab-pane>
       </el-tabs>
@@ -124,7 +123,7 @@
           banner_type: "profile"
         },
         configZero: {
-          card_type: "profile",
+          card_type: "shoucang",
           card: 'home',
 
         },
@@ -268,7 +267,6 @@
     methods:{
       updateUserInfo(flag){
         this.isUpdate = flag
-        console.log('flag---', flag)
       },
       goLink(item) {
         this.$router.push(item);
@@ -306,9 +304,12 @@
           home.collectionList(this.collectionForm).then(response => {
             // console.log(response, '收藏返回')
             this.collectionData = response.data.curriculumList
+            // console.log(response.data.curriculumList, '请求返回')
             resolve(true)
           })
         })
+        // console.log('tab-------------------', tab);
+        this.goLink('/course/pages/categoryd');
       }
     },
     mounted () {
