@@ -60,7 +60,7 @@ import CustomPagination from "@/components/common/Pagination.vue";
 import CustomUnlogged from "@/pages/course/pages/unlogged.vue";
 import CustomShoppingCart from "@/pages/shop/shoppingCart.vue";
 import { auth, home } from "~/lib/v1_sdk/index";
-  import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   components: {
     "v-card": CustomCard,
@@ -70,11 +70,11 @@ export default {
     "v-shop": CustomShoppingCart
   },
   computed: {
-    ...mapState("auth", ["pid", "cid","isShowTip"]),
+    ...mapState("auth", ["pid", "cid", "isShowTip"]),
     ...mapGetters("auth", ["isAuthenticated"]),
-    isShow(){
+    isShow() {
       // console.log(this.isShowTip)
-      return this.isShowTip && !this.isAuthenticated
+      return this.isShowTip && !this.isAuthenticated;
     }
   },
   data() {
@@ -87,15 +87,14 @@ export default {
       configSevent: {
         card_type: "profile",
         card: "home",
-        types: 'buy'
+        types: "buy"
       },
-        pagemsg: {
-          page: 1,
-          pagesize: 5,
-          total:5
-        },
-      categoryData:[
-      ],
+      pagemsg: {
+        page: 1,
+        pagesize: 5,
+        total: 5
+      },
+      categoryData: [],
       curriculumListForm: {
         categoryIda: null,
         categoryIdb: null,
@@ -103,115 +102,108 @@ export default {
         pages: 1,
         limits: 8
       },
-      data: [
-
-      ],
-      data2: [
-
-      ],
+      data: [],
+      data2: [],
       curriculumListForm: {
-          categoryIda: null,
-          categoryIdb: null,
-          sortBy: 1,
-          pages: 1,
-          limits: 8
-        },
-        cidform: {
-          cids: ''
-        },
-        pidform: {
-          pids: ''
-        }
+        categoryIda: null,
+        categoryIdb: null,
+        sortBy: 1,
+        pages: 1,
+        limits: 8
+      },
+      cidform: {
+        cids: ""
+      },
+      pidform: {
+        pids: ""
+      }
     };
   },
   methods: {
-    ...mapActions('auth', [
-        'setCid',
-        'setPid'
-      ]),
+    ...mapActions("auth", ["setCid", "setPid"]),
     handleItemOne(item, index) {
       this.bgmsg = index;
     },
     handleItemTwo(item, index) {
       this.bgmsgs = index;
     },
-     handleItemTwo(item, index) {
-        this.bgmsgs = item.id;
-        this.pidform.pids = item.id
-        this.setPid(this.pidform)
-        this.curriculumList()
-      },
-       getCidList(){
-         this.cidform.cids = ''
-         this.bgmsg = 0
+    handleItemTwo(item, index) {
+      this.bgmsgs = item.id;
+      this.pidform.pids = item.id;
+      this.setPid(this.pidform);
+      this.curriculumList();
+    },
+    getCidList() {
+      this.cidform.cids = "";
+      this.bgmsg = 0;
 
-        this.setCid(this.cidform)
-        this.curriculumList()
-      },
-    getPidList(){
-        this.pidform.pids = ''
-        this.bgmsgs = 0
-        this.setPid(this.pidform)
-        this.curriculumList()
-      },
+      this.setCid(this.cidform);
+      this.curriculumList();
+    },
+    getPidList() {
+      this.pidform.pids = "";
+      this.bgmsgs = 0;
+      this.setPid(this.pidform);
+      this.curriculumList();
+    },
     handleItemOne(item, index) {
-         this.bgmsgs = 0
-        this.bgmsg = item.id;
-        this.data2 = this.data[index]
-        this.cidform.cids = item.id
-        this.setCid(this.cidform)
-         this.pidform.pids = ''
-        this.setPid(this.pidform)
-        this.curriculumList()
-      },
+      this.bgmsgs = 0;
+      this.bgmsg = item.id;
+      this.data2 = this.data[index];
+      this.cidform.cids = item.id;
+      this.setCid(this.cidform);
+      this.pidform.pids = "";
+      this.setPid(this.pidform);
+      this.curriculumList();
+    },
     handleClick(tab, event) {},
-    curriculumList () {
-        this.curriculumListForm.categoryIda = this.cid
-        this.curriculumListForm.categoryIdb = this.pid
-        // this.curriculumListForm.sortBy = 1
-        return new Promise((resolve, reject) => {
-          home.curriculumList(this.curriculumListForm).then(response => {
-            // console.log(response, '99999')
-            this.categoryData = response.data.curriculumList
-            this.pagemsg.total = response.data.pageCount
-            for(let item of response.data.curriculumList){
-              this.$set(item, 'checkmsg', false)
-            }
-            resolve(true)
-          })
-        })
-      },
-      childCategoryList () {
-        return new Promise((resolve, reject) => {
-          home.childCategoryList().then(response => {
-            this.data = response.data.categoryList
-            console.log(response, '返回的response')
-            if(this.cid === '50'){
-              this.data2 = this.data[0]
-            } else if (this.cid === '51'){
-              this.data2 = this.data[1]
-            } else {
-              this.data2 = this.data[2]
-            }
-            resolve(true)
-          })
-        })
-      },
-      selectCid (val) {
-        // console.log(val)
-      }
+    curriculumList() {
+      this.curriculumListForm.categoryIda = this.cid;
+      this.curriculumListForm.categoryIdb = this.pid;
+      // this.curriculumListForm.sortBy = 1
+      return new Promise((resolve, reject) => {
+        home.curriculumList(this.curriculumListForm).then(response => {
+          // console.log(response, '99999')
+          this.categoryData = response.data.curriculumList;
+          this.pagemsg.total = response.data.pageCount;
+          for (let item of response.data.curriculumList) {
+            this.$set(item, "checkmsg", false);
+          }
+          resolve(true);
+        });
+      });
+    },
+    childCategoryList() {
+      return new Promise((resolve, reject) => {
+        home.childCategoryList().then(response => {
+          this.data = response.data.categoryList;
+          console.log(response, "返回的response");
+          if (this.cid === "50") {
+            this.data2 = this.data[0];
+          } else if (this.cid === "51") {
+            this.data2 = this.data[1];
+          } else {
+            this.data2 = this.data[2];
+          }
+          resolve(true);
+        });
+      });
+    },
+    selectCid(val) {
+      // console.log(val)
+    }
   },
   mounted() {
     document.getElementsByClassName("headerBox")[0].style.display = "inline";
     document.getElementsByClassName("footerBox")[0].style.display = "inline";
     this.bgmsg = Number(this.cid) + Number(1);
     this.bgmsgs = Number(this.pid) + Number(1);
-     this.cidform.cids = ''
-         this.bgmsg = 0
+    this.cidform.cids = "";
+    this.bgmsg = 0;
 
-        this.setCid(this.cidform)
-    this.curriculumList()
-    this.childCategoryList()
+    this.setCid(this.cidform);
+    this.curriculumList();
+    this.childCategoryList();
   }
 };
 </script>

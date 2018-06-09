@@ -10,9 +10,10 @@
         <div class="center-box">
           <div class="avator">
             <div class="img">
-              <img :src="avator" alt="">
-              <el-upload class="up-user-avtor" 
-                action="http://www.1911edu.com/Publics/Upload/leafletsUpload" 
+              <img :src="userInfo.head_img" alt="" v-if="userInfo.head_img">
+              <img :src="avator" alt="" v-else>
+              <el-upload v-show="isShowUpAvtor" class="up-user-avtor" 
+                action="http://www.1911edu.com/Wapi/MyInfo/uploadHeadImg" 
                 accept='image/*'
                 :on-success="upSuccess"
                 :on-error="failUp"
@@ -38,13 +39,14 @@
 <script>
 import { home } from "~/lib/v1_sdk/index";
 export default {
-  props: ["bannerImg", "config", "isUpdate"],
+  props: ["bannerImg", "config", "isUpdate","isShowUpAvtor"],
   data() {
     return {
-      avator: require("~/assets/images/profile_avator01.png"),
+      avator:require("~/assets/images/profile_avator01.png"),
       userInfo: {
         nick_name: "",
-        company_name: ""
+        company_name: "",
+        head_img:""
       }
     };
   },
@@ -65,11 +67,10 @@ export default {
       });
     },
     upSuccess(res,file){
-      this.avator = res.data.full_path
-      console.log('file-----', file)
+      this.userInfo.head_img= res.data.full_path
     },
     failUp(){
-
+      console.log('失败')
     }
   }
 };

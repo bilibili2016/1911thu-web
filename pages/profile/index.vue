@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config = "bconfig" :isUpdate="isUpdate"></v-banner>
+    <v-banner :config = "bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fourth'"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab">
         <!-- 我的信息 -->
@@ -88,7 +88,7 @@
         </el-tab-pane>
         <!-- 我的选课 -->
         <el-tab-pane name="tab-sixth" @tab-click="goShop">
-        <!-- <el-tab-pane name="tab-sixth" @click="goLink('/shop/checkedCourse')"> -->
+        <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
           <span slot="label"><i class="el-icon-date"></i> 我的选课</span>
         </el-tab-pane>
       </el-tabs>
@@ -268,7 +268,6 @@
     methods:{
       updateUserInfo(flag){
         this.isUpdate = flag
-        console.log('flag---', flag)
       },
       goLink(item) {
         this.$router.push(item);
@@ -309,6 +308,8 @@
             resolve(true)
           })
         })
+        console.log('tab-------------------', tab);
+        this.goLink('/course/pages/categoryd');
       }
     },
     mounted () {
