@@ -1,7 +1,9 @@
 <template>
   <div class="checkedCourse">
     <div class="main">
+      {{curriculumPayData}}
       <div class="company" v-for="(courseList, index ) in curriculumPayData" :key="index">
+        <!-- v-if="courseList.CurriculumPayApplyList.length<3"  -->
         <div class="title clearfix">
           <span class="fl">{{courseList.company_name}}</span>
           <span class="fr">{{courseList.batch}}</span>
@@ -20,8 +22,8 @@
               查看更多课程>
             </div>
           </div>
-          <div class="price height" :style="{height:courseList.length>3? 3*140+60+'px' :courseList.length*140+'px'}">¥{{allPrice}}</div>
-          <div class="telephone height" :style="{height: courseList.length>3? 3*140+60+'px' :courseList.length*140 + 'px' }">
+          <div class="price height" :style="{height:courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+'px'}">¥{{courseList.totalPresentPrice}}</div>
+          <div class="telephone height" :style="{height: courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140 + 'px' }">
             <p>客服电话</p>
             <p>010-6270 1911</p>
           </div>
@@ -56,9 +58,7 @@ import { store as persistStore } from '~/lib/core/store'
       curriculumPayApply() {
         return new Promise((resolve, reject) => {
           home.curriculumPayApply().then(response => {
-            // console.log(response, '123')
-            this.curriculumPayData = response.data.curriculumPayApply
-
+           this.curriculumPayData = response.data.curriculumPayApply
             resolve(true)
           })
         })

@@ -247,7 +247,6 @@
         margin: 20px 0 10px;
       }
       .el-form-item__content {
-        text-align: center;
         .el-button {
           width: 264px;
           height: 40px;
@@ -268,6 +267,7 @@
           background-color: #eee;
           color: #6417A6;
           font-size: 12px;
+          cursor: pointer;
         }
       }
     }

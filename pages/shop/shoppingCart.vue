@@ -4,7 +4,7 @@
     <div class="main">
       <div class="table">
         <div class="tableHeader">
-          <el-checkbox v-model="selectAll" @change="handleSelectAllChange">全选</el-checkbox>
+          <el-checkbox v-model="selectAll"  @change="checkAll">全选</el-checkbox>
           <span class="courseName">课程名称</span>
           <span class="price">单价</span>
           <span class="operation">操作</span>
@@ -38,7 +38,7 @@
           <span>尾页</span>
         </div>
         <div class="tableFooter">
-          <el-checkbox v-model="selectAll">全选</el-checkbox>
+          <el-checkbox v-model="selectAll" @change="checkAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
             <span class="deleteChecked">删除选中的课程</span>
             <span class="person">购买人数：</span>
@@ -51,7 +51,7 @@
           <span class="commitOrder fr">
             <el-button @click="showCommit">提交</el-button>
           </span>
-          <span class="allPrice fr">{{prices}}￥</span>
+          <span class="allPrice fr">￥{{prices}}</span>
 
         </div>
       </div>
@@ -84,7 +84,7 @@
           </el-form-item>
           <el-form-item class="code" label="验证码：" prop="codes">
             <el-input placeholder="请输入短信验证码" v-model="companyInfo.codes"></el-input>
-            <span @click="handleGetCode">获取验证码</span>
+            <span @click="handleGetCode">{{companyInfo.getCode}}</span>
           </el-form-item>
           <el-form-item class="btnCommit">
             <el-button type="primary" @click="addPaySubmit">提交</el-button>
@@ -125,8 +125,11 @@ import { home,auth } from '@/lib/v1_sdk/index'
           companyname:"",
           companyaddress:"",
           contactperson:"",
+          captchaDisable:false,
+          getCode:"获取验证码",
           phones:"",
           codes:"",
+          seconds:60,
           types: 6,
         },
         rules: {
@@ -194,8 +197,11 @@ import { home,auth } from '@/lib/v1_sdk/index'
       },
       handleSelect(item, index) {
       },
-      handleSelectAllChange(item,index) {
-
+      checkAll(item,index) {
+        for(var i = 0; i<this.courseList.length; i++){
+          this.$set(this.courseList[i], 'checkMsg', item)
+        }
+        // this.$set(this.courseList[index], 'checkMsg', true)
       },
       handleSelectChange(item,index) {
         this.$set(this.courseList[index], 'checkMsg', true)
@@ -255,7 +261,6 @@ import { home,auth } from '@/lib/v1_sdk/index'
       shopCartList (){
         return new Promise((resolve, reject) => {
           home.shopCartList().then(response => {
-            // console.log(response, '这是response')
             this.courseList = response.data.curriculumCartList
           })
         })
@@ -284,19 +289,19 @@ import { home,auth } from '@/lib/v1_sdk/index'
             type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          // this.captchaDisable = true;
-          // this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
-          // let interval = setInterval(() => {
-          //   if (this.bindTelData.seconds <= 0) {
-          //     this.bindTelData.getCode = "获取验证码";
-          //     this.bindTelData.seconds = 60;
-          //     this.captchaDisable = false;
-          //     clearInterval(interval);
-          //   } else {
-          //     this.bindTelData.getCode =
-          //       --this.bindTelData.seconds + "秒后重新发送";
-          //   }
-          // }, 1000);
+          this.companyInfo.captchaDisable = true;
+          this.companyInfo.getCode = this.companyInfo.seconds + "秒后重新发送";
+          let interval = setInterval(() => {
+            if (this.companyInfo.seconds <= 0) {
+              this.companyInfo.getCode = "获取验证码";
+              this.companyInfo.seconds = 60;
+              this.captchaDisable = false;
+              clearInterval(interval);
+            } else {
+              this.companyInfo.getCode =
+                --this.companyInfo.seconds + "秒后重新发送";
+            }
+          }, 1000);
         });
       });
     },
