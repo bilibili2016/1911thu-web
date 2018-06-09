@@ -62,7 +62,7 @@
         </el-tab-pane>
         <!-- 我的选课 -->
         <el-tab-pane name="tab-sixth" @tab-click="goShop">
-        <!-- <el-tab-pane name="tab-sixth" @click="goLink('/shop/checkedCourse')"> -->
+        <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
           <span slot="label"><i class="el-icon-date"></i> 我的选课</span>
         </el-tab-pane>
       </el-tabs>
@@ -228,14 +228,13 @@
     methods:{
       updateUserInfo(flag){
         this.isUpdate = flag
-        console.log('flag---', flag)
       },
       goLink(item) {
         this.$router.push(item);
       },
       goShop(tab){
-        console.log(tab);
-        // this.goLink('/shop/checkedCourse');
+        console.log('tab-------------------', tab);
+        this.goLink('/course/pages/categoryd');
       }
     },
     mounted () {

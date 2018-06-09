@@ -95,35 +95,46 @@
 import { home } from "~/lib/v1_sdk/index";
 export default {
   watch: {
-    "psnForm.province"(val) {
-      this.city = [];
-      this.psnForm.city = "";
-      if(this.mapregionList){
-        for (let item of this.mapregionList) {
-        if (item.region_code == val) {
-          for (let cit of item.city) {
-            this.city.push(
-              Object.assign({},cit,{ label: cit.name, value: cit.region_code })
-            );
-          }
-        }
-      }
-      }
+    province(val){
+      this.city=this.getRegion(val,this.psnForm.province)
+      this.area = this.getRegion(this.city,this.psnForm.city)
     },
-    "psnForm.city"(val) {
-      this.area = [];
-      for (let item of this.city) {
-        if (item.region_code == val) {
-          for (let cit of item.city) {
-            this.area.push(
-              Object.assign({},cit,{ label: cit.name, value: cit.region_code })
-            );
-          }
-        }
+    "psnForm.province"(val,oldval) {
+      if (!this.province && this.province.length==0) {
+        this.getRegionList()
       }
+      if(oldval != ''){
+        this.psnForm.city = ''
+      }
+      this.city=this.getRegion(this.province,val)
+    },
+    "psnForm.city"(val,oldval) {
+      if(!this.city && this.city.length==0){
+        this.getRegionList()
+      }
+      if(oldval != ''){
+        this.psnForm.area = ''
+      }
+      this.area = this.getRegion(this.city,val)
     }
   },
   methods: {
+    getRegion(data,val){
+      let tmp = []
+      for (let item of data) {
+        if (item.region_code == val) {
+          for (let cit of item.city) {
+            tmp.push(
+              Object.assign({}, cit, {
+                label: cit.name,
+                value: cit.region_code
+              })
+            );
+          }
+        }
+      }
+      return tmp
+    },
     handleClick(tab, event) {
       if (tab == "first") {
         this.getUserInfo();
@@ -132,20 +143,22 @@ export default {
     getUserInfo() {
       home.getUserInfo().then(res => {
         this.psnForm = res.data.userInfo;
-        this.getRegionList(this.psnForm.region_code);
       });
     },
     onSubmit() {
       home.perInformation(this.psnForm).then(res => {
-        let flag = res.status !=0 ? false : true
-        this.$emit('update',flag)
+        let flag = res.status != 0 ? false : true;
+        this.$emit("update", flag);
       });
     },
-    getRegionList(regionCode) {
-      home.getRegionList({ region_code: regionCode }).then(res => {
+    getRegionList() {
+      home.getRegionList({ region_code: "" }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
-          return Object.assign({},item,{ label: item.name, value: item.region_code });
+          return Object.assign({}, item, {
+            label: item.name,
+            value: item.region_code
+          });
         });
       });
     },
@@ -175,7 +188,7 @@ export default {
         }
       });
     },
-    getPositionList(){
+    getPositionList() {
       home.positionList().then(res => {
         let tmp = res.data;
         this.options = tmp.map(item => {
@@ -186,7 +199,8 @@ export default {
   },
   mounted() {
     this.getUserInfo();
-    this.getPositionList()
+    this.getPositionList();
+    this.getRegionList();
   },
   data() {
     var validatePass = (rule, value, callback) => {
