@@ -15,7 +15,7 @@
      <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
-        {{data}}
+        <!-- {{data}} -->
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
             <div  class="new-style" v-if="config.new === 'true'">
@@ -84,7 +84,7 @@
         <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'shoucang'">
       <div class="card-category profile">
-        {{data}}
+        <!-- {{data}} -->
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
             <div  class="new-style" v-if="config.new === 'true'">
@@ -471,12 +471,13 @@
       this.getMore(linksix);
     },
     selectCid(item, index) {
-
+        console.log(item.id, '这是item.id')
+        console.log(item, '这是item')
         this.curriculumcartids.cartid = item.id
       if(item.is_checked === false){
         item.is_checked = true
         this.curriculumcartid.numberArr.push(item.id)
-        this.addChecked()
+        this.addShopCart()
       } else {
         item.is_checked = false
         this.curriculumcartid.numberArr.pop()
@@ -487,10 +488,11 @@
       this.setNumber(this.numberForm)
 
     },
-    addChecked(){
+    addShopCart(){
       return new Promise((resolve, reject) => {
-        home.addChecked(this.curriculumcartids).then(response => {
-            // console.log(response)
+        console.log(this.curriculumcartids, '添加成功123')
+        home.addShopCart(this.curriculumcartids).then(response => {
+            console.log(response, '添加成功')
           })
         })
     },
@@ -502,7 +504,9 @@
         })
     }
   },
-  mounted() {}
+  mounted() {
+    console.log(this.data, '返回的数据')
+  }
 };
 </script>
 

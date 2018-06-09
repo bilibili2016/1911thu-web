@@ -151,7 +151,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
         curriculumcartids: {
           cartid: null
         },
-        prices: null,
+        prices: 0.00,
         addArray:{
           curriculumcartid: []
         }
@@ -209,6 +209,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
       addNumber(){
         this.numForm.number= Number(this.numForm.number) + Number(1)
         this.prices = (this.numForm.number)* this.prices
+
         this.changeCartNumber()
       },
       delNumber(){
