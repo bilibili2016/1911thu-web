@@ -280,7 +280,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.shopCartList().then(response => {
           let body = response.data.curriculumCartList.map(item => {
-            return Object.assign({}, item, { checkMsg: false });
+            this.addArray.curriculumcartid.push(item.id);
+            this.arraySum = this.arraySum + Number(item.present_price);
+            return Object.assign({}, item, { checkMsg: true });
           });
           this.courseList = body;
         });
@@ -295,6 +297,7 @@ export default {
             message: "删除成功"
           });
           this.courseList.splice(index, 1);
+          this.handleSelectChange(item,index)
           // this.shopCartList();
         });
       });
