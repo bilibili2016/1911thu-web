@@ -421,9 +421,9 @@
     methods: {
       ...mapActions("auth", ["setProductsNum", 'setNumber', 'setKid']),
       selCheckboxChange(item,index){
-        console.log('123')
-        console.log(item, '这是item')
-        console.log(item.is_checked === false)
+        // console.log('123')
+        // console.log(item, '这是item')
+        // console.log(item.is_checked === false)
         if (item.is_checked === false) {
           item.is_checked = false
           this.curriculumcartid.numberArr.push(item.id)
