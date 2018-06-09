@@ -145,7 +145,7 @@ export default {
       home.getRegionList({ region_code: regionCode }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
-          return { label: item.name, value: item.region_code };
+          return Object.assign({},item,{ label: item.name, value: item.region_code });
         });
       });
     },

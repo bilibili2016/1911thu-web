@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config = "bconfig" :isUpdate="isUpdate"></v-banner>
+    <v-banner :config = "bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fourth'"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab">
         <!-- 我的信息 -->
