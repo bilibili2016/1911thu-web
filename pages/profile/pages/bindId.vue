@@ -91,6 +91,12 @@
         return new Promise((resolve, reject) => {
            home.getUsedInvitationCodeList(this.curruntForm).then(response => {
             this.courseList.courseID = response.data.usedInvitationCodeList
+
+            if(!this.courseList.courseID || his.courseList.courseID.length<=0){
+              this.$emit('isShowMsg',true)
+            }else{
+              this.$emit('isShowMsg',false)
+            }
           })
         })
       }
