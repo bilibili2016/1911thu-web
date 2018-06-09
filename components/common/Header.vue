@@ -9,12 +9,12 @@
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin" @click="goSearchd('home/pages/hrEntry')">Hr入口</span>
+        <span class="hrin" @click="goSearchd('/home/pages/hrEntry')">Hr入口</span>
         <span v-show="isAuthenticated" @click="goLink('second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
-            <img class="fl" src="@/assets/images/downApp.png" alt="">
+            <img class="fl" src="@/assets/images/wechatLogin.png" alt="">
             <div class="changeType fr">
               <span>下载1911学堂APP</span>
               <span><img src="@/assets/images/iphone.png" alt=""> App Store下载</span>
@@ -60,7 +60,7 @@
                 <el-input v-model.number="loginData.phonenum" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
+                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
@@ -83,7 +83,7 @@
                 <!--  -->
               </el-form-item>
                <el-form-item prop="passwords">
-                <el-input v-model="registerData.passwords" type="password" placeholder="请输入密码"></el-input>
+                <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
               <el-form-item prop="companyCodes">
                 <el-input v-model="registerData.companyCodes" placeholder="绑定企业"></el-input>

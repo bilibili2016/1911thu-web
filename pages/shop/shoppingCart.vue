@@ -48,7 +48,7 @@
           <span class="commitOrder fr">
             <el-button @click="showCommit">提交</el-button>
           </span>
-          <span class="allPrice fr">{{prices}}￥</span>
+          <span class="allPrice fr">￥{{prices}}</span>
 
         </div>
       </div>
@@ -81,7 +81,7 @@
           </el-form-item>
           <el-form-item class="code" label="验证码：" prop="codes">
             <el-input placeholder="请输入短信验证码" v-model="companyInfo.codes"></el-input>
-            <span @click="handleGetCode">获取验证码</span>
+            <span @click="handleGetCode">{{companyInfo.getCode}}</span>
           </el-form-item>
           <el-form-item class="btnCommit">
             <el-button type="primary" @click="addPaySubmit">提交</el-button>
@@ -306,22 +306,22 @@ export default {
       return new Promise((resolve, reject) => {
         auth.smsCodes(this.companyInfo).then(response => {
           this.$message({
-            type: response.status === "0" ? "success" : "error",
+            type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          // this.captchaDisable = true;
-          // this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
-          // let interval = setInterval(() => {
-          //   if (this.bindTelData.seconds <= 0) {
-          //     this.bindTelData.getCode = "获取验证码";
-          //     this.bindTelData.seconds = 60;
-          //     this.captchaDisable = false;
-          //     clearInterval(interval);
-          //   } else {
-          //     this.bindTelData.getCode =
-          //       --this.bindTelData.seconds + "秒后重新发送";
-          //   }
-          // }, 1000);
+          this.companyInfo.captchaDisable = true;
+          this.companyInfo.getCode = this.companyInfo.seconds + "秒后重新发送";
+          let interval = setInterval(() => {
+            if (this.companyInfo.seconds <= 0) {
+              this.companyInfo.getCode = "获取验证码";
+              this.companyInfo.seconds = 60;
+              this.captchaDisable = false;
+              clearInterval(interval);
+            } else {
+              this.companyInfo.getCode =
+                --this.companyInfo.seconds + "秒后重新发送";
+            }
+          }, 1000);
         });
       });
     }
