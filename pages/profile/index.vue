@@ -26,7 +26,7 @@
           <el-card>
             <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
-                <v-card v-if="newDataing" :data="newDataing" :config="configOne"></v-card>
+                <v-card v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -36,7 +36,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="已完成" name="second">
-                <v-card v-if="newDataReady" :data="newDataReady" :config="configTwo"></v-card>
+                <v-card v-if="newDataReady && newDataReady.length>0" :data="newDataReady" :config="configTwo"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -46,7 +46,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="我的收藏" name="third">
-                <v-card v-if="collectionData" :data="collectionData" :config="configZero"></v-card>
+                <v-card v-if="collectionData && collectionData.length>0" :data="collectionData" :config="configZero"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
