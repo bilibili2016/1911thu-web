@@ -3,22 +3,25 @@
     <div class="banner">
       <div class="center category-style">
         <div class="college">
+           <li class="title">学院：</li>
           <ul>
-            <li class="title">
-              学院:
+            <li  :class="{bgs: this.cid === '' ? true : false }">
+              <el-button @click="getCidList">全部</el-button>
             </li>
-            <li v-for="(item,index) in data" :index="index" :key="index" :class="{bgs: bgmsg === index ? true : false }">
-              <el-button @click="handleItemOne(item,index)">{{item.name}}</el-button>
+            <li v-for="(item,index) in data" :index="index" :key="index" :class="{bgs: bgmsg === item.id ? true : false }">
+              <el-button @click="handleItemOne(item,index)">{{item.category_name}}</el-button>
             </li>
+
           </ul>
         </div>
         <div class="classification">
+           <li class="title">分类：</li>
           <ul>
-            <li class="title">
-              分类:
+             <li :class="{bgs: this.pid === '' ? true : false }">
+              <el-button @click="getPidList">全部</el-button>
             </li>
-            <li v-for="(item,index) in data2" :index="index" :key="index" :class="{bgs: bgmsgs === index ? true : false }">
-              <el-button @click="handleItemTwo(item,index)">{{item.name}}</el-button>
+            <li v-for="(items,index) in data2.childList" :index="index" :key="index" :class="{bgs: bgmsgs === items.id ? true : false }">
+              <el-button @click="handleItemTwo(items,index)">{{items.category_name}}</el-button>
             </li>
           </ul>
         </div>
@@ -40,8 +43,8 @@
       </div>
     </div>
     <!-- <v-filter></v-filter> -->
-    <div>
-      <v-page :data="pagemsg"></v-page>
+     <div class="pagination">
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
     </div>
     <div v-if="isShowTip">
       <v-unlogged v-if="!this.isAuthenticated"></v-unlogged>
@@ -57,7 +60,7 @@ import CustomPagination from "@/components/common/Pagination.vue";
 import CustomUnlogged from "@/pages/course/pages/unlogged.vue";
 import CustomShoppingCart from "@/pages/shop/shoppingCart.vue";
 import { auth, home } from "~/lib/v1_sdk/index";
-import { mapState, mapGetters } from "vuex";
+  import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     "v-card": CustomCard,
@@ -86,11 +89,11 @@ export default {
         card: "home",
         types: 'buy'
       },
-      pagemsg: {
-        page: 1,
-        pagesize: 8,
-        total: 12
-      },
+        pagemsg: {
+          page: 1,
+          pagesize: 5,
+          total:5
+        },
       categoryData:[
       ],
       curriculumListForm: {
@@ -100,225 +103,67 @@ export default {
         pages: 1,
         limits: 8
       },
-      // categoryData: [
-      //   {
-      //     bg: require("@/assets/images/home_new01.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 12,
-      //     pnum: 899,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 123,
-      //     rate: 3,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new02.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 34,
-      //     pnum: 2312,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 129,
-      //     rate: 5,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new03.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 26,
-      //     pnum: 799,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 131,
-      //     rate: 1,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new04.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 12,
-      //     pnum: 4399,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 161,
-      //     rate: 2,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new01.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 12,
-      //     pnum: 899,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 141,
-      //     rate: 3,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new02.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 34,
-      //     pnum: 2312,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 122,
-      //     rate: 5,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new03.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 26,
-      //     pnum: 799,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 134,
-      //     rate: 1,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new04.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 12,
-      //     pnum: 4399,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 166,
-      //     rate: 2,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new01.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 12,
-      //     pnum: 899,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 146,
-      //     rate: 3,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new02.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 34,
-      //     pnum: 2312,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 622,
-      //     rate: 5,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new03.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 26,
-      //     pnum: 799,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 174,
-      //     rate: 1,
-      //     checkmsg: false
-      //   },
-      //   {
-      //     bg: require("@/assets/images/home_new04.png"),
-      //     name: "H5和小程序直播开发",
-      //     cnum: 12,
-      //     pnum: 4399,
-      //     avator: require("@/assets/images/home_avator.png"),
-      //     id: 186,
-      //     rate: 2,
-      //     checkmsg: false
-      //   }
-      // ],
       data: [
-        {
-          name: "全部",
-          id: 1
-        },
-        {
-          name: "干部通用学院",
-          id: 2
-        },
-        {
-          name: "党政系统学院",
-          id: 3
-        },
-        {
-          name: "在线商学院",
-          id: 4
-        },
-        {
-          name: "行业学院",
-          id: 5
-        },
-        {
-          name: "职场学院",
-          id: 6
-        },
-        {
-          name: "直播学院",
-          id: 7
-        },
-        {
-          name: "学位学院",
-          id: 8
-        }
+
       ],
       data2: [
-        {
-          name: "全部",
-          id: 1999
+
+      ],
+      curriculumListForm: {
+          categoryIda: null,
+          categoryIdb: null,
+          sortBy: 1,
+          pages: 1,
+          limits: 8
         },
-        {
-          name: "公共管理/履职能力",
-          id: 9
+        cidform: {
+          cids: ''
         },
-        {
-          name: "时政解读",
-          id: 10
-        },
-        {
-          name: "法律法规",
-          id: 11
-        },
-        {
-          name: "政府绩效管理",
-          id: 12
-        },
-        {
-          name: "经济治理与城市规划",
-          id: 13
-        },
-        {
-          name: "城市管理",
-          id: 14
-        },
-        {
-          name: "新闻宣传国际形式及安全治理",
-          id: 15
-        },
-        {
-          name: "创新驱动发展",
-          id: 16
-        },
-        {
-          name: "一带一路与国际合作",
-          id: 17
-        },
-        {
-          name: "乡村振兴",
-          id: 18
-        },
-        {
-          name: "人文素养",
-          id: 19
-        },
-        {
-          name: "社会治理",
-          id: 20
+        pidform: {
+          pids: ''
         }
-      ]
     };
   },
   methods: {
+    ...mapActions('auth', [
+        'setCid',
+        'setPid'
+      ]),
     handleItemOne(item, index) {
       this.bgmsg = index;
     },
     handleItemTwo(item, index) {
       this.bgmsgs = index;
     },
+     handleItemTwo(item, index) {
+        this.bgmsgs = item.id;
+        this.pidform.pids = item.id
+        this.setPid(this.pidform)
+        this.curriculumList()
+      },
+       getCidList(){
+         this.cidform.cids = ''
+         this.bgmsg = 0
+
+        this.setCid(this.cidform)
+        this.curriculumList()
+      },
+    getPidList(){
+        this.pidform.pids = ''
+        this.bgmsgs = 0
+        this.setPid(this.pidform)
+        this.curriculumList()
+      },
+    handleItemOne(item, index) {
+         this.bgmsgs = 0
+        this.bgmsg = item.id;
+        this.data2 = this.data[index]
+        this.cidform.cids = item.id
+        this.setCid(this.cidform)
+         this.pidform.pids = ''
+        this.setPid(this.pidform)
+        this.curriculumList()
+      },
     handleClick(tab, event) {},
     curriculumList () {
         this.curriculumListForm.categoryIda = this.cid
@@ -336,6 +181,22 @@ export default {
           })
         })
       },
+      childCategoryList () {
+        return new Promise((resolve, reject) => {
+          home.childCategoryList().then(response => {
+            this.data = response.data.categoryList
+            console.log(response, '返回的response')
+            if(this.cid === '50'){
+              this.data2 = this.data[0]
+            } else if (this.cid === '51'){
+              this.data2 = this.data[1]
+            } else {
+              this.data2 = this.data[2]
+            }
+            resolve(true)
+          })
+        })
+      },
       selectCid (val) {
         // console.log(val)
       }
@@ -346,6 +207,7 @@ export default {
     this.bgmsg = Number(this.cid) + Number(1);
     this.bgmsgs = Number(this.pid) + Number(1);
     this.curriculumList()
+    this.childCategoryList()
   }
 };
 </script>
