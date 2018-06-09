@@ -226,7 +226,7 @@ import { store as persistStore } from '~/lib/core/store'
         this.playerForm.catalogId = persistStore.get('catalogId')
         return new Promise((resolve, reject) => {
           home.getPlayerInfo(this.playerForm).then(response => {
-
+            console.log(response.data);
             this.tcplayer.m3u8 = response.data.playurl
             this.tcplayer.fileID = response.data.playAuthInfo.fileID
             this.tcplayer.appID = response.data.playAuthInfo.appID

@@ -2,7 +2,7 @@
   <div>
     <v-banner :config = "bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fourth'"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
-      <el-tabs :tab-position="tabPosition" v-model="activeTab">
+      <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="empty">
         <!-- 我的信息 -->
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label"><i class="el-icon-date"></i> 我的首页</span>
@@ -278,6 +278,9 @@
       goShop(tab){
         // console.log(tab);
         this.goLink('/shop/checkedCourse');
+      },
+      empty(){
+        
       },
       studyCurriculumList () {
         this.styleForm.types =  1

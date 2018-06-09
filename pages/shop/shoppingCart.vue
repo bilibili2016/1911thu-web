@@ -28,16 +28,13 @@
             </div>
           </div>
         </div>
-        <div class="pagination">
-          <span>首页</span>
-          <el-pagination
-            :page-size="20"
-            layout="prev, pager, next"
-            :total="20">
-          </el-pagination>
-          <span>尾页</span>
+        <div class="noMsg-con" v-if="courseList.length === 0">
+          <div class="noMsg-img">
+            <img :src="noMsg" alt="">
+            <p>您的购物车为空</p>
+          </div>
         </div>
-        <div class="tableFooter">
+        <div class="tableFooter" v-if="courseList.length > 0">
           <el-checkbox v-model="selectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
@@ -51,7 +48,7 @@
           <span class="commitOrder fr">
             <el-button @click="showCommit">提交</el-button>
           </span>
-          <span class="allPrice fr">{{prices}}￥</span>
+          <span class="allPrice fr">￥{{prices}}</span>
 
         </div>
       </div>
@@ -84,7 +81,7 @@
           </el-form-item>
           <el-form-item class="code" label="验证码：" prop="codes">
             <el-input placeholder="请输入短信验证码" v-model="companyInfo.codes"></el-input>
-            <span @click="handleGetCode">获取验证码</span>
+            <span @click="handleGetCode">{{companyInfo.getCode}}</span>
           </el-form-item>
           <el-form-item class="btnCommit">
             <el-button type="primary" @click="addPaySubmit">提交</el-button>
@@ -103,6 +100,7 @@ import { home, auth } from "@/lib/v1_sdk/index";
 export default {
   data() {
     return {
+       noMsg: require('~/assets/images/noMsg.png'),
       showInfo: false,
       selectAll: false,
       checked: [],
@@ -297,33 +295,33 @@ export default {
             message: "删除成功"
           });
           this.courseList.splice(index, 1);
+          console.log(this.courseList, '123')
           this.handleSelectChange(item,index)
           // this.shopCartList();
         });
       });
       // console.log(this.curriculumcartids, '787878787')
     },
-    delShopCart() {},
     async handleGetCode() {
       return new Promise((resolve, reject) => {
         auth.smsCodes(this.companyInfo).then(response => {
           this.$message({
-            type: response.status === "0" ? "success" : "error",
+            type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          // this.captchaDisable = true;
-          // this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
-          // let interval = setInterval(() => {
-          //   if (this.bindTelData.seconds <= 0) {
-          //     this.bindTelData.getCode = "获取验证码";
-          //     this.bindTelData.seconds = 60;
-          //     this.captchaDisable = false;
-          //     clearInterval(interval);
-          //   } else {
-          //     this.bindTelData.getCode =
-          //       --this.bindTelData.seconds + "秒后重新发送";
-          //   }
-          // }, 1000);
+          this.companyInfo.captchaDisable = true;
+          this.companyInfo.getCode = this.companyInfo.seconds + "秒后重新发送";
+          let interval = setInterval(() => {
+            if (this.companyInfo.seconds <= 0) {
+              this.companyInfo.getCode = "获取验证码";
+              this.companyInfo.seconds = 60;
+              this.captchaDisable = false;
+              clearInterval(interval);
+            } else {
+              this.companyInfo.getCode =
+                --this.companyInfo.seconds + "秒后重新发送";
+            }
+          }, 1000);
         });
       });
     }

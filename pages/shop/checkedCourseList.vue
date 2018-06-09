@@ -19,14 +19,14 @@
               </div>
             </div>
             <div class="coursePrice">
-              ￥{{course.price}}
+              ￥{{course.present_price}}
             </div>
             <div class="courseOperation">
               删除
             </div>
           </div>
         </div>
-        <div class="tableFooter">商品总额：￥94.00</div>
+        <!-- <div class="tableFooter">商品总额：￥94.00</div> -->
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@
     <!-- 用户评价 -->
     <v-evaluate :titleFour="titleFour" :carouselSrc = "carouselSrc" :evaluateData="evaluateData"></v-evaluate>
     <!-- 学堂资讯 -->
-    <v-info :infoDesc = "infoDesc" :infoArticle= "infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive= "titleFive" :linkfour="linkfours"></v-info>
+    <v-info :infoDesc = "infoDesc" :infoArticle= "infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive= "titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
     <!-- 合作伙伴 -->
     <v-partner :data="partnerList"></v-partner>
     <v-backtotop></v-backtotop>
@@ -52,6 +52,7 @@ export default {
       linkone:'/course/pages/newlesson',
       linktwo: '/course/pages/classify',
       linkfours: '/news/list',
+      linkfive: '/news/detail',
       tabmsg: false,
       newData: [],
       classicData: [],

@@ -141,18 +141,18 @@ import { mapActions } from "vuex";
       background-color: #FCD23F;
       transition: all 300ms;
       span{
-        width: 23px;
-        height: 19px;
+        width: 24px;
+        height: 21px;
         margin-top: 15.5px;
         transition: all 300ms;
         background: url('~assets/images/home_backtop22.png') no-repeat;
-        background-size: 23px 19px;
+        background-size: 24px 21px;
       }
       &:hover {
         background-color: #8F4ACB;
         span{
           background: url('~assets/images/home_backtop02.png') no-repeat;
-          background-size: 23px 19px;
+          background-size: 24px 21px;
         }
         
         .showCode{
