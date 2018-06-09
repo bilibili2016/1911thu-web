@@ -1,7 +1,7 @@
 <template>
     <div class="noMsg-con">
       <div class="noMsg-img">
-        <img :src="noMsg"/>
+        <img :src="noMsg" alt="">
         <p>暂时没有消息</p>
       </div>
     </div>
@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      noMsg: require('~/assets/images/nomsg.png')
+      noMsg: require('~/assets/images/noMsg.png')
     };
   }
 };
