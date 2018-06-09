@@ -34,6 +34,7 @@
   import CustomPagination from "@/components/common/Pagination.vue";
   import BackToTop from "@/components/common/BackToTop.vue";
   import { home } from '~/lib/v1_sdk/index'
+  import { store as persistStore } from "~/lib/core/store";
   export default {
     components: {
       "v-search": Search,
@@ -78,6 +79,7 @@
         this.searchCurriculumList()
       },
       searchCurriculumList () {
+
         return new Promise((resolve, reject) => {
           home.searchCurriculumList(this.searchForm).then(response => {
             // console.log(response, '这是response')
@@ -86,10 +88,13 @@
             this.pagemsg.total = response.data.pageCount
             if(response.data.curriculumList.length === 0){
               this.result = false
+            }else {
+              this.result = true
+              this.pagemsg.total = response.data.curriculumList.length
+              this.courseNumber = response.data.curriculumList.length
+              this.loading = false
             }
-            this.pagemsg.total = response.data.curriculumList.length
-            this.courseNumber = response.data.curriculumList.length
-            this.loading = false
+
             resolve(true)
           })
         })
@@ -98,6 +103,7 @@
     mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+
     }
   };
 </script>
