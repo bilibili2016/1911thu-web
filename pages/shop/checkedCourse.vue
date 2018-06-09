@@ -18,7 +18,7 @@
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
-            <div class="more" v-show="courseList.CurriculumPayApplyList.length>3" @click="selectPayApply(courseList, index)">
+            <div class="more" v-show="courseList.CurriculumPayApplyList.length>0" @click="selectPayApply(courseList, index)">
               查看更多课程>
             </div>
           </div>
