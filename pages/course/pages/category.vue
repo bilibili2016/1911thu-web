@@ -42,7 +42,7 @@
       </div>
     </div>
     <!-- <v-filter></v-filter> -->
-    <div>
+    <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="total"></el-pagination>
     </div>
   </div>
