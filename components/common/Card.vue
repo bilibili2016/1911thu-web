@@ -16,7 +16,7 @@
 <template v-if="config.card_type === 'profile'">
   <div class="card-category profile">
     <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-      <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
+      <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid2(card,index)">
         <div class="new-style" v-if="config.new === 'true'">
           <img :src="newTag" alt="">
         </div>
@@ -83,46 +83,51 @@
 <template v-if="config.card_type === 'shoucang'">
   <div class="card-category profile">
     <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-      <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid(card,index)">
-        <div class="new-style" v-if="config.new === 'true'">
-          <img :src="newTag" alt="">
-        </div>
-        <div class="mask-style" @click="goLink('course/pages/coursedetail')">
-          <!-- <img :src="jinImg" alt="" class="jin-style"> -->
-        </div>
-        <div class="bgImgs">
-          <img :src="card.picture" alt="">
-        </div>
-        <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
-        <div class="tag">
-          <span>新闻宣传</span>
-          <span>时政</span>
-        </div>
-        <div v-if="config.card === 'home'"></div>
-        <div class="common-button btn-bgs " v-else>
-          <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
-        </div>
-        <el-row>
-          <!-- 名字 -->
-          <div class="item">
-            <p class="itemBox-name">
-              <span>{{card.title}}</span>
-            </p>
+
+      <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
+        <!-- {{card.is_checked}} -->
+         <el-checkbox v-model="card.is_checked" @change="selCheckboxChange(card,index)" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
+        <div @click="selectCid(card,index)">
+          <div class="new-style" v-if="config.new === 'true'">
+            <img :src="newTag" alt="">
           </div>
-          <!-- 作者和头衔    金额 -->
-          <!-- <div class="line-wrap" v-if="config.card === 'home'">
-                  <div class="line-center">
-                   <img src="" alt="">
-                  </div>
-                </div> -->
-          <div class="line-wrap" v-if="config.card === 'home'">
-            <div class="line-center">
-              <img :src="card.head_img" alt="">
-              <span>王建中</span>
-              <span class="title">华中科技大学博士</span>
+          <div class="mask-style" @click="goLink('course/pages/coursedetail')">
+            <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+          </div>
+          <div class="bgImgs">
+            <img :src="card.picture" alt="">
+          </div>
+
+          <div class="tag">
+            <span>新闻宣传</span>
+            <span>时政</span>
+          </div>
+          <div v-if="config.card === 'home'"></div>
+          <div class="common-button btn-bgs " v-else>
+            <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+          </div>
+          <el-row>
+            <!-- 名字 -->
+            <div class="item">
+              <p class="itemBox-name">
+                <span>{{card.title}}</span>
+              </p>
             </div>
-          </div>
-        </el-row>
+            <!-- 作者和头衔    金额 -->
+            <!-- <div class="line-wrap" v-if="config.card === 'home'">
+                    <div class="line-center">
+                    <img src="" alt="">
+                    </div>
+                  </div> -->
+            <div class="line-wrap" v-if="config.card === 'home'">
+              <div class="line-center">
+                <img :src="card.head_img" alt="">
+                <span>王建中</span>
+                <span class="title">华中科技大学博士</span>
+              </div>
+            </div>
+          </el-row>
+        </div>
       </el-card>
     </div>
   </div>
@@ -415,6 +420,24 @@
     },
     methods: {
       ...mapActions("auth", ["setProductsNum", 'setNumber', 'setKid']),
+      selCheckboxChange(item,index){
+        console.log('123')
+        console.log(item, '这是item')
+        console.log(item.is_checked === false)
+        if (item.is_checked === false) {
+          item.is_checked = false
+          this.curriculumcartid.numberArr.push(item.id)
+          this.curriculumcartids.cartid = item.id
+this.delShopCart()
+
+        } else {
+          item.is_checked = true
+          this.curriculumcartids.cartid = item.id
+          this.curriculumcartid.numberArr.pop()
+          // alert('掉错接口了')
+          this.addShopCart()
+        }
+      },
       goLink(item) {
         switch (window.location.pathname) {
           case '/course/pages/category':
@@ -480,6 +503,7 @@
         this.kidForm.kids = item.id
         this.setKid(this.kidForm)
         this.curriculumcartids.cartid = item.id
+        console.log(item.is_checked, '这是点击的布尔值')
         if (item.is_checked === false) {
           item.is_checked = true
           this.curriculumcartid.numberArr.push(item.id)
@@ -487,11 +511,18 @@
         } else {
           item.is_checked = false
           this.curriculumcartid.numberArr.pop()
+          // alert('掉错接口了')
           this.delShopCart()
         }
         this.numberForm.numbers = this.curriculumcartid.numberArr.length
         // persistStore.set('number', this.number)
         this.setNumber(this.numberForm)
+
+      },
+      selectCid2(item, index) {
+        this.kidForm.kids = item.id
+        this.setKid(this.kidForm)
+        this.curriculumcartids.cartid = item.id
 
       },
       addShopCart() {
