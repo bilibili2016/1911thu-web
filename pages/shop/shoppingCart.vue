@@ -232,7 +232,7 @@ import { home,auth } from '@/lib/v1_sdk/index'
         return new Promise((resolve, reject) => {
           home.addPaySubmit(this.companyInfo).then(response => {
             console.log(response)
-            this.$router.push('/shop/checkedCourseList')
+            this.$router.push('/shop/checkedCourse')
             resolve(true)
           })
         })
