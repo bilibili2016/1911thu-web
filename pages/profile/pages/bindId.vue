@@ -46,7 +46,7 @@
           <p>2.绑定成功后，不可更改。</p>
         </div>
         <div :class="{presentAble:!courseList.showErr,present:courseList.present}">
-          <el-button :disabled="courseList.presentAble" round @click="doSubmit">提交</el-button>
+          <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交</el-button>
         </div>
       </div>
       <div class="success" v-show="courseList.success">
@@ -74,9 +74,13 @@
       },
       courseVerify(){
         if (this.courseList.inputID == "") {
+          console.log(1);
+          
           this.courseList.showErr = true;
           this.courseList.presentAble = false;
         } else {
+          console.log(2);
+          
           this.courseList.showErr = false;
           this.courseList.presentAble = true;
         }
@@ -101,7 +105,7 @@
            home.getUsedInvitationCodeList(this.curruntForm).then(response => {
             this.courseList.courseID = response.data.usedInvitationCodeList
 
-            if(!this.courseList.courseID || his.courseList.courseID.length<=0){
+            if(!this.courseList.courseID || this.courseList.courseID.length<=0){
               this.$emit('isShowMsg',true)
             }else{
               this.$emit('isShowMsg',false)

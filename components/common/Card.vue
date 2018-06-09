@@ -852,7 +852,7 @@ this.delShopCart()
           width: 22px;
           height: 22px;
           padding: 0px;
-          margin: 0px 10px 0px 14px;
+          margin-right: 10px;
           vertical-align: middle;
           font-family: MicrosoftYaHei;
           color: rgba(109, 104, 127, 1);
