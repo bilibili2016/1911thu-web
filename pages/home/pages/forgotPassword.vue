@@ -10,8 +10,8 @@
                     <span>忘记密码</span>
                 </div>
                 <!-- 忘记密码 -->
-                <el-form :model="fpData" status-icon :rules="rules2" ref="fpData" class="demo-ruleForm">
-                    <el-form-item prop="tel">
+                <el-form :model="fpData" status-icon :rules="formRules" ref="fpData" class="demo-ruleForm">
+                    <el-form-item prop="phones">
                         <!-- 手机号 -->
                         <el-input v-model="fpData.phones" placeholder="请输入手机号"></el-input>
                     </el-form-item>
@@ -20,13 +20,13 @@
                         <el-input class="captcha" v-model.number="fpData.code" placeholder="请输入短信验证码"></el-input>
                         <div class="getCode" @click="handleGetCode">{{fpData.getCode}}</div>
                     </el-form-item>
-                    <el-form-item prop="pass">
+                    <el-form-item prop="password">
                         <!-- 密码 -->
                         <el-input :type="pwdType" v-model="fpData.password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
                         <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
                     </el-form-item>
                     <el-row>
-                        <el-button>提交</el-button>
+                        <el-button @click.native="forgetPasswordAjax">提交</el-button>
                     </el-row>
                 </el-form>
                 <div class="otherLogin">返回登录</div>
@@ -40,44 +40,27 @@ import { checkPhone, checkCode, checkPassord } from "~/lib/util/validatefn";
 import { auth } from "~/lib/v1_sdk/index";
 export default {
   data() {
-     var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
-        return false;
-      } else if (value.length < 6 || value.length > 10) {
-        callback(new Error("请输入6-10位密码"));
-        return false;
-      }
-    };
-    var checkTel = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error("手机号不能为空"));
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error("请输入正确手机号"));
-        }
-      }, 1000);
-    };
-
     return {
       showPwd: false,
       pwdType: "password",
       fpData: {
-        tel: "",
         seconds: 60,
-        tel: "",
+        phones: null,
         code: "",
+        password:"",
         getCode: "获取验证码",
         captchaDisable: false,
         checked: false,
-        phones: null,
-        types: 1
+        types: 5
       },
-      rules2: {
-        pass: [
+      formRules: {
+        password: [
+          { required: true, message: "请输入账户密码1", trigger: "blur" },
           {
-            validator: checkPassord,
+            type: "string",
+            min: 8,
+            max: 16,
+            message: "密码长度为8-16位",
             trigger: "blur"
           }
         ],
@@ -127,8 +110,11 @@ export default {
     },
     forgetPasswordAjax() {
       return new Promise((resolve, reject) => {
-        home.getCategorylist(this.categorylist).then(response => {
+        auth.forgetPasswordAjax(this.fpData).then(response => {
           resolve(true);
+          if(response.status === 0){
+            this.$router.push("/");
+          }
         });
       });
     },
