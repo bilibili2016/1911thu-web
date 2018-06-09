@@ -748,7 +748,12 @@
     border-radius: 6px;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, .28);
     margin-bottom: 20px;
+    background: url("~/assets/images/newsBg1.png") no-repeat;
+    background-size: contain;
     cursor: pointer;
+    &>div{
+      display: none;
+    }
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
       transition: all 300ms;
@@ -849,7 +854,7 @@
       .item {
         font-size: 14px;
         color: #222;;
-        line-height: 30px;
+        line-height: 28px;
         padding: 20px 15px 0;
         text-indent: 30px;
         overflow: hidden;
