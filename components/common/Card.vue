@@ -27,7 +27,7 @@
               <img :src="card.picture" alt=""
              >
             </div>
-
+            <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
               <span>新闻宣传</span>
               <span>时政</span>
@@ -97,7 +97,7 @@
               <img :src="card.bg" alt=""
              >
             </div>
-              <el-checkbox v-model="card.checkmsg" style="position:absolute;top:10px;right:10px;"></el-checkbox>
+
             <div class="tag">
               <span>新闻宣传</span>
               <span>时政</span>
@@ -315,6 +315,9 @@
     mapActions,
     mapGetters
   } from "vuex";
+  import {
+  store as persistStore
+} from '~/lib/core/store'
   export default {
     props: [
       "data",
@@ -341,17 +344,28 @@
         jinImg: require('@/assets/images/jin.png'),
         isShow: false,
         checked: false,
-        numberArr: []
+        numberArr: [],
+        number: null,
+        numberForm:{
+          numbers: null
+        },
+        curriculumcartid:{
+          numberArr: []
+        },
+        curriculumcartids: {
+          cartid: null
+        }
       };
     },
     computed: {
       ...mapGetters('auth', [
-      'isAuthenticated'
+      'isAuthenticated',
+
       ]),
       ...mapState("auth", ["token","productsNum"]),
     },
     methods: {
-      ...mapActions("auth", ["setProductsNum"]),
+      ...mapActions("auth", ["setProductsNum",'setNumber']),
       goLink(item) {
          switch (window.location.pathname) {
           case '/course/pages/category':
@@ -390,14 +404,14 @@
         return new Promise((resolve, reject) => {
            home.addShopCart(tmp).then(response => {
             let newData = response.data.data
-            console.log(this.newData )
+
           })
         })
 
         for (var i=0; i<this.data.length; i++){
         if(i === index){
           // this.nextmsg = true
-          this.$set(this.data[i], "checkmsg", true);
+          this.$set(this.data[i], "is_checked", true);
         }
       }
     },
@@ -408,13 +422,39 @@
       this.isShow = !this.isShow;
     },
     selectDetail(index, course, linksix) {
-      // console.log(course, '这是course')
       this.$emit("checkdetail", course.id);
       this.getMore(linksix);
     },
     selectCid(item, index) {
-      // console.log(item, '这是item')
-      this.$emit("selectCid", item.id);
+
+        this.curriculumcartids.cartid = item.id
+      if(item.is_checked === false){
+        item.is_checked = true
+        this.curriculumcartid.numberArr.push(item.id)
+        this.addChecked()
+      } else {
+        item.is_checked = false
+        this.curriculumcartid.numberArr.pop()
+        this.delShopCart()
+      }
+      this.numberForm.numbers = this.curriculumcartid.numberArr.length
+      // persistStore.set('number', this.number)
+      this.setNumber(this.numberForm)
+
+    },
+    addChecked(){
+      return new Promise((resolve, reject) => {
+        home.addChecked(this.curriculumcartids).then(response => {
+            // console.log(response)
+          })
+        })
+    },
+    delShopCart (){
+       return new Promise((resolve, reject) => {
+        home.delShopCart(this.curriculumcartids).then(response => {
+            // console.log(response)
+          })
+        })
     }
   },
   mounted() {}

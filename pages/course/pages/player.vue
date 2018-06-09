@@ -239,7 +239,7 @@ import { store as persistStore } from '~/lib/core/store'
         this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
         return new Promise((resolve, reject) => {
           home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-            console.log(response, '345678')
+            // console.log(response, '345678')
             this.player = response.data.curriculumDetail
             this.courseList = response.data.curriculumCatalogList
             this.collectMsg = response.data.curriculumDetail.is_collection
@@ -266,7 +266,7 @@ import { store as persistStore } from '~/lib/core/store'
         this.addEvaluateForm.scores = this.evaluate.eltnum
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
-            console.log(response, '345678')
+            // console.log(response, '345678')
             this.$message({
               type: 'success',
               message: response.msg

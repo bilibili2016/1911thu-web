@@ -18,7 +18,7 @@
             <h3>1911学堂课程体系</h3>
             <p>学堂课程体系包括：通识性课程体系（干部通用学院）、系统专题性课程（党政系统学院）、在线商学院、行业学院、职场学院、直播/热点课程（热点课程）、企业课程定制、学位项目及面授及线下活动等9大业务板块，包含560余门课程。</p>
             <ul class="list">
-                <li v-for="(li,index) in courseList" :key="index">
+                <li v-for="(li,index) in courseList" >
                     <img :src="li.src" alt="">
                     <h5>{{li.title}}</h5>
                     <h6>{{li.number}}</h6>
@@ -36,7 +36,7 @@
                 <p><img src="@/assets/images/cartIcon.png" alt=""> 购买流程</p>
                 <h5>
                     <span v-for="(one,index) in buyList" :key="index"><i class="icon before el-icon-caret-right"></i><i class="word">{{one}}</i><i class="icon after el-icon-caret-right"></i></span>
-                   
+
                 </h5>
                 <p><img src="@/assets/images/studyIcon.png" alt="">学习流程</p>
                 <h5>
@@ -160,7 +160,7 @@
                 if (valid) {
                     alert('submit!');
                 } else {
-                    console.log('error submit!!');
+                    // console.log('error submit!!');
                     return false;
                 }
                 });

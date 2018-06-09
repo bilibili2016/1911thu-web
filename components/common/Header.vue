@@ -401,7 +401,7 @@ export default {
     async getWXLogin() {
       return new Promise((resolve, reject) => {
         auth.verifyWX(this.getWXLoginImg.WXverify).then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           if(response.status === "100100"){
               clearInterval(timewx);
               this.$message({
@@ -411,11 +411,11 @@ export default {
           }
           if(response.status === "0"){
              clearInterval(timewx);
-            console.log(response.data,"已有账号直接登录，返回token");
+            // console.log(response.data,"已有账号直接登录，返回token");
           }
           if(response.status === "100102"){
              clearInterval(timewx);
-            console.log(response.data,"未绑定手机");
+            // console.log(response.data,"未绑定手机");
           }
 
         });
