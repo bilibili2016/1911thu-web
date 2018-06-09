@@ -10,8 +10,8 @@
             </el-form-item>
             <el-form-item label="性别" prop="sex">
               <el-radio-group v-model="psnForm.sex">
-                <el-radio label="男" :value="1"></el-radio>
-                <el-radio label="女" :value="2"></el-radio>
+                <el-radio label="1">男</el-radio>
+                <el-radio label="2">女</el-radio>
               </el-radio-group>
             </el-form-item>
             <el-form-item label="生日" prop="birthday">
@@ -92,7 +92,6 @@
 </template>
 
 <script>
-import { store as persistStore } from '~/lib/core/store'
 import { home } from "~/lib/v1_sdk/index";
 export default {
   watch: {
@@ -138,7 +137,8 @@ export default {
     },
     onSubmit() {
       home.perInformation(this.psnForm).then(res => {
-        persistStore.set('personInfo',this.psnForm)
+        let flag = res.status !=0 ? false : true
+        this.$emit('update',flag)
       });
     },
     getRegionList(regionCode) {

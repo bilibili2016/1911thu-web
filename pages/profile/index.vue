@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config = "bconfig"></v-banner>
+    <v-banner :config = "bconfig" :isUpdate="isUpdate"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab">
         <!-- 我的信息 -->
@@ -53,7 +53,7 @@
         <!-- 个人设置 -->
         <el-tab-pane name="tab-fourth">
           <span slot="label"><i class="el-icon-date"></i> 个人设置</span>
-          <v-person></v-person>
+          <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
         <el-tab-pane name="tab-fifth">
@@ -216,7 +216,8 @@
             id: 1516,
             rate: 2
           }
-        ]
+        ],
+        isUpdate:false
       };
     },
     computed: {
@@ -225,6 +226,10 @@
       ])
     },
     methods:{
+      updateUserInfo(flag){
+        this.isUpdate = flag
+        console.log('flag---', flag)
+      },
       goLink(item) {
         this.$router.push(item);
       },
