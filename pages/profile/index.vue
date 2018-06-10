@@ -280,7 +280,7 @@
         this.goLink('/shop/checkedCourse');
       },
       empty(){
-        
+
       },
       studyCurriculumList () {
         this.styleForm.types =  1
@@ -326,6 +326,12 @@
       // console.log(this.gid)
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+
+    },
+    created (){
+       this.$bus.$on('selectProfileIndex', (data)=>{
+        this.activeTab = data
+      })
     }
   };
 </script>

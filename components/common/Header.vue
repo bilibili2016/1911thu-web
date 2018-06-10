@@ -37,11 +37,11 @@
       <div class="headImg" v-else>
         <img :src="user.userImg" alt="">
         <ul class="subPages">
-          <li class="cli" @click="goLink('first')">我的首页</li>
-          <li @click="goLink('second')">我的课程</li>
-          <li @click="goLink('third')">我的消息</li>
-          <li @click="goLink('fourth')">个人设置</li>
-          <li @click="goLink('fifth')">绑定课程</li>
+          <li class="cli" @click="goLink('tab-first')">我的首页</li>
+          <li @click="goLink('tab-second')">我的课程</li>
+          <li @click="goLink('tab-third')">我的消息</li>
+          <li @click="goLink('tab-fourth')">个人设置</li>
+          <li @click="goLink('tab-fifth')">绑定课程</li>
           <li @click="signOuts">退出</li>
         </ul>
       </div>
@@ -435,7 +435,10 @@ export default {
       this.$router.push("/shop/shoppingCart");
     },
     goLink(item) {
-      this.$router.push(item);
+      console.log('123')
+      console.log(this.$bus)
+       this.$bus.$emit('selectProfileIndex', '123')
+      // this.$router.push(item);
     },
     login() {},
     signOuts() {
@@ -540,13 +543,15 @@ export default {
     gokey() {
       if (event.keyCode == 13) {
         persistStore.set('key', this.search)
-        switch (window.location.pathname) {
-          case "/course/pages/search":
-            break;
-          default:
-            this.$router.push("/course/pages/search");
-            break;
-        }
+         this.$router.push("/course/pages/search");
+        // switch (window.location.pathname) {
+
+          // case "/course/pages/search":
+          //   break;
+          // default:
+          //   this.$router.push("/course/pages/search");
+          //   break;
+        // }
       }
     },
     goSearchd(item) {
@@ -559,6 +564,7 @@ export default {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
+       this.$bus.$emit('selectProfileIndex', item)
       // switch (window.location.pathname) {
       //   case '/':
       //     this.$router.push('/profile');
