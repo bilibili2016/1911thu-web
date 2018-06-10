@@ -694,12 +694,17 @@
   // 新上好课
   .card-category {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
     position: relative;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    justify-content: flex-start;
     .card-list {
       margin-bottom: 50px;
       border-radius: 16px;
+      margin-left: 33px;
+      &:nth-child(4n+1){
+        margin-left: 0;
+      }
       &:hover {
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         transition: all 300ms;
