@@ -151,33 +151,33 @@
           home.childCategoryList().then(response => {
             this.data = response.data.categoryList
             // this.data2 = this.data[this.$route.params.id]
-            if(this.cid === '179'){
-              this.data2 = this.data[0]
-            }
+            // if(this.cid === '179'){
+            //   this.data2 = this.data[0]
+            // }
             switch (this.cid) {
 
-        case '179':
-          this.data2 = this.data[0]
-          break;
-        case '50':
-          this.data2 = this.data[1]
-          break;
-        case '52':
-          this.data2 = this.data[2]
-          break;
-        case '51':
-          this.data2 = this.data[3]
-          break;
-        case '180':
-          this.data2 = this.data[4]
-          break;
-        case '175':
-          this.data2 = this.data[5]
-          break;
-        default:
-          // this.$router.push("/course/pages/search");
-          break;
-      }
+              case '1':
+                this.data2 = this.data[0]
+                break;
+              case '16':
+                this.data2 = this.data[1]
+                break;
+              case '17':
+                this.data2 = this.data[2]
+                break;
+              case '18':
+                this.data2 = this.data[3]
+                break;
+              case '19':
+                this.data2 = this.data[4]
+                break;
+              case '20':
+                this.data2 = this.data[5]
+                break;
+              default:
+                // this.$router.push("/course/pages/search");
+                break;
+            }
             resolve(true)
           })
         })

@@ -179,14 +179,30 @@ export default {
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList;
-          // console.log(response, "返回的response");
-          if (this.cid === "50") {
-            this.data2 = this.data[0];
-          } else if (this.cid === "51") {
-            this.data2 = this.data[1];
-          } else {
-            this.data2 = this.data[2];
-          }
+          switch (this.cid) {
+
+              case '1':
+                this.data2 = this.data[0]
+                break;
+              case '16':
+                this.data2 = this.data[1]
+                break;
+              case '17':
+                this.data2 = this.data[2]
+                break;
+              case '18':
+                this.data2 = this.data[3]
+                break;
+              case '19':
+                this.data2 = this.data[4]
+                break;
+              case '20':
+                this.data2 = this.data[5]
+                break;
+              default:
+                // this.$router.push("/course/pages/search");
+                break;
+            }
           resolve(true);
         });
       });
