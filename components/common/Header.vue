@@ -213,9 +213,9 @@ export default {
       scanCodeShow: false,
       bindSuccessShow: false,
       WxLogin:{
-        id:"wxchatIMG", 
-        appid: "wxefa2295aae13fe2e", 
-        scope: "snsapi_login", 
+        id:"wxchatIMG",
+        appid: "wxefa2295aae13fe2e",
+        scope: "snsapi_login",
         redirect_uri: "",//重定向地址
       },
       bindTelData: {
@@ -402,9 +402,9 @@ export default {
       console.log(this.WxLogin.redirect_uri);
       const weixin = new WxLogin(this.WxLogin);
       //  var obj = new WxLogin({
-      //     id:this.WxLogin.id, 
-      //     appid: this.WxLogin.appid, 
-      //     scope: this.WxLogin.scope, 
+      //     id:this.WxLogin.id,
+      //     appid: this.WxLogin.appid,
+      //     scope: this.WxLogin.scope,
       //     redirect_uri: this.WxLogin.redirect_uri,
       //   });
 
@@ -597,6 +597,11 @@ export default {
       //     break
       // }
     }
+  },
+  mounted () {
+    this.$bus.$on('loginShow',(data)=>{
+      this.loginCardShow()
+    })
   }
 };
 </script>

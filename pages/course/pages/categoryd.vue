@@ -46,9 +46,10 @@
      <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
     </div>
-    <!-- <div v-if="isShowTip">
+    <!-- v-if="isShowTip" -->
+    <div >
       <v-unlogged v-if="!this.isAuthenticated"></v-unlogged>
-    </div> -->
+    </div>
     <!-- <v-shop></v-shop> -->
   </div>
 </template>
