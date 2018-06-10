@@ -58,7 +58,7 @@
       }
     }
     .HREntry {
-      margin-left: 40px;
+      margin-left: 50px;
       margin-top: 20px;
       &.islogined{
         margin-left: 106px;
@@ -84,9 +84,17 @@
         margin-right: 14px;
         position: relative;
         cursor: pointer;
-        img{
+        vertical-align: top;
+        span{
           width: 20px;
           height: 20px;
+          background: url('~assets/images/cartIcon.png') no-repeat;
+          background-size: 20px 20px;
+          transition: all 300ms;
+          &:hover{
+            background: url('~assets/images/cartIconHover.png') no-repeat;
+            background-size: 20px 20px;
+          }
         }
         i{
           position: absolute;
