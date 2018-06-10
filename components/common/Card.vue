@@ -260,10 +260,10 @@
           <div class="common-button btn-bg">
             <div v-if="isAuthenticated">
               <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+              <el-button type="primary" plain @click="goBuy(courseList.id)" v-if="privileMsg === false">立即购买</el-button>
             </div>
             <div v-else>
-              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+              <el-button type="primary" plain @click="getMore()" v-if="privileMsg === false">立即购买</el-button>
             </div>
           </div>
         </div>
@@ -282,10 +282,10 @@
           <div class="common-button">
             <div v-if="isAuthenticated">
               <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
             <div v-else>
-              <el-button type="primary" plain @click="getMore('/shop/shoppingCart')" v-if="privileMsg === false">立即购买</el-button>
+              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
           </div>
         </div>
@@ -407,6 +407,9 @@
         curriculumcartids: {
           cartid: null
         },
+        curriculumcartids2: {
+          cartid: null
+        },
         kidForm: {
           kids: null
         }
@@ -417,7 +420,7 @@
         'isAuthenticated',
 
       ]),
-      ...mapState("auth", ["token", "productsNum"]),
+      ...mapState("auth", ["token", "productsNum", 'kid']),
     },
     methods: {
       ...mapActions("auth", ["setProductsNum", 'setNumber', 'setKid']),
@@ -429,7 +432,7 @@
           item.is_checked = false
           this.curriculumcartid.numberArr.push(item.id)
           this.curriculumcartids.cartid = item.id
-this.delShopCart()
+          this.delShopCart()
 
         } else {
           item.is_checked = true
@@ -439,6 +442,31 @@ this.delShopCart()
           this.addShopCart()
         }
       },
+      goBuy(item){
+          console.log(this.kid)
+        if(this.isAuthenticated){
+
+          console.log(this.isAuthenticated)
+          // console.log()
+          this.addShopCarts();
+        }else {
+          this.$bus.$emit('loginShow', true)
+        }
+
+      },
+      // goBuy(item, index) {
+      //   this.curriculumcartids.cartid = item.curriculum_id;
+      //   this.addShopCart();
+      // },
+    addShopCarts() {
+      let a = this.kid
+      this.curriculumcartids.cartid = 17;
+      return new Promise((resolve, reject) => {
+        home.addShopCart(this.curriculumcartids).then(response => {
+          this.$router.push("/shop/shoppingCart");
+        });
+      });
+    },
       goLink(item) {
         switch (window.location.pathname) {
           case '/course/pages/category':
@@ -497,9 +525,9 @@ this.delShopCart()
         this.isShow = !this.isShow;
       },
       selectDetail(index, course, linksix) {
-        console.log(course, '787878')
+        // console.log(course, '787878')
         this.$emit("checkdetail", course.id);
-        console.log(linksix, '99999')
+        // console.log(linksix, '99999')
         this.getMore(linksix);
       },
       selectCid(item, index) {
@@ -666,12 +694,17 @@ this.delShopCart()
   // 新上好课
   .card-category {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
     position: relative;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+    justify-content: flex-start;
     .card-list {
       margin-bottom: 50px;
       border-radius: 16px;
+      margin-left: 33px;
+      &:nth-child(4n+1){
+        margin-left: 0;
+      }
       &:hover {
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         transition: all 300ms;

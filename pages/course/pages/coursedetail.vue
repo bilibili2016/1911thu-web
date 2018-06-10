@@ -317,6 +317,7 @@ export default {
     document.getElementsByClassName("footerBox")[0].style.display = "inline";
     this.kidForm.ids = this.kid;
     this.evaluateListForm.ids = this.kid;
+    this.activeName ='first'
     this.getCourseDetail();
     this.getEvaluateList();
     this.getCourseList();
