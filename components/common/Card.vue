@@ -462,7 +462,7 @@ export default {
       ...mapActions("auth", ["setProductsNum", 'setNumber', 'setKid']),
       goLink(item) {
       this.$router.push(item);
-    },
+      },
       selCheckboxChange(item,index){
         // console.log('123')
         // console.log(item, '这是item')
@@ -478,7 +478,7 @@ export default {
       // this.setProductsNum({
       //   pn: pronum
       // });
-
+        }
       },
       // goBuy(item, index) {
       //   this.curriculumcartids.cartid = item.curriculum_id;
@@ -558,7 +558,8 @@ export default {
   mounted() {
     // console.log(this.data, '返回的数据')
   }
-};
+}
+}
 </script>
 
 <style scoped lang="scss">
