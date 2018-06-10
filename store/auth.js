@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-09 10:21:53
+ * @Last Modified time: 2018-06-11 06:25:16
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -163,7 +163,7 @@ export const actions = {
   }) {
     try {
       let token = tokens
-      console.log(token, '898989899898')
+      // console.log(token, '898989899898')
       persistStore.set('token', token)
       commit(MUTATION.signIn, {
         token

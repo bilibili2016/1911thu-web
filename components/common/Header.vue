@@ -384,7 +384,7 @@ export default {
     verifyRgTelWX() {
       return new Promise((resolve, reject) => {
         auth.verifywechat(this.bindTelData).then(response => {
-          console.log(response)
+          // console.log(response)
           if (response.status != 0) {
             this.$message({
               type: "error",
@@ -459,7 +459,7 @@ export default {
               message: "登录成功！"
             });
             this.tokenForm.token = response.data.token
-            console.log(response.data.token, '123')
+            // console.log(response.data.token, '123')
             this.setToken(this.tokenForm)
             this.closeWechat();
             this.close();
@@ -478,7 +478,7 @@ export default {
         auth.getWXAccredit(this.WxLogin).then(response => {
           if(response.status === 0){
              this.tokenForm.tokens = response.data.token
-             console.log(response.data.token,'999999')
+            //  console.log(response.data.token,'999999')
             this.setToken(this.tokenForm)
             clearInterval(this.getwxtime);
             this.scanCodeShow = false; //微信扫码
