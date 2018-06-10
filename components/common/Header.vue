@@ -17,8 +17,8 @@
             <img class="fl" src="@/assets/images/wechatLogin.png" alt="">
             <div class="changeType fr">
               <span>下载1911学堂APP</span>
-              <span><img src="@/assets/images/iphone.png" alt=""> App Store下载</span>
-              <span><img src="@/assets/images/Android.png" alt=""> Android下载</span>
+              <span><img src="@/assets/images/iphone.png" alt="">AppStore下载</span>
+              <span><img src="@/assets/images/Android.png" alt="">Android下载</span>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
       <div class="headImg" v-else>
         <img :src="user.userImg" alt="">
         <ul class="subPages">
-          <li class="cli" @click="goLink('tab-first')">我的首页</li>
+          <li @click="goLink('tab-first')">我的首页</li>
           <li @click="goLink('tab-second')">我的课程</li>
           <li @click="goLink('tab-third')">我的消息</li>
           <li @click="goLink('tab-fourth')">个人设置</li>

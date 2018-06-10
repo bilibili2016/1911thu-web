@@ -333,7 +333,7 @@
         </div>
       </el-card>
     </div>
-    <div class="more" @click="getMore(linkdata)">查看更多>></div>
+    <div class="more newsMore" @click="getMore(linkdata)">查看更多>></div>
   </div>
 </template>
 
@@ -665,12 +665,17 @@ export default {
 // 新上好课
 .card-category {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   position: relative;
   .card-list {
-    margin-bottom: 50px;
+    margin: 0 32px 50px 0;
+    // margin-bottom: 50px;
     border-radius: 16px;
+    &:nth-child(4n+4){
+      margin-right: 0;
+    }
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
       transition: all 300ms;
@@ -868,7 +873,15 @@ export default {
     border-radius: 16px;
   }
 }
-
+#pane-first .card-category .card-list{
+  margin: 0 24px 50px 0;
+  &:nth-child(4n+4){
+    margin-right: 24px;
+  }
+  &:nth-child(3n+3){
+    margin-right: 0;
+  }
+}
 // 学堂资讯
 .info-list {
   float: right;
@@ -925,6 +938,10 @@ export default {
     font-family: MicrosoftYaHei;
     color: rgba(100, 23, 166, 1);
     line-height: 40px;
+    &.newsMore:hover{
+      transition: all 300;
+      color: #8f4acb;
+    }
   }
 }
 
