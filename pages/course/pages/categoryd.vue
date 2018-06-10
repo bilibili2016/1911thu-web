@@ -49,6 +49,7 @@
     <!-- v-if="isShowTip" -->
     <div >
       <v-unlogged v-if="!this.isAuthenticated"></v-unlogged>
+
     </div>
     <!-- <v-shop></v-shop> -->
   </div>
