@@ -390,7 +390,7 @@ export default {
             this.bindTelData.captchaDisable = false;
           }
           console.log(response.status);
-          
+
         });
       });
     },
@@ -448,12 +448,6 @@ export default {
     // 微信绑定手机号
     async loginWechat(){
       return new Promise((resolve, reject) => {
-<<<<<<< HEAD
-        auth.getWXAccredit(this.WxLogin).then(response => {
-          // console.log(response.status);
-          if(response.status === 0 || response.status === 100102){
-            clearInterval(getwxtime);
-=======
         auth.loginWechat(this.bindTelData).then(response => {
           if(response.status === 0){
             this.$message({
@@ -467,7 +461,6 @@ export default {
               type: "error",
               message: response.msg
             });
->>>>>>> zs
           }
       })
       });
