@@ -155,6 +155,31 @@ export const mutations = {
 
 }
 export const actions = {
+  async setToken({
+    commit,
+    state
+  }, {
+    tokens
+  }) {
+    try {
+      let token = tokens
+      console.log(token, '898989899898')
+      persistStore.set('token', token)
+      commit(MUTATION.signIn, {
+        token
+      })
+
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return token
+  },
+
+
   async signIn({
     commit,
     state
