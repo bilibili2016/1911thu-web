@@ -43,7 +43,7 @@
     </div>
     <!-- <v-filter></v-filter> -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
   </div>
 </template>
@@ -79,7 +79,7 @@
         },
         pagemsg: {
           page: 1,
-          pagesize: 5,
+          pagesize: 8,
           total:5
         },
         categoryData: [
@@ -107,6 +107,19 @@
         'setCid',
         'setPid'
       ]),
+      handleCurrentChange(val){
+        this.pagemsg.page = val;
+        this.curriculumListForm.pages = val
+        this.curriculumListForm.limits = 8
+
+        return new Promise((resolve, reject) => {
+          home.curriculumList(this.curriculumListForm).then(response => {
+            this.categoryData = response.data.curriculumList
+            this.pagemsg.total = response.data.pageCount
+            resolve(true)
+          })
+        })
+      },
       handleItemOne(item, index) {
          this.bgmsgs = 0
         this.bgmsg = item.id;
@@ -150,10 +163,6 @@
         return new Promise((resolve, reject) => {
           home.childCategoryList().then(response => {
             this.data = response.data.categoryList
-            // this.data2 = this.data[this.$route.params.id]
-            // if(this.cid === '179'){
-            //   this.data2 = this.data[0]
-            // }
             switch (this.cid) {
 
               case '1':
