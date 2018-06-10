@@ -125,11 +125,9 @@
         </el-form>
 
         <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"><span>微信登录</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4> <!-- el-icon-loading -->
+          <h4 class="clearfix"><i class="el-icon-close fr" @click="closeWechat"></i></h4> <!-- el-icon-loading -->
           <div class="wxchatIMG" id="wxchatIMG"></div>
-          <!-- <img :src="getWXLoginImg.isget" alt=""> -->
-          <h5>请使用微信扫描“1911学堂”二维码登录</h5>
-          <p>二维码将在5分钟后失效！<i @click="getWXRecode">重新获取二维码</i></p>
+          <!-- <p>二维码将在5分钟后失效！<i @click="getWXRecode">重新获取二维码</i></p> -->
         </div>
 
         <div class="bindSuccess" v-show="bindSuccessShow">
@@ -400,9 +398,8 @@ export default {
     },
     // 从微信拉取二维码
     async wxLogin() {
-      this.WxLogin.redirect_uri = "http%3A%2F%2Fwww.1911edu.com%2Findex.html";
+      this.WxLogin.redirect_uri = "http%3A%2F%2Ffrontend.1911edu.com%2Ftest%2Ftest";
       this.WxLogin.state = Math.random().toString(36).substr(2);
-      console.log(this.WxLogin.state);
       const weixin = new WxLogin(this.WxLogin);
       //  var obj = new WxLogin({
       //     id:this.WxLogin.id,

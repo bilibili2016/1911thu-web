@@ -47,6 +47,7 @@ import { store as persistStore } from '~/lib/core/store'
         curriculumPayData: [],
         allPrice: "69.00",
         status: "等待审核",
+        time: null
       }
     },
      mounted () {
@@ -59,6 +60,12 @@ import { store as persistStore } from '~/lib/core/store'
         return new Promise((resolve, reject) => {
           home.curriculumPayApply().then(response => {
            this.curriculumPayData = response.data.curriculumPayApply
+           console.log(response, '123')
+           for(let item of response.data.curriculumPayApply){
+             this.time = this.timestampToTime(item.create_time)
+             console.log(this.time, '678')
+
+           }
             resolve(true)
           })
         })
@@ -70,6 +77,16 @@ import { store as persistStore } from '~/lib/core/store'
       },
       goLink(item){
         this.$router.push(item)
+      },
+      timestampToTime(timestamp) {
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        let Y = date.getFullYear() + '-';
+        let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        let D = date.getDate() + ' ';
+        let h = date.getHours() + ':';
+        let m = date.getMinutes() + ':';
+        let s = date.getSeconds();
+        return Y+M+D+h+m+s;
       }
     },
   }
