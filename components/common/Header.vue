@@ -9,12 +9,12 @@
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin" @click="goSearchd('home/pages/hrEntry')">Hr入口</span>
+        <span class="hrin" @click="goSearchd('/home/pages/hrEntry')">Hr入口</span>
         <span v-show="isAuthenticated" @click="goLink('second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
-            <img class="fl" src="@/assets/images/downApp.png" alt="">
+            <img class="fl" src="@/assets/images/wechatLogin.png" alt="">
             <div class="changeType fr">
               <span>下载1911学堂APP</span>
               <span><img src="@/assets/images/iphone.png" alt=""> App Store下载</span>
@@ -23,7 +23,9 @@
           </div>
         </div>
         <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
-          <img src="@/assets/images/shoppingCart.png" alt=""><i v-show="shoppingCartNum>0">{{shoppingCartNum}}</i>
+        <!-- {{shoppingCartNum}} -->
+        <!-- <i v-show="shoppingCartNum>0"></i> -->
+          <img src="@/assets/images/shoppingCart.png" alt="">
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -35,11 +37,11 @@
       <div class="headImg" v-else>
         <img :src="user.userImg" alt="">
         <ul class="subPages">
-          <li class="cli" @click="goLink('first')">我的首页</li>
-          <li @click="goLink('second')">我的课程</li>
-          <li @click="goLink('third')">我的消息</li>
-          <li @click="goLink('fourth')">个人设置</li>
-          <li @click="goLink('fifth')">绑定课程</li>
+          <li class="cli" @click="goLink('tab-first')">我的首页</li>
+          <li @click="goLink('tab-second')">我的课程</li>
+          <li @click="goLink('tab-third')">我的消息</li>
+          <li @click="goLink('tab-fourth')">个人设置</li>
+          <li @click="goLink('tab-fifth')">绑定课程</li>
           <li @click="signOuts">退出</li>
         </ul>
       </div>
@@ -58,7 +60,7 @@
                 <el-input v-model.number="loginData.phonenum" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="6-10位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
+                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
@@ -81,7 +83,7 @@
                 <!--  -->
               </el-form-item>
                <el-form-item prop="passwords">
-                <el-input v-model="registerData.passwords" type="password" placeholder="请输入密码"></el-input>
+                <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
               <el-form-item prop="companyCodes">
                 <el-input v-model="registerData.companyCodes" placeholder="绑定企业"></el-input>
@@ -433,7 +435,10 @@ export default {
       this.$router.push("/shop/shoppingCart");
     },
     goLink(item) {
-      this.$router.push(item);
+      console.log('123')
+      console.log(this.$bus)
+       this.$bus.$emit('selectProfileIndex', '123')
+      // this.$router.push(item);
     },
     login() {},
     signOuts() {
@@ -498,7 +503,7 @@ export default {
       this.wxLogin();
     },
     getWXCode() {
-      console.log(this.getWXLoginImg.time);
+      // console.log(this.getWXLoginImg.time);
       if (this.getWXLoginImg.time < 1) {
         clearInterval(timewx);
         this.wxLogin();
@@ -538,13 +543,15 @@ export default {
     gokey() {
       if (event.keyCode == 13) {
         persistStore.set('key', this.search)
-        switch (window.location.pathname) {
-          case "/course/pages/search":
-            break;
-          default:
-            this.$router.push("/course/pages/search");
-            break;
-        }
+         this.$router.push("/course/pages/search");
+        // switch (window.location.pathname) {
+
+          // case "/course/pages/search":
+          //   break;
+          // default:
+          //   this.$router.push("/course/pages/search");
+          //   break;
+        // }
       }
     },
     goSearchd(item) {
@@ -557,6 +564,7 @@ export default {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
+       this.$bus.$emit('selectProfileIndex', item)
       // switch (window.location.pathname) {
       //   case '/':
       //     this.$router.push('/profile');

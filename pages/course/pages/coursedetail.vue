@@ -239,6 +239,7 @@ export default {
         .catch(_ => {});
     },
     getCourseDetail() {
+      this.kidForm.ids = persistStore.get("kid")
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
           // console.log(response, "这是课程详情");
@@ -256,6 +257,7 @@ export default {
       });
     },
     getCourseList() {
+      this.kidForm.ids = persistStore.get("kid")
       return new Promise((resolve, reject) => {
         home.getCourseList(this.kidForm).then(response => {
           // console.log(response, "这是课程列表");

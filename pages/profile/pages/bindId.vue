@@ -37,7 +37,7 @@
       <div v-show="courseList.addNewID">
         <div class="courseID">
           <span>绑定课程ID:</span>
-          <input v-model="courseList.inputID" @blur.stop="verify" placeholder="请输入您的课程ID">
+          <input v-model="courseList.inputID" @blur.stop="courseVerify" placeholder="请输入您的课程ID">
           <span class="error" v-show="courseList.showErr">请输入正确的企业ID</span>
         </div>
         <div class="bindInfo">
@@ -46,7 +46,7 @@
           <p>2.绑定成功后，不可更改。</p>
         </div>
         <div :class="{presentAble:!courseList.showErr,present:courseList.present}">
-          <el-button :disabled="courseList.presentAble" round @click="doSubmit">提交</el-button>
+          <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交</el-button>
         </div>
       </div>
       <div class="success" v-show="courseList.success">
@@ -72,6 +72,19 @@
           this.binding.presentAble = true;
         }
       },
+      courseVerify(){
+        if (this.courseList.inputID == "") {
+          console.log(1);
+          
+          this.courseList.showErr = true;
+          this.courseList.presentAble = false;
+        } else {
+          console.log(2);
+          
+          this.courseList.showErr = false;
+          this.courseList.presentAble = true;
+        }
+      },
       addID() {
         this.courseList.addNewID = true;
       },
@@ -92,7 +105,7 @@
            home.getUsedInvitationCodeList(this.curruntForm).then(response => {
             this.courseList.courseID = response.data.usedInvitationCodeList
 
-            if(!this.courseList.courseID || his.courseList.courseID.length<=0){
+            if(!this.courseList.courseID || this.courseList.courseID.length<=0){
               this.$emit('isShowMsg',true)
             }else{
               this.$emit('isShowMsg',false)
@@ -117,6 +130,7 @@
           presentAble: false,
           present: true,
           success: false,
+          addCourse:true,
           courseID: []
         },
         bindImg: require('~/assets/images/bindingSuccess.png')

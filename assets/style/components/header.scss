@@ -121,9 +121,11 @@
           height: 20px;
           cursor: pointer;
           background: url('~assets/images/phone.png') no-repeat;
+          background-size: contain;
           transition: all 300ms;
           &:hover {
             background: url('~assets/images/phone2.png') no-repeat;
+            background-size: contain;
           }
         }
         .downApp{

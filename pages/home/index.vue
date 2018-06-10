@@ -12,7 +12,7 @@
     <!-- 用户评价 -->
     <v-evaluate :titleFour="titleFour" :carouselSrc = "carouselSrc" :evaluateData="evaluateData"></v-evaluate>
     <!-- 学堂资讯 -->
-    <v-info :infoDesc = "infoDesc" :infoArticle= "infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive= "titleFive" :linkfour="linkfours"></v-info>
+    <v-info :infoDesc = "infoDesc" :infoArticle= "infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive= "titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
     <!-- 合作伙伴 -->
     <v-partner :data="partnerList"></v-partner>
     <v-backtotop></v-backtotop>
@@ -52,6 +52,7 @@ export default {
       linkone:'/course/pages/newlesson',
       linktwo: '/course/pages/classify',
       linkfours: '/news/list',
+      linkfive: '/news/detail',
       tabmsg: false,
       newData: [],
       classicData: [],
@@ -133,10 +134,14 @@ export default {
       ],
       carouselSrc: require("@/assets/images/home_avator02.png"),
       items: [
-        { src: require("@/assets/images/banner_1.png") },
-        { src: require("@/assets/images/banner_2.png") },
-        { src: require("@/assets/images/banner_3.png") }
+        { picture: require("@/assets/images/banner_1.png") },
+        { picture: require("@/assets/images/banner_2.png") },
+        { picture: require("@/assets/images/banner_3.png") }
       ],
+      itemsData:{
+        limit:null,
+        types:1
+      },
       classify: [
         "干部通用",
         "党政系统学院",
@@ -248,6 +253,7 @@ export default {
   mounted () {
     document.getElementsByClassName("headerBox")[0].style.display="inline"
     document.getElementsByClassName("footerBox")[0].style.display="inline"
+    this.getBanner()
     this.getClassifyList()
     this.getNewCourseList()
     this.getClassicCourseList()
@@ -256,6 +262,14 @@ export default {
     this.getNewInfoList()
   },
   methods: {
+    // 获取banner
+    getBanner() {
+      return new Promise((resolve, reject) => {
+           home.getBannerList(this.itemsData).then(response => {
+            this.items = response.data.bannerList;
+          })
+        })
+    },
     // 获取分类列表
     getClassifyList() {
       return new Promise((resolve, reject) => {

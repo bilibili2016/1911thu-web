@@ -2,7 +2,7 @@
   <div>
     <v-banner :config = "bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fourth'"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
-      <el-tabs :tab-position="tabPosition" v-model="activeTab">
+      <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="empty">
         <!-- 我的信息 -->
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label"><i class="el-icon-date"></i> 我的首页</span>
@@ -89,7 +89,6 @@
             <div class="noCourse" v-if="isShowNoCourse">
               <img :src="noMsgImg" alt="">
               <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
-              <!-- <p>去学习</p> -->
             </div>
           </div>
         </el-tab-pane>
@@ -297,6 +296,9 @@
       goShop(){
         this.goLink('/course/pages/categoryd');
       },
+      empty(){
+
+      },
       studyCurriculumList () {
         this.styleForm.types =  1
         this.styleForm.pages = 0
@@ -324,9 +326,9 @@
       collectionList () {
         return new Promise((resolve, reject) => {
           home.collectionList(this.collectionForm).then(response => {
-            console.log(response, '收藏返回')
+            // console.log(response, '收藏返回')
             this.collectionData = response.data.curriculumList
-            console.log(response.data.curriculumList, '请求返回')
+            // console.log(response.data.curriculumList, '请求返回')
             resolve(true)
           })
         })
@@ -341,6 +343,12 @@
       // console.log(this.gid)
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+
+    },
+    created (){
+       this.$bus.$on('selectProfileIndex', (data)=>{
+        this.activeTab = data
+      })
     }
   };
 </script>
