@@ -639,12 +639,13 @@ this.delShopCart()
         h5 {
           color: #6417a6;
           // line-height: 40px;
-          margin: 15px 0px 10px 0px;
+          margin: 18px 0px 10px 0px;
           &:hover {
             color: #8f4acb;
           }
         }
         p {
+          height: 41px;
           color: #93999f;
           font-size: 12px;
           line-height: 22px;
@@ -821,7 +822,6 @@ this.delShopCart()
           padding: 0 15px;
           p.price {
             color: #332a51;
-            padding: 0 15px;
           }
           span {
             vertical-align: middle;
@@ -921,7 +921,7 @@ this.delShopCart()
       float: right;
       height: 20px;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 18px;
       font-family: MicrosoftYaHei;
       color: rgba(100, 23, 166, 1);
       line-height: 40px;

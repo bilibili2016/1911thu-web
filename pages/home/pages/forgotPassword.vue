@@ -127,21 +127,23 @@ export default {
         return new Promise((resolve, reject) => {
           auth.smsCodes(this.fpData).then(response => {
             this.$message({
-              type: "success",
+              type: response.status === 0 ? "success" : "error",
               message: response.msg
             });
-            this.captchaDisable = true;
-            this.fpData.getCode = this.fpData.seconds + "秒后重新发送";
-            let interval = setInterval(() => {
-              if (this.fpData.seconds <= 0) {
-                this.fpData.getCode = "获取验证码";
-                this.fpData.seconds = 60;
-                this.captchaDisable = false;
-                clearInterval(interval);
-              } else {
-                this.fpData.getCode = --this.fpData.seconds + "秒后重新发送";
-              }
-            }, 1000);
+            if(response.status === 0){
+              this.captchaDisable = true;
+              this.fpData.getCode = this.fpData.seconds + "秒后重新发送";
+              let interval = setInterval(() => {
+                if (this.fpData.seconds <= 0) {
+                  this.fpData.getCode = "获取验证码";
+                  this.fpData.seconds = 60;
+                  this.captchaDisable = false;
+                  clearInterval(interval);
+                } else {
+                  this.fpData.getCode = --this.fpData.seconds + "秒后重新发送";
+                }
+              }, 1000);
+            }
           });
         });
       }
