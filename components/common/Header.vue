@@ -398,9 +398,12 @@ export default {
     },
     // 从微信拉取二维码
     async wxLogin() {
-      this.WxLogin.redirect_uri = "http%3A%2F%2Ffrontend.1911edu.com%2Ftest%2Ftest";
+      this.WxLogin.redirect_uri = "http%3A%2F%2Fwww.1911edu.com%2FWapi%2FIndex%2FwxBack";
       this.WxLogin.state = Math.random().toString(36).substr(2);
       const weixin = new WxLogin(this.WxLogin);
+      var getwxtime = setInterval(() => {
+        this.getWXAccredit();
+      }, 4000);
 
       // return new Promise((resolve, reject) => {
       //   auth.wechat(this.getWXLoginImg.isget).then(response => {
@@ -416,7 +419,10 @@ export default {
     getWXAccredit(){
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
-          console.log(response.data);
+          console.log(response.status);
+          if(response.status === 0 || response.status === 100102){
+            clearInterval(getwxtime);
+          }
         });
       });
     },
@@ -490,6 +496,7 @@ export default {
       this.lrFrame = false;
       this.bgMsg = false;
       this.emptyForm();
+      clearInterval(getwxtime);
     },
     closeWechat() {
       this.move();
@@ -497,6 +504,7 @@ export default {
       this.lrFrame = false;
       this.wechatLogin = false;
       clearInterval(timewx);
+      clearInterval(getwxtime);
       // document.body.style.overflow = "auto";
     },
     emptyForm(){
@@ -519,7 +527,7 @@ export default {
       this.lrFrame = false;
       this.wechatLogin = true;
       this.scanCodeShow = true; //微信扫码
-      // this.bindTelShow=true; //绑定手机号
+      //this.bindTelShow=true; //绑定手机号
       // this.bindSuccessShow=true; // 登录成功
       this.wxLogin();
     },

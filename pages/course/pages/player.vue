@@ -5,7 +5,7 @@
         <i class="el-icon-arrow-left" @click="goLink()"></i>{{player.title}}
       </div>
       <div class="playInner" ref="playInner">
-        <div id="movd" ref="movd"></div>
+        <video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
@@ -150,14 +150,22 @@ import { store as persistStore } from '~/lib/core/store'
           curriculumId: null,
           catalogId: null
         },
-        m3u8Url: null,
         fileID: null,
         appID: null,
         tcplayer: {
-          "m3u8": 'h', //请替换成实际可用的播放地址
+          "fileID": '',
+          "appID": '',
+          "sign":"",
+          "t":"",
+          "exper":"",
           "autoplay" : false,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-          "fileID": '7447',
-          "appID": '1256'
+          "plugins": {
+            ContinuePlay: { // 开启续播功能
+              auto: false, //[可选] 是否在视频播放后自动续播
+              text: '上次播放至 ', //[可选] 提示文案
+              btnText: '恢复播放' //[可选] 按钮文案
+            },
+          }
         },
         playerDetailForm: {
           curriculumId: null
@@ -228,10 +236,21 @@ import { store as persistStore } from '~/lib/core/store'
         return new Promise((resolve, reject) => {
           home.getPlayerInfo(this.playerForm).then(response => {
             console.log(response.data);
-            this.tcplayer.m3u8 = response.data.playurl
-            this.tcplayer.fileID = response.data.playAuthInfo.fileID
-            this.tcplayer.appID = response.data.playAuthInfo.appID
-            const player = new TcPlayer('movd' , this.tcplayer);
+            if (response.data.playAuthInfo.videoViewType == false) {
+              this.tcplayer.fileID = response.data.playAuthInfo.fileID;
+              this.tcplayer.appID = response.data.playAuthInfo.appID;
+              this.tcplayer.sign = response.data.playAuthInfo.sign;
+              this.tcplayer.t = response.data.playAuthInfo.t;
+              this.tcplayer.exper = response.data.playAuthInfo.appID;
+            }else{
+              this.tcplayer.fileID = response.data.playAuthInfo.fileID;
+              this.tcplayer.appID = response.data.playAuthInfo.appID;
+              this.tcplayer.sign = response.data.playAuthInfo.sign;
+              this.tcplayer.t = response.data.playAuthInfo.t;
+            }
+            // this.tcplayer.m3u8 = response.data.playurl;
+           
+            const player = new TCPlayer('movd' , this.tcplayer);
 
           });
         });
