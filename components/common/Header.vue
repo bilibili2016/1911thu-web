@@ -129,7 +129,7 @@
           <div class="wxchatIMG" id="wxchatIMG"></div>
           <!-- <img :src="getWXLoginImg.isget" alt=""> -->
           <h5>请使用微信扫描“1911学堂”二维码登录</h5>
-          <p>二维码将在5分钟后失效！<i @click="getWXCode">重新获取二维码</i></p>
+          <p>二维码将在5分钟后失效！<i @click="getWXRecode">重新获取二维码</i></p>
         </div>
 
         <div class="bindSuccess" v-show="bindSuccessShow">
@@ -217,12 +217,13 @@ export default {
         appid: "wxefa2295aae13fe2e",
         scope: "snsapi_login",
         redirect_uri: "",//重定向地址
+        state:""
       },
       bindTelData: {
         tel: "",
         code: "",
         getCode: "获取验证码",
-        seconds: 60,
+        seconds: 30,
         captchaDisable: false,
         exist:false,
         checked: false
@@ -311,6 +312,8 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
+      console.log(this.bindTelData.captchaDisable);
+      console.log(this.bindTelData.exist);
       if(!this.bindTelData.captchaDisable && this.bindTelData.exist){
         return new Promise((resolve, reject) => {
         auth.smsCodes(this.registerData).then(response => {
@@ -323,7 +326,7 @@ export default {
           let interval = setInterval(() => {
             if (this.bindTelData.seconds <= 0) {
               this.bindTelData.getCode = "获取验证码";
-              this.bindTelData.seconds = 60;
+              this.bindTelData.seconds = 30;
               this.bindTelData.captchaDisable = false;
               clearInterval(interval);
             } else {
@@ -343,11 +346,12 @@ export default {
             type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          if(response.status != "0"){
-            this.bindTelData.captchaDisable=true;
+
+          if(response.status === 0 ){
+            this.bindTelData.captchaDisable=false;
             this.bindTelData.exist=true;
           }else{
-            this.bindTelData.captchaDisable=false;
+            this.bindTelData.captchaDisable=true;
             this.bindTelData.exist=false;
           }
         });
@@ -395,11 +399,11 @@ export default {
       });
       this.move();
     },
-    // 获取微信登录二维码
+    // 从微信拉取二维码
     async wxLogin() {
-      // this.WxLogin.redirect_uri = encodeURI("http://www.1911edu.com/Wapi/Index/wxBack");
-      this.WxLogin.redirect_uri = "http%3A%2F%2Fwww.1911edu.com%2FWapi%2FIndex%2FwxBack";
-      console.log(this.WxLogin.redirect_uri);
+      this.WxLogin.redirect_uri = "http%3A%2F%2Fwww.1911edu.com%2Findex.html";
+      this.WxLogin.state = Math.random().toString(36).substr(2);
+      console.log(this.WxLogin.state);
       const weixin = new WxLogin(this.WxLogin);
       //  var obj = new WxLogin({
       //     id:this.WxLogin.id,
@@ -419,33 +423,37 @@ export default {
       //   });
       // });
     },
-    // 获取微信登录权限
-    async getWXLogin() {
+    //获取微信登录是否已经绑定
+    getWXAccredit(){
       return new Promise((resolve, reject) => {
-        auth.verifyWX(this.getWXLoginImg.WXverify).then(response => {
-          // console.log(response.data);
-          if(response.status === "100100"){
-              clearInterval(timewx);
-              this.$message({
-                type: "error",
-                message: response.msg
-              });
-          }
-          if(response.status === "0"){
-             clearInterval(timewx);
-            // console.log(response.data,"已有账号直接登录，返回token");
-          }
-          if(response.status === "100102"){
-             clearInterval(timewx);
-            // console.log(response.data,"未绑定手机");
-          }
-
+        auth.getWXAccredit(this.WxLogin).then(response => {
+          console.log(response.data);
         });
       });
     },
-    // encodeURI
-    encodeURI(url){//转码
-      this.redirect_uri = encodeURI("url");
+
+    // 获取微信返回权限
+    async judgeWX() {
+      return new Promise((resolve, reject) => {
+        auth.judgeWX(this.WxLogin).then(response => {
+          console.log(response.data);
+          // if(response.status === "100100"){
+          //     clearInterval(timewx);
+          //     this.$message({
+          //       type: "error",
+          //       message: response.msg
+          //     });
+          // }
+          // if(response.status === "0"){
+          //    clearInterval(timewx);
+          //   // console.log(response.data,"已有账号直接登录，返回token");
+          // }
+          // if(response.status === "100102"){
+          //    clearInterval(timewx);
+          //   // console.log(response.data,"未绑定手机");
+          // }
+        });
+      });
     },
     // 忘记密码
     forget() {
@@ -526,7 +534,7 @@ export default {
       // this.bindSuccessShow=true; // 登录成功
       this.wxLogin();
     },
-    getWXCode() {
+    getWXRecode() { //刷新二维码
       if (this.getWXLoginImg.time < 1) {
         clearInterval(timewx);
         this.wxLogin();
@@ -536,6 +544,9 @@ export default {
           type: "warning"
         });
       }
+    },
+    polling(){//轮询请求 微信扫码结果
+
     },
     stop() {
       var mo = function(e) {

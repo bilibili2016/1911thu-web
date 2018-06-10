@@ -44,7 +44,7 @@ export default {
       showPwd: false,
       pwdType: "password",
       fpData: {
-        seconds: 60,
+        seconds: 30,
         phones: null,
         code: "",
         password:"",
@@ -82,7 +82,7 @@ export default {
         tel: "",
         code: "",
         getCode: "获取验证码",
-        seconds: 60,
+        seconds: 30,
         captchaDisable: false,
         checked: false,
         types: 1
@@ -136,7 +136,7 @@ export default {
               let interval = setInterval(() => {
                 if (this.fpData.seconds <= 0) {
                   this.fpData.getCode = "获取验证码";
-                  this.fpData.seconds = 60;
+                  this.fpData.seconds = 30;
                   this.captchaDisable = false;
                   clearInterval(interval);
                 } else {
