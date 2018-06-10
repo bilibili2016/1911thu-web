@@ -33,7 +33,8 @@ config.head.script = [
     async: true
   },
   {
-    src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.js',
+    src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
+
     async: true
   },
    {
