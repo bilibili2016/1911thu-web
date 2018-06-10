@@ -39,11 +39,12 @@
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
             <span class="person">购买人数：</span>
-            <span class="number clearfix">
+            <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput"></el-input-number>
+            <!-- <span class="number clearfix">
               <i class="fl minus el-icon-minus"  @click="delNumber"></i>
-              <input type="text" class="fl num" v-model.number="numForm.number" @blur="changeNumber">
+              <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
               <i class="fl add el-icon-plus" @click="addNumber"></i>
-            </span>
+            </span> -->
           </span>
           <span class="commitOrder fr">
             <el-button @click="showCommit">提交</el-button>
@@ -176,6 +177,16 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
+    setPatten(){
+        let reg =   new RegExp('/^[0-9]*$/')
+        if(!reg.test(this.numForm.number)){
+          let str = this.numForm.number.toString()
+          console.log('2222222------',str)
+          this.numForm.number = str.replace(this.numForm.number, 1)
+          console.log('2222222-this.numForm.number--',this.numForm.number)
+
+        }
+    },
     handleSelectAll(){
       this.isRest = true
     },
@@ -301,7 +312,7 @@ export default {
       this.changeCartNumber();
     },
     changeNumber() {
-      if (typeof this.number !== "number" || this.number < 1) {
+      if (typeof this.number !== "number" || this.number < 1 ) {
         this.number = 1;
       }
       this.changeCartNumber();
