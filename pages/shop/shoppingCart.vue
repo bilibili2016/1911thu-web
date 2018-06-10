@@ -4,7 +4,7 @@
     <div class="main" v-loading="loding">
       <div class="table">
         <div class="tableHeader">
-          <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
+          <!-- <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox> -->
           <span class="courseName">课程名称</span>
           <span class="price">单价</span>
           <span class="operation">操作</span>

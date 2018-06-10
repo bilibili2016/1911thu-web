@@ -77,7 +77,7 @@
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                <div class="getCode" @click="handleGetCode">{{bindTelData.getCode}}</div>
+                <div class="getCode" @click="handleGetCode(registerData)">{{bindTelData.getCode}}</div>
                 <!--  -->
               </el-form-item>
                <el-form-item prop="passwords">
@@ -103,24 +103,25 @@
 
       <!-- 微信登录 -->
       <div class="lrFrame wechatLogin" v-show="wechatLogin">
-        <el-form :model="bindTelData" status-icon :rules="registRules" class="demo-ruleForm" v-show="bindTelShow">
-          <h4 class="clearfix"><span>绑定手机账号</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
+        <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
+          <h4 class="clearfix"><span>绑定手机账号</span></h4>
+           <!-- <i class="el-icon-close fr" @click="closeWechat"></i> -->
           <el-form-item prop="tel">
 
-            <el-input v-model.number="bindTelData.tel" placeholder="请输入登录手机号"></el-input>
+            <el-input v-model.number="bindTelData.phones" @blur="verifyRgTelWX" placeholder="请输入登录手机号"></el-input>
           </el-form-item>
           <el-form-item prop="code">
 
-            <el-input class="captcha" v-model.number="bindTelData.code" placeholder="请输入验证码"></el-input>
-            <div class="getCode" @click="handleGetCode">{{bindTelData.getCode}}</div>
+            <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
+            <div class="getCode" @click="handleGetCode(bindTelData)">{{bindTelData.getCode}}</div>
           </el-form-item>
 
           <el-form-item prop="companyCodes">
-            <el-input v-model="bindTelData.company" placeholder="绑定企业"></el-input>
+            <el-input v-model="bindTelData.companyCodes" placeholder="绑定企业"></el-input>
             <span class="bindCompany">(可选)</span>
           </el-form-item>
           <el-row>
-            <el-button>绑定</el-button>
+            <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
           </el-row>
         </el-form>
 
@@ -218,10 +219,13 @@ export default {
         state:""
       },
       bindTelData: {
-        tel: "",
-        code: "",
+        phones: "",
+        codes: "",
         getCode: "获取验证码",
         seconds: 30,
+        types: 1,
+        openid:null,
+        companyCodes:"",
         captchaDisable: false,
         exist:false,
         checked: false
@@ -288,6 +292,19 @@ export default {
           { required: true, message: "请输入账户密码", trigger: "blur" }
         ]
       },
+      // 微信绑定表单验证
+      bindwxRules: {
+        phones: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          { validator: checkPhone, trigger: "blur" }
+        ],
+        codes: [{ required: true, message: "请输入验证码", trigger: "blur" }],
+        companyCodes: [
+          { min: 6, max: 6, message: "请输入正确的企业ID", trigger: "blur" },
+          { validator: checkCompanyCodes, trigger: "blur" }
+        ]
+      },
+      getwxtime: null,
       gidForm: {
         gids: null
       }
@@ -316,11 +333,11 @@ export default {
       this.stop();
       this.bgMsg = true;
     },
-    // 获取验证码
-    async handleGetCode() {
+    // 获取验证码 this.registerData
+    async handleGetCode(data) {
       if (!this.bindTelData.captchaDisable) {
         return new Promise((resolve, reject) => {
-          auth.smsCodes(this.registerData).then(response => {
+          auth.smsCodes(data).then(response => {
             this.$message({
               type: response.status === 0 ? "success" : "error",
               message: response.msg
@@ -356,6 +373,24 @@ export default {
           } else {
             this.bindTelData.captchaDisable = false;
           }
+        });
+      });
+    },
+    // 验证手机号是否已经绑定了微信
+    verifyRgTelWX() {
+      return new Promise((resolve, reject) => {
+        auth.verifywechat(this.bindTelData).then(response => {
+          this.$message({
+            type: response.status === 0 ? "success" : "error",
+            message: response.msg
+          });
+          if (response.status != 0) {
+            this.bindTelData.captchaDisable = true;
+          }else{
+            this.bindTelData.captchaDisable = false;
+          }
+          console.log(response.status);
+          
         });
       });
     },
@@ -406,53 +441,54 @@ export default {
       this.WxLogin.redirect_uri = "http%3A%2F%2Fwww.1911edu.com%2FWapi%2FIndex%2FwxBack";
       this.WxLogin.state = Math.random().toString(36).substr(2);
       const weixin = new WxLogin(this.WxLogin);
-      var getwxtime = setInterval(() => {
+      this.getwxtime = setInterval(() => {
         this.getWXAccredit();
-      }, 4000);
-
-      // return new Promise((resolve, reject) => {
-      //   auth.wechat(this.getWXLoginImg.isget).then(response => {
-      //     this.getWXLoginImg.isget = response.data.url;
-      //     var timewx = setInterval(() => {
-      //       this.getWXLoginImg.time--;
-      //       this.getWXLogin();
-      //     }, 1000);
-      //   });
-      // });
+      }, 1000);
     },
-    //获取微信登录是否已经绑定
-    getWXAccredit(){
+    // 微信绑定手机号
+    async loginWechat(){
       return new Promise((resolve, reject) => {
-        auth.getWXAccredit(this.WxLogin).then(response => {
-          console.log(response.status);
-          if(response.status === 0 || response.status === 100102){
-            clearInterval(getwxtime);
-          }
-        });
-      });
-    },
-    // 获取微信登录权限
-    async getWXLogin() {
-      return new Promise((resolve, reject) => {
-        auth.verifyWX(this.getWXLoginImg.WXverify).then(response => {
-          // console.log(response.data);
-          if (response.status === "100100") {
-            clearInterval(timewx);
+        auth.loginWechat(this.bindTelData).then(response => {
+          if(response.status === 0){
+            this.$message({
+              type: "success",
+              message: "登录成功！"
+            });
+            persistStore.set("token",response.data.token);
+            this.closeWechat();
+          }else{
             this.$message({
               type: "error",
               message: response.msg
             });
           }
-          if (response.status === "0") {
-            clearInterval(timewx);
-            // console.log(response.data,"已有账号直接登录，返回token");
+      })
+      });
+    },
+    //获取微信登录是否已经绑定
+    getWXAccredit(){
+      return new Promise((resolve, reject) => {
+        auth.getWXAccredit(this.WxLogin).then(response => {
+          console.log(response.status); // 0 token  100102 openid
+          if(response.status === 0){
+            persistStore.set("token",response.data.token);
+            clearInterval(this.getwxtime);
+            this.scanCodeShow = false; //微信扫码
+            this.closeWechat();
           }
-          if (response.status === "100102") {
-            clearInterval(timewx);
-            // console.log(response.data,"未绑定手机");
+          if(response.status === 100102){
+            this.scanCodeShow = false; //微信扫码
+            this.bindTelShow=true;
+            this.bindTelData.captchaDisable = true;
+            this.bindTelData.openid = response.data.openid;
+          }else if(response.status === 100100){
+            this.$message({
+              type: "error",
+              message: response.msg
+            });
           }
         });
-      });
+      })
     },
     // 忘记密码
     forget() {
@@ -507,7 +543,6 @@ export default {
       this.start = false;
       this.lrFrame = false;
       this.wechatLogin = false;
-      clearInterval(timewx);
       clearInterval(getwxtime);
       // document.body.style.overflow = "auto";
     },
@@ -534,17 +569,6 @@ export default {
       //this.bindTelShow=true; //绑定手机号
       // this.bindSuccessShow=true; // 登录成功
       this.wxLogin();
-    },
-    getWXRecode() { //刷新二维码
-      if (this.getWXLoginImg.time < 1) {
-        clearInterval(timewx);
-        this.wxLogin();
-      } else {
-        this.$message({
-          message: "请勿重复获取！",
-          type: "warning"
-        });
-      }
     },
     polling(){//轮询请求 微信扫码结果
 

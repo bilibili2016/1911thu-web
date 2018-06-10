@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <div class="center category-style">
+      <div class="center category-style categoryd">
         <div class="college">
            <li class="title">学院：</li>
           <ul>
@@ -33,8 +33,7 @@
           <el-tab-pane label="最新" name="first"></el-tab-pane>
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
-        <div class="pages"><el-pagination layout=" pager, prev, next" :total="1"></el-pagination></div>
-        <!-- <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch"> -->
+        <!-- <div class="pages"><el-pagination layout=" pager, prev, next" :total="1"></el-pagination></div> -->
         <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch">
         </el-switch>
       </div>

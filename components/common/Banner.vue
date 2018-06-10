@@ -78,9 +78,15 @@ export default {
 
 <style scoped lang="scss">
 .news-banner {
-  height: 360px;
+  height: 148px;
+  position: relative;
   img {
-    height: 100%;
+    width: 1920px;
+    height: 148px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -960px;
   }
 }
 </style>
