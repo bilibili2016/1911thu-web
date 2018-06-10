@@ -249,7 +249,7 @@ export default {
       //  persistStore.set("curriculumId", item.id)
       this.playerForm.curriculumId = persistStore.get('curriculumId');
 
-      // this.playerForm.catalogId = persistStore.get("catalogId");
+      this.playerForm.catalogId = persistStore.get("catalogId");
       player = TCPlayer("movd", this.tcplayer);
       return new Promise((resolve, reject) => {
         home.getPlayerInfos(this.playerForm).then(response => {
