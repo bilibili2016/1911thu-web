@@ -64,7 +64,7 @@
               <el-row>
                  <!-- @click="goSearchd('/home/pages/forgotPassword')"  -->
                 <div @click="forget">忘记密码?</div>
-                <el-button @click="signIns('loginData')">登录{{this.token}}</el-button>
+                <el-button @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -595,14 +595,6 @@ export default {
       this.setGid(this.gidForm);
       this.$router.push("/profile");
        this.$bus.$emit('selectProfileIndex', item)
-      // switch (window.location.pathname) {
-      //   case '/':
-      //     this.$router.push('/profile');
-      //     break
-      //   default:
-
-      //     break
-      // }
     }
   },
   mounted () {

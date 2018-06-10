@@ -26,7 +26,7 @@
             </div> -->
           </div>
         </div>
-        <div class="tableFooter">商品总额：{{sum}}￥</div>
+        <div class="tableFooter">商品总额：￥{{sum}}</div>
       </div>
     </div>
   </div>

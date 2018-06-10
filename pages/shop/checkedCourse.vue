@@ -10,7 +10,7 @@
         </div>
         <div class="content">
           <div class="course">
-            <div class="courseOne" v-for="(course,index) in courseList.CurriculumPayApplyList" :key="index">
+            <div class="courseOne" v-for="(course,index) in courseList.CurriculumPayApplyList" :key="index" v-if="index<3">
               <img class="fl" :src="course.curriculum_picture" alt="">
               <div class="fl">
                 <h4>{{course.curriculum_title}}</h4>
@@ -22,7 +22,7 @@
               查看更多课程>
             </div>
           </div>
-          <div class="price height" :style="{height:courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+60+'px'}">¥{{courseList.totalPresentPrice}}</div>
+          <div class="price height" :style="{height:courseList.CurriculumPayApplyList.length > 3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+70+'px'}">¥{{courseList.totalPresentPrice}}ll{{courseList.CurriculumPayApplyList.length}}</div>
           <div class="telephone height" :style="{height: courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+60+'px'}">
             <p>客服电话</p>
             <p>010-6270 1911</p>
@@ -60,11 +60,11 @@ import { store as persistStore } from '~/lib/core/store'
         return new Promise((resolve, reject) => {
           home.curriculumPayApply().then(response => {
            this.curriculumPayData = response.data.curriculumPayApply
-           console.log(response, '123')
+          //  console.log(response, '123')
            for(let item of response.data.curriculumPayApply){
              item.create_time = this.timestampToTime(item.create_time)
             //  console.log(this.time, '678')
-            console.log(item, '这是item')
+              // console.log(item, '这是item')
            }
             resolve(true)
           })
