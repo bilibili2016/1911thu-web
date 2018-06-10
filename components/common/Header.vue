@@ -318,11 +318,7 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
-<<<<<<< HEAD
-      if(!this.bindTelData.captchaDisable && this.bindTelData.exist){
-=======
       if (!this.bindTelData.captchaDisable) {
->>>>>>> wuyy
         return new Promise((resolve, reject) => {
           auth.smsCodes(this.registerData).then(response => {
             this.$message({
@@ -344,22 +340,6 @@ export default {
               }
             }, 1000);
           });
-<<<<<<< HEAD
-          this.bindTelData.captchaDisable = true;
-          this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
-          let interval = setInterval(() => {
-            if (this.bindTelData.seconds <= 0) {
-              this.bindTelData.getCode = "获取验证码";
-              this.bindTelData.seconds = 30;
-              this.bindTelData.captchaDisable = false;
-              clearInterval(interval);
-            } else {
-              this.bindTelData.getCode =
-                --this.bindTelData.seconds + "秒后重新发送";
-            }
-          }, 1000);
-=======
->>>>>>> wuyy
         });
       }
     },
@@ -371,20 +351,10 @@ export default {
             type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-<<<<<<< HEAD
-
-          if(response.status === 0 ){
-            this.bindTelData.captchaDisable=false;
-            this.bindTelData.exist=true;
-          }else{
-            this.bindTelData.captchaDisable=true;
-            this.bindTelData.exist=false;
-=======
           if (response.status != "0") {
             this.bindTelData.captchaDisable = true;
           } else {
             this.bindTelData.captchaDisable = false;
->>>>>>> wuyy
           }
         });
       });
@@ -461,29 +431,6 @@ export default {
         });
       });
     },
-<<<<<<< HEAD
-
-    // 获取微信返回权限
-    async judgeWX() {
-      return new Promise((resolve, reject) => {
-        auth.judgeWX(this.WxLogin).then(response => {
-          console.log(response.data);
-          // if(response.status === "100100"){
-          //     clearInterval(timewx);
-          //     this.$message({
-          //       type: "error",
-          //       message: response.msg
-          //     });
-          // }
-          // if(response.status === "0"){
-          //    clearInterval(timewx);
-          //   // console.log(response.data,"已有账号直接登录，返回token");
-          // }
-          // if(response.status === "100102"){
-          //    clearInterval(timewx);
-          //   // console.log(response.data,"未绑定手机");
-          // }
-=======
     // 获取微信登录权限
     async getWXLogin() {
       return new Promise((resolve, reject) => {
@@ -504,7 +451,6 @@ export default {
             clearInterval(timewx);
             // console.log(response.data,"未绑定手机");
           }
->>>>>>> wuyy
         });
       });
     },
@@ -652,9 +598,6 @@ export default {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
-<<<<<<< HEAD
-       this.$bus.$emit('selectProfileIndex', item)
-=======
       this.$bus.$emit("selectProfileIndex", item);
       // switch (window.location.pathname) {
       //   case '/':
@@ -664,7 +607,6 @@ export default {
 
       //     break
       // }
->>>>>>> wuyy
     }
   },
   mounted () {
