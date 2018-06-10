@@ -294,7 +294,7 @@
         this.$router.push(item);
       },
       goShop(){
-        this.goLink('/course/pages/categoryd');
+        this.goLink('/shop/checkedCourse');
       },
       empty(){
 
