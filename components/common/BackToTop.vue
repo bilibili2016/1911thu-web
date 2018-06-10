@@ -145,7 +145,7 @@ export default {
     height: 50px;
     border-radius: 4px;
     line-height: 45px;
-    background-color: #fcd23f;
+    background-color: #7200ff;
     transition: all 300ms;
     span {
       width: 24px;
@@ -175,7 +175,7 @@ export default {
     height: 50px;
     border-radius: 4px;
     line-height: 45px;
-    background-color: #fcd23f;
+    background-color: #7200ff;
     transition: all 300ms;
     span {
       width: 24px;
