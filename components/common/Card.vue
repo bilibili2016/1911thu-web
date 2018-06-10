@@ -259,11 +259,11 @@
           <div class="mask"></div>
           <div class="common-button btn-bg">
             <div v-if="isAuthenticated">
-              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button>
-              <el-button type="primary" plain @click="goLink('player')" v-if="privileMsg === false">立即观看2</el-button>
+              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
+              <el-button type="primary" plain @click="goLink('player')" v-if="privileMsg === false">立即观看</el-button>
             </div>
             <div v-else>
-              <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即购买3</el-button>
+              <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看</el-button>
             </div>
           </div>
         </div>
@@ -282,10 +282,10 @@
           <div class="common-button">
             <div v-if="isAuthenticated">
               <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习4</el-button>
-              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买5</el-button>
+              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
             <div v-else>
-              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买6</el-button>
+              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
           </div>
         </div>
