@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <div class="center category-style">
+      <div class="center category-style categoryd">
         <div class="college">
            <li class="title">学院：</li>
           <ul>

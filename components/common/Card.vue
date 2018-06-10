@@ -1360,7 +1360,7 @@ export default {
       }
       .study {
         // padding: 30px 40px 0;
-        padding: 20px 38px 0px 0px;
+        padding: 20px 0 0 0;
         border-top: 1px rgba(232, 214, 247, 1) solid;
         // margin-top: 65px;
         p {
