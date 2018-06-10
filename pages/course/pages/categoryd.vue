@@ -44,7 +44,7 @@
     </div>
     <!-- <v-filter></v-filter> -->
      <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
     <!-- v-if="isShowTip" -->
     <div >
@@ -93,16 +93,16 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 5,
+        pagesize: 8,
         total: 5
       },
       categoryData: [],
       curriculumListForm: {
         categoryIda: null,
-        categoryIdb: null,
-        sortBy: 1,
-        pages: 1,
-        limits: 8
+          categoryIdb: null,
+          sortBy: 1,
+          pages: 1,
+          limits: 8
       },
       data: [],
       data2: [],
@@ -123,6 +123,19 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setCid", "setPid"]),
+    handleCurrentChange(val){
+        this.pagemsg.page = val;
+        this.curriculumListForm.pages = val
+        this.curriculumListForm.limits = 8
+
+        return new Promise((resolve, reject) => {
+          home.curriculumList(this.curriculumListForm).then(response => {
+            this.categoryData = response.data.curriculumList
+            this.pagemsg.total = response.data.pageCount
+            resolve(true)
+          })
+        })
+      },
     handleItemOne(item, index) {
       this.bgmsg = index;
     },
@@ -179,6 +192,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList;
+          // this.cid= '1'
           switch (this.cid) {
 
               case '1':
