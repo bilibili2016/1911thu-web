@@ -117,11 +117,33 @@
             color: #222;
             .courseNumber{
                 margin-left: 47px;
+                .courseNumberInput{
+                    border: 1px solid #6417A6;
+                    width: 134px;
+                    // height: 34px;
+                    .el-input-number__decrease,
+                    .el-input-number__increase{
+                        background: #fff;
+                    }
+                    .el-input-number__decrease{
+                        border-right:1px solid #6417A6;
+                    }
+                    .el-input-number__increase{
+                        border-left:1px solid #6417A6;
+                    }
+                    .el-input__inner{
+                        border: none !important;
+                    }
+                }
                 .deleteChecked{
                     font-size: 16px;
                     color: #222;
                     margin-right: 47px;
                     cursor: pointer;
+                }
+                .el-icon-minus,
+                .el-icon-plus{
+                    color: #6417A6 !important;
                 }
                 .person{
                     font-size: 16px;
