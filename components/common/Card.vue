@@ -260,10 +260,10 @@
           <div class="common-button btn-bg">
             <div v-if="isAuthenticated">
               <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-              <el-button type="primary" plain @click="goBuy(courseList.id)" v-if="privileMsg === false">立即购买</el-button>
+              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
             <div v-else>
-              <el-button type="primary" plain @click="getMore()" v-if="privileMsg === false">立即购买</el-button>
+              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
           </div>
         </div>
