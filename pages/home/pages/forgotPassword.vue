@@ -55,7 +55,7 @@ export default {
       },
       formRules: {
         password: [
-          { required: true, message: "请输入账户密码1", trigger: "blur" },
+          { required: true, message: "请输入您新设置的密码", trigger: "blur" },
           {
             type: "string",
             min: 8,

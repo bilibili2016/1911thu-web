@@ -15,8 +15,6 @@ config.head.script = [
      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
      async: true
    }
-
-
 ]
 
 module.exports = config
