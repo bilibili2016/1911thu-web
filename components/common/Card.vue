@@ -260,7 +260,7 @@
           <div class="common-button btn-bg">
             <div v-if="isAuthenticated">
               <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
+              <el-button type="primary" plain @click="goLink('player')" v-if="privileMsg === false">立即观看</el-button>
             </div>
             <div v-else>
               <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
@@ -458,9 +458,20 @@ export default {
           break;
       }
     },
-    handleCheck(item, index) {
-      this.checked = true;
-      // let tmp = {curriculumId:item.id}
+    methods: {
+      ...mapActions("auth", ["setProductsNum", 'setNumber', 'setKid']),
+      goLink(item) {
+      this.$router.push(item);
+    },
+      selCheckboxChange(item,index){
+        // console.log('123')
+        // console.log(item, '这是item')
+        // console.log(item.is_checked === false)
+        if (item.is_checked === false) {
+          item.is_checked = false
+          this.curriculumcartid.numberArr.push(item.id)
+          this.curriculumcartids.cartid = item.id
+          this.delShopCart()
 
       // let pronum = this.productsNum;
       // pronum = pronum + 1;
@@ -468,6 +479,13 @@ export default {
       //   pn: pronum
       // });
 
+      },
+      // goBuy(item, index) {
+      //   this.curriculumcartids.cartid = item.curriculum_id;
+      //   this.addShopCart();
+      // },
+    addShopCarts() {
+      this.curriculumcartids.cartid = this.kid;
       return new Promise((resolve, reject) => {
         home.addShopCart(tmp).then(response => {
           let newData = response.data.data;
