@@ -271,7 +271,7 @@ export default {
         ],
         checked: [
           {
-            type: "array",
+            // type: "array",
             required: true,
             message: "请勾选同意用户协议",
             trigger: "change"
