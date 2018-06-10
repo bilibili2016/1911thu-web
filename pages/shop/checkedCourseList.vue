@@ -5,8 +5,8 @@
       <div class="table">
         <div class="tableHeader">
           <span class="courseName">课程名称</span>
-          <span class="price">单价</span>
-          <span class="operation">操作</span>
+          <span class="price" style="margin-left:830px;">单价</span>
+          <!-- <span class="operation">操作</span> -->
         </div>
         <div class="tableBody">
           <div v-for="(course,index) in courseList" :key="index">
@@ -21,12 +21,12 @@
             <div class="coursePrice">
               ￥{{course.present_price}}
             </div>
-            <div class="courseOperation">
+            <!-- <div class="courseOperation">
               删除
-            </div>
+            </div> -->
           </div>
         </div>
-        <!-- <div class="tableFooter">商品总额：￥94.00</div> -->
+        <div class="tableFooter">商品总额：￥{{sum}}</div>
       </div>
     </div>
   </div>
@@ -79,7 +79,8 @@ import { store as persistStore } from '~/lib/core/store'
           code: [
             { required: true, message: '请填写短信验证码', trigger: 'blur' }
           ],
-        }
+        },
+        sum: 0.00
       }
     },
     methods: {
@@ -98,6 +99,7 @@ import { store as persistStore } from '~/lib/core/store'
       document.getElementsByClassName("footerBox")[0].style.display="inline"
       this.payIndex = persistStore.get('pay')
       this.curriculumPayApply()
+       this.sum =persistStore.get('price')
     }
   }
 </script>

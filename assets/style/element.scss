@@ -831,6 +831,21 @@
     font-size: 13px;
     margin-bottom: 6px;
   }
+
+  .submit{
+    margin: 41px auto 20px;
+    width: 160px;
+    .el-button {
+      font-size: 14px;
+      padding: 12px 65px;
+      border-radius: 6px;
+    }
+    .el-button--primary {
+      color: #fff;
+      background-color: #6417A6;
+      border-color: #6417A6;
+    }
+  }
   .el-dialog{
     width: 1000px!important;
     height: 644px;
@@ -961,4 +976,9 @@
     }
   }
 }
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset !important; //关于解决输入框背景颜色
+    // -webkit-text-fill-color: #606266 !important; //关于接输入框文字颜色
+
+  }
 

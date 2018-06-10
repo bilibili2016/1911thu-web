@@ -26,7 +26,7 @@
           <el-card>
             <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
-                <v-card v-if="newDataing.length" :data="newDataing" :config="configOne"></v-card>
+                <v-card v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -36,7 +36,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="已完成" name="second">
-                <v-card v-if="newDataReady.length" :data="newDataReady" :config="configTwo"></v-card>
+                <v-card v-if="newDataReady && newDataReady.length>0" :data="newDataReady" :config="configTwo"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -46,7 +46,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="我的收藏" name="third">
-                <v-card v-if="collectionData.length" :data="collectionData" :config="configZero"></v-card>
+                <v-card v-if="collectionData && collectionData.length>0" :data="collectionData" :config="configZero"></v-card>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -66,7 +66,14 @@
             <div slot="header" class="clearfix">
               <span>我的消息</span>
             </div>
-            <v-info></v-info>
+            <v-info @noMsg="isNoMyMsg"></v-info>
+            <div class="content">
+              <div class="noCourse" v-if="noMyMsg">
+                <img :src="noMsgImg" alt="">
+                <h4>抱歉，现在还没有我的消息呦~</h4>
+                <!-- <p>去学习</p> -->
+              </div>
+            </div>
           </el-card>
         </el-tab-pane>
         <!-- 个人设置 -->
@@ -86,7 +93,7 @@
           </div>
         </el-tab-pane>
         <!-- 我的选课 -->
-        <el-tab-pane name="tab-sixth" @tab-click="goShop">
+        <el-tab-pane name="tab-sixth">
         <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
           <span slot="label"><i class="el-icon-date"></i> 我的选课</span>
         </el-tab-pane>
@@ -114,6 +121,7 @@
     data() {
       return {
         isShowNoCourse:false,
+        noMyMsg:false,
         study:false,
         avator: require("~/assets/images/profile_avator01.png"),
         noMsgImg:require("~/assets/images/noMsg.png"),
@@ -260,12 +268,22 @@
         isUpdate:false
       };
     },
+    watch:{
+      activeTab(val){
+        if(val == 'tab-sixth'){
+          this.goShop()
+        }
+      }
+    },
     computed: {
       ...mapState('auth', [
         'gid'
       ])
     },
     methods:{
+      isNoMyMsg(isShow){
+        this.noMyMsg  = isShow
+      },
       isShowMsg(isShow){
         this.isShowNoCourse  = isShow
       },
@@ -275,8 +293,7 @@
       goLink(item) {
         this.$router.push(item);
       },
-      goShop(tab){
-        // console.log(tab);
+      goShop(){
         this.goLink('/shop/checkedCourse');
       },
       empty(){

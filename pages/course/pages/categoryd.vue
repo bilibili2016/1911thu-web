@@ -44,11 +44,13 @@
     </div>
     <!-- <v-filter></v-filter> -->
      <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
-    <!-- <div v-if="isShowTip">
+    <!-- v-if="isShowTip" -->
+    <div >
       <v-unlogged v-if="!this.isAuthenticated"></v-unlogged>
-    </div> -->
+
+    </div>
     <!-- <v-shop></v-shop> -->
   </div>
 </template>
@@ -91,16 +93,16 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 5,
+        pagesize: 8,
         total: 5
       },
       categoryData: [],
       curriculumListForm: {
         categoryIda: null,
-        categoryIdb: null,
-        sortBy: 1,
-        pages: 1,
-        limits: 8
+          categoryIdb: null,
+          sortBy: 1,
+          pages: 1,
+          limits: 8
       },
       data: [],
       data2: [],
@@ -121,7 +123,21 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setCid", "setPid"]),
+    handleCurrentChange(val){
+        this.pagemsg.page = val;
+        this.curriculumListForm.pages = val
+        this.curriculumListForm.limits = 8
+
+        return new Promise((resolve, reject) => {
+          home.curriculumList(this.curriculumListForm).then(response => {
+            this.categoryData = response.data.curriculumList
+            this.pagemsg.total = response.data.pageCount
+            resolve(true)
+          })
+        })
+      },
     handleItemOne(item, index) {
+      console.log(index, '123')
       this.bgmsg = index;
     },
     handleItemTwo(item, index) {
@@ -155,6 +171,7 @@ export default {
       this.pidform.pids = "";
       this.setPid(this.pidform);
       this.curriculumList();
+      console.log(index, '123')
     },
     handleClick(tab, event) {},
     curriculumList() {
@@ -177,14 +194,31 @@ export default {
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList;
-          // console.log(response, "返回的response");
-          if (this.cid === "50") {
-            this.data2 = this.data[0];
-          } else if (this.cid === "51") {
-            this.data2 = this.data[1];
-          } else {
-            this.data2 = this.data[2];
-          }
+          // this.cid= '1'
+          switch (this.cid) {
+
+              case '1':
+                this.data2 = this.data[0]
+                break;
+              case '16':
+                this.data2 = this.data[1]
+                break;
+              case '17':
+                this.data2 = this.data[2]
+                break;
+              case '18':
+                this.data2 = this.data[3]
+                break;
+              case '19':
+                this.data2 = this.data[4]
+                break;
+              case '20':
+                this.data2 = this.data[5]
+                break;
+              default:
+                // this.$router.push("/course/pages/search");
+                break;
+            }
           resolve(true);
         });
       });
@@ -200,11 +234,13 @@ export default {
     this.bgmsgs = Number(this.pid) + Number(1);
     this.cidform.cids = "";
     this.pidform.pids = "";
-    this.bgmsg = 0;
-
+    // this.bgmsg = 0;
+    this.activeName = 'first'
     this.setCid(this.cidform);
    this.pidform.pids = "";
+   this.bgmsg = this.cid
       this.setPid(this.pidform);
+      //  this.data2 = this.data[0];
     this.curriculumList();
     this.childCategoryList();
   }

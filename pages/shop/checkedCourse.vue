@@ -6,11 +6,11 @@
         <!-- v-if="courseList.CurriculumPayApplyList.length<3"  -->
         <div class="title clearfix">
           <span class="fl">{{courseList.company_name}}</span>
-          <span class="fr">{{courseList.batch}}</span>
+          <span class="fr">{{courseList.create_time}}</span>
         </div>
         <div class="content">
           <div class="course">
-            <div class="courseOne" v-for="(course,index) in courseList.CurriculumPayApplyList" :key="index">
+            <div class="courseOne" v-for="(course,index) in courseList.CurriculumPayApplyList" :key="index" v-if="index<3">
               <img class="fl" :src="course.curriculum_picture" alt="">
               <div class="fl">
                 <h4>{{course.curriculum_title}}</h4>
@@ -22,7 +22,7 @@
               查看更多课程>
             </div>
           </div>
-          <div class="price height" :style="{height:courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+60+'px'}">¥{{courseList.totalPresentPrice}}</div>
+          <div class="price height" :style="{height:courseList.CurriculumPayApplyList.length > 3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+70+'px'}">¥{{courseList.totalPresentPrice}}ll{{courseList.CurriculumPayApplyList.length}}</div>
           <div class="telephone height" :style="{height: courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+60+'px'}">
             <p>客服电话</p>
             <p>010-6270 1911</p>
@@ -47,6 +47,7 @@ import { store as persistStore } from '~/lib/core/store'
         curriculumPayData: [],
         allPrice: "69.00",
         status: "等待审核",
+        time: null
       }
     },
      mounted () {
@@ -59,18 +60,33 @@ import { store as persistStore } from '~/lib/core/store'
         return new Promise((resolve, reject) => {
           home.curriculumPayApply().then(response => {
            this.curriculumPayData = response.data.curriculumPayApply
+          //  console.log(response, '123')
+           for(let item of response.data.curriculumPayApply){
+             item.create_time = this.timestampToTime(item.create_time)
+            //  console.log(this.time, '678')
+              // console.log(item, '这是item')
+           }
             resolve(true)
           })
         })
       },
       selectPayApply(item,index){
-        // console.log(item, 'item')
-        // console.log(index, 'index')
          persistStore.set('pay', index)
+          persistStore.set('price', item.totalPresentPrice)
          this.$router.push('/shop/checkedCourseList')
       },
       goLink(item){
         this.$router.push(item)
+      },
+      timestampToTime(timestamp) {
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        let Y = date.getFullYear() + '-';
+        let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        let D = date.getDate() + ' ';
+        let h = date.getHours() + ':';
+        let m = date.getMinutes() + ':';
+        let s = date.getSeconds();
+        return Y+M+D+h+m+s;
       }
     },
   }

@@ -263,6 +263,12 @@ export default {
           // console.log(response, "这是课程列表");
           // this.courseList = response.data.curriculumDetail
           this.catalogs = response.data.curriculumCatalogList;
+          console.log(this.catalogs, '这是catalogs')
+          for(let item of this.catalogs){
+            for(let i of item.childList){
+              i.video_time = Math.round((i.video_time)/60)
+            }
+          }
         });
       });
     },
@@ -313,6 +319,7 @@ export default {
     document.getElementsByClassName("footerBox")[0].style.display = "inline";
     this.kidForm.ids = this.kid;
     this.evaluateListForm.ids = this.kid;
+    this.activeName ='first'
     this.getCourseDetail();
     this.getEvaluateList();
     this.getCourseList();
