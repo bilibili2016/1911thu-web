@@ -137,6 +137,7 @@ export default {
         })
       },
     handleItemOne(item, index) {
+      console.log(index, '123')
       this.bgmsg = index;
     },
     handleItemTwo(item, index) {
@@ -170,6 +171,7 @@ export default {
       this.pidform.pids = "";
       this.setPid(this.pidform);
       this.curriculumList();
+      console.log(index, '123')
     },
     handleClick(tab, event) {},
     curriculumList() {
@@ -232,11 +234,13 @@ export default {
     this.bgmsgs = Number(this.pid) + Number(1);
     this.cidform.cids = "";
     this.pidform.pids = "";
-    this.bgmsg = 0;
+    // this.bgmsg = 0;
     this.activeName = 'first'
     this.setCid(this.cidform);
    this.pidform.pids = "";
+   this.bgmsg = this.cid
       this.setPid(this.pidform);
+      //  this.data2 = this.data[0];
     this.curriculumList();
     this.childCategoryList();
   }
