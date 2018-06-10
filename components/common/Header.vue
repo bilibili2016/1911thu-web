@@ -213,6 +213,7 @@ export default {
       scanCodeShow: false,
       bindSuccessShow: false,
       WxLogin:{
+        self_redirect:true,
         id:"wxchatIMG", 
         appid: "wxefa2295aae13fe2e", 
         scope: "snsapi_login", 
