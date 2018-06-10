@@ -504,6 +504,8 @@ export default {
     },
     selectCid(item, index) {
       this.kidForm.kids = item.id;
+      // persistStore.set('curriculumId', item.id)
+
       this.setKid(this.kidForm);
       this.curriculumcartids.cartid = item.id;
 
@@ -527,6 +529,8 @@ export default {
     },
     selectCid2(item, index) {
       this.kidForm.kids = item.id;
+       persistStore.set("curriculumId", item.id)
+      //  console.log('123')
       this.setKid(this.kidForm);
       this.curriculumcartids.cartid = item.id;
     },

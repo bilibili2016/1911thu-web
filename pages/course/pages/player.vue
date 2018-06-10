@@ -246,7 +246,8 @@ export default {
       }
       console.log(this.kid)
       let kid = this.kid
-      this.playerForm.curriculumId = persistStore.get('kid');
+      //  persistStore.set("curriculumId", item.id)
+      this.playerForm.curriculumId = persistStore.get('curriculumId');
 
       // this.playerForm.catalogId = persistStore.get("catalogId");
       player = TCPlayer("movd", this.tcplayer);
