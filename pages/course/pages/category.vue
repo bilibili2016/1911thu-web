@@ -105,7 +105,8 @@
     methods: {
       ...mapActions('auth', [
         'setCid',
-        'setPid'
+        'setPid',
+        'setProductsNum'
       ]),
       handleCurrentChange(val){
         this.pagemsg.page = val;
@@ -199,6 +200,7 @@
           home.curriculumList(this.curriculumListForm).then(response => {
             this.categoryData = response.data.curriculumList
             this.pagemsg.total = response.data.pageCount
+            setProductsNum({pn:his.categoryData.length})
             resolve(true)
           })
         })

@@ -1,7 +1,24 @@
 <template>
   <div>
     <div class="classification">
-      <v-hots></v-hots>
+       <div class="classification">
+          <div class="clsTitle clearfix">
+            <div class="fl hotBtn">
+              <el-tabs v-model="activeName" @tab-click="handleClick">
+                <!-- <el-tab-pane label="全部" name="first"></el-tab-pane> -->
+                <!-- <el-tab-pane label="全部" name="first"></el-tab-pane> -->
+                <el-tab-pane label="最新" name="first"></el-tab-pane>
+                <el-tab-pane label="最热" name="second"></el-tab-pane>
+              </el-tabs>
+            </div>
+            <div class="fr rightPages">
+              <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
+              </el-switch>隐藏已参加课程
+              <el-pagination class="fr" small layout="pager, prev, next" :total="20"></el-pagination>
+            </div>
+
+          </div>
+        </div>
       <div class="classList">
         <ul>
           <li v-for="(item,index) in classList" :key="index" @click="bind(index)">{{item}}</li>
@@ -42,7 +59,17 @@
             resolve(true)
           })
         })
-      }
+      },
+       handleClick(tab, event) {
+        // console.log(tab, '这是tab')
+        if(tab.name === 'first'){
+          this.newsCurriculumForm.sortBy = 1
+          this.recommendCurriculumList()
+        } else {
+          this.newsCurriculumForm.sortBy = 2
+          this.recommendCurriculumList()
+        }
+      },
     },
     data() {
       return {
@@ -71,13 +98,16 @@
         newsCurriculumForm: {
           pages: 0,
           limits: 100,
-          evaluateLimit: null
-        }
+          evaluateLimit: null,
+          sortBy: null
+        },
+        activeName: null
       };
     },
     mounted () {
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
+      this.activeName = 'first'
       this.recommendCurriculumList()
     }
   };

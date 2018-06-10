@@ -87,6 +87,7 @@
       },
       addID() {
         this.courseList.addNewID = true;
+         this.$emit('isShowMsg',false)
       },
       doSubmit() {
         // this.binding.success = true;

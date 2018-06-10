@@ -70,7 +70,7 @@
             <div class="content">
               <div class="noCourse" v-if="noMyMsg">
                 <img :src="noMsgImg" alt="">
-                <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
+                <h4>抱歉，现在还没有我的消息呦~</h4>
                 <!-- <p>去学习</p> -->
               </div>
             </div>
@@ -294,7 +294,7 @@
         this.$router.push(item);
       },
       goShop(){
-        this.goLink('/course/pages/categoryd');
+        this.goLink('/shop/checkedCourse');
       },
       empty(){
 
