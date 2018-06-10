@@ -116,7 +116,8 @@ export default {
           content:
             "中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...",
             link: 'activity/degree'
-        }
+        },
+        
       ],
       numSrc: require("@/assets/images/home_num.png"),
       value1: 4,
@@ -133,11 +134,7 @@ export default {
         }
       ],
       carouselSrc: require("@/assets/images/home_avator02.png"),
-      items: [
-        { picture: require("@/assets/images/banner_1.png") },
-        { picture: require("@/assets/images/banner_2.png") },
-        { picture: require("@/assets/images/banner_3.png") }
-      ],
+      items: [],
       itemsData:{
         limit:null,
         types:1

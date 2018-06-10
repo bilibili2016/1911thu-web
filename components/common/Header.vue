@@ -23,9 +23,7 @@
           </div>
         </div>
         <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
-        <!-- {{shoppingCartNum}} -->
-        <!-- <i v-show="shoppingCartNum>0"></i> -->
-          <img src="@/assets/images/shoppingCart.png" alt="">
+          <span class="cartIcon"></span>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -219,6 +217,7 @@ export default {
         getCode: "获取验证码",
         seconds: 60,
         captchaDisable: false,
+        exist:false,
         checked: false
       },
       getWXLoginImg: {
@@ -305,7 +304,7 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
-      if(!this.bindTelData.captchaDisable){
+      if(!this.bindTelData.captchaDisable && this.bindTelData.exist){
         return new Promise((resolve, reject) => {
         auth.smsCodes(this.registerData).then(response => {
           this.$message({
@@ -339,8 +338,10 @@ export default {
           });
           if(response.status != "0"){
             this.bindTelData.captchaDisable=true;
+            this.bindTelData.exist=true;
           }else{
             this.bindTelData.captchaDisable=false;
+            this.bindTelData.exist=false;
           }
         });
       });
@@ -503,7 +504,6 @@ export default {
       this.wxLogin();
     },
     getWXCode() {
-      // console.log(this.getWXLoginImg.time);
       if (this.getWXLoginImg.time < 1) {
         clearInterval(timewx);
         this.wxLogin();
