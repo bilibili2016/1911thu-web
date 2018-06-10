@@ -64,9 +64,8 @@ import { store as persistStore } from '~/lib/core/store'
         })
       },
       selectPayApply(item,index){
-        // console.log(item, 'item')
-        // console.log(index, 'index')
          persistStore.set('pay', index)
+          persistStore.set('price', item.totalPresentPrice)
          this.$router.push('/shop/checkedCourseList')
       },
       goLink(item){
