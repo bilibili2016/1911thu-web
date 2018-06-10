@@ -37,17 +37,17 @@
         <div class="tableFooter" v-if="courseList && courseList.length > 0">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
-              <!-- <span class="deleteChecked">删除选中的课程</span> -->
-          <span class="person">购买人数：</span>
-          <span class="number clearfix">
-                <i class="fl minus el-icon-minus"  @click="delNumber"></i>
-                <input type="text" class="fl num" v-model.number="numForm.number" @blur="changeNumber">
-                <i class="fl add el-icon-plus" @click="addNumber"></i>
-              </span>
+            <!-- <span class="deleteChecked">删除选中的课程</span> -->
+            <span class="person">购买人数：</span>
+            <span class="number clearfix">
+              <i class="fl minus el-icon-minus"  @click="delNumber"></i>
+              <input type="text" class="fl num" v-model.number="numForm.number" @blur="changeNumber">
+              <i class="fl add el-icon-plus" @click="addNumber"></i>
+            </span>
           </span>
           <span class="commitOrder fr">
-              <el-button @click="showCommit">提交</el-button>
-            </span>
+            <el-button @click="showCommit">提交</el-button>
+          </span>
           <span class="allPrice fr">￥{{prices}}</span>
 
         </div>
@@ -62,7 +62,13 @@
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="ruleForm" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
-            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearch" placeholder="请输入公司名称" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+            <el-autocomplete
+              v-model="companyInfo.companyname"
+              :fetch-suggestions="querySearch"
+              placeholder="请输入公司名称"
+              :trigger-on-focus="false"
+              @select="handleSelect"
+            ></el-autocomplete>
           </el-form-item>
           <el-form-item label="公司地址：" prop="companyaddress">
             <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
@@ -83,7 +89,7 @@
           </el-form-item>
         </el-form>
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -117,19 +123,31 @@ export default {
         contactperson: "",
         phones: "",
         codes: "",
-        types: 6
+        types: 6,
+        getCode: '获取验证码',
+        seconds: 30
       },
-      showCommit() {
-        this.showInfo = true;
-        // this.$router.push('/shop/checkedCourse');
-        return new Promise((resolve, reject) => {
-          home.addChecked(this.addArray).then(response => {
-            resolve(true);
-          });
-        });
+      rules: {
+        companyname: [
+          { required: true, message: "请输入公司名称", trigger: "blur" }
+        ],
+        companyaddress: [
+          { required: true, message: "请填写公司地址", trigger: "blur" }
+        ],
+        contactperson: [
+          { required: true, message: "请填写联系人姓名", trigger: "blur" }
+        ],
+        phones: [
+          { required: true, message: "请填写手机号", trigger: "blur" },
+          { type: "number", message: "请填写正确手机号", trigger: "blur" }
+        ],
+        codes: [
+          { required: true, message: "请填写短信验证码", trigger: "blur" }
+        ]
       },
-      close() {
-        this.showInfo = false;
+      arraySum: 0,
+      curriculumcartids: {
+        cartid: null
       },
       addArray: {
         curriculumcartid: []
@@ -293,7 +311,6 @@ export default {
               this.$router.push("/shop/checkedCourse");
               resolve(true);
             });
-            this.courseList = body;
           });
         } else {
           return false;
@@ -324,13 +341,21 @@ export default {
             type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
+          this.companyInfo.captchaDisable = true;
+          this.companyInfo.getCode = this.companyInfo.seconds + "秒后重新发送";
+          let interval = setInterval(() => {
+            if (this.companyInfo.seconds <= 0) {
+              this.companyInfo.getCode = "获取验证码";
+              this.companyInfo.seconds = 60;
+              this.captchaDisable = false;
+              clearInterval(interval);
+            } else {
+              this.companyInfo.getCode =
+                --this.companyInfo.seconds + "秒后重新发送";
+            }
+          }, 1000);
         });
-      }
-    },
-    mounted() {
-      document.getElementsByClassName("headerBox")[0].style.display = "inline";
-      document.getElementsByClassName("footerBox")[0].style.display = "inline";
-      this.shopCartList();
+      });
     }
   }
 };
