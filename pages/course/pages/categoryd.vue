@@ -171,6 +171,7 @@ export default {
       this.pidform.pids = "";
       this.setPid(this.pidform);
       this.curriculumList();
+
       console.log(index, '123')
     },
     handleClick(tab, event) {},

@@ -260,7 +260,7 @@
           <div class="common-button btn-bg">
             <div v-if="isAuthenticated">
               <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
+              <el-button type="primary" plain @click="goLink('player')" v-if="privileMsg === false">立即观看</el-button>
             </div>
             <div v-else>
               <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
@@ -424,6 +424,9 @@
     },
     methods: {
       ...mapActions("auth", ["setProductsNum", 'setNumber', 'setKid']),
+      goLink(item) {
+      this.$router.push(item);
+    },
       selCheckboxChange(item,index){
         // console.log('123')
         // console.log(item, '这是item')
@@ -459,8 +462,7 @@
       //   this.addShopCart();
       // },
     addShopCarts() {
-      let a = this.kid
-      this.curriculumcartids.cartid = 17;
+      this.curriculumcartids.cartid = this.kid;
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push("/shop/shoppingCart");
