@@ -354,7 +354,7 @@
 </script>
 <style scope lang="scss">
   .profile{
-    width: 1120px;
+    // width: 1120px;
     /* 我的首页 没有课程 */
     .content .noCourse{
       width: 100%;

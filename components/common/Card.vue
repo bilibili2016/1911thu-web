@@ -836,7 +836,7 @@ export default {
         }
       }
       .line-centers {
-        padding: 0px 14px 0px 0;
+        padding: 0px 14px 0px 13px;
         p {
           margin-bottom: 10px;
           font-size: 14px;
