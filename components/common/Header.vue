@@ -213,6 +213,7 @@ export default {
       scanCodeShow: false,
       bindSuccessShow: false,
       WxLogin:{
+        self_redirect:true,
         id:"wxchatIMG",
         appid: "wxefa2295aae13fe2e",
         scope: "snsapi_login",
@@ -312,8 +313,6 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
-      console.log(this.bindTelData.captchaDisable);
-      console.log(this.bindTelData.exist);
       if(!this.bindTelData.captchaDisable && this.bindTelData.exist){
         return new Promise((resolve, reject) => {
         auth.smsCodes(this.registerData).then(response => {
