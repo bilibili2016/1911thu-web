@@ -252,7 +252,7 @@ export default {
               appID : response.data.playAuthInfo.appID,
               sign : response.data.playAuthInfo.sign,
               t : response.data.playAuthInfo.t,
-             exper : response.data.playAuthInfo.appID
+              exper : response.data.playAuthInfo.exper
             })
           } else {
             player.loadVideoByID({
