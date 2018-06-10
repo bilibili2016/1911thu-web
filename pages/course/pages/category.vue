@@ -200,7 +200,7 @@
           home.curriculumList(this.curriculumListForm).then(response => {
             this.categoryData = response.data.curriculumList
             this.pagemsg.total = response.data.pageCount
-            setProductsNum({pn:his.categoryData.length})
+            this.setProductsNum({pn:this.categoryData.length})
             resolve(true)
           })
         })
