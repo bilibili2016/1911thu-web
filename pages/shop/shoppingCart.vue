@@ -237,6 +237,9 @@ export default {
         this.addArray.curriculumcartid.push(item.id);
         this.arraySum = this.arraySum + Number(item.present_price);
       }
+      if(this.addArray.curriculumcartid.length==this.courseList.length){
+        this.selectAll = true
+      }
     },
     addNumber() {
       this.numForm.number = Number(this.numForm.number) + Number(1);
@@ -285,6 +288,7 @@ export default {
             return Object.assign({}, item, { checkMsg: true });
           });
           this.courseList = body;
+          this.selectAll = true
         });
       });
     },
