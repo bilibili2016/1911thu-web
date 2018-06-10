@@ -201,7 +201,7 @@ export default {
     this.cidform.cids = "";
     this.pidform.pids = "";
     this.bgmsg = 0;
-
+    this.activeName = 'first'
     this.setCid(this.cidform);
    this.pidform.pids = "";
       this.setPid(this.pidform);

@@ -199,6 +199,7 @@
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
       // console.log(Number(this.cid), '123')
+      this.activeName = 'first'
       this.bgmsg = this.cid
       this.bgmsgs = this.pid
       this.childCategoryList()
