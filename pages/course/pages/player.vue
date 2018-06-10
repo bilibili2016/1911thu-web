@@ -95,6 +95,9 @@ import { other, auth, home } from "~/lib/v1_sdk/index";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 export default {
+  computed: {
+    ...mapState("auth", ["kid"])
+  },
   data() {
     return {
       showReportBug: false,
@@ -156,8 +159,8 @@ export default {
         hsgs: true
       },
       playerForm: {
-        curriculumId: null,
-        catalogId: null
+        curriculumId: '',
+        catalogId: ''
       },
       fileID: null,
       appID: null,
@@ -175,7 +178,7 @@ export default {
         }
       },
       playerDetailForm: {
-        curriculumId: null
+        curriculumId: ''
       },
       addEvaluateForm: {
         ids: null,
@@ -187,7 +190,10 @@ export default {
         curriculumId: null
       },
       collectMsg: 1,
-      iseve: 1
+      iseve: 1,
+      getdefaultForm: {
+          curriculumid: ''
+      }
     };
   },
 
@@ -241,11 +247,16 @@ export default {
         $("#playInner").html("");
         $("#playInner").html('<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>');
       }
-      this.playerForm.curriculumId = persistStore.get("curriculumId");
+      // console.log(this.kid)
+      let kid = this.kid
+      //  persistStore.set("curriculumId", item.id)
+      this.playerForm.curriculumId = persistStore.get('curriculumId');
+
       this.playerForm.catalogId = persistStore.get("catalogId");
       player = TCPlayer("movd", this.tcplayer);
       return new Promise((resolve, reject) => {
-        home.getPlayerInfo(this.playerForm).then(response => {
+        home.getPlayerInfos(this.playerForm).then(response => {
+          // console.log(this.playerForm, '12345678')
           if (response.data.playAuthInfo.videoViewType == false) {
             player.loadVideoByID({
               fileID : response.data.playAuthInfo.fileID,
@@ -275,6 +286,7 @@ export default {
         });
       });
     },
+
     // 反馈问题
     reportProblem() {
       this.problem.curriculumId = persistStore.get("curriculumId");

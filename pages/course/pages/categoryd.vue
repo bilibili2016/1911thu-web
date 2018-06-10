@@ -34,8 +34,9 @@
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
         <!-- <div class="pages"><el-pagination layout=" pager, prev, next" :total="1"></el-pagination></div> -->
-        <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch">
-        </el-switch>
+        <!-- <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch"> -->
+        <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch">
+        </el-switch> -->
       </div>
       <div class="carlist">
         <v-card :data="categoryData" :config="configSevent" @selectCid = 'selectCid'></v-card>
@@ -136,7 +137,7 @@ export default {
         })
       },
     handleItemOne(item, index) {
-      console.log(index, '123')
+      // console.log(index, '123')
       this.bgmsg = index;
     },
     handleItemTwo(item, index) {
@@ -170,7 +171,8 @@ export default {
       this.pidform.pids = "";
       this.setPid(this.pidform);
       this.curriculumList();
-      console.log(index, '123')
+
+      // console.log(index, '123')
     },
     handleClick(tab, event) {},
     curriculumList() {
@@ -215,7 +217,7 @@ export default {
                 this.data2 = this.data[5]
                 break;
               default:
-                // this.$router.push("/course/pages/search");
+                 this.data2 = this.data[0]
                 break;
             }
           resolve(true);

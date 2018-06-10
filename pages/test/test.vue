@@ -23,7 +23,7 @@ export default {
   },
   methods: {},
   mounted() {
-    console.log('123')
+    // console.log('123')
     function GetQueryString(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
       var r = window.location.search.substr(1).match(reg); //search,查询？后面的参数，并匹配正则
@@ -38,8 +38,6 @@ export default {
         this.wxGet(this.wxData).then(response => {
           console.log(response);
           alert(123);
-
-          
         });
       });
       // $.ajax({

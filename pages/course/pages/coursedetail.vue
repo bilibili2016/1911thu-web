@@ -6,7 +6,7 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/course/pages/newlesson' }">分类列表</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/course/pages/categorys' }">分类列表</el-breadcrumb-item>
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -59,7 +59,7 @@
           </div>
         </div>
         <!-- 评价 -->
-        <div class="evaluate-tag ">
+        <div class="evaluate-tag" >
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
@@ -85,7 +85,7 @@
                 </el-input>
               </div>
               <div class="submit">
-                <el-button type="primary" @click="dialogVisible = true">提交</el-button>
+                <el-button type="primary" @click="submit()">提交</el-button>
               </div>
               <!-- 弹窗 -->
               <el-dialog
@@ -225,11 +225,20 @@ export default {
       collectMsg: 2,
       addCollectionForm: {
         curriculumId: null
+      },
+      getdefaultForm:{
+        curriculumid: ''
       }
     };
   },
   methods: {
     handleClick() {},
+    submit(){
+      this.$message({
+        type: 'success',
+        message: '提交评价成功'
+      })
+    },
     handleClose(done) {
       this.$confirm("确认关闭？")
         .then(_ => {
@@ -262,7 +271,7 @@ export default {
           // console.log(response, "这是课程列表");
           // this.courseList = response.data.curriculumDetail
           this.catalogs = response.data.curriculumCatalogList;
-          console.log(this.catalogs, '这是catalogs')
+          // console.log(this.catalogs, '这是catalogs')
           for(let item of this.catalogs){
             for(let i of item.childList){
               i.video_time = Math.round((i.video_time)/60)
@@ -311,6 +320,15 @@ export default {
           this.collectMsg = 0;
         });
       });
+    },
+    getdefaultCurriculumCatalog(){
+      this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
+      return new Promise((resolve, reject) => {
+        home.getdefaultCurriculumCatalog(this.getdefaultForm).then(response => {
+          console.log(response, '345678')
+          persistStore.set('catalogId',response.data.defaultCurriculumCatalog.id)
+        });
+      });
     }
   },
   mounted() {
@@ -322,6 +340,7 @@ export default {
     this.getCourseDetail();
     this.getEvaluateList();
     this.getCourseList();
+    this.getdefaultCurriculumCatalog()
   }
 };
 </script>

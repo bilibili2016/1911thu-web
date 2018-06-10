@@ -185,7 +185,7 @@
                 this.data2 = this.data[5]
                 break;
               default:
-                // this.$router.push("/course/pages/search");
+                 this.data2 = this.data[0]
                 break;
             }
             resolve(true)
@@ -211,8 +211,14 @@
       document.getElementsByClassName("footerBox")[0].style.display="inline"
       // console.log(Number(this.cid), '123')
       this.activeName = 'first'
-      this.bgmsg = this.cid
-      this.bgmsgs = this.pid
+       this.cidform.cids = "";
+    this.pidform.pids = "";
+    // this.bgmsg = 0;
+    this.activeName = 'first'
+    this.setCid(this.cidform);
+   this.pidform.pids = "";
+   this.bgmsg = this.cid
+      this.setPid(this.pidform);
       this.childCategoryList()
       this.curriculumList()
     }

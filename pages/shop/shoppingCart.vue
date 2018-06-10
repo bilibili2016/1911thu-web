@@ -61,7 +61,7 @@
         <div class="infoTitle">
           <h4>为方便我们的沟通，请填写下列信息</h4>
         </div>
-        <el-form :model="companyInfo" :rules="rules" ref="ruleForm" label-width="136px" class="companyInfo">
+        <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
             <el-autocomplete
               v-model="companyInfo.companyname"
@@ -85,7 +85,7 @@
             <span @click="handleGetCode">{{companyInfo.getCode}}</span>
           </el-form-item>
           <el-form-item class="btnCommit">
-            <el-button type="primary" @click="addPaySubmit">提交</el-button>
+            <el-button type="primary" @click="addPaySubmit('companyInfo')">提交</el-button>
             <!-- <el-button type="primary" @click="submitForm('companyInfo')">提交</el-button> -->
           </el-form-item>
         </el-form>
@@ -98,7 +98,7 @@
 import { indexOf } from "lodash";
 import { home, auth } from "@/lib/v1_sdk/index";
 import { mapState, mapActions } from "vuex";
-
+import { checkPhone, checkCode } from "~/lib/util/validatefn";
 export default {
   data() {
     return {
@@ -128,7 +128,8 @@ export default {
         codes: "",
         types: 6,
         getCode: '获取验证码',
-        seconds: 30
+        seconds: 30,
+        captchaDisable: true
       },
       rules: {
         companyname: [
@@ -141,8 +142,8 @@ export default {
           { required: true, message: "请填写联系人姓名", trigger: "blur" }
         ],
         phones: [
-          { required: true, message: "请填写手机号", trigger: "blur" },
-          { type: "number", message: "请填写正确手机号", trigger: "blur" }
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          { validator: checkPhone, trigger: "blur" }
         ],
         codes: [
           { required: true, message: "请填写短信验证码", trigger: "blur" }
@@ -183,9 +184,9 @@ export default {
         let reg =   new RegExp('/^[0-9]*$/')
         if(!reg.test(this.numForm.number)){
           let str = this.numForm.number.toString()
-          console.log('2222222------',str)
+          // console.log('2222222------',str)
           this.numForm.number = str.replace(this.numForm.number, 1)
-          console.log('2222222-this.numForm.number--',this.numForm.number)
+          // console.log('2222222-this.numForm.number--',this.numForm.number)
 
         }
     },
@@ -319,12 +320,21 @@ export default {
       }
       this.changeCartNumber();
     },
-    addPaySubmit() {
-      this.$refs.ruleForm.validate(valid => {
+    addPaySubmit(formName) {
+      this.$refs[formName].validate(valid => {
+
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addPaySubmit(this.companyInfo).then(response => {
-              this.$router.push("/shop/checkedCourse");
+              if(response.status === '1000100'){
+                this.$message({
+                  type: 'error',
+                  message: response.msg
+                })
+              } else {
+                this.$router.push("/shop/checkedCourse");
+              }
+
               resolve(true);
             });
           });
@@ -351,27 +361,39 @@ export default {
       });
     },
     async handleGetCode() {
-      return new Promise((resolve, reject) => {
-        auth.smsCodes(this.companyInfo).then(response => {
-          this.$message({
-            type: response.status === 0 ? "success" : "error",
-            message: response.msg
-          });
-          this.companyInfo.captchaDisable = true;
-          this.companyInfo.getCode = this.companyInfo.seconds + "秒后重新发送";
-          let interval = setInterval(() => {
-            if (this.companyInfo.seconds <= 0) {
-              this.companyInfo.getCode = "获取验证码";
-              this.companyInfo.seconds = 60;
-              this.captchaDisable = false;
-              clearInterval(interval);
-            } else {
-              this.companyInfo.getCode =
-                --this.companyInfo.seconds + "秒后重新发送";
-            }
-          }, 1000);
-        });
-      });
+      if(this.companyInfo.phones){
+        if(this.companyInfo.captchaDisable === true){
+           return new Promise((resolve, reject) => {
+              auth.smsCodes(this.companyInfo).then(response => {
+                // console.log(response)
+                this.$message({
+                  type: response.status === 0 ? "success" : "error",
+                  message: response.msg
+                });
+                this.companyInfo.captchaDisable = false;
+                this.companyInfo.getCode = this.companyInfo.seconds + "秒后重新发送";
+                let interval = setInterval(() => {
+                  if (this.companyInfo.seconds <= 0) {
+                    this.companyInfo.getCode = "获取验证码";
+                    this.companyInfo.seconds = 60;
+                    this.companyInfo.captchaDisable = true;
+                    clearInterval(interval);
+                  } else {
+                    this.companyInfo.getCode =
+                      --this.companyInfo.seconds + "秒后重新发送";
+                  }
+                }, 1000);
+              });
+            });
+        }
+
+      } else{
+        this.$message({
+          type: 'error',
+          message: '请填写手机号'
+        })
+      }
+
     }
   }
 };

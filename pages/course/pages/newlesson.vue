@@ -32,7 +32,8 @@
         newsCurriculumForm: {
           pages: 0,
           limits: 1,
-          evaluateLimit: null
+          evaluateLimit: null,
+          isevaluate:1
         }
       };
     },

@@ -61,7 +61,7 @@ const config = {
         async: true
       },
       {
-        src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
+        src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.js',
         async: true
       },
       {

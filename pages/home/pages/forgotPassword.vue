@@ -29,7 +29,7 @@
                         <el-button @click.native="forgetPasswordAjax">提交</el-button>
                     </el-row>
                 </el-form>
-                <div class="otherLogin">返回登录</div>
+                <div class="otherLogin" @click="otherLogin">返回登录</div>
             </div>
         </div>
     </div>
@@ -147,6 +147,10 @@ export default {
           });
         });
       }
+    },
+    otherLogin (){
+      this.$router.push('/')
+      this.$bus.$emit('loginShow', true)
     }
   },
   mounted() {
