@@ -13,9 +13,9 @@
         <div class="fr">
           <div class="collect">
             <div class="line-center">
-              <span @click="collection" :class=" { bag: this.collectMsg === 1 }" >
+              <span @click="collection" :class=" { bag: this.collectMsg === 1 }">
                 <i class="el-icon-star-on"></i>
-                <span :class=" { bag: this.collectMsg === 1 }">收藏 </span>
+                <span>收藏 </span>
               </span>
               <span>
                 <i class="el-icon-share"></i>
@@ -223,7 +223,7 @@ export default {
         isRecommend: 2
       },
       privileMsg: true,
-      collectMsg: 1,
+      collectMsg: 2,
       addCollectionForm: {
         curriculumId: null
       }
@@ -277,8 +277,10 @@ export default {
       // console.log(this.collectMsg, "1234");
       if (this.collectMsg === 1) {
         this.deleteCollection();
+        this.collectMsg = 2;
       } else {
         this.addCollection();
+        this.collectMsg = 1;
       }
     },
     // 添加收藏
