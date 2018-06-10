@@ -46,13 +46,22 @@ const config = {
       { hid: 'description', name: 'description', content: '1911学堂' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       // 需要直接加载的 CSS
+      {
+        rel: 'stylesheet',
+        href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
+      }
+
       // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
     ],
     script: [
       {
-        src: 'https://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js',
+        src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
+        async: true
+      },
+      {
+        src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
         async: true
       },
       {
