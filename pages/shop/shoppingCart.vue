@@ -365,7 +365,7 @@ export default {
         if(this.companyInfo.captchaDisable === true){
            return new Promise((resolve, reject) => {
               auth.smsCodes(this.companyInfo).then(response => {
-                console.log(response)
+                // console.log(response)
                 this.$message({
                   type: response.status === 0 ? "success" : "error",
                   message: response.msg
