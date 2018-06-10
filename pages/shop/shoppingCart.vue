@@ -185,6 +185,7 @@ export default {
     },
     shopCartList() {
       this.arraySum = 0;
+      this.addArray.curriculumcartid = []
       return new Promise((resolve, reject) => {
         home.shopCartList().then(response => {
           let body = response.data.curriculumCartList.map(item => {
