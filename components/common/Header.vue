@@ -312,8 +312,6 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
-      console.log(this.bindTelData.captchaDisable);
-      console.log(this.bindTelData.exist);
       if(!this.bindTelData.captchaDisable && this.bindTelData.exist){
         return new Promise((resolve, reject) => {
         auth.smsCodes(this.registerData).then(response => {
