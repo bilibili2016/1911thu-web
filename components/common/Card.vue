@@ -281,7 +281,7 @@
           <p>{{courseList.introduction}}</p>
           <div class="common-button">
             <div v-if="isAuthenticated">
-              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习4</el-button>
+              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
               <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
             <div v-else>
@@ -448,6 +448,9 @@ export default {
         case "/course/pages/category":
           this.$router.push("coursedetail");
           break;
+        case "/course/pages/categorys":
+          this.$router.push("coursedetail");
+          break;
         case "/":
           this.$router.push(item);
           break;
@@ -501,6 +504,8 @@ export default {
     },
     selectCid(item, index) {
       this.kidForm.kids = item.id;
+      // persistStore.set('curriculumId', item.id)
+
       this.setKid(this.kidForm);
       this.curriculumcartids.cartid = item.id;
 
@@ -524,6 +529,8 @@ export default {
     },
     selectCid2(item, index) {
       this.kidForm.kids = item.id;
+       persistStore.set("curriculumId", item.id)
+      //  console.log('123')
       this.setKid(this.kidForm);
       this.curriculumcartids.cartid = item.id;
     },
@@ -826,7 +833,7 @@ export default {
         padding: 0 15px;
         p.price {
           color: #332a51;
-          padding: 0 15px;
+          padding: 0 0px;
         }
         span {
           vertical-align: middle;
@@ -1353,7 +1360,7 @@ export default {
       }
       .study {
         // padding: 30px 40px 0;
-        padding: 20px 38px 0px 0px;
+        padding: 20px 0 0 0;
         border-top: 1px rgba(232, 214, 247, 1) solid;
         // margin-top: 65px;
         p {

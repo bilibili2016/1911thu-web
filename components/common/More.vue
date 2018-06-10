@@ -24,7 +24,7 @@
 <style scoped lang="scss">
   .card-button {
     width: 174px;
-    margin: 10px auto 70px;
+    margin: 10px auto 60px;
     cursor: pointer;
     .el-button {
       width: 174px;

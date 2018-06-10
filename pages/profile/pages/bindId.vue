@@ -74,13 +74,13 @@
       },
       courseVerify(){
         if (this.courseList.inputID == "") {
-          console.log(1);
-          
+          // console.log(1);
+
           this.courseList.showErr = true;
           this.courseList.presentAble = false;
         } else {
-          console.log(2);
-          
+          // console.log(2);
+
           this.courseList.showErr = false;
           this.courseList.presentAble = true;
         }
