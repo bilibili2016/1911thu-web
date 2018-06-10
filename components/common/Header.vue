@@ -23,8 +23,7 @@
           </div>
         </div>
         <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
-        <!-- {{shoppingCartNum}} -->
-        <!-- <i v-show="shoppingCartNum>0"></i> -->
+        <i v-show="shoppingCartNum>0" v-if="productsNum>0">{{productsNum}}</i>
           <img src="@/assets/images/shoppingCart.png" alt="">
         </div>
       </div>
@@ -146,15 +145,14 @@
 <script>
 import { store as persistStore } from "~/lib/core/store";
 import { getQueryString } from "@/lib/util/helper";
-import { other, auth } from "~/lib/v1_sdk/index";
+import { other, auth, home } from "~/lib/v1_sdk/index";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { checkPhone, checkCode } from "~/lib/util/validatefn";
 export default {
   data() {
     var checkTel = (rule, value, callback) => {
-      if (value === '') {
+      if (value === "") {
         return callback(new Error("手机号不能为空"));
-
       }
       if (value.toString().length != 11) {
         return callback(new Error("请输入正确手机号123"));
@@ -166,7 +164,7 @@ export default {
       // console.log(5);
     };
     var checkRgTel = (rule, value, callback) => {
-      if (value === '') {
+      if (value === "") {
         return callback(new Error("手机号不能为空"));
       }
       if (value.toString().length != 11) {
@@ -187,7 +185,7 @@ export default {
       }
     };
     var checkCompanyCodes = (rule, value, callback) => {
-      if(value == "" && /^[A-Za-z0-9]+$/.test(value)){
+      if (value == "" && /^[A-Za-z0-9]+$/.test(value)) {
         return callback(new Error("请输入正确企业ID"));
       }
       callback();
@@ -224,8 +222,7 @@ export default {
       getWXLoginImg: {
         time: 300,
         isget: "",
-        WXverify:false
-
+        WXverify: false
       },
       // 登录数据
       loginData: {
@@ -290,11 +287,20 @@ export default {
     };
   },
   computed: {
-    ...mapState("auth", ["token"]),
+    ...mapState("auth", ["token", "productsNum"]),
     ...mapGetters("auth", ["isAuthenticated"])
   },
+  mounted() {
+    return new Promise((resolve, reject) => {
+      home.shopCartList().then(response => {
+        let body = response.data.curriculumCartList;
+        let len = { pn: body.length }
+        this.setProductsNum(len);
+      });
+    });
+  },
   methods: {
-    ...mapActions("auth", ["signIn", "setGid", "signOut"]),
+    ...mapActions("auth", ["signIn", "setGid", "setProductsNum", "signOut"]),
     // 登录显示card
     async loginCardShow() {
       this.start = true;
@@ -305,28 +311,29 @@ export default {
     },
     // 获取验证码
     async handleGetCode() {
-      if(!this.bindTelData.captchaDisable){
+      if (!this.bindTelData.captchaDisable) {
         return new Promise((resolve, reject) => {
-        auth.smsCodes(this.registerData).then(response => {
-          this.$message({
-            type: response.status === 0 ? "success" : "error",
-            message: response.msg
+          auth.smsCodes(this.registerData).then(response => {
+            this.$message({
+              type: response.status === 0 ? "success" : "error",
+              message: response.msg
+            });
+            this.bindTelData.captchaDisable = true;
+            this.bindTelData.getCode =
+              this.bindTelData.seconds + "秒后重新发送";
+            let interval = setInterval(() => {
+              if (this.bindTelData.seconds <= 0) {
+                this.bindTelData.getCode = "获取验证码";
+                this.bindTelData.seconds = 60;
+                this.bindTelData.captchaDisable = false;
+                clearInterval(interval);
+              } else {
+                this.bindTelData.getCode =
+                  --this.bindTelData.seconds + "秒后重新发送";
+              }
+            }, 1000);
           });
-          this.bindTelData.captchaDisable = true;
-          this.bindTelData.getCode = this.bindTelData.seconds + "秒后重新发送";
-          let interval = setInterval(() => {
-            if (this.bindTelData.seconds <= 0) {
-              this.bindTelData.getCode = "获取验证码";
-              this.bindTelData.seconds = 60;
-              this.bindTelData.captchaDisable = false;
-              clearInterval(interval);
-            } else {
-              this.bindTelData.getCode =
-                --this.bindTelData.seconds + "秒后重新发送";
-            }
-          }, 1000);
         });
-      });
       }
     },
     // 验证手机号是否存在
@@ -337,10 +344,10 @@ export default {
             type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          if(response.status != "0"){
-            this.bindTelData.captchaDisable=true;
-          }else{
-            this.bindTelData.captchaDisable=false;
+          if (response.status != "0") {
+            this.bindTelData.captchaDisable = true;
+          } else {
+            this.bindTelData.captchaDisable = false;
           }
         });
       });
@@ -355,7 +362,7 @@ export default {
                 type: response.status === 0 ? "success" : "error",
                 message: response.msg
               });
-              if(response.status === 0){
+              if (response.status === 0) {
                 this.close();
               }
             });
@@ -404,22 +411,21 @@ export default {
       return new Promise((resolve, reject) => {
         auth.verifyWX(this.getWXLoginImg.WXverify).then(response => {
           // console.log(response.data);
-          if(response.status === "100100"){
-              clearInterval(timewx);
-              this.$message({
-                type: "error",
-                message: response.msg
-              });
+          if (response.status === "100100") {
+            clearInterval(timewx);
+            this.$message({
+              type: "error",
+              message: response.msg
+            });
           }
-          if(response.status === "0"){
-             clearInterval(timewx);
+          if (response.status === "0") {
+            clearInterval(timewx);
             // console.log(response.data,"已有账号直接登录，返回token");
           }
-          if(response.status === "100102"){
-             clearInterval(timewx);
+          if (response.status === "100102") {
+            clearInterval(timewx);
             // console.log(response.data,"未绑定手机");
           }
-
         });
       });
     },
@@ -435,9 +441,9 @@ export default {
       this.$router.push("/shop/shoppingCart");
     },
     goLink(item) {
-      console.log('123')
-      console.log(this.$bus)
-       this.$bus.$emit('selectProfileIndex', '123')
+      console.log("123");
+      console.log(this.$bus);
+      this.$bus.$emit("selectProfileIndex", "123");
       // this.$router.push(item);
     },
     login() {},
@@ -478,17 +484,17 @@ export default {
       clearInterval(timewx);
       // document.body.style.overflow = "auto";
     },
-    emptyForm(){
-      this.loginData.phonenum="";
-      this.loginData.password="";
-      this.loginData.pwdType="password";
-      this.loginData.loginTypes=1;
-      this.registerData.phones="";
-      this.registerData.passwords="";
-      this.registerData.types=1;
-      this.registerData.codes="";
-      this.registerData.checked=[false];
-      this.registerData.companyCodes="";
+    emptyForm() {
+      this.loginData.phonenum = "";
+      this.loginData.password = "";
+      this.loginData.pwdType = "password";
+      this.loginData.loginTypes = 1;
+      this.registerData.phones = "";
+      this.registerData.passwords = "";
+      this.registerData.types = 1;
+      this.registerData.codes = "";
+      this.registerData.checked = [false];
+      this.registerData.companyCodes = "";
     },
     handleClick(tab, event) {
       this.emptyForm();
@@ -530,9 +536,8 @@ export default {
       document.removeEventListener("touchmove", mo, false);
     },
     goSearch(item) {
-      persistStore.set('key', this.search)
+      persistStore.set("key", this.search);
       switch (window.location.pathname) {
-
         case "/course/pages/search":
           break;
         default:
@@ -542,15 +547,15 @@ export default {
     },
     gokey() {
       if (event.keyCode == 13) {
-        persistStore.set('key', this.search)
-         this.$router.push("/course/pages/search");
+        persistStore.set("key", this.search);
+        this.$router.push("/course/pages/search");
         // switch (window.location.pathname) {
 
-          // case "/course/pages/search":
-          //   break;
-          // default:
-          //   this.$router.push("/course/pages/search");
-          //   break;
+        // case "/course/pages/search":
+        //   break;
+        // default:
+        //   this.$router.push("/course/pages/search");
+        //   break;
         // }
       }
     },
@@ -564,7 +569,7 @@ export default {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
-       this.$bus.$emit('selectProfileIndex', item)
+      this.$bus.$emit("selectProfileIndex", item);
       // switch (window.location.pathname) {
       //   case '/':
       //     this.$router.push('/profile');

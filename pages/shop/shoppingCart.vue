@@ -96,6 +96,8 @@
 <script>
 import { indexOf } from "lodash";
 import { home, auth } from "@/lib/v1_sdk/index";
+import { mapState, mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -160,6 +162,7 @@ export default {
     this.getNum();
   },
   computed: {
+    ...mapState("auth", ["token", "productsNum"]),
     prices() {
       return (Number(this.arraySum) * 10 * (Number(this.numForm.number) * 10) / 100).toFixed(2)
     }
@@ -172,6 +175,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions("auth", ["setProductsNum"]),
     handleSelectAll(){
       this.isRest = true
     },
@@ -196,6 +200,7 @@ export default {
           this.courseList = body;
           this.selectAll = true;
           this.loding = false
+          this.setProductsNum({pn:this.courseList.length})
           if(this.courseList.length == 0){
             this.isNoMsg = true
             this.selectAll = false;

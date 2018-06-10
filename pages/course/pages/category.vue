@@ -105,7 +105,8 @@
     methods: {
       ...mapActions('auth', [
         'setCid',
-        'setPid'
+        'setPid',
+        'setProductsNum'
       ]),
       handleItemOne(item, index) {
          this.bgmsgs = 0
@@ -164,6 +165,7 @@
             // console.log(response, '99999')
             this.categoryData = response.data.curriculumList
             this.pagemsg.total = response.data.pageCount
+            setProductsNum({pn:his.categoryData.length})
             resolve(true)
           })
         })

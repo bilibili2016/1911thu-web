@@ -58,10 +58,8 @@ export const MUTATION = {
   setNid: 'set-nid',
   setKid: 'set-kid',
   setIsShowTip: 'set-isShowTip',
-  productsNum:'set-productsNum',
-  setNumber:'set-number'
-
-
+  setProductsNum: 'set-productsNum',
+  setNumber: 'set-number'
 }
 export const state = () => ({
   user,
@@ -80,7 +78,7 @@ export const getters = {
   isAuthenticated(state) {
     return !isNull(state.token)
   },
-  getProductsNum(state){
+  getProductsNum(state) {
     return state.productsNum
   },
   isShowTip(state) {
@@ -395,10 +393,10 @@ export const actions = {
     commit,
     state
   }, {
-    productsNums
+    pn
   }) {
     try {
-      let productsNum = productsNums
+      let productsNum = pn
       persistStore.set('productsNum', productsNum)
       commit(MUTATION.setProductsNum, {
         productsNum
@@ -412,7 +410,7 @@ export const actions = {
     }
     return productsNum
   },
-  async setNumber ({
+  async setNumber({
     commit,
     state
   }, {

@@ -358,1073 +358,1066 @@
 </template>
 
 <script>
-  import {
-    home
-  } from "~/lib/v1_sdk/index";
-  import {
-    mapState,
-    mapActions,
-    mapGetters
-  } from "vuex";
-  import {
-    store as persistStore
-  } from '~/lib/core/store'
-  export default {
-    props: [
-      "data",
-      "config",
-      "infoArticle",
-      "infoDesc",
-      "dingData",
-      "searchData",
-      "courseList",
-      "linkdata",
-      'newsList',
-      'linkfour',
-      'linkfive',
-      'linksix',
-      'privileMsg'
-    ],
-    data() {
-      return {
-        numSrc: require("@/assets/images/home_num.png"),
-        avator: require("@/assets/images/home_avator.png"),
-        one: 1,
-        readyImg: require("@/assets/images/ready.png"),
-        playbtn: require('@/assets/images/play.png'),
-        newTag: require('@/assets/images/new.png'),
-        jinImg: require('@/assets/images/jin.png'),
-        isShow: false,
-        checked: false,
-        numberArr: [],
-        number: null,
-        numberForm: {
-          numbers: null
-        },
-        curriculumcartid: {
-          numberArr: []
-        },
-        curriculumcartids: {
-          cartid: null
-        },
-        kidForm: {
-          kids: null
-        }
-      };
+import { home } from "~/lib/v1_sdk/index";
+import { mapState, mapActions, mapGetters } from "vuex";
+import { store as persistStore } from "~/lib/core/store";
+export default {
+  props: [
+    "data",
+    "config",
+    "infoArticle",
+    "infoDesc",
+    "dingData",
+    "searchData",
+    "courseList",
+    "linkdata",
+    "newsList",
+    "linkfour",
+    "linkfive",
+    "linksix",
+    "privileMsg"
+  ],
+  data() {
+    return {
+      numSrc: require("@/assets/images/home_num.png"),
+      avator: require("@/assets/images/home_avator.png"),
+      one: 1,
+      readyImg: require("@/assets/images/ready.png"),
+      playbtn: require("@/assets/images/play.png"),
+      newTag: require("@/assets/images/new.png"),
+      jinImg: require("@/assets/images/jin.png"),
+      isShow: false,
+      checked: false,
+      numberArr: [],
+      number: null,
+      numberForm: {
+        numbers: null
+      },
+      curriculumcartid: {
+        numberArr: []
+      },
+      curriculumcartids: {
+        cartid: null
+      },
+      kidForm: {
+        kids: null
+      }
+    };
+  },
+  computed: {
+    ...mapGetters("auth", ["isAuthenticated"]),
+    ...mapState("auth", ["token", "productsNum"])
+  },
+  methods: {
+    ...mapActions("auth", ["setProductsNum", "setKid"]),
+    selCheckboxChange(item, index) {
+      // console.log('123')
+      // console.log(item, '这是item')
+      // console.log(item.is_checked === false)
+      let len = this.productsNum
+      if (item.is_checked === false) {
+        item.is_checked = false;
+        this.curriculumcartid.numberArr.push(item.id);
+        this.curriculumcartids.cartid = item.id;
+        len = len - 1
+        this.delShopCart();
+      } else {
+        item.is_checked = true;
+        this.curriculumcartids.cartid = item.id;
+        this.curriculumcartid.numberArr.pop();
+        // alert('掉错接口了')
+        len = len + 1
+        this.addShopCart();
+      }
+      this.setProductsNum({ pn: len });
     },
-    computed: {
-      ...mapGetters('auth', [
-        'isAuthenticated',
-
-      ]),
-      ...mapState("auth", ["token", "productsNum"]),
-    },
-    methods: {
-      ...mapActions("auth", ["setProductsNum", 'setNumber', 'setKid']),
-      selCheckboxChange(item,index){
-        // console.log('123')
-        // console.log(item, '这是item')
-        // console.log(item.is_checked === false)
-        if (item.is_checked === false) {
-          item.is_checked = false
-          this.curriculumcartid.numberArr.push(item.id)
-          this.curriculumcartids.cartid = item.id
-this.delShopCart()
-
-        } else {
-          item.is_checked = true
-          this.curriculumcartids.cartid = item.id
-          this.curriculumcartid.numberArr.pop()
-          // alert('掉错接口了')
-          this.addShopCart()
-        }
-      },
-      goLink(item) {
-        switch (window.location.pathname) {
-          case '/course/pages/category':
-            this.$router.push('coursedetail');
-            break
-          case '/':
-            this.$router.push(item);
-            break
-          case '/course/pages/coursedetail':
-            this.$router.push('player');
-            break
-          case '/course/pages/classify':
-            this.$router.push('coursedetail');
-            break
-          case '/course/pages/search':
-            this.$router.push('coursedetail');
-            break
-          case '/course/pages/newlesson':
-            this.$router.push('coursedetail');
-            break
-          case '/profile':
-            this.$router.push('/course/pages/coursedetail');
-            break
-          default:
-            break
-        }
-      },
-      handleCheck(item, index) {
-        this.checked = true
-        // let tmp = {curriculumId:item.id}
-
-        let pronum = this.productsNum
-        pronum = pronum + 1
-        this.setProductsNum({
-          productsNums: pronum
-        })
-
-        return new Promise((resolve, reject) => {
-          home.addShopCart(tmp).then(response => {
-            let newData = response.data.data
-
-          })
-        })
-
-        for (var i = 0; i < this.data.length; i++) {
-          if (i === index) {
-            // this.nextmsg = true
-            this.$set(this.data[i], "is_checked", true);
-          }
-        }
-      },
-      getMore(item) {
-        this.$router.push(item);
-      },
-      toggleShow: function() {
-        this.isShow = !this.isShow;
-      },
-      selectDetail(index, course, linksix) {
-        console.log(course, '787878')
-        this.$emit("checkdetail", course.id);
-        console.log(linksix, '99999')
-        this.getMore(linksix);
-      },
-      selectCid(item, index) {
-        this.kidForm.kids = item.id
-        this.setKid(this.kidForm)
-        this.curriculumcartids.cartid = item.id
-        console.log(item.is_checked, '这是点击的布尔值')
-        if (item.is_checked === false) {
-          item.is_checked = true
-          this.curriculumcartid.numberArr.push(item.id)
-          this.addShopCart()
-        } else {
-          item.is_checked = false
-          this.curriculumcartid.numberArr.pop()
-          // alert('掉错接口了')
-          this.delShopCart()
-        }
-        this.numberForm.numbers = this.curriculumcartid.numberArr.length
-        // persistStore.set('number', this.number)
-        this.setNumber(this.numberForm)
-
-      },
-      selectCid2(item, index) {
-        this.kidForm.kids = item.id
-        this.setKid(this.kidForm)
-        this.curriculumcartids.cartid = item.id
-
-      },
-      addShopCart() {
-        return new Promise((resolve, reject) => {
-          home.addShopCart(this.curriculumcartids).then(response => {
-            // console.log(response, '添加成功')
-          })
-        })
-      },
-      delShopCart() {
-        return new Promise((resolve, reject) => {
-          home.delShopCart(this.curriculumcartids).then(response => {
-            // console.log(response)
-          })
-        })
+    goLink(item) {
+      switch (window.location.pathname) {
+        case "/course/pages/category":
+          this.$router.push("coursedetail");
+          break;
+        case "/":
+          this.$router.push(item);
+          break;
+        case "/course/pages/coursedetail":
+          this.$router.push("player");
+          break;
+        case "/course/pages/classify":
+          this.$router.push("coursedetail");
+          break;
+        case "/course/pages/search":
+          this.$router.push("coursedetail");
+          break;
+        case "/course/pages/newlesson":
+          this.$router.push("coursedetail");
+          break;
+        case "/profile":
+          this.$router.push("/course/pages/coursedetail");
+          break;
+        default:
+          break;
       }
     },
-    mounted() {
-      // console.log(this.data, '返回的数据')
+    handleCheck(item, index) {
+      this.checked = true;
+      // let tmp = {curriculumId:item.id}
+
+      // let pronum = this.productsNum;
+      // pronum = pronum + 1;
+      // this.setProductsNum({
+      //   pn: pronum
+      // });
+
+      return new Promise((resolve, reject) => {
+        home.addShopCart(tmp).then(response => {
+          let newData = response.data.data;
+        });
+      });
+
+      for (var i = 0; i < this.data.length; i++) {
+        if (i === index) {
+          // this.nextmsg = true
+          this.$set(this.data[i], "is_checked", true);
+        }
+      }
+    },
+    getMore(item) {
+      this.$router.push(item);
+    },
+    toggleShow: function() {
+      this.isShow = !this.isShow;
+    },
+    selectDetail(index, course, linksix) {
+      console.log(course, "787878");
+      this.$emit("checkdetail", course.id);
+      console.log(linksix, "99999");
+      this.getMore(linksix);
+    },
+    selectCid(item, index) {
+      this.kidForm.kids = item.id;
+      this.setKid(this.kidForm);
+      this.curriculumcartids.cartid = item.id;
+
+      console.log(item.is_checked, "这是点击的布尔值");
+      let len = 0
+      if (item.is_checked === false) {
+        item.is_checked = true;
+        this.curriculumcartid.numberArr.push(item.id);
+        len = this.productsNum + 1
+        this.addShopCart();
+      } else {
+        item.is_checked = false;
+        this.curriculumcartid.numberArr.pop();
+        len = this.productsNum - 1
+        // alert('掉错接口了')
+        this.delShopCart();
+      }
+      this.numberForm.numbers = this.curriculumcartid.numberArr;
+      // persistStore.set('number', this.number)
+      this.setProductsNum({ pn: len });
+    },
+    selectCid2(item, index) {
+      this.kidForm.kids = item.id;
+      this.setKid(this.kidForm);
+      this.curriculumcartids.cartid = item.id;
+    },
+    addShopCart() {
+      return new Promise((resolve, reject) => {
+        home.addShopCart(this.curriculumcartids).then(response => {
+          // console.log(response, '添加成功')
+          resolve(true)
+        });
+      });
+    },
+    delShopCart() {
+      return new Promise((resolve, reject) => {
+        home.delShopCart(this.curriculumcartids).then(response => {
+          // console.log(response)
+        });
+      });
     }
-  };
+  },
+  mounted() {
+    // console.log(this.data, '返回的数据')
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  .new-style {
-    img {
-      width: 48px !important;
-      height: 28px !important;
-      // margin-top: -20px;
-      position: absolute;
-      top: -13px;
-      left: -10px;
-      z-index: 1;
-    }
+.new-style {
+  img {
+    width: 48px !important;
+    height: 28px !important;
+    // margin-top: -20px;
+    position: absolute;
+    top: -13px;
+    left: -10px;
+    z-index: 1;
   }
+}
 
-  .mask-style {
+.mask-style {
+  width: 250px;
+  height: 160px;
+  background-color: rgba(100, 23, 166, 0.5);
+  position: absolute;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  opacity: 0;
+  transition: all 300ms;
+}
+
+.bgImgs {
+  width: 250px;
+  height: 160px;
+  overflow: hidden;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  img {
     width: 250px;
     height: 160px;
-    background-color: rgba(100, 23, 166, 0.5);
-    position: absolute;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-    opacity: 0;
     transition: all 300ms;
   }
+}
 
-  .bgImgs {
-    width: 250px;
-    height: 160px;
-    overflow: hidden;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+.mask {
+  display: none;
+  transition: all 3000ms;
+}
+
+.jin-style {
+  width: 38px !important;
+  height: 38px !important;
+  position: absolute;
+  top: 60px;
+  left: 110px;
+  z-index: 1000;
+  display: none;
+  transition: all 300ms;
+}
+
+// banner定制
+.customization {
+  width: 1100px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -550px;
+  z-index: 3;
+  div.pro {
+    float: right;
+    width: 280px;
+    height: 100px;
+    border-radius: 5px;
+    background-color: #efefef;
+    cursor: pointer;
+    transition: all 300ms;
+    &:hover {
+      margin-top: -8px;
+      background-color: #f1e9f8;
+    }
+    &:last-child,
+    &:nth-child(2) {
+      margin-right: 31px;
+    }
+    .con {
+      margin-right: 20px;
+    }
     img {
-      width: 250px;
-      height: 160px;
-      transition: all 300ms;
+      width: 50px;
+      height: 50px;
+      margin: 25px 16px;
     }
-  }
-
-  .mask {
-    display: none;
-    transition: all 3000ms;
-  }
-
-  .jin-style {
-    width: 38px !important;
-    height: 38px !important;
-    position: absolute;
-    top: 60px;
-    left: 110px;
-    z-index: 1000;
-    display: none;
-    transition: all 300ms;
-  }
-
-  // banner定制
-  .customization {
-    width: 1100px;
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    margin-left: -550px;
-    z-index: 3;
-    div.pro {
-      float: right;
-      width: 280px;
-      height: 100px;
-      border-radius: 5px;
-      background-color: #efefef;
-      cursor: pointer;
-      transition: all 300ms;
-      &:hover {
-        margin-top: -8px;
-        background-color: #f1e9f8;
-      }
-      &:last-child,
-      &:nth-child(2) {
-        margin-right: 31px;
-      }
-      .con {
-        margin-right: 20px;
-      }
-      img {
-        width: 50px;
-        height: 50px;
-        margin: 25px 16px;
-      }
-      div {
-        width: 178px;
-        h5 {
-          color: #6417a6;
-          // line-height: 40px;
-          margin: 15px 0px 10px 0px;
-          &:hover {
-            color: #8f4acb;
-          }
+    div {
+      width: 178px;
+      h5 {
+        color: #6417a6;
+        // line-height: 40px;
+        margin: 15px 0px 10px 0px;
+        &:hover {
+          color: #8f4acb;
         }
-        p {
-          color: #93999f;
-          font-size: 12px;
-          line-height: 22px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-        }
+      }
+      p {
+        color: #93999f;
+        font-size: 12px;
+        line-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
     }
   }
+}
 
-  .showMsg {
-    display: none;
-  }
+.showMsg {
+  display: none;
+}
 
-  // 新上好课
-  .card-category {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    position: relative;
-    .card-list {
-      margin-bottom: 50px;
-      border-radius: 16px;
-      &:hover {
-        box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+// 新上好课
+.card-category {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+  .card-list {
+    margin-bottom: 50px;
+    border-radius: 16px;
+    &:hover {
+      box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+      transition: all 300ms;
+      .jin-style {
+        display: block;
         transition: all 300ms;
-        .jin-style {
-          display: block;
-          transition: all 300ms;
-        }
-        .mask-style {
-          opacity: 1;
-        }
-        .bgImgs img {
-          width: 254px;
-          height: 162.2px;
-          margin-left: -2px;
-          margin-top: -1.1px;
+      }
+      .mask-style {
+        opacity: 1;
+      }
+      .bgImgs img {
+        width: 254px;
+        height: 162.2px;
+        margin-left: -2px;
+        margin-top: -1.1px;
+      }
+    }
+    .itemBox {
+      cursor: pointer;
+      width: 250px;
+      display: flex;
+      border-radius: 16px;
+      background: #fff;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      border: none;
+      img {
+        width: 250px;
+        height: 160px;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+      }
+      .tag {
+        position: absolute;
+        top: 126px;
+        left: 4px;
+        span {
+          display: inline-block;
+          padding: 6px 11px 5px 10px;
+          background: rgba(37, 55, 163, 1);
+          opacity: 0.6;
+          border-radius: 6px;
+          color: #fff;
+          margin-left: 8px;
         }
       }
-      .itemBox {
-        cursor: pointer;
-        width: 250px;
-        display: flex;
-        border-radius: 16px;
-        background: #fff;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        border: none;
+      .item {
+        // border-bottom: 1px rgba(228, 228, 244, 1) solid;
+        .itemBox-name {
+          height: 45px;
+          line-height: 45px;
+          font-size: 16px;
+          font-family: MicrosoftYaHei;
+          color: rgba(51, 42, 81, 1);
+          padding: 0 15px;
+          overflow: hidden;
+        }
+        .itemBox-info {
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(176, 174, 184, 1);
+          line-height: 0px;
+          margin: 0px 0px 0px 15px;
+          .itemBox-num {
+            font-size: 12px;
+            font-family: MicrosoftYaHei;
+            color: rgba(176, 174, 184, 1);
+            line-height: 0px;
+            padding-left: 8px;
+            width: 160px;
+            img {
+              width: 12px;
+              height: 12px;
+              margin: 0px 5px;
+            }
+            .itemBox-rate {
+              // display: inline;
+              font-size: 12px;
+              line-height: 13px;
+              float: right;
+            }
+          }
+        }
+      }
+      .items {
+        // border-bottom: 1px rgba(228, 228, 244, 1) solid;
+        .itemBox-name {
+          height: 45px;
+          line-height: 45px;
+          font-size: 16px;
+          font-family: MicrosoftYaHei;
+          color: rgba(51, 42, 81, 1);
+          padding: 0 15px;
+          overflow: hidden;
+        }
+        .itemBox-info {
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(176, 174, 184, 1);
+          line-height: 0px;
+          margin: 0px 0px 0px 15px;
+          .itemBox-num {
+            font-size: 12px;
+            font-family: MicrosoftYaHei;
+            color: rgba(176, 174, 184, 1);
+            line-height: 0px;
+            padding-left: 8px;
+            width: 160px;
+            img {
+              width: 12px;
+              height: 12px;
+              margin: 0px 5px;
+            }
+            .itemBox-rate {
+              // display: inline;
+              font-size: 12px;
+              line-height: 13px;
+              float: right;
+            }
+          }
+        }
+      }
+      .readyImg {
+        width: 75px;
+        height: 49px;
+        position: absolute;
+        top: 40%;
+        left: 94%;
+        margin-left: -70px;
+        margin-top: -20px;
         img {
-          width: 250px;
-          height: 160px;
-          border-top-left-radius: 16px;
-          border-top-right-radius: 16px;
-        }
-        .tag {
-          position: absolute;
-          top: 126px;
-          left: 4px;
-          span {
-            display: inline-block;
-            padding: 6px 11px 5px 10px;
-            background: rgba(37, 55, 163, 1);
-            opacity: 0.6;
-            border-radius: 6px;
-            color: #fff;
-            margin-left: 8px;
-          }
-        }
-        .item {
-          // border-bottom: 1px rgba(228, 228, 244, 1) solid;
-          .itemBox-name {
-            height: 45px;
-            line-height: 45px;
-            font-size: 16px;
-            font-family: MicrosoftYaHei;
-            color: rgba(51, 42, 81, 1);
-            padding: 0 15px;
-            overflow: hidden;
-          }
-          .itemBox-info {
-            font-size: 14px;
-            font-family: MicrosoftYaHei;
-            color: rgba(176, 174, 184, 1);
-            line-height: 0px;
-            margin: 0px 0px 0px 15px;
-            .itemBox-num {
-              font-size: 12px;
-              font-family: MicrosoftYaHei;
-              color: rgba(176, 174, 184, 1);
-              line-height: 0px;
-              padding-left: 8px;
-              width: 160px;
-              img {
-                width: 12px;
-                height: 12px;
-                margin: 0px 5px;
-              }
-              .itemBox-rate {
-                // display: inline;
-                font-size: 12px;
-                line-height: 13px;
-                float: right;
-              }
-            }
-          }
-        }
-        .items {
-          // border-bottom: 1px rgba(228, 228, 244, 1) solid;
-          .itemBox-name {
-            height: 45px;
-            line-height: 45px;
-            font-size: 16px;
-            font-family: MicrosoftYaHei;
-            color: rgba(51, 42, 81, 1);
-            padding: 0 15px;
-            overflow: hidden;
-          }
-          .itemBox-info {
-            font-size: 14px;
-            font-family: MicrosoftYaHei;
-            color: rgba(176, 174, 184, 1);
-            line-height: 0px;
-            margin: 0px 0px 0px 15px;
-            .itemBox-num {
-              font-size: 12px;
-              font-family: MicrosoftYaHei;
-              color: rgba(176, 174, 184, 1);
-              line-height: 0px;
-              padding-left: 8px;
-              width: 160px;
-              img {
-                width: 12px;
-                height: 12px;
-                margin: 0px 5px;
-              }
-              .itemBox-rate {
-                // display: inline;
-                font-size: 12px;
-                line-height: 13px;
-                float: right;
-              }
-            }
-          }
-        }
-        .readyImg {
           width: 75px;
           height: 49px;
-          position: absolute;
-          top: 40%;
-          left: 94%;
-          margin-left: -70px;
-          margin-top: -20px;
-          img {
-            width: 75px;
-            height: 49px;
-          }
         }
-        .line-wrap {
-          height: 35px;
-          line-height: 30px;
-        }
-        .line-wraps {
-          height: 50px;
-          // border-top: 1px #e4e4f4 solid;
-        }
-        .line-center {
-          overflow: hidden;
-          height: 35px;
+      }
+      .line-wrap {
+        height: 35px;
+        line-height: 30px;
+      }
+      .line-wraps {
+        height: 50px;
+        // border-top: 1px #e4e4f4 solid;
+      }
+      .line-center {
+        overflow: hidden;
+        height: 35px;
+        padding: 0 15px;
+        p.price {
+          color: #332a51;
           padding: 0 15px;
-          p.price {
-            color: #332a51;
-            padding: 0 15px;
-          }
-          span {
-            vertical-align: middle;
-            font-family: MicrosoftYaHei;
-            color: rgba(109, 104, 127, 1);
-            padding-top: 1px;
-            display: inline-block;
-          }
-          .title {
-            float: right;
-            color: rgba(109, 104, 127, 1);
-          }
         }
-        .line-centers {
-          padding: 0px 14px 0px 0;
-          p {
-            margin-bottom: 10px;
-            font-size: 14px;
-            font-family: MicrosoftYaHei;
-            color: rgba(136, 136, 136, 1);
-            // line-height:0px;
-          }
-          div {
-            margin-bottom: 26px;
-            font-size: 14px;
-            font-family: MicrosoftYaHei;
-            color: rgba(136, 136, 136, 1);
-          }
-        }
-        .line-center img {
-          width: 22px;
-          height: 22px;
-          padding: 0px;
-          margin-right: 10px;
+        span {
           vertical-align: middle;
           font-family: MicrosoftYaHei;
           color: rgba(109, 104, 127, 1);
-          border-radius: 50%;
+          padding-top: 1px;
+          display: inline-block;
+        }
+        .title {
+          float: right;
+          color: rgba(109, 104, 127, 1);
+        }
+      }
+      .line-centers {
+        padding: 0px 14px 0px 0;
+        p {
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(136, 136, 136, 1);
+          // line-height:0px;
+        }
+        div {
+          margin-bottom: 26px;
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(136, 136, 136, 1);
+        }
+      }
+      .line-center img {
+        width: 22px;
+        height: 22px;
+        padding: 0px;
+        margin-right: 10px;
+        vertical-align: middle;
+        font-family: MicrosoftYaHei;
+        color: rgba(109, 104, 127, 1);
+        border-radius: 50%;
+      }
+    }
+  }
+  .el-card {
+    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    border-radius: 16px;
+  }
+}
+
+// 学堂资讯
+.info-list {
+  float: right;
+  .el-card {
+    border: none;
+  }
+  .info {
+    width: 593px;
+    height: 106px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    margin-bottom: 20px;
+    cursor: pointer;
+    &:hover {
+      box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+      transition: all 300ms;
+    }
+    .info-box {
+      height: 106px;
+      .info-wrap {
+        height: 106px;
+        overflow: hidden;
+        img {
+          width: 180px;
+          height: 106px;
+          padding: 0px;
+          margin: 0px;
+          overflow: hidden;
+        }
+        span {
+          display: inline-block;
+          width: 413px;
+          height: 72px;
+          line-height: 36px;
+          margin-top: 17px;
+          font-size: 18px;
+          padding: 0 15px;
+          color: rgba(34, 34, 34, 1);
+          overflow: hidden;
+          vertical-align: top;
+        }
+        span:hover {
+          color: #8f4acb;
         }
       }
     }
-    .el-card {
-      box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-      border-radius: 16px;
-    }
   }
-
-  // 学堂资讯
-  .info-list {
+  .more {
     float: right;
-    .el-card {
-      border: none;
-    }
-    .info {
-      width: 593px;
-      height: 106px;
-      background: rgba(255, 255, 255, 1);
-      border-radius: 6px;
-      box-shadow: 0px 0px 12px rgba(198, 194, 210, .28);
-      margin-bottom: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: MicrosoftYaHei;
+    color: rgba(100, 23, 166, 1);
+    line-height: 40px;
+  }
+}
+
+// left
+.card-categorys {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  float: left;
+  .card-list {
+    .itemBoxs {
       cursor: pointer;
+      width: 472px;
+      height: 406px;
+      background: #fff; // margin-top: 50px;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center; // border:1px #999 solid;
+      border-radius: 6px;
+      box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
       &:hover {
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         transition: all 300ms;
       }
-      .info-box {
-        height: 106px;
-        .info-wrap {
-          height: 106px;
-          overflow: hidden;
-          img {
-            width: 180px;
-            height: 106px;
-            padding: 0px;
-            margin: 0px;
-            overflow: hidden;
-          }
+      .img-box {
+        width: 472px;
+        height: 254px;
+        position: relative;
+        overflow: hidden;
+        img {
+          width: 472px;
+          height: 254px;
+        }
+        div {
+          width: 472px;
+          height: 60px;
+          background: rgba(100, 23, 166, 1);
+          opacity: 0.8;
+          position: absolute;
+          bottom: 0px;
+          left: 0px;
+          display: inline-block;
           span {
+            height: 60px;
+            padding: 0 10px;
+            font-size: 20px;
+            line-height: 64px !important;
+            font-family: MicrosoftYaHei;
+            color: rgba(255, 255, 255, 1);
             display: inline-block;
-            width: 413px;
-            height: 72px;
-            line-height: 36px;
-            margin-top: 17px;
-            font-size: 18px;
-            padding: 0 15px;
-            color: rgba(34, 34, 34, 1);
             overflow: hidden;
-            vertical-align: top;
-          }
-          span:hover {
-            color: #8f4acb;
           }
         }
       }
-    }
-    .more {
-      float: right;
-      height: 20px;
-      cursor: pointer;
-      font-size: 20px;
-      font-family: MicrosoftYaHei;
-      color: rgba(100, 23, 166, 1);
-      line-height: 40px;
+      .item {
+        font-size: 14px;
+        color: #222;
+        line-height: 28px;
+        padding: 20px 15px 0;
+        text-indent: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+      }
+      .line-wrap {
+        height: 40px;
+      }
+      .line-center {
+        line-height: 40px;
+        span {
+          vertical-align: middle;
+          font-family: MicrosoftYaHei;
+          color: rgba(109, 104, 127, 1);
+          padding-top: 1px;
+          display: inline-block;
+        }
+      }
+      .line-center img {
+        width: 22px;
+        height: 22px;
+        padding: 0px;
+        margin: 0px 10px 0px 14px;
+        vertical-align: middle;
+        font-family: MicrosoftYaHei;
+        color: rgba(109, 104, 127, 1);
+      }
     }
   }
+  .el-card {
+    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    border-radius: 16px;
+  }
+}
 
-  // left
-  .card-categorys {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    float: left;
-    .card-list {
-      .itemBoxs {
-        cursor: pointer;
-        width: 472px;
-        height: 406px;
-        background: #fff; // margin-top: 50px;
-        border: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center; // border:1px #999 solid;
-        border-radius: 6px;
-        box-shadow: 0px 0px 12px rgba(198, 194, 210, .28);
-        &:hover {
-          box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
-          transition: all 300ms;
+// 新上好课详情
+.courseList {
+  width: 1100px;
+  margin: 0 auto;
+  .bottom {
+    margin-bottom: 40px;
+  }
+  .boxshadow-none {
+    position: relative;
+  }
+  .course {
+    width: 100%;
+    padding: 40px 0 40px 40px;
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    .el-card {
+      // width: 400px;
+      // height: 392px;
+      font-size: 0;
+      position: relative;
+      .img-wrap {
+        width: 400px;
+        height: 260px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
         }
-        .img-box {
-          width: 472px;
-          height: 254px;
-          position: relative;
-          overflow: hidden;
-          img {
-            width: 472px;
-            height: 254px;
-          }
-          div {
-            width: 472px;
-            height: 60px;
-            background: rgba(100, 23, 166, 1);
-            opacity: 0.8;
-            position: absolute;
-            bottom: 0px;
-            left: 0px;
-            display: inline-block;
-            span {
-              height: 60px;
-              padding: 0 10px;
-              font-size: 20px;
-              line-height: 64px !important;
-              font-family: MicrosoftYaHei;
-              color: rgba(255, 255, 255, 1);
-              display: inline-block;
-              overflow: hidden;
-            }
-          }
+      }
+      & > img {
+        width: 400px;
+        height: 260px;
+      }
+      .personInfo {
+        width: 100%;
+        height: 132px;
+        background-color: #6417a6;
+        img {
+          float: left;
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          margin: 31px 26px;
         }
-        .item {
+        h5,
+        p {
+          float: left;
+          width: 274px;
+          color: #fff;
+        }
+        h5 {
+          margin-top: 41px;
+          font-size: 18px;
+        }
+        p {
+          font-weight: 400;
+          height: 36px;
+          line-height: 36px;
           font-size: 14px;
+        }
+      }
+      .play-btn {
+        width: 76px;
+        height: 76px;
+        border-radius: 38px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -43px;
+        margin-top: -89px;
+        cursor: pointer;
+      }
+    }
+    .goodplay {
+      position: relative;
+      .image {
+        width: 480px;
+        height: 312px;
+      }
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 480px;
+        height: 312px;
+        background: rgba(100, 23, 166, 1);
+        opacity: 0.5;
+      }
+    }
+    .particulars {
+      width: 660px;
+      .currentclum {
+        padding-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 40px;
+        h4 {
+          font-size: 18px;
           color: #222;
-          ;
-          line-height: 28px;
-          padding: 20px 15px 0;
-          text-indent: 30px;
+          height: 54px;
+          line-height: 54px;
+          margin-bottom: 8px;
+          cursor: pointer;
+        }
+        h4:hover {
+          color: #8f4acb;
+        }
+        p {
+          font-size: 14px;
+          line-height: 30px;
+          color: #222;
+          cursor: pointer;
+        }
+      }
+      .comment {
+        height: 134px;
+        margin-top: 5px;
+        padding: 0 40px 10px;
+        background-color: #fafafa;
+        color: #888;
+        h5 {
+          line-height: 40px;
+          .itemBox-rate {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 20px;
+            vertical-align: middle;
+          }
+        }
+        p {
+          font-size: 14px;
+          color: #888888;
+          line-height: 30px;
+        }
+      }
+      .bordernone {
+        border: none;
+        padding-top: 0px;
+        font-size: 14px;
+        font-family: MicrosoftYaHei;
+        color: rgba(34, 34, 34, 1);
+        line-height: 30px;
+        padding: 0px 40px;
+        p {
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
           -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
         }
-        .line-wrap {
-          height: 40px;
-        }
-        .line-center {
-          line-height: 40px;
-          span {
-            vertical-align: middle;
-            font-family: MicrosoftYaHei;
-            color: rgba(109, 104, 127, 1);
-            padding-top: 1px;
-            display: inline-block;
-          }
-        }
-        .line-center img {
-          width: 22px;
-          height: 22px;
-          padding: 0px;
-          margin: 0px 10px 0px 14px;
-          vertical-align: middle;
-          font-family: MicrosoftYaHei;
-          color: rgba(109, 104, 127, 1);
-        }
       }
-    }
-    .el-card {
-      box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-      border-radius: 16px;
-    }
-  }
-
-  // 新上好课详情
-  .courseList {
-    width: 1100px;
-    margin: 0 auto;
-    .bottom {
-      margin-bottom: 40px;
-    }
-    .boxshadow-none {
-      position: relative;
-    }
-    .course {
-      width: 100%;
-      padding: 40px 0 40px 40px;
-      border-radius: 6px;
-      background-color: #fff;
-      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-      .el-card {
-        // width: 400px;
-        // height: 392px;
-        font-size: 0;
-        position: relative;
-        .img-wrap {
-          width: 400px;
-          height: 260px;
-          overflow: hidden;
-          img {
-            width: 100%;
-            height: 100%;
-          }
+      .study {
+        padding: 15px 40px 0;
+        .coin {
+          color: red;
+          font-size: 17px;
+          padding-left: 20px;
         }
-        &>img {
-          width: 400px;
-          height: 260px;
-        }
-        .personInfo {
-          width: 100%;
-          height: 132px;
-          background-color: #6417a6;
-          img {
-            float: left;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            margin: 31px 26px;
-          }
-          h5,
-          p {
-            float: left;
-            width: 274px;
-            color: #fff;
-          }
-          h5 {
-            margin-top: 41px;
-            font-size: 18px;
-          }
-          p {
-            font-weight: 400;
+        span {
+          font-size: 14px;
+          color: #888888;
+          margin-top: 21px;
+          display: inline-block;
+          &:nth-child(3) {
+            width: 140px;
             height: 36px;
             line-height: 36px;
-            font-size: 14px;
+            border: 1px solid #6417a6;
+            color: #6417a6;
+            text-align: center;
+            border-radius: 18px;
+            cursor: pointer;
+          }
+          img {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
           }
         }
-        .play-btn {
-          width: 76px;
-          height: 76px;
-          border-radius: 38px;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          margin-left: -43px;
-          margin-top: -89px;
+        div {
+          margin-top: 10px;
+        }
+      }
+      .date {
+        color: rgba(136, 136, 136, 1);
+        font-size: 14px;
+      }
+      .time {
+        color: rgba(136, 136, 136, 1);
+        font-size: 14px;
+        margin: 10px 40px;
+      }
+      .more {
+        color: #6417a6;
+        font-size: 14px;
+        margin: 10px 40px;
+        cursor: pointer;
+      }
+    }
+    .particularss {
+      width: 510px;
+      margin-right: 30px;
+      .currentclum {
+        font-size: 16px;
+        font-family: MicrosoftYaHei;
+        color: rgba(34, 34, 34, 1);
+        line-height: 0px;
+        cursor: pointer;
+        h4 {
+          font-size: 16px;
+          color: #222;
+          height: 54px;
+          line-height: 54px;
+          margin-bottom: 30px;
+        }
+        h4:hover {
+          color: #8f4acb;
           cursor: pointer;
         }
-      }
-      .goodplay {
-        position: relative;
-        .image {
-          width: 480px;
-          height: 312px;
+        .coursenum {
+          width: auto;
+          padding-top: 12px;
+          cursor: pointer;
+          span {
+            display: inline-block;
+            margin-right: 15px;
+          }
         }
-        .mask {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 480px;
-          height: 312px;
-          background: rgba(100, 23, 166, 1);
-          opacity: 0.5;
+        .coins {
+          float: right;
+          color: #ff5f5f;
+          padding-top: 17px;
+          font-size: 16px;
+          padding-right: 20px;
         }
-      }
-      .particulars {
-        width: 660px;
-        .currentclum {
-          padding-left: 40px;
-          margin-right: 40px;
-          margin-bottom: 40px;
-          h4 {
-            font-size: 18px;
-            color: #222;
-            height: 54px;
-            line-height: 54px;
-            margin-bottom: 8px;
+        .rate {
+          padding-top: 10px;
+        }
+        p {
+          font-size: 14px;
+          line-height: 30px;
+          color: #222;
+        }
+        span {
+          font-size: 14px;
+          color: #888888;
+          &:nth-child(2) {
+            width: 140px;
+            height: 36px;
+            line-height: 36px;
+            // border: 1px solid #6417a6;
+            // color: #6417a6;
+            text-align: center;
+            border-radius: 18px;
             cursor: pointer;
           }
-          h4:hover {
-            color: #8f4acb;
-          }
-          p {
-            font-size: 14px;
-            line-height: 30px;
-            color: #222;
-            cursor: pointer;
+          img {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
           }
         }
-        .comment {
-          height: 134px;
-          margin-top: 5px;
-          padding: 0 40px 10px;
-          background-color: #fafafa;
-          color: #888;
-          h5 {
-            line-height: 40px;
+        .itemBox-info {
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(176, 174, 184, 1);
+          line-height: 0px;
+          margin: 0px 0px 0px 15px;
+          .itemBox-num {
+            font-size: 12px;
+            font-family: MicrosoftYaHei;
+            color: rgba(176, 174, 184, 1);
+            line-height: 0px;
+            padding-left: 8px;
+            width: 160px;
+            img {
+              width: 12px;
+              height: 12px;
+              margin: 0px 5px;
+            }
             .itemBox-rate {
-              display: inline-block;
-              height: 40px;
-              line-height: 40px;
-              margin-left: 20px;
-              vertical-align: middle;
+              // display: inline;
+              font-size: 12px;
+              line-height: 13px;
+              float: right;
             }
           }
-          p {
-            font-size: 14px;
-            color: #888888;
-            line-height: 30px;
+        }
+      }
+      .comment {
+        height: 134px;
+        margin-top: 40px;
+        padding: 0 40px 10px;
+        background-color: #fafafa;
+        color: #888;
+        h5 {
+          line-height: 40px;
+          .itemBox-rate {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 20px;
+            vertical-align: middle;
           }
         }
-        .bordernone {
-          border: none;
-          padding-top: 0px;
+        p {
+          font-size: 14px;
+          color: #888888;
+          line-height: 30px;
+        }
+      }
+      .study {
+        // padding: 30px 40px 0;
+        padding: 20px 38px 0px 0px;
+        border-top: 1px rgba(232, 214, 247, 1) solid;
+        // margin-top: 65px;
+        p {
           font-size: 14px;
           font-family: MicrosoftYaHei;
           color: rgba(34, 34, 34, 1);
           line-height: 30px;
-          padding: 0px 40px;
-          p {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-          }
+          margin-bottom: 20px;
         }
-        .study {
-          padding: 15px 40px 0;
-          .coin {
-            color: red;
-            font-size: 17px;
-            padding-left: 20px;
-          }
-          span {
-            font-size: 14px;
-            color: #888888;
-            margin-top: 21px;
-            display: inline-block;
-            &:nth-child(3) {
-              width: 140px;
-              height: 36px;
-              line-height: 36px;
-              border: 1px solid #6417a6;
-              color: #6417a6;
-              text-align: center;
-              border-radius: 18px;
-              cursor: pointer;
-            }
-            img {
-              width: 14px;
-              height: 14px;
-              vertical-align: middle;
-            }
-          }
-          div {
-            margin-top: 10px;
-          }
-        }
-        .date {
-          color: rgba(136, 136, 136, 1);
-          font-size: 14px;
-        }
-        .time {
-          color: rgba(136, 136, 136, 1);
-          font-size: 14px;
-          margin: 10px 40px;
-        }
-        .more {
+        .common-button .is-plain {
+          border-radius: 20px;
+          border-color: #6417a6;
           color: #6417a6;
-          font-size: 14px;
-          margin: 10px 40px;
-          cursor: pointer;
-        }
-      }
-      .particularss {
-        width: 510px;
-        margin-right: 30px;
-        .currentclum {
-          font-size: 16px;
-          font-family: MicrosoftYaHei;
-          color: rgba(34, 34, 34, 1);
-          line-height: 0px;
-          cursor: pointer;
-          h4 {
-            font-size: 16px;
-            color: #222;
-            height: 54px;
-            line-height: 54px;
-            margin-bottom: 30px;
-          }
-          h4:hover {
-            color: #8f4acb;
-            cursor: pointer;
-          }
-          .coursenum {
-            width: auto;
-            padding-top: 12px;
-            cursor: pointer;
-            span {
-              display: inline-block;
-              margin-right: 15px;
-            }
-          }
-          .coins {
-            float: right;
-            color: #ff5f5f;
-            padding-top: 17px;
-            font-size: 16px;
-            padding-right: 20px;
-          }
-          .rate {
-            padding-top: 10px;
-          }
-          p {
-            font-size: 14px;
-            line-height: 30px;
-            color: #222;
-          }
-          span {
-            font-size: 14px;
-            color: #888888;
-            &:nth-child(2) {
-              width: 140px;
-              height: 36px;
-              line-height: 36px;
-              // border: 1px solid #6417a6;
-              // color: #6417a6;
-              text-align: center;
-              border-radius: 18px;
-              cursor: pointer;
-            }
-            img {
-              width: 14px;
-              height: 14px;
-              vertical-align: middle;
-            }
-          }
-          .itemBox-info {
-            font-size: 14px;
-            font-family: MicrosoftYaHei;
-            color: rgba(176, 174, 184, 1);
-            line-height: 0px;
-            margin: 0px 0px 0px 15px;
-            .itemBox-num {
-              font-size: 12px;
-              font-family: MicrosoftYaHei;
-              color: rgba(176, 174, 184, 1);
-              line-height: 0px;
-              padding-left: 8px;
-              width: 160px;
-              img {
-                width: 12px;
-                height: 12px;
-                margin: 0px 5px;
-              }
-              .itemBox-rate {
-                // display: inline;
-                font-size: 12px;
-                line-height: 13px;
-                float: right;
-              }
-            }
-          }
-        }
-        .comment {
-          height: 134px;
-          margin-top: 40px;
-          padding: 0 40px 10px;
-          background-color: #fafafa;
-          color: #888;
-          h5 {
-            line-height: 40px;
-            .itemBox-rate {
-              display: inline-block;
-              height: 40px;
-              line-height: 40px;
-              margin-left: 20px;
-              vertical-align: middle;
-            }
-          }
-          p {
-            font-size: 14px;
-            color: #888888;
-            line-height: 30px;
-          }
-        }
-        .study {
-          // padding: 30px 40px 0;
-          padding: 20px 38px 0px 0px;
-          border-top: 1px rgba(232, 214, 247, 1) solid;
-          // margin-top: 65px;
-          p {
-            font-size: 14px;
-            font-family: MicrosoftYaHei;
-            color: rgba(34, 34, 34, 1);
-            line-height: 30px;
-            margin-bottom: 20px;
-          }
-          .common-button .is-plain {
-            border-radius: 20px;
-            border-color: #6417a6;
-            color: #6417a6;
-            font-weight: 400;
-            transition: all 300ms;
-            &:hover {
-              color: #fff;
-              border-color: #8f4acb;
-            }
+          font-weight: 400;
+          transition: all 300ms;
+          &:hover {
+            color: #fff;
+            border-color: #8f4acb;
           }
         }
       }
     }
   }
+}
 
-  .btn {
-    width: 140px;
-    height: 36px;
-    line-height: 36px;
-    border: 1px solid #6417a6;
+.btn {
+  width: 140px;
+  height: 36px;
+  line-height: 36px;
+  border: 1px solid #6417a6;
+  color: #6417a6;
+  text-align: center;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: #fff;
+  background-color: #6417a6;
+}
+
+.btn-class {
+  width: 140px;
+  border-radius: 20px;
+}
+
+.btn-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -70px;
+  margin-top: -20px;
+  .el-button {
+    width: 174px;
+    height: 56px;
+    line-height: 56px;
+    border-radius: 28px;
     color: #6417a6;
-    text-align: center;
-    border-radius: 18px;
-    cursor: pointer;
+    padding: 0;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: rgba(255, 255, 255, 0.9);
   }
+}
 
-  .btn:hover {
-    color: #fff;
-    background-color: #6417a6;
-  }
+.btn-bgs {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-left: -70px;
+  margin-top: -29px;
+  color: #732eaf;
+}
 
-  .btn-class {
-    width: 140px;
-    border-radius: 20px;
-  }
+.boxshadow-none {
+  box-shadow: none;
+}
 
-  .btn-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -70px;
-    margin-top: -20px;
-    .el-button {
-      width: 174px;
-      height: 56px;
-      line-height: 56px;
-      border-radius: 28px;
-      color: #6417a6;
-      padding: 0;
-      border: none;
-      font-size: 16px;
-      font-weight: 400;
-      background-color: rgba(255, 255, 255, .9);
-    }
-  }
-
-  .btn-bgs {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    margin-left: -70px;
-    margin-top: -29px;
-    color: #732eaf;
-  }
-
-  .boxshadow-none {
-    box-shadow: none;
-  }
-
-  .lines {
-    width: 1000px;
-    height: 1px;
-    background-color: #e8d6f7;
-    margin: 0 auto;
-    position: absolute;
-    top: 0px;
-    z-index: 100;
-    left: 45px;
-  }
+.lines {
+  width: 1000px;
+  height: 1px;
+  background-color: #e8d6f7;
+  margin: 0 auto;
+  position: absolute;
+  top: 0px;
+  z-index: 100;
+  left: 45px;
+}
 </style>
