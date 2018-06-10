@@ -247,18 +247,21 @@ export default {
       return new Promise((resolve, reject) => {
         home.getPlayerInfo(this.playerForm).then(response => {
           if (response.data.playAuthInfo.videoViewType == false) {
-            this.tcplayer.fileID = response.data.playAuthInfo.fileID;
-            this.tcplayer.appID = response.data.playAuthInfo.appID;
-            this.tcplayer.sign = response.data.playAuthInfo.sign;
-            this.tcplayer.t = response.data.playAuthInfo.t;
-            this.tcplayer.exper = response.data.playAuthInfo.appID;
+            player.loadVideoByID({
+              fileID : response.data.playAuthInfo.fileID,
+              appID : response.data.playAuthInfo.appID,
+              sign : response.data.playAuthInfo.sign,
+              t : response.data.playAuthInfo.t,
+             exper : response.data.playAuthInfo.appID
+            })
           } else {
-            this.tcplayer.fileID = response.data.playAuthInfo.fileID;
-            this.tcplayer.appID = response.data.playAuthInfo.appID;
-            this.tcplayer.sign = response.data.playAuthInfo.sign;
-            this.tcplayer.t = response.data.playAuthInfo.t;
+            player.loadVideoByID({
+              fileID : response.data.playAuthInfo.fileID,
+              appID : response.data.playAuthInfo.appID,
+              t : response.data.playAuthInfo.t,
+              sign : response.data.playAuthInfo.sign
+            })
           }
-          player.loadVideoByID(this.tcplayer);
         });
       });
     },
