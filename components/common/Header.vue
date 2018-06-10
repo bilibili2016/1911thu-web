@@ -389,7 +389,7 @@ export default {
           }else{
             this.bindTelData.captchaDisable = false;
           }
-          console.log(response.status);
+          // console.log(response.status);
 
         });
       });
@@ -469,7 +469,7 @@ export default {
     getWXAccredit(){
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
-          console.log(response.status); // 0 token  100102 openid
+          // console.log(response.status); // 0 token  100102 openid
           if(response.status === 0){
             persistStore.set("token",response.data.token);
             clearInterval(this.getwxtime);

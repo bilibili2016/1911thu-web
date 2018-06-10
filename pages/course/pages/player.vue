@@ -190,7 +190,10 @@ export default {
         curriculumId: null
       },
       collectMsg: 1,
-      iseve: 1
+      iseve: 1,
+      getdefaultForm: {
+          curriculumid: ''
+      }
     };
   },
 
@@ -244,7 +247,7 @@ export default {
         $("#playInner").html("");
         $("#playInner").html('<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>');
       }
-      console.log(this.kid)
+      // console.log(this.kid)
       let kid = this.kid
       //  persistStore.set("curriculumId", item.id)
       this.playerForm.curriculumId = persistStore.get('curriculumId');
@@ -253,7 +256,7 @@ export default {
       player = TCPlayer("movd", this.tcplayer);
       return new Promise((resolve, reject) => {
         home.getPlayerInfos(this.playerForm).then(response => {
-          console.log(this.playerForm, '12345678')
+          // console.log(this.playerForm, '12345678')
           if (response.data.playAuthInfo.videoViewType == false) {
             player.loadVideoByID({
               fileID : response.data.playAuthInfo.fileID,
@@ -284,6 +287,7 @@ export default {
         });
       });
     },
+
     // 反馈问题
     reportProblem() {
       this.problem.curriculumId = persistStore.get("curriculumId");
