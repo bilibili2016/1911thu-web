@@ -242,6 +242,12 @@ import { store as persistStore } from '~/lib/core/store'
             // console.log(response, '345678')
             this.player = response.data.curriculumDetail
             this.courseList = response.data.curriculumCatalogList
+            // console.log(response.data.curriculumCatalogList, '123')
+            for (let item of response.data.curriculumCatalogList){
+              for(let i of item.childList){
+                  i.video_time = Math.round(i.video_time/60)
+              }
+            }
             this.collectMsg = response.data.curriculumDetail.is_collection
           });
         });

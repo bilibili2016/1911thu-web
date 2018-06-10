@@ -5,7 +5,7 @@
       <!-- {{privileMsg}}  1{{isAuthenticated}} -->
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="checked(index)">
         <span class="fl playIcon"><i class="el-icon-caret-right"></i></span>
-        <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}）</span>
+        <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}分钟）</span>
         <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
         <span v-if="isAuthenticated" class="fr">
             <span v-if="privileMsg === false">
@@ -78,6 +78,7 @@ export default {
         message: "请登录后,进行试看",
         type: "success"
       });
+      this.$bus.$emit('loginShow', true)
     }
   }
 };

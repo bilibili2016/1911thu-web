@@ -6,7 +6,7 @@
         <!-- v-if="courseList.CurriculumPayApplyList.length<3"  -->
         <div class="title clearfix">
           <span class="fl">{{courseList.company_name}}</span>
-          <span class="fr">{{courseList.batch}}</span>
+          <span class="fr">{{courseList.create_time}}</span>
         </div>
         <div class="content">
           <div class="course">
@@ -62,9 +62,9 @@ import { store as persistStore } from '~/lib/core/store'
            this.curriculumPayData = response.data.curriculumPayApply
            console.log(response, '123')
            for(let item of response.data.curriculumPayApply){
-             this.time = this.timestampToTime(item.create_time)
-             console.log(this.time, '678')
-
+             item.create_time = this.timestampToTime(item.create_time)
+            //  console.log(this.time, '678')
+            console.log(item, '这是item')
            }
             resolve(true)
           })
