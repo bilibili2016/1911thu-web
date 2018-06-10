@@ -216,7 +216,7 @@ export default {
         id:"wxchatIMG", 
         appid: "wxefa2295aae13fe2e", 
         scope: "snsapi_login", 
-        redirect_uri: encodeURI("http://www.1911edu.com/Wapi/Index/wxBack"),//重定向地址
+        redirect_uri: "",//重定向地址
       },
       bindTelData: {
         tel: "",
@@ -397,6 +397,9 @@ export default {
     },
     // 获取微信登录二维码
     async wxLogin() {
+      // this.WxLogin.redirect_uri = encodeURI("http://www.1911edu.com/Wapi/Index/wxBack");
+      this.WxLogin.redirect_uri = "http%3A%2F%2Fwww.1911edu.com%2FWapi%2FIndex%2FwxBack";
+      console.log(this.WxLogin.redirect_uri);
       const weixin = new WxLogin(this.WxLogin);
       //  var obj = new WxLogin({
       //     id:this.WxLogin.id, 
