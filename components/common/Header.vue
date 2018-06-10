@@ -459,6 +459,7 @@ export default {
               message: "登录成功！"
             });
             this.tokenForm.token = response.data.token
+            console.log(response.data.token, '123')
             this.setToken(this.tokenForm)
             this.closeWechat();
             this.close();
@@ -476,7 +477,8 @@ export default {
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
           if(response.status === 0){
-             this.tokenForm.token = response.data.token
+             this.tokenForm.tokens = response.data.token
+             console.log(response.data.token,'999999')
             this.setToken(this.tokenForm)
             clearInterval(this.getwxtime);
             this.scanCodeShow = false; //微信扫码
