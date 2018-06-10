@@ -73,11 +73,11 @@
           <el-tab-pane label="注册" name="register">
             <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
               <el-form-item prop="phones">
-                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable @blur="verifyRgTel"></el-input>
+                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                <div class="getCode" @click="handleGetCode(registerData)">{{bindTelData.getCode}}</div>
+                <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div>
                 <!--  -->
               </el-form-item>
                <el-form-item prop="passwords">
@@ -108,12 +108,12 @@
            <!-- <i class="el-icon-close fr" @click="closeWechat"></i> -->
           <el-form-item prop="tel">
 
-            <el-input v-model.number="bindTelData.phones" @blur="verifyRgTelWX" placeholder="请输入登录手机号"></el-input>
+            <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
           </el-form-item>
           <el-form-item prop="code">
 
             <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
-            <div class="getCode" @click="handleGetCode(bindTelData)">{{bindTelData.getCode}}</div>
+            <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
           </el-form-item>
 
           <el-form-item prop="companyCodes">
@@ -126,7 +126,7 @@
         </el-form>
 
         <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"><i class="el-icon-close fr" @click="closeWechat"></i></h4> <!-- el-icon-loading -->
+          <h4 class="clearfix"></h4> <!-- el-icon-loading -->
           <div class="wxchatIMG" id="wxchatIMG"></div>
           <!-- <p>二维码将在5分钟后失效！<i @click="getWXRecode">重新获取二维码</i></p> -->
         </div>
@@ -172,7 +172,6 @@ export default {
       if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
         return callback(new Error("请输入正确手机号"));
       }
-      // this.verifyRgTel();
     };
     var validatePass = (rule, value, callback) => {
       if (value === "") {
@@ -307,6 +306,9 @@ export default {
       getwxtime: null,
       gidForm: {
         gids: null
+      },
+      tokenForm:{
+        tokens: ''
       }
     };
   },
@@ -324,9 +326,10 @@ export default {
     });
   },
   methods: {
-    ...mapActions("auth", ["signIn", "setGid", "setProductsNum", "signOut"]),
+    ...mapActions("auth", ["signIn", "setGid", "setProductsNum", "signOut", 'setToken']),
     // 登录显示card
     async loginCardShow() {
+      this.closeWechat();
       this.start = true;
       this.lrFrame = this.start;
       this.activeName = "login";
@@ -368,10 +371,11 @@ export default {
             type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          if (response.status != "0") {
+          if (response.status != 0) {
             this.bindTelData.captchaDisable = true;
           } else {
             this.bindTelData.captchaDisable = false;
+            this.handleGetCode(this.registerData);
           }
         });
       });
@@ -380,17 +384,17 @@ export default {
     verifyRgTelWX() {
       return new Promise((resolve, reject) => {
         auth.verifywechat(this.bindTelData).then(response => {
-          this.$message({
-            type: response.status === 0 ? "success" : "error",
-            message: response.msg
-          });
+          console.log(response)
           if (response.status != 0) {
+            this.$message({
+              type: "error",
+              message: response.msg
+            });
             this.bindTelData.captchaDisable = true;
           }else{
             this.bindTelData.captchaDisable = false;
+            this.handleGetCode(this.bindTelData);
           }
-          // console.log(response.status);
-
         });
       });
     },
@@ -454,8 +458,10 @@ export default {
               type: "success",
               message: "登录成功！"
             });
-            persistStore.set("token",response.data.token);
+            this.tokenForm.token = response.data.token
+            this.setToken(this.tokenForm)
             this.closeWechat();
+            this.close();
           }else{
             this.$message({
               type: "error",
@@ -469,9 +475,9 @@ export default {
     getWXAccredit(){
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
-          // console.log(response.status); // 0 token  100102 openid
           if(response.status === 0){
-            persistStore.set("token",response.data.token);
+             this.tokenForm.token = response.data.token
+            this.setToken(this.tokenForm)
             clearInterval(this.getwxtime);
             this.scanCodeShow = false; //微信扫码
             this.closeWechat();
@@ -481,6 +487,7 @@ export default {
             this.bindTelShow=true;
             this.bindTelData.captchaDisable = true;
             this.bindTelData.openid = response.data.openid;
+            clearInterval(this.getwxtime);
           }else if(response.status === 100100){
             this.$message({
               type: "error",
@@ -522,6 +529,7 @@ export default {
       }
     },
     register() {
+      this.closeWechat();
       this.start = true;
       this.lrFrame = true;
       this.activeName = "register";
@@ -537,14 +545,16 @@ export default {
       this.lrFrame = false;
       this.bgMsg = false;
       this.emptyForm();
-      clearInterval(getwxtime);
+      clearInterval(this.getwxtime);
     },
     closeWechat() {
       this.move();
       this.start = false;
       this.lrFrame = false;
       this.wechatLogin = false;
-      clearInterval(getwxtime);
+      this.scanCodeShow = false;
+      this.bindTelShow=false;
+      clearInterval(this.getwxtime);
       // document.body.style.overflow = "auto";
     },
     emptyForm() {

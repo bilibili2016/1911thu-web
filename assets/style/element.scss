@@ -183,6 +183,9 @@
 
 // 登录注册 tab切换
 .start {
+  .el-form {
+    padding-top:16px;
+  }
   .el-tabs__header {
     margin: 0 0 18px;
   }
@@ -222,7 +225,7 @@
     position: relative;
   }
   .el-form-item__error {
-    left: 63px;
+    left: 83px;
   }
   .el-input__suffix .el-input__validateIcon {
     display: none;
@@ -280,7 +283,12 @@
     .captcha {
       width: 132px;
     }
-
+  }
+  .el-form-item.is-success .el-input__inner,
+  .el-form-item.is-success .el-input__inner:focus,
+  .el-form-item.is-success .el-textarea__inner,
+  .el-form-item.is-success .el-textarea__inner:focus{
+    border-color: #222;
   }
 }
 
