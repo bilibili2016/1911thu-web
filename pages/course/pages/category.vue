@@ -188,7 +188,6 @@
         // this.curriculumListForm.sortBy = 1
         return new Promise((resolve, reject) => {
           home.curriculumList(this.curriculumListForm).then(response => {
-            // console.log(response, '99999')
             this.categoryData = response.data.curriculumList
             this.pagemsg.total = response.data.pageCount
             resolve(true)
