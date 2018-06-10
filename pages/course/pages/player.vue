@@ -230,7 +230,7 @@ import { store as persistStore } from '~/lib/core/store'
             this.tcplayer.m3u8 = response.data.playurl
             this.tcplayer.fileID = response.data.playAuthInfo.fileID
             this.tcplayer.appID = response.data.playAuthInfo.appID
-             const player = new TcPlayer('movd' , this.tcplayer);
+            const player = new TcPlayer('movd' , this.tcplayer);
 
           });
         });
