@@ -280,7 +280,6 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get("curriculumId");
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          // console.log(response, '345678')
           this.player = response.data.curriculumDetail;
           this.courseList = response.data.curriculumCatalogList;
           this.collectMsg = response.data.curriculumDetail.is_collection;
