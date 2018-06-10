@@ -46,9 +46,9 @@
      <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
     </div>
-    <div v-if="isShowTip">
+    <!-- <div v-if="isShowTip">
       <v-unlogged v-if="!this.isAuthenticated"></v-unlogged>
-    </div>
+    </div> -->
     <!-- <v-shop></v-shop> -->
   </div>
 </template>
@@ -85,7 +85,7 @@ export default {
       value3: true,
       value4: true,
       configSevent: {
-        card_type: "profile",
+        card_type: "shoucang",
         card: "home",
         types: "buy"
       },
@@ -177,7 +177,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList;
-          console.log(response, "返回的response");
+          // console.log(response, "返回的response");
           if (this.cid === "50") {
             this.data2 = this.data[0];
           } else if (this.cid === "51") {
@@ -199,9 +199,12 @@ export default {
     this.bgmsg = Number(this.cid) + Number(1);
     this.bgmsgs = Number(this.pid) + Number(1);
     this.cidform.cids = "";
+    this.pidform.pids = "";
     this.bgmsg = 0;
 
     this.setCid(this.cidform);
+   this.pidform.pids = "";
+      this.setPid(this.pidform);
     this.curriculumList();
     this.childCategoryList();
   }

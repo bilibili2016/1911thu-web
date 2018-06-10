@@ -24,12 +24,12 @@
         </div>
         <div class="QRCode clearfix">
           <div>
-            <img src="../../assets/images/attentionWX.png" alt="">
-            <!-- <p>扫码关注公众号</p> -->
+            <img src="@/assets/images/wechatLogin.png" alt="">
+            <p>扫码关注公众号</p>
           </div>
           <div>
-            <img src="../../assets/images/downLoadApp.png" alt="">
-            <!-- <p>扫码下载APP</p> -->
+            <img src="@/assets/images/wechatLogin.png" alt="">
+            <p>扫码下载APP</p>
           </div>
         </div>
       </div>

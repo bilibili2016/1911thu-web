@@ -19,14 +19,14 @@
               </div>
             </div>
             <div class="coursePrice">
-              ￥{{course.price}}
+              ￥{{course.present_price}}
             </div>
             <div class="courseOperation">
               删除
             </div>
           </div>
         </div>
-        <div class="tableFooter">商品总额：￥94.00</div>
+        <!-- <div class="tableFooter">商品总额：￥94.00</div> -->
       </div>
     </div>
   </div>
@@ -88,7 +88,6 @@ import { store as persistStore } from '~/lib/core/store'
           home.curriculumPayApply().then(response => {
             // console.log(response, '123')
             this.courseList = response.data.curriculumPayApply[this.payIndex].CurriculumPayApplyList
-            // console.log(this.courseList, '123')
             resolve(true)
           })
         })

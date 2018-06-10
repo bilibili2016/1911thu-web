@@ -150,13 +150,7 @@
         return new Promise((resolve, reject) => {
           home.childCategoryList().then(response => {
             this.data = response.data.categoryList
-            if(this.cid === '50'){
-              this.data2 = this.data[0]
-            } else if (this.cid === '51'){
-              this.data2 = this.data[1]
-            } else {
-              this.data2 = this.data[2]
-            }
+            this.data2 = this.data[this.$route.params.id]
             resolve(true)
           })
         })
