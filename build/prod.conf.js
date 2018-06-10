@@ -14,13 +14,34 @@ config.sentry = {
     maxBreadcrumbs: 50
   }
 }
+config.head.link = [{
+    rel: 'icon',
+    type: 'image/x-icon',
+    href: '/favicon.ico'
+  },
+  {
+    rel: 'stylesheet',
+    href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
+  }
+],
+
 
 config.head.script = [
   { src: 'https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js', async: true },
   {
-    src: 'https://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js',
+    src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
     async: true
-  }
+  },
+  {
+    src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
+
+    async: true
+  },
+   {
+     src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+     async: true
+   }
+
 ]
 
 module.exports = config

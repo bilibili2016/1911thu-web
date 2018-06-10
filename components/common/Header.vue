@@ -17,14 +17,13 @@
             <img class="fl" src="@/assets/images/wechatLogin.png" alt="">
             <div class="changeType fr">
               <span>下载1911学堂APP</span>
-              <span><img src="@/assets/images/iphone.png" alt=""> App Store下载</span>
-              <span><img src="@/assets/images/Android.png" alt=""> Android下载</span>
+              <span><img src="@/assets/images/iphone.png" alt="">AppStore下载</span>
+              <span><img src="@/assets/images/Android.png" alt="">Android下载</span>
             </div>
           </div>
         </div>
         <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
-        <i v-show="shoppingCartNum>0" v-if="productsNum>0">{{productsNum}}</i>
-          <img src="@/assets/images/shoppingCart.png" alt="">
+          <span class="cartIcon"></span>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -36,7 +35,7 @@
       <div class="headImg" v-else>
         <img :src="user.userImg" alt="">
         <ul class="subPages">
-          <li class="cli" @click="goLink('tab-first')">我的首页</li>
+          <li @click="goLink('tab-first')">我的首页</li>
           <li @click="goLink('tab-second')">我的课程</li>
           <li @click="goLink('tab-third')">我的消息</li>
           <li @click="goLink('tab-fourth')">个人设置</li>
@@ -56,7 +55,7 @@
             <!-- 登录 表单-->
             <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm">
               <el-form-item prop="phonenum">
-                <el-input v-model.number="loginData.phonenum" placeholder="请输入登录手机号" clearable></el-input>
+                <el-input v-model.number="loginData.phonenum" auto-complete ="off" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="password">
                 <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
@@ -65,7 +64,7 @@
               <el-row>
                  <!-- @click="goSearchd('/home/pages/forgotPassword')"  -->
                 <div @click="forget">忘记密码?</div>
-                <el-button @click="signIns('loginData')">登录{{this.token}}</el-button>
+                <el-button @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -126,10 +125,9 @@
         </el-form>
 
         <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"><span>微信登录</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4> <!-- el-icon-loading -->
-          <img :src="getWXLoginImg.isget" alt="">
-          <h5>请使用微信扫描“1911学堂”二维码登录</h5>
-          <p>二维码将在5分钟后失效！<i @click="getWXCode">重新获取二维码</i></p>
+          <h4 class="clearfix"><i class="el-icon-close fr" @click="closeWechat"></i></h4> <!-- el-icon-loading -->
+          <div class="wxchatIMG" id="wxchatIMG"></div>
+          <!-- <p>二维码将在5分钟后失效！<i @click="getWXRecode">重新获取二维码</i></p> -->
         </div>
 
         <div class="bindSuccess" v-show="bindSuccessShow">
@@ -211,12 +209,21 @@ export default {
       bindTelShow: false,
       scanCodeShow: false,
       bindSuccessShow: false,
+      WxLogin:{
+        self_redirect:true,
+        id:"wxchatIMG",
+        appid: "wxefa2295aae13fe2e",
+        scope: "snsapi_login",
+        redirect_uri: "",//重定向地址
+        state:""
+      },
       bindTelData: {
         tel: "",
         code: "",
         getCode: "获取验证码",
-        seconds: 60,
+        seconds: 30,
         captchaDisable: false,
+        exist:false,
         checked: false
       },
       getWXLoginImg: {
@@ -394,15 +401,33 @@ export default {
       });
       this.move();
     },
-    // 获取微信登录二维码
+    // 从微信拉取二维码
     async wxLogin() {
+      this.WxLogin.redirect_uri = "http%3A%2F%2Fwww.1911edu.com%2FWapi%2FIndex%2FwxBack";
+      this.WxLogin.state = Math.random().toString(36).substr(2);
+      const weixin = new WxLogin(this.WxLogin);
+      var getwxtime = setInterval(() => {
+        this.getWXAccredit();
+      }, 4000);
+
+      // return new Promise((resolve, reject) => {
+      //   auth.wechat(this.getWXLoginImg.isget).then(response => {
+      //     this.getWXLoginImg.isget = response.data.url;
+      //     var timewx = setInterval(() => {
+      //       this.getWXLoginImg.time--;
+      //       this.getWXLogin();
+      //     }, 1000);
+      //   });
+      // });
+    },
+    //获取微信登录是否已经绑定
+    getWXAccredit(){
       return new Promise((resolve, reject) => {
-        auth.wechat(this.getWXLoginImg.isget).then(response => {
-          this.getWXLoginImg.isget = response.data.url;
-          var timewx = setInterval(() => {
-            this.getWXLoginImg.time--;
-            this.getWXLogin();
-          }, 1000);
+        auth.getWXAccredit(this.WxLogin).then(response => {
+          console.log(response.status);
+          if(response.status === 0 || response.status === 100102){
+            clearInterval(getwxtime);
+          }
         });
       });
     },
@@ -475,6 +500,7 @@ export default {
       this.lrFrame = false;
       this.bgMsg = false;
       this.emptyForm();
+      clearInterval(getwxtime);
     },
     closeWechat() {
       this.move();
@@ -482,6 +508,7 @@ export default {
       this.lrFrame = false;
       this.wechatLogin = false;
       clearInterval(timewx);
+      clearInterval(getwxtime);
       // document.body.style.overflow = "auto";
     },
     emptyForm() {
@@ -504,12 +531,11 @@ export default {
       this.lrFrame = false;
       this.wechatLogin = true;
       this.scanCodeShow = true; //微信扫码
-      // this.bindTelShow=true; //绑定手机号
+      //this.bindTelShow=true; //绑定手机号
       // this.bindSuccessShow=true; // 登录成功
       this.wxLogin();
     },
-    getWXCode() {
-      // console.log(this.getWXLoginImg.time);
+    getWXRecode() { //刷新二维码
       if (this.getWXLoginImg.time < 1) {
         clearInterval(timewx);
         this.wxLogin();
@@ -519,6 +545,9 @@ export default {
           type: "warning"
         });
       }
+    },
+    polling(){//轮询请求 微信扫码结果
+
     },
     stop() {
       var mo = function(e) {
@@ -579,6 +608,11 @@ export default {
       //     break
       // }
     }
+  },
+  mounted () {
+    this.$bus.$on('loginShow',(data)=>{
+      this.loginCardShow()
+    })
   }
 };
 </script>

@@ -43,7 +43,7 @@
     </div>
     <!-- <v-filter></v-filter> -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count ="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
   </div>
 </template>
@@ -79,7 +79,7 @@
         },
         pagemsg: {
           page: 1,
-          pagesize: 5,
+          pagesize: 8,
           total:5
         },
         categoryData: [
@@ -108,6 +108,19 @@
         'setPid',
         'setProductsNum'
       ]),
+      handleCurrentChange(val){
+        this.pagemsg.page = val;
+        this.curriculumListForm.pages = val
+        this.curriculumListForm.limits = 8
+
+        return new Promise((resolve, reject) => {
+          home.curriculumList(this.curriculumListForm).then(response => {
+            this.categoryData = response.data.curriculumList
+            this.pagemsg.total = response.data.pageCount
+            resolve(true)
+          })
+        })
+      },
       handleItemOne(item, index) {
          this.bgmsgs = 0
         this.bgmsg = item.id;
@@ -151,7 +164,30 @@
         return new Promise((resolve, reject) => {
           home.childCategoryList().then(response => {
             this.data = response.data.categoryList
-            this.data2 = this.data[this.$route.params.id]
+            switch (this.cid) {
+
+              case '1':
+                this.data2 = this.data[0]
+                break;
+              case '16':
+                this.data2 = this.data[1]
+                break;
+              case '17':
+                this.data2 = this.data[2]
+                break;
+              case '18':
+                this.data2 = this.data[3]
+                break;
+              case '19':
+                this.data2 = this.data[4]
+                break;
+              case '20':
+                this.data2 = this.data[5]
+                break;
+              default:
+                // this.$router.push("/course/pages/search");
+                break;
+            }
             resolve(true)
           })
         })
@@ -162,10 +198,9 @@
         // this.curriculumListForm.sortBy = 1
         return new Promise((resolve, reject) => {
           home.curriculumList(this.curriculumListForm).then(response => {
-            // console.log(response, '99999')
             this.categoryData = response.data.curriculumList
             this.pagemsg.total = response.data.pageCount
-            setProductsNum({pn:his.categoryData.length})
+            this.setProductsNum({pn:this.categoryData.length})
             resolve(true)
           })
         })
@@ -175,6 +210,7 @@
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
       // console.log(Number(this.cid), '123')
+      this.activeName = 'first'
       this.bgmsg = this.cid
       this.bgmsgs = this.pid
       this.childCategoryList()

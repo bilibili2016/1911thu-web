@@ -263,7 +263,7 @@
               <el-button type="primary" plain @click="goLink('player')" v-if="privileMsg === false">立即观看</el-button>
             </div>
             <div v-else>
-              <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看</el-button>
+              <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
           </div>
         </div>
@@ -281,7 +281,7 @@
           <p>{{courseList.introduction}}</p>
           <div class="common-button">
             <div v-if="isAuthenticated">
-              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习4</el-button>
+              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
               <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
             <div v-else>
@@ -333,7 +333,7 @@
         </div>
       </el-card>
     </div>
-    <div class="more newsMore" @click="getMore(linkdata)">查看更多>></div>
+    <div class="more" @click="getMore(linkdata)">查看更多>></div>
   </div>
 </template>
 
@@ -406,7 +406,7 @@ export default {
   },
   computed: {
     ...mapGetters("auth", ["isAuthenticated"]),
-    ...mapState("auth", ["token", "productsNum", 'kid'])
+    ...mapState("auth", ["token", "productsNum"])
   },
   methods: {
     ...mapActions("auth", ["setProductsNum", "setKid"]),
@@ -431,18 +431,6 @@ export default {
       }
       this.setProductsNum({ pn: len });
     },
-    goBuy(item, index) {
-        // this.curriculumcartids.cartid = item.curriculum_id;
-        if(this.isAuthenticated){
-            this.addShopCarts();
-        } else {
-          this.$bus.$emit('loginShow', true)
-        }
-
-      },
-      goBuy3(item,index){
-          this.$bus.$emit('loginShow', true)
-      },
     goLink(item) {
       switch (window.location.pathname) {
         case "/course/pages/category":
@@ -470,16 +458,40 @@ export default {
           break;
       }
     },
+    methods: {
+      ...mapActions("auth", ["setProductsNum", 'setNumber', 'setKid']),
+      goLink(item) {
+      this.$router.push(item);
+      },
+      selCheckboxChange(item,index){
+        // console.log('123')
+        // console.log(item, '这是item')
+        // console.log(item.is_checked === false)
+        if (item.is_checked === false) {
+          item.is_checked = false
+          this.curriculumcartid.numberArr.push(item.id)
+          this.curriculumcartids.cartid = item.id
+          this.delShopCart()
+
+      // let pronum = this.productsNum;
+      // pronum = pronum + 1;
+      // this.setProductsNum({
+      //   pn: pronum
+      // });
+        }
+      },
+      goBuy(item, index) {
+        // this.curriculumcartids.cartid = item.curriculum_id;
+        this.addShopCarts();
+      },
     addShopCarts() {
-      console.log(this.kid, '123')
       this.curriculumcartids.cartid = this.kid;
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          // let newData = response.data.data;
-          console.log(response, '123')
-          this.$router.push('/shop/shoppingCart')
+          let newData = response.data.data;
         });
       });
+
       for (var i = 0; i < this.data.length; i++) {
         if (i === index) {
           // this.nextmsg = true
@@ -546,6 +558,7 @@ export default {
   mounted() {
     // console.log(this.data, '返回的数据')
   }
+}
 }
 </script>
 
@@ -665,17 +678,12 @@ export default {
 // 新上好课
 .card-category {
   display: flex;
-  // justify-content: space-between;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
   .card-list {
-    margin: 0 32px 50px 0;
-    // margin-bottom: 50px;
+    margin-bottom: 50px;
     border-radius: 16px;
-    &:nth-child(4n+4){
-      margin-right: 0;
-    }
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
       transition: all 300ms;
@@ -841,7 +849,7 @@ export default {
         }
       }
       .line-centers {
-        padding: 0px 14px 0px 13px;
+        padding: 0px 14px 0px 0;
         p {
           margin-bottom: 10px;
           font-size: 14px;
@@ -873,15 +881,7 @@ export default {
     border-radius: 16px;
   }
 }
-#pane-first .card-category .card-list{
-  margin: 0 24px 50px 0;
-  &:nth-child(4n+4){
-    margin-right: 24px;
-  }
-  &:nth-child(3n+3){
-    margin-right: 0;
-  }
-}
+
 // 学堂资讯
 .info-list {
   float: right;
@@ -938,10 +938,6 @@ export default {
     font-family: MicrosoftYaHei;
     color: rgba(100, 23, 166, 1);
     line-height: 40px;
-    &.newsMore:hover{
-      transition: all 300;
-      color: #8f4acb;
-    }
   }
 }
 

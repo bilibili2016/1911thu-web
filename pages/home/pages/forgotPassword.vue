@@ -44,7 +44,7 @@ export default {
       showPwd: false,
       pwdType: "password",
       fpData: {
-        seconds: 60,
+        seconds: 30,
         phones: null,
         code: "",
         password:"",
@@ -55,7 +55,7 @@ export default {
       },
       formRules: {
         password: [
-          { required: true, message: "请输入账户密码1", trigger: "blur" },
+          { required: true, message: "请输入您新设置的密码", trigger: "blur" },
           {
             type: "string",
             min: 8,
@@ -82,7 +82,7 @@ export default {
         tel: "",
         code: "",
         getCode: "获取验证码",
-        seconds: 60,
+        seconds: 30,
         captchaDisable: false,
         checked: false,
         types: 1
@@ -127,21 +127,23 @@ export default {
         return new Promise((resolve, reject) => {
           auth.smsCodes(this.fpData).then(response => {
             this.$message({
-              type: "success",
+              type: response.status === 0 ? "success" : "error",
               message: response.msg
             });
-            this.captchaDisable = true;
-            this.fpData.getCode = this.fpData.seconds + "秒后重新发送";
-            let interval = setInterval(() => {
-              if (this.fpData.seconds <= 0) {
-                this.fpData.getCode = "获取验证码";
-                this.fpData.seconds = 60;
-                this.captchaDisable = false;
-                clearInterval(interval);
-              } else {
-                this.fpData.getCode = --this.fpData.seconds + "秒后重新发送";
-              }
-            }, 1000);
+            if(response.status === 0){
+              this.captchaDisable = true;
+              this.fpData.getCode = this.fpData.seconds + "秒后重新发送";
+              let interval = setInterval(() => {
+                if (this.fpData.seconds <= 0) {
+                  this.fpData.getCode = "获取验证码";
+                  this.fpData.seconds = 30;
+                  this.captchaDisable = false;
+                  clearInterval(interval);
+                } else {
+                  this.fpData.getCode = --this.fpData.seconds + "秒后重新发送";
+                }
+              }, 1000);
+            }
           });
         });
       }

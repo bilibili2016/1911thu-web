@@ -126,7 +126,9 @@ export default {
         contactperson: "",
         phones: "",
         codes: "",
-        types: 6
+        types: 6,
+        getCode: '获取验证码',
+        seconds: 30
       },
       rules: {
         companyname: [

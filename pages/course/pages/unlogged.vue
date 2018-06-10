@@ -18,7 +18,8 @@
     mounted () {},
     methods:{
       showLogin(){
-
+        this.showTip = false
+        this.$bus.$emit("loginShow", true)
       },
       close() {
         this.showTip = false;

@@ -13,9 +13,9 @@
         <div class="fr">
           <div class="collect">
             <div class="line-center">
-              <span @click="collection" :class=" { bag: this.collectMsg === 1 }" >
+              <span @click="collection" :class=" { bag: this.collectMsg === 1 }">
                 <i class="el-icon-star-on"></i>
-                <span :class=" { bag: this.collectMsg === 1 }">收藏 </span>
+                <span>收藏 </span>
               </span>
               <span>
                 <i class="el-icon-share"></i>
@@ -41,7 +41,7 @@
         <div class="attention">
           <h4>关注我们</h4>
           <div class="code">
-            <img src="@/assets/images/attentionWechat.png" alt="">
+            <img src="@/assets/images/wechatLogin.png" alt="">
             <h5>扫描二维码或关注“1911学堂”微信公众号</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
@@ -223,7 +223,7 @@ export default {
         isRecommend: 2
       },
       privileMsg: true,
-      collectMsg: 1,
+      collectMsg: 2,
       addCollectionForm: {
         curriculumId: null
       }
@@ -263,6 +263,12 @@ export default {
           // console.log(response, "这是课程列表");
           // this.courseList = response.data.curriculumDetail
           this.catalogs = response.data.curriculumCatalogList;
+          console.log(this.catalogs, '这是catalogs')
+          for(let item of this.catalogs){
+            for(let i of item.childList){
+              i.video_time = Math.round((i.video_time)/60)
+            }
+          }
         });
       });
     },
@@ -271,8 +277,10 @@ export default {
       // console.log(this.collectMsg, "1234");
       if (this.collectMsg === 1) {
         this.deleteCollection();
+        this.collectMsg = 2;
       } else {
         this.addCollection();
+        this.collectMsg = 1;
       }
     },
     // 添加收藏
@@ -311,6 +319,7 @@ export default {
     document.getElementsByClassName("footerBox")[0].style.display = "inline";
     this.kidForm.ids = this.kid;
     this.evaluateListForm.ids = this.kid;
+    this.activeName ='first'
     this.getCourseDetail();
     this.getEvaluateList();
     this.getCourseList();
