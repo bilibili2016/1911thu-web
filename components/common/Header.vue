@@ -597,7 +597,7 @@ export default {
       //     break
       // }
     }
-  }
+  },
 };
 </script>
 

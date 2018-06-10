@@ -1,5 +1,5 @@
 <template>
-  <div class="playerBox clearfix">
+  <div class="playerBox clearfix" ref="playerBox">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <div class="playTop">
         <i class="el-icon-arrow-left" @click="goLink()"></i>{{player.title}}
@@ -198,10 +198,11 @@ import { store as persistStore } from '~/lib/core/store'
         this.word="";
       },
       resize() {
-        const h = window.screen.availHeight;
+        const h = this.$refs.playerBox.offsetHeight;
         this.$refs.mediaL.style.height= h+"px";
         this.$refs.mediaR.style.height= h+"px";
         this.$refs.playInner.style.height=h-100+"px";
+        console.log('height='+h);
       },
       fold() {
         if (this.$refs.mediaR.offsetWidth != 0) {
