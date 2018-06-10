@@ -546,7 +546,7 @@ export default {
   mounted() {
     // console.log(this.data, '返回的数据')
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

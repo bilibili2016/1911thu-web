@@ -10,16 +10,19 @@
         <div class="center-box">
           <div class="avator">
             <div class="img">
-              <img :src="userInfo.head_img" alt="" v-if="userInfo.head_img">
-              <img :src="avator" alt="" v-else>
-              <el-upload v-show="isShowUpAvtor" class="up-user-avtor"
+              <img :src="avator" alt="">
+              <!-- <img :src="avator" alt="" v-if="userInfo.head_img"> -->
+
+              <!-- <img :src="userInfo.head_img" alt="" v-if="userInfo.head_img">
+              <img :src="avator" alt="" v-else> -->
+              <!-- <el-upload v-show="isShowUpAvtor" class="up-user-avtor"
                 action="http://www.1911edu.com/Wapi/MyInfo/uploadHeadImg"
                 accept='image/*'
                 :on-success="upSuccess"
                 :on-error="failUp"
                 :show-file-list="false">
                 <el-button size="medium" type="primary">更换图片</el-button>
-              </el-upload>
+              </el-upload> -->
             </div>
           </div>
           <div class="name">
@@ -42,7 +45,7 @@ export default {
   props: ["bannerImg", "config", "isUpdate","isShowUpAvtor"],
   data() {
     return {
-      avator:require("~/assets/images/profile_avator01.png"),
+      avator:require("@/assets/images/profile_avator01.png"),
       userInfo: {
         nick_name: "",
         company_name: "",
