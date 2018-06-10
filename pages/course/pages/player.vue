@@ -324,7 +324,7 @@ import { store as persistStore } from '~/lib/core/store'
       document.getElementsByClassName("footerBox")[0].style.display="none";
       this.getPlayerInfo()
       this.getCurriculumPlayInfo()
-
+      this.$bus.$emit('hideHeader', true)
     },
   }
 </script>
