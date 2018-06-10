@@ -177,10 +177,12 @@ export default {
                 newPass: "",
                 checkPass: ""
               };
-              this.updateSuccess = true;
-              setTimeout(() => {
-                this.updateSuccess = false;
-              }, 1000);
+              if(data.status==0){
+                this.updateSuccess = true;
+                setTimeout(() => {
+                  this.updateSuccess = false;
+                }, 1000);
+              }
             });
           });
         } else {
