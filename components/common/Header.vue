@@ -126,7 +126,7 @@
         </el-form>
 
         <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"><i class="el-icon-close fr" @click="closeWechat"></i></h4> <!-- el-icon-loading -->
+          <h4 class="clearfix"></h4> <!-- el-icon-loading -->
           <div class="wxchatIMG" id="wxchatIMG"></div>
           <!-- <p>二维码将在5分钟后失效！<i @click="getWXRecode">重新获取二维码</i></p> -->
         </div>
@@ -368,7 +368,7 @@ export default {
             type: response.status === 0 ? "success" : "error",
             message: response.msg
           });
-          if (response.status != "0") {
+          if (response.status != 0) {
             this.bindTelData.captchaDisable = true;
           } else {
             this.bindTelData.captchaDisable = false;
@@ -380,17 +380,15 @@ export default {
     verifyRgTelWX() {
       return new Promise((resolve, reject) => {
         auth.verifywechat(this.bindTelData).then(response => {
-          this.$message({
-            type: response.status === 0 ? "success" : "error",
-            message: response.msg
-          });
           if (response.status != 0) {
+            this.$message({
+              type: "error",
+              message: response.msg
+            });
             this.bindTelData.captchaDisable = true;
           }else{
             this.bindTelData.captchaDisable = false;
           }
-          console.log(response.status);
-          
         });
       });
     },
@@ -469,7 +467,7 @@ export default {
     getWXAccredit(){
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
-          console.log(response.status); // 0 token  100102 openid
+          //console.log(response.status); // 0 token  100102 openid
           if(response.status === 0){
             persistStore.set("token",response.data.token);
             clearInterval(this.getwxtime);
@@ -481,6 +479,7 @@ export default {
             this.bindTelShow=true;
             this.bindTelData.captchaDisable = true;
             this.bindTelData.openid = response.data.openid;
+            clearInterval(this.getwxtime);
           }else if(response.status === 100100){
             this.$message({
               type: "error",
@@ -536,14 +535,14 @@ export default {
       this.lrFrame = false;
       this.bgMsg = false;
       this.emptyForm();
-      clearInterval(getwxtime);
+      clearInterval(this.getwxtime);
     },
     closeWechat() {
       this.move();
       this.start = false;
       this.lrFrame = false;
       this.wechatLogin = false;
-      clearInterval(getwxtime);
+      clearInterval(this.getwxtime);
       // document.body.style.overflow = "auto";
     },
     emptyForm() {
