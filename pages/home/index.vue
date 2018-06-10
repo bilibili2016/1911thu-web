@@ -134,11 +134,7 @@ export default {
         }
       ],
       carouselSrc: require("@/assets/images/home_avator02.png"),
-      items: [
-        { picture: require("@/assets/images/banner_1.png") },
-        { picture: require("@/assets/images/banner_2.png") },
-        { picture: require("@/assets/images/banner_3.png") }
-      ],
+      items: [],
       itemsData:{
         limit:null,
         types:1
