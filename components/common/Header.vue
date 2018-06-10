@@ -211,6 +211,13 @@ export default {
       bindTelShow: false,
       scanCodeShow: false,
       bindSuccessShow: false,
+      WxLogin:{
+        self_redirect:true,
+        id:"login_container", 
+        appid: "wxefa2295aae13fe2e", 
+        scope: "snsapi_login", 
+        redirect_uri: encodeURI("http://www.1911edu.com/Wapi/Index/wxBack"),//重定向地址
+      },
       bindTelData: {
         tel: "",
         code: "",
@@ -390,15 +397,24 @@ export default {
     },
     // 获取微信登录二维码
     async wxLogin() {
-      return new Promise((resolve, reject) => {
-        auth.wechat(this.getWXLoginImg.isget).then(response => {
-          this.getWXLoginImg.isget = response.data.url;
-          var timewx = setInterval(() => {
-            this.getWXLoginImg.time--;
-            this.getWXLogin();
-          }, 1000);
-        });
-      });
+      const weixin = new WxLogin(this.WxLogin);
+      //  var obj = new WxLogin({
+      //     id:this.WxLogin.id, 
+      //     appid: this.WxLogin.appid, 
+      //     scope: this.WxLogin.scope, 
+      //     redirect_uri: this.WxLogin.redirect_uri,
+      //   });
+
+
+      // return new Promise((resolve, reject) => {
+      //   auth.wechat(this.getWXLoginImg.isget).then(response => {
+      //     this.getWXLoginImg.isget = response.data.url;
+      //     var timewx = setInterval(() => {
+      //       this.getWXLoginImg.time--;
+      //       this.getWXLogin();
+      //     }, 1000);
+      //   });
+      // });
     },
     // 获取微信登录权限
     async getWXLogin() {
@@ -423,6 +439,10 @@ export default {
 
         });
       });
+    },
+    // encodeURI
+    encodeURI(url){//转码
+      this.redirect_uri = encodeURI("url");
     },
     // 忘记密码
     forget() {

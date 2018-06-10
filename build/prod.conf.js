@@ -17,7 +17,12 @@ config.head.script = [
   {
     src: 'https://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js',
     async: true
-  }
+  },
+   {
+     src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+     async: true
+   }
+
 ]
 
 module.exports = config
