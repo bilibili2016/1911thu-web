@@ -23,12 +23,7 @@
           </div>
         </div>
         <div class="shoppingCart" v-show="isAuthenticated"  @click="goSearchd('/shop/shoppingCart')">
-<<<<<<< HEAD
           <span class="cartIcon"></span>
-=======
-        <i v-show="shoppingCartNum>0" v-if="productsNum>0">{{productsNum}}</i>
-          <img src="@/assets/images/shoppingCart.png" alt="">
->>>>>>> wuyy
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
