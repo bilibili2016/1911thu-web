@@ -126,7 +126,8 @@
 
         <div class="scanCode" v-show="scanCodeShow">
           <h4 class="clearfix"><span>微信登录</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4> <!-- el-icon-loading -->
-          <img :src="getWXLoginImg.isget" alt="">
+          <div class="wxchatIMG" id="wxchatIMG"></div>
+          <!-- <img :src="getWXLoginImg.isget" alt=""> -->
           <h5>请使用微信扫描“1911学堂”二维码登录</h5>
           <p>二维码将在5分钟后失效！<i @click="getWXCode">重新获取二维码</i></p>
         </div>
@@ -212,8 +213,7 @@ export default {
       scanCodeShow: false,
       bindSuccessShow: false,
       WxLogin:{
-        self_redirect:true,
-        id:"login_container", 
+        id:"wxchatIMG", 
         appid: "wxefa2295aae13fe2e", 
         scope: "snsapi_login", 
         redirect_uri: encodeURI("http://www.1911edu.com/Wapi/Index/wxBack"),//重定向地址
