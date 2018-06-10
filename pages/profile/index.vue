@@ -340,7 +340,9 @@
       this.readyStudyCurriculumList()
       this.collectionList()
       this.activeName = this.gid
-      // console.log(this.gid)
+      if(this.$route.query.goTab){
+        this.activeTab = this.$route.query.goTab
+      }
       document.getElementsByClassName("headerBox")[0].style.display="inline"
       document.getElementsByClassName("footerBox")[0].style.display="inline"
 

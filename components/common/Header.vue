@@ -10,7 +10,7 @@
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
         <span class="hrin" @click="goSearchd('/home/pages/hrEntry')">Hr入口</span>
-        <span v-show="isAuthenticated" @click="goLink('second')">我的课程</span>
+        <span v-show="isAuthenticated" @click="goToMourse()">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -309,6 +309,10 @@ export default {
   methods: {
     ...mapActions("auth", ["signIn", "setGid", "setProductsNum", "signOut"]),
     // 登录显示card
+    goToMourse(){
+      let goTab = 'tab-second'
+      this.$router.push({ path: '/profile', query: { goTab: goTab }})
+    },
     async loginCardShow() {
       this.start = true;
       this.lrFrame = this.start;
