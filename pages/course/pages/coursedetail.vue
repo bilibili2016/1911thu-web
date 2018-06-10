@@ -6,7 +6,7 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/course/pages/newlesson' }">分类列表</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/course/pages/categorys' }">分类列表</el-breadcrumb-item>
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -263,7 +263,7 @@ export default {
           // console.log(response, "这是课程列表");
           // this.courseList = response.data.curriculumDetail
           this.catalogs = response.data.curriculumCatalogList;
-          console.log(this.catalogs, '这是catalogs')
+          // console.log(this.catalogs, '这是catalogs')
           for(let item of this.catalogs){
             for(let i of item.childList){
               i.video_time = Math.round((i.video_time)/60)

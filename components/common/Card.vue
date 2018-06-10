@@ -281,7 +281,7 @@
           <p>{{courseList.introduction}}</p>
           <div class="common-button">
             <div v-if="isAuthenticated">
-              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习4</el-button>
+              <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
               <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
             </div>
             <div v-else>
@@ -446,6 +446,9 @@ export default {
     goLink(item) {
       switch (window.location.pathname) {
         case "/course/pages/category":
+          this.$router.push("coursedetail");
+          break;
+        case "/course/pages/categorys":
           this.$router.push("coursedetail");
           break;
         case "/":
@@ -826,7 +829,7 @@ export default {
         padding: 0 15px;
         p.price {
           color: #332a51;
-          padding: 0 15px;
+          padding: 0 0px;
         }
         span {
           vertical-align: middle;

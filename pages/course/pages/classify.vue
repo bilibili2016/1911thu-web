@@ -12,9 +12,9 @@
               </el-tabs>
             </div>
             <div class="fr rightPages">
-              <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
+              <!-- <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
               </el-switch>隐藏已参加课程
-              <el-pagination class="fr" small layout="pager, prev, next" :total="20"></el-pagination>
+              <el-pagination class="fr" small layout="pager, prev, next" :total="20"></el-pagination> -->
             </div>
 
           </div>

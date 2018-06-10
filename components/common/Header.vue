@@ -424,7 +424,7 @@ export default {
     getWXAccredit(){
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
-          console.log(response.status);
+          // console.log(response.status);
           if(response.status === 0 || response.status === 100102){
             clearInterval(getwxtime);
           }
@@ -466,14 +466,15 @@ export default {
       this.$router.push("/shop/shoppingCart");
     },
     goLink(item) {
-      console.log("123");
-      console.log(this.$bus);
+      // console.log("123");
+      // console.log(this.$bus);
       this.$bus.$emit("selectProfileIndex", "123");
       // this.$router.push(item);
     },
     login() {},
     signOuts() {
       this.signOut();
+      this.$router.push('/')
     },
     changePwd() {
       if (this.loginData.showPwd) {
