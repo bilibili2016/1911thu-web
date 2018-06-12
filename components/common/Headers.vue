@@ -22,15 +22,15 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-if="this.token === '123' ? true : false"  @click="goLink('/shop/shoppingCart')">
+        <div class="shoppingCart" v-if="this.token === '123' ? true : false" @click="goLink('/shop/shoppingCart')">
           <img src="@/assets/images/shoppingCart.png" alt=""><i>2</i>
         </div>
       </div>
       <div class="lrBtn" v-if="this.token === '123' ? false : true">
         <!-- @click="login" -->
-        <span @click ="loginCardShow">登录</span>
+        <span @click="loginCardShow">登录</span>
         <!-- @click="register" -->
-        <span class="register" >注册</span>
+        <span class="register">注册</span>
       </div>
       <div class="headImg" v-else>
         <img :src="user.userImg" alt="">
@@ -44,12 +44,11 @@
         </ul>
       </div>
     </div>
-
     <!-- 登录注册 -->
     <div class="start">
-      <div class="bgt" ></div>
+      <div class="bgt"></div>
       <!-- @click="close" -->
-      <div class="lrFrame" >
+      <div class="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
@@ -62,7 +61,7 @@
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
-                 <!-- @click="goSearchd('/home/pages/forgotPassword')"  -->
+                <!-- @click="goSearchd('/home/pages/forgotPassword')"  -->
                 <div @click="forget">忘记密码?</div>
                 <el-button @click="signIns('loginData')">登录</el-button>
               </el-row>
@@ -80,7 +79,7 @@
                 <div class="getCode" @click="handleGetCode">获取验证码</div>
                 <!--  -->
               </el-form-item>
-               <el-form-item prop="passwords">
+              <el-form-item prop="passwords">
                 <el-input v-model="registerData.passwords" placeholder="请输入密码"></el-input>
               </el-form-item>
               <el-form-item prop="companyCodes">
@@ -100,42 +99,36 @@
           </el-tab-pane>
         </el-tabs>
       </div>
-
       <!-- 微信登录 -->
       <!-- <div class="lrFrame wechatLogin" v-show="wechatLogin">
-        <el-form :model="bindTelData" status-icon ref="bindTelData" class="demo-ruleForm" v-show="bindTelShow">
-          <h4 class="clearfix"><span>绑定手机账号</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
-          <el-form-item prop="tel">
-
-            <el-input v-model.number="bindTelData.tel" placeholder="请输入登录手机号"></el-input>
-          </el-form-item>
-          <el-form-item prop="code">
-
-            <el-input class="captcha" v-model.number="bindTelData.code" placeholder="请输入验证码"></el-input>
-            <div class="getCode">{{bindTelData.getCode}}</div>
-          </el-form-item>
-          <el-form-item>
-
-            <el-input v-model="bindTelData.company" placeholder="绑定企业"></el-input>
-            <span class="bindCompany">(可选)</span>
-          </el-form-item>
-          <el-row>
-            <el-button>绑定</el-button>
-          </el-row>
-        </el-form>
-
-        <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"><span>微信登录</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
-          <img :src="QRcode" alt="">
-          <p>请使用微信扫描“1911学堂”二维码登录</p>
-        </div>
-
-        <div class="bindSuccess" v-show="bindSuccessShow">
-          <img src="@/assets/images/bindingSuccess.png" alt="">
-          <h5>手机账号绑定成功</h5>
-          <p>返回登录 3S</p>
-        </div>
-      </div> -->
+          <el-form :model="bindTelData" status-icon ref="bindTelData" class="demo-ruleForm" v-show="bindTelShow">
+            <h4 class="clearfix"><span>绑定手机账号</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
+            <el-form-item prop="tel">
+              <el-input v-model.number="bindTelData.tel" placeholder="请输入登录手机号"></el-input>
+            </el-form-item>
+            <el-form-item prop="code">
+              <el-input class="captcha" v-model.number="bindTelData.code" placeholder="请输入验证码"></el-input>
+              <div class="getCode">{{bindTelData.getCode}}</div>
+            </el-form-item>
+            <el-form-item>
+              <el-input v-model="bindTelData.company" placeholder="绑定企业"></el-input>
+              <span class="bindCompany">(可选)</span>
+            </el-form-item>
+            <el-row>
+              <el-button>绑定</el-button>
+            </el-row>
+          </el-form>
+          <div class="scanCode" v-show="scanCodeShow">
+            <h4 class="clearfix"><span>微信登录</span> <i class="el-icon-close fr" @click="closeWechat"></i></h4>
+            <img :src="QRcode" alt="">
+            <p>请使用微信扫描“1911学堂”二维码登录</p>
+          </div>
+          <div class="bindSuccess" v-show="bindSuccessShow">
+            <img src="@/assets/images/bindingSuccess.png" alt="">
+            <h5>手机账号绑定成功</h5>
+            <p>返回登录 3S</p>
+          </div>
+        </div> -->
     </div>
   </div>
 </template>
@@ -193,7 +186,6 @@
           userImg: require("~/assets/images/headImg.png")
         },
         activeName: "login",
-
         QRcode: require("~/assets/images/wechatLogin.png"),
         wechatLogin: false,
         bindTelShow: false,
@@ -234,9 +226,17 @@
               trigger: "blur"
             }
           ],
-          passwords: [
-            { required: true, message: '请输入账户密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
+          passwords: [{
+              required: true,
+              message: '请输入账户密码',
+              trigger: 'blur'
+            },
+            {
+              type: 'string',
+              min: 6,
+              message: '密码长度为 6 位以上',
+              trigger: 'blur'
+            }
           ],
           codes: [{
               required: true,
@@ -267,9 +267,17 @@
               trigger: "blur"
             }
           ],
-          password: [
-            { required: true, message: '请输入账户密码', trigger: 'blur' },
-            { type: 'string', min: 6, message: '密码长度为 6 位以上', trigger: 'blur' }
+          password: [{
+              required: true,
+              message: '请输入账户密码',
+              trigger: 'blur'
+            },
+            {
+              type: 'string',
+              min: 6,
+              message: '密码长度为 6 位以上',
+              trigger: 'blur'
+            }
           ]
         },
         gidForm: {
@@ -284,26 +292,23 @@
     methods: {
       ...mapActions("auth", ["signIn", "setGid"]),
       // 登录显示card
-      async loginCardShow () {
+      async loginCardShow() {
         this.start = !this.start;
         this.lrFrame = this.start;
         this.activeName = "login";
         this.stop();
         this.bgMsg = true;
-        // this.tokenForm.tokens = "123";
       },
       // // 获取验证码
       async handleGetCode() {
         return new Promise((resolve, reject) => {
-           auth.smsCodes(this.registerData).then(response => {
-            // console.log(response, '这是response')
+          auth.smsCodes(this.registerData).then(response => {
             this.$message({
               type: response.status === '1' ? 'success' : 'error',
               message: response.msg
-                })
+            })
           })
         })
-        // console.log('获取验证码被点击')
       },
       // 注册 请求
       signUp(formName) {
@@ -318,38 +323,23 @@
               })
             })
           } else {
-            // console.log("error submit!!");
             return false;
           }
         });
       },
       // 登录 请求
       signIns(formName) {
-        // this.signIn(this.tokenForm);
-        // this.start = false;
         this.$refs[formName].validate(valid => {
           if (valid) {
-            // console.log(this.loginData, '678')
             this.signIn(this.loginData)
-            //  return new Promise((resolve, reject) => {
-            //     auth.signIns(this.loginData).then(response => {
-            //       console.log(response, '这是response')
-            //       this.$message({
-            //             type: response.status === '1' ? 'success' : 'error',
-            //             message: response.msg
-            //           })
-            //     })
-            //   })
           } else {
-            // console.log("error submit!!");
             return false;
           }
         })
         this.move();
       },
       // 忘记密码
-      forget () {
-      },
+      forget() {},
       goMycourse() {
         this.$router.push("/profile");
       },
@@ -360,12 +350,9 @@
         this.$router.push(item);
       },
       login() {
-
       },
-
       signOut() {
         this.tokenForm.tokens = "";
-        // this.signIn(this.tokenForm);
       },
       changePwd() {
         if (this.showPwd) {
@@ -391,7 +378,6 @@
         this.start = false;
         this.lrFrame = false;
         this.bgMsg = false;
-        // document.body.style.overflow = 'auto';
       },
       closeWechat() {
         this.start = false;
@@ -453,14 +439,6 @@
         this.gidForm.gids = item;
         this.setGid(this.gidForm);
         this.$router.push("/profile");
-        // switch (window.location.pathname) {
-        //   case '/':
-        //     this.$router.push('/profile');
-        //     break
-        //   default:
-
-        //     break
-        // }
       }
     },
     mounted() {}

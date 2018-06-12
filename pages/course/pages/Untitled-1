@@ -44,8 +44,6 @@ import { store as persistStore } from '~/lib/core/store'
           //  console.log(response, '123')
            for(let item of response.data.curriculumPayApply){
              item.create_time = this.timestampToTime(item.create_time)
-            //  console.log(this.time, '678')
-              // console.log(item, '这是item')
            }
             resolve(true)
           })

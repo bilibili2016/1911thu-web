@@ -18,7 +18,7 @@
         <el-button :disabled="!binding.presentAble" round @click="doSubmit">提交</el-button>
       </div>
       <div class="success" v-show="binding.success">
-         <img :src="bindImg" alt="">
+        <img :src="bindImg" alt="">
         <p>恭喜您绑定成功</p>
       </div>
     </div>
@@ -55,92 +55,94 @@
       </div>
     </div>
 
-
   </div>
 </template>
 
 <script>
- import { home } from "~/lib/v1_sdk/index";
-  export default {
-    methods: {
-      verify() {
-        if (this.binding.inputID == "") {
-          this.binding.showErr = true;
-          this.binding.presentAble = false;
-        } else {
-          this.binding.showErr = false;
-          this.binding.presentAble = true;
-        }
-      },
-      courseVerify(){
-        if (this.courseList.inputID == "") {
-          // console.log(1);
-
-          this.courseList.showErr = true;
-          this.courseList.presentAble = false;
-        } else {
-          // console.log(2);
-
-          this.courseList.showErr = false;
-          this.courseList.presentAble = true;
-        }
-      },
-      addID() {
-        this.courseList.addNewID = true;
-         this.$emit('isShowMsg',false)
-      },
-      doSubmit() {
-        // this.binding.success = true;
-        return new Promise((resolve, reject) => {
-           home.bindingCurriculumPrivate({invitation_code: this.courseList.inputID}).then(res=>{
-             if(res.status ==0){
-               this.getUsedInvitationCodeList()
-             }
-             this.courseList.showErr = res.status !=0 ? true : false
-             this.courseList.success = res.status !=0 ? false : true
-           })
-        })
-      },
-      getUsedInvitationCodeList(){
-        return new Promise((resolve, reject) => {
-           home.getUsedInvitationCodeList(this.curruntForm).then(response => {
-            this.courseList.courseID = response.data.usedInvitationCodeList
-
-            if(!this.courseList.courseID || this.courseList.courseID.length<=0){
-              this.$emit('isShowMsg',true)
-            }else{
-              this.$emit('isShowMsg',false)
-            }
-          })
-        })
+import { home } from '~/lib/v1_sdk/index'
+export default {
+  methods: {
+    verify() {
+      if (this.binding.inputID == '') {
+        this.binding.showErr = true
+        this.binding.presentAble = false
+      } else {
+        this.binding.showErr = false
+        this.binding.presentAble = true
       }
     },
-    data() {
-      return {
-        binding: {
-          inputID: "",
-          showErr: false,
-          presentAble: false,
-          present: true,
-          success: false
-        },
-        courseList: {
-          addNewID: false,
-          inputID: "",
-          showErr: false,
-          presentAble: false,
-          present: true,
-          success: false,
-          addCourse:true,
-          courseID: []
-        },
-        bindImg: require('~/assets/images/bindingSuccess.png')
-      };
+    courseVerify() {
+      if (this.courseList.inputID == '') {
+        this.courseList.showErr = true
+        this.courseList.presentAble = false
+      } else {
+        this.courseList.showErr = false
+        this.courseList.presentAble = true
+      }
     },
-    mounted () {
-      this.getUsedInvitationCodeList()
-      document.getElementsByClassName("headerBox")[0].style.display="inline"
-      document.getElementsByClassName("footerBox")[0].style.display="inline"
+    addID() {
+      this.courseList.addNewID = true
+      this.$emit('isShowMsg', false)
+    },
+    doSubmit() {
+      // this.binding.success = true;
+      return new Promise((resolve, reject) => {
+        home
+          .bindingCurriculumPrivate({
+            invitation_code: this.courseList.inputID
+          })
+          .then(res => {
+            if (res.status == 0) {
+              this.getUsedInvitationCodeList()
+            }
+            this.courseList.showErr = res.status != 0 ? true : false
+            this.courseList.success = res.status != 0 ? false : true
+          })
+      })
+    },
+    getUsedInvitationCodeList() {
+      return new Promise((resolve, reject) => {
+        home.getUsedInvitationCodeList(this.curruntForm).then(response => {
+          this.courseList.courseID = response.data.usedInvitationCodeList
+
+          if (
+            !this.courseList.courseID ||
+            this.courseList.courseID.length <= 0
+          ) {
+            this.$emit('isShowMsg', true)
+          } else {
+            this.$emit('isShowMsg', false)
+          }
+        })
+      })
     }
-  };
+  },
+  data() {
+    return {
+      binding: {
+        inputID: '',
+        showErr: false,
+        presentAble: false,
+        present: true,
+        success: false
+      },
+      courseList: {
+        addNewID: false,
+        inputID: '',
+        showErr: false,
+        presentAble: false,
+        present: true,
+        success: false,
+        addCourse: true,
+        courseID: []
+      },
+      bindImg: require('~/assets/images/bindingSuccess.png')
+    }
+  },
+  mounted() {
+    this.getUsedInvitationCodeList()
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+  }
+}
 </script>

@@ -34,7 +34,7 @@ const config = {
 
     // stardust 接口配置
     API_STARDUST_BASE_URL: env.API_STARDUST_BASE_URL,
-    API_STARDUST_TIMEOUT: env.API_STARDUST_TIMEOUT,
+    API_STARDUST_TIMEOUT: env.API_STARDUST_TIMEOUT
   },
   head: {
     title: '1911学堂',
@@ -42,7 +42,11 @@ const config = {
       { charset: 'utf-8' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'renderer', content: 'webkit' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
+      {
+        name: 'viewport',
+        content:
+          'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+      },
       { hid: 'description', name: 'description', content: '1911学堂' }
     ],
     link: [
@@ -57,7 +61,8 @@ const config = {
     ],
     script: [
       {
-        src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
+        src:
+          'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
         async: true
       },
       {
@@ -84,30 +89,25 @@ const config = {
   router: {
     base: baseRouter
   },
-  plugins: [
-    '~/plugins/main'
-  ],
+  plugins: ['~/plugins/main'],
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],
   build: {
     extractCSS: true,
-    vendor: [
-      'axios',
-      'loglevel'
-    ],
-    extend (config, { isDev, isClient }) {
-      // 可以在此观察、修改 webpack 配置
+    vendor: ['axios', 'loglevel']
+    // extend (config, { isDev, isClient }) {
+    //   // 可以在此观察、修改 webpack 配置
 
-      // if (isDev && isClient) {
-      //   config.module.rules.push({
-      //     enforce: 'pre',
-      //   test: /\.(js|vue)$/,
-      //     loader: 'eslint-loader',
-      //     exclude: /(node_modules)/
-      //   })
-      // }
-    }
+    //   if (isDev && isClient) {
+    //     config.module.rules.push({
+    //       enforce: 'pre',
+    //     test: /\.(js|vue)$/,
+    //       loader: 'eslint-loader',
+    //       exclude: /(node_modules)/
+    //     })
+    //   }
+    // }
   }
 }
 
