@@ -94,7 +94,8 @@ export default {
       },
       pidform: {
         pids: ''
-      }
+      },
+      catagoryId: ''
     }
   },
   methods: {
@@ -148,10 +149,24 @@ export default {
         this.curriculumList()
       }
     },
+
     childCategoryList() {
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList
+          // console.log(this.collegeId, 'this.collegeId')
+
+          // console.log(this.data, '这是data')
+          // for (let item of '16') {
+          //   console.log(item.id, 'item.id')
+          //   console.log(this.catagoryId, 'this.collegeId')
+          //   if (item.id === datas) {
+          //     console.log(this.data.indexOf(item), '这是data的index')
+          //     this.data2 = this.data[this.data.indexOf(item)]
+          //   }
+          // }
+
+          // for()
           switch (this.cid) {
             case '1':
               this.data2 = this.data[0]
@@ -194,6 +209,14 @@ export default {
         })
       })
     }
+  },
+  created() {
+    this.$nextTick(() => {
+      this.$bus.$on('collegeId', data => {
+        console.log(data, '这是进入页面获取的1111111111111111')
+        // this.catagoryId = data
+      })
+    })
   },
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'

@@ -1,7 +1,7 @@
 <template>
   <div class="classify">
     <div class="starters">
-      <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="showItem(index,item)" @mouseleave="leave">
+      <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="selectCollege(index,item)" @mouseleave="leave">
         <div class="tabs-title">{{item.category_name}}</div>
         <div class="tabs-content" v-show="index===itemID">
           <div class="subClass">
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   props: ['classify', 'courses', 'tab', 'active', 'classtext'],
   data() {
@@ -45,36 +45,37 @@ export default {
       pidform: {
         pids: ''
       }
-    };
+    }
   },
   methods: {
     ...mapActions('auth', ['setCid', 'setPid']),
     handleClick(item, index) {
-      this.cidform.cids = Number(item.index);
-      this.setCid(this.cidform);
+      this.cidform.cids = Number(item.index)
+      this.setCid(this.cidform)
     },
     getMore(linedata) {
-      this.$router.push('course/pages/coursedetail');
+      this.$router.push('course/pages/coursedetail')
     },
     handlePid(item, index) {
-      this.$router.push('/course/pages/category');
-      this.pidform.pids = item.id;
-      this.setPid(this.pidform);
+      this.$router.push('/course/pages/category')
+      this.pidform.pids = item.id
+      this.setPid(this.pidform)
     },
-    showItem(index, item) {
-      this.big = index;
-      this.itemID = index;
-      this.cidform.cids = item.id;
-      this.setCid(this.cidform);
+    selectCollege(index, item) {
+      this.big = index
+      this.itemID = index
+      this.cidform.cids = item.id
+      this.$bus.$emit('collegeId', item.id)
+      this.setCid(this.cidform)
     },
     leave() {
-      this.itemID = null;
+      this.itemID = null
     }
   },
   mounted() {
-    this.actived = this.active;
+    this.actived = this.active
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

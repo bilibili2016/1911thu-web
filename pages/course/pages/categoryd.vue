@@ -35,7 +35,7 @@
         <!-- <div class="pages"><el-pagination layout=" pager, prev, next" :total="1"></el-pagination></div> -->
         <!-- <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch"> -->
         <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch">
-          </el-switch> -->
+            </el-switch> -->
       </div>
       <div class="carlist">
         <v-card :data="categoryData" :config="configSevent" @selectCid='selectCid'></v-card>
@@ -206,7 +206,7 @@ export default {
               this.data2 = this.data[5]
               break
             default:
-              this.data2 = this.data[0]
+              // this.data2 = this.data[0]
               break
           }
           resolve(true)

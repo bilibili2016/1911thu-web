@@ -96,13 +96,13 @@ const config = {
   build: {
     extractCSS: true,
     vendor: ['axios', 'loglevel']
-    // extend (config, { isDev, isClient }) {
+    // extend(config, { isDev, isClient }) {
     //   // 可以在此观察、修改 webpack 配置
 
     //   if (isDev && isClient) {
     //     config.module.rules.push({
     //       enforce: 'pre',
-    //     test: /\.(js|vue)$/,
+    //       test: /\.(js|vue)$/,
     //       loader: 'eslint-loader',
     //       exclude: /(node_modules)/
     //     })
