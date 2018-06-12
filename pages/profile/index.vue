@@ -345,8 +345,6 @@ export default {
 </script>
 <style scope lang="scss">
 .profile {
-  // width: 1120px;
-  /* 我的首页 没有课程 */
   .content .noCourse {
     width: 100%;
     height: 600px;
@@ -378,7 +376,8 @@ export default {
         background-color: #8f4acb;
       }
     }
-    .tabList{
+  }
+  .tabList{
       i{
         display: inline-block;
         width: 20px;
@@ -436,6 +435,5 @@ export default {
         background-size: contain;
       }
     }
-  }
 }
 </style>

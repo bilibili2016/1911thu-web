@@ -185,11 +185,17 @@
         }
       };
       var checkCompanyCodes = (rule, value, callback) => {
-        if (value == "" && /^[A-Za-z0-9]+$/.test(value)) {
+        if (value !== "" && !/^[A-Za-z0-9]+$/.test(value)) {
           return callback(new Error("请输入正确企业ID"));
         }
-        callback();
+        return callback();
       };
+      var checkProtocol = (rule, value, callback)=>{
+        if (!value) {
+          return callback(new Error("请勾选同意用户协议"));
+        }
+        return callback();
+      }
       return {
         searchImg: require("~/assets/images/search.png"),
         start: false,
@@ -250,7 +256,7 @@
           passwords: "",
           types: 1,
           codes: "",
-          checked: [],
+          checked: false,
           companyCodes: ""
         },
         // 注册表单验证
@@ -265,7 +271,8 @@
               trigger: "blur"
             }
           ],
-          passwords: [{
+          passwords: [
+            {
               required: true,
               message: "请输入账户密码",
               trigger: "blur"
@@ -278,12 +285,15 @@
               trigger: "blur"
             }
           ],
-          codes: [{
-            required: true,
-            message: "请输入验证码",
-            trigger: "blur"
-          }],
-          companyCodes: [{
+          codes: [
+            {
+              required: true,
+              message: "请输入验证码",
+              trigger: "blur"
+            }
+          ],
+          companyCodes: [
+            {
               min: 6,
               max: 6,
               message: "请输入正确的企业ID",
@@ -294,12 +304,12 @@
               trigger: "blur"
             }
           ],
-          checked: [{
-            // type: "array",
-            required: true,
-            message: "请勾选同意用户协议",
-            trigger: "change"
-          }]
+          checked: [
+            {
+              validator: checkProtocol,
+              trigger: "change"
+            }
+          ]
         },
         // 登录表单验证
         loginRules: {
@@ -395,7 +405,7 @@
               let interval = setInterval(() => {
                 if (this.bindTelData.seconds <= 0) {
                   this.bindTelData.getCode = "获取验证码";
-                  this.bindTelData.seconds = 60;
+                  this.bindTelData.seconds = 30;
                   this.bindTelData.captchaDisable = false;
                   clearInterval(interval);
                 } else {
@@ -411,15 +421,17 @@
       verifyRgTel() {
         return new Promise((resolve, reject) => {
           auth.verifyPhone(this.registerData).then(response => {
-            this.$message({
-              type: response.status === 0 ? "success" : "error",
-              message: response.msg
-            });
-            if (response.status != 0) {
+            if (response.status !== 0) {
+              this.$message({
+                type: "error",
+                message: response.msg
+              });
               this.bindTelData.captchaDisable = true;
             } else {
-              this.bindTelData.captchaDisable = false;
-              this.handleGetCode(this.registerData);
+              if(this.bindTelData.seconds === 30){
+                this.bindTelData.captchaDisable = false;
+                this.handleGetCode(this.registerData);
+              }
             }
           });
         });
