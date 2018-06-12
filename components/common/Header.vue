@@ -51,14 +51,14 @@
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="登录" name="login">
+          <el-tab-pane label="登录" name="login" @keyup.enter="signIns('loginData')">
             <!-- 登录 表单-->
             <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm">
               <el-form-item prop="phonenum">
                 <el-input v-model.number="loginData.phonenum" auto-complete ="off" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
+                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
@@ -105,17 +105,13 @@
       <div class="lrFrame wechatLogin" v-show="wechatLogin">
         <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
           <h4 class="clearfix"><span>绑定手机账号</span></h4>
-           <!-- <i class="el-icon-close fr" @click="closeWechat"></i> -->
           <el-form-item prop="tel">
-
             <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
           </el-form-item>
           <el-form-item prop="code">
-
             <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
             <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
           </el-form-item>
-
           <el-form-item prop="companyCodes">
             <el-input v-model="bindTelData.companyCodes" placeholder="绑定企业"></el-input>
             <span class="bindCompany">(可选)</span>
@@ -124,13 +120,10 @@
             <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
           </el-row>
         </el-form>
-
         <div class="scanCode" v-show="scanCodeShow">
           <h4 class="clearfix"></h4> <!-- el-icon-loading -->
           <div class="wxchatIMG" id="wxchatIMG"></div>
-          <!-- <p>二维码将在5分钟后失效！<i @click="getWXRecode">重新获取二维码</i></p> -->
         </div>
-
         <div class="bindSuccess" v-show="bindSuccessShow">
           <img src="@/assets/images/bindingSuccess.png" alt="">
           <h5>手机账号绑定成功</h5>
@@ -183,10 +176,17 @@ export default {
       }
     };
     var checkCompanyCodes = (rule, value, callback) => {
-      if (value == "" && /^[A-Za-z0-9]+$/.test(value)) {
+      if (value !== "" && !/^[A-Za-z0-9]+$/.test(value)) {
         return callback(new Error("请输入正确企业ID"));
       }
-      callback();
+      return callback();
+    };
+    var checkProtocol = (rule, value, callback)=>{
+      if(value === true){
+        return callback();
+      }else{
+        return callback(new Error("请勾选同意用户协议"));
+      }
     };
     return {
       searchImg: require("~/assets/images/search.png"),
@@ -205,6 +205,7 @@ export default {
       },
       activeName: "login",
       QRcode: require("~/assets/images/wechatLogin.png"),
+      wechatLoading: true,
       wechatLogin: false,
       bindTelShow: false,
       scanCodeShow: false,
@@ -248,7 +249,7 @@ export default {
         passwords: "",
         types: 1,
         codes: "",
-        checked: [],
+        checked: false,
         companyCodes: ""
       },
       // 注册表单验证
@@ -273,12 +274,8 @@ export default {
           { validator: checkCompanyCodes, trigger: "blur" }
         ],
         checked: [
-          {
-            // type: "array",
-            required: true,
-            message: "请勾选同意用户协议",
-            trigger: "change"
-          }
+          { validator: checkProtocol, trigger: "change" }
+          // { required: true, message: "请勾选同意用户协议", trigger: "change" }
         ]
       },
       // 登录表单验证
@@ -367,12 +364,12 @@ export default {
     verifyRgTel() {
       return new Promise((resolve, reject) => {
         auth.verifyPhone(this.registerData).then(response => {
-          this.$message({
-            type: response.status === 0 ? "success" : "error",
-            message: response.msg
-          });
-          if (response.status != 0) {
+          if (response.status !== 0) {
             this.bindTelData.captchaDisable = true;
+            this.$message({
+              type: "error",
+              message: response.msg
+            });
           } else {
             this.bindTelData.captchaDisable = false;
             this.handleGetCode(this.registerData);
@@ -425,11 +422,10 @@ export default {
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               if (response.status === 0) {
-                this.start = false;
-                this.islogin = true;
+                this.close();
               }
               this.$message({
-                type: response.status === "0" ? "error" : "success",
+                type: response.status === 0 ? "success" : "error",
                 message: response.msg
               });
             });

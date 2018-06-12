@@ -111,7 +111,6 @@ export default {
     forgetPasswordAjax() {
       return new Promise((resolve, reject) => {
         auth.forgetPasswordAjax(this.fpData).then(response => {
-          // resolve(true);
           this.$message({
               type: response.status === 0 ? "success" : "error",
               message: response.msg

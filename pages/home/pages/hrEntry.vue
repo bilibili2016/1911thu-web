@@ -18,7 +18,7 @@
             <h3>1911学堂课程体系</h3>
             <p>学堂课程体系包括：通识性课程体系（干部通用学院）、系统专题性课程（党政系统学院）、在线商学院、行业学院、职场学院、直播/热点课程（热点课程）、企业课程定制、学位项目及面授及线下活动等9大业务板块，包含560余门课程。</p>
             <ul class="list">
-                <li v-for="(li,index) in courseList" >
+                <li v-for="(li,index) in courseList" :key="index">
                     <img :src="li.src" alt="">
                     <h5>{{li.title}}</h5>
                     <h6>{{li.number}}</h6>
