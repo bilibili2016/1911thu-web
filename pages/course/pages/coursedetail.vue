@@ -25,13 +25,13 @@
           </div>
         </div>
       </div>
-      <div class="main-header">
+      <div class="main-header" v-loading="loadMsg">
         <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg"></v-card>
       </div>
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="介绍" name="first">
-            <div class="detail" v-html="courseList.content"></div>
+            <div class="detail" v-html="courseList.content" v-loading="loadMsg"></div>
           </el-tab-pane>
           <el-tab-pane label="目录" name="second">
             <v-line :catalogs="catalogs" :privileMsg="privileMsg"></v-line>
@@ -69,35 +69,43 @@
               <el-rate v-model="rateModel"></el-rate>
             </span>
             <div class="bthgrop">
-              <el-button plain>内容精彩</el-button>
-              <el-button plain>内容生涩</el-button>
-              <el-button plain>音质不好</el-button>
-              <el-button plain>很有帮助</el-button>
-              <el-button plain>点赞老师</el-button>
-              <el-button plain>讲解详细</el-button>
+              <!-- borderIndex === index ? true : false -->
+              <span>
+                <el-button plain v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: borderIndex === index ? true : false }">
+                  <!-- <span :class="{borderColor: borderIndex === index ? true : false }"> -->
+                  {{item}}{{borderIndex === index ? true : false}}
+                  <!-- </span> -->
+
+                </el-button>
+              </span>
+
             </div>
             <div class="area">
               <el-input type="textarea" :rows="3" placeholder="请输入内容" v-model="textarea">
               </el-input>
             </div>
             <div class="submit">
-              <el-button type="primary" @click="submit()">提交</el-button>
+              <el-button type="primary" @click="addEvaluate()">提交</el-button>
             </div>
             <!-- 弹窗 -->
             <el-dialog title="报告问题" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-
-              <div v-for="(item,index) in commentator" :key="index" class="dialog-line">
-                <div class="commentator clearfix">
-                  <img class="fl" :src="item.headImg" alt="">
-                  <div class="fl">
-                    <p style="margin-top:5px;">{{item.name}}</p>
-                    <p>{{item.time}}</p>
+              <div v-loading="loadMsg">
+                <div v-for="(item,index) in commentator" :key="index" class="dialog-line">
+                  <div class="commentator clearfix">
+                    <img class="fl" :src="item.head_img" alt="">
+                    <div class="fl">
+                      <p style="margin-top:5px;">{{item.nick_name}}</p>
+                      <p>{{item.create_time}}</p>
+                    </div>
+                    <div class="rates">
+                      <el-rate disabled v-model="item.score" class="itemBox-rate fl"></el-rate>
+                    </div>
+                    <h5>{{item.evaluate_content}}</h5>
                   </div>
-                  <div class="rates">
-                    <el-rate disabled v-model="item.rate" class="itemBox-rate fl"></el-rate>
-                  </div>
-                  <h5>{{item.content}}</h5>
                 </div>
+              </div>
+              <div class="pagination">
+                <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
               </div>
             </el-dialog>
           </div>
@@ -105,23 +113,29 @@
         <!-- 用户评论 -->
         <div class="evaluate">
           <h4>用户评价
-            <span>查看更多></span>
+            <span @click="getMore">查看更多></span>
           </h4>
-          <div class="score">
-            <span class="fl">{{evaluate.score}}</span>
-            <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
-            <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
-          </div>
-          <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
-            <img class="fl" :src="item.head_img" alt="">
-            <div class="fl">
-              <p style="margin-top:5px;">{{item.nick_name}}</p>
-              <p>{{item.create_time}}</p>
+          <div v-loading="loadMsg">
+            <div class="score">
+
+              <span class="fl">{{evaluate.score}}</span>
+              <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
+              <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
             </div>
-            <div style="margin-top:10px;">
-              <el-rate disabled v-model="item.rate" class="itemBox-rate fr"></el-rate>
+            <!-- <div>
+              {{evaluate}}
+            </div> -->
+            <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
+              <img class="fl" :src="item.head_img" alt="">
+              <div class="fl">
+                <p style="margin-top:5px;">{{item.nick_name}}</p>
+                <p>{{item.create_time}}</p>
+              </div>
+              <div style="margin-top:10px;">
+                <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
+              </div>
+              <h5>{{item.evaluate_content}}</h5>
             </div>
-            <h5>{{item.content}}</h5>
           </div>
         </div>
       </div>
@@ -148,7 +162,7 @@ export default {
       activeName: 'second',
       dialogVisible: false,
       textarea: null,
-      rateModel: 5,
+      rateModel: null,
       shareImg: require('~/assets/images/f.png'),
       shareImgc: require('~/assets/images/c.png'),
       value1: 5,
@@ -167,40 +181,7 @@ export default {
         number: '24',
         praise: '99%'
       },
-      commentator: [
-        {
-          headImg: require('../../../assets/images/headImg.png'),
-          name: '小萝卜头',
-          time: '2018-05-30',
-          rate: 2,
-          content:
-            '你的工作较认真负责，能协助老师做好工作，能尊敬老师,希望你能团结更多的同学。保持良好的学习心态，激发学习热情，是当务之急。愿你永远孜孜以求，铸造一个强者的形象。记住，有些事情不是单凭兴趣就可以的，彩虹是经历风雨后才能得见的美景。'
-        },
-        {
-          headImg: require('../../../assets/images/headImg.png'),
-          name: '小萝卜头',
-          time: '2018-05-30',
-          rate: 4,
-          content:
-            '你的工作较认真负责，能协助老师做好工作，能尊敬老师,希望你能团结更多的同学。保持良好的学习心态，激发学习热情，是当务之急。愿你永远孜孜以求，铸造一个强者的形象。记住，有些事情不是单凭兴趣就可以的，彩虹是经历风雨后才能得见的美景。'
-        },
-        {
-          headImg: require('../../../assets/images/headImg.png'),
-          name: '小萝卜头',
-          time: '2018-05-30',
-          rate: 3,
-          content:
-            '你的工作较认真负责，能协助老师做好工作，能尊敬老师,希望你能团结更多的同学。保持良好的学习心态，激发学习热情，是当务之急。愿你永远孜孜以求，铸造一个强者的形象。记住，有些事情不是单凭兴趣就可以的，彩虹是经历风雨后才能得见的美景。'
-        },
-        {
-          headImg: require('../../../assets/images/headImg.png'),
-          name: '小萝卜头',
-          time: '2018-05-30',
-          rate: 5,
-          content:
-            '你的工作较认真负责，能协助老师做好工作，能尊敬老师,希望你能团结更多的同学。保持良好的学习心态，激发学习热情，是当务之急。愿你永远孜孜以求，铸造一个强者的形象。记住，有些事情不是单凭兴趣就可以的，彩虹是经历风雨后才能得见的美景。'
-        }
-      ],
+      commentator: [],
       config: {
         card_type: 'goodplay'
       },
@@ -210,7 +191,7 @@ export default {
       },
       evaluateListForm: {
         pages: 1,
-        limits: 4,
+        limits: 2,
         ids: '',
         types: 1,
         isRecommend: 2
@@ -222,6 +203,24 @@ export default {
       },
       getdefaultForm: {
         curriculumid: ''
+      },
+      loadMsg: true,
+      pagemsg: {
+        page: 1,
+        pagesize: 2,
+        total: null
+      },
+      btnData: [],
+      borderIndex: 0,
+      addEvaluateForm: {
+        ids: '',
+        evaluatecontent: '',
+        scores: '',
+        types: 1,
+        tags: ''
+      },
+      evaluate: {
+        eltnum: null
       }
     }
   },
@@ -233,26 +232,84 @@ export default {
         message: '提交评价成功'
       })
     },
-    handleClose(done) {
-      this.$confirm('确认关闭？')
-        .then(_ => {
-          done()
+    // 点击评论查看更多
+    getMore() {
+      this.dialogVisible = true
+    },
+    // 评论查看更多-分页
+    handleCurrentChange(val) {
+      this.loadMsg = true
+      this.pagemsg.page = val
+      this.evaluateListForm.pages = val
+      this.evaluateListForm.limits = 2
+      this.evaluateListForm.ids = persistStore.get('curriculumId')
+      return new Promise((resolve, reject) => {
+        home.getEvaluateLists(this.evaluateListForm).then(response => {
+          this.loadMsg = false
+          this.pagemsg.total = response.data.length
+          this.commentator = response.data.evaluateList
         })
-        .catch(_ => {})
+      })
+    },
+    // 关闭查看更多-评论弹框
+    handleClose(done) {
+      done()
+    },
+    //获取课程标签列表
+    getEvaluateTags() {
+      return new Promise((resolve, reject) => {
+        home.getEvaluateTags().then(response => {
+          console.log(response)
+          this.btnData = response.data.evaluateTags
+        })
+      })
+    },
+    // 提交评论接口
+    addEvaluate() {
+      this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.evaluatecontent = this.textarea
+      this.addEvaluateForm.scores = this.rateModel
+      this.addEvaluateForm.tags = '内容精彩,内容生涩'
+      return new Promise((resolve, reject) => {
+        home.addEvaluate(this.addEvaluateForm).then(response => {
+          console.log(response, '这是response')
+          if (response.status === '100100') {
+            this.$message({
+              type: 'warning',
+              message: response.msg
+            })
+          } else {
+            this.$message({
+              type: 'success',
+              message: response.msg
+            })
+          }
+        })
+      })
+    },
+    getBtnContent(val, index) {
+      console.log(val, '这是val')
+      console.log(index, '这是index')
+      this.borderIndex = index
     },
     getCourseDetail() {
       this.kidForm.ids = persistStore.get('kid')
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
+          this.loadMsg = false
           this.courseList = response.data.curriculumDetail
           this.privileMsg = response.data.curriculumPrivilege
           this.content = response.data.curriculumPrivilege
         })
       })
     },
+    // 获取评论列表
     getEvaluateList() {
+      this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
+          this.loadMsg = false
+          this.pagemsg.total = response.data.length
           this.commentator = response.data.evaluateList
         })
       })
@@ -329,12 +386,21 @@ export default {
     this.getEvaluateList()
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
+    this.getEvaluateTags()
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .bag {
   color: #732eaf !important;
+}
+.pagination {
+  margin-top: 50px;
+}
+.borderColor {
+  .el-button {
+    border-color: red !important;
+  }
 }
 </style>
