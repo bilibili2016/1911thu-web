@@ -18,7 +18,7 @@
                     <el-form-item prop="code" class="clearfix">
                         <!-- 验证码 -->
                         <el-input class="captcha" v-model.number="fpData.code" placeholder="请输入短信验证码"></el-input>
-                        <div class="getCode" @click="handleGetCode">{{fpData.getCode}}</div>
+                        <div class="getCode" @click="verifyRgTel">{{fpData.getCode}}</div>
                     </el-form-item>
                     <el-form-item prop="password">
                         <!-- 密码 -->
@@ -107,6 +107,31 @@ export default {
         this.showPwd = true;
         this.pwdType = "text";
       }
+    },
+    // 验证手机号是否存在
+    verifyRgTel() {
+      return new Promise((resolve, reject) => {
+        auth.verifyPhone(this.fpData).then(response => {
+          if (response.status === 0) {
+            this.$message({
+              type: "error",
+              message: "您的手机号还未注册！"
+            });
+            this.bindTelData.captchaDisable = true;
+          } else if(response.status === "100100"){
+             this.$message({
+              type: "error",
+              message: response.msg
+            });
+            this.bindTelData.captchaDisable = true;
+          } else{
+            if(this.bindTelData.seconds === 30){
+              this.bindTelData.captchaDisable = false;
+              this.handleGetCode(this.registerData);
+            }
+          }
+        });
+      });
     },
     forgetPasswordAjax() {
       return new Promise((resolve, reject) => {

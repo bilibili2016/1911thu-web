@@ -50,9 +50,9 @@
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="登录" name="login" @keyup.enter="signIns('loginData')">
+          <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
-            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm">
+            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')">
               <el-form-item prop="phonenum">
                 <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
@@ -479,14 +479,13 @@
           if (valid) {
             return new Promise((resolve, reject) => {
               this.signIn(this.loginData).then(response => {
-                if (response.status === 0) {
-                  this.start = false;
-                  this.islogin = true;
-                }
                 this.$message({
                   type: response.status === "0" ? "error" : "success",
                   message: response.msg
                 });
+                if (response.status === 0) {
+                  this.close();
+                }
               });
             });
           } else {
