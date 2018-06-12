@@ -63,13 +63,7 @@
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
-            <el-autocomplete
-              v-model="companyInfo.companyname"
-              :fetch-suggestions="querySearch"
-              placeholder="请输入公司名称"
-              :trigger-on-focus="false"
-              @select="handleSelect"
-            ></el-autocomplete>
+            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearch" placeholder="请输入公司名称" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <el-form-item label="公司地址：" prop="companyaddress">
             <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
@@ -90,21 +84,21 @@
           </el-form-item>
         </el-form>
       </div>
-      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { indexOf } from "lodash";
-import { home, auth } from "@/lib/v1_sdk/index";
-import { mapState, mapActions } from "vuex";
-import { checkPhone, checkCode } from "~/lib/util/validatefn";
+import { indexOf } from 'lodash'
+import { home, auth } from '@/lib/v1_sdk/index'
+import { mapState, mapActions } from 'vuex'
+import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
     return {
-      isNoMsg:false,
-      loding:true,
-      noMsg: require("~/assets/images/noMsg.png"),
+      isNoMsg: false,
+      loding: true,
+      noMsg: require('~/assets/images/noMsg.png'),
       showInfo: false,
       selectAll: false,
       checked: [],
@@ -112,20 +106,20 @@ export default {
       numForm: {
         number: 1
       },
-      courseList: "",
+      courseList: '',
       restaurants: [
-        { value: "11111" },
-        { value: "22" },
-        { value: "222" },
-        { value: "1" },
-        { value: "111" }
+        { value: '11111' },
+        { value: '22' },
+        { value: '222' },
+        { value: '1' },
+        { value: '111' }
       ],
       companyInfo: {
-        companyname: "",
-        companyaddress: "",
-        contactperson: "",
-        phones: "",
-        codes: "",
+        companyname: '',
+        companyaddress: '',
+        contactperson: '',
+        phones: '',
+        codes: '',
         types: 6,
         getCode: '获取验证码',
         seconds: 30,
@@ -133,20 +127,20 @@ export default {
       },
       rules: {
         companyname: [
-          { required: true, message: "请输入公司名称", trigger: "blur" }
+          { required: true, message: '请输入公司名称', trigger: 'blur' }
         ],
         companyaddress: [
-          { required: true, message: "请填写公司地址", trigger: "blur" }
+          { required: true, message: '请填写公司地址', trigger: 'blur' }
         ],
         contactperson: [
-          { required: true, message: "请填写联系人姓名", trigger: "blur" }
+          { required: true, message: '请填写联系人姓名', trigger: 'blur' }
         ],
         phones: [
-          { required: true, message: "请输入手机号", trigger: "blur" },
-          { validator: checkPhone, trigger: "blur" }
+          { required: true, message: '请输入手机号', trigger: 'blur' },
+          { validator: checkPhone, trigger: 'blur' }
         ],
         codes: [
-          { required: true, message: "请填写短信验证码", trigger: "blur" }
+          { required: true, message: '请填写短信验证码', trigger: 'blur' }
         ]
       },
       arraySum: 0,
@@ -156,85 +150,91 @@ export default {
       addArray: {
         curriculumcartid: []
       },
-      isRest:true
-    };
+      isRest: true
+    }
   },
   mounted() {
-    document.getElementsByClassName("headerBox")[0].style.display = "inline";
-    document.getElementsByClassName("footerBox")[0].style.display = "inline";
-    this.shopCartList();
-    this.getNum();
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.shopCartList()
+    this.getNum()
   },
   computed: {
-    ...mapState("auth", ["token", "productsNum"]),
+    ...mapState('auth', ['token', 'productsNum']),
     prices() {
-      return (Number(this.arraySum) * 10 * (Number(this.numForm.number) * 10) / 100).toFixed(2)
+      return (
+        Number(this.arraySum) *
+        10 *
+        (Number(this.numForm.number) * 10) /
+        100
+      ).toFixed(2)
     }
   },
   watch: {
     selectAll(val) {
-      if(this.isRest){
-        this.handleSelectAllChange(val);
+      if (this.isRest) {
+        this.handleSelectAllChange(val)
       }
     }
   },
   methods: {
-    ...mapActions("auth", ["setProductsNum"]),
-    setPatten(){
-        let reg =   new RegExp('/^[0-9]*$/')
-        if(!reg.test(this.numForm.number)){
-          let str = this.numForm.number.toString()
-          // console.log('2222222------',str)
-          this.numForm.number = str.replace(this.numForm.number, 1)
-          // console.log('2222222-this.numForm.number--',this.numForm.number)
-
-        }
+    ...mapActions('auth', ['setProductsNum']),
+    setPatten() {
+      let reg = new RegExp('/^[0-9]*$/')
+      if (!reg.test(this.numForm.number)) {
+        let str = this.numForm.number.toString()
+        this.numForm.number = str.replace(this.numForm.number, 1)
+      }
     },
-    handleSelectAll(){
+    handleSelectAll() {
       this.isRest = true
     },
     getNum() {
       return new Promise((resolve, reject) => {
         home.changeCartNumber(this.numForm).then(res => {
-          this.numForm.number = Number(res.data.cart_number);
-          resolve(true);
-        });
-      });
+          this.numForm.number = Number(res.data.cart_number)
+          resolve(true)
+        })
+      })
     },
     shopCartList() {
-      this.arraySum = 0;
+      this.arraySum = 0
       this.addArray.curriculumcartid = []
       return new Promise((resolve, reject) => {
         home.shopCartList().then(response => {
           let body = response.data.curriculumCartList.map(item => {
-            this.addArray.curriculumcartid.push(item.id);
-            this.arraySum =((Number(this.arraySum) * 10) + (Number(item.present_price) * 10)) /10;
-            return Object.assign({}, item, { checkMsg: true });
-          });
-          this.courseList = body;
-          this.selectAll = true;
+            this.addArray.curriculumcartid.push(item.id)
+            this.arraySum =
+              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+              10
+            return Object.assign({}, item, { checkMsg: true })
+          })
+          this.courseList = body
+          this.selectAll = true
           this.loding = false
-          this.setProductsNum({pn:this.courseList.length})
-          if(this.courseList.length == 0){
+          this.setProductsNum({ pn: this.courseList.length })
+          if (this.courseList.length == 0) {
             this.isNoMsg = true
-            this.selectAll = false;
+            this.selectAll = false
           }
-        });
-      });
+        })
+      })
     },
     handleSelectChange(item, index) {
-      let shopIndex = indexOf(this.addArray.curriculumcartid, item.id);
+      let shopIndex = indexOf(this.addArray.curriculumcartid, item.id)
       if (shopIndex >= 0) {
-        this.addArray.curriculumcartid.splice(shopIndex, 1);
-        this.arraySum = ((Number(this.arraySum)*10) - (Number(item.present_price)*10))/10
+        this.addArray.curriculumcartid.splice(shopIndex, 1)
+        this.arraySum =
+          (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10
       } else {
-        this.addArray.curriculumcartid.push(item.id);
-        this.arraySum = ((Number(this.arraySum)*10) + (Number(item.present_price)*10))/10
+        this.addArray.curriculumcartid.push(item.id)
+        this.arraySum =
+          (Number(this.arraySum) * 10 + Number(item.present_price) * 10) / 10
       }
-      if(this.addArray.curriculumcartid.length == this.courseList.length){
+      if (this.addArray.curriculumcartid.length == this.courseList.length) {
         this.selectAll = true
         this.isRest = true
-      }else{
+      } else {
         this.selectAll = false
         this.isRest = false
       }
@@ -242,15 +242,17 @@ export default {
     handleSelectAllChange(val) {
       if (this.courseList && this.courseList.length > 0) {
         this.courseList.forEach(item => {
-          item.checkMsg = val;
-        });
-        this.arraySum = 0;
-        this.addArray.curriculumcartid = [];
+          item.checkMsg = val
+        })
+        this.arraySum = 0
+        this.addArray.curriculumcartid = []
         if (val) {
           this.courseList.forEach(item => {
-            this.addArray.curriculumcartid.push(item.id);
-            this.arraySum = ((Number(this.arraySum)*10) + (Number(item.present_price)*10))/10
-          });
+            this.addArray.curriculumcartid.push(item.id)
+            this.arraySum =
+              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+              10
+          })
         }
       }
     },
@@ -264,137 +266,134 @@ export default {
     //   });
     // },
     showCommit() {
-      this.showInfo = true;
+      this.showInfo = true
       // this.$router.push('/shop/checkedCourse');
       return new Promise((resolve, reject) => {
         home.addChecked(this.addArray).then(res => {
           if (res.status == 0) {
-            this.shopCartList();
+            this.shopCartList()
           }
-          resolve(true);
-        });
-      });
+          resolve(true)
+        })
+      })
     },
     close() {
-      this.showInfo = false;
+      this.showInfo = false
     },
     querySearch(queryString, cb) {
-      var restaurants = this.restaurants;
+      var restaurants = this.restaurants
       var results = queryString
         ? restaurants.filter(this.createFilter(queryString))
-        : restaurants;
+        : restaurants
       // 调用 callback 返回建议列表的数据
-      cb(results);
+      cb(results)
     },
     createFilter(queryString) {
       return restaurant => {
         return (
           restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) ===
           0
-        );
-      };
+        )
+      }
     },
     handleSelect(item, index) {},
     addNumber() {
-      this.numForm.number = this.numForm.number + 1;
-      this.changeCartNumber();
+      this.numForm.number = this.numForm.number + 1
+      this.changeCartNumber()
     },
     changeCartNumber() {
       return new Promise((resolve, reject) => {
         home.changeCartNumber(this.numForm).then(res => {
-          resolve(true);
-        });
-      });
+          resolve(true)
+        })
+      })
     },
     delNumber() {
       if (this.numForm.number > 1) {
-        this.numForm.number = this.numForm.number - 1;
+        this.numForm.number = this.numForm.number - 1
       } else {
-        this.numForm.number = Number(1);
+        this.numForm.number = Number(1)
       }
-      this.changeCartNumber();
+      this.changeCartNumber()
     },
     changeNumber() {
-      if (typeof this.number !== "number" || this.number < 1 ) {
-        this.number = 1;
+      if (typeof this.number !== 'number' || this.number < 1) {
+        this.number = 1
       }
-      this.changeCartNumber();
+      this.changeCartNumber()
     },
     addPaySubmit(formName) {
       this.$refs[formName].validate(valid => {
-
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addPaySubmit(this.companyInfo).then(response => {
-              if(response.status === '1000100'){
+              if (response.status === '1000100') {
                 this.$message({
                   type: 'error',
                   message: response.msg
                 })
               } else {
-                this.$router.push("/shop/checkedCourse");
+                this.$router.push('/shop/checkedCourse')
               }
 
-              resolve(true);
-            });
-          });
+              resolve(true)
+            })
+          })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
     handleDelete(item, index) {
-      this.curriculumcartids.cartid = item.id;
+      this.curriculumcartids.cartid = item.id
       this.loding = true
       return new Promise((resolve, reject) => {
         home.delShopCart(this.curriculumcartids).then(response => {
           this.$message({
-            type: "success",
-            message: "删除成功"
-          });
+            type: 'success',
+            message: '删除成功'
+          })
           // this.handleSelectChange(item, index);
           // this.courseList.splice(index, 1);
-          this.shopCartList();
-          this.getNum();
+          this.shopCartList()
+          this.getNum()
           this.loding = false
-        });
-      });
+        })
+      })
     },
     async handleGetCode() {
-      if(this.companyInfo.phones){
-        if(this.companyInfo.captchaDisable === true){
-           return new Promise((resolve, reject) => {
-              auth.smsCodes(this.companyInfo).then(response => {
-                // console.log(response)
-                this.$message({
-                  type: response.status === 0 ? "success" : "error",
-                  message: response.msg
-                });
-                this.companyInfo.captchaDisable = false;
-                this.companyInfo.getCode = this.companyInfo.seconds + "秒后重新发送";
-                let interval = setInterval(() => {
-                  if (this.companyInfo.seconds <= 0) {
-                    this.companyInfo.getCode = "获取验证码";
-                    this.companyInfo.seconds = 60;
-                    this.companyInfo.captchaDisable = true;
-                    clearInterval(interval);
-                  } else {
-                    this.companyInfo.getCode =
-                      --this.companyInfo.seconds + "秒后重新发送";
-                  }
-                }, 1000);
-              });
-            });
+      if (this.companyInfo.phones) {
+        if (this.companyInfo.captchaDisable === true) {
+          return new Promise((resolve, reject) => {
+            auth.smsCodes(this.companyInfo).then(response => {
+              this.$message({
+                type: response.status === 0 ? 'success' : 'error',
+                message: response.msg
+              })
+              this.companyInfo.captchaDisable = false
+              this.companyInfo.getCode =
+                this.companyInfo.seconds + '秒后重新发送'
+              let interval = setInterval(() => {
+                if (this.companyInfo.seconds <= 0) {
+                  this.companyInfo.getCode = '获取验证码'
+                  this.companyInfo.seconds = 60
+                  this.companyInfo.captchaDisable = true
+                  clearInterval(interval)
+                } else {
+                  this.companyInfo.getCode =
+                    --this.companyInfo.seconds + '秒后重新发送'
+                }
+              }, 1000)
+            })
+          })
         }
-
-      } else{
+      } else {
         this.$message({
           type: 'error',
           message: '请填写手机号'
         })
       }
-
     }
   }
-};
+}
 </script>

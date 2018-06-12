@@ -19,6 +19,7 @@
     "axios": "^0.17.1",
     "axios-mock-adapter": "^1.14.1",
     "bluebird": "^3.5.1",
+    "css-loader": "^0.28.11",
     "dotenv": "^4.0.0",
     "dropzone": "^5.4.0",
     "echarts": "^4.0.2",
@@ -38,7 +39,9 @@
     "tcplayer": "^2.2.1",
     "to": "^0.2.9",
     "update": "^0.7.4",
-    "vue-simplemde": "^0.4.6"
+    "vue-loader": "^14.2.3",
+    "vue-simplemde": "^0.4.6",
+    "vue-template-compiler": "^2.5.16"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",

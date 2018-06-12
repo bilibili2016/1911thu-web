@@ -1,10 +1,11 @@
 <template>
   <div>
     <template v-if="config.banner_type === 'news'">
-          <div class="news-banner">
-            <img :src="bannerImg" alt="">
-          </div>
+      <div class="news-banner">
+        <img :src="bannerImg" alt="">
+      </div>
     </template>
+
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
@@ -12,17 +13,16 @@
             <div class="img">
               <img :src="avator" alt="">
               <!-- <img :src="avator" alt="" v-if="userInfo.head_img"> -->
-
               <!-- <img :src="userInfo.head_img" alt="" v-if="userInfo.head_img">
-              <img :src="avator" alt="" v-else> -->
+                <img :src="avator" alt="" v-else> -->
               <!-- <el-upload v-show="isShowUpAvtor" class="up-user-avtor"
-                action="http://www.1911edu.com/Wapi/MyInfo/uploadHeadImg"
-                accept='image/*'
-                :on-success="upSuccess"
-                :on-error="failUp"
-                :show-file-list="false">
-                <el-button size="medium" type="primary">更换图片</el-button>
-              </el-upload> -->
+                  action="http://www.1911edu.com/Wapi/MyInfo/uploadHeadImg"
+                  accept='image/*'
+                  :on-success="upSuccess"
+                  :on-error="failUp"
+                  :show-file-list="false">
+                  <el-button size="medium" type="primary">更换图片</el-button>
+                </el-upload> -->
             </div>
           </div>
           <div class="name">
@@ -40,43 +40,41 @@
 </template>
 
 <script>
-import { home } from "~/lib/v1_sdk/index";
+import { home } from '~/lib/v1_sdk/index'
 export default {
-  props: ["bannerImg", "config", "isUpdate","isShowUpAvtor"],
+  props: ['bannerImg', 'config', 'isUpdate', 'isShowUpAvtor'],
   data() {
     return {
-      avator:require("@/assets/images/profile_avator01.png"),
+      avator: require('@/assets/images/profile_avator01.png'),
       userInfo: {
-        nick_name: "",
-        company_name: "",
-        head_img:""
+        nick_name: '',
+        company_name: '',
+        head_img: ''
       }
-    };
+    }
   },
   mounted() {
-    this.getUserInfo();
+    this.getUserInfo()
   },
   watch: {
     isUpdate(val) {
       if (val) {
-        this.getUserInfo();
+        this.getUserInfo()
       }
     }
   },
   methods: {
     getUserInfo() {
       home.getUserInfo().then(res => {
-        this.userInfo = res.data.userInfo;
-      });
+        this.userInfo = res.data.userInfo
+      })
     },
-    upSuccess(res,file){
-      this.userInfo.head_img= res.data.full_path
+    upSuccess(res, file) {
+      this.userInfo.head_img = res.data.full_path
     },
-    failUp(){
-
-    }
+    failUp() {}
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

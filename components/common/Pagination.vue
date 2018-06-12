@@ -11,7 +11,6 @@
     props: ["data"],
     methods: {
       handleCurrentChange(val) {
-        // console.log(val, '这是val')
         this.$emit("page", val);
       }
     }

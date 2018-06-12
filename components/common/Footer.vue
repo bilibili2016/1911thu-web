@@ -41,11 +41,11 @@
 </template>
 
 <script>
-  export default {
-    methods:{
-      goLink(link){
-        this.$router.push(link);
-      }
+export default {
+  methods: {
+    goLink(link) {
+      this.$router.push(link)
     }
-  };
+  }
+}
 </script>
