@@ -5,12 +5,7 @@
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="empty">
         <!-- 我的信息 -->
         <el-tab-pane class="my-home" name="tab-first">
-<<<<<<< HEAD
           <span slot="label" class="tabList"><i class="icon-home"></i> 我的首页</span>
-=======
-          <span slot="label">
-            <i class="el-icon-date"></i> 我的首页</span>
->>>>>>> master
           <el-card class="card-style">
             <div slot="header" class="clearfix">
               <span>最近学习</span>
@@ -27,12 +22,7 @@
         </el-tab-pane>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
-<<<<<<< HEAD
           <span slot="label" class="tabList"><i class="icon-course"></i> 我的课程</span>
-=======
-          <span slot="label">
-            <i class="el-icon-date"></i> 我的课程</span>
->>>>>>> master
           <el-card>
             <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
@@ -71,12 +61,7 @@
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-third">
-<<<<<<< HEAD
           <span slot="label" class="tabList"><i class="icon-message"></i> 我的消息</span>
-=======
-          <span slot="label">
-            <i class="el-icon-date"></i> 我的消息</span>
->>>>>>> master
           <el-card class="card-style">
             <div slot="header" class="clearfix">
               <span>我的消息</span>
@@ -93,24 +78,13 @@
         </el-tab-pane>
         <!-- 个人设置 -->
         <el-tab-pane name="tab-fourth">
-<<<<<<< HEAD
           <span slot="label" class="tabList"><i class="icon-set"></i> 个人设置</span>
-=======
-          <span slot="label">
-            <i class="el-icon-date"></i> 个人设置</span>
->>>>>>> master
           <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
         <el-tab-pane name="tab-fifth">
-<<<<<<< HEAD
           <span slot="label" class="tabList"><i class="icon-bind"></i> 绑定课程ID</span>
           <v-bind @isShowMsg = "isShowMsg"></v-bind>
-=======
-          <span slot="label">
-            <i class="el-icon-date"></i> 绑定课程ID</span>
-          <v-bind @isShowMsg="isShowMsg"></v-bind>
->>>>>>> master
           <div class="content">
             <div class="noCourse" v-if="isShowNoCourse">
               <img :src="noMsgImg" alt="">
@@ -120,14 +94,8 @@
         </el-tab-pane>
         <!-- 我的选课 -->
         <el-tab-pane name="tab-sixth">
-<<<<<<< HEAD
         <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
           <span slot="label" class="tabList"><i class="icon-choose"></i> 我的选课</span>
-=======
-          <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
-          <span slot="label">
-            <i class="el-icon-date"></i> 我的选课</span>
->>>>>>> master
         </el-tab-pane>
       </el-tabs>
     </div>
