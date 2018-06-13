@@ -181,10 +181,16 @@ export default {
                 checkPass: ""
               };
               if(res.status==0){
-                this.updateSuccess = true;
-                setTimeout(() => {
-                  this.updateSuccess = false;
-                }, 1000);
+               this.$message({
+                  type: "success",
+                  message: '恭喜你操作成功'
+                });
+              }else{
+                let msg = res.msg
+                this.$message({
+                  type: "error",
+                  message: msg
+                });
               }
             });
           });
