@@ -3,7 +3,7 @@
     <!-- 购物车列表 -->
     <div class="main" v-loading="loding">
       <div class="table">
-        <div class="tableHeader">
+        <div class="tableHeader" v-if="!isNoMsg">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseName">课程名称</span>
           <span class="price">单价</span>
