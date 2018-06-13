@@ -47,7 +47,8 @@
             </span> -->
           </span>
           <span class="commitOrder fr">
-            <el-button @click="showCommit">提交</el-button>
+            <el-button class="notGray" @click="showCommit" v-if="canSubmit">提交</el-button>
+            <el-button class="isGray" v-else>提交</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
 
@@ -168,6 +169,9 @@ export default {
     ...mapState("auth", ["token", "productsNum"]),
     prices() {
       return (Number(this.arraySum) * 10 * (Number(this.numForm.number) * 10) / 100).toFixed(2)
+    },
+    canSubmit(){
+      return this.addArray.curriculumcartid.length>0
     }
   },
   watch: {
