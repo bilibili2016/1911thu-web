@@ -3,9 +3,9 @@
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow">
       <div @click="getNewInfoList"></div>
-      <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail"></v-card>
+      <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
     </div>
-    <v-page :data="pagemsg" @page="selectPages"></v-page>
+    <v-page :data="pagemsg" @page="selectPages" :pageSize='8'></v-page>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
     ...mapActions('auth', ['setNid']),
     getNewInfoList() {
       this.newsInfoForm.pages = 1
-      this.newsInfoForm.limits = 2
+      this.newsInfoForm.limits = 8
       return new Promise((resolve, reject) => {
         home.getNewInfoList(this.newsInfoForm).then(response => {
           this.pagemsg.total = Number(response.data.pageCount) - 1

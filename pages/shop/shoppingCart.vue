@@ -3,8 +3,8 @@
     <!-- 购物车列表 -->
     <div class="main" v-loading="loding">
       <div class="table">
-        <div class="tableHeader">
-          <!-- <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox> -->
+        <div class="tableHeader" v-if="!isNoMsg">
+          <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseName">课程名称</span>
           <span class="price">单价</span>
           <span class="operation">操作</span>
@@ -39,7 +39,7 @@
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
             <span class="person">购买人数：</span>
-            <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput"></el-input-number>
+            <el-input-number v-model="numForm.number" :step="1" :min="1" :max="6000" class="courseNumberInput"></el-input-number>
             <!-- <span class="number clearfix">
                 <i class="fl minus el-icon-minus"  @click="delNumber"></i>
                 <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
@@ -423,6 +423,7 @@ export default {
               } else {
                 this.$router.push('/shop/checkedCourse')
               }
+              this.showInfo = false
               resolve(true)
             })
           })
