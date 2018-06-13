@@ -324,7 +324,8 @@ export default {
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addPaySubmit(this.companyInfo).then(response => {
-              this.$router.push("/shop/checkedCourse");
+              // this.$router.push("/shop/checkedCourse");
+              this.showInfo = false
               resolve(true);
             });
           });
