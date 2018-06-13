@@ -190,7 +190,10 @@ export default {
       iseve: 1,
       getdefaultForm: {
         curriculumid: ''
-      }
+      },
+      seconds: 500000,
+      time: '',
+      player: ''
     }
   },
   methods: {
@@ -239,9 +242,11 @@ export default {
       this.$router.back(-1)
     },
     getPlayerInfo() {
-      var player = TCPlayer('movd', this.tcplayer)
+      this.player = TCPlayer('movd', this.tcplayer)
+      console.log(this.player.currentTime())
+
       if (this.$refs.playInner.children[0]) {
-        player.dispose()
+        this.player.dispose()
         $('#playInner').html('')
         $('#playInner').html(
           '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
@@ -250,11 +255,15 @@ export default {
       let kid = this.kid
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
-      player = TCPlayer('movd', this.tcplayer)
+      this.player = TCPlayer('movd', this.tcplayer)
+      // persistStore.set('player', this.player)
+      // let time = player.currentTime()
+      // console.log(time, '这是time')
       return new Promise((resolve, reject) => {
         home.getPlayerInfos(this.playerForm).then(response => {
+          this.daojishi()
           if (response.data.playAuthInfo.videoViewType == false) {
-            player.loadVideoByID({
+            this.player.loadVideoByID({
               fileID: response.data.playAuthInfo.fileID,
               appID: response.data.playAuthInfo.appID,
               sign: response.data.playAuthInfo.sign,
@@ -262,7 +271,7 @@ export default {
               exper: response.data.playAuthInfo.exper
             })
           } else {
-            player.loadVideoByID({
+            this.player.loadVideoByID({
               fileID: response.data.playAuthInfo.fileID,
               appID: response.data.playAuthInfo.appID,
               t: response.data.playAuthInfo.t,
@@ -271,6 +280,21 @@ export default {
           }
         })
       })
+    },
+    daojishi() {
+      let interval = setInterval(() => {
+        if (this.seconds <= 0) {
+          this.seconds = 1
+          this.courseList.success = false
+          this.courseList.inputID = ''
+          clearInterval(interval)
+        } else {
+          this.seconds--
+          // console.log(this, '这是this')
+          // this.time = this.player.currentTime()
+          // console.log(this.time)
+        }
+      }, 1000)
     },
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
@@ -344,6 +368,12 @@ export default {
           this.collectMsg = 0
         })
       })
+    },
+
+    players() {
+      let playerTime = this.player.currentTime()
+      console.log(playerTime)
+      return playerTime
     }
   },
   mounted() {
@@ -355,6 +385,17 @@ export default {
     this.getPlayerInfo()
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
+    // 新建webspcket对象
+    var socket = new io('http://www.1911edu.com:2120')
+    socket.on('connect', function() {
+      console.log('已连接')
+      socket.emit(
+        'login',
+        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTk3In0.L0yuyoKeO37A0W4HUHpr7eaKyP67MiBjtlLOHMxDorU'
+      )
+    })
+
+    this.players()
   }
 }
 </script>

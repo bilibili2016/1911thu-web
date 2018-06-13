@@ -56,7 +56,7 @@ export default {
         head_img: ''
       },
       fileForm: {
-        FILESS: ''
+        FILESS: []
       },
       imgs: []
     }
@@ -79,21 +79,13 @@ export default {
       var formdata = new window.FormData()
       formdata.append('image', img1)
       formdata.image = img1
-      console.log(formdata, '这是formdata')
-      that.fileForm.FILESS = formdata.image
-      console.log(that.fileForm, 'fileForm')
-      home.uploadHeadImg(that.fileForm).then(response => {
-        console.log(response)
-      })
-      // reader.readAsDataURL(img1)
-      // reader.onloadend = function() {
-      //   console.log(reader.result, '上传图片')
-      //   that.fileForm.FILESS.push(reader.result)
-      //   console.log(that.fileForm, '3233434')
-      //   home.uploadHeadImg(that.fileForm).then(response => {
-      //     console.log(response)
-      //   })
-      // }
+      reader.readAsDataURL(img1)
+      reader.onloadend = function() {
+        that.fileForm.FILESS.push(reader.result)
+        home.uploadHeadImg(that.fileForm).then(response => {
+          console.log(response)
+        })
+      }
     },
     uploadImg(e) {
       let param = new FormData() //创建form对象
