@@ -180,7 +180,7 @@ export default {
                 newPass: "",
                 checkPass: ""
               };
-              if(data.status==0){
+              if(res.status==0){
                 this.updateSuccess = true;
                 setTimeout(() => {
                   this.updateSuccess = false;
