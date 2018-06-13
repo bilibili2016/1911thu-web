@@ -41,20 +41,18 @@
             <span class="person">购买人数：</span>
             <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput"></el-input-number>
             <!-- <span class="number clearfix">
-              <i class="fl minus el-icon-minus"  @click="delNumber"></i>
-              <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
-              <i class="fl add el-icon-plus" @click="addNumber"></i>
-            </span> -->
+                <i class="fl minus el-icon-minus"  @click="delNumber"></i>
+                <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
+                <i class="fl add el-icon-plus" @click="addNumber"></i>
+              </span> -->
           </span>
           <span class="commitOrder fr">
             <el-button @click="showCommit">提交</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
-
         </div>
       </div>
     </div>
-
     <!-- 提交公司信息 -->
     <div class="information" @click.self="close" v-show="showInfo">
       <div class="info">
@@ -63,9 +61,6 @@
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
-            <!-- <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearch" placeholder="请输入公司名称" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete> -->
-            <!-- <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入公司名称" @select="handleSelect"></el-autocomplete> -->
-            <!-- <el-autocomplete class="inline-input" v-model="companyInfo.companyname" :fetch-suggestions="querySearch" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete> -->
             <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <el-form-item label="公司地址：" prop="companyaddress">
@@ -111,11 +106,21 @@ export default {
       },
       courseList: '',
       restaurants: [
-        { value: '11111' },
-        { value: '22' },
-        { value: '222' },
-        { value: '1' },
-        { value: '111' }
+        {
+          value: '11111'
+        },
+        {
+          value: '22'
+        },
+        {
+          value: '222'
+        },
+        {
+          value: '1'
+        },
+        {
+          value: '111'
+        }
       ],
       companyInfo: {
         companyname: '',
@@ -130,20 +135,43 @@ export default {
       },
       rules: {
         companyname: [
-          { required: true, message: '请输入公司名称', trigger: 'blur' }
+          {
+            required: true,
+            message: '请输入公司名称',
+            trigger: 'blur'
+          }
         ],
         companyaddress: [
-          { required: true, message: '请填写公司地址', trigger: 'blur' }
+          {
+            required: true,
+            message: '请填写公司地址',
+            trigger: 'blur'
+          }
         ],
         contactperson: [
-          { required: true, message: '请填写联系人姓名', trigger: 'blur' }
+          {
+            required: true,
+            message: '请填写联系人姓名',
+            trigger: 'blur'
+          }
         ],
         phones: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { validator: checkPhone, trigger: 'blur' }
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          {
+            validator: checkPhone,
+            trigger: 'blur'
+          }
         ],
         codes: [
-          { required: true, message: '请填写短信验证码', trigger: 'blur' }
+          {
+            required: true,
+            message: '请填写短信验证码',
+            trigger: 'blur'
+          }
         ]
       },
       arraySum: 0,
@@ -263,12 +291,16 @@ export default {
             this.arraySum =
               (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
               10
-            return Object.assign({}, item, { checkMsg: true })
+            return Object.assign({}, item, {
+              checkMsg: true
+            })
           })
           this.courseList = body
           this.selectAll = true
           this.loding = false
-          this.setProductsNum({ pn: this.courseList.length })
+          this.setProductsNum({
+            pn: this.courseList.length
+          })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
             this.selectAll = false
@@ -391,7 +423,6 @@ export default {
               } else {
                 this.$router.push('/shop/checkedCourse')
               }
-
               resolve(true)
             })
           })
