@@ -14,11 +14,11 @@
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
-            <img class="fl" src="@/assets/images/wechatLogin.png" alt="">
+            <img class="fl" :src="downApp" alt="">
             <div class="changeType fr">
               <span>下载1911学堂APP</span>
-              <span><img src="@/assets/images/iphone.png" alt="">AppStore下载</span>
-              <span><img src="@/assets/images/Android.png" alt="">Android下载</span>
+              <span @mouseenter="changeImg('iphone')"><img src="@/assets/images/iphone.png" alt="">AppStore下载</span>
+              <span @mouseenter="changeImg('android')"><img src="@/assets/images/Android.png" alt="">Android下载</span>
             </div>
           </div>
         </div>
@@ -156,33 +156,11 @@
   } from "~/lib/util/validatefn";
   export default {
     data() {
-      var checkTel = (rule, value, callback) => {
-        if (value === "") {
-          return callback(new Error("手机号不能为空"));
-        }
-        if (value.toString().length != 11) {
-          return callback(new Error("请输入正确手机号123"));
-        }
-      };
-      var checkRgTel = (rule, value, callback) => {
-        if (value === "") {
-          return callback(new Error("手机号不能为空"));
-        }
-        if (value.toString().length != 11) {
-          return callback(new Error("请输入正确手机号"));
-        }
-        if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
-          return callback(new Error("请输入正确手机号"));
-        }
-      };
       var validatePass = (rule, value, callback) => {
-        if (value === "") {
-          callback(new Error("请输入密码"));
-          return false;
-        } else if (value.length < 6 || value.length > 10) {
-          callback(new Error("请输入6-10位密码"));
-          return false;
-        }
+        if (!/^[A-Za-z0-9]+$/.test(value)) {
+          callback(new Error("密码只能输入数字、字母"));
+        } 
+        return callback();
       };
       var checkCompanyCodes = (rule, value, callback) => {
         if (value !== "" && !/^[A-Za-z0-9]+$/.test(value)) {
@@ -198,6 +176,7 @@
       }
       return {
         searchImg: require("~/assets/images/search.png"),
+        downApp:require("~/assets/images/wechatLogin.png"),
         start: false,
         lrFrame: false,
         islogin: false,
@@ -282,6 +261,10 @@
               min: 8,
               max: 16,
               message: "密码长度为8-16位",
+              trigger: "blur"
+            },
+            {
+              validator: validatePass,
               trigger: "blur"
             }
           ],
@@ -381,6 +364,15 @@
     },
     methods: {
       ...mapActions("auth", ["signIn", "setGid", "setProductsNum", "signOut", 'setToken']),
+      changeImg(what){
+        if(what == "android"){
+          console.log(1);
+          this.downApp = require("~/assets/images/wechatLogin.png");
+        }else{
+          console.log(2);
+          this.downApp = require("~/assets/images/wechatLogin.png");
+        }
+      },
       // 登录显示card
       async loginCardShow() {
         this.closeWechat();
@@ -419,39 +411,43 @@
       },
       // 验证手机号是否存在
       verifyRgTel() {
-        return new Promise((resolve, reject) => {
-          auth.verifyPhone(this.registerData).then(response => {
-            if (response.status !== 0) {
-              this.$message({
-                type: "error",
-                message: response.msg
-              });
-              this.bindTelData.captchaDisable = true;
-            } else {
-              if(this.bindTelData.seconds === 30){
-                this.bindTelData.captchaDisable = false;
-                this.handleGetCode(this.registerData);
+        if(this.bindTelData.seconds == 30){
+          return new Promise((resolve, reject) => {
+            auth.verifyPhone(this.registerData).then(response => {
+              if (response.status !== 0) {
+                this.$message({
+                  type: "error",
+                  message: response.msg
+                });
+                this.bindTelData.captchaDisable = true;
+              } else {
+                if(this.bindTelData.seconds === 30){
+                  this.bindTelData.captchaDisable = false;
+                  this.handleGetCode(this.registerData);
+                }
               }
-            }
+            });
           });
-        });
+        }
       },
       // 验证手机号是否已经绑定了微信
       verifyRgTelWX() {
-        return new Promise((resolve, reject) => {
-          auth.verifywechat(this.bindTelData).then(response => {
-            if (response.status != 0) {
-              this.$message({
-                type: "error",
-                message: response.msg
-              });
-              this.bindTelData.captchaDisable = true;
-            } else {
-              this.bindTelData.captchaDisable = false;
-              this.handleGetCode(this.bindTelData);
-            }
+        if(this.bindTelData.seconds === 30){
+          return new Promise((resolve, reject) => {
+            auth.verifywechat(this.bindTelData).then(response => {
+              if (response.status != 0) {
+                this.$message({
+                  type: "error",
+                  message: response.msg
+                });
+                this.bindTelData.captchaDisable = true;
+              } else {
+                this.bindTelData.captchaDisable = false;
+                this.handleGetCode(this.bindTelData);
+              }
+            });
           });
-        });
+        }
       },
       // 注册 请求
       signUp(formName) {
@@ -480,7 +476,7 @@
             return new Promise((resolve, reject) => {
               this.signIn(this.loginData).then(response => {
                 this.$message({
-                  type: response.status === "0" ? "error" : "success",
+                  type: response.status === 0 ? "success" : "error",
                   message: response.msg
                 });
                 if (response.status === 0) {
@@ -606,6 +602,7 @@
         this.scanCodeShow = false;
         this.bindTelShow = false;
         clearInterval(this.getwxtime);
+        this.emptyWechatForm();
         // document.body.style.overflow = "auto";
       },
       emptyForm() {
@@ -619,6 +616,16 @@
         this.registerData.codes = "";
         this.registerData.checked = [false];
         this.registerData.companyCodes = "";
+      },
+      emptyWechatForm(){
+        this.bindTelData.phones ="",
+        this.bindTelData.codes ="",
+        this.bindTelData.seconds =30,
+        this.bindTelData.openid =null,
+        this.bindTelData.companyCodes ="",
+        this.bindTelData.captchaDisable =false,
+        this.bindTelData.exist =false,
+        this.bindTelData.checked =false
       },
       handleClick(tab, event) {
         this.emptyForm();
@@ -650,26 +657,23 @@
         document.removeEventListener("touchmove", mo, false);
       },
       goSearch(item) {
-        persistStore.set("key", this.search);
-        switch (window.location.pathname) {
-          case "/course/pages/search":
-            break;
-          default:
-            this.$router.push("/course/pages/search");
-            break;
+        if(this.search !== ""){
+          persistStore.set("key", this.search);
+          switch (window.location.pathname) {
+            case "/course/pages/search":
+              break;
+            default:
+              this.$router.push("/course/pages/search");
+              break;
+          }
         }
       },
       gokey() {
         if (event.keyCode == 13) {
-          persistStore.set("key", this.search);
-          this.$router.push("/course/pages/search");
-          // switch (window.location.pathname) {
-          // case "/course/pages/search":
-          //   break;
-          // default:
-          //   this.$router.push("/course/pages/search");
-          //   break;
-          // }
+          if(this.search !== ""){
+            persistStore.set("key", this.search);
+            this.$router.push("/course/pages/search");
+          }
         }
       },
       goSearchd(item) {

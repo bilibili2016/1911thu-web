@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 /* eslint-disable */
 export default {
   name: 'BackToTop',
@@ -60,7 +60,6 @@ export default {
     return {
       visible: false,
       move: true,
-      token: true,
       interval: null,
       ceilSrc: require('@/assets/images/home_backtop11.png'),
       wxSrc: require('@/assets/images/home_backtop22.png'),
@@ -76,13 +75,16 @@ export default {
       clearInterval(this.interval)
     }
   },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated']),
+  },
   methods: {
     ...mapActions('auth', ['setIsShowTip']),
     handleScroll() {
       this.visible = window.pageYOffset > this.visibilityHeight
     },
     checkCourse() {
-      if (this.token) {
+      if (this.isAuthenticated) {
         this.setIsShowTip({
           isShowTips: true
         })
