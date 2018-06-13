@@ -61,6 +61,34 @@
 <script>
 import { home } from '~/lib/v1_sdk/index'
 export default {
+  data() {
+    return {
+      binding: {
+        inputID: '',
+        showErr: false,
+        presentAble: false,
+        present: true,
+        success: false
+      },
+      courseList: {
+        addNewID: false,
+        inputID: '',
+        showErr: false,
+        presentAble: false,
+        present: true,
+        success: false,
+        addCourse: true,
+        courseID: []
+      },
+      bindImg: require('~/assets/images/bindingSuccess.png'),
+      bindForm: {
+        courseId: ''
+      },
+      i: '',
+      intervalid: null,
+      seconds: 1
+    }
+  },
   methods: {
     verify() {
       if (this.binding.inputID == '') {
@@ -86,18 +114,34 @@ export default {
     },
     doSubmit() {
       // this.binding.success = true;
+      this.bindForm.courseId = this.courseList.inputID
       return new Promise((resolve, reject) => {
-        home
-          .bindingCurriculumPrivate({
-            invitation_code: this.courseList.inputID
-          })
-          .then(res => {
-            if (res.status == 0) {
-              this.getUsedInvitationCodeList()
-            }
-            this.courseList.showErr = res.status != 0 ? true : false
-            this.courseList.success = res.status != 0 ? false : true
-          })
+        home.bindingCurriculumPrivate(this.bindForm).then(res => {
+          if (res.status === 0) {
+            this.getUsedInvitationCodeList()
+            this.courseList.success = true
+            let interval = setInterval(() => {
+              if (this.seconds <= 0) {
+                this.seconds = 1
+                this.courseList.success = false
+                this.courseList.inputID = ''
+                clearInterval(interval)
+              } else {
+                this.seconds--
+                // console.log(this.seconds)
+              }
+            }, 1000)
+          } else if (res.status === '100100') {
+            this.courseList.showErr = true
+            this.$message({
+              type: 'error',
+              message: res.msg
+            })
+          }
+
+          // this.courseList.showErr = res.status != 0 ? true : false
+          // this.courseList.success = res.status != 0 ? false : true
+        })
       })
     },
     getUsedInvitationCodeList() {
@@ -117,28 +161,7 @@ export default {
       })
     }
   },
-  data() {
-    return {
-      binding: {
-        inputID: '',
-        showErr: false,
-        presentAble: false,
-        present: true,
-        success: false
-      },
-      courseList: {
-        addNewID: false,
-        inputID: '',
-        showErr: false,
-        presentAble: false,
-        present: true,
-        success: false,
-        addCourse: true,
-        courseID: []
-      },
-      bindImg: require('~/assets/images/bindingSuccess.png')
-    }
-  },
+
   mounted() {
     this.getUsedInvitationCodeList()
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
