@@ -2,17 +2,17 @@
   <div class="card">
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
-        <div class="customization">
-          <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link)">
-            <img :src="pro.src" alt="" class="fl">
-            <div class="fr con">
-              <h5>{{pro.title}}</h5>
-              <p>{{pro.content}}</p>
-            </div>
+      <div class="customization">
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link)">
+          <img :src="pro.src" alt="" class="fl">
+          <div class="fr con">
+            <h5>{{pro.title}}</h5>
+            <p>{{pro.content}}</p>
           </div>
         </div>
-</template>
-     <!-- profile个人信息模板 新上好课模板-->
+      </div>
+    </template>
+    <!-- profile个人信息模板 新上好课模板-->
 <template v-if="config.card_type === 'profile'">
   <div class="card-category profile">
     <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
@@ -43,12 +43,12 @@
             </p>
             <p class="itemBox-info">
               <span v-if="config.card === 'home'">
-                      {{card.curriculum_time}}课时
-                    </span>
+                {{card.curriculum_time}}课时
+              </span>
               <span class="itemBox-num" v-if="config.card === 'home'">
-                      <img :src="numSrc" alt="">
-                      <span>{{card.study_number}}</span>
-              <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                <img :src="numSrc" alt="">
+                <span>{{card.study_number}}</span>
+                <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
               </span>
             </p>
           </div>
@@ -83,10 +83,9 @@
 <template v-if="config.card_type === 'shoucang'">
   <div class="card-category profile">
     <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-
-      <el-card shadow="never" body-style="padding: 0;" class="itemBox" >
+      <el-card shadow="never" body-style="padding: 0;" class="itemBox">
         <!-- {{card.is_checked}} -->
-         <el-checkbox v-model="card.is_checked" @change="selCheckboxChange(card,index)" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
+        <el-checkbox v-model="card.is_checked" @change="selCheckboxChange(card,index)" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
         <div @click="selectCid(card,index)">
           <div class="new-style" v-if="config.new === 'true'">
             <img :src="newTag" alt="">
@@ -97,7 +96,6 @@
           <div class="bgImgs">
             <img :src="card.picture" alt="">
           </div>
-
           <div class="tag">
             <span>新闻宣传</span>
             <span>时政</span>
@@ -115,10 +113,10 @@
             </div>
             <!-- 作者和头衔    金额 -->
             <!-- <div class="line-wrap" v-if="config.card === 'home'">
-                    <div class="line-center">
-                    <img src="" alt="">
-                    </div>
-                  </div> -->
+                                      <div class="line-center">
+                                      <img src="" alt="">
+                                      </div>
+                                    </div> -->
             <div class="line-wrap" v-if="config.card === 'home'">
               <div class="line-center">
                 <img :src="card.head_img" alt="">
@@ -137,7 +135,6 @@
 <template v-if="config.card_type === 'profiled'">
   <div class="card-category profile">
     <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="handleCheck(card,index)">
-
       <el-card shadow="never" body-style="padding: 0;" class="itemBox">
         <div class="new-style" v-if="config.new === 'true'">
           <img :src="newTag" alt="">
@@ -148,7 +145,6 @@
         <div class="bgImgs">
           <img :src="card.bg" alt="">
         </div>
-
         <div class="tag">
           <span>新闻宣传</span>
           <span>时政</span>
@@ -165,14 +161,12 @@
             </p>
             <p class="itemBox-info">
               <span v-if="config.card === 'home'">
-                      {{card.cnum}}课时
-                    </span>
+                {{card.cnum}}课时
+              </span>
               <span class="itemBox-num" v-if="config.card === 'home'">
-                      <img :src="numSrc" alt="">
-                      <span>{{card.pnum}}</span>
-
-              <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
-
+                <img :src="numSrc" alt="">
+                <span>{{card.pnum}}</span>
+                <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
               </span>
             </p>
           </div>
@@ -224,7 +218,6 @@
           <h4>{{course.title}}</h4>
           <p>{{course.introduction}}</p>
         </div>
-
         <el-carousel trigger="click" height="120px">
           <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
             <div class="comment">
@@ -272,8 +265,11 @@
         <div class="currentclum">
           <h4>{{courseList.title}}</h4>
           <div>
-            <span class="fl coursenum"><span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/ren.png" alt=""> {{courseList.study_number}}</span>
-            <span class="rate"><el-rate disabled v-model="one"></el-rate></span>
+            <span class="fl coursenum">
+              <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/ren.png" alt=""> {{courseList.study_number}}</span>
+            <span class="rate">
+              <el-rate disabled v-model="one"></el-rate>
+            </span>
             <span class="coins">￥ {{courseList.present_price}}</span>
           </div>
         </div>
@@ -296,7 +292,6 @@
       <!-- 新上好课详情 页面  资讯详情页面-->
 <template v-if="config.card_type === 'goodplayTwo'">
   <div class="courseList center">
-
     <div class="course clearfix boxshadow-none" v-for="(course,index) in newsList" :key="index" style="box-shadow:none;">
       <el-card class="fl" :body-style="{ padding: '0px' }">
         <div style="position:relative;" class="img-wrap" @click="selectDetail(index,course,linksix)">
@@ -358,34 +353,34 @@
 </template>
 
 <script>
-import { home } from "~/lib/v1_sdk/index";
-import { mapState, mapActions, mapGetters } from "vuex";
-import { store as persistStore } from "~/lib/core/store";
+import { home } from '~/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: [
-    "data",
-    "config",
-    "infoArticle",
-    "infoDesc",
-    "dingData",
-    "searchData",
-    "courseList",
-    "linkdata",
-    "newsList",
-    "linkfour",
-    "linkfive",
-    "linksix",
-    "privileMsg"
+    'data',
+    'config',
+    'infoArticle',
+    'infoDesc',
+    'dingData',
+    'searchData',
+    'courseList',
+    'linkdata',
+    'newsList',
+    'linkfour',
+    'linkfive',
+    'linksix',
+    'privileMsg'
   ],
   data() {
     return {
-      numSrc: require("@/assets/images/home_num.png"),
-      avator: require("@/assets/images/home_avator.png"),
+      numSrc: require('@/assets/images/home_num.png'),
+      avator: require('@/assets/images/home_avator.png'),
       one: 1,
-      readyImg: require("@/assets/images/ready.png"),
-      playbtn: require("@/assets/images/play.png"),
-      newTag: require("@/assets/images/new.png"),
-      jinImg: require("@/assets/images/jin.png"),
+      readyImg: require('@/assets/images/ready.png'),
+      playbtn: require('@/assets/images/play.png'),
+      newTag: require('@/assets/images/new.png'),
+      jinImg: require('@/assets/images/jin.png'),
       isShow: false,
       checked: false,
       numberArr: [],
@@ -402,157 +397,137 @@ export default {
       kidForm: {
         kids: null
       }
-    };
+    }
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated"]),
-    ...mapState("auth", ["token", "productsNum", 'kid'])
+    ...mapGetters('auth', ['isAuthenticated']),
+    ...mapState('auth', ['token', 'productsNum', 'kid'])
   },
   methods: {
-    ...mapActions("auth", ["setProductsNum", "setKid"]),
+    ...mapActions('auth', ['setProductsNum', 'setKid']),
     selCheckboxChange(item, index) {
-      // console.log('123')
-      // console.log(item, '这是item')
-      // console.log(item.is_checked === false)
       let len = this.productsNum
       if (item.is_checked === false) {
-        item.is_checked = false;
-        this.curriculumcartid.numberArr.push(item.id);
-        this.curriculumcartids.cartid = item.id;
+        item.is_checked = false
+        this.curriculumcartid.numberArr.push(item.id)
+        this.curriculumcartids.cartid = item.id
         len = len - 1
-        this.delShopCart();
+        this.delShopCart()
       } else {
-        item.is_checked = true;
-        this.curriculumcartids.cartid = item.id;
-        this.curriculumcartid.numberArr.pop();
-        // alert('掉错接口了')
+        item.is_checked = true
+        this.curriculumcartids.cartid = item.id
+        this.curriculumcartid.numberArr.pop()
         len = len + 1
-        this.addShopCart();
+        this.addShopCart()
       }
-      this.setProductsNum({ pn: len });
+      this.setProductsNum({
+        pn: len
+      })
     },
     goBuy(item, index) {
-        // this.curriculumcartids.cartid = item.curriculum_id;
-        if(this.isAuthenticated){
-            this.addShopCarts();
-        } else {
-          this.$bus.$emit('loginShow', true)
-        }
-
-      },
-      goBuy3(item,index){
-          this.$bus.$emit('loginShow', true)
-      },
+      if (this.isAuthenticated) {
+        this.addShopCarts()
+      } else {
+        this.$bus.$emit('loginShow', true)
+      }
+    },
+    goBuy3(item, index) {
+      this.$bus.$emit('loginShow', true)
+    },
     goLink(item) {
       switch (window.location.pathname) {
-        case "/course/pages/category":
-          this.$router.push("coursedetail");
-          break;
-        case "/course/pages/categorys":
-          this.$router.push("coursedetail");
-          break;
-        case "/":
-          this.$router.push(item);
-          break;
-        case "/course/pages/coursedetail":
-          this.$router.push("player");
-          break;
-        case "/course/pages/classify":
-          this.$router.push("coursedetail");
-          break;
-        case "/course/pages/search":
-          this.$router.push("coursedetail");
-          break;
-        case "/course/pages/newlesson":
-          this.$router.push("coursedetail");
-          break;
-        case "/profile":
-          this.$router.push("/course/pages/coursedetail");
-          break;
+        case '/course/pages/category':
+          this.$router.push('coursedetail')
+          break
+        case '/course/pages/categorys':
+          this.$router.push('coursedetail')
+          break
+        case '/':
+          this.$router.push(item)
+          break
+        case '/course/pages/coursedetail':
+          this.$router.push('player')
+          break
+        case '/course/pages/classify':
+          this.$router.push('coursedetail')
+          break
+        case '/course/pages/search':
+          this.$router.push('coursedetail')
+          break
+        case '/course/pages/newlesson':
+          this.$router.push('coursedetail')
+          break
+        case '/profile':
+          this.$router.push('/course/pages/coursedetail')
+          break
         default:
-          break;
+          break
       }
     },
     addShopCarts() {
-      console.log(this.kid, '123')
-      this.curriculumcartids.cartid = this.kid;
+      this.curriculumcartids.cartid = this.kid
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          // let newData = response.data.data;
-          console.log(response, '123')
           this.$router.push('/shop/shoppingCart')
-        });
-      });
+        })
+      })
       for (var i = 0; i < this.data.length; i++) {
         if (i === index) {
-          // this.nextmsg = true
-          this.$set(this.data[i], "is_checked", true);
+          this.$set(this.data[i], 'is_checked', true)
         }
       }
     },
     getMore(item) {
-      this.$router.push(item);
+      this.$router.push(item)
     },
     toggleShow: function() {
-      this.isShow = !this.isShow;
+      this.isShow = !this.isShow
     },
     selectDetail(index, course, linksix) {
-      console.log(course, "787878");
-      this.$emit("checkdetail", course.id);
-      console.log(linksix, "99999");
-      this.getMore(linksix);
+      this.$emit('checkdetail', course.id)
+      this.getMore(linksix)
     },
     selectCid(item, index) {
-      this.kidForm.kids = item.id;
-      // persistStore.set('curriculumId', item.id)
-
-      this.setKid(this.kidForm);
-      this.curriculumcartids.cartid = item.id;
-
-      console.log(item.is_checked, "这是点击的布尔值");
+      this.kidForm.kids = item.id
+      this.setKid(this.kidForm)
+      this.curriculumcartids.cartid = item.id
       let len = 0
       if (item.is_checked === false) {
-        item.is_checked = true;
-        this.curriculumcartid.numberArr.push(item.id);
+        item.is_checked = true
+        this.curriculumcartid.numberArr.push(item.id)
         len = this.productsNum + 1
-        this.addShopCart();
+        this.addShopCart()
       } else {
-        item.is_checked = false;
-        this.curriculumcartid.numberArr.pop();
+        item.is_checked = false
+        this.curriculumcartid.numberArr.pop()
         len = this.productsNum - 1
-        // alert('掉错接口了')
-        this.delShopCart();
+        this.delShopCart()
       }
-      this.numberForm.numbers = this.curriculumcartid.numberArr;
-      // persistStore.set('number', this.number)
-      this.setProductsNum({ pn: len });
+      this.numberForm.numbers = this.curriculumcartid.numberArr
+      this.setProductsNum({
+        pn: len
+      })
     },
     selectCid2(item, index) {
-      this.kidForm.kids = item.id;
-       persistStore.set("curriculumId", item.id)
-      //  console.log('123')
-      this.setKid(this.kidForm);
-      this.curriculumcartids.cartid = item.id;
+      this.kidForm.kids = item.id
+      persistStore.set('curriculumId', item.id)
+      this.setKid(this.kidForm)
+      this.curriculumcartids.cartid = item.id
     },
     addShopCart() {
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          // console.log(response, '添加成功')
           resolve(true)
-        });
-      });
+        })
+      })
     },
     delShopCart() {
       return new Promise((resolve, reject) => {
-        home.delShopCart(this.curriculumcartids).then(response => {
-          // console.log(response)
-        });
-      });
+        home.delShopCart(this.curriculumcartids).then(response => {})
+      })
     }
   },
-  mounted() {
-    // console.log(this.data, '返回的数据')
-  }
+  mounted() {}
 }
 </script>
 
@@ -560,15 +535,13 @@ export default {
 .new-style {
   img {
     width: 48px !important;
-    height: 28px !important;
-    // margin-top: -20px;
+    height: 28px !important; // margin-top: -20px;
     position: absolute;
     top: -13px;
     left: -10px;
     z-index: 1;
   }
 }
-
 .mask-style {
   width: 250px;
   height: 160px;
@@ -579,7 +552,6 @@ export default {
   opacity: 0;
   transition: all 300ms;
 }
-
 .bgImgs {
   width: 250px;
   height: 160px;
@@ -592,12 +564,10 @@ export default {
     transition: all 300ms;
   }
 }
-
 .mask {
   display: none;
   transition: all 3000ms;
 }
-
 .jin-style {
   width: 38px !important;
   height: 38px !important;
@@ -607,9 +577,7 @@ export default {
   z-index: 1000;
   display: none;
   transition: all 300ms;
-}
-
-// banner定制
+} // banner定制
 .customization {
   width: 1100px;
   position: absolute;
@@ -644,8 +612,7 @@ export default {
     div {
       width: 178px;
       h5 {
-        color: #6417a6;
-        // line-height: 40px;
+        color: #6417a6; // line-height: 40px;
         margin: 15px 0px 10px 0px;
         &:hover {
           color: #8f4acb;
@@ -664,23 +631,18 @@ export default {
     }
   }
 }
-
 .showMsg {
   display: none;
-}
-
-// 新上好课
+} // 新上好课
 .card-category {
-  display: flex;
-  // justify-content: space-between;
+  display: flex; // justify-content: space-between;
   justify-content: flex-start;
   flex-wrap: wrap;
   position: relative;
   .card-list {
-    margin: 0 32px 50px 0;
-    // margin-bottom: 50px;
+    margin: 0 32px 50px 0; // margin-bottom: 50px;
     border-radius: 16px;
-    &:nth-child(4n+4){
+    &:nth-child(4n + 4) {
       margin-right: 0;
     }
     &:hover {
@@ -824,8 +786,7 @@ export default {
         line-height: 30px;
       }
       .line-wraps {
-        height: 50px;
-        // border-top: 1px #e4e4f4 solid;
+        height: 50px; // border-top: 1px #e4e4f4 solid;
       }
       .line-center {
         overflow: hidden;
@@ -853,8 +814,7 @@ export default {
           margin-bottom: 10px;
           font-size: 14px;
           font-family: MicrosoftYaHei;
-          color: rgba(136, 136, 136, 1);
-          // line-height:0px;
+          color: rgba(136, 136, 136, 1); // line-height:0px;
         }
         div {
           margin-bottom: 26px;
@@ -880,16 +840,15 @@ export default {
     border-radius: 16px;
   }
 }
-#pane-first .card-category .card-list{
+#pane-first .card-category .card-list {
   margin: 0 24px 50px 0;
-  &:nth-child(4n+4){
+  &:nth-child(4n + 4) {
     margin-right: 24px;
   }
-  &:nth-child(3n+3){
+  &:nth-child(3n + 3) {
     margin-right: 0;
   }
-}
-// 学堂资讯
+} // 学堂资讯
 .info-list {
   float: right;
   .el-card {
@@ -945,14 +904,12 @@ export default {
     font-family: MicrosoftYaHei;
     color: rgba(100, 23, 166, 1);
     line-height: 40px;
-    &.newsMore:hover{
+    &.newsMore:hover {
       transition: all 300;
       color: #8f4acb;
     }
   }
-}
-
-// left
+} // left
 .card-categorys {
   display: flex;
   justify-content: space-between;
@@ -1044,9 +1001,7 @@ export default {
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     border-radius: 16px;
   }
-}
-
-// 新上好课详情
+} // 新上好课详情
 .courseList {
   width: 1100px;
   margin: 0 auto;
@@ -1296,8 +1251,7 @@ export default {
           &:nth-child(2) {
             width: 140px;
             height: 36px;
-            line-height: 36px;
-            // border: 1px solid #6417a6;
+            line-height: 36px; // border: 1px solid #6417a6;
             // color: #6417a6;
             text-align: center;
             border-radius: 18px;
@@ -1361,8 +1315,7 @@ export default {
       .study {
         // padding: 30px 40px 0;
         padding: 20px 0 0 0;
-        border-top: 1px rgba(232, 214, 247, 1) solid;
-        // margin-top: 65px;
+        border-top: 1px rgba(232, 214, 247, 1) solid; // margin-top: 65px;
         p {
           font-size: 14px;
           font-family: MicrosoftYaHei;
@@ -1385,7 +1338,6 @@ export default {
     }
   }
 }
-
 .btn {
   width: 140px;
   height: 36px;
@@ -1396,17 +1348,14 @@ export default {
   border-radius: 18px;
   cursor: pointer;
 }
-
 .btn:hover {
   color: #fff;
   background-color: #6417a6;
 }
-
 .btn-class {
   width: 140px;
   border-radius: 20px;
 }
-
 .btn-bg {
   position: absolute;
   top: 50%;
@@ -1426,7 +1375,6 @@ export default {
     background-color: rgba(255, 255, 255, 0.9);
   }
 }
-
 .btn-bgs {
   position: absolute;
   top: 30%;
@@ -1435,11 +1383,9 @@ export default {
   margin-top: -29px;
   color: #732eaf;
 }
-
 .boxshadow-none {
   box-shadow: none;
 }
-
 .lines {
   width: 1000px;
   height: 1px;
