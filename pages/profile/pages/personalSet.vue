@@ -254,7 +254,7 @@ export default {
           {
             validator: validatePass,
             trigger: "blur",
-            message: "请输入至少6位的密码"
+            message: "请输入至少6位最大18位的密码"
           }
         ],
         checkPass: [
