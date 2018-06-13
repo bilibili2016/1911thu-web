@@ -85,11 +85,12 @@ export default {
     },
     checkCourse() {
       if (this.isAuthenticated) {
-        this.goLink('/course/pages/categoryd')
-      } else {
         this.setIsShowTip({
           isShowTips: true
         })
+        this.goLink('/course/pages/categoryd')
+      } else {
+        this.notLogin = true
       }
     },
     backToTop() {
