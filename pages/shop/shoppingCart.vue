@@ -63,7 +63,8 @@
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
-            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearch" placeholder="请输入公司名称" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+            <!-- <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearch" placeholder="请输入公司名称" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete> -->
+            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入公司名称" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <el-form-item label="公司地址：" prop="companyaddress">
             <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
