@@ -266,7 +266,7 @@
           <h4>{{courseList.title}}</h4>
           <div>
             <span class="fl coursenum">
-              <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/ren.png" alt=""> {{courseList.study_number}}</span>
+              <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
             <span class="rate">
               <el-rate disabled v-model="one"></el-rate>
             </span>
@@ -1211,7 +1211,7 @@ export default {
         line-height: 0px;
         cursor: pointer;
         h4 {
-          font-size: 16px;
+          font-size: 18px;
           color: #222;
           height: 54px;
           line-height: 54px;
