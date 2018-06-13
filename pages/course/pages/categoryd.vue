@@ -38,18 +38,15 @@
             </el-switch> -->
       </div>
       <div class="carlist">
-        <v-card :data="categoryData" :config="configSevent" @selectCid='selectCid'></v-card>
+        <!-- @selectCid='selectCid' -->
+        <v-card :data="categoryData" :config="configSevent"></v-card>
       </div>
     </div>
     <!-- <v-filter></v-filter> -->
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
-    <!-- v-if="isShowTip" -->
-    <div>
-      <v-unlogged v-if="!this.isAuthenticated"></v-unlogged>
-    </div>
-    <!-- <v-shop></v-shop> -->
+    <v-unlogged v-if="!isAuthenticated"></v-unlogged>
   </div>
 </template>
 
@@ -57,8 +54,9 @@
 import CustomCard from '@/components/common/Card.vue'
 import CustomHot2 from '@/components/common/Hot2.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
-import CustomUnlogged from '@/pages/course/pages/unlogged.vue'
 import CustomShoppingCart from '@/pages/shop/shoppingCart.vue'
+import CustomUnlogged from '@/pages/course/pages/unlogged.vue'
+
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
@@ -66,15 +64,12 @@ export default {
     'v-card': CustomCard,
     'v-filter': CustomHot2,
     'v-page': CustomPagination,
-    'v-unlogged': CustomUnlogged,
-    'v-shop': CustomShoppingCart
+    'v-shop': CustomShoppingCart,
+    'v-unlogged': CustomUnlogged
   },
   computed: {
-    ...mapState('auth', ['pid', 'cid', 'isShowTip']),
-    ...mapGetters('auth', ['isAuthenticated']),
-    isShow() {
-      return this.isShowTip && !this.isAuthenticated
-    }
+    ...mapState('auth', ['pid', 'cid']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
   data() {
     return {
@@ -219,7 +214,7 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.bgmsg = Number(this.cid) + Number(1)
     this.bgmsgs = Number(this.pid) + Number(1)
-    this.cidform.cids = ''
+    this.cidform.cids = '1'
     this.pidform.pids = ''
     // this.bgmsg = 0;
     this.activeName = 'first'

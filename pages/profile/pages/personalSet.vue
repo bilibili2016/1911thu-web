@@ -39,8 +39,11 @@
             <el-form-item disable label="手机号" prop="name">
               <el-input v-model="psnForm.user_name" disabled></el-input>
             </el-form-item>
-            <el-form-item label="公司信息" prop="name">
+            <el-form-item label="公司信息" prop="name" v-if="psnForm.company_name" key="psnForm.company_name">
               <el-input v-model="psnForm.company_name" disabled></el-input>
+            </el-form-item>
+            <el-form-item label="公司信息" prop="name" v-else>
+              <el-input :value="psnForm.company_name"></el-input>
             </el-form-item>
             <el-form-item size="large" class="submit">
               <el-button type="primary" @click="onSubmit" round>提交</el-button>
