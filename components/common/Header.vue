@@ -52,12 +52,12 @@
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
-            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm">
+            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')">
               <el-form-item prop="phonenum">
                 <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
               <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格" @keyup.enter="signIns('loginData')"></el-input>
+                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
@@ -103,7 +103,6 @@
       <div class="lrFrame wechatLogin" v-show="wechatLogin">
         <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
           <h4 class="clearfix"><span>绑定手机账号</span></h4>
-          <!-- <i class="el-icon-close fr" @click="closeWechat"></i> -->
           <el-form-item prop="tel">
             <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
           </el-form-item>
@@ -123,7 +122,6 @@
           <h4 class="clearfix"></h4>
           <!-- el-icon-loading -->
           <div class="wxchatIMG" id="wxchatIMG"></div>
-          <!-- <p>二维码将在5分钟后失效！<i @click="getWXRecode">重新获取二维码</i></p> -->
         </div>
         <div class="bindSuccess" v-show="bindSuccessShow">
           <img src="@/assets/images/bindingSuccess.png" alt="">
@@ -187,11 +185,17 @@
         }
       };
       var checkCompanyCodes = (rule, value, callback) => {
-        if (value == "" && /^[A-Za-z0-9]+$/.test(value)) {
+        if (value !== "" && !/^[A-Za-z0-9]+$/.test(value)) {
           return callback(new Error("请输入正确企业ID"));
         }
-        callback();
+        return callback();
       };
+      var checkProtocol = (rule, value, callback)=>{
+        if (!value) {
+          return callback(new Error("请勾选同意用户协议"));
+        }
+        return callback();
+      }
       return {
         searchImg: require("~/assets/images/search.png"),
         start: false,
@@ -252,7 +256,7 @@
           passwords: "",
           types: 1,
           codes: "",
-          checked: [],
+          checked: false,
           companyCodes: ""
         },
         // 注册表单验证
@@ -267,7 +271,8 @@
               trigger: "blur"
             }
           ],
-          passwords: [{
+          passwords: [
+            {
               required: true,
               message: "请输入账户密码",
               trigger: "blur"
@@ -280,12 +285,15 @@
               trigger: "blur"
             }
           ],
-          codes: [{
-            required: true,
-            message: "请输入验证码",
-            trigger: "blur"
-          }],
-          companyCodes: [{
+          codes: [
+            {
+              required: true,
+              message: "请输入验证码",
+              trigger: "blur"
+            }
+          ],
+          companyCodes: [
+            {
               min: 6,
               max: 6,
               message: "请输入正确的企业ID",
@@ -296,12 +304,12 @@
               trigger: "blur"
             }
           ],
-          checked: [{
-            // type: "array",
-            required: true,
-            message: "请勾选同意用户协议",
-            trigger: "change"
-          }]
+          checked: [
+            {
+              validator: checkProtocol,
+              trigger: "change"
+            }
+          ]
         },
         // 登录表单验证
         loginRules: {
@@ -397,7 +405,7 @@
               let interval = setInterval(() => {
                 if (this.bindTelData.seconds <= 0) {
                   this.bindTelData.getCode = "获取验证码";
-                  this.bindTelData.seconds = 60;
+                  this.bindTelData.seconds = 30;
                   this.bindTelData.captchaDisable = false;
                   clearInterval(interval);
                 } else {
@@ -413,15 +421,17 @@
       verifyRgTel() {
         return new Promise((resolve, reject) => {
           auth.verifyPhone(this.registerData).then(response => {
-            this.$message({
-              type: response.status === 0 ? "success" : "error",
-              message: response.msg
-            });
-            if (response.status != 0) {
+            if (response.status !== 0) {
+              this.$message({
+                type: "error",
+                message: response.msg
+              });
               this.bindTelData.captchaDisable = true;
             } else {
-              this.bindTelData.captchaDisable = false;
-              this.handleGetCode(this.registerData);
+              if(this.bindTelData.seconds === 30){
+                this.bindTelData.captchaDisable = false;
+                this.handleGetCode(this.registerData);
+              }
             }
           });
         });
@@ -469,14 +479,13 @@
           if (valid) {
             return new Promise((resolve, reject) => {
               this.signIn(this.loginData).then(response => {
-                if (response.status === 0) {
-                  this.start = false;
-                  this.islogin = true;
-                }
                 this.$message({
                   type: response.status === "0" ? "error" : "success",
                   message: response.msg
                 });
+                if (response.status === 0) {
+                  this.close();
+                }
               });
             });
           } else {
