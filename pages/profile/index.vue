@@ -5,7 +5,8 @@
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="empty">
         <!-- 我的信息 -->
         <el-tab-pane class="my-home" name="tab-first">
-          <span slot="label" class="tabList"><i class="icon-home"></i> 我的首页</span>
+          <span slot="label" class="tabList">
+            <i class="icon-home"></i> 我的首页</span>
           <el-card class="card-style">
             <div slot="header" class="clearfix">
               <span>最近学习</span>
@@ -22,7 +23,8 @@
         </el-tab-pane>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
-          <span slot="label" class="tabList"><i class="icon-course"></i> 我的课程</span>
+          <span slot="label" class="tabList">
+            <i class="icon-course"></i> 我的课程</span>
           <el-card>
             <el-tabs v-model="activeNames">
               <el-tab-pane label="学习中" name="first">
@@ -61,7 +63,8 @@
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-third">
-          <span slot="label" class="tabList"><i class="icon-message"></i> 我的消息</span>
+          <span slot="label" class="tabList">
+            <i class="icon-message"></i> 我的消息</span>
           <el-card class="card-style">
             <div slot="header" class="clearfix">
               <span>我的消息</span>
@@ -78,13 +81,15 @@
         </el-tab-pane>
         <!-- 个人设置 -->
         <el-tab-pane name="tab-fourth">
-          <span slot="label" class="tabList"><i class="icon-set"></i> 个人设置</span>
+          <span slot="label" class="tabList">
+            <i class="icon-set"></i> 个人设置</span>
           <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
         <el-tab-pane name="tab-fifth">
-          <span slot="label" class="tabList"><i class="icon-bind"></i> 绑定课程ID</span>
-          <v-bind @isShowMsg = "isShowMsg"></v-bind>
+          <span slot="label" class="tabList">
+            <i class="icon-bind"></i> 绑定课程ID</span>
+          <v-bind @isShowMsg="isShowMsg"></v-bind>
           <div class="content">
             <div class="noCourse" v-if="isShowNoCourse">
               <img :src="noMsgImg" alt="">
@@ -94,8 +99,9 @@
         </el-tab-pane>
         <!-- 我的选课 -->
         <el-tab-pane name="tab-sixth">
-        <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
-          <span slot="label" class="tabList"><i class="icon-choose"></i> 我的选课</span>
+          <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
+          <span slot="label" class="tabList">
+            <i class="icon-choose"></i> 我的选课</span>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -335,6 +341,9 @@ export default {
     this.activeName = this.gid
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    if (this.$route.query.goTab) {
+      this.activeTab = this.$route.query.goTab
+    }
   },
   created() {
     this.$bus.$on('selectProfileIndex', data => {
@@ -377,63 +386,63 @@ export default {
       }
     }
   }
-  .tabList{
-      i{
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin-bottom: -4px;
-        &.icon-home{
-          background: url('~assets/images/icon_home1.png') no-repeat center;
-          background-size: contain;
-        }
-        &.icon-course{
-          background: url('~assets/images/icon_course1.png') no-repeat center;
-          background-size: contain;
-        }
-        &.icon-message{
-          background: url('~assets/images/icon_message1.png') no-repeat center;
-          background-size: contain;
-        }
-        &.icon-set{
-          background: url('~assets/images/icon_set1.png') no-repeat center;
-          background-size: contain;
-        }
-        &.icon-bind{
-          background: url('~assets/images/icon_bind1.png') no-repeat center;
-          background-size: contain;
-        }
-        &.icon-choose{
-          background: url('~assets/images/icon_choose1.png') no-repeat center;
-          background-size: contain;
-        }
-      }
-    }
-    .el-tabs__item.is-active i{
-      &.icon-home{
-        background: url('~assets/images/icon_home2.png') no-repeat center;
+  .tabList {
+    i {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-bottom: -4px;
+      &.icon-home {
+        background: url('~assets/images/icon_home1.png') no-repeat center;
         background-size: contain;
       }
-      &.icon-course{
-        background: url('~assets/images/icon_course2.png') no-repeat center;
+      &.icon-course {
+        background: url('~assets/images/icon_course1.png') no-repeat center;
         background-size: contain;
       }
-      &.icon-message{
-        background: url('~assets/images/icon_message2.png') no-repeat center;
+      &.icon-message {
+        background: url('~assets/images/icon_message1.png') no-repeat center;
         background-size: contain;
       }
-      &.icon-set{
-        background: url('~assets/images/icon_set2.png') no-repeat center;
+      &.icon-set {
+        background: url('~assets/images/icon_set1.png') no-repeat center;
         background-size: contain;
       }
-      &.icon-bind{
-        background: url('~assets/images/icon_bind2.png') no-repeat center;
+      &.icon-bind {
+        background: url('~assets/images/icon_bind1.png') no-repeat center;
         background-size: contain;
       }
-      &.icon-choose{
-        background: url('~assets/images/icon_choose2.png') no-repeat center;
+      &.icon-choose {
+        background: url('~assets/images/icon_choose1.png') no-repeat center;
         background-size: contain;
       }
     }
+  }
+  .el-tabs__item.is-active i {
+    &.icon-home {
+      background: url('~assets/images/icon_home2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-course {
+      background: url('~assets/images/icon_course2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-message {
+      background: url('~assets/images/icon_message2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-set {
+      background: url('~assets/images/icon_set2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-bind {
+      background: url('~assets/images/icon_bind2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-choose {
+      background: url('~assets/images/icon_choose2.png') no-repeat center;
+      background-size: contain;
+    }
+  }
 }
 </style>
