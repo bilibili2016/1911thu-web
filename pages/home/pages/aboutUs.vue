@@ -5,7 +5,7 @@
     </div>
     <div class="main">
       <div class="topBar">
-        <el-tabs v-model="activeName">
+        <el-tabs v-model="indexData.indexs">
           <el-tab-pane label="关于集团" name="first">
             <div class="first">
                <div class="group">
@@ -78,10 +78,17 @@
 </template>
 
 <script>
+  import { mapState, mapActions, mapGetters } from 'vuex'
   export default {
+    computed: {
+      ...mapState('auth', ['index'])
+    },
     data() {
       return {
         activeName: "first",
+        indexData:{
+          indexs:null,
+        },
         lineData: [{
           time: '2016年',
           text: '1911创客空间收 购“大家咖啡”'
@@ -104,14 +111,18 @@
         rightImg: require('@/assets/images/right.png'),
         moreImg: require('@/assets/images/more.png')
       }
+    },
+    mounted() {
+      console.log(this.index);
+      this.indexData.indexs = this.index
     }
   }
 </script>
 
 <style scoped>
-  .second {
-    /* height: 1030px; */
-  }
+  /* .second {
+    height: 1030px;
+  } */
   .first{
     width: 1000px;
     margin: 0 auto;

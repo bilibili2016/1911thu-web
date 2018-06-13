@@ -151,7 +151,8 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapState('auth', ['kid'])
+    ...mapGetters("auth", ["isAuthenticated"]),
+    ...mapState("auth", ["kid"])
   },
   components: {
     'v-card': CustomCard,
@@ -327,14 +328,18 @@ export default {
         })
       })
     },
-    // 判断是收藏还是为收藏
+    // 判断是收藏还是未收藏
     collection() {
-      if (this.collectMsg === 1) {
-        this.deleteCollection()
-        this.collectMsg = 2
+      if(this.isAuthenticated){
+        if (this.collectMsg === 1) {
+          this.deleteCollection();
+          this.collectMsg = 2;
+        } else {
+          this.addCollection();
+          this.collectMsg = 1;
+        }
       } else {
-        this.addCollection()
-        this.collectMsg = 1
+        this.$bus.$emit('loginShow', true)
       }
     },
     // 添加收藏
