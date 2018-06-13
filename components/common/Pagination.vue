@@ -7,25 +7,18 @@
 </template>
 
 <script>
-  export default {
-    props: ["data"],
-    methods: {
-      handleCurrentChange(val) {
-        this.$emit("page", val);
-      }
-    },
-    pageSize: {
-      type: Number,
-      default: 2
-    }
-  },
+export default {
+  props: ['data'],
   methods: {
     handleCurrentChange(val) {
-      // console.log(val, '这是val')
-      this.$emit("page", val);
+      this.$emit('page', val)
     }
+  },
+  pageSize: {
+    type: Number,
+    default: 2
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

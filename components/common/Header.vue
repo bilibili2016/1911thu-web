@@ -10,7 +10,7 @@
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
         <span class="hrin" @click="goSearchd('/home/pages/hrEntry')">Hr入口</span>
-        <span v-show="isAuthenticated" @click="goToMourse()">我的课程</span>
+        <span v-show="isAuthenticated" @click="goLink('second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -24,7 +24,6 @@
         </div>
         <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingCart')">
           <span class="cartIcon"></span>
-          <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -137,255 +136,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-  import {
-    store as persistStore
-  } from "~/lib/core/store";
-  import {
-    getQueryString
-  } from "@/lib/util/helper";
-  import {
-    other,
-    auth,
-    home
-  } from "~/lib/v1_sdk/index";
-  import {
-    mapState,
-    mapActions,
-    mapGetters
-  } from "vuex";
-  import {
-    checkPhone,
-    checkCode
-  } from "~/lib/util/validatefn";
-  export default {
-    data() {
-      var validatePass = (rule, value, callback) => {
-        if (!/^[A-Za-z0-9]+$/.test(value)) {
-          callback(new Error("密码只能输入数字、字母"));
-        } 
-        return callback();
-      };
-      var checkCompanyCodes = (rule, value, callback) => {
-        if (value !== "" && !/^[A-Za-z0-9]+$/.test(value)) {
-          return callback(new Error("请输入正确企业ID"));
-        }
-        return callback();
-      };
-      var checkProtocol = (rule, value, callback)=>{
-        if (!value) {
-          return callback(new Error("请勾选同意用户协议"));
-        }
-        return callback();
-      }
-      return {
-        searchImg: require("~/assets/images/search.png"),
-        downApp:require("~/assets/images/wechatLogin.png"),
-        start: false,
-        lrFrame: false,
-        islogin: false,
-        activeName: "second",
-        search: "",
-        shoppingCartNum: 1,
-        tokenForm: {
-          tokens: "123"
-        },
-        bgMsg: false,
-        user: {
-          userImg: require("~/assets/images/headImg.png")
-        },
-        activeName: "login",
-        QRcode: require("~/assets/images/wechatLogin.png"),
-        wechatLogin: false,
-        bindTelShow: false,
-        scanCodeShow: false,
-        bindSuccessShow: false,
-        WxLogin: {
-          self_redirect: true,
-          id: "wxchatIMG",
-          appid: "wxefa2295aae13fe2e",
-          scope: "snsapi_login",
-          redirect_uri: "", //重定向地址
-          state: ""
-        },
-        bindTelData: {
-          phones: "",
-          codes: "",
-          getCode: "获取验证码",
-          seconds: 30,
-          types: 1,
-          openid: null,
-          companyCodes: "",
-          captchaDisable: false,
-          exist: false,
-          checked: false
-        },
-        getWXLoginImg: {
-          time: 300,
-          isget: "",
-          WXverify: false
-        },
-        // 登录数据
-        loginData: {
-          password: "",
-          phonenum: "",
-          showPwd: false,
-          pwdType: "password",
-          loginTypes: 1
-        },
-        // 注册数据
-        registerData: {
-          phones: "",
-          passwords: "",
-          types: 1,
-          codes: "",
-          checked: false,
-          companyCodes: ""
-        },
-        // 注册表单验证
-        registRules: {
-          phones: [{
-              required: true,
-              message: "请输入手机号",
-              trigger: "blur"
-            },
-            {
-              validator: checkPhone,
-              trigger: "blur"
-            }
-          ],
-          passwords: [
-            {
-              required: true,
-              message: "请输入账户密码",
-              trigger: "blur"
-            },
-            {
-              type: "string",
-              min: 8,
-              max: 16,
-              message: "密码长度为8-16位",
-              trigger: "blur"
-            },
-            {
-              validator: validatePass,
-              trigger: "blur"
-            }
-          ],
-          codes: [
-            {
-              required: true,
-              message: "请输入验证码",
-              trigger: "blur"
-            }
-          ],
-          companyCodes: [
-            {
-              min: 6,
-              max: 6,
-              message: "请输入正确的企业ID",
-              trigger: "blur"
-            },
-            {
-              validator: checkCompanyCodes,
-              trigger: "blur"
-            }
-          ],
-          checked: [
-            {
-              validator: checkProtocol,
-              trigger: "change"
-            }
-          ]
-        },
-        // 登录表单验证
-        loginRules: {
-          phonenum: [
-            // { required: true, message: "请输入手机号", trigger: "blur" },
-            {
-              validator: checkPhone,
-              trigger: "blur"
-            }
-          ],
-          password: [{
-            required: true,
-            message: "请输入账户密码",
-            trigger: "blur"
-          }]
-        },
-        // 微信绑定表单验证
-        bindwxRules: {
-          phones: [{
-              required: true,
-              message: "请输入手机号",
-              trigger: "blur"
-            },
-            {
-              validator: checkPhone,
-              trigger: "blur"
-            }
-          ],
-          codes: [{
-            required: true,
-            message: "请输入验证码",
-            trigger: "blur"
-          }],
-          companyCodes: [{
-              min: 6,
-              max: 6,
-              message: "请输入正确的企业ID",
-              trigger: "blur"
-            },
-            {
-              validator: checkCompanyCodes,
-              trigger: "blur"
-            }
-          ]
-        },
-        getwxtime: null,
-        gidForm: {
-          gids: null
-        },
-        tokenForm: {
-          tokens: ''
-        }
-      };
-    },
-    computed: {
-      ...mapState("auth", ["token", "productsNum"]),
-      ...mapGetters("auth", ["isAuthenticated"])
-    },
-    mounted() {
-      return new Promise((resolve, reject) => {
-        home.shopCartList().then(response => {
-          let body = response.data.curriculumCartList;
-          let len = {
-            pn: body.length
-          }
-          this.setProductsNum(len);
-        });
-      });
-    },
-    methods: {
-      ...mapActions("auth", ["signIn", "setGid", "setProductsNum", "signOut", 'setToken']),
-      changeImg(what){
-        if(what == "android"){
-          console.log(1);
-          this.downApp = require("~/assets/images/wechatLogin.png");
-        }else{
-          console.log(2);
-          this.downApp = require("~/assets/images/wechatLogin.png");
-        }
-      },
-      // 登录显示card
-      async loginCardShow() {
-        this.closeWechat();
-        this.start = true;
-        this.lrFrame = this.start;
-        this.activeName = "login";
-        this.stop();
-        this.bgMsg = true;
-=======
 import { store as persistStore } from '~/lib/core/store'
 import { getQueryString } from '@/lib/util/helper'
 import { other, auth, home } from '~/lib/v1_sdk/index'
@@ -393,33 +143,11 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
-    var checkTel = (rule, value, callback) => {
-      if (value === '') {
-        return callback(new Error('手机号不能为空'))
-      }
-      if (value.toString().length != 11) {
-        return callback(new Error('请输入正确手机号123'))
-      }
-    }
-    var checkRgTel = (rule, value, callback) => {
-      if (value === '') {
-        return callback(new Error('手机号不能为空'))
-      }
-      if (value.toString().length != 11) {
-        return callback(new Error('请输入正确手机号'))
-      }
-      if (!/^1[3|5|6|7|8][0-9]\d{4,8}$/.test(value)) {
-        return callback(new Error('请输入正确手机号'))
-      }
-    }
     var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
-        return false
-      } else if (value.length < 6 || value.length > 10) {
-        callback(new Error('请输入6-10位密码'))
-        return false
+      if (!/^[A-Za-z0-9]+$/.test(value)) {
+        callback(new Error('密码只能输入数字、字母'))
       }
+      return callback()
     }
     var checkCompanyCodes = (rule, value, callback) => {
       if (value !== '' && !/^[A-Za-z0-9]+$/.test(value)) {
@@ -435,6 +163,7 @@ export default {
     }
     return {
       searchImg: require('~/assets/images/search.png'),
+      downApp: require('~/assets/images/wechatLogin.png'),
       start: false,
       lrFrame: false,
       islogin: false,
@@ -443,53 +172,11 @@ export default {
       shoppingCartNum: 1,
       tokenForm: {
         tokens: '123'
->>>>>>> wuyy
       },
       bgMsg: false,
       user: {
         userImg: require('~/assets/images/headImg.png')
       },
-<<<<<<< HEAD
-      // 验证手机号是否存在
-      verifyRgTel() {
-        if(this.bindTelData.seconds == 30){
-          return new Promise((resolve, reject) => {
-            auth.verifyPhone(this.registerData).then(response => {
-              if (response.status !== 0) {
-                this.$message({
-                  type: "error",
-                  message: response.msg
-                });
-                this.bindTelData.captchaDisable = true;
-              } else {
-                if(this.bindTelData.seconds === 30){
-                  this.bindTelData.captchaDisable = false;
-                  this.handleGetCode(this.registerData);
-                }
-              }
-            });
-          });
-        }
-      },
-      // 验证手机号是否已经绑定了微信
-      verifyRgTelWX() {
-        if(this.bindTelData.seconds === 30){
-          return new Promise((resolve, reject) => {
-            auth.verifywechat(this.bindTelData).then(response => {
-              if (response.status != 0) {
-                this.$message({
-                  type: "error",
-                  message: response.msg
-                });
-                this.bindTelData.captchaDisable = true;
-              } else {
-                this.bindTelData.captchaDisable = false;
-                this.handleGetCode(this.bindTelData);
-              }
-            });
-          });
-        }
-=======
       activeName: 'login',
       QRcode: require('~/assets/images/wechatLogin.png'),
       wechatLogin: false,
@@ -515,7 +202,6 @@ export default {
         captchaDisable: false,
         exist: false,
         checked: false
->>>>>>> wuyy
       },
       getWXLoginImg: {
         time: 300,
@@ -564,6 +250,10 @@ export default {
             max: 16,
             message: '密码长度为8-16位',
             trigger: 'blur'
+          },
+          {
+            validator: validatePass,
+            trigger: 'blur'
           }
         ],
         codes: [
@@ -592,25 +282,6 @@ export default {
           }
         ]
       },
-<<<<<<< HEAD
-      // 登录 请求
-      signIns(formName) {
-        this.$refs[formName].validate(valid => {
-          if (valid) {
-            return new Promise((resolve, reject) => {
-              this.signIn(this.loginData).then(response => {
-                this.$message({
-                  type: response.status === 0 ? "success" : "error",
-                  message: response.msg
-                });
-                if (response.status === 0) {
-                  this.close();
-                }
-              });
-            });
-          } else {
-            return false;
-=======
       // 登录表单验证
       loginRules: {
         phonenum: [
@@ -625,7 +296,6 @@ export default {
             required: true,
             message: '请输入账户密码',
             trigger: 'blur'
->>>>>>> wuyy
           }
         ]
       },
@@ -675,6 +345,17 @@ export default {
     ...mapState('auth', ['token', 'productsNum']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
+  mounted() {
+    return new Promise((resolve, reject) => {
+      home.shopCartList().then(response => {
+        let body = response.data.curriculumCartList
+        let len = {
+          pn: body.length
+        }
+        this.setProductsNum(len)
+      })
+    })
+  },
   methods: {
     ...mapActions('auth', [
       'signIn',
@@ -683,17 +364,14 @@ export default {
       'signOut',
       'setToken'
     ]),
-    // 登录显示card
-    goToMourse() {
-      let goTab = 'tab-second'
-      this.$router.push({ path: '/profile', query: { goTab: goTab } })
-    },
-    async loginCardShow() {
-      this.start = true
-      this.lrFrame = this.start
-      this.activeName = 'login'
-      this.stop()
-      this.bgMsg = true
+    changeImg(what) {
+      if (what == 'android') {
+        console.log(1)
+        this.downApp = require('~/assets/images/wechatLogin.png')
+      } else {
+        console.log(2)
+        this.downApp = require('~/assets/images/wechatLogin.png')
+      }
     },
     // 登录显示card
     async loginCardShow() {
@@ -732,39 +410,43 @@ export default {
     },
     // 验证手机号是否存在
     verifyRgTel() {
-      return new Promise((resolve, reject) => {
-        auth.verifyPhone(this.registerData).then(response => {
-          if (response.status !== 0) {
-            this.$message({
-              type: 'error',
-              message: response.msg
-            })
-            this.bindTelData.captchaDisable = true
-          } else {
-            if (this.bindTelData.seconds === 30) {
-              this.bindTelData.captchaDisable = false
-              this.handleGetCode(this.registerData)
+      if (this.bindTelData.seconds == 30) {
+        return new Promise((resolve, reject) => {
+          auth.verifyPhone(this.registerData).then(response => {
+            if (response.status !== 0) {
+              this.$message({
+                type: 'error',
+                message: response.msg
+              })
+              this.bindTelData.captchaDisable = true
+            } else {
+              if (this.bindTelData.seconds === 30) {
+                this.bindTelData.captchaDisable = false
+                this.handleGetCode(this.registerData)
+              }
             }
-          }
+          })
         })
-      })
+      }
     },
     // 验证手机号是否已经绑定了微信
     verifyRgTelWX() {
-      return new Promise((resolve, reject) => {
-        auth.verifywechat(this.bindTelData).then(response => {
-          if (response.status != 0) {
-            this.$message({
-              type: 'error',
-              message: response.msg
-            })
-            this.bindTelData.captchaDisable = true
-          } else {
-            this.bindTelData.captchaDisable = false
-            this.handleGetCode(this.bindTelData)
-          }
+      if (this.bindTelData.seconds === 30) {
+        return new Promise((resolve, reject) => {
+          auth.verifywechat(this.bindTelData).then(response => {
+            if (response.status != 0) {
+              this.$message({
+                type: 'error',
+                message: response.msg
+              })
+              this.bindTelData.captchaDisable = true
+            } else {
+              this.bindTelData.captchaDisable = false
+              this.handleGetCode(this.bindTelData)
+            }
+          })
         })
-      })
+      }
     },
     // 注册 请求
     signUp(formName) {
@@ -793,7 +475,7 @@ export default {
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               this.$message({
-                type: response.status === '0' ? 'error' : 'success',
+                type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
               if (response.status === 0) {
@@ -804,114 +486,8 @@ export default {
         } else {
           return false
         }
-<<<<<<< HEAD
-      },
-      close() {
-        this.move();
-        this.start = false;
-        this.lrFrame = false;
-        this.bgMsg = false;
-        this.emptyForm();
-        clearInterval(this.getwxtime);
-      },
-      closeWechat() {
-        this.move();
-        this.start = false;
-        this.lrFrame = false;
-        this.wechatLogin = false;
-        this.scanCodeShow = false;
-        this.bindTelShow = false;
-        clearInterval(this.getwxtime);
-        this.emptyWechatForm();
-        // document.body.style.overflow = "auto";
-      },
-      emptyForm() {
-        this.loginData.phonenum = "";
-        this.loginData.password = "";
-        this.loginData.pwdType = "password";
-        this.loginData.loginTypes = 1;
-        this.registerData.phones = "";
-        this.registerData.passwords = "";
-        this.registerData.types = 1;
-        this.registerData.codes = "";
-        this.registerData.checked = [false];
-        this.registerData.companyCodes = "";
-      },
-      emptyWechatForm(){
-        this.bindTelData.phones ="",
-        this.bindTelData.codes ="",
-        this.bindTelData.seconds =30,
-        this.bindTelData.openid =null,
-        this.bindTelData.companyCodes ="",
-        this.bindTelData.captchaDisable =false,
-        this.bindTelData.exist =false,
-        this.bindTelData.checked =false
-      },
-      handleClick(tab, event) {
-        this.emptyForm();
-      },
-      wechatLogined() {
-        //微信登录
-        this.lrFrame = false;
-        this.wechatLogin = true;
-        this.scanCodeShow = true; //微信扫码
-        //this.bindTelShow=true; //绑定手机号
-        // this.bindSuccessShow=true; // 登录成功
-        this.wxLogin();
-      },
-      polling() { //轮询请求 微信扫码结果
-      },
-      stop() {
-        var mo = function(e) {
-          e.preventDefault();
-        };
-        document.body.style.overflow = "hidden";
-        document.addEventListener("touchmove", mo, false); //禁止页面滑动
-      },
-      /***取消滑动限制***/
-      move() {
-        var mo = function(e) {
-          e.preventDefault();
-        };
-        document.body.style.overflow = "auto"; //出现滚动条
-        document.removeEventListener("touchmove", mo, false);
-      },
-      goSearch(item) {
-        if(this.search !== ""){
-          persistStore.set("key", this.search);
-          switch (window.location.pathname) {
-            case "/course/pages/search":
-              break;
-            default:
-              this.$router.push("/course/pages/search");
-              break;
-          }
-        }
-      },
-      gokey() {
-        if (event.keyCode == 13) {
-          if(this.search !== ""){
-            persistStore.set("key", this.search);
-            this.$router.push("/course/pages/search");
-          }
-        }
-      },
-      goSearchd(item) {
-        this.$router.push(item);
-      },
-      backHome() {
-        this.$router.push("/");
-      },
-      goLink(item) {
-        this.gidForm.gids = item;
-        this.setGid(this.gidForm);
-        this.$router.push("/profile");
-        this.$bus.$emit("selectProfileIndex", item);
-      }
-=======
       })
       this.move()
->>>>>>> wuyy
     },
     // 从微信拉取二维码
     async wxLogin() {
@@ -1028,6 +604,7 @@ export default {
       this.scanCodeShow = false
       this.bindTelShow = false
       clearInterval(this.getwxtime)
+      this.emptyWechatForm()
       // document.body.style.overflow = "auto";
     },
     emptyForm() {
@@ -1041,6 +618,16 @@ export default {
       this.registerData.codes = ''
       this.registerData.checked = [false]
       this.registerData.companyCodes = ''
+    },
+    emptyWechatForm() {
+      ;(this.bindTelData.phones = ''),
+        (this.bindTelData.codes = ''),
+        (this.bindTelData.seconds = 30),
+        (this.bindTelData.openid = null),
+        (this.bindTelData.companyCodes = ''),
+        (this.bindTelData.captchaDisable = false),
+        (this.bindTelData.exist = false),
+        (this.bindTelData.checked = false)
     },
     handleClick(tab, event) {
       this.emptyForm()
@@ -1073,26 +660,23 @@ export default {
       document.removeEventListener('touchmove', mo, false)
     },
     goSearch(item) {
-      persistStore.set('key', this.search)
-      switch (window.location.pathname) {
-        case '/course/pages/search':
-          break
-        default:
-          this.$router.push('/course/pages/search')
-          break
+      if (this.search !== '') {
+        persistStore.set('key', this.search)
+        switch (window.location.pathname) {
+          case '/course/pages/search':
+            break
+          default:
+            this.$router.push('/course/pages/search')
+            break
+        }
       }
     },
     gokey() {
       if (event.keyCode == 13) {
-        persistStore.set('key', this.search)
-        this.$router.push('/course/pages/search')
-        // switch (window.location.pathname) {
-        // case "/course/pages/search":
-        //   break;
-        // default:
-        //   this.$router.push("/course/pages/search");
-        //   break;
-        // }
+        if (this.search !== '') {
+          persistStore.set('key', this.search)
+          this.$router.push('/course/pages/search')
+        }
       }
     },
     goSearchd(item) {
@@ -1111,13 +695,6 @@ export default {
   mounted() {
     this.$bus.$on('loginShow', data => {
       this.loginCardShow()
-    })
-    return new Promise((resolve, reject) => {
-      home.shopCartList().then(response => {
-        let body = response.data.curriculumCartList
-        let len = { pn: body.length }
-        this.setProductsNum(len)
-      })
     })
   }
 }
