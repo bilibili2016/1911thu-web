@@ -38,7 +38,8 @@
             </el-switch> -->
       </div>
       <div class="carlist">
-        <v-card :data="categoryData" :config="configSevent" @selectCid='selectCid'></v-card>
+        <!-- @selectCid='selectCid' -->
+        <v-card :data="categoryData" :config="configSevent"></v-card>
       </div>
     </div>
     <!-- <v-filter></v-filter> -->
@@ -219,7 +220,7 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.bgmsg = Number(this.cid) + Number(1)
     this.bgmsgs = Number(this.pid) + Number(1)
-    this.cidform.cids = ''
+    this.cidform.cids = '1'
     this.pidform.pids = ''
     // this.bgmsg = 0;
     this.activeName = 'first'
