@@ -113,7 +113,6 @@
       }
     },
     mounted() {
-      console.log(this.index);
       this.indexData.indexs = this.index
     }
   }

@@ -480,7 +480,7 @@
             return new Promise((resolve, reject) => {
               this.signIn(this.loginData).then(response => {
                 this.$message({
-                  type: response.status === "0" ? "error" : "success",
+                  type: response.status === 0 ? "success" : "error",
                   message: response.msg
                 });
                 if (response.status === 0) {
