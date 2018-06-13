@@ -30,9 +30,9 @@ export default {
       courseList: [],
       newsCurriculumForm: {
         pages: 0,
-        limits: 1,
-        evaluateLimit: null,
-        isevaluate: 1
+        limits: 5,
+        evaluateLimit: 4,
+        isevaluate: 1,
       }
     }
   },
@@ -40,13 +40,15 @@ export default {
     getNewCourseList() {
       return new Promise((resolve, reject) => {
         home.getNewCourseList(this.newsCurriculumForm).then(response => {
+          // console.log(response.data.curriculumList);
           this.courseList = response.data.curriculumList
           resolve(true)
         })
       })
     },
     getMoreData() {
-      this.newsCurriculumForm.limits = this.newsCurriculumForm.limits + 1
+      this.newsCurriculumForm.limits = this.newsCurriculumForm.limits + 1;
+      console.log(this.newsCurriculumForm);
       this.getNewCourseList()
     }
   },

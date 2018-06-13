@@ -39,7 +39,7 @@
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
             <span class="person">购买人数：</span>
-            <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput"></el-input-number>
+            <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput" @change="changeNumber"></el-input-number>
             <!-- <span class="number clearfix">
               <i class="fl minus el-icon-minus"  @click="delNumber"></i>
               <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
@@ -158,7 +158,7 @@ export default {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.shopCartList()
-    this.getNum()
+    // this.getNum()
   },
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
@@ -187,16 +187,11 @@ export default {
         this.numForm.number = str.replace(this.numForm.number, 1)
       }
     },
+    querySearchAsync(){
+
+    },
     handleSelectAll() {
       this.isRest = true
-    },
-    getNum() {
-      return new Promise((resolve, reject) => {
-        home.changeCartNumber(this.numForm).then(res => {
-          this.numForm.number = Number(res.data.cart_number)
-          resolve(true)
-        })
-      })
     },
     shopCartList() {
       this.arraySum = 0
@@ -213,6 +208,9 @@ export default {
           this.courseList = body
           this.selectAll = true
           this.loding = false
+          this.numForm.number = response.data.number;
+          console.log(this.numForm.number);
+          
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
@@ -328,12 +326,12 @@ export default {
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addPaySubmit(this.companyInfo).then(response => {
-              if (response.status === '1000100') {
+              if (response.status === '100100') {
                 this.$message({
                   type: 'error',
                   message: response.msg
                 })
-              } else {
+              } else if(response.status === 0){
                 this.$router.push('/shop/checkedCourse')
               }
 
@@ -357,7 +355,7 @@ export default {
           // this.handleSelectChange(item, index);
           // this.courseList.splice(index, 1);
           this.shopCartList()
-          this.getNum()
+          // this.getNum()
           this.loding = false
         })
       })

@@ -24,7 +24,8 @@ persistStore.defaults({
   isShowTip: null,
   productsNum: null,
   number: null,
-  index:null
+  index:null,
+  tid:null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -38,6 +39,7 @@ let isShowTip = persistStore.get('isShowTip')
 let productsNum = persistStore.get('productsNum')
 let number = persistStore.get('number')
 let index = persistStore.get('index')
+let tid = persistStore.get('tid')
 
 export const MUTATION = {
   signIn: 'sign-in',
@@ -53,7 +55,8 @@ export const MUTATION = {
   setIsShowTip: 'set-isShowTip',
   setProductsNum: 'set-productsNum',
   setNumber: 'set-number',
-  setIndex: 'set-index'
+  setIndex: 'set-index',
+  setTid: 'set-tid'
 }
 export const state = () => ({
   user,
@@ -67,7 +70,8 @@ export const state = () => ({
   isShowTip,
   productsNum,
   number,
-  index
+  index,
+  tid
 })
 export const getters = {
   isAuthenticated(state) {
@@ -123,7 +127,10 @@ export const mutations = {
   },
   [MUTATION.setIndex](state, { index }) {
     state.index = index
-  }
+  },
+  [MUTATION.setTid](state, { tid }) {
+    state.tid = tid
+  },
 }
 export const actions = {
   async setToken({ commit, state }, { tokens }) {
@@ -351,7 +358,7 @@ export const actions = {
     }
     return productsNum
   },
-    async setIndex({ commit, state }, { indexs }) {
+  async setIndex({ commit, state }, { indexs }) {
     try {
       let index = indexs
       persistStore.set('index', index)
@@ -366,5 +373,21 @@ export const actions = {
       }
     }
     return gid
+  },
+  async setTid({ commit, state }, { tids }) {
+    try {
+      let tid = tids
+      persistStore.set('tid', tid)
+      commit(MUTATION.setTid, {
+        tid
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return tid
   },
 }

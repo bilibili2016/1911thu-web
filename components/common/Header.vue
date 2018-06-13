@@ -453,6 +453,8 @@
       signUp(formName) {
         this.$refs[formName].validate(valid => {
           if (valid) {
+            console.log("--=-=-==-=--=-=-");
+            return false;
             return new Promise((resolve, reject) => {
               auth.signUp(this.registerData).then(response => {
                 this.$message({
@@ -658,14 +660,15 @@
       },
       goSearch(item) {
         if(this.search !== ""){
-          persistStore.set("key", this.search);
-          switch (window.location.pathname) {
-            case "/course/pages/search":
-              break;
-            default:
-              this.$router.push("/course/pages/search");
-              break;
-          }
+          this.$emit('Search', this.search)
+          // persistStore.set("key", this.search);
+          // switch (window.location.pathname) {
+          //   case "/course/pages/search":
+          //     break;
+          //   default:
+          //     this.$router.push("/course/pages/search");
+          //     break;
+          // }
         }
       },
       gokey() {
