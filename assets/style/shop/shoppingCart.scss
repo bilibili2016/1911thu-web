@@ -13,10 +13,10 @@
             color: #222;
             margin-bottom: 40px;
             .courseName{
-                margin-left: 97px;
+                margin-left: 120px;
             }
             .price{
-                margin-left: 585px;
+                margin-left: 662px;
             }
             .operation{
                 margin-left: 127px;
@@ -35,8 +35,8 @@
             }
             .courseInfo{
                 display: inline-block;
-                width: 650px;
-                margin-left: 99px;
+                width: 690px;
+                margin-left: 60px;
                 img{
                     width: 160px;
                     height: 100px;
@@ -48,7 +48,7 @@
                     font-size: 16px;
                     color: #332A51;
                     overflow: hidden;
-                    padding: 9px 0 0 10px;
+                    padding-top: 9px;
                     margin-bottom: 15px;
                 }
                 h6{
@@ -120,15 +120,43 @@
                 .courseNumberInput{
                     border: 1px solid #6417A6;
                     width: 134px;
+                    height: 31px;
+                    background-color: #fff;
                     // height: 34px;
+                    span{
+                        width: 30px;
+                        height: 30px;
+                        line-height: 30px;
+                    }
+                    .el-input{
+                        height: 30px;
+                    }
+                    .el-input__inner{
+                        height: 30px;
+                        line-height: 30px;
+                        padding: 0 40px;
+                        background-color: transparent;
+                        vertical-align: top;
+                    }
                     .el-input-number__decrease,
                     .el-input-number__increase{
-                        background: #fff;
+                        background: transparent;
+                        margin-top: -1px;
+                        transition: all 300ms;
+                        font-size: 16px;
+                        &:hover{
+                            background-color: #8F4ACB;
+                            i{
+                                color: #fff;
+                            }
+                        }
                     }
                     .el-input-number__decrease{
+                        margin-left: -1px;
                         border-right:1px solid #6417A6;
                     }
                     .el-input-number__increase{
+                        margin-right: -1px;
                         border-left:1px solid #6417A6;
                     }
                     .el-input__inner{
@@ -143,7 +171,7 @@
                 }
                 .el-icon-minus,
                 .el-icon-plus{
-                    color: #6417A6 !important;
+                    color: #6417A6;
                 }
                 .person{
                     font-size: 16px;
@@ -181,12 +209,13 @@
                 }
             }
             .allPrice {
-                width: 180px;
+                width: 300px;
                 height: 60px;
                 line-height: 60px;
+                padding-right: 30px;
+                text-align: right;
                 color: #FF5F5F;
                 font-size: 30px;
-                text-align: center;
             }
             .commitOrder .el-button {
                 border: none;

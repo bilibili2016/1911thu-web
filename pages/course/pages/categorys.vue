@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <div class="center category-style categoryd">
+      <div class="center category-style">
         <div class="college">
           <li class="title">学院：</li>
           <ul>
@@ -34,11 +34,10 @@
         </el-tabs>
         <!-- <div class="pages"><el-pagination layout=" pager, prev, next" :total="1"></el-pagination></div> -->
         <!-- <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch"> -->
-        <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch">
-            </el-switch> -->
+        <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch"> -->
+        </el-switch>
       </div>
       <div class="carlist">
-        <!-- @selectCid='selectCid' -->
         <v-card :data="categoryData" :config="configSevent"></v-card>
       </div>
     </div>
@@ -46,7 +45,6 @@
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
-    <v-unlogged v-if="!isAuthenticated"></v-unlogged>
   </div>
 </template>
 
@@ -54,34 +52,27 @@
 import CustomCard from '@/components/common/Card.vue'
 import CustomHot2 from '@/components/common/Hot2.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
-import CustomShoppingCart from '@/pages/shop/shoppingCart.vue'
-import CustomUnlogged from '@/pages/course/pages/unlogged.vue'
-
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     'v-card': CustomCard,
     'v-filter': CustomHot2,
-    'v-page': CustomPagination,
-    'v-shop': CustomShoppingCart,
-    'v-unlogged': CustomUnlogged
+    'v-page': CustomPagination
   },
   computed: {
-    ...mapState('auth', ['pid', 'cid']),
-    ...mapGetters('auth', ['isAuthenticated'])
+    ...mapState('auth', ['pid', 'cid'])
   },
   data() {
     return {
       bgmsg: 0,
       bgmsgs: 0,
-      activeName: 'second',
+      activeName: '',
       value3: true,
       value4: true,
       configSevent: {
-        card_type: 'shoucang',
-        card: 'home',
-        types: 'buy'
+        card_type: 'profile',
+        card: 'home'
       },
       pagemsg: {
         page: 1,
@@ -89,13 +80,6 @@ export default {
         total: 5
       },
       categoryData: [],
-      curriculumListForm: {
-        categoryIda: null,
-        categoryIdb: null,
-        sortBy: 1,
-        pages: 1,
-        limits: 8
-      },
       data: [],
       data2: [],
       curriculumListForm: {
@@ -114,7 +98,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid']),
+    ...mapActions('auth', ['setCid', 'setPid', 'setProductsNum']),
     handleCurrentChange(val) {
       this.pagemsg.page = val
       this.curriculumListForm.pages = val
@@ -128,10 +112,14 @@ export default {
       })
     },
     handleItemOne(item, index) {
-      this.bgmsg = index
-    },
-    handleItemTwo(item, index) {
-      this.bgmsgs = index
+      this.bgmsgs = 0
+      this.bgmsg = item.id
+      this.data2 = this.data[index]
+      this.cidform.cids = item.id
+      this.setCid(this.cidform)
+      this.pidform.pids = ''
+      this.setPid(this.pidform)
+      this.curriculumList()
     },
     handleItemTwo(item, index) {
       this.bgmsgs = item.id
@@ -151,36 +139,19 @@ export default {
       this.setPid(this.pidform)
       this.curriculumList()
     },
-    handleItemOne(item, index) {
-      this.bgmsgs = 0
-      this.bgmsg = item.id
-      this.data2 = this.data[index]
-      this.cidform.cids = item.id
-      this.setCid(this.cidform)
-      this.pidform.pids = ''
-      this.setPid(this.pidform)
-      this.curriculumList()
-    },
-    handleClick(tab, event) {},
-    curriculumList() {
-      this.curriculumListForm.categoryIda = this.cid
-      this.curriculumListForm.categoryIdb = this.pid
-      return new Promise((resolve, reject) => {
-        home.curriculumList(this.curriculumListForm).then(response => {
-          this.categoryData = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
-          for (let item of response.data.curriculumList) {
-            this.$set(item, 'checkmsg', false)
-          }
-          resolve(true)
-        })
-      })
+    handleClick(tab, event) {
+      if (tab.name === 'first') {
+        this.curriculumListForm.sortBy = 1
+        this.curriculumList()
+      } else {
+        this.curriculumListForm.sortBy = 2
+        this.curriculumList()
+      }
     },
     childCategoryList() {
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList
-          // this.cid= '1'
           switch (this.cid) {
             case '1':
               this.data2 = this.data[0]
@@ -201,9 +172,24 @@ export default {
               this.data2 = this.data[5]
               break
             default:
-              // this.data2 = this.data[0]
+              this.data2 = this.data[0]
               break
           }
+          resolve(true)
+        })
+      })
+    },
+    curriculumList() {
+      this.curriculumListForm.categoryIda = this.cid
+      this.curriculumListForm.categoryIdb = this.pid
+      // this.curriculumListForm.sortBy = 1
+      return new Promise((resolve, reject) => {
+        home.curriculumList(this.curriculumListForm).then(response => {
+          this.categoryData = response.data.curriculumList
+          this.pagemsg.total = response.data.pageCount
+          this.setProductsNum({
+            pn: this.categoryData.length
+          })
           resolve(true)
         })
       })
@@ -212,9 +198,8 @@ export default {
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.bgmsg = Number(this.cid) + Number(1)
-    this.bgmsgs = Number(this.pid) + Number(1)
-    this.cidform.cids = '1'
+    this.activeName = 'first'
+    this.cidform.cids = ''
     this.pidform.pids = ''
     // this.bgmsg = 0;
     this.activeName = 'first'
@@ -222,9 +207,8 @@ export default {
     this.pidform.pids = ''
     this.bgmsg = this.cid
     this.setPid(this.pidform)
-    //  this.data2 = this.data[0];
-    this.curriculumList()
     this.childCategoryList()
+    this.curriculumList()
   }
 }
 </script>

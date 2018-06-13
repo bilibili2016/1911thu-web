@@ -36,72 +36,68 @@
 // 总价 多选
 import { home } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-  export default {
-    data(){
-      return{
-        shwoInfo: false,
-        selectAll:false,
-        checked:[],
-        isIndeterminate:true,
-        number:1,
-        courseList:[
-
+export default {
+  data() {
+    return {
+      shwoInfo: false,
+      selectAll: false,
+      checked: [],
+      isIndeterminate: true,
+      number: 1,
+      courseList: [],
+      restaurants: [
+        { value: '11111' },
+        { value: '22' },
+        { value: '222' },
+        { value: '1' },
+        { value: '111' }
+      ],
+      companyInfo: {
+        name: '',
+        address: '',
+        contacts: '',
+        tel: '',
+        code: '',
+        payIndex: null
+      },
+      rules: {
+        name: [{ required: true, message: '请输入公司名称', trigger: 'blur' }],
+        address: [
+          { required: true, message: '请填写公司地址', trigger: 'blur' }
         ],
-        restaurants: [
-          {"value":"11111"},
-          {"value":"22"},
-          {"value":"222"},
-          {"value":"1"},
-          {"value":"111"}
+        contacts: [
+          { required: true, message: '请填写联系人姓名', trigger: 'blur' }
         ],
-        companyInfo:{
-          name:"",
-          address:"",
-          contacts:"",
-          tel:"",
-          code:"",
-          payIndex: null
-        },
-        rules: {
-          name: [
-            { required: true, message: '请输入公司名称', trigger: 'blur' }
-          ],
-          address: [
-            { required: true, message: '请填写公司地址', trigger: 'blur' }
-          ],
-          contacts: [
-            { required: true, message: '请填写联系人姓名', trigger: 'blur' }
-          ],
-          tel: [
-            { required: true, message: '请填写手机号', trigger: 'blur' },
-            { type: 'number', message: '请填写正确手机号', trigger: 'blur' }
-          ],
-          code: [
-            { required: true, message: '请填写短信验证码', trigger: 'blur' }
-          ],
-        },
-        sum: 0.00
-      }
-    },
-    methods: {
-      curriculumPayApply() {
-        return new Promise((resolve, reject) => {
-          home.curriculumPayApply().then(response => {
-            // console.log(response, '123')
-            this.courseList = response.data.curriculumPayApply[this.payIndex].CurriculumPayApplyList
-            resolve(true)
-          })
-        })
-      }
-    },
-     mounted () {
-      document.getElementsByClassName("headerBox")[0].style.display="inline"
-      document.getElementsByClassName("footerBox")[0].style.display="inline"
-      this.payIndex = persistStore.get('pay')
-      this.curriculumPayApply()
-       this.sum =persistStore.get('price')
+        tel: [
+          { required: true, message: '请填写手机号', trigger: 'blur' },
+          { type: 'number', message: '请填写正确手机号', trigger: 'blur' }
+        ],
+        code: [{ required: true, message: '请填写短信验证码', trigger: 'blur' }]
+      },
+      sum: 0.0
     }
+  },
+  methods: {
+    curriculumPayApply() {
+      return new Promise((resolve, reject) => {
+        home.curriculumPayApply().then(response => {
+          this.courseList =
+            response.data.curriculumPayApply[
+              this.payIndex
+            ].CurriculumPayApplyList
+          resolve(true)
+        })
+      })
+    }
+  },
+  mounted() {
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.payIndex = persistStore.get('pay')
+    this.curriculumPayApply()
+    this.sum = persistStore.get('price')
   }
+}
 </script>
 
 <style scoped>

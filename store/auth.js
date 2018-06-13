@@ -2,24 +2,15 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-09 10:21:53
+ * @Last Modified time: 2018-06-12 09:06:11
  * @File Type:  登陆的store
  * @Describe:
  */
 
-import {
-  isNull
-} from 'lodash'
-import {
-  storeLog as log
-} from '~/lib/core/logger'
-import {
-  store as persistStore
-} from '~/lib/core/store'
-import {
-  auth,
-  ServerError
-} from '~/lib/v1_sdk'
+import { isNull } from 'lodash'
+import { storeLog as log } from '~/lib/core/logger'
+import { store as persistStore } from '~/lib/core/store'
+import { auth, ServerError } from '~/lib/v1_sdk'
 // import { message } from '~/lib/core/message'
 persistStore.defaults({
   user: null,
@@ -32,7 +23,8 @@ persistStore.defaults({
   kid: null,
   isShowTip: null,
   productsNum: null,
-  number: null
+  number: null,
+  index:null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -45,6 +37,7 @@ let kid = persistStore.get('kid')
 let isShowTip = persistStore.get('isShowTip')
 let productsNum = persistStore.get('productsNum')
 let number = persistStore.get('number')
+let index = persistStore.get('index')
 
 export const MUTATION = {
   signIn: 'sign-in',
@@ -59,7 +52,8 @@ export const MUTATION = {
   setKid: 'set-kid',
   setIsShowTip: 'set-isShowTip',
   setProductsNum: 'set-productsNum',
-  setNumber: 'set-number'
+  setNumber: 'set-number',
+  setIndex: 'set-index'
 }
 export const state = () => ({
   user,
@@ -72,7 +66,8 @@ export const state = () => ({
   kid,
   isShowTip,
   productsNum,
-  number
+  number,
+  index
 })
 export const getters = {
   isAuthenticated(state) {
@@ -87,90 +82,74 @@ export const getters = {
 }
 
 export const mutations = {
-  [MUTATION.signIn](state, {
-    token
-  }) {
+  [MUTATION.signIn](state, { token }) {
     state.token = token
   },
   [MUTATION.signOut](state) {
     state.token = null
   },
-  [MUTATION.refresh](state, {
-    token
-  }) {
+  [MUTATION.refresh](state, { token }) {
     state.token = token
   },
-  [MUTATION.me](state, {
-    user
-  }) {
+  [MUTATION.me](state, { user }) {
     state.user = user
   },
-  [MUTATION.setCid](state, {
-    cid
-  }) {
+  [MUTATION.setCid](state, { cid }) {
     state.cid = cid
   },
-  [MUTATION.setPid](state, {
-    pid
-  }) {
+  [MUTATION.setPid](state, { pid }) {
     state.pid = pid
   },
-  [MUTATION.setGid](state, {
-    gid
-  }) {
+  [MUTATION.setGid](state, { gid }) {
     state.gid = gid
   },
-  [MUTATION.setHsg](state, {
-    hsg
-  }) {
+  [MUTATION.setHsg](state, { hsg }) {
     state.hsg = hsg
   },
-  [MUTATION.setNid](state, {
-    nid
-  }) {
+  [MUTATION.setNid](state, { nid }) {
     state.nid = nid
   },
-  [MUTATION.setKid](state, {
-    kid
-  }) {
+  [MUTATION.setKid](state, { kid }) {
     state.kid = kid
   },
-  [MUTATION.setIsShowTip](state, {
-    isShowTip
-  }) {
+  [MUTATION.setIsShowTip](state, { isShowTip }) {
     state.isShowTip = isShowTip
   },
-  [MUTATION.setProductsNum](state, {
-    productsNum
-  }) {
+  [MUTATION.setProductsNum](state, { productsNum }) {
     state.productsNum = productsNum
   },
-  [MUTATION.setNumber](state, {
-
-    number
-
-  }) {
+  [MUTATION.setNumber](state, { number }) {
     state.number = number
+  },
+  [MUTATION.setIndex](state, { index }) {
+    state.index = index
   }
-
 }
 export const actions = {
-  async signIn({
-    commit,
-    state
-  }, {
-    phonenum,
-    password,
-    loginTypes
-  }) {
+  async setToken({ commit, state }, { tokens }) {
+    try {
+      let token = tokens
+      persistStore.set('token', token)
+      commit(MUTATION.signIn, {
+        token
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return token
+  },
+
+  async signIn({ commit, state }, { phonenum, password, loginTypes }) {
     let user
     try {
       let tokens = await auth.signIns({
-
         phonenum,
         password,
         loginTypes
-
       })
       // if (!tokens.data.token) {
       //   return tokens
@@ -194,10 +173,7 @@ export const actions = {
     return user
   },
 
-  async signOut({
-    commit,
-    state
-  }) {
+  async signOut({ commit, state }) {
     try {
       await auth.signOut()
       persistStore.set('token', null)
@@ -208,14 +184,7 @@ export const actions = {
     }
   },
 
-
-  async companySignIn({
-    commit,
-    state
-  }, {
-    email,
-    password
-  }) {
+  async companySignIn({ commit, state }, { email, password }) {
     let user
     try {
       let tokens = await auth.companySignIn({
@@ -238,12 +207,7 @@ export const actions = {
     }
     return user
   },
-  async setCid({
-    commit,
-    state
-  }, {
-    cids
-  }) {
+  async setCid({ commit, state }, { cids }) {
     try {
       let cid = cids
       persistStore.set('cid', cid)
@@ -259,12 +223,7 @@ export const actions = {
     }
     return cid
   },
-  async setPid({
-    commit,
-    state
-  }, {
-    pids
-  }) {
+  async setPid({ commit, state }, { pids }) {
     try {
       let pid = pids
       persistStore.set('pid', pid)
@@ -280,12 +239,7 @@ export const actions = {
     }
     return pid
   },
-  async setGid({
-    commit,
-    state
-  }, {
-    gids
-  }) {
+  async setGid({ commit, state }, { gids }) {
     try {
       let gid = gids
       persistStore.set('gid', gid)
@@ -301,19 +255,13 @@ export const actions = {
     }
     return gid
   },
-  async setHsg({
-    commit,
-    state
-  }, {
-    hsgs
-  }) {
+  async setHsg({ commit, state }, { hsgs }) {
     try {
       let hsg = hsgs
       persistStore.set('hsg', hsg)
       commit(MUTATION.setHsg, {
         hsg
       })
-
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -323,19 +271,13 @@ export const actions = {
     }
     return gid
   },
-  async setNid({
-    commit,
-    state
-  }, {
-    nids
-  }) {
+  async setNid({ commit, state }, { nids }) {
     try {
       let nid = nids
       persistStore.set('nid', nid)
       commit(MUTATION.setNid, {
         nid
       })
-
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -345,20 +287,13 @@ export const actions = {
     }
     return gid
   },
-  async setKid({
-    commit,
-    state
-  }, {
-    kids
-  }) {
+  async setKid({ commit, state }, { kids }) {
     try {
-      // console.log(kids, '这是kids')
       let kid = kids
       persistStore.set('kid', kid)
       commit(MUTATION.setKid, {
         kid
       })
-
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -368,12 +303,7 @@ export const actions = {
     }
     return kid
   },
-  async setIsShowTip({
-    commit,
-    state
-  }, {
-    isShowTips
-  }) {
+  async setIsShowTip({ commit, state }, { isShowTips }) {
     try {
       let isShowTip = isShowTips
       persistStore.set('isShowTip', isShowTip)
@@ -389,12 +319,7 @@ export const actions = {
     }
     return isShowTip
   },
-  async setProductsNum({
-    commit,
-    state
-  }, {
-    pn
-  }) {
+  async setProductsNum({ commit, state }, { pn }) {
     try {
       let productsNum = pn
       persistStore.set('productsNum', productsNum)
@@ -410,15 +335,8 @@ export const actions = {
     }
     return productsNum
   },
-  async setNumber({
-    commit,
-    state
-  }, {
-    numbers
-  }) {
+  async setNumber({ commit, state }, { numbers }) {
     try {
-      // console.log(numbers)
-
       let number = numbers
       persistStore.set('number', number)
       commit(MUTATION.setNumber, {
@@ -432,7 +350,21 @@ export const actions = {
       }
     }
     return productsNum
-  }
-
-
+  },
+    async setIndex({ commit, state }, { indexs }) {
+    try {
+      let index = indexs
+      persistStore.set('index', index)
+      commit(MUTATION.setIndex, {
+        index
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return gid
+  },
 }

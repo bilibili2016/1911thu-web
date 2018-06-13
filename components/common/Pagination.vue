@@ -8,29 +8,17 @@
 
 <script>
 export default {
-  props: {
-    data: {
-      type: Object,
-      default: function() {
-        return {
-          pagesize: 0,
-          page: 0,
-          total: 0
-        };
-      }
-    },
-    pageSize: {
-      type: Number,
-      default: 2
-    }
-  },
+  props: ['data'],
   methods: {
     handleCurrentChange(val) {
-      // console.log(val, '这是val')
-      this.$emit("page", val);
+      this.$emit('page', val)
     }
+  },
+  pageSize: {
+    type: Number,
+    default: 2
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

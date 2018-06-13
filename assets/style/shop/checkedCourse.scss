@@ -52,7 +52,7 @@
                             color: #332A51;
                             font-size: 16px;
                             overflow: hidden;
-                            padding: 9px 0 0 10px;
+                            padding-top: 9px;
                         }
                         h6{
                             color:#6D687F;
@@ -70,6 +70,7 @@
                         line-height: 60px;
                         text-align: center;
                         color: #3A1781;
+                        cursor: pointer;
                         border-top: 1px solid #E8D6F7;
                         border-right: 1px solid #E8D6F7;
                     }

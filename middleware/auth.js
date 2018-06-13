@@ -3,9 +3,8 @@
  *
  * @param {Object} context
  */
-export default function ({ store, redirect }) {
+export default function({ store, redirect }) {
   // if (!store.getters['auth/isAuthenticated']) {
   //   return redirect('/')
   // }
-  // console.log('123')
 }

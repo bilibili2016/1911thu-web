@@ -34,20 +34,20 @@
         </div>
       </div>
     </transition>
-    <div >
+    <div>
       <v-unlogged v-if="showNotLogin"></v-unlogged>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import CustomUnlogged from "@/pages/course/pages/unlogged.vue";
+import { mapState, mapActions, mapGetters } from 'vuex'
+import CustomUnlogged from '@/pages/course/pages/unlogged.vue'
 /* eslint-disable */
 export default {
-  name: "BackToTop",
+  name: 'BackToTop',
   components: {
-    "v-unlogged": CustomUnlogged
+    'v-unlogged': CustomUnlogged
   },
   props: {
     visibilityHeight: {
@@ -60,72 +60,76 @@ export default {
     },
     transitionName: {
       type: String,
-      default: "fade"
+      default: 'fade'
     }
   },
   data() {
     return {
-      showNotLogin:false,
+      showNotLogin: false,
       visible: false,
       move: true,
-      token: true,
       interval: null,
-      ceilSrc: require("@/assets/images/home_backtop11.png"),
-      wxSrc: require("@/assets/images/home_backtop22.png"),
-      topSrc: require("@/assets/images/home_backtop03.png")
-    };
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
-    if (this.interval) {
-      clearInterval(this.interval);
+      ceilSrc: require('@/assets/images/home_backtop11.png'),
+      wxSrc: require('@/assets/images/home_backtop22.png'),
+      topSrc: require('@/assets/images/home_backtop03.png')
     }
   },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+  },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
+  },
   methods: {
-    ...mapGetters("auth", ["isAuthenticated"]),
+    ...mapActions('auth', ['setIsShowTip']),
     handleScroll() {
-      this.visible = window.pageYOffset > this.visibilityHeight;
+      this.visible = window.pageYOffset > this.visibilityHeight
     },
     checkCourse() {
-      console.log('this.isAuthenticated', this.isAuthenticated)
-      if(this.isAuthenticated()){
-        this.goLink("/course/pages/categoryd");
-      }else{
-        this.showNotLogin = true
+      if (this.isAuthenticated) {
+        this.setIsShowTip({
+          isShowTips: true
+        })
+        this.goLink('/course/pages/categoryd')
+      } else {
+        this.notLogin = true
       }
     },
     backToTop() {
       if (this.move) {
-        const start = window.pageYOffset;
-        let i = 0;
+        const start = window.pageYOffset
+        let i = 0
         this.interval = setInterval(() => {
           const next = Math.floor(
             this.easeInOutQuad(10 * i, start, -start, 500)
-          );
+          )
           if (next <= this.backPosition) {
-            window.scrollTo(0, this.backPosition);
-            clearInterval(this.interval);
-            this.move = true;
+            window.scrollTo(0, this.backPosition)
+            clearInterval(this.interval)
+            this.move = true
           } else {
-            this.move = false;
-            window.scrollTo(0, next);
+            this.move = false
+            window.scrollTo(0, next)
           }
-          i++;
-        }, 16.7);
+          i++
+        }, 16.7)
       }
     },
     goLink(item) {
-      this.$router.push(item);
+      this.$router.push(item)
     },
     easeInOutQuad(t, b, c, d) {
-      if ((t /= d / 2) < 1) return c / 2 * t * t + b;
-      return -c / 2 * (--t * (t - 2) - 1) + b;
+      if ((t /= d / 2) < 1) return c / 2 * t * t + b
+      return -c / 2 * (--t * (t - 2) - 1) + b
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -158,16 +162,15 @@ export default {
       height: 21px;
       margin-top: 15.5px;
       transition: all 300ms;
-      background: url("~assets/images/home_backtop22.png") no-repeat;
+      background: url('~assets/images/home_backtop22.png') no-repeat;
       background-size: 24px 21px;
     }
     &:hover {
       background-color: #8f4acb;
       span {
-        background: url("~assets/images/home_backtop02.png") no-repeat;
+        background: url('~assets/images/home_backtop02.png') no-repeat;
         background-size: 24px 21px;
       }
-
       .showCode {
         opacity: 1;
         right: 62px;
@@ -188,13 +191,13 @@ export default {
       height: 24px;
       margin-top: 13px;
       transition: all 300ms;
-      background: url("~assets/images/home_backtop11.png") no-repeat;
+      background: url('~assets/images/home_backtop11.png') no-repeat;
       background-size: 24px 24px;
     }
     &:hover {
       background-color: #8f4acb;
       span {
-        background: url("~assets/images/home_backtop01.png") no-repeat;
+        background: url('~assets/images/home_backtop01.png') no-repeat;
         background-size: 24px 24px;
       }
       .telShow {
@@ -217,13 +220,11 @@ export default {
       background-color: #8f4acb;
       .line-center {
         color: #fcd23f;
-        background: url("~assets/images/home_backtop44.png") no-repeat 16px 17px;
+        background: url('~assets/images/home_backtop44.png') no-repeat 16px 17px;
         background-size: 18px 18px;
       }
     }
-  }
-
-  // &.hasColor:hover{
+  } // &.hasColor:hover{
   //   transition: all 400ms;
   //   background: #8f4acb;
   // }
@@ -274,58 +275,48 @@ export default {
     transition: opacity 400ms;
   }
 }
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
-
 .back-to-ceiling .Icon {
   fill: #9aaabf;
   background: none;
 }
-
 .ceilSrc {
   width: 24px;
   height: 24px;
   margin: 13px;
 }
-
 .wxSrc {
   width: 23px;
   height: 19px;
   margin: 16px 13px 13px 13px;
 }
-
 .topSrc {
   width: 20px;
   height: 13px;
   margin: 20px 15px 15px 15px;
 }
-
 .line-wrap {
   height: 50px;
   width: 100px;
-  cursor: pointer;
-  // border: 1px red solid;
+  cursor: pointer; // border: 1px red solid;
 }
-
 .line-center {
   line-height: 50px;
   color: #6417a6;
-  background: url("~assets/images/home_backtop04.png") no-repeat 16px 17px;
+  background: url('~assets/images/home_backtop04.png') no-repeat 16px 17px;
   background-size: 18px 18px;
   transition: all 500ms;
   span {
     padding-left: 35px;
   }
 }
-
 .line-center img {
   width: 18px;
   height: 18px;

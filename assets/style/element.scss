@@ -183,6 +183,9 @@
 
 // 登录注册 tab切换
 .start {
+  .el-form {
+    padding-top:16px;
+  }
   .el-tabs__header {
     margin: 0 0 18px;
   }
@@ -199,6 +202,7 @@
     font-weight: 400;
     padding: 0 16px !important;
     border-bottom: 2px solid transparent;
+    font-size: 16px;
     &.is-active {
       font-weight: 500;
     }
@@ -213,12 +217,15 @@
   .el-tabs__nav-wrap::after {
     background-color: transparent;
   } // 登录表单
+  .el-form-item{
+    margin-bottom: 30px;
+  }
   .el-form-item__content {
     text-align: center;
     position: relative;
   }
   .el-form-item__error {
-    left: 63px;
+    left: 83px;
   }
   .el-input__suffix .el-input__validateIcon {
     display: none;
@@ -276,7 +283,12 @@
     .captcha {
       width: 132px;
     }
-
+  }
+  .el-form-item.is-success .el-input__inner,
+  .el-form-item.is-success .el-input__inner:focus,
+  .el-form-item.is-success .el-textarea__inner,
+  .el-form-item.is-success .el-textarea__inner:focus{
+    border-color: #222;
   }
 }
 
@@ -824,6 +836,29 @@
   .el-carousel__container{
     background-color: #fafafa;
   }
+}
+.card-category{
+  .el-checkbox__inner {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255,255,255,0.6);
+    &:after{
+      height: 12px;
+      width: 6px;
+      left: 11px;
+      top: 6px;
+      border-width: 2px;
+    }
+  }
+
+  .el-checkbox__input.is-checked .el-checkbox__inner{
+    background-color: #6417a6;
+    border-color: #6417a6;
+
+  }
+
 }
 .evaluate-tag{
   .el-rate__icon {

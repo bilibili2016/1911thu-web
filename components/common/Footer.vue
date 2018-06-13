@@ -2,7 +2,7 @@
   <div class="footerBox">
     <div class="main">
       <div class="logo">
-        <img src="../../assets/images/logobt.png" alt="">
+        <img src="@/assets/images/logobt.png" alt="">
       </div>
       <div class="companyInfo">
         <div class="enterprise">
@@ -14,8 +14,8 @@
         <div class="aboutUs clearfix">
           <dl>
             <dt>关于我们</dt>
-            <dd @click="goLink('/home/pages/aboutUs')">关于集团</dd>
-            <dd @click="goLink('/home/pages/aboutUs')">发展历程</dd>
+            <dd @click="goLink('first')">关于集团</dd>
+            <dd @click="goLink('second')">发展历程</dd>
           </dl>
           <dl>
             <dt>加入我们</dt>
@@ -41,11 +41,22 @@
 </template>
 
 <script>
-  export default {
-    methods:{
-      goLink(link){
-        this.$router.push(link);
-      }
+import { mapState, mapActions, mapGetters } from 'vuex'
+export default {
+  data(){
+    return{
+      indexData:{
+        indexs:null,
+      },
     }
-  };
+  },
+  methods: {
+    ...mapActions('auth', ['setIndex']),
+    goLink(num) {
+      this.indexData.indexs =num;
+      this.setIndex(this.indexData);
+      this.$router.push("/home/pages/aboutUs")
+    }
+  }
+}
 </script>

@@ -1,47 +1,40 @@
 <template>
   <div>
     <div class="centers">
-      <!-- <video id="movd" width="414" height="270" preload="auto" playsinline webkit-playinline x5-playinline ref="mov">
-      </video> -->
       <div id="movd" style="width:100%;height:auto;"></div>
     </div>
   </div>
 </template>
 
 <script>
-// import tcPlayer from 'tcplayer'
-import { other, auth } from "~/lib/v1_sdk/index";
+import { other, auth } from '~/lib/v1_sdk/index'
 export default {
   data() {
     return {
-      token: "",
-      wxData:{
-        code:"",
-        state:""
+      token: '',
+      wxData: {
+        code: '',
+        state: ''
       }
-    };
+    }
   },
   methods: {},
   mounted() {
-    console.log('123')
     function GetQueryString(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-      var r = window.location.search.substr(1).match(reg); //search,查询？后面的参数，并匹配正则
-      if (r != null) return unescape(r[2]);
-      return null;
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+      var r = window.location.search.substr(1).match(reg) //search,查询？后面的参数，并匹配正则
+      if (r != null) return unescape(r[2])
+      return null
     }
-    this.wxData.code = GetQueryString("code");
-    this.wxData.state = GetQueryString("state");
+    this.wxData.code = GetQueryString('code')
+    this.wxData.state = GetQueryString('state')
     // this.$bus.$emit('getMsg', this.wxData)
-    if (code != "" && code != null && code != "undefined") {
+    if (code != '' && code != null && code != 'undefined') {
       return new Promise((resolve, reject) => {
         this.wxGet(this.wxData).then(response => {
-          console.log(response);
-          alert(123);
-
-          
-        });
-      });
+          alert(123)
+        })
+      })
       // $.ajax({
       //   type: "post",
       //   url: "http://www.1911edu.com/Wapi/Index/wxBack",
@@ -58,7 +51,7 @@ export default {
       //         type: "success",
       //         message: response.msg
       //       });
-      //       console.log(this.token);
+
       //     }
       //     if (response.status === 100101) {
       //       //跳转到绑定手机号
@@ -78,7 +71,7 @@ export default {
       // });
     }
   }
-};
+}
 </script>
 
 <style scoped>
