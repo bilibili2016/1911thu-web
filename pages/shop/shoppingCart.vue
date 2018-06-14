@@ -209,6 +209,11 @@ export default {
       ).toFixed(2)
     },
     canSubmit() {
+      if (this.addArray.curriculumcartid.length <= 0) {
+        this.$message({
+          message: '请您选择课程哦'
+        })
+      }
       return this.addArray.curriculumcartid.length > 0
     }
   },
