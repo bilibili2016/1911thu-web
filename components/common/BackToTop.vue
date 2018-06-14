@@ -34,14 +34,21 @@
         </div>
       </div>
     </transition>
+    <div>
+      <v-unlogged v-if="showNotLogin"></v-unlogged>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
+import CustomUnlogged from '@/pages/course/pages/unlogged.vue'
 /* eslint-disable */
 export default {
   name: 'BackToTop',
+  components: {
+    'v-unlogged': CustomUnlogged
+  },
   props: {
     visibilityHeight: {
       type: Number,
@@ -58,6 +65,7 @@ export default {
   },
   data() {
     return {
+      showNotLogin: false,
       visible: false,
       move: true,
       interval: null,
@@ -76,7 +84,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('auth', ['isAuthenticated']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
     ...mapActions('auth', ['setIsShowTip']),

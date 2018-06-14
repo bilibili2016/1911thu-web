@@ -219,7 +219,7 @@ export default {
   created() {
     this.$nextTick(() => {
       this.$bus.$on('collegeId', data => {
-        console.log(data, '这是进入页面获取的1111111111111111')
+        // console.log(data, '这是进入页面获取的1111111111111111')
         // this.catagoryId = data
       })
     })

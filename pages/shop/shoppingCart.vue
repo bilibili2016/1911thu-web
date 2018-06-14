@@ -3,8 +3,8 @@
     <!-- 购物车列表 -->
     <div class="main" v-loading="loding">
       <div class="table">
-        <div class="tableHeader">
-          <!-- <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox> -->
+        <div class="tableHeader" v-if="!isNoMsg">
+          <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseName">课程名称</span>
           <span class="price">单价</span>
           <span class="operation">操作</span>
@@ -41,20 +41,18 @@
             <span class="person">购买人数：</span>
             <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput" @change="changeNumber"></el-input-number>
             <!-- <span class="number clearfix">
-              <i class="fl minus el-icon-minus"  @click="delNumber"></i>
-              <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
-              <i class="fl add el-icon-plus" @click="addNumber"></i>
-            </span> -->
+                <i class="fl minus el-icon-minus"  @click="delNumber"></i>
+                <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
+                <i class="fl add el-icon-plus" @click="addNumber"></i>
+              </span> -->
           </span>
           <span class="commitOrder fr">
             <el-button @click="showCommit">提交</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
-
         </div>
       </div>
     </div>
-
     <!-- 提交公司信息 -->
     <div class="information" @click.self="close" v-show="showInfo">
       <div class="info">
@@ -63,8 +61,7 @@
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
-            <!-- <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearch" placeholder="请输入公司名称" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete> -->
-            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入公司名称" @select="handleSelect"></el-autocomplete>
+            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <el-form-item label="公司地址：" prop="companyaddress">
             <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
@@ -109,11 +106,21 @@ export default {
       },
       courseList: '',
       restaurants: [
-        { value: '11111' },
-        { value: '22' },
-        { value: '222' },
-        { value: '1' },
-        { value: '111' }
+        {
+          value: '11111'
+        },
+        {
+          value: '22'
+        },
+        {
+          value: '222'
+        },
+        {
+          value: '1'
+        },
+        {
+          value: '111'
+        }
       ],
       companyInfo: {
         companyname: '',
@@ -128,20 +135,43 @@ export default {
       },
       rules: {
         companyname: [
-          { required: true, message: '请输入公司名称', trigger: 'blur' }
+          {
+            required: true,
+            message: '请输入公司名称',
+            trigger: 'blur'
+          }
         ],
         companyaddress: [
-          { required: true, message: '请填写公司地址', trigger: 'blur' }
+          {
+            required: true,
+            message: '请填写公司地址',
+            trigger: 'blur'
+          }
         ],
         contactperson: [
-          { required: true, message: '请填写联系人姓名', trigger: 'blur' }
+          {
+            required: true,
+            message: '请填写联系人姓名',
+            trigger: 'blur'
+          }
         ],
         phones: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { validator: checkPhone, trigger: 'blur' }
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          {
+            validator: checkPhone,
+            trigger: 'blur'
+          }
         ],
         codes: [
-          { required: true, message: '请填写短信验证码', trigger: 'blur' }
+          {
+            required: true,
+            message: '请填写短信验证码',
+            trigger: 'blur'
+          }
         ]
       },
       arraySum: 0,
@@ -151,7 +181,12 @@ export default {
       addArray: {
         curriculumcartid: []
       },
-      isRest: true
+      isRest: true,
+      companyForm: {
+        companyname: '1911'
+      },
+      restaurants: [],
+      timeout: null
     }
   },
   mounted() {
@@ -159,6 +194,8 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.shopCartList()
     // this.getNum()
+    this.searchCompanyList()
+    this.restaurants = this.loadAll()
   },
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
@@ -180,6 +217,52 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
+    loadAll() {
+      return []
+    },
+    querySearchAsync(queryString, cb) {
+      // console.log(queryString, '查询字符串')
+      var restaurants = this.restaurants
+      var results = queryString
+        ? restaurants.filter(this.createStateFilter(queryString))
+        : restaurants
+      // console.log(results, '这是查询出来的')
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        cb(results)
+      }, 3000 * Math.random())
+    },
+    createStateFilter(queryString) {
+      return state => {
+        return (
+          state.company_name
+            .toLowerCase()
+            .indexOf(queryString.toLowerCase()) === 0
+        )
+      }
+    },
+    handleSelect(item) {
+      console.log(item)
+    },
+    //搜索企业 接口
+    searchCompanyList() {
+      return new Promise((resolve, reject) => {
+        home.searchCompanyList(this.companyForm).then(res => {
+          for (var i = 0; i < res.data.companyList.length; i++) {
+            this.$set(
+              res.data.companyList[i],
+              'value',
+              res.data.companyList[i].company_name
+            )
+          }
+          this.restaurants = res.data.companyList
+          resolve(true)
+        })
+      })
+    },
+    handleSelect(item) {
+      console.log(item)
+    },
     setPatten() {
       let reg = new RegExp('/^[0-9]*$/')
       if (!reg.test(this.numForm.number)) {
@@ -203,7 +286,9 @@ export default {
             this.arraySum =
               (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
               10
-            return Object.assign({}, item, { checkMsg: true })
+            return Object.assign({}, item, {
+              checkMsg: true
+            })
           })
           this.courseList = body
           this.selectAll = true
@@ -334,7 +419,7 @@ export default {
               } else if(response.status === 0){
                 this.$router.push('/shop/checkedCourse')
               }
-
+              this.showInfo = false
               resolve(true)
             })
           })
