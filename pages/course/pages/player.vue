@@ -242,28 +242,55 @@ export default {
       this.$router.back(-1)
     },
     getPlayerInfo() {
-      this.player = TCPlayer('movd', this.tcplayer)
-      console.log(this.player.currentTime())
-
+      // console.log(this.player.currentTime())
+      player = TCPlayer('movd', this.tcplayer)
       if (this.$refs.playInner.children[0]) {
-        this.player.dispose()
+        player.dispose()
         $('#playInner').html('')
         $('#playInner').html(
           '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
         )
       }
+      // console.log(this.$refs, '123')
       let kid = this.kid
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
-      this.player = TCPlayer('movd', this.tcplayer)
+      var player = TCPlayer('movd', this.tcplayer)
+
+      var socket = new io('http://www.1911edu.com:2120')
+      socket.on('connect', function() {
+        console.log('已连接')
+        socket.emit(
+          'login',
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTk3In0.L0yuyoKeO37A0W4HUHpr7eaKyP67MiBjtlLOHMxDorU'
+        )
+      })
+      // socket.on('new_msg', function(msg) {
+      //   console.log(msg)
+      // })
+      // 断线重连
+      socket.on('reconnect', function(msg) {})
+      let interval = setInterval(() => {
+        if (this.seconds <= 0) {
+          this.seconds = 1
+          this.courseList.success = false
+          this.courseList.inputID = ''
+          clearInterval(interval)
+        } else {
+          this.seconds--
+          // console.log()
+          let playTime = player.currentTime()
+          socket.emit('watchRecordingTime', 18, 67, playTime)
+        }
+      }, 1000)
       // persistStore.set('player', this.player)
       // let time = player.currentTime()
       // console.log(time, '这是time')
       return new Promise((resolve, reject) => {
         home.getPlayerInfos(this.playerForm).then(response => {
-          this.daojishi()
+          // this.daojishi()
           if (response.data.playAuthInfo.videoViewType == false) {
-            this.player.loadVideoByID({
+            player.loadVideoByID({
               fileID: response.data.playAuthInfo.fileID,
               appID: response.data.playAuthInfo.appID,
               sign: response.data.playAuthInfo.sign,
@@ -271,7 +298,7 @@ export default {
               exper: response.data.playAuthInfo.exper
             })
           } else {
-            this.player.loadVideoByID({
+            player.loadVideoByID({
               fileID: response.data.playAuthInfo.fileID,
               appID: response.data.playAuthInfo.appID,
               t: response.data.playAuthInfo.t,
@@ -282,6 +309,7 @@ export default {
       })
     },
     daojishi() {
+      console.log(player, '123')
       let interval = setInterval(() => {
         if (this.seconds <= 0) {
           this.seconds = 1
@@ -371,9 +399,9 @@ export default {
     },
 
     players() {
-      let playerTime = this.player.currentTime()
-      console.log(playerTime)
-      return playerTime
+      // let playerTime = this.player.currentTime()
+      // console.log(playerTime)
+      // return playerTime
     }
   },
   mounted() {
@@ -386,14 +414,6 @@ export default {
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
     // 新建webspcket对象
-    var socket = new io('http://www.1911edu.com:2120')
-    socket.on('connect', function() {
-      console.log('已连接')
-      socket.emit(
-        'login',
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTk3In0.L0yuyoKeO37A0W4HUHpr7eaKyP67MiBjtlLOHMxDorU'
-      )
-    })
 
     this.players()
   }
