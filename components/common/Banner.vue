@@ -19,7 +19,7 @@
           </div>
           <div class="name">
             <p>{{userInfo.nick_name}}</p>
-            <p>{{userInfo.company_name}}{{avator}}</p>
+            <p>{{userInfo.company_name}}</p>
           </div>
           <div class="time">
             <p class="fr">18小时32分钟</p>
