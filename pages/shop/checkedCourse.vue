@@ -29,7 +29,7 @@
                 查看更多课程>
               </div>
             </div>
-            <div class="price height" :style="{height:courseList.CurriculumPayApplyList.length > 3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+70+'px'}">¥{{courseList.totalPresentPrice}}</div>
+            <div class="price height" :style="{height:courseList.CurriculumPayApplyList.length > 3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+60+'px'}">¥{{courseList.totalPresentPrice}}</div>
             <div class="telephone height" :style="{height: courseList.CurriculumPayApplyList.length>3? 3*140+60+'px' :courseList.CurriculumPayApplyList.length*140+60+'px'}">
               <p>客服电话</p>
               <p>010-6270 1911</p>
