@@ -6,6 +6,16 @@
     width: 100%;
     background-color: #fff;
     border: 1px solid #ebeef5;
+    position: relative;
+    .person-edit {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      right: 40px;
+      top: 17px;
+      cursor: pointer;
+      z-index: 100;
+    }
     .el-form.psnForm {
       width: 100%;
       margin-top: 50px;
@@ -25,7 +35,7 @@
           background-color: #ccc;
           border: none;
           &.submitAble {
-            background-color: #6417A6;
+            background-color: #6417a6;
           }
         }
       }
@@ -49,7 +59,7 @@
           margin-left: 40px;
         }
         &.default {
-          color: #6417A6;
+          color: #6417a6;
         }
       }
     }
@@ -64,7 +74,7 @@
       line-height: 56px;
       padding: 0;
       margin: 80px 0 50px -135px;
-      background-color: #9A5CD0;
+      background-color: #9a5cd0;
       border: none;
       border-radius: 28px;
     }
@@ -87,7 +97,7 @@
     }
     p {
       font-size: 20px;
-      color: #6417A6;
+      color: #6417a6;
       line-height: 25px;
     }
   }
