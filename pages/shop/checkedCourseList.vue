@@ -1,7 +1,7 @@
 <template>
   <div class="checkedCourseList">
     <!-- 购物车列表 -->
-    <div class="main">
+    <div class="main" v-loading='loading'>
       <div class="table">
         <div class="tableHeader">
           <span class="courseName">课程名称</span>
@@ -39,6 +39,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
+      loading: true,
       shwoInfo: false,
       selectAll: false,
       checked: [],
@@ -85,6 +86,8 @@ export default {
             response.data.curriculumPayApply[
               this.payIndex
             ].CurriculumPayApplyList
+          this.sum = persistStore.get('price')
+          this.loading = false
           resolve(true)
         })
       })
@@ -95,7 +98,6 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.payIndex = persistStore.get('pay')
     this.curriculumPayApply()
-    this.sum = persistStore.get('price')
   }
 }
 </script>
