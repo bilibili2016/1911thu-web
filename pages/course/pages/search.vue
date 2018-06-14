@@ -16,11 +16,12 @@
           <p>未找到相关内容</p>
         </div>
         <div class="doYouLike">
-          <!-- <div class="clearfix title">
-              <p class="fl">猜你喜欢</p>
-              <p class="fr"><i class="el-icon-refresh"></i>换一批</p>
-            </div> -->
+          <div class="clearfix title">
+            <p class="fl">猜你喜欢</p>
+            <p class="fr"><i class="el-icon-refresh"></i>换一批</p>
+          </div>
           <!--猜你喜欢 card组件 -->
+          <v-card :data="getData" :config="config" v-loading="loading" element-loading-text="拼命加载中" element-loading-background="rgba(0, 0, 0, 0.8)"></v-card>
         </div>
       </div>
     </div>
@@ -48,6 +49,7 @@ export default {
         img: require('~/assets/images/noSearch.png')
       },
       searchData: [],
+      getData: [],
       config: {
         card_type: 'profile',
         card: 'home'
@@ -63,6 +65,10 @@ export default {
         searchword: null,
         categoryid: null,
         sortby: 2
+      },
+      getLikeForm: {
+        pages: 0,
+        limits: 2,
       },
       loading: false,
       result: true,
@@ -91,7 +97,17 @@ export default {
           resolve(true)
         })
       })
+    },
+    // 获取猜你喜欢列表
+    getLikeList(){
+      return new Promise((resolve, reject) => {
+        home.getLikeList(this.getLikeForm).then(response => {
+          
+          
+        })
+      })
     }
+
   },
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'

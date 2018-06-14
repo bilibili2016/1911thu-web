@@ -37,9 +37,13 @@
         <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch"> -->
         <!-- </el-switch> -->
       </div>
-      <div class="carlist">
+      <div class="carlist" v-if="categoryData.length">
         <v-card :data="categoryData" :config="configSevent"></v-card>
       </div>
+      <div v-else>
+        <v-nothing></v-nothing>
+      </div>
+
     </div>
     <!-- <v-filter></v-filter> -->
     <div class="pagination">
@@ -52,13 +56,15 @@
 import CustomCard from '@/components/common/Card.vue'
 import CustomHot2 from '@/components/common/Hot2.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
+import SearchNothing from '@/pages/home/pages/searchNothing.vue'
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     'v-card': CustomCard,
     'v-filter': CustomHot2,
-    'v-page': CustomPagination
+    'v-page': CustomPagination,
+    'v-nothing': SearchNothing
   },
   computed: {
     ...mapState('auth', ['pid', 'cid'])

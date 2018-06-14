@@ -10,7 +10,7 @@
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
         <span class="hrin" @click="goSearchd('/home/pages/hrEntry')">Hr入口</span>
-        <span v-show="isAuthenticated" @click="goLink('second')">我的课程</span>
+        <span v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -24,6 +24,7 @@
         </div>
         <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingCart')">
           <span class="cartIcon"></span>
+          <i>{{productsNum}}</i>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -554,8 +555,8 @@ export default {
       this.$router.push('/home/pages/forgotPassword')
       this.close()
     },
-    goMycourse() {
-      this.$router.push('/profile')
+    goMycourse(tab) {
+      this.$router.push({ path: '/profile', query: { tab: tab } })
     },
     goLinks() {
       this.$router.push('/shop/shoppingCart')
