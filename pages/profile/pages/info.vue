@@ -10,22 +10,15 @@
         </div>
       </div>
     </template>
-    <!-- <template v-else>
-      <v-nomsg></v-nomsg>
-    </template> -->
   </div>
 </template>
 
 <script>
 import { home } from "~/lib/v1_sdk/index";
-// import noMsg from "@/pages/profile/pages/noMsg.vue";
 export default {
-  // components: {
-  //   "v-nomsg": noMsg
-  // },
   data() {
     return {
-      infoList: [],
+      infoList: []
     };
   },
   methods: {
@@ -33,8 +26,8 @@ export default {
       return new Promise((resolve, reject) => {
         home.userMessage(this.curruntForm).then(res => {
           this.infoList = res.data.userMessage;
-          let noMsg = this.infoList&& this.infoList.length > 0 ? false : true;
-          this.$emit('noMsg',noMsg)
+          let noMsg = this.infoList && this.infoList.length > 0 ? false : true;
+          this.$emit("noMsg", noMsg);
         });
       });
     }

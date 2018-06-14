@@ -180,11 +180,17 @@ export default {
                 newPass: "",
                 checkPass: ""
               };
-              if(data.status==0){
-                this.updateSuccess = true;
-                setTimeout(() => {
-                  this.updateSuccess = false;
-                }, 1000);
+              if(res.status==0){
+               this.$message({
+                  type: "success",
+                  message: '恭喜你操作成功'
+                });
+              }else{
+                let msg = res.msg
+                this.$message({
+                  type: "error",
+                  message: msg
+                });
               }
             });
           });
@@ -220,6 +226,15 @@ export default {
     };
     var validatePass2 = (rule, value, callback) => {
       if (value === "") {
+        callback(new Error("请输入密码"));
+      } else if (value.length<8||value.length>17) {
+        callback(new Error("请输入至少8位最多16位的密码"));
+      } else {
+        callback();
+      }
+    };
+    var validatePass3 = (rule, value, callback) => {
+      if (value === "") {
         callback(new Error("请再次输入密码"));
       } else if (value !== this.changePwd.newPass) {
         callback(new Error("两次输入密码不一致!"));
@@ -246,22 +261,19 @@ export default {
         oldPass: [
           {
             validator: validatePass,
-            trigger: "blur",
-            message: "请输入旧密码"
+            trigger: "blur"
           }
         ],
         newPass: [
           {
-            validator: validatePass,
-            trigger: "blur",
-            message: "请输入至少6位的密码"
+            validator: validatePass2,
+            trigger: "blur"
           }
         ],
         checkPass: [
           {
-            validator: validatePass2,
-            trigger: "blur",
-            message: "请再次输入密码"
+            validator: validatePass3,
+            trigger: "blur"
           }
         ]
       },
