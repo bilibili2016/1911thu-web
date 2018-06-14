@@ -204,7 +204,7 @@
     <div class="course clearfix bottom" v-for="(course,index) in courseList" :key="index">
       <el-card class="fl" :body-style="{ padding: '0px' }">
         <img :src="course.picture" class="image">
-        <div class="personInfo clearfix ">
+        <div class="personInfo clearfix" @click="goTeacherInfo(course.teacher_id)">
           <img :src="course.head_img" alt="">
           <h5 class="fr">特约讲师：{{course.teacher_name}}</h5>
           <p class="fr">{{course.graduate}}</p>
@@ -396,6 +396,12 @@ export default {
       },
       kidForm: {
         kids: null
+      },
+      nidForm: {
+        nids: null
+      },
+      tidForm:{
+        tids: null
       }
     }
   },
@@ -404,7 +410,7 @@ export default {
     ...mapState('auth', ['token', 'productsNum', 'kid'])
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid','setNid','setTid']),
     selCheckboxChange(item, index) {
       let len = this.productsNum
       if (item.is_checked === false) {
@@ -484,6 +490,8 @@ export default {
       this.isShow = !this.isShow
     },
     selectDetail(index, course, linksix) {
+      this.nidForm.nids = course.id;
+      this.setNid(this.nidForm)
       this.$emit('checkdetail', course.id)
       this.getMore(linksix)
     },
@@ -513,6 +521,13 @@ export default {
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
       this.curriculumcartids.cartid = item.id
+    },
+    goTeacherInfo(id){
+      this.tidForm.tids = id*1;
+      this.setTid(this.tidForm);
+      console.log(typeof this.tidForm.tids);
+      // return false;
+      this.getMore("/home/pages/teacher");
     },
     addShopCart() {
       return new Promise((resolve, reject) => {
@@ -793,7 +808,7 @@ export default {
         height: 35px;
         padding: 0 15px;
         p.price {
-          color: #332a51;
+          color: #ff5f5f;
           padding: 0 0px;
         }
         span {

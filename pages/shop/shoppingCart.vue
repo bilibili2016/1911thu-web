@@ -39,7 +39,7 @@
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
             <span class="person">购买人数：</span>
-            <el-input-number v-model="numForm.number" :step="1" :min="1" :max="6000" class="courseNumberInput"></el-input-number>
+            <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput" @change="changeNumber"></el-input-number>
             <!-- <span class="number clearfix">
                 <i class="fl minus el-icon-minus"  @click="delNumber"></i>
                 <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
@@ -88,16 +88,16 @@
 </template>
 
 <script>
-import { indexOf } from "lodash";
-import { home, auth } from "@/lib/v1_sdk/index";
-import { mapState, mapActions } from "vuex";
-import { checkPhone, checkCode } from "~/lib/util/validatefn";
+import { indexOf } from 'lodash'
+import { home, auth } from '@/lib/v1_sdk/index'
+import { mapState, mapActions } from 'vuex'
+import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
     return {
       isNoMsg: false,
       loding: true,
-      noMsg: require("~/assets/images/noMsg.png"),
+      noMsg: require('~/assets/images/noMsg.png'),
       showInfo: false,
       selectAll: false,
       checked: [],
@@ -105,32 +105,32 @@ export default {
       numForm: {
         number: 1
       },
-      courseList: "",
+      courseList: '',
       restaurants: [
         {
-          value: "11111"
+          value: '11111'
         },
         {
-          value: "22"
+          value: '22'
         },
         {
-          value: "222"
+          value: '222'
         },
         {
-          value: "1"
+          value: '1'
         },
         {
-          value: "111"
+          value: '111'
         }
       ],
       companyInfo: {
-        companyname: "",
-        companyaddress: "",
-        contactperson: "",
-        phones: "",
-        codes: "",
+        companyname: '',
+        companyaddress: '',
+        contactperson: '',
+        phones: '',
+        codes: '',
         types: 6,
-        getCode: "获取验证码",
+        getCode: '获取验证码',
         seconds: 30,
         captchaDisable: true
       },
@@ -138,40 +138,40 @@ export default {
         companyname: [
           {
             required: true,
-            message: "请输入公司名称",
-            trigger: "blur"
+            message: '请输入公司名称',
+            trigger: 'blur'
           }
         ],
         companyaddress: [
           {
             required: true,
-            message: "请填写公司地址",
-            trigger: "blur"
+            message: '请填写公司地址',
+            trigger: 'blur'
           }
         ],
         contactperson: [
           {
             required: true,
-            message: "请填写联系人姓名",
-            trigger: "blur"
+            message: '请填写联系人姓名',
+            trigger: 'blur'
           }
         ],
         phones: [
           {
             required: true,
-            message: "请输入手机号",
-            trigger: "blur"
+            message: '请输入手机号',
+            trigger: 'blur'
           },
           {
             validator: checkPhone,
-            trigger: "blur"
+            trigger: 'blur'
           }
         ],
         codes: [
           {
             required: true,
-            message: "请填写短信验证码",
-            trigger: "blur"
+            message: '请填写短信验证码',
+            trigger: 'blur'
           }
         ]
       },
@@ -184,57 +184,57 @@ export default {
       },
       isRest: true,
       companyForm: {
-        companyname: "1911"
+        companyname: '1911'
       },
       restaurants: [],
       timeout: null
-    };
+    }
   },
   mounted() {
-    document.getElementsByClassName("headerBox")[0].style.display = "inline";
-    document.getElementsByClassName("footerBox")[0].style.display = "inline";
-    this.shopCartList();
-    this.getNum();
-    this.searchCompanyList();
-    this.restaurants = this.loadAll();
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.shopCartList()
+    // this.getNum()
+    this.searchCompanyList()
+    this.restaurants = this.loadAll()
   },
   computed: {
-    ...mapState("auth", ["token", "productsNum"]),
+    ...mapState('auth', ['token', 'productsNum']),
     prices() {
       return (
         Number(this.arraySum) *
         10 *
         (Number(this.numForm.number) * 10) /
         100
-      ).toFixed(2);
+      ).toFixed(2)
     },
     canSubmit() {
-      return this.addArray.curriculumcartid.length > 0;
+      return this.addArray.curriculumcartid.length > 0
     }
   },
   watch: {
     selectAll(val) {
       if (this.isRest) {
-        this.handleSelectAllChange(val);
+        this.handleSelectAllChange(val)
       }
     }
   },
   methods: {
-    ...mapActions("auth", ["setProductsNum"]),
+    ...mapActions('auth', ['setProductsNum']),
     loadAll() {
-      return [];
+      return []
     },
     querySearchAsync(queryString, cb) {
       // console.log(queryString, '查询字符串')
-      var restaurants = this.restaurants;
+      var restaurants = this.restaurants
       var results = queryString
         ? restaurants.filter(this.createStateFilter(queryString))
-        : restaurants;
+        : restaurants
       // console.log(results, '这是查询出来的')
-      clearTimeout(this.timeout);
+      clearTimeout(this.timeout)
       this.timeout = setTimeout(() => {
-        cb(results);
-      }, 3000 * Math.random());
+        cb(results)
+      }, 3000 * Math.random())
     },
     createStateFilter(queryString) {
       return state => {
@@ -242,11 +242,11 @@ export default {
           state.company_name
             .toLowerCase()
             .indexOf(queryString.toLowerCase()) === 0
-        );
-      };
+        )
+      }
     },
     handleSelect(item) {
-      console.log(item);
+      console.log(item)
     },
     //搜索企业 接口
     searchCompanyList() {
@@ -255,96 +255,90 @@ export default {
           for (var i = 0; i < res.data.companyList.length; i++) {
             this.$set(
               res.data.companyList[i],
-              "value",
+              'value',
               res.data.companyList[i].company_name
-            );
+            )
           }
-          this.restaurants = res.data.companyList;
-          resolve(true);
-        });
-      });
+          this.restaurants = res.data.companyList
+          resolve(true)
+        })
+      })
     },
     handleSelect(item) {
-      console.log(item);
+      console.log(item)
     },
     setPatten() {
-      let reg = new RegExp("/^[0-9]*$/");
+      let reg = new RegExp('/^[0-9]*$/')
       if (!reg.test(this.numForm.number)) {
-        let str = this.numForm.number.toString();
-        this.numForm.number = str.replace(this.numForm.number, 1);
+        let str = this.numForm.number.toString()
+        this.numForm.number = str.replace(this.numForm.number, 1)
       }
     },
+    querySearchAsync() {},
     handleSelectAll() {
-      this.isRest = true;
-    },
-    getNum() {
-      return new Promise((resolve, reject) => {
-        home.changeCartNumber(this.numForm).then(res => {
-          this.numForm.number = Number(res.data.cart_number);
-          resolve(true);
-        });
-      });
+      this.isRest = true
     },
     shopCartList() {
-      this.arraySum = 0;
-      this.addArray.curriculumcartid = [];
+      this.arraySum = 0
+      this.addArray.curriculumcartid = []
       return new Promise((resolve, reject) => {
         home.shopCartList().then(response => {
           let body = response.data.curriculumCartList.map(item => {
-            this.addArray.curriculumcartid.push(item.id);
+            this.addArray.curriculumcartid.push(item.id)
             this.arraySum =
               (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-              10;
+              10
             return Object.assign({}, item, {
               checkMsg: true
-            });
-          });
-          this.courseList = body;
-          this.selectAll = true;
-          this.loding = false;
-          this.setProductsNum({
-            pn: this.courseList.length
-          });
+            })
+          })
+          this.courseList = body
+          this.selectAll = true
+          this.loding = false
+          this.numForm.number = response.data.number
+          console.log(this.numForm.number)
+
+          this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
-            this.isNoMsg = true;
-            this.selectAll = false;
+            this.isNoMsg = true
+            this.selectAll = false
           }
-        });
-      });
+        })
+      })
     },
     handleSelectChange(item, index) {
-      let shopIndex = indexOf(this.addArray.curriculumcartid, item.id);
+      let shopIndex = indexOf(this.addArray.curriculumcartid, item.id)
       if (shopIndex >= 0) {
-        this.addArray.curriculumcartid.splice(shopIndex, 1);
+        this.addArray.curriculumcartid.splice(shopIndex, 1)
         this.arraySum =
-          (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10;
+          (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10
       } else {
-        this.addArray.curriculumcartid.push(item.id);
+        this.addArray.curriculumcartid.push(item.id)
         this.arraySum =
-          (Number(this.arraySum) * 10 + Number(item.present_price) * 10) / 10;
+          (Number(this.arraySum) * 10 + Number(item.present_price) * 10) / 10
       }
       if (this.addArray.curriculumcartid.length == this.courseList.length) {
-        this.selectAll = true;
-        this.isRest = true;
+        this.selectAll = true
+        this.isRest = true
       } else {
-        this.selectAll = false;
-        this.isRest = false;
+        this.selectAll = false
+        this.isRest = false
       }
     },
     handleSelectAllChange(val) {
       if (this.courseList && this.courseList.length > 0) {
         this.courseList.forEach(item => {
-          item.checkMsg = val;
-        });
-        this.arraySum = 0;
-        this.addArray.curriculumcartid = [];
+          item.checkMsg = val
+        })
+        this.arraySum = 0
+        this.addArray.curriculumcartid = []
         if (val) {
           this.courseList.forEach(item => {
-            this.addArray.curriculumcartid.push(item.id);
+            this.addArray.curriculumcartid.push(item.id)
             this.arraySum =
               (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-              10;
-          });
+              10
+          })
         }
       }
     },
@@ -358,135 +352,135 @@ export default {
     //   });
     // },
     showCommit() {
-      this.showInfo = true;
+      this.showInfo = true
       // this.$router.push('/shop/checkedCourse');
       return new Promise((resolve, reject) => {
         home.addChecked(this.addArray).then(res => {
           if (res.status == 0) {
-            this.shopCartList();
+            this.shopCartList()
           }
-          resolve(true);
-        });
-      });
+          resolve(true)
+        })
+      })
     },
     close() {
-      this.showInfo = false;
+      this.showInfo = false
     },
     querySearch(queryString, cb) {
-      var restaurants = this.restaurants;
+      var restaurants = this.restaurants
       var results = queryString
         ? restaurants.filter(this.createFilter(queryString))
-        : restaurants;
+        : restaurants
       // 调用 callback 返回建议列表的数据
-      cb(results);
+      cb(results)
     },
     createFilter(queryString) {
       return restaurant => {
         return (
           restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) ===
           0
-        );
-      };
+        )
+      }
     },
     handleSelect(item, index) {},
     addNumber() {
-      this.numForm.number = this.numForm.number + 1;
-      this.changeCartNumber();
+      this.numForm.number = this.numForm.number + 1
+      this.changeCartNumber()
     },
     changeCartNumber() {
       return new Promise((resolve, reject) => {
         home.changeCartNumber(this.numForm).then(res => {
-          resolve(true);
-        });
-      });
+          resolve(true)
+        })
+      })
     },
     delNumber() {
       if (this.numForm.number > 1) {
-        this.numForm.number = this.numForm.number - 1;
+        this.numForm.number = this.numForm.number - 1
       } else {
-        this.numForm.number = Number(1);
+        this.numForm.number = Number(1)
       }
-      this.changeCartNumber();
+      this.changeCartNumber()
     },
     changeNumber() {
-      if (typeof this.number !== "number" || this.number < 1) {
-        this.number = 1;
+      if (typeof this.number !== 'number' || this.number < 1) {
+        this.number = 1
       }
-      this.changeCartNumber();
+      this.changeCartNumber()
     },
     addPaySubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addPaySubmit(this.companyInfo).then(response => {
-              if (response.status === "1000100") {
+              if (response.status === '100100') {
                 this.$message({
-                  type: "error",
+                  type: 'error',
                   message: response.msg
-                });
-              } else {
-                this.$router.push("/shop/checkedCourse");
+                })
+              } else if (response.status === 0) {
+                this.$router.push('/shop/checkedCourse')
               }
-              this.showInfo = false;
-              resolve(true);
-            });
-          });
+              this.showInfo = false
+              resolve(true)
+            })
+          })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
     handleDelete(item, index) {
-      this.curriculumcartids.cartid = item.id;
-      this.loding = true;
+      this.curriculumcartids.cartid = item.id
+      this.loding = true
       return new Promise((resolve, reject) => {
         home.delShopCart(this.curriculumcartids).then(response => {
           this.$message({
-            type: "success",
-            message: "删除成功"
-          });
+            type: 'success',
+            message: '删除成功'
+          })
           // this.handleSelectChange(item, index);
           // this.courseList.splice(index, 1);
-          this.shopCartList();
-          this.getNum();
-          this.loding = false;
-        });
-      });
+          this.shopCartList()
+          // this.getNum()
+          this.loding = false
+        })
+      })
     },
     async handleGetCode() {
       if (this.companyInfo.phones) {
         if (this.companyInfo.captchaDisable === true) {
           return new Promise((resolve, reject) => {
             auth.smsCodes(this.companyInfo).then(response => {
-              console.log("resp-------", response);
+              console.log('resp-------', response)
               this.$message({
-                type: response.status === 0 ? "success" : "error",
+                type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
-              });
-              this.companyInfo.captchaDisable = false;
+              })
+              this.companyInfo.captchaDisable = false
               this.companyInfo.getCode =
-                this.companyInfo.seconds + "秒后重新发送";
+                this.companyInfo.seconds + '秒后重新发送'
               let interval = setInterval(() => {
                 if (this.companyInfo.seconds <= 0) {
-                  this.companyInfo.getCode = "获取验证码";
-                  this.companyInfo.seconds = 60;
-                  this.companyInfo.captchaDisable = true;
-                  clearInterval(interval);
+                  this.companyInfo.getCode = '获取验证码'
+                  this.companyInfo.seconds = 60
+                  this.companyInfo.captchaDisable = true
+                  clearInterval(interval)
                 } else {
                   this.companyInfo.getCode =
-                    --this.companyInfo.seconds + "秒后重新发送";
+                    --this.companyInfo.seconds + '秒后重新发送'
                 }
-              }, 1000);
-            });
-          });
+              }, 1000)
+            })
+          })
         }
       } else {
         this.$message({
-          type: "error",
-          message: "请填写手机号"
-        });
+          type: 'error',
+          message: '请填写手机号'
+        })
       }
     }
   }
-};
+}
 </script>

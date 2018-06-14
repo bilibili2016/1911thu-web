@@ -556,7 +556,7 @@ export default {
       this.close()
     },
     goMycourse(tab) {
-      this.$router.push({path:'/profile',query:{tab:tab}})
+      this.$router.push({ path: '/profile', query: { tab: tab } })
     },
     goLinks() {
       this.$router.push('/shop/shoppingCart')
