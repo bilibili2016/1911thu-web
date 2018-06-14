@@ -3,7 +3,7 @@
     <v-search @Search="handleSearchs"></v-search>
     <div class="center">
       <div class="cnums">
-        共找到{{courseNumber}}门“冲突管理”相关课程
+        共找到 {{courseNumber}} 门“ {{searchForm.searchword}} ”相关课程
       </div>
       <div v-if="result">
         <v-card :data="searchData" :config="config" v-loading="loading" element-loading-text="拼命加载中" element-loading-background="rgba(0, 0, 0, 0.8)"></v-card>
@@ -18,10 +18,12 @@
         <div class="doYouLike">
           <div class="clearfix title">
             <p class="fl">猜你喜欢</p>
-            <p class="fr"><i class="el-icon-refresh"></i>换一批</p>
+            <p class="fr" @click="getLikeList">
+              <i class="el-icon-refresh"></i>换一批</p>
           </div>
           <!--猜你喜欢 card组件 -->
-          <v-card :data="getData" :config="config" v-loading="loading" element-loading-text="拼命加载中" element-loading-background="rgba(0, 0, 0, 0.8)"></v-card>
+          <!-- <v-card :data="getData" :config="config"></v-card> -->
+          <v-card :data="getData" :config="config" v-loading="loadinged" element-loading-text="拼命加载中" element-loading-background="rgba(255, 255, 255, 0.8)"></v-card>
         </div>
       </div>
     </div>
@@ -56,7 +58,7 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 1,
+        pageSize: 1,
         total: null
       },
       searchForm: {
@@ -67,17 +69,17 @@ export default {
         sortby: 2
       },
       getLikeForm: {
-        pages: 0,
-        limits: 2,
+        limits: 4
       },
       loading: false,
+      loadinged: true,
       result: true,
       courseNumber: 0
     }
   },
   methods: {
     handleSearchs(val) {
-      this.searchForm.searchword = val
+      this.searchForm.searchword = persistStore.get('key')
       this.loading = true
       this.searchCurriculumList()
     },
@@ -88,6 +90,8 @@ export default {
           this.pagemsg.total = response.data.pageCount
           if (response.data.curriculumList.length === 0) {
             this.result = false
+            this.courseNumber = 0
+            this.getLikeList()
           } else {
             this.result = true
             this.pagemsg.total = response.data.curriculumList.length
@@ -99,19 +103,21 @@ export default {
       })
     },
     // 获取猜你喜欢列表
-    getLikeList(){
+    getLikeList() {
       return new Promise((resolve, reject) => {
         home.getLikeList(this.getLikeForm).then(response => {
-          
-          
+          this.getData = response.data.curriculumList
+          if (this.getData !== 0) {
+            this.loadinged = false
+          }
         })
       })
     }
-
   },
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.handleSearchs()
   }
 }
 </script>

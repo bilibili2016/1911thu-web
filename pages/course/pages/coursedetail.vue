@@ -151,8 +151,8 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapGetters("auth", ["isAuthenticated"]),
-    ...mapState("auth", ["kid"])
+    ...mapGetters('auth', ['isAuthenticated']),
+    ...mapState('auth', ['kid'])
   },
   components: {
     'v-card': CustomCard,
@@ -260,7 +260,7 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          console.log(response)
+          // console.log(response)
           this.btnData = response.data.evaluateTags
         })
       })
@@ -273,7 +273,7 @@ export default {
       this.addEvaluateForm.tags = '内容精彩,内容生涩'
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
-          console.log(response, '这是response')
+          // console.log(response, '这是response')
           if (response.status === '100100') {
             this.$message({
               type: 'warning',
@@ -330,13 +330,13 @@ export default {
     },
     // 判断是收藏还是未收藏
     collection() {
-      if(this.isAuthenticated){
+      if (this.isAuthenticated) {
         if (this.collectMsg === 1) {
-          this.deleteCollection();
-          this.collectMsg = 2;
+          this.deleteCollection()
+          this.collectMsg = 2
         } else {
-          this.addCollection();
-          this.collectMsg = 1;
+          this.addCollection()
+          this.collectMsg = 1
         }
       } else {
         this.$bus.$emit('loginShow', true)

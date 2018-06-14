@@ -33,7 +33,7 @@
     <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
       <div v-show="mediaRInner" class="inner">
         <h5 class="title">{{player.title}}</h5>
-        <div class="teacher clearfix">
+        <div class="teacher clearfix" @click="goTeacher(player.teacher_id)">
           <img class="fl" :src="player.head_img" alt="">
           <p class="fl">{{player.teacher_name}}</p>
           <p class="fl">{{player.graduate}}</p>
@@ -93,7 +93,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapState('auth', ['kid'])
+    ...mapState('auth', ['kid', 'tid'])
   },
   data() {
     return {
@@ -177,6 +177,9 @@ export default {
       playerDetailForm: {
         curriculumId: ''
       },
+      tidForm: {
+        tids: null
+      },
       addEvaluateForm: {
         ids: null,
         evaluatecontent: null,
@@ -197,7 +200,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg']),
+    ...mapActions('auth', ['setHsg', 'setTid']),
     selTypeChange(index) {
       this.radioBtn = index
     },
@@ -241,9 +244,14 @@ export default {
     goLink() {
       this.$router.back(-1)
     },
+    goTeacher(teacherID) {
+      this.tidForm.tids = teacherID * 1
+      this.setTid(this.tidForm)
+      this.$router.push('/home/pages/teacher')
+    },
     getPlayerInfo() {
       this.player = TCPlayer('movd', this.tcplayer)
-      console.log(this.player.currentTime())
+      // console.log(this.player.currentTime())
 
       if (this.$refs.playInner.children[0]) {
         this.player.dispose()
@@ -372,7 +380,7 @@ export default {
 
     players() {
       let playerTime = this.player.currentTime()
-      console.log(playerTime)
+      // console.log(playerTime)
       return playerTime
     }
   },
