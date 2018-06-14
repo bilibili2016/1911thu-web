@@ -50,6 +50,8 @@
             <el-button @click="showCommit">提交</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
+          <span class="checkedNUmber fr">已选择
+            <i>{{this.addArray.curriculumcartid.length}}</i> 门课程</span>
         </div>
       </div>
     </div>
@@ -270,9 +272,7 @@ export default {
         this.numForm.number = str.replace(this.numForm.number, 1)
       }
     },
-    querySearchAsync(){
-
-    },
+    querySearchAsync() {},
     handleSelectAll() {
       this.isRest = true
     },
@@ -293,9 +293,9 @@ export default {
           this.courseList = body
           this.selectAll = true
           this.loding = false
-          this.numForm.number = response.data.number;
+          this.numForm.number = response.data.number
           // console.log(this.numForm.number);
-          
+
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
@@ -416,7 +416,7 @@ export default {
                   type: 'error',
                   message: response.msg
                 })
-              } else if(response.status === 0){
+              } else if (response.status === 0) {
                 this.$router.push('/shop/checkedCourse')
               }
               this.showInfo = false
