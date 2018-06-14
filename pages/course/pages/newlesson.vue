@@ -3,7 +3,7 @@
     <div class="topImg">
       <img :src="atopImg" alt="">
     </div>
-    <v-card :courseList="courseList" :config="config" :linkdata="linkdata"></v-card>
+    <v-card :courseList="courseList" :config="config" linkdata="coursedetail"></v-card>
     <div class="card-button">
       <el-button type="primary" @click='getMoreData()'>查看更多</el-button>
     </div>
@@ -23,7 +23,6 @@ export default {
   data() {
     return {
       atopImg: require('@/assets/images/banner2.png'),
-      linkdata: 'coursedetail',
       config: {
         card_type: 'goodlesson'
       },
@@ -32,7 +31,7 @@ export default {
         pages: 0,
         limits: 5,
         evaluateLimit: 4,
-        isevaluate: 1,
+        isevaluate: 1
       }
     }
   },
@@ -47,8 +46,7 @@ export default {
       })
     },
     getMoreData() {
-      this.newsCurriculumForm.limits = this.newsCurriculumForm.limits + 1;
-      console.log(this.newsCurriculumForm);
+      this.newsCurriculumForm.limits = this.newsCurriculumForm.limits + 1
       this.getNewCourseList()
     }
   },

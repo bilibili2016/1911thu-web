@@ -13,71 +13,71 @@
       </div>
     </template>
     <!-- profile个人信息模板 新上好课模板-->
-<template v-if="config.card_type === 'profile'">
-  <div class="card-category profile">
-    <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-      <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid2(card,index)">
-        <div class="new-style" v-if="config.new === 'true'">
-          <img :src="newTag" alt="">
-        </div>
-        <div class="mask-style" @click="goLink('course/pages/coursedetail')">
-          <!-- <img :src="jinImg" alt="" class="jin-style"> -->
-        </div>
-        <div class="bgImgs">
-          <img :src="card.picture" alt="">
-        </div>
-        <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
-        <div class="tag">
-          <span>新闻宣传</span>
-          <span>时政</span>
-        </div>
-        <div v-if="config.card === 'home'"></div>
-        <div class="common-button btn-bgs " v-else>
-          <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
-        </div>
-        <el-row>
-          <!-- 名字 -->
-          <div class="item">
-            <p class="itemBox-name">
-              <span>{{card.title}}</span>
-            </p>
-            <p class="itemBox-info">
-              <span v-if="config.card === 'home'">
-                {{card.curriculum_time}}课时
-              </span>
-              <span class="itemBox-num" v-if="config.card === 'home'">
-                <img :src="numSrc" alt="">
-                <span>{{card.study_number}}</span>
-                <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
-              </span>
-            </p>
-          </div>
-          <!-- 作者和头衔    金额 -->
-          <div class="line-wrap" v-if="config.card === 'home'">
-            <div class="line-center">
-              <p class="price">￥{{card.present_price}}</p>
+    <template v-if="config.card_type === 'profile'">
+      <div class="card-category profile">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
+          <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid2(card,index)">
+            <div class="new-style" v-if="config.new === 'true'">
+              <img :src="newTag" alt="">
             </div>
-          </div>
-          <!-- 学习进度 -->
-          <div class="line-wraps" v-if="config.card === 'learning'">
-            <div class="line-centers">
-              <p>已学习100%</p>
-              <el-progress :percentage="50"></el-progress>
+            <div class="mask-style" @click="goLink('course/pages/coursedetail')">
+              <!-- <img :src="jinImg" alt="" class="jin-style"> -->
             </div>
-          </div>
-          <div v-if="config.card === 'already'">
-            <div class="line-centers">
-              <div>已学习100%</div>
+            <div class="bgImgs">
+              <img :src="card.picture" alt="">
             </div>
-          </div>
-          <div class="readyImg" v-if="config.card === 'already'">
-            <img :src="readyImg" alt="">
-          </div>
-        </el-row>
-      </el-card>
-    </div>
-  </div>
-</template>
+            <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
+            <div class="tag">
+              <span>新闻宣传</span>
+              <span>时政</span>
+            </div>
+            <div v-if="config.card === 'home'"></div>
+            <div class="common-button btn-bgs " v-else>
+              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+            </div>
+            <el-row>
+              <!-- 名字 -->
+              <div class="item">
+                <p class="itemBox-name">
+                  <span>{{card.title}}</span>
+                </p>
+                <p class="itemBox-info">
+                  <span v-if="config.card === 'home'">
+                    {{card.curriculum_time}}课时
+                  </span>
+                  <span class="itemBox-num" v-if="config.card === 'home'">
+                    <img :src="numSrc" alt="">
+                    <span>{{card.study_number}}</span>
+                    <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                  </span>
+                </p>
+              </div>
+              <!-- 作者和头衔    金额 -->
+              <div class="line-wrap" v-if="config.card === 'home'">
+                <div class="line-center">
+                  <p class="price">￥{{card.present_price}}</p>
+                </div>
+              </div>
+              <!-- 学习进度 -->
+              <div class="line-wraps" v-if="config.card === 'learning'">
+                <div class="line-centers">
+                  <p>已学习100%</p>
+                  <el-progress :percentage="50"></el-progress>
+                </div>
+              </div>
+              <div v-if="config.card === 'already'">
+                <div class="line-centers">
+                  <div>已学习100%</div>
+                </div>
+              </div>
+              <div class="readyImg" v-if="config.card === 'already'">
+                <img :src="readyImg" alt="">
+              </div>
+            </el-row>
+          </el-card>
+        </div>
+      </div>
+    </template>
     <!-- 我的收藏 -->
         <!-- profile个人信息模板 新上好课模板-->
 <template v-if="config.card_type === 'shoucang'">
@@ -215,7 +215,7 @@
       </el-card>
       <div class="particulars fr">
         <div class="currentclum">
-          <h4>{{course.title}}</h4>
+          <h4 @click="goTeacherInfo(course.teacher_id)">{{course.title}}</h4>
           <p>{{course.introduction}}</p>
         </div>
         <el-carousel trigger="click" height="120px">
@@ -400,7 +400,7 @@ export default {
       nidForm: {
         nids: null
       },
-      tidForm:{
+      tidForm: {
         tids: null
       }
     }
@@ -410,7 +410,7 @@ export default {
     ...mapState('auth', ['token', 'productsNum', 'kid'])
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid','setNid','setTid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     selCheckboxChange(item, index) {
       let len = this.productsNum
       if (item.is_checked === false) {
@@ -490,7 +490,7 @@ export default {
       this.isShow = !this.isShow
     },
     selectDetail(index, course, linksix) {
-      this.nidForm.nids = course.id;
+      this.nidForm.nids = course.id
       this.setNid(this.nidForm)
       this.$emit('checkdetail', course.id)
       this.getMore(linksix)
@@ -522,12 +522,12 @@ export default {
       this.setKid(this.kidForm)
       this.curriculumcartids.cartid = item.id
     },
-    goTeacherInfo(id){
-      this.tidForm.tids = id*1;
-      this.setTid(this.tidForm);
-      console.log(typeof this.tidForm.tids);
+    goTeacherInfo(id) {
+      this.tidForm.tids = id * 1
+      this.setTid(this.tidForm)
+      console.log(typeof this.tidForm.tids)
       // return false;
-      this.getMore("/home/pages/teacher");
+      this.getMore('/home/pages/teacher')
     },
     addShopCart() {
       return new Promise((resolve, reject) => {
