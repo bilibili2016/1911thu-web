@@ -24,7 +24,7 @@
         </div>
         <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingCart')">
           <span class="cartIcon"></span>
-          <i>{{productsNum}}</i>
+          <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
