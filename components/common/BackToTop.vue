@@ -93,12 +93,11 @@ export default {
     },
     checkCourse() {
       if (this.isAuthenticated) {
-        this.setIsShowTip({
-          isShowTips: true
-        })
         this.goLink('/course/pages/categoryd')
+        this.showNotLogin = false
       } else {
         this.notLogin = true
+        this.showNotLogin = true
       }
     },
     backToTop() {
