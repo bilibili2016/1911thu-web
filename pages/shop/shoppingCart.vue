@@ -294,7 +294,7 @@ export default {
           this.selectAll = true
           this.loding = false
           this.numForm.number = response.data.number;
-          console.log(this.numForm.number);
+          // console.log(this.numForm.number);
           
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {

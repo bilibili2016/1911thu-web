@@ -37,6 +37,10 @@ import { store as persistStore } from "~/lib/core/store";
 
       },
       search () {
+        var searchWord = this.searchMsg.replace(/\s+/g,"");
+        console.log(searchWord);
+        console.log(this.searchMsg);
+        
         this.$emit('Search', this.searchMsg)
       },
       selectItem (val) {

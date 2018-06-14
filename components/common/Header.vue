@@ -208,27 +208,6 @@ export default {
         isget: '',
         WXverify: false
       },
-<<<<<<< HEAD
-      // 注册 请求
-      signUp(formName) {
-        this.$refs[formName].validate(valid => {
-          if (valid) {
-            console.log("--=-=-==-=--=-=-");
-            return false;
-            return new Promise((resolve, reject) => {
-              auth.signUp(this.registerData).then(response => {
-                this.$message({
-                  type: response.status === 0 ? "success" : "error",
-                  message: response.msg
-                });
-                if (response.status === 0) {
-                  this.close();
-                }
-              });
-            });
-          } else {
-            return false;
-=======
       // 登录数据
       loginData: {
         password: '',
@@ -257,7 +236,6 @@ export default {
           {
             validator: checkPhone,
             trigger: 'blur'
->>>>>>> master
           }
         ],
         passwords: [
@@ -508,97 +486,6 @@ export default {
         } else {
           return false
         }
-<<<<<<< HEAD
-      },
-      close() {
-        this.move();
-        this.start = false;
-        this.lrFrame = false;
-        this.bgMsg = false;
-        this.emptyForm();
-        clearInterval(this.getwxtime);
-      },
-      closeWechat() {
-        this.move();
-        this.start = false;
-        this.lrFrame = false;
-        this.wechatLogin = false;
-        this.scanCodeShow = false;
-        this.bindTelShow = false;
-        clearInterval(this.getwxtime);
-        this.emptyWechatForm();
-        // document.body.style.overflow = "auto";
-      },
-      emptyForm() {
-        this.loginData.phonenum = "";
-        this.loginData.password = "";
-        this.loginData.pwdType = "password";
-        this.loginData.loginTypes = 1;
-        this.registerData.phones = "";
-        this.registerData.passwords = "";
-        this.registerData.types = 1;
-        this.registerData.codes = "";
-        this.registerData.checked = [false];
-        this.registerData.companyCodes = "";
-      },
-      emptyWechatForm(){
-        this.bindTelData.phones ="",
-        this.bindTelData.codes ="",
-        this.bindTelData.seconds =30,
-        this.bindTelData.openid =null,
-        this.bindTelData.companyCodes ="",
-        this.bindTelData.captchaDisable =false,
-        this.bindTelData.exist =false,
-        this.bindTelData.checked =false
-      },
-      handleClick(tab, event) {
-        this.emptyForm();
-      },
-      wechatLogined() {
-        //微信登录
-        this.lrFrame = false;
-        this.wechatLogin = true;
-        this.scanCodeShow = true; //微信扫码
-        //this.bindTelShow=true; //绑定手机号
-        // this.bindSuccessShow=true; // 登录成功
-        this.wxLogin();
-      },
-      polling() { //轮询请求 微信扫码结果
-      },
-      stop() {
-        var mo = function(e) {
-          e.preventDefault();
-        };
-        document.body.style.overflow = "hidden";
-        document.addEventListener("touchmove", mo, false); //禁止页面滑动
-      },
-      /***取消滑动限制***/
-      move() {
-        var mo = function(e) {
-          e.preventDefault();
-        };
-        document.body.style.overflow = "auto"; //出现滚动条
-        document.removeEventListener("touchmove", mo, false);
-      },
-      goSearch(item) {
-        if(this.search !== ""){
-          this.$emit('Search', this.search)
-          // persistStore.set("key", this.search);
-          // switch (window.location.pathname) {
-          //   case "/course/pages/search":
-          //     break;
-          //   default:
-          //     this.$router.push("/course/pages/search");
-          //     break;
-          // }
-        }
-      },
-      gokey() {
-        if (event.keyCode == 13) {
-          if(this.search !== ""){
-            persistStore.set("key", this.search);
-            this.$router.push("/course/pages/search");
-=======
       })
       this.move()
     },
@@ -658,7 +545,6 @@ export default {
               type: 'error',
               message: response.msg
             })
->>>>>>> master
           }
         })
       })
