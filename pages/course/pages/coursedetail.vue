@@ -59,7 +59,7 @@
           </div>
         </div>
         <!-- 评价 -->
-        <div class="evaluate-tag">
+        <div class="evaluate-tag" v-show="courseList.is_study">
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
@@ -71,13 +71,12 @@
             <div class="bthgrop">
               <!-- borderIndex === index ? true : false -->
               <span>
-                <el-button plain v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: borderIndex === index ? true : false }">
-                  <!-- <span :class="{borderColor: borderIndex === index ? true : false }"> -->
+                <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: borderIndex === index ? true : false }" class="detail-btngrounp">
                   {{item}}
-                  <!-- {{item}}{{borderIndex === index ? true : false}} -->
-                  <!-- </span> -->
-
-                </el-button>
+                </div>
+                <!-- <el-button plain v-for="(item,index) in btnDatas" :class="{borderColor: borderIndex === index ? true : false }">
+                  {{item}}
+                </el-button> -->
               </span>
 
             </div>
@@ -89,7 +88,7 @@
               <el-button type="primary" @click="addEvaluate()">提交</el-button>
             </div>
             <!-- 弹窗 -->
-            <el-dialog title="报告问题" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+            <el-dialog title="课程评价" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
               <div v-loading="loadMsg">
                 <div v-for="(item,index) in commentator" :key="index" class="dialog-line">
                   <div class="commentator clearfix">
@@ -105,7 +104,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pagination">
+              <div class="pagination course-style">
                 <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
               </div>
             </el-dialog>
@@ -118,15 +117,12 @@
           </h4>
           <div v-loading="loadMsg">
             <div class="score">
-
+              <!-- {{}} -->
               <span class="fl">{{evaluate.score}}</span>
               <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
               <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
             </div>
-            <!-- <div>
-              {{evaluate}}
-            </div> -->
-            <div class="commentator clearfix" v-for="(item,index) in commentator" :key="index">
+            <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index">
               <img class="fl" :src="item.head_img" alt="">
               <div class="fl">
                 <p style="margin-top:5px;">{{item.nick_name}}</p>
@@ -184,6 +180,7 @@ export default {
         praise: '99%'
       },
       commentator: [],
+      commentators: [],
       config: {
         card_type: 'goodplay'
       },
@@ -193,7 +190,7 @@ export default {
       },
       evaluateListForm: {
         pages: 1,
-        limits: 2,
+        limits: 3,
         ids: '',
         types: 1,
         isRecommend: 2
@@ -210,9 +207,10 @@ export default {
       pagemsg: {
         page: 1,
         pagesize: 2,
-        total: null
+        total: 5
       },
       btnData: [],
+      btnDatas: [],
       borderIndex: 0,
       addEvaluateForm: {
         ids: '',
@@ -230,6 +228,7 @@ export default {
     handleClick() {},
     submit() {
       this.$message({
+        showClose: true,
         type: 'success',
         message: '提交评价成功'
       })
@@ -243,10 +242,11 @@ export default {
       this.loadMsg = true
       this.pagemsg.page = val
       this.evaluateListForm.pages = val
-      this.evaluateListForm.limits = 2
+      this.evaluateListForm.limits = 3
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
+          // console.log(response, 'response')
           this.loadMsg = false
           this.pagemsg.total = response.data.length
           this.commentator = response.data.evaluateList
@@ -263,6 +263,7 @@ export default {
         home.getEvaluateTags().then(response => {
           // console.log(response)
           this.btnData = response.data.evaluateTags
+          this.btnDatas = response.data.evaluateTags
         })
       })
     },
@@ -278,11 +279,13 @@ export default {
             // console.log(response, '这是response')
             if (response.status === '100100') {
               this.$message({
+                showClose: true,
                 type: 'warning',
                 message: response.msg
               })
             } else {
               this.$message({
+                showClose: true,
                 type: 'success',
                 message: response.msg
               })
@@ -291,6 +294,7 @@ export default {
         })
       } else {
         this.$message({
+          showClose: true,
           type: 'warning',
           message: '您还没有观看过此课程，请先去观看吧！'
         })
@@ -317,9 +321,10 @@ export default {
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
+          // console.log(response, '获取评价')
           this.loadMsg = false
           this.pagemsg.total = response.data.length
-          this.commentator = response.data.evaluateList
+          this.commentators = response.data.evaluateList
         })
       })
     },
@@ -332,8 +337,6 @@ export default {
             for (let i of item.childList) {
               i.second = i.video_time
               i.video_time = Math.round(i.video_time / 60)
-
-              // console.log(i, '123')
             }
           }
         })
@@ -359,6 +362,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.addCollection(this.addCollectionForm).then(response => {
           this.$message({
+            showClose: true,
             type: 'success',
             message: '添加收藏成功'
           })
@@ -373,6 +377,7 @@ export default {
         home.deleteCollection(this.addCollectionForm).then(response => {
           // this.collectMsg = response.data.curriculumDetail.is_collection
           this.$message({
+            showClose: true,
             type: 'success',
             message: '取消收藏成功'
           })
@@ -415,8 +420,26 @@ export default {
   margin-top: 50px;
 }
 .borderColor {
-  .el-button {
-    border-color: red !important;
-  }
+  border-color: #6417a6 !important;
+}
+.course-style {
+  margin-top: 100px;
+}
+.detail-btngrounp {
+  float: left;
+  padding: 6px 11px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin: 10px 7px 0px 0px;
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #dcdfe6;
+  border-color: #dcdfe6;
+  color: #606266;
 }
 </style>

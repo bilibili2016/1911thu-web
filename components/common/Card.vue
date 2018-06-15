@@ -38,7 +38,7 @@
             <el-row>
               <!-- 名字 -->
               <div class="item">
-                <p class="itemBox-name">
+                <p class="itemBox-name" @click="goLink('course/pages/coursedetail')">
                   <span>{{card.title}}</span>
                 </p>
                 <p class="itemBox-info">

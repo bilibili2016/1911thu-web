@@ -74,7 +74,11 @@ export default {
           for (let item of response.data.curriculumPayApply) {
             item.create_time = this.timestampToTime(item.create_time)
           }
-          let noData = this.curriculumPayData.length < 0
+          // console.log(this.curriculumPayData.length, '123')
+          if (this.curriculumPayData.length === 0) {
+            this.noData = true
+          }
+          // let noData = this.curriculumPayData.length = 0
           this.loding = false
           resolve(true)
         })

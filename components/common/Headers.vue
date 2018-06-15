@@ -304,6 +304,7 @@
         return new Promise((resolve, reject) => {
           auth.smsCodes(this.registerData).then(response => {
             this.$message({
+              showClose: true,
               type: response.status === '1' ? 'success' : 'error',
               message: response.msg
             })
@@ -317,6 +318,7 @@
             return new Promise((resolve, reject) => {
               auth.signUp(this.registerData).then(response => {
                 this.$message({
+                  showClose: true,
                   type: response.status === '1' ? 'success' : 'error',
                   message: response.msg
                 })

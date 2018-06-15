@@ -107,6 +107,15 @@
           margin-right: 10px;
           margin-top: -3px;
         }
+        i {
+          display: inline-block;
+          height: 95px;
+          overflow: hidden;
+          width: 400px;
+          vertical-align: middle;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
       }
     }
   }

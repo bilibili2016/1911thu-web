@@ -88,6 +88,12 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
+    var validatePhone = (rule, value, callback) => {
+      if (!/^[A-Za-z0-9]+$/.test(value)) {
+        callback(new Error('密码只能输入数字、字母'))
+      }
+      return callback()
+    }
     return {
       courseList: [
         {
@@ -199,6 +205,7 @@ export default {
         if (valid) {
           if (!this.company.userID) {
             this.$message({
+              showClose: true,
               type: 'error',
               message: '您还没有登录，请先登录后再提交吧！'
             })
@@ -208,12 +215,14 @@ export default {
             home.addCompany(this.company).then(response => {
               if (response.status === 0) {
                 this.$message({
+                  showClose: true,
                   type: 'success',
                   message: '企业信息提交成功'
                 })
                 this.$router.push('/')
               } else {
                 this.$message({
+                  showClose: true,
                   type: 'error',
                   message: response.msg
                 })
@@ -227,8 +236,12 @@ export default {
     querySearch(queryString, cb) {},
     // 获取验证码 this.registerData
     async handleGetCode(data) {
-      if (this.company.phones === '') {
+      if (
+        this.company.phones === '' ||
+        !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.company.phones)
+      ) {
         this.$message({
+          showClose: true,
           type: 'error',
           message: '请填写正确的手机号'
         })
@@ -240,6 +253,7 @@ export default {
         return new Promise((resolve, reject) => {
           auth.smsCodes(this.company).then(response => {
             this.$message({
+              showClose: true,
               type: response.status === 0 ? 'success' : 'error',
               message: response.msg
             })

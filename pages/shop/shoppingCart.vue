@@ -13,9 +13,9 @@
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">
-              <img class="fl" :src="course.picture">
+              <img class="fl" :src="course.picture" @click="goDetail(course.id)">
               <div class="fl">
-                <h4>{{course.title}}</h4>
+                <h4 @click="goDetail(course.id)">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
                 <p>讲师：{{course.teacher}}</p>
               </div>
@@ -48,7 +48,7 @@
           </span>
           <span class="commitOrder fr">
             <el-button class="notGray" @click="showCommit" v-if="canSubmit">提交</el-button>
-            <el-button class="isGray" v-else>提交</el-button>
+            <el-button class="isGray" v-else @click="showMsg">提交</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
@@ -203,16 +203,18 @@ export default {
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
     prices() {
-      return (
+      let p = (
         Number(this.arraySum) *
         10 *
         (Number(this.numForm.number) * 10) /
         100
       ).toFixed(2)
+      return Math.abs(p)
     },
     canSubmit() {
       if (this.addArray.curriculumcartid.length <= 0) {
         this.$message({
+          showClose: true,
           message: '请您选择课程哦'
         })
       }
@@ -221,15 +223,34 @@ export default {
   },
   watch: {
     selectAll(val) {
+      if (!val) {
+        this.$message({
+          message: '请您先选择课程哦',
+          duration: 1000
+        })
+      }
       if (this.isRest) {
         this.handleSelectAllChange(val)
       }
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum']),
+    ...mapActions('auth', ['setProductsNum', 'setKid']),
+    goDetail(id) {
+      let kidForm = {
+        kids: id
+      }
+      this.setKid(kidForm)
+      this.$router.push('/course/pages/coursedetail')
+    },
     loadAll() {
       return []
+    },
+    showMsg() {
+      this.$message({
+        message: '请您先选择课程哦',
+        duration: 1000
+      })
     },
     querySearchAsync(queryString, cb) {
       // console.log(queryString, '查询字符串')
@@ -304,7 +325,6 @@ export default {
           this.loding = false
           this.numForm.number = response.data.number
           // console.log(this.numForm.number);
-
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
@@ -422,10 +442,12 @@ export default {
             home.addPaySubmit(this.companyInfo).then(response => {
               if (response.status === '100100') {
                 this.$message({
+                  showClose: true,
                   type: 'error',
                   message: response.msg
                 })
               } else if (response.status === 0) {
+                this.$bus.$emit('updateCount')
                 this.$router.push('/shop/checkedCourse')
               }
               this.showInfo = false
@@ -443,6 +465,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.delShopCart(this.curriculumcartids).then(response => {
           this.$message({
+            showClose: true,
             type: 'success',
             message: '删除成功'
           })
@@ -461,6 +484,7 @@ export default {
             auth.smsCodes(this.companyInfo).then(response => {
               // console.log('resp-------', response)
               this.$message({
+                showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
@@ -470,7 +494,7 @@ export default {
               let interval = setInterval(() => {
                 if (this.companyInfo.seconds <= 0) {
                   this.companyInfo.getCode = '获取验证码'
-                  this.companyInfo.seconds = 60
+                  this.companyInfo.seconds = 30
                   this.companyInfo.captchaDisable = true
                   clearInterval(interval)
                 } else {
@@ -483,6 +507,7 @@ export default {
         }
       } else {
         this.$message({
+          showClose: true,
           type: 'error',
           message: '请填写手机号'
         })

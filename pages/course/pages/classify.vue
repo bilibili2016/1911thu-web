@@ -7,13 +7,17 @@
             <el-tabs v-model="activeName" @tab-click="handleClick">
               <!-- <el-tab-pane label="全部" name="first"></el-tab-pane> -->
               <!-- <el-tab-pane label="全部" name="first"></el-tab-pane> -->
-              <el-tab-pane label="最新" name="first"></el-tab-pane>
-              <el-tab-pane label="最热" name="second"></el-tab-pane>
+              <el-tab-pane label="全部" name="first"></el-tab-pane>
+              <el-tab-pane label="最新" name="second"></el-tab-pane>
+              <el-tab-pane label="最热" name="third"></el-tab-pane>
             </el-tabs>
           </div>
           <div class="fr rightPages">
-            <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
-            </el-switch>隐藏已参加课程
+            <span v-show="hideSwitch">
+              <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#999" @change="hideCourse">
+              </el-switch>隐藏已参加课程
+            </span>
+
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
           </div>
         </div>
@@ -38,6 +42,7 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import CustomHots from '@/components/common/Hot.vue'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import CustomPagination from '@/components/common/Pagination.vue'
 import { home } from '~/lib/v1_sdk/index'
 export default {
@@ -49,7 +54,8 @@ export default {
   data() {
     return {
       checked: true,
-      onOff: true,
+      onOff: false,
+      hideSwitch: false,
       cardlink: 'coursedetail',
       classList: [
         '干部通用',
@@ -75,21 +81,27 @@ export default {
         limits: 100,
         categoryId: null,
         evaluateLimit: null,
-        sortBy: null
+        sortBy: null,
+        onOff: 0
       },
       activeName: null
     }
   },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
+  },
   methods: {
     bind(id, index) {
-      // $('.classList ul li').removeClass('checked')
-      // $('.classList ul li')
-      //   .eq(id)
-      //   .addClass('checked')
-      // console.log(index * 1)
-
       this.checkedLi = index
       this.newsCurriculumForm.categoryId = id
+      this.recommendCurriculumList()
+    },
+    hideCourse() {
+      if (this.onOff) {
+        this.newsCurriculumForm.onOff = 1
+      } else {
+        this.newsCurriculumForm.onOff = 0
+      }
       this.recommendCurriculumList()
     },
     getClassicsList() {
@@ -109,21 +121,24 @@ export default {
       })
     },
     handleClick(tab, event) {
-      if (tab.name === 'first') {
+      if (tab.name === 'second') {
         this.newsCurriculumForm.sortBy = 1
-        this.recommendCurriculumList()
-      } else {
+      } else if (tab.name === 'third') {
         this.newsCurriculumForm.sortBy = 2
-        this.recommendCurriculumList()
+      } else if (tab.name === 'first') {
+        this.checkedLi = null
+        this.newsCurriculumForm.categoryId = null
       }
+      this.recommendCurriculumList()
     }
   },
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    // this.activeName = 'first'
+    this.activeName = 'first'
     this.recommendCurriculumList()
     this.getClassicsList()
+    this.isAuthenticated ? (this.hideSwitch = true) : (this.hideSwitch = false)
   }
 }
 </script>

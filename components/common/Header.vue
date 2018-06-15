@@ -46,7 +46,7 @@
       </div>
     </div>
     <!-- 登录注册 -->
-    <div class="start" v-if="start">
+    <div class="start" v-if="start" v-loading="loadinged" element-loading-text="拼命加载中" element-loading-background="rgba(255, 255, 255, 0.6)">
       <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
@@ -163,6 +163,7 @@ export default {
       return callback()
     }
     return {
+      loadinged: false,
       searchImg: require('~/assets/images/search.png'),
       downApp: require('~/assets/images/wechatLogin.png'),
       start: false,
@@ -176,7 +177,7 @@ export default {
       },
       bgMsg: false,
       user: {
-        userImg: require('~/assets/images/headImg.png')
+        userImg: ''
       },
       activeName: 'login',
       QRcode: require('~/assets/images/wechatLogin.png'),
@@ -347,15 +348,15 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   mounted() {
-    return new Promise((resolve, reject) => {
-      home.shopCartList().then(response => {
-        let body = response.data.curriculumCartList
-        let len = {
-          pn: body.length
-        }
-        this.setProductsNum(len)
+    let me = this
+    this.getCount()
+    this.$bus
+      .$on('loginShow', data => {
+        this.loginCardShow()
       })
-    })
+      .$on('updateCount', () => {
+        me.getCount()
+      })
   },
   methods: {
     ...mapActions('auth', [
@@ -365,6 +366,17 @@ export default {
       'signOut',
       'setToken'
     ]),
+    getCount() {
+      return new Promise((resolve, reject) => {
+        home.shopCartList().then(response => {
+          let body = response.data.curriculumCartList
+          let len = {
+            pn: body.length
+          }
+          this.setProductsNum(len)
+        })
+      })
+    },
     changeImg(what) {
       if (what == 'android') {
         // console.log(1)
@@ -385,10 +397,11 @@ export default {
     },
     // 获取验证码 this.registerData
     async handleGetCode(data) {
-      if (!this.bindTelData.captchaDisable) {
+      if (!this.bindTelData.captchaDisable && this.bindTelData.seconds === 30) {
         return new Promise((resolve, reject) => {
           auth.smsCodes(data).then(response => {
             this.$message({
+              showClose: true,
               type: response.status === 0 ? 'success' : 'error',
               message: response.msg
             })
@@ -416,6 +429,7 @@ export default {
           auth.verifyPhone(this.registerData).then(response => {
             if (response.status !== 0) {
               this.$message({
+                showClose: true,
                 type: 'error',
                 message: response.msg
               })
@@ -437,6 +451,7 @@ export default {
           auth.verifywechat(this.bindTelData).then(response => {
             if (response.status != 0) {
               this.$message({
+                showClose: true,
                 type: 'error',
                 message: response.msg
               })
@@ -458,6 +473,7 @@ export default {
       return new Promise((resolve, reject) => {
         this.signIn(this.loginData).then(response => {
           this.$message({
+            showClose: true,
             type: response.status === 0 ? 'success' : 'error',
             message: response.msg
           })
@@ -470,12 +486,14 @@ export default {
     // 注册 请求
     signUp(formName) {
       // console.log(this.registerData, '这是this.registerData')
+      this.loadinged = true
       this.alreadySignin()
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
             auth.signUp(this.registerData).then(response => {
               this.$message({
+                showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
@@ -491,11 +509,13 @@ export default {
     },
     // 登录 请求
     signIns(formName) {
+      this.loadinged = true
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               this.$message({
+                showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
@@ -520,6 +540,7 @@ export default {
       const weixin = new WxLogin(this.WxLogin)
       this.getwxtime = setInterval(() => {
         this.getWXAccredit()
+        this.loadinged = false
       }, 1000)
     },
     // 微信绑定手机号
@@ -528,6 +549,7 @@ export default {
         auth.loginWechat(this.bindTelData).then(response => {
           if (response.status === 0) {
             this.$message({
+              showClose: true,
               type: 'success',
               message: '登录成功！'
             })
@@ -537,6 +559,7 @@ export default {
             this.close()
           } else {
             this.$message({
+              showClose: true,
               type: 'error',
               message: response.msg
             })
@@ -563,6 +586,7 @@ export default {
             clearInterval(this.getwxtime)
           } else if (response.status === 100100) {
             this.$message({
+              showClose: true,
               type: 'error',
               message: response.msg
             })
@@ -616,6 +640,7 @@ export default {
       this.bgMsg = false
       this.emptyForm()
       clearInterval(this.getwxtime)
+      this.loadinged = false
     },
     closeWechat() {
       this.move()
@@ -626,7 +651,7 @@ export default {
       this.bindTelShow = false
       clearInterval(this.getwxtime)
       this.emptyWechatForm()
-      // document.body.style.overflow = "auto";
+      this.loadinged = false
     },
     emptyForm() {
       this.loginData.phonenum = ''
@@ -661,6 +686,7 @@ export default {
       //this.bindTelShow=true; //绑定手机号
       // this.bindSuccessShow=true; // 登录成功
       this.wxLogin()
+      this.loadinged = true
     },
     polling() {
       //轮询请求 微信扫码结果
@@ -705,12 +731,28 @@ export default {
       this.setGid(this.gidForm)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', item)
+    },
+    // 获取用户头像
+    getUserInfo() {
+      home.getUserInfo().then(res => {
+        this.userInfo = res.data.userInfo
+        if (this.userInfo.head_img && this.userInfo.head_img != '') {
+          this.user.userImg = this.userInfo.head_img
+        } else {
+          this.user.userImg = require('@/assets/images/profile_avator01.png')
+        }
+      })
     }
   },
   mounted() {
+    this.getUserInfo()
     this.$bus.$on('loginShow', data => {
       this.loginCardShow()
-    })
+    }),
+      this.$bus.$on('changeimg', data => {
+        this.user.userImg = data
+        // console.log(data)
+      })
   }
 }
 </script>
