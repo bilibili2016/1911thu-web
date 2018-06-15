@@ -46,7 +46,7 @@
       </div>
     </div>
     <!-- 登录注册 -->
-    <div class="start" v-if="start">
+    <div class="start" v-if="start" v-loading="loadinged" element-loading-text="拼命加载中" element-loading-background="rgba(255, 255, 255, 0.6)">
       <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
@@ -163,6 +163,7 @@ export default {
       return callback()
     }
     return {
+      loadinged: false,
       searchImg: require('~/assets/images/search.png'),
       downApp: require('~/assets/images/wechatLogin.png'),
       start: false,
@@ -365,6 +366,16 @@ export default {
       'signOut',
       'setToken'
     ]),
+    startLoading() {
+      loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)',
+        target: document.querySelector('.start')
+      })
+      // loading.close()
+    },
     changeImg(what) {
       if (what == 'android') {
         // console.log(1)
@@ -385,7 +396,7 @@ export default {
     },
     // 获取验证码 this.registerData
     async handleGetCode(data) {
-      if (!this.bindTelData.captchaDisable) {
+      if (!this.bindTelData.captchaDisable && this.bindTelData.seconds === 30) {
         return new Promise((resolve, reject) => {
           auth.smsCodes(data).then(response => {
             this.$message({
@@ -470,6 +481,7 @@ export default {
     // 注册 请求
     signUp(formName) {
       // console.log(this.registerData, '这是this.registerData')
+      this.loadinged = true
       this.alreadySignin()
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -491,6 +503,7 @@ export default {
     },
     // 登录 请求
     signIns(formName) {
+      this.loadinged = true
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -520,6 +533,7 @@ export default {
       const weixin = new WxLogin(this.WxLogin)
       this.getwxtime = setInterval(() => {
         this.getWXAccredit()
+        this.loadinged = false
       }, 1000)
     },
     // 微信绑定手机号
@@ -616,6 +630,7 @@ export default {
       this.bgMsg = false
       this.emptyForm()
       clearInterval(this.getwxtime)
+      this.loadinged = false
     },
     closeWechat() {
       this.move()
@@ -626,7 +641,7 @@ export default {
       this.bindTelShow = false
       clearInterval(this.getwxtime)
       this.emptyWechatForm()
-      // document.body.style.overflow = "auto";
+      this.loadinged = false
     },
     emptyForm() {
       this.loginData.phonenum = ''
@@ -661,6 +676,7 @@ export default {
       //this.bindTelShow=true; //绑定手机号
       // this.bindSuccessShow=true; // 登录成功
       this.wxLogin()
+      this.loadinged = true
     },
     polling() {
       //轮询请求 微信扫码结果
