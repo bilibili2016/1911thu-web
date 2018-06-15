@@ -17,30 +17,32 @@ const _21c4caa2 = () => import('../pages/activity/faceteach.vue' /* webpackChunk
 const _398a265c = () => import('../pages/activity/degree.vue' /* webpackChunkName: "pages/activity/degree" */).then(m => m.default || m)
 const _1c267f9a = () => import('../pages/shop/checkedCourse.vue' /* webpackChunkName: "pages/shop/checkedCourse" */).then(m => m.default || m)
 const _e21a07b2 = () => import('../pages/shop/shoppingCart.vue' /* webpackChunkName: "pages/shop/shoppingCart" */).then(m => m.default || m)
+const _7253b3cf = () => import('../pages/home/pages/info.vue' /* webpackChunkName: "pages/home/pages/info" */).then(m => m.default || m)
 const _7e92713a = () => import('../pages/course/pages/category.vue' /* webpackChunkName: "pages/course/pages/category" */).then(m => m.default || m)
-const _76d199f3 = () => import('../pages/profile/pages/bindId.vue' /* webpackChunkName: "pages/profile/pages/bindId" */).then(m => m.default || m)
-const _58fa6591 = () => import('../pages/course/pages/categoryd.vue' /* webpackChunkName: "pages/course/pages/categoryd" */).then(m => m.default || m)
-const _12e48f15 = () => import('../pages/profile/pages/noMsg.vue' /* webpackChunkName: "pages/profile/pages/noMsg" */).then(m => m.default || m)
-const _44a98140 = () => import('../pages/course/pages/unlogged.vue' /* webpackChunkName: "pages/course/pages/unlogged" */).then(m => m.default || m)
 const _ebec58e2 = () => import('../pages/home/pages/new.vue' /* webpackChunkName: "pages/home/pages/new" */).then(m => m.default || m)
 const _22ac65de = () => import('../pages/course/pages/coursedetail.vue' /* webpackChunkName: "pages/course/pages/coursedetail" */).then(m => m.default || m)
-const _5a02ae29 = () => import('../pages/profile/pages/info.vue' /* webpackChunkName: "pages/profile/pages/info" */).then(m => m.default || m)
-const _06384b06 = () => import('../pages/course/pages/player.vue' /* webpackChunkName: "pages/course/pages/player" */).then(m => m.default || m)
-const _a4f89c2e = () => import('../pages/course/pages/classify.vue' /* webpackChunkName: "pages/course/pages/classify" */).then(m => m.default || m)
 const _f10c3752 = () => import('../pages/profile/pages/personalSet.vue' /* webpackChunkName: "pages/profile/pages/personalSet" */).then(m => m.default || m)
-const _73bc21ba = () => import('../pages/home/pages/evaluate.vue' /* webpackChunkName: "pages/home/pages/evaluate" */).then(m => m.default || m)
+const _1bf5af37 = () => import('../pages/home/pages/partner.vue' /* webpackChunkName: "pages/home/pages/partner" */).then(m => m.default || m)
+const _811831f8 = () => import('../pages/home/pages/tab.vue' /* webpackChunkName: "pages/home/pages/tab" */).then(m => m.default || m)
+const _155a2976 = () => import('../pages/home/pages/lost.vue' /* webpackChunkName: "pages/home/pages/lost" */).then(m => m.default || m)
+const _06384b06 = () => import('../pages/course/pages/player.vue' /* webpackChunkName: "pages/course/pages/player" */).then(m => m.default || m)
+const _17e6155c = () => import('../pages/home/pages/famous.vue' /* webpackChunkName: "pages/home/pages/famous" */).then(m => m.default || m)
 const _811e0f7a = () => import('../pages/course/pages/newlesson.vue' /* webpackChunkName: "pages/course/pages/newlesson" */).then(m => m.default || m)
+const _fb4dd812 = () => import('../pages/home/pages/hrEntry.vue' /* webpackChunkName: "pages/home/pages/hrEntry" */).then(m => m.default || m)
+const _212cdbb4 = () => import('../pages/home/pages/searchNothing.vue' /* webpackChunkName: "pages/home/pages/searchNothing" */).then(m => m.default || m)
+const _5ef35a4d = () => import('../pages/course/pages/search.vue' /* webpackChunkName: "pages/course/pages/search" */).then(m => m.default || m)
+const _12e48f15 = () => import('../pages/profile/pages/noMsg.vue' /* webpackChunkName: "pages/profile/pages/noMsg" */).then(m => m.default || m)
+const _73bc21ba = () => import('../pages/home/pages/evaluate.vue' /* webpackChunkName: "pages/home/pages/evaluate" */).then(m => m.default || m)
+const _76d199f3 = () => import('../pages/profile/pages/bindId.vue' /* webpackChunkName: "pages/profile/pages/bindId" */).then(m => m.default || m)
+const _5a02ae29 = () => import('../pages/profile/pages/info.vue' /* webpackChunkName: "pages/profile/pages/info" */).then(m => m.default || m)
+const _59cdc620 = () => import('../pages/course/pages/categorys.vue' /* webpackChunkName: "pages/course/pages/categorys" */).then(m => m.default || m)
+const _a4f89c2e = () => import('../pages/course/pages/classify.vue' /* webpackChunkName: "pages/course/pages/classify" */).then(m => m.default || m)
+const _44a98140 = () => import('../pages/course/pages/unlogged.vue' /* webpackChunkName: "pages/course/pages/unlogged" */).then(m => m.default || m)
 const _241277fa = () => import('../pages/home/pages/aboutUs.vue' /* webpackChunkName: "pages/home/pages/aboutUs" */).then(m => m.default || m)
 const _44c98151 = () => import('../pages/home/pages/teacher.vue' /* webpackChunkName: "pages/home/pages/teacher" */).then(m => m.default || m)
-const _7253b3cf = () => import('../pages/home/pages/info.vue' /* webpackChunkName: "pages/home/pages/info" */).then(m => m.default || m)
-const _811831f8 = () => import('../pages/home/pages/tab.vue' /* webpackChunkName: "pages/home/pages/tab" */).then(m => m.default || m)
-const _fb4dd812 = () => import('../pages/home/pages/hrEntry.vue' /* webpackChunkName: "pages/home/pages/hrEntry" */).then(m => m.default || m)
-const _4cd9d3fe = () => import('../pages/home/pages/classic.vue' /* webpackChunkName: "pages/home/pages/classic" */).then(m => m.default || m)
-const _17e6155c = () => import('../pages/home/pages/famous.vue' /* webpackChunkName: "pages/home/pages/famous" */).then(m => m.default || m)
-const _1bf5af37 = () => import('../pages/home/pages/partner.vue' /* webpackChunkName: "pages/home/pages/partner" */).then(m => m.default || m)
-const _59cdc620 = () => import('../pages/course/pages/categorys.vue' /* webpackChunkName: "pages/course/pages/categorys" */).then(m => m.default || m)
 const _60d1cebf = () => import('../pages/home/pages/forgotPassword.vue' /* webpackChunkName: "pages/home/pages/forgotPassword" */).then(m => m.default || m)
-const _5ef35a4d = () => import('../pages/course/pages/search.vue' /* webpackChunkName: "pages/course/pages/search" */).then(m => m.default || m)
+const _4cd9d3fe = () => import('../pages/home/pages/classic.vue' /* webpackChunkName: "pages/home/pages/classic" */).then(m => m.default || m)
+const _58fa6591 = () => import('../pages/course/pages/categoryd.vue' /* webpackChunkName: "pages/course/pages/categoryd" */).then(m => m.default || m)
 const _2dfb1658 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 
 
@@ -172,29 +174,14 @@ export function createRouter () {
 			name: "shop-shoppingCart"
 		},
 		{
+			path: "/home/pages/info",
+			component: _7253b3cf,
+			name: "home-pages-info"
+		},
+		{
 			path: "/course/pages/category",
 			component: _7e92713a,
 			name: "course-pages-category"
-		},
-		{
-			path: "/profile/pages/bindId",
-			component: _76d199f3,
-			name: "profile-pages-bindId"
-		},
-		{
-			path: "/course/pages/categoryd",
-			component: _58fa6591,
-			name: "course-pages-categoryd"
-		},
-		{
-			path: "/profile/pages/noMsg",
-			component: _12e48f15,
-			name: "profile-pages-noMsg"
-		},
-		{
-			path: "/course/pages/unlogged",
-			component: _44a98140,
-			name: "course-pages-unlogged"
 		},
 		{
 			path: "/home/pages/new",
@@ -207,9 +194,24 @@ export function createRouter () {
 			name: "course-pages-coursedetail"
 		},
 		{
-			path: "/profile/pages/info",
-			component: _5a02ae29,
-			name: "profile-pages-info"
+			path: "/profile/pages/personalSet",
+			component: _f10c3752,
+			name: "profile-pages-personalSet"
+		},
+		{
+			path: "/home/pages/partner",
+			component: _1bf5af37,
+			name: "home-pages-partner"
+		},
+		{
+			path: "/home/pages/tab",
+			component: _811831f8,
+			name: "home-pages-tab"
+		},
+		{
+			path: "/home/pages/lost",
+			component: _155a2976,
+			name: "home-pages-lost"
 		},
 		{
 			path: "/course/pages/player",
@@ -217,14 +219,34 @@ export function createRouter () {
 			name: "course-pages-player"
 		},
 		{
-			path: "/course/pages/classify",
-			component: _a4f89c2e,
-			name: "course-pages-classify"
+			path: "/home/pages/famous",
+			component: _17e6155c,
+			name: "home-pages-famous"
 		},
 		{
-			path: "/profile/pages/personalSet",
-			component: _f10c3752,
-			name: "profile-pages-personalSet"
+			path: "/course/pages/newlesson",
+			component: _811e0f7a,
+			name: "course-pages-newlesson"
+		},
+		{
+			path: "/home/pages/hrEntry",
+			component: _fb4dd812,
+			name: "home-pages-hrEntry"
+		},
+		{
+			path: "/home/pages/searchNothing",
+			component: _212cdbb4,
+			name: "home-pages-searchNothing"
+		},
+		{
+			path: "/course/pages/search",
+			component: _5ef35a4d,
+			name: "course-pages-search"
+		},
+		{
+			path: "/profile/pages/noMsg",
+			component: _12e48f15,
+			name: "profile-pages-noMsg"
 		},
 		{
 			path: "/home/pages/evaluate",
@@ -232,9 +254,29 @@ export function createRouter () {
 			name: "home-pages-evaluate"
 		},
 		{
-			path: "/course/pages/newlesson",
-			component: _811e0f7a,
-			name: "course-pages-newlesson"
+			path: "/profile/pages/bindId",
+			component: _76d199f3,
+			name: "profile-pages-bindId"
+		},
+		{
+			path: "/profile/pages/info",
+			component: _5a02ae29,
+			name: "profile-pages-info"
+		},
+		{
+			path: "/course/pages/categorys",
+			component: _59cdc620,
+			name: "course-pages-categorys"
+		},
+		{
+			path: "/course/pages/classify",
+			component: _a4f89c2e,
+			name: "course-pages-classify"
+		},
+		{
+			path: "/course/pages/unlogged",
+			component: _44a98140,
+			name: "course-pages-unlogged"
 		},
 		{
 			path: "/home/pages/aboutUs",
@@ -247,19 +289,9 @@ export function createRouter () {
 			name: "home-pages-teacher"
 		},
 		{
-			path: "/home/pages/info",
-			component: _7253b3cf,
-			name: "home-pages-info"
-		},
-		{
-			path: "/home/pages/tab",
-			component: _811831f8,
-			name: "home-pages-tab"
-		},
-		{
-			path: "/home/pages/hrEntry",
-			component: _fb4dd812,
-			name: "home-pages-hrEntry"
+			path: "/home/pages/forgotPassword",
+			component: _60d1cebf,
+			name: "home-pages-forgotPassword"
 		},
 		{
 			path: "/home/pages/classic",
@@ -267,29 +299,9 @@ export function createRouter () {
 			name: "home-pages-classic"
 		},
 		{
-			path: "/home/pages/famous",
-			component: _17e6155c,
-			name: "home-pages-famous"
-		},
-		{
-			path: "/home/pages/partner",
-			component: _1bf5af37,
-			name: "home-pages-partner"
-		},
-		{
-			path: "/course/pages/categorys",
-			component: _59cdc620,
-			name: "course-pages-categorys"
-		},
-		{
-			path: "/home/pages/forgotPassword",
-			component: _60d1cebf,
-			name: "home-pages-forgotPassword"
-		},
-		{
-			path: "/course/pages/search",
-			component: _5ef35a4d,
-			name: "course-pages-search"
+			path: "/course/pages/categoryd",
+			component: _58fa6591,
+			name: "course-pages-categoryd"
 		},
 		{
 			path: "/",
