@@ -212,6 +212,12 @@ export default {
       return Math.abs(p)
     },
     canSubmit() {
+      if (this.addArray.curriculumcartid.length <= 0) {
+        this.$message({
+          showClose: true,
+          message: '请您选择课程哦'
+        })
+      }
       return this.addArray.curriculumcartid.length > 0
     }
   },
