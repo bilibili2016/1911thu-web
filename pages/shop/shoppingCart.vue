@@ -203,12 +203,13 @@ export default {
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
     prices() {
-      return (
+      let money = (
         Number(this.arraySum) *
         10 *
         (Number(this.numForm.number) * 10) /
         100
       ).toFixed(2)
+      return Math.abs(money)
     },
     canSubmit() {
       if (this.addArray.curriculumcartid.length <= 0) {
