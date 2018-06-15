@@ -330,7 +330,10 @@ export default {
           this.catalogs = response.data.curriculumCatalogList
           for (let item of this.catalogs) {
             for (let i of item.childList) {
+              i.second = i.video_time
               i.video_time = Math.round(i.video_time / 60)
+
+              console.log(i, '123')
             }
           }
         })

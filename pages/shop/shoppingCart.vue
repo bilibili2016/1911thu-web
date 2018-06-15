@@ -39,7 +39,7 @@
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
             <span class="person">购买人数：</span>
-            <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput" @change="changeNumber"></el-input-number>
+            <el-input-number v-model="numForm.number" :step="1" :min="1" :max="9999" class="courseNumberInput" @change="changeNumber"></el-input-number>
             <!-- <span class="number clearfix">
                 <i class="fl minus el-icon-minus"  @click="delNumber"></i>
                 <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
@@ -47,7 +47,8 @@
               </span> -->
           </span>
           <span class="commitOrder fr">
-            <el-button @click="showCommit">提交</el-button>
+            <el-button class="notGray" @click="showCommit" v-if="canSubmit">提交</el-button>
+            <el-button class="isGray" v-else>提交</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
@@ -208,6 +209,14 @@ export default {
         (Number(this.numForm.number) * 10) /
         100
       ).toFixed(2)
+    },
+    canSubmit() {
+      if (this.addArray.curriculumcartid.length <= 0) {
+        this.$message({
+          message: '请您选择课程哦'
+        })
+      }
+      return this.addArray.curriculumcartid.length > 0
     }
   },
   watch: {
@@ -450,6 +459,7 @@ export default {
         if (this.companyInfo.captchaDisable === true) {
           return new Promise((resolve, reject) => {
             auth.smsCodes(this.companyInfo).then(response => {
+              console.log('resp-------', response)
               this.$message({
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg

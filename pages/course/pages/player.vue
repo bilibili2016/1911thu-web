@@ -40,11 +40,11 @@
         </div>
         <div class="courseList" v-for="(section,index) in courseList" :key="index">
           <h4>{{section.title}}</h4>
-          <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index">
+          <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index" @click="handleCourse(bar,index)">
             <span class="fl playIcon">
               <i class="el-icon-caret-right"></i>
             </span>
-            <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}分钟)</span>
+            <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}oo分钟)</span>
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@ export default {
       tcplayer: {
         fileID: '',
         appID: '',
-        autoplay: true, //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+        autoplay: false, //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
         plugins: {
           ContinuePlay: {
             // 开启续播功能
@@ -200,6 +200,13 @@ export default {
     }
   },
   methods: {
+    handleCourse(item, index) {
+      // console.log(item, '点击的课程')
+      // console.log(index, '点击的第几个')
+      persistStore.set('curriculumId', item.curriculum_id)
+      persistStore.set('catalogId', item.id)
+      this.getPlayerInfo()
+    },
     ...mapActions('auth', ['setHsg', 'setTid']),
     selTypeChange(index) {
       this.radioBtn = index
@@ -250,28 +257,62 @@ export default {
       this.$router.push('/home/pages/teacher')
     },
     getPlayerInfo() {
-      this.player = TCPlayer('movd', this.tcplayer)
-      // console.log(this.player.currentTime())
+      player = TCPlayer('movd', this.tcplayer)
 
-      if (this.$refs.playInner.children[0]) {
-        this.player.dispose()
-        $('#playInner').html('')
-        $('#playInner').html(
-          '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
-        )
-      }
-      let kid = this.kid
+      player.dispose()
+      // $('#playInner').html('')
+      // $('#playInner').html(
+      //   '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
+      // )
+
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
-      this.player = TCPlayer('movd', this.tcplayer)
-      // persistStore.set('player', this.player)
-      // let time = player.currentTime()
-      // console.log(time, '这是time')
+      // 设置websocket
+      var player = TCPlayer('movd', this.tcplayer)
+      player.pause()
+      var socket = new io('http://www.1911edu.com:2120')
+      // 连接socket
+      socket.on('connect', function() {
+        // console.log('已连接')
+        socket.emit('login', persistStore.get('token'))
+      })
+      // 断线重连
+      socket.on('reconnect', function(msg) {})
+      let that = this
+      player.on('pause', () => {
+        clearInterval(that.interval)
+      })
+      player.on('play', function() {
+        // console.log(that.seconds, '这是重新播放倒计时秒数2')
+        that.interval = setInterval(() => {
+          if (that.seconds <= 0) {
+            that.seconds = 1
+            that.courseList.success = false
+            that.courseList.inputID = ''
+            socket.emit('watchRecordingTime_disconnect')
+            clearInterval(this.interval)
+          } else {
+            that.seconds--
+            // console.log(that.seconds, '这是重新秒数3')
+            let playTime = player.currentTime()
+
+            socket.emit(
+              'watchRecordingTime',
+              persistStore.get('curriculumId'),
+              persistStore.get('catalogId'),
+              playTime
+            )
+          }
+        }, 1000)
+        // console.log('重新开始播放')
+      })
+      // 计时器
       return new Promise((resolve, reject) => {
         home.getPlayerInfos(this.playerForm).then(response => {
-          this.daojishi()
+          console.log(response, '获取的时间')
+          // this.daojishi()
           if (response.data.playAuthInfo.videoViewType == false) {
-            this.player.loadVideoByID({
+            player.loadVideoByID({
               fileID: response.data.playAuthInfo.fileID,
               appID: response.data.playAuthInfo.appID,
               sign: response.data.playAuthInfo.sign,
@@ -279,7 +320,7 @@ export default {
               exper: response.data.playAuthInfo.exper
             })
           } else {
-            this.player.loadVideoByID({
+            player.loadVideoByID({
               fileID: response.data.playAuthInfo.fileID,
               appID: response.data.playAuthInfo.appID,
               t: response.data.playAuthInfo.t,
@@ -289,25 +330,11 @@ export default {
         })
       })
     },
-    daojishi() {
-      let interval = setInterval(() => {
-        if (this.seconds <= 0) {
-          this.seconds = 1
-          this.courseList.success = false
-          this.courseList.inputID = ''
-          clearInterval(interval)
-        } else {
-          this.seconds--
-          // console.log(this, '这是this')
-          // this.time = this.player.currentTime()
-          // console.log(this.time)
-        }
-      }, 1000)
-    },
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+          console.log(response, '这是获取的播放信息')
           this.player = response.data.curriculumDetail
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection
@@ -354,7 +381,6 @@ export default {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.addCollection(this.addCollectionForm).then(response => {
-          s
           this.$message({
             type: 'success',
             message: '添加收藏成功'
@@ -376,12 +402,6 @@ export default {
           this.collectMsg = 0
         })
       })
-    },
-
-    players() {
-      let playerTime = this.player.currentTime()
-      // console.log(playerTime)
-      return playerTime
     }
   },
   mounted() {
@@ -394,16 +414,10 @@ export default {
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
     // 新建webspcket对象
-    var socket = new io('http://www.1911edu.com:2120')
-    socket.on('connect', function() {
-      console.log('已连接')
-      socket.emit(
-        'login',
-        'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTk3In0.L0yuyoKeO37A0W4HUHpr7eaKyP67MiBjtlLOHMxDorU'
-      )
-    })
 
-    this.players()
+    this.seconds = persistStore.get('video_time')
+    console.log()
+    // this.seconds = 10
   }
 }
 </script>

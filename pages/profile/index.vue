@@ -341,8 +341,8 @@ export default {
     this.activeName = this.gid
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    if (this.$route.query.goTab) {
-      this.activeTab = this.$route.query.goTab
+    if (this.$route.query.tab) {
+      this.activeTab = this.$route.query.tab
     }
   },
   created() {

@@ -15,16 +15,16 @@
         <img :src="sharewb" alt="">
         <img :src="sharekj" alt="">
       </div>
-      <div class="newsContent">
+      <div class="newsContent" v-loading='loading'>
         <h3>{{newsDetail.title}}</h3>
-        <p class="time">{{newsDetail.create_time}}</p>
+        <p class="time">{{getTime(newsDetail.create_time)}}</p>
         <div class="newsInner" v-html="newsDetail.content"></div>
         <div class="next clearfix">
-          <span class="fl" v-if="newsDetail.prePiece" @click="getMore('detailone')">上一篇
-            <i>{{newsDetail.prePiece}}</i>
+          <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇
+            <i>{{beforeNews.title}}</i>
           </span>
-          <span class="fr" v-if="newsDetail.nextPiece" @click="getMore('detailtwo')">下一篇
-            <i>{{newsDetail.nextPiece}}</i>
+          <span class="fr" v-if="afterNews" @click="getNewInfoDetail(afterNews.id)">下一篇
+            <i>{{afterNews.title}}</i>
           </span>
         </div>
       </div>
@@ -36,6 +36,7 @@
 import CustomBanner from '@/components/common/Banner.vue'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { other, home } from '~/lib/v1_sdk/index'
+import { timestampToTime } from '~/lib/util/helper'
 export default {
   computed: {
     ...mapState('auth', ['nid'])
@@ -52,36 +53,46 @@ export default {
       configs: {
         banner_type: 'news'
       },
-      newsDetail: {
-        title: '1911广场旗下1911咖啡获香港文利国际餐饮300万天使轮投资',
-        time: '2018-05-20',
-        detail: '',
-        prePiece: '清华大学成立 “青年教师骨干领航工作站”',
-        nextPiece: '清华大学成立 “青年教师骨干领航工作站”'
+      newsDetail: {},
+      loading: true,
+      afterNews: {
+        id: '',
+        title: ''
       },
-      nidForm: {
-        ids: null
+      beforeNews: {
+        id: '',
+        title: ''
       }
     }
   },
   methods: {
+    getTime(time) {
+      return timestampToTime(time)
+    },
     getMore(item) {
       this.$router.push(item)
     },
     // 获取资讯详情
-    getNewInfoDetail() {
+    getNewInfoDetail(id) {
+      let me = this
+      if (!id) return
+      let newsId = {
+        ids: id
+      }
       return new Promise((resolve, reject) => {
-        home.getNewInfoDetail(this.nidForm).then(response => {
+        home.getNewInfoDetail(newsId).then(response => {
           this.newsDetail = response.data.newDetail
+          me.beforeNews = response.data.beforeNews
+          me.afterNews = response.data.afterNews
+          this.loading = false
         })
       })
     }
   },
   mounted() {
-    this.nidForm.ids = this.nid
+    this.getNewInfoDetail(this.nid)
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.getNewInfoDetail()
   }
 }
 </script>

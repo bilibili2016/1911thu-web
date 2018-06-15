@@ -84,7 +84,8 @@ const config = {
     //   { src: 'https://cdn.bootcss.com/holder/2.9.4/holder.min.js', async: true }
     // ]
   },
-  loading: { color: '#3B8070' },
+  // loading: { color: '#3B8070' },
+  loading: false,
   css: [
     '@/assets/style/element.scss',
     '@/assets/style/icon.scss',

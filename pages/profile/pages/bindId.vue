@@ -26,7 +26,7 @@
     <div class="courseList">
       <div class="title clearfix">
         <span>绑定课程ID</span>
-        <el-button class="fr" @click="addID" round>新增课程ID</el-button>
+        <el-button class="fr addClass" @click="addID" round>新增课程ID</el-button>
       </div>
       <div class="courseIDList">
         <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
