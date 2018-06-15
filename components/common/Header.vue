@@ -348,15 +348,15 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   mounted() {
-    return new Promise((resolve, reject) => {
-      home.shopCartList().then(response => {
-        let body = response.data.curriculumCartList
-        let len = {
-          pn: body.length
-        }
-        this.setProductsNum(len)
+    let me = this
+    this.getCount()
+    this.$bus
+      .$on('loginShow', data => {
+        this.loginCardShow()
       })
-    })
+      .$on('updateCount', () => {
+        me.getCount()
+      })
   },
   methods: {
     ...mapActions('auth', [
@@ -366,15 +366,16 @@ export default {
       'signOut',
       'setToken'
     ]),
-    startLoading() {
-      loading = this.$loading({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)',
-        target: document.querySelector('.start')
+    getCount() {
+      return new Promise((resolve, reject) => {
+        home.shopCartList().then(response => {
+          let body = response.data.curriculumCartList
+          let len = {
+            pn: body.length
+          }
+          this.setProductsNum(len)
+        })
       })
-      // loading.close()
     },
     changeImg(what) {
       if (what == 'android') {
