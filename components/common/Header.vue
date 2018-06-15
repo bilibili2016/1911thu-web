@@ -367,10 +367,10 @@ export default {
     ]),
     changeImg(what) {
       if (what == 'android') {
-        console.log(1)
+        // console.log(1)
         this.downApp = require('~/assets/images/wechatLogin.png')
       } else {
-        console.log(2)
+        // console.log(2)
         this.downApp = require('~/assets/images/wechatLogin.png')
       }
     },
@@ -451,7 +451,7 @@ export default {
     },
     // 注册完登录 请求
     alreadySignin(formName) {
-      console.log(this.registerData, '这是this.registerData')
+      // console.log(this.registerData, '这是this.registerData')
       this.loginData.phonenum = this.registerData.phones
       this.loginData.password = this.registerData.passwords
 
@@ -469,7 +469,7 @@ export default {
     },
     // 注册 请求
     signUp(formName) {
-      console.log(this.registerData, '这是this.registerData')
+      // console.log(this.registerData, '这是this.registerData')
       this.alreadySignin()
       this.$refs[formName].validate(valid => {
         if (valid) {

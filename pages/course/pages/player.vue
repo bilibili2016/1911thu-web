@@ -44,7 +44,7 @@
             <span class="fl playIcon">
               <i class="el-icon-caret-right"></i>
             </span>
-            <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}oo分钟)</span>
+            <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}分钟)</span>
           </div>
         </div>
       </div>
@@ -196,7 +196,8 @@ export default {
       },
       seconds: 500000,
       time: '',
-      player: ''
+      player: '',
+      clickMsg: false
     }
   },
   methods: {
@@ -205,6 +206,8 @@ export default {
       // console.log(index, '点击的第几个')
       persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
+      clearInterval(this.interval)
+      this.clickMsg = true
       this.getPlayerInfo()
     },
     ...mapActions('auth', ['setHsg', 'setTid']),
@@ -257,13 +260,18 @@ export default {
       this.$router.push('/home/pages/teacher')
     },
     getPlayerInfo() {
-      player = TCPlayer('movd', this.tcplayer)
+      if (this.clickMsg === true) {
+        player = TCPlayer('movd_html5_api', this.tcplayer)
+        player.dispose()
+      } else {
+        player = TCPlayer('movd', this.tcplayer)
+        player.dispose()
+      }
 
-      player.dispose()
-      // $('#playInner').html('')
-      // $('#playInner').html(
-      //   '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
-      // )
+      $('#playInner').html('')
+      $('#playInner').html(
+        '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
+      )
 
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
@@ -290,12 +298,12 @@ export default {
             that.courseList.success = false
             that.courseList.inputID = ''
             socket.emit('watchRecordingTime_disconnect')
-            clearInterval(this.interval)
+            clearInterval(that.interval)
           } else {
             that.seconds--
             // console.log(that.seconds, '这是重新秒数3')
             let playTime = player.currentTime()
-
+            // console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
@@ -308,9 +316,9 @@ export default {
       })
       // 计时器
       return new Promise((resolve, reject) => {
+        // console.log(this.playerForm, '123')
         home.getPlayerInfos(this.playerForm).then(response => {
-          console.log(response, '获取的时间')
-          // this.daojishi()
+          // console.log(response, '898989898')
           if (response.data.playAuthInfo.videoViewType == false) {
             player.loadVideoByID({
               fileID: response.data.playAuthInfo.fileID,
@@ -334,7 +342,7 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          console.log(response, '这是获取的播放信息')
+          // console.log(response, '这是获取的播放信息')
           this.player = response.data.curriculumDetail
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection
@@ -416,7 +424,7 @@ export default {
     // 新建webspcket对象
 
     this.seconds = persistStore.get('video_time')
-    console.log()
+    // console.log()
     // this.seconds = 10
   }
 }

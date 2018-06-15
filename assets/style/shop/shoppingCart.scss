@@ -8,7 +8,7 @@
       .tableHeader {
         height: 60px;
         line-height: 60px;
-        background-color: #EBE7ED;
+        background-color: #ebe7ed;
         font-size: 16px;
         color: #222;
         margin-bottom: 40px;
@@ -16,7 +16,7 @@
           margin-left: 120px;
         }
         .price {
-          margin-left: 662px;
+          margin-left: 552px;
         }
         .operation {
           margin-left: 127px;
@@ -46,19 +46,19 @@
             width: 470px;
             height: 42px;
             font-size: 16px;
-            color: #332A51;
+            color: #332a51;
             overflow: hidden;
             padding-top: 9px;
             margin-bottom: 15px;
           }
           h6 {
-            color: #6D687F;
+            color: #6d687f;
             font-size: 12px;
             padding-bottom: 9px;
           }
           p {
             font-size: 14px;
-            color: #6D687F;
+            color: #6d687f;
           }
         }
         .coursePrice {
@@ -66,7 +66,7 @@
           width: 100px;
           height: 140px;
           text-align: center;
-          color: #FF5F5F;
+          color: #ff5f5f;
           font-size: 16px;
           line-height: 78px;
         }
@@ -78,7 +78,7 @@
           margin-left: 38px;
           line-height: 78px;
           font-size: 16px;
-          color: #332A51;
+          color: #332a51;
           cursor: pointer;
         }
       }
@@ -104,7 +104,7 @@
             height: 24px;
             line-height: 24px;
             border-radius: 50%;
-            background-color: #8F4ACB;
+            background-color: #8f4acb;
             color: #fff;
           }
         }
@@ -112,13 +112,13 @@
       .tableFooter {
         height: 60px;
         line-height: 60px;
-        background-color: #EBE7ED;
+        background-color: #ebe7ed;
         font-size: 16px;
         color: #222;
         .courseNumber {
           margin-left: 47px;
           .courseNumberInput {
-            border: 1px solid #6417A6;
+            border: 1px solid #6417a6;
             width: 134px;
             height: 31px;
             background-color: #fff; // height: 34px;
@@ -144,7 +144,7 @@
               transition: all 300ms;
               font-size: 16px;
               &:hover {
-                background-color: #8F4ACB;
+                background-color: #8f4acb;
                 i {
                   color: #fff;
                 }
@@ -152,34 +152,47 @@
             }
             .el-input-number__decrease {
               margin-left: -1px;
-              border-right: 1px solid #6417A6;
+              border-right: 1px solid #6417a6;
             }
             .el-input-number__increase {
               margin-right: -1px;
-              border-left: 1px solid #6417A6;
+              border-left: 1px solid #6417a6;
             }
-            .commitOrder .el-button {
-              border: none;
-              color: #fff;
-              height: 60px;
-              width: 140px;
-              font-weight: 400;
-              font-size: 16px;
-              transition: background 300ms;
+            .el-input__inner {
+              border: none !important;
             }
-            .commitOrder .isGray {
-              background-color: #8f8f8f;
-              &:hover {
-                background-color: #8f8f8f;
-              }
-            }
-            .commitOrder .notGray {
-              background-color: #6417a6;
-              &:hover {
-                background-color: #8F4ACB;
-              }
-              .el-input__inner {
-                border: none !important;
+          }
+          .deleteChecked {
+            font-size: 16px;
+            color: #222;
+            margin-right: 47px;
+            cursor: pointer;
+          }
+          .el-icon-minus,
+          .el-icon-plus {
+            color: #6417a6;
+          }
+          .person {
+            font-size: 16px;
+            color: #222;
+          }
+          .number {
+            vertical-align: middle;
+            i {
+              width: 30px;
+              height: 30px;
+              line-height: 30px;
+              text-align: center;
+              float: left;
+              font-size: 20px;
+              font-weight: 700;
+              border: 1px solid #6417a6;
+              transition: all 300ms;
+              cursor: pointer;
+              &.minus:hover,
+              &.add:hover {
+                background-color: #8f4acb;
+                color: #fff;
               }
             }
             .deleteChecked {
@@ -226,121 +239,121 @@
               }
             }
           }
-          .allPrice {
-            width: 300px;
-            height: 60px;
-            line-height: 60px;
-            padding-right: 30px;
-            text-align: right;
-            color: #FF5F5F;
-            font-size: 30px;
-          }
-          .checkedNUmber {
-            i {
-              color: #ff5f5f;
-            }
-          }
-          .commitOrder .el-button {
-            border: none;
-            background-color: #6417a6;
-            color: #fff;
-            height: 60px;
-            width: 140px;
-            font-weight: 400;
-            font-size: 16px;
-            transition: background 300ms;
-            &:hover {
-              background-color: #8F4ACB;
-            }
+        }
+        .allPrice {
+          width: 300px;
+          height: 60px;
+          line-height: 60px;
+          padding-right: 30px;
+          text-align: right;
+          color: #ff5f5f;
+          font-size: 30px;
+        }
+        .commitOrder .el-button {
+          border: none;
+          color: #fff;
+          height: 60px;
+          width: 140px;
+          font-weight: 400;
+          font-size: 16px;
+          transition: background 300ms;
+        }
+        .commitOrder .isGray {
+          background-color: #8f8f8f;
+          &:hover {
+            background-color: #8f8f8f;
           }
         }
-        .el-checkbox {
-          padding-left: 41px;
-          color: #222;
-          font-size: 16px;
-          .el-checkbox__inner {
-            border-color: #6417A6;
-            width: 18px;
-            height: 18px;
-            border-radius: 4px;
-            background-color: transparent;
-            &:after {
-              height: 9px;
-              left: 6px;
-              top: 2px;
-            }
+        .commitOrder .notGray {
+          background-color: #6417a6;
+          &:hover {
+            background-color: #8f4acb;
           }
-          .el-checkbox__input.is-checked {
-            & .el-checkbox__inner {
-              border-color: #6417A6;
-              background-color: #6417A6;
-            }
-            &+.el-checkbox__label {
-              color: #222;
-            }
+        }
+      }
+      .el-checkbox {
+        padding-left: 41px;
+        color: #222;
+        font-size: 16px;
+        .el-checkbox__inner {
+          border-color: #6417a6;
+          width: 18px;
+          height: 18px;
+          border-radius: 4px;
+          background-color: transparent;
+          &:after {
+            height: 9px;
+            left: 6px;
+            top: 2px;
           }
-          .el-checkbox__label {
-            font-size: 16px;
-            font-weight: 400;
+        }
+        .el-checkbox__input.is-checked {
+          & .el-checkbox__inner {
+            border-color: #6417a6;
+            background-color: #6417a6;
+          }
+          &+.el-checkbox__label {
+            color: #222;
           }
         }
       }
     }
   }
-  .information {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, .6);
-    z-index: 1;
-    .info {
-      position: absolute;
-      top: 60px;
-      left: 50%;
-      margin-left: -227px;
-      width: 454px;
-      height: auto;
-      border-radius: 10px;
-      background-color: #fff;
-      .infoTitle h4 {
-        border-bottom: 1px solid #E8D6F7;
-        height: 76px;
-        line-height: 76px;
-        padding-left: 50px;
-        color: #6417A6;
+}
+
+.information {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  .info {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    margin-left: -227px;
+    width: 454px;
+    height: auto;
+    border-radius: 10px;
+    background-color: #fff;
+    .infoTitle h4 {
+      border-bottom: 1px solid #e8d6f7;
+      height: 76px;
+      line-height: 76px;
+      padding-left: 50px;
+      color: #6417a6;
+    }
+    .companyInfo {
+      .el-form-item {
+        height: 50px;
+        margin: 20px 0 10px;
       }
-      .companyInfo {
-        .el-form-item {
-          height: 50px;
-          margin: 20px 0 10px;
+      .el-form-item__content {
+        .el-button {
+          width: 264px;
+          height: 40px;
+          border-radius: 6px;
+          margin-left: -80px;
+          background-color: #6417a6;
+          color: #fff;
         }
-        .el-form-item__content {
-          .el-button {
-            width: 264px;
-            height: 40px;
-            border-radius: 6px;
-            margin-left: -80px;
-            background-color: #6417A6;
-            color: #fff
-          }
-        }
-        .code {
-          span {
-            float: right;
-            width: 118px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            border-radius: 6px;
-            background-color: #eee;
-            color: #6417A6;
-            font-size: 12px;
-            cursor: pointer;
-          }
+      }
+      .code {
+        span {
+          float: right;
+          width: 118px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          border-radius: 6px;
+          background-color: #eee;
+          color: #6417a6;
+          font-size: 12px;
+          cursor: pointer;
         }
       }
     }

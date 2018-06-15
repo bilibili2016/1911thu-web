@@ -297,8 +297,8 @@ export default {
       }
     },
     getBtnContent(val, index) {
-      console.log(val, '这是val')
-      console.log(index, '这是index')
+      // console.log(val, '这是val')
+      // console.log(index, '这是index')
       this.borderIndex = index
     },
     getCourseDetail() {
@@ -333,7 +333,7 @@ export default {
               i.second = i.video_time
               i.video_time = Math.round(i.video_time / 60)
 
-              console.log(i, '123')
+              // console.log(i, '123')
             }
           }
         })
