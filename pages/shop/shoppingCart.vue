@@ -48,7 +48,7 @@
           </span>
           <span class="commitOrder fr">
             <el-button class="notGray" @click="showCommit" v-if="canSubmit">提交</el-button>
-            <el-button class="isGray" v-else>提交</el-button>
+            <el-button class="isGray" v-else @click="showMsg">提交</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
@@ -203,25 +203,26 @@ export default {
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
     prices() {
-      let money = (
+      let p = (
         Number(this.arraySum) *
         10 *
         (Number(this.numForm.number) * 10) /
         100
       ).toFixed(2)
-      return Math.abs(money)
+      return Math.abs(p)
     },
     canSubmit() {
-      if (this.addArray.curriculumcartid.length <= 0) {
-        this.$message({
-          message: '请您选择课程哦'
-        })
-      }
       return this.addArray.curriculumcartid.length > 0
     }
   },
   watch: {
     selectAll(val) {
+      if (!val) {
+        this.$message({
+          message: '请您先选择课程哦',
+          duration: 1000
+        })
+      }
       if (this.isRest) {
         this.handleSelectAllChange(val)
       }
@@ -231,6 +232,12 @@ export default {
     ...mapActions('auth', ['setProductsNum']),
     loadAll() {
       return []
+    },
+    showMsg() {
+      this.$message({
+        message: '请您先选择课程哦',
+        duration: 1000
+      })
     },
     querySearchAsync(queryString, cb) {
       // console.log(queryString, '查询字符串')
