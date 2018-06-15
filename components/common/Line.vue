@@ -12,12 +12,12 @@
           <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
           <span v-if="isAuthenticated" class="fr">
             <span v-if="privileMsg === false">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看1</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
               <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
             </span>
             <span v-if="privileMsg === true">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看2</span>
-              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看3</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
             </span>
           </span>
           <span v-else class="fr clearfix">
@@ -69,14 +69,14 @@ export default {
         .addClass('checked')
     },
     handleCatalog(index, item) {
-      console.log(index, 'index')
-      console.log(item, 'item')
+      // console.log(index, 'index')
+      // console.log(item, 'item')
       let curriculum_id = item.childList[index].curriculum_id
       let catalog_id = item.childList[index].id
       // console.log(curriculum_id, '这是curriculum_id')
       // console.log(catalog_id, '这是catalog_id')
       let video_time = item.childList[index].second
-      console.log(video_time, '这是video_time')
+      // console.log(video_time, '这是video_time')
       persistStore.set('video_time', video_time)
       persistStore.set('curriculumId', curriculum_id)
       persistStore.set('catalogId', catalog_id)

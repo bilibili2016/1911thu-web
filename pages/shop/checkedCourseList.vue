@@ -92,14 +92,14 @@ export default {
             response.data.curriculumPayApply[
               this.payIndex
             ].CurriculumPayApplyList
-          this.sum = persistStore.get('price')
-          this.loading = false
           this.companyInfo.number =
             response.data.curriculumPayApply[this.payIndex].number
           this.companyInfo.courseNum =
             response.data.curriculumPayApply[
               this.payIndex
             ].CurriculumPayApplyList.length
+          this.sum = persistStore.get('price')
+          this.loading = false
           resolve(true)
         })
       })

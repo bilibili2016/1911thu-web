@@ -86,7 +86,7 @@ export default {
       // $('.classList ul li')
       //   .eq(id)
       //   .addClass('checked')
-      console.log(index * 1)
+      // console.log(index * 1)
 
       this.checkedLi = index
       this.newsCurriculumForm.categoryId = id

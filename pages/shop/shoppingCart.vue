@@ -253,7 +253,7 @@ export default {
       }
     },
     handleSelect(item) {
-      console.log(item)
+      // console.log(item)
     },
     //搜索企业 接口
     searchCompanyList() {
@@ -272,7 +272,7 @@ export default {
       })
     },
     handleSelect(item) {
-      console.log(item)
+      // console.log(item)
     },
     setPatten() {
       let reg = new RegExp('/^[0-9]*$/')
@@ -459,7 +459,7 @@ export default {
         if (this.companyInfo.captchaDisable === true) {
           return new Promise((resolve, reject) => {
             auth.smsCodes(this.companyInfo).then(response => {
-              console.log('resp-------', response)
+              // console.log('resp-------', response)
               this.$message({
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg

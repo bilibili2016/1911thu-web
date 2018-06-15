@@ -221,7 +221,7 @@ export default {
       notLogin: false,
       curruntForm: {
         pages: 1,
-        limits: 4,
+        limits: '',
         evaluateLimit: null,
         isevaluate: 1
       },
