@@ -88,6 +88,12 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
+    var validatePhone = (rule, value, callback) => {
+      if (!/^[A-Za-z0-9]+$/.test(value)) {
+        callback(new Error('密码只能输入数字、字母'))
+      }
+      return callback()
+    }
     return {
       courseList: [
         {
@@ -230,7 +236,10 @@ export default {
     querySearch(queryString, cb) {},
     // 获取验证码 this.registerData
     async handleGetCode(data) {
-      if (this.company.phones === '') {
+      if (
+        this.company.phones === '' ||
+        !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.company.phones)
+      ) {
         this.$message({
           showClose: true,
           type: 'error',
