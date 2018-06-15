@@ -92,9 +92,9 @@ export default {
       this.newsCurriculumForm.categoryId = id
       this.recommendCurriculumList()
     },
-    getClassifyList() {
+    getClassicsList() {
       return new Promise((resolve, reject) => {
-        home.getClassifyList(this.classList).then(response => {
+        home.getClassicsList(this.classList).then(response => {
           this.classList = response.data.categoryList
           resolve(true)
         })
@@ -123,7 +123,7 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     // this.activeName = 'first'
     this.recommendCurriculumList()
-    this.getClassifyList()
+    this.getClassicsList()
   }
 }
 </script>
