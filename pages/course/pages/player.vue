@@ -196,7 +196,8 @@ export default {
       },
       seconds: 500000,
       time: '',
-      player: ''
+      player: '',
+      clickMsg: false
     }
   },
   methods: {
@@ -205,6 +206,8 @@ export default {
       // console.log(index, '点击的第几个')
       persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
+      clearInterval(this.interval)
+      this.clickMsg = true
       this.getPlayerInfo()
     },
     ...mapActions('auth', ['setHsg', 'setTid']),
@@ -257,9 +260,14 @@ export default {
       this.$router.push('/home/pages/teacher')
     },
     getPlayerInfo() {
-      player = TCPlayer('movd', this.tcplayer)
+      if (this.clickMsg === true) {
+        player = TCPlayer('movd_html5_api', this.tcplayer)
+        player.dispose()
+      } else {
+        player = TCPlayer('movd', this.tcplayer)
+        player.dispose()
+      }
 
-      player.dispose()
       $('#playInner').html('')
       $('#playInner').html(
         '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
@@ -290,12 +298,12 @@ export default {
             that.courseList.success = false
             that.courseList.inputID = ''
             socket.emit('watchRecordingTime_disconnect')
-            clearInterval(this.interval)
+            clearInterval(that.interval)
           } else {
             that.seconds--
             // console.log(that.seconds, '这是重新秒数3')
             let playTime = player.currentTime()
-
+            // console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
@@ -308,9 +316,9 @@ export default {
       })
       // 计时器
       return new Promise((resolve, reject) => {
+        // console.log(this.playerForm, '123')
         home.getPlayerInfos(this.playerForm).then(response => {
-          // console.log(response, '获取的时间')
-          // this.daojishi()
+          // console.log(response, '898989898')
           if (response.data.playAuthInfo.videoViewType == false) {
             player.loadVideoByID({
               fileID: response.data.playAuthInfo.fileID,
