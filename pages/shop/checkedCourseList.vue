@@ -13,7 +13,7 @@
             <div class="courseInfo clearfix">
               <img class="fl" :src="course.curriculum_picture" alt="">
               <div class="fl">
-                <h4>{{course.curriculum_title}}</h4>
+                <h4 style="padding:0">{{course.curriculum_title}}</h4>
                 <h6>{{course.number}}学时</h6>
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
