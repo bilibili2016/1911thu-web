@@ -176,7 +176,7 @@ export default {
       },
       bgMsg: false,
       user: {
-        userImg: require('~/assets/images/headImg.png')
+        userImg: ''
       },
       activeName: 'login',
       QRcode: require('~/assets/images/wechatLogin.png'),
@@ -389,6 +389,7 @@ export default {
         return new Promise((resolve, reject) => {
           auth.smsCodes(data).then(response => {
             this.$message({
+              showClose: true,
               type: response.status === 0 ? 'success' : 'error',
               message: response.msg
             })
@@ -416,6 +417,7 @@ export default {
           auth.verifyPhone(this.registerData).then(response => {
             if (response.status !== 0) {
               this.$message({
+                showClose: true,
                 type: 'error',
                 message: response.msg
               })
@@ -437,6 +439,7 @@ export default {
           auth.verifywechat(this.bindTelData).then(response => {
             if (response.status != 0) {
               this.$message({
+                showClose: true,
                 type: 'error',
                 message: response.msg
               })
@@ -458,6 +461,7 @@ export default {
       return new Promise((resolve, reject) => {
         this.signIn(this.loginData).then(response => {
           this.$message({
+            showClose: true,
             type: response.status === 0 ? 'success' : 'error',
             message: response.msg
           })
@@ -476,6 +480,7 @@ export default {
           return new Promise((resolve, reject) => {
             auth.signUp(this.registerData).then(response => {
               this.$message({
+                showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
@@ -496,6 +501,7 @@ export default {
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               this.$message({
+                showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
@@ -528,6 +534,7 @@ export default {
         auth.loginWechat(this.bindTelData).then(response => {
           if (response.status === 0) {
             this.$message({
+              showClose: true,
               type: 'success',
               message: '登录成功！'
             })
@@ -537,6 +544,7 @@ export default {
             this.close()
           } else {
             this.$message({
+              showClose: true,
               type: 'error',
               message: response.msg
             })
@@ -563,6 +571,7 @@ export default {
             clearInterval(this.getwxtime)
           } else if (response.status === 100100) {
             this.$message({
+              showClose: true,
               type: 'error',
               message: response.msg
             })
@@ -705,12 +714,28 @@ export default {
       this.setGid(this.gidForm)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', item)
+    },
+    // 获取用户头像
+    getUserInfo() {
+      home.getUserInfo().then(res => {
+        this.userInfo = res.data.userInfo
+        if (this.userInfo.head_img && this.userInfo.head_img != '') {
+          this.user.userImg = this.userInfo.head_img
+        } else {
+          this.user.userImg = require('@/assets/images/profile_avator01.png')
+        }
+      })
     }
   },
   mounted() {
+    this.getUserInfo()
     this.$bus.$on('loginShow', data => {
       this.loginCardShow()
-    })
+    }),
+      this.$bus.$on('changeimg', data => {
+        this.user.userImg = data
+        // console.log(data)
+      })
   }
 }
 </script>

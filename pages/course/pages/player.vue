@@ -289,6 +289,7 @@ export default {
       let that = this
       player.on('pause', () => {
         clearInterval(that.interval)
+        socket.emit('watchRecordingTime_disconnect')
       })
       player.on('play', function() {
         // console.log(that.seconds, '这是重新播放倒计时秒数2')
@@ -303,7 +304,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '这是重新秒数3')
             let playTime = player.currentTime()
-            // console.log(playTime, '时间')
+            console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
@@ -355,6 +356,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.reportProblem(this.problem).then(response => {
           this.$message({
+            showClose: true,
             type: 'success',
             message: response.msg
           })
@@ -370,6 +372,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
           this.$message({
+            showClose: true,
             type: 'success',
             message: response.msg
           })
@@ -390,6 +393,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.addCollection(this.addCollectionForm).then(response => {
           this.$message({
+            showClose: true,
             type: 'success',
             message: '添加收藏成功'
           })
@@ -404,6 +408,7 @@ export default {
         home.deleteCollection(this.addCollectionForm).then(response => {
           // this.collectMsg = response.data.curriculumDetail.is_collection
           this.$message({
+            showClose: true,
             type: 'success',
             message: '取消收藏成功'
           })
@@ -423,7 +428,7 @@ export default {
     this.$bus.$emit('hideHeader', true)
     // 新建webspcket对象
 
-    this.seconds = persistStore.get('video_time')
+    this.seconds = 10000000
     // console.log()
     // this.seconds = 10
   }

@@ -306,6 +306,11 @@ export default {
       return new Promise((resolve, reject) => {
         home.getEvaluateList(this.evaluateForm).then(response => {
           this.evaluateData = response.data.evaluateList
+          // this.$message({
+          //   showClose: true,
+          //   type: 'success',
+          //   message: '这是一条成功的提示'
+          // })
         })
       })
     },

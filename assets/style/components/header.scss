@@ -1,7 +1,7 @@
 .headerBox {
   width: 100%;
   height: 90px;
-  border-bottom: 1px #E8D6F7 solid;
+  border-bottom: 1px #e8d6f7 solid;
   background-color: #fff;
   .main {
     width: 1100px;
@@ -29,21 +29,19 @@
         margin-left: 14px;
         font-size: 14px;
         cursor: pointer;
-
-
       }
       input::-webkit-input-placeholder {
         color: #6417a6;
         cursor: pointer;
       }
       input:-moz-placeholder {
-        color: #6417a6
+        color: #6417a6;
       }
       input::-moz-placeholder {
-       color: #6417a6
+        color: #6417a6;
       }
       input:-ms-input-placeholder {
-       color: #6417a6
+        color: #6417a6;
       }
       img {
         width: 16px;
@@ -52,13 +50,12 @@
         top: 6px;
         right: 18px;
         cursor: pointer;
-
       }
     }
     .HREntry {
       margin-left: 50px;
       margin-top: 20px;
-      &.islogined{
+      &.islogined {
         margin-left: 106px;
         height: 40px;
         margin-top: 20px;
@@ -71,11 +68,11 @@
         vertical-align: top;
         cursor: pointer;
         transition: all 300ms;
-        &.hrin{
+        &.hrin {
           border-right: 2px solid #ccc;
         }
       }
-      .shoppingCart{
+      .shoppingCart {
         display: inline-block;
         padding: 0;
         width: auto;
@@ -83,18 +80,18 @@
         position: relative;
         cursor: pointer;
         vertical-align: top;
-        span{
+        span {
           width: 20px;
           height: 20px;
           background: url('~assets/images/cartIcon.png') no-repeat;
           background-size: 20px 20px;
           transition: all 300ms;
-          &:hover{
+          &:hover {
             background: url('~assets/images/cartIconHover.png') no-repeat;
             background-size: 20px 20px;
           }
         }
-        i{
+        i {
           position: absolute;
           top: -6px;
           right: -6px;
@@ -109,9 +106,9 @@
         }
       }
       span:hover {
-        color: #8F4ACB;
+        color: #8f4acb;
       }
-      .downLoad{
+      .downLoad {
         height: 40px;
         display: inline-block;
         position: relative;
@@ -134,113 +131,112 @@
             background-size: contain;
           }
         }
-        .downApp{
+        .downApp {
           opacity: 0;
-          width:299px;
-          height:150px;
+          width: 299px;
+          height: 150px;
           transition: all 300ms;
-          background:rgba(255, 255, 255, 1);
-          border-radius:4px;
-          box-shadow:0px 0px 12px rgba(198, 194, 210, 0.28);
+          background: rgba(255, 255, 255, 1);
+          border-radius: 4px;
+          box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
           padding: 15px;
           position: absolute;
           right: 30px;
           top: 40px;
           z-index: -1;
-          img.fl{
+          img.fl {
             width: 120px;
             height: 120px;
             margin-right: 9px;
             transition: all 300ms;
           }
-          .changeType{
+          .changeType {
             width: 140px;
-            span{
+            span {
               display: inline-block;
               text-align: left;
               font-size: 14px;
               width: 100%;
-              padding-left:15px;
+              padding-left: 15px;
             }
             span:first-child {
-              color:#050223;
+              color: #050223;
               font-size: 14px;
             }
             span:nth-child(2),
             span:nth-child(3) {
               height: 36px;
               line-height: 36px;
-              background-color: #6417A6;
+              background-color: #6417a6;
               border-radius: 18px;
               color: #fff;
               margin-top: 8px;
-              &:hover{
-                background-color: #9A5CD0;
+              &:hover {
+                background-color: #9a5cd0;
               }
             }
-            span:nth-child(2) img{
+            span:nth-child(2) img {
               width: 16px;
               height: 18px;
               margin-right: 5px;
               vertical-align: middle;
             }
-            span:nth-child(3) img{
+            span:nth-child(3) img {
               width: 18px;
               height: 20px;
               vertical-align: middle;
               margin-right: 5px;
             }
-
           }
         }
       }
-
     }
     .lrBtn {
       span {
         width: 95px;
         height: 30px;
         line-height: 30px;
-        border: 1px solid #491C9C;
-        color: #491C9C;
+        border: 1px solid #491c9c;
+        color: #491c9c;
         border-radius: 5px;
         text-align: center;
         font-size: 14px;
         cursor: pointer;
         &:hover {
-          border-color: #8F4ACB;
+          border-color: #8f4acb;
         }
       }
       .login {
-        color: #491C9C;
+        color: #491c9c;
         margin-right: 10px;
         &:hover {
-          color: #8F4ACB;
+          color: #8f4acb;
         }
       }
       .register {
         margin-left: 10px;
-        background-color: #6417A6;
+        background-color: #6417a6;
         color: #fff;
         &:hover {
-          background-color: #8F4ACB;
+          background-color: #8f4acb;
         }
       }
     }
-    .headImg{
+    .headImg {
       height: 44px;
       position: relative;
       cursor: pointer;
-      &:hover .subPages{
+      &:hover .subPages {
         opacity: 1;
         z-index: 9;
       }
-      img{
+      img {
         width: 34px;
         height: 34px;
         margin-top: 5px;
+        border-radius: 20px;
       }
-      .subPages{
+      .subPages {
         opacity: 0;
         width: 120px;
         position: absolute;
@@ -251,17 +247,17 @@
         overflow: hidden;
         transition: all 300ms;
         background-color: #fff;
-        box-shadow:0px 0px 12px rgba(198, 194, 210, 0.28);
-        li{
+        box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+        li {
           height: 40px;
           line-height: 40px;
           text-align: center;
           font-size: 14px;
-          color: #332A51;
+          color: #332a51;
           cursor: pointer;
           transition: all 300ms;
-          &:hover{
-            background-color: #9A5CD0;
+          &:hover {
+            background-color: #9a5cd0;
             color: #fff;
           }
         }
@@ -278,7 +274,7 @@
     .bgt {
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,.6);
+      background-color: rgba(0, 0, 0, 0.6);
     }
     .lrFrame {
       width: 400px;
@@ -357,11 +353,11 @@
         font-size: 12px;
         background-color: #fff;
       }
-      .el-button{
+      .el-button {
         margin-top: 20px;
       }
     }
-    .wechatLogin{
+    .wechatLogin {
       width: 450px;
       height: auto;
       background-color: #fff;
@@ -370,7 +366,7 @@
       top: 90px;
       left: 50%;
       margin-left: -225px;
-      .el-form{
+      .el-form {
         padding-top: 50px;
       }
       h4 {
@@ -379,7 +375,7 @@
         top: 0;
         left: 50%;
         margin-left: -50%;
-        span{
+        span {
           width: 100%;
           text-align: center;
           height: 50px;
@@ -399,7 +395,7 @@
         height: 500px;
         background-color: #fff;
         border-radius: 10px;
-        .wxchatIMG{
+        .wxchatIMG {
           width: 300px;
           height: 400px;
           position: absolute;
@@ -407,13 +403,13 @@
           left: 50%;
           margin-left: -150px;
         }
-        p{
+        p {
           text-align: center;
           font-size: 12px;
           color: #666;
           margin-top: 395px;
-          i{
-            color:#6417a6;
+          i {
+            color: #6417a6;
             cursor: pointer;
           }
         }
@@ -422,7 +418,7 @@
         width: 100%;
         height: 40px;
         border-radius: 6px;
-        background-color: #6417A6;
+        background-color: #6417a6;
         font-size: 14px;
         color: #fff;
       }
@@ -431,27 +427,27 @@
         height: 40px;
         display: block;
         border-radius: 6px;
-        background-color: #6417A6;
+        background-color: #6417a6;
         margin: 62px auto 41px;
         color: #fff;
       }
-      .bindSuccess{
-        img{
+      .bindSuccess {
+        img {
           display: block;
           width: 114px;
           height: 114px;
           margin: 90px auto 40px;
         }
-        h5{
+        h5 {
           font-size: 20px;
-          color: #6417A6;
+          color: #6417a6;
           text-align: center;
         }
-        p{
+        p {
           text-align: center;
           font-size: 14px;
           color: #555;
-          padding:19px 0 88px;
+          padding: 19px 0 88px;
         }
       }
     }

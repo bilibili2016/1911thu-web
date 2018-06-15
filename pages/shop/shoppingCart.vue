@@ -213,6 +213,7 @@ export default {
     canSubmit() {
       if (this.addArray.curriculumcartid.length <= 0) {
         this.$message({
+          showClose: true,
           message: '请您选择课程哦'
         })
       }
@@ -422,6 +423,7 @@ export default {
             home.addPaySubmit(this.companyInfo).then(response => {
               if (response.status === '100100') {
                 this.$message({
+                  showClose: true,
                   type: 'error',
                   message: response.msg
                 })
@@ -443,6 +445,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.delShopCart(this.curriculumcartids).then(response => {
           this.$message({
+            showClose: true,
             type: 'success',
             message: '删除成功'
           })
@@ -461,6 +464,7 @@ export default {
             auth.smsCodes(this.companyInfo).then(response => {
               // console.log('resp-------', response)
               this.$message({
+                showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
@@ -470,7 +474,7 @@ export default {
               let interval = setInterval(() => {
                 if (this.companyInfo.seconds <= 0) {
                   this.companyInfo.getCode = '获取验证码'
-                  this.companyInfo.seconds = 60
+                  this.companyInfo.seconds = 30
                   this.companyInfo.captchaDisable = true
                   clearInterval(interval)
                 } else {
@@ -483,6 +487,7 @@ export default {
         }
       } else {
         this.$message({
+          showClose: true,
           type: 'error',
           message: '请填写手机号'
         })
