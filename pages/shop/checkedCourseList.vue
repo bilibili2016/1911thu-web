@@ -26,7 +26,11 @@
             </div> -->
           </div>
         </div>
-        <div class="tableFooter">商品总额：￥{{sum}}</div>
+        <div class="tableFooter">
+          <p>课程数量：{{companyInfo.courseNum}}门</p>
+          <p>学习人数：{{companyInfo.number}}人</p>
+          <h4>商品总额：￥{{sum}}</h4>
+        </div>
       </div>
     </div>
   </div>
@@ -58,6 +62,8 @@ export default {
         address: '',
         contacts: '',
         tel: '',
+        number: null,
+        courseNum: null,
         code: '',
         payIndex: null
       },
@@ -88,6 +94,12 @@ export default {
             ].CurriculumPayApplyList
           this.sum = persistStore.get('price')
           this.loading = false
+          this.companyInfo.number =
+            response.data.curriculumPayApply[this.payIndex].number
+          this.companyInfo.courseNum =
+            response.data.curriculumPayApply[
+              this.payIndex
+            ].CurriculumPayApplyList.length
           resolve(true)
         })
       })

@@ -1,7 +1,7 @@
 <template>
   <div class="center">
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pageSize" :page-count="data.pagesize" :current-page="data.page" @current-change="handleCurrentChange" :total="data.total"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :page-size="data.pageSize" :page-count="data.pagesize" :current-page="data.page" @current-change="handleCurrentChange" :total="data.total"></el-pagination>
     </div>
   </div>
 </template>

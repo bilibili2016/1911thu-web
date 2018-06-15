@@ -51,7 +51,7 @@
           color: #8F4ACB;
         }
       }
-      .share{
+      .share {
         margin-right: 15px;
       }
       .usePhone {
@@ -126,8 +126,7 @@
     }
   }
   .mediaR {
-    position: relative;
-    // width: 340px;
+    position: relative; // width: 340px;
     width: 28%;
     height: auto;
     background-color: #050223;
@@ -146,6 +145,7 @@
     .teacher {
       padding: 40px 20px 20px;
       border-bottom: 2px solid #151141;
+      cursor: pointer;
       img {
         width: 70px;
         height: 70px;
@@ -320,7 +320,7 @@
         }
       }
       .btnList {
-        .el-radio{
+        .el-radio {
           width: 74px;
           height: 26px;
           line-height: 26px;
@@ -333,13 +333,13 @@
             color: #6417A6;
             border: 1px solid #6417A6;
           }
-          &.is-bordered.is-checked{
+          &.is-bordered.is-checked {
             border-color: #6417A6;
           }
-          .el-radio__input.is-checked+.el-radio__label{
+          .el-radio__input.is-checked+.el-radio__label {
             color: #6417A6;
           }
-          .el-radio__input{
+          .el-radio__input {
             display: none;
           }
         }

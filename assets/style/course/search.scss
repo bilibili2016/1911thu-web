@@ -1,4 +1,4 @@
-.center{
+.center {
   .cnums {
     font-size: 14px;
     font-family: MicrosoftYaHei;
@@ -6,7 +6,7 @@
     line-height: 0px;
     margin: 40px 0px;
   }
-  .searchFalse{
+  .searchFalse {
     .noMsg {
       padding: 100px 0;
       text-align: center;
@@ -22,20 +22,24 @@
         color: #999999;
       }
     }
-    .doYouLike{
-      padding:0 0 80px;
-      .title{
+    .doYouLike {
+      padding: 0 0 80px;
+      .title {
         height: 76px;
         line-height: 76px;
-        p{
+        p {
           font-size: 18px;
           color: #222;
-          &.fr{
+          &.fr {
             color: #6417a6;
+            cursor: pointer;
+            transition: all 300ms;
+            &:hover {
+              color: #8f4acb;
+            }
           }
         }
       }
     }
   }
-  
 }

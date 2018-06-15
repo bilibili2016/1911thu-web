@@ -51,6 +51,8 @@
             <el-button class="isGray" v-else>提交</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
+          <span class="checkedNUmber fr">已选择
+            <i>{{this.addArray.curriculumcartid.length}}</i> 门课程</span>
         </div>
       </div>
     </div>
@@ -301,7 +303,7 @@ export default {
           this.selectAll = true
           this.loding = false
           this.numForm.number = response.data.number
-          console.log(this.numForm.number)
+          // console.log(this.numForm.number);
 
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {

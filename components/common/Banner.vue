@@ -68,11 +68,16 @@ export default {
       formdata.append('image', img1)
       formdata.image = img1
       reader.readAsDataURL(img1)
+      that.fileForm.FILESS = []
       reader.onloadend = function() {
         that.fileForm.FILESS.push(reader.result)
         home.uploadHeadImg(that.fileForm).then(response => {
-          this.avator = response.data.full_path
-          console.log(this.avator)
+          that.avator = response.data.full_path
+          that.$message({
+            message: response.msg,
+            type: 'success'
+          })
+          // console.log(response)
         })
       }
     },
@@ -93,6 +98,7 @@ export default {
 <style scoped lang="scss">
 .news-banner {
   height: 148px;
+  overflow: hidden;
   position: relative;
   img {
     width: 1920px;
