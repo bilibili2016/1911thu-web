@@ -1063,6 +1063,7 @@ export default {
         width: 100%;
         height: 132px;
         background-color: #6417a6;
+        cursor: pointer;
         img {
           float: left;
           width: 70px;

@@ -22,7 +22,7 @@
           margin-left: 127px;
         }
       }
-      .tableBody > div {
+      .tableBody>div {
         background-color: #fff;
         display: flex;
         align-items: center;
@@ -86,7 +86,7 @@
         text-align: center;
         height: 30px;
         margin: 80px 0 50px;
-        & > span {
+        &>span {
           cursor: pointer;
         }
         .el-pagination {
@@ -121,8 +121,7 @@
             border: 1px solid #6417a6;
             width: 134px;
             height: 31px;
-            background-color: #fff;
-            // height: 34px;
+            background-color: #fff; // height: 34px;
             span {
               width: 30px;
               height: 30px;
@@ -196,14 +195,48 @@
                 color: #fff;
               }
             }
-            .num {
-              width: 64px;
-              height: 30px;
-              border-top: 1px solid #6417a6;
-              border-bottom: 1px solid #6417a6;
-              font-weight: 400;
+            .deleteChecked {
               font-size: 16px;
-              text-align: center;
+              color: #222;
+              margin-right: 47px;
+              cursor: pointer;
+            }
+            .el-icon-minus,
+            .el-icon-plus {
+              color: #6417A6;
+            }
+            .person {
+              font-size: 16px;
+              color: #222;
+            }
+            .number {
+              vertical-align: middle;
+              i {
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                float: left;
+                font-size: 20px;
+                font-weight: 700;
+                border: 1px solid #6417A6;
+                transition: all 300ms;
+                cursor: pointer;
+                &.minus:hover,
+                &.add:hover {
+                  background-color: #8F4ACB;
+                  color: #fff;
+                }
+              }
+              .num {
+                width: 64px;
+                height: 30px;
+                border-top: 1px solid #6417a6;
+                border-bottom: 1px solid #6417a6;
+                font-weight: 400;
+                font-size: 16px;
+                text-align: center;
+              }
             }
           }
         }
@@ -259,13 +292,9 @@
             border-color: #6417a6;
             background-color: #6417a6;
           }
-          & + .el-checkbox__label {
+          &+.el-checkbox__label {
             color: #222;
           }
-        }
-        .el-checkbox__label {
-          font-size: 16px;
-          font-weight: 400;
         }
       }
     }

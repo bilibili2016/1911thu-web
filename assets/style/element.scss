@@ -10,11 +10,11 @@
   border-radius: $--button-large-border-radius;
 }
 
-.el-button + .el-button {
+.el-button+.el-button {
   margin: 0 10px;
 }
 
-.el-button + .el-dropdown {
+.el-button+.el-dropdown {
   margin: 0 10px;
 }
 
@@ -110,6 +110,7 @@
     }
   }
 }
+
 // 输入框变小手
 .el-input__inner {
   cursor: pointer;
@@ -334,6 +335,7 @@
     background-color: transparent;
   }
 }
+
 .el-pagination.is-background .el-pager li:not(.disabled).active {
   background-color: #8f4acb;
   color: #fff;
@@ -369,8 +371,7 @@
   }
   .el-tabs__item {
     height: 56px;
-    line-height: 56px;
-    // width: 40px;
+    line-height: 56px; // width: 40px;
     text-align: center;
     margin-left: 38px;
     padding: 0;
@@ -607,8 +608,8 @@
     }
   }
 }
-// hot组件
 
+// hot组件
 .clsTitle {
   .hotBtn {
     .el-tabs {
@@ -699,7 +700,7 @@
 
 // profile页面修改tab
 .profile {
-  & > div > div.el-tabs__content {
+  &>div>div.el-tabs__content {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
   }
@@ -752,11 +753,10 @@
       box-shadow: none;
     }
   }
-
-  & > .el-tabs {
+  &>.el-tabs {
     padding: 10px;
   }
-  & > .el-tabs--left,
+  &>.el-tabs--left,
   .el-tabs--right {
     overflow: auto;
   }
@@ -773,8 +773,7 @@
         padding-left: 15px;
       }
     }
-  }
-  // .el-tabs__nav{
+  } // .el-tabs__nav{
   //   border-radius:6px;
   //   overflow: hidden;
   //   box-shadow:0px 0px 14px rgba(198, 194, 210, 0.36);
@@ -826,17 +825,18 @@
 // 设置card 的goodLesson 左边的大小
 .goodLesson {
   .el-card {
-    width: 400px;
-    // height: 392px;
+    width: 400px; // height: 392px;
     border: none;
   }
 }
+
 // 修改轮播
 .particulars {
   .el-carousel__container {
     background-color: #fafafa;
   }
 }
+
 .card-category {
   .el-checkbox__inner {
     width: 30px;
@@ -852,19 +852,18 @@
       border-width: 2px;
     }
   }
-
   .el-checkbox__input.is-checked .el-checkbox__inner {
     background-color: #6417a6;
     border-color: #6417a6;
   }
 }
+
 .evaluate-tag {
   .el-rate__icon {
     margin-right: 0px;
     font-size: 13px;
     margin-bottom: 6px;
   }
-
   .submit {
     margin: 41px auto 20px;
     width: 160px;
@@ -908,6 +907,7 @@
     padding: 0;
   }
 }
+
 // category页
 .category-style {
   .pages {
@@ -944,11 +944,9 @@
         &.is-active {
           background-color: transparent;
           border-bottom: 2px solid #6417a6;
-        }
-        //  &:first-child {
+        } //  &:first-child {
         //    margin-right: 20px;
         //  }
-
         &:last-child {
           margin-left: 20px;
         }
@@ -971,12 +969,15 @@
     }
   }
 }
+
 .el-breadcrumb__inner.is-link {
   font-weight: normal;
 }
+
 .el-breadcrumb__separator[class*='icon'] {
   margin: 0px;
 }
+
 .el-breadcrumb__item:last-child .el-breadcrumb__inner {
   color: #8f4acb !important;
 }
@@ -1004,6 +1005,7 @@
     }
   }
 }
+
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #fff inset !important; //关于解决输入框背景颜色
   // -webkit-text-fill-color: #606266 !important; //关于接输入框文字颜色

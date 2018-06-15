@@ -12,9 +12,9 @@
             </el-tabs>
           </div>
           <div class="fr rightPages">
-            <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
+            <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
             </el-switch>隐藏已参加课程
-            <el-pagination class="fr" small layout="pager, prev, next" :total="20"></el-pagination>
+            <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
           </div>
         </div>
       </div>
@@ -92,9 +92,9 @@ export default {
       this.newsCurriculumForm.categoryId = id
       this.recommendCurriculumList()
     },
-    getClassifyList() {
+    getClassicsList() {
       return new Promise((resolve, reject) => {
-        home.getClassifyList(this.classList).then(response => {
+        home.getClassicsList(this.classList).then(response => {
           this.classList = response.data.categoryList
           resolve(true)
         })
@@ -123,7 +123,7 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     // this.activeName = 'first'
     this.recommendCurriculumList()
-    this.getClassifyList()
+    this.getClassicsList()
   }
 }
 </script>
