@@ -44,7 +44,7 @@
             <span class="fl playIcon">
               <i class="el-icon-caret-right"></i>
             </span>
-            <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}oo分钟)</span>
+            <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}分钟)</span>
           </div>
         </div>
       </div>
@@ -260,10 +260,10 @@ export default {
       player = TCPlayer('movd', this.tcplayer)
 
       player.dispose()
-      // $('#playInner').html('')
-      // $('#playInner').html(
-      //   '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
-      // )
+      $('#playInner').html('')
+      $('#playInner').html(
+        '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
+      )
 
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
@@ -309,7 +309,7 @@ export default {
       // 计时器
       return new Promise((resolve, reject) => {
         home.getPlayerInfos(this.playerForm).then(response => {
-          console.log(response, '获取的时间')
+          // console.log(response, '获取的时间')
           // this.daojishi()
           if (response.data.playAuthInfo.videoViewType == false) {
             player.loadVideoByID({
@@ -334,7 +334,7 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          console.log(response, '这是获取的播放信息')
+          // console.log(response, '这是获取的播放信息')
           this.player = response.data.curriculumDetail
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection
@@ -416,7 +416,7 @@ export default {
     // 新建webspcket对象
 
     this.seconds = persistStore.get('video_time')
-    console.log()
+    // console.log()
     // this.seconds = 10
   }
 }
