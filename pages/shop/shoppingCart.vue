@@ -13,9 +13,9 @@
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">
-              <img class="fl" :src="course.picture">
+              <img class="fl" :src="course.picture" @click="goDetail(course.id)">
               <div class="fl">
-                <h4>{{course.title}}</h4>
+                <h4 @click="goDetail(course.id)">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
                 <p>讲师：{{course.teacher}}</p>
               </div>
@@ -229,7 +229,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum']),
+    ...mapActions('auth', ['setProductsNum', 'setKid']),
+    goDetail(id) {
+      let kidForm = {
+        kids: id
+      }
+      this.setKid(kidForm)
+      this.$router.push('/course/pages/coursedetail')
+    },
     loadAll() {
       return []
     },
