@@ -347,15 +347,15 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   mounted() {
-    return new Promise((resolve, reject) => {
-      home.shopCartList().then(response => {
-        let body = response.data.curriculumCartList
-        let len = {
-          pn: body.length
-        }
-        this.setProductsNum(len)
+    let me = this
+    this.getCount()
+    this.$bus
+      .$on('loginShow', data => {
+        this.loginCardShow()
       })
-    })
+      .$on('updateCount', () => {
+        me.getCount()
+      })
   },
   methods: {
     ...mapActions('auth', [
@@ -365,6 +365,17 @@ export default {
       'signOut',
       'setToken'
     ]),
+    getCount() {
+      return new Promise((resolve, reject) => {
+        home.shopCartList().then(response => {
+          let body = response.data.curriculumCartList
+          let len = {
+            pn: body.length
+          }
+          this.setProductsNum(len)
+        })
+      })
+    },
     changeImg(what) {
       if (what == 'android') {
         // console.log(1)
@@ -706,11 +717,6 @@ export default {
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', item)
     }
-  },
-  mounted() {
-    this.$bus.$on('loginShow', data => {
-      this.loginCardShow()
-    })
   }
 }
 </script>

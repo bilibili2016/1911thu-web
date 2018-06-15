@@ -312,7 +312,6 @@ export default {
           this.loding = false
           this.numForm.number = response.data.number
           // console.log(this.numForm.number);
-
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
@@ -434,6 +433,7 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
+                this.$bus.$emit('updateCount')
                 this.$router.push('/shop/checkedCourse')
               }
               this.showInfo = false
