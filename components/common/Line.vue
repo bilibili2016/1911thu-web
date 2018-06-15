@@ -58,7 +58,7 @@ export default {
     addShopCart() {
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingCart')
+          // this.$router.push('/shop/shoppingCart')
         })
       })
     },
@@ -69,12 +69,15 @@ export default {
         .addClass('checked')
     },
     handleCatalog(index, item) {
-      console.log(index, 'index')
-      console.log(item, 'item')
+      // console.log(index, 'index')
+      // console.log(item, 'item')
       let curriculum_id = item.childList[index].curriculum_id
       let catalog_id = item.childList[index].id
-      console.log(curriculum_id, '这是curriculum_id')
-      console.log(catalog_id, '这是catalog_id')
+      // console.log(curriculum_id, '这是curriculum_id')
+      // console.log(catalog_id, '这是catalog_id')
+      let video_time = item.childList[index].second
+      // console.log(video_time, '这是video_time')
+      persistStore.set('video_time', video_time)
       persistStore.set('curriculumId', curriculum_id)
       persistStore.set('catalogId', catalog_id)
     },

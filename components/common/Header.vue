@@ -5,7 +5,7 @@
         <img src="~/assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="gokey">
+        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
@@ -24,7 +24,7 @@
         </div>
         <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingCart')">
           <span class="cartIcon"></span>
-          <i>{{productsNum}}</i>
+          <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
@@ -55,7 +55,7 @@
             <!-- 登录 表单-->
             <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')">
               <el-form-item prop="phonenum">
-                <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable></el-input>
+                <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable type="text"></el-input>
               </el-form-item>
               <el-form-item prop="password">
                 <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
@@ -367,10 +367,10 @@ export default {
     ]),
     changeImg(what) {
       if (what == 'android') {
-        console.log(1)
+        // console.log(1)
         this.downApp = require('~/assets/images/wechatLogin.png')
       } else {
-        console.log(2)
+        // console.log(2)
         this.downApp = require('~/assets/images/wechatLogin.png')
       }
     },
@@ -449,8 +449,28 @@ export default {
         })
       }
     },
+    // 注册完登录 请求
+    alreadySignin(formName) {
+      // console.log(this.registerData, '这是this.registerData')
+      this.loginData.phonenum = this.registerData.phones
+      this.loginData.password = this.registerData.passwords
+
+      return new Promise((resolve, reject) => {
+        this.signIn(this.loginData).then(response => {
+          this.$message({
+            type: response.status === 0 ? 'success' : 'error',
+            message: response.msg
+          })
+          if (response.status === 0) {
+            this.close()
+          }
+        })
+      })
+    },
     // 注册 请求
     signUp(formName) {
+      // console.log(this.registerData, '这是this.registerData')
+      this.alreadySignin()
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -661,22 +681,16 @@ export default {
       document.removeEventListener('touchmove', mo, false)
     },
     goSearch(item) {
+      this.search = this.search.replace(/[ ]/g, '')
       if (this.search !== '') {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
           case '/course/pages/search':
+            this.$router.go()
             break
           default:
             this.$router.push('/course/pages/search')
             break
-        }
-      }
-    },
-    gokey() {
-      if (event.keyCode == 13) {
-        if (this.search !== '') {
-          persistStore.set('key', this.search)
-          this.$router.push('/course/pages/search')
         }
       }
     },

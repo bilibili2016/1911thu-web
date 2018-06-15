@@ -1,12 +1,10 @@
 <template>
   <div class="checkedCourse">
-    <div class="main">
-      <!-- {{curriculumPayData}} -->
-      <div class="content" v-if="curriculumPayData.length === 0">
+    <div class="main" v-loading="loding">
+      <div class="content" v-if="noData">
         <div class="noCourse">
           <img :src="noMsgImg" alt="">
           <h4 style="color:#333;">抱歉，现在还没有选中的课程呦~</h4>
-          <!-- <p>去学习</p> -->
         </div>
       </div>
       <div v-else>
@@ -57,7 +55,9 @@ export default {
       allPrice: '69.00',
       status: '等待审核',
       time: null,
-      noMsgImg: require('~/assets/images/noMsg.png')
+      noMsgImg: require('~/assets/images/noMsg.png'),
+      noData: false,
+      loding: true
     }
   },
   mounted() {
@@ -67,12 +67,15 @@ export default {
   },
   methods: {
     curriculumPayApply() {
+      this.loding = true
       return new Promise((resolve, reject) => {
         home.curriculumPayApply().then(response => {
           this.curriculumPayData = response.data.curriculumPayApply
           for (let item of response.data.curriculumPayApply) {
             item.create_time = this.timestampToTime(item.create_time)
           }
+          let noData = this.curriculumPayData.length < 0
+          this.loding = false
           resolve(true)
         })
       })

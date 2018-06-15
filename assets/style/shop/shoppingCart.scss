@@ -1,332 +1,347 @@
 .shopCart {
   background-color: #fafafa;
-  .main{
+  .main {
     width: 1100px;
     margin: 0 auto;
-    .table{
-        padding: 40px 0 80px;
-        .tableHeader{
-            height: 60px;
-            line-height: 60px;
-            background-color: #EBE7ED;
+    .table {
+      padding: 40px 0 80px;
+      .tableHeader {
+        height: 60px;
+        line-height: 60px;
+        background-color: #ebe7ed;
+        font-size: 16px;
+        color: #222;
+        margin-bottom: 40px;
+        .courseName {
+          margin-left: 120px;
+        }
+        .price {
+          margin-left: 662px;
+        }
+        .operation {
+          margin-left: 127px;
+        }
+      }
+      .tableBody > div {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        height: 140px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+        .el-checkbox {
+          line-height: 140px;
+        }
+        .courseInfo {
+          display: inline-block;
+          width: 690px;
+          margin-left: 60px;
+          img {
+            width: 160px;
+            height: 100px;
+            margin-right: 20px;
+          }
+          h4 {
+            width: 470px;
+            height: 42px;
             font-size: 16px;
-            color: #222;
-            margin-bottom: 40px;
-            .courseName{
-                margin-left: 120px;
-            }
-            .price{
-                margin-left: 662px;
-            }
-            .operation{
-                margin-left: 127px;
-            }
+            color: #332a51;
+            overflow: hidden;
+            padding-top: 9px;
+            margin-bottom: 15px;
+          }
+          h6 {
+            color: #6d687f;
+            font-size: 12px;
+            padding-bottom: 9px;
+          }
+          p {
+            font-size: 14px;
+            color: #6d687f;
+          }
         }
-        .tableBody>div{
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            height: 140px;
-            margin-bottom: 20px;
-            border-radius:6px;
-            box-shadow:0px 0px 14px rgba(198, 194, 210, 0.36);
-            .el-checkbox{
-                line-height: 140px;
-            }
-            .courseInfo{
-                display: inline-block;
-                width: 690px;
-                margin-left: 60px;
-                img{
-                    width: 160px;
-                    height: 100px;
-                    margin-right: 20px;
-                }
-                h4{
-                    width: 470px;
-                    height: 42px;
-                    font-size: 16px;
-                    color: #332A51;
-                    overflow: hidden;
-                    padding-top: 9px;
-                    margin-bottom: 15px;
-                }
-                h6{
-                    color: #6D687F;
-                    font-size: 12px;
-                    padding-bottom: 9px;
-                }
-                p{
-                    font-size: 14px;
-                    color: #6D687F;
-                }
-            }
-            .coursePrice{
-                display: inline-block;
-                width: 100px;
-                height: 140px;
-                text-align: center;
-                color: #FF5F5F;
-                font-size: 16px;
-                line-height: 78px;
-            }
-            .courseOperation{
-                display: inline-block;
-                width: 150px;
-                height: 140px;
-                text-align: center;
-                margin-left: 38px;
-                line-height: 78px;
-                font-size: 16px;
-                color: #332A51;
-                cursor: pointer;
-            }
+        .coursePrice {
+          display: inline-block;
+          width: 100px;
+          height: 140px;
+          text-align: center;
+          color: #ff5f5f;
+          font-size: 16px;
+          line-height: 78px;
         }
-        .pagination{
-            text-align: center;
-            height: 30px;
-            margin: 80px 0 50px;
-            &>span{
-                cursor: pointer;
-            }
-            .el-pagination{
-                display: inline-block;
-                vertical-align: middle;
-            }
-            .el-pagination .btn-prev,
-            .el-pagination .btn-next{
-                background-color: transparent;
-            }
-            .el-pager .number{
-                background-color: transparent;
-                &.active {
-                    min-width: 24px;
-                    height: 24px;
-                    line-height: 24px;
-                    border-radius: 50%;
-                    background-color: #8F4ACB;
-                    color: #fff;
-                }
-            }
+        .courseOperation {
+          display: inline-block;
+          width: 150px;
+          height: 140px;
+          text-align: center;
+          margin-left: 38px;
+          line-height: 78px;
+          font-size: 16px;
+          color: #332a51;
+          cursor: pointer;
         }
-        .tableFooter{
-            height: 60px;
-            line-height: 60px;
-            background-color: #EBE7ED;
-            font-size: 16px;
-            color: #222;
-            .courseNumber{
-                margin-left: 47px;
-                .courseNumberInput{
-                    border: 1px solid #6417A6;
-                    width: 134px;
-                    height: 31px;
-                    background-color: #fff;
-                    // height: 34px;
-                    span{
-                        width: 30px;
-                        height: 30px;
-                        line-height: 30px;
-                    }
-                    .el-input{
-                        height: 30px;
-                    }
-                    .el-input__inner{
-                        height: 30px;
-                        line-height: 30px;
-                        padding: 0 40px;
-                        background-color: transparent;
-                        vertical-align: top;
-                    }
-                    .el-input-number__decrease,
-                    .el-input-number__increase{
-                        background: transparent;
-                        margin-top: -1px;
-                        transition: all 300ms;
-                        font-size: 16px;
-                        &:hover{
-                            background-color: #8F4ACB;
-                            i{
-                                color: #fff;
-                            }
-                        }
-                    }
-                    .el-input-number__decrease{
-                        margin-left: -1px;
-                        border-right:1px solid #6417A6;
-                    }
-                    .el-input-number__increase{
-                        margin-right: -1px;
-                        border-left:1px solid #6417A6;
-                    }
-                    .el-input__inner{
-                        border: none !important;
-                    }
-                }
-                .deleteChecked{
-                    font-size: 16px;
-                    color: #222;
-                    margin-right: 47px;
-                    cursor: pointer;
-                }
-                .el-icon-minus,
-                .el-icon-plus{
-                    color: #6417A6;
-                }
-                .person{
-                    font-size: 16px;
-                    color: #222;
-                }
-                .number{
-                    vertical-align: middle;
-                    i{
-                        width: 30px;
-                        height: 30px;
-                        line-height: 30px;
-                        text-align: center;
-                        float: left;
-                        font-size: 20px;
-                        font-weight: 700;
-                        border: 1px solid #6417A6;
-                        transition: all 300ms;
-                        cursor: pointer;
-                        &.minus:hover,
-                        &.add:hover {
-                            background-color: #8F4ACB;
-                            color:#fff;
-                        }
-                    }
-                    .num{
-                        width: 64px;
-                        height: 30px;
-                        border-top:1px solid #6417a6;
-                        border-bottom:1px solid #6417a6;
-                        font-weight: 400;
-                        font-size: 16px;
-                        text-align: center;
-                    }
-                    
-                }
+      }
+      .pagination {
+        text-align: center;
+        height: 30px;
+        margin: 80px 0 50px;
+        & > span {
+          cursor: pointer;
+        }
+        .el-pagination {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .el-pagination .btn-prev,
+        .el-pagination .btn-next {
+          background-color: transparent;
+        }
+        .el-pager .number {
+          background-color: transparent;
+          &.active {
+            min-width: 24px;
+            height: 24px;
+            line-height: 24px;
+            border-radius: 50%;
+            background-color: #8f4acb;
+            color: #fff;
+          }
+        }
+      }
+      .tableFooter {
+        height: 60px;
+        line-height: 60px;
+        background-color: #ebe7ed;
+        font-size: 16px;
+        color: #222;
+        .courseNumber {
+          margin-left: 47px;
+          .courseNumberInput {
+            border: 1px solid #6417a6;
+            width: 134px;
+            height: 31px;
+            background-color: #fff; // height: 34px;
+            span {
+              width: 30px;
+              height: 30px;
+              line-height: 30px;
             }
-            .allPrice {
-                width: 300px;
-                height: 60px;
-                line-height: 60px;
-                padding-right: 30px;
-                text-align: right;
-                color: #FF5F5F;
-                font-size: 30px;
+            .el-input {
+              height: 30px;
+            }
+            .el-input__inner {
+              height: 30px;
+              line-height: 30px;
+              padding: 0 40px;
+              background-color: transparent;
+              vertical-align: top;
+            }
+            .el-input-number__decrease,
+            .el-input-number__increase {
+              background: transparent;
+              margin-top: -1px;
+              transition: all 300ms;
+              font-size: 16px;
+              &:hover {
+                background-color: #8f4acb;
+                i {
+                  color: #fff;
+                }
+              }
+            }
+            .el-input-number__decrease {
+              margin-left: -1px;
+              border-right: 1px solid #6417a6;
+            }
+            .el-input-number__increase {
+              margin-right: -1px;
+              border-left: 1px solid #6417a6;
             }
             .commitOrder .el-button {
-                border: none;
-                color: #fff;
-                height: 60px;
-                width: 140px;
-                font-weight: 400;
-                font-size: 16px;
-                transition: background 300ms;
+              border: none;
+              color: #fff;
+              height: 60px;
+              width: 140px;
+              font-weight: 400;
+              font-size: 16px;
+              transition: background 300ms;
             }
-            .commitOrder .isGray{
+            .commitOrder .isGray {
+              background-color: #8f8f8f;
+              &:hover {
                 background-color: #8f8f8f;
-                &:hover{
-                    background-color: #8f8f8f;
-                }
+              }
             }
-            .commitOrder .notGray{
-                background-color: #6417a6;
-                &:hover{
-                    background-color: #8F4ACB;
-                }
+            .commitOrder .notGray {
+              background-color: #6417a6;
+              &:hover {
+                background-color: #8f4acb;
+              }
+              // .el-input__inner {
+              //   border: none !important;
+              // }
             }
-
-        }
-        .el-checkbox{
-            padding-left: 41px;
-            color: #222;
-            font-size: 16px;
-            .el-checkbox__inner{
-                border-color:#6417A6;
-                width: 18px;
-                height: 18px;
-                border-radius: 4px;
-                background-color: transparent;
-                &:after{
-                    height: 9px;
-                    left: 6px;
-                    top: 2px;
-                }
+            .deleteChecked {
+              font-size: 16px;
+              color: #222;
+              margin-right: 47px;
+              cursor: pointer;
             }
-            .el-checkbox__input.is-checked{
-               & .el-checkbox__inner{
-                    border-color:#6417A6;
-                    background-color:#6417A6;
-                } 
-                &+.el-checkbox__label {
-                  color: #222;
+            .el-icon-minus,
+            .el-icon-plus {
+              color: #6417a6;
+            }
+            .person {
+              font-size: 16px;
+              color: #222;
+            }
+            .number {
+              vertical-align: middle;
+              i {
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                float: left;
+                font-size: 20px;
+                font-weight: 700;
+                border: 1px solid #6417a6;
+                transition: all 300ms;
+                cursor: pointer;
+                &.minus:hover,
+                &.add:hover {
+                  background-color: #8f4acb;
+                  color: #fff;
                 }
-            } 
-            .el-checkbox__label{
-                font-size: 16px;
+              }
+              .num {
+                width: 64px;
+                height: 30px;
+                border-top: 1px solid #6417a6;
+                border-bottom: 1px solid #6417a6;
                 font-weight: 400;
+                font-size: 16px;
+                text-align: center;
+              }
             }
+          }
+          .allPrice {
+            width: 300px;
+            height: 60px;
+            line-height: 60px;
+            padding-right: 30px;
+            text-align: right;
+            color: #ff5f5f;
+            font-size: 30px;
+          }
+          .checkedNUmber {
+            i {
+              color: #ff5f5f;
+            }
+          }
+          .commitOrder .el-button {
+            border: none;
+            background-color: #6417a6;
+            color: #fff;
+            height: 60px;
+            width: 140px;
+            font-weight: 400;
+            font-size: 16px;
+            transition: background 300ms;
+            &:hover {
+              background-color: #8f4acb;
+            }
+          }
         }
+        .el-checkbox {
+          padding-left: 41px;
+          color: #222;
+          font-size: 16px;
+          .el-checkbox__inner {
+            border-color: #6417a6;
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            background-color: transparent;
+            &:after {
+              height: 9px;
+              left: 6px;
+              top: 2px;
+            }
+          }
+          .el-checkbox__input.is-checked {
+            & .el-checkbox__inner {
+              border-color: #6417a6;
+              background-color: #6417a6;
+            }
+            & + .el-checkbox__label {
+              color: #222;
+            }
+          }
+          .el-checkbox__label {
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+      }
     }
   }
-}
 
-.information {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, .6);
-  z-index: 1;
-  .info {
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    margin-left: -227px;
-    width: 454px;
-    height: auto;
-    border-radius: 10px;
-    background-color: #fff;
-    .infoTitle h4 {
-      border-bottom: 1px solid #E8D6F7;
-      height: 76px;
-      line-height: 76px;
-      padding-left: 50px;
-      color: #6417A6;
-    }
-    .companyInfo {
-      .el-form-item {
-        height: 50px;
-        margin: 20px 0 10px;
+  .information {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    .info {
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      margin-left: -227px;
+      width: 454px;
+      height: auto;
+      border-radius: 10px;
+      background-color: #fff;
+      .infoTitle h4 {
+        border-bottom: 1px solid #e8d6f7;
+        height: 76px;
+        line-height: 76px;
+        padding-left: 50px;
+        color: #6417a6;
       }
-      .el-form-item__content {
-        .el-button {
-          width: 264px;
-          height: 40px;
-          border-radius: 6px;
-          margin-left: -80px;
-          background-color: #6417A6;
-          color: #fff
+      .companyInfo {
+        .el-form-item {
+          height: 50px;
+          margin: 20px 0 10px;
         }
-      }
-      .code {
-        span {
-          float: right;
-          width: 118px;
-          height: 40px;
-          line-height: 40px;
-          text-align: center;
-          border-radius: 6px;
-          background-color: #eee;
-          color: #6417A6;
-          font-size: 12px;
-          cursor: pointer;
+        .el-form-item__content {
+          .el-button {
+            width: 264px;
+            height: 40px;
+            border-radius: 6px;
+            margin-left: -80px;
+            background-color: #6417a6;
+            color: #fff;
+          }
+        }
+        .code {
+          span {
+            float: right;
+            width: 118px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 6px;
+            background-color: #eee;
+            color: #6417a6;
+            font-size: 12px;
+            cursor: pointer;
+          }
         }
       }
     }

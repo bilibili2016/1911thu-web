@@ -227,7 +227,7 @@ export default {
       },
       classicForm: {
         pages: 0,
-        limits: 4,
+        limits: 8,
         categoryId: null,
         sortBy: null
       },

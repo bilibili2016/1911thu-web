@@ -1,7 +1,7 @@
 <template>
   <div class="checkedCourseList">
     <!-- 购物车列表 -->
-    <div class="main">
+    <div class="main" v-loading='loading'>
       <div class="table">
         <div class="tableHeader">
           <span class="courseName">课程名称</span>
@@ -26,7 +26,11 @@
             </div> -->
           </div>
         </div>
-        <div class="tableFooter">商品总额：￥{{sum}}</div>
+        <div class="tableFooter">
+          <p>课程数量：{{companyInfo.courseNum}}门</p>
+          <p>学习人数：{{companyInfo.number}}人</p>
+          <h4>商品总额：￥{{sum}}</h4>
+        </div>
       </div>
     </div>
   </div>
@@ -39,6 +43,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
+      loading: true,
       shwoInfo: false,
       selectAll: false,
       checked: [],
@@ -57,6 +62,8 @@ export default {
         address: '',
         contacts: '',
         tel: '',
+        number: null,
+        courseNum: null,
         code: '',
         payIndex: null
       },
@@ -85,6 +92,14 @@ export default {
             response.data.curriculumPayApply[
               this.payIndex
             ].CurriculumPayApplyList
+          this.companyInfo.number =
+            response.data.curriculumPayApply[this.payIndex].number
+          this.companyInfo.courseNum =
+            response.data.curriculumPayApply[
+              this.payIndex
+            ].CurriculumPayApplyList.length
+          this.sum = persistStore.get('price')
+          this.loading = false
           resolve(true)
         })
       })
@@ -95,7 +110,6 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.payIndex = persistStore.get('pay')
     this.curriculumPayApply()
-    this.sum = persistStore.get('price')
   }
 }
 </script>

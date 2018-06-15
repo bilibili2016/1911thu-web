@@ -4,7 +4,6 @@
   .topImg {
     width: 100%;
     height: 360px;
-    margin-bottom: 80px;
     position: relative;
     overflow: hidden;
     img {
@@ -14,6 +13,16 @@
       margin-left: -960px;
       width: 1920px;
       height: 360px;
+    }
+  }
+  .breadCrumb {
+    height: 80px;
+    line-height: 80px;
+    width: 1100px;
+    margin: 0 auto;
+    div {
+      display: inline-block;
+      vertical-align: middle;
     }
   }
 }
