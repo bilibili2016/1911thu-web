@@ -151,8 +151,8 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapGetters("auth", ["isAuthenticated"]),
-    ...mapState("auth", ["kid"])
+    ...mapGetters('auth', ['isAuthenticated']),
+    ...mapState('auth', ['kid'])
   },
   components: {
     'v-card': CustomCard,
@@ -322,7 +322,10 @@ export default {
           this.catalogs = response.data.curriculumCatalogList
           for (let item of this.catalogs) {
             for (let i of item.childList) {
+              i.second = i.video_time
               i.video_time = Math.round(i.video_time / 60)
+
+              console.log(i, '123')
             }
           }
         })
@@ -330,13 +333,13 @@ export default {
     },
     // 判断是收藏还是未收藏
     collection() {
-      if(this.isAuthenticated){
+      if (this.isAuthenticated) {
         if (this.collectMsg === 1) {
-          this.deleteCollection();
-          this.collectMsg = 2;
+          this.deleteCollection()
+          this.collectMsg = 2
         } else {
-          this.addCollection();
-          this.collectMsg = 1;
+          this.addCollection()
+          this.collectMsg = 1
         }
       } else {
         this.$bus.$emit('loginShow', true)
