@@ -3,6 +3,13 @@
     <div class="topImg">
       <img :src="atopImg" alt="">
     </div>
+    <div class="breadCrumb">
+      <span>当前位置：</span>
+      <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>新上好课</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <v-card :courseList="courseList" :config="config" :linkdata="linkdata"></v-card>
     <div class="card-button">
       <el-button type="primary" @click='getMoreData()'>查看更多</el-button>
