@@ -3,6 +3,13 @@
     <div class="topImg">
       <img :src="atopImg" alt="">
     </div>
+    <div class="breadCrumb">
+      <span>当前位置：</span>
+      <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>新上好课</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <v-card :courseList="courseList" :config="config" :linkdata="linkdata"></v-card>
     <div class="card-button">
       <el-button type="primary" @click='getMoreData()'>查看更多</el-button>
@@ -28,11 +35,12 @@ export default {
         card_type: 'goodlesson'
       },
       courseList: [],
+      pageCount: null,
       newsCurriculumForm: {
-        pages: 0,
+        pages: 1,
         limits: 5,
         evaluateLimit: 4,
-        isevaluate: 1,
+        isevaluate: 1
       }
     }
   },
@@ -40,16 +48,23 @@ export default {
     getNewCourseList() {
       return new Promise((resolve, reject) => {
         home.getNewCourseList(this.newsCurriculumForm).then(response => {
-          // console.log(response.data.curriculumList);
-          this.courseList = response.data.curriculumList
+          // console.log(response.data.curriculumList)
+          this.courseList = this.courseList.concat(response.data.curriculumList)
+          this.pageCount = response.data.pageCount
           resolve(true)
         })
       })
     },
     getMoreData() {
-      this.newsCurriculumForm.limits = this.newsCurriculumForm.limits + 1;
-      console.log(this.newsCurriculumForm);
-      this.getNewCourseList()
+      if (this.pageCount === this.courseList.length) {
+        this.$message({
+          type: 'error',
+          message: '没有更多课程了！'
+        })
+      } else {
+        this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
+        this.getNewCourseList()
+      }
     }
   },
   mounted() {

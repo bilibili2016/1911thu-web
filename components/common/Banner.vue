@@ -110,6 +110,7 @@ export default {
 <style scoped lang="scss">
 .news-banner {
   height: 148px;
+  overflow: hidden;
   position: relative;
   img {
     width: 1920px;

@@ -12,15 +12,17 @@
             </el-tabs>
           </div>
           <div class="fr rightPages">
-            <!-- <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
-                  </el-switch>隐藏已参加课程
-                  <el-pagination class="fr" small layout="pager, prev, next" :total="20"></el-pagination> -->
+            <el-switch class="fl" v-model="onOff" active-color="#8F4ACB" inactive-color="#999">
+            </el-switch>隐藏已参加课程
+            <el-pagination class="fr" small layout="pager, prev, next" :total="20"></el-pagination>
           </div>
         </div>
       </div>
       <div class="classList">
         <ul>
-          <li v-for="(item,index) in classList" :key="index" @click="bind(index)">{{item}}</li>
+          <li v-for="(item,index) in classList" :key="index" @click="bind(item.id,index)">
+            <span :class="{checked:checkedLi===index? true : false}">{{item.short_name}}</span>
+          </li>
         </ul>
       </div>
       <div class="center">
@@ -44,12 +46,59 @@ export default {
     'v-card': CustomCard,
     'v-page': CustomPagination
   },
+  data() {
+    return {
+      checked: true,
+      onOff: true,
+      cardlink: 'coursedetail',
+      classList: [
+        '干部通用',
+        '党政系统',
+        '商学院',
+        '行业学院',
+        '职场学院',
+        '热点学院'
+      ],
+      pagemsg: {
+        page: 1,
+        pagesize: 5,
+        total: 4
+      },
+      checkedLi: null,
+      categoryData: [],
+      config: {
+        card_type: 'profile',
+        card: 'home'
+      },
+      newsCurriculumForm: {
+        pages: 0,
+        limits: 100,
+        categoryId: null,
+        evaluateLimit: null,
+        sortBy: null
+      },
+      activeName: null
+    }
+  },
   methods: {
-    bind(index) {
-      $('.classList ul li').removeClass('checked')
-      $('.classList ul li')
-        .eq(index)
-        .addClass('checked')
+    bind(id, index) {
+      // $('.classList ul li').removeClass('checked')
+      // $('.classList ul li')
+      //   .eq(id)
+      //   .addClass('checked')
+      console.log(index * 1)
+
+      this.checkedLi = index
+      this.newsCurriculumForm.categoryId = id
+      this.recommendCurriculumList()
+    },
+    getClassifyList() {
+      return new Promise((resolve, reject) => {
+        home.getClassifyList(this.classList).then(response => {
+          this.classList = response.data.categoryList
+          resolve(true)
+        })
+      })
     },
     recommendCurriculumList() {
       return new Promise((resolve, reject) => {
@@ -69,43 +118,12 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      checked: true,
-      onOff: true,
-      cardlink: 'coursedetail',
-      classList: [
-        '干部通用',
-        '党政系统',
-        '商学院',
-        '行业学院',
-        '职场学院',
-        '热点学院'
-      ],
-      pagemsg: {
-        page: 1,
-        pagesize: 5,
-        total: 4
-      },
-      categoryData: [],
-      config: {
-        card_type: 'profile',
-        card: 'home'
-      },
-      newsCurriculumForm: {
-        pages: 0,
-        limits: 100,
-        evaluateLimit: null,
-        sortBy: null
-      },
-      activeName: null
-    }
-  },
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     // this.activeName = 'first'
     this.recommendCurriculumList()
+    this.getClassifyList()
   }
 }
 </script>

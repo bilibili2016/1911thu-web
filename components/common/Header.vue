@@ -5,7 +5,7 @@
         <img src="~/assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="gokey">
+        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
@@ -681,22 +681,16 @@ export default {
       document.removeEventListener('touchmove', mo, false)
     },
     goSearch(item) {
+      this.search = this.search.replace(/[ ]/g, '')
       if (this.search !== '') {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
           case '/course/pages/search':
+            this.$router.go()
             break
           default:
             this.$router.push('/course/pages/search')
             break
-        }
-      }
-    },
-    gokey() {
-      if (event.keyCode == 13) {
-        if (this.search !== '') {
-          persistStore.set('key', this.search)
-          this.$router.push('/course/pages/search')
         }
       }
     },

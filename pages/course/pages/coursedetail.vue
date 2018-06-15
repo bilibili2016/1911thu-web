@@ -73,7 +73,8 @@
               <span>
                 <el-button plain v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: borderIndex === index ? true : false }">
                   <!-- <span :class="{borderColor: borderIndex === index ? true : false }"> -->
-                  {{item}}{{borderIndex === index ? true : false}}
+                  {{item}}
+                  <!-- {{item}}{{borderIndex === index ? true : false}} -->
                   <!-- </span> -->
 
                 </el-button>
@@ -260,7 +261,7 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          console.log(response)
+          // console.log(response)
           this.btnData = response.data.evaluateTags
         })
       })
@@ -271,22 +272,29 @@ export default {
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tags = '内容精彩,内容生涩'
-      return new Promise((resolve, reject) => {
-        home.addEvaluate(this.addEvaluateForm).then(response => {
-          console.log(response, '这是response')
-          if (response.status === '100100') {
-            this.$message({
-              type: 'warning',
-              message: response.msg
-            })
-          } else {
-            this.$message({
-              type: 'success',
-              message: response.msg
-            })
-          }
+      if (this.courseList.is_study) {
+        return new Promise((resolve, reject) => {
+          home.addEvaluate(this.addEvaluateForm).then(response => {
+            // console.log(response, '这是response')
+            if (response.status === '100100') {
+              this.$message({
+                type: 'warning',
+                message: response.msg
+              })
+            } else {
+              this.$message({
+                type: 'success',
+                message: response.msg
+              })
+            }
+          })
         })
-      })
+      } else {
+        this.$message({
+          type: 'warning',
+          message: '您还没有观看过此课程，请先去观看吧！'
+        })
+      }
     },
     getBtnContent(val, index) {
       console.log(val, '这是val')
