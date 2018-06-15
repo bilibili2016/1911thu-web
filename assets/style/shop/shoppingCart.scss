@@ -121,8 +121,7 @@
             border: 1px solid #6417a6;
             width: 134px;
             height: 31px;
-            background-color: #fff;
-            // height: 34px;
+            background-color: #fff; // height: 34px;
             span {
               width: 30px;
               height: 30px;
@@ -195,6 +194,12 @@
                 background-color: #8f4acb;
                 color: #fff;
               }
+            }
+            .deleteChecked {
+              font-size: 16px;
+              color: #222;
+              margin-right: 47px;
+              cursor: pointer;
             }
             .el-icon-minus,
             .el-icon-plus {
