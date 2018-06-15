@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import NuxtLoading from './components/nuxt-loading.vue'
+
 
 import '../assets/style/element.scss'
 
@@ -19,7 +19,7 @@ let resolvedLayouts = {}
 export default {
   head: {"title":"1911学堂","meta":[{"charset":"utf-8"},{"http-equiv":"X-UA-Compatible","content":"IE=edge"},{"name":"renderer","content":"webkit"},{"name":"viewport","content":"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"},{"hid":"description","name":"description","content":"1911学堂"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"http:\u002F\u002Fimgcache.qq.com\u002Fopen\u002Fqcloud\u002Fvideo\u002Ftcplayer\u002Ftcplayer.css"}],"script":[{"src":"https:\u002F\u002Fcdn.bootcss.com\u002Fjquery\u002F3.2.1\u002Fjquery.min.js","async":true},{"src":"http:\u002F\u002Fimgcache.qq.com\u002Fopen\u002Fqcloud\u002Fvideo\u002Ftcplayer\u002Flib\u002Fhls.min.0.8.8.js","async":true},{"src":"http:\u002F\u002Fimgcache.qq.com\u002Fopen\u002Fqcloud\u002Fvideo\u002Ftcplayer\u002Ftcplayer.min.js","async":true},{"src":"http:\u002F\u002Fres.wx.qq.com\u002Fconnect\u002Fzh_CN\u002Fhtmledition\u002Fjs\u002FwxLogin.js","async":true},{"src":"https:\u002F\u002Fcdn.bootcss.com\u002Fsocket.io\u002F2.0.3\u002Fsocket.io.js","async":true}],"style":[]},
   render(h, props) {
-    const loadingEl = h('nuxt-loading', { ref: 'loading' })
+    
     const layoutEl = h(this.layout || 'nuxt')
     const templateEl = h('div', {
       domProps: {
@@ -40,7 +40,7 @@ export default {
         id: '__nuxt'
       }
     }, [
-      loadingEl,
+      
       transitionEl
     ])
   },
@@ -62,21 +62,7 @@ export default {
     this.error = this.nuxt.error
   },
   
-  mounted () {
-    this.$loading = this.$refs.loading
-  },
-  watch: {
-    'nuxt.err': 'errorChanged'
-  },
-  
   methods: {
-    
-    errorChanged () {
-      if (this.nuxt.err && this.$loading) {
-        if (this.$loading.fail) this.$loading.fail()
-        if (this.$loading.finish) this.$loading.finish()
-      }
-    },
     
     setLayout (layout) {
       if (!layout || !resolvedLayouts['_' + layout]) layout = 'default'
@@ -105,7 +91,7 @@ export default {
     }
   },
   components: {
-    NuxtLoading
+    
   }
 }
 
