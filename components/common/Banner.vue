@@ -5,28 +5,16 @@
         <img :src="bannerImg" alt="">
       </div>
     </template>
-
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
           <div class="avator">
             <div class="img">
-              <img :src="avator" alt="" />
-              <div class="up-user-avtor">
+              <img :src="avator" />
+              <div class="up-user-avtor" v-show="isShowUpAvtor">
                 <input type="file" @change="add_img" accept="image/png,image/gif,image/jpeg" />
                 <span>更换图片</span>
               </div>
-              <!-- <img :src="avator" alt="" v-if="userInfo.head_img"> -->
-              <!-- <img :src="userInfo.head_img" alt="" v-if="userInfo.head_img">
-                <img :src="avator" alt="" v-else> -->
-              <!-- <el-upload v-show="isShowUpAvtor" class="up-user-avtor"
-                  action="http://www.1911edu.com/Wapi/MyInfo/uploadHeadImg"
-                  accept='image/*'
-                  :on-success="upSuccess"
-                  :on-error="failUp"
-                  :show-file-list="false">
-                  <el-button size="medium" type="primary">更换图片</el-button>
-                </el-upload> -->
             </div>
           </div>
           <div class="name">
@@ -96,13 +84,13 @@ export default {
     getUserInfo() {
       home.getUserInfo().then(res => {
         this.userInfo = res.data.userInfo
-        this.avator = res.data.userInfo.head_img
+        if (this.userInfo.head_img && this.userInfo.head_img != '') {
+          this.avator = this.userInfo.head_img
+        } else {
+          this.avator = require('@/assets/images/profile_avator01.png')
+        }
       })
-    },
-    upSuccess(res, file) {
-      this.userInfo.head_img = res.data.full_path
-    },
-    failUp() {}
+    }
   }
 }
 </script>

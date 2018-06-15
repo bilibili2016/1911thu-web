@@ -39,7 +39,7 @@
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
             <span class="person">购买人数：</span>
-            <el-input-number v-model="numForm.number" :step="1" :min="1" class="courseNumberInput" @change="changeNumber"></el-input-number>
+            <el-input-number v-model="numForm.number" :step="1" :min="1" :max="9999" class="courseNumberInput" @change="changeNumber"></el-input-number>
             <!-- <span class="number clearfix">
                 <i class="fl minus el-icon-minus"  @click="delNumber"></i>
                 <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
@@ -211,6 +211,11 @@ export default {
       ).toFixed(2)
     },
     canSubmit() {
+      if (this.addArray.curriculumcartid.length <= 0) {
+        this.$message({
+          message: '请您选择课程哦'
+        })
+      }
       return this.addArray.curriculumcartid.length > 0
     }
   },

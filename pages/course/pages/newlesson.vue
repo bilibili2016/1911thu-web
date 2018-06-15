@@ -30,7 +30,6 @@ export default {
   data() {
     return {
       atopImg: require('@/assets/images/banner2.png'),
-      linkdata: 'coursedetail',
       config: {
         card_type: 'goodlesson'
       },
