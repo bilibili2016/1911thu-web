@@ -34,7 +34,9 @@
         <span class="register" @click="register">注册</span>
       </div>
       <div class="headImg" v-else>
-        <img :src="user.userImg" alt="">
+        <span>
+          <img :src="user.userImg" alt="">
+        </span>
         <ul class="subPages">
           <li @click="goLink('tab-first')">我的首页</li>
           <li @click="goLink('tab-second')">我的课程</li>
