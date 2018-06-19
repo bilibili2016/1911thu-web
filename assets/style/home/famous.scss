@@ -30,12 +30,11 @@
     .card {
       width: 340px;
       height: 430px;
-      position: relative;
-      cursor: pointer;
+      position: relative; // cursor: pointer;
       &:hover .diaphaneity {
         transition: all 450ms;
         opacity: 1;
-        .abstract  h4{
+        .abstract h4 {
           top: 0;
           opacity: 1;
         }
@@ -43,7 +42,6 @@
           top: 50px;
           opacity: 1;
         }
-
       }
       img {
         width: 226px;
@@ -83,6 +81,7 @@
             top: 150px;
             left: 0;
             transition: all 400ms;
+            cursor: pointer;
           }
           p {
             position: absolute;
@@ -99,7 +98,6 @@
             display: -webkit-box;
             -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
-
           }
         }
       }

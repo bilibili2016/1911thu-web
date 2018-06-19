@@ -14,28 +14,29 @@
 </template>
 
 <script>
-import { home } from "~/lib/v1_sdk/index";
+import { home } from '~/lib/v1_sdk/index'
 export default {
   data() {
     return {
-      infoList: []
-    };
+      infoList: [],
+      curruntForm: {}
+    }
   },
   methods: {
     getInfo() {
       return new Promise((resolve, reject) => {
         home.userMessage(this.curruntForm).then(res => {
-          this.infoList = res.data.userMessage;
-          let noMsg = this.infoList && this.infoList.length > 0 ? false : true;
-          this.$emit("noMsg", noMsg);
-        });
-      });
+          this.infoList = res.data.userMessage
+          let noMsg = this.infoList && this.infoList.length > 0 ? false : true
+          this.$emit('noMsg', noMsg)
+        })
+      })
     }
   },
   mounted() {
-    this.getInfo();
-    document.getElementsByClassName("headerBox")[0].style.display = "inline";
-    document.getElementsByClassName("footerBox")[0].style.display = "inline";
+    this.getInfo()
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
   }
-};
+}
 </script>

@@ -11,11 +11,11 @@
       border-radius: 6px;
       background-color: #fff;
       box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-      .detail{
+      .detail {
         padding: 0 20px;
-        p{
+        p {
           margin-top: -3px;
-          img{
+          img {
             margin-top: -3px;
           }
         }
@@ -115,7 +115,7 @@
         }
       }
     }
-    .rightBox{
+    .rightBox {
       float: right;
       width: 340px;
     }
@@ -175,7 +175,15 @@
       background-color: #fff;
       border-radius: 6px;
       box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-      .el-button{
+      &.shadow {
+        margin: 0;
+        padding: 0;
+        .el-dialog__wrapper {
+          top: -80px;
+          bottom: auto;
+        }
+      }
+      .el-button {
         font-weight: 400;
       }
       h4 {
@@ -190,26 +198,25 @@
         // text-align: center
         width: 294px;
         margin: 0 auto;
-        .title{
-           font-size:14px;
-           color:#222;
-           line-height:25px;
-           font-weight: 400;
-           margin: 15px 0px;
-
+        .title {
+          font-size: 14px;
+          color: #222;
+          line-height: 25px;
+          font-weight: 400;
+          margin: 15px 0px;
         }
         .rate {
-          font-size:14px;
-          color:#222;
-          line-height:25px;
+          font-size: 14px;
+          color: #222;
+          line-height: 25px;
           padding-right: 10px;
         }
-        .ratem{
+        .ratem {
           padding-bottom: 5px;
         }
-        .area{
+        .area {
           margin: 10px 0px 0px 0px;
-          textarea{
+          textarea {
             resize: none;
             font-weight: 400;
           }
@@ -222,10 +229,9 @@
             padding: 12px 65px;
             border-radius: 20px;
             transition: all 300ms;
-            &:hover{
+            &:hover {
               background-color: #8F4ACB;
               border-color: #8F4ACB;
-
             }
           }
           .el-button--primary {
@@ -233,9 +239,7 @@
             background-color: #6417A6;
             border-color: #6417A6;
           }
-
         }
-
         .bthgrop {
           .el-button {
             padding: 6px 11px;
@@ -243,37 +247,36 @@
             border-radius: 4px;
             margin: 10px 7px 0px 0px;
             transition: all 300ms;
-            &:hover{
-              color:#6417a6;
+            &:hover {
+              color: #6417a6;
               border-color: #6417a6;
             }
           }
         }
-        .dialog-line{
+        .dialog-line {
           width: 920px;
           margin: 0 auto;
-          border-bottom:1px #E8D6F7 solid;
-           .commentator {
-             padding: 20px 0px 20px;
-             .fl {
-               margin-top: 7px;
-             }
-             &>img {
-               width: 42px;
-               height: 42px;
-               border-radius: 50%;
-               margin: 0 16px 16px 0;
-             }
-             h5 {
-               clear: both;
-               margin-top: 16px;
-               line-height: 20px;
-             }
-             .rates{
-               margin:10px 0px 0px 20px;
-             }
-           }
-
+          border-bottom: 1px #E8D6F7 solid;
+          .commentator {
+            padding: 20px 0px 20px;
+            .fl {
+              margin-top: 7px;
+            }
+            &>img {
+              width: 42px;
+              height: 42px;
+              border-radius: 50%;
+              margin: 0 16px 16px 0;
+            }
+            h5 {
+              clear: both;
+              margin-top: 16px;
+              line-height: 20px;
+            }
+            .rates {
+              margin: 10px 0px 0px 20px;
+            }
+          }
         }
       }
     }
@@ -345,8 +348,8 @@
     display: inline-block;
     line-height: 85px;
     height: 85px;
-    .el-breadcrumb__separator{
-      color:#222;
+    .el-breadcrumb__separator {
+      color: #222;
     }
   }
   .fr {
@@ -367,10 +370,10 @@
             font-size: 16px;
             margin-right: 5px;
           }
-          &:hover{
-            color:#732eaf;
+          &:hover {
+            color: #732eaf;
           }
-          &:last-child{
+          &:last-child {
             padding-right: 0;
           }
         }

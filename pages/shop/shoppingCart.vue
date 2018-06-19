@@ -64,7 +64,8 @@
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
-            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect"></el-autocomplete>
+            <el-input placeholder="请输入公司名称" v-model="companyInfo.companyname"></el-input>
+            <!-- <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect"></el-autocomplete> -->
           </el-form-item>
           <el-form-item label="公司地址：" prop="companyaddress">
             <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
@@ -213,10 +214,10 @@ export default {
     },
     canSubmit() {
       if (this.addArray.curriculumcartid.length <= 0) {
-        this.$message({
-          showClose: true,
-          message: '请您选择课程哦'
-        })
+        // this.$message({
+        //   showClose: true,
+        //   message: '请您选择课程哦'
+        // })
       }
       return this.addArray.curriculumcartid.length > 0
     }
@@ -447,6 +448,7 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
+                this.setProductsNum(0)
                 this.$bus.$emit('updateCount')
                 this.$router.push('/shop/checkedCourse')
               }
@@ -478,11 +480,14 @@ export default {
       })
     },
     async handleGetCode() {
-      if (this.companyInfo.phones) {
+      if (
+        this.companyInfo.phones &&
+        /^[1][3,5,6,7,8][0-9]{9}$/.test(this.companyInfo.phones) &&
+        this.companyInfo.seconds === 30
+      ) {
         if (this.companyInfo.captchaDisable === true) {
           return new Promise((resolve, reject) => {
             auth.smsCodes(this.companyInfo).then(response => {
-              // console.log('resp-------', response)
               this.$message({
                 showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
@@ -505,12 +510,6 @@ export default {
             })
           })
         }
-      } else {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '请填写手机号'
-        })
       }
     }
   }

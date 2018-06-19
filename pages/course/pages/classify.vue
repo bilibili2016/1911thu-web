@@ -145,7 +145,7 @@ export default {
 
 <style lang="scss" scoped>
 .pagination {
-  margin: 200px 0px;
+  margin: 20px 0px 60px;
 }
 </style>
 
