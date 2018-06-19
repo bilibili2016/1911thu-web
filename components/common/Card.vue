@@ -222,7 +222,7 @@
             <!-- {{course.evaluateList}} -->
             <el-carousel trigger="click" height="120px">
               <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
-                {{item}}
+                <!-- {{item}} -->
                 <div class="comment">
                   <h5>
                     <span>{{item.nick_name}}的评论</span>
