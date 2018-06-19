@@ -205,6 +205,7 @@ export default {
         if (valid) {
           if (!this.company.userID) {
             this.$message({
+              showClose: true,
               type: 'error',
               message: '您还没有登录，请先登录后再提交吧！'
             })
@@ -214,12 +215,14 @@ export default {
             home.addCompany(this.company).then(response => {
               if (response.status === 0) {
                 this.$message({
+                  showClose: true,
                   type: 'success',
                   message: '企业信息提交成功'
                 })
                 this.$router.push('/')
               } else {
                 this.$message({
+                  showClose: true,
                   type: 'error',
                   message: response.msg
                 })
@@ -238,6 +241,7 @@ export default {
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.company.phones)
       ) {
         this.$message({
+          showClose: true,
           type: 'error',
           message: '请填写正确的手机号'
         })
@@ -249,6 +253,7 @@ export default {
         return new Promise((resolve, reject) => {
           auth.smsCodes(this.company).then(response => {
             this.$message({
+              showClose: true,
               type: response.status === 0 ? 'success' : 'error',
               message: response.msg
             })

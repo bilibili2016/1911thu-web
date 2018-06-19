@@ -896,6 +896,10 @@
   }
   .el-dialog__body {
     padding: 0px 20px;
+    &>div {
+      height: 450px;
+      overflow: hidden;
+    }
   }
 }
 

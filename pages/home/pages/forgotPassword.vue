@@ -114,12 +114,14 @@ export default {
         auth.verifyPhone(this.fpData).then(response => {
           if (response.status === 0) {
             this.$message({
+              showClose: true,
               type: "error",
               message: "您的手机号还未注册！"
             });
             this.bindTelData.captchaDisable = true;
           } else if(response.status === "100100"){
              this.$message({
+               showClose: true,
               type: "error",
               message: response.msg
             });
@@ -137,6 +139,7 @@ export default {
       return new Promise((resolve, reject) => {
         auth.forgetPasswordAjax(this.fpData).then(response => {
           this.$message({
+            showClose: true,
               type: response.status === 0 ? "success" : "error",
               message: response.msg
             });
@@ -151,6 +154,7 @@ export default {
         return new Promise((resolve, reject) => {
           auth.smsCodes(this.fpData).then(response => {
             this.$message({
+              showClose: true,
               type: response.status === 0 ? "success" : "error",
               message: response.msg
             });

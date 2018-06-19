@@ -244,12 +244,14 @@ export default {
               }
               if (res.status == 0) {
                 this.$message({
+                  showClose: true,
                   type: 'success',
                   message: '恭喜你操作成功'
                 })
               } else {
                 let msg = res.msg
                 this.$message({
+                  showClose: true,
                   type: 'error',
                   message: msg
                 })

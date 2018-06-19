@@ -134,6 +134,7 @@ export default {
           } else if (res.status === '100100') {
             this.courseList.showErr = true
             this.$message({
+              showClose: true,
               type: 'error',
               message: res.msg
             })

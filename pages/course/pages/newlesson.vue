@@ -57,6 +57,7 @@ export default {
     getMoreData() {
       if (this.pageCount === this.courseList.length) {
         this.$message({
+          showClose: true,
           type: 'error',
           message: '没有更多课程了！'
         })
