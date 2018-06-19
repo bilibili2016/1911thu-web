@@ -304,7 +304,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '这是重新秒数3')
             let playTime = player.currentTime()
-            console.log(playTime, '时间')
+            // console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
@@ -320,20 +320,27 @@ export default {
         // console.log(this.playerForm, '123')
         home.getPlayerInfos(this.playerForm).then(response => {
           // console.log(response, '898989898')
-          if (response.data.playAuthInfo.videoViewType == false) {
-            player.loadVideoByID({
-              fileID: response.data.playAuthInfo.fileID,
-              appID: response.data.playAuthInfo.appID,
-              sign: response.data.playAuthInfo.sign,
-              t: response.data.playAuthInfo.t,
-              exper: response.data.playAuthInfo.exper
-            })
+          if (response.status === 0) {
+            if (response.data.playAuthInfo.videoViewType == false) {
+              player.loadVideoByID({
+                fileID: response.data.playAuthInfo.fileID,
+                appID: response.data.playAuthInfo.appID,
+                sign: response.data.playAuthInfo.sign,
+                t: response.data.playAuthInfo.t,
+                exper: response.data.playAuthInfo.exper
+              })
+            } else {
+              player.loadVideoByID({
+                fileID: response.data.playAuthInfo.fileID,
+                appID: response.data.playAuthInfo.appID,
+                t: response.data.playAuthInfo.t,
+                sign: response.data.playAuthInfo.sign
+              })
+            }
           } else {
-            player.loadVideoByID({
-              fileID: response.data.playAuthInfo.fileID,
-              appID: response.data.playAuthInfo.appID,
-              t: response.data.playAuthInfo.t,
-              sign: response.data.playAuthInfo.sign
+            this.$message({
+              type: 'success',
+              message: response.msg
             })
           }
         })
