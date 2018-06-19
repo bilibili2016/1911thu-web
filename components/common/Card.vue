@@ -61,8 +61,9 @@
               <!-- 学习进度 -->
               <div class="line-wraps" v-if="config.card === 'learning'">
                 <div class="line-centers">
-                  <p>已学习100%</p>
-                  <el-progress :percentage="50"></el-progress>
+                  <!-- {{typeof(card.percent)}} -->
+                  <p>已学习{{card.percent}}%</p>
+                  <el-progress :percentage="card.percent"></el-progress>
                 </div>
               </div>
               <div v-if="config.card === 'already'">
@@ -218,8 +219,10 @@
               <h4>{{course.title}}</h4>
               <p>{{course.introduction}}</p>
             </div>
+            <!-- {{course.evaluateList}} -->
             <el-carousel trigger="click" height="120px">
               <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
+                <!-- {{item}} -->
                 <div class="comment">
                   <h5>
                     <span>{{item.nick_name}}的评论</span>
@@ -271,6 +274,13 @@
                 </span>
                 <span class="coins">￥ {{courseList.present_price}}</span>
               </div>
+              <!-- <div>
+                <span class="fl coursenum">
+                  <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                <span class="rate">
+                  <el-rate disabled v-model="one"></el-rate>
+                </span>
+              </div> -->
             </div>
             <div class="study clearfix">
               <p>{{courseList.introduction}}</p>
