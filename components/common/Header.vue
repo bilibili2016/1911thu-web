@@ -339,6 +339,11 @@ export default {
       },
       tokenForm: {
         tokens: ''
+      },
+      currentURL: null,
+      errorTel: {
+        tel: null,
+        msg: null
       }
     }
   },
@@ -425,24 +430,36 @@ export default {
     },
     // 验证手机号是否存在
     verifyRgTel() {
-      if (this.bindTelData.seconds == 30) {
-        return new Promise((resolve, reject) => {
-          auth.verifyPhone(this.registerData).then(response => {
-            if (response.status !== 0) {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: response.msg
-              })
-              this.bindTelData.captchaDisable = true
-            } else {
-              if (this.bindTelData.seconds === 30) {
-                this.bindTelData.captchaDisable = false
-                this.handleGetCode(this.registerData)
-              }
-            }
-          })
+      if (this.errorTel.tel === this.registerData.phones) {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: this.errorTel.msg
         })
+      } else {
+        if (this.bindTelData.seconds == 30) {
+          return new Promise((resolve, reject) => {
+            auth.verifyPhone(this.registerData).then(response => {
+              if (response.status !== 0) {
+                this.errorTel.tel = this.registerData.phones
+                this.errorTel.msg = response.msg
+                this.$message({
+                  showClose: true,
+                  type: 'error',
+                  message: response.msg
+                })
+                this.bindTelData.captchaDisable = true
+              } else {
+                if (this.bindTelData.seconds === 30) {
+                  this.errorTel.tel = null
+                  this.errorTel.msg = null
+                  this.bindTelData.captchaDisable = false
+                  this.handleGetCode(this.registerData)
+                }
+              }
+            })
+          })
+        }
       }
     },
     // 验证手机号是否已经绑定了微信
@@ -480,6 +497,7 @@ export default {
           })
           if (response.status === 0) {
             this.close()
+            this.getUserInfo()
           }
         })
       })
@@ -520,6 +538,7 @@ export default {
               })
               if (response.status === 0) {
                 this.close()
+                this.getUserInfo()
               }
             })
           })
@@ -537,6 +556,7 @@ export default {
         .toString(36)
         .substr(2)
       const weixin = new WxLogin(this.WxLogin)
+      this.currentURL = this.$route.path
       this.getwxtime = setInterval(() => {
         this.getWXAccredit()
       }, 1000)
@@ -552,6 +572,7 @@ export default {
               message: '登录成功！'
             })
             this.tokenForm.token = response.data.token
+            this.getUserInfo()
             this.setToken(this.tokenForm)
             this.closeWechat()
             this.close()
@@ -567,10 +588,16 @@ export default {
     },
     //获取微信登录是否已经绑定
     getWXAccredit() {
+      // 判断当前网址是否已经变更
+      if (this.$route.path !== this.currentURL) {
+        this.closeWechat()
+        return false
+      }
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
           if (response.status === 0) {
             this.tokenForm.tokens = response.data.token
+            this.getUserInfo()
             this.setToken(this.tokenForm)
             clearInterval(this.getwxtime)
             this.scanCodeShow = false //微信扫码
@@ -729,14 +756,16 @@ export default {
     },
     // 获取用户头像
     getUserInfo() {
-      home.getUserInfo().then(res => {
-        this.userInfo = res.data.userInfo
-        if (this.userInfo.head_img && this.userInfo.head_img != '') {
-          this.user.userImg = this.userInfo.head_img
-        } else {
-          this.user.userImg = require('@/assets/images/profile_avator01.png')
-        }
-      })
+      if (this.isAuthenticated) {
+        home.getUserInfo().then(res => {
+          this.userInfo = res.data.userInfo
+          if (this.userInfo.head_img && this.userInfo.head_img != '') {
+            this.user.userImg = this.userInfo.head_img
+          } else {
+            this.user.userImg = require('@/assets/images/profile_avator01.png')
+          }
+        })
+      }
     }
   },
   mounted() {
