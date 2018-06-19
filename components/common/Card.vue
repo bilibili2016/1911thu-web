@@ -293,7 +293,7 @@
             </div>
             <div class="study clearfix bought" v-else>
               <h4 class="clearfix">
-                <p>50分钟</p>
+                <p>{{courseList.study_curriculum_time}}分钟</p>
                 <p>已学时长</p>
               </h4>
               <div class="common-button">
