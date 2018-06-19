@@ -35,7 +35,7 @@
       </div>
     </transition>
     <div>
-      <v-unlogged v-if="showNotLogin"></v-unlogged>
+      <v-unlogged v-if="showNotLogin" @showTips='showTips'></v-unlogged>
     </div>
   </div>
 </template>
@@ -91,13 +91,16 @@ export default {
     handleScroll() {
       this.visible = window.pageYOffset > this.visibilityHeight
     },
+    showTips(show) {
+      this.showNotLogin = show
+    },
     checkCourse() {
       if (this.isAuthenticated) {
         this.goLink('/course/pages/categoryd')
         this.showNotLogin = false
       } else {
-        this.notLogin = true
         this.showNotLogin = true
+        console.log('登陆-----333--------')
       }
     },
     backToTop() {

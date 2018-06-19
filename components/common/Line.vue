@@ -86,6 +86,7 @@ export default {
     },
     buyMask() {
       this.$message({
+        showClose: true,
         message: '请登录后,进行试看',
         type: 'success'
       })

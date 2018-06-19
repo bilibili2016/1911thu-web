@@ -1,7 +1,7 @@
 .headerBox {
   width: 100%;
   height: 90px;
-  border-bottom: 1px #E8D6F7 solid;
+  border-bottom: 1px #e8d6f7 solid;
   background-color: #fff;
   .main {
     width: 1100px;
@@ -35,13 +35,13 @@
         cursor: pointer;
       }
       input:-moz-placeholder {
-        color: #6417a6
+        color: #6417a6;
       }
       input::-moz-placeholder {
-        color: #6417a6
+        color: #6417a6;
       }
       input:-ms-input-placeholder {
-        color: #6417a6
+        color: #6417a6;
       }
       img {
         width: 16px;
@@ -107,7 +107,7 @@
         }
       }
       span:hover {
-        color: #8F4ACB;
+        color: #8f4acb;
       }
       .downLoad {
         height: 40px;
@@ -168,12 +168,12 @@
             span:nth-child(3) {
               height: 36px;
               line-height: 36px;
-              background-color: #6417A6;
+              background-color: #6417a6;
               border-radius: 18px;
               color: #fff;
               margin-top: 8px;
               &:hover {
-                background-color: #9A5CD0;
+                background-color: #9a5cd0;
               }
             }
             span:nth-child(2) img {
@@ -197,29 +197,29 @@
         width: 95px;
         height: 30px;
         line-height: 30px;
-        border: 1px solid #491C9C;
-        color: #491C9C;
+        border: 1px solid #491c9c;
+        color: #491c9c;
         border-radius: 5px;
         text-align: center;
         font-size: 14px;
         cursor: pointer;
         &:hover {
-          border-color: #8F4ACB;
+          border-color: #8f4acb;
         }
       }
       .login {
-        color: #491C9C;
+        color: #491c9c;
         margin-right: 10px;
         &:hover {
-          color: #8F4ACB;
+          color: #8f4acb;
         }
       }
       .register {
         margin-left: 10px;
-        background-color: #6417A6;
+        background-color: #6417a6;
         color: #fff;
         &:hover {
-          background-color: #8F4ACB;
+          background-color: #8f4acb;
         }
       }
     }
@@ -235,6 +235,7 @@
         width: 34px;
         height: 34px;
         margin-top: 5px;
+        border-radius: 20px;
       }
       .subPages {
         opacity: 0;
@@ -253,11 +254,11 @@
           line-height: 40px;
           text-align: center;
           font-size: 14px;
-          color: #332A51;
+          color: #332a51;
           cursor: pointer;
           transition: all 300ms;
           &:hover {
-            background-color: #9A5CD0;
+            background-color: #9a5cd0;
             color: #fff;
           }
         }
@@ -274,7 +275,7 @@
     .bgt {
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, .6);
+      background-color: rgba(0, 0, 0, 0.6);
     }
     .lrFrame {
       width: 400px;
@@ -337,6 +338,7 @@
         font-size: 12px;
         display: inline-block;
         vertical-align: middle;
+        border: none;
         cursor: pointer;
       }
       .el-checkbox {
@@ -416,7 +418,7 @@
         width: 100%;
         height: 40px;
         border-radius: 6px;
-        background-color: #6417A6;
+        background-color: #6417a6;
         font-size: 14px;
         color: #fff;
       }
@@ -425,7 +427,7 @@
         height: 40px;
         display: block;
         border-radius: 6px;
-        background-color: #6417A6;
+        background-color: #6417a6;
         margin: 62px auto 41px;
         color: #fff;
       }
@@ -438,7 +440,7 @@
         }
         h5 {
           font-size: 20px;
-          color: #6417A6;
+          color: #6417a6;
           text-align: center;
         }
         p {

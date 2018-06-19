@@ -70,7 +70,7 @@
               <span>我的消息</span>
             </div>
             <v-info @noMsg="isNoMyMsg"></v-info>
-            <div class="content">
+            <div class="content" v-show="noMyMsg">
               <div class="noCourse" v-if="noMyMsg">
                 <img :src="noMsgImg" alt="">
                 <h4>抱歉，现在还没有我的消息呦~</h4>
@@ -338,7 +338,8 @@ export default {
     this.studyCurriculumList()
     this.readyStudyCurriculumList()
     this.collectionList()
-    this.activeName = this.gid
+    this.activeTab = this.gid
+
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     if (this.$route.query.tab) {

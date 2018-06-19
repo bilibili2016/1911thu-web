@@ -40,8 +40,11 @@ export default {
     },
     handleSelect(item) {},
     search() {
-      persistStore.set('key', this.searchMsg)
-      this.$emit('Search', this.searchMsg)
+      this.searchMsg = this.searchMsg.replace(/[ ]/g, '')
+      if (this.searchMsg !== '') {
+        persistStore.set('key', this.searchMsg)
+        this.$emit('Search', this.searchMsg)
+      }
     },
     selectItem(val) {
       this.searchMsg = val

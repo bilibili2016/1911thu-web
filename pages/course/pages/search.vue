@@ -6,7 +6,7 @@
         共找到 {{courseNumber}} 门“ {{searchForm.searchword}} ”相关课程
       </div>
       <div v-if="result">
-        <v-card :data="searchData" :config="config" v-loading="loading" element-loading-text="拼命加载中" element-loading-background="rgba(0, 0, 0, 0.8)"></v-card>
+        <v-card :data="searchData" :config="config" v-loading="loading" element-loading-text="拼命加载中" element-loading-background="#fff"></v-card>
         <v-page :data="pagemsg"></v-page>
         <v-backtotop></v-backtotop>
       </div>

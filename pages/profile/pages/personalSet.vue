@@ -91,6 +91,7 @@
         <el-tab-pane label="修改密码" name="second">
           <!-- 修改密码 -->
           <div v-show="showPwd" class="changePwd">
+            <input type="password" class="hideInput">
             <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm">
               <el-form-item label="原密码：" prop="oldPass">
                 <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input>
@@ -105,6 +106,7 @@
                 <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
               </el-form-item>
             </el-form>
+            <input type="password" class="hideInput">
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -244,14 +246,16 @@ export default {
               }
               if (res.status == 0) {
                 this.$message({
+                  showClose: true,
                   type: 'success',
-                  message: '恭喜你操作成功'
+                  message: res.msg
                 })
               } else {
                 let msg = res.msg
                 this.$message({
+                  showClose: true,
                   type: 'error',
-                  message: msg
+                  message: res.msg
                 })
               }
             })
@@ -303,6 +307,16 @@ export default {
       } else {
         callback()
       }
+    }
+    var validateEmail = (rule, value, callback) => {
+      if (
+        !/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/.test(
+          value
+        )
+      ) {
+        callback(new Error('请输入正确的邮箱！'))
+      }
+      callback()
     }
     return {
       hasCompany: true,
@@ -404,6 +418,10 @@ export default {
             type: 'email',
             message: '请输入正确的邮箱地址',
             trigger: ['blur', 'change']
+          },
+          {
+            validator: validateEmail,
+            trigger: 'blur'
           }
         ]
       }

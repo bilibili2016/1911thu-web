@@ -61,23 +61,24 @@ export default {
   },
   methods: {
     add_img(event) {
-      var that = this
+      // var that = this
       var reader = new FileReader()
-      let img1 = event.target.files[0]
+      let imgFiles = event.target.files[0]
       var formdata = new window.FormData()
-      formdata.append('image', img1)
-      formdata.image = img1
-      reader.readAsDataURL(img1)
-      that.fileForm.FILESS = []
-      reader.onloadend = function() {
-        that.fileForm.FILESS.push(reader.result)
-        home.uploadHeadImg(that.fileForm).then(response => {
-          that.avator = response.data.full_path
-          that.$message({
+      formdata.append('image', imgFiles)
+      formdata.image = imgFiles
+      reader.readAsDataURL(imgFiles)
+      this.fileForm.FILESS = []
+      reader.onloadend = () => {
+        this.fileForm.FILESS.push(reader.result)
+        home.uploadHeadImg(this.fileForm).then(response => {
+          this.avator = response.data.full_path
+          this.$message({
+            showClose: true,
             message: response.msg,
             type: 'success'
           })
-          // console.log(response)
+          this.$bus.$emit('changeimg', this.avator)
         })
       }
     },
