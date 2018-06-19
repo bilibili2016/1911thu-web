@@ -15,9 +15,6 @@
           </span>
           <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
           <!-- {{bar}} -->
-          <span>
-            <el-progress :percentage="percents"></el-progress>
-          </span>
           <span v-if="isAuthenticated" class="fr">
             <span v-if="privileMsg === false">
               <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看look_at=2</span>

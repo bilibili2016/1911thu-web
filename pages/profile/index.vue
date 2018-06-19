@@ -308,7 +308,7 @@ export default {
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
-          console.log(response, '这是response')
+          // console.log(response, '这是response')
           this.newDataing = response.data.curriculumList
           for (let item of response.data.curriculumList) {
             item.percent = Number(item.percent)

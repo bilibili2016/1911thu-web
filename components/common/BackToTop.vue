@@ -100,7 +100,7 @@ export default {
         this.showNotLogin = false
       } else {
         this.showNotLogin = true
-        console.log('登陆-----333--------')
+        // console.log('登陆-----333--------')
       }
     },
     backToTop() {

@@ -98,7 +98,7 @@ export default {
     },
     getUserInfo() {
       home.getUserInfo().then(res => {
-        console.log(res.data.userInfo, '这是用户信息')
+        // console.log(res.data.userInfo, '这是用户信息')
         // this.studycurriculumtime = res.data.userInfo.study_curriculum_time
         this.userInfo = res.data.userInfo
         if (this.userInfo.head_img && this.userInfo.head_img != '') {
