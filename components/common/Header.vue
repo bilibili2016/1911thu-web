@@ -759,9 +759,13 @@ export default {
       if (this.isAuthenticated) {
         home.getUserInfo().then(res => {
           this.userInfo = res.data.userInfo
+
           if (this.userInfo.head_img && this.userInfo.head_img != '') {
             this.user.userImg = this.userInfo.head_img
           } else {
+            this.user.userImg = require('@/assets/images/profile_avator01.png')
+          }
+          if (/^\//.test(this.userInfo.head_img)) {
             this.user.userImg = require('@/assets/images/profile_avator01.png')
           }
         })

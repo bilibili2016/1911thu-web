@@ -38,13 +38,15 @@
           <p class="fl">{{player.teacher_name}}</p>
           <p class="fl">{{player.graduate}}</p>
         </div>
-        <div class="courseList" v-for="(section,index) in courseList" :key="index">
-          <h4>{{section.title}}</h4>
-          <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index" @click="handleCourse(bar,index)">
-            <span class="fl playIcon">
-              <i class="el-icon-caret-right"></i>
-            </span>
-            <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}分钟)</span>
+        <div class="courseList" ref="courseList">
+          <div class="chapter" v-for="(section,index) in courseList" :key="index">
+            <h4>{{section.title}}</h4>
+            <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index" @click="handleCourse(bar,index)" :class="{cli:ischeck === bar.id?true:false}">
+              <span class="fl playIcon">
+                <i class="el-icon-caret-right"></i>
+              </span>
+              <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}分钟)</span>
+            </div>
           </div>
         </div>
       </div>
@@ -79,7 +81,7 @@
         <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="word">
         </el-input>
         <div class="commitBug">
-          <el-button round @click.native="collection">提交</el-button>
+          <el-button round @click.native="addEvaluate">提交</el-button>
         </div>
       </div>
     </div>
@@ -99,6 +101,7 @@ export default {
     return {
       showReportBug: false,
       showEvaluate: false,
+      ischeck: null,
       mediaRW: 28,
       mediaLW: 72,
       mediaRInner: true,
@@ -191,6 +194,7 @@ export default {
       },
       collectMsg: 1,
       iseve: 1,
+      isStudy: false,
       getdefaultForm: {
         curriculumid: ''
       },
@@ -202,8 +206,7 @@ export default {
   },
   methods: {
     handleCourse(item, index) {
-      // console.log(item, '点击的课程')
-      // console.log(index, '点击的第几个')
+      this.ischeck = item.id
       persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
       clearInterval(this.interval)
@@ -233,6 +236,7 @@ export default {
         const h = this.$refs.playerBox.offsetHeight
         this.$refs.mediaL.style.height = h + 'px'
         this.$refs.mediaR.style.height = h + 'px'
+        this.$refs.courseList.style.height = h - 40 - 132 - 100 + 'px'
         this.$refs.playInner.style.height = h - 100 + 'px'
       }
     },
@@ -304,7 +308,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '这是重新秒数3')
             let playTime = player.currentTime()
-            console.log(playTime, '时间')
+            // console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
@@ -313,28 +317,36 @@ export default {
             )
           }
         }, 1000)
-        // console.log('重新开始播放')
       })
       // 计时器
       return new Promise((resolve, reject) => {
         // console.log(this.playerForm, '123')
         home.getPlayerInfos(this.playerForm).then(response => {
           // console.log(response, '898989898')
-          if (response.data.playAuthInfo.videoViewType == false) {
-            player.loadVideoByID({
-              fileID: response.data.playAuthInfo.fileID,
-              appID: response.data.playAuthInfo.appID,
-              sign: response.data.playAuthInfo.sign,
-              t: response.data.playAuthInfo.t,
-              exper: response.data.playAuthInfo.exper
+          if (response.status === '100100') {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              duration: 5000,
+              message: response.msg
             })
           } else {
-            player.loadVideoByID({
-              fileID: response.data.playAuthInfo.fileID,
-              appID: response.data.playAuthInfo.appID,
-              t: response.data.playAuthInfo.t,
-              sign: response.data.playAuthInfo.sign
-            })
+            if (response.data.playAuthInfo.videoViewType == false) {
+              player.loadVideoByID({
+                fileID: response.data.playAuthInfo.fileID,
+                appID: response.data.playAuthInfo.appID,
+                sign: response.data.playAuthInfo.sign,
+                t: response.data.playAuthInfo.t,
+                exper: response.data.playAuthInfo.exper
+              })
+            } else {
+              player.loadVideoByID({
+                fileID: response.data.playAuthInfo.fileID,
+                appID: response.data.playAuthInfo.appID,
+                t: response.data.playAuthInfo.t,
+                sign: response.data.playAuthInfo.sign
+              })
+            }
           }
         })
       })
@@ -345,6 +357,8 @@ export default {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
           // console.log(response, '这是获取的播放信息')
           this.player = response.data.curriculumDetail
+          this.iseve = response.data.curriculumDetail.is_evaluate
+          this.isStudy = response.data.curriculumDetail.is_study
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection
         })
@@ -366,18 +380,30 @@ export default {
     },
     // 增加评论
     addEvaluate() {
-      this.addEvaluateForm.ids = persistStore.get('curriculumId')
-      this.addEvaluateForm.evaluatecontent = this.word
-      this.addEvaluateForm.scores = this.evaluate.eltnum
-      return new Promise((resolve, reject) => {
-        home.addEvaluate(this.addEvaluateForm).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: response.msg
+      if (this.isStudy) {
+        this.addEvaluateForm.ids = persistStore.get('curriculumId')
+        this.addEvaluateForm.evaluatecontent = this.word
+        this.addEvaluateForm.scores = this.evaluate.eltnum
+        return new Promise((resolve, reject) => {
+          home.addEvaluate(this.addEvaluateForm).then(response => {
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+            if (response.status === 0) {
+              this.showEvaluate = false
+              this.iseve = 1
+            }
           })
         })
-      })
+      } else {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '您还没有观看该课程，请先观看再来评论吧！'
+        })
+      }
     },
     // 判断是收藏还是为收藏
     collection() {
