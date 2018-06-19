@@ -65,6 +65,9 @@
     }
   }
   .changePwd {
+    .hideInput {
+      display: none;
+    }
     .el-form {
       margin-top: 35px;
     }
