@@ -78,7 +78,6 @@
                   {{item}}
                 </el-button> -->
               </span>
-
             </div>
             <div class="area">
               <el-input type="textarea" :rows="3" placeholder="请输入内容" v-model="textarea">
@@ -87,6 +86,11 @@
             <div class="submit">
               <el-button type="primary" @click="addEvaluate()">提交</el-button>
             </div>
+          </div>
+        </div>
+
+        <div class="evaluate-tag shadow" v-show="dialogVisible">
+          <div class="personal">
             <!-- 弹窗 -->
             <el-dialog title="课程评价" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
               <div v-loading="loadMsg">
@@ -110,6 +114,7 @@
             </el-dialog>
           </div>
         </div>
+
         <!-- 用户评论 -->
         <div class="evaluate">
           <h4>用户评价
@@ -326,6 +331,7 @@ export default {
           // console.log(response, '获取评价')
           this.loadMsg = false
           this.pagemsg.total = response.data.length
+          this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
         })
       })
@@ -425,7 +431,7 @@ export default {
   border-color: #6417a6 !important;
 }
 .course-style {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 .detail-btngrounp {
   float: left;
@@ -435,7 +441,6 @@ export default {
   margin: 10px 7px 0px 0px;
   -webkit-transition: all 300ms;
   transition: all 300ms;
-  display: inline-block;
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;

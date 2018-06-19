@@ -46,7 +46,7 @@
       </div>
     </div>
     <!-- 登录注册 -->
-    <div class="start" v-if="start" v-loading="loadinged" element-loading-text="拼命加载中" element-loading-background="rgba(255, 255, 255, 0.6)">
+    <div class="start" v-if="start">
       <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
@@ -163,7 +163,6 @@ export default {
       return callback()
     }
     return {
-      loadinged: false,
       searchImg: require('~/assets/images/search.png'),
       downApp: require('~/assets/images/wechatLogin.png'),
       start: false,
@@ -340,6 +339,11 @@ export default {
       },
       tokenForm: {
         tokens: ''
+      },
+      currentURL: null,
+      errorTel: {
+        tel: null,
+        msg: null
       }
     }
   },
@@ -397,51 +401,65 @@ export default {
     },
     // 获取验证码 this.registerData
     async handleGetCode(data) {
-      if (!this.bindTelData.captchaDisable && this.bindTelData.seconds === 30) {
-        return new Promise((resolve, reject) => {
-          auth.smsCodes(data).then(response => {
-            this.$message({
-              showClose: true,
-              type: response.status === 0 ? 'success' : 'error',
-              message: response.msg
+      if (this.bindTelData.seconds === 30) {
+        if (this.bindTelData.captchaDisable === false) {
+          return new Promise((resolve, reject) => {
+            auth.smsCodes(data).then(response => {
+              this.$message({
+                type: response.status === 0 ? 'success' : 'error',
+                message: response.msg
+              })
+              this.bindTelData.captchaDisable = true
+              this.bindTelData.getCode =
+                this.bindTelData.seconds + '秒后重新发送'
+              let interval = setInterval(() => {
+                if (this.bindTelData.seconds <= 0) {
+                  this.bindTelData.getCode = '获取验证码'
+                  this.bindTelData.seconds = 30
+                  this.bindTelData.captchaDisable = false
+                  clearInterval(interval)
+                } else {
+                  this.bindTelData.getCode =
+                    --this.bindTelData.seconds + '秒后重新发送'
+                }
+              }, 1000)
             })
-            this.bindTelData.captchaDisable = true
-            this.bindTelData.getCode = this.bindTelData.seconds + '秒后重新发送'
-            let interval = setInterval(() => {
-              if (this.bindTelData.seconds <= 0) {
-                this.bindTelData.getCode = '获取验证码'
-                this.bindTelData.seconds = 30
-                this.bindTelData.captchaDisable = false
-                clearInterval(interval)
-              } else {
-                this.bindTelData.getCode =
-                  --this.bindTelData.seconds + '秒后重新发送'
-              }
-            }, 1000)
           })
-        })
+        }
       }
     },
     // 验证手机号是否存在
     verifyRgTel() {
-      if (this.bindTelData.seconds == 30) {
-        return new Promise((resolve, reject) => {
-          auth.verifyPhone(this.registerData).then(response => {
-            if (response.status !== 0) {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: response.msg
-              })
-              this.bindTelData.captchaDisable = true
-            } else {
-              if (this.bindTelData.seconds === 30) {
-                this.bindTelData.captchaDisable = false
-                this.handleGetCode(this.registerData)
-              }
-            }
-          })
+      if (this.errorTel.tel === this.registerData.phones) {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: this.errorTel.msg
         })
+      } else {
+        if (this.bindTelData.seconds == 30) {
+          return new Promise((resolve, reject) => {
+            auth.verifyPhone(this.registerData).then(response => {
+              if (response.status !== 0) {
+                this.errorTel.tel = this.registerData.phones
+                this.errorTel.msg = response.msg
+                this.$message({
+                  showClose: true,
+                  type: 'error',
+                  message: response.msg
+                })
+                this.bindTelData.captchaDisable = true
+              } else {
+                if (this.bindTelData.seconds === 30) {
+                  this.errorTel.tel = null
+                  this.errorTel.msg = null
+                  this.bindTelData.captchaDisable = false
+                  this.handleGetCode(this.registerData)
+                }
+              }
+            })
+          })
+        }
       }
     },
     // 验证手机号是否已经绑定了微信
@@ -479,6 +497,7 @@ export default {
           })
           if (response.status === 0) {
             this.close()
+            this.getUserInfo()
           }
         })
       })
@@ -486,7 +505,6 @@ export default {
     // 注册 请求
     signUp(formName) {
       // console.log(this.registerData, '这是this.registerData')
-      this.loadinged = true
       this.alreadySignin()
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -509,7 +527,6 @@ export default {
     },
     // 登录 请求
     signIns(formName) {
-      this.loadinged = true
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -521,6 +538,7 @@ export default {
               })
               if (response.status === 0) {
                 this.close()
+                this.getUserInfo()
               }
             })
           })
@@ -538,9 +556,9 @@ export default {
         .toString(36)
         .substr(2)
       const weixin = new WxLogin(this.WxLogin)
+      this.currentURL = this.$route.path
       this.getwxtime = setInterval(() => {
         this.getWXAccredit()
-        this.loadinged = false
       }, 1000)
     },
     // 微信绑定手机号
@@ -554,6 +572,7 @@ export default {
               message: '登录成功！'
             })
             this.tokenForm.token = response.data.token
+            this.getUserInfo()
             this.setToken(this.tokenForm)
             this.closeWechat()
             this.close()
@@ -569,10 +588,16 @@ export default {
     },
     //获取微信登录是否已经绑定
     getWXAccredit() {
+      // 判断当前网址是否已经变更
+      if (this.$route.path !== this.currentURL) {
+        this.closeWechat()
+        return false
+      }
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
           if (response.status === 0) {
             this.tokenForm.tokens = response.data.token
+            this.getUserInfo()
             this.setToken(this.tokenForm)
             clearInterval(this.getwxtime)
             this.scanCodeShow = false //微信扫码
@@ -641,7 +666,6 @@ export default {
       this.bgMsg = false
       this.emptyForm()
       clearInterval(this.getwxtime)
-      this.loadinged = false
     },
     closeWechat() {
       this.move()
@@ -652,7 +676,6 @@ export default {
       this.bindTelShow = false
       clearInterval(this.getwxtime)
       this.emptyWechatForm()
-      this.loadinged = false
     },
     emptyForm() {
       this.loginData.phonenum = ''
@@ -687,7 +710,6 @@ export default {
       //this.bindTelShow=true; //绑定手机号
       // this.bindSuccessShow=true; // 登录成功
       this.wxLogin()
-      this.loadinged = true
     },
     polling() {
       //轮询请求 微信扫码结果
@@ -735,14 +757,20 @@ export default {
     },
     // 获取用户头像
     getUserInfo() {
-      home.getUserInfo().then(res => {
-        this.userInfo = res.data.userInfo
-        if (this.userInfo.head_img && this.userInfo.head_img != '') {
-          this.user.userImg = this.userInfo.head_img
-        } else {
-          this.user.userImg = require('@/assets/images/profile_avator01.png')
-        }
-      })
+      if (this.isAuthenticated) {
+        home.getUserInfo().then(res => {
+          this.userInfo = res.data.userInfo
+
+          if (this.userInfo.head_img && this.userInfo.head_img != '') {
+            this.user.userImg = this.userInfo.head_img
+          } else {
+            this.user.userImg = require('@/assets/images/profile_avator01.png')
+          }
+          if (/^\//.test(this.userInfo.head_img)) {
+            this.user.userImg = require('@/assets/images/profile_avator01.png')
+          }
+        })
+      }
     }
   },
   mounted() {

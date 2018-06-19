@@ -16,9 +16,9 @@
           <div class="content">
             <div class="course">
               <div class="courseOne" v-for="(course,index) in courseList.CurriculumPayApplyList" :key="index" v-if="index<3">
-                <img class="fl" :src="course.curriculum_picture" alt="">
+                <img @click="goCourseInfo(course,index)" class="fl" :src="course.curriculum_picture" alt="">
                 <div class="fl">
-                  <h4>{{course.curriculum_title}}</h4>
+                  <h4 @click="goCourseInfo(course,index)">{{course.curriculum_title}}</h4>
                   <h6>{{course.number}}学时</h6>
                   <p>讲师：{{course.teacher_name}}</p>
                 </div>
@@ -44,6 +44,7 @@
 
 <script>
 import { home } from '@/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -57,8 +58,14 @@ export default {
       time: null,
       noMsgImg: require('~/assets/images/noMsg.png'),
       noData: false,
-      loding: true
+      loding: true,
+      kidForm: {
+        kids: null
+      }
     }
+  },
+  computed: {
+    ...mapState('auth', ['kid'])
   },
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
@@ -66,6 +73,7 @@ export default {
     this.curriculumPayApply()
   },
   methods: {
+    ...mapActions('auth', ['setKid']),
     curriculumPayApply() {
       this.loding = true
       return new Promise((resolve, reject) => {
@@ -91,6 +99,12 @@ export default {
     },
     goLink(item) {
       this.$router.push(item)
+    },
+    goCourseInfo(item, index) {
+      this.kidForm.kids = item.curriculum_id
+      persistStore.set('kid', item.curriculum_id)
+      this.setKid(this.kidForm)
+      this.$router.push('/course/pages/coursedetail')
     },
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
