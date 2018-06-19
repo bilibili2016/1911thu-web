@@ -366,16 +366,6 @@ export default {
       'signOut',
       'setToken'
     ]),
-    startLoading() {
-      loading = this.$loading({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)',
-        target: document.querySelector('.start')
-      })
-      // loading.close()
-    },
     changeImg(what) {
       if (what == 'android') {
         // console.log(1)
@@ -396,28 +386,31 @@ export default {
     },
     // 获取验证码 this.registerData
     async handleGetCode(data) {
-      if (!this.bindTelData.captchaDisable && this.bindTelData.seconds === 30) {
-        return new Promise((resolve, reject) => {
-          auth.smsCodes(data).then(response => {
-            this.$message({
-              type: response.status === 0 ? 'success' : 'error',
-              message: response.msg
+      if (this.bindTelData.seconds === 30) {
+        if (this.bindTelData.captchaDisable === false) {
+          return new Promise((resolve, reject) => {
+            auth.smsCodes(data).then(response => {
+              this.$message({
+                type: response.status === 0 ? 'success' : 'error',
+                message: response.msg
+              })
+              this.bindTelData.captchaDisable = true
+              this.bindTelData.getCode =
+                this.bindTelData.seconds + '秒后重新发送'
+              let interval = setInterval(() => {
+                if (this.bindTelData.seconds <= 0) {
+                  this.bindTelData.getCode = '获取验证码'
+                  this.bindTelData.seconds = 30
+                  this.bindTelData.captchaDisable = false
+                  clearInterval(interval)
+                } else {
+                  this.bindTelData.getCode =
+                    --this.bindTelData.seconds + '秒后重新发送'
+                }
+              }, 1000)
             })
-            this.bindTelData.captchaDisable = true
-            this.bindTelData.getCode = this.bindTelData.seconds + '秒后重新发送'
-            let interval = setInterval(() => {
-              if (this.bindTelData.seconds <= 0) {
-                this.bindTelData.getCode = '获取验证码'
-                this.bindTelData.seconds = 30
-                this.bindTelData.captchaDisable = false
-                clearInterval(interval)
-              } else {
-                this.bindTelData.getCode =
-                  --this.bindTelData.seconds + '秒后重新发送'
-              }
-            }, 1000)
           })
-        })
+        }
       }
     },
     // 验证手机号是否存在

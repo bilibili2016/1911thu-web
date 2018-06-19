@@ -304,6 +304,16 @@ export default {
         callback()
       }
     }
+    var validateEmail = (rule, value, callback) => {
+      if (
+        !/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/.test(
+          value
+        )
+      ) {
+        callback(new Error('请输入正确的邮箱！'))
+      }
+      callback()
+    }
     return {
       hasCompany: true,
       showInfo: false,
@@ -404,6 +414,10 @@ export default {
             type: 'email',
             message: '请输入正确的邮箱地址',
             trigger: ['blur', 'change']
+          },
+          {
+            validator: validateEmail,
+            trigger: 'blur'
           }
         ]
       }

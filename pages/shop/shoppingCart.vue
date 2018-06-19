@@ -455,11 +455,14 @@ export default {
       })
     },
     async handleGetCode() {
-      if (this.companyInfo.phones) {
+      if (
+        this.companyInfo.phones &&
+        /^[1][3,5,6,7,8][0-9]{9}$/.test(this.companyInfo.phones) &&
+        this.companyInfo.seconds === 30
+      ) {
         if (this.companyInfo.captchaDisable === true) {
           return new Promise((resolve, reject) => {
             auth.smsCodes(this.companyInfo).then(response => {
-              // console.log('resp-------', response)
               this.$message({
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
@@ -470,7 +473,7 @@ export default {
               let interval = setInterval(() => {
                 if (this.companyInfo.seconds <= 0) {
                   this.companyInfo.getCode = '获取验证码'
-                  this.companyInfo.seconds = 60
+                  this.companyInfo.seconds = 30
                   this.companyInfo.captchaDisable = true
                   clearInterval(interval)
                 } else {
@@ -481,11 +484,6 @@ export default {
             })
           })
         }
-      } else {
-        this.$message({
-          type: 'error',
-          message: '请填写手机号'
-        })
       }
     }
   }
