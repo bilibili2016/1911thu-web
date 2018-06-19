@@ -20,9 +20,10 @@
           <div class="name">
             <p>{{userInfo.nick_name}}</p>
             <p>{{userInfo.company_name}}</p>
+            <!-- <p style="color:black">{{userInfo}}</p> -->
           </div>
           <div class="time">
-            <p class="fr">18小时32分钟</p>
+            <p class="fr">18小时32分钟{{userInfo.study_curriculum_time}}</p>
             <p class="fr">总学习时长</p>
           </div>
         </div>
@@ -82,8 +83,23 @@ export default {
         })
       }
     },
+    timestampToTime(timestamp) {
+      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let Y = date.getFullYear() + '-'
+      let M =
+        (date.getMonth() + 1 < 10
+          ? '0' + (date.getMonth() + 1)
+          : date.getMonth() + 1) + '-'
+      let D = date.getDate() + ' '
+      let h = date.getHours() + ':'
+      let m = date.getMinutes() + ':'
+      let s = date.getSeconds()
+      return Y + M + D + h + m + s
+    },
     getUserInfo() {
       home.getUserInfo().then(res => {
+        console.log(res.data.userInfo, '这是用户信息')
+        // this.studycurriculumtime = res.data.userInfo.study_curriculum_time
         this.userInfo = res.data.userInfo
         if (this.userInfo.head_img && this.userInfo.head_img != '') {
           this.avator = this.userInfo.head_img

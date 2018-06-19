@@ -304,7 +304,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '这是重新秒数3')
             let playTime = player.currentTime()
-            // console.log(playTime, '时间')
+            console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
@@ -350,7 +350,7 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          // console.log(response, '这是获取的播放信息')
+          console.log(response, '这是获取的播放信息')
           this.player = response.data.curriculumDetail
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection

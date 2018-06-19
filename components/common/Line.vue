@@ -1,5 +1,6 @@
 <template>
   <div class="catalog">
+    <!-- {{catalogs}} -->
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
       <h4>{{catalog.title}}</h4>
       <!-- {{privileMsg}}  1{{isAuthenticated}} -->
@@ -8,20 +9,25 @@
           <i class="el-icon-caret-right"></i>
         </span>
         <p @click="handleCatalog(index,catalog)">
+          <!-- {{privileMsg}} -->
           <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}分钟）</span>
           <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
+          <!-- {{bar}} -->
+          <span>
+            <el-progress :percentage="percents"></el-progress>
+          </span>
           <span v-if="isAuthenticated" class="fr">
             <span v-if="privileMsg === false">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看look_at=2</span>
               <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
             </span>
             <span v-if="privileMsg === true">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
-              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看look_at=2</span>
+              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看look_at=1</span>
             </span>
           </span>
           <span v-else class="fr clearfix">
-            <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="buyMask">立即试看</span>
+            <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="buyMask">立即试看look_at=2</span>
             <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
           </span>
         </p>
@@ -44,7 +50,8 @@ export default {
     return {
       curriculumcartids: {
         cartid: null
-      }
+      },
+      percents: 50
     }
   },
   methods: {
