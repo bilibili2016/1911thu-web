@@ -5,13 +5,18 @@
       <h4>{{catalog.title}}</h4>
       <!-- {{privileMsg}}  1{{isAuthenticated}} -->
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index">
+        <!-- {{bar}} -->
         <span class="fl playIcon">
           <i class="el-icon-caret-right"></i>
         </span>
         <p @click="handleCatalog(index,catalog)">
           <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}分钟)</span>
-          <span>
-            <el-progress :percentage="bar.precent"></el-progress>
+          <!-- <span>{{bar.precent}}1</span> -->
+          <span v-if="bar.percent === 0">
+
+          </span>
+          <span v-else>
+            <el-progress :percentage="bar.percent" :show-text="false"></el-progress>
           </span>
           <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
           <!-- {{bar}} -->
