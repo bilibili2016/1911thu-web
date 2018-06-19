@@ -632,6 +632,7 @@ export default {
     },
     goLink(item) {
       this.$bus.$emit('selectProfileIndex', '123')
+      // persistStore.set('selectTab', item)
     },
     login() {},
     signOuts() {

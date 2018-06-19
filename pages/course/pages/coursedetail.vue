@@ -278,6 +278,7 @@ export default {
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tags = '内容精彩,内容生涩'
+
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
@@ -315,6 +316,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
           this.loadMsg = false
+          // console.log(response, '获取详情的接口')
           this.courseList = response.data.curriculumDetail
           this.privileMsg = response.data.curriculumPrivilege
           this.content = response.data.curriculumPrivilege

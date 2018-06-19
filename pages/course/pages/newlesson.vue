@@ -10,7 +10,7 @@
         <el-breadcrumb-item>新上好课</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <v-card :courseList="courseList" :config="config" :linkdata="linkdata"></v-card>
+    <v-card :courseList="courseList" :config="config"></v-card>
     <div class="card-button">
       <el-button type="primary" @click='getMoreData()'>查看更多</el-button>
     </div>
@@ -47,9 +47,10 @@ export default {
     getNewCourseList() {
       return new Promise((resolve, reject) => {
         home.getNewCourseList(this.newsCurriculumForm).then(response => {
-          // console.log(response.data.curriculumList)
+          // console.log(response, '123')
           this.courseList = this.courseList.concat(response.data.curriculumList)
           this.pageCount = response.data.pageCount
+          // for
           resolve(true)
         })
       })
