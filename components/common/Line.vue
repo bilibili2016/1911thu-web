@@ -9,8 +9,10 @@
           <i class="el-icon-caret-right"></i>
         </span>
         <p @click="handleCatalog(index,catalog)">
-          <!-- {{privileMsg}} -->
-          <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}分钟）</span>
+          <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}分钟)</span>
+          <span>
+            <el-progress :percentage="bar.precent"></el-progress>
+          </span>
           <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
           <!-- {{bar}} -->
           <span>
