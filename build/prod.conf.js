@@ -26,7 +26,7 @@ config.sentry = {
   }
 ]),
   (config.head.script = [
-    { src: 'https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js', async: true },
+    // { src: 'https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js', async: true },
     // {
     //   src:
     //     'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',

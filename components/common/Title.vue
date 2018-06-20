@@ -9,16 +9,8 @@
 </template>
 
 <script>
-  export default {
-    props: ["data"]
-  };
+export default {
+  props: ['data']
+}
 </script>
 
-<style scoped lang="scss">
-  .title {
-    h1 {
-      color: #222;
-      margin: 70px 0px 60px;
-    }
-  }
-</style>
