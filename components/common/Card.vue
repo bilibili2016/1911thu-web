@@ -211,7 +211,7 @@
               <p class="fr">{{course.graduate}}</p>
             </div>
             <div class="play-btn">
-              <img :src="playbtn" alt="" @click="goLink('coursedetail')">
+              <img :src="playbtn" alt="" @click="courseInfo(course)">
             </div>
           </el-card>
           <div class="particulars fr">
@@ -236,7 +236,7 @@
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
               <div class="fr common-button">
-                <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+                <el-button type="primary" plain @click="courseInfo(course)">立即学习</el-button>
               </div>
             </div>
           </div>
@@ -525,6 +525,7 @@ export default {
     },
     courseInfo(item, index) {
       this.kidForm.kids = item.id
+      persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
       this.$router.push('/course/pages/coursedetail')
     },
