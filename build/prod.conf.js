@@ -32,17 +32,13 @@ config.sentry = {
     //     'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
     //   async: true
     // },
-    // {
-    //   src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
-
-    //   async: true
-    // },
     {
-      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+      src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
+
       async: true
     },
     {
-      src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
+      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
     }
   ])
