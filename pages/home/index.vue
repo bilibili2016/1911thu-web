@@ -14,7 +14,7 @@
       <!-- 学堂资讯 -->
       <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive="titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
       <!-- 合作伙伴 -->
-      <v-partner :data="partnerList"></v-partner>
+      <v-partner :data="partnerList.list"></v-partner>
       <v-backtotop></v-backtotop>
       <!-- <v-notlogin></v-notlogin> -->
     </el-main>
@@ -74,18 +74,11 @@ export default {
       titleThree: '名师大咖秀',
       titleFour: '用户评价',
       titleFive: '学堂资讯',
-      partnerList: [
-        { src: require('@/assets/images/ptn1.png') },
-        { src: require('@/assets/images/ptn2.png') },
-        { src: require('@/assets/images/ptn3.png') },
-        { src: require('@/assets/images/ptn4.png') },
-        { src: require('@/assets/images/ptn5.png') },
-        { src: require('@/assets/images/ptn6.png') },
-        { src: require('@/assets/images/ptn7.png') },
-        { src: require('@/assets/images/ptn8.png') },
-        { src: require('@/assets/images/ptn9.png') },
-        { src: require('~/assets/images/ptn10.png') }
-      ],
+      partnerList: {
+        list: [],
+        pages: 1,
+        limits: 10
+      },
       teachers: [],
       evaluateData: [],
       infoArticle: [],
@@ -196,6 +189,7 @@ export default {
     this.getTeacherList()
     this.getEvaluateList()
     this.getNewInfoList()
+    this.getPartnerList()
   },
   methods: {
     // 获取banner
@@ -251,6 +245,14 @@ export default {
         home.getNewInfoList(this.newsInfoForm).then(response => {
           this.infoDesc = response.data.newsList
           this.infoArticle = response.data.newsList
+        })
+      })
+    },
+    // 获取合作伙伴
+    getPartnerList() {
+      return new Promise((resolve, reject) => {
+        home.getPartnerList(this.partnerList).then(response => {
+          this.partnerList = response.data.collaborationEnterpriseList
         })
       })
     }
