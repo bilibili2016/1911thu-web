@@ -7,36 +7,36 @@
 </template>
 
 <script>
-  export default {
-    props: ['linkdata'],
-    methods: {
-      getMore() {
-        this.$router.push(this.linkdata)
-        this.$emit('getMoreData')
-      }
-    },
-    mounted() {
-
+export default {
+  props: ['linkdata'],
+  methods: {
+    getMore() {
+      // this.$router.push(this.linkdata)
+      this.$emit('getMoreData')
+      window.open(window.location.origin + this.linkdata)
+      // console.log(window.location.origin, '123')
     }
-  };
+  },
+  mounted() {}
+}
 </script>
 
 <style scoped lang="scss">
-  .card-button {
+.card-button {
+  width: 174px;
+  margin: 10px auto 60px;
+  cursor: pointer;
+  .el-button {
     width: 174px;
-    margin: 10px auto 60px;
-    cursor: pointer;
-    .el-button {
-      width: 174px;
-      height: 56px;
-      border-radius: 38px;
-      background-color: #6417a6;
-      transition: background 300ms;
-      border: none;
-      font-weight: 400;
-      &:hover{
-        background-color: #8F4ACB;
-      }
+    height: 56px;
+    border-radius: 38px;
+    background-color: #6417a6;
+    transition: background 300ms;
+    border: none;
+    font-weight: 400;
+    &:hover {
+      background-color: #8f4acb;
     }
   }
+}
 </style>
