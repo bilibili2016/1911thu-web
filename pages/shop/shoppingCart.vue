@@ -223,12 +223,6 @@ export default {
   },
   watch: {
     selectAll(val) {
-      if (!val) {
-        this.$message({
-          message: '请您先选择课程哦',
-          duration: 1000
-        })
-      }
       if (this.isRest) {
         this.handleSelectAllChange(val)
       }

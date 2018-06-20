@@ -28,8 +28,8 @@
             </div>
             <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
-              <span>新闻宣传</span>
-              <span>时政</span>
+              <!-- {{card}} -->
+              <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
@@ -99,8 +99,7 @@
                 <img :src="card.picture" alt="">
               </div>
               <div class="tag">
-                <span>新闻宣传</span>
-                <span>时政</span>
+                <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
               </div>
               <div v-if="config.card === 'home'"></div>
               <div class="common-button btn-bgs " v-else>
@@ -888,7 +887,9 @@ export default {
     border-radius: 16px;
   }
 }
-#pane-first .card-category .card-list {
+#pane-first .card-category .card-list,
+#pane-second .card-category .card-list,
+#pane-third .card-category .card-list {
   margin: 0 24px 50px 0;
   &:nth-child(4n + 4) {
     margin-right: 24px;
