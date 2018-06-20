@@ -231,11 +231,17 @@
         opacity: 1;
         z-index: 9;
       }
-      img {
+      span {
         width: 34px;
         height: 34px;
+        background-color: #eee;
+        border-radius: 50%;
         margin-top: 5px;
-        border-radius: 20px;
+        img {
+          width: 34px;
+          height: 34px;
+          border-radius: 20px;
+        }
       }
       .subPages {
         opacity: 0;
