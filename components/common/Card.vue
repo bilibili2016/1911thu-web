@@ -266,7 +266,11 @@
           <div class="particularss fr">
             <div class="currentclum">
               <h4>{{courseList.title}}</h4>
-              <div>
+              <div class="clum" v-if="courseList.is_study === 1">
+                <span class="fl coursenum">
+                  <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
+              </div>
+              <div v-else>
                 <span class="fl coursenum">
                   <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                 <span class="rate">
@@ -274,15 +278,24 @@
                 </span>
                 <span class="coins">￥ {{courseList.present_price}}</span>
               </div>
-              <!-- <div>
-                <span class="fl coursenum">
-                  <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
-                <span class="rate">
-                  <el-rate disabled v-model="one"></el-rate>
-                </span>
-              </div> -->
             </div>
-            <div class="study clearfix">
+            <!-- {{courseList}} -->
+            <div class="study clearfix bought" v-if="courseList.is_study === 1">
+              <h4 class="clearfix">
+                <p>{{courseList.study_curriculum_time}}分钟</p>
+                <p>已学时长</p>
+              </h4>
+              <div class="common-button">
+                <div>
+                  <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+                </div>
+                <div class="lineProgress">
+                  <h5>已学习{{courseList.percent}}%</h5>
+                  <el-progress stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
+                </div>
+              </div>
+            </div>
+            <div class="study clearfix" v-else>
               <p>{{courseList.introduction}}</p>
               <div class="common-button">
                 <div v-if="isAuthenticated">
@@ -1255,14 +1268,21 @@ export default {
           color: #222;
           height: 54px;
           line-height: 54px;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
         }
         h4:hover {
           color: #8f4acb;
           cursor: pointer;
         }
+        .clum {
+          height: 25px;
+          .coursenum {
+            padding: 0;
+          }
+        }
         .coursenum {
           width: auto;
+          line-height: 25px;
           padding-top: 12px;
           cursor: pointer;
           span {
@@ -1278,7 +1298,7 @@ export default {
           padding-right: 20px;
         }
         .rate {
-          padding-top: 10px;
+          padding-top: 14px;
         }
         p {
           font-size: 14px;
@@ -1363,6 +1383,17 @@ export default {
           line-height: 30px;
           margin-bottom: 20px;
         }
+        h4 {
+          float: left;
+          color: #222;
+          p:first-child {
+            font-size: 20px;
+            margin: 0;
+          }
+          p:last-child {
+            font-size: 14px;
+          }
+        }
         .common-button .is-plain {
           border-radius: 20px;
           border-color: #6417a6;
@@ -1372,6 +1403,32 @@ export default {
           &:hover {
             color: #fff;
             border-color: #8f4acb;
+          }
+        }
+        &.bought {
+          .common-button .is-plain {
+            margin-top: 30px;
+          }
+          .lineProgress {
+            clear: both;
+            width: 100%;
+            padding-top: 45px;
+            h5 {
+              width: 100%;
+              line-height: 30px;
+              text-align: right;
+              font-size: 14px;
+              color: #666;
+            }
+            .el-progress-bar {
+              .el-progress-bar__outer {
+                height: 14px;
+                background-color: #ffdb5f;
+              }
+              .el-progress-bar__inner {
+                background-color: #6417a6;
+              }
+            }
           }
         }
       }

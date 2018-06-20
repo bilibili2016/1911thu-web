@@ -122,10 +122,15 @@
           </h4>
           <div v-loading="loadMsg">
             <div class="score">
-              <!-- {{}} -->
-              <span class="fl">{{evaluate.score}}</span>
-              <el-rate disabled v-model="evaluate.rate" class="itemBox-rate fl"></el-rate>
-              <span class="fr">{{evaluate.number}}人评价 好评度{{evaluate.praise}}</span>
+              <!-- {{totalEvaluateInfo}} -->
+              <span class="fl">{{totalEvaluateInfo.totalScore}}</span>
+<<<<<<< HEAD
+              <!-- <el-rate disabled v-model=" class="itemBox-rate fl"></el-rate> -->
+              <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{evaluate.praise}}</span>
+=======
+              <el-rate disabled v-model="totalEvaluateInfo.totalScore" class="itemBox-rate fl"></el-rate>
+              <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
+>>>>>>> zs
             </div>
             <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index">
               <img class="fl" :src="item.head_img" alt="">
@@ -226,7 +231,16 @@ export default {
       },
       evaluate: {
         eltnum: null
+      },
+<<<<<<< HEAD
+      totalEvaluateInfo: {
+        evaluatePercent: null,
+        totalEvaluate: null,
+        totalScore: null
       }
+=======
+      totalEvaluateInfo: {}
+>>>>>>> zs
     }
   },
   methods: {
@@ -330,9 +344,11 @@ export default {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           // console.log(response, '获取评价')
           this.loadMsg = false
+          this.totalEvaluateInfo = response.data.totalEvaluateInfo
           this.pagemsg.total = response.data.length
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
+          this.totalEvaluateInfo = response.data.totalEvaluateInfo
         })
       })
     },

@@ -830,6 +830,16 @@
   }
 }
 
+// 设置card 的goodplay 进度条
+.study {
+  .el-progress-bar {
+    .el-progress-bar__outer {
+      height: 14px;
+      background-color: #ffdb5f;
+    }
+  }
+}
+
 // 修改轮播
 .particulars {
   .el-carousel__container {

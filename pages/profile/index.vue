@@ -274,6 +274,7 @@ export default {
       isUpdate: false
     }
   },
+
   watch: {
     activeTab(val) {
       if (val == 'tab-sixth') {
@@ -282,7 +283,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('auth', ['gid'])
+    ...mapState('auth', ['token', 'gid'])
   },
   methods: {
     isNoMyMsg(isShow) {
@@ -340,11 +341,13 @@ export default {
     }
   },
   mounted() {
+    if (!this.token) {
+      this.$router.push('/')
+    }
     this.studyCurriculumList()
     this.readyStudyCurriculumList()
     this.collectionList()
     this.activeTab = this.gid
-
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     if (this.$route.query.tab) {
