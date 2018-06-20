@@ -93,32 +93,24 @@
 import { other, auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-// require('@/assets/js/tcplayer.min.js')
 export default {
+  // head: {
+  //   script: [
+  //     {
+  //       src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js'
+  //     }
+  //   ],
+  //   link: [
+  //     {
+  //       rel: 'stylesheet',
+  //       href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
+  //     }
+  //   ]
+  // },
   computed: {
     ...mapState('auth', ['kid', 'tid'])
   },
-  head: {
-    script: [
-      {
-        src:
-          'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
-        async: true
-      }
-    ],
-    link: [
-      {
-        rel: 'stylesheet',
-        href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
-      }
-    ]
-  },
-  //  asyncData ({ params }) {
-  //   return axios.get(`https://my-api/posts/${params.id}`)
-  //   .then((res) => {
-  //     return { title: res.data.title }
-  //   })
-  // },
+
   data() {
     return {
       showReportBug: false,
@@ -331,7 +323,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '这是重新秒数3')
             let playTime = player.currentTime()
-            // console.log(playTime, '时间')
+            console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
@@ -473,12 +465,8 @@ export default {
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
 
-    // this.getPlayerInfo()
-    // this.getCurriculumPlayInfo()
-    this.$nextTick(function() {
-      this.getPlayerInfo()
-      this.getCurriculumPlayInfo()
-    })
+    this.getPlayerInfo()
+    this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
     // 新建webspcket对象
 
