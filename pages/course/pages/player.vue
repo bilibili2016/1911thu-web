@@ -4,7 +4,7 @@
       <div class="playTop">
         <i class="el-icon-arrow-left" @click="goLink()"></i>{{player.title}}
       </div>
-      <div class="playInner" ref="playInner" id="playInner">
+      <div class="playInner" ref="playInner">
         <video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>
       </div>
       <div class="playBottom clearfix">
@@ -331,11 +331,9 @@ export default {
         player = TCPlayer('movd', this.tcplayer)
         player.dispose()
       }
-
-      $('#playInner').html('')
-      $('#playInner').html(
+      this.$refs.playInner.innerHTML = ''
+      this.$refs.playInner.innerHTML =
         '<video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>'
-      )
 
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
