@@ -193,6 +193,7 @@ export default {
         curriculumId: '',
         catalogId: ''
       },
+      autoplay: false,
       fileID: null,
       appID: null,
       tcplayer: {
@@ -243,6 +244,7 @@ export default {
       persistStore.set('catalogId', item.id)
       clearInterval(this.interval)
       this.clickMsg = true
+      this.autoplay = true
       this.getPlayerInfo()
     },
     goShoppingCart(msg) {
@@ -382,12 +384,6 @@ export default {
         home.getPlayerInfos(this.playerForm).then(response => {
           // console.log(response, '898989898')
           if (response.status === '100100') {
-            // this.$message({
-            //   showClose: true,
-            //   type: 'error',
-            //   duration: 5000,
-            //   message: response.msg
-            // })
             this.goShoppingCart(response.msg)
           } else {
             if (response.data.playAuthInfo.videoViewType == false) {
@@ -405,6 +401,9 @@ export default {
                 t: response.data.playAuthInfo.t,
                 sign: response.data.playAuthInfo.sign
               })
+            }
+            if (this.autoplay) {
+              player.play()
             }
           }
         })

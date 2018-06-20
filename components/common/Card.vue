@@ -99,6 +99,7 @@
                 <img :src="card.picture" alt="">
               </div>
               <div class="tag">
+                <!-- 收藏的tag -->
                 <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
               </div>
               <div v-if="config.card === 'home'"></div>
@@ -146,8 +147,7 @@
               <img :src="card.bg" alt="">
             </div>
             <div class="tag">
-              <span>新闻宣传</span>
-              <span>时政</span>
+              <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
@@ -181,7 +181,8 @@
               <!-- 学习进度 -->
               <div class="line-wraps" v-if="config.card === 'learning'">
                 <div class="line-centers">
-                  <p>已学习100%</p>
+                  {{card}}
+                  <p>已学习100%123123123123</p>
                   <el-progress :percentage="50"></el-progress>
                 </div>
               </div>
