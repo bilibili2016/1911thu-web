@@ -42,10 +42,14 @@
           <div class="chapter" v-for="(section,index) in courseList" :key="index">
             <h4>{{section.title}}</h4>
             <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index" @click="handleCourse(bar,index)" :class="{cli:ischeck === bar.id?true:false}">
-              <span class="fl playIcon">
+              <span class="fl playIcon" v-if="ischeck === bar.id?false:true">
                 <i class="el-icon-caret-right"></i>
               </span>
-              <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{bar.video_time}}分钟)</span>
+              <span class="fl playImg" v-if="ischeck === bar.id?true:false">
+                <img src="@/assets/images/playImg.png" alt="">
+              </span>
+              <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
+              </span>
             </div>
           </div>
         </div>
@@ -85,6 +89,7 @@
         </div>
       </div>
     </div>
+    <el-button type="text" @click="goShoppingCart"></el-button>
   </div>
 </template>
 
@@ -93,37 +98,32 @@
 import { other, auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-// require('@/assets/js/tcplayer.min.js')
 export default {
+  // head: {
+  //   script: [
+  //     {
+  //       src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js'
+  //     }
+  //   ],
+  //   link: [
+  //     {
+  //       rel: 'stylesheet',
+  //       href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
+  //     }
+  //   ]
+  // },
   computed: {
     ...mapState('auth', ['kid', 'tid'])
   },
-  head: {
-    script: [
-      {
-        src:
-          'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
-        async: true
-      }
-    ],
-    link: [
-      {
-        rel: 'stylesheet',
-        href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
-      }
-    ]
-  },
-  //  asyncData ({ params }) {
-  //   return axios.get(`https://my-api/posts/${params.id}`)
-  //   .then((res) => {
-  //     return { title: res.data.title }
-  //   })
-  // },
+
   data() {
     return {
       showReportBug: false,
       title: '1',
       showEvaluate: false,
+      curriculumcartids: {
+        cartid: null
+      },
       ischeck: null,
       mediaRW: 28,
       mediaLW: 72,
@@ -185,6 +185,7 @@ export default {
         curriculumId: '',
         catalogId: ''
       },
+      autoplay: false,
       fileID: null,
       appID: null,
       tcplayer: {
@@ -228,15 +229,43 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['setHsg', 'setTid']),
     handleCourse(item, index) {
       this.ischeck = item.id
       persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
       clearInterval(this.interval)
       this.clickMsg = true
+      this.autoplay = true
       this.getPlayerInfo()
     },
-    ...mapActions('auth', ['setHsg', 'setTid']),
+    goShoppingCart(msg) {
+      this.$confirm(msg, '提示', {
+        confirmButtonText: '去购买',
+        cancelButtonText: '取消',
+        closeOnHashChange: true,
+        type: 'warning',
+        center: true
+      })
+        .then(() => {
+          // 未购买课程跳转到购物车
+          this.addShopCart()
+        })
+        .catch(() => {
+          // this.$message({
+          //   type: 'info',
+          //   message: '已取消删除'
+          // })
+        })
+    },
+    addShopCart() {
+      this.curriculumcartids.cartid = this.kid
+      return new Promise((resolve, reject) => {
+        home.addShopCart(this.curriculumcartids).then(response => {
+          this.$router.push('/shop/shoppingCart')
+        })
+      })
+    },
     selTypeChange(index) {
       this.radioBtn = index
     },
@@ -347,12 +376,7 @@ export default {
         home.getPlayerInfos(this.playerForm).then(response => {
           // console.log(response, '898989898')
           if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              duration: 5000,
-              message: response.msg
-            })
+            this.goShoppingCart(response.msg)
           } else {
             if (response.data.playAuthInfo.videoViewType == false) {
               player.loadVideoByID({
@@ -369,6 +393,9 @@ export default {
                 t: response.data.playAuthInfo.t,
                 sign: response.data.playAuthInfo.sign
               })
+            }
+            if (this.autoplay) {
+              player.play()
             }
           }
         })
@@ -473,12 +500,8 @@ export default {
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
 
-    // this.getPlayerInfo()
-    // this.getCurriculumPlayInfo()
-    this.$nextTick(function() {
-      this.getPlayerInfo()
-      this.getCurriculumPlayInfo()
-    })
+    this.getPlayerInfo()
+    this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
     // 新建webspcket对象
 

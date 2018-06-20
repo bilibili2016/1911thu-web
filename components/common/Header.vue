@@ -784,6 +784,10 @@ export default {
         this.user.userImg = data
         // console.log(data)
       })
+    if (!this.token) {
+      this.signOut()
+      this.$router.push('/')
+    }
   }
 }
 </script>

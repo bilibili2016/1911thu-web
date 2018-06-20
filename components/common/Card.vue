@@ -28,8 +28,8 @@
             </div>
             <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
-              <span>新闻宣传</span>
-              <span>时政</span>
+              <!-- {{card}} -->
+              <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
@@ -99,8 +99,8 @@
                 <img :src="card.picture" alt="">
               </div>
               <div class="tag">
-                <span>新闻宣传</span>
-                <span>时政</span>
+                <!-- 收藏的tag -->
+                <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
               </div>
               <div v-if="config.card === 'home'"></div>
               <div class="common-button btn-bgs " v-else>
@@ -147,8 +147,7 @@
               <img :src="card.bg" alt="">
             </div>
             <div class="tag">
-              <span>新闻宣传</span>
-              <span>时政</span>
+              <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
@@ -182,7 +181,8 @@
               <!-- 学习进度 -->
               <div class="line-wraps" v-if="config.card === 'learning'">
                 <div class="line-centers">
-                  <p>已学习100%</p>
+                  {{card}}
+                  <p>已学习100%123123123123</p>
                   <el-progress :percentage="50"></el-progress>
                 </div>
               </div>
@@ -211,7 +211,7 @@
               <p class="fr">{{course.graduate}}</p>
             </div>
             <div class="play-btn">
-              <img :src="playbtn" alt="" @click="goLink('coursedetail')">
+              <img :src="playbtn" alt="" @click="courseInfo(course)">
             </div>
           </el-card>
           <div class="particulars fr">
@@ -236,7 +236,7 @@
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
               <div class="fr common-button">
-                <el-button type="primary" plain @click="goLink(linkdata)">立即学习</el-button>
+                <el-button type="primary" plain @click="courseInfo(course)">立即学习</el-button>
               </div>
             </div>
           </div>
@@ -525,6 +525,7 @@ export default {
     },
     courseInfo(item, index) {
       this.kidForm.kids = item.id
+      persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
       this.$router.push('/course/pages/coursedetail')
     },
@@ -887,7 +888,9 @@ export default {
     border-radius: 16px;
   }
 }
-#pane-first .card-category .card-list {
+#pane-first .card-category .card-list,
+#pane-second .card-category .card-list,
+#pane-third .card-category .card-list {
   margin: 0 24px 50px 0;
   &:nth-child(4n + 4) {
     margin-right: 24px;

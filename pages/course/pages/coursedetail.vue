@@ -152,21 +152,22 @@ import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  head: {
-    script: [
-      {
-        src:
-          'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
-        async: true
-      }
-    ],
-    link: [
-      {
-        rel: 'stylesheet',
-        href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
-      }
-    ]
-  },
+  // head: {
+  //   script: [
+  //     {
+  //       src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js'
+  //     },
+  //     {
+  //       src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js'
+  //     }
+  //   ],
+  //   link: [
+  //     {
+  //       rel: 'stylesheet',
+  //       href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
+  //     }
+  //   ]
+  // },
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
     ...mapState('auth', ['kid'])

@@ -23,7 +23,7 @@
             <!-- <p style="color:black">{{userInfo}}</p> -->
           </div>
           <div class="time">
-            <p class="fr">18小时32分钟{{userInfo.study_curriculum_time}}</p>
+            <p class="fr">{{parseInt(userInfo.study_curriculum_time / 3600)}}小时{{parseInt(userInfo.study_curriculum_time / 60)}}分钟{{parseInt(userInfo.study_curriculum_time % 60)}}秒</p>
             <p class="fr">总学习时长</p>
           </div>
         </div>

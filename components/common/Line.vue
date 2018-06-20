@@ -9,13 +9,12 @@
         <span class="fl playIcon">
           <i class="el-icon-caret-right"></i>
         </span>
+        <!-- {{bar}} -->
         <p @click="handleCatalog(index,catalog)">
           <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}分钟)</span>
-          <!-- <span>{{bar.precent}}1</span> -->
-          <span v-if="bar.percent === 0">
-
-          </span>
+          <span v-if="bar.percent === 0"></span>
           <span v-else>
+            <!-- 课程目录进度条 -->
             <el-progress :percentage="bar.percent" :show-text="false"></el-progress>
           </span>
           <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
