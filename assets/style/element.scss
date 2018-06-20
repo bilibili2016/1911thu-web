@@ -565,6 +565,25 @@
   }
 }
 
+// 播放页 弹框
+.el-message-box__wrapper {
+  .el-button--default {
+    border-radius: 6px;
+  }
+  .el-message-box__btns button:nth-child(2) {
+    margin-left: 40px;
+  }
+  .el-button--primary {
+    background-color: #6417a6;
+    border-color: #6417a6;
+  }
+  .el-button--primary:hover,
+  .el-button--primary:focus {
+    background-color: #8f4acb;
+    border-color: #8f4acb;
+  }
+}
+
 // 新闻详情页
 .news {
   .el-breadcrumb__item.current {

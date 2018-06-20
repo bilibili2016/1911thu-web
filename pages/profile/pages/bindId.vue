@@ -6,7 +6,7 @@
       </div>
       <div class="courseID">
         <span>绑定课程ID:</span>
-        <input v-model="binding.inputID" @blur.stop="verify" placeholder="请输入您的课程ID">
+        <input v-model="binding.inputID" @change="verify(binding)" placeholder="请输入您的课程ID">
         <span class="error" v-show="binding.showErr">请输入正确的企业ID</span>
       </div>
       <div class="bindInfo">
@@ -37,7 +37,7 @@
       <div v-show="courseList.addNewID">
         <div class="courseID">
           <span>绑定课程ID:</span>
-          <input v-model="courseList.inputID" @blur.stop="courseVerify" placeholder="请输入您的课程ID">
+          <input v-model="courseList.inputID" @change="verify(courseList)" placeholder="请输入您的课程ID">
           <span class="error" v-show="courseList.showErr">请输入正确的企业ID</span>
         </div>
         <div class="bindInfo">
@@ -90,22 +90,13 @@ export default {
     }
   },
   methods: {
-    verify() {
-      if (this.binding.inputID == '') {
-        this.binding.showErr = true
-        this.binding.presentAble = false
+    verify(item) {
+      if (item.inputID == '') {
+        item.showErr = true
+        item.presentAble = false
       } else {
-        this.binding.showErr = false
-        this.binding.presentAble = true
-      }
-    },
-    courseVerify() {
-      if (this.courseList.inputID == '') {
-        this.courseList.showErr = true
-        this.courseList.presentAble = false
-      } else {
-        this.courseList.showErr = false
-        this.courseList.presentAble = true
+        item.showErr = false
+        item.presentAble = true
       }
     },
     addID() {

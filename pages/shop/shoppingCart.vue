@@ -64,8 +64,8 @@
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
-            <el-input placeholder="请输入公司名称" v-model="companyInfo.companyname"></el-input>
-            <!-- <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect"></el-autocomplete> -->
+            <!-- <el-input placeholder="请输入公司名称" v-model="companyInfo.companyname"></el-input> -->
+            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <el-form-item label="公司地址：" prop="companyaddress">
             <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
@@ -198,7 +198,6 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.shopCartList()
     // this.getNum()
-    this.searchCompanyList()
     this.restaurants = this.loadAll()
   },
   computed: {
@@ -224,12 +223,6 @@ export default {
   },
   watch: {
     selectAll(val) {
-      if (!val) {
-        this.$message({
-          message: '请您先选择课程哦',
-          duration: 1000
-        })
-      }
       if (this.isRest) {
         this.handleSelectAllChange(val)
       }
@@ -254,16 +247,18 @@ export default {
       })
     },
     querySearchAsync(queryString, cb) {
-      // console.log(queryString, '查询字符串')
+      queryString = queryString.replace(/^\s+|\s+$/g, '')
+
+      if (queryString === '') {
+        return false
+      }
+      this.searchCompanyList()
       var restaurants = this.restaurants
       var results = queryString
         ? restaurants.filter(this.createStateFilter(queryString))
         : restaurants
-      // console.log(results, '这是查询出来的')
       clearTimeout(this.timeout)
-      this.timeout = setTimeout(() => {
-        cb(results)
-      }, 3000 * Math.random())
+      cb(results)
     },
     createStateFilter(queryString) {
       return state => {
@@ -275,25 +270,32 @@ export default {
       }
     },
     handleSelect(item) {
+      console.log(item, '选择')
+      this.companyInfo.companyname = item
       // console.log(item)
     },
     //搜索企业 接口
     searchCompanyList() {
-      return new Promise((resolve, reject) => {
-        home.searchCompanyList(this.companyForm).then(res => {
-          for (var i = 0; i < res.data.companyList.length; i++) {
-            this.$set(
-              res.data.companyList[i],
-              'value',
-              res.data.companyList[i].company_name
-            )
-          }
-          this.restaurants = res.data.companyList
-          resolve(true)
+      if (this.companyInfo.companyname === '') {
+        return false
+      } else {
+        return new Promise((resolve, reject) => {
+          home.searchCompanyList(this.companyInfo).then(res => {
+            for (var i = 0; i < res.data.companyList.length; i++) {
+              this.$set(
+                res.data.companyList[i],
+                'value',
+                res.data.companyList[i].company_name
+              )
+            }
+            this.restaurants = res.data.companyList
+            resolve(true)
+          })
         })
-      })
+      }
     },
     handleSelect(item) {
+      this.companyInfo.companyname = item
       // console.log(item)
     },
     setPatten() {
@@ -303,7 +305,6 @@ export default {
         this.numForm.number = str.replace(this.numForm.number, 1)
       }
     },
-    querySearchAsync() {},
     handleSelectAll() {
       this.isRest = true
     },
@@ -451,8 +452,8 @@ export default {
                 this.setProductsNum(0)
                 this.$bus.$emit('updateCount')
                 this.$router.push('/shop/checkedCourse')
+                this.showInfo = false
               }
-              this.showInfo = false
               resolve(true)
             })
           })
