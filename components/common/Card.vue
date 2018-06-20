@@ -291,7 +291,7 @@
                 </div>
                 <div class="lineProgress">
                   <h5>已学习{{courseList.percent}}%</h5>
-                  <el-progress stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
+                  <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
                 </div>
               </div>
             </div>
