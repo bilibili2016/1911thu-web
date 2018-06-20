@@ -124,13 +124,8 @@
             <div class="score">
               <!-- {{totalEvaluateInfo}} -->
               <span class="fl">{{totalEvaluateInfo.totalScore}}</span>
-<<<<<<< HEAD
-              <!-- <el-rate disabled v-model=" class="itemBox-rate fl"></el-rate> -->
-              <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{evaluate.praise}}</span>
-=======
               <el-rate disabled v-model="totalEvaluateInfo.totalScore" class="itemBox-rate fl"></el-rate>
               <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
->>>>>>> zs
             </div>
             <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index">
               <img class="fl" :src="item.head_img" alt="">
@@ -232,15 +227,11 @@ export default {
       evaluate: {
         eltnum: null
       },
-<<<<<<< HEAD
       totalEvaluateInfo: {
         evaluatePercent: null,
         totalEvaluate: null,
         totalScore: null
       }
-=======
-      totalEvaluateInfo: {}
->>>>>>> zs
     }
   },
   methods: {
