@@ -360,7 +360,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '这是重新秒数3')
             let playTime = player.currentTime()
-            console.log(playTime, '时间')
+            // console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
