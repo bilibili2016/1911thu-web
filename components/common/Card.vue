@@ -266,7 +266,11 @@
           <div class="particularss fr">
             <div class="currentclum">
               <h4>{{courseList.title}}</h4>
-              <div v-if="courseList.is_study === 0">
+              <div class="clum" v-if="courseList.is_study === 1">
+                <span class="fl coursenum">
+                  <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
+              </div>
+              <div v-else>
                 <span class="fl coursenum">
                   <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                 <span class="rate">
@@ -274,24 +278,9 @@
                 </span>
                 <span class="coins">￥ {{courseList.present_price}}</span>
               </div>
-              <div class="clum" v-else>
-                <span class="fl coursenum">
-                  <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
-              </div>
             </div>
-            <div class="study clearfix" v-if="courseList.is_study === 0">
-              <p>{{courseList.introduction}}</p>
-              <div class="common-button">
-                <div v-if="isAuthenticated">
-                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
-                </div>
-                <div v-else>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
-                </div>
-              </div>
-            </div>
-            <div class="study clearfix bought" v-else>
+            <!-- {{courseList}} -->
+            <div class="study clearfix bought" v-if="courseList.is_study === 1">
               <h4 class="clearfix">
                 <p>{{courseList.study_curriculum_time}}分钟</p>
                 <p>已学时长</p>
@@ -303,6 +292,18 @@
                 <div class="lineProgress">
                   <h5>已学习{{courseList.percent}}%</h5>
                   <el-progress stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
+                </div>
+              </div>
+            </div>
+            <div class="study clearfix" v-else>
+              <p>{{courseList.introduction}}</p>
+              <div class="common-button">
+                <div v-if="isAuthenticated">
+                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
+                </div>
+                <div v-else>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
                 </div>
               </div>
             </div>
