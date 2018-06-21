@@ -145,6 +145,7 @@ import { getQueryString } from '@/lib/util/helper'
 import { other, auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import { MessageBox } from 'element-ui'
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -776,15 +777,24 @@ export default {
     getUserInfo() {
       if (this.isAuthenticated) {
         home.getUserInfo().then(res => {
-          this.userInfo = res.data.userInfo
-
-          if (this.userInfo.head_img && this.userInfo.head_img != '') {
-            this.user.userImg = this.userInfo.head_img
+          if (res.status === '100008') {
+            this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.signOuts()
+                this.$bus.$emit('loginShow', true)
+              }
+            })
           } else {
-            this.user.userImg = require('@/assets/images/profile_avator01.png')
-          }
-          if (/^\//.test(this.userInfo.head_img)) {
-            this.user.userImg = require('@/assets/images/profile_avator01.png')
+            this.userInfo = res.data.userInfo
+            if (this.userInfo.head_img && this.userInfo.head_img != '') {
+              this.user.userImg = this.userInfo.head_img
+            } else {
+              this.user.userImg = require('@/assets/images/profile_avator01.png')
+            }
+            if (/^\//.test(this.userInfo.head_img)) {
+              this.user.userImg = require('@/assets/images/profile_avator01.png')
+            }
           }
         })
       }
