@@ -14,11 +14,6 @@
             <img class="serviceImg_center" src="~/assets/images/serviceImg_center.png" alt="">
             <img class="serviceImg_bottom" src="~/assets/images/serviceImg_bottom.png" alt="">
         </div>
-        <!-- <div class="bg_img"> -->
-            <!-- <img class="serviceImg_top" src="~/assets/images/serviceImg_top.png" alt="">
-            <img class="serviceImg_center" src="~/assets/images/serviceImg_center.png" alt="">
-            <img class="serviceImg_bottom" src="~/assets/images/serviceImg_bottom.png" alt=""> -->
-        <!-- </div> -->
     </div>
 </template>
 

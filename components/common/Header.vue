@@ -9,7 +9,7 @@
         <img :src="searchImg" alt="" @click="goSearch">
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin" @click="goSearchd('/home/pages/hrEntry')">Hr入口</span>
+        <span class="hrin" @click="goSearchd('/other/hrEntry')">Hr入口</span>
         <span v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>

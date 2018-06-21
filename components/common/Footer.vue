@@ -43,19 +43,19 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
-  data(){
-    return{
-      indexData:{
-        indexs:null,
-      },
+  data() {
+    return {
+      indexData: {
+        indexs: null
+      }
     }
   },
   methods: {
     ...mapActions('auth', ['setIndex']),
     goLink(num) {
-      this.indexData.indexs =num;
-      this.setIndex(this.indexData);
-      this.$router.push("/home/pages/aboutUs")
+      this.indexData.indexs = num
+      this.setIndex(this.indexData)
+      this.$router.push('/other/aboutUs')
     }
   }
 }

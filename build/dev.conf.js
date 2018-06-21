@@ -16,7 +16,7 @@ config.analyze = {
   }
 ]),
   (config.head.script = [
-    { src: '/script/jquery.js', async: true },
+    // { src: '/script/jquery.js', async: true },
     // {
     //   src:
     //     'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',

@@ -3,40 +3,23 @@
     <!-- banner -->
     <v-carousel :items="items"></v-carousel>
     <!-- 分类 -->
-    <v-tab :classify ="classify" :classtext="classtext" :courses="courses" :tab="tabmsg" :active="activeName"></v-tab>
+    <v-tab :classify="classify" :courses="courses" :tab="tabmsg"></v-tab>
     <!-- 定制 -->
-   <v-card :dingData="dingData" :config = "config"></v-card>
+    <v-card :dingData="dingData" :config="config"></v-card>
   </div>
 </template>
 
 <script>
-import Card from "@/components/common/Card.vue";
-import Carousel from "@/components/common/Carousel.vue";
-import Tab from "@/components/common/Tab.vue";
+import Card from '@/components/common/Card.vue'
+import Carousel from '@/components/common/Carousel.vue'
+import Tab from '@/components/common/Tab.vue'
 export default {
-  props: [
-    "classify",
-    'classtext',
-    "courses",
-    "tabmsg",
-    "activeName",
-    "items",
-    "dingData",
-    "config"
-  ],
+  props: ['classify', 'courses', 'tabmsg', 'items', 'dingData', 'config'],
   components: {
-    "v-carousel": Carousel,
-    "v-card": Card,
-    "v-tab": Tab
-  },
-  data() {
-    return {
-      // tabmsgs: null
-    }
-  },
-  // mounted () {
-  //   this.tabmsgs = this.tabmsg
-  // }
-};
+    'v-carousel': Carousel,
+    'v-card': Card,
+    'v-tab': Tab
+  }
+}
 </script>
 

@@ -23,7 +23,7 @@ config.sentry = {
   }
 ]),
   (config.head.script = [
-    { src: 'https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js', async: true },
+    // { src: 'https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js', async: true },
     // {
     //   src:
     //     'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
@@ -36,6 +36,10 @@ config.sentry = {
     },
     {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+      async: true
+    },
+    {
+      src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
       async: true
     }
   ])
