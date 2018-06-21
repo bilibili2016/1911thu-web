@@ -256,7 +256,7 @@
               <div class="common-button btn-bg">
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goLink('player')" v-if="privileMsg === false">立即观看</el-button>
+                  <el-button type="primary" plain @click="goLink()" v-if="privileMsg === false">立即观看</el-button>
                 </div>
                 <div v-else>
                   <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看</el-button>
@@ -481,6 +481,7 @@ export default {
           break
         case '/course/pages/coursedetail':
           this.$router.push('player')
+          // window.open(window.location.origin + '/course/pages/player')
           break
         case '/course/pages/classify':
           this.$router.push('coursedetail')

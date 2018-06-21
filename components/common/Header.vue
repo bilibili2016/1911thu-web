@@ -652,6 +652,7 @@ export default {
     login() {},
     signOuts() {
       this.signOut()
+      persistStore.clearAll()
       this.$router.push('/')
     },
     changePwd() {
