@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const pkg = require('../package.json')
 // 注意，所有语言的 dotenv 默认都不会覆盖 process.env
 const dotenvConfig = require('dotenv').config()
-const I18N = require('../lib/core/lang')
+// const I18N = require('../lib/core/lang')
 let env = process.env
 // if (dotenvConfig.error) {
 //   throw env.error
