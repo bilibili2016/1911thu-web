@@ -115,7 +115,7 @@
                   </p>
                 </div>
                 <!-- 作者和头衔    金额 -->
-                <div class="line-wrap" v-if="config.card === 'home'" @click="goTeacherInfo(card.teacher_id)">
+                <div class="line-wrap" v-if="config.card === 'home'" @click.stop="goTeacherInfo(card.teacher_id)">
                   <div class="line-center">
                     <img :src="card.head_img" alt="">
                     <span>{{card.teacher_name}}</span>
@@ -275,7 +275,7 @@
                 <span class="fl coursenum">
                   <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                 <span class="rate">
-                  <el-rate disabled v-model="one"></el-rate>
+                  <el-rate disabled v-model="courseList.score"></el-rate>
                 </span>
                 <span class="coins">￥ {{courseList.present_price}}</span>
               </div>
@@ -837,6 +837,7 @@ export default {
         }
       }
       .line-wrap {
+        width: 100%;
         height: 35px;
         line-height: 30px;
       }
@@ -882,7 +883,7 @@ export default {
         width: 22px;
         height: 22px;
         padding: 0px;
-        margin-right: 10px;
+        margin: 0 10px 0 0;
         vertical-align: middle;
         font-family: MicrosoftYaHei;
         color: rgba(109, 104, 127, 1);
@@ -895,6 +896,7 @@ export default {
     border-radius: 16px;
   }
 }
+#pane-tab-first .card-category .card-list,
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {

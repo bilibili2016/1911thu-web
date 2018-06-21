@@ -7,10 +7,19 @@
  * @Describe:
  */
 
-import { isNull } from 'lodash'
-import { storeLog as log } from '~/lib/core/logger'
-import { store as persistStore } from '~/lib/core/store'
-import { auth, ServerError } from '~/lib/v1_sdk'
+import {
+  isNull
+} from 'lodash'
+import {
+  storeLog as log
+} from '~/lib/core/logger'
+import {
+  store as persistStore
+} from '~/lib/core/store'
+import {
+  auth,
+  ServerError
+} from '~/lib/v1_sdk'
 // import { message } from '~/lib/core/message'
 persistStore.defaults({
   user: null,
@@ -86,54 +95,87 @@ export const getters = {
 }
 
 export const mutations = {
-  [MUTATION.signIn](state, { token }) {
+  [MUTATION.signIn](state, {
+    token
+  }) {
     state.token = token
   },
   [MUTATION.signOut](state) {
     state.token = null
   },
-  [MUTATION.refresh](state, { token }) {
+  [MUTATION.refresh](state, {
+    token
+  }) {
     state.token = token
   },
-  [MUTATION.me](state, { user }) {
+  [MUTATION.me](state, {
+    user
+  }) {
     state.user = user
   },
-  [MUTATION.setCid](state, { cid }) {
+  [MUTATION.setCid](state, {
+    cid
+  }) {
     state.cid = cid
   },
-  [MUTATION.setPid](state, { pid }) {
+  [MUTATION.setPid](state, {
+    pid
+  }) {
     state.pid = pid
   },
-  [MUTATION.setGid](state, { gid }) {
+  [MUTATION.setGid](state, {
+    gid
+  }) {
     state.gid = gid
   },
-  [MUTATION.setHsg](state, { hsg }) {
+  [MUTATION.setHsg](state, {
+    hsg
+  }) {
     state.hsg = hsg
   },
-  [MUTATION.setNid](state, { nid }) {
+  [MUTATION.setNid](state, {
+    nid
+  }) {
     state.nid = nid
   },
-  [MUTATION.setKid](state, { kid }) {
+  [MUTATION.setKid](state, {
+    kid
+  }) {
     state.kid = kid
   },
-  [MUTATION.setIsShowTip](state, { isShowTip }) {
+  [MUTATION.setIsShowTip](state, {
+    isShowTip
+  }) {
     state.isShowTip = isShowTip
   },
-  [MUTATION.setProductsNum](state, { productsNum }) {
+  [MUTATION.setProductsNum](state, {
+    productsNum
+  }) {
     state.productsNum = productsNum
   },
-  [MUTATION.setNumber](state, { number }) {
+  [MUTATION.setNumber](state, {
+    number
+  }) {
     state.number = number
   },
-  [MUTATION.setIndex](state, { index }) {
+  [MUTATION.setIndex](state, {
+    index
+  }) {
     state.index = index
   },
-  [MUTATION.setTid](state, { tid }) {
+  [MUTATION.setTid](state, {
+    tid
+  }) {
     state.tid = tid
   }
 }
 export const actions = {
-  async setToken({ commit, state }, { tokens }) {
+  async setToken({
+    commit,
+    state
+  }, {
+    tokens
+  }) {
     try {
       let token = tokens
       persistStore.set('token', token)
@@ -150,12 +192,19 @@ export const actions = {
     return token
   },
 
-  async signIn({ commit, state }, { phonenum, password, loginTypes }) {
+  async signIn({
+    commit,
+    state
+  }, {
+    phonenum,
+    ectpwd,
+    loginTypes
+  }) {
     let user
     try {
       let tokens = await auth.signIns({
         phonenum,
-        password,
+        ectpwd,
         loginTypes
       })
       // if (!tokens.data.token) {
@@ -180,11 +229,13 @@ export const actions = {
     return user
   },
 
-  async signOut({ commit, state }) {
-    console.log('进入了signout')
+  async signOut({
+    commit,
+    state
+  }) {
     try {
       await auth.signOut()
-      persistStore.set('token', null)
+      persistStore.clearAll()
 
       commit(MUTATION.signOut)
     } catch (e) {
@@ -192,7 +243,13 @@ export const actions = {
     }
   },
 
-  async companySignIn({ commit, state }, { email, password }) {
+  async companySignIn({
+    commit,
+    state
+  }, {
+    email,
+    password
+  }) {
     let user
     try {
       let tokens = await auth.companySignIn({
@@ -215,7 +272,12 @@ export const actions = {
     }
     return user
   },
-  async setCid({ commit, state }, { cids }) {
+  async setCid({
+    commit,
+    state
+  }, {
+    cids
+  }) {
     try {
       let cid = cids
       persistStore.set('cid', cid)
@@ -231,7 +293,12 @@ export const actions = {
     }
     return cid
   },
-  async setPid({ commit, state }, { pids }) {
+  async setPid({
+    commit,
+    state
+  }, {
+    pids
+  }) {
     try {
       let pid = pids
       persistStore.set('pid', pid)
@@ -247,7 +314,12 @@ export const actions = {
     }
     return pid
   },
-  async setGid({ commit, state }, { gids }) {
+  async setGid({
+    commit,
+    state
+  }, {
+    gids
+  }) {
     try {
       let gid = gids
       persistStore.set('gid', gid)
@@ -263,7 +335,12 @@ export const actions = {
     }
     return gid
   },
-  async setHsg({ commit, state }, { hsgs }) {
+  async setHsg({
+    commit,
+    state
+  }, {
+    hsgs
+  }) {
     try {
       let hsg = hsgs
       persistStore.set('hsg', hsg)
@@ -279,7 +356,12 @@ export const actions = {
     }
     return gid
   },
-  async setNid({ commit, state }, { nids }) {
+  async setNid({
+    commit,
+    state
+  }, {
+    nids
+  }) {
     try {
       let nid = nids
       persistStore.set('nid', nid)
@@ -295,7 +377,12 @@ export const actions = {
     }
     return gid
   },
-  async setKid({ commit, state }, { kids }) {
+  async setKid({
+    commit,
+    state
+  }, {
+    kids
+  }) {
     try {
       let kid = kids
       persistStore.set('kid', kid)
@@ -311,7 +398,12 @@ export const actions = {
     }
     return kid
   },
-  async setIsShowTip({ commit, state }, { isShowTips }) {
+  async setIsShowTip({
+    commit,
+    state
+  }, {
+    isShowTips
+  }) {
     try {
       let isShowTip = isShowTips
       persistStore.set('isShowTip', isShowTip)
@@ -327,7 +419,12 @@ export const actions = {
     }
     return isShowTip
   },
-  async setProductsNum({ commit, state }, { pn }) {
+  async setProductsNum({
+    commit,
+    state
+  }, {
+    pn
+  }) {
     try {
       let productsNum = pn
       persistStore.set('productsNum', productsNum)
@@ -343,7 +440,12 @@ export const actions = {
     }
     return productsNum
   },
-  async setNumber({ commit, state }, { numbers }) {
+  async setNumber({
+    commit,
+    state
+  }, {
+    numbers
+  }) {
     try {
       let number = numbers
       persistStore.set('number', number)
@@ -359,7 +461,12 @@ export const actions = {
     }
     return productsNum
   },
-  async setIndex({ commit, state }, { indexs }) {
+  async setIndex({
+    commit,
+    state
+  }, {
+    indexs
+  }) {
     try {
       let index = indexs
       persistStore.set('index', index)
@@ -375,7 +482,12 @@ export const actions = {
     }
     return gid
   },
-  async setTid({ commit, state }, { tids }) {
+  async setTid({
+    commit,
+    state
+  }, {
+    tids
+  }) {
     try {
       let tid = tids
       persistStore.set('tid', tid)

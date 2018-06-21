@@ -17,7 +17,7 @@
             </p>
           </div>
           <div class="courseMsg">
-            <div class="courseOne clearfix" v-for="(curriculum,index) in item.curriculumList" :key="index" @click="getMore">
+            <div class="courseOne clearfix" v-for="(curriculum,index) in item.curriculumList" :key="index" @click="getMore(curriculum)">
               <img class="fl" :src="curriculum.picture" alt="">
               <div class="fl hover">
                 <h5>{{curriculum.title}}</h5>
@@ -33,6 +33,7 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['classify', 'courses', 'tab', 'active', 'classtext'],
   data() {
@@ -44,18 +45,23 @@ export default {
       },
       pidform: {
         pids: ''
+      },
+      kidForm: {
+        kids: null
       }
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid']),
+    ...mapActions('auth', ['setCid', 'setPid', 'setKid']),
     handleClick(item, index) {
       this.cidform.cids = Number(item.index)
       this.setCid(this.cidform)
     },
     getMore(linedata) {
+      this.kidForm.kids = linedata.id
+      persistStore.set('curriculumId', linedata.id)
+      this.setKid(this.kidForm)
       this.$router.push('course/pages/coursedetail')
-      // window.open(window.location.origin + '/course/pages/coursedetail')
     },
     handlePid(item, index) {
       // window.open(window.location.origin + '/course/pages/category')

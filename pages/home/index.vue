@@ -194,6 +194,9 @@ export default {
       }
     }
   },
+  beforeCreate() {
+    // this.getAll()
+  },
   created() {
     this.getAll()
   },

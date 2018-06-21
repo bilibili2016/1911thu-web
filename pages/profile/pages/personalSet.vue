@@ -123,6 +123,7 @@
 
 <script>
 import { home } from '~/lib/v1_sdk/index'
+import { encryption } from '~/lib/util/helper'
 export default {
   watch: {
     province(val) {
@@ -233,9 +234,9 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           let tmp = {
-            oldps: this.changePwd.oldPass,
-            newpass: this.changePwd.newPass,
-            newpasso: this.changePwd.checkPass
+            oldps: encryption(this.changePwd.oldPass),
+            newpass: encryption(this.changePwd.newPass),
+            newpasso: encryption(this.changePwd.checkPass)
           }
           return new Promise((resolve, reject) => {
             home.editPassWord(tmp).then(res => {

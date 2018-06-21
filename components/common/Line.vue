@@ -62,13 +62,17 @@ export default {
       this.$router.push(item)
     },
     goBuy(item, index) {
-      this.curriculumcartids.cartid = item.curriculum_id
-      this.addShopCart()
+      if (this.isAuthenticated) {
+        this.curriculumcartids.cartid = item.curriculum_id
+        this.addShopCart()
+      } else {
+        this.$bus.$emit('loginShow', true)
+      }
     },
     addShopCart() {
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          // this.$router.push('/shop/shoppingCart')
+          this.$router.push('/shop/shoppingCart')
         })
       })
     },
