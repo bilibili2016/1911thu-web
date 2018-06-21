@@ -2,7 +2,8 @@
   <div class="headerBox">
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
-        <img src="~/assets/images/1911xt.png" alt="">
+        <!-- <img src="~/assets/images/1911xt.png" alt=""> -->
+        <i></i>
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
@@ -52,7 +53,7 @@
       <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
             <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')">
@@ -170,6 +171,7 @@ export default {
       start: false,
       lrFrame: false,
       islogin: false,
+      loadLogin: false,
       activeName: 'second',
       search: '',
       shoppingCartNum: 1,
@@ -490,7 +492,7 @@ export default {
       // console.log(this.registerData, '这是this.registerData')
       this.loginData.phonenum = this.registerData.phones
       this.loginData.password = this.registerData.passwords
-
+      this.loadLogin = true
       return new Promise((resolve, reject) => {
         this.signIn(this.loginData).then(response => {
           this.$message({
@@ -502,6 +504,7 @@ export default {
             this.close()
             this.getUserInfo()
           }
+          this.loadLogin = false
         })
       })
     },
@@ -509,6 +512,7 @@ export default {
     signUp(formName) {
       // console.log(this.registerData, '这是this.registerData')
       this.alreadySignin()
+      this.loadLogin = true
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -521,6 +525,7 @@ export default {
               if (response.status === 0) {
                 this.close()
               }
+              this.loadLogin = false
             })
           })
         } else {
@@ -532,6 +537,7 @@ export default {
     signIns(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          this.loadLogin = true
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               this.$message({
@@ -544,6 +550,7 @@ export default {
                 this.getUserInfo()
                 this.getCount()
               }
+              this.loadLogin = false
             })
           })
         } else {
@@ -567,6 +574,7 @@ export default {
     },
     // 微信绑定手机号
     async loginWechat() {
+      this.loadLogin = true
       return new Promise((resolve, reject) => {
         auth.loginWechat(this.bindTelData).then(response => {
           if (response.status === 0) {
@@ -588,6 +596,7 @@ export default {
               message: response.msg
             })
           }
+          this.loadLogin = false
         })
       })
     },
@@ -643,6 +652,7 @@ export default {
     login() {},
     signOuts() {
       this.signOut()
+      persistStore.clearAll()
       this.$router.push('/')
     },
     changePwd() {
@@ -744,7 +754,8 @@ export default {
             this.$router.go()
             break
           default:
-            this.$router.push('/course/pages/search')
+            // this.$router.push('/course/pages/search')
+            window.open(window.location.origin + '/course/pages/search')
             break
         }
       }

@@ -5,11 +5,7 @@ config.analyze = {
   analyzerMode: 'html'
 }
 ;(config.head.link = [
-  {
-    rel: 'icon',
-    type: 'image/x-icon',
-    href: '/favicon.ico'
-  },
+  { rel: 'icon', type: 'image/x-icon', href: '@/assets/images/favicon.png' },
   {
     rel: 'stylesheet',
     href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
@@ -30,10 +26,7 @@ config.analyze = {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
     },
-    {
-      src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
-      async: true
-    }
+    { src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js', async: true }
   ])
 
 module.exports = config

@@ -1,5 +1,5 @@
 <template>
-  <el-carousel :interval="5000" arrow="never">
+  <el-carousel :interval="5000" arrow="never" class="lbt">
     <el-carousel-item v-for="(img,index) in items" :key="index">
       <img :src="img.picture" alt="">
     </el-carousel-item>
@@ -13,6 +13,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.lbt {
+  background-color: rgba(123, 2, 3, 0);
+}
 .el-main {
   padding: 0;
 }

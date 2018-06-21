@@ -5,12 +5,12 @@
       <div class="cnums">
         共找到 {{courseNumber}} 门“ {{searchForm.searchword}} ”相关课程
       </div>
-      <div v-if="result">
+      <div v-if="result" v-loading="loadSearch">
         <v-card :data="searchData" :config="config" v-loading="loading" element-loading-text="拼命加载中" element-loading-background="#fff"></v-card>
         <v-page :data="pagemsg"></v-page>
         <v-backtotop></v-backtotop>
       </div>
-      <div class="searchFalse" v-else>
+      <div class="searchFalse" v-else v-loading="loadSearch">
         <div class="noMsg">
           <img :src="noMsg.img" alt="">
           <p>未找到相关内容</p>
@@ -22,7 +22,6 @@
               <i class="el-icon-refresh"></i>换一批</p>
           </div>
           <!--猜你喜欢 card组件 -->
-          <!-- <v-card :data="getData" :config="config"></v-card> -->
           <v-card :data="getData" :config="config" v-loading="loadinged" element-loading-text="拼命加载中" element-loading-background="rgba(255, 255, 255, 0.8)"></v-card>
         </div>
       </div>
@@ -47,6 +46,7 @@ export default {
   data() {
     return {
       ressult: false,
+      loadSearch: false,
       noMsg: {
         img: require('~/assets/images/noSearch.png')
       },
@@ -62,8 +62,8 @@ export default {
         total: null
       },
       searchForm: {
-        pages: 0,
-        limits: 2,
+        pages: 1,
+        limits: 20,
         searchword: null,
         categoryid: null,
         sortby: 2
@@ -84,21 +84,24 @@ export default {
       this.searchCurriculumList()
     },
     searchCurriculumList() {
+      this.loadSearch = true
       return new Promise((resolve, reject) => {
         home.searchCurriculumList(this.searchForm).then(response => {
           this.searchData = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
           if (response.data.curriculumList.length === 0) {
             this.result = false
             this.courseNumber = 0
             this.getLikeList()
           } else {
             this.result = true
-            this.pagemsg.total = response.data.curriculumList.length
+            this.pagemsg.total = Math.ceil(
+              response.data.curriculumList.length / 20
+            )
             this.courseNumber = response.data.curriculumList.length
             this.loading = false
           }
           resolve(true)
+          this.loadSearch = false
         })
       })
     },

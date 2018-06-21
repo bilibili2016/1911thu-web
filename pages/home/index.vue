@@ -89,21 +89,21 @@ export default {
           title: '面授、线下活动',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: 'activity/faceteach'
+          link: '/activity/faceteach'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/pro2.b8c7f5f.png',
           title: '企业课程定制',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: 'activity/enterpriseCustom'
+          link: '/activity/enterpriseCustom'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/pro1.68e8047.png',
           title: '学位项目',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: 'activity/degree'
+          link: '/activity/degree'
         }
       ],
       numSrc: require('@/assets/images/home_num.png'),
