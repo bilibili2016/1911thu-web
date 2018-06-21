@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="banner">
+    <div class="banner" v-loading="loadBanner">
       <div class="center category-style categoryd">
         <div class="college">
           <li class="title">学院：</li>
@@ -37,9 +37,11 @@
         <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch">
             </el-switch> -->
       </div>
-      <div class="carlist">
-        <!-- @selectCid='selectCid' -->
+      <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>
+      </div>
+      <div v-else v-loading="loadCourse">
+        <v-nothing></v-nothing>
       </div>
     </div>
     <!-- <v-filter></v-filter> -->
@@ -56,6 +58,7 @@ import CustomHot2 from '@/components/common/Hot2.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
 import CustomShoppingCart from '@/pages/shop/shoppingCart.vue'
 import CustomUnlogged from '@/pages/course/pages/unlogged.vue'
+import SearchNothing from '@/pages/home/pages/searchNothing.vue'
 
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -65,7 +68,8 @@ export default {
     'v-filter': CustomHot2,
     'v-page': CustomPagination,
     'v-shop': CustomShoppingCart,
-    'v-unlogged': CustomUnlogged
+    'v-unlogged': CustomUnlogged,
+    'v-nothing': SearchNothing
   },
   computed: {
     ...mapState('auth', ['pid', 'cid']),
@@ -110,12 +114,15 @@ export default {
       },
       pidform: {
         pids: ''
-      }
+      },
+      loadBanner: false,
+      loadCourse: false
     }
   },
   methods: {
     ...mapActions('auth', ['setCid', 'setPid']),
     handleCurrentChange(val) {
+      this.loadCourse = true
       this.pagemsg.page = val
       this.curriculumListForm.pages = val
       this.curriculumListForm.limits = 8
@@ -124,6 +131,7 @@ export default {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
           resolve(true)
+          this.loadCourse = false
         })
       })
     },
@@ -163,6 +171,7 @@ export default {
     },
     handleClick(tab, event) {},
     curriculumList() {
+      this.loadCourse = true
       this.curriculumListForm.categoryIda = this.cid
       this.curriculumListForm.categoryIdb = this.pid
       return new Promise((resolve, reject) => {
@@ -173,10 +182,12 @@ export default {
             this.$set(item, 'checkmsg', false)
           }
           resolve(true)
+          this.loadCourse = false
         })
       })
     },
     childCategoryList() {
+      this.loadBanner = true
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList
@@ -205,6 +216,7 @@ export default {
               break
           }
           resolve(true)
+          this.loadBanner = false
         })
       })
     }

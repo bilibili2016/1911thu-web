@@ -12,9 +12,13 @@
     .headerLogo {
       width: 177px;
       cursor: pointer;
-      img {
+      i {
+        display: inline-block;
         width: 177px;
         height: 44px;
+        background: url("~/assets/images/iconList.png") no-repeat;
+        background-position: 0 -23px;
+        background-size: cover;
       }
     }
     .search {
