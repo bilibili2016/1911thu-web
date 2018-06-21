@@ -184,8 +184,6 @@ export default {
       rateModel: null,
       loadTeacher: false,
       loadEvaluate: false,
-      shareImg: require('~/assets/images/f.png'),
-      shareImgc: require('~/assets/images/c.png'),
       value1: 5,
       linkseven: 'player',
       catalogs: [],
