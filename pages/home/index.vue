@@ -2,7 +2,7 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-tab :items="items" :classify="classify" :courses="courses" :tabmsg="tabmsg" :dingData="dingData" :config="ding"></v-tab>
+      <v-tab :items="items" :classify="classify" :courses="courses" :dingData="dingData" :config="ding"></v-tab>
       <!-- 新上好课 -->
       <v-new :config="configZero" :newData="newData" :titleOne="titleOne" :linkone="linkone"></v-new>
       <!-- 经典好课 -->
@@ -16,21 +16,20 @@
       <!-- 合作伙伴 -->
       <v-partner :data="partnerList.list"></v-partner>
       <v-backtotop></v-backtotop>
-      <!-- <v-notlogin></v-notlogin> -->
     </el-main>
   </div>
 </template>
 
 <script>
-import Partner from '@/pages/home/pages/partner.vue'
-import Info from '@/pages/home/pages/info.vue'
-import Evaluate from '@/pages/home/pages/evaluate.vue'
-import Famous from '@/pages/home/pages/famous.vue'
-import Classic from '@/pages/home/pages/classic.vue'
-import New from '@/pages/home/pages/new.vue'
 import Tab from '@/pages/home/pages/tab.vue'
+import New from '@/pages/home/pages/new.vue'
+import Classic from '@/pages/home/pages/classic.vue'
+import Famous from '@/pages/home/pages/famous.vue'
+import Evaluate from '@/pages/home/pages/evaluate.vue'
+import Info from '@/pages/home/pages/info.vue'
+import Partner from '@/pages/home/pages/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
-// import NotLogin from '@/components/common/NotLogin.vue'
+
 import { home } from '~/lib/v1_sdk/index'
 export default {
   components: {
@@ -42,7 +41,6 @@ export default {
     'v-new': New,
     'v-tab': Tab,
     'v-backtotop': BackToTop
-    // 'v-notlogin': NotLogin
   },
   data() {
     return {
@@ -50,7 +48,6 @@ export default {
       linktwo: '/course/pages/classify',
       linkfours: '/news/list',
       linkfive: '/news/detail',
-      tabmsg: false,
       newData: [],
       classicData: [],
       configZero: {
@@ -119,12 +116,30 @@ export default {
         types: 1
       },
       classify: [
-        '干部通用',
-        '党政系统学院',
-        '在线商学院',
-        '行业学院',
-        '职场学院',
-        '热点学院'
+        {
+          category_name: '干部通用学院',
+          id: '1'
+        },
+        {
+          category_name: '党政系统学院',
+          id: '16'
+        },
+        {
+          category_name: '在线商学院',
+          id: '17'
+        },
+        {
+          category_name: '行业学院',
+          id: '18'
+        },
+        {
+          category_name: '职场学院',
+          id: '19'
+        },
+        {
+          category_name: '直播/热点课程',
+          id: '20'
+        }
       ],
       classtext: [],
       courses: [
@@ -179,81 +194,72 @@ export default {
       }
     }
   },
+  created() {
+    this.getAll()
+  },
   mounted() {
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.getBanner()
-    this.getClassifyList()
-    this.getNewCourseList()
-    this.getClassicCourseList()
-    this.getTeacherList()
-    this.getEvaluateList()
-    this.getNewInfoList()
-    this.getPartnerList()
+    // document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    // document.getElementsByClassName('footerBox')[0].style.display = 'inline'
   },
   methods: {
+    async getAll() {
+      await Promise.all([
+        this.getBanner(),
+        this.getClassifyList(),
+        this.getNewCourseList(),
+        this.getClassicCourseList(),
+        this.getTeacherList(),
+        this.getEvaluateList(),
+        this.getNewInfoList()
+      ])
+    },
     // 获取banner
     getBanner() {
-      return new Promise((resolve, reject) => {
-        home.getBannerList(this.itemsData).then(response => {
-          this.items = response.data.bannerList
-        })
+      home.getBannerList(this.itemsData).then(response => {
+        this.items = response.data.bannerList
       })
     },
     // 获取分类列表
     getClassifyList() {
-      return new Promise((resolve, reject) => {
-        home.getClassifyList(this.curruntForm).then(response => {
-          this.classify = response.data.categoryList
-        })
+      home.getClassifyList(this.curruntForm).then(response => {
+        console.log(response, '这是classify')
+        this.classify = response.data.categoryList
       })
     },
     // 获取新上好课列表
     getNewCourseList() {
-      return new Promise((resolve, reject) => {
-        home.getNewCourseList(this.curruntForm).then(response => {
-          this.newData = response.data.curriculumList
-        })
+      home.getNewCourseList(this.curruntForm).then(response => {
+        this.newData = response.data.curriculumList
       })
     },
     getClassicCourseList() {
-      return new Promise((resolve, reject) => {
-        home.getClassicCourseList(this.classicForm).then(response => {
-          this.classicData = response.data.curriculumList
-        })
+      home.getClassicCourseList(this.classicForm).then(response => {
+        this.classicData = response.data.curriculumList
       })
     },
 
     getTeacherList() {
-      return new Promise((resolve, reject) => {
-        home.getTeacherList(this.teacherForm).then(response => {
-          this.teachers = response.data.teacherList
-        })
+      home.getTeacherList(this.teacherForm).then(response => {
+        this.teachers = response.data.teacherList
       })
     },
     // 用户评价
     getEvaluateList() {
-      return new Promise((resolve, reject) => {
-        home.getEvaluateList(this.evaluateForm).then(response => {
-          this.evaluateData = response.data.evaluateList
-        })
+      home.getEvaluateList(this.evaluateForm).then(response => {
+        this.evaluateData = response.data.evaluateList
       })
     },
     // 学堂资讯
     getNewInfoList() {
-      return new Promise((resolve, reject) => {
-        home.getNewInfoList(this.newsInfoForm).then(response => {
-          this.infoDesc = response.data.newsList
-          this.infoArticle = response.data.newsList
-        })
+      home.getNewInfoList(this.newsInfoForm).then(response => {
+        this.infoDesc = response.data.newsList
+        this.infoArticle = response.data.newsList
       })
     },
     // 获取合作伙伴
     getPartnerList() {
-      return new Promise((resolve, reject) => {
-        home.getPartnerList(this.partnerList).then(response => {
-          this.partnerList = response.data.collaborationEnterpriseList
-        })
+      home.getPartnerList(this.partnerList).then(response => {
+        this.partnerList = response.data.collaborationEnterpriseList
       })
     }
   }
