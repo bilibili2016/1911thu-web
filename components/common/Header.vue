@@ -144,6 +144,7 @@ import { getQueryString } from '@/lib/util/helper'
 import { other, auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import { encryption } from '~/lib/util/helper'
 export default {
   data() {
     var validatePass = (rule, value, callback) => {
@@ -215,6 +216,7 @@ export default {
       // 登录数据
       loginData: {
         password: '',
+        ectpwd: '',
         phonenum: '',
         showPwd: false,
         pwdType: 'password',
@@ -224,6 +226,7 @@ export default {
       registerData: {
         phones: '',
         passwords: '',
+        ectpwd: '',
         types: 1,
         codes: '',
         checked: false,
@@ -343,6 +346,9 @@ export default {
       tokenForm: {
         tokens: ''
       },
+      pwdForm: {
+        pwds: null
+      },
       currentURL: null,
       errorTel: {
         tel: null,
@@ -371,7 +377,8 @@ export default {
       'setGid',
       'setProductsNum',
       'signOut',
-      'setToken'
+      'setToken',
+      'setPwd'
     ]),
     getCount() {
       return new Promise((resolve, reject) => {
@@ -488,9 +495,9 @@ export default {
     },
     // 注册完登录 请求
     alreadySignin(formName) {
-      // console.log(this.registerData, '这是this.registerData')
       this.loginData.phonenum = this.registerData.phones
       this.loginData.password = this.registerData.passwords
+      this.loginData.ectpwd = encryption(this.registerData.passwords)
       this.loadLogin = true
       return new Promise((resolve, reject) => {
         this.signIn(this.loginData).then(response => {
@@ -509,9 +516,8 @@ export default {
     },
     // 注册 请求
     signUp(formName) {
-      // console.log(this.registerData, '这是this.registerData')
-      this.alreadySignin()
       this.loadLogin = true
+      this.registerData.ectpwd = encryption(this.registerData.passwords)
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -522,6 +528,7 @@ export default {
                 message: response.msg
               })
               if (response.status === 0) {
+                this.alreadySignin()
                 this.close()
               }
               this.loadLogin = false
@@ -534,6 +541,7 @@ export default {
     },
     // 登录 请求
     signIns(formName) {
+      this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.loadLogin = true
@@ -651,6 +659,7 @@ export default {
     login() {},
     signOuts() {
       this.signOut()
+      persistStore.clearAll()
       this.$router.push('/')
     },
     changePwd() {
@@ -752,7 +761,8 @@ export default {
             this.$router.go()
             break
           default:
-            this.$router.push('/course/pages/search')
+            // this.$router.push('/course/pages/search')
+            window.open(window.location.origin + '/course/pages/search')
             break
         }
       }

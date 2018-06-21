@@ -20,7 +20,8 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <div class="mask-style" @click="goLink('course/pages/coursedetail')">
+            <!-- @click="goLink('course/pages/coursedetail')" -->
+            <div class="mask-style" @click="openDetail()">
               <!-- <img :src="jinImg" alt="" class="jin-style"> -->
             </div>
             <div class="bgImgs">
@@ -114,7 +115,7 @@
                   </p>
                 </div>
                 <!-- 作者和头衔    金额 -->
-                <div class="line-wrap" v-if="config.card === 'home'" @click="goTeacherInfo(card.teacher_id)">
+                <div class="line-wrap" v-if="config.card === 'home'" @click.stop="goTeacherInfo(card.teacher_id)">
                   <div class="line-center">
                     <img :src="card.head_img" alt="">
                     <span>{{card.teacher_name}}</span>
@@ -255,7 +256,7 @@
               <div class="common-button btn-bg">
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goLink('player')" v-if="privileMsg === false">立即观看</el-button>
+                  <el-button type="primary" plain @click="goLink()" v-if="privileMsg === false">立即观看</el-button>
                 </div>
                 <div v-else>
                   <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看</el-button>
@@ -274,7 +275,7 @@
                 <span class="fl coursenum">
                   <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                 <span class="rate">
-                  <el-rate disabled v-model="one"></el-rate>
+                  <el-rate disabled v-model="courseList.score"></el-rate>
                 </span>
                 <span class="coins">￥ {{courseList.present_price}}</span>
               </div>
@@ -432,6 +433,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
+    openDetail() {
+      window.open(window.location.origin + '/course/pages/coursedetail')
+    },
     selCheckboxChange(item, index) {
       let len = this.productsNum
       if (item.is_checked === false) {
@@ -477,6 +481,7 @@ export default {
           break
         case '/course/pages/coursedetail':
           this.$router.push('player')
+          // window.open(window.location.origin + '/course/pages/player')
           break
         case '/course/pages/classify':
           this.$router.push('coursedetail')
@@ -511,7 +516,8 @@ export default {
       }
     },
     getMore(item) {
-      this.$router.push(item)
+      // this.$router.push(item)
+      window.open(window.location.origin + item)
     },
     toggleShow: function() {
       this.isShow = !this.isShow
@@ -526,7 +532,8 @@ export default {
       this.kidForm.kids = item.id
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      // this.$router.push('/course/pages/coursedetail')
+      this.openDetail()
     },
     selectCid(item, index) {
       this.kidForm.kids = item.id
@@ -829,6 +836,7 @@ export default {
         }
       }
       .line-wrap {
+        width: 100%;
         height: 35px;
         line-height: 30px;
       }
@@ -874,7 +882,7 @@ export default {
         width: 22px;
         height: 22px;
         padding: 0px;
-        margin-right: 10px;
+        margin: 0 10px 0 0;
         vertical-align: middle;
         font-family: MicrosoftYaHei;
         color: rgba(109, 104, 127, 1);

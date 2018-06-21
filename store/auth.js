@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-12 09:06:11
+ * @Last Modified time: 2018-06-21 11:36:25
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -167,7 +167,7 @@ export const mutations = {
     tid
   }) {
     state.tid = tid
-  },
+  }
 }
 export const actions = {
   async setToken({
@@ -197,14 +197,14 @@ export const actions = {
     state
   }, {
     phonenum,
-    password,
+    ectpwd,
     loginTypes
   }) {
     let user
     try {
       let tokens = await auth.signIns({
         phonenum,
-        password,
+        ectpwd,
         loginTypes
       })
       // if (!tokens.data.token) {
@@ -502,5 +502,5 @@ export const actions = {
       }
     }
     return tid
-  },
+  }
 }

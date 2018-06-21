@@ -64,7 +64,9 @@ export default {
       this.$router.push('course/pages/coursedetail')
     },
     handlePid(item, index) {
-      this.$router.push('/course/pages/category')
+      window.open(window.location.origin + '/course/pages/category')
+      // this.$router.push('/course/pages/category')
+
       this.pidform.pids = item.id
       this.setPid(this.pidform)
     },
