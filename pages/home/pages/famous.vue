@@ -19,7 +19,7 @@
 
 <script>
 import CustomTitle from '@/components/common/Title.vue'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   props: ['teachers', 'titleThree'],
   data() {

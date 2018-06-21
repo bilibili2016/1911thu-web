@@ -4,7 +4,7 @@
 }
 
 .shadow {
-  box-shadow: 0px 0px 14px rgba(198, 194, 210, .36)
+  box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
 }
 
 .fc14-888 {
@@ -17,7 +17,7 @@
   font-family: MicrosoftYaHei;
   color: rgba(34, 34, 34, 1);
 }
-.flh-30{
+.flh-30 {
   line-height: 30px;
 }
 
@@ -31,12 +31,13 @@
   background: #fff;
 }
 .color-2 {
-  color:rgba(176, 174, 184, 1);
+  color: rgba(176, 174, 184, 1);
 }
 
 .color-3 {
-  color:rgba(109, 104, 127, 1);
+  color: rgba(109, 104, 127, 1);
 }
+
 // rgba(176, 174, 184, 1) #B0AEB8
 // rgba(255, 255, 255, 1) #fff
 // rgba(255, 95, 95, 1) #FF5F5F

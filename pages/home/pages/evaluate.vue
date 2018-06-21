@@ -10,9 +10,6 @@
                 <img :src="item.head_img" alt="">
               </div>
               <div class="evaluate-box">
-                <span>
-                  <img src="" alt="">
-                </span>
                 <p class="one">{{item.evaluate_content}}</p>
                 <p class="two">-- {{item.nick_name}}（{{item.position}}）</p>
               </div>
@@ -27,12 +24,9 @@
 <script>
 import CustomTitle from '@/components/common/Title.vue'
 export default {
-  props: ['titleFour', 'carouselSrc', 'evaluateData'],
+  props: ['titleFour', 'evaluateData'],
   components: {
     'v-title': CustomTitle
-  },
-  methods: {
-    changeItem() {}
   }
 }
 </script>
