@@ -2,8 +2,7 @@
   <div class="headerBox">
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
-        <!-- <img src="~/assets/images/1911xt.png" alt=""> -->
-        <i></i>
+        <img src="~/assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">

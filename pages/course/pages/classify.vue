@@ -5,8 +5,6 @@
         <div class="clsTitle clearfix">
           <div class="fl hotBtn">
             <el-tabs v-model="activeName" @tab-click="handleClick">
-              <!-- <el-tab-pane label="全部" name="first"></el-tab-pane> -->
-              <!-- <el-tab-pane label="全部" name="first"></el-tab-pane> -->
               <el-tab-pane label="全部" name="first"></el-tab-pane>
               <el-tab-pane label="最新" name="second"></el-tab-pane>
               <el-tab-pane label="最热" name="third"></el-tab-pane>
@@ -29,11 +27,14 @@
           </li>
         </ul>
       </div>
-      <div class="center">
+      <div class="center noCourse" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="config" :linkdata="cardlink"></v-card>
       </div>
+      <div v-else v-loading="loadCourse" class="noCourse">
+        <v-nothing></v-nothing>
+      </div>
     </div>
-    <div class="pagination">
+    <div class="pagination" v-if="categoryData.length">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
     </div>
   </div>
@@ -42,20 +43,23 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import CustomHots from '@/components/common/Hot.vue'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import SearchNothing from '@/pages/home/pages/searchNothing.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { home } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-hots': CustomHots,
     'v-card': CustomCard,
-    'v-page': CustomPagination
+    'v-page': CustomPagination,
+    'v-nothing': SearchNothing
   },
   data() {
     return {
       checked: true,
       onOff: false,
       hideSwitch: false,
+      loadCourse: false,
       cardlink: 'coursedetail',
       classList: [
         '干部通用',
@@ -113,10 +117,12 @@ export default {
       })
     },
     recommendCurriculumList() {
+      this.loadCourse = true
       return new Promise((resolve, reject) => {
         home.getClassicCourseList(this.newsCurriculumForm).then(response => {
           this.categoryData = response.data.curriculumList
           resolve(true)
+          this.loadCourse = false
         })
       })
     },
