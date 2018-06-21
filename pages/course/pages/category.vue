@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="banner">
+    <div class="banner" v-loading="loadBanner">
       <div class="center category-style">
         <div class="college">
           <li class="title">学院：</li>
@@ -37,10 +37,10 @@
         <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch"> -->
         <!-- </el-switch> -->
       </div>
-      <div class="carlist" v-if="categoryData.length">
+      <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>
       </div>
-      <div v-else>
+      <div v-else v-loading="loadCourse">
         <v-nothing></v-nothing>
       </div>
 
@@ -71,6 +71,8 @@ export default {
   },
   data() {
     return {
+      loadBanner: true,
+      loadCourse: true,
       bgmsg: 0,
       bgmsgs: 0,
       activeName: '',
@@ -114,6 +116,7 @@ export default {
         home.curriculumList(this.curriculumListForm).then(response => {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
+          this.loadCourse = false
           resolve(true)
         })
       })
@@ -160,6 +163,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.childCategoryList().then(response => {
           this.data = response.data.categoryList
+          this.loadBanner = false
           // console.log(this.collegeId, 'this.collegeId')
 
           // console.log(this.data, '这是data')
@@ -201,6 +205,7 @@ export default {
       })
     },
     curriculumList() {
+      this.loadCourse = true
       this.curriculumListForm.categoryIda = this.cid
       this.curriculumListForm.categoryIdb = this.pid
       // this.curriculumListForm.sortBy = 1
@@ -208,10 +213,12 @@ export default {
         home.curriculumList(this.curriculumListForm).then(response => {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
+          this.loadCourse = false
           this.setProductsNum({
             pn: this.categoryData.length
           })
           resolve(true)
+          this.loadCourse = false
         })
       })
     }

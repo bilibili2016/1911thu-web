@@ -47,9 +47,9 @@
         </div>
       </div>
 
-      <!-- 讲师介绍 -->
       <div style="width:345px" class="fr">
-        <div class="teacher ">
+        <!-- 讲师介绍 -->
+        <div class="teacher" v-loading="loadTeacher">
           <h4>讲师介绍</h4>
           <div class="personal">
             <img :src="courseList.head_img" alt="">
@@ -116,7 +116,7 @@
         </div>
 
         <!-- 用户评论 -->
-        <div class="evaluate">
+        <div class="evaluate" v-loading="loadEvaluate">
           <h4>用户评价
             <span @click="getMore">查看更多></span>
           </h4>
@@ -182,6 +182,8 @@ export default {
       dialogVisible: false,
       textarea: null,
       rateModel: null,
+      loadTeacher: false,
+      loadEvaluate: false,
       shareImg: require('~/assets/images/f.png'),
       shareImgc: require('~/assets/images/c.png'),
       value1: 5,
@@ -333,6 +335,7 @@ export default {
       this.borderIndex = index
     },
     getCourseDetail() {
+      this.loadTeacher = true
       this.kidForm.ids = persistStore.get('kid')
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
@@ -341,11 +344,13 @@ export default {
           this.courseList = response.data.curriculumDetail
           this.privileMsg = response.data.curriculumPrivilege
           this.content = response.data.curriculumPrivilege
+          this.loadTeacher = false
         })
       })
     },
     // 获取评论列表
     getEvaluateList() {
+      this.loadEvaluate = true
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
@@ -356,6 +361,7 @@ export default {
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
+          this.loadEvaluate = false
         })
       })
     },
