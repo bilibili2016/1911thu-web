@@ -54,12 +54,12 @@ export default {
       this.setCid(this.cidform)
     },
     getMore(linedata) {
-      // this.$router.push('course/pages/coursedetail')
-      window.open(window.location.origin + '/course/pages/coursedetail')
+      this.$router.push('course/pages/coursedetail')
+      // window.open(window.location.origin + '/course/pages/coursedetail')
     },
     handlePid(item, index) {
-      window.open(window.location.origin + '/course/pages/category')
-      // this.$router.push('/course/pages/category')
+      // window.open(window.location.origin + '/course/pages/category')
+      this.$router.push('/course/pages/category')
 
       this.pidform.pids = item.id
       this.setPid(this.pidform)

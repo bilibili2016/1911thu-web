@@ -755,8 +755,8 @@ export default {
             this.$router.go()
             break
           default:
-            // this.$router.push('/course/pages/search')
-            window.open(window.location.origin + '/course/pages/search')
+            this.$router.push('/course/pages/search')
+            // window.open(window.location.origin + '/course/pages/search')
             break
         }
       }
