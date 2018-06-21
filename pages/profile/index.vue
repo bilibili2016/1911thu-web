@@ -12,7 +12,7 @@
               <span>最近学习</span>
             </div>
             <div class="content">
-              <v-card v-if="study" :data="newDataing" :config="configZero"></v-card>
+              <v-card v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-card>
               <div v-else class="noCourse">
                 <img :src="noMsgImg" alt="">
                 <h4>抱歉，现在还没有学习过的课程呦~</h4>
@@ -155,6 +155,7 @@ export default {
         pages: 0,
         limits: 12
       },
+      studyData: [],
       newDataing: [],
       newDataReady: [],
       collectionForm: {
@@ -209,6 +210,21 @@ export default {
         })
       })
     },
+    studydataList() {
+      this.styleForm.types = 3
+      this.styleForm.pages = 0
+      this.styleForm.limits = 12
+      return new Promise((resolve, reject) => {
+        home.studyCurriculumList(this.styleForm).then(response => {
+          // console.log(response, '这是response')
+          this.studyData = response.data.curriculumList
+          for (let item of response.data.curriculumList) {
+            item.percent = Number(item.percent)
+          }
+          resolve(true)
+        })
+      })
+    },
     readyStudyCurriculumList() {
       this.styleForm.types = 2
       this.styleForm.pages = 0
@@ -235,6 +251,7 @@ export default {
     if (!this.token) {
       this.$router.push('/')
     }
+    this.studydataList()
     this.studyCurriculumList()
     this.readyStudyCurriculumList()
     this.collectionList()

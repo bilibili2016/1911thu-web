@@ -14,7 +14,7 @@ export default {
 
 <style scoped lang="scss">
 .lbt {
-  background-color: rgba(123, 2, 3, 0);
+  background-color: rgb(211, 208, 255);
 }
 .el-main {
   padding: 0;
