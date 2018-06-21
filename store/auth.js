@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-12 09:06:11
+ * @Last Modified time: 2018-06-21 11:36:25
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -24,8 +24,8 @@ persistStore.defaults({
   isShowTip: null,
   productsNum: null,
   number: null,
-  index:null,
-  tid:null
+  index: null,
+  tid: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -130,7 +130,7 @@ export const mutations = {
   },
   [MUTATION.setTid](state, { tid }) {
     state.tid = tid
-  },
+  }
 }
 export const actions = {
   async setToken({ commit, state }, { tokens }) {
@@ -181,6 +181,7 @@ export const actions = {
   },
 
   async signOut({ commit, state }) {
+    console.log('进入了signout')
     try {
       await auth.signOut()
       persistStore.set('token', null)
@@ -389,5 +390,5 @@ export const actions = {
       }
     }
     return tid
-  },
+  }
 }

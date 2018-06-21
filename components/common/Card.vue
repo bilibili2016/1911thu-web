@@ -20,7 +20,8 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <div class="mask-style" @click="goLink('course/pages/coursedetail')">
+            <!-- @click="goLink('course/pages/coursedetail')" -->
+            <div class="mask-style" @click="openDetail()">
               <!-- <img :src="jinImg" alt="" class="jin-style"> -->
             </div>
             <div class="bgImgs">
@@ -432,6 +433,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
+    openDetail() {
+      window.open(window.location.origin + '/course/pages/coursedetail')
+    },
     selCheckboxChange(item, index) {
       let len = this.productsNum
       if (item.is_checked === false) {
@@ -511,7 +515,8 @@ export default {
       }
     },
     getMore(item) {
-      this.$router.push(item)
+      // this.$router.push(item)
+      window.open(window.location.origin + item)
     },
     toggleShow: function() {
       this.isShow = !this.isShow
@@ -526,7 +531,8 @@ export default {
       this.kidForm.kids = item.id
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      // this.$router.push('/course/pages/coursedetail')
+      this.openDetail()
     },
     selectCid(item, index) {
       this.kidForm.kids = item.id

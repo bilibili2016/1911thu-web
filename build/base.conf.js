@@ -50,7 +50,7 @@ const config = {
       { hid: 'description', name: 'description', content: '1911学堂' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '@/assets/images/headImg.png' }
       // 需要直接加载的 CSS
       // {
       //   rel: 'stylesheet',
