@@ -210,7 +210,8 @@ export default {
         this.getClassicCourseList(),
         this.getTeacherList(),
         this.getEvaluateList(),
-        this.getNewInfoList()
+        this.getNewInfoList(),
+        this.getPartnerList()
       ])
     },
     // 获取banner
@@ -222,7 +223,7 @@ export default {
     // 获取分类列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
-        console.log(response, '这是classify')
+        // console.log(response, '这是classify')
         this.classify = response.data.categoryList
       })
     },
@@ -259,7 +260,7 @@ export default {
     // 获取合作伙伴
     getPartnerList() {
       home.getPartnerList(this.partnerList).then(response => {
-        this.partnerList = response.data.collaborationEnterpriseList
+        this.partnerList.list = response.data.collaborationEnterpriseList
       })
     }
   }
