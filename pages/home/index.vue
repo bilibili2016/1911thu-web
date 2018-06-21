@@ -210,7 +210,8 @@ export default {
         this.getClassicCourseList(),
         this.getTeacherList(),
         this.getEvaluateList(),
-        this.getNewInfoList()
+        this.getNewInfoList(),
+        this.getPartnerList()
       ])
     },
     // 获取banner
@@ -259,7 +260,7 @@ export default {
     // 获取合作伙伴
     getPartnerList() {
       home.getPartnerList(this.partnerList).then(response => {
-        this.partnerList = response.data.collaborationEnterpriseList
+        this.partnerList.list = response.data.collaborationEnterpriseList
       })
     }
   }
