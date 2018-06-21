@@ -380,6 +380,7 @@ export default {
             pn: body.length
           }
           this.setProductsNum(len)
+          // console.log(this.productsNum)
         })
       })
     },
@@ -541,6 +542,7 @@ export default {
               if (response.status === 0) {
                 this.close()
                 this.getUserInfo()
+                this.getCount()
               }
             })
           })
@@ -575,6 +577,7 @@ export default {
             })
             this.tokenForm.token = response.data.token
             this.getUserInfo()
+            this.getCount()
             this.setToken(this.tokenForm)
             this.closeWechat()
             this.close()
@@ -600,6 +603,7 @@ export default {
           if (response.status === 0) {
             this.tokenForm.tokens = response.data.token
             this.getUserInfo()
+            this.getCount()
             this.setToken(this.tokenForm)
             clearInterval(this.getwxtime)
             this.scanCodeShow = false //微信扫码
