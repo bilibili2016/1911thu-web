@@ -820,7 +820,7 @@ export default {
       })
     if (!this.token) {
       this.signOut()
-      this.$router.push('/')
+      // this.$router.push('/')
     }
   }
 }

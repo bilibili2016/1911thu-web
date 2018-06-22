@@ -280,7 +280,7 @@
                 <span class="coins">￥ {{courseList.present_price}}</span>
               </div>
             </div>
-            <!-- <div class="study clearfix bought" v-if="courseList.is_study === 1">
+            <div class="study clearfix bought" v-if="courseList.is_study === 1">
               <h4 class="clearfix">
                 <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                 <p>已学时长</p>
@@ -306,7 +306,7 @@
                   <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
