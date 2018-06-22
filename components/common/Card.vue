@@ -256,7 +256,7 @@
               <div class="common-button btn-bg">
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goPlay()" v-if="privileMsg === false">立即观看</el-button>
+                  <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看</el-button>
                 </div>
                 <div v-else>
                   <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看</el-button>
@@ -275,6 +275,7 @@
                 <span class="fl coursenum">
                   <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                 <span class="rate">
+                  <!-- {{}} -->
                   <el-rate disabled v-model="courseList.score"></el-rate>
                 </span>
                 <span class="coins">￥ {{courseList.present_price}}</span>
@@ -287,7 +288,7 @@
               </h4>
               <div class="common-button">
                 <div>
-                  <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+                  <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                 </div>
                 <div class="lineProgress">
                   <h5>已学习{{courseList.percent}}%</h5>
@@ -423,6 +424,9 @@ export default {
       },
       tidForm: {
         tids: null
+      },
+      getdefaultForm: {
+        curriculumid: ''
       }
     }
   },
@@ -465,8 +469,24 @@ export default {
     goBuy3(item, index) {
       this.$bus.$emit('loginShow', true)
     },
-    goPlay() {
+    goPlay(item) {
+      persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
+      // console.log(item, '8989989989898')
       window.open(window.location.origin + '/course/pages/player')
+    },
+    // 获取详情默认播放小节id
+    getdefaultCurriculumCatalogs() {
+      this.getdefaultForm.curriculumid = this.courseList.id
+      // console.log(this.courseList.id, '888888')
+      return new Promise((resolve, reject) => {
+        home.getdefaultCurriculumCatalog(this.getdefaultForm).then(response => {
+          // console.log(response, '123')
+          persistStore.set(
+            'catalogId',
+            response.data.defaultCurriculumCatalog.id
+          )
+        })
+      })
     },
     goLink(item) {
       switch (window.location.pathname) {
@@ -560,8 +580,10 @@ export default {
       })
     },
     selectCid2(item, index) {
+      // console.log('23424424')
       this.kidForm.kids = item.id
       persistStore.set('curriculumId', item.id)
+      // console.log()
       this.setKid(this.kidForm)
       this.curriculumcartids.cartid = item.id
     },
@@ -583,7 +605,11 @@ export default {
       })
     }
   },
-  mounted() {}
+  mounted() {
+    if (window.location.pathname === '/course/pages/coursedetail') {
+      // this.getdefaultCurriculumCatalogs()
+    }
+  }
 }
 </script>
 
