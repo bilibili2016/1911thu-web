@@ -433,8 +433,8 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     openDetail() {
-      // window.open(window.location.origin + '/course/pages/coursedetail')
-      this.$router.push('/course/pages/coursedetail')
+      window.open(window.location.origin + '/course/pages/coursedetail')
+      // this.$router.push('/course/pages/coursedetail')
     },
     selCheckboxChange(item, index) {
       let len = this.productsNum
