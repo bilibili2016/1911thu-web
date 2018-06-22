@@ -4,7 +4,7 @@
     <template v-if="config.card_type === 'ding'">
       <div class="customization">
         <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link)">
-          <img :src="pro.src" alt="" class="fl">
+          <i class="fl"></i>
           <div class="fr con">
             <h5>{{pro.title}}</h5>
             <p>{{pro.content}}</p>
@@ -401,7 +401,7 @@ export default {
       readyImg: require('@/assets/images/ready.png'),
       playbtn: 'http://pam8iyw9q.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
-      jinImg: require('@/assets/images/jin.png'),
+      // jinImg: require('@/assets/images/jin.png'),
       isShow: false,
       checked: false,
       numberArr: [],

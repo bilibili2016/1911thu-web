@@ -2,7 +2,7 @@
   <div class="footerBox">
     <div class="main">
       <div class="logo">
-        <img src="@/assets/images/logobt.png" alt="">
+        <i></i>
       </div>
       <div class="companyInfo">
         <div class="enterprise">
@@ -24,11 +24,11 @@
         </div>
         <div class="QRCode clearfix">
           <div>
-            <img :src="wxImg" alt="">
+            <i></i>
             <p>扫码关注公众号</p>
           </div>
           <div>
-            <img :src="appImg" alt="">
+            <i></i>
             <p>扫码下载APP</p>
           </div>
         </div>
@@ -47,9 +47,7 @@ export default {
     return {
       indexData: {
         indexs: null
-      },
-      wxImg: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
-      appImg: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png'
+      }
     }
   },
   methods: {

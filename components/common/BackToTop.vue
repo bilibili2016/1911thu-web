@@ -2,14 +2,14 @@
   <div>
     <transition :name="transitionName">
       <div class="back-to-ceiling customStyle" @click="backToTop" v-show="visible">
-        <img :src="topSrc" alt="" class="topSrc">
+        <i class="topSrc"></i>
       </div>
     </transition>
     <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
         <span></span>
         <div class="showCode">
-          <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
+          <i></i>
           <h4>1911学堂官方微信</h4>
           <p>微信号：xuetang1911</p>
         </div>

@@ -61,7 +61,7 @@
         }
         &:hover .tabs-title {
           color: #6417A6;
-          background:rgba(233, 208, 255, 1);
+          background: rgba(233, 208, 255, 1);
         }
         .tabs-content {
           position: absolute;
@@ -144,7 +144,6 @@
         }
       }
     }
-
   }
   .customization {
     width: 1100px;
@@ -169,6 +168,23 @@
         width: 50px;
         height: 50px;
         margin: 31px 16px;
+      }
+      i.fl {
+        display: inline-block;
+        width: 56px;
+        height: 56px;
+        margin: 22px 13px;
+        background: url("~assets/images/iconList.png") no-repeat;
+        background-size: 177px 966px;
+      }
+      &:first-child i {
+        background-position: 0 -250px;
+      }
+      &:nth-child(2) i {
+        background-position: 0 -192px;
+      }
+      &:nth-child(3) i {
+        background-position: 0 -134px;
       }
       div {
         width: 235px;
