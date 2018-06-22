@@ -249,7 +249,8 @@ export default {
   },
   mounted() {
     if (!this.token) {
-      this.$router.push('/')
+      // this.$router.push('/')
+      // console.log(this.token, '123')
     }
     this.studydataList()
     this.studyCurriculumList()

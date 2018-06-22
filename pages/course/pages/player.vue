@@ -10,7 +10,7 @@
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
           <div class="ewCode">
-            <img src="http://pam8iyw9q.bkt.clouddn.com/attentionWechat2.png" alt="">
+            <img src="@/assets/images/attentionWechat2.png" alt="">
             <i></i>
           </div>
         </span>
@@ -46,7 +46,7 @@
                 <i class="el-icon-caret-right"></i>
               </span>
               <span class="fl playImg" v-if="ischeck === bar.id?true:false">
-                <img src="http://pam8iyw9q.bkt.clouddn.com/playImg.png" alt="">
+                <img src="@/assets/images/playImg.png" alt="">
               </span>
               <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
               </span>
