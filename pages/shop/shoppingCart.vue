@@ -270,7 +270,7 @@ export default {
       }
     },
     handleSelect(item) {
-      console.log(item, '选择')
+      // console.log(item, '选择')
       this.companyInfo.companyname = item
       // console.log(item)
     },

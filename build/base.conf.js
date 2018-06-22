@@ -53,13 +53,17 @@ const config = {
       { hid: 'description', name: 'description', content: '1911学堂' }
     ],
     link: [
-      // { rel: 'icon', type: 'image/x-icon', href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png' }
       // 需要直接加载的 CSS
       // {
       //   rel: 'stylesheet',
       //   href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
       // }
       // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
+      // {
+      //   rel: 'icon',
+      //   type: 'image/x-icon',
+      //   href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png'
+      // }
     ],
     script: [
       // {

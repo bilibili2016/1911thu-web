@@ -15,11 +15,12 @@ config.sentry = {
   }
 }
 ;(config.head.link = [
-  {
-    rel: 'icon',
-    type: 'image/x-icon',
-    href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png'
-  },
+  // {
+  //   rel: 'icon',
+  //   type: 'image/x-icon',
+  //   href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png'
+  // },
+
   {
     rel: 'stylesheet',
     href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'

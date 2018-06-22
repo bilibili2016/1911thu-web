@@ -256,7 +256,7 @@
               <div class="common-button btn-bg">
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goLink()" v-if="privileMsg === false">立即观看</el-button>
+                  <el-button type="primary" plain @click="goPlay()" v-if="privileMsg === false">立即观看</el-button>
                 </div>
                 <div v-else>
                   <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看</el-button>
@@ -280,7 +280,7 @@
                 <span class="coins">￥ {{courseList.present_price}}</span>
               </div>
             </div>
-            <div class="study clearfix bought" v-if="courseList.is_study === 1">
+            <!-- <div class="study clearfix bought" v-if="courseList.is_study === 1">
               <h4 class="clearfix">
                 <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                 <p>已学时长</p>
@@ -306,7 +306,7 @@
                   <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -464,6 +464,9 @@ export default {
     },
     goBuy3(item, index) {
       this.$bus.$emit('loginShow', true)
+    },
+    goPlay() {
+      window.open(window.location.origin + '/course/pages/player')
     },
     goLink(item) {
       switch (window.location.pathname) {

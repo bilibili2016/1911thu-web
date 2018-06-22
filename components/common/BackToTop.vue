@@ -68,7 +68,7 @@ export default {
       interval: null,
       ceilSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop11.png',
       wxSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop22.png',
-      topSrc: '@/assets/images/home_backtop03.png'
+      topSrc: require('@/assets/images/home_backtop03.png')
     }
   },
   mounted() {
