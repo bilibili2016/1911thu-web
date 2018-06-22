@@ -1,7 +1,7 @@
 <template>
     <div class="custom">
         <div class="topImg">
-            <img src="~/assets/images/custom.png" alt="">
+            <img src="http://pam8iyw9q.bkt.clouddn.com/custom.png" alt="">
         </div>
         <div class="serviceDetails">
             <h2>服务详情</h2>
@@ -10,9 +10,9 @@
                 <h6>{{item.content}}</h6>
                 <p>{{item.num}}</p>
             </div>
-            <img class="serviceImg_top" src="~/assets/images/serviceImg_top.png" alt="">
-            <img class="serviceImg_center" src="~/assets/images/serviceImg_center.png" alt="">
-            <img class="serviceImg_bottom" src="~/assets/images/serviceImg_bottom.png" alt="">
+            <img class="serviceImg_top" src="http://pam8iyw9q.bkt.clouddn.com/serviceImg_top.png" alt="">
+            <img class="serviceImg_center" src="http://pam8iyw9q.bkt.clouddn.com/serviceImg_center.png" alt="">
+            <img class="serviceImg_bottom" src="http://pam8iyw9q.bkt.clouddn.com/serviceImg_bottom.png" alt="">
         </div>
     </div>
 </template>

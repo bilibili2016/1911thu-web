@@ -397,10 +397,9 @@ export default {
   data() {
     return {
       numSrc: require('@/assets/images/home_num.png'),
-      avator: require('@/assets/images/home_avator.png'),
       one: 1,
       readyImg: require('@/assets/images/ready.png'),
-      playbtn: require('@/assets/images/play.png'),
+      playbtn: 'http://pam8iyw9q.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
       jinImg: require('@/assets/images/jin.png'),
       isShow: false,

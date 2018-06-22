@@ -9,7 +9,7 @@
       <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
         <span></span>
         <div class="showCode">
-          <img src="@/assets/images/wechatLogin.png" alt="">
+          <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
           <h4>1911学堂官方微信</h4>
           <p>微信号：xuetang1911</p>
         </div>
@@ -66,9 +66,9 @@ export default {
       visible: false,
       move: true,
       interval: null,
-      ceilSrc: require('@/assets/images/home_backtop11.png'),
-      wxSrc: require('@/assets/images/home_backtop22.png'),
-      topSrc: require('@/assets/images/home_backtop03.png')
+      ceilSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop11.png',
+      wxSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop22.png',
+      topSrc: '@/assets/images/home_backtop03.png'
     }
   },
   mounted() {

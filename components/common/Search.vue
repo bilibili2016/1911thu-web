@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       searchMsg: '',
-      searchImg: require('~/assets/images/search.png'),
+      searchImg: require('@/assets/images/search.png'),
       searchMsgs: ['电子政务', '学术管理', '学位', 'HR', '历史', '日本']
     }
   },

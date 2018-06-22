@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="topImg">
-      <img src="@/assets/images/degreeBg.png" alt="">
+      <img src="http://pam8iyw9q.bkt.clouddn.com/degreeBg.png" alt="">
     </div>
     <div class="degreeInfo">
       <h3>项目介绍</h3>

@@ -24,11 +24,11 @@
         </div>
         <div class="QRCode clearfix">
           <div>
-            <img src="@/assets/images/wechatLogin.png" alt="">
+            <img :src="wxImg" alt="">
             <p>扫码关注公众号</p>
           </div>
           <div>
-            <img src="@/assets/images/wechatLogin.png" alt="">
+            <img :src="appImg" alt="">
             <p>扫码下载APP</p>
           </div>
         </div>
@@ -47,7 +47,9 @@ export default {
     return {
       indexData: {
         indexs: null
-      }
+      },
+      wxImg: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
+      appImg: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png'
     }
   },
   methods: {

@@ -2,7 +2,7 @@
   <div class="headerBox">
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
-        <img src="~/assets/images/1911xt.png" alt="">
+        <img src="@/assets/images/1911xt.png" alt="">
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
@@ -129,7 +129,7 @@
           <div class="wxchatIMG" id="wxchatIMG"></div>
         </div>
         <div class="bindSuccess" v-show="bindSuccessShow">
-          <img src="@/assets/images/bindingSuccess.png" alt="">
+          <img src="http://pam8iyw9q.bkt.clouddn.com/bindingSuccess.png" alt="">
           <h5>手机账号绑定成功</h5>
           <p>返回登录 3S</p>
         </div>
@@ -167,8 +167,8 @@ export default {
       return callback()
     }
     return {
-      searchImg: require('~/assets/images/search.png'),
-      downApp: require('~/assets/images/wechatLogin.png'),
+      searchImg: '@/assets/images/search.png',
+      downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
       start: false,
       lrFrame: false,
       islogin: false,
@@ -184,7 +184,7 @@ export default {
         userImg: ''
       },
       activeName: 'login',
-      QRcode: require('~/assets/images/wechatLogin.png'),
+      QRcode: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
       wechatLogin: false,
       bindTelShow: false,
       scanCodeShow: false,
@@ -396,10 +396,10 @@ export default {
     changeImg(what) {
       if (what == 'android') {
         // console.log(1)
-        this.downApp = require('~/assets/images/wechatLogin.png')
+        this.downApp = 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png'
       } else {
         // console.log(2)
-        this.downApp = require('~/assets/images/wechatLogin.png')
+        this.downApp = 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png'
       }
     },
     // 登录显示card
@@ -797,10 +797,12 @@ export default {
             if (this.userInfo.head_img && this.userInfo.head_img != '') {
               this.user.userImg = this.userInfo.head_img
             } else {
-              this.user.userImg = require('@/assets/images/profile_avator01.png')
+              this.user.userImg =
+                'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
             }
             if (/^\//.test(this.userInfo.head_img)) {
-              this.user.userImg = require('@/assets/images/profile_avator01.png')
+              this.user.userImg =
+                'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
             }
           }
         })
