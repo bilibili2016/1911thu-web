@@ -426,7 +426,7 @@ export default {
       this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getdefaultCurriculumCatalog(this.getdefaultForm).then(response => {
-          console.log(response.data.defaultCurriculumCatalog.id, 'catalogId')
+          // console.log(response.data.defaultCurriculumCatalog.id, 'catalogId')
           persistStore.set(
             'catalogId',
             response.data.defaultCurriculumCatalog.id
