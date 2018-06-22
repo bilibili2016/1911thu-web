@@ -24,6 +24,9 @@ function isTrue(value) {
 // const DEBUG = isTrue(dotenv.DEBUG)
 const baseRouter = env.BASE_ROUTER
 const config = {
+  render: {
+    resourceHints: true
+  },
   mode: 'spa',
   env: {
     VERSION: pkg.version,
