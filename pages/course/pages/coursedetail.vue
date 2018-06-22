@@ -246,7 +246,8 @@ export default {
         evaluatePercent: null,
         totalEvaluate: null,
         totalScore: null
-      }
+      },
+      defaultCatalogId: ''
     }
   },
   methods: {
@@ -333,12 +334,14 @@ export default {
     },
     getCourseDetail() {
       this.loadTeacher = true
-      this.kidForm.ids = persistStore.get('kid')
+      this.kidForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
           this.loadMsg = false
-          console.log(response, '获取详情的接口')
+          // console.log(response, '获取详情的接口')
           this.courseList = response.data.curriculumDetail
+          persistStore.set('curriculumId', response.data.curriculumDetail.id)
+
           this.privileMsg = response.data.curriculumPrivilege
           this.content = response.data.curriculumPrivilege
           this.loadTeacher = false
@@ -363,7 +366,7 @@ export default {
       })
     },
     getCourseList() {
-      this.kidForm.ids = persistStore.get('kid')
+      this.kidForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCourseList(this.kidForm).then(response => {
           this.catalogs = response.data.curriculumCatalogList
@@ -423,6 +426,7 @@ export default {
       this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getdefaultCurriculumCatalog(this.getdefaultForm).then(response => {
+          console.log(response.data.defaultCurriculumCatalog.id, 'catalogId')
           persistStore.set(
             'catalogId',
             response.data.defaultCurriculumCatalog.id
