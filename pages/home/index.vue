@@ -222,6 +222,7 @@ export default {
 
     getTeacherList() {
       home.getTeacherList(this.teacherForm).then(response => {
+        // console.log(response, '这是response')
         this.teachers = response.data.teacherList
       })
     },

@@ -38,7 +38,10 @@ config.sentry = {
       async: true
     },
     { src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js', async: true }
-  ])
+  ]),
+  (config.render = {
+    resourceHints: false
+  })
 
 module.exports = config
 
