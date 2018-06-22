@@ -80,7 +80,7 @@ export default {
         addCourse: true,
         courseID: []
       },
-      bindImg: require('~/assets/images/bindingSuccess.png'),
+      bindImg: 'http://pam8iyw9q.bkt.clouddn.com/bindingSuccess.png',
       bindForm: {
         courseId: ''
       },

@@ -10,7 +10,7 @@
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
           <div class="ewCode">
-            <img src="~/assets/images/attentionWechat2.png" alt="">
+            <img src="http://pam8iyw9q.bkt.clouddn.com/attentionWechat2.png" alt="">
             <i></i>
           </div>
         </span>
@@ -46,7 +46,7 @@
                 <i class="el-icon-caret-right"></i>
               </span>
               <span class="fl playImg" v-if="ischeck === bar.id?true:false">
-                <img src="@/assets/images/playImg.png" alt="">
+                <img src="http://pam8iyw9q.bkt.clouddn.com/playImg.png" alt="">
               </span>
               <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
               </span>
@@ -135,7 +135,7 @@ export default {
       player: {
         // courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
         // video: "",
-        // ewCode: require("@/assets/images/attentionWechat2.png"),
+        // ewCode: require("http://pam8iyw9q.bkt.clouddn.com/attentionWechat2.png"),
         // teacher: {
         //   name: "莎良朋",
         //   school: "华中科技大学博士"

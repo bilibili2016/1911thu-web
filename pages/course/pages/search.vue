@@ -48,7 +48,7 @@ export default {
       ressult: false,
       loadSearch: false,
       noMsg: {
-        img: require('~/assets/images/noSearch.png')
+        img: 'http://pam8iyw9q.bkt.clouddn.com/noSearch.png'
       },
       searchData: [],
       getData: [],

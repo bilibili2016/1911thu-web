@@ -108,7 +108,6 @@ export default {
       ],
       numSrc: require('@/assets/images/home_num.png'),
       value1: 4,
-      avator: require('@/assets/images/home_avator.png'),
       imgList: [],
       items: [],
       itemsData: {
@@ -142,28 +141,7 @@ export default {
         }
       ],
       classtext: [],
-      courses: [
-        {
-          src: require('@/assets/images/course1.png'),
-          title: '高效团队与卓越执行力 高效团队',
-          author: '王建林 清华大学电子工程系教授'
-        },
-        {
-          src: require('@/assets/images/course2.png'),
-          title: '高效团队与卓越执行力 高效团队',
-          author: '王建林 清华大学电子工程系教授'
-        },
-        {
-          src: require('@/assets/images/course1.png'),
-          title: '高效团队与卓越执行力 高效团队',
-          author: '王建林 清华大学电子工程系教授'
-        },
-        {
-          src: require('@/assets/images/course2.png'),
-          title: '高效团队与卓越执行力 高效团队',
-          author: '王建林 清华大学电子工程系教授'
-        }
-      ],
+      courses: [],
       notLogin: false,
       curruntForm: {
         pages: 1,

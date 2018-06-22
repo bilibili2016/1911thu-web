@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      atopImg: require('@/assets/images/banner2.png'),
+      atopImg: 'http://pam8iyw9q.bkt.clouddn.com/banner2.png',
       config: {
         card_type: 'goodlesson'
       },

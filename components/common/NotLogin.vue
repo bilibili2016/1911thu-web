@@ -15,7 +15,7 @@ export default {
   props: ['notLogin'],
   data() {
     return {
-      tipSrc: require('@/assets/images/tips.png')
+      tipSrc: require('http://pam8iyw9q.bkt.clouddn.com/tips.png')
     }
   },
   methods: {

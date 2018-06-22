@@ -98,13 +98,11 @@ export default {
     },
     getUserInfo() {
       home.getUserInfo().then(res => {
-        // console.log(res.data.userInfo, '这是用户信息')
-        // this.studycurriculumtime = res.data.userInfo.study_curriculum_time
         this.userInfo = res.data.userInfo
         if (this.userInfo.head_img && this.userInfo.head_img != '') {
           this.avator = this.userInfo.head_img
         } else {
-          this.avator = require('@/assets/images/profile_avator01.png')
+          this.avator = 'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
         }
       })
     }

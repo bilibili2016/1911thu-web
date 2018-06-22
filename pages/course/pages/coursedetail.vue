@@ -40,7 +40,7 @@
         <!-- 关注我们 -->
         <div class="attention">
           <div class="code">
-            <img src="@/assets/images/wechatLogin.png" alt="">
+            <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
             <h5>扫描二维码或关注“1911学堂”微信公众号</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
@@ -188,7 +188,6 @@ export default {
       linkseven: 'player',
       catalogs: [],
       teacher: {
-        headImg: require('../../../assets/images/headImg.png'),
         teacherName: '莎良朋',
         degree: '华中科技大学博士',
         abstract:

@@ -1,7 +1,7 @@
 <template>
   <div class="allInfo">
     <div class="topImg">
-      <img src="@/assets/images/hrEntry.png" alt="">
+      <img src="http://pam8iyw9q.bkt.clouddn.com/hrEntry.png" alt="">
     </div>
     <div class="why">
       <h3>为什么选择我们</h3>
@@ -37,7 +37,7 @@
     <div class="psrocess">
       <h3>购买、学习流程</h3>
       <div class="route">
-        <p><img src="@/assets/images/cartIcon.png" alt=""> 购买流程</p>
+        <p><img src="http://pam8iyw9q.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
         <h5>
           <span v-for="(one,index) in buyList" :key="index">
             <i class="icon before el-icon-caret-right"></i>
@@ -45,7 +45,7 @@
             <i class="icon after el-icon-caret-right"></i>
           </span>
         </h5>
-        <p><img src="@/assets/images/studyIcon.png" alt="">学习流程</p>
+        <p><img src="http://pam8iyw9q.bkt.clouddn.com/studyIcon.png" alt="">学习流程</p>
         <h5>
           <span v-for="(one,index) in studyList" :key="index">
             <i class="icon before el-icon-caret-right"></i>
@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="bottomForm">
-      <img src="@/assets/images/hrEntrybottom.png" alt="">
+      <img src="http://pam8iyw9q.bkt.clouddn.com/hrEntrybottom.png" alt="">
       <div class="word">
         <p>如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
         <el-form :model="company" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -97,47 +97,47 @@ export default {
     return {
       courseList: [
         {
-          src: require('@/assets/images/hrEntry_1.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_1.png',
           title: '通识性课程体系（干部通用学院）',
           number: '（10余门课程）'
         },
         {
-          src: require('@/assets/images/hrEntry_2.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_2.png',
           title: '系统专题性课程（党政系统学院）',
           number: '（14个专题，110余门课程）'
         },
         {
-          src: require('@/assets/images/hrEntry_3.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_3.png',
           title: '在线商学院',
           number: '（12个模块，160余门课程）'
         },
         {
-          src: require('@/assets/images/hrEntry_4.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_4.png',
           title: '行业学院',
           number: '（14个模块，150余门课程）'
         },
         {
-          src: require('@/assets/images/hrEntry_5.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_5.png',
           title: '职场学院',
           number: '（6个模块，初期20余门课程）'
         },
         {
-          src: require('@/assets/images/hrEntry_6.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_6.png',
           title: '直播/热点课程（热点课程）',
           number: '（11个行业，110余门课程）'
         }
       ],
       project: [
         {
-          src: require('@/assets/images/hrEntry_7.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_7.png',
           title: '企业课程定制'
         },
         {
-          src: require('@/assets/images/hrEntry_8.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_8.png',
           title: '学位项目'
         },
         {
-          src: require('@/assets/images/hrEntry_9.png'),
+          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_9.png',
           title: '面授及线下活动'
         }
       ],

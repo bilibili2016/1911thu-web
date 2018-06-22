@@ -100,7 +100,7 @@ export default {
     return {
       isNoMsg: false,
       loding: true,
-      noMsg: require('~/assets/images/noMsg.png'),
+      noMsg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
       showInfo: false,
       selectAll: false,
       checked: [],

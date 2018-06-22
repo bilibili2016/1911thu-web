@@ -56,7 +56,7 @@ export default {
       allPrice: '69.00',
       status: '等待审核',
       time: null,
-      noMsgImg: require('~/assets/images/noMsg.png'),
+      noMsgImg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
       noData: false,
       loding: true,
       kidForm: {

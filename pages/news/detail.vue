@@ -46,10 +46,10 @@ export default {
   },
   data() {
     return {
-      bannerImg: require('~/assets/images/profile_banner03.png'),
-      sharewx: require('~/assets/images/share-wx.png'),
-      sharewb: require('~/assets/images/share-wb.png'),
-      sharekj: require('~/assets/images/share-kj.png'),
+      bannerImg: 'http://pam8iyw9q.bkt.clouddn.com/profile_banner03.png',
+      sharewx: require('@/assets/images/share-wx.png'),
+      sharewb: require('@/assets/images/share-wb.png'),
+      sharekj: require('@/assets/images/share-kj.png'),
       configs: {
         banner_type: 'news'
       },
