@@ -337,7 +337,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
           this.loadMsg = false
-          // console.log(response, '获取详情的接口')
+          console.log(response, '获取详情的接口')
           this.courseList = response.data.curriculumDetail
           this.privileMsg = response.data.curriculumPrivilege
           this.content = response.data.curriculumPrivilege
