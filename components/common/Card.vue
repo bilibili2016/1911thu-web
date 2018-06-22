@@ -480,8 +480,8 @@ export default {
           this.$router.push(item)
           break
         case '/course/pages/coursedetail':
-          this.$router.push('player')
-          // window.open(window.location.origin + '/course/pages/player')
+          // this.$router.push('player')
+          window.open(window.location.origin + '/course/pages/player')
           break
         case '/course/pages/classify':
           this.$router.push('coursedetail')
@@ -516,8 +516,8 @@ export default {
       }
     },
     getMore(item) {
-      this.$router.push(item)
-      // window.open(window.location.origin + item)
+      // this.$router.push(item)
+      window.open(window.location.origin + item)
     },
     toggleShow: function() {
       this.isShow = !this.isShow
