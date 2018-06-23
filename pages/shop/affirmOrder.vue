@@ -7,9 +7,6 @@
       </div>
     </div>
     <div class="affirmOrder" v-else>
-      <div class="topImg">
-        <!-- <i></i> -->
-      </div>
       <div class="contain" v-loading="loadGoods">
         <h3>确认订单</h3>
         <div class="buyType" v-if="payNumber>1">
@@ -66,7 +63,7 @@
               <span>学习人数：{{payNumber}}人</span>
               <span>商品总金额：¥{{allPrise}}</span>
             </h5>
-            <p>购买账号：mmmmmm</p>
+            <p>购买账号：{{nickName}}</p>
           </div>
         </div>
         <div class="bottomBtn clearfix">
@@ -127,6 +124,7 @@ export default {
       curriculumSum: null,
       payNumber: null,
       allPrise: null,
+      nickName: null,
       noMsg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
       commitOrders: {},
       companyInfo: {
@@ -235,11 +233,13 @@ export default {
             this.curriculumSum = res.data.curriculumSum
             this.payNumber = res.data.payNumber
             this.allPrise = res.data.goodsAmount
+            this.nickName = persistStore.get('nickName')
             if (res.data.companyInfo) {
               this.company = res.data.companyInfo
               this.person = false
               this.flag = false
               // console.log(this.company)
+              // persistStore.set('curriculumId', item.id)
             }
             this.loadGoods = false
           } else {

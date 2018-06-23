@@ -793,6 +793,7 @@ export default {
             })
           } else {
             this.userInfo = res.data.userInfo
+            persistStore.set('nickName', this.userInfo.nick_name)
             if (this.userInfo.head_img && this.userInfo.head_img != '') {
               this.user.userImg = this.userInfo.head_img
             } else {
