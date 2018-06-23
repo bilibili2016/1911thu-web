@@ -97,12 +97,6 @@
             </div>
           </div>
         </el-tab-pane>
-        <!-- 我的选课 -->
-        <el-tab-pane name="tab-sixth">
-          <!-- <el-tab-pane name="tab-sixth" class="wertttttttttttt" @click="goLink('/shop/checkedCourse')"> -->
-          <span slot="label" class="tabList">
-            <i class="icon-choose"></i> 我的选课</span>
-        </el-tab-pane>
       </el-tabs>
     </div>
   </div>

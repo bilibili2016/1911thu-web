@@ -32,11 +32,9 @@ config.analyze = {
   {
     src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
     async: true
-  }, {
+  },
+  {
     src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
-    async: true
-  }, {
-    src: 'http://parq881t8.bkt.clouddn.com/fragment.js',
     async: true
   }
   // { src: '../assets/js/bas.js', async: true },
