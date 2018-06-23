@@ -186,7 +186,6 @@ export default {
     }
   },
   mounted() {
-    // this.setProductsNum(0)
     this.goodsList()
   },
   methods: {
