@@ -334,20 +334,19 @@ export default {
       var player = TCPlayer('movd', this.tcplayer)
       player.pause()
       var socket = new io('http://ceshi.1911edu.com:2120')
-
+      // 连接socket
+      socket.on('connect', function() {
+        // console.log('已连接')
+        socket.emit('login', persistStore.get('token'))
+      })
+      // 断线重连
+      socket.on('reconnect', function(msg) {})
       let that = this
       player.on('pause', () => {
         clearInterval(that.interval)
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('play', function() {
-        // 连接socket
-        socket.on('connect', function() {
-          // console.log('已连接')
-          socket.emit('login', persistStore.get('token'))
-        })
-        // 断线重连
-        socket.on('reconnect', function(msg) {})
         // console.log(that.seconds, '这是重新播放倒计时秒数2')
         that.interval = setInterval(() => {
           if (that.seconds <= 0) {
@@ -369,7 +368,6 @@ export default {
             )
           }
           // this.ischeck = item.id
-          // console.log(this.playerForm, '12312312')
         }, 1000)
       })
       // 计时器
