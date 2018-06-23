@@ -23,7 +23,7 @@
             <!-- <p style="color:black">{{userInfo}}</p> -->
           </div>
           <div class="time">
-            <p class="fr">{{parseInt(userInfo.study_curriculum_time / 3600)}}小时{{parseInt(userInfo.study_curriculum_time / 60)}}分钟{{parseInt(userInfo.study_curriculum_time % 60)}}秒</p>
+            <p class="fr">{{time.hour}}小时{{time.minutes}}分钟{{time.second}}秒</p>
             <p class="fr">总学习时长</p>
           </div>
         </div>
@@ -43,6 +43,11 @@ export default {
         nick_name: '',
         company_name: '',
         head_img: ''
+      },
+      time: {
+        hour: null,
+        minutes: null,
+        second: null
       },
       fileForm: {
         FILESS: []
@@ -99,6 +104,26 @@ export default {
     getUserInfo() {
       home.getUserInfo().then(res => {
         this.userInfo = res.data.userInfo
+        this.time.hour = parseInt(this.userInfo.study_curriculum_time / 3600)
+        this.time.minutes = parseInt(
+          (parseFloat(this.userInfo.study_curriculum_time / 3600.0) -
+            parseInt(this.userInfo.study_curriculum_time / 3600.0)) *
+            60
+        )
+        this.time.second = parseInt(
+          (parseFloat(
+            (parseFloat(this.userInfo.study_curriculum_time / 3600.0) -
+              parseInt(this.userInfo.study_curriculum_time / 3600.0)) *
+              60
+          ) -
+            parseInt(
+              (parseFloat(this.userInfo.study_curriculum_time / 3600.0) -
+                parseInt(this.userInfo.study_curriculum_time / 3600.0)) *
+                60
+            )) *
+            60
+        )
+
         if (this.userInfo.head_img && this.userInfo.head_img != '') {
           this.avator = this.userInfo.head_img
         } else {
