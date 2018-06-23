@@ -214,9 +214,6 @@ export default {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
           this.loadCourse = false
-          this.setProductsNum({
-            pn: this.categoryData.length
-          })
           resolve(true)
           this.loadCourse = false
         })
