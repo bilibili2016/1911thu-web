@@ -2,70 +2,73 @@
   <div>
     <div class="affirmOrder">
       <div class="topImg">
-        <img src="" alt="">
+        <i></i>
       </div>
-      <h3>确认订单</h3>
-      <div class="buyType">
-        <div class="buy">
-          <h4>购买方式：</h4>
-          <p>
-            <span :class={checked:person} @click="buyType('1')">个人购买</span>
-            <span :class={checked:!person} @click="buyType('2')">企业购买</span>
-          </p>
-        </div>
-        <div class="company" v-show="!person">
-          <h4 class="clearfix">
-            <span class="fl">企业信息：</span>
-            <span class="fr addCompany" v-if="flag" @click="open">
-              <i class="el-icon-circle-plus-outline"></i> 添加企业信息</span>
-            <span class="fr addCompany" v-else>
-              <i class="el-icon-edit-outline"></i> 修改</span>
-          </h4>
-          <div class="cpnInfo" v-if="flag">
-            <p>暂无信息，请您添加。</p>
-          </div>
-          <div class="cpnInfo" v-else>
-            <p class="cpnInfoLi">
-              <span>{{company.company_name}}</span>
-              <span>{{company.company_name}}</span>
-              <span>{{company.phone}}</span>
+      <div class="contain">
+        <h3>确认订单</h3>
+        <div class="buyType" v-if="payNumber>1">
+          <div class="buy">
+            <h4>购买方式：</h4>
+            <p>
+              <span :class={checked:person} @click="buyType('1')">个人购买</span>
+              <span :class={checked:!person} @click="buyType('2')">企业购买</span>
             </p>
           </div>
+          <div class="company" v-show="!person">
+            <h4 class="clearfix">
+              <span class="fl">企业信息：</span>
+              <span class="fr addCompany" v-if="flag" @click="openCompanyInfo">
+                <i class="el-icon-circle-plus-outline"></i> 添加企业信息</span>
+              <span class="fr addCompany" v-else @click="openCompanyInfo">
+                <i class="el-icon-edit-outline"></i> 修改</span>
+            </h4>
+            <div class="cpnInfo" v-if="flag">
+              <p>暂无信息，请您添加。</p>
+            </div>
+            <div class="cpnInfo" v-else>
+              <p class="cpnInfoLi">
+                <span>{{company.contact_person}}</span>
+                <span>{{company.address}}</span>
+                <span>{{company.phone}}</span>
+              </p>
+            </div>
 
-        </div>
-      </div>
-      <div class="goodsList">
-        <div class="topBar clearfix">
-          <span>商品信息</span>
-          <span class="fr">我有疑问，需要反馈?</span>
-        </div>
-        <div class="goods">
-          <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
-            <div class="fl">
-              <img :src="course.picture" alt="">
-            </div>
-            <div class="fl">
-              <h5>{{course.title}}</h5>
-              <h6>{{course.curriculum_time}}学时</h6>
-              <p>讲师：</p>
-            </div>
-            <div class="fr">¥{{course.present_price}}</div>
           </div>
         </div>
+        <div class="goodsList">
+          <div class="topBar clearfix">
+            <span>商品信息</span>
+            <span class="fr">我有疑问，需要反馈?</span>
+          </div>
+          <div class="goods">
+            <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
+              <div class="fl">
+                <img :src="course.picture" alt="">
+              </div>
+              <div class="fl">
+                <h5>{{course.title}}</h5>
+                <h6>{{course.curriculum_time}}学时</h6>
+                <p>讲师：</p>
+              </div>
+              <div class="fr">¥{{course.present_price}}</div>
+            </div>
+          </div>
 
-        <div class="orderInfo">
-          <h5>
-            <span>商品数量：{{curriculumSum}}</span>
-            <span>学习人数：{{payNumber}}人</span>
-            <span>商品总金额：¥{{allPrise}}</span>
-          </h5>
-          <p>购买账号：mmmmmm</p>
+          <div class="orderInfo">
+            <h5>
+              <span>商品数量：{{curriculumSum}}</span>
+              <span>学习人数：{{payNumber}}人</span>
+              <span>商品总金额：¥{{allPrise}}</span>
+            </h5>
+            <p>购买账号：mmmmmm</p>
+          </div>
+        </div>
+        <div class="bottomBtn clearfix">
+          <p class="allPrice">应付金额：¥{{allPrise}}</p>
+          <p class="commitOrder" @click="commitOrder">提交订单</p>
         </div>
       </div>
-      <div class="bottomBtn clearfix">
-        <p class="allPrice">应付金额：¥{{allPrise}}</p>
-        <p class="commitOrder">提交订单</p>
-      </div>
+
     </div>
     <!-- 提交公司信息 -->
     <div class="information" @click.self="close" v-show="showInfo">
@@ -75,7 +78,6 @@
         </div>
         <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
           <el-form-item label="公司名称：" prop="companyname">
-            <!-- <el-input placeholder="请输入公司名称" v-model="companyInfo.companyname"></el-input> -->
             <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <el-form-item label="公司地址：" prop="companyaddress">
@@ -92,7 +94,7 @@
             <span @click="handleGetCode">{{companyInfo.getCode}}</span>
           </el-form-item>
           <el-form-item class="btnCommit">
-            <el-button type="primary" @click="addPaySubmit('companyInfo')">提交</el-button>
+            <el-button type="primary" @click="addCompanyInfo('companyInfo')">提交</el-button>
             <!-- <el-button type="primary" @click="submitForm('companyInfo')">提交</el-button> -->
           </el-form-item>
         </el-form>
@@ -114,6 +116,7 @@ export default {
       curriculumSum: null,
       payNumber: null,
       allPrise: null,
+      commitOrders: {},
       companyInfo: {
         companyname: '',
         companyaddress: '',
@@ -125,7 +128,10 @@ export default {
         seconds: 30,
         captchaDisable: true
       },
-      company: {},
+      restaurants: [],
+      company: {
+        id: null
+      },
       rules: {
         companyname: [
           {
@@ -170,29 +176,30 @@ export default {
     }
   },
   mounted() {
+    // this.setProductsNum(0)
     this.goodsList()
   },
   methods: {
     buyType(type) {
-      console.log(type)
       if (type === '1') {
         this.person = true
       } else {
         this.person = false
       }
     },
-    goodsList() {
+    commitOrder() {
+      this.company.id
+        ? (this.commitOrders.companyId = this.company.id)
+        : (this.commitOrders.companyId = '')
+      if (this.person) {
+        this.commitOrders.types = 1
+      } else {
+        this.commitOrders.types = 2
+      }
       return new Promise((resolve, reject) => {
-        home.goodsList(this.addArray).then(res => {
+        home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
-            this.curriculumLists = res.data.curriculumLists
-            this.company = res.data.companyInfo
-            this.curriculumSum = res.data.curriculumSum
-            this.payNumber = res.data.payNumber
-            this.allPrise = res.data.goodsAmount
-            res.data.curriculumLists <= 1
-              ? (this.person = true)
-              : (this.person = false)
+            console.log(res.data)
           } else {
             this.$message({
               showClose: true,
@@ -204,12 +211,38 @@ export default {
         })
       })
     },
-    addPaySubmit(formName) {
+    goodsList() {
+      //获取商品信息
+      return new Promise((resolve, reject) => {
+        home.goodsList(this.addArray).then(res => {
+          if (res.status === 0) {
+            this.curriculumLists = res.data.curriculumLists
+            this.curriculumSum = res.data.curriculumSum
+            this.payNumber = res.data.payNumber
+            this.allPrise = res.data.goodsAmount
+            if (res.data.companyInfo) {
+              this.company = res.data.companyInfo
+              this.person = false
+              this.flag = false
+              console.log(this.company)
+            }
+          } else {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: res.msg
+            })
+          }
+          resolve(true)
+        })
+      })
+    },
+    addCompanyInfo(formName) {
       //提交企业信息表单
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
-            home.addPaySubmit(this.companyInfo).then(response => {
+            home.addCompanyInfo(this.companyInfo).then(response => {
               if (response.status === '100100') {
                 this.$message({
                   showClose: true,
@@ -217,10 +250,12 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
-                this.setProductsNum(0)
-                this.$bus.$emit('updateCount')
-                this.$router.push('/shop/checkedCourse')
+                this.company.id = response.data.id
+                this.company.contact_person = this.companyInfo.contactperson
+                this.company.address = this.companyInfo.companyaddress
+                this.company.phone = this.companyInfo.phones
                 this.showInfo = false
+                this.flag = false
               }
               resolve(true)
             })
@@ -230,7 +265,7 @@ export default {
         }
       })
     },
-    open() {
+    openCompanyInfo() {
       this.showInfo = true
     },
     close() {
@@ -238,7 +273,7 @@ export default {
       this.showInfo = false
     },
     handleSelect(item) {
-      this.companyInfo.companyname = item
+      this.companyInfo.companyname = item.company_name
     },
     querySearchAsync(queryString, cb) {
       //搜索企业
