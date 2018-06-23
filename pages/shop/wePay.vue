@@ -13,7 +13,7 @@
           <div class="content">
             <div class="course">
               <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="index<3">
-                <img @click="goCourseInfo(course,index)" class="fl" :src="course.curriculum_picture" alt="">
+                <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
                 <div class="fl">
                   <h4 @click="goCourseInfo(course,index)">{{course.curriculum_title}}</h4>
                   <h6>{{course.curriculum_time}}学时</h6>
@@ -23,7 +23,7 @@
                   ￥{{course.price}}
                 </div>
                 <div class="courseNumber">
-                  {{}}
+                  {{course.pay_number}}
                 </div>
               </div>
               <div class="more">
@@ -57,7 +57,18 @@
         </div>
       </div>
     </div>
-    <div>
+    <div class="unlogged" @click="unloggedClick" v-if="wxMask">
+      <div class="unloginner" style="width:374px;height:420px;">
+        <div class="texts">扫一扫付款(元)
+          <span>￥{{orderDetail.order_amount}}</span>
+        </div>
+        <div class="update">
+          <qrcode :value="val" :options="{ size: 220 }" class="qrcode"></qrcode>
+        </div>
+        <div class="rechoise" @click="rechoise">
+          重新选择支付方式
+        </div>
+      </div>
     </div>
   </div>
   </div>
@@ -67,6 +78,9 @@
 import { home } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import Vue from 'vue'
+import VueQrcode from '@xkeshi/vue-qrcode'
+Vue.component(VueQrcode.name, VueQrcode)
 export default {
   data() {
     return {
@@ -84,8 +98,7 @@ export default {
         kids: null
       },
       payListForm: {
-        orderId: 100,
-        userId: 202
+        orderId: null
       },
       orderDetail: {
         order_sn: null,
@@ -97,7 +110,14 @@ export default {
       addPaySubmitForm: {
         types: '1',
         companyId: null
-      }
+      },
+      payImg: require('@/assets/images/wxqr.png'),
+      wxMask: false,
+      code_url: '',
+      qr_code: '',
+      val: '',
+      interval: '',
+      seconds: 1000000
     }
   },
   computed: {
@@ -106,34 +126,16 @@ export default {
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    // this.curriculumPayApply()
     this.getPayList()
   },
   methods: {
     ...mapActions('auth', ['setKid']),
-    curriculumPayApply() {
-      this.loding = true
-      return new Promise((resolve, reject) => {
-        home.curriculumPayApply().then(response => {
-          this.curriculumPayData = response.data.curriculumPayApply
-          console.log(
-            response.data.curriculumPayApply,
-            'response.data.curriculumPayApply'
-          )
-          for (let item of response.data.curriculumPayApply) {
-            item.create_time = this.timestampToTime(item.create_time)
-          }
-          // console.log(this.curriculumPayData.length, '123')
-          if (this.curriculumPayData.length === 0) {
-            this.noData = true
-          }
-          // let noData = this.curriculumPayData.length = 0
-          this.loding = false
-          resolve(true)
-        })
-      })
+    unloggedClick() {
+      this.wxMask = false
     },
-
+    rechoise() {
+      this.wxMask = false
+    },
     selectPayApply(item, index) {
       persistStore.set('pay', index)
       persistStore.set('price', item.totalPresentPrice)
@@ -163,11 +165,13 @@ export default {
     },
     // 获取订单id列表
     getPayList() {
+      this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
-          // this.orderDetail = response.data.data.orderDetail
-          // this.orderCurriculumLists = response.data.data.orderCurriculumLists
-          console.log(response, '这是response')
+          this.orderDetail = response.data.data.orderDetail
+          this.orderCurriculumLists = response.data.data.orderCurriculumLists
+          this.code_url = response.data.code_url
+          this.qr_code = response.data.qr_code
           resolve(true)
         })
       })
@@ -180,22 +184,51 @@ export default {
       this.wxMsg = false
       this.zfbMsg = true
     },
+    getStatus() {
+      this.interval = setInterval(() => {
+        if (this.seconds <= 0) {
+          this.seconds = 1
+          // socket.emit('watchRecordingTime_disconnect')
+          clearInterval(this.interval)
+        } else {
+          this.seconds--
+          // console.log(this.seconds, '123')
+          // if (this.second === 90) {
+          //   this.$message({
+          //     type: 'success',
+          //     message: response.msg
+          //   })
+          //   clearInterval(this.interval)
+          // }
+          home.payResult(this.payListForm).then(response => {
+            if (response.status === '0') {
+              this.$message({
+                type: 'success',
+                message: response.msg
+              })
+            }
+            console.log('123')
+            // clearInterval(this.interval)
+            // resolve(true)
+          })
+        }
+      }, 1000)
+    },
     addPaySubmit() {
-      return new Promise((resolve, reject) => {
-        home.addPaySubmit(this.addPaySubmitForm).then(response => {
-          // this.orderDetail = response.data.data.orderDetail
-          // this.orderCurriculumLists = response.data.data.orderCurriculumLists
-          console.log(response, '这是response')
-          this.goLink('/shop/qrCode')
-          resolve(true)
-        })
-      })
+      this.wxMask = true
+      if (this.wxMsg === true) {
+        this.val = this.code_url
+        this.getStatus()
+      } else {
+        this.val = this.qr_code
+        this.getStatus()
+      }
     }
   }
 }
 </script>
 
-<style scoped >
+<style scoped>
 .noCourse {
   width: 100%;
   height: 600px;
@@ -215,5 +248,42 @@ export default {
 }
 .borderColor {
   border: 1px red solid !important;
+}
+.unloginner {
+  img {
+    width: 220px;
+    height: 220px;
+  }
+}
+.texts {
+  width: 200px;
+  margin: 60px auto 0px;
+  font-size: 18px;
+  font-family: MicrosoftYaHei;
+  color: rgba(34, 34, 34, 1);
+  line-height: 25px;
+  margin-bottom: 20px;
+  span {
+    color: #ff5ff5;
+    font-size: 19px;
+  }
+}
+.update {
+  font-size: 16px;
+  font-family: MicrosoftYaHei;
+  color: rgba(115, 46, 175, 1);
+  line-height: 25px;
+  margin: 20px auto;
+  width: 220px;
+  margin: 0 auto;
+}
+.rechoise {
+  width: 144px;
+  height: 17px;
+  font-size: 16px;
+  font-family: MicrosoftYaHei;
+  color: rgba(115, 46, 175, 1);
+  line-height: 25px;
+  margin: 20px auto;
 }
 </style>

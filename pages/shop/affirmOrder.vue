@@ -106,6 +106,7 @@
 <script>
 import { home, auth } from '@/lib/v1_sdk/index'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
@@ -200,6 +201,8 @@ export default {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
             console.log(res.data)
+            persistStore.set('cpyid', res.data.id)
+            this.$router.push('/shop/wepay')
           } else {
             this.$message({
               showClose: true,

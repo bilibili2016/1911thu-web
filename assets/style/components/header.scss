@@ -20,7 +20,7 @@
         display: inline-block;
         width: 177px;
         height: 44px;
-        background: url("~assets/images/iconList.png") no-repeat;
+        background: url('~assets/images/iconList.png') no-repeat;
         background-size: 177px 966px;
         background-position: 0 0;
       }
@@ -67,7 +67,7 @@
         top: 6px;
         right: 18px;
         cursor: pointer;
-        background: url("~assets/images/iconList.png") no-repeat;
+        background: url('~assets/images/iconList.png') no-repeat;
         background-size: 177px 966px;
         background-position: 0 -321px;
       }
@@ -103,11 +103,13 @@
         span {
           width: 20px;
           height: 20px;
-          background: url('http://pam8iyw9q.bkt.clouddn.com/cartIcon.png') no-repeat;
+          background: url('http://pam8iyw9q.bkt.clouddn.com/cartIcon.png')
+            no-repeat;
           background-size: 20px 20px;
           transition: all 300ms;
           &:hover {
-            background: url('http://pam8iyw9q.bkt.clouddn.com/cartIconHover.png') no-repeat;
+            background: url('http://pam8iyw9q.bkt.clouddn.com/cartIconHover.png')
+              no-repeat;
             background-size: 20px 20px;
           }
         }
@@ -171,11 +173,11 @@
             height: 120px;
             margin-right: 9px;
             transition: all 300ms;
-            background: url("~assets/images/iconList.png") no-repeat;
+            background: url('~assets/images/iconList.png') no-repeat;
             background-size: 177px 966px;
             background-position: 3px -337px;
             &.iphone {
-              background: url("~assets/images/iconList.png") no-repeat;
+              background: url('~assets/images/iconList.png') no-repeat;
               background-size: 177px 966px;
               background-position: 3px -337px;
             }
@@ -211,7 +213,7 @@
               height: 20px;
               margin-right: 5px;
               vertical-align: middle;
-              background: url("~assets/images/iconList.png") no-repeat;
+              background: url('~assets/images/iconList.png') no-repeat;
               background-size: 177px 966px;
               background-position: 0 -90px;
             }
@@ -221,7 +223,7 @@
               height: 20px;
               vertical-align: middle;
               margin-right: 5px;
-              background: url("~assets/images/iconList.png") no-repeat;
+              background: url('~assets/images/iconList.png') no-repeat;
               background-size: 177px 966px;
               background-position: 0 -112px;
             }
@@ -358,22 +360,16 @@
         margin: 30px auto 25px;
         text-align: center;
         padding-right: 40px;
-<<<<<<< HEAD
-        background: url(require('@/assets/images/wx1.png')) no-repeat 97px 0;
-=======
-        background: url('http://pam8iyw9q.bkt.clouddn.com/wx1.png') no-repeat 97px 0;
->>>>>>> zs
+        background: url('http://pam8iyw9q.bkt.clouddn.com/wx1.png') no-repeat
+          97px 0;
         background-size: 24px 24px;
         font-size: 14px;
         color: #555555;
         cursor: pointer;
         transition: all 300ms;
         &:hover {
-<<<<<<< HEAD
-          background: url(require('@/assets/images/wx2.png')) no-repeat 97px 0;
-=======
-          background: url('http://pam8iyw9q.bkt.clouddn.com/wx2.png') no-repeat 97px 0;
->>>>>>> zs
+          background: url('http://pam8iyw9q.bkt.clouddn.com/wx2.png') no-repeat
+            97px 0;
           background-size: 24px 24px;
         }
       }
