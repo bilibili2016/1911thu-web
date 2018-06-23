@@ -11,7 +11,7 @@ export default {
   props: ['linkdata'],
   methods: {
     getMore() {
-      this.$router.push(this.linkdata)
+      // this.$router.push(this.linkdata)
       this.$emit('getMoreData')
       window.open(window.location.origin + this.linkdata)
       // console.log(window.location.origin, '123')

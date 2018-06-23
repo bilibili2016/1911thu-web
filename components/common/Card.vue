@@ -83,7 +83,7 @@
     <!-- 我的收藏 -->
     <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'shoucang'">
-      <div class="card-category profile">
+      <div class="card-category profile www">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox">
             <!-- {{card.id}} -->
@@ -93,7 +93,8 @@
               <div class="new-style" v-if="config.new === 'true'">
                 <img :src="newTag" alt="">
               </div>
-              <div class="mask-style" @click="goLink('course/pages/coursedetail')">
+              <div class="mask-style">
+                <!-- <div class="mask-style" @click="goLink('course/pages/coursedetail')"> -->
                 <!-- <img :src="jinImg" alt="" class="jin-style"> -->
               </div>
               <div class="bgImgs">
