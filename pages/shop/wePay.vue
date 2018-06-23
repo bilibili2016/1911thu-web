@@ -1,6 +1,7 @@
 <template>
   <div class="checkedCourse-wepay">
     <div class="banner">
+      <div>支付中心</div>
     </div>
     <div class="main">
       <div>
@@ -8,11 +9,12 @@
         <div class="company">
           <div class="title clearfix">
             <span class="fl">订单：{{orderDetail.order_sn}}</span>
-            <span class="fr">收起</span>
+            <span class="fr" @click="takeUp" v-if="takeupMsg === true">收起</span>
+            <span class="fr" @click="takeUp" v-if="takeupMsg === false">展开</span>
           </div>
           <div class="content">
             <div class="course">
-              <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="index<3">
+              <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="takeupMsg">
                 <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
                 <div class="fl">
                   <h4 @click="goCourseInfo(course,index)">{{course.curriculum_title}}</h4>
@@ -66,7 +68,7 @@
           <qrcode :value="val" :options="{ size: 220 }" class="qrcode"></qrcode>
         </div>
         <div class="rechoise" @click="rechoise">
-          重新选择支付方式
+          <img :src="updateImg" alt=""> 重新选择支付方式
         </div>
       </div>
     </div>
@@ -105,7 +107,7 @@ export default {
         order_amount: null
       },
       orderCurriculumLists: [],
-      wxMsg: false,
+      wxMsg: true,
       zfbMsg: false,
       addPaySubmitForm: {
         types: '1',
@@ -117,7 +119,9 @@ export default {
       qr_code: '',
       val: '',
       interval: '',
-      seconds: 1000000
+      seconds: 1000000,
+      takeupMsg: true,
+      updateImg: require('@/assets/images/update.png')
     }
   },
   computed: {
@@ -130,6 +134,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setKid']),
+    takeUp() {
+      this.takeupMsg = !this.takeupMsg
+    },
     unloggedClick() {
       this.wxMask = false
     },
@@ -151,7 +158,7 @@ export default {
       this.$router.push('/course/pages/coursedetail')
     },
     timestampToTime(timestamp) {
-      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      var date = new Date(timestamp * 1000)
       let Y = date.getFullYear() + '-'
       let M =
         (date.getMonth() + 1 < 10
@@ -187,29 +194,15 @@ export default {
     getStatus() {
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
-          this.seconds = 1
-          // socket.emit('watchRecordingTime_disconnect')
           clearInterval(this.interval)
         } else {
           this.seconds--
-          // console.log(this.seconds, '123')
-          // if (this.second === 90) {
-          //   this.$message({
-          //     type: 'success',
-          //     message: response.msg
-          //   })
-          //   clearInterval(this.interval)
-          // }
           home.payResult(this.payListForm).then(response => {
-            if (response.status === '0') {
-              this.$message({
-                type: 'success',
-                message: response.msg
-              })
+            if (response.status === 0) {
+              this.wxMask = false
+              this.$router.push('/shop/payResult')
+              clearInterval(this.interval)
             }
-            console.log('123')
-            // clearInterval(this.interval)
-            // resolve(true)
           })
         }
       }, 1000)
@@ -228,7 +221,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .noCourse {
   width: 100%;
   height: 600px;
@@ -248,12 +241,6 @@ export default {
 }
 .borderColor {
   border: 1px red solid !important;
-}
-.unloginner {
-  img {
-    width: 220px;
-    height: 220px;
-  }
 }
 .texts {
   width: 200px;
@@ -278,12 +265,16 @@ export default {
   margin: 0 auto;
 }
 .rechoise {
-  width: 144px;
+  width: 155px;
   height: 17px;
   font-size: 16px;
   font-family: MicrosoftYaHei;
   color: rgba(115, 46, 175, 1);
   line-height: 25px;
   margin: 20px auto;
+  img {
+    width: 16px;
+    height: 14px;
+  }
 }
 </style>

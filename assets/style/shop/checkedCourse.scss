@@ -250,9 +250,16 @@
   background-color: #fafafa;
   position: relative;
   .banner {
-    height: 160px;
-    // background-image: url(require('@/assets/images/'));
-    background-color: #6417a6;
+    height: 148px;
+    background-image: url('http://pam8iyw9q.bkt.clouddn.com/orderBanner.png');
+    div {
+      font-size: 24px;
+      font-family: MicrosoftYaHei;
+      color: rgba(143, 74, 203, 1);
+      line-height: 110px;
+      width: 1100px;
+      margin: 0 auto;
+    }
   }
   .main {
     width: 1100px;
@@ -296,6 +303,7 @@
             height: 140px;
             // border-right: 1px solid #e8d6f7;
             border-top: 1px solid #e8d6f7;
+            border-bottom: 1px solid #e8d6f7;
             padding: 20px 0 20px 2px;
             margin: 0 auto;
             &:first-child {
@@ -354,7 +362,7 @@
             color: #3a1781;
             cursor: pointer;
             margin: 0 auto;
-            border-top: 1px solid #e8d6f7;
+            // border-top: 1px solid #e8d6f7;
             // border-right: 1px solid #e8d6f7;
           }
           .method {
