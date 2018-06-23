@@ -15,8 +15,9 @@
               <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#999" @change="hideCourse">
               </el-switch>隐藏已参加课程
             </span>
-
-            <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
+            <div class="pagination pages">
+              <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
+            </div>
           </div>
         </div>
       </div>
@@ -152,6 +153,10 @@ export default {
 <style lang="scss" scoped>
 .pagination {
   margin: 20px 0px 60px;
+  &.pages {
+    margin: 0;
+    display: inline-block;
+  }
 }
 </style>
 

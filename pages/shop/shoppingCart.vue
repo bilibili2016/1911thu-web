@@ -17,7 +17,7 @@
               <div class="fl">
                 <h4 @click="goDetail(course.id)">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
-                <p>讲师：{{course.teacher}}</p>
+                <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
             <div class="coursePrice">

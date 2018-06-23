@@ -73,7 +73,6 @@
       </div>
     </div>
   </div>
-  </div>
 </template>
 
 <script>
@@ -133,7 +132,7 @@ export default {
     this.getPayList()
   },
   methods: {
-    ...mapActions('auth', ['setKid']),
+    ...mapActions('auth', ['setKid', 'setProductsNum']),
     takeUp() {
       this.takeupMsg = !this.takeupMsg
     },
@@ -179,6 +178,7 @@ export default {
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url
           this.qr_code = response.data.qr_code
+          this.setProductsNum(0)
           resolve(true)
         })
       })

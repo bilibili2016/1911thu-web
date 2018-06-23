@@ -367,6 +367,8 @@ export default {
               playTime
             )
           }
+          // this.ischeck = item.id
+          console.log(this.playerForm, '12312312')
         }, 1000)
       })
       // 计时器
