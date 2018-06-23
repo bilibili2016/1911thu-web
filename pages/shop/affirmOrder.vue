@@ -1,10 +1,16 @@
 <template>
   <div>
-    <div class="affirmOrder">
+    <div class="noMsg-con" v-if="isNoMsg">
+      <div class="noMsg-img">
+        <img :src="noMsg" alt="">
+        <p>您的购物车为空,{{backSeconds}}s后将会跳转到首页！</p>
+      </div>
+    </div>
+    <div class="affirmOrder" v-else>
       <div class="topImg">
         <!-- <i></i> -->
       </div>
-      <div class="contain">
+      <div class="contain" v-loading="loadGoods">
         <h3>确认订单</h3>
         <div class="buyType" v-if="payNumber>1">
           <div class="buy">
@@ -70,6 +76,7 @@
       </div>
 
     </div>
+
     <!-- 提交公司信息 -->
     <div class="information" @click.self="close" v-show="showInfo">
       <div class="info">
@@ -113,10 +120,14 @@ export default {
       flag: true,
       person: true,
       showInfo: false,
+      isNoMsg: false,
+      backSeconds: 5,
+      loadGoods: true,
       curriculumLists: [],
       curriculumSum: null,
       payNumber: null,
       allPrise: null,
+      noMsg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
       commitOrders: {},
       companyInfo: {
         companyname: '',
@@ -216,6 +227,7 @@ export default {
     },
     goodsList() {
       //获取商品信息
+      this.loadGoods = true
       return new Promise((resolve, reject) => {
         home.goodsList(this.addArray).then(res => {
           if (res.status === 0) {
@@ -229,12 +241,21 @@ export default {
               this.flag = false
               console.log(this.company)
             }
+            this.loadGoods = false
           } else {
             this.$message({
               showClose: true,
               type: 'error',
               message: res.msg
             })
+            let timer = setInterval(() => {
+              if (this.backSeconds <= 1) {
+                clearInterval(timer)
+                this.$router.push('/')
+              }
+              this.backSeconds--
+            }, 1000)
+            this.isNoMsg = true
           }
           resolve(true)
         })

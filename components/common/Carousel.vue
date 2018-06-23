@@ -4,6 +4,9 @@
       <img :src="img.picture" alt="">
     </el-carousel-item>
   </el-carousel>
+  <!-- <div class="popup-container">
+    <div class="img-flex"></div>
+  </div> -->
 </template>
 
 <script>
