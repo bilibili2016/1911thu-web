@@ -41,7 +41,8 @@
         <div class="goodsList">
           <div class="topBar clearfix">
             <span>商品信息</span>
-            <span class="fr">我有疑问，需要反馈?</span>
+            <span class="fr goBack" @click="goLink">
+              <i class="el-icon-edit-outline"></i> 返回修改购物车</span>
           </div>
           <div class="goods">
             <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
@@ -69,6 +70,7 @@
         <div class="bottomBtn clearfix">
           <p class="allPrice">应付金额：¥{{allPrise}}</p>
           <p class="commitOrder" @click="commitOrder">提交订单</p>
+          <h6>我有疑问，需要反馈?</h6>
         </div>
       </div>
 
@@ -196,6 +198,9 @@ export default {
         this.person = false
       }
     },
+    goLink() {
+      this.$router.push('/shop/shoppingCart')
+    },
     commitOrder() {
       this.company.id
         ? (this.commitOrders.companyId = this.company.id)
@@ -275,7 +280,7 @@ export default {
               } else if (response.status === 0) {
                 this.company.id = response.data.id
                 this.company.contact_person = this.companyInfo.contactperson
-                this.company.company_name = this.companyInfo.company_name
+                this.company.company_name = this.companyInfo.companyname
                 this.company.phone = this.companyInfo.phones
                 this.showInfo = false
                 this.flag = false
