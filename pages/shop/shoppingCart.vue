@@ -438,6 +438,7 @@ export default {
       this.changeCartNumber()
     },
     addPaySubmit(formName) {
+      this.$router.push('/shop/checkedCourse')
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -451,7 +452,7 @@ export default {
               } else if (response.status === 0) {
                 this.setProductsNum(0)
                 this.$bus.$emit('updateCount')
-                this.$router.push('/shop/checkedCourse')
+
                 this.showInfo = false
               }
               resolve(true)
