@@ -2,11 +2,11 @@
   <div class="headerBox">
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
-        <img src="@/assets/images/1911xt.png" alt="">
+        <i></i>
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
-        <img :src="searchImg" alt="" @click="goSearch">
+        <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
         <span class="hrin" @click="goSearchd('/other/hrEntry')">Hr入口</span>
@@ -14,11 +14,13 @@
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
-            <img class="fl" :src="downApp" alt="">
+            <i :class={iphone:!iphones} class="downIcon fl"></i>
             <div class="changeType fr">
               <span>下载1911学堂APP</span>
-              <span @mouseenter="changeImg('iphone')"><img src="@/assets/images/iphone.png" alt="">AppStore下载</span>
-              <span @mouseenter="changeImg('android')"><img src="@/assets/images/Android.png" alt="">Android下载</span>
+              <span @mouseenter="changeImg('iphone')">
+                <i></i>AppStore下载</span>
+              <span @mouseenter="changeImg('android')">
+                <i></i>Android下载</span>
             </div>
           </div>
         </div>
@@ -170,6 +172,7 @@ export default {
       searchImg: require('@/assets/images/search.png'),
       downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
       start: false,
+      iphones: true,
       lrFrame: false,
       islogin: false,
       loadLogin: false,
@@ -394,13 +397,7 @@ export default {
       })
     },
     changeImg(what) {
-      if (what == 'android') {
-        // console.log(1)
-        this.downApp = 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png'
-      } else {
-        // console.log(2)
-        this.downApp = 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png'
-      }
+      what == 'android' ? (this.iphones = false) : (this.iphones = true)
     },
     // 登录显示card
     async loginCardShow() {

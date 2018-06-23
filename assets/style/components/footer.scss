@@ -9,9 +9,13 @@
       margin: 0 auto;
       .logo {
         margin: 52px 0 35px;
-        img {
+        i {
+          display: inline-block;
           width: 177px;
           height: 44px;
+          background: url("~assets/images/iconList.png") no-repeat;
+          background-size: 177px 966px;
+          background-position: 0 -44px;
         }
       }
       .companyInfo {
@@ -47,7 +51,7 @@
               color: #999;
               cursor: pointer;
               transition: all 300ms;
-              &:hover{
+              &:hover {
                 color: #E5E5E7;
               }
             }
@@ -61,11 +65,15 @@
           div:first-child {
             margin-right: 80px;
           }
-          img {
+          i {
+            display: inline-block;
             width: 114px;
             height: 114px;
-          } 
-          p{
+            background: url("~assets/images/iconList.png") no-repeat;
+            background-size: 177px 966px;
+            background-position: 0 -339px;
+          }
+          p {
             height: 40px;
             line-height: 40px;
             text-align: center;
