@@ -1,5 +1,13 @@
 <template>
   <div class="allInfo">
+    <div class="recommend" v-show="recommend">
+      <div>
+        <img src="@/assets/images/hr_discounts1.png" alt="">
+        <span>优惠专题入口</span>
+        <img src="@/assets/images/hr_discounts2.png" alt="">
+        <i class="el-icon-close" @click="closeRecommend"></i>
+      </div>
+    </div>
     <div class="topImg">
       <img src="http://pam8iyw9q.bkt.clouddn.com/hrEntry.png" alt="">
     </div>
@@ -79,6 +87,7 @@
         </el-form>
       </div>
     </div>
+    <v-backtotop :data="showCheckedCourse"></v-backtotop>
   </div>
 </template>
 
@@ -86,7 +95,11 @@
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import BackToTop from '@/components/common/BackToTop.vue'
 export default {
+  components: {
+    'v-backtotop': BackToTop
+  },
   data() {
     var validatePhone = (rule, value, callback) => {
       if (!/^[A-Za-z0-9]+$/.test(value)) {
@@ -95,6 +108,8 @@ export default {
       return callback()
     }
     return {
+      showCheckedCourse: true,
+      recommend: true,
       courseList: [
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_1.png',
@@ -142,24 +157,15 @@ export default {
         }
       ],
       buyList: [
-        '浏览课程',
+        '机构入口',
         '我要选课',
-        '登录',
         '选择课程',
-        '提交课程',
-        '填写资料',
-        'BD细节沟通',
-        '线下付款',
-        '提供学员手机号',
+        '购物车结算',
+        '填写资料，提交订单',
+        '支付',
         '学员登录观看'
       ],
-      studyList: [
-        '进入网站',
-        '使用生成账号登录',
-        '我的课程',
-        '点击课程封面',
-        '进入视频学习'
-      ],
+      studyList: ['进入网站或APP', '我的课程', '点击课程封面', '进入视频学习'],
       company: {
         name: '',
         person: '',
@@ -233,6 +239,10 @@ export default {
       })
     },
     handleSelect(item) {},
+    closeRecommend() {
+      this.recommend = false
+      document.getElementsByTagName('body')[0].style.padding = '0'
+    },
     querySearch(queryString, cb) {},
     // 获取验证码 this.registerData
     async handleGetCode(data) {
@@ -276,6 +286,7 @@ export default {
   },
   mounted() {
     this.company.userID = this.token
+    document.getElementsByTagName('body')[0].style.paddingTop = '40px'
   }
 }
 </script>

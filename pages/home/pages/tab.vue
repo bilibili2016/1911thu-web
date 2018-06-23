@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
     <!-- banner -->
-    <!-- <v-carousel :items="items"></v-carousel> -->
+    <v-carousel :items="items"></v-carousel>
     <div id="three-container"></div>
     <!-- 分类 -->
     <v-tab :classify="classify" :courses="courses" :tab="tabmsg"></v-tab>
