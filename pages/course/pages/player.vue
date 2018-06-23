@@ -331,6 +331,9 @@ export default {
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
       // 设置websocket
+      var player = TCPlayer('movd', this.tcplayer)
+      player.pause()
+      var socket = new io('http://ceshi.1911edu.com:2120')
 
       let that = this
       player.on('pause', () => {
@@ -338,10 +341,6 @@ export default {
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('play', function() {
-        // console.log(that.seconds, '这是重新播放倒计时秒数2')
-        var player = TCPlayer('movd', this.tcplayer)
-        player.pause()
-        var socket = new io('http://ceshi.1911edu.com:2120')
         // 连接socket
         socket.on('connect', function() {
           // console.log('已连接')
@@ -349,6 +348,7 @@ export default {
         })
         // 断线重连
         socket.on('reconnect', function(msg) {})
+        // console.log(that.seconds, '这是重新播放倒计时秒数2')
         that.interval = setInterval(() => {
           if (that.seconds <= 0) {
             that.seconds = 1
