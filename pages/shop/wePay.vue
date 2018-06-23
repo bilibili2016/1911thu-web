@@ -201,13 +201,16 @@ export default {
           //   clearInterval(this.interval)
           // }
           home.payResult(this.payListForm).then(response => {
-            if (response.status === '0') {
-              this.$message({
-                type: 'success',
-                message: response.msg
-              })
+            if (response.status === 0) {
+              // this.$message({
+              //   type: 'success',
+              //   message: response.msg
+              // })
+              this.wxMask = false
+              this.$router.push('/shop/payResult')
+              clearInterval(this.interval)
             }
-            console.log('123')
+            // console.log('123')
             // clearInterval(this.interval)
             // resolve(true)
           })
