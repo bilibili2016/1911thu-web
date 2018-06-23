@@ -31,7 +31,7 @@
             <div class="cpnInfo" v-else>
               <p class="cpnInfoLi">
                 <span>{{company.contact_person}}</span>
-                <span>{{company.address}}</span>
+                <span>{{company.company_name}}</span>
                 <span>{{company.phone}}</span>
               </p>
             </div>
@@ -51,7 +51,7 @@
               <div class="fl">
                 <h5>{{course.title}}</h5>
                 <h6>{{course.curriculum_time}}学时</h6>
-                <p>讲师：</p>
+                <p>讲师：{{course.teacher_name}}</p>
               </div>
               <div class="fr">¥{{course.present_price}}</div>
             </div>
@@ -275,7 +275,7 @@ export default {
               } else if (response.status === 0) {
                 this.company.id = response.data.id
                 this.company.contact_person = this.companyInfo.contactperson
-                this.company.address = this.companyInfo.companyaddress
+                this.company.company_name = this.companyInfo.company_name
                 this.company.phone = this.companyInfo.phones
                 this.showInfo = false
                 this.flag = false
