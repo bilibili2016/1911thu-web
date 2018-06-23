@@ -5,7 +5,7 @@
     <!-- <div class="popup-container">
       <div class="img-flex"></div>
     </div> -->
-    <div id="three-container"></div>
+    <!-- <div id="three-container"></div> -->
     <!-- 分类 -->
     <v-tab :classify="classify" :courses="courses" :tab="tabmsg"></v-tab>
     <!-- 定制 -->
