@@ -237,6 +237,10 @@
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
               <div class="fr common-button">
+                <!-- <p class="goStudy">
+                  <span class="fl" @click="courseInfo(course)">立即学习</span>
+                  <span class="fr" ></span>
+                </p> -->
                 <el-button type="primary" plain @click="courseInfo(course)">立即学习</el-button>
               </div>
             </div>
@@ -1252,6 +1256,32 @@ export default {
           font-size: 17px;
           padding-left: 20px;
         }
+        .common-button {
+          p.goStudy {
+            width: 140px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 18px;
+            border: 1px solid #6417a6;
+            overflow: hidden;
+            font-size: 0;
+            span {
+              margin: 0;
+              height: 34px;
+              text-align: center;
+              font-size: 14px;
+              color: #6417a6;
+              cursor: pointer;
+              &.fl {
+                width: 88px;
+              }
+              &.fr {
+                width: 50px;
+                background-color: #6417a6;
+              }
+            }
+          }
+        }
         span {
           font-size: 14px;
           color: #888888;
@@ -1433,6 +1463,7 @@ export default {
             font-size: 14px;
           }
         }
+
         .common-button .is-plain {
           border-radius: 20px;
           border-color: #6417a6;

@@ -221,7 +221,7 @@ export default {
 }
 
 .aboutUs h3 {
-  font-size: 36px;
+  font-size: 30px;
   color: #222;
   padding-bottom: 61px;
   text-align: center;

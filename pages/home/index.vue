@@ -15,7 +15,7 @@
       <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive="titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
       <!-- 合作伙伴 -->
       <v-partner :data="partnerList.list"></v-partner>
-      <v-backtotop></v-backtotop>
+      <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
       linkfive: '/news/detail',
       newData: [],
       classicData: [],
+      showCheckedCourse: false,
       configZero: {
         card_type: 'profile',
         card: 'home',

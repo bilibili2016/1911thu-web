@@ -136,7 +136,7 @@ export default {
   height: 100px;
   line-height: 100px;
   text-align: center;
-  font-size: 36px;
+  font-size: 30px;
   color: #222;
 }
 .courseList .list {

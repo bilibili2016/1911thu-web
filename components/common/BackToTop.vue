@@ -23,7 +23,8 @@
         </div>
       </div>
     </transition>
-    <transition :name="transitionName">
+    <transition :name="transitionName" v-if="data">
+
       <div class="back-to-ceiling customStyleThree" v-show="visible" @click="checkCourse">
         <div class="line-wrap">
           <div class="line-centerd">
@@ -46,22 +47,28 @@ export default {
   components: {
     'v-unlogged': CustomUnlogged
   },
-  props: {
-    visibilityHeight: {
-      type: Number,
-      default: 400
-    },
-    backPosition: {
-      type: Number,
-      default: 0
-    },
-    transitionName: {
-      type: String,
-      default: 'fade'
-    }
-  },
+  props: [
+    // {
+    //   visibilityHeight: {
+    //     type: Number,
+    //     default: 400
+    //   },
+    //   backPosition: {
+    //     type: Number,
+    //     default: 0
+    //   },
+    //   transitionName: {
+    //     type: String,
+    //     default: 'fade'
+    //   }
+    // },
+    'data'
+  ],
   data() {
     return {
+      visibilityHeight: 400,
+      backPosition: 0,
+      transitionName: 'fade',
       showNotLogin: false,
       visible: false,
       move: true,
