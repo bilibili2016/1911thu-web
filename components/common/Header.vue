@@ -171,6 +171,8 @@ export default {
       return callback()
     }
     return {
+      searchImg: require('@/assets/images/search.png'),
+      downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
       start: false,
       iphones: true,
       lrFrame: false,

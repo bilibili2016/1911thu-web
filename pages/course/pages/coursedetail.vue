@@ -6,7 +6,7 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/course/pages/categorys' }">分类列表</el-breadcrumb-item>
+            <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item>
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -152,22 +152,6 @@ import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  // head: {
-  //   script: [
-  //     {
-  //       src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js'
-  //     },
-  //     {
-  //       src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js'
-  //     }
-  //   ],
-  //   link: [
-  //     {
-  //       rel: 'stylesheet',
-  //       href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
-  //     }
-  //   ]
-  // },
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
     ...mapState('auth', ['kid'])
@@ -252,6 +236,11 @@ export default {
   },
   methods: {
     handleClick() {},
+    goCategory() {
+      this.$router.push('/course/pages/category')
+      persistStore.set('cid', '1')
+      persistStore.set('pid', '')
+    },
     submit() {
       this.$message({
         showClose: true,
@@ -426,7 +415,7 @@ export default {
       this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getdefaultCurriculumCatalog(this.getdefaultForm).then(response => {
-          console.log(response.data.defaultCurriculumCatalog.id, 'catalogId')
+          // console.log(response.data.defaultCurriculumCatalog.id, 'catalogId')
           persistStore.set(
             'catalogId',
             response.data.defaultCurriculumCatalog.id
