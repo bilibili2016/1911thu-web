@@ -569,7 +569,7 @@ export default {
     // 从微信拉取二维码
     async wxLogin() {
       this.WxLogin.redirect_uri =
-        'http%3A%2F%2Fwww.1911edu.com%2FWapi%2FIndex%2FwxBack'
+        'http%3A%2F%2Fceshi.1911edu.com%2FWapi%2FIndex%2FwxBack'
       this.WxLogin.state = Math.random()
         .toString(36)
         .substr(2)
@@ -793,6 +793,7 @@ export default {
             })
           } else {
             this.userInfo = res.data.userInfo
+            persistStore.set('nickName', this.userInfo.nick_name)
             if (this.userInfo.head_img && this.userInfo.head_img != '') {
               this.user.userImg = this.userInfo.head_img
             } else {
