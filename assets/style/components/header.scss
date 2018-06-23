@@ -95,7 +95,7 @@
             display: inline-block;
             width: 45px;
             height: 27px;
-            background: url("~assets/images/iconList.png") no-repeat;
+            background: url('~assets/images/iconList.png') no-repeat;
             background-size: 177px 966px;
             background-position: 0 -457px;
             position: absolute;
@@ -372,16 +372,14 @@
         margin: 30px auto 25px;
         text-align: center;
         padding-right: 40px;
-        background: url('http://pam8iyw9q.bkt.clouddn.com/wx1.png') no-repeat
-          97px 0;
+        background: url(require('@/assets/images/wx1.png')) no-repeat 97px 0;
         background-size: 24px 24px;
         font-size: 14px;
         color: #555555;
         cursor: pointer;
         transition: all 300ms;
         &:hover {
-          background: url('http://pam8iyw9q.bkt.clouddn.com/wx2.png') no-repeat
-            97px 0;
+          background: url(require('@/assets/images/wx2.png')) no-repeat 97px 0;
           background-size: 24px 24px;
         }
       }

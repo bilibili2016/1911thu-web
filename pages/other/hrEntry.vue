@@ -1,13 +1,13 @@
 <template>
   <div class="allInfo">
-    <div class="recommend" v-show="recommend">
+    <!-- <div class="recommend" v-show="recommend">
       <div>
         <img src="@/assets/images/hr_discounts1.png" alt="">
         <span>优惠专题入口</span>
         <img src="@/assets/images/hr_discounts2.png" alt="">
         <i class="el-icon-close" @click="closeRecommend"></i>
       </div>
-    </div>
+    </div> -->
     <div class="topImg">
       <img src="http://pam8iyw9q.bkt.clouddn.com/hrEntry.png" alt="">
     </div>
@@ -286,7 +286,7 @@ export default {
   },
   mounted() {
     this.company.userID = this.token
-    document.getElementsByTagName('body')[0].style.paddingTop = '40px'
+    // document.getElementsByTagName('body')[0].style.paddingTop = '40px'
   }
 }
 </script>

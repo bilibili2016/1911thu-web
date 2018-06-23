@@ -3,8 +3,8 @@ const config = require('./base.conf')
 // 本地环境每次执行 npm run build 都要生成包分析报告
 config.analyze = {
   analyzerMode: 'html'
-}
-;(config.head.link = [
+};
+(config.head.link = [
   // {
   //   rel: 'icon',
   //   type: 'image/x-icon',
@@ -15,32 +15,36 @@ config.analyze = {
     href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
   }
 ]),
-  (config.head.script = [
-    // { src: '/script/jquery.js', async: true },
-    // {
-    //   src:
-    //     'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
-    //   async: true
-    // },
-    {
-      src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
-      async: true
-    },
-    {
-      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
-      async: true
-    },
-    {
-      src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
-      async: true
-    }
-    // { src: '../assets/js/bas.js', async: true },
-    // { src: '../assets/js/index.js', async: true },
-    // { src: '../assets/js/OrbitControls-2.js', async: true },
-    // { src: '../assets/js/three.min.js', async: true },
-    // { src: '../assets/js/TweenMax.min.js', async: true }
-  ]),
-  (config.render = { resourceHints: false })
+(config.head.script = [
+  // { src: '/script/jquery.js', async: true },
+  // {
+  //   src:
+  //     'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
+  //   async: true
+  // },
+  {
+    src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
+    async: true
+  },
+  {
+    src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+    async: true
+  }, {
+    src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
+    async: true
+  }, {
+    src: 'http://parq881t8.bkt.clouddn.com/fragment.js',
+    async: true
+  }
+  // { src: '../assets/js/bas.js', async: true },
+  // { src: '../assets/js/index.js', async: true },
+  // { src: '../assets/js/OrbitControls-2.js', async: true },
+  // { src: '../assets/js/three.min.js', async: true },
+  // { src: '../assets/js/TweenMax.min.js', async: true }
+]),
+(config.render = {
+  resourceHints: false
+})
 
 module.exports = config
 
