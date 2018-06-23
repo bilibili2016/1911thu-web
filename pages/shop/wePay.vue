@@ -120,7 +120,7 @@ export default {
       val: '',
       interval: '',
       seconds: 1000000,
-      takeupMsg: true,
+      takeupMsg: false,
       updateImg: require('@/assets/images/update.png')
     }
   },
