@@ -3,7 +3,7 @@
     <div class="main">
       <div class="searchWord">
         <el-input v-model="searchMsg" placeholder="请输入内容" class="inline-input" @keyup.enter.native="search"></el-input>
-        <img :src="searchImg" alt="" @click="search">
+        <i></i>
       </div>
       <div class="hotWord">
         <span>热搜关键词：</span>
@@ -55,7 +55,6 @@ export default {
   data() {
     return {
       searchMsg: '',
-      searchImg: require('@/assets/images/search.png'),
       searchMsgs: ['电子政务', '学术管理', '学位', 'HR', '历史', '日本']
     }
   },

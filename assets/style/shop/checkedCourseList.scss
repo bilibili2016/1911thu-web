@@ -8,7 +8,7 @@
       .tableHeader {
         height: 60px;
         line-height: 60px;
-        background-color: #EBE7ED;
+        background-color: #ebe7ed;
         font-size: 16px;
         color: #222;
         margin-bottom: 40px;
@@ -22,7 +22,7 @@
           margin-left: 130px;
         }
       }
-      .tableBody>div {
+      .tableBody > div {
         background-color: #fff;
         display: flex;
         align-items: center;
@@ -46,19 +46,19 @@
             width: 470px;
             height: 42px;
             font-size: 16px;
-            color: #332A51;
+            color: #332a51;
             overflow: hidden;
             padding: 9px 0 0 10px;
             margin-bottom: 15px;
           }
           h6 {
-            color: #6D687F;
+            color: #6d687f;
             font-size: 12px;
             padding-bottom: 9px;
           }
           p {
             font-size: 14px;
-            color: #6D687F;
+            color: #6d687f;
           }
         }
         .coursePrice {
@@ -66,10 +66,20 @@
           width: 100px;
           height: 140px;
           text-align: center;
-          color: #FF5F5F;
+          color: #ff5f5f;
           font-size: 16px;
           line-height: 78px;
           margin-left: 258px;
+        }
+        .courseNumber {
+          display: inline-block;
+          width: 100px;
+          height: 140px;
+          text-align: center;
+          color: #ff5f5f;
+          font-size: 16px;
+          line-height: 78px;
+          margin-left: 58px;
         }
         .courseOperation {
           display: inline-block;
@@ -79,7 +89,7 @@
           margin-left: 35px;
           line-height: 78px;
           font-size: 16px;
-          color: #332A51;
+          color: #332a51;
         }
       }
       .tableFooter {
@@ -91,7 +101,7 @@
         }
         h4 {
           font-size: 24px;
-          color: #FF5F5F;
+          color: #ff5f5f;
           font-weight: 700;
           margin-top: 28px;
         }

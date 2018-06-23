@@ -248,7 +248,6 @@ export default {
     },
     querySearchAsync(queryString, cb) {
       queryString = queryString.replace(/^\s+|\s+$/g, '')
-
       if (queryString === '') {
         return false
       }
@@ -381,12 +380,19 @@ export default {
     //   });
     // },
     showCommit() {
-      this.showInfo = true
+      // this.showInfo = true
       // this.$router.push('/shop/checkedCourse');
       return new Promise((resolve, reject) => {
         home.addChecked(this.addArray).then(res => {
-          if (res.status == 0) {
-            this.shopCartList()
+          if (res.status === 0) {
+            this.$router.push('/shop/affirmOrder')
+            // this.shopCartList()
+          } else {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: res.msg
+            })
           }
           resolve(true)
         })
@@ -438,6 +444,7 @@ export default {
       this.changeCartNumber()
     },
     addPaySubmit(formName) {
+      this.$router.push('/shop/checkedCourse')
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -451,7 +458,7 @@ export default {
               } else if (response.status === 0) {
                 this.setProductsNum(0)
                 this.$bus.$emit('updateCount')
-                this.$router.push('/shop/checkedCourse')
+
                 this.showInfo = false
               }
               resolve(true)

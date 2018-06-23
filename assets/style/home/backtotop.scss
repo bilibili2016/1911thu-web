@@ -105,10 +105,14 @@
     z-index: 5;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     transition: opacity 400ms;
-    img {
+    i {
+      display: inline-block;
       margin: 20px 25px 0;
       width: 120px;
       height: 120px;
+      background: url("~assets/images/iconList.png") no-repeat;
+      background-size: 177px 966px;
+      background-position: 4px -339px;
     }
     h4 {
       text-align: center;
@@ -140,38 +144,50 @@
     transition: opacity 400ms;
   }
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
 }
+
 .back-to-ceiling .Icon {
   fill: #9aaabf;
   background: none;
 }
+
 .ceilSrc {
   width: 24px;
   height: 24px;
   margin: 13px;
 }
+
 .wxSrc {
   width: 23px;
   height: 19px;
   margin: 16px 13px 13px 13px;
 }
+
 .topSrc {
+  display: inline-block;
   width: 20px;
   height: 13px;
   margin: 20px 15px 15px 15px;
+  background: url("~assets/images/iconList.png") no-repeat;
+  background-size: 177px 966px;
+  background-position: 0 -308px;
 }
+
 .line-wrap {
   height: 50px;
   width: 100px;
   cursor: pointer; // border: 1px red solid;
 }
+
 .line-centerd {
   line-height: 50px;
   color: #6417a6;
@@ -182,6 +198,7 @@
     padding-left: 35px;
   }
 }
+
 .line-center img {
   width: 18px;
   height: 18px;
