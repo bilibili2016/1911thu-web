@@ -1,4 +1,4 @@
-// import jQuery from 'jQuery'
+import $ from 'jQuery'
 function aa($) {
   var fnName = 'fragmentImg'
 
@@ -89,7 +89,8 @@ function aa($) {
       }
     }
   }
+  export default window[fnName]
 }
-console.log(jQuery, 'jQuery')
-console.log('123')
-aa(jQuery)
+// console.log(jQuery, 'jQuery')
+// console.log('123')
+aa($)

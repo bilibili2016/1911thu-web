@@ -368,7 +368,7 @@ export default {
             )
           }
           // this.ischeck = item.id
-          console.log(this.playerForm, '12312312')
+          // console.log(this.playerForm, '12312312')
         }, 1000)
       })
       // 计时器
