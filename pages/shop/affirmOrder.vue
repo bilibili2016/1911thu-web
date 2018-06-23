@@ -2,7 +2,7 @@
   <div>
     <div class="affirmOrder">
       <div class="topImg">
-        <i></i>
+        <!-- <i></i> -->
       </div>
       <div class="contain">
         <h3>确认订单</h3>
