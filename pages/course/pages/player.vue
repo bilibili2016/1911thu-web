@@ -347,7 +347,6 @@ export default {
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('play', function() {
-        // console.log(that.seconds, '这是重新播放倒计时秒数2')
         that.interval = setInterval(() => {
           if (that.seconds <= 0) {
             that.seconds = 1
@@ -357,7 +356,7 @@ export default {
             clearInterval(that.interval)
           } else {
             that.seconds--
-            // console.log(that.seconds, '这是重新秒数3')
+            // console.log(that.seconds, '秒数')
             let playTime = player.currentTime()
             // console.log(playTime, '时间')
             socket.emit(
@@ -372,9 +371,7 @@ export default {
       })
       // 计时器
       return new Promise((resolve, reject) => {
-        // console.log(this.playerForm, '123')
         home.getPlayerInfos(this.playerForm).then(response => {
-          // console.log(response, '898989898')
           if (response.status === '100100') {
             this.goShoppingCart(response.msg)
           } else {
@@ -405,7 +402,6 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          // console.log(response, '这是获取的播放信息')
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.isStudy = response.data.curriculumDetail.is_study
@@ -503,11 +499,7 @@ export default {
     this.getPlayerInfo()
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
-    // 新建webspcket对象
-
     this.seconds = 10000000
-    // console.log()
-    // this.seconds = 10
   }
 }
 </script>

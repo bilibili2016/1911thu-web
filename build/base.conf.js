@@ -25,7 +25,7 @@ function isTrue(value) {
 const baseRouter = env.BASE_ROUTER
 const config = {
   render: {
-    resourceHints: true
+    resourceHints: false
   },
   mode: 'spa',
   env: {
@@ -55,28 +55,8 @@ const config = {
     link: [
       // { rel: 'icon', type: 'image/x-icon', href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png' }
       // 需要直接加载的 CSS
-      // {
-      //   rel: 'stylesheet',
-      //   href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
-      // }
-      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
     ],
-    script: [
-      // {
-      //   src:
-      //     'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
-      //   async: true
-      // },
-      // {
-      //   src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
-      //   async: true
-      // }
-    ]
-
-    // 需要直接加载的 JS
-    // script: [
-    //   { src: 'https://cdn.bootcss.com/holder/2.9.4/holder.min.js', async: true }
-    // ]
+    script: []
   },
   // loading: { color: '#3B8070' },
   loading: false,
@@ -86,9 +66,10 @@ const config = {
     '@/assets/style/main.scss'
   ],
   router: {
-    base: baseRouter
+    base: baseRouter,
+    middleware: 'auth'
   },
-  plugins: ['~/plugins/main'],
+  plugins: [{ src: '~/plugins/main', ssr: false }],
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],

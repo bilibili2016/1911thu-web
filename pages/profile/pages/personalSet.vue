@@ -124,6 +124,7 @@
 <script>
 import { home } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
+import { mapGetters } from 'vuex'
 export default {
   watch: {
     province(val) {
@@ -148,6 +149,9 @@ export default {
       }
       this.area = this.getRegion(this.city, val)
     }
+  },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
     changeCard() {
@@ -276,9 +280,11 @@ export default {
     }
   },
   mounted() {
-    this.getUserInfo()
-    this.getPositionList()
-    this.getRegionList()
+    if (this.isAuthenticated) {
+      this.getUserInfo()
+      this.getPositionList()
+      this.getRegionList()
+    }
   },
   data() {
     var validatePass = (rule, value, callback) => {

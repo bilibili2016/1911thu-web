@@ -49,7 +49,6 @@ export default {
     getTeacherInfo() {
       return new Promise((resolve, reject) => {
         home.getTeacherInfo(this.tidForm).then(response => {
-          // console.log(response.data);
           this.teacherData = response.data.teacherInfo
         })
       })

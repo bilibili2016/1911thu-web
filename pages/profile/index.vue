@@ -169,7 +169,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('auth', ['token', 'gid'])
+    ...mapState('auth', ['token', 'gid']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
     isNoMyMsg(isShow) {
@@ -195,7 +196,6 @@ export default {
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
-          // console.log(response, '这是response')
           this.newDataing = response.data.curriculumList
           for (let item of response.data.curriculumList) {
             item.percent = Number(item.percent)
@@ -210,7 +210,6 @@ export default {
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
-          // console.log(response, '这是response')
           this.studyData = response.data.curriculumList
           for (let item of response.data.curriculumList) {
             item.percent = Number(item.percent)
@@ -242,14 +241,13 @@ export default {
     }
   },
   mounted() {
-    if (!this.token) {
-      // this.$router.push('/')
-      // console.log(this.token, '123')
+    if (this.isAuthenticated) {
+      this.studydataList()
+      this.studyCurriculumList()
+      this.readyStudyCurriculumList()
+      this.collectionList()
     }
-    this.studydataList()
-    this.studyCurriculumList()
-    this.readyStudyCurriculumList()
-    this.collectionList()
+
     this.activeTab = this.gid
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'

@@ -54,7 +54,6 @@ export default {
       this.payCompleteForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.payComplete(this.payCompleteForm).then(response => {
-          // console.log(response, '67676767')
           this.payCompleteData = response.data
           this.interval = setInterval(() => {
             if (this.seconds <= 0) {

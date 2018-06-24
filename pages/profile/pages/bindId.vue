@@ -60,6 +60,7 @@
 
 <script>
 import { home } from '~/lib/v1_sdk/index'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -88,6 +89,9 @@ export default {
       intervalid: null,
       seconds: 1
     }
+  },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
     verify(item) {
@@ -119,7 +123,6 @@ export default {
                 clearInterval(interval)
               } else {
                 this.seconds--
-                // console.log(this.seconds)
               }
             }, 1000)
           } else if (res.status === '100100') {
@@ -130,9 +133,6 @@ export default {
               message: res.msg
             })
           }
-
-          // this.courseList.showErr = res.status != 0 ? true : false
-          // this.courseList.success = res.status != 0 ? false : true
         })
       })
     },
@@ -155,7 +155,10 @@ export default {
   },
 
   mounted() {
-    this.getUsedInvitationCodeList()
+    if (this.isAuthenticated) {
+      this.getUsedInvitationCodeList()
+    }
+
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
   }
