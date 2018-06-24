@@ -31,19 +31,19 @@
                 <p>集团旗下主要有1911创客空间、1911资本、1911商城和1911教育四大业务板块核心业务，各业务板块公司化独立运营，由集团公司控股。</p>
                 <div class="businessInfo">
                   <div>
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/au_hackerspace.png" alt="">
+                    <img src="@/assets/images/au_hackerspace.png" alt="">
                     <p>1911创客空间</p>
                   </div>
                   <div>
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/au_capital.png" alt="">
+                    <img src="@/assets/images/au_capital.png" alt="">
                     <p>1911资本</p>
                   </div>
                   <div>
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/au_shop.png" alt="">
+                    <img src="@/assets/images/au_shop.png" alt="">
                     <p>1911商城</p>
                   </div>
                   <div>
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/au_education.png" alt="">
+                    <img src="@/assets/images/au_education.png" alt="">
                     <p>1911教育</p>
                   </div>
 
@@ -115,7 +115,7 @@ export default {
         }
       ],
       rightImg: 'http://pam8iyw9q.bkt.clouddn.com/right.png',
-      moreImg: 'http://pam8iyw9q.bkt.clouddn.com/more.png'
+      moreImg: require('@/assets/images/more.png')
     }
   },
   mounted() {
