@@ -69,11 +69,7 @@ const config = {
     base: baseRouter,
     middleware: 'auth'
   },
-  plugins: [
-    { src: '~/plugins/main', ssr: false }
-    // { src: '~/plugins/jquery-1.11.3.min.js', ssr: false }
-    // { src: '~/plugins/fragment.js', ssr: false }
-  ],
+  plugins: [{ src: '~/plugins/main', ssr: false }],
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],

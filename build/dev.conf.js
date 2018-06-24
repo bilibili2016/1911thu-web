@@ -19,12 +19,6 @@ config.analyze = {
   }
 ]),
   (config.head.script = [
-    // { src: '/script/jquery.js', async: true },
-    // {
-    //   src:
-    //     'http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js',
-    //   async: true
-    // },
     {
       src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
       async: true
@@ -33,7 +27,6 @@ config.analyze = {
       src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
       async: true
     },
-    // { src: '~/plugins/fragment.js' },
     {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
@@ -41,6 +34,5 @@ config.analyze = {
     { src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js', async: true }
   ]),
   (config.render = { resourceHints: false })
-// { src: '../assets/js/fragment.js' }
 
 module.exports = config
