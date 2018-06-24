@@ -205,7 +205,6 @@ export default {
     // 获取分类列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
-        // console.log(response, '这是classify')
         this.classify = response.data.categoryList
       })
     },
@@ -223,7 +222,6 @@ export default {
 
     getTeacherList() {
       home.getTeacherList(this.teacherForm).then(response => {
-        // console.log(response, '这是response')
         this.teachers = response.data.teacherList
       })
     },

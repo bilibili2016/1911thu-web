@@ -261,7 +261,6 @@ export default {
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
-          // console.log(response, 'response')
           this.loadMsg = false
           this.pagemsg.total = response.data.length
           this.commentator = response.data.evaluateList
@@ -276,7 +275,6 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          // console.log(response)
           this.btnData = response.data.evaluateTags
           this.btnDatas = response.data.evaluateTags
         })
@@ -292,7 +290,6 @@ export default {
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
-            // console.log(response, '这是response')
             if (response.status === '100100') {
               this.$message({
                 showClose: true,
@@ -317,8 +314,6 @@ export default {
       }
     },
     getBtnContent(val, index) {
-      // console.log(val, '这是val')
-      // console.log(index, '这是index')
       this.borderIndex = index
     },
     getCourseDetail() {
@@ -327,7 +322,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
           this.loadMsg = false
-          // console.log(response, '获取详情的接口')
+
           this.courseList = response.data.curriculumDetail
           persistStore.set('curriculumId', response.data.curriculumDetail.id)
 
@@ -343,7 +338,6 @@ export default {
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
-          // console.log(response, '获取评价')
           this.loadMsg = false
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           this.pagemsg.total = response.data.length
@@ -415,7 +409,6 @@ export default {
       this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getdefaultCurriculumCatalog(this.getdefaultForm).then(response => {
-          // console.log(response.data.defaultCurriculumCatalog.id, 'catalogId')
           persistStore.set(
             'catalogId',
             response.data.defaultCurriculumCatalog.id

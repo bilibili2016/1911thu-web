@@ -359,7 +359,13 @@ export default {
       errorTel: {
         tel: null,
         msg: null
-      }
+      },
+      authPath: [
+        '/shop/affirmOrder',
+        '/shop/shoppingCart',
+        '/profile',
+        '/shop/wepay'
+      ]
     }
   },
   computed: {
@@ -394,7 +400,6 @@ export default {
             pn: body.length
           }
           this.setProductsNum(len)
-          // console.log(this.productsNum)
         })
       })
     },
@@ -781,9 +786,18 @@ export default {
     },
     // 获取用户头像
     getUserInfo() {
-      if (this.isAuthenticated) {
-        home.getUserInfo().then(res => {
-          if (res.status === '100008') {
+      // if (this.isAuthenticated) {
+      home.getUserInfo().then(res => {
+        if (res.status === '100008') {
+          this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.signOuts()
+              this.$bus.$emit('loginShow', true)
+            }
+          })
+        } else if (res.status === '100100') {
+          if (this.authPath.indexOf(window.location.pathname) > 0) {
             this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
               confirmButtonText: '确定',
               callback: action => {
@@ -791,22 +805,23 @@ export default {
                 this.$bus.$emit('loginShow', true)
               }
             })
-          } else {
-            this.userInfo = res.data.userInfo
-            persistStore.set('nickName', this.userInfo.nick_name)
-            if (this.userInfo.head_img && this.userInfo.head_img != '') {
-              this.user.userImg = this.userInfo.head_img
-            } else {
-              this.user.userImg =
-                'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
-            }
-            if (/^\//.test(this.userInfo.head_img)) {
-              this.user.userImg =
-                'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
-            }
           }
-        })
-      }
+        } else {
+          this.userInfo = res.data.userInfo
+          persistStore.set('nickName', this.userInfo.nick_name)
+          if (this.userInfo.head_img && this.userInfo.head_img != '') {
+            this.user.userImg = this.userInfo.head_img
+          } else {
+            this.user.userImg =
+              'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
+          }
+          if (/^\//.test(this.userInfo.head_img)) {
+            this.user.userImg =
+              'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
+          }
+        }
+      })
+      // }
     }
   },
   mounted() {
@@ -816,11 +831,9 @@ export default {
     }),
       this.$bus.$on('changeimg', data => {
         this.user.userImg = data
-        // console.log(data)
       })
     if (!this.token) {
       this.signOut()
-      // this.$router.push('/')
     }
   }
 }

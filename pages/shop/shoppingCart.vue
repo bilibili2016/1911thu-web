@@ -93,7 +93,8 @@
 <script>
 import { indexOf } from 'lodash'
 import { home, auth } from '@/lib/v1_sdk/index'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
@@ -196,12 +197,16 @@ export default {
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.shopCartList()
+    if (this.isAuthenticated) {
+      this.shopCartList()
+    }
+
     // this.getNum()
     this.restaurants = this.loadAll()
   },
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
+    ...mapGetters('auth', ['isAuthenticated']),
     prices() {
       let p = (
         Number(this.arraySum) *
@@ -269,9 +274,7 @@ export default {
       }
     },
     handleSelect(item) {
-      // console.log(item, '选择')
       this.companyInfo.companyname = item
-      // console.log(item)
     },
     //搜索企业 接口
     searchCompanyList() {
@@ -295,7 +298,6 @@ export default {
     },
     handleSelect(item) {
       this.companyInfo.companyname = item
-      // console.log(item)
     },
     setPatten() {
       let reg = new RegExp('/^[0-9]*$/')
@@ -325,7 +327,7 @@ export default {
           this.selectAll = true
           this.loding = false
           this.numForm.number = response.data.number
-          // console.log(this.numForm.number);
+
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true

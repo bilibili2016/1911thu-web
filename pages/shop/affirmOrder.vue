@@ -213,7 +213,6 @@ export default {
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
-            // console.log(res.data)
             persistStore.set('cpyid', res.data.id)
             this.$router.push('/shop/wepay')
           } else {
@@ -242,8 +241,7 @@ export default {
               this.company = res.data.companyInfo
               this.person = false
               this.flag = false
-              // console.log(this.company)
-              // persistStore.set('curriculumId', item.id)
+
             }
             this.loadGoods = false
           } else {

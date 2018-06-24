@@ -1,4 +1,4 @@
-import $ from 'jQuery'
+// import jQuery from 'jQuery'
 function aa($) {
   var fnName = 'fragmentImg'
 
@@ -6,7 +6,7 @@ function aa($) {
     width: 1200,
     line: 5,
     column: 12,
-    img: 'images/2.jpg',
+    img: require('~/static/2.jpg'),
     animeTime: 3000
   }
 
@@ -38,7 +38,8 @@ function aa($) {
 
     //加载图片
     var Img = new Image()
-    Img.src = _default.img
+    Img.src = require('~/static/2.jpg')
+
     //图片加载完成时
     Img.onload = function() {
       var multiple = container.width() / Img.width,
@@ -89,8 +90,5 @@ function aa($) {
       }
     }
   }
-  export default window[fnName]
 }
-// console.log(jQuery, 'jQuery')
-// console.log('123')
-aa($)
+aa(jQuery)

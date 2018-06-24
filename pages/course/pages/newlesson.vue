@@ -47,10 +47,9 @@ export default {
     getNewCourseList() {
       return new Promise((resolve, reject) => {
         home.getNewCourseList(this.newsCurriculumForm).then(response => {
-          // console.log(response, '123')
           this.courseList = this.courseList.concat(response.data.curriculumList)
           this.pageCount = response.data.pageCount
-          // for
+
           resolve(true)
         })
       })

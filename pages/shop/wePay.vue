@@ -124,12 +124,15 @@ export default {
     }
   },
   computed: {
-    ...mapState('auth', ['kid'])
+    ...mapState('auth', ['kid']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.getPayList()
+    if (this.isAuthenticated) {
+      this.getPayList()
+    }
   },
   methods: {
     ...mapActions('auth', ['setKid', 'setProductsNum']),

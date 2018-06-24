@@ -15,12 +15,16 @@
 
 <script>
 import { home } from '~/lib/v1_sdk/index'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       infoList: [],
       curruntForm: {}
     }
+  },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
     getInfo() {
@@ -34,7 +38,9 @@ export default {
     }
   },
   mounted() {
-    this.getInfo()
+    if (this.isAuthenticated) {
+      this.getInfo()
+    }
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
   }

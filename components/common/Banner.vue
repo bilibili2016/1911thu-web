@@ -34,8 +34,12 @@
 
 <script>
 import { home } from '~/lib/v1_sdk/index'
+import { mapGetters } from 'vuex'
 export default {
   props: ['bannerImg', 'config', 'isUpdate', 'isShowUpAvtor'],
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
+  },
   data() {
     return {
       avator: '',
@@ -56,7 +60,9 @@ export default {
     }
   },
   mounted() {
-    this.getUserInfo()
+    if (this.isAuthenticated) {
+      this.getUserInfo()
+    }
   },
   watch: {
     isUpdate(val) {
