@@ -112,7 +112,6 @@ export default {
         types: '1',
         companyId: null
       },
-      payImg: require('@/assets/images/wxqr.png'),
       wxMask: false,
       code_url: '',
       qr_code: '',
