@@ -66,8 +66,7 @@ const config = {
     '@/assets/style/main.scss'
   ],
   router: {
-    base: baseRouter,
-    middleware: 'auth'
+    base: baseRouter
   },
   plugins: [{ src: '~/plugins/main', ssr: false }],
   modules: [
