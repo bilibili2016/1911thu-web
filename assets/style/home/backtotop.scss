@@ -44,7 +44,7 @@
   }
   &.customStyleTwo {
     right: 30px;
-    bottom: 200px;
+    bottom: 140px;
     width: 50px;
     height: 50px;
     border-radius: 4px;
@@ -71,9 +71,38 @@
       }
     }
   }
+  &.customStyleFour {
+    right: 30px;
+    bottom: 200px;
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    line-height: 45px;
+    background-color: #7200ff;
+    transition: all 300ms;
+    span {
+      width: 24px;
+      height: 24px;
+      margin-top: 13px;
+      transition: all 300ms;
+      background: url('~assets/images/qq.png') no-repeat;
+      background-size: 24px 24px;
+    }
+    &:hover {
+      background-color: #8f4acb;
+      span {
+        background: url('~assets/images/qqy.png') no-repeat;
+        background-size: 24px 24px;
+      }
+      .telShow {
+        opacity: 1;
+        right: 62px;
+      }
+    }
+  }
   &.customStyleThree {
     right: 30px;
-    bottom: 100px;
+    bottom: 50px;
     width: 110px;
     height: 50px;
     border-radius: 4px;
@@ -110,7 +139,7 @@
       margin: 20px 25px 0;
       width: 120px;
       height: 120px;
-      background: url("~assets/images/iconList.png") no-repeat;
+      background: url('~assets/images/iconList.png') no-repeat;
       background-size: 177px 966px;
       background-position: 4px -339px;
     }
@@ -177,7 +206,7 @@
   width: 20px;
   height: 13px;
   margin: 20px 15px 15px 15px;
-  background: url("~assets/images/iconList.png") no-repeat;
+  background: url('~assets/images/iconList.png') no-repeat;
   background-size: 177px 966px;
   background-position: 0 -308px;
 }
