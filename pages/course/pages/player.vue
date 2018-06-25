@@ -358,7 +358,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '秒数')
             let playTime = player.currentTime()
-            // console.log(playTime, '时间')
+            console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),

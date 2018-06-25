@@ -15,6 +15,14 @@
         </div>
       </div>
     </transition>
+    <!-- <transition :name="transitionName">
+      <div class="back-to-ceiling hasColor customStyleFour" v-show="visible">
+        <span></span>
+        <div class="telShow">
+          <p>123</p>
+        </div>
+      </div>
+    </transition> -->
     <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
         <span></span>
@@ -23,6 +31,7 @@
         </div>
       </div>
     </transition>
+
     <transition :name="transitionName" v-if="data">
 
       <div class="back-to-ceiling customStyleThree" v-show="visible" @click="checkCourse">
@@ -75,6 +84,7 @@ export default {
       interval: null,
       ceilSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop11.png',
       wxSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop22.png',
+      qqSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop22.png',
       topSrc: require('@/assets/images/home_backtop03.png')
     }
   },

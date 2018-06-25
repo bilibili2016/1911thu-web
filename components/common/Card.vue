@@ -237,13 +237,15 @@
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
-              <div class="fr common-button">
-                <!-- <p class="goStudy">
-                  <span class="fl" @click="courseInfo(course)">立即学习</span>
-                  <span class="fr" ></span>
-                </p> -->
+              <div class="fr common-button-half">
+                <el-button type="primary" plain @click="buyNewCourse(course)">
+                  <img src="@/assets/images/shopcard.png" alt="">
+                </el-button>
+              </div>
+              <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="courseInfo(course)">立即学习</el-button>
               </div>
+
             </div>
           </div>
         </div>
@@ -272,6 +274,7 @@
           <div class="particularss fr">
             <div class="currentclum">
               <h4>{{courseList.title}}</h4>
+              <div class="tg">团购价更优，团购电话：010-62701911</div>
               <div class="clum" v-if="courseList.is_study === 1">
                 <span class="fl coursenum">
                   <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
@@ -540,6 +543,15 @@ export default {
           this.$set(this.data[i], 'is_checked', true)
         }
       }
+    },
+    buyNewCourse(item) {
+      console.log(item, '这是item')
+      this.curriculumcartids.cartid = item.id
+      return new Promise((resolve, reject) => {
+        home.addShopCart(this.curriculumcartids).then(response => {
+          this.$router.push('/shop/shoppingCart')
+        })
+      })
     },
     getMore(item) {
       // this.$router.push(item)
@@ -1305,6 +1317,17 @@ export default {
           margin-top: 10px;
         }
       }
+      .common-button-half {
+        img {
+          width: 20px !important;
+          height: 20px !important;
+        }
+        .el-button {
+          padding: 9px 16px;
+          border: 1px #6417a6 solid;
+          border-left: none;
+        }
+      }
       .date {
         color: rgba(136, 136, 136, 1);
         font-size: 14px;
@@ -1330,12 +1353,20 @@ export default {
         color: rgba(34, 34, 34, 1);
         line-height: 0px;
         cursor: pointer;
+        .tg {
+          color: #ff5f5f;
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(255, 95, 95, 1);
+          padding-bottom: 20px;
+          padding-top: 10px;
+        }
         h4 {
           font-size: 18px;
           color: #222;
           height: 54px;
           line-height: 54px;
-          margin-bottom: 20px;
+          margin-bottom: 0px;
         }
         h4:hover {
           color: #8f4acb;
