@@ -33,10 +33,13 @@
     <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
       <div v-show="mediaRInner" class="inner">
         <h5 class="title">{{player.title}}</h5>
-        <div class="teacher clearfix" @click="goTeacher(player.teacher_id)">
+        <div class="teacher clearfix">
           <img class="fl" :src="player.head_img" alt="">
-          <p class="fl">{{player.teacher_name}}</p>
-          <p class="fl">{{player.graduate}}</p>
+          <div class="playername fl" @click="goTeacher(player.teacher_id)">
+            <div class="fl">{{player.teacher_name}}</div>
+            <div class="fl">{{player.graduate}}</div>
+          </div>
+          <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
         </div>
         <div class="courseList" ref="courseList">
           <div class="chapter" v-for="(section,index) in courseList" :key="index">
@@ -315,6 +318,23 @@ export default {
       this.tidForm.tids = teacherID * 1
       this.setTid(this.tidForm)
       this.$router.push('/home/pages/teacher')
+    },
+    playerBuy(item, info) {
+      console.log(item, 'playerItem')
+      console.log(info, 'info')
+      if (info.is_cart === 1) {
+        this.$alert('商品已在购物车内', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {}
+        })
+      } else {
+        this.curriculumcartids.cartid = item[0].curriculum_id
+        return new Promise((resolve, reject) => {
+          home.addShopCart(this.curriculumcartids).then(response => {
+            this.$router.push('/shop/shoppingCart')
+          })
+        })
+      }
     },
     getPlayerInfo() {
       if (this.clickMsg === true) {
