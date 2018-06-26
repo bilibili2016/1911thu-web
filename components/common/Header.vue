@@ -9,7 +9,7 @@
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin" @click="goSearchd('/other/hrEntry')">机构入口
+        <span class="hrin" @click="goSearchd('/other/hrentry')">机构入口
           <i></i>
         </span>
         <span v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingCart')">
+        <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingcart')">
           <span class="cartIcon"></span>
           <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
@@ -68,7 +68,7 @@
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
-                <!-- @click="goSearchd('/home/components/forgotPassword')"  -->
+                <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
                 <div @click="forget">忘记密码?</div>
                 <el-button @click="signIns('loginData')">登录</el-button>
               </el-row>
@@ -361,8 +361,8 @@ export default {
         msg: null
       },
       authPath: [
-        '/shop/affirmOrder',
-        '/shop/shoppingCart',
+        '/shop/affirmorder',
+        '/shop/shoppingcart',
         '/profile',
         '/shop/wepay'
       ]
@@ -649,14 +649,14 @@ export default {
     },
     // 忘记密码
     forget() {
-      this.$router.push('/home/components/forgotPassword')
+      this.$router.push('/home/components/forgotpassword')
       this.close()
     },
     goMycourse(tab) {
       this.$router.push({ path: '/profile', query: { tab: tab } })
     },
     goLinks() {
-      this.$router.push('/shop/shoppingCart')
+      this.$router.push('/shop/shoppingcart')
     },
     goLink(item) {
       this.$bus.$emit('selectProfileIndex', '123')

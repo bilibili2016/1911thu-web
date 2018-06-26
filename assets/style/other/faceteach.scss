@@ -1,0 +1,118 @@
+.faceteach {
+  .banner {
+    overflow: hidden;
+    // height: 2000px;
+    height: 1200px;
+    .banner-img {
+      width: 100%;
+      height: 360px;
+    }
+    .img {
+      width: 721px;
+      height: 528px;
+    }
+    .center {
+      position: relative;
+      .text {
+        p:nth-child(1) {
+          font-size: 46px;
+          color: rgba(255, 255, 255, 1);
+          line-height: 39px;
+          position: absolute;
+          top: -250px;
+          right: 150px;
+        }
+        p:nth-child(2) {
+          font-size: 22px;
+          color: rgba(255, 255, 255, 1);
+          line-height: 54px;
+          position: absolute;
+          top: -140px;
+          right: 190px;
+        }
+        p:nth-child(3) {
+          font-size: 22px;
+          color: rgba(255, 255, 255, 1);
+          line-height: 54px;
+          position: absolute;
+          top: -90px;
+          right: 85px;
+        }
+      }
+    }
+    .centerImg {
+      width: 754px;
+      height: 760px;
+
+      margin: 0 auto;
+      padding: 140px 0px;
+      position: relative;
+      .fz-one {
+        font-size: 24px;
+        font-family: MicrosoftYaHei;
+        color: rgba(34, 34, 34, 1);
+        line-height: 39px;
+      }
+      .fz-two {
+        font-size: 14px;
+        font-family: MicrosoftYaHei;
+        color: rgba(34, 34, 34, 1);
+        line-height: 30px;
+      }
+      .one {
+        position: absolute;
+        top: 190px;
+        left: -152px;
+      }
+      .right-one {
+        text-indent: 199px;
+      }
+      .two {
+        position: absolute;
+        top: 304px;
+        left: -162px;
+      }
+      .hw {
+        width: 178px;
+      }
+      .right-two {
+        text-indent: 75px;
+      }
+      .three {
+        position: absolute;
+        top: 492px;
+        left: -136px;
+      }
+      .hw-two {
+        width: 264px;
+      }
+      .right-three {
+        text-indent: 140px;
+      }
+      .four {
+        position: absolute;
+        top: 163px;
+        left: 598px;
+      }
+      .hw-three {
+        width: 329px;
+      }
+      .five {
+        position: absolute;
+        top: 345px;
+        left: 677px;
+      }
+      .hw-five {
+        width: 240px;
+      }
+      .six {
+        position: absolute;
+        top: 515px;
+        left: 716px;
+      }
+      .hw-six {
+        width: 203px;
+      }
+    }
+  }
+}

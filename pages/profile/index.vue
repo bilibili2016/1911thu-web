@@ -105,8 +105,8 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import Banner from '@/components/common/Banner.vue'
-import PersonalSet from '@/pages/profile/components/personalSet.vue'
-import Binding from '@/pages/profile/components/bindId'
+import PersonalSet from '@/pages/profile/components/personalset.vue'
+import Binding from '@/pages/profile/components/bindid'
 import Info from '@/pages/profile/components/info'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -186,7 +186,7 @@ export default {
       this.$router.push(item)
     },
     goShop() {
-      this.goLink('/shop/checkedCourse')
+      this.goLink('/shop/checkedcourse')
     },
     empty() {},
 

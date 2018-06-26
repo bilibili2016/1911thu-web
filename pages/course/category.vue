@@ -41,7 +41,6 @@
       </div>
 
     </div>
-    <!-- <v-filter></v-filter> -->
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
@@ -50,15 +49,13 @@
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
-import CustomHot2 from '@/components/common/Hot2.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
-import SearchNothing from '@/pages/home/components/searchNothing.vue'
+import SearchNothing from '@/components/common/SearchNothing.vue'
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-filter': CustomHot2,
     'v-page': CustomPagination,
     'v-nothing': SearchNothing
   },
@@ -221,5 +218,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
+// 因兼容问题暂时组件引入
 @import '~assets/style/course/category';
 </style>

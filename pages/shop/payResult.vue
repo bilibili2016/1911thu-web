@@ -57,7 +57,7 @@ export default {
           this.payCompleteData = response.data
           this.interval = setInterval(() => {
             if (this.seconds <= 0) {
-              // this.seconds = 1
+              // this.seconds = -1
               this.$router.push('/')
               clearInterval(this.interval)
             } else {
@@ -75,10 +75,3 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import '~assets/style/shop/payResult';
-.goback {
-  width: 100px;
-  margin: 80px auto;
-}
-</style>

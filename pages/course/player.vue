@@ -265,7 +265,7 @@ export default {
       this.curriculumcartids.cartid = this.kid
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingCart')
+          this.$router.push('/shop/shoppingcart')
         })
       })
     },
@@ -331,7 +331,7 @@ export default {
         this.curriculumcartids.cartid = item[0].curriculum_id
         return new Promise((resolve, reject) => {
           home.addShopCart(this.curriculumcartids).then(response => {
-            this.$router.push('/shop/shoppingCart')
+            this.$router.push('/shop/shoppingcart')
           })
         })
       }
@@ -524,18 +524,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.bag {
-  color: #732eaf;
-}
-video::-internal-media-controls-download-button {
-  display: none;
-}
-video::-webkit-media-controls-enclosure {
-  overflow: hidden;
-}
-video::-webkit-media-controls-panel {
-  width: calc(100% + 30px);
-}
-</style>
 

@@ -55,7 +55,7 @@ export default {
     goLink(num) {
       this.indexData.indexs = num
       this.setIndex(this.indexData)
-      this.$router.push('/other/aboutUs')
+      this.$router.push('/other/aboutus')
     }
   }
 }

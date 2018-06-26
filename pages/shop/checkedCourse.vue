@@ -95,7 +95,7 @@ export default {
     selectPayApply(item, index) {
       persistStore.set('pay', index)
       persistStore.set('price', item.totalPresentPrice)
-      this.$router.push('/shop/checkedCourseList')
+      this.$router.push('/shop/checkedcourselist')
     },
     goLink(item) {
       this.$router.push(item)
