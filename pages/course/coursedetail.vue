@@ -237,7 +237,7 @@ export default {
   methods: {
     handleClick() {},
     goCategory() {
-      this.$router.push('/course/classifycourselists')
+      this.$router.push('/course/classifycourses')
       persistStore.set('cid', '1')
       persistStore.set('pid', '')
     },

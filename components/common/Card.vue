@@ -512,13 +512,13 @@ export default {
     },
     goLink(item) {
       switch (window.location.pathname) {
-        case '/course/classifycourselist':
+        case '/course/classifycourse':
           this.$router.push('coursedetail')
           break
         case '/course/chooselesson':
           this.$router.push('coursedetail')
           break
-        case '/course/classifycourselists':
+        case '/course/classifycourses':
           this.$router.push('coursedetail')
           break
         case '/':
