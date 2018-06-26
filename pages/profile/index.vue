@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fourth'"></v-banner>
+    <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fifth'"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="empty">
         <!-- 我的信息 -->
@@ -150,7 +150,7 @@
         <!-- 绑定企业Id -->
         <el-tab-pane name="tab-seventh">
           <span slot="label" class="tabList">
-            <i class="icon-bind"></i> 绑定企业ID</span>
+            <i class="icon-company"></i> 绑定企业ID</span>
           <v-companyId :cpnData="companyData"></v-companyId>
           <div class="content">
             <div class="noCourse" v-if="isShowNoCourse">
@@ -162,7 +162,7 @@
         <!-- 专属邀请码 -->
         <el-tab-pane name="tab-eighth">
           <span slot="label" class="tabList">
-            <i class="icon-bind"></i> 专属邀请码</span>
+            <i class="icon-code"></i> 专属邀请码</span>
           <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>
           <!-- <div class="content">
             <div class="noCourse">
@@ -511,6 +511,14 @@ export default {
         background: url('~assets/images/icon_choose1.png') no-repeat center;
         background-size: contain;
       }
+      &.icon-code {
+        background: url('~assets/images/icon_code1.png') no-repeat center;
+        background-size: contain;
+      }
+      &.icon-company {
+        background: url('~assets/images/icon_company1.png') no-repeat center;
+        background-size: contain;
+      }
     }
   }
   .el-tabs__item.is-active i {
@@ -540,6 +548,14 @@ export default {
     }
     &.icon-choose {
       background: url('~assets/images/icon_choose2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-code {
+      background: url('~assets/images/icon_code2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-company {
+      background: url('~assets/images/icon_company2.png') no-repeat center;
       background-size: contain;
     }
   }
