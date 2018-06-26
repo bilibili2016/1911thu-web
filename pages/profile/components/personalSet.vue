@@ -125,6 +125,7 @@
 import { home } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
 import { mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   watch: {
     province(val) {
@@ -204,6 +205,7 @@ export default {
         this.psnForm = res.data.userInfo
         if (this.psnForm.company_name && this.psnForm.company_name != '') {
           this.hasCompany = true
+          persistStore.set('cpnc', this.psnForm.company_code)
         } else {
           this.hasCompany = false
         }

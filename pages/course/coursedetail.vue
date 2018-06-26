@@ -20,6 +20,11 @@
               <span>
                 <i class="el-icon-share"></i>
                 <span> 分享 </span>
+                <div class="shareIcon">
+                  <img @click="share(courseList.title,courseList.picture,'wx')" src="@/assets/images/share-wx.png" alt="">
+                  <img @click="share(courseList.title,courseList.picture,'wb')" src="@/assets/images/share-wb.png" alt="">
+                  <img @click="share(courseList.title,courseList.picture,'kj')" src="@/assets/images/share-kj.png" alt="">
+                </div>
               </span>
             </div>
           </div>
@@ -389,6 +394,41 @@ export default {
           this.collectMsg = 1
         })
       })
+    },
+    //分享
+    share(title, picurl, where) {
+      if (where === 'wb') {
+        var sharesinastring =
+          'http://v.t.sina.com.cn/share/share.php?title=' +
+          title +
+          '&url=' +
+          window.location.href +
+          '&content=utf-8&sourceUrl=' +
+          window.location.href +
+          '&pic=' +
+          picurl
+        window.open(
+          sharesinastring,
+          'newwindow',
+          'height=400,width=400,top=100,left=100'
+        )
+      }
+      if (where === 'wx') {
+      }
+      if (where === 'kj') {
+        var shareqqzonestring =
+          'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=' +
+          title +
+          '&url=' +
+          window.location.href +
+          '&pics=' +
+          picurl
+        window.open(
+          shareqqzonestring,
+          'newwindow',
+          'height=400,width=400,top=100,left=100'
+        )
+      }
     },
     // 删除收藏
     deleteCollection() {
