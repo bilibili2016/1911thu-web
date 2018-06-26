@@ -17,7 +17,7 @@
               <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="takeupMsg">
                 <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
                 <div class="fl">
-                  <h4 @click="goCourseInfo(course,index)">{{course.curriculum_title}}</h4>
+                  <h4 @click="goCourseInfo(course,index)">{{course.title}}</h4>
                   <h6>{{course.curriculum_time}}学时</h6>
                   <p>讲师：{{course.teacher_name}}</p>
                 </div>

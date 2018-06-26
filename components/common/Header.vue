@@ -44,9 +44,10 @@
         <ul class="subPages">
           <li @click="goLink('tab-first')">我的首页</li>
           <li @click="goLink('tab-second')">我的课程</li>
-          <li @click="goLink('tab-third')">我的消息</li>
-          <li @click="goLink('tab-fourth')">个人设置</li>
-          <li @click="goLink('tab-fifth')">绑定课程</li>
+          <li @click="goLink('tab-third')">我的订单</li>
+          <li @click="goLink('tab-fourth')">我的消息</li>
+          <li @click="goLink('tab-fifth')">个人设置</li>
+          <li @click="goLink('tab-sixth')">绑定课程</li>
           <li @click="signOuts">退出</li>
         </ul>
       </div>
