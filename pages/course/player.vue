@@ -320,8 +320,8 @@ export default {
       this.$router.push('/home/components/teacher')
     },
     playerBuy(item, info) {
-      console.log(item, 'playerItem')
-      console.log(info, 'info')
+      // console.log(item, 'playerItem')
+      // console.log(info, 'info')
       if (info.is_cart === 1) {
         this.$alert('商品已在购物车内', '温馨提示', {
           confirmButtonText: '确定',
@@ -378,7 +378,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '秒数')
             let playTime = player.currentTime()
-            console.log(playTime, '时间')
+            // console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),

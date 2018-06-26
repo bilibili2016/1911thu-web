@@ -226,13 +226,13 @@ export default {
     this.bgmsgs = Number(this.pid) + Number(1)
     this.cidform.cids = '1'
     this.pidform.pids = ''
-    // this.bgmsg = 0;
+
     this.activeName = 'first'
     this.setCid(this.cidform)
     this.pidform.pids = ''
     this.bgmsg = this.cid
     this.setPid(this.pidform)
-    //  this.data2 = this.data[0];
+
     this.curriculumList()
     this.childCategoryList()
     this.$bus.$emit('bannerShow', false)
