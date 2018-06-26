@@ -20,7 +20,7 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <!-- @click="goLink('course/pages/coursedetail')" -->
+            <!-- @click="goLink('course/coursedetail')" -->
             <div class="mask-style" @click="openDetail()">
               <!-- <img :src="jinImg" alt="" class="jin-style"> -->
             </div>
@@ -39,7 +39,7 @@
             <el-row>
               <!-- 名字 -->
               <div class="item">
-                <p class="itemBox-name" @click="goLink('course/pages/coursedetail')">
+                <p class="itemBox-name" @click="goLink('course/coursedetail')">
                   <span>{{card.title}}</span>
                 </p>
                 <p class="itemBox-info">
@@ -94,7 +94,7 @@
                 <img :src="newTag" alt="">
               </div>
               <div class="mask-style">
-                <!-- <div class="mask-style" @click="goLink('course/pages/coursedetail')"> -->
+                <!-- <div class="mask-style" @click="goLink('course/coursedetail')"> -->
                 <!-- <img :src="jinImg" alt="" class="jin-style"> -->
               </div>
               <div class="bgImgs">
@@ -312,7 +312,7 @@
               </h4>
               <div class="common-button">
                 <div>
-                  <el-button type="primary" plain @click="goPlay(courseList)">继续学习5</el-button>
+                  <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                 </div>
                 <div class="lineProgress">
                   <h5>已学习{{courseList.percent}}%</h5>
@@ -324,11 +324,11 @@
               <p>{{courseList.introduction}}</p>
               <div class="common-button">
                 <div v-if="isAuthenticated">
-                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习6</el-button>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车7</el-button>
+                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
                 <div v-else>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车8</el-button>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
               </div>
             </div>
@@ -461,8 +461,8 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     openDetail() {
-      window.open(window.location.origin + '/course/pages/coursedetail')
-      // this.$router.push('/course/pages/coursedetail')
+      window.open(window.location.origin + '/course/coursedetail')
+      // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
       let len = this.productsNum
@@ -495,7 +495,7 @@ export default {
     },
     goPlay(item) {
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
-      window.open(window.location.origin + '/course/pages/player')
+      window.open(window.location.origin + '/course/player')
     },
     // 获取详情默认播放小节id
     getdefaultCurriculumCatalogs() {
@@ -512,36 +512,36 @@ export default {
     },
     goLink(item) {
       switch (window.location.pathname) {
-        case '/course/pages/category':
+        case '/course/classifycourselist':
           this.$router.push('coursedetail')
           break
-        case '/course/pages/categoryd':
+        case '/course/chooselesson':
           this.$router.push('coursedetail')
           break
-        case '/course/pages/categorys':
+        case '/course/classifycourselists':
           this.$router.push('coursedetail')
           break
         case '/':
           this.$router.push(item)
           break
-        case '/course/pages/coursedetail':
+        case '/course/coursedetail':
           // this.$router.push('player')
-          window.open(window.location.origin + '/course/pages/player')
+          window.open(window.location.origin + '/course/player')
           break
-        case '/course/pages/classify':
+        case '/course/classifycourse':
           this.$router.push('coursedetail')
           break
-        case '/course/pages/search':
+        case '/course/search':
           this.$router.push('coursedetail')
           break
-        case '/course/pages/newlesson':
+        case '/course/newlesson':
           this.$router.push('coursedetail')
           break
-        case '/home/pages/teacher':
-          this.$router.push('/course/pages/coursedetail')
+        case '/home/components/teacher':
+          this.$router.push('/course/coursedetail')
           break
         case '/profile':
-          this.$router.push('/course/pages/coursedetail')
+          this.$router.push('/course/coursedetail')
           break
         default:
           break
@@ -593,7 +593,7 @@ export default {
       this.kidForm.kids = item.id
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
-      // this.$router.push('/course/pages/coursedetail')
+      // this.$router.push('/course/coursedetail')
       this.openDetail()
     },
     selectCid(item, index) {
@@ -626,7 +626,7 @@ export default {
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
       this.setTid(this.tidForm)
-      this.getMore('/home/pages/teacher')
+      this.getMore('/home/components/teacher')
     },
     addShopCart() {
       return new Promise((resolve, reject) => {
@@ -642,7 +642,7 @@ export default {
     }
   },
   mounted() {
-    if (window.location.pathname === '/course/pages/coursedetail') {
+    if (window.location.pathname === '/course/coursedetail') {
       // this.getdefaultCurriculumCatalogs()
     }
   }

@@ -312,12 +312,12 @@ export default {
     },
     goLink() {
       // this.$router.back(-1)
-      window.open(window.location.origin + '/course/pages/coursedetail')
+      window.open(window.location.origin + '/course/coursedetail')
     },
     goTeacher(teacherID) {
       this.tidForm.tids = teacherID * 1
       this.setTid(this.tidForm)
-      this.$router.push('/home/pages/teacher')
+      this.$router.push('/home/components/teacher')
     },
     playerBuy(item, info) {
       console.log(item, 'playerItem')

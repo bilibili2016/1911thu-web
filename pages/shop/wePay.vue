@@ -156,7 +156,7 @@ export default {
       this.kidForm.kids = item.curriculum_id
       persistStore.set('kid', item.curriculum_id)
       this.setKid(this.kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      this.$router.push('/course/coursedetail')
     },
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000)

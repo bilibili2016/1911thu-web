@@ -61,11 +61,11 @@ export default {
       this.kidForm.kids = linedata.id
       persistStore.set('curriculumId', linedata.id)
       this.setKid(this.kidForm)
-      this.$router.push('course/pages/coursedetail')
+      this.$router.push('course/coursedetail')
     },
     handlePid(item, index) {
-      window.open(window.location.origin + '/course/pages/category')
-      // this.$router.push('/course/pages/category')
+      window.open(window.location.origin + '/course/classifycourselist')
+      // this.$router.push('/course/classifycourselist')
 
       this.pidform.pids = item.id
       this.setPid(this.pidform)

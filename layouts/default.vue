@@ -1,12 +1,12 @@
 <template>
   <el-container class="is-vertical layout-default">
-     <Header :class="{ showMsg : this.hsg }"></Header>
+    <Header :class="{ showMsg : this.hsg }"></Header>
     <el-container>
       <el-main>
-         <nuxt/>
+        <nuxt/>
       </el-main>
     </el-container>
-   <Footer></Footer>
+    <Footer></Footer>
   </el-container>
 </template>
 <script>
@@ -19,35 +19,16 @@ export default {
     Footer
   },
   data() {
-    return {
-      // headerMsg: true,
-      // hsgForm: {
-      //   hsgs: true
-      // }
-    }
+    return {}
   },
-
   computed: {
-    ...mapState('auth', [
-      'hsg'
-    ])
+    ...mapState('auth', ['hsg'])
   }
-  // methods: {
-  //   ...mapActions('auth', [
-  //     'setHsg',
-  //   ])
-  // },
-  // computed: {
-  //   ...mapState('auth', [
-  //     'hsg'
-  //   ])
-  // }
 }
 </script>
 <style lang="scss" scoped>
-@import "~assets/style/config";
-// @import "~assets/style/default";
-.headerBox{
-  display: block
+@import '~assets/style/config';
+.headerBox {
+  display: block;
 }
 </style>

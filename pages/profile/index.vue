@@ -105,9 +105,9 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import Banner from '@/components/common/Banner.vue'
-import PersonalSet from '@/pages/profile/pages/personalSet.vue'
-import Binding from '@/pages/profile/pages/bindId'
-import Info from '@/pages/profile/pages/info'
+import PersonalSet from '@/pages/profile/components/personalSet.vue'
+import Binding from '@/pages/profile/components/bindId'
+import Info from '@/pages/profile/components/info'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
@@ -237,7 +237,7 @@ export default {
           resolve(true)
         })
       })
-      this.goLink('/course/pages/categoryd')
+      this.goLink('/course/chooselesson')
     }
   },
   mounted() {

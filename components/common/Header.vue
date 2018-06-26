@@ -68,7 +68,7 @@
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
-                <!-- @click="goSearchd('/home/pages/forgotPassword')"  -->
+                <!-- @click="goSearchd('/home/components/forgotPassword')"  -->
                 <div @click="forget">忘记密码?</div>
                 <el-button @click="signIns('loginData')">登录</el-button>
               </el-row>
@@ -561,6 +561,7 @@ export default {
                 this.close()
                 this.getUserInfo()
                 this.getCount()
+                this.$bus.$emit('reLogin', true)
               }
               this.loadLogin = false
             })
@@ -648,7 +649,7 @@ export default {
     },
     // 忘记密码
     forget() {
-      this.$router.push('/home/pages/forgotPassword')
+      this.$router.push('/home/components/forgotPassword')
       this.close()
     },
     goMycourse(tab) {
@@ -762,12 +763,12 @@ export default {
       if (this.search !== '') {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
-          case '/course/pages/search':
+          case '/course/search':
             this.$router.go()
             break
           default:
-            this.$router.push('/course/pages/search')
-            // window.open(window.location.origin + '/course/pages/search')
+            this.$router.push('/course/search')
+            // window.open(window.location.origin + '/course/search')
             break
         }
       }
