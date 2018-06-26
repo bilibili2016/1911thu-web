@@ -16,15 +16,6 @@
           </td>
         </tr>
       </table>
-      <!-- <el-table style="width: 100%">
-        <el-table-column prop="invitation_code" label="专属邀请码" width="300">
-        </el-table-column>
-        <el-table-column prop="pay_time" label="购买日期" width="300">
-        </el-table-column>
-        <el-table-column @change="changeCode" class="noCode" prop="use_code_number" label="可用个数">
-          <span></span>
-        </el-table-column>
-      </el-table> -->
     </div>
     <div class="rules clearfix">
       <div class="fl">
