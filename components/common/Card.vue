@@ -208,6 +208,7 @@
           <el-card class="fl" :body-style="{ padding: '0px' }">
             <img :src="course.picture" class="image">
             <div class="personInfo clearfix" @click="goTeacherInfo(course.teacher_id)">
+              <span>{{course}}</span>
               <img :src="course.head_img" alt="">
               <h5 class="fr">特约讲师：{{course.teacher_name}}</h5>
               <p class="fr">{{course.graduate}}</p>
@@ -222,18 +223,26 @@
               <p>{{course.introduction}}</p>
             </div>
             <!-- {{course.evaluateList}} -->
-            <el-carousel trigger="click" height="120px">
-              <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
-                <!-- {{item}} -->
-                <div class="comment">
-                  <h5>
-                    <span>{{item.nick_name}}的评论</span>
-                    <el-rate disabled v-model="item.score" class="itemBox-rate"></el-rate>
-                  </h5>
-                  <p>{{item.evaluate_content}}</p>
-                </div>
-              </el-carousel-item>
-            </el-carousel>
+            <div v-if="course.evaluateList.length > 0">
+              <el-carousel trigger="click" height="120px">
+                <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
+                  <!-- {{item}} -->
+                  <div class="comment">
+                    <h5>
+                      <span>{{item.nick_name}}的评论</span>
+                      <el-rate disabled v-model="item.score" class="itemBox-rate"></el-rate>
+                    </h5>
+                    <p>{{item.evaluate_content}}</p>
+                  </div>
+                </el-carousel-item>
+              </el-carousel>
+            </div>
+            <div class="no-comment" v-else>
+              <div class="comment-img">
+                <img src="@/assets/images/nocmt.png" alt="">
+              </div>
+              <p class="comment-text">暂无评论，快来抢沙发～</p>
+            </div>
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
@@ -262,11 +271,18 @@
               <div class="mask"></div>
               <div class="common-button btn-bg">
                 <div v-if="isAuthenticated">
-                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看</el-button>
+                  <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button> -->
+                  <!-- <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看2</el-button> -->
+                  <div class="playBtn-detail" v-if="privileMsg === true">
+                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
+                  </div>
+                  <div class="playBtn-detail" v-if="privileMsg === false">
+                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
+                  </div>
                 </div>
-                <div v-else>
-                  <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看</el-button>
+                <div v-else class="playBtn-detail">
+                  <!-- <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看3</el-button> -->
+                  <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
                 </div>
               </div>
             </div>
@@ -296,7 +312,7 @@
               </h4>
               <div class="common-button">
                 <div>
-                  <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
+                  <el-button type="primary" plain @click="goPlay(courseList)">继续学习5</el-button>
                 </div>
                 <div class="lineProgress">
                   <h5>已学习{{courseList.percent}}%</h5>
@@ -308,11 +324,11 @@
               <p>{{courseList.introduction}}</p>
               <div class="common-button">
                 <div v-if="isAuthenticated">
-                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
+                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习6</el-button>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车7</el-button>
                 </div>
                 <div v-else>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车8</el-button>
                 </div>
               </div>
             </div>
@@ -546,12 +562,19 @@ export default {
     },
     buyNewCourse(item) {
       console.log(item, '这是item')
-      this.curriculumcartids.cartid = item.id
-      return new Promise((resolve, reject) => {
-        home.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingCart')
+      if (item.is_cart === '0') {
+        this.curriculumcartids.cartid = item.id
+        return new Promise((resolve, reject) => {
+          home.addShopCart(this.curriculumcartids).then(response => {
+            this.$router.push('/shop/shoppingCart')
+          })
         })
-      })
+      } else {
+        this.$alert('商品已在购物车内', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {}
+        })
+      }
     },
     getMore(item) {
       // this.$router.push(item)
@@ -1191,9 +1214,31 @@ export default {
         background: rgba(100, 23, 166, 1);
         opacity: 0.5;
       }
+      .playBtn-detail {
+        width: 76px;
+        height: 76px;
+        margin-left: 30px;
+        margin-top: -10px;
+      }
     }
     .particulars {
       width: 660px;
+      .no-comment {
+        height: 120px;
+        background-color: rgba(250, 250, 250, 1);
+        overflow: hidden;
+        .comment-img {
+          width: 48px;
+          height: 44px;
+          margin: 22px auto 13px;
+        }
+        .comment-text {
+          font-size: 14px;
+          color: rgba(136, 136, 136, 1);
+          width: 159px;
+          margin: 0 auto;
+        }
+      }
       .currentclum {
         padding-left: 40px;
         margin-right: 40px;
