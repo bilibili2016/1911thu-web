@@ -1,0 +1,115 @@
+.invitation {
+  background-color: #fff;
+  margin: 0 auto;
+  h4 {
+    height: 56px;
+    line-height: 56px;
+    padding-left: 30px;
+    font-size: 16px;
+    color: #222;
+    border-bottom: 1px solid #E8D6F7;
+  }
+  .table {
+    margin: 30px;
+    border: 1px solid #E8D6F7;
+    table {
+      width: 100%;
+      border-spacing: 0;
+      tr {
+        font-size: 0;
+      }
+      .tr_header {
+        height: 60px;
+        line-height: 60px;
+        background-color: #EBE7ED;
+        text-align: center;
+        color: #6417A6;
+        font-size: 16px;
+        th {
+          font-weight: 400;
+          background-color: transparent;
+          font-size: 14px;
+        }
+      }
+      .tr_body {
+        height: 52px;
+        line-height: 52px;
+        background-color: #fafafa;
+        text-align: center;
+        color: #222;
+        font-size: 14px;
+        td {
+          border-bottom: 1px solid #E8D6F7;
+        }
+        &:last-child td {
+          border: none;
+        }
+        &.noCode:befor {
+          width: 64px;
+          height: 40px;
+        }
+      }
+    }
+  }
+  .el-table {
+    &:before {
+      height: 0;
+    }
+    .el-table__header-wrapper {
+      tr,
+      th {
+        background-color: #EBE7ED;
+      }
+      th.is-leaf {
+        border: none;
+      }
+    }
+    tr {
+      background-color: #fafafa;
+      &:last-child td {
+        border: none;
+      }
+    }
+    .cell {
+      text-align: center;
+      color: #6417A6;
+      font-size: 16px;
+      font-weight: 400;
+    }
+    .el-table__body-wrapper .cell {
+      color: #222;
+    }
+    td {
+      border-bottom: 1px solid #E8D6F7;
+    }
+  }
+  .rules {
+    margin: 0 30px;
+    padding-bottom: 50px;
+    h5 {
+      line-height: 56px;
+      height: 56px;
+      color: #222;
+      font-size: 16px;
+    }
+    .word {
+      width: 270px;
+      height: 217px;
+      padding: 30px 25px 0 14px;
+      border: 1px solid #E8D6F7;
+      p {
+        color: #888;
+        font-size: 12px;
+        line-height: 24px;
+        i {
+          color: #222;
+        }
+      }
+    }
+    div.fr {
+      .el-table {
+        border: 1px solid #E8D6F7;
+      }
+    }
+  }
+}

@@ -192,5 +192,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/home/forgotPassword';
+@import '~assets/style/home/forgotpassword';
 </style>

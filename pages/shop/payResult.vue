@@ -25,13 +25,14 @@
         <span>重新下单</span>
       </h5> -->
       <div class="goback">
-        <span>{{seconds}}s后</span>前往首页</div>
+        <span>{{seconds}}s后</span>前往个人中心</div>
     </div>
 
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { home } from '@/lib/v1_sdk/index'
 export default {
@@ -42,13 +43,15 @@ export default {
         orderId: null
       },
       payCompleteData: {},
-      seconds: 5,
+      gidForm: { gids: null },
+      seconds: 3,
       interval: null
     }
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
     choiceCourse() {
-      this.$router.push('/course/pages/categoryd')
+      this.$router.push('/course/chooselesson')
     },
     payComplete() {
       this.payCompleteForm.orderId = persistStore.get('cpyid')
@@ -56,10 +59,9 @@ export default {
         home.payComplete(this.payCompleteForm).then(response => {
           this.payCompleteData = response.data
           this.interval = setInterval(() => {
-            if (this.seconds <= 0) {
-              // this.seconds = 1
-              this.$router.push('/')
+            if (this.seconds < 1) {
               clearInterval(this.interval)
+              this.goLink('tab-first')
             } else {
               this.seconds--
             }
@@ -67,6 +69,12 @@ export default {
           resolve(true)
         })
       })
+    },
+    goLink(item) {
+      this.gidForm.gids = item
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
+      this.$bus.$emit('selectProfileIndex', item)
     }
   },
   mounted() {
@@ -75,10 +83,3 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import '~assets/style/shop/payResult';
-.goback {
-  width: 100px;
-  margin: 80px auto;
-}
-</style>

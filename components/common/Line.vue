@@ -72,7 +72,7 @@ export default {
     addShopCart() {
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingCart')
+          this.$router.push('/shop/shoppingcart')
         })
       })
     },

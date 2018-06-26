@@ -95,7 +95,7 @@ export default {
     selectPayApply(item, index) {
       persistStore.set('pay', index)
       persistStore.set('price', item.totalPresentPrice)
-      this.$router.push('/shop/checkedCourseList')
+      this.$router.push('/shop/checkedcourselist')
     },
     goLink(item) {
       this.$router.push(item)
@@ -104,7 +104,7 @@ export default {
       this.kidForm.kids = item.curriculum_id
       persistStore.set('kid', item.curriculum_id)
       this.setKid(this.kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      this.$router.push('/course/coursedetail')
     },
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000

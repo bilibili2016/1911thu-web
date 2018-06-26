@@ -21,13 +21,13 @@
 </template>
 
 <script>
-import Tab from '@/pages/home/pages/tab.vue'
-import New from '@/pages/home/pages/new.vue'
-import Classic from '@/pages/home/pages/classic.vue'
-import Famous from '@/pages/home/pages/famous.vue'
-import Evaluate from '@/pages/home/pages/evaluate.vue'
-import Info from '@/pages/home/pages/info.vue'
-import Partner from '@/pages/home/pages/partner.vue'
+import Tab from '@/pages/home/components/tab.vue'
+import New from '@/pages/home/components/new.vue'
+import Classic from '@/pages/home/components/classic.vue'
+import Famous from '@/pages/home/components/famous.vue'
+import Evaluate from '@/pages/home/components/evaluate.vue'
+import Info from '@/pages/home/components/info.vue'
+import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 
 import { home } from '~/lib/v1_sdk/index'
@@ -44,8 +44,8 @@ export default {
   },
   data() {
     return {
-      linkone: '/course/pages/newlesson',
-      linktwo: '/course/pages/classify',
+      linkone: '/course/newlesson',
+      linktwo: '/course/classifycourse',
       linkfours: '/news/list',
       linkfive: '/news/detail',
       newData: [],
@@ -90,21 +90,21 @@ export default {
           title: '面授、线下活动',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/activity/faceteach'
+          link: '/other/faceteach'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/pro2.b8c7f5f.png',
           title: '企业课程定制',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/activity/enterpriseCustom'
+          link: '/other/enterprisecustom'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/pro1.68e8047.png',
           title: '学位项目',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/activity/degree'
+          link: '/other/degree'
         }
       ],
       numSrc: require('@/assets/images/home_num.png'),
@@ -182,6 +182,10 @@ export default {
   mounted() {
     // document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     // document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.$bus.$on('reLogin', data => {
+      this.getAll()
+    })
+    this.$bus.$emit('bannerShow', false)
   },
   methods: {
     async getAll() {

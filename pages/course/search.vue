@@ -121,6 +121,7 @@ export default {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.handleSearchs()
+    this.$bus.$emit('bannerShow', false)
   }
 }
 </script>

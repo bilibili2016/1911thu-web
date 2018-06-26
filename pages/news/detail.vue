@@ -11,9 +11,9 @@
     <div class="detail">
       <div class="topbar">
         <span>分享：</span>
-        <img :src="sharewx" alt="">
-        <img :src="sharewb" alt="">
-        <img :src="sharekj" alt="">
+        <img @click="share(newsDetail.title,newsDetail.picture,'wx')" :src="sharewx" alt="">
+        <img @click="share(newsDetail.title,newsDetail.picture,'wb')" :src="sharewb" alt="">
+        <img @click="share(newsDetail.title,newsDetail.picture,'kj')" :src="sharekj" alt="">
       </div>
       <div class="newsContent" v-loading='loading'>
         <h3>{{newsDetail.title}}</h3>
@@ -87,6 +87,40 @@ export default {
           this.loading = false
         })
       })
+    },
+    share(title, picurl, where) {
+      if (where === 'wb') {
+        var sharesinastring =
+          'http://v.t.sina.com.cn/share/share.php?title=' +
+          title +
+          '&url=' +
+          window.location.href +
+          '&content=utf-8&sourceUrl=' +
+          window.location.href +
+          '&pic=' +
+          picurl
+        window.open(
+          sharesinastring,
+          'newwindow',
+          'height=400,width=400,top=100,left=100'
+        )
+      }
+      if (where === 'wx') {
+      }
+      if (where === 'kj') {
+        var shareqqzonestring =
+          'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=' +
+          title +
+          '&url=' +
+          window.location.href +
+          '&pics=' +
+          picurl
+        window.open(
+          shareqqzonestring,
+          'newwindow',
+          'height=400,width=400,top=100,left=100'
+        )
+      }
     }
   },
   mounted() {

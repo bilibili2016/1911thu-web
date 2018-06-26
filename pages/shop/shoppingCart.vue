@@ -200,7 +200,7 @@ export default {
     if (this.isAuthenticated) {
       this.shopCartList()
     }
-
+    this.$bus.$emit('bannerShow', false)
     // this.getNum()
     this.restaurants = this.loadAll()
   },
@@ -240,7 +240,7 @@ export default {
         kids: id
       }
       this.setKid(kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      this.$router.push('/course/coursedetail')
     },
     loadAll() {
       return []
@@ -383,11 +383,11 @@ export default {
     // },
     showCommit() {
       // this.showInfo = true
-      // this.$router.push('/shop/checkedCourse');
+      // this.$router.push('/shop/checkedcourse');
       return new Promise((resolve, reject) => {
         home.addChecked(this.addArray).then(res => {
           if (res.status === 0) {
-            this.$router.push('/shop/affirmOrder')
+            this.$router.push('/shop/affirmorder')
             // this.shopCartList()
           } else {
             this.$message({
@@ -446,7 +446,7 @@ export default {
       this.changeCartNumber()
     },
     addPaySubmit(formName) {
-      this.$router.push('/shop/checkedCourse')
+      this.$router.push('/shop/checkedcourse')
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {

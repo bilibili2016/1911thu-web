@@ -1,5 +1,5 @@
 <template>
-  <div class="goodLesson">
+  <div class="goodLesson new-lesson">
     <div class="topImg">
       <img :src="atopImg" alt="">
     </div>
@@ -75,25 +75,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.card-button {
-  text-align: center;
-  margin: 70px 0 100px;
-  .el-button {
-    width: 174px;
-    height: 56px;
-    line-height: 56px;
-    border-radius: 28px;
-    background-color: #6417a6;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    border: none;
-    transition: all 300ms;
-
-    &:hover {
-      background-color: #8e4fc8;
-    }
-  }
-}
 </style>
 
