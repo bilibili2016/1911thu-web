@@ -394,7 +394,6 @@ export default {
           this.recordData = response.data.usedInvitationCodeList
           var that = this
           this.recordData.forEach(function(v, i, arr) {
-            v.word = v.user_name + ' 通过 ' + v.invitation_code + ' 加入学习'
             v.create_time = that.timestampToTime(v.create_time)
           })
           resolve(true)
