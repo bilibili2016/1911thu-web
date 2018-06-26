@@ -965,7 +965,7 @@ export default {
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {
-  margin: 0 24px 50px 0;
+  margin: 0 30px 50px 0;
   &:nth-child(4n + 4) {
     margin-right: 24px;
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main clearfix bindCourse">
     <div class="binding" style="display: none;">
       <div class="title">
         <h4>绑定课程ID</h4>

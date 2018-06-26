@@ -551,6 +551,7 @@
     color: #fff;
   }
 }
+
 // 半角按钮 右边
 // 修改默认button按钮 颜色
 .common-button-half {
@@ -572,14 +573,14 @@
     color: #fff;
   }
 }
+
 // 半角按钮 左边
 .common-button-half-right {
   .el-button--primary.is-plain {
     background: #fff;
   }
   .el-button {
-    width: 84px;
-    // border-radius: 18px;
+    width: 84px; // border-radius: 18px;
     float: right;
     border-top-left-radius: 18px;
     border-bottom-left-radius: 18px;
@@ -591,6 +592,7 @@
     color: #fff;
   }
 }
+
 // player页
 .playerBox {
   .el-textarea .el-textarea__inner {
@@ -781,7 +783,6 @@
     font-size: 16px;
   }
   .my-home {
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     .el-card__body {
       padding: 50px 40px 0px 40px;
     }
