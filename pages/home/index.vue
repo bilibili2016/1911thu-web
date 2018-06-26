@@ -185,6 +185,7 @@ export default {
     this.$bus.$on('reLogin', data => {
       this.getAll()
     })
+    this.$bus.$emit('bannerShow', false)
   },
   methods: {
     async getAll() {

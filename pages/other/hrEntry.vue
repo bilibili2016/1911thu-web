@@ -286,6 +286,7 @@ export default {
   },
   mounted() {
     this.company.userID = this.token
+    this.$bus.$emit('bannerShow', true)
   }
 }
 </script>

@@ -1,5 +1,13 @@
 <template>
   <div class="headerBox">
+    <div class="recommend" v-if="bannerMsg">
+      <div>
+        <img src="@/assets/images/hr_discounts1.png" alt="">
+        <span>优惠专题入口</span>
+        <img src="@/assets/images/hr_discounts2.png" alt="">
+        <i class="el-icon-close"></i>
+      </div>
+    </div>
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <i></i>
@@ -172,6 +180,7 @@ export default {
     }
     return {
       searchImg: require('@/assets/images/search.png'),
+      bannerMsg: false,
       downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
       start: false,
       iphones: true,
@@ -653,7 +662,12 @@ export default {
       this.close()
     },
     goMycourse(tab) {
-      this.$router.push({ path: '/profile', query: { tab: tab } })
+      this.$router.push({
+        path: '/profile',
+        query: {
+          tab: tab
+        }
+      })
     },
     goLinks() {
       this.$router.push('/shop/shoppingcart')
@@ -826,6 +840,19 @@ export default {
     }
   },
   mounted() {
+    // console.log(window.location.pathname, '这')
+    // if (window.location.pathname === '/other/hrentry') {
+    //   this.bannerMsg = true
+    // }
+    this.$bus.$emit('bannerShow', false)
+    this.$bus.$on('bannerShow', data => {
+      if (data === true) {
+        this.bannerMsg = true
+      } else {
+        this.bannerMsg = false
+      }
+    })
+
     this.getUserInfo()
     this.$bus.$on('loginShow', data => {
       this.loginCardShow()
@@ -843,5 +870,47 @@ export default {
 <style lang="scss" scoped>
 .cli {
   cursor: pointer;
+}
+.recommend {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  background: linear-gradient(to right, #5e00b5, #e91351);
+  div {
+    width: 1100px;
+    margin: 0 auto;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    span {
+      vertical-align: top;
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+      margin: 0 20px;
+    }
+    img {
+      width: 52px;
+      height: 37px;
+    }
+    img:first-child {
+      width: 53px;
+      height: 30px;
+    }
+  }
+  i {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #6417a6;
+  }
 }
 </style>

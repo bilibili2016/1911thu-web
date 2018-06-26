@@ -120,6 +120,7 @@ export default {
   },
   mounted() {
     this.indexData.indexs = this.index
+    this.$bus.$emit('bannerShow', false)
   }
 }
 </script>

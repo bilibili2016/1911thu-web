@@ -200,7 +200,7 @@ export default {
     if (this.isAuthenticated) {
       this.shopCartList()
     }
-
+    this.$bus.$emit('bannerShow', false)
     // this.getNum()
     this.restaurants = this.loadAll()
   },

@@ -235,6 +235,7 @@ export default {
     //  this.data2 = this.data[0];
     this.curriculumList()
     this.childCategoryList()
+    this.$bus.$emit('bannerShow', false)
   }
 }
 </script>
