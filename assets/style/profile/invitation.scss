@@ -29,6 +29,9 @@
           font-weight: 400;
           background-color: transparent;
           font-size: 14px;
+          &:last-child {
+            width: 200px;
+          }
         }
       }
       .tr_body {
@@ -44,9 +47,20 @@
         &:last-child td {
           border: none;
         }
-        &.noCode:befor {
-          width: 64px;
-          height: 40px;
+        &.noCodes {
+          color: #aaa;
+          td {
+            position: relative;
+          }
+          i {
+            background-color: #fff;
+            width: 64px;
+            height: 40px;
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            background: url("~assets/images/loseEfficacy.png") no-repeat;
+          }
         }
       }
     }
@@ -109,6 +123,21 @@
     div.fr {
       .el-table {
         border: 1px solid #E8D6F7;
+        .el-table .hidden-columns {
+          visibility: inherit
+        }
+      }
+      .noCode {
+        width: 530px;
+        height: 167px;
+        margin-top: 50px;
+        text-align: center;
+        background-color: #fff;
+        img {
+          width: 124px;
+          height: 106px;
+          margin-top: 30px;
+        }
       }
     }
   }

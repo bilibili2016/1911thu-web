@@ -160,7 +160,7 @@
           </div>
         </el-tab-pane>
         <!-- 专属邀请码 -->
-        <el-tab-pane name="tab-eighth">
+        <el-tab-pane name="tab-eighth" v-if="codeData.length">
           <span slot="label" class="tabList">
             <i class="icon-code"></i> 专属邀请码</span>
           <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>

@@ -8,10 +8,12 @@
           <th>购买日期</th>
           <th>可用个数</th>
         </tr>
-        <tr v-for="(code,index) in codeData" :key="index" class="tr_body">
+        <tr v-for="(code,index) in codeData" :key="index" :class="number === code.use_code_number ?'noCodes tr_body':'tr_body' ">
           <td>{{code.invitation_code}}</td>
           <td>{{timestampToTime(code.pay_time)}}</td>
-          <td>{{code.use_code_number}}</td>
+          <td>{{code.use_code_number}}
+            <i></i>
+          </td>
         </tr>
       </table>
       <!-- <el-table style="width: 100%">
@@ -43,6 +45,9 @@
           </el-table-column>
           <el-table-column prop="create_time" label="日期" width="230">
           </el-table-column>
+          <div class="noCode" v-if="recordData.length === 0">
+            <img :src="noMsgImg" alt="">
+          </div>
         </el-table>
       </div>
     </div>
@@ -55,7 +60,9 @@ export default {
   props: ['codeData', 'recordData'],
   data() {
     return {
-      noCodes: true
+      noCodes: true,
+      number: '0',
+      noMsgImg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png'
     }
   },
   methods: {
