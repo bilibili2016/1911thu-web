@@ -51,7 +51,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setGid']),
     choiceCourse() {
-      this.$router.push('/course/pages/categoryd')
+      this.$router.push('/course/chooselesson')
     },
     payComplete() {
       this.payCompleteForm.orderId = persistStore.get('cpyid')

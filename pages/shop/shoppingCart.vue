@@ -240,7 +240,7 @@ export default {
         kids: id
       }
       this.setKid(kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      this.$router.push('/course/coursedetail')
     },
     loadAll() {
       return []

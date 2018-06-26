@@ -20,7 +20,7 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <!-- @click="goLink('course/pages/coursedetail')" -->
+            <!-- @click="goLink('course/coursedetail')" -->
             <div class="mask-style" @click="openDetail()">
               <!-- <img :src="jinImg" alt="" class="jin-style"> -->
             </div>
@@ -39,7 +39,7 @@
             <el-row>
               <!-- 名字 -->
               <div class="item">
-                <p class="itemBox-name" @click="goLink('course/pages/coursedetail')">
+                <p class="itemBox-name" @click="goLink('course/coursedetail')">
                   <span>{{card.title}}</span>
                 </p>
                 <p class="itemBox-info">
@@ -94,7 +94,7 @@
                 <img :src="newTag" alt="">
               </div>
               <div class="mask-style">
-                <!-- <div class="mask-style" @click="goLink('course/pages/coursedetail')"> -->
+                <!-- <div class="mask-style" @click="goLink('course/coursedetail')"> -->
                 <!-- <img :src="jinImg" alt="" class="jin-style"> -->
               </div>
               <div class="bgImgs">
@@ -208,6 +208,7 @@
           <el-card class="fl" :body-style="{ padding: '0px' }">
             <img :src="course.picture" class="image">
             <div class="personInfo clearfix" @click="goTeacherInfo(course.teacher_id)">
+              <span>{{course}}</span>
               <img :src="course.head_img" alt="">
               <h5 class="fr">特约讲师：{{course.teacher_name}}</h5>
               <p class="fr">{{course.graduate}}</p>
@@ -222,28 +223,38 @@
               <p>{{course.introduction}}</p>
             </div>
             <!-- {{course.evaluateList}} -->
-            <el-carousel trigger="click" height="120px">
-              <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
-                <!-- {{item}} -->
-                <div class="comment">
-                  <h5>
-                    <span>{{item.nick_name}}的评论</span>
-                    <el-rate disabled v-model="item.score" class="itemBox-rate"></el-rate>
-                  </h5>
-                  <p>{{item.evaluate_content}}</p>
-                </div>
-              </el-carousel-item>
-            </el-carousel>
+            <div v-if="course.evaluateList.length > 0">
+              <el-carousel trigger="click" height="120px">
+                <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
+                  <!-- {{item}} -->
+                  <div class="comment">
+                    <h5>
+                      <span>{{item.nick_name}}的评论</span>
+                      <el-rate disabled v-model="item.score" class="itemBox-rate"></el-rate>
+                    </h5>
+                    <p>{{item.evaluate_content}}</p>
+                  </div>
+                </el-carousel-item>
+              </el-carousel>
+            </div>
+            <div class="no-comment" v-else>
+              <div class="comment-img">
+                <img src="@/assets/images/nocmt.png" alt="">
+              </div>
+              <p class="comment-text">暂无评论，快来抢沙发～</p>
+            </div>
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
-              <div class="fr common-button">
-                <!-- <p class="goStudy">
-                  <span class="fl" @click="courseInfo(course)">立即学习</span>
-                  <span class="fr" ></span>
-                </p> -->
+              <div class="fr common-button-half">
+                <el-button type="primary" plain @click="buyNewCourse(course)">
+                  <img src="@/assets/images/shopcard.png" alt="">
+                </el-button>
+              </div>
+              <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="courseInfo(course)">立即学习</el-button>
               </div>
+
             </div>
           </div>
         </div>
@@ -260,11 +271,18 @@
               <div class="mask"></div>
               <div class="common-button btn-bg">
                 <div v-if="isAuthenticated">
-                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看</el-button>
+                  <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button> -->
+                  <!-- <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看2</el-button> -->
+                  <div class="playBtn-detail" v-if="privileMsg === true">
+                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
+                  </div>
+                  <div class="playBtn-detail" v-if="privileMsg === false">
+                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
+                  </div>
                 </div>
-                <div v-else>
-                  <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看</el-button>
+                <div v-else class="playBtn-detail">
+                  <!-- <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看3</el-button> -->
+                  <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
                 </div>
               </div>
             </div>
@@ -272,6 +290,7 @@
           <div class="particularss fr">
             <div class="currentclum">
               <h4>{{courseList.title}}</h4>
+              <div class="tg">团购价更优，团购电话：010-62701911</div>
               <div class="clum" v-if="courseList.is_study === 1">
                 <span class="fl coursenum">
                   <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
@@ -306,10 +325,10 @@
               <div class="common-button">
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
                 <div v-else>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">立即购买</el-button>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
               </div>
             </div>
@@ -442,8 +461,8 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     openDetail() {
-      window.open(window.location.origin + '/course/pages/coursedetail')
-      // this.$router.push('/course/pages/coursedetail')
+      window.open(window.location.origin + '/course/coursedetail')
+      // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
       let len = this.productsNum
@@ -476,7 +495,7 @@ export default {
     },
     goPlay(item) {
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
-      window.open(window.location.origin + '/course/pages/player')
+      window.open(window.location.origin + '/course/player')
     },
     // 获取详情默认播放小节id
     getdefaultCurriculumCatalogs() {
@@ -493,36 +512,36 @@ export default {
     },
     goLink(item) {
       switch (window.location.pathname) {
-        case '/course/pages/category':
+        case '/course/classifycourse':
           this.$router.push('coursedetail')
           break
-        case '/course/pages/categoryd':
+        case '/course/chooselesson':
           this.$router.push('coursedetail')
           break
-        case '/course/pages/categorys':
+        case '/course/classifycourses':
           this.$router.push('coursedetail')
           break
         case '/':
           this.$router.push(item)
           break
-        case '/course/pages/coursedetail':
+        case '/course/coursedetail':
           // this.$router.push('player')
-          window.open(window.location.origin + '/course/pages/player')
+          window.open(window.location.origin + '/course/player')
           break
-        case '/course/pages/classify':
+        case '/course/classifycourse':
           this.$router.push('coursedetail')
           break
-        case '/course/pages/search':
+        case '/course/search':
           this.$router.push('coursedetail')
           break
-        case '/course/pages/newlesson':
+        case '/course/newlesson':
           this.$router.push('coursedetail')
           break
-        case '/home/pages/teacher':
-          this.$router.push('/course/pages/coursedetail')
+        case '/home/components/teacher':
+          this.$router.push('/course/coursedetail')
           break
         case '/profile':
-          this.$router.push('/course/pages/coursedetail')
+          this.$router.push('/course/coursedetail')
           break
         default:
           break
@@ -539,6 +558,22 @@ export default {
         if (i === index) {
           this.$set(this.data[i], 'is_checked', true)
         }
+      }
+    },
+    buyNewCourse(item) {
+      console.log(item, '这是item')
+      if (item.is_cart === '0') {
+        this.curriculumcartids.cartid = item.id
+        return new Promise((resolve, reject) => {
+          home.addShopCart(this.curriculumcartids).then(response => {
+            this.$router.push('/shop/shoppingCart')
+          })
+        })
+      } else {
+        this.$alert('商品已在购物车内', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {}
+        })
       }
     },
     getMore(item) {
@@ -558,7 +593,7 @@ export default {
       this.kidForm.kids = item.id
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
-      // this.$router.push('/course/pages/coursedetail')
+      // this.$router.push('/course/coursedetail')
       this.openDetail()
     },
     selectCid(item, index) {
@@ -591,7 +626,7 @@ export default {
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
       this.setTid(this.tidForm)
-      this.getMore('/home/pages/teacher')
+      this.getMore('/home/components/teacher')
     },
     addShopCart() {
       return new Promise((resolve, reject) => {
@@ -607,7 +642,7 @@ export default {
     }
   },
   mounted() {
-    if (window.location.pathname === '/course/pages/coursedetail') {
+    if (window.location.pathname === '/course/coursedetail') {
       // this.getdefaultCurriculumCatalogs()
     }
   }
@@ -1180,9 +1215,31 @@ export default {
         background: rgba(100, 23, 166, 1);
         opacity: 0.5;
       }
+      .playBtn-detail {
+        width: 76px;
+        height: 76px;
+        margin-left: 30px;
+        margin-top: -10px;
+      }
     }
     .particulars {
       width: 660px;
+      .no-comment {
+        height: 120px;
+        background-color: rgba(250, 250, 250, 1);
+        overflow: hidden;
+        .comment-img {
+          width: 48px;
+          height: 44px;
+          margin: 22px auto 13px;
+        }
+        .comment-text {
+          font-size: 14px;
+          color: rgba(136, 136, 136, 1);
+          width: 159px;
+          margin: 0 auto;
+        }
+      }
       .currentclum {
         padding-left: 40px;
         margin-right: 40px;
@@ -1306,6 +1363,17 @@ export default {
           margin-top: 10px;
         }
       }
+      .common-button-half {
+        img {
+          width: 20px !important;
+          height: 20px !important;
+        }
+        .el-button {
+          padding: 9px 16px;
+          border: 1px #6417a6 solid;
+          border-left: none;
+        }
+      }
       .date {
         color: rgba(136, 136, 136, 1);
         font-size: 14px;
@@ -1331,12 +1399,20 @@ export default {
         color: rgba(34, 34, 34, 1);
         line-height: 0px;
         cursor: pointer;
+        .tg {
+          color: #ff5f5f;
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(255, 95, 95, 1);
+          padding-bottom: 20px;
+          padding-top: 10px;
+        }
         h4 {
           font-size: 18px;
           color: #222;
           height: 54px;
           line-height: 54px;
-          margin-bottom: 20px;
+          margin-bottom: 0px;
         }
         h4:hover {
           color: #8f4acb;

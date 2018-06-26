@@ -21,13 +21,13 @@
 </template>
 
 <script>
-import Tab from '@/pages/home/pages/tab.vue'
-import New from '@/pages/home/pages/new.vue'
-import Classic from '@/pages/home/pages/classic.vue'
-import Famous from '@/pages/home/pages/famous.vue'
-import Evaluate from '@/pages/home/pages/evaluate.vue'
-import Info from '@/pages/home/pages/info.vue'
-import Partner from '@/pages/home/pages/partner.vue'
+import Tab from '@/pages/home/components/tab.vue'
+import New from '@/pages/home/components/new.vue'
+import Classic from '@/pages/home/components/classic.vue'
+import Famous from '@/pages/home/components/famous.vue'
+import Evaluate from '@/pages/home/components/evaluate.vue'
+import Info from '@/pages/home/components/info.vue'
+import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 
 import { home } from '~/lib/v1_sdk/index'
@@ -44,8 +44,8 @@ export default {
   },
   data() {
     return {
-      linkone: '/course/pages/newlesson',
-      linktwo: '/course/pages/classify',
+      linkone: '/course/newlesson',
+      linktwo: '/course/classifycourse',
       linkfours: '/news/list',
       linkfive: '/news/detail',
       newData: [],
@@ -182,6 +182,9 @@ export default {
   mounted() {
     // document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     // document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.$bus.$on('reLogin', data => {
+      this.getAll()
+    })
   },
   methods: {
     async getAll() {

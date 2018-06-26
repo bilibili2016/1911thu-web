@@ -17,7 +17,7 @@
               <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="takeupMsg">
                 <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
                 <div class="fl">
-                  <h4 @click="goCourseInfo(course,index)">{{course.title}}</h4>
+                  <h4 @click="goCourseInfo(course,index)">{{course.name}}</h4>
                   <h6>{{course.curriculum_time}}学时</h6>
                   <p>讲师：{{course.teacher_name}}</p>
                 </div>
@@ -156,7 +156,7 @@ export default {
       this.kidForm.kids = item.curriculum_id
       persistStore.set('kid', item.curriculum_id)
       this.setKid(this.kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      this.$router.push('/course/coursedetail')
     },
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000)
@@ -176,6 +176,7 @@ export default {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
+          console.log(response.data.data.orderCurriculumLists, '课程')
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url

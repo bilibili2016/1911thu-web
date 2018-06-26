@@ -551,7 +551,46 @@
     color: #fff;
   }
 }
-
+// 半角按钮 右边
+// 修改默认button按钮 颜色
+.common-button-half {
+  .el-button--primary.is-plain {
+    background: #fff;
+  }
+  .el-button {
+    width: 56px;
+    float: right;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    background-color: #9431e9 !important;
+    border-left: none;
+  }
+  .el-button--primary.is-plain:hover {
+    transition: all 300ms;
+    background: #8f4acb;
+    border-color: #8f4acb;
+    color: #fff;
+  }
+}
+// 半角按钮 左边
+.common-button-half-right {
+  .el-button--primary.is-plain {
+    background: #fff;
+  }
+  .el-button {
+    width: 84px;
+    // border-radius: 18px;
+    float: right;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+  }
+  .el-button--primary.is-plain:hover {
+    transition: all 300ms;
+    background: #8f4acb;
+    border-color: #8f4acb;
+    color: #fff;
+  }
+}
 // player页
 .playerBox {
   .el-textarea .el-textarea__inner {

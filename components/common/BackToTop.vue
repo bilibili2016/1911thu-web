@@ -16,6 +16,19 @@
       </div>
     </transition>
     <transition :name="transitionName">
+      <!-- <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=1060962187"> -->
+      <a href="http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes">
+        <div class="back-to-ceiling hasColor customStyleFour" v-show="visible">
+
+          <span></span>
+          <div class="telShow">
+            <p>点击咨询在线qq</p>
+
+          </div>
+        </div>
+      </a>
+    </transition>
+    <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
         <span></span>
         <div class="telShow">
@@ -23,6 +36,7 @@
         </div>
       </div>
     </transition>
+
     <transition :name="transitionName" v-if="data">
 
       <div class="back-to-ceiling customStyleThree" v-show="visible" @click="checkCourse">
@@ -41,7 +55,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import CustomUnlogged from '@/pages/course/pages/unlogged.vue'
+import CustomUnlogged from '@/pages/course/unlogged.vue'
 /* eslint-disable */
 export default {
   components: {
@@ -75,6 +89,7 @@ export default {
       interval: null,
       ceilSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop11.png',
       wxSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop22.png',
+      qqSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop22.png',
       topSrc: require('@/assets/images/home_backtop03.png')
     }
   },
@@ -100,7 +115,7 @@ export default {
     },
     checkCourse() {
       if (this.isAuthenticated) {
-        this.goLink('/course/pages/categoryd')
+        this.goLink('/course/chooselesson')
         this.showNotLogin = false
       } else {
         this.showNotLogin = true
