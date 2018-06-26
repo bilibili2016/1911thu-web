@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fourth'"></v-banner>
+    <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fifth'"></v-banner>
     <div class="center-tab center profile" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="empty">
         <!-- 我的信息 -->
@@ -61,8 +61,58 @@
           </el-card>
 
         </el-tab-pane>
+        <!-- 我的订单 -->
+        <el-tab-pane class="my-course my-order" name="tab-third">
+          <span slot="label" class="tabList">
+            <i class="icon-order"></i> 我的订单</span>
+          <el-card>
+            <el-tabs v-model="activeOrder">
+              <el-tab-pane label="全部" name="orderFirst">
+                <v-order v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" :config="configOne" @handleUpdate="getUpdateMsg" v-loading="allOrderLoad"></v-order>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，没有更多的订单了~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="未完成" name="orderSecond">
+                <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-order>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，没有更多的订单了~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="已完成" name="orderThird">
+                <v-order v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" v-loading="readyOrderLoad"></v-order>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，没有更多的订单了~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane label="已失效" name="orderFour">
+                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" v-loading="invalidOrderLoad"></v-order>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，没有更多的订单了~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+          </el-card>
+
+        </el-tab-pane>
         <!-- 我的消息 -->
-        <el-tab-pane class="my-info" name="tab-third">
+        <el-tab-pane class="my-info" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-message"></i> 我的消息</span>
           <el-card class="card-style">
@@ -80,13 +130,13 @@
           </el-card>
         </el-tab-pane>
         <!-- 个人设置 -->
-        <el-tab-pane name="tab-fourth">
+        <el-tab-pane name="tab-fifth">
           <span slot="label" class="tabList">
             <i class="icon-set"></i> 个人设置</span>
           <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
-        <el-tab-pane name="tab-fifth">
+        <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
             <i class="icon-bind"></i> 绑定课程ID</span>
           <v-bind @isShowMsg="isShowMsg"></v-bind>
@@ -97,6 +147,30 @@
             </div>
           </div>
         </el-tab-pane>
+        <!-- 绑定企业Id -->
+        <el-tab-pane name="tab-seventh">
+          <span slot="label" class="tabList">
+            <i class="icon-company"></i> 绑定企业ID</span>
+          <v-companyId :cpnData="companyData"></v-companyId>
+          <div class="content">
+            <div class="noCourse" v-if="isShowNoCourse">
+              <img :src="noMsgImg" alt="">
+              <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
+            </div>
+          </div>
+        </el-tab-pane>
+        <!-- 专属邀请码 -->
+        <el-tab-pane name="tab-eighth">
+          <span slot="label" class="tabList">
+            <i class="icon-code"></i> 专属邀请码</span>
+          <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>
+          <!-- <div class="content">
+            <div class="noCourse">
+              <img :src="noMsgImg" alt="">
+              <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
+            </div>
+          </div> -->
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -105,18 +179,25 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import Banner from '@/components/common/Banner.vue'
-import PersonalSet from '@/pages/profile/components/personalSet.vue'
-import Binding from '@/pages/profile/components/bindId'
+import PersonalSet from '@/pages/profile/components/personalset.vue'
+import Binding from '@/pages/profile/components/bindid'
 import Info from '@/pages/profile/components/info'
+import Order from '@/pages/profile/pages/order'
+import CompanyId from '@/pages/profile/pages/companyid'
+import Invitation from '@/pages/profile/pages/invitation'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {
     'v-card': CustomCard,
     'v-person': PersonalSet,
     'v-bind': Binding,
     'v-info': Info,
-    'v-banner': Banner
+    'v-banner': Banner,
+    'v-order': Order,
+    'v-companyId': CompanyId,
+    'v-invitation': Invitation
   },
   data() {
     return {
@@ -126,8 +207,9 @@ export default {
       avator: 'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png',
       noMsgImg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
       tabPosition: 'left',
-      activeTab: 'tab-first',
+      activeTab: 'tab-seventh',
       activeNames: 'first',
+      activeOrder: 'orderFirst',
       bconfig: {
         banner_type: 'profile'
       },
@@ -152,20 +234,32 @@ export default {
       studyData: [],
       newDataing: [],
       newDataReady: [],
+      allOrderData: [],
+      unfinishedOrderData: [],
+      readyOrderData: [],
+      invalidOrderData: [],
+      codeData: [],
+      recordData: [],
+      companyData: null,
       collectionForm: {
         pages: 1,
         limits: 12
       },
+      codeListForm: {
+        pages: 1,
+        limits: null
+      },
+      orderForm: {
+        pages: 1,
+        limits: null,
+        payStatus: null
+      },
       collectionData: [],
-      isUpdate: false
-    }
-  },
-
-  watch: {
-    activeTab(val) {
-      if (val == 'tab-sixth') {
-        this.goShop()
-      }
+      isUpdate: false,
+      allOrderLoad: true,
+      unfinishedOrderLoad: true,
+      readyOrderLoad: true,
+      invalidOrderLoad: true
     }
   },
   computed: {
@@ -173,6 +267,13 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
+    getUpdateMsg(msg) {
+      if (msg === true) {
+        this.getAllOrderData()
+        this.getUnfinishedOrderData()
+        this.getInvalidOrderData()
+      }
+    },
     isNoMyMsg(isShow) {
       this.noMyMsg = isShow
     },
@@ -186,7 +287,7 @@ export default {
       this.$router.push(item)
     },
     goShop() {
-      this.goLink('/shop/checkedCourse')
+      this.goLink('/shop/checkedcourse')
     },
     empty() {},
 
@@ -237,7 +338,81 @@ export default {
           resolve(true)
         })
       })
-      this.goLink('/course/chooselesson')
+      this.goLink('/course/pages/categoryd')
+    },
+    getAllOrderData() {
+      this.orderForm.payStatus = 0
+      return new Promise((resolve, reject) => {
+        home.getAllOrderData(this.orderForm).then(response => {
+          this.allOrderData = response.data.orderList
+          this.allOrderLoad = false
+          resolve(true)
+        })
+      })
+    },
+    getUnfinishedOrderData() {
+      this.orderForm.payStatus = 1
+      return new Promise((resolve, reject) => {
+        home.getAllOrderData(this.orderForm).then(response => {
+          this.unfinishedOrderData = response.data.orderList
+          this.unfinishedOrderLoad = false
+          resolve(true)
+        })
+      })
+    },
+    getReadyOrderData() {
+      this.orderForm.payStatus = 2
+      return new Promise((resolve, reject) => {
+        home.getAllOrderData(this.orderForm).then(response => {
+          this.readyOrderData = response.data.orderList
+          this.readyOrderLoad = false
+          resolve(true)
+        })
+      })
+    },
+    getInvalidOrderData() {
+      this.orderForm.payStatus = 3
+      return new Promise((resolve, reject) => {
+        home.getAllOrderData(this.orderForm).then(response => {
+          this.invalidOrderData = response.data.orderList
+          this.invalidOrderLoad = false
+          resolve(true)
+        })
+      })
+    },
+    getCodeList() {
+      return new Promise((resolve, reject) => {
+        home.getCodeList(this.codeListForm).then(response => {
+          this.codeData = response.data.orderInvitationCodeList
+          resolve(true)
+        })
+      })
+    },
+    getRecordList() {
+      return new Promise((resolve, reject) => {
+        home.getRecordList(this.codeListForm).then(response => {
+          this.recordData = response.data.usedInvitationCodeList
+          var that = this
+          this.recordData.forEach(function(v, i, arr) {
+            v.word = v.user_name + ' 通过 ' + v.invitation_code + ' 加入学习'
+            v.create_time = that.timestampToTime(v.create_time)
+          })
+          resolve(true)
+        })
+      })
+    },
+    timestampToTime(timestamp) {
+      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let Y = date.getFullYear() + '-'
+      let M =
+        (date.getMonth() + 1 < 10
+          ? '0' + (date.getMonth() + 1)
+          : date.getMonth() + 1) + '-'
+      let D = date.getDate() + ' '
+      let h = date.getHours() + ':'
+      let m = date.getMinutes() + ':'
+      let s = date.getSeconds()
+      return Y + M + D + h + m + s
     }
   },
   mounted() {
@@ -246,8 +421,14 @@ export default {
       this.studyCurriculumList()
       this.readyStudyCurriculumList()
       this.collectionList()
+      this.getAllOrderData()
+      this.getUnfinishedOrderData()
+      this.getReadyOrderData()
+      this.getInvalidOrderData()
+      this.getCodeList()
+      this.getRecordList()
     }
-
+    this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
@@ -310,6 +491,10 @@ export default {
         background: url('~assets/images/icon_course1.png') no-repeat center;
         background-size: contain;
       }
+      &.icon-order {
+        background: url('~assets/images/icon_order1.png') no-repeat center;
+        background-size: contain;
+      }
       &.icon-message {
         background: url('~assets/images/icon_message1.png') no-repeat center;
         background-size: contain;
@@ -326,6 +511,14 @@ export default {
         background: url('~assets/images/icon_choose1.png') no-repeat center;
         background-size: contain;
       }
+      &.icon-code {
+        background: url('~assets/images/icon_code1.png') no-repeat center;
+        background-size: contain;
+      }
+      &.icon-company {
+        background: url('~assets/images/icon_company1.png') no-repeat center;
+        background-size: contain;
+      }
     }
   }
   .el-tabs__item.is-active i {
@@ -335,6 +528,10 @@ export default {
     }
     &.icon-course {
       background: url('~assets/images/icon_course2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-order {
+      background: url('~assets/images/icon_order2.png') no-repeat center;
       background-size: contain;
     }
     &.icon-message {
@@ -351,6 +548,14 @@ export default {
     }
     &.icon-choose {
       background: url('~assets/images/icon_choose2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-code {
+      background: url('~assets/images/icon_code2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-company {
+      background: url('~assets/images/icon_company2.png') no-repeat center;
       background-size: contain;
     }
   }

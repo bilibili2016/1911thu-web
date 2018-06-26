@@ -1,6 +1,3 @@
-/**
- * 生产环境配置
- */
 const config = require('./base.conf')
 let env = process.env
 const pkg = require('../package.json')
@@ -48,3 +45,4 @@ config.sentry = {
   })
 
 module.exports = config
+

@@ -199,7 +199,7 @@ export default {
       }
     },
     goLink() {
-      this.$router.push('/shop/shoppingCart')
+      this.$router.push('/shop/shoppingcart')
     },
     commitOrder() {
       this.company.id
@@ -241,7 +241,6 @@ export default {
               this.company = res.data.companyInfo
               this.person = false
               this.flag = false
-
             }
             this.loadGoods = false
           } else {
@@ -381,6 +380,3 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import '~assets/style/shop/affirmOrder';
-</style>

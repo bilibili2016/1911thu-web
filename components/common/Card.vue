@@ -312,7 +312,7 @@
               </h4>
               <div class="common-button">
                 <div>
-                  <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
+                  <el-button type="primary" plain @click="goPlay(courseList)">继续学习5</el-button>
                 </div>
                 <div class="lineProgress">
                   <h5>已学习{{courseList.percent}}%</h5>
@@ -324,11 +324,19 @@
               <p>{{courseList.introduction}}</p>
               <div class="common-button">
                 <div v-if="isAuthenticated">
+<<<<<<< HEAD
+                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习6</el-button>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车7</el-button>
+                </div>
+                <div v-else>
+                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车8</el-button>
+=======
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
                   <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
                 <div v-else>
                   <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+>>>>>>> 2c801ea27b6a9fc733b67d75bd123b7895f0994b
                 </div>
               </div>
             </div>
@@ -551,7 +559,7 @@ export default {
       this.curriculumcartids.cartid = this.kid
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingCart')
+          this.$router.push('/shop/shoppingcart')
         })
       })
       for (var i = 0; i < this.data.length; i++) {
@@ -561,12 +569,12 @@ export default {
       }
     },
     buyNewCourse(item) {
-      console.log(item, '这是item')
+    
       if (item.is_cart === '0') {
         this.curriculumcartids.cartid = item.id
         return new Promise((resolve, reject) => {
           home.addShopCart(this.curriculumcartids).then(response => {
-            this.$router.push('/shop/shoppingCart')
+            this.$router.push('/shop/shoppingcart')
           })
         })
       } else {
@@ -960,6 +968,7 @@ export default {
     border-radius: 16px;
   }
 }
+
 #pane-tab-first .card-category .card-list,
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,

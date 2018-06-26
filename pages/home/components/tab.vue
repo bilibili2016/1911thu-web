@@ -18,7 +18,6 @@
 import Card from '@/components/common/Card.vue'
 import Carousel from '@/components/common/Carousel.vue'
 import Tab from '@/components/common/Tab.vue'
-// import { fragmentImg } from '@/assets/js/fragment'
 export default {
   props: ['classify', 'courses', 'tabmsg', 'items', 'dingData', 'config'],
   components: {
@@ -34,9 +33,8 @@ export default {
         line: 5,
         column: 12,
         height: 553,
-        // img: require('~/static/2.jpg'),
         animeTime: 3000,
-        img: require('@/assets/images/123.png') //图片路径
+        img: require('@/assets/images/123.png')
       }
     }
   },

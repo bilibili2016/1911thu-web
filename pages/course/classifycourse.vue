@@ -44,7 +44,7 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import CustomHots from '@/components/common/Hot.vue'
-import SearchNothing from '@/pages/home/components/searchNothing.vue'
+import SearchNothing from '@/components/common/SearchNothing.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { home } from '~/lib/v1_sdk/index'

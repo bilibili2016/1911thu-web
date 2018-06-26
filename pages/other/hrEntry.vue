@@ -286,7 +286,7 @@ export default {
   },
   mounted() {
     this.company.userID = this.token
-    // document.getElementsByTagName('body')[0].style.paddingTop = '40px'
+    this.$bus.$emit('bannerShow', true)
   }
 }
 </script>
