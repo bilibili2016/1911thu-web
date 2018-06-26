@@ -129,10 +129,56 @@
           visibility: inherit
         }
       }
-      .noCode {
+      .tables {
         width: 530px;
-        height: 167px;
-        margin-top: 50px;
+        height: 217px;
+        position: relative;
+        overflow-y: auto;
+        border: 1px solid #E8D6F7;
+      }
+      .recordTable {
+        width: 100%;
+        border-spacing: 0;
+        tr {
+          font-size: 0;
+        }
+        .tr_header {
+          height: 60px;
+          line-height: 60px;
+          background-color: #EBE7ED;
+          text-align: center;
+          color: #6417A6;
+          font-size: 16px;
+          th {
+            font-weight: 400;
+            background-color: transparent;
+            font-size: 14px;
+            &:last-child {
+              width: 200px;
+            }
+          }
+        }
+        .tr_body {
+          height: 52px;
+          line-height: 52px;
+          background-color: #fafafa;
+          text-align: center;
+          color: #222;
+          font-size: 14px;
+          td {
+            font-size: 14px;
+            border-bottom: 1px solid #E8D6F7;
+            i {
+              color: #6417a6;
+            }
+          }
+          &:last-child td {
+            border: none;
+          }
+        }
+      }
+      .noCode {
+        width: 528px;
         text-align: center;
         background-color: #fff;
         img {

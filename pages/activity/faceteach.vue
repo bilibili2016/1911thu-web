@@ -57,8 +57,7 @@ export default {
 <style scoped lang="scss">
 .banner {
   overflow: hidden;
-  // height: 2000px;
-  height: 1200px;
+  height: 1063px;
   .banner-img {
     width: 100%;
     height: 360px;
@@ -98,10 +97,9 @@ export default {
   }
   .centerImg {
     width: 754px;
-    height: 760px;
-
+    height: 700px;
     margin: 0 auto;
-    padding: 140px 0px;
+    padding: 70px 0px 0;
     position: relative;
     .fz-one {
       font-size: 24px;
