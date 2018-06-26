@@ -1,74 +1,76 @@
 <template>
-  <div class="checkedCourse-wepay">
-    <div class="banner">
-      <div>支付中心</div>
-    </div>
-    <div class="main">
-      <div>
+  <div class="wepay">
+    <div class="checkedCourse-wepay">
+      <div class="banner">
+        <div>支付中心</div>
+      </div>
+      <div class="main">
+        <div>
 
-        <div class="company">
-          <div class="title clearfix">
-            <span class="fl">订单：{{orderDetail.order_sn}}</span>
-            <span class="fr" @click="takeUp" v-if="takeupMsg === true">收起</span>
-            <span class="fr" @click="takeUp" v-if="takeupMsg === false">展开</span>
-          </div>
-          <div class="content">
-            <div class="course">
-              <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="takeupMsg">
-                <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
-                <div class="fl">
-                  <h4 @click="goCourseInfo(course,index)">{{course.name}}</h4>
-                  <h6>{{course.curriculum_time}}学时</h6>
-                  <p>讲师：{{course.teacher_name}}</p>
-                </div>
-                <div class="coursePrice">
-                  ￥{{course.price}}
-                </div>
-                <div class="courseNumber">
-                  {{course.pay_number}}
-                </div>
-              </div>
-              <div class="more">
-                支付方式
-              </div>
-              <div class="method">
-                <div class="center">
-                  <div class="zfb fl" @click="selectWx" :class="{borderColor: wxMsg}">
-                    <img src="@/assets/images/wxp.png" alt="">
-                    <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="wxMsg">
+          <div class="company">
+            <div class="title clearfix">
+              <span class="fl">订单：{{orderDetail.order_sn}}</span>
+              <span class="fr" @click="takeUp" v-if="takeupMsg === true">收起</span>
+              <span class="fr" @click="takeUp" v-if="takeupMsg === false">展开</span>
+            </div>
+            <div class="content">
+              <div class="course">
+                <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="takeupMsg">
+                  <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
+                  <div class="fl">
+                    <h4 @click="goCourseInfo(course,index)">{{course.name}}</h4>
+                    <h6>{{course.curriculum_time}}学时</h6>
+                    <p>讲师：{{course.teacher_name}}</p>
                   </div>
-                  <div class="wx fr" @click="selectZfb" :class="{borderColor: zfbMsg}">
-                    <img src="@/assets/images/zfb.png" alt="">
-                    <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="zfbMsg">
+                  <div class="coursePrice">
+                    ￥{{course.price}}
+                  </div>
+                  <div class="courseNumber">
+                    {{course.pay_number}}
                   </div>
                 </div>
-              </div>
-              <div class="text">
-                请在24小时以内支付完成，如未完成此订单将自动关闭，需重新购买！
-                <span class="fr">应付金额：¥{{orderDetail.order_amount}}</span>
-              </div>
-              <div class="fr pay">
-                <el-button @click="addPaySubmit">立即支付</el-button>
-              </div>
-              <div class="fk fr">
-                我有疑问，需要反馈?
+                <div class="more">
+                  支付方式
+                </div>
+                <div class="method">
+                  <div class="center">
+                    <div class="zfb fl" @click="selectWx" :class="{borderColor: wxMsg}">
+                      <img src="@/assets/images/wxp.png" alt="">
+                      <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="wxMsg">
+                    </div>
+                    <div class="wx fr" @click="selectZfb" :class="{borderColor: zfbMsg}">
+                      <img src="@/assets/images/zfb.png" alt="">
+                      <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="zfbMsg">
+                    </div>
+                  </div>
+                </div>
+                <div class="text">
+                  请在24小时以内支付完成，如未完成此订单将自动关闭，需重新购买！
+                  <span class="fr">应付金额：¥{{orderDetail.order_amount}}</span>
+                </div>
+                <div class="fr pay">
+                  <el-button @click="addPaySubmit">立即支付</el-button>
+                </div>
+                <div class="fk fr">
+                  我有疑问，需要反馈?
+                </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
-    </div>
-    <div class="unlogged" @click="unloggedClick" v-if="wxMask">
-      <div class="unloginner" style="width:374px;height:420px;">
-        <div class="texts">扫一扫付款(元)
-          <span>￥{{orderDetail.order_amount}}</span>
-        </div>
-        <div class="update">
-          <qrcode :value="val" :options="{ size: 220 }" class="qrcode"></qrcode>
-        </div>
-        <div class="rechoise" @click="rechoise">
-          <img :src="updateImg" alt=""> 重新选择支付方式
+      <div class="unlogged" @click="unloggedClick" v-if="wxMask">
+        <div class="unloginner" style="width:374px;height:420px;">
+          <div class="texts">扫一扫付款(元)
+            <span>￥{{orderDetail.order_amount}}</span>
+          </div>
+          <div class="update">
+            <qrcode :value="val" :options="{ size: 220 }" class="qrcode"></qrcode>
+          </div>
+          <div class="rechoise" @click="rechoise">
+            <img :src="updateImg" alt=""> 重新选择支付方式
+          </div>
         </div>
       </div>
     </div>
@@ -147,7 +149,7 @@ export default {
     selectPayApply(item, index) {
       persistStore.set('pay', index)
       persistStore.set('price', item.totalPresentPrice)
-      this.$router.push('/shop/checkedCourseList')
+      this.$router.push('/shop/checkedcourselist')
     },
     goLink(item) {
       this.$router.push(item)
@@ -156,7 +158,7 @@ export default {
       this.kidForm.kids = item.curriculum_id
       persistStore.set('kid', item.curriculum_id)
       this.setKid(this.kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      this.$router.push('/course/coursedetail')
     },
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000)
@@ -176,7 +178,7 @@ export default {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
-          console.log(response.data.data.orderCurriculumLists, '课程')
+          // console.log(response.data.data.orderCurriculumLists, '课程')
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url
@@ -203,7 +205,7 @@ export default {
           home.payResult(this.payListForm).then(response => {
             if (response.status === 0) {
               this.wxMask = false
-              this.$router.push('/shop/payResult')
+              this.$router.push('/shop/payresult')
               clearInterval(this.interval)
             }
           })
@@ -224,60 +226,3 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.noCourse {
-  width: 100%;
-  height: 600px;
-  text-align: center;
-}
-.noCourse img {
-  width: 316px;
-  height: 274px;
-  margin-top: 35px;
-}
-.profile .content .noCourse h4 {
-  height: 70px;
-  line-height: 70px;
-  text-align: center;
-  color: #999;
-  font-size: 20px;
-}
-.borderColor {
-  border: 1px red solid !important;
-}
-.texts {
-  width: 200px;
-  margin: 60px auto 0px;
-  font-size: 18px;
-  font-family: MicrosoftYaHei;
-  color: rgba(34, 34, 34, 1);
-  line-height: 25px;
-  margin-bottom: 20px;
-  span {
-    color: #ff5ff5;
-    font-size: 19px;
-  }
-}
-.update {
-  font-size: 16px;
-  font-family: MicrosoftYaHei;
-  color: rgba(115, 46, 175, 1);
-  line-height: 25px;
-  margin: 20px auto;
-  width: 220px;
-  margin: 0 auto;
-}
-.rechoise {
-  width: 155px;
-  height: 17px;
-  font-size: 16px;
-  font-family: MicrosoftYaHei;
-  color: rgba(115, 46, 175, 1);
-  line-height: 25px;
-  margin: 20px auto;
-  img {
-    width: 16px;
-    height: 14px;
-  }
-}
-</style>

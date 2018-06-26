@@ -32,10 +32,6 @@
           <el-tab-pane label="最新" name="first"></el-tab-pane>
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
-        <!-- <div class="pages"><el-pagination layout=" pager, prev, next" :total="1"></el-pagination></div> -->
-        <!-- <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch"> -->
-        <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch"> -->
-        <!-- </el-switch> -->
       </div>
       <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>
@@ -45,7 +41,6 @@
       </div>
 
     </div>
-    <!-- <v-filter></v-filter> -->
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
@@ -54,15 +49,13 @@
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
-import CustomHot2 from '@/components/common/Hot2.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
-import SearchNothing from '@/pages/home/pages/searchNothing.vue'
+import SearchNothing from '@/components/common/SearchNothing.vue'
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-filter': CustomHot2,
     'v-page': CustomPagination,
     'v-nothing': SearchNothing
   },
@@ -184,7 +177,7 @@ export default {
               this.data2 = this.data[5]
               break
             default:
-              // this.$router.push("/course/pages/search");
+              // this.$router.push("/course/search");
               break
           }
           resolve(true)
@@ -225,5 +218,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
+// 因兼容问题暂时组件引入
 @import '~assets/style/course/category';
 </style>

@@ -55,8 +55,7 @@ const config = {
     link: [
       // { rel: 'icon', type: 'image/x-icon', href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png' }
       // 需要直接加载的 CSS
-    ],
-    script: []
+    ]
   },
   // loading: { color: '#3B8070' },
   loading: false,
