@@ -568,21 +568,12 @@ export default {
         }
       }
     },
-    buyNewCourse(item) {
-<<<<<<< HEAD
-      console.log(item, '这是item')
-=======
-      // console.log(item, '这是item')
->>>>>>> 2c801ea27b6a9fc733b67d75bd123b7895f0994b
+    buyNewCourse(item){		
       if (item.is_cart === '0') {
         this.curriculumcartids.cartid = item.id
         return new Promise((resolve, reject) => {
           home.addShopCart(this.curriculumcartids).then(response => {
-<<<<<<< HEAD
-            this.$router.push('/shop/shoppingCart')
-=======
             this.$router.push('/shop/shoppingcart')
->>>>>>> 2c801ea27b6a9fc733b67d75bd123b7895f0994b
           })
         })
       } else {
