@@ -31,7 +31,7 @@
           <h5>{{li.title}}</h5>
           <h6>{{li.number}}</h6>
         </li>
-        <li v-for="(item,index) in project" :key="index">
+        <li v-for="(item,index) in project" :key="index" @click="handleLink(item)">
           <img :src="item.src" alt="">
           <h4>{{item.title}}
             <span class="fr">了解更多
@@ -119,7 +119,8 @@ export default {
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_2.png',
           title: '系统专题性课程（党政系统学院）',
-          number: '（14个专题，110余门课程）'
+          number: '（14个专题，110余门课程）',
+          link: '/other/enterprisecustom'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_3.png',
@@ -145,15 +146,18 @@ export default {
       project: [
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_7.png',
-          title: '企业课程定制'
+          title: '企业课程定制',
+          link: '/other/enterprisecustom'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_8.png',
-          title: '学位项目'
+          title: '学位项目',
+          link: '/other/degree'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_9.png',
-          title: '面授及线下活动'
+          title: '面授及线下活动',
+          link: '/other/faceteach'
         }
       ],
       buyList: [
@@ -206,6 +210,9 @@ export default {
     ...mapState('auth', ['token'])
   },
   methods: {
+    handleLink(item) {
+      window.open(window.location.origin + item.link)
+    },
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {

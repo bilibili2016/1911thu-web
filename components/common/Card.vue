@@ -315,7 +315,7 @@
                   <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                 </div>
                 <div class="lineProgress">
-                  <h5>已学习{{courseList.percent}}%</h5>
+                  <h5>已完成{{courseList.percent}}%</h5>
                   <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
                 </div>
               </div>
@@ -325,7 +325,7 @@
               <div class="common-button">
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+                  <el-button type="primary" plain @click="goBuy(true)" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
                 <div v-else>
                   <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
@@ -483,9 +483,13 @@ export default {
         pn: len
       })
     },
-    goBuy(item, index) {
+    goBuy(detail) {
       if (this.isAuthenticated) {
-        this.addShopCarts()
+        if(detail === true){
+          this.detailAddShopCarts()
+        }else {
+          this.addShopCarts()
+        }
       } else {
         this.$bus.$emit('loginShow', true)
       }
@@ -552,6 +556,23 @@ export default {
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push('/shop/shoppingcart')
+        })
+      })
+      for (var i = 0; i < this.data.length; i++) {
+        if (i === index) {
+          this.$set(this.data[i], 'is_checked', true)
+        }
+      }
+    },
+    detailAddShopCarts() {
+      this.curriculumcartids.cartid = this.kid
+      return new Promise((resolve, reject) => {
+        home.addShopCart(this.curriculumcartids).then(response => {
+          // this.$router.push('/shop/shoppingcart')
+          this.$message({
+            type: 'success',
+            message: '加入购物车成功'
+          })
         })
       })
       for (var i = 0; i < this.data.length; i++) {
@@ -1463,7 +1484,7 @@ export default {
           img {
             width: 14px;
             height: 14px;
-            vertical-align: middle;
+            // vertical-align: middle;
           }
         }
         .itemBox-info {

@@ -47,7 +47,7 @@
       </div>
       <div class="headImg" v-else>
         <span>
-          <img :src="user.userImg" alt="">
+          <img :src="user.userImg" alt="" @click="goLink('tab-first')">
         </span>
         <ul class="subPages">
           <li @click="goLink('tab-first')">我的首页</li>
