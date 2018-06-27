@@ -32,6 +32,15 @@
           <el-tab-pane label="最新" name="first"></el-tab-pane>
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
+        <!-- <div>
+          <span v-show="hideSwitch">
+            <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#999" @change="hideCourse">
+            </el-switch>隐藏已参加课程
+          </span>
+          <div class="pagination pages">
+            <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
+          </div>
+        </div> -->
       </div>
       <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>

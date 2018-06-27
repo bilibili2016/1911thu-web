@@ -40,7 +40,7 @@ export default {
     goTeacherInfo(item, index) {
       this.tidForm.tids = item.id
       this.setTid(this.tidForm)
-      this.goLink('/home/pages/teacher')
+      this.goLink('/home/components/teacher')
     }
   }
 }
