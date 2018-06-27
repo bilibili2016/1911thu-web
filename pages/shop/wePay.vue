@@ -37,9 +37,13 @@
                     <img src="@/assets/images/wxp.png" alt="">
                     <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="wxMsg">
                   </div>
-                  <div class="wx fr" @click="selectZfb" :class="{borderColor: zfbMsg}">
+                  <div class="wx fl" @click="selectZfb" :class="{borderColor: zfbMsg}">
                     <img src="@/assets/images/zfb.png" alt="">
                     <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="zfbMsg">
+                  </div>
+                  <div class="pub fl" @click="selectPub" :class="{borderColor: pubMsg}">
+                    <img src="@/assets/images/payPublic.png" alt="">
+                    <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="pubMsg">
                   </div>
                 </div>
               </div>
@@ -108,6 +112,7 @@ export default {
       orderCurriculumLists: [],
       wxMsg: true,
       zfbMsg: false,
+      pubMsg: false,
       addPaySubmitForm: {
         types: '1',
         companyId: null
@@ -176,7 +181,7 @@ export default {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
-          console.log(response.data.data.orderCurriculumLists, '课程')
+          // console.log(response.data.data.orderCurriculumLists, '课程')
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url
@@ -189,10 +194,18 @@ export default {
     selectWx() {
       this.wxMsg = true
       this.zfbMsg = false
+      this.pubMsg = false
     },
     selectZfb() {
       this.wxMsg = false
       this.zfbMsg = true
+      this.pubMsg = false
+    },
+    selectPub() {
+      this.wxMsg = false
+      this.zfbMsg = false
+      this.pubMsg = true
+      this.$router.push('/shop/payPublic')
     },
     getStatus() {
       this.interval = setInterval(() => {

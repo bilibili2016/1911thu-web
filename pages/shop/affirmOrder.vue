@@ -57,7 +57,20 @@
               <div class="fr">¥{{course.present_price}}</div>
             </div>
           </div>
-
+          <div class="invoiceMsg clearfix">
+            <h4>
+              发票信息
+            </h4>
+            <p>
+              <span class="invoiceWord" v-show="isShowTicket">不开发票</span>
+              <span class="invoiceWord" v-show="!isShowTicket">
+                <i>普通发票</i>
+                <i>{{invoiceForm.companyname}}</i>
+                <i>商品明细</i>
+              </span>
+              <span class="changeInvoice" @click="showIoc">修改</span>
+            </p>
+          </div>
           <div class="orderInfo">
             <h5>
               <span>商品数量：{{curriculumSum}}</span>
@@ -74,6 +87,66 @@
         </div>
       </div>
 
+    </div>
+    <!-- 发票信息 -->
+    <div class="invoiceShadow" @click.self="close" v-show="showInvoice">
+      <div class="invoiceInfo">
+        <h3 class="clearfix">发票信息
+          <i class="el-icon-close fr" @click="close"></i>
+        </h3>
+        <div class="invoiceForm">
+          <div class="formLi clearfix">
+            <p class="fl">发票抬头</p>
+            <!-- <h6 class="fr check">个人</h6> -->
+            <h6 :class="invoiceForm.saveioc === false?'fr check':'fr'">个人</h6>
+          </div>
+          <div class="formLi clearfix">
+            <h5 @click="addInvoice" v-show="invoiceForm.ticket">新增机构发票</h5>
+            <p class="fl"></p>
+            <p class="fr addInvoice" v-show="!invoiceForm.ticket && !invoiceForm.saveioc">
+              <input type="text" v-model="invoiceForm.companyname" placeholder="新增机构发票抬头">
+              <span @click="saveInvoice">保存</span>
+            </p>
+            <p class="fr addInvoice saveioc check" v-show="invoiceForm.saveioc">
+              <input type="text" v-model="invoiceForm.companyname" disabled>
+              <span @click="changeInvoice">编辑</span>
+              <span @click="deleteInvoice">删除</span>
+            </p>
+
+          </div>
+          <div class="formLi clearfix" v-show="!invoiceForm.ticket">
+            <p class="fl">纳税人识别号</p>
+            <p class="fr">
+              <input type="text" v-model="invoiceForm.number" placeholder="输入纳税人识别号">
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">发票内容</p>
+            <p class="fr radioBtn">
+              <el-radio-group v-model="invoiceForm.radio" @change="isTicket">
+                <el-radio :label="1">不开发票
+                  <i></i>
+                </el-radio>
+                <el-radio :label="2">商品明细
+                  <i></i>
+                </el-radio>
+              </el-radio-group>
+            </p>
+            <p class="word" v-show="invoiceForm.isRadio">
+              <i class="el-icon-warning"> </i> 发票内容将显示详细商品名称与价格信息</p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">收货地址</p>
+            <p class="fr">
+              <input type="text" v-model="invoiceForm.address" placeholder="输入收货地址">
+            </p>
+          </div>
+        </div>
+        <div class="operation">
+          <span @click="addInvoiceInfo">保存</span>
+          <span @click="close">取消</span>
+        </div>
+      </div>
     </div>
 
     <!-- 提交公司信息 -->
@@ -127,6 +200,8 @@ export default {
       payNumber: null,
       allPrise: null,
       nickName: null,
+      showInvoice: false,
+      isShowTicket: true,
       noMsg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
       commitOrders: {},
       companyInfo: {
@@ -139,6 +214,17 @@ export default {
         getCode: '获取验证码',
         seconds: 30,
         captchaDisable: true
+      },
+      invoiceForm: {
+        companyname: null,
+        ticket: true,
+        number: null,
+        address: null,
+        radio: 1,
+        types: 1, //发票类型
+        saveioc: false,
+        isRadio: false,
+        ids: null
       },
       restaurants: [],
       company: {
@@ -189,6 +275,7 @@ export default {
   },
   mounted() {
     this.goodsList()
+    this.getTicket()
   },
   methods: {
     buyType(type) {
@@ -196,6 +283,100 @@ export default {
         this.person = true
       } else {
         this.person = false
+      }
+    },
+    showIoc() {
+      this.showInvoice = true
+    },
+    addInvoice() {
+      // 添加发票
+      this.invoiceForm.ticket = false
+    },
+    saveInvoice() {
+      // 保存机构发票抬头
+      console.log(this.invoiceForm.companyname)
+
+      if (
+        this.invoiceForm.companyname === '' ||
+        this.invoiceForm.companyname === null
+      ) {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请填写机构发票抬头'
+        })
+      } else {
+        this.invoiceForm.saveioc = true
+      }
+    },
+    changeInvoice() {
+      // 编辑机构发票抬头
+      this.invoiceForm.saveioc = false
+      // console.log('编辑机构发票抬头')
+    },
+    deleteInvoice() {
+      // 删除机构发票抬头
+      this.invoiceForm.saveioc = false
+      this.invoiceForm.ticket = true
+      // console.log('删除机构发票抬头')
+    },
+    addInvoiceInfo() {
+      // 添加发票 invoiceForm
+      if (this.invoiceForm.radio === 2) {
+        if (this.invoiceForm.saveioc) {
+          this.invoiceForm.types = 2
+        } else {
+          this.invoiceForm.types = 1
+          this.invoiceForm.companyname = '个人'
+        }
+        this.invoiceForm.ids = this.commitOrders.ticketId
+        return new Promise((resolve, reject) => {
+          home.addInvoiceInfo(this.invoiceForm).then(res => {
+            if (res.status === 0) {
+              this.$message({
+                showClose: true,
+                type: 'success',
+                message: res.msg
+              })
+              this.isShowTicket = false
+              this.commitOrders.ticketId = res.data.invoice_id
+              this.close()
+            } else {
+              this.$message({
+                showClose: true,
+                type: 'error',
+                message: res.msg
+              })
+            }
+            resolve(true)
+          })
+        })
+      } else {
+        this.isShowTicket = true
+        this.close()
+      }
+    },
+    // Wapi/Invoice/invoiceDetail
+    getTicket() {
+      this.invoiceForm.types = 2
+      return new Promise((resolve, reject) => {
+        home.getTicket(this.invoiceForm).then(res => {
+          if (res.status === 0) {
+            this.invoiceForm.companyname = res.data.invoice_name
+            this.invoiceForm.number = res.data.invoice_number
+            this.invoiceForm.address = res.data.address
+            this.commitOrders.ticketId = res.data.id
+            this.isShowTicket = false
+          }
+          resolve(true)
+        })
+      })
+    },
+    isTicket(item) {
+      if (item === 2) {
+        this.invoiceForm.isRadio = true
+      } else {
+        this.invoiceForm.isRadio = false
       }
     },
     goLink() {
@@ -241,7 +422,6 @@ export default {
               this.company = res.data.companyInfo
               this.person = false
               this.flag = false
-
             }
             this.loadGoods = false
           } else {
@@ -297,6 +477,7 @@ export default {
     close() {
       // 关闭表单
       this.showInfo = false
+      this.showInvoice = false
     },
     handleSelect(item) {
       this.companyInfo.companyname = item.company_name

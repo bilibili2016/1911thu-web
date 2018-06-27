@@ -44,6 +44,7 @@
         <v-nothing></v-nothing>
       </div>
     </div>
+    <div class="allChecked" @click="allChecked">全选</div>
     <!-- <v-filter></v-filter> -->
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
@@ -116,11 +117,16 @@ export default {
         pids: ''
       },
       loadBanner: false,
-      loadCourse: false
+      loadCourse: false,
+      allCheckedId: [],
+      idsForm: {
+        cartid: []
+      },
+      changeData: []
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid']),
+    ...mapActions('auth', ['setCid', 'setProductsNum', 'setPid']),
     handleCurrentChange(val) {
       this.loadCourse = true
       this.pagemsg.page = val
@@ -132,6 +138,30 @@ export default {
           this.pagemsg.total = response.data.pageCount
           resolve(true)
           this.loadCourse = false
+        })
+      })
+    },
+    allChecked() {
+      this.idsForm.cartid = [].concat(this.allCheckedId)
+      this.changeData = [].concat(this.allCheckedId)
+      return new Promise((resolve, reject) => {
+        home.addShopCart(this.idsForm).then(response => {
+          if (response.status === 0) {
+            this.categoryData.forEach(function(v, i, arr) {
+              v.is_checked = true
+            })
+            this.setProductsNum({
+              //设置购物车数量
+              pn: response.data.curriculumNumber
+            })
+          } else {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: response.msg
+            })
+          }
+          resolve(true)
         })
       })
     },
@@ -183,6 +213,10 @@ export default {
           }
           resolve(true)
           this.loadCourse = false
+          var that = this
+          response.data.curriculumList.forEach(function(v, i, arr) {
+            that.allCheckedId.push(v.id)
+          })
         })
       })
     },

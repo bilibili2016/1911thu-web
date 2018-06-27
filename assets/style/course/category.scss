@@ -13,13 +13,13 @@
   .center {
     width: 1100px;
     margin: 0 auto;
-    &.category{
+    &.category {
       padding-bottom: 20px;
     }
     .college {
       height: 78px;
       border-bottom: 1px rgba(232, 214, 247, 1) solid;
-      &>li{
+      &>li {
         display: inline-block;
         height: 78px;
         line-height: 78px;
@@ -48,7 +48,7 @@
       }
     }
     .classification {
-      &>li{
+      &>li {
         display: inline-block;
         height: 50px;
         line-height: 50px;
@@ -73,17 +73,19 @@
     .carlist {
       height: 1400px;
     }
-    .el-button{
+    .el-button {
       font-weight: 400;
     }
   }
 }
+
 .header {
   .pages {
     float: right;
     margin-top: 26px;
   }
 }
+
 .bgs {
   .el-button {
     background-color: rgba(143, 74, 203, 1);
@@ -104,9 +106,23 @@
     color: #888;
   }
 }
-.pagination{
+
+.pagination {
   padding: 30px 0 80px;
 }
 
-
-
+.allChecked {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 6px;
+  color: #fff;
+  position: fixed;
+  top: 500px;
+  left: 93%; // margin-left: 300px;
+  background: url("~assets/images/allChecked.png");
+  background-size: cover;
+  z-index: 9;
+  cursor: pointer;
+}

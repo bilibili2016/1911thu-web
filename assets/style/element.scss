@@ -931,6 +931,39 @@
   }
 }
 
+// 填写发票信息
+.invoiceForm {
+  .radioBtn {
+    .el-radio {
+      color: #222;
+      font-size: 14px;
+      font-weight: 400;
+      .el-radio__input {
+        display: none;
+      }
+      .el-radio__label {
+        width: 88px;
+        height: 34px;
+        text-align: center;
+        line-height: 34px;
+        padding: 0;
+        border: 1px solid #6417a6;
+        border-radius: 6px;
+        position: relative;
+        overflow: hidden;
+      }
+      .el-radio__input.is-checked+.el-radio__label {
+        background-color: #6417a6;
+        color: #fff;
+        border: none;
+        i {
+          display: block !important;
+        }
+      }
+    }
+  }
+}
+
 .card-category {
   .el-checkbox__inner {
     width: 30px;
