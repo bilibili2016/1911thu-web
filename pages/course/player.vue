@@ -265,7 +265,7 @@ export default {
       this.curriculumcartids.cartid = this.kid
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingCart')
+          this.$router.push('/shop/shoppingcart')
         })
       })
     },
@@ -318,6 +318,23 @@ export default {
       this.tidForm.tids = teacherID * 1
       this.setTid(this.tidForm)
       this.$router.push('/home/components/teacher')
+    },
+    playerBuy(item, info) {
+      // console.log(item, 'playerItem')
+      // console.log(info, 'info')
+      if (info.is_cart === 1) {
+        this.$alert('商品已在购物车内', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {}
+        })
+      } else {
+        this.curriculumcartids.cartid = item[0].curriculum_id
+        return new Promise((resolve, reject) => {
+          home.addShopCart(this.curriculumcartids).then(response => {
+            this.$router.push('/shop/shoppingcart')
+          })
+        })
+      }
     },
     playerBuy(item, info) {
       console.log(item, 'playerItem')
@@ -378,7 +395,7 @@ export default {
             that.seconds--
             // console.log(that.seconds, '秒数')
             let playTime = player.currentTime()
-            console.log(playTime, '时间')
+            // console.log(playTime, '时间')
             socket.emit(
               'watchRecordingTime',
               persistStore.get('curriculumId'),
@@ -524,18 +541,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.bag {
-  color: #732eaf;
-}
-video::-internal-media-controls-download-button {
-  display: none;
-}
-video::-webkit-media-controls-enclosure {
-  overflow: hidden;
-}
-video::-webkit-media-controls-panel {
-  width: calc(100% + 30px);
-}
-</style>
 

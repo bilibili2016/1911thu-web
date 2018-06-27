@@ -33,8 +33,7 @@ export default {
       this.kidForm.kids = val
       this.setKid(this.kidForm)
     }
-  },
-  mounted() {}
+  }
 }
 </script>
 

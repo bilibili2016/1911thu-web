@@ -55,18 +55,16 @@
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
-import CustomHot2 from '@/components/common/Hot2.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
-import CustomShoppingCart from '@/pages/shop/shoppingCart.vue'
-import CustomUnlogged from '@/pages/course/unlogged.vue'
-import SearchNothing from '@/pages/home/components/searchNothing.vue'
+import CustomShoppingCart from '@/pages/shop/shoppingcart.vue'
+import CustomUnlogged from '@/components/common/Unlogged.vue'
+import SearchNothing from '@/components/common/SearchNothing.vue'
 
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-filter': CustomHot2,
     'v-page': CustomPagination,
     'v-shop': CustomShoppingCart,
     'v-unlogged': CustomUnlogged,
@@ -262,15 +260,16 @@ export default {
     this.bgmsgs = Number(this.pid) + Number(1)
     this.cidform.cids = '1'
     this.pidform.pids = ''
-    // this.bgmsg = 0;
+
     this.activeName = 'first'
     this.setCid(this.cidform)
     this.pidform.pids = ''
     this.bgmsg = this.cid
     this.setPid(this.pidform)
-    //  this.data2 = this.data[0];
+
     this.curriculumList()
     this.childCategoryList()
+    this.$bus.$emit('bannerShow', false)
   }
 }
 </script>

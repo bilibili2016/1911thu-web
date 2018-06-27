@@ -380,7 +380,7 @@ export default {
       }
     },
     goLink() {
-      this.$router.push('/shop/shoppingCart')
+      this.$router.push('/shop/shoppingcart')
     },
     commitOrder() {
       this.company.id
@@ -562,6 +562,3 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import '~assets/style/shop/affirmOrder';
-</style>

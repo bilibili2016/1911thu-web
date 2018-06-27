@@ -287,7 +287,7 @@ export default {
       this.$router.push(item)
     },
     goShop() {
-      this.goLink('/shop/checkedCourse')
+      this.goLink('/shop/checkedcourse')
     },
     empty() {},
 
@@ -427,7 +427,7 @@ export default {
       this.getCodeList()
       this.getRecordList()
     }
-
+    this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'

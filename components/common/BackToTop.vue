@@ -55,7 +55,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import CustomUnlogged from '@/pages/course/unlogged.vue'
+import CustomUnlogged from '@/components/common/Unlogged.vue'
 /* eslint-disable */
 export default {
   components: {

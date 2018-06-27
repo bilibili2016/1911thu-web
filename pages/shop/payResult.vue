@@ -83,10 +83,3 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import '~assets/style/shop/payResult';
-.goback {
-  text-align: center;
-  margin: 80px auto;
-}
-</style>

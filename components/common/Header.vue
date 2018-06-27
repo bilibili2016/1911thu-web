@@ -1,5 +1,13 @@
 <template>
   <div class="headerBox">
+    <div class="recommend" v-if="bannerMsg">
+      <div>
+        <img src="@/assets/images/hr_discounts1.png" alt="">
+        <span>优惠专题入口</span>
+        <img src="@/assets/images/hr_discounts2.png" alt="">
+        <i class="el-icon-close"></i>
+      </div>
+    </div>
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <i></i>
@@ -9,7 +17,7 @@
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin" @click="goSearchd('/other/hrEntry')">机构入口
+        <span class="hrin" @click="goSearchd('/other/hrentry')">机构入口
           <i></i>
         </span>
         <span v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
@@ -26,7 +34,7 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingCart')">
+        <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingcart')">
           <span class="cartIcon"></span>
           <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
@@ -39,7 +47,7 @@
       </div>
       <div class="headImg" v-else>
         <span>
-          <img :src="user.userImg" alt="">
+          <img :src="user.userImg" alt="" @click="goLink('tab-first')">
         </span>
         <ul class="subPages">
           <li @click="goLink('tab-first')">我的首页</li>
@@ -69,7 +77,7 @@
                 <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
               </el-form-item>
               <el-row>
-                <!-- @click="goSearchd('/home/components/forgotPassword')"  -->
+                <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
                 <div @click="forget">忘记密码?</div>
                 <el-button @click="signIns('loginData')">登录</el-button>
               </el-row>
@@ -173,6 +181,7 @@ export default {
     }
     return {
       searchImg: require('@/assets/images/search.png'),
+      bannerMsg: false,
       downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
       start: false,
       iphones: true,
@@ -362,8 +371,8 @@ export default {
         msg: null
       },
       authPath: [
-        '/shop/affirmOrder',
-        '/shop/shoppingCart',
+        '/shop/affirmorder',
+        '/shop/shoppingcart',
         '/profile',
         '/shop/wepay'
       ]
@@ -650,14 +659,19 @@ export default {
     },
     // 忘记密码
     forget() {
-      this.$router.push('/home/components/forgotPassword')
+      this.$router.push('/home/components/forgotpassword')
       this.close()
     },
     goMycourse(tab) {
-      this.$router.push({ path: '/profile', query: { tab: tab } })
+      this.$router.push({
+        path: '/profile',
+        query: {
+          tab: tab
+        }
+      })
     },
     goLinks() {
-      this.$router.push('/shop/shoppingCart')
+      this.$router.push('/shop/shoppingcart')
     },
     goLink(item) {
       this.$bus.$emit('selectProfileIndex', '123')
@@ -828,6 +842,19 @@ export default {
     }
   },
   mounted() {
+    // console.log(window.location.pathname, '这')
+    // if (window.location.pathname === '/other/hrentry') {
+    //   this.bannerMsg = true
+    // }
+    this.$bus.$emit('bannerShow', false)
+    this.$bus.$on('bannerShow', data => {
+      if (data === true) {
+        this.bannerMsg = true
+      } else {
+        this.bannerMsg = false
+      }
+    })
+
     this.getUserInfo()
     this.$bus.$on('loginShow', data => {
       this.loginCardShow()
@@ -845,5 +872,47 @@ export default {
 <style lang="scss" scoped>
 .cli {
   cursor: pointer;
+}
+.recommend {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  background: linear-gradient(to right, #5e00b5, #e91351);
+  div {
+    width: 1100px;
+    margin: 0 auto;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    span {
+      vertical-align: top;
+      font-weight: 700;
+      font-size: 18px;
+      color: #fff;
+      margin: 0 20px;
+    }
+    img {
+      width: 52px;
+      height: 37px;
+    }
+    img:first-child {
+      width: 53px;
+      height: 30px;
+    }
+  }
+  i {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #6417a6;
+  }
 }
 </style>
