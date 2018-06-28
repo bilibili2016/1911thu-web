@@ -623,10 +623,10 @@ export default {
               type: 'success',
               message: '登录成功！'
             })
-            this.tokenForm.token = response.data.token
+            this.tokenForm.tokens = response.data.token
+            this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
-            this.setToken(this.tokenForm)
             this.closeWechat()
             this.close()
           } else {
@@ -650,11 +650,11 @@ export default {
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
           if (response.status === 0) {
+            clearInterval(this.getwxtime)
             this.tokenForm.tokens = response.data.token
             this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
-            clearInterval(this.getwxtime)
             this.scanCodeShow = false //微信扫码
             this.closeWechat()
           }
