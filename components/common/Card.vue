@@ -83,7 +83,7 @@
     <!-- 我的收藏 -->
     <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'shoucang'">
-      <div class="card-category profile www">
+      <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox">
             <!-- {{card.id}} -->
@@ -465,6 +465,11 @@ export default {
       // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
+      console.log(item, '123')
+      // if(this.productsNum === null)
+      console.log(this.productsNum, '12345678')
+
+      console.log(this.productsNum, '3')
       let len = this.productsNum
       if (item.is_checked === false) {
         item.is_checked = false
@@ -473,6 +478,8 @@ export default {
         len = len - 1
         this.delShopCart()
       } else {
+        console.log(item)
+
         item.is_checked = true
         this.curriculumcartids.cartid = item.id
         this.curriculumcartid.numberArr.pop()
@@ -485,10 +492,20 @@ export default {
     },
     goBuy(detail) {
       if (this.isAuthenticated) {
-        if(detail === true){
+        let len = Number(this.productsNum) + 1
+        console.log(len, 'len')
+        this.setProductsNum({
+          pn: len
+        })
+        if (detail === true) {
           this.detailAddShopCarts()
-        }else {
+        } else {
           this.addShopCarts()
+          // let len = Number(this.productsNum) + 1
+          // console.log(len, 'len')
+          // this.setProductsNum({
+          //   pn: len
+          // })
         }
       } else {
         this.$bus.$emit('loginShow', true)
@@ -582,6 +599,7 @@ export default {
       }
     },
     buyNewCourse(item) {
+      // console.log(item, '这是item')
       if (item.is_cart === '0') {
         this.curriculumcartids.cartid = item.id
         return new Promise((resolve, reject) => {
@@ -664,6 +682,16 @@ export default {
   mounted() {
     if (window.location.pathname === '/course/coursedetail') {
       // this.getdefaultCurriculumCatalogs()
+    }
+    if (
+      !this.productsNum &&
+      typeof this.productsNum != 'undefined' &&
+      this.productsNum != 0
+    ) {
+      console.log('进来了')
+      this.setProductsNum({
+        pn: 0
+      })
     }
   }
 }
@@ -985,7 +1013,7 @@ export default {
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {
-  margin: 0 24px 50px 0;
+  margin: 0 30px 50px 0;
   &:nth-child(4n + 4) {
     margin-right: 24px;
   }
@@ -1240,6 +1268,9 @@ export default {
         height: 76px;
         margin-left: 30px;
         margin-top: -10px;
+        img {
+          cursor: pointer;
+        }
       }
     }
     .particulars {

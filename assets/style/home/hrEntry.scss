@@ -59,11 +59,10 @@
     }
   }
   .why {
-    height: 603px;
-    padding-bottom: 100px;
+    padding-bottom: 70px;
     background-color: #fff;
     h3 {
-      padding: 70px 0 60px;
+      padding: 60px 0 70px;
       text-align: center;
       font-size: 30px;
       color: #222;
@@ -75,14 +74,14 @@
   }
   .course {
     background-color: #fafafa;
-    padding-bottom: 60px;
+    padding-bottom: 20px;
     h3 {
-      padding: 98px 0 78px;
+      padding: 60px 0 70px;
       text-align: center;
       font-size: 30px;
       color: #222;
     }
-    & > p {
+    &>p {
       width: 1100px;
       margin: 0 auto;
       line-height: 36px;
@@ -143,7 +142,7 @@
     background-color: #fff;
     padding-bottom: 100px;
     h3 {
-      padding: 98px 0 78px;
+      padding: 60px 0 70px;
       text-align: center;
       font-size: 30px;
       color: #222;

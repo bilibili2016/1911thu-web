@@ -362,9 +362,15 @@
             margin: 0 auto;
             border-bottom: 1px rgba(232, 214, 247, 1) solid;
             .center {
-              width: 560px;
+              width: 860px;
               margin: 0 auto;
               height: 120px;
+              div {
+                margin-left: 85px;
+                &:first-child {
+                  margin: 0;
+                }
+              }
               .zfb {
                 width: 230px;
                 height: 90px;
@@ -388,6 +394,28 @@
                 }
               }
               .wx {
+                width: 230px;
+                height: 90px;
+                background-color: rgba(242, 242, 242, 1);
+                border-radius: 5px;
+                line-height: 90px;
+                text-align: center;
+                border: 1px rgba(242, 242, 242, 1) solid;
+                position: relative;
+                img {
+                  width: 169px;
+                  height: 52px;
+                  vertical-align: middle;
+                }
+                .okImg {
+                  position: absolute;
+                  bottom: 0px;
+                  right: 0px;
+                  width: 33px;
+                  height: 32px;
+                }
+              }
+              .pub {
                 width: 230px;
                 height: 90px;
                 background-color: rgba(242, 242, 242, 1);

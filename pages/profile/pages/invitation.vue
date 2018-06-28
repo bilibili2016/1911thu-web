@@ -8,21 +8,14 @@
           <th>购买日期</th>
           <th>可用个数</th>
         </tr>
-        <tr v-for="(code,index) in codeData" :key="index" class="tr_body">
+        <tr v-for="(code,index) in codeData" :key="index" :class="number === code.use_code_number ?'noCodes tr_body':'tr_body' ">
           <td>{{code.invitation_code}}</td>
           <td>{{timestampToTime(code.pay_time)}}</td>
-          <td>{{code.use_code_number}}</td>
+          <td>{{code.use_code_number}}
+            <i></i>
+          </td>
         </tr>
       </table>
-      <!-- <el-table style="width: 100%">
-        <el-table-column prop="invitation_code" label="专属邀请码" width="300">
-        </el-table-column>
-        <el-table-column prop="pay_time" label="购买日期" width="300">
-        </el-table-column>
-        <el-table-column @change="changeCode" class="noCode" prop="use_code_number" label="可用个数">
-          <span></span>
-        </el-table-column>
-      </el-table> -->
     </div>
     <div class="rules clearfix">
       <div class="fl">
@@ -38,12 +31,31 @@
       </div>
       <div class="fr">
         <h5>邀请记录</h5>
-        <el-table :data="recordData" height="220" style="width: 100%">
+        <!-- <el-table :data="recordData" height="220" style="width: 100%">
           <el-table-column prop="word" label="邀请好友" width="300">
           </el-table-column>
           <el-table-column prop="create_time" label="日期" width="230">
           </el-table-column>
-        </el-table>
+          <div class="noCode" v-if="recordData.length === 0">
+            <img :src="noMsgImg" alt="">
+          </div>
+        </el-table> -->
+        <div class="tables">
+          <table :data="recordData" class="recordTable">
+            <tr class="tr_header">
+              <th>邀请好友</th>
+              <th>日期</th>
+            </tr>
+            <tr v-for="(code,index) in recordData" :key="index" :class="number === code.use_code_number ?'noCodes tr_body':'tr_body' ">
+              <td>{{code.user_name}}通过
+                <i>{{code.invitation_code}}</i> 加入学习</td>
+              <td>{{code.create_time}}</td>
+            </tr>
+          </table>
+          <div class="noCode" v-if="recordData.length === 0">
+            <img :src="noMsgImg" alt="">
+          </div>
+        </div>
       </div>
     </div>
 
@@ -55,7 +67,9 @@ export default {
   props: ['codeData', 'recordData'],
   data() {
     return {
-      noCodes: true
+      noCodes: true,
+      number: '0',
+      noMsgImg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png'
     }
   },
   methods: {

@@ -109,6 +109,7 @@ export default {
     ...mapActions('auth', ['setIsShowTip']),
     handleScroll() {
       this.visible = window.pageYOffset > this.visibilityHeight
+      // this.visible = true
     },
     showTips(show) {
       this.showNotLogin = show

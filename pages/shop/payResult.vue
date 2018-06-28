@@ -24,6 +24,10 @@
       <h5 v-else>
         <span>重新下单</span>
       </h5> -->
+      <h5>
+        <span @click="choiceCourse">继续选课</span>
+        <span>查看订单</span>
+      </h5>
       <div class="goback">
         <span>{{seconds}}s后</span>前往个人中心</div>
     </div>
@@ -51,21 +55,22 @@ export default {
   methods: {
     ...mapActions('auth', ['setGid']),
     choiceCourse() {
-      this.$router.push('/course/chooselesson')
+      // this.$router.push('/course/chooselesson')
+      window.open(window.location.origin + '/course/chooselesson')
     },
     payComplete() {
       this.payCompleteForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.payComplete(this.payCompleteForm).then(response => {
           this.payCompleteData = response.data
-          this.interval = setInterval(() => {
-            if (this.seconds < 1) {
-              clearInterval(this.interval)
-              this.goLink('tab-first')
-            } else {
-              this.seconds--
-            }
-          }, 1000)
+          // this.interval = setInterval(() => {
+          //   if (this.seconds < 1) {
+          //     clearInterval(this.interval)
+          //     this.goLink('tab-first')
+          //   } else {
+          //     this.seconds--
+          //   }
+          // }, 1000)
           resolve(true)
         })
       })
