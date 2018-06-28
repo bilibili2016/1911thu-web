@@ -22,7 +22,7 @@
           margin-left: 140px;
         }
       }
-      .tableBody>div {
+      .tableBody > div {
         background-color: #fff;
         display: flex;
         align-items: center;
@@ -41,6 +41,7 @@
             width: 160px;
             height: 100px;
             margin-right: 20px;
+            cursor: pointer;
           }
           h4 {
             width: 470px;
@@ -50,6 +51,7 @@
             overflow: hidden;
             padding-top: 9px;
             margin-bottom: 15px;
+            cursor: pointer;
           }
           h6 {
             color: #6d687f;
@@ -86,7 +88,7 @@
         text-align: center;
         height: 30px;
         margin: 80px 0 50px;
-        &>span {
+        & > span {
           cursor: pointer;
         }
         .el-pagination {
@@ -140,7 +142,7 @@
             }
             .el-input-number__decrease,
             .el-input-number__increase {
-              background: transparent;
+              background-color: #6417a6;
               margin-top: -1px;
               transition: all 300ms;
               font-size: 16px;
@@ -154,6 +156,7 @@
             .el-input-number__decrease {
               margin-left: -1px;
               border-right: 1px solid #6417a6;
+              background-color: #6417a6;
             }
             .el-input-number__increase {
               margin-right: -1px;
@@ -171,7 +174,7 @@
           }
           .el-icon-minus,
           .el-icon-plus {
-            color: #6417a6;
+            color: #fff;
           }
           .person {
             font-size: 16px;
@@ -293,7 +296,7 @@
             border-color: #6417a6;
             background-color: #6417a6;
           }
-          &+.el-checkbox__label {
+          & + .el-checkbox__label {
             color: #222;
           }
         }

@@ -351,6 +351,13 @@
     .el-breadcrumb__separator {
       color: #222;
     }
+    .el-breadcrumb__inner {
+      cursor: pointer;
+      color: #222;
+      &:hover {
+        color: #6417a6;
+      }
+    }
   }
   .fr {
     .collect {
