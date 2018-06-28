@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="main-header" v-loading="loadMsg">
-        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg"></v-card>
+        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
       </div>
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">

@@ -323,9 +323,11 @@
             <div class="study clearfix" v-else>
               <p>{{courseList.introduction}}</p>
               <div class="common-button">
+                <!-- {{courseList}} -->
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goBuy(true)" v-if="privileMsg === false">加入购物车</el-button>
+                  <!-- {{courseList.is_cart}} -->
+                  <el-button type="primary" plain @click="goBuy(true,courseList)" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
                 <div v-else>
                   <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
@@ -417,7 +419,8 @@ export default {
     'linkfour',
     'linkfive',
     'linksix',
-    'privileMsg'
+    'privileMsg',
+    'cardetails'
   ],
   data() {
     return {
@@ -451,7 +454,8 @@ export default {
       },
       getdefaultForm: {
         curriculumid: ''
-      }
+      },
+      isCart: 0
     }
   },
   computed: {
@@ -490,15 +494,44 @@ export default {
         pn: len
       })
     },
-    goBuy(detail) {
+    goBuy(detail, item) {
       if (this.isAuthenticated) {
-        let len = Number(this.productsNum) + 1
-        console.log(len, 'len')
-        this.setProductsNum({
-          pn: len
-        })
+        // if (item.is_cart === 0) {
+        //   // this.isCart = 1
+        // } else {
+        //   this.$message({
+        //     type: 'success',
+        //     message: '您添加商品已经加入购物车'
+        //   })
+        // }
+        if (item.is_cart === 0) {
+          if (this.isCart === 0) {
+            let len = Number(this.productsNum) + 1
+            console.log(len, 'len')
+            this.setProductsNum({
+              pn: len
+            })
+          } else {
+          }
+        } else {
+          this.$message({
+            type: 'success',
+            message: '您的商品已经在购物车里面'
+          })
+        }
+
         if (detail === true) {
-          this.detailAddShopCarts()
+          if (item.is_cart === 0) {
+            if (this.isCart === 0) {
+              this.detailAddShopCarts()
+            } else {
+              this.$message({
+                type: 'success',
+                message: '您的商品已经在购物车里面'
+              })
+            }
+          } else {
+          }
         } else {
           this.addShopCarts()
           // let len = Number(this.productsNum) + 1
@@ -583,13 +616,16 @@ export default {
     },
     detailAddShopCarts() {
       this.curriculumcartids.cartid = this.kid
+
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
           // this.$router.push('/shop/shoppingcart')
+
           this.$message({
             type: 'success',
             message: '加入购物车成功'
           })
+          this.isCart = 1
         })
       })
       for (var i = 0; i < this.data.length; i++) {
@@ -680,6 +716,8 @@ export default {
     }
   },
   mounted() {
+    // this.isCart = 0
+    // console.log(this.cardetails, 'uuuu')
     if (window.location.pathname === '/course/coursedetail') {
       // this.getdefaultCurriculumCatalogs()
     }
