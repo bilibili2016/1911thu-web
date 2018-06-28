@@ -15,7 +15,7 @@
       <h3>为什么选择我们</h3>
       <p>深度体验顶级商学院文化</p>
       <p>清华经管学院是率先获得AACSB和EQUIS两大全球管理教育顶级认证的中国内地商学院</p>
-      <p>高管教育中心(EXED)与MBA、EMBA、本硕博并列为学院教学部门，经过十多年的沉淀，成就一套规范、完善、实效的企业高管培训课程体系</p>
+      <p>高管教育中心(EXED)与MBA、EMBA、本硕博并列为学院教学部门，经过十多年的沉淀，成就一套规范、完善、实效的机构高管培训课程体系</p>
       <p>国内课程均在清华经管学院授课</p>
       <p>领略大师风采，启迪心智</p>
       <p>160多位清华大学经济管理学院全职教授及著名经济学家、知名学者精心设计并亲自授课</p>
@@ -24,14 +24,14 @@
     </div>
     <div class="course">
       <h3>1911学堂课程体系</h3>
-      <p>学堂课程体系包括：通识性课程体系（干部通用学院）、系统专题性课程（党政系统学院）、在线商学院、行业学院、职场学院、直播/热点课程（热点课程）、企业课程定制、学位项目及面授及线下活动等9大业务板块，包含560余门课程。</p>
+      <p>学堂课程体系包括：通识性课程体系（干部通用学院）、系统专题性课程（党政系统学院）、在线商学院、行业学院、职场学院、直播/热点课程（热点课程）、机构课程定制、学位项目及面授及线下活动等9大业务板块，包含560余门课程。</p>
       <ul class="list">
         <li v-for="li in courseList" :key="li.id">
           <img :src="li.src" alt="">
           <h5>{{li.title}}</h5>
           <h6>{{li.number}}</h6>
         </li>
-        <li v-for="(item,index) in project" :key="index">
+        <li v-for="(item,index) in project" :key="index" @click="handleLink(item)">
           <img :src="item.src" alt="">
           <h4>{{item.title}}
             <span class="fr">了解更多
@@ -66,9 +66,9 @@
     <div class="bottomForm">
       <img src="http://pam8iyw9q.bkt.clouddn.com/hrEntrybottom.png" alt="">
       <div class="word">
-        <p>如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
+        <p>如果您对1911学堂的课程感兴趣，您可以留下您的机构名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
         <el-form :model="company" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="企业名称：" prop="name">
+          <el-form-item label="机构名称：" prop="name">
             <el-autocomplete class="inline-input" v-model="company.name" :fetch-suggestions="querySearch" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <el-form-item label="联系人：" prop="person">
@@ -119,7 +119,8 @@ export default {
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_2.png',
           title: '系统专题性课程（党政系统学院）',
-          number: '（14个专题，110余门课程）'
+          number: '（14个专题，110余门课程）',
+          link: '/other/enterprisecustom'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_3.png',
@@ -145,15 +146,18 @@ export default {
       project: [
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_7.png',
-          title: '企业课程定制'
+          title: '机构课程定制',
+          link: '/other/enterprisecustom'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_8.png',
-          title: '学位项目'
+          title: '学位项目',
+          link: '/other/degree'
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_9.png',
-          title: '面授及线下活动'
+          title: '面授及线下活动',
+          link: '/other/faceteach'
         }
       ],
       buyList: [
@@ -179,7 +183,7 @@ export default {
         captchaDisable: false
       },
       rules: {
-        name: [{ required: true, message: '请输入企业名', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入机构名', trigger: 'blur' }],
         person: [
           { required: true, message: '请输入联系人姓名', trigger: 'blur' }
         ],
@@ -206,6 +210,9 @@ export default {
     ...mapState('auth', ['token'])
   },
   methods: {
+    handleLink(item) {
+      window.open(window.location.origin + item.link)
+    },
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -223,7 +230,7 @@ export default {
                 this.$message({
                   showClose: true,
                   type: 'success',
-                  message: '企业信息提交成功'
+                  message: '机构信息提交成功'
                 })
                 this.$router.push('/')
               } else {

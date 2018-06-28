@@ -1,17 +1,17 @@
 <template>
-  <div class="main">
+  <div class="main clearfix bindCourse">
     <div class="binding" v-if="hasId">
       <div class="title">
-        <h4>绑定企业ID</h4>
+        <h4>绑定机构ID</h4>
       </div>
       <div class="courseID">
-        <span>绑定企业ID:</span>
-        <input v-model="binding.inputID" @change="changeID(binding.inputID)" placeholder="请输入您的企业ID">
-        <span class="error" v-show="binding.showErr">请输入正确的企业ID</span>
+        <span>绑定机构ID:</span>
+        <input v-model="binding.inputID" @change="changeID(binding.inputID)" placeholder="请输入您的机构ID">
+        <span class="error" v-show="binding.showErr">请输入正确的机构ID</span>
       </div>
       <div class="bindInfo">
-        <p>绑定企业ID说明：</p>
-        <p>1、由课程负责人提供企业ID，每家企业具备唯一企业ID。</p>
+        <p>绑定机构ID说明：</p>
+        <p>1、由课程负责人提供机构ID，每家机构具备唯一机构ID。</p>
         <p>2.绑定成功后，不可更改。</p>
       </div>
       <div :class="{presentAble:binding.presentAble,present:binding.present}">
@@ -25,11 +25,11 @@
 
     <div class="courseList" v-else>
       <div class="title">
-        <span>绑定企业ID</span>
+        <span>绑定机构ID</span>
       </div>
       <div class="courseIDList">
         <div class="oneID">
-          <span>企业ID:</span>
+          <span>机构ID:</span>
           <span>{{companyId.cpnid}}</span>
         </div>
       </div>

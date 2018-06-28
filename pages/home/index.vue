@@ -94,7 +94,7 @@ export default {
         },
         {
           src: 'http://pam8iyw9q.bkt.clouddn.com/pro2.b8c7f5f.png',
-          title: '企业课程定制',
+          title: '机构课程定制',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
           link: '/other/enterprisecustom'

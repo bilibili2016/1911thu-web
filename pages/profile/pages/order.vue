@@ -16,12 +16,12 @@
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
-            <div class="more" @click="selectPayApply(courseList, index)">
+            <div class="more" v-if="courseList.orderCurriculumList.length>3" @click="selectPayApply(courseList, index)">
               查看更多课程>
             </div>
           </div>
-          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+60+'px'}">¥{{courseList.order_amount}}</div>
-          <div class="status height" :style="{height: courseList.orderCurriculumList.length>3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+60+'px'}">
+          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">¥{{courseList.order_amount}}</div>
+          <div class="status height" :style="{height: courseList.orderCurriculumList.length>3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
             <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
             <p v-if="courseList.pay_status === '2'">已支付</p>
             <p v-if="courseList.pay_status === '3'">已关闭</p>

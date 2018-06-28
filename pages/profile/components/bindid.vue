@@ -1,20 +1,20 @@
 <template>
-  <div class="main">
+  <div class="main clearfix bindCourse">
     <div class="binding" style="display: none;">
       <div class="title">
         <h4>绑定课程ID</h4>
       </div>
       <div class="courseID">
         <span>绑定课程ID:</span>
-        <input v-model="binding.inputID" @change="verify(binding)" placeholder="请输入您的课程ID">
-        <span class="error" v-show="binding.showErr">请输入正确的企业ID</span>
+        <input v-model="binding.inputID" placeholder="请输入您的课程ID">
+        <span class="error" v-show="binding.showErr">{{courseList.error}}</span>
       </div>
       <div class="bindInfo">
-        <p>绑定企业ID说明：</p>
-        <p>1.公司hr提供的企业ID，兑换后可以学习企业购买的课程。</p>
+        <p>绑定机构ID说明：</p>
+        <p>1.公司hr提供的机构ID，兑换后可以学习机构购买的课程。</p>
         <p>2.绑定成功后，不可更改。</p>
       </div>
-      <div :class="{presentAble:binding.presentAble,present:binding.present}">
+      <div class="presentAble present">
         <el-button :disabled="!binding.presentAble" round @click="doSubmit">提交</el-button>
       </div>
       <div class="success" v-show="binding.success">
@@ -37,15 +37,15 @@
       <div v-show="courseList.addNewID">
         <div class="courseID">
           <span>绑定课程ID:</span>
-          <input v-model="courseList.inputID" @change="verify(courseList)" placeholder="请输入您的课程ID">
-          <span class="error" v-show="courseList.showErr">请输入正确的企业ID</span>
+          <input v-model="courseList.inputID" placeholder="请输入您的课程ID">
+          <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
         </div>
         <div class="bindInfo">
-          <p>绑定企业ID说明：</p>
-          <p>1.公司hr提供的企业ID，兑换后可以学习企业购买的课程。</p>
+          <p>绑定机构ID说明：</p>
+          <p>1.公司hr提供的机构ID，兑换后可以学习机构购买的课程。</p>
           <p>2.绑定成功后，不可更改。</p>
         </div>
-        <div :class="{presentAble:!courseList.showErr,present:courseList.present}">
+        <div class="presentAble present">
           <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交</el-button>
         </div>
       </div>
@@ -67,7 +67,7 @@ export default {
       binding: {
         inputID: '',
         showErr: false,
-        presentAble: false,
+        presentAble: true,
         present: true,
         success: false
       },
@@ -75,7 +75,8 @@ export default {
         addNewID: false,
         inputID: '',
         showErr: false,
-        presentAble: false,
+        error: '',
+        presentAble: true,
         present: true,
         success: false,
         addCourse: true,
@@ -132,6 +133,7 @@ export default {
               type: 'error',
               message: res.msg
             })
+            this.courseList.error = res.msg
           }
         })
       })

@@ -5,12 +5,12 @@
         <img src="@/assets/images/hr_discounts1.png" alt="">
         <span>优惠专题入口</span>
         <img src="@/assets/images/hr_discounts2.png" alt="">
-        <i class="el-icon-close"></i>
+        <i class="el-icon-close" @click="closeBanner"></i>
       </div>
     </div>
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
-        <i></i>
+        <img src="@/assets/images/logo2.png" alt="">
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
@@ -47,7 +47,7 @@
       </div>
       <div class="headImg" v-else>
         <span>
-          <img :src="user.userImg" alt="">
+          <img :src="user.userImg" alt="" @click="goLink('tab-first')">
         </span>
         <ul class="subPages">
           <li @click="goLink('tab-first')">我的首页</li>
@@ -99,7 +99,7 @@
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
               <el-form-item prop="companyCodes">
-                <el-input v-model="registerData.companyCodes" placeholder="绑定企业"></el-input>
+                <el-input v-model="registerData.companyCodes" placeholder="绑定机构"></el-input>
                 <span class="bindCompany">(可选)</span>
               </el-form-item>
               <el-form-item prop="checked">
@@ -129,7 +129,7 @@
             <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
           </el-form-item>
           <el-form-item prop="companyCodes">
-            <el-input v-model="bindTelData.companyCodes" placeholder="绑定企业"></el-input>
+            <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
             <span class="bindCompany">(可选)</span>
           </el-form-item>
           <el-row>
@@ -169,7 +169,7 @@ export default {
     }
     var checkCompanyCodes = (rule, value, callback) => {
       if (value !== '' && !/^[A-Za-z0-9]+$/.test(value)) {
-        return callback(new Error('请输入正确企业ID'))
+        return callback(new Error('请输入正确机构ID'))
       }
       return callback()
     }
@@ -290,7 +290,7 @@ export default {
           {
             min: 6,
             max: 6,
-            message: '请输入正确的企业ID',
+            message: '请输入正确的机构ID',
             trigger: 'blur'
           },
           {
@@ -346,7 +346,7 @@ export default {
           {
             min: 6,
             max: 6,
-            message: '请输入正确的企业ID',
+            message: '请输入正确的机构ID',
             trigger: 'blur'
           },
           {
@@ -402,6 +402,9 @@ export default {
       'setToken',
       'setPwd'
     ]),
+    closeBanner() {
+      this.bannerMsg = false
+    },
     getCount() {
       return new Promise((resolve, reject) => {
         home.shopCartList().then(response => {
@@ -531,10 +534,10 @@ export default {
     },
     // 注册 请求
     signUp(formName) {
-      this.loadLogin = true
       this.registerData.ectpwd = encryption(this.registerData.passwords)
       this.$refs[formName].validate(valid => {
         if (valid) {
+          this.loadLogin = true
           return new Promise((resolve, reject) => {
             auth.signUp(this.registerData).then(response => {
               this.$message({
@@ -662,11 +665,15 @@ export default {
       this.$router.push('/home/components/forgotpassword')
       this.close()
     },
-    goMycourse(tab) {
+    goMycourse(item) {
+      this.gidForm.gids = item
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
+      this.$bus.$emit('selectProfileIndex', item)
       this.$router.push({
         path: '/profile',
         query: {
-          tab: tab
+          tab: item
         }
       })
     },
@@ -825,6 +832,7 @@ export default {
         } else {
           this.userInfo = res.data.userInfo
           persistStore.set('nickName', this.userInfo.nick_name)
+          persistStore.set('phone', this.userInfo.user_name)
           if (this.userInfo.head_img && this.userInfo.head_img != '') {
             this.user.userImg = this.userInfo.head_img
           } else {

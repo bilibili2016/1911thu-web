@@ -83,7 +83,7 @@
     <!-- 我的收藏 -->
     <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'shoucang'">
-      <div class="card-category profile www">
+      <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox">
             <!-- {{card.id}} -->
@@ -315,7 +315,7 @@
                   <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                 </div>
                 <div class="lineProgress">
-                  <h5>已学习{{courseList.percent}}%</h5>
+                  <h5>已完成{{courseList.percent}}%</h5>
                   <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
                 </div>
               </div>
@@ -325,7 +325,7 @@
               <div class="common-button">
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+                  <el-button type="primary" plain @click="goBuy(true)" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
                 <div v-else>
                   <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
@@ -465,6 +465,11 @@ export default {
       // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
+      console.log(item, '123')
+      // if(this.productsNum === null)
+      console.log(this.productsNum, '12345678')
+
+      console.log(this.productsNum, '3')
       let len = this.productsNum
       if (item.is_checked === false) {
         item.is_checked = false
@@ -473,6 +478,8 @@ export default {
         len = len - 1
         this.delShopCart()
       } else {
+        console.log(item)
+
         item.is_checked = true
         this.curriculumcartids.cartid = item.id
         this.curriculumcartid.numberArr.pop()
@@ -483,9 +490,23 @@ export default {
         pn: len
       })
     },
-    goBuy(item, index) {
+    goBuy(detail) {
       if (this.isAuthenticated) {
-        this.addShopCarts()
+        let len = Number(this.productsNum) + 1
+        console.log(len, 'len')
+        this.setProductsNum({
+          pn: len
+        })
+        if (detail === true) {
+          this.detailAddShopCarts()
+        } else {
+          this.addShopCarts()
+          // let len = Number(this.productsNum) + 1
+          // console.log(len, 'len')
+          // this.setProductsNum({
+          //   pn: len
+          // })
+        }
       } else {
         this.$bus.$emit('loginShow', true)
       }
@@ -560,7 +581,25 @@ export default {
         }
       }
     },
+    detailAddShopCarts() {
+      this.curriculumcartids.cartid = this.kid
+      return new Promise((resolve, reject) => {
+        home.addShopCart(this.curriculumcartids).then(response => {
+          // this.$router.push('/shop/shoppingcart')
+          this.$message({
+            type: 'success',
+            message: '加入购物车成功'
+          })
+        })
+      })
+      for (var i = 0; i < this.data.length; i++) {
+        if (i === index) {
+          this.$set(this.data[i], 'is_checked', true)
+        }
+      }
+    },
     buyNewCourse(item) {
+      // console.log(item, '这是item')
       if (item.is_cart === '0') {
         this.curriculumcartids.cartid = item.id
         return new Promise((resolve, reject) => {
@@ -643,6 +682,16 @@ export default {
   mounted() {
     if (window.location.pathname === '/course/coursedetail') {
       // this.getdefaultCurriculumCatalogs()
+    }
+    if (
+      !this.productsNum &&
+      typeof this.productsNum != 'undefined' &&
+      this.productsNum != 0
+    ) {
+      console.log('进来了')
+      this.setProductsNum({
+        pn: 0
+      })
     }
   }
 }
@@ -964,7 +1013,7 @@ export default {
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {
-  margin: 0 24px 50px 0;
+  margin: 0 30px 50px 0;
   &:nth-child(4n + 4) {
     margin-right: 24px;
   }
@@ -1219,6 +1268,9 @@ export default {
         height: 76px;
         margin-left: 30px;
         margin-top: -10px;
+        img {
+          cursor: pointer;
+        }
       }
     }
     .particulars {
@@ -1463,7 +1515,7 @@ export default {
           img {
             width: 14px;
             height: 14px;
-            vertical-align: middle;
+            // vertical-align: middle;
           }
         }
         .itemBox-info {

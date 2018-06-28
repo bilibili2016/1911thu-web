@@ -55,10 +55,10 @@
       <div style="width:345px" class="fr">
         <!-- 讲师介绍 -->
         <div class="teacher" v-loading="loadTeacher">
-          <h4>讲师介绍</h4>
+          <h4>讲师介绍{{courseList.teacher_id}}</h4>
           <div class="personal">
-            <img :src="courseList.head_img" alt="">
-            <h5>{{courseList.teacher_name}}</h5>
+            <img :src="courseList.head_img" alt="" @click="goTeacherInfo(courseList.teacher_id)">
+            <h5 @click="goTeacherInfo(courseList.teacher_id)">{{courseList.teacher_name}}</h5>
             <h6>{{courseList.graduate}}</h6>
             <p>{{courseList.teacher_content}}</p>
           </div>
@@ -68,20 +68,15 @@
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
-
             <span class="rate">课程评分:</span>
             <span class="ratem">
               <el-rate v-model="rateModel"></el-rate>
             </span>
             <div class="bthgrop">
-              <!-- borderIndex === index ? true : false -->
               <span>
                 <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: borderIndex === index ? true : false }" class="detail-btngrounp">
                   {{item}}
                 </div>
-                <!-- <el-button plain v-for="(item,index) in btnDatas" :class="{borderColor: borderIndex === index ? true : false }">
-                  {{item}}
-                </el-button> -->
               </span>
             </div>
             <div class="area">
@@ -127,7 +122,6 @@
           </h4>
           <div v-loading="loadMsg">
             <div class="score">
-              <!-- {{totalEvaluateInfo}} -->
               <span class="fl">{{totalEvaluateInfo.totalScore}}</span>
               <el-rate disabled v-model="totalEvaluateInfo.totalScore" class="itemBox-rate fl"></el-rate>
               <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
@@ -170,7 +164,7 @@ export default {
       activeName: 'second',
       dialogVisible: false,
       textarea: null,
-      rateModel: null,
+      rateModel: 5,
       loadTeacher: false,
       loadEvaluate: false,
       value1: 5,
@@ -236,11 +230,20 @@ export default {
         totalEvaluate: null,
         totalScore: null
       },
-      defaultCatalogId: ''
+      defaultCatalogId: '',
+      tidForm: {
+        tids: ''
+      }
     }
   },
   methods: {
+    ...mapActions('auth', ['setTid']),
     handleClick() {},
+    goTeacherInfo(id) {
+      this.tidForm.tids = id * 1
+      this.setTid(this.tidForm)
+      window.open(window.location.origin + '/home/components/teacher')
+    },
     goCategory() {
       this.$router.push('/course/classifylist')
       persistStore.set('cid', '1')
@@ -253,6 +256,7 @@ export default {
         message: '提交评价成功'
       })
     },
+    linkTeacher() {},
     // 点击评论查看更多
     getMore() {
       this.dialogVisible = true

@@ -33,7 +33,7 @@ export default {
         line: 5,
         column: 12,
         height: 553,
-        animeTime: 3000,
+        animeTime: 5000,
         img: require('@/assets/images/123.png')
       }
     }
@@ -127,7 +127,7 @@ export default {
         column: 10, //多少列
         width: document.body.clientWidth, //显示容器的宽度
         height: 553,
-        animeTime: 3000, //最长动画时间,图片的取值将在 animeTime*0.33 + animeTime*0.66之前取值
+        animeTime: 5000, //最长动画时间,图片的取值将在 animeTime*0.33 + animeTime*0.66之前取值
         img: require('@/assets/images/123.png') //图片路径
       }
 
@@ -135,7 +135,7 @@ export default {
       setInterval(() => {
         $('.img-flex').html('')
         this.fragmentImg(fragmentConfig)
-      }, 5000)
+      }, 7000)
     })
   }
 }
