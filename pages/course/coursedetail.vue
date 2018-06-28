@@ -119,7 +119,7 @@
         <!-- 用户评论 -->
         <div class="evaluate" v-loading="loadEvaluate">
           <h4>用户评价
-            <span @click="getMore">查看更多></span>
+            <span @click="getMore" v-if="commentators.length> 3">查看更多></span>
           </h4>
           <div v-loading="loadMsg">
             <div class="score">
