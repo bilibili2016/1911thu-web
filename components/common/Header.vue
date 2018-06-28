@@ -596,12 +596,12 @@ export default {
     // 从微信拉取二维码
     async wxLogin() {
       var link = window.location.origin
-      if (link === 'http://localhost:8080') {
-        link = 'http://ceshi.1911edu.com'
+      if (link === 'http://www.1911edu.com') {
+        link = 'http://api.1911edu.com/Wapi/Index/wxBack'
+      } else {
+        link = 'http://ceshi.1911edu.com/Wapi/Index/wxBack'
       }
-      this.WxLogin.redirect_uri = encodeURIComponent(
-        link + '/Wapi/Index/wxBack'
-      )
+      this.WxLogin.redirect_uri = encodeURIComponent(link)
       this.WxLogin.state = Math.random()
         .toString(36)
         .substr(2)
