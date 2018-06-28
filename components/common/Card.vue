@@ -247,9 +247,10 @@
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
               <div class="fr common-button-half">
-                <el-button type="primary" plain @click="buyNewCourse(course)">
+                <!-- <el-button type="primary" plain @click="buyNewCourse(course)">
                   <img src="@/assets/images/shopcard.png" alt="">
-                </el-button>
+                </el-button> -->
+                <span></span>
               </div>
               <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="courseInfo(course)">立即学习</el-button>
@@ -1449,6 +1450,40 @@ export default {
         }
         div {
           margin-top: 10px;
+        }
+        .common-button-half {
+          width: 56px;
+          height: 40px;
+          line-height: 40px;
+          background: #6417a6;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+          transition: all 300ms;
+          span {
+            width: 20px;
+            height: 20px;
+            margin: 10px 0 10px 15px;
+            background: url('~assets/images/shopcard.png') no-repeat;
+            background-size: contain;
+          }
+          &:hover {
+            background: #8f4acb;
+          }
+        }
+        .common-button-half-right {
+          .el-button--primary {
+            color: #6417a6;
+            &.is-plain {
+              border-color: #6417a6;
+            }
+            &:hover {
+              color: #8f4acb;
+              background-color: #fff;
+              &.is-plain {
+                border-color: #8f4acb;
+              }
+            }
+          }
         }
       }
       .common-button-half {
