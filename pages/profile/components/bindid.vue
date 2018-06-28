@@ -6,18 +6,13 @@
       </div>
       <div class="courseID">
         <span>绑定课程ID:</span>
-<<<<<<< HEAD
-        <input v-model="binding.inputID" @change="verify(binding)" placeholder="请输入您的课程ID">
-        <span class="error" v-show="binding.showErr">请输入正确的机构ID</span>
-=======
         <input v-model="binding.inputID" placeholder="请输入您的课程ID">
         <span class="error" v-show="binding.showErr">{{courseList.error}}</span>
->>>>>>> zs
       </div>
       <div class="bindInfo">
-        <p>绑定机构ID说明：</p>
-        <p>1.公司hr提供的机构ID，兑换后可以学习机构购买的课程。</p>
-        <p>2.绑定成功后，不可更改。</p>
+        <p>绑定课程ID说明：</p>
+        <p>1、绑定课程ID，兑换所购课程。</p>
+        <p>2、绑定成功后，不可更改。</p>
       </div>
       <div class="presentAble present">
         <el-button :disabled="!binding.presentAble" round @click="doSubmit">提交</el-button>
@@ -31,7 +26,7 @@
     <div class="courseList">
       <div class="title clearfix">
         <span>绑定课程ID</span>
-        <el-button class="fr addClass" @click="addID" round>新增课程ID</el-button>
+        <el-button v-show="courseList.addNewID" class="fr addClass" @click="addID" round>新增课程ID</el-button>
       </div>
       <div class="courseIDList">
         <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
@@ -39,21 +34,16 @@
           <span>{{item.invitation_code}}</span>
         </div>
       </div>
-      <div v-show="courseList.addNewID">
+      <div v-show="!courseList.addNewID">
         <div class="courseID">
           <span>绑定课程ID:</span>
-<<<<<<< HEAD
-          <input v-model="courseList.inputID" @change="verify(courseList)" placeholder="请输入您的课程ID">
-          <span class="error" v-show="courseList.showErr">请输入正确的机构ID</span>
-=======
           <input v-model="courseList.inputID" placeholder="请输入您的课程ID">
           <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
->>>>>>> zs
         </div>
         <div class="bindInfo">
-          <p>绑定机构ID说明：</p>
-          <p>1.公司hr提供的机构ID，兑换后可以学习机构购买的课程。</p>
-          <p>2.绑定成功后，不可更改。</p>
+          <p>绑定课程ID说明：</p>
+          <p>1、绑定课程ID，兑换所购课程。</p>
+          <p>2、绑定成功后，不可更改。</p>
         </div>
         <div class="presentAble present">
           <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交</el-button>
@@ -82,7 +72,7 @@ export default {
         success: false
       },
       courseList: {
-        addNewID: false,
+        addNewID: true,
         inputID: '',
         showErr: false,
         error: '',
@@ -115,11 +105,12 @@ export default {
       }
     },
     addID() {
-      this.courseList.addNewID = true
+      this.courseList.addNewID = false
       this.$emit('isShowMsg', false)
     },
     doSubmit() {
       // this.binding.success = true;
+      this.courseList.addNewID = true
       this.bindForm.courseId = this.courseList.inputID
       return new Promise((resolve, reject) => {
         home.bindingCurriculumPrivate(this.bindForm).then(res => {
