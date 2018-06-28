@@ -497,6 +497,9 @@ export default {
     this.$bus.$on('selectProfileIndex', data => {
       this.activeTab = data
     })
+    this.$bus.$on('updateCourse', data => {
+      this.studyCurriculumList()
+    })
   }
 }
 </script>

@@ -426,6 +426,7 @@
       padding-bottom: 64px;
       .el-form {
         padding-top: 50px;
+        margin-top: 20px;
       }
       h4 {
         width: 100%;
@@ -433,6 +434,7 @@
         top: 0;
         left: 50%;
         margin-left: -50%;
+        margin-top: 30px;
         span {
           width: 100%;
           text-align: center;
@@ -485,7 +487,7 @@
         display: block;
         border-radius: 6px;
         background-color: #6417a6;
-        margin: 62px auto 41px;
+        margin: 20px auto 20px;
         color: #fff;
       }
       .bindSuccess {
