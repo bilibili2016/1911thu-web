@@ -174,17 +174,18 @@
         width: 56px;
         height: 56px;
         margin: 22px 13px;
-        background: url("~assets/images/iconList.png") no-repeat;
-        background-size: 177px 966px;
       }
       &:first-child i {
-        background-position: 0 -250px;
+        background: url("http://pam8iyw9q.bkt.clouddn.com/pro1.png") no-repeat;
+        background-size: contain;
       }
       &:nth-child(2) i {
-        background-position: 0 -192px;
+        background: url("http://pam8iyw9q.bkt.clouddn.com/pro2.png") no-repeat;
+        background-size: contain;
       }
       &:nth-child(3) i {
-        background-position: 0 -134px;
+        background: url("http://pam8iyw9q.bkt.clouddn.com/pro3.png") no-repeat;
+        background-size: contain;
       }
       div {
         width: 235px;

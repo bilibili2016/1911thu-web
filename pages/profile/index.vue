@@ -190,22 +190,16 @@
           </div>
         </el-tab-pane>
         <!-- 绑定机构Id -->
-        <el-tab-pane name="tab-seventh">
+        <!-- <el-tab-pane name="tab-seventh">
           <span slot="label" class="tabList">
             <i class="icon-company"></i> 绑定机构ID</span>
           <v-companyId :cpnData="companyData"></v-companyId>
-        </el-tab-pane>
+        </el-tab-pane> -->
         <!-- 专属邀请码 -->
         <el-tab-pane name="tab-eighth" v-if="codeData.length">
           <span slot="label" class="tabList">
             <i class="icon-code"></i> 专属邀请码</span>
           <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>
-          <!-- <div class="content">
-            <div class="noCourse">
-              <img :src="noMsgImg" alt="">
-              <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
-            </div>
-          </div> -->
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -219,7 +213,7 @@ import PersonalSet from '@/pages/profile/components/personalset.vue'
 import Binding from '@/pages/profile/components/bindid'
 import Info from '@/pages/profile/components/info'
 import Order from '@/pages/profile/pages/order'
-import CompanyId from '@/pages/profile/pages/companyid'
+// import CompanyId from '@/pages/profile/pages/companyid'
 import Invitation from '@/pages/profile/pages/invitation'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -232,8 +226,8 @@ export default {
     'v-info': Info,
     'v-banner': Banner,
     'v-order': Order,
-    'v-companyId': CompanyId,
     'v-invitation': Invitation
+    // 'v-companyId': CompanyId
   },
   data() {
     return {
@@ -465,8 +459,10 @@ export default {
       this.orderForm.ids = persistStore.get('order')
       return new Promise((resolve, reject) => {
         home.curriculumPayApply(this.orderForm).then(response => {
-          this.courseList = response.data.orderCurriculumList
-          this.orderDetail = response.data.orderDetail
+          if (response.status === 0) {
+            this.courseList = response.data.orderCurriculumList
+            this.orderDetail = response.data.orderDetail
+          }
           // this.loading = false
           resolve(true)
         })
