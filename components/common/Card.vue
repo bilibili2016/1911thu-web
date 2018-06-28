@@ -184,7 +184,7 @@
               <div class="line-wraps" v-if="config.card === 'learning'">
                 <div class="line-centers">
                   {{card}}
-                  <p>已学习100%123123123123</p>
+                  <p>已学习100%</p>
                   <el-progress :percentage="50"></el-progress>
                 </div>
               </div>
