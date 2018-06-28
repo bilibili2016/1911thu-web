@@ -3,7 +3,6 @@
   height: 70px;
   line-height: 70px;
   background-color: #050223;
-  position: relative;
   color: #fff;
   .main {
     width: 1100px;
@@ -14,8 +13,8 @@
         display: inline-block;
         margin-top: 20px;
         width: 128px;
-        height: 31px;
-        background: url('~assets/images/logo.png') no-repeat;
+        height: 32px;
+        background: url('~assets/images/logof.png') no-repeat;
         background-size: cover;
       }
     }
