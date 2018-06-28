@@ -1046,7 +1046,6 @@ export default {
     border-radius: 16px;
   }
 }
-
 #pane-tab-first .card-category .card-list,
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,
