@@ -86,30 +86,30 @@
           <p class="item-desc1">在线商学院</p>
           <p class=item-desc2>（12个模块，160余门课程）</p>
         </li>
-        <li class="list-item list-icon clearfix">
+        <li class="list-item list-icon clearfix" @click="goLink('/other/degree')">
           <div class="item-img">
-            <img src="@/assets/images/hrEntry_7.png" alt="">
+            <img src="http://pam8iyw9q.bkt.clouddn.com/pro1.png" alt="">
           </div>
           <div class="item-desc">
             <p class="item-desc-text">学位项目</p>
             <p class=item-desc-more>了解更多></p>
           </div>
         </li>
-        <li class="list-item list-icon clearfix">
+        <li class="list-item list-icon clearfix" @click="goLink('/other/enterprisecustom')">
           <div class="item-img">
-            <img src="@/assets/images/hrEntry_7.png" alt="">
+            <img src="http://pam8iyw9q.bkt.clouddn.com/pro2.png" alt="">
           </div>
           <div class="item-desc">
-            <p class="item-desc-text">学位项目</p>
+            <p class="item-desc-text">机构课程定制</p>
             <p class=item-desc-more>了解更多></p>
           </div>
         </li>
-        <li class="list-item list-icon clearfix">
+        <li class="list-item list-icon clearfix" @click="goLink('/other/faceteach')">
           <div class="item-img">
-            <img src="@/assets/images/hrEntry_7.png" alt="">
+            <img src="http://pam8iyw9q.bkt.clouddn.com/pro3.png" alt="">
           </div>
           <div class="item-desc">
-            <p class="item-desc-text">学位项目</p>
+            <p class="item-desc-text">面授、线下课程</p>
             <p class=item-desc-more>了解更多></p>
           </div>
         </li>
@@ -307,6 +307,9 @@ export default {
   methods: {
     handleLink(item) {
       window.open(window.location.origin + item.link)
+    },
+    goLink(item) {
+      window.open(window.location.origin + item)
     },
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
