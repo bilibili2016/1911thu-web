@@ -29,7 +29,7 @@ const _0bcd6fd7 = () => import('../pages/course/category.vue' /* webpackChunkNam
 const _367ce07e = () => import('../pages/course/search.vue' /* webpackChunkName: "pages/course/search" */).then(m => m.default || m)
 const _5202c248 = () => import('../pages/other/enterprisecustom.vue' /* webpackChunkName: "pages/other/enterprisecustom" */).then(m => m.default || m)
 const _e957bd0a = () => import('../pages/course/classifylist.vue' /* webpackChunkName: "pages/course/classifylist" */).then(m => m.default || m)
-const _1511f709 = () => import('../pages/other/institutional.vue' /* webpackChunkName: "pages/other/institutional" */).then(m => m.default || m)
+const _0053922e = () => import('../pages/other/Institutional.vue' /* webpackChunkName: "pages/other/Institutional" */).then(m => m.default || m)
 const _f87adf9e = () => import('../pages/home/components/tab.vue' /* webpackChunkName: "pages/home/components/tab" */).then(m => m.default || m)
 const _5941f9e4 = () => import('../pages/home/components/partner.vue' /* webpackChunkName: "pages/home/components/partner" */).then(m => m.default || m)
 const _b34f3568 = () => import('../pages/profile/pages/companyid.vue' /* webpackChunkName: "pages/profile/pages/companyid" */).then(m => m.default || m)
@@ -237,9 +237,9 @@ export function createRouter () {
 			name: "course-classifylist"
 		},
 		{
-			path: "/other/institutional",
-			component: _1511f709,
-			name: "other-institutional"
+			path: "/other/Institutional",
+			component: _0053922e,
+			name: "other-Institutional"
 		},
 		{
 			path: "/home/components/tab",
