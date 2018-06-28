@@ -9,7 +9,7 @@
           <span class="price">单价</span>
           <span class="operation">操作</span>
         </div>
-        <div class="tableBody">
+        <div class="tableBody" v-if="!isNoMsg">
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">
@@ -47,8 +47,8 @@
               </span> -->
           </span>
           <span class="commitOrder fr">
-            <el-button class="notGray" @click="showCommit" v-if="canSubmit">提交</el-button>
-            <el-button class="isGray" v-else @click="showMsg">提交</el-button>
+            <el-button class="notGray" @click="showCommit" v-if="canSubmit">去结算</el-button>
+            <el-button class="isGray" v-else @click="showMsg">去结算</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择

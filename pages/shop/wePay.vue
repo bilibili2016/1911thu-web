@@ -26,7 +26,7 @@
                     ￥{{course.price}}
                   </div>
                   <div class="courseNumber">
-                    {{course.pay_number}}
+                    X{{course.pay_number}}
                   </div>
                 </div>
                 <div class="more">

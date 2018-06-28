@@ -10,9 +10,9 @@
         <span class="error" v-show="binding.showErr">请输入正确的机构ID</span>
       </div>
       <div class="bindInfo">
-        <p>绑定机构ID说明：</p>
+        <p>绑定机构ID说明1：</p>
         <p>1、由课程负责人提供机构ID，每家机构具备唯一机构ID。</p>
-        <p>2.绑定成功后，不可更改。</p>
+        <p>2.绑定成功后，不可更改1。</p>
       </div>
       <div :class="{presentAble:binding.presentAble,present:binding.present}">
         <el-button :disabled="!binding.presentAble" round @click="doSubmit">提交</el-button>
@@ -117,7 +117,7 @@ export default {
   watch: {},
   mounted() {
     if (persistStore.get('cpnc')) {
-      console.log(persistStore.get('cpnc'))
+      // console.log(persistStore.get('cpnc'))
       this.companyId.cpnid = persistStore.get('cpnc')
       this.hasId = false
     }

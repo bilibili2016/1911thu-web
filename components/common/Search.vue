@@ -3,24 +3,30 @@
     <div class="main">
       <div class="searchWord">
         <el-input v-model="searchMsg" placeholder="请输入内容" class="inline-input" @keyup.enter.native="search"></el-input>
-        <i></i>
+        <i @click="search"></i>
       </div>
       <div class="hotWord">
         <span>热搜关键词：</span>
-        <span v-for="item in searchMsgs" @click="selectItem(item)" :key="item">{{item}}</span>
-        <!-- <span>学术管理</span>
-        <span>学位</span>
-        <span>HR</span>
-        <span>历史</span>
-        <span>人事管理</span> -->
+        <span v-for="item in hotSearchRecord" @click="selectItem(item)" :key="item">{{item.search_word}}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { home } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
+  data() {
+    return {
+      searchMsg: '',
+      hotSearchRecord: [],
+      searchForm: {
+        limits: 5,
+        pages: 0
+      }
+    }
+  },
   methods: {
     querySearch(queryString, cb) {
       var restaurants = this.restaurants
@@ -29,6 +35,16 @@ export default {
         : restaurants
       // 调用 callback 返回建议列表的数据
       cb(results)
+    },
+    searchHotWord() {
+      return new Promise((resolve, reject) => {
+        home.searchHotWord(this.searchForm).then(response => {
+          if (response.status === 0) {
+            this.hotSearchRecord = response.data.hotSearchRecord
+          }
+          resolve(true)
+        })
+      })
     },
     createFilter(queryString) {
       return restaurant => {
@@ -52,14 +68,9 @@ export default {
       this.$emit('Search', this.searchMsg)
     }
   },
-  data() {
-    return {
-      searchMsg: '',
-      searchMsgs: ['电子政务', '学术管理', '学位', 'HR', '历史', '日本']
-    }
-  },
   mounted() {
     this.searchMsg = persistStore.get('key')
+    this.searchHotWord()
   }
 }
 </script>

@@ -17,10 +17,6 @@
       <div class="presentAble present">
         <el-button :disabled="!binding.presentAble" round @click="doSubmit">提交</el-button>
       </div>
-      <div class="success" v-show="binding.success">
-        <img :src="bindImg" alt="">
-        <p>恭喜您绑定成功</p>
-      </div>
     </div>
 
     <div class="courseList">
@@ -42,16 +38,12 @@
         </div>
         <div class="bindInfo">
           <p>绑定机构ID说明：</p>
-          <p>1.公司hr提供的机构ID，兑换后可以学习机构购买的课程。</p>
+          <p>1.公司hr提供的机构ID，兑换后可以学习机构购买的课程</p>
           <p>2.绑定成功后，不可更改。</p>
         </div>
         <div class="presentAble present">
           <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交</el-button>
         </div>
-      </div>
-      <div class="success" v-show="courseList.success">
-        <img :src="bindImg" alt="">
-        <p>恭喜您绑定成功</p>
       </div>
     </div>
 
@@ -68,8 +60,7 @@ export default {
         inputID: '',
         showErr: false,
         presentAble: true,
-        present: true,
-        success: false
+        present: true
       },
       courseList: {
         addNewID: false,
@@ -78,11 +69,9 @@ export default {
         error: '',
         presentAble: true,
         present: true,
-        success: false,
         addCourse: true,
         courseID: []
       },
-      bindImg: 'http://pam8iyw9q.bkt.clouddn.com/bindingSuccess.png',
       bindForm: {
         courseId: ''
       },
@@ -109,23 +98,20 @@ export default {
       this.$emit('isShowMsg', false)
     },
     doSubmit() {
-      // this.binding.success = true;
       this.bindForm.courseId = this.courseList.inputID
       return new Promise((resolve, reject) => {
         home.bindingCurriculumPrivate(this.bindForm).then(res => {
           if (res.status === 0) {
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: res.msg
+            })
             this.getUsedInvitationCodeList()
-            this.courseList.success = true
-            let interval = setInterval(() => {
-              if (this.seconds <= 0) {
-                this.seconds = 1
-                this.courseList.success = false
-                this.courseList.inputID = ''
-                clearInterval(interval)
-              } else {
-                this.seconds--
-              }
-            }, 1000)
+            this.courseList.inputID = ''
+            if (this.courseList.addNewID) {
+              this.courseList.addNewID = false
+            }
           } else if (res.status === '100100') {
             this.courseList.showErr = true
             this.$message({

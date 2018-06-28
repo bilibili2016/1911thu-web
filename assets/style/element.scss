@@ -375,6 +375,7 @@
     text-align: center;
     margin-left: 38px;
     padding: 0;
+    font-weight: 700;
   }
   .el-tabs__item.is-active {
     color: #6417a6;
@@ -581,10 +582,11 @@
     color: #9431e9;
   }
   .el-button {
-    width: 84px; // border-radius: 18px;
+    width: 108px; // border-radius: 18px;
     float: right;
-    border-top-left-radius: 18px;
-    border-bottom-left-radius: 18px;
+    // border-top-left-radius: 18px;
+    // border-bottom-left-radius: 18px;
+    border-radius: 18px;
   }
   .el-button--primary.is-plain:hover {
     transition: all 300ms;
@@ -744,8 +746,7 @@
         color: #222;
         font-weight: 700;
         &.is-active {
-          background-color: transparent;
-          border-bottom: 4px solid #6417a6;
+          background-color: transparent; // border-bottom: 4px solid #6417a6;
         }
         &:last-child {
           margin-left: 20px;
@@ -953,7 +954,7 @@
         position: relative;
         overflow: hidden;
       }
-      .el-radio__input.is-checked+.el-radio__label {
+      .el-radio__input.is-checked + .el-radio__label {
         background-color: #6417a6;
         color: #fff;
         border: none;
@@ -1014,7 +1015,7 @@
     overflow: hidden;
   }
   .el-dialog__header {
-    border: 1px #e8d6f7 solid;
+    border-bottom: 1px #e8d6f7 solid;
   }
   .el-dialog__title {
     line-height: 24px;
@@ -1028,6 +1029,11 @@
       height: 450px;
       overflow: hidden;
     }
+  }
+  .el-dialog__headerbtn .el-dialog__close {
+    font-size: 20px;
+    color: #6417a6;
+    font-weight: 700;
   }
 }
 
@@ -1161,4 +1167,13 @@ input:-webkit-autofill {
 }
 .el-icon-warning {
   color: #ff5f5f;
+}
+.descript {
+  span {
+    display: inline;
+    line-height: 30px;
+  }
+  p {
+    margin: 20px 0px;
+  }
 }

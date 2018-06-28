@@ -101,6 +101,9 @@ export default {
             })
             this.code = res.data.code
             this.showPay = true
+            if (this.showTel) {
+              this.showTel = false
+            }
           } else {
             this.$message({
               showClose: true,
