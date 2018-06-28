@@ -60,6 +60,7 @@
           <div class="invoiceMsg clearfix">
             <h4>
               发票信息
+              <span>开机构抬头发票须填写纳税人识别号，以免影响报销</span>
             </h4>
             <p>
               <span class="invoiceWord" v-show="isShowTicket">不开发票</span>

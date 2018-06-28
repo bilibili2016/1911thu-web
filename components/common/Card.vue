@@ -1243,6 +1243,9 @@ export default {
         height: 76px;
         margin-left: 30px;
         margin-top: -10px;
+        img {
+          cursor: pointer;
+        }
       }
     }
     .particulars {

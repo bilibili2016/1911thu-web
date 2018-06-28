@@ -53,6 +53,27 @@
       }
       .share {
         margin-right: 15px;
+        position: relative;
+        .shareIcon {
+          display: none;
+          width: 165px;
+          height: 31px;
+          position: absolute;
+          top: -30px;
+          right: 0;
+          img {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
+        &:hover .shareIcon {
+          display: block;
+        }
       }
       .usePhone {
         position: relative;
@@ -366,7 +387,7 @@
           &.is-bordered.is-checked {
             border-color: #6417a6;
           }
-          .el-radio__input.is-checked + .el-radio__label {
+          .el-radio__input.is-checked+.el-radio__label {
             color: #6417a6;
           }
           .el-radio__input {
