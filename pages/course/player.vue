@@ -255,7 +255,7 @@ export default {
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
-      console
+      // console
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
@@ -339,13 +339,13 @@ export default {
     playerBuy(item, info) {
       // console.log(item, 'playerItem')
       // console.log(info, 'info')
-      console.log('123')
+      // console.log('123')
       if (info.is_cart === 1) {
         // this.$alert('商品已在购物车内', '温馨提示', {
         //   confirmButtonText: '确定',
         //   callback: action => {}
         // })
-        console.log('123')
+        // console.log('123')
       } else {
         this.curriculumcartids.cartid = item[0].curriculum_id
         return new Promise((resolve, reject) => {
@@ -357,8 +357,8 @@ export default {
       }
     },
     playerBuy(item, info) {
-      console.log(item, 'playerItem')
-      console.log(info, 'info')
+      // console.log(item, 'playerItem')
+      // console.log(info, 'info')
       if (info.is_cart === 1) {
         // this.$alert('商品已在购物车内', '温馨提示', {
         //   confirmButtonText: '确定',
@@ -409,7 +409,7 @@ export default {
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
-        console.log(player.volume(), '123')
+        // console.log(player.volume(), '123')
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
