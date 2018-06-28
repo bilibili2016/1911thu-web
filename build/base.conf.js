@@ -25,7 +25,7 @@ function isTrue(value) {
 const baseRouter = env.BASE_ROUTER
 const config = {
   render: {
-    resourceHints: true
+    resourceHints: false
   },
   mode: 'spa',
   env: {
