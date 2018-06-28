@@ -172,8 +172,7 @@
         div {
           font-size: 14px;
           font-family: MicrosoftYaHei;
-          color: #c0bacc;
-          // margin-top: 10px;
+          color: #c0bacc; // margin-top: 10px;
           line-height: 30px;
         }
       }
@@ -250,7 +249,11 @@
         }
         span.barName {
           margin: 0 10px;
-          width: 271px;
+          width: 272px;
+          height: 46px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
@@ -393,7 +396,7 @@
           &.is-bordered.is-checked {
             border-color: #6417a6;
           }
-          .el-radio__input.is-checked+.el-radio__label {
+          .el-radio__input.is-checked + .el-radio__label {
             color: #6417a6;
           }
           .el-radio__input {

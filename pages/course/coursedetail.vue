@@ -98,13 +98,14 @@
                   <div class="commentator clearfix">
                     <img class="fl" :src="item.head_img" alt="">
                     <div class="fl">
-                      <p style="margin-top:5px;">{{item.nick_name}}</p>
+                      <p style="margin:5px 0 8px;">{{item.nick_name}}</p>
                       <p>{{item.create_time}}</p>
                     </div>
                     <div class="rates">
                       <el-rate disabled v-model="item.score" class="itemBox-rate fl"></el-rate>
                     </div>
-                    <h5>{{item.evaluate_content}}</h5>
+                    <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
+                    <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
                   </div>
                 </div>
               </div>
@@ -129,13 +130,14 @@
             <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index">
               <img class="fl" :src="item.head_img" alt="">
               <div class="fl">
-                <p style="margin-top:5px;">{{item.nick_name}}</p>
+                <p style="margin:3px 0 8px;">{{item.nick_name}}</p>
                 <p>{{item.create_time}}</p>
               </div>
               <div style="margin-top:10px;">
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
               </div>
-              <h5>{{item.evaluate_content}}</h5>
+              <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
+              <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
             </div>
           </div>
         </div>
@@ -214,7 +216,7 @@ export default {
       },
       btnData: [],
       btnDatas: [],
-      borderIndex: 0,
+      borderIndex: 7,
       addEvaluateForm: {
         ids: '',
         evaluatecontent: '',
@@ -271,7 +273,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
-          this.pagemsg.total = response.data.length
+          this.pagemsg.total = response.data.pageCount / 3
           this.commentator = response.data.evaluateList
         })
       })
@@ -294,7 +296,6 @@ export default {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
-      this.addEvaluateForm.tags = '内容精彩,内容生涩'
 
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
@@ -324,6 +325,7 @@ export default {
     },
     getBtnContent(val, index) {
       this.borderIndex = index
+      this.addEvaluateForm.tags = val
     },
     getCourseDetail() {
       this.loadTeacher = true
@@ -349,7 +351,7 @@ export default {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
-          this.pagemsg.total = response.data.length
+          this.pagemsg.total = response.data.pageCount / 3
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
           this.totalEvaluateInfo = response.data.totalEvaluateInfo

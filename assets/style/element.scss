@@ -953,7 +953,7 @@
         position: relative;
         overflow: hidden;
       }
-      .el-radio__input.is-checked+.el-radio__label {
+      .el-radio__input.is-checked + .el-radio__label {
         background-color: #6417a6;
         color: #fff;
         border: none;
@@ -1014,7 +1014,7 @@
     overflow: hidden;
   }
   .el-dialog__header {
-    border: 1px #e8d6f7 solid;
+    border-bottom: 1px #e8d6f7 solid;
   }
   .el-dialog__title {
     line-height: 24px;
@@ -1028,6 +1028,11 @@
       height: 450px;
       overflow: hidden;
     }
+  }
+  .el-dialog__headerbtn .el-dialog__close {
+    font-size: 20px;
+    color: #6417a6;
+    font-weight: 700;
   }
 }
 

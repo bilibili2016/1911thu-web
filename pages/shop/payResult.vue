@@ -26,10 +26,11 @@
       </h5> -->
       <h5>
         <span @click="choiceCourse">继续选课</span>
-        <span>查看订单</span>
+        <span @click="goMycourse('tab-third')">查看订单</span>
       </h5>
       <div class="goback">
-        <span>{{seconds}}s后</span>前往个人中心</div>
+        <span>
+          <i>{{seconds}}</i>s后</span>前往个人中心</div>
     </div>
 
   </div>
@@ -55,8 +56,19 @@ export default {
   methods: {
     ...mapActions('auth', ['setGid']),
     choiceCourse() {
-      // this.$router.push('/course/chooselesson')
       window.open(window.location.origin + '/course/chooselesson')
+    },
+    goMycourse(item) {
+      this.gidForm.gids = item
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
+      this.$bus.$emit('selectProfileIndex', item)
+      this.$router.push({
+        path: '/profile',
+        query: {
+          tab: item
+        }
+      })
     },
     payComplete() {
       this.payCompleteForm.orderId = persistStore.get('cpyid')

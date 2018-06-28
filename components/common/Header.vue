@@ -10,7 +10,11 @@
     </div>
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
+<<<<<<< HEAD
         <img src="@/assets/images/logo2.png" alt="">
+=======
+        <img src="http://pam8iyw9q.bkt.clouddn.com/logo.png" alt="">
+>>>>>>> 50a2bd7f4559f30a739ab3f1f5371ef8fb9ad384
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
