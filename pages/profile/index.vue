@@ -152,12 +152,6 @@
           <span slot="label" class="tabList">
             <i class="icon-company"></i> 绑定机构ID</span>
           <v-companyId :cpnData="companyData"></v-companyId>
-          <div class="content">
-            <div class="noCourse" v-if="isShowNoCourse">
-              <img :src="noMsgImg" alt="">
-              <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
-            </div>
-          </div>
         </el-tab-pane>
         <!-- 专属邀请码 -->
         <el-tab-pane name="tab-eighth" v-if="codeData.length">
