@@ -64,7 +64,7 @@
     <div class="start" v-if="start">
       <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
-      <div class="lrFrame" v-show="lrFrame">
+      <div class="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
@@ -562,7 +562,7 @@ export default {
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.loadLogin = true
+          // this.loadLogin = true
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               this.$message({
@@ -576,7 +576,7 @@ export default {
                 this.getCount()
                 this.$bus.$emit('reLogin', true)
               }
-              this.loadLogin = false
+              // this.loadLogin = false
             })
           })
         } else {
