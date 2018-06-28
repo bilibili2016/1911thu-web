@@ -66,9 +66,9 @@
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
           <el-card>
-            <el-tabs v-model="activeOrder">
+            <el-tabs v-model="activeOrder" v-if="isShowCourseList">
               <el-tab-pane label="全部" name="orderFirst">
-                <v-order v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" :config="configOne" @handleUpdate="getUpdateMsg" v-loading="allOrderLoad"></v-order>
+                <v-order v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" :config="configOne" @handleUpdate="getUpdateMsg" @changeStatus="handleChange" v-loading="allOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -78,7 +78,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="未完成" name="orderSecond">
-                <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-order>
+                <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" @changeStatus="handleChange" v-loading="unfinishedOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -88,7 +88,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="已完成" name="orderThird">
-                <v-order v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" v-loading="readyOrderLoad"></v-order>
+                <v-order v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @changeStatus="handleChange" v-loading="readyOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -98,7 +98,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane label="已失效" name="orderFour">
-                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" v-loading="invalidOrderLoad"></v-order>
+                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @changeStatus="handleChange" v-loading="invalidOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -108,8 +108,10 @@
                 </div>
               </el-tab-pane>
             </el-tabs>
+            <el-tabs v-else>
+              <v-course @return="handleReturn"></v-course>
+            </el-tabs>
           </el-card>
-
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fourth">
@@ -185,6 +187,7 @@ import Info from '@/pages/profile/components/info'
 import Order from '@/pages/profile/pages/order'
 import CompanyId from '@/pages/profile/pages/companyid'
 import Invitation from '@/pages/profile/pages/invitation'
+import Course from '@/pages/profile/pages/courselist'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -197,10 +200,12 @@ export default {
     'v-banner': Banner,
     'v-order': Order,
     'v-companyId': CompanyId,
-    'v-invitation': Invitation
+    'v-invitation': Invitation,
+    'v-course': Course
   },
   data() {
     return {
+      isShowCourseList: true,
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
@@ -267,6 +272,12 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
+    handleChange(flag) {
+      this.isShowCourseList = flag
+    },
+    handleReturn(flag) {
+      this.isShowCourseList = flag
+    },
     getUpdateMsg(msg) {
       if (msg === true) {
         this.getAllOrderData()

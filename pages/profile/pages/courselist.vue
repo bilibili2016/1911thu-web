@@ -1,18 +1,21 @@
 <template>
   <div class="checkedCourseList">
-    <!-- 购物车列表 -->ß
+    <!-- 购物车列表 -->
     <div class="main" v-loading='loading'>
       <div class="table">
         <div class="tableHeader">
-          <span style="font-size:14px;color:#8F4ACB;margin-left:30px;">
-            <i class="el-icon-arrow-left"></i>上一步</span>
-          <span class="courseName">课程名称</span>
-          <span class="price" style="margin-left:830px;">单价</span>
+          <span class="table-return" @click="returnLastPage">
+            <i class="el-icon-arrow-left" style="font-size:16px"></i>上一步</span>
+          <span class="courseName">课程</span>
+          <span class="price">单价</span>
+          <span class="course-num">课程数量</span>
         </div>
         <div class="tableBody">
           <div v-for="(course,index) in courseList" :key="index">
             <div class="courseInfo clearfix">
-              <img class="fl" :src="course.picture" alt="">
+              <div class="course-img">
+                <img class="fl" :src="course.picture" alt="">
+              </div>
               <div class="fl">
                 <h4 style="padding:0">{{course.name}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
@@ -21,6 +24,10 @@
             </div>
             <div class="coursePrice">
               ￥{{course.price}}
+            </div>
+            <div class="courseNum">
+              <i class="el-icon-close"></i>
+              <span>10</span>
             </div>
             <!-- <div class="courseOperation">
               删除
@@ -58,6 +65,9 @@ export default {
     }
   },
   methods: {
+    returnLastPage() {
+      this.$emit('return', true)
+    },
     curriculumPayApply() {
       return new Promise((resolve, reject) => {
         home.curriculumPayApply(this.orderForm).then(response => {
