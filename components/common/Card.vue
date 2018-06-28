@@ -599,7 +599,10 @@ export default {
       }
     },
     buyNewCourse(item) {
+<<<<<<< HEAD
       // console.log(item, '这是item')
+=======
+>>>>>>> origin/liyr
       if (item.is_cart === '0') {
         this.curriculumcartids.cartid = item.id
         return new Promise((resolve, reject) => {

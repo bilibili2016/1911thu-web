@@ -62,7 +62,8 @@ export default {
     },
     selectPayApply(item, index) {
       persistStore.set('order', item.id)
-      this.$router.push('/shop/checkedCourseList')
+      this.$emit('changeStatus', false)
+      // this.$router.push('/shop/checkedCourseList')
     },
     goShopping(id) {
       this.orderForm.ids = id

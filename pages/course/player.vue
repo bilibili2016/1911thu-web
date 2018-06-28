@@ -486,6 +486,9 @@ export default {
             type: 'success',
             message: response.msg
           })
+          if (this.word === '') {
+            return
+          }
           this.closeReport()
         })
       })
