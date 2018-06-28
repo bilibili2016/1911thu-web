@@ -231,6 +231,8 @@ export default {
     // 获取新上好课列表
     getNewCourseList() {
       home.getNewCourseList(this.curruntForm).then(response => {
+        if (response.status === '100008') {
+        }
         this.newData = response.data.curriculumList
       })
     },

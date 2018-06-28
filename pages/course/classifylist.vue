@@ -33,8 +33,11 @@
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
       </div>
-      <div class="carlist">
+      <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>
+      </div>
+      <div v-else v-loading="loadCourse">
+        <v-nothing></v-nothing>
       </div>
     </div>
 
@@ -47,12 +50,14 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
+import SearchNothing from '@/components/common/SearchNothing.vue'
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-page': CustomPagination
+    'v-page': CustomPagination,
+    'v-nothing': SearchNothing
   },
   computed: {
     ...mapState('auth', ['pid', 'cid'])
