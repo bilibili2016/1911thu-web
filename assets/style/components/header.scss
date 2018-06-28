@@ -115,11 +115,13 @@
         span {
           width: 20px;
           height: 20px;
-          background: url('http://pam8iyw9q.bkt.clouddn.com/cartIcon.png') no-repeat;
+          background: url('http://pam8iyw9q.bkt.clouddn.com/cartIcon.png')
+            no-repeat;
           background-size: 20px 20px;
           transition: all 300ms;
           &:hover {
-            background: url('http://pam8iyw9q.bkt.clouddn.com/cartIconHover.png') no-repeat;
+            background: url('http://pam8iyw9q.bkt.clouddn.com/cartIconHover.png')
+              no-repeat;
             background-size: 20px 20px;
           }
         }
@@ -370,14 +372,16 @@
         margin: 30px auto 25px;
         text-align: center;
         padding-right: 40px;
-        background: url('http://pam8iyw9q.bkt.clouddn.com/wx1.png') no-repeat 97px 0;
+        background: url('http://pam8iyw9q.bkt.clouddn.com/wx1.png') no-repeat
+          97px 0;
         background-size: 24px 24px;
         font-size: 14px;
         color: #555555;
         cursor: pointer;
         transition: all 300ms;
         &:hover {
-          background: url('http://pam8iyw9q.bkt.clouddn.com/wx2.png') no-repeat 97px 0;
+          background: url('http://pam8iyw9q.bkt.clouddn.com/wx2.png') no-repeat
+            97px 0;
           background-size: 24px 24px;
         }
       }
@@ -422,6 +426,8 @@
       top: 90px;
       left: 50%;
       margin-left: -225px;
+      z-index: 999;
+      padding-bottom: 64px;
       .el-form {
         padding-top: 50px;
       }
