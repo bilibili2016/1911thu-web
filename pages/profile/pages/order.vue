@@ -39,6 +39,7 @@
 
 <script>
 import { home } from '~/lib/v1_sdk/index'
+import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['orderData'],
@@ -50,10 +51,12 @@ export default {
         limits: null,
         payStatus: null,
         ids: null
-      }
+      },
+      gidForm: { gids: null }
     }
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
     goCourseInfo(item, index) {
       this.kidForm.kids = item.curriculum_id
       persistStore.set('kid', item.curriculum_id)
@@ -62,7 +65,7 @@ export default {
     },
     selectPayApply(item, index) {
       persistStore.set('order', item.id)
-      this.$router.push('/shop/checkedCourseList')
+      this.$emit('goOrderDetail', false)
     },
     goShopping(id) {
       this.orderForm.ids = id
@@ -120,6 +123,12 @@ export default {
       let m = date.getMinutes() + ':'
       let s = date.getSeconds()
       return Y + M + D + h + m + s
+    },
+    goLink(item) {
+      this.gidForm.gids = item
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
+      this.$bus.$emit('selectProfileIndex', item)
     }
   }
 }

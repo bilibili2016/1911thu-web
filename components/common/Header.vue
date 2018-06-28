@@ -10,11 +10,8 @@
     </div>
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
-<<<<<<< HEAD
-        <img src="@/assets/images/logo2.png" alt="">
-=======
         <img src="http://pam8iyw9q.bkt.clouddn.com/logo.png" alt="">
->>>>>>> 50a2bd7f4559f30a739ab3f1f5371ef8fb9ad384
+
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
@@ -68,7 +65,7 @@
     <div class="start" v-if="start">
       <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
-      <div class="lrFrame" v-show="lrFrame">
+      <div class="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
@@ -303,6 +300,11 @@ export default {
           }
         ],
         checked: [
+          {
+            required: true,
+            message: '',
+            trigger: 'blur'
+          },
           {
             validator: checkProtocol,
             trigger: 'change'
@@ -540,24 +542,26 @@ export default {
     signUp(formName) {
       this.registerData.ectpwd = encryption(this.registerData.passwords)
       this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.loadLogin = true
-          return new Promise((resolve, reject) => {
-            auth.signUp(this.registerData).then(response => {
-              this.$message({
-                showClose: true,
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
+        if (this.registerData.checked) {
+          if (valid) {
+            this.loadLogin = true
+            return new Promise((resolve, reject) => {
+              auth.signUp(this.registerData).then(response => {
+                this.$message({
+                  showClose: true,
+                  type: response.status === 0 ? 'success' : 'error',
+                  message: response.msg
+                })
+                if (response.status === 0) {
+                  this.alreadySignin()
+                  this.close()
+                }
+                this.loadLogin = false
               })
-              if (response.status === 0) {
-                this.alreadySignin()
-                this.close()
-              }
-              this.loadLogin = false
             })
-          })
-        } else {
-          return false
+          } else {
+            return false
+          }
         }
       })
     },
@@ -566,7 +570,7 @@ export default {
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.loadLogin = true
+          // this.loadLogin = true
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
               this.$message({
@@ -578,9 +582,10 @@ export default {
                 this.close()
                 this.getUserInfo()
                 this.getCount()
+                persistStore.set('loginMsg', false)
                 this.$bus.$emit('reLogin', true)
               }
-              this.loadLogin = false
+              // this.loadLogin = false
             })
           })
         } else {
@@ -816,6 +821,7 @@ export default {
       // if (this.isAuthenticated) {
       home.getUserInfo().then(res => {
         if (res.status === '100008') {
+          persistStore.set('dandian', true)
           this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
             confirmButtonText: '确定',
             callback: action => {
@@ -824,6 +830,7 @@ export default {
             }
           })
         } else if (res.status === '100100') {
+          persistStore.set('dandian', true)
           if (this.authPath.indexOf(window.location.pathname) > 0) {
             this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
               confirmButtonText: '确定',
@@ -834,6 +841,7 @@ export default {
             })
           }
         } else {
+          persistStore.set('dandian', false)
           this.userInfo = res.data.userInfo
           persistStore.set('nickName', this.userInfo.nick_name)
           persistStore.set('phone', this.userInfo.user_name)

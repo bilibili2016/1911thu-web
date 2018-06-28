@@ -91,7 +91,7 @@
         text-align: center;
         height: 30px;
         margin: 80px 0 50px;
-        & > span {
+        &>span {
           cursor: pointer;
         }
         .el-pagination {
@@ -299,7 +299,7 @@
             border-color: #6417a6;
             background-color: #6417a6;
           }
-          & + .el-checkbox__label {
+          &+.el-checkbox__label {
             color: #222;
           }
         }
