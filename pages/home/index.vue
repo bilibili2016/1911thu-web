@@ -29,6 +29,7 @@ import Evaluate from '@/pages/home/components/evaluate.vue'
 import Info from '@/pages/home/components/info.vue'
 import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
+import { store as persistStore } from '~/lib/core/store'
 
 import { home } from '~/lib/v1_sdk/index'
 export default {
@@ -170,18 +171,28 @@ export default {
       newsInfoForm: {
         page: 1,
         limits: 4
-      }
+      },
+      loginMsg: false
     }
   },
   beforeCreate() {
     // this.getAll()
   },
   created() {
-    this.getAll()
+    // if (this.loginMsg === false) {
+    //   this.getAll()
+    // }
+    let aa = persistStore.get('dandian')
+    console.log(aa)
+    // console.log(persistStore.get('dandian'))
   },
   mounted() {
-    // document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    // document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.$bus.$on('loginMsg', data => {
+      if (data === true) {
+        this.loginMsg = true
+      }
+    })
+
     this.$bus.$on('reLogin', data => {
       this.getAll()
     })

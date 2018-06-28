@@ -812,6 +812,7 @@ export default {
       // if (this.isAuthenticated) {
       home.getUserInfo().then(res => {
         if (res.status === '100008') {
+          persistStore.set('dandian', true)
           this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
             confirmButtonText: '确定',
             callback: action => {
