@@ -23,8 +23,8 @@
           <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">¥{{courseList.order_amount}}</div>
           <div class="status height" :style="{height: courseList.orderCurriculumList.length>3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
             <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
-            <p v-if="courseList.pay_status === '2'">已支付</p>
-            <p v-if="courseList.pay_status === '3'">已关闭</p>
+            <p class="payReady" v-if="courseList.pay_status === '2'">已支付</p>
+            <p class="payClose" v-if="courseList.pay_status === '3'">已关闭</p>
             <p>
               <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id)">立即支付</span>
               <span class="buy" v-if="courseList.pay_status === '3'" @click="goShopping(courseList.id)">立即购买</span>

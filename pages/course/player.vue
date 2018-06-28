@@ -395,7 +395,7 @@ export default {
         player.volume(volume)
       }
       player.pause()
-      var socket = new io('http://ceshi.1911edu.com:2120')
+      var socket = new io('http://www.1911edu.com:2120')
       // 连接socket
       socket.on('connect', function() {
         // console.log('已连接')

@@ -104,7 +104,8 @@
                     <div class="rates">
                       <el-rate disabled v-model="item.score" class="itemBox-rate fl"></el-rate>
                     </div>
-                    <h5>{{item.evaluate_content}}</h5>
+                    <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
+                    <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
                   </div>
                 </div>
               </div>
@@ -135,7 +136,8 @@
               <div style="margin-top:10px;">
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
               </div>
-              <h5>{{item.evaluate_content}}</h5>
+              <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
+              <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
             </div>
           </div>
         </div>
@@ -214,7 +216,7 @@ export default {
       },
       btnData: [],
       btnDatas: [],
-      borderIndex: 0,
+      borderIndex: 7,
       addEvaluateForm: {
         ids: '',
         evaluatecontent: '',
@@ -294,7 +296,6 @@ export default {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
-      this.addEvaluateForm.tags = '内容精彩,内容生涩'
 
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
@@ -324,6 +325,7 @@ export default {
     },
     getBtnContent(val, index) {
       this.borderIndex = index
+      this.addEvaluateForm.tags = val
     },
     getCourseDetail() {
       this.loadTeacher = true

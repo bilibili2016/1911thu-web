@@ -77,7 +77,10 @@
                   </div>
                 </div>
               </el-tab-pane>
-              <el-tab-pane label="未完成" name="orderSecond">
+              <el-tab-pane name="orderSecond">
+                <span class="payCut" slot="label">未完成
+                  <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
+                </span>
                 <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
@@ -87,7 +90,10 @@
                   </div>
                 </div>
               </el-tab-pane>
-              <el-tab-pane label="已完成" name="orderThird">
+              <el-tab-pane name="orderThird">
+                <span class="payOk" slot="label">已完成
+                  <i v-if="readyOrderData && readyOrderData.length>0">{{readyOrderData.length}}</i>
+                </span>
                 <v-order v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" v-loading="readyOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
@@ -97,7 +103,10 @@
                   </div>
                 </div>
               </el-tab-pane>
-              <el-tab-pane label="已失效" name="orderFour">
+              <el-tab-pane name="orderFour">
+                <span class="payOff" slot="label">已失效
+                  <i v-if="invalidOrderData && invalidOrderData.length>0">{{invalidOrderData.length}}</i>
+                </span>
                 <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" v-loading="invalidOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
@@ -462,6 +471,27 @@ export default {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
     overflow: hidden;
+  }
+  .el-tabs__content {
+    .el-tabs__item {
+      span {
+        position: relative;
+        i {
+          position: absolute;
+          top: 5px;
+          right: -18px;
+          width: 18px;
+          height: 18px;
+          line-height: 18px;
+          text-align: center;
+          border-radius: 50%;
+          font-size: 12px;
+          color: #fff;
+          display: inline-block;
+          background-color: #ff5f5f;
+        }
+      }
+    }
   }
 }
 .profile {
