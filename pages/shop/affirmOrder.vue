@@ -14,14 +14,14 @@
             <h4>购买方式：</h4>
             <p>
               <span :class={checked:person} @click="buyType('1')">个人购买</span>
-              <span :class={checked:!person} @click="buyType('2')">企业购买</span>
+              <span :class={checked:!person} @click="buyType('2')">机构购买</span>
             </p>
           </div>
           <div class="company" v-show="!person">
             <h4 class="clearfix">
-              <span class="fl">企业信息：</span>
+              <span class="fl">机构信息：</span>
               <span class="fr addCompany" v-if="flag" @click="openCompanyInfo">
-                <i class="el-icon-circle-plus-outline"></i> 添加企业信息</span>
+                <i class="el-icon-circle-plus-outline"></i> 添加机构信息</span>
               <span class="fr addCompany" v-else @click="openCompanyInfo">
                 <i class="el-icon-edit-outline"></i> 修改</span>
             </h4>
@@ -263,7 +263,7 @@ export default {
       })
     },
     addCompanyInfo(formName) {
-      //提交企业信息表单
+      //提交机构信息表单
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -301,7 +301,7 @@ export default {
       this.companyInfo.companyname = item.company_name
     },
     querySearchAsync(queryString, cb) {
-      //搜索企业
+      //搜索机构
       queryString = queryString.replace(/^\s+|\s+$/g, '')
       if (queryString === '') {
         return false
@@ -323,7 +323,7 @@ export default {
         )
       }
     },
-    //搜索企业 接口
+    //搜索机构 接口
     searchCompanyList() {
       if (this.companyInfo.companyname === '') {
         return false

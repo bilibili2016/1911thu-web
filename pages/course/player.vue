@@ -1,8 +1,8 @@
 <template>
   <div class="playerBox clearfix" ref="playerBox">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
-      <div class="playTop">
-        <i class="el-icon-arrow-left" @click="goLink()"></i>{{player.title}}
+      <div class="playTop" @click="goLink()">
+        <i class="el-icon-arrow-left"></i>{{player.title}}
       </div>
       <div class="playInner" ref="playInner">
         <video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>
@@ -34,8 +34,10 @@
       <div v-show="mediaRInner" class="inner">
         <h5 class="title">{{player.title}}</h5>
         <div class="teacher clearfix">
-          <img class="fl" :src="player.head_img" alt="">
+
+          <img class="fl" :src="player.head_img" alt="" @click="goTeacherInfo(player.teacher_id)">
           <div class="playername fl" @click="goTeacher(player.teacher_id)">
+
             <div class="fl">{{player.teacher_name}}</div>
             <div class="fl">{{player.graduate}}</div>
           </div>
@@ -228,7 +230,10 @@ export default {
       seconds: 500000,
       time: '',
       player: '',
-      clickMsg: false
+      clickMsg: false,
+      tidForm: {
+        tids: ''
+      }
     }
   },
   methods: {
@@ -241,6 +246,12 @@ export default {
       this.clickMsg = true
       this.autoplay = true
       this.getPlayerInfo()
+    },
+    goTeacherInfo(id) {
+      this.tidForm.tids = Number(id)
+      console
+      this.setTid(this.tidForm)
+      window.open(window.location.origin + '/home/components/teacher')
     },
     goShoppingCart(msg) {
       this.$confirm(msg, '提示', {
@@ -322,16 +333,19 @@ export default {
     playerBuy(item, info) {
       // console.log(item, 'playerItem')
       // console.log(info, 'info')
+      console.log('123')
       if (info.is_cart === 1) {
-        this.$alert('商品已在购物车内', '温馨提示', {
-          confirmButtonText: '确定',
-          callback: action => {}
-        })
+        // this.$alert('商品已在购物车内', '温馨提示', {
+        //   confirmButtonText: '确定',
+        //   callback: action => {}
+        // })
+        console.log('123')
       } else {
         this.curriculumcartids.cartid = item[0].curriculum_id
         return new Promise((resolve, reject) => {
           home.addShopCart(this.curriculumcartids).then(response => {
-            this.$router.push('/shop/shoppingcart')
+            // this.$router.push('/shop/shoppingcart')
+            window.open(window.location.origin + '/shop/shoppingcart')
           })
         })
       }
@@ -340,15 +354,16 @@ export default {
       console.log(item, 'playerItem')
       console.log(info, 'info')
       if (info.is_cart === 1) {
-        this.$alert('商品已在购物车内', '温馨提示', {
-          confirmButtonText: '确定',
-          callback: action => {}
-        })
+        // this.$alert('商品已在购物车内', '温馨提示', {
+        //   confirmButtonText: '确定',
+        //   callback: action => {}
+        // })
       } else {
         this.curriculumcartids.cartid = item[0].curriculum_id
         return new Promise((resolve, reject) => {
           home.addShopCart(this.curriculumcartids).then(response => {
-            this.$router.push('/shop/shoppingCart')
+            // this.$router.push('/shop/shoppingCart')
+            window.open(window.location.origin + '/shop/shoppingcart')
           })
         })
       }
@@ -369,6 +384,10 @@ export default {
       this.playerForm.catalogId = persistStore.get('catalogId')
       // 设置websocket
       var player = TCPlayer('movd', this.tcplayer)
+      if (persistStore.get('volume')) {
+        let volume = persistStore.get('volume')
+        player.volume(volume)
+      }
       player.pause()
       var socket = new io('http://ceshi.1911edu.com:2120')
       // 连接socket
@@ -382,6 +401,10 @@ export default {
       player.on('pause', () => {
         clearInterval(that.interval)
         socket.emit('watchRecordingTime_disconnect')
+      })
+      player.on('volumechange', () => {
+        console.log(player.volume(), '123')
+        persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
         that.interval = setInterval(() => {

@@ -465,6 +465,11 @@ export default {
       // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
+      console.log(item, '123')
+      // if(this.productsNum === null)
+      console.log(this.productsNum, '12345678')
+
+      console.log(this.productsNum, '3')
       let len = this.productsNum
       if (item.is_checked === false) {
         item.is_checked = false
@@ -485,10 +490,20 @@ export default {
     },
     goBuy(detail) {
       if (this.isAuthenticated) {
-        if(detail === true){
+        let len = Number(this.productsNum) + 1
+        console.log(len, 'len')
+        this.setProductsNum({
+          pn: len
+        })
+        if (detail === true) {
           this.detailAddShopCarts()
-        }else {
+        } else {
           this.addShopCarts()
+          // let len = Number(this.productsNum) + 1
+          // console.log(len, 'len')
+          // this.setProductsNum({
+          //   pn: len
+          // })
         }
       } else {
         this.$bus.$emit('loginShow', true)
@@ -664,6 +679,16 @@ export default {
   mounted() {
     if (window.location.pathname === '/course/coursedetail') {
       // this.getdefaultCurriculumCatalogs()
+    }
+    if (
+      !this.productsNum &&
+      typeof this.productsNum != 'undefined' &&
+      this.productsNum != 0
+    ) {
+      console.log('进来了')
+      this.setProductsNum({
+        pn: 0
+      })
     }
   }
 }

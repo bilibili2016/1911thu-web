@@ -45,13 +45,14 @@
                   </div>
                 </div>
                 <div class="text">
+                  <i class="el-icon-warning"></i>
                   请在24小时以内支付完成，如未完成此订单将自动关闭，需重新购买！
                   <span class="fr">应付金额：¥{{orderDetail.order_amount}}</span>
                 </div>
                 <div class="fr pay">
                   <el-button @click="addPaySubmit">立即支付</el-button>
                 </div>
-                <div class="fk fr">
+                <div class="fk fr" @click="feedback">
                   我有疑问，需要反馈?
                 </div>
               </div>
@@ -73,6 +74,19 @@
           </div>
         </div>
       </div>
+      <div class="reportBug" v-show="showReportBug">
+        <div class="note">
+          <h4>报告问题
+            <i @click="closeReport" class="el-icon-close fr"></i>
+          </h4>
+          <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题">
+          </el-input>
+          <div class="commitBug">
+            <!-- @click="reportProblem" -->
+            <el-button @click="reportProblem">提交</el-button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -89,6 +103,7 @@ export default {
     return {
       company: '北京分分形状科技有限公司',
       time: '2018-06-05 09：30：05',
+      showReportBug: false,
       courseList: [],
       curriculumPayData: [],
       allPrice: '69.00',
@@ -140,6 +155,20 @@ export default {
     takeUp() {
       this.takeupMsg = !this.takeupMsg
     },
+    closeReport() {
+      this.showReportBug = false
+    },
+    reportProblem() {
+      this.$message({
+        showClose: true,
+        type: 'success',
+        message: '您的疑问已反馈，我们会尽快与您联系'
+      })
+      this.showReportBug = false
+    },
+    feedback() {
+      this.showReportBug = true
+    },
     unloggedClick() {
       this.wxMask = false
     },
@@ -151,6 +180,7 @@ export default {
       persistStore.set('price', item.totalPresentPrice)
       this.$router.push('/shop/checkedcourselist')
     },
+
     goLink(item) {
       this.$router.push(item)
     },
@@ -225,4 +255,61 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.reportBug {
+  // display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  .note {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    margin-left: -180px;
+    width: 360px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 0 20px;
+    h4 {
+      line-height: 62px;
+      color: #222;
+      font-size: 16px;
+      i {
+        font-size: 30px;
+        margin-top: 15px;
+        color: #6417a6;
+      }
+    }
+    .el-textarea__inner {
+      width: 100%;
+      font-size: 12px;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #bbbbbb;
+    }
+    .commitBug {
+      text-align: center;
+      margin: 30px 0;
+      .el-button {
+        border: none;
+        transition: background 300ms;
+        background-color: #6417a6;
+        &:hover {
+          background-color: #8f4acb;
+        }
+      }
+      button {
+        width: 160px;
+        height: 40px;
+        border-radius: 20px;
+        color: #fff;
+      }
+    }
+  }
+}
+</style>
 
