@@ -56,6 +56,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setGid']),
     choiceCourse() {
+      clearInterval(this.interval)
       window.open(window.location.origin + '/course/chooselesson')
     },
     goMycourse(item) {
@@ -63,6 +64,7 @@ export default {
       this.setGid(this.gidForm)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', item)
+      clearInterval(this.interval)
       this.$router.push({
         path: '/profile',
         query: {
@@ -90,6 +92,7 @@ export default {
     goLink(item) {
       this.gidForm.gids = item
       this.setGid(this.gidForm)
+      clearInterval(this.interval)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', item)
     }
