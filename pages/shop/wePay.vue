@@ -38,14 +38,14 @@
                       <img src="@/assets/images/wxp.png" alt="">
                       <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="wxMsg">
                     </div>
+                    <div class="pub fr" @click="selectPub" :class="{borderColor: pubMsg}">
+                      <img src="@/assets/images/payPublic.png" alt="">
+                      <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="pubMsg">
+                    </div>
                     <div class="wx fr" @click="selectZfb" :class="{borderColor: zfbMsg}">
                       <img src="@/assets/images/zfb.png" alt="">
                       <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="zfbMsg">
                     </div>
-                  </div>
-                  <div class="pub fl" @click="selectPub" :class="{borderColor: pubMsg}">
-                    <img src="@/assets/images/payPublic.png" alt="">
-                    <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="pubMsg">
                   </div>
                 </div>
                 <div class="text">
