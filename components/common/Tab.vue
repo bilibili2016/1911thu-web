@@ -61,7 +61,7 @@ export default {
       this.kidForm.kids = linedata.id
       persistStore.set('curriculumId', linedata.id)
       this.setKid(this.kidForm)
-      this.$router.push('course/coursedetail')
+      this.$router.push('/course/coursedetail')
     },
     handlePid(item, index) {
       window.open(window.location.origin + '/course/category')

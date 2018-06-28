@@ -696,7 +696,7 @@ export default {
     },
     getMore(item) {
       // this.$router.push(item)
-      window.open(window.location.origin + item)
+      window.open(window.location.origin + '/course/coursedetail')
     },
     toggleShow: function() {
       this.isShow = !this.isShow
