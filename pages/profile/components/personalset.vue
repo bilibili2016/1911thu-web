@@ -92,9 +92,10 @@
           <!-- 修改密码 -->
           <div v-show="showPwd" class="changePwd">
             <input type="password" class="hideInput">
-            <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm">
+            <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autocomplete="off">
               <el-form-item label="原密码：" prop="oldPass">
-                <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input>
+                <!-- <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input> -->
+                <el-input type="text" v-model="changePwd.oldPass" auto-complete="off" onfocus="this.type='password'" id="onlyOne" disableautocomplete></el-input>
               </el-form-item>
               <el-form-item label="新密码：" prop="newPass">
                 <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
