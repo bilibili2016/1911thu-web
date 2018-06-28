@@ -745,7 +745,7 @@
         font-weight: 700;
         &.is-active {
           background-color: transparent;
-          border-bottom: 4px solid #6417a6;
+          // border-bottom: 4px solid #6417a6;
         }
         &:last-child {
           margin-left: 20px;
@@ -953,7 +953,7 @@
         position: relative;
         overflow: hidden;
       }
-      .el-radio__input.is-checked+.el-radio__label {
+      .el-radio__input.is-checked + .el-radio__label {
         background-color: #6417a6;
         color: #fff;
         border: none;

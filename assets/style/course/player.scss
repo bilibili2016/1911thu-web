@@ -395,7 +395,7 @@
           &.is-bordered.is-checked {
             border-color: #6417a6;
           }
-          .el-radio__input.is-checked+.el-radio__label {
+          .el-radio__input.is-checked + .el-radio__label {
             color: #6417a6;
           }
           .el-radio__input {
