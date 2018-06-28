@@ -12,12 +12,9 @@
           </div>
           <div class="fr rightPages">
             <span v-show="hideSwitch">
-              <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#999" @change="hideCourse">
+              <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#ddd" @change="hideCourse">
               </el-switch>隐藏已参加课程
             </span>
-            <div class="pagination pages">
-              <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total"></el-pagination>
-            </div>
           </div>
         </div>
       </div>
