@@ -2,7 +2,7 @@
   <div>
     <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fifth'"></v-banner>
     <div class="center-tab center profile bigTab" style="min-height:800px;">
-      <el-tabs :tab-position="tabPosition" v-model="activeTab">
+      <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
         <!-- 我的信息 -->
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label" class="tabList">
@@ -237,7 +237,7 @@ export default {
       avator: 'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png',
       noMsgImg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
       tabPosition: 'left',
-      activeTab: 'tab-seventh',
+      activeTab: 'tab-first',
       activeNames: 'first',
       activeOrder: 'orderFirst',
       bconfig: {
@@ -332,7 +332,10 @@ export default {
     goBack() {
       this.showOrderList = true
     },
-
+    handleClick(item) {
+      // name
+      persistStore.set('gid', item.name)
+    },
     studyCurriculumList() {
       this.styleForm.types = 1
       this.styleForm.pages = 0
@@ -463,7 +466,6 @@ export default {
             this.courseList = response.data.orderCurriculumList
             this.orderDetail = response.data.orderDetail
           }
-          // this.loading = false
           resolve(true)
         })
       })
