@@ -295,8 +295,6 @@ export default {
     },
     saveInvoice() {
       // 保存机构发票抬头
-      console.log(this.invoiceForm.companyname)
-
       if (
         this.invoiceForm.companyname === '' ||
         this.invoiceForm.companyname === null
@@ -313,13 +311,11 @@ export default {
     changeInvoice() {
       // 编辑机构发票抬头
       this.invoiceForm.saveioc = false
-      // console.log('编辑机构发票抬头')
     },
     deleteInvoice() {
       // 删除机构发票抬头
       this.invoiceForm.saveioc = false
       this.invoiceForm.ticket = true
-      // console.log('删除机构发票抬头')
     },
     addInvoiceInfo() {
       // 添加发票 invoiceForm
@@ -357,7 +353,6 @@ export default {
         this.close()
       }
     },
-    // Wapi/Invoice/invoiceDetail
     getTicket() {
       this.invoiceForm.types = 2
       return new Promise((resolve, reject) => {
