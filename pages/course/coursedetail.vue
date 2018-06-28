@@ -98,7 +98,7 @@
                   <div class="commentator clearfix">
                     <img class="fl" :src="item.head_img" alt="">
                     <div class="fl">
-                      <p style="margin-top:5px;">{{item.nick_name}}</p>
+                      <p style="margin:5px 0 8px;">{{item.nick_name}}</p>
                       <p>{{item.create_time}}</p>
                     </div>
                     <div class="rates">
@@ -129,7 +129,7 @@
             <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index">
               <img class="fl" :src="item.head_img" alt="">
               <div class="fl">
-                <p style="margin-top:5px;">{{item.nick_name}}</p>
+                <p style="margin:3px 0 8px;">{{item.nick_name}}</p>
                 <p>{{item.create_time}}</p>
               </div>
               <div style="margin-top:10px;">
@@ -271,7 +271,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
-          this.pagemsg.total = response.data.length
+          this.pagemsg.total = response.data.pageCount / 3
           this.commentator = response.data.evaluateList
         })
       })
@@ -349,7 +349,7 @@ export default {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
-          this.pagemsg.total = response.data.length
+          this.pagemsg.total = response.data.pageCount / 3
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
           this.totalEvaluateInfo = response.data.totalEvaluateInfo

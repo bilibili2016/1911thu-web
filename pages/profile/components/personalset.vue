@@ -202,7 +202,7 @@ export default {
     },
     getUserInfo() {
       home.getUserInfo().then(res => {
-        console.log(res, '123')
+        // console.log(res, '123')
         this.psnForm = res.data.userInfo
         if (this.psnForm.company_name && this.psnForm.company_name != '') {
           this.hasCompany = true

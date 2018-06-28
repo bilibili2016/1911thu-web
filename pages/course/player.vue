@@ -57,9 +57,9 @@
                 <i class="el-icon-caret-right"></i>
               </span>
               <span class="fl playImg" v-if="ischeck === bar.id?true:false">
-                <img src="@/assets/images/playImg.png" alt="">
+                <img src="@/assets/images/playImg.gif" alt="">
               </span>
-              <span class="fl barName">{{bar.video_number}} {{bar.title}}（{{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
+              <span class="fl barName">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
               </span>
             </div>
           </div>

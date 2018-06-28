@@ -10,11 +10,11 @@
   border-radius: $--button-large-border-radius;
 }
 
-.el-button + .el-button {
+.el-button+.el-button {
   margin: 0 10px;
 }
 
-.el-button + .el-dropdown {
+.el-button+.el-dropdown {
   margin: 0 10px;
 }
 
@@ -760,7 +760,7 @@
 
 // profile页面修改tab
 .profile {
-  & > div > div.el-tabs__content {
+  &>div>div.el-tabs__content {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
   }
@@ -814,10 +814,10 @@
       box-shadow: none;
     }
   }
-  & > .el-tabs {
+  &>.el-tabs {
     padding: 10px;
   }
-  & > .el-tabs--left,
+  &>.el-tabs--left,
   .el-tabs--right {
     overflow: auto;
   }
@@ -1014,7 +1014,7 @@
     overflow: hidden;
   }
   .el-dialog__header {
-    border: 1px #e8d6f7 solid;
+    border-bottom: 1px #e8d6f7 solid;
   }
   .el-dialog__title {
     line-height: 24px;
@@ -1024,10 +1024,15 @@
   }
   .el-dialog__body {
     padding: 0px 20px;
-    & > div {
+    &>div {
       height: 450px;
       overflow: hidden;
     }
+  }
+  .el-dialog__headerbtn .el-dialog__close {
+    font-size: 20px;
+    color: #6417a6;
+    font-weight: 700;
   }
 }
 
@@ -1159,6 +1164,7 @@ input:-webkit-autofill {
     }
   }
 }
+
 .el-icon-warning {
   color: #ff5f5f;
 }
