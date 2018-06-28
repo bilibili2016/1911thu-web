@@ -121,27 +121,35 @@ export default {
         cartid: []
       },
       changeData: []
+      // allCheckedArray: []
     }
   },
   methods: {
     ...mapActions('auth', ['setCid', 'setProductsNum', 'setPid']),
     handleCurrentChange(val) {
+      this.allCheckedId = []
       this.loadCourse = true
       this.pagemsg.page = val
       this.curriculumListForm.pages = val
       this.curriculumListForm.limits = 8
       return new Promise((resolve, reject) => {
         home.curriculumList(this.curriculumListForm).then(response => {
+          // console.log(response.data.curriculumList, '单页的数据')
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
+          for (let item of response.data.curriculumList) {
+            this.allCheckedId.push(item.id)
+          }
+          // console.log(this.allCheckedId, 'this.allCheckedId')
           resolve(true)
           this.loadCourse = false
         })
       })
     },
     allChecked() {
-      this.idsForm.cartid = [].concat(this.allCheckedId)
-      this.changeData = [].concat(this.allCheckedId)
+      this.idsForm.cartid = this.allCheckedId
+      this.changeData = this.allCheckedId
+      // console.log(this.idsForm, 'this.idsForm')
       return new Promise((resolve, reject) => {
         home.addShopCart(this.idsForm).then(response => {
           if (response.status === 0) {
@@ -170,24 +178,31 @@ export default {
       this.bgmsgs = index
     },
     handleItemTwo(item, index) {
+      this.allCheckedId = []
       this.bgmsgs = item.id
       this.pidform.pids = item.id
       this.setPid(this.pidform)
+      this.allCheckedArray = []
       this.curriculumList()
     },
     getCidList() {
+      this.allCheckedId = []
       this.cidform.cids = ''
       this.bgmsg = 0
       this.setCid(this.cidform)
+
       this.curriculumList()
     },
     getPidList() {
+      this.allCheckedId = []
       this.pidform.pids = ''
       this.bgmsgs = 0
       this.setPid(this.pidform)
+      this.getPidList = []
       this.curriculumList()
     },
     handleItemOne(item, index) {
+      this.allCheckedId = []
       this.bgmsgs = 0
       this.bgmsg = item.id
       this.data2 = this.data[index]
@@ -195,6 +210,7 @@ export default {
       this.setCid(this.cidform)
       this.pidform.pids = ''
       this.setPid(this.pidform)
+      this.allCheckedArray = []
       this.curriculumList()
     },
     handleClick(tab, event) {},
@@ -206,15 +222,20 @@ export default {
         home.curriculumList(this.curriculumListForm).then(response => {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
+          // console.log(
+          //   response.data.curriculumList,
+          //   '这是response.data.curriculumList'
+          // )
           for (let item of response.data.curriculumList) {
             this.$set(item, 'checkmsg', false)
           }
           resolve(true)
           this.loadCourse = false
           var that = this
-          response.data.curriculumList.forEach(function(v, i, arr) {
-            that.allCheckedId.push(v.id)
-          })
+          for (let item of response.data.curriculumList) {
+            this.allCheckedId.push(item.id)
+          }
+          // console.log(this.allCheckedId, 'that.allCheckedId')
         })
       })
     },
