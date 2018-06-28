@@ -17,6 +17,12 @@
         <span class="fl problem" @click="showRpt">报告问题</span>
         <span class="fr share">
           <i class="el-icon-share"></i>分享
+          <span class="shareIcon">
+            <img src="@/assets/images/share_qq.png" alt="">
+            <img src="@/assets/images/share_wx.png" alt="">
+            <img src="@/assets/images/share_wb.png" alt="">
+            <img src="@/assets/images/share_pyq.png" alt="">
+          </span>
         </span>
         <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
           <i class="el-icon-star-on"></i>

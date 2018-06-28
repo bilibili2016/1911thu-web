@@ -551,6 +551,7 @@
     color: #fff;
   }
 }
+
 // 半角按钮 右边
 // 修改默认button按钮 颜色
 .common-button-half {
@@ -572,6 +573,7 @@
     color: #fff;
   }
 }
+
 // 半角按钮 左边
 .common-button-half-right {
   .el-button--primary.is-plain {
@@ -579,8 +581,7 @@
     color: #9431e9;
   }
   .el-button {
-    width: 84px;
-    // border-radius: 18px;
+    width: 84px; // border-radius: 18px;
     float: right;
     border-top-left-radius: 18px;
     border-bottom-left-radius: 18px;
@@ -592,6 +593,7 @@
     color: #fff;
   }
 }
+
 // player页
 .playerBox {
   .el-textarea .el-textarea__inner {
@@ -782,7 +784,6 @@
     font-size: 16px;
   }
   .my-home {
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     .el-card__body {
       padding: 50px 40px 0px 40px;
     }
@@ -928,6 +929,39 @@
 .particulars {
   .el-carousel__container {
     background-color: #fafafa;
+  }
+}
+
+// 填写发票信息
+.invoiceForm {
+  .radioBtn {
+    .el-radio {
+      color: #222;
+      font-size: 14px;
+      font-weight: 400;
+      .el-radio__input {
+        display: none;
+      }
+      .el-radio__label {
+        width: 88px;
+        height: 34px;
+        text-align: center;
+        line-height: 34px;
+        padding: 0;
+        border: 1px solid #6417a6;
+        border-radius: 6px;
+        position: relative;
+        overflow: hidden;
+      }
+      .el-radio__input.is-checked+.el-radio__label {
+        background-color: #6417a6;
+        color: #fff;
+        border: none;
+        i {
+          display: block !important;
+        }
+      }
+    }
   }
 }
 

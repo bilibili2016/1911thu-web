@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main clearfix bindCourse">
     <div class="binding" v-if="hasId">
       <div class="title">
         <h4>绑定机构ID</h4>

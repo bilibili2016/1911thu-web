@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fifth'"></v-banner>
-    <div class="center-tab center profile" style="min-height:800px;">
+    <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="empty">
         <!-- 我的信息 -->
         <el-tab-pane class="my-home" name="tab-first">
@@ -160,7 +160,7 @@
           </div>
         </el-tab-pane>
         <!-- 专属邀请码 -->
-        <el-tab-pane name="tab-eighth">
+        <el-tab-pane name="tab-eighth" v-if="codeData.length">
           <span slot="label" class="tabList">
             <i class="icon-code"></i> 专属邀请码</span>
           <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>
@@ -394,7 +394,6 @@ export default {
           this.recordData = response.data.usedInvitationCodeList
           var that = this
           this.recordData.forEach(function(v, i, arr) {
-            v.word = v.user_name + ' 通过 ' + v.invitation_code + ' 加入学习'
             v.create_time = that.timestampToTime(v.create_time)
           })
           resolve(true)
@@ -444,6 +443,25 @@ export default {
 }
 </script>
 <style scope lang="scss">
+.bigTab {
+  width: 1140px;
+  & > div > div.el-tabs__content {
+    padding: 15px;
+    margin-top: -15px;
+    box-shadow: none;
+  }
+  &.profile .my-course.my-order {
+    overflow: initial;
+  }
+  &.profile .my-course#pane-tab-third .el-tabs__content {
+    overflow: initial;
+  }
+  &.profile .my-course .el-tabs__header {
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+}
 .profile {
   .content .noCourse {
     width: 100%;

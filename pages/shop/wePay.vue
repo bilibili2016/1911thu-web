@@ -43,6 +43,10 @@
                       <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="zfbMsg">
                     </div>
                   </div>
+                  <div class="pub fl" @click="selectPub" :class="{borderColor: pubMsg}">
+                    <img src="@/assets/images/payPublic.png" alt="">
+                    <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="pubMsg">
+                  </div>
                 </div>
                 <div class="text">
                   <i class="el-icon-warning"></i>
@@ -125,6 +129,7 @@ export default {
       orderCurriculumLists: [],
       wxMsg: true,
       zfbMsg: false,
+      pubMsg: false,
       addPaySubmitForm: {
         types: '1',
         companyId: null
@@ -221,10 +226,18 @@ export default {
     selectWx() {
       this.wxMsg = true
       this.zfbMsg = false
+      this.pubMsg = false
     },
     selectZfb() {
       this.wxMsg = false
       this.zfbMsg = true
+      this.pubMsg = false
+    },
+    selectPub() {
+      this.wxMsg = false
+      this.zfbMsg = false
+      this.pubMsg = true
+      this.$router.push('/shop/payPublic')
     },
     getStatus() {
       this.interval = setInterval(() => {

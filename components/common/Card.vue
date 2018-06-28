@@ -83,7 +83,7 @@
     <!-- 我的收藏 -->
     <!-- profile个人信息模板 新上好课模板-->
     <template v-if="config.card_type === 'shoucang'">
-      <div class="card-category profile www">
+      <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox">
             <!-- {{card.id}} -->
@@ -478,6 +478,8 @@ export default {
         len = len - 1
         this.delShopCart()
       } else {
+        console.log(item)
+
         item.is_checked = true
         this.curriculumcartids.cartid = item.id
         this.curriculumcartid.numberArr.pop()
@@ -597,6 +599,7 @@ export default {
       }
     },
     buyNewCourse(item) {
+      // console.log(item, '这是item')
       if (item.is_cart === '0') {
         this.curriculumcartids.cartid = item.id
         return new Promise((resolve, reject) => {
@@ -1010,7 +1013,7 @@ export default {
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {
-  margin: 0 24px 50px 0;
+  margin: 0 30px 50px 0;
   &:nth-child(4n + 4) {
     margin-right: 24px;
   }
@@ -1265,6 +1268,9 @@ export default {
         height: 76px;
         margin-left: 30px;
         margin-top: -10px;
+        img {
+          cursor: pointer;
+        }
       }
     }
     .particulars {

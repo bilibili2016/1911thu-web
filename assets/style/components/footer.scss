@@ -6,55 +6,31 @@
   color: #fff;
   .main {
     width: 100%;
-    margin: 0 auto;
-    .logo {
-      // margin: 52px 0 35px;
-      i {
-        display: inline-block;
-        width: 177px;
-        height: 44px;
-        background: url('~assets/images/iconList.png') no-repeat;
-        // background-size: 100px 20px;
-        // background-size: 177px 966px;
-        // background-position: 0 -44px;
+    height: 70px;
+    line-height: 70px;
+    background-color: #050223;
+    position: relative;
+    color: #fff;
+    .main {
+      width: 1100px;
+      margin: 0 auto;
+      .logo {
+        height: 70px;
+        i {
+          display: inline-block;
+          margin-top: 20px;
+          width: 128px;
+          height: 31px;
+          background: url('~assets/images/logo.png') no-repeat;
+          background-size: cover;
+        }
       }
-    }
-    .companyInfo {
-      display: flex;
-      .enterprise {
-        float: left;
-        width: 252px;
-        height: 135px;
-        line-height: 36px;
-        padding-top: 28px;
-      }
-      .verticalLine {
-        width: 1px;
-        height: 100px;
-        background-color: #fff;
-        margin-right: 48px;
-        margin-top: 27px;
-      }
-      .aboutUs {
-        padding-top: 28px;
-        dl {
-          float: left;
-          line-height: 34px;
-          width: 72px;
-          &:nth-child(1) {
-            margin-right: 68px;
-          }
-          dt {
-            font-size: 18px;
-          }
-          dd {
-            margin: 0;
-            color: #999;
-            cursor: pointer;
-            transition: all 300ms;
-            &:hover {
-              color: #e5e5e7;
-            }
+      .companyInfo {
+        margin-left: 43px;
+        span {
+          cursor: pointer;
+          &.line {
+            margin: 0 15px;
           }
         }
       }
