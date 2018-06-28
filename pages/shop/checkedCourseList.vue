@@ -60,13 +60,6 @@ export default {
       return new Promise((resolve, reject) => {
         home.curriculumPayApply(this.orderForm).then(response => {
           this.courseList = response.data.orderCurriculumList
-          // response.data.curriculumPayApply[this.payIndex].CurriculumPayApplyList
-          // this.companyInfo.number =
-          //   response.data.curriculumPayApply[this.payIndex].number
-          // this.companyInfo.courseNum =
-          //   response.data.curriculumPayApply[
-          //     this.payIndex
-          //   ].CurriculumPayApplyList.length
           this.orderDetail = response.data.orderDetail
           this.loading = false
           resolve(true)

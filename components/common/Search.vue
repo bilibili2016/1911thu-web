@@ -3,7 +3,7 @@
     <div class="main">
       <div class="searchWord">
         <el-input v-model="searchMsg" placeholder="请输入内容" class="inline-input" @keyup.enter.native="search"></el-input>
-        <i></i>
+        <i @click="search"></i>
       </div>
       <div class="hotWord">
         <span>热搜关键词：</span>

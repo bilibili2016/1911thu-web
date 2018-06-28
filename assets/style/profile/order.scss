@@ -117,7 +117,14 @@
           width: 133px;
           text-align: center;
           &.cancelOrder {
+            color: #6D687F;
             cursor: pointer;
+          }
+          &.payReady {
+            color: #aaa;
+          }
+          &.payClose {
+            color: #332A51;
           }
           span {
             width: 90px;
@@ -132,12 +139,15 @@
             transition: all 300ms;
             &.pay {
               background-color: #FFAE5F;
+              &:hover {
+                background-color: rgb(238, 144, 20);
+              }
             }
             &.buy {
               background-color: #6417A6;
-            }
-            &:hover {
-              background-color: #8f4acb;
+              &:hover {
+                background-color: #8f4acb;
+              }
             }
           }
         }
