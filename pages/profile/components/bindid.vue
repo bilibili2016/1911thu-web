@@ -10,8 +10,8 @@
         <span class="error" v-show="binding.showErr">{{courseList.error}}</span>
       </div>
       <div class="bindInfo">
-        <p>绑定企业ID说明：</p>
-        <p>1.公司hr提供的企业ID，兑换后可以学习企业购买的课程。</p>
+        <p>绑定机构ID说明：</p>
+        <p>1.公司hr提供的机构ID，兑换后可以学习机构购买的课程。</p>
         <p>2.绑定成功后，不可更改。</p>
       </div>
       <div class="presentAble present">
@@ -41,8 +41,8 @@
           <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
         </div>
         <div class="bindInfo">
-          <p>绑定企业ID说明：</p>
-          <p>1.公司hr提供的企业ID，兑换后可以学习企业购买的课程。</p>
+          <p>绑定机构ID说明：</p>
+          <p>1.公司hr提供的机构ID，兑换后可以学习机构购买的课程。</p>
           <p>2.绑定成功后，不可更改。</p>
         </div>
         <div class="presentAble present">

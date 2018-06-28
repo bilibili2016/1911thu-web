@@ -147,10 +147,10 @@
             </div>
           </div>
         </el-tab-pane>
-        <!-- 绑定企业Id -->
+        <!-- 绑定机构Id -->
         <el-tab-pane name="tab-seventh">
           <span slot="label" class="tabList">
-            <i class="icon-company"></i> 绑定企业ID</span>
+            <i class="icon-company"></i> 绑定机构ID</span>
           <v-companyId :cpnData="companyData"></v-companyId>
         </el-tab-pane>
         <!-- 专属邀请码 -->
