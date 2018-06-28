@@ -4,7 +4,7 @@
     width: 1100px;
     margin: 0 auto;
     .table {
-      padding: 40px 0 80px;
+      padding: 40px 0 10px;
       .tableHeader {
         height: 60px;
         line-height: 60px;
@@ -91,7 +91,7 @@
         text-align: center;
         height: 30px;
         margin: 80px 0 50px;
-        &>span {
+        & > span {
           cursor: pointer;
         }
         .el-pagination {
@@ -299,7 +299,7 @@
             border-color: #6417a6;
             background-color: #6417a6;
           }
-          &+.el-checkbox__label {
+          & + .el-checkbox__label {
             color: #222;
           }
         }
