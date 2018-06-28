@@ -74,11 +74,9 @@
     }
     .HREntry {
       margin-left: 50px;
-      margin-top: 20px;
       &.islogined {
         margin-left: 106px;
-        height: 40px;
-        margin-top: 20px;
+        height: 20px;
       }
       span {
         color: #222;
@@ -88,6 +86,9 @@
         vertical-align: top;
         cursor: pointer;
         transition: all 300ms;
+        &.center {
+          margin-top: 3px;
+        }
         &.hrin {
           position: relative;
           border-right: 2px solid #ccc;
@@ -108,7 +109,7 @@
         display: inline-block;
         padding: 0;
         width: auto;
-        margin-right: 14px;
+        margin-right: 22px;
         position: relative;
         cursor: pointer;
         vertical-align: top;
@@ -145,7 +146,7 @@
         height: 40px;
         display: inline-block;
         position: relative;
-        padding: 0 25px;
+        padding: 0 21px;
         cursor: pointer;
         &:hover .downApp {
           opacity: 1;
@@ -273,7 +274,7 @@
       }
     }
     .headImg {
-      height: 44px;
+      height: 40px;
       position: relative;
       cursor: pointer;
       &:hover .subPages {
@@ -285,7 +286,6 @@
         height: 34px;
         background-color: #eee;
         border-radius: 50%;
-        margin-top: 5px;
         img {
           width: 34px;
           height: 34px;

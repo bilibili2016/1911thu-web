@@ -17,10 +17,10 @@
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin" @click="goSearchd('/other/hrentry')">机构入口
+        <span class="hrin center" @click="goSearchd('/other/hrentry')">机构入口
           <i></i>
         </span>
-        <span v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
+        <span class="center" v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
