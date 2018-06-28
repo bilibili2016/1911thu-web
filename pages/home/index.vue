@@ -183,7 +183,12 @@ export default {
     //   this.getAll()
     // }
     let aa = persistStore.get('dandian')
-    console.log(aa)
+    // console.log(aa, '345')
+    // console.log(aa === false)
+    // if (aa === false) {
+
+    // }
+    this.getAll()
     // console.log(persistStore.get('dandian'))
   },
   mounted() {

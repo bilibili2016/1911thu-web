@@ -574,6 +574,7 @@ export default {
                 this.close()
                 this.getUserInfo()
                 this.getCount()
+                persistStore.set('loginMsg', false)
                 this.$bus.$emit('reLogin', true)
               }
               // this.loadLogin = false
@@ -821,6 +822,7 @@ export default {
             }
           })
         } else if (res.status === '100100') {
+          persistStore.set('dandian', true)
           if (this.authPath.indexOf(window.location.pathname) > 0) {
             this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
               confirmButtonText: '确定',
@@ -831,6 +833,7 @@ export default {
             })
           }
         } else {
+          persistStore.set('dandian', false)
           this.userInfo = res.data.userInfo
           persistStore.set('nickName', this.userInfo.nick_name)
           persistStore.set('phone', this.userInfo.user_name)
