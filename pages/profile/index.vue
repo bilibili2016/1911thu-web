@@ -451,9 +451,17 @@ export default {
     overflow: initial;
   }
   &.profile .my-course .el-tabs__header {
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+  }
+  #pane-tab-third .el-tabs__header {
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+  }
+  #pane-tab-sixth,
+  #pane-tab-seventh {
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    border-radius: 6px;
+    overflow: hidden;
   }
 }
 .profile {
