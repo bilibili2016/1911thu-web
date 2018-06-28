@@ -651,9 +651,9 @@ export default {
         auth.getWXAccredit(this.WxLogin).then(response => {
           if (response.status === 0) {
             this.tokenForm.tokens = response.data.token
+            this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
-            this.setToken(this.tokenForm)
             clearInterval(this.getwxtime)
             this.scanCodeShow = false //微信扫码
             this.closeWechat()
