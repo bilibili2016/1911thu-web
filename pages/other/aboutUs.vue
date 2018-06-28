@@ -52,7 +52,7 @@
             </div>
 
           </el-tab-pane>
-          <el-tab-pane label="发展历程" name="second">
+          <!-- <el-tab-pane label="发展历程" name="second">
             <div class="second">
               <div class="timeline" v-for="item in lineData" :key="item.id">
                 <span>{{item.time}}</span>
@@ -67,7 +67,7 @@
               </div>
             </div>
 
-          </el-tab-pane>
+          </el-tab-pane> -->
         </el-tabs>
       </div>
 

@@ -43,8 +43,8 @@
             <el-form-item label="公司信息" prop="name" v-if="hasCompany" key="psnForm.company_name">
               <el-input v-model="psnForm.company_name" disabled></el-input>
             </el-form-item>
-            <el-form-item label="公司信息" prop="name" v-else>
-              <el-input v-model="psnForm.company_name"></el-input>
+            <el-form-item label="绑定机构ID" prop="name" v-else>
+              <el-input v-model="psnForm.company_code"></el-input>
             </el-form-item>
             <el-form-item size="large" class="submit">
               <el-button type="primary" class="submitAble" @click="onSubmit" round>提交</el-button>
@@ -202,13 +202,19 @@ export default {
     },
     getUserInfo() {
       home.getUserInfo().then(res => {
-        // console.log(res, '123')
         this.psnForm = res.data.userInfo
         if (this.psnForm.company_name && this.psnForm.company_name != '') {
           this.hasCompany = true
           persistStore.set('cpnc', this.psnForm.company_code)
         } else {
           this.hasCompany = false
+        }
+        if (res.data.userInfo.is_update === 1) {
+          this.showInfo = true
+          this.hasPersonalInfo = false
+        } else {
+          this.showInfo = false
+          this.hasPersonalInfo = true
         }
       })
     },
@@ -221,6 +227,11 @@ export default {
           this.showInfo = true
           this.hasPersonalInfo = false
         } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
           this.showInfo = false
           this.hasPersonalInfo = true
         }
@@ -379,7 +390,8 @@ export default {
         city_name: '', //所在市名称
         area: '', //所在区编码
         area_name: '', //区名称
-        company_name: '' //所在公司名称
+        company_name: '', //所在公司名称
+        company_code: '' //所在公司名称
       },
       rules: {
         name: [

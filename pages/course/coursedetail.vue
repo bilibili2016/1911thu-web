@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="main-header" v-loading="loadMsg">
-        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg"></v-card>
+        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
       </div>
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -55,7 +55,7 @@
       <div style="width:345px" class="fr">
         <!-- 讲师介绍 -->
         <div class="teacher" v-loading="loadTeacher">
-          <h4>讲师介绍{{courseList.teacher_id}}</h4>
+          <h4>讲师介绍</h4>
           <div class="personal">
             <img :src="courseList.head_img" alt="" @click="goTeacherInfo(courseList.teacher_id)">
             <h5 @click="goTeacherInfo(courseList.teacher_id)">{{courseList.teacher_name}}</h5>
