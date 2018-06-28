@@ -4,11 +4,10 @@
   </div>
 </template>
 <script>
-// import Home from '@/pages/home/index.vue'
-import About from '@/pages/other/hrEntryNew.vue'
+import Home from '@/pages/home/index.vue'
 export default {
   components: {
-    'v-home': About
+    'v-home': Home
   },
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
