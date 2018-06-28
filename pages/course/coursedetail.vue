@@ -99,7 +99,7 @@
                     <img class="fl" :src="item.head_img" alt="">
                     <div class="fl">
                       <p style="margin:5px 0 8px;">{{item.nick_name}}</p>
-                      <p>{{item.create_time}}</p>
+                      <p class="time">{{item.create_time}}</p>
                     </div>
                     <div class="rates">
                       <el-rate disabled v-model="item.score" class="itemBox-rate fl"></el-rate>
@@ -131,7 +131,7 @@
               <img class="fl" :src="item.head_img" alt="">
               <div class="fl">
                 <p style="margin:3px 0 8px;">{{item.nick_name}}</p>
-                <p>{{item.create_time}}</p>
+                <p class="time">{{item.create_time}}</p>
               </div>
               <div style="margin-top:10px;">
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>

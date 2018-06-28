@@ -596,8 +596,13 @@ export default {
     },
     // 从微信拉取二维码
     async wxLogin() {
-      this.WxLogin.redirect_uri =
-        'http%3A%2F%2Fceshi.1911edu.com%2FWapi%2FIndex%2FwxBack'
+      var link = window.location.origin
+      if (link === 'http://localhost:8080') {
+        link = 'http://ceshi.1911edu.com'
+      }
+      this.WxLogin.redirect_uri = encodeURIComponent(
+        link + '/Wapi/Index/wxBack'
+      )
       this.WxLogin.state = Math.random()
         .toString(36)
         .substr(2)
