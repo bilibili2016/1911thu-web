@@ -9,7 +9,7 @@
           <span class="price">单价</span>
           <span class="operation">操作</span>
         </div>
-        <div class="tableBody">
+        <div class="tableBody" v-if="!isNoMsg">
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">

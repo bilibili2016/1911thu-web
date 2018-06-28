@@ -300,6 +300,11 @@ export default {
         ],
         checked: [
           {
+            required: true,
+            message: '',
+            trigger: 'blur'
+          },
+          {
             validator: checkProtocol,
             trigger: 'change'
           }
@@ -536,24 +541,26 @@ export default {
     signUp(formName) {
       this.registerData.ectpwd = encryption(this.registerData.passwords)
       this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.loadLogin = true
-          return new Promise((resolve, reject) => {
-            auth.signUp(this.registerData).then(response => {
-              this.$message({
-                showClose: true,
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
+        if (this.registerData.checked) {
+          if (valid) {
+            this.loadLogin = true
+            return new Promise((resolve, reject) => {
+              auth.signUp(this.registerData).then(response => {
+                this.$message({
+                  showClose: true,
+                  type: response.status === 0 ? 'success' : 'error',
+                  message: response.msg
+                })
+                if (response.status === 0) {
+                  this.alreadySignin()
+                  this.close()
+                }
+                this.loadLogin = false
               })
-              if (response.status === 0) {
-                this.alreadySignin()
-                this.close()
-              }
-              this.loadLogin = false
             })
-          })
-        } else {
-          return false
+          } else {
+            return false
+          }
         }
       })
     },
