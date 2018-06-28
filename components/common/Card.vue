@@ -246,21 +246,12 @@
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
-<<<<<<< HEAD
               <!-- <div class="fr common-button-half"> -->
               <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
               <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
 
               <!-- </el-button> -->
               <!-- </div> -->
-=======
-              <div class="fr common-button-half">
-                <!-- <el-button type="primary" plain @click="buyNewCourse(course)">
-                  <img src="@/assets/images/shopcard.png" alt="">
-                </el-button> -->
-                <span></span>
-              </div>
->>>>>>> zs
               <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="buyNewCourse(course)"> 加入购物车</el-button>
               </div>
