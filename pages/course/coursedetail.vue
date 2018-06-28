@@ -36,7 +36,7 @@
       <div class="content fl">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="介绍" name="first">
-            <div class="detail" v-html="courseList.content" v-loading="loadMsg"></div>
+            <div class="detail descript" v-html="courseList.content" v-loading="loadMsg"></div>
           </el-tab-pane>
           <el-tab-pane label="目录" name="second">
             <v-line :catalogs="catalogs" :privileMsg="privileMsg"></v-line>
@@ -477,4 +477,12 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.detail {
+  span {
+    display: inline !important;
+    line-height: 40px;
+  }
+}
+</style>
 

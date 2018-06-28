@@ -328,8 +328,8 @@ export default {
       // this.resize();
     },
     goLink() {
-      // this.$router.back(-1)
-      window.open(window.location.origin + '/course/coursedetail')
+      this.$router.push('/course/coursedetail')
+      // window.open(window.location.origin + '/course/coursedetail')
     },
     goTeacher(teacherID) {
       this.tidForm.tids = teacherID * 1

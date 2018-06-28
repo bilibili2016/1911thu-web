@@ -190,11 +190,11 @@
           </div>
         </el-tab-pane>
         <!-- 绑定机构Id -->
-        <el-tab-pane name="tab-seventh">
+        <!-- <el-tab-pane name="tab-seventh">
           <span slot="label" class="tabList">
             <i class="icon-company"></i> 绑定机构ID</span>
           <v-companyId :cpnData="companyData"></v-companyId>
-        </el-tab-pane>
+        </el-tab-pane> -->
         <!-- 专属邀请码 -->
         <el-tab-pane name="tab-eighth" v-if="codeData.length">
           <span slot="label" class="tabList">
@@ -498,6 +498,9 @@ export default {
   created() {
     this.$bus.$on('selectProfileIndex', data => {
       this.activeTab = data
+    })
+    this.$bus.$on('updateCourse', data => {
+      this.studyCurriculumList()
     })
   }
 }

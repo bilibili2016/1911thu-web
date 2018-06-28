@@ -126,6 +126,7 @@ export default {
                 this.seconds--
               }
             }, 1000)
+            this.$bus.$emit('updateCourse', true)
           } else if (res.status === '100100') {
             this.courseList.showErr = true
             this.$message({

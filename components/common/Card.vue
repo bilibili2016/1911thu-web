@@ -246,14 +246,18 @@
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin">￥ {{course.present_price}}</span>
-              <div class="fr common-button-half">
-                <el-button type="primary" plain @click="buyNewCourse(course)">
-                  <img src="@/assets/images/shopcard.png" alt="">
-                </el-button>
-              </div>
+              <!-- <div class="fr common-button-half"> -->
+              <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
+              <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
+
+              <!-- </el-button> -->
+              <!-- </div> -->
               <div class="fr common-button-half-right">
-                <el-button type="primary" plain @click="courseInfo(course)">立即学习</el-button>
+                <el-button type="primary" plain @click="buyNewCourse(course)"> 加入购物车</el-button>
               </div>
+              <!-- <div class="fr common-button-half-right">
+                <el-button type="primary" plain @click="courseInfo(course)"> 加入购物车</el-button>
+              </div> -->
 
             </div>
           </div>
@@ -636,19 +640,59 @@ export default {
     },
     buyNewCourse(item) {
       // console.log(item, '这是item')
-      if (item.is_cart === '0') {
-        this.curriculumcartids.cartid = item.id
-        return new Promise((resolve, reject) => {
-          home.addShopCart(this.curriculumcartids).then(response => {
-            this.$router.push('/shop/shoppingcart')
+      if (item.is_cart === 0) {
+        if (this.isCart === 0) {
+          let len = Number(this.productsNum) + 1
+          // console.log(len, 'len')
+          this.setProductsNum({
+            pn: len
           })
-        })
+          this.$message({
+            type: 'success',
+            message: '加入购物车成功'
+          })
+        } else {
+          this.$message({
+            type: 'success',
+            message: '您的商品已经在购物车里面'
+          })
+        }
       } else {
-        this.$alert('商品已在购物车内', '温馨提示', {
-          confirmButtonText: '确定',
-          callback: action => {}
+        this.$message({
+          type: 'success',
+          message: '您的商品已经在购物车里面'
         })
       }
+      if (item.is_cart === 0) {
+        if (this.isCart === 0) {
+          this.curriculumcartids.cartid = item.id
+          return new Promise((resolve, reject) => {
+            home.addShopCart(this.curriculumcartids).then(response => {
+              // this.$router.push('/shop/shoppingcart')
+              this.isCart = 1
+            })
+          })
+        } else {
+          this.$message({
+            type: 'success',
+            message: '您的商品已经在购物车里面'
+          })
+        }
+      } else {
+      }
+      // if (item.is_cart === '0') {
+      //   this.curriculumcartids.cartid = item.id
+      //   return new Promise((resolve, reject) => {
+      //     home.addShopCart(this.curriculumcartids).then(response => {
+      //       this.$router.push('/shop/shoppingcart')
+      //     })
+      //   })
+      // } else {
+      //   this.$alert('商品已在购物车内', '温馨提示', {
+      //     confirmButtonText: '确定',
+      //     callback: action => {}
+      //   })
+      // }
     },
     getMore(item) {
       // this.$router.push(item)
