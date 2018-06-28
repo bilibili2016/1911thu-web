@@ -470,11 +470,11 @@ export default {
       // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
-      console.log(item, '123')
+      // console.log(item, '123')
       // if(this.productsNum === null)
-      console.log(this.productsNum, '12345678')
+      // console.log(this.productsNum, '12345678')
 
-      console.log(this.productsNum, '3')
+      // console.log(this.productsNum, '3')
       let len = this.productsNum
       if (item.is_checked === false) {
         item.is_checked = false
@@ -483,7 +483,7 @@ export default {
         len = len - 1
         this.delShopCart()
       } else {
-        console.log(item)
+        // console.log(item)
 
         item.is_checked = true
         this.curriculumcartids.cartid = item.id
@@ -508,7 +508,7 @@ export default {
         if (item.is_cart === 0) {
           if (this.isCart === 0) {
             let len = Number(this.productsNum) + 1
-            console.log(len, 'len')
+            // console.log(len, 'len')
             this.setProductsNum({
               pn: len
             })
@@ -727,7 +727,7 @@ export default {
       typeof this.productsNum != 'undefined' &&
       this.productsNum != 0
     ) {
-      console.log('进来了')
+      // console.log('进来了')
       this.setProductsNum({
         pn: 0
       })
