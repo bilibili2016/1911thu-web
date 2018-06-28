@@ -36,15 +36,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.copyright {
-  .about {
-    margin-right: 20px;
-    display: inline-block;
-  }
-  // .logof {
-  //   width: 177px;
-  //   height: 50px;
-  // }
-}
-</style>

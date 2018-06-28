@@ -1,80 +1,32 @@
 .footerBox {
   width: 100%;
-  height: 50px;
-  background-color: #040423;
+  height: 70px;
+  line-height: 70px;
+  background-color: #050223;
   position: relative;
   color: #fff;
   .main {
-    width: 100%;
-    height: 70px;
-    line-height: 70px;
-    background-color: #050223;
-    position: relative;
-    color: #fff;
-    .main {
-      width: 1100px;
-      margin: 0 auto;
-      .logo {
-        height: 70px;
-        i {
-          display: inline-block;
-          margin-top: 20px;
-          width: 128px;
-          height: 31px;
-          background: url('~assets/images/logo.png') no-repeat;
-          background-size: cover;
-        }
+    width: 1100px;
+    margin: 0 auto;
+    .logo {
+      height: 70px;
+      i {
+        display: inline-block;
+        margin-top: 20px;
+        width: 128px;
+        height: 31px;
+        background: url('~assets/images/logo.png') no-repeat;
+        background-size: cover;
       }
-      .companyInfo {
-        margin-left: 43px;
-        span {
-          cursor: pointer;
-          &.line {
-            margin: 0 15px;
-          }
-        }
-      }
-      .QRCode {
-        margin-left: 279px;
-        div {
-          float: left;
-        }
-        div:first-child {
-          margin-right: 80px;
-        }
-        i {
-          display: inline-block;
-          width: 114px;
-          height: 114px;
-          background: url('~assets/images/iconList.png') no-repeat;
-          background-size: 177px 966px;
-          background-position: 0 -339px;
-        }
-        p {
-          height: 40px;
-          line-height: 40px;
-          text-align: center;
-          font-size: 12px;
-          color: #999;
+    }
+    .companyInfo {
+      margin-left: 43px;
+      span {
+        cursor: pointer;
+        &.line {
+          margin: 0 15px;
         }
       }
     }
-  }
-  .copyright {
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    background-color: #151141;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    color: #e5e5e7;
-  }
-  a {
-    font-size: 16px;
-    font-family: PingFangSC-Regular;
-    color: #999;
-    padding-right: 20px;
   }
 }
