@@ -64,7 +64,7 @@
     <div class="start" v-if="start">
       <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
-      <div class="lrFrame">
+      <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
