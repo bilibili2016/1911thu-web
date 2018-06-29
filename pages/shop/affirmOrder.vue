@@ -465,7 +465,7 @@ export default {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
             persistStore.set('cpyid', res.data.id)
-            // this.$router.push('/shop/wepay')
+            this.$router.push('/shop/wepay')
           } else {
             this.$message({
               showClose: true,
