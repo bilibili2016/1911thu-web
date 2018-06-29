@@ -97,9 +97,7 @@
                 <span>不开发票</span>
               </span>
               <span class="changeInvoice" @click="showIoc">修改</span>
-
             </p>
-
           </div>
           <div class="orderInfo">
             <h5>
@@ -453,19 +451,22 @@ export default {
       this.$router.push('/shop/shoppingcart')
     },
     commitOrder() {
+
       this.company.id
         ? (this.commitOrders.companyId = this.company.id)
         : (this.commitOrders.companyId = '')
+        console.log(this.company.id, '8989898')
       if (this.person) {
         this.commitOrders.types = 1
       } else {
         this.commitOrders.types = 2
       }
+       console.log()
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
             persistStore.set('cpyid', res.data.id)
-            this.$router.push('/shop/wepay')
+            // this.$router.push('/shop/wepay')
           } else {
             this.$message({
               showClose: true,
