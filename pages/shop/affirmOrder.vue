@@ -451,17 +451,16 @@ export default {
       this.$router.push('/shop/shoppingcart')
     },
     commitOrder() {
-
       this.company.id
         ? (this.commitOrders.companyId = this.company.id)
         : (this.commitOrders.companyId = '')
-        console.log(this.company.id, '8989898')
+      // console.log(this.company.id, '8989898')
       if (this.person) {
         this.commitOrders.types = 1
       } else {
         this.commitOrders.types = 2
       }
-       console.log()
+      //  console.log()
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
