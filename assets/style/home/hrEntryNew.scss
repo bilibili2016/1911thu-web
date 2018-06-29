@@ -2,6 +2,9 @@
   height: auto;
   width: 100%;
   overflow: hidden;
+  background: url('~assets/images/hrentry-bigBg.png') no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
   .recommend {
     position: absolute;
     top: 0;
@@ -137,7 +140,7 @@
   }
   .course {
     height: 666px;
-    background-color: #fafafa;
+    background-color: rgba(0, 0, 0, 0);
     padding-bottom: 20px;
     h3 {
       padding: 60px 0 30px;
@@ -257,7 +260,8 @@
   }
   .psrocess {
     background-color: #fff;
-    padding-bottom: 70px;
+    padding-bottom: 60px;
+    margin-bottom: 62px;
     h3 {
       padding: 60px 0 70px;
       font-size: 30px;
@@ -362,10 +366,15 @@
         font-size: 16px;
         color: #fff;
         margin-top: 40px;
-        img {
+        text-align: center;
+        .word-desc-bg {
           display: inline-block;
           width: 22px;
           height: 18px;
+          background: url('~assets/images/hrentry_pic06.png') no-repeat;
+          background-size: 22px 18px;
+          margin-right: 15px;
+          margin-bottom: -2px;
         }
       }
       .word-desc1 {
@@ -374,6 +383,7 @@
         line-height: 46px;
         color: #fff;
         font-size: 22px;
+        text-align: center;
       }
     }
     .el-form {
@@ -398,6 +408,18 @@
       .el-form-item {
         float: left;
         margin-right: 60px;
+      }
+      .el-form-item__content .el-input__inner::-webkit-input-placeholder {
+        color: #222;
+      }
+      .el-form-item__content .el-input__inner:-moz-placeholder {
+        color: #222;
+      }
+      .el-form-item__content .el-input__inner::-moz-placeholder {
+        color: #222;
+      }
+      .el-form-item__content .el-input__inner:-ms-input-placeholder {
+        color: #222;
       }
       .code {
         width: 140px;

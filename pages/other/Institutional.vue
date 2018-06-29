@@ -14,7 +14,9 @@
         <h1 class="top-h1">你好，培训方案规划者</h1>
         <p class="top-desc">如果您正在为帮助领导选课烦恼、或者正在为企业培训 、提醒进行规划， EXED为您精心准备了定制课程方案和高端课程。
         </p>
-        <div class="top-button">请填写联系方式</div>
+        <div class="top-button">
+          <a href="#buttom" style="color:#fff">请填写联系方式</a>
+        </div>
       </div>
     </div>
 
@@ -157,11 +159,12 @@
 
       </div>
     </div>
-    <div class="bottomForm">
+    <div class="bottomForm" id="buttom">
       <img src="@/assets/images/hrentry-bg.png" alt="">
       <div class="word">
         <p class="word-desc1">如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
-        <p class="word-desc2"><img src="@/assets/images/hrentry_pic06.png" alt="">您也可以拨打咨询电话：4000-5856-9654</p>
+        <p class="word-desc2">
+          <i class="word-desc-bg"></i>您也可以拨打咨询电话：4000-5856-9654</p>
         <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
           <el-form-item label="" prop="name">
             <el-autocomplete class="inline-input" placeholder="您的机构名称" v-model="company.name" :fetch-suggestions="querySearch" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
