@@ -10,7 +10,9 @@
           <div class="company">
             <div class="title clearfix">
               <span class="fl">订单：{{orderDetail.order_sn}}</span>
-              <span class="fr" @click="takeUp" v-if="takeupMsg === true">收起</span>
+              <span class="fr fr-up" @click="takeUp" v-if="takeupMsg === true">收起
+                <i class="el-icon-arrow-down"></i>
+              </span>
               <span class="fr" @click="takeUp" v-if="takeupMsg === false">展开</span>
             </div>
             <div class="content">
@@ -34,7 +36,7 @@
                 </div>
                 <div class="method">
                   <div class="center">
-                    <div class="zfb fl" @click="selectWx" :class="{borderColor: wxMsg}">
+                    <div class="wx fl" @click="selectWx" :class="{borderColor: wxMsg}">
                       <img src="@/assets/images/wxp.png" alt="">
                       <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="wxMsg">
                     </div>
@@ -42,7 +44,7 @@
                       <img src="@/assets/images/payPublic.png" alt="">
                       <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="pubMsg">
                     </div>
-                    <div class="wx fr" @click="selectZfb" :class="{borderColor: zfbMsg}">
+                    <div class="zfb fr" @click="selectZfb" :class="{borderColor: zfbMsg}">
                       <img src="@/assets/images/zfb.png" alt="">
                       <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="zfbMsg">
                     </div>
