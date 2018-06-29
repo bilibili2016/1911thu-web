@@ -639,6 +639,7 @@ export default {
       }
     },
     buyNewCourse(item) {
+<<<<<<< HEAD
       // console.log(item, '这是item')
       if (item.is_cart === 0) {
         if (this.isCart === 0) {
@@ -646,6 +647,13 @@ export default {
           // console.log(len, 'len')
           this.setProductsNum({
             pn: len
+=======
+      if (item.is_cart === '0') {
+        this.curriculumcartids.cartid = item.id
+        return new Promise((resolve, reject) => {
+          home.addShopCart(this.curriculumcartids).then(response => {
+            this.$router.push('/shop/shoppingcart')
+>>>>>>> dev
           })
           this.$message({
             type: 'success',
