@@ -278,10 +278,6 @@ export default {
     handleScroll() {
       window.scroll(0, this.buttonFormTop)
     },
-    easeInOutQuad(t, b, c, d) {
-      if ((t /= d / 2) < 1) return c / 2 * t * t + b
-      return -c / 2 * (--t * (t - 2) - 1) + b
-    },
     handleLink(item) {
       window.open(window.location.origin + item.link)
     },
@@ -375,6 +371,7 @@ export default {
 
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop
+      console.log(this.scroll)
       if (this.scroll >= this.headerHeight && this.scroll < totalHeight) {
         this.istopFixed = true
         this.istopRelative = false
