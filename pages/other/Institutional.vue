@@ -285,6 +285,9 @@ export default {
     handleLink(item) {
       window.open(window.location.origin + item.link)
     },
+    goLink(item) {
+      window.open(window.location.origin + item)
+    },
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {

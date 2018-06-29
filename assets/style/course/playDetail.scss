@@ -17,7 +17,7 @@
       .detail {
         padding: 0 20px;
         p {
-          margin-top: -3px;
+          margin: 0;
           width: 100%;
           span {
             display: inline;
@@ -267,6 +267,9 @@
             .fl {
               margin-top: 7px;
             }
+            .time {
+              color: #bbb;
+            }
             &>img {
               width: 42px;
               height: 42px;
@@ -330,6 +333,9 @@
         padding: 20px 25px 20px;
         .fl {
           margin-top: 7px;
+        }
+        .time {
+          color: #bbb;
         }
         &>img {
           width: 42px;

@@ -680,6 +680,7 @@ export default {
         }
       } else {
       }
+
       // if (item.is_cart === '0') {
       //   this.curriculumcartids.cartid = item.id
       //   return new Promise((resolve, reject) => {
