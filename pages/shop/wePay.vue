@@ -10,7 +10,9 @@
           <div class="company">
             <div class="title clearfix">
               <span class="fl">订单：{{orderDetail.order_sn}}</span>
-              <span class="fr" @click="takeUp" v-if="takeupMsg === true">收起</span>
+              <span class="fr fr-up" @click="takeUp" v-if="takeupMsg === true">收起
+                <i class="el-icon-arrow-down"></i>
+              </span>
               <span class="fr" @click="takeUp" v-if="takeupMsg === false">展开</span>
             </div>
             <div class="content">

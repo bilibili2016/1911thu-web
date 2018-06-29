@@ -18,7 +18,7 @@
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin center" @click="goSearchd('/other/hrentry')">机构入口
+        <span class="hrin center" @click="goSearchd('/other/institutional')">机构入口
           <i></i>
         </span>
         <span class="center" v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
@@ -623,10 +623,10 @@ export default {
               type: 'success',
               message: '登录成功！'
             })
-            this.tokenForm.token = response.data.token
+            this.tokenForm.tokens = response.data.token
+            this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
-            this.setToken(this.tokenForm)
             this.closeWechat()
             this.close()
           } else {
@@ -650,11 +650,11 @@ export default {
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
           if (response.status === 0) {
+            clearInterval(this.getwxtime)
             this.tokenForm.tokens = response.data.token
+            this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
-            this.setToken(this.tokenForm)
-            clearInterval(this.getwxtime)
             this.scanCodeShow = false //微信扫码
             this.closeWechat()
           }
