@@ -159,6 +159,9 @@ export default {
       return callback()
     }
     return {
+      backPosition: 0,
+      move: true,
+      interval: null,
       buttonFormTop: '',
       headerHeight: '',
       scroll: '',
@@ -384,14 +387,12 @@ export default {
     this.company.userID = this.token
     this.$bus.$emit('bannerShow', true)
     window.addEventListener('scroll', this.pageScroll)
-    console.log(document.getElementsByClassName('headerBox')[0].offsetHeight)
     this.headerHeight = document.getElementsByClassName(
       'headerBox'
     )[0].offsetHeight
     this.buttonFormTop = this.$refs.buttonForm.offsetTop
   },
   deactivated() {
-    console.log(111)
     window.removeEventListener('scroll', this.pageScroll)
   }
 }
