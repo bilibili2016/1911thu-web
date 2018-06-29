@@ -126,6 +126,10 @@ export default {
                 this.seconds--
               }
             }, 1000)
+            this.$bus.$emit('updateCourse', true)
+            if (this.courseList.addNewID) {
+              this.courseList.addNewID = false
+            }
           } else if (res.status === '100100') {
             this.courseList.showErr = true
             this.$message({

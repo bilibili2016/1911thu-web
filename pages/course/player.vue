@@ -47,7 +47,7 @@
             <div class="fl">{{player.teacher_name}}</div>
             <div class="fl">{{player.graduate}}</div>
           </div>
-          <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
+          <div v-if="!curriculumPrivilege" class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
         </div>
         <div class="courseList" ref="courseList">
           <div class="chapter" v-for="(section,index) in courseList" :key="index">
@@ -239,7 +239,8 @@ export default {
       clickMsg: false,
       tidForm: {
         tids: ''
-      }
+      },
+      curriculumPrivilege: false
     }
   },
   methods: {
@@ -328,8 +329,8 @@ export default {
       // this.resize();
     },
     goLink() {
-      // this.$router.back(-1)
-      window.open(window.location.origin + '/course/coursedetail')
+      this.$router.push('/course/coursedetail')
+      // window.open(window.location.origin + '/course/coursedetail')
     },
     goTeacher(teacherID) {
       this.tidForm.tids = teacherID * 1
@@ -395,7 +396,7 @@ export default {
         player.volume(volume)
       }
       player.pause()
-      var socket = new io('http://www.1911edu.com:2120')
+      var socket = new io('http://ceshi.1911edu.com:2120')
       // 连接socket
       socket.on('connect', function() {
         // console.log('已连接')
@@ -473,6 +474,7 @@ export default {
           this.isStudy = response.data.curriculumDetail.is_study
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection
+          this.curriculumPrivilege = response.data.curriculumPrivilege
         })
       })
     },

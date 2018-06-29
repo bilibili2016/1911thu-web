@@ -18,10 +18,10 @@
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin" @click="goSearchd('/other/hrentry')">机构入口
+        <span class="hrin center" @click="goSearchd('/other/hrentry')">机构入口
           <i></i>
         </span>
-        <span v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
+        <span class="center" v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
         <div class="downLoad">
           <i class="phone"></i>
           <div class="downApp clearfix">
@@ -65,7 +65,7 @@
     <div class="start" v-if="start">
       <div class="bgt" @click="close"></div>
       <!-- @click="close" -->
-      <div class="lrFrame">
+      <div class="lrFrame" v-show="lrFrame">
         <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
