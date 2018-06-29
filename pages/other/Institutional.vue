@@ -360,8 +360,13 @@ export default {
       }
     },
     pageScroll() {
-      let topImgHeight = this.$refs.topImg.offsetHeight
-      let totalHeight = this.headerHeight + topImgHeight
+      let totalHeight
+      let topImgHeight
+      if (this.$refs.topImg) {
+        topImgHeight = this.$refs.topImg.offsetHeight || this.$refs.topImg
+        totalHeight = this.headerHeight + topImgHeight
+      }
+
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop
       if (this.scroll >= this.headerHeight && this.scroll < totalHeight) {
@@ -379,10 +384,15 @@ export default {
     this.company.userID = this.token
     this.$bus.$emit('bannerShow', true)
     window.addEventListener('scroll', this.pageScroll)
+    console.log(document.getElementsByClassName('headerBox')[0].offsetHeight)
     this.headerHeight = document.getElementsByClassName(
       'headerBox'
     )[0].offsetHeight
     this.buttonFormTop = this.$refs.buttonForm.offsetTop
+  },
+  deactivated() {
+    console.log(111)
+    window.removeEventListener('scroll', this.pageScroll)
   }
 }
 </script>
