@@ -100,7 +100,7 @@
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
               <el-form-item prop="companyCodes">
-                <el-input v-model="registerData.companyCodes" placeholder="绑定机构"></el-input>
+                <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
                 <span class="bindCompany">(可选)</span>
               </el-form-item>
               <el-form-item prop="checked">
