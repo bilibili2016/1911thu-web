@@ -36,10 +36,9 @@
         </div>
       </div>
     </transition>
-
     <transition :name="transitionName" v-if="data">
 
-      <div class="back-to-ceiling customStyleThree" v-show="visible" @click="checkCourse">
+      <div class="back-to-ceiling customStyleThree" v-show="true" @click="checkCourse">
         <div class="line-wrap">
           <div class="line-centerd">
             <span>我要选课</span>
