@@ -36,7 +36,7 @@
       <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>
       </div>
-      <div v-else v-loading="loadCourse">
+      <div v-else v-loading="loadCourse" class="noCourse">
         <v-nothing></v-nothing>
       </div>
     </div>
@@ -69,6 +69,7 @@ export default {
       activeName: '',
       value3: true,
       value4: true,
+      loadCourse: false,
       configSevent: {
         card_type: 'profile',
         card: 'home'
@@ -102,11 +103,13 @@ export default {
       this.pagemsg.page = val
       this.curriculumListForm.pages = val
       this.curriculumListForm.limits = 8
+      this.loadCourse = true
       return new Promise((resolve, reject) => {
         home.curriculumList(this.curriculumListForm).then(response => {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
           resolve(true)
+          this.loadCourse = false
         })
       })
     },

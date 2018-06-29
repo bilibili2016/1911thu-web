@@ -7,7 +7,7 @@
       </div>
       <div class="hotWord">
         <span>热搜关键词：</span>
-        <span v-for="item in hotSearchRecord" @click="selectItem(item)" :key="item">{{item.search_word}}</span>
+        <span v-for="(item,index) in hotSearchRecord" @click="selectItem(item.search_word)" :key="index">{{item.search_word}}</span>
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@ export default {
         this.$emit('Search', this.searchMsg)
       }
     },
-    selectItem(val) {
+    selectItem(val, index) {
       this.searchMsg = val
       persistStore.set('key', this.searchMsg)
       this.$emit('Search', this.searchMsg)

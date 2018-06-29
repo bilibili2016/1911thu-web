@@ -100,7 +100,7 @@
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
               <el-form-item prop="companyCodes">
-                <el-input v-model="registerData.companyCodes" placeholder="绑定机构"></el-input>
+                <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
                 <span class="bindCompany">(可选)</span>
               </el-form-item>
               <el-form-item prop="checked">
@@ -599,6 +599,8 @@ export default {
       var link = window.location.origin
       if (link === 'http://www.1911edu.com') {
         link = 'http://api.1911edu.com/Wapi/Index/wxBack'
+      } else if (link === 'http://1911edu.com' || link === '1911edu.com') {
+        link = 'http://api.1911edu.com/Wapi/Index/wxBack'
       } else {
         link = 'http://ceshi.1911edu.com/Wapi/Index/wxBack'
       }
@@ -623,10 +625,10 @@ export default {
               type: 'success',
               message: '登录成功！'
             })
-            this.tokenForm.token = response.data.token
+            this.tokenForm.tokens = response.data.token
+            this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
-            this.setToken(this.tokenForm)
             this.closeWechat()
             this.close()
           } else {
@@ -650,11 +652,11 @@ export default {
       return new Promise((resolve, reject) => {
         auth.getWXAccredit(this.WxLogin).then(response => {
           if (response.status === 0) {
+            clearInterval(this.getwxtime)
             this.tokenForm.tokens = response.data.token
+            this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
-            this.setToken(this.tokenForm)
-            clearInterval(this.getwxtime)
             this.scanCodeShow = false //微信扫码
             this.closeWechat()
           }

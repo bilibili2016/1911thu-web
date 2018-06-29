@@ -30,9 +30,16 @@
             </div>
             <div class="cpnInfo" v-else>
               <p class="cpnInfoLi">
-                <span>{{company.contact_person}}</span>
-                <span>{{company.company_name}}</span>
-                <span>{{company.phone}}</span>
+                <!-- {{company}} -->
+                <span>
+
+                  <strong>联系人:</strong>{{company.contact_person}}</span>
+                <span>
+                  <strong>公司名称:</strong>{{company.company_name}}</span>
+                <span>
+                  <strong>公司地址:</strong>{{company.address}}</span>
+                <span>
+                  <strong>手机号:</strong>{{company.phone}}</span>
               </p>
             </div>
 
@@ -58,19 +65,41 @@
             </div>
           </div>
           <div class="invoiceMsg clearfix">
+            <!-- {{isShowTicket}} -->
             <h4>
               发票信息
               <span>开机构抬头发票须填写纳税人识别号，以免影响报销</span>
             </h4>
-            <p>
-              <span class="invoiceWord" v-show="isShowTicket">不开发票</span>
+            <p class="invoice">
+              <!-- <span v-show="isShowTicket" style="display:inline-block;padding-right:20px;">
+                <strong style="display:inline-block;padding-right:8px;">发票类型:</strong>个人</span> -->
+              <!-- 显示发票抬头 -->
+              <span v-show="isShowTicket">
+                <!-- {{invoiceForm.ticket }} -->
+                <strong>发票抬头:
+
+                </strong>
+                <span v-if="invoiceForm.ticket === true">个人</span>
+                <span v-if="invoiceForm.ticket === false">{{invoiceForm.companyname}}</span>
+                <span v-if="invoiceForm.ticket === false">{{invoiceForm.number}}</span>
+              </span>
+              <!-- 显示发票抬头 -->
+              <span class="invoiceWord" v-show="isShowTicket">
+                <strong>发票内容:</strong>
+                <span v-if="invoiceForm.radio === 1">不开发票</span>
+                <span v-if="invoiceForm.radio === 2">商品明细</span>
+              </span>
+              <span v-show="isShowTicket">
+                <strong>收货地址:</strong>{{invoiceForm.address}}
+              </span>
+
               <span class="invoiceWord" v-show="!isShowTicket">
-                <i>普通发票</i>
-                <i>{{invoiceForm.companyname}}</i>
-                <i>商品明细</i>
+                <span>不开发票</span>
               </span>
               <span class="changeInvoice" @click="showIoc">修改</span>
+
             </p>
+
           </div>
           <div class="orderInfo">
             <h5>
@@ -84,7 +113,7 @@
         <div class="bottomBtn clearfix">
           <p class="allPrice">应付金额：¥{{allPrise}}</p>
           <p class="commitOrder" @click="commitOrder">提交订单</p>
-          <h6>我有疑问，需要反馈?</h6>
+          <!-- <h6>我有疑问，需要反馈?</h6> -->
         </div>
       </div>
 
@@ -97,6 +126,7 @@
         </h3>
         <div class="invoiceForm">
           <div class="formLi clearfix">
+            <!-- {{invoiceForm.ticket}} -->
             <p class="fl">发票抬头</p>
             <!-- <h6 class="fr check">个人</h6> -->
             <h6 :class="invoiceForm.saveioc === false?'fr check':'fr'">个人</h6>
@@ -160,8 +190,9 @@
           <el-form-item label="公司名称：" prop="companyname">
             <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
           </el-form-item>
-          <el-form-item label="公司地址：" prop="companyaddress">
-            <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
+          <!-- prop="companyaddress" -->
+          <el-form-item label="公司地址：">
+            <el-input placeholder="请输入公司地址" v-model="address"></el-input>
           </el-form-item>
           <el-form-item label="联系人：" prop="contactperson">
             <el-input placeholder="请输入联系人姓名" v-model="companyInfo.contactperson"></el-input>
@@ -190,6 +221,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
+      address: '',
       flag: true,
       person: true,
       showInfo: false,
@@ -277,6 +309,34 @@ export default {
   mounted() {
     this.goodsList()
     this.getTicket()
+    if (persistStore.get('address')) {
+      this.flag = false
+      this.company.company_name = persistStore.get('companyname')
+      this.company.contact_person = persistStore.get('contactperson')
+      this.company.phone = persistStore.get('phone')
+      this.company.address = persistStore.get('address')
+    }
+
+    if (persistStore.get('invoiceradio')) {
+      this.isShowTicket = true
+      this.invoiceForm.ticket = persistStore.get('invoiceticket')
+      // console.log(this.invoiceForm.ticket, 'this.invoiceForm.ticket')
+      this.invoiceForm.radio = persistStore.get('invoiceradio')
+      this.invoiceForm.address = persistStore.get('invoiceaddress')
+
+      this.invoiceForm.companyname = persistStore.get('invoicetitle')
+      this.invoiceForm.number = persistStore.get('invoicenumber')
+    } else {
+      this.isShowTicket = false
+    }
+  },
+  watch: {
+    address(val) {
+      // console.log(val, '67777')
+      if (val) {
+        persistStore.set('address', val)
+      }
+    }
   },
   methods: {
     buyType(type) {
@@ -318,6 +378,20 @@ export default {
       this.invoiceForm.ticket = true
     },
     addInvoiceInfo() {
+      // if (this.invoiceForm.ticket === true) {
+      //   persistStore.set('invoiceticket', true)
+      //   persistStore.set('invoicetitle', '个人')
+      // } else {
+      //   persistStore.set('invoiceticket', false)
+      //   persistStore.set('invoicetitle', this.invoiceForm.companyname)
+      //   persistStore.set('invoicenumber', this.invoiceForm.number)
+      // }
+      // console.log(this.invoiceForm.radio, 'this.invoiceForm.radio')
+      persistStore.set('invoiceticket', this.invoiceForm.ticket)
+      persistStore.set('invoiceradio', this.invoiceForm.radio)
+      persistStore.set('invoiceaddress', this.invoiceForm.address)
+      persistStore.set('invoicetitle', this.invoiceForm.companyname)
+      persistStore.set('invoicenumber', this.invoiceForm.number)
       // 添加发票 invoiceForm
       if (this.invoiceForm.radio === 2) {
         if (this.invoiceForm.saveioc) {
@@ -335,7 +409,7 @@ export default {
                 type: 'success',
                 message: res.msg
               })
-              this.isShowTicket = false
+              this.isShowTicket = true
               this.commitOrders.ticketId = res.data.invoice_id
               this.close()
             } else {
@@ -408,6 +482,7 @@ export default {
       this.loadGoods = true
       return new Promise((resolve, reject) => {
         home.goodsList(this.addArray).then(res => {
+          // console.log(res, '这是公司信息8899999')
           if (res.status === 0) {
             this.curriculumLists = res.data.curriculumLists
             this.curriculumSum = res.data.curriculumSum
@@ -415,6 +490,7 @@ export default {
             this.allPrise = res.data.goodsAmount
             this.nickName = persistStore.get('nickName')
             if (res.data.companyInfo) {
+              // console.log(res.data.companyInfo, '这是公司信息8899999')
               this.company = res.data.companyInfo
               this.person = false
               this.flag = false
@@ -440,10 +516,15 @@ export default {
       })
     },
     addCompanyInfo(formName) {
+      // persistStore.set(companyname, this.companyInfo.companyname)
+      // console.log()
       //提交机构信息表单
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
+            // let companyname = this.companyInfo.companyname
+            // console.log(this.companyInfo.companyname, '公司信息')
+
             home.addCompanyInfo(this.companyInfo).then(response => {
               if (response.status === '100100') {
                 this.$message({
@@ -452,10 +533,24 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
+                // console.log(this.companyInfo, 'opopopop')
+                // let aa = this.companyInfo.companyname
+                // persistStore.set(a, aa)
+                // persistStore.set(companyaddress, this.address)
+                // persistStore.set(contactperson, this.companyInfo.contactperson)
+                // persistStore.set(phone, this.companyInfo.phones)
+                persistStore.set('companyname', this.companyInfo.companyname)
+                persistStore.set('companyaddress', this.address)
+                persistStore.set(
+                  'contactperson',
+                  this.companyInfo.contactperson
+                )
+                persistStore.set('phone', this.companyInfo.phones)
                 this.company.id = response.data.id
                 this.company.contact_person = this.companyInfo.contactperson
                 this.company.company_name = this.companyInfo.companyname
                 this.company.phone = this.companyInfo.phones
+                this.company.address = persistStore.get('address')
                 this.showInfo = false
                 this.flag = false
               }
@@ -558,3 +653,11 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+.invoice {
+  span {
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
+</style>

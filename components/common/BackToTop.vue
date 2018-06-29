@@ -125,11 +125,13 @@ export default {
     backToTop() {
       if (this.move) {
         const start = window.pageYOffset
+        console.log(start)
         let i = 0
         this.interval = setInterval(() => {
           const next = Math.floor(
             this.easeInOutQuad(10 * i, start, -start, 500)
           )
+          console.log(next)
           if (next <= this.backPosition) {
             window.scrollTo(0, this.backPosition)
             clearInterval(this.interval)
