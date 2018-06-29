@@ -43,11 +43,16 @@
 
           <img class="fl" :src="player.head_img" alt="" @click="goTeacherInfo(player.teacher_id)">
           <div class="playername fl" @click="goTeacher(player.teacher_id)">
-
+            <!-- <div>{{player.is_car === 1 ? false : true}}</div> -->
             <div class="fl">{{player.teacher_name}}</div>
             <div class="fl">{{player.graduate}}</div>
+            <div>{{player.is_cart}}</div>
           </div>
-          <div v-if="!curriculumPrivilege" class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
+          <!-- player.is_car ===  1 ? false : true -->
+          <div v-if="player.is_car === 1">
+            <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
+          </div>
+          <div v-else>ioioii{{player.is_car}}</div>
         </div>
         <div class="courseList" ref="courseList">
           <div class="chapter" v-for="(section,index) in courseList" :key="index">
@@ -337,26 +342,7 @@ export default {
       this.setTid(this.tidForm)
       this.$router.push('/home/components/teacher')
     },
-    playerBuy(item, info) {
-      // console.log(item, 'playerItem')
-      // console.log(info, 'info')
-      // console.log('123')
-      if (info.is_cart === 1) {
-        // this.$alert('商品已在购物车内', '温馨提示', {
-        //   confirmButtonText: '确定',
-        //   callback: action => {}
-        // })
-        // console.log('123')
-      } else {
-        this.curriculumcartids.cartid = item[0].curriculum_id
-        return new Promise((resolve, reject) => {
-          home.addShopCart(this.curriculumcartids).then(response => {
-            // this.$router.push('/shop/shoppingcart')
-            window.open(window.location.origin + '/shop/shoppingcart')
-          })
-        })
-      }
-    },
+
     playerBuy(item, info) {
       // console.log(item, 'playerItem')
       // console.log(info, 'info')
@@ -370,7 +356,11 @@ export default {
         return new Promise((resolve, reject) => {
           home.addShopCart(this.curriculumcartids).then(response => {
             // this.$router.push('/shop/shoppingCart')
-            window.open(window.location.origin + '/shop/shoppingcart')
+            // window.open(window.location.origin + '/shop/shoppingcart')
+            this.$message({
+              type: 'success',
+              message: '添加购物车成功'
+            })
           })
         })
       }
@@ -574,5 +564,10 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.displays {
+  display: none;
+}
+</style>
 
 
