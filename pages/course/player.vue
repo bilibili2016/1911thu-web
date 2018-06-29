@@ -46,13 +46,13 @@
             <!-- <div>{{player.is_car === 1 ? false : true}}</div> -->
             <div class="fl">{{player.teacher_name}}</div>
             <div class="fl">{{player.graduate}}</div>
-            <div>{{player.is_cart}}</div>
+            <!-- <div>{{player.is_cart}}</div> -->
           </div>
           <!-- player.is_car ===  1 ? false : true -->
           <div v-if="player.is_car === 1">
             <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
           </div>
-          <div v-else>ioioii{{player.is_car}}</div>
+          <div v-else>{{player.is_car}}</div>
         </div>
         <div class="courseList" ref="courseList">
           <div class="chapter" v-for="(section,index) in courseList" :key="index">
