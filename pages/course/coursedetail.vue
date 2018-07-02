@@ -17,14 +17,19 @@
                 <i class="el-icon-star-on"></i>
                 <span>收藏 </span>
               </span>
-              <span>
+              <span id="iShare">
                 <i class="el-icon-share"></i>
-                <span> 分享 </span>
+                <span @click="share"> 分享 </span>
                 <div class="shareIcon">
-                  <i><img @click="share(courseList.title,courseList.picture,'qq')" src="@/assets/images/share_qq.png" alt="">QQ</i>
-                  <i><img @click="share(courseList.title,courseList.picture,'wx')" src="@/assets/images/share_wx.png" alt="">微信</i>
-                  <i><img @click="share(courseList.title,courseList.picture,'wb')" src="@/assets/images/share_wb.png" alt="">微博</i>
-                  <i><img @click="share(courseList.title,courseList.picture,'pyq')" src="@/assets/images/share_pyq.png" alt="">朋友圈</i>
+                  <a href="#" class="iShare_qzone">
+                    <i class="iconfont qzone"><img src="@/assets/images/share_qq.png" alt="">QQ</i>
+                  </a>
+                  <a href="#" class="iShare_qq">
+                    <i class="iconfont qq"><img src="@/assets/images/share_qq.png" alt="">空间</i>
+                  </a>
+                  <a href="#" class="iShare_weibo">
+                    <i class="iconfont weibo"><img src="@/assets/images/share_wb.png" alt="">微博</i>
+                  </a>
                 </div>
               </span>
             </div>
@@ -237,7 +242,8 @@ export default {
       defaultCatalogId: '',
       tidForm: {
         tids: ''
-      }
+      },
+      iShare_config: ''
     }
   },
   methods: {
@@ -408,38 +414,14 @@ export default {
       })
     },
     //分享
-    share(title, picurl, where) {
-      if (where === 'wb') {
-        var sharesinastring =
-          'http://v.t.sina.com.cn/share/share.php?title=' +
-          title +
-          '&url=' +
-          window.location.href +
-          '&content=utf-8&sourceUrl=' +
-          window.location.href +
-          '&pic=' +
-          picurl
-        window.open(
-          sharesinastring,
-          'newwindow',
-          'height=400,width=400,top=100,left=100'
-        )
-      }
-      if (where === 'wx') {
-      }
-      if (where === 'kj') {
-        var shareqqzonestring =
-          'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=' +
-          title +
-          '&url=' +
-          window.location.href +
-          '&pics=' +
-          picurl
-        window.open(
-          shareqqzonestring,
-          'newwindow',
-          'height=400,width=400,top=100,left=100'
-        )
+    share() {
+      var iShare_config = {
+        container: '#iShare',
+        config: {
+          title: this.title,
+          description: this.introduction,
+          url: this.picture
+        }
       }
     },
     // 删除收藏
@@ -480,6 +462,7 @@ export default {
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
+    this.share()
   }
 }
 </script>
