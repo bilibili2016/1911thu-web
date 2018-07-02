@@ -21,9 +21,10 @@
                 <i class="el-icon-share"></i>
                 <span> 分享 </span>
                 <div class="shareIcon">
-                  <img @click="share(courseList.title,courseList.picture,'wx')" src="@/assets/images/share-wx.png" alt="">
-                  <img @click="share(courseList.title,courseList.picture,'wb')" src="@/assets/images/share-wb.png" alt="">
-                  <img @click="share(courseList.title,courseList.picture,'kj')" src="@/assets/images/share-kj.png" alt="">
+                  <i><img @click="share(courseList.title,courseList.picture,'qq')" src="@/assets/images/share_qq.png" alt="">QQ</i>
+                  <i><img @click="share(courseList.title,courseList.picture,'wx')" src="@/assets/images/share_wx.png" alt="">微信</i>
+                  <i><img @click="share(courseList.title,courseList.picture,'wb')" src="@/assets/images/share_wb.png" alt="">微博</i>
+                  <i><img @click="share(courseList.title,courseList.picture,'pyq')" src="@/assets/images/share_wb.png" alt="">朋友圈</i>
                 </div>
               </span>
             </div>
@@ -64,7 +65,7 @@
           </div>
         </div>
         <!-- 评价 -->
-        <div class="evaluate-tag" v-show="courseList.is_study">
+        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0">
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
@@ -110,7 +111,7 @@
                 </div>
               </div>
               <div class="pagination course-style">
-                <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
+                <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
               </div>
             </el-dialog>
           </div>
@@ -119,7 +120,7 @@
         <!-- 用户评论 -->
         <div class="evaluate" v-loading="loadEvaluate">
           <h4>用户评价
-            <span @click="getMore">查看更多></span>
+            <span v-if="pageCount>3" @click="getMore">查看更多></span>
           </h4>
           <div v-loading="loadMsg">
             <div class="score">
@@ -127,7 +128,7 @@
               <el-rate disabled v-model="totalEvaluateInfo.totalScore" class="itemBox-rate fl"></el-rate>
               <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
             </div>
-            <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index">
+            <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index" v-if="index<3">
               <img class="fl" :src="item.head_img" alt="">
               <div class="fl">
                 <p style="margin:3px 0 8px;">{{item.nick_name}}</p>
@@ -186,6 +187,7 @@ export default {
       },
       commentator: [],
       commentators: [],
+      pageCount: null,
       config: {
         card_type: 'goodplay'
       },
@@ -211,7 +213,7 @@ export default {
       loadMsg: true,
       pagemsg: {
         page: 1,
-        pagesize: 2,
+        pagesize: 3,
         total: 5
       },
       btnData: [],
@@ -222,7 +224,7 @@ export default {
         evaluatecontent: '',
         scores: '',
         types: 1,
-        tags: ''
+        tag: ''
       },
       evaluate: {
         eltnum: null
@@ -262,6 +264,7 @@ export default {
     // 点击评论查看更多
     getMore() {
       this.dialogVisible = true
+      this.handleCurrentChange(1)
     },
     // 评论查看更多-分页
     handleCurrentChange(val) {
@@ -273,7 +276,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
-          this.pagemsg.total = response.data.pageCount / 3
+          this.pagemsg.total = response.data.pageCount
           this.commentator = response.data.evaluateList
         })
       })
@@ -312,6 +315,8 @@ export default {
                 type: 'success',
                 message: response.msg
               })
+              this.getCourseDetail()
+              this.getEvaluateList()
             }
           })
         })
@@ -325,7 +330,7 @@ export default {
     },
     getBtnContent(val, index) {
       this.borderIndex = index
-      this.addEvaluateForm.tags = val
+      this.addEvaluateForm.tag = val
     },
     getCourseDetail() {
       this.loadTeacher = true
@@ -351,7 +356,8 @@ export default {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
-          this.pagemsg.total = response.data.pageCount / 3
+          this.pagemsg.total = response.data.pageCount
+          this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
           this.totalEvaluateInfo = response.data.totalEvaluateInfo

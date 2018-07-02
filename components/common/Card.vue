@@ -81,7 +81,7 @@
       </div>
     </template>
     <!-- 我的收藏 -->
-    <!-- profile个人信息模板 新上好课模板-->
+    <!-- profile个人信息模板 新上好课模板 我要选课-->
     <template v-if="config.card_type === 'shoucang'">
       <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
@@ -473,11 +473,6 @@ export default {
       // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
-      // console.log(item, '123')
-      // if(this.productsNum === null)
-      // console.log(this.productsNum, '12345678')
-
-      // console.log(this.productsNum, '3')
       let len = this.productsNum
       if (item.is_checked === false) {
         item.is_checked = false
@@ -486,8 +481,6 @@ export default {
         len = len - 1
         this.delShopCart()
       } else {
-        // console.log(item)
-
         item.is_checked = true
         this.curriculumcartids.cartid = item.id
         this.curriculumcartid.numberArr.pop()
@@ -749,6 +742,9 @@ export default {
     addShopCart() {
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
+          this.setProductsNum({
+            pn: response.data.curriculumNumber
+          })
           resolve(true)
         })
       })
