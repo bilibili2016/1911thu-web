@@ -24,7 +24,7 @@
                   <i><img @click="share(courseList.title,courseList.picture,'qq')" src="@/assets/images/share_qq.png" alt="">QQ</i>
                   <i><img @click="share(courseList.title,courseList.picture,'wx')" src="@/assets/images/share_wx.png" alt="">微信</i>
                   <i><img @click="share(courseList.title,courseList.picture,'wb')" src="@/assets/images/share_wb.png" alt="">微博</i>
-                  <i><img @click="share(courseList.title,courseList.picture,'pyq')" src="@/assets/images/share_wb.png" alt="">朋友圈</i>
+                  <i><img @click="share(courseList.title,courseList.picture,'pyq')" src="@/assets/images/share_pyq.png" alt="">朋友圈</i>
                 </div>
               </span>
             </div>
