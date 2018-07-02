@@ -291,32 +291,6 @@ export default {
         }, 16.7)
       }
     },
-    // handleScroll() {
-    //   if (this.move) {
-    //     // const start = window.pageYOffset
-    //     const start = this.$refs.buttonForm.offsetTop
-    //     // console.log(start)
-    //     let i = 0
-    //     this.interval = setInterval(() => {
-    //       const next = Math.floor(this.easeInOutQuad(1 * i, start, -start, 500))
-    //       console.log(next)
-    //       if (next <= this.backPosition) {
-    //         window.scrollTo(0, this.backPosition)
-    //         clearInterval(this.interval)
-    //         this.move = true
-    //       } else {
-    //         this.move = false
-    //         window.scrollTo(0, next)
-    //       }
-    //       i++
-    //     }, 16.7)
-    //   }
-    // },
-    easeInOutQuad(t, b, c, d) {
-      // console.log(t, b, c, d)
-      if ((t /= d / 2) < 1) return c / 2 * t * t + b
-      return -c / 2 * (--t * (t - 2) - 1) + b
-    },
     handleLink(item) {
       window.open(window.location.origin + item.link)
     },
