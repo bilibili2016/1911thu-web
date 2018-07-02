@@ -147,6 +147,7 @@ import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import BackToTop from '@/components/common/BackToTop.vue'
+import $ from 'jquery'
 export default {
   components: {
     'v-backtotop': BackToTop
@@ -276,7 +277,45 @@ export default {
   },
   methods: {
     handleScroll() {
-      window.scroll(0, this.buttonFormTop)
+      if (this.move) {
+        this.interval = setInterval(() => {
+          this.backPosition += 50
+          if (this.backPosition > this.buttonFormTop) {
+            this.move = true
+            this.backPosition = 0
+            clearInterval(this.interval)
+          } else {
+            this.move = false
+            window.scrollTo(0, this.backPosition)
+          }
+        }, 16.7)
+      }
+    },
+    // handleScroll() {
+    //   if (this.move) {
+    //     // const start = window.pageYOffset
+    //     const start = this.$refs.buttonForm.offsetTop
+    //     // console.log(start)
+    //     let i = 0
+    //     this.interval = setInterval(() => {
+    //       const next = Math.floor(this.easeInOutQuad(1 * i, start, -start, 500))
+    //       console.log(next)
+    //       if (next <= this.backPosition) {
+    //         window.scrollTo(0, this.backPosition)
+    //         clearInterval(this.interval)
+    //         this.move = true
+    //       } else {
+    //         this.move = false
+    //         window.scrollTo(0, next)
+    //       }
+    //       i++
+    //     }, 16.7)
+    //   }
+    // },
+    easeInOutQuad(t, b, c, d) {
+      // console.log(t, b, c, d)
+      if ((t /= d / 2) < 1) return c / 2 * t * t + b
+      return -c / 2 * (--t * (t - 2) - 1) + b
     },
     handleLink(item) {
       window.open(window.location.origin + item.link)
@@ -371,7 +410,6 @@ export default {
 
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop
-      console.log(this.scroll)
       if (this.scroll >= this.headerHeight && this.scroll < totalHeight) {
         this.istopFixed = true
         this.istopRelative = false

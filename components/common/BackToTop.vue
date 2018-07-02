@@ -130,7 +130,6 @@ export default {
           const next = Math.floor(
             this.easeInOutQuad(10 * i, start, -start, 500)
           )
-          console.log(next)
           if (next <= this.backPosition) {
             window.scrollTo(0, this.backPosition)
             clearInterval(this.interval)
