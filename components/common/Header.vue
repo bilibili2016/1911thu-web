@@ -109,7 +109,7 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
-                <el-button @click.native="signUp('registerData')">注册</el-button>
+                <el-button ref="registerBtn" :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -181,6 +181,8 @@ export default {
       return callback()
     }
     return {
+      isClick: false,
+      timer: null,
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
@@ -540,6 +542,7 @@ export default {
     },
     // 注册 请求
     signUp(formName) {
+      this.isClick = true
       this.registerData.ectpwd = encryption(this.registerData.passwords)
       this.$refs[formName].validate(valid => {
         if (this.registerData.checked) {
@@ -557,11 +560,15 @@ export default {
                   this.close()
                 }
                 this.loadLogin = false
+                this.isClick = false
               })
             })
           } else {
+            this.isClick = false
             return false
           }
+        } else {
+          this.isClick = false
         }
       })
     },
