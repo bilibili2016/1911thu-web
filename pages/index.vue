@@ -5,6 +5,7 @@
 </template>
 <script>
 import Home from '@/pages/home/index.vue'
+// import About from '@/pages/other/degree1.vue'
 export default {
   components: {
     'v-home': Home

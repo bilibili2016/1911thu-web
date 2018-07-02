@@ -303,7 +303,7 @@ export default {
           {
             required: true,
             message: '',
-            trigger: 'blur'
+            trigger: 'change'
           },
           {
             validator: checkProtocol,
@@ -751,7 +751,8 @@ export default {
       this.registerData.passwords = ''
       this.registerData.types = 1
       this.registerData.codes = ''
-      this.registerData.checked = [false]
+      // this.registerData.checked = [false]
+      this.registerData.checked = false
       this.registerData.companyCodes = ''
     },
     emptyWechatForm() {
