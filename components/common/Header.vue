@@ -80,7 +80,7 @@
               <el-row>
                 <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
                 <div @click="forget">忘记密码?</div>
-                <el-button @click="signIns('loginData')">登录</el-button>
+                <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -109,7 +109,7 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
-                <el-button ref="registerBtn" :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
+                <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -182,7 +182,6 @@ export default {
     }
     return {
       isClick: false,
-      timer: null,
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
@@ -574,6 +573,7 @@ export default {
     },
     // 登录 请求
     signIns(formName) {
+      this.isClick = true
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -592,10 +592,12 @@ export default {
                 persistStore.set('loginMsg', false)
                 this.$bus.$emit('reLogin', true)
               }
+              this.isClick = false
               // this.loadLogin = false
             })
           })
         } else {
+          this.isClick = false
           return false
         }
       })

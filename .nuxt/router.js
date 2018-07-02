@@ -5,10 +5,10 @@ Vue.use(Router)
 
 const _121a4c47 = () => import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */).then(m => m.default || m)
 const _01587f57 = () => import('../pages/profile/index.vue' /* webpackChunkName: "pages/profile/index" */).then(m => m.default || m)
-const _903560e0 = () => import('../pages/other/degree.vue' /* webpackChunkName: "pages/other/degree" */).then(m => m.default || m)
+const _44ce3451 = () => import('../pages/other/degree1.vue' /* webpackChunkName: "pages/other/degree1" */).then(m => m.default || m)
 const _0e7597be = () => import('../pages/other/homeUs.vue' /* webpackChunkName: "pages/other/homeUs" */).then(m => m.default || m)
 const _025553c6 = () => import('../pages/shop/wePay.vue' /* webpackChunkName: "pages/shop/wePay" */).then(m => m.default || m)
-const _4fe35dd3 = () => import('../pages/other/degree.1.vue' /* webpackChunkName: "pages/other/degree.1" */).then(m => m.default || m)
+const _903560e0 = () => import('../pages/other/degree.vue' /* webpackChunkName: "pages/other/degree" */).then(m => m.default || m)
 const _f6467512 = () => import('../pages/other/aboutUs.vue' /* webpackChunkName: "pages/other/aboutUs" */).then(m => m.default || m)
 const _26a9bbc9 = () => import('../pages/course/newlesson.vue' /* webpackChunkName: "pages/course/newlesson" */).then(m => m.default || m)
 const _07910e54 = () => import('../pages/other/enterprisecustom.vue' /* webpackChunkName: "pages/other/enterprisecustom" */).then(m => m.default || m)
@@ -118,9 +118,9 @@ export function createRouter () {
 			name: "profile"
 		},
 		{
-			path: "/other/degree",
-			component: _903560e0,
-			name: "other-degree"
+			path: "/other/degree1",
+			component: _44ce3451,
+			name: "other-degree1"
 		},
 		{
 			path: "/other/homeUs",
@@ -133,9 +133,9 @@ export function createRouter () {
 			name: "shop-wePay"
 		},
 		{
-			path: "/other/degree.1",
-			component: _4fe35dd3,
-			name: "other-degree.1"
+			path: "/other/degree",
+			component: _903560e0,
+			name: "other-degree"
 		},
 		{
 			path: "/other/aboutUs",
