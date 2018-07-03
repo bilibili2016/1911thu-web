@@ -93,10 +93,12 @@
         </h4>
         <h5>请问该课程对您有帮忙吗？快来评个分吧！</h5>
         <h6>课程评分：
-          <el-rate v-model="evaluate.eltnum"></el-rate>
+
+          <el-rate v-model="rateModel" @change="changeRate"></el-rate>
+
         </h6>
-        <div class="btnList">
-          <el-radio v-for="(btn,index) in evaluate.btnList" :key="index" v-model="radioBtn" :label="index" border @change="selTypeChange(index)">{{btn}}</el-radio>
+        <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+          {{item.value}}
         </div>
         <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="word">
         </el-input>
@@ -115,19 +117,6 @@ import { other, auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  // head: {
-  //   script: [
-  //     {
-  //       src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js'
-  //     }
-  //   ],
-  //   link: [
-  //     {
-  //       rel: 'stylesheet',
-  //       href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
-  //     }
-  //   ]
-  // },
   computed: {
     ...mapState('auth', ['kid', 'tid'])
   },
@@ -151,15 +140,7 @@ export default {
       playing: '',
       playImg: require('@/assets/images/playImg.gif'),
       pauseImg: require('@/assets/images/video.png'),
-      player: {
-        // courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
-        // video: "",
-        // ewCode: require("http://pam8iyw9q.bkt.clouddn.com/attentionWechat2.png"),
-        // teacher: {
-        //   name: "莎良朋",
-        //   school: "华中科技大学博士"
-        // },
-      },
+      player: {},
       courseList: [
         {
           section: '第一章 图的基本概念',
@@ -248,11 +229,26 @@ export default {
       tidForm: {
         tids: ''
       },
-      curriculumPrivilege: false
+      curriculumPrivilege: false,
+      btnData: [],
+      reTagBtn: [],
+      tagGroup: '',
+      rateModel: 5
     }
   },
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid']),
+    changeRate(val) {
+      this.reTagBtn = []
+      this.tagGroup[val].map((item, i) => {
+        let obj = new Object()
+        obj.value = item
+        obj.index = i
+        obj.isCheck = false
+        this.reTagBtn.push(obj)
+      })
+      this.btnData = this.reTagBtn
+    },
     handleCourse(item, index) {
       this.ischeck = item.id
       this.playing = this.playImg
@@ -262,6 +258,18 @@ export default {
       this.clickMsg = true
       this.autoplay = true
       this.getPlayerInfo()
+    },
+    getEvaluateTags() {
+      return new Promise((resolve, reject) => {
+        home.getEvaluateTags().then(response => {
+          console.log(response.data.evaluateTags['1'], '123')
+          // this.btnData = response.data.evaluateTags['1']
+          this.tagGroup = response.data.evaluateTags
+          this.changeRate('1')
+          this.btnDatas = response.data.evaluateTags
+          // this.tagGroup = response.data.evaluateTags
+        })
+      })
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
@@ -570,7 +578,9 @@ export default {
     this.getPlayerInfo()
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
-    this.seconds = 10000000
+    ;(this.seconds = 10000000),
+      // 获取评论接口
+      this.getEvaluateTags()
   }
 }
 </script>
