@@ -52,7 +52,7 @@
         <div class="attention">
           <div class="code">
             <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
-            <h5>扫描二维码或关注“1911学堂”微信公众号</h5>
+            <h5>扫描二维码，下载“1911学堂”APP</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
         </div>
@@ -205,7 +205,7 @@ export default {
         limits: 3,
         ids: '',
         types: 1,
-        isRecommend: 2
+        isRecommend: ''
       },
       privileMsg: true,
       collectMsg: 2,
