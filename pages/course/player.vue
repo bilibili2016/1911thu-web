@@ -509,6 +509,9 @@ export default {
         this.addEvaluateForm.ids = persistStore.get('curriculumId')
         this.addEvaluateForm.evaluatecontent = this.word
         this.addEvaluateForm.scores = this.evaluate.eltnum
+        this.addEvaluateForm.tag = this.addEvaluateForm.tag
+          .toString()
+          .replace(/,/g, '#')
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
             this.$message({

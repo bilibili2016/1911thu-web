@@ -332,8 +332,12 @@ export default {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
-      console.log(this.addEvaluateForm, '123')
-      console.log(this.courseList.is_study, '是否出现评论')
+
+      this.addEvaluateForm.tag = this.addEvaluateForm.tag
+        .toString()
+        .replace(/,/g, '#')
+      console.log(this.addEvaluateForm, '提交评论的form')
+      // console.log(this.courseList.is_study, '是否出现评论')
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
