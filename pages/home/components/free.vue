@@ -1,9 +1,9 @@
 <template>
   <div class="bg">
     <el-row class="center">
-      <v-title :data="titleTwo"></v-title>
-      <v-card ref="card" :data="newData" :config="config" @selectCid="selectCid"></v-card>
-      <v-more :linkdata="linkone"></v-more>
+      <v-title :data="titleOne"></v-title>
+      <v-card ref="card" :data="freeData" :config="config" @selectCid="selectCid"></v-card>
+      <v-more :linkdata="linkzero"></v-more>
     </el-row>
   </div>
 </template>
@@ -14,7 +14,7 @@ import CustomCard from '@/components/common/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 import { mapActions } from 'vuex'
 export default {
-  props: ['config', 'newData', 'titleTwo', 'linkone'],
+  props: ['config', 'freeData', 'titleOne', 'linkzero'],
   components: {
     'v-title': CustomTitle,
     'v-card': CustomCard,
