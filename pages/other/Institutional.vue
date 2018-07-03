@@ -8,180 +8,136 @@
         <i class="el-icon-close" @click="closeRecommend"></i>
       </div>
     </div> -->
-    <div class="topImg">
+    <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
       <img src="@/assets/images/hrentry-pic5.png" alt="">
       <div class="top-text">
         <h1 class="top-h1">你好，培训方案规划者</h1>
         <p class="top-desc">如果您正在为帮助领导选课烦恼、或者正在为企业培训 、提醒进行规划， EXED为您精心准备了定制课程方案和高端课程。
         </p>
-        <div class="top-button">请填写联系方式</div>
+        <div class="top-button" @click="handleScroll">
+          请填写联系方式
+        </div>
+      </div>
+    </div>
+    <div :class="{topBottom:istopBottom}" ref="topBottom">
+      <div class="why">
+        <h3>为什么选择我们</h3>
+        <div class="why-con clearfix">
+          <div class="why-item">
+            <div class="item-img">
+              <img src="@/assets/images/hrentry-pic1.png" alt="">
+            </div>
+            <p class="item-desc1">深度体验顶级商学院文化</p>
+            <span class="item-line"></span>
+            <p class="item-desc2">清华经管学院是率先获得AACSB和EQUIS两大 全球管理教育顶级认证的中国内地商学院。</p>
+          </div>
+          <div class="why-item">
+            <div class="item-img">
+              <img src="@/assets/images/hrentry-pic2.png" alt="">
+            </div>
+            <p class="item-desc1">国内课程均在清华经管学院授课</p>
+            <span class="item-line"></span>
+            <p class="item-desc2">高管教育中心(EXED)与MBA、EMBA、本硕博并列为学院教学部门，经过十多年的沉淀，成就一套规范、完善、实效的企业高管培训课程体系。
+            </p>
+          </div>
+          <div class="why-item">
+            <div class="item-img">
+              <img src="@/assets/images/hrentry-pic3.png" alt="">
+            </div>
+            <p class="item-desc1">领略大师风采，启迪心智</p>
+            <span class="item-line"></span>
+            <p class="item-desc2">160多位清华大学经济管理学院全职教授及著名 经济学家、知名学者精心设计并亲自授课。
+            </p>
+          </div>
+          <div class="why-item">
+            <div class="item-img">
+              <img src="@/assets/images/hrentry-pic4.png" alt="">
+            </div>
+            <p class="item-desc1">打造最有价值的清华校友人脉</p>
+            <span class="item-line"></span>
+            <p class="item-desc2">6万多各行业精英校友资源，形式多样的校友活 动为学员之间搭起交流合作平台。
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="course">
+        <h3>1911学堂课程体系</h3>
+        <p class="course-small-title">包含560余门课程</p>
+        <ul class="list clearfix">
+          <li v-for="li in courseList" :key="li.id" class="list-item">
+            <p class="item-desc1">{{li.title}}</p>
+            <p class=item-desc2>{{li.number}}</p>
+          </li>
+          <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
+            <div class="item-img">
+              <img :src="item.src" alt="">
+            </div>
+            <div class="item-desc">
+              <p class="item-desc-text">{{item.title}}</p>
+              <p class=item-desc-more>了解更多></p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+      <div class="psrocess">
+        <div class="route">
+          <h3>购买、学习流程</h3>
+          <div class="process-list clearfix">
+            <p><img src="http://pam8iyw9q.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
+            <h5>
+              <span v-for="(one,index) in buyList" :key="index">
+                <i class="icon before el-icon-caret-right"></i>
+                <i class="word">{{one}}</i>
+                <i class="icon after el-icon-caret-right"></i>
+              </span>
+            </h5>
+          </div>
+          <div class="process-list clearfix">
+            <p>
+              <img src="http://pam8iyw9q.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
+            </p>
+            <h5>
+              <span v-for="(one,index) in studyList" :key="index">
+                <i class="icon before el-icon-caret-right"></i>
+                <i class="word">{{one}}</i>
+                <i class="icon after el-icon-caret-right"></i>
+              </span>
+            </h5>
+          </div>
+
+        </div>
+      </div>
+      <div class="bottomForm" id="buttom" ref="buttonForm">
+        <img class="buttom-bg" src="@/assets/images/hrentry-bg.png" alt="">
+        <div class="word">
+          <p class="word-desc1">如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
+          <p class="word-desc2">
+            <i class="word-desc-bg"></i>您也可以拨打咨询电话：4000-5856-9654</p>
+          <div class="formDIv">
+            <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
+              <el-form-item label="" prop="name">
+                <el-autocomplete class="inline-input" placeholder="您的机构名称" v-model="company.name" :fetch-suggestions="querySearch" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+              </el-form-item>
+              <el-form-item label="" prop="person">
+                <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
+              </el-form-item>
+              <el-form-item label="" prop="phones">
+                <el-input v-model="company.phones" placeholder="请输入联系方式"></el-input>
+              </el-form-item>
+              <el-form-item label="" prop="code">
+                <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
+                <span class="code" @click="handleGetCode">{{company.getCode}}</span>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="why">
-      <h3>为什么选择我们</h3>
-      <div class="why-con clearfix">
-        <div class="why-item">
-          <div class="item-img">
-            <img src="@/assets/images/hrentry-pic1.png" alt="">
-          </div>
-          <p class="item-desc1">深度体验顶级商学院文化</p>
-          <span class="item-line"></span>
-          <p class="item-desc2">清华经管学院是率先获得AACSB和EQUIS两大 全球管理教育顶级认证的中国内地商学院。</p>
-        </div>
-        <div class="why-item">
-          <div class="item-img">
-            <img src="@/assets/images/hrentry-pic2.png" alt="">
-          </div>
-          <p class="item-desc1">国内课程均在清华经管学院授课</p>
-          <span class="item-line"></span>
-          <p class="item-desc2">高管教育中心(EXED)与MBA、EMBA、本硕博并列为学院教学部门，经过十多年的沉淀，成就一套规范、完善、实效的企业高管培训课程体系。
-          </p>
-        </div>
-        <div class="why-item">
-          <div class="item-img">
-            <img src="@/assets/images/hrentry-pic3.png" alt="">
-          </div>
-          <p class="item-desc1">领略大师风采，启迪心智</p>
-          <span class="item-line"></span>
-          <p class="item-desc2">160多位清华大学经济管理学院全职教授及著名 经济学家、知名学者精心设计并亲自授课。
-          </p>
-        </div>
-        <div class="why-item">
-          <div class="item-img">
-            <img src="@/assets/images/hrentry-pic4.png" alt="">
-          </div>
-          <p class="item-desc1">打造最有价值的清华校友人脉</p>
-          <span class="item-line"></span>
-          <p class="item-desc2">6万多各行业精英校友资源，形式多样的校友活 动为学员之间搭起交流合作平台。
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="course">
-      <h3>1911学堂课程体系</h3>
-      <p class="course-small-title">包含560余门课程</p>
-      <ul class="list clearfix">
-        <li class="list-item">
-          <p class="item-desc1">通识性课程体系（干部通用学院）</p>
-          <p class=item-desc2>（10余门课程）</p>
-        </li>
-        <li class="list-item">
-          <p class="item-desc1">系统专题性课程（党政系统学院）</p>
-          <p class=item-desc2>（14个专题，110余门课程）</p>
-        </li>
-        <li class="list-item">
-          <p class="item-desc1">直播/热点课程（热点课程）</p>
-          <p class=item-desc2>（11个行业，110余门课程）</p>
-        </li>
-        <li class="list-item">
-          <p class="item-desc1">行业学院</p>
-          <p class=item-desc2>（14个模块，150余门课程）</p>
-        </li>
-        <li class="list-item">
-          <p class="item-desc1">职业学院</p>
-          <p class=item-desc2>（6个模块，初期20余门课程）</p>
-        </li>
-        <li class="list-item">
-          <p class="item-desc1">在线商学院</p>
-          <p class=item-desc2>（12个模块，160余门课程）</p>
-        </li>
-        <li class="list-item list-icon clearfix" @click="goLink('/other/degree')">
-          <div class="item-img">
-            <img src="http://pam8iyw9q.bkt.clouddn.com/pro1.png" alt="">
-          </div>
-          <div class="item-desc">
-            <p class="item-desc-text">学位项目</p>
-            <p class=item-desc-more>了解更多></p>
-          </div>
-        </li>
-        <li class="list-item list-icon clearfix" @click="goLink('/other/enterprisecustom')">
-          <div class="item-img">
-            <img src="http://pam8iyw9q.bkt.clouddn.com/pro2.png" alt="">
-          </div>
-          <div class="item-desc">
-            <p class="item-desc-text">机构课程定制</p>
-            <p class=item-desc-more>了解更多></p>
-          </div>
-        </li>
-        <li class="list-item list-icon clearfix" @click="goLink('/other/faceteach')">
-          <div class="item-img">
-            <img src="http://pam8iyw9q.bkt.clouddn.com/pro3.png" alt="">
-          </div>
-          <div class="item-desc">
-            <p class="item-desc-text">面授、线下课程</p>
-            <p class=item-desc-more>了解更多></p>
-          </div>
-        </li>
-        <!-- <li v-for="li in courseList" :key="li.id">
-          <img :src="li.src" alt="">
-          <h5>{{li.title}}</h5>
-          <h6>{{li.number}}</h6>
-        </li>
-        <li v-for="(item,index) in project" :key="index" @click="handleLink(item)">
-          <img :src="item.src" alt="">
-          <h4>{{item.title}}
-            <span class="fr">了解更多
-              <i class="el-icon-arrow-right"></i>
-            </span>
-          </h4>
-        </li> -->
-
-      </ul>
-    </div>
-    <div class="psrocess">
-      <div class="route">
-        <h3>购买、学习流程</h3>
-        <div class="process-list clearfix">
-          <p><img src="http://pam8iyw9q.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
-          <h5>
-            <span v-for="(one,index) in buyList" :key="index">
-              <i class="icon before el-icon-caret-right"></i>
-              <i class="word">{{one}}</i>
-              <i class="icon after el-icon-caret-right"></i>
-            </span>
-          </h5>
-        </div>
-        <div class="process-list clearfix">
-          <p>
-            <img src="http://pam8iyw9q.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
-          </p>
-          <h5>
-            <span v-for="(one,index) in studyList" :key="index">
-              <i class="icon before el-icon-caret-right"></i>
-              <i class="word">{{one}}</i>
-              <i class="icon after el-icon-caret-right"></i>
-            </span>
-          </h5>
-        </div>
-
-      </div>
-    </div>
-    <div class="bottomForm">
-      <img src="@/assets/images/hrentry-bg.png" alt="">
-      <div class="word">
-        <p class="word-desc1">如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
-        <p class="word-desc2"><img src="@/assets/images/hrentry_pic06.png" alt="">您也可以拨打咨询电话：4000-5856-9654</p>
-        <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-          <el-form-item label="" prop="name">
-            <el-autocomplete class="inline-input" placeholder="您的机构名称" v-model="company.name" :fetch-suggestions="querySearch" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
-          </el-form-item>
-          <el-form-item label="" prop="person">
-            <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
-          </el-form-item>
-          <el-form-item label="" prop="phones">
-            <el-input v-model="company.phones" placeholder="请输入联系方式"></el-input>
-          </el-form-item>
-          <el-form-item label="" prop="code">
-            <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
-            <span class="code" @click="handleGetCode">{{company.getCode}}</span>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-    </div>
     <v-backtotop :data="showCheckedCourse"></v-backtotop>
   </div>
 </template>
@@ -203,6 +159,20 @@ export default {
       return callback()
     }
     return {
+      backPosition: 0,
+      move: true,
+      interval: null,
+      buttonFormTop: '',
+      headerHeight: '',
+      scroll: '',
+      istopFixed: false,
+      istopRelative: true,
+      istopBottom: false,
+      topImgStyle: {
+        position: 'fixed',
+        top: 0,
+        left: 0
+      },
       showCheckedCourse: true,
       recommend: true,
       courseList: [
@@ -305,6 +275,13 @@ export default {
     ...mapState('auth', ['token'])
   },
   methods: {
+    handleScroll() {
+      window.scroll(0, this.buttonFormTop)
+    },
+    easeInOutQuad(t, b, c, d) {
+      if ((t /= d / 2) < 1) return c / 2 * t * t + b
+      return -c / 2 * (--t * (t - 2) - 1) + b
+    },
     handleLink(item) {
       window.open(window.location.origin + item.link)
     },
@@ -387,11 +364,39 @@ export default {
           })
         })
       }
+    },
+    pageScroll() {
+      let totalHeight
+      let topImgHeight
+      if (this.$refs.topImg) {
+        topImgHeight = this.$refs.topImg.offsetHeight || this.$refs.topImg
+        totalHeight = this.headerHeight + topImgHeight
+      }
+
+      this.scroll =
+        document.documentElement.scrollTop || document.body.scrollTop
+      if (this.scroll >= this.headerHeight && this.scroll < totalHeight) {
+        this.istopFixed = true
+        this.istopRelative = false
+        this.istopBottom = true
+      } else {
+        this.istopFixed = false
+        this.istopRelative = true
+        this.istopBottom = false
+      }
     }
   },
   mounted() {
     this.company.userID = this.token
     this.$bus.$emit('bannerShow', true)
+    window.addEventListener('scroll', this.pageScroll)
+    this.headerHeight = document.getElementsByClassName(
+      'headerBox'
+    )[0].offsetHeight
+    this.buttonFormTop = this.$refs.buttonForm.offsetTop
+  },
+  deactivated() {
+    window.removeEventListener('scroll', this.pageScroll)
   }
 }
 </script>
