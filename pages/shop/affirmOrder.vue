@@ -76,9 +76,9 @@
               <!-- 显示发票抬头 -->
               <span v-show="isShowTicket">
                 <!-- {{invoiceForm.ticket }} -->
-                <strong>发票抬头:
-
-                </strong>
+                <strong class="choose" v-show="invoiceForm.choose=='1'">普通发票</strong>
+                <strong class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</strong>
+                <strong>发票抬头:</strong>
                 <span v-if="invoiceForm.ticket === true">个人</span>
                 <span v-if="invoiceForm.ticket === false">{{invoiceForm.companyname}}</span>
                 <span v-if="invoiceForm.ticket === false">{{invoiceForm.number}}</span>
@@ -86,8 +86,8 @@
               <!-- 显示发票抬头 -->
               <span class="invoiceWord" v-show="isShowTicket">
                 <strong>发票内容:</strong>
-                <span v-if="invoiceForm.radio === 1">不开发票</span>
-                <span v-if="invoiceForm.radio === 2">商品明细</span>
+                <span v-if="invoiceForm.radio == 1">商品类别</span>
+                <span v-if="invoiceForm.radio == 2">{{invoiceForm.others}}</span>
               </span>
               <span v-show="isShowTicket">
                 <strong>收货地址:</strong>{{invoiceForm.address}}
@@ -124,28 +124,27 @@
         <h3 class="clearfix">发票信息
           <i class="el-icon-close fr" @click="close"></i>
         </h3>
-        <div class="invoiceForm">
+        <div class="header">
+          <span :class="{checked:choose=='1'?true:false}" @click="chooseTicket('1')">普通发票
+            <i></i>
+          </span>
+          <span :class="{checked:choose=='2'?true:false}" @click="chooseTicket('2')">增值税专用发票
+            <i></i>
+          </span>
+        </div>
+        <div class="invoiceForm" v-show="choose=='1'">
           <div class="formLi clearfix">
-            <!-- {{invoiceForm.ticket}} -->
             <p class="fl">发票抬头</p>
-            <!-- <h6 class="fr check">个人</h6> -->
-            <h6 :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
+            <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
           </div>
           <div class="formLi clearfix">
-            <h5 @click="addInvoice" v-show="ticketForm.ticket">新增机构发票</h5>
+            <!-- <h5 @click="addInvoice" v-show="ticketForm.ticket">新增机构发票</h5> -->
             <p class="fl"></p>
-            <p class="fr addInvoice" v-show="!ticketForm.ticket && !ticketForm.saveioc">
+            <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
               <input type="text" v-model="ticketForm.companyname" placeholder="新增机构发票抬头">
-              <span @click="saveInvoice">保存</span>
             </p>
-            <p class="fr addInvoice saveioc check" v-show="ticketForm.saveioc">
-              <input type="text" v-model="ticketForm.companyname" disabled>
-              <span @click="changeInvoice">编辑</span>
-              <span @click="deleteInvoice">删除</span>
-            </p>
-
           </div>
-          <div class="formLi clearfix" v-show="!ticketForm.ticket">
+          <div class="formLi clearfix" v-show="ticketForm.saveioc">
             <p class="fl">纳税人识别号</p>
             <p class="fr">
               <input type="text" v-model="ticketForm.number" placeholder="输入纳税人识别号">
@@ -155,27 +154,229 @@
             <p class="fl">发票内容</p>
             <p class="fr radioBtn">
               <el-radio-group v-model="ticketForm.radio" @change="isTicket">
-                <el-radio :label="1">不开发票
+                <el-radio :label="1">商品类别
                   <i></i>
                 </el-radio>
-                <el-radio :label="2">商品明细
+                <el-radio :label="2">其他
                   <i></i>
                 </el-radio>
               </el-radio-group>
             </p>
             <p class="word" v-show="ticketForm.isRadio">
-              <i class="el-icon-warning"> </i> 发票内容将显示详细商品名称与价格信息</p>
-          </div>
-          <div class="formLi clearfix">
-            <p class="fl">收货地址</p>
-            <p class="fr">
-              <input type="text" v-model="ticketForm.address" placeholder="输入收货地址">
+              <i class="el-icon-warning"> </i> 发票内容将显示培训费</p>
+            <p class="word" v-show="!ticketForm.isRadio">
+              <input type="text" v-model="ticketForm.others" placeholder="请输入发票内容">
             </p>
           </div>
+          <div class="formLi clearfix">
+            <p class="fl">收票人姓名</p>
+            <p class="fr">
+              <input type="text" v-model="ticketForm.name" placeholder="输入收票人姓名">
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">收票人手机</p>
+            <p class="fr">
+              <input type="text" v-model="ticketForm.tel" placeholder="输入收票人手机号">
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">收货省份</p>
+            <p class="fr province">
+              <el-select v-model="ticketForm.province" placeholder="省">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
+              </el-select>
+              <el-select v-model="ticketForm.city" placeholder="市">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
+              </el-select>
+              <el-select v-model="ticketForm.area" placeholder="区">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
+              </el-select>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">收货详细地址</p>
+            <p class="fr">
+              <input type="text" v-model="ticketForm.address" placeholder="请输入收票人的详细地址">
+            </p>
+          </div>
+          <div class="operation">
+            <span @click="addInvoiceBefor">保存</span>
+            <span @click="close">取消</span>
+          </div>
         </div>
-        <div class="operation">
-          <span @click="addInvoiceInfo">保存</span>
-          <span @click="close">取消</span>
+        <div class="invoiceForm zzTicket" v-show="choose=='2'">
+          <div class="stepOne" v-show="stepOne">
+            <div class="formLi clearfix">
+              <p class="fl">开票方式</p>
+              <p class="fr readyOrderTicket">
+                <span>订单完成后开票
+                  <i></i>
+                </span>
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">发票内容</p>
+              <p class="fr radioBtn">
+                <el-radio-group v-model="zzTicketForm.radio" @change="iszzTicket">
+                  <el-radio :label="1">商品类别
+                    <i></i>
+                  </el-radio>
+                  <el-radio :label="2">其他
+                    <i></i>
+                  </el-radio>
+                </el-radio-group>
+              </p>
+              <p class="word" v-show="zzTicketForm.isRadio">
+                <i class="el-icon-warning"> </i> 发票内容将显示培训费</p>
+              <p class="word" v-show="!zzTicketForm.isRadio">
+                <input type="text" v-model="zzTicketForm.others" placeholder="请输入发票内容">
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <div class="step">
+                <span class="stepCheck">1.选择开票方式</span>
+                <i></i>
+                <span>2.填写或核对公司信息</span>
+                <i></i>
+                <span>3.填写收票人信息</span>
+              </div>
+              <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
+            </div>
+            <div class="operation">
+              <span @click="nextStep('stepTwo')">下一步</span>
+              <span @click="close">取消</span>
+            </div>
+          </div>
+          <div class="stepTwo" v-show="stepTwo">
+            <div class="formLi clearfix">
+              <div class="step">
+                <span class="stepCheck">1.选择开票方式</span>
+                <i></i>
+                <span class="stepCheck">2.填写或核对公司信息</span>
+                <i></i>
+                <span>3.填写收票人信息</span>
+              </div>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">
+                <i>*</i>单位名称</p>
+              <p class="fr">
+                <input type="text" v-model="zzTicketForm.companyname" placeholder="请输入单位名称">
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">
+                <i>*</i>纳税人识别码</p>
+              <p class="fr">
+                <input type="text" v-model="zzTicketForm.number" @change="reNumber" placeholder="请输入纳税人识别码">
+                <span class="tips" v-show="tipsNumber&&number">
+                  <i class="el-icon-success"></i>
+                </span>
+                <span class="tips" v-show="!tipsNumber&&number">
+                  <i class="el-icon-warning"></i>纳税人识别号不正确！</span>
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">
+                <i>*</i>注册地址</p>
+              <p class="fr">
+                <input type="text" v-model="zzTicketForm.zcadd" @blur="zzTicketForm.zcadd==''?(tipsZcadd=false,zcadd=true):(tipsZcadd=true,zcadd=true)" placeholder="请输入注册地址">
+                <span class="tips" v-show="tipsZcadd&&zcadd">
+                  <i class="el-icon-success"></i>
+                </span>
+                <span class="tips" v-show="!tipsZcadd&&zcadd">
+                  <i class="el-icon-warning"></i>注册地址不能为空！</span>
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">
+                <i>*</i>注册电话</p>
+              <p class="fr">
+                <input type="text" v-model="zzTicketForm.phones" @change="rePhone" placeholder="请输入注册电话">
+                <span class="tips" v-show="tipsPhones&&phones">
+                  <i class="el-icon-success"></i>
+                </span>
+                <span class="tips" v-show="!tipsPhones&&phones">
+                  <i class="el-icon-warning"></i>注册电话不正确！</span>
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">
+                <i>*</i>开户银行</p>
+              <p class="fr">
+                <input type="text" v-model="zzTicketForm.bank" @blur="zzTicketForm.bank==''?(tipsBank=false,bank=true):(tipsBank=true,bank=true)" placeholder="请输入开户银行">
+                <span class="tips" v-show="tipsBank&&bank">
+                  <i class="el-icon-success"></i>
+                </span>
+                <span class="tips" v-show="!tipsBank&&bank">
+                  <i class="el-icon-warning"></i>开户银行不能为空！</span>
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">
+                <i>*</i>银行账户</p>
+              <p class="fr">
+                <input type="text" v-model.number="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账户">
+                <span class="tips" v-show="tipsAccount&&account">
+                  <i class="el-icon-success"></i>
+                </span>
+                <span class="tips" v-show="!tipsAccount&&account">
+                  <i class="el-icon-warning"></i>银行账户不正确！</span>
+              </p>
+            </div>
+            <div class="operation">
+              <span @click="nextStep('stepThree')">下一步</span>
+              <span @click="nextStep('stepOne')">返回</span>
+            </div>
+          </div>
+          <div class="stepThree" v-show="stepThree">
+            <div class="formLi clearfix">
+              <div class="step">
+                <span class="stepCheck">1.选择开票方式</span>
+                <i></i>
+                <span class="stepCheck">2.填写或核对公司信息</span>
+                <i></i>
+                <span class="stepCheck">3.填写收票人信息</span>
+              </div>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">收票人姓名</p>
+              <p class="fr">
+                <input type="text" v-model="zzTicketForm.name" placeholder="输入收票人姓名">
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">收票人手机</p>
+              <p class="fr">
+                <input type="text" v-model="zzTicketForm.tel" placeholder="输入收票人手机号">
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">收货省份</p>
+              <p class="fr province">
+                <el-select v-model="ticketForm.province" placeholder="省">
+                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
+                </el-select>
+                <el-select v-model="ticketForm.city" placeholder="市">
+                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
+                </el-select>
+                <el-select v-model="ticketForm.area" placeholder="区">
+                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
+                </el-select>
+              </p>
+            </div>
+            <div class="formLi clearfix">
+              <p class="fl">收货详细地址</p>
+              <p class="fr">
+                <input type="text" v-model="zzTicketForm.address" placeholder="请输入收票人的详细地址">
+              </p>
+            </div>
+            <div class="operation">
+              <span @click="addZZTicketBefore">保存</span>
+              <span @click="nextStep('stepTwo')">返回</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -234,8 +435,11 @@ export default {
       allPrise: null,
       nickName: null,
       showInvoice: false,
-      isShowTicket: true,
+      isShowTicket: false,
       noMsg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
+      province: [],
+      city: [],
+      area: [],
       commitOrders: {},
       companyInfo: {
         companyname: '',
@@ -249,6 +453,7 @@ export default {
         captchaDisable: true
       },
       invoiceForm: {
+        choose: '1',
         companyname: null,
         ticket: true,
         number: null,
@@ -256,24 +461,67 @@ export default {
         radio: 1,
         types: 1, //发票类型
         saveioc: false,
-        isRadio: false,
+        isRadio: true,
+        others: null,
         ids: null
       },
       ticketForm: {
         companyname: null,
         ticket: true,
         number: null,
+        province: null,
+        city: null,
+        area: null,
+        name: null,
+        tel: null,
+        others: null,
         address: null,
         radio: 1,
         types: 1, //发票类型
         saveioc: false,
-        isRadio: false,
+        isRadio: true,
         ids: null
       },
+      zzTicketForm: {
+        companyname: '',
+        ticket: true,
+        number: '',
+        zcadd: '',
+        phones: '',
+        bank: '',
+        account: '',
+        tel: '',
+        name: '',
+        province: null,
+        city: null,
+        area: null,
+        address: null,
+        others: '',
+        radio: 1,
+        isRadio: true,
+        types: 3
+      },
+      tipsNumber: null,
+      tipsAccount: null,
+      tipsBank: null,
+      tipsPhones: null,
+      tipsZcadd: null,
+      number: false,
+      zcadd: false,
+      phones: false,
+      bank: false,
+      account: false,
       restaurants: [],
       company: {
         id: null
       },
+      getInvoice: {
+        isDefault: 1
+      },
+      choose: '1',
+      stepOne: true,
+      stepTwo: false,
+      stepThree: false,
       rules: {
         companyname: [
           {
@@ -317,39 +565,77 @@ export default {
       }
     }
   },
-  mounted() {
-    this.goodsList()
-    this.getTicket()
-    // if (persistStore.get('address')) {
-    //   this.flag = false
-    //   this.company.company_name = persistStore.get('companyname')
-    //   this.company.contact_person = persistStore.get('contactperson')
-    //   this.company.phone = persistStore.get('phone')
-    //   this.company.address = persistStore.get('address')
-    // }
-
-    // if (persistStore.get('invoiceradio')) {
-    //   this.isShowTicket = true
-    //   this.invoiceForm.ticket = persistStore.get('invoiceticket')
-    //   console.log(this.invoiceForm.ticket, 'this.invoiceForm.ticket')
-    //   this.invoiceForm.radio = persistStore.get('invoiceradio')
-    //   this.invoiceForm.address = persistStore.get('invoiceaddress')
-
-    //   this.invoiceForm.companyname = persistStore.get('invoicetitle')
-    //   this.invoiceForm.number = persistStore.get('invoicenumber')
-    // } else {
-    //   this.isShowTicket = false
-    // }
-  },
   watch: {
+    province(val) {
+      this.city = this.getRegion(val, this.ticketForm.province)
+      this.area = this.getRegion(this.city, this.ticketForm.city)
+    },
+    'ticketForm.province'(val, oldval) {
+      if (!this.province && this.province.length == 0) {
+        this.getRegionList()
+      }
+      if (oldval != '') {
+        this.ticketForm.city = ''
+      }
+      this.city = this.getRegion(this.province, val)
+    },
+    'ticketForm.city'(val, oldval) {
+      if (!this.city && this.city.length == 0) {
+        this.getRegionList()
+      }
+      if (oldval != '') {
+        this.ticketForm.area = ''
+      }
+      this.area = this.getRegion(this.city, val)
+    },
     address(val) {
-      console.log(val, '67777')
       if (val) {
         persistStore.set('address', val)
       }
     }
   },
+  mounted() {
+    this.goodsList()
+    this.getInvoiceDetail()
+    this.getRegionList()
+  },
   methods: {
+    reNumber() {
+      if (
+        this.zzTicketForm.number == '' ||
+        !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
+      ) {
+        this.tipsNumber = false
+        this.number = true
+      } else {
+        this.tipsNumber = true
+        this.number = true
+      }
+    },
+    rePhone() {
+      if (
+        this.zzTicketForm.phones == '' ||
+        !/^0\d{2,3}-?\d{7,8}$/.test(this.zzTicketForm.phones)
+      ) {
+        this.tipsPhones = false
+        this.phones = true
+      } else {
+        this.tipsPhones = true
+        this.phones = true
+      }
+    },
+    reAccount() {
+      if (
+        this.zzTicketForm.account == '' ||
+        !/^[0-9]+$/.test(this.zzTicketForm.account)
+      ) {
+        this.tipsAccount = false
+        this.account = true
+      } else {
+        this.tipsAccount = true
+        this.account = true
+      }
+    },
     buyType(type) {
       if (type === '1') {
         this.person = true
@@ -357,48 +643,187 @@ export default {
         this.person = false
       }
     },
+    chooseTicket(v) {
+      if (v === '1') {
+        this.choose = '1'
+        this.invoiceForm.types = '1'
+      } else {
+        this.choose = '2'
+        this.invoiceForm.types = '3'
+      }
+      this.getTicket()
+    },
+    chooseCompany(v) {
+      if (v === '1') {
+        this.ticketForm.saveioc = false
+        this.invoiceForm.types = '1'
+      } else {
+        this.ticketForm.saveioc = true
+        this.invoiceForm.types = '2'
+      }
+      this.getTicket()
+    },
     showIoc() {
       this.showInvoice = true
+      this.getTicket()
     },
-    addInvoice() {
-      // 添加发票
-      this.ticketForm.ticket = false
+    nextStep(item) {
+      if (item === 'stepOne') {
+        this.stepOne = true
+        this.stepTwo = false
+        this.stepThree = false
+      }
+      if (item === 'stepTwo') {
+        if (!this.zzTicketForm.isRadio) {
+          if (this.zzTicketForm.others == '') {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: '请输入发票内容！'
+            })
+            return false
+          }
+        }
+        this.stepOne = false
+        this.stepTwo = true
+        this.stepThree = false
+      }
+      if (item === 'stepThree') {
+        if (this.zzTicketForm.companyname == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入单位名称！'
+          })
+          return false
+        } else if (
+          this.zzTicketForm.number == '' ||
+          !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
+        ) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入正确的纳税人识别码！'
+          })
+          return false
+        } else if (this.zzTicketForm.zcadd == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入注册地址！'
+          })
+          return false
+        } else if (
+          this.zzTicketForm.phones == '' ||
+          !/^0\d{2,3}-?\d{7,8}$/.test(this.zzTicketForm.phones)
+        ) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入正确的注册电话！'
+          })
+          return false
+        } else if (this.zzTicketForm.bank == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入开户银行！'
+          })
+          return false
+        } else if (
+          this.zzTicketForm.account == '' ||
+          !/^[0-9]+$/.test(this.zzTicketForm.account)
+        ) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入正确的开户银行账户！'
+          })
+          return false
+        }
+
+        this.stepOne = false
+        this.stepTwo = false
+        this.stepThree = true
+      }
     },
-    saveInvoice() {
-      // 保存机构发票抬头
+    addInvoiceBefor() {
+      //普通发票、个人发票
+      if (this.ticketForm.saveioc) {
+        this.ticketForm.types = 2
+      } else {
+        this.ticketForm.types = 1
+        this.ticketForm.number = ''
+        this.ticketForm.companyname = '个人'
+      }
+      if (!this.ticketForm.isRadio) {
+        if (this.ticketForm.others == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入发票内容！'
+          })
+          return false
+        }
+      }
+      if (this.ticketForm.types == 2) {
+        if (
+          this.ticketForm.number == '' ||
+          !/^[A-Za-z0-9]+$/.test(this.ticketForm.number)
+        ) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入正确的纳税人识别号！'
+          })
+          return false
+        }
+      }
       if (
-        this.ticketForm.companyname === '' ||
-        this.ticketForm.companyname === null
+        this.ticketForm.tel === '' ||
+        !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.ticketForm.tel)
       ) {
         this.$message({
           showClose: true,
           type: 'error',
-          message: '请填写机构发票抬头'
+          message: '请输入正确的手机号！'
         })
-      } else {
-        this.ticketForm.saveioc = true
+        return false
       }
+      this.addInvoiceInfo()
     },
-    changeInvoice() {
-      // 编辑机构发票抬头
-      this.ticketForm.saveioc = false
-    },
-    deleteInvoice() {
-      // 删除机构发票抬头
-      this.ticketForm.saveioc = false
-      this.ticketForm.ticket = true
+    addZZTicketBefore() {
+      if (
+        this.zzTicketForm.number == '' ||
+        !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
+      ) {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请输入正确的纳税人识别号！'
+        })
+        return false
+      }
+
+      if (
+        this.zzTicketForm.tel === '' ||
+        !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.zzTicketForm.tel)
+      ) {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请输入正确的手机号！'
+        })
+        return false
+      }
+      this.zzTicketForm.province = this.ticketForm.province
+      this.zzTicketForm.city = this.ticketForm.city
+      this.zzTicketForm.area = this.ticketForm.area
+      this.addInvoiceInfo()
     },
     addInvoiceInfo() {
-      // 添加发票 invoiceForm
-      if (this.ticketForm.radio === 2) {
-        if (this.ticketForm.saveioc) {
-          this.ticketForm.types = 2
-        } else {
-          this.ticketForm.types = 1
-          this.ticketForm.number = ''
-          this.ticketForm.companyname = '个人'
-        }
-        this.ticketForm.ids = this.commitOrders.ticketId
+      //保存发票信息
+      if (this.choose === '1') {
         return new Promise((resolve, reject) => {
           home.addInvoiceInfo(this.ticketForm).then(res => {
             if (res.status === 0) {
@@ -407,13 +832,16 @@ export default {
                 type: 'success',
                 message: res.msg
               })
+              this.invoiceForm.types = this.ticketForm.types
               this.commitOrders.ticketId = res.data.invoice_id
               this.invoiceForm.companyname = this.ticketForm.companyname
               this.invoiceForm.number = this.ticketForm.number
               this.invoiceForm.address = this.ticketForm.address
+              this.invoiceForm.others = this.ticketForm.others
               this.invoiceForm.radio = Number(this.ticketForm.radio)
               this.invoiceForm.ticket = false
               this.isShowTicket = true
+              this.commitOrders.ticketId = res.data.invoice_id
               this.close()
             } else {
               this.$message({
@@ -426,31 +854,84 @@ export default {
           })
         })
       } else {
-        this.isShowTicket = false
-        this.close()
+        return new Promise((resolve, reject) => {
+          home.addInvoiceInfo(this.zzTicketForm).then(res => {
+            if (res.status === 0) {
+              this.$message({
+                showClose: true,
+                type: 'success',
+                message: res.msg
+              })
+              this.invoiceForm.choose = this.choose
+              this.invoiceForm.types = this.zzTicketForm.types
+              this.invoiceForm.companyname = this.zzTicketForm.companyname
+              this.invoiceForm.number = this.zzTicketForm.number
+              this.invoiceForm.address = this.zzTicketForm.address
+              this.invoiceForm.radio = Number(this.zzTicketForm.radio)
+              this.invoiceForm.ticket = false
+              this.isShowTicket = true
+              this.commitOrders.ticketId = res.data.invoice_id
+              this.close()
+              this.stepOne = true
+              this.stepTwo = false
+              this.stepThree = false
+            } else {
+              this.$message({
+                showClose: true,
+                type: 'error',
+                message: res.msg
+              })
+            }
+            resolve(true)
+          })
+        })
       }
     },
     getTicket() {
-      this.invoiceForm.types = 2
       return new Promise((resolve, reject) => {
         home.getTicket(this.invoiceForm).then(res => {
           if (res.status === 0) {
-            // 发票信息放到页面
-            this.invoiceForm.companyname = res.data.invoice_name
-            this.invoiceForm.number = res.data.invoice_number
-            this.invoiceForm.address = res.data.address
-            this.invoiceForm.radio = Number(res.data.type)
-            this.invoiceForm.ticket = false
-            this.invoiceForm.radio = 2
-            // 发票信息放到修改弹框
-            this.ticketForm.saveioc = true
-            this.ticketForm.companyname = res.data.invoice_name
-            this.ticketForm.number = res.data.invoice_number
-            this.ticketForm.address = res.data.address
-            this.ticketForm.radio = Number(res.data.type)
-            this.ticketForm.ticket = false
-            this.isShowTicket = true
-            this.commitOrders.ticketId = res.data.id
+            if (this.invoiceForm.types == 1 || this.invoiceForm.types == 2) {
+              this.ticketForm.saveioc = res.data.type == '1' ? false : true
+              this.ticketForm.companyname = res.data.invoice_name
+              this.ticketForm.number = res.data.invoice_number
+              this.ticketForm.name = res.data.consignee
+              this.ticketForm.tel = res.data.phone
+              this.ticketForm.province = res.data.province
+              this.ticketForm.city = res.data.city
+              this.ticketForm.area = res.data.area
+              this.ticketForm.address = res.data.address
+              this.ticketForm.radio = Number(res.data.content_type)
+              this.ticketForm.others = res.data.content
+              this.ticketForm.ticket = false
+              this.isShowTicket = true
+              this.commitOrders.ticketId = res.data.id
+              if (this.ticketForm.radio == 2) {
+                this.ticketForm.isRadio = false
+              }
+            }
+            if (this.invoiceForm.types == 3) {
+              this.ticketForm.saveioc = res.data.type == '1' ? false : true
+              this.zzTicketForm.companyname = res.data.invoice_name
+              this.zzTicketForm.zcadd = res.data.company_address
+              this.zzTicketForm.phones = res.data.company_phone
+              this.zzTicketForm.bank = res.data.bank_name
+              this.zzTicketForm.account = res.data.bank_card
+              this.zzTicketForm.number = res.data.invoice_number
+              this.zzTicketForm.name = res.data.consignee
+              this.zzTicketForm.tel = res.data.phone
+              this.ticketForm.province = res.data.province
+              this.ticketForm.city = res.data.city
+              this.ticketForm.area = res.data.area
+              this.zzTicketForm.address = res.data.address
+              this.zzTicketForm.others = res.data.content
+              this.zzTicketForm.radio = Number(res.data.content_type)
+              this.isShowTicket = true
+              this.commitOrders.ticketId = res.data.id
+              if (this.zzTicketForm.radio == 2) {
+                this.zzTicketForm.isRadio = false
+              }
+            }
           }
           if (res.status == '100100') {
             this.isShowTicket = false
@@ -459,11 +940,34 @@ export default {
         })
       })
     },
+    getRegion(data, val) {
+      let tmp = []
+      for (let item of data) {
+        if (item.region_code == val) {
+          for (let cit of item.city) {
+            tmp.push(
+              Object.assign({}, cit, {
+                label: cit.name,
+                value: cit.region_code
+              })
+            )
+          }
+        }
+      }
+      return tmp
+    },
     isTicket(item) {
       if (item === 2) {
-        this.ticketForm.isRadio = true
-      } else {
         this.ticketForm.isRadio = false
+      } else {
+        this.ticketForm.isRadio = true
+      }
+    },
+    iszzTicket(item) {
+      if (item === 2) {
+        this.zzTicketForm.isRadio = false
+      } else {
+        this.zzTicketForm.isRadio = true
       }
     },
     goLink() {
@@ -478,10 +982,8 @@ export default {
       } else {
         this.commitOrders.types = 2
       }
-      if (this.ticketForm.radio === 1) {
-        //选择不开发票，发票id为空
-        this.commitOrders.ticketId = ''
-      }
+      // console.log(this.commitOrders)
+      // return false
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
@@ -531,6 +1033,40 @@ export default {
             this.isNoMsg = true
           }
           resolve(true)
+        })
+      })
+    },
+    getInvoiceDetail() {
+      //获取发票信息
+      return new Promise((resolve, reject) => {
+        home.getInvoiceDetail(this.getInvoice).then(res => {
+          if (res.status == 0) {
+            console.log(res.data)
+
+            // 发票信息放到页面 isShowTicket
+            if (res.data.type == '1') {
+              this.invoiceForm.choose = '1'
+              this.choose = '1'
+              this.invoiceForm.ticket = true
+            } else if (res.data.type == '2') {
+              this.invoiceForm.choose = '1'
+              this.choose = '1'
+              this.invoiceForm.ticket = false
+            } else {
+              this.invoiceForm.choose = '2'
+              this.choose = '2'
+              this.invoiceForm.ticket = false
+            }
+            this.invoiceForm.types = res.data.type
+            this.invoiceForm.companyname = res.data.invoice_name
+            this.invoiceForm.number = res.data.invoice_number
+            this.invoiceForm.others = res.data.content
+            this.invoiceForm.radio = Number(res.data.content_type)
+            this.invoiceForm.address = res.data.address
+            this.invoiceForm.radio = res.data.content_type
+            this.isShowTicket = true
+            this.commitOrders.ticketId = res.data.id
+          }
         })
       })
     },
@@ -667,6 +1203,17 @@ export default {
           })
         }
       }
+    },
+    getRegionList() {
+      home.getRegionList({ region_code: '' }).then(res => {
+        this.mapregionList = res.data.regionList
+        this.province = this.mapregionList.map(item => {
+          return Object.assign({}, item, {
+            label: item.name,
+            value: item.region_code
+          })
+        })
+      })
     }
   }
 }
