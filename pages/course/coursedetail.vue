@@ -64,13 +64,14 @@
           </div>
         </div>
         <!-- 评价 -->
-        <div class="evaluate-tag" v-show="courseList.is_study">
-          <h4>课程评价</h4>
+        <!-- v-show="courseList.is_study" -->
+        <div class="evaluate-tag">
+          <h4>课程评价{{courseList.is_study}}</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
             <span class="rate">课程评分:</span>
             <span class="ratem">
-              <el-rate v-model="rateModel"></el-rate>
+              <el-rate v-model="rateModel" @change="changeRate"></el-rate>
             </span>
             <div class="bthgrop">
               <span>
@@ -235,12 +236,16 @@ export default {
       defaultCatalogId: '',
       tidForm: {
         tids: ''
-      }
+      },
+      tagGroup: ''
     }
   },
   methods: {
     ...mapActions('auth', ['setTid']),
     handleClick() {},
+    changeRate(val) {
+      this.btnData = this.tagGroup[val]
+    },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
       this.setTid(this.tidForm)
@@ -286,8 +291,10 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          this.btnData = response.data.evaluateTags
+          console.log(response.data.evaluateTags['1'], '123')
+          this.btnData = response.data.evaluateTags['1']
           this.btnDatas = response.data.evaluateTags
+          this.tagGroup = response.data.evaluateTags
         })
       })
     },

@@ -27,7 +27,7 @@
           <div class="downApp clearfix">
             <i :class={iphone:!iphones} class="downIcon fl"></i>
             <div class="changeType fr">
-              <span>下载1911学堂APP1</span>
+              <span>下载1911学堂APP</span>
               <span @mouseenter="changeImg('iphone')">
                 <i></i>AppStore下载</span>
               <span @mouseenter="changeImg('android')">
@@ -408,6 +408,11 @@ export default {
       'setToken',
       'setPwd'
     ]),
+    openWx() {
+      var target_url =
+        'http://qr.liantu.com/api.php?text=http://test.qicheyitiao.com'
+      window.open(target_url, 'weixin', 'height=320, width=320')
+    },
     closeBanner() {
       this.bannerMsg = false
     },

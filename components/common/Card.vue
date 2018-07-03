@@ -44,7 +44,7 @@
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
-                    {{card.curriculum_time}}课时
+                    {{card.curriculum_time}}min
                   </span>
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
@@ -163,7 +163,7 @@
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
-                    {{card.cnum}}课时
+                    {{card.cnum}}
                   </span>
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
@@ -301,7 +301,7 @@
               </div>
               <div v-else>
                 <span class="fl coursenum">
-                  <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                  <span>{{courseList.curriculum_time}}min</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                 <span class="rate">
                   <!-- {{}} -->
                   <el-rate disabled v-model="courseList.score"></el-rate>
