@@ -147,6 +147,7 @@ import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import BackToTop from '@/components/common/BackToTop.vue'
+import $ from 'jquery'
 export default {
   components: {
     'v-backtotop': BackToTop
@@ -276,11 +277,27 @@ export default {
   },
   methods: {
     handleScroll() {
+<<<<<<< HEAD
       window.scroll(0, this.buttonFormTop)
     },
     easeInOutQuad(t, b, c, d) {
       if ((t /= d / 2) < 1) return c / 2 * t * t + b
       return -c / 2 * (--t * (t - 2) - 1) + b
+=======
+      if (this.move) {
+        this.interval = setInterval(() => {
+          this.backPosition += 50
+          if (this.backPosition > this.buttonFormTop) {
+            this.move = true
+            this.backPosition = 0
+            clearInterval(this.interval)
+          } else {
+            this.move = false
+            window.scrollTo(0, this.backPosition)
+          }
+        }, 16.7)
+      }
+>>>>>>> fc7fa1bcee14a077dec76f8b09f4794ca339f19d
     },
     handleLink(item) {
       window.open(window.location.origin + item.link)

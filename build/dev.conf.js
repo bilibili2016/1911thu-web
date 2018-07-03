@@ -3,8 +3,8 @@ const config = require('./base.conf')
 // 本地环境每次执行 npm run build 都要生成包分析报告
 config.analyze = {
   analyzerMode: 'html'
-}
-;(config.head.link = [
+};
+(config.head.link = [
   // {
   //   rel: 'icon',
   //   type: 'image/x-icon',
@@ -15,22 +15,29 @@ config.analyze = {
     href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
   }
 ]),
-  (config.head.script = [
-    {
-      src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
-      async: true
-    },
-    {
-      src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
-      async: true
-    },
-    {
-      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
-      async: true
-    },
-    { src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js', async: true }
-  ]),
-  (config.render = { resourceHints: false })
+(config.head.script = [{
+    src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
+    async: true
+  },
+  {
+    src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
+    async: true
+  },
+  {
+    src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+    async: true
+  },
+  {
+    src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
+    async: true
+  },
+  {
+    src: 'http://parq881t8.bkt.clouddn.com/iShare_tidy.js',
+    async: true
+  }
+]),
+(config.render = {
+  resourceHints: false
+})
 
 module.exports = config
-
