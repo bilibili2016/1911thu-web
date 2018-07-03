@@ -110,6 +110,13 @@ export default {
           // line-height: 0px;
           margin-top: 40px;
         }
+        img {
+          cursor: pointer;
+          transition: all 1s;
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
       }
       .dec {
         font-size: 14px;
@@ -119,11 +126,13 @@ export default {
         margin-top: 20px;
         padding-bottom: 20px;
         border-bottom: 1px rgba(0, 0, 0, 1) solid;
+        transition: all 1s;
         // position: absolute;
         // top: 0px;
+        cursor: pointer;
       }
       &:hover .dec {
-        transition: all 450ms;
+        // top: 50px;
         opacity: 1;
         .dec {
           top: 0;
