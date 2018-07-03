@@ -44,25 +44,25 @@
           <img class="fl" :src="player.head_img" alt="" @click="goTeacherInfo(player.teacher_id)">
           <div class="playername fl" @click="goTeacher(player.teacher_id)">
             <!-- <div>{{player.is_car === 1 ? false : true}}</div> -->
-            <div class="fl">{{player.teacher_name}}</div>
-            <div class="fl">{{player.graduate}}</div>
-            <div>{{player.is_cart}}</div>
+            <div>{{player.teacher_name}}</div>
+            <div>{{player.graduate}}</div>
+            <!-- <div>{{player.is_cart}}</div> -->
           </div>
           <!-- player.is_car ===  1 ? false : true -->
-          <div v-if="player.is_car === 1">
+          <div v-if="player.is_cart === 1">
             <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
           </div>
-          <div v-else>ioioii{{player.is_car}}</div>
+          <!-- <div v-else>{{player.is_cart}}</div> -->
         </div>
         <div class="courseList" ref="courseList">
           <div class="chapter" v-for="(section,index) in courseList" :key="index">
             <h4>{{section.title}}</h4>
-            <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index" @click="handleCourse(bar,index)" :class="{cli:ischeck === bar.id?true:false}">
-              <span class="fl playIcon" v-if="ischeck === bar.id?false:true">
+            <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index" @click="handleCourse(bar,index)" :class="{cli:ischeck == bar.id?true:false}">
+              <span class="fl playIcon" v-show="ischeck == bar.id?false:true">
                 <i class="el-icon-caret-right"></i>
               </span>
-              <span class="fl playImg" v-if="ischeck === bar.id?true:false">
-                <img src="@/assets/images/playImg.gif" alt="">
+              <span class="fl playImg" v-show="ischeck == bar.id?true:false">
+                <img :src="playing" alt="">
               </span>
               <span class="fl barName">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
               </span>
@@ -148,6 +148,9 @@ export default {
       appID: '',
       mediaRIcon: 'el-icon-arrow-right',
       radioBtn: '',
+      playing: '',
+      playImg: require('@/assets/images/playImg.gif'),
+      pauseImg: require('@/assets/images/video.png'),
       player: {
         // courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
         // video: "",
@@ -252,6 +255,7 @@ export default {
     ...mapActions('auth', ['setHsg', 'setTid']),
     handleCourse(item, index) {
       this.ischeck = item.id
+      this.playing = this.playImg
       persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
       clearInterval(this.interval)
@@ -425,6 +429,12 @@ export default {
           }
           // this.ischeck = item.id
         }, 1000)
+        this.ischeck = persistStore.get('catalogId')
+        this.playing = this.playImg
+        console.log(this.ischeck)
+      })
+      player.on('play', function() {
+        this.playing = this.pauseImg
       })
       // 计时器
       return new Promise((resolve, reject) => {
