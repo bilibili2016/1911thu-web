@@ -17,10 +17,11 @@
                 <i class="el-icon-star-on"></i>
                 <span>收藏 </span>
               </span>
-              <span id="iShare">
+              <span>
                 <i class="el-icon-share"></i>
                 <span @click="share"> 分享 </span>
-                <div class="shareIcon">
+                <div class="shareIcon iShare-32" id="iShare" data-sites="">
+                  <!-- <div class="shareIcon" id="iShare"> -->
                   <a href="#" class="iShare_qzone">
                     <i class="iconfont qzone"><img src="@/assets/images/share_qq.png" alt="">QQ</i>
                   </a>
@@ -169,6 +170,7 @@ export default {
   },
   data() {
     return {
+      iShare_config: '',
       activeName: 'second',
       dialogVisible: false,
       textarea: null,
@@ -420,16 +422,7 @@ export default {
       })
     },
     //分享
-    share() {
-      var iShare_config = {
-        container: '#iShare',
-        config: {
-          title: this.title,
-          description: this.introduction,
-          url: this.picture
-        }
-      }
-    },
+    share() {},
     // 删除收藏
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
@@ -469,6 +462,21 @@ export default {
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
     this.share()
+    this.iShare_config = {
+      container: document.getElementById('iShare'),
+      config: {
+        title: '分享测试',
+        description: '水淀粉及爱丽丝的房间里爱神的箭发牢骚',
+        url: 'http://www.1911edu.com/course/coursedetail',
+        WXoptions: {
+          evenType: 'click',
+          isTitleVisibility: true,
+          isTipVisibility: true,
+          tip: '这是一段测试文本',
+          title: 'QR CODE'
+        }
+      }
+    }
   }
 }
 </script>
