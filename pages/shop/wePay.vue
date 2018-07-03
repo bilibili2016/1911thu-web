@@ -76,7 +76,7 @@
             <qrcode :value="val" :options="{ size: 220 }" class="qrcode"></qrcode>
           </div>
           <div class="rechoise" @click="rechoise">
-            <img :src="updateImg" alt=""> 重新选择支付方式
+            <img :src="updateImg" alt="">刷新二维码
           </div>
         </div>
       </div>
@@ -178,9 +178,12 @@ export default {
     },
     unloggedClick() {
       this.wxMask = false
+      clearInterval(this.interval)
     },
     rechoise() {
-      this.wxMask = false
+      clearInterval(this.interval)
+      // this.wxMask = true
+      this.getPayList('recode')
     },
     selectPayApply(item, index) {
       persistStore.set('pay', index)
@@ -211,7 +214,7 @@ export default {
       return Y + M + D + h + m + s
     },
     // 获取订单id列表
-    getPayList() {
+    getPayList(item) {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
@@ -222,6 +225,9 @@ export default {
           this.qr_code = response.data.qr_code
           this.setProductsNum(0)
           resolve(true)
+          if (item === 'recode') {
+            this.addPaySubmit()
+          }
         })
       })
     },

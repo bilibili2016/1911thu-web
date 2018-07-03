@@ -1,6 +1,6 @@
 <template>
   <div class="teachers">
-    <v-title :data="titleThree"></v-title>
+    <v-title :data="titleFore"></v-title>
     <!-- <div class="blueBar"></div> -->
     <div class="cardList" style="padding-top:30px;">
       <div class="famouscenter">
@@ -53,7 +53,7 @@
 import CustomTitle from '@/components/common/Title.vue'
 import { mapActions } from 'vuex'
 export default {
-  props: ['teachers', 'titleThree'],
+  props: ['teachers', 'titleFore'],
   data() {
     return {
       tidForm: {

@@ -3,8 +3,7 @@
   position: relative;
   .contain {
     padding-bottom: 70px;
-    background: url('http://pam8iyw9q.bkt.clouddn.com/orderBanners.png')
-      no-repeat;
+    background: url('http://pam8iyw9q.bkt.clouddn.com/orderBanners.png') no-repeat;
     background-position: top center;
   }
   h3 {
@@ -86,8 +85,7 @@
   }
   .goodsList {
     width: 1100px;
-    margin: 0 auto;
-    margin-top: 100px;
+    margin: 0 auto; // margin-top: 100px;
     .topBar {
       height: 60px;
       line-height: 60px;

@@ -17,13 +17,19 @@
                 <i class="el-icon-star-on"></i>
                 <span>收藏 </span>
               </span>
-              <span>
+              <span id="iShare">
                 <i class="el-icon-share"></i>
-                <span> 分享 </span>
+                <span @click="share"> 分享 </span>
                 <div class="shareIcon">
-                  <img @click="share(courseList.title,courseList.picture,'wx')" src="@/assets/images/share-wx.png" alt="">
-                  <img @click="share(courseList.title,courseList.picture,'wb')" src="@/assets/images/share-wb.png" alt="">
-                  <img @click="share(courseList.title,courseList.picture,'kj')" src="@/assets/images/share-kj.png" alt="">
+                  <a href="#" class="iShare_qzone">
+                    <i class="iconfont qzone"><img src="@/assets/images/share_qq.png" alt="">QQ</i>
+                  </a>
+                  <a href="#" class="iShare_qq">
+                    <i class="iconfont qq"><img src="@/assets/images/share_qq.png" alt="">空间</i>
+                  </a>
+                  <a href="#" class="iShare_weibo">
+                    <i class="iconfont weibo"><img src="@/assets/images/share_wb.png" alt="">微博</i>
+                  </a>
                 </div>
               </span>
             </div>
@@ -46,7 +52,7 @@
         <div class="attention">
           <div class="code">
             <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
-            <h5>扫描二维码或关注“1911学堂”微信公众号</h5>
+            <h5>扫描二维码，下载“1911学堂”APP</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
         </div>
@@ -64,13 +70,13 @@
           </div>
         </div>
         <!-- 评价 -->
-        <div class="evaluate-tag" v-show="courseList.is_study">
+        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0">
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
             <span class="rate">课程评分:</span>
             <span class="ratem">
-              <el-rate v-model="rateModel"></el-rate>
+              <el-rate v-model="rateModel" @change="changeRate"></el-rate>
             </span>
             <div class="bthgrop">
               <span>
@@ -110,7 +116,7 @@
                 </div>
               </div>
               <div class="pagination course-style">
-                <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
+                <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
               </div>
             </el-dialog>
           </div>
@@ -119,7 +125,7 @@
         <!-- 用户评论 -->
         <div class="evaluate" v-loading="loadEvaluate">
           <h4>用户评价
-            <span @click="getMore">查看更多></span>
+            <span v-if="pageCount>3" @click="getMore">查看更多></span>
           </h4>
           <div v-loading="loadMsg">
             <div class="score">
@@ -127,7 +133,7 @@
               <el-rate disabled v-model="totalEvaluateInfo.totalScore" class="itemBox-rate fl"></el-rate>
               <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
             </div>
-            <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index">
+            <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index" v-if="index<3">
               <img class="fl" :src="item.head_img" alt="">
               <div class="fl">
                 <p style="margin:3px 0 8px;">{{item.nick_name}}</p>
@@ -186,6 +192,7 @@ export default {
       },
       commentator: [],
       commentators: [],
+      pageCount: null,
       config: {
         card_type: 'goodplay'
       },
@@ -198,7 +205,7 @@ export default {
         limits: 3,
         ids: '',
         types: 1,
-        isRecommend: 2
+        isRecommend: ''
       },
       privileMsg: true,
       collectMsg: 2,
@@ -211,7 +218,7 @@ export default {
       loadMsg: true,
       pagemsg: {
         page: 1,
-        pagesize: 2,
+        pagesize: 3,
         total: 5
       },
       btnData: [],
@@ -222,7 +229,7 @@ export default {
         evaluatecontent: '',
         scores: '',
         types: 1,
-        tags: ''
+        tag: ''
       },
       evaluate: {
         eltnum: null
@@ -235,12 +242,17 @@ export default {
       defaultCatalogId: '',
       tidForm: {
         tids: ''
-      }
+      },
+      tagGroup: '',
+      iShare_config: ''
     }
   },
   methods: {
     ...mapActions('auth', ['setTid']),
     handleClick() {},
+    changeRate(val) {
+      this.btnData = this.tagGroup[val]
+    },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
       this.setTid(this.tidForm)
@@ -262,6 +274,7 @@ export default {
     // 点击评论查看更多
     getMore() {
       this.dialogVisible = true
+      this.handleCurrentChange(1)
     },
     // 评论查看更多-分页
     handleCurrentChange(val) {
@@ -273,7 +286,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
-          this.pagemsg.total = response.data.pageCount / 3
+          this.pagemsg.total = response.data.pageCount
           this.commentator = response.data.evaluateList
         })
       })
@@ -286,8 +299,10 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          this.btnData = response.data.evaluateTags
+          console.log(response.data.evaluateTags['1'], '123')
+          this.btnData = response.data.evaluateTags['1']
           this.btnDatas = response.data.evaluateTags
+          this.tagGroup = response.data.evaluateTags
         })
       })
     },
@@ -312,6 +327,8 @@ export default {
                 type: 'success',
                 message: response.msg
               })
+              this.getCourseDetail()
+              this.getEvaluateList()
             }
           })
         })
@@ -325,7 +342,7 @@ export default {
     },
     getBtnContent(val, index) {
       this.borderIndex = index
-      this.addEvaluateForm.tags = val
+      this.addEvaluateForm.tag = val
     },
     getCourseDetail() {
       this.loadTeacher = true
@@ -351,7 +368,8 @@ export default {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
-          this.pagemsg.total = response.data.pageCount / 3
+          this.pagemsg.total = response.data.pageCount
+          this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
@@ -402,38 +420,14 @@ export default {
       })
     },
     //分享
-    share(title, picurl, where) {
-      if (where === 'wb') {
-        var sharesinastring =
-          'http://v.t.sina.com.cn/share/share.php?title=' +
-          title +
-          '&url=' +
-          window.location.href +
-          '&content=utf-8&sourceUrl=' +
-          window.location.href +
-          '&pic=' +
-          picurl
-        window.open(
-          sharesinastring,
-          'newwindow',
-          'height=400,width=400,top=100,left=100'
-        )
-      }
-      if (where === 'wx') {
-      }
-      if (where === 'kj') {
-        var shareqqzonestring =
-          'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?title=' +
-          title +
-          '&url=' +
-          window.location.href +
-          '&pics=' +
-          picurl
-        window.open(
-          shareqqzonestring,
-          'newwindow',
-          'height=400,width=400,top=100,left=100'
-        )
+    share() {
+      var iShare_config = {
+        container: '#iShare',
+        config: {
+          title: this.title,
+          description: this.introduction,
+          url: this.picture
+        }
       }
     },
     // 删除收藏
@@ -474,6 +468,7 @@ export default {
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
+    this.share()
   }
 }
 </script>
