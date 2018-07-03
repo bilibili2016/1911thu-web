@@ -129,32 +129,32 @@
             <!-- {{invoiceForm.ticket}} -->
             <p class="fl">发票抬头</p>
             <!-- <h6 class="fr check">个人</h6> -->
-            <h6 :class="invoiceForm.saveioc === false?'fr check':'fr'">个人</h6>
+            <h6 :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
           </div>
           <div class="formLi clearfix">
-            <h5 @click="addInvoice" v-show="invoiceForm.ticket">新增机构发票</h5>
+            <h5 @click="addInvoice" v-show="ticketForm.ticket">新增机构发票</h5>
             <p class="fl"></p>
-            <p class="fr addInvoice" v-show="!invoiceForm.ticket && !invoiceForm.saveioc">
-              <input type="text" v-model="invoiceForm.companyname" placeholder="新增机构发票抬头">
+            <p class="fr addInvoice" v-show="!ticketForm.ticket && !ticketForm.saveioc">
+              <input type="text" v-model="ticketForm.companyname" placeholder="新增机构发票抬头">
               <span @click="saveInvoice">保存</span>
             </p>
-            <p class="fr addInvoice saveioc check" v-show="invoiceForm.saveioc">
-              <input type="text" v-model="invoiceForm.companyname" disabled>
+            <p class="fr addInvoice saveioc check" v-show="ticketForm.saveioc">
+              <input type="text" v-model="ticketForm.companyname" disabled>
               <span @click="changeInvoice">编辑</span>
               <span @click="deleteInvoice">删除</span>
             </p>
 
           </div>
-          <div class="formLi clearfix" v-show="!invoiceForm.ticket">
+          <div class="formLi clearfix" v-show="!ticketForm.ticket">
             <p class="fl">纳税人识别号</p>
             <p class="fr">
-              <input type="text" v-model="invoiceForm.number" placeholder="输入纳税人识别号">
+              <input type="text" v-model="ticketForm.number" placeholder="输入纳税人识别号">
             </p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">发票内容</p>
             <p class="fr radioBtn">
-              <el-radio-group v-model="invoiceForm.radio" @change="isTicket">
+              <el-radio-group v-model="ticketForm.radio" @change="isTicket">
                 <el-radio :label="1">不开发票
                   <i></i>
                 </el-radio>
@@ -163,13 +163,13 @@
                 </el-radio>
               </el-radio-group>
             </p>
-            <p class="word" v-show="invoiceForm.isRadio">
+            <p class="word" v-show="ticketForm.isRadio">
               <i class="el-icon-warning"> </i> 发票内容将显示详细商品名称与价格信息</p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">收货地址</p>
             <p class="fr">
-              <input type="text" v-model="invoiceForm.address" placeholder="输入收货地址">
+              <input type="text" v-model="ticketForm.address" placeholder="输入收货地址">
             </p>
           </div>
         </div>
@@ -259,6 +259,17 @@ export default {
         isRadio: false,
         ids: null
       },
+      ticketForm: {
+        companyname: null,
+        ticket: true,
+        number: null,
+        address: null,
+        radio: 1,
+        types: 1, //发票类型
+        saveioc: false,
+        isRadio: false,
+        ids: null
+      },
       restaurants: [],
       company: {
         id: null
@@ -309,26 +320,26 @@ export default {
   mounted() {
     this.goodsList()
     this.getTicket()
-    if (persistStore.get('address')) {
-      this.flag = false
-      this.company.company_name = persistStore.get('companyname')
-      this.company.contact_person = persistStore.get('contactperson')
-      this.company.phone = persistStore.get('phone')
-      this.company.address = persistStore.get('address')
-    }
+    // if (persistStore.get('address')) {
+    //   this.flag = false
+    //   this.company.company_name = persistStore.get('companyname')
+    //   this.company.contact_person = persistStore.get('contactperson')
+    //   this.company.phone = persistStore.get('phone')
+    //   this.company.address = persistStore.get('address')
+    // }
 
-    if (persistStore.get('invoiceradio')) {
-      this.isShowTicket = true
-      this.invoiceForm.ticket = persistStore.get('invoiceticket')
-      console.log(this.invoiceForm.ticket, 'this.invoiceForm.ticket')
-      this.invoiceForm.radio = persistStore.get('invoiceradio')
-      this.invoiceForm.address = persistStore.get('invoiceaddress')
+    // if (persistStore.get('invoiceradio')) {
+    //   this.isShowTicket = true
+    //   this.invoiceForm.ticket = persistStore.get('invoiceticket')
+    //   console.log(this.invoiceForm.ticket, 'this.invoiceForm.ticket')
+    //   this.invoiceForm.radio = persistStore.get('invoiceradio')
+    //   this.invoiceForm.address = persistStore.get('invoiceaddress')
 
-      this.invoiceForm.companyname = persistStore.get('invoicetitle')
-      this.invoiceForm.number = persistStore.get('invoicenumber')
-    } else {
-      this.isShowTicket = false
-    }
+    //   this.invoiceForm.companyname = persistStore.get('invoicetitle')
+    //   this.invoiceForm.number = persistStore.get('invoicenumber')
+    // } else {
+    //   this.isShowTicket = false
+    // }
   },
   watch: {
     address(val) {
@@ -351,13 +362,13 @@ export default {
     },
     addInvoice() {
       // 添加发票
-      this.invoiceForm.ticket = false
+      this.ticketForm.ticket = false
     },
     saveInvoice() {
       // 保存机构发票抬头
       if (
-        this.invoiceForm.companyname === '' ||
-        this.invoiceForm.companyname === null
+        this.ticketForm.companyname === '' ||
+        this.ticketForm.companyname === null
       ) {
         this.$message({
           showClose: true,
@@ -365,52 +376,44 @@ export default {
           message: '请填写机构发票抬头'
         })
       } else {
-        this.invoiceForm.saveioc = true
+        this.ticketForm.saveioc = true
       }
     },
     changeInvoice() {
       // 编辑机构发票抬头
-      this.invoiceForm.saveioc = false
+      this.ticketForm.saveioc = false
     },
     deleteInvoice() {
       // 删除机构发票抬头
-      this.invoiceForm.saveioc = false
-      this.invoiceForm.ticket = true
+      this.ticketForm.saveioc = false
+      this.ticketForm.ticket = true
     },
     addInvoiceInfo() {
-      // if (this.invoiceForm.ticket === true) {
-      //   persistStore.set('invoiceticket', true)
-      //   persistStore.set('invoicetitle', '个人')
-      // } else {
-      //   persistStore.set('invoiceticket', false)
-      //   persistStore.set('invoicetitle', this.invoiceForm.companyname)
-      //   persistStore.set('invoicenumber', this.invoiceForm.number)
-      // }
-      // console.log(this.invoiceForm.radio, 'this.invoiceForm.radio')
-      persistStore.set('invoiceticket', this.invoiceForm.ticket)
-      persistStore.set('invoiceradio', this.invoiceForm.radio)
-      persistStore.set('invoiceaddress', this.invoiceForm.address)
-      persistStore.set('invoicetitle', this.invoiceForm.companyname)
-      persistStore.set('invoicenumber', this.invoiceForm.number)
       // 添加发票 invoiceForm
-      if (this.invoiceForm.radio === 2) {
-        if (this.invoiceForm.saveioc) {
-          this.invoiceForm.types = 2
+      if (this.ticketForm.radio === 2) {
+        if (this.ticketForm.saveioc) {
+          this.ticketForm.types = 2
         } else {
-          this.invoiceForm.types = 1
-          this.invoiceForm.companyname = '个人'
+          this.ticketForm.types = 1
+          this.ticketForm.number = ''
+          this.ticketForm.companyname = '个人'
         }
-        this.invoiceForm.ids = this.commitOrders.ticketId
+        this.ticketForm.ids = this.commitOrders.ticketId
         return new Promise((resolve, reject) => {
-          home.addInvoiceInfo(this.invoiceForm).then(res => {
+          home.addInvoiceInfo(this.ticketForm).then(res => {
             if (res.status === 0) {
               this.$message({
                 showClose: true,
                 type: 'success',
                 message: res.msg
               })
-              this.isShowTicket = false
               this.commitOrders.ticketId = res.data.invoice_id
+              this.invoiceForm.companyname = this.ticketForm.companyname
+              this.invoiceForm.number = this.ticketForm.number
+              this.invoiceForm.address = this.ticketForm.address
+              this.invoiceForm.radio = Number(this.ticketForm.radio)
+              this.invoiceForm.ticket = false
+              this.isShowTicket = true
               this.close()
             } else {
               this.$message({
@@ -423,7 +426,7 @@ export default {
           })
         })
       } else {
-        this.isShowTicket = true
+        this.isShowTicket = false
         this.close()
       }
     },
@@ -432,10 +435,24 @@ export default {
       return new Promise((resolve, reject) => {
         home.getTicket(this.invoiceForm).then(res => {
           if (res.status === 0) {
+            // 发票信息放到页面
             this.invoiceForm.companyname = res.data.invoice_name
             this.invoiceForm.number = res.data.invoice_number
             this.invoiceForm.address = res.data.address
+            this.invoiceForm.radio = Number(res.data.type)
+            this.invoiceForm.ticket = false
+            this.invoiceForm.radio = 2
+            // 发票信息放到修改弹框
+            this.ticketForm.saveioc = true
+            this.ticketForm.companyname = res.data.invoice_name
+            this.ticketForm.number = res.data.invoice_number
+            this.ticketForm.address = res.data.address
+            this.ticketForm.radio = Number(res.data.type)
+            this.ticketForm.ticket = false
+            this.isShowTicket = true
             this.commitOrders.ticketId = res.data.id
+          }
+          if (res.status == '100100') {
             this.isShowTicket = false
           }
           resolve(true)
@@ -444,9 +461,9 @@ export default {
     },
     isTicket(item) {
       if (item === 2) {
-        this.invoiceForm.isRadio = true
+        this.ticketForm.isRadio = true
       } else {
-        this.invoiceForm.isRadio = false
+        this.ticketForm.isRadio = false
       }
     },
     goLink() {
@@ -460,6 +477,10 @@ export default {
         this.commitOrders.types = 1
       } else {
         this.commitOrders.types = 2
+      }
+      if (this.ticketForm.radio === 1) {
+        //选择不开发票，发票id为空
+        this.commitOrders.ticketId = ''
       }
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
@@ -482,7 +503,6 @@ export default {
       this.loadGoods = true
       return new Promise((resolve, reject) => {
         home.goodsList(this.addArray).then(res => {
-          console.log(res, '这是公司信息8899999')
           if (res.status === 0) {
             this.curriculumLists = res.data.curriculumLists
             this.curriculumSum = res.data.curriculumSum
@@ -490,7 +510,6 @@ export default {
             this.allPrise = res.data.goodsAmount
             this.nickName = persistStore.get('nickName')
             if (res.data.companyInfo) {
-              console.log(res.data.companyInfo, '这是公司信息8899999')
               this.company = res.data.companyInfo
               this.person = false
               this.flag = false
