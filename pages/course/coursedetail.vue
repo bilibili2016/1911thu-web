@@ -12,7 +12,7 @@
         </div>
         <div class="fr">
           <div class="collect">
-            <div class="line-center">
+            <div class="line-center sharePicture">
               <span @click="collection" :class=" { bag: this.collectMsg === 1 }">
                 <i class="el-icon-star-on"></i>
                 <span>收藏 </span>
@@ -524,6 +524,5 @@ export default {
     line-height: 40px;
   }
 }
-
 </style>
 
