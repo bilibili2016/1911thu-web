@@ -67,8 +67,10 @@
           </div>
         </div>
       </div>
-      <div class="unlogged" @click="unloggedClick" v-if="wxMask">
-        <div class="unloginner" style="width:374px;height:420px;">
+      <!--   -->
+      <div class="unlogged" v-if="wxMask">
+        <div class="unloginner" style="width:374px;height:420px;" v-loading="loading">
+          <i class="el-icon-close" @click="unloggedClick"></i>
           <div class="texts">扫一扫付款(元)
             <span>￥{{orderDetail.order_amount}}</span>
           </div>
@@ -143,7 +145,8 @@ export default {
       interval: '',
       seconds: 1000000,
       takeupMsg: false,
-      updateImg: require('@/assets/images/update.png')
+      updateImg: require('@/assets/images/update.png'),
+      loading: false
     }
   },
   computed: {
@@ -183,6 +186,11 @@ export default {
     rechoise() {
       clearInterval(this.interval)
       // this.wxMask = true
+      this.loading = true
+      this.$message({
+        type: 'success',
+        message: '二维码已更新'
+      })
       this.getPayList('recode')
     },
     selectPayApply(item, index) {
@@ -218,6 +226,7 @@ export default {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
+          this.loading = false
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url

@@ -15,14 +15,12 @@
           </div>
         </span>
         <span class="fl problem" @click="showRpt">报告问题</span>
-        <span class="fr share">
-          <i class="el-icon-share"></i>分享
-          <span class="shareIcon">
-            <img src="@/assets/images/share_qq.png" alt="">
-            <img src="@/assets/images/share_wx.png" alt="">
-            <img src="@/assets/images/share_wb.png" alt="">
-            <img src="@/assets/images/share_pyq.png" alt="">
+        <span class="fr share" style="position:reletive">
+          <i class="el-icon-share "></i>分享
+          <span class="shareIcond">
+            <span class="social-share" data-sites="weibo,qq,wechat"></span>
           </span>
+
         </span>
         <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
           <i class="el-icon-star-on"></i>
@@ -568,6 +566,11 @@ export default {
   },
   mounted() {
     this.resize()
+    var $config = {
+      url: 'http://www.1911edu.com/'
+    }
+
+    socialShare('.social-share', $config)
     window.addEventListener('resize', this.resize)
     // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
@@ -585,6 +588,46 @@ export default {
 <style lang="scss" scoped>
 .displays {
   display: none;
+}
+.shareIcond {
+  opacity: 0;
+  // display: none;
+  margin-top: -104px;
+  width: 121px;
+  height: 56px;
+  // background: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  // box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+  position: absolute;
+  transition: all 300ms;
+  top: 55px;
+  right: 0px;
+  z-index: 99999;
+  i {
+    display: inline-block;
+    width: 55.4px;
+    line-height: 36px;
+    text-align: center;
+    color: #222;
+    font-size: 12px;
+    margin: 0;
+    &:hover {
+      color: #8f4acb;
+    }
+  }
+  img {
+    width: 100px;
+    height: 100px;
+    margin: 15px 0 0 2.7px;
+    display: block;
+    cursor: pointer;
+  }
+}
+.share {
+  &:hover .shareIcond {
+    opacity: 1;
+    display: inline-block;
+  }
 }
 </style>
 

@@ -974,6 +974,9 @@ export default {
       this.$router.push('/shop/shoppingcart')
     },
     commitOrder() {
+      console.log(this.commitOrders.companyId, 'this.commitOrders.companyId')
+      console.log(this.company.id, 'this.company.id')
+
       this.company.id
         ? (this.commitOrders.companyId = this.company.id)
         : (this.commitOrders.companyId = '')
@@ -983,21 +986,22 @@ export default {
         this.commitOrders.types = 2
       }
 
+      console.log(this.commitOrders, '这是this.commitOrders')
       // return false
       return new Promise((resolve, reject) => {
-        home.commitOrder(this.commitOrders).then(res => {
-          if (res.status === 0) {
-            persistStore.set('cpyid', res.data.id)
-            this.$router.push('/shop/wepay')
-          } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: res.msg
-            })
-          }
-          resolve(true)
-        })
+        // home.commitOrder(this.commitOrders).then(res => {
+        //   if (res.status === 0) {
+        //     persistStore.set('cpyid', res.data.id)
+        //     this.$router.push('/shop/wepay')
+        //   } else {
+        //     this.$message({
+        //       showClose: true,
+        //       type: 'error',
+        //       message: res.msg
+        //     })
+        //   }
+        //   resolve(true)
+        // })
       })
     },
     goodsList() {
@@ -1041,8 +1045,6 @@ export default {
       return new Promise((resolve, reject) => {
         home.getInvoiceDetail(this.getInvoice).then(res => {
           if (res.status == 0) {
-
-
             // 发票信息放到页面 isShowTicket
             if (res.data.type == '1') {
               this.invoiceForm.choose = '1'
@@ -1080,6 +1082,7 @@ export default {
             // let companyname = this.companyInfo.companyname
 
             home.addCompanyInfo(this.companyInfo).then(response => {
+              console.log(response,'这是获取')
               if (response.status === '100100') {
                 this.$message({
                   showClose: true,

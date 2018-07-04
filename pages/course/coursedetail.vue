@@ -20,10 +20,11 @@
               <span>
                 <i class="el-icon-share"></i>
                 <span> 分享 </span>
-                <!-- <div class="social-share" data-sites="weibo,qq,tencent,wechat" style="z-index:88888;margin-top:200px;"></div>
-                <div class="shareIcon">
+                <!-- <div class="social-share" data-sites="weibo,qq,tencent,wechat" style="z-index:88888;margin-top:200px;"></div> -->
+                <div class="shareIcons">
+                  <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
+                </div>
 
-                </div> -->
               </span>
             </div>
           </div>
@@ -523,5 +524,6 @@ export default {
     line-height: 40px;
   }
 }
+
 </style>
 
