@@ -62,7 +62,7 @@ export default {
   }
 }
 </script>
-<style scope lang="scss">
+<style scoped lang="scss">
 .goodCourse {
   width: 1100px;
   margin: 0 auto;
