@@ -81,7 +81,8 @@ export default {
       showFree: false,
       configSevent: {
         card_type: 'profile',
-        card: 'home'
+        card: 'home',
+        free: 'true'
       },
       pagemsg: {
         page: 1,
@@ -104,6 +105,15 @@ export default {
       },
       pidform: {
         pids: ''
+      }
+    }
+  },
+  watch: {
+    onOff(val) {
+      if (val) {
+        this.configSevent.free = 'true'
+      } else {
+        this.configSevent.free = 'false'
       }
     }
   },
