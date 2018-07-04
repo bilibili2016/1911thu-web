@@ -972,8 +972,7 @@ export default {
       this.$router.push('/shop/shoppingcart')
     },
     commitOrder() {
-
-      console.log(this.company.id, 'this.company.id')
+      // console.log(this.company.id, 'this.company.id')
 
       this.company.id
         ? (this.commitOrders.companyId = this.company.id)
@@ -1081,7 +1080,7 @@ export default {
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addCompanyInfo(this.companyInfo).then(response => {
-              console.log(response, '这是获取')
+              // console.log(response, '这是获取')
               if (response.status === '100100') {
                 this.$message({
                   showClose: true,
