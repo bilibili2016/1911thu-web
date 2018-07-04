@@ -10,8 +10,8 @@
     </div>
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
-        <img src="http://pam8iyw9q.bkt.clouddn.com/logo.png" alt="">
-
+        <!-- <img src="http://pam8iyw9q.bkt.clouddn.com/logo.png" alt=""> -->
+        <img src="@/assets/images/logoh.png" alt="">
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
@@ -27,7 +27,7 @@
           <div class="downApp clearfix">
             <i :class={iphone:!iphones} class="downIcon fl"></i>
             <div class="changeType fr">
-              <span>下载1911学堂APP1</span>
+              <span>下载1911学堂APP</span>
               <span @mouseenter="changeImg('iphone')">
                 <i></i>AppStore下载</span>
               <span @mouseenter="changeImg('android')">
@@ -80,7 +80,7 @@
               <el-row>
                 <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
                 <div @click="forget">忘记密码?</div>
-                <el-button @click="signIns('loginData')">登录</el-button>
+                <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -109,7 +109,7 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
-                <el-button @click.native="signUp('registerData')">注册</el-button>
+                <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -181,6 +181,7 @@ export default {
       return callback()
     }
     return {
+      isClick: false,
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
@@ -303,7 +304,7 @@ export default {
           {
             required: true,
             message: '',
-            trigger: 'blur'
+            trigger: 'change'
           },
           {
             validator: checkProtocol,
@@ -408,6 +409,11 @@ export default {
       'setToken',
       'setPwd'
     ]),
+    openWx() {
+      var target_url =
+        'http://qr.liantu.com/api.php?text=http://test.qicheyitiao.com'
+      window.open(target_url, 'weixin', 'height=320, width=320')
+    },
     closeBanner() {
       this.bannerMsg = false
     },
@@ -540,6 +546,7 @@ export default {
     },
     // 注册 请求
     signUp(formName) {
+      this.isClick = true
       this.registerData.ectpwd = encryption(this.registerData.passwords)
       this.$refs[formName].validate(valid => {
         if (this.registerData.checked) {
@@ -557,16 +564,21 @@ export default {
                   this.close()
                 }
                 this.loadLogin = false
+                this.isClick = false
               })
             })
           } else {
+            this.isClick = false
             return false
           }
+        } else {
+          this.isClick = false
         }
       })
     },
     // 登录 请求
     signIns(formName) {
+      this.isClick = true
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -585,10 +597,12 @@ export default {
                 persistStore.set('loginMsg', false)
                 this.$bus.$emit('reLogin', true)
               }
+              this.isClick = false
               // this.loadLogin = false
             })
           })
         } else {
+          this.isClick = false
           return false
         }
       })
@@ -751,7 +765,8 @@ export default {
       this.registerData.passwords = ''
       this.registerData.types = 1
       this.registerData.codes = ''
-      this.registerData.checked = [false]
+      // this.registerData.checked = [false]
+      this.registerData.checked = false
       this.registerData.companyCodes = ''
     },
     emptyWechatForm() {
@@ -866,7 +881,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(window.location.pathname, '这')
     // if (window.location.pathname === '/other/hrentry') {
     //   this.bannerMsg = true
     // }

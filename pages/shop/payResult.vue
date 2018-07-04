@@ -56,7 +56,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setGid']),
     choiceCourse() {
-      clearInterval(this.interval)
+      // clearInterval(this.interval)
       window.open(window.location.origin + '/course/chooselesson')
     },
     goMycourse(item) {

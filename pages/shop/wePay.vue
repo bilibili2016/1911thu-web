@@ -67,8 +67,10 @@
           </div>
         </div>
       </div>
-      <div class="unlogged" @click="unloggedClick" v-if="wxMask">
-        <div class="unloginner" style="width:374px;height:420px;">
+      <!--   -->
+      <div class="unlogged" v-if="wxMask">
+        <div class="unloginner" style="width:374px;height:420px;" v-loading="loading">
+          <i class="el-icon-close" @click="unloggedClick"></i>
           <div class="texts">扫一扫付款(元)
             <span>￥{{orderDetail.order_amount}}</span>
           </div>
@@ -76,7 +78,7 @@
             <qrcode :value="val" :options="{ size: 220 }" class="qrcode"></qrcode>
           </div>
           <div class="rechoise" @click="rechoise">
-            <img :src="updateImg" alt=""> 重新选择支付方式
+            <img :src="updateImg" alt="">刷新二维码
           </div>
         </div>
       </div>
@@ -143,7 +145,8 @@ export default {
       interval: '',
       seconds: 1000000,
       takeupMsg: false,
-      updateImg: require('@/assets/images/update.png')
+      updateImg: require('@/assets/images/update.png'),
+      loading: false
     }
   },
   computed: {
@@ -178,9 +181,17 @@ export default {
     },
     unloggedClick() {
       this.wxMask = false
+      clearInterval(this.interval)
     },
     rechoise() {
-      this.wxMask = false
+      clearInterval(this.interval)
+      // this.wxMask = true
+      this.loading = true
+      this.$message({
+        type: 'success',
+        message: '二维码已更新'
+      })
+      this.getPayList('recode')
     },
     selectPayApply(item, index) {
       persistStore.set('pay', index)
@@ -211,17 +222,20 @@ export default {
       return Y + M + D + h + m + s
     },
     // 获取订单id列表
-    getPayList() {
+    getPayList(item) {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
-          // console.log(response.data.data.orderCurriculumLists, '课程')
+          this.loading = false
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url
           this.qr_code = response.data.qr_code
           this.setProductsNum(0)
           resolve(true)
+          if (item === 'recode') {
+            this.addPaySubmit()
+          }
         })
       })
     },

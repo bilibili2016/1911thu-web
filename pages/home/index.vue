@@ -3,12 +3,14 @@
     <el-main class="home">
       <!-- 头部导航 -->
       <v-tab :items="items" :classify="classify" :courses="courses" :dingData="dingData" :config="ding"></v-tab>
+      <!-- 免费专区 -->
+      <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 新上好课 -->
-      <v-new :config="configZero" :newData="newData" :titleOne="titleOne" :linkone="linkone"></v-new>
+      <v-new :config="configZero" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 经典好课 -->
-      <v-classic :config="configZ" :classicData="classicData" :titleTwo="titleTwo" :linktwo="linktwo"></v-classic>
+      <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 名师大咖秀 -->
-      <v-famous :teachers="teachers" :titleThree="titleThree"></v-famous>
+      <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
       <!-- 用户评价 -->
       <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate>
       <!-- 学堂资讯 -->
@@ -22,6 +24,7 @@
 
 <script>
 import Tab from '@/pages/home/components/tab.vue'
+import Free from '@/pages/home/components/free.vue'
 import New from '@/pages/home/components/new.vue'
 import Classic from '@/pages/home/components/classic.vue'
 import Famous from '@/pages/home/components/famous.vue'
@@ -39,16 +42,19 @@ export default {
     'v-evaluate': Evaluate,
     'v-famous': Famous,
     'v-classic': Classic,
+    'v-free': Free,
     'v-new': New,
     'v-tab': Tab,
     'v-backtotop': BackToTop
   },
   data() {
     return {
+      linkzero: '/course/classifylist',
       linkone: '/course/newlesson',
       linktwo: '/course/classifycourse',
       linkfours: '/news/list',
       linkfive: '/news/detail',
+      freeData: [],
       newData: [],
       classicData: [],
       showCheckedCourse: false,
@@ -68,9 +74,10 @@ export default {
       infoTwo: {
         card_type: 'infoTwo'
       },
-      titleOne: '新上好课',
-      titleTwo: '经典课程',
-      titleThree: '名师大咖秀',
+      titleOne: '免费专区',
+      titleTwo: '最新课程',
+      titleThree: '精品好课',
+      titleFore: '名师大咖秀',
       titleFour: '用户评价',
       titleFive: '学堂资讯',
       partnerList: {
@@ -147,9 +154,14 @@ export default {
       notLogin: false,
       curruntForm: {
         pages: 1,
-        limits: '',
+        limits: 8,
         evaluateLimit: null,
         isevaluate: 1
+      },
+      freeForm: {
+        pages: 1,
+        limits: '',
+        isFree: 2
       },
       classicForm: {
         pages: 0,
@@ -179,17 +191,8 @@ export default {
     // this.getAll()
   },
   created() {
-    // if (this.loginMsg === false) {
-    //   this.getAll()
-    // }
     let aa = persistStore.get('dandian')
-    // console.log(aa, '345')
-    // console.log(aa === false)
-    // if (aa === false) {
-
-    // }
     this.getAll()
-    // console.log(persistStore.get('dandian'))
   },
   mounted() {
     this.$bus.$on('loginMsg', data => {
@@ -208,6 +211,7 @@ export default {
       await Promise.all([
         this.getBanner(),
         this.getClassifyList(),
+        this.getFreeCourseList(),
         this.getNewCourseList(),
         this.getClassicCourseList(),
         this.getTeacherList(),
@@ -226,6 +230,12 @@ export default {
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
         this.classify = response.data.categoryList
+      })
+    },
+    // 获取免费课程列表
+    getFreeCourseList() {
+      home.getFreeCourseList(this.freeForm).then(response => {
+        this.freeData = response.data.curriculumList
       })
     },
     // 获取新上好课列表

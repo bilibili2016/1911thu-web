@@ -32,6 +32,12 @@
           <el-tab-pane label="最新" name="first"></el-tab-pane>
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
+        <div class="fr rightPages" v-if="showFree">
+          <span>
+            <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#ddd" @change="hideCourse">
+            </el-switch>免费课程
+          </span>
+        </div>
       </div>
       <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>
@@ -53,6 +59,7 @@ import CustomPagination from '@/components/common/Pagination.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
 import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {
     'v-card': CustomCard,
@@ -67,9 +74,11 @@ export default {
       bgmsg: 0,
       bgmsgs: 0,
       activeName: '',
+      onOff: false,
       value3: true,
       value4: true,
       loadCourse: false,
+      showFree: false,
       configSevent: {
         card_type: 'profile',
         card: 'home'
@@ -87,7 +96,8 @@ export default {
         categoryIdb: null,
         sortBy: 1,
         pages: 1,
-        limits: 8
+        limits: 8,
+        isFree: 0
       },
       cidform: {
         cids: ''
@@ -112,6 +122,14 @@ export default {
           this.loadCourse = false
         })
       })
+    },
+    hideCourse() {
+      if (this.onOff) {
+        this.curriculumListForm.isFree = 1
+      } else {
+        this.curriculumListForm.isFree = 0
+      }
+      this.curriculumList()
     },
     handleItemOne(item, index) {
       this.bgmsgs = 0
@@ -200,7 +218,6 @@ export default {
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.activeName = 'first'
     this.cidform.cids = ''
     this.pidform.pids = ''
     // this.bgmsg = 0;
@@ -209,6 +226,11 @@ export default {
     this.pidform.pids = ''
     this.bgmsg = this.cid
     this.setPid(this.pidform)
+    if (persistStore.get('showFree')) {
+      this.showFree = true
+      this.onOff = true
+      this.curriculumListForm.isFree = 1
+    }
     this.childCategoryList()
     this.curriculumList()
   }
