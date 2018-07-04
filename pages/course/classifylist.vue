@@ -217,9 +217,9 @@ export default {
         home.curriculumList(this.curriculumListForm).then(response => {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
-          this.setProductsNum({
-            pn: this.categoryData.length
-          })
+          // this.setProductsNum({
+          //   pn: this.categoryData.length
+          // })
           resolve(true)
         })
       })
@@ -228,7 +228,7 @@ export default {
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.cidform.cids = ''
+    this.cidform.cids = '1'
     this.pidform.pids = ''
     // this.bgmsg = 0;
     this.activeName = 'first'
@@ -241,6 +241,7 @@ export default {
       this.onOff = true
       this.curriculumListForm.isFree = 1
     }
+    console.log(this.cid, '这是cid')
     this.childCategoryList()
     this.curriculumList()
   }
