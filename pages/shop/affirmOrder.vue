@@ -972,7 +972,7 @@ export default {
       this.$router.push('/shop/shoppingcart')
     },
     commitOrder() {
-      console.log(this.commitOrders.companyId, 'this.commitOrders.companyId')
+
       console.log(this.company.id, 'this.company.id')
 
       this.company.id
@@ -992,19 +992,19 @@ export default {
         }
       }
       return new Promise((resolve, reject) => {
-        // home.commitOrder(this.commitOrders).then(res => {
-        //   if (res.status === 0) {
-        //     persistStore.set('cpyid', res.data.id)
-        //     this.$router.push('/shop/wepay')
-        //   } else {
-        //     this.$message({
-        //       showClose: true,
-        //       type: 'error',
-        //       message: res.msg
-        //     })
-        //   }
-        //   resolve(true)
-        // })
+        home.commitOrder(this.commitOrders).then(res => {
+          if (res.status === 0) {
+            persistStore.set('cpyid', res.data.id)
+            this.$router.push('/shop/wepay')
+          } else {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: res.msg
+            })
+          }
+          resolve(true)
+        })
       })
     },
     goodsList() {
