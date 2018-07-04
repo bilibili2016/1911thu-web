@@ -373,6 +373,11 @@ export default {
       }
     },
     getPlayerInfo() {
+      if (typeof TCPlayer === 'undefined') {
+        location.reload()
+        return
+      }
+
       if (this.clickMsg === true) {
         player = TCPlayer('movd_html5_api', this.tcplayer)
         player.dispose()
