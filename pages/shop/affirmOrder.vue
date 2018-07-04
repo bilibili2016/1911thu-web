@@ -392,8 +392,8 @@
             <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <!-- prop="companyaddress" -->
-          <el-form-item label="公司地址：">
-            <el-input placeholder="请输入公司地址" v-model="address"></el-input>
+          <el-form-item label="公司地址：" prop="companyaddress">
+            <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
           </el-form-item>
           <el-form-item label="联系人：" prop="contactperson">
             <el-input placeholder="请输入联系人姓名" v-model="companyInfo.contactperson"></el-input>
@@ -979,8 +979,6 @@ export default {
       } else {
         this.commitOrders.types = 2
       }
-      // console.log(this.commitOrders)
-      // return false
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
@@ -1066,15 +1064,10 @@ export default {
       })
     },
     addCompanyInfo(formName) {
-      // persistStore.set(companyname, this.companyInfo.companyname)
-      // console.log()
       //提交机构信息表单
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
-            // let companyname = this.companyInfo.companyname
-            // console.log(this.companyInfo.companyname, '公司信息')
-
             home.addCompanyInfo(this.companyInfo).then(response => {
               if (response.status === '100100') {
                 this.$message({
@@ -1083,24 +1076,12 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
-                // console.log(this.companyInfo, 'opopopop')
-                // let aa = this.companyInfo.companyname
-                // persistStore.set(a, aa)
-                // persistStore.set(companyaddress, this.address)
-                // persistStore.set(contactperson, this.companyInfo.contactperson)
-                // persistStore.set(phone, this.companyInfo.phones)
-                persistStore.set('companyname', this.companyInfo.companyname)
-                persistStore.set('companyaddress', this.address)
-                persistStore.set(
-                  'contactperson',
-                  this.companyInfo.contactperson
-                )
                 persistStore.set('phone', this.companyInfo.phones)
                 this.company.id = response.data.id
                 this.company.contact_person = this.companyInfo.contactperson
                 this.company.company_name = this.companyInfo.companyname
                 this.company.phone = this.companyInfo.phones
-                this.company.address = persistStore.get('address')
+                this.company.address = this.companyInfo.companyaddress
                 this.showInfo = false
                 this.flag = false
               }
