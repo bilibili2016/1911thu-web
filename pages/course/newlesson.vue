@@ -11,11 +11,12 @@
       </el-breadcrumb>
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
+
     <div class="card-button" v-if="noMoreData">
-      <el-button type="primary">下拉加载更多</el-button>
+      <el-button type="primary">暂无更多数据</el-button>
     </div>
     <div class="card-button" v-else>
-      <el-button type="primary">暂无更多数据</el-button>
+      <el-button type="primary">下拉加载更多</el-button>
     </div>
     <!-- <v-more @getMoreData ="getMoreData"></v-more> -->
   </div>

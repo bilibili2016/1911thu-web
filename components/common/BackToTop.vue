@@ -124,7 +124,6 @@ export default {
     backToTop() {
       if (this.move) {
         const start = window.pageYOffset
-        console.log(start)
         let i = 0
         this.interval = setInterval(() => {
           const next = Math.floor(

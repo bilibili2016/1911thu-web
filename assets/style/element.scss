@@ -583,8 +583,7 @@
   }
   .el-button {
     width: 108px; // border-radius: 18px;
-    float: right;
-    // border-top-left-radius: 18px;
+    float: right; // border-top-left-radius: 18px;
     // border-bottom-left-radius: 18px;
     border-radius: 18px;
   }
@@ -955,7 +954,7 @@
         overflow: hidden;
       }
       .el-radio__input.is-checked + .el-radio__label {
-        background-color: #6417a6;
+        background-color: #8f4acb;
         color: #fff;
         border: none;
         i {
@@ -1165,9 +1164,11 @@ input:-webkit-autofill {
     }
   }
 }
+
 .el-icon-warning {
   color: #ff5f5f;
 }
+
 .descript {
   span {
     display: inline;
@@ -1176,4 +1177,7 @@ input:-webkit-autofill {
   p {
     margin: 20px 0px;
   }
+}
+.social-share .icon-wechat .wechat-qrcode {
+  top: 45px !important;
 }

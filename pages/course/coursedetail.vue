@@ -17,20 +17,14 @@
                 <i class="el-icon-star-on"></i>
                 <span>收藏 </span>
               </span>
-              <span id="iShare">
+              <span>
                 <i class="el-icon-share"></i>
-                <span @click="share"> 分享 </span>
-                <div class="shareIcon">
-                  <a href="#" class="iShare_qzone">
-                    <i class="iconfont qzone"><img src="@/assets/images/share_qq.png" alt="">QQ</i>
-                  </a>
-                  <a href="#" class="iShare_qq">
-                    <i class="iconfont qq"><img src="@/assets/images/share_qq.png" alt="">空间</i>
-                  </a>
-                  <a href="#" class="iShare_weibo">
-                    <i class="iconfont weibo"><img src="@/assets/images/share_wb.png" alt="">微博</i>
-                  </a>
+                <span> 分享 </span>
+                <!-- <div class="social-share" data-sites="weibo,qq,tencent,wechat" style="z-index:88888;margin-top:200px;"></div> -->
+                <div class="shareIcons">
+                  <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
                 </div>
+
               </span>
             </div>
           </div>
@@ -49,13 +43,13 @@
           </el-tab-pane>
         </el-tabs>
         <!-- 关注我们 -->
-        <div class="attention">
+        <!-- <div class="attention">
           <div class="code">
             <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
             <h5>扫描二维码，下载“1911学堂”APP</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div style="width:345px" class="fr">
@@ -70,7 +64,8 @@
           </div>
         </div>
         <!-- 评价 -->
-        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0">
+        <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0" -->
+        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
@@ -80,9 +75,10 @@
             </span>
             <div class="bthgrop">
               <span>
-                <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: borderIndex === index ? true : false }" class="detail-btngrounp">
-                  {{item}}
+                <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+                  {{item.value}}
                 </div>
+                <input type="text">
               </span>
             </div>
             <div class="area">
@@ -143,7 +139,7 @@
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
               </div>
               <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
-              <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
+              <h5 v-else>#{{item.tags}}，{{item.evaluate_content}}</h5>
             </div>
           </div>
         </div>
@@ -167,9 +163,13 @@ export default {
     'v-card': CustomCard,
     'v-line': CustomLine
   },
+  watch: {
+    selectMsg(val) {}
+  },
   data() {
     return {
       activeName: 'second',
+      selectMsg: '',
       dialogVisible: false,
       textarea: null,
       rateModel: 5,
@@ -229,7 +229,7 @@ export default {
         evaluatecontent: '',
         scores: '',
         types: 1,
-        tag: ''
+        tag: []
       },
       evaluate: {
         eltnum: null
@@ -244,14 +244,31 @@ export default {
         tids: ''
       },
       tagGroup: '',
-      iShare_config: ''
+      iShare_config: '',
+      reTagBtn: [],
+      configShare: {
+        url: 'http://www.1911edu.com/',
+        sites: ['qzone', 'qq', 'weibo', 'wechat'],
+        source: 'http://www.1911edu.com/'
+        // wechatQrcodeTitle: '微信扫一扫：分享',
+        // wechatQrcodeHelper:
+        //   '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>'
+      }
     }
   },
   methods: {
     ...mapActions('auth', ['setTid']),
     handleClick() {},
     changeRate(val) {
-      this.btnData = this.tagGroup[val]
+      this.reTagBtn = []
+      this.tagGroup[val].map((item, i) => {
+        let obj = new Object()
+        obj.value = item
+        obj.index = i
+        obj.isCheck = false
+        this.reTagBtn.push(obj)
+      })
+      this.btnData = this.reTagBtn
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
@@ -299,10 +316,11 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          console.log(response.data.evaluateTags['1'], '123')
-          this.btnData = response.data.evaluateTags['1']
-          this.btnDatas = response.data.evaluateTags
+          // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
+          this.changeRate('1')
+          this.btnDatas = response.data.evaluateTags
+          // this.tagGroup = response.data.evaluateTags
         })
       })
     },
@@ -311,6 +329,10 @@ export default {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
+
+      this.addEvaluateForm.tag = this.addEvaluateForm.tag
+        .toString()
+        .replace(/,/g, '#')
 
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
@@ -341,8 +363,14 @@ export default {
       }
     },
     getBtnContent(val, index) {
-      this.borderIndex = index
-      this.addEvaluateForm.tag = val
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
+      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     getCourseDetail() {
       this.loadTeacher = true
@@ -420,16 +448,7 @@ export default {
       })
     },
     //分享
-    share() {
-      var iShare_config = {
-        container: '#iShare',
-        config: {
-          title: this.title,
-          description: this.introduction,
-          url: this.picture
-        }
-      }
-    },
+    share() {},
     // 删除收藏
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
@@ -455,9 +474,36 @@ export default {
           )
         })
       })
+    },
+    shareInit() {
+      let url = 'http://parq881t8.bkt.clouddn.com/iShare_tidy.js'
+      let script = document.createElement('script')
+      script.setAttribute('src', url)
+      document.getElementsByTagName('head')[0].appendChild(script)
+
+      let iShare_config = {
+        container: document.getElementById('iShare'),
+        config: {
+          title: '分享测试',
+          description: '水淀粉及爱丽丝的房间里爱神的箭发牢骚',
+          url: 'http://www.1911edu.com/course/coursedetail',
+          WXoptions: {
+            evenType: 'click',
+            isTitleVisibility: true,
+            isTipVisibility: true,
+            tip: '这是一段测试文本',
+            title: 'QR CODE'
+          }
+        }
+      }
     }
   },
   mounted() {
+    var $config = {
+      url: 'http://www.1911edu.com/'
+    }
+
+    socialShare('.social-share', $config)
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.kidForm.ids = this.kid
@@ -468,7 +514,6 @@ export default {
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
-    this.share()
   }
 }
 </script>
@@ -479,5 +524,6 @@ export default {
     line-height: 40px;
   }
 }
+
 </style>
 
