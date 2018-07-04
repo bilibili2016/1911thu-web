@@ -991,8 +991,6 @@ export default {
           return false
         }
       }
-      console.log(this.company)
-      return false
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
