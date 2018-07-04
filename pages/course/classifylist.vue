@@ -186,23 +186,23 @@ export default {
             case '1':
               this.data2 = this.data[0]
               break
-            case '16':
+            case '17':
               this.data2 = this.data[1]
               break
-            case '17':
+            case '19':
               this.data2 = this.data[2]
               break
-            case '18':
+            case '16':
               this.data2 = this.data[3]
               break
-            case '19':
+            case '18':
               this.data2 = this.data[4]
               break
             case '20':
               this.data2 = this.data[5]
               break
             default:
-              this.data2 = this.data[0]
+              // this.$router.push("/course/search");
               break
           }
           resolve(true)

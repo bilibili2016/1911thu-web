@@ -135,23 +135,23 @@ export default {
           id: '1'
         },
         {
-          category_name: '党政系统学院',
-          id: '16'
-        },
-        {
           category_name: '在线商学院',
           id: '17'
-        },
-        {
-          category_name: '行业学院',
-          id: '18'
         },
         {
           category_name: '职场学院',
           id: '19'
         },
         {
-          category_name: '直播/热点课程',
+          category_name: '党政委托项目',
+          id: '16'
+        },
+        {
+          category_name: '企业内训项目',
+          id: '18'
+        },
+        {
+          category_name: '管理公开项目',
           id: '20'
         }
       ],
