@@ -1,5 +1,5 @@
 <template>
-  <div class="bg">
+  <div class="bg-none">
     <el-row class="center">
       <v-title :data="titleTwo"></v-title>
       <v-card ref="card" :data="newData" :config="config" @selectCid="selectCid"></v-card>

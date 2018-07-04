@@ -120,11 +120,6 @@ export default {
         margin-top: 20px;
         padding-bottom: 20px;
         border-bottom: 1px rgba(0, 0, 0, 1) solid;
-        // position: absolute;
-        // top: 0px;
-      }
-      &:hover .dec {
-        transition: all 450ms;
         transition: all 1s;
         // position: absolute;
         // top: 0px;
