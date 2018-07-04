@@ -647,6 +647,7 @@ export default {
       if (v === '1') {
         this.choose = '1'
         this.invoiceForm.types = '1'
+        this.nextStep('stepOne')
       } else {
         this.choose = '2'
         this.invoiceForm.types = '3'
@@ -904,7 +905,6 @@ export default {
               this.ticketForm.radio = Number(res.data.content_type)
               this.ticketForm.others = res.data.content
               this.ticketForm.ticket = false
-              this.isShowTicket = true
               this.commitOrders.ticketId = res.data.id
               if (this.ticketForm.radio == 2) {
                 this.ticketForm.isRadio = false
@@ -926,15 +926,12 @@ export default {
               this.zzTicketForm.address = res.data.address
               this.zzTicketForm.others = res.data.content
               this.zzTicketForm.radio = Number(res.data.content_type)
-              this.isShowTicket = true
               this.commitOrders.ticketId = res.data.id
               if (this.zzTicketForm.radio == 2) {
                 this.zzTicketForm.isRadio = false
               }
             }
-          }
-          if (res.status == '100100') {
-            this.isShowTicket = false
+            this.getRegion('', this.ticketForm.province)
           }
           resolve(true)
         })
@@ -1041,9 +1038,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getInvoiceDetail(this.getInvoice).then(res => {
           if (res.status == 0) {
-            console.log(res.data)
-
-            // 发票信息放到页面 isShowTicket
+            // 发票信息放到页面
             if (res.data.type == '1') {
               this.invoiceForm.choose = '1'
               this.choose = '1'
