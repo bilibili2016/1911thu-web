@@ -10,10 +10,16 @@
                 <i></i>
               </span>
             </h4>
-            <p>
+            <p v-if="item.is_picture_show === '0'">
               <span v-for="(child,index) in item._child" :key="child.id" @click="handlePid(child,index)">
                 <span>{{child.category_name}}</span>
               </span>
+            </p>
+            <p v-if="item.is_picture_show === '1'">
+              <span v-for="(child,index) in item._child" :key="child.id" @click="handlePid(child,index)" class="is_picture">
+                <span>{{child.category_name}}</span>
+              </span>
+
             </p>
           </div>
           <div class="courseMsg">
@@ -95,6 +101,11 @@ export default {
   p:hover {
     color: #8f4acb;
   }
+}
+.is_picture {
+  display: inline-block;
+  width: 100px;
+  // width: 0pc
 }
 </style>
 
