@@ -277,13 +277,6 @@ export default {
   },
   methods: {
     handleScroll() {
-<<<<<<< HEAD
-      window.scroll(0, this.buttonFormTop)
-    },
-    easeInOutQuad(t, b, c, d) {
-      if ((t /= d / 2) < 1) return c / 2 * t * t + b
-      return -c / 2 * (--t * (t - 2) - 1) + b
-=======
       if (this.move) {
         this.interval = setInterval(() => {
           this.backPosition += 50
@@ -297,7 +290,6 @@ export default {
           }
         }, 16.7)
       }
->>>>>>> fc7fa1bcee14a077dec76f8b09f4794ca339f19d
     },
     handleLink(item) {
       window.open(window.location.origin + item.link)

@@ -103,8 +103,6 @@ export default {
           // line-height: 0px;
           margin-top: 40px;
         }
-<<<<<<< HEAD
-=======
         img {
           cursor: pointer;
           transition: all 1s;
@@ -112,7 +110,6 @@ export default {
             transform: scale(1.1);
           }
         }
->>>>>>> fc7fa1bcee14a077dec76f8b09f4794ca339f19d
       }
       .dec {
         width: 320px;
@@ -123,13 +120,11 @@ export default {
         margin-top: 20px;
         padding-bottom: 20px;
         border-bottom: 1px rgba(0, 0, 0, 1) solid;
-<<<<<<< HEAD
         // position: absolute;
         // top: 0px;
       }
       &:hover .dec {
         transition: all 450ms;
-=======
         transition: all 1s;
         // position: absolute;
         // top: 0px;
@@ -142,7 +137,6 @@ export default {
       }
       &:hover .dec {
         // top: 50px;
->>>>>>> fc7fa1bcee14a077dec76f8b09f4794ca339f19d
         opacity: 1;
         .dec {
           top: 0;
