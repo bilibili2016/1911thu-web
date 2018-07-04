@@ -50,13 +50,13 @@
           </el-tab-pane>
         </el-tabs>
         <!-- 关注我们 -->
-        <div class="attention">
+        <!-- <div class="attention">
           <div class="code">
             <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
             <h5>扫描二维码，下载“1911学堂”APP</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div style="width:345px" class="fr">
@@ -71,7 +71,8 @@
           </div>
         </div>
         <!-- 评价 -->
-        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0">
+        <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0" -->
+        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
@@ -81,9 +82,10 @@
             </span>
             <div class="bthgrop">
               <span>
-                <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: borderIndex === index ? true : false }" class="detail-btngrounp">
-                  {{item}}
+                <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+                  {{item.value}}
                 </div>
+                <input type="text">
               </span>
             </div>
             <div class="area">
@@ -144,7 +146,7 @@
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
               </div>
               <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
-              <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
+              <h5 v-else>#{{item.tags}}，{{item.evaluate_content}}</h5>
             </div>
           </div>
         </div>
@@ -168,10 +170,16 @@ export default {
     'v-card': CustomCard,
     'v-line': CustomLine
   },
+  watch: {
+    selectMsg(val) {
+      console.log(val, '123')
+    }
+  },
   data() {
     return {
       iShare_config: '',
       activeName: 'second',
+      selectMsg: '',
       dialogVisible: false,
       textarea: null,
       rateModel: 5,
@@ -231,7 +239,7 @@ export default {
         evaluatecontent: '',
         scores: '',
         types: 1,
-        tag: ''
+        tag: []
       },
       evaluate: {
         eltnum: null
@@ -246,14 +254,23 @@ export default {
         tids: ''
       },
       tagGroup: '',
-      iShare_config: ''
+      iShare_config: '',
+      reTagBtn: []
     }
   },
   methods: {
     ...mapActions('auth', ['setTid']),
     handleClick() {},
     changeRate(val) {
-      this.btnData = this.tagGroup[val]
+      this.reTagBtn = []
+      this.tagGroup[val].map((item, i) => {
+        let obj = new Object()
+        obj.value = item
+        obj.index = i
+        obj.isCheck = false
+        this.reTagBtn.push(obj)
+      })
+      this.btnData = this.reTagBtn
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
@@ -302,9 +319,11 @@ export default {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
           console.log(response.data.evaluateTags['1'], '123')
-          this.btnData = response.data.evaluateTags['1']
-          this.btnDatas = response.data.evaluateTags
+          // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
+          this.changeRate('1')
+          this.btnDatas = response.data.evaluateTags
+          // this.tagGroup = response.data.evaluateTags
         })
       })
     },
@@ -314,6 +333,11 @@ export default {
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
 
+      this.addEvaluateForm.tag = this.addEvaluateForm.tag
+        .toString()
+        .replace(/,/g, '#')
+      console.log(this.addEvaluateForm, '提交评论的form')
+      // console.log(this.courseList.is_study, '是否出现评论')
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
@@ -343,8 +367,14 @@ export default {
       }
     },
     getBtnContent(val, index) {
-      this.borderIndex = index
-      this.addEvaluateForm.tag = val
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
+      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     getCourseDetail() {
       this.loadTeacher = true
@@ -368,6 +398,7 @@ export default {
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
+          console.log(response, '这是response')
           this.loadMsg = false
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           this.pagemsg.total = response.data.pageCount
