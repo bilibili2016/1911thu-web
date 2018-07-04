@@ -19,19 +19,11 @@
               </span>
               <span>
                 <i class="el-icon-share"></i>
-                <span @click="share"> 分享 </span>
-                <div class="shareIcon iShare-32" id="iShare" data-sites="">
-                  <!-- <div class="shareIcon" id="iShare"> -->
-                  <a href="#" class="iShare_qzone">
-                    <i class="iconfont qzone"><img src="@/assets/images/share_qq.png" alt="">QQ</i>
-                  </a>
-                  <a href="#" class="iShare_qq">
-                    <i class="iconfont qq"><img src="@/assets/images/share_qq.png" alt="">空间</i>
-                  </a>
-                  <a href="#" class="iShare_weibo">
-                    <i class="iconfont weibo"><img src="@/assets/images/share_wb.png" alt="">微博</i>
-                  </a>
-                </div>
+                <span> 分享 </span>
+                <!-- <div class="social-share" data-sites="weibo,qq,tencent,wechat" style="z-index:88888;margin-top:200px;"></div>
+                <div class="shareIcon">
+
+                </div> -->
               </span>
             </div>
           </div>
@@ -177,7 +169,6 @@ export default {
   },
   data() {
     return {
-      iShare_config: '',
       activeName: 'second',
       selectMsg: '',
       dialogVisible: false,
@@ -255,7 +246,15 @@ export default {
       },
       tagGroup: '',
       iShare_config: '',
-      reTagBtn: []
+      reTagBtn: [],
+      configShare: {
+        url: 'http://www.1911edu.com/',
+        sites: ['qzone', 'qq', 'weibo', 'wechat'],
+        source: 'http://www.1911edu.com/'
+        // wechatQrcodeTitle: '微信扫一扫：分享',
+        // wechatQrcodeHelper:
+        //   '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>'
+      }
     }
   },
   methods: {
@@ -482,6 +481,11 @@ export default {
     }
   },
   mounted() {
+    var $config = {
+      url: 'http://www.1911edu.com/'
+    }
+
+    socialShare('.social-share', $config)
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.kidForm.ids = this.kid
@@ -492,22 +496,6 @@ export default {
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
-    this.share()
-    this.iShare_config = {
-      container: document.getElementById('iShare'),
-      config: {
-        title: '分享测试',
-        description: '水淀粉及爱丽丝的房间里爱神的箭发牢骚',
-        url: 'http://www.1911edu.com/course/coursedetail',
-        WXoptions: {
-          evenType: 'click',
-          isTitleVisibility: true,
-          isTipVisibility: true,
-          tip: '这是一段测试文本',
-          title: 'QR CODE'
-        }
-      }
-    }
   }
 }
 </script>
