@@ -5,9 +5,9 @@
       <v-tab :items="items" :classify="classify" :courses="courses" :dingData="dingData" :config="ding"></v-tab>
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
-      <!-- 新上好课 -->
+      <!-- 最新课程 -->
       <v-new :config="configZero" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
-      <!-- 经典好课 -->
+      <!-- 精品好课 -->
       <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 名师大咖秀 -->
       <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
