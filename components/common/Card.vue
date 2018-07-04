@@ -305,17 +305,17 @@
                 <span class="rate">
                   <el-rate disabled v-model="courseList.score"></el-rate>
                 </span>
-                <span class="coins">￥ {{courseList.present_price}}</span>
+                <span class="coins" v-if="courseList.is_free === '1'">￥ {{courseList.present_price}}</span>
 
                 <div class="study clearfix">
                   <p>{{courseList.introduction}}</p>
                   <div class="common-button">
                     <div v-if="isAuthenticated">
                       <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
-                      <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车2===</el-button>
+                      <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
                     </div>
                     <div v-else>
-                      <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车3===</el-button>
+                      <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
                     </div>
                   </div>
                 </div>
