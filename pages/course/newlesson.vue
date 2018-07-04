@@ -11,8 +11,12 @@
       </el-breadcrumb>
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
-    <div class="card-button">
-      <el-button type="primary" @click='getMoreData()'>查看更多</el-button>
+
+    <div class="card-button" v-if="noMoreData">
+      <el-button type="primary">暂无更多数据</el-button>
+    </div>
+    <div class="card-button" v-else>
+      <el-button type="primary">下拉加载更多</el-button>
     </div>
     <!-- <v-more @getMoreData ="getMoreData"></v-more> -->
   </div>
@@ -40,15 +44,21 @@ export default {
         limits: 5,
         evaluateLimit: 4,
         isevaluate: 1
-      }
+      },
+      scrollTopMsg: true,
+      noMoreData: false
     }
   },
   methods: {
     getNewCourseList() {
       return new Promise((resolve, reject) => {
         home.getNewCourseList(this.newsCurriculumForm).then(response => {
+          if (response.data.curriculumList.length === 0) {
+            this.noMoreData = true
+          }
           this.courseList = this.courseList.concat(response.data.curriculumList)
           this.pageCount = response.data.pageCount
+          this.scrollTopMsg = true
 
           resolve(true)
         })
@@ -71,6 +81,30 @@ export default {
     this.getNewCourseList()
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    // 缓存指针
+    let _this = this
+    // 设置一个开关来避免重负请求数据
+    let sw = true
+    // 此处使用node做了代理
+
+    // 注册scroll事件并监听
+    window.addEventListener('scroll', () => {
+      var scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop
+      //变量windowHeight是可视区的高度
+      var windowHeight =
+        document.documentElement.clientHeight || document.body.clientHeight
+      //变量scrollHeight是滚动条的总高度
+      var scrollHeight =
+        document.documentElement.scrollHeight || document.body.scrollHeight
+      if (scrollTop + windowHeight == scrollHeight) {
+        if (this.scrollTopMsg === true) {
+          this.scrollTopMsg = false
+          this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
+          this.getNewCourseList()
+        }
+      }
+    })
   }
 }
 </script>

@@ -9,7 +9,7 @@
       </div>
     </div> -->
     <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
-      <img src="@/assets/images/hrentry-pic5.png" alt="">
+      <img src="http://pam8iyw9q.bkt.clouddn.com//hrentry-pic5.png" alt="">
       <div class="top-text">
         <h1 class="top-h1">你好，培训方案规划者</h1>
         <p class="top-desc">如果您正在为帮助领导选课烦恼、或者正在为企业培训 、提醒进行规划， EXED为您精心准备了定制课程方案和高端课程。
@@ -25,7 +25,7 @@
         <div class="why-con clearfix">
           <div class="why-item">
             <div class="item-img">
-              <img src="@/assets/images/hrentry-pic1.png" alt="">
+              <img src="http://pam8iyw9q.bkt.clouddn.com/hrentry-pic1.png" alt="">
             </div>
             <p class="item-desc1">深度体验顶级商学院文化</p>
             <span class="item-line"></span>
@@ -33,7 +33,7 @@
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="@/assets/images/hrentry-pic2.png" alt="">
+              <img src="http://pam8iyw9q.bkt.clouddn.com/hrentry-pic2.png" alt="">
             </div>
             <p class="item-desc1">国内课程均在清华经管学院授课</p>
             <span class="item-line"></span>
@@ -42,7 +42,7 @@
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="@/assets/images/hrentry-pic3.png" alt="">
+              <img src="http://pam8iyw9q.bkt.clouddn.com/hrentry-pic3.png" alt="">
             </div>
             <p class="item-desc1">领略大师风采，启迪心智</p>
             <span class="item-line"></span>
@@ -51,7 +51,7 @@
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="@/assets/images/hrentry-pic4.png" alt="">
+              <img src="http://pam8iyw9q.bkt.clouddn.com/hrentry-pic4.png" alt="">
             </div>
             <p class="item-desc1">打造最有价值的清华校友人脉</p>
             <span class="item-line"></span>
@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="bottomForm" id="buttom" ref="buttonForm">
-        <img class="buttom-bg" src="@/assets/images/hrentry-bg.png" alt="">
+        <img class="buttom-bg" src="http://pam8iyw9q.bkt.clouddn.com/hrentry-bg.png" alt="">
         <div class="word">
           <p class="word-desc1">如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
           <p class="word-desc2">
@@ -147,6 +147,7 @@ import { auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import BackToTop from '@/components/common/BackToTop.vue'
+import $ from 'jquery'
 export default {
   components: {
     'v-backtotop': BackToTop
@@ -276,11 +277,19 @@ export default {
   },
   methods: {
     handleScroll() {
-      window.scroll(0, this.buttonFormTop)
-    },
-    easeInOutQuad(t, b, c, d) {
-      if ((t /= d / 2) < 1) return c / 2 * t * t + b
-      return -c / 2 * (--t * (t - 2) - 1) + b
+      if (this.move) {
+        this.interval = setInterval(() => {
+          this.backPosition += 50
+          if (this.backPosition > this.buttonFormTop) {
+            this.move = true
+            this.backPosition = 0
+            clearInterval(this.interval)
+          } else {
+            this.move = false
+            window.scrollTo(0, this.backPosition)
+          }
+        }, 16.7)
+      }
     },
     handleLink(item) {
       window.open(window.location.origin + item.link)

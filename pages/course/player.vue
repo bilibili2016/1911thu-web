@@ -15,14 +15,12 @@
           </div>
         </span>
         <span class="fl problem" @click="showRpt">报告问题</span>
-        <span class="fr share">
-          <i class="el-icon-share"></i>分享
-          <span class="shareIcon">
-            <img src="@/assets/images/share_qq.png" alt="">
-            <img src="@/assets/images/share_wx.png" alt="">
-            <img src="@/assets/images/share_wb.png" alt="">
-            <img src="@/assets/images/share_pyq.png" alt="">
+        <span class="fr share" style="position:reletive">
+          <i class="el-icon-share "></i>分享
+          <span class="shareIcond">
+            <span class="social-share" data-sites="weibo,qq,wechat"></span>
           </span>
+
         </span>
         <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
           <i class="el-icon-star-on"></i>
@@ -93,10 +91,12 @@
         </h4>
         <h5>请问该课程对您有帮忙吗？快来评个分吧！</h5>
         <h6>课程评分：
-          <el-rate v-model="evaluate.eltnum"></el-rate>
+
+          <el-rate v-model="rateModel" @change="changeRate"></el-rate>
+
         </h6>
-        <div class="btnList">
-          <el-radio v-for="(btn,index) in evaluate.btnList" :key="index" v-model="radioBtn" :label="index" border @change="selTypeChange(index)">{{btn}}</el-radio>
+        <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+          {{item.value}}
         </div>
         <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="word">
         </el-input>
@@ -115,19 +115,6 @@ import { other, auth, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  // head: {
-  //   script: [
-  //     {
-  //       src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js'
-  //     }
-  //   ],
-  //   link: [
-  //     {
-  //       rel: 'stylesheet',
-  //       href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
-  //     }
-  //   ]
-  // },
   computed: {
     ...mapState('auth', ['kid', 'tid'])
   },
@@ -151,15 +138,7 @@ export default {
       playing: '',
       playImg: require('@/assets/images/playImg.gif'),
       pauseImg: require('@/assets/images/video.png'),
-      player: {
-        // courseName: "新的中央经济工作会议精神解读2018年经济工作思路年",
-        // video: "",
-        // ewCode: require("http://pam8iyw9q.bkt.clouddn.com/attentionWechat2.png"),
-        // teacher: {
-        //   name: "莎良朋",
-        //   school: "华中科技大学博士"
-        // },
-      },
+      player: {},
       courseList: [
         {
           section: '第一章 图的基本概念',
@@ -248,11 +227,26 @@ export default {
       tidForm: {
         tids: ''
       },
-      curriculumPrivilege: false
+      curriculumPrivilege: false,
+      btnData: [],
+      reTagBtn: [],
+      tagGroup: '',
+      rateModel: 5
     }
   },
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid']),
+    changeRate(val) {
+      this.reTagBtn = []
+      this.tagGroup[val].map((item, i) => {
+        let obj = new Object()
+        obj.value = item
+        obj.index = i
+        obj.isCheck = false
+        this.reTagBtn.push(obj)
+      })
+      this.btnData = this.reTagBtn
+    },
     handleCourse(item, index) {
       this.ischeck = item.id
       this.playing = this.playImg
@@ -263,9 +257,20 @@ export default {
       this.autoplay = true
       this.getPlayerInfo()
     },
+    getEvaluateTags() {
+      return new Promise((resolve, reject) => {
+        home.getEvaluateTags().then(response => {
+          // this.btnData = response.data.evaluateTags['1']
+          this.tagGroup = response.data.evaluateTags
+          this.changeRate('1')
+          this.btnDatas = response.data.evaluateTags
+          // this.tagGroup = response.data.evaluateTags
+        })
+      })
+    },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
-      // console
+
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
@@ -348,8 +353,6 @@ export default {
     },
 
     playerBuy(item, info) {
-      // console.log(item, 'playerItem')
-      // console.log(info, 'info')
       if (info.is_cart === 1) {
         // this.$alert('商品已在购物车内', '温馨提示', {
         //   confirmButtonText: '确定',
@@ -404,7 +407,6 @@ export default {
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
-        // console.log(player.volume(), '123')
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
@@ -431,7 +433,6 @@ export default {
         }, 1000)
         this.ischeck = persistStore.get('catalogId')
         this.playing = this.playImg
-        console.log(this.ischeck)
       })
       player.on('play', function() {
         this.playing = this.pauseImg
@@ -501,6 +502,9 @@ export default {
         this.addEvaluateForm.ids = persistStore.get('curriculumId')
         this.addEvaluateForm.evaluatecontent = this.word
         this.addEvaluateForm.scores = this.evaluate.eltnum
+        this.addEvaluateForm.tag = this.addEvaluateForm.tag
+          .toString()
+          .replace(/,/g, '#')
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
             this.$message({
@@ -562,6 +566,11 @@ export default {
   },
   mounted() {
     this.resize()
+    var $config = {
+      url: 'http://www.1911edu.com/'
+    }
+
+    socialShare('.social-share', $config)
     window.addEventListener('resize', this.resize)
     // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
@@ -570,13 +579,55 @@ export default {
     this.getPlayerInfo()
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
-    this.seconds = 10000000
+    ;(this.seconds = 10000000),
+      // 获取评论接口
+      this.getEvaluateTags()
   }
 }
 </script>
 <style lang="scss" scoped>
 .displays {
   display: none;
+}
+.shareIcond {
+  opacity: 0;
+  // display: none;
+  margin-top: -104px;
+  width: 121px;
+  height: 56px;
+  // background: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  // box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+  position: absolute;
+  transition: all 300ms;
+  top: 55px;
+  right: 0px;
+  z-index: 99999;
+  i {
+    display: inline-block;
+    width: 55.4px;
+    line-height: 36px;
+    text-align: center;
+    color: #222;
+    font-size: 12px;
+    margin: 0;
+    &:hover {
+      color: #8f4acb;
+    }
+  }
+  img {
+    width: 100px;
+    height: 100px;
+    margin: 15px 0 0 2.7px;
+    display: block;
+    cursor: pointer;
+  }
+}
+.share {
+  &:hover .shareIcond {
+    opacity: 1;
+    display: inline-block;
+  }
 }
 </style>
 

@@ -45,7 +45,7 @@
 export default {
   data() {
     return {
-      faceImg: 'http://pam8iyw9q.bkt.clouddn.com/fact_teach.png',
+      faceImg: 'http://pam8iyw9q.bkt.clouddn.com/faceteach-bg.png',
       cenImg: 'http://pam8iyw9q.bkt.clouddn.com/ccenter.png'
     }
   },

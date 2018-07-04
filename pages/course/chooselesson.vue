@@ -134,13 +134,12 @@ export default {
       this.curriculumListForm.limits = 8
       return new Promise((resolve, reject) => {
         home.curriculumList(this.curriculumListForm).then(response => {
-          // console.log(response.data.curriculumList, '单页的数据')
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
           for (let item of response.data.curriculumList) {
             this.allCheckedId.push(item.id)
           }
-          // console.log(this.allCheckedId, 'this.allCheckedId')
+
           resolve(true)
           this.loadCourse = false
         })
@@ -149,7 +148,7 @@ export default {
     allChecked() {
       this.idsForm.cartid = this.allCheckedId
       this.changeData = this.allCheckedId
-      // console.log(this.idsForm, 'this.idsForm')
+
       return new Promise((resolve, reject) => {
         home.addShopCart(this.idsForm).then(response => {
           if (response.status === 0) {
@@ -222,10 +221,7 @@ export default {
         home.curriculumList(this.curriculumListForm).then(response => {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
-          // console.log(
-          //   response.data.curriculumList,
-          //   '这是response.data.curriculumList'
-          // )
+
           for (let item of response.data.curriculumList) {
             this.$set(item, 'checkmsg', false)
           }
@@ -235,7 +231,6 @@ export default {
           for (let item of response.data.curriculumList) {
             this.allCheckedId.push(item.id)
           }
-          // console.log(this.allCheckedId, 'that.allCheckedId')
         })
       })
     },

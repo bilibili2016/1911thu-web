@@ -1,105 +1,189 @@
+// .homeUs {
+//   width: 1100px;
+//   margin: 0 auto;
+//   min-height: 665px;
+//   .about-title {
+//     .about-h1 {
+//       margin-top: 70px;
+//       text-align: center;
+//     }
+//     .about-p {
+//       text-align: center;
+//       margin-top: 20px;
+//     }
+//   }
+//   .about-con {
+//     margin-top: 63px;
+//     .con-img {
+//       float: left;
+//       width: 480px;
+//       height: 330px;
+//       img {
+//         width: 100%;
+//       }
+//     }
+//     .con-text {
+//       float: left;
+//       width: 550px;
+//       margin-left: 60px;
+//       font-size: 16px;
+//       color: #222;
+//       .con-top {
+//         margin-top: 20px;
+//         text-indent: 2rem;
+//         line-height: 30px;
+//       }
+//       .con-line {
+//         display: inline-block;
+//         width: 100%;
+//         height: 1px;
+//         background-color: #e8d6f7;
+//         margin: 30px 0 40px 0;
+//       }
+//       .con-weight {
+//         font-weight: 500;
+//       }
+//       .con-bottom {
+//         line-height: 30px;
+//       }
+//     }
+//   }
+//   .about-line {
+//     display: inline-block;
+//     width: 100%;
+//     height: 1px;
+//     background-color: #e8d6f7;
+//     margin: 70px 0;
+//   }
+//   .about-contact {
+//     width: 905px;
+//     text-align: center;
+//     margin-bottom: 70px;
+//     margin: 0 auto;
+//     .contact-phone {
+//       width: 41px;
+//       height: 74px;
+//       margin-left: 130px;
+//     }
+//     .contact-email {
+//       align: center;
+//       width: 72px;
+//       height: 58px;
+//       margin-left: 115px;
+//     }
+//     .contact-pos {
+//       width: 90px;
+//       height: 76px;
+//       margin-left: 105px;
+//     }
+//     .contact-imgs {
+//       float: left;
+//       width: 300px;
+//       height: 250px;
+//       text-align: center;
+//       position: relative;
+//       margin-top: 57px;
+//     }
+//     .contact-text {
+//       font-size: 16px;
+//       color: #222;
+//       margin: 42px 0 15px 0;
+//     }
+//     .contact-con {
+//       font-size: 14px;
+//       color: #666;
+//     }
+//     .contact-line {
+//       float: left;
+//       height: 120px;
+//       width: 1px;
+//       background-color: #ddd;
+//       line-height: 250px;
+//       margin-top: 65px;
+//     }
+//   }
+// }
+
 .homeUs {
-  width: 1100px;
-  margin: 0 auto;
-  min-height: 665px;
-  .about-title {
-    .about-h1 {
-      margin-top: 70px;
-      text-align: center;
-    }
-    .about-p {
-      text-align: center;
-      margin-top: 20px;
-    }
-  }
-  .about-con {
-    margin-top: 63px;
-    .con-img {
-      float: left;
-      width: 480px;
-      height: 330px;
-      img {
-        width: 100%;
-      }
-    }
-    .con-text {
-      float: left;
-      width: 550px;
-      margin-left: 60px;
-      font-size: 16px;
-      color: #222;
-      .con-top {
-        margin-top: 20px;
-        text-indent: 2rem;
-        line-height: 30px;
-      }
-      .con-line {
-        display: inline-block;
-        width: 100%;
-        height: 1px;
-        background-color: #e8d6f7;
-        margin: 30px 0 40px 0;
-      }
-      .con-weight {
-        font-weight: 500;
-      }
-      .con-bottom {
-        line-height: 30px;
-      }
-    }
-  }
-  .about-line {
-    display: inline-block;
+  background-color: #eee;
+  .topImg {
     width: 100%;
-    height: 1px;
-    background-color: #e8d6f7;
-    margin: 70px 0;
-  }
-  .about-contact {
-    width: 905px;
+    height: 260px;
+    background: url('~assets/images/homeUs-pic1.png') no-repeat;
+    background-size: 100% 100%;
     text-align: center;
-    margin-bottom: 70px;
+    line-height: 260px;
+    .top-content {
+      color: #fff;
+      .top-con {
+        font-size: 58px;
+      }
+      .top-desc {
+        font-size: 30px;
+      }
+    }
+  }
+  .content {
+    width: 1100px;
+    height: 600px;
     margin: 0 auto;
-    .contact-phone {
-      width: 41px;
-      height: 74px;
-      margin-left: 130px;
+    position: relative;
+    .left {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 195px;
+      height: 100%;
+      // background-color: #ccc;
+      .con-nav {
+        margin-top: 50px;
+        .nav-item {
+          width: 195px;
+          height: 62px;
+          line-height: 62px;
+          // background: rgba(255, 255, 255, 1);
+          box-shadow: 0px 0px 18px rgba(198, 194, 210, 0.1);
+          font-size: 16px;
+          color: #333;
+          position: relative;
+          border-bottom: 1px solid #e1e4ea;
+          border-left: 2px solid #eee;
+          .item-desc {
+            display: inline-block;
+            margin-left: 17px;
+          }
+          .item-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url('~assets/images/homeUs-contact.png') no-repeat;
+            background-size: 100% 100%;
+            // margin-bottom: -2px;
+            position: absolute;
+            top: 24px;
+            right: 23px;
+          }
+          &:hover {
+            background-color: #fff;
+            color: #6417a6;
+            border-left-color: #6417a6;
+          }
+        }
+        .item-hover {
+          background-color: #fff;
+          color: #6417a6;
+          border-left-color: #6417a6;
+        }
+      }
     }
-    .contact-email {
-      align: center;
-      width: 72px;
-      height: 58px;
-      margin-left: 115px;
-    }
-    .contact-pos {
-      width: 90px;
-      height: 76px;
-      margin-left: 105px;
-    }
-    .contact-imgs {
-      float: left;
-      width: 300px;
-      height: 250px;
-      text-align: center;
-      position: relative;
-      margin-top: 57px;
-    }
-    .contact-text {
-      font-size: 16px;
-      color: #222;
-      margin: 42px 0 15px 0;
-    }
-    .contact-con {
-      font-size: 14px;
-      color: #666;
-    }
-    .contact-line {
-      float: left;
-      height: 120px;
-      width: 1px;
-      background-color: #ddd;
-      line-height: 250px;
-      margin-top: 65px;
+    .right {
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 200px;
+      right: 0;
+      background-color: #fff;
+      padding: 68px 0 0 53px;
     }
   }
 }

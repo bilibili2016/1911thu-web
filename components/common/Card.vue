@@ -44,7 +44,7 @@
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
-                    {{card.curriculum_time}}课时
+                    {{card.curriculum_time}}min
                   </span>
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
@@ -163,7 +163,7 @@
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
-                    {{card.cnum}}课时
+                    {{card.cnum}}
                   </span>
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
@@ -301,7 +301,7 @@
               </div>
               <div v-else>
                 <span class="fl coursenum">
-                  <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                  <span>{{courseList.curriculum_time}}min</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                 <span class="rate">
                   <!-- {{}} -->
                   <el-rate disabled v-model="courseList.score"></el-rate>
@@ -318,6 +318,9 @@
                 <div>
                   <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                 </div>
+                <div>
+                  <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
+                </div>
                 <div class="lineProgress">
                   <h5>已完成{{courseList.percent}}%</h5>
                   <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
@@ -327,14 +330,12 @@
             <div class="study clearfix" v-else>
               <p>{{courseList.introduction}}</p>
               <div class="common-button">
-                <!-- {{courseList}} -->
                 <div v-if="isAuthenticated">
-                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习</el-button>
-                  <!-- {{courseList.is_cart}} -->
-                  <el-button type="primary" plain @click="goBuy(true,courseList)" v-if="privileMsg === false">加入购物车</el-button>
+                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
+                  <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
                 </div>
                 <div v-else>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+                  <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
               </div>
             </div>
@@ -459,7 +460,8 @@ export default {
       getdefaultForm: {
         curriculumid: ''
       },
-      isCart: 0
+      isCart: 0,
+      isClick: false
     }
   },
   computed: {
@@ -493,24 +495,17 @@ export default {
     },
     goBuy(detail, item) {
       if (this.isAuthenticated) {
-        // if (item.is_cart === 0) {
-        //   // this.isCart = 1
-        // } else {
-        //   this.$message({
-        //     type: 'success',
-        //     message: '您添加商品已经加入购物车'
-        //   })
-        // }
         if (item.is_cart === 0) {
+          this.isClick = true
           if (this.isCart === 0) {
-            let len = Number(this.productsNum) + 1
-            // console.log(len, 'len')
-            this.setProductsNum({
-              pn: len
-            })
+            // let len = Number(this.productsNum) + 1
+            // this.setProductsNum({
+            //   pn: len
+            // })
           } else {
           }
         } else {
+          this.isClick = false
           this.$message({
             type: 'success',
             message: '您的商品已经在购物车里面'
@@ -522,6 +517,7 @@ export default {
             if (this.isCart === 0) {
               this.detailAddShopCarts()
             } else {
+              this.isClick = false
               this.$message({
                 type: 'success',
                 message: '您的商品已经在购物车里面'
@@ -531,11 +527,6 @@ export default {
           }
         } else {
           this.addShopCarts()
-          // let len = Number(this.productsNum) + 1
-          // console.log(len, 'len')
-          // this.setProductsNum({
-          //   pn: len
-          // })
         }
       } else {
         this.$bus.$emit('loginShow', true)
@@ -617,12 +608,16 @@ export default {
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
           // this.$router.push('/shop/shoppingcart')
-
+          let len = Number(this.productsNum) + 1
+          this.setProductsNum({
+            pn: len
+          })
           this.$message({
             type: 'success',
             message: '加入购物车成功'
           })
           this.isCart = 1
+          this.isClick = false
         })
       })
       for (var i = 0; i < this.data.length; i++) {
@@ -673,6 +668,7 @@ export default {
         }
       } else {
       }
+
       // if (item.is_cart === '0') {
       //   this.curriculumcartids.cartid = item.id
       //   return new Promise((resolve, reject) => {

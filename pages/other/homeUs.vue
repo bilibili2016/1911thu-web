@@ -1,6 +1,6 @@
 <template>
     <div class="homeUs">
-        <div class="about-title">
+        <!-- <div class="about-title">
             <h1 class="about-h1">关于我们</h1>
             <p class="about-p">ABOUT US</p>
         </div>
@@ -53,12 +53,42 @@
                 <p class="contact-text">地址</p>
                 <p class="contact-con">北京市海淀区双清路77号院</p>
             </div>
+        </div> -->
+        <div class="topImg">
+            <div class="top-content">
+                <span class="top-con">关于我们</span>
+                <span class="top-desc">About us</span>
+            </div>
         </div>
+        <div class="content">
+            <div class="left">
+                <ul class="con-nav">
+                    <li class="nav-item" v-for="(item,index) in navList" :key="index">
+                        <span class="item-desc">{{item.title}}</span>
+                        <i class="item-icon"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="right"></div>
+        </div>
+
     </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      navList: [
+        { title: '集团介绍' },
+        { title: '讲师招聘' },
+        { title: '人才招聘' },
+        { title: '帮助中心' },
+        { title: '联系我们' }
+      ]
+    }
+  }
+}
 </script>
 
 <style scoped>

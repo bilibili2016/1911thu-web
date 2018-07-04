@@ -5,12 +5,12 @@
       <v-tab :items="items" :classify="classify" :courses="courses" :dingData="dingData" :config="ding"></v-tab>
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
-      <!-- 新上好课 -->
+      <!-- 最新课程 -->
       <v-new :config="configZero" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
-      <!-- 经典好课 -->
+      <!-- 精品好课 -->
       <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 名师大咖秀 -->
-      <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
+      <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 用户评价 -->
       <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate>
       <!-- 学堂资讯 -->
@@ -154,7 +154,7 @@ export default {
       notLogin: false,
       curruntForm: {
         pages: 1,
-        limits: '',
+        limits: 8,
         evaluateLimit: null,
         isevaluate: 1
       },
@@ -191,17 +191,8 @@ export default {
     // this.getAll()
   },
   created() {
-    // if (this.loginMsg === false) {
-    //   this.getAll()
-    // }
     let aa = persistStore.get('dandian')
-    // console.log(aa, '345')
-    // console.log(aa === false)
-    // if (aa === false) {
-
-    // }
     this.getAll()
-    // console.log(persistStore.get('dandian'))
   },
   mounted() {
     this.$bus.$on('loginMsg', data => {
