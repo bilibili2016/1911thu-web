@@ -191,17 +191,8 @@ export default {
     // this.getAll()
   },
   created() {
-    // if (this.loginMsg === false) {
-    //   this.getAll()
-    // }
     let aa = persistStore.get('dandian')
-    // console.log(aa, '345')
-    // console.log(aa === false)
-    // if (aa === false) {
-
-    // }
     this.getAll()
-    // console.log(persistStore.get('dandian'))
   },
   mounted() {
     this.$bus.$on('loginMsg', data => {

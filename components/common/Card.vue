@@ -332,10 +332,10 @@
               <div class="common-button">
                 <div v-if="isAuthenticated">
                   <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
-                  <el-button type="primary" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
+                  <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
                 </div>
                 <div v-else>
-                  <el-button type="primary" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+                  <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
                 </div>
               </div>
             </div>
@@ -460,7 +460,8 @@ export default {
       getdefaultForm: {
         curriculumid: ''
       },
-      isCart: 0
+      isCart: 0,
+      isClick: false
     }
   },
   computed: {
@@ -495,15 +496,16 @@ export default {
     goBuy(detail, item) {
       if (this.isAuthenticated) {
         if (item.is_cart === 0) {
+          this.isClick = true
           if (this.isCart === 0) {
-            let len = Number(this.productsNum) + 1
-            // console.log(len, 'len')
-            this.setProductsNum({
-              pn: len
-            })
+            // let len = Number(this.productsNum) + 1
+            // this.setProductsNum({
+            //   pn: len
+            // })
           } else {
           }
         } else {
+          this.isClick = false
           this.$message({
             type: 'success',
             message: '您的商品已经在购物车里面'
@@ -515,6 +517,7 @@ export default {
             if (this.isCart === 0) {
               this.detailAddShopCarts()
             } else {
+              this.isClick = false
               this.$message({
                 type: 'success',
                 message: '您的商品已经在购物车里面'
@@ -605,12 +608,16 @@ export default {
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
           // this.$router.push('/shop/shoppingcart')
-
+          let len = Number(this.productsNum) + 1
+          this.setProductsNum({
+            pn: len
+          })
           this.$message({
             type: 'success',
             message: '加入购物车成功'
           })
           this.isCart = 1
+          this.isClick = false
         })
       })
       for (var i = 0; i < this.data.length; i++) {

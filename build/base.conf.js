@@ -41,7 +41,8 @@ const config = {
   },
   head: {
     title: '1911学堂',
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8'
       },
       {
@@ -54,7 +55,8 @@ const config = {
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+        content:
+          'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
       },
       {
         hid: 'description',
@@ -77,10 +79,12 @@ const config = {
   router: {
     base: baseRouter
   },
-  plugins: [{
-    src: '~/plugins/main',
-    ssr: false
-  }],
+  plugins: [
+    {
+      src: '~/plugins/main',
+      ssr: false
+    }
+  ],
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],

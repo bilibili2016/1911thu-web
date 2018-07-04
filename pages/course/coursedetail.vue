@@ -19,19 +19,12 @@
               </span>
               <span>
                 <i class="el-icon-share"></i>
-                <span @click="share"> 分享 </span>
-                <div class="shareIcon iShare-32" id="iShare" data-sites="">
-                  <!-- <div class="shareIcon" id="iShare"> -->
-                  <a href="#" class="iShare_qzone">
-                    <i class="iconfont qzone"><img src="@/assets/images/share_qq.png" alt="">QQ</i>
-                  </a>
-                  <a href="#" class="iShare_qq">
-                    <i class="iconfont qq"><img src="@/assets/images/share_qq.png" alt="">空间</i>
-                  </a>
-                  <a href="#" class="iShare_weibo">
-                    <i class="iconfont weibo"><img src="@/assets/images/share_wb.png" alt="">微博</i>
-                  </a>
+                <span> 分享 </span>
+                <!-- <div class="social-share" data-sites="weibo,qq,tencent,wechat" style="z-index:88888;margin-top:200px;"></div> -->
+                <div class="shareIcons">
+                  <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
                 </div>
+
               </span>
             </div>
           </div>
@@ -171,13 +164,10 @@ export default {
     'v-line': CustomLine
   },
   watch: {
-    selectMsg(val) {
-      console.log(val, '123')
-    }
+    selectMsg(val) {}
   },
   data() {
     return {
-      iShare_config: '',
       activeName: 'second',
       selectMsg: '',
       dialogVisible: false,
@@ -255,7 +245,15 @@ export default {
       },
       tagGroup: '',
       iShare_config: '',
-      reTagBtn: []
+      reTagBtn: [],
+      configShare: {
+        url: 'http://www.1911edu.com/',
+        sites: ['qzone', 'qq', 'weibo', 'wechat'],
+        source: 'http://www.1911edu.com/'
+        // wechatQrcodeTitle: '微信扫一扫：分享',
+        // wechatQrcodeHelper:
+        //   '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>'
+      }
     }
   },
   methods: {
@@ -318,7 +316,6 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          console.log(response.data.evaluateTags['1'], '123')
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('1')
@@ -336,8 +333,7 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      console.log(this.addEvaluateForm, '提交评论的form')
-      // console.log(this.courseList.is_study, '是否出现评论')
+
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
@@ -398,7 +394,6 @@ export default {
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
-          console.log(response, '这是response')
           this.loadMsg = false
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           this.pagemsg.total = response.data.pageCount
@@ -504,7 +499,11 @@ export default {
     }
   },
   mounted() {
-    this.shareInit()
+    var $config = {
+      url: 'http://www.1911edu.com/'
+    }
+
+    socialShare('.social-share', $config)
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.kidForm.ids = this.kid
@@ -515,7 +514,6 @@ export default {
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
-    this.share()
   }
 }
 </script>
@@ -526,5 +524,6 @@ export default {
     line-height: 40px;
   }
 }
+
 </style>
 
