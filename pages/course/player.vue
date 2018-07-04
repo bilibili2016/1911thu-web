@@ -138,6 +138,7 @@ export default {
       playing: '',
       playImg: require('@/assets/images/playImg.gif'),
       pauseImg: require('@/assets/images/video.png'),
+      // gifImg: require('@/assets/images/playImg.gif'),
       player: {},
       courseList: [
         {
@@ -408,6 +409,7 @@ export default {
       socket.on('reconnect', function(msg) {})
       let that = this
       player.on('pause', () => {
+        this.playing = this.pauseImg
         clearInterval(that.interval)
         socket.emit('watchRecordingTime_disconnect')
       })
@@ -415,6 +417,7 @@ export default {
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
+        console.log('bofang ')
         that.interval = setInterval(() => {
           if (that.seconds <= 0) {
             that.seconds = 1
@@ -434,8 +437,10 @@ export default {
               playTime
             )
           }
+
           // this.ischeck = item.id
         }, 1000)
+
         this.ischeck = persistStore.get('catalogId')
         this.playing = this.playImg
       })
@@ -587,7 +592,8 @@ export default {
     ;(this.seconds = 10000000),
       // 获取评论接口
       this.getEvaluateTags()
-  }
+  },
+  watch: {}
 }
 </script>
 <style lang="scss" scoped>
