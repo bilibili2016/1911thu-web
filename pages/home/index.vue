@@ -10,7 +10,7 @@
       <!-- 精品好课 -->
       <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 名师大咖秀 -->
-      <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
+      <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 用户评价 -->
       <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate>
       <!-- 学堂资讯 -->
