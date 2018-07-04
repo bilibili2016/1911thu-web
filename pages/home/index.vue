@@ -6,7 +6,7 @@
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 最新课程 -->
-      <v-new :config="configZero" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
+      <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 精品好课 -->
       <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 名师大咖秀 -->
@@ -59,6 +59,12 @@ export default {
       classicData: [],
       showCheckedCourse: false,
       configZero: {
+        card_type: 'profile',
+        card: 'home',
+        new: 'false',
+        free: 'true'
+      },
+      configOne: {
         card_type: 'profile',
         card: 'home',
         new: 'true'
@@ -154,7 +160,13 @@ export default {
       notLogin: false,
       curruntForm: {
         pages: 1,
-        limits: 8,
+        limits: '',
+        evaluateLimit: null,
+        isevaluate: 1
+      },
+      courseForm: {
+        pages: 1,
+        limits: null,
         evaluateLimit: null,
         isevaluate: 1
       },
@@ -165,7 +177,7 @@ export default {
       },
       classicForm: {
         pages: 0,
-        limits: 8,
+        limits: null,
         categoryId: null,
         sortBy: null
       },
@@ -244,7 +256,7 @@ export default {
     },
     // 获取新上好课列表
     getNewCourseList() {
-      home.getNewCourseList(this.curruntForm).then(response => {
+      home.getNewCourseList(this.courseForm).then(response => {
         this.newData = response.data.curriculumList
       })
     },

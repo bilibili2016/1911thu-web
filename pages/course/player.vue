@@ -591,13 +591,11 @@ export default {
 }
 .shareIcond {
   opacity: 0;
-  // display: none;
+  display: none;
   margin-top: -104px;
   width: 121px;
   height: 56px;
-  // background: rgba(255, 255, 255, 1);
   border-radius: 4px;
-  // box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
   position: absolute;
   transition: all 300ms;
   top: 55px;
