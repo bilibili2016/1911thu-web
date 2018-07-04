@@ -10,7 +10,7 @@
           </div>
           <div class="fr courseInfo">
             <h4 @click="courseInfo(course)">{{course.title}}</h4>
-            <h5>{{course.deputy_title}}俞敏洪的十五字创业心经</h5>
+            <h5>{{course.deputy_title}}</h5>
             <h6 class="clearfix">
               <p class="fl">{{course.curriculum_time}}min <img :src="stydyNum" alt=""> {{course.study_number}}</p>
               <p class="fr">
@@ -100,8 +100,8 @@ export default {
         cursor: pointer;
       }
       h5 {
-        height: 50px;
-        line-height: 25px;
+        height: 46px;
+        line-height: 23px;
         margin: 5px 0;
         color: #93999f;
         font-size: 14px;

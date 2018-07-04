@@ -612,7 +612,9 @@ export default {
     rePhone() {
       if (
         this.zzTicketForm.phones == '' ||
-        !/^0\d{2,3}-?\d{7,8}$/.test(this.zzTicketForm.phones)
+        !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
+          this.zzTicketForm.phones
+        )
       ) {
         this.tipsPhones = false
         this.phones = true
@@ -713,7 +715,9 @@ export default {
           return false
         } else if (
           this.zzTicketForm.phones == '' ||
-          !/^0\d{2,3}-?\d{7,8}$/.test(this.zzTicketForm.phones)
+          !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
+            this.zzTicketForm.phones
+          )
         ) {
           this.$message({
             showClose: true,

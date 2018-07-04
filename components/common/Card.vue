@@ -39,8 +39,9 @@
             <el-row>
               <!-- 名字 -->
               <div class="item">
-                <p class="itemBox-name" @click="goLink('course/coursedetail')">
-                  <span>{{card.title}}</span>
+                <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]" @click="goLink('course/coursedetail')">
+                  <span :class="{'title':config.card === 'home'?true:false}">{{card.title}}</span>
+                  <span v-if="config.card === 'home'" class="deputyTitle">{{card.deputy_title}}</span>
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
@@ -114,6 +115,7 @@
                 <div class="item " @click="courseInfo(card,index) ">
                   <p class="itemBox-name ">
                     <span>{{card.title}}</span>
+                    <!-- <span class="deputyTitle">{{card.deputy_title}}</span> -->
                   </p>
                 </div>
                 <!-- 作者和头衔    金额 -->
@@ -968,6 +970,33 @@ export default {
           color: rgba(51, 42, 81, 1);
           padding: 0 15px;
           overflow: hidden;
+          &.itemBoxTitle {
+            height: 80px;
+            line-height: 20px;
+            .title {
+              width: 220px;
+              height: 18px;
+              line-height: 18px;
+              overflow: hidden;
+              color: #1c1f21;
+              margin-top: 20px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            .deputyTitle {
+              width: 220px;
+              height: 20px;
+              line-height: 20px;
+              margin: 8px 0;
+              overflow: hidden;
+              font-size: 14px;
+              color: #93999f;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
         }
         .itemBox-info {
           font-size: 14px;
