@@ -841,6 +841,9 @@ export default {
               this.isShowTicket = true
               this.commitOrders.ticketId = res.data.invoice_id
               this.close()
+              if (this.ticketForm.types == 1) {
+                this.invoiceForm.ticket = true
+              }
             } else {
               this.$message({
                 showClose: true,
@@ -988,8 +991,6 @@ export default {
           return false
         }
       }
-      console.log(this.company)
-      return false
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
