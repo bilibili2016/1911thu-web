@@ -10,9 +10,9 @@
           </div>
           <div class="fr courseInfo">
             <h4 @click="courseInfo(course)">{{course.title}}</h4>
-            <h5>{{course.deputy_title}}俞敏洪的十五字创业心经</h5>
+            <h5>{{course.deputy_title}}</h5>
             <h6 class="clearfix">
-              <p class="fl">{{course.curriculum_time}}课时 <img :src="stydyNum" alt=""> {{course.study_number}}</p>
+              <p class="fl">{{course.curriculum_time}}min <img :src="stydyNum" alt=""> {{course.study_number}}</p>
               <p class="fr">
                 <el-rate disabled v-model="course.score" class="itemBox-rate"></el-rate>
               </p>
@@ -74,7 +74,7 @@ export default {
     height: 160px;
     margin-bottom: 50px;
     background-color: #fff;
-    border-radius: 16px;
+    // border-radius: 16px;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
@@ -83,7 +83,7 @@ export default {
     div.fl img {
       width: 250px;
       height: 160px;
-      border-radius: 16px;
+      // border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
     }
@@ -100,8 +100,8 @@ export default {
         cursor: pointer;
       }
       h5 {
-        height: 50px;
-        line-height: 25px;
+        height: 46px;
+        line-height: 23px;
         margin: 5px 0;
         color: #93999f;
         font-size: 14px;

@@ -589,38 +589,38 @@ export default {
 .displays {
   display: none;
 }
-.shareIcond {
-  opacity: 0;
-  // display: none;
-  margin-top: -104px;
-  width: 121px;
-  height: 56px;
-  // background: rgba(255, 255, 255, 1);
-  border-radius: 4px;
-  // box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-  position: absolute;
-  transition: all 300ms;
-  top: 55px;
-  right: 0px;
-  z-index: 99999;
-  i {
-    display: inline-block;
-    width: 55.4px;
-    line-height: 36px;
-    text-align: center;
-    color: #222;
-    font-size: 12px;
-    margin: 0;
-    &:hover {
-      color: #8f4acb;
+.playerBox {
+  .shareIcond {
+    opacity: 0;
+    display: none;
+    margin-top: -104px;
+    width: 121px;
+    height: 56px;
+    border-radius: 4px;
+    position: absolute;
+    transition: all 300ms;
+    top: 55px;
+    right: 0px;
+    z-index: 99999;
+    i {
+      display: inline-block;
+      width: 55.4px;
+      line-height: 36px;
+      text-align: center;
+      color: #222;
+      font-size: 12px;
+      margin: 0;
+      &:hover {
+        color: #8f4acb;
+      }
     }
-  }
-  img {
-    width: 100px;
-    height: 100px;
-    margin: 15px 0 0 2.7px;
-    display: block;
-    cursor: pointer;
+    img {
+      width: 100px;
+      height: 100px;
+      margin: 15px 0 0 2.7px;
+      display: block;
+      cursor: pointer;
+    }
   }
 }
 .share {
