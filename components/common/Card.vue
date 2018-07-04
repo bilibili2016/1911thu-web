@@ -56,24 +56,25 @@
               <!-- 作者和头衔    金额 -->
               <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
-                  <p class="price">￥{{card.present_price}}</p>
+                  <p class="price freePrise" v-if="config.card === 'home'&&config.free != 'true'">￥{{card.present_price}}</p>
+                  <p class="freePrise" v-if="config.free === 'true'">免费</p>
                 </div>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps" v-if="config.card === 'learning'">
-                <div class="line-centers">
+              <div class="line-wraps " v-if="config.card==='learning' ">
+                <div class="line-centers ">
                   <!-- {{typeof(card.percent)}} -->
                   <p>已学习{{card.percent}}%</p>
-                  <el-progress :percentage="card.percent"></el-progress>
+                  <el-progress :percentage="card.percent "></el-progress>
                 </div>
               </div>
-              <div v-if="config.card === 'already'">
-                <div class="line-centers">
+              <div v-if="config.card==='already' ">
+                <div class="line-centers ">
                   <div>已学习100%</div>
                 </div>
               </div>
-              <div class="readyImg" v-if="config.card === 'already'">
-                <img :src="readyImg" alt="">
+              <div class="readyImg " v-if="config.card==='already' ">
+                <img :src="readyImg " alt=" ">
               </div>
             </el-row>
           </el-card>
@@ -82,50 +83,50 @@
     </template>
     <!-- 我的收藏 -->
     <!-- profile个人信息模板 新上好课模板 我要选课-->
-    <template v-if="config.card_type === 'shoucang'">
-      <div class="card-category profile">
-        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBox">
+    <template v-if="config.card_type==='shoucang' ">
+      <div class="card-category profile ">
+        <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
+          <el-card shadow="never " body-style="padding: 0; " class="itemBox ">
             <!-- {{card.id}} -->
-            <el-checkbox v-model="card.is_checked" @change="selCheckboxChange(card,index)" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
-            <!-- @click="selectCid(card,index)" -->
-            <div @click="courseInfo(card,index)">
-              <div class="new-style" v-if="config.new === 'true'">
-                <img :src="newTag" alt="">
+            <el-checkbox v-model="card.is_checked " @change="selCheckboxChange(card,index) " style="position:absolute;top:10px;right:10px; " v-if="config.types==='buy' "></el-checkbox>
+            <!-- @click="selectCid(card,index) " -->
+            <div @click="courseInfo(card,index) ">
+              <div class="new-style " v-if="config.new==='true' ">
+                <img :src="newTag " alt=" ">
               </div>
-              <div class="mask-style">
-                <!-- <div class="mask-style" @click="goLink('course/coursedetail')"> -->
-                <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+              <div class="mask-style ">
+                <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
+                <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
               </div>
-              <div class="bgImgs">
-                <img :src="card.picture" alt="">
+              <div class="bgImgs ">
+                <img :src="card.picture " alt=" ">
               </div>
-              <div class="tag">
+              <div class="tag ">
                 <!-- 收藏的tag -->
-                <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
+                <span v-if="card.tag.length !==0 " v-for="(tag,index) in card.tag " :key="index ">{{tag}}</span>
               </div>
-              <div v-if="config.card === 'home'"></div>
+              <div v-if="config.card==='home' "></div>
               <div class="common-button btn-bgs " v-else>
-                <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+                <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
               </div>
               <el-row>
                 <!-- 名字 -->
-                <div class="item" @click="courseInfo(card,index)">
-                  <p class="itemBox-name">
+                <div class="item " @click="courseInfo(card,index) ">
+                  <p class="itemBox-name ">
                     <span>{{card.title}}</span>
                   </p>
                 </div>
                 <!-- 作者和头衔    金额 -->
-                <div class="line-wrap" v-if="config.card === 'home'" @click.stop="goTeacherInfo(card.teacher_id)">
-                  <div class="line-center">
-                    <img :src="card.head_img" alt="">
+                <div class="line-wrap " v-if="config.card==='home' " @click.stop="goTeacherInfo(card.teacher_id) ">
+                  <div class="line-center ">
+                    <img :src="card.head_img " alt=" ">
                     <span>{{card.teacher_name}}</span>
-                    <span class="title">{{card.graduate}}</span>
+                    <span class="title ">{{card.graduate}}</span>
                   </div>
                 </div>
-                <!-- <div class="line-wrap" v-if="config.card === 'home'">
-                  <div class="line-center">
-                    <p class="price">￥{{card.present_price}}</p>
+                <!-- <div class="line-wrap " v-if="config.card==='home' ">
+                  <div class="line-center ">
+                    <p class="price ">￥{{card.present_price}}</p>
                   </div>
                 </div> -->
               </el-row>
@@ -135,66 +136,66 @@
       </div>
     </template>
     <!-- 购物车页面 -->
-    <template v-if="config.card_type === 'profiled'">
-      <div class="card-category profile">
-        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="handleCheck(card,index)">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBox">
-            <div class="new-style" v-if="config.new === 'true'">
-              <img :src="newTag" alt="">
+    <template v-if="config.card_type==='profiled' ">
+      <div class="card-category profile ">
+        <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list " @click="handleCheck(card,index) ">
+          <el-card shadow="never " body-style="padding: 0; " class="itemBox ">
+            <div class="new-style " v-if="config.new==='true' ">
+              <img :src="newTag " alt=" ">
             </div>
-            <div class="mask-style">
-              <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+            <div class="mask-style ">
+              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
             </div>
-            <div class="bgImgs">
-              <img :src="card.bg" alt="">
+            <div class="bgImgs ">
+              <img :src="card.bg " alt=" ">
             </div>
-            <div class="tag">
-              <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
+            <div class="tag ">
+              <span v-if="card.tag.length !==0 " v-for="(tag,index) in card.tag " :key="index ">{{tag}}</span>
             </div>
-            <div v-if="config.card === 'home'"></div>
+            <div v-if="config.card==='home' "></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+              <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
             </div>
             <el-row>
               <!-- 名字 -->
-              <div class="item">
-                <p class="itemBox-name">
+              <div class="item ">
+                <p class="itemBox-name ">
                   <span>{{card.name}}</span>
                 </p>
-                <p class="itemBox-info">
-                  <span v-if="config.card === 'home'">
+                <p class="itemBox-info ">
+                  <span v-if="config.card==='home' ">
                     {{card.cnum}}
                   </span>
-                  <span class="itemBox-num" v-if="config.card === 'home'">
-                    <img :src="numSrc" alt="">
+                  <span class="itemBox-num " v-if="config.card==='home' ">
+                    <img :src="numSrc " alt=" ">
                     <span>{{card.pnum}}</span>
-                    <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                    <el-rate disabled v-model="card.rate " class="itemBox-rate " v-if="config.card==='home' "></el-rate>
                   </span>
                 </p>
               </div>
               <!-- 作者和头衔 -->
-              <div class="line-wrap" v-if="config.card === 'home'">
-                <div class="line-center">
-                  <img :src="card.avator" alt=""> {{card}}
+              <div class="line-wrap " v-if="config.card==='home' ">
+                <div class="line-center ">
+                  <img :src="card.avator " alt=" "> {{card}}
                   <span>王建中</span>
-                  <span class="title">华中科技大学博士</span>
+                  <span class="title ">华中科技大学博士</span>
                 </div>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps" v-if="config.card === 'learning'">
-                <div class="line-centers">
+              <div class="line-wraps " v-if="config.card==='learning' ">
+                <div class="line-centers ">
                   {{card}}
                   <p>已学习100%</p>
-                  <el-progress :percentage="50"></el-progress>
+                  <el-progress :percentage="50 "></el-progress>
                 </div>
               </div>
-              <div v-if="config.card === 'already'">
-                <div class="line-centers">
+              <div v-if="config.card==='already' ">
+                <div class="line-centers ">
                   <div>已学习100%</div>
                 </div>
               </div>
-              <div class="readyImg" v-if="config.card === 'already'">
-                <img :src="readyImg" alt="">
+              <div class="readyImg " v-if="config.card==='already' ">
+                <img :src="readyImg " alt=" ">
               </div>
             </el-row>
           </el-card>
@@ -202,28 +203,28 @@
       </div>
     </template>
     <!-- 新上好课详情 -->
-    <template v-if="config.card_type === 'goodlesson'">
-      <div class="courseList center goodLesson">
-        <div class="course clearfix bottom" v-for="(course,index) in courseList" :key="index">
-          <el-card class="fl" :body-style="{ padding: '0px' }">
-            <img :src="course.picture" class="image">
-            <div class="personInfo clearfix" @click="goTeacherInfo(course.teacher_id)">
+    <template v-if="config.card_type==='goodlesson' ">
+      <div class="courseList center goodLesson ">
+        <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
+          <el-card class="fl " :body-style="{ padding: '0px' } ">
+            <img :src="course.picture " class="image ">
+            <div class="personInfo clearfix " @click="goTeacherInfo(course.teacher_id) ">
               <span>{{course}}</span>
-              <img :src="course.head_img" alt="">
-              <h5 class="fr">特约讲师：{{course.teacher_name}}</h5>
-              <p class="fr">{{course.graduate}}</p>
+              <img :src="course.head_img " alt=" ">
+              <h5 class="fr ">特约讲师：{{course.teacher_name}}</h5>
+              <p class="fr ">{{course.graduate}}</p>
             </div>
-            <div class="play-btn">
-              <img :src="playbtn" alt="" @click="courseInfo(course)">
+            <div class="play-btn ">
+              <img :src="playbtn " alt=" " @click="courseInfo(course) ">
             </div>
           </el-card>
-          <div class="particulars fr">
-            <div class="currentclum">
+          <div class="particulars fr ">
+            <div class="currentclum ">
               <h4>{{course.title}}</h4>
               <p>{{course.introduction}}</p>
             </div>
             <!-- {{course.evaluateList}} -->
-            <div v-if="course.evaluateList.length > 0">
+            <div v-if="course.evaluateList.length> 0">
               <el-carousel trigger="click" height="120px">
                 <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
                   <!-- {{item}} -->
@@ -1036,7 +1037,12 @@ export default {
         padding: 0 15px;
         p.price {
           color: #ff5f5f;
+          font-size: 14px;
           padding: 0 0px;
+        }
+        p.freePrise {
+          color: #1c1f21;
+          font-size: 14px;
         }
         span {
           vertical-align: middle;
