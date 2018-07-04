@@ -7,11 +7,15 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['linkdata'],
   methods: {
     getMore() {
       // this.$router.push(this.linkdata)
+      if (this.linkdata === '/course/classifylist') {
+        persistStore.set('showFree', true)
+      }
       this.$emit('getMoreData')
       window.open(window.location.origin + this.linkdata)
     }
