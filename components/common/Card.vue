@@ -388,7 +388,7 @@
 
     <template v-if="config.card_type === 'infoTwo'">
       <div class="card-categorys">
-        <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 1">
+        <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 0">
           <el-card shadow="never" body-style="padding: 0;" class="itemBoxs">
             <div class="img-box">
               <img :src="card.picture" alt="">
