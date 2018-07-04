@@ -22,17 +22,15 @@
               <span class="fl">机构信息：</span>
               <span class="fr addCompany" v-if="flag" @click="openCompanyInfo">
                 <i class="el-icon-circle-plus-outline"></i> 添加机构信息</span>
-              <span class="fr addCompany" v-else @click="openCompanyInfo">
-                <i class="el-icon-edit-outline"></i> 修改</span>
+              <!-- <span class="fr addCompany" v-else @click="openCompanyInfo">
+                <i class="el-icon-edit-outline"></i> 修改</span> -->
             </h4>
             <div class="cpnInfo" v-if="flag">
               <p>暂无信息，请您添加。</p>
             </div>
             <div class="cpnInfo" v-else>
               <p class="cpnInfoLi">
-                <!-- {{company}} -->
                 <span>
-
                   <strong>联系人:</strong>{{company.contact_person}}</span>
                 <span>
                   <strong>公司名称:</strong>{{company.company_name}}</span>
@@ -75,7 +73,6 @@
                 <strong style="display:inline-block;padding-right:8px;">发票类型:</strong>个人</span> -->
               <!-- 显示发票抬头 -->
               <span v-show="isShowTicket">
-                <!-- {{invoiceForm.ticket }} -->
                 <strong class="choose" v-show="invoiceForm.choose=='1'">普通发票</strong>
                 <strong class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</strong>
                 <strong>发票抬头:</strong>
@@ -392,8 +389,8 @@
             <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
           </el-form-item>
           <!-- prop="companyaddress" -->
-          <el-form-item label="公司地址：">
-            <el-input placeholder="请输入公司地址" v-model="address"></el-input>
+          <el-form-item label="公司地址：" prop="companyaddress">
+            <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
           </el-form-item>
           <el-form-item label="联系人：" prop="contactperson">
             <el-input placeholder="请输入联系人姓名" v-model="companyInfo.contactperson"></el-input>
@@ -647,6 +644,7 @@ export default {
       if (v === '1') {
         this.choose = '1'
         this.invoiceForm.types = '1'
+        this.nextStep('stepOne')
       } else {
         this.choose = '2'
         this.invoiceForm.types = '3'
@@ -754,7 +752,6 @@ export default {
       } else {
         this.ticketForm.types = 1
         this.ticketForm.number = ''
-        this.ticketForm.companyname = '个人'
       }
       if (!this.ticketForm.isRadio) {
         if (this.ticketForm.others == '') {
@@ -832,6 +829,7 @@ export default {
                 type: 'success',
                 message: res.msg
               })
+              this.invoiceForm.choose = this.choose
               this.invoiceForm.types = this.ticketForm.types
               this.commitOrders.ticketId = res.data.invoice_id
               this.invoiceForm.companyname = this.ticketForm.companyname
@@ -893,7 +891,11 @@ export default {
           if (res.status === 0) {
             if (this.invoiceForm.types == 1 || this.invoiceForm.types == 2) {
               this.ticketForm.saveioc = res.data.type == '1' ? false : true
-              this.ticketForm.companyname = res.data.invoice_name
+              if (this.invoiceForm.types == 1) {
+                this.ticketForm.companyname = ''
+              } else {
+                this.ticketForm.companyname = res.data.invoice_name
+              }
               this.ticketForm.number = res.data.invoice_number
               this.ticketForm.name = res.data.consignee
               this.ticketForm.tel = res.data.phone
@@ -904,7 +906,6 @@ export default {
               this.ticketForm.radio = Number(res.data.content_type)
               this.ticketForm.others = res.data.content
               this.ticketForm.ticket = false
-              this.isShowTicket = true
               this.commitOrders.ticketId = res.data.id
               if (this.ticketForm.radio == 2) {
                 this.ticketForm.isRadio = false
@@ -926,15 +927,12 @@ export default {
               this.zzTicketForm.address = res.data.address
               this.zzTicketForm.others = res.data.content
               this.zzTicketForm.radio = Number(res.data.content_type)
-              this.isShowTicket = true
               this.commitOrders.ticketId = res.data.id
               if (this.zzTicketForm.radio == 2) {
                 this.zzTicketForm.isRadio = false
               }
             }
-          }
-          if (res.status == '100100') {
-            this.isShowTicket = false
+            this.getRegion('', this.ticketForm.province)
           }
           resolve(true)
         })
@@ -984,10 +982,15 @@ export default {
         this.commitOrders.types = 1
       } else {
         this.commitOrders.types = 2
+        if (this.commitOrders.companyId == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '您还没有绑定机构，请选择个人购买！'
+          })
+          return false
+        }
       }
-
-      console.log(this.commitOrders, '这是this.commitOrders')
-      // return false
       return new Promise((resolve, reject) => {
         // home.commitOrder(this.commitOrders).then(res => {
         //   if (res.status === 0) {
@@ -1045,7 +1048,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getInvoiceDetail(this.getInvoice).then(res => {
           if (res.status == 0) {
-            // 发票信息放到页面 isShowTicket
+            // 发票信息放到页面
             if (res.data.type == '1') {
               this.invoiceForm.choose = '1'
               this.choose = '1'
@@ -1073,16 +1076,12 @@ export default {
       })
     },
     addCompanyInfo(formName) {
-      // persistStore.set(companyname, this.companyInfo.companyname)
-
       //提交机构信息表单
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
-            // let companyname = this.companyInfo.companyname
-
             home.addCompanyInfo(this.companyInfo).then(response => {
-              console.log(response,'这是获取')
+              console.log(response, '这是获取')
               if (response.status === '100100') {
                 this.$message({
                   showClose: true,
@@ -1090,18 +1089,12 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
-                persistStore.set('companyname', this.companyInfo.companyname)
-                persistStore.set('companyaddress', this.address)
-                persistStore.set(
-                  'contactperson',
-                  this.companyInfo.contactperson
-                )
                 persistStore.set('phone', this.companyInfo.phones)
                 this.company.id = response.data.id
                 this.company.contact_person = this.companyInfo.contactperson
                 this.company.company_name = this.companyInfo.companyname
                 this.company.phone = this.companyInfo.phones
-                this.company.address = persistStore.get('address')
+                this.company.address = this.companyInfo.companyaddress
                 this.showInfo = false
                 this.flag = false
               }
