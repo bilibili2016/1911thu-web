@@ -75,10 +75,7 @@ export default {
       this.goLink('/home/components/teacher')
     }
   },
-  mounted() {
-    console.log(this.teachers)
-    console.log(this.titleThree)
-  }
+  mounted() {}
 }
 </script>
 <style lang="scss" scoped>

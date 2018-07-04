@@ -1,6 +1,5 @@
 // import jQuery from 'jQuery'
 function aa($) {
-  console.log(123)
   var fnName = 'fragmentImg'
 
   var _default = {

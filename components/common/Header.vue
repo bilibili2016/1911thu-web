@@ -881,7 +881,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(window.location.pathname, '这')
     // if (window.location.pathname === '/other/hrentry') {
     //   this.bannerMsg = true
     // }

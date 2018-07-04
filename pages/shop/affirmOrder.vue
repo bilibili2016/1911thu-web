@@ -982,7 +982,7 @@ export default {
       } else {
         this.commitOrders.types = 2
       }
-      // console.log(this.commitOrders)
+
       // return false
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
@@ -1041,7 +1041,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getInvoiceDetail(this.getInvoice).then(res => {
           if (res.status == 0) {
-            console.log(res.data)
+
 
             // 发票信息放到页面 isShowTicket
             if (res.data.type == '1') {
@@ -1072,13 +1072,12 @@ export default {
     },
     addCompanyInfo(formName) {
       // persistStore.set(companyname, this.companyInfo.companyname)
-      // console.log()
+
       //提交机构信息表单
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
             // let companyname = this.companyInfo.companyname
-            // console.log(this.companyInfo.companyname, '公司信息')
 
             home.addCompanyInfo(this.companyInfo).then(response => {
               if (response.status === '100100') {
@@ -1088,12 +1087,6 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
-                // console.log(this.companyInfo, 'opopopop')
-                // let aa = this.companyInfo.companyname
-                // persistStore.set(a, aa)
-                // persistStore.set(companyaddress, this.address)
-                // persistStore.set(contactperson, this.companyInfo.contactperson)
-                // persistStore.set(phone, this.companyInfo.phones)
                 persistStore.set('companyname', this.companyInfo.companyname)
                 persistStore.set('companyaddress', this.address)
                 persistStore.set(

@@ -163,9 +163,7 @@ export default {
     'v-line': CustomLine
   },
   watch: {
-    selectMsg(val) {
-      console.log(val, '123')
-    }
+    selectMsg(val) {}
   },
   data() {
     return {
@@ -317,7 +315,6 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          console.log(response.data.evaluateTags['1'], '123')
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('1')
@@ -335,8 +332,7 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      console.log(this.addEvaluateForm, '提交评论的form')
-      // console.log(this.courseList.is_study, '是否出现评论')
+
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
@@ -397,7 +393,6 @@ export default {
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getEvaluateLists(this.evaluateListForm).then(response => {
-          console.log(response, '这是response')
           this.loadMsg = false
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           this.pagemsg.total = response.data.pageCount

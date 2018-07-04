@@ -262,7 +262,6 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          console.log(response.data.evaluateTags['1'], '123')
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('1')
@@ -273,7 +272,7 @@ export default {
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
-      // console
+
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
@@ -356,8 +355,6 @@ export default {
     },
 
     playerBuy(item, info) {
-      // console.log(item, 'playerItem')
-      // console.log(info, 'info')
       if (info.is_cart === 1) {
         // this.$alert('商品已在购物车内', '温馨提示', {
         //   confirmButtonText: '确定',
@@ -412,7 +409,6 @@ export default {
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
-        // console.log(player.volume(), '123')
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
@@ -439,7 +435,6 @@ export default {
         }, 1000)
         this.ischeck = persistStore.get('catalogId')
         this.playing = this.playImg
-        console.log(this.ischeck)
       })
       player.on('play', function() {
         this.playing = this.pauseImg
