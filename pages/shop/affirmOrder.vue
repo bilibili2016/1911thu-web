@@ -841,6 +841,9 @@ export default {
               this.isShowTicket = true
               this.commitOrders.ticketId = res.data.invoice_id
               this.close()
+              if (this.ticketForm.types == 1) {
+                this.invoiceForm.ticket = true
+              }
             } else {
               this.$message({
                 showClose: true,
