@@ -216,7 +216,7 @@
     .el-tabs--left.el-tabs--card .el-tabs__item.is-left.is-active,
     .el-tabs__item:hover {
       border-left: 2px solid #6417a6;
-      background-color: #fff;
+      background-color: #fafafa;
       color: #6417a6;
 
       .icon-intro {
@@ -399,7 +399,10 @@
         margin-right: 10px;
         font-size: 14px;
         color: #6417a6;
+        padding: 0;
+        text-align: center;
       }
+
       .el-tabs--border-card > .el-tabs__header .el-tabs__item {
         margin: 0;
         margin-right: 10px;
@@ -409,6 +412,7 @@
         padding-top: 0;
         box-shadow: none;
       }
+
       // .el-tabs--border-card
       //   > .el-tabs__header
       //   .el-tabs__item:not(.is-disabled):hover {
