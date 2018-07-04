@@ -22,17 +22,15 @@
               <span class="fl">机构信息：</span>
               <span class="fr addCompany" v-if="flag" @click="openCompanyInfo">
                 <i class="el-icon-circle-plus-outline"></i> 添加机构信息</span>
-              <span class="fr addCompany" v-else @click="openCompanyInfo">
-                <i class="el-icon-edit-outline"></i> 修改</span>
+              <!-- <span class="fr addCompany" v-else @click="openCompanyInfo">
+                <i class="el-icon-edit-outline"></i> 修改</span> -->
             </h4>
             <div class="cpnInfo" v-if="flag">
               <p>暂无信息，请您添加。</p>
             </div>
             <div class="cpnInfo" v-else>
               <p class="cpnInfoLi">
-                <!-- {{company}} -->
                 <span>
-
                   <strong>联系人:</strong>{{company.contact_person}}</span>
                 <span>
                   <strong>公司名称:</strong>{{company.company_name}}</span>
@@ -75,7 +73,6 @@
                 <strong style="display:inline-block;padding-right:8px;">发票类型:</strong>个人</span> -->
               <!-- 显示发票抬头 -->
               <span v-show="isShowTicket">
-                <!-- {{invoiceForm.ticket }} -->
                 <strong class="choose" v-show="invoiceForm.choose=='1'">普通发票</strong>
                 <strong class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</strong>
                 <strong>发票抬头:</strong>
@@ -755,7 +752,6 @@ export default {
       } else {
         this.ticketForm.types = 1
         this.ticketForm.number = ''
-        this.ticketForm.companyname = '个人'
       }
       if (!this.ticketForm.isRadio) {
         if (this.ticketForm.others == '') {
@@ -833,6 +829,7 @@ export default {
                 type: 'success',
                 message: res.msg
               })
+              this.invoiceForm.choose = this.choose
               this.invoiceForm.types = this.ticketForm.types
               this.commitOrders.ticketId = res.data.invoice_id
               this.invoiceForm.companyname = this.ticketForm.companyname
@@ -894,7 +891,11 @@ export default {
           if (res.status === 0) {
             if (this.invoiceForm.types == 1 || this.invoiceForm.types == 2) {
               this.ticketForm.saveioc = res.data.type == '1' ? false : true
-              this.ticketForm.companyname = res.data.invoice_name
+              if (this.invoiceForm.types == 1) {
+                this.ticketForm.companyname = ''
+              } else {
+                this.ticketForm.companyname = res.data.invoice_name
+              }
               this.ticketForm.number = res.data.invoice_number
               this.ticketForm.name = res.data.consignee
               this.ticketForm.tel = res.data.phone
@@ -978,7 +979,17 @@ export default {
         this.commitOrders.types = 1
       } else {
         this.commitOrders.types = 2
+        if (this.commitOrders.companyId == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '您还没有绑定机构，请选择个人购买！'
+          })
+          return false
+        }
       }
+      console.log(this.company)
+      return false
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
