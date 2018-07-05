@@ -117,7 +117,6 @@ export default {
   watch: {},
   mounted() {
     if (persistStore.get('cpnc')) {
-      // console.log(persistStore.get('cpnc'))
       this.companyId.cpnid = persistStore.get('cpnc')
       this.hasId = false
     }

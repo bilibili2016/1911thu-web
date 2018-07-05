@@ -15,14 +15,12 @@
           </div>
         </span>
         <span class="fl problem" @click="showRpt">报告问题</span>
-        <span class="fr share">
-          <i class="el-icon-share"></i>分享
-          <span class="shareIcon">
-            <img src="@/assets/images/share_qq.png" alt="">
-            <img src="@/assets/images/share_wx.png" alt="">
-            <img src="@/assets/images/share_wb.png" alt="">
-            <img src="@/assets/images/share_pyq.png" alt="">
+        <span class="fr share" style="position:reletive">
+          <i class="el-icon-share "></i>分享
+          <span class="shareIcond">
+            <span class="social-share" data-sites="weibo,qq,wechat"></span>
           </span>
+
         </span>
         <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
           <i class="el-icon-star-on"></i>
@@ -62,7 +60,7 @@
                 <i class="el-icon-caret-right"></i>
               </span>
               <span class="fl playImg" v-show="ischeck == bar.id?true:false">
-                <img :src="playing" alt="">
+                <img :src="playing" alt="" ref="videoButton">
               </span>
               <span class="fl barName">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
               </span>
@@ -123,6 +121,7 @@ export default {
 
   data() {
     return {
+      videoState: false,
       showReportBug: false,
       title: '1',
       showEvaluate: false,
@@ -140,6 +139,7 @@ export default {
       playing: '',
       playImg: require('@/assets/images/playImg.gif'),
       pauseImg: require('@/assets/images/video.png'),
+      // gifImg: require('@/assets/images/playImg.gif'),
       player: {},
       courseList: [
         {
@@ -238,6 +238,20 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid']),
+    isHasClass() {
+      let myVideo = document.getElementById('movd')
+      if (myVideo.getAttribute('class')) {
+        // 存在class属性
+
+        // 方式2
+        if (myVideo.className.indexOf('vjs-paused') > -1) {
+          this.videoState = false
+          // console.log('包含 test 这个class')
+        } else {
+          this.videoState = true
+        }
+      }
+    },
     changeRate(val) {
       this.reTagBtn = []
       this.tagGroup[val].map((item, i) => {
@@ -262,7 +276,6 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         home.getEvaluateTags().then(response => {
-          console.log(response.data.evaluateTags['1'], '123')
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('1')
@@ -273,7 +286,7 @@ export default {
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
-      // console
+
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
@@ -356,8 +369,6 @@ export default {
     },
 
     playerBuy(item, info) {
-      // console.log(item, 'playerItem')
-      // console.log(info, 'info')
       if (info.is_cart === 1) {
         // this.$alert('商品已在购物车内', '温馨提示', {
         //   confirmButtonText: '确定',
@@ -378,6 +389,11 @@ export default {
       }
     },
     getPlayerInfo() {
+      if (typeof TCPlayer === 'undefined') {
+        location.reload()
+        return
+      }
+
       if (this.clickMsg === true) {
         player = TCPlayer('movd_html5_api', this.tcplayer)
         player.dispose()
@@ -408,11 +424,14 @@ export default {
       socket.on('reconnect', function(msg) {})
       let that = this
       player.on('pause', () => {
+        this.isHasClass()
+        this.playing = this.pauseImg
         clearInterval(that.interval)
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
-        // console.log(player.volume(), '123')
+        this.isHasClass()
+        // console.log(this.$refs.videoButton.src)
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
@@ -437,9 +456,9 @@ export default {
           }
           // this.ischeck = item.id
         }, 1000)
+
         this.ischeck = persistStore.get('catalogId')
         this.playing = this.playImg
-        console.log(this.ischeck)
       })
       player.on('play', function() {
         this.playing = this.pauseImg
@@ -472,6 +491,7 @@ export default {
           }
         })
       })
+      this.isHasClass()
     },
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
@@ -572,7 +592,13 @@ export default {
     }
   },
   mounted() {
+    this.videoState = document.getElementById('movd')
     this.resize()
+    var $config = {
+      url: 'http://www.1911edu.com/'
+    }
+
+    socialShare('.social-share', $config)
     window.addEventListener('resize', this.resize)
     // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
@@ -584,12 +610,64 @@ export default {
     ;(this.seconds = 10000000),
       // 获取评论接口
       this.getEvaluateTags()
+
+    this.isHasClass()
+  },
+  watch: {
+    videoState(flag) {
+      console.log(flag)
+      if (flag) {
+        this.playing = this.playImg
+      } else {
+        this.playing = this.pauseImg
+      }
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
 .displays {
   display: none;
+}
+.shareIcond {
+  opacity: 0;
+  // display: none;
+  margin-top: -104px;
+  width: 121px;
+  height: 56px;
+  // background: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  // box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+  position: absolute;
+  transition: all 300ms;
+  top: 55px;
+  right: 0px;
+  z-index: 99999;
+  i {
+    display: inline-block;
+    width: 55.4px;
+    line-height: 36px;
+    text-align: center;
+    color: #222;
+    font-size: 12px;
+    margin: 0;
+    &:hover {
+      color: #8f4acb;
+    }
+  }
+  img {
+    width: 100px;
+    height: 100px;
+    margin: 15px 0 0 2.7px;
+    display: block;
+    cursor: pointer;
+  }
+}
+.share {
+  &:hover .shareIcond {
+    opacity: 1;
+    display: inline-block;
+  }
 }
 </style>
 
