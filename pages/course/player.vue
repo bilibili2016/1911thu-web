@@ -47,9 +47,9 @@
             <!-- <div>{{player.is_cart}}</div> -->
           </div>
           <!-- player.is_car ===  1 ? false : true -->
-          <div v-if="player.is_cart === 1">
+          <!-- <div v-if="player.is_cart === 1">
             <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
-          </div>
+          </div> -->
           <!-- <div v-else>{{player.is_cart}}</div> -->
         </div>
         <div class="courseList" ref="courseList">

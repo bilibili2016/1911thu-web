@@ -35,7 +35,7 @@
         <div class="fr rightPages" v-if="showFree">
           <span>
             <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#ddd" @change="hideCourse">
-            </el-switch>免费课程
+            </el-switch> 免费课程
           </span>
         </div>
       </div>

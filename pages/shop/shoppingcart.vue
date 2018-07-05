@@ -420,10 +420,6 @@ export default {
       }
     },
     handleSelect(item, index) {},
-    addNumber() {
-      this.numForm.number = this.numForm.number + 1
-      this.changeCartNumber()
-    },
     changeCartNumber() {
       return new Promise((resolve, reject) => {
         home.changeCartNumber(this.numForm).then(res => {
@@ -431,17 +427,9 @@ export default {
         })
       })
     },
-    delNumber() {
-      if (this.numForm.number > 1) {
-        this.numForm.number = this.numForm.number - 1
-      } else {
-        this.numForm.number = Number(1)
-      }
-      this.changeCartNumber()
-    },
     changeNumber() {
-      if (typeof this.number !== 'number' || this.number < 1) {
-        this.number = 1
+      if (typeof this.numForm.number !== 'number' || this.numForm.number < 1) {
+        this.numForm.number = 1
       }
       this.changeCartNumber()
     },
