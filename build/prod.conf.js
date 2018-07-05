@@ -15,7 +15,7 @@ config.sentry = {
   // {
   //   rel: 'icon',
   //   type: 'image/x-icon',
-  //   href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png'
+  //   href: 'http://papn9j3ys.bkt.clouddn.com/favicon.png'
   // },
   {
     rel: 'stylesheet',

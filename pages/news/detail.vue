@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      bannerImg: 'http://pam8iyw9q.bkt.clouddn.com/profile_banner03.png',
+      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/profile_banner03.png',
       sharewx: require('@/assets/images/share-wx.png'),
       sharewb: require('@/assets/images/share-wb.png'),
       sharekj: require('@/assets/images/share-kj.png'),

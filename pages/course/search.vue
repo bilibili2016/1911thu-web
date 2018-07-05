@@ -48,7 +48,7 @@ export default {
       ressult: false,
       loadSearch: false,
       noMsg: {
-        img: 'http://pam8iyw9q.bkt.clouddn.com/noSearch.png'
+        img: 'http://papn9j3ys.bkt.clouddn.com/noSearch.png'
       },
       searchData: [],
       getData: [],
