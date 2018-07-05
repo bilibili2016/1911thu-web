@@ -65,7 +65,7 @@ const config = {
       }
     ],
     link: [
-      // { rel: 'icon', type: 'image/x-icon', href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png' }
+      // { rel: 'icon', type: 'image/x-icon', href: 'http://papn9j3ys.bkt.clouddn.com/favicon.png' }
       // 需要直接加载的 CSS
     ]
   },

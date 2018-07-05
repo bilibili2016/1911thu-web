@@ -1,7 +1,7 @@
 <template>
   <div class="degree" ref="ref">
     <!-- <div class="topImg">
-      <img src="http://pam8iyw9q.bkt.clouddn.com/degreeBg.png" alt="">
+      <img src="http://papn9j3ys.bkt.clouddn.com/degreeBg.png" alt="">
     </div>
     <div class="degreeInfo">
       <h3>项目介绍</h3>

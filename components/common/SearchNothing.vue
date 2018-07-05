@@ -1,6 +1,6 @@
 <template>
   <div class="nothing">
-    <img src="http://pam8iyw9q.bkt.clouddn.com/searchNothing.png" alt="">
+    <img src="http://papn9j3ys.bkt.clouddn.com/searchNothing.png" alt="">
     <p>未找到相关内容</p>
   </div>
 </template>

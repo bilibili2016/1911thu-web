@@ -100,21 +100,21 @@ export default {
       },
       dingData: [
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/pro3.817a75e.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
           title: '面授、线下活动',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
           link: '/other/faceteach'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/pro2.b8c7f5f.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
           title: '机构课程定制',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
           link: '/other/enterprisecustom'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/pro1.68e8047.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
           title: '学位项目',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
@@ -228,7 +228,7 @@ export default {
         this.getClassicCourseList(),
         this.getTeacherList(),
         this.getEvaluateList(),
-        this.getNewInfoList(),
+        this.getNewsInfoList(),
         this.getPartnerList()
       ])
     },
@@ -278,10 +278,10 @@ export default {
       })
     },
     // 学堂资讯
-    getNewInfoList() {
-      home.getNewInfoList(this.newsInfoForm).then(response => {
-        this.infoDesc = response.data.newsList
-        this.infoArticle = response.data.newsList
+    getNewsInfoList() {
+      home.getNewsInfoList(this.newsInfoForm).then(response => {
+        this.infoDesc = response.data.outerList
+        this.infoArticle = response.data.innerList
       })
     },
     // 获取合作伙伴

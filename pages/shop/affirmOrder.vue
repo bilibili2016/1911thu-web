@@ -434,7 +434,7 @@ export default {
       nickName: null,
       showInvoice: false,
       isShowTicket: false,
-      noMsg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
+      noMsg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       province: [],
       city: [],
       area: [],

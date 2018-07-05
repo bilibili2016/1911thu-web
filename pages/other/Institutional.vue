@@ -9,7 +9,7 @@
       </div>
     </div> -->
     <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
-      <img src="http://pam8iyw9q.bkt.clouddn.com//hrentry-pic5.png" alt="">
+      <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic5.png" alt="">
       <div class="top-text">
         <h1 class="top-h1">你好，培训方案规划者</h1>
         <p class="top-desc">如果您正在为帮助领导选课烦恼、或者正在为企业培训 、提醒进行规划， EXED为您精心准备了定制课程方案和高端课程。
@@ -25,7 +25,7 @@
         <div class="why-con clearfix">
           <div class="why-item">
             <div class="item-img">
-              <img src="http://pam8iyw9q.bkt.clouddn.com/hrentry-pic1.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic1.png" alt="">
             </div>
             <p class="item-desc1">深度体验顶级商学院文化</p>
             <span class="item-line"></span>
@@ -33,7 +33,7 @@
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://pam8iyw9q.bkt.clouddn.com/hrentry-pic2.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic2.png" alt="">
             </div>
             <p class="item-desc1">国内课程均在清华经管学院授课</p>
             <span class="item-line"></span>
@@ -42,7 +42,7 @@
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://pam8iyw9q.bkt.clouddn.com/hrentry-pic3.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic3.png" alt="">
             </div>
             <p class="item-desc1">领略大师风采，启迪心智</p>
             <span class="item-line"></span>
@@ -51,7 +51,7 @@
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://pam8iyw9q.bkt.clouddn.com/hrentry-pic4.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic4.png" alt="">
             </div>
             <p class="item-desc1">打造最有价值的清华校友人脉</p>
             <span class="item-line"></span>
@@ -84,7 +84,7 @@
         <div class="route">
           <h3>购买、学习流程</h3>
           <div class="process-list clearfix">
-            <p><img src="http://pam8iyw9q.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
+            <p><img src="http://papn9j3ys.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
             <h5>
               <span v-for="(one,index) in buyList" :key="index">
                 <i class="icon before el-icon-caret-right"></i>
@@ -95,7 +95,7 @@
           </div>
           <div class="process-list clearfix">
             <p>
-              <img src="http://pam8iyw9q.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
+              <img src="http://papn9j3ys.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
             </p>
             <h5>
               <span v-for="(one,index) in studyList" :key="index">
@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="bottomForm" id="buttom" ref="buttonForm">
-        <img class="buttom-bg" src="http://pam8iyw9q.bkt.clouddn.com/hrentry-bg.png" alt="">
+        <img class="buttom-bg" src="http://papn9j3ys.bkt.clouddn.com/hrentry-bg.png" alt="">
         <div class="word">
           <p class="word-desc1">如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
           <p class="word-desc2">
@@ -178,50 +178,50 @@ export default {
       recommend: true,
       courseList: [
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_1.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_1.png',
           title: '通识性课程体系（干部通用学院）',
           number: '（10余门课程）'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_2.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_2.png',
           title: '系统专题性课程（党政系统学院）',
           number: '（14个专题，110余门课程）',
           link: '/other/enterprisecustom'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_3.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_3.png',
           title: '在线商学院',
           number: '（12个模块，160余门课程）'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_4.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_4.png',
           title: '行业学院',
           number: '（14个模块，150余门课程）'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_5.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_5.png',
           title: '职场学院',
           number: '（6个模块，初期20余门课程）'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_6.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_6.png',
           title: '直播/热点课程（热点课程）',
           number: '（11个行业，110余门课程）'
         }
       ],
       project: [
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_7.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_7.png',
           title: '机构课程定制',
           link: '/other/enterprisecustom'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_8.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_8.png',
           title: '学位项目',
           link: '/other/degree'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/hrEntry_9.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_9.png',
           title: '面授及线下活动',
           link: '/other/faceteach'
         }
@@ -291,7 +291,7 @@ export default {
         }, 16.7)
       }
     },
-    handleLinki(item) {
+    handleLink(item) {
       window.open(window.location.origin + item.link)
     },
     goLink(item) {

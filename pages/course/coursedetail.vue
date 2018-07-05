@@ -45,7 +45,7 @@
         <!-- 关注我们 -->
         <!-- <div class="attention">
           <div class="code">
-            <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
+            <img src="http://papn9j3ys.bkt.clouddn.com/wechatLogin.png" alt="">
             <h5>扫描二维码，下载“1911学堂”APP</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
@@ -534,6 +534,9 @@ export default {
     display: inline !important;
     line-height: 40px;
   }
+}
+.shareIconss .icon-wechat .wechat-qrcode {
+  // top: -100px;
 }
 </style>
 
