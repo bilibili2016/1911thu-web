@@ -98,7 +98,7 @@ export default {
         sortBy: 1,
         pages: 1,
         limits: 8,
-        isFree: 0
+        isFree: 2
       },
       cidform: {
         cids: ''
@@ -135,9 +135,9 @@ export default {
     },
     hideCourse() {
       if (this.onOff) {
-        this.curriculumListForm.isFree = 1
+        this.curriculumListForm.isFree = 2
       } else {
-        this.curriculumListForm.isFree = 0
+        this.curriculumListForm.isFree = 1
       }
       this.curriculumList()
     },
@@ -239,7 +239,7 @@ export default {
     if (persistStore.get('showFree')) {
       this.showFree = true
       this.onOff = true
-      this.curriculumListForm.isFree = 1
+      this.curriculumListForm.isFree = 2
     }
     console.log(this.cid, '这是cid')
     this.childCategoryList()
