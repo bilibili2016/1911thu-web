@@ -228,7 +228,7 @@ export default {
         this.getClassicCourseList(),
         this.getTeacherList(),
         this.getEvaluateList(),
-        this.getNewInfoList(),
+        this.getNewsInfoList(),
         this.getPartnerList()
       ])
     },
@@ -274,10 +274,10 @@ export default {
       })
     },
     // 学堂资讯
-    getNewInfoList() {
-      home.getNewInfoList(this.newsInfoForm).then(response => {
-        this.infoDesc = response.data.newsList
-        this.infoArticle = response.data.newsList
+    getNewsInfoList() {
+      home.getNewsInfoList(this.newsInfoForm).then(response => {
+        this.infoDesc = response.data.outerList
+        this.infoArticle = response.data.innerList
       })
     },
     // 获取合作伙伴
