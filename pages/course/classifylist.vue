@@ -149,12 +149,14 @@ export default {
       this.setCid(this.cidform)
       this.pidform.pids = ''
       this.setPid(this.pidform)
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
     handleItemTwo(item, index) {
       this.bgmsgs = item.id
       this.pidform.pids = item.id
       this.setPid(this.pidform)
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
     getCidList() {
