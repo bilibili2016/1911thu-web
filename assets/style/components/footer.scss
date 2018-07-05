@@ -1,7 +1,6 @@
 .footerBox {
   width: 100%;
   height: 70px;
-  line-height: 70px;
   background-color: #050223;
   color: #fff;
   .main {
@@ -11,15 +10,15 @@
       height: 70px;
       i {
         display: inline-block;
-        margin-top: 20px;
         width: 128px;
-        height: 32px;
-        background: url('http://pam8iyw9q.bkt.clouddn.com/logof.png') no-repeat;
-        background-size: cover;
+        height: 52px;
+        background: url('http://pam8iyw9q.bkt.clouddn.com/logof.png') no-repeat center bottom;
+        background-size: contain;
       }
     }
     .companyInfo {
       margin-left: 43px;
+      line-height: 70px;
       span {
         cursor: pointer;
         transition: all 300ms;
@@ -30,6 +29,9 @@
           color: #999;
         }
       }
+    }
+    .copyright {
+      line-height: 70px;
     }
   }
 }

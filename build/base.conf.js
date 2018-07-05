@@ -42,15 +42,27 @@ const config = {
   head: {
     title: '1911学堂',
     meta: [
-      { charset: 'utf-8' },
-      { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
-      { name: 'renderer', content: 'webkit' },
+      {
+        charset: 'utf-8'
+      },
+      {
+        'http-equiv': 'X-UA-Compatible',
+        content: 'IE=edge'
+      },
+      {
+        name: 'renderer',
+        content: 'webkit'
+      },
       {
         name: 'viewport',
         content:
           'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
       },
-      { hid: 'description', name: 'description', content: '1911学堂' }
+      {
+        hid: 'description',
+        name: 'description',
+        content: '1911学堂'
+      }
     ],
     link: [
       // { rel: 'icon', type: 'image/x-icon', href: 'http://pam8iyw9q.bkt.clouddn.com/favicon.png' }
@@ -67,7 +79,12 @@ const config = {
   router: {
     base: baseRouter
   },
-  plugins: [{ src: '~/plugins/main', ssr: false }],
+  plugins: [
+    {
+      src: '~/plugins/main',
+      ssr: false
+    }
+  ],
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],

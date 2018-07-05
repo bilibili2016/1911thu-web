@@ -5,6 +5,7 @@
       <div class="center">
         <div class="text">
           <p>面授及线下活动</p>
+          <p class="text-line"></p>
           <p>1911学堂采用混合式教学模式</p>
           <p>为学习者提供线上+线下的教育培训资源</p>
         </div>
@@ -45,7 +46,7 @@
 export default {
   data() {
     return {
-      faceImg: 'http://pam8iyw9q.bkt.clouddn.com/fact_teach.png',
+      faceImg: 'http://pam8iyw9q.bkt.clouddn.com/faceteach-bg.png',
       cenImg: 'http://pam8iyw9q.bkt.clouddn.com/ccenter.png'
     }
   },

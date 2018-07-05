@@ -1,55 +1,47 @@
 <template>
   <div class="teachers">
-    <v-title :data="titleThree"></v-title>
+    <v-title :data="titleFore"></v-title>
     <!-- <div class="blueBar"></div> -->
     <div class="cardList" style="padding-top:30px;">
-      <!-- <div class="card" v-for="(teacher,index) in teachers" :key="index">
-        <div class="diaphaneity">
-          <div class="octImg"></div>
-          <div class="abstract">
-            <img src="@/assets/images/d1.png" alt="" class="imgSrc">
-            <h4 @click="goTeacherInfo(teacher,index)">{{teacher.teacher_name}}</h4>
-            <p>{{teacher.content}}</p>
-          </div>
-        </div>
-      </div> -->
       <div class="famouscenter">
-        <div class="fl box">
-          <div class="img-style">
-            <img src="@/assets/images/d1.png" alt="">
+        <div v-for="(teacher,index) in teachers" :key="index">
+          <div class="fl box" v-if="index===0" @click="goTeacherInfo(teacher,index)">
+            <div class="img-style">
+              <img :src="teacher.picture" alt="">
+            </div>
+            <div class="name name1" style="margin-top:40px;font-weight:blod;">
+
+            </div>
+            <div class="dec name2">
+              <p>{{teacher.teacher_name}}</p>
+              <p>{{teacher.content}}</p>
+            </div>
           </div>
-          <div class="name name1" style="margin-top:40px;font-weight:blod;">
+          <div class="fl box" style="margin-left:50px;" v-else-if="index===1" @click="goTeacherInfo(teacher,index)">
+
+            <div class="name name3" style="margin-top:10px;font-weight:blod;">
+
+            </div>
+            <div class="dec name4">
+              <p>{{teacher.teacher_name}}</p>
+              <p>{{teacher.content}}</p>
+
+            </div>
+            <div class="img-style" style="margin-top:132px;">
+              <img :src="teacher.picture" alt="">
+            </div>
 
           </div>
-          <div class="dec name2">
-            <p>胡鞍钢</p>
-            清华大学公共管理学院教授、清华大学国情研究院院长。
-          </div>
-        </div>
-        <div class="fl box" style="margin-left:50px;">
-
-          <div class="name name3" style="margin-top:10px;font-weight:blod;">
-
-          </div>
-          <div class="dec name4">
-            <p>陈春花</p>
-            北京大学国家发展研究院教授，企业文化与战略专家。
-
-          </div>
-          <div class="img-style" style="margin-top:132px;">
-            <img src="@/assets/images/d2.png" alt="">
-          </div>
-
-        </div>
-        <div class="fl box" style="margin-left:50px;">
-          <div class="img-style">
-            <img src="@/assets/images/d3.png" alt="">
-          </div>
-          <div class="name name1" style="margin-top:40px;font-weight:blod;">
-          </div>
-          <div class="dec name2">
-            <p>钱颖一</p>
-            华大学经济管理学院院长、国务院参事室参事。
+          <div class="fl box" style="margin-left:50px;" v-else @click="goTeacherInfo(teacher,index)">
+            <div class="img-style">
+              <img :src="teacher.picture" alt="">
+            </div>
+            <div class="name name1" style="margin-top:40px;font-weight:blod;">
+            </div>
+            <div class="dec name2">
+              <p>{{teacher.teacher_name}}</p>
+              <p>{{teacher.content}}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -61,7 +53,7 @@
 import CustomTitle from '@/components/common/Title.vue'
 import { mapActions } from 'vuex'
 export default {
-  props: ['teachers', 'titleThree'],
+  props: ['teachers', 'titleFore'],
   data() {
     return {
       tidForm: {
@@ -82,7 +74,8 @@ export default {
       this.setTid(this.tidForm)
       this.goLink('/home/components/teacher')
     }
-  }
+  },
+  mounted() {}
 }
 </script>
 <style lang="scss" scoped>
@@ -119,6 +112,7 @@ export default {
         }
       }
       .dec {
+        width: 320px;
         font-size: 14px;
         font-family: MicrosoftYaHei;
         color: rgba(34, 34, 34, 1);
@@ -130,6 +124,11 @@ export default {
         // position: absolute;
         // top: 0px;
         cursor: pointer;
+        p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       &:hover .dec {
         // top: 50px;

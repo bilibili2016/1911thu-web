@@ -122,12 +122,14 @@ export default {
       this.setCid(this.cidform)
       this.pidform.pids = ''
       this.setPid(this.pidform)
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
     handleItemTwo(item, index) {
       this.bgmsgs = item.id
       this.pidform.pids = item.id
       this.setPid(this.pidform)
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
     getCidList() {
@@ -161,16 +163,16 @@ export default {
             case '1':
               this.data2 = this.data[0]
               break
-            case '16':
+            case '17':
               this.data2 = this.data[1]
               break
-            case '17':
+            case '19':
               this.data2 = this.data[2]
               break
-            case '18':
+            case '16':
               this.data2 = this.data[3]
               break
-            case '19':
+            case '18':
               this.data2 = this.data[4]
               break
             case '20':

@@ -1,105 +1,431 @@
 .homeUs {
-  width: 1100px;
-  margin: 0 auto;
-  min-height: 665px;
-  .about-title {
-    .about-h1 {
-      margin-top: 70px;
-      text-align: center;
-    }
-    .about-p {
-      text-align: center;
-      margin-top: 20px;
-    }
+  position: relative;
+  background-color: #fff;
+  .left {
+    width: 25%;
+    height: 100%;
+    background-color: #eee;
+    position: absolute;
+    left: 0;
+    top: 0;
+    // bottom: 0;
+    margin-top: 260px;
   }
-  .about-con {
-    margin-top: 63px;
-    .con-img {
-      float: left;
-      width: 480px;
-      height: 330px;
-      img {
-        width: 100%;
-      }
-    }
-    .con-text {
-      float: left;
-      width: 550px;
-      margin-left: 60px;
-      font-size: 16px;
-      color: #222;
-      .con-top {
-        margin-top: 20px;
-        text-indent: 2rem;
-        line-height: 30px;
-      }
-      .con-line {
-        display: inline-block;
-        width: 100%;
-        height: 1px;
-        background-color: #e8d6f7;
-        margin: 30px 0 40px 0;
-      }
-      .con-weight {
-        font-weight: 500;
-      }
-      .con-bottom {
-        line-height: 30px;
-      }
-    }
-  }
-  .about-line {
-    display: inline-block;
+  .topImg {
     width: 100%;
-    height: 1px;
-    background-color: #e8d6f7;
-    margin: 70px 0;
-  }
-  .about-contact {
-    width: 905px;
+    height: 260px;
+    background: url('~assets/images/homeUs-pic1.png') no-repeat;
+    background-size: 100% 100%;
     text-align: center;
-    margin-bottom: 70px;
+    line-height: 260px;
+    .top-content {
+      color: #fff;
+      .top-con {
+        font-size: 58px;
+      }
+      .top-desc {
+        font-size: 30px;
+      }
+    }
+  }
+  .content {
+    width: 1100px;
+    height: 100%;
     margin: 0 auto;
-    .contact-phone {
-      width: 41px;
-      height: 74px;
-      margin-left: 130px;
+    // margin-top: 45px;
+    // padding-bottom: 70px;
+    // margin: 45px 0 0 70px;
+    position: relative;
+
+    .el-tabs--left.el-tabs--card .el-tabs__item.is-left {
+      border: none;
+      // border-bottom: 1px solid #e1e4ea;
+      border-left: 2px solid #fff;
     }
-    .contact-email {
-      align: center;
-      width: 72px;
-      height: 58px;
-      margin-left: 115px;
+    .el-tabs--card > .el-tabs__header {
+      border-bottom: none;
     }
-    .contact-pos {
-      width: 90px;
-      height: 76px;
-      margin-left: 105px;
+    .el-tabs__header {
+      height: 780px;
+      padding-top: 45px;
+      box-shadow: 8px 8px 20px #f5f5f5;
     }
-    .contact-imgs {
-      float: left;
-      width: 300px;
-      height: 250px;
-      text-align: center;
-      position: relative;
-      margin-top: 57px;
+    // .el-tabs__header
+
+    .el-card {
+      border: none;
     }
-    .contact-text {
-      font-size: 16px;
-      color: #222;
-      margin: 42px 0 15px 0;
+    .el-tabs__item {
+      height: 62px;
+      line-height: 62px;
+      text-align: left;
+      border: none;
+      border-bottom: 1px solid #e1e4ea;
+      border-left: 2px solid #eee;
     }
-    .contact-con {
-      font-size: 14px;
-      color: #666;
+    .el-tabs__nav {
+      border: none;
     }
-    .contact-line {
-      float: left;
-      height: 120px;
-      width: 1px;
-      background-color: #ddd;
-      line-height: 250px;
-      margin-top: 65px;
+    .item-icon {
+      display: inline-block;
+      position: absolute;
+      top: 24px;
+      right: 23px;
+    }
+    // &:hover {
+    //   background-color: #fff;
+    //   color: #6417a6;
+    //   border-left-color: #6417a6;
+    // }
+
+    .icon-intro {
+      width: 14px;
+      height: 12px;
+      background: url('~assets/images/homeUs-intro.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    .icon-teacher {
+      width: 14px;
+      height: 16px;
+      background: url('~assets/images/homeUs-teacher.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    .icon-people {
+      width: 17px;
+      height: 15px;
+      background: url('~assets/images/homeUs-people.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    .icon-help {
+      width: 15px;
+      height: 15px;
+      background: url('~assets/images/homeUs-help.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    .icon-contact {
+      width: 14px;
+      height: 12px;
+      background: url('~assets/images/homeUs-contact.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    .el-tabs--left.el-tabs--card .el-tabs__item.is-left.is-active,
+    .el-tabs--left.el-tabs--card .el-tabs__item.is-left:hover {
+      border-left: 2px solid #6417a6;
+      background-color: #fafafa;
+      color: #6417a6;
+
+      .icon-intro {
+        background: url('~assets/images/homeUs-intro-icon.png') no-repeat;
+      }
+      .icon-teacher {
+        background: url('~assets/images/homeUs-teacher-icon.png') no-repeat;
+      }
+      .icon-people {
+        background: url('~assets/images/homeUs-people-icon.png') no-repeat;
+      }
+      .icon-help {
+        background: url('~assets/images/homeUs-help-icon.png') no-repeat;
+      }
+      .icon-contact {
+        background: url('~assets/images/homeUs-contact-icon.png') no-repeat;
+      }
+    }
+    .el-card {
+      margin-left: 20px;
+    }
+    .el-card.is-always-shadow {
+      box-shadow: none;
+    }
+    h1 {
+      // width: 830px;
+      font-size: 30px;
+      padding: 30px 0;
+      border-bottom: 1px solid #e1e4ea;
+    }
+
+    .con-nav {
+      margin-top: 50px;
+      .nav-item {
+        width: 195px;
+        height: 62px;
+        line-height: 62px;
+        font-size: 16px;
+        color: #333;
+        position: relative;
+        border-bottom: 1px solid #e1e4ea;
+        border-left: 2px solid #eee;
+        .item-desc {
+          display: inline-block;
+          margin-left: 17px;
+        }
+      }
+    }
+
+    // 集团介绍
+    .company-intro {
+      .company-info {
+        width: 490px;
+        float: left;
+        .info {
+          font-size: 14px;
+          color: #333;
+          line-height: 30px;
+          text-indent: 2rem;
+          margin: 40px 0;
+        }
+        .info-detail {
+          font-size: 16px;
+          color: #222;
+          line-height: 30px;
+          span {
+            color: #000;
+          }
+        }
+      }
+      .company-img {
+        width: 350px;
+        float: left;
+        position: relative;
+        .img-line {
+          width: 120px;
+          height: 120px;
+          border: 4px solid #643dbf;
+          position: absolute;
+          top: 71px;
+          right: 2px;
+        }
+        .img-bg {
+          position: absolute;
+          top: 93px;
+          left: 70px;
+        }
+      }
+    }
+    // 讲师招聘
+    .teacher {
+      width: 830px;
+      .teacher-info {
+        .title {
+          padding: 40px 0 20px 0;
+          font-size: 20px;
+          color: #333;
+        }
+        .title-small {
+          font-size: 18px;
+          padding: 20px 0;
+        }
+        .title-desc {
+          font-size: 14px;
+          color: #666;
+          line-height: 32px;
+        }
+        .join {
+          width: 140px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          color: #fff;
+          background-color: #6417a6;
+          border-radius: 3px;
+          margin-top: 50px;
+          font-size: 14px;
+        }
+      }
+    }
+    // 人才招聘
+    .people {
+      .people-con {
+        color: #333;
+        .btn {
+          margin-bottom: 40px;
+          span {
+            display: inline-block;
+            width: 130px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #6417a6;
+            background-color: #fff;
+            border: 1px solid #6417a6;
+            margin-right: 10px;
+            cursor: pointer;
+          }
+        }
+        .desc-one {
+          font-size: 20px;
+          padding: 40px 0 27px 0;
+        }
+        .desc-two {
+          font-size: 18px;
+          margin-bottom: 30px;
+        }
+        .desc-three {
+          font-size: 16px;
+          margin-top: 20px;
+          margin-bottom: 22px;
+          color: #333;
+        }
+        .desc-four {
+          font-size: 16px;
+          margin: 22px 0 27px 0;
+        }
+        .desc-five {
+          font-size: 14px;
+          color: #666;
+          line-height: 32px;
+        }
+      }
+
+      .el-tabs--border-card {
+        border: none;
+        box-shadow: none;
+      }
+      .el-tabs--border-card > .el-tabs__header {
+        background-color: #fff;
+        border: none;
+      }
+      .el-tabs__item {
+        width: 130px;
+        height: 40px;
+        line-height: 40px;
+        border: none;
+        border: 1px solid #6417a6;
+        margin-right: 10px;
+        font-size: 14px;
+        color: #6417a6;
+        padding: 0;
+        text-align: center;
+      }
+
+      .el-tabs--border-card > .el-tabs__header .el-tabs__item {
+        margin: 0;
+        margin-right: 10px;
+      }
+      .el-tabs__header {
+        height: 100%;
+        padding-top: 0;
+        box-shadow: none;
+      }
+
+      // .el-tabs--border-card
+      //   > .el-tabs__header
+      //   .el-tabs__item:not(.is-disabled):hover {
+      //   color: #6417a6;
+      // }
+      .is-active {
+        background-color: #6417a6;
+        color: #fff;
+      }
+    }
+    // 帮助中心
+    .help {
+      .help-con {
+        margin-top: 40px;
+        .title {
+          font-size: 18px;
+          color: #6417a6;
+          margin-bottom: 10px;
+        }
+        div {
+          font-size: 16px;
+          color: #666;
+          p {
+            line-height: 32px;
+          }
+        }
+        .help-desc {
+          font-size: 14px;
+        }
+        .learn-more {
+          font-size: 12px;
+          cursor: pointer;
+          margin-top: 10px;
+          &:hover {
+            color: #6417a6;
+          }
+        }
+        .help-left {
+          float: left;
+          width: 380px;
+        }
+
+        .help-right {
+          float: left;
+          width: 380px;
+        }
+      }
+    }
+    // 联系我们
+    .contact {
+      .contact-con {
+        .con-img {
+          margin-top: 30px;
+          // width: 830px;
+          width: 100%;
+          height: 340px;
+          img {
+            width: 100%;
+          }
+        }
+        .con-line {
+          margin-top: 58px;
+          span {
+            display: inline-block;
+          }
+          .line {
+            width: 400px;
+            height: 1px;
+            background-color: #e1e4ea;
+          }
+          .circle {
+            width: 3px;
+            height: 3px;
+            background-color: #e1e4ea;
+            margin: 0 22px;
+          }
+        }
+        .bottom {
+          .bottom-item {
+            float: left;
+            width: 270px;
+            height: 200px;
+            // border: 1px solid;
+            text-align: center;
+            display: table;
+            .item {
+              display: table-cell;
+              vertical-align: middle;
+              text-align: center;
+            }
+            img {
+              width: 37px;
+              height: 37px;
+              margin-bottom: 30px;
+            }
+            p {
+              font-size: 16px;
+              color: #666;
+              line-height: 32px;
+            }
+            .item-title {
+              color: #222;
+            }
+            .item1 {
+              img {
+                width: 36px;
+                height: 27px;
+              }
+            }
+            .item2 {
+              img {
+                width: 32px;
+                height: 40px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

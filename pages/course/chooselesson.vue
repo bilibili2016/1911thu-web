@@ -134,13 +134,12 @@ export default {
       this.curriculumListForm.limits = 8
       return new Promise((resolve, reject) => {
         home.curriculumList(this.curriculumListForm).then(response => {
-          // console.log(response.data.curriculumList, '单页的数据')
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
           for (let item of response.data.curriculumList) {
             this.allCheckedId.push(item.id)
           }
-          // console.log(this.allCheckedId, 'this.allCheckedId')
+
           resolve(true)
           this.loadCourse = false
         })
@@ -149,7 +148,7 @@ export default {
     allChecked() {
       this.idsForm.cartid = this.allCheckedId
       this.changeData = this.allCheckedId
-      // console.log(this.idsForm, 'this.idsForm')
+
       return new Promise((resolve, reject) => {
         home.addShopCart(this.idsForm).then(response => {
           if (response.status === 0) {
@@ -171,36 +170,13 @@ export default {
         })
       })
     },
-    handleItemOne(item, index) {
-      this.bgmsg = index
-    },
-    handleItemTwo(item, index) {
-      this.bgmsgs = index
-    },
-    handleItemTwo(item, index) {
-      this.allCheckedId = []
-      this.bgmsgs = item.id
-      this.pidform.pids = item.id
-      this.setPid(this.pidform)
-      this.allCheckedArray = []
-      this.curriculumList()
-    },
-    getCidList() {
-      this.allCheckedId = []
-      this.cidform.cids = ''
-      this.bgmsg = 0
-      this.setCid(this.cidform)
-
-      this.curriculumList()
-    },
-    getPidList() {
-      this.allCheckedId = []
-      this.pidform.pids = ''
-      this.bgmsgs = 0
-      this.setPid(this.pidform)
-      this.getPidList = []
-      this.curriculumList()
-    },
+    // handleItemOne(item, index) {
+    //   this.bgmsg = index
+    //   console.log(this.bgmsg)
+    // },
+    // handleItemTwo(item, index) {
+    //   console.log(this.bgmsgs)
+    // },
     handleItemOne(item, index) {
       this.allCheckedId = []
       this.bgmsgs = 0
@@ -211,8 +187,36 @@ export default {
       this.pidform.pids = ''
       this.setPid(this.pidform)
       this.allCheckedArray = []
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
+    handleItemTwo(item, index) {
+      this.bgmsgs = index
+      this.allCheckedId = []
+      this.bgmsgs = item.id
+      this.pidform.pids = item.id
+      this.setPid(this.pidform)
+      this.allCheckedArray = []
+      this.curriculumListForm.pages = 1
+      this.curriculumList()
+    },
+    getCidList() {
+      this.allCheckedId = []
+      this.cidform.cids = ''
+      this.bgmsg = 0
+      this.setCid(this.cidform)
+      this.curriculumListForm.pages = 1
+      this.curriculumList()
+    },
+    getPidList() {
+      this.allCheckedId = []
+      this.pidform.pids = ''
+      this.bgmsgs = 0
+      this.setPid(this.pidform)
+      this.getPidList = []
+      this.curriculumList()
+    },
+
     handleClick(tab, event) {},
     curriculumList() {
       this.loadCourse = true
@@ -222,10 +226,7 @@ export default {
         home.curriculumList(this.curriculumListForm).then(response => {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
-          // console.log(
-          //   response.data.curriculumList,
-          //   '这是response.data.curriculumList'
-          // )
+
           for (let item of response.data.curriculumList) {
             this.$set(item, 'checkmsg', false)
           }
@@ -235,7 +236,6 @@ export default {
           for (let item of response.data.curriculumList) {
             this.allCheckedId.push(item.id)
           }
-          // console.log(this.allCheckedId, 'that.allCheckedId')
         })
       })
     },
@@ -249,23 +249,23 @@ export default {
             case '1':
               this.data2 = this.data[0]
               break
-            case '16':
+            case '17':
               this.data2 = this.data[1]
               break
-            case '17':
+            case '19':
               this.data2 = this.data[2]
               break
-            case '18':
+            case '16':
               this.data2 = this.data[3]
               break
-            case '19':
+            case '18':
               this.data2 = this.data[4]
               break
             case '20':
               this.data2 = this.data[5]
               break
             default:
-              // this.data2 = this.data[0]
+              // this.$router.push("/course/search");
               break
           }
           resolve(true)

@@ -73,7 +73,7 @@ export default {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     // this.payIndex = persistStore.get('pay')
-    // console.log(this.payIndex)
+
     this.orderForm.ids = persistStore.get('order')
     this.curriculumPayApply()
   }

@@ -13,6 +13,11 @@ config.analyze = {
   {
     rel: 'stylesheet',
     href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
+  },
+  {
+    rel: 'stylesheet',
+    href:
+      'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css'
   }
 ]),
   (config.head.script = [
@@ -28,9 +33,16 @@ config.analyze = {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
     },
-    { src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js', async: true }
+    {
+      src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
+      async: true
+    },
+    {
+      src:
+        'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
+      async: true
+    }
   ]),
   (config.render = { resourceHints: false })
 
 module.exports = config
-
