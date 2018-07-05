@@ -27,6 +27,8 @@ export default {
   },
   data() {
     return {
+      timer: null,
+      exeCount: 0,
       fragmentConfig: 123,
       default: {
         width: 1200,
@@ -34,7 +36,20 @@ export default {
         column: 12,
         height: 553,
         animeTime: 5000,
-        img: require('@/assets/images/home_b.png')
+        img: require('@/assets/images/123.png')
+      },
+      imgList: [
+        require('@/assets/images/123.png'),
+        require('@/assets/images/banne4.png')
+      ],
+      fragmentConfig: {
+        container: '.img-flex', //显示容器
+        line: 5, //多少行
+        column: 10, //多少列
+        width: document.body.clientWidth, //显示容器的宽度
+        height: 553,
+        animeTime: 5000, //最长动画时间,图片的取值将在 animeTime*0.33 + animeTime*0.66之前取值
+        img: require('@/assets/images/123.png') //图片路径
       }
     }
   },
@@ -63,10 +78,10 @@ export default {
         containerUl.append('<li></li>')
       }
       var containerItem = containerUl.find('li')
-
+      Img = null
       //加载图片
       var Img = new Image()
-      Img.src = require('@/assets/images/home_b.png')
+      Img.src = changeConfig.img
 
       //图片加载完成时
       Img.onload = () => {
@@ -121,23 +136,19 @@ export default {
   },
   mounted() {
     $(() => {
-      var fragmentConfig = {
-        container: '.img-flex', //显示容器
-        line: 5, //多少行
-        column: 10, //多少列
-        width: document.body.clientWidth, //显示容器的宽度
-        height: 553,
-        animeTime: 5000, //最长动画时间,图片的取值将在 animeTime*0.33 + animeTime*0.66之前取值
-        img: require('@/assets/images/home_b.png') //图片路径
-      }
-
-      this.fragmentImg(fragmentConfig)
-      setInterval(() => {
+      this.fragmentImg(this.fragmentConfig)
+      this.timer = setInterval(() => {
+        ++this.exeCount
+        const imgListLength = this.imgList.length
+        let index = this.exeCount % imgListLength
+        this.fragmentConfig.img = this.imgList[index]
+        this.default.img = this.imgList[index]
         $('.img-flex').html('')
-        this.fragmentImg(fragmentConfig)
+        this.fragmentImg(this.fragmentConfig)
       }, 7000)
     })
-  }
+  },
+  watch: {}
 }
 </script>
 <style scoped lang="scss">
