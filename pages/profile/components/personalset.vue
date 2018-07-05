@@ -220,6 +220,16 @@ export default {
       })
     },
     onSubmit() {
+      if (this.psnForm.province !== '') {
+        if (this.psnForm.city == '' || this.psnForm.area == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请选择地址信息！'
+          })
+          return false
+        }
+      }
       home.perInformation(this.psnForm).then(res => {
         let flag = res.status != 0 ? false : true
         this.$emit('update', flag)
