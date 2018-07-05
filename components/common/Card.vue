@@ -594,6 +594,7 @@ export default {
       this.$bus.$emit('loginShow', true)
     },
     goPlay(item) {
+      persistStore.set('curriculumId', item.defaultCurriculumCatalog.id)
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
       window.open(window.location.origin + '/course/player')
     },
