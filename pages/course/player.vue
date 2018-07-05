@@ -417,7 +417,6 @@ export default {
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
-        console.log('bofang ')
         that.interval = setInterval(() => {
           if (that.seconds <= 0) {
             that.seconds = 1
@@ -437,7 +436,6 @@ export default {
               playTime
             )
           }
-
           // this.ischeck = item.id
         }, 1000)
 
