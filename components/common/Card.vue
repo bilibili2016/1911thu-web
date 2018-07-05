@@ -338,11 +338,13 @@
                   <p>{{courseList.introduction}}</p>
                   <div class="common-button">
                     <div v-if="isAuthenticated">
-                      <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
-                      <!-- <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button> -->
+                      <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习6</el-button> -->
+                      <!-- 免费课程=登录之后的开始学习 -->
+                      <el-button type="primary" :disabled="isClick" plain @click="goLink(linkdata)" v-if="courseList.is_free === '2'">开始学习</el-button>
                     </div>
                     <div v-else>
-                      <!-- <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button> -->
+                      <!-- 免费课程=未登录之后的立即学习 -->
+                      <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">立即学习</el-button>
                     </div>
                   </div>
                 </div>
