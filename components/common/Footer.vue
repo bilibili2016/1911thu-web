@@ -31,7 +31,8 @@ export default {
     goLink(num) {
       this.indexData.indexs = num
       this.setIndex(this.indexData)
-      this.$router.push('/other/homeUs')
+      // this.$router.push('/other/homeUs')
+      window.open(window.location.origin + '/other/homeUs')
     }
   }
 }
