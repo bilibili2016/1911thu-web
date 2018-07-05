@@ -34,7 +34,7 @@ export default {
         column: 12,
         height: 553,
         animeTime: 5000,
-        img: require('@/assets/images/123.png')
+        img: require('@/assets/images/home_b.png')
       }
     }
   },
@@ -66,7 +66,7 @@ export default {
 
       //加载图片
       var Img = new Image()
-      Img.src = require('@/assets/images/123.png')
+      Img.src = require('@/assets/images/home_b.png')
 
       //图片加载完成时
       Img.onload = () => {
@@ -128,7 +128,7 @@ export default {
         width: document.body.clientWidth, //显示容器的宽度
         height: 553,
         animeTime: 5000, //最长动画时间,图片的取值将在 animeTime*0.33 + animeTime*0.66之前取值
-        img: require('@/assets/images/123.png') //图片路径
+        img: require('@/assets/images/home_b.png') //图片路径
       }
 
       this.fragmentImg(fragmentConfig)
