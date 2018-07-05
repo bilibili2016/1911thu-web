@@ -94,11 +94,9 @@
 
             <input type="password" class="hideInput">
             <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autocomplete="off">
-              <el-form-item label="原密码：" prop="oldPass">
-                <!-- <input type="password" name="noauto" style="background-color:red"> -->
-                <!-- <input type="password" name="autoPsw"> -->
-                <!-- <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input> -->
-                <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" onfocus="this.type='password'" id="onlyOne" disableautocomplete></el-input>
+              <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
+                <!-- <el-input type="text" name="noauto" v-model="changePwd.oldPass" auto-complete="off" onfocus="this.type='password'" id="onlyOne" disableautocomplete></el-input> -->
+                <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne"></el-input>
               </el-form-item>
               <el-form-item label="新密码：" prop="newPass">
                 <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
@@ -306,9 +304,22 @@ export default {
           return { label: item.position_name, value: item.id }
         })
       })
+    },
+    insertEle() {
+      var oTest = document.getElementById('onlyOne').parentNode
+      console.log(oTest)
+      var newNode = document.createElement('input')
+      var reforeNode = document.getElementById('onlyOne')
+      // newNode.setAttribute({ type: 'password', name: 'noauto' })
+      newNode.setAttribute('type', 'text')
+      newNode.setAttribute('name', 'noauto')
+      newNode.setAttribute('style', 'display:none')
+      // newNode.innerHTML = ' This is a newcon '
+      oTest.insertBefore(newNode, reforeNode.nextSibling) //新建的元素节点插入id为P1节点元素的后面。
     }
   },
   mounted() {
+    this.insertEle()
     if (this.isAuthenticated) {
       this.getUserInfo()
       this.getPositionList()
