@@ -318,7 +318,7 @@ export default {
         home.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
-          this.changeRate('1')
+          this.changeRate('5')
           this.btnDatas = response.data.evaluateTags
           // this.tagGroup = response.data.evaluateTags
         })
