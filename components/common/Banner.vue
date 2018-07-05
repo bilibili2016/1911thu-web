@@ -133,7 +133,7 @@ export default {
         if (this.userInfo.head_img && this.userInfo.head_img != '') {
           this.avator = this.userInfo.head_img
         } else {
-          this.avator = 'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
+          this.avator = 'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
         }
       })
     }

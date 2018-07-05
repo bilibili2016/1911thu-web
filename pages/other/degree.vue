@@ -1,7 +1,7 @@
 <template>
-  <div class="degree">
+  <div class="degree" ref="ref">
     <!-- <div class="topImg">
-      <img src="http://pam8iyw9q.bkt.clouddn.com/degreeBg.png" alt="">
+      <img src="http://papn9j3ys.bkt.clouddn.com/degreeBg.png" alt="">
     </div>
     <div class="degreeInfo">
       <h3>项目介绍</h3>
@@ -70,6 +70,17 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    let headerHeight = document.getElementsByClassName('headerBox')[0]
+      .offsetHeight
+    let footerHeight = document.getElementsByClassName('footerBox')[0]
+      .offsetHeight
+    let windowHeight = document.body.clientHeight
+    console.log(windowHeight)
+    this.$refs.ref.style.height =
+      windowHeight - headerHeight - footerHeight + 'px'
+  }
+}
 </script>
 

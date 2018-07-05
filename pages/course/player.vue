@@ -116,9 +116,9 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapState('auth', ['kid', 'tid'])
+    ...mapState('auth', ['kid', 'tid']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
-
   data() {
     return {
       videoState: false,
@@ -213,7 +213,8 @@ export default {
         evaluatecontent: null,
         scores: null,
         types: 1,
-        curriculumcatalogid: ''
+        curriculumcatalogid: '',
+        tag: []
       },
       addCollectionForm: {
         curriculumId: null
@@ -247,7 +248,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg', 'setTid']),
+    ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
     isHasClass() {
       let myVideo = document.getElementById('movd')
       if (myVideo.getAttribute('class')) {
@@ -262,6 +263,11 @@ export default {
         }
       }
     },
+    signOuts() {
+      this.signOut()
+      persistStore.clearAll()
+      this.$router.push('/')
+    },
     changeRate(val) {
       this.reTagBtn = []
       this.tagGroup[val].map((item, i) => {
@@ -272,6 +278,16 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
+    },
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
+      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     handleCourse(item, index) {
       this.ischeck = item.id
@@ -488,6 +504,14 @@ export default {
         home.getPlayerInfos(this.playerForm).then(response => {
           if (response.status === '100100') {
             this.goShoppingCart(response.msg)
+          } else if (response.status === '100006') {
+            this.$alert('您已退出登录，请重新登录', '温馨提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.signOuts()
+                this.$bus.$emit('loginShow', true)
+              }
+            })
           } else {
             if (response.data.playAuthInfo.videoViewType == false) {
               player.loadVideoByID({
@@ -517,7 +541,7 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          console.log(response.data.curriculumDetail, '9999')
+          // console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.isStudy = response.data.curriculumDetail.is_study
@@ -650,7 +674,7 @@ export default {
   },
   watch: {
     videoState(flag) {
-      console.log(flag)
+      // console.log(flag)
       if (flag) {
         this.playing = this.playImg
       } else {

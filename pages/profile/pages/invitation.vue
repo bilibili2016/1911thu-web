@@ -69,7 +69,7 @@ export default {
     return {
       noCodes: true,
       number: '0',
-      noMsgImg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png'
+      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png'
     }
   },
   methods: {

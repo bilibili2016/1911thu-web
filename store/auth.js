@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-07-05 14:24:59
+ * @Last Modified time: 2018-07-05 15:41:45
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -385,7 +385,7 @@ export const actions = {
     return gid
   },
   async setTid({ commit, state }, { tids }) {
-    console.log(tids)
+    // console.log(tids)
     try {
       let tid = tids
       persistStore.set('tid', tid)

@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      atopImg: 'http://pam8iyw9q.bkt.clouddn.com/banner2.png',
+      atopImg: 'http://papn9j3ys.bkt.clouddn.com/banner2.png',
       config: {
         card_type: 'goodlesson'
       },

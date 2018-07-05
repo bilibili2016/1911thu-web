@@ -68,34 +68,35 @@
               发票信息
               <span>开机构抬头发票须填写纳税人识别号，以免影响报销</span>
             </h4>
-            <p class="invoice">
+            <div class="invoice">
+              <span class="changeInvoice" @click="showIoc">修改</span>
               <!-- <span v-show="isShowTicket" style="display:inline-block;padding-right:20px;">
                 <strong style="display:inline-block;padding-right:8px;">发票类型:</strong>个人</span> -->
-              <!-- 显示发票抬头 -->
-              <span v-show="isShowTicket">
-                <strong class="choose" v-show="invoiceForm.choose=='1'">普通发票</strong>
-                <strong class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</strong>
-                <strong>发票抬头:</strong>
-                <span v-if="invoiceForm.ticket === true">个人</span>
-                <span v-if="invoiceForm.ticket === false">{{invoiceForm.companyname}}</span>
-                <span v-if="invoiceForm.ticket === false">{{invoiceForm.number}}</span>
-              </span>
-              <!-- 显示发票抬头 -->
-              <span class="invoiceWord" v-show="isShowTicket">
-                <strong>发票内容:</strong>
-                <span v-if="invoiceForm.radio == 1">商品类别</span>
-                <span v-if="invoiceForm.radio == 2">{{invoiceForm.others}}</span>
-              </span>
-              <span v-show="isShowTicket">
-                <strong>收货地址:</strong>{{invoiceForm.address}}
-              </span>
+              <p>
+                <span v-show="isShowTicket">
+                  <strong class="choose" v-show="invoiceForm.choose=='1'">普通发票</strong>
+                  <strong class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</strong>
+                  <strong>发票抬头:</strong>
+                  <span v-if="invoiceForm.ticket === true">个人</span>
+                  <span v-if="invoiceForm.ticket === false">{{invoiceForm.companyname}}</span>
+                  <span v-if="invoiceForm.ticket === false">{{invoiceForm.number}}</span>
+                </span>
+                <!-- 显示发票抬头 -->
+                <span class="invoiceWord" v-show="isShowTicket">
+                  <strong>发票内容:</strong>
+                  <span v-if="invoiceForm.radio == 1">商品类别</span>
+                  <span v-if="invoiceForm.radio == 2">{{invoiceForm.others}}</span>
+                </span>
+                <span v-show="isShowTicket">
+                  <strong>收货地址:</strong>{{invoiceForm.address}}
+                </span>
 
-              <span class="invoiceWord" v-show="!isShowTicket">
-                <span>不开发票</span>
-              </span>
-              <span class="changeInvoice" @click="showIoc">修改</span>
-
-            </p>
+                <span class="invoiceWord" v-show="!isShowTicket">
+                  <span>不开发票</span>
+                </span>
+              </p>
+              <!-- 显示发票抬头 -->
+            </div>
 
           </div>
           <div class="orderInfo">
@@ -116,7 +117,7 @@
 
     </div>
     <!-- 发票信息 -->
-    <div class="invoiceShadow" @click.self="close" v-show="showInvoice">
+    <div class="invoiceShadow" v-show="showInvoice">
       <div class="invoiceInfo">
         <h3 class="clearfix">发票信息
           <i class="el-icon-close fr" @click="close"></i>
@@ -433,7 +434,7 @@ export default {
       nickName: null,
       showInvoice: false,
       isShowTicket: false,
-      noMsg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
+      noMsg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       province: [],
       city: [],
       area: [],

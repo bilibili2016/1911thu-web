@@ -57,8 +57,9 @@
               <!-- 作者和头衔    金额 -->
               <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
-                  <p class="price freePrise" v-if="config.card === 'home'&&config.free != 'true'">￥{{card.present_price}}</p>
-                  <p class="freePrise" v-if="config.free === 'true'">免费</p>
+                  <!-- <p class="price freePrise" v-if="config.card === 'home'&&config.free != 'true'">￥{{card.present_price}}</p> -->
+                  <p class="price freePrise" v-if="config.card === 'home'&&card.is_free == '1'">￥{{card.present_price}}</p>
+                  <p class="freePrise" v-if="card.is_free === '2'">免费</p>
                 </div>
               </div>
               <!-- 学习进度 -->
@@ -248,7 +249,8 @@
             </div>
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
-              <span class="coin">￥ {{course.present_price}}</span>
+              <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span>
+              <span class="coin mfree" v-if="course.is_free == '2'">免费</span>
               <!-- <div class="fr common-button-half"> -->
               <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
               <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
@@ -285,15 +287,15 @@
                   <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button> -->
                   <!-- <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看2</el-button> -->
                   <div class="playBtn-detail" v-if="privileMsg === true">
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
+                    <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
                   </div>
                   <div class="playBtn-detail" v-if="privileMsg === false">
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
+                    <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
                   </div>
                 </div>
                 <div v-else class="playBtn-detail">
                   <!-- <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看3</el-button> -->
-                  <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
+                  <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
                 </div>
               </div>
             </div>
@@ -488,7 +490,7 @@ export default {
       numSrc: require('@/assets/images/home_num.png'),
       one: 1,
       readyImg: require('@/assets/images/ready.png'),
-      playbtn: 'http://pam8iyw9q.bkt.clouddn.com/play.png',
+      playbtn: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
       // jinImg: require('@/assets/images/jin.png'),
       isShow: false,
@@ -1536,6 +1538,9 @@ export default {
           color: red;
           font-size: 17px;
           padding-left: 20px;
+        }
+        .mfree {
+          color: #222;
         }
         .common-button {
           p.goStudy {

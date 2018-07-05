@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="personalSet">
-      <img class="person-edit" src="http://pam8iyw9q.bkt.clouddn.com/edit-info.png" @click="changeCard()" v-if="!hasPersonalInfo" />
+      <img class="person-edit" src="http://papn9j3ys.bkt.clouddn.com/edit-info.png" @click="changeCard()" v-if="!hasPersonalInfo" />
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="基础信息" name="first">
           <!-- 填写个人信息 -->
@@ -91,11 +91,14 @@
         <el-tab-pane label="修改密码" name="second">
           <!-- 修改密码 -->
           <div v-show="showPwd" class="changePwd">
+
             <input type="password" class="hideInput">
             <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autocomplete="off">
               <el-form-item label="原密码：" prop="oldPass">
+                <!-- <input type="password" name="noauto" style="background-color:red"> -->
+                <!-- <input type="password" name="autoPsw"> -->
                 <!-- <el-input type="password" v-model="changePwd.oldPass" auto-complete="off"></el-input> -->
-                <el-input type="text" v-model="changePwd.oldPass" auto-complete="off" onfocus="this.type='password'" id="onlyOne" disableautocomplete></el-input>
+                <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" onfocus="this.type='password'" id="onlyOne" disableautocomplete></el-input>
               </el-form-item>
               <el-form-item label="新密码：" prop="newPass">
                 <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
@@ -107,6 +110,7 @@
                 <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
               </el-form-item>
             </el-form>
+
             <input type="password" class="hideInput">
           </div>
         </el-tab-pane>
@@ -115,7 +119,7 @@
     </div>
     <transition name="fade">
       <div class="success" v-show="updateSuccess">
-        <img src="http://pam8iyw9q.bkt.clouddn.com/bindingSuccess.png">
+        <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png">
         <p>恭喜您操作成功</p>
       </div>
     </transition>

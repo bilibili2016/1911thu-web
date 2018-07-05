@@ -6,7 +6,7 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item>
+            <!-- <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item> -->
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -45,7 +45,7 @@
         <!-- 关注我们 -->
         <!-- <div class="attention">
           <div class="code">
-            <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
+            <img src="http://papn9j3ys.bkt.clouddn.com/wechatLogin.png" alt="">
             <h5>扫描二维码，下载“1911学堂”APP</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
@@ -280,11 +280,11 @@ export default {
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
-    goCategory() {
-      this.$router.push('/course/classifylist')
-      persistStore.set('cid', '1')
-      persistStore.set('pid', '')
-    },
+    // goCategory() {
+    //   this.$router.push('/course/category')
+    //   persistStore.set('cid', '1')
+    //   persistStore.set('pid', '')
+    // },
     submit() {
       this.$message({
         showClose: true,
@@ -434,7 +434,7 @@ export default {
         //   this.addCollection()
         //   this.collectMsg = 1
         // }
-        console.log(this.isCollection)
+        // console.log(this.isCollection)
         if (!this.isCollection) {
           //收藏
           this.addCollection()
@@ -518,12 +518,12 @@ export default {
 
     let isTrue = this.isCollection == null ? false : this.isCollection
     this.collectionInfo.isCollections = isTrue
-    console.log(this.collectionInfo)
+    // console.log(this.collectionInfo)
     this.setIsCollection(this.collectionInfo)
   },
   watch: {
     isCollection(flag) {
-      console.log(flag)
+      // console.log(flag)
     }
   }
 }
@@ -534,6 +534,9 @@ export default {
     display: inline !important;
     line-height: 40px;
   }
+}
+.shareIconss .icon-wechat .wechat-qrcode {
+  // top: -100px;
 }
 </style>
 
