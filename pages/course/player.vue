@@ -116,9 +116,9 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapState('auth', ['kid', 'tid'])
+    ...mapState('auth', ['kid', 'tid']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
-
   data() {
     return {
       showReportBug: false,
@@ -235,7 +235,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg', 'setTid']),
+    ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
+    signOuts() {
+      this.signOut()
+      persistStore.clearAll()
+      this.$router.push('/')
+    },
     changeRate(val) {
       this.reTagBtn = []
       this.tagGroup[val].map((item, i) => {
@@ -442,6 +447,14 @@ export default {
         home.getPlayerInfos(this.playerForm).then(response => {
           if (response.status === '100100') {
             this.goShoppingCart(response.msg)
+          } else if (response.status === '100006') {
+            this.$alert('您已退出登录，请重新登录', '温馨提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.signOuts()
+                this.$bus.$emit('loginShow', true)
+              }
+            })
           } else {
             if (response.data.playAuthInfo.videoViewType == false) {
               player.loadVideoByID({
