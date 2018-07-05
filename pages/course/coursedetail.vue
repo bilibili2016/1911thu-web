@@ -13,7 +13,7 @@
         <div class="fr">
           <div class="collect">
             <div class="line-center">
-              <span @click="collection" :class=" { bag: this.collectMsg === 1 }">
+              <span @click="collection" :class=" { bag: isCollection}">
                 <i class="el-icon-star-on"></i>
                 <span>收藏 </span>
               </span>
@@ -157,7 +157,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
-    ...mapState('auth', ['kid'])
+    ...mapState('auth', ['kid', 'isCollection'])
   },
   components: {
     'v-card': CustomCard,
@@ -243,6 +243,9 @@ export default {
       tidForm: {
         tids: ''
       },
+      collectionInfo: {
+        isCollections: ''
+      },
       tagGroup: '',
       iShare_config: '',
       reTagBtn: [],
@@ -257,7 +260,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setTid']),
+    ...mapActions('auth', ['setTid', 'setIsCollection']),
     handleClick() {},
     changeRate(val) {
       this.reTagBtn = []
@@ -272,6 +275,7 @@ export default {
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
+
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
@@ -422,12 +426,26 @@ export default {
     // 判断是收藏还是未收藏
     collection() {
       if (this.isAuthenticated) {
-        if (this.collectMsg === 1) {
-          this.deleteCollection()
-          this.collectMsg = 2
-        } else {
+        // if (this.collectMsg === 1) {
+        //   this.deleteCollection()
+        //   this.collectMsg = 2
+        // } else {
+        //   this.addCollection()
+        //   this.collectMsg = 1
+        // }
+        console.log(this.isCollection)
+        if (!this.isCollection) {
+          //收藏
           this.addCollection()
-          this.collectMsg = 1
+          // this.collectMsg = true
+          this.collectionInfo.isCollections = true
+          this.setIsCollection(this.collectionInfo)
+        } else {
+          //取消收藏
+          this.deleteCollection()
+          // this.collectMsg = false
+          this.collectionInfo.isCollections = false
+          this.setIsCollection(this.collectionInfo)
         }
       } else {
         this.$bus.$emit('loginShow', true)
@@ -443,7 +461,9 @@ export default {
             type: 'success',
             message: '添加收藏成功'
           })
-          this.collectMsg = 1
+          // this.collectMsg = 1
+          this.collectionInfo.isCollections = true
+          this.setIsCollection(this.collectionInfo)
         })
       })
     },
@@ -460,7 +480,9 @@ export default {
             type: 'success',
             message: '取消收藏成功'
           })
-          this.collectMsg = 0
+          // this.collectMsg = 0
+          this.collectionInfo.isCollections = false
+          this.setIsCollection(this.collectionInfo)
         })
       })
     },
@@ -514,6 +536,16 @@ export default {
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
+
+    let isTrue = this.isCollection == null ? false : this.isCollection
+    this.collectionInfo.isCollections = isTrue
+    console.log(this.collectionInfo)
+    this.setIsCollection(this.collectionInfo)
+  },
+  watch: {
+    isCollection(flag) {
+      console.log(flag)
+    }
   }
 }
 </script>
@@ -524,6 +556,5 @@ export default {
     line-height: 40px;
   }
 }
-
 </style>
 
