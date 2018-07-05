@@ -217,6 +217,7 @@ export default {
       },
       collectMsg: 1,
       iseve: 1,
+      bought: false,
       isStudy: false,
       getdefaultForm: {
         curriculumid: ''
@@ -496,6 +497,7 @@ export default {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
+          this.bought = response.data.curriculumPrivilege
           this.isStudy = response.data.curriculumDetail.is_study
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection
@@ -522,6 +524,15 @@ export default {
     },
     // 增加评论
     addEvaluate() {
+      if (!this.bought) {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '您还没有购买该课程，请先购买后再来评论吧！'
+        })
+        this.showEvaluate = false
+        return false
+      }
       if (this.isStudy) {
         this.addEvaluateForm.ids = persistStore.get('curriculumId')
         this.addEvaluateForm.evaluatecontent = this.word
@@ -548,6 +559,7 @@ export default {
           type: 'error',
           message: '您还没有观看该课程，请先观看再来评论吧！'
         })
+        this.showEvaluate = false
       }
     },
     // 判断是收藏还是为收藏
