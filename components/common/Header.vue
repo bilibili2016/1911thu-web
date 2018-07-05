@@ -105,13 +105,14 @@
               </el-form-item>
               <el-form-item prop="checked">
                 <el-checkbox-group v-model="registerData.checked">
-                  <el-checkbox label="同意用户注册协议" name="checked"></el-checkbox>
+                  <el-checkbox label="同意" name="checked"></el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
                 <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
+            <div class="userPotal" @click="userProtocol">用户注册协议</div>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
         </el-tabs>
@@ -878,6 +879,9 @@ export default {
         }
       })
       // }
+    },
+    userProtocol() {
+      window.open(window.location.origin + '/other/userProtocol')
     }
   },
   mounted() {
@@ -952,5 +956,14 @@ export default {
     color: #fff;
     background-color: #6417a6;
   }
+}
+.userPotal {
+  position: absolute;
+  right: 166px;
+  bottom: 175px;
+  font-size: 12px;
+  color: #6417a6;
+  font-weight: 500;
+  cursor: pointer;
 }
 </style>
