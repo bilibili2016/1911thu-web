@@ -116,9 +116,10 @@ export default {
     checkCourse() {
       if (this.isAuthenticated) {
         this.goLink('/course/chooselesson')
-        this.showNotLogin = false
+        // this.showNotLogin = false
       } else {
-        this.showNotLogin = true
+        // this.showNotLogin = true
+        this.$bus.$emit('loginShow')
       }
     },
     backToTop() {
