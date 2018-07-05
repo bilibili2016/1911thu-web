@@ -15,8 +15,8 @@
       cursor: pointer;
       border-bottom: 2px solid transparent;
       &.checked {
-        color: #8F4ACB;
-        border-bottom: 2px solid #8F4ACB;
+        color: #8f4acb;
+        border-bottom: 2px solid #8f4acb;
       }
       &.el-switch__core {
         height: 20px;
@@ -52,13 +52,13 @@
     margin-left: -636px;
     z-index: 1;
     ul {
-      width: 70px;
+      width: 95px;
       border-radius: 6px;
-      background-color: #6417A6;
+      background-color: #6417a6;
       color: #fff;
       font-size: 14px;
       position: absolute;
-      left: 0;
+      left: -20px;
       top: 0;
       text-align: center;
       overflow: hidden;
@@ -72,7 +72,7 @@
           height: 100%;
           padding: 0 5px;
           &.checked {
-            background-color: #8F4ACB;
+            background-color: #8f4acb;
           }
         }
         &:hover {
@@ -101,5 +101,5 @@
 }
 
 .noCourse {
-  min-height: 600px
+  min-height: 600px;
 }
