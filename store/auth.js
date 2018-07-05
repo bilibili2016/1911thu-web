@@ -385,7 +385,7 @@ export const actions = {
     return gid
   },
   async setTid({ commit, state }, { tids }) {
-    console.log(tids)
+    // console.log(tids)
     try {
       let tid = tids
       persistStore.set('tid', tid)
