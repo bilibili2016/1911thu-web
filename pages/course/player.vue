@@ -60,7 +60,7 @@
                 <i class="el-icon-caret-right"></i>
               </span>
               <span class="fl playImg" v-show="ischeck == bar.id?true:false">
-                <img :src="playing" alt="">
+                <img :src="playing" alt="" ref="videoButton">
               </span>
               <span class="fl barName">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
               </span>
@@ -121,6 +121,7 @@ export default {
 
   data() {
     return {
+      videoState: false,
       showReportBug: false,
       title: '1',
       showEvaluate: false,
@@ -237,6 +238,20 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid']),
+    isHasClass() {
+      let myVideo = document.getElementById('movd')
+      if (myVideo.getAttribute('class')) {
+        // 存在class属性
+
+        // 方式2
+        if (myVideo.className.indexOf('vjs-paused') > -1) {
+          this.videoState = false
+          // console.log('包含 test 这个class')
+        } else {
+          this.videoState = true
+        }
+      }
+    },
     changeRate(val) {
       this.reTagBtn = []
       this.tagGroup[val].map((item, i) => {
@@ -409,11 +424,14 @@ export default {
       socket.on('reconnect', function(msg) {})
       let that = this
       player.on('pause', () => {
+        this.isHasClass()
         this.playing = this.pauseImg
         clearInterval(that.interval)
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
+        this.isHasClass()
+        // console.log(this.$refs.videoButton.src)
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
@@ -473,6 +491,7 @@ export default {
           }
         })
       })
+      this.isHasClass()
     },
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
@@ -573,6 +592,7 @@ export default {
     }
   },
   mounted() {
+    this.videoState = document.getElementById('movd')
     this.resize()
     var $config = {
       url: 'http://www.1911edu.com/'
@@ -590,8 +610,19 @@ export default {
     ;(this.seconds = 10000000),
       // 获取评论接口
       this.getEvaluateTags()
+
+    this.isHasClass()
   },
-  watch: {}
+  watch: {
+    videoState(flag) {
+      console.log(flag)
+      if (flag) {
+        this.playing = this.playImg
+      } else {
+        this.playing = this.pauseImg
+      }
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
