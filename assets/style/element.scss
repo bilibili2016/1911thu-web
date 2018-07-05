@@ -1229,3 +1229,11 @@ input:-webkit-autofill {
 .social-share .icon-wechat .wechat-qrcode:after {
   bottom: -4px;
 }
+.newsCarousel {
+  .el-carousel__container {
+    height: 406px;
+  }
+  .el-carousel__indicators {
+    display: none;
+  }
+}
