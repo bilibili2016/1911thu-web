@@ -116,9 +116,9 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapState('auth', ['kid', 'tid'])
+    ...mapState('auth', ['kid', 'tid']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
-
   data() {
     return {
       videoState: false,
@@ -213,7 +213,8 @@ export default {
         evaluatecontent: null,
         scores: null,
         types: 1,
-        curriculumcatalogid: ''
+        curriculumcatalogid: '',
+        tag: []
       },
       addCollectionForm: {
         curriculumId: null
@@ -247,20 +248,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg', 'setTid']),
-    isHasClass() {
-      let myVideo = document.getElementById('movd')
-      if (myVideo.getAttribute('class')) {
-        // 存在class属性
-
-        // 方式2
-        if (myVideo.className.indexOf('vjs-paused') > -1) {
-          this.videoState = false
-          // console.log('包含 test 这个class')
-        } else {
-          this.videoState = true
-        }
-      }
+    ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
+    signOuts() {
+      this.signOut()
+      persistStore.clearAll()
+      this.$router.push('/')
     },
     changeRate(val) {
       this.reTagBtn = []
@@ -272,6 +264,16 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
+    },
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
+      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     handleCourse(item, index) {
       this.ischeck = item.id
@@ -488,6 +490,14 @@ export default {
         home.getPlayerInfos(this.playerForm).then(response => {
           if (response.status === '100100') {
             this.goShoppingCart(response.msg)
+          } else if (response.status === '100006') {
+            this.$alert('您已退出登录，请重新登录', '温馨提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.signOuts()
+                this.$bus.$emit('loginShow', true)
+              }
+            })
           } else {
             if (response.data.playAuthInfo.videoViewType == false) {
               player.loadVideoByID({

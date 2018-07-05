@@ -57,8 +57,9 @@
               <!-- 作者和头衔    金额 -->
               <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
-                  <p class="price freePrise" v-if="config.card === 'home'&&config.free != 'true'">￥{{card.present_price}}</p>
-                  <p class="freePrise" v-if="config.free === 'true'">免费</p>
+                  <!-- <p class="price freePrise" v-if="config.card === 'home'&&config.free != 'true'">￥{{card.present_price}}</p> -->
+                  <p class="price freePrise" v-if="config.card === 'home'&&card.is_free == '1'">￥{{card.present_price}}</p>
+                  <p class="freePrise" v-if="card.is_free === '2'">免费</p>
                 </div>
               </div>
               <!-- 学习进度 -->
@@ -248,7 +249,8 @@
             </div>
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
-              <span class="coin">￥ {{course.present_price}}</span>
+              <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span>
+              <span class="coin mfree" v-if="course.is_free == '2'">免费</span>
               <!-- <div class="fr common-button-half"> -->
               <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
               <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
@@ -1536,6 +1538,9 @@ export default {
           color: red;
           font-size: 17px;
           padding-left: 20px;
+        }
+        .mfree {
+          color: #222;
         }
         .common-button {
           p.goStudy {
