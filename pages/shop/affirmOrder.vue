@@ -1073,6 +1073,9 @@ export default {
             this.invoiceForm.number = res.data.invoice_number
             this.invoiceForm.others = res.data.content
             this.invoiceForm.radio = Number(res.data.content_type)
+            this.ticketForm.province = res.data.province
+            this.ticketForm.city = res.data.city
+            this.ticketForm.area = res.data.area
             this.invoiceForm.address = res.data.address
             this.invoiceForm.radio = res.data.content_type
             this.isShowTicket = true
