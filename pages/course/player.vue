@@ -164,7 +164,8 @@ export default {
       ],
       problem: {
         curriculumId: null,
-        content: ''
+        content: '',
+        curriculumcatalogid: ''
       },
       word: '',
       evaluate: {
@@ -211,7 +212,8 @@ export default {
         ids: null,
         evaluatecontent: null,
         scores: null,
-        types: 1
+        types: 1,
+        curriculumcatalogid: ''
       },
       addCollectionForm: {
         curriculumId: null
@@ -239,7 +241,8 @@ export default {
         evaluatecontent: '',
         scores: '',
         types: 1,
-        tag: []
+        tag: [],
+        curriculumcatalogid: ''
       }
     }
   },
@@ -285,7 +288,7 @@ export default {
         home.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
-          this.changeRate('1')
+          this.changeRate('5')
           this.btnDatas = response.data.evaluateTags
           // this.tagGroup = response.data.evaluateTags
         })
@@ -514,6 +517,7 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+          console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.isStudy = response.data.curriculumDetail.is_study
@@ -526,17 +530,29 @@ export default {
     // 反馈问题
     reportProblem() {
       this.problem.curriculumId = persistStore.get('curriculumId')
+      this.problem.curriculumcatalogid = persistStore.get('catalogId')
       return new Promise((resolve, reject) => {
         home.reportProblem(this.problem).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: response.msg
-          })
+          // this.closeReport()
+
+          if (response.status === '100100') {
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          } else {
+            this.closeReport()
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          }
+
           if (this.word === '') {
             return
           }
-          this.closeReport()
         })
       })
     },
@@ -548,6 +564,7 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
+      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
           this.$message({

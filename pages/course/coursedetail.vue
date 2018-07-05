@@ -229,7 +229,8 @@ export default {
         evaluatecontent: '',
         scores: '',
         types: 1,
-        tag: []
+        tag: [],
+        curriculumcatalogid: ''
       },
       evaluate: {
         eltnum: null
