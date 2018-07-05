@@ -170,36 +170,13 @@ export default {
         })
       })
     },
-    handleItemOne(item, index) {
-      this.bgmsg = index
-    },
-    handleItemTwo(item, index) {
-      this.bgmsgs = index
-    },
-    handleItemTwo(item, index) {
-      this.allCheckedId = []
-      this.bgmsgs = item.id
-      this.pidform.pids = item.id
-      this.setPid(this.pidform)
-      this.allCheckedArray = []
-      this.curriculumList()
-    },
-    getCidList() {
-      this.allCheckedId = []
-      this.cidform.cids = ''
-      this.bgmsg = 0
-      this.setCid(this.cidform)
-
-      this.curriculumList()
-    },
-    getPidList() {
-      this.allCheckedId = []
-      this.pidform.pids = ''
-      this.bgmsgs = 0
-      this.setPid(this.pidform)
-      this.getPidList = []
-      this.curriculumList()
-    },
+    // handleItemOne(item, index) {
+    //   this.bgmsg = index
+    //   console.log(this.bgmsg)
+    // },
+    // handleItemTwo(item, index) {
+    //   console.log(this.bgmsgs)
+    // },
     handleItemOne(item, index) {
       this.allCheckedId = []
       this.bgmsgs = 0
@@ -210,8 +187,36 @@ export default {
       this.pidform.pids = ''
       this.setPid(this.pidform)
       this.allCheckedArray = []
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
+    handleItemTwo(item, index) {
+      this.bgmsgs = index
+      this.allCheckedId = []
+      this.bgmsgs = item.id
+      this.pidform.pids = item.id
+      this.setPid(this.pidform)
+      this.allCheckedArray = []
+      this.curriculumListForm.pages = 1
+      this.curriculumList()
+    },
+    getCidList() {
+      this.allCheckedId = []
+      this.cidform.cids = ''
+      this.bgmsg = 0
+      this.setCid(this.cidform)
+      this.curriculumListForm.pages = 1
+      this.curriculumList()
+    },
+    getPidList() {
+      this.allCheckedId = []
+      this.pidform.pids = ''
+      this.bgmsgs = 0
+      this.setPid(this.pidform)
+      this.getPidList = []
+      this.curriculumList()
+    },
+
     handleClick(tab, event) {},
     curriculumList() {
       this.loadCourse = true
