@@ -116,7 +116,7 @@
 
     </div>
     <!-- 发票信息 -->
-    <div class="invoiceShadow" @click.self="close" v-show="showInvoice">
+    <div class="invoiceShadow" v-show="showInvoice">
       <div class="invoiceInfo">
         <h3 class="clearfix">发票信息
           <i class="el-icon-close fr" @click="close"></i>
