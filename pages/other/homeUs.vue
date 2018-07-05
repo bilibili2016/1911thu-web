@@ -73,11 +73,11 @@
                 <p class="info">1911学堂是由1911集团与清华大学共同发起的在线继续教育平台。平台通过整合清华大学及国内外著名高校优质的教育资源，集合国内一线互联网团队，将继续教育与互联网完美结合，以国家经济建设和社会发展需求为导向，形成系统性、针对性、前瞻性、科学性、实用性的继续教育培养服务体系，以线上线下相结合的模式，为党政机关、企事业单位干部提供终身教育解决方案，最终建设一所面向未来的终身学堂。
                 </p>
                 <p class="info-detail">
-                  <span>使命: </span>提供与时俱进的终身教育解决方案，用更好的教育普惠大众。
+                  <span>使命 :&nbsp;</span>提供与时俱进的终身教育解决方案，用更好的教育普惠大众。
 
                 </p>
                 <p class="info-detail">
-                  <span>愿景: </span>成为卓越的终身教育提供者。
+                  <span>愿景 :&nbsp;</span>成为卓越的终身教育提供者。
                 </p>
               </div>
               <div class="company-img">
@@ -170,8 +170,8 @@
                     </p>
                   </el-tab-pane>
 
-                </el-tabs>
-                <!-- <div class="btn">
+                  <<<<<<< HEAD </el-tabs>
+                    <!-- <div class="btn">
                                     <span>教学教研部</span>
                                     <span>产品研发部</span>
                                     <span>市场运营部</span>
@@ -191,88 +191,151 @@
               </div>
             </div>
           </el-card>
-
-        </el-tab-pane>
-        <el-tab-pane label="帮助中心">
-          <span slot="label" class="tabList">
-            <i class="item-icon icon-help"></i>帮助中心</span>
-          <el-card class="card-style">
-            <div class="help">
-              <h1>帮助中心</h1>
-              <div class="help-con clearfix">
-                <div class="help-left">
-                  <p class="title">热门问题</p>
-                  <p>1.红包提现方法及注意事项<br /> 2.成为会员的方法
-                    <br /> 3.帐号找回申诉信息被驳回的原因
-                    <br /> 4.会员成长值介绍
-                    <br /> 5.登录密码重置方法
-                    <br />
-                  </p>
-                  <p class="learn-more">了解更多>></p>
-                </div>
-                <div class="help-right">
-                  <p class="title">最新问题</p>
-                  <p>1.盗号保护的解除方法<br /> 2.未开启登录保护需要短信验证的操作方法
-                    <br /> 3.帐号找回申诉信息被驳回的原因
-                    <br /> 4.提高帐号安全等级的方法
-                    <br /> 5.发起群招募的方法
-                    <br /> 6.添加自定义表情的方法
-                    <br /> 7.登录陌陌网页版的方法
-                    <br />
-                  </p>
-                  <p class="learn-more">了解更多>></p>
-                </div>
-              </div>
-            </div>
-          </el-card>
-        </el-tab-pane>
-        <el-tab-pane label="联系我们">
-          <span slot="label" class="tabList">
-            <i class="item-icon icon-contact"></i>联系我们</span>
-          <el-card class="card-style">
-            <div class="contact">
-              <h1>联系我们</h1>
-              <div class="contact-con">
-                <div class="con-img">
-                  <img src="@/assets/images/homeUs-pic3.png" alt="">
-                </div>
-                <div class="con-line">
-                  <span class="line"></span>
-                  <span class="circle"></span>
-                  <span class="line"></span>
-                </div>
-                <div class="bottom clearfix">
-                  <div class="bottom-item">
-                    <div class="item">
-                      <img src="@/assets/images/homeUs-pic5.png" alt="">
-                      <p class="item-title">电话</p>
-                      <p>010-6270 1911</p>
-                    </div>
-
-                  </div>
-                  <div class="bottom-item">
-                    <div class="item item1">
-                      <img src="@/assets/images/homeUs-pic6.png" alt="">
-                      <p class="item-title">邮箱</p>
-                      <p>info@1911thu.com</p>
-                    </div>
-
-                  </div>
-                  <div class="bottom-item">
-                    <div class="item item2">
-                      <img src="@/assets/images/homeUs-pic4.png" alt="">
-                      <p class="item-title">地址</p>
-                      <p>北京市海淀区双清路77号院</p>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </el-card>
-        </el-tab-pane>
-      </el-tabs>
+          =======
+          </el-tabs>
     </div>
+  </div>
+  </el-card>
+
+  </el-tab-pane>
+  <el-tab-pane label="帮助中心">
+    <span slot="label" class="tabList">
+      <i class="item-icon icon-help"></i>帮助中心</span>
+    <el-card class="card-style">
+      <div class="help">
+        <h1>帮助中心</h1>
+        <div class="help-con clearfix">
+          <div class="help-left">
+            <p class="title">热门问题</p>
+            <p class="help-desc">1.红包提现方法及注意事项<br /> 2.成为会员的方法
+              <br /> 3.帐号找回申诉信息被驳回的原因
+              <br /> 4.会员成长值介绍
+              <br /> 5.登录密码重置方法
+              <br />
+            </p>
+            <p class="learn-more">了解更多>></p>
+          </div>
+          <div class="help-right">
+            <p class="title">最新问题</p>
+            <p class="help-desc">1.盗号保护的解除方法<br /> 2.未开启登录保护需要短信验证的操作方法
+              <br /> 3.帐号找回申诉信息被驳回的原因
+              <br /> 4.提高帐号安全等级的方法
+              <br /> 5.发起群招募的方法
+              <br /> 6.添加自定义表情的方法
+              <br /> 7.登录陌陌网页版的方法
+              <br />
+            </p>
+            <p class="learn-more">了解更多>></p>
+          </div>
+        </div>
+      </div>
+    </el-card>
+  </el-tab-pane>
+  <el-tab-pane label="联系我们">
+    <span slot="label" class="tabList">
+      <i class="item-icon icon-contact"></i>联系我们</span>
+    <el-card class="card-style">
+      <div class="contact">
+        <h1>联系我们</h1>
+        <div class="contact-con">
+          <div class="con-img">
+            <img src="@/assets/images/homeUs-pic3.png" alt="">
+          </div>
+          <div class="con-line">
+            <span class="line"></span>
+            <span class="circle"></span>
+            <span class="line"></span>
+          </div>
+          <div class="bottom clearfix">
+            <div class="bottom-item">
+              <div class="item">
+                <img src="@/assets/images/homeUs-pic5.png" alt="">
+                <p class="item-title">电话</p>
+                <p>010-6270 1911</p>
+              </div>
+              >>>>>>> liyr
+
+  </el-tab-pane>
+  <el-tab-pane label="帮助中心">
+    <span slot="label" class="tabList">
+      <i class="item-icon icon-help"></i>帮助中心</span>
+    <el-card class="card-style">
+      <div class="help">
+        <h1>帮助中心</h1>
+        <div class="help-con clearfix">
+          <div class="help-left">
+            <p class="title">热门问题</p>
+            <p>1.红包提现方法及注意事项<br /> 2.成为会员的方法
+              <br /> 3.帐号找回申诉信息被驳回的原因
+              <br /> 4.会员成长值介绍
+              <br /> 5.登录密码重置方法
+              <br />
+            </p>
+            <p class="learn-more">了解更多>></p>
+          </div>
+          <div class="help-right">
+            <p class="title">最新问题</p>
+            <p>1.盗号保护的解除方法<br /> 2.未开启登录保护需要短信验证的操作方法
+              <br /> 3.帐号找回申诉信息被驳回的原因
+              <br /> 4.提高帐号安全等级的方法
+              <br /> 5.发起群招募的方法
+              <br /> 6.添加自定义表情的方法
+              <br /> 7.登录陌陌网页版的方法
+              <br />
+            </p>
+            <p class="learn-more">了解更多>></p>
+          </div>
+        </div>
+      </div>
+    </el-card>
+  </el-tab-pane>
+  <el-tab-pane label="联系我们">
+    <span slot="label" class="tabList">
+      <i class="item-icon icon-contact"></i>联系我们</span>
+    <el-card class="card-style">
+      <div class="contact">
+        <h1>联系我们</h1>
+        <div class="contact-con">
+          <div class="con-img">
+            <img src="@/assets/images/homeUs-pic3.png" alt="">
+          </div>
+          <div class="con-line">
+            <span class="line"></span>
+            <span class="circle"></span>
+            <span class="line"></span>
+          </div>
+          <div class="bottom clearfix">
+            <div class="bottom-item">
+              <div class="item">
+                <img src="@/assets/images/homeUs-pic5.png" alt="">
+                <p class="item-title">电话</p>
+                <p>010-6270 1911</p>
+              </div>
+
+            </div>
+            <div class="bottom-item">
+              <div class="item item1">
+                <img src="@/assets/images/homeUs-pic6.png" alt="">
+                <p class="item-title">邮箱</p>
+                <p>info@1911thu.com</p>
+              </div>
+
+            </div>
+            <div class="bottom-item">
+              <div class="item item2">
+                <img src="@/assets/images/homeUs-pic4.png" alt="">
+                <p class="item-title">地址</p>
+                <p>北京市海淀区双清路77号院</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </el-card>
+  </el-tab-pane>
+  </el-tabs>
+  </div>
 
   </div>
 </template>

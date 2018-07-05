@@ -2,24 +2,15 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-06-21 14:39:38
+ * @Last Modified time: 2018-07-05 14:24:59
  * @File Type:  登陆的store
  * @Describe:
  */
 
-import {
-  isNull
-} from 'lodash'
-import {
-  storeLog as log
-} from '~/lib/core/logger'
-import {
-  store as persistStore
-} from '~/lib/core/store'
-import {
-  auth,
-  ServerError
-} from '~/lib/v1_sdk'
+import { isNull } from 'lodash'
+import { storeLog as log } from '~/lib/core/logger'
+import { store as persistStore } from '~/lib/core/store'
+import { auth, ServerError } from '~/lib/v1_sdk'
 // import { message } from '~/lib/core/message'
 persistStore.defaults({
   user: null,
@@ -34,7 +25,8 @@ persistStore.defaults({
   productsNum: null,
   number: null,
   index: null,
-  tid: null
+  tid: null,
+  isCollection: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -49,6 +41,7 @@ let productsNum = persistStore.get('productsNum')
 let number = persistStore.get('number')
 let index = persistStore.get('index')
 let tid = persistStore.get('tid')
+let isCollection = persistStore.get('isCollection')
 
 export const MUTATION = {
   signIn: 'sign-in',
@@ -65,7 +58,8 @@ export const MUTATION = {
   setProductsNum: 'set-productsNum',
   setNumber: 'set-number',
   setIndex: 'set-index',
-  setTid: 'set-tid'
+  setTid: 'set-tid',
+  setIsCollection: 'set-isCollection'
 }
 export const state = () => ({
   user,
@@ -80,7 +74,8 @@ export const state = () => ({
   productsNum,
   number,
   index,
-  tid
+  tid,
+  isCollection
 })
 export const getters = {
   isAuthenticated(state) {
@@ -91,91 +86,64 @@ export const getters = {
   },
   isShowTip(state) {
     return state.isShowTip
+  },
+  isCollection(state) {
+    return state.isCollection
   }
 }
 
 export const mutations = {
-  [MUTATION.signIn](state, {
-    token
-  }) {
+  [MUTATION.signIn](state, { token }) {
     state.token = token
   },
   [MUTATION.signOut](state) {
     state.token = null
   },
-  [MUTATION.refresh](state, {
-    token
-  }) {
+  [MUTATION.refresh](state, { token }) {
     state.token = token
   },
-  [MUTATION.me](state, {
-    user
-  }) {
+  [MUTATION.me](state, { user }) {
     state.user = user
   },
-  [MUTATION.setCid](state, {
-    cid
-  }) {
+  [MUTATION.setCid](state, { cid }) {
     state.cid = cid
   },
-  [MUTATION.setPid](state, {
-    pid
-  }) {
+  [MUTATION.setPid](state, { pid }) {
     state.pid = pid
   },
-  [MUTATION.setGid](state, {
-    gid
-  }) {
+  [MUTATION.setGid](state, { gid }) {
     state.gid = gid
   },
-  [MUTATION.setHsg](state, {
-    hsg
-  }) {
+  [MUTATION.setHsg](state, { hsg }) {
     state.hsg = hsg
   },
-  [MUTATION.setNid](state, {
-    nid
-  }) {
+  [MUTATION.setNid](state, { nid }) {
     state.nid = nid
   },
-  [MUTATION.setKid](state, {
-    kid
-  }) {
+  [MUTATION.setKid](state, { kid }) {
     state.kid = kid
   },
-  [MUTATION.setIsShowTip](state, {
-    isShowTip
-  }) {
+  [MUTATION.setIsShowTip](state, { isShowTip }) {
     state.isShowTip = isShowTip
   },
-  [MUTATION.setProductsNum](state, {
-    productsNum
-  }) {
+  [MUTATION.setProductsNum](state, { productsNum }) {
     state.productsNum = productsNum
   },
-  [MUTATION.setNumber](state, {
-    number
-  }) {
+  [MUTATION.setNumber](state, { number }) {
     state.number = number
   },
-  [MUTATION.setIndex](state, {
-    index
-  }) {
+  [MUTATION.setIndex](state, { index }) {
     state.index = index
   },
-  [MUTATION.setTid](state, {
-    tid
-  }) {
+  [MUTATION.setTid](state, { tid }) {
     state.tid = tid
+  },
+  [MUTATION.setIsCollection](state, { isCollection }) {
+    state.isCollection = isCollection
   }
 }
 export const actions = {
-  async setToken({
-    commit,
-    state
-  }, {
-    tokens
-  }) {
+  async setToken({ commit, state }, { tokens }) {
     try {
       let token = tokens
       persistStore.set('token', token)
@@ -192,14 +160,7 @@ export const actions = {
     return token
   },
 
-  async signIn({
-    commit,
-    state
-  }, {
-    phonenum,
-    ectpwd,
-    loginTypes
-  }) {
+  async signIn({ commit, state }, { phonenum, ectpwd, loginTypes }) {
     let user
     try {
       let tokens = await auth.signIns({
@@ -229,10 +190,7 @@ export const actions = {
     return user
   },
 
-  async signOut({
-    commit,
-    state
-  }) {
+  async signOut({ commit, state }) {
     try {
       await auth.signOut()
       persistStore.clearAll()
@@ -243,13 +201,7 @@ export const actions = {
     }
   },
 
-  async companySignIn({
-    commit,
-    state
-  }, {
-    email,
-    password
-  }) {
+  async companySignIn({ commit, state }, { email, password }) {
     let user
     try {
       let tokens = await auth.companySignIn({
@@ -272,12 +224,7 @@ export const actions = {
     }
     return user
   },
-  async setCid({
-    commit,
-    state
-  }, {
-    cids
-  }) {
+  async setCid({ commit, state }, { cids }) {
     try {
       let cid = cids
       persistStore.set('cid', cid)
@@ -293,12 +240,7 @@ export const actions = {
     }
     return cid
   },
-  async setPid({
-    commit,
-    state
-  }, {
-    pids
-  }) {
+  async setPid({ commit, state }, { pids }) {
     try {
       let pid = pids
       persistStore.set('pid', pid)
@@ -314,12 +256,7 @@ export const actions = {
     }
     return pid
   },
-  async setGid({
-    commit,
-    state
-  }, {
-    gids
-  }) {
+  async setGid({ commit, state }, { gids }) {
     try {
       let gid = gids
       persistStore.set('gid', gid)
@@ -335,12 +272,7 @@ export const actions = {
     }
     return gid
   },
-  async setHsg({
-    commit,
-    state
-  }, {
-    hsgs
-  }) {
+  async setHsg({ commit, state }, { hsgs }) {
     try {
       let hsg = hsgs
       persistStore.set('hsg', hsg)
@@ -356,12 +288,7 @@ export const actions = {
     }
     return gid
   },
-  async setNid({
-    commit,
-    state
-  }, {
-    nids
-  }) {
+  async setNid({ commit, state }, { nids }) {
     try {
       let nid = nids
       persistStore.set('nid', nid)
@@ -377,12 +304,7 @@ export const actions = {
     }
     return gid
   },
-  async setKid({
-    commit,
-    state
-  }, {
-    kids
-  }) {
+  async setKid({ commit, state }, { kids }) {
     try {
       let kid = kids
       persistStore.set('kid', kid)
@@ -398,12 +320,7 @@ export const actions = {
     }
     return kid
   },
-  async setIsShowTip({
-    commit,
-    state
-  }, {
-    isShowTips
-  }) {
+  async setIsShowTip({ commit, state }, { isShowTips }) {
     try {
       let isShowTip = isShowTips
       persistStore.set('isShowTip', isShowTip)
@@ -419,12 +336,7 @@ export const actions = {
     }
     return isShowTip
   },
-  async setProductsNum({
-    commit,
-    state
-  }, {
-    pn
-  }) {
+  async setProductsNum({ commit, state }, { pn }) {
     try {
       let productsNum = pn
       persistStore.set('productsNum', productsNum)
@@ -440,12 +352,7 @@ export const actions = {
     }
     return productsNum
   },
-  async setNumber({
-    commit,
-    state
-  }, {
-    numbers
-  }) {
+  async setNumber({ commit, state }, { numbers }) {
     try {
       let number = numbers
       persistStore.set('number', number)
@@ -461,12 +368,7 @@ export const actions = {
     }
     return productsNum
   },
-  async setIndex({
-    commit,
-    state
-  }, {
-    indexs
-  }) {
+  async setIndex({ commit, state }, { indexs }) {
     try {
       let index = indexs
       persistStore.set('index', index)
@@ -482,12 +384,8 @@ export const actions = {
     }
     return gid
   },
-  async setTid({
-    commit,
-    state
-  }, {
-    tids
-  }) {
+  async setTid({ commit, state }, { tids }) {
+    console.log(tids)
     try {
       let tid = tids
       persistStore.set('tid', tid)
@@ -502,5 +400,19 @@ export const actions = {
       }
     }
     return tid
+  },
+  async setIsCollection({ commit, state }, { isCollections }) {
+    try {
+      let isCollection = isCollections
+      persistStore.set('isCollection', isCollection)
+      commit(MUTATION.setIsCollection, { isCollection })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return isCollection
   }
 }
