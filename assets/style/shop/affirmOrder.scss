@@ -166,18 +166,22 @@
           background: url('~assets/images/ticketTips.png') no-repeat;
         }
       }
-      p {
+      .invoice {
         // height: 52px;
         line-height: 52px;
         font-size: 14px;
         color: #888;
+        p {
+          display: inline-block;
+          width: 990px;
+        }
         .invoiceWord i {
           margin-right: 30px;
         }
         .changeInvoice {
-          margin-left: 30px;
           color: #6417a6;
           cursor: pointer;
+          vertical-align: top;
         }
         .choose {
           margin-right: 30px;
