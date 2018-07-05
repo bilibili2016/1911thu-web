@@ -373,7 +373,7 @@
                   </h4>
                   <div class="common-button">
                     <div>
-                      <el-button type="primary" plain @click="goPlay(courseList)">继续学习1</el-button>
+                      <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                     </div>
                     <div>
                       <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
@@ -388,7 +388,7 @@
                   <p>{{courseList.introduction}}</p>
                   <div class="common-button">
                     <div v-if="isAuthenticated">
-                      <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习2</el-button>
+                      <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
                       <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
                     </div>
                     <div v-else>
