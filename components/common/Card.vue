@@ -267,9 +267,9 @@
               <!-- <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="courseInfo(course)"> 加入购物车</el-button>
               </div> -->
-              <div class="fr common-button-half-right">
+              <!-- <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="courseInfo(course)"> 立即学习</el-button>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
