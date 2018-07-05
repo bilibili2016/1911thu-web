@@ -15,7 +15,7 @@
         <p>2.绑定成功后，不可更改。</p>
       </div>
       <div class="presentAble present">
-        <el-button :disabled="!binding.presentAble" round @click="doSubmit">提交1</el-button>
+        <el-button :disabled="!binding.presentAble" round @click="doSubmit">提交</el-button>
       </div>
     </div>
 
@@ -42,7 +42,7 @@
           <p>2.绑定成功后，不可更改。</p>
         </div>
         <div class="presentAble present">
-          <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交2</el-button>
+          <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交</el-button>
         </div>
       </div>
     </div>

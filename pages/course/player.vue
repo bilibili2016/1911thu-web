@@ -231,7 +231,14 @@ export default {
       btnData: [],
       reTagBtn: [],
       tagGroup: '',
-      rateModel: 5
+      rateModel: 5,
+      addEvaluateForm: {
+        ids: '',
+        evaluatecontent: '',
+        scores: '',
+        types: 1,
+        tag: []
+      }
     }
   },
   methods: {
@@ -267,6 +274,16 @@ export default {
           // this.tagGroup = response.data.evaluateTags
         })
       })
+    },
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
+      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
@@ -498,33 +515,34 @@ export default {
     },
     // 增加评论
     addEvaluate() {
-      if (this.isStudy) {
-        this.addEvaluateForm.ids = persistStore.get('curriculumId')
-        this.addEvaluateForm.evaluatecontent = this.word
-        this.addEvaluateForm.scores = this.evaluate.eltnum
-        this.addEvaluateForm.tag = this.addEvaluateForm.tag
-          .toString()
-          .replace(/,/g, '#')
-        return new Promise((resolve, reject) => {
-          home.addEvaluate(this.addEvaluateForm).then(response => {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-            if (response.status === 0) {
-              this.showEvaluate = false
-              this.iseve = 1
-            }
+      this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.evaluatecontent = this.word
+      this.addEvaluateForm.scores = this.evaluate.eltnum
+      this.addEvaluateForm.tag = this.addEvaluateForm.tag
+        .toString()
+        .replace(/,/g, '#')
+      return new Promise((resolve, reject) => {
+        home.addEvaluate(this.addEvaluateForm).then(response => {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
           })
+          if (response.status === 0) {
+            this.showEvaluate = false
+            this.iseve = 1
+          }
         })
-      } else {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '您还没有观看该课程，请先观看再来评论吧！'
-        })
-      }
+      })
+      // if (this.isStudy) {
+
+      // } else {
+      //   this.$message({
+      //     showClose: true,
+      //     type: 'error',
+      //     message: '您还没有观看该课程，请先观看再来评论吧！'
+      //   })
+      // }
     },
     // 判断是收藏还是为收藏
     collection() {
