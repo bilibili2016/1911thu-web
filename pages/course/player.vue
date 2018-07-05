@@ -249,6 +249,20 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
+    isHasClass() {
+      let myVideo = document.getElementById('movd')
+      if (myVideo.getAttribute('class')) {
+        // 存在class属性
+
+        // 方式2
+        if (myVideo.className.indexOf('vjs-paused') > -1) {
+          this.videoState = false
+          // console.log('包含 test 这个class')
+        } else {
+          this.videoState = true
+        }
+      }
+    },
     signOuts() {
       this.signOut()
       persistStore.clearAll()
