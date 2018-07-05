@@ -36,13 +36,13 @@ export default {
         column: 12,
         height: 553,
         animeTime: 5000,
-        img: require('@/assets/images/banner4.png')
+        img: require('@/assets/images/banner1.png')
       },
       imgList: [
-        require('@/assets/images/banner4.png'),
         require('@/assets/images/banner1.png'),
         require('@/assets/images/banner2.png'),
-        require('@/assets/images/banner3.png')
+        require('@/assets/images/banner3.png'),
+        require('@/assets/images/banner4.png')
       ],
       fragmentConfig: {
         container: '.img-flex', //显示容器
@@ -51,7 +51,7 @@ export default {
         width: document.body.clientWidth, //显示容器的宽度
         height: 553,
         animeTime: 5000, //最长动画时间,图片的取值将在 animeTime*0.33 + animeTime*0.66之前取值
-        img: require('@/assets/images/banner4.png') //图片路径
+        img: require('@/assets/images/banner1.png') //图片路径
       }
     }
   },
@@ -142,18 +142,20 @@ export default {
         this.$refs.popupContainer.style.background = '#4e37b3'
         this.fragmentImg(this.fragmentConfig)
         clearInterval(setInter)
+        setInter = null
       }, 3000)
-
-      this.timer = setInterval(() => {
-        this.$refs.popupContainer.style.background = '#4e37b3'
-        ++this.exeCount
-        const imgListLength = this.imgList.length
-        let index = this.exeCount % imgListLength
-        this.fragmentConfig.img = this.imgList[index]
-        this.default.img = this.imgList[index]
-        $('.img-flex').html('')
-        this.fragmentImg(this.fragmentConfig)
-      }, 7000)
+      setTimeout(() => {
+        this.timer = setInterval(() => {
+          this.$refs.popupContainer.style.background = '#4e37b3'
+          ++this.exeCount
+          const imgListLength = this.imgList.length
+          let index = this.exeCount % imgListLength
+          this.fragmentConfig.img = this.imgList[index]
+          this.default.img = this.imgList[index]
+          $('.img-flex').html('')
+          this.fragmentImg(this.fragmentConfig)
+        }, 7000)
+      }, 3000)
     })
   },
   watch: {}
