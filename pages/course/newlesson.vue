@@ -7,7 +7,7 @@
       <span>当前位置：</span>
       <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>新上好课</el-breadcrumb-item>
+        <el-breadcrumb-item>最新课程</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      atopImg: 'http://papn9j3ys.bkt.clouddn.com/banner2.png',
+      atopImg: 'http://pam8iyw9q.bkt.clouddn.com/banner2.png',
       config: {
         card_type: 'goodlesson'
       },

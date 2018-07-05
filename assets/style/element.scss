@@ -2,10 +2,6 @@
 @import '~element-ui/packages/theme-chalk/src/index';
 /* 默认的 Element 无法满足需要时，就在下面进行扩展，建议扩展方式仍然参考 Element 的风格 */
 
-// input:-webkit-autofill {
-//   -webkit-box-shadow: 0 0 0px 1000px white #f1e9f8 !important;
-//   -webkit-text-fill-color: #f1e9f8 !important;
-// }
 /* Button */
 
 .el-button--large {
@@ -523,23 +519,6 @@
       border: none;
       font-size: 20px;
       color: #000;
-    }
-
-    .el-input__inner:-webkit-autofill {
-      // background-color: #f1e9f8 !important;
-      // background-image: none !important;
-      // color: rgb(0, 0, 0) !important;
-      // background-image: none;
-      // color: #000;
-      -webkit-box-shadow: 0 0 0px 1000px #f1e9f8 inset;
-      width: 670px !important;
-      height: 50px !important;
-      border-radius: 4px !important;
-      background-color: #f1e9f8 !important;
-      border: none !important;
-      font-size: 20px !important;
-      color: #000 !important;
-      background-image: #f1e9f8 !important;
     }
   }
   .el-form-item__content {
