@@ -434,7 +434,7 @@ export default {
         //   this.addCollection()
         //   this.collectMsg = 1
         // }
-        console.log(this.isCollection)
+        // console.log(this.isCollection)
         if (!this.isCollection) {
           //收藏
           this.addCollection()
@@ -518,12 +518,12 @@ export default {
 
     let isTrue = this.isCollection == null ? false : this.isCollection
     this.collectionInfo.isCollections = isTrue
-    console.log(this.collectionInfo)
+    // console.log(this.collectionInfo)
     this.setIsCollection(this.collectionInfo)
   },
   watch: {
     isCollection(flag) {
-      console.log(flag)
+      // console.log(flag)
     }
   }
 }

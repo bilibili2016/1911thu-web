@@ -517,7 +517,7 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          console.log(response.data.curriculumDetail, '9999')
+          // console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.isStudy = response.data.curriculumDetail.is_study
@@ -650,7 +650,7 @@ export default {
   },
   watch: {
     videoState(flag) {
-      console.log(flag)
+      // console.log(flag)
       if (flag) {
         this.playing = this.playImg
       } else {

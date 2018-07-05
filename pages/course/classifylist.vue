@@ -241,7 +241,7 @@ export default {
       this.onOff = true
       this.curriculumListForm.isFree = 2
     }
-    console.log(this.cid, '这是cid')
+    // console.log(this.cid, '这是cid')
     this.childCategoryList()
     this.curriculumList()
   }
