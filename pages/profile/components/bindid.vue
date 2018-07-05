@@ -6,7 +6,7 @@
       </div>
       <div class="courseID">
         <span>绑定课程ID:</span>
-        <input v-model="binding.inputID" placeholder="请输入您的课程，区别大小写。">
+        <input v-model="binding.inputID" placeholder="请输入您的课程ID，区别大小写。">
         <span class="error" v-show="binding.showErr">{{courseList.error}}</span>
       </div>
       <div class="bindInfo">
@@ -33,7 +33,7 @@
       <div v-show="courseList.addNewID">
         <div class="courseID">
           <span>绑定课程ID:</span>
-          <input v-model="courseList.inputID" placeholder="请输入您的课程，区别大小写。">
+          <input v-model="courseList.inputID" placeholder="请输入您的课程ID，区别大小写。">
           <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
         </div>
         <div class="bindInfo">
