@@ -102,7 +102,7 @@ export default {
     getClassicsList() {
       return new Promise((resolve, reject) => {
         home.getClassicsList(this.classList).then(response => {
-          console.log(response.data.categoryList)
+          // console.log(response.data.categoryList)
           this.classList = response.data.categoryList
           resolve(true)
         })
