@@ -275,7 +275,7 @@
         </div>
       </div>
     </template>
-    <!-- 新上好课详情 页面 -->
+    <!-- coursedetail 页面 -->
     <template v-if="config.card_type === 'goodplay'">
       <div class="courseList center">
         <!-- v-for="(course,index) in courseList -->
@@ -285,9 +285,11 @@
               <img :src="courseList.picture" class="image">
               <div class="mask"></div>
               <div class="common-button btn-bg">
+                <!-- 用户已登录 -->
                 <div v-if="isAuthenticated">
                   <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button> -->
                   <!-- <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看2</el-button> -->
+
                   <div class="playBtn-detail" v-if="privileMsg === true">
                     <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
                   </div>
@@ -295,6 +297,7 @@
                     <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
                   </div>
                 </div>
+                <!-- 用户未登录 -->
                 <div v-else class="playBtn-detail">
                   <!-- <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看3</el-button> -->
                   <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
@@ -305,7 +308,9 @@
           <div class="particularss fr">
             <div class="currentclum">
               <h4>{{courseList.title}}</h4>
-              <div class="tg">团购价更优，团购电话：010-62701911</div>
+              <!-- ==(免费2)={{courseList.is_free}} 是否购买{{privileMsg}} 是否学习（1已学习）{{courseList.is_study }} -->
+              <!-- 团购价更优，团购电话：010-62701911 -->
+              <div class="tg">团购价更优，团购电话：010-62701911 </div>
               <!-- 判断是否免费 is_free(2是免费)-->
               <div v-if="courseList.is_free === '2'">
                 <div class="clum" v-if="courseList.is_study === 1">
@@ -597,6 +602,7 @@ export default {
     },
     goPlay(item) {
       // console.log(item)
+
       persistStore.set(
         'curriculumId',
         item.defaultCurriculumCatalog.curriculum_id
