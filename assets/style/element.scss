@@ -583,8 +583,7 @@
   }
   .el-button {
     width: 108px; // border-radius: 18px;
-    float: right;
-    // border-top-left-radius: 18px;
+    float: right; // border-top-left-radius: 18px;
     // border-bottom-left-radius: 18px;
     border-radius: 18px;
   }
@@ -955,7 +954,7 @@
         overflow: hidden;
       }
       .el-radio__input.is-checked + .el-radio__label {
-        background-color: #6417a6;
+        background-color: #8f4acb;
         color: #fff;
         border: none;
         i {
@@ -1165,9 +1164,11 @@ input:-webkit-autofill {
     }
   }
 }
+
 .el-icon-warning {
   color: #ff5f5f;
 }
+
 .descript {
   span {
     display: inline;
@@ -1175,5 +1176,28 @@ input:-webkit-autofill {
   }
   p {
     margin: 20px 0px;
+  }
+}
+
+.playerBox {
+  .social-share .icon-wechat .wechat-qrcode {
+    top: -205px !important;
+    left: -155px !important;
+    &:after {
+      left: 85% !important;
+      bottom: -13px;
+    }
+  }
+}
+
+.sharePicture {
+  .social-share .icon-wechat .wechat-qrcode {
+    top: 50px !important;
+    &:after {
+      bottom: auto;
+      transform: rotate(-180deg);
+      top: -14px;
+      border-color: #f3f3f3 transparent transparent transparent;
+    }
   }
 }

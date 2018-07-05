@@ -16,7 +16,7 @@
               </el-radio-group>
             </el-form-item>
             <el-form-item label="生日" prop="birthday">
-              <el-date-picker v-model="psnForm.birthday" type="date"></el-date-picker>
+              <el-date-picker v-model="psnForm.birthday" type="date" value-format="yyyy-MM-dd"></el-date-picker>
             </el-form-item>
             <el-form-item label="所在地区" prop="address">
               <el-select v-model="psnForm.province" placeholder="省">
@@ -220,6 +220,16 @@ export default {
       })
     },
     onSubmit() {
+      if (this.psnForm.province !== '') {
+        if (this.psnForm.city == '' || this.psnForm.area == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请选择地址信息！'
+          })
+          return false
+        }
+      }
       home.perInformation(this.psnForm).then(res => {
         let flag = res.status != 0 ? false : true
         this.$emit('update', flag)
@@ -415,7 +425,7 @@ export default {
         ],
         birthday: [
           {
-            type: 'date',
+            type: 'string',
             message: '请选择生日',
             trigger: 'change'
           }

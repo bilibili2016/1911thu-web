@@ -118,20 +118,18 @@ export default {
         this.goLink('/course/chooselesson')
         // this.showNotLogin = false
       } else {
-        this.$bus.$emit('loginShow', true)
         // this.showNotLogin = true
+        this.$bus.$emit('loginShow')
       }
     },
     backToTop() {
       if (this.move) {
         const start = window.pageYOffset
-        // console.log(start)
         let i = 0
         this.interval = setInterval(() => {
           const next = Math.floor(
             this.easeInOutQuad(10 * i, start, -start, 500)
           )
-          // console.log(next)
           if (next <= this.backPosition) {
             window.scrollTo(0, this.backPosition)
             clearInterval(this.interval)

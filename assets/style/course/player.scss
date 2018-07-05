@@ -54,7 +54,7 @@
       .share {
         margin-right: 15px;
         position: relative;
-        .shareIcon {
+        .shareIcons {
           display: none;
           width: 165px;
           height: 31px;
@@ -71,7 +71,7 @@
             }
           }
         }
-        &:hover .shareIcon {
+        &:hover .shareIcons {
           display: block;
         }
       }

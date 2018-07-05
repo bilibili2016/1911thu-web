@@ -3,6 +3,12 @@
   margin: 0 auto;
   .header {
     height: 84px;
+    .rightPages {
+      line-height: 84px;
+      .el-switch {
+        margin-right: 10px;
+      }
+    }
   }
 }
 
