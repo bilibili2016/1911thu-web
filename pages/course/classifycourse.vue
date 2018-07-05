@@ -59,14 +59,7 @@ export default {
       hideSwitch: false,
       loadCourse: false,
       cardlink: 'coursedetail',
-      classList: [
-        '干部通用',
-        '党政系统',
-        '商学院',
-        '行业学院',
-        '职场学院',
-        '热点学院'
-      ],
+      classList: [],
       pagemsg: {
         page: 1,
         pagesize: 5,
@@ -109,6 +102,7 @@ export default {
     getClassicsList() {
       return new Promise((resolve, reject) => {
         home.getClassicsList(this.classList).then(response => {
+          console.log(response.data.categoryList)
           this.classList = response.data.categoryList
           resolve(true)
         })
