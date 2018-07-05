@@ -6,10 +6,10 @@
   img {
     width: 1920px;
     height: 360px;
-    position: absolute;
-    left: 50%;
-    top: 0;
-    margin-left: -960px;
+    // position: absolute;
+    // left: 50%;
+    // top: 0;
+    // margin-left: -960px;
   }
 }
 
@@ -142,8 +142,8 @@
   }
 }
 
-@media screen and (max-width: 1920px) {
-  .degree {
-    min-height: 815px;
-  }
-}
+// @media screen and (max-width: 1920px) {
+//   .degree {
+//     min-height: 815px;
+//   }
+// }
