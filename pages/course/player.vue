@@ -22,9 +22,11 @@
           </span>
 
         </span>
-        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
+        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1}">
           <i class="el-icon-star-on"></i>
-          <span>收藏</span>
+          <span v-if="this.collectMsg === 0">收藏</span>
+          <span v-else>收藏</span>
+          <!-- 已收藏 -->
         </span>
         <span class="fr elt" @click="showElt" v-if="this.iseve === 0">
           <i class="el-icon-edit"></i>课程评价

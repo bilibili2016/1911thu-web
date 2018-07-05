@@ -13,8 +13,10 @@
         <div class="fr">
           <div class="collect">
             <div class="line-center">
+
               <span @click="collection" :class=" { bag: isCollection}">
                 <i class="el-icon-star-on"></i>
+                <!-- {{isCollection}} -->
                 <span>收藏 </span>
               </span>
               <span>
