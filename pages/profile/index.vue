@@ -492,13 +492,13 @@ export default {
     if (this.$route.query.tab) {
       this.activeTab = this.$route.query.tab
     }
+    this.$bus.$on('studyCourse', data => {
+      this.studyCurriculumList()
+    })
   },
   created() {
     this.$bus.$on('selectProfileIndex', data => {
       this.activeTab = data
-    })
-    this.$bus.$on('updateCourse', data => {
-      this.studyCurriculumList()
     })
   }
 }

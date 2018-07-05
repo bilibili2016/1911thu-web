@@ -318,7 +318,7 @@ export default {
         home.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
-          this.changeRate('1')
+          this.changeRate('5')
           this.btnDatas = response.data.evaluateTags
           // this.tagGroup = response.data.evaluateTags
         })
@@ -474,28 +474,6 @@ export default {
           )
         })
       })
-    },
-    shareInit() {
-      let url = 'http://parq881t8.bkt.clouddn.com/iShare_tidy.js'
-      let script = document.createElement('script')
-      script.setAttribute('src', url)
-      document.getElementsByTagName('head')[0].appendChild(script)
-
-      let iShare_config = {
-        container: document.getElementById('iShare'),
-        config: {
-          title: '分享测试',
-          description: '水淀粉及爱丽丝的房间里爱神的箭发牢骚',
-          url: 'http://www.1911edu.com/course/coursedetail',
-          WXoptions: {
-            evenType: 'click',
-            isTitleVisibility: true,
-            isTipVisibility: true,
-            tip: '这是一段测试文本',
-            title: 'QR CODE'
-          }
-        }
-      }
     }
   },
   mounted() {
