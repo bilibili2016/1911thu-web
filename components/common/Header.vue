@@ -9,14 +9,14 @@
       </div>
     </div>
 
-    <!-- <div class="judegExplorer" v-if="judegExplorer">
-      <div>
-        <img src="@/assets/images/hr_discounts1.png" alt="">
-        <span>优惠专题入口</span>
-        <img src="@/assets/images/hr_discounts2.png" alt="">
+    <div class="judegExplorer" v-show="judegExplorer">
+      <p>为提升浏览体验与质量,建议使用
+        <span style="color:#4182f3">Chrome</span>或
+        <span style="color:#4182f3">firefox</span>
         <i class="el-icon-close" @click="closeBanner"></i>
-      </div>
-    </div> -->
+      </p>
+
+    </div>
 
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
@@ -192,6 +192,7 @@ export default {
       return callback()
     }
     return {
+      judegExplorer: false,
       isClick: false,
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
@@ -403,6 +404,7 @@ export default {
   mounted() {
     let me = this
     this.getCount()
+
     this.$bus
       .$on('loginShow', data => {
         this.loginCardShow()
@@ -420,6 +422,20 @@ export default {
       'setToken',
       'setPwd'
     ]),
+    explorer() {
+      var userAgent = navigator.userAgent // 取得浏览器的 userAgent 字符串
+      if (
+        userAgent.indexOf('compatible') > -1 &&
+        userAgent.indexOf('MSIE') > -1 &&
+        !userAgent.indexOf('Opera') > -1
+      ) {
+        console.log('IE')
+        this.judegExplorer = true
+      } else {
+        console.log('其他')
+        this.judegExplorer = false
+      }
+    },
     openWx() {
       var target_url =
         'http://qr.liantu.com/api.php?text=http://test.qicheyitiao.com'
@@ -427,6 +443,7 @@ export default {
     },
     closeBanner() {
       this.bannerMsg = false
+      this.judegExplorer = false
     },
     getCount() {
       return new Promise((resolve, reject) => {
@@ -919,6 +936,7 @@ export default {
     if (!this.token) {
       this.signOut()
     }
+    this.explorer()
   }
 }
 </script>
@@ -971,9 +989,28 @@ export default {
 }
 .judegExplorer {
   width: 100%;
+
   height: 40px;
   line-height: 40px;
   background-color: #f1f1f1;
+  text-align: center;
+  font-size: 16px;
+  color: #222;
+  p {
+    width: 1100px;
+    margin: 0 auto;
+  }
+  i {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #eee;
+  }
 }
 .userPotal {
   position: absolute;
