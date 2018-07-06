@@ -6,7 +6,7 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <!-- <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item> -->
+            <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item>
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -46,7 +46,7 @@
         <!-- 关注我们 -->
         <!-- <div class="attention">
           <div class="code">
-            <img src="http://papn9j3ys.bkt.clouddn.com/wechatLogin.png" alt="">
+            <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
             <h5>扫描二维码，下载“1911学堂”APP</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
@@ -230,8 +230,7 @@ export default {
         evaluatecontent: '',
         scores: '',
         types: 1,
-        tag: [],
-        curriculumcatalogid: ''
+        tag: []
       },
       evaluate: {
         eltnum: null
@@ -281,11 +280,11 @@ export default {
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
-    // goCategory() {
-    //   this.$router.push('/course/category')
-    //   persistStore.set('cid', '1')
-    //   persistStore.set('pid', '')
-    // },
+    goCategory() {
+      this.$router.push('/course/classifylist')
+      persistStore.set('cid', '1')
+      persistStore.set('pid', '')
+    },
     submit() {
       this.$message({
         showClose: true,
@@ -324,7 +323,7 @@ export default {
         home.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
-          this.changeRate('5')
+          this.changeRate('1')
           this.btnDatas = response.data.evaluateTags
           // this.tagGroup = response.data.evaluateTags
         })
@@ -482,6 +481,28 @@ export default {
           )
         })
       })
+    },
+    shareInit() {
+      let url = 'http://parq881t8.bkt.clouddn.com/iShare_tidy.js'
+      let script = document.createElement('script')
+      script.setAttribute('src', url)
+      document.getElementsByTagName('head')[0].appendChild(script)
+
+      let iShare_config = {
+        container: document.getElementById('iShare'),
+        config: {
+          title: '分享测试',
+          description: '水淀粉及爱丽丝的房间里爱神的箭发牢骚',
+          url: 'http://www.1911edu.com/course/coursedetail',
+          WXoptions: {
+            evenType: 'click',
+            isTitleVisibility: true,
+            isTipVisibility: true,
+            tip: '这是一段测试文本',
+            title: 'QR CODE'
+          }
+        }
+      }
     }
   },
   mounted() {
@@ -503,7 +524,7 @@ export default {
   },
   watch: {
     isCollection(flag) {
-      // console.log(flag)
+      console.log(flag)
     }
   }
 }
@@ -514,9 +535,6 @@ export default {
     display: inline !important;
     line-height: 40px;
   }
-}
-.shareIconss .icon-wechat .wechat-qrcode {
-  // top: -100px;
 }
 </style>
 
