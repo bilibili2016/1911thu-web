@@ -519,6 +519,7 @@ export default {
     box-shadow: none;
   }
   &.profile .my-course.my-order {
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     overflow: initial;
   }
   &.profile .my-course#pane-tab-third .el-tabs__content {
