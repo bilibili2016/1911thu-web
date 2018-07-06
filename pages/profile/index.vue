@@ -140,7 +140,7 @@
                     ￥{{course.price}}
                   </div>
                   <div class="courseOperation">
-                    X{{course.pay_number}}
+                    <i class="el-icon-close"></i>{{course.pay_number}}
                   </div>
                 </div>
               </div>
@@ -453,10 +453,15 @@ export default {
         (date.getMonth() + 1 < 10
           ? '0' + (date.getMonth() + 1)
           : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
       let h = date.getHours() + ':'
-      let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
     },
     curriculumPayApply() {
@@ -508,6 +513,7 @@ export default {
 .bigTab {
   width: 1140px;
   & > div > div.el-tabs__content {
+    width: 926px;
     padding: 15px;
     margin-top: -15px;
     box-shadow: none;
@@ -635,6 +641,9 @@ export default {
           margin-left: 35px;
           font-size: 16px;
           color: #332a51;
+          i {
+            font-size: 12px;
+          }
         }
       }
       .tableFooter {

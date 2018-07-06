@@ -8,13 +8,23 @@
         <i class="el-icon-close" @click="closeBanner"></i>
       </div>
     </div>
+
+    <div class="judegExplorer" v-show="judegExplorer">
+      <p>为提升浏览体验与质量,建议使用
+        <span style="color:#4182f3">Chrome</span>或
+        <span style="color:#4182f3">firefox</span>
+        <i class="el-icon-close" @click="closeBanner"></i>
+      </p>
+
+    </div>
+
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
         <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
+        <input type="text" placeholder="请输入课程" v-model="search" @keyup.enter="goSearch">
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
@@ -99,10 +109,10 @@
               <el-form-item prop="passwords">
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
-              <el-form-item prop="companyCodes">
+              <!-- <el-form-item prop="companyCodes">
                 <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
                 <span class="bindCompany">(可选)</span>
-              </el-form-item>
+              </el-form-item> -->
               <el-form-item prop="checked">
                 <el-checkbox-group v-model="registerData.checked">
                   <el-checkbox label="同意" name="checked"></el-checkbox>
@@ -182,6 +192,7 @@ export default {
       return callback()
     }
     return {
+      judegExplorer: false,
       isClick: false,
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
@@ -393,6 +404,7 @@ export default {
   mounted() {
     let me = this
     this.getCount()
+
     this.$bus
       .$on('loginShow', data => {
         this.loginCardShow()
@@ -410,6 +422,15 @@ export default {
       'setToken',
       'setPwd'
     ]),
+    explorer() {
+      if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+        console.log('ie')
+        this.judegExplorer = true
+      } else {
+        console.log('其他')
+        this.judegExplorer = false
+      }
+    },
     openWx() {
       var target_url =
         'http://qr.liantu.com/api.php?text=http://test.qicheyitiao.com'
@@ -417,6 +438,7 @@ export default {
     },
     closeBanner() {
       this.bannerMsg = false
+      this.judegExplorer = false
     },
     getCount() {
       return new Promise((resolve, reject) => {
@@ -847,6 +869,8 @@ export default {
             confirmButtonText: '确定',
             callback: action => {
               this.signOuts()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
               this.$bus.$emit('loginShow', true)
             }
           })
@@ -907,6 +931,7 @@ export default {
     if (!this.token) {
       this.signOut()
     }
+    this.explorer()
   }
 }
 </script>
@@ -957,9 +982,34 @@ export default {
     background-color: #6417a6;
   }
 }
+.judegExplorer {
+  width: 100%;
+
+  height: 40px;
+  line-height: 40px;
+  background-color: #f1f1f1;
+  text-align: center;
+  font-size: 16px;
+  color: #222;
+  p {
+    width: 1100px;
+    margin: 0 auto;
+  }
+  i {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #eee;
+  }
+}
 .userPotal {
   position: absolute;
-  right: 97px;
+  right: 93px;
   bottom: 175px;
   font-size: 12px;
   color: #6417a6;
