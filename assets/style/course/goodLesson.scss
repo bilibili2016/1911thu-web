@@ -7,8 +7,7 @@
     height: 420px;
     width: 100%;
     overflow: hidden;
-    background: url(http://papn9j3ys.bkt.clouddn.com/newLessonBanner.png)
-      no-repeat;
+    background: url(http://papn9j3ys.bkt.clouddn.com/lessonBanner.png) no-repeat;
     background-size: 100% 100%;
     // display: table;
     z-index: 90;
@@ -22,8 +21,8 @@
       right: 0;
       bottom: 0;
       margin: auto;
-      width: 510px;
-      height: 145px;
+      width: 360px;
+      height: 190px;
 
       .desc-one {
         font-size: 46px;
@@ -33,7 +32,7 @@
       .desc-two {
         font-size: 56px;
         color: #fff;
-        margin-top: 30px;
+        margin-top: 80px;
         font-weight: 700;
         text-align: right;
       }

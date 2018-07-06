@@ -883,16 +883,21 @@ export default {
       })
     },
     timestampToTime(timestamp) {
-      var date = new Date(timestamp * 1000)
+      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
       let Y = date.getFullYear() + '-'
       let M =
         (date.getMonth() + 1 < 10
           ? '0' + (date.getMonth() + 1)
           : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
       let h = date.getHours() + ':'
-      let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
     }
   },
@@ -1224,8 +1229,15 @@ export default {
           display: inline-block;
         }
         .title {
+          width: 140px;
+          height: 31px;
+          line-height: 31px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
           float: right;
           color: rgba(109, 104, 127, 1);
+          vertical-align: middle;
         }
       }
       .line-centers {

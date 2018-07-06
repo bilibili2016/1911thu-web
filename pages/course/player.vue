@@ -131,7 +131,7 @@ export default {
       curriculumcartids: {
         cartid: null
       },
-      ischeck: '',
+      ischeck: null,
       mediaRW: 28,
       mediaLW: 72,
       mediaRInner: true,
@@ -254,7 +254,13 @@ export default {
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
     isHasClass() {
+      console.log('isHasClass')
+
       let myVideo = document.getElementById('movd')
+      // console.log(myVideo)
+      if (myVideo == null) {
+        return
+      }
       if (myVideo.getAttribute('class')) {
         // 存在class属性
 
@@ -464,12 +470,14 @@ export default {
       socket.on('reconnect', function(msg) {})
       let that = this
       player.on('pause', () => {
+        console.log('pause')
         this.isHasClass()
         this.playing = this.pauseImg
         clearInterval(that.interval)
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
+        consoel.log('volumechange')
         this.isHasClass()
         // console.log(this.$refs.videoButton.src)
         persistStore.set('volume', player.volume())
@@ -497,8 +505,11 @@ export default {
           // this.ischeck = item.id
         }, 1000)
 
-        that.ischeck = persistStore.get('catalogId')
-        that.playing = that.playImg
+        this.ischeck = persistStore.get('catalogId')
+        this.playing = this.playImg
+      })
+      player.on('play', function() {
+        this.playing = this.pauseImg
       })
       // 计时器
       return new Promise((resolve, reject) => {
@@ -510,8 +521,6 @@ export default {
               confirmButtonText: '确定',
               callback: action => {
                 this.signOuts()
-                //初始化首页数据
-                this.$bus.$emit('reLogin', true)
                 this.$bus.$emit('loginShow', true)
               }
             })
@@ -538,6 +547,7 @@ export default {
           }
         })
       })
+      console.log('before')
       this.isHasClass()
     },
     getCurriculumPlayInfo() {
@@ -599,35 +609,35 @@ export default {
         this.showEvaluate = false
         return false
       }
-      if (this.isStudy) {
-        this.addEvaluateForm.ids = persistStore.get('curriculumId')
-        this.addEvaluateForm.evaluatecontent = this.word
-        this.addEvaluateForm.scores = this.evaluate.eltnum
-        this.addEvaluateForm.tag = this.addEvaluateForm.tag
-          .toString()
-          .replace(/,/g, '#')
-        return new Promise((resolve, reject) => {
-          home.addEvaluate(this.addEvaluateForm).then(response => {
-            // console.log(response)
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-            if (response.status === 0) {
-              this.showEvaluate = false
-              this.iseve = 1
-            }
+      // if (this.isStudy) {
+      this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.evaluatecontent = this.word
+      this.addEvaluateForm.scores = this.evaluate.eltnum
+      this.addEvaluateForm.tag = this.addEvaluateForm.tag
+        .toString()
+        .replace(/,/g, '#')
+      return new Promise((resolve, reject) => {
+        home.addEvaluate(this.addEvaluateForm).then(response => {
+          // console.log(response)
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
           })
+          // if (response.status === 0) {
+          //   this.showEvaluate = false
+          //   this.iseve = 1
+          // }
         })
-      } else {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '您还没有观看该课程，请先观看再来评论吧！'
-        })
-        this.showEvaluate = false
-      }
+      })
+      // } else {
+      //   this.$message({
+      //     showClose: true,
+      //     type: 'error',
+      //     message: '您还没有观看该课程，请先观看再来评论吧！'
+      //   })
+      //   this.showEvaluate = false
+      // }
     },
     // 判断是收藏还是为收藏
     collection() {
