@@ -14,7 +14,7 @@
         <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
+        <input type="text" placeholder="请输入课程" v-model="search" @keyup.enter="goSearch">
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
@@ -99,10 +99,10 @@
               <el-form-item prop="passwords">
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
-              <el-form-item prop="companyCodes">
+              <!-- <el-form-item prop="companyCodes">
                 <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
                 <span class="bindCompany">(可选)</span>
-              </el-form-item>
+              </el-form-item> -->
               <el-form-item prop="checked">
                 <el-checkbox-group v-model="registerData.checked">
                   <el-checkbox label="同意" name="checked"></el-checkbox>
@@ -112,7 +112,9 @@
                 <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
-            <div class="userPotal" @click="userProtocol">用户注册协议</div>
+            <div class="userPotal" @click="userProtocol">
+              <span>1911学堂</span>
+              《用户注册协议》</div>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
         </el-tabs>
@@ -960,8 +962,11 @@ export default {
   }
 }
 .userPotal {
+  span {
+    color: #555555;
+  }
   position: absolute;
-  right: 166px;
+  right: 87px;
   bottom: 175px;
   font-size: 12px;
   color: #6417a6;

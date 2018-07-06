@@ -119,6 +119,13 @@ export default {
     font-family: MicrosoftYaHei;
     color: rgba(255, 254, 254, 1);
   }
+  &:hover {
+    border-radius: 3px;
+    box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+    .picture-style {
+      color: #fff !important;
+    }
+  }
 }
 </style>
 
