@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-07-05 14:24:59
+ * @Last Modified time: 2018-07-06 09:52:03
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -25,8 +25,7 @@ persistStore.defaults({
   productsNum: null,
   number: null,
   index: null,
-  tid: null,
-  isCollection: null
+  tid: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -41,7 +40,6 @@ let productsNum = persistStore.get('productsNum')
 let number = persistStore.get('number')
 let index = persistStore.get('index')
 let tid = persistStore.get('tid')
-let isCollection = persistStore.get('isCollection')
 
 export const MUTATION = {
   signIn: 'sign-in',
@@ -58,8 +56,7 @@ export const MUTATION = {
   setProductsNum: 'set-productsNum',
   setNumber: 'set-number',
   setIndex: 'set-index',
-  setTid: 'set-tid',
-  setIsCollection: 'set-isCollection'
+  setTid: 'set-tid'
 }
 export const state = () => ({
   user,
@@ -74,8 +71,7 @@ export const state = () => ({
   productsNum,
   number,
   index,
-  tid,
-  isCollection
+  tid
 })
 export const getters = {
   isAuthenticated(state) {
@@ -86,9 +82,6 @@ export const getters = {
   },
   isShowTip(state) {
     return state.isShowTip
-  },
-  isCollection(state) {
-    return state.isCollection
   }
 }
 
@@ -137,9 +130,6 @@ export const mutations = {
   },
   [MUTATION.setTid](state, { tid }) {
     state.tid = tid
-  },
-  [MUTATION.setIsCollection](state, { isCollection }) {
-    state.isCollection = isCollection
   }
 }
 export const actions = {
@@ -400,19 +390,5 @@ export const actions = {
       }
     }
     return tid
-  },
-  async setIsCollection({ commit, state }, { isCollections }) {
-    try {
-      let isCollection = isCollections
-      persistStore.set('isCollection', isCollection)
-      commit(MUTATION.setIsCollection, { isCollection })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return isCollection
   }
 }
