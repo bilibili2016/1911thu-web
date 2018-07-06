@@ -8,6 +8,16 @@
         <i class="el-icon-close" @click="closeBanner"></i>
       </div>
     </div>
+
+    <!-- <div class="judegExplorer" v-if="judegExplorer">
+      <div>
+        <img src="@/assets/images/hr_discounts1.png" alt="">
+        <span>优惠专题入口</span>
+        <img src="@/assets/images/hr_discounts2.png" alt="">
+        <i class="el-icon-close" @click="closeBanner"></i>
+      </div>
+    </div> -->
+
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
@@ -958,6 +968,12 @@ export default {
     color: #fff;
     background-color: #6417a6;
   }
+}
+.judegExplorer {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background-color: #f1f1f1;
 }
 .userPotal {
   position: absolute;
