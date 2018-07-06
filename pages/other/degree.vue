@@ -77,8 +77,8 @@ export default {
     let footerHeight = document.getElementsByClassName('footerBox')[0]
       .offsetHeight
     let windowHeight = document.body.clientHeight
-    // console.log(windowHeight)
-    this.$refs.ref.style.height =
+
+    this.$refs.ref.style.minHeight =
       windowHeight - headerHeight - footerHeight + 'px'
   }
 }

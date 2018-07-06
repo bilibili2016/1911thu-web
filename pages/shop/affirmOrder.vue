@@ -6,7 +6,7 @@
         <p>您没有正在进行的订单,{{backSeconds}}s后将会跳转到首页！</p>
       </div>
     </div>
-    <div class="affirmOrder" v-else>
+    <div class="affirmOrder" ref="affirmOrder" v-else>
       <div class="contain" v-loading="loadGoods">
         <h3>确认订单</h3>
         <div class="buyType" v-if="payNumber>1">
@@ -604,6 +604,14 @@ export default {
     this.goodsList()
     this.getInvoiceDetail()
     this.getRegionList()
+
+    let headerHeight = document.getElementsByClassName('headerBox')[0]
+      .offsetHeight
+    let footerHeight = document.getElementsByClassName('footerBox')[0]
+      .offsetHeight
+    let windowHeight = document.body.clientHeight
+    this.$refs.affirmOrder.style.minHeight =
+      windowHeight - headerHeight - footerHeight + 'px'
   },
   methods: {
     buyType(type) {

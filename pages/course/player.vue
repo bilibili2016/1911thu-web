@@ -121,6 +121,7 @@ export default {
   },
   data() {
     return {
+      isFreeCourse: '',
       videoState: false,
       showReportBug: false,
       title: '1',
@@ -541,7 +542,9 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+          // console.log(response)
           // console.log(response.data.curriculumDetail, '9999')
+          // console.log(response.data.curriculumDetail.is_study)
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.bought = response.data.curriculumPrivilege
@@ -549,6 +552,7 @@ export default {
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection
           this.curriculumPrivilege = response.data.curriculumPrivilege
+          this.isFreeCourse = response.data.curriculumDetail.is_free
         })
       })
     },
@@ -583,7 +587,8 @@ export default {
     },
     // 增加评论
     addEvaluate() {
-      if (!this.bought) {
+      //免费课程不购买可以评价
+      if (!this.bought && this.isFreeCourse !== 2) {
         this.$message({
           showClose: true,
           type: 'error',
@@ -601,6 +606,7 @@ export default {
           .replace(/,/g, '#')
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
+            // console.log(response)
             this.$message({
               showClose: true,
               type: 'success',

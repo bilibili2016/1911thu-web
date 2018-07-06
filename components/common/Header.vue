@@ -126,27 +126,27 @@
             <span>绑定手机账号</span>
           </h4>
           <el-form-item prop="tel">
-            <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
+            <el-input v-model.number="bindTelData.phones" placeholder录手机号 "></el-input>
           </el-form-item>
-          <el-form-item prop="code">
-            <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
-            <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
+          <el-form-item prop="code ">
+            <el-input class="captcha " v-model.number="bindTelData.codes " placeholder="请输入验证码 "></el-input>
+            <div class="getCode " @click="verifyRgTelWX ">{{bindTelData.getCode}}</div>
           </el-form-item>
-          <el-form-item prop="companyCodes">
-            <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
-            <span class="bindCompany">(可选)</span>
+          <el-form-item prop="companyCodes ">
+            <el-input v-model="bindTelData.companyCodes " placeholder="绑定机构 "></el-input>
+            <span class="bindCompany ">(可选)</span>
           </el-form-item>
           <el-row>
-            <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
+            <el-button @click.native="loginWechat(bindTelData) ">绑定</el-button>
           </el-row>
         </el-form>
-        <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"></h4>
+        <div class="scanCode " v-show="scanCodeShow ">
+          <h4 class="clearfix "></h4>
           <!-- el-icon-loading -->
-          <div class="wxchatIMG" id="wxchatIMG"></div>
+          <div class="wxchatIMG " id="wxchatIMG "></div>
         </div>
-        <div class="bindSuccess" v-show="bindSuccessShow">
-          <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
+        <div class="bindSuccess " v-show="bindSuccessShow ">
+          <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png " alt=" ">
           <h5>手机账号绑定成功</h5>
           <p>返回登录 3S</p>
         </div>
@@ -966,7 +966,7 @@ export default {
     color: #555555;
   }
   position: absolute;
-  right: 87px;
+  right: 97px;
   bottom: 175px;
   font-size: 12px;
   color: #6417a6;
