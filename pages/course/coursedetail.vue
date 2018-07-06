@@ -13,8 +13,7 @@
         <div class="fr">
           <div class="collect">
             <div class="line-center">
-
-              <span @click="collection" :class=" { bag: isCollection}">
+              <span @click="collection" :class=" { bag: collectMsg === 1}">
                 <i class="el-icon-star-on"></i>
                 <!-- {{isCollection}} -->
                 <span>收藏 </span>
@@ -384,6 +383,7 @@ export default {
       this.kidForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
+          // console.log(response)
           this.loadMsg = false
 
           this.courseList = response.data.curriculumDetail
@@ -392,6 +392,7 @@ export default {
           this.privileMsg = response.data.curriculumPrivilege
           this.content = response.data.curriculumPrivilege
           this.loadTeacher = false
+          this.collectMsg = response.data.curriculumDetail.is_collection
         })
       })
     },
@@ -429,26 +430,12 @@ export default {
     // 判断是收藏还是未收藏
     collection() {
       if (this.isAuthenticated) {
-        // if (this.collectMsg === 1) {
-        //   this.deleteCollection()
-        //   this.collectMsg = 2
-        // } else {
-        //   this.addCollection()
-        //   this.collectMsg = 1
-        // }
-        // console.log(this.isCollection)
-        if (!this.isCollection) {
-          //收藏
-          this.addCollection()
-          // this.collectMsg = true
-          this.collectionInfo.isCollections = true
-          this.setIsCollection(this.collectionInfo)
-        } else {
-          //取消收藏
+        if (this.collectMsg === 1) {
           this.deleteCollection()
-          // this.collectMsg = false
-          this.collectionInfo.isCollections = false
-          this.setIsCollection(this.collectionInfo)
+          this.collectMsg = 2
+        } else {
+          this.addCollection()
+          this.collectMsg = 1
         }
       } else {
         this.$bus.$emit('loginShow', true)
@@ -464,9 +451,7 @@ export default {
             type: 'success',
             message: '添加收藏成功'
           })
-          // this.collectMsg = 1
-          this.collectionInfo.isCollections = true
-          this.setIsCollection(this.collectionInfo)
+          this.collectMsg = 1
         })
       })
     },
@@ -477,15 +462,13 @@ export default {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.deleteCollection(this.addCollectionForm).then(response => {
-          // this.collectMsg = response.data.curriculumDetail.is_collection
+          this.collectMsg = response.data.curriculumDetail.is_collection
           this.$message({
             showClose: true,
             type: 'success',
             message: '取消收藏成功'
           })
-          // this.collectMsg = 0
-          this.collectionInfo.isCollections = false
-          this.setIsCollection(this.collectionInfo)
+          this.collectMsg = 0
         })
       })
     },
@@ -517,11 +500,6 @@ export default {
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
-
-    let isTrue = this.isCollection == null ? false : this.isCollection
-    this.collectionInfo.isCollections = isTrue
-    // console.log(this.collectionInfo)
-    this.setIsCollection(this.collectionInfo)
   },
   watch: {
     isCollection(flag) {
