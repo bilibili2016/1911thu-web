@@ -605,7 +605,7 @@ export default {
       let footerHeight = document.getElementsByClassName('footerBox')[0]
         .offsetHeight
       let windowHeight = document.documentElement.clientHeight
-      console.log(windowHeight)
+      // console.log(windowHeight)
       this.$refs.affirmOrder.style.minHeight =
         windowHeight - headerHeight - footerHeight + 'px'
     },
