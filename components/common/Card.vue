@@ -240,7 +240,7 @@
           </el-card>
           <div class="particulars fr ">
             <div class="currentclum ">
-              <h4>{{course.title}}</h4>
+              <h4 @click="courseInfo(course)">{{course.title}}</h4>
               <p>{{course.introduction}}</p>
             </div>
             <!-- {{course.evaluateList}} -->

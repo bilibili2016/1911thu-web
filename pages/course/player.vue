@@ -131,7 +131,7 @@ export default {
       curriculumcartids: {
         cartid: null
       },
-      ischeck: null,
+      ischeck: '',
       mediaRW: 28,
       mediaLW: 72,
       mediaRInner: true,
@@ -502,11 +502,8 @@ export default {
           // this.ischeck = item.id
         }, 1000)
 
-        this.ischeck = persistStore.get('catalogId')
-        this.playing = this.playImg
-      })
-      player.on('play', function() {
-        this.playing = this.pauseImg
+        that.ischeck = persistStore.get('catalogId')
+        that.playing = that.playImg
       })
       // 计时器
       return new Promise((resolve, reject) => {
@@ -518,6 +515,8 @@ export default {
               confirmButtonText: '确定',
               callback: action => {
                 this.signOuts()
+                //初始化首页数据
+                this.$bus.$emit('reLogin', true)
                 this.$bus.$emit('loginShow', true)
               }
             })
