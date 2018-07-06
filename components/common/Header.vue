@@ -112,9 +112,9 @@
                 <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
-            <div class="userPotal" @click="userProtocol">
-              <span>1911学堂</span>
-              《用户注册协议》</div>
+
+            <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
+
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
         </el-tabs>
@@ -962,9 +962,6 @@ export default {
   }
 }
 .userPotal {
-  span {
-    color: #555555;
-  }
   position: absolute;
   right: 97px;
   bottom: 175px;

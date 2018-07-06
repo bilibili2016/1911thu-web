@@ -1,19 +1,42 @@
 .goodLesson {
   background-color: #fafafa;
   padding-bottom: 1px;
+
   .topImg {
-    width: 100%;
-    height: 360px;
     position: relative;
+    height: 420px;
+    width: 100%;
     overflow: hidden;
-    img {
+    background: url(http://papn9j3ys.bkt.clouddn.com/newLessonBanner.png)
+      no-repeat;
+    background-size: 100% 100%;
+    // display: table;
+    z-index: 90;
+    .top-con {
+      // display: table-cell;
+      // vertical-align: middle;
+      // text-align: center;
       position: absolute;
-      // top: 0;
       left: 0;
+      top: 0;
       right: 0;
-      // margin-left: -960px;
-      width: 100%;
-      height: 360px;
+      bottom: 0;
+      margin: auto;
+      width: 510px;
+      height: 145px;
+
+      .desc-one {
+        font-size: 46px;
+        color: #fff;
+        font-weight: 700;
+      }
+      .desc-two {
+        font-size: 56px;
+        color: #fff;
+        margin-top: 30px;
+        font-weight: 700;
+        text-align: right;
+      }
     }
   }
   .breadCrumb {
