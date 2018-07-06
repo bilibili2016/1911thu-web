@@ -542,7 +542,11 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+<<<<<<< HEAD
           // console.log(response)
+=======
+          // console.log(response.data.curriculumDetail, '9999')
+>>>>>>> liyr
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.bought = response.data.curriculumPrivilege
