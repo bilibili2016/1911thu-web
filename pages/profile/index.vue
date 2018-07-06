@@ -234,8 +234,8 @@ export default {
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
-      avator: 'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png',
-      noMsgImg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
+      avator: 'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png',
+      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       tabPosition: 'left',
       activeTab: 'tab-first',
       activeNames: 'first',
@@ -492,13 +492,13 @@ export default {
     if (this.$route.query.tab) {
       this.activeTab = this.$route.query.tab
     }
+    this.$bus.$on('studyCourse', data => {
+      this.studyCurriculumList()
+    })
   },
   created() {
     this.$bus.$on('selectProfileIndex', data => {
       this.activeTab = data
-    })
-    this.$bus.$on('updateCourse', data => {
-      this.studyCurriculumList()
     })
   }
 }

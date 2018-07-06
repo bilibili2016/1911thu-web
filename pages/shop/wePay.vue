@@ -117,7 +117,7 @@ export default {
       allPrice: '69.00',
       status: '等待审核',
       time: null,
-      noMsgImg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
+      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       noData: false,
       loding: true,
       kidForm: {

@@ -35,7 +35,7 @@
         <div class="fr rightPages" v-if="showFree">
           <span>
             <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#ddd" @change="hideCourse">
-            </el-switch>免费课程
+            </el-switch> 免费课程
           </span>
         </div>
       </div>
@@ -81,7 +81,8 @@ export default {
       showFree: false,
       configSevent: {
         card_type: 'profile',
-        card: 'home'
+        card: 'home',
+        free: 'true'
       },
       pagemsg: {
         page: 1,
@@ -97,13 +98,22 @@ export default {
         sortBy: 1,
         pages: 1,
         limits: 8,
-        isFree: 0
+        isFree: 2
       },
       cidform: {
         cids: ''
       },
       pidform: {
         pids: ''
+      }
+    }
+  },
+  watch: {
+    onOff(val) {
+      if (val) {
+        this.configSevent.free = 'true'
+      } else {
+        this.configSevent.free = 'false'
       }
     }
   },
@@ -125,9 +135,9 @@ export default {
     },
     hideCourse() {
       if (this.onOff) {
-        this.curriculumListForm.isFree = 1
+        this.curriculumListForm.isFree = 2
       } else {
-        this.curriculumListForm.isFree = 0
+        this.curriculumListForm.isFree = 1
       }
       this.curriculumList()
     },
@@ -139,12 +149,14 @@ export default {
       this.setCid(this.cidform)
       this.pidform.pids = ''
       this.setPid(this.pidform)
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
     handleItemTwo(item, index) {
       this.bgmsgs = item.id
       this.pidform.pids = item.id
       this.setPid(this.pidform)
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
     getCidList() {
@@ -176,23 +188,23 @@ export default {
             case '1':
               this.data2 = this.data[0]
               break
-            case '16':
+            case '17':
               this.data2 = this.data[1]
               break
-            case '17':
+            case '19':
               this.data2 = this.data[2]
               break
-            case '18':
+            case '16':
               this.data2 = this.data[3]
               break
-            case '19':
+            case '18':
               this.data2 = this.data[4]
               break
             case '20':
               this.data2 = this.data[5]
               break
             default:
-              this.data2 = this.data[0]
+              // this.$router.push("/course/search");
               break
           }
           resolve(true)
@@ -207,9 +219,9 @@ export default {
         home.curriculumList(this.curriculumListForm).then(response => {
           this.categoryData = response.data.curriculumList
           this.pagemsg.total = response.data.pageCount
-          this.setProductsNum({
-            pn: this.categoryData.length
-          })
+          // this.setProductsNum({
+          //   pn: this.categoryData.length
+          // })
           resolve(true)
         })
       })
@@ -218,7 +230,7 @@ export default {
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.cidform.cids = ''
+    this.cidform.cids = '1'
     this.pidform.pids = ''
     // this.bgmsg = 0;
     this.activeName = 'first'
@@ -229,8 +241,9 @@ export default {
     if (persistStore.get('showFree')) {
       this.showFree = true
       this.onOff = true
-      this.curriculumListForm.isFree = 1
+      this.curriculumListForm.isFree = 2
     }
+    // console.log(this.cid, '这是cid')
     this.childCategoryList()
     this.curriculumList()
   }

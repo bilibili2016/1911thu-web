@@ -1,7 +1,7 @@
 <template>
   <div class="classify">
     <div class="starters">
-      <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="selectCollege(index,item)" @mouseleave="leave">
+      <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="selectCollege(index,item)" @mouseleave="leave" style="display:block;">
         <div class="tabs-title">{{item.category_name}}</div>
         <div class="tabs-content" v-show="index===itemID">
           <div class="subClass">
@@ -10,13 +10,20 @@
                 <i></i>
               </span>
             </h4>
-            <p>
+            <p v-if="item.is_picture_show === '0'">
               <span v-for="(child,index) in item._child" :key="child.id" @click="handlePid(child,index)">
                 <span>{{child.category_name}}</span>
               </span>
             </p>
+            <p v-if="item.is_picture_show === '1'">
+              <span v-for="(child,index) in item._child" :key="child.id" @click="handlePid(child,index)" class="is_picture">
+                <img :src="child.picture" alt="">
+                <span class="picture-style">{{child.category_name}}</span>
+              </span>
+
+            </p>
           </div>
-          <div class="courseMsg">
+          <div class="courseMsg" v-if="item.is_picture_show === '0'">
             <div class="courseOne clearfix" v-for="(curriculum,index) in item.curriculumList" :key="index" @click="getMore(curriculum)">
               <img class="fl" :src="curriculum.picture" alt="">
               <div class="fl hover">
@@ -94,6 +101,30 @@ export default {
   }
   p:hover {
     color: #8f4acb;
+  }
+}
+.is_picture {
+  display: inline-block;
+  width: 316px;
+  height: 86px;
+  // border: 1px red solid;
+  margin: 20px 53px 20px 30px;
+  // width: 0pc
+  position: relative;
+  .picture-style {
+    position: absolute;
+    top: 25px;
+    left: 85px;
+    font-size: 18px;
+    font-family: MicrosoftYaHei;
+    color: rgba(255, 254, 254, 1);
+  }
+  &:hover {
+    border-radius: 3px;
+    box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+    .picture-style {
+      color: #fff !important;
+    }
   }
 }
 </style>

@@ -47,9 +47,9 @@
             <!-- <div>{{player.is_cart}}</div> -->
           </div>
           <!-- player.is_car ===  1 ? false : true -->
-          <div v-if="player.is_cart === 1">
+          <!-- <div v-if="player.is_cart === 1">
             <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
-          </div>
+          </div> -->
           <!-- <div v-else>{{player.is_cart}}</div> -->
         </div>
         <div class="courseList" ref="courseList">
@@ -116,9 +116,9 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapState('auth', ['kid', 'tid'])
+    ...mapState('auth', ['kid', 'tid']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
-
   data() {
     return {
       videoState: false,
@@ -164,7 +164,8 @@ export default {
       ],
       problem: {
         curriculumId: null,
-        content: ''
+        content: '',
+        curriculumcatalogid: ''
       },
       word: '',
       evaluate: {
@@ -211,13 +212,16 @@ export default {
         ids: null,
         evaluatecontent: null,
         scores: null,
-        types: 1
+        types: 1,
+        curriculumcatalogid: '',
+        tag: []
       },
       addCollectionForm: {
         curriculumId: null
       },
       collectMsg: 1,
       iseve: 1,
+      bought: false,
       isStudy: false,
       getdefaultForm: {
         curriculumid: ''
@@ -233,11 +237,19 @@ export default {
       btnData: [],
       reTagBtn: [],
       tagGroup: '',
-      rateModel: 5
+      rateModel: 5,
+      addEvaluateForm: {
+        ids: '',
+        evaluatecontent: '',
+        scores: '',
+        types: 1,
+        tag: [],
+        curriculumcatalogid: ''
+      }
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg', 'setTid']),
+    ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
     isHasClass() {
       let myVideo = document.getElementById('movd')
       if (myVideo.getAttribute('class')) {
@@ -252,6 +264,11 @@ export default {
         }
       }
     },
+    signOuts() {
+      this.signOut()
+      persistStore.clearAll()
+      this.$router.push('/')
+    },
     changeRate(val) {
       this.reTagBtn = []
       this.tagGroup[val].map((item, i) => {
@@ -262,6 +279,16 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
+    },
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
+      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     handleCourse(item, index) {
       this.ischeck = item.id
@@ -278,11 +305,21 @@ export default {
         home.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
-          this.changeRate('1')
+          this.changeRate('5')
           this.btnDatas = response.data.evaluateTags
           // this.tagGroup = response.data.evaluateTags
         })
       })
+    },
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
+      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
@@ -468,6 +505,14 @@ export default {
         home.getPlayerInfos(this.playerForm).then(response => {
           if (response.status === '100100') {
             this.goShoppingCart(response.msg)
+          } else if (response.status === '100006') {
+            this.$alert('您已退出登录，请重新登录', '温馨提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.signOuts()
+                this.$bus.$emit('loginShow', true)
+              }
+            })
           } else {
             if (response.data.playAuthInfo.videoViewType == false) {
               player.loadVideoByID({
@@ -497,9 +542,10 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          // console.log(response)
+          // console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
+          this.bought = response.data.curriculumPrivilege
           this.isStudy = response.data.curriculumDetail.is_study
           this.courseList = response.data.curriculumCatalogList
           this.collectMsg = response.data.curriculumDetail.is_collection
@@ -510,22 +556,43 @@ export default {
     // 反馈问题
     reportProblem() {
       this.problem.curriculumId = persistStore.get('curriculumId')
+      this.problem.curriculumcatalogid = persistStore.get('catalogId')
       return new Promise((resolve, reject) => {
         home.reportProblem(this.problem).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: response.msg
-          })
+          // this.closeReport()
+
+          if (response.status === '100100') {
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          } else {
+            this.closeReport()
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          }
+
           if (this.word === '') {
             return
           }
-          this.closeReport()
         })
       })
     },
     // 增加评论
     addEvaluate() {
+      if (!this.bought) {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '您还没有购买该课程，请先购买后再来评论吧！'
+        })
+        this.showEvaluate = false
+        return false
+      }
       if (this.isStudy) {
         this.addEvaluateForm.ids = persistStore.get('curriculumId')
         this.addEvaluateForm.evaluatecontent = this.word
@@ -545,6 +612,10 @@ export default {
               this.iseve = 1
             }
           })
+          if (response.status === 0) {
+            this.showEvaluate = false
+            this.iseve = 1
+          }
         })
       } else {
         this.$message({
@@ -552,6 +623,7 @@ export default {
           type: 'error',
           message: '您还没有观看该课程，请先观看再来评论吧！'
         })
+        this.showEvaluate = false
       }
     },
     // 判断是收藏还是为收藏
@@ -616,7 +688,7 @@ export default {
   },
   watch: {
     videoState(flag) {
-      console.log(flag)
+      // console.log(flag)
       if (flag) {
         this.playing = this.playImg
       } else {
@@ -630,38 +702,38 @@ export default {
 .displays {
   display: none;
 }
-.shareIcond {
-  opacity: 0;
-  // display: none;
-  margin-top: -104px;
-  width: 121px;
-  height: 56px;
-  // background: rgba(255, 255, 255, 1);
-  border-radius: 4px;
-  // box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-  position: absolute;
-  transition: all 300ms;
-  top: 55px;
-  right: 0px;
-  z-index: 99999;
-  i {
-    display: inline-block;
-    width: 55.4px;
-    line-height: 36px;
-    text-align: center;
-    color: #222;
-    font-size: 12px;
-    margin: 0;
-    &:hover {
-      color: #8f4acb;
+.playerBox {
+  .shareIcond {
+    opacity: 0;
+    display: none;
+    margin-top: -104px;
+    width: 121px;
+    height: 56px;
+    border-radius: 4px;
+    position: absolute;
+    transition: all 300ms;
+    top: 55px;
+    right: 0px;
+    z-index: 99999;
+    i {
+      display: inline-block;
+      width: 55.4px;
+      line-height: 36px;
+      text-align: center;
+      color: #222;
+      font-size: 12px;
+      margin: 0;
+      &:hover {
+        color: #8f4acb;
+      }
     }
-  }
-  img {
-    width: 100px;
-    height: 100px;
-    margin: 15px 0 0 2.7px;
-    display: block;
-    cursor: pointer;
+    img {
+      width: 100px;
+      height: 100px;
+      margin: 15px 0 0 2.7px;
+      display: block;
+      cursor: pointer;
+    }
   }
 }
 .share {

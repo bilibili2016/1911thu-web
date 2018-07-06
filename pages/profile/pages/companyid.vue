@@ -58,7 +58,7 @@ export default {
         showErr: false,
         success: false
       },
-      bindImg: 'http://pam8iyw9q.bkt.clouddn.com/bindingSuccess.png',
+      bindImg: 'http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png',
       bindForm: {
         companyId: ''
       },
