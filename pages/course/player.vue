@@ -610,12 +610,10 @@ export default {
       this.addEvaluateForm.evaluatecontent = this.word
       this.addEvaluateForm.scores = this.evaluate.eltnum
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
-      this.addEvaluateForm.curriculumcatalogid = persistStore
-        .get('catalogId')
-        .get('curriculumId')
         .toString()
         .replace(/,/g, '#')
-      console.log(this.addEvaluateForm)
+      // console.log(this.addEvaluateForm)
+      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
 
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
