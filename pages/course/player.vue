@@ -616,9 +616,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
           if (response.status === 0) {
-            this.showEvaluate = false
             this.iseve = 1
           }
+          this.showEvaluate = false
           // console.log(response)
           this.$message({
             showClose: true,
