@@ -605,7 +605,7 @@ export default {
       let footerHeight = document.getElementsByClassName('footerBox')[0]
         .offsetHeight
       let windowHeight = document.documentElement.clientHeight
-      console.log(windowHeight)
+      // console.log(windowHeight)
       this.$refs.affirmOrder.style.minHeight =
         windowHeight - headerHeight - footerHeight + 'px'
     },
@@ -638,7 +638,7 @@ export default {
     reAccount() {
       if (
         this.zzTicketForm.account == '' ||
-        !/^[0-9]+$/.test(this.zzTicketForm.account)
+        !/^[0-9 ]+$/.test(this.zzTicketForm.account)
       ) {
         this.tipsAccount = false
         this.account = true
@@ -746,12 +746,12 @@ export default {
           return false
         } else if (
           this.zzTicketForm.account == '' ||
-          !/^[0-9]+$/.test(this.zzTicketForm.account)
+          !/^[0-9 ]+$/.test(this.zzTicketForm.account)
         ) {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '请输入正确的开户银行账户！'
+            message: '请输入正确的银行账户！'
           })
           return false
         }
@@ -979,7 +979,6 @@ export default {
       return tmp
     },
     isTicket(item) {
-      console.log(item, '这是item')
       if (item === 2) {
         this.ticketForm.isRadio = false
       } else {
