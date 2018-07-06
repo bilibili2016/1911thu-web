@@ -6,7 +6,7 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item>
+            <!-- <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item> -->
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -140,7 +140,7 @@
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
               </div>
               <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
-              <h5 v-else>#{{item.tags}}，{{item.evaluate_content}}</h5>
+              <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
             </div>
           </div>
         </div>
@@ -273,6 +273,7 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
+      this.addEvaluateForm.tag = []
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
@@ -280,11 +281,11 @@ export default {
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
-    goCategory() {
-      this.$router.push('/course/classifylist')
-      persistStore.set('cid', '1')
-      persistStore.set('pid', '')
-    },
+    // goCategory() {
+    //   this.$router.push('/course/classifylist')
+    //   persistStore.set('cid', '1')
+    //   persistStore.set('pid', '')
+    // },
     submit() {
       this.$message({
         showClose: true,
@@ -323,7 +324,7 @@ export default {
         home.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
-          this.changeRate('1')
+          this.changeRate('5')
           this.btnDatas = response.data.evaluateTags
           // this.tagGroup = response.data.evaluateTags
         })
@@ -334,11 +335,9 @@ export default {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
-
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
@@ -524,7 +523,7 @@ export default {
   },
   watch: {
     isCollection(flag) {
-      console.log(flag)
+      // console.log(flag)
     }
   }
 }

@@ -1,7 +1,11 @@
 <template>
   <div class="goodLesson new-lesson">
     <div class="topImg">
-      <img :src="atopImg" alt="">
+      <!-- <img :src="atopImg" alt=""> -->
+      <div class="top-con">
+        <p class="desc-one">走心课程</p>
+        <p class="desc-two">实力覆盖</p>
+      </div>
     </div>
     <div class="breadCrumb">
       <span>当前位置：</span>
@@ -33,7 +37,7 @@ export default {
   },
   data() {
     return {
-      atopImg: 'http://pam8iyw9q.bkt.clouddn.com/banner2.png',
+      atopImg: 'http://papn9j3ys.bkt.clouddn.com/newLessonBanner.png',
       config: {
         card_type: 'goodlesson'
       },
@@ -57,6 +61,9 @@ export default {
             this.noMoreData = true
           }
           this.courseList = this.courseList.concat(response.data.curriculumList)
+          for (var i = 0; i < this.courseList.length; i++) {
+            this.$set(this.courseList[i], 'isCartNew', 0)
+          }
           this.pageCount = response.data.pageCount
           this.scrollTopMsg = true
 

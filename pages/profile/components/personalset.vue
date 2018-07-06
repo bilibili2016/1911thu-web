@@ -307,7 +307,7 @@ export default {
     },
     insertEle() {
       var oTest = document.getElementById('onlyOne').parentNode
-      console.log(oTest)
+      // console.log(oTest)
       var newNode = document.createElement('input')
       var reforeNode = document.getElementById('onlyOne')
       // newNode.setAttribute({ type: 'password', name: 'noauto' })
@@ -319,7 +319,6 @@ export default {
     }
   },
   mounted() {
-    this.insertEle()
     if (this.isAuthenticated) {
       this.getUserInfo()
       this.getPositionList()

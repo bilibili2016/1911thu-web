@@ -107,6 +107,7 @@ export default {
   display: inline-block;
   width: 316px;
   height: 86px;
+  border-radius: 8px;
   // border: 1px red solid;
   margin: 20px 53px 20px 30px;
   // width: 0pc
@@ -119,8 +120,11 @@ export default {
     font-family: MicrosoftYaHei;
     color: rgba(255, 254, 254, 1);
   }
+  img {
+    border-radius: 8px;
+  }
   &:hover {
-    border-radius: 3px;
+    border-radius: 8px;
     box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
     .picture-style {
       color: #fff !important;

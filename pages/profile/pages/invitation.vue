@@ -87,7 +87,7 @@ export default {
 
       if (Number(date.getSeconds()) < 10) {
         this.s = '0' + date.getSeconds()
-        console.log(this.s, '123131')
+        // console.log(this.s, '123131')
       } else {
         this.s = date.getSeconds()
       }
