@@ -6,7 +6,7 @@
         <p>您没有正在进行的订单,{{backSeconds}}s后将会跳转到首页！</p>
       </div>
     </div>
-    <div class="affirmOrder" v-else>
+    <div class="affirmOrder" ref="affirmOrder" v-else>
       <div class="contain" v-loading="loadGoods">
         <h3>确认订单</h3>
         <div class="buyType" v-if="payNumber>1">
@@ -260,14 +260,19 @@
               <p class="fl">
                 <i>*</i>单位名称</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.companyname" placeholder="请输入单位名称">
+                <input type="text" v-model="zzTicketForm.companyname" @blur="zzTicketForm.companyname==''?(tipsName=false,name=true):(tipsName=true,name=true)" placeholder="请输入单位名称">
+                <span class="tips" v-show="tipsName&&name">
+                  <i class="el-icon-success"></i>
+                </span>
+                <span class="tips" v-show="!tipsName&&name">
+                  <i class="el-icon-warning"></i>单位名称不正确！</span>
               </p>
             </div>
             <div class="formLi clearfix">
               <p class="fl">
                 <i>*</i>纳税人识别码</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.number" @change="reNumber" placeholder="请输入纳税人识别码">
+                <input type="text" v-model="zzTicketForm.number" @blur="zzTicketForm.number == '' || !/^[A-Za-z0-9]+$/.test(zzTicketForm.number)?(tipsNumber=false,number=true):(tipsNumber=true,number=true)" placeholder="请输入纳税人识别码">
                 <span class="tips" v-show="tipsNumber&&number">
                   <i class="el-icon-success"></i>
                 </span>
@@ -291,7 +296,7 @@
               <p class="fl">
                 <i>*</i>注册电话</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.phones" @change="rePhone" placeholder="请输入注册电话">
+                <input type="text" v-model="zzTicketForm.phones" @blur="zzTicketForm.phones == '' || !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(zzTicketForm.phones)?(tipsPhones=false,phones=true):(tipsPhones=true,phones=true)" placeholder="请输入注册电话">
                 <span class="tips" v-show="tipsPhones&&phones">
                   <i class="el-icon-success"></i>
                 </span>
@@ -315,7 +320,8 @@
               <p class="fl">
                 <i>*</i>银行账户</p>
               <p class="fr">
-                <input type="text" v-model.number="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账户">
+                <input type="text" v-model.number="zzTicketForm.account" @blur="zzTicketForm.account == '' ||
+        !/^[0-9]+$/.test(zzTicketForm.account)?(tipsAccount=false,account=true):(tipsAccount=true,account=true)" placeholder="请输入银行账户">
                 <span class="tips" v-show="tipsAccount&&account">
                   <i class="el-icon-success"></i>
                 </span>
@@ -499,11 +505,13 @@ export default {
         isRadio: true,
         types: 3
       },
+      tipsName: null,
       tipsNumber: null,
       tipsAccount: null,
       tipsBank: null,
       tipsPhones: null,
       tipsZcadd: null,
+      name: false,
       number: false,
       zcadd: false,
       phones: false,
@@ -596,46 +604,16 @@ export default {
     this.goodsList()
     this.getInvoiceDetail()
     this.getRegionList()
+
+    let headerHeight = document.getElementsByClassName('headerBox')[0]
+      .offsetHeight
+    let footerHeight = document.getElementsByClassName('footerBox')[0]
+      .offsetHeight
+    let windowHeight = document.body.clientHeight
+    this.$refs.affirmOrder.style.minHeight =
+      windowHeight - headerHeight - footerHeight + 'px'
   },
   methods: {
-    reNumber() {
-      if (
-        this.zzTicketForm.number == '' ||
-        !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
-      ) {
-        this.tipsNumber = false
-        this.number = true
-      } else {
-        this.tipsNumber = true
-        this.number = true
-      }
-    },
-    rePhone() {
-      if (
-        this.zzTicketForm.phones == '' ||
-        !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
-          this.zzTicketForm.phones
-        )
-      ) {
-        this.tipsPhones = false
-        this.phones = true
-      } else {
-        this.tipsPhones = true
-        this.phones = true
-      }
-    },
-    reAccount() {
-      if (
-        this.zzTicketForm.account == '' ||
-        !/^[0-9]+$/.test(this.zzTicketForm.account)
-      ) {
-        this.tipsAccount = false
-        this.account = true
-      } else {
-        this.tipsAccount = true
-        this.account = true
-      }
-    },
     buyType(type) {
       if (type === '1') {
         this.person = true
@@ -963,7 +941,7 @@ export default {
       return tmp
     },
     isTicket(item) {
-      console.log(item, '这是item')
+      // console.log(item, '这是item')
       if (item === 2) {
         this.ticketForm.isRadio = false
       } else {

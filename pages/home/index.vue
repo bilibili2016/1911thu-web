@@ -16,7 +16,7 @@
       <!-- 学堂资讯 -->
       <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive="titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
       <!-- 合作伙伴 -->
-      <v-partner :data="partnerList.list"></v-partner>
+      <!-- <v-partner :data="partnerList.list"></v-partner> -->
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>
