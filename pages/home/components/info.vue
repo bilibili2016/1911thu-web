@@ -1,5 +1,5 @@
 <template>
-  <div class="home-info bg">
+  <div class="home-info bg-none">
     <el-row class="info-center center">
       <v-title :data="titleFive"></v-title>
       <div v-loading="load" class="newsUl clearfix">
