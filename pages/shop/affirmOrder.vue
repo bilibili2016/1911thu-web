@@ -596,16 +596,19 @@ export default {
     this.goodsList()
     this.getInvoiceDetail()
     this.getRegionList()
-
-    let headerHeight = document.getElementsByClassName('headerBox')[0]
-      .offsetHeight
-    let footerHeight = document.getElementsByClassName('footerBox')[0]
-      .offsetHeight
-    let windowHeight = document.body.clientHeight
-    this.$refs.affirmOrder.style.minHeight =
-      windowHeight - headerHeight - footerHeight + 'px'
+    this.resize()
   },
   methods: {
+    resize() {
+      let headerHeight = document.getElementsByClassName('headerBox')[0]
+        .offsetHeight
+      let footerHeight = document.getElementsByClassName('footerBox')[0]
+        .offsetHeight
+      let windowHeight = document.documentElement.clientHeight
+      console.log(windowHeight)
+      this.$refs.affirmOrder.style.minHeight =
+        windowHeight - headerHeight - footerHeight + 'px'
+    },
     reNumber() {
       if (
         this.zzTicketForm.number == '' ||
