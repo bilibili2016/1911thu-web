@@ -424,10 +424,8 @@ export default {
     ]),
     explorer() {
       if (!!window.ActiveXObject || 'ActiveXObject' in window) {
-        console.log('ie')
         this.judegExplorer = true
       } else {
-        console.log('其他')
         this.judegExplorer = false
       }
     },
