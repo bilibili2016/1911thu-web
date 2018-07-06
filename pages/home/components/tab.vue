@@ -36,13 +36,17 @@ export default {
         column: 12,
         height: 553,
         animeTime: 5000,
-        img: require('@/assets/images/banner1.png')
+        img: 'http://papn9j3ys.bkt.clouddn.com/banner1.png'
       },
       imgList: [
-        require('@/assets/images/banner1.png'),
-        require('@/assets/images/banner2.png'),
-        require('@/assets/images/banner3.png'),
-        require('@/assets/images/banner4.png')
+        // require('@/assets/images/banner1.png'),
+        'http://papn9j3ys.bkt.clouddn.com/banner1.png',
+        'http://papn9j3ys.bkt.clouddn.com/banner2.png',
+        'http://papn9j3ys.bkt.clouddn.com/banner3.png',
+        'http://papn9j3ys.bkt.clouddn.com/banner4.png'
+        // require('@/assets/images/banner2.png'),
+        // require('@/assets/images/banner3.png'),
+        // require('@/assets/images/banner4.png')
       ],
       fragmentConfig: {
         container: '.img-flex', //显示容器
@@ -51,7 +55,7 @@ export default {
         width: document.body.clientWidth, //显示容器的宽度
         height: 553,
         animeTime: 5000, //最长动画时间,图片的取值将在 animeTime*0.33 + animeTime*0.66之前取值
-        img: require('@/assets/images/banner1.png') //图片路径
+        img: 'http://papn9j3ys.bkt.clouddn.com/banner1.png' //图片路径
       }
     }
   },
@@ -191,7 +195,7 @@ ul li {
   width: 100%;
   height: 100%;
   // background-color: #4e37b3;
-  background: url('~assets/images/banner4.png') no-repeat;
+  background: url('http://papn9j3ys.bkt.clouddn.com/banner4.png') no-repeat;
   background-size: 100% 100%;
   overflow: hidden;
 }

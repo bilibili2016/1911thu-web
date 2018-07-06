@@ -39,8 +39,9 @@
             <el-row>
               <!-- 名字 -->
               <div class="item">
-                <p class="itemBox-name" @click="goLink('course/coursedetail')">
-                  <span>{{card.title}}</span>
+                <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]" @click="goLink('course/coursedetail')">
+                  <span :class="{'title':config.card === 'home'?true:false}">{{card.title}}</span>
+                  <span v-if="config.card === 'home'" class="deputyTitle">{{card.deputy_title}}</span>
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
@@ -56,24 +57,26 @@
               <!-- 作者和头衔    金额 -->
               <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
-                  <p class="price">￥{{card.present_price}}</p>
+                  <!-- <p class="price freePrise" v-if="config.card === 'home'&&config.free != 'true'">￥{{card.present_price}}</p> -->
+                  <p class="price freePrise" v-if="config.card === 'home'&&card.is_free == '1'">￥{{card.present_price}}</p>
+                  <p class="freePrise" v-if="card.is_free === '2'">免费</p>
                 </div>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps" v-if="config.card === 'learning'">
-                <div class="line-centers">
+              <div class="line-wraps " v-if="config.card==='learning' ">
+                <div class="line-centers ">
                   <!-- {{typeof(card.percent)}} -->
                   <p>已学习{{card.percent}}%</p>
-                  <el-progress :percentage="card.percent"></el-progress>
+                  <el-progress :percentage="card.percent "></el-progress>
                 </div>
               </div>
-              <div v-if="config.card === 'already'">
-                <div class="line-centers">
+              <div v-if="config.card==='already' ">
+                <div class="line-centers ">
                   <div>已学习100%</div>
                 </div>
               </div>
-              <div class="readyImg" v-if="config.card === 'already'">
-                <img :src="readyImg" alt="">
+              <div class="readyImg " v-if="config.card==='already' ">
+                <img :src="readyImg " alt=" ">
               </div>
             </el-row>
           </el-card>
@@ -82,50 +85,51 @@
     </template>
     <!-- 我的收藏 -->
     <!-- profile个人信息模板 新上好课模板 我要选课-->
-    <template v-if="config.card_type === 'shoucang'">
-      <div class="card-category profile">
-        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBox">
+    <template v-if="config.card_type==='shoucang' ">
+      <div class="card-category profile ">
+        <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
+          <el-card shadow="never " body-style="padding: 0; " class="itemBox ">
             <!-- {{card.id}} -->
-            <el-checkbox v-model="card.is_checked" @change="selCheckboxChange(card,index)" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
-            <!-- @click="selectCid(card,index)" -->
-            <div @click="courseInfo(card,index)">
-              <div class="new-style" v-if="config.new === 'true'">
-                <img :src="newTag" alt="">
+            <el-checkbox v-model="card.is_checked " @change="selCheckboxChange(card,index) " style="position:absolute;top:10px;right:10px; " v-if="config.types==='buy' "></el-checkbox>
+            <!-- @click="selectCid(card,index) " -->
+            <div @click="courseInfo(card,index) ">
+              <div class="new-style " v-if="config.new==='true' ">
+                <img :src="newTag " alt=" ">
               </div>
-              <div class="mask-style">
-                <!-- <div class="mask-style" @click="goLink('course/coursedetail')"> -->
-                <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+              <div class="mask-style ">
+                <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
+                <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
               </div>
-              <div class="bgImgs">
-                <img :src="card.picture" alt="">
+              <div class="bgImgs ">
+                <img :src="card.picture " alt=" ">
               </div>
-              <div class="tag">
+              <div class="tag ">
                 <!-- 收藏的tag -->
-                <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
+                <span v-if="card.tag.length !==0 " v-for="(tag,index) in card.tag " :key="index ">{{tag}}</span>
               </div>
-              <div v-if="config.card === 'home'"></div>
+              <div v-if="config.card==='home' "></div>
               <div class="common-button btn-bgs " v-else>
-                <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+                <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
               </div>
               <el-row>
                 <!-- 名字 -->
-                <div class="item" @click="courseInfo(card,index)">
-                  <p class="itemBox-name">
+                <div class="item " @click="courseInfo(card,index) ">
+                  <p class="itemBox-name ">
                     <span>{{card.title}}</span>
+                    <!-- <span class="deputyTitle">{{card.deputy_title}}</span> -->
                   </p>
                 </div>
                 <!-- 作者和头衔    金额 -->
-                <div class="line-wrap" v-if="config.card === 'home'" @click.stop="goTeacherInfo(card.teacher_id)">
-                  <div class="line-center">
-                    <img :src="card.head_img" alt="">
+                <div class="line-wrap " v-if="config.card==='home' " @click.stop="goTeacherInfo(card.teacher_id) ">
+                  <div class="line-center ">
+                    <img :src="card.head_img " alt=" ">
                     <span>{{card.teacher_name}}</span>
-                    <span class="title">{{card.graduate}}</span>
+                    <span class="title ">{{card.graduate}}</span>
                   </div>
                 </div>
-                <!-- <div class="line-wrap" v-if="config.card === 'home'">
-                  <div class="line-center">
-                    <p class="price">￥{{card.present_price}}</p>
+                <!-- <div class="line-wrap " v-if="config.card==='home' ">
+                  <div class="line-center ">
+                    <p class="price ">￥{{card.present_price}}</p>
                   </div>
                 </div> -->
               </el-row>
@@ -135,66 +139,66 @@
       </div>
     </template>
     <!-- 购物车页面 -->
-    <template v-if="config.card_type === 'profiled'">
-      <div class="card-category profile">
-        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="handleCheck(card,index)">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBox">
-            <div class="new-style" v-if="config.new === 'true'">
-              <img :src="newTag" alt="">
+    <template v-if="config.card_type==='profiled' ">
+      <div class="card-category profile ">
+        <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list " @click="handleCheck(card,index) ">
+          <el-card shadow="never " body-style="padding: 0; " class="itemBox ">
+            <div class="new-style " v-if="config.new==='true' ">
+              <img :src="newTag " alt=" ">
             </div>
-            <div class="mask-style">
-              <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+            <div class="mask-style ">
+              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
             </div>
-            <div class="bgImgs">
-              <img :src="card.bg" alt="">
+            <div class="bgImgs ">
+              <img :src="card.bg " alt=" ">
             </div>
-            <div class="tag">
-              <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
+            <div class="tag ">
+              <span v-if="card.tag.length !==0 " v-for="(tag,index) in card.tag " :key="index ">{{tag}}</span>
             </div>
-            <div v-if="config.card === 'home'"></div>
+            <div v-if="config.card==='home' "></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+              <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
             </div>
             <el-row>
               <!-- 名字 -->
-              <div class="item">
-                <p class="itemBox-name">
+              <div class="item ">
+                <p class="itemBox-name ">
                   <span>{{card.name}}</span>
                 </p>
-                <p class="itemBox-info">
-                  <span v-if="config.card === 'home'">
+                <p class="itemBox-info ">
+                  <span v-if="config.card==='home' ">
                     {{card.cnum}}
                   </span>
-                  <span class="itemBox-num" v-if="config.card === 'home'">
-                    <img :src="numSrc" alt="">
+                  <span class="itemBox-num " v-if="config.card==='home' ">
+                    <img :src="numSrc " alt=" ">
                     <span>{{card.pnum}}</span>
-                    <el-rate disabled v-model="card.rate" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                    <el-rate disabled v-model="card.rate " class="itemBox-rate " v-if="config.card==='home' "></el-rate>
                   </span>
                 </p>
               </div>
               <!-- 作者和头衔 -->
-              <div class="line-wrap" v-if="config.card === 'home'">
-                <div class="line-center">
-                  <img :src="card.avator" alt=""> {{card}}
+              <div class="line-wrap " v-if="config.card==='home' ">
+                <div class="line-center ">
+                  <img :src="card.avator " alt=" "> {{card}}
                   <span>王建中</span>
-                  <span class="title">华中科技大学博士</span>
+                  <span class="title ">华中科技大学博士</span>
                 </div>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps" v-if="config.card === 'learning'">
-                <div class="line-centers">
+              <div class="line-wraps " v-if="config.card==='learning' ">
+                <div class="line-centers ">
                   {{card}}
                   <p>已学习100%</p>
-                  <el-progress :percentage="50"></el-progress>
+                  <el-progress :percentage="50 "></el-progress>
                 </div>
               </div>
-              <div v-if="config.card === 'already'">
-                <div class="line-centers">
+              <div v-if="config.card==='already' ">
+                <div class="line-centers ">
                   <div>已学习100%</div>
                 </div>
               </div>
-              <div class="readyImg" v-if="config.card === 'already'">
-                <img :src="readyImg" alt="">
+              <div class="readyImg " v-if="config.card==='already' ">
+                <img :src="readyImg " alt=" ">
               </div>
             </el-row>
           </el-card>
@@ -202,28 +206,28 @@
       </div>
     </template>
     <!-- 新上好课详情 -->
-    <template v-if="config.card_type === 'goodlesson'">
-      <div class="courseList center goodLesson">
-        <div class="course clearfix bottom" v-for="(course,index) in courseList" :key="index">
-          <el-card class="fl" :body-style="{ padding: '0px' }">
-            <img :src="course.picture" class="image">
-            <div class="personInfo clearfix" @click="goTeacherInfo(course.teacher_id)">
+    <template v-if="config.card_type==='goodlesson' ">
+      <div class="courseList center goodLesson ">
+        <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
+          <el-card class="fl " :body-style="{ padding: '0px' } ">
+            <img :src="course.picture " class="image ">
+            <div class="personInfo clearfix " @click="goTeacherInfo(course.teacher_id) ">
               <span>{{course}}</span>
-              <img :src="course.head_img" alt="">
-              <h5 class="fr">特约讲师：{{course.teacher_name}}</h5>
-              <p class="fr">{{course.graduate}}</p>
+              <img :src="course.head_img " alt=" ">
+              <h5 class="fr ">特约讲师：{{course.teacher_name}}</h5>
+              <p class="fr ">{{course.graduate}}</p>
             </div>
-            <div class="play-btn">
-              <img :src="playbtn" alt="" @click="courseInfo(course)">
+            <div class="play-btn ">
+              <img :src="playbtn " alt=" " @click="courseInfo(course) ">
             </div>
           </el-card>
-          <div class="particulars fr">
-            <div class="currentclum">
+          <div class="particulars fr ">
+            <div class="currentclum ">
               <h4>{{course.title}}</h4>
               <p>{{course.introduction}}</p>
             </div>
             <!-- {{course.evaluateList}} -->
-            <div v-if="course.evaluateList.length > 0">
+            <div v-if="course.evaluateList.length> 0">
               <el-carousel trigger="click" height="120px">
                 <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
                   <!-- {{item}} -->
@@ -245,26 +249,33 @@
             </div>
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
-              <span class="coin">￥ {{course.present_price}}</span>
+              <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span>
+              <span class="coin mfree" v-if="course.is_free == '2'">免费</span>
               <!-- <div class="fr common-button-half"> -->
               <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
               <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
 
               <!-- </el-button> -->
               <!-- </div> -->
-              <div class="fr common-button-half-right">
+              <!-- <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="buyNewCourse(course)"> 加入购物车</el-button>
+              </div> -->
+              <div class="fr common-button-half-right">
+
+                <el-button type="primary" plain @click="courseInfo(course) "> 立即学习</el-button>
               </div>
               <!-- <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="courseInfo(course)"> 加入购物车</el-button>
               </div> -->
-
+              <!-- <div class="fr common-button-half-right">
+                <el-button type="primary" plain @click="courseInfo(course)"> 立即学习</el-button>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
     </template>
-    <!-- 新上好课详情 页面 -->
+    <!-- coursedetail 页面 -->
     <template v-if="config.card_type === 'goodplay'">
       <div class="courseList center">
         <!-- v-for="(course,index) in courseList -->
@@ -274,19 +285,22 @@
               <img :src="courseList.picture" class="image">
               <div class="mask"></div>
               <div class="common-button btn-bg">
+                <!-- 用户已登录 -->
                 <div v-if="isAuthenticated">
                   <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button> -->
                   <!-- <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看2</el-button> -->
+
                   <div class="playBtn-detail" v-if="privileMsg === true">
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
+                    <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
                   </div>
                   <div class="playBtn-detail" v-if="privileMsg === false">
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
+                    <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
                   </div>
                 </div>
+                <!-- 用户未登录 -->
                 <div v-else class="playBtn-detail">
                   <!-- <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看3</el-button> -->
-                  <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
+                  <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
                 </div>
               </div>
             </div>
@@ -294,51 +308,102 @@
           <div class="particularss fr">
             <div class="currentclum">
               <h4>{{courseList.title}}</h4>
-              <div class="tg">团购价更优，团购电话：010-62701911</div>
-              <div class="clum" v-if="courseList.is_study === 1">
-                <span class="fl coursenum">
-                  <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
-              </div>
-              <div v-else>
-                <span class="fl coursenum">
-                  <span>{{courseList.curriculum_time}}min</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
-                <span class="rate">
-                  <!-- {{}} -->
-                  <el-rate disabled v-model="courseList.score"></el-rate>
-                </span>
-                <span class="coins">￥ {{courseList.present_price}}</span>
-              </div>
-            </div>
-            <div class="study clearfix bought" v-if="courseList.is_study === 1">
-              <h4 class="clearfix">
-                <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
-                <p>已学时长</p>
-              </h4>
-              <div class="common-button">
-                <div>
-                  <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
-                </div>
-                <div>
-                  <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
-                </div>
-                <div class="lineProgress">
-                  <h5>已完成{{courseList.percent}}%</h5>
-                  <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
-                </div>
-              </div>
-            </div>
-            <div class="study clearfix" v-else>
-              <p>{{courseList.introduction}}</p>
-              <div class="common-button">
-                <div v-if="isAuthenticated">
-                  <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
-                  <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
+              <!-- ==(免费2)={{courseList.is_free}} 是否购买{{privileMsg}} 是否学习（1已学习）{{courseList.is_study }} -->
+              <!-- 团购价更优，团购电话：010-62701911 -->
+              <div class="tg">团购价更优，团购电话：010-62701911 </div>
+              <!-- 判断是否免费 is_free(2是免费)-->
+              <div v-if="courseList.is_free === '2'">
+                <div class="clum" v-if="courseList.is_study === 1">
+                  <span class="fl coursenum">
+                    <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
                 </div>
                 <div v-else>
-                  <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+                  <span class="fl coursenum">
+                    <span>{{courseList.curriculum_time}}min</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                  <span class="rate">
+                    <el-rate disabled v-model="courseList.score"></el-rate>
+                  </span>
+                  <!-- <span class="coins">￥ {{courseList.present_price}}</span> -->
+                </div>
+                <div class="study clearfix bought" v-if="courseList.is_study === 1">
+                  <h4 class="clearfix">
+                    <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
+                    <p>已学时长</p>
+                  </h4>
+                  <div class="common-button">
+                    <div>
+                      <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
+                    </div>
+                    <div>
+                      <!-- <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button> -->
+                    </div>
+                    <div class="lineProgress">
+                      <h5>已完成{{courseList.percent}}%</h5>
+                      <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
+                    </div>
+                  </div>
+                </div>
+                <div class="study clearfix" v-else>
+                  <p>{{courseList.introduction}}</p>
+                  <div class="common-button">
+                    <div v-if="isAuthenticated">
+                      <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习6</el-button> -->
+                      <!-- 免费课程=登录之后的开始学习 -->
+                      <el-button type="primary" :disabled="isClick" plain @click="goLink(linkdata)" v-if="courseList.is_free === '2'">开始学习</el-button>
+                    </div>
+                    <div v-else>
+                      <!-- 免费课程=未登录之后的立即学习 -->
+                      <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">立即学习</el-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="courseList.is_free === '1'">
+                <div class="clum" v-if="courseList.is_study === 1">
+                  <span class="fl coursenum">
+                    <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
+                </div>
+                <div v-else>
+                  <span class="fl coursenum">
+                    <span>{{courseList.curriculum_time}}min</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                  <span class="rate">
+                    <el-rate disabled v-model="courseList.score"></el-rate>
+                  </span>
+                  <span class="coins">￥ {{courseList.present_price}}</span>
+                </div>
+                <div class="study clearfix bought" v-if="courseList.is_study === 1">
+                  <h4 class="clearfix">
+                    <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
+                    <p>已学时长</p>
+                  </h4>
+                  <div class="common-button">
+                    <div>
+                      <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
+                    </div>
+                    <div>
+                      <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
+                    </div>
+                    <div class="lineProgress">
+                      <h5>已完成{{courseList.percent}}%</h5>
+                      <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
+                    </div>
+                  </div>
+                </div>
+                <div class="study clearfix" v-else>
+                  <p>{{courseList.introduction}}</p>
+                  <div class="common-button">
+                    <div v-if="isAuthenticated">
+                      <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
+                      <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
+                    </div>
+                    <div v-else>
+                      <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -360,7 +425,7 @@
               <p>{{course.introduce}}</p>
             </div>
             <div>
-              <p class="fl time">{{course.create_time}}</p>
+              <p class="fl time">{{timestampToTime(course.create_time)}}</p>
               <p class="fr more" @click="selectDetail(index,course,linksix)">阅读全文 >></p>
             </div>
           </div>
@@ -388,7 +453,7 @@
 
     <template v-if="config.card_type === 'infoTwo'">
       <div class="card-categorys">
-        <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 1">
+        <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 0">
           <el-card shadow="never" body-style="padding: 0;" class="itemBoxs">
             <div class="img-box">
               <img :src="card.picture" alt="">
@@ -432,7 +497,7 @@ export default {
       numSrc: require('@/assets/images/home_num.png'),
       one: 1,
       readyImg: require('@/assets/images/ready.png'),
-      playbtn: 'http://pam8iyw9q.bkt.clouddn.com/play.png',
+      playbtn: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
       // jinImg: require('@/assets/images/jin.png'),
       isShow: false,
@@ -536,7 +601,14 @@ export default {
       this.$bus.$emit('loginShow', true)
     },
     goPlay(item) {
+      // console.log(item)
+
+      persistStore.set(
+        'curriculumId',
+        item.defaultCurriculumCatalog.curriculum_id
+      )
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
+
       window.open(window.location.origin + '/course/player')
     },
     // 获取详情默认播放小节id
@@ -749,6 +821,19 @@ export default {
       return new Promise((resolve, reject) => {
         home.delShopCart(this.curriculumcartids).then(response => {})
       })
+    },
+    timestampToTime(timestamp) {
+      var date = new Date(timestamp * 1000)
+      let Y = date.getFullYear() + '-'
+      let M =
+        (date.getMonth() + 1 < 10
+          ? '0' + (date.getMonth() + 1)
+          : date.getMonth() + 1) + '-'
+      let D = date.getDate() + ' '
+      let h = date.getHours() + ':'
+      let m = date.getMinutes() + ':'
+      let s = date.getSeconds()
+      return Y + M + D + h + m + s
     }
   },
   mounted() {
@@ -943,6 +1028,33 @@ export default {
           color: rgba(51, 42, 81, 1);
           padding: 0 15px;
           overflow: hidden;
+          &.itemBoxTitle {
+            height: 80px;
+            line-height: 20px;
+            .title {
+              width: 220px;
+              height: 18px;
+              line-height: 18px;
+              overflow: hidden;
+              color: #1c1f21;
+              margin-top: 20px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            .deputyTitle {
+              width: 220px;
+              height: 20px;
+              line-height: 20px;
+              margin: 8px 0;
+              overflow: hidden;
+              font-size: 14px;
+              color: #93999f;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+          }
         }
         .itemBox-info {
           font-size: 14px;
@@ -1036,7 +1148,12 @@ export default {
         padding: 0 15px;
         p.price {
           color: #ff5f5f;
+          font-size: 14px;
           padding: 0 0px;
+        }
+        p.freePrise {
+          color: #1c1f21;
+          font-size: 14px;
         }
         span {
           vertical-align: middle;
@@ -1435,6 +1552,9 @@ export default {
           color: red;
           font-size: 17px;
           padding-left: 20px;
+        }
+        .mfree {
+          color: #222;
         }
         .common-button {
           p.goStudy {

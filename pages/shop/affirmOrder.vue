@@ -68,34 +68,35 @@
               发票信息
               <span>开机构抬头发票须填写纳税人识别号，以免影响报销</span>
             </h4>
-            <p class="invoice">
+            <div class="invoice">
+              <span class="changeInvoice" @click="showIoc">修改</span>
               <!-- <span v-show="isShowTicket" style="display:inline-block;padding-right:20px;">
                 <strong style="display:inline-block;padding-right:8px;">发票类型:</strong>个人</span> -->
-              <!-- 显示发票抬头 -->
-              <span v-show="isShowTicket">
-                <strong class="choose" v-show="invoiceForm.choose=='1'">普通发票</strong>
-                <strong class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</strong>
-                <strong>发票抬头:</strong>
-                <span v-if="invoiceForm.ticket === true">个人</span>
-                <span v-if="invoiceForm.ticket === false">{{invoiceForm.companyname}}</span>
-                <span v-if="invoiceForm.ticket === false">{{invoiceForm.number}}</span>
-              </span>
-              <!-- 显示发票抬头 -->
-              <span class="invoiceWord" v-show="isShowTicket">
-                <strong>发票内容:</strong>
-                <span v-if="invoiceForm.radio == 1">商品类别</span>
-                <span v-if="invoiceForm.radio == 2">{{invoiceForm.others}}</span>
-              </span>
-              <span v-show="isShowTicket">
-                <strong>收货地址:</strong>{{invoiceForm.address}}
-              </span>
+              <p>
+                <span v-show="isShowTicket">
+                  <strong class="choose" v-show="invoiceForm.choose=='1'">普通发票</strong>
+                  <strong class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</strong>
+                  <strong>发票抬头:</strong>
+                  <span v-if="invoiceForm.ticket === true">个人</span>
+                  <span v-if="invoiceForm.ticket === false">{{invoiceForm.companyname}}</span>
+                  <span v-if="invoiceForm.ticket === false">{{invoiceForm.number}}</span>
+                </span>
+                <!-- 显示发票抬头 -->
+                <span class="invoiceWord" v-show="isShowTicket">
+                  <strong>发票内容:</strong>
+                  <span v-if="invoiceForm.radio == 1">商品类别</span>
+                  <span v-if="invoiceForm.radio == 2">{{invoiceForm.others}}</span>
+                </span>
+                <span v-show="isShowTicket">
+                  <strong>收货地址:</strong>{{invoiceForm.address}}
+                </span>
 
-              <span class="invoiceWord" v-show="!isShowTicket">
-                <span>不开发票</span>
-              </span>
-              <span class="changeInvoice" @click="showIoc">修改</span>
-
-            </p>
+                <span class="invoiceWord" v-show="!isShowTicket">
+                  <span>不开发票</span>
+                </span>
+              </p>
+              <!-- 显示发票抬头 -->
+            </div>
 
           </div>
           <div class="orderInfo">
@@ -116,7 +117,7 @@
 
     </div>
     <!-- 发票信息 -->
-    <div class="invoiceShadow" @click.self="close" v-show="showInvoice">
+    <div class="invoiceShadow" v-show="showInvoice">
       <div class="invoiceInfo">
         <h3 class="clearfix">发票信息
           <i class="el-icon-close fr" @click="close"></i>
@@ -433,7 +434,7 @@ export default {
       nickName: null,
       showInvoice: false,
       isShowTicket: false,
-      noMsg: 'http://pam8iyw9q.bkt.clouddn.com/noMsg.png',
+      noMsg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       province: [],
       city: [],
       area: [],
@@ -612,7 +613,9 @@ export default {
     rePhone() {
       if (
         this.zzTicketForm.phones == '' ||
-        !/^0\d{2,3}-?\d{7,8}$/.test(this.zzTicketForm.phones)
+        !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
+          this.zzTicketForm.phones
+        )
       ) {
         this.tipsPhones = false
         this.phones = true
@@ -713,7 +716,9 @@ export default {
           return false
         } else if (
           this.zzTicketForm.phones == '' ||
-          !/^0\d{2,3}-?\d{7,8}$/.test(this.zzTicketForm.phones)
+          !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
+            this.zzTicketForm.phones
+          )
         ) {
           this.$message({
             showClose: true,
@@ -841,6 +846,9 @@ export default {
               this.isShowTicket = true
               this.commitOrders.ticketId = res.data.invoice_id
               this.close()
+              if (this.ticketForm.types == 1) {
+                this.invoiceForm.ticket = true
+              }
             } else {
               this.$message({
                 showClose: true,
@@ -972,8 +980,7 @@ export default {
       this.$router.push('/shop/shoppingcart')
     },
     commitOrder() {
-
-      console.log(this.company.id, 'this.company.id')
+      // console.log(this.company.id, 'this.company.id')
 
       this.company.id
         ? (this.commitOrders.companyId = this.company.id)
@@ -1067,6 +1074,9 @@ export default {
             this.invoiceForm.number = res.data.invoice_number
             this.invoiceForm.others = res.data.content
             this.invoiceForm.radio = Number(res.data.content_type)
+            this.ticketForm.province = res.data.province
+            this.ticketForm.city = res.data.city
+            this.ticketForm.area = res.data.area
             this.invoiceForm.address = res.data.address
             this.invoiceForm.radio = res.data.content_type
             this.isShowTicket = true
@@ -1081,7 +1091,7 @@ export default {
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addCompanyInfo(this.companyInfo).then(response => {
-              console.log(response, '这是获取')
+              // console.log(response, '这是获取')
               if (response.status === '100100') {
                 this.$message({
                   showClose: true,

@@ -24,7 +24,7 @@
       }
       .tableBody {
         min-height: 500px;
-        & > div {
+        &>div {
           background-color: #fff;
           display: flex;
           align-items: center;
@@ -130,7 +130,7 @@
             vertical-align: middle;
             span {
               width: 30px;
-              height: 30px;
+              height: 29px;
               line-height: 30px;
             }
             .el-input {

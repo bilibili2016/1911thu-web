@@ -1178,6 +1178,41 @@ input:-webkit-autofill {
     margin: 20px 0px;
   }
 }
-.social-share .icon-wechat .wechat-qrcode {
-  top: 45px !important;
+
+.playerBox {
+  .social-share .icon-wechat .wechat-qrcode {
+    top: -205px !important;
+    left: -155px !important;
+    &:after {
+      left: 85% !important;
+      bottom: -13px;
+    }
+  }
+}
+
+.sharePicture {
+  .social-share .icon-wechat .wechat-qrcode {
+    top: 50px !important;
+    &:after {
+      bottom: auto;
+      transform: rotate(-180deg);
+      top: -14px;
+      border-color: #f3f3f3 transparent transparent transparent;
+    }
+  }
+}
+
+.shareIcons .social-share .icon-wechat .wechat-qrcode {
+  top: 48px;
+}
+.social-share .icon-wechat .wechat-qrcode:after {
+  bottom: -4px;
+}
+.newsCarousel {
+  .el-carousel__container {
+    height: 406px;
+  }
+  .el-carousel__indicators {
+    display: none;
+  }
 }

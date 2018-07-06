@@ -5,12 +5,12 @@
       <v-tab :items="items" :classify="classify" :courses="courses" :dingData="dingData" :config="ding"></v-tab>
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
-      <!-- 新上好课 -->
-      <v-new :config="configZero" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
-      <!-- 经典好课 -->
+      <!-- 最新课程 -->
+      <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
+      <!-- 精品好课 -->
       <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 名师大咖秀 -->
-      <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
+      <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 用户评价 -->
       <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate>
       <!-- 学堂资讯 -->
@@ -61,6 +61,12 @@ export default {
       configZero: {
         card_type: 'profile',
         card: 'home',
+        new: 'false',
+        free: 'true'
+      },
+      configOne: {
+        card_type: 'profile',
+        card: 'home',
         new: 'true'
       },
       configZ: {
@@ -94,21 +100,21 @@ export default {
       },
       dingData: [
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/pro3.817a75e.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
           title: '面授、线下活动',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
           link: '/other/faceteach'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/pro2.b8c7f5f.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
           title: '机构课程定制',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
           link: '/other/enterprisecustom'
         },
         {
-          src: 'http://pam8iyw9q.bkt.clouddn.com/pro1.68e8047.png',
+          src: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
           title: '学位项目',
           content:
             '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
@@ -129,23 +135,23 @@ export default {
           id: '1'
         },
         {
-          category_name: '党政系统学院',
-          id: '16'
-        },
-        {
           category_name: '在线商学院',
           id: '17'
-        },
-        {
-          category_name: '行业学院',
-          id: '18'
         },
         {
           category_name: '职场学院',
           id: '19'
         },
         {
-          category_name: '直播/热点课程',
+          category_name: '党政委托项目',
+          id: '16'
+        },
+        {
+          category_name: '企业内训项目',
+          id: '18'
+        },
+        {
+          category_name: '管理公开项目',
           id: '20'
         }
       ],
@@ -154,7 +160,13 @@ export default {
       notLogin: false,
       curruntForm: {
         pages: 1,
-        limits: 8,
+        limits: '',
+        evaluateLimit: null,
+        isevaluate: 1
+      },
+      courseForm: {
+        pages: 1,
+        limits: null,
         evaluateLimit: null,
         isevaluate: 1
       },
@@ -165,7 +177,7 @@ export default {
       },
       classicForm: {
         pages: 0,
-        limits: 8,
+        limits: null,
         categoryId: null,
         sortBy: null
       },
@@ -216,7 +228,7 @@ export default {
         this.getClassicCourseList(),
         this.getTeacherList(),
         this.getEvaluateList(),
-        this.getNewInfoList(),
+        this.getNewsInfoList(),
         this.getPartnerList()
       ])
     },
@@ -229,6 +241,10 @@ export default {
     // 获取分类列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
+        // console.log(
+        //   response.data.categoryList,
+        //   '这是response.data.categoryList'
+        // )
         this.classify = response.data.categoryList
       })
     },
@@ -240,7 +256,7 @@ export default {
     },
     // 获取新上好课列表
     getNewCourseList() {
-      home.getNewCourseList(this.curruntForm).then(response => {
+      home.getNewCourseList(this.courseForm).then(response => {
         this.newData = response.data.curriculumList
       })
     },
@@ -262,10 +278,10 @@ export default {
       })
     },
     // 学堂资讯
-    getNewInfoList() {
-      home.getNewInfoList(this.newsInfoForm).then(response => {
-        this.infoDesc = response.data.newsList
-        this.infoArticle = response.data.newsList
+    getNewsInfoList() {
+      home.getNewsInfoList(this.newsInfoForm).then(response => {
+        this.infoDesc = response.data.outerList
+        this.infoArticle = response.data.innerList
       })
     },
     // 获取合作伙伴

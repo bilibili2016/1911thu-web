@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="personalSet">
-      <img class="person-edit" src="http://pam8iyw9q.bkt.clouddn.com/edit-info.png" @click="changeCard()" v-if="!hasPersonalInfo" />
+      <img class="person-edit" src="http://papn9j3ys.bkt.clouddn.com/edit-info.png" @click="changeCard()" v-if="!hasPersonalInfo" />
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="基础信息" name="first">
           <!-- 填写个人信息 -->
@@ -117,7 +117,7 @@
     </div>
     <transition name="fade">
       <div class="success" v-show="updateSuccess">
-        <img src="http://pam8iyw9q.bkt.clouddn.com/bindingSuccess.png">
+        <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png">
         <p>恭喜您操作成功</p>
       </div>
     </transition>
@@ -222,6 +222,16 @@ export default {
       })
     },
     onSubmit() {
+      if (this.psnForm.province !== '') {
+        if (this.psnForm.city == '' || this.psnForm.area == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请选择地址信息！'
+          })
+          return false
+        }
+      }
       home.perInformation(this.psnForm).then(res => {
         let flag = res.status != 0 ? false : true
         this.$emit('update', flag)

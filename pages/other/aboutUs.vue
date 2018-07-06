@@ -1,7 +1,7 @@
 <template>
   <div class="aboutUs">
     <div class="topImg">
-      <img src="http://pam8iyw9q.bkt.clouddn.com/au_banner.png" alt="">
+      <img src="http://papn9j3ys.bkt.clouddn.com/au_banner.png" alt="">
     </div>
     <div class="main">
       <div class="topBar">
@@ -23,7 +23,7 @@
                     <p>1911价值观：有诚信，有担当，敢付出，行胜于言。</p>
                     <p>1911愿景：有清华校友的地方就有1911。</p>
                   </div>
-                  <img class="fr" src="http://pam8iyw9q.bkt.clouddn.com/au_culture.png" alt="">
+                  <img class="fr" src="http://papn9j3ys.bkt.clouddn.com/au_culture.png" alt="">
                 </div>
               </div>
               <div class="business">
@@ -114,7 +114,7 @@ export default {
           text: '1911教育正式成立'
         }
       ],
-      rightImg: 'http://pam8iyw9q.bkt.clouddn.com/right.png',
+      rightImg: 'http://papn9j3ys.bkt.clouddn.com/right.png',
       moreImg: require('@/assets/images/more.png')
     }
   },

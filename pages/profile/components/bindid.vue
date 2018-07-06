@@ -108,6 +108,7 @@ export default {
               message: res.msg
             })
             this.getUsedInvitationCodeList()
+            this.$bus.$emit('studyCourse')
             this.courseList.inputID = ''
             if (this.courseList.addNewID) {
               this.courseList.addNewID = false

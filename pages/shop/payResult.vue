@@ -50,6 +50,7 @@ export default {
       payCompleteData: {},
       gidForm: { gids: null },
       seconds: 3,
+      link: null,
       interval: null
     }
   },
@@ -85,6 +86,9 @@ export default {
             } else {
               this.seconds--
             }
+            if (this.$route.path !== this.link) {
+              clearInterval(this.interval)
+            }
           }, 1000)
           resolve(true)
         })
@@ -100,6 +104,7 @@ export default {
   },
   mounted() {
     this.payComplete()
+    this.link = this.$route.path
   }
 }
 </script>

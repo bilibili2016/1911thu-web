@@ -86,9 +86,9 @@ export default {
       visible: false,
       move: true,
       interval: null,
-      ceilSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop11.png',
-      wxSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop22.png',
-      qqSrc: 'http://pam8iyw9q.bkt.clouddn.com/home_backtop22.png',
+      ceilSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop11.png',
+      wxSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
+      qqSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
       topSrc: require('@/assets/images/home_backtop03.png')
     }
   },
@@ -116,9 +116,10 @@ export default {
     checkCourse() {
       if (this.isAuthenticated) {
         this.goLink('/course/chooselesson')
-        this.showNotLogin = false
+        // this.showNotLogin = false
       } else {
-        this.showNotLogin = true
+        // this.showNotLogin = true
+        this.$bus.$emit('loginShow')
       }
     },
     backToTop() {
