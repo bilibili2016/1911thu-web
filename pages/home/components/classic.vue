@@ -113,7 +113,7 @@ export default {
       }
       h6 {
         color: #93999f;
-        font-size: 12px;
+        font-size: 14px;
         p img {
           width: 12px;
           height: 12px;
