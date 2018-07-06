@@ -3,7 +3,7 @@
     <div class="noMsg-con" v-if="isNoMsg">
       <div class="noMsg-img">
         <img :src="noMsg" alt="">
-        <p>您的购物车为空,{{backSeconds}}s后将会跳转到首页！</p>
+        <p>您没有正在进行的订单,{{backSeconds}}s后将会跳转到首页！</p>
       </div>
     </div>
     <div class="affirmOrder" v-else>
