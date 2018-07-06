@@ -847,6 +847,8 @@ export default {
             confirmButtonText: '确定',
             callback: action => {
               this.signOuts()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
               this.$bus.$emit('loginShow', true)
             }
           })
