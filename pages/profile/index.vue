@@ -245,7 +245,8 @@ export default {
       },
       configZero: {
         card_type: 'shoucang',
-        card: 'home'
+        card: 'home',
+        position: 'personal'
       },
       configOne: {
         card_type: 'profile',
