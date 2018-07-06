@@ -113,10 +113,15 @@ export default {
         (date.getMonth() + 1 < 10
           ? '0' + (date.getMonth() + 1)
           : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
       let h = date.getHours() + ':'
-      let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
     }
   }

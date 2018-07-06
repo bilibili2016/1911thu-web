@@ -928,6 +928,8 @@ export default {
               this.commitOrders.ticketId = res.data.id
               if (this.ticketForm.radio == 2) {
                 this.ticketForm.isRadio = false
+              } else {
+                this.ticketForm.isRadio = true
               }
             }
             if (this.invoiceForm.types == 3) {
@@ -949,6 +951,8 @@ export default {
               this.commitOrders.ticketId = res.data.id
               if (this.zzTicketForm.radio == 2) {
                 this.zzTicketForm.isRadio = false
+              } else {
+                this.zzTicketForm.isRadio = true
               }
             }
             this.getRegion('', this.ticketForm.province)
