@@ -1,5 +1,5 @@
 <template>
-  <div class="wepay">
+  <div class="wepay" ref="wepay">
     <div class="checkedCourse-wepay">
       <div class="banner">
         <div>支付中心</div>
@@ -159,6 +159,14 @@ export default {
     if (this.isAuthenticated) {
       this.getPayList()
     }
+    let headerHeight = document.getElementsByClassName('headerBox')[0]
+      .offsetHeight
+    let footerHeight = document.getElementsByClassName('footerBox')[0]
+      .offsetHeight
+    let windowHeight = document.documentElement.clientHeight
+
+    this.$refs.wepay.style.minHeight =
+      windowHeight - headerHeight - footerHeight + 'px'
   },
   methods: {
     ...mapActions('auth', ['setKid', 'setProductsNum']),
