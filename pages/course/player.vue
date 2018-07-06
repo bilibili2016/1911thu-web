@@ -428,6 +428,7 @@ export default {
     },
     getPlayerInfo() {
       if (typeof TCPlayer === 'undefined') {
+        console.log(1111)
         location.reload()
         return
       }
