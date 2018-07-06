@@ -28,7 +28,7 @@
                     ￥{{course.price}}
                   </div>
                   <div class="courseNumber">
-                    X{{course.pay_number}}
+                    <i class="el-icon-close"></i>{{course.pay_number}}
                   </div>
                 </div>
                 <div class="more">
@@ -231,11 +231,21 @@ export default {
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url
           this.qr_code = response.data.qr_code
-          this.setProductsNum(0)
+          this.shopCartList()
           resolve(true)
           if (item === 'recode') {
             this.addPaySubmit()
           }
+        })
+      })
+    },
+    shopCartList() {
+      return new Promise((resolve, reject) => {
+        home.shopCartList().then(response => {
+          let len = {
+            pn: response.data.curriculumCartList.length
+          }
+          this.setProductsNum(len)
         })
       })
     },
