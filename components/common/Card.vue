@@ -437,7 +437,7 @@
     <!-- 学堂资讯 -->
     <template v-if="config.card_type === 'infoOne'">
       <div class="info-list">
-        <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index>0">
+        <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info">
           <el-card shadow="never" body-style="padding: 0;">
             <div class="info-box" @click="selectDetail(index,card,linkfive)">
               <div class="info-wrap">
