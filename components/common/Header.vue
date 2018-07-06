@@ -383,7 +383,10 @@ export default {
         '/shop/shoppingcart',
         '/profile',
         '/shop/wepay'
-      ]
+      ],
+      didform: {
+        dids: ''
+      }
     }
   },
   computed: {
@@ -408,7 +411,8 @@ export default {
       'setProductsNum',
       'signOut',
       'setToken',
-      'setPwd'
+      'setPwd',
+      'setDid'
     ]),
     openWx() {
       var target_url =
@@ -852,8 +856,12 @@ export default {
               this.$bus.$emit('loginShow', true)
             }
           })
+          // this.didform.dids = 1
+          // this.setDid(this.didform)
         } else if (res.status === '100100') {
           persistStore.set('dandian', true)
+          // this.didform.dids = 1
+          // this.setDid(this.didform)
           if (this.authPath.indexOf(window.location.pathname) > 0) {
             this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
               confirmButtonText: '确定',

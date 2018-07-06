@@ -2,7 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-07-05 15:41:45
+ * @Last Modified time: 2018-07-06 09:35:45
  * @File Type:  登陆的store
  * @Describe:
  */
@@ -16,6 +16,7 @@ persistStore.defaults({
   user: null,
   token: null,
   cid: null,
+  did: null,
   pid: null,
   gid: null,
   hsg: null,
@@ -32,6 +33,7 @@ let user = persistStore.get('user')
 let token = persistStore.get('token')
 let cid = persistStore.get('cid')
 let pid = persistStore.get('pid')
+let did = persistStore.get('did')
 let gid = persistStore.get('gid')
 let hsg = persistStore.get('hsg')
 let nid = persistStore.get('nid')
@@ -50,6 +52,7 @@ export const MUTATION = {
   me: 'me',
   setCid: 'set-cid',
   setPid: 'set-pid',
+  setDid: 'set-did',
   setGid: 'set-gid',
   setHsg: 'set-hsg',
   setNid: 'set-nid',
@@ -65,6 +68,7 @@ export const state = () => ({
   user,
   token,
   cid,
+  did,
   pid,
   gid,
   hsg,
@@ -111,6 +115,9 @@ export const mutations = {
   [MUTATION.setPid](state, { pid }) {
     state.pid = pid
   },
+  [MUTATION.setDid](state, { did }) {
+    state.did = did
+  },
   [MUTATION.setGid](state, { gid }) {
     state.gid = gid
   },
@@ -143,6 +150,22 @@ export const mutations = {
   }
 }
 export const actions = {
+  async setDid({ commit, state }, { dids }) {
+    try {
+      let did = dids
+      persistStore.set('did', did)
+      commit(MUTATION.setDid, {
+        did
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return did
+  },
   async setToken({ commit, state }, { tokens }) {
     try {
       let token = tokens
