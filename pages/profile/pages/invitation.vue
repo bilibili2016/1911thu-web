@@ -69,7 +69,8 @@ export default {
     return {
       noCodes: true,
       number: '0',
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png'
+      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      s: null
     }
   },
   methods: {
@@ -83,8 +84,14 @@ export default {
       let D = date.getDate() + ' '
       let h = date.getHours() + ':'
       let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
-      return Y + M + D + h + m + s
+
+      if (Number(date.getSeconds()) < 10) {
+        this.s = '0' + date.getSeconds()
+        console.log(this.s, '123131')
+      } else {
+        this.s = date.getSeconds()
+      }
+      return Y + M + D + h + m + this.s
     }
   }
 }

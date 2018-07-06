@@ -3,10 +3,10 @@
     <div class="noMsg-con" v-if="isNoMsg">
       <div class="noMsg-img">
         <img :src="noMsg" alt="">
-        <p>您的购物车为空,{{backSeconds}}s后将会跳转到首页！</p>
+        <p>您没有正在进行的订单,{{backSeconds}}s后将会跳转到首页！</p>
       </div>
     </div>
-    <div class="affirmOrder" v-else>
+    <div class="affirmOrder" ref="affirmOrder" v-else>
       <div class="contain" v-loading="loadGoods">
         <h3>确认订单</h3>
         <div class="buyType" v-if="payNumber>1">
@@ -84,7 +84,7 @@
                 <!-- 显示发票抬头 -->
                 <span class="invoiceWord" v-show="isShowTicket">
                   <strong>发票内容:</strong>
-                  <span v-if="invoiceForm.radio == 1">商品类别</span>
+                  <span v-if="invoiceForm.radio == 1">培训费</span>
                   <span v-if="invoiceForm.radio == 2">{{invoiceForm.others}}</span>
                 </span>
                 <span v-show="isShowTicket">
@@ -596,6 +596,15 @@ export default {
     this.goodsList()
     this.getInvoiceDetail()
     this.getRegionList()
+    // let windowHeight = document.body.clientHeight
+    // let aa = document.body.offsetHeight
+    let headerHeight = document.getElementsByClassName('headerBox')[0]
+      .offsetHeight
+    let footerHeight = document.getElementsByClassName('footerBox')[0]
+      .offsetHeight
+    let windowHeight = document.body.clientHeight
+    this.$refs.affirmOrder.style.minHeight =
+      windowHeight - headerHeight - footerHeight + 'px'
   },
   methods: {
     reNumber() {
@@ -963,6 +972,7 @@ export default {
       return tmp
     },
     isTicket(item) {
+      console.log(item, '这是item')
       if (item === 2) {
         this.ticketForm.isRadio = false
       } else {

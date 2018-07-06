@@ -14,7 +14,7 @@
         <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
+        <input type="text" placeholder="请输入课程" v-model="search" @keyup.enter="goSearch">
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
@@ -99,10 +99,10 @@
               <el-form-item prop="passwords">
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
-              <el-form-item prop="companyCodes">
+              <!-- <el-form-item prop="companyCodes">
                 <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
                 <span class="bindCompany">(可选)</span>
-              </el-form-item>
+              </el-form-item> -->
               <el-form-item prop="checked">
                 <el-checkbox-group v-model="registerData.checked">
                   <el-checkbox label="同意" name="checked"></el-checkbox>
@@ -112,44 +112,49 @@
                 <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
-            <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
-            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
-          </el-tab-pane>
-        </el-tabs>
+            <<<<<<< HEAD <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
+      =======
+      <div class="userPotal" @click="userProtocol">
+        <span>1911学堂</span>
+        《用户注册协议》</div>
+      >>>>>>> origin/dev
+      <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
+      </el-tab-pane>
+      </el-tabs>
+    </div>
+    <!-- 微信登录 -->
+    <div class="lrFrame wechatLogin" v-show="wechatLogin">
+      <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
+        <h4 class="clearfix">
+          <span>绑定手机账号</span>
+        </h4>
+        <el-form-item prop="tel">
+          <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
+        </el-form-item>
+        <el-form-item prop="code">
+          <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
+          <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
+        </el-form-item>
+        <el-form-item prop="companyCodes">
+          <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
+          <span class="bindCompany">(可选)</span>
+        </el-form-item>
+        <el-row>
+          <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
+        </el-row>
+      </el-form>
+      <div class="scanCode" v-show="scanCodeShow">
+        <h4 class="clearfix"></h4>
+        <!-- el-icon-loading -->
+        <div class="wxchatIMG" id="wxchatIMG"></div>
       </div>
-      <!-- 微信登录 -->
-      <div class="lrFrame wechatLogin" v-show="wechatLogin">
-        <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
-          <h4 class="clearfix">
-            <span>绑定手机账号</span>
-          </h4>
-          <el-form-item prop="tel">
-            <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
-          </el-form-item>
-          <el-form-item prop="code">
-            <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
-            <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
-          </el-form-item>
-          <el-form-item prop="companyCodes">
-            <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
-            <span class="bindCompany">(可选)</span>
-          </el-form-item>
-          <el-row>
-            <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
-          </el-row>
-        </el-form>
-        <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"></h4>
-          <!-- el-icon-loading -->
-          <div class="wxchatIMG" id="wxchatIMG"></div>
-        </div>
-        <div class="bindSuccess" v-show="bindSuccessShow">
-          <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
-          <h5>手机账号绑定成功</h5>
-          <p>返回登录 3S</p>
-        </div>
+      <div class="bindSuccess" v-show="bindSuccessShow">
+        <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
+        <h5>手机账号绑定成功</h5>
+        <p>返回登录 3S</p>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -847,6 +852,8 @@ export default {
             confirmButtonText: '确定',
             callback: action => {
               this.signOuts()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
               this.$bus.$emit('loginShow', true)
             }
           })
@@ -958,6 +965,9 @@ export default {
   }
 }
 .userPotal {
+  span {
+    color: #555555;
+  }
   position: absolute;
   right: 97px;
   bottom: 175px;

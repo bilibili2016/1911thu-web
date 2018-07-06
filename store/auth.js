@@ -2,11 +2,7 @@
  * @Author: Allasm98.zhaoliang
  * @Date: 2018-04-26 18:06:23
  * @Last Modified by: Allasm98.zhaoliang
-<<<<<<< HEAD
- * @Last Modified time: 2018-07-06 09:52:03
-=======
- * @Last Modified time: 2018-07-05 15:41:45
->>>>>>> origin/dev
+ * @Last Modified time: 2018-07-06 11:08:41
  * @File Type:  登陆的store
  * @Describe:
  */
