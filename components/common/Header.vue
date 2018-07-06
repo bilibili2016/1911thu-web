@@ -10,8 +10,8 @@
     </div>
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
-        <!-- <img src="http://pam8iyw9q.bkt.clouddn.com/logo.png" alt=""> -->
-        <img src="@/assets/images/logoh.png" alt="">
+        <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
+        <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
@@ -105,13 +105,14 @@
               </el-form-item>
               <el-form-item prop="checked">
                 <el-checkbox-group v-model="registerData.checked">
-                  <el-checkbox label="同意用户注册协议" name="checked"></el-checkbox>
+                  <el-checkbox label="同意" name="checked"></el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
                 <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
+            <div class="userPotal" @click="userProtocol">用户注册协议</div>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
         </el-tabs>
@@ -143,7 +144,7 @@
           <div class="wxchatIMG" id="wxchatIMG"></div>
         </div>
         <div class="bindSuccess" v-show="bindSuccessShow">
-          <img src="http://pam8iyw9q.bkt.clouddn.com/bindingSuccess.png" alt="">
+          <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
           <h5>手机账号绑定成功</h5>
           <p>返回登录 3S</p>
         </div>
@@ -184,7 +185,7 @@ export default {
       isClick: false,
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
-      downApp: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
+      downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
       start: false,
       iphones: true,
       lrFrame: false,
@@ -201,7 +202,7 @@ export default {
         userImg: ''
       },
       activeName: 'login',
-      QRcode: 'http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png',
+      QRcode: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
       wechatLogin: false,
       bindTelShow: false,
       scanCodeShow: false,
@@ -869,15 +870,18 @@ export default {
             this.user.userImg = this.userInfo.head_img
           } else {
             this.user.userImg =
-              'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
+              'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
           }
           if (/^\//.test(this.userInfo.head_img)) {
             this.user.userImg =
-              'http://pam8iyw9q.bkt.clouddn.com/profile_avator01.png'
+              'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
           }
         }
       })
       // }
+    },
+    userProtocol() {
+      window.open(window.location.origin + '/other/userProtocol')
     }
   },
   mounted() {
@@ -952,5 +956,14 @@ export default {
     color: #fff;
     background-color: #6417a6;
   }
+}
+.userPotal {
+  position: absolute;
+  right: 166px;
+  bottom: 175px;
+  font-size: 12px;
+  color: #6417a6;
+  font-weight: 500;
+  cursor: pointer;
 }
 </style>

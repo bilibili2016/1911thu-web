@@ -287,15 +287,15 @@
                   <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button> -->
                   <!-- <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看2</el-button> -->
                   <div class="playBtn-detail" v-if="privileMsg === true">
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
+                    <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
                   </div>
                   <div class="playBtn-detail" v-if="privileMsg === false">
-                    <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
+                    <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
                   </div>
                 </div>
                 <div v-else class="playBtn-detail">
                   <!-- <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看3</el-button> -->
-                  <img src="http://pam8iyw9q.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
+                  <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
                 </div>
               </div>
             </div>
@@ -490,7 +490,7 @@ export default {
       numSrc: require('@/assets/images/home_num.png'),
       one: 1,
       readyImg: require('@/assets/images/ready.png'),
-      playbtn: 'http://pam8iyw9q.bkt.clouddn.com/play.png',
+      playbtn: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
       // jinImg: require('@/assets/images/jin.png'),
       isShow: false,

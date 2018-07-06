@@ -1,109 +1,3 @@
-// .homeUs {
-//   width: 1100px;
-//   margin: 0 auto;
-//   min-height: 665px;
-//   .about-title {
-//     .about-h1 {
-//       margin-top: 70px;
-//       text-align: center;
-//     }
-//     .about-p {
-//       text-align: center;
-//       margin-top: 20px;
-//     }
-//   }
-//   .about-con {
-//     margin-top: 63px;
-//     .con-img {
-//       float: left;
-//       width: 480px;
-//       height: 330px;
-//       img {
-//         width: 100%;
-//       }
-//     }
-//     .con-text {
-//       float: left;
-//       width: 550px;
-//       margin-left: 60px;
-//       font-size: 16px;
-//       color: #222;
-//       .con-top {
-//         margin-top: 20px;
-//         text-indent: 2rem;
-//         line-height: 30px;
-//       }
-//       .con-line {
-//         display: inline-block;
-//         width: 100%;
-//         height: 1px;
-//         background-color: #e8d6f7;
-//         margin: 30px 0 40px 0;
-//       }
-//       .con-weight {
-//         font-weight: 500;
-//       }
-//       .con-bottom {
-//         line-height: 30px;
-//       }
-//     }
-//   }
-//   .about-line {
-//     display: inline-block;
-//     width: 100%;
-//     height: 1px;
-//     background-color: #e8d6f7;
-//     margin: 70px 0;
-//   }
-//   .about-contact {
-//     width: 905px;
-//     text-align: center;
-//     margin-bottom: 70px;
-//     margin: 0 auto;
-//     .contact-phone {
-//       width: 41px;
-//       height: 74px;
-//       margin-left: 130px;
-//     }
-//     .contact-email {
-//       align: center;
-//       width: 72px;
-//       height: 58px;
-//       margin-left: 115px;
-//     }
-//     .contact-pos {
-//       width: 90px;
-//       height: 76px;
-//       margin-left: 105px;
-//     }
-//     .contact-imgs {
-//       float: left;
-//       width: 300px;
-//       height: 250px;
-//       text-align: center;
-//       position: relative;
-//       margin-top: 57px;
-//     }
-//     .contact-text {
-//       font-size: 16px;
-//       color: #222;
-//       margin: 42px 0 15px 0;
-//     }
-//     .contact-con {
-//       font-size: 14px;
-//       color: #666;
-//     }
-//     .contact-line {
-//       float: left;
-//       height: 120px;
-//       width: 1px;
-//       background-color: #ddd;
-//       line-height: 250px;
-//       margin-top: 65px;
-//     }
-//   }
-// }
-
 .homeUs {
   position: relative;
   background-color: #fff;
@@ -145,7 +39,8 @@
 
     .el-tabs--left.el-tabs--card .el-tabs__item.is-left {
       border: none;
-      border-bottom: 1px solid #e1e4ea;
+      // border-bottom: 1px solid #e1e4ea;
+      border-left: 2px solid #fff;
     }
     .el-tabs--card > .el-tabs__header {
       border-bottom: none;
@@ -153,7 +48,7 @@
     .el-tabs__header {
       height: 780px;
       padding-top: 45px;
-      box-shadow: 10px 10px 15px #eee;
+      box-shadow: 8px 8px 20px #f5f5f5;
     }
     // .el-tabs__header
 
@@ -214,7 +109,7 @@
       background-size: 100% 100%;
     }
     .el-tabs--left.el-tabs--card .el-tabs__item.is-left.is-active,
-    .el-tabs__item:hover {
+    .el-tabs--left.el-tabs--card .el-tabs__item.is-left:hover {
       border-left: 2px solid #6417a6;
       background-color: #fafafa;
       color: #6417a6;
@@ -272,7 +167,7 @@
         width: 490px;
         float: left;
         .info {
-          font-size: 16px;
+          font-size: 14px;
           color: #333;
           line-height: 30px;
           text-indent: 2rem;
@@ -312,7 +207,7 @@
       .teacher-info {
         .title {
           padding: 40px 0 20px 0;
-          font-size: 22px;
+          font-size: 20px;
           color: #333;
         }
         .title-small {
@@ -320,7 +215,7 @@
           padding: 20px 0;
         }
         .title-desc {
-          font-size: 16px;
+          font-size: 14px;
           color: #666;
           line-height: 32px;
         }
@@ -358,7 +253,7 @@
           }
         }
         .desc-one {
-          font-size: 22px;
+          font-size: 20px;
           padding: 40px 0 27px 0;
         }
         .desc-two {
@@ -376,7 +271,7 @@
           margin: 22px 0 27px 0;
         }
         .desc-five {
-          font-size: 16px;
+          font-size: 14px;
           color: #666;
           line-height: 32px;
         }
@@ -416,7 +311,7 @@
       // .el-tabs--border-card
       //   > .el-tabs__header
       //   .el-tabs__item:not(.is-disabled):hover {
-      //   color: #fff;
+      //   color: #6417a6;
       // }
       .is-active {
         background-color: #6417a6;
@@ -439,8 +334,11 @@
             line-height: 32px;
           }
         }
-        .learn-more {
+        .help-desc {
           font-size: 14px;
+        }
+        .learn-more {
+          font-size: 12px;
           cursor: pointer;
           margin-top: 10px;
           &:hover {
@@ -451,6 +349,7 @@
           float: left;
           width: 380px;
         }
+
         .help-right {
           float: left;
           width: 380px;
@@ -462,7 +361,8 @@
       .contact-con {
         .con-img {
           margin-top: 30px;
-          width: 830px;
+          // width: 830px;
+          width: 100%;
           height: 340px;
           img {
             width: 100%;

@@ -14,9 +14,6 @@
         <div class="shareIcons">
           <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
         </div>
-        <!-- <img @click="share(newsDetail.title,newsDetail.picture,'wx')" :src="sharewx" alt="">
-        <img @click="share(newsDetail.title,newsDetail.picture,'wb')" :src="sharewb" alt="">
-        <img @click="share(newsDetail.title,newsDetail.picture,'kj')" :src="sharekj" alt=""> -->
       </div>
       <div class="newsContent" v-loading='loading'>
         <h3>{{newsDetail.title}}</h3>
@@ -49,10 +46,7 @@ export default {
   },
   data() {
     return {
-      bannerImg: 'http://pam8iyw9q.bkt.clouddn.com/profile_banner03.png',
-      sharewx: require('@/assets/images/share-wx.png'),
-      sharewb: require('@/assets/images/share-wb.png'),
-      sharekj: require('@/assets/images/share-kj.png'),
+      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/profile_banner03.png',
       configs: {
         banner_type: 'news'
       },

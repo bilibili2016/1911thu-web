@@ -12,7 +12,7 @@
 export default {
   data() {
     return {
-      img: 'http://pam8iyw9q.bkt.clouddn.com/404.png'
+      img: 'http://papn9j3ys.bkt.clouddn.com/404.png'
     }
   },
   methods: {

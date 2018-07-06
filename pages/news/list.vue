@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      bannerImg: 'http://pam8iyw9q.bkt.clouddn.com/profile_banner03.png',
+      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/profile_banner03.png',
       linksix: '/news/detail',
       configs: {
         banner_type: 'news'

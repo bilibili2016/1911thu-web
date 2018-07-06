@@ -60,7 +60,7 @@
                 <i class="el-icon-caret-right"></i>
               </span>
               <span class="fl playImg" v-show="ischeck == bar.id?true:false">
-                <img :src="playing" alt="">
+                <img :src="playing" alt="" ref="videoButton">
               </span>
               <span class="fl barName">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
               </span>
@@ -121,6 +121,7 @@ export default {
   },
   data() {
     return {
+      videoState: false,
       showReportBug: false,
       title: '1',
       showEvaluate: false,
@@ -138,6 +139,7 @@ export default {
       playing: '',
       playImg: require('@/assets/images/playImg.gif'),
       pauseImg: require('@/assets/images/video.png'),
+      // gifImg: require('@/assets/images/playImg.gif'),
       player: {},
       courseList: [
         {
@@ -162,7 +164,8 @@ export default {
       ],
       problem: {
         curriculumId: null,
-        content: ''
+        content: '',
+        curriculumcatalogid: ''
       },
       word: '',
       evaluate: {
@@ -210,6 +213,7 @@ export default {
         evaluatecontent: null,
         scores: null,
         types: 1,
+        curriculumcatalogid: '',
         tag: []
       },
       addCollectionForm: {
@@ -233,11 +237,33 @@ export default {
       btnData: [],
       reTagBtn: [],
       tagGroup: '',
-      rateModel: 5
+      rateModel: 5,
+      addEvaluateForm: {
+        ids: '',
+        evaluatecontent: '',
+        scores: '',
+        types: 1,
+        tag: [],
+        curriculumcatalogid: ''
+      }
     }
   },
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
+    isHasClass() {
+      let myVideo = document.getElementById('movd')
+      if (myVideo.getAttribute('class')) {
+        // 存在class属性
+
+        // 方式2
+        if (myVideo.className.indexOf('vjs-paused') > -1) {
+          this.videoState = false
+          // console.log('包含 test 这个class')
+        } else {
+          this.videoState = true
+        }
+      }
+    },
     signOuts() {
       this.signOut()
       persistStore.clearAll()
@@ -284,6 +310,16 @@ export default {
           // this.tagGroup = response.data.evaluateTags
         })
       })
+    },
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
+      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
@@ -390,6 +426,11 @@ export default {
       }
     },
     getPlayerInfo() {
+      if (typeof TCPlayer === 'undefined') {
+        location.reload()
+        return
+      }
+
       if (this.clickMsg === true) {
         player = TCPlayer('movd_html5_api', this.tcplayer)
         player.dispose()
@@ -420,10 +461,14 @@ export default {
       socket.on('reconnect', function(msg) {})
       let that = this
       player.on('pause', () => {
+        this.isHasClass()
+        this.playing = this.pauseImg
         clearInterval(that.interval)
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
+        this.isHasClass()
+        // console.log(this.$refs.videoButton.src)
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
@@ -448,6 +493,7 @@ export default {
           }
           // this.ischeck = item.id
         }, 1000)
+
         this.ischeck = persistStore.get('catalogId')
         this.playing = this.playImg
       })
@@ -490,11 +536,13 @@ export default {
           }
         })
       })
+      this.isHasClass()
     },
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+          // console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.bought = response.data.curriculumPrivilege
@@ -508,17 +556,29 @@ export default {
     // 反馈问题
     reportProblem() {
       this.problem.curriculumId = persistStore.get('curriculumId')
+      this.problem.curriculumcatalogid = persistStore.get('catalogId')
       return new Promise((resolve, reject) => {
         home.reportProblem(this.problem).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: response.msg
-          })
+          // this.closeReport()
+
+          if (response.status === '100100') {
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          } else {
+            this.closeReport()
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          }
+
           if (this.word === '') {
             return
           }
-          this.closeReport()
         })
       })
     },
@@ -552,6 +612,10 @@ export default {
               this.iseve = 1
             }
           })
+          if (response.status === 0) {
+            this.showEvaluate = false
+            this.iseve = 1
+          }
         })
       } else {
         this.$message({
@@ -601,6 +665,7 @@ export default {
     }
   },
   mounted() {
+    this.videoState = document.getElementById('movd')
     this.resize()
     var $config = {
       url: 'http://www.1911edu.com/'
@@ -618,6 +683,18 @@ export default {
     ;(this.seconds = 10000000),
       // 获取评论接口
       this.getEvaluateTags()
+
+    this.isHasClass()
+  },
+  watch: {
+    videoState(flag) {
+      // console.log(flag)
+      if (flag) {
+        this.playing = this.playImg
+      } else {
+        this.playing = this.pauseImg
+      }
+    }
   }
 }
 </script>

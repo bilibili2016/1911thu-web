@@ -6,8 +6,8 @@
       </div>
       <div class="companyInfo fl">
         <span @click="goLink('first')">关于我们</span>
-        <span class="line">|</span>
-        <span>加入我们</span>
+        <!-- <span class="line">|</span> -->
+        <!-- <span>加入我们</span> -->
       </div>
       <div class="copyright fr">
         京ICP证 98278361836726381号 一九一一未来教育科技（北京）有限公司 版权所有
@@ -31,7 +31,8 @@ export default {
     goLink(num) {
       this.indexData.indexs = num
       this.setIndex(this.indexData)
-      this.$router.push('/other/homeUs')
+      // this.$router.push('/other/homeUs')
+      window.open(window.location.origin + '/other/homeUs')
     }
   }
 }

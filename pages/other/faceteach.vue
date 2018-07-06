@@ -1,14 +1,16 @@
 <template>
   <div class="faceteach">
     <div class="banner">
-      <img :src="faceImg" alt="" class="banner-img">
-      <div class="center">
+      <div class="banner-img">
+        <!-- <img :src="faceImg" alt="" class="banner-img"> -->
         <div class="text">
-          <p>面授及线下活动</p>
-          <p>1911学堂采用混合式教学模式</p>
-          <p>为学习者提供线上+线下的教育培训资源</p>
+          <p class="text-desc1">面授及线下活动</p>
+          <p class="text-line"></p>
+          <p class="text-desc2">1911学堂采用混合式教学模式</p>
+          <p class="text-desc3">为学习者提供线上+线下的教育培训资源</p>
         </div>
       </div>
+
       <div class="centerImg">
         <img :src="cenImg" alt="" class="img">
         <div class="one">
@@ -45,8 +47,8 @@
 export default {
   data() {
     return {
-      faceImg: 'http://pam8iyw9q.bkt.clouddn.com/faceteach-bg.png',
-      cenImg: 'http://pam8iyw9q.bkt.clouddn.com/ccenter.png'
+      faceImg: 'http://papn9j3ys.bkt.clouddn.com/faceteach-bg.png',
+      cenImg: 'http://papn9j3ys.bkt.clouddn.com/ccenter.png'
     }
   },
   mounted() {
