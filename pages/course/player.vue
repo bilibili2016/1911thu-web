@@ -610,8 +610,12 @@ export default {
       this.addEvaluateForm.evaluatecontent = this.word
       this.addEvaluateForm.scores = this.evaluate.eltnum
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
+      this.addEvaluateForm.curriculumcatalogid = persistStore
+        .get('catalogId')
+        .get('curriculumId')
         .toString()
         .replace(/,/g, '#')
+      console.log(this.addEvaluateForm)
 
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
@@ -676,6 +680,7 @@ export default {
     }
   },
   mounted() {
+    this.addEvaluateForm.ids = persistStore.get('curriculumId')
     this.videoState = document.getElementById('movd')
     this.resize()
     var $config = {
