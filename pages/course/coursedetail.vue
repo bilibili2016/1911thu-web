@@ -6,14 +6,14 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <!-- <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item> -->
+            <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item>
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
         <div class="fr">
           <div class="collect">
             <div class="line-center">
-              <span @click="collection" :class=" { bag: isCollection}">
+              <span @click="collection" :class=" { bag: collectMsg === 1}">
                 <i class="el-icon-star-on"></i>
                 <span>收藏 </span>
               </span>
@@ -45,7 +45,7 @@
         <!-- 关注我们 -->
         <!-- <div class="attention">
           <div class="code">
-            <img src="http://papn9j3ys.bkt.clouddn.com/wechatLogin.png" alt="">
+            <img src="http://pam8iyw9q.bkt.clouddn.com/wechatLogin.png" alt="">
             <h5>扫描二维码，下载“1911学堂”APP</h5>
             <p>精彩好课，第一时间了解</p>
           </div>
@@ -229,8 +229,7 @@ export default {
         evaluatecontent: '',
         scores: '',
         types: 1,
-        tag: [],
-        curriculumcatalogid: ''
+        tag: []
       },
       evaluate: {
         eltnum: null
@@ -280,11 +279,11 @@ export default {
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
-    // goCategory() {
-    //   this.$router.push('/course/category')
-    //   persistStore.set('cid', '1')
-    //   persistStore.set('pid', '')
-    // },
+    goCategory() {
+      this.$router.push('/course/classifylist')
+      persistStore.set('cid', '1')
+      persistStore.set('pid', '')
+    },
     submit() {
       this.$message({
         showClose: true,
@@ -323,7 +322,7 @@ export default {
         home.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
-          this.changeRate('5')
+          this.changeRate('1')
           this.btnDatas = response.data.evaluateTags
           // this.tagGroup = response.data.evaluateTags
         })
@@ -382,6 +381,7 @@ export default {
       this.kidForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.getCourseDetail(this.kidForm).then(response => {
+          // console.log(response)
           this.loadMsg = false
 
           this.courseList = response.data.curriculumDetail
@@ -390,6 +390,7 @@ export default {
           this.privileMsg = response.data.curriculumPrivilege
           this.content = response.data.curriculumPrivilege
           this.loadTeacher = false
+          this.collectMsg = response.data.curriculumDetail.is_collection
         })
       })
     },
@@ -427,26 +428,12 @@ export default {
     // 判断是收藏还是未收藏
     collection() {
       if (this.isAuthenticated) {
-        // if (this.collectMsg === 1) {
-        //   this.deleteCollection()
-        //   this.collectMsg = 2
-        // } else {
-        //   this.addCollection()
-        //   this.collectMsg = 1
-        // }
-        // console.log(this.isCollection)
-        if (!this.isCollection) {
-          //收藏
-          this.addCollection()
-          // this.collectMsg = true
-          this.collectionInfo.isCollections = true
-          this.setIsCollection(this.collectionInfo)
-        } else {
-          //取消收藏
+        if (this.collectMsg === 1) {
           this.deleteCollection()
-          // this.collectMsg = false
-          this.collectionInfo.isCollections = false
-          this.setIsCollection(this.collectionInfo)
+          this.collectMsg = 2
+        } else {
+          this.addCollection()
+          this.collectMsg = 1
         }
       } else {
         this.$bus.$emit('loginShow', true)
@@ -462,9 +449,7 @@ export default {
             type: 'success',
             message: '添加收藏成功'
           })
-          // this.collectMsg = 1
-          this.collectionInfo.isCollections = true
-          this.setIsCollection(this.collectionInfo)
+          this.collectMsg = 1
         })
       })
     },
@@ -475,15 +460,13 @@ export default {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         home.deleteCollection(this.addCollectionForm).then(response => {
-          // this.collectMsg = response.data.curriculumDetail.is_collection
+          this.collectMsg = response.data.curriculumDetail.is_collection
           this.$message({
             showClose: true,
             type: 'success',
             message: '取消收藏成功'
           })
-          // this.collectMsg = 0
-          this.collectionInfo.isCollections = false
-          this.setIsCollection(this.collectionInfo)
+          this.collectMsg = 0
         })
       })
     },
@@ -497,6 +480,28 @@ export default {
           )
         })
       })
+    },
+    shareInit() {
+      let url = 'http://parq881t8.bkt.clouddn.com/iShare_tidy.js'
+      let script = document.createElement('script')
+      script.setAttribute('src', url)
+      document.getElementsByTagName('head')[0].appendChild(script)
+
+      let iShare_config = {
+        container: document.getElementById('iShare'),
+        config: {
+          title: '分享测试',
+          description: '水淀粉及爱丽丝的房间里爱神的箭发牢骚',
+          url: 'http://www.1911edu.com/course/coursedetail',
+          WXoptions: {
+            evenType: 'click',
+            isTitleVisibility: true,
+            isTipVisibility: true,
+            tip: '这是一段测试文本',
+            title: 'QR CODE'
+          }
+        }
+      }
     }
   },
   mounted() {
@@ -515,15 +520,10 @@ export default {
     this.getCourseList()
     this.getdefaultCurriculumCatalog()
     this.getEvaluateTags()
-
-    let isTrue = this.isCollection == null ? false : this.isCollection
-    this.collectionInfo.isCollections = isTrue
-    // console.log(this.collectionInfo)
-    this.setIsCollection(this.collectionInfo)
   },
   watch: {
     isCollection(flag) {
-      // console.log(flag)
+      console.log(flag)
     }
   }
 }
@@ -534,9 +534,6 @@ export default {
     display: inline !important;
     line-height: 40px;
   }
-}
-.shareIconss .icon-wechat .wechat-qrcode {
-  // top: -100px;
 }
 </style>
 

@@ -158,7 +158,7 @@ export default {
           this.default.img = this.imgList[index]
           $('.img-flex').html('')
           this.fragmentImg(this.fragmentConfig)
-        }, 7000)
+        }, 5000)
       }, 3000)
     })
   },
