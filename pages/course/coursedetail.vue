@@ -6,7 +6,7 @@
         <div class="fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item>
+            <!-- <el-breadcrumb-item @click.native="goCategory">分类列表</el-breadcrumb-item> -->
             <el-breadcrumb-item>课程详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -279,11 +279,11 @@ export default {
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
-    goCategory() {
-      this.$router.push('/course/classifylist')
-      persistStore.set('cid', '1')
-      persistStore.set('pid', '')
-    },
+    // goCategory() {
+    //   this.$router.push('/course/classifylist')
+    //   persistStore.set('cid', '1')
+    //   persistStore.set('pid', '')
+    // },
     submit() {
       this.$message({
         showClose: true,
