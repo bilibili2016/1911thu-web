@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-none">
+  <div class="bg">
     <el-row class="home-evaluate center">
       <v-title :data="titleFour"></v-title>
       <div class="evaluate-carousel">

@@ -111,15 +111,37 @@
               <div class="common-button btn-bgs " v-else>
                 <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
               </div>
-              <el-row>
+              <el-row v-if="config.position !== 'personal'">
+                <!-- 名字 -->
+                <div class="item " @click="courseInfo(card,index) " v-if="config.card === 'home'">
+                  <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]">
+                    <span class="title">{{card.title}}</span>
+                    <span class="deputyTitle">{{card.deputy_title}}</span>
+                  </p>
+                  <p class="itemBox-info">
+                    <span v-if="config.card === 'home'">
+                      {{card.curriculum_time}}课时
+                    </span>
+                    <span class="itemBox-num" v-if="config.card === 'home'">
+                      <img :src="numSrc" alt="">
+                      <span>{{card.study_number}}</span>
+                      <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                    </span>
+                  </p>
+                </div>
+                <div class="line-wrap " v-if="config.card==='home' ">
+                  <div class="line-center ">
+                    <p class="price ">￥{{card.present_price}}</p>
+                  </div>
+                </div>
+              </el-row>
+              <el-row v-if="config.position === 'personal'">
                 <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) ">
                   <p class="itemBox-name ">
                     <span>{{card.title}}</span>
-                    <!-- <span class="deputyTitle">{{card.deputy_title}}</span> -->
                   </p>
                 </div>
-                <!-- 作者和头衔    金额 -->
                 <div class="line-wrap " v-if="config.card==='home' " @click.stop="goTeacherInfo(card.teacher_id) ">
                   <div class="line-center ">
                     <img :src="card.head_img " alt=" ">
@@ -127,11 +149,6 @@
                     <span class="title ">{{card.graduate}}</span>
                   </div>
                 </div>
-                <!-- <div class="line-wrap " v-if="config.card==='home' ">
-                  <div class="line-center ">
-                    <p class="price ">￥{{card.present_price}}</p>
-                  </div>
-                </div> -->
               </el-row>
             </div>
           </el-card>
@@ -205,7 +222,7 @@
         </div>
       </div>
     </template>
-    <!-- 新上好课详情 -->
+    <!-- 新上好课详情  course/newlesson-->
     <template v-if="config.card_type==='goodlesson' ">
       <div class="courseList center goodLesson ">
         <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
@@ -260,16 +277,17 @@
               <!-- <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="buyNewCourse(course)"> 加入购物车</el-button>
               </div> -->
-              <div class="fr common-button-half-right">
+              <div class="fr common-button-half-right" v-if="course.is_free == '2'">
 
                 <el-button type="primary" plain @click="courseInfo(course) "> 立即学习</el-button>
               </div>
-              <!-- <div class="fr common-button-half-right">
-                <el-button type="primary" plain @click="courseInfo(course)"> 加入购物车</el-button>
-              </div> -->
-              <!-- <div class="fr common-button-half-right">
-                <el-button type="primary" plain @click="courseInfo(course)"> 立即学习</el-button>
-              </div> -->
+
+              <div class="fr common-button-half-right" v-if="course.is_free == '1'">
+                <!-- 是否在购物车{{course.is_cart}} {{course.isCartNew}} -->
+                <el-button type="primary" plain @click="goBuyNewLesson(true,course,index)"> 加入购物车 </el-button>
+                <!-- {{item.isCartNew}} -->
+              </div>
+
             </div>
           </div>
         </div>
@@ -527,6 +545,7 @@ export default {
         curriculumid: ''
       },
       isCart: 0,
+      isCartNew: 0,
       isClick: false
     }
   },
@@ -560,6 +579,7 @@ export default {
       })
     },
     goBuy(detail, item) {
+      // console.log(item, '这是item')
       if (this.isAuthenticated) {
         if (item.is_cart === 0) {
           this.isClick = true
@@ -598,12 +618,39 @@ export default {
         this.$bus.$emit('loginShow', true)
       }
     },
+    goBuyNewLesson(detail, item, index) {
+      persistStore.set('curriculumId', item.id)
+      this.kidForm.kids = item.id
+      this.setKid(this.kidForm)
+      // console.log(item, '这是item')
+      if (this.isAuthenticated) {
+        if (item.is_cart === 0) {
+          this.isClick = true
+          if (item.isCartNew === 0) {
+            this.detailAddShopCarts(index)
+          } else {
+            this.isClick = false
+            this.$message({
+              type: 'success',
+              message: '您的商品已经在购物车里面'
+            })
+            // this.isCartNew = 1
+          }
+        } else {
+          this.$message({
+            type: 'success',
+            message: '您的商品已经在购物车里面'
+          })
+        }
+      } else {
+        this.$bus.$emit('loginShow', true)
+      }
+    },
     goBuy3(item, index) {
       this.$bus.$emit('loginShow', true)
     },
     goPlay(item) {
       // console.log(item)
-
       persistStore.set(
         'curriculumId',
         item.defaultCurriculumCatalog.curriculum_id
@@ -675,9 +722,10 @@ export default {
         }
       }
     },
-    detailAddShopCarts() {
+    // 点击加入购物车
+    detailAddShopCarts(newIndex) {
       this.curriculumcartids.cartid = this.kid
-
+      // console.log(this.courseList, '这是response')
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
           // this.$router.push('/shop/shoppingcart')
@@ -685,14 +733,25 @@ export default {
           this.setProductsNum({
             pn: len
           })
+
+          this.isCart = 1
+          this.isCartNew = 1
+          this.isClick = false
           this.$message({
             type: 'success',
             message: '加入购物车成功'
           })
-          this.isCart = 1
-          this.isClick = false
+          // 设置newlesson 第一次加入购物车的状态
+          for (var i = 0; i < this.courseList.length; i++) {
+            if (i === newIndex) {
+              this.$set(this.courseList[i], 'isCartNew', 1)
+            }
+          }
+          // console.log(this.courseList, '123')
         })
       })
+
+      // console.log(this.courseList, '123')
       for (var i = 0; i < this.data.length; i++) {
         if (i === index) {
           this.$set(this.data[i], 'is_checked', true)
@@ -1022,6 +1081,7 @@ export default {
       .item {
         // border-bottom: 1px rgba(228, 228, 244, 1) solid;
         .itemBox-name {
+          width: 100%;
           height: 45px;
           line-height: 45px;
           font-size: 16px;
