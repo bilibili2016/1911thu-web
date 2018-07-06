@@ -114,24 +114,26 @@
               <el-row>
                 <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) ">
-                  <p class="itemBox-name ">
-                    <span>{{card.title}}</span>
-                    <!-- <span class="deputyTitle">{{card.deputy_title}}</span> -->
+                  <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]">
+                    <span class="title">{{card.title}}</span>
+                    <span class="deputyTitle">{{card.deputy_title}}</span>
+                  </p>
+                  <p class="itemBox-info">
+                    <span v-if="config.card === 'home'">
+                      {{card.curriculum_time}}课时
+                    </span>
+                    <span class="itemBox-num" v-if="config.card === 'home'">
+                      <img :src="numSrc" alt="">
+                      <span>{{card.study_number}}</span>
+                      <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                    </span>
                   </p>
                 </div>
-                <!-- 作者和头衔    金额 -->
-                <div class="line-wrap " v-if="config.card==='home' " @click.stop="goTeacherInfo(card.teacher_id) ">
-                  <div class="line-center ">
-                    <img :src="card.head_img " alt=" ">
-                    <span>{{card.teacher_name}}</span>
-                    <span class="title ">{{card.graduate}}</span>
-                  </div>
-                </div>
-                <!-- <div class="line-wrap " v-if="config.card==='home' ">
+                <div class="line-wrap " v-if="config.card==='home' ">
                   <div class="line-center ">
                     <p class="price ">￥{{card.present_price}}</p>
                   </div>
-                </div> -->
+                </div>
               </el-row>
             </div>
           </el-card>
