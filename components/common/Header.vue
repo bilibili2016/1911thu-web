@@ -112,49 +112,46 @@
                 <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
-            <<<<<<< HEAD <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
-      =======
-      <div class="userPotal" @click="userProtocol">
-        <span>1911学堂</span>
-        《用户注册协议》</div>
-      >>>>>>> origin/dev
-      <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
-      </el-tab-pane>
-      </el-tabs>
-    </div>
-    <!-- 微信登录 -->
-    <div class="lrFrame wechatLogin" v-show="wechatLogin">
-      <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
-        <h4 class="clearfix">
-          <span>绑定手机账号</span>
-        </h4>
-        <el-form-item prop="tel">
-          <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
-        </el-form-item>
-        <el-form-item prop="code">
-          <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
-          <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
-        </el-form-item>
-        <el-form-item prop="companyCodes">
-          <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
-          <span class="bindCompany">(可选)</span>
-        </el-form-item>
-        <el-row>
-          <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
-        </el-row>
-      </el-form>
-      <div class="scanCode" v-show="scanCodeShow">
-        <h4 class="clearfix"></h4>
-        <!-- el-icon-loading -->
-        <div class="wxchatIMG" id="wxchatIMG"></div>
+            <div class="userPotal" @click="userProtocol">
+              <span>1911学堂</span>
+              《用户注册协议》</div>
+            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
+          </el-tab-pane>
+        </el-tabs>
       </div>
-      <div class="bindSuccess" v-show="bindSuccessShow">
-        <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
-        <h5>手机账号绑定成功</h5>
-        <p>返回登录 3S</p>
+      <!-- 微信登录 -->
+      <div class="lrFrame wechatLogin" v-show="wechatLogin">
+        <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
+          <h4 class="clearfix">
+            <span>绑定手机账号</span>
+          </h4>
+          <el-form-item prop="tel">
+            <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
+          </el-form-item>
+          <el-form-item prop="code">
+            <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
+            <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
+          </el-form-item>
+          <el-form-item prop="companyCodes">
+            <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
+            <span class="bindCompany">(可选)</span>
+          </el-form-item>
+          <el-row>
+            <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
+          </el-row>
+        </el-form>
+        <div class="scanCode" v-show="scanCodeShow">
+          <h4 class="clearfix"></h4>
+          <!-- el-icon-loading -->
+          <div class="wxchatIMG" id="wxchatIMG"></div>
+        </div>
+        <div class="bindSuccess" v-show="bindSuccessShow">
+          <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
+          <h5>手机账号绑定成功</h5>
+          <p>返回登录 3S</p>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
