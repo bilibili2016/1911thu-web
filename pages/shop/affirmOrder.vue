@@ -315,7 +315,7 @@
               <p class="fl">
                 <i>*</i>银行账户</p>
               <p class="fr">
-                <input type="text" v-model.number="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账户">
+                <input type="text" v-model="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账户">
                 <span class="tips" v-show="tipsAccount&&account">
                   <i class="el-icon-success"></i>
                 </span>
