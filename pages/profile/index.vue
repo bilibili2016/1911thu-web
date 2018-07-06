@@ -140,7 +140,7 @@
                     ￥{{course.price}}
                   </div>
                   <div class="courseOperation">
-                    X{{course.pay_number}}
+                    <i class="el-icon-close"></i>{{course.pay_number}}
                   </div>
                 </div>
               </div>
@@ -641,6 +641,9 @@ export default {
           margin-left: 35px;
           font-size: 16px;
           color: #332a51;
+          i {
+            font-size: 12px;
+          }
         }
       }
       .tableFooter {
