@@ -513,6 +513,7 @@ export default {
 .bigTab {
   width: 1140px;
   & > div > div.el-tabs__content {
+    width: 926px;
     padding: 15px;
     margin-top: -15px;
     box-shadow: none;
