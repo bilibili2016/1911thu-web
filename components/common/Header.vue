@@ -112,7 +112,9 @@
                 <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
-            <div class="userPotal" @click="userProtocol">用户注册协议</div>
+            <div class="userPotal" @click="userProtocol">
+              <span>1911学堂</span>
+              《用户注册协议》</div>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
         </el-tabs>
@@ -847,6 +849,8 @@ export default {
             confirmButtonText: '确定',
             callback: action => {
               this.signOuts()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
               this.$bus.$emit('loginShow', true)
             }
           })
@@ -958,8 +962,11 @@ export default {
   }
 }
 .userPotal {
+  span {
+    color: #555555;
+  }
   position: absolute;
-  right: 166px;
+  right: 87px;
   bottom: 175px;
   font-size: 12px;
   color: #6417a6;
