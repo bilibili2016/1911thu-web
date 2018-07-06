@@ -139,6 +139,7 @@ export default {
       } else {
         this.curriculumListForm.isFree = 1
       }
+      this.curriculumListForm.pages = 1
       this.curriculumList()
     },
     handleItemOne(item, index) {
