@@ -57,6 +57,9 @@ export default {
             this.noMoreData = true
           }
           this.courseList = this.courseList.concat(response.data.curriculumList)
+          for (var i = 0; i < this.courseList.length; i++) {
+            this.$set(this.courseList[i], 'isCartNew', 0)
+          }
           this.pageCount = response.data.pageCount
           this.scrollTopMsg = true
 
