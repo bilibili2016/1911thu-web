@@ -45,7 +45,7 @@
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
-                    {{card.curriculum_time}}min
+                    {{card.curriculum_time}}课时
                   </span>
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
@@ -267,13 +267,15 @@
               <!-- <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click="courseInfo(course)"> 加入购物车</el-button>
               </div> -->
-
+              <!-- <div class="fr common-button-half-right">
+                <el-button type="primary" plain @click="courseInfo(course)"> 立即学习</el-button>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
     </template>
-    <!-- 新上好课详情 页面 -->
+    <!-- coursedetail 页面 -->
     <template v-if="config.card_type === 'goodplay'">
       <div class="courseList center">
         <!-- v-for="(course,index) in courseList -->
@@ -283,9 +285,11 @@
               <img :src="courseList.picture" class="image">
               <div class="mask"></div>
               <div class="common-button btn-bg">
+                <!-- 用户已登录 -->
                 <div v-if="isAuthenticated">
                   <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button> -->
                   <!-- <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看2</el-button> -->
+
                   <div class="playBtn-detail" v-if="privileMsg === true">
                     <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
                   </div>
@@ -293,6 +297,7 @@
                     <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
                   </div>
                 </div>
+                <!-- 用户未登录 -->
                 <div v-else class="playBtn-detail">
                   <!-- <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看3</el-button> -->
                   <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
@@ -303,7 +308,9 @@
           <div class="particularss fr">
             <div class="currentclum">
               <h4>{{courseList.title}}</h4>
-              <div class="tg">团购价更优，团购电话：010-62701911</div>
+              <!-- ==(免费2)={{courseList.is_free}} 是否购买{{privileMsg}} 是否学习（1已学习）{{courseList.is_study }} -->
+              <!-- 团购价更优，团购电话：010-62701911 -->
+              <div class="tg">团购价更优，团购电话：010-62701911 </div>
               <!-- 判断是否免费 is_free(2是免费)-->
               <div v-if="courseList.is_free === '2'">
                 <div class="clum" v-if="courseList.is_study === 1">
@@ -312,7 +319,7 @@
                 </div>
                 <div v-else>
                   <span class="fl coursenum">
-                    <span>{{courseList.curriculum_time}}min</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                    <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                   <span class="rate">
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
@@ -358,7 +365,7 @@
                 </div>
                 <div v-else>
                   <span class="fl coursenum">
-                    <span>{{courseList.curriculum_time}}min</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                    <span>{{courseList.curriculum_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                   <span class="rate">
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
@@ -430,7 +437,8 @@
     <!-- 学堂资讯 -->
     <template v-if="config.card_type === 'infoOne'">
       <div class="info-list">
-        <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index>0">
+        <!--  -->
+        <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index<3">
           <el-card shadow="never" body-style="padding: 0;">
             <div class="info-box" @click="selectDetail(index,card,linkfive)">
               <div class="info-wrap">
@@ -594,8 +602,14 @@ export default {
       this.$bus.$emit('loginShow', true)
     },
     goPlay(item) {
-      persistStore.set('curriculumId', item.defaultCurriculumCatalog.id)
+      // console.log(item)
+
+      persistStore.set(
+        'curriculumId',
+        item.defaultCurriculumCatalog.curriculum_id
+      )
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
+
       window.open(window.location.origin + '/course/player')
     },
     // 获取详情默认播放小节id
@@ -1249,7 +1263,7 @@ export default {
     float: right;
     height: 20px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 16px;
     font-family: MicrosoftYaHei;
     color: rgba(100, 23, 166, 1);
     line-height: 40px;
