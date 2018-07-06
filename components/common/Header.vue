@@ -14,7 +14,7 @@
         <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
+        <input type="text" placeholder="请输入课程" v-model="search" @keyup.enter="goSearch">
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
