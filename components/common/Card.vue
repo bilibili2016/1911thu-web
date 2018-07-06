@@ -1145,7 +1145,7 @@ export default {
     float: right;
     height: 20px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 16px;
     font-family: MicrosoftYaHei;
     color: rgba(100, 23, 166, 1);
     line-height: 40px;
