@@ -304,22 +304,9 @@ export default {
           return { label: item.position_name, value: item.id }
         })
       })
-    },
-    insertEle() {
-      var oTest = document.getElementById('onlyOne').parentNode
-      console.log(oTest)
-      var newNode = document.createElement('input')
-      var reforeNode = document.getElementById('onlyOne')
-      // newNode.setAttribute({ type: 'password', name: 'noauto' })
-      newNode.setAttribute('type', 'text')
-      newNode.setAttribute('name', 'noauto')
-      newNode.setAttribute('style', 'display:none')
-      // newNode.innerHTML = ' This is a newcon '
-      oTest.insertBefore(newNode, reforeNode.nextSibling) //新建的元素节点插入id为P1节点元素的后面。
     }
   },
   mounted() {
-    this.insertEle()
     if (this.isAuthenticated) {
       this.getUserInfo()
       this.getPositionList()

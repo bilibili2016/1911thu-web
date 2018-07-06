@@ -39,14 +39,10 @@ export default {
         img: 'http://papn9j3ys.bkt.clouddn.com/banner1.png'
       },
       imgList: [
-        // require('@/assets/images/banner1.png'),
         'http://papn9j3ys.bkt.clouddn.com/banner1.png',
         'http://papn9j3ys.bkt.clouddn.com/banner2.png',
         'http://papn9j3ys.bkt.clouddn.com/banner3.png',
         'http://papn9j3ys.bkt.clouddn.com/banner4.png'
-        // require('@/assets/images/banner2.png'),
-        // require('@/assets/images/banner3.png'),
-        // require('@/assets/images/banner4.png')
       ],
       fragmentConfig: {
         container: '.img-flex', //显示容器
@@ -143,6 +139,10 @@ export default {
   mounted() {
     $(() => {
       let setInter = setInterval(() => {
+        if (this.$refs.popupContainer == undefined) {
+          clearInterval(this.timer)
+          return
+        }
         this.$refs.popupContainer.style.background = '#4e37b3'
         this.fragmentImg(this.fragmentConfig)
         clearInterval(setInter)
@@ -150,6 +150,10 @@ export default {
       }, 3000)
       setTimeout(() => {
         this.timer = setInterval(() => {
+          if (this.$refs.popupContainer == undefined) {
+            clearInterval(this.timer)
+            return
+          }
           this.$refs.popupContainer.style.background = '#4e37b3'
           ++this.exeCount
           const imgListLength = this.imgList.length
