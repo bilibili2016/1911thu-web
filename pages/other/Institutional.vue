@@ -291,7 +291,7 @@ export default {
         }, 16.7)
       }
     },
-    handleLinki(item) {
+    handleLink(item) {
       window.open(window.location.origin + item.link)
     },
     goLink(item) {
