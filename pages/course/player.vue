@@ -252,7 +252,13 @@ export default {
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
     isHasClass() {
+      console.log('isHasClass')
+
       let myVideo = document.getElementById('movd')
+      // console.log(myVideo)
+      if (myVideo == null) {
+        return
+      }
       if (myVideo.getAttribute('class')) {
         // 存在class属性
 
@@ -462,12 +468,14 @@ export default {
       socket.on('reconnect', function(msg) {})
       let that = this
       player.on('pause', () => {
+        console.log('pause')
         this.isHasClass()
         this.playing = this.pauseImg
         clearInterval(that.interval)
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
+        consoel.log('volumechange')
         this.isHasClass()
         // console.log(this.$refs.videoButton.src)
         persistStore.set('volume', player.volume())
@@ -537,6 +545,7 @@ export default {
           }
         })
       })
+      console.log('before')
       this.isHasClass()
     },
     getCurriculumPlayInfo() {
