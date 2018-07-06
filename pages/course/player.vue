@@ -254,8 +254,6 @@ export default {
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
     isHasClass() {
-      console.log('isHasClass')
-
       let myVideo = document.getElementById('movd')
       // console.log(myVideo)
       if (myVideo == null) {
@@ -470,7 +468,6 @@ export default {
       socket.on('reconnect', function(msg) {})
       let that = this
       player.on('pause', () => {
-        console.log('pause')
         this.isHasClass()
         this.playing = this.pauseImg
         clearInterval(that.interval)
@@ -547,7 +544,7 @@ export default {
           }
         })
       })
-      console.log('before')
+
       this.isHasClass()
     },
     getCurriculumPlayInfo() {
@@ -556,7 +553,6 @@ export default {
         home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
           // console.log(response)
           // console.log(response.data.curriculumDetail, '9999')
-          // console.log(response.data.curriculumDetail.is_study)
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.bought = response.data.curriculumPrivilege
