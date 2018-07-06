@@ -693,7 +693,7 @@ export default {
   },
   watch: {
     videoState(flag) {
-      console.log(flag)
+      // console.log(flag)
       if (flag) {
         this.playing = this.playImg
       } else {
