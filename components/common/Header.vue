@@ -961,7 +961,7 @@ export default {
 }
 .userPotal {
   position: absolute;
-  right: 97px;
+  right: 93px;
   bottom: 175px;
   font-size: 12px;
   color: #6417a6;
