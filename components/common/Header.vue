@@ -959,7 +959,7 @@ export default {
 }
 .userPotal {
   position: absolute;
-  right: 90px;
+  right: 97px;
   bottom: 175px;
   font-size: 12px;
   color: #6417a6;
