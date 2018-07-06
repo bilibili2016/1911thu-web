@@ -139,7 +139,7 @@
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
               </div>
               <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
-              <h5 v-else>#{{item.tags}}，{{item.evaluate_content}}</h5>
+              <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
             </div>
           </div>
         </div>
@@ -334,11 +334,9 @@ export default {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.evaluatecontent = this.textarea
       this.addEvaluateForm.scores = this.rateModel
-
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
