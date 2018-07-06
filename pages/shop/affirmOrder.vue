@@ -596,8 +596,7 @@ export default {
     this.goodsList()
     this.getInvoiceDetail()
     this.getRegionList()
-    // let windowHeight = document.body.clientHeight
-    // let aa = document.body.offsetHeight
+
     let headerHeight = document.getElementsByClassName('headerBox')[0]
       .offsetHeight
     let footerHeight = document.getElementsByClassName('footerBox')[0]
