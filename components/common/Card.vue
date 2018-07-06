@@ -1086,7 +1086,7 @@ export default {
       .item {
         // border-bottom: 1px rgba(228, 228, 244, 1) solid;
         .itemBox-name {
-          width: 100%;
+          width: 250px;
           height: 45px;
           line-height: 45px;
           font-size: 16px;

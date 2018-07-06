@@ -423,13 +423,8 @@ export default {
       'setPwd'
     ]),
     explorer() {
-      var userAgent = navigator.userAgent // 取得浏览器的 userAgent 字符串
-      if (
-        userAgent.indexOf('compatible') > -1 &&
-        userAgent.indexOf('MSIE') > -1 &&
-        !userAgent.indexOf('Opera') > -1
-      ) {
-        console.log('IE')
+      if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+        console.log('ie')
         this.judegExplorer = true
       } else {
         console.log('其他')
