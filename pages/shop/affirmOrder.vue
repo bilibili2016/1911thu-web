@@ -979,7 +979,6 @@ export default {
       return tmp
     },
     isTicket(item) {
-      console.log(item, '这是item')
       if (item === 2) {
         this.ticketForm.isRadio = false
       } else {
