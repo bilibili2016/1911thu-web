@@ -562,7 +562,7 @@ export default {
       })
     },
     goBuy(detail, item) {
-      console.log(item, '这是item')
+      // console.log(item, '这是item')
       if (this.isAuthenticated) {
         if (item.is_cart === 0) {
           this.isClick = true
@@ -605,7 +605,7 @@ export default {
       persistStore.set('curriculumId', item.id)
       this.kidForm.kids = item.id
       this.setKid(this.kidForm)
-      console.log(item, '这是item')
+      // console.log(item, '这是item')
       if (this.isAuthenticated) {
         if (item.is_cart === 0) {
           this.isClick = true
@@ -730,11 +730,11 @@ export default {
               this.$set(this.courseList[i], 'isCartNew', 1)
             }
           }
-          console.log(this.courseList, '123')
+          // console.log(this.courseList, '123')
         })
       })
 
-      console.log(this.courseList, '123')
+      // console.log(this.courseList, '123')
       for (var i = 0; i < this.data.length; i++) {
         if (i === index) {
           this.$set(this.data[i], 'is_checked', true)

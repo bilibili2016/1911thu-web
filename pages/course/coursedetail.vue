@@ -523,7 +523,7 @@ export default {
   },
   watch: {
     isCollection(flag) {
-      console.log(flag)
+      // console.log(flag)
     }
   }
 }
