@@ -885,6 +885,7 @@ export default {
               this.invoiceForm.number = this.zzTicketForm.number
               this.invoiceForm.address = this.zzTicketForm.address
               this.invoiceForm.radio = Number(this.zzTicketForm.radio)
+              this.invoiceForm.others = this.zzTicketForm.others
               this.invoiceForm.ticket = false
               this.isShowTicket = true
               this.commitOrders.ticketId = res.data.invoice_id
@@ -947,6 +948,7 @@ export default {
               this.ticketForm.area = res.data.area
               this.zzTicketForm.address = res.data.address
               this.zzTicketForm.others = res.data.content
+              this.TicketForm.others = res.data.content
               this.zzTicketForm.radio = Number(res.data.content_type)
               this.commitOrders.ticketId = res.data.id
               if (this.zzTicketForm.radio == 2) {
