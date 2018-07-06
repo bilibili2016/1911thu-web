@@ -129,7 +129,7 @@ export default {
       curriculumcartids: {
         cartid: null
       },
-      ischeck: '',
+      ischeck: null,
       mediaRW: 28,
       mediaLW: 72,
       mediaRInner: true,
@@ -428,7 +428,6 @@ export default {
     },
     getPlayerInfo() {
       if (typeof TCPlayer === 'undefined') {
-        console.log(1111)
         location.reload()
         return
       }
@@ -496,8 +495,11 @@ export default {
           // this.ischeck = item.id
         }, 1000)
 
-        that.ischeck = persistStore.get('catalogId')
-        that.playing = that.playImg
+        this.ischeck = persistStore.get('catalogId')
+        this.playing = this.playImg
+      })
+      player.on('play', function() {
+        this.playing = this.pauseImg
       })
       // 计时器
       return new Promise((resolve, reject) => {
@@ -509,8 +511,6 @@ export default {
               confirmButtonText: '确定',
               callback: action => {
                 this.signOuts()
-                //初始化首页数据
-                this.$bus.$emit('reLogin', true)
                 this.$bus.$emit('loginShow', true)
               }
             })
@@ -618,10 +618,10 @@ export default {
               this.iseve = 1
             }
           })
-          if (response.status === 0) {
-            this.showEvaluate = false
-            this.iseve = 1
-          }
+          // if (response.status === 0) {
+          //   this.showEvaluate = false
+          //   this.iseve = 1
+          // }
         })
       } else {
         this.$message({
