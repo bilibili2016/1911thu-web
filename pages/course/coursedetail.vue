@@ -67,7 +67,9 @@
         <!-- 评价 -->
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0" -->
         <!--  -->
-        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
+        <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
+
+        <div class="evaluate-tag">
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
@@ -348,7 +350,6 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
@@ -359,6 +360,10 @@ export default {
                 message: response.msg
               })
             } else {
+              this.addEvaluateForm.tag = []
+              for (let item of this.btnData) {
+                this.$set(item, 'isCheck', false)
+              }
               this.$message({
                 showClose: true,
                 type: 'success',
@@ -378,15 +383,40 @@ export default {
         })
       }
     },
+    unique(arr) {
+      var newArr = [arr[0]]
+      for (var i = 1; i < arr.length; i++) {
+        if (newArr.indexOf(arr[i]) == -1) {
+          newArr.push(arr[i])
+        }
+      }
+      return newArr
+    },
+    remove(val) {
+      var index = this.indexOf(val)
+      if (index > -1) {
+        this.splice(index, 1)
+      }
+    },
     getBtnContent(val, index) {
+      console.log(val, '这是val')
+
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)
+
+        for (var i = 0; i < this.addEvaluateForm.tag.length; i++) {
+          // document.write(cars[i] + '<br>')
+          if (this.addEvaluateForm.tag[i] === val.value) {
+            this.addEvaluateForm.tag.splice(i, 1)
+          }
+        }
       } else {
         this.$set(val, 'isCheck', true)
+        this.addEvaluateForm.tag.push(val.value)
+        this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
       }
-
+      // console.log(this.addEvaluateForm.tag, '这是this.addEvaluateForm.tag')
       // this.borderIndex = index
-      this.addEvaluateForm.tag.push(val.value)
     },
     getCourseDetail() {
       this.loadTeacher = true
