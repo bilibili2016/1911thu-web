@@ -66,6 +66,7 @@
         </div>
         <!-- 评价 -->
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0" -->
+        <!--  -->
         <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
           <h4>课程评价</h4>
           <div class="personal">
@@ -172,7 +173,7 @@ export default {
       activeName: 'second',
       selectMsg: '',
       dialogVisible: false,
-      textarea: null,
+      textarea: '',
       rateModel: 5,
       loadTeacher: false,
       loadEvaluate: false,
@@ -347,6 +348,7 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
+
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
@@ -367,6 +369,7 @@ export default {
             }
           })
         })
+        // this.addEvaluateForm.tag = []
       } else {
         this.$message({
           showClose: true,
