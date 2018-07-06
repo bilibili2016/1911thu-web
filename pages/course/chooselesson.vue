@@ -216,8 +216,17 @@ export default {
       this.getPidList = []
       this.curriculumList()
     },
-
-    handleClick(tab, event) {},
+    changeTab(item) {
+      console.log(item, 'item')
+    },
+    handleClick(tab, event) {
+      if (tab.name == 'first') {
+        this.curriculumListForm.sortBy = 1
+      } else {
+        this.curriculumListForm.sortBy = 2
+      }
+      this.curriculumList()
+    },
     curriculumList() {
       this.loadCourse = true
       this.curriculumListForm.categoryIda = this.cid

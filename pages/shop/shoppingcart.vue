@@ -1,5 +1,5 @@
 <template>
-  <div class="shopCart">
+  <div class="shopCart" ref="shopCart">
     <!-- 购物车列表 -->
     <div class="main" v-loading="loding">
       <div class="table">
@@ -203,6 +203,15 @@ export default {
     this.$bus.$emit('bannerShow', false)
     // this.getNum()
     this.restaurants = this.loadAll()
+
+    let headerHeight = document.getElementsByClassName('headerBox')[0]
+      .offsetHeight
+    let footerHeight = document.getElementsByClassName('footerBox')[0]
+      .offsetHeight
+    let windowHeight = document.documentElement.clientHeight
+
+    this.$refs.shopCart.style.minHeight =
+      windowHeight - headerHeight - footerHeight + 'px'
   },
   computed: {
     ...mapState('auth', ['token', 'productsNum']),

@@ -884,6 +884,7 @@ export default {
               this.invoiceForm.companyname = this.zzTicketForm.companyname
               this.invoiceForm.number = this.zzTicketForm.number
               this.invoiceForm.address = this.zzTicketForm.address
+              this.invoiceForm.others = this.zzTicketForm.others
               this.invoiceForm.radio = Number(this.zzTicketForm.radio)
               this.invoiceForm.ticket = false
               this.isShowTicket = true
