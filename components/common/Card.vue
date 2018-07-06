@@ -111,9 +111,9 @@
               <div class="common-button btn-bgs " v-else>
                 <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
               </div>
-              <el-row>
+              <el-row v-if="config.position !== 'personal'">
                 <!-- 名字 -->
-                <div class="item " @click="courseInfo(card,index) ">
+                <div class="item " @click="courseInfo(card,index) " v-if="config.card === 'home'">
                   <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]">
                     <span class="title">{{card.title}}</span>
                     <span class="deputyTitle">{{card.deputy_title}}</span>
@@ -132,6 +132,21 @@
                 <div class="line-wrap " v-if="config.card==='home' ">
                   <div class="line-center ">
                     <p class="price ">￥{{card.present_price}}</p>
+                  </div>
+                </div>
+              </el-row>
+              <el-row v-if="config.position === 'personal'">
+                <!-- 名字 -->
+                <div class="item " @click="courseInfo(card,index) ">
+                  <p class="itemBox-name ">
+                    <span>{{card.title}}</span>
+                  </p>
+                </div>
+                <div class="line-wrap " v-if="config.card==='home' " @click.stop="goTeacherInfo(card.teacher_id) ">
+                  <div class="line-center ">
+                    <img :src="card.head_img " alt=" ">
+                    <span>{{card.teacher_name}}</span>
+                    <span class="title ">{{card.graduate}}</span>
                   </div>
                 </div>
               </el-row>
