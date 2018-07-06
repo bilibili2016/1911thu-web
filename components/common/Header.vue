@@ -14,7 +14,7 @@
         <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
+        <input type="text" placeholder="请输入课程" v-model="search" @keyup.enter="goSearch">
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
@@ -99,10 +99,10 @@
               <el-form-item prop="passwords">
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
-              <el-form-item prop="companyCodes">
+              <!-- <el-form-item prop="companyCodes">
                 <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
                 <span class="bindCompany">(可选)</span>
-              </el-form-item>
+              </el-form-item> -->
               <el-form-item prop="checked">
                 <el-checkbox-group v-model="registerData.checked">
                   <el-checkbox label="同意" name="checked"></el-checkbox>
@@ -847,6 +847,8 @@ export default {
             confirmButtonText: '确定',
             callback: action => {
               this.signOuts()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
               this.$bus.$emit('loginShow', true)
             }
           })
