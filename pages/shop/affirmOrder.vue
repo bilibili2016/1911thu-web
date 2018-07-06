@@ -605,7 +605,7 @@ export default {
       let footerHeight = document.getElementsByClassName('footerBox')[0]
         .offsetHeight
       let windowHeight = document.documentElement.clientHeight
-      console.log(windowHeight)
+      // console.log(windowHeight)
       this.$refs.affirmOrder.style.minHeight =
         windowHeight - headerHeight - footerHeight + 'px'
     },
@@ -979,7 +979,6 @@ export default {
       return tmp
     },
     isTicket(item) {
-      console.log(item, '这是item')
       if (item === 2) {
         this.ticketForm.isRadio = false
       } else {
@@ -1002,7 +1001,6 @@ export default {
       this.company.id
         ? (this.commitOrders.companyId = this.company.id)
         : (this.commitOrders.companyId = '')
-      // console.log(this.company.id, '8989898')
       if (this.person) {
         this.commitOrders.types = 1
       } else {
@@ -1016,7 +1014,6 @@ export default {
           return false
         }
       }
-      //  console.log()
       return new Promise((resolve, reject) => {
         home.commitOrder(this.commitOrders).then(res => {
           if (res.status === 0) {
