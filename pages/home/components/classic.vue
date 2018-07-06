@@ -12,7 +12,7 @@
             <h4 @click="courseInfo(course)">{{course.title}}</h4>
             <h5>{{course.deputy_title}}</h5>
             <h6 class="clearfix">
-              <p class="fl">{{course.curriculum_time}}min <img :src="stydyNum" alt=""> {{course.study_number}}</p>
+              <p class="fl">{{course.study_time}}课时 <img :src="stydyNum" alt=""> {{course.study_number}}</p>
               <p class="fr">
                 <el-rate disabled v-model="course.score" class="itemBox-rate"></el-rate>
               </p>
@@ -113,7 +113,7 @@ export default {
       }
       h6 {
         color: #93999f;
-        font-size: 12px;
+        font-size: 14px;
         p img {
           width: 12px;
           height: 12px;
