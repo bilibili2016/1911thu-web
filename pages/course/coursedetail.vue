@@ -69,7 +69,7 @@
         <!--  -->
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
 
-        <div class="evaluate-tag">
+        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
           <h4>课程评价</h4>
           <div class="personal">
             <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
