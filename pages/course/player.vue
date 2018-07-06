@@ -619,10 +619,6 @@ export default {
               this.iseve = 1
             }
           })
-          if (response.status === 0) {
-            this.showEvaluate = false
-            this.iseve = 1
-          }
         })
       } else {
         this.$message({
