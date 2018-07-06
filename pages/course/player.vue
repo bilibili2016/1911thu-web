@@ -612,18 +612,19 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
+
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
+          if (response.status === 0) {
+            this.showEvaluate = false
+            this.iseve = 1
+          }
           // console.log(response)
           this.$message({
             showClose: true,
             type: 'success',
             message: response.msg
           })
-          if (response.status === 0) {
-            this.showEvaluate = false
-            this.iseve = 1
-          }
         })
       })
       // } else {
@@ -634,7 +635,7 @@ export default {
       //   })
       //   this.showEvaluate = false
       // }
-      this.showEvaluate = false
+      // this.showEvaluate = false
     },
     // 判断是收藏还是为收藏
     collection() {
