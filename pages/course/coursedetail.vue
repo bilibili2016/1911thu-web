@@ -332,7 +332,16 @@ export default {
     // 提交评论接口
     addEvaluate() {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
-      this.addEvaluateForm.evaluatecontent = this.textarea
+      if (this.textarea.length < 300) {
+        this.addEvaluateForm.evaluatecontent = this.textarea
+      } else {
+        this.$message({
+          showClose: true,
+          type: 'warning',
+          message: '请输入少于300个字符！'
+        })
+        return false
+      }
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()

@@ -315,7 +315,7 @@
               <p class="fl">
                 <i>*</i>银行账户</p>
               <p class="fr">
-                <input type="text" v-model.number="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账户">
+                <input type="text" v-model="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账户">
                 <span class="tips" v-show="tipsAccount&&account">
                   <i class="el-icon-success"></i>
                 </span>
@@ -884,6 +884,7 @@ export default {
               this.invoiceForm.companyname = this.zzTicketForm.companyname
               this.invoiceForm.number = this.zzTicketForm.number
               this.invoiceForm.address = this.zzTicketForm.address
+              this.invoiceForm.others = this.zzTicketForm.others
               this.invoiceForm.radio = Number(this.zzTicketForm.radio)
               this.invoiceForm.ticket = false
               this.isShowTicket = true
@@ -928,6 +929,8 @@ export default {
               this.commitOrders.ticketId = res.data.id
               if (this.ticketForm.radio == 2) {
                 this.ticketForm.isRadio = false
+              } else {
+                this.ticketForm.isRadio = true
               }
             }
             if (this.invoiceForm.types == 3) {
@@ -949,6 +952,8 @@ export default {
               this.commitOrders.ticketId = res.data.id
               if (this.zzTicketForm.radio == 2) {
                 this.zzTicketForm.isRadio = false
+              } else {
+                this.zzTicketForm.isRadio = true
               }
             }
             this.getRegion('', this.ticketForm.province)
