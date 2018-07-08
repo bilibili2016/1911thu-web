@@ -630,30 +630,30 @@ export default {
         .toString()
         .replace(/,/g, '#')
 
-      console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
-      // return new Promise((resolve, reject) => {
-      //   home.addEvaluate(this.addEvaluateForm).then(response => {
-      //     if (response.status === '100100') {
-      //       this.$message({
-      //         showClose: true,
-      //         type: 'warning',
-      //         message: response.msg
-      //       })
-      //     } else {
-      //       this.addEvaluateForm.tag = []
-      //       for (let item of this.btnData) {
-      //         this.$set(item, 'isCheck', false)
-      //       }
-      //       this.word = ''
-      //       this.showEvaluate = false
-      //       this.$message({
-      //         showClose: true,
-      //         type: 'success',
-      //         message: response.msg
-      //       })
-      //     }
-      //   })
-      // })
+      // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
+      return new Promise((resolve, reject) => {
+        home.addEvaluate(this.addEvaluateForm).then(response => {
+          if (response.status === '100100') {
+            this.$message({
+              showClose: true,
+              type: 'warning',
+              message: response.msg
+            })
+          } else {
+            this.addEvaluateForm.tag = []
+            for (let item of this.btnData) {
+              this.$set(item, 'isCheck', false)
+            }
+            this.word = ''
+            this.showEvaluate = false
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          }
+        })
+      })
     },
     // 判断是收藏还是为收藏
     collection() {
