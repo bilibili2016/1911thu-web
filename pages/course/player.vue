@@ -101,7 +101,7 @@
         <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
           {{item.value}}
         </div>
-        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="word">
+        <el-input type="textarea" :rows="4" placeholder="请输入您的评价" v-model="word">
         </el-input>
         <div class="commitBug">
           <el-button round @click.native="addEvaluate">提交</el-button>
@@ -288,6 +288,7 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
+      this.addEvaluateForm.tag = []
     },
     unique(arr) {
       var newArr = [arr[0]]
@@ -342,6 +343,7 @@ export default {
         this.addEvaluateForm.tag.push(val.value)
         this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
       }
+      console.log(this.addEvaluateForm.tag, '这是最后的tag')
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
@@ -609,53 +611,47 @@ export default {
     },
     // 增加评论
     addEvaluate() {
-      this.addEvaluateForm.ids = persistStore.get('curriculumId')
-      if (this.textarea.length < 300) {
-        this.addEvaluateForm.evaluatecontent = this.textarea
-      } else {
+      //免费课程不购买可以评价
+      if (!this.bought && this.isFreeCourse !== 2) {
         this.$message({
           showClose: true,
-          type: 'warning',
-          message: '请输入少于300个字符！'
+          type: 'error',
+          message: '您还没有购买该课程，请先购买后再来评论吧！'
         })
+        this.showEvaluate = false
         return false
       }
+
+      this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.evaluatecontent = this.word
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
+      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
       // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
-      if (this.courseList.is_study) {
-        return new Promise((resolve, reject) => {
-          home.addEvaluate(this.addEvaluateForm).then(response => {
-            if (response.status === '100100') {
-              this.$message({
-                showClose: true,
-                type: 'warning',
-                message: response.msg
-              })
-            } else {
-              this.addEvaluateForm.tag = []
-              for (let item of this.btnData) {
-                this.$set(item, 'isCheck', false)
-              }
-              this.$message({
-                showClose: true,
-                type: 'success',
-                message: response.msg
-              })
-              this.getCourseDetail()
-              this.getEvaluateList()
+      return new Promise((resolve, reject) => {
+        home.addEvaluate(this.addEvaluateForm).then(response => {
+          if (response.status === '100100') {
+            this.$message({
+              showClose: true,
+              type: 'warning',
+              message: response.msg
+            })
+          } else {
+            this.addEvaluateForm.tag = []
+            for (let item of this.btnData) {
+              this.$set(item, 'isCheck', false)
             }
-          })
+            this.word = ''
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          }
         })
-      } else {
-        this.$message({
-          showClose: true,
-          type: 'warning',
-          message: '您还没有观看过此课程，请先去观看吧！'
-        })
-      }
+      })
     },
     // 判断是收藏还是为收藏
     collection() {
