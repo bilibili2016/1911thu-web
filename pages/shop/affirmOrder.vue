@@ -1019,12 +1019,17 @@ export default {
           if (res.status === 0) {
             persistStore.set('cpyid', res.data.id)
             this.$router.push('/shop/wepay')
-          } else {
             this.$message({
               showClose: true,
-              type: 'error',
-              message: res.msg
+              type: 'success',
+              message: '订单提交成功'
             })
+          } else {
+            // this.$message({
+            //   showClose: true,
+            //   type: 'error',
+            //   message: res.msg
+            // })
           }
           resolve(true)
         })
