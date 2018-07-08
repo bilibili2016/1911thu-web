@@ -399,7 +399,7 @@ export default {
       }
     },
     getBtnContent(val, index) {
-      console.log(val, '这是val')
+      // console.log(val, '这是val')
 
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)

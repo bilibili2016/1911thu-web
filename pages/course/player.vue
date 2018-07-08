@@ -326,7 +326,7 @@ export default {
       })
     },
     getBtnContent(val, index) {
-      console.log(val, '这是val')
+      // console.log(val, '这是val')
 
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)
@@ -624,7 +624,7 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
+      // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
       if (this.courseList.is_study) {
         return new Promise((resolve, reject) => {
           home.addEvaluate(this.addEvaluateForm).then(response => {
