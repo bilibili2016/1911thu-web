@@ -629,7 +629,7 @@ export default {
         .toString()
         .replace(/,/g, '#')
       this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
-      // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
+      console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
           if (response.status === '100100') {
@@ -644,6 +644,7 @@ export default {
               this.$set(item, 'isCheck', false)
             }
             this.word = ''
+            this.showEvaluate = false
             this.$message({
               showClose: true,
               type: 'success',
