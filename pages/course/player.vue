@@ -343,7 +343,7 @@ export default {
         this.addEvaluateForm.tag.push(val.value)
         this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
       }
-      console.log(this.addEvaluateForm.tag, '这是最后的tag')
+      // console.log(this.addEvaluateForm.tag, '这是最后的tag')
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
@@ -623,35 +623,37 @@ export default {
       }
 
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
       this.addEvaluateForm.evaluatecontent = this.word
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
-      // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
-      return new Promise((resolve, reject) => {
-        home.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'warning',
-              message: response.msg
-            })
-          } else {
-            this.addEvaluateForm.tag = []
-            for (let item of this.btnData) {
-              this.$set(item, 'isCheck', false)
-            }
-            this.word = ''
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-          }
-        })
-      })
+
+      console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
+      // return new Promise((resolve, reject) => {
+      //   home.addEvaluate(this.addEvaluateForm).then(response => {
+      //     if (response.status === '100100') {
+      //       this.$message({
+      //         showClose: true,
+      //         type: 'warning',
+      //         message: response.msg
+      //       })
+      //     } else {
+      //       this.addEvaluateForm.tag = []
+      //       for (let item of this.btnData) {
+      //         this.$set(item, 'isCheck', false)
+      //       }
+      //       this.word = ''
+      //       this.showEvaluate = false
+      //       this.$message({
+      //         showClose: true,
+      //         type: 'success',
+      //         message: response.msg
+      //       })
+      //     }
+      //   })
+      // })
     },
     // 判断是收藏还是为收藏
     collection() {
