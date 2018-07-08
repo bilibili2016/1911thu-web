@@ -1020,11 +1020,11 @@ export default {
             persistStore.set('cpyid', res.data.id)
             this.$router.push('/shop/wepay')
           } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: res.msg
-            })
+            // this.$message({
+            //   showClose: true,
+            //   type: 'error',
+            //   message: res.msg
+            // })
           }
           resolve(true)
         })
