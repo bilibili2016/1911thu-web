@@ -25,7 +25,7 @@ export default {
     ...mapState('auth', ['hsg'])
   },
   mounted() {
-    console.log('123')
+    // console.log('123')
   }
 }
 </script>

@@ -217,7 +217,7 @@ export default {
       this.curriculumList()
     },
     changeTab(item) {
-      console.log(item, 'item')
+      // console.log(item, 'item')
     },
     handleClick(tab, event) {
       if (tab.name == 'first') {
