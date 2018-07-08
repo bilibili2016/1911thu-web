@@ -415,8 +415,6 @@ export default {
         this.addEvaluateForm.tag.push(val.value)
         this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
       }
-      // console.log(this.addEvaluateForm.tag, '这是this.addEvaluateForm.tag')
-      // this.borderIndex = index
     },
     getCourseDetail() {
       this.loadTeacher = true
