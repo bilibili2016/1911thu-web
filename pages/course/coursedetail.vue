@@ -15,6 +15,7 @@
             <div class="line-center">
               <span @click="collection" :class=" { bag: collectMsg === 1}">
                 <i class="el-icon-star-on"></i>
+                <!-- {{isCollection}} -->
                 <span>收藏 </span>
               </span>
               <span>
@@ -65,6 +66,9 @@
         </div>
         <!-- 评价 -->
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0" -->
+        <!--  -->
+        <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
+
         <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
           <h4>课程评价</h4>
           <div class="personal">
@@ -171,7 +175,7 @@ export default {
       activeName: 'second',
       selectMsg: '',
       dialogVisible: false,
-      textarea: null,
+      textarea: '',
       rateModel: 5,
       loadTeacher: false,
       loadEvaluate: false,
@@ -332,7 +336,16 @@ export default {
     // 提交评论接口
     addEvaluate() {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
-      this.addEvaluateForm.evaluatecontent = this.textarea
+      if (this.textarea.length < 300) {
+        this.addEvaluateForm.evaluatecontent = this.textarea
+      } else {
+        this.$message({
+          showClose: true,
+          type: 'warning',
+          message: '请输入少于300个字符！'
+        })
+        return false
+      }
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
@@ -347,6 +360,10 @@ export default {
                 message: response.msg
               })
             } else {
+              this.addEvaluateForm.tag = []
+              for (let item of this.btnData) {
+                this.$set(item, 'isCheck', false)
+              }
               this.$message({
                 showClose: true,
                 type: 'success',
@@ -357,6 +374,7 @@ export default {
             }
           })
         })
+        // this.addEvaluateForm.tag = []
       } else {
         this.$message({
           showClose: true,
@@ -365,15 +383,38 @@ export default {
         })
       }
     },
+    unique(arr) {
+      var newArr = [arr[0]]
+      for (var i = 1; i < arr.length; i++) {
+        if (newArr.indexOf(arr[i]) == -1) {
+          newArr.push(arr[i])
+        }
+      }
+      return newArr
+    },
+    remove(val) {
+      var index = this.indexOf(val)
+      if (index > -1) {
+        this.splice(index, 1)
+      }
+    },
     getBtnContent(val, index) {
+      // console.log(val, '这是val')
+
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)
+
+        for (var i = 0; i < this.addEvaluateForm.tag.length; i++) {
+          // document.write(cars[i] + '<br>')
+          if (this.addEvaluateForm.tag[i] === val.value) {
+            this.addEvaluateForm.tag.splice(i, 1)
+          }
+        }
       } else {
         this.$set(val, 'isCheck', true)
+        this.addEvaluateForm.tag.push(val.value)
+        this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
       }
-
-      // this.borderIndex = index
-      this.addEvaluateForm.tag.push(val.value)
     },
     getCourseDetail() {
       this.loadTeacher = true
