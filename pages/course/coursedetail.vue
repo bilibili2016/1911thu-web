@@ -140,7 +140,7 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import CustomLine from '@/components/common/Line.vue'
-import { other, home } from '~/lib/v1_sdk/index'
+import { coursedetail, home } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { uniqueArray } from '@/lib/util/helper'
@@ -236,10 +236,11 @@ export default {
     },
     //标签-获取课程标签列表
     getEvaluateTags() {
-      home.getEvaluateTags().then(response => {
+      coursedetail.getEvaluateTags().then(response => {
         this.tagGroup = response.data.evaluateTags
-        this.changeRate('5')
+
         this.btnDatas = response.data.evaluateTags
+        this.changeRate('5')
       })
     },
     // 标签-点击评价改变星级
@@ -288,28 +289,26 @@ export default {
         .toString()
         .replace(/,/g, '#')
       if (this.courseList.is_study) {
-        return new Promise((resolve, reject) => {
-          home.addEvaluate(this.addEvaluateForm).then(response => {
-            if (response.status === '100100') {
-              this.$message({
-                showClose: true,
-                type: 'warning',
-                message: response.msg
-              })
-            } else {
-              this.addEvaluateForm.tag = []
-              for (let item of this.btnData) {
-                this.$set(item, 'isCheck', false)
-              }
-              this.$message({
-                showClose: true,
-                type: 'success',
-                message: response.msg
-              })
-              this.getCourseDetail()
-              this.getEvaluateList()
+        coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
+          if (response.status === '100100') {
+            this.$message({
+              showClose: true,
+              type: 'warning',
+              message: response.msg
+            })
+          } else {
+            this.addEvaluateForm.tag = []
+            for (let item of this.btnData) {
+              this.$set(item, 'isCheck', false)
             }
-          })
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+            this.getCourseDetail()
+            this.getEvaluateList()
+          }
         })
         // this.addEvaluateForm.tag = []
       } else {
@@ -333,7 +332,7 @@ export default {
       this.evaluateListForm.limits = 3
       this.evaluateListForm.ids = persistStore.get('curriculumId')
 
-      home.getEvaluateLists(this.evaluateListForm).then(response => {
+      coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
         this.loadMsg = false
         this.pagemsg.total = response.data.pageCount
         this.commentator = response.data.evaluateList
@@ -344,7 +343,7 @@ export default {
       this.loadEvaluate = true
       this.evaluateListForm.ids = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        home.getEvaluateLists(this.evaluateListForm).then(response => {
+        coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
           this.pagemsg.total = response.data.pageCount
           this.pageCount = response.data.pageCount
@@ -366,7 +365,7 @@ export default {
       this.loadTeacher = true
       this.kidForm.ids = persistStore.get('curriculumId')
 
-      home.getCourseDetail(this.kidForm).then(response => {
+      coursedetail.getCourseDetail(this.kidForm).then(response => {
         this.loadMsg = false
         this.courseList = response.data.curriculumDetail
         persistStore.set('curriculumId', response.data.curriculumDetail.id)
@@ -379,7 +378,7 @@ export default {
     // 课程-获取课程列表
     getCourseList() {
       this.kidForm.ids = persistStore.get('curriculumId')
-      home.getCourseList(this.kidForm).then(response => {
+      coursedetail.getCourseList(this.kidForm).then(response => {
         this.catalogs = response.data.curriculumCatalogList
         for (let item of this.catalogs) {
           for (let i of item.childList) {
@@ -392,9 +391,14 @@ export default {
     // 课程-获取默认播放信息
     getdefaultCurriculumCatalog() {
       this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
-      home.getdefaultCurriculumCatalog(this.getdefaultForm).then(response => {
-        persistStore.set('catalogId', response.data.defaultCurriculumCatalog.id)
-      })
+      coursedetail
+        .getdefaultCurriculumCatalog(this.getdefaultForm)
+        .then(response => {
+          persistStore.set(
+            'catalogId',
+            response.data.defaultCurriculumCatalog.id
+          )
+        })
     },
     // 收藏-判断是收藏还是未收藏
     collection() {
@@ -414,7 +418,7 @@ export default {
     addCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        home.addCollection(this.addCollectionForm).then(response => {
+        coursedetail.addCollection(this.addCollectionForm).then(response => {
           this.$message({
             showClose: true,
             type: 'success',
@@ -427,7 +431,7 @@ export default {
     // 收藏-删除收藏
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      home.deleteCollection(this.addCollectionForm).then(response => {
+      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
         this.collectMsg = response.data.curriculumDetail.is_collection
         this.$message({
           showClose: true,
@@ -436,23 +440,35 @@ export default {
         })
         this.collectMsg = 0
       })
+    },
+    // 分享 默认设置
+    shareDefault() {
+      var $config = {
+        url: 'http://www.1911edu.com/'
+      }
+      socialShare('.social-share', $config)
+    },
+    // 初始化默认data
+    initData() {
+      this.kidForm.ids = this.kid
+      this.evaluateListForm.ids = this.kid
+      this.activeName = 'first'
+      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    },
+    //拉取服务器数据 初始化所有方法
+    initAll() {
+      this.initData()
+      this.shareDefault()
+      this.getCourseDetail()
+      this.getEvaluateList()
+      this.getCourseList()
+      this.getdefaultCurriculumCatalog()
+      this.getEvaluateTags()
     }
   },
   mounted() {
-    var $config = {
-      url: 'http://www.1911edu.com/'
-    }
-    socialShare('.social-share', $config)
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.kidForm.ids = this.kid
-    this.evaluateListForm.ids = this.kid
-    this.activeName = 'first'
-    this.getCourseDetail()
-    this.getEvaluateList()
-    this.getCourseList()
-    this.getdefaultCurriculumCatalog()
-    this.getEvaluateTags()
+    this.initAll()
   }
 }
 </script>

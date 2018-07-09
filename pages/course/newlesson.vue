@@ -21,18 +21,15 @@
     <div class="card-button" v-else>
       <el-button type="primary">下拉加载更多</el-button>
     </div>
-    <!-- <v-more @getMoreData ="getMoreData"></v-more> -->
   </div>
 </template>
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
-import CustomMore from '@/components/common/More.vue'
 import { home } from '~/lib/v1_sdk/index'
 export default {
   components: {
-    'v-card': CustomCard,
-    'v-more': CustomMore
+    'v-card': CustomCard
   },
   data() {
     return {
