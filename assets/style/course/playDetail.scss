@@ -270,7 +270,7 @@
             .time {
               color: #bbb;
             }
-            & > img {
+            &>img {
               width: 42px;
               height: 42px;
               border-radius: 50%;
@@ -337,7 +337,7 @@
         .time {
           color: #bbb;
         }
-        & > img {
+        &>img {
           width: 42px;
           height: 42px;
           border-radius: 50%;
@@ -375,7 +375,7 @@
       height: 85px;
       .line-center {
         line-height: 85px;
-        & > span {
+        &>span {
           font-size: 14px;
           height: 60px;
           vertical-align: middle;
