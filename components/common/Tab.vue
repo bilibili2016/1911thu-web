@@ -20,7 +20,6 @@
                 <img :src="child.picture" alt="">
                 <span class="picture-style">{{child.category_name}}</span>
               </span>
-
             </p>
           </div>
           <div class="courseMsg" v-if="item.is_picture_show === '0'">
@@ -40,7 +39,7 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
+// import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['classify', 'courses', 'tab', 'active', 'classtext'],
   data() {
@@ -48,9 +47,8 @@ export default {
       itemID: null,
       actived: null,
       cidform: {
-        cids: ''
-      },
-      pidform: {
+        cids: '',
+        indexs: '',
         pids: ''
       },
       kidForm: {
@@ -71,16 +69,16 @@ export default {
       this.$router.push('/course/coursedetail')
     },
     handlePid(item, index) {
+      this.cidform.pids = item.id
+      this.setCid(this.cidform)
       window.open(window.location.origin + '/course/category')
       // this.$router.push('/course/classifycourse')
-
-      this.pidform.pids = item.id
-      this.setPid(this.pidform)
     },
     selectCollege(index, item) {
       this.big = index
       this.itemID = index
       this.cidform.cids = item.id
+      this.cidform.indexs = index
       this.$bus.$emit('collegeId', item.id)
       this.setCid(this.cidform)
     },
@@ -107,7 +105,6 @@ export default {
   display: inline-block;
   width: 316px;
   height: 86px;
-  border-radius: 8px;
   // border: 1px red solid;
   margin: 20px 53px 20px 30px;
   // width: 0pc
@@ -119,16 +116,6 @@ export default {
     font-size: 18px;
     font-family: MicrosoftYaHei;
     color: rgba(255, 254, 254, 1);
-  }
-  img {
-    border-radius: 8px;
-  }
-  &:hover {
-    border-radius: 8px;
-    box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
-    .picture-style {
-      color: #fff !important;
-    }
   }
 }
 </style>

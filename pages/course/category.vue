@@ -1,77 +1,52 @@
 <template>
   <div>
-    <div class="banner" v-loading="loadBanner">
-      <div class="center category-style">
-        <div class="college">
-          <li class="title">学院：</li>
-          <ul>
-            <li :class="{bgs: this.cid === '' ? true : false }">
-              <el-button @click="getCidList">全部</el-button>
-            </li>
-            <li v-for="(item,index) in data" :index="index" :key="index" :class="{bgs: bgmsg === item.id ? true : false }">
-              <el-button @click="handleItemOne(item,index)">{{item.category_name}}</el-button>
-            </li>
-          </ul>
-        </div>
-        <div class="classification">
-          <li class="title">分类：</li>
-          <ul>
-            <li :class="{bgs: this.pid === '' ? true : false }">
-              <el-button @click="getPidList">全部</el-button>
-            </li>
-            <li v-for="(items,index) in data2.childList" :index="index" :key="index" :class="{bgs: bgmsgs === items.id ? true : false }">
-              <el-button @click="handleItemTwo(items,index)">{{items.category_name}}</el-button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectAllCid="selectAllCid" @selectCid="selectCid" @selectAllPid="selectAllPid" @selectPid="selectPid" v-if="this.cg !=='1'"></v-list>
     <div class="center category-style">
-      <div class="header">
-        <el-tabs v-model="activeName" @tab-click="handleClick" class="tabStyle">
-          <el-tab-pane label="最新" name="first"></el-tab-pane>
-          <el-tab-pane label="最热" name="second"></el-tab-pane>
-        </el-tabs>
-      </div>
+      <v-filter @selectActiveTab="selectActiveTab"></v-filter>
       <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
-        <v-card :data="categoryData" :config="configSevent"></v-card>
+        <v-card :data="categoryData" :config="categoryCard"></v-card>
       </div>
       <div v-else v-loading="loadCourse">
         <v-nothing></v-nothing>
       </div>
-
     </div>
-    <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
-    </div>
+    <v-page :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
   </div>
 </template>
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
-import CustomPagination from '@/components/common/Pagination.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
-import { auth, home } from '~/lib/v1_sdk/index'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { home } from '~/lib/v1_sdk/index'
+import { mapState, mapActions } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
+
+import List from '@/pages/course/components/List'
+import Filter from '@/pages/course/components/Filter'
+import Page from '@/components/common/Pagination'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-page': CustomPagination,
-    'v-nothing': SearchNothing
+    'v-nothing': SearchNothing,
+    'v-list': List,
+    'v-filter': Filter,
+    'v-page': Page
   },
   computed: {
-    ...mapState('auth', ['pid', 'cid'])
+    ...mapState('auth', ['pid', 'cid', 'cindex', 'cg'])
   },
   data() {
     return {
+      cidData: [],
+      pidData: [],
       loadBanner: true,
       loadCourse: true,
-      bgmsg: 0,
-      bgmsgs: 0,
-      activeName: '',
-      value3: true,
-      value4: true,
-      configSevent: {
+      cidBg: 0,
+      pidBg: 0,
+      activeTab: '',
+      categoryData: [],
+
+      categoryCard: {
         card_type: 'profile',
         card: 'home'
       },
@@ -80,141 +55,99 @@ export default {
         pagesize: 8,
         total: 5
       },
-      categoryData: [],
-      data: [],
-      data2: [],
-      curriculumListForm: {
-        categoryIda: null,
-        categoryIdb: null,
+
+      categoryForm: {
+        cids: null,
+        pids: null,
         sortBy: 1,
         pages: 1,
         limits: 8
       },
       cidform: {
-        cids: ''
-      },
-      pidform: {
+        cids: '',
+        indexs: '',
         pids: ''
-      },
-      catagoryId: ''
+      }
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid', 'setProductsNum']),
-    handleCurrentChange(val) {
-      this.pagemsg.page = val
-      this.curriculumListForm.pages = val
-      this.curriculumListForm.limits = 8
-      return new Promise((resolve, reject) => {
-        home.curriculumList(this.curriculumListForm).then(response => {
-          this.categoryData = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
-          this.loadCourse = false
-          resolve(true)
-        })
-      })
-    },
-    handleItemOne(item, index) {
-      this.bgmsgs = 0
-      this.bgmsg = item.id
-      this.data2 = this.data[index]
+    ...mapActions('auth', ['setCid']),
+    selectCid(item, index) {
+      this.pidBg = 0
+      this.cidBg = item.id
+      this.pidData = this.cidData[index]
       this.cidform.cids = item.id
+      this.cidform.pids = ''
       this.setCid(this.cidform)
-      this.pidform.pids = ''
-      this.setPid(this.pidform)
-      this.curriculumListForm.pages = 1
-      this.curriculumList()
+      this.getcourseList()
     },
-    handleItemTwo(item, index) {
-      this.bgmsgs = item.id
-      this.pidform.pids = item.id
-      this.setPid(this.pidform)
-      this.curriculumListForm.pages = 1
-      this.curriculumList()
-    },
-    getCidList() {
-      this.cidform.cids = ''
-      this.bgmsg = 0
+    selectPid(item, index) {
+      this.pidBg = item.id
+      this.cidform.pids = item.id
       this.setCid(this.cidform)
-      this.curriculumList()
-    },
-    getPidList() {
-      this.pidform.pids = ''
-      this.bgmsgs = 0
-      this.setPid(this.pidform)
-      this.curriculumList()
-    },
-    handleClick(tab, event) {
-      if (tab.name === 'first') {
-        this.curriculumListForm.sortBy = 1
-        this.curriculumList()
-      } else {
-        this.curriculumListForm.sortBy = 2
-        this.curriculumList()
-      }
+      this.getcourseList()
     },
 
-    childCategoryList() {
-      return new Promise((resolve, reject) => {
-        home.childCategoryList().then(response => {
-          this.data = response.data.categoryList
-          this.loadBanner = false
-          switch (this.cid) {
-            case '1':
-              this.data2 = this.data[0]
-              break
-            case '17':
-              this.data2 = this.data[1]
-              break
-            case '19':
-              this.data2 = this.data[2]
-              break
-            case '16':
-              this.data2 = this.data[3]
-              break
-            case '18':
-              this.data2 = this.data[4]
-              break
-            case '20':
-              this.data2 = this.data[5]
-              break
-            default:
-              // this.$router.push("/course/search");
-              break
-          }
-          resolve(true)
-        })
+    selectAllCid() {
+      this.cidform.cids = ''
+      this.cidBg = 0
+      this.setCid(this.cidform)
+      this.getcourseList()
+    },
+    selectAllPid() {
+      this.cidform.pids = ''
+      this.pidBg = 0
+      this.setCid(this.cidform)
+      this.getcourseList()
+    },
+    selectActiveTab(item) {
+      item.name === 'second'
+        ? (this.categoryForm.sortBy = 1)
+        : (this.categoryForm.sortBy = 2)
+      this.getcourseList()
+    },
+    // 分页事件
+    handlePageChange(val) {
+      this.pagemsg.page = val
+      this.categoryForm.pages = val
+      home.curriculumList(this.categoryForm).then(res => {
+        this.categoryData = res.data.curriculumList
+        this.pagemsg.total = res.data.pageCount
+        this.loadCourse = false
       })
     },
-    curriculumList() {
+    // 顶部列表数据
+    getCidPidList() {
+      home.childCategoryList().then(res => {
+        this.cidData = res.data.categoryList
+        console.log(this.cindex, '00000000')
+        this.pidData = res.data.categoryList[this.cindex]
+        this.loadBanner = false
+      })
+    },
+    // 获取课程列表
+    getcourseList() {
       this.loadCourse = true
-      this.curriculumListForm.categoryIda = this.cid
-      this.curriculumListForm.categoryIdb = this.pid
-      // this.curriculumListForm.sortBy = 1
-      return new Promise((resolve, reject) => {
-        home.curriculumList(this.curriculumListForm).then(response => {
-          this.categoryData = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
-          this.loadCourse = false
-          resolve(true)
-          this.loadCourse = false
-        })
+      this.categoryForm.cids = this.cid
+      this.categoryForm.pids = this.pid
+      home.curriculumList(this.categoryForm).then(res => {
+        this.categoryData = res.data.curriculumList
+        this.pagemsg.total = res.data.pageCount
+        this.loadCourse = false
       })
     }
   },
-  created() {
-    this.$nextTick(() => {
-      this.$bus.$on('collegeId', data => {})
-    })
-  },
   mounted() {
+    this.activeTab = 'first'
+    console.log(this.cid, '这是cid')
+    console.log(this.pid, '这是pid')
+    this.cidBg = this.cid
+    this.pidBg = this.pid
+
+    this.getCidPidList()
+    this.getcourseList()
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.activeName = 'first'
-    this.bgmsg = this.cid
-    this.bgmsgs = this.pid
-    this.childCategoryList()
-    this.curriculumList()
   }
 }
 </script>

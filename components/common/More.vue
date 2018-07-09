@@ -8,19 +8,36 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
+import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   props: ['linkdata'],
-  methods: {
-    getMore() {
-      // this.$router.push(this.linkdata)
-      if (this.linkdata === '/course/classifylist') {
-        persistStore.set('showFree', true)
+  data() {
+    return {
+      cidform: {
+        cids: '1',
+        indexs: 1,
+        pids: ''
+      },
+      cgForm: {
+        cgs: null
       }
+    }
+  },
+  methods: {
+    ...mapActions('auth', ['setCid']),
+    getMore() {
+      // 免费课程路由 设置cid pid cindex
+      // if (this.linkdata === '/course/category') {
+      //   this.setCid(this.cidform)
+      // }
+      // if (this.linkdata === '/course/classifylesson') {
+      //   this.cgForm.cgs = '1'
+      //   this.setCg(this.cgForm)
+      // }
       this.$emit('getMoreData')
       window.open(window.location.origin + this.linkdata)
     }
-  },
-  mounted() {}
+  }
 }
 </script>
 

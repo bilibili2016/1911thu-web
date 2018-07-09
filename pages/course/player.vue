@@ -20,7 +20,6 @@
           <span class="shareIcond">
             <span class="social-share" data-sites="weibo,qq,wechat"></span>
           </span>
-
         </span>
         <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1}">
           <i class="el-icon-star-on"></i>
@@ -41,19 +40,11 @@
       <div v-show="mediaRInner" class="inner">
         <h5 class="title">{{player.title}}</h5>
         <div class="teacher clearfix">
-
           <img class="fl" :src="player.head_img" alt="" @click="goTeacherInfo(player.teacher_id)">
           <div class="playername fl" @click="goTeacher(player.teacher_id)">
-            <!-- <div>{{player.is_car === 1 ? false : true}}</div> -->
             <div>{{player.teacher_name}}</div>
             <div>{{player.graduate}}</div>
-            <!-- <div>{{player.is_cart}}</div> -->
           </div>
-          <!-- player.is_car ===  1 ? false : true -->
-          <!-- <div v-if="player.is_cart === 1">
-            <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
-          </div> -->
-          <!-- <div v-else>{{player.is_cart}}</div> -->
         </div>
         <div class="courseList" ref="courseList">
           <div class="chapter" v-for="(section,index) in courseList" :key="index">
@@ -75,6 +66,7 @@
         <i :class="mediaRIcon"></i>
       </div>
     </div>
+    <!-- 报告问题 -->
     <div class="reportBug" v-show="showReportBug">
       <div class="note">
         <h4>报告问题
@@ -108,15 +100,14 @@
         </div>
       </div>
     </div>
-    <el-button type="text" @click="goShoppingCart"></el-button>
+
   </div>
 </template>
-
-
 <script>
-import { other, auth, home } from '~/lib/v1_sdk/index'
+import { home, coursedetail, players } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import { uniqueArray } from '@/lib/util/helper'
 export default {
   computed: {
     ...mapState('auth', ['kid', 'tid']),
@@ -127,11 +118,7 @@ export default {
       isFreeCourse: '',
       videoState: false,
       showReportBug: false,
-      title: '1',
       showEvaluate: false,
-      curriculumcartids: {
-        cartid: null
-      },
       ischeck: '',
       mediaRW: 28,
       mediaLW: 72,
@@ -139,50 +126,18 @@ export default {
       fileID: '',
       appID: '',
       mediaRIcon: 'el-icon-arrow-right',
-      radioBtn: '',
+
       playing: '',
       playImg: require('@/assets/images/playImg.gif'),
       pauseImg: require('@/assets/images/video.png'),
-      // gifImg: require('@/assets/images/playImg.gif'),
       player: {},
-      courseList: [
-        {
-          section: '第一章 图的基本概念',
-          knobbles: [
-            {
-              number: '1-1',
-              barName: '课程概述',
-              duration: '32分钟',
-              percentage: 30,
-              isFree: true
-            },
-            {
-              number: '1-1',
-              barName: '课程概述',
-              duration: '32分钟',
-              percentage: 30,
-              isFree: true
-            }
-          ]
-        }
-      ],
+      courseList: [],
       problem: {
         curriculumId: null,
         content: '',
         curriculumcatalogid: ''
       },
       word: '',
-      evaluate: {
-        eltnum: 5,
-        btnList: [
-          '内容精彩',
-          '内容生涩',
-          '音质不好',
-          '讲解详细',
-          '很有帮助',
-          '点赞老师'
-        ]
-      },
       hsgForm: {
         hsgs: true
       },
@@ -255,56 +210,7 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
-    isHasClass() {
-      let myVideo = document.getElementById('movd')
-      // console.log(myVideo)
-      if (myVideo == null) {
-        return
-      }
-      if (myVideo.getAttribute('class')) {
-        // 存在class属性
-
-        // 方式2
-        if (myVideo.className.indexOf('vjs-paused') > -1) {
-          this.videoState = false
-          // console.log('包含 test 这个class')
-        } else {
-          this.videoState = true
-        }
-      }
-    },
-    signOuts() {
-      this.signOut()
-      persistStore.clearAll()
-      this.$router.push('/')
-    },
-    changeRate(val) {
-      this.reTagBtn = []
-      this.tagGroup[val].map((item, i) => {
-        let obj = new Object()
-        obj.value = item
-        obj.index = i
-        obj.isCheck = false
-        this.reTagBtn.push(obj)
-      })
-      this.btnData = this.reTagBtn
-      this.addEvaluateForm.tag = []
-    },
-    unique(arr) {
-      var newArr = [arr[0]]
-      for (var i = 1; i < arr.length; i++) {
-        if (newArr.indexOf(arr[i]) == -1) {
-          newArr.push(arr[i])
-        }
-      }
-      return newArr
-    },
-    remove(val) {
-      var index = this.indexOf(val)
-      if (index > -1) {
-        this.splice(index, 1)
-      }
-    },
+    // 点击课程列表设置id
     handleCourse(item, index) {
       this.ischeck = item.id
       this.playing = this.playImg
@@ -314,95 +220,6 @@ export default {
       this.clickMsg = true
       this.autoplay = true
       this.getPlayerInfo()
-    },
-    getEvaluateTags() {
-      return new Promise((resolve, reject) => {
-        home.getEvaluateTags().then(response => {
-          // this.btnData = response.data.evaluateTags['1']
-          this.tagGroup = response.data.evaluateTags
-          this.changeRate('5')
-          this.btnDatas = response.data.evaluateTags
-          // this.tagGroup = response.data.evaluateTags
-        })
-      })
-    },
-    getBtnContent(val, index) {
-      // console.log(val, '这是val')
-
-      if (val.isCheck === true) {
-        this.$set(val, 'isCheck', false)
-
-        for (var i = 0; i < this.addEvaluateForm.tag.length; i++) {
-          // document.write(cars[i] + '<br>')
-          if (this.addEvaluateForm.tag[i] === val.value) {
-            this.addEvaluateForm.tag.splice(i, 1)
-          }
-        }
-      } else {
-        this.$set(val, 'isCheck', true)
-        this.addEvaluateForm.tag.push(val.value)
-        this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
-      }
-      console.log(this.addEvaluateForm.tag, '这是最后的tag')
-    },
-    goTeacherInfo(id) {
-      this.tidForm.tids = Number(id)
-
-      this.setTid(this.tidForm)
-      window.open(window.location.origin + '/home/components/teacher')
-    },
-    goShoppingCart(msg) {
-      this.$confirm(msg, '提示', {
-        confirmButtonText: '去购买',
-        cancelButtonText: '取消',
-        closeOnHashChange: true,
-        type: 'warning',
-        center: true
-      })
-        .then(() => {
-          // 未购买课程跳转到购物车
-          this.addShopCart()
-        })
-        .catch(() => {
-          // this.$message({
-          //   type: 'info',
-          //   message: '已取消删除'
-          // })
-        })
-    },
-    addShopCart() {
-      this.curriculumcartids.cartid = this.kid
-      return new Promise((resolve, reject) => {
-        home.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingcart')
-        })
-      })
-    },
-    selTypeChange(index) {
-      this.radioBtn = index
-    },
-    showRpt() {
-      this.showReportBug = true
-    },
-    showElt() {
-      this.showEvaluate = true
-    },
-    closeReport() {
-      this.showReportBug = false
-    },
-    closeEvaluate() {
-      this.showEvaluate = false
-      this.radioBtn = ''
-      this.word = ''
-    },
-    resize() {
-      if (this.$refs.playerBox) {
-        const h = this.$refs.playerBox.offsetHeight
-        this.$refs.mediaL.style.height = h + 'px'
-        this.$refs.mediaR.style.height = h + 'px'
-        this.$refs.courseList.style.height = h - 40 - 132 - 100 + 'px'
-        this.$refs.playInner.style.height = h - 100 + 'px'
-      }
     },
     fold() {
       if (this.$refs.mediaR.offsetWidth != 0) {
@@ -419,36 +236,25 @@ export default {
       }
       // this.resize();
     },
-    goLink() {
-      this.$router.push('/course/coursedetail')
-      // window.open(window.location.origin + '/course/coursedetail')
-    },
-    goTeacher(teacherID) {
-      this.tidForm.tids = teacherID * 1
-      this.setTid(this.tidForm)
-      this.$router.push('/home/components/teacher')
-    },
-
-    playerBuy(item, info) {
-      if (info.is_cart === 1) {
-        // this.$alert('商品已在购物车内', '温馨提示', {
-        //   confirmButtonText: '确定',
-        //   callback: action => {}
-        // })
-      } else {
-        this.curriculumcartids.cartid = item[0].curriculum_id
-        return new Promise((resolve, reject) => {
-          home.addShopCart(this.curriculumcartids).then(response => {
-            // this.$router.push('/shop/shoppingCart')
-            // window.open(window.location.origin + '/shop/shoppingcart')
-            this.$message({
-              type: 'success',
-              message: '添加购物车成功'
-            })
-          })
+    // 获取当前播放信息
+    getCurriculumPlayInfo() {
+      this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
+      return new Promise((resolve, reject) => {
+        players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+          // console.log(response)
+          // console.log(response.data.curriculumDetail, '9999')
+          this.player = response.data.curriculumDetail
+          this.iseve = response.data.curriculumDetail.is_evaluate
+          this.bought = response.data.curriculumPrivilege
+          this.isStudy = response.data.curriculumDetail.is_study
+          this.courseList = response.data.curriculumCatalogList
+          this.collectMsg = response.data.curriculumDetail.is_collection
+          this.curriculumPrivilege = response.data.curriculumPrivilege
+          this.isFreeCourse = response.data.curriculumDetail.is_free
         })
-      }
+      })
     },
+    // websocket
     getPlayerInfo() {
       if (typeof TCPlayer === 'undefined') {
         location.reload()
@@ -484,7 +290,7 @@ export default {
       } else {
         link = 'http://api.1911edu.com:2120'
       }
-      var socket = new io(link) //'http://ceshi.1911edu.com:2120'
+      var socket = new io(link)
       // 连接socket
       socket.on('connect', function() {
         // console.log('已连接')
@@ -531,94 +337,99 @@ export default {
         that.ischeck = persistStore.get('catalogId')
         that.playing = that.playImg
       })
-      // 计时器
-      return new Promise((resolve, reject) => {
-        home.getPlayerInfos(this.playerForm).then(response => {
-          if (response.status === '100100') {
-            this.goShoppingCart(response.msg)
-          } else if (response.status === '100006') {
-            this.$alert('您已退出登录，请重新登录', '温馨提示', {
-              confirmButtonText: '确定',
-              callback: action => {
-                this.signOuts()
-                //初始化首页数据
-                this.$bus.$emit('reLogin', true)
-                this.$bus.$emit('loginShow', true)
-              }
+      // 获取视频播放信息
+      players.getPlayerInfos(this.playerForm).then(response => {
+        if (response.status === '100100') {
+          // this.goShoppingCart(response.msg)
+        } else if (response.status === '100006') {
+          this.$alert('您已退出登录，请重新登录', '温馨提示', {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.signOuts()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
+              this.$bus.$emit('loginShow', true)
+            }
+          })
+        } else {
+          if (response.data.playAuthInfo.videoViewType == false) {
+            player.loadVideoByID({
+              fileID: response.data.playAuthInfo.fileID,
+              appID: response.data.playAuthInfo.appID,
+              sign: response.data.playAuthInfo.sign,
+              t: response.data.playAuthInfo.t,
+              exper: response.data.playAuthInfo.exper
             })
           } else {
-            if (response.data.playAuthInfo.videoViewType == false) {
-              player.loadVideoByID({
-                fileID: response.data.playAuthInfo.fileID,
-                appID: response.data.playAuthInfo.appID,
-                sign: response.data.playAuthInfo.sign,
-                t: response.data.playAuthInfo.t,
-                exper: response.data.playAuthInfo.exper
-              })
-            } else {
-              player.loadVideoByID({
-                fileID: response.data.playAuthInfo.fileID,
-                appID: response.data.playAuthInfo.appID,
-                t: response.data.playAuthInfo.t,
-                sign: response.data.playAuthInfo.sign
-              })
-            }
-            if (this.autoplay) {
-              player.play()
-            }
+            player.loadVideoByID({
+              fileID: response.data.playAuthInfo.fileID,
+              appID: response.data.playAuthInfo.appID,
+              t: response.data.playAuthInfo.t,
+              sign: response.data.playAuthInfo.sign
+            })
           }
-        })
+          if (this.autoplay) {
+            player.play()
+          }
+        }
       })
 
       this.isHasClass()
     },
-    getCurriculumPlayInfo() {
-      this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
+
+    // 点击老师进去老师详情
+    goTeacher(teacherID) {
+      this.tidForm.tids = teacherID * 1
+      this.setTid(this.tidForm)
+      this.$router.push('/home/components/teacher')
+    },
+    // 点击老师进去老师详情
+    goTeacherInfo(id) {
+      this.tidForm.tids = Number(id)
+      this.setTid(this.tidForm)
+      window.open(window.location.origin + '/home/components/teacher')
+    },
+
+    // 评论-点击星级切换标签
+
+    changeRate(val) {
+      this.reTagBtn = []
+      this.tagGroup[val].map((item, i) => {
+        let obj = new Object()
+        obj.value = item
+        obj.index = i
+        obj.isCheck = false
+        this.reTagBtn.push(obj)
+      })
+      this.btnData = this.reTagBtn
+      this.addEvaluateForm.tag = []
+    },
+    // 评论-获取标签列表
+    getEvaluateTags() {
       return new Promise((resolve, reject) => {
-        home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          // console.log(response)
-          // console.log(response.data.curriculumDetail, '9999')
-          this.player = response.data.curriculumDetail
-          this.iseve = response.data.curriculumDetail.is_evaluate
-          this.bought = response.data.curriculumPrivilege
-          this.isStudy = response.data.curriculumDetail.is_study
-          this.courseList = response.data.curriculumCatalogList
-          this.collectMsg = response.data.curriculumDetail.is_collection
-          this.curriculumPrivilege = response.data.curriculumPrivilege
-          this.isFreeCourse = response.data.curriculumDetail.is_free
+        coursedetail.getEvaluateTags().then(response => {
+          this.tagGroup = response.data.evaluateTags
+          this.changeRate('5')
+          this.btnDatas = response.data.evaluateTags
         })
       })
     },
-    // 反馈问题
-    reportProblem() {
-      this.problem.curriculumId = persistStore.get('curriculumId')
-      this.problem.curriculumcatalogid = persistStore.get('catalogId')
-      return new Promise((resolve, reject) => {
-        home.reportProblem(this.problem).then(response => {
-          // this.closeReport()
-
-          if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-          } else {
-            this.closeReport()
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
+    // 评论-点击效果
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+        for (var i = 0; i < this.addEvaluateForm.tag.length; i++) {
+          if (this.addEvaluateForm.tag[i] === val.value) {
+            this.addEvaluateForm.tag.splice(i, 1)
           }
-
-          if (this.word === '') {
-            return
-          }
-        })
-      })
+        }
+      } else {
+        this.$set(val, 'isCheck', true)
+        this.addEvaluateForm.tag.push(val.value)
+        this.addEvaluateForm.tag = this.uniqueArray(this.addEvaluateForm.tag)
+      }
     },
-    // 增加评论
+    // 评论-增加评论
     addEvaluate() {
       //免费课程不购买可以评价
       if (!this.bought && this.isFreeCourse !== 2) {
@@ -638,29 +449,63 @@ export default {
         .toString()
         .replace(/,/g, '#')
       this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
-      console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
-      return new Promise((resolve, reject) => {
-        home.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'warning',
-              message: response.msg
-            })
-          } else {
-            this.addEvaluateForm.tag = []
-            for (let item of this.btnData) {
-              this.$set(item, 'isCheck', false)
-            }
-            this.word = ''
-            this.showEvaluate = false
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
+      // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
+      coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
+        if (response.status === '100100') {
+          this.$message({
+            showClose: true,
+            type: 'warning',
+            message: response.msg
+          })
+        } else {
+          this.addEvaluateForm.tag = []
+          for (let item of this.btnData) {
+            this.$set(item, 'isCheck', false)
           }
+          this.word = ''
+          this.showEvaluate = false
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
+          })
+        }
+      })
+    },
+    // 评价-点击课程标签
+    showElt() {
+      this.showEvaluate = true
+    },
+    // 评价-关闭课程评价
+    closeEvaluate() {
+      this.showEvaluate = false
+
+      this.word = ''
+    },
+
+    // 收藏-添加收藏
+    addCollection() {
+      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+
+      coursedetail.addCollection(this.addCollectionForm).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '添加收藏成功'
         })
+        this.collectMsg = 1
+      })
+    },
+    // 收藏-删除收藏
+    deleteCollection() {
+      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '取消收藏成功'
+        })
+        this.collectMsg = 0
       })
     },
     // 判断是收藏还是为收藏
@@ -671,34 +516,73 @@ export default {
         this.addCollection()
       }
     },
-    // 添加收藏
-    addCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      return new Promise((resolve, reject) => {
-        home.addCollection(this.addCollectionForm).then(response => {
+    // 反馈问题
+    reportProblem() {
+      this.problem.curriculumId = persistStore.get('curriculumId')
+      this.problem.curriculumcatalogid = persistStore.get('catalogId')
+
+      home.reportProblem(this.problem).then(response => {
+        // this.closeReport()
+        if (response.status === '100100') {
           this.$message({
             showClose: true,
             type: 'success',
-            message: '添加收藏成功'
+            message: response.msg
           })
-          this.collectMsg = 1
-        })
+        } else {
+          this.closeReport()
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
+          })
+        }
+
+        if (this.word === '') {
+          return
+        }
       })
     },
-    // 删除收藏
-    deleteCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      return new Promise((resolve, reject) => {
-        home.deleteCollection(this.addCollectionForm).then(response => {
-          // this.collectMsg = response.data.curriculumDetail.is_collection
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '取消收藏成功'
-          })
-          this.collectMsg = 0
-        })
-      })
+    // 报告问题-点击报告问题 显示
+    showRpt() {
+      this.showReportBug = true
+    },
+    // 报告问题-关闭报告问题的按钮
+    closeReport() {
+      this.showReportBug = false
+    },
+    // 退出登录
+    signOuts() {
+      this.signOut()
+      persistStore.clearAll()
+      this.$router.push('/')
+    },
+    goLink() {
+      this.$router.push('/course/coursedetail')
+      // window.open(window.location.origin + '/course/coursedetail')
+    },
+    isHasClass() {
+      let myVideo = document.getElementById('movd')
+      if (myVideo == null) {
+        return
+      }
+      if (myVideo.getAttribute('class')) {
+        if (myVideo.className.indexOf('vjs-paused') > -1) {
+          this.videoState = false
+        } else {
+          this.videoState = true
+        }
+      }
+    },
+    // 判断重新判断宽高
+    resize() {
+      if (this.$refs.playerBox) {
+        const h = this.$refs.playerBox.offsetHeight
+        this.$refs.mediaL.style.height = h + 'px'
+        this.$refs.mediaR.style.height = h + 'px'
+        this.$refs.courseList.style.height = h - 40 - 132 - 100 + 'px'
+        this.$refs.playInner.style.height = h - 100 + 'px'
+      }
     }
   },
   mounted() {

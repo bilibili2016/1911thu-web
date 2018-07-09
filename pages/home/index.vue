@@ -35,7 +35,7 @@ import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { home } from '~/lib/v1_sdk/index'
+import { home, newlesson } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-partner': Partner,
@@ -50,9 +50,9 @@ export default {
   },
   data() {
     return {
-      linkzero: '/course/classifylist',
+      linkzero: '/course/category',
       linkone: '/course/newlesson',
-      linktwo: '/course/classifycourse',
+      linktwo: '/course/classifylesson',
       linkfours: '/news/list',
       linkfive: '/news/detail',
       freeData: [],
@@ -247,7 +247,7 @@ export default {
     },
     // 获取新上好课列表
     getNewCourseList() {
-      home.getNewCourseList(this.courseForm).then(response => {
+      newlesson.getNewCourseList(this.courseForm).then(response => {
         this.newData = response.data.curriculumList
       })
     },
