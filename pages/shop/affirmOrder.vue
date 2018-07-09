@@ -1022,7 +1022,7 @@ export default {
             this.$message({
               showClose: true,
               type: 'success',
-              message: '订单提交成功'
+              message: res.msg
             })
           } else {
             // this.$message({
