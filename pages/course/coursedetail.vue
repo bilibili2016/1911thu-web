@@ -129,7 +129,7 @@
           </h4>
           <div v-loading="loadMsg">
             <div class="score">
-              <span class="fl">{{totalEvaluateInfo.totalScore}}</span>
+              <span class="fl">{{totalEvaluateInfo.totalScore}}.0</span>
               <el-rate disabled v-model="totalEvaluateInfo.totalScore" class="itemBox-rate fl"></el-rate>
               <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
             </div>
