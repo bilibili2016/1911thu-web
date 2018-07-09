@@ -34,7 +34,7 @@ import Info from '@/pages/home/components/info.vue'
 import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { store as persistStore } from '~/lib/core/store'
-
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { home } from '~/lib/v1_sdk/index'
 export default {
   components: {
@@ -200,24 +200,14 @@ export default {
       loginMsg: false
     }
   },
-  beforeCreate() {
-    // this.getAll()
-  },
   created() {
-    let aa = persistStore.get('dandian')
-    this.getAll()
-  },
-  mounted() {
-    this.$bus.$on('loginMsg', data => {
-      if (data === true) {
-        this.loginMsg = true
-      }
-    })
-
-    this.$bus.$on('reLogin', data => {
+    if (this.did === '0') {
       this.getAll()
-    })
-    this.$bus.$emit('bannerShow', false)
+    } else {
+    }
+  },
+  computed: {
+    ...mapState('auth', ['did'])
   },
   methods: {
     async getAll() {
@@ -291,6 +281,18 @@ export default {
         this.partnerList.list = response.data.collaborationEnterpriseList
       })
     }
+  },
+  mounted() {
+    this.$bus.$on('loginMsg', data => {
+      if (data === true) {
+        this.loginMsg = true
+      }
+    })
+
+    this.$bus.$on('reLogin', data => {
+      this.getAll()
+    })
+    this.$bus.$emit('bannerShow', false)
   }
 }
 </script>

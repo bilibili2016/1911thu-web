@@ -1,7 +1,6 @@
 <template>
   <div class="goodLesson new-lesson">
     <div class="topImg">
-      <!-- <img :src="atopImg" alt=""> -->
       <div class="top-con">
         <p class="desc-one">走心课程</p>
         <p class="desc-two">实力覆盖</p>
@@ -37,7 +36,6 @@ export default {
   },
   data() {
     return {
-      atopImg: 'http://papn9j3ys.bkt.clouddn.com/newLessonBanner.png',
       config: {
         card_type: 'goodlesson'
       },
@@ -54,6 +52,7 @@ export default {
     }
   },
   methods: {
+    // 获取最新课程列表
     getNewCourseList() {
       return new Promise((resolve, reject) => {
         home.getNewCourseList(this.newsCurriculumForm).then(response => {
@@ -71,6 +70,7 @@ export default {
         })
       })
     },
+    // 下拉查看更多
     getMoreData() {
       if (this.pageCount === this.courseList.length) {
         this.$message({
@@ -82,39 +82,32 @@ export default {
         this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
         this.getNewCourseList()
       }
+    },
+    // 监听下拉刷新方法
+    downRefresh() {
+      window.addEventListener('scroll', () => {
+        var scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop
+        var windowHeight =
+          document.documentElement.clientHeight || document.body.clientHeight
+        var scrollHeight =
+          document.documentElement.scrollHeight || document.body.scrollHeight
+        if (scrollTop + windowHeight == scrollHeight) {
+          if (this.scrollTopMsg === true) {
+            this.scrollTopMsg = false
+            this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
+            this.getNewCourseList()
+          }
+        }
+      })
     }
   },
   mounted() {
     this.getNewCourseList()
+    this.downRefresh()
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    // 缓存指针
-    let _this = this
-    // 设置一个开关来避免重负请求数据
-    let sw = true
-    // 此处使用node做了代理
-
-    // 注册scroll事件并监听
-    window.addEventListener('scroll', () => {
-      var scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop
-      //变量windowHeight是可视区的高度
-      var windowHeight =
-        document.documentElement.clientHeight || document.body.clientHeight
-      //变量scrollHeight是滚动条的总高度
-      var scrollHeight =
-        document.documentElement.scrollHeight || document.body.scrollHeight
-      if (scrollTop + windowHeight == scrollHeight) {
-        if (this.scrollTopMsg === true) {
-          this.scrollTopMsg = false
-          this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
-          this.getNewCourseList()
-        }
-      }
-    })
   }
 }
 </script>
-<style lang="scss" scoped>
-</style>
 

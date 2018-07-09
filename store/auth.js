@@ -131,9 +131,11 @@ export const mutations = {
   }
 }
 export const actions = {
+  // 单点登录标记
   async setDid({ commit, state }, { dids }) {
     try {
       let did = dids
+      console.log(did, 'did')
       persistStore.set('did', did)
       commit(MUTATION.setDid, {
         did
