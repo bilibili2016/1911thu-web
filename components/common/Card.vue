@@ -556,9 +556,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     openDetail() {
-      window.open(
-        window.location.origin + '/course/coursedetail:' + this.kidForm.kids
-      )
+      window.open(window.location.origin + '/course/coursedetail')
       // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
@@ -832,7 +830,6 @@ export default {
     },
     courseInfo(item, index) {
       this.kidForm.kids = item.id
-      console.log(this.kidForm.kids)
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
       // this.$router.push('/course/coursedetail')

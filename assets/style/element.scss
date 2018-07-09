@@ -241,6 +241,23 @@
       font-size: 12px;
     }
   }
+  .el-input__inner::-webkit-input-placeholder {
+    /* WebKit browsers */
+    font-size: 12px;
+  }
+  .el-input__inner:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    font-size: 12px;
+  }
+  .el-input__inner::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    font-size: 12px;
+  }
+  .el-input__inner:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    font-size: 12px;
+  }
+
   .el-tab-pane .el-row {
     width: 264px;
     margin: 0 auto;
@@ -250,6 +267,19 @@
       cursor: pointer;
       margin-bottom: 30px;
       color: #6417a6;
+    }
+    .registerUser {
+      .el-loading-mask {
+        margin-bottom: 0 !important;
+        background-color: #6417a6;
+        .circular {
+          width: 24px;
+          height: 24px;
+        }
+        .el-loading-spinner {
+          margin-top: 0;
+        }
+      }
     }
     button {
       width: 100%;
@@ -1218,5 +1248,19 @@ input:-webkit-autofill {
   }
   .el-carousel__indicators {
     display: none;
+  }
+}
+
+//机构入口页
+.allInfo {
+  .bottomForm .el-form .el-button.el-button--primary {
+    border: none;
+  }
+
+  .el-form-item.is-error .el-input__inner,
+  .el-form-item.is-error .el-input__inner:focus,
+  .el-form-item.is-error .el-textarea__inner,
+  .el-form-item.is-error .el-textarea__inner:focus {
+    border: none;
   }
 }

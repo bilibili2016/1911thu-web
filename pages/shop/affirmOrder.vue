@@ -1155,6 +1155,7 @@ export default {
       this.companyInfo.companyname = item.company_name
     },
     querySearchAsync(queryString, cb) {
+      console.log(111)
       //搜索机构
       queryString = queryString.replace(/^\s+|\s+$/g, '')
       if (queryString === '') {

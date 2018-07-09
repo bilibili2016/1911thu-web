@@ -101,7 +101,7 @@ export default {
     return {
       isNoMsg: false,
       loding: true,
-      noMsg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
       showInfo: false,
       selectAll: false,
       checked: [],
