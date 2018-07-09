@@ -305,7 +305,6 @@
       color: #222;
       font-size: 12px;
     }
-
     .el-checkbox__input.is-checked .el-checkbox__inner {
       background-color: #6417a6;
       border-color: #6417a6;
@@ -534,11 +533,12 @@
   }
 }
 
+// 个人中心修改密码
 .changePwd {
   .el-form-item__label {
     color: #222;
     font-size: 16px;
-    // font-weight: 700;
+    font-weight: 600;
   }
   .el-input {
     text-align: left;
@@ -581,6 +581,16 @@
     background: #8f4acb;
     border-color: #8f4acb;
     color: #fff;
+  }
+  &.btn-bgs {
+    .el-button--primary.is-plain {
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+    }
+    .el-button--primary.is-plain:hover {
+      transition: all 300ms;
+      background: #8f4acb;
+    }
   }
 }
 
@@ -1239,9 +1249,11 @@ input:-webkit-autofill {
 .shareIcons .social-share .icon-wechat .wechat-qrcode {
   top: 48px;
 }
+
 .social-share .icon-wechat .wechat-qrcode:after {
   bottom: -4px;
 }
+
 .newsCarousel {
   .el-carousel__container {
     height: 406px;
@@ -1250,6 +1262,7 @@ input:-webkit-autofill {
     display: none;
   }
 }
+<<<<<<< HEAD
 
 //机构入口页
 .allInfo {
@@ -1263,4 +1276,9 @@ input:-webkit-autofill {
   .el-form-item.is-error .el-textarea__inner:focus {
     border: none;
   }
+=======
+// 设置课程详情鼠标悬浮状态
+.main-crumb .main-crumbs .el-breadcrumb__inner:hover {
+  cursor: pointer;
+>>>>>>> origin/dev
 }
