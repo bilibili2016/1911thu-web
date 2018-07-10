@@ -38,6 +38,7 @@ export default {
         window.open(window.location.origin + '/course/category')
       } else if (this.linkdata === '/course/freelesson') {
         // 免费课程cgs === '2'
+
         this.setCid(this.cidform)
         this.cgForm.cgs = '2'
         this.setCg(this.cgForm)

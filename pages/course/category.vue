@@ -25,7 +25,7 @@
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
-import { home } from '~/lib/v1_sdk/index'
+import { home, players } from '~/lib/v1_sdk/index'
 import { mapState, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 
@@ -95,12 +95,12 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid']),
     selectCid(item, index) {
-      // console.log(index, '这是index')
+      console.log(index, '这是index')
       this.pidBg = 0
       this.cidBg = item.id
       this.pidData = this.cidData[index]
       this.cidform.cids = item.id
-      this.cidform.pids = ''
+      this.cidform.pids = '0'
       this.cidform.indexs = index
       this.setCid(this.cidform)
       this.getcourseList()
@@ -108,19 +108,31 @@ export default {
     selectPid(item, index) {
       this.pidBg = item.id
       this.cidform.pids = item.id
+      this.cidform.cids = this.cid
+      this.cidform.indexs = this.cindex
       this.setCid(this.cidform)
       this.getcourseList()
     },
 
     selectAllCid() {
-      this.cidform.cids = ''
+      this.cidform.cids = '0'
+      this.cidform.indexs = 0
+      this.cidform.pids = '0'
       this.cidBg = 0
+      this.pidBg = 0
+
+      this.pidData = this.cidData[0]
       this.setCid(this.cidform)
       this.getcourseList()
     },
     selectAllPid() {
-      this.cidform.pids = ''
+      this.cidform.pids = '0'
+      this.cidform.cids = '0'
+      this.cidform.indexs = 0
+      this.pidData = this.cidData[0]
+      this.cidBg = 0
       this.pidBg = 0
+
       this.setCid(this.cidform)
       this.getcourseList()
     },
@@ -155,7 +167,8 @@ export default {
       this.loadCourse = true
       this.categoryForm.cids = this.cid
       this.categoryForm.pids = this.pid
-      home.curriculumList(this.categoryForm).then(res => {
+      // console.log(this.categoryForm, '这是this.categoryForm')
+      home.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
         this.loadCourse = false
@@ -195,11 +208,22 @@ export default {
     console.log(this.pid, '这是pid')
     this.cidBg = this.cid
     this.pidBg = this.pid
+
     // 获取竖直列表
     this.getClassicsList()
     this.getCidPidList()
     this.getcourseList()
-
+    console.log(this.cg, 'ppp')
+    if (this.cg === '2') {
+      this.cidform.pids = '0'
+      this.cidform.cids = '0'
+      this.cidform.indexs = 0
+      // this.pidData = this.cidData[0]
+      this.cidBg = 0
+      this.pidBg = 0
+      this.setCid(this.cidform)
+      this.getcourseList()
+    }
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
   }
