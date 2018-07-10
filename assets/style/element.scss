@@ -1262,7 +1262,10 @@ input:-webkit-autofill {
     display: none;
   }
 }
-<<<<<<< HEAD
+// 设置课程详情鼠标悬浮状态
+.main-crumb .main-crumbs .el-breadcrumb__inner:hover {
+  cursor: pointer;
+}
 
 //机构入口页
 .allInfo {
@@ -1276,9 +1279,4 @@ input:-webkit-autofill {
   .el-form-item.is-error .el-textarea__inner:focus {
     border: none;
   }
-=======
-// 设置课程详情鼠标悬浮状态
-.main-crumb .main-crumbs .el-breadcrumb__inner:hover {
-  cursor: pointer;
->>>>>>> origin/dev
 }
