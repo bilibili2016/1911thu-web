@@ -8,13 +8,13 @@
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
+          <img class="topImg" :src="avator" />
+          <div class="up-user-avtor" v-show="isShowUpAvtor">
+            <input type="file" @change="add_img" accept="image/png,image/gif,image/jpeg" />
+            <span>更换图片</span>
+          </div>
           <div class="avator">
             <div class="img">
-              <img :src="avator" />
-              <div class="up-user-avtor" v-show="isShowUpAvtor">
-                <input type="file" @change="add_img" accept="image/png,image/gif,image/jpeg" />
-                <span>更换图片</span>
-              </div>
             </div>
           </div>
           <div class="name">

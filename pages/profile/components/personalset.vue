@@ -1,12 +1,12 @@
 <template>
   <div class="main">
     <div class="personalSet">
-      <img class="person-edit" src="http://papn9j3ys.bkt.clouddn.com/edit-info.png" @click="changeCard()" v-if="!hasPersonalInfo" />
+      <img class="person-edit" src="http://papn9j3ys.bkt.clouddn.com/edit-info.png" @click="changeCard()" v-if="!hasPersonalInfo&&showIcon" />
       <el-tabs v-model="activeName" @tab-click="handleClick">
+        <!-- 填写个人信息 -->
         <el-tab-pane label="基础信息" name="first">
-          <!-- 填写个人信息 -->
           <el-form v-if="hasPersonalInfo" :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
-            <el-form-item label="昵称" prop="name">
+            <el-form-item label="昵称" prop="nick_name">
               <el-input v-model="psnForm.nick_name"></el-input>
             </el-form-item>
             <el-form-item label="性别" prop="sex">
@@ -18,7 +18,7 @@
             <el-form-item label="生日" prop="birthday">
               <el-date-picker v-model="psnForm.birthday" type="date" value-format="yyyy-MM-dd"></el-date-picker>
             </el-form-item>
-            <el-form-item label="所在地区" prop="address">
+            <el-form-item label="所在地区" prop="province">
               <el-select v-model="psnForm.province" placeholder="省">
                 <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
               </el-select>
@@ -37,17 +37,17 @@
             <el-form-item label="邮箱" prop="email">
               <el-input v-model="psnForm.email"></el-input>
             </el-form-item>
-            <el-form-item disable label="手机号" prop="name">
+            <el-form-item disable label="手机号">
               <el-input v-model="psnForm.user_name" disabled></el-input>
             </el-form-item>
-            <el-form-item label="公司信息" prop="name" v-if="hasCompany" key="psnForm.company_name">
+            <el-form-item label="公司信息" v-if="hasCompany" key="psnForm.company_name">
               <el-input v-model="psnForm.company_name" disabled></el-input>
             </el-form-item>
-            <el-form-item label="绑定机构ID" prop="name" v-else>
+            <el-form-item label="绑定机构ID" v-else>
               <el-input v-model="psnForm.company_code"></el-input>
             </el-form-item>
             <el-form-item size="large" class="submit">
-              <el-button type="primary" class="submitAble" @click="onSubmit" round>提交</el-button>
+              <el-button type="primary" class="submitAble" @click="onSubmit('psnForm')" round>提交</el-button>
             </el-form-item>
           </el-form>
           <!-- 展示个人信息 -->
@@ -88,14 +88,12 @@
             </ul>
           </div>
         </el-tab-pane>
+        <!-- 修改密码 -->
         <el-tab-pane label="修改密码" name="second">
-          <!-- 修改密码 -->
           <div v-show="showPwd" class="changePwd">
-
             <input type="password" class="hideInput">
             <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autocomplete="off">
               <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
-                <!-- <el-input type="text" name="noauto" v-model="changePwd.oldPass" auto-complete="off" onfocus="this.type='password'" id="onlyOne" disableautocomplete></el-input> -->
                 <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne"></el-input>
               </el-form-item>
               <el-form-item label="新密码：" prop="newPass">
@@ -130,201 +128,6 @@ import { encryption } from '~/lib/util/helper'
 import { mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  watch: {
-    province(val) {
-      this.city = this.getRegion(val, this.psnForm.province)
-      this.area = this.getRegion(this.city, this.psnForm.city)
-    },
-    'psnForm.province'(val, oldval) {
-      if (!this.province && this.province.length == 0) {
-        this.getRegionList()
-      }
-      if (oldval != '') {
-        this.psnForm.city = ''
-      }
-      this.city = this.getRegion(this.province, val)
-    },
-    'psnForm.city'(val, oldval) {
-      if (!this.city && this.city.length == 0) {
-        this.getRegionList()
-      }
-      if (oldval != '') {
-        this.psnForm.area = ''
-      }
-      this.area = this.getRegion(this.city, val)
-    }
-  },
-  computed: {
-    ...mapGetters('auth', ['isAuthenticated'])
-  },
-  methods: {
-    changeCard() {
-      this.showInfo = false
-      this.hasPersonalInfo = true
-    },
-    getSex(sex) {
-      if (sex == 1) {
-        return '男'
-      } else if (sex == 2) {
-        return '女'
-      } else {
-        return '保密'
-      }
-    },
-    formatDate(date) {
-      if (date && date != '') {
-        let tmp = new Date(date)
-        let year = tmp.getFullYear()
-        let mon = tmp.getMonth() + 1
-        let day = tmp.getDate()
-        return year + '年' + mon + '月' + day + '日'
-      } else {
-        return ''
-      }
-    },
-    getRegion(data, val) {
-      let tmp = []
-      for (let item of data) {
-        if (item.region_code == val) {
-          for (let cit of item.city) {
-            tmp.push(
-              Object.assign({}, cit, {
-                label: cit.name,
-                value: cit.region_code
-              })
-            )
-          }
-        }
-      }
-      return tmp
-    },
-    handleClick(tab, event) {
-      if (tab == 'first') {
-        this.getUserInfo()
-      }
-    },
-    getUserInfo() {
-      home.getUserInfo().then(res => {
-        this.psnForm = res.data.userInfo
-        if (this.psnForm.company_name && this.psnForm.company_name != '') {
-          this.hasCompany = true
-          persistStore.set('cpnc', this.psnForm.company_code)
-        } else {
-          this.hasCompany = false
-        }
-        if (res.data.userInfo.is_update === 1) {
-          this.showInfo = true
-          this.hasPersonalInfo = false
-        } else {
-          this.showInfo = false
-          this.hasPersonalInfo = true
-        }
-      })
-    },
-    onSubmit() {
-      if (this.psnForm.province !== '') {
-        if (this.psnForm.city == '' || this.psnForm.area == '') {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: '请选择地址信息！'
-          })
-          return false
-        }
-      }
-      home.perInformation(this.psnForm).then(res => {
-        let flag = res.status != 0 ? false : true
-        this.$emit('update', flag)
-        if (res.status == 0) {
-          this.getUserInfo()
-          this.showInfo = true
-          this.hasPersonalInfo = false
-        } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: res.msg
-          })
-          this.showInfo = false
-          this.hasPersonalInfo = true
-        }
-      })
-    },
-    getRegionList() {
-      home.getRegionList({ region_code: '' }).then(res => {
-        this.mapregionList = res.data.regionList
-        this.province = this.mapregionList.map(item => {
-          return Object.assign({}, item, {
-            label: item.name,
-            value: item.region_code
-          })
-        })
-      })
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          let tmp = {
-            oldps: encryption(this.changePwd.oldPass),
-            newpass: encryption(this.changePwd.newPass),
-            newpasso: encryption(this.changePwd.checkPass)
-          }
-          return new Promise((resolve, reject) => {
-            home.editPassWord(tmp).then(res => {
-              this.changePwd = {
-                oldPass: '',
-                newPass: '',
-                checkPass: ''
-              }
-              if (res.status == 0) {
-                this.$message({
-                  showClose: true,
-                  type: 'success',
-                  message: res.msg
-                })
-              } else {
-                let msg = res.msg
-                this.$message({
-                  showClose: true,
-                  type: 'error',
-                  message: res.msg
-                })
-              }
-            })
-          })
-        } else {
-          return false
-        }
-      })
-    },
-    getPositionList() {
-      home.positionList().then(res => {
-        let tmp = res.data
-        this.options = tmp.map(item => {
-          return { label: item.position_name, value: item.id }
-        })
-      })
-    },
-    insertEle() {
-      var oTest = document.getElementById('onlyOne').parentNode
-      // console.log(oTest)
-      var newNode = document.createElement('input')
-      var reforeNode = document.getElementById('onlyOne')
-      // newNode.setAttribute({ type: 'password', name: 'noauto' })
-      newNode.setAttribute('type', 'text')
-      newNode.setAttribute('name', 'noauto')
-      newNode.setAttribute('style', 'display:none')
-      // newNode.innerHTML = ' This is a newcon '
-      oTest.insertBefore(newNode, reforeNode.nextSibling) //新建的元素节点插入id为P1节点元素的后面。
-    }
-  },
-  mounted() {
-    if (this.isAuthenticated) {
-      this.getUserInfo()
-      this.getPositionList()
-      this.getRegionList()
-    }
-  },
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -364,9 +167,18 @@ export default {
       }
       callback()
     }
+    var nickName = (rule, value, callback) => {
+      if (!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
+        callback(
+          new Error('请输入至少4位最多18位，可包含汉字，英文字母，数字，下划线')
+        )
+      }
+      callback()
+    }
     return {
       hasCompany: true,
       showInfo: false,
+      showIcon: true,
       regionList: [],
       area: [],
       province: [],
@@ -419,50 +231,53 @@ export default {
         company_code: '' //所在公司名称
       },
       rules: {
-        name: [
+        nick_name: [
+          { required: true, message: '昵称不能为空' },
           {
-            message: '请输入昵称',
+            min: 4,
+            max: 18,
+            message:
+              '请输入至少4位最多18位，可包含汉字，英文字母，数字，下划线',
             trigger: 'blur'
           },
           {
-            min: 3,
-            max: 8,
-            message: '长度在 3 到 5 个字符',
+            validator: nickName,
             trigger: 'blur'
           }
         ],
         sex: [
           {
+            required: true,
             message: '请选择性别',
             trigger: 'change'
           }
         ],
         birthday: [
           {
+            required: true,
             type: 'string',
             message: '请选择生日',
             trigger: 'change'
           }
         ],
-        address: [
+        province: [
           {
+            required: true,
             message: '请选择您的所在地',
             trigger: 'change'
           }
         ],
         position: [
+          { required: true, message: '职业不能为空' },
           {
-            message: '请填写您的职位',
+            required: true,
+            message: '请填写您的职业',
             trigger: 'blur'
           }
         ],
         email: [
           {
-            message: '请输入邮箱地址',
-            trigger: 'blur'
-          },
-          {
-            type: 'email',
+            required: true,
             message: '请输入正确的邮箱地址',
             trigger: ['blur', 'change']
           },
@@ -472,6 +287,206 @@ export default {
           }
         ]
       }
+    }
+  },
+  watch: {
+    province(val) {
+      this.city = this.getRegion(val, this.psnForm.province)
+      this.area = this.getRegion(this.city, this.psnForm.city)
+    },
+    'psnForm.province'(val, oldval) {
+      if (!this.province && this.province.length == 0) {
+        this.getRegionList()
+      }
+      if (oldval != '') {
+        this.psnForm.city = ''
+      }
+      this.city = this.getRegion(this.province, val)
+    },
+    'psnForm.city'(val, oldval) {
+      if (!this.city && this.city.length == 0) {
+        this.getRegionList()
+      }
+      if (oldval != '') {
+        this.psnForm.area = ''
+      }
+      this.area = this.getRegion(this.city, val)
+    }
+  },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
+  },
+  methods: {
+    // 切换展示/编辑个人信息
+    changeCard() {
+      this.showInfo = false
+      this.hasPersonalInfo = true
+    },
+    // 切换性别
+    getSex(sex) {
+      if (sex == 1) {
+        return '男'
+      } else if (sex == 2) {
+        return '女'
+      } else {
+        return '保密'
+      }
+    },
+    // 格式化生日
+    formatDate(date) {
+      if (date && date != '') {
+        let tmp = new Date(date)
+        let year = tmp.getFullYear()
+        let mon = tmp.getMonth() + 1
+        let day = tmp.getDate()
+        return year + '年' + mon + '月' + day + '日'
+      } else {
+        return ''
+      }
+    },
+    // 整理省市区
+    getRegion(data, val) {
+      let tmp = []
+      for (let item of data) {
+        if (item.region_code == val) {
+          for (let cit of item.city) {
+            tmp.push(
+              Object.assign({}, cit, {
+                label: cit.name,
+                value: cit.region_code
+              })
+            )
+          }
+        }
+      }
+      return tmp
+    },
+    // 切换个人信息/修改密码
+    handleClick(tab, event) {
+      if (tab.name == 'first') {
+        this.showIcon = true
+        this.getUserInfo()
+      } else {
+        this.showIcon = false
+      }
+    },
+    // 获取用户信息
+    getUserInfo() {
+      home.getUserInfo().then(res => {
+        this.psnForm = res.data.userInfo
+        if (this.psnForm.company_name && this.psnForm.company_name != '') {
+          this.hasCompany = true
+          persistStore.set('cpnc', this.psnForm.company_code)
+        } else {
+          this.hasCompany = false
+        }
+        if (res.data.userInfo.is_update === 1) {
+          this.showInfo = true
+          this.hasPersonalInfo = false
+        } else {
+          this.showInfo = false
+          this.hasPersonalInfo = true
+        }
+      })
+    },
+    // 提交个人信息表单
+    onSubmit(formName) {
+      if (this.psnForm.province !== '') {
+        if (this.psnForm.city == '' || this.psnForm.area == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请选择地址信息！'
+          })
+          return false
+        }
+      }
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          home.perInformation(this.psnForm).then(res => {
+            let flag = res.status != 0 ? false : true
+            this.$emit('update', flag)
+            if (res.status == 0) {
+              this.getUserInfo()
+              this.showInfo = true
+              this.hasPersonalInfo = false
+            } else {
+              this.$message({
+                showClose: true,
+                type: 'error',
+                message: res.msg
+              })
+              this.showInfo = false
+              this.hasPersonalInfo = true
+            }
+          })
+        }
+      })
+    },
+    // 获取省市区
+    getRegionList() {
+      home.getRegionList({ region_code: '' }).then(res => {
+        this.mapregionList = res.data.regionList
+        this.province = this.mapregionList.map(item => {
+          return Object.assign({}, item, {
+            label: item.name,
+            value: item.region_code
+          })
+        })
+      })
+    },
+    // 提交修改密码
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          let tmp = {
+            oldps: encryption(this.changePwd.oldPass),
+            newpass: encryption(this.changePwd.newPass),
+            newpasso: encryption(this.changePwd.checkPass)
+          }
+          return new Promise((resolve, reject) => {
+            home.editPassWord(tmp).then(res => {
+              this.changePwd = {
+                oldPass: '',
+                newPass: '',
+                checkPass: ''
+              }
+              if (res.status == 0) {
+                this.$message({
+                  showClose: true,
+                  type: 'success',
+                  message: res.msg
+                })
+              } else {
+                let msg = res.msg
+                this.$message({
+                  showClose: true,
+                  type: 'error',
+                  message: res.msg
+                })
+              }
+            })
+          })
+        } else {
+          return false
+        }
+      })
+    },
+    // 获取职业列表
+    getPositionList() {
+      home.positionList().then(res => {
+        let tmp = res.data
+        this.options = tmp.map(item => {
+          return { label: item.position_name, value: item.id }
+        })
+      })
+    }
+  },
+  mounted() {
+    if (this.isAuthenticated) {
+      this.getUserInfo()
+      this.getPositionList()
+      this.getRegionList()
     }
   }
 }
