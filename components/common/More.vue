@@ -24,18 +24,29 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid']),
+    ...mapActions('auth', ['setCid', 'setCg']),
     getMore() {
       // 免费课程路由 设置cid pid cindex
       // if (this.linkdata === '/course/category') {
       //   this.setCid(this.cidform)
       // }
-      // if (this.linkdata === '/course/classifylesson') {
-      //   this.cgForm.cgs = '1'
-      //   this.setCg(this.cgForm)
-      // }
+
+      // 经典课程cgs === '1'
+      if (this.linkdata === '/course/classifylesson') {
+        this.cgForm.cgs = '1'
+        this.setCg(this.cgForm)
+        window.open(window.location.origin + '/course/category')
+      } else if (this.linkdata === '/course/freelesson') {
+        // 免费课程cgs === '2'
+        this.setCid(this.cidform)
+        this.cgForm.cgs = '2'
+        this.setCg(this.cgForm)
+        window.open(window.location.origin + '/course/category')
+      } else {
+        window.open(window.location.origin + this.linkdata)
+      }
       this.$emit('getMoreData')
-      window.open(window.location.origin + this.linkdata)
+      // window.open(window.location.origin + this.linkdata)
     }
   }
 }

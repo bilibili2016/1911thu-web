@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      linkzero: '/course/category',
+      linkzero: '/course/freelesson',
       linkone: '/course/newlesson',
       linktwo: '/course/classifylesson',
       linkfours: '/news/list',

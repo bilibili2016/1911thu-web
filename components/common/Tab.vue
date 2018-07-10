@@ -53,11 +53,14 @@ export default {
       },
       kidForm: {
         kids: null
+      },
+      cgForm: {
+        cgs: null
       }
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid', 'setKid']),
+    ...mapActions('auth', ['setCid', 'setPid', 'setKid', 'setCg']),
     handleClick(item, index) {
       this.cidform.cids = Number(item.index)
       this.setCid(this.cidform)
@@ -69,6 +72,8 @@ export default {
       this.$router.push('/course/coursedetail')
     },
     handlePid(item, index) {
+      this.cgForm.cgs = '0'
+      this.setCg(this.cgForm)
       this.cidform.pids = item.id
       this.setCid(this.cidform)
       window.open(window.location.origin + '/course/category')
