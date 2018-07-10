@@ -183,7 +183,7 @@ export default {
       courseList: [
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_1.png',
-          title: '通识性课程体系（干部通用学院）',
+          title: '通识性课程体系（干部网络学院）',
           number: '（10余门课程）'
         },
         {

@@ -132,7 +132,7 @@ export default {
       },
       classify: [
         {
-          category_name: '干部通用学院',
+          category_name: '干部网络学院',
           id: '1'
         },
         {
