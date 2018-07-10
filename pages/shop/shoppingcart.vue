@@ -52,7 +52,7 @@
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
-            <i>{{this.addArray.curriculumcartid.length}}</i> 门课程</span>
+            <i>{{checkedCourse}}</i> 门课程</span>
         </div>
       </div>
     </div>
@@ -99,6 +99,8 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
     return {
+      // prices: 0, //计算总价钱
+      checkedCourse: 0, //已选几门课程
       isNoMsg: false,
       loding: true,
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
@@ -216,16 +218,7 @@ export default {
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
     ...mapGetters('auth', ['isAuthenticated']),
-    prices() {
-      let p = (
-        Number(this.arraySum) *
-        10 *
-        (Number(this.numForm.number) * 10) /
-        100
-      ).toFixed(2)
 
-      return Math.abs(p)
-    },
     canSubmit() {
       if (this.addArray.curriculumcartid.length <= 0) {
         // this.$message({
@@ -234,6 +227,17 @@ export default {
         // })
       }
       return this.addArray.curriculumcartid.length > 0
+    },
+    prices() {
+      console.log(this.arraySum)
+      let p = (
+        Number(this.arraySum) *
+        10 *
+        (Number(this.numForm.number) * 10) /
+        100
+      ).toFixed(2)
+
+      return Math.abs(p)
     }
   },
   watch: {
@@ -325,38 +329,53 @@ export default {
       return new Promise((resolve, reject) => {
         home.shopCartList().then(response => {
           let body = response.data.curriculumCartList.map(item => {
-            this.addArray.curriculumcartid.push(item.id)
-            this.arraySum =
-              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-              10
+            // this.addArray.curriculumcartid.push(item.id)      //默认不选中
+            // this.arraySum =
+            //   (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+            //   10
             return Object.assign({}, item, {
-              checkMsg: true
+              checkMsg: false
             })
           })
           this.courseList = body
-          this.selectAll = true
+          // this.selectAll = true
           this.loding = false
           this.numForm.number = response.data.number
 
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
-            this.selectAll = false
+            // this.selectAll = false
           }
         })
       })
     },
     handleSelectChange(item, index) {
       let shopIndex = indexOf(this.addArray.curriculumcartid, item.id)
+
       if (shopIndex >= 0) {
+        //未选中
+
+        home.shopCartremoveChecked({ curriculumcartid: item.id }).then(res => {
+          console.log(res)
+          resolve(true)
+        })
+
         this.addArray.curriculumcartid.splice(shopIndex, 1)
         this.arraySum =
           (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10
       } else {
+        //选中
+        home.shopCartaddChecked({ curriculumcartid: item.id }).then(res => {
+          console.log(res)
+          resolve(true)
+        })
+
         this.addArray.curriculumcartid.push(item.id)
         this.arraySum =
           (Number(this.arraySum) * 10 + Number(item.present_price) * 10) / 10
       }
+
       if (this.addArray.curriculumcartid.length == this.courseList.length) {
         this.selectAll = true
         this.isRest = true
