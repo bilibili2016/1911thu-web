@@ -394,21 +394,22 @@ export default {
     showCommit() {
       // this.showInfo = true
       // this.$router.push('/shop/checkedcourse');
-      return new Promise((resolve, reject) => {
-        home.addChecked(this.addArray).then(res => {
-          if (res.status === 0) {
-            this.$router.push('/shop/affirmorder')
-            // this.shopCartList()
-          } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: res.msg
-            })
-          }
-          resolve(true)
-        })
-      })
+      this.$router.push('/shop/affirmorder')
+      // return new Promise((resolve, reject) => {
+      //   home.addChecked(this.addArray).then(res => {
+      //     if (res.status === 0) {
+
+      //       // this.shopCartList()
+      //     } else {
+      //       this.$message({
+      //         showClose: true,
+      //         type: 'error',
+      //         message: res.msg
+      //       })
+      //     }
+      //     resolve(true)
+      //   })
+      // })
     },
     close() {
       this.showInfo = false

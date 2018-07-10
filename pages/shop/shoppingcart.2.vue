@@ -99,7 +99,7 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
     return {
-      prices: 0, //计算总价钱
+      // prices: 0, //计算总价钱
       checkedCourse: 0, //已选几门课程
       isNoMsg: false,
       loding: true,
@@ -218,7 +218,15 @@ export default {
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
     ...mapGetters('auth', ['isAuthenticated']),
-
+    prices() {
+      let p = (
+        Number(this.arraySum) *
+        10 *
+        (Number(this.numForm.number) * 10) /
+        100
+      ).toFixed(2)
+      return Math.abs(p)
+    },
     canSubmit() {
       if (this.addArray.curriculumcartid.length <= 0) {
         // this.$message({
@@ -234,16 +242,6 @@ export default {
       if (this.isRest) {
         this.handleSelectAllChange(val)
       }
-    },
-    prices() {
-      let p = (
-        Number(this.arraySum) *
-        10 *
-        (Number(this.numForm.number) * 10) /
-        100
-      ).toFixed(2)
-
-      return Math.abs(p)
     }
   },
   methods: {
@@ -328,13 +326,25 @@ export default {
       return new Promise((resolve, reject) => {
         home.shopCartList().then(response => {
           let body = response.data.curriculumCartList.map(item => {
-            this.addArray.curriculumcartid.push(item.id)
-            this.arraySum =
-              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-              10
-            return Object.assign({}, item, {
-              checkMsg: false
-            })
+            // this.addArray.curriculumcartid.push(item.id)      //默认不选中
+            // this.arraySum =
+            //   (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+            //   10
+            if (item.is_checked === 0) {
+              //未选中
+              return Object.assign({}, item, {
+                checkMsg: false
+              })
+            } else if (item.is_checked === 1) {
+              //选中
+              this.addArray.curriculumcartid.push(item.id) //默认不选中
+              this.arraySum =
+                (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+                10
+              return Object.assign({}, item, {
+                checkMsg: true
+              })
+            }
           })
           this.courseList = body
           // this.selectAll = true
@@ -346,29 +356,40 @@ export default {
             this.isNoMsg = true
             // this.selectAll = false
           }
-
-          console.log(this.addArray.curriculumcartid)
-          console.log(this.courseList)
         })
       })
     },
     handleSelectChange(item, index) {
       let shopIndex = indexOf(this.addArray.curriculumcartid, item.id)
-      console.log(shopIndex)
+
       if (shopIndex >= 0) {
-        //不选中
+        //未选中
+        return new Promise((resolve, reject) => {
+          home
+            .shopCartremoveChecked({ curriculumcartid: item.id })
+            .then(res => {
+              // console.log(res)
+              resolve(true)
+            })
+        })
+
         this.addArray.curriculumcartid.splice(shopIndex, 1)
         this.arraySum =
           (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10
-        // console.log(this.arraySum)
       } else {
         //选中
+        return new Promise((resolve, reject) => {
+          home.shopCartaddChecked({ curriculumcartid: item.id }).then(res => {
+            // console.log(res)
+            resolve(true)
+          })
+        })
+
         this.addArray.curriculumcartid.push(item.id)
         this.arraySum =
           (Number(this.arraySum) * 10 + Number(item.present_price) * 10) / 10
       }
-      console.log(this.addArray.curriculumcartid)
-      console.log(this.courseList)
+
       if (this.addArray.curriculumcartid.length == this.courseList.length) {
         this.selectAll = true
         this.isRest = true

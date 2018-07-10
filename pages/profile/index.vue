@@ -118,7 +118,7 @@
 
           <!-- 订单详情 -->
           <div class="orderListDetail" v-else>
-            <div class="order-top">
+            <!-- <div class="order-top">
               <div class="orderItem orderInfo ">
                 <div class="title">订单信息</div>
                 <div>
@@ -139,7 +139,7 @@
               <div class="orderItem ticketInfo">
                 <div class="title">发票信息</div>
               </div>
-            </div>
+            </div> -->
             <div class="table">
               <div class="tableHeader">
                 <span class="goBack" @click="goBack">
