@@ -29,13 +29,12 @@
             </div>
             <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
-              <!-- {{card}} -->
               <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent <1" type="primary" plain @click="goLink(linkdata)">开始学习</el-button>
-              <el-button v-else type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+              <el-button v-if="card.percent <1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-else type="primary" plain @click="goToPlay(card)">继续学习</el-button>
             </div>
             <el-row>
               <!-- 名字 -->
@@ -658,6 +657,11 @@ export default {
       )
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
 
+      window.open(window.location.origin + '/course/player')
+    },
+    goToPlay(item) {
+      persistStore.set('curriculumId', item.id)
+      persistStore.set('catalogId', item.catalog_id)
       window.open(window.location.origin + '/course/player')
     },
     // 获取详情默认播放小节id

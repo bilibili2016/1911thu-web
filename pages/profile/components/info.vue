@@ -27,10 +27,11 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
+    // 获取我的消息列表
     getInfo() {
       return new Promise((resolve, reject) => {
         home.userMessage(this.curruntForm).then(res => {
-          this.infoList = res.data.userMessage
+          this.infoList = ''
           let noMsg = this.infoList && this.infoList.length > 0 ? false : true
           this.$emit('noMsg', noMsg)
         })
