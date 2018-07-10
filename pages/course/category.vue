@@ -95,7 +95,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid']),
     selectCid(item, index) {
-      console.log(index, '这是index')
+      // console.log(index, '这是index')
       this.pidBg = 0
       this.cidBg = item.id
       this.pidData = this.cidData[index]
@@ -156,7 +156,7 @@ export default {
     getCidPidList() {
       home.childCategoryList().then(res => {
         this.cidData = res.data.categoryList
-        console.log(this.cindex, '00000000')
+        // console.log(this.cindex, '00000000')
 
         this.pidData = res.data.categoryList[this.cindex]
         this.loadBanner = false
@@ -178,7 +178,7 @@ export default {
     getClassicsList() {
       return new Promise((resolve, reject) => {
         home.getClassicsList(this.classList).then(response => {
-          console.log(response.data.categoryList, '这是竖直列表')
+          // console.log(response.data.categoryList, '这是竖直列表')
           this.classList = response.data.categoryList
           resolve(true)
         })
@@ -204,8 +204,8 @@ export default {
   },
   mounted() {
     this.activeTab = 'first'
-    console.log(this.cid, '这是cid')
-    console.log(this.pid, '这是pid')
+    // console.log(this.cid, '这是cid')
+    // console.log(this.pid, '这是pid')
     this.cidBg = this.cid
     this.pidBg = this.pid
 
@@ -213,7 +213,7 @@ export default {
     this.getClassicsList()
     this.getCidPidList()
     this.getcourseList()
-    console.log(this.cg, 'ppp')
+    // console.log(this.cg, 'ppp')
     if (this.cg === '2') {
       this.cidform.pids = '0'
       this.cidform.cids = '0'

@@ -6,3 +6,4 @@ git add .
 git commit -m "update"
 git pull origin dev
 send "$username\r"
+npm run build

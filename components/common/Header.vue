@@ -900,8 +900,8 @@ export default {
           })
         } else if (res.status === '100100') {
           // 设置单点登录
-          this.didForm.dids = '1'
-          this.setDid(this.didForm)
+          // this.didForm.dids = '1'
+          // this.setDid(this.didForm)
           if (this.authPath.indexOf(window.location.pathname) > 0) {
             this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
               confirmButtonText: '确定',
@@ -938,6 +938,8 @@ export default {
   },
   mounted() {
     this.$bus.$emit('bannerShow', false)
+    this.didForm.dids = '0'
+  this.setDid(this.didForm)
     this.$bus.$on('bannerShow', data => {
       if (data === true) {
         this.bannerMsg = true
@@ -967,6 +969,7 @@ export default {
       this.codeClick = false
     }
   }
+
 }
 </script>
 

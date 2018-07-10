@@ -200,12 +200,7 @@ export default {
       loginMsg: false
     }
   },
-  created() {
-    if (this.did === '0') {
-      this.getAll()
-    } else {
-    }
-  },
+  created() {},
   computed: {
     ...mapState('auth', ['did'])
   },
@@ -288,7 +283,12 @@ export default {
         this.loginMsg = true
       }
     })
-
+    // console.log(this.did, '9999')
+    // console.log(this.did === '0', '9999')
+    if (this.did === '0') {
+      this.getAll()
+    } else {
+    }
     this.$bus.$on('reLogin', data => {
       this.getAll()
     })
