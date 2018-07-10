@@ -58,17 +58,7 @@ export default {
       this.$emit('selectPid', items, index)
     }
   },
-  mounted() {
-    // console.log(this.pidData, '78789')
-    // console.log(this.pidBg, '787899999999')
-    // console.log(this.cidBg, 'cidBg')
-
-    console.log(this.cg, '44444444')
-    console.log(this.cid, '99999999999')
-    console.log(this.pid, '777777777777')
-    console.log(this.cidBg, '6666666')
-    console.log(this.pidBg, '5555555')
-  }
+  mounted() {}
 }
 </script>
 
