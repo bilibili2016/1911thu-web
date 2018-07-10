@@ -12,7 +12,7 @@
         </div>
       </div>
     </template>
-    <!-- profile个人信息模板 新上好课模板-->
+    <!-- profile个人信息模板 新上好课模板 学习中-->
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
@@ -29,12 +29,12 @@
             </div>
             <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
-              <!-- {{card}} -->
               <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+              <el-button v-if="card.percent <1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-else type="primary" plain @click="goToPlay(card)">继续学习</el-button>
             </div>
             <el-row>
               <!-- 名字 -->
@@ -240,7 +240,7 @@
           </el-card>
           <div class="particulars fr ">
             <div class="currentclum ">
-              <h4>{{course.title}}</h4>
+              <h4 @click="courseInfo(course)">{{course.title}}</h4>
               <p>{{course.introduction}}</p>
             </div>
             <!-- {{course.evaluateList}} -->
@@ -659,6 +659,11 @@ export default {
 
       window.open(window.location.origin + '/course/player')
     },
+    goToPlay(item) {
+      persistStore.set('curriculumId', item.id)
+      persistStore.set('catalogId', item.catalog_id)
+      window.open(window.location.origin + '/course/player')
+    },
     // 获取详情默认播放小节id
     getdefaultCurriculumCatalogs() {
       this.getdefaultForm.curriculumid = this.courseList.id
@@ -883,16 +888,23 @@ export default {
       })
     },
     timestampToTime(timestamp) {
-      var date = new Date(timestamp * 1000)
+      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
       let Y = date.getFullYear() + '-'
       let M =
         (date.getMonth() + 1 < 10
           ? '0' + (date.getMonth() + 1)
           : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
-      let h = date.getHours() + ':'
-      let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
     }
   },
@@ -1081,7 +1093,7 @@ export default {
       .item {
         // border-bottom: 1px rgba(228, 228, 244, 1) solid;
         .itemBox-name {
-          width: 100%;
+          width: 250px;
           height: 45px;
           line-height: 45px;
           font-size: 16px;
@@ -1224,8 +1236,15 @@ export default {
           display: inline-block;
         }
         .title {
+          width: 140px;
+          height: 31px;
+          line-height: 31px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
           float: right;
           color: rgba(109, 104, 127, 1);
+          vertical-align: middle;
         }
       }
       .line-centers {
@@ -1266,7 +1285,7 @@ export default {
 #pane-third .card-category .card-list {
   margin: 0 30px 50px 0;
   &:nth-child(4n + 4) {
-    margin-right: 24px;
+    // margin-right: 24px;
   }
   &:nth-child(3n + 3) {
     margin-right: 0;

@@ -8,13 +8,13 @@
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
+          <img class="topImg" :src="avator" />
+          <div class="up-user-avtor" v-show="isShowUpAvtor">
+            <input type="file" @change="add_img" accept="image/png,image/gif,image/jpeg" />
+            <span>更换图片</span>
+          </div>
           <div class="avator">
             <div class="img">
-              <img :src="avator" />
-              <div class="up-user-avtor" v-show="isShowUpAvtor">
-                <input type="file" @change="add_img" accept="image/png,image/gif,image/jpeg" />
-                <span>更换图片</span>
-              </div>
             </div>
           </div>
           <div class="name">
@@ -101,10 +101,17 @@ export default {
         (date.getMonth() + 1 < 10
           ? '0' + (date.getMonth() + 1)
           : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
-      let h = date.getHours() + ':'
-      let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
     },
     getUserInfo() {

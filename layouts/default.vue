@@ -23,6 +23,9 @@ export default {
   },
   computed: {
     ...mapState('auth', ['hsg'])
+  },
+  mounted() {
+    // console.log('123')
   }
 }
 </script>

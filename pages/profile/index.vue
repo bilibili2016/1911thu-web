@@ -13,7 +13,7 @@
             </div>
             <div class="content">
               <v-card v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-card>
-              <div v-else class="noCourse">
+              <div v-else class="noCourse fillTop">
                 <img :src="noMsgImg" alt="">
                 <h4>抱歉，现在还没有学习过的课程呦~</h4>
                 <!-- <p>去学习</p> -->
@@ -140,7 +140,7 @@
                     ￥{{course.price}}
                   </div>
                   <div class="courseOperation">
-                    X{{course.pay_number}}
+                    <i class="el-icon-close"></i>{{course.pay_number}}
                   </div>
                 </div>
               </div>
@@ -181,20 +181,8 @@
         <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
             <i class="icon-bind"></i> 绑定课程ID</span>
-          <v-bind @isShowMsg="isShowMsg"></v-bind>
-          <div class="content">
-            <div class="noCourse" v-if="isShowNoCourse">
-              <img :src="noMsgImg" alt="">
-              <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
-            </div>
-          </div>
+          <v-bind></v-bind>
         </el-tab-pane>
-        <!-- 绑定机构Id -->
-        <!-- <el-tab-pane name="tab-seventh">
-          <span slot="label" class="tabList">
-            <i class="icon-company"></i> 绑定机构ID</span>
-          <v-companyId :cpnData="companyData"></v-companyId>
-        </el-tab-pane> -->
         <!-- 专属邀请码 -->
         <el-tab-pane name="tab-eighth" v-if="codeData.length">
           <span slot="label" class="tabList">
@@ -213,7 +201,6 @@ import PersonalSet from '@/pages/profile/components/personalset.vue'
 import Binding from '@/pages/profile/components/bindid'
 import Info from '@/pages/profile/components/info'
 import Order from '@/pages/profile/pages/order'
-// import CompanyId from '@/pages/profile/pages/companyid'
 import Invitation from '@/pages/profile/pages/invitation'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -227,7 +214,6 @@ export default {
     'v-banner': Banner,
     'v-order': Order,
     'v-invitation': Invitation
-    // 'v-companyId': CompanyId
   },
   data() {
     return {
@@ -317,9 +303,6 @@ export default {
     },
     isNoMyMsg(isShow) {
       this.noMyMsg = isShow
-    },
-    isShowMsg(isShow) {
-      this.isShowNoCourse = isShow
     },
     updateUserInfo(flag) {
       this.isUpdate = flag
@@ -453,10 +436,17 @@ export default {
         (date.getMonth() + 1 < 10
           ? '0' + (date.getMonth() + 1)
           : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
-      let h = date.getHours() + ':'
-      let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
     },
     curriculumPayApply() {
@@ -508,12 +498,12 @@ export default {
 .bigTab {
   width: 1140px;
   & > div > div.el-tabs__content {
+    width: 926px;
     padding: 15px;
     margin-top: -15px;
     box-shadow: none;
   }
   &.profile .my-course.my-order {
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     overflow: initial;
   }
   &.profile .my-course#pane-tab-third .el-tabs__content {
@@ -636,6 +626,9 @@ export default {
           margin-left: 35px;
           font-size: 16px;
           color: #332a51;
+          i {
+            font-size: 12px;
+          }
         }
       }
       .tableFooter {
@@ -664,6 +657,9 @@ export default {
     height: 600px;
     background-color: #fff;
     text-align: center;
+    &.fillTop {
+      margin-top: -50px;
+    }
     img {
       width: 316px;
       height: 274px;

@@ -111,7 +111,7 @@
 
 
 <script>
-import { other, auth, home } from '~/lib/v1_sdk/index'
+import { other, auth, home, players, coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -129,7 +129,7 @@ export default {
       curriculumcartids: {
         cartid: null
       },
-      ischeck: null,
+      ischeck: '',
       mediaRW: 28,
       mediaLW: 72,
       mediaRInner: true,
@@ -307,7 +307,7 @@ export default {
     },
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
-        home.getEvaluateTags().then(response => {
+        coursedetail.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('5')
@@ -456,7 +456,16 @@ export default {
         player.volume(volume)
       }
       player.pause()
-      var socket = new io('http://ceshi.1911edu.com:2120')
+      var link = window.location.origin
+      if (
+        link === 'http://frontend.1911edu.com' ||
+        link == 'http://localhost:8080'
+      ) {
+        link = 'http://ceshi.1911edu.com:2120'
+      } else {
+        link = 'http://api.1911edu.com:2120'
+      }
+      var socket = new io(link) //'http://ceshi.1911edu.com:2120'
       // 连接socket
       socket.on('connect', function() {
         // console.log('已连接')
@@ -500,15 +509,12 @@ export default {
           // this.ischeck = item.id
         }, 1000)
 
-        this.ischeck = persistStore.get('catalogId')
-        this.playing = this.playImg
-      })
-      player.on('play', function() {
-        this.playing = this.pauseImg
+        that.ischeck = persistStore.get('catalogId')
+        that.playing = that.playImg
       })
       // 计时器
       return new Promise((resolve, reject) => {
-        home.getPlayerInfos(this.playerForm).then(response => {
+        players.getPlayerInfos(this.playerForm).then(response => {
           if (response.status === '100100') {
             this.goShoppingCart(response.msg)
           } else if (response.status === '100006') {
@@ -516,6 +522,8 @@ export default {
               confirmButtonText: '确定',
               callback: action => {
                 this.signOuts()
+                //初始化首页数据
+                this.$bus.$emit('reLogin', true)
                 this.$bus.$emit('loginShow', true)
               }
             })
@@ -548,7 +556,7 @@ export default {
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+        players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
           // console.log(response)
           // console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
@@ -603,39 +611,35 @@ export default {
         this.showEvaluate = false
         return false
       }
-      if (this.isStudy) {
-        this.addEvaluateForm.ids = persistStore.get('curriculumId')
-        this.addEvaluateForm.evaluatecontent = this.word
-        this.addEvaluateForm.scores = this.evaluate.eltnum
-        this.addEvaluateForm.tag = this.addEvaluateForm.tag
-          .toString()
-          .replace(/,/g, '#')
-        return new Promise((resolve, reject) => {
-          home.addEvaluate(this.addEvaluateForm).then(response => {
-            // console.log(response)
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-            if (response.status === 0) {
-              this.showEvaluate = false
-              this.iseve = 1
-            }
+      // if (this.isStudy) {
+      this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.evaluatecontent = this.word
+      this.addEvaluateForm.scores = this.evaluate.eltnum
+      this.addEvaluateForm.tag = this.addEvaluateForm.tag
+        .toString()
+        .replace(/,/g, '#')
+      return new Promise((resolve, reject) => {
+        home.addEvaluate(this.addEvaluateForm).then(response => {
+          // console.log(response)
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
           })
           // if (response.status === 0) {
           //   this.showEvaluate = false
           //   this.iseve = 1
           // }
         })
-      } else {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '您还没有观看该课程，请先观看再来评论吧！'
-        })
-        this.showEvaluate = false
-      }
+      })
+      // } else {
+      //   this.$message({
+      //     showClose: true,
+      //     type: 'error',
+      //     message: '您还没有观看该课程，请先观看再来评论吧！'
+      //   })
+      //   this.showEvaluate = false
+      // }
     },
     // 判断是收藏还是为收藏
     collection() {
@@ -754,5 +758,4 @@ export default {
   }
 }
 </style>
-
 

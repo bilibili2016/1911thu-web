@@ -11,7 +11,7 @@
         </span>
         <!-- {{bar}} -->
         <p @click="handleCatalog(index,catalog)">
-          <span class="fl barName">{{bar.video_number}} {{bar.title}} （{{bar.video_time}}分钟)</span>
+          <span class="fl barName">{{bar.video_number}}{{bar.title}}({{bar.video_time}}分钟)</span>
           <span v-if="bar.percent === 0"></span>
           <span v-else>
             <!-- 课程目录进度条 -->
@@ -21,17 +21,18 @@
           <!-- {{bar}} -->
           <span v-if="isAuthenticated" class="fr">
             <span v-if="privileMsg === false">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看look_at=2</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
               <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
             </span>
             <span v-if="privileMsg === true">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看look_at=2</span>
-              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看look_at=1</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
             </span>
           </span>
           <span v-else class="fr clearfix">
-            <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="buyMask">立即试看look_at=2</span>
-            <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
+            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看</span>
+            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看</span>
+            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程</span>
           </span>
         </p>
         <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>

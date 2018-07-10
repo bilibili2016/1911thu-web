@@ -1,12 +1,3 @@
-/*
- * @Author: Allasm98.zhaoliang
- * @Date: 2018-04-26 18:06:23
- * @Last Modified by: Allasm98.zhaoliang
- * @Last Modified time: 2018-07-06 11:08:41
- * @File Type:  登陆的store
- * @Describe:
- */
-
 import { isNull } from 'lodash'
 import { storeLog as log } from '~/lib/core/logger'
 import { store as persistStore } from '~/lib/core/store'
@@ -16,6 +7,8 @@ persistStore.defaults({
   user: null,
   token: null,
   cid: null,
+  cg: null,
+  did: null,
   pid: null,
   gid: null,
   hsg: null,
@@ -25,12 +18,16 @@ persistStore.defaults({
   productsNum: null,
   number: null,
   index: null,
-  tid: null
+  tid: null,
+  cindex: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
 let cid = persistStore.get('cid')
+let cg = persistStore.get('cg')
+let cindex = persistStore.get('cindex')
 let pid = persistStore.get('pid')
+let did = persistStore.get('did')
 let gid = persistStore.get('gid')
 let hsg = persistStore.get('hsg')
 let nid = persistStore.get('nid')
@@ -47,7 +44,9 @@ export const MUTATION = {
   refresh: 'refresh',
   me: 'me',
   setCid: 'set-cid',
+  setCg: 'set-cg',
   setPid: 'set-pid',
+  setDid: 'set-did',
   setGid: 'set-gid',
   setHsg: 'set-hsg',
   setNid: 'set-nid',
@@ -62,6 +61,7 @@ export const state = () => ({
   user,
   token,
   cid,
+  did,
   pid,
   gid,
   hsg,
@@ -71,7 +71,9 @@ export const state = () => ({
   productsNum,
   number,
   index,
-  tid
+  cindex,
+  tid,
+  cg
 })
 export const getters = {
   isAuthenticated(state) {
@@ -98,11 +100,20 @@ export const mutations = {
   [MUTATION.me](state, { user }) {
     state.user = user
   },
-  [MUTATION.setCid](state, { cid }) {
+  [MUTATION.setCid](state, { cid, cindex, pid, kid }) {
     state.cid = cid
+    state.cindex = cindex
+    state.pid = pid
+    state.kid = kid
+  },
+  [MUTATION.setCg](state, { cg }) {
+    state.cg = cg
   },
   [MUTATION.setPid](state, { pid }) {
     state.pid = pid
+  },
+  [MUTATION.setDid](state, { did }) {
+    state.did = did
   },
   [MUTATION.setGid](state, { gid }) {
     state.gid = gid
@@ -133,6 +144,24 @@ export const mutations = {
   }
 }
 export const actions = {
+  // 单点登录标记
+  async setDid({ commit, state }, { dids }) {
+    try {
+      let did = dids
+      console.log(did, 'did')
+      persistStore.set('did', did)
+      commit(MUTATION.setDid, {
+        did
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return did
+  },
   async setToken({ commit, state }, { tokens }) {
     try {
       let token = tokens
@@ -214,12 +243,19 @@ export const actions = {
     }
     return user
   },
-  async setCid({ commit, state }, { cids }) {
+  // 设置点击tab分类大类id 小类id 以及大类的index
+  async setCid({ commit, state }, { cids, indexs, pids, kids }) {
     try {
-      let cid = cids
+      let [cid, cindex, pid, kid] = [cids, indexs, pids, kids]
       persistStore.set('cid', cid)
+      persistStore.set('cindex', cindex)
+      persistStore.set('pid', pid)
+      persistStore.set('kid', kid)
       commit(MUTATION.setCid, {
-        cid
+        cid,
+        cindex,
+        pid,
+        kid
       })
     } catch (e) {
       if (e instanceof ServerError) {
@@ -229,6 +265,23 @@ export const actions = {
       }
     }
     return cid
+  },
+  // 设置category 传入类型 （tab进入,经典课程，免费课程,选课)
+  async setCg({ commit, state }, { cgs }) {
+    try {
+      let cg = cgs
+      persistStore.set('cg', cg)
+      commit(MUTATION.setCg, {
+        cg
+      })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return pid
   },
   async setPid({ commit, state }, { pids }) {
     try {
