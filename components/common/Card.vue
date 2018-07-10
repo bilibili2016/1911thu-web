@@ -363,6 +363,7 @@
                 </div>
                 <div class="study clearfix" v-else>
                   <p>{{courseList.introduction}}</p>
+                  <p class="soldOut fl" v-if="courseList.status =='2'">此课程已下架</p>
                   <div class="common-button">
                     <div v-if="isAuthenticated">
                       <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习6</el-button> -->
@@ -1285,9 +1286,9 @@ export default {
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {
   margin: 0 30px 50px 0;
-  &:nth-child(4n + 4) {
-    // margin-right: 24px;
-  }
+  // &:nth-child(4n + 4) {
+  // margin-right: 24px;
+  // }
   &:nth-child(3n + 3) {
     margin-right: 0;
   }
@@ -1885,6 +1886,9 @@ export default {
           color: rgba(34, 34, 34, 1);
           line-height: 30px;
           margin-bottom: 20px;
+          &.soldOut {
+            text-decoration: underline;
+          }
         }
         h4 {
           float: left;
@@ -1896,9 +1900,6 @@ export default {
             }
             &:last-child {
               font-size: 14px;
-            }
-            &.soldOut {
-              text-decoration: underline;
             }
           }
         }

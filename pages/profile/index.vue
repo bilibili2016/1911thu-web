@@ -34,7 +34,7 @@
               <el-tab-pane label="学习中" name="first">
                 <v-card v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-card>
                 <div class="pagination" v-if="newDataing  && newDataing.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="studyPageChange"></el-pagination>
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg1.pagesize" :pager-count="5" :page-count="pagemsg1.pagesize" :current-page="pagemsg1.page" :total="pagemsg1.total" @current-change="studyPageChange"></el-pagination>
                 </div>
                 <div class="content" v-else>
                   <div class="noCourse">
@@ -47,7 +47,7 @@
               <el-tab-pane label="已完成" name="second">
                 <v-card v-if="newDataReady && newDataReady.length>0" :data="newDataReady" :config="configTwo"></v-card>
                 <div class="pagination" v-if="newDataReady && newDataReady.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="readyStudyPageChange"></el-pagination>
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
                 </div>
                 <div class="content" v-else>
                   <div class="noCourse">
@@ -60,7 +60,7 @@
               <el-tab-pane label="我的收藏" name="third">
                 <v-card v-if="collectionData && collectionData.length>0" :data="collectionData" :config="configZero"></v-card>
                 <div class="pagination" v-if="collectionData && collectionData.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="collectionPageChange"></el-pagination>
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg3.pagesize" :pager-count="5" :page-count="pagemsg3.pagesize" :current-page="pagemsg3.page" :total="pagemsg3.total" @current-change="collectionPageChange"></el-pagination>
                 </div>
                 <div class="content" v-else>
                   <div class="noCourse">
@@ -260,10 +260,20 @@ export default {
         pages: 0,
         limits: 12
       },
-      pagemsg: {
+      pagemsg1: {
         page: 1,
         pagesize: 12,
-        total: 5
+        total: 12
+      },
+      pagemsg2: {
+        page: 1,
+        pagesize: 12,
+        total: 12
+      },
+      pagemsg3: {
+        page: 1,
+        pagesize: 12,
+        total: 12
       },
       studyData: [],
       newDataing: [],
@@ -331,10 +341,6 @@ export default {
     updateUserInfo(flag) {
       this.isUpdate = flag
     },
-    // 跳转方法
-    goLink(item) {
-      this.$router.push(item)
-    },
     // 订单详情 返回上一步到我的订单
     goBack() {
       this.showOrderList = true
@@ -347,28 +353,37 @@ export default {
     handleActive(item) {
       this.value = '查看全部'
       if (item.name == 'first') {
+        this.pagemsg1.total = 1
         this.studyCurriculumList()
       } else if (item.name == 'second') {
+        this.pagemsg2.total = 1
         this.readyStudyCurriculumList()
       } else if (item.name == 'third') {
+        this.pagemsg3.total = 1
         this.collectionList()
       }
     },
     // 切换 我的学习中分类
     changeNav(item) {
       if (this.activeNames == 'third') {
-        this.styleForm.categoryId = item
-        this.collectionList()
+        this.collectionForm.categoryId = item
+        return new Promise((resolve, reject) => {
+          home.collectionList(this.collectionForm).then(response => {
+            this.collectionData = response.data.curriculumList
+            this.pagemsg2.total = response.data.pageCount
+            resolve(true)
+          })
+        })
       } else {
         if (this.activeNames == 'first') {
           this.styleForm.types = 1
           this.styleForm.categoryId = item
-          this.styleForm.pages = 0
+          this.styleForm.pages = 1
           this.styleForm.limits = 12
           return new Promise((resolve, reject) => {
             home.studyCurriculumList(this.styleForm).then(response => {
               this.newDataing = response.data.curriculumList
-              this.pagemsg.total = response.data.pageCount
+              this.pagemsg1.total = response.data.pageCount
               for (let item of response.data.curriculumList) {
                 item.percent = Number(item.percent)
               }
@@ -378,12 +393,12 @@ export default {
         } else if (this.activeNames == 'second') {
           this.styleForm.types = 2
           this.styleForm.categoryId = item
-          this.styleForm.pages = 0
+          this.styleForm.pages = 1
           this.styleForm.limits = 12
           return new Promise((resolve, reject) => {
             home.studyCurriculumList(this.styleForm).then(response => {
               this.newDataReady = response.data.curriculumList
-              this.pagemsg.total = response.data.pageCount
+              this.pagemsg2.total = response.data.pageCount
               resolve(true)
             })
           })
@@ -409,12 +424,12 @@ export default {
     studyCurriculumList() {
       this.styleForm.types = 1
       this.styleForm.categoryId = 0
-      this.styleForm.pages = 0
+      this.styleForm.pages = 1
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
           this.newDataing = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
+          this.pagemsg1.total = response.data.pageCount
           for (let item of response.data.curriculumList) {
             item.percent = Number(item.percent)
           }
@@ -424,13 +439,13 @@ export default {
     },
     // 学习中 分页切换
     studyPageChange(val) {
-      this.pagemsg.page = val
+      this.pagemsg1.page = val
       this.styleForm.pages = val
       this.styleForm.types = 1
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
           this.newDataing = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
+          this.pagemsg1.total = response.data.pageCount
           for (let item of response.data.curriculumList) {
             item.percent = Number(item.percent)
           }
@@ -457,25 +472,25 @@ export default {
     readyStudyCurriculumList() {
       this.styleForm.types = 2
       this.styleForm.categoryId = 0
-      this.styleForm.pages = 0
+      this.styleForm.pages = 1
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
           this.newDataReady = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
+          this.pagemsg2.total = response.data.pageCount
           resolve(true)
         })
       })
     },
     // 已完成 分页切换
     readyStudyPageChange(val) {
-      this.pagemsg.page = val
+      this.pagemsg2.page = val
       this.styleForm.pages = val
       this.styleForm.types = 1
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
           this.newDataReady = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
+          this.pagemsg2.total = response.data.pageCount
           resolve(true)
         })
       })
@@ -486,20 +501,19 @@ export default {
       return new Promise((resolve, reject) => {
         home.collectionList(this.collectionForm).then(response => {
           this.collectionData = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
+          this.pagemsg3.total = response.data.pageCount
           resolve(true)
         })
       })
-      this.goLink('/course/pages/categoryd')
     },
     // 收藏列表 分页切换
-    readyStudyPageChange(val) {
-      this.pagemsg.page = val
+    collectionPageChange(val) {
+      this.pagemsg3.page = val
       this.collectionForm.pages = val
       return new Promise((resolve, reject) => {
         home.collectionList(this.collectionForm).then(response => {
           this.collectionData = response.data.curriculumList
-          this.pagemsg.total = response.data.pageCount
+          this.pagemsg3.total = response.data.pageCount
           resolve(true)
         })
       })
@@ -570,7 +584,7 @@ export default {
         })
       })
     },
-    // 格式化时间
+    // 格式化时间戳
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
       let Y = date.getFullYear() + '-'

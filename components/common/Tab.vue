@@ -108,26 +108,35 @@ export default {
   width: 316px;
   height: 86px;
   border-radius: 8px;
-  // border: 1px red solid;
   margin: 20px 53px 20px 30px;
-  // width: 0pc
+  transition: all 300ms;
+  overflow: hidden;
   position: relative;
   .picture-style {
     position: absolute;
     top: 25px;
     left: 85px;
     font-size: 18px;
-    font-family: MicrosoftYaHei;
     color: rgba(255, 254, 254, 1);
   }
   img {
-    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 316px;
+    height: 86px;
+    transition: all 350ms;
   }
   &:hover {
-    border-radius: 8px;
     box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
     .picture-style {
       color: #fff !important;
+    }
+    img {
+      width: 322px;
+      height: 92px;
+      left: -3px;
+      top: -3px;
     }
   }
 }
