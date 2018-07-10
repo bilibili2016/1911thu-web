@@ -36,12 +36,20 @@
   background: url('http://papn9j3ys.bkt.clouddn.com/degree-bg.png') no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
+  position: relative;
   .degree-wrapper {
     width: 1100px;
     min-height: 665px;
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     margin: auto;
     display: table;
+    .degree-con {
+      position: relative;
+    }
   }
 
   .left {
@@ -142,8 +150,8 @@
   }
 }
 
-// @media screen and (max-width: 1920px) {
-//   .degree {
-//     min-height: 815px;
-//   }
-// }
+@media screen and (min-width: 1920px) {
+  .degree {
+    min-height: 815px;
+  }
+}

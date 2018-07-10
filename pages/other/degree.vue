@@ -1,5 +1,5 @@
 <template>
-  <div class="degree" ref="ref">
+  <div class="degree" ref="degree">
     <!-- <div class="topImg">
       <img src="http://papn9j3ys.bkt.clouddn.com/degreeBg.png" alt="">
     </div>
@@ -78,8 +78,10 @@ export default {
       .offsetHeight
     let windowHeight = document.documentElement.clientHeight
 
-    this.$refs.ref.style.minHeight =
+    this.$refs.degree.style.height =
       windowHeight - headerHeight - footerHeight + 'px'
+    // this.$refs.degree.style.minHeight =
+    //   windowHeight - headerHeight - footerHeight + 'px'
   }
 }
 </script>

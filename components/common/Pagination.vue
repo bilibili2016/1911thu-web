@@ -1,17 +1,17 @@
 <template>
   <div class="center">
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="data.pageSize" :page-count="data.pagesize" :current-page="data.page" @current-change="handleCurrentChange" :total="data.total"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handlePageChange"></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['data'],
+  props: ['pagemsg'],
   methods: {
-    handleCurrentChange(val) {
-      this.$emit('page', val)
+    handlePageChange(val) {
+      this.$emit('handlePageChange', val)
     }
   },
   pageSize: {

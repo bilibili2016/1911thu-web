@@ -5,54 +5,70 @@
   background-image: url('http://papn9j3ys.bkt.clouddn.com/profile_banner01.png');
   background-size: 100% 100%;
   margin-bottom: 64px;
+  .center-box {
+    position: relative;
+  }
+  img.topImg {
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    position: absolute;
+    left: 6px;
+    top: 56px;
+  }
+  .up-user-avtor {
+    position: absolute;
+    top: 56px;
+    left: 6px;
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    overflow: hidden;
+    input {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: block !important;
+      width: 100%;
+      height: 30px;
+      opacity: 0;
+      z-index: 2;
+    }
+    span {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 30px;
+      width: 108px;
+      color: #fff;
+      line-height: 30px;
+      text-align: center;
+      background: rgba(143, 74, 203, 0.5);
+      cursor: pointer;
+    }
+    .el-upload {
+      width: 100%;
+    } // .el-button{
+    //   text-align: center;
+    //   padding: 10px 20px;
+    //   font-size: 14px;
+    //   background: rgba(143, 74, 203, .5);
+    //   border: none;
+    // }
+  }
   .avator {
     float: left;
+    height: 148px;
+    overflow: hidden;
     .img {
       width: 120px;
       height: 120px;
       margin-top: 50px;
       position: relative;
       border-radius: 50%;
-      border: solid 6px rgba(255, 255, 255, 0.5);
+      border: solid 6px #bd9aff;
       overflow: hidden;
-      background: #fff;
-      img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-      }
-      .up-user-avtor {
-        position: absolute;
-        bottom: 0;
-        height: 30px;
-        width: 100%;
-        background: rgba(143, 74, 203, 0.5);
-        input {
-          position: absolute;
-          left: 0;
-          right: 0;
-          display: block !important;
-          width: 100%;
-          height: 100%;
-          opacity: 0;
-        }
-        span {
-          display: block;
-          color: #fff;
-          line-height: 30px;
-          text-align: center;
-        }
-        .el-upload {
-          width: 100%;
-        }
-        // .el-button{
-        //   text-align: center;
-        //   padding: 10px 20px;
-        //   font-size: 14px;
-        //   background: rgba(143, 74, 203, .5);
-        //   border: none;
-        // }
-      }
     }
   }
 }

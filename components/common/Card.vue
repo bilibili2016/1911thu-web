@@ -12,7 +12,7 @@
         </div>
       </div>
     </template>
-    <!-- profile个人信息模板 新上好课模板-->
+    <!-- profile个人信息模板 新上好课模板 学习中-->
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
@@ -29,12 +29,12 @@
             </div>
             <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
-              <!-- {{card}} -->
               <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+              <el-button v-if="card.percent <1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-else type="primary" plain @click="goToPlay(card)">继续学习</el-button>
             </div>
             <el-row>
               <!-- 名字 -->
@@ -659,6 +659,11 @@ export default {
 
       window.open(window.location.origin + '/course/player')
     },
+    goToPlay(item) {
+      persistStore.set('curriculumId', item.id)
+      persistStore.set('catalogId', item.catalog_id)
+      window.open(window.location.origin + '/course/player')
+    },
     // 获取详情默认播放小节id
     getdefaultCurriculumCatalogs() {
       this.getdefaultForm.curriculumid = this.courseList.id
@@ -891,7 +896,9 @@ export default {
           : date.getMonth() + 1) + '-'
       let D =
         (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-      let h = date.getHours() + ':'
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
       let m =
         (date.getMinutes() * 1 < 10
           ? '0' + date.getMinutes()
@@ -1278,7 +1285,7 @@ export default {
 #pane-third .card-category .card-list {
   margin: 0 30px 50px 0;
   &:nth-child(4n + 4) {
-    margin-right: 24px;
+    // margin-right: 24px;
   }
   &:nth-child(3n + 3) {
     margin-right: 0;

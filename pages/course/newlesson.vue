@@ -1,7 +1,6 @@
 <template>
   <div class="goodLesson new-lesson">
     <div class="topImg">
-      <!-- <img :src="atopImg" alt=""> -->
       <div class="top-con">
         <p class="desc-one">走心课程</p>
         <p class="desc-two">实力覆盖</p>
@@ -22,22 +21,18 @@
     <div class="card-button" v-else>
       <el-button type="primary">下拉加载更多</el-button>
     </div>
-    <!-- <v-more @getMoreData ="getMoreData"></v-more> -->
   </div>
 </template>
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
-import CustomMore from '@/components/common/More.vue'
-import { home } from '~/lib/v1_sdk/index'
+import { home, newlesson } from '~/lib/v1_sdk/index'
 export default {
   components: {
-    'v-card': CustomCard,
-    'v-more': CustomMore
+    'v-card': CustomCard
   },
   data() {
     return {
-      atopImg: 'http://papn9j3ys.bkt.clouddn.com/newLessonBanner.png',
       config: {
         card_type: 'goodlesson'
       },
@@ -54,23 +49,23 @@ export default {
     }
   },
   methods: {
+    // 获取最新课程列表
     getNewCourseList() {
-      return new Promise((resolve, reject) => {
-        home.getNewCourseList(this.newsCurriculumForm).then(response => {
-          if (response.data.curriculumList.length === 0) {
-            this.noMoreData = true
-          }
-          this.courseList = this.courseList.concat(response.data.curriculumList)
-          for (var i = 0; i < this.courseList.length; i++) {
-            this.$set(this.courseList[i], 'isCartNew', 0)
-          }
-          this.pageCount = response.data.pageCount
-          this.scrollTopMsg = true
+      newlesson.getNewCourseList(this.newsCurriculumForm).then(response => {
+        if (response.data.curriculumList.length === 0) {
+          this.noMoreData = true
+        }
+        this.courseList = this.courseList.concat(response.data.curriculumList)
+        for (var i = 0; i < this.courseList.length; i++) {
+          this.$set(this.courseList[i], 'isCartNew', 0)
+        }
+        this.pageCount = response.data.pageCount
+        this.scrollTopMsg = true
 
-          resolve(true)
-        })
+        resolve(true)
       })
     },
+    // 下拉查看更多
     getMoreData() {
       if (this.pageCount === this.courseList.length) {
         this.$message({
@@ -82,39 +77,40 @@ export default {
         this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
         this.getNewCourseList()
       }
+    },
+    // 监听下拉刷新方法
+    downRefresh() {
+      window.addEventListener('scroll', () => {
+        var scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop
+        var windowHeight =
+          document.documentElement.clientHeight || document.body.clientHeight
+        var scrollHeight =
+          document.documentElement.scrollHeight || document.body.scrollHeight
+        if (scrollTop + windowHeight == scrollHeight) {
+          if (this.scrollTopMsg === true) {
+            this.scrollTopMsg = false
+            this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
+            this.getNewCourseList()
+          }
+        }
+      })
+    },
+    //初始化data
+    initData() {
+      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    },
+    // 初始化所有方法
+    initAll() {
+      this.initData()
+      this.getNewCourseList()
+      this.downRefresh()
     }
   },
   mounted() {
-    this.getNewCourseList()
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    // 缓存指针
-    let _this = this
-    // 设置一个开关来避免重负请求数据
-    let sw = true
-    // 此处使用node做了代理
-
-    // 注册scroll事件并监听
-    window.addEventListener('scroll', () => {
-      var scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop
-      //变量windowHeight是可视区的高度
-      var windowHeight =
-        document.documentElement.clientHeight || document.body.clientHeight
-      //变量scrollHeight是滚动条的总高度
-      var scrollHeight =
-        document.documentElement.scrollHeight || document.body.scrollHeight
-      if (scrollTop + windowHeight == scrollHeight) {
-        if (this.scrollTopMsg === true) {
-          this.scrollTopMsg = false
-          this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
-          this.getNewCourseList()
-        }
-      }
-    })
+    this.initAll()
   }
 }
 </script>
-<style lang="scss" scoped>
-</style>
 
