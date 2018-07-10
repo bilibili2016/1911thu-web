@@ -111,7 +111,7 @@
 
 
 <script>
-import { other, auth, home } from '~/lib/v1_sdk/index'
+import { other, auth, home, players, coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -307,7 +307,7 @@ export default {
     },
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
-        home.getEvaluateTags().then(response => {
+        coursedetail.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('5')
@@ -514,7 +514,7 @@ export default {
       })
       // 计时器
       return new Promise((resolve, reject) => {
-        home.getPlayerInfos(this.playerForm).then(response => {
+        players.getPlayerInfos(this.playerForm).then(response => {
           if (response.status === '100100') {
             this.goShoppingCart(response.msg)
           } else if (response.status === '100006') {
@@ -556,7 +556,7 @@ export default {
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+        players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
           // console.log(response)
           // console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
@@ -758,5 +758,4 @@ export default {
   }
 }
 </style>
-
 

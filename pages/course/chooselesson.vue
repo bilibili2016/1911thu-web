@@ -32,10 +32,6 @@
           <el-tab-pane label="最新" name="first"></el-tab-pane>
           <el-tab-pane label="最热" name="second"></el-tab-pane>
         </el-tabs>
-        <!-- <div class="pages"><el-pagination layout=" pager, prev, next" :total="1"></el-pagination></div> -->
-        <!-- <el-switch v-model="value3" active-text="按月付费" inactive-text="按年付费" class="switch"> -->
-        <!-- <el-switch v-model="value3" active-text="隐藏已参加课程" class="switch">
-            </el-switch> -->
       </div>
       <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>
@@ -217,7 +213,7 @@ export default {
       this.curriculumList()
     },
     changeTab(item) {
-      console.log(item, 'item')
+      // console.log(item, 'item')
     },
     handleClick(tab, event) {
       if (tab.name == 'first') {

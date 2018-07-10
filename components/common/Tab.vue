@@ -20,7 +20,6 @@
                 <img :src="child.picture" alt="">
                 <span class="picture-style">{{child.category_name}}</span>
               </span>
-
             </p>
           </div>
           <div class="courseMsg" v-if="item.is_picture_show === '0'">
@@ -40,7 +39,7 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
+// import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['classify', 'courses', 'tab', 'active', 'classtext'],
   data() {
@@ -48,18 +47,20 @@ export default {
       itemID: null,
       actived: null,
       cidform: {
-        cids: ''
-      },
-      pidform: {
+        cids: '',
+        indexs: '',
         pids: ''
       },
       kidForm: {
         kids: null
+      },
+      cgForm: {
+        cgs: null
       }
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid', 'setKid']),
+    ...mapActions('auth', ['setCid', 'setPid', 'setKid', 'setCg']),
     handleClick(item, index) {
       this.cidform.cids = Number(item.index)
       this.setCid(this.cidform)
@@ -71,16 +72,18 @@ export default {
       this.$router.push('/course/coursedetail')
     },
     handlePid(item, index) {
+      this.cgForm.cgs = '0'
+      this.setCg(this.cgForm)
+      this.cidform.pids = item.id
+      this.setCid(this.cidform)
       window.open(window.location.origin + '/course/category')
       // this.$router.push('/course/classifycourse')
-
-      this.pidform.pids = item.id
-      this.setPid(this.pidform)
     },
     selectCollege(index, item) {
       this.big = index
       this.itemID = index
       this.cidform.cids = item.id
+      this.cidform.indexs = index
       this.$bus.$emit('collegeId', item.id)
       this.setCid(this.cidform)
     },
