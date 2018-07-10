@@ -98,7 +98,7 @@
         <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
           {{item.value}}
         </div>
-        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="word">
+        <el-input type="textarea" :rows="4" placeholder="请输入您的评价" v-model="word">
         </el-input>
         <div class="commitBug">
           <el-button round @click.native="addEvaluate">提交</el-button>
@@ -284,6 +284,7 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
+      this.addEvaluateForm.tag = []
     },
     getBtnContent(val, index) {
       if (val.isCheck === true) {
@@ -611,35 +612,39 @@ export default {
         this.showEvaluate = false
         return false
       }
-      // if (this.isStudy) {
+
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
       this.addEvaluateForm.evaluatecontent = this.word
-      this.addEvaluateForm.scores = this.evaluate.eltnum
+      this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
+
+      // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
-          // console.log(response)
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: response.msg
-          })
-          // if (response.status === 0) {
-          //   this.showEvaluate = false
-          //   this.iseve = 1
-          // }
+          if (response.status === '100100') {
+            this.$message({
+              showClose: true,
+              type: 'warning',
+              message: response.msg
+            })
+          } else {
+            this.addEvaluateForm.tag = []
+            for (let item of this.btnData) {
+              this.$set(item, 'isCheck', false)
+            }
+            this.word = ''
+            this.showEvaluate = false
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
+          }
         })
       })
-      // } else {
-      //   this.$message({
-      //     showClose: true,
-      //     type: 'error',
-      //     message: '您还没有观看该课程，请先观看再来评论吧！'
-      //   })
-      //   this.showEvaluate = false
-      // }
     },
     // 判断是收藏还是为收藏
     collection() {
