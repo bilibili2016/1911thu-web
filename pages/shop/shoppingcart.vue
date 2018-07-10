@@ -440,6 +440,7 @@ export default {
         }
 
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
+          //全选
           return new Promise((resolve, reject) => {
             home.shopCartaddChecked(this.addArray).then(res => {
               // console.log(res)
@@ -447,6 +448,7 @@ export default {
             })
           })
         } else {
+          //全不选
           return new Promise((resolve, reject) => {
             home.shopCartremoveChecked(this.removeArray).then(res => {
               // console.log(res)
@@ -466,7 +468,6 @@ export default {
     //   });
     // },
     showCommit() {
-      // console.log(this.addArray)
       // this.showInfo = true
       // this.$router.push('/shop/checkedcourse');
       this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口

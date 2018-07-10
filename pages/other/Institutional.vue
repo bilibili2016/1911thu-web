@@ -66,7 +66,7 @@
         <ul class="list clearfix">
           <li v-for="li in courseList" :key="li.id" class="list-item">
             <p class="item-desc1">{{li.title}}</p>
-            <p class=item-desc2>{{li.number}}</p>
+            <!-- <p class=item-desc2>{{li.number}}</p> -->
           </li>
           <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
             <div class="item-img">
@@ -183,33 +183,33 @@ export default {
       courseList: [
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_1.png',
-          title: '通识性课程体系（干部通用学院）',
+          title: '干部网络学院',
           number: '（10余门课程）'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_2.png',
-          title: '系统专题性课程（党政系统学院）',
+          title: '在线商学院',
           number: '（14个专题，110余门课程）',
           link: '/other/enterprisecustom'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_3.png',
-          title: '在线商学院',
+          title: '职场学院',
           number: '（12个模块，160余门课程）'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_4.png',
-          title: '行业学院',
+          title: '党政委托项目',
           number: '（14个模块，150余门课程）'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_5.png',
-          title: '职场学院',
+          title: '企业内训项目',
           number: '（6个模块，初期20余门课程）'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_6.png',
-          title: '直播/热点课程（热点课程）',
+          title: '管理公开项目',
           number: '（11个行业，110余门课程）'
         }
       ],
