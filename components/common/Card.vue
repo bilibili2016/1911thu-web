@@ -363,7 +363,7 @@
                 </div>
                 <div class="study clearfix" v-else>
                   <p>{{courseList.introduction}}</p>
-                  <p class="soldOut fl" v-if="courseList.status =='2'">此课程已下架</p>
+                  <!-- <p class="soldOut fl" v-if="courseList.status =='2'">此课程已下架</p> -->
                   <div class="common-button">
                     <div v-if="isAuthenticated">
                       <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习6</el-button> -->
@@ -394,13 +394,14 @@
                   <h4 class="clearfix">
                     <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                     <p>已学时长</p>
-                    <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p>
+                    <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
                   </h4>
                   <div class="common-button">
                     <div>
                       <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                     </div>
-                    <div v-if="courseList.status =='1'">
+                    <!--  v-if="courseList.status =='1'" -->
+                    <div>
                       <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
                     </div>
                     <div class="lineProgress">
