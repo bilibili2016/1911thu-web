@@ -71,9 +71,12 @@
       .cpnInfo {
         p {
           color: #6d687f;
-          font-size: 16px;
-          padding: 15px 0 25px;
-          padding-left: 10px;
+          font-size: 14px;
+          padding: 0 0 10px;
+          // padding-left: 10px;
+        }
+        p:last-child {
+          padding-bottom: 20px;
         }
         .cpnInfoLi {
           font-size: 16px;
@@ -178,7 +181,7 @@
           width: 990px;
         }
         .invoiceWord i {
-          margin-right: 30px;
+          // margin-right: 30px;
         }
         .changeInvoice {
           color: #6417a6;
@@ -557,7 +560,7 @@
       height: 76px;
       text-align: center;
       line-height: 76px;
-      padding-left: 50px;
+      // padding-left: 50px;
       color: #6417a6;
     }
     .companyInfo {

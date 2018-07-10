@@ -150,8 +150,8 @@
   }
 }
 
-// @media screen and (max-width: 1920px) {
-//   .degree {
-//     min-height: 815px;
-//   }
-// }
+@media screen and (min-width: 1920px) {
+  .degree {
+    min-height: 815px;
+  }
+}

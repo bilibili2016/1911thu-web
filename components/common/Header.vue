@@ -103,7 +103,8 @@
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div>
+                <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
+                <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
                 <!--  -->
               </el-form-item>
               <el-form-item prop="passwords">
@@ -119,7 +120,7 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
-                <el-button :disabled="isClick" @click.native="signUp('registerData')">注册</el-button>
+                <el-button :disabled="isClick" class="registerUser" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
             <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
@@ -140,10 +141,10 @@
             <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
             <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
           </el-form-item>
-          <el-form-item prop="companyCodes">
+          <!-- <el-form-item prop="companyCodes">
             <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
             <span class="bindCompany">(可选)</span>
-          </el-form-item>
+          </el-form-item> -->
           <el-row>
             <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
           </el-row>
@@ -192,8 +193,11 @@ export default {
       return callback()
     }
     return {
-      judegExplorer: false,
-      isClick: false,
+      isloading: false, //注册按钮点击之后loading（体验）
+      codeInterval: null, //注册获取验证码定时循环
+      codeClick: false, //判断是否点击过 获取验证码（防重）
+      judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
+      isClick: false, //判断是否点击过注册按钮（防重）
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
@@ -478,12 +482,13 @@ export default {
               this.bindTelData.captchaDisable = true
               this.bindTelData.getCode =
                 this.bindTelData.seconds + '秒后重新发送'
-              let interval = setInterval(() => {
+              this.codeInterval = setInterval(() => {
                 if (this.bindTelData.seconds <= 0) {
                   this.bindTelData.getCode = '获取验证码'
                   this.bindTelData.seconds = 30
                   this.bindTelData.captchaDisable = false
-                  clearInterval(interval)
+                  this.codeClick = false
+                  clearInterval(this.codeInterval)
                 } else {
                   this.bindTelData.getCode =
                     --this.bindTelData.seconds + '秒后重新发送'
@@ -496,12 +501,14 @@ export default {
     },
     // 验证手机号是否存在
     verifyRgTel() {
+      this.codeClick = true
       if (this.errorTel.tel === this.registerData.phones) {
         this.$message({
           showClose: true,
           type: 'error',
           message: this.errorTel.msg
         })
+        this.codeClick = false
       } else {
         if (this.bindTelData.seconds == 30) {
           return new Promise((resolve, reject) => {
@@ -515,6 +522,7 @@ export default {
                   message: response.msg
                 })
                 this.bindTelData.captchaDisable = true
+                this.codeClick = false
               } else {
                 if (this.bindTelData.seconds === 30) {
                   this.errorTel.tel = null
@@ -571,6 +579,7 @@ export default {
     },
     // 注册 请求
     signUp(formName) {
+      this.isloading = true
       this.isClick = true
       this.registerData.ectpwd = encryption(this.registerData.passwords)
       this.$refs[formName].validate(valid => {
@@ -590,20 +599,24 @@ export default {
                 }
                 this.loadLogin = false
                 this.isClick = false
+                this.isloading = false
               })
             })
           } else {
             this.isClick = false
+            this.isloading = false
             return false
           }
         } else {
           this.isClick = false
+          this.isloading = false
         }
       })
     },
     // 登录 请求
     signIns(formName) {
       this.isClick = true
+      this.isloading = false
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -623,11 +636,13 @@ export default {
                 this.$bus.$emit('reLogin', true)
               }
               this.isClick = false
+              this.isloading = false
               // this.loadLogin = false
             })
           })
         } else {
           this.isClick = false
+          this.isloading = false
           return false
         }
       })
@@ -769,6 +784,11 @@ export default {
       this.lrFrame = false
       this.bgMsg = false
       this.emptyForm()
+      clearInterval(this.codeInterval)
+      this.bindTelData.getCode = '获取验证码'
+      this.bindTelData.seconds = 30
+      this.bindTelData.captchaDisable = false
+      this.codeClick = false
       clearInterval(this.getwxtime)
     },
     closeWechat() {
@@ -936,6 +956,16 @@ export default {
       this.signOut()
     }
     this.explorer()
+  },
+  watch: {
+    // 监测登陆注册切换时清除注册获取验证码定时器
+    activeName() {
+      clearInterval(this.codeInterval)
+      this.bindTelData.getCode = '获取验证码'
+      this.bindTelData.seconds = 30
+      this.bindTelData.captchaDisable = false
+      this.codeClick = false
+    }
   }
 }
 </script>
