@@ -34,8 +34,8 @@ import Info from '@/pages/home/components/info.vue'
 import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { store as persistStore } from '~/lib/core/store'
-
-import { home } from '~/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from 'vuex'
+import { home, newlesson } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-partner': Partner,
@@ -50,9 +50,9 @@ export default {
   },
   data() {
     return {
-      linkzero: '/course/classifylist',
+      linkzero: '/course/freelesson',
       linkone: '/course/newlesson',
-      linktwo: '/course/classifycourse',
+      linktwo: '/course/classifylesson',
       linkfours: '/news/list',
       linkfive: '/news/detail',
       freeData: [],
@@ -200,24 +200,14 @@ export default {
       loginMsg: false
     }
   },
-  beforeCreate() {
-    // this.getAll()
-  },
   created() {
-    let aa = persistStore.get('dandian')
-    this.getAll()
-  },
-  mounted() {
-    this.$bus.$on('loginMsg', data => {
-      if (data === true) {
-        this.loginMsg = true
-      }
-    })
-
-    this.$bus.$on('reLogin', data => {
+    if (this.did === '0') {
       this.getAll()
-    })
-    this.$bus.$emit('bannerShow', false)
+    } else {
+    }
+  },
+  computed: {
+    ...mapState('auth', ['did'])
   },
   methods: {
     async getAll() {
@@ -257,7 +247,7 @@ export default {
     },
     // 获取新上好课列表
     getNewCourseList() {
-      home.getNewCourseList(this.courseForm).then(response => {
+      newlesson.getNewCourseList(this.courseForm).then(response => {
         this.newData = response.data.curriculumList
       })
     },
@@ -291,6 +281,18 @@ export default {
         this.partnerList.list = response.data.collaborationEnterpriseList
       })
     }
+  },
+  mounted() {
+    this.$bus.$on('loginMsg', data => {
+      if (data === true) {
+        this.loginMsg = true
+      }
+    })
+
+    this.$bus.$on('reLogin', data => {
+      this.getAll()
+    })
+    this.$bus.$emit('bannerShow', false)
   }
 }
 </script>

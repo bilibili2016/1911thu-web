@@ -31,15 +31,6 @@
       </div>
       <div class="fr">
         <h5>邀请记录</h5>
-        <!-- <el-table :data="recordData" height="220" style="width: 100%">
-          <el-table-column prop="word" label="邀请好友" width="300">
-          </el-table-column>
-          <el-table-column prop="create_time" label="日期" width="230">
-          </el-table-column>
-          <div class="noCode" v-if="recordData.length === 0">
-            <img :src="noMsgImg" alt="">
-          </div>
-        </el-table> -->
         <div class="tables">
           <table :data="recordData" class="recordTable">
             <tr class="tr_header">

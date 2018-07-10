@@ -22,13 +22,10 @@
           </span>
 
         </span>
-        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1}">
+        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
           <i class="el-icon-star-on"></i>
-          <span v-if="this.collectMsg === 0">收藏</span>
-          <span v-else>收藏</span>
-          <!-- 已收藏 -->
+          <span>收藏</span>
         </span>
-        <!-- v-if="this.iseve === 0" -->
         <span class="fr elt" @click="showElt" v-if="this.iseve === 0">
           <i class="el-icon-edit"></i>课程评价
         </span>
@@ -101,7 +98,7 @@
         <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
           {{item.value}}
         </div>
-        <el-input type="textarea" :rows="4" placeholder="请输入您的评价" v-model="word">
+        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="word">
         </el-input>
         <div class="commitBug">
           <el-button round @click.native="addEvaluate">提交</el-button>
@@ -249,8 +246,7 @@ export default {
         types: 1,
         tag: [],
         curriculumcatalogid: ''
-      },
-      textarea: ''
+      }
     }
   },
   methods: {
@@ -288,22 +284,16 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
-      this.addEvaluateForm.tag = []
     },
-    unique(arr) {
-      var newArr = [arr[0]]
-      for (var i = 1; i < arr.length; i++) {
-        if (newArr.indexOf(arr[i]) == -1) {
-          newArr.push(arr[i])
-        }
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
       }
-      return newArr
-    },
-    remove(val) {
-      var index = this.indexOf(val)
-      if (index > -1) {
-        this.splice(index, 1)
-      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     handleCourse(item, index) {
       this.ischeck = item.id
@@ -327,23 +317,14 @@ export default {
       })
     },
     getBtnContent(val, index) {
-      // console.log(val, '这是val')
-
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)
-
-        for (var i = 0; i < this.addEvaluateForm.tag.length; i++) {
-          // document.write(cars[i] + '<br>')
-          if (this.addEvaluateForm.tag[i] === val.value) {
-            this.addEvaluateForm.tag.splice(i, 1)
-          }
-        }
       } else {
         this.$set(val, 'isCheck', true)
-        this.addEvaluateForm.tag.push(val.value)
-        this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
       }
-      console.log(this.addEvaluateForm.tag, '这是最后的tag')
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
@@ -630,38 +611,35 @@ export default {
         this.showEvaluate = false
         return false
       }
-
+      // if (this.isStudy) {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.evaluatecontent = this.word
-      this.addEvaluateForm.scores = this.rateModel
+      this.addEvaluateForm.scores = this.evaluate.eltnum
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
-      console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'warning',
-              message: response.msg
-            })
-          } else {
-            this.addEvaluateForm.tag = []
-            for (let item of this.btnData) {
-              this.$set(item, 'isCheck', false)
-            }
-            this.word = ''
-            this.showEvaluate = false
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-          }
+          // console.log(response)
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
+          })
+          // if (response.status === 0) {
+          //   this.showEvaluate = false
+          //   this.iseve = 1
+          // }
         })
       })
+      // } else {
+      //   this.$message({
+      //     showClose: true,
+      //     type: 'error',
+      //     message: '您还没有观看该课程，请先观看再来评论吧！'
+      //   })
+      //   this.showEvaluate = false
+      // }
     },
     // 判断是收藏还是为收藏
     collection() {
@@ -702,7 +680,6 @@ export default {
     }
   },
   mounted() {
-    this.addEvaluateForm.ids = persistStore.get('curriculumId')
     this.videoState = document.getElementById('movd')
     this.resize()
     var $config = {
@@ -781,5 +758,4 @@ export default {
   }
 }
 </style>
-
 

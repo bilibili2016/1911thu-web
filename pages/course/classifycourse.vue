@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="classification">
-      <div class="classification">
+      <!-- <div class="classification">
         <div class="clsTitle clearfix">
           <div class="fl hotBtn">
             <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -17,7 +17,8 @@
             </span>
           </div>
         </div>
-      </div>
+      </div> -->
+      <v-filter @selectActiveTab="selectActiveTab"></v-filter>
       <div class="classList">
         <ul>
           <li v-for="(item,index) in classList" :key="index" @click="bind(item.id,index)">
@@ -43,6 +44,7 @@ import CustomCard from '@/components/common/Card.vue'
 import CustomHots from '@/components/common/Hot.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
+import Filter from '@/pages/course/components/Filter'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { home } from '~/lib/v1_sdk/index'
 export default {
@@ -50,6 +52,7 @@ export default {
     'v-hots': CustomHots,
     'v-card': CustomCard,
     'v-page': CustomPagination,
+    'v-filter': Filter,
     'v-nothing': SearchNothing
   },
   data() {
@@ -79,7 +82,14 @@ export default {
         sortBy: null,
         onOff: 0
       },
-      activeName: null
+      activeName: null,
+      categoryForm: {
+        cids: null,
+        pids: null,
+        sortBy: 1,
+        pages: 1,
+        limits: 8
+      }
     }
   },
   computed: {
@@ -89,6 +99,13 @@ export default {
     bind(id, index) {
       this.checkedLi = index
       this.newsCurriculumForm.categoryId = id
+      this.recommendCurriculumList()
+    },
+    // 筛选最新最热
+    selectActiveTab(item) {
+      item.name === 'second'
+        ? (this.newsCurriculumForm.sortBy = 1)
+        : (this.newsCurriculumForm.sortBy = 2)
       this.recommendCurriculumList()
     },
     hideCourse() {
