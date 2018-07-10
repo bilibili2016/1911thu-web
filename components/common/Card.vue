@@ -393,12 +393,13 @@
                   <h4 class="clearfix">
                     <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                     <p>已学时长</p>
+                    <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p>
                   </h4>
                   <div class="common-button">
                     <div>
                       <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                     </div>
-                    <div>
+                    <div v-if="courseList.status =='1'">
                       <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
                     </div>
                     <div class="lineProgress">
@@ -1888,12 +1889,17 @@ export default {
         h4 {
           float: left;
           color: #222;
-          p:first-child {
-            font-size: 20px;
+          p {
             margin: 0;
-          }
-          p:last-child {
-            font-size: 14px;
+            &:first-child {
+              font-size: 20px;
+            }
+            &:last-child {
+              font-size: 14px;
+            }
+            &.soldOut {
+              text-decoration: underline;
+            }
           }
         }
 
