@@ -2,10 +2,10 @@
   <div>
     <div class="banner">
       <!-- banner -->
-      <!-- <v-carousel :items="items"></v-carousel> -->
-      <div class="popup-container" ref="popupContainer">
+      <v-carousel :items="items"></v-carousel>
+      <!-- <div class="popup-container" ref="popupContainer">
         <div class="img-flex"></div>
-      </div>
+      </div> -->
       <!-- 分类 -->
       <v-tab :classify="classify" :courses="courses" :tab="tabmsg"></v-tab>
       <!-- 定制 -->
