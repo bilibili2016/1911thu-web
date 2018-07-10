@@ -52,7 +52,7 @@
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
-            <i>{{this.addArray.curriculumcartid.length}}</i> 门课程</span>
+            <i>{{checkedCourse}}</i> 门课程</span>
         </div>
       </div>
     </div>
@@ -99,6 +99,8 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
     return {
+      prices: 0, //计算总价钱
+      checkedCourse: 0, //已选几门课程
       isNoMsg: false,
       loding: true,
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
@@ -216,16 +218,7 @@ export default {
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
     ...mapGetters('auth', ['isAuthenticated']),
-    prices() {
-      let p = (
-        Number(this.arraySum) *
-        10 *
-        (Number(this.numForm.number) * 10) /
-        100
-      ).toFixed(2)
 
-      return Math.abs(p)
-    },
     canSubmit() {
       if (this.addArray.curriculumcartid.length <= 0) {
         // this.$message({
@@ -241,6 +234,16 @@ export default {
       if (this.isRest) {
         this.handleSelectAllChange(val)
       }
+    },
+    prices() {
+      let p = (
+        Number(this.arraySum) *
+        10 *
+        (Number(this.numForm.number) * 10) /
+        100
+      ).toFixed(2)
+
+      return Math.abs(p)
     }
   },
   methods: {
@@ -330,33 +333,42 @@ export default {
               (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
               10
             return Object.assign({}, item, {
-              checkMsg: true
+              checkMsg: false
             })
           })
           this.courseList = body
-          this.selectAll = true
+          // this.selectAll = true
           this.loding = false
           this.numForm.number = response.data.number
 
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
-            this.selectAll = false
+            // this.selectAll = false
           }
+
+          console.log(this.addArray.curriculumcartid)
+          console.log(this.courseList)
         })
       })
     },
     handleSelectChange(item, index) {
       let shopIndex = indexOf(this.addArray.curriculumcartid, item.id)
+      console.log(shopIndex)
       if (shopIndex >= 0) {
+        //不选中
         this.addArray.curriculumcartid.splice(shopIndex, 1)
         this.arraySum =
           (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10
+        // console.log(this.arraySum)
       } else {
+        //选中
         this.addArray.curriculumcartid.push(item.id)
         this.arraySum =
           (Number(this.arraySum) * 10 + Number(item.present_price) * 10) / 10
       }
+      console.log(this.addArray.curriculumcartid)
+      console.log(this.courseList)
       if (this.addArray.curriculumcartid.length == this.courseList.length) {
         this.selectAll = true
         this.isRest = true
