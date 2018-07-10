@@ -213,7 +213,7 @@ export default {
     this.getClassicsList()
     this.getCidPidList()
     this.getcourseList()
-    // console.log(this.cg, 'ppp')
+    console.log(this.cg, 'ppp')
     if (this.cg === '2') {
       this.cidform.pids = '0'
       this.cidform.cids = '0'
