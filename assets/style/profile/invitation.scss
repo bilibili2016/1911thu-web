@@ -145,7 +145,7 @@
         .tr_header {
           height: 60px;
           line-height: 60px;
-          background-color: #EBE7ED;
+          background-color: #fafafa;
           text-align: center;
           color: #6417A6;
           font-size: 16px;
@@ -161,19 +161,15 @@
         .tr_body {
           height: 52px;
           line-height: 52px;
-          background-color: #fafafa;
+          background-color: #fff;
           text-align: center;
           color: #222;
           font-size: 14px;
           td {
             font-size: 14px;
-            border-bottom: 1px solid #E8D6F7;
             i {
               color: #6417a6;
             }
-          }
-          &:last-child td {
-            border: none;
           }
         }
       }
