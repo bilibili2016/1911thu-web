@@ -210,6 +210,7 @@
         padding: 0 20px;
       }
       .knobble {
+        position: relative;
         width: 100%;
         height: 46px;
         line-height: 46px;
@@ -257,6 +258,20 @@
           text-overflow: ellipsis;
           white-space: nowrap;
         }
+        span.barNameHover {
+          display: inline-block;
+          width: 100%;
+          // height: 46px;
+          position: absolute;
+          left: 48px;
+          top: -46px;
+          // background-color: #fff;
+        }
+        // &:hover {
+        //   .barNameHover {
+        //     display: block;
+        //   }
+        // }
       }
     }
     .fold {
@@ -397,7 +412,7 @@
           &.is-bordered.is-checked {
             border-color: #6417a6;
           }
-          .el-radio__input.is-checked+.el-radio__label {
+          .el-radio__input.is-checked + .el-radio__label {
             color: #6417a6;
           }
           .el-radio__input {
