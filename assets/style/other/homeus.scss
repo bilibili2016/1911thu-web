@@ -46,7 +46,7 @@
       border-bottom: none;
     }
     .el-tabs__header {
-      height: 780px;
+      min-height: 800px;
       padding-top: 45px;
       box-shadow: 8px 8px 20px #f5f5f5;
     }
@@ -78,31 +78,31 @@
     //   border-left-color: #6417a6;
     // }
 
-    .icon-intro {
+    .iconIntro {
       width: 14px;
       height: 12px;
       background: url('~assets/images/homeUs-intro.png') no-repeat;
       background-size: 100% 100%;
     }
-    .icon-teacher {
+    .iconTeacher {
       width: 14px;
       height: 16px;
       background: url('~assets/images/homeUs-teacher.png') no-repeat;
       background-size: 100% 100%;
     }
-    .icon-people {
+    .iconPeople {
       width: 17px;
       height: 15px;
       background: url('~assets/images/homeUs-people.png') no-repeat;
       background-size: 100% 100%;
     }
-    .icon-help {
+    .iconHelp {
       width: 15px;
       height: 15px;
       background: url('~assets/images/homeUs-help.png') no-repeat;
       background-size: 100% 100%;
     }
-    .icon-contact {
+    .iconContact {
       width: 14px;
       height: 12px;
       background: url('~assets/images/homeUs-contact.png') no-repeat;
@@ -114,19 +114,19 @@
       background-color: #fafafa;
       color: #6417a6;
 
-      .icon-intro {
+      .iconIntro {
         background: url('~assets/images/homeUs-intro-icon.png') no-repeat;
       }
-      .icon-teacher {
+      .iconTeacher {
         background: url('~assets/images/homeUs-teacher-icon.png') no-repeat;
       }
-      .icon-people {
+      .iconPeople {
         background: url('~assets/images/homeUs-people-icon.png') no-repeat;
       }
-      .icon-help {
+      .iconHelp {
         background: url('~assets/images/homeUs-help-icon.png') no-repeat;
       }
-      .icon-contact {
+      .iconContact {
         background: url('~assets/images/homeUs-contact-icon.png') no-repeat;
       }
     }
