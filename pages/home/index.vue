@@ -57,7 +57,7 @@ export default {
     return {
       linkzero: '/course/freelesson',
       linkone: '/course/newlesson',
-      linktwo: '/course/classifylesson',
+      linktwo: '/course/qualitylesson',
       linkfours: '/news/list',
       linkfive: '/news/detail',
       linkSix: '/home/components/teacher',

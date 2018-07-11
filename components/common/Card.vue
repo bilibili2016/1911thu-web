@@ -243,13 +243,13 @@
       <div class="courseList center goodLesson ">
         <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
           <el-card class="fl " :body-style="{ padding: '0px' } ">
-            <img :src="course.picture " class="image ">
+            <!-- 课程封面 -->
+            <img v-if="!config.teacher" :src="course.picture" class="image " alt=" ">
+            <!-- 老师封面 -->
+            <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" ">
             <div class="personInfo clearfix " @click="goTeacherInfo(course.teacher_id) ">
               <span>{{course}}</span>
-              <!-- 课程封面 -->
-              <img v-if="!config.teacher" :src="course.head_img " alt=" ">
-              <!-- 老师封面 -->
-              <img v-if="config.teacher" :src="course.teacher_picture " alt=" ">
+              <img :src="course.head_img " alt=" ">
               <h5 class="fr ">特约讲师：{{course.teacher_name}}</h5>
               <p class="fr ">{{course.graduate}}</p>
             </div>
