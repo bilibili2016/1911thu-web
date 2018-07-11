@@ -13,7 +13,7 @@
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 用户评价 -->
-      <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate>
+      <!-- <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate> -->
       <!-- 学堂资讯 -->
       <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive="titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
       <!-- 合作伙伴 -->
@@ -213,7 +213,7 @@ export default {
         this.getNewCourseList(),
         this.getClassicCourseList(),
         this.getTeacherList(),
-        this.getEvaluateList(),
+        // this.getEvaluateList(),
         this.getNewsInfoList(),
         this.getPartnerList()
       ])
@@ -258,11 +258,11 @@ export default {
       })
     },
     // 用户评价
-    getEvaluateList() {
-      home.getEvaluateList(this.evaluateForm).then(response => {
-        this.evaluateData = response.data.evaluateList
-      })
-    },
+    // getEvaluateList() {
+    //   home.getEvaluateList(this.evaluateForm).then(response => {
+    //     this.evaluateData = response.data.evaluateList
+    //   })
+    // },
     // 学堂资讯
     getNewsInfoList() {
       home.getNewsInfoList(this.newsInfoForm).then(response => {

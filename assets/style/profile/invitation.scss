@@ -137,12 +137,14 @@
         border: 1px solid #E8D6F7;
       }
       .recordTable {
-        width: 100%;
+        width: 528px;
         border-spacing: 0;
         tr {
           font-size: 0;
         }
         .tr_header {
+          display: table;
+          width: 528px;
           height: 60px;
           line-height: 60px;
           background-color: #fafafa;
@@ -159,6 +161,8 @@
           }
         }
         .tr_body {
+          display: inline-table;
+          width: 528px;
           height: 52px;
           line-height: 52px;
           background-color: #fff;

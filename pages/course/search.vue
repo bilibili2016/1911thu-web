@@ -7,7 +7,7 @@
       </div>
       <div v-if="result" v-loading="loadSearch">
         <v-card :data="searchData" :config="config" v-loading="loading" element-loading-text="拼命加载中" element-loading-background="#fff"></v-card>
-        <v-page :data="pagemsg"></v-page>
+        <v-page :pagemsg="pagemsg"></v-page>
         <v-backtotop></v-backtotop>
       </div>
       <div class="searchFalse" v-else v-loading="loadSearch">
