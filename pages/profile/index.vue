@@ -533,8 +533,11 @@ export default {
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
           this.overTimeData = response.data.curriculumList
-          // this.pagemsg2.total = response.data.pageCount
-          console.log(response.data.curriculumList, '获取过期的项目')
+          for (var i = 0; i < this.overTimeData.length; i++) {
+            this.$set(this.overTimeData[i], 'overtime', true)
+          }
+
+          console.log(this.overTimeData, '获取过期的项目')
           resolve(true)
         })
       })
@@ -609,16 +612,16 @@ export default {
       })
     },
     // 我的课程 已过期
-    getOverTime() {
-      this.orderForm.payStatus = 4
-      home.getAllOrderData(this.orderForm).then(response => {
-        this.overTimeData = response.data.orderList
+    // getOverTime() {
+    //   this.orderForm.payStatus = 4
+    //   home.getAllOrderData(this.orderForm).then(response => {
+    //     this.overTimeData = response.data.orderList
 
-        console.log(response.data.orderList, '123')
-        // this.readyOrderLoad = false
-        resolve(true)
-      })
-    },
+    //     console.log(response.data.orderList, '123')
+    //     // this.readyOrderLoad = false
+    //     resolve(true)
+    //   })
+    // },
     // 我的订单 取消
     getInvalidOrderData() {
       this.orderForm.payStatus = 3
@@ -701,7 +704,7 @@ export default {
       this.getCodeList()
       this.getRecordList()
       this.curriculumPayApply()
-      this.getOverTime()
+      // this.getOverTime()
       //过期的我的课程
       this.overStudyCurriculumList()
     }

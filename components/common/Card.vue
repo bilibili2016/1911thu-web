@@ -35,8 +35,16 @@
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent <1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
-              <el-button v-else type="primary" plain @click="goToPlay(card)">继续学习</el-button>
+              <el-button v-if="card.percent < 1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.percent > 1" type="primary" plain @click="goToPlay(card)">
+                <span v-if="card.overtime">
+                  加入购物车
+                </span>
+                <span v-else>
+                  继续学习
+                </span>
+              </el-button>
+
             </div>
             <el-row>
               <!-- 名字 -->
@@ -68,13 +76,14 @@
               <div class="line-wraps" v-if="config.card==='learning' ">
                 <div class="line-centers ">
                   <!-- {{typeof(card.percent)}} -->
-                  <p>已学习{{card.percent}}%</p>
+                  <span>已学习{{card.percent}}%</span>
+                  <span class="expire_day" style="float:right;padding-bottom:10px;">剩余{{card.expire_day}}天</span>
                   <el-progress :percentage="card.percent "></el-progress>
                 </div>
               </div>
               <div v-if="config.card==='already' ">
                 <div class="line-centers ">
-                  <div>已学习100%</div>
+                  <div>已完成100%</div>
                 </div>
               </div>
               <div class="readyImg " v-if="config.card==='already' ">
