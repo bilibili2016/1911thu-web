@@ -197,7 +197,7 @@
           <div class="formLi clearfix">
             <p class="fl">收货省份</p>
             <p class="fr province">
-              <el-select v-model="ticketForm.province" placeholder="省">
+              <el-select v-model="ticketForm.province" placeholder="省" @change="changeTicketp">
                 <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
               </el-select>
               <el-select v-model="ticketForm.city" placeholder="市">
@@ -369,7 +369,7 @@
             <div class="formLi clearfix">
               <p class="fl">收货省份</p>
               <p class="fr province">
-                <el-select v-model="zzTicketForm.province" placeholder="省">
+                <el-select v-model="zzTicketForm.province" placeholder="省" @change="changezzTicketp">
                   <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzprovince" :key="'prov'+index"></el-option>
                 </el-select>
                 <el-select v-model="zzTicketForm.city" placeholder="市">
@@ -605,18 +605,18 @@ export default {
       if (!this.province && this.province.length == 0) {
         this.getRegionList()
       }
-      if (oldval != '') {
-        this.ticketForm.city = ''
-      }
+      // if (oldval != '') {
+      //   this.ticketForm.city = ''
+      // }
       this.city = this.getRegion(this.province, val)
     },
     'ticketForm.city'(val, oldval) {
       if (!this.city && this.city.length == 0) {
         this.getRegionList()
       }
-      if (oldval != '') {
-        this.ticketForm.area = ''
-      }
+      // if (oldval != '') {
+      //   this.ticketForm.area = ''
+      // }
       this.area = this.getRegion(this.city, val)
     },
     zzprovince(val) {
@@ -627,18 +627,18 @@ export default {
       if (!this.zzprovince && this.zzprovince.length == 0) {
         this.getRegionList()
       }
-      if (oldval != '') {
-        this.zzTicketForm.city = ''
-      }
+      // if (oldval != '') {
+      //   this.zzTicketForm.city = ''
+      // }
       this.zzcity = this.getRegion(this.zzprovince, val)
     },
     'zzTicketForm.city'(val, oldval) {
       if (!this.zzcity && this.zzcity.length == 0) {
         this.getRegionList()
       }
-      if (oldval != '') {
-        this.zzTicketForm.area = ''
-      }
+      // if (oldval != '') {
+      //   this.zzTicketForm.area = ''
+      // }
       this.zzarea = this.getRegion(this.zzcity, val)
     },
     address(val) {
@@ -833,7 +833,7 @@ export default {
         this.ticketForm.number = ''
       }
       if (!this.ticketForm.isRadio) {
-        if (this.ticketForm.others == '') {
+        if (this.ticketForm.others == '' || this.zzTicketForm.others == null) {
           this.$message({
             showClose: true,
             type: 'error',
@@ -847,7 +847,7 @@ export default {
           this.ticketForm.number == '' ||
           !/^[A-Za-z0-9]+$/.test(this.ticketForm.number)
         ) {
-          this.$message({
+          that.$message({
             showClose: true,
             type: 'error',
             message: '请输入正确的纳税人识别号！'
@@ -859,7 +859,7 @@ export default {
         this.ticketForm.tel === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.ticketForm.tel)
       ) {
-        this.$message({
+        that.$message({
           showClose: true,
           type: 'error',
           message: '请输入正确的手机号！'
@@ -893,9 +893,6 @@ export default {
         })
         return false
       }
-      // this.zzTicketForm.province = this.ticketForm.province
-      // this.zzTicketForm.city = this.ticketForm.city
-      // this.zzTicketForm.area = this.ticketForm.area
       this.addInvoiceInfo()
     },
     // 添加发票信息
@@ -1016,19 +1013,18 @@ export default {
               this.ticketForm.name = res.data.consignee
               this.ticketForm.tel = res.data.phone
               this.ticketForm.province = res.data.province
+              this.ticketForm.city = res.data.city
               this.city = this.getRegion(
                 this.province,
                 this.ticketForm.province
               )
-              this.ticketForm.city = res.data.city
-              this.area = this.getRegion(this.city, this.ticketForm.city)
               this.ticketForm.area = res.data.area
+              this.area = this.getRegion(this.city, this.ticketForm.city)
               this.ticketForm.address = res.data.address
               this.ticketForm.radio = Number(res.data.content_type)
               this.ticketForm.others = res.data.content
               this.ticketForm.ticket = false
               this.commitOrders.ticketId = res.data.id
-
               if (this.ticketForm.radio == 2) {
                 this.ticketForm.isRadio = false
               } else {
@@ -1068,6 +1064,16 @@ export default {
           resolve(true)
         })
       })
+    },
+    // 切换普通发票下的省
+    changeTicketp(v) {
+      this.ticketForm.city = ''
+      this.ticketForm.area = ''
+    },
+    // 切换增值税发票下的省
+    changezzTicketp(v) {
+      this.zzTicketForm.city = ''
+      this.zzTicketForm.area = ''
     },
     //根据省市区列表 摘出对应省市区
     getRegion(data, val) {
