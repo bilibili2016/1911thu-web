@@ -180,8 +180,7 @@ export default {
       },
       freeForm: {
         pages: 1,
-        limits: '',
-        isFree: 2
+        limits: ''
       },
       classicForm: {
         pages: 0,

@@ -42,7 +42,7 @@ export default {
         this.setCid(this.cidform)
         this.cgForm.cgs = '2'
         this.setCg(this.cgForm)
-        window.open(window.location.origin + '/course/category')
+        window.open(window.location.origin + '/course/freelesson')
       } else {
         window.open(window.location.origin + this.linkdata)
       }
