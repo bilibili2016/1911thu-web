@@ -52,7 +52,7 @@
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
-            <i>{{this.addArray.curriculumcartid.length}}</i> 门课程</span>
+            <i>{{checkedCourse}}</i> 门课程</span>
         </div>
       </div>
     </div>
@@ -99,6 +99,8 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
     return {
+      // prices: 0, //计算总价钱
+      checkedCourse: 0, //已选几门课程
       isNoMsg: false,
       loding: true,
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
@@ -184,10 +186,6 @@ export default {
         cartid: null
       },
       addArray: {
-        curriculumcartid: []
-      },
-      removeArray: {
-        //记录所有课程ID，全不选作为参数传入，没有修改
         curriculumcartid: []
       },
       isRest: true,
@@ -332,8 +330,6 @@ export default {
             // this.arraySum =
             //   (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
             //   10
-
-            this.removeArray.curriculumcartid.push(item.id)
             if (item.is_checked === 0) {
               //未选中
               return Object.assign({}, item, {
@@ -341,11 +337,10 @@ export default {
               })
             } else if (item.is_checked === 1) {
               //选中
-              this.addArray.curriculumcartid.push(item.id)
+              this.addArray.curriculumcartid.push(item.id) //默认不选中
               this.arraySum =
                 (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
                 10
-              // console.log(this.addArray)
               return Object.assign({}, item, {
                 checkMsg: true
               })
@@ -361,19 +356,12 @@ export default {
             this.isNoMsg = true
             // this.selectAll = false
           }
-
-          if (this.addArray.curriculumcartid.length == this.courseList.length) {
-            this.selectAll = true
-            this.isRest = true
-          } else {
-            this.selectAll = false
-            this.isRest = false
-          }
         })
       })
     },
     handleSelectChange(item, index) {
       let shopIndex = indexOf(this.addArray.curriculumcartid, item.id)
+
       if (shopIndex >= 0) {
         //未选中
         return new Promise((resolve, reject) => {
@@ -381,47 +369,36 @@ export default {
             .shopCartremoveChecked({ curriculumcartid: item.id })
             .then(res => {
               // console.log(res)
-              this.addArray.curriculumcartid.splice(shopIndex, 1)
-              this.arraySum =
-                (Number(this.arraySum) * 10 - Number(item.present_price) * 10) /
-                10
-              if (
-                this.addArray.curriculumcartid.length == this.courseList.length
-              ) {
-                this.selectAll = true
-                this.isRest = true
-              } else {
-                this.selectAll = false
-                this.isRest = false
-              }
               resolve(true)
             })
         })
+
+        this.addArray.curriculumcartid.splice(shopIndex, 1)
+        this.arraySum =
+          (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10
       } else {
         //选中
         return new Promise((resolve, reject) => {
           home.shopCartaddChecked({ curriculumcartid: item.id }).then(res => {
             // console.log(res)
-            this.addArray.curriculumcartid.push(item.id)
-            this.arraySum =
-              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-              10
-            if (
-              this.addArray.curriculumcartid.length == this.courseList.length
-            ) {
-              this.selectAll = true
-              this.isRest = true
-            } else {
-              this.selectAll = false
-              this.isRest = false
-            }
             resolve(true)
           })
         })
+
+        this.addArray.curriculumcartid.push(item.id)
+        this.arraySum =
+          (Number(this.arraySum) * 10 + Number(item.present_price) * 10) / 10
+      }
+
+      if (this.addArray.curriculumcartid.length == this.courseList.length) {
+        this.selectAll = true
+        this.isRest = true
+      } else {
+        this.selectAll = false
+        this.isRest = false
       }
     },
     handleSelectAllChange(val) {
-      // console.log(this.removeArray)
       if (this.courseList && this.courseList.length > 0) {
         this.courseList.forEach(item => {
           item.checkMsg = val
@@ -434,24 +411,6 @@ export default {
             this.arraySum =
               (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
               10
-          })
-        }
-
-        if (this.addArray.curriculumcartid.length == this.courseList.length) {
-          //全选
-          return new Promise((resolve, reject) => {
-            home.shopCartaddChecked(this.addArray).then(res => {
-              // console.log(res)
-              resolve(true)
-            })
-          })
-        } else {
-          //全不选
-          return new Promise((resolve, reject) => {
-            home.shopCartremoveChecked(this.removeArray).then(res => {
-              // console.log(res)
-              resolve(true)
-            })
           })
         }
       }
@@ -468,22 +427,21 @@ export default {
     showCommit() {
       // this.showInfo = true
       // this.$router.push('/shop/checkedcourse');
-      this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
-      // return new Promise((resolve, reject) => {
-      //   home.addChecked(this.addArray).then(res => {
-      //     if (res.status === 0) {
-      //       this.$router.push('/shop/affirmorder')
-      //       // this.shopCartList()
-      //     } else {
-      //       this.$message({
-      //         showClose: true,
-      //         type: 'error',
-      //         message: res.msg
-      //       })
-      //     }
-      //     resolve(true)
-      //   })
-      // })
+      return new Promise((resolve, reject) => {
+        home.addChecked(this.addArray).then(res => {
+          if (res.status === 0) {
+            this.$router.push('/shop/affirmorder')
+            // this.shopCartList()
+          } else {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: res.msg
+            })
+          }
+          resolve(true)
+        })
+      })
     },
     close() {
       this.showInfo = false
@@ -598,5 +556,3 @@ export default {
   }
 }
 </script>
-
-
