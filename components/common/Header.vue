@@ -623,6 +623,7 @@ export default {
           // this.loadLogin = true
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
+              // console.log(response)
               this.$message({
                 showClose: true,
                 type: response.status === 0 ? 'success' : 'error',

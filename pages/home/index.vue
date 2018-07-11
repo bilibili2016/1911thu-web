@@ -8,6 +8,9 @@
       <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 精品好课 -->
       <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
+      <!-- 名师智库 -->
+      <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
+      <!-- <v-teacherresource :teacherResource="teacherResource" :titleSix="titleSix"></v-teacherresource> -->
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 名师大咖秀 -->
@@ -24,6 +27,7 @@
 </template>
 
 <script>
+import teacherResource from '@/pages/home/components/teacherResource.vue'
 import Tab from '@/pages/home/components/tab.vue'
 import Free from '@/pages/home/components/free.vue'
 import New from '@/pages/home/components/new.vue'
@@ -46,15 +50,17 @@ export default {
     'v-free': Free,
     'v-new': New,
     'v-tab': Tab,
-    'v-backtotop': BackToTop
+    'v-backtotop': BackToTop,
+    'v-teacherresource': teacherResource
   },
   data() {
     return {
       linkzero: '/course/freelesson',
       linkone: '/course/newlesson',
-      linktwo: '/course/classifylesson',
+      linktwo: '/course/qualitylesson',
       linkfours: '/news/list',
       linkfive: '/news/detail',
+      linkSix: '/home/components/teacher',
       freeData: [],
       newData: [],
       classicData: [],
@@ -84,7 +90,7 @@ export default {
       titleOne: '免费专区',
       titleTwo: '最新课程',
       titleThree: '精品好课',
-      titleFore: '名师大咖秀',
+      titleFore: '师资智库',
       titleFour: '用户评价',
       titleFive: '学堂资讯',
       partnerList: {
@@ -92,6 +98,7 @@ export default {
         pages: 1,
         limits: 10
       },
+      teacherResource: [],
       teachers: [],
       evaluateData: [],
       infoArticle: [],
@@ -179,12 +186,12 @@ export default {
       classicForm: {
         pages: 0,
         limits: null,
-        categoryId: null,
-        sortBy: null
+        evaluateLimit: 0,
+        isEvaluate: 0
       },
       teacherForm: {
         pages: 1,
-        limits: 3
+        limits: 7
       },
       evaluateForm: {
         pages: 1,
@@ -247,6 +254,7 @@ export default {
         this.newData = response.data.curriculumList
       })
     },
+    // 获取精品好课列表
     getClassicCourseList() {
       home.getClassicCourseList(this.classicForm).then(response => {
         this.classicData = response.data.curriculumList
@@ -256,6 +264,7 @@ export default {
     getTeacherList() {
       home.getTeacherList(this.teacherForm).then(response => {
         this.teachers = response.data.teacherList
+        // this.teacherResource = response.data.teacherList
       })
     },
     // 用户评价
