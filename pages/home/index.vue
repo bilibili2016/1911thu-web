@@ -8,6 +8,9 @@
       <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 精品好课 -->
       <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
+      <!-- 名师智库 -->
+      <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
+      <!-- <v-teacherresource :teacherResource="teacherResource" :titleSix="titleSix"></v-teacherresource> -->
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 名师大咖秀 -->
@@ -24,6 +27,7 @@
 </template>
 
 <script>
+import teacherResource from '@/pages/home/components/teacherResource.vue'
 import Tab from '@/pages/home/components/tab.vue'
 import Free from '@/pages/home/components/free.vue'
 import New from '@/pages/home/components/new.vue'
@@ -46,7 +50,8 @@ export default {
     'v-free': Free,
     'v-new': New,
     'v-tab': Tab,
-    'v-backtotop': BackToTop
+    'v-backtotop': BackToTop,
+    'v-teacherresource': teacherResource
   },
   data() {
     return {
@@ -55,6 +60,7 @@ export default {
       linktwo: '/course/classifylesson',
       linkfours: '/news/list',
       linkfive: '/news/detail',
+      linkSix: '/home/components/teacher',
       freeData: [],
       newData: [],
       classicData: [],
@@ -84,7 +90,7 @@ export default {
       titleOne: '免费专区',
       titleTwo: '最新课程',
       titleThree: '精品好课',
-      titleFore: '名师大咖秀',
+      titleFore: '师资智库',
       titleFour: '用户评价',
       titleFive: '学堂资讯',
       partnerList: {
@@ -92,6 +98,7 @@ export default {
         pages: 1,
         limits: 10
       },
+      teacherResource: [],
       teachers: [],
       evaluateData: [],
       infoArticle: [],
@@ -100,27 +107,27 @@ export default {
         card_type: 'ding'
       },
       dingData: [
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
-          title: '面授、线下活动',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/faceteach'
-        },
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
-          title: '机构课程定制',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/enterprisecustom'
-        },
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
-          title: '学位项目',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/degree'
-        }
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
+        //   title: '面授、线下活动',
+        //   content:
+        //     '中共中央办公厅国务院办公厅印发关于党政机关停止新建楼堂馆所和清理办楼堂馆所和清理办...',
+        //   link: '/other/faceteach'
+        // },
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
+        //   title: '机构课程定制',
+        //   content:
+        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
+        //   link: '/other/enterprisecustom'
+        // },
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
+        //   title: '学位项目',
+        //   content:
+        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
+        //   link: '/other/degree'
+        // }
       ],
       numSrc: require('@/assets/images/home_num.png'),
       value1: 4,
@@ -179,12 +186,12 @@ export default {
       classicForm: {
         pages: 0,
         limits: null,
-        categoryId: null,
-        sortBy: null
+        evaluateLimit: 0,
+        isEvaluate: 0
       },
       teacherForm: {
         pages: 1,
-        limits: 3
+        limits: 7
       },
       evaluateForm: {
         pages: 1,
@@ -215,7 +222,8 @@ export default {
         this.getTeacherList(),
         // this.getEvaluateList(),
         this.getNewsInfoList(),
-        this.getPartnerList()
+        this.getPartnerList(),
+        this.getPointList()
       ])
     },
     // 获取banner
@@ -246,6 +254,7 @@ export default {
         this.newData = response.data.curriculumList
       })
     },
+    // 获取精品好课列表
     getClassicCourseList() {
       home.getClassicCourseList(this.classicForm).then(response => {
         this.classicData = response.data.curriculumList
@@ -255,6 +264,7 @@ export default {
     getTeacherList() {
       home.getTeacherList(this.teacherForm).then(response => {
         this.teachers = response.data.teacherList
+        // this.teacherResource = response.data.teacherList
       })
     },
     // 用户评价
@@ -274,6 +284,13 @@ export default {
     getPartnerList() {
       home.getPartnerList(this.partnerList).then(response => {
         this.partnerList.list = response.data.collaborationEnterpriseList
+      })
+    },
+    // 获取定制消息
+    getPointList() {
+      home.getPointList().then(response => {
+        console.log(response, '获取定制消息')
+        this.dingData = response.data.pointList
       })
     }
   },
