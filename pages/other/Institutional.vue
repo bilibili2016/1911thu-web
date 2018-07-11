@@ -1,13 +1,5 @@
 <template>
   <div class="allInfo">
-    <!-- <div class="recommend" v-show="recommend">
-      <div>
-        <img src="@/assets/images/hr_discounts1.png" alt="">
-        <span>优惠专题入口</span>
-        <img src="@/assets/images/hr_discounts2.png" alt="">
-        <i class="el-icon-close" @click="closeRecommend"></i>
-      </div>
-    </div> -->
     <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
       <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic5.png" alt="">
       <div class="top-text">
