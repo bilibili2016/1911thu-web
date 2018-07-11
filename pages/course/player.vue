@@ -22,13 +22,10 @@
           </span>
 
         </span>
-        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1}">
+        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
           <i class="el-icon-star-on"></i>
-          <span v-if="this.collectMsg === 0">收藏</span>
-          <span v-else>收藏</span>
-          <!-- 已收藏 -->
+          <span>收藏</span>
         </span>
-        <!-- v-if="this.iseve === 0" -->
         <span class="fr elt" @click="showElt" v-if="this.iseve === 0">
           <i class="el-icon-edit"></i>课程评价
         </span>
@@ -114,7 +111,7 @@
 
 
 <script>
-import { other, auth, home } from '~/lib/v1_sdk/index'
+import { other, auth, home, players, coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -249,8 +246,7 @@ export default {
         types: 1,
         tag: [],
         curriculumcatalogid: ''
-      },
-      textarea: ''
+      }
     }
   },
   methods: {
@@ -290,20 +286,15 @@ export default {
       this.btnData = this.reTagBtn
       this.addEvaluateForm.tag = []
     },
-    unique(arr) {
-      var newArr = [arr[0]]
-      for (var i = 1; i < arr.length; i++) {
-        if (newArr.indexOf(arr[i]) == -1) {
-          newArr.push(arr[i])
-        }
+    getBtnContent(val, index) {
+      if (val.isCheck === true) {
+        this.$set(val, 'isCheck', false)
+      } else {
+        this.$set(val, 'isCheck', true)
       }
-      return newArr
-    },
-    remove(val) {
-      var index = this.indexOf(val)
-      if (index > -1) {
-        this.splice(index, 1)
-      }
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     handleCourse(item, index) {
       this.ischeck = item.id
@@ -317,7 +308,7 @@ export default {
     },
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
-        home.getEvaluateTags().then(response => {
+        coursedetail.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('5')
@@ -327,23 +318,14 @@ export default {
       })
     },
     getBtnContent(val, index) {
-      // console.log(val, '这是val')
-
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)
-
-        for (var i = 0; i < this.addEvaluateForm.tag.length; i++) {
-          // document.write(cars[i] + '<br>')
-          if (this.addEvaluateForm.tag[i] === val.value) {
-            this.addEvaluateForm.tag.splice(i, 1)
-          }
-        }
       } else {
         this.$set(val, 'isCheck', true)
-        this.addEvaluateForm.tag.push(val.value)
-        this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
       }
-      console.log(this.addEvaluateForm.tag, '这是最后的tag')
+
+      // this.borderIndex = index
+      this.addEvaluateForm.tag.push(val.value)
     },
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
@@ -533,7 +515,7 @@ export default {
       })
       // 计时器
       return new Promise((resolve, reject) => {
-        home.getPlayerInfos(this.playerForm).then(response => {
+        players.getPlayerInfos(this.playerForm).then(response => {
           if (response.status === '100100') {
             this.goShoppingCart(response.msg)
           } else if (response.status === '100006') {
@@ -575,7 +557,7 @@ export default {
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        home.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+        players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
           // console.log(response)
           // console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
@@ -632,13 +614,14 @@ export default {
       }
 
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
       this.addEvaluateForm.evaluatecontent = this.word
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
-      console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
+
+      // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
       return new Promise((resolve, reject) => {
         home.addEvaluate(this.addEvaluateForm).then(response => {
           if (response.status === '100100') {
@@ -702,7 +685,6 @@ export default {
     }
   },
   mounted() {
-    this.addEvaluateForm.ids = persistStore.get('curriculumId')
     this.videoState = document.getElementById('movd')
     this.resize()
     var $config = {
@@ -781,5 +763,4 @@ export default {
   }
 }
 </style>
-
 

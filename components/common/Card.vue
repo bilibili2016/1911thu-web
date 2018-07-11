@@ -3,8 +3,10 @@
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
       <div class="customization">
-        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link)">
-          <i class="fl"></i>
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link_url)">
+          <i class="fl">
+            <img :src="pro.picture" alt="">
+          </i>
           <div class="fr con">
             <h5>{{pro.title}}</h5>
             <p>{{pro.content}}</p>
@@ -29,13 +31,12 @@
             </div>
             <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
-              <!-- {{card}} -->
               <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent <1" type="primary" plain @click="goLink(linkdata)">开始学习</el-button>
-              <el-button v-else type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+              <el-button v-if="card.percent <1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-else type="primary" plain @click="goToPlay(card)">继续学习</el-button>
             </div>
             <el-row>
               <!-- 名字 -->
@@ -64,7 +65,7 @@
                 </div>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps " v-if="config.card==='learning' ">
+              <div class="line-wraps" v-if="config.card==='learning' ">
                 <div class="line-centers ">
                   <!-- {{typeof(card.percent)}} -->
                   <p>已学习{{card.percent}}%</p>
@@ -79,6 +80,12 @@
               <div class="readyImg " v-if="config.card==='already' ">
                 <img :src="readyImg " alt=" ">
               </div>
+              <!-- 我的课程 已过期的图片 -->
+              <div class="readyImg " v-if="config.card==='overtime' ">
+                <img :src="overTimeImg" alt=" ">
+              </div>
+              <!-- 我的课程 已过期的副标题 -->
+              <div class="deputyTitleOverTime" v-if="config.card==='overtime' ">{{card.deputy_title}}</div>
             </el-row>
           </el-card>
         </div>
@@ -90,30 +97,35 @@
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
           <el-card shadow="never " body-style="padding: 0; " class="itemBox ">
-            <!-- {{card.id}} -->
+
+            <!-- 选课使用的勾选 -->
             <el-checkbox v-model="card.is_checked " @change="selCheckboxChange(card,index) " style="position:absolute;top:10px;right:10px; " v-if="config.types==='buy' "></el-checkbox>
+
             <!-- @click="selectCid(card,index) " -->
             <div @click="courseInfo(card,index) ">
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
-              <div class="mask-style ">
-                <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
-                <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
-              </div>
+              <div class="mask-style "></div>
+              <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
+              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
+              <!-- </div> -->
+
+              <!-- 我的首页的图片背景 -->
               <div class="bgImgs ">
                 <img :src="card.picture " alt=" ">
               </div>
-              <div class="tag ">
-                <!-- 收藏的tag -->
+
+              <!-- <div class="tag ">
                 <span v-if="card.tag.length !==0 " v-for="(tag,index) in card.tag " :key="index ">{{tag}}</span>
-              </div>
-              <div v-if="config.card==='home' "></div>
+              </div> -->
+
+              <!-- <div v-if="config.card==='home' "></div>
               <div class="common-button btn-bgs " v-else>
-                <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
-              </div>
+                <el-button type="primary " plain @click="goLink(linkdata) ">继续学习2334</el-button>
+              </div> -->
+
               <el-row v-if="config.position !== 'personal'">
-                <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) " v-if="config.card === 'home'">
                   <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]">
                     <span class="title">{{card.title}}</span>
@@ -131,20 +143,23 @@
                   </p>
                 </div>
                 <div class="line-wrap " v-if="config.card==='home' ">
-                  <div class="line-center ">
+                  <div class="line-center">
                     <p class="price ">￥{{card.present_price}}</p>
                   </div>
                 </div>
               </el-row>
+              <!-- 我的课程的 我的收藏 -->
               <el-row v-if="config.position === 'personal'">
-                <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) ">
                   <p class="itemBox-name ">
                     <span>{{card.title}}</span>
                   </p>
+                  <!-- {{card}} -->
+                  <div class="deputyTitleOverTime">{{card.deputy_title}}</div>
+                  <!-- <span>123</span> -->
                 </div>
                 <div class="line-wrap " v-if="config.card==='home' " @click.stop="goTeacherInfo(card.teacher_id) ">
-                  <div class="line-center ">
+                  <div class="line-center">
                     <img :src="card.head_img " alt=" ">
                     <span>{{card.teacher_name}}</span>
                     <span class="title ">{{card.graduate}}</span>
@@ -364,6 +379,7 @@
                 </div>
                 <div class="study clearfix" v-else>
                   <p>{{courseList.introduction}}</p>
+                  <!-- <p class="soldOut fl" v-if="courseList.status =='2'">此课程已下架</p> -->
                   <div class="common-button">
                     <div v-if="isAuthenticated">
                       <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习6</el-button> -->
@@ -394,11 +410,13 @@
                   <h4 class="clearfix">
                     <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                     <p>已学时长</p>
+                    <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
                   </h4>
                   <div class="common-button">
                     <div>
                       <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                     </div>
+                    <!--  v-if="courseList.status =='1'" -->
                     <div>
                       <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
                     </div>
@@ -453,41 +471,7 @@
         </div>
       </div>
     </template>
-    <!-- 学堂资讯 -->
-    <template v-if="config.card_type === 'infoOne'">
-      <div class="info-list">
-        <!--  -->
-        <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index<3">
-          <el-card shadow="never" body-style="padding: 0;">
-            <div class="info-box" @click="selectDetail(index,card,linkfive)">
-              <div class="info-wrap">
-                <img :src="card.picture" alt="">
-                <span>{{card.title}}</span>
-              </div>
-            </div>
-          </el-card>
-        </div>
-        <div class="more newsMore" @click="getMore(linkdata)">查看更多>></div>
-      </div>
-    </template>
 
-    <template v-if="config.card_type === 'infoTwo'">
-      <div class="card-categorys">
-        <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 0">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBoxs">
-            <div class="img-box">
-              <img :src="card.picture" alt="">
-              <div>
-                <span>{{card.title}}</span>
-              </div>
-            </div>
-            <div class="item">
-              {{card.introduce}}
-            </div>
-          </el-card>
-        </div>
-      </div>
-    </template>
   </div>
 </template>
 
@@ -499,8 +483,6 @@ export default {
   props: [
     'data',
     'config',
-    'infoArticle',
-    'infoDesc',
     'dingData',
     'searchData',
     'courseList',
@@ -517,6 +499,7 @@ export default {
       numSrc: require('@/assets/images/home_num.png'),
       one: 1,
       readyImg: require('@/assets/images/ready.png'),
+      overTimeImg: require('@/assets/images/overtime.png'),
       playbtn: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
       // jinImg: require('@/assets/images/jin.png'),
@@ -658,6 +641,11 @@ export default {
       )
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
 
+      window.open(window.location.origin + '/course/player')
+    },
+    goToPlay(item) {
+      persistStore.set('curriculumId', item.id)
+      persistStore.set('catalogId', item.catalog_id)
       window.open(window.location.origin + '/course/player')
     },
     // 获取详情默认播放小节id
@@ -925,6 +913,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.deputyTitleOverTime {
+  width: 220px;
+  height: 20px;
+  line-height: 20px;
+  margin: 8px 0;
+  overflow: hidden;
+  font-size: 14px;
+  color: #93999f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 16px;
+}
 .new-style {
   img {
     width: 48px !important;
@@ -978,8 +979,9 @@ export default {
   left: 50%;
   margin-left: -550px;
   z-index: 3;
+  padding-left: 192px;
   div.pro {
-    float: right;
+    float: left;
     width: 280px;
     height: 100px;
     border-radius: 5px;
@@ -990,7 +992,7 @@ export default {
       margin-top: -8px;
       background-color: #f1e9f8;
     }
-    &:last-child,
+    &:nth-child(1),
     &:nth-child(2) {
       margin-right: 31px;
     }
@@ -1000,7 +1002,7 @@ export default {
     img {
       width: 50px;
       height: 50px;
-      margin: 25px 16px;
+      margin: 2px 3px;
     }
     div {
       width: 178px;
@@ -1280,74 +1282,14 @@ export default {
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {
   margin: 0 30px 50px 0;
-  &:nth-child(4n + 4) {
-    // margin-right: 24px;
-  }
+  // &:nth-child(4n + 4) {
+  // margin-right: 24px;
+  // }
   &:nth-child(3n + 3) {
     margin-right: 0;
   }
-} // 学堂资讯
-.info-list {
-  float: right;
-  .el-card {
-    border: none;
-  }
-  .info {
-    width: 593px;
-    height: 106px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 6px;
-    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-    margin-bottom: 20px;
-    cursor: pointer;
-    &:hover {
-      box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
-      transition: all 300ms;
-    }
-    .info-box {
-      height: 106px;
-      .info-wrap {
-        height: 106px;
-        overflow: hidden;
-        img {
-          width: 180px;
-          height: 106px;
-          padding: 0px;
-          margin: 0px;
-          overflow: hidden;
-        }
-        span {
-          display: inline-block;
-          width: 413px;
-          height: 72px;
-          line-height: 36px;
-          margin-top: 17px;
-          font-size: 18px;
-          padding: 0 15px;
-          color: rgba(34, 34, 34, 1);
-          overflow: hidden;
-          vertical-align: top;
-        }
-        span:hover {
-          color: #8f4acb;
-        }
-      }
-    }
-  }
-  .more {
-    float: right;
-    height: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: MicrosoftYaHei;
-    color: rgba(100, 23, 166, 1);
-    line-height: 40px;
-    &.newsMore:hover {
-      transition: all 300;
-      color: #8f4acb;
-    }
-  }
-} // left
+}
+// left
 .card-categorys {
   display: flex;
   justify-content: space-between;
@@ -1767,6 +1709,9 @@ export default {
           height: 54px;
           line-height: 54px;
           margin-bottom: 0px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
         h4:hover {
           color: #8f4acb;
@@ -1880,16 +1825,28 @@ export default {
           color: rgba(34, 34, 34, 1);
           line-height: 30px;
           margin-bottom: 20px;
+          height: 94px;
+          // border: 1px red solid;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          &.soldOut {
+            text-decoration: underline;
+          }
         }
         h4 {
           float: left;
           color: #222;
-          p:first-child {
-            font-size: 20px;
+          p {
             margin: 0;
-          }
-          p:last-child {
-            font-size: 14px;
+            &:first-child {
+              font-size: 20px;
+            }
+            &:last-child {
+              font-size: 14px;
+            }
           }
         }
 

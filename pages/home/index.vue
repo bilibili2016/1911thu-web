@@ -16,7 +16,7 @@
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 用户评价 -->
-      <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate>
+      <!-- <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate> -->
       <!-- 学堂资讯 -->
       <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive="titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
       <!-- 合作伙伴 -->
@@ -39,7 +39,7 @@ import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { home } from '~/lib/v1_sdk/index'
+import { home, newlesson } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-partner': Partner,
@@ -55,9 +55,9 @@ export default {
   },
   data() {
     return {
-      linkzero: '/course/classifylist',
+      linkzero: '/course/freelesson',
       linkone: '/course/newlesson',
-      linktwo: '/course/classifycourse',
+      linktwo: '/course/classifylesson',
       linkfours: '/news/list',
       linkfive: '/news/detail',
       linkSix: '/home/components/teacher',
@@ -107,27 +107,27 @@ export default {
         card_type: 'ding'
       },
       dingData: [
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
-          title: '面授、线下活动',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/faceteach'
-        },
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
-          title: '机构课程定制',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/enterprisecustom'
-        },
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
-          title: '学位项目',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/degree'
-        }
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
+        //   title: '面授、线下活动',
+        //   content:
+        //     '中共中央办公厅国务院办公厅印发关于党政机关停止新建楼堂馆所和清理办楼堂馆所和清理办...',
+        //   link: '/other/faceteach'
+        // },
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
+        //   title: '机构课程定制',
+        //   content:
+        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
+        //   link: '/other/enterprisecustom'
+        // },
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
+        //   title: '学位项目',
+        //   content:
+        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
+        //   link: '/other/degree'
+        // }
       ],
       numSrc: require('@/assets/images/home_num.png'),
       value1: 4,
@@ -139,7 +139,7 @@ export default {
       },
       classify: [
         {
-          category_name: '干部通用学院',
+          category_name: '干部网络学院',
           id: '1'
         },
         {
@@ -207,12 +207,7 @@ export default {
       loginMsg: false
     }
   },
-  created() {
-    if (this.did === '0') {
-      this.getAll()
-    } else {
-    }
-  },
+  created() {},
   computed: {
     ...mapState('auth', ['did'])
   },
@@ -225,9 +220,10 @@ export default {
         this.getNewCourseList(),
         this.getClassicCourseList(),
         this.getTeacherList(),
-        this.getEvaluateList(),
+        // this.getEvaluateList(),
         this.getNewsInfoList(),
-        this.getPartnerList()
+        this.getPartnerList(),
+        this.getPointList()
       ])
     },
     // 获取banner
@@ -254,7 +250,7 @@ export default {
     },
     // 获取新上好课列表
     getNewCourseList() {
-      home.getNewCourseList(this.courseForm).then(response => {
+      newlesson.getNewCourseList(this.courseForm).then(response => {
         this.newData = response.data.curriculumList
       })
     },
@@ -271,11 +267,11 @@ export default {
       })
     },
     // 用户评价
-    getEvaluateList() {
-      home.getEvaluateList(this.evaluateForm).then(response => {
-        this.evaluateData = response.data.evaluateList
-      })
-    },
+    // getEvaluateList() {
+    //   home.getEvaluateList(this.evaluateForm).then(response => {
+    //     this.evaluateData = response.data.evaluateList
+    //   })
+    // },
     // 学堂资讯
     getNewsInfoList() {
       home.getNewsInfoList(this.newsInfoForm).then(response => {
@@ -288,6 +284,13 @@ export default {
       home.getPartnerList(this.partnerList).then(response => {
         this.partnerList.list = response.data.collaborationEnterpriseList
       })
+    },
+    // 获取定制消息
+    getPointList() {
+      home.getPointList().then(response => {
+        console.log(response, '获取定制消息')
+        this.dingData = response.data.pointList
+      })
     }
   },
   mounted() {
@@ -296,7 +299,12 @@ export default {
         this.loginMsg = true
       }
     })
-
+    // console.log(this.did, '9999')
+    // console.log(this.did === '0', '9999')
+    if (this.did === '0') {
+      this.getAll()
+    } else {
+    }
     this.$bus.$on('reLogin', data => {
       this.getAll()
     })

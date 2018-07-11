@@ -8,13 +8,13 @@
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
+          <img class="topImg" :src="avator" />
+          <div class="up-user-avtor" v-show="isShowUpAvtor">
+            <input type="file" @change="add_img" accept="image/png,image/gif,image/jpeg" />
+            <span>更换图片</span>
+          </div>
           <div class="avator">
             <div class="img">
-              <img :src="avator" />
-              <div class="up-user-avtor" v-show="isShowUpAvtor">
-                <input type="file" @change="add_img" accept="image/png,image/gif,image/jpeg" />
-                <span>更换图片</span>
-              </div>
             </div>
           </div>
           <div class="name">
@@ -23,8 +23,8 @@
             <!-- <p style="color:black">{{userInfo}}</p> -->
           </div>
           <div class="time">
-            <p class="fr">{{time.hour}}小时{{time.minutes}}分钟{{time.second}}秒</p>
-            <p class="fr">总学习时长</p>
+            <p>{{userInfo.study_curriculum_time}}</p>
+            <p>总学时</p>
           </div>
         </div>
       </div>

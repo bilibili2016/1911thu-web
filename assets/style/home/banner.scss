@@ -31,7 +31,7 @@
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
-  .el-carousel__item:nth-child(2n+1) {
+  .el-carousel__item:nth-child(2n + 1) {
     background-color: #d3dce6;
   }
   .classify {
@@ -45,7 +45,7 @@
     .starters {
       width: 178px;
       height: 555px;
-      background-color: rgba(100, 23, 166, .9);
+      background-color: rgba(100, 23, 166, 0.9);
       position: relative;
       .classItem {
         .tabs-title {
@@ -53,14 +53,14 @@
           height: 66px;
           line-height: 66px;
           text-align: center;
-          color: #E9D0FF;
+          color: #e9d0ff;
           font-size: 16px;
           font-family: 'microsoft YaHei';
           cursor: pointer;
           transition: all 300ms;
         }
         &:hover .tabs-title {
-          color: #6417A6;
+          color: #6417a6;
           background: rgba(233, 208, 255, 1);
         }
         .tabs-content {
@@ -88,7 +88,7 @@
                   width: 100%;
                   height: 1px;
                   margin-bottom: 6px;
-                  background-color: #E8D6F7;
+                  background-color: #e8d6f7;
                 }
               }
             }
@@ -106,7 +106,7 @@
             width: 100%;
             height: 193px;
             padding: 20px 0;
-            background-color: #F7FAFC;
+            background-color: #f7fafc;
             display: flex;
             flex-wrap: wrap;
             position: absolute;
@@ -159,7 +159,7 @@
       background-color: #efefef;
       cursor: pointer;
       &:hover {
-        background-color: #F1E9F8;
+        background-color: #f1e9f8;
       }
       .con {
         margin-right: 20px;
@@ -176,15 +176,15 @@
         margin: 22px 13px;
       }
       &:first-child i {
-        background: url("http://papn9j3ys.bkt.clouddn.com/pro1.png") no-repeat;
+        // background: url("http://papn9j3ys.bkt.clouddn.com/pro1.png") no-repeat;
         background-size: contain;
       }
       &:nth-child(2) i {
-        background: url("http://papn9j3ys.bkt.clouddn.com/pro2.png") no-repeat;
+        // background: url("http://papn9j3ys.bkt.clouddn.com/pro2.png") no-repeat;
         background-size: contain;
       }
       &:nth-child(3) i {
-        background: url("http://papn9j3ys.bkt.clouddn.com/pro3.png") no-repeat;
+        // background: url("http://papn9j3ys.bkt.clouddn.com/pro3.png") no-repeat;
         background-size: contain;
       }
       div {
@@ -193,7 +193,7 @@
           color: #222; // line-height: 40px;
           margin: 19px 0px 12px 0px;
           &:hover {
-            color: #8F4ACB;
+            color: #8f4acb;
           }
         }
         p {

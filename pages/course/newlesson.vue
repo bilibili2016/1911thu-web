@@ -26,7 +26,7 @@
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
-import { home } from '~/lib/v1_sdk/index'
+import { home, newlesson } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-card': CustomCard
@@ -51,20 +51,18 @@ export default {
   methods: {
     // 获取最新课程列表
     getNewCourseList() {
-      return new Promise((resolve, reject) => {
-        home.getNewCourseList(this.newsCurriculumForm).then(response => {
-          if (response.data.curriculumList.length === 0) {
-            this.noMoreData = true
-          }
-          this.courseList = this.courseList.concat(response.data.curriculumList)
-          for (var i = 0; i < this.courseList.length; i++) {
-            this.$set(this.courseList[i], 'isCartNew', 0)
-          }
-          this.pageCount = response.data.pageCount
-          this.scrollTopMsg = true
+      newlesson.getNewCourseList(this.newsCurriculumForm).then(response => {
+        if (response.data.curriculumList.length === 0) {
+          this.noMoreData = true
+        }
+        this.courseList = this.courseList.concat(response.data.curriculumList)
+        for (var i = 0; i < this.courseList.length; i++) {
+          this.$set(this.courseList[i], 'isCartNew', 0)
+        }
+        this.pageCount = response.data.pageCount
+        this.scrollTopMsg = true
 
-          resolve(true)
-        })
+        resolve(true)
       })
     },
     // 下拉查看更多
@@ -97,13 +95,21 @@ export default {
           }
         }
       })
+    },
+    //初始化data
+    initData() {
+      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    },
+    // 初始化所有方法
+    initAll() {
+      this.initData()
+      this.getNewCourseList()
+      this.downRefresh()
     }
   },
   mounted() {
-    this.getNewCourseList()
-    this.downRefresh()
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.initAll()
   }
 }
 </script>

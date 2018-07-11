@@ -8,19 +8,48 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
+import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   props: ['linkdata'],
-  methods: {
-    getMore() {
-      // this.$router.push(this.linkdata)
-      if (this.linkdata === '/course/classifylist') {
-        persistStore.set('showFree', true)
+  data() {
+    return {
+      cidform: {
+        cids: '1',
+        indexs: 1,
+        pids: ''
+      },
+      cgForm: {
+        cgs: null
       }
-      this.$emit('getMoreData')
-      window.open(window.location.origin + this.linkdata)
     }
   },
-  mounted() {}
+  methods: {
+    ...mapActions('auth', ['setCid', 'setCg']),
+    getMore() {
+      // 免费课程路由 设置cid pid cindex
+      // if (this.linkdata === '/course/category') {
+      //   this.setCid(this.cidform)
+      // }
+
+      // 经典课程cgs === '1'
+      if (this.linkdata === '/course/classifylesson') {
+        this.cgForm.cgs = '1'
+        this.setCg(this.cgForm)
+        window.open(window.location.origin + '/course/category')
+      } else if (this.linkdata === '/course/freelesson') {
+        // 免费课程cgs === '2'
+
+        this.setCid(this.cidform)
+        this.cgForm.cgs = '2'
+        this.setCg(this.cgForm)
+        window.open(window.location.origin + '/course/category')
+      } else {
+        window.open(window.location.origin + this.linkdata)
+      }
+      this.$emit('getMoreData')
+      // window.open(window.location.origin + this.linkdata)
+    }
+  }
 }
 </script>
 
