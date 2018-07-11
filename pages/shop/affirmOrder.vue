@@ -75,33 +75,43 @@
               <span>开机构抬头发票须填写纳税人识别号，以免影响报销</span>
             </h4>
             <div class="invoice">
-              <span class="changeInvoice" @click="showIoc">修改</span>
-              <!-- <span v-show="isShowTicket" style="display:inline-block;padding-right:20px;">
-                <strong style="display:inline-block;padding-right:8px;">发票类型:</strong>个人</span> -->
-              <p>
-                <span v-show="isShowTicket">
-                  <i class="choose" v-show="invoiceForm.choose=='1'">普通发票</i>
-                  <i class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</i>
-                  <i>发票抬头：</i>
-                  <span v-if="invoiceForm.ticket === true">个人</span>
-                  <span v-if="invoiceForm.ticket === false">{{invoiceForm.companyname}}</span>
-                  <span v-if="invoiceForm.ticket === false">{{invoiceForm.number}}</span>
-                </span>
-                <!-- 显示发票抬头 -->
-                <span class="invoiceWord" v-show="isShowTicket">
-                  <i>发票内容：</i>
-                  <span v-if="invoiceForm.radio == 1">培训费</span>
-                  <span v-if="invoiceForm.radio == 2">{{invoiceForm.others}}</span>
-                </span>
-                <span v-show="isShowTicket">
-                  <i>收货地址：</i>{{invoiceForm.address}}
-                </span>
+              <span v-show="isShowTicket">
+                <i class="choose" v-show="invoiceForm.choose=='1'">普通发票</i>
+                <i class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</i>
+              </span>
 
-                <span class="invoiceWord" v-show="!isShowTicket">
-                  <span>不开发票</span>
-                </span>
+              <span class="invoiceWord" v-show="!isShowTicket">
+                <span>不开发票</span>
+              </span>
+              <span class="changeInvoice" @click="showIoc">修改</span>
+            </div>
+            <!-- 发票内容 -->
+            <div class="ticketInfo" v-show="invoiceForm.choose=='1'">
+              <p v-if="invoiceForm.ticket === true">发票抬头：个人</p>
+              <p v-if="invoiceForm.ticket === false">发票抬头：{{invoiceForm.companyname}}</p>
+              <p v-if="invoiceForm.ticket === false">纳税人识别号：{{invoiceForm.number}}</p>
+              <p v-if="invoiceForm.radio == 1">发票内容：培训费</p>
+              <p v-if="invoiceForm.radio == 2">发票内容：{{invoiceForm.others}}</p>
+              <p>收票人姓名：{{invoiceForm.name}}</p>
+              <p>收票人手机号：{{invoiceForm.tel}}</p>
+              <p>收票人省份：{{invoiceForm.province_name }}{{invoiceForm.city_name}}{{invoiceForm.area_name}}
               </p>
-              <!-- 显示发票抬头 -->
+              <p>详细地址：{{invoiceForm.address}}</p>
+            </div>
+            <div class="ticketInfo" v-show="invoiceForm.choose=='2'">
+              <p>开票方式：订单完成后开票</p>
+              <p v-if="invoiceForm.radio == 1">发票内容：培训费</p>
+              <p v-if="invoiceForm.radio == 2">发票内容：{{invoiceForm.others}}</p>
+              <p v-if="invoiceForm.ticket === false">单位名称：{{invoiceForm.companyname}}</p>
+              <p v-if="invoiceForm.ticket === false">纳税人识别号：{{invoiceForm.number}}</p>
+              <p>注册地址：{{invoiceForm.zcadd}}</p>
+              <p>注册电话：{{invoiceForm.phones}}</p>
+              <p>开户银行：{{invoiceForm.bank}}</p>
+              <p>银行账户：{{invoiceForm.account}}</p>
+              <p>收票人姓名：{{invoiceForm.name}}</p>
+              <p>收票人手机号：{{invoiceForm.tel}}</p>
+              <p>收票人省份：{{invoiceForm.province_name}}{{invoiceForm.city_name}}{{invoiceForm.area_name}}</p>
+              <p>收票人详细地址：{{invoiceForm.address}}</p>
             </div>
 
           </div>
@@ -359,14 +369,14 @@
             <div class="formLi clearfix">
               <p class="fl">收货省份</p>
               <p class="fr province">
-                <el-select v-model="ticketForm.province" placeholder="省">
-                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
+                <el-select v-model="zzTicketForm.province" placeholder="省">
+                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzprovince" :key="'prov'+index"></el-option>
                 </el-select>
-                <el-select v-model="ticketForm.city" placeholder="市">
-                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
+                <el-select v-model="zzTicketForm.city" placeholder="市">
+                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzcity" :key="'city'+index"></el-option>
                 </el-select>
-                <el-select v-model="ticketForm.area" placeholder="区">
-                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
+                <el-select v-model="zzTicketForm.area" placeholder="区">
+                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzarea" :key="'area'+index"></el-option>
                 </el-select>
               </p>
             </div>
@@ -444,6 +454,9 @@ export default {
       province: [],
       city: [],
       area: [],
+      zzprovince: [],
+      zzcity: [],
+      zzarea: [],
       commitOrders: {},
       companyInfo: {
         companyname: '',
@@ -461,7 +474,15 @@ export default {
         companyname: null,
         ticket: true,
         number: null,
+        phones: null,
+        bank: null,
+        account: null,
         address: null,
+        province: null,
+        city: null,
+        area: null,
+        name: null,
+        tel: null,
         radio: 1,
         types: 1, //发票类型
         saveioc: false,
@@ -474,8 +495,11 @@ export default {
         ticket: true,
         number: null,
         province: null,
+        province_name: null,
         city: null,
+        city_name: null,
         area: null,
+        area_name: null,
         name: null,
         tel: null,
         others: null,
@@ -497,8 +521,11 @@ export default {
         tel: '',
         name: '',
         province: null,
+        province_name: null,
         city: null,
+        city_name: null,
         area: null,
+        area_name: null,
         address: null,
         others: '',
         radio: 1,
@@ -592,6 +619,28 @@ export default {
       }
       this.area = this.getRegion(this.city, val)
     },
+    zzprovince(val) {
+      this.zzcity = this.getRegion(val, this.zzTicketForm.province)
+      this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city)
+    },
+    'zzTicketForm.province'(val, oldval) {
+      if (!this.zzprovince && this.zzprovince.length == 0) {
+        this.getRegionList()
+      }
+      if (oldval != '') {
+        this.zzTicketForm.city = ''
+      }
+      this.zzcity = this.getRegion(this.zzprovince, val)
+    },
+    'zzTicketForm.city'(val, oldval) {
+      if (!this.zzcity && this.zzcity.length == 0) {
+        this.getRegionList()
+      }
+      if (oldval != '') {
+        this.zzTicketForm.area = ''
+      }
+      this.zzarea = this.getRegion(this.zzcity, val)
+    },
     address(val) {
       if (val) {
         persistStore.set('address', val)
@@ -600,8 +649,8 @@ export default {
   },
   mounted() {
     this.goodsList()
-    this.getInvoiceDetail()
     this.getRegionList()
+    this.getInvoiceDetail()
     this.resize()
   },
   methods: {
@@ -615,6 +664,7 @@ export default {
       this.$refs.affirmOrder.style.minHeight =
         windowHeight - headerHeight - footerHeight + 'px'
     },
+    // 验证增值税发票 中的纳税人识别号
     reNumber() {
       if (
         this.zzTicketForm.number == '' ||
@@ -627,6 +677,7 @@ export default {
         this.number = true
       }
     },
+    // 验证增值税发票 中的注册电话
     rePhone() {
       if (
         this.zzTicketForm.phones == '' ||
@@ -641,6 +692,7 @@ export default {
         this.phones = true
       }
     },
+    // 验证增值税发票 中的银行卡号
     reAccount() {
       if (
         this.zzTicketForm.account == '' ||
@@ -653,6 +705,7 @@ export default {
         this.account = true
       }
     },
+    // 购买类型 个人/企业
     buyType(type) {
       if (type === '1') {
         this.person = true
@@ -660,6 +713,7 @@ export default {
         this.person = false
       }
     },
+    // 切换普通发票/增值税发票
     chooseTicket(v) {
       if (v === '1') {
         this.choose = '1'
@@ -671,6 +725,7 @@ export default {
       }
       this.getTicket()
     },
+    // 普通发票 选择个人/企业
     chooseCompany(v) {
       if (v === '1') {
         this.ticketForm.saveioc = false
@@ -681,10 +736,12 @@ export default {
       }
       this.getTicket()
     },
+    // 展示修改发票信息弹框
     showIoc() {
       this.showInvoice = true
       this.getTicket()
     },
+    // 增值税发票 下一步
     nextStep(item) {
       if (item === 'stepOne') {
         this.stepOne = true
@@ -767,8 +824,8 @@ export default {
         this.stepThree = true
       }
     },
+    //普通发票、个人发票 验证
     addInvoiceBefor() {
-      //普通发票、个人发票
       if (this.ticketForm.saveioc) {
         this.ticketForm.types = 2
       } else {
@@ -811,6 +868,7 @@ export default {
       }
       this.addInvoiceInfo()
     },
+    // 添加增值税发票验证
     addZZTicketBefore() {
       if (
         this.zzTicketForm.number == '' ||
@@ -835,11 +893,12 @@ export default {
         })
         return false
       }
-      this.zzTicketForm.province = this.ticketForm.province
-      this.zzTicketForm.city = this.ticketForm.city
-      this.zzTicketForm.area = this.ticketForm.area
+      // this.zzTicketForm.province = this.ticketForm.province
+      // this.zzTicketForm.city = this.ticketForm.city
+      // this.zzTicketForm.area = this.ticketForm.area
       this.addInvoiceInfo()
     },
+    // 添加发票信息
     addInvoiceInfo() {
       //保存发票信息
       if (this.choose === '1') {
@@ -858,6 +917,20 @@ export default {
               this.invoiceForm.number = this.ticketForm.number
               this.invoiceForm.address = this.ticketForm.address
               this.invoiceForm.others = this.ticketForm.others
+              this.invoiceForm.tel = this.ticketForm.tel
+              this.invoiceForm.name = this.ticketForm.name
+              this.invoiceForm.province_name = this.getProvince(
+                this.province,
+                this.ticketForm.province
+              )
+              this.invoiceForm.city_name = this.getCity(
+                this.city,
+                this.ticketForm.city
+              )
+              this.invoiceForm.area_name = this.getArea(
+                this.area,
+                this.ticketForm.area
+              )
               this.invoiceForm.radio = Number(this.ticketForm.radio)
               this.invoiceForm.ticket = false
               this.isShowTicket = true
@@ -889,8 +962,24 @@ export default {
               this.invoiceForm.types = this.zzTicketForm.types
               this.invoiceForm.companyname = this.zzTicketForm.companyname
               this.invoiceForm.number = this.zzTicketForm.number
+              this.invoiceForm.zcadd = this.zzTicketForm.zcadd
               this.invoiceForm.address = this.zzTicketForm.address
               this.invoiceForm.others = this.zzTicketForm.others
+              this.invoiceForm.bank = this.zzTicketForm.bank
+              this.invoiceForm.account = this.zzTicketForm.account
+              this.invoiceForm.phones = this.zzTicketForm.phones
+              this.invoiceForm.province_name = this.getProvince(
+                this.zzprovince,
+                this.zzTicketForm.province
+              )
+              this.invoiceForm.city_name = this.getCity(
+                this.zzcity,
+                this.zzTicketForm.city
+              )
+              this.invoiceForm.area_name = this.getArea(
+                this.zzarea,
+                this.zzTicketForm.area
+              )
               this.invoiceForm.radio = Number(this.zzTicketForm.radio)
               this.invoiceForm.ticket = false
               this.isShowTicket = true
@@ -911,6 +1000,7 @@ export default {
         })
       }
     },
+    // 获取发票信息
     getTicket() {
       return new Promise((resolve, reject) => {
         home.getTicket(this.invoiceForm).then(res => {
@@ -926,13 +1016,19 @@ export default {
               this.ticketForm.name = res.data.consignee
               this.ticketForm.tel = res.data.phone
               this.ticketForm.province = res.data.province
+              this.city = this.getRegion(
+                this.province,
+                this.ticketForm.province
+              )
               this.ticketForm.city = res.data.city
+              this.area = this.getRegion(this.city, this.ticketForm.city)
               this.ticketForm.area = res.data.area
               this.ticketForm.address = res.data.address
               this.ticketForm.radio = Number(res.data.content_type)
               this.ticketForm.others = res.data.content
               this.ticketForm.ticket = false
               this.commitOrders.ticketId = res.data.id
+
               if (this.ticketForm.radio == 2) {
                 this.ticketForm.isRadio = false
               } else {
@@ -949,9 +1045,14 @@ export default {
               this.zzTicketForm.number = res.data.invoice_number
               this.zzTicketForm.name = res.data.consignee
               this.zzTicketForm.tel = res.data.phone
-              this.ticketForm.province = res.data.province
-              this.ticketForm.city = res.data.city
-              this.ticketForm.area = res.data.area
+              this.zzTicketForm.province = res.data.province
+              this.zzcity = this.getRegion(
+                this.zzprovince,
+                this.zzTicketForm.province
+              )
+              this.zzTicketForm.city = res.data.city
+              this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city)
+              this.zzTicketForm.area = res.data.area
               this.zzTicketForm.address = res.data.address
               this.zzTicketForm.others = res.data.content
               this.zzTicketForm.radio = Number(res.data.content_type)
@@ -962,12 +1063,13 @@ export default {
                 this.zzTicketForm.isRadio = true
               }
             }
-            this.getRegion('', this.ticketForm.province)
+            // this.getRegion('', this.ticketForm.province)
           }
           resolve(true)
         })
       })
     },
+    //根据省市区列表 摘出对应省市区
     getRegion(data, val) {
       let tmp = []
       for (let item of data) {
@@ -984,6 +1086,37 @@ export default {
       }
       return tmp
     },
+    // 根据省编码循环省名字
+    getProvince(arr, val) {
+      var province = ''
+      arr.forEach(function(v, i) {
+        if (v.region_code === val) {
+          province = v.name
+        }
+      })
+      return province
+    },
+    // 根据市编码循环市名字
+    getCity(arr, val) {
+      var city = ''
+      arr.forEach(function(v, i) {
+        if (v.region_code === val) {
+          city = v.name
+        }
+      })
+      return city
+    },
+    // 根据区编码循环区名字
+    getArea(arr, val) {
+      var area = ''
+      arr.forEach(function(v, i) {
+        if (v.region_code === val) {
+          area = v.name
+        }
+      })
+      return area
+    },
+    // 切换发票内容
     isTicket(item) {
       if (item === 2) {
         this.ticketForm.isRadio = false
@@ -991,6 +1124,7 @@ export default {
         this.ticketForm.isRadio = true
       }
     },
+    // 切换增值税发票内容
     iszzTicket(item) {
       if (item === 2) {
         this.zzTicketForm.isRadio = false
@@ -1001,9 +1135,8 @@ export default {
     goLink() {
       this.$router.push('/shop/shoppingcart')
     },
+    // 提交订单
     commitOrder() {
-      // console.log(this.company.id, 'this.company.id')
-
       this.company.id
         ? (this.commitOrders.companyId = this.company.id)
         : (this.commitOrders.companyId = '')
@@ -1041,8 +1174,8 @@ export default {
         })
       })
     },
+    //获取商品信息
     goodsList() {
-      //获取商品信息
       this.loadGoods = true
       return new Promise((resolve, reject) => {
         home.goodsList(this.addArray).then(res => {
@@ -1077,8 +1210,8 @@ export default {
         })
       })
     },
+    //获取发票信息
     getInvoiceDetail() {
-      //获取发票信息
       return new Promise((resolve, reject) => {
         home.getInvoiceDetail(this.getInvoice).then(res => {
           if (res.status == 0) {
@@ -1100,11 +1233,20 @@ export default {
             this.invoiceForm.companyname = res.data.invoice_name
             this.invoiceForm.number = res.data.invoice_number
             this.invoiceForm.others = res.data.content
+            this.invoiceForm.tel = res.data.phone
+            this.invoiceForm.name = res.data.consignee
+            this.invoiceForm.province_name = res.data.province_name
+            this.invoiceForm.city_name = res.data.city_name
+            this.invoiceForm.area_name = res.data.area_name
             this.invoiceForm.radio = Number(res.data.content_type)
             this.ticketForm.province = res.data.province
             this.ticketForm.city = res.data.city
             this.ticketForm.area = res.data.area
             this.invoiceForm.address = res.data.address
+            this.invoiceForm.bank = res.data.bank_name
+            this.invoiceForm.account = res.data.bank_card
+            this.invoiceForm.phones = res.data.phone
+            this.invoiceForm.zcadd = res.data.company_address
             this.invoiceForm.radio = res.data.content_type
             this.isShowTicket = true
             this.commitOrders.ticketId = res.data.id
@@ -1112,8 +1254,8 @@ export default {
         })
       })
     },
+    //提交机构信息表单
     addCompanyInfo(formName) {
-      //提交机构信息表单
       this.$refs[formName].validate(valid => {
         if (valid) {
           return new Promise((resolve, reject) => {
@@ -1143,20 +1285,22 @@ export default {
         }
       })
     },
+    // 打开添加机构
     openCompanyInfo() {
       this.showInfo = true
     },
+    // 关闭表单
     close() {
-      // 关闭表单
       this.showInfo = false
       this.showInvoice = false
     },
+    // 选择公司名称
     handleSelect(item) {
       this.companyInfo.companyname = item.company_name
     },
+
+    //搜索机构
     querySearchAsync(queryString, cb) {
-      console.log(111)
-      //搜索机构
       queryString = queryString.replace(/^\s+|\s+$/g, '')
       if (queryString === '') {
         return false
@@ -1240,6 +1384,7 @@ export default {
             value: item.region_code
           })
         })
+        this.zzprovince = this.province
       })
     }
   }

@@ -111,6 +111,7 @@
               <div class="common-button btn-bgs " v-else>
                 <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
               </div>
+              <!-- personal 是否是个人中心内的课程列表 -->
               <el-row v-if="config.position !== 'personal'">
                 <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) " v-if="config.card === 'home'">
