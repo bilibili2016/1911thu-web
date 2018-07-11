@@ -223,7 +223,7 @@
         </div>
       </div>
     </template>
-    <!-- 新上好课详情  course/newlesson-->
+    <!-- 新上好课详情  course/newlesson 精品好课详情 course/qualitylesson-->
     <template v-if="config.card_type==='goodlesson' ">
       <div class="courseList center goodLesson ">
         <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
@@ -231,7 +231,10 @@
             <img :src="course.picture " class="image ">
             <div class="personInfo clearfix " @click="goTeacherInfo(course.teacher_id) ">
               <span>{{course}}</span>
-              <img :src="course.head_img " alt=" ">
+              <!-- 课程封面 -->
+              <img v-if="!config.teacher" :src="course.head_img " alt=" ">
+              <!-- 老师封面 -->
+              <img v-if="config.teacher" :src="course.teacher_picture " alt=" ">
               <h5 class="fr ">特约讲师：{{course.teacher_name}}</h5>
               <p class="fr ">{{course.graduate}}</p>
             </div>

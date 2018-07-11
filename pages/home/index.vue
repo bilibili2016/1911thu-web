@@ -179,8 +179,8 @@ export default {
       classicForm: {
         pages: 0,
         limits: null,
-        categoryId: null,
-        sortBy: null
+        evaluateLimit: 0,
+        isEvaluate: 0
       },
       teacherForm: {
         pages: 1,
@@ -246,6 +246,7 @@ export default {
         this.newData = response.data.curriculumList
       })
     },
+    // 获取精品好课列表
     getClassicCourseList() {
       home.getClassicCourseList(this.classicForm).then(response => {
         this.classicData = response.data.curriculumList
