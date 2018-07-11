@@ -65,7 +65,7 @@
               <span class="fl playImg" v-show="ischeck == bar.id?true:false">
                 <img :src="playing" alt="" ref="videoButton">
               </span>
-              <span class="fl barName">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
+              <span class="fl barName" :title="bar.video_number+bar.title+'('+parseInt(bar.video_time / 60)+'分'+parseInt(bar.video_time % 60)+'秒)'">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)
               </span>
             </div>
           </div>
