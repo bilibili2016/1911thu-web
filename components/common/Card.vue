@@ -1089,6 +1089,10 @@ export default {
           border-radius: 6px;
           color: #fff;
           margin-left: 8px;
+          max-width: 92px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
       .item {

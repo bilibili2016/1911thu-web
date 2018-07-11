@@ -73,7 +73,7 @@
               </span>
             </div>
             <div class="area">
-              <el-input type="textarea" :rows="3" placeholder="请输入内容" v-model="textarea">
+              <el-input type="textarea" :rows="3" placeholder="请输入内容" v-model="textarea" maxlength="100">
               </el-input>
             </div>
             <div class="submit">
