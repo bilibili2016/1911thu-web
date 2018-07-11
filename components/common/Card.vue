@@ -3,8 +3,10 @@
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
       <div class="customization">
-        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link)">
-          <i class="fl"></i>
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link_url)">
+          <i class="fl">
+            <img :src="pro.picture" alt="">
+          </i>
           <div class="fr con">
             <h5>{{pro.title}}</h5>
             <p>{{pro.content}}</p>
@@ -45,7 +47,7 @@
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
-                    {{card.study_time}}课时
+                    {{card.study_time}}学时
                   </span>
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
@@ -63,7 +65,7 @@
                 </div>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps " v-if="config.card==='learning' ">
+              <div class="line-wraps" v-if="config.card==='learning' ">
                 <div class="line-centers ">
                   <!-- {{typeof(card.percent)}} -->
                   <p>已学习{{card.percent}}%</p>
@@ -78,6 +80,12 @@
               <div class="readyImg " v-if="config.card==='already' ">
                 <img :src="readyImg " alt=" ">
               </div>
+              <!-- 我的课程 已过期的图片 -->
+              <div class="readyImg " v-if="config.card==='overtime' ">
+                <img :src="overTimeImg" alt=" ">
+              </div>
+              <!-- 我的课程 已过期的副标题 -->
+              <div class="deputyTitleOverTime" v-if="config.card==='overtime' ">{{card.deputy_title}}</div>
             </el-row>
           </el-card>
         </div>
@@ -89,31 +97,35 @@
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
           <el-card shadow="never " body-style="padding: 0; " class="itemBox ">
-            <!-- {{card.id}} -->
+
+            <!-- 选课使用的勾选 -->
             <el-checkbox v-model="card.is_checked " @change="selCheckboxChange(card,index) " style="position:absolute;top:10px;right:10px; " v-if="config.types==='buy' "></el-checkbox>
+
             <!-- @click="selectCid(card,index) " -->
             <div @click="courseInfo(card,index) ">
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
-              <div class="mask-style ">
-                <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
-                <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
-              </div>
+              <div class="mask-style "></div>
+              <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
+              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
+              <!-- </div> -->
+
+              <!-- 我的首页的图片背景 -->
               <div class="bgImgs ">
                 <img :src="card.picture " alt=" ">
               </div>
-              <div class="tag ">
-                <!-- 收藏的tag -->
+
+              <!-- <div class="tag ">
                 <span v-if="card.tag.length !==0 " v-for="(tag,index) in card.tag " :key="index ">{{tag}}</span>
-              </div>
-              <div v-if="config.card==='home' "></div>
+              </div> -->
+
+              <!-- <div v-if="config.card==='home' "></div>
               <div class="common-button btn-bgs " v-else>
-                <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
-              </div>
-              <!-- personal 是否是个人中心内的课程列表 -->
+                <el-button type="primary " plain @click="goLink(linkdata) ">继续学习2334</el-button>
+              </div> -->
+
               <el-row v-if="config.position !== 'personal'">
-                <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) " v-if="config.card === 'home'">
                   <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]">
                     <span class="title">{{card.title}}</span>
@@ -121,7 +133,7 @@
                   </p>
                   <p class="itemBox-info">
                     <span v-if="config.card === 'home'">
-                      {{card.study_time}}课时
+                      {{card.study_time}}学时
                     </span>
                     <span class="itemBox-num" v-if="config.card === 'home'">
                       <img :src="numSrc" alt="">
@@ -131,20 +143,23 @@
                   </p>
                 </div>
                 <div class="line-wrap " v-if="config.card==='home' ">
-                  <div class="line-center ">
+                  <div class="line-center">
                     <p class="price ">￥{{card.present_price}}</p>
                   </div>
                 </div>
               </el-row>
+              <!-- 我的课程的 我的收藏 -->
               <el-row v-if="config.position === 'personal'">
-                <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) ">
                   <p class="itemBox-name ">
                     <span>{{card.title}}</span>
                   </p>
+                  <!-- {{card}} -->
+                  <div class="deputyTitleOverTime">{{card.deputy_title}}</div>
+                  <!-- <span>123</span> -->
                 </div>
                 <div class="line-wrap " v-if="config.card==='home' " @click.stop="goTeacherInfo(card.teacher_id) ">
-                  <div class="line-center ">
+                  <div class="line-center">
                     <img :src="card.head_img " alt=" ">
                     <span>{{card.teacher_name}}</span>
                     <span class="title ">{{card.graduate}}</span>
@@ -341,7 +356,7 @@
                 </div>
                 <div v-else>
                   <span class="fl coursenum">
-                    <span>{{courseList.study_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                    <span>{{courseList.study_time}}学时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                   <span class="rate">
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
@@ -388,7 +403,7 @@
                 </div>
                 <div v-else>
                   <span class="fl coursenum">
-                    <span>{{courseList.study_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                    <span>{{courseList.study_time}}学时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                   <span class="rate">
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
@@ -487,6 +502,7 @@ export default {
       numSrc: require('@/assets/images/home_num.png'),
       one: 1,
       readyImg: require('@/assets/images/ready.png'),
+      overTimeImg: require('@/assets/images/overtime.png'),
       playbtn: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
       // jinImg: require('@/assets/images/jin.png'),
@@ -900,6 +916,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.deputyTitleOverTime {
+  width: 220px;
+  height: 20px;
+  line-height: 20px;
+  margin: 8px 0;
+  overflow: hidden;
+  font-size: 14px;
+  color: #93999f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 16px;
+}
 .new-style {
   img {
     width: 48px !important;
@@ -953,8 +982,9 @@ export default {
   left: 50%;
   margin-left: -550px;
   z-index: 3;
+  padding-left: 192px;
   div.pro {
-    float: right;
+    float: left;
     width: 280px;
     height: 100px;
     border-radius: 5px;
@@ -965,7 +995,7 @@ export default {
       margin-top: -8px;
       background-color: #f1e9f8;
     }
-    &:last-child,
+    &:nth-child(1),
     &:nth-child(2) {
       margin-right: 31px;
     }
@@ -975,7 +1005,7 @@ export default {
     img {
       width: 50px;
       height: 50px;
-      margin: 25px 16px;
+      margin: 2px 3px;
     }
     div {
       width: 178px;
@@ -1682,6 +1712,9 @@ export default {
           height: 54px;
           line-height: 54px;
           margin-bottom: 0px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
         h4:hover {
           color: #8f4acb;
@@ -1795,6 +1828,13 @@ export default {
           color: rgba(34, 34, 34, 1);
           line-height: 30px;
           margin-bottom: 20px;
+          height: 94px;
+          // border: 1px red solid;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
           &.soldOut {
             text-decoration: underline;
           }

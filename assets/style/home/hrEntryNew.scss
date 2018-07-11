@@ -187,9 +187,11 @@
 
       .list-item {
         width: 340px;
-        height: 115px;
+
+        height: 80px;
+        // line-height: 80px;
         float: left;
-        border-radius: 16px;
+        // border-radius: 16px;
         text-align: center;
         margin-right: 40px;
         background-color: #fff;
@@ -231,6 +233,7 @@
         }
       }
       .list-icon {
+        height: 115px;
         padding-top: 20px;
       }
     }

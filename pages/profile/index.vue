@@ -31,6 +31,7 @@
               </el-option>
             </el-select>
             <el-tabs v-model="activeNames" @tab-click="handleActive">
+              <!-- 我的课程 学习中 -->
               <el-tab-pane label="学习中" name="first">
                 <v-card v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-card>
                 <div class="pagination" v-if="newDataing  && newDataing.length>0">
@@ -44,6 +45,7 @@
                   </div>
                 </div>
               </el-tab-pane>
+              <!-- 我的课程 已完成 -->
               <el-tab-pane label="已完成" name="second">
                 <v-card v-if="newDataReady && newDataReady.length>0" :data="newDataReady" :config="configTwo"></v-card>
                 <div class="pagination" v-if="newDataReady && newDataReady.length>0">
@@ -57,6 +59,21 @@
                   </div>
                 </div>
               </el-tab-pane>
+              <!-- 我的课程 已过期 -->
+              <el-tab-pane label="已过期" name="fourth">
+                <v-card v-if="overTimeData && overTimeData.length>0" :data="overTimeData" :config="configFour"></v-card>
+                <div class="pagination" v-if="overTimeData && overTimeData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
+                </div>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有已过期的课程呦~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
+              </el-tab-pane>
+              <!-- 我的课程 我的收藏 -->
               <el-tab-pane label="我的收藏" name="third">
                 <v-card v-if="collectionData && collectionData.length>0" :data="collectionData" :config="configZero"></v-card>
                 <div class="pagination" v-if="collectionData && collectionData.length>0">
@@ -113,22 +130,44 @@
                   </div>
                 </div>
               </el-tab-pane>
-              <el-tab-pane name="orderFour">
+              <!-- <el-tab-pane name="orderFour">
                 <span class="payOff" slot="label">已失效
                 </span>
-                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
+                <v-order v-if="overTimeData && overTimeData.length>0" :orderData="overTimeData" @goOrderDetail="overTimeData" v-loading="invalidOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
                   </div>
                 </div>
-              </el-tab-pane>
+              </el-tab-pane> -->
             </el-tabs>
           </el-card>
 
           <!-- 订单详情 -->
           <div class="orderListDetail" v-else>
+            <!-- <div class="order-top">
+              <div class="orderItem orderInfo ">
+                <div class="title">订单信息</div>
+                <div>
+                  <p>
+                    <span>订单编号：</span>
+                    <span>{{orderDetail.order_sn}}</span>
+
+                  </p>
+                  <p>
+                    <span>下单时间：</span>
+                    <span>{{timestampToTime(orderDetail.create_time)}}</span>
+                  </p>
+                </div>
+              </div>
+              <div class="orderItem payInfo">
+                <div class="title">付款信息</div>
+              </div>
+              <div class="orderItem ticketInfo">
+                <div class="title">发票信息</div>
+              </div>
+            </div> -->
             <div class="table">
               <div class="tableHeader">
                 <span class="goBack" @click="goBack">
@@ -161,7 +200,6 @@
                 <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
               </div>
             </div>
-
           </div>
         </el-tab-pane>
         <!-- 我的消息 -->
@@ -253,6 +291,10 @@ export default {
         card_type: 'profile',
         card: 'already'
       },
+      configFour: {
+        card_type: 'profile',
+        card: 'overtime'
+      },
       newData: [],
       styleForm: {
         types: 1,
@@ -310,7 +352,8 @@ export default {
       allOrderLoad: true,
       unfinishedOrderLoad: true,
       readyOrderLoad: true,
-      invalidOrderLoad: true
+      invalidOrderLoad: true,
+      overTimeData: []
     }
   },
   computed: {
@@ -482,6 +525,20 @@ export default {
         })
       })
     },
+    // 我的课程 已过期的项目
+    overStudyCurriculumList() {
+      this.pagemsg2.page = 1
+      this.styleForm.pages = 1
+      this.styleForm.types = 4
+      return new Promise((resolve, reject) => {
+        home.studyCurriculumList(this.styleForm).then(response => {
+          this.overTimeData = response.data.curriculumList
+          // this.pagemsg2.total = response.data.pageCount
+          console.log(response.data.curriculumList, '获取过期的项目')
+          resolve(true)
+        })
+      })
+    },
     // 已完成 分页切换
     readyStudyPageChange(val) {
       this.pagemsg2.page = val
@@ -549,6 +606,17 @@ export default {
           this.readyOrderLoad = false
           resolve(true)
         })
+      })
+    },
+    // 我的课程 已过期
+    getOverTime() {
+      this.orderForm.payStatus = 4
+      home.getAllOrderData(this.orderForm).then(response => {
+        this.overTimeData = response.data.orderList
+
+        console.log(response.data.orderList, '123')
+        // this.readyOrderLoad = false
+        resolve(true)
       })
     },
     // 我的订单 取消
@@ -633,6 +701,9 @@ export default {
       this.getCodeList()
       this.getRecordList()
       this.curriculumPayApply()
+      this.getOverTime()
+      //过期的我的课程
+      this.overStudyCurriculumList()
     }
     this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid
@@ -730,12 +801,12 @@ export default {
         color: #222;
         margin-bottom: 40px;
         .goBack {
-          margin-left: 40px;
+          margin-left: 10px;
           color: #6417a6;
           cursor: pointer;
         }
         .courseName {
-          margin-left: 53px;
+          margin-left: 75px;
         }
         .price {
           margin-left: 500px;

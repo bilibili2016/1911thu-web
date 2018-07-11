@@ -53,12 +53,17 @@
   }
   .tcInfo h6 {
     width: 660px;
-    height: 75px;
+    height: 125px;
     margin: 0 auto;
     overflow: hidden;
-    margin-top: 40px;
+    margin-top: 10px;
     line-height: 25px;
     color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
   }
   .courseList h3 {
     height: 100px;

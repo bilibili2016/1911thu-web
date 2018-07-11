@@ -100,27 +100,27 @@ export default {
         card_type: 'ding'
       },
       dingData: [
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
-          title: '面授、线下活动',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/faceteach'
-        },
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
-          title: '机构课程定制',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/enterprisecustom'
-        },
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
-          title: '学位项目',
-          content:
-            '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-          link: '/other/degree'
-        }
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
+        //   title: '面授、线下活动',
+        //   content:
+        //     '中共中央办公厅国务院办公厅印发关于党政机关停止新建楼堂馆所和清理办楼堂馆所和清理办...',
+        //   link: '/other/faceteach'
+        // },
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
+        //   title: '机构课程定制',
+        //   content:
+        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
+        //   link: '/other/enterprisecustom'
+        // },
+        // {
+        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
+        //   title: '学位项目',
+        //   content:
+        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
+        //   link: '/other/degree'
+        // }
       ],
       numSrc: require('@/assets/images/home_num.png'),
       value1: 4,
@@ -132,7 +132,7 @@ export default {
       },
       classify: [
         {
-          category_name: '干部通用学院',
+          category_name: '干部网络学院',
           id: '1'
         },
         {
@@ -215,7 +215,8 @@ export default {
         this.getTeacherList(),
         // this.getEvaluateList(),
         this.getNewsInfoList(),
-        this.getPartnerList()
+        this.getPartnerList(),
+        this.getPointList()
       ])
     },
     // 获取banner
@@ -275,6 +276,13 @@ export default {
     getPartnerList() {
       home.getPartnerList(this.partnerList).then(response => {
         this.partnerList.list = response.data.collaborationEnterpriseList
+      })
+    },
+    // 获取定制消息
+    getPointList() {
+      home.getPointList().then(response => {
+        console.log(response, '获取定制消息')
+        this.dingData = response.data.pointList
       })
     }
   },

@@ -26,7 +26,7 @@
 import CustomCard from '@/components/common/Card.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players } from '~/lib/v1_sdk/index'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 
 import List from '@/pages/course/components/List'
@@ -41,7 +41,8 @@ export default {
     'v-page': Page
   },
   computed: {
-    ...mapState('auth', ['pid', 'cid', 'cindex', 'cg'])
+    ...mapState('auth', ['pid', 'cid', 'cindex', 'cg']),
+    ...mapGetters('auth', ['isAuthenticated'])
   },
   data() {
     return {
@@ -157,8 +158,12 @@ export default {
       home.childCategoryList().then(res => {
         this.cidData = res.data.categoryList
         // console.log(this.cindex, '00000000')
+        if (this.cindex) {
+          this.pidData = res.data.categoryList[this.cindex]
+        } else {
+          this.pidData = res.data.categoryList[0]
+        }
 
-        this.pidData = res.data.categoryList[this.cindex]
         this.loadBanner = false
       })
     },
@@ -203,26 +208,52 @@ export default {
     }
   },
   mounted() {
-    this.activeTab = 'first'
-    // console.log(this.cid, '这是cid')
-    // console.log(this.pid, '这是pid')
-    this.cidBg = this.cid
-    this.pidBg = this.pid
+    if (this.cid) {
+      this.activeTab = 'first'
+      this.cidBg = this.cid
+      this.pidBg = this.pid
+      // 获取竖直列表
+      this.getClassicsList()
+      this.getCidPidList()
+      this.getcourseList()
+      if (this.cg === '2') {
+        this.cidform.pids = '0'
+        this.cidform.cids = '0'
+        this.cidform.indexs = 0
+        // this.pidData = this.cidData[0]
+        this.cidBg = 0
+        this.pidBg = 0
+        this.setCid(this.cidform)
+        this.getcourseList()
+      }
+      console.log('有cid')
+    } else {
+      this.activeTab = 'first'
 
-    // 获取竖直列表
-    this.getClassicsList()
-    this.getCidPidList()
-    this.getcourseList()
-    // console.log(this.cg, 'ppp')
-    if (this.cg === '2') {
-      this.cidform.pids = '0'
+      // 无登录时候设置全部选择
+
       this.cidform.cids = '0'
       this.cidform.indexs = 0
-      // this.pidData = this.cidData[0]
+      this.cidform.pids = '0'
       this.cidBg = 0
       this.pidBg = 0
+
+      // this.pidData = this.cidData[0]
       this.setCid(this.cidform)
+
+      // 获取竖直列表
+      this.getClassicsList()
+      this.getCidPidList()
       this.getcourseList()
+      if (this.cg === '2') {
+        this.cidform.pids = '0'
+        this.cidform.cids = '0'
+        this.cidform.indexs = 0
+        // this.pidData = this.cidData[0]
+        this.cidBg = 0
+        this.pidBg = 0
+        this.setCid(this.cidform)
+      }
     }
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
