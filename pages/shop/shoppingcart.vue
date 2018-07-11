@@ -52,7 +52,7 @@
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
-            <i>{{checkedCourse}}</i> 门课程</span>
+            <i>{{this.addArray.curriculumcartid.length}}</i> 门课程</span>
         </div>
       </div>
     </div>
@@ -99,8 +99,6 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   data() {
     return {
-      // prices: 0, //计算总价钱
-      checkedCourse: 0, //已选几门课程
       isNoMsg: false,
       loding: true,
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
