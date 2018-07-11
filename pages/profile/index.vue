@@ -399,6 +399,7 @@ export default {
         })
       })
     },
+    //获取失效订单
     getInvalidOrderData() {
       this.orderForm.payStatus = 3
       return new Promise((resolve, reject) => {
