@@ -13,7 +13,7 @@
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 用户评价 -->
-      <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate>
+      <!-- <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate> -->
       <!-- 学堂资讯 -->
       <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive="titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
       <!-- 合作伙伴 -->
@@ -34,8 +34,8 @@ import Info from '@/pages/home/components/info.vue'
 import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { store as persistStore } from '~/lib/core/store'
-
-import { home } from '~/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from 'vuex'
+import { home, newlesson } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-partner': Partner,
@@ -50,9 +50,9 @@ export default {
   },
   data() {
     return {
-      linkzero: '/course/classifylist',
+      linkzero: '/course/freelesson',
       linkone: '/course/newlesson',
-      linktwo: '/course/classifycourse',
+      linktwo: '/course/classifylesson',
       linkfours: '/news/list',
       linkfive: '/news/detail',
       freeData: [],
@@ -200,24 +200,9 @@ export default {
       loginMsg: false
     }
   },
-  beforeCreate() {
-    // this.getAll()
-  },
-  created() {
-    let aa = persistStore.get('dandian')
-    this.getAll()
-  },
-  mounted() {
-    this.$bus.$on('loginMsg', data => {
-      if (data === true) {
-        this.loginMsg = true
-      }
-    })
-
-    this.$bus.$on('reLogin', data => {
-      this.getAll()
-    })
-    this.$bus.$emit('bannerShow', false)
+  created() {},
+  computed: {
+    ...mapState('auth', ['did'])
   },
   methods: {
     async getAll() {
@@ -228,7 +213,7 @@ export default {
         this.getNewCourseList(),
         this.getClassicCourseList(),
         this.getTeacherList(),
-        this.getEvaluateList(),
+        // this.getEvaluateList(),
         this.getNewsInfoList(),
         this.getPartnerList()
       ])
@@ -257,7 +242,7 @@ export default {
     },
     // 获取新上好课列表
     getNewCourseList() {
-      home.getNewCourseList(this.courseForm).then(response => {
+      newlesson.getNewCourseList(this.courseForm).then(response => {
         this.newData = response.data.curriculumList
       })
     },
@@ -273,11 +258,11 @@ export default {
       })
     },
     // 用户评价
-    getEvaluateList() {
-      home.getEvaluateList(this.evaluateForm).then(response => {
-        this.evaluateData = response.data.evaluateList
-      })
-    },
+    // getEvaluateList() {
+    //   home.getEvaluateList(this.evaluateForm).then(response => {
+    //     this.evaluateData = response.data.evaluateList
+    //   })
+    // },
     // 学堂资讯
     getNewsInfoList() {
       home.getNewsInfoList(this.newsInfoForm).then(response => {
@@ -291,6 +276,23 @@ export default {
         this.partnerList.list = response.data.collaborationEnterpriseList
       })
     }
+  },
+  mounted() {
+    this.$bus.$on('loginMsg', data => {
+      if (data === true) {
+        this.loginMsg = true
+      }
+    })
+    // console.log(this.did, '9999')
+    // console.log(this.did === '0', '9999')
+    if (this.did === '0') {
+      this.getAll()
+    } else {
+    }
+    this.$bus.$on('reLogin', data => {
+      this.getAll()
+    })
+    this.$bus.$emit('bannerShow', false)
   }
 }
 </script>

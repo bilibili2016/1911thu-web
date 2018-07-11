@@ -1,13 +1,5 @@
 <template>
   <div class="allInfo">
-    <!-- <div class="recommend" v-show="recommend">
-      <div>
-        <img src="@/assets/images/hr_discounts1.png" alt="">
-        <span>优惠专题入口</span>
-        <img src="@/assets/images/hr_discounts2.png" alt="">
-        <i class="el-icon-close" @click="closeRecommend"></i>
-      </div>
-    </div> -->
     <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
       <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic5.png" alt="">
       <div class="top-text">
@@ -116,8 +108,8 @@
             <i class="word-desc-bg"></i>您也可以拨打咨询电话：4000-5856-9654</p>
           <div class="formDIv">
             <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-              <el-form-item label="" prop="name">
-                <el-autocomplete class="inline-input" placeholder="您的机构名称" v-model="company.name" :fetch-suggestions="querySearch" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+              <el-form-item label="" prop="companyname">
+                <el-autocomplete class="inline-input" placeholder="您的机构名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
               </el-form-item>
               <el-form-item label="" prop="person">
                 <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
@@ -127,7 +119,8 @@
               </el-form-item>
               <el-form-item label="" prop="code">
                 <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
-                <span class="code" @click="handleGetCode">{{company.getCode}}</span>
+                <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
+                <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
@@ -160,6 +153,9 @@ export default {
       return callback()
     }
     return {
+      codeClick: false,
+      restaurants: [],
+      timeout: null,
       backPosition: 0,
       move: true,
       interval: null,
@@ -237,7 +233,7 @@ export default {
       ],
       studyList: ['进入网站或APP', '我的课程', '点击课程封面', '进入视频学习'],
       company: {
-        name: '',
+        companyname: '',
         person: '',
         phones: '',
         userID: null,
@@ -249,7 +245,9 @@ export default {
         captchaDisable: false
       },
       rules: {
-        name: [{ required: true, message: '请输入机构名', trigger: 'blur' }],
+        companyname: [
+          { required: true, message: '请输入机构名', trigger: 'blur' }
+        ],
         person: [
           { required: true, message: '请输入联系人姓名', trigger: 'blur' }
         ],
@@ -337,6 +335,7 @@ export default {
     querySearch(queryString, cb) {},
     // 获取验证码 this.registerData
     async handleGetCode(data) {
+      this.codeClick = true
       if (
         this.company.phones === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.company.phones)
@@ -347,8 +346,10 @@ export default {
           message: '请填写正确的手机号'
         })
         this.company.captchaDisable = true
+        this.codeClick = false
       } else {
         this.company.captchaDisable = false
+        this.codeClick = true
       }
       if (!this.company.captchaDisable && this.company.seconds == 30) {
         return new Promise((resolve, reject) => {
@@ -365,6 +366,7 @@ export default {
                 this.company.getCode = '获取验证码'
                 this.company.seconds = 30
                 this.company.captchaDisable = false
+                this.codeClick = false
                 clearInterval(interval)
               } else {
                 this.company.getCode = --this.company.seconds + '秒后重新发送'
@@ -392,6 +394,52 @@ export default {
         this.istopFixed = false
         this.istopRelative = true
         this.istopBottom = false
+      }
+    },
+    handleSelect(item) {
+      this.company.companyname = item.company_name
+    },
+    querySearchAsync(queryString, cb) {
+      //搜索机构
+      queryString = queryString.replace(/^\s+|\s+$/g, '')
+      if (queryString === '') {
+        return false
+      }
+      this.searchCompanyList()
+      var restaurants = this.restaurants
+      var results = queryString
+        ? restaurants.filter(this.createStateFilter(queryString))
+        : restaurants
+      clearTimeout(this.timeout)
+      cb(results)
+    },
+    createStateFilter(queryString) {
+      return state => {
+        return (
+          state.company_name
+            .toLowerCase()
+            .indexOf(queryString.toLowerCase()) === 0
+        )
+      }
+    },
+    //搜索机构 接口
+    searchCompanyList() {
+      if (this.company.companyname === '') {
+        return false
+      } else {
+        return new Promise((resolve, reject) => {
+          home.searchCompanyList(this.company).then(res => {
+            for (var i = 0; i < res.data.companyList.length; i++) {
+              this.$set(
+                res.data.companyList[i],
+                'value',
+                res.data.companyList[i].company_name
+              )
+            }
+            this.restaurants = res.data.companyList
+            resolve(true)
+          })
+        })
       }
     }
   },

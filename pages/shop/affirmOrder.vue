@@ -29,7 +29,7 @@
               <p>暂无信息，请您添加。</p>
             </div>
             <div class="cpnInfo" v-else>
-              <p class="cpnInfoLi">
+              <!-- <p class="cpnInfoLi">
                 <span>
                   <strong>联系人:</strong>{{company.contact_person}}</span>
                 <span>
@@ -38,7 +38,13 @@
                   <strong>公司地址:</strong>{{company.address}}</span>
                 <span>
                   <strong>手机号:</strong>{{company.phone}}</span>
-              </p>
+              </p> -->
+              <div class="cpnInfoLi">
+                <p>联系人：{{company.contact_person}}</p>
+                <p>公司名称：{{company.company_name}}</p>
+                <p>公司地址：{{company.address}}</p>
+                <p>手机号：{{company.phone}}</p>
+              </div>
             </div>
 
           </div>
@@ -74,21 +80,21 @@
                 <strong style="display:inline-block;padding-right:8px;">发票类型:</strong>个人</span> -->
               <p>
                 <span v-show="isShowTicket">
-                  <strong class="choose" v-show="invoiceForm.choose=='1'">普通发票</strong>
-                  <strong class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</strong>
-                  <strong>发票抬头:</strong>
+                  <i class="choose" v-show="invoiceForm.choose=='1'">普通发票</i>
+                  <i class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</i>
+                  <i>发票抬头：</i>
                   <span v-if="invoiceForm.ticket === true">个人</span>
                   <span v-if="invoiceForm.ticket === false">{{invoiceForm.companyname}}</span>
                   <span v-if="invoiceForm.ticket === false">{{invoiceForm.number}}</span>
                 </span>
                 <!-- 显示发票抬头 -->
                 <span class="invoiceWord" v-show="isShowTicket">
-                  <strong>发票内容:</strong>
+                  <i>发票内容：</i>
                   <span v-if="invoiceForm.radio == 1">培训费</span>
                   <span v-if="invoiceForm.radio == 2">{{invoiceForm.others}}</span>
                 </span>
                 <span v-show="isShowTicket">
-                  <strong>收货地址:</strong>{{invoiceForm.address}}
+                  <i>收货地址：</i>{{invoiceForm.address}}
                 </span>
 
                 <span class="invoiceWord" v-show="!isShowTicket">
@@ -1019,12 +1025,17 @@ export default {
           if (res.status === 0) {
             persistStore.set('cpyid', res.data.id)
             this.$router.push('/shop/wepay')
-          } else {
             this.$message({
               showClose: true,
-              type: 'error',
+              type: 'success',
               message: res.msg
             })
+          } else {
+            // this.$message({
+            //   showClose: true,
+            //   type: 'error',
+            //   message: res.msg
+            // })
           }
           resolve(true)
         })
@@ -1144,6 +1155,7 @@ export default {
       this.companyInfo.companyname = item.company_name
     },
     querySearchAsync(queryString, cb) {
+      console.log(111)
       //搜索机构
       queryString = queryString.replace(/^\s+|\s+$/g, '')
       if (queryString === '') {

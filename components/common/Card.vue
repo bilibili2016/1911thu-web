@@ -363,6 +363,7 @@
                 </div>
                 <div class="study clearfix" v-else>
                   <p>{{courseList.introduction}}</p>
+                  <!-- <p class="soldOut fl" v-if="courseList.status =='2'">此课程已下架</p> -->
                   <div class="common-button">
                     <div v-if="isAuthenticated">
                       <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习6</el-button> -->
@@ -393,11 +394,13 @@
                   <h4 class="clearfix">
                     <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                     <p>已学时长</p>
+                    <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
                   </h4>
                   <div class="common-button">
                     <div>
                       <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                     </div>
+                    <!--  v-if="courseList.status =='1'" -->
                     <div>
                       <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
                     </div>
@@ -452,41 +455,7 @@
         </div>
       </div>
     </template>
-    <!-- 学堂资讯 -->
-    <template v-if="config.card_type === 'infoOne'">
-      <div class="info-list">
-        <!--  -->
-        <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index<3">
-          <el-card shadow="never" body-style="padding: 0;">
-            <div class="info-box" @click="selectDetail(index,card,linkfive)">
-              <div class="info-wrap">
-                <img :src="card.picture" alt="">
-                <span>{{card.title}}</span>
-              </div>
-            </div>
-          </el-card>
-        </div>
-        <div class="more newsMore" @click="getMore(linkdata)">查看更多>></div>
-      </div>
-    </template>
 
-    <template v-if="config.card_type === 'infoTwo'">
-      <div class="card-categorys">
-        <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 0">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBoxs">
-            <div class="img-box">
-              <img :src="card.picture" alt="">
-              <div>
-                <span>{{card.title}}</span>
-              </div>
-            </div>
-            <div class="item">
-              {{card.introduce}}
-            </div>
-          </el-card>
-        </div>
-      </div>
-    </template>
   </div>
 </template>
 
@@ -498,8 +467,6 @@ export default {
   props: [
     'data',
     'config',
-    'infoArticle',
-    'infoDesc',
     'dingData',
     'searchData',
     'courseList',
@@ -1284,74 +1251,14 @@ export default {
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {
   margin: 0 30px 50px 0;
-  &:nth-child(4n + 4) {
-    // margin-right: 24px;
-  }
+  // &:nth-child(4n + 4) {
+  // margin-right: 24px;
+  // }
   &:nth-child(3n + 3) {
     margin-right: 0;
   }
-} // 学堂资讯
-.info-list {
-  float: right;
-  .el-card {
-    border: none;
-  }
-  .info {
-    width: 593px;
-    height: 106px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 6px;
-    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-    margin-bottom: 20px;
-    cursor: pointer;
-    &:hover {
-      box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
-      transition: all 300ms;
-    }
-    .info-box {
-      height: 106px;
-      .info-wrap {
-        height: 106px;
-        overflow: hidden;
-        img {
-          width: 180px;
-          height: 106px;
-          padding: 0px;
-          margin: 0px;
-          overflow: hidden;
-        }
-        span {
-          display: inline-block;
-          width: 413px;
-          height: 72px;
-          line-height: 36px;
-          margin-top: 17px;
-          font-size: 18px;
-          padding: 0 15px;
-          color: rgba(34, 34, 34, 1);
-          overflow: hidden;
-          vertical-align: top;
-        }
-        span:hover {
-          color: #8f4acb;
-        }
-      }
-    }
-  }
-  .more {
-    float: right;
-    height: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: MicrosoftYaHei;
-    color: rgba(100, 23, 166, 1);
-    line-height: 40px;
-    &.newsMore:hover {
-      transition: all 300;
-      color: #8f4acb;
-    }
-  }
-} // left
+}
+// left
 .card-categorys {
   display: flex;
   justify-content: space-between;
@@ -1884,16 +1791,21 @@ export default {
           color: rgba(34, 34, 34, 1);
           line-height: 30px;
           margin-bottom: 20px;
+          &.soldOut {
+            text-decoration: underline;
+          }
         }
         h4 {
           float: left;
           color: #222;
-          p:first-child {
-            font-size: 20px;
+          p {
             margin: 0;
-          }
-          p:last-child {
-            font-size: 14px;
+            &:first-child {
+              font-size: 20px;
+            }
+            &:last-child {
+              font-size: 14px;
+            }
           }
         }
 
