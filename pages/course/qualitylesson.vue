@@ -43,7 +43,7 @@ export default {
         pages: 1,
         limits: 5,
         evaluateLimit: 4,
-        isevaluate: 1
+        isEvaluate: 1
       },
       scrollTopMsg: true,
       noMoreData: false
@@ -52,7 +52,7 @@ export default {
   methods: {
     // 获取精品好课列表
     getNewCourseList() {
-      newlesson.getClassicCourseList(this.goodCurriculumForm).then(response => {
+      home.getClassicCourseList(this.goodCurriculumForm).then(response => {
         if (response.data.curriculumList.length === 0) {
           this.noMoreData = true
         }
