@@ -74,7 +74,7 @@
               发票信息
               <span>开机构抬头发票须填写纳税人识别号，以免影响报销</span>
             </h4>
-            <div class="invoice">
+            <div :class="['invoice',{'noTicket':!isShowTicket}]">
               <span v-show="isShowTicket">
                 <i class="choose" v-show="invoiceForm.choose=='1'">普通发票</i>
                 <i class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</i>
@@ -86,7 +86,7 @@
               <span class="changeInvoice" @click="showIoc">修改</span>
             </div>
             <!-- 发票内容 -->
-            <div class="ticketInfo" v-show="invoiceForm.choose=='1'">
+            <div class="ticketInfo" v-show="invoiceForm.choose=='1'&&isShowTicket">
               <p v-if="invoiceForm.ticket === true">发票抬头：个人</p>
               <p v-if="invoiceForm.ticket === false">发票抬头：{{invoiceForm.companyname}}</p>
               <p v-if="invoiceForm.ticket === false">纳税人识别号：{{invoiceForm.number}}</p>
@@ -98,7 +98,7 @@
               </p>
               <p>详细地址：{{invoiceForm.address}}</p>
             </div>
-            <div class="ticketInfo" v-show="invoiceForm.choose=='2'">
+            <div class="ticketInfo" v-show="invoiceForm.choose=='2'&&isShowTicket">
               <p>开票方式：订单完成后开票</p>
               <p v-if="invoiceForm.radio == 1">发票内容：培训费</p>
               <p v-if="invoiceForm.radio == 2">发票内容：{{invoiceForm.others}}</p>

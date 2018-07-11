@@ -172,6 +172,9 @@
         line-height: 52px;
         font-size: 14px;
         color: #888;
+        &.noTicket {
+          border-bottom: 1px solid #e8d6f7;
+        }
         .changeInvoice {
           color: #6417a6;
           cursor: pointer;
