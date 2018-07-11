@@ -37,6 +37,14 @@
     // margin: 45px 0 0 70px;
     position: relative;
 
+    .tabList {
+      display: inline-block;
+      width: 70px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; /*超出部分用...代替*/
+    }
+
     .el-tabs--left.el-tabs--card .el-tabs__item.is-left {
       border: none;
       // border-bottom: 1px solid #e1e4ea;

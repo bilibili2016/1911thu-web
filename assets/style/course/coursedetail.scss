@@ -15,6 +15,7 @@
 }
 
 .detail-btngrounp {
+  // max-width: 155px;
   float: left;
   padding: 6px 10px;
   font-size: 12px;
@@ -29,4 +30,8 @@
   border: 1px solid #dcdfe6;
   border-color: #dcdfe6;
   color: #606266;
+
+  // overflow: hidden;
+  // white-space: nowrap;
+  // text-overflow: ellipsis;
 }
