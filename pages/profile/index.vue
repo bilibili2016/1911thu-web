@@ -118,6 +118,28 @@
 
           <!-- 订单详情 -->
           <div class="orderListDetail" v-else>
+            <!-- <div class="order-top">
+              <div class="orderItem orderInfo ">
+                <div class="title">订单信息</div>
+                <div>
+                  <p>
+                    <span>订单编号：</span>
+                    <span>{{orderDetail.order_sn}}</span>
+
+                  </p>
+                  <p>
+                    <span>下单时间：</span>
+                    <span>{{timestampToTime(orderDetail.create_time)}}</span>
+                  </p>
+                </div>
+              </div>
+              <div class="orderItem payInfo">
+                <div class="title">付款信息</div>
+              </div>
+              <div class="orderItem ticketInfo">
+                <div class="title">发票信息</div>
+              </div>
+            </div> -->
             <div class="table">
               <div class="tableHeader">
                 <span class="goBack" @click="goBack">
@@ -150,7 +172,6 @@
                 <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
               </div>
             </div>
-
           </div>
         </el-tab-pane>
         <!-- 我的消息 -->
@@ -555,12 +576,12 @@ export default {
         color: #222;
         margin-bottom: 40px;
         .goBack {
-          margin-left: 40px;
+          margin-left: 10px;
           color: #6417a6;
           cursor: pointer;
         }
         .courseName {
-          margin-left: 53px;
+          margin-left: 75px;
         }
         .price {
           margin-left: 500px;

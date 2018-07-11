@@ -12,7 +12,7 @@
             <h4 @click="courseInfo(course)">{{course.title}}</h4>
             <h5>{{course.deputy_title}}</h5>
             <h6 class="clearfix">
-              <p class="fl">{{course.study_time}}课时 <img :src="stydyNum" alt=""> {{course.study_number}}</p>
+              <p class="fl">{{course.study_time}}学时 <img :src="stydyNum" alt=""> {{course.study_number}}</p>
               <p class="fr">
                 <el-rate disabled v-model="course.score" class="itemBox-rate"></el-rate>
               </p>
