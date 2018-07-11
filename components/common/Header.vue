@@ -939,7 +939,7 @@ export default {
   mounted() {
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
-  this.setDid(this.didForm)
+    this.setDid(this.didForm)
     this.$bus.$on('bannerShow', data => {
       if (data === true) {
         this.bannerMsg = true
@@ -969,7 +969,6 @@ export default {
       this.codeClick = false
     }
   }
-
 }
 </script>
 

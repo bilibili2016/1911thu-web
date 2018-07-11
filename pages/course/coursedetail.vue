@@ -50,7 +50,8 @@
           <div class="personal">
             <img :src="courseList.head_img" alt="" @click="goTeacherInfo(courseList.teacher_id)">
             <h5 @click="goTeacherInfo(courseList.teacher_id)">{{courseList.teacher_name}}</h5>
-            <h6>{{courseList.graduate}}</h6>
+            <!-- <h6></h6> -->
+            <div>{{courseList.graduate}}</div>
             <p>{{courseList.teacher_content}}</p>
           </div>
         </div>
