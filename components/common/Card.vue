@@ -238,12 +238,15 @@
         </div>
       </div>
     </template>
-    <!-- 新上好课详情  course/newlesson-->
+    <!-- 新上好课详情  course/newlesson 精品好课详情 course/qualitylesson-->
     <template v-if="config.card_type==='goodlesson' ">
       <div class="courseList center goodLesson ">
         <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
           <el-card class="fl " :body-style="{ padding: '0px' } ">
-            <img :src="course.picture " class="image ">
+            <!-- 课程封面 -->
+            <img v-if="!config.teacher" :src="course.picture" class="image " alt=" ">
+            <!-- 老师封面 -->
+            <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" ">
             <div class="personInfo clearfix " @click="goTeacherInfo(course.teacher_id) ">
               <span>{{course}}</span>
               <img :src="course.head_img " alt=" ">

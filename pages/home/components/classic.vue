@@ -79,6 +79,9 @@ export default {
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
       transition: all 300ms;
+      .courseInfo h4 {
+        color: #8f4acb;
+      }
     }
     div.fl img {
       width: 250px;
@@ -94,6 +97,7 @@ export default {
         margin-top: 24px;
         color: #1c1f21;
         font-size: 16px;
+        transition: all 300ms;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
