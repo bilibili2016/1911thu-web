@@ -67,7 +67,7 @@
           <li @click="goLink('tab-fourth')">我的消息</li>
           <li @click="goLink('tab-fifth')">个人设置</li>
           <li @click="goLink('tab-sixth')">绑定课程</li>
-          <li @click="goLink('tab-eighth')">专属邀请码</li>
+          <li v-if="this.codeData.length !== 0" @click="goLink('tab-eighth')">专属邀请码</li>
           <li @click="signOuts">退出</li>
         </ul>
       </div>
@@ -194,6 +194,11 @@ export default {
       return callback()
     }
     return {
+      codeData: [], //专属邀请码根据接口长度判断是否显示
+      codeListForm: {
+        pages: 1,
+        limits: null
+      },
       isloading: false, //注册按钮点击之后loading（体验）
       codeInterval: null, //注册获取验证码定时循环
       codeClick: false, //判断是否点击过 获取验证码（防重）
@@ -938,9 +943,20 @@ export default {
     },
     userProtocol() {
       window.open(window.location.origin + '/other/userProtocol')
+    },
+    // 获取专属邀请码列表
+    getCodeList() {
+      return new Promise((resolve, reject) => {
+        home.getCodeList(this.codeListForm).then(response => {
+          this.codeData = response.data.orderInvitationCodeList
+          console.log(this.codeData)
+          resolve(true)
+        })
+      })
     }
   },
   mounted() {
+    this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
     this.setDid(this.didForm)
