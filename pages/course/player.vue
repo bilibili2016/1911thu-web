@@ -612,6 +612,16 @@ export default {
         this.showEvaluate = false
         return false
       }
+      if (this.word.length < 100) {
+        this.addEvaluateForm.evaluatecontent = this.word
+      } else {
+        this.$message({
+          showClose: true,
+          type: 'warning',
+          message: '请输入少于100个字符！'
+        })
+        return false
+      }
 
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')

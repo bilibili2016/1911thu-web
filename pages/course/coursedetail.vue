@@ -56,6 +56,7 @@
           </div>
         </div>
         <!-- 课程评价 -->
+        <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
         <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
           <h4>课程评价</h4>
           <div class="personal">
@@ -275,13 +276,13 @@ export default {
     // 评论-提交评论接口
     addEvaluate() {
       this.addEvaluateForm.ids = persistStore.get('curriculumId')
-      if (this.textarea.length < 300) {
+      if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
       } else {
         this.$message({
           showClose: true,
           type: 'warning',
-          message: '请输入少于300个字符！'
+          message: '请输入少于100个字符！'
         })
         return false
       }
