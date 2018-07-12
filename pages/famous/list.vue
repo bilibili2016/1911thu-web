@@ -1,11 +1,9 @@
 <template>
-  <div class="news-list famous-teacher">
+  <div class="news-list ">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
-
     <div class="center shadow">
       <div @click="getNewInfoList"></div>
-      <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
-      <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
+      <v-card :famousList="famousList" :config="config" :linkSeven='linkSeven' @checkdetail="checkdetail" class="new-card-on"></v-card>
     </div>
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
@@ -27,25 +25,26 @@ export default {
   },
   data() {
     return {
-      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/newList-bg.png',
-      linksix: '/news/detail',
+      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/famousTeacher-bg.png',
+      linkSeven: '/home/components/teacher',
       configs: {
-        banner_type: 'news'
+        banner_type: 'famousList'
       },
       // config: {
       //   card_type: 'goodlesson2'
       // },
       config: {
-        card_type: 'newLists'
+        card_type: 'famousList'
       },
-      newsList: [],
-      newsInfoForm: {
+      famousList: [],
+      teacherForm: {
         pages: 1,
-        limits: 6
+        limits: 7,
+        recommend: 0
       },
       pagemsg: {
         page: 1,
-        pagesize: 6,
+        pagesize: 7,
         total: null
       },
       nidForm: {
@@ -61,23 +60,23 @@ export default {
   methods: {
     ...mapActions('auth', ['setNid']),
     getNewInfoList() {
-      this.newsInfoForm.pages = 1
-      this.newsInfoForm.limits = 6
+      this.teacherForm.pages = 1
+      this.teacherForm.limits = 7
       return new Promise((resolve, reject) => {
-        home.getNewInfoList(this.newsInfoForm).then(response => {
+        home.getTeacherList(this.teacherForm).then(response => {
           this.pagemsg.total = Number(response.data.pageCount)
-          this.newsList = response.data.newsList
+          this.famousList = response.data.teacherList
         })
       })
     },
     selectPages(val) {
-      this.newsInfoForm.pages = val
+      this.teacherForm.pages = val
       this.pagemsg.page = val
-      this.newsInfoForm.limits = this.pagemsg.pagesize
+      this.teacherForm.limits = this.pagemsg.pagesize
       return new Promise((resolve, reject) => {
-        home.getNewInfoList(this.newsInfoForm).then(response => {
+        home.getTeacherList(this.teacherForm).then(response => {
           this.pagemsg.total = Number(response.data.pageCount)
-          this.newsList = response.data.newsList
+          this.famousList = response.data.teacherList
         })
       })
     },
