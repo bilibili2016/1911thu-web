@@ -11,7 +11,7 @@
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 名师智库 -->
-      <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
+      <v-famous :teachers="teachers" :titleFore="titleFore" :linkSeven="linkSeven"></v-famous>
       <!-- <v-teacherresource :teacherResource="teacherResource" :titleSix="titleSix"></v-teacherresource> -->
 
       <!-- 名师大咖秀 -->
@@ -62,6 +62,7 @@ export default {
       linkfours: '/news/list',
       linkfive: '/news/detail',
       linkSix: '/home/components/teacher',
+      linkSeven: '/famous/list',
       freeData: [],
       newData: [],
       classicData: [],
@@ -191,7 +192,8 @@ export default {
       },
       teacherForm: {
         pages: 1,
-        limits: 7
+        limits: 7,
+        recommend: 1
       },
       evaluateForm: {
         pages: 1,
