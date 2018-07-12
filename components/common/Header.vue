@@ -635,7 +635,6 @@ export default {
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
-              console.log(this, '这是点击的this')
               if (response.status === 0) {
                 this.close()
                 this.getUserInfo()
@@ -915,6 +914,8 @@ export default {
               confirmButtonText: '确定',
               callback: action => {
                 this.signOuts()
+                //初始化首页数据
+                this.$bus.$emit('reLogin', true)
                 this.$bus.$emit('loginShow', true)
               }
             })
