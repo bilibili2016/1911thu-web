@@ -404,11 +404,15 @@ export default {
       } else if (item.name == 'third') {
         this.pagemsg3.total = 1
         this.collectionList()
+      } else if (item.name == 'fourth') {
+        this.pagemsg3.total = 1
+        this.overStudyCurriculumList()
       }
     },
     // 切换 我的学习中分类
     changeNav(item) {
       if (this.activeNames == 'third') {
+        // 我的课程 收藏的项目
         this.collectionForm.categoryId = item
         return new Promise((resolve, reject) => {
           home.collectionList(this.collectionForm).then(response => {
@@ -419,6 +423,7 @@ export default {
         })
       } else {
         if (this.activeNames == 'first') {
+          // 我的课程 学习中的项目
           this.styleForm.types = 1
           this.styleForm.categoryId = item
           this.styleForm.pages = 1
@@ -434,6 +439,7 @@ export default {
             })
           })
         } else if (this.activeNames == 'second') {
+          // 我的课程 已完成的项目
           this.styleForm.types = 2
           this.styleForm.categoryId = item
           this.styleForm.pages = 1
@@ -442,6 +448,22 @@ export default {
             home.studyCurriculumList(this.styleForm).then(response => {
               this.newDataReady = response.data.curriculumList
               this.pagemsg2.total = response.data.pageCount
+              resolve(true)
+            })
+          })
+        } else if (this.activeNames == 'fourth') {
+          // 我的课程 已过期的项目
+          this.styleForm.categoryId = item
+          this.styleForm.pages = 1
+          this.styleForm.limits = 12
+          this.pagemsg2.page = 1
+          this.styleForm.types = 4
+          return new Promise((resolve, reject) => {
+            home.studyCurriculumList(this.styleForm).then(response => {
+              this.overTimeData = response.data.curriculumList
+              for (var i = 0; i < this.overTimeData.length; i++) {
+                this.$set(this.overTimeData[i], 'overtime', true)
+              }
               resolve(true)
             })
           })
@@ -528,6 +550,7 @@ export default {
     // 我的课程 已过期的项目
     overStudyCurriculumList() {
       this.pagemsg2.page = 1
+      this.styleForm.categoryId = 0
       this.styleForm.pages = 1
       this.styleForm.types = 4
       return new Promise((resolve, reject) => {
