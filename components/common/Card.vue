@@ -35,13 +35,13 @@
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent < 1&&card.expire_day>1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.percent < 1&&card.expire_day>0" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
               <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
                   加入购物车
                 </span>
               </el-button>
-              <el-button v-if="card.percent > 1&&!card.overtime" type="primary" plain @click="goToPlay(card)">
+              <el-button v-if="card.percent > 0&&!card.overtime" type="primary" plain @click="goToPlay(card)">
                 <span>继续学习</span>
               </el-button>
 
@@ -77,7 +77,7 @@
                 <div class="line-centers ">
                   <!-- {{typeof(card.percent)}} -->
                   <span>已学习{{card.percent}}%</span>
-                  <span class="expire_day" style="float:right;padding-bottom:10px;">剩余{{card.expire_day}}天</span>
+                  <span v-if="card.is_free === '1'" class="expire_day" style="float:right;padding-bottom:10px;">剩余{{card.expire_day}}天</span>
                   <el-progress :percentage="card.percent "></el-progress>
                 </div>
               </div>
