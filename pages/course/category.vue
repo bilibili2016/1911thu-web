@@ -226,7 +226,7 @@ export default {
         this.setCid(this.cidform)
         this.getcourseList()
       }
-      console.log('有cid')
+      // console.log('有cid')
     } else {
       this.activeTab = 'first'
 
