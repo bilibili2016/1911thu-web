@@ -847,7 +847,7 @@ export default {
           this.ticketForm.number == '' ||
           !/^[A-Za-z0-9]+$/.test(this.ticketForm.number)
         ) {
-          that.$message({
+          this.$message({
             showClose: true,
             type: 'error',
             message: '请输入正确的纳税人识别号！'
@@ -859,7 +859,7 @@ export default {
         this.ticketForm.tel === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.ticketForm.tel)
       ) {
-        that.$message({
+        this.$message({
           showClose: true,
           type: 'error',
           message: '请输入正确的手机号！'

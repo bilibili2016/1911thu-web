@@ -629,6 +629,7 @@ export default {
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
+              console.log(this, '这是点击的this')
               if (response.status === 0) {
                 this.close()
                 this.getUserInfo()

@@ -90,7 +90,7 @@ export default {
       titleOne: '免费专区',
       titleTwo: '最新课程',
       titleThree: '精品好课',
-      titleFore: '师资智库',
+      titleFore: '名师智库',
       titleFour: '用户评价',
       titleFive: '学堂资讯',
       partnerList: {
@@ -180,8 +180,7 @@ export default {
       },
       freeForm: {
         pages: 1,
-        limits: '',
-        isFree: 2
+        limits: ''
       },
       classicForm: {
         pages: 0,
