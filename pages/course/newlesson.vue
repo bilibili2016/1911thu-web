@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       config: {
-        card_type: 'goodlesson',
+        card_type: 'newlesson',
         teacher: false
       },
       courseList: [],
