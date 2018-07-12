@@ -98,7 +98,7 @@
         <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
           {{item.value}}
         </div>
-        <el-input type="textarea" :rows="4" placeholder="请输入您的评价" v-model="word">
+        <el-input type="textarea" :rows="4" placeholder="其它想说的" v-model="word">
         </el-input>
         <div class="commitBug">
           <el-button round @click.native="addEvaluate">提交</el-button>
