@@ -270,8 +270,9 @@
     background-color: #fff;
     border-radius: 10px;
     position: absolute;
-    top: 98px;
+    top: 99px;
     left: 50%;
+    overflow-y: auto;
     margin-left: -360px;
     .header {
       padding-left: 53px;
@@ -320,9 +321,9 @@
       width: 550px;
       margin: 0 auto;
       font-size: 14px;
-      margin-top: 20px;
+      margin-top: 16px;
       .formLi {
-        margin-bottom: 12px;
+        margin-bottom: 15px;
         p {
           line-height: 34px;
           input {
@@ -503,10 +504,15 @@
           }
         }
       }
+      .smallTip {
+        color: #888;
+        text-align: center;
+        padding-bottom: 10px;
+      }
     }
     .operation {
       text-align: center;
-      padding: 5px 0 20px;
+      padding: 8px 0 19px;
       font-size: 14px;
       span {
         width: 150px;

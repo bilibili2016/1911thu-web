@@ -130,17 +130,17 @@
                   </div>
                 </div>
               </el-tab-pane>
-              <!-- <el-tab-pane name="orderFour">
+              <el-tab-pane name="orderFour">
                 <span class="payOff" slot="label">已失效
                 </span>
-                <v-order v-if="overTimeData && overTimeData.length>0" :orderData="overTimeData" @goOrderDetail="overTimeData" v-loading="invalidOrderLoad"></v-order>
+                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="invalidOrderData" v-loading="invalidOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
                   </div>
                 </div>
-              </el-tab-pane> -->
+              </el-tab-pane>
             </el-tabs>
           </el-card>
 
@@ -536,8 +536,6 @@ export default {
           for (var i = 0; i < this.overTimeData.length; i++) {
             this.$set(this.overTimeData[i], 'overtime', true)
           }
-
-          // console.log(this.overTimeData, '获取过期的项目')
           resolve(true)
         })
       })

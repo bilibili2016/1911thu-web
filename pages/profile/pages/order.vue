@@ -24,6 +24,9 @@
           <div class="status height" :style="{height: courseList.orderCurriculumList.length>3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
             <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
             <p class="payReady" v-if="courseList.pay_status === '2'">已支付</p>
+            <!-- 已完成订单剩余时间 -->
+            <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
+            <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day<1">已过期</p>
             <p class="payClose" v-if="courseList.pay_status === '3'">已关闭</p>
             <p>
               <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id)">立即支付</span>
