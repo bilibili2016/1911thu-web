@@ -39,7 +39,7 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
-// import { store as persistStore } from '~/lib/core/store'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['classify', 'courses', 'tab', 'active', 'classtext'],
   data() {
@@ -66,6 +66,8 @@ export default {
       this.setCid(this.cidform)
     },
     getMore(linedata) {
+      console.log(linedata)
+
       this.kidForm.kids = linedata.id
       persistStore.set('curriculumId', linedata.id)
       this.setKid(this.kidForm)
