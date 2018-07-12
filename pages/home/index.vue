@@ -175,17 +175,17 @@ export default {
       },
       courseForm: {
         pages: 1,
-        limits: null,
+        limits: '8',
         evaluateLimit: null,
         isevaluate: 1
       },
       freeForm: {
         pages: 1,
-        limits: ''
+        limits: '8'
       },
       classicForm: {
         pages: 0,
-        limits: null,
+        limits: '6',
         evaluateLimit: 0,
         isEvaluate: 0
       },

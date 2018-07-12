@@ -9,7 +9,7 @@
     overflow: hidden;
     position: relative;
   }
-  .tcInfo > img {
+  .tcInfo>img {
     position: absolute;
     width: 1920px;
     height: 458px;
@@ -53,16 +53,15 @@
   }
   .tcInfo h6 {
     width: 660px;
-    height: 125px;
+    height: 100px;
     margin: 0 auto;
-    overflow: hidden;
     margin-top: 10px;
     line-height: 25px;
     color: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
   .courseList h3 {
