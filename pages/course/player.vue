@@ -382,7 +382,7 @@ export default {
         const h = this.$refs.playerBox.offsetHeight
         this.$refs.mediaL.style.height = h + 'px'
         this.$refs.mediaR.style.height = h + 'px'
-        this.$refs.courseList.style.height = h - 40 - 132 - 100 + 'px'
+        this.$refs.courseList.style.height = h - 40 - 132 - 100 + 20 + 'px'
         this.$refs.playInner.style.height = h - 100 + 'px'
       }
     },

@@ -320,11 +320,11 @@
       <div class="newOrFreeCourseList center goodlesson">
         <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
           <el-card class="fl " :body-style="{ padding: '0px' } ">
-            <!-- 课程封面 -->
-            <img :src="course.picture" class="image " alt=" ">
-            <!-- 老师封面 -->
-            <!-- <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" "> -->
 
+            <!-- 老师封面 -->
+            <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" ">
+            <!-- 课程封面 -->
+            <img :src="course.picture" class="image " alt=" " v-else>
           </el-card>
           <div class="particulars fr ">
             <div class="currentclum ">

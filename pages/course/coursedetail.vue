@@ -59,6 +59,7 @@
         </div>
         <!-- 课程评价 -->
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
+        <!-- 已经学习（1） -->
         <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
           <h4>课程评价{{courseList.is_study}} == {{courseList.is_evaluate}}</h4>
           <div class="personal">
