@@ -249,7 +249,7 @@
     </template>
 
     <!-- 最新课程列表 -->
-    <!-- <template v-if="config.card_type==='newlesson' ">
+    <!-- <template v-if="config.card_type==='goodlesson' ">
       <div class="courseList center  ">
         <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
           <el-card class="fl " :body-style="{ padding: '0px' } ">
@@ -318,13 +318,13 @@
     <!-- 最新好课列表、精品好课列表、免费专区列表 -->
     <template v-if="config.card_type==='goodlesson' ">
       <div class="newOrFreeCourseList center goodlesson">
-        <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
+        <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index " @click="courseInfo(course) ">
           <el-card class="fl " :body-style="{ padding: '0px' } ">
-            <!-- 课程封面 -->
-            <img :src="course.picture" class="image " alt=" ">
-            <!-- 老师封面 -->
-            <!-- <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" "> -->
 
+            <!-- 老师封面 -->
+            <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" ">
+            <!-- 课程封面 -->
+            <img :src="course.picture" class="image " alt=" " v-else>
           </el-card>
           <div class="particulars fr ">
             <div class="currentclum ">
@@ -349,12 +349,12 @@
               </div> -->
               <div class="fr common-button-half-right" v-if="course.is_free == '2'">
 
-                <el-button type="primary" plain @click="courseInfo(course) "> 立即学习</el-button>
+                <el-button type="primary" plain @click.stop="courseInfo(course) "> 立即学习</el-button>
               </div>
 
               <div class="fr common-button-half-right" v-if="course.is_free == '1'">
                 <!-- 是否在购物车{{course.is_cart}} {{course.isCartNew}} -->
-                <el-button type="primary" plain @click="goBuyNewLesson(true,course,index)"> 加入购物车 </el-button>
+                <el-button type="primary" plain @click.stop="goBuyNewLesson(true,course,index)"> 加入购物车 </el-button>
                 <!-- {{item.isCartNew}} -->
               </div>
 
@@ -2145,7 +2145,7 @@ export default {
   .course {
     width: 100%;
     padding: 32px 0;
-    border-bottom: 1px solid #c6c2d2;
+    border-bottom: 1px solid #eee;
     transition: all 0.5s;
     // border-radius: 6px;
     // background-color: #fff;
@@ -2407,6 +2407,7 @@ export default {
           }
         }
         .common-button-half-right {
+          transition: all 0.5s;
           .el-button {
             width: 144px;
             border-radius: 21px;
@@ -2419,8 +2420,8 @@ export default {
               border-color: #6417a6;
             }
             &:hover {
-              color: #8f4acb;
-              background-color: #fff;
+              color: #fff;
+              background-color: #8f4acb;
               &.is-plain {
                 border-color: #8f4acb;
               }
