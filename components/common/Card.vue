@@ -530,7 +530,7 @@
                         <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
                       </div>
                       <div v-else>
-                        <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="privileMsg === false">加入购物车</el-button>
                       </div>
                     </div>
                   </div>
@@ -1261,18 +1261,27 @@ export default {
           padding: 0 15px;
           overflow: hidden;
           &.itemBoxTitle {
-            height: 80px;
-            line-height: 20px;
+            // height: 80px;
+            height: 102px;
+            // line-height: 20px;
             .title {
+              display: block;
               width: 220px;
-              height: 18px;
-              line-height: 18px;
-              overflow: hidden;
+              // height: 18px;
+              // line-height: 18px;
+              height: 40px;
+              line-height: 20px;
+              // overflow: hidden;
               color: #1c1f21;
               margin-top: 20px;
+              // overflow: hidden;
+              // text-overflow: ellipsis;
+              // white-space: nowrap;overflow:hidden;
               overflow: hidden;
               text-overflow: ellipsis;
-              white-space: nowrap;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
             }
             .deputyTitle {
               width: 220px;

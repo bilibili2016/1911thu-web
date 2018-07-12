@@ -103,22 +103,28 @@
         h4 {
           display: inline-block;
           width: 300px;
-          height: 25px;
-          line-height: 25px;
+          height: 40px;
+          line-height: 20px;
           margin-top: 10px;
           font-size: 16px;
           color: #222;
           overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          vertical-align: top;
+          // text-overflow: ellipsis;
+          // white-space: nowrap;
+          // vertical-align: top;
           transition: all 300ms;
+
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
         }
         p {
           display: inline-block;
           width: 300px;
           height: 40px;
-          margin-top: 10px;
+          margin-top: 5px;
           font-size: 13px;
           line-height: 20px;
           color: #93999f;
