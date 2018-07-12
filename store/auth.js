@@ -148,7 +148,7 @@ export const actions = {
   async setDid({ commit, state }, { dids }) {
     try {
       let did = dids
-      console.log(did, 'did')
+      // console.log(did, 'did')
       persistStore.set('did', did)
       commit(MUTATION.setDid, {
         did

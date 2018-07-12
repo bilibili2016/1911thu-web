@@ -12,7 +12,7 @@
 
         <el-tab-pane v-for="item in titleListData" :label="item.title" :key="item.id">
           <span slot="label" class="tabList">
-            <i class="item-icon" :class="{iconIntro:item.title==='公司介绍',iconTeacher:item.title==='讲师招聘',iconPeople:item.title==='人才招聘',iconHelp:item.title==='帮助中心',iconContact:item.title==='联系我们'}"></i>
+            <i class="item-icon" :class="{iconIntro:item.id==1,iconTeacher:item.id==2,iconPeople:item.id==3,iconHelp:item.id==4,iconContact:item.id==5}"></i>
             {{item.title}}
           </span>
           <el-card class="card-style">
