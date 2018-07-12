@@ -3,8 +3,23 @@
     <template v-if="config.banner_type === 'news'">
       <div class="news-banner">
         <img :src="bannerImg" alt="">
+        <div v-if="config.banner_type === 'news'" class="newLsit-desc">
+          <p class="title">NEWS</p>
+          <span class="line"></span>
+          <p class="small-title">学堂资讯</p>
+          <p class="desc">School Information</p>
+        </div>
       </div>
     </template>
+    <template v-if="config.banner_type === 'famousList'">
+      <div class="famousTeacher">
+        <img :src="bannerImg" alt="">
+        <div class="desc">
+          名师阵容
+        </div>
+      </div>
+    </template>
+
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
@@ -160,6 +175,58 @@ export default {
     left: 50%;
     top: 0;
     margin-left: -960px;
+  }
+}
+.news-list {
+  .news-banner {
+    position: relative;
+    height: 300px !important;
+    img {
+      height: 300px;
+    }
+    .newLsit-desc {
+      position: absolute;
+      top: 50px;
+      right: 200px;
+      width: 190px;
+      color: #fff;
+      text-align: right;
+      .title {
+        font-size: 46px;
+      }
+      .line {
+        width: 46px;
+        height: 4px;
+        background: rgba(255, 255, 255, 1);
+        margin: 32px 0 28px 0;
+      }
+      .small-title {
+        font-size: 33px;
+        margin-bottom: 20px;
+      }
+      .desc {
+        font-size: 20px;
+      }
+    }
+  }
+}
+.famousTeacher {
+  position: relative;
+  height: 300px !important;
+  img {
+    height: 300px;
+  }
+  .desc {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    line-height: 300px;
+    font-size: 56px;
+    color: #fff;
+    line-height: 300px;
+    text-align: center;
   }
 }
 </style>
