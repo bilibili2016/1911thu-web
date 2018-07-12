@@ -62,7 +62,7 @@
               </div>
               <div class="fl">
                 <h5>{{course.title}}</h5>
-                <h6>{{course.curriculum_time}}学时</h6>
+                <h6>{{course.study_time}}学时</h6>
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
               <div class="fr">¥{{course.present_price}}</div>
@@ -134,7 +134,7 @@
     </div>
     <!-- 发票信息 -->
     <div class="invoiceShadow" v-show="showInvoice">
-      <div class="invoiceInfo">
+      <div class="invoiceInfo" ref="invoiceInfo">
         <h3 class="clearfix">发票信息
           <i class="el-icon-close fr" @click="close"></i>
         </h3>
@@ -606,18 +606,12 @@ export default {
       if (!this.province && this.province.length == 0) {
         this.getRegionList()
       }
-      // if (oldval != '') {
-      //   this.ticketForm.city = ''
-      // }
       this.city = this.getRegion(this.province, val)
     },
     'ticketForm.city'(val, oldval) {
       if (!this.city && this.city.length == 0) {
         this.getRegionList()
       }
-      // if (oldval != '') {
-      //   this.ticketForm.area = ''
-      // }
       this.area = this.getRegion(this.city, val)
     },
     zzprovince(val) {
@@ -628,18 +622,12 @@ export default {
       if (!this.zzprovince && this.zzprovince.length == 0) {
         this.getRegionList()
       }
-      // if (oldval != '') {
-      //   this.zzTicketForm.city = ''
-      // }
       this.zzcity = this.getRegion(this.zzprovince, val)
     },
     'zzTicketForm.city'(val, oldval) {
       if (!this.zzcity && this.zzcity.length == 0) {
         this.getRegionList()
       }
-      // if (oldval != '') {
-      //   this.zzTicketForm.area = ''
-      // }
       this.zzarea = this.getRegion(this.zzcity, val)
     },
     address(val) {
@@ -661,9 +649,13 @@ export default {
       let footerHeight = document.getElementsByClassName('footerBox')[0]
         .offsetHeight
       let windowHeight = document.documentElement.clientHeight
-      // console.log(windowHeight)
       this.$refs.affirmOrder.style.minHeight =
         windowHeight - headerHeight - footerHeight + 'px'
+      // 判断屏幕高度是否小于发票弹框高度
+      if (windowHeight - headerHeight - 20 < 600) {
+        this.$refs.invoiceInfo.style.height =
+          windowHeight - headerHeight - 16 + 'px'
+      }
     },
     // 验证增值税发票 中的纳税人识别号
     reNumber() {
