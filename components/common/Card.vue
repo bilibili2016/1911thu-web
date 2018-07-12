@@ -453,7 +453,7 @@
               <h4>{{courseList.title}}</h4>
               <!-- ==(免费2)={{courseList.is_free}} 是否购买{{privileMsg}} 是否学习（1已学习）{{courseList.is_study }} -->
               <!-- 团购价更优，团购电话：010-62701911 -->
-              <div class="tg">团购价更优，团购电话：010-62701911 </div>
+              <div class="tg">团购价更优，团购电话：010-62701911</div>
               <!-- 判断是否免费 is_free(2是免费)-->
               <div v-if="courseList.is_free === '2'">
                 <div class="clum" v-if="courseList.is_study === 1">
@@ -522,19 +522,19 @@
 
                 <!-- 已经学习了 右侧是 courseList.is_study === 1 -->
                 <div class="study clearfix bought" v-if="courseList.is_study === 1">
-                  <div v-if="isAuthenticated">
+                  <!-- <div >
                     <p>{{courseList.introduction}}</p>
                     <div class="common-button">
                       <div v-if="privileMsg === true">
-                        <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
-                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
+                        <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习3</el-button>
+                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车2</el-button>
                       </div>
                       <div v-else>
-                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="privileMsg === false">加入购物车</el-button>
+                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="privileMsg === false">加入购物车11</el-button>
                       </div>
                     </div>
-                  </div>
-                  <div v-else>
+                  </div> -->
+                  <div>
                     <h4 class="clearfix">
                       <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                       <p>已学时长</p>
