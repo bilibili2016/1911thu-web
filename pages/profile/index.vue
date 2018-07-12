@@ -393,6 +393,7 @@ export default {
       // name
       persistStore.set('gid', item.name)
     },
+    // 切换我的课程 子类
     handleActive(item) {
       this.value = '查看全部'
       if (item.name == 'first') {

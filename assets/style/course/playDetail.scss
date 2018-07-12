@@ -168,14 +168,14 @@
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
-          -webkit-line-clamp: 5;
+          -webkit-line-clamp: 10;
           -webkit-box-orient: vertical;
         }
         div {
           font-size: 14px;
           padding: 0 20px;
-          text-align: left;
           line-height: 30px;
+          text-align: center;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
@@ -283,7 +283,7 @@
             .time {
               color: #b0aeb8;
             }
-            & > img {
+            &>img {
               width: 42px;
               height: 42px;
               border-radius: 50%;
@@ -350,7 +350,7 @@
         .time {
           color: #bbb;
         }
-        & > img {
+        &>img {
           width: 42px;
           height: 42px;
           border-radius: 50%;
@@ -388,7 +388,7 @@
       height: 85px;
       .line-center {
         line-height: 85px;
-        & > span {
+        &>span {
           font-size: 14px;
           height: 60px;
           vertical-align: middle;
