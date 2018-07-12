@@ -1163,11 +1163,6 @@ export default {
           if (res.status === 0) {
             persistStore.set('cpyid', res.data.id)
             this.$router.push('/shop/wepay')
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: res.msg
-            })
           } else {
             // this.$message({
             //   showClose: true,
