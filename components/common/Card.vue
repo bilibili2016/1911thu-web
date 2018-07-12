@@ -1650,6 +1650,9 @@ export default {
           line-height: 54px;
           margin-bottom: 8px;
           cursor: pointer;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
         h4:hover {
           color: #8f4acb;
