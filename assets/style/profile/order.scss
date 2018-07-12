@@ -122,6 +122,9 @@
           }
           &.payReady {
             color: #aaa;
+            &.payed {
+              color: #06BB09;
+            }
           }
           &.payClose {
             color: #332A51;

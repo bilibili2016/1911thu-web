@@ -87,8 +87,17 @@ export default {
       return new Promise((resolve, reject) => {
         home.getNewInfoDetail(newsId).then(response => {
           this.newsDetail = response.data.newDetail
-          me.beforeNews = response.data.beforeNews
-          me.afterNews = response.data.afterNews
+          if (response.data.beforeNews.id) {
+            me.beforeNews = response.data.beforeNews
+          } else {
+            me.beforeNews.title = '暂无'
+          }
+          if (response.data.afterNews.id) {
+            me.afterNews = response.data.afterNews
+          } else {
+            me.afterNews.title = '暂无'
+          }
+          // me.afterNews = response.data.afterNews
           this.loading = false
         })
       })
