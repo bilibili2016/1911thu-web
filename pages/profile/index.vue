@@ -536,8 +536,6 @@ export default {
           for (var i = 0; i < this.overTimeData.length; i++) {
             this.$set(this.overTimeData[i], 'overtime', true)
           }
-
-          console.log(this.overTimeData, '获取过期的项目')
           resolve(true)
         })
       })

@@ -36,13 +36,13 @@
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
               <el-button v-if="card.percent < 1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
-              <el-button v-if="card.percent > 1" type="primary" plain @click="goToPlay(card)">
-                <span v-if="card.overtime">
+              <el-button v-if="card.percent > 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
+                <span>
                   加入购物车
                 </span>
-                <span v-else>
-                  继续学习
-                </span>
+              </el-button>
+              <el-button v-if="card.percent > 1&&!card.overtime" type="primary" plain @click="goToPlay(card)">
+                <span>继续学习</span>
               </el-button>
 
             </div>
@@ -614,6 +614,12 @@ export default {
         this.$bus.$emit('loginShow', true)
       }
     },
+    // 已过期商品直接加入购物车
+    goShoppingCart(item) {
+      this.kidForm.kids = item.id
+      this.setKid(this.kidForm)
+      this.addShopCarts()
+    },
     goBuyNewLesson(detail, item, index) {
       persistStore.set('curriculumId', item.id)
       this.kidForm.kids = item.id
@@ -633,6 +639,7 @@ export default {
             // this.isCartNew = 1
           }
         } else {
+          console.log(item)
           this.$message({
             type: 'success',
             message: '您的商品已经在购物车里面'

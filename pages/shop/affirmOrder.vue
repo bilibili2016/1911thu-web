@@ -105,9 +105,9 @@
               <p v-if="invoiceForm.ticket === false">单位名称：{{invoiceForm.companyname}}</p>
               <p v-if="invoiceForm.ticket === false">纳税人识别号：{{invoiceForm.number}}</p>
               <p>注册地址：{{invoiceForm.zcadd}}</p>
-              <p>注册电话：{{invoiceForm.phones}}</p>
+              <p>联系电话：{{invoiceForm.phones}}</p>
               <p>开户银行：{{invoiceForm.bank}}</p>
-              <p>银行账户：{{invoiceForm.account}}</p>
+              <p>银行账号：{{invoiceForm.account}}</p>
               <p>收票人姓名：{{invoiceForm.name}}</p>
               <p>收票人手机号：{{invoiceForm.tel}}</p>
               <p>收票人省份：{{invoiceForm.province_name}}{{invoiceForm.city_name}}{{invoiceForm.area_name}}</p>
@@ -168,7 +168,7 @@
             <p class="fl">发票内容</p>
             <p class="fr radioBtn">
               <el-radio-group v-model="ticketForm.radio" @change="isTicket">
-                <el-radio :label="1">商品类别
+                <el-radio :label="1">培训费
                   <i></i>
                 </el-radio>
                 <el-radio :label="2">其他
@@ -177,7 +177,7 @@
               </el-radio-group>
             </p>
             <p class="word" v-show="ticketForm.isRadio">
-              <i class="el-icon-warning"> </i> 发票内容将显示培训费</p>
+              <i class="el-icon-warning"> </i>将有专人与您联系，请您留意，感谢您的支持！</p>
             <p class="word" v-show="!ticketForm.isRadio">
               <input type="text" v-model="ticketForm.others" placeholder="请输入发票内容">
             </p>
@@ -214,6 +214,7 @@
               <input type="text" v-model="ticketForm.address" placeholder="请输入收票人的详细地址">
             </p>
           </div>
+          <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
           <div class="operation">
             <span @click="addInvoiceBefor">保存</span>
             <span @click="close">取消</span>
@@ -233,7 +234,7 @@
               <p class="fl">发票内容</p>
               <p class="fr radioBtn">
                 <el-radio-group v-model="zzTicketForm.radio" @change="iszzTicket">
-                  <el-radio :label="1">商品类别
+                  <el-radio :label="1">培训费
                     <i></i>
                   </el-radio>
                   <el-radio :label="2">其他
@@ -281,9 +282,9 @@
             </div>
             <div class="formLi clearfix">
               <p class="fl">
-                <i>*</i>纳税人识别码</p>
+                <i>*</i>纳税人识别号</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.number" @change="reNumber" placeholder="请输入纳税人识别码">
+                <input type="text" v-model="zzTicketForm.number" @change="reNumber" placeholder="请输入纳税人识别号">
                 <span class="tips" v-show="tipsNumber&&number">
                   <i class="el-icon-success"></i>
                 </span>
@@ -305,14 +306,14 @@
             </div>
             <div class="formLi clearfix">
               <p class="fl">
-                <i>*</i>注册电话</p>
+                <i>*</i>联系电话</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.phones" @change="rePhone" placeholder="请输入注册电话">
+                <input type="text" v-model="zzTicketForm.phones" @change="rePhone" placeholder="请输入联系电话">
                 <span class="tips" v-show="tipsPhones&&phones">
                   <i class="el-icon-success"></i>
                 </span>
                 <span class="tips" v-show="!tipsPhones&&phones">
-                  <i class="el-icon-warning"></i>注册电话不正确！</span>
+                  <i class="el-icon-warning"></i>联系电话不正确！</span>
               </p>
             </div>
             <div class="formLi clearfix">
@@ -329,14 +330,14 @@
             </div>
             <div class="formLi clearfix">
               <p class="fl">
-                <i>*</i>银行账户</p>
+                <i>*</i>银行账号</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账户">
+                <input type="text" v-model="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账号">
                 <span class="tips" v-show="tipsAccount&&account">
                   <i class="el-icon-success"></i>
                 </span>
                 <span class="tips" v-show="!tipsAccount&&account">
-                  <i class="el-icon-warning"></i>银行账户不正确！</span>
+                  <i class="el-icon-warning"></i>银行账号不正确！</span>
               </p>
             </div>
             <div class="operation">
@@ -677,7 +678,7 @@ export default {
         this.number = true
       }
     },
-    // 验证增值税发票 中的注册电话
+    // 验证增值税发票 中的联系电话
     rePhone() {
       if (
         this.zzTicketForm.phones == '' ||
@@ -778,7 +779,7 @@ export default {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '请输入正确的纳税人识别码！'
+            message: '请输入正确的纳税人识别号！'
           })
           return false
         } else if (this.zzTicketForm.zcadd == '') {
@@ -797,7 +798,7 @@ export default {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '请输入正确的注册电话！'
+            message: '请输入正确的联系电话！'
           })
           return false
         } else if (this.zzTicketForm.bank == '') {
@@ -814,7 +815,7 @@ export default {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '请输入正确的银行账户！'
+            message: '请输入正确的银行账号！'
           })
           return false
         }
