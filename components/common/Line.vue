@@ -2,7 +2,8 @@
   <div class="catalog">
     <!-- {{catalogs}} -->
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
-      <h4>{{catalog.title}}</h4>
+      <h4>{{catalog.title}} </h4>
+      <!-- {{privileMsg}} -->
       <!-- {{privileMsg}}  1{{isAuthenticated}} -->
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index">
         <!-- {{bar}} -->
@@ -30,9 +31,9 @@
             </span>
           </span>
           <span v-else class="fr clearfix">
-            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看</span>
-            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看</span>
-            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程</span>
+            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
+            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
+            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
           </span>
         </p>
         <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
