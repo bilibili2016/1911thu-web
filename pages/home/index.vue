@@ -289,7 +289,7 @@ export default {
     // 获取定制消息
     getPointList() {
       home.getPointList().then(response => {
-        console.log(response, '获取定制消息')
+        // console.log(response, '获取定制消息')
         this.dingData = response.data.pointList
       })
     }
