@@ -1,10 +1,11 @@
 <template>
-  <div class="news-list">
+  <div class="news-list famous-teacher">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
+
     <div class="center shadow">
       <div @click="getNewInfoList"></div>
-      <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
       <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
+      <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
     </div>
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
@@ -26,7 +27,7 @@ export default {
   },
   data() {
     return {
-      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/profile_banner03.png',
+      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/newList-bg.png',
       linksix: '/news/detail',
       configs: {
         banner_type: 'news'
@@ -35,7 +36,7 @@ export default {
       //   card_type: 'goodlesson2'
       // },
       config: {
-        card_type: 'goodplayTwo'
+        card_type: 'newLists'
       },
       newsList: [],
       newsInfoForm: {
@@ -87,3 +88,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.news-list .shadow {
+  box-shadow: none;
+}
+</style>

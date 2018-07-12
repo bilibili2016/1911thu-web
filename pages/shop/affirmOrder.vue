@@ -282,7 +282,12 @@
               <p class="fl">
                 <i>*</i>单位名称</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.companyname" placeholder="请输入单位名称">
+                <input type="text" v-model="zzTicketForm.companyname" @change="reCompanyname" placeholder="请输入单位名称">
+                <span class="tips" v-show="tipsCompanyname&&companyname">
+                  <i class="el-icon-success"></i>
+                </span>
+                <span class="tips" v-show="!tipsCompanyname&&companyname">
+                  <i class="el-icon-warning"></i>单位名称不正确！</span>
               </p>
             </div>
             <div class="formLi clearfix">
@@ -301,7 +306,7 @@
               <p class="fl">
                 <i>*</i>注册地址</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.zcadd" @blur="zzTicketForm.zcadd==''?(tipsZcadd=false,zcadd=true):(tipsZcadd=true,zcadd=true)" placeholder="请输入注册地址">
+                <input type="text" v-model="zzTicketForm.zcadd" @change="reZcadd" placeholder="请输入注册地址">
                 <span class="tips" v-show="tipsZcadd&&zcadd">
                   <i class="el-icon-success"></i>
                 </span>
@@ -325,7 +330,7 @@
               <p class="fl">
                 <i>*</i>开户银行</p>
               <p class="fr">
-                <input type="text" v-model="zzTicketForm.bank" @blur="zzTicketForm.bank==''?(tipsBank=false,bank=true):(tipsBank=true,bank=true)" placeholder="请输入开户银行">
+                <input type="text" v-model="zzTicketForm.bank" @change="reBank" placeholder="请输入开户银行">
                 <span class="tips" v-show="tipsBank&&bank">
                   <i class="el-icon-success"></i>
                 </span>
@@ -546,11 +551,13 @@ export default {
         isRadio: true,
         types: 3
       },
+      tipsCompanyname: null,
       tipsNumber: null,
       tipsAccount: null,
       tipsBank: null,
       tipsPhones: null,
       tipsZcadd: null,
+      companyname: false,
       number: false,
       zcadd: false,
       phones: false,
@@ -672,6 +679,16 @@ export default {
       }
     },
     // 验证增值税发票 中的纳税人识别号
+    reCompanyname() {
+      if (this.zzTicketForm.companyname == '') {
+        this.tipsCompanyname = false
+        this.companyname = true
+      } else {
+        this.tipsCompanyname = true
+        this.companyname = true
+      }
+    },
+    // 验证增值税发票 中的纳税人识别号
     reNumber() {
       if (
         this.zzTicketForm.number == '' ||
@@ -682,6 +699,26 @@ export default {
       } else {
         this.tipsNumber = true
         this.number = true
+      }
+    },
+    // 验证增值税发票 注册地址
+    reZcadd() {
+      if (this.zzTicketForm.zcadd == '') {
+        this.tipsZcadd = false
+        this.zcadd = true
+      } else {
+        this.tipsZcadd = true
+        this.zcadd = true
+      }
+    },
+    // 验证增值税发票 注册地址
+    reBank() {
+      if (this.zzTicketForm.bank == '') {
+        this.tipsBank = false
+        this.bank = true
+      } else {
+        this.tipsBank = true
+        this.bank = true
       }
     },
     // 验证增值税发票 中的联系电话
