@@ -2329,8 +2329,9 @@ export default {
         h4 {
           font-size: 18px;
           color: #222;
-          margin: 18px 0;
+          margin: 10px 0 18px 0;
           cursor: pointer;
+          line-height: 26px;
         }
         h4:hover {
           color: #8f4acb;
