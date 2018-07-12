@@ -309,7 +309,9 @@ export default {
     } else {
     }
     this.$bus.$on('reLogin', data => {
+      console.log('过来了1')
       this.getAll()
+      console.log('过来了2')
     })
     this.$bus.$emit('bannerShow', false)
   }
