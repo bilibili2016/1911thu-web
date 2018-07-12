@@ -35,8 +35,8 @@
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent < 1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
-              <el-button v-if="card.percent > 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
+              <el-button v-if="card.percent < 1&&card.expire_day>1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
                   加入购物车
                 </span>
@@ -49,7 +49,7 @@
             <el-row>
               <!-- 名字 -->
               <div class="item">
-                <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]" @click="goLink('course/coursedetail')">
+                <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]" @click="openDetail()">
                   <span :class="{'title':config.card === 'home'?true:false}">{{card.title}}</span>
                   <span v-if="config.card === 'home'" class="deputyTitle">{{card.deputy_title}}</span>
                 </p>
