@@ -67,6 +67,7 @@
           <li @click="goLink('tab-fourth')">我的消息</li>
           <li @click="goLink('tab-fifth')">个人设置</li>
           <li @click="goLink('tab-sixth')">绑定课程</li>
+          <li @click="goLink('tab-eighth')">专属邀请码</li>
           <li @click="signOuts">退出</li>
         </ul>
       </div>
