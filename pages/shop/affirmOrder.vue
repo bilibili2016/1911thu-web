@@ -957,6 +957,8 @@ export default {
               this.invoiceForm.number = this.zzTicketForm.number
               this.invoiceForm.zcadd = this.zzTicketForm.zcadd
               this.invoiceForm.address = this.zzTicketForm.address
+              this.invoiceForm.name = this.zzTicketForm.name
+              this.invoiceForm.tel = this.zzTicketForm.tel
               this.invoiceForm.others = this.zzTicketForm.others
               this.invoiceForm.bank = this.zzTicketForm.bank
               this.invoiceForm.account = this.zzTicketForm.account
