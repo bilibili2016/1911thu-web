@@ -279,7 +279,7 @@ export default {
           {
             required: true,
             message: '请输入正确的邮箱地址',
-            trigger: ['blur', 'change']
+            trigger: ['blur']
           },
           {
             validator: validateEmail,
