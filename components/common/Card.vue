@@ -321,9 +321,9 @@
         <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
           <el-card class="fl " :body-style="{ padding: '0px' } ">
             <!-- 课程封面 -->
-            <img v-if="!config.teacher" :src="course.picture" class="image " alt=" ">
+            <img :src="course.picture" class="image " alt=" ">
             <!-- 老师封面 -->
-            <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" ">
+            <!-- <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" "> -->
 
           </el-card>
           <div class="particulars fr ">
@@ -358,6 +358,60 @@
               </div>
 
             </div>
+          </div>
+          <div class="">
+
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- 新闻列表  goodlesson2-->
+    <template v-if="config.card_type==='goodlesson2' ">
+      <div class="newOrFreeCourseList center goodlesson">
+        <div class="course clearfix bottom " v-for="(course,index) in newsList " :key="index ">
+          <el-card class="fl " :body-style="{ padding: '0px' } ">
+            <!-- 课程封面 -->
+            <img v-if="!config.teacher" :src="course.picture" class="image " alt=" ">
+            <!-- 老师封面 -->
+            <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" ">
+
+          </el-card>
+          <div class="particulars fl " style="width:560px;">
+            <div class="currentclum ">
+              <h4 @click="courseInfo(course)">{{course.title}}</h4>
+              <p class="small-title">{{course.introduce}}</p>
+              <p>{{course.introduction}}</p>
+            </div>
+
+            <!-- <div class="study clearfix"> -->
+            <!-- <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span> -->
+            <!-- <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span> -->
+            <!-- <span class="coin mfree" v-if="course.is_free == '2'">免费</span> -->
+            <!-- <div class="fr common-button-half"> -->
+            <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
+            <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
+
+            <!-- </el-button> -->
+            <!-- </div> -->
+            <!-- <div class="fr common-button-half-right">
+                <el-button type="primary" plain @click="buyNewCourse(course)"> 加入购物车</el-button>
+              </div> -->
+            <!-- <div class="fr common-button-half-right" v-if="course.is_free == '2'"> -->
+
+            <!-- <el-button type="primary" plain @click="courseInfo(course) "> 立即学习</el-button> -->
+            <!-- </div> -->
+
+            <!-- <div class="fr common-button-half-right" v-if="course.is_free == '1'"> -->
+            <!-- 是否在购物车{{course.is_cart}} {{course.isCartNew}} -->
+            <!-- <el-button type="primary" plain @click="goBuyNewLesson(true,course,index)"> 加入购物车 </el-button> -->
+            <!-- {{item.isCartNew}} -->
+            <!-- </div> -->
+
+            <!-- </div> -->
+          </div>
+          <div class="Newtime">
+            {{timestampToTime2(course.create_time)}}
           </div>
         </div>
       </div>
@@ -951,6 +1005,26 @@ export default {
       let s =
         date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
+    },
+    timestampToTime2(timestamp) {
+      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let Y = date.getFullYear() + '-'
+      let M =
+        (date.getMonth() + 1 < 10
+          ? '0' + (date.getMonth() + 1)
+          : date.getMonth() + 1) + '-'
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
+      return M + D
     }
   },
   mounted() {
@@ -2562,6 +2636,13 @@ export default {
           }
         }
       }
+    }
+    .Newtime {
+      width: 131px;
+      float: right;
+      font-size: 22px;
+      margin-top: 19px;
+      color: #888888;
     }
   }
 }
