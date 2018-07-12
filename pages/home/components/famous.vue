@@ -1,7 +1,7 @@
 <template>
   <div class="teachers">
     <v-title :data="titleFore"></v-title>
-    <div class="cardList clearfix">
+    <div class="cardList ">
       <div class="item" v-for="(teacher,index) in teachers" :key="index" @click="goTeacherInfo(teacher,index)">
         <div class="item-img">
           <img :src="teacher.head_img" alt="">

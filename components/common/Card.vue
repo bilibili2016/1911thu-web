@@ -334,9 +334,10 @@
             </div>
 
             <div class="study clearfix">
+              <p class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</p>
+              <p class="coin mfree" v-if="course.is_free == '2'"></p>
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
-              <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span>
-              <span class="coin mfree" v-if="course.is_free == '2'">免费</span>
+
               <!-- <div class="fr common-button-half"> -->
               <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
               <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
@@ -2159,7 +2160,7 @@ export default {
         .small-title {
           font-size: 14px;
           color: #93999f;
-          margin-bottom: 26px;
+          margin-bottom: 18px;
         }
         p {
           font-size: 14px;
@@ -2212,12 +2213,14 @@ export default {
         }
       }
       .study {
-        padding: 15px 22px 0 20px;
-        line-height: 42px;
+        padding: 10px 22px 0 20px;
+        // height: 50px;
+        // line-height: 42px;
         .coin {
-          color: red;
-          font-size: 17px;
-          padding-left: 20px;
+          color: #ff4400;
+          font-size: 18px;
+          margin-bottom: 10px;
+          // padding-left: 20px;
         }
         .mfree {
           color: #222;
@@ -2470,6 +2473,7 @@ export default {
         }
       }
       .study {
+        // height: 50px;
         // padding: 30px 40px 0;
         padding: 20px 0 0 0;
         border-top: 1px rgba(232, 214, 247, 1) solid; // margin-top: 65px;
