@@ -35,9 +35,9 @@
           <h6>
             <i class="el-icon-warning"></i>注意事项：汇款时需要注意以下信息，请牢记！</h6>
           <div class="account">
-            <p>户名：XXXXXX</p>
-            <p>账户：XXXXXXXX</p>
-            <p>开户行：XXXXXXXXX</p>
+            <p>户名：一九一一未来教育科技(北京)有限公司</p>
+            <p>账户：8110701013101386732</p>
+            <p>开户行：中信银行北京海淀支行</p>
             <p>联行号：XXXXXXX（ 非必填项）</p>
             <p>汇付识别码：{{code}}</p>
             <p>订单号：{{orderDetail.order_sn}}</p>
