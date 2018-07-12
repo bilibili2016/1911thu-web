@@ -10,7 +10,7 @@
       <span>当前位置：</span>
       <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>最新课程</el-breadcrumb-item>
+        <el-breadcrumb-item>免费专区</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
@@ -39,20 +39,20 @@ export default {
       },
       courseList: [],
       pageCount: null,
-      newsCurriculumForm: {
+      freeCurriculumForm: {
         pages: 1,
         limits: 5,
         evaluateLimit: 4,
-        isevaluate: 1
+        isEvaluate: 1
       },
       scrollTopMsg: true,
       noMoreData: false
     }
   },
   methods: {
-    // 获取最新课程列表
+    // 获取精品好课列表
     getNewCourseList() {
-      newlesson.getNewCourseList(this.newsCurriculumForm).then(response => {
+      home.getFreeCourseList(this.freeCurriculumForm).then(response => {
         if (response.data.curriculumList.length === 0) {
           this.noMoreData = true
         }
@@ -73,7 +73,7 @@ export default {
           message: '没有更多课程了！'
         })
       } else {
-        this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
+        this.freeCurriculumForm.pages = this.freeCurriculumForm.pages + 1
         this.getNewCourseList()
       }
     },
@@ -89,7 +89,7 @@ export default {
         if (scrollTop + windowHeight == scrollHeight) {
           if (this.scrollTopMsg === true) {
             this.scrollTopMsg = false
-            this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
+            this.freeCurriculumForm.pages = this.freeCurriculumForm.pages + 1
             this.getNewCourseList()
           }
         }

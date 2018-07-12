@@ -1,5 +1,5 @@
 <template>
-  <div class="wepay">
+  <div class="wepay" ref="wepay">
     <div class="checkedCourse-wepay">
       <div class="banner">
         <div>支付中心</div>
@@ -21,7 +21,7 @@
                   <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
                   <div class="fl">
                     <h4 @click="goCourseInfo(course,index)">{{course.name}}</h4>
-                    <h6>{{course.curriculum_time}}学时</h6>
+                    <h6>{{course.study_time}}学时</h6>
                     <p>讲师：{{course.teacher_name}}</p>
                   </div>
                   <div class="coursePrice">
@@ -159,6 +159,14 @@ export default {
     if (this.isAuthenticated) {
       this.getPayList()
     }
+    let headerHeight = document.getElementsByClassName('headerBox')[0]
+      .offsetHeight
+    let footerHeight = document.getElementsByClassName('footerBox')[0]
+      .offsetHeight
+    let windowHeight = document.documentElement.clientHeight
+
+    this.$refs.wepay.style.minHeight =
+      windowHeight - headerHeight - footerHeight + 'px'
   },
   methods: {
     ...mapActions('auth', ['setKid', 'setProductsNum']),
@@ -217,7 +225,9 @@ export default {
           : date.getMonth() + 1) + '-'
       let D =
         (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-      let h = date.getHours() + ':'
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
       let m =
         (date.getMinutes() * 1 < 10
           ? '0' + date.getMinutes()

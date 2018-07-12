@@ -78,8 +78,10 @@ export default {
       .offsetHeight
     let windowHeight = document.documentElement.clientHeight
 
-    this.$refs.degree.style.minHeight =
+    this.$refs.degree.style.height =
       windowHeight - headerHeight - footerHeight + 'px'
+    // this.$refs.degree.style.minHeight =
+    //   windowHeight - headerHeight - footerHeight + 'px'
   }
 }
 </script>

@@ -115,7 +115,9 @@ export default {
           : date.getMonth() + 1) + '-'
       let D =
         (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-      let h = date.getHours() + ':'
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
       let m =
         (date.getMinutes() * 1 < 10
           ? '0' + date.getMinutes()

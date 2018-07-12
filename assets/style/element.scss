@@ -241,6 +241,22 @@
       font-size: 12px;
     }
   }
+  .el-input__inner::-webkit-input-placeholder {
+    /* WebKit browsers */
+    font-size: 12px;
+  }
+  .el-input__inner:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    font-size: 12px;
+  }
+  .el-input__inner::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    font-size: 12px;
+  }
+  .el-input__inner:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    font-size: 12px;
+  }
   .el-tab-pane .el-row {
     width: 264px;
     margin: 0 auto;
@@ -250,6 +266,19 @@
       cursor: pointer;
       margin-bottom: 30px;
       color: #6417a6;
+    }
+    .registerUser {
+      .el-loading-mask {
+        margin-bottom: 0 !important;
+        background-color: #6417a6;
+        .circular {
+          width: 24px;
+          height: 24px;
+        }
+        .el-loading-spinner {
+          margin-top: -10px;
+        }
+      }
     }
     button {
       width: 100%;
@@ -275,7 +304,6 @@
       color: #222;
       font-size: 12px;
     }
-
     .el-checkbox__input.is-checked .el-checkbox__inner {
       background-color: #6417a6;
       border-color: #6417a6;
@@ -504,11 +532,11 @@
   }
 }
 
+// 个人中心修改密码
 .changePwd {
   .el-form-item__label {
     color: #222;
     font-size: 16px;
-    // font-weight: 700;
   }
   .el-input {
     text-align: left;
@@ -551,6 +579,18 @@
     background: #8f4acb;
     border-color: #8f4acb;
     color: #fff;
+  }
+  &.btn-bgs {
+    .el-button--primary.is-plain {
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      color: #9431e9;
+    }
+    .el-button--primary.is-plain:hover {
+      transition: all 300ms;
+      background: #8f4acb;
+      color: #fff;
+    }
   }
 }
 
@@ -717,6 +757,25 @@
   }
 }
 
+.newsCarousel {
+  .el-carousel__arrow {
+    width: 46px;
+    height: 76px;
+    border-radius: initial;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 24px;
+    &.el-carousel__arrow--right {
+      right: 0;
+    }
+    &.el-carousel__arrow--left {
+      left: 0;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+
 // aboutUs组件
 .aboutUs {
   .el-tabs {
@@ -769,8 +828,8 @@
     overflow: visible;
   }
   .el-tabs__item {
-    margin: 0px 0px 0px 0px; // background-color: red;
-    color: #696a70;
+    margin: 0px 0px 0px 0px;
+    color: #222;
     height: 76px;
     padding: 12px;
     font-size: 16px;
@@ -882,10 +941,9 @@
       line-height: 57px;
       padding: 0;
       margin-left: 30px;
-    }
-    .el-tab-pane {
-      // padding: 50px 41px 0 44px;
-    }
+    } // .el-tab-pane {
+    // padding: 50px 41px 0 44px;
+    // }
     .el-progress-bar__outer {
       background-color: #ffdb5f;
     }
@@ -1209,14 +1267,34 @@ input:-webkit-autofill {
 .shareIcons .social-share .icon-wechat .wechat-qrcode {
   top: 48px;
 }
+
 .social-share .icon-wechat .wechat-qrcode:after {
   bottom: -4px;
 }
+
 .newsCarousel {
   .el-carousel__container {
     height: 406px;
   }
   .el-carousel__indicators {
     display: none;
+  }
+}
+
+// 设置课程详情鼠标悬浮状态
+.main-crumb .main-crumbs .el-breadcrumb__inner:hover {
+  cursor: pointer;
+}
+
+//机构入口页
+.allInfo {
+  .bottomForm .el-form .el-button.el-button--primary {
+    border: none;
+  }
+  .el-form-item.is-error .el-input__inner,
+  .el-form-item.is-error .el-input__inner:focus,
+  .el-form-item.is-error .el-textarea__inner,
+  .el-form-item.is-error .el-textarea__inner:focus {
+    border: none;
   }
 }

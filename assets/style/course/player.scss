@@ -202,7 +202,7 @@
     }
     .courseList {
       // height: 75.5%;
-      overflow-x: auto;
+      // overflow-x: auto;
       padding-top: 20px;
       h4 {
         line-height: 52px;
@@ -210,12 +210,13 @@
         padding: 0 20px;
       }
       .knobble {
+        position: relative;
         width: 100%;
         height: 46px;
         line-height: 46px;
         padding: 0 5%;
         cursor: pointer;
-        overflow: hidden;
+        // overflow: hidden;
         transition: background 300ms;
         &:hover {
           background: #151141;
@@ -256,6 +257,24 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+        }
+        .barNameHover {
+          display: none;
+          // width: 100%;
+          // height: 46px;
+          line-height: 20px;
+
+          position: absolute;
+          left: 48px;
+          bottom: 46px;
+          background-color: #fff;
+          padding-left: 10px;
+          color: #000;
+        }
+        &:hover {
+          .barNameHover {
+            display: block;
+          }
         }
       }
     }
@@ -397,7 +416,7 @@
           &.is-bordered.is-checked {
             border-color: #6417a6;
           }
-          .el-radio__input.is-checked+.el-radio__label {
+          .el-radio__input.is-checked + .el-radio__label {
             color: #6417a6;
           }
           .el-radio__input {

@@ -1,8 +1,20 @@
+body {
+  padding-top: 90px;
+}
+
 .headerBox {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%; // height: 90px;
   border-bottom: 1px #e8d6f7 solid;
   background-color: #fff;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04);
+  z-index: 100;
+  // width: 100%; // height: 90px;
+  // border-bottom: 1px #e8d6f7 solid;
+  // background-color: #fff;
+  // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04);
   .main {
     width: 1100px;
     height: 90px;
@@ -153,6 +165,7 @@
         cursor: pointer;
         &:hover .downApp {
           opacity: 1;
+          display: block;
           z-index: 999;
         }
         .phone {
@@ -170,6 +183,7 @@
         }
         .downApp {
           opacity: 0;
+          display: none;
           width: 299px;
           height: 150px;
           transition: all 300ms;
@@ -277,11 +291,12 @@
       }
     }
     .headImg {
-      height: 40px;
+      height: 44px;
       position: relative;
       cursor: pointer;
       &:hover .subPages {
         opacity: 1;
+        display: block;
         z-index: 999;
       }
       span {
@@ -289,6 +304,7 @@
         height: 34px;
         background-color: #eee;
         border-radius: 50%;
+        margin-top: 5px;
         img {
           width: 34px;
           height: 34px;
@@ -297,6 +313,7 @@
       }
       .subPages {
         opacity: 0;
+        display: none;
         width: 120px;
         position: absolute;
         right: 0;
@@ -416,6 +433,7 @@
       }
       .el-button {
         margin-top: 20px;
+        position: relative;
       }
     }
     .wechatLogin {

@@ -51,7 +51,6 @@
       top: 0;
       right: 0;
       bottom: 0;
-      left: -38px;
     }
   }
   .psnInfo {
@@ -63,7 +62,6 @@
       span {
         font-size: 16px;
         color: #222;
-        // font-weight: 700;
         &:first-child {
           width: 135px;
           text-align: right;
@@ -96,6 +94,9 @@
       background-color: #9a5cd0;
       border: none;
       border-radius: 28px;
+    }
+    .el-form-item .el-input__validateIcon {
+      display: none;
     }
     input:-webkit-autofill {
       -webkit-box-shadow: 0 0 0px 1000px #f1e9f8 inset !important; //关于解决输入框背景颜色

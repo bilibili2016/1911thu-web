@@ -13,7 +13,7 @@
             </div>
             <div class="content">
               <v-card v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-card>
-              <div v-else class="noCourse">
+              <div v-else class="noCourse fillTop">
                 <img :src="noMsgImg" alt="">
                 <h4>抱歉，现在还没有学习过的课程呦~</h4>
                 <!-- <p>去学习</p> -->
@@ -25,10 +25,18 @@
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
-          <el-card>
-            <el-tabs v-model="activeNames">
+          <el-card class="changeNav">
+            <el-select v-model="value" @change="changeNav">
+              <el-option v-for="(item,index) in options" :key="index" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
+            <el-tabs v-model="activeNames" @tab-click="handleActive">
+              <!-- 我的课程 学习中 -->
               <el-tab-pane label="学习中" name="first">
                 <v-card v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-card>
+                <div class="pagination" v-if="newDataing  && newDataing.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg1.pagesize" :pager-count="5" :page-count="pagemsg1.pagesize" :current-page="pagemsg1.page" :total="pagemsg1.total" @current-change="studyPageChange"></el-pagination>
+                </div>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -37,8 +45,12 @@
                   </div>
                 </div>
               </el-tab-pane>
+              <!-- 我的课程 已完成 -->
               <el-tab-pane label="已完成" name="second">
                 <v-card v-if="newDataReady && newDataReady.length>0" :data="newDataReady" :config="configTwo"></v-card>
+                <div class="pagination" v-if="newDataReady && newDataReady.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
+                </div>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -47,8 +59,26 @@
                   </div>
                 </div>
               </el-tab-pane>
+              <!-- 我的课程 已过期 -->
+              <el-tab-pane label="已过期" name="fourth">
+                <v-card v-if="overTimeData && overTimeData.length>0" :data="overTimeData" :config="configFour"></v-card>
+                <div class="pagination" v-if="overTimeData && overTimeData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
+                </div>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有已过期的课程呦~</h4>
+                    <!-- <p>去学习</p> -->
+                  </div>
+                </div>
+              </el-tab-pane>
+              <!-- 我的课程 我的收藏 -->
               <el-tab-pane label="我的收藏" name="third">
                 <v-card v-if="collectionData && collectionData.length>0" :data="collectionData" :config="configZero"></v-card>
+                <div class="pagination" v-if="collectionData && collectionData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg3.pagesize" :pager-count="5" :page-count="pagemsg3.pagesize" :current-page="pagemsg3.page" :total="pagemsg3.total" @current-change="collectionPageChange"></el-pagination>
+                </div>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -91,7 +121,6 @@
               </el-tab-pane>
               <el-tab-pane name="orderThird">
                 <span class="payOk" slot="label">已完成
-                  <i v-if="readyOrderData && readyOrderData.length>0">{{readyOrderData.length}}</i>
                 </span>
                 <v-order v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
                 <div class="content" v-else>
@@ -103,9 +132,8 @@
               </el-tab-pane>
               <el-tab-pane name="orderFour">
                 <span class="payOff" slot="label">已失效
-                  <i v-if="invalidOrderData && invalidOrderData.length>0">{{invalidOrderData.length}}</i>
                 </span>
-                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
+                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="invalidOrderData" v-loading="invalidOrderLoad"></v-order>
                 <div class="content" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -118,6 +146,28 @@
 
           <!-- 订单详情 -->
           <div class="orderListDetail" v-else>
+            <!-- <div class="order-top">
+              <div class="orderItem orderInfo ">
+                <div class="title">订单信息</div>
+                <div>
+                  <p>
+                    <span>订单编号：</span>
+                    <span>{{orderDetail.order_sn}}</span>
+
+                  </p>
+                  <p>
+                    <span>下单时间：</span>
+                    <span>{{timestampToTime(orderDetail.create_time)}}</span>
+                  </p>
+                </div>
+              </div>
+              <div class="orderItem payInfo">
+                <div class="title">付款信息</div>
+              </div>
+              <div class="orderItem ticketInfo">
+                <div class="title">发票信息</div>
+              </div>
+            </div> -->
             <div class="table">
               <div class="tableHeader">
                 <span class="goBack" @click="goBack">
@@ -150,7 +200,6 @@
                 <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
               </div>
             </div>
-
           </div>
         </el-tab-pane>
         <!-- 我的消息 -->
@@ -181,20 +230,8 @@
         <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
             <i class="icon-bind"></i> 绑定课程ID</span>
-          <v-bind @isShowMsg="isShowMsg"></v-bind>
-          <div class="content">
-            <div class="noCourse" v-if="isShowNoCourse">
-              <img :src="noMsgImg" alt="">
-              <h4>抱歉，现在还没有已经绑定的课程呦~</h4>
-            </div>
-          </div>
+          <v-bind></v-bind>
         </el-tab-pane>
-        <!-- 绑定机构Id -->
-        <!-- <el-tab-pane name="tab-seventh">
-          <span slot="label" class="tabList">
-            <i class="icon-company"></i> 绑定机构ID</span>
-          <v-companyId :cpnData="companyData"></v-companyId>
-        </el-tab-pane> -->
         <!-- 专属邀请码 -->
         <el-tab-pane name="tab-eighth" v-if="codeData.length">
           <span slot="label" class="tabList">
@@ -213,7 +250,6 @@ import PersonalSet from '@/pages/profile/components/personalset.vue'
 import Binding from '@/pages/profile/components/bindid'
 import Info from '@/pages/profile/components/info'
 import Order from '@/pages/profile/pages/order'
-// import CompanyId from '@/pages/profile/pages/companyid'
 import Invitation from '@/pages/profile/pages/invitation'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -227,7 +263,6 @@ export default {
     'v-banner': Banner,
     'v-order': Order,
     'v-invitation': Invitation
-    // 'v-companyId': CompanyId
   },
   data() {
     return {
@@ -256,11 +291,31 @@ export default {
         card_type: 'profile',
         card: 'already'
       },
+      configFour: {
+        card_type: 'profile',
+        card: 'overtime'
+      },
       newData: [],
       styleForm: {
         types: 1,
+        categoryId: 0,
         pages: 0,
         limits: 12
+      },
+      pagemsg1: {
+        page: 1,
+        pagesize: 12,
+        total: 12
+      },
+      pagemsg2: {
+        page: 1,
+        pagesize: 12,
+        total: 12
+      },
+      pagemsg3: {
+        page: 1,
+        pagesize: 12,
+        total: 12
       },
       studyData: [],
       newDataing: [],
@@ -273,7 +328,10 @@ export default {
       recordData: [],
       courseList: [],
       companyData: null,
+      options: [],
+      value: '查看全部',
       collectionForm: {
+        categoryId: 0,
         pages: 1,
         limits: 12
       },
@@ -294,7 +352,8 @@ export default {
       allOrderLoad: true,
       unfinishedOrderLoad: true,
       readyOrderLoad: true,
-      invalidOrderLoad: true
+      invalidOrderLoad: true,
+      overTimeData: []
     }
   },
   computed: {
@@ -302,6 +361,7 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
+    // 获取我的订单
     getUpdateMsg(msg) {
       if (msg === true) {
         this.getAllOrderData()
@@ -309,41 +369,132 @@ export default {
         this.getInvalidOrderData()
       }
     },
+    // 获取订单详情
     getOrderDetail(msg) {
       if (msg === false) {
         this.showOrderList = false
         this.curriculumPayApply()
       }
     },
+    // 我的消息空页面展示
     isNoMyMsg(isShow) {
       this.noMyMsg = isShow
     },
-    isShowMsg(isShow) {
-      this.isShowNoCourse = isShow
-    },
+    // 切换展示个人信息
     updateUserInfo(flag) {
       this.isUpdate = flag
     },
-    goLink(item) {
-      this.$router.push(item)
-    },
-    goShop() {
-      this.goLink('/shop/checkedcourse')
-    },
+    // 订单详情 返回上一步到我的订单
     goBack() {
       this.showOrderList = true
     },
+    // 切换tab时保存tab的name刷新就还是在这个tab
     handleClick(item) {
       // name
       persistStore.set('gid', item.name)
     },
+    handleActive(item) {
+      this.value = '查看全部'
+      if (item.name == 'first') {
+        this.pagemsg1.total = 1
+        this.studyCurriculumList()
+      } else if (item.name == 'second') {
+        this.pagemsg2.total = 1
+        this.readyStudyCurriculumList()
+      } else if (item.name == 'third') {
+        this.pagemsg3.total = 1
+        this.collectionList()
+      } else if (item.name == 'fourth') {
+        this.pagemsg3.total = 1
+        this.overStudyCurriculumList()
+      }
+    },
+    // 切换 我的学习中分类
+    changeNav(item) {
+      if (this.activeNames == 'third') {
+        // 我的课程 收藏的项目
+        this.collectionForm.categoryId = item
+        return new Promise((resolve, reject) => {
+          home.collectionList(this.collectionForm).then(response => {
+            this.collectionData = response.data.curriculumList
+            this.pagemsg2.total = response.data.pageCount
+            resolve(true)
+          })
+        })
+      } else {
+        if (this.activeNames == 'first') {
+          // 我的课程 学习中的项目
+          this.styleForm.types = 1
+          this.styleForm.categoryId = item
+          this.styleForm.pages = 1
+          this.styleForm.limits = 12
+          return new Promise((resolve, reject) => {
+            home.studyCurriculumList(this.styleForm).then(response => {
+              this.newDataing = response.data.curriculumList
+              this.pagemsg1.total = response.data.pageCount
+              for (let item of response.data.curriculumList) {
+                item.percent = Number(item.percent)
+              }
+              resolve(true)
+            })
+          })
+        } else if (this.activeNames == 'second') {
+          // 我的课程 已完成的项目
+          this.styleForm.types = 2
+          this.styleForm.categoryId = item
+          this.styleForm.pages = 1
+          this.styleForm.limits = 12
+          return new Promise((resolve, reject) => {
+            home.studyCurriculumList(this.styleForm).then(response => {
+              this.newDataReady = response.data.curriculumList
+              this.pagemsg2.total = response.data.pageCount
+              resolve(true)
+            })
+          })
+        } else if (this.activeNames == 'fourth') {
+          // 我的课程 已过期的项目
+          this.styleForm.categoryId = item
+          this.styleForm.pages = 1
+          this.styleForm.limits = 12
+          this.pagemsg2.page = 1
+          this.styleForm.types = 4
+          return new Promise((resolve, reject) => {
+            home.studyCurriculumList(this.styleForm).then(response => {
+              this.overTimeData = response.data.curriculumList
+              for (var i = 0; i < this.overTimeData.length; i++) {
+                this.$set(this.overTimeData[i], 'overtime', true)
+              }
+              resolve(true)
+            })
+          })
+        }
+      }
+    },
+    // 获取我的学习右侧的分类
+    childCategoryList() {
+      return new Promise((resolve, reject) => {
+        home.childCategoryList().then(response => {
+          if (response.status === 0) {
+            response.data.categoryList.forEach((element, i) => {
+              this.options[i] = {}
+              this.options[i].value = element.id
+              this.options[i].label = element.category_name
+            })
+          }
+          resolve(true)
+        })
+      })
+    },
+    // 我的学习 学习中
     studyCurriculumList() {
       this.styleForm.types = 1
-      this.styleForm.pages = 0
+      this.styleForm.categoryId = 0
+      this.styleForm.pages = 1
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
           this.newDataing = response.data.curriculumList
+          this.pagemsg1.total = response.data.pageCount
           for (let item of response.data.curriculumList) {
             item.percent = Number(item.percent)
           }
@@ -351,6 +502,23 @@ export default {
         })
       })
     },
+    // 学习中 分页切换
+    studyPageChange(val) {
+      this.pagemsg1.page = val
+      this.styleForm.pages = val
+      this.styleForm.types = 1
+      return new Promise((resolve, reject) => {
+        home.studyCurriculumList(this.styleForm).then(response => {
+          this.newDataing = response.data.curriculumList
+          this.pagemsg1.total = response.data.pageCount
+          for (let item of response.data.curriculumList) {
+            item.percent = Number(item.percent)
+          }
+          resolve(true)
+        })
+      })
+    },
+    // 我的首页 最近学习
     studydataList() {
       this.styleForm.types = 3
       this.styleForm.pages = 0
@@ -365,27 +533,73 @@ export default {
         })
       })
     },
+    // 我的首页 已完成
     readyStudyCurriculumList() {
       this.styleForm.types = 2
-      this.styleForm.pages = 0
+      this.styleForm.categoryId = 0
+      this.styleForm.pages = 1
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
         home.studyCurriculumList(this.styleForm).then(response => {
           this.newDataReady = response.data.curriculumList
+          this.pagemsg2.total = response.data.pageCount
           resolve(true)
         })
       })
     },
+    // 我的课程 已过期的项目
+    overStudyCurriculumList() {
+      this.pagemsg2.page = 1
+      this.styleForm.categoryId = 0
+      this.styleForm.pages = 1
+      this.styleForm.types = 4
+      return new Promise((resolve, reject) => {
+        home.studyCurriculumList(this.styleForm).then(response => {
+          this.overTimeData = response.data.curriculumList
+          for (var i = 0; i < this.overTimeData.length; i++) {
+            this.$set(this.overTimeData[i], 'overtime', true)
+          }
+          resolve(true)
+        })
+      })
+    },
+    // 已完成 分页切换
+    readyStudyPageChange(val) {
+      this.pagemsg2.page = val
+      this.styleForm.pages = val
+      this.styleForm.types = 1
+      return new Promise((resolve, reject) => {
+        home.studyCurriculumList(this.styleForm).then(response => {
+          this.newDataReady = response.data.curriculumList
+          this.pagemsg2.total = response.data.pageCount
+          resolve(true)
+        })
+      })
+    },
+    // 我的学习 收藏列表
     collectionList() {
+      this.collectionForm.categoryId = 0
       return new Promise((resolve, reject) => {
         home.collectionList(this.collectionForm).then(response => {
           this.collectionData = response.data.curriculumList
-
+          this.pagemsg3.total = response.data.pageCount
           resolve(true)
         })
       })
-      this.goLink('/course/pages/categoryd')
     },
+    // 收藏列表 分页切换
+    collectionPageChange(val) {
+      this.pagemsg3.page = val
+      this.collectionForm.pages = val
+      return new Promise((resolve, reject) => {
+        home.collectionList(this.collectionForm).then(response => {
+          this.collectionData = response.data.curriculumList
+          this.pagemsg3.total = response.data.pageCount
+          resolve(true)
+        })
+      })
+    },
+    // 我的订单 全部
     getAllOrderData() {
       this.orderForm.payStatus = 0
       return new Promise((resolve, reject) => {
@@ -396,6 +610,7 @@ export default {
         })
       })
     },
+    // 我的订单 待支付
     getUnfinishedOrderData() {
       this.orderForm.payStatus = 1
       return new Promise((resolve, reject) => {
@@ -406,6 +621,7 @@ export default {
         })
       })
     },
+    // 我的订单 已支付
     getReadyOrderData() {
       this.orderForm.payStatus = 2
       return new Promise((resolve, reject) => {
@@ -416,6 +632,18 @@ export default {
         })
       })
     },
+    // 我的课程 已过期
+    // getOverTime() {
+    //   this.orderForm.payStatus = 4
+    //   home.getAllOrderData(this.orderForm).then(response => {
+    //     this.overTimeData = response.data.orderList
+
+    //     console.log(response.data.orderList, '123')
+    //     // this.readyOrderLoad = false
+    //     resolve(true)
+    //   })
+    // },
+    // 我的订单 取消
     getInvalidOrderData() {
       this.orderForm.payStatus = 3
       return new Promise((resolve, reject) => {
@@ -426,6 +654,7 @@ export default {
         })
       })
     },
+    // 获取专属邀请码列表
     getCodeList() {
       return new Promise((resolve, reject) => {
         home.getCodeList(this.codeListForm).then(response => {
@@ -434,6 +663,7 @@ export default {
         })
       })
     },
+    // 专属邀请码 邀请记录
     getRecordList() {
       return new Promise((resolve, reject) => {
         home.getRecordList(this.codeListForm).then(response => {
@@ -446,6 +676,7 @@ export default {
         })
       })
     },
+    // 格式化时间戳
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
       let Y = date.getFullYear() + '-'
@@ -455,7 +686,9 @@ export default {
           : date.getMonth() + 1) + '-'
       let D =
         (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-      let h = date.getHours() + ':'
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
       let m =
         (date.getMinutes() * 1 < 10
           ? '0' + date.getMinutes()
@@ -464,6 +697,7 @@ export default {
         date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
     },
+    // 订单详情
     curriculumPayApply() {
       this.orderForm.ids = persistStore.get('order')
       return new Promise((resolve, reject) => {
@@ -482,6 +716,7 @@ export default {
       this.studydataList()
       this.studyCurriculumList()
       this.readyStudyCurriculumList()
+      this.childCategoryList()
       this.collectionList()
       this.getAllOrderData()
       this.getUnfinishedOrderData()
@@ -490,6 +725,9 @@ export default {
       this.getCodeList()
       this.getRecordList()
       this.curriculumPayApply()
+      // this.getOverTime()
+      //过期的我的课程
+      this.overStudyCurriculumList()
     }
     this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid
@@ -517,9 +755,25 @@ export default {
     padding: 15px;
     margin-top: -15px;
     box-shadow: none;
+    .changeNav {
+      position: relative;
+      .el-select {
+        position: absolute;
+        right: 0;
+        top: 9px;
+        z-index: 5;
+        .el-input__inner {
+          border: none;
+          padding: 0;
+          text-align: center;
+        }
+      }
+    }
+    .pagination {
+      margin: 10px 0 40px;
+    }
   }
   &.profile .my-course.my-order {
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     overflow: initial;
   }
   &.profile .my-course#pane-tab-third .el-tabs__content {
@@ -571,12 +825,12 @@ export default {
         color: #222;
         margin-bottom: 40px;
         .goBack {
-          margin-left: 40px;
+          margin-left: 10px;
           color: #6417a6;
           cursor: pointer;
         }
         .courseName {
-          margin-left: 53px;
+          margin-left: 75px;
         }
         .price {
           margin-left: 500px;
@@ -673,10 +927,13 @@ export default {
     height: 600px;
     background-color: #fff;
     text-align: center;
+    &.fillTop {
+      margin-top: -50px;
+    }
     img {
       width: 316px;
       height: 274px;
-      margin-top: 35px;
+      margin-top: 100px;
     }
     h4 {
       height: 70px;

@@ -137,15 +137,17 @@
         border: 1px solid #E8D6F7;
       }
       .recordTable {
-        width: 100%;
+        width: 528px;
         border-spacing: 0;
         tr {
           font-size: 0;
         }
         .tr_header {
+          display: table;
+          width: 528px;
           height: 60px;
           line-height: 60px;
-          background-color: #EBE7ED;
+          background-color: #fafafa;
           text-align: center;
           color: #6417A6;
           font-size: 16px;
@@ -159,21 +161,19 @@
           }
         }
         .tr_body {
+          display: inline-table;
+          width: 528px;
           height: 52px;
           line-height: 52px;
-          background-color: #fafafa;
+          background-color: #fff;
           text-align: center;
           color: #222;
           font-size: 14px;
           td {
             font-size: 14px;
-            border-bottom: 1px solid #E8D6F7;
             i {
               color: #6417a6;
             }
-          }
-          &:last-child td {
-            border: none;
           }
         }
       }

@@ -3,8 +3,10 @@
     <!-- banner定制 -->
     <template v-if="config.card_type === 'ding'">
       <div class="customization">
-        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link)">
-          <i class="fl"></i>
+        <div class="pro clearfix" v-for="(pro,index) in dingData" :key="index" @click="getMore(pro.link_url)">
+          <i class="fl">
+            <img :src="pro.picture" alt="">
+          </i>
           <div class="fr con">
             <h5>{{pro.title}}</h5>
             <p>{{pro.content}}</p>
@@ -12,7 +14,7 @@
         </div>
       </div>
     </template>
-    <!-- profile个人信息模板 新上好课模板-->
+    <!-- profile个人信息模板 新上好课模板 学习中-->
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
@@ -29,12 +31,20 @@
             </div>
             <el-checkbox v-model="card.is_checked" style="position:absolute;top:10px;right:10px;" v-if="config.types === 'buy'"></el-checkbox>
             <div class="tag">
-              <!-- {{card}} -->
               <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button type="primary" plain @click="goLink(linkdata)">继续学习</el-button>
+              <el-button v-if="card.percent < 1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.percent > 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
+                <span>
+                  加入购物车
+                </span>
+              </el-button>
+              <el-button v-if="card.percent > 1&&!card.overtime" type="primary" plain @click="goToPlay(card)">
+                <span>继续学习</span>
+              </el-button>
+
             </div>
             <el-row>
               <!-- 名字 -->
@@ -45,7 +55,7 @@
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
-                    {{card.study_time}}课时
+                    {{card.study_time}}学时
                   </span>
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
@@ -63,21 +73,28 @@
                 </div>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps " v-if="config.card==='learning' ">
+              <div class="line-wraps" v-if="config.card==='learning' ">
                 <div class="line-centers ">
                   <!-- {{typeof(card.percent)}} -->
-                  <p>已学习{{card.percent}}%</p>
+                  <span>已学习{{card.percent}}%</span>
+                  <span class="expire_day" style="float:right;padding-bottom:10px;">剩余{{card.expire_day}}天</span>
                   <el-progress :percentage="card.percent "></el-progress>
                 </div>
               </div>
               <div v-if="config.card==='already' ">
                 <div class="line-centers ">
-                  <div>已学习100%</div>
+                  <div>已完成100%</div>
                 </div>
               </div>
               <div class="readyImg " v-if="config.card==='already' ">
                 <img :src="readyImg " alt=" ">
               </div>
+              <!-- 我的课程 已过期的图片 -->
+              <div class="readyImg " v-if="config.card==='overtime' ">
+                <img :src="overTimeImg" alt=" ">
+              </div>
+              <!-- 我的课程 已过期的副标题 -->
+              <div class="deputyTitleOverTime" v-if="config.card==='overtime' ">{{card.deputy_title}}</div>
             </el-row>
           </el-card>
         </div>
@@ -89,30 +106,35 @@
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
           <el-card shadow="never " body-style="padding: 0; " class="itemBox ">
-            <!-- {{card.id}} -->
+
+            <!-- 选课使用的勾选 -->
             <el-checkbox v-model="card.is_checked " @change="selCheckboxChange(card,index) " style="position:absolute;top:10px;right:10px; " v-if="config.types==='buy' "></el-checkbox>
+
             <!-- @click="selectCid(card,index) " -->
             <div @click="courseInfo(card,index) ">
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
-              <div class="mask-style ">
-                <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
-                <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
-              </div>
+              <div class="mask-style "></div>
+              <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
+              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
+              <!-- </div> -->
+
+              <!-- 我的首页的图片背景 -->
               <div class="bgImgs ">
                 <img :src="card.picture " alt=" ">
               </div>
-              <div class="tag ">
-                <!-- 收藏的tag -->
+
+              <!-- <div class="tag ">
                 <span v-if="card.tag.length !==0 " v-for="(tag,index) in card.tag " :key="index ">{{tag}}</span>
-              </div>
-              <div v-if="config.card==='home' "></div>
+              </div> -->
+
+              <!-- <div v-if="config.card==='home' "></div>
               <div class="common-button btn-bgs " v-else>
-                <el-button type="primary " plain @click="goLink(linkdata) ">继续学习</el-button>
-              </div>
+                <el-button type="primary " plain @click="goLink(linkdata) ">继续学习2334</el-button>
+              </div> -->
+
               <el-row v-if="config.position !== 'personal'">
-                <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) " v-if="config.card === 'home'">
                   <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]">
                     <span class="title">{{card.title}}</span>
@@ -120,7 +142,7 @@
                   </p>
                   <p class="itemBox-info">
                     <span v-if="config.card === 'home'">
-                      {{card.study_time}}课时
+                      {{card.study_time}}学时
                     </span>
                     <span class="itemBox-num" v-if="config.card === 'home'">
                       <img :src="numSrc" alt="">
@@ -130,20 +152,23 @@
                   </p>
                 </div>
                 <div class="line-wrap " v-if="config.card==='home' ">
-                  <div class="line-center ">
+                  <div class="line-center">
                     <p class="price ">￥{{card.present_price}}</p>
                   </div>
                 </div>
               </el-row>
+              <!-- 我的课程的 我的收藏 -->
               <el-row v-if="config.position === 'personal'">
-                <!-- 名字 -->
                 <div class="item " @click="courseInfo(card,index) ">
                   <p class="itemBox-name ">
                     <span>{{card.title}}</span>
                   </p>
+                  <!-- {{card}} -->
+                  <div class="deputyTitleOverTime">{{card.deputy_title}}</div>
+                  <!-- <span>123</span> -->
                 </div>
                 <div class="line-wrap " v-if="config.card==='home' " @click.stop="goTeacherInfo(card.teacher_id) ">
-                  <div class="line-center ">
+                  <div class="line-center">
                     <img :src="card.head_img " alt=" ">
                     <span>{{card.teacher_name}}</span>
                     <span class="title ">{{card.graduate}}</span>
@@ -222,12 +247,16 @@
         </div>
       </div>
     </template>
-    <!-- 新上好课详情  course/newlesson-->
-    <template v-if="config.card_type==='goodlesson' ">
-      <div class="courseList center goodLesson ">
+
+    <!-- 最新课程列表 -->
+    <!-- <template v-if="config.card_type==='newlesson' ">
+      <div class="courseList center  ">
         <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
           <el-card class="fl " :body-style="{ padding: '0px' } ">
-            <img :src="course.picture " class="image ">
+
+            <img v-if="!config.teacher" :src="course.picture" class="image " alt=" ">
+
+            <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" ">
             <div class="personInfo clearfix " @click="goTeacherInfo(course.teacher_id) ">
               <span>{{course}}</span>
               <img :src="course.head_img " alt=" ">
@@ -243,11 +272,11 @@
               <h4 @click="courseInfo(course)">{{course.title}}</h4>
               <p>{{course.introduction}}</p>
             </div>
-            <!-- {{course.evaluateList}} -->
+
             <div v-if="course.evaluateList.length> 0">
               <el-carousel trigger="click" height="120px">
                 <el-carousel-item v-for="item in course.evaluateList" :key="item.id">
-                  <!-- {{item}} -->
+
                   <div class="comment">
                     <h5>
                       <span>{{item.nick_name}}的评论</span>
@@ -264,6 +293,46 @@
               </div>
               <p class="comment-text">暂无评论，快来抢沙发～</p>
             </div>
+            <div class="study clearfix">
+              <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
+              <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span>
+              <span class="coin mfree" v-if="course.is_free == '2'">免费</span>
+
+              <div class="fr common-button-half-right" v-if="course.is_free == '2'">
+
+                <el-button type="primary" plain @click="courseInfo(course) "> 立即学习</el-button>
+              </div>
+
+              <div class="fr common-button-half-right" v-if="course.is_free == '1'">
+
+                <el-button type="primary" plain @click="goBuyNewLesson(true,course,index)"> 加入购物车 </el-button>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </template> -->
+
+    <!-- 最新好课列表、精品好课列表、免费专区列表 -->
+    <template v-if="config.card_type==='goodlesson' ">
+      <div class="newOrFreeCourseList center goodlesson">
+        <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index ">
+          <el-card class="fl " :body-style="{ padding: '0px' } ">
+            <!-- 课程封面 -->
+            <img :src="course.picture" class="image " alt=" ">
+            <!-- 老师封面 -->
+            <!-- <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" "> -->
+
+          </el-card>
+          <div class="particulars fr ">
+            <div class="currentclum ">
+              <h4 @click="courseInfo(course)">{{course.title}}</h4>
+              <p class="small-title">{{course.deputy_title}}</p>
+              <p>{{course.introduction}}</p>
+            </div>
+
             <div class="study clearfix">
               <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span>
               <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span>
@@ -290,9 +359,64 @@
 
             </div>
           </div>
+          <div class="">
+
+          </div>
         </div>
       </div>
     </template>
+
+    <!-- 新闻列表  goodlesson2-->
+    <template v-if="config.card_type==='goodlesson2' ">
+      <div class="newOrFreeCourseList center goodlesson">
+        <div class="course clearfix bottom " v-for="(course,index) in newsList " :key="index ">
+          <el-card class="fl " :body-style="{ padding: '0px' } ">
+            <!-- 课程封面 -->
+            <img v-if="!config.teacher" :src="course.picture" class="image " alt=" ">
+            <!-- 老师封面 -->
+            <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" ">
+
+          </el-card>
+          <div class="particulars fl " style="width:560px;">
+            <div class="currentclum ">
+              <h4 @click="courseInfo(course)">{{course.title}}</h4>
+              <p class="small-title">{{course.introduce}}</p>
+              <p>{{course.introduction}}</p>
+            </div>
+
+            <!-- <div class="study clearfix"> -->
+            <!-- <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span> -->
+            <!-- <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span> -->
+            <!-- <span class="coin mfree" v-if="course.is_free == '2'">免费</span> -->
+            <!-- <div class="fr common-button-half"> -->
+            <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
+            <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
+
+            <!-- </el-button> -->
+            <!-- </div> -->
+            <!-- <div class="fr common-button-half-right">
+                <el-button type="primary" plain @click="buyNewCourse(course)"> 加入购物车</el-button>
+              </div> -->
+            <!-- <div class="fr common-button-half-right" v-if="course.is_free == '2'"> -->
+
+            <!-- <el-button type="primary" plain @click="courseInfo(course) "> 立即学习</el-button> -->
+            <!-- </div> -->
+
+            <!-- <div class="fr common-button-half-right" v-if="course.is_free == '1'"> -->
+            <!-- 是否在购物车{{course.is_cart}} {{course.isCartNew}} -->
+            <!-- <el-button type="primary" plain @click="goBuyNewLesson(true,course,index)"> 加入购物车 </el-button> -->
+            <!-- {{item.isCartNew}} -->
+            <!-- </div> -->
+
+            <!-- </div> -->
+          </div>
+          <div class="Newtime">
+            {{timestampToTime2(course.create_time)}}
+          </div>
+        </div>
+      </div>
+    </template>
+
     <!-- coursedetail 页面 -->
     <template v-if="config.card_type === 'goodplay'">
       <div class="courseList center">
@@ -337,7 +461,7 @@
                 </div>
                 <div v-else>
                   <span class="fl coursenum">
-                    <span>{{courseList.study_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                    <span>{{courseList.study_time}}学时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                   <span class="rate">
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
@@ -363,6 +487,7 @@
                 </div>
                 <div class="study clearfix" v-else>
                   <p>{{courseList.introduction}}</p>
+                  <!-- <p class="soldOut fl" v-if="courseList.status =='2'">此课程已下架</p> -->
                   <div class="common-button">
                     <div v-if="isAuthenticated">
                       <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习6</el-button> -->
@@ -383,7 +508,7 @@
                 </div>
                 <div v-else>
                   <span class="fl coursenum">
-                    <span>{{courseList.study_time}}课时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
+                    <span>{{courseList.study_time}}学时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
                   <span class="rate">
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
@@ -393,11 +518,13 @@
                   <h4 class="clearfix">
                     <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                     <p>已学时长</p>
+                    <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
                   </h4>
                   <div class="common-button">
                     <div>
                       <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
                     </div>
+                    <!--  v-if="courseList.status =='1'" -->
                     <div>
                       <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
                     </div>
@@ -452,41 +579,7 @@
         </div>
       </div>
     </template>
-    <!-- 学堂资讯 -->
-    <template v-if="config.card_type === 'infoOne'">
-      <div class="info-list">
-        <!--  -->
-        <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index<3">
-          <el-card shadow="never" body-style="padding: 0;">
-            <div class="info-box" @click="selectDetail(index,card,linkfive)">
-              <div class="info-wrap">
-                <img :src="card.picture" alt="">
-                <span>{{card.title}}</span>
-              </div>
-            </div>
-          </el-card>
-        </div>
-        <div class="more newsMore" @click="getMore(linkdata)">查看更多>></div>
-      </div>
-    </template>
 
-    <template v-if="config.card_type === 'infoTwo'">
-      <div class="card-categorys">
-        <div v-for="(card,index) in infoDesc" :index="index" :key="card.id" class="card-list" v-if="index === 0">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBoxs">
-            <div class="img-box">
-              <img :src="card.picture" alt="">
-              <div>
-                <span>{{card.title}}</span>
-              </div>
-            </div>
-            <div class="item">
-              {{card.introduce}}
-            </div>
-          </el-card>
-        </div>
-      </div>
-    </template>
   </div>
 </template>
 
@@ -498,8 +591,6 @@ export default {
   props: [
     'data',
     'config',
-    'infoArticle',
-    'infoDesc',
     'dingData',
     'searchData',
     'courseList',
@@ -516,6 +607,7 @@ export default {
       numSrc: require('@/assets/images/home_num.png'),
       one: 1,
       readyImg: require('@/assets/images/ready.png'),
+      overTimeImg: require('@/assets/images/overtime.png'),
       playbtn: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
       // jinImg: require('@/assets/images/jin.png'),
@@ -618,6 +710,12 @@ export default {
         this.$bus.$emit('loginShow', true)
       }
     },
+    // 已过期商品直接加入购物车
+    goShoppingCart(item) {
+      this.kidForm.kids = item.id
+      this.setKid(this.kidForm)
+      this.addShopCarts()
+    },
     goBuyNewLesson(detail, item, index) {
       persistStore.set('curriculumId', item.id)
       this.kidForm.kids = item.id
@@ -637,6 +735,7 @@ export default {
             // this.isCartNew = 1
           }
         } else {
+          console.log(item)
           this.$message({
             type: 'success',
             message: '您的商品已经在购物车里面'
@@ -657,6 +756,11 @@ export default {
       )
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
 
+      window.open(window.location.origin + '/course/player')
+    },
+    goToPlay(item) {
+      persistStore.set('curriculumId', item.id)
+      persistStore.set('catalogId', item.catalog_id)
       window.open(window.location.origin + '/course/player')
     },
     // 获取详情默认播放小节id
@@ -891,7 +995,9 @@ export default {
           : date.getMonth() + 1) + '-'
       let D =
         (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-      let h = date.getHours() + ':'
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
       let m =
         (date.getMinutes() * 1 < 10
           ? '0' + date.getMinutes()
@@ -899,6 +1005,26 @@ export default {
       let s =
         date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
       return Y + M + D + h + m + s
+    },
+    timestampToTime2(timestamp) {
+      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let Y = date.getFullYear() + '-'
+      let M =
+        (date.getMonth() + 1 < 10
+          ? '0' + (date.getMonth() + 1)
+          : date.getMonth() + 1) + '-'
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
+      return M + D
     }
   },
   mounted() {
@@ -922,6 +1048,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.deputyTitleOverTime {
+  width: 220px;
+  height: 20px;
+  line-height: 20px;
+  margin: 8px 0;
+  overflow: hidden;
+  font-size: 14px;
+  color: #93999f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 16px;
+}
 .new-style {
   img {
     width: 48px !important;
@@ -975,8 +1114,9 @@ export default {
   left: 50%;
   margin-left: -550px;
   z-index: 3;
+  padding-left: 192px;
   div.pro {
-    float: right;
+    float: left;
     width: 280px;
     height: 100px;
     border-radius: 5px;
@@ -987,7 +1127,7 @@ export default {
       margin-top: -8px;
       background-color: #f1e9f8;
     }
-    &:last-child,
+    &:nth-child(1),
     &:nth-child(2) {
       margin-right: 31px;
     }
@@ -997,7 +1137,7 @@ export default {
     img {
       width: 50px;
       height: 50px;
-      margin: 25px 16px;
+      margin: 2px 3px;
     }
     div {
       width: 178px;
@@ -1081,6 +1221,10 @@ export default {
           border-radius: 6px;
           color: #fff;
           margin-left: 8px;
+          max-width: 92px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
       .item {
@@ -1277,74 +1421,14 @@ export default {
 #pane-second .card-category .card-list,
 #pane-third .card-category .card-list {
   margin: 0 30px 50px 0;
-  &:nth-child(4n + 4) {
-    margin-right: 24px;
-  }
+  // &:nth-child(4n + 4) {
+  // margin-right: 24px;
+  // }
   &:nth-child(3n + 3) {
     margin-right: 0;
   }
-} // 学堂资讯
-.info-list {
-  float: right;
-  .el-card {
-    border: none;
-  }
-  .info {
-    width: 593px;
-    height: 106px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 6px;
-    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-    margin-bottom: 20px;
-    cursor: pointer;
-    &:hover {
-      box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
-      transition: all 300ms;
-    }
-    .info-box {
-      height: 106px;
-      .info-wrap {
-        height: 106px;
-        overflow: hidden;
-        img {
-          width: 180px;
-          height: 106px;
-          padding: 0px;
-          margin: 0px;
-          overflow: hidden;
-        }
-        span {
-          display: inline-block;
-          width: 413px;
-          height: 72px;
-          line-height: 36px;
-          margin-top: 17px;
-          font-size: 18px;
-          padding: 0 15px;
-          color: rgba(34, 34, 34, 1);
-          overflow: hidden;
-          vertical-align: top;
-        }
-        span:hover {
-          color: #8f4acb;
-        }
-      }
-    }
-  }
-  .more {
-    float: right;
-    height: 20px;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: MicrosoftYaHei;
-    color: rgba(100, 23, 166, 1);
-    line-height: 40px;
-    &.newsMore:hover {
-      transition: all 300;
-      color: #8f4acb;
-    }
-  }
-} // left
+}
+// left
 .card-categorys {
   display: flex;
   justify-content: space-between;
@@ -1764,6 +1848,9 @@ export default {
           height: 54px;
           line-height: 54px;
           margin-bottom: 0px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
         h4:hover {
           color: #8f4acb;
@@ -1877,16 +1964,28 @@ export default {
           color: rgba(34, 34, 34, 1);
           line-height: 30px;
           margin-bottom: 20px;
+          height: 94px;
+          // border: 1px red solid;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          &.soldOut {
+            text-decoration: underline;
+          }
         }
         h4 {
           float: left;
           color: #222;
-          p:first-child {
-            font-size: 20px;
+          p {
             margin: 0;
-          }
-          p:last-child {
-            font-size: 14px;
+            &:first-child {
+              font-size: 20px;
+            }
+            &:last-child {
+              font-size: 14px;
+            }
           }
         }
 
@@ -1988,5 +2087,563 @@ export default {
   top: 0px;
   z-index: 100;
   left: 45px;
+}
+
+//精品好课 免费专区
+.newOrFreeCourseList {
+  width: 1100px;
+  margin: 0 auto;
+  .bottom {
+    // margin-bottom: 40px;
+  }
+  .boxshadow-none {
+    position: relative;
+  }
+  .el-card {
+    width: 360px;
+    height: 230px;
+    border-radius: 0;
+    .el-card__body {
+      img {
+        width: 360px;
+        height: 230px;
+      }
+    }
+  }
+  .course {
+    width: 100%;
+    padding: 32px 0;
+    border-bottom: 1px solid #c6c2d2;
+    transition: all 0.5s;
+    // border-radius: 6px;
+    // background-color: #fff;
+    // box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    .el-card.is-always-shadow {
+      box-shadow: none;
+    }
+    .el-card {
+      // width: 400px;
+      // height: 392px;
+      font-size: 0;
+      position: relative;
+      .img-wrap {
+        width: 400px;
+        height: 260px;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      & > img {
+        width: 400px;
+        height: 260px;
+      }
+      .personInfo {
+        width: 100%;
+        height: 132px;
+        background-color: #6417a6;
+        cursor: pointer;
+        img {
+          float: left;
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          margin: 31px 26px;
+        }
+        h5,
+        p {
+          float: left;
+          width: 274px;
+          color: #fff;
+        }
+        h5 {
+          margin-top: 41px;
+          font-size: 18px;
+        }
+        p {
+          font-weight: 400;
+          height: 36px;
+          line-height: 36px;
+          font-size: 14px;
+        }
+      }
+      .play-btn {
+        width: 76px;
+        height: 76px;
+        border-radius: 38px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -43px;
+        margin-top: -89px;
+        cursor: pointer;
+      }
+    }
+    .goodplay {
+      position: relative;
+      .image {
+        width: 480px;
+        height: 312px;
+      }
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 480px;
+        height: 312px;
+        background: rgba(100, 23, 166, 1);
+        opacity: 0.5;
+      }
+      .playBtn-detail {
+        width: 76px;
+        height: 76px;
+        margin-left: 30px;
+        margin-top: -10px;
+        img {
+          cursor: pointer;
+        }
+      }
+    }
+    .particulars {
+      width: 720px;
+      // transition: all 0.5s;
+      .no-comment {
+        height: 120px;
+        background-color: rgba(250, 250, 250, 1);
+        overflow: hidden;
+        .comment-img {
+          width: 48px;
+          height: 44px;
+          margin: 22px auto 13px;
+        }
+        .comment-text {
+          font-size: 14px;
+          color: rgba(136, 136, 136, 1);
+          width: 159px;
+          margin: 0 auto;
+        }
+      }
+      .currentclum {
+        padding-left: 20px;
+        margin-right: 22px;
+        // margin-bottom: 40px;
+        h4 {
+          font-size: 18px;
+          color: #222;
+          margin: 18px 0;
+          cursor: pointer;
+        }
+        h4:hover {
+          color: #8f4acb;
+        }
+        .small-title {
+          font-size: 14px;
+          color: #93999f;
+          margin-bottom: 26px;
+        }
+        p {
+          font-size: 14px;
+          line-height: 28px;
+          color: #222;
+          cursor: pointer;
+        }
+      }
+      .comment {
+        height: 134px;
+        margin-top: 5px;
+        padding: 0 40px 10px;
+        background-color: #fafafa;
+        color: #888;
+        h5 {
+          line-height: 40px;
+          .itemBox-rate {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 20px;
+            vertical-align: middle;
+          }
+        }
+        p {
+          font-size: 14px;
+          color: #888888;
+          line-height: 30px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+      }
+      .bordernone {
+        border: none;
+        padding-top: 0px;
+        font-size: 14px;
+        font-family: MicrosoftYaHei;
+        color: rgba(34, 34, 34, 1);
+        line-height: 30px;
+        padding: 0px 40px;
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+        }
+      }
+      .study {
+        padding: 15px 22px 0 20px;
+        line-height: 42px;
+        .coin {
+          color: red;
+          font-size: 17px;
+          padding-left: 20px;
+        }
+        .mfree {
+          color: #222;
+        }
+        .common-button {
+          p.goStudy {
+            width: 140px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 18px;
+            border: 1px solid #6417a6;
+            overflow: hidden;
+            font-size: 0;
+            span {
+              margin: 0;
+              height: 34px;
+              text-align: center;
+              font-size: 14px;
+              color: #6417a6;
+              cursor: pointer;
+              &.fl {
+                width: 88px;
+              }
+              &.fr {
+                width: 50px;
+                background-color: #6417a6;
+              }
+            }
+          }
+        }
+        span {
+          font-size: 14px;
+          color: #888888;
+          // margin-top: 21px;
+          display: inline-block;
+          &:nth-child(3) {
+            width: 140px;
+            height: 36px;
+            line-height: 36px;
+            border: 1px solid #6417a6;
+            color: #6417a6;
+            text-align: center;
+            border-radius: 18px;
+            cursor: pointer;
+          }
+          img {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+          }
+        }
+        div {
+          // margin-top: 10px;
+        }
+        .common-button-half {
+          width: 56px;
+          height: 40px;
+          line-height: 40px;
+          background: #6417a6;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+          transition: all 300ms;
+          span {
+            width: 20px;
+            height: 20px;
+            margin: 10px 0 10px 15px;
+            background: url('~assets/images/shopcard.png') no-repeat;
+            background-size: contain;
+          }
+          &:hover {
+            background: #8f4acb;
+          }
+        }
+        .common-button-half-right {
+          .el-button {
+            width: 144px;
+            border-radius: 21px;
+            line-height: 1.2;
+            background-color: rgba(255, 255, 255, 0);
+          }
+          .el-button--primary {
+            color: #6417a6;
+            &.is-plain {
+              border-color: #6417a6;
+            }
+            &:hover {
+              color: #8f4acb;
+              background-color: #fff;
+              &.is-plain {
+                border-color: #8f4acb;
+              }
+            }
+          }
+        }
+      }
+      .common-button-half {
+        img {
+          width: 20px !important;
+          height: 20px !important;
+        }
+        .el-button {
+          padding: 9px 16px;
+          border: 1px #6417a6 solid;
+          border-left: none;
+        }
+      }
+      .date {
+        color: rgba(136, 136, 136, 1);
+        font-size: 14px;
+      }
+      .time {
+        color: rgba(136, 136, 136, 1);
+        font-size: 14px;
+        margin: 10px 40px;
+      }
+      .more {
+        color: #6417a6;
+        font-size: 14px;
+        margin: 10px 40px;
+        cursor: pointer;
+      }
+    }
+    .particularss {
+      width: 510px;
+      margin-right: 30px;
+      .currentclum {
+        font-size: 16px;
+        font-family: MicrosoftYaHei;
+        color: rgba(34, 34, 34, 1);
+        line-height: 0px;
+        cursor: pointer;
+        .tg {
+          color: #ff5f5f;
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(255, 95, 95, 1);
+          padding-bottom: 20px;
+          padding-top: 10px;
+        }
+        h4 {
+          font-size: 18px;
+          color: #222;
+          height: 54px;
+          line-height: 54px;
+          margin-bottom: 0px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        h4:hover {
+          color: #8f4acb;
+          cursor: pointer;
+        }
+        .clum {
+          height: 25px;
+          .coursenum {
+            padding: 0;
+          }
+        }
+        .coursenum {
+          width: auto;
+          line-height: 25px;
+          padding-top: 12px;
+          cursor: pointer;
+          span {
+            display: inline-block;
+            margin-right: 15px;
+          }
+        }
+        .coins {
+          float: right;
+          color: #ff5f5f;
+          padding-top: 17px;
+          font-size: 16px;
+          padding-right: 20px;
+        }
+        .rate {
+          padding-top: 14px;
+        }
+        p {
+          font-size: 14px;
+          line-height: 30px;
+          color: #222;
+        }
+        span {
+          font-size: 14px;
+          color: #888888;
+          &:nth-child(2) {
+            width: 140px;
+            height: 36px;
+            line-height: 36px; // border: 1px solid #6417a6;
+            // color: #6417a6;
+            text-align: center;
+            border-radius: 18px;
+            cursor: pointer;
+          }
+          img {
+            width: 14px;
+            height: 14px;
+            // vertical-align: middle;
+          }
+        }
+        .itemBox-info {
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(176, 174, 184, 1);
+          line-height: 0px;
+          margin: 0px 0px 0px 15px;
+          .itemBox-num {
+            font-size: 12px;
+            font-family: MicrosoftYaHei;
+            color: rgba(176, 174, 184, 1);
+            line-height: 0px;
+            padding-left: 8px;
+            width: 160px;
+            img {
+              width: 12px;
+              height: 12px;
+              margin: 0px 5px;
+            }
+            .itemBox-rate {
+              // display: inline;
+              font-size: 12px;
+              line-height: 13px;
+              float: right;
+            }
+          }
+        }
+      }
+      .comment {
+        height: 134px;
+        margin-top: 40px;
+        padding: 0 40px 10px;
+        background-color: #fafafa;
+        color: #888;
+        h5 {
+          line-height: 40px;
+          .itemBox-rate {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            margin-left: 20px;
+            vertical-align: middle;
+          }
+        }
+        p {
+          font-size: 14px;
+          color: #888888;
+          line-height: 30px;
+        }
+      }
+      .study {
+        // padding: 30px 40px 0;
+        padding: 20px 0 0 0;
+        border-top: 1px rgba(232, 214, 247, 1) solid; // margin-top: 65px;
+        p {
+          font-size: 14px;
+          font-family: MicrosoftYaHei;
+          color: rgba(34, 34, 34, 1);
+          line-height: 30px;
+          margin-bottom: 20px;
+          height: 94px;
+          // border: 1px red solid;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          &.soldOut {
+            text-decoration: underline;
+          }
+        }
+        h4 {
+          float: left;
+          color: #222;
+          p {
+            margin: 0;
+            &:first-child {
+              font-size: 20px;
+            }
+            &:last-child {
+              font-size: 14px;
+            }
+          }
+        }
+
+        .common-button .is-plain {
+          border-radius: 20px;
+          border-color: #6417a6;
+          color: #6417a6;
+          font-weight: 400;
+          transition: all 300ms;
+          &:hover {
+            color: #fff;
+            border-color: #8f4acb;
+          }
+        }
+        &.bought {
+          .common-button .is-plain {
+            margin-top: 30px;
+          }
+          .lineProgress {
+            clear: both;
+            width: 100%;
+            padding-top: 45px;
+            h5 {
+              width: 100%;
+              line-height: 30px;
+              text-align: right;
+              font-size: 14px;
+              color: #666;
+            }
+            .el-progress-bar {
+              .el-progress-bar__outer {
+                height: 14px;
+                background-color: #ffdb5f;
+              }
+              .el-progress-bar__inner {
+                background-color: #6417a6;
+              }
+            }
+          }
+        }
+      }
+    }
+    &:hover {
+      background-color: #fff;
+      box-shadow: 0 8px 35px rgba(0, 0, 0, 0.08);
+      padding-left: 20px;
+
+      .particulars {
+        .currentclum {
+          h4 {
+            color: #8f4acb;
+          }
+        }
+      }
+    }
+    .Newtime {
+      width: 131px;
+      float: right;
+      font-size: 22px;
+      margin-top: 19px;
+      color: #888888;
+    }
+  }
 }
 </style>

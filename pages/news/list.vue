@@ -4,8 +4,9 @@
     <div class="center shadow">
       <div @click="getNewInfoList"></div>
       <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
+      <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
     </div>
-    <v-page :data="pagemsg" @page="selectPages" :pageSize='8'></v-page>
+    <v-page :pagemsg="pagemsg" @page="selectPages" :pageSize='8'></v-page>
   </div>
 </template>
 
@@ -28,6 +29,9 @@ export default {
       configs: {
         banner_type: 'news'
       },
+      // config: {
+      //   card_type: 'goodlesson2'
+      // },
       config: {
         card_type: 'goodplayTwo'
       },
