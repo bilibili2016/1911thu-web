@@ -194,7 +194,7 @@
             </p>
           </div>
           <div class="formLi clearfix">
-            <p class="fl">收货省份</p>
+            <p class="fl">收票人省份</p>
             <p class="fr province">
               <el-select v-model="ticketForm.province" placeholder="省" @change="changeTicketp">
                 <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
@@ -208,7 +208,7 @@
             </p>
           </div>
           <div class="formLi clearfix">
-            <p class="fl">收货详细地址</p>
+            <p class="fl">详细地址</p>
             <p class="fr">
               <input type="text" v-model="ticketForm.address" placeholder="请输入收票人的详细地址">
             </p>
@@ -381,7 +381,7 @@
               </p>
             </div>
             <div class="formLi clearfix">
-              <p class="fl">收货省份</p>
+              <p class="fl">收票人省份</p>
               <p class="fr province">
                 <el-select v-model="zzTicketForm.province" placeholder="省" @change="changezzTicketp">
                   <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzprovince" :key="'prov'+index"></el-option>
@@ -395,7 +395,7 @@
               </p>
             </div>
             <div class="formLi clearfix">
-              <p class="fl">收货详细地址</p>
+              <p class="fl">详细地址</p>
               <p class="fr">
                 <input type="text" v-model="zzTicketForm.address" placeholder="请输入收票人的详细地址">
               </p>
