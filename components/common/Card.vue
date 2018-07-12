@@ -503,10 +503,14 @@
                 </div>
               </div>
               <div v-if="courseList.is_free === '1'">
+
+                <!-- 已经学习了 左侧 courseList.is_study === 1 -->
                 <div class="clum" v-if="courseList.is_study === 1">
                   <span class="fl coursenum">
                     <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
                 </div>
+
+                <!-- 未学习 左侧  courseList.is_study === 2 -->
                 <div v-else>
                   <span class="fl coursenum">
                     <span>{{courseList.study_time}}学时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
@@ -515,26 +519,43 @@
                   </span>
                   <span class="coins">￥ {{courseList.present_price}}</span>
                 </div>
+
+                <!-- 已经学习了 右侧是 courseList.is_study === 1 -->
                 <div class="study clearfix bought" v-if="courseList.is_study === 1">
-                  <h4 class="clearfix">
-                    <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
-                    <p>已学时长</p>
-                    <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
-                  </h4>
-                  <div class="common-button">
-                    <div>
-                      <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
+                  <div v-if="isAuthenticated">
+                    <p>{{courseList.introduction}}</p>
+                    <div class="common-button">
+                      <div v-if="privileMsg === true">
+                        <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
+                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
+                      </div>
+                      <div v-else>
+                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="privileMsg === false">加入购物车</el-button>
+                      </div>
                     </div>
-                    <!--  v-if="courseList.status =='1'" -->
-                    <div>
-                      <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
-                    </div>
-                    <div class="lineProgress">
-                      <h5>已完成{{courseList.percent}}%</h5>
-                      <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
+                  </div>
+                  <div v-else>
+                    <h4 class="clearfix">
+                      <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
+                      <p>已学时长</p>
+                      <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
+                    </h4>
+                    <div class="common-button">
+                      <div>
+                        <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
+                      </div>
+                      <!--  v-if="courseList.status =='1'" -->
+                      <div>
+                        <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
+                      </div>
+                      <div class="lineProgress">
+                        <h5>已完成{{courseList.percent}}%</h5>
+                        <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <!-- 未学习 右侧  courseList.is_study === 2 -->
                 <div class="study clearfix" v-else>
                   <p>{{courseList.introduction}}</p>
                   <div class="common-button">
@@ -1240,18 +1261,27 @@ export default {
           padding: 0 15px;
           overflow: hidden;
           &.itemBoxTitle {
-            height: 80px;
-            line-height: 20px;
+            // height: 80px;
+            height: 102px;
+            // line-height: 20px;
             .title {
+              display: block;
               width: 220px;
-              height: 18px;
-              line-height: 18px;
-              overflow: hidden;
+              // height: 18px;
+              // line-height: 18px;
+              height: 40px;
+              line-height: 20px;
+              // overflow: hidden;
               color: #1c1f21;
               margin-top: 20px;
+              // overflow: hidden;
+              // text-overflow: ellipsis;
+              // white-space: nowrap;overflow:hidden;
               overflow: hidden;
               text-overflow: ellipsis;
-              white-space: nowrap;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
             }
             .deputyTitle {
               width: 220px;
@@ -1420,11 +1450,9 @@ export default {
 #pane-tab-first .card-category .card-list,
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,
-#pane-third .card-category .card-list {
+#pane-third .card-category .card-list,
+#pane-fourth .card-category .card-list {
   margin: 0 30px 50px 0;
-  // &:nth-child(4n + 4) {
-  // margin-right: 24px;
-  // }
   &:nth-child(3n + 3) {
     margin-right: 0;
   }
@@ -1650,6 +1678,9 @@ export default {
           line-height: 54px;
           margin-bottom: 8px;
           cursor: pointer;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
         h4:hover {
           color: #8f4acb;

@@ -6,7 +6,9 @@
       <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
       <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
     </div>
-    <v-page :pagemsg="pagemsg" @page="selectPages" :pageSize='8'></v-page>
+    <div class="pagination">
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
+    </div>
   </div>
 </template>
 
@@ -42,7 +44,7 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 2,
+        pagesize: 6,
         total: null
       },
       nidForm: {
@@ -59,10 +61,10 @@ export default {
     ...mapActions('auth', ['setNid']),
     getNewInfoList() {
       this.newsInfoForm.pages = 1
-      this.newsInfoForm.limits = 8
+      this.newsInfoForm.limits = 6
       return new Promise((resolve, reject) => {
         home.getNewInfoList(this.newsInfoForm).then(response => {
-          this.pagemsg.total = Number(response.data.pageCount) - 1
+          this.pagemsg.total = Number(response.data.pageCount)
           this.newsList = response.data.newsList
         })
       })
@@ -73,7 +75,7 @@ export default {
       this.newsInfoForm.limits = this.pagemsg.pagesize
       return new Promise((resolve, reject) => {
         home.getNewInfoList(this.newsInfoForm).then(response => {
-          this.pagemsg.total = Number(response.data.pageCount) - 1
+          this.pagemsg.total = Number(response.data.pageCount)
           this.newsList = response.data.newsList
         })
       })
