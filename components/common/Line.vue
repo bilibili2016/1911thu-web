@@ -16,7 +16,10 @@
           <span v-if="bar.percent === 0"></span>
           <span v-else>
             <!-- 课程目录进度条 -->
-            <el-progress :percentage="bar.percent" :show-text="false"></el-progress>
+            <span v-if="privileMsg === true">
+              <el-progress :percentage="bar.percent" :show-text="false"></el-progress>
+            </span>
+
           </span>
           <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
           <!-- {{bar}} -->
@@ -36,7 +39,10 @@
             <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
           </span>
         </p>
-        <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
+        <span v-if="privileMsg === true">
+          <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
+        </span>
+
       </div>
     </div>
   </div>
