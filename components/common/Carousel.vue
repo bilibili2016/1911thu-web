@@ -1,5 +1,5 @@
 <template>
-  <el-carousel :interval="5000" arrow="never" class="lbt">
+  <el-carousel :interval="5000" class="lbt indexBanner">
     <el-carousel-item v-for="(img,index) in items" :key="index">
       <img :src="img.picture" alt="">
     </el-carousel-item>
