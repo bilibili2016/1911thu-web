@@ -1420,11 +1420,9 @@ export default {
 #pane-tab-first .card-category .card-list,
 #pane-first .card-category .card-list,
 #pane-second .card-category .card-list,
-#pane-third .card-category .card-list {
+#pane-third .card-category .card-list,
+#pane-fourth .card-category .card-list {
   margin: 0 30px 50px 0;
-  // &:nth-child(4n + 4) {
-  // margin-right: 24px;
-  // }
   &:nth-child(3n + 3) {
     margin-right: 0;
   }
