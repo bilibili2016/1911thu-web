@@ -40,11 +40,11 @@
             <el-form-item disable label="手机号">
               <el-input v-model="psnForm.user_name" disabled></el-input>
             </el-form-item>
-            <el-form-item label="公司信息" v-if="hasCompany" key="psnForm.company_name">
-              <el-input v-model="psnForm.company_name" disabled></el-input>
+            <el-form-item label="机构信息" v-if="hasCompany" key="psnForm.company_name">
+              <el-input v-model="psnForm.company_name"></el-input>
             </el-form-item>
-            <el-form-item label="绑定机构ID" v-else>
-              <el-input v-model="psnForm.company_code"></el-input>
+            <el-form-item label="机构信息" v-else>
+              <el-input v-model="psnForm.company_name"></el-input>
             </el-form-item>
             <el-form-item size="large" class="submit">
               <el-button type="primary" class="submitAble" @click="onSubmit('psnForm')" round>提交</el-button>
@@ -82,7 +82,7 @@
                 <span class="default">{{psnForm.user_name}}</span>
               </li>
               <li>
-                <span>公司信息：</span>
+                <span>机构信息：</span>
                 <span class="default">{{psnForm.company_name}}</span>
               </li>
             </ul>
@@ -389,7 +389,7 @@ export default {
         }
       })
     },
-    // 提交个人信息表单
+    // 提交个 人信息表单
     onSubmit(formName) {
       if (this.psnForm.province !== '') {
         if (this.psnForm.city == '' || this.psnForm.area == '') {

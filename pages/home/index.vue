@@ -8,11 +8,12 @@
       <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 精品好课 -->
       <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
+      <!-- 免费专区 -->
+      <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 名师智库 -->
       <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous>
       <!-- <v-teacherresource :teacherResource="teacherResource" :titleSix="titleSix"></v-teacherresource> -->
-      <!-- 免费专区 -->
-      <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
+
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 用户评价 -->
