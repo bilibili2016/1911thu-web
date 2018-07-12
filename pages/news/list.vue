@@ -6,13 +6,7 @@
       <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
       <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
     </div>
-<<<<<<< HEAD
-    <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
-    </div>
-=======
     <v-page :pagemsg="pagemsg" @handlePageChange="selectPages"></v-page>
->>>>>>> origin/liyr
   </div>
 </template>
 
