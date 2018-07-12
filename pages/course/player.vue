@@ -514,44 +514,40 @@ export default {
         that.playing = that.playImg
       })
       // 计时器
-      return new Promise((resolve, reject) => {
-        players.getPlayerInfos(this.playerForm).then(response => {
-          if (response.status === '100100') {
-            this.goShoppingCart(response.msg)
-          } else if (response.status === '100006') {
-            this.$alert('您已退出登录，请重新登录', '温馨提示', {
-              confirmButtonText: '确定',
-              callback: action => {
-                this.signOuts()
-                //初始化首页数据
-                this.$bus.$emit('reLogin', true)
-                this.$bus.$emit('loginShow', true)
-              }
+      players.getPlayerInfos(this.playerForm).then(response => {
+        if (response.status === '100100') {
+          this.goShoppingCart(response.msg)
+        } else if (response.status === '100006') {
+          this.$alert('您已退出登录，请重新登录', '温馨提示', {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.signOuts()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
+              this.$bus.$emit('loginShow', true)
+            }
+          })
+        } else {
+          if (response.data.playAuthInfo.videoViewType == false) {
+            player.loadVideoByID({
+              fileID: response.data.playAuthInfo.fileID,
+              appID: response.data.playAuthInfo.appID,
+              sign: response.data.playAuthInfo.sign,
+              t: response.data.playAuthInfo.t,
+              exper: response.data.playAuthInfo.exper
             })
           } else {
-            if (response.data.playAuthInfo.videoViewType == false) {
-              // console.log(player, '这是player')
-              player.loadVideoByID({
-                fileID: response.data.playAuthInfo.fileID,
-                appID: response.data.playAuthInfo.appID,
-                sign: response.data.playAuthInfo.sign,
-                t: response.data.playAuthInfo.t,
-                exper: response.data.playAuthInfo.exper
-              })
-            } else {
-              // console.log(player, '这是player')
-              player.loadVideoByID({
-                fileID: response.data.playAuthInfo.fileID,
-                appID: response.data.playAuthInfo.appID,
-                t: response.data.playAuthInfo.t,
-                sign: response.data.playAuthInfo.sign
-              })
-            }
-            if (this.autoplay) {
-              player.play()
-            }
+            player.loadVideoByID({
+              fileID: response.data.playAuthInfo.fileID,
+              appID: response.data.playAuthInfo.appID,
+              t: response.data.playAuthInfo.t,
+              sign: response.data.playAuthInfo.sign
+            })
           }
-        })
+          if (this.autoplay) {
+            player.play()
+          }
+        }
       })
 
       this.isHasClass()

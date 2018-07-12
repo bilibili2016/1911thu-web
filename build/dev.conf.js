@@ -30,8 +30,7 @@ config.analyze = {
       async: true
     },
     {
-      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
-      async: true
+      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js'
     },
     {
       src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',

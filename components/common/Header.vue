@@ -892,6 +892,8 @@ export default {
     // 获取用户头像
     getUserInfo() {
       // if (this.isAuthenticated) {
+      // this.$bus.$emit('reLogin', false)
+      // this.$bus.$emit('loginShow', false)
       home.getUserInfo().then(res => {
         if (res.status === '100008') {
           // 设置单点登录
