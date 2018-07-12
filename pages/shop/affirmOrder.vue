@@ -665,9 +665,10 @@ export default {
       this.$refs.affirmOrder.style.minHeight =
         windowHeight - headerHeight - footerHeight + 'px'
       // 判断屏幕高度是否小于发票弹框高度
-      if (windowHeight - headerHeight - 20 < 600) {
-        this.$refs.invoiceInfo.style.height =
-          windowHeight - headerHeight - 16 + 'px'
+      if (windowHeight - 120 < 600) {
+        console.log(windowHeight)
+
+        this.$refs.invoiceInfo.style.height = windowHeight - 120 + 'px'
       }
     },
     // 验证增值税发票 中的纳税人识别号
