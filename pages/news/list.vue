@@ -6,7 +6,7 @@
       <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
       <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
     </div>
-    <v-page :pagemsg="pagemsg" @page="selectPages" :pageSize='8'></v-page>
+    <v-page :pagemsg="pagemsg" @handlePageChange="selectPages"></v-page>
   </div>
 </template>
 

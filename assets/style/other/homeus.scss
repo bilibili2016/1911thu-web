@@ -86,29 +86,12 @@
     //   border-left-color: #6417a6;
     // }
 
-    .iconIntro {
-      width: 14px;
-      height: 12px;
-      background: url('~assets/images/homeUs-intro.png') no-repeat;
+    .arrow-icon {
+      width: 12px;
+      height: 14px;
+      background: url('~assets/images/homeUs-icon1.png') no-repeat;
       background-size: 100% 100%;
-    }
-    .iconTeacher {
-      width: 14px;
-      height: 16px;
-      background: url('~assets/images/homeUs-teacher.png') no-repeat;
-      background-size: 100% 100%;
-    }
-    .iconPeople {
-      width: 17px;
-      height: 15px;
-      background: url('~assets/images/homeUs-people.png') no-repeat;
-      background-size: 100% 100%;
-    }
-    .iconHelp {
-      width: 15px;
-      height: 15px;
-      background: url('~assets/images/homeUs-help.png') no-repeat;
-      background-size: 100% 100%;
+      // transform: rotate(180deg);
     }
     .iconContact {
       width: 14px;
@@ -121,21 +104,8 @@
       border-left: 2px solid #6417a6;
       background-color: #fafafa;
       color: #6417a6;
-
-      .iconIntro {
-        background: url('~assets/images/homeUs-intro-icon.png') no-repeat;
-      }
-      .iconTeacher {
-        background: url('~assets/images/homeUs-teacher-icon.png') no-repeat;
-      }
-      .iconPeople {
-        background: url('~assets/images/homeUs-people-icon.png') no-repeat;
-      }
-      .iconHelp {
-        background: url('~assets/images/homeUs-help-icon.png') no-repeat;
-      }
-      .iconContact {
-        background: url('~assets/images/homeUs-contact-icon.png') no-repeat;
+      .arrow-icon {
+        background: url('~assets/images/homeUs-icon2.png') no-repeat;
       }
     }
     .el-card {

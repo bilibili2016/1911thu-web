@@ -95,17 +95,26 @@ export default {
       width: 284px;
       padding: 0 30px 0 20px;
       h4 {
-        margin-top: 24px;
+        width: 235px;
+        height: 47px;
+        margin-top: 15px;
         color: #1c1f21;
         font-size: 16px;
+        line-height: 22px;
         transition: all 300ms;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+        cursor: pointer;
+
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
-        cursor: pointer;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
       }
       h5 {
-        height: 46px;
+        height: 30px;
         line-height: 23px;
         margin: 5px 0;
         color: #93999f;
