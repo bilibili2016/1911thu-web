@@ -948,8 +948,8 @@ export default {
     getCodeList() {
       return new Promise((resolve, reject) => {
         home.getCodeList(this.codeListForm).then(response => {
+          console.log(response.data)
           this.codeData = response.data.orderInvitationCodeList
-          console.log(this.codeData)
           resolve(true)
         })
       })

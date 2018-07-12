@@ -1106,7 +1106,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.famousList)
+    // console.log(this.famousList)
     // this.isCart = 0
     // console.log(this.cardetails, 'uuuu')
     if (window.location.pathname === '/course/coursedetail') {
