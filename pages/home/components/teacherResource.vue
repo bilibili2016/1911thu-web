@@ -1,12 +1,12 @@
 <template>
-    <div class="bg-none">
-        <el-row class="center">
-            <v-title :data="titleSix"></v-title>
-            <!-- <v-card ref="card" :data="newData" :config="config" @selectCid="selectCid"></v-card>
+  <div class="bg-none">
+    <el-row class="center">
+      <v-title :data="titleSix"></v-title>
+      <!-- <v-card ref="card" :data="newData" :config="config" @selectCid="selectCid"></v-card>
       <v-more :linkdata="linkone"></v-more> -->
-            <v-more :linkdata="linkSix"></v-more>
-        </el-row>
-    </div>
+      <v-more :linkdata="linkSix"></v-more>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default {
     // }
   },
   mounted() {
-    console.log(this.titleSix)
+    // console.log(this.titleSix)
   }
 }
 </script>

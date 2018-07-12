@@ -17,7 +17,8 @@
                 <el-rate disabled v-model="course.score" class="itemBox-rate"></el-rate>
               </p>
             </h6>
-            <p>￥{{course.present_price}}</p>
+            <p v-if="course.is_free === '1'">￥{{course.present_price}}</p>
+            <p v-else>免费</p>
           </div>
         </div>
       </div>
