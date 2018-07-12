@@ -530,7 +530,7 @@
                         <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
                       </div>
                       <div v-else>
-                        <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
+                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="privileMsg === false">加入购物车</el-button>
                       </div>
                     </div>
                   </div>
