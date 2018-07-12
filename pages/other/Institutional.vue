@@ -105,7 +105,7 @@
         <div class="word">
           <p class="word-desc1">如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
           <p class="word-desc2">
-            <i class="word-desc-bg"></i>您也可以拨打咨询电话：4000-5856-9654</p>
+            <i class="word-desc-bg"></i>您也可以拨打咨询电话：010-62701911</p>
           <div class="formDIv">
             <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
               <el-form-item label="" prop="companyname">
