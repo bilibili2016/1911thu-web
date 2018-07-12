@@ -5,7 +5,7 @@
         <div class="college">
           <li class="title">学院：</li>
           <ul>
-            <li :class="{btnBg: this.cid === '' ? true : false }">
+            <li :class="{btnBg: this.cid === '0' ? true : false }">
               <el-button @click="selectAllCid">全部</el-button>
             </li>
             <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cidBg === item.id ? true : false }">
@@ -16,7 +16,7 @@
         <div class="classification">
           <li class="title">分类：</li>
           <ul>
-            <li :class="{btnBg: this.pid === '' ? true : false }">
+            <li :class="{btnBg: this.pid === '0' ? true : false }">
               <el-button @click="selectAllPid">全部</el-button>
             </li>
             <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pidBg === items.id ? true : false }">
@@ -35,7 +35,7 @@ export default {
   props: ['cidData', 'pidData', 'cidBg', 'pidBg'],
 
   computed: {
-    ...mapState('auth', ['pid', 'cid', 'cindex'])
+    ...mapState('auth', ['pid', 'cid', 'cindex', 'cg'])
   },
   data() {
     return {}
@@ -58,11 +58,7 @@ export default {
       this.$emit('selectPid', items, index)
     }
   },
-  mounted() {
-    console.log(this.pidData, '78789')
-    console.log(this.pidBg, '787899999999')
-    console.log(this.cidBg, 'cidBg')
-  }
+  mounted() {}
 }
 </script>
 
