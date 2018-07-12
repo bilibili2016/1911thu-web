@@ -76,9 +76,9 @@
               <div class="line-wraps" v-if="config.card==='learning' ">
                 <div class="line-centers ">
                   <!-- {{typeof(card.percent)}} -->
-                  <span>已学习{{card.percent}}%</span>
-                  <span v-if="card.is_free === '1'" class="expire_day" style="float:right;padding-bottom:10px;">剩余{{card.expire_day}}天</span>
-                  <el-progress :percentage="card.percent "></el-progress>
+                  <span class="studyPercent">已学习{{card.percent}}%</span>
+                  <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
+                  <el-progress v-if="card.percent>0" :percentage="card.percent "></el-progress>
                 </div>
               </div>
               <div v-if="config.card==='already' ">
@@ -1417,6 +1417,15 @@ export default {
       }
       .line-centers {
         padding: 0px 14px 0px 13px;
+        .studyPercent {
+          padding-bottom: 10px;
+          color: #6417a6;
+        }
+        .studyIsFree {
+          float: right;
+          padding-bottom: 10px;
+          color: #888;
+        }
         p {
           margin-bottom: 10px;
           font-size: 14px;

@@ -122,7 +122,9 @@
           }
           &.payReady {
             color: #aaa;
+            margin-top: 5px;
             &.payed {
+              margin: 0;
               color: #06BB09;
             }
           }
