@@ -47,12 +47,14 @@
         <!-- 讲师介绍 -->
         <div class="teacher" v-loading="loadTeacher">
           <h4>讲师介绍</h4>
-          <div class="personal">
-            <img :src="courseList.head_img" alt="" @click="goTeacherInfo(courseList.teacher_id)">
-            <h5 @click="goTeacherInfo(courseList.teacher_id)">{{courseList.teacher_name}}</h5>
-            <!-- <h6></h6> -->
-            <div>{{courseList.graduate}}</div>
+          <div class="personal clearfix">
+            <img class="fl" :src="courseList.head_img" alt="" @click="goTeacherInfo(courseList.teacher_id)">
+            <div class="fl">
+              <h5 @click="goTeacherInfo(courseList.teacher_id)">{{courseList.teacher_name}}</h5>
+              <h6>{{courseList.graduate}}</h6>
+            </div>
             <p>{{courseList.teacher_content}}</p>
+
           </div>
         </div>
         <!-- 课程评价 -->
