@@ -530,6 +530,7 @@ export default {
             })
           } else {
             if (response.data.playAuthInfo.videoViewType == false) {
+              // console.log(player, '这是player')
               player.loadVideoByID({
                 fileID: response.data.playAuthInfo.fileID,
                 appID: response.data.playAuthInfo.appID,
@@ -538,6 +539,7 @@ export default {
                 exper: response.data.playAuthInfo.exper
               })
             } else {
+              // console.log(player, '这是player')
               player.loadVideoByID({
                 fileID: response.data.playAuthInfo.fileID,
                 appID: response.data.playAuthInfo.appID,
