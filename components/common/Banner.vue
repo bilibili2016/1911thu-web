@@ -169,12 +169,17 @@ export default {
   overflow: hidden;
   position: relative;
   img {
-    width: 1920px;
+    // width: 1920px;
+    width: 100%;
     height: 148px;
     position: absolute;
-    left: 50%;
     top: 0;
-    margin-left: -960px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    // left: 50%;
+    // top: 0;
+    // margin-left: -960px;
   }
 }
 .news-list {

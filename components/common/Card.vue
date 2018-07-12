@@ -35,7 +35,7 @@
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent < 1&&card.expire_day>0" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.percent < 1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
               <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
                   加入购物车
@@ -2328,8 +2328,9 @@ export default {
         h4 {
           font-size: 18px;
           color: #222;
-          margin: 18px 0;
+          margin: 10px 0 18px 0;
           cursor: pointer;
+          line-height: 26px;
         }
         h4:hover {
           color: #8f4acb;
