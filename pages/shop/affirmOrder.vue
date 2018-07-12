@@ -176,10 +176,9 @@
                 </el-radio>
               </el-radio-group>
             </p>
-            <p class="word" v-show="ticketForm.isRadio">
-              <i class="el-icon-warning"> </i>将有专人与您联系，请您留意，感谢您的支持！</p>
             <p class="word" v-show="!ticketForm.isRadio">
-              <input type="text" v-model="ticketForm.others" placeholder="请输入发票内容">
+              <i class="el-icon-warning"> </i>将有专人与您联系，请您留意，感谢您的支持！
+              <!-- <input type="text" v-model="ticketForm.others" placeholder="请输入发票内容"> -->
             </p>
           </div>
           <div class="formLi clearfix">
@@ -242,10 +241,8 @@
                   </el-radio>
                 </el-radio-group>
               </p>
-              <p class="word" v-show="zzTicketForm.isRadio">
-                <i class="el-icon-warning"> </i> 发票内容将显示培训费</p>
               <p class="word" v-show="!zzTicketForm.isRadio">
-                <input type="text" v-model="zzTicketForm.others" placeholder="请输入发票内容">
+                <i class="el-icon-warning"> </i> 将有专人与您联系，请您留意，感谢您的支持！
               </p>
             </div>
             <div class="formLi clearfix">
@@ -264,6 +261,14 @@
             </div>
           </div>
           <div class="stepTwo" v-show="stepTwo">
+            <div class="formLi clearfix">
+              <p class="fl">开票方式</p>
+              <p class="fr readyOrderTicket">
+                <span>订单完成后开票
+                  <i></i>
+                </span>
+              </p>
+            </div>
             <div class="formLi clearfix">
               <div class="step">
                 <span class="stepCheck">1.选择开票方式</span>
@@ -346,6 +351,14 @@
             </div>
           </div>
           <div class="stepThree" v-show="stepThree">
+            <div class="formLi clearfix">
+              <p class="fl">开票方式</p>
+              <p class="fr readyOrderTicket">
+                <span>订单完成后开票
+                  <i></i>
+                </span>
+              </p>
+            </div>
             <div class="formLi clearfix">
               <div class="step">
                 <span class="stepCheck">1.选择开票方式</span>
@@ -742,16 +755,6 @@ export default {
         this.stepThree = false
       }
       if (item === 'stepTwo') {
-        if (!this.zzTicketForm.isRadio) {
-          if (this.zzTicketForm.others == '') {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: '请输入发票内容！'
-            })
-            return false
-          }
-        }
         this.stepOne = false
         this.stepTwo = true
         this.stepThree = false
@@ -825,16 +828,6 @@ export default {
         this.ticketForm.types = 1
         this.ticketForm.number = ''
       }
-      if (!this.ticketForm.isRadio) {
-        if (this.ticketForm.others == '' || this.zzTicketForm.others == null) {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: '请输入发票内容！'
-          })
-          return false
-        }
-      }
       if (this.ticketForm.types == 2) {
         if (
           this.ticketForm.number == '' ||
@@ -890,8 +883,12 @@ export default {
     },
     // 添加发票信息
     addInvoiceInfo() {
-      //保存发票信息
       if (this.choose === '1') {
+        if (this.ticketForm.isRadio) {
+          this.ticketForm.others = '培训费'
+        } else {
+          this.ticketForm.others = '其他'
+        }
         return new Promise((resolve, reject) => {
           home.addInvoiceInfo(this.ticketForm).then(res => {
             if (res.status === 0) {
@@ -940,6 +937,11 @@ export default {
           })
         })
       } else {
+        if (this.zzTicketForm.isRadio) {
+          this.zzTicketForm.others = '培训费'
+        } else {
+          this.zzTicketForm.others = '其他'
+        }
         return new Promise((resolve, reject) => {
           home.addInvoiceInfo(this.zzTicketForm).then(res => {
             if (res.status === 0) {
@@ -1119,16 +1121,20 @@ export default {
     isTicket(item) {
       if (item === 2) {
         this.ticketForm.isRadio = false
+        this.ticketForm.others = '其他'
       } else {
         this.ticketForm.isRadio = true
+        this.ticketForm.others = '培训费'
       }
     },
     // 切换增值税发票内容
     iszzTicket(item) {
       if (item === 2) {
         this.zzTicketForm.isRadio = false
+        this.zzTicketForm.others = '其他'
       } else {
         this.zzTicketForm.isRadio = true
+        this.zzTicketForm.others = '培训费'
       }
     },
     goLink() {
@@ -1341,6 +1347,7 @@ export default {
         })
       }
     },
+    // 获取验证码
     async handleGetCode() {
       if (
         this.companyInfo.phones &&
@@ -1374,6 +1381,7 @@ export default {
         }
       }
     },
+    // 获取三级联动省市县列表
     getRegionList() {
       home.getRegionList({ region_code: '' }).then(res => {
         this.mapregionList = res.data.regionList
