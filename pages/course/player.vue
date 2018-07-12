@@ -633,7 +633,7 @@ export default {
 
       // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
       return new Promise((resolve, reject) => {
-        home.addEvaluate(this.addEvaluateForm).then(response => {
+        coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
           if (response.status === '100100') {
             this.$message({
               showClose: true,
@@ -668,7 +668,7 @@ export default {
     addCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        home.addCollection(this.addCollectionForm).then(response => {
+        coursedetail.addCollection(this.addCollectionForm).then(response => {
           this.$message({
             showClose: true,
             type: 'success',
@@ -682,7 +682,7 @@ export default {
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        home.deleteCollection(this.addCollectionForm).then(response => {
+        coursedetail.deleteCollection(this.addCollectionForm).then(response => {
           // this.collectMsg = response.data.curriculumDetail.is_collection
           this.$message({
             showClose: true,
