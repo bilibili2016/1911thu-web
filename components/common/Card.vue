@@ -35,7 +35,7 @@
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent < 1&&card.expire_day>0" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.percent < 1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
               <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
                   加入购物车
@@ -1106,7 +1106,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.famousList)
+    // console.log(this.famousList)
     // this.isCart = 0
     // console.log(this.cardetails, 'uuuu')
     if (window.location.pathname === '/course/coursedetail') {
