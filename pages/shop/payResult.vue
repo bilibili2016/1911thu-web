@@ -82,7 +82,7 @@ export default {
             if (this.seconds < 1) {
               this.seconds = 0
               clearInterval(this.interval)
-              this.goLink('tab-first')
+              this.goLink('tab-eighth')
             } else {
               this.seconds--
             }
