@@ -24,7 +24,7 @@
         <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <div class="search">
-        <input type="text" placeholder="请输入课程" v-model="search" @keyup.enter="goSearch">
+        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
@@ -635,10 +635,12 @@ export default {
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
+              console.log(this, '这是点击的this')
               if (response.status === 0) {
                 this.close()
                 this.getUserInfo()
                 this.getCount()
+                this.getCodeList()
                 persistStore.set('loginMsg', false)
                 this.$bus.$emit('reLogin', true)
               }
@@ -688,6 +690,7 @@ export default {
             this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
+            this.getCodeList()
             this.closeWechat()
             this.close()
           } else {
@@ -716,6 +719,7 @@ export default {
             this.setToken(this.tokenForm)
             this.getUserInfo()
             this.getCount()
+            this.getCodeList()
             this.scanCodeShow = false //微信扫码
             this.closeWechat()
           }
@@ -916,8 +920,6 @@ export default {
               confirmButtonText: '确定',
               callback: action => {
                 this.signOuts()
-                //初始化首页数据
-                this.$bus.$emit('reLogin', true)
                 this.$bus.$emit('loginShow', true)
               }
             })
@@ -950,9 +952,12 @@ export default {
     getCodeList() {
       return new Promise((resolve, reject) => {
         home.getCodeList(this.codeListForm).then(response => {
-          this.codeData = response.data.orderInvitationCodeList
-          console.log(this.codeData)
-          resolve(true)
+          if (response.status !== '100100') {
+            console.log('获取编码')
+            this.codeData = response.data.orderInvitationCodeList
+            // console.log(this.codeData)
+            resolve(true)
+          }
         })
       })
     }

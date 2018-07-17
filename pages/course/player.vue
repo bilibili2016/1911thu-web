@@ -40,7 +40,7 @@
         <div class="teacher clearfix">
 
           <img class="fl" :src="player.head_img" alt="" @click="goTeacherInfo(player.teacher_id)">
-          <div class="playername fl" @click="goTeacher(player.teacher_id)">
+          <div class="playername fl" @click="goTeacherInfo(player.teacher_id)">
             <!-- <div>{{player.is_car === 1 ? false : true}}</div> -->
             <div>{{player.teacher_name}}</div>
             <div>{{player.graduate}}</div>
@@ -405,12 +405,6 @@ export default {
       this.$router.push('/course/coursedetail')
       // window.open(window.location.origin + '/course/coursedetail')
     },
-    goTeacher(teacherID) {
-      this.tidForm.tids = teacherID * 1
-      this.setTid(this.tidForm)
-      this.$router.push('/home/components/teacher')
-    },
-
     playerBuy(item, info) {
       if (info.is_cart === 1) {
         // this.$alert('商品已在购物车内', '温馨提示', {

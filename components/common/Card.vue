@@ -813,7 +813,7 @@ export default {
             // this.isCartNew = 1
           }
         } else {
-          console.log(item)
+          // console.log(item)
           this.$message({
             type: 'success',
             message: '您的商品已经在购物车里面'
@@ -1106,7 +1106,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.famousList)
+    // console.log(this.famousList)
     // this.isCart = 0
     // console.log(this.cardetails, 'uuuu')
     if (window.location.pathname === '/course/coursedetail') {

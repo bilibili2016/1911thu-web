@@ -241,6 +241,7 @@ export default {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
+          console.log(response)
           this.loading = false
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists

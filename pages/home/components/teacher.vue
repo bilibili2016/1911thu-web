@@ -62,7 +62,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.tidForm)
     this.tidForm.tids = this.tid
     this.getTeacherInfo()
     this.getTeacherCourse()
