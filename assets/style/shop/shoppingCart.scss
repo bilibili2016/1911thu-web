@@ -24,7 +24,7 @@
       }
       .tableBody {
         min-height: 500px;
-        & > div {
+        &>div {
           background-color: #fff;
           display: flex;
           align-items: center;
@@ -91,7 +91,7 @@
         text-align: center;
         height: 30px;
         margin: 80px 0 50px;
-        & > span {
+        &>span {
           cursor: pointer;
         }
         .el-pagination {
@@ -112,6 +112,21 @@
             background-color: #8f4acb;
             color: #fff;
           }
+        }
+      }
+      .tips {
+        width: 1100px;
+        margin: 0 auto;
+        height: 50px;
+        background-color: #FCF7D9;
+        line-height: 50px;
+        margin-bottom: 20px;
+        color: #FD7576;
+        img {
+          width: 19px;
+          height: 19px;
+          margin: 0 20px 0 32px;
+          vertical-align: middle;
         }
       }
       .tableFooter {
@@ -299,7 +314,7 @@
             border-color: #6417a6;
             background-color: #6417a6;
           }
-          & + .el-checkbox__label {
+          &+.el-checkbox__label {
             color: #222;
           }
         }
