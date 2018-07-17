@@ -34,6 +34,9 @@
             <p>您的购物车为空</p>
           </div>
         </div>
+        <div class="tips">
+          <img src="@/assets/images/sale.png" alt="">购买多份课程可选机构购买，价格更优惠，详情请咨询010-6217 1911
+        </div>
         <div class="tableFooter" v-if="courseList && courseList.length > 0">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
