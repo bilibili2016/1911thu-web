@@ -813,7 +813,7 @@ export default {
             // this.isCartNew = 1
           }
         } else {
-          console.log(item)
+          // console.log(item)
           this.$message({
             type: 'success',
             message: '您的商品已经在购物车里面'
