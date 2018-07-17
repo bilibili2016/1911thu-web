@@ -86,8 +86,8 @@ export default {
           document.documentElement.clientHeight || document.body.clientHeight
         var scrollHeight =
           document.documentElement.scrollHeight || document.body.scrollHeight
-        console.log(scrollTop + windowHeight, '这是scrollTop + windowHeight')
-        console.log(scrollHeight, 'scrollHeight')
+        // console.log(scrollTop + windowHeight, '这是scrollTop + windowHeight')
+        // console.log(scrollHeight, 'scrollHeight')
         if (scrollTop + windowHeight === scrollHeight) {
           if (this.scrollTopMsg === true) {
             this.scrollTopMsg = false
