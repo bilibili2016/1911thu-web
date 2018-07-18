@@ -731,6 +731,7 @@ export default {
       this.overStudyCurriculumList()
     }
     this.$bus.$emit('bannerShow', false)
+    console.log(this.gid, '这是this.gid')
     this.activeTab = this.gid
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
