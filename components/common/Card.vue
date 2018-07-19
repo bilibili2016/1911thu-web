@@ -24,7 +24,7 @@
             </div>
             <!-- @click="goLink('course/coursedetail')" -->
             <div class="mask-style" @click="openDetail()">
-              <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+              <img :src="jinImg" alt="" class="jin-style">
             </div>
             <div class="bgImgs">
               <img :src="card.picture" alt="">
@@ -35,7 +35,7 @@
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent < 1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
               <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
                   加入购物车
@@ -115,10 +115,10 @@
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
-              <div class="mask-style "></div>
-              <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
-              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
-              <!-- </div> -->
+              <!-- <div class="mask-style "></div> -->
+              <div class="mask-style ">
+                <img :src="jinImg " alt=" " class="jin-style ">
+              </div>
 
               <!-- 我的首页的图片背景 -->
               <div class="bgImgs ">
@@ -189,7 +189,7 @@
               <img :src="newTag " alt=" ">
             </div>
             <div class="mask-style ">
-              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
+              <img :src="jinImg " alt=" " class="jin-style ">
             </div>
             <div class="bgImgs ">
               <img :src="card.bg " alt=" ">
@@ -683,7 +683,7 @@ export default {
       overTimeImg: require('@/assets/images/overtime.png'),
       playbtn: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
-      // jinImg: require('@/assets/images/jin.png'),
+      jinImg: require('@/assets/images/jin.png'),
       isShow: false,
       checked: false,
       numberArr: [],
@@ -1173,11 +1173,11 @@ export default {
   transition: all 3000ms;
 }
 .jin-style {
-  width: 38px !important;
-  height: 38px !important;
+  width: 25px !important;
+  height: 14px !important;
   position: absolute;
-  top: 60px;
-  left: 110px;
+  top: 73px;
+  left: 112.5px;
   z-index: 1000;
   display: none;
   transition: all 300ms;

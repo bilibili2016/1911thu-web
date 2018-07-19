@@ -77,7 +77,7 @@ export default {
     background-color: #fff;
     // border-radius: 16px;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-    transition: all 300ms;
+    transition: all 400ms;
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
       padding: 10px;
@@ -97,13 +97,13 @@ export default {
       height: 160px;
       // border-radius: 16px;
       overflow: hidden;
-      transition: all 300ms;
+      transition: all 400ms;
       cursor: pointer;
     }
     .courseInfo {
       width: 284px;
       padding: 10px 30px 10px 20px;
-      transition: all 300ms;
+      transition: all 400ms;
       h4 {
         width: 235px;
         height: 47px;
@@ -111,7 +111,7 @@ export default {
         color: #1c1f21;
         font-size: 16px;
         line-height: 22px;
-        transition: all 300ms;
+        transition: all 400ms;
         // overflow: hidden;
         // text-overflow: ellipsis;
         // white-space: nowrap;
