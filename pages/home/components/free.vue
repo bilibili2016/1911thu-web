@@ -59,5 +59,10 @@ h1 {
     transition: all 300ms;
     cursor: pointer;
   }
+  span:hover {
+    color: #fff;
+    background-color: #8f4acb;
+    border-color: #8f4acb;
+  }
 }
 </style>
