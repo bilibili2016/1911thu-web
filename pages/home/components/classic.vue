@@ -1,8 +1,11 @@
 <template>
   <div class="bg">
     <el-row class="center">
-      <v-title :data="titleThree"></v-title>
+      <!-- <v-title :data="titleThree"></v-title> -->
       <!-- <v-card ref="card" :data="classicData" :config="config"></v-card> -->
+      <h1 class="clearfix">{{titleThree}}
+        <span class="fr" @click="getMore(linktwo)">查看更多</span>
+      </h1>
       <div class="goodCourse" :data="classicData">
         <div class="courseLi clearfix" v-for="(course,index) in classicData" :key="index">
           <div class="fl">
@@ -22,7 +25,7 @@
           </div>
         </div>
       </div>
-      <v-more :linkdata="linktwo"></v-more>
+      <!-- <v-more :linkdata="linktwo"></v-more> -->
     </el-row>
   </div>
 </template>
@@ -59,6 +62,9 @@ export default {
     },
     openDetail() {
       window.open(window.location.origin + '/course/coursedetail')
+    },
+    getMore(item) {
+      window.open(window.location.origin + item)
     }
   }
 }
@@ -77,11 +83,19 @@ export default {
     background-color: #fff;
     // border-radius: 16px;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    transition: all 400ms;
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
-      transition: all 300ms;
+      padding: 10px;
       .courseInfo h4 {
         color: #8f4acb;
+      }
+      div.fl img {
+        width: 230px;
+        height: 140px;
+      }
+      .courseInfo {
+        padding: 0 30px 0 20px;
       }
     }
     div.fl img {
@@ -89,19 +103,21 @@ export default {
       height: 160px;
       // border-radius: 16px;
       overflow: hidden;
+      transition: all 400ms;
       cursor: pointer;
     }
     .courseInfo {
       width: 284px;
-      padding: 0 30px 0 20px;
+      padding: 10px 30px 10px 20px;
+      transition: all 400ms;
       h4 {
         width: 235px;
         height: 47px;
-        margin-top: 15px;
+        margin-top: 5px;
         color: #1c1f21;
         font-size: 16px;
         line-height: 22px;
-        transition: all 300ms;
+        transition: all 400ms;
         // overflow: hidden;
         // text-overflow: ellipsis;
         // white-space: nowrap;
@@ -114,7 +130,7 @@ export default {
         -webkit-line-clamp: 2;
       }
       h5 {
-        height: 30px;
+        height: 23px;
         line-height: 23px;
         margin: 5px 0;
         color: #93999f;
@@ -140,6 +156,23 @@ export default {
         font-size: 14px;
       }
     }
+  }
+}
+h1 {
+  color: #222;
+  margin: 70px 0px 60px;
+  span {
+    width: 128px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    border: 1px solid #888;
+    border-radius: 20px;
+    font-size: 16px;
+    color: #666;
+    -webkit-transition: all 300ms;
+    transition: all 300ms;
+    cursor: pointer;
   }
 }
 </style>

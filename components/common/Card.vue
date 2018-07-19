@@ -24,7 +24,7 @@
             </div>
             <!-- @click="goLink('course/coursedetail')" -->
             <div class="mask-style" @click="openDetail()">
-              <!-- <img :src="jinImg" alt="" class="jin-style"> -->
+              <img :src="jinImg" alt="" class="jin-style">
             </div>
             <div class="bgImgs">
               <img :src="card.picture" alt="">
@@ -35,7 +35,7 @@
             </div>
             <div v-if="config.card === 'home'"></div>
             <div class="common-button btn-bgs " v-else>
-              <el-button v-if="card.percent < 1" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
               <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
                   加入购物车
@@ -115,10 +115,10 @@
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
-              <div class="mask-style "></div>
-              <!-- <div class="mask-style " @click="goLink( 'course/coursedetail') "> -->
-              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
-              <!-- </div> -->
+              <!-- <div class="mask-style "></div> -->
+              <div class="mask-style ">
+                <img :src="jinImg " alt=" " class="jin-style ">
+              </div>
 
               <!-- 我的首页的图片背景 -->
               <div class="bgImgs ">
@@ -189,7 +189,7 @@
               <img :src="newTag " alt=" ">
             </div>
             <div class="mask-style ">
-              <!-- <img :src="jinImg " alt=" " class="jin-style "> -->
+              <img :src="jinImg " alt=" " class="jin-style ">
             </div>
             <div class="bgImgs ">
               <img :src="card.bg " alt=" ">
@@ -683,7 +683,7 @@ export default {
       overTimeImg: require('@/assets/images/overtime.png'),
       playbtn: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       newTag: require('@/assets/images/new.png'),
-      // jinImg: require('@/assets/images/jin.png'),
+      jinImg: require('@/assets/images/jin.png'),
       isShow: false,
       checked: false,
       numberArr: [],
@@ -1134,8 +1134,8 @@ export default {
     width: 48px !important;
     height: 28px !important; // margin-top: -20px;
     position: absolute;
-    top: -13px;
-    left: -10px;
+    top: 0;
+    left: 0;
     z-index: 1;
   }
 }
@@ -1144,8 +1144,6 @@ export default {
   height: 160px;
   background-color: rgba(100, 23, 166, 0.5);
   position: absolute;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
   opacity: 0;
   transition: all 300ms;
 }
@@ -1153,8 +1151,6 @@ export default {
   width: 250px;
   height: 160px;
   overflow: hidden;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
   img {
     width: 250px;
     height: 160px;
@@ -1166,11 +1162,11 @@ export default {
   transition: all 3000ms;
 }
 .jin-style {
-  width: 38px !important;
-  height: 38px !important;
+  width: 25px !important;
+  height: 14px !important;
   position: absolute;
-  top: 60px;
-  left: 110px;
+  top: 73px;
+  left: 112.5px;
   z-index: 1000;
   display: none;
   transition: all 300ms;
@@ -1245,7 +1241,7 @@ export default {
       margin-right: 0;
     }
     &:hover {
-      box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+      box-shadow: 10px 0px 40px rgba(0, 0, 0, 0.12);
       transition: all 300ms;
       .jin-style {
         display: block;
@@ -1260,22 +1256,27 @@ export default {
         margin-left: -2px;
         margin-top: -1.1px;
       }
+      // .item {
+      //   padding: 0 15px;
+      // }
+      // .line-wrap {
+      //   padding: 0 15px;
+      // }
     }
     .itemBox {
       cursor: pointer;
       width: 250px;
       display: flex;
-      border-radius: 16px;
-      background: #fff;
+      border-radius: 0;
+      // background: #fff;
       flex-direction: column;
       align-items: center;
       position: relative;
       border: none;
+      border-bottom: 1px solid #eee;
       img {
         width: 250px;
         height: 160px;
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
       }
       .tag {
         position: absolute;
@@ -1304,7 +1305,6 @@ export default {
           font-size: 16px;
           font-family: MicrosoftYaHei;
           color: rgba(51, 42, 81, 1);
-          padding: 0 15px;
           overflow: hidden;
           &.itemBoxTitle {
             // height: 80px;
@@ -1328,12 +1328,13 @@ export default {
               display: -webkit-box;
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 2;
+              padding-left: 10px;
             }
             .deputyTitle {
               width: 220px;
               height: 20px;
               line-height: 20px;
-              margin: 8px 0;
+              margin: 8px 10px;
               overflow: hidden;
               font-size: 14px;
               color: #93999f;
@@ -1348,7 +1349,8 @@ export default {
           font-family: MicrosoftYaHei;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
-          margin: 0px 0px 0px 15px;
+          // margin: 0px 0px 0px 15px;
+          padding-left: 10px;
           .itemBox-num {
             font-size: 12px;
             font-family: MicrosoftYaHei;
@@ -1378,7 +1380,6 @@ export default {
           font-size: 16px;
           font-family: MicrosoftYaHei;
           color: rgba(51, 42, 81, 1);
-          padding: 0 15px;
           overflow: hidden;
         }
         .itemBox-info {
@@ -1386,7 +1387,6 @@ export default {
           font-family: MicrosoftYaHei;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
-          margin: 0px 0px 0px 15px;
           .itemBox-num {
             font-size: 12px;
             font-family: MicrosoftYaHei;
@@ -1425,6 +1425,7 @@ export default {
         width: 100%;
         height: 35px;
         line-height: 30px;
+        padding-left: 10px;
       }
       .line-wraps {
         height: 50px; // border-top: 1px #e4e4f4 solid;
@@ -1432,7 +1433,7 @@ export default {
       .line-center {
         overflow: hidden;
         height: 35px;
-        padding: 0 15px;
+        // padding: 0 15px;
         p.price {
           color: #ff5f5f;
           font-size: 14px;
@@ -1462,7 +1463,7 @@ export default {
         }
       }
       .line-centers {
-        padding: 0px 14px 0px 13px;
+        // padding: 0px 14px 0px 13px;
         .studyPercent {
           padding-bottom: 10px;
           color: #6417a6;
@@ -1498,8 +1499,9 @@ export default {
     }
   }
   .el-card {
-    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    // box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     border-radius: 16px;
+    border-bottom: 1px solid #eeeeee;
   }
 }
 #pane-tab-first .card-category .card-list,
@@ -1997,7 +1999,6 @@ export default {
           font-family: MicrosoftYaHei;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
-          margin: 0px 0px 0px 15px;
           .itemBox-num {
             font-size: 12px;
             font-family: MicrosoftYaHei;

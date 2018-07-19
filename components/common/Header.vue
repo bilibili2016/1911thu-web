@@ -25,7 +25,7 @@
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
-        <i @click="goSearch"></i>
+        <i class="el-icon-search" @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
         <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
@@ -52,7 +52,7 @@
       </div>
       <div class="lrBtn" v-if="!isAuthenticated">
         <!-- @click="login" -->
-        <span @click="loginCardShow">登录</span>
+        <span class="login" @click="loginCardShow">登录</span>
         <!-- @click="register" -->
         <span class="register" @click="register">注册</span>
       </div>
