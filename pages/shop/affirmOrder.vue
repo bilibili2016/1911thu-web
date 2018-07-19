@@ -673,8 +673,6 @@ export default {
         windowHeight - headerHeight - footerHeight + 'px'
       // 判断屏幕高度是否小于发票弹框高度
       if (windowHeight - 120 < 600) {
-        console.log(windowHeight)
-
         this.$refs.invoiceInfo.style.height = windowHeight - 120 + 'px'
       }
     },
@@ -692,13 +690,22 @@ export default {
     reNumber() {
       if (
         this.zzTicketForm.number == '' ||
-        !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
+        !/^[A-Z0-9]+$/.test(this.zzTicketForm.number)
       ) {
         this.tipsNumber = false
         this.number = true
       } else {
-        this.tipsNumber = true
-        this.number = true
+        if (
+          this.zzTicketForm.number.length == 15 ||
+          this.zzTicketForm.number.length == 18 ||
+          this.zzTicketForm.number.length == 20
+        ) {
+          this.tipsNumber = true
+          this.number = true
+        } else {
+          this.tipsNumber = false
+          this.number = true
+        }
       }
     },
     // 验证增值税发票 注册地址
@@ -805,16 +812,6 @@ export default {
             message: '请输入单位名称！'
           })
           return false
-        } else if (
-          this.zzTicketForm.number == '' ||
-          !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
-        ) {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: '请输入正确的纳税人识别号！'
-          })
-          return false
         } else if (this.zzTicketForm.zcadd == '') {
           this.$message({
             showClose: true,
@@ -851,6 +848,31 @@ export default {
             message: '请输入正确的银行账号！'
           })
           return false
+        }
+        if (
+          this.zzTicketForm.number == '' ||
+          !/^[A-Z0-9]+$/.test(this.zzTicketForm.number)
+        ) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入正确的纳税人识别号！'
+          })
+          return false
+        } else {
+          if (
+            this.zzTicketForm.number.length == 15 ||
+            this.zzTicketForm.number.length == 18 ||
+            this.zzTicketForm.number.length == 20
+          ) {
+          } else {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: '请输入正确的纳税人识别号！'
+            })
+            return false
+          }
         }
 
         this.stepOne = false
@@ -1225,6 +1247,7 @@ export default {
             this.payNumber = res.data.payNumber
             this.allPrise = res.data.goodsAmount
             this.nickName = persistStore.get('nickName')
+
             if (res.data.companyInfo) {
               this.company = res.data.companyInfo
               this.person = false

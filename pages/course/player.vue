@@ -585,7 +585,6 @@ export default {
               message: response.msg
             })
           }
-
           if (this.word === '') {
             return
           }
