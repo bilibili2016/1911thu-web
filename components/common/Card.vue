@@ -1145,8 +1145,8 @@ export default {
     width: 48px !important;
     height: 28px !important; // margin-top: -20px;
     position: absolute;
-    top: -13px;
-    left: -10px;
+    top: 0;
+    left: 0;
     z-index: 1;
   }
 }
