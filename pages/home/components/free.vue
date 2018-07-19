@@ -3,8 +3,8 @@
     <el-row class="center">
       <!-- <v-title :data="titleOne"></v-title> -->
       <h1 class="clearfix">
-        <span class="titles">{{titleOne}}</span>
-        <span class="fr" @click="getMore(linkzero)">查看更多</span>
+        <span class="title">{{titleOne}}</span>
+        <span class="fr moredata" @click="getMore(linkzero)">查看更多</span>
       </h1>
       <v-card ref="card" :data="freeData" :config="config" @selectCid="selectCid"></v-card>
       <!-- <v-more :linkdata="linkzero"></v-more> -->
@@ -50,7 +50,10 @@ export default {
 h1 {
   color: #222;
   margin: 70px 0px 50px;
-  span {
+  .title {
+    padding-top: 10px;
+  }
+  .moredata {
     width: 128px;
     height: 40px;
     line-height: 38px;
@@ -63,7 +66,7 @@ h1 {
     transition: all 300ms;
     cursor: pointer;
   }
-  span:hover {
+  .moredata:hover {
     color: #fff;
     background-color: #8f4acb;
     border-color: #8f4acb;
