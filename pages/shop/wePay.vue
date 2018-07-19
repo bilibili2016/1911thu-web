@@ -241,11 +241,16 @@ export default {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
+
           this.loading = false
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url
           this.qr_code = response.data.qr_code
+          persistStore.set(
+            'paynumber',
+            response.data.data.orderDetail.pay_number
+          )
           this.shopCartList()
           resolve(true)
           if (item === 'recode') {

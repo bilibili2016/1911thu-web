@@ -28,7 +28,7 @@
         <i @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <span class="hrin center" @click="goSearchd('/other/institutional')">机构入口
+        <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
           <i></i>
         </span>
         <span class="center" v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span>
@@ -629,13 +629,13 @@ export default {
           // this.loadLogin = true
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
-              // console.log(response)
+
               this.$message({
                 showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
-              console.log(this, '这是点击的this')
+
               if (response.status === 0) {
                 this.close()
                 this.getUserInfo()
@@ -951,9 +951,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.getCodeList(this.codeListForm).then(response => {
           if (response.status !== '100100') {
-            console.log('获取编码')
+
             this.codeData = response.data.orderInvitationCodeList
-            // console.log(this.codeData)
+
             resolve(true)
           }
         })
