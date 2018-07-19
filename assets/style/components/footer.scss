@@ -3,6 +3,9 @@
   height: 70px;
   background-color: #050223;
   color: #fff;
+  // position: fixed;
+  // bottom: 0;
+  // left: 0;
   .main {
     width: 1100px;
     margin: 0 auto;
@@ -12,7 +15,8 @@
         display: inline-block;
         width: 128px;
         height: 52px;
-        background: url('http://papn9j3ys.bkt.clouddn.com/logof.png') no-repeat center bottom;
+        background: url('http://papn9j3ys.bkt.clouddn.com/logof.png') no-repeat
+          center bottom;
         background-size: contain;
       }
     }

@@ -13,9 +13,9 @@
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
             <div class="courseInfo clearfix">
-              <img class="fl" :src="course.picture" @click="goDetail(course.id)">
+              <img class="fl" :src="course.picture" @click="goDetail(course)">
               <div class="fl">
-                <h4 @click="goDetail(course.id)">{{course.title}}</h4>
+                <h4 @click="goDetail(course)">{{course.title}}</h4>
                 <h6>{{course.study_time}}学时</h6>
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
@@ -99,6 +99,7 @@ import { home, auth } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 // import { mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
@@ -251,11 +252,13 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
-    goDetail(id) {
+    goDetail(item) {
+      console.log(item, '这是item')
       let kidForm = {
-        kids: id
+        kids: item.id
       }
       this.setKid(kidForm)
+      persistStore.set('curriculumId', item.id)
       this.$router.push('/course/coursedetail')
     },
     loadAll() {
@@ -358,7 +361,7 @@ export default {
           // this.selectAll = true
           this.loding = false
           this.numForm.number = response.data.number
-
+          console.log(this.courseList, '这是this.courseList')
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
