@@ -1328,12 +1328,13 @@ export default {
               display: -webkit-box;
               -webkit-box-orient: vertical;
               -webkit-line-clamp: 2;
+              padding-left: 10px;
             }
             .deputyTitle {
               width: 220px;
               height: 20px;
               line-height: 20px;
-              margin: 8px 0;
+              margin: 8px 10px;
               overflow: hidden;
               font-size: 14px;
               color: #93999f;
@@ -1349,6 +1350,7 @@ export default {
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
           // margin: 0px 0px 0px 15px;
+          padding-left: 10px;
           .itemBox-num {
             font-size: 12px;
             font-family: MicrosoftYaHei;
@@ -1423,6 +1425,7 @@ export default {
         width: 100%;
         height: 35px;
         line-height: 30px;
+        padding-left: 10px;
       }
       .line-wraps {
         height: 50px; // border-top: 1px #e4e4f4 solid;

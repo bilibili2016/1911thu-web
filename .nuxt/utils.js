@@ -121,9 +121,13 @@ export async function setContext(app, context) {
       error: context.error,
       base: '/',
 <<<<<<< HEAD
+<<<<<<< HEAD
       env: {"VERSION":"1.0.0","NODE_ENV":"development","BASE_URL":"/","BASE_ROUTER":"/","API_STARDUST_BASE_URL":"http://wapi.1911thu.com/","API_STARDUST_TIMEOUT":"30000"}
 =======
       env: {"VERSION":"1.0.0","NODE_ENV":"development","BASE_URL":"/","BASE_ROUTER":"/","API_STARDUST_BASE_URL":"http://39.104.120.79","API_STARDUST_TIMEOUT":"30000"}
+>>>>>>> dev
+=======
+      env: {"VERSION":"1.0.0","NODE_ENV":"development","BASE_URL":"/","BASE_ROUTER":"/","API_STARDUST_BASE_URL":"http://test.1911thu.com/","API_STARDUST_TIMEOUT":"30000"}
 >>>>>>> dev
     }
     // Only set once
