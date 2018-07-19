@@ -666,8 +666,10 @@ export default {
       // }
       if (link === 'http://edu.1911thu.com/') {
         link = 'http://wapi.1911thu.com/Wapi/Index/wxBack'
+        this.WxLogin.appid = 'wx60c7f5b807077a7b'
       } else {
         link = 'http://test.1911thu.com/Wapi/Index/wxBack'
+        this.WxLogin.appid = 'wxefa2295aae13fe2e'
       }
       this.WxLogin.redirect_uri = encodeURIComponent(link)
       this.WxLogin.state = Math.random()

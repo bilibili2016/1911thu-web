@@ -179,5 +179,6 @@ h1 {
     background-color: #8f4acb;
     border-color: #8f4acb;
   }
+  align-self: auto;
 }
 </style>

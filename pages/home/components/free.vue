@@ -2,7 +2,8 @@
   <div class="bg-none">
     <el-row class="center">
       <!-- <v-title :data="titleOne"></v-title> -->
-      <h1 class="clearfix">{{titleOne}}
+      <h1 class="clearfix">
+        <span class="titles">{{titleOne}}</span>
         <span class="fr" @click="getMore(linkzero)">查看更多</span>
       </h1>
       <v-card ref="card" :data="freeData" :config="config" @selectCid="selectCid"></v-card>
@@ -43,9 +44,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.title {
+  display: inline-block;
+}
 h1 {
   color: #222;
-  margin: 70px 0px 60px;
+  margin: 70px 0px 50px;
   span {
     width: 128px;
     height: 40px;
