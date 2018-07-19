@@ -629,13 +629,13 @@ export default {
           // this.loadLogin = true
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
-              // console.log(response)
+
               this.$message({
                 showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
                 message: response.msg
               })
-              console.log(this, '这是点击的this')
+
               if (response.status === 0) {
                 this.close()
                 this.getUserInfo()
@@ -951,9 +951,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.getCodeList(this.codeListForm).then(response => {
           if (response.status !== '100100') {
-            console.log('获取编码')
+
             this.codeData = response.data.orderInvitationCodeList
-            // console.log(this.codeData)
+
             resolve(true)
           }
         })

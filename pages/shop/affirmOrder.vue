@@ -673,8 +673,6 @@ export default {
         windowHeight - headerHeight - footerHeight + 'px'
       // 判断屏幕高度是否小于发票弹框高度
       if (windowHeight - 120 < 600) {
-        console.log(windowHeight)
-
         this.$refs.invoiceInfo.style.height = windowHeight - 120 + 'px'
       }
     },
@@ -1249,6 +1247,7 @@ export default {
             this.payNumber = res.data.payNumber
             this.allPrise = res.data.goodsAmount
             this.nickName = persistStore.get('nickName')
+
             if (res.data.companyInfo) {
               this.company = res.data.companyInfo
               this.person = false

@@ -253,7 +253,6 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
     goDetail(item) {
-      console.log(item, '这是item')
       let kidForm = {
         kids: item.id
       }
@@ -361,7 +360,7 @@ export default {
           // this.selectAll = true
           this.loding = false
           this.numForm.number = response.data.number
-          console.log(this.courseList, '这是this.courseList')
+
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
