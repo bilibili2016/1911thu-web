@@ -1323,5 +1323,20 @@ input:-webkit-autofill {
     width: 360px !important;
     height: 170px;
     margin-top: 35vh !important;
+    border-radius: 6px;
+    .el-dialog__body {
+      padding: 17px 20px 19px;
+    }
+    .el-button--primary {
+      border-radius: 5px;
+    }
+    .el-button {
+      padding: 12px 61px;
+    }
+    .text {
+      font-size: 16px;
+      text-align: center;
+      display: block;
+    }
   }
 }

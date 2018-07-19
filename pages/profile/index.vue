@@ -240,10 +240,10 @@
         </el-tab-pane>
         <!-- 专属邀请码弹框 -->
         <div class="invitationCodeBox">
-          <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
-            <span style="text-align:center;">绑定优惠码，好课看不停</span>
+          <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center :show-close="false">
+            <span class="text">绑定优惠码，好课看不停</span>
             <span slot="footer" class="dialog-footer">
-              <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+              <el-button type="primary" @click="invitationConfim">确 定</el-button>
             </span>
           </el-dialog>
         </div>
@@ -714,8 +714,15 @@ export default {
     // 判断是否显示绑定邀请码弹框
     getAlertbox() {
       if (Number(persistStore.get('paynumber')) > 1) {
-        this.centerDialogVisible = true
+        if (!persistStore.get('paynumbermsg')) {
+          this.centerDialogVisible = true
+        }
       }
+    },
+    // 确认提示框
+    invitationConfim() {
+      this.centerDialogVisible = false
+      persistStore.set('paynumbermsg', '1')
     }
   },
   mounted() {
@@ -736,7 +743,8 @@ export default {
       //过期的我的课程
       this.overStudyCurriculumList()
       // 判断企业多份是否弹出框
-      // this.getAlertbox()
+      // if (!persistStore.get('paynumbermsg')) {
+      this.getAlertbox()
     }
     this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid

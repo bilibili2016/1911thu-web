@@ -24,9 +24,7 @@ export default {
   computed: {
     ...mapState('auth', ['hsg'])
   },
-  mounted() {
-    // console.log('123')
-  }
+  mounted() {}
 }
 </script>
 <style lang="scss" scoped>
