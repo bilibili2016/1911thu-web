@@ -629,7 +629,6 @@ export default {
           // this.loadLogin = true
           return new Promise((resolve, reject) => {
             this.signIn(this.loginData).then(response => {
-
               this.$message({
                 showClose: true,
                 type: response.status === 0 ? 'success' : 'error',
@@ -660,10 +659,15 @@ export default {
     // 从微信拉取二维码
     async wxLogin() {
       var link = window.location.origin
+      // if (link === 'http://www.1911edu.com') {
+      //   link = 'http://api.1911edu.com/Wapi/Index/wxBack'
+      // } else {
+      //   link = 'http://ceshi.1911edu.com/Wapi/Index/wxBack'
+      // }
       if (link === 'http://www.1911edu.com') {
-        link = 'http://api.1911edu.com/Wapi/Index/wxBack'
+        link = 'http://wapi.1911thu.com/Wapi/Index/wxBack'
       } else {
-        link = 'http://ceshi.1911edu.com/Wapi/Index/wxBack'
+        link = 'http://test.1911thu.com/Wapi/Index/wxBack'
       }
       this.WxLogin.redirect_uri = encodeURIComponent(link)
       this.WxLogin.state = Math.random()
@@ -953,7 +957,6 @@ export default {
       return new Promise((resolve, reject) => {
         home.getCodeList(this.codeListForm).then(response => {
           if (response.status !== '100100') {
-
             this.codeData = response.data.orderInvitationCodeList
 
             resolve(true)

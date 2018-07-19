@@ -96,7 +96,6 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid']),
     selectCid(item, index) {
-      // console.log(index, '这是index')
       this.pidBg = 0
       this.cidBg = item.id
       this.pidData = this.cidData[index]
@@ -157,7 +156,7 @@ export default {
     getCidPidList() {
       home.childCategoryList().then(res => {
         this.cidData = res.data.categoryList
-        // console.log(this.cindex, '00000000')
+
         if (this.cindex) {
           this.pidData = res.data.categoryList[this.cindex]
         } else {
@@ -172,7 +171,7 @@ export default {
       this.loadCourse = true
       this.categoryForm.cids = this.cid
       this.categoryForm.pids = this.pid
-      // console.log(this.categoryForm, '这是this.categoryForm')
+
       home.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
@@ -183,7 +182,6 @@ export default {
     getClassicsList() {
       return new Promise((resolve, reject) => {
         home.getClassicsList(this.classList).then(response => {
-          // console.log(response.data.categoryList, '这是竖直列表')
           this.classList = response.data.categoryList
           resolve(true)
         })
@@ -226,7 +224,6 @@ export default {
         this.setCid(this.cidform)
         this.getcourseList()
       }
-      // console.log('有cid')
     } else {
       this.activeTab = 'first'
 

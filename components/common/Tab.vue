@@ -66,7 +66,6 @@ export default {
       this.setCid(this.cidform)
     },
     getMore(linedata) {
-      // console.log(mac, '123')
       this.kidForm.kids = linedata.id
       persistStore.set('curriculumId', linedata.id)
       this.setKid(this.kidForm)

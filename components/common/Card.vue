@@ -749,7 +749,6 @@ export default {
       })
     },
     goBuy(detail, item) {
-      // console.log(item, '这是item')
       if (this.isAuthenticated) {
         if (item.is_cart === 0) {
           this.isClick = true
@@ -798,7 +797,7 @@ export default {
       persistStore.set('curriculumId', item.id)
       this.kidForm.kids = item.id
       this.setKid(this.kidForm)
-      // console.log(item, '这是item')
+
       if (this.isAuthenticated) {
         if (item.is_cart === 0) {
           this.isClick = true
@@ -813,7 +812,6 @@ export default {
             // this.isCartNew = 1
           }
         } else {
-          // console.log(item)
           this.$message({
             type: 'success',
             message: '您的商品已经在购物车里面'
@@ -827,7 +825,6 @@ export default {
       this.$bus.$emit('loginShow', true)
     },
     goPlay(item) {
-      // console.log(item)
       persistStore.set(
         'curriculumId',
         item.defaultCurriculumCatalog.curriculum_id
@@ -846,7 +843,6 @@ export default {
       this.getdefaultForm.curriculumid = this.courseList.id
       return new Promise((resolve, reject) => {
         home.getdefaultCurriculumCatalog(this.getdefaultForm).then(response => {
-          // console.log(response, '123')
           persistStore.set(
             'catalogId',
             response.data.defaultCurriculumCatalog.id
@@ -907,7 +903,7 @@ export default {
     // 点击加入购物车
     detailAddShopCarts(newIndex) {
       this.curriculumcartids.cartid = this.kid
-      // console.log(this.courseList, '这是response')
+
       return new Promise((resolve, reject) => {
         home.addShopCart(this.curriculumcartids).then(response => {
           // this.$router.push('/shop/shoppingcart')
@@ -929,11 +925,9 @@ export default {
               this.$set(this.courseList[i], 'isCartNew', 1)
             }
           }
-          // console.log(this.courseList, '123')
         })
       })
 
-      // console.log(this.courseList, '123')
       for (var i = 0; i < this.data.length; i++) {
         if (i === index) {
           this.$set(this.data[i], 'is_checked', true)
@@ -941,11 +935,10 @@ export default {
       }
     },
     buyNewCourse(item) {
-      // console.log(item, '这是item')
       if (item.is_cart === 0) {
         if (this.isCart === 0) {
           let len = Number(this.productsNum) + 1
-          // console.log(len, 'len')
+
           this.setProductsNum({
             pn: len
           })
@@ -1106,9 +1099,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.famousList)
-    // this.isCart = 0
-    // console.log(this.cardetails, 'uuuu')
     if (window.location.pathname === '/course/coursedetail') {
       // this.getdefaultCurriculumCatalogs()
     }
@@ -1117,7 +1107,6 @@ export default {
       typeof this.productsNum != 'undefined' &&
       this.productsNum != 0
     ) {
-      // console.log('进来了')
       this.setProductsNum({
         pn: 0
       })

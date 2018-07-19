@@ -35,9 +35,7 @@ export default {
     //   this.setKid(this.kidForm)
     // }
   },
-  mounted() {
-    // console.log(this.titleSix)
-  }
+  mounted() {}
 }
 </script>
 
