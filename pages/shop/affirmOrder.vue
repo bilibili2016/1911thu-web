@@ -1323,7 +1323,6 @@ export default {
         if (valid) {
           return new Promise((resolve, reject) => {
             home.addCompanyInfo(this.companyInfo).then(response => {
-              // console.log(response, '这是获取')
               if (response.status === '100100') {
                 this.$message({
                   showClose: true,

@@ -237,10 +237,6 @@ export default {
     // 获取分类列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
-        // console.log(
-        //   response.data.categoryList,
-        //   '这是response.data.categoryList'
-        // )
         this.classify = response.data.categoryList
       })
     },
@@ -291,7 +287,6 @@ export default {
     // 获取定制消息
     getPointList() {
       home.getPointList().then(response => {
-        // console.log(response, '获取定制消息')
         this.dingData = response.data.pointList
       })
     }
@@ -302,8 +297,7 @@ export default {
         this.loginMsg = true
       }
     })
-    // console.log(this.did, '9999')
-    // console.log(this.did === '0', '9999')
+
     if (this.did === '0') {
       this.getAll()
     } else {
