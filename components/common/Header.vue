@@ -664,7 +664,7 @@ export default {
       // } else {
       //   link = 'http://ceshi.1911edu.com/Wapi/Index/wxBack'
       // }
-      if (link === 'http://www.1911edu.com') {
+      if (link === 'http://edu.1911thu.com/') {
         link = 'http://wapi.1911thu.com/Wapi/Index/wxBack'
       } else {
         link = 'http://test.1911thu.com/Wapi/Index/wxBack'
