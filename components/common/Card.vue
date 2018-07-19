@@ -1155,8 +1155,6 @@ export default {
   height: 160px;
   background-color: rgba(100, 23, 166, 0.5);
   position: absolute;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
   opacity: 0;
   transition: all 300ms;
 }
@@ -1164,8 +1162,6 @@ export default {
   width: 250px;
   height: 160px;
   overflow: hidden;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
   img {
     width: 250px;
     height: 160px;
@@ -1256,7 +1252,7 @@ export default {
       margin-right: 0;
     }
     &:hover {
-      box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
+      box-shadow: 10px 0px 40px rgba(0, 0, 0, 0.12);
       transition: all 300ms;
       .jin-style {
         display: block;
@@ -1271,22 +1267,27 @@ export default {
         margin-left: -2px;
         margin-top: -1.1px;
       }
+      // .item {
+      //   padding: 0 15px;
+      // }
+      // .line-wrap {
+      //   padding: 0 15px;
+      // }
     }
     .itemBox {
       cursor: pointer;
       width: 250px;
       display: flex;
-      border-radius: 16px;
-      background: #fff;
+      border-radius: 0;
+      // background: #fff;
       flex-direction: column;
       align-items: center;
       position: relative;
       border: none;
+      border-bottom: 1px solid #eee;
       img {
         width: 250px;
         height: 160px;
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
       }
       .tag {
         position: absolute;
@@ -1315,7 +1316,6 @@ export default {
           font-size: 16px;
           font-family: MicrosoftYaHei;
           color: rgba(51, 42, 81, 1);
-          padding: 0 15px;
           overflow: hidden;
           &.itemBoxTitle {
             // height: 80px;
@@ -1359,7 +1359,7 @@ export default {
           font-family: MicrosoftYaHei;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
-          margin: 0px 0px 0px 15px;
+          // margin: 0px 0px 0px 15px;
           .itemBox-num {
             font-size: 12px;
             font-family: MicrosoftYaHei;
@@ -1389,7 +1389,6 @@ export default {
           font-size: 16px;
           font-family: MicrosoftYaHei;
           color: rgba(51, 42, 81, 1);
-          padding: 0 15px;
           overflow: hidden;
         }
         .itemBox-info {
@@ -1397,7 +1396,6 @@ export default {
           font-family: MicrosoftYaHei;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
-          margin: 0px 0px 0px 15px;
           .itemBox-num {
             font-size: 12px;
             font-family: MicrosoftYaHei;
@@ -1443,7 +1441,7 @@ export default {
       .line-center {
         overflow: hidden;
         height: 35px;
-        padding: 0 15px;
+        // padding: 0 15px;
         p.price {
           color: #ff5f5f;
           font-size: 14px;
@@ -1473,7 +1471,7 @@ export default {
         }
       }
       .line-centers {
-        padding: 0px 14px 0px 13px;
+        // padding: 0px 14px 0px 13px;
         .studyPercent {
           padding-bottom: 10px;
           color: #6417a6;
@@ -1509,8 +1507,9 @@ export default {
     }
   }
   .el-card {
-    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    // box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     border-radius: 16px;
+    border-bottom: 1px solid #eeeeee;
   }
 }
 #pane-tab-first .card-category .card-list,
@@ -2008,7 +2007,6 @@ export default {
           font-family: MicrosoftYaHei;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
-          margin: 0px 0px 0px 15px;
           .itemBox-num {
             font-size: 12px;
             font-family: MicrosoftYaHei;

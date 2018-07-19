@@ -10,11 +10,11 @@
   border-radius: $--button-large-border-radius;
 }
 
-.el-button + .el-button {
+.el-button+.el-button {
   margin: 0 10px;
 }
 
-.el-button + .el-dropdown {
+.el-button+.el-dropdown {
   margin: 0 10px;
 }
 
@@ -27,10 +27,10 @@
 // banner
 .banner {
   .el-carousel__container {
-    height: 555px;
+    height: 420px;
   }
   .el-carousel__indicators {
-    bottom: 145px;
+    bottom: 10px;
   }
   .el-carousel__indicator.is-active button {
     opacity: 0.9;
@@ -42,7 +42,7 @@
   }
   .el-carousel__indicators {
     width: 1100px;
-    text-align: right;
+    text-align: center;
     margin: 0 auto;
   }
   .home-evaluate {
@@ -160,7 +160,7 @@
   }
   .el-tabs__nav {
     background-color: #6417a6;
-    height: 555px;
+    height: 420px;
   }
   .el-tabs__header.is-left {
     margin-right: 40px;
@@ -839,7 +839,7 @@
 
 // profile页面修改tab
 .profile {
-  & > div > div.el-tabs__content {
+  &>div>div.el-tabs__content {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
   }
@@ -893,10 +893,10 @@
       box-shadow: none;
     }
   }
-  & > .el-tabs {
+  &>.el-tabs {
     padding: 10px;
   }
-  & > .el-tabs--left,
+  &>.el-tabs--left,
   .el-tabs--right {
     overflow: auto;
   }
@@ -1034,7 +1034,7 @@
         position: relative;
         overflow: hidden;
       }
-      .el-radio__input.is-checked + .el-radio__label {
+      .el-radio__input.is-checked+.el-radio__label {
         background-color: #8f4acb;
         color: #fff;
         border: none;
@@ -1105,7 +1105,7 @@
   }
   .el-dialog__body {
     padding: 0px 20px;
-    & > div {
+    &>div {
       height: 450px;
       overflow: hidden;
     }

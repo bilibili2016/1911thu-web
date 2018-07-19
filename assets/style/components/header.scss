@@ -14,7 +14,6 @@ body {
   // border-bottom: 1px #e8d6f7 solid;
   // background-color: #fff;
   // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04);
-
   flex: 0 0 auto;
   .main {
     width: 1100px;
@@ -81,13 +80,13 @@ body {
         height: 16px;
         position: absolute;
         top: 10px;
-        left: 18px;
+        left: 14px;
         color: #666666;
         cursor: pointer;
       }
     }
     .HREntry {
-      margin-left: 50px;
+      margin-left: 95px;
       height: 20px;
       &.islogined {
         margin-left: 106px;
@@ -266,23 +265,14 @@ body {
         text-align: center;
         font-size: 14px;
         cursor: pointer;
-        &:hover {
-          border-color: #8f4acb;
-        }
       }
       .login {
         color: #fff;
         background-color: #6417A6;
-        &:hover {
-          color: #8f4acb;
-        }
       }
       .register {
         background-color: #2A85EB;
         color: #fff;
-        &:hover {
-          background-color: #8f4acb;
-        }
       }
     }
     .headImg {

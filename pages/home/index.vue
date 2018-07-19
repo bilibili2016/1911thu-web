@@ -2,8 +2,8 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-tab :items="items" :classify="classify" :courses="courses" :dingData="dingData" :config="ding"></v-tab>
-
+      <v-tab :items="items" :classify="classify" :courses="courses"></v-tab>
+      <v-project :dingData="dingData" :config="ding"></v-project>
       <!-- 最新课程 -->
       <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 精品好课 -->
@@ -30,6 +30,7 @@
 <script>
 import teacherResource from '@/pages/home/components/teacherResource.vue'
 import Tab from '@/pages/home/components/tab.vue'
+import Project from '@/pages/home/components/project.vue'
 import Free from '@/pages/home/components/free.vue'
 import New from '@/pages/home/components/new.vue'
 import Classic from '@/pages/home/components/classic.vue'
@@ -51,6 +52,7 @@ export default {
     'v-free': Free,
     'v-new': New,
     'v-tab': Tab,
+    'v-project': Project,
     'v-backtotop': BackToTop,
     'v-teacherresource': teacherResource
   },

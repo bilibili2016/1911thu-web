@@ -77,11 +77,19 @@ export default {
     background-color: #fff;
     // border-radius: 16px;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+    transition: all 300ms;
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
-      transition: all 300ms;
+      padding: 10px;
       .courseInfo h4 {
         color: #8f4acb;
+      }
+      div.fl img {
+        width: 230px;
+        height: 140px;
+      }
+      .courseInfo {
+        padding: 0 30px 0 20px;
       }
     }
     div.fl img {
@@ -89,15 +97,17 @@ export default {
       height: 160px;
       // border-radius: 16px;
       overflow: hidden;
+      transition: all 300ms;
       cursor: pointer;
     }
     .courseInfo {
       width: 284px;
-      padding: 0 30px 0 20px;
+      padding: 10px 30px 10px 20px;
+      transition: all 300ms;
       h4 {
         width: 235px;
         height: 47px;
-        margin-top: 15px;
+        margin-top: 5px;
         color: #1c1f21;
         font-size: 16px;
         line-height: 22px;
@@ -114,7 +124,7 @@ export default {
         -webkit-line-clamp: 2;
       }
       h5 {
-        height: 30px;
+        height: 23px;
         line-height: 23px;
         margin: 5px 0;
         color: #93999f;
