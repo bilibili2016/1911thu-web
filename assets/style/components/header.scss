@@ -10,8 +10,7 @@ body {
   border-bottom: 1px #e8d6f7 solid;
   background-color: #fff;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04);
-  z-index: 100;
-  // width: 100%; // height: 90px;
+  z-index: 100; // width: 100%; // height: 90px;
   // border-bottom: 1px #e8d6f7 solid;
   // background-color: #fff;
   // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04);
@@ -39,29 +38,32 @@ body {
     }
     .search {
       width: 240px;
-      height: 30px;
+      height: 34px;
+      line-height: 34px;
       margin-left: 289px;
-      border: 1px solid #6417a6;
-      border-radius: 14px;
+      background-color: #ECECF6;
+      border-radius: 17px;
       position: relative;
       input {
+        width: 190px;
         height: 28px;
-        margin-left: 14px;
+        margin-left: 38px;
         font-size: 14px;
+        color: #222;
         cursor: pointer;
       }
       input::-webkit-input-placeholder {
-        color: #6417a6;
+        color: #aaa;
         cursor: pointer;
       }
       input:-moz-placeholder {
-        color: #6417a6;
+        color: #aaa;
       }
       input::-moz-placeholder {
-        color: #6417a6;
+        color: #aaa;
       }
       input:-ms-input-placeholder {
-        color: #6417a6;
+        color: #aaa;
       }
       img {
         width: 16px;
@@ -76,12 +78,10 @@ body {
         width: 16px;
         height: 16px;
         position: absolute;
-        top: 6px;
-        right: 18px;
+        top: 10px;
+        left: 18px;
+        color: #666666;
         cursor: pointer;
-        background: url('~assets/images/iconList.png') no-repeat;
-        background-size: 177px 966px;
-        background-position: 0 -321px;
       }
     }
     .HREntry {
@@ -109,8 +109,7 @@ body {
             display: inline-block;
             width: 45px;
             height: 27px;
-            background: url('http://papn9j3ys.bkt.clouddn.com/preferential.png')
-              no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/preferential.png') no-repeat;
             background-size: contain;
             position: absolute;
             top: -25px;
@@ -129,13 +128,11 @@ body {
         span {
           width: 20px;
           height: 20px;
-          background: url('http://papn9j3ys.bkt.clouddn.com/cartIcon.png')
-            no-repeat;
+          background: url('http://papn9j3ys.bkt.clouddn.com/cartIcon.png') no-repeat;
           background-size: 20px 20px;
           transition: all 300ms;
           &:hover {
-            background: url('http://papn9j3ys.bkt.clouddn.com/cartIconHover.png')
-              no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/cartIconHover.png') no-repeat;
             background-size: 20px 20px;
           }
         }
@@ -261,12 +258,9 @@ body {
     }
     .lrBtn {
       span {
-        width: 95px;
-        height: 30px;
-        line-height: 30px;
-        border: 1px solid #491c9c;
-        color: #491c9c;
-        border-radius: 5px;
+        width: 80px;
+        height: 34px;
+        line-height: 34px;
         text-align: center;
         font-size: 14px;
         cursor: pointer;
@@ -275,15 +269,14 @@ body {
         }
       }
       .login {
-        color: #491c9c;
-        margin-right: 10px;
+        color: #fff;
+        background-color: #6417A6;
         &:hover {
           color: #8f4acb;
         }
       }
       .register {
-        margin-left: 10px;
-        background-color: #6417a6;
+        background-color: #2A85EB;
         color: #fff;
         &:hover {
           background-color: #8f4acb;
@@ -390,16 +383,14 @@ body {
         margin: 30px auto 25px;
         text-align: center;
         padding-right: 40px;
-        background: url('http://papn9j3ys.bkt.clouddn.com/wx1.png') no-repeat
-          97px 0;
+        background: url('http://papn9j3ys.bkt.clouddn.com/wx1.png') no-repeat 97px 0;
         background-size: 24px 24px;
         font-size: 14px;
         color: #555555;
         cursor: pointer;
         transition: all 300ms;
         &:hover {
-          background: url('http://papn9j3ys.bkt.clouddn.com/wx2.png') no-repeat
-            97px 0;
+          background: url('http://papn9j3ys.bkt.clouddn.com/wx2.png') no-repeat 97px 0;
           background-size: 24px 24px;
         }
       }
