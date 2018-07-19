@@ -22,13 +22,13 @@ export default {
     test() {
       const img = document.createElement('img')
       img.onerror = () => {
-        console.log(this, '这是this')
+
       }
       img.onerror()
     }
   },
   mounted() {
-    console.log(SwiperImg, '这是SwiperImg')
+
     new SwiperImg(document.getElementById('captcha'), function() {
       document.getElementById('msg').innerHTML = '登录成功！'
     })

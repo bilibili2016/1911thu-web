@@ -148,7 +148,7 @@ export const actions = {
   async setDid({ commit, state }, { dids }) {
     try {
       let did = dids
-      // console.log(did, 'did')
+
       persistStore.set('did', did)
       commit(MUTATION.setDid, {
         did
@@ -428,7 +428,6 @@ export const actions = {
     return gid
   },
   async setTid({ commit, state }, { tids }) {
-    // console.log(tids)
     try {
       let tid = tids
       persistStore.set('tid', tid)
