@@ -166,13 +166,7 @@ export default {
         })
       })
     },
-    // handleItemOne(item, index) {
-    //   this.bgmsg = index
-    //   console.log(this.bgmsg)
-    // },
-    // handleItemTwo(item, index) {
-    //   console.log(this.bgmsgs)
-    // },
+
     handleItemOne(item, index) {
       this.allCheckedId = []
       this.bgmsgs = 0
@@ -212,9 +206,7 @@ export default {
       this.getPidList = []
       this.curriculumList()
     },
-    changeTab(item) {
-      // console.log(item, 'item')
-    },
+    changeTab(item) {},
     handleClick(tab, event) {
       if (tab.name == 'first') {
         this.curriculumListForm.sortBy = 1

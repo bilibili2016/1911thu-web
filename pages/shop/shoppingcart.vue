@@ -253,7 +253,6 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
     goDetail(item) {
-      console.log(item, '这是item')
       let kidForm = {
         kids: item.id
       }
@@ -351,7 +350,7 @@ export default {
               this.arraySum =
                 (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
                 10
-              // console.log(this.addArray)
+
               return Object.assign({}, item, {
                 checkMsg: true
               })
@@ -361,7 +360,7 @@ export default {
           // this.selectAll = true
           this.loding = false
           this.numForm.number = response.data.number
-          console.log(this.courseList, '这是this.courseList')
+
           this.setProductsNum({ pn: this.courseList.length })
           if (this.courseList.length == 0) {
             this.isNoMsg = true
@@ -386,7 +385,6 @@ export default {
           home
             .shopCartremoveChecked({ curriculumcartid: item.id })
             .then(res => {
-              // console.log(res)
               this.addArray.curriculumcartid.splice(shopIndex, 1)
               this.arraySum =
                 (Number(this.arraySum) * 10 - Number(item.present_price) * 10) /
@@ -407,7 +405,6 @@ export default {
         //选中
         return new Promise((resolve, reject) => {
           home.shopCartaddChecked({ curriculumcartid: item.id }).then(res => {
-            // console.log(res)
             this.addArray.curriculumcartid.push(item.id)
             this.arraySum =
               (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
@@ -427,7 +424,6 @@ export default {
       }
     },
     handleSelectAllChange(val) {
-      // console.log(this.removeArray)
       if (this.courseList && this.courseList.length > 0) {
         this.courseList.forEach(item => {
           item.checkMsg = val
@@ -447,7 +443,6 @@ export default {
           //全选
           return new Promise((resolve, reject) => {
             home.shopCartaddChecked(this.addArray).then(res => {
-              // console.log(res)
               resolve(true)
             })
           })
@@ -455,7 +450,6 @@ export default {
           //全不选
           return new Promise((resolve, reject) => {
             home.shopCartremoveChecked(this.removeArray).then(res => {
-              // console.log(res)
               resolve(true)
             })
           })

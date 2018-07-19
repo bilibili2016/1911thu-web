@@ -238,6 +238,16 @@
             <i class="icon-code"></i> 专属邀请码</span>
           <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>
         </el-tab-pane>
+        <!-- 专属邀请码弹框 -->
+        <div class="invitationCodeBox">
+          <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center :show-close="false">
+            <span class="text">绑定优惠码，好课看不停</span>
+            <span slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="invitationConfim">确 定</el-button>
+            </span>
+          </el-dialog>
+        </div>
+
       </el-tabs>
     </div>
   </div>
@@ -353,7 +363,8 @@ export default {
       unfinishedOrderLoad: true,
       readyOrderLoad: true,
       invalidOrderLoad: true,
-      overTimeData: []
+      overTimeData: [],
+      centerDialogVisible: false
     }
   },
   computed: {
@@ -633,17 +644,6 @@ export default {
         })
       })
     },
-    // 我的课程 已过期
-    // getOverTime() {
-    //   this.orderForm.payStatus = 4
-    //   home.getAllOrderData(this.orderForm).then(response => {
-    //     this.overTimeData = response.data.orderList
-
-    //     console.log(response.data.orderList, '123')
-    //     // this.readyOrderLoad = false
-    //     resolve(true)
-    //   })
-    // },
     // 我的订单 取消
     getInvalidOrderData() {
       this.orderForm.payStatus = 3
@@ -710,6 +710,19 @@ export default {
           resolve(true)
         })
       })
+    },
+    // 判断是否显示绑定邀请码弹框
+    getAlertbox() {
+      if (Number(persistStore.get('paynumber')) > 1) {
+        if (!persistStore.get('paynumbermsg')) {
+          this.centerDialogVisible = true
+        }
+      }
+    },
+    // 确认提示框
+    invitationConfim() {
+      this.centerDialogVisible = false
+      persistStore.set('paynumbermsg', '1')
     }
   },
   mounted() {
@@ -729,9 +742,11 @@ export default {
       // this.getOverTime()
       //过期的我的课程
       this.overStudyCurriculumList()
+      // 判断企业多份是否弹出框
+      // if (!persistStore.get('paynumbermsg')) {
+      this.getAlertbox()
     }
     this.$bus.$emit('bannerShow', false)
-    console.log(this.gid, '这是this.gid')
     this.activeTab = this.gid
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
