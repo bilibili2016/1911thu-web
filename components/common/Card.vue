@@ -503,7 +503,7 @@
               <h4>{{courseList.title}}</h4>
               <!-- ==(免费2)={{courseList.is_free}} 是否购买{{privileMsg}} 是否学习（1已学习）{{courseList.is_study }} -->
               <!-- 团购价更优，团购电话：010-62701911 -->
-              <div class="tg">团购价更优，团购电话：010-62701911</div>
+              <!-- <div class="tg">团购价更优，团购电话：010-62701911</div> -->
               <!-- 判断是否免费 is_free(2是免费)-->
               <div v-if="courseList.is_free === '2'">
                 <div class="clum" v-if="courseList.is_study === 1">
