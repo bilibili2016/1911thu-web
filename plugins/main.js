@@ -39,26 +39,3 @@ Vue.use(eventBus)
 // } else {
 //   alert('非IE')
 // }
-
-var isIE = function(ver) {
-  var b = document.createElement('b')
-  b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
-  return b.getElementsByTagName('i').length === 1
-}
-if (isIE(6)) {
-  // IE 6
-  console.log('6')
-}
-if (isIE(7)) {
-  // IE 6
-  console.log('7')
-}
-if (isIE(8)) {
-  // IE 6
-  console.log('8')
-}
-// ...
-if (isIE(9)) {
-  // IE 9
-  console.log('9')
-}

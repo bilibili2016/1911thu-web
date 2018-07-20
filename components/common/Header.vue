@@ -963,6 +963,12 @@ export default {
           }
         })
       })
+    },
+    // 判断浏览器的ie型号
+    isIE(ver) {
+      var b = document.createElement('b')
+      b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
+      return b.getElementsByTagName('i').length === 1
     }
   },
   mounted() {
@@ -987,7 +993,12 @@ export default {
     if (!this.token) {
       this.signOut()
     }
-    this.explorer()
+    // this.explorer()
+    // 判断是否是ie浏览器
+
+    if (this.isIE(6) && this.isIE(7) && this.isIE(8) && this.isIE(9)) {
+      this.$router.push('/other/ie')
+    }
   },
   watch: {
     // 监测登陆注册切换时清除注册获取验证码定时器
