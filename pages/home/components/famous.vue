@@ -1,8 +1,9 @@
 <template>
   <div class="teachers">
     <!-- <v-title :data="titleFore"></v-title> -->
-    <h1 class="clearfix">{{titleFore}}
-      <span class="fr" @click="getMore(linkSeven)">查看更多</span>
+    <h1 class="clearfix">
+      <span class="title">{{titleFore}}</span>
+      <span class="fr moredata" @click="getMore(linkSeven)">查看更多</span>
     </h1>
     <div class="cardList ">
       <div class="item" v-for="(teacher,index) in teachers" :key="index" @click="goTeacherInfo(teacher,index)">
@@ -57,8 +58,11 @@ export default {
     width: 1100px;
     margin: 0 auto;
     color: #fff;
-    padding: 70px 0px 60px;
-    span {
+    padding: 70px 0px 50px;
+    .title {
+      padding-top: 10px;
+    }
+    .moredata {
       width: 128px;
       height: 40px;
       line-height: 38px;
