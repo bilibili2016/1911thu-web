@@ -1241,15 +1241,16 @@ export default {
   .card-list {
     margin: 0 32px 50px 0; // margin-bottom: 50px;
     border-radius: 16px;
+    transition: all 0.6s linear;
     &:nth-child(4n + 4) {
       margin-right: 0;
     }
     &:hover {
       box-shadow: 10px 0px 40px rgba(0, 0, 0, 0.12);
-      transition: all 400ms;
+      transition: all 0.6s linear;
       .jin-style {
         display: block;
-        transition: all 400ms;
+        transition: all 0.6s linear;
       }
       .mask-style {
         opacity: 1;
@@ -1266,12 +1267,22 @@ export default {
         //   height: 170px;
         // }
       }
-      // .item {
-      //   padding: 0 15px;
-      // }
-      // .line-wrap {
-      //   padding: 0 15px;
-      // }
+      .itemBox-name {
+        transition: all 0.6s linear;
+        padding: 0px 0px 0px 15px;
+      }
+      .itemBox-info {
+        transition: all 0.6s linear;
+        padding: 0px 0px 0px 15px;
+      }
+      .line-wrap {
+        transition: all 0.6s linear;
+        padding: 0px 0px 0px 15px;
+      }
+      .title {
+        transition: all 0.6s linear;
+        color: #8f4acb !important;
+      }
     }
     .itemBox {
       cursor: pointer;
@@ -1285,24 +1296,10 @@ export default {
       position: relative;
       border: none;
       border-bottom: 1px solid #eee;
-      &:hover {
-        transition: all 400ms;
-        .itemBox-name {
-          padding: 0px 0px 0px 15px;
-          transition: all 400ms;
-        }
-        .itemBox-info {
-          padding: 0px 0px 0px 15px;
-          transition: all 400ms;
-        }
-        .line-wrap {
-          padding: 0px 0px 0px 15px;
-          transition: all 400ms;
-        }
-        .title {
-          color: #8f4acb !important;
-        }
-      }
+      transition: all 400ms;
+      // &:hover {
+
+      // }
       img {
         width: 250px;
         height: 160px;
@@ -1328,6 +1325,8 @@ export default {
       .item {
         // border-bottom: 1px rgba(228, 228, 244, 1) solid;
         // card1 的主标题和副标题
+
+        cursor: pointer;
         .itemBox-name {
           width: 250px;
           // height: 45px;
@@ -1362,6 +1361,10 @@ export default {
               white-space: nowrap;
             }
           }
+          &:hover {
+            padding: 0px 0px 0px 15px;
+            transition: all 400ms;
+          }
         }
         .itemBox-info {
           font-size: 14px;
@@ -1389,6 +1392,10 @@ export default {
               line-height: 13px;
               float: right;
             }
+          }
+          &:hover {
+            padding: 0px 0px 0px 15px;
+            transition: all 400ms;
           }
         }
       }
