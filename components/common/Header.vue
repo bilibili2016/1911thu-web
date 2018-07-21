@@ -990,7 +990,7 @@ export default {
     //     'ie:' +
     //     isIE()
     // )
-    console.log('1')
+    console.log(this, 'header中的this')
     this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
