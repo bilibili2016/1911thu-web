@@ -27,6 +27,9 @@ const config = {
   render: {
     resourceHints: false
   },
+  router: {
+    mode: 'hash'
+  },
   mode: 'spa',
   env: {
     VERSION: pkg.version,
