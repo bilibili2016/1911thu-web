@@ -970,16 +970,27 @@ export default {
     var isIE = function(ver) {
       var b = document.createElement('b')
       b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
+      console.log(b.getElementsByTagName('i').length === 1, '123')
       return b.getElementsByTagName('i').length === 1
     }
-    if (isIE(6)) {
-      // IE 6
-    }
-    // ...
-    if (isIE(9)) {
-      // IE 9
-      console.log('9')
-    }
+    console.log('1')
+    alert(
+      'ie6:' +
+        isIE(6) +
+        '\n' +
+        'ie7:' +
+        isIE(7) +
+        '\n' +
+        'ie8:' +
+        isIE(8) +
+        '\n' +
+        'ie9:' +
+        isIE(9) +
+        '\n' +
+        'ie:' +
+        isIE()
+    )
+    console.log('1')
     this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
