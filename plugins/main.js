@@ -65,16 +65,16 @@ function BrowserType() {
     reIE.test(userAgent)
     var fIEVersion = parseFloat(RegExp['$1'])
     if (userAgent.indexOf('MSIE 6.0') != -1) {
-      window.location.replace('http://ceshi.1911thu.com/other/ie')
+      window.location.replace('http://ceshi.1911thu.com/index.html')
     } else if (fIEVersion == 7) {
-      window.location.replace('http://ceshi.1911thu.com/other/ie')
+      window.location.replace('http://ceshi.1911thu.com/index.html')
     } else if (fIEVersion == 8) {
-      window.location.replace('http://ceshi.1911thu.com/other/ie')
+      window.location.replace('http://ceshi.1911thu.com/index.html')
     } else if (fIEVersion == 9) {
       console.log('9')
-      window.location.replace('http://ceshi.1911thu.com/other/ie')
+      window.location.replace('http://ceshi.1911thu.com/index.html')
     } else if (fIEVersion == 10) {
-      window.location.replace('http://ceshi.1911thu.com/other/ie')
+      // window.location.repla('http://ceshi.1911thu.com/other/ie')
     } else if (userAgent.toLowerCase().match(/rv:([\d.]+)\) like gecko/)) {
       // return 'IE11'
     } else {
