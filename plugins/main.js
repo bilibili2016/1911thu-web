@@ -35,8 +35,9 @@ Vue.use(eventBus)
 // ) {
 //   alert('IE')
 //   // do IE something
+//   window.location.replace('http://www.baidu.com')
 // } else {
-//   // window.location.replace('http://www.baidu.com')
+//   window.location.replace('http://www.baidu.com')
 //   alert('非IE')
 // }
 if (window.location.host === 'http://ceshi.1911thu.com/') {
@@ -70,6 +71,7 @@ function BrowserType() {
     } else if (fIEVersion == 8) {
       window.location.replace(host)
     } else if (fIEVersion == 9) {
+      console.log('9')
       window.location.replace(host)
     } else if (fIEVersion == 10) {
       window.location.replace(host)
@@ -95,5 +97,5 @@ function BrowserType() {
   //   return 'Edge'
   // }
 } //myBrowser() end
-
+BrowserType()
 // alert(BrowserType())
