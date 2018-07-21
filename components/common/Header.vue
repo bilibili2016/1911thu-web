@@ -965,13 +965,33 @@ export default {
       })
     },
     // 判断浏览器的ie型号
-    isIE(ver) {
+    isIEmethod() {
+       var isIE = function(ver) {
       var b = document.createElement('b')
       b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
       return b.getElementsByTagName('i').length === 1
     }
+    if (isIE(6)) {
+      this.$router.push('/other/ie')
+      console.log('6')
+    }
+    if (isIE(7)) {
+      this.$router.push('/other/ie')
+      console.log('7')
+    }
+    if (isIE(8)) {
+      this.$router.push('/other/ie')
+      console.log('8')
+    }
+    // ...
+    if (isIE(9)) {
+      this.$router.push('/other/ie')
+      console.log('9')
+    }
+    }
   },
   mounted() {
+    this.isIEmethod()
     this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
@@ -996,28 +1016,7 @@ export default {
     // this.explorer()
     // 判断是否是ie浏览器
 
-    var isIE = function(ver) {
-      var b = document.createElement('b')
-      b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
-      return b.getElementsByTagName('i').length === 1
-    }
-    if (isIE(6)) {
-      this.$router.push('/other/ie')
-      console.log('6')
-    }
-    if (isIE(7)) {
-      this.$router.push('/other/ie')
-      console.log('7')
-    }
-    if (isIE(8)) {
-      this.$router.push('/other/ie')
-      console.log('8')
-    }
-    // ...
-    if (isIE(9)) {
-      this.$router.push('/other/ie')
-      console.log('9')
-    }
+
   },
   watch: {
     // 监测登陆注册切换时清除注册获取验证码定时器
