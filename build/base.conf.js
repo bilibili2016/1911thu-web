@@ -8,6 +8,8 @@ let env = process.env
 //   throw env.error
 // }
 let dotenv = dotenvConfig.parsed
+const ES3CompatibleWebpackPlugin = require('es3-compatible-webpack-plugin')
+  .default
 
 /**
  * 检查值是否为 true
@@ -26,9 +28,6 @@ const baseRouter = env.BASE_ROUTER
 const config = {
   render: {
     resourceHints: false
-  },
-  router: {
-    mode: 'hash'
   },
   mode: 'spa',
   env: {
@@ -86,7 +85,8 @@ const config = {
     {
       src: '~/plugins/main',
       ssr: false
-    }
+    },
+    new ES3CompatibleWebpackPlugin()
   ],
   modules: [
     // ['nuxt-i18n', I18N.I18N]
