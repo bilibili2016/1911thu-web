@@ -101,6 +101,7 @@ function BrowserType() {
   //   return 'Edge'
   // }
 } //myBrowser() end
+BrowserType()
 // var isIE = function(ver) {
 //   var b = document.createElement('b')
 //   b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
