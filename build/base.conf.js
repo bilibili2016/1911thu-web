@@ -8,8 +8,7 @@ let env = process.env
 //   throw env.error
 // }
 let dotenv = dotenvConfig.parsed
-const ES3CompatibleWebpackPlugin = require('es3-compatible-webpack-plugin')
-  .default
+var es3ifyPlugin = require('es3ify-webpack-plugin')
 
 /**
  * 检查值是否为 true
@@ -85,15 +84,15 @@ const config = {
     {
       src: '~/plugins/main',
       ssr: false
-    },
-    new ES3CompatibleWebpackPlugin()
+    }
   ],
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],
   build: {
     extractCSS: true,
-    vendor: ['axios', 'loglevel']
+    vendor: ['axios', 'loglevel'],
+    plugins: [new es3ifyPlugin()]
     // extend(config, { isDev, isClient }) {
     //   // 可以在此观察、修改 webpack 配置
 
