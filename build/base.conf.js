@@ -89,6 +89,12 @@ const config = {
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],
+  postLoaders: [
+    {
+      test: /\.js$/,
+      loaders: ['es3ify-loader']
+    }
+  ],
   build: {
     extractCSS: true,
     vendor: ['axios', 'loglevel'],
