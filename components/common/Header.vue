@@ -1012,7 +1012,7 @@ export default {
     if (!this.token) {
       this.signOut()
     }
-    // this.explorer()
+    this.explorer()
   },
   watch: {
     // 监测登陆注册切换时清除注册获取验证码定时器
