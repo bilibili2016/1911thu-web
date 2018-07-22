@@ -61,7 +61,33 @@ function BrowserType() {
   //   return 'Edge'
   // }
 } //myBrowser() end
-BrowserType()
+// BrowserType()
+var isIE = function(ver) {
+  var b = document.createElement('b')
+  b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
+  return b.getElementsByTagName('i').length === 1
+}
+if (isIE(6)) {
+  console.log('6')
+  // IE 6
+  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+}
+if (isIE(7)) {
+  console.log('7')
+  // IE 9
+  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+}
+if (isIE(8)) {
+  console.log('8')
+  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+  // IE 9
+}
+// ...
+if (isIE(9)) {
+  console.log('9')
+  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+  // IE 9
+}
 ;(config.head.link = [
   // {
   //   rel: 'icon',
