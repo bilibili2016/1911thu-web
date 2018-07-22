@@ -89,6 +89,13 @@ const config = {
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],
+  rules: [
+    {
+      test: /.js$/,
+      enforce: 'post', // post-loader处理
+      loader: 'es3ify-loader'
+    }
+  ],
   postLoaders: [
     {
       test: /\.js$/,
