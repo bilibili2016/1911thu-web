@@ -102,10 +102,51 @@ const config = {
       loaders: ['es3ify-loader']
     }
   ],
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader']
+      }
+    ],
+    postLoaders: [
+      {
+        test: /\.js$/,
+        loaders: ['es3ify-loader']
+      }
+    ]
+  },
   build: {
     extractCSS: true,
     vendor: ['axios', 'loglevel'],
-    plugins: [new es3ifyPlugin()]
+    rules: [
+      {
+        test: /.js$/,
+        enforce: 'post', // post-loader处理
+        loader: 'es3ify-loader'
+      }
+    ],
+    postLoaders: [
+      {
+        test: /\.js$/,
+        loaders: ['es3ify-loader']
+      }
+    ],
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false,
+          screw_ie8: false
+        },
+        mangle: {
+          screw_ie8: false
+        },
+        output: {
+          screw_ie8: false
+        }
+      })
+    ]
     // extend(config, { isDev, isClient }) {
     //   // 可以在此观察、修改 webpack 配置
 
