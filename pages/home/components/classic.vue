@@ -101,7 +101,7 @@ export default {
       cursor: pointer;
     }
     .courseInfo {
-      width: 284px;
+      width: 283px;
       padding: 10px 30px 10px 20px;
       transition: all 400ms;
       h4 {
