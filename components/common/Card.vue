@@ -51,7 +51,9 @@
               <div class="item">
                 <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]" @click="openDetail()">
                   <span :class="{'title':config.card === 'home'?true:false}">{{card.title}}</span>
-                  <span v-if="config.card === 'home'" class="deputyTitle">{{card.deputy_title}}</span>
+                  <span v-if="config.card === 'home'" class="deputyTitle fl">{{card.deputy_title}}</span>
+                  <span v-if="config.card === 'home'&&card.is_free == '1'" class="deputyTitle fr" style="padding-right:15px;">￥{{card.present_price}}</span>
+                  <span v-if="card.is_free === '2'" class="deputyTitle fr" style="padding-right:15px;">免费</span>
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
@@ -60,18 +62,20 @@
                   <span class="itemBox-num" v-if="config.card === 'home'">
                     <img :src="numSrc" alt="">
                     <span>{{card.study_number}}</span>
-                    <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                  </span>
+                  <span class="" style="display:inline-block;float:right;padding-right:15px;">
+                    <el-rate disabled v-model="card.score" class="itemBox-rate fr" v-if="config.card === 'home'"></el-rate>
                   </span>
                 </p>
               </div>
               <!-- 作者和头衔    金额 -->
-              <div class="line-wrap" v-if="config.card === 'home'">
+              <!-- <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
-                  <!-- <p class="price freePrise" v-if="config.card === 'home'&&config.free != 'true'">￥{{card.present_price}}</p> -->
+
                   <p class="price freePrise" v-if="config.card === 'home'&&card.is_free == '1'">￥{{card.present_price}}</p>
                   <p class="freePrise" v-if="card.is_free === '2'">免费</p>
                 </div>
-              </div>
+              </div> -->
               <!-- 学习进度 -->
               <div class="line-wraps" v-if="config.card==='learning' ">
                 <div class="line-centers ">
@@ -1132,7 +1136,7 @@ export default {
 .new-style {
   img {
     width: 48px !important;
-    height: 28px !important; // margin-top: -20px;
+    height: 34px !important; // margin-top: -20px;
     position: absolute;
     top: 0;
     left: 0;
@@ -1154,7 +1158,7 @@ export default {
   img {
     width: 250px;
     height: 160px;
-    transition: all 300ms;
+    transition: all 500ms;
   }
 }
 .mask {
@@ -1237,35 +1241,53 @@ export default {
   .card-list {
     margin: 0 32px 50px 0; // margin-bottom: 50px;
     border-radius: 16px;
+    transition: all 500ms linear;
     &:nth-child(4n + 4) {
       margin-right: 0;
     }
     &:hover {
       box-shadow: 10px 0px 40px rgba(0, 0, 0, 0.12);
-      transition: all 300ms;
+      transition: all 500ms linear;
       .jin-style {
         display: block;
-        transition: all 300ms;
+        transition: all 500ms linear;
       }
       .mask-style {
         opacity: 1;
       }
       .bgImgs img {
-        width: 254px;
-        height: 162.2px;
-        margin-left: -2px;
-        margin-top: -1.1px;
+        width: 260px;
+        height: 165.2px;
+        // width: 270px;
+        // height: 170px;
+        // margin-left: -3px;
+        // margin-top: -2px;
+        // &.hover {
+        //   width: 270px;
+        //   height: 170px;
+        // }
       }
-      // .item {
-      //   padding: 0 15px;
-      // }
-      // .line-wrap {
-      //   padding: 0 15px;
-      // }
+      .itemBox-name {
+        transition: all 500ms linear;
+        padding: 0px 0px 0px 15px;
+      }
+      .itemBox-info {
+        transition: all 500ms linear;
+        padding: 0px 0px 0px 15px;
+      }
+      .line-wrap {
+        transition: all 500ms linear;
+        padding: 0px 0px 0px 15px;
+      }
+      .title {
+        transition: all 500ms linear;
+        color: #8f4acb !important;
+      }
     }
     .itemBox {
       cursor: pointer;
       width: 250px;
+      height: 294px;
       display: flex;
       border-radius: 0;
       // background: #fff;
@@ -1274,6 +1296,7 @@ export default {
       position: relative;
       border: none;
       border-bottom: 1px solid #eee;
+      transition: all 500ms linear;
       img {
         width: 250px;
         height: 160px;
@@ -1298,31 +1321,25 @@ export default {
       }
       .item {
         // border-bottom: 1px rgba(228, 228, 244, 1) solid;
+        // card1 的主标题和副标题
+
+        cursor: pointer;
         .itemBox-name {
           width: 250px;
-          height: 45px;
-          line-height: 45px;
+          // height: 45px;
+          // line-height: 45px;
           font-size: 16px;
           font-family: MicrosoftYaHei;
           color: rgba(51, 42, 81, 1);
           overflow: hidden;
+          transition: all 500ms linear;
           &.itemBoxTitle {
-            // height: 80px;
-            height: 102px;
-            // line-height: 20px;
             .title {
               display: block;
-              width: 220px;
-              // height: 18px;
-              // line-height: 18px;
-              height: 40px;
               line-height: 20px;
-              // overflow: hidden;
               color: #1c1f21;
               margin-top: 20px;
-              // overflow: hidden;
-              // text-overflow: ellipsis;
-              // white-space: nowrap;overflow:hidden;
+              padding-right: 15px;
               overflow: hidden;
               text-overflow: ellipsis;
               display: -webkit-box;
@@ -1330,10 +1347,10 @@ export default {
               -webkit-line-clamp: 2;
             }
             .deputyTitle {
-              width: 220px;
+              // width: 220px;
               height: 20px;
               line-height: 20px;
-              margin: 8px 0;
+              margin: 8px 0px;
               overflow: hidden;
               font-size: 14px;
               color: #93999f;
@@ -1342,20 +1359,27 @@ export default {
               white-space: nowrap;
             }
           }
+          &:hover {
+            padding: 0px 0px 0px 15px;
+            transition: all 500ms linear;
+          }
         }
         .itemBox-info {
           font-size: 14px;
           font-family: MicrosoftYaHei;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
+          padding-bottom: 25px;
           // margin: 0px 0px 0px 15px;
+          // padding-left: 10px;
+          transition: all 500ms linear;
           .itemBox-num {
             font-size: 12px;
             font-family: MicrosoftYaHei;
             color: rgba(176, 174, 184, 1);
             line-height: 0px;
             padding-left: 8px;
-            width: 160px;
+            // width: 160px;
             img {
               width: 12px;
               height: 12px;
@@ -1367,6 +1391,10 @@ export default {
               line-height: 13px;
               float: right;
             }
+          }
+          &:hover {
+            padding: 0px 0px 0px 15px;
+            transition: all 500ms linear;
           }
         }
       }
@@ -1423,6 +1451,7 @@ export default {
         width: 100%;
         height: 35px;
         line-height: 30px;
+        // padding-left: 10px;
       }
       .line-wraps {
         height: 50px; // border-top: 1px #e4e4f4 solid;

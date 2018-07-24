@@ -666,8 +666,10 @@ export default {
       // }
       if (link === 'http://edu.1911thu.com/') {
         link = 'http://wapi.1911thu.com/Wapi/Index/wxBack'
+        this.WxLogin.appid = 'wx60c7f5b807077a7b'
       } else {
         link = 'http://test.1911thu.com/Wapi/Index/wxBack'
+        this.WxLogin.appid = 'wxefa2295aae13fe2e'
       }
       this.WxLogin.redirect_uri = encodeURIComponent(link)
       this.WxLogin.state = Math.random()
@@ -962,8 +964,33 @@ export default {
         })
       })
     }
+    // 判断浏览器的ie型
   },
   mounted() {
+    // var isIE = function(ver) {
+    //   var b = document.createElement('b')
+    //   b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
+    //   console.log(b.getElementsByTagName('i').length === 1, '123')
+    //   return b.getElementsByTagName('i').length === 1
+    // }
+    // console.log('1')
+    // alert(
+    //   'ie6:' +
+    //     isIE(6) +
+    //     '\n' +
+    //     'ie7:' +
+    //     isIE(7) +
+    //     '\n' +
+    //     'ie8:' +
+    //     isIE(8) +
+    //     '\n' +
+    //     'ie9:' +
+    //     isIE(9) +
+    //     '\n' +
+    //     'ie:' +
+    //     isIE()
+    // )
+    console.log(this, 'header中的this')
     this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
