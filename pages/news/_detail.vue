@@ -61,9 +61,9 @@ export default {
         title: ''
       },
       configShare: {
-        url: 'http://www.1911edu.com/',
+        url: 'http://edu.1911thu.com/',
         sites: ['qzone', 'qq', 'weibo', 'wechat'],
-        source: 'http://www.1911edu.com/'
+        source: 'http://edu.1911thu.com/'
         // wechatQrcodeTitle: '微信扫一扫：分享',
         // wechatQrcodeHelper:
         //   '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>'
@@ -105,7 +105,7 @@ export default {
   },
   mounted() {
     var $config = {
-      url: 'http://www.1911edu.com/'
+      url: 'http://edu.1911thu.com/news/' + this.nid
     }
     socialShare('.social-share', $config)
     this.getNewInfoDetail(this.nid)
