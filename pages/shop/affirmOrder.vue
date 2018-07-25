@@ -1248,7 +1248,7 @@ export default {
             this.allPrise = res.data.goodsAmount
             this.nickName = persistStore.get('nickName')
 
-            if (res.data.companyInfo) {
+            if (JSON.stringify(res.data.companyInfo) != '{}') {
               this.company = res.data.companyInfo
               this.person = false
               this.flag = false
