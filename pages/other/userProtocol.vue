@@ -26,8 +26,9 @@
     <p class="content">保护用户隐私是1911学堂的一项基本政策, 本网站保证不对外公开或向第三方提供用户的注册资料及用户在使用网络服务时存储在本网站内的非公开内容, 下列情况除外:<br/> 1、事先获得用户的书面明确授权; <br/> 2、根据有关的法律法规要求; <br/> 3、按照相关政府主管部门的要求;<br/> 4、为维护社会公众的利益; <br/> 5、为维护1911学堂的合法权益；<br/>
 
     </p>
-    <p class="content" style="margin-top:48px;"> 如果您有隐私顾虑，或者披露了您希望保密的数据，或者希望访问我们持有的关于您的信息，请联系我们：
-      <span style="color:red">HYPERLINK "mailto:contact@xuetangx.com" contact@1911edu.com。</span>
+    <p class="content" style="margin-top:48px;"> 如果您有隐私顾虑，或者披露了您希望保密的数据，或者希望访问我们持有的关于您的信息，请联系我们:
+      <span style="color:red">contact@1911edu.com。</span>
+
     </p>
     <p class="title">1911学堂用户注册协议</p>
     <p class="smal-title">合作原则</p>

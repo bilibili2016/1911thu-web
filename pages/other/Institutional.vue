@@ -314,7 +314,11 @@ export default {
                   type: 'success',
                   message: '机构信息提交成功'
                 })
-                this.$router.push('/')
+                this.company.companyname = ''
+                this.company.person = ''
+                this.company.codes = ''
+                this.company.phones = ''
+                // this.$router.push('/')
               } else {
                 this.$message({
                   showClose: true,

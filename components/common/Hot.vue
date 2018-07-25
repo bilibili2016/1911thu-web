@@ -21,34 +21,32 @@
 </template>
 
 <script>
-  import CustomPagination from "@/components/common/Pagination.vue";
-  export default {
-    data() {
-      return {
-        activeName:"",
-        checked: true,
-        onOff: true,
-        pagemsg: {
-          page: 1,
-          pagesize: 8,
-          total: 12
-        }
+import CustomPagination from '@/components/common/Pagination.vue'
+export default {
+  data() {
+    return {
+      activeName: '',
+      checked: true,
+      onOff: true,
+      pagemsg: {
+        page: 1,
+        pagesize: 8,
+        total: 12
       }
+    }
+  },
+  methods: {
+    bind(index) {
+      $('.classList ul li').removeClass('checked')
+      $('.classList ul li')
+        .eq(index)
+        .addClass('checked')
     },
-    methods: {
-      bind(index) {
-        $(".classList ul li").removeClass("checked");
-        $(".classList ul li")
-          .eq(index)
-          .addClass("checked");
-      },
-      handleClick(){
-
-      }
-    },
-    components: {
-      "v-page": CustomPagination,
-    },
+    handleClick() {}
+  },
+  components: {
+    'v-page': CustomPagination
   }
+}
 </script>
 
