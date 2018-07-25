@@ -8,7 +8,7 @@
   right: 0;
   height: auto;
   color: #c0bacc;
-  background-color: #050223;
+  background-color: #110e30;
   overflow: hidden;
   .mediaL {
     // width: 940px;
@@ -21,7 +21,7 @@
       width: 100%;
       height: 50px;
       line-height: 50px;
-      background-color: #050223;
+      background-color: #110e30;
     }
     .playTop {
       font-size: 18px;
@@ -150,7 +150,7 @@
     position: relative; // width: 340px;
     width: 28%;
     height: auto;
-    background-color: #050223;
+    background-color: #110e30;
     transition: all 300ms;
     .inner {
       height: 100%;
@@ -414,7 +414,7 @@
           &.is-bordered.is-checked {
             border-color: #6417a6;
           }
-          .el-radio__input.is-checked+.el-radio__label {
+          .el-radio__input.is-checked + .el-radio__label {
             color: #6417a6;
           }
           .el-radio__input {
