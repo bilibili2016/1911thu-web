@@ -57,9 +57,18 @@ export default {
     handleSelect(item) {},
     search() {
       this.searchMsg = this.searchMsg.replace(/[ ]/g, '')
-      if (this.searchMsg !== '') {
+      if (
+        !/[@#\$%\^&\*]+/g.test(this.searchMsg) &&
+        this.searchMsg !== '' &&
+        this.searchMsg.length < 30
+      ) {
         persistStore.set('key', this.searchMsg)
         this.$emit('Search', this.searchMsg)
+      } else {
+        this.$message({
+          type: 'error',
+          message: '请输入不包含特殊字符且小于30个字符的关键词！'
+        })
       }
     },
     selectItem(val, index) {

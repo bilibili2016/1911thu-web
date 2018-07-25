@@ -327,12 +327,14 @@ export default {
       // this.borderIndex = index
       this.addEvaluateForm.tag.push(val.value)
     },
+    // 去老师详情
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
 
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
+    // 提示跳转购车
     goShoppingCart(msg) {
       this.$confirm(msg, '提示', {
         confirmButtonText: '去购买',
@@ -352,6 +354,7 @@ export default {
           // })
         })
     },
+    // 添加购物车
     addShopCart() {
       this.curriculumcartids.cartid = this.kid
       return new Promise((resolve, reject) => {
@@ -377,6 +380,7 @@ export default {
       this.radioBtn = ''
       this.word = ''
     },
+    // 改变屏幕宽度
     resize() {
       if (this.$refs.playerBox) {
         const h = this.$refs.playerBox.offsetHeight
@@ -511,6 +515,7 @@ export default {
       return new Promise((resolve, reject) => {
         players.getPlayerInfos(this.playerForm).then(response => {
           if (response.status === '100100') {
+            this.playing = this.pauseImg
             this.goShoppingCart(response.msg)
           } else if (response.status === '100006') {
             this.$alert('您已退出登录，请重新登录', '温馨提示', {

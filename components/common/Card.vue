@@ -1283,6 +1283,10 @@ export default {
         transition: all 500ms linear;
         color: #8f4acb !important;
       }
+      // .line-wrap {
+      //   transition: all 500ms linear;
+      //   padding: 0px 0px 0px 15px;
+      // }
     }
     .itemBox {
       cursor: pointer;
@@ -1369,7 +1373,7 @@ export default {
           font-family: MicrosoftYaHei;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
-          padding-bottom: 25px;
+          // padding-bottom: 25px;
           // margin: 0px 0px 0px 15px;
           // padding-left: 10px;
           transition: all 500ms linear;
@@ -1452,6 +1456,7 @@ export default {
         height: 35px;
         line-height: 30px;
         // padding-left: 10px;
+        transition: all 500ms linear;
       }
       .line-wraps {
         height: 50px; // border-top: 1px #e4e4f4 solid;

@@ -55,16 +55,20 @@ export default {
         payStatus: null,
         ids: null
       },
+      kidForm: {
+        kid: ''
+      },
       gidForm: { gids: null }
     }
   },
   methods: {
-    ...mapActions('auth', ['setGid']),
+    ...mapActions('auth', ['setGid', 'setKid']),
     goCourseInfo(item, index) {
       this.kidForm.kids = item.curriculum_id
       persistStore.set('kid', item.curriculum_id)
       this.setKid(this.kidForm)
-      this.$router.push('/course/pages/coursedetail')
+      persistStore.set('curriculumId', item.curriculum_id)
+      this.$router.push('/course/coursedetail')
     },
     selectPayApply(item, index) {
       persistStore.set('order', item.id)

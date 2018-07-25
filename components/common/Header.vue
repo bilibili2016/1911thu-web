@@ -873,7 +873,11 @@ export default {
     },
     goSearch(item) {
       this.search = this.search.replace(/[ ]/g, '')
-      if (this.search !== '') {
+      if (
+        !/[@#\$%\^&\*]+/g.test(this.search) &&
+        this.search !== '' &&
+        this.search.length < 30
+      ) {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
           case '/course/search':
@@ -884,6 +888,11 @@ export default {
             // window.open(window.location.origin + '/course/search')
             break
         }
+      } else {
+        this.$message({
+          type: 'error',
+          message: '请输入不包含特殊字符且小于30个字符的关键词！'
+        })
       }
     },
     goSearchd(item) {
