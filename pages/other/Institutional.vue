@@ -298,14 +298,14 @@ export default {
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          if (!this.company.userID) {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: '您还没有登录，请先登录后再提交吧！'
-            })
-            return false
-          }
+          // if (!this.company.userID) {
+          //   this.$message({
+          //     showClose: true,
+          //     type: 'error',
+          //     message: '您还没有登录，请先登录后再提交吧！'
+          //   })
+          //   return false
+          // }
           return new Promise((resolve, reject) => {
             home.addCompany(this.company).then(response => {
               if (response.status === 0) {

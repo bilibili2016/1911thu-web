@@ -102,7 +102,8 @@ export default {
         categoryIdb: null,
         sortBy: 1,
         pages: 1,
-        limits: 8
+        limits: 8,
+        isFree: 1
       },
       cidform: {
         cids: ''
