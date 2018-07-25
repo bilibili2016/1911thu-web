@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container courseDetail">
     <div class="main clearfix">
       <!-- 面包屑 收藏分享 -->
       <div class="main-crumb">
@@ -108,7 +108,7 @@
                 </div>
               </div>
               <div class="pagination course-style">
-                <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
+                <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
               </div>
             </el-dialog>
           </div>

@@ -6,7 +6,7 @@
       <v-card :famousList="famousList" :config="config" :linkSeven='linkSeven' @checkdetail="checkdetail" class="new-card-on"></v-card>
     </div>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
+      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
   </div>
 </template>
