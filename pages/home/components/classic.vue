@@ -1,8 +1,6 @@
 <template>
   <div class="bg">
     <el-row class="center">
-      <!-- <v-title :data="titleThree"></v-title> -->
-      <!-- <v-card ref="card" :data="classicData" :config="config"></v-card> -->
       <h1 class="clearfix">
         <span class="title">{{titleThree}}</span>
         <span class="fr moredata" @click="getMore(linktwo)">查看更多</span>
@@ -39,7 +37,7 @@ import CustomTitle from '@/components/common/Title.vue'
 import CustomCard from '@/components/common/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 export default {
-  props: ['config', 'classicData', 'titleThree', 'linktwo'],
+  props: ['classicData', 'titleThree', 'linktwo'],
   components: {
     'v-title': CustomTitle,
     'v-card': CustomCard,

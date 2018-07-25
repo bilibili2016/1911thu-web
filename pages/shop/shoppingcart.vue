@@ -34,7 +34,7 @@
             <p>您的购物车为空</p>
           </div>
         </div>
-        <div class="tips">
+        <div class="tips" id="tips">
           <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
         </div>
         <div class="tableFooter" v-if="courseList && courseList.length > 0">
@@ -103,6 +103,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
+      // scroll: '',
       isNoMsg: false,
       loding: true,
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
@@ -220,6 +221,8 @@ export default {
 
     this.$refs.shopCart.style.minHeight =
       windowHeight - headerHeight - footerHeight + 'px'
+
+    // window.addEventListener('scroll', this.addClass)
   },
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
@@ -593,6 +596,23 @@ export default {
             })
           })
         }
+      }
+    },
+    //tableFooter根据页面滚动位置设置定位
+    addClass() {
+      let tipsHeight = document.getElementById('tips').offsetTop
+      console.log(tipsHeight)
+
+      this.scroll =
+        document.documentElement.scrollTop || document.body.scrollTop
+      if (this.scroll >= tipsHeight) {
+        this.istopFixed = true
+        this.istopRelative = false
+        this.istopBottom = true
+      } else {
+        this.istopFixed = false
+        this.istopRelative = true
+        this.istopBottom = false
       }
     }
   }

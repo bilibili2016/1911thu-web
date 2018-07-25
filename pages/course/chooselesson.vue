@@ -40,10 +40,10 @@
         <v-nothing></v-nothing>
       </div>
     </div>
-    <div class="allChecked" @click="allChecked">全选</div>
+    <div v-show="categoryData.length !=0" class="allChecked" @click="allChecked">全选</div>
     <!-- <v-filter></v-filter> -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
+      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
     </div>
     <v-unlogged v-if="!isAuthenticated"></v-unlogged>
   </div>
@@ -102,7 +102,8 @@ export default {
         categoryIdb: null,
         sortBy: 1,
         pages: 1,
-        limits: 8
+        limits: 8,
+        isFree: 1
       },
       cidform: {
         cids: ''

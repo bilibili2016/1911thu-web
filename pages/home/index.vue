@@ -7,7 +7,7 @@
       <!-- 最新课程 -->
       <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 精品好课 -->
-      <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
+      <v-classic :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 名师智库 -->
@@ -79,11 +79,6 @@ export default {
         card_type: 'profile',
         card: 'home',
         new: 'true'
-      },
-      configZ: {
-        card_type: 'profile',
-        card: 'home',
-        new: 'false'
       },
       infoOne: {
         card_type: 'infoOne'
