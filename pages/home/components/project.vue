@@ -60,10 +60,6 @@ export default {
         cursor: pointer;
         transition: all 300ms;
         position: relative;
-
-        &:first-child {
-          cursor: auto;
-        }
         img {
           width: 275px;
           height: 100px;
