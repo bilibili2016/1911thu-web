@@ -727,7 +727,7 @@ export default {
     goDetail(news) {
       this.nidForm.nids = news.id
       this.setNid(this.nidForm)
-      window.open(window.location.origin + '/news/detail')
+      window.open(window.location.origin + '/news/' + news.id)
     },
     openDetail() {
       window.open(window.location.origin + '/course/coursedetail')

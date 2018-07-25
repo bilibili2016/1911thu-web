@@ -105,7 +105,7 @@ export default {
   },
   mounted() {
     var $config = {
-      url: 'http://edu.1911thu.com/news/detail/' + this.nid
+      url: 'http://edu.1911thu.com/news/' + this.nid
     }
     socialShare('.social-share', $config)
     this.getNewInfoDetail(this.nid)
