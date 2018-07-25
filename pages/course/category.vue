@@ -18,7 +18,7 @@
         <v-nothing></v-nothing>
       </div>
     </div>
-    <v-page :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
+    <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
   </div>
 </template>
 
@@ -175,6 +175,8 @@ export default {
       home.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
+        console.log(this.pagemsg.total)
+
         this.loadCourse = false
       })
     },
