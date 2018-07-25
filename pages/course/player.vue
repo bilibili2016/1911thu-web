@@ -1,3 +1,11 @@
+/*
+ * @Author: Allasm98.zhaoliang
+ * @Date: 2018-07-25 11:17:27
+ * @Last Modified by: Allasm98.zhaoliang
+ * @Last Modified time: 2018-07-25 11:42:23
+  * @File Type:
+ * @Describe:
+ */
 <template>
   <div class="playerBox clearfix" ref="playerBox">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
@@ -486,6 +494,9 @@ export default {
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
+        console.log('123')
+        console.log(this.curriculumPrivilege, '这是this.curriculumPrivilege')
+
         that.interval = setInterval(() => {
           if (that.seconds <= 0) {
             that.seconds = 1
@@ -528,6 +539,7 @@ export default {
               }
             })
           } else {
+            console.log('要播放了')
             if (response.data.playAuthInfo.videoViewType == false) {
               // console.log(player, '这是player')
               player.loadVideoByID({
