@@ -18,13 +18,13 @@
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-          <el-card shadow="never" body-style="padding: 0;" class="itemBox" @click.native="selectCid2(card,index)">
+          <el-card shadow="never" body-style="padding: 0;" :class="['itemBox',{'learn':config.mask}]" @click.native="selectCid2(card,index)">
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
             <!-- @click="goLink('course/coursedetail')" -->
             <div class="mask-style" @click="openDetail()">
-              <img :src="jinImg" alt="" class="jin-style">
+              <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
             </div>
             <div class="bgImgs">
               <img :src="card.picture" alt="">
@@ -49,11 +49,11 @@
             <el-row>
               <!-- 名字 -->
               <div class="item">
-                <p :class="['itemBox-name',{'itemBoxTitle':config.card === 'home'?true:false}]" @click="openDetail()">
+                <p :class="['itemBox-name','itemBoxTitle',{'itemBoxTitle':config.card === 'home'?true:false}]" @click="openDetail()">
                   <span :class="{'title':config.card === 'home'?true:false}">{{card.title}}</span>
                   <span v-if="config.card === 'home'" class="deputyTitle fl">{{card.deputy_title}}</span>
                   <span v-if="config.card === 'home'&&card.is_free == '1'" class="deputyTitle fr" style="padding-right:15px;">￥{{card.present_price}}</span>
-                  <span v-if="card.is_free === '2'" class="deputyTitle fr" style="padding-right:15px;">免费</span>
+                  <span v-if="card.is_free === '2'&&config.card!=='overtime'&&config.card!=='already'&&!config.mask" class="deputyTitle fr" style="padding-right:15px;">免费</span>
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
@@ -87,7 +87,7 @@
               </div>
               <div v-if="config.card==='already' ">
                 <div class="line-centers ">
-                  <div>已完成100%</div>
+                  <div class="already">已完成100%</div>
                 </div>
               </div>
               <div class="readyImg " v-if="config.card==='already' ">
@@ -109,7 +109,7 @@
     <template v-if="config.card_type==='shoucang' ">
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
-          <el-card shadow="never " body-style="padding: 0; " class="itemBox ">
+          <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
 
             <!-- 选课使用的勾选 -->
             <el-checkbox v-model="card.is_checked " @change="selCheckboxChange(card,index) " style="position:absolute;top:10px;right:10px; " v-if="config.types==='buy' "></el-checkbox>
@@ -1131,7 +1131,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-left: 16px;
+  transition: all 500ms linear;
 }
 .new-style {
   img {
@@ -1274,6 +1274,20 @@ export default {
       .itemBox-info {
         transition: all 500ms linear;
         padding: 0px 0px 0px 15px;
+      }
+      .learn {
+        .line-wraps .line-centers {
+          .studyPercent {
+            padding: 0px 0px 0px 15px;
+          }
+        }
+      }
+
+      .deputyTitleOverTime {
+        margin-left: 16px;
+      }
+      .already {
+        margin-left: 16px;
       }
       .line-wrap {
         transition: all 500ms linear;
@@ -1516,6 +1530,9 @@ export default {
           font-family: MicrosoftYaHei;
           color: rgba(136, 136, 136, 1);
         }
+        .already {
+          transition: all 500ms linear;
+        }
       }
       .line-center img {
         width: 22px;
@@ -1526,6 +1543,29 @@ export default {
         font-family: MicrosoftYaHei;
         color: rgba(109, 104, 127, 1);
         border-radius: 50%;
+      }
+      &.learn {
+        height: auto;
+        .item .itemBox-name {
+          margin: 20px 0;
+        }
+        .line-wraps {
+          .line-centers {
+            .studyPercent {
+              transition: all 500ms linear;
+            }
+            .studyIsFree {
+              margin-right: 18px;
+            }
+          }
+        }
+      }
+      &.collect {
+        height: auto;
+        padding-bottom: 15px;
+        .item .itemBox-name {
+          padding-top: 10px;
+        }
       }
     }
   }
