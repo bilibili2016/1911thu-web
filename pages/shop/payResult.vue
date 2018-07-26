@@ -49,7 +49,7 @@ export default {
       },
       payCompleteData: {},
       gidForm: { gids: null },
-      seconds: 3,
+      seconds: 5,
       link: null,
       interval: null
     }
