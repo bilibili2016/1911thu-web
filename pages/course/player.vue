@@ -24,13 +24,13 @@
           </div>
         </span>
         <span class="fl problem" @click="showRpt">报告问题</span>
-        <span class="fr share" style="position:reletive">
+        <!-- <span class="fr share" style="position:reletive">
           <i class="el-icon-share "></i>分享
           <span class="shareIcond">
             <span class="social-share" data-sites="weibo,qq,wechat"></span>
           </span>
 
-        </span>
+        </span> -->
         <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
           <i class="el-icon-star-on"></i>
           <span>收藏</span>
@@ -721,11 +721,12 @@ export default {
   mounted() {
     this.videoState = document.getElementById('movd')
     this.resize()
-    var $config = {
-      url: 'http://www.1911edu.com/'
-    }
+    // 分享暂时注释
+    // var $config = {
+    //   url: 'http://www.1911edu.com/'
+    // }
 
-    socialShare('.social-share', $config)
+    // socialShare('.social-share', $config)
     window.addEventListener('resize', this.resize)
     // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'

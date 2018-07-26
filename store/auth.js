@@ -150,9 +150,7 @@ export const actions = {
       let did = dids
 
       persistStore.set('did', did)
-      commit(MUTATION.setDid, {
-        did
-      })
+      commit(MUTATION.setDid, { did })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -166,9 +164,7 @@ export const actions = {
     try {
       let token = tokens
       persistStore.set('token', token)
-      commit(MUTATION.signIn, {
-        token
-      })
+      commit(MUTATION.signIn, { token })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -178,7 +174,6 @@ export const actions = {
     }
     return token
   },
-
   async signIn({ commit, state }, { phonenum, ectpwd, loginTypes }) {
     let user
     try {
@@ -194,9 +189,7 @@ export const actions = {
         token = tokens.data.token
         persistStore.set('token', token)
         // 更新 state
-        commit(MUTATION.signIn, {
-          token
-        })
+        commit(MUTATION.signIn, { token })
       }
       return tokens
     } catch (e) {
@@ -208,7 +201,34 @@ export const actions = {
     }
     return user
   },
-
+  // 手机验证码     登录
+  async signInmobile({ commit, state }, { phones, loginTypes, codes }) {
+    let user
+    try {
+      let tokens = await auth.signInsmobile({
+        phones,
+        loginTypes,
+        codes
+      })
+      // if (!tokens.data.token) {
+      //   return tokens
+      // }
+      if (tokens.status === 0) {
+        token = tokens.data.token
+        persistStore.set('token', token)
+        // 更新 state
+        commit(MUTATION.signIn, { token })
+      }
+      return tokens
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return user
+  },
   async signOut({ commit, state }) {
     try {
       await auth.signOut()
@@ -219,20 +239,13 @@ export const actions = {
       log.error(e)
     }
   },
-
   async companySignIn({ commit, state }, { email, password }) {
     let user
     try {
-      let tokens = await auth.companySignIn({
-        email,
-        password
-      })
+      let tokens = await auth.companySignIn({ email, password })
       token = 'JWT ' + tokens.token
       persistStore.set('token', token)
-      commit(MUTATION.signIn, {
-        token,
-        user
-      })
+      commit(MUTATION.signIn, { token, user })
       return tokens
     } catch (e) {
       if (e instanceof ServerError) {
@@ -242,8 +255,7 @@ export const actions = {
       }
     }
     return user
-  },
-  // 设置点击tab分类大类id 小类id 以及大类的index
+  }, // 设置点击tab分类大类id 小类id 以及大类的index
   async setCid({ commit, state }, { cids, indexs, pids, kids }) {
     try {
       let [cid, cindex, pid, kid] = [cids, indexs, pids, kids]
@@ -251,12 +263,7 @@ export const actions = {
       persistStore.set('cindex', cindex)
       persistStore.set('pid', pid)
       persistStore.set('kid', kid)
-      commit(MUTATION.setCid, {
-        cid,
-        cindex,
-        pid,
-        kid
-      })
+      commit(MUTATION.setCid, { cid, cindex, pid, kid })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -265,15 +272,12 @@ export const actions = {
       }
     }
     return cid
-  },
-  // 设置category 传入类型 （tab进入,经典课程，免费课程,选课)
+  }, // 设置category 传入类型 （tab进入,经典课程，免费课程,选课)
   async setCg({ commit, state }, { cgs }) {
     try {
       let cg = cgs
       persistStore.set('cg', cg)
-      commit(MUTATION.setCg, {
-        cg
-      })
+      commit(MUTATION.setCg, { cg })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -287,9 +291,7 @@ export const actions = {
     try {
       let pid = pids
       persistStore.set('pid', pid)
-      commit(MUTATION.setPid, {
-        pid
-      })
+      commit(MUTATION.setPid, { pid })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -303,9 +305,7 @@ export const actions = {
     try {
       let gid = gids
       persistStore.set('gid', gid)
-      commit(MUTATION.setGid, {
-        gid
-      })
+      commit(MUTATION.setGid, { gid })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -319,9 +319,7 @@ export const actions = {
     try {
       let hsg = hsgs
       persistStore.set('hsg', hsg)
-      commit(MUTATION.setHsg, {
-        hsg
-      })
+      commit(MUTATION.setHsg, { hsg })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -335,9 +333,7 @@ export const actions = {
     try {
       let nid = nids
       persistStore.set('nid', nid)
-      commit(MUTATION.setNid, {
-        nid
-      })
+      commit(MUTATION.setNid, { nid })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -351,9 +347,7 @@ export const actions = {
     try {
       let kid = kids
       persistStore.set('kid', kid)
-      commit(MUTATION.setKid, {
-        kid
-      })
+      commit(MUTATION.setKid, { kid })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -367,9 +361,7 @@ export const actions = {
     try {
       let isShowTip = isShowTips
       persistStore.set('isShowTip', isShowTip)
-      commit(MUTATION.setIsShowTip, {
-        isShowTip
-      })
+      commit(MUTATION.setIsShowTip, { isShowTip })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -383,9 +375,7 @@ export const actions = {
     try {
       let productsNum = pn
       persistStore.set('productsNum', productsNum)
-      commit(MUTATION.setProductsNum, {
-        productsNum
-      })
+      commit(MUTATION.setProductsNum, { productsNum })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -399,9 +389,7 @@ export const actions = {
     try {
       let number = numbers
       persistStore.set('number', number)
-      commit(MUTATION.setNumber, {
-        number
-      })
+      commit(MUTATION.setNumber, { number })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -415,9 +403,7 @@ export const actions = {
     try {
       let index = indexs
       persistStore.set('index', index)
-      commit(MUTATION.setIndex, {
-        index
-      })
+      commit(MUTATION.setIndex, { index })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
@@ -431,9 +417,7 @@ export const actions = {
     try {
       let tid = tids
       persistStore.set('tid', tid)
-      commit(MUTATION.setTid, {
-        tid
-      })
+      commit(MUTATION.setTid, { tid })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)

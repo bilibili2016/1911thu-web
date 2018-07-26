@@ -104,8 +104,7 @@
         </div>
       </div>
     </template>
-    <!-- 我的收藏 -->
-    <!-- profile个人信息模板 新上好课模板 我要选课-->
+    <!-- 我要选课 我的收藏-->
     <template v-if="config.card_type==='shoucang' ">
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
@@ -148,10 +147,17 @@
                     <span v-if="config.card === 'home'">
                       {{card.study_time}}学时
                     </span>
+                    <!-- <span class="itemBox-num" v-if="config.card === 'home'">
+                      <img :src="numSrc" alt="">
+                      <span>{{card.study_number}}</span>
+                      <el-rate disabled v-model="card.score" class="itemBox-rate fr" v-if="config.card === 'home'"></el-rate>
+                    </span> -->
                     <span class="itemBox-num" v-if="config.card === 'home'">
                       <img :src="numSrc" alt="">
                       <span>{{card.study_number}}</span>
-                      <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                    </span>
+                    <span class="" style="display:inline-block;float:right;padding-right:15px;">
+                      <el-rate disabled v-model="card.score" class="itemBox-rate fr" v-if="config.card === 'home'"></el-rate>
                     </span>
                   </p>
                 </div>
@@ -2892,6 +2898,69 @@ export default {
       img {
         width: 160px;
         height: 160px;
+      }
+    }
+  }
+}
+//我的课程
+.my-course {
+  .card-category {
+    .card-list {
+      &:hover {
+        box-shadow: none;
+        transition: none;
+
+        .mask-style {
+          opacity: 0;
+        }
+        .bgImgs img {
+          width: 250px;
+          height: 160px;
+
+        }
+        .itemBox-name.itemBoxTitle {
+          transition: none;
+          padding: 0;
+          span {
+              padding: 0;
+            }
+        }
+
+        .itemBox-info {
+          transition: none;
+          padding: 0;
+        }
+        .learn {
+          .line-wraps .line-centers {
+            .studyPercent {
+              padding: 0;
+              padding-bottom: 10px;
+              transition: none;
+            }
+          }
+        }
+
+        .deputyTitleOverTime {
+          margin-left: 0;
+        }
+        .already {
+          margin-left: 0;
+        }
+        .line-wrap {
+          transition: none;
+          padding: 0;
+        }
+        .title {
+          transition: none;
+          color: #6d687f;
+          // color: #8f4acb !important;
+        }
+
+
+        // .line-wrap {
+        //   transition: all 500ms linear;
+        //   padding: 0px 0px 0px 15px;
+        // }
       }
     }
   }

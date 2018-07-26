@@ -17,13 +17,14 @@
                 <!-- {{isCollection}} -->
                 <span>收藏 </span>
               </span>
-              <span>
+              <!-- 分享暂时注释 -->
+              <!-- <span>
                 <i class="el-icon-share"></i>
                 <span> 分享 </span>
                 <div class="shareIcons">
-                  <!-- <div class="social-share" data-sites="weibo,qq,wechat" style=""></div> -->
+                  <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
                 </div>
-              </span>
+              </span> -->
             </div>
           </div>
         </div>
@@ -355,8 +356,6 @@ export default {
           this.pagemsg.total = response.data.pageCount
           this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
-          console.log(this.commentator)
-
           this.commentators = response.data.evaluateList
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           let totalEvaluateInfo = response.data.totalEvaluateInfo
@@ -478,7 +477,6 @@ export default {
   },
   mounted() {
     this.initAll()
-    console.log(33333)
   }
 }
 </script>
