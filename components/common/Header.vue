@@ -109,12 +109,8 @@
                 <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
 
                 <div @click="forget">忘记密码?</div>
-<<<<<<< HEAD
-                <el-button @click="signIns('loginData')">登录</el-button>
-=======
                 <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
                 <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
->>>>>>> 037afe49886838cac6b438088cbf73d08b76ac31
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
