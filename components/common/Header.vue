@@ -121,30 +121,6 @@
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-<<<<<<< HEAD
-                <!-- <! <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div>  -->
-                <!-- <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
-              </el-form-item>  -->
-
-                <el-row>
-                  <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
-
-                  <div @click="forget">忘记密码?</div>
-                  <el-button @click="signIns('loginData')">登录</el-button>
-                </el-row>
-            </el-form>
-            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
-          </el-tab-pane>
-          <!-- 注册表单 -->
-          <el-tab-pane label="注册" name="register">
-            <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
-              <el-form-item prop="phones">
-                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
-              </el-form-item>
-              <el-form-item prop="codes">
-                <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-=======
->>>>>>> origin/liyr
                 <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
                 <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
                 <!--  -->
