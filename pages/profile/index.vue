@@ -295,15 +295,18 @@ export default {
       },
       configOne: {
         card_type: 'profile',
-        card: 'learning'
+        card: 'learning',
+        mask: true
       },
       configTwo: {
         card_type: 'profile',
-        card: 'already'
+        card: 'already',
+        mask: true
       },
       configFour: {
         card_type: 'profile',
-        card: 'overtime'
+        card: 'overtime',
+        mask: true
       },
       newData: [],
       styleForm: {

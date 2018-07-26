@@ -3,7 +3,8 @@
   position: relative;
   .contain {
     padding-bottom: 70px;
-    background: url('http://papn9j3ys.bkt.clouddn.com/orderBanners.png') no-repeat;
+    background: url('http://papn9j3ys.bkt.clouddn.com/orderBanners.png')
+      no-repeat;
     background-position: top center;
     background-size: 100%;
   }
@@ -102,6 +103,12 @@
       }
       .goBack {
         cursor: pointer;
+      }
+      .editOutline {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-bottom: -6px;
       }
     }
     .goods {

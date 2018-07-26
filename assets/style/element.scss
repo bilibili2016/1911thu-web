@@ -1088,8 +1088,8 @@
     }
   }
   .el-dialog {
-    width: 1000px !important;
-    height: 644px;
+    width: 800px !important;
+    // height: 500px;
     background: rgba(255, 255, 255, 1);
     border-radius: 10px;
     overflow: hidden;
@@ -1106,8 +1106,24 @@
   .el-dialog__body {
     padding: 0px 20px;
     & > div {
-      height: 450px;
+      // height: 450px;
       overflow: hidden;
+    }
+    .topDiv {
+      // height: 380px;
+    }
+    .pagination {
+      height: 70px;
+      // margin-top: 19px;
+      .el-pagination {
+        margin-top: 19px;
+      }
+    }
+    .course-style {
+      margin-top: 0;
+    }
+    .container .main .evaluate-tag .personal .dialog-line {
+      width: none;
     }
   }
   .el-dialog__headerbtn .el-dialog__close {
@@ -1348,5 +1364,12 @@ input:-webkit-autofill {
   }
   .el-card {
     border-radius: 0 !important;
+  }
+}
+.el-rate__icon {
+  &:hover {
+    color: #c0c4cc !important;
+
+    transform: scale(1);
   }
 }
