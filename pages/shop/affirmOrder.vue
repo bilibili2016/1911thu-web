@@ -20,13 +20,14 @@
           <div class="company" v-show="!person">
             <h4 class="clearfix">
               <span class="fl">机构信息：</span>
-              <span class="fr addCompany" v-if="flag" @click="openCompanyInfo">
-                <i class="el-icon-circle-plus-outline"></i> 添加机构信息</span>
               <!-- <span class="fr addCompany" v-else @click="openCompanyInfo">
                 <i class="el-icon-edit-outline"></i> 修改</span> -->
             </h4>
             <div class="cpnInfo" v-if="flag">
-              <p>暂无信息，请您添加。</p>
+              <p class="addcp">
+                <span class="fl addCompany" v-if="flag" @click="openCompanyInfo">
+                  <i class="el-icon-circle-plus-outline"></i> 添加机构信息</span>
+                暂无信息，请您添加。</p>
             </div>
             <div class="cpnInfo" v-else>
               <!-- <p class="cpnInfoLi">

@@ -131,10 +131,6 @@ export default {
     selectAllPid() {
       this.categoryForm.pages = 1
       this.cidform.pids = '0'
-      this.cidform.cids = '0'
-      this.cidform.indexs = 0
-      this.pidData = this.cidData[0]
-      this.cidBg = 0
       this.pidBg = 0
 
       this.setCid(this.cidform)
@@ -179,6 +175,7 @@ export default {
       home.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
+        // console.log(this.pagemsg.total)
 
         this.loadCourse = false
       })
