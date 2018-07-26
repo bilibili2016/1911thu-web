@@ -2902,4 +2902,67 @@ export default {
     }
   }
 }
+//我的课程
+.my-course {
+  .card-category {
+    .card-list {
+      &:hover {
+        box-shadow: none;
+        transition: none;
+
+        .mask-style {
+          opacity: 0;
+        }
+        .bgImgs img {
+          width: 250px;
+          height: 160px;
+
+        }
+        .itemBox-name.itemBoxTitle {
+          transition: none;
+          padding: 0;
+          span {
+              padding: 0;
+            }
+        }
+
+        .itemBox-info {
+          transition: none;
+          padding: 0;
+        }
+        .learn {
+          .line-wraps .line-centers {
+            .studyPercent {
+              padding: 0;
+              padding-bottom: 10px;
+              transition: none;
+            }
+          }
+        }
+
+        .deputyTitleOverTime {
+          margin-left: 0;
+        }
+        .already {
+          margin-left: 0;
+        }
+        .line-wrap {
+          transition: none;
+          padding: 0;
+        }
+        .title {
+          transition: none;
+          color: #6d687f;
+          // color: #8f4acb !important;
+        }
+
+
+        // .line-wrap {
+        //   transition: all 500ms linear;
+        //   padding: 0px 0px 0px 15px;
+        // }
+      }
+    }
+  }
+}
 </style>

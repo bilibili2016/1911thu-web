@@ -109,78 +109,81 @@
                 <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
 
                 <div @click="forget">忘记密码?</div>
-                <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
-                <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
-              </el-row>
-            </el-form>
-            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
-          </el-tab-pane>
-          <!-- 注册表单 -->
-          <el-tab-pane label="注册" name="register">
-            <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
-              <el-form-item prop="phones">
-                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
-              </el-form-item>
-              <el-form-item prop="codes">
-                <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
-                <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
-                <!--  -->
-              </el-form-item>
-              <el-form-item prop="passwords">
-                <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
-              </el-form-item>
-              <!-- <el-form-item prop="companyCodes">
+                <<<<<<< HEAD <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
+      <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
+      =======
+      <el-button @click="signIns('loginData')">登录</el-button>
+      >>>>>>> origin/liyr
+      </el-row>
+      </el-form>
+      <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
+      </el-tab-pane>
+      <!-- 注册表单 -->
+      <el-tab-pane label="注册" name="register">
+        <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
+          <el-form-item prop="phones">
+            <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
+          </el-form-item>
+          <el-form-item prop="codes">
+            <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
+            <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
+            <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
+            <!--  -->
+          </el-form-item>
+          <el-form-item prop="passwords">
+            <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
+          </el-form-item>
+          <!-- <el-form-item prop="companyCodes">
                 <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
                 <span class="bindCompany">(可选)</span>
               </el-form-item> -->
-              <el-form-item prop="checked">
-                <el-checkbox-group v-model="registerData.checked">
-                  <el-checkbox label="同意" name="checked"></el-checkbox>
-                </el-checkbox-group>
-              </el-form-item>
-              <el-row>
-                <el-button :disabled="isClick" class="registerUser " :class="{noSubmit:isHasClass}" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
-              </el-row>
-            </el-form>
-            <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
-            <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
-          </el-tab-pane>
-        </el-tabs>
-      </div>
-      <!-- 微信登录 -->
-      <div class="lrFrame wechatLogin" v-show="wechatLogin">
-        <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
-          <h4 class="clearfix">
-            <span>绑定手机账号</span>
-          </h4>
-          <el-form-item prop="tel">
-            <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
+          <el-form-item prop="checked">
+            <el-checkbox-group v-model="registerData.checked">
+              <el-checkbox label="同意" name="checked"></el-checkbox>
+            </el-checkbox-group>
           </el-form-item>
-          <el-form-item prop="code">
-            <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
-            <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
-          </el-form-item>
-          <!-- <el-form-item prop="companyCodes">
+          <el-row>
+            <el-button :disabled="isClick" class="registerUser " :class="{noSubmit:isHasClass}" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
+          </el-row>
+        </el-form>
+        <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
+        <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
+      </el-tab-pane>
+      </el-tabs>
+    </div>
+    <!-- 微信登录 -->
+    <div class="lrFrame wechatLogin" v-show="wechatLogin">
+      <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
+        <h4 class="clearfix">
+          <span>绑定手机账号</span>
+        </h4>
+        <el-form-item prop="tel">
+          <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
+        </el-form-item>
+        <el-form-item prop="code">
+          <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
+          <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
+        </el-form-item>
+        <!-- <el-form-item prop="companyCodes">
             <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
             <span class="bindCompany">(可选)</span>
           </el-form-item> -->
-          <el-row>
-            <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
-          </el-row>
-        </el-form>
-        <div class="scanCode" v-show="scanCodeShow">
-          <h4 class="clearfix"></h4>
-          <!-- el-icon-loading -->
-          <div class="wxchatIMG" id="wxchatIMG"></div>
-        </div>
-        <div class="bindSuccess" v-show="bindSuccessShow">
-          <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
-          <h5>手机账号绑定成功</h5>
-          <p>返回登录 3S</p>
-        </div>
+        <el-row>
+          <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
+        </el-row>
+      </el-form>
+      <div class="scanCode" v-show="scanCodeShow">
+        <h4 class="clearfix"></h4>
+        <!-- el-icon-loading -->
+        <div class="wxchatIMG" id="wxchatIMG"></div>
+      </div>
+      <div class="bindSuccess" v-show="bindSuccessShow">
+        <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
+        <h5>手机账号绑定成功</h5>
+        <p>返回登录 3S</p>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -222,9 +225,9 @@ export default {
       isloading: false, //注册按钮点击之后loading（体验）
       codeInterval: null, //注册获取验证码定时循环
       codeClick: false, //判断是否点击过 获取验证码（防重）
-      isClick: false, //判断是否点击过注册按钮（防重）
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
       isClick: true, //判断是否点击过注册按钮（防重）
+      isClick: false, //判断是否点击过注册按钮（防重）
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
