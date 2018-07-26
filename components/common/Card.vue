@@ -2907,16 +2907,16 @@ export default {
           width: 250px;
           height: 160px;
         }
-        .itemBox-name{
+        .itemBox-name {
           transition: none;
           padding: 0;
           &.itemBoxTitle {
-          transition: none;
-          padding: 0;
-          span {
+            transition: none;
             padding: 0;
+            span {
+              padding: 0;
+            }
           }
-        }
         }
 
         .itemBox-info {
@@ -2945,14 +2945,8 @@ export default {
         }
         .title {
           transition: none;
-          color: #6d687f;
-          // color: #8f4acb !important;
+          color: #6d687f !important;
         }
-
-        // .line-wrap {
-        //   transition: all 500ms linear;
-        //   padding: 0px 0px 0px 15px;
-        // }
       }
     }
   }
