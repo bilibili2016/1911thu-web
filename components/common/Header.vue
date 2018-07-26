@@ -300,6 +300,16 @@ export default {
         checked: false,
         companyCodes: ''
       },
+      // 手机验证码登录数据
+      registerMobileData: {
+        phones: '',
+        passwords: '',
+        ectpwd: '',
+        types: 3,
+        codes: '',
+        checked: false,
+        companyCodes: ''
+      },
       // 注册表单验证
       registRules: {
         phones: [
