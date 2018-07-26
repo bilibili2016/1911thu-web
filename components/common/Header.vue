@@ -92,7 +92,7 @@
             <!-- 账号密码登录 end-->
 
             <!-- 手机验证码登录 start-->
-            <el-form :model="registerMobileData" status-icon :rules="registRules" ref="loginDatamobile" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === true">
+            <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === true">
               <!-- 手机验证码登录 -->
               <div v-if="mobileloginmsg === true">
                 <el-form-item prop="phones">
@@ -397,6 +397,27 @@ export default {
           {
             required: true,
             message: '请输入账户密码',
+            trigger: 'blur'
+          }
+        ]
+      },
+      // 短信登录表单验证
+      loginDXRules: {
+        phones: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          {
+            validator: checkPhone,
+            trigger: 'blur'
+          }
+        ],
+        codes: [
+          {
+            required: true,
+            message: '请输入验证码',
             trigger: 'blur'
           }
         ]
