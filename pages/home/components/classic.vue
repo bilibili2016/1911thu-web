@@ -6,12 +6,12 @@
         <span class="fr moredata" @click="getMore(linktwo)">查看更多</span>
       </h1>
       <div class="goodCourse" :data="classicData">
-        <div class="courseLi clearfix" v-for="(course,index) in classicData" :key="index">
+        <div class="courseLi clearfix" v-for="(course,index) in classicData" :key="index" @click="courseInfo(course)">
           <div class="fl">
-            <img :src="course.teacher_picture" alt="" @click="courseInfo(course)">
+            <img :src="course.teacher_picture" alt="">
           </div>
           <div class="fr courseInfo">
-            <h4 @click="courseInfo(course)">{{course.title}}</h4>
+            <h4>{{course.title}}</h4>
             <h5>{{course.deputy_title}}</h5>
 
             <p v-if="course.is_free === '1'" class="money">￥{{course.present_price}}</p>
@@ -84,6 +84,7 @@ export default {
     // border-radius: 16px;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     transition: all 400ms;
+    cursor: pointer;
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
       padding: 10px;
@@ -101,10 +102,8 @@ export default {
     div.fl img {
       width: 250px;
       height: 160px;
-      // border-radius: 16px;
       overflow: hidden;
       transition: all 400ms;
-      cursor: pointer;
     }
     .courseInfo {
       width: 283px;
@@ -112,17 +111,11 @@ export default {
       transition: all 400ms;
       h4 {
         width: 235px;
-        // height: 47px;
         margin-top: 5px;
         color: #1c1f21;
         font-size: 16px;
         line-height: 22px;
         transition: all 400ms;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
-        cursor: pointer;
-
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
