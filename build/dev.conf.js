@@ -37,12 +37,18 @@ config.analyze = {
       src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
       async: true
     },
-    {
-      src:
-        'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
-      async: true
-    }
+    { src: 'http://pcgdozq49.bkt.clouddn.com/social-share.min.js', async: true }
   ]),
   (config.render = { resourceHints: false })
+// {
+//   src:
+//     'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
+//   async: true
+// }
+// {
+//   src:
+//     'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
+//   async: true
+// }
 
 module.exports = config
