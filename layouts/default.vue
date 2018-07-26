@@ -25,7 +25,7 @@ export default {
     ...mapState('auth', ['hsg'])
   },
   mounted() {
-    console.log(window.location.origin, '123')
+    // console.log(window.location.origin, '123')
   }
 }
 </script>

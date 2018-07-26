@@ -104,8 +104,7 @@
         </div>
       </div>
     </template>
-    <!-- 我的收藏 -->
-    <!-- profile个人信息模板 新上好课模板 我要选课-->
+    <!-- 我要选课 我的收藏-->
     <template v-if="config.card_type==='shoucang' ">
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
@@ -148,10 +147,17 @@
                     <span v-if="config.card === 'home'">
                       {{card.study_time}}学时
                     </span>
+                    <!-- <span class="itemBox-num" v-if="config.card === 'home'">
+                      <img :src="numSrc" alt="">
+                      <span>{{card.study_number}}</span>
+                      <el-rate disabled v-model="card.score" class="itemBox-rate fr" v-if="config.card === 'home'"></el-rate>
+                    </span> -->
                     <span class="itemBox-num" v-if="config.card === 'home'">
                       <img :src="numSrc" alt="">
                       <span>{{card.study_number}}</span>
-                      <el-rate disabled v-model="card.score" class="itemBox-rate" v-if="config.card === 'home'"></el-rate>
+                    </span>
+                    <span class="" style="display:inline-block;float:right;padding-right:15px;">
+                      <el-rate disabled v-model="card.score" class="itemBox-rate fr" v-if="config.card === 'home'"></el-rate>
                     </span>
                   </p>
                 </div>

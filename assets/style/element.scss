@@ -568,12 +568,11 @@
 // .el-tabs__active-bar{
 //   width: 30px!important;
 // }
-.collect {
-  .el-rate__icon {
-    font-size: 18px;
-  }
-}
-
+// .collect {
+//   .el-rate__icon {
+//     font-size: 18px;
+//   }
+// }
 // 修改默认button按钮 颜色
 .common-button {
   .el-button--primary.is-plain {
@@ -1098,8 +1097,7 @@
     }
   }
   .el-dialog {
-    width: 800px !important;
-    // height: 500px;
+    width: 800px !important; // height: 500px;
     background: rgba(255, 255, 255, 1);
     border-radius: 10px;
     overflow: hidden;
@@ -1115,21 +1113,15 @@
   }
   .el-dialog__body {
     padding: 0px 20px;
-<<<<<<< HEAD
     &>div {
-      height: 450px;
-=======
-    & > div {
       // height: 450px;
->>>>>>> dev
       overflow: hidden;
     }
     .topDiv {
       // height: 380px;
     }
     .pagination {
-      height: 70px;
-      // margin-top: 19px;
+      height: 70px; // margin-top: 19px;
       .el-pagination {
         margin-top: 19px;
       }
@@ -1382,10 +1374,13 @@ input:-webkit-autofill {
     border-radius: 0 !important;
   }
 }
+
 // .el-rate__icon {
 //   &:hover {
 //     color: #c0c4cc !important;
-
 //     transform: scale(1);
 //   }
 // }
+.start .captcha {
+  width: 130px;
+}
