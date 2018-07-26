@@ -92,7 +92,7 @@
         <el-tab-pane label="修改密码" name="second">
           <div v-show="showPwd" class="changePwd">
             <input type="password" class="hideInput">
-            <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autocomplete="off">
+            <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autoComplete="off">
               <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
                 <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne"></el-input>
               </el-form-item>
@@ -452,10 +452,15 @@ export default {
                 checkPass: ''
               }
               if (res.status == 0) {
+                // this.$message({
+                //   showClose: true,
+                //   type: 'success',
+                //   message: res.msg
+                // })
                 this.$message({
                   showClose: true,
                   type: 'success',
-                  message: res.msg
+                  message: '修改成功，请重新登录'
                 })
               } else {
                 let msg = res.msg
