@@ -9,15 +9,6 @@
       </div>
     </div>
 
-    <div class="judegExplorer" v-show="judegExplorer">
-      <p>为提升浏览体验与质量,建议使用
-        <span style="color:#4182f3">Chrome</span>或
-        <span style="color:#4182f3">firefox</span>
-        <i class="el-icon-close" @click="closeBanner"></i>
-      </p>
-
-    </div>
-
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
@@ -230,7 +221,6 @@ export default {
       isloading: false, //注册按钮点击之后loading（体验）
       codeInterval: null, //注册获取验证码定时循环
       codeClick: false, //判断是否点击过 获取验证码（防重）
-      judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
       isClick: false, //判断是否点击过注册按钮（防重）
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
@@ -494,7 +484,6 @@ export default {
     },
     closeBanner() {
       this.bannerMsg = false
-      this.judegExplorer = false
     },
     getCount() {
       return new Promise((resolve, reject) => {
@@ -1071,7 +1060,6 @@ export default {
     //     'ie:' +
     //     isIE()
     // )
-    console.log(this, 'header中的this')
     this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
@@ -1152,31 +1140,6 @@ export default {
     border-radius: 50%;
     color: #fff;
     background-color: #6417a6;
-  }
-}
-.judegExplorer {
-  width: 100%;
-
-  height: 40px;
-  line-height: 40px;
-  background-color: #f1f1f1;
-  text-align: center;
-  font-size: 16px;
-  color: #222;
-  p {
-    width: 1100px;
-    margin: 0 auto;
-  }
-  i {
-    float: right;
-    width: 20px;
-    height: 20px;
-    margin-top: 10px;
-    line-height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    color: #fff;
-    background-color: #eee;
   }
 }
 .userPotal {
