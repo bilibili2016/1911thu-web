@@ -24,10 +24,6 @@ config.analyze = {
     async: true
   },
   {
-    src: 'http://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.1.js',
-    async: true
-  },
-  {
     src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
     async: true
   },
@@ -40,12 +36,22 @@ config.analyze = {
     async: true
   },
   {
-    src: 'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
+    src: 'http://pcgdozq49.bkt.clouddn.com/social-share.min.js',
     async: true
   }
 ]),
 (config.render = {
   resourceHints: false
 })
+// {
+//   src:
+//     'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
+//   async: true
+// }
+// {
+//   src:
+//     'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
+//   async: true
+// }
 
 module.exports = config

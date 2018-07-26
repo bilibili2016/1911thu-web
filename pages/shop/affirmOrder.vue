@@ -53,7 +53,8 @@
           <div class="topBar clearfix">
             <span>商品信息</span>
             <span class="fr goBack" @click="goLink">
-              <i class="el-icon-edit-outline"></i> 返回修改购物车</span>
+              <img class="editOutline" src="@/assets/images/shopCart-icon.png" alt=""> 返回修改购物车
+            </span>
           </div>
           <div class="goods">
             <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
