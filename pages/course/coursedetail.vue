@@ -91,7 +91,7 @@
           <div class="personal">
             <!-- 弹窗 -->
             <el-dialog title="课程评价" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-              <div v-loading="loadMsg">
+              <div v-loading="loadMsg" class="topDiv">
                 <div v-for="(item,index) in commentator" :key="index" class="dialog-line">
                   <div class="commentator clearfix">
                     <img class="fl" :src="item.head_img" alt="">
@@ -134,6 +134,7 @@
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
               </div>
               <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
+              <h5 v-else-if="item.evaluate_content===''">{{item.tags}}</h5>
               <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
             </div>
           </div>
@@ -354,6 +355,8 @@ export default {
           this.pagemsg.total = response.data.pageCount
           this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
+          console.log(this.commentator)
+
           this.commentators = response.data.evaluateList
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           let totalEvaluateInfo = response.data.totalEvaluateInfo

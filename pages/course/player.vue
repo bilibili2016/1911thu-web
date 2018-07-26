@@ -306,7 +306,7 @@ export default {
     },
     handleCourse(item, index) {
       this.ischeck = item.id
-      this.playing = this.playImg
+      this.playing = this.pauseImg
       persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
       clearInterval(this.interval)
@@ -488,15 +488,11 @@ export default {
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
-        consoel.log('volumechange')
         this.isHasClass()
         // console.log(this.$refs.videoButton.src)
         persistStore.set('volume', player.volume())
       })
       player.on('play', function() {
-        console.log('123')
-        console.log(this.curriculumPrivilege, '这是this.curriculumPrivilege')
-
         that.interval = setInterval(() => {
           if (that.seconds <= 0) {
             that.seconds = 1
@@ -539,7 +535,6 @@ export default {
               }
             })
           } else {
-            console.log('要播放了')
             if (response.data.playAuthInfo.videoViewType == false) {
               // console.log(player, '这是player')
               player.loadVideoByID({
@@ -704,6 +699,21 @@ export default {
           this.collectMsg = 0
         })
       })
+    },
+    // 为播放器上当的播放按钮添加点击事件
+    addPlay() {
+      var that = this
+      document.addEventListener('click', function(event) {
+        var target = event.path[3].classList[0]
+        if (target == 'vjs-big-play-button') {
+          players.getPlayerInfos(that.playerForm).then(response => {
+            if (response.status === '100100') {
+              that.playing = that.pauseImg
+              that.goShoppingCart(response.msg)
+            }
+          })
+        }
+      })
     }
   },
   mounted() {
@@ -727,6 +737,7 @@ export default {
       this.getEvaluateTags()
 
     this.isHasClass()
+    this.addPlay()
   },
   watch: {
     videoState(flag) {

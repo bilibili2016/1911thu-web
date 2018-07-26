@@ -242,6 +242,11 @@
         }
         .ratem {
           padding-bottom: 5px;
+          .el-rate .el-rate__item .el-rate__icon {
+            &.hover {
+              color: rgb(198, 209, 222);
+            }
+          }
         }
         .area {
           margin: 10px 0px 0px 0px;
@@ -283,7 +288,7 @@
           }
         }
         .dialog-line {
-          width: 920px;
+          // width: 920px;
           margin: 0 auto;
           border-bottom: 1px #e8d6f7 solid;
           .commentator {
@@ -294,7 +299,7 @@
             .time {
               color: #b0aeb8;
             }
-            &>img {
+            & > img {
               width: 42px;
               height: 42px;
               border-radius: 50%;
@@ -361,7 +366,7 @@
         .time {
           color: #bbb;
         }
-        &>img {
+        & > img {
           width: 42px;
           height: 42px;
           border-radius: 50%;
@@ -399,7 +404,7 @@
       height: 85px;
       .line-center {
         line-height: 85px;
-        &>span {
+        & > span {
           font-size: 14px;
           height: 60px;
           vertical-align: middle;

@@ -62,7 +62,7 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 8,
+        pagesize: 12,
         total: 5
       },
 
@@ -71,7 +71,7 @@ export default {
         pids: null,
         sortBy: 1,
         pages: 1,
-        limits: 8
+        limits: 12
       },
       cidform: {
         cids: '',
@@ -96,6 +96,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid']),
     selectCid(item, index) {
+      this.categoryForm.pages = 1
       this.pidBg = 0
       this.cidBg = item.id
       this.pidData = this.cidData[index]
@@ -106,6 +107,7 @@ export default {
       this.getcourseList()
     },
     selectPid(item, index) {
+      this.categoryForm.pages = 1
       this.pidBg = item.id
       this.cidform.pids = item.id
       this.cidform.cids = this.cid
@@ -115,6 +117,7 @@ export default {
     },
 
     selectAllCid() {
+      this.categoryForm.pages = 1
       this.cidform.cids = '0'
       this.cidform.indexs = 0
       this.cidform.pids = '0'
@@ -126,6 +129,7 @@ export default {
       this.getcourseList()
     },
     selectAllPid() {
+      this.categoryForm.pages = 1
       this.cidform.pids = '0'
       this.cidform.cids = '0'
       this.cidform.indexs = 0

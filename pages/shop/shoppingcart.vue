@@ -37,7 +37,8 @@
         <div class="tips" id="tips">
           <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
         </div>
-        <div class="tableFooter" v-if="courseList && courseList.length > 0">
+        <div id="computedHeight"></div>
+        <div class="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="courseList && courseList.length > 0">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
@@ -103,7 +104,8 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
-      // scroll: '',
+      isFixed: true,
+      scroll: '',
       isNoMsg: false,
       loding: true,
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
@@ -200,7 +202,9 @@ export default {
         companyname: '1911'
       },
       restaurants: [],
-      timeout: null
+      timeout: null,
+      windowHeight: '',
+      tipsHeight: ''
     }
   },
   mounted() {
@@ -212,17 +216,17 @@ export default {
     this.$bus.$emit('bannerShow', false)
     // this.getNum()
     this.restaurants = this.loadAll()
-
     let headerHeight = document.getElementsByClassName('headerBox')[0]
       .offsetHeight
     let footerHeight = document.getElementsByClassName('footerBox')[0]
       .offsetHeight
-    let windowHeight = document.documentElement.clientHeight
+
+    this.windowHeight = document.documentElement.clientHeight
 
     this.$refs.shopCart.style.minHeight =
-      windowHeight - headerHeight - footerHeight + 'px'
+      this.windowHeight - headerHeight - footerHeight + 5 + 'px'
 
-    // window.addEventListener('scroll', this.addClass)
+    window.addEventListener('scroll', this.addClass)
   },
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
@@ -600,21 +604,21 @@ export default {
     },
     //tableFooter根据页面滚动位置设置定位
     addClass() {
-      let tipsHeight = document.getElementById('tips').offsetTop
-      console.log(tipsHeight)
-
+      if (document.getElementById('tips')) {
+        var tipsHeight = document.getElementById('tips').offsetTop + 70
+      }
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop
-      if (this.scroll >= tipsHeight) {
-        this.istopFixed = true
-        this.istopRelative = false
-        this.istopBottom = true
+
+      if (this.scroll + this.windowHeight >= tipsHeight) {
+        this.isFixed = false
       } else {
-        this.istopFixed = false
-        this.istopRelative = true
-        this.istopBottom = false
+        this.isFixed = true
       }
     }
+  },
+  deactivated() {
+    window.removeEventListener('scroll', this.addClass)
   }
 }
 </script>
