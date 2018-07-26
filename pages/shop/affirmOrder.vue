@@ -745,9 +745,10 @@ export default {
     },
     // 验证增值税发票 中的银行卡号
     reAccount() {
+      // !/^[0-9 ]+$/.test(this.zzTicketForm.account)
       if (
         this.zzTicketForm.account == '' ||
-        !/^[0-9 ]+$/.test(this.zzTicketForm.account)
+        this.zzTicketForm.account.length > 50
       ) {
         this.tipsAccount = false
         this.account = true
@@ -840,7 +841,7 @@ export default {
           return false
         } else if (
           this.zzTicketForm.account == '' ||
-          !/^[0-9 ]+$/.test(this.zzTicketForm.account)
+          this.zzTicketForm.account.length > 50
         ) {
           this.$message({
             showClose: true,
