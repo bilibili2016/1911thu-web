@@ -13,6 +13,7 @@
         <i class="el-icon-arrow-left"></i>{{player.title}}
       </div>
       <div class="playInner" ref="playInner">
+        <!-- <div id="player-container-id" style="width:100%; height:500px;"></div> -->
         <video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>
       </div>
       <div class="playBottom clearfix">
@@ -201,6 +202,7 @@ export default {
       tcplayer: {
         fileID: '',
         appID: '',
+        mp4: '',
         autoplay: false, //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
         plugins: {
           ContinuePlay: {

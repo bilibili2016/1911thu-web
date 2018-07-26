@@ -18,6 +18,11 @@
   margin: 0 10px;
 }
 
+// 重置鼠标悬浮输入框时鼠标状态
+.el-input__inner {
+  cursor: auto !important;
+}
+
 /* Menu */
 
 .el-menu-item--text {
@@ -1333,6 +1338,7 @@ input:-webkit-autofill {
     border: none;
   }
 }
+
 // 邀请码弹窗
 .invitationCodeBox {
   .el-dialog--center {
@@ -1373,3 +1379,6 @@ input:-webkit-autofill {
 //     transform: scale(1);
 //   }
 // }
+.start .captcha {
+  width: 130px;
+}
