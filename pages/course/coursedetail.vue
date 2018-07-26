@@ -453,7 +453,7 @@ export default {
     // 分享 默认设置
     shareDefault() {
       var $config = {
-        url: 'http://www.1911edu.com/'
+        url: 'http://www.11911edu.com/'
       }
       socialShare('.social-share', $config)
     },
