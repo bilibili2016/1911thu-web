@@ -226,6 +226,7 @@ export default {
     this.$refs.shopCart.style.minHeight =
       this.windowHeight - headerHeight - footerHeight + 5 + 'px'
 
+    this.initScroll()
     window.addEventListener('scroll', this.addClass)
   },
   computed: {
@@ -615,6 +616,9 @@ export default {
       } else {
         this.isFixed = true
       }
+    },
+    initScroll() {
+      console.log(document.getElementById('tips').offsetTop)
     }
   },
   deactivated() {
