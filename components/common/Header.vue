@@ -71,10 +71,10 @@
         <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
-            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')">
-
+            <!-- 账号密码登录 start-->
+            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === false">
               <!-- 账号密码登录 -->
-              <div v-if="mobileloginmsg === false">
+              <div>
                 <el-form-item prop="phonenum">
                   <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable type="text"></el-input>
                 </el-form-item>
@@ -83,36 +83,34 @@
                   <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
                 </el-form-item>
               </div>
-
-              <!-- 手机验证码登录 -->
-              <div v-if="mobileloginmsg === true">
-                <el-form-item prop="phones">
-                  <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
-                </el-form-item>
-                <el-form-item prop="codes">
-                  <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                  <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
-                  <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
-                </el-form-item>
-              </div>
-
-              <!-- <el-form-item prop="phones">
-                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
-              </el-form-item>
-              <el-form-item prop="codes">
-                <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                <! <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
-              <!-- <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
-              </el-form-item>  -->
-
               <el-row>
-                <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
-
                 <div @click="forget">忘记密码?</div>
                 <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
                 <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
+            <!-- 账号密码登录 end-->
+
+            <!-- 手机验证码登录 start-->
+            <el-form :model="registerMobileData" status-icon :rules="registRules" ref="loginDatamobile" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === true">
+              <!-- 手机验证码登录 -->
+              <div v-if="mobileloginmsg === true">
+                <el-form-item prop="phones">
+                  <el-input v-model.number="registerMobileData.phones" placeholder="请输入登录手机号" clearable></el-input>
+                </el-form-item>
+                <el-form-item prop="codes">
+                  <el-input class="captcha" v-model="registerMobileData.codes" placeholder="请输入验证码"></el-input>
+                  <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
+                  <el-button type="primary" :disabled="codeClick" class="getCode" @click="handleMobileGetCode('loginDatamobile')" style="line-height:0">{{bindTelData.getCode}}</el-button>
+                </el-form-item>
+              </div>
+              <el-row>
+                <div @click="forget">忘记密码?</div>
+                <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
+                <el-button :disabled="isClick" @click="signInsMobile('loginDatamobile')">登录</el-button>
+              </el-row>
+            </el-form>
+            <!-- 手机验证码登录 end-->
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
           <!-- 注册表单 -->
@@ -280,6 +278,15 @@ export default {
         pwdType: 'password',
         loginTypes: 1
       },
+      // 登录数据 手机验证码
+      loginDatamobile: {
+        password: '',
+        ectpwd: '',
+        phonenum: '',
+        showPwd: false,
+        pwdType: 'password',
+        loginTypes: 2
+      },
       // 注册数据
       registerData: {
         phones: '',
@@ -293,9 +300,10 @@ export default {
       // 手机验证码登录数据
       registerMobileData: {
         phones: '',
+        phonenum: '',
         passwords: '',
         ectpwd: '',
-        types: 3,
+        loginTypes: 2,
         codes: '',
         checked: false,
         companyCodes: ''
@@ -303,6 +311,17 @@ export default {
       // 注册表单验证
       registRules: {
         phones: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          {
+            validator: checkPhone,
+            trigger: 'blur'
+          }
+        ],
+        phonenum: [
           {
             required: true,
             message: '请输入手机号',
@@ -458,6 +477,7 @@ export default {
   methods: {
     ...mapActions('auth', [
       'signIn',
+      'signInmobile',
       'setGid',
       'setProductsNum',
       'signOut',
@@ -465,9 +485,12 @@ export default {
       'setPwd',
       'setDid'
     ]),
+
     // 验证手机登录还是账号密码登录
     mobilelogin() {
+      this.emptyForm()
       this.mobileloginmsg = !this.mobileloginmsg
+
       // this.registerData.codes = '123'
     },
     explorer() {
@@ -507,6 +530,7 @@ export default {
       this.activeName = 'login'
       this.stop()
       this.bgMsg = true
+      this.mobileloginmsg = false
     },
     // 注册时候获取验证码 this.registerData
     async handleGetCode(data) {
@@ -538,33 +562,40 @@ export default {
         }
       }
     },
-    // 手机验证码登录时候
+    // 手机验证码 登录时候
     async handleMobileGetCode() {
-      if (this.bindTelData.seconds === 30) {
-        if (this.bindTelData.captchaDisable === false) {
-          return new Promise((resolve, reject) => {
-            auth.smsCodes(data).then(response => {
-              this.$message({
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
+      if (!/^[1][3,4,5,6,7,8][0-9]{9}$/.test(this.registerMobileData.phones)) {
+        this.$message({
+          type: 'error',
+          message: '请输入正确手机号'
+        })
+      } else {
+        if (this.bindTelData.seconds === 30) {
+          if (this.bindTelData.captchaDisable === false) {
+            return new Promise((resolve, reject) => {
+              auth.smsCodes(this.registerMobileData).then(response => {
+                this.$message({
+                  type: response.status === 0 ? 'success' : 'error',
+                  message: response.msg
+                })
+                this.bindTelData.captchaDisable = true
+                this.bindTelData.getCode =
+                  this.bindTelData.seconds + '秒后重新发送'
+                this.codeInterval = setInterval(() => {
+                  if (this.bindTelData.seconds <= 0) {
+                    this.bindTelData.getCode = '获取验证码'
+                    this.bindTelData.seconds = 30
+                    this.bindTelData.captchaDisable = false
+                    this.codeClick = false
+                    clearInterval(this.codeInterval)
+                  } else {
+                    this.bindTelData.getCode =
+                      --this.bindTelData.seconds + '秒后重新发送'
+                  }
+                }, 1000)
               })
-              this.bindTelData.captchaDisable = true
-              this.bindTelData.getCode =
-                this.bindTelData.seconds + '秒后重新发送'
-              this.codeInterval = setInterval(() => {
-                if (this.bindTelData.seconds <= 0) {
-                  this.bindTelData.getCode = '获取验证码'
-                  this.bindTelData.seconds = 30
-                  this.bindTelData.captchaDisable = false
-                  this.codeClick = false
-                  clearInterval(this.codeInterval)
-                } else {
-                  this.bindTelData.getCode =
-                    --this.bindTelData.seconds + '秒后重新发送'
-                }
-              }, 1000)
             })
-          })
+          }
         }
       }
     },
@@ -572,6 +603,8 @@ export default {
     verifyRgTel() {
       this.codeClick = true
       if (this.errorTel.tel === this.registerData.phones) {
+        zxc
+
         this.$message({
           showClose: true,
           type: 'error',
@@ -629,19 +662,17 @@ export default {
       this.loginData.password = this.registerData.passwords
       this.loginData.ectpwd = encryption(this.registerData.passwords)
       this.loadLogin = true
-      return new Promise((resolve, reject) => {
-        this.signIn(this.loginData).then(response => {
-          this.$message({
-            showClose: true,
-            type: response.status === 0 ? 'success' : 'error',
-            message: response.msg
-          })
-          if (response.status === 0) {
-            this.close()
-            this.getUserInfo()
-          }
-          this.loadLogin = false
+      this.signIn(this.loginData).then(response => {
+        this.$message({
+          showClose: true,
+          type: response.status === 0 ? 'success' : 'error',
+          message: response.msg
         })
+        if (response.status === 0) {
+          this.close()
+          this.getUserInfo()
+        }
+        this.loadLogin = false
       })
     },
     // 注册 请求
@@ -653,21 +684,19 @@ export default {
         if (this.registerData.checked) {
           if (valid) {
             this.loadLogin = true
-            return new Promise((resolve, reject) => {
-              auth.signUp(this.registerData).then(response => {
-                this.$message({
-                  showClose: true,
-                  type: response.status === 0 ? 'success' : 'error',
-                  message: response.msg
-                })
-                if (response.status === 0) {
-                  this.alreadySignin()
-                  this.close()
-                }
-                this.loadLogin = false
-                this.isClick = false
-                this.isloading = false
+            auth.signUp(this.registerData).then(response => {
+              this.$message({
+                showClose: true,
+                type: response.status === 0 ? 'success' : 'error',
+                message: response.msg
               })
+              if (response.status === 0) {
+                this.alreadySignin()
+                this.close()
+              }
+              this.loadLogin = false
+              this.isClick = false
+              this.isloading = false
             })
           } else {
             this.isClick = false
@@ -680,7 +709,7 @@ export default {
         }
       })
     },
-    // 登录 请求
+    // 账号密码 登录 请求
     signIns(formName) {
       this.isClick = true
       this.isloading = false
@@ -688,26 +717,61 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           // this.loadLogin = true
-          return new Promise((resolve, reject) => {
-            this.signIn(this.loginData).then(response => {
-              this.$message({
-                showClose: true,
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
-              })
 
-              if (response.status === 0) {
-                this.close()
-                this.getUserInfo()
-                this.getCount()
-                this.getCodeList()
-                persistStore.set('loginMsg', false)
-                this.$bus.$emit('reLogin', true)
-              }
-              this.isClick = false
-              this.isloading = false
-              // this.loadLogin = false
+          this.signIn(this.loginData).then(response => {
+            this.$message({
+              showClose: true,
+              type: response.status === 0 ? 'success' : 'error',
+              message: response.msg
             })
+
+            if (response.status === 0) {
+              this.close()
+              this.getUserInfo()
+              this.getCount()
+              this.getCodeList()
+              persistStore.set('loginMsg', false)
+              this.$bus.$emit('reLogin', true)
+            }
+            this.isClick = false
+            this.isloading = false
+            // this.loadLogin = false
+          })
+        } else {
+          this.isClick = false
+          this.isloading = false
+          return false
+        }
+      })
+      this.move()
+    },
+    // 手机验证码 登录
+    signInsMobile(formName) {
+      this.isClick = true
+      this.isloading = false
+      // this.loginData.ectpwd = encryption(this.loginData.password)
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          // this.loadLogin = true
+
+          this.signInmobile(this.registerMobileData).then(response => {
+            this.$message({
+              showClose: true,
+              type: response.status === 0 ? 'success' : 'error',
+              message: response.msg
+            })
+
+            if (response.status === 0) {
+              this.close()
+              this.getUserInfo()
+              this.getCount()
+              this.getCodeList()
+              persistStore.set('loginMsg', false)
+              this.$bus.$emit('reLogin', true)
+            }
+            this.isClick = false
+            this.isloading = false
+            // this.loadLogin = false
           })
         } else {
           this.isClick = false
@@ -745,30 +809,29 @@ export default {
     // 微信绑定手机号
     async loginWechat() {
       this.loadLogin = true
-      return new Promise((resolve, reject) => {
-        auth.loginWechat(this.bindTelData).then(response => {
-          if (response.status === 0) {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: '登录成功！'
-            })
-            this.tokenForm.tokens = response.data.token
-            this.setToken(this.tokenForm)
-            this.getUserInfo()
-            this.getCount()
-            this.getCodeList()
-            this.closeWechat()
-            this.close()
-          } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: response.msg
-            })
-          }
-          this.loadLogin = false
-        })
+
+      auth.loginWechat(this.bindTelData).then(response => {
+        if (response.status === 0) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: '登录成功！'
+          })
+          this.tokenForm.tokens = response.data.token
+          this.setToken(this.tokenForm)
+          this.getUserInfo()
+          this.getCount()
+          this.getCodeList()
+          this.closeWechat()
+          this.close()
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
+        this.loadLogin = false
       })
     },
     //获取微信登录是否已经绑定
@@ -778,32 +841,31 @@ export default {
         this.closeWechat()
         return false
       }
-      return new Promise((resolve, reject) => {
-        auth.getWXAccredit(this.WxLogin).then(response => {
-          if (response.status === 0) {
-            clearInterval(this.getwxtime)
-            this.tokenForm.tokens = response.data.token
-            this.setToken(this.tokenForm)
-            this.getUserInfo()
-            this.getCount()
-            this.getCodeList()
-            this.scanCodeShow = false //微信扫码
-            this.closeWechat()
-          }
-          if (response.status === 100102) {
-            this.scanCodeShow = false //微信扫码
-            this.bindTelShow = true
-            this.bindTelData.captchaDisable = true
-            this.bindTelData.openid = response.data.openid
-            clearInterval(this.getwxtime)
-          } else if (response.status === 100100) {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: response.msg
-            })
-          }
-        })
+
+      auth.getWXAccredit(this.WxLogin).then(response => {
+        if (response.status === 0) {
+          clearInterval(this.getwxtime)
+          this.tokenForm.tokens = response.data.token
+          this.setToken(this.tokenForm)
+          this.getUserInfo()
+          this.getCount()
+          this.getCodeList()
+          this.scanCodeShow = false //微信扫码
+          this.closeWechat()
+        }
+        if (response.status === 100102) {
+          this.scanCodeShow = false //微信扫码
+          this.bindTelShow = true
+          this.bindTelData.captchaDisable = true
+          this.bindTelData.openid = response.data.openid
+          clearInterval(this.getwxtime)
+        } else if (response.status === 100100) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
       })
     },
     // 忘记密码
@@ -891,6 +953,14 @@ export default {
       // this.registerData.checked = [false]
       this.registerData.checked = false
       this.registerData.companyCodes = ''
+
+      this.registerMobileData.phones = ''
+      this.registerMobileData.passwords = ''
+      this.registerMobileData.types = 3
+      this.registerMobileData.codes = ''
+      // this.registerMobileData.checked = [false]
+      this.registerMobileData.checked = false
+      this.registerMobileData.companyCodes = ''
     },
     emptyWechatForm() {
       ;(this.bindTelData.phones = ''),
@@ -1037,29 +1107,6 @@ export default {
     // 判断浏览器的ie型
   },
   mounted() {
-    // var isIE = function(ver) {
-    //   var b = document.createElement('b')
-    //   b.innerHTML = '<!--[if IE ' + ver + ']><i></i><![endif]-->'
-    //   console.log(b.getElementsByTagName('i').length === 1, '123')
-    //   return b.getElementsByTagName('i').length === 1
-    // }
-    // console.log('1')
-    // alert(
-    //   'ie6:' +
-    //     isIE(6) +
-    //     '\n' +
-    //     'ie7:' +
-    //     isIE(7) +
-    //     '\n' +
-    //     'ie8:' +
-    //     isIE(8) +
-    //     '\n' +
-    //     'ie9:' +
-    //     isIE(9) +
-    //     '\n' +
-    //     'ie:' +
-    //     isIE()
-    // )
     this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
