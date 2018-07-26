@@ -81,16 +81,44 @@
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
             <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')">
-              <el-form-item prop="phonenum">
-                <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable type="text"></el-input>
+
+              <!-- 账号密码登录 -->
+              <div v-if="mobileloginmsg === false">
+                <el-form-item prop="phonenum">
+                  <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable type="text"></el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                  <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
+                  <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
+                </el-form-item>
+              </div>
+
+              <!-- 手机验证码登录 -->
+              <div v-if="mobileloginmsg === true">
+                <el-form-item prop="phones">
+                  <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
+                </el-form-item>
+                <el-form-item prop="codes">
+                  <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
+                  <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
+                  <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
+                </el-form-item>
+              </div>
+
+              <!-- <el-form-item prop="phones">
+                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
               </el-form-item>
-              <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
-                <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
-              </el-form-item>
+              <el-form-item prop="codes">
+                <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
+                <! <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
+              <!-- <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
+              </el-form-item>  -->
+
               <el-row>
                 <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
+
                 <div @click="forget">忘记密码?</div>
+                <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
                 <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
@@ -407,7 +435,8 @@ export default {
       ],
       didForm: {
         dids: ''
-      }
+      },
+      mobileloginmsg: false
     }
   },
   computed: {
@@ -436,6 +465,11 @@ export default {
       'setPwd',
       'setDid'
     ]),
+    // 验证手机登录还是账号密码登录
+    mobilelogin() {
+      this.mobileloginmsg = !this.mobileloginmsg
+      // this.registerData.codes = '123'
+    },
     explorer() {
       if (!!window.ActiveXObject || 'ActiveXObject' in window) {
         this.judegExplorer = true
@@ -475,8 +509,38 @@ export default {
       this.stop()
       this.bgMsg = true
     },
-    // 获取验证码 this.registerData
+    // 注册时候获取验证码 this.registerData
     async handleGetCode(data) {
+      if (this.bindTelData.seconds === 30) {
+        if (this.bindTelData.captchaDisable === false) {
+          return new Promise((resolve, reject) => {
+            auth.smsCodes(data).then(response => {
+              this.$message({
+                type: response.status === 0 ? 'success' : 'error',
+                message: response.msg
+              })
+              this.bindTelData.captchaDisable = true
+              this.bindTelData.getCode =
+                this.bindTelData.seconds + '秒后重新发送'
+              this.codeInterval = setInterval(() => {
+                if (this.bindTelData.seconds <= 0) {
+                  this.bindTelData.getCode = '获取验证码'
+                  this.bindTelData.seconds = 30
+                  this.bindTelData.captchaDisable = false
+                  this.codeClick = false
+                  clearInterval(this.codeInterval)
+                } else {
+                  this.bindTelData.getCode =
+                    --this.bindTelData.seconds + '秒后重新发送'
+                }
+              }, 1000)
+            })
+          })
+        }
+      }
+    },
+    // 手机验证码登录时候
+    async handleMobileGetCode() {
       if (this.bindTelData.seconds === 30) {
         if (this.bindTelData.captchaDisable === false) {
           return new Promise((resolve, reject) => {
@@ -517,27 +581,25 @@ export default {
         this.codeClick = false
       } else {
         if (this.bindTelData.seconds == 30) {
-          return new Promise((resolve, reject) => {
-            auth.verifyPhone(this.registerData).then(response => {
-              if (response.status !== 0) {
-                this.errorTel.tel = this.registerData.phones
-                this.errorTel.msg = response.msg
-                this.$message({
-                  showClose: true,
-                  type: 'error',
-                  message: response.msg
-                })
-                this.bindTelData.captchaDisable = true
-                this.codeClick = false
-              } else {
-                if (this.bindTelData.seconds === 30) {
-                  this.errorTel.tel = null
-                  this.errorTel.msg = null
-                  this.bindTelData.captchaDisable = false
-                  this.handleGetCode(this.registerData)
-                }
+          auth.verifyPhone(this.registerData).then(response => {
+            if (response.status !== 0) {
+              this.errorTel.tel = this.registerData.phones
+              this.errorTel.msg = response.msg
+              this.$message({
+                showClose: true,
+                type: 'error',
+                message: response.msg
+              })
+              this.bindTelData.captchaDisable = true
+              this.codeClick = false
+            } else {
+              if (this.bindTelData.seconds === 30) {
+                this.errorTel.tel = null
+                this.errorTel.msg = null
+                this.bindTelData.captchaDisable = false
+                this.handleGetCode(this.registerData)
               }
-            })
+            }
           })
         }
       }
@@ -1115,5 +1177,8 @@ export default {
   color: #6417a6;
   font-weight: 500;
   cursor: pointer;
+}
+.mobile-login {
+  float: left;
 }
 </style>
