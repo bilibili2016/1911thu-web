@@ -5,8 +5,7 @@
   overflow: hidden;
   img {
     width: 1920px;
-    height: 360px;
-    // position: absolute;
+    height: 360px; // position: absolute;
     // left: 50%;
     // top: 0;
     // margin-left: -960px;
@@ -46,19 +45,16 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    display: table;
     .degree-con {
       position: relative;
     }
   }
-
   .left {
     float: left;
     width: 370px;
     height: 420px;
     background-color: #0253ba;
     padding: 30px;
-
     h1 {
       font-size: 40px;
       color: #fff;
@@ -87,7 +83,6 @@
     top: 0;
     bottom: 0;
     left: 370px;
-
     .box {
       // float: left;
       display: table;

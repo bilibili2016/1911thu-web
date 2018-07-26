@@ -18,6 +18,11 @@
   margin: 0 10px;
 }
 
+// 重置鼠标悬浮输入框时鼠标状态
+.el-input__inner {
+  cursor: auto !important;
+}
+
 /* Menu */
 
 .el-menu-item--text {
@@ -287,11 +292,6 @@
       background-color: #6417a6;
       font-size: 14px;
       color: #fff;
-    }
-    .el-button.noSubmit {
-      background-color: #eee;
-      color: #888;
-      border-color: none !important;
     }
   } // 注册表单
   #pane-register {
@@ -1093,8 +1093,7 @@
     }
   }
   .el-dialog {
-    width: 800px !important;
-    // height: 500px;
+    width: 800px !important; // height: 500px;
     background: rgba(255, 255, 255, 1);
     border-radius: 10px;
     overflow: hidden;
@@ -1118,8 +1117,7 @@
       // height: 380px;
     }
     .pagination {
-      height: 70px;
-      // margin-top: 19px;
+      height: 70px; // margin-top: 19px;
       .el-pagination {
         margin-top: 19px;
       }
@@ -1338,6 +1336,7 @@ input:-webkit-autofill {
     border: none;
   }
 }
+
 // 邀请码弹窗
 .invitationCodeBox {
   .el-dialog--center {
@@ -1370,4 +1369,14 @@ input:-webkit-autofill {
   .el-card {
     border-radius: 0 !important;
   }
+}
+
+// .el-rate__icon {
+//   &:hover {
+//     color: #c0c4cc !important;
+//     transform: scale(1);
+//   }
+// }
+.start .captcha {
+  width: 130px;
 }

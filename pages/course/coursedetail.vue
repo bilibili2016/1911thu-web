@@ -21,7 +21,7 @@
                 <i class="el-icon-share"></i>
                 <span> 分享 </span>
                 <div class="shareIcons">
-                  <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
+                  <!-- <div class="social-share" data-sites="weibo,qq,wechat" style=""></div> -->
                 </div>
               </span>
             </div>
@@ -451,12 +451,12 @@ export default {
       })
     },
     // 分享 默认设置
-    shareDefault() {
-      var $config = {
-        url: 'http://www.1911edu.com/'
-      }
-      socialShare('.social-share', $config)
-    },
+    // shareDefault() {
+    //   var $config = {
+    //     url: 'http://www.11911edu.com/'
+    //   }
+    //   socialShare('.social-share', $config)
+    // },
     // 初始化默认data
     initData() {
       this.kidForm.ids = this.kid
@@ -468,7 +468,7 @@ export default {
     //拉取服务器数据 初始化所有方法
     initAll() {
       this.initData()
-      this.shareDefault()
+      // this.shareDefault()
       this.getCourseDetail()
       this.getEvaluateList()
       this.getCourseList()
@@ -478,6 +478,7 @@ export default {
   },
   mounted() {
     this.initAll()
+    console.log(33333)
   }
 }
 </script>

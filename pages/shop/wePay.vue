@@ -241,7 +241,6 @@ export default {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
         home.webPay(this.payListForm).then(response => {
-
           this.loading = false
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
@@ -294,6 +293,7 @@ export default {
           home.payResult(this.payListForm).then(response => {
             if (response.status === 0) {
               this.wxMask = false
+              persistStore.set('payComplete', true)
               this.$router.push('/shop/payresult')
               clearInterval(this.interval)
             }

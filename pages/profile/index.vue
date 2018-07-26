@@ -716,7 +716,10 @@ export default {
     },
     // 判断是否显示绑定邀请码弹框
     getAlertbox() {
-      if (Number(persistStore.get('paynumber')) > 1) {
+      if (
+        Number(persistStore.get('paynumber')) > 1 &&
+        persistStore.get('payComplete')
+      ) {
         if (!persistStore.get('paynumbermsg')) {
           this.centerDialogVisible = true
         }
