@@ -86,7 +86,7 @@
               <el-row>
                 <div @click="forget">忘记密码?</div>
                 <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
-                <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
+                <el-button :disabled="isloginClick" @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
             <!-- 账号密码登录 end-->
@@ -107,7 +107,7 @@
               <el-row>
                 <div @click="forget">忘记密码?</div>
                 <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
-                <el-button :disabled="isClick" @click="signInsMobile('loginDatamobile')">登录</el-button>
+                <el-button :disabled="isloginClick" @click="signInsMobile('loginDatamobile')">登录</el-button>
               </el-row>
             </el-form>
             <!-- 手机验证码登录 end-->
@@ -121,6 +121,7 @@
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
+<<<<<<< HEAD
                 <!-- <! <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div>  -->
                 <!-- <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
               </el-form-item>  -->
@@ -142,6 +143,8 @@
               </el-form-item>
               <el-form-item prop="codes">
                 <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
+=======
+>>>>>>> origin/liyr
                 <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
                 <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
                 <!--  -->
@@ -243,6 +246,7 @@ export default {
       codeClick: false, //判断是否点击过 获取验证码（防重）
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
       isClick: true, //判断是否点击过注册按钮（防重）
+      isloginClick: false,
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
@@ -755,12 +759,12 @@ export default {
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
             }
-            this.isClick = false
+            this.isloginClick = false
             this.isloading = false
             // this.loadLogin = false
           })
         } else {
-          this.isClick = false
+          this.isloginClick = false
           this.isloading = false
           return false
         }
@@ -769,7 +773,7 @@ export default {
     },
     // 手机验证码 登录
     signInsMobile(formName) {
-      this.isClick = true
+      this.isloginClick = true
       this.isloading = false
       // this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
@@ -791,7 +795,7 @@ export default {
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
             }
-            this.isClick = false
+            this.isloginClick = false
             this.isloading = false
             // this.loadLogin = false
           })
