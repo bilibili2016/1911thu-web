@@ -10,11 +10,11 @@
   border-radius: $--button-large-border-radius;
 }
 
-.el-button+.el-button {
+.el-button + .el-button {
   margin: 0 10px;
 }
 
-.el-button+.el-dropdown {
+.el-button + .el-dropdown {
   margin: 0 10px;
 }
 
@@ -292,6 +292,11 @@
       background-color: #6417a6;
       font-size: 14px;
       color: #fff;
+    }
+    .el-button.noSubmit {
+      background-color: #eee;
+      color: #888;
+      border-color: none !important;
     }
   } // 注册表单
   #pane-register {
@@ -843,7 +848,7 @@
 
 // profile页面修改tab
 .profile {
-  &>div>div.el-tabs__content {
+  & > div > div.el-tabs__content {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
   }
@@ -897,10 +902,10 @@
       box-shadow: none;
     }
   }
-  &>.el-tabs {
+  & > .el-tabs {
     padding: 10px;
   }
-  &>.el-tabs--left,
+  & > .el-tabs--left,
   .el-tabs--right {
     overflow: auto;
   }
@@ -1038,7 +1043,7 @@
         position: relative;
         overflow: hidden;
       }
-      .el-radio__input.is-checked+.el-radio__label {
+      .el-radio__input.is-checked + .el-radio__label {
         background-color: #8f4acb;
         color: #fff;
         border: none;
@@ -1108,7 +1113,7 @@
   }
   .el-dialog__body {
     padding: 0px 20px;
-    &>div {
+    & > div {
       // height: 450px;
       overflow: hidden;
     }
