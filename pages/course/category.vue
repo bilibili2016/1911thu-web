@@ -179,7 +179,7 @@ export default {
       home.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
-        console.log(this.pagemsg.total)
+        // console.log(this.pagemsg.total)
 
         this.loadCourse = false
       })

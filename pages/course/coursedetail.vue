@@ -356,8 +356,6 @@ export default {
           this.pagemsg.total = response.data.pageCount
           this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
-          console.log(this.commentator)
-
           this.commentators = response.data.evaluateList
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           let totalEvaluateInfo = response.data.totalEvaluateInfo
@@ -479,7 +477,6 @@ export default {
   },
   mounted() {
     this.initAll()
-    console.log(33333)
   }
 }
 </script>
