@@ -1383,10 +1383,6 @@ export default {
               white-space: nowrap;
             }
           }
-          &:hover {
-            padding: 0px 0px 0px 15px;
-            transition: all 500ms linear;
-          }
         }
         .itemBox-info {
           font-size: 14px;
@@ -2258,9 +2254,6 @@ export default {
 .newOrFreeCourseList {
   width: 1100px;
   margin: 0 auto;
-  .bottom {
-    // margin-bottom: 40px;
-  }
   .boxshadow-none {
     position: relative;
   }
@@ -2529,9 +2522,6 @@ export default {
             height: 14px;
             vertical-align: middle;
           }
-        }
-        div {
-          // margin-top: 10px;
         }
         .common-button-half {
           width: 56px;
@@ -2916,14 +2906,17 @@ export default {
         .bgImgs img {
           width: 250px;
           height: 160px;
-
         }
-        .itemBox-name.itemBoxTitle {
+        .itemBox-name {
           transition: none;
           padding: 0;
-          span {
+          &.itemBoxTitle {
+            transition: none;
+            padding: 0;
+            span {
               padding: 0;
             }
+          }
         }
 
         .itemBox-info {
@@ -2952,15 +2945,8 @@ export default {
         }
         .title {
           transition: none;
-          color: #6d687f;
-          // color: #8f4acb !important;
+          color: #6d687f !important;
         }
-
-
-        // .line-wrap {
-        //   transition: all 500ms linear;
-        //   padding: 0px 0px 0px 15px;
-        // }
       }
     }
   }

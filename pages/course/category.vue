@@ -182,22 +182,19 @@ export default {
     },
     // 获取竖直分类列表
     getClassicsList() {
-      return new Promise((resolve, reject) => {
-        home.getClassicsList(this.classList).then(response => {
-          this.classList = response.data.categoryList
-          resolve(true)
-        })
+      home.getClassicsList(this.classList).then(response => {
+        this.classList = response.data.categoryList
+        resolve(true)
       })
     },
     // 点击竖直列表获取数据
     recommendCurriculumList() {
       this.loadCourse = true
-      return new Promise((resolve, reject) => {
-        home.getClassicCourseList(this.newsCurriculumForm).then(response => {
-          this.categoryData = response.data.curriculumList
-          resolve(true)
-          this.loadCourse = false
-        })
+
+      home.getClassicCourseList(this.newsCurriculumForm).then(response => {
+        this.categoryData = response.data.curriculumList
+        resolve(true)
+        this.loadCourse = false
       })
     },
     // 点击竖直列表
