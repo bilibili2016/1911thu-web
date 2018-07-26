@@ -38,7 +38,7 @@
           <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
         </div>
         <div id="computedHeight"></div>
-        <div class="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="courseList && courseList.length > 0">
+        <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="courseList && courseList.length > 0">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
@@ -104,7 +104,10 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
-      isFixed: true,
+      headerHeight: '',
+      tableFooteroffsetTop: '',
+      index: 0,
+      isFixed: false,
       scroll: '',
       isNoMsg: false,
       loding: true,
@@ -216,15 +219,16 @@ export default {
     this.$bus.$emit('bannerShow', false)
     // this.getNum()
     this.restaurants = this.loadAll()
-    let headerHeight = document.getElementsByClassName('headerBox')[0]
-      .offsetHeight
+    this.headerHeight = document.getElementsByClassName(
+      'headerBox'
+    )[0].offsetHeight
     let footerHeight = document.getElementsByClassName('footerBox')[0]
       .offsetHeight
 
     this.windowHeight = document.documentElement.clientHeight
 
     this.$refs.shopCart.style.minHeight =
-      this.windowHeight - headerHeight - footerHeight + 5 + 'px'
+      this.windowHeight - this.headerHeight - footerHeight + 5 + 'px'
 
     this.initScroll()
     window.addEventListener('scroll', this.addClass)
@@ -605,21 +609,44 @@ export default {
     },
     //tableFooter根据页面滚动位置设置定位
     addClass() {
-      if (document.getElementById('tips')) {
-        var tipsHeight = document.getElementById('tips').offsetTop + 70
+      if (document.getElementById('computedHeight')) {
+        var tipsHeight =
+          document.getElementById('computedHeight').offsetTop + 70
       }
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop
 
-      if (this.scroll + this.windowHeight >= tipsHeight) {
+      console.log('scroll:' + (this.scroll + this.windowHeight))
+
+      if (this.scroll + this.windowHeight >= this.tableFooteroffsetTop) {
         this.isFixed = false
       } else {
         this.isFixed = true
       }
     },
     initScroll() {
-      console.log(document.getElementById('tips').offsetTop)
+      // console.log(document.getElementById('tableFooter').offsetTop)
     }
+  },
+  updated() {
+    this.index++
+    if (this.index === 1) {
+      this.tableFooteroffsetTop =
+        document.getElementById('tableFooter').offsetTop +
+        this.headerHeight +
+        10
+      console.log(this.tableFooteroffsetTop)
+      console.log(this.windowHeight)
+
+      if (this.tableFooteroffsetTop > this.windowHeight) {
+        this.isFixed = true
+      } else {
+        this.isFixed = false
+      }
+    }
+    // this.tableFooteroffsetTop = document.getElementById('tableFooter').offsetTop
+    // console.log(this.tableFooteroffsetTop)
+    // console.log(this.windowHeight)
   },
   deactivated() {
     window.removeEventListener('scroll', this.addClass)
