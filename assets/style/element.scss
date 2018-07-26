@@ -1350,3 +1350,10 @@ input:-webkit-autofill {
     border-radius: 0 !important;
   }
 }
+.el-rate__icon {
+  &:hover {
+    color: #c0c4cc !important;
+
+    transform: scale(1);
+  }
+}
