@@ -342,7 +342,7 @@ export default {
       courseList: [],
       companyData: null,
       options: [],
-      value: '查看全部',
+      value: '全部',
       collectionForm: {
         categoryId: 0,
         pages: 1,
@@ -409,7 +409,7 @@ export default {
     },
     // 切换我的课程 子类
     handleActive(item) {
-      this.value = '查看全部'
+      this.value = '全部'
       if (item.name == 'first') {
         this.pagemsg1.total = 1
         this.studyCurriculumList()

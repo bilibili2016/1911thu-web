@@ -91,7 +91,7 @@
               <el-row>
                 <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
                 <div @click="forget">忘记密码?</div>
-                <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
+                <el-button @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -121,7 +121,7 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
-                <el-button :disabled="isClick" class="registerUser" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
+                <el-button :disabled="isClick" class="registerUser " :class="{noSubmit:isHasClass}" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
             <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
@@ -194,6 +194,7 @@ export default {
       return callback()
     }
     return {
+      isHasClass: true,
       codeData: [], //专属邀请码根据接口长度判断是否显示
       codeListForm: {
         pages: 1,
@@ -203,7 +204,7 @@ export default {
       codeInterval: null, //注册获取验证码定时循环
       codeClick: false, //判断是否点击过 获取验证码（防重）
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
-      isClick: false, //判断是否点击过注册按钮（防重）
+      isClick: true, //判断是否点击过注册按钮（防重）
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
@@ -621,7 +622,6 @@ export default {
     },
     // 登录 请求
     signIns(formName) {
-      this.isClick = true
       this.isloading = false
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
@@ -643,13 +643,12 @@ export default {
                 persistStore.set('loginMsg', false)
                 this.$bus.$emit('reLogin', true)
               }
-              this.isClick = false
+
               this.isloading = false
               // this.loadLogin = false
             })
           })
         } else {
-          this.isClick = false
           this.isloading = false
           return false
         }
@@ -1031,6 +1030,15 @@ export default {
       this.bindTelData.seconds = 30
       this.bindTelData.captchaDisable = false
       this.codeClick = false
+    },
+    'registerData.checked'(val, oldVal) {
+      if (val) {
+        this.isClick = false
+        this.isHasClass = false
+      } else {
+        this.isClick = true
+        this.isHasClass = true
+      }
     }
   }
 }
