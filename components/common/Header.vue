@@ -19,6 +19,9 @@
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
       <div :class="{ HREntry : true , islogined : isAuthenticated }">
+        <!-- <span class="center" v-show="isAuthenticated" @click="goMycourse('tab-second')" style="width:90px;">课程兑换码
+          <i></i>
+        </span> -->
         <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
           <i></i>
         </span>

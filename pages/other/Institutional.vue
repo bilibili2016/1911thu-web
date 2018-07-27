@@ -13,41 +13,41 @@
     </div>
     <div :class="{topBottom:istopBottom}" ref="topBottom">
       <div class="why">
-        <h3>为什么选择我们</h3>
+        <h3>为什么选择1911学堂</h3>
         <div class="why-con clearfix">
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic1.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic25.png" alt="">+
             </div>
-            <p class="item-desc1">深度体验顶级商学院文化</p>
+            <p class="item-desc1">雄厚的师资力量</p>
             <span class="item-line"></span>
-            <p class="item-desc2">清华经管学院是率先获得AACSB和EQUIS两大 全球管理教育顶级认证的中国内地商学院。</p>
+            <p class="item-desc2">集聚清华大学等国内外知名大学学者教授、各领域精英联合授课。</p>
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic2.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic26.png" alt="">
             </div>
-            <p class="item-desc1">国内课程均在清华经管学院授课</p>
+            <p class="item-desc1">与时俱进的系统化创新课程体系</p>
             <span class="item-line"></span>
-            <p class="item-desc2">高管教育中心(EXED)与MBA、EMBA、本硕博并列为学院教学部门，经过十多年的沉淀，成就一套规范、完善、实效的企业高管培训课程体系。
+            <p class="item-desc2">理论学习与经典实践案例相结合，权威、实战、实用，以解决问题为导向。
             </p>
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic3.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic27.png" alt="">
             </div>
-            <p class="item-desc1">领略大师风采，启迪心智</p>
+            <p class="item-desc1">线上+线下自由组合的学习模式</p>
             <span class="item-line"></span>
-            <p class="item-desc2">160多位清华大学经济管理学院全职教授及著名 经济学家、知名学者精心设计并亲自授课。
+            <p class="item-desc2">基于大数据分析的个性化学习，线上、线下多种 学习模式可供选择，安排灵活。
             </p>
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic4.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic28.png" alt="">
             </div>
-            <p class="item-desc1">打造最有价值的清华校友人脉</p>
+            <p class="item-desc1">清华认证证书</p>
             <span class="item-line"></span>
-            <p class="item-desc2">6万多各行业精英校友资源，形式多样的校友活 动为学员之间搭起交流合作平台。
+            <p class="item-desc2">完成课程学习并通过相应考核后，可获得清华大 学及相关合作单位认证证书。
             </p>
           </div>
         </div>
@@ -60,7 +60,7 @@
             <p class="item-desc1">{{li.title}}</p>
             <!-- <p class=item-desc2>{{li.number}}</p> -->
           </li>
-          <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
+          <!-- <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
             <div class="item-img">
               <img :src="item.src" alt="">
             </div>
@@ -68,7 +68,7 @@
               <p class="item-desc-text">{{item.title}}</p>
               <p class=item-desc-more>了解更多></p>
             </div>
-          </li>
+          </li> -->
 
         </ul>
       </div>
@@ -201,7 +201,7 @@ export default {
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_6.png',
-          title: '管理公开项目',
+          title: '......',
           number: '（11个行业，110余门课程）'
         }
       ],
