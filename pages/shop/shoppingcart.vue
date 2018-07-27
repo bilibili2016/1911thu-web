@@ -623,11 +623,6 @@ export default {
       } else {
         this.isFixed = true
       }
-<<<<<<< HEAD
-=======
-    },
-    initScroll() {
-      // console.log(document.getElementById('tableFooter').offsetTop)
     }
   },
   updated() {
@@ -643,7 +638,6 @@ export default {
       } else {
         this.isFixed = false
       }
->>>>>>> dev
     }
   },
   deactivated() {
