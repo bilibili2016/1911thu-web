@@ -705,12 +705,18 @@ export default {
     // 为播放器上当的播放按钮添加点击事件
     addPlay() {
       var that = this
+      console.log(11111)
+
       document.addEventListener('click', function(e) {
+        console.log(222222)
+
         event = e || window.event
         event.stopPropagation()
         console.log(event)
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
+          console.log(333333)
+
           console.log(event, 'vjs-big-play-button')
           players.getPlayerInfos(that.playerForm).then(response => {
             if (response.status === '100100') {
