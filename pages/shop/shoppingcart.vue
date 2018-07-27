@@ -627,7 +627,12 @@ export default {
   },
   updated() {
     this.index++
-    if (this.index === 1) {
+    if (this.index === 1 && document.getElementById('tableFooter')) {
+      this.tableFooteroffsetTop =
+        document.getElementById('tableFooter').offsetTop +
+        this.headerHeight +
+        10
+
       this.tableFooteroffsetTop =
         document.getElementById('tableFooter').offsetTop +
         this.headerHeight +
