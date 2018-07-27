@@ -235,6 +235,7 @@ export default {
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
         this.classify = response.data.categoryList
+        console.log(this.classify)
       })
     },
     // 获取免费课程列表
