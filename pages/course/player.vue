@@ -707,8 +707,11 @@ export default {
       var that = this
       document.addEventListener('click', function(e) {
         event = e || window.event
+        event.stopPropagation()
+        console.log(event)
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
+          console.log(event, 'vjs-big-play-button')
           players.getPlayerInfos(that.playerForm).then(response => {
             if (response.status === '100100') {
               that.playing = that.pauseImg
