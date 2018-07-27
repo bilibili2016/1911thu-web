@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="infoItem">
     <transition :name="transitionName">
       <div class="back-to-ceiling customStyle" @click="backToTop" v-show="visible">
         <i class="topSrc"></i>
@@ -39,10 +39,12 @@
     <transition :name="transitionName" v-if="data">
 
       <div class="back-to-ceiling customStyleThree" v-show="true" @click="checkCourse">
+
         <div class="line-wrap">
-          <div class="line-centerd">
+          <img src="@/assets/images/chooseCourse-icon.gif" alt="">
+          <!-- <div class="line-centerd">
             <span>我要选课</span>
-          </div>
+          </div> -->
         </div>
       </div>
     </transition>
