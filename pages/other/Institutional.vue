@@ -59,7 +59,7 @@
         <p class="course-small-title">包含560余门课程</p>
         <ul class="list clearfix">
           <li v-for="li in courseList" :key="li.id" class="list-item">
-            <p class="item-desc1">{{li.title}}</p>
+            <p class="item-desc1" @click="goCourseList(li)">{{li.title}}</p>
             <!-- <p class=item-desc2>{{li.number}}</p> -->
           </li>
           <!-- <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
@@ -199,33 +199,63 @@ export default {
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_1.png',
           title: '干部网络学院',
-          number: '（10余门课程）'
+          number: '（10余门课程）',
+          cidform: {
+            cids: '1',
+            indexs: '',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_2.png',
           title: '在线商学院',
           number: '（14个专题，110余门课程）',
-          link: '/other/enterprisecustom'
+          link: '/other/enterprisecustom',
+          cidform: {
+            cids: '17',
+            indexs: '1',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_3.png',
           title: '职场学院',
-          number: '（12个模块，160余门课程）'
+          number: '（12个模块，160余门课程）',
+          cidform: {
+            cids: '19',
+            indexs: '2',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_4.png',
           title: '党政委托项目',
-          number: '（14个模块，150余门课程）'
+          number: '（14个模块，150余门课程）',
+          cidform: {
+            cids: '16',
+            indexs: '3',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_5.png',
           title: '企业内训项目',
-          number: '（6个模块，初期20余门课程）'
+          number: '（6个模块，初期20余门课程）',
+          cidform: {
+            cids: '18',
+            indexs: '4',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_6.png',
           title: '......',
-          number: '（11个行业，110余门课程）'
+          number: '（11个行业，110余门课程）',
+          cidform: {
+            cids: '20',
+            indexs: '5',
+            pids: '0'
+          }
         }
       ],
       project: [
@@ -297,6 +327,13 @@ export default {
     ...mapState('auth', ['token'])
   },
   methods: {
+    ...mapActions('auth', ['setCid']),
+    goCourseList(li) {
+      console.log(li, '这是li')
+      this.setCid(li.cidform)
+      // window.open()
+      window.open(window.location.origin + '/course/category')
+    },
     handleScroll() {
       if (this.move) {
         this.interval = setInterval(() => {
