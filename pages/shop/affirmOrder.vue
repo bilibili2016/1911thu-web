@@ -14,19 +14,19 @@
             <h4>购买方式：</h4>
             <p>
               <span :class={checked:person} @click="buyType('1')">个人购买</span>
-              <span :class={checked:!person} @click="buyType('2')">机构购买</span>
+              <span :class={checked:!person} @click="buyType('2')">单位购买</span>
             </p>
           </div>
           <div class="company" v-show="!person">
             <h4 class="clearfix">
-              <span class="fl">机构信息：</span>
+              <span class="fl">单位信息：</span>
               <!-- <span class="fr addCompany" v-else @click="openCompanyInfo">
                 <i class="el-icon-edit-outline"></i> 修改</span> -->
             </h4>
             <div class="cpnInfo" v-if="flag">
               <p class="addcp">
                 <span class="fl addCompany" v-if="flag" @click="openCompanyInfo">
-                  <i class="el-icon-circle-plus-outline"></i> 添加机构信息</span>
+                  <i class="el-icon-circle-plus-outline"></i> 添加单位信息</span>
                 暂无信息，请您添加。</p>
             </div>
             <div class="cpnInfo" v-else>
@@ -74,7 +74,7 @@
             <!-- {{isShowTicket}} -->
             <h4>
               发票信息
-              <span>开机构抬头发票须填写纳税人识别号，以免影响报销</span>
+              <span>开单位抬头发票须填写纳税人识别号，以免影响报销</span>
             </h4>
             <div :class="['invoice',{'noTicket':!isShowTicket}]">
               <span v-show="isShowTicket">
@@ -154,10 +154,10 @@
             <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
           </div>
           <div class="formLi clearfix">
-            <!-- <h5 @click="addInvoice" v-show="ticketForm.ticket">新增机构发票</h5> -->
+            <!-- <h5 @click="addInvoice" v-show="ticketForm.ticket">新增单位发票</h5> -->
             <p class="fl"></p>
             <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
-              <input type="text" v-model="ticketForm.companyname" placeholder="新增机构发票抬头">
+              <input type="text" v-model="ticketForm.companyname" placeholder="新增单位发票抬头">
             </p>
           </div>
           <div class="formLi clearfix" v-show="ticketForm.saveioc">
@@ -1218,7 +1218,7 @@ export default {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '您还没有绑定机构，请选择个人购买！'
+            message: '您还没有绑定单位，请选择个人购买！'
           })
           return false
         }
@@ -1320,7 +1320,7 @@ export default {
         })
       })
     },
-    //提交机构信息表单
+    //提交单位信息表单
     addCompanyInfo(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -1350,7 +1350,7 @@ export default {
         }
       })
     },
-    // 打开添加机构
+    // 打开添加单位
     openCompanyInfo() {
       this.showInfo = true
     },
@@ -1364,7 +1364,7 @@ export default {
       this.companyInfo.companyname = item.company_name
     },
 
-    //搜索机构
+    //搜索单位
     querySearchAsync(queryString, cb) {
       queryString = queryString.replace(/^\s+|\s+$/g, '')
       if (queryString === '') {
@@ -1387,7 +1387,7 @@ export default {
         )
       }
     },
-    //搜索机构 接口
+    //搜索单位 接口
     searchCompanyList() {
       if (this.companyInfo.companyname === '') {
         return false

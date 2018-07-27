@@ -305,7 +305,7 @@ export default {
     handleSelect(item) {
       this.companyInfo.companyname = item
     },
-    //搜索机构 接口
+    //搜索单位 接口
     searchCompanyList() {
       if (this.companyInfo.companyname === '') {
         return false

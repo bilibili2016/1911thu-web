@@ -229,7 +229,7 @@
         <!-- 绑定Id -->
         <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
-            <i class="icon-bind"></i> 绑定课程ID</span>
+            <i class="icon-bind"></i> 课程兑换码</span>
           <v-bind></v-bind>
         </el-tab-pane>
         <!-- 专属邀请码 -->
