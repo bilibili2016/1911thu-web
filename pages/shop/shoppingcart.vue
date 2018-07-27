@@ -609,14 +609,17 @@ export default {
     },
     //tableFooter根据页面滚动位置设置定位
     addClass() {
-      if (document.getElementById('computedHeight')) {
-        var tipsHeight =
-          document.getElementById('computedHeight').offsetTop + 70
+      if (document.getElementById('tips')) {
+        var tipsHeight = parseInt(
+          document.getElementById('tips').offsetTop + 170 //170:tips本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
+        )
       }
-      this.scroll =
+      this.scroll = parseInt(
         document.documentElement.scrollTop || document.body.scrollTop
+      )
+      let scrollIns = parseInt(this.scroll + this.windowHeight)
 
-      if (this.scroll + this.windowHeight >= this.tableFooteroffsetTop) {
+      if (scrollIns > this.tableFooteroffsetTop || scrollIns > tipsHeight) {
         this.isFixed = false
       } else {
         this.isFixed = true
