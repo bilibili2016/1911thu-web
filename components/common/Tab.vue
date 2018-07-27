@@ -1,11 +1,12 @@
 <template>
   <div class="classify">
     <div class="starters">
-      <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="selectCollege(index,item)" @mouseleave="leave" style="display:block;">
-        <div class="tabs-title">{{item.category_name}}</div>
+      <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="mouseenters(index,item)" @mouseleave="leave" style="display:block;">
+        <div class="tabs-title" @click="selectCollege(index,item)">{{item.category_name}}</div>
         <div class="tabs-content" v-show="index===itemID">
           <div class="subClass">
-            <h4>全部
+            <h4>
+              全部
               <span>
                 <i></i>
               </span>
@@ -79,12 +80,26 @@ export default {
       window.open(window.location.origin + '/course/category')
       // this.$router.push('/course/classifycourse')
     },
-    selectCollege(index, item) {
+    mouseenters(index, item) {
       this.big = index
       this.itemID = index
+    },
+    selectCollegeall(index, item) {
       this.cidform.cids = item.id
       this.cidform.indexs = index
+      this.cidform.pids = '0'
       this.$bus.$emit('collegeId', item.id)
+      window.open(window.location.origin + '/course/category')
+      this.setCid(this.cidform)
+    },
+    selectCollege(index, item) {
+      // this.big = index
+      // this.itemID = index
+      this.cidform.cids = item.id
+      this.cidform.indexs = index
+      this.cidform.pids = '0'
+      this.$bus.$emit('collegeId', item.id)
+      window.open(window.location.origin + '/course/category')
       this.setCid(this.cidform)
     },
     leave() {
