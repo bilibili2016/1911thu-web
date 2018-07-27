@@ -1098,9 +1098,12 @@
   }
   .el-dialog {
     width: 800px !important; // height: 500px;
+    // height: 100%;
+    min-height: 540px;
     background: rgba(255, 255, 255, 1);
     border-radius: 10px;
     overflow: hidden;
+    padding-bottom: 70px;
   }
   .el-dialog__header {
     border-bottom: 1px #e8d6f7 solid;
@@ -1121,7 +1124,11 @@
       // height: 380px;
     }
     .pagination {
-      height: 70px; // margin-top: 19px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 20px;
+      // height: 70px; // margin-top: 19px;
       .el-pagination {
         margin-top: 19px;
       }
