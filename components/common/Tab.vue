@@ -5,7 +5,7 @@
         <div class="tabs-title" @click="selectCollege(index,item)">{{item.category_name}}</div>
         <div class="tabs-content" v-show="index===itemID">
           <div class="subClass">
-            <h4>
+            <h4 @click="selectCollege(index,item)">
               全部
               <span>
                 <i></i>
@@ -76,6 +76,7 @@ export default {
       this.cgForm.cgs = '0'
       this.setCg(this.cgForm)
       this.cidform.pids = item.id
+      console.log(this.cidform, '这是this.cidform')
       this.setCid(this.cidform)
       window.open(window.location.origin + '/course/category')
       // this.$router.push('/course/classifycourse')
@@ -83,6 +84,11 @@ export default {
     mouseenters(index, item) {
       this.big = index
       this.itemID = index
+      this.cidform.cids = item.id
+      this.cidform.indexs = index
+      this.cidform.pids = '0'
+      this.$bus.$emit('collegeId', item.id)
+      this.setCid(this.cidform)
     },
     selectCollegeall(index, item) {
       this.cidform.cids = item.id
