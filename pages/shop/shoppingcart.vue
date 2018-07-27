@@ -197,7 +197,7 @@ export default {
         curriculumcartid: []
       },
       removeArray: {
-        //记录所有课程ID，全不选作为参数传入，没有修改
+        //记录所有课程兑换码，全不选作为参数传入，没有修改
         curriculumcartid: []
       },
       isRest: true,
