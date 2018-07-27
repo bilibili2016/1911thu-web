@@ -97,18 +97,33 @@
         margin-bottom: 70px;
       }
       .top-button {
-        width: 175px;
-        height: 55px;
+        width: 376px;
+        height: 56px;
         line-height: 55px;
-        border: 1px solid #fff;
-        text-align: center;
+        background-color: #6417a6;
+        // border: 1px solid #fff;
+        // text-align: center;
         font-size: 16px;
         color: #fff;
         border-radius: 28px;
         cursor: pointer;
-        &:hover {
+        padding-left: 40px;
+        span.right {
+          display: inline-block;
+          width: 56px;
+          height: 100%;
           background-color: #fff;
+          border-radius: 50%;
+          margin-left: 18px;
+          font-size: 24px;
           color: #6417a6;
+          text-align: center;
+          line-height: 56px;
+          font-weight: 700;
+        }
+        &:hover {
+          // background-color: #fff;
+          // color: #6417a6;
         }
       }
     }
