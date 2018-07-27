@@ -230,7 +230,6 @@ export default {
     this.$refs.shopCart.style.minHeight =
       this.windowHeight - this.headerHeight - footerHeight + 5 + 'px'
 
-    this.initScroll()
     window.addEventListener('scroll', this.addClass)
   },
   computed: {
@@ -624,14 +623,16 @@ export default {
       } else {
         this.isFixed = true
       }
-    },
-    initScroll() {
-      // console.log(document.getElementById('tableFooter').offsetTop)
     }
   },
   updated() {
     this.index++
-    if (this.index === 1) {
+    if (this.index === 1 && document.getElementById('tableFooter')) {
+      this.tableFooteroffsetTop =
+        document.getElementById('tableFooter').offsetTop +
+        this.headerHeight +
+        10
+
       this.tableFooteroffsetTop =
         document.getElementById('tableFooter').offsetTop +
         this.headerHeight +

@@ -38,8 +38,8 @@
             <!-- <p style="color:black">{{userInfo}}</p> -->
           </div>
           <div class="time">
-            <p>{{userInfo.study_curriculum_time}}</p>
-            <p>总学时</p>
+            <p>{{time.hour}}小时{{time.minutes}}分钟</p>
+            <p>已学习时长</p>
           </div>
         </div>
       </div>
