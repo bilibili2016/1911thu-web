@@ -711,11 +711,21 @@ export default {
         console.log(222222)
 
         event = e || window.event
-        event.stopPropagation()
+        console.log(333333)
+
+        if (event.stopPropagation) {
+          console.log(4444444)
+
+          event.stopPropagation()
+        } else if (window.event) {
+          console.log(55555555)
+
+          window.event.cancelBubble = true
+        }
         console.log(event)
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
-          console.log(333333)
+          console.log(6666)
 
           console.log(event, 'vjs-big-play-button')
           players.getPlayerInfos(that.playerForm).then(response => {
