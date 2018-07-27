@@ -109,7 +109,7 @@
           <div class="formDIv">
             <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
               <el-form-item label="" prop="companyname">
-                <el-autocomplete class="inline-input" placeholder="您的机构名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+                <el-autocomplete class="inline-input" placeholder="您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
               </el-form-item>
               <el-form-item label="" prop="person">
                 <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
@@ -208,7 +208,7 @@ export default {
       project: [
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_7.png',
-          title: '机构课程定制',
+          title: '单位课程定制',
           link: '/other/enterprisecustom'
         },
         {
@@ -223,7 +223,7 @@ export default {
         }
       ],
       buyList: [
-        '机构入口',
+        '单位入口',
         '我要选课',
         '选择课程',
         '购物车结算',
@@ -246,7 +246,7 @@ export default {
       },
       rules: {
         companyname: [
-          { required: true, message: '请输入机构名', trigger: 'blur' }
+          { required: true, message: '请输入单位名', trigger: 'blur' }
         ],
         person: [
           { required: true, message: '请输入联系人姓名', trigger: 'blur' }
@@ -312,7 +312,7 @@ export default {
                 this.$message({
                   showClose: true,
                   type: 'success',
-                  message: '机构信息提交成功'
+                  message: '单位信息提交成功'
                 })
                 this.company.companyname = ''
                 this.company.person = ''
@@ -404,7 +404,7 @@ export default {
       this.company.companyname = item.company_name
     },
     querySearchAsync(queryString, cb) {
-      //搜索机构
+      //搜索单位
       queryString = queryString.replace(/^\s+|\s+$/g, '')
       if (queryString === '') {
         return false
@@ -426,7 +426,7 @@ export default {
         )
       }
     },
-    //搜索机构 接口
+    //搜索单位 接口
     searchCompanyList() {
       if (this.company.companyname === '') {
         return false

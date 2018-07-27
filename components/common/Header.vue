@@ -133,7 +133,7 @@
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
               <!-- <el-form-item prop="companyCodes">
-                <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
+                <el-input v-model="registerData.companyCodes" placeholder="绑定单位ID"></el-input>
                 <span class="bindCompany">(可选)</span>
               </el-form-item> -->
               <el-form-item prop="checked">
@@ -164,7 +164,7 @@
             <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
           </el-form-item>
           <!-- <el-form-item prop="companyCodes">
-            <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
+            <el-input v-model="bindTelData.companyCodes" placeholder="绑定单位"></el-input>
             <span class="bindCompany">(可选)</span>
           </el-form-item> -->
           <el-row>
@@ -204,7 +204,7 @@ export default {
     }
     var checkCompanyCodes = (rule, value, callback) => {
       if (value !== '' && !/^[A-Za-z0-9]+$/.test(value)) {
-        return callback(new Error('请输入正确机构ID'))
+        return callback(new Error('请输入正确单位ID'))
       }
       return callback()
     }
@@ -368,7 +368,7 @@ export default {
           {
             min: 6,
             max: 6,
-            message: '请输入正确的机构ID',
+            message: '请输入正确的单位ID',
             trigger: 'blur'
           },
           {
@@ -450,7 +450,7 @@ export default {
           {
             min: 6,
             max: 6,
-            message: '请输入正确的机构ID',
+            message: '请输入正确的单位ID',
             trigger: 'blur'
           },
           {

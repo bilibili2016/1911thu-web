@@ -40,10 +40,10 @@
             <el-form-item disable label="手机号">
               <el-input v-model="psnForm.user_name" disabled></el-input>
             </el-form-item>
-            <el-form-item label="机构信息" v-if="hasCompany" key="psnForm.company_name">
+            <el-form-item label="单位信息" v-if="hasCompany" key="psnForm.company_name">
               <el-input v-model="psnForm.company_name"></el-input>
             </el-form-item>
-            <el-form-item label="机构信息" v-else>
+            <el-form-item label="单位信息" v-else>
               <el-input v-model="psnForm.company_name"></el-input>
             </el-form-item>
             <el-form-item size="large" class="submit">
@@ -82,7 +82,7 @@
                 <span class="default">{{psnForm.user_name}}</span>
               </li>
               <li>
-                <span>机构信息：</span>
+                <span>单位信息：</span>
                 <span class="default">{{psnForm.company_name}}</span>
               </li>
             </ul>
