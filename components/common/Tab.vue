@@ -5,7 +5,7 @@
         <div class="tabs-title" @click="handlePid(item._child[0],0)">{{item.category_name}}</div>
         <div class="tabs-content" v-show="index===itemID">
           <div class="subClass">
-            <h4 @click="handlePid(item._child[0],0)">全部
+            <h4 style="cursor: pointer" @click="handlePid(item._child[0],0)">全部
               <span>
                 <i></i>
               </span>
