@@ -706,8 +706,9 @@ export default {
     addPlay() {
       var that = this
       document.addEventListener('click', function(e) {
-        event = window.event || arguments.callee.caller.arguments[0]
+        event = e || window.event
         console.log(event)
+
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
           players.getPlayerInfos(that.playerForm).then(response => {
