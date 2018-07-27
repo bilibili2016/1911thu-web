@@ -3,11 +3,13 @@
     <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
       <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic5.png" alt="">
       <div class="top-text">
-        <h1 class="top-h1">你好，培训方案规划者</h1>
-        <p class="top-desc">如果您正在为帮助领导选课烦恼、或者正在为企业培训 、提醒进行规划， EXED为您精心准备了定制课程方案和高端课程。
+        <h1 class="top-h1">1911学堂</h1>
+        <p class="top-desc">源自清华、面向世界，集聚清华大学、北京大学等国内外知名高校师资， 为党政干部与企事业单位高管提供与时俱进的终身教育解决方案。
+
         </p>
         <div class="top-button" @click="handleScroll">
-          请填写联系方式
+          填写联系方式，免费申请课程体验。
+          <span class="right">GO</span>
         </div>
       </div>
     </div>
@@ -71,6 +73,27 @@
           </li> -->
 
         </ul>
+      </div>
+      <div class="together">
+        <h4>与1911学堂一起</h4>
+        <div class="list">
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_1.png" alt="">
+            <p>加快知识更新</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_2.png" alt="">
+            <p>转变思维方式</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_3.png" alt="">
+            <p>提高学习能力</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_4.png" alt="">
+            <p>改善行为模式</p>
+          </div>
+        </div>
       </div>
       <div class="psrocess">
         <div class="route">

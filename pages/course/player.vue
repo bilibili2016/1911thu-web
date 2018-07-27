@@ -31,15 +31,16 @@
           </span>
 
         </span> -->
-        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
-          <i class="el-icon-star-on"></i>
-          <span>收藏</span>
-        </span>
-        <span class="fr elt" @click="showElt" v-if="this.iseve === 0">
+
+        <span class="fl elt" @click="showElt" v-if="this.iseve === 0">
           <i class="el-icon-edit"></i>课程评价
         </span>
-        <span class="fr elt" v-else :class=" { bag: this.iseve === 1 }">
+        <span class="fl elt" v-else :class=" { bag: this.iseve === 1 }">
           <i class="el-icon-edit"></i>已评价
+        </span>
+        <span class="fl collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
+          <i class="el-icon-star-on"></i>
+          <span>收藏</span>
         </span>
       </div>
     </div>
@@ -139,8 +140,8 @@ export default {
         cartid: null
       },
       ischeck: '',
-      mediaRW: 28,
-      mediaLW: 72,
+      mediaRW: 22,
+      mediaLW: 78,
       mediaRInner: true,
       fileID: '',
       appID: '',
@@ -408,10 +409,10 @@ export default {
         this.mediaLW = 100
         this.$refs.movd.children[0].style.width = this.mediaLW + '%'
       } else {
-        this.mediaRW = 28
+        this.mediaRW = 22
         this.mediaRInner = true
         this.mediaRIcon = 'el-icon-arrow-right'
-        this.mediaLW = 72
+        this.mediaLW = 78
       }
       // this.resize();
     },
@@ -705,29 +706,16 @@ export default {
     // 为播放器上当的播放按钮添加点击事件
     addPlay() {
       var that = this
-      console.log(11111)
-
       document.addEventListener('click', function(e) {
-        console.log(222222)
-
         event = e || window.event
-        console.log(333333)
-
         if (event.stopPropagation) {
-          console.log(4444444)
-
           event.stopPropagation()
         } else if (window.event) {
-          console.log(55555555)
-
           window.event.cancelBubble = true
         }
-        console.log(event)
+        // console.log(event)
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
-          console.log(6666)
-
-          console.log(event, 'vjs-big-play-button')
           players.getPlayerInfos(that.playerForm).then(response => {
             if (response.status === '100100') {
               that.playing = that.pauseImg

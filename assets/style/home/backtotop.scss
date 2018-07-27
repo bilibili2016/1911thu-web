@@ -1,3 +1,8 @@
+.infoItem {
+  position: absolute;
+  right: 0;
+  bottom: 50px;
+}
 .back-to-ceiling {
   position: fixed;
   display: inline-block;
@@ -6,7 +11,7 @@
   z-index: 4;
   &.customStyle {
     right: 30px;
-    bottom: 320px;
+    bottom: 405px;
     width: 50px;
     height: 50px;
     border-radius: 4px;
@@ -16,7 +21,7 @@
   }
   &.customStyleOne {
     right: 30px;
-    bottom: 260px;
+    bottom: 344px;
     width: 50px;
     height: 50px;
     border-radius: 4px;
@@ -46,7 +51,7 @@
   }
   &.customStyleTwo {
     right: 30px;
-    bottom: 140px;
+    bottom: 224px;
     // bottom: 199px;
     width: 50px;
     height: 50px;
@@ -77,7 +82,7 @@
   }
   &.customStyleFour {
     right: 30px;
-    bottom: 200px;
+    bottom: 284px;
     width: 50px;
     height: 50px;
     border-radius: 4px;
@@ -107,16 +112,16 @@
   }
   &.customStyleThree {
     right: 30px;
-    bottom: 50px;
-    width: 110px;
-    height: 50px;
+    bottom: 80px;
+    width: 150px;
+    height: 117px;
     border-radius: 4px;
     line-height: 45px;
-    background: rgba(252, 210, 63, 1);
+    // background: rgba(252, 210, 63, 1);
     transition: all 500ms;
     z-index: 999;
     &:hover {
-      background-color: #8f4acb;
+      // background-color: #8f4acb;
       .line-centerd {
         color: #fcd23f;
         background: url('~assets/images/home_backtop44.png') no-repeat 16px 17px;
@@ -217,8 +222,8 @@
 }
 
 .line-wrap {
-  height: 50px;
-  width: 100px;
+  // height: 50px;
+  // width: 100px;
   cursor: pointer; // border: 1px red solid;
 }
 
