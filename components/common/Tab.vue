@@ -2,10 +2,10 @@
   <div class="classify">
     <div class="starters">
       <div class="classItem" v-for="(item,index) in classify" :key="index" @mouseenter="selectCollege(index,item)" @mouseleave="leave" style="display:block;">
-        <div class="tabs-title">{{item.category_name}}</div>
+        <div class="tabs-title" @click="handlePid(item._child[0],0)">{{item.category_name}}</div>
         <div class="tabs-content" v-show="index===itemID">
           <div class="subClass">
-            <h4>全部
+            <h4 @click="handlePid(item._child[0],0)">全部
               <span>
                 <i></i>
               </span>
@@ -60,7 +60,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid', 'setKid', 'setCg']),
+    ...mapActions('auth', ['setCid', 'setPid', 'setKid', 'setCg', 'setPid']),
     handleClick(item, index) {
       this.cidform.cids = Number(item.index)
       this.setCid(this.cidform)
