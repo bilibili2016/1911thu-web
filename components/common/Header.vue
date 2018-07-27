@@ -92,14 +92,17 @@
             <!-- 账号密码登录 end-->
 
             <!-- 手机验证码登录 start-->
-            <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === true">
+            <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm" v-if="mobileloginmsg === true">
               <!-- 手机验证码登录 -->
               <div v-if="mobileloginmsg === true">
                 <el-form-item prop="phones">
-                  <el-input v-model.number="registerMobileData.phones" placeholder="请输入登录手机号" clearable></el-input>
+                  <el-input v-model.number="registerMobileData.phones" placeholder="请输入登录手机号" clearable auto-complete="off" type="text"></el-input>
+                </el-form-item>
+                <el-form-item prop="codes" style="display:none">
+                  <el-input v-model.number="registerMobileData.codes" placeholder="请输入登录手机号" clearable auto-complete="off" type="text"></el-input>
                 </el-form-item>
                 <el-form-item prop="codes">
-                  <el-input class="captcha" v-model="registerMobileData.codes" placeholder="请输入验证码"></el-input>
+                  <el-input class="captcha" v-model="registerMobileData.codes" placeholder="请输入验证码" auto-complete="off" type="text"></el-input>
                   <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
                   <el-button type="primary" :disabled="codeClick" class="getCode" @click="handleMobileGetCode('loginDatamobile')" style="line-height:0">{{bindTelData.getCode}}</el-button>
                 </el-form-item>
@@ -113,6 +116,7 @@
             <!-- 手机验证码登录 end-->
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
+
           <!-- 注册表单 -->
           <el-tab-pane label="注册" name="register">
             <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
@@ -512,9 +516,10 @@ export default {
 
     // 验证手机登录还是账号密码登录
     mobilelogin() {
-      this.emptyForm()
       this.mobileloginmsg = !this.mobileloginmsg
-
+      this.registerMobileData.phones = ''
+      this.registerMobileData.codes = ''
+      this.emptyForm()
       // this.registerData.codes = '123'
     },
     explorer() {
