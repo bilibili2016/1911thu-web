@@ -86,31 +86,29 @@ export default {
     // 添加课程
     doSubmit() {
       this.bindForm.courseId = this.courseList.inputID
-      return new Promise((resolve, reject) => {
-        home.bindingCurriculumPrivate(this.bindForm).then(res => {
-          if (res.status === 0) {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: res.msg
-            })
-            this.getUsedInvitationCodeList()
-            this.$bus.$emit('studyCourse')
-            this.courseList.inputID = ''
-            if (this.courseList.addNewID) {
-              this.courseList.addNewID = false
-            }
-            this.$bus.$emit('updateCourse', true)
-          } else if (res.status === '100100') {
-            this.courseList.showErr = true
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: res.msg
-            })
-            this.courseList.error = res.msg
+      home.bindingCurriculumPrivate(this.bindForm).then(res => {
+        if (res.status === 0) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: res.msg
+          })
+          this.getUsedInvitationCodeList()
+          this.$bus.$emit('studyCourse')
+          this.courseList.inputID = ''
+          if (this.courseList.addNewID) {
+            this.courseList.addNewID = false
           }
-        })
+          this.$bus.$emit('updateCourse', true)
+        } else if (res.status === '100100') {
+          this.courseList.showErr = true
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+          this.courseList.error = res.msg
+        }
       })
     },
     // 获取已经添加的课程兑换码
