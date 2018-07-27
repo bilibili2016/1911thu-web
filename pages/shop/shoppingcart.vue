@@ -34,7 +34,7 @@
             <p>您的购物车为空</p>
           </div>
         </div>
-        <div class="tips" id="tips">
+        <div class="tips" id="tips" v-if="!isNoMsg">
           <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
         </div>
         <div id="computedHeight"></div>

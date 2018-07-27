@@ -462,6 +462,7 @@ export default {
                   type: 'success',
                   message: '修改成功，请重新登录'
                 })
+                persistStore.clearAll()
               } else {
                 let msg = res.msg
                 this.$message({
