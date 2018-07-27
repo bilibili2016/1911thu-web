@@ -72,6 +72,27 @@
 
         </ul>
       </div>
+      <div class="together">
+        <h4>与1911学堂一起</h4>
+        <div class="list">
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_1.png" alt="">
+            <p>加快知识更新</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_2.png" alt="">
+            <p>转变思维方式</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_3.png" alt="">
+            <p>提高学习能力</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_4.png" alt="">
+            <p>改善行为模式</p>
+          </div>
+        </div>
+      </div>
       <div class="psrocess">
         <div class="route">
           <h3>购买、学习流程</h3>
