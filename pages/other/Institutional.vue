@@ -62,7 +62,7 @@
             <p class="item-desc1">{{li.title}}</p>
             <!-- <p class=item-desc2>{{li.number}}</p> -->
           </li>
-          <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
+          <!-- <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
             <div class="item-img">
               <img :src="item.src" alt="">
             </div>
@@ -70,9 +70,22 @@
               <p class="item-desc-text">{{item.title}}</p>
               <p class=item-desc-more>了解更多></p>
             </div>
-          </li>
+          </li> -->
 
         </ul>
+        <div class="course-bottom">
+          <div class="left">
+            <div class="con">
+              <p class="title">课程定制服务</p>
+              <p class="text">如果您有更多、更独特、更专业的课程需求，请联系我们， 1911学堂将根据需求，为您量身定制高品质的培训课程。
+              </p>
+              <div class="btn" @click="knowDetail">了解详情</div>
+            </div>
+          </div>
+          <div class="right">
+            <img src="http://papn9j3ys.bkt.clouddn.com/insitituationCourse-bg.png" alt="">
+          </div>
+        </div>
       </div>
       <div class="psrocess">
         <div class="route">
@@ -202,9 +215,9 @@ export default {
           number: '（6个模块，初期20余门课程）'
         },
         {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_6.png',
-          title: '管理公开项目',
-          number: '（11个行业，110余门课程）'
+          src: '',
+          title: '......',
+          number: ''
         }
       ],
       project: [
@@ -447,6 +460,9 @@ export default {
           })
         })
       }
+    },
+    knowDetail() {
+      this.$router.push('/other/enterprisecustom')
     }
   },
   mounted() {
