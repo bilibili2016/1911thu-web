@@ -29,7 +29,7 @@
       </div>
       <div class="five">
         <p class="fz-one">海外游学</p>
-        <p class="fz-two hw-five">考察海外知名企业、机构、团体、站在国际化、全球化的视频思考问题。</p>
+        <p class="fz-two hw-five">考察海外知名企业、单位、团体、站在国际化、全球化的视频思考问题。</p>
       </div>
       <div class="six">
         <p class="fz-one">户外拓展</p>

@@ -2,7 +2,7 @@
   <div class="main clearfix bindCourse">
     <div class="courseList">
       <div class="title clearfix">
-        <span>绑定课程ID</span>
+        <span>课程兑换码</span>
         <el-button v-show="!courseList.addNewID" class="fr addClass" @click="addID" round>新增课程ID</el-button>
       </div>
       <div class="courseIDList">
@@ -13,12 +13,12 @@
       </div>
       <div v-show="courseList.addNewID">
         <div class="courseID">
-          <span>绑定课程ID:</span>
+          <span>课程兑换码:</span>
           <input v-model="courseList.inputID" placeholder="请输入您的课程ID，区分大小写。">
           <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
         </div>
         <div class="bindInfo">
-          <p>绑定课程ID说明：</p>
+          <p>课程兑换码说明：</p>
           <p>1.输入课程ID，绑定兑换购买的课程</p>
           <p>2.绑定成功后，不可更改。</p>
         </div>
