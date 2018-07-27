@@ -58,8 +58,8 @@
         <h3>1911学堂课程体系</h3>
         <p class="course-small-title">包含560余门课程</p>
         <ul class="list clearfix">
-          <li v-for="li in courseList" :key="li.id" class="list-item">
-            <p class="item-desc1" @click="goCourseList(li)">{{li.title}}</p>
+          <li v-for="li in courseList" :key="li.id" class="list-item" @click="goCourseList(li)">
+            <p class="item-desc1">{{li.title}}</p>
             <!-- <p class=item-desc2>{{li.number}}</p> -->
           </li>
           <!-- <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
