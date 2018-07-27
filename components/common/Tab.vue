@@ -61,7 +61,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid', 'setKid', 'setCg']),
+    ...mapActions('auth', ['setCid', 'setPid', 'setKid', 'setCg', 'setPid']),
     handleClick(item, index) {
       this.cidform.cids = Number(item.index)
       this.setCid(this.cidform)
