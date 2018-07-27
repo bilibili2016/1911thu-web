@@ -705,29 +705,16 @@ export default {
     // 为播放器上当的播放按钮添加点击事件
     addPlay() {
       var that = this
-      console.log(11111)
-
       document.addEventListener('click', function(e) {
-        console.log(222222)
-
         event = e || window.event
-        console.log(333333)
-
         if (event.stopPropagation) {
-          console.log(4444444)
-
           event.stopPropagation()
         } else if (window.event) {
-          console.log(55555555)
-
           window.event.cancelBubble = true
         }
-        console.log(event)
+        // console.log(event)
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
-          console.log(6666)
-
-          console.log(event, 'vjs-big-play-button')
           players.getPlayerInfos(that.playerForm).then(response => {
             if (response.status === '100100') {
               that.playing = that.pauseImg
