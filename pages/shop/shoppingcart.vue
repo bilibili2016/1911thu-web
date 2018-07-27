@@ -616,8 +616,6 @@ export default {
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop
 
-      console.log('scroll:' + (this.scroll + this.windowHeight))
-
       if (this.scroll + this.windowHeight >= this.tableFooteroffsetTop) {
         this.isFixed = false
       } else {
@@ -642,9 +640,6 @@ export default {
         this.isFixed = false
       }
     }
-    // this.tableFooteroffsetTop = document.getElementById('tableFooter').offsetTop
-    // console.log(this.tableFooteroffsetTop)
-    // console.log(this.windowHeight)
   },
   deactivated() {
     window.removeEventListener('scroll', this.addClass)
