@@ -8,9 +8,11 @@
           <img :src="imgUrl.one" alt="">
         </li>
         <li v-for="(item,index) in dingData" :key="index" @click="goLink(item.link_url)">
-          <img :src="item.picture" alt="">
-          <h4>{{item.title}}</h4>
-          <p>{{item.content}}</p>
+          <div>
+            <img :src="item.picture" alt="">
+            <h4>{{item.title}}</h4>
+            <p>{{item.content}}</p>
+          </div>
         </li>
       </ul>
     </div>
@@ -46,51 +48,50 @@ export default {
   ul {
     display: flex;
     li {
-      position: relative;
-      width: 275px;
-      height: 100px;
-      cursor: pointer;
-      transition: all 300ms;
-      &:hover {
+      &:hover div {
         margin-top: -10px;
         p {
           opacity: 1;
         }
       }
-      &:first-child {
-        cursor: auto;
-      }
-      img {
+      div {
         width: 275px;
         height: 100px;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-      h4 {
-        width: 200px;
-        height: 18px;
-        overflow: hidden;
-        font-size: 16px;
-        color: #fff;
-        position: absolute;
-        left: 20px;
-        top: 20px;
-      }
-      p {
-        font-size: 12px;
-        color: #fff;
-        width: 200px;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        line-height: 18px;
-        position: absolute;
-        top: 50px;
-        left: 20px;
-        opacity: 0.5;
+        cursor: pointer;
         transition: all 300ms;
+        position: relative;
+        img {
+          width: 275px;
+          height: 100px;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        h4 {
+          width: 200px;
+          height: 18px;
+          overflow: hidden;
+          font-size: 16px;
+          color: #fff;
+          position: absolute;
+          left: 20px;
+          top: 20px;
+        }
+        p {
+          font-size: 12px;
+          color: #fff;
+          width: 200px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+          line-height: 18px;
+          position: absolute;
+          top: 50px;
+          left: 20px;
+          opacity: 0.5;
+          transition: all 300ms;
+        }
       }
     }
   }

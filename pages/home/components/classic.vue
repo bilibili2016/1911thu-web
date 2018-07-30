@@ -1,27 +1,27 @@
 <template>
   <div class="bg">
     <el-row class="center">
-      <!-- <v-title :data="titleThree"></v-title> -->
-      <!-- <v-card ref="card" :data="classicData" :config="config"></v-card> -->
-      <h1 class="clearfix">{{titleThree}}
-        <span class="fr" @click="getMore(linktwo)">查看更多</span>
+      <h1 class="clearfix">
+        <span class="title">{{titleThree}}</span>
+        <span class="fr moredata" @click="getMore(linktwo)">查看更多</span>
       </h1>
       <div class="goodCourse" :data="classicData">
-        <div class="courseLi clearfix" v-for="(course,index) in classicData" :key="index">
+        <div class="courseLi clearfix" v-for="(course,index) in classicData" :key="index" @click="courseInfo(course)">
           <div class="fl">
-            <img :src="course.teacher_picture" alt="" @click="courseInfo(course)">
+            <img :src="course.teacher_picture" alt="">
           </div>
           <div class="fr courseInfo">
-            <h4 @click="courseInfo(course)">{{course.title}}</h4>
+            <h4>{{course.title}}</h4>
             <h5>{{course.deputy_title}}</h5>
+
+            <p v-if="course.is_free === '1'" class="money">￥{{course.present_price}}</p>
+            <p v-else class="money">免费</p>
             <h6 class="clearfix">
               <p class="fl">{{course.study_time}}学时 <img :src="stydyNum" alt=""> {{course.study_number}}</p>
               <p class="fr">
                 <el-rate disabled v-model="course.score" class="itemBox-rate"></el-rate>
               </p>
             </h6>
-            <p v-if="course.is_free === '1'">￥{{course.present_price}}</p>
-            <p v-else>免费</p>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@ import CustomTitle from '@/components/common/Title.vue'
 import CustomCard from '@/components/common/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 export default {
-  props: ['config', 'classicData', 'titleThree', 'linktwo'],
+  props: ['classicData', 'titleThree', 'linktwo'],
   components: {
     'v-title': CustomTitle,
     'v-card': CustomCard,
@@ -84,6 +84,7 @@ export default {
     // border-radius: 16px;
     box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
     transition: all 400ms;
+    cursor: pointer;
     &:hover {
       box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
       padding: 10px;
@@ -101,28 +102,20 @@ export default {
     div.fl img {
       width: 250px;
       height: 160px;
-      // border-radius: 16px;
       overflow: hidden;
       transition: all 400ms;
-      cursor: pointer;
     }
     .courseInfo {
-      width: 284px;
+      width: 283px;
       padding: 10px 30px 10px 20px;
       transition: all 400ms;
       h4 {
         width: 235px;
-        height: 47px;
         margin-top: 5px;
         color: #1c1f21;
         font-size: 16px;
         line-height: 22px;
         transition: all 400ms;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
-        cursor: pointer;
-
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -150,6 +143,12 @@ export default {
           margin-left: 17px;
         }
       }
+      .money {
+        font-size: 14px;
+        font-family: MicrosoftYaHei;
+        color: rgba(28, 31, 33, 1);
+        padding: 10px 0px 17px 0px;
+      }
       & > p {
         margin-top: 8px;
         color: #1c1f21;
@@ -160,8 +159,11 @@ export default {
 }
 h1 {
   color: #222;
-  margin: 70px 0px 60px;
-  span {
+  margin: 70px 0px 50px;
+  .title {
+    padding-top: 10px;
+  }
+  .moredata {
     width: 128px;
     height: 40px;
     line-height: 38px;
@@ -174,7 +176,7 @@ h1 {
     transition: all 300ms;
     cursor: pointer;
   }
-  span:hover {
+  .moredata:hover {
     color: #fff;
     background-color: #8f4acb;
     border-color: #8f4acb;

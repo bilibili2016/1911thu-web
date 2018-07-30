@@ -3,51 +3,53 @@
     <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
       <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic5.png" alt="">
       <div class="top-text">
-        <h1 class="top-h1">你好，培训方案规划者</h1>
-        <p class="top-desc">如果您正在为帮助领导选课烦恼、或者正在为企业培训 、提醒进行规划， EXED为您精心准备了定制课程方案和高端课程。
+        <h1 class="top-h1">1911学堂</h1>
+        <p class="top-desc">源自清华、面向世界，集聚清华大学、北京大学等国内外知名高校师资， 为党政干部与企事业单位高管提供与时俱进的终身教育解决方案。
+
         </p>
         <div class="top-button" @click="handleScroll">
-          请填写联系方式
+          填写联系方式，免费申请课程体验。
+          <span class="right">GO</span>
         </div>
       </div>
     </div>
     <div :class="{topBottom:istopBottom}" ref="topBottom">
       <div class="why">
-        <h3>为什么选择我们</h3>
+        <h3>为什么选择1911学堂</h3>
         <div class="why-con clearfix">
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic1.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic25.png" alt="">+
             </div>
-            <p class="item-desc1">深度体验顶级商学院文化</p>
+            <p class="item-desc1">雄厚的师资力量</p>
             <span class="item-line"></span>
-            <p class="item-desc2">清华经管学院是率先获得AACSB和EQUIS两大 全球管理教育顶级认证的中国内地商学院。</p>
+            <p class="item-desc2">集聚清华大学等国内外知名大学学者教授、各领域精英联合授课。</p>
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic2.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic26.png" alt="">
             </div>
-            <p class="item-desc1">国内课程均在清华经管学院授课</p>
+            <p class="item-desc1">与时俱进的系统化创新课程体系</p>
             <span class="item-line"></span>
-            <p class="item-desc2">高管教育中心(EXED)与MBA、EMBA、本硕博并列为学院教学部门，经过十多年的沉淀，成就一套规范、完善、实效的企业高管培训课程体系。
+            <p class="item-desc2">理论学习与经典实践案例相结合，权威、实战、实用，以解决问题为导向。
             </p>
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic3.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic27.png" alt="">
             </div>
-            <p class="item-desc1">领略大师风采，启迪心智</p>
+            <p class="item-desc1">线上+线下自由组合的学习模式</p>
             <span class="item-line"></span>
-            <p class="item-desc2">160多位清华大学经济管理学院全职教授及著名 经济学家、知名学者精心设计并亲自授课。
+            <p class="item-desc2">基于大数据分析的个性化学习，线上、线下多种 学习模式可供选择，安排灵活。
             </p>
           </div>
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic4.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic28.png" alt="">
             </div>
-            <p class="item-desc1">打造最有价值的清华校友人脉</p>
+            <p class="item-desc1">清华认证证书</p>
             <span class="item-line"></span>
-            <p class="item-desc2">6万多各行业精英校友资源，形式多样的校友活 动为学员之间搭起交流合作平台。
+            <p class="item-desc2">完成课程学习并通过相应考核后，可获得清华大 学及相关合作单位认证证书。
             </p>
           </div>
         </div>
@@ -56,11 +58,11 @@
         <h3>1911学堂课程体系</h3>
         <p class="course-small-title">包含560余门课程</p>
         <ul class="list clearfix">
-          <li v-for="li in courseList" :key="li.id" class="list-item">
+          <li v-for="li in courseList" :key="li.id" class="list-item" @click="goCourseList(li)">
             <p class="item-desc1">{{li.title}}</p>
             <!-- <p class=item-desc2>{{li.number}}</p> -->
           </li>
-          <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
+          <!-- <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
             <div class="item-img">
               <img :src="item.src" alt="">
             </div>
@@ -68,9 +70,43 @@
               <p class="item-desc-text">{{item.title}}</p>
               <p class=item-desc-more>了解更多></p>
             </div>
-          </li>
+          </li> -->
 
         </ul>
+        <div class="course-bottom">
+          <div class="left">
+            <div class="con">
+              <p class="title">课程定制服务</p>
+              <p class="text">如果您有更多、更独特、更专业的课程需求，请联系我们， 1911学堂将根据需求，为您量身定制高品质的培训课程。
+              </p>
+              <div class="btn" @click="knowDetail">了解详情</div>
+            </div>
+          </div>
+          <div class="right">
+            <img src="http://papn9j3ys.bkt.clouddn.com/insitituationCourse-bg.png" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="together">
+        <h4>与1911学堂一起</h4>
+        <div class="list">
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_1.png" alt="">
+            <p>加快知识更新</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_2.png" alt="">
+            <p>转变思维方式</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_3.png" alt="">
+            <p>提高学习能力</p>
+          </div>
+          <div>
+            <img src="http://papn9j3ys.bkt.clouddn.com/together_4.png" alt="">
+            <p>改善行为模式</p>
+          </div>
+        </div>
       </div>
       <div class="psrocess">
         <div class="route">
@@ -109,7 +145,7 @@
           <div class="formDIv">
             <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
               <el-form-item label="" prop="companyname">
-                <el-autocomplete class="inline-input" placeholder="您的机构名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+                <el-autocomplete class="inline-input" placeholder="您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
               </el-form-item>
               <el-form-item label="" prop="person">
                 <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
@@ -176,39 +212,69 @@ export default {
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_1.png',
           title: '干部网络学院',
-          number: '（10余门课程）'
+          number: '（10余门课程）',
+          cidform: {
+            cids: '1',
+            indexs: '',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_2.png',
           title: '在线商学院',
           number: '（14个专题，110余门课程）',
-          link: '/other/enterprisecustom'
+          link: '/other/enterprisecustom',
+          cidform: {
+            cids: '17',
+            indexs: '1',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_3.png',
           title: '职场学院',
-          number: '（12个模块，160余门课程）'
+          number: '（12个模块，160余门课程）',
+          cidform: {
+            cids: '19',
+            indexs: '2',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_4.png',
           title: '党政委托项目',
-          number: '（14个模块，150余门课程）'
+          number: '（14个模块，150余门课程）',
+          cidform: {
+            cids: '16',
+            indexs: '3',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_5.png',
           title: '企业内训项目',
-          number: '（6个模块，初期20余门课程）'
+          number: '（6个模块，初期20余门课程）',
+          cidform: {
+            cids: '18',
+            indexs: '4',
+            pids: '0'
+          }
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_6.png',
-          title: '管理公开项目',
-          number: '（11个行业，110余门课程）'
+          title: '......',
+          number: '（11个行业，110余门课程）',
+          cidform: {
+            cids: '20',
+            indexs: '5',
+            pids: '0'
+          }
         }
       ],
       project: [
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_7.png',
-          title: '机构课程定制',
+          title: '单位课程定制',
           link: '/other/enterprisecustom'
         },
         {
@@ -223,7 +289,7 @@ export default {
         }
       ],
       buyList: [
-        '机构入口',
+        '单位入口',
         '我要选课',
         '选择课程',
         '购物车结算',
@@ -246,7 +312,7 @@ export default {
       },
       rules: {
         companyname: [
-          { required: true, message: '请输入机构名', trigger: 'blur' }
+          { required: true, message: '请输入单位名', trigger: 'blur' }
         ],
         person: [
           { required: true, message: '请输入联系人姓名', trigger: 'blur' }
@@ -274,6 +340,13 @@ export default {
     ...mapState('auth', ['token'])
   },
   methods: {
+    ...mapActions('auth', ['setCid']),
+    goCourseList(li) {
+      console.log(li, '这是li')
+      this.setCid(li.cidform)
+      // window.open()
+      window.open(window.location.origin + '/course/category')
+    },
     handleScroll() {
       if (this.move) {
         this.interval = setInterval(() => {
@@ -298,23 +371,27 @@ export default {
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          if (!this.company.userID) {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: '您还没有登录，请先登录后再提交吧！'
-            })
-            return false
-          }
+          // if (!this.company.userID) {
+          //   this.$message({
+          //     showClose: true,
+          //     type: 'error',
+          //     message: '您还没有登录，请先登录后再提交吧！'
+          //   })
+          //   return false
+          // }
           return new Promise((resolve, reject) => {
             home.addCompany(this.company).then(response => {
               if (response.status === 0) {
                 this.$message({
                   showClose: true,
                   type: 'success',
-                  message: '机构信息提交成功'
+                  message: '单位信息提交成功'
                 })
-                this.$router.push('/')
+                this.company.companyname = ''
+                this.company.person = ''
+                this.company.codes = ''
+                this.company.phones = ''
+                // this.$router.push('/')
               } else {
                 this.$message({
                   showClose: true,
@@ -381,7 +458,7 @@ export default {
       let topImgHeight
       if (this.$refs.topImg) {
         topImgHeight = this.$refs.topImg.offsetHeight || this.$refs.topImg
-        totalHeight = this.headerHeight + topImgHeight
+        totalHeight = this.headerHeight + topImgHeight + this.recommendHeight
       }
 
       this.scroll =
@@ -400,7 +477,7 @@ export default {
       this.company.companyname = item.company_name
     },
     querySearchAsync(queryString, cb) {
-      //搜索机构
+      //搜索单位
       queryString = queryString.replace(/^\s+|\s+$/g, '')
       if (queryString === '') {
         return false
@@ -422,7 +499,7 @@ export default {
         )
       }
     },
-    //搜索机构 接口
+    //搜索单位 接口
     searchCompanyList() {
       if (this.company.companyname === '') {
         return false
@@ -441,6 +518,9 @@ export default {
           })
         })
       }
+    },
+    knowDetail() {
+      this.$router.push('/other/enterprisecustom')
     }
   },
   mounted() {
@@ -450,6 +530,13 @@ export default {
     this.headerHeight = document.getElementsByClassName(
       'headerBox'
     )[0].offsetHeight
+
+    if (document.getElementsByClassName('recommend')[0]) {
+      this.recommendHeight = document.getElementsByClassName(
+        'recommend'
+      )[0].offsetHeight
+    }
+
     this.buttonFormTop = this.$refs.buttonForm.offsetTop
   },
   deactivated() {

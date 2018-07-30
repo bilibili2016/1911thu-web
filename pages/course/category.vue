@@ -18,7 +18,7 @@
         <v-nothing></v-nothing>
       </div>
     </div>
-    <v-page :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
+    <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 8,
+        pagesize: 12,
         total: 5
       },
 
@@ -71,7 +71,7 @@ export default {
         pids: null,
         sortBy: 1,
         pages: 1,
-        limits: 8
+        limits: 12
       },
       cidform: {
         cids: '',
@@ -96,6 +96,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid']),
     selectCid(item, index) {
+      this.categoryForm.pages = 1
       this.pidBg = 0
       this.cidBg = item.id
       this.pidData = this.cidData[index]
@@ -106,6 +107,7 @@ export default {
       this.getcourseList()
     },
     selectPid(item, index) {
+      this.categoryForm.pages = 1
       this.pidBg = item.id
       this.cidform.pids = item.id
       this.cidform.cids = this.cid
@@ -115,6 +117,7 @@ export default {
     },
 
     selectAllCid() {
+      this.categoryForm.pages = 1
       this.cidform.cids = '0'
       this.cidform.indexs = 0
       this.cidform.pids = '0'
@@ -126,11 +129,8 @@ export default {
       this.getcourseList()
     },
     selectAllPid() {
+      this.categoryForm.pages = 1
       this.cidform.pids = '0'
-      this.cidform.cids = '0'
-      this.cidform.indexs = 0
-      this.pidData = this.cidData[0]
-      this.cidBg = 0
       this.pidBg = 0
 
       this.setCid(this.cidform)
@@ -175,27 +175,26 @@ export default {
       home.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
+        // console.log(this.pagemsg.total)
+
         this.loadCourse = false
       })
     },
     // 获取竖直分类列表
     getClassicsList() {
-      return new Promise((resolve, reject) => {
-        home.getClassicsList(this.classList).then(response => {
-          this.classList = response.data.categoryList
-          resolve(true)
-        })
+      home.getClassicsList(this.classList).then(response => {
+        this.classList = response.data.categoryList
+        // resolve(true)
       })
     },
     // 点击竖直列表获取数据
     recommendCurriculumList() {
       this.loadCourse = true
-      return new Promise((resolve, reject) => {
-        home.getClassicCourseList(this.newsCurriculumForm).then(response => {
-          this.categoryData = response.data.curriculumList
-          resolve(true)
-          this.loadCourse = false
-        })
+
+      home.getClassicCourseList(this.newsCurriculumForm).then(response => {
+        this.categoryData = response.data.curriculumList
+        // resolve(true)
+        this.loadCourse = false
       })
     },
     // 点击竖直列表

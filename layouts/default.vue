@@ -24,7 +24,9 @@ export default {
   computed: {
     ...mapState('auth', ['hsg'])
   },
-  mounted() {}
+  mounted() {
+    // console.log(window.location.origin, '123')
+  }
 }
 </script>
 <style lang="scss" scoped>

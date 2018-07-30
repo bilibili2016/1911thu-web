@@ -9,15 +9,6 @@
       </div>
     </div>
 
-    <div class="judegExplorer" v-show="judegExplorer">
-      <p>为提升浏览体验与质量,建议使用
-        <span style="color:#4182f3">Chrome</span>或
-        <span style="color:#4182f3">firefox</span>
-        <i class="el-icon-close" @click="closeBanner"></i>
-      </p>
-
-    </div>
-
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
@@ -27,7 +18,10 @@
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
-      <div :class="{ HREntry : true , islogined : isAuthenticated }">
+      <div :class="['HREntry' ,{islogined : isAuthenticated }]">
+        <span class="center" @click="addEcg" style="width:90px;">课程兑换码
+          <i></i>
+        </span>
         <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
           <i></i>
         </span>
@@ -72,6 +66,27 @@
         </ul>
       </div>
     </div>
+    <!-- 兑换码弹框 -->
+    <div class="exchange" v-show="bindForm.isBind">
+      <div class="innerWord">
+        <i class="el-icon-close closeEcg" @click="closeEcg"></i>
+        <div class="changeContent">
+          <div class="changeInput">
+            <span>课程兑换码:</span>
+            <input v-model="bindForm.courseId" placeholder="请输入您的课程兑换码，区分大小写。">
+            <p>
+              <span>{{bindForm.error}}</span>
+            </p>
+          </div>
+          <div class="changeTips">
+            <p>课程兑换码说明：</p>
+            <p>1.输入课程兑换码，绑定兑换购买的课程</p>
+            <p>2.绑定成功后，不可更改。</p>
+          </div>
+          <div :class="['bind',{input:bindForm.isInput}]" @click="goBind">绑定</div>
+        </div>
+      </div>
+    </div>
     <!-- 登录注册 -->
     <div class="start" v-if="start">
       <div class="bgt" @click="close"></div>
@@ -80,22 +95,52 @@
         <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
-            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')">
-              <el-form-item prop="phonenum">
-                <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable type="text"></el-input>
-              </el-form-item>
-              <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
-                <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
-              </el-form-item>
+            <!-- 账号密码登录 start-->
+            <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === false">
+              <!-- 账号密码登录 -->
+              <div>
+                <el-form-item prop="phonenum">
+                  <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable type="text"></el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                  <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
+                  <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
+                </el-form-item>
+              </div>
               <el-row>
-                <!-- @click="goSearchd('/home/components/forgotpassword')"  -->
                 <div @click="forget">忘记密码?</div>
-                <el-button :disabled="isClick" @click="signIns('loginData')">登录</el-button>
+                <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
+                <el-button :disabled="isloginClick" @click="signIns('loginData')">登录</el-button>
               </el-row>
             </el-form>
+            <!-- 账号密码登录 end-->
+
+            <!-- 手机验证码登录 start-->
+            <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm" v-if="mobileloginmsg === true">
+              <!-- 手机验证码登录 -->
+              <div v-if="mobileloginmsg === true">
+                <el-form-item prop="phones">
+                  <el-input v-model.number="registerMobileData.phones" placeholder="请输入登录手机号" clearable auto-complete="off" type="text"></el-input>
+                </el-form-item>
+                <el-form-item prop="codes" style="display:none">
+                  <el-input v-model.number="registerMobileData.codes" placeholder="请输入登录手机号" clearable auto-complete="off" type="text"></el-input>
+                </el-form-item>
+                <el-form-item prop="codes">
+                  <el-input class="captcha" v-model="registerMobileData.codes" placeholder="请输入验证码" auto-complete="off" type="text"></el-input>
+                  <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
+                  <el-button type="primary" :disabled="codeClick" class="getCode" @click="handleMobileGetCode('loginDatamobile')" style="line-height:0">{{bindTelData.getCode}}</el-button>
+                </el-form-item>
+              </div>
+              <el-row>
+                <div @click="forget">忘记密码?</div>
+                <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
+                <el-button :disabled="isloginClick" @click="signInsMobile('loginDatamobile')">登录</el-button>
+              </el-row>
+            </el-form>
+            <!-- 手机验证码登录 end-->
             <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
           </el-tab-pane>
+
           <!-- 注册表单 -->
           <el-tab-pane label="注册" name="register">
             <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
@@ -112,16 +157,16 @@
                 <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
               </el-form-item>
               <!-- <el-form-item prop="companyCodes">
-                <el-input v-model="registerData.companyCodes" placeholder="绑定机构ID"></el-input>
+                <el-input v-model="registerData.companyCodes" placeholder="绑定单位ID"></el-input>
                 <span class="bindCompany">(可选)</span>
               </el-form-item> -->
-              <el-form-item prop="checked">
+              <el-form-item prop="">
                 <el-checkbox-group v-model="registerData.checked">
                   <el-checkbox label="同意" name="checked"></el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
-                <el-button :disabled="isClick" class="registerUser" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
+                <el-button :disabled="isClick" class="registerUser " :class="{noSubmit:isHasClass}" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
               </el-row>
             </el-form>
             <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
@@ -143,7 +188,7 @@
             <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
           </el-form-item>
           <!-- <el-form-item prop="companyCodes">
-            <el-input v-model="bindTelData.companyCodes" placeholder="绑定机构"></el-input>
+            <el-input v-model="bindTelData.companyCodes" placeholder="绑定单位"></el-input>
             <span class="bindCompany">(可选)</span>
           </el-form-item> -->
           <el-row>
@@ -183,7 +228,7 @@ export default {
     }
     var checkCompanyCodes = (rule, value, callback) => {
       if (value !== '' && !/^[A-Za-z0-9]+$/.test(value)) {
-        return callback(new Error('请输入正确机构ID'))
+        return callback(new Error('请输入正确单位ID'))
       }
       return callback()
     }
@@ -194,6 +239,7 @@ export default {
       return callback()
     }
     return {
+      isHasClass: true,
       codeData: [], //专属邀请码根据接口长度判断是否显示
       codeListForm: {
         pages: 1,
@@ -203,10 +249,18 @@ export default {
       codeInterval: null, //注册获取验证码定时循环
       codeClick: false, //判断是否点击过 获取验证码（防重）
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
-      isClick: false, //判断是否点击过注册按钮（防重）
+      isClick: true, //判断是否点击过注册按钮（防重）
+      isloginClick: false,
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
+      bindForm: {
+        courseId: '',
+        isBind: false,
+        isInput: false,
+        showErr: false,
+        error: ''
+      },
       start: false,
       iphones: true,
       lrFrame: false,
@@ -262,6 +316,15 @@ export default {
         pwdType: 'password',
         loginTypes: 1
       },
+      // 登录数据 手机验证码
+      loginDatamobile: {
+        password: '',
+        ectpwd: '',
+        phonenum: '',
+        showPwd: false,
+        pwdType: 'password',
+        loginTypes: 2
+      },
       // 注册数据
       registerData: {
         phones: '',
@@ -272,9 +335,31 @@ export default {
         checked: false,
         companyCodes: ''
       },
+      // 手机验证码登录数据
+      registerMobileData: {
+        phones: '',
+        phonenum: '',
+        passwords: '',
+        ectpwd: '',
+        loginTypes: 2,
+        codes: '',
+        checked: false,
+        companyCodes: ''
+      },
       // 注册表单验证
       registRules: {
         phones: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          {
+            validator: checkPhone,
+            trigger: 'blur'
+          }
+        ],
+        phonenum: [
           {
             required: true,
             message: '请输入手机号',
@@ -314,7 +399,7 @@ export default {
           {
             min: 6,
             max: 6,
-            message: '请输入正确的机构ID',
+            message: '请输入正确的单位ID',
             trigger: 'blur'
           },
           {
@@ -351,6 +436,27 @@ export default {
           }
         ]
       },
+      // 短信登录表单验证
+      loginDXRules: {
+        phones: [
+          {
+            required: true,
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          {
+            validator: checkPhone,
+            trigger: 'blur'
+          }
+        ],
+        codes: [
+          {
+            required: true,
+            message: '请输入验证码',
+            trigger: 'blur'
+          }
+        ]
+      },
       // 微信绑定表单验证
       bindwxRules: {
         phones: [
@@ -375,7 +481,7 @@ export default {
           {
             min: 6,
             max: 6,
-            message: '请输入正确的机构ID',
+            message: '请输入正确的单位ID',
             trigger: 'blur'
           },
           {
@@ -407,7 +513,8 @@ export default {
       ],
       didForm: {
         dids: ''
-      }
+      },
+      mobileloginmsg: false
     }
   },
   computed: {
@@ -429,6 +536,7 @@ export default {
   methods: {
     ...mapActions('auth', [
       'signIn',
+      'signInmobile',
       'setGid',
       'setProductsNum',
       'signOut',
@@ -436,6 +544,60 @@ export default {
       'setPwd',
       'setDid'
     ]),
+    closeEcg() {
+      this.bindForm.courseId = ''
+      this.bindForm.isBind = false
+    },
+    addEcg() {
+      if (this.token) {
+        this.bindForm.isBind = true
+      } else {
+        this.$alert('抱歉，您还未登录，请先登录吧！', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            if (action === 'cancel') {
+            } else {
+              this.signOuts()
+              this.$bus.$emit('loginShow', true)
+            }
+          }
+        })
+      }
+    },
+    // 头部绑定课程
+    goBind() {
+      home.bindingCurriculumPrivate(this.bindForm).then(res => {
+        if (res.status === 0) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: res.msg
+          })
+          this.bindForm.courseId = ''
+          this.bindForm.isBind = false
+          if (window.location.pathname === '/profile') {
+            this.$bus.$emit('studyCourse')
+          }
+          this.goLink('tab-second')
+        } else if (res.status === '100100') {
+          this.bindForm.showErr = true
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+          this.bindForm.error = res.msg
+        }
+      })
+    },
+    // 验证手机登录还是账号密码登录
+    mobilelogin() {
+      this.mobileloginmsg = !this.mobileloginmsg
+      this.registerMobileData.phones = ''
+      this.registerMobileData.codes = ''
+      this.emptyForm()
+      // this.registerData.codes = '123'
+    },
     explorer() {
       if (!!window.ActiveXObject || 'ActiveXObject' in window) {
         this.judegExplorer = true
@@ -450,7 +612,6 @@ export default {
     },
     closeBanner() {
       this.bannerMsg = false
-      this.judegExplorer = false
     },
     getCount() {
       return new Promise((resolve, reject) => {
@@ -474,8 +635,9 @@ export default {
       this.activeName = 'login'
       this.stop()
       this.bgMsg = true
+      this.mobileloginmsg = false
     },
-    // 获取验证码 this.registerData
+    // 注册时候获取验证码 this.registerData
     async handleGetCode(data) {
       if (this.bindTelData.seconds === 30) {
         if (this.bindTelData.captchaDisable === false) {
@@ -505,10 +667,49 @@ export default {
         }
       }
     },
+    // 手机验证码 登录时候
+    async handleMobileGetCode() {
+      if (!/^[1][3,4,5,6,7,8][0-9]{9}$/.test(this.registerMobileData.phones)) {
+        this.$message({
+          type: 'error',
+          message: '请输入正确手机号'
+        })
+      } else {
+        if (this.bindTelData.seconds === 30) {
+          if (this.bindTelData.captchaDisable === false) {
+            return new Promise((resolve, reject) => {
+              auth.smsCodes(this.registerMobileData).then(response => {
+                this.$message({
+                  type: response.status === 0 ? 'success' : 'error',
+                  message: response.msg
+                })
+                this.bindTelData.captchaDisable = true
+                this.bindTelData.getCode =
+                  this.bindTelData.seconds + '秒后重新发送'
+                this.codeInterval = setInterval(() => {
+                  if (this.bindTelData.seconds <= 0) {
+                    this.bindTelData.getCode = '获取验证码'
+                    this.bindTelData.seconds = 30
+                    this.bindTelData.captchaDisable = false
+                    this.codeClick = false
+                    clearInterval(this.codeInterval)
+                  } else {
+                    this.bindTelData.getCode =
+                      --this.bindTelData.seconds + '秒后重新发送'
+                  }
+                }, 1000)
+              })
+            })
+          }
+        }
+      }
+    },
     // 验证手机号是否存在
     verifyRgTel() {
       this.codeClick = true
       if (this.errorTel.tel === this.registerData.phones) {
+        zxc
+
         this.$message({
           showClose: true,
           type: 'error',
@@ -517,27 +718,25 @@ export default {
         this.codeClick = false
       } else {
         if (this.bindTelData.seconds == 30) {
-          return new Promise((resolve, reject) => {
-            auth.verifyPhone(this.registerData).then(response => {
-              if (response.status !== 0) {
-                this.errorTel.tel = this.registerData.phones
-                this.errorTel.msg = response.msg
-                this.$message({
-                  showClose: true,
-                  type: 'error',
-                  message: response.msg
-                })
-                this.bindTelData.captchaDisable = true
-                this.codeClick = false
-              } else {
-                if (this.bindTelData.seconds === 30) {
-                  this.errorTel.tel = null
-                  this.errorTel.msg = null
-                  this.bindTelData.captchaDisable = false
-                  this.handleGetCode(this.registerData)
-                }
+          auth.verifyPhone(this.registerData).then(response => {
+            if (response.status !== 0) {
+              this.errorTel.tel = this.registerData.phones
+              this.errorTel.msg = response.msg
+              this.$message({
+                showClose: true,
+                type: 'error',
+                message: response.msg
+              })
+              this.bindTelData.captchaDisable = true
+              this.codeClick = false
+            } else {
+              if (this.bindTelData.seconds === 30) {
+                this.errorTel.tel = null
+                this.errorTel.msg = null
+                this.bindTelData.captchaDisable = false
+                this.handleGetCode(this.registerData)
               }
-            })
+            }
           })
         }
       }
@@ -568,19 +767,17 @@ export default {
       this.loginData.password = this.registerData.passwords
       this.loginData.ectpwd = encryption(this.registerData.passwords)
       this.loadLogin = true
-      return new Promise((resolve, reject) => {
-        this.signIn(this.loginData).then(response => {
-          this.$message({
-            showClose: true,
-            type: response.status === 0 ? 'success' : 'error',
-            message: response.msg
-          })
-          if (response.status === 0) {
-            this.close()
-            this.getUserInfo()
-          }
-          this.loadLogin = false
+      this.signIn(this.loginData).then(response => {
+        this.$message({
+          showClose: true,
+          type: response.status === 0 ? 'success' : 'error',
+          message: response.msg
         })
+        if (response.status === 0) {
+          this.close()
+          this.getUserInfo()
+        }
+        this.loadLogin = false
       })
     },
     // 注册 请求
@@ -592,21 +789,19 @@ export default {
         if (this.registerData.checked) {
           if (valid) {
             this.loadLogin = true
-            return new Promise((resolve, reject) => {
-              auth.signUp(this.registerData).then(response => {
-                this.$message({
-                  showClose: true,
-                  type: response.status === 0 ? 'success' : 'error',
-                  message: response.msg
-                })
-                if (response.status === 0) {
-                  this.alreadySignin()
-                  this.close()
-                }
-                this.loadLogin = false
-                this.isClick = false
-                this.isloading = false
+            auth.signUp(this.registerData).then(response => {
+              this.$message({
+                showClose: true,
+                type: response.status === 0 ? 'success' : 'error',
+                message: response.msg
               })
+              if (response.status === 0) {
+                this.alreadySignin()
+                this.close()
+              }
+              this.loadLogin = false
+              this.isClick = false
+              this.isloading = false
             })
           } else {
             this.isClick = false
@@ -619,37 +814,70 @@ export default {
         }
       })
     },
-    // 登录 请求
+    // 账号密码 登录 请求
     signIns(formName) {
-      this.isClick = true
       this.isloading = false
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
           // this.loadLogin = true
-          return new Promise((resolve, reject) => {
-            this.signIn(this.loginData).then(response => {
-              this.$message({
-                showClose: true,
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
-              })
 
-              if (response.status === 0) {
-                this.close()
-                this.getUserInfo()
-                this.getCount()
-                this.getCodeList()
-                persistStore.set('loginMsg', false)
-                this.$bus.$emit('reLogin', true)
-              }
-              this.isClick = false
-              this.isloading = false
-              // this.loadLogin = false
+          this.signIn(this.loginData).then(response => {
+            this.$message({
+              showClose: true,
+              type: response.status === 0 ? 'success' : 'error',
+              message: response.msg
             })
+
+            if (response.status === 0) {
+              this.close()
+              this.getUserInfo()
+              this.getCount()
+              this.getCodeList()
+              persistStore.set('loginMsg', false)
+              this.$bus.$emit('reLogin', true)
+            }
+            this.isloginClick = false
+            this.isloading = false
+            // this.loadLogin = false
           })
         } else {
-          this.isClick = false
+          this.isloginClick = false
+          this.isloading = false
+          return false
+        }
+      })
+      this.move()
+    },
+    // 手机验证码 登录
+    signInsMobile(formName) {
+      this.isloginClick = true
+      this.isloading = false
+      // this.loginData.ectpwd = encryption(this.loginData.password)
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          // this.loadLogin = true
+
+          this.signInmobile(this.registerMobileData).then(response => {
+            this.$message({
+              showClose: true,
+              type: response.status === 0 ? 'success' : 'error',
+              message: response.msg
+            })
+
+            if (response.status === 0) {
+              this.close()
+              this.getUserInfo()
+              this.getCount()
+              this.getCodeList()
+              persistStore.set('loginMsg', false)
+              this.$bus.$emit('reLogin', true)
+            }
+            this.isloginClick = false
+            this.isloading = false
+            // this.loadLogin = false
+          })
+        } else {
           this.isloading = false
           return false
         }
@@ -666,8 +894,10 @@ export default {
       // }
       if (link === 'http://edu.1911thu.com') {
         link = 'http://wapi.1911thu.com/Wapi/Index/wxBack'
+        this.WxLogin.appid = 'wx60c7f5b807077a7b'
       } else {
         link = 'http://test.1911thu.com/Wapi/Index/wxBack'
+        this.WxLogin.appid = 'wxefa2295aae13fe2e'
       }
       this.WxLogin.redirect_uri = encodeURIComponent(link)
       this.WxLogin.state = Math.random()
@@ -682,30 +912,29 @@ export default {
     // 微信绑定手机号
     async loginWechat() {
       this.loadLogin = true
-      return new Promise((resolve, reject) => {
-        auth.loginWechat(this.bindTelData).then(response => {
-          if (response.status === 0) {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: '登录成功！'
-            })
-            this.tokenForm.tokens = response.data.token
-            this.setToken(this.tokenForm)
-            this.getUserInfo()
-            this.getCount()
-            this.getCodeList()
-            this.closeWechat()
-            this.close()
-          } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: response.msg
-            })
-          }
-          this.loadLogin = false
-        })
+
+      auth.loginWechat(this.bindTelData).then(response => {
+        if (response.status === 0) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: '登录成功！'
+          })
+          this.tokenForm.tokens = response.data.token
+          this.setToken(this.tokenForm)
+          this.getUserInfo()
+          this.getCount()
+          this.getCodeList()
+          this.closeWechat()
+          this.close()
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
+        this.loadLogin = false
       })
     },
     //获取微信登录是否已经绑定
@@ -715,32 +944,31 @@ export default {
         this.closeWechat()
         return false
       }
-      return new Promise((resolve, reject) => {
-        auth.getWXAccredit(this.WxLogin).then(response => {
-          if (response.status === 0) {
-            clearInterval(this.getwxtime)
-            this.tokenForm.tokens = response.data.token
-            this.setToken(this.tokenForm)
-            this.getUserInfo()
-            this.getCount()
-            this.getCodeList()
-            this.scanCodeShow = false //微信扫码
-            this.closeWechat()
-          }
-          if (response.status === 100102) {
-            this.scanCodeShow = false //微信扫码
-            this.bindTelShow = true
-            this.bindTelData.captchaDisable = true
-            this.bindTelData.openid = response.data.openid
-            clearInterval(this.getwxtime)
-          } else if (response.status === 100100) {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: response.msg
-            })
-          }
-        })
+
+      auth.getWXAccredit(this.WxLogin).then(response => {
+        if (response.status === 0) {
+          clearInterval(this.getwxtime)
+          this.tokenForm.tokens = response.data.token
+          this.setToken(this.tokenForm)
+          this.getUserInfo()
+          this.getCount()
+          this.getCodeList()
+          this.scanCodeShow = false //微信扫码
+          this.closeWechat()
+        }
+        if (response.status === 100102) {
+          this.scanCodeShow = false //微信扫码
+          this.bindTelShow = true
+          this.bindTelData.captchaDisable = true
+          this.bindTelData.openid = response.data.openid
+          clearInterval(this.getwxtime)
+        } else if (response.status === 100100) {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
       })
     },
     // 忘记密码
@@ -828,6 +1056,14 @@ export default {
       // this.registerData.checked = [false]
       this.registerData.checked = false
       this.registerData.companyCodes = ''
+
+      this.registerMobileData.phones = ''
+      this.registerMobileData.passwords = ''
+      this.registerMobileData.types = 3
+      this.registerMobileData.codes = ''
+      // this.registerMobileData.checked = [false]
+      this.registerMobileData.checked = false
+      this.registerMobileData.companyCodes = ''
     },
     emptyWechatForm() {
       ;(this.bindTelData.phones = ''),
@@ -871,7 +1107,11 @@ export default {
     },
     goSearch(item) {
       this.search = this.search.replace(/[ ]/g, '')
-      if (this.search !== '') {
+      if (
+        !/[@#\$%\^&\*]+/g.test(this.search) &&
+        this.search !== '' &&
+        this.search.length < 30
+      ) {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
           case '/course/search':
@@ -882,6 +1122,11 @@ export default {
             // window.open(window.location.origin + '/course/search')
             break
         }
+      } else {
+        this.$message({
+          type: 'error',
+          message: '请输入不包含特殊字符且小于30个字符的关键词！'
+        })
       }
     },
     goSearchd(item) {
@@ -964,6 +1209,7 @@ export default {
         })
       })
     }
+    // 判断浏览器的ie型
   },
   mounted() {
     this.getCodeList()
@@ -997,6 +1243,32 @@ export default {
       this.bindTelData.seconds = 30
       this.bindTelData.captchaDisable = false
       this.codeClick = false
+    },
+    'registerData.checked'(val, oldVal) {
+      if (val) {
+        this.isClick = false
+        this.isHasClass = false
+      } else {
+        this.isClick = true
+        this.isHasClass = true
+      }
+    },
+    'bindForm.courseId'(val, oldval) {
+      if (val == '') {
+        this.bindForm.showErr = true
+        this.bindForm.isInput = false
+      } else {
+        if (/^[A-Za-z0-9]+$/.test(val)) {
+          this.bindForm.showErr = false
+          this.bindForm.isInput = true
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请您输入正确的课程兑换码！'
+          })
+        }
+      }
     }
   }
 }
@@ -1048,31 +1320,6 @@ export default {
     background-color: #6417a6;
   }
 }
-.judegExplorer {
-  width: 100%;
-
-  height: 40px;
-  line-height: 40px;
-  background-color: #f1f1f1;
-  text-align: center;
-  font-size: 16px;
-  color: #222;
-  p {
-    width: 1100px;
-    margin: 0 auto;
-  }
-  i {
-    float: right;
-    width: 20px;
-    height: 20px;
-    margin-top: 10px;
-    line-height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    color: #fff;
-    background-color: #eee;
-  }
-}
 .userPotal {
   position: absolute;
   right: 93px;
@@ -1081,5 +1328,8 @@ export default {
   color: #6417a6;
   font-weight: 500;
   cursor: pointer;
+}
+.mobile-login {
+  float: left;
 }
 </style>

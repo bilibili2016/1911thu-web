@@ -2,24 +2,24 @@
   <div class="main clearfix bindCourse">
     <div class="courseList">
       <div class="title clearfix">
-        <span>绑定课程ID</span>
-        <el-button v-show="!courseList.addNewID" class="fr addClass" @click="addID" round>新增课程ID</el-button>
+        <span>课程兑换码</span>
+        <el-button v-show="!courseList.addNewID" class="fr addClass" @click="addID" round>新增课程兑换码</el-button>
       </div>
       <div class="courseIDList">
         <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
-          <span>课程ID:</span>
+          <span>课程兑换码:</span>
           <span>{{item.invitation_code}}</span>
         </div>
       </div>
       <div v-show="courseList.addNewID">
         <div class="courseID">
-          <span>绑定课程ID:</span>
-          <input v-model="courseList.inputID" placeholder="请输入您的课程ID，区分大小写。">
+          <span>课程兑换码:</span>
+          <input v-model="courseList.inputID" placeholder="请输入您的课程兑换码，区分大小写。">
           <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
         </div>
         <div class="bindInfo">
-          <p>绑定课程ID说明：</p>
-          <p>1.输入课程ID，绑定兑换购买的课程</p>
+          <p>课程兑换码说明：</p>
+          <p>1.输入课程兑换码，绑定兑换购买的课程</p>
           <p>2.绑定成功后，不可更改。</p>
         </div>
         <div :class="[{'presentAble':courseList.presentAble},'present']">
@@ -71,7 +71,7 @@ export default {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '请您输入正确的课程ID！'
+            message: '请您输入正确的课程兑换码！'
           })
         }
       }
@@ -86,34 +86,32 @@ export default {
     // 添加课程
     doSubmit() {
       this.bindForm.courseId = this.courseList.inputID
-      return new Promise((resolve, reject) => {
-        home.bindingCurriculumPrivate(this.bindForm).then(res => {
-          if (res.status === 0) {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: res.msg
-            })
-            this.getUsedInvitationCodeList()
-            this.$bus.$emit('studyCourse')
-            this.courseList.inputID = ''
-            if (this.courseList.addNewID) {
-              this.courseList.addNewID = false
-            }
-            this.$bus.$emit('updateCourse', true)
-          } else if (res.status === '100100') {
-            this.courseList.showErr = true
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: res.msg
-            })
-            this.courseList.error = res.msg
+      home.bindingCurriculumPrivate(this.bindForm).then(res => {
+        if (res.status === 0) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: res.msg
+          })
+          this.getUsedInvitationCodeList()
+          this.$bus.$emit('studyCourse')
+          this.courseList.inputID = ''
+          if (this.courseList.addNewID) {
+            this.courseList.addNewID = false
           }
-        })
+          this.$bus.$emit('updateCourse', true)
+        } else if (res.status === '100100') {
+          this.courseList.showErr = true
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+          this.courseList.error = res.msg
+        }
       })
     },
-    // 获取已经添加的课程ID
+    // 获取已经添加的课程兑换码
     getUsedInvitationCodeList() {
       return new Promise((resolve, reject) => {
         home.getUsedInvitationCodeList(this.curruntForm).then(response => {

@@ -229,7 +229,7 @@
         <!-- 绑定Id -->
         <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
-            <i class="icon-bind"></i> 绑定课程ID</span>
+            <i class="icon-bind"></i> 课程兑换码</span>
           <v-bind></v-bind>
         </el-tab-pane>
         <!-- 专属邀请码 -->
@@ -295,15 +295,18 @@ export default {
       },
       configOne: {
         card_type: 'profile',
-        card: 'learning'
+        card: 'learning',
+        mask: true
       },
       configTwo: {
         card_type: 'profile',
-        card: 'already'
+        card: 'already',
+        mask: true
       },
       configFour: {
         card_type: 'profile',
-        card: 'overtime'
+        card: 'overtime',
+        mask: true
       },
       newData: [],
       styleForm: {
@@ -339,7 +342,7 @@ export default {
       courseList: [],
       companyData: null,
       options: [],
-      value: '查看全部',
+      value: '全部',
       collectionForm: {
         categoryId: 0,
         pages: 1,
@@ -406,7 +409,7 @@ export default {
     },
     // 切换我的课程 子类
     handleActive(item) {
-      this.value = '查看全部'
+      this.value = '全部'
       if (item.name == 'first') {
         this.pagemsg1.total = 1
         this.studyCurriculumList()
@@ -713,7 +716,10 @@ export default {
     },
     // 判断是否显示绑定邀请码弹框
     getAlertbox() {
-      if (Number(persistStore.get('paynumber')) > 1) {
+      if (
+        Number(persistStore.get('paynumber')) > 1 &&
+        persistStore.get('payComplete')
+      ) {
         if (!persistStore.get('paynumbermsg')) {
           this.centerDialogVisible = true
         }

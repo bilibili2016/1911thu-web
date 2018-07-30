@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container courseDetail">
     <div class="main clearfix">
       <!-- 面包屑 收藏分享 -->
       <div class="main-crumb">
@@ -17,13 +17,14 @@
                 <!-- {{isCollection}} -->
                 <span>收藏 </span>
               </span>
-              <span>
+              <!-- 分享暂时注释 -->
+              <!-- <span>
                 <i class="el-icon-share"></i>
                 <span> 分享 </span>
                 <div class="shareIcons">
                   <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
                 </div>
-              </span>
+              </span> -->
             </div>
           </div>
         </div>
@@ -91,7 +92,7 @@
           <div class="personal">
             <!-- 弹窗 -->
             <el-dialog title="课程评价" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-              <div v-loading="loadMsg">
+              <div v-loading="loadMsg" class="topDiv">
                 <div v-for="(item,index) in commentator" :key="index" class="dialog-line">
                   <div class="commentator clearfix">
                     <img class="fl" :src="item.head_img" alt="">
@@ -108,7 +109,7 @@
                 </div>
               </div>
               <div class="pagination course-style">
-                <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
+                <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
               </div>
             </el-dialog>
           </div>
@@ -134,6 +135,7 @@
                 <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
               </div>
               <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
+              <h5 v-else-if="item.evaluate_content===''">{{item.tags}}</h5>
               <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
             </div>
           </div>
@@ -448,12 +450,12 @@ export default {
       })
     },
     // 分享 默认设置
-    shareDefault() {
-      var $config = {
-        url: 'http://www.1911edu.com/'
-      }
-      socialShare('.social-share', $config)
-    },
+    // shareDefault() {
+    //   var $config = {
+    //     url: 'http://www.11911edu.com/'
+    //   }
+    //   socialShare('.social-share', $config)
+    // },
     // 初始化默认data
     initData() {
       this.kidForm.ids = this.kid
@@ -465,7 +467,7 @@ export default {
     //拉取服务器数据 初始化所有方法
     initAll() {
       this.initData()
-      this.shareDefault()
+      // this.shareDefault()
       this.getCourseDetail()
       this.getEvaluateList()
       this.getCourseList()

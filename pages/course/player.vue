@@ -1,3 +1,11 @@
+/*
+ * @Author: Allasm98.zhaoliang
+ * @Date: 2018-07-25 11:17:27
+ * @Last Modified by: Allasm98.zhaoliang
+ * @Last Modified time: 2018-07-30 11:22:45
+  * @File Type:
+ * @Describe:
+ */
 <template>
   <div class="playerBox clearfix" ref="playerBox">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
@@ -5,6 +13,7 @@
         <i class="el-icon-arrow-left"></i>{{player.title}}
       </div>
       <div class="playInner" ref="playInner">
+        <!-- <div id="player-container-id" style="width:100%; height:500px;"></div> -->
         <video id="movd" ref="movd" preload="auto" playsinline webkit-playinline x5-playinline></video>
       </div>
       <div class="playBottom clearfix">
@@ -15,22 +24,23 @@
           </div>
         </span>
         <span class="fl problem" @click="showRpt">报告问题</span>
-        <span class="fr share" style="position:reletive">
+        <!-- <span class="fr share" style="position:reletive">
           <i class="el-icon-share "></i>分享
           <span class="shareIcond">
             <span class="social-share" data-sites="weibo,qq,wechat"></span>
           </span>
 
-        </span>
-        <span class="fr collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
-          <i class="el-icon-star-on"></i>
-          <span>收藏</span>
-        </span>
-        <span class="fr elt" @click="showElt" v-if="this.iseve === 0">
+        </span> -->
+
+        <span class="fl elt" @click="showElt" v-if="this.iseve === 0">
           <i class="el-icon-edit"></i>课程评价
         </span>
-        <span class="fr elt" v-else :class=" { bag: this.iseve === 1 }">
+        <span class="fl elt" v-else :class=" { bag: this.iseve === 1 }">
           <i class="el-icon-edit"></i>已评价
+        </span>
+        <span class="fl collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
+          <i class="el-icon-star-on"></i>
+          <span>收藏</span>
         </span>
       </div>
     </div>
@@ -130,8 +140,8 @@ export default {
         cartid: null
       },
       ischeck: '',
-      mediaRW: 28,
-      mediaLW: 72,
+      mediaRW: 22,
+      mediaLW: 78,
       mediaRInner: true,
       fileID: '',
       appID: '',
@@ -193,6 +203,7 @@ export default {
       tcplayer: {
         fileID: '',
         appID: '',
+        mp4: '',
         autoplay: false, //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
         plugins: {
           ContinuePlay: {
@@ -298,7 +309,7 @@ export default {
     },
     handleCourse(item, index) {
       this.ischeck = item.id
-      this.playing = this.playImg
+      this.playing = this.pauseImg
       persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
       clearInterval(this.interval)
@@ -327,12 +338,14 @@ export default {
       // this.borderIndex = index
       this.addEvaluateForm.tag.push(val.value)
     },
+    // 去老师详情
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
 
       this.setTid(this.tidForm)
       window.open(window.location.origin + '/home/components/teacher')
     },
+    // 提示跳转购车
     goShoppingCart(msg) {
       this.$confirm(msg, '提示', {
         confirmButtonText: '去购买',
@@ -352,6 +365,7 @@ export default {
           // })
         })
     },
+    // 添加购物车
     addShopCart() {
       this.curriculumcartids.cartid = this.kid
       return new Promise((resolve, reject) => {
@@ -377,6 +391,7 @@ export default {
       this.radioBtn = ''
       this.word = ''
     },
+    // 改变屏幕宽度
     resize() {
       if (this.$refs.playerBox) {
         const h = this.$refs.playerBox.offsetHeight
@@ -394,10 +409,10 @@ export default {
         this.mediaLW = 100
         this.$refs.movd.children[0].style.width = this.mediaLW + '%'
       } else {
-        this.mediaRW = 28
+        this.mediaRW = 22
         this.mediaRInner = true
         this.mediaRIcon = 'el-icon-arrow-right'
-        this.mediaLW = 72
+        this.mediaLW = 78
       }
       // this.resize();
     },
@@ -476,7 +491,6 @@ export default {
         socket.emit('watchRecordingTime_disconnect')
       })
       player.on('volumechange', () => {
-        consoel.log('volumechange')
         this.isHasClass()
         // console.log(this.$refs.videoButton.src)
         persistStore.set('volume', player.volume())
@@ -508,27 +522,20 @@ export default {
         that.playing = that.playImg
       })
       // 计时器
-      players.getPlayerInfos(this.playerForm).then(response => {
-        if (response.status === '100100') {
-          this.goShoppingCart(response.msg)
-        } else if (response.status === '100006') {
-          this.$alert('您已退出登录，请重新登录', '温馨提示', {
-            confirmButtonText: '确定',
-            callback: action => {
-              this.signOuts()
-              //初始化首页数据
-              this.$bus.$emit('reLogin', true)
-              this.$bus.$emit('loginShow', true)
-            }
-          })
-        } else {
-          if (response.data.playAuthInfo.videoViewType == false) {
-            player.loadVideoByID({
-              fileID: response.data.playAuthInfo.fileID,
-              appID: response.data.playAuthInfo.appID,
-              sign: response.data.playAuthInfo.sign,
-              t: response.data.playAuthInfo.t,
-              exper: response.data.playAuthInfo.exper
+      return new Promise((resolve, reject) => {
+        players.getPlayerInfos(this.playerForm).then(response => {
+          if (response.status === '100100') {
+            this.playing = this.pauseImg
+            this.goShoppingCart(response.msg)
+          } else if (response.status === '100006') {
+            this.$alert('您已退出登录，请重新登录', '温馨提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.signOuts()
+                //初始化首页数据
+                this.$bus.$emit('reLogin', true)
+                this.$bus.$emit('loginShow', true)
+              }
             })
           } else {
             player.loadVideoByID({
@@ -683,16 +690,39 @@ export default {
           this.collectMsg = 0
         })
       })
+    },
+    // 为播放器上当的播放按钮添加点击事件
+    addPlay() {
+      var that = this
+      document.addEventListener('click', function(e) {
+        event = e || window.event
+        if (event.stopPropagation) {
+          event.stopPropagation()
+        } else if (window.event) {
+          window.event.cancelBubble = true
+        }
+        // console.log(event)
+        var target = event.path[3].classList[0]
+        if (target == 'vjs-big-play-button') {
+          players.getPlayerInfos(that.playerForm).then(response => {
+            if (response.status === '100100') {
+              that.playing = that.pauseImg
+              that.goShoppingCart(response.msg)
+            }
+          })
+        }
+      })
     }
   },
   mounted() {
     this.videoState = document.getElementById('movd')
     this.resize()
-    var $config = {
-      url: 'http://www.1911edu.com/'
-    }
+    // 分享暂时注释
+    // var $config = {
+    //   url: 'http://www.1911edu.com/'
+    // }
 
-    socialShare('.social-share', $config)
+    // socialShare('.social-share', $config)
     window.addEventListener('resize', this.resize)
     // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
@@ -706,6 +736,7 @@ export default {
       this.getEvaluateTags()
 
     this.isHasClass()
+    this.addPlay()
   },
   watch: {
     videoState(flag) {

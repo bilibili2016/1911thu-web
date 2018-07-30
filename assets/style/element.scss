@@ -18,6 +18,11 @@
   margin: 0 10px;
 }
 
+// 重置鼠标悬浮输入框时鼠标状态
+.el-input__inner {
+  cursor: auto !important;
+}
+
 /* Menu */
 
 .el-menu-item--text {
@@ -287,6 +292,11 @@
       background-color: #6417a6;
       font-size: 14px;
       color: #fff;
+    }
+    .el-button.noSubmit {
+      background-color: #eee;
+      color: #888;
+      border-color: none !important;
     }
   } // 注册表单
   #pane-register {
@@ -558,12 +568,11 @@
 // .el-tabs__active-bar{
 //   width: 30px!important;
 // }
-.collect {
-  .el-rate__icon {
-    font-size: 18px;
-  }
-}
-
+// .collect {
+//   .el-rate__icon {
+//     font-size: 18px;
+//   }
+// }
 // 修改默认button按钮 颜色
 .common-button {
   .el-button--primary.is-plain {
@@ -658,7 +667,10 @@
   }
   .el-button--primary {
     background-color: #6417a6;
-    border-color: #6417a6;
+    border: 1px solid transparent;
+    &:focus {
+      outline: none;
+    }
   }
   .el-button--primary:hover,
   .el-button--primary:focus {
@@ -1088,11 +1100,13 @@
     }
   }
   .el-dialog {
-    width: 1000px !important;
-    height: 644px;
+    width: 800px !important; // height: 500px;
+    // height: 100%;
+    min-height: 540px;
     background: rgba(255, 255, 255, 1);
     border-radius: 10px;
     overflow: hidden;
+    padding-bottom: 70px;
   }
   .el-dialog__header {
     border-bottom: 1px #e8d6f7 solid;
@@ -1106,8 +1120,26 @@
   .el-dialog__body {
     padding: 0px 20px;
     &>div {
-      height: 450px;
+      // height: 450px;
       overflow: hidden;
+    }
+    .topDiv {
+      // height: 380px;
+    }
+    .pagination {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 20px; // height: 70px; // margin-top: 19px;
+      .el-pagination {
+        margin-top: 19px;
+      }
+    }
+    .course-style {
+      margin-top: 0;
+    }
+    .container .main .evaluate-tag .personal .dialog-line {
+      width: none;
     }
   }
   .el-dialog__headerbtn .el-dialog__close {
@@ -1305,7 +1337,7 @@ input:-webkit-autofill {
   cursor: pointer;
 }
 
-//机构入口页
+//单位入口页
 .allInfo {
   .bottomForm .el-form .el-button.el-button--primary {
     border: none;
@@ -1317,6 +1349,7 @@ input:-webkit-autofill {
     border: none;
   }
 }
+
 // 邀请码弹窗
 .invitationCodeBox {
   .el-dialog--center {
@@ -1339,4 +1372,24 @@ input:-webkit-autofill {
       display: block;
     }
   }
+}
+
+//课程详情
+.courseDetail {
+  .main-header .card .courseList .course .el-card.is-always-shadow {
+    box-shadow: none !important;
+  }
+  .el-card {
+    border-radius: 0 !important;
+  }
+}
+
+// .el-rate__icon {
+//   &:hover {
+//     color: #c0c4cc !important;
+//     transform: scale(1);
+//   }
+// }
+.start .captcha {
+  width: 130px;
 }

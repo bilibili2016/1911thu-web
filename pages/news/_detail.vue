@@ -1,6 +1,8 @@
 <template>
   <div class="newsDetail">
-    <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
+    <div class="news-banner">
+      <img :src="bannerImg" alt="">
+    </div>
     <!-- 面包屑 -->
     <el-breadcrumb class="news" separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>当前位置</el-breadcrumb-item>
@@ -9,15 +11,16 @@
     </el-breadcrumb>
     <!-- 新闻内容 -->
     <div class="detail">
-      <div class="topbar">
+      <!-- 分享暂时注释 -->
+      <!-- <div class="topbar">
         <span>分享：</span>
         <div class="shareIcons">
           <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
         </div>
-      </div>
+      </div> -->
       <div class="newsContent" v-loading='loading'>
         <h3>{{newsDetail.title}}</h3>
-        <p class="time">{{getTime(newsDetail.create_time)}}</p>
+        <p class="time">{{newsDetail.create_time}}</p>
         <div class="newsInner" v-html="newsDetail.content"></div>
         <div class="next clearfix">
           <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇
@@ -47,9 +50,6 @@ export default {
   data() {
     return {
       bannerImg: 'http://papn9j3ys.bkt.clouddn.com/profile_banner03.png',
-      configs: {
-        banner_type: 'news'
-      },
       newsDetail: {},
       loading: true,
       afterNews: {
@@ -61,9 +61,9 @@ export default {
         title: ''
       },
       configShare: {
-        url: 'http://www.1911edu.com/',
+        url: 'http://edu.1911thu.com/',
         sites: ['qzone', 'qq', 'weibo', 'wechat'],
-        source: 'http://www.1911edu.com/'
+        source: 'http://edu.1911thu.com/'
         // wechatQrcodeTitle: '微信扫一扫：分享',
         // wechatQrcodeHelper:
         //   '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>'
@@ -71,9 +71,6 @@ export default {
     }
   },
   methods: {
-    getTime(time) {
-      return timestampToTime(time)
-    },
     getMore(item) {
       this.$router.push(item)
     },
@@ -87,6 +84,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.getNewInfoDetail(newsId).then(response => {
           this.newsDetail = response.data.newDetail
+          this.newsDetail.create_time = timestampToTime(
+            this.newsDetail.create_time
+          )
           if (response.data.beforeNews.id) {
             me.beforeNews = response.data.beforeNews
           } else {
@@ -104,13 +104,37 @@ export default {
     }
   },
   mounted() {
-    var $config = {
-      url: 'http://www.1911edu.com/'
-    }
-    socialShare('.social-share', $config)
+    // 分享暂时注释
+    // var $config = {
+    //   url: 'http://edu.1911thu.com/news/' + this.nid
+    // }
+    // socialShare('.social-share', $config)
     this.getNewInfoDetail(this.nid)
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
   }
 }
 </script>
+<style lang="scss" scoped>
+.newsDetail {
+  .news-banner {
+    height: 148px;
+    overflow: hidden;
+    position: relative;
+    img {
+      width: 100%;
+      height: 148px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  .detail .newsContent h3 {
+    margin: 0;
+    padding: 59px 45px 0;
+  }
+}
+</style>
+

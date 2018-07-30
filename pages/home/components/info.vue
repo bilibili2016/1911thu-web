@@ -72,13 +72,13 @@ export default {
     goDetail(news) {
       this.nidForm.nids = news.id
       this.setNid(this.nidForm)
-      window.open(window.location.origin + '/news/detail')
+      window.open(window.location.origin + '/news/' + news.id)
     },
     selectDetail(index, course, link) {
       this.nidForm.nids = course.id
       this.setNid(this.nidForm)
       this.$emit('checkdetail', course.id)
-      this.getMore(link)
+      window.open(window.location.origin + '/news/' + course.id)
     },
     getMore(item) {
       window.open(window.location.origin + item)

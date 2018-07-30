@@ -7,7 +7,7 @@
       <!-- 最新课程 -->
       <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 精品好课 -->
-      <v-classic :config="configZ" :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
+      <v-classic :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 免费专区 -->
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 名师智库 -->
@@ -80,11 +80,6 @@ export default {
         card: 'home',
         new: 'true'
       },
-      configZ: {
-        card_type: 'profile',
-        card: 'home',
-        new: 'false'
-      },
       infoOne: {
         card_type: 'infoOne'
       },
@@ -120,7 +115,7 @@ export default {
         // },
         // {
         //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
-        //   title: '机构课程定制',
+        //   title: '单位课程定制',
         //   content:
         //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
         //   link: '/other/enterprisecustom'
@@ -240,6 +235,7 @@ export default {
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
         this.classify = response.data.categoryList
+        console.log(this.classify)
       })
     },
     // 获取免费课程列表

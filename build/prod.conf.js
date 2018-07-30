@@ -33,7 +33,8 @@ config.sentry = {
       async: true
     },
     {
-      src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js'
+      src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
+      async: true
     },
     {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
@@ -43,12 +44,15 @@ config.sentry = {
       src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
       async: true
     },
+    // { src: 'http://pcgdozq49.bkt.clouddn.com/social-share.min.js', async: true }
     {
       src:
         'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
       async: true
     }
   ]),
-  (config.render = { resourceHints: false })
+  (config.render = {
+    resourceHints: false
+  })
 
 module.exports = config

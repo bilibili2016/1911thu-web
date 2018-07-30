@@ -34,10 +34,11 @@
             <p>您的购物车为空</p>
           </div>
         </div>
-        <div class="tips">
+        <div class="tips" id="tips" v-if="!isNoMsg">
           <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
         </div>
-        <div class="tableFooter" v-if="courseList && courseList.length > 0">
+        <div id="computedHeight"></div>
+        <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="courseList && courseList.length > 0">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
             <!-- <span class="deleteChecked">删除选中的课程</span> -->
@@ -103,6 +104,11 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
+      headerHeight: '',
+      tableFooteroffsetTop: '',
+      index: 0,
+      isFixed: false,
+      scroll: '',
       isNoMsg: false,
       loding: true,
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
@@ -191,7 +197,7 @@ export default {
         curriculumcartid: []
       },
       removeArray: {
-        //记录所有课程ID，全不选作为参数传入，没有修改
+        //记录所有课程兑换码，全不选作为参数传入，没有修改
         curriculumcartid: []
       },
       isRest: true,
@@ -199,7 +205,9 @@ export default {
         companyname: '1911'
       },
       restaurants: [],
-      timeout: null
+      timeout: null,
+      windowHeight: '',
+      tipsHeight: ''
     }
   },
   mounted() {
@@ -211,15 +219,18 @@ export default {
     this.$bus.$emit('bannerShow', false)
     // this.getNum()
     this.restaurants = this.loadAll()
-
-    let headerHeight = document.getElementsByClassName('headerBox')[0]
-      .offsetHeight
+    this.headerHeight = document.getElementsByClassName(
+      'headerBox'
+    )[0].offsetHeight
     let footerHeight = document.getElementsByClassName('footerBox')[0]
       .offsetHeight
-    let windowHeight = document.documentElement.clientHeight
+
+    this.windowHeight = document.documentElement.clientHeight
 
     this.$refs.shopCart.style.minHeight =
-      windowHeight - headerHeight - footerHeight + 'px'
+      this.windowHeight - this.headerHeight - footerHeight + 5 + 'px'
+
+    window.addEventListener('scroll', this.addClass)
   },
   computed: {
     ...mapState('auth', ['token', 'productsNum']),
@@ -294,7 +305,7 @@ export default {
     handleSelect(item) {
       this.companyInfo.companyname = item
     },
-    //搜索机构 接口
+    //搜索单位 接口
     searchCompanyList() {
       if (this.companyInfo.companyname === '') {
         return false
@@ -594,7 +605,48 @@ export default {
           })
         }
       }
+    },
+    //tableFooter根据页面滚动位置设置定位
+    addClass() {
+      if (document.getElementById('tips')) {
+        var tipsHeight = parseInt(
+          document.getElementById('tips').offsetTop + 170 //170:tips本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
+        )
+      }
+      this.scroll = parseInt(
+        document.documentElement.scrollTop || document.body.scrollTop
+      )
+      let scrollIns = parseInt(this.scroll + this.windowHeight)
+
+      if (scrollIns > this.tableFooteroffsetTop || scrollIns > tipsHeight) {
+        this.isFixed = false
+      } else {
+        this.isFixed = true
+      }
     }
+  },
+  updated() {
+    this.index++
+    if (this.index === 1 && document.getElementById('tableFooter')) {
+      this.tableFooteroffsetTop =
+        document.getElementById('tableFooter').offsetTop +
+        this.headerHeight +
+        10
+
+      this.tableFooteroffsetTop =
+        document.getElementById('tableFooter').offsetTop +
+        this.headerHeight +
+        10
+
+      if (this.tableFooteroffsetTop > this.windowHeight) {
+        this.isFixed = true
+      } else {
+        this.isFixed = false
+      }
+    }
+  },
+  deactivated() {
+    window.removeEventListener('scroll', this.addClass)
   }
 }
 </script>

@@ -76,6 +76,9 @@
         p:last-child {
           padding-bottom: 20px;
         }
+        p.addcp {
+          text-align: center;
+        }
         .cpnInfoLi {
           font-size: 16px;
           color: #6d687f;
@@ -102,6 +105,12 @@
       }
       .goBack {
         cursor: pointer;
+      }
+      .editOutline {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-bottom: -6px;
       }
     }
     .goods {

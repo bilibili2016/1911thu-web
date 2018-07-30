@@ -8,11 +8,11 @@
   right: 0;
   height: auto;
   color: #c0bacc;
-  background-color: #050223;
+  background-color: #202026;
   overflow: hidden;
   .mediaL {
     // width: 940px;
-    width: 72%;
+    width: 78%;
     height: 100%;
     transition: all 300ms;
     overflow: hidden;
@@ -21,7 +21,7 @@
       width: 100%;
       height: 50px;
       line-height: 50px;
-      background-color: #050223;
+      background-color: #202026;
     }
     .playTop {
       font-size: 18px;
@@ -38,6 +38,7 @@
         margin-left: 30px;
         cursor: pointer;
       }
+
       span.fl {
         padding-left: 30px;
       }
@@ -50,6 +51,14 @@
           transition: all 300ms;
           color: #8f4acb;
         }
+      }
+      span.collection {
+        // margin-right: 30px;
+        padding-left: 0 !important;
+      }
+      span.elt {
+        // margin-right: 30px;
+        padding-left: 0 !important;
       }
       .share {
         margin-right: 15px;
@@ -148,13 +157,13 @@
   }
   .mediaR {
     position: relative; // width: 340px;
-    width: 28%;
+    width: 22%;
     height: auto;
-    background-color: #050223;
+    background-color: #202026;
     transition: all 300ms;
     .inner {
       height: 100%;
-      border-left: 2px solid #151141;
+      // border-left: 2px solid #151141;
       padding: 50px 0 50px;
     }
     .title {
@@ -164,8 +173,9 @@
       padding: 0 20px;
     }
     .teacher {
-      padding: 40px 0px 20px 20px;
-      border-bottom: 2px solid #151141;
+      padding: 20px 0px 20px 20px;
+      // border-bottom: 2px solid #151141;
+      background-color: #18181f;
       cursor: pointer;
       .playername {
         width: 180px;
@@ -181,7 +191,7 @@
         height: 70px;
         border-radius: 50%;
         margin-right: 23px;
-        margin-top: 10px;
+        // margin-top: 10px;
       }
       p {
         width: 120px;
@@ -219,10 +229,10 @@
         cursor: pointer; // overflow: hidden;
         transition: background 300ms;
         &:hover {
-          background: #151141;
+          background: #18181f;
         }
         &.cli {
-          background: #151141;
+          background: #18181f;
         }
         span.playIcon {
           width: 24px;
@@ -414,7 +424,7 @@
           &.is-bordered.is-checked {
             border-color: #6417a6;
           }
-          .el-radio__input.is-checked+.el-radio__label {
+          .el-radio__input.is-checked + .el-radio__label {
             color: #6417a6;
           }
           .el-radio__input {

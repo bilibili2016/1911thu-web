@@ -9,6 +9,9 @@
 <script>
 export default {
   props: ['pagemsg'],
+  mounted() {
+    // console.log(this.pagemsg)
+  },
   methods: {
     handlePageChange(val) {
       this.$emit('handlePageChange', val)

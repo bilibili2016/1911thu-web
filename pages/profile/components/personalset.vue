@@ -40,10 +40,10 @@
             <el-form-item disable label="手机号">
               <el-input v-model="psnForm.user_name" disabled></el-input>
             </el-form-item>
-            <el-form-item label="机构信息" v-if="hasCompany" key="psnForm.company_name">
+            <el-form-item label="单位信息" v-if="hasCompany" key="psnForm.company_name">
               <el-input v-model="psnForm.company_name"></el-input>
             </el-form-item>
-            <el-form-item label="机构信息" v-else>
+            <el-form-item label="单位信息" v-else>
               <el-input v-model="psnForm.company_name"></el-input>
             </el-form-item>
             <el-form-item size="large" class="submit">
@@ -82,7 +82,7 @@
                 <span class="default">{{psnForm.user_name}}</span>
               </li>
               <li>
-                <span>机构信息：</span>
+                <span>单位信息：</span>
                 <span class="default">{{psnForm.company_name}}</span>
               </li>
             </ul>
@@ -92,7 +92,7 @@
         <el-tab-pane label="修改密码" name="second">
           <div v-show="showPwd" class="changePwd">
             <input type="password" class="hideInput">
-            <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autocomplete="off">
+            <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autoComplete="off">
               <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
                 <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne"></el-input>
               </el-form-item>
@@ -125,7 +125,7 @@
 <script>
 import { home } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -317,6 +317,7 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
+    ...mapActions('auth', ['signOut']),
     // 切换展示/编辑个人信息
     changeCard() {
       this.showInfo = false
@@ -452,11 +453,15 @@ export default {
                 checkPass: ''
               }
               if (res.status == 0) {
-                this.$message({
-                  showClose: true,
-                  type: 'success',
-                  message: res.msg
+                this.$alert('修改成功，请重新登录！', '温馨提示', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    this.$router.push('/')
+                    this.signOut()
+                    this.$bus.$emit('loginShow', true)
+                  }
                 })
+                persistStore.clearAll()
               } else {
                 let msg = res.msg
                 this.$message({

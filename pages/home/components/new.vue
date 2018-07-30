@@ -2,11 +2,12 @@
   <div class="bg-none">
     <el-row class="center">
       <!-- <v-title :data="titleTwo"></v-title> -->
-      <h1 class="clearfix">{{titleTwo}}
-        <span class="fr" @click="getMore(linkone)">查看更多</span>
+      <h1 class="clearfix">
+        <span class="title">{{titleTwo}}</span>
+        <span class="fr moredata" @click="getMore(linkone)">查看更多</span>
       </h1>
       <v-card ref="card" :data="newData" :config="config" @selectCid="selectCid"></v-card>
-      <v-more :linkdata="linkone"></v-more>
+      <!-- <v-more :linkdata="linkone"></v-more> -->
     </el-row>
   </div>
 </template>
@@ -45,8 +46,11 @@ export default {
 <style lang="scss" scoped>
 h1 {
   color: #222;
-  margin: 70px 0px 60px;
-  span {
+  margin: 70px 0px 50px;
+  .title {
+    padding-top: 10px;
+  }
+  .moredata {
     width: 128px;
     height: 40px;
     line-height: 38px;
@@ -59,7 +63,7 @@ h1 {
     transition: all 300ms;
     cursor: pointer;
   }
-  span:hover {
+  .moredata:hover {
     color: #fff;
     background-color: #8f4acb;
     border-color: #8f4acb;
