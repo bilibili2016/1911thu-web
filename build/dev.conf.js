@@ -26,11 +26,17 @@ config.analyze = {
       async: true
     },
     {
+      src:
+        'http://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js',
+      async: true
+    },
+    {
       src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
       async: true
     },
     {
-      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js'
+      src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+      async: true
     },
     {
       src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
@@ -43,7 +49,9 @@ config.analyze = {
       async: true
     }
   ]),
-  (config.render = { resourceHints: false })
+  (config.render = {
+    resourceHints: false
+  })
 // {
 //   src:
 //     'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',

@@ -19,7 +19,7 @@
         <div class="why-con clearfix">
           <div class="why-item">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic25.png" alt="">+
+              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic25.png" alt="">
             </div>
             <p class="item-desc1">雄厚的师资力量</p>
             <span class="item-line"></span>

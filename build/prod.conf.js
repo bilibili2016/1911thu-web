@@ -37,6 +37,11 @@ config.sentry = {
       async: true
     },
     {
+      src:
+        'http://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js',
+      async: true
+    },
+    {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
     },
