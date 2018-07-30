@@ -19,7 +19,7 @@
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
       <div :class="['HREntry' ,{islogined : isAuthenticated }]">
-        <span class="center" v-show="isAuthenticated" @click="addEcg" style="width:90px;">课程兑换码
+        <span class="center" @click="addEcg" style="width:90px;">课程兑换码
           <i></i>
         </span>
         <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
@@ -549,8 +549,19 @@ export default {
       this.bindForm.isBind = false
     },
     addEcg() {
-      this.bindForm.isBind = true
+      if (this.token) {
+        this.bindForm.isBind = true
+      } else {
+        this.$alert('抱歉，您还未登录，请先登录吧！', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.signOuts()
+            this.$bus.$emit('loginShow', true)
+          }
+        })
+      }
     },
+    // 头部绑定课程
     goBind() {
       home.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
