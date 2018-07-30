@@ -238,17 +238,16 @@
             <i class="icon-code"></i> 专属邀请码</span>
           <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>
         </el-tab-pane>
-        <!-- 专属邀请码弹框 -->
-        <div class="invitationCodeBox">
-          <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center :show-close="false">
-            <span class="text">绑定优惠码，好课看不停</span>
-            <span slot="footer" class="dialog-footer">
-              <el-button type="primary" @click="invitationConfim">确 定</el-button>
-            </span>
-          </el-dialog>
-        </div>
-
       </el-tabs>
+    </div>
+    <!-- 专属邀请码弹框 -->
+    <div class="invitationCodeBox">
+      <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center :show-close="false">
+        <span class="text">绑定优惠码，好课看不停</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="invitationConfim">确 定</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
