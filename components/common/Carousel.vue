@@ -12,7 +12,7 @@ export default {
   methods: {
     goLink(link) {
       if (link != '' || link != null) {
-        this.$router.push(link)
+        window.open(link)
       }
     }
   }
