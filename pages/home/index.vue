@@ -211,6 +211,7 @@ export default {
     ...mapState('auth', ['did'])
   },
   methods: {
+    ...mapActions('auth', ['signOut']),
     async getAll() {
       await Promise.all([
         this.getBanner(),
@@ -240,6 +241,7 @@ export default {
     // 获取免费课程列表
     getFreeCourseList() {
       home.getFreeCourseList(this.freeForm).then(response => {
+        this.singleSignOn(response.status, response.msg)
         this.freeData = response.data.curriculumList
       })
     },
@@ -286,6 +288,19 @@ export default {
       home.getPointList().then(response => {
         this.dingData = response.data.pointList
       })
+    },
+    // 单点登录验证
+    singleSignOn(status, msg) {
+      if (status === '100008') {
+        this.$alert(msg + ',' + '请重新登录', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.signOut()
+            this.$bus.$emit('reLogin', true)
+            this.$bus.$emit('loginShow', true)
+          }
+        })
+      }
     }
   },
   mounted() {
