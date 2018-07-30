@@ -342,10 +342,6 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid']),
     goCourseList(li) {
-<<<<<<< HEAD
-=======
-      // console.log(li, '这是li')
->>>>>>> dev
       this.setCid(li.cidform)
       // window.open()
       if (li.cidform.cids !== '20') {
