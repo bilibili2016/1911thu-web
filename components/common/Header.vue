@@ -555,8 +555,11 @@ export default {
         this.$alert('抱歉，您还未登录，请先登录吧！', '温馨提示', {
           confirmButtonText: '确定',
           callback: action => {
-            this.signOuts()
-            this.$bus.$emit('loginShow', true)
+            if (action === 'cancel') {
+            } else {
+              this.signOuts()
+              this.$bus.$emit('loginShow', true)
+            }
           }
         })
       }
@@ -572,6 +575,9 @@ export default {
           })
           this.bindForm.courseId = ''
           this.bindForm.isBind = false
+          if (window.location.pathname === '/profile') {
+            this.$bus.$emit('studyCourse')
+          }
           this.goLink('tab-second')
         } else if (res.status === '100100') {
           this.bindForm.showErr = true
