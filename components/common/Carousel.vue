@@ -11,7 +11,9 @@ export default {
   props: ['items'],
   methods: {
     goLink(link) {
-      if (link != '' || link != null) {
+      if (link === '' || link === null) {
+        return false
+      } else {
         window.open(link)
       }
     }
