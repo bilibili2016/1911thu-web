@@ -49,7 +49,7 @@
 
 <script>
 import { home } from '~/lib/v1_sdk/index'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   props: ['bannerImg', 'config', 'isUpdate', 'isShowUpAvtor'],
   computed: {
@@ -87,6 +87,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['signOut']),
     add_img(event) {
       // var that = this
       var reader = new FileReader()
@@ -131,6 +132,17 @@ export default {
     },
     getUserInfo() {
       home.getUserInfo().then(res => {
+        if (res.status === '100008') {
+          this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.signOut()
+              this.$router.push('/')
+              this.$bus.$emit('reLogin', true)
+              this.$bus.$emit('loginShow', true)
+            }
+          })
+        }
         this.userInfo = res.data.userInfo
         this.time.hour = parseInt(this.userInfo.study_curriculum_time / 3600)
         this.time.minutes = parseInt(
