@@ -9,7 +9,7 @@
         </p>
         <div class="top-button" @click="handleScroll">
           填写联系方式，免费申请课程体验。
-          <span class="right">GO</span>
+          <span class="right" ref="rgihtGo">GO</span>
         </div>
       </div>
     </div>
@@ -538,6 +538,12 @@ export default {
     }
 
     this.buttonFormTop = this.$refs.buttonForm.offsetTop
+
+    if (navigator.userAgent.indexOf('Firefox') > 0) {
+      this.$refs.rgihtGo.style.marginLeft = '19px'
+    } else {
+      this.$refs.rgihtGo.style.marginLeft = '18px'
+    }
   },
   deactivated() {
     window.removeEventListener('scroll', this.pageScroll)
