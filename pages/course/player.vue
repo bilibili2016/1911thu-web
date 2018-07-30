@@ -467,13 +467,21 @@ export default {
       }
       player.pause()
       var link = window.location.origin
+      // if (
+      //   link === 'http://frontend.1911edu.com' ||
+      //   link == 'http://localhost:8080'
+      // ) {
+      //   link = 'http://ceshi.1911edu.com:2120'
+      // } else {
+      //   link = 'http://api.1911edu.com:2120'
+      // }
       if (
-        link === 'http://frontend.1911edu.com' ||
+        link === 'http://ceshi.1911thu.com' ||
         link == 'http://localhost:8080'
       ) {
-        link = 'http://ceshi.1911edu.com:2120'
+        link = 'http://ceshi.1911thu.com:2120'
       } else {
-        link = 'http://api.1911edu.com:2120'
+        link = 'http://wapi.1911thu.com:2120'
       }
       var socket = new io(link) //'http://ceshi.1911edu.com:2120'
       // 连接socket
