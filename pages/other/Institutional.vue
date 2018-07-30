@@ -342,10 +342,12 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid']),
     goCourseList(li) {
-      console.log(li, '这是li')
       this.setCid(li.cidform)
       // window.open()
-      window.open(window.location.origin + '/course/category')
+      if (li.cidform.cids !== '20') {
+        window.open(window.location.origin + '/course/category')
+      }
+      // window.open(window.location.origin + '/course/category')
     },
     handleScroll() {
       if (this.move) {
@@ -539,6 +541,7 @@ export default {
 
     this.buttonFormTop = this.$refs.buttonForm.offsetTop
 
+    //处理火狐一像素差的问题
     if (navigator.userAgent.indexOf('Firefox') > 0) {
       this.$refs.rgihtGo.style.marginLeft = '19px'
     } else {

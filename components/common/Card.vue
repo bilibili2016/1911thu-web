@@ -1361,8 +1361,9 @@ export default {
             .title {
               display: block;
               line-height: 20px;
+              height: 38px;
               color: #1c1f21;
-              margin-top: 20px;
+              margin-top: 16px;
               padding-right: 15px;
               overflow: hidden;
               text-overflow: ellipsis;
