@@ -226,7 +226,7 @@ export default {
       },
       seconds: 500000,
       time: '',
-      players: '',
+      player: '',
       clickMsg: false,
       tidForm: {
         tids: ''
@@ -478,14 +478,11 @@ export default {
         } else {
           // 初始化播放器
           this.tcplayer.mp4 = response.data.playAuthInfo.video_address
-          this.players = new TcPlayer('mediaPlayer', this.tcplayer)
-          window.qcplayer = this.players
+          this.player = new TcPlayer('mediaPlayer', this.tcplayer)
+          window.qcplayer = this.player
           if (persistStore.get('volume')) {
             let volume = persistStore.get('volume')
             window.qcplayer.volume(volume)
-          }
-          if (this.autoplay) {
-            window.qcplayer.play()
           }
         }
       })
