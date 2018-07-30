@@ -18,10 +18,10 @@
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
-      <div :class="{ HREntry : true , islogined : isAuthenticated }">
-        <!-- <span class="center" v-show="isAuthenticated" @click="goMycourse('tab-second')" >课程兑换码
+      <div :class="['HREntry' ,{islogined : isAuthenticated }]">
+        <span class="center" v-show="isAuthenticated" @click="addEcg" style="width:90px;">课程兑换码
           <i></i>
-        </span> -->
+        </span>
         <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
           <i></i>
         </span>
@@ -64,6 +64,27 @@
           <li v-if="this.codeData.length !== 0" @click="goLink('tab-eighth')">专属邀请码</li>
           <li @click="signOuts">退出</li>
         </ul>
+      </div>
+    </div>
+    <!-- 兑换码弹框 -->
+    <div class="exchange" v-show="bindForm.isBind">
+      <div class="innerWord">
+        <i class="el-icon-close closeEcg" @click="closeEcg"></i>
+        <div class="changeContent">
+          <div class="changeInput">
+            <span>课程兑换码:</span>
+            <input v-model="bindForm.courseId" placeholder="请输入您的课程兑换码，区分大小写。">
+            <p>
+              <span>{{bindForm.error}}</span>
+            </p>
+          </div>
+          <div class="changeTips">
+            <p>课程兑换码说明：</p>
+            <p>1.输入课程兑换码，绑定兑换购买的课程</p>
+            <p>2.绑定成功后，不可更改。</p>
+          </div>
+          <div :class="['bind',{input:bindForm.isInput}]" @click="goBind">绑定</div>
+        </div>
       </div>
     </div>
     <!-- 登录注册 -->
@@ -233,6 +254,13 @@ export default {
       searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
       downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
+      bindForm: {
+        courseId: '',
+        isBind: false,
+        isInput: false,
+        showErr: false,
+        error: ''
+      },
       start: false,
       iphones: true,
       lrFrame: false,
@@ -516,7 +544,35 @@ export default {
       'setPwd',
       'setDid'
     ]),
-
+    closeEcg() {
+      this.bindForm.courseId = ''
+      this.bindForm.isBind = false
+    },
+    addEcg() {
+      this.bindForm.isBind = true
+    },
+    goBind() {
+      home.bindingCurriculumPrivate(this.bindForm).then(res => {
+        if (res.status === 0) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: res.msg
+          })
+          this.bindForm.courseId = ''
+          this.bindForm.isBind = false
+          this.goLink('tab-second')
+        } else if (res.status === '100100') {
+          this.bindForm.showErr = true
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+          this.bindForm.error = res.msg
+        }
+      })
+    },
     // 验证手机登录还是账号密码登录
     mobilelogin() {
       this.mobileloginmsg = !this.mobileloginmsg
@@ -1176,6 +1232,23 @@ export default {
       } else {
         this.isClick = true
         this.isHasClass = true
+      }
+    },
+    'bindForm.courseId'(val, oldval) {
+      if (val == '') {
+        this.bindForm.showErr = true
+        this.bindForm.isInput = false
+      } else {
+        if (/^[A-Za-z0-9]+$/.test(val)) {
+          this.bindForm.showErr = false
+          this.bindForm.isInput = true
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请您输入正确的课程兑换码！'
+          })
+        }
       }
     }
   }

@@ -184,7 +184,7 @@ export default {
     getClassicsList() {
       home.getClassicsList(this.classList).then(response => {
         this.classList = response.data.categoryList
-        resolve(true)
+        // resolve(true)
       })
     },
     // 点击竖直列表获取数据
@@ -193,7 +193,7 @@ export default {
 
       home.getClassicCourseList(this.newsCurriculumForm).then(response => {
         this.categoryData = response.data.curriculumList
-        resolve(true)
+        // resolve(true)
         this.loadCourse = false
       })
     },

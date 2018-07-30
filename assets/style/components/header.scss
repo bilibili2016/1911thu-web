@@ -88,7 +88,7 @@ body {
       margin-left: 95px;
       height: 20px;
       &.islogined {
-        margin-left: 106px;
+        margin-left: 25px;
         height: 20px;
       }
       span {
@@ -109,8 +109,7 @@ body {
             display: inline-block;
             width: 45px;
             height: 27px;
-            background: url('http://papn9j3ys.bkt.clouddn.com/preferential.png')
-              no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/preferential.png') no-repeat;
             background-size: contain;
             position: absolute;
             top: -25px;
@@ -129,13 +128,11 @@ body {
         span {
           width: 20px;
           height: 20px;
-          background: url('http://papn9j3ys.bkt.clouddn.com/cartIcon.png')
-            no-repeat;
+          background: url('http://papn9j3ys.bkt.clouddn.com/cartIcon.png') no-repeat;
           background-size: 20px 20px;
           transition: all 300ms;
           &:hover {
-            background: url('http://papn9j3ys.bkt.clouddn.com/cartIconHover.png')
-              no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/cartIconHover.png') no-repeat;
             background-size: 20px 20px;
           }
         }
@@ -161,7 +158,7 @@ body {
         height: 40px;
         display: inline-block;
         position: relative;
-        padding: 0 21px;
+        padding: 0 15px;
         cursor: pointer;
         &:hover .downApp {
           opacity: 1;
@@ -333,6 +330,86 @@ body {
       }
     }
   }
+  .exchange {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 99;
+    .innerWord {
+      width: 580px;
+      height: 340px;
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      margin-left: -290px;
+      border-radius: 10px;
+      background-color: #fff;
+      .closeEcg {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 30px;
+        color: #6417a6;
+      }
+      .changeContent {
+        width: 100%;
+        margin-top: 72px;
+        padding: 0 35px;
+        .changeInput {
+          span {
+            color: #222;
+            font-size: 16px;
+            margin-right: 20px;
+          }
+          input {
+            width: 400px;
+            height: 50px;
+            border-radius: 5px;
+            padding-left: 20px;
+            background-color: #F1E9F8;
+            ::placeholder {
+              color: #C099EC;
+              font-size: 14px;
+            }
+          }
+          p {
+            height: 30px;
+            line-height: 30px;
+            span {
+              font-size: 13px;
+              color: #ff5f5f;
+              padding-left: 124px;
+            }
+          }
+        }
+        .changeTips {
+          padding-left: 120px;
+          p {
+            color: #AAA;
+            font-size: 12px;
+            line-height: 24px;
+          }
+        }
+        .bind {
+          width: 125px;
+          height: 42px;
+          line-height: 42px;
+          text-align: center;
+          color: #fff;
+          margin: 50px auto 0;
+          border-radius: 21px;
+          background-color: #CCCCCC;
+          cursor: pointer;
+          &.input {
+            background-color: #8f4acb;
+          }
+        }
+      }
+    }
+  }
   .start {
     width: 100%;
     height: 100%;
@@ -383,16 +460,14 @@ body {
         margin: 30px auto 25px;
         text-align: center;
         padding-right: 40px;
-        background: url('http://papn9j3ys.bkt.clouddn.com/wx1.png') no-repeat
-          97px 0;
+        background: url('http://papn9j3ys.bkt.clouddn.com/wx1.png') no-repeat 97px 0;
         background-size: 24px 24px;
         font-size: 14px;
         color: #555555;
         cursor: pointer;
         transition: all 300ms;
         &:hover {
-          background: url('http://papn9j3ys.bkt.clouddn.com/wx2.png') no-repeat
-            97px 0;
+          background: url('http://papn9j3ys.bkt.clouddn.com/wx2.png') no-repeat 97px 0;
           background-size: 24px 24px;
         }
       }
