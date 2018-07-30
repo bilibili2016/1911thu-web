@@ -342,10 +342,13 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid']),
     goCourseList(li) {
-      console.log(li, '这是li')
+      // console.log(li, '这是li')
       this.setCid(li.cidform)
       // window.open()
-      window.open(window.location.origin + '/course/category')
+      if (li.cidform.cids !== '20') {
+        window.open(window.location.origin + '/course/category')
+      }
+      // window.open(window.location.origin + '/course/category')
     },
     handleScroll() {
       if (this.move) {
