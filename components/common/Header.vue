@@ -561,6 +561,7 @@ export default {
         })
       }
     },
+    // 头部绑定课程
     goBind() {
       home.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
