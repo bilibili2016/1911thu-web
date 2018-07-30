@@ -1,20 +1,47 @@
 <template>
   <el-carousel :interval="5000" class="lbt indexBanner">
     <el-carousel-item v-for="(img,index) in items" :key="index">
-      <img :src="img.picture" alt="" @click="goLink(img.jump_url)">
+      <img :src="img.picture" alt="" @click="goLink(img.jump_url,img.jump_type,img.jump_id)">
     </el-carousel-item>
   </el-carousel>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['items'],
+  data() {
+    return {
+      kidForm: {
+        kids: ''
+      }
+    }
+  },
   methods: {
-    goLink(link) {
-      if (link === '' || link === null) {
+    ...mapActions('auth', ['setKid']),
+    goLink(link, type, id) {
+      if (type === '0') {
+        if (link === '' || link === null) {
+          return false
+        } else {
+          window.open(link)
+        }
+      }
+      if (type === '1') {
+        if (id === '' || id == null) {
+          return false
+        }
+        this.kidForm.kids = id
+        persistStore.set('curriculumId', id)
+        this.setKid(this.kidForm)
+        window.open(window.location.origin + '/course/coursedetail')
+      }
+      if (type === '2') {
+        if (id === '' || id == null) {
+          return false
+        }
         return false
-      } else {
-        window.open(link)
       }
     }
   }
