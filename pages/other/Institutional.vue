@@ -539,6 +539,7 @@ export default {
 
     this.buttonFormTop = this.$refs.buttonForm.offsetTop
 
+    //处理火狐一像素差的问题
     if (navigator.userAgent.indexOf('Firefox') > 0) {
       this.$refs.rgihtGo.style.marginLeft = '19px'
     } else {
