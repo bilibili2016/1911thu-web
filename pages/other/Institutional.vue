@@ -530,13 +530,11 @@ export default {
     this.headerHeight = document.getElementsByClassName(
       'headerBox'
     )[0].offsetHeight
-    // console.log(document.getElementsByClassName('recommend'))
 
     if (document.getElementsByClassName('recommend')[0]) {
       this.recommendHeight = document.getElementsByClassName(
         'recommend'
       )[0].offsetHeight
-      // console.log(this.recommendHeight)
     }
 
     this.buttonFormTop = this.$refs.buttonForm.offsetTop
