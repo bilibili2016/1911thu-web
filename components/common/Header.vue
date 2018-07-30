@@ -160,7 +160,7 @@
                 <el-input v-model="registerData.companyCodes" placeholder="绑定单位ID"></el-input>
                 <span class="bindCompany">(可选)</span>
               </el-form-item> -->
-              <el-form-item prop="checked">
+              <el-form-item prop="">
                 <el-checkbox-group v-model="registerData.checked">
                   <el-checkbox label="同意" name="checked"></el-checkbox>
                 </el-checkbox-group>
