@@ -1,14 +1,23 @@
 <template>
   <el-carousel :interval="5000" class="lbt indexBanner">
     <el-carousel-item v-for="(img,index) in items" :key="index">
-      <img :src="img.picture" alt="">
+      <img :src="img.picture" alt="" @click="goLink(img.jump_url)">
     </el-carousel-item>
   </el-carousel>
 </template>
 
 <script>
 export default {
-  props: ['items']
+  props: ['items'],
+  methods: {
+    goLink(link) {
+      if (link === '' || link === null) {
+        return false
+      } else {
+        window.open(link)
+      }
+    }
+  }
 }
 </script>
 

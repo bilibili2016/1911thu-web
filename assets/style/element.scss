@@ -10,11 +10,11 @@
   border-radius: $--button-large-border-radius;
 }
 
-.el-button+.el-button {
+.el-button + .el-button {
   margin: 0 10px;
 }
 
-.el-button+.el-dropdown {
+.el-button + .el-dropdown {
   margin: 0 10px;
 }
 
@@ -444,6 +444,7 @@
 // personialSet页
 .personalSet {
   // tab切换
+
   .el-tabs__nav-wrap {
     margin: 0;
     .el-tabs__nav-scroll {
@@ -851,7 +852,10 @@
 
 // profile页面修改tab
 .profile {
-  &>div>div.el-tabs__content {
+  .el-tabs__nav {
+    width: 100%;
+  }
+  & > div > div.el-tabs__content {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
   }
@@ -905,10 +909,10 @@
       box-shadow: none;
     }
   }
-  &>.el-tabs {
+  & > .el-tabs {
     padding: 10px;
   }
-  &>.el-tabs--left,
+  & > .el-tabs--left,
   .el-tabs--right {
     overflow: auto;
   }
@@ -937,6 +941,7 @@
       padding: 50px 41px 0 44px;
     }
     .el-tabs__nav {
+      width: 100%;
       border-radius: 0;
       box-shadow: none;
       border-bottom: 1px solid #e8d6f7;
@@ -1046,7 +1051,7 @@
         position: relative;
         overflow: hidden;
       }
-      .el-radio__input.is-checked+.el-radio__label {
+      .el-radio__input.is-checked + .el-radio__label {
         background-color: #8f4acb;
         color: #fff;
         border: none;
@@ -1119,7 +1124,7 @@
   }
   .el-dialog__body {
     padding: 0px 20px;
-    &>div {
+    & > div {
       // height: 450px;
       overflow: hidden;
     }
@@ -1381,6 +1386,22 @@ input:-webkit-autofill {
   }
   .el-card {
     border-radius: 0 !important;
+  }
+
+  .el-dialog__header {
+    padding: 17px 0 17px 40px;
+  }
+  .evaluate-tag .el-dialog__body {
+    padding: 0 40px;
+  }
+  .dialog-line .commentator .rates {
+    margin: 7px 0 0 20px !important;
+  }
+  .dialog-line .commentator h5 {
+    line-height: 30px !important;
+  }
+  .main .evaluate-tag .personal .dialog-line .commentator .fl {
+    margin-right: 20px;
   }
 }
 
