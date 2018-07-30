@@ -76,7 +76,6 @@ export default {
       this.cgForm.cgs = '0'
       this.setCg(this.cgForm)
       this.cidform.pids = item.id
-      console.log(this.cidform, '这是this.cidform')
       this.setCid(this.cidform)
       window.open(window.location.origin + '/course/category')
       // this.$router.push('/course/classifycourse')
