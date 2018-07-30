@@ -52,8 +52,9 @@
                 <p :class="['itemBox-name','itemBoxTitle',{'itemBoxTitle':config.card === 'home'?true:false}]" @click="openDetail()">
                   <span :class="{'title':config.card === 'home'?true:false}">{{card.title}}</span>
                   <span v-if="config.card === 'home'" class="deputyTitle fl">{{card.deputy_title}}</span>
-                  <span v-if="config.card === 'home'&&card.is_free == '1'" class="deputyTitle fr" style="padding-right:15px;">￥{{card.present_price}}</span>
-                  <span v-if="card.is_free === '2'&&config.card!=='overtime'&&config.card!=='already'&&!config.mask" class="deputyTitle fr" style="padding-right:15px;">免费</span>
+                  <!-- 和副标题在一行的金额 -->
+                  <!-- <span v-if="config.card === 'home'&&card.is_free == '1'" class="deputyTitle fr" style="padding-right:15px;">￥{{card.present_price}}</span> -->
+                  <!-- <span v-if="card.is_free === '2'&&config.card!=='overtime'&&config.card!=='already'&&!config.mask" class="deputyTitle fr" style="padding-right:15px;">免费</span> -->
                 </p>
                 <p class="itemBox-info">
                   <span v-if="config.card === 'home'">
@@ -69,13 +70,12 @@
                 </p>
               </div>
               <!-- 作者和头衔    金额 -->
-              <!-- <div class="line-wrap" v-if="config.card === 'home'">
+              <div class="line-wrap" v-if="config.card === 'home'">
                 <div class="line-center">
-
                   <p class="price freePrise" v-if="config.card === 'home'&&card.is_free == '1'">￥{{card.present_price}}</p>
-                  <p class="freePrise" v-if="card.is_free === '2'">免费</p>
+                  <p class="freePrise" v-if="card.is_free === '2'&&config.card!=='overtime'&&config.card!=='already'&&!config.mask">免费</p>
                 </div>
-              </div> -->
+              </div>
               <!-- 学习进度 -->
               <div class="line-wraps" v-if="config.card==='learning' ">
                 <div class="line-centers ">
