@@ -125,7 +125,7 @@
 <script>
 import { home } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -317,6 +317,7 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
+    ...mapActions('auth', ['signOut']),
     // 切换展示/编辑个人信息
     changeCard() {
       this.showInfo = false
@@ -452,15 +453,13 @@ export default {
                 checkPass: ''
               }
               if (res.status == 0) {
-                // this.$message({
-                //   showClose: true,
-                //   type: 'success',
-                //   message: res.msg
-                // })
-                this.$message({
-                  showClose: true,
-                  type: 'success',
-                  message: '修改成功，请重新登录'
+                this.$alert('修改成功，请重新登录！', '温馨提示', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    this.$router.push('/')
+                    this.signOut()
+                    this.$bus.$emit('loginShow', true)
+                  }
                 })
                 persistStore.clearAll()
               } else {
