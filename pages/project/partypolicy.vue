@@ -407,7 +407,7 @@ export default {
       tableOne: '1',
       tableTwo: '1',
       tableThree: '1',
-      courseDataOne: [
+      courseDataOnea: [
         {
           title: '当前经济形势判断与区域经济发展',
           teacher: '马晓河',
@@ -427,12 +427,26 @@ export default {
           time: '3'
         }
       ],
+      courseDataOneb: [
+        {
+          title: '深化供给侧结构性改革的思路与对策',
+          teacher: '李佐军',
+          position: '国务院发展研究中心资源与环境政策研究所副所长',
+          time: '2'
+        },
+        {
+          title: '新时期中国改革的新思路和新框架',
+          teacher: '刘元春',
+          position: '中国人民大学副校长',
+          time: '0.5'
+        }
+      ],
       courseDataTwo: [
         {
-          title: '当前经济形势判断与区域经济发展',
-          teacher: '马晓河',
-          position: '国家发改委宏观院原副院长、研究员',
-          time: '1'
+          title: '领导者选拔任用中的政治素质问题',
+          teacher: '萧鸣政',
+          position: '北京大学政府管理学院行政管理系主任',
+          time: '0.5'
         },
         {
           title: '绿色经济与可持续发展',
