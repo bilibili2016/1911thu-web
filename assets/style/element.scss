@@ -1420,6 +1420,10 @@ input:-webkit-autofill {
   padding: 0px !important;
   cursor: pointer;
   left: 10px;
+  border: none;
+  // position: relative;
+  // top: 0px;
+  // left: 10px;
 }
 .el-dropdown-menu__item {
   list-style: none;
@@ -1430,8 +1434,10 @@ input:-webkit-autofill {
   color: #606266;
   cursor: pointer;
   outline: none;
+  // position: absolute;
   &:hover {
     background-color: #9947e2 !important;
     color: #fff !important;
+    width: 100%;
   }
 }
