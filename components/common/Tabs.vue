@@ -20,6 +20,7 @@
         <el-dropdown-item v-for="(item,index) in projectArr" :key="index" @click.native="handleClick(item)">{{item.category_name}}</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
+
   </div>
 
   </div>
