@@ -459,6 +459,12 @@ export default {
           teacher: '张俊伟',
           position: '国务院发展研究中心宏观经济研究部研究室主任',
           time: '3'
+        },
+        {
+          title: '中国实体经济的发展困局及破解思路',
+          teacher: '张俊伟',
+          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          time: '3'
         }
       ],
       courseDataTwos: [
