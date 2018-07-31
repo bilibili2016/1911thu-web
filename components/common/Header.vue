@@ -1211,8 +1211,6 @@ export default {
       home.getCodeList(this.codeListForm).then(response => {
         if (response.status !== '100100') {
           this.codeData = response.data.orderInvitationCodeList
-
-          resolve(true)
         }
       })
     }
