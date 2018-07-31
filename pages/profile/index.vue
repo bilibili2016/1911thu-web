@@ -845,7 +845,7 @@ export default {
         background-color: #ebe7ed;
         font-size: 16px;
         color: #222;
-        margin-bottom: 40px;
+        margin-bottom: 43px;
         .goBack {
           margin-left: 10px;
           color: #6417a6;
