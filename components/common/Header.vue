@@ -1208,14 +1208,10 @@ export default {
     },
     // 获取专属邀请码列表
     getCodeList() {
-      return new Promise((resolve, reject) => {
-        home.getCodeList(this.codeListForm).then(response => {
-          if (response.status !== '100100') {
-            this.codeData = response.data.orderInvitationCodeList
-
-            resolve(true)
-          }
-        })
+      home.getCodeList(this.codeListForm).then(response => {
+        if (response.status !== '100100') {
+          this.codeData = response.data.orderInvitationCodeList
+        }
       })
     }
     // 判断浏览器的ie型

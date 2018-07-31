@@ -261,12 +261,12 @@
             </div>
             <div class="modeList">
               <div class="modeTop">
-                <span class="fl">1</span>
-                <span class="fr">体系一：宏观政策与深 化改革</span>
+                <span class="fl">2</span>
+                <span class="fr">体系二：宏观政策与深 化改革</span>
               </div>
               <div class="modeBottom">
-                <span class="fl">3</span>
-                <span class="fr">体系三：人文素养与通 用能力提升</span>
+                <span class="fl">4</span>
+                <span class="fr">体系四：人文素养与通 用能力提升</span>
               </div>
             </div>
           </div>
@@ -302,8 +302,8 @@
               <th colspan="4">体系一：宏观政策与深化改革（线上课程）</th>
             </tr>
             <tr class="titleTwo">
-              <th colspan="2" :class="{'checked':tableOne=='1'?true:false}" @click="checkOne('1')">模块一：宏观政策解读</th>
-              <th colspan="2" :class="{'checked':tableOne=='2'?true:false}" @click="checkOne('2')">模块二：新时代深化改革</th>
+              <th colspan="2" :class="{'checked':tableOne=='1'?true:false}" @click="checkFirst('1')">模块一：宏观政策解读</th>
+              <th colspan="2" :class="{'checked':tableOne=='2'?true:false}" @click="checkFirst('2')">模块二：新时代深化改革</th>
             </tr>
             <tr class="titleThree">
               <th>课程名称</th>
@@ -311,19 +311,12 @@
               <th>职务</th>
               <th>学时</th>
             </tr>
-            <tr v-for="(item,index) in courseDataOnea" :key="index" v-show="tableOne=='1'">
+            <tr v-for="(item,index) in courseDataOne" :key="index">
               <td>{{item.title}}</td>
               <td>{{item.teacher}}</td>
               <td>{{item.position}}</td>
               <td>{{item.time}}</td>
             </tr>
-            <tr v-for="(item,index) in courseDataOneb" :key="index" v-show="tableOne=='2'">
-              <td>{{item.title}}</td>
-              <td>{{item.teacher}}</td>
-              <td>{{item.position}}</td>
-              <td>{{item.time}}</td>
-            </tr>
-
           </table>
         </div>
         <!-- 体系 表格2 -->
@@ -333,11 +326,10 @@
               <th colspan="4">体系二：公共管理与创新发展（线上课程）</th>
             </tr>
             <tr class="titleTwo">
-              <th colspan="4">
-                <span :class="{'checked':tableTwo=='1'?true:false}" @click="checkSecond('1')">模块一：领导人才管理</span>
-                <span :class="{'checked':tableTwo=='2'?true:false}" @click="checkSecond('2')">模块二：城市规划与乡村振兴</span>
-                <span :class="{'checked':tableTwo=='3'?true:false}" @click="checkSecond('3')">模块三：地方财政解析</span>
-              </th>
+              <th colspan="1" :class="{'checked':tableTwo=='1'?true:false}" @click="checkSecond('1')">模块一：领导人才管理</th>
+              <th colspan="1" :class="{'checked':tableTwo=='2'?true:false}" @click="checkSecond('2')">模块二：城市规划与乡村振兴</th>
+              <th colspan="1" :class="{'checked':tableTwo=='3'?true:false}" @click="checkSecond('3')">模块三：地方财政解析</th>
+              <th colspan="1" :class="{'checked':tableTwo=='4'?true:false}" @click="checkSecond('4')">模块四：新兴产业与国际合作</th>
             </tr>
             <tr class="titleThree">
               <th>课程名称</th>
@@ -345,19 +337,7 @@
               <th>职务</th>
               <th>学时</th>
             </tr>
-            <tr v-for="(item,index) in courseDataTwo" :key="index" v-show="tableTwo=='1'">
-              <td>{{item.title}}</td>
-              <td>{{item.teacher}}</td>
-              <td>{{item.position}}</td>
-              <td>{{item.time}}</td>
-            </tr>
-            <tr v-for="(item,index) in courseDataTwo" :key="index" v-show="tableTwo=='2'">
-              <td>{{item.title}}</td>
-              <td>{{item.teacher}}</td>
-              <td>{{item.position}}</td>
-              <td>{{item.time}}</td>
-            </tr>
-            <tr v-for="(item,index) in courseDataTwos" :key="index" v-show="tableTwo=='3'">
+            <tr v-for="(item,index) in courseDataTwo" :key="index">
               <td>{{item.title}}</td>
               <td>{{item.teacher}}</td>
               <td>{{item.position}}</td>
@@ -369,7 +349,7 @@
         <div class="table tableThree">
           <table cellpadding="0" cellspacing="0" width="100%">
             <tr class="titleOne">
-              <th colspan="4">体系三：人文素养与通用能力提升（线上课程）</th>
+              <th colspan="4">体系三：人文素养与通用能力提升</th>
             </tr>
             <tr class="titleTwo">
               <th colspan="2" :class="{'checked':tableThree=='1'?true:false}" @click="checkThird('1')">模块一：人文素养提升</th>
@@ -381,13 +361,7 @@
               <th>职务</th>
               <th>学时</th>
             </tr>
-            <tr v-for="(item,index) in courseDataThree" :key="index" v-show="tableThree=='1'">
-              <td>{{item.title}}</td>
-              <td>{{item.teacher}}</td>
-              <td>{{item.position}}</td>
-              <td>{{item.time}}</td>
-            </tr>
-            <tr v-for="(item,index) in courseDataThree" :key="index" v-show="tableThree=='2'">
+            <tr v-for="(item,index) in courseDataThree" :key="index">
               <td>{{item.title}}</td>
               <td>{{item.teacher}}</td>
               <td>{{item.position}}</td>
@@ -395,6 +369,95 @@
             </tr>
           </table>
         </div>
+        <div class="underLine">
+          <!-- 线下面授课程 -->
+          <div class="studyCourse">
+            <!-- <h3>线下面授课程</h3> -->
+            <div class="title">
+              <img class="titlt-icon-left" src="@/assets/images/policy-pic01.png" alt="">
+              <span class="text">线下面授课程</span>
+              <img class="titlt-icon-right" src="@/assets/images/policy-pic02.png" alt="">
+            </div>
+            <div class="studyInfo">
+              <h5>
+                <span class="studyTitle">学习方式</span>
+                <span>课堂面授+专题讲座+小组研讨+现场教学。</span>
+              </h5>
+              <h5>
+                <span class="studyTitle">学习时间</span>
+                <span>12学时，有效期12个月，在有效期内委托单位可根据时间自行选择两天，进行灵活安排。</span>
+              </h5>
+              <h5>
+                <span class="studyTitle">学习地点</span>
+                <span>清华大学</span>
+              </h5>
+            </div>
+          </div>
+          <!-- 体系 表格4 -->
+          <div class="table tableFour">
+            <table cellpadding="0" cellspacing="0" width="100%">
+              <tr class="titleOne">
+                <th colspan="4">体系四：新时代党政建设与科学管理（线下课程）</th>
+              </tr>
+              <tr class="titleThree">
+                <th>课程名称</th>
+                <th>主讲人</th>
+                <th>职务</th>
+                <th>学时</th>
+              </tr>
+              <tr v-for="(item,index) in courseDataFour" :key="index">
+                <td>{{item.title}}</td>
+                <td>{{item.teacher}}</td>
+                <td>{{item.position}}</td>
+                <td>{{item.time}}</td>
+              </tr>
+            </table>
+            <p>注：1911学堂将根据实际情况对上述课程及师资安排进行调整。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="companyInfo">
+        <div class="listOne">
+          <p class="title">学习认证</p>
+          <div class="content">
+            <h5>完成全部课程并通过考核者，可获得由清华大学及相关合作单位颁发的认证证书。
+            </h5>
+            <h5>1911学堂即将推出与国外高校合作的学位项目，学员在学堂所修课程的学分后期可转化为学位项目认可的学分。
+            </h5>
+          </div>
+        </div>
+        <div class="listOne">
+          <p class="title">增值服务及活动</p>
+          <div class="content">
+            <p>1、整合资源：成为同学会会员，享受全国各地区同学人脉资源；</p>
+            <p>2、课程赠送：学员可额外免费选修8学时的在线专业课程学习；</p>
+            <p>3、参加论坛：参加年度公共管理论坛，探讨时代前沿话题。</p>
+          </div>
+        </div>
+        <div class="listOne">
+          <p class="title">申请程序</p>
+          <div class="content">
+            <p>1、在1911学堂网站或APP详细填写个人信息；</p>
+            <p>2、报名成功后按照相关要求交纳学习费用；</p>
+            <p>3、学员所交学习费用得到确认后正式录入学员信息库，并收到课程码；</p>
+            <p>4、学员凭课程码登录网站参加在线学习；</p>
+            <p>5、根据面授时间参加线下学习、开学或结业典礼等。</p>
+          </div>
+        </div>
+        <div class="listOne">
+          <p class="title">申请程序</p>
+          <div class="content">
+            <p>银行汇款方式，具体信息如下：</p>
+            <p>开户单位： 一九一一未来教育科技（北京）有限公司</p>
+            <p>开户行： 中信银行北京海淀支行</p>
+            <p>账号：8110701013101386732</p>
+          </div>
+        </div>
+      </div>
+      <div class="callMe">
+        <span>点击报名课程或了解更多信息拨打咨询电话：010-62701911</span>
+        <img src="~assets/images/click_call.png" alt="">
       </div>
     </div>
   </div>
@@ -407,6 +470,9 @@ export default {
       tableOne: '1',
       tableTwo: '1',
       tableThree: '1',
+      courseDataOne: [],
+      courseDataTwo: [],
+      courseDataThree: [],
       courseDataOnea: [
         {
           title: '当前经济形势判断与区域经济发展',
@@ -425,6 +491,18 @@ export default {
           teacher: '张俊伟',
           position: '国务院发展研究中心宏观经济研究部研究室主任',
           time: '3'
+        },
+        {
+          title: '维护环境生态、发展绿色经济',
+          teacher: '任志强',
+          position: '华远集团原董事长',
+          time: '0.5'
+        },
+        {
+          title: '我国资本市场制度的短板和解决之道',
+          teacher: '刘纪鹏',
+          position: '中国政法大学商学院院长',
+          time: '0.5'
         }
       ],
       courseDataOneb: [
@@ -441,7 +519,7 @@ export default {
           time: '0.5'
         }
       ],
-      courseDataTwo: [
+      courseDataTwoa: [
         {
           title: '领导者选拔任用中的政治素质问题',
           teacher: '萧鸣政',
@@ -449,78 +527,216 @@ export default {
           time: '0.5'
         },
         {
-          title: '绿色经济与可持续发展',
-          teacher: '许小年',
-          position: '中欧国际工商学院经济学与金融学教授',
+          title: '组织部门如何选人识人用人',
+          teacher: '张国玉',
+          position: '国家行政学院政治学教研部副教授',
+          time: '2.5'
+        },
+        {
+          title: '领导干部执行力提升策略',
+          teacher: '宋世明',
+          position: '国家行政学院公共管理教研部教授',
+          time: '3'
+        },
+        {
+          title: '完善行政问责制，提升政府执行力',
+          teacher: '李军鹏',
+          position: '国家行政学院公共管理教研部教授',
+          time: '2.5'
+        },
+        {
+          title: '新时代的领导人才素质',
+          teacher: '董克用',
+          position: '中国人民大学公共管理学院原院长',
+          time: '0.5'
+        }
+      ],
+      courseDataTwob: [
+        {
+          title: '城市群规划应解决什么问题',
+          teacher: '仇保兴',
+          position: '国务院参事、住房和城乡建设部原副部长',
           time: '0.5'
         },
         {
-          title: '中国实体经济的发展困局及破解思路',
-          teacher: '张俊伟',
-          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          title: '乡村振兴战略与智慧农业发展',
+          teacher: '李国祥',
+          position: '中国社科院农村发展研究所主任',
+          time: '0.5'
+        },
+        {
+          title: '如何推进基层治理法治化',
+          teacher: '高其才',
+          position: '清华大学法学院教授',
+          time: '2.5'
+        }
+      ],
+      courseDataTwoc: [
+        {
+          title: '新常态下地方政府投融资平台转型发展问题及对策',
+          teacher: '赵全厚',
+          position: '财政部科研所金融研究室主任、研究员',
+          time: '2.5'
+        },
+        {
+          title: '我国PPP项目实施的相关法律与政策实务',
+          teacher: '郑春贤',
+          position: '中国政法大学PPP研究中心教授',
+          time: '2.5'
+        },
+        {
+          title: '财政制度变异的内容和解决方法',
+          teacher: '郭庆旺',
+          position: '中国人民大学财政金融学院院长、教授',
+          time: '0.5'
+        },
+        {
+          title: '“政府与市场关系”的经济学思考',
+          teacher: '黄桂田',
+          position: '北京大学经济学院教授',
+          time: '0.5'
+        }
+      ],
+      courseDataTwod: [
+        {
+          title: '工业机器人应用与发展思考',
+          teacher: '孙富春',
+          position: '清华大学计算机科学与技术系教授、博士生导师',
           time: '3'
         },
         {
-          title: '中国实体经济的发展困局及破解思路',
-          teacher: '张俊伟',
-          position: '国务院发展研究中心宏观经济研究部研究室主任',
-          time: '3'
-        }
-      ],
-      courseDataTwos: [
-        {
-          title: '当前经济形势判断与区域经济发展',
-          teacher: '马晓河',
-          position: '国家发改委宏观院原副院长、研究员',
+          title: '“互联网+”时代的物联网产业发展',
+          teacher: '尹浩',
+          position: '中国科学院院士',
           time: '1'
         },
         {
-          title: '绿色经济与可持续发展',
-          teacher: '许小年',
-          position: '中欧国际工商学院经济学与金融学教授',
-          time: '0.5'
+          title: '打造大健康产业链 助力“健康中国2030” ',
+          teacher: '李玲',
+          position: '北京大学中国健康发展研究中心主任',
+          time: '2.5'
         },
         {
-          title: '中国实体经济的发展困局及破解思路',
-          teacher: '张俊伟',
-          position: '国务院发展研究中心宏观经济研究部研究室主任',
-          time: '3'
-        }
-      ],
-      courseDataThree: [
-        {
-          title: '当前经济形势判断与区域经济发展',
-          teacher: '马晓河',
-          position: '国家发改委宏观院原副院长、研究员',
+          title: '中国大健康产业发展中的医养结合发展',
+          teacher: '郑静晨',
+          position: '中国工程院院士、原武警总医院院长',
           time: '1'
         },
         {
-          title: '绿色经济与可持续发展',
-          teacher: '许小年',
-          position: '中欧国际工商学院经济学与金融学教授',
-          time: '0.5'
+          title: '“一带一路”的机遇与挑战',
+          teacher: '王义桅',
+          position: '中国人民大学国际关系学院教授',
+          time: '2'
         },
         {
-          title: '中国实体经济的发展困局及破解思路',
-          teacher: '张俊伟',
-          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          title: '“一带一路”倡议与财富管理市场投资机遇',
+          teacher: '朱光耀',
+          position: '财政部原副部长',
+          time: '0.5'
+        }
+      ],
+      courseDataThreea: [
+        {
+          title: '科学应对压力，维护身心健康',
+          teacher: '祝卓宏',
+          position: '中国科学院心理研究所教授',
+          time: '2.5'
+        },
+        {
+          title: '中华优秀传统文化的创造性转化与创新性发展',
+          teacher: '楼宇烈',
+          position: '北京大学哲学系教授',
+          time: '0.5'
+        }
+      ],
+      courseDataThreeb: [
+        {
+          title: '行政领导者公共形象设计与传播',
+          teacher: '刘庆龙',
+          position: '清华大学公共管理学院教授',
+          time: '2.5'
+        },
+        {
+          title: '如何提高领导干部的说服力',
+          teacher: '吴德贵',
+          position: '中国人事科学院原副院长',
           time: '3'
+        },
+        {
+          title: '如何与境外媒体打交道',
+          teacher: '王彩平',
+          position: '国家行政学院应急管理培训中心副教授',
+          time: '2'
+        },
+        {
+          title: '群体性事件应急处置策略',
+          teacher: '张小明',
+          position: '国家行政学院应急管理中心教授',
+          time: '2.5'
+        },
+        {
+          title: '集体领导力的有效性',
+          teacher: '杨百寅',
+          position: '清华大学经济管理学院领导力与组织管理系主任',
+          time: '0.5'
+        }
+      ],
+      courseDataFour: [
+        {
+          title: '党建创新与政党发展',
+          teacher: '王长江',
+          position: '中共中央党校教授，党建教研部主任',
+          time: '4'
+        },
+        {
+          title: '政府廉政建设',
+          teacher: '程文浩',
+          position: '清华大学公共管理学院教授',
+          time: '4'
+        },
+        {
+          title: '突发事件应对与公共危机管理',
+          teacher: '张小明',
+          position: '国家行政学院应急管理中心教授',
+          time: '4'
         }
       ]
     }
   },
   methods: {
-    checkOne(items) {
+    checkFirst(items) {
+      if (items === '1') {
+        this.courseDataOne = this.courseDataOnea
+      } else {
+        this.courseDataOne = this.courseDataOneb
+      }
       this.tableOne = items
     },
     checkSecond(items) {
-      console.log(items)
-
+      if (items === '1') {
+        this.courseDataTwo = this.courseDataTwoa
+      } else if (items === '2') {
+        this.courseDataTwo = this.courseDataTwob
+      } else if (items === '3') {
+        this.courseDataTwo = this.courseDataTwoc
+      } else if (items === '4') {
+        this.courseDataTwo = this.courseDataTwod
+      }
       this.tableTwo = items
     },
     checkThird(items) {
+      if (items === '1') {
+        this.courseDataThree = this.courseDataThreea
+      } else {
+        this.courseDataThree = this.courseDataThreeb
+      }
       this.tableThree = items
     }
+  },
+  mounted() {
+    this.courseDataOne = this.courseDataOnea
+    this.courseDataTwo = this.courseDataTwoa
+    this.courseDataThree = this.courseDataThreea
   }
 }
 </script>
