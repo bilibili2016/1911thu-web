@@ -117,8 +117,9 @@
             <th colspan="4">体系一：宏观政策与深化改革（线上课程）</th>
           </tr>
           <tr class="titleTwo">
-            <th colspan="2" class="checked">模块一：宏观政策解读</th>
-            <th colspan="2">模块一：新时代深化改革</th>
+            <th colspan="2" class="checked">模块一：领导人才管理</th>
+            <th colspan="2">模块二：城市规划与乡村振兴</th>
+            <th colspan="2">模块三：地方财政解析</th>
           </tr>
           <tr class="titleThree">
             <th>课程名称</th>
@@ -138,12 +139,11 @@
       <div class="table tableThree">
         <table cellpadding="0" cellspacing="0" width="100%">
           <tr class="titleOne">
-            <th colspan="4">体系二：公共管理与创新发展（线上课程）</th>
+            <th colspan="4">体系三：人文素养与通用能力提升（线上课程）</th>
           </tr>
           <tr class="titleTwo">
-            <th colspan="2" class="checked">模块一：领导人才管理</th>
-            <th colspan="2">模块二：城市规划与乡村振兴</th>
-            <th colspan="2">模块三：地方财政解析</th>
+            <th colspan="2" class="checked">模块一：人文素养提升</th>
+            <th colspan="2">模块二：通用能力提升</th>
           </tr>
           <tr class="titleThree">
             <th>课程名称</th>
