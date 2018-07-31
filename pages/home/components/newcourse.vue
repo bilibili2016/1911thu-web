@@ -85,15 +85,13 @@ export default {
       this.openDetail()
     },
     openDetail() {
-      // window.open(window.location.origin + '/course/coursedetail')
+      window.open(window.location.origin + '/other/policyProgram')
     },
     getMore(item) {
       window.open(window.location.origin + item)
     }
   },
-  mounted() {
-    console.log(this.newData, '这是data123')
-  }
+  mounted() {}
 }
 </script>
 <style scoped lang="scss">
