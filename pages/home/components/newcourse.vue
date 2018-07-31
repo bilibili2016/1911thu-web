@@ -91,9 +91,7 @@ export default {
       window.open(window.location.origin + item)
     }
   },
-  mounted() {
-    console.log(this.newData, '这是data123')
-  }
+  mounted() {}
 }
 </script>
 <style scoped lang="scss">

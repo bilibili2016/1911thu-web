@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+<<<<<<< HEAD
 const _1b62cf17 = () => import('../pages/profile/index.vue' /* webpackChunkName: "pages/profile/index" */).then(m => m.default || m)
 const _69f81487 = () => import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */).then(m => m.default || m)
 const _1c9f70a4 = () => import('../pages/shop/checkedCourse.vue' /* webpackChunkName: "pages/shop/checkedCourse" */).then(m => m.default || m)
@@ -60,6 +61,65 @@ const _b9329498 = () => import('../pages/profile/components/personalset.vue' /* 
 const _a144022c = () => import('../pages/home/components/partner.vue' /* webpackChunkName: "pages/home/components/partner" */).then(m => m.default || m)
 const _62ecb6d9 = () => import('../pages/news/_detail.vue' /* webpackChunkName: "pages/news/_detail" */).then(m => m.default || m)
 const _76ca02fd = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+=======
+const _440a116d = () => import('../pages/profile/index.vue' /* webpackChunkName: "pages/profile/index" */).then(m => m.default || m)
+const _87dc3c1e = () => import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */).then(m => m.default || m)
+const _4c030b18 = () => import('../pages/shop/checkedCourse.vue' /* webpackChunkName: "pages/shop/checkedCourse" */).then(m => m.default || m)
+const _d54f3ebe = () => import('../pages/shop/affirmOrder.vue' /* webpackChunkName: "pages/shop/affirmOrder" */).then(m => m.default || m)
+const _a7662d20 = () => import('../pages/shop/wePay.vue' /* webpackChunkName: "pages/shop/wePay" */).then(m => m.default || m)
+const _9a1cc5dc = () => import('../pages/course/qualitylesson.vue' /* webpackChunkName: "pages/course/qualitylesson" */).then(m => m.default || m)
+const _82559154 = () => import('../pages/course/player.vue' /* webpackChunkName: "pages/course/player" */).then(m => m.default || m)
+const _b0cac5f2 = () => import('../pages/shop/paypublic.vue' /* webpackChunkName: "pages/shop/paypublic" */).then(m => m.default || m)
+const _1b97340a = () => import('../pages/other/ie.vue' /* webpackChunkName: "pages/other/ie" */).then(m => m.default || m)
+const _c35a288c = () => import('../pages/other/faceteach.vue' /* webpackChunkName: "pages/other/faceteach" */).then(m => m.default || m)
+const _ee4f853e = () => import('../pages/course/coursedetail.vue' /* webpackChunkName: "pages/course/coursedetail" */).then(m => m.default || m)
+const _25d4f38a = () => import('../pages/other/hrEntry.vue' /* webpackChunkName: "pages/other/hrEntry" */).then(m => m.default || m)
+const _93efeb18 = () => import('../pages/other/policyProgram.vue' /* webpackChunkName: "pages/other/policyProgram" */).then(m => m.default || m)
+const _746c409a = () => import('../pages/course/category.vue' /* webpackChunkName: "pages/course/category" */).then(m => m.default || m)
+const _adeb3e54 = () => import('../pages/shop/checkedCourseList.vue' /* webpackChunkName: "pages/shop/checkedCourseList" */).then(m => m.default || m)
+const _7b63ba8c = () => import('../pages/other/degree.vue' /* webpackChunkName: "pages/other/degree" */).then(m => m.default || m)
+const _5cc0e9f3 = () => import('../pages/course/newlesson.vue' /* webpackChunkName: "pages/course/newlesson" */).then(m => m.default || m)
+const _70e350e6 = () => import('../pages/other/aboutUs.vue' /* webpackChunkName: "pages/other/aboutUs" */).then(m => m.default || m)
+const _1790469d = () => import('../pages/course/search.vue' /* webpackChunkName: "pages/course/search" */).then(m => m.default || m)
+const _916a46fc = () => import('../pages/shop/shoppingcart.vue' /* webpackChunkName: "pages/shop/shoppingcart" */).then(m => m.default || m)
+const _5b042814 = () => import('../pages/course/classifycourse.vue' /* webpackChunkName: "pages/course/classifycourse" */).then(m => m.default || m)
+const _50b27a1a = () => import('../pages/famous/list.vue' /* webpackChunkName: "pages/famous/list" */).then(m => m.default || m)
+const _032e074b = () => import('../pages/other/homeUs.vue' /* webpackChunkName: "pages/other/homeUs" */).then(m => m.default || m)
+const _76d3e463 = () => import('../pages/project/partypolicy.vue' /* webpackChunkName: "pages/project/partypolicy" */).then(m => m.default || m)
+const _174dcf19 = () => import('../pages/course/freelesson.vue' /* webpackChunkName: "pages/course/freelesson" */).then(m => m.default || m)
+const _f7c14e76 = () => import('../pages/other/Institutional.vue' /* webpackChunkName: "pages/other/Institutional" */).then(m => m.default || m)
+const _1179df80 = () => import('../pages/other/enterprisecustom.vue' /* webpackChunkName: "pages/other/enterprisecustom" */).then(m => m.default || m)
+const _0bdf5c78 = () => import('../pages/course/chooselesson.vue' /* webpackChunkName: "pages/course/chooselesson" */).then(m => m.default || m)
+const _7bdb1587 = () => import('../pages/activity/faceteach.vue' /* webpackChunkName: "pages/activity/faceteach" */).then(m => m.default || m)
+const _7f85d4e8 = () => import('../pages/shop/test.vue' /* webpackChunkName: "pages/shop/test" */).then(m => m.default || m)
+const _ea5ad64a = () => import('../pages/shop/payResult.vue' /* webpackChunkName: "pages/shop/payResult" */).then(m => m.default || m)
+const _192a745b = () => import('../pages/news/list.vue' /* webpackChunkName: "pages/news/list" */).then(m => m.default || m)
+const _578de302 = () => import('../pages/course/media.vue' /* webpackChunkName: "pages/course/media" */).then(m => m.default || m)
+const _2a6e0b71 = () => import('../pages/other/userProtocol.vue' /* webpackChunkName: "pages/other/userProtocol" */).then(m => m.default || m)
+const _d1fac04c = () => import('../pages/home/components/teacher.vue' /* webpackChunkName: "pages/home/components/teacher" */).then(m => m.default || m)
+const _70e6131e = () => import('../pages/profile/pages/order.vue' /* webpackChunkName: "pages/profile/pages/order" */).then(m => m.default || m)
+const _07dea8de = () => import('../pages/home/components/project.vue' /* webpackChunkName: "pages/home/components/project" */).then(m => m.default || m)
+const _68a6d451 = () => import('../pages/home/components/evaluate.vue' /* webpackChunkName: "pages/home/components/evaluate" */).then(m => m.default || m)
+const _851ec014 = () => import('../pages/home/components/forgotpassword.vue' /* webpackChunkName: "pages/home/components/forgotpassword" */).then(m => m.default || m)
+const _d0efb868 = () => import('../pages/profile/components/bindid.vue' /* webpackChunkName: "pages/profile/components/bindid" */).then(m => m.default || m)
+const _5abcc2d0 = () => import('../pages/home/components/new.vue' /* webpackChunkName: "pages/home/components/new" */).then(m => m.default || m)
+const _34642f0e = () => import('../pages/profile/pages/invitation.vue' /* webpackChunkName: "pages/profile/pages/invitation" */).then(m => m.default || m)
+const _532e26b8 = () => import('../pages/home/components/free.vue' /* webpackChunkName: "pages/home/components/free" */).then(m => m.default || m)
+const _160ff933 = () => import('../pages/home/components/newcourse.vue' /* webpackChunkName: "pages/home/components/newcourse" */).then(m => m.default || m)
+const _2bcc348a = () => import('../pages/home/components/classic.vue' /* webpackChunkName: "pages/home/components/classic" */).then(m => m.default || m)
+const _080bb20d = () => import('../pages/home/components/tab.vue' /* webpackChunkName: "pages/home/components/tab" */).then(m => m.default || m)
+const _3cb549e6 = () => import('../pages/home/components/info.vue' /* webpackChunkName: "pages/home/components/info" */).then(m => m.default || m)
+const _03249f08 = () => import('../pages/home/components/teacherResource.vue' /* webpackChunkName: "pages/home/components/teacherResource" */).then(m => m.default || m)
+const _5f8afc9a = () => import('../pages/home/components/famous.vue' /* webpackChunkName: "pages/home/components/famous" */).then(m => m.default || m)
+const _752d144c = () => import('../pages/course/components/Filter.vue' /* webpackChunkName: "pages/course/components/Filter" */).then(m => m.default || m)
+const _3b44a7ce = () => import('../pages/profile/pages/courselist.vue' /* webpackChunkName: "pages/profile/pages/courselist" */).then(m => m.default || m)
+const _4a454e62 = () => import('../pages/profile/components/info.vue' /* webpackChunkName: "pages/profile/components/info" */).then(m => m.default || m)
+const _03e9551c = () => import('../pages/course/components/List.vue' /* webpackChunkName: "pages/course/components/List" */).then(m => m.default || m)
+const _ba24abc4 = () => import('../pages/profile/components/personalset.vue' /* webpackChunkName: "pages/profile/components/personalset" */).then(m => m.default || m)
+const _6e2ecdc0 = () => import('../pages/home/components/partner.vue' /* webpackChunkName: "pages/home/components/partner" */).then(m => m.default || m)
+const _d46e5c7a = () => import('../pages/news/_detail.vue' /* webpackChunkName: "pages/news/_detail" */).then(m => m.default || m)
+const _35ebfb53 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 
 
 
@@ -121,16 +181,21 @@ export function createRouter () {
     routes: [
 		{
 			path: "/profile",
-			component: _1b62cf17,
+			component: _440a116d,
 			name: "profile"
 		},
 		{
 			path: "/home",
+<<<<<<< HEAD
 			component: _69f81487,
+=======
+			component: _87dc3c1e,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home"
 		},
 		{
 			path: "/shop/checkedCourse",
+<<<<<<< HEAD
 			component: _1c9f70a4,
 			name: "shop-checkedCourse"
 		},
@@ -248,15 +313,139 @@ export function createRouter () {
 			path: "/other/Institutional",
 			component: _d7cca222,
 			name: "other-Institutional"
+=======
+			component: _4c030b18,
+			name: "shop-checkedCourse"
+		},
+		{
+			path: "/shop/affirmOrder",
+			component: _d54f3ebe,
+			name: "shop-affirmOrder"
+		},
+		{
+			path: "/shop/wePay",
+			component: _a7662d20,
+			name: "shop-wePay"
+		},
+		{
+			path: "/course/qualitylesson",
+			component: _9a1cc5dc,
+			name: "course-qualitylesson"
+		},
+		{
+			path: "/course/player",
+			component: _82559154,
+			name: "course-player"
+		},
+		{
+			path: "/shop/paypublic",
+			component: _b0cac5f2,
+			name: "shop-paypublic"
+		},
+		{
+			path: "/other/ie",
+			component: _1b97340a,
+			name: "other-ie"
+		},
+		{
+			path: "/other/faceteach",
+			component: _c35a288c,
+			name: "other-faceteach"
+		},
+		{
+			path: "/course/coursedetail",
+			component: _ee4f853e,
+			name: "course-coursedetail"
+		},
+		{
+			path: "/other/hrEntry",
+			component: _25d4f38a,
+			name: "other-hrEntry"
+		},
+		{
+			path: "/other/policyProgram",
+			component: _93efeb18,
+			name: "other-policyProgram"
+		},
+		{
+			path: "/course/category",
+			component: _746c409a,
+			name: "course-category"
+		},
+		{
+			path: "/shop/checkedCourseList",
+			component: _adeb3e54,
+			name: "shop-checkedCourseList"
+		},
+		{
+			path: "/other/degree",
+			component: _7b63ba8c,
+			name: "other-degree"
+		},
+		{
+			path: "/course/newlesson",
+			component: _5cc0e9f3,
+			name: "course-newlesson"
+		},
+		{
+			path: "/other/aboutUs",
+			component: _70e350e6,
+			name: "other-aboutUs"
+		},
+		{
+			path: "/course/search",
+			component: _1790469d,
+			name: "course-search"
+		},
+		{
+			path: "/shop/shoppingcart",
+			component: _916a46fc,
+			name: "shop-shoppingcart"
+		},
+		{
+			path: "/course/classifycourse",
+			component: _5b042814,
+			name: "course-classifycourse"
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
+		},
+		{
+			path: "/famous/list",
+			component: _50b27a1a,
+			name: "famous-list"
+		},
+		{
+<<<<<<< HEAD
+			path: "/course/chooselesson",
+			component: _0a0aa7ee,
+=======
+			path: "/other/homeUs",
+			component: _032e074b,
+			name: "other-homeUs"
+		},
+		{
+			path: "/project/partypolicy",
+			component: _76d3e463,
+			name: "project-partypolicy"
+		},
+		{
+			path: "/course/freelesson",
+			component: _174dcf19,
+			name: "course-freelesson"
+		},
+		{
+			path: "/other/Institutional",
+			component: _f7c14e76,
+			name: "other-Institutional"
 		},
 		{
 			path: "/other/enterprisecustom",
-			component: _6e6ae116,
+			component: _1179df80,
 			name: "other-enterprisecustom"
 		},
 		{
 			path: "/course/chooselesson",
-			component: _0a0aa7ee,
+			component: _0bdf5c78,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "course-chooselesson"
 		},
 		{
@@ -266,7 +455,11 @@ export function createRouter () {
 		},
 		{
 			path: "/shop/test",
+<<<<<<< HEAD
 			component: _63c98f94,
+=======
+			component: _7f85d4e8,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "shop-test"
 		},
 		{
@@ -276,27 +469,47 @@ export function createRouter () {
 		},
 		{
 			path: "/news/list",
+<<<<<<< HEAD
 			component: _27089705,
+=======
+			component: _192a745b,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "news-list"
 		},
 		{
 			path: "/course/media",
+<<<<<<< HEAD
 			component: _bd4618d6,
+=======
+			component: _578de302,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "course-media"
 		},
 		{
 			path: "/other/userProtocol",
+<<<<<<< HEAD
 			component: _5fc96ff2,
+=======
+			component: _2a6e0b71,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "other-userProtocol"
 		},
 		{
 			path: "/home/components/teacher",
+<<<<<<< HEAD
 			component: _4f9c5df8,
+=======
+			component: _d1fac04c,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-teacher"
 		},
 		{
 			path: "/profile/pages/order",
+<<<<<<< HEAD
 			component: _fe3f2d70,
+=======
+			component: _70e6131e,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "profile-pages-order"
 		},
 		{
@@ -306,17 +519,29 @@ export function createRouter () {
 		},
 		{
 			path: "/home/components/evaluate",
+<<<<<<< HEAD
 			component: _4d5dc867,
+=======
+			component: _68a6d451,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-evaluate"
 		},
 		{
 			path: "/home/components/forgotpassword",
+<<<<<<< HEAD
 			component: _842ca8e8,
+=======
+			component: _851ec014,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-forgotpassword"
 		},
 		{
 			path: "/profile/components/bindid",
+<<<<<<< HEAD
 			component: _49afb276,
+=======
+			component: _d0efb868,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "profile-components-bindid"
 		},
 		{
@@ -326,82 +551,138 @@ export function createRouter () {
 		},
 		{
 			path: "/profile/pages/invitation",
+<<<<<<< HEAD
 			component: _6af646e2,
+=======
+			component: _34642f0e,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "profile-pages-invitation"
 		},
 		{
 			path: "/home/components/free",
+<<<<<<< HEAD
 			component: _748d488c,
+=======
+			component: _532e26b8,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-free"
 		},
 		{
 			path: "/home/components/newcourse",
+<<<<<<< HEAD
 			component: _6f90f046,
+=======
+			component: _160ff933,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-newcourse"
 		},
 		{
 			path: "/home/components/classic",
+<<<<<<< HEAD
 			component: _6cfb65b4,
+=======
+			component: _2bcc348a,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-classic"
 		},
 		{
 			path: "/home/components/tab",
+<<<<<<< HEAD
 			component: _18060837,
+=======
+			component: _080bb20d,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-tab"
 		},
 		{
 			path: "/home/components/info",
+<<<<<<< HEAD
 			component: _2c05b8fc,
+=======
+			component: _3cb549e6,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-info"
 		},
 		{
 			path: "/home/components/teacherResource",
+<<<<<<< HEAD
 			component: _11cd0632,
+=======
+			component: _03249f08,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-teacherResource"
 		},
 		{
 			path: "/home/components/famous",
+<<<<<<< HEAD
 			component: _2d2b8349,
+=======
+			component: _5f8afc9a,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-famous"
 		},
 		{
 			path: "/course/components/Filter",
+<<<<<<< HEAD
 			component: _59e40862,
+=======
+			component: _752d144c,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "course-components-Filter"
 		},
 		{
 			path: "/profile/pages/courselist",
+<<<<<<< HEAD
 			component: _71d6bfa2,
+=======
+			component: _3b44a7ce,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "profile-pages-courselist"
 		},
 		{
 			path: "/profile/components/info",
-			component: _e91700e8,
+			component: _4a454e62,
 			name: "profile-components-info"
 		},
 		{
 			path: "/course/components/List",
-			component: _5afc5708,
+			component: _03e9551c,
 			name: "course-components-List"
 		},
 		{
 			path: "/profile/components/personalset",
+<<<<<<< HEAD
 			component: _b9329498,
+=======
+			component: _ba24abc4,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "profile-components-personalset"
 		},
 		{
 			path: "/home/components/partner",
+<<<<<<< HEAD
 			component: _a144022c,
+=======
+			component: _6e2ecdc0,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "home-components-partner"
 		},
 		{
 			path: "/news/:detail?",
+<<<<<<< HEAD
 			component: _62ecb6d9,
+=======
+			component: _d46e5c7a,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "news-detail"
 		},
 		{
 			path: "/",
+<<<<<<< HEAD
 			component: _76ca02fd,
+=======
+			component: _35ebfb53,
+>>>>>>> c7b191c2aff4d7d3e56c4f1891431db8f84b84e4
 			name: "index"
 		}
     ],
