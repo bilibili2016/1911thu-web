@@ -3,7 +3,7 @@
     <el-main class="home">
       <!-- 头部导航 -->
       <v-tab :items="items" :classify="classify" :courses="courses"></v-tab>
-      <v-project :dingData="dingData" :config="ding"></v-project>
+      <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
       <v-newp :newData="newData" :titleTwo="titleEight" :linkone="linkone"></v-newp>
       <!-- 最新课程 -->
