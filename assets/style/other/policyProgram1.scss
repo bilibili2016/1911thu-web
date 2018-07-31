@@ -1,13 +1,17 @@
 .policyPrograme {
+  width: 100%;
+  height: auto;
+  background: url(~assets/images/program-big-bg.png) no-repeat;
+  background-size: 100% 100%;
   .banner {
     position: relative;
     width: 100%;
     height: 500px;
-    background: url('http://papn9j3ys.bkt.clouddn.com/policy-bg1.png') no-repeat;
+    background: url('~assets/images/program-bg.jpg') no-repeat;
     background-size: 100% 100%;
     z-index: 0;
     .text {
-      width: 730px;
+      width: 770px;
       height: 150px;
       position: absolute;
       left: 0;
@@ -16,31 +20,37 @@
       bottom: 0;
       margin: auto;
       .line {
-        width: 132px;
-        height: 2px;
-        background-color: #fff;
+        width: 192px;
+        height: 1px;
+        background-color: #ffaa07;
         margin-bottom: 10px;
       }
       .desc {
         font-size: 32px;
-        color: #fff;
-        letter-spacing: 8px;
+        color: #ffaa07;
+        letter-spacing: 13px;
         margin: 0 35px;
       }
       .small-title {
         text-align: center;
+        margin-bottom: -50px;
+        color: #ffaa07;
       }
-      .title {
+      .title-bg {
         font-size: 72px;
-        color: #fff;
+        color: #ffaa07;
         font-weight: 700;
         margin-top: 32px;
+        padding: 40px 20px 30px 20px;
+        border: 1px solid #ffaa07;
+        border-top: none;
       }
     }
   }
   .title {
     text-align: center;
-    margin: 30px 0 40px 0;
+    margin: 0 0 40px 0;
+    padding-top: 30px;
     .titlt-icon-left {
       width: 22px;
       height: 36px;
@@ -85,14 +95,14 @@
   .content-one {
     position: relative;
     width: 100%;
-    height: 780px;
-    background-color: #fff;
-
-    .program-bg {
+    height: 2730px;
+    .content-inner {
       position: absolute;
       top: -30px;
       left: 0;
       right: 0;
+    }
+    .program-bg {
       width: 1100px;
       height: 444px;
       background: rgba(255, 255, 255, 1);
@@ -100,8 +110,6 @@
       margin: 0 auto;
       z-index: 10;
       padding: 0 38px 50px 38px;
-      //   margin-top: -30px;
-      //   text-align: center;
       .desc {
         font-size: 16px;
         color: #222;
@@ -109,14 +117,10 @@
       }
     }
     .study-info {
-      position: absolute;
-      top: 444px;
-      left: 0;
-      right: 0;
       width: 1100px;
       height: 288px;
       margin: 0 auto;
-      //   margin-top: 444px;
+      margin-top: 30px;
       background: rgba(255, 255, 255, 1);
       box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
       .info {
@@ -162,29 +166,10 @@
         }
       }
     }
-  }
-  .content-two {
-    width: 100%;
-    height: 860px;
-    background: url('http://papn9j3ys.bkt.clouddn.com/policy-bg2.png') no-repeat;
-    background-size: 100% 100%;
-    .top-con {
-      width: 890px;
-      margin: 0 auto;
-      //   text-align: center;
-      padding-top: 30px;
-      .desc {
-        font-size: 16px;
-        line-height: 32px;
-        color: #1e1e1e;
-        margin-top: 10px;
-        text-align: center;
-      }
-    }
     .teach-info {
       width: 1100px;
       height: 555px;
-      padding: 40px 70px;
+      padding: 0 70px 40px 70px;
       background: rgba(255, 255, 255, 1);
       box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
       margin: 0 auto;
@@ -204,63 +189,119 @@
         }
       }
     }
-  }
-  .content-three {
-    width: 100%;
-    height: 800px;
-    background-color: #fff;
-
-    .study-info {
+    .other-info {
       width: 1100px;
       margin: 0 auto;
-      .info {
-        .left {
-          .down {
-            background-color: #fff;
-          }
-          .up {
-            background-color: #d0a04e;
-          }
-        }
-        .right {
-          width: 300px;
-          .title-con {
-            font-size: 18px;
-            color: #fff;
-            font-weight: 500;
-            margin-bottom: 20px;
-          }
-          .text {
-            color: #fff;
-            font-size: 16px;
-            line-height: 32px;
-          }
-        }
-      }
-      .info1 {
-        float: left;
-        width: 450px;
-        height: 316px;
-        background: rgba(208, 160, 78, 1);
-        border-radius: 16px;
-        padding: 30px 80px 30px 30px;
-        margin-right: 20px;
-      }
-      .info2 {
-        float: left;
-        width: 630px;
-        height: 316px;
-        background: rgba(100, 23, 166, 1);
-        border-radius: 16px;
-        padding: 30px;
-        .item {
+      .study-content {
+        width: 1100px;
+        margin: 0 auto;
+        .info {
           .left {
+            .down {
+              background-color: #3646c9;
+            }
             .up {
-              background-color: #6417a6;
+              background-color: #ffaa07;
             }
           }
           .right {
-            width: 530px;
+            width: 300px;
+            .title-con {
+              font-size: 18px;
+              color: #fff;
+              font-weight: 500;
+              margin-bottom: 20px;
+            }
+            .text {
+              color: #fff;
+              font-size: 16px;
+              line-height: 32px;
+            }
+          }
+        }
+        .info1 {
+          float: left;
+          width: 450px;
+          height: 316px;
+          background-color: #ffaa07;
+          color: #fff;
+          border-radius: 16px;
+          padding: 30px 80px 30px 30px;
+          margin-right: 20px;
+          .item {
+            .right {
+              .title-con {
+                color: #3632c7;
+              }
+            }
+          }
+        }
+        .info2 {
+          float: left;
+          width: 630px;
+          height: 316px;
+          background-color: #3632c7;
+          color: #fff;
+          border-radius: 16px;
+          padding: 30px;
+          .item {
+            .left {
+              .down {
+                background-color: #ffaa07;
+              }
+              .up {
+                background-color: #3632c7;
+              }
+            }
+            .right {
+              width: 530px;
+              .title-con {
+                color: #ffaa07;
+              }
+            }
+          }
+        }
+      }
+    }
+    .distinctive {
+      width: 100%;
+      height: 520px;
+      margin-top: 30px;
+      padding-top: 70px;
+      background-color: #ffaa07;
+
+      // background: url('~assets/images/distinctiveBg.png') no-repeat;
+      // background-position: top center;
+      // background-size: cover;
+      .lietOne {
+        width: 1100px;
+        height: 170px;
+        margin: 0 auto 51px;
+        border-radius: 16px;
+        background-color: #fff;
+        .dttImg img {
+          width: 80px;
+          height: 80px;
+          margin-top: -30px;
+          border-radius: 50%;
+          box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+        }
+        h4 {
+          padding: 20px 10px 10px;
+          color: #3751c9;
+          font-size: 18px;
+        }
+        .inner {
+          clear: both;
+          ul {
+            padding: 0 49px 0 86px;
+            li {
+              float: left;
+              width: 480px;
+              font-size: 16px;
+              line-height: 32px;
+              color: #222;
+            }
           }
         }
       }
