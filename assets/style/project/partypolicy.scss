@@ -1,0 +1,297 @@
+.project {
+  background-color: #fff;
+  padding-bottom: 100px;
+  .distinctive {
+    width: 100%;
+    height: 570px;
+    padding-top: 102px;
+    background: url('~assets/images/distinctiveBg.png') no-repeat;
+    background-position: top center;
+    background-size: cover;
+    .lietOne {
+      width: 1100px;
+      height: 170px;
+      margin: 0 auto 51px;
+      border-radius: 16px;
+      background-color: #fff;
+      .dttImg img {
+        width: 80px;
+        height: 80px;
+        margin-top: -30px;
+        border-radius: 50%;
+        box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+      }
+      h4 {
+        padding: 20px 10px 10px;
+        color: #D0A04E;
+        font-size: 18px;
+      }
+      .inner {
+        clear: both;
+        ul {
+          padding: 0 49px 0 86px;
+          li {
+            float: left;
+            width: 480px;
+            font-size: 16px;
+            line-height: 32px;
+            color: #222;
+          }
+        }
+      }
+    }
+  }
+  .system {
+    .courseSystem {
+      width: 1100px;
+      margin: 0 auto;
+      h3 {
+        font-size: 30px;
+        color: #222;
+        padding: 60px 0;
+        text-align: center;
+        &::before {
+          content: ' ';
+          margin: 0 5px;
+          display: inline-block;
+          background: url('~assets/images/beauty_left.png') no-repeat;
+          background-size: cover;
+          width: 20px;
+          height: 34px;
+          vertical-align: middle;
+        }
+        &::after {
+          content: ' ';
+          margin: 0 5px;
+          display: inline-block;
+          background: url('~assets/images/beauty_right.png') no-repeat;
+          background-size: cover;
+          width: 26px;
+          height: 40px;
+          vertical-align: middle;
+        }
+      }
+      &>p {
+        font-size: 18px;
+        line-height: 32px;
+        text-align: center;
+      }
+      .mode {
+        width: 1100px;
+        margin: 0 auto;
+        margin-top: 70px;
+        padding-top: 100px;
+        padding: 100px 40px 90px;
+        display: flex;
+        justify-content: space-around;
+        background: url('~assets/images/modeBg.png') no-repeat;
+        background-size: contain;
+        .modeCenter {
+          width: 290px;
+          height: 314px;
+          padding: 103px 60px 114px;
+          background: url('~assets/images/modeCenter.png') no-repeat;
+          background-size: cover;
+          p {
+            width: 170px;
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+            line-height: 36px;
+          }
+        }
+        .modeTop {
+          width: 312px;
+          height: 104px;
+          background: rgba(255, 255, 255, 1);
+          border-radius: 52px;
+          padding: 20px 0;
+          margin-bottom: 106px;
+          box-shadow: 9px 0px 16px rgba(100, 23, 166, 0.1);
+        }
+        .modeBottom {
+          width: 312px;
+          height: 104px;
+          background: rgba(255, 255, 255, 1);
+          border-radius: 52px;
+          padding: 20px 0;
+          box-shadow: 9px 0px 16px rgba(100, 23, 166, 0.1);
+        }
+        .modeList div {
+          span.fl {
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            font-size: 30px;
+            border-radius: 50%;
+            margin-left: -27px;
+            background: rgba(100, 23, 166, 1);
+            color: #fff;
+          }
+          span.fr {
+            width: 220px;
+            margin-right: 44px;
+            font-size: 22px;
+            line-height: 36px;
+          }
+        }
+      }
+    }
+    .studyCourse {
+      width: 1100px;
+      margin: 0 auto;
+      h3 {
+        font-size: 30px;
+        color: #222;
+        padding: 60px 0;
+        text-align: center;
+        &::before {
+          content: ' ';
+          margin: 0 5px;
+          display: inline-block;
+          background: url('~assets/images/beauty_left.png') no-repeat;
+          background-size: cover;
+          width: 20px;
+          height: 34px;
+          vertical-align: middle;
+        }
+        &::after {
+          content: ' ';
+          margin: 0 5px;
+          display: inline-block;
+          background: url('~assets/images/beauty_right.png') no-repeat;
+          background-size: cover;
+          width: 26px;
+          height: 40px;
+          vertical-align: middle;
+        }
+      }
+      .studyInfo {
+        width: 1100px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+        h5 {
+          margin-bottom: 20px;
+          .studyTitle {
+            margin-right: 20px;
+            width: 150px;
+            padding-right: 24px;
+            text-align: right;
+            background: url('~assets/images/studyTitleBg.png') no-repeat;
+            background-size: contain;
+          }
+          span {
+            font-size: 18px;
+            line-height: 32px;
+          }
+        }
+        p {
+          font-size: 18px;
+          color: #222;
+          line-height: 32px;
+        }
+      }
+    }
+    .table {
+      width: 1100px;
+      margin: 30px auto 0;
+      table {
+        border: none;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        th {
+          border: none;
+        }
+        td {
+          height: 120px;
+          line-height: 120px;
+          text-align: center;
+          color: #666;
+          font-size: 18px;
+          border-left: 2px solid #EBECF0;
+          border-bottom: 2px solid #EBECF0;
+          &:last-child {
+            border-right: 2px solid #EBECF0;
+          }
+        }
+        .titleOne {
+          height: 95px;
+          background: url('~assets/images/systemBorderBg1.png') no-repeat;
+          background-size: contain;
+          th {
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            color: #fff;
+            line-height: 95px;
+            text-align: center;
+            font-size: 24px;
+          }
+        }
+        .titleTwo {
+          height: 68px;
+          background-color: #F7F1FF;
+          th {
+            color: #222;
+            border-bottom: 2px solid transparent;
+            &.checked {
+              background-color: #E8D7FF;
+              color: #6417a6;
+              border-bottom: 2px solid #6417A6;
+            }
+          }
+        }
+        .titleThree {
+          height: 68px;
+          background-color: #F4F5F6;
+          text-align: center;
+          th {
+            border-left: 2px solid #EBECF0;
+            border-bottom: 2px solid #EBECF0;
+            border-top: 2px solid #EBECF0;
+            &:last-child {
+              border-right: 2px solid #EBECF0;
+            }
+          }
+        }
+      }
+      &.tableTwo {
+        .titleOne {
+          height: 95px;
+          background: url('~assets/images/systemBorderBg2.png') no-repeat;
+          background-size: contain;
+        }
+        .titleTwo {
+          background-color: #FFEEE5;
+          th {
+            border-bottom: 2px solid transparent;
+            &.checked {
+              background-color: #FFBFA1;
+              color: #FF4401;
+              border-bottom: 2px solid #FF4401;
+            }
+          }
+        }
+      }
+      &.tableThree {
+        .titleOne {
+          height: 95px;
+          background: url('~assets/images/systemBorderBg3.png') no-repeat;
+          background-size: contain;
+        }
+        .titleTwo {
+          background-color: #EEFFF8;
+          th {
+            border-bottom: 2px solid transparent;
+            &.checked {
+              background-color: #B9EFD7;
+              color: #189565;
+              border-bottom: 2px solid #189565;
+            }
+          }
+        }
+      }
+    }
+  }
+}
