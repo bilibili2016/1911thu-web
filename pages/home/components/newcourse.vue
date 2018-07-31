@@ -60,7 +60,8 @@ export default {
           present_price: '3280',
           study_time: '20',
           study_number: '22',
-          score: 5
+          score: 5,
+          link: '/other/policyProgram'
         },
         {
           teacher_picture: 'http://papneyee7.bkt.clouddn.com/1532946351',
@@ -70,7 +71,8 @@ export default {
           present_price: '4280',
           study_time: '18',
           study_number: '20',
-          score: 5
+          score: 5,
+          link: '/project/partypolicy'
         }
       ]
     }
@@ -82,10 +84,10 @@ export default {
       // persistStore.set('curriculumId', item.id)
       // this.setKid(this.kidForm)
       // this.$router.push('/course/coursedetail')
-      this.openDetail()
+      this.openDetail(item.link)
     },
-    openDetail() {
-      window.open(window.location.origin + '/project/partypolicy')
+    openDetail(link) {
+      window.open(window.location.origin + link)
     },
     getMore(item) {
       window.open(window.location.origin + item)
