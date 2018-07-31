@@ -453,6 +453,12 @@ export default {
           time: '2.5'
         },
         {
+          title: '大数据时代的人力资源管理',
+          teacher: '王通讯',
+          position: '中国人事科学院原院长、研究员',
+          time: '2.5'
+        },
+        {
           title: '新时代的领导人才素质',
           teacher: '董克用',
           position: '中国人民大学公共管理学院原院长',
@@ -569,12 +575,6 @@ export default {
           teacher: '吴德贵',
           position: '中国人事科学院原副院长',
           time: '3'
-        },
-        {
-          title: '如何与境外媒体打交道',
-          teacher: '王彩平',
-          position: '国家行政学院应急管理培训中心副教授',
-          time: '2'
         },
         {
           title: '群体性事件应急处置策略',

@@ -349,7 +349,7 @@
         <div class="table tableThree">
           <table cellpadding="0" cellspacing="0" width="100%">
             <tr class="titleOne">
-              <th colspan="4">体系三：人文素养与通用能力提升（线上课程）</th>
+              <th colspan="4">体系三：人文素养与通用能力提升</th>
             </tr>
             <tr class="titleTwo">
               <th colspan="2" :class="{'checked':tableThree=='1'?true:false}" @click="checkThird('1')">模块一：人文素养提升</th>
