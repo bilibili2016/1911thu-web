@@ -303,7 +303,7 @@
             </tr>
             <tr class="titleTwo">
               <th colspan="2" :class="{'checked':tableOne=='1'?true:false}" @click="checkOne('1')">模块一：宏观政策解读</th>
-              <th colspan="2" :class="{'checked':tableOne=='2'?true:false}" @click="checkOne('2')">模块一：新时代深化改革</th>
+              <th colspan="2" :class="{'checked':tableOne=='2'?true:false}" @click="checkOne('2')">模块二：新时代深化改革</th>
             </tr>
             <tr class="titleThree">
               <th>课程名称</th>
@@ -311,13 +311,13 @@
               <th>职务</th>
               <th>学时</th>
             </tr>
-            <tr v-for="(item,index) in courseDataOne" :key="index" v-show="tableOne=='1'">
+            <tr v-for="(item,index) in courseDataOnea" :key="index" v-show="tableOne=='1'">
               <td>{{item.title}}</td>
               <td>{{item.teacher}}</td>
               <td>{{item.position}}</td>
               <td>{{item.time}}</td>
             </tr>
-            <tr v-for="(item,index) in courseDataOne" :key="index" v-show="tableOne=='2'">
+            <tr v-for="(item,index) in courseDataOneb" :key="index" v-show="tableOne=='2'">
               <td>{{item.title}}</td>
               <td>{{item.teacher}}</td>
               <td>{{item.position}}</td>
