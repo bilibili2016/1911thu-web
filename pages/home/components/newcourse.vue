@@ -65,6 +65,7 @@ export default {
         },
         {
           teacher_picture: 'http://papneyee7.bkt.clouddn.com/1532946351',
+          t: '',
           title: '党政干部综合能力提升',
           deputy_title: '混合式教学模式',
           is_free: '1',
