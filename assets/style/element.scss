@@ -1431,8 +1431,10 @@ input:-webkit-autofill {
   color: #606266;
   cursor: pointer;
   outline: none;
+  // position: absolute;
   &:hover {
     background-color: #9947e2 !important;
     color: #fff !important;
+    width: 100%;
   }
 }
