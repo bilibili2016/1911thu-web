@@ -113,7 +113,7 @@
         </div>
       </div>
     </div>
-    <di class="content-three">
+    <div class="content-three">
       <div class="title">
         <img class="titlt-icon-left" src="@/assets/images/policy-pic01.png" alt="">
         <span class="text">学习方式及优势</span>
@@ -194,8 +194,7 @@
           </div>
         </div>
       </div>
-
-    </di>
+    </div>
   </div>
 
 </template>
