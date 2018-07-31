@@ -10,11 +10,11 @@
   border-radius: $--button-large-border-radius;
 }
 
-.el-button + .el-button {
+.el-button+.el-button {
   margin: 0 10px;
 }
 
-.el-button + .el-dropdown {
+.el-button+.el-dropdown {
   margin: 0 10px;
 }
 
@@ -444,7 +444,6 @@
 // personialSet页
 .personalSet {
   // tab切换
-
   .el-tabs__nav-wrap {
     margin: 0;
     .el-tabs__nav-scroll {
@@ -855,7 +854,7 @@
   .el-tabs__nav {
     width: 100%;
   }
-  & > div > div.el-tabs__content {
+  &>div>div.el-tabs__content {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
   }
@@ -909,10 +908,10 @@
       box-shadow: none;
     }
   }
-  & > .el-tabs {
+  &>.el-tabs {
     padding: 10px;
   }
-  & > .el-tabs--left,
+  &>.el-tabs--left,
   .el-tabs--right {
     overflow: auto;
   }
@@ -1051,7 +1050,7 @@
         position: relative;
         overflow: hidden;
       }
-      .el-radio__input.is-checked + .el-radio__label {
+      .el-radio__input.is-checked+.el-radio__label {
         background-color: #8f4acb;
         color: #fff;
         border: none;
@@ -1124,7 +1123,7 @@
   }
   .el-dialog__body {
     padding: 0px 20px;
-    & > div {
+    &>div {
       // height: 450px;
       overflow: hidden;
     }
@@ -1387,7 +1386,6 @@ input:-webkit-autofill {
   .el-card {
     border-radius: 0 !important;
   }
-
   .el-dialog__header {
     padding: 17px 0 17px 40px;
   }
@@ -1413,4 +1411,33 @@ input:-webkit-autofill {
 // }
 .start .captcha {
   width: 130px;
+}
+
+.dropdown {}
+
+.el-dropdown-menu {
+  padding: 0px !important;
+  cursor: pointer;
+  left: 10px;
+  border: none;
+}
+
+.popper__arrow {
+  top: -7px !important;
+}
+
+.el-dropdown-menu__item {
+  list-style: none;
+  line-height: 60px;
+  padding: 5px 25px !important;
+  margin: 0;
+  font-size: 14px;
+  color: #606266;
+  cursor: pointer;
+  outline: none; // position: absolute;
+  &:hover {
+    background-color: #9947e2 !important;
+    color: #fff !important;
+    width: 100%;
+  }
 }

@@ -25,8 +25,8 @@ body {
       width: 177px;
       cursor: pointer;
       img {
-        width: 179px;
-        height: 70px;
+        width: 156px;
+        height: 60px;
       }
       i {
         display: inline-block;
@@ -38,10 +38,11 @@ body {
       }
     }
     .search {
-      width: 240px;
+      width: 260px;
       height: 34px;
       line-height: 34px;
-      margin-left: 289px;
+      // margin-left: 289px;
+      margin-left: 20px;
       background-color: #ececf6;
       border-radius: 17px;
       position: relative;
@@ -85,7 +86,7 @@ body {
       }
     }
     .HREntry {
-      margin-left: 22px;
+      margin-left: 60px;
       height: 20px;
       &.islogined {
         margin-left: 100px;
@@ -261,7 +262,7 @@ body {
     }
     .lrBtn {
       span {
-        width: 80px;
+        width: 60px;
         height: 34px;
         line-height: 34px;
         text-align: center;

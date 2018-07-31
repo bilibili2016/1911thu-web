@@ -9,11 +9,16 @@
       </div>
     </div>
 
+    <!-- <el-select v-model="value" @change="changeNav">
+      <el-option v-for="(item,index) in options" :key="index" :label="item.label" :value="item.value">
+      </el-option>
+    </el-select> -->
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
         <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
+      <v-tabs></v-tabs>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i class="el-icon-search" @click="goSearch"></i>
@@ -220,7 +225,11 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { MessageBox } from 'element-ui'
 import { encryption } from '~/lib/util/helper'
+import Tabs from '@/components/common/Tabs.vue'
 export default {
+  components: {
+    'v-tabs': Tabs
+  },
   data() {
     var validatePass = (rule, value, callback) => {
       if (!/^[A-Za-z0-9]+$/.test(value)) {
@@ -1201,14 +1210,10 @@ export default {
     },
     // 获取专属邀请码列表
     getCodeList() {
-      return new Promise((resolve, reject) => {
-        home.getCodeList(this.codeListForm).then(response => {
-          if (response.status !== '100100') {
-            this.codeData = response.data.orderInvitationCodeList
-
-            resolve(true)
-          }
-        })
+      home.getCodeList(this.codeListForm).then(response => {
+        if (response.status !== '100100') {
+          this.codeData = response.data.orderInvitationCodeList
+        }
       })
     }
     // 判断浏览器的ie型

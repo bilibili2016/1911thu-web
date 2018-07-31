@@ -3,7 +3,9 @@
     <el-main class="home">
       <!-- 头部导航 -->
       <v-tab :items="items" :classify="classify" :courses="courses"></v-tab>
-      <v-project :dingData="dingData" :config="ding"></v-project>
+      <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
+      <!-- 最新项目 -->
+      <v-newp :newData="newData" :titleTwo="titleEight" :linkone="linkone"></v-newp>
       <!-- 最新课程 -->
       <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
       <!-- 精品好课 -->
@@ -33,6 +35,7 @@ import Tab from '@/pages/home/components/tab.vue'
 import Project from '@/pages/home/components/project.vue'
 import Free from '@/pages/home/components/free.vue'
 import New from '@/pages/home/components/new.vue'
+import Newp from '@/pages/home/components/newcourse.vue'
 import Classic from '@/pages/home/components/classic.vue'
 import Famous from '@/pages/home/components/famous.vue'
 import Evaluate from '@/pages/home/components/evaluate.vue'
@@ -50,6 +53,7 @@ export default {
     'v-famous': Famous,
     'v-classic': Classic,
     'v-free': Free,
+    'v-newp': Newp,
     'v-new': New,
     'v-tab': Tab,
     'v-project': Project,
@@ -92,6 +96,7 @@ export default {
       titleFore: '名师智库',
       titleFour: '用户评价',
       titleFive: '学堂资讯',
+      titleEight: '最新项目',
       partnerList: {
         list: [],
         pages: 1,
@@ -241,7 +246,6 @@ export default {
     // 获取免费课程列表
     getFreeCourseList() {
       home.getFreeCourseList(this.freeForm).then(response => {
-        this.singleSignOn(response.status, response.msg)
         this.freeData = response.data.curriculumList
       })
     },
@@ -288,19 +292,6 @@ export default {
       home.getPointList().then(response => {
         this.dingData = response.data.pointList
       })
-    },
-    // 单点登录验证
-    singleSignOn(status, msg) {
-      if (status === '100008') {
-        this.$alert(msg + ',' + '请重新登录', '温馨提示', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.signOut()
-            this.$bus.$emit('reLogin', true)
-            this.$bus.$emit('loginShow', true)
-          }
-        })
-      }
     }
   },
   mounted() {
