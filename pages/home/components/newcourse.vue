@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-    <el-row class="center">
+    <el-row class="center coursenew">
       <h1 class="clearfix">
         <span class="title">{{titleTwo}}</span>
         <!-- <span class="fr moredata" @click="getMore(linkone)">查看更多</span> -->
@@ -95,6 +95,9 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.coursenew {
+  padding-bottom: 50px;
+}
 .goodCourse {
   width: 1100px;
   margin: 0 auto;
