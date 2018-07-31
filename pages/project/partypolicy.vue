@@ -347,7 +347,7 @@
               <td>{{item.position}}</td>
               <td>{{item.time}}</td>
             </tr>
-            <tr v-for="(item,index) in courseDataTwo" :key="index" v-show="tableThree=='3'">
+            <tr v-for="(item,index) in courseDataTwos" :key="index" v-show="tableTwo=='3'">
               <td>{{item.title}}</td>
               <td>{{item.teacher}}</td>
               <td>{{item.position}}</td>
@@ -437,6 +437,26 @@ export default {
           time: '3'
         }
       ],
+      courseDataTwos: [
+        {
+          title: '当前经济形势判断与区域经济发展',
+          teacher: '马晓河',
+          position: '国家发改委宏观院原副院长、研究员',
+          time: '1'
+        },
+        {
+          title: '绿色经济与可持续发展',
+          teacher: '许小年',
+          position: '中欧国际工商学院经济学与金融学教授',
+          time: '0.5'
+        },
+        {
+          title: '中国实体经济的发展困局及破解思路',
+          teacher: '张俊伟',
+          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          time: '3'
+        }
+      ],
       courseDataThree: [
         {
           title: '当前经济形势判断与区域经济发展',
@@ -468,7 +488,7 @@ export default {
 
       this.tableTwo = items
     },
-    checkThree(items) {
+    checkThird(items) {
       this.tableThree = items
     }
   }
