@@ -311,13 +311,13 @@
               <th>职务</th>
               <th>学时</th>
             </tr>
-            <tr v-for="(item,index) in courseDataOne" :key="index" v-show="tableOne=='1'">
+            <tr v-for="(item,index) in courseDataOnea" :key="index" v-show="tableOne=='1'">
               <td>{{item.title}}</td>
               <td>{{item.teacher}}</td>
               <td>{{item.position}}</td>
               <td>{{item.time}}</td>
             </tr>
-            <tr v-for="(item,index) in courseDataOne" :key="index" v-show="tableOne=='2'">
+            <tr v-for="(item,index) in courseDataOneb" :key="index" v-show="tableOne=='2'">
               <td>{{item.title}}</td>
               <td>{{item.teacher}}</td>
               <td>{{item.position}}</td>
