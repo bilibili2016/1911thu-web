@@ -226,9 +226,9 @@
       <!-- 线下面授课程 -->
       <div class="studyCourse">
         <div class="title">
-          <img class="titlt-icon-left" src="@/assets/images/policy-pic01.png" alt="">
+          <!-- <img class="titlt-icon-left" src="@/assets/images/policy-pic03.png" alt=""> -->
           <span class="text">课程及师资介绍</span>
-          <img class="titlt-icon-right" src="@/assets/images/policy-pic02.png" alt="">
+          <!-- <img class="titlt-icon-right" src="@/assets/images/policy-pic04.png" alt=""> -->
         </div>
         <div class="studyInfo">
           <h5>
@@ -242,7 +242,7 @@
       <div class="table">
         <table cellpadding="0" cellspacing="0" width="100%">
           <tr class="titleOne">
-            <th colspan="4">体系一：宏观政策与深化改革（线上课程）</th>
+            <th colspan="4">体系一：宏观政策与深化改革</th>
           </tr>
           <tr class="titleTwo">
             <th colspan="2" :class="{'checked':tableOne=='1'?true:false}" @click="checkFirst('1')">模块一：宏观政策解读</th>
@@ -266,14 +266,13 @@
       <div class="table tableTwo">
         <table cellpadding="0" cellspacing="0" width="100%">
           <tr class="titleOne">
-            <th colspan="4">体系二：公共管理与创新发展（线上课程）</th>
+            <th colspan="4">体系二：公共管理与创新发展</th>
           </tr>
           <tr class="titleTwo">
-            <th colspan="4">
-              <span :class="{'checked':tableTwo=='1'?true:false}" @click="checkSecond('1')">模块一：领导人才管理</span>
-              <span :class="{'checked':tableTwo=='2'?true:false}" @click="checkSecond('2')">模块二：城市规划与乡村振兴</span>
-              <span :class="{'checked':tableTwo=='3'?true:false}" @click="checkSecond('3')">模块三：地方财政解析</span>
-            </th>
+            <th colspan="1" :class="{'checked':tableTwo=='1'?true:false}" @click="checkSecond('1')">模块一：领导人才管理</th>
+            <th colspan="1" :class="{'checked':tableTwo=='2'?true:false}" @click="checkSecond('2')">模块二：城市规划与乡村振兴</th>
+            <th colspan="1" :class="{'checked':tableTwo=='3'?true:false}" @click="checkSecond('3')">模块三：地方财政解析</th>
+            <th colspan="1" :class="{'checked':tableTwo=='4'?true:false}" @click="checkSecond('4')">模块四：新兴产业与国际合作</th>
           </tr>
           <tr class="titleThree">
             <th>课程名称</th>
@@ -293,7 +292,7 @@
       <div class="table tableThree">
         <table cellpadding="0" cellspacing="0" width="100%">
           <tr class="titleOne">
-            <th colspan="4">体系三：人文素养与通用能力提升（线上课程）</th>
+            <th colspan="4">体系三：人文素养与通用能力提升</th>
           </tr>
           <tr class="titleTwo">
             <th colspan="2" :class="{'checked':tableThree=='1'?true:false}" @click="checkThird('1')">模块一：人文素养提升</th>
@@ -378,27 +377,21 @@ export default {
           time: '1'
         },
         {
+          title: '全球经济确定的和不确定的',
+          teacher: '朱民',
+          position: '清华大学国家金融研究院院长、国际货币基金组织前副总裁',
+          time: '1'
+        },
+        {
           title: '绿色经济与可持续发展',
           teacher: '许小年',
           position: '中欧国际工商学院经济学与金融学教授',
           time: '0.5'
         },
         {
-          title: '中国实体经济的发展困局及破解思路',
-          teacher: '张俊伟',
-          position: '国务院发展研究中心宏观经济研究部研究室主任',
-          time: '3'
-        },
-        {
           title: '维护环境生态、发展绿色经济',
           teacher: '任志强',
           position: '华远集团原董事长',
-          time: '0.5'
-        },
-        {
-          title: '我国资本市场制度的短板和解决之道',
-          teacher: '刘纪鹏',
-          position: '中国政法大学商学院院长',
           time: '0.5'
         }
       ],
@@ -410,9 +403,27 @@ export default {
           time: '2'
         },
         {
+          title: '中国实体经济的发展困局及破解思路',
+          teacher: '张俊伟',
+          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          time: '3'
+        },
+        {
           title: '新时期中国改革的新思路和新框架',
           teacher: '刘元春',
           position: '中国人民大学副校长',
+          time: '0.5'
+        },
+        {
+          title: '我国资本市场制度的短板和解决之道',
+          teacher: '刘纪鹏',
+          position: '中国政法大学商学院院长',
+          time: '0.5'
+        },
+        {
+          title: '中国经济的新二元结构',
+          teacher: '白重恩',
+          position: '清华大学经济管理学院教授',
           time: '0.5'
         }
       ],
@@ -494,6 +505,44 @@ export default {
           time: '0.5'
         }
       ],
+      courseDataTwod: [
+        {
+          title: '工业机器人应用与发展思考',
+          teacher: '孙富春',
+          position: '清华大学计算机科学与技术系教授、博士生导师',
+          time: '3'
+        },
+        {
+          title: '“互联网+”时代的物联网产业发展',
+          teacher: '尹浩',
+          position: '中国科学院院士',
+          time: '1'
+        },
+        {
+          title: '打造大健康产业链 助力“健康中国2030” ',
+          teacher: '李玲',
+          position: '北京大学中国健康发展研究中心主任',
+          time: '2.5'
+        },
+        {
+          title: '中国大健康产业发展中的医养结合发展',
+          teacher: '郑静晨',
+          position: '中国工程院院士、原武警总医院院长',
+          time: '1'
+        },
+        {
+          title: '“一带一路”的机遇与挑战',
+          teacher: '王义桅',
+          position: '中国人民大学国际关系学院教授',
+          time: '2'
+        },
+        {
+          title: '“一带一路”倡议与财富管理市场投资机遇',
+          teacher: '朱光耀',
+          position: '财政部原副部长',
+          time: '0.5'
+        }
+      ],
       courseDataThreea: [
         {
           title: '科学应对压力，维护身心健康',
@@ -558,6 +607,8 @@ export default {
         this.courseDataTwo = this.courseDataTwob
       } else if (items === '3') {
         this.courseDataTwo = this.courseDataTwoc
+      } else if (items === '4') {
+        this.courseDataTwo = this.courseDataTwod
       }
       this.tableTwo = items
     },
