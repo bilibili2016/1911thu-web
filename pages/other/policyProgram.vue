@@ -352,8 +352,8 @@
       </div>
     </div>
     <div class="callMe">
-      <span>点击报名课程或了解更多信息拨打咨询电话：010-62701911</span>
-      <img src="~assets/images/click_call.png" alt="">
+      <span>了解更多信息拨打咨询电话：010-62701911</span>
+      <!-- <img src="~assets/images/click_call.png" alt=""> -->
     </div>
   </div>
 
