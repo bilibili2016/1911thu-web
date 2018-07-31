@@ -302,8 +302,8 @@
               <th colspan="4">体系一：宏观政策与深化改革（线上课程）</th>
             </tr>
             <tr class="titleTwo">
-              <th colspan="2" class="checked">模块一：宏观政策解读</th>
-              <th colspan="2">模块一：新时代深化改革</th>
+              <th colspan="2" :class="{'checked':tableOne=='1'?true:false}" @click="checkOne('1')">模块一：宏观政策解读</th>
+              <th colspan="2" :class="{'checked':tableOne=='2'?true:false}" @click="checkOne('2')">模块一：新时代深化改革</th>
             </tr>
             <tr class="titleThree">
               <th>课程名称</th>
@@ -311,23 +311,33 @@
               <th>职务</th>
               <th>学时</th>
             </tr>
-            <tr>
-              <td>当前经济形势判断与区域经济发展</td>
-              <td>马晓河</td>
-              <td>国家发改委宏观院原副院长、研究员</td>
-              <td>1</td>
+            <tr v-for="(item,index) in courseDataOne" :key="index" v-show="tableOne=='1'">
+              <td>{{item.title}}</td>
+              <td>{{item.teacher}}</td>
+              <td>{{item.position}}</td>
+              <td>{{item.time}}</td>
             </tr>
+            <tr v-for="(item,index) in courseDataOne" :key="index" v-show="tableOne=='2'">
+              <td>{{item.title}}</td>
+              <td>{{item.teacher}}</td>
+              <td>{{item.position}}</td>
+              <td>{{item.time}}</td>
+            </tr>
+
           </table>
         </div>
         <!-- 体系 表格2 -->
         <div class="table tableTwo">
           <table cellpadding="0" cellspacing="0" width="100%">
             <tr class="titleOne">
-              <th colspan="4">体系一：宏观政策与深化改革（线上课程）</th>
+              <th colspan="4">体系二：公共管理与创新发展（线上课程）</th>
             </tr>
             <tr class="titleTwo">
-              <th colspan="2" class="checked">模块一：宏观政策解读</th>
-              <th colspan="2">模块一：新时代深化改革</th>
+              <th colspan="4">
+                <span :class="{'checked':tableTwo=='1'?true:false}" @click="checkSecond('1')">模块一：领导人才管理</span>
+                <span :class="{'checked':tableTwo=='2'?true:false}" @click="checkSecond('2')">模块二：城市规划与乡村振兴</span>
+                <span :class="{'checked':tableTwo=='3'?true:false}" @click="checkSecond('3')">模块三：地方财政解析</span>
+              </th>
             </tr>
             <tr class="titleThree">
               <th>课程名称</th>
@@ -335,11 +345,23 @@
               <th>职务</th>
               <th>学时</th>
             </tr>
-            <tr>
-              <td>当前经济形势判断与区域经济发展</td>
-              <td>马晓河</td>
-              <td>国家发改委宏观院原副院长、研究员</td>
-              <td>1</td>
+            <tr v-for="(item,index) in courseDataTwo" :key="index" v-show="tableTwo=='1'">
+              <td>{{item.title}}</td>
+              <td>{{item.teacher}}</td>
+              <td>{{item.position}}</td>
+              <td>{{item.time}}</td>
+            </tr>
+            <tr v-for="(item,index) in courseDataTwo" :key="index" v-show="tableTwo=='2'">
+              <td>{{item.title}}</td>
+              <td>{{item.teacher}}</td>
+              <td>{{item.position}}</td>
+              <td>{{item.time}}</td>
+            </tr>
+            <tr v-for="(item,index) in courseDataTwos" :key="index" v-show="tableTwo=='3'">
+              <td>{{item.title}}</td>
+              <td>{{item.teacher}}</td>
+              <td>{{item.position}}</td>
+              <td>{{item.time}}</td>
             </tr>
           </table>
         </div>
@@ -347,12 +369,11 @@
         <div class="table tableThree">
           <table cellpadding="0" cellspacing="0" width="100%">
             <tr class="titleOne">
-              <th colspan="4">体系二：公共管理与创新发展（线上课程）</th>
+              <th colspan="4">体系三：人文素养与通用能力提升（线上课程）</th>
             </tr>
             <tr class="titleTwo">
-              <th colspan="2" class="checked">模块一：领导人才管理</th>
-              <th colspan="2">模块二：城市规划与乡村振兴</th>
-              <th colspan="2">模块三：地方财政解析</th>
+              <th colspan="2" :class="{'checked':tableThree=='1'?true:false}" @click="checkThird('1')">模块一：人文素养提升</th>
+              <th colspan="2" :class="{'checked':tableThree=='2'?true:false}" @click="checkThird('2')">模块二：通用能力提升</th>
             </tr>
             <tr class="titleThree">
               <th>课程名称</th>
@@ -360,11 +381,17 @@
               <th>职务</th>
               <th>学时</th>
             </tr>
-            <tr>
-              <td>当前经济形势判断与区域经济发展</td>
-              <td>马晓河</td>
-              <td>国家发改委宏观院原副院长、研究员</td>
-              <td>1</td>
+            <tr v-for="(item,index) in courseDataThree" :key="index" v-show="tableThree=='1'">
+              <td>{{item.title}}</td>
+              <td>{{item.teacher}}</td>
+              <td>{{item.position}}</td>
+              <td>{{item.time}}</td>
+            </tr>
+            <tr v-for="(item,index) in courseDataThree" :key="index" v-show="tableThree=='2'">
+              <td>{{item.title}}</td>
+              <td>{{item.teacher}}</td>
+              <td>{{item.position}}</td>
+              <td>{{item.time}}</td>
             </tr>
           </table>
         </div>
@@ -374,7 +401,128 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      tableOne: '1',
+      tableTwo: '1',
+      tableThree: '1',
+      courseDataOnea: [
+        {
+          title: '当前经济形势判断与区域经济发展',
+          teacher: '马晓河',
+          position: '国家发改委宏观院原副院长、研究员',
+          time: '1'
+        },
+        {
+          title: '绿色经济与可持续发展',
+          teacher: '许小年',
+          position: '中欧国际工商学院经济学与金融学教授',
+          time: '0.5'
+        },
+        {
+          title: '中国实体经济的发展困局及破解思路',
+          teacher: '张俊伟',
+          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          time: '3'
+        }
+      ],
+      courseDataOneb: [
+        {
+          title: '深化供给侧结构性改革的思路与对策',
+          teacher: '李佐军',
+          position: '国务院发展研究中心资源与环境政策研究所副所长',
+          time: '2'
+        },
+        {
+          title: '新时期中国改革的新思路和新框架',
+          teacher: '刘元春',
+          position: '中国人民大学副校长',
+          time: '0.5'
+        }
+      ],
+      courseDataTwo: [
+        {
+          title: '领导者选拔任用中的政治素质问题',
+          teacher: '萧鸣政',
+          position: '北京大学政府管理学院行政管理系主任',
+          time: '0.5'
+        },
+        {
+          title: '绿色经济与可持续发展',
+          teacher: '许小年',
+          position: '中欧国际工商学院经济学与金融学教授',
+          time: '0.5'
+        },
+        {
+          title: '中国实体经济的发展困局及破解思路',
+          teacher: '张俊伟',
+          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          time: '3'
+        },
+        {
+          title: '中国实体经济的发展困局及破解思路',
+          teacher: '张俊伟',
+          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          time: '3'
+        }
+      ],
+      courseDataTwos: [
+        {
+          title: '当前经济形势判断与区域经济发展',
+          teacher: '马晓河',
+          position: '国家发改委宏观院原副院长、研究员',
+          time: '1'
+        },
+        {
+          title: '绿色经济与可持续发展',
+          teacher: '许小年',
+          position: '中欧国际工商学院经济学与金融学教授',
+          time: '0.5'
+        },
+        {
+          title: '中国实体经济的发展困局及破解思路',
+          teacher: '张俊伟',
+          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          time: '3'
+        }
+      ],
+      courseDataThree: [
+        {
+          title: '当前经济形势判断与区域经济发展',
+          teacher: '马晓河',
+          position: '国家发改委宏观院原副院长、研究员',
+          time: '1'
+        },
+        {
+          title: '绿色经济与可持续发展',
+          teacher: '许小年',
+          position: '中欧国际工商学院经济学与金融学教授',
+          time: '0.5'
+        },
+        {
+          title: '中国实体经济的发展困局及破解思路',
+          teacher: '张俊伟',
+          position: '国务院发展研究中心宏观经济研究部研究室主任',
+          time: '3'
+        }
+      ]
+    }
+  },
+  methods: {
+    checkOne(items) {
+      this.tableOne = items
+    },
+    checkSecond(items) {
+      console.log(items)
+
+      this.tableTwo = items
+    },
+    checkThird(items) {
+      this.tableThree = items
+    }
+  }
+}
 </script>
 <style scoped lang="scss">
 @import '~assets/style/project/partypolicy.scss';
