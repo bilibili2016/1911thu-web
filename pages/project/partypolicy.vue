@@ -261,12 +261,12 @@
             </div>
             <div class="modeList">
               <div class="modeTop">
-                <span class="fl">1</span>
-                <span class="fr">体系一：宏观政策与深 化改革</span>
+                <span class="fl">2</span>
+                <span class="fr">体系二：宏观政策与深 化改革</span>
               </div>
               <div class="modeBottom">
-                <span class="fl">3</span>
-                <span class="fr">体系三：人文素养与通 用能力提升</span>
+                <span class="fl">4</span>
+                <span class="fr">体系四：人文素养与通 用能力提升</span>
               </div>
             </div>
           </div>
