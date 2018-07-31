@@ -348,7 +348,8 @@
   }
   .system {
     padding-bottom: 60px;
-    background: url('~assets/images/inlineBg.png') center top no-repeat, url('~assets/images/underlineBg.png') center bottom no-repeat;
+    background: url('~assets/images/inlineBg.png') center top no-repeat,
+      url('~assets/images/underLineBg.png') center bottom no-repeat;
     background-size: contain;
     .studyCourse .title .text {
       color: #fff;
@@ -435,9 +436,9 @@
             cursor: pointer;
             border-bottom: 2px solid transparent;
             &.checked {
-              background-color: #FFBFA1;
-              color: #FF4401;
-              border-bottom: 2px solid #FF4401;
+              background-color: #ffbfa1;
+              color: #ff4401;
+              border-bottom: 2px solid #ff4401;
             }
           }
         }
@@ -519,7 +520,7 @@
         font-size: 24px;
         color: #fff;
         text-align: center;
-        background-color: #FFAA07;
+        background-color: #ffaa07;
       }
       .content {
         padding: 30px 26px 12px 20px;
@@ -535,13 +536,13 @@
         }
       }
       &:nth-child(2) .title {
-        background-color: #F88E4A;
+        background-color: #f88e4a;
       }
       &:nth-child(3) .title {
-        background-color: #4F86ED;
+        background-color: #4f86ed;
       }
       &:nth-child(4) .title {
-        background-color: #8F53D2;
+        background-color: #8f53d2;
       }
     }
   }
@@ -553,7 +554,7 @@
     color: #fff;
     border-radius: 45px;
     font-size: 20px;
-    background-color: #8F53D2;
+    background-color: #8f53d2;
     position: relative;
     span {
       width: 710px;
