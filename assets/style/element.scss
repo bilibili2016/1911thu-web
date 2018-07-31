@@ -1431,6 +1431,7 @@ input:-webkit-autofill {
   cursor: pointer;
   outline: none;
   &:hover {
-    background-color: red;
+    background-color: #9947e2 !important;
+    color: #fff !important;
   }
 }
