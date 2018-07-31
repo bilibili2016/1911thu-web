@@ -226,9 +226,9 @@
       <!-- 线下面授课程 -->
       <div class="studyCourse">
         <div class="title">
-          <!-- <img class="titlt-icon-left" src="@/assets/images/policy-pic03.png" alt=""> -->
+          <img class="titlt-icon-left" src="@/assets/images/policy-pic05.png" alt="">
           <span class="text">课程及师资介绍</span>
-          <!-- <img class="titlt-icon-right" src="@/assets/images/policy-pic04.png" alt=""> -->
+          <img class="titlt-icon-right" src="@/assets/images/policy-pic06.png" alt="">
         </div>
         <div class="studyInfo">
           <h5>
