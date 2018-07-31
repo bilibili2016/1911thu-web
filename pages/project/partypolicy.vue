@@ -114,7 +114,7 @@
           </div>
         </div>
       </div>
-      <di class="content-three">
+      <div class="content-three">
         <div class="title">
           <img class="titlt-icon-left" src="@/assets/images/policy-pic01.png" alt="">
           <span class="text">学习方式及优势</span>
@@ -196,7 +196,7 @@
           </div>
         </div>
 
-      </di>
+      </div>
     </div>
     <div class="project">
       <div class="distinctive">
@@ -235,7 +235,12 @@
       <div class="system">
         <!-- 课程体系 -->
         <div class="courseSystem">
-          <h3>课程体系</h3>
+          <!-- <h3>课程体系</h3> -->
+          <div class="title">
+            <img class="titlt-icon-left" src="@/assets/images/policy-pic01.png" alt="">
+            <span class="text">课程体系</span>
+            <img class="titlt-icon-right" src="@/assets/images/policy-pic02.png" alt="">
+          </div>
           <p>该项目共四大课程体系，九个课程模块，总计62学时，包含： </p>
           <p>线上网络课程：八个课程模块，计50学时。线下面授课程：一个课程模块，计12学时。</p>
           <div class="mode">
@@ -268,7 +273,12 @@
         </div>
         <!-- 线上学习课程 -->
         <div class="studyCourse">
-          <h3>线上学习课程</h3>
+          <!-- <h3>线上学习课程</h3> -->
+          <div class="title">
+            <img class="titlt-icon-left" src="@/assets/images/policy-pic01.png" alt="">
+            <span class="text">线上学习课程</span>
+            <img class="titlt-icon-right" src="@/assets/images/policy-pic02.png" alt="">
+          </div>
           <div class="studyInfo">
             <h5>
               <span class="studyTitle">三个体系</span>
