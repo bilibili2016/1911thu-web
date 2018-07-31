@@ -240,7 +240,6 @@ export default {
     // 获取分类列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
-        console.log(response, '这是')
         this.classify = response.data.categoryList
       })
     },
