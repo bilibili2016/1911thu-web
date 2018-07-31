@@ -85,7 +85,7 @@ export default {
       this.openDetail()
     },
     openDetail() {
-      window.open(window.location.origin + '/other/policyProgram')
+      window.open(window.location.origin + '/project/partypolicy')
     },
     getMore(item) {
       window.open(window.location.origin + item)
