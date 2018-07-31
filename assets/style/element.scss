@@ -1414,3 +1414,23 @@ input:-webkit-autofill {
 .start .captcha {
   width: 130px;
 }
+.dropdown {
+}
+.el-dropdown-menu {
+  padding: 0px !important;
+  cursor: pointer;
+  left: 10px;
+}
+.el-dropdown-menu__item {
+  list-style: none;
+  line-height: 60px;
+  padding: 5px 25px !important;
+  margin: 0;
+  font-size: 14px;
+  color: #606266;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    background-color: red;
+  }
+}

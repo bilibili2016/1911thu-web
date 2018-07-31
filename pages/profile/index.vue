@@ -26,10 +26,10 @@
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
           <el-card class="changeNav">
-            <el-select v-model="value" @change="changeNav">
+            <!-- <el-select v-model="value" @change="changeNav">
               <el-option v-for="(item,index) in options" :key="index" :label="item.label" :value="item.value">
               </el-option>
-            </el-select>
+            </el-select> -->
             <el-tabs v-model="activeNames" @tab-click="handleActive">
               <!-- 我的课程 学习中 -->
               <el-tab-pane label="学习中" name="first">
