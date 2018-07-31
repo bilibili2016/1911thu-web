@@ -7,7 +7,7 @@
         <div class="img-flex"></div>
       </div> -->
       <!-- 分类 -->
-      <v-tab :classify="classify" :courses="courses" :tab="tabmsg"></v-tab>
+      <!-- <v-tab :classify="classify" :courses="courses" :tab="tabmsg"></v-tab> -->
       <!-- 定制 -->
       <!-- <v-card :dingData="dingData" :config="config"></v-card> -->
     </div>
