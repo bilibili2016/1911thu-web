@@ -52,7 +52,6 @@ export default {
     // 获取项目以及学院列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
-        console.log(response, '这是123')
         for (let item of response.data.categoryList) {
           if (item.is_picture_show === '0') {
             this.categoryArr.push(item)
