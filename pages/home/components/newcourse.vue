@@ -85,7 +85,7 @@ export default {
       this.openDetail()
     },
     openDetail() {
-      // window.open(window.location.origin + '/course/coursedetail')
+      window.open(window.location.origin + '/other/policyProgram')
     },
     getMore(item) {
       window.open(window.location.origin + item)
