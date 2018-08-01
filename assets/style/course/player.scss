@@ -26,6 +26,7 @@
     .playTop {
       font-size: 18px;
       overflow: hidden;
+      cursor: pointer;
       i {
         margin: 0 10px 0 20px;
         cursor: pointer;
@@ -420,7 +421,7 @@
           &.is-bordered.is-checked {
             border-color: #6417a6;
           }
-          .el-radio__input.is-checked+.el-radio__label {
+          .el-radio__input.is-checked + .el-radio__label {
             color: #6417a6;
           }
           .el-radio__input {
