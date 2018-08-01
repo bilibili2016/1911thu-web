@@ -477,6 +477,7 @@ export default {
     //   });
     // },
     showCommit() {
+      // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
       // this.showInfo = true
       // this.$router.push('/shop/checkedcourse');
       this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口

@@ -23,7 +23,7 @@
           <p>2.绑定成功后，不可更改。</p>
         </div>
         <div :class="[{'presentAble':courseList.presentAble},'present']">
-          <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交</el-button>
+          <el-button :disabled="!courseList.presentAble" round @click="detection">提交</el-button>
         </div>
       </div>
     </div>
@@ -82,6 +82,34 @@ export default {
     addID() {
       this.courseList.addNewID = true
       this.$emit('isShowMsg', false)
+    },
+    // 检测邀请码内是否包含已绑定的课程
+    detection() {
+      this.bindForm.courseId = this.courseList.inputID
+      home.detectionCode(this.bindForm).then(res => {
+        // 判断邀请码内是否包含已绑定的课程
+        if (res.data.is_exist === 1) {
+          this.$confirm('邀请码内是否包含已绑定的课程!', '提示', {
+            confirmButtonText: '坚持绑定',
+            cancelButtonText: '取消',
+            closeOnHashChange: true,
+            type: 'warning',
+            center: true
+          })
+            .then(() => {
+              // 添加绑定课程
+              this.doSubmit()
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消绑定'
+              })
+            })
+        } else {
+          this.doSubmit()
+        }
+      })
     },
     // 添加课程
     doSubmit() {

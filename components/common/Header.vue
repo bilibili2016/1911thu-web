@@ -90,15 +90,16 @@
             <p>1.输入课程兑换码，绑定兑换购买的课程</p>
             <p>2.绑定成功后，不可更改。</p>
           </div>
-          <div :class="['bind',{input:bindForm.isInput}]" @click="goBind">绑定</div>
+          <div :class="['bind',{input:bindForm.isInput}]" @click="detection">绑定</div>
         </div>
       </div>
     </div>
     <!-- 登录注册 -->
     <div class="start" v-if="start">
-      <div class="bgt" @click="close"></div>
+      <div class="bgt"></div>
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
+        <i class="el-icon-close closelrFrom" @click="close"></i>
         <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
@@ -183,6 +184,7 @@
       </div>
       <!-- 微信登录 -->
       <div class="lrFrame wechatLogin" v-show="wechatLogin">
+        <i class="el-icon-close closeWechat" @click="close"></i>
         <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
           <h4 class="clearfix">
             <span>绑定手机账号</span>
@@ -574,6 +576,33 @@ export default {
           }
         })
       }
+    },
+    // 检测邀请码内是否包含已绑定的课程
+    detection() {
+      home.detectionCode(this.bindForm).then(res => {
+        // 判断邀请码内是否包含已绑定的课程
+        if (res.data.is_exist === 1) {
+          this.$confirm('邀请码内是否包含已绑定的课程!', '提示', {
+            confirmButtonText: '坚持绑定',
+            cancelButtonText: '取消',
+            closeOnHashChange: true,
+            type: 'warning',
+            center: true
+          })
+            .then(() => {
+              // 添加绑定课程
+              this.goBind()
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消绑定'
+              })
+            })
+        } else {
+          this.goBind()
+        }
+      })
     },
     // 头部绑定课程
     goBind() {
