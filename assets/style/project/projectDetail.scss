@@ -1,0 +1,122 @@
+.projectDetail {
+  padding: 0 0 100px;
+  background: url('~assets/images/pro_detailbg.png') no-repeat;
+  background-position: top center;
+  background-size: auto;
+  .proHeader {
+    width: 1100px;
+    margin: 0 auto;
+    background: url('~assets/images/pro_banner.png') no-repeat;
+    background-position: top center;
+    background-size: cover;
+    box-shadow: 8px 0px 21px rgba(39, 0, 77, 0.07);
+    .headerTop {
+      height: 56px;
+      line-height: 56px;
+      padding: 0 25px;
+      font-size: 12px;
+      color: #BDBCCF;
+      .headerL {
+        color: #999;
+        .main-crumbs {
+          display: inline-block;
+          .el-breadcrumb__inner {
+            color: #999;
+          }
+          .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+            color: #999 !important;
+          }
+        }
+      }
+      .collection {
+        margin-right: 21px;
+      }
+    }
+    h1 {
+      margin-top: 76px;
+      font-size: 46px;
+      color: #fff;
+      text-align: center;
+    }
+    h3 {
+      font-size: 24px;
+      line-height: 30px;
+      margin-top: 20px;
+      color: #fff;
+      text-align: center;
+    }
+    h5 {
+      margin-top: 45px;
+      font-size: 16px;
+      height: 20px;
+      line-height: 20px;
+      color: #C4C3D5;
+      text-align: center;
+      .el-rate {
+        display: inline-block;
+        vertical-align: top;
+      }
+      i {
+        display: inline-block;
+        height: 12px;
+        width: 1px;
+        margin: 0 17px;
+        background-color: #BDBCCF;
+      }
+    }
+    .price {
+      margin-top: 135px;
+      height: 98px;
+      line-height: 98px;
+      padding: 0 40px;
+      background: #fff;
+      .fl {
+        font-size: 32px;
+        i {
+          font-size: 24px;
+        }
+        color: #FD0E19;
+      }
+      .fr {
+        width: 200px;
+        height: 48px;
+        line-height: 48px;
+        margin-top: 25px;
+        border-radius: 24px;
+        background-color: #FD0E19;
+        text-align: center;
+        i {
+          display: inline-block;
+          color: #fff;
+          font-size: 16px;
+          padding-right: 20px;
+          line-height: 20px;
+          margin-top: 14px;
+          border-right: 1px solid #fff;
+          cursor: pointer;
+        }
+        span {
+          padding-left: 20px;
+          vertical-align: top;
+          img {
+            width: 23px;
+            height: 24px;
+            margin-top: 12px;
+          }
+        }
+      }
+    }
+  }
+  .proContent {
+    clear: both;
+    padding-top: 35px;
+    .proTab {
+      width: 1130px;
+      margin: 0 auto;
+      padding: 0 15px;
+      .detail {
+        padding: 28px;
+      }
+    }
+  }
+}
