@@ -5,7 +5,9 @@
       <div class="table">
         <div class="tableHeader">
           <span class="table-return" @click="returnLastPage">
-            <i class="el-icon-arrow-left" style="font-size:16px"></i>上一步</span>
+            <i class="el-icon-arrow-left" style="font-size:16px"></i>
+            上一步
+          </span>
           <span class="courseName">课程</span>
           <span class="price">单价</span>
           <span class="course-num">课程数量</span>

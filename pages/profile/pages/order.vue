@@ -20,7 +20,10 @@
               查看更多课程>
             </div>
           </div>
-          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">¥{{courseList.order_amount}}</div>
+          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
+            <p>¥{{courseList.order_amount}}</p>
+            <p v-if="courseList.orderCurriculumList.length<=3" class="detail" @click="selectPayApply(courseList, index)">订单详情</p>
+          </div>
           <div class="status height" :style="{height: courseList.orderCurriculumList.length>3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
             <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
             <p class="payReady payed" v-if="courseList.pay_status === '2'">已支付</p>

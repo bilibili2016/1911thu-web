@@ -18,6 +18,7 @@
                 <h4>抱歉，现在还没有学习过的课程呦~</h4>
                 <!-- <p>去学习</p> -->
               </div>
+
             </div>
           </el-card>
         </el-tab-pane>
@@ -146,58 +147,118 @@
 
           <!-- 订单详情 -->
           <div class="orderListDetail" v-else>
-            <!-- <div class="order-top">
-              <div class="orderItem orderInfo ">
-                <div class="title">订单信息</div>
-                <div>
-                  <p>
-                    <span>订单编号：</span>
-                    <span>{{orderDetail.order_sn}}</span>
-
-                  </p>
-                  <p>
-                    <span>下单时间：</span>
-                    <span>{{timestampToTime(orderDetail.create_time)}}</span>
-                  </p>
-                </div>
-              </div>
-              <div class="orderItem payInfo">
-                <div class="title">付款信息</div>
-              </div>
-              <div class="orderItem ticketInfo">
-                <div class="title">发票信息</div>
-              </div>
-            </div> -->
             <div class="table">
               <div class="tableHeader">
                 <span class="goBack" @click="goBack">
-                  <i class="el-icon-arrow-left"></i>上一步</span>
-                <span class="courseName">课程</span>
-                <span class="price">单价</span>
-                <span class="operation">课程数量</span>
+                  <i class="el-icon-arrow-left icon"></i>
+                </span>
+                <span>订单详情</span>
               </div>
               <div class="tableBody">
-                <div v-for="(course,index) in courseList" :key="index">
-                  <div class="courseInfo clearfix">
-                    <img class="fl" :src="course.picture" alt="">
-                    <div class="fl">
-                      <h4>{{course.name}}</h4>
-                      <h6>{{course.curriculum_time}}学时</h6>
-                      <p>讲师：{{course.teacher_name}}</p>
+                <!-- 订单信息 -->
+                <div class="order bodyItem">
+                  <div class="top">
+                    订单信息
+                  </div>
+                  <div class="bottom">
+                    <div class="info clearfix">
+                      <div class="info-fl">
+                        <span>订单编号：</span>
+                        <span>{{orderDetail.order_sn}}</span>
+                      </div>
+                      <div class="info-fr">
+                        <span>下单时间：</span>
+                        <span>{{timestampToTime(orderDetail.create_time)}}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="coursePrice">
-                    ￥{{course.price}}
-                  </div>
-                  <div class="courseOperation">
-                    <i class="el-icon-close"></i>{{course.pay_number}}
+
                   </div>
                 </div>
-              </div>
-              <div class="tableFooter">
-                <p>课程数量：{{courseList.length}}门</p>
-                <p>学习人数：{{orderDetail.pay_number}}人</p>
-                <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
+                <!-- 付款信息 -->
+                <div class="pay bodyItem">
+                  <div class="top">
+                    付款信息
+                  </div>
+                  <div class="bottom">
+                    <!-- 快捷支付 -->
+                    <div v-if="orderDetail.payment_method !== '3'">
+                      <div class="info clearfix">
+                        <div class="info-fl">
+                          <span>支付方式：</span>
+                          <span>快捷支付</span>
+                        </div>
+                        <div class="info-fr">
+                          <span>支付时间：</span>
+                          <span>{{timestampToTime(orderDetail.pay_time)}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 公司转账 -->
+                    <div v-else>
+                      <div class="info clearfix">
+                        <div class="info-fl">
+                          <span>支付方式：</span>
+                          <span>公司转账</span>
+                        </div>
+                        <div class="info-fr">
+                          <span>户名：</span>
+                          <span>{{bankInfo.bank_account}}</span>
+                        </div>
+                      </div>
+                      <div class="info clearfix">
+                        <div class="info-fl">
+                          <span>账户：</span>
+                          <span>{{bankInfo.card_number}}</span>
+                        </div>
+                        <div class="info-fr">
+                          <span>开户行：</span>
+                          <span>{{bankInfo.bank_name}}</span>
+                        </div>
+                      </div>
+                      <div class="info clearfix">
+                        <div class="info-fl">
+                          <span>联行号：</span>
+                          <span>{{bankInfo.bank_code}}</span>
+                        </div>
+                        <div class="info-fr">
+                          <span>汇款识别码：</span>
+                          <span>{{bankInfo.identification_code}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 商品信息 -->
+                <div class="goods bodyItem">
+                  <div class="top">
+                    <span class="lf">商品信息</span>
+                    <span class="lm">单价</span>
+                    <span class="lr">数量</span>
+                  </div>
+                  <div class="bottom">
+                    <div class="clearfix" v-for="(course,index) in courseList" :key="index">
+                      <div class="courseInfo clearfix">
+                        <img class="fl" :src="course.picture" alt="">
+                        <div class="fl">
+                          <h4>{{course.name}}</h4>
+                          <h6>{{course.curriculum_time}}学时</h6>
+                          <p>讲师：{{course.teacher_name}}</p>
+                        </div>
+                      </div>
+                      <div class="coursePrice">
+                        ￥{{course.price}}
+                      </div>
+                      <div class="courseOperation">
+                        <i class="el-icon-close"></i>{{course.pay_number}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tableFooter">
+                    <p>课程数量：{{courseList.length}}门</p>
+                    <p>学习人数：{{orderDetail.pay_number}}人</p>
+                    <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -358,7 +419,9 @@ export default {
         ids: null
       },
       collectionData: [],
-      orderDetail: {},
+      orderDetail: {}, //订单详情信息
+      bankInfo: {}, //公司打款信息
+
       showOrderList: true,
       isUpdate: false,
       allOrderLoad: true,
@@ -708,6 +771,7 @@ export default {
           if (response.status === 0) {
             this.courseList = response.data.orderCurriculumList
             this.orderDetail = response.data.orderDetail
+            this.bankInfo = response.data.bankInfo
           }
           resolve(true)
         })
@@ -838,107 +902,142 @@ export default {
   .orderListDetail {
     //订单列表详情
     width: 100%;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     .table {
       .tableHeader {
-        height: 60px;
-        line-height: 60px;
-        background-color: #ebe7ed;
-        font-size: 16px;
+        height: 55px;
+        line-height: 55px;
+        background-color: #fff;
         color: #222;
-        margin-bottom: 40px;
+        border-bottom: 1px solid #e8d6f7;
+        span {
+          vertical-align: middle;
+        }
         .goBack {
-          margin-left: 10px;
+          font-size: 18px;
+          font-weight: 800;
+          margin: 0 15px 0 30px;
           color: #6417a6;
           cursor: pointer;
         }
-        .courseName {
-          margin-left: 75px;
-        }
-        .price {
-          margin-left: 500px;
-        }
-        .operation {
-          margin-left: 70px;
-        }
       }
-      .tableBody > div {
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-        height: 140px;
-        margin-bottom: 20px;
-        border-radius: 6px;
-        box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-        .el-checkbox {
-          line-height: 140px;
-        }
-        .courseInfo {
-          display: inline-block;
-          width: 620px;
-          margin-left: 32px;
-          img {
-            width: 160px;
-            height: 100px;
-            margin-right: 20px;
-          }
-          h4 {
-            width: 440px;
-            height: 42px;
+      .tableBody {
+        padding: 20px 30px 40px 30px;
+        .bodyItem {
+          border: 1px solid #e8d6f7;
+          margin-bottom: 20px;
+          .top {
+            height: 60px;
+            line-height: 60px;
+            background-color: #ebe7ed;
+            color: #6417a6;
             font-size: 16px;
-            color: #332a51;
-            overflow: hidden;
-            padding: 9px 0 0;
-            margin-bottom: 15px;
+            padding-left: 30px;
           }
-          h6 {
-            color: #6d687f;
-            font-size: 12px;
-            padding-bottom: 9px;
-          }
-          p {
-            font-size: 14px;
-            color: #6d687f;
-          }
-        }
-        .coursePrice {
-          display: inline-block;
-          width: 100px;
-          height: 140px;
-          line-height: 140px;
-          text-align: center;
-          color: #ff5f5f;
-          font-size: 16px;
-        }
-        .courseOperation {
-          display: inline-block;
-          width: 76px;
-          height: 140px;
-          line-height: 140px;
-          text-align: center;
-          margin-left: 35px;
-          font-size: 16px;
-          color: #332a51;
-          i {
-            font-size: 12px;
+          .bottom {
+            background-color: #fafafa;
+            padding: 0 50px 0 30px;
+            .info {
+              height: 50px;
+              line-height: 50px;
+              font-size: 14px;
+              color: #222;
+              .info-fr,
+              .info-fl {
+                width: 50%;
+                float: left;
+              }
+            }
           }
         }
-      }
-      .tableFooter {
-        p {
-          font-size: 16px;
-          text-align: right;
-          color: #222;
-          line-height: 30px;
+        .goods {
+          .top {
+            padding-right: 50px;
+            .lf {
+              width: 80%;
+            }
+            .lm {
+              width: 10%;
+              text-align: center;
+            }
+            .lr {
+              width: 10%;
+              text-align: right;
+            }
+          }
+          .bottom {
+            border-bottom: 1px solid #e8d6f7;
+            .courseInfo {
+              float: left;
+              width: 80%;
+              margin-top: 20px;
+              img {
+                width: 160px;
+                height: 100px;
+                margin-right: 20px;
+              }
+              h4 {
+                // width: 440px;
+                height: 42px;
+                font-size: 16px;
+                color: #332a51;
+                overflow: hidden;
+                padding: 9px 0 0;
+                margin-bottom: 15px;
+              }
+              h6 {
+                color: #6d687f;
+                font-size: 12px;
+                padding-bottom: 9px;
+              }
+              p {
+                font-size: 14px;
+                color: #6d687f;
+              }
+            }
+            .coursePrice {
+              float: left;
+              width: 10%;
+              height: 140px;
+              line-height: 140px;
+              text-align: center;
+              color: #ff5f5f;
+              font-size: 16px;
+            }
+            .courseOperation {
+              float: left;
+              width: 10%;
+              height: 140px;
+              line-height: 140px;
+              text-align: right;
+              font-size: 16px;
+              color: #332a51;
+              i {
+                font-size: 12px;
+              }
+            }
+          }
+
+          .tableFooter {
+            background-color: #fafafa;
+            padding: 20px 45px 20px 0;
+            text-align: right;
+            p {
+              font-size: 14px;
+              text-align: right;
+              color: #222;
+              line-height: 30px;
+            }
+            h4 {
+              font-size: 20px;
+              color: #ff5f5f;
+              font-weight: 700;
+              margin-top: 15px;
+            }
+          }
         }
-        h4 {
-          font-size: 24px;
-          color: #ff5f5f;
-          font-weight: 700;
-          margin-top: 28px;
-        }
-        text-align: right;
-        padding: 30px 0 50px;
-        background-color: transparent;
       }
     }
   }
