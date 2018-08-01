@@ -86,7 +86,7 @@ export default {
               if (Number(paynumber) > 1) {
                 this.goLink('tab-eighth')
               } else {
-                this.goLink('tab-second')
+                this.goLink('tab-third')
               }
             } else {
               this.seconds--
