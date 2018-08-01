@@ -163,7 +163,7 @@
           <div class="formLi clearfix" v-show="ticketForm.saveioc">
             <p class="fl">纳税人识别号</p>
             <p class="fr">
-              <input type="text" v-model="ticketForm.number" placeholder="输入纳税人识别号">
+              <input type="text" v-model="ticketForm.number" @blur="retfNumber" placeholder="输入纳税人识别号">
             </p>
           </div>
           <div class="formLi clearfix">
@@ -576,6 +576,7 @@ export default {
       stepOne: true,
       stepTwo: false,
       stepThree: false,
+      tfNumber: false,
       rules: {
         companyname: [
           {
@@ -676,6 +677,35 @@ export default {
       // 判断屏幕高度是否小于发票弹框高度
       if (windowHeight - 120 < 600) {
         this.$refs.invoiceInfo.style.height = windowHeight - 120 + 'px'
+      }
+    },
+    retfNumber() {
+      if (
+        this.ticketForm.number == '' ||
+        !/^[A-Z0-9]+$/.test(this.ticketForm.number)
+      ) {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请输入正确的纳税人识别号！'
+        })
+        this.tfNumber = false
+      } else {
+        if (
+          this.ticketForm.number.length == 15 ||
+          this.ticketForm.number.length == 18 ||
+          this.ticketForm.number.length == 20
+        ) {
+          this.tfNumber = true
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入正确的纳税人识别号！'
+          })
+          this.tfNumber = false
+          return false
+        }
       }
     },
     // 验证增值税发票 中的纳税人识别号
@@ -892,10 +922,7 @@ export default {
         this.ticketForm.number = ''
       }
       if (this.ticketForm.types == 2) {
-        if (
-          this.ticketForm.number == '' ||
-          !/^[A-Za-z0-9]+$/.test(this.ticketForm.number)
-        ) {
+        if (!this.tfNumber) {
           this.$message({
             showClose: true,
             type: 'error',
