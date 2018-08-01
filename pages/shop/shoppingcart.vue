@@ -478,9 +478,39 @@ export default {
     // },
     showCommit() {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
+      console.log(this.numForm.number)
+
+      if (this.numForm.number === 1) {
+        home.existCourse().then(res => {
+          if (res.data.is_exist_curriculum === 1) {
+            this.$confirm(
+              '您所购买的商品与已购商品重复，建议您慎重选择，如果您继续购买，该订单将生成专属邀请码，需绑定后学习，绑定后重复商品将进行有效期累加。',
+              {
+                confirmButtonText: '去结算',
+                cancelButtonText: '取消',
+                closeOnHashChange: false,
+                // type: 'warning',
+                center: true
+              }
+            )
+              .then(() => {
+                this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
+              })
+              .catch(() => {
+                this.$message({
+                  type: 'info',
+                  message: '已取消结算！'
+                })
+              })
+          }
+        })
+      } else {
+        this.$router.push('/shop/affirmorder')
+      }
+
       // this.showInfo = true
       // this.$router.push('/shop/checkedcourse');
-      this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
+      //this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
       // return new Promise((resolve, reject) => {
       //   home.addChecked(this.addArray).then(res => {
       //     if (res.status === 0) {

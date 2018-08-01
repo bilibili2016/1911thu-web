@@ -582,13 +582,16 @@ export default {
       home.detectionCode(this.bindForm).then(res => {
         // 判断邀请码内是否包含已绑定的课程
         if (res.data.is_exist === 1) {
-          this.$confirm('邀请码内是否包含已绑定的课程!', '提示', {
-            confirmButtonText: '坚持绑定',
-            cancelButtonText: '取消',
-            closeOnHashChange: true,
-            type: 'warning',
-            center: true
-          })
+          this.$confirm(
+            '该邀请码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
+            {
+              confirmButtonText: '坚持绑定',
+              cancelButtonText: '取消',
+              closeOnHashChange: false,
+              // type: 'warning',
+              center: true
+            }
+          )
             .then(() => {
               // 添加绑定课程
               this.goBind()
