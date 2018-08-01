@@ -50,7 +50,7 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 6,
+        pagesize: 5,
         total: null
       },
       scrollTopMsg: true,
