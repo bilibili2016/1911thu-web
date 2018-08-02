@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background:#fff">
     <div class="orderList" v-for="(courseList, index ) in orderData" :key="index">
       <div class="topBar clearfix">
         <span class="fl">订单：{{courseList.order_sn}}</span>

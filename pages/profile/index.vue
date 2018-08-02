@@ -101,7 +101,7 @@
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="全部" name="orderFirst">
                 <v-order v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" :config="configOne" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
-                <div class="content" v-else>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
@@ -113,7 +113,7 @@
                   <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
                 </span>
                 <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-order>
-                <div class="content" v-else>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
@@ -124,7 +124,7 @@
                 <span class="payOk" slot="label">已完成
                 </span>
                 <v-order v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
-                <div class="content" v-else>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
@@ -135,7 +135,7 @@
                 <span class="payOff" slot="label">已失效
                 </span>
                 <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="invalidOrderData" v-loading="invalidOrderLoad"></v-order>
-                <div class="content" v-else>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
@@ -288,16 +288,29 @@
           <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
-        <el-tab-pane name="tab-sixth">
+        <!-- <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
             <i class="icon-bind"></i> 课程兑换码</span>
           <v-bind></v-bind>
-        </el-tab-pane>
-        <!-- 专属邀请码 -->
-        <el-tab-pane name="tab-eighth" v-if="codeData.length">
+        </el-tab-pane> -->
+        <!-- 课程码管理 -->
+        <el-tab-pane class="my-course my-invitation" name="tab-sixth">
           <span slot="label" class="tabList">
-            <i class="icon-code"></i> 专属邀请码</span>
-          <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>
+            <i class="icon-code"></i> 课程码管理</span>
+          <el-tabs v-model="courseCodeNames" @tab-click="handleCourseCode">
+            <!-- 课程码管理 课程码列表 -->
+            <el-tab-pane label="课程码列表" name="first">
+              <v-invitation :codeData="codeData"></v-invitation>
+            </el-tab-pane>
+            <!-- 课程码管理 兑换详情 -->
+            <el-tab-pane label="兑换详情" name="second">
+              <v-conversion :recordData="recordData"></v-conversion>
+            </el-tab-pane>
+            <!-- 课程码管理 我的兑换 -->
+            <el-tab-pane label="我的兑换" name="fourth">
+              <v-binding :invitationCodeList='invitationCodeList'></v-binding>
+            </el-tab-pane>
+          </el-tabs>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -321,6 +334,8 @@ import Binding from '@/pages/profile/components/bindid'
 import Info from '@/pages/profile/components/info'
 import Order from '@/pages/profile/pages/order'
 import Invitation from '@/pages/profile/pages/invitation'
+import Conversion from '@/pages/profile/components/conversion'
+import Bind from '@/pages/profile/components/binding'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -332,7 +347,9 @@ export default {
     'v-info': Info,
     'v-banner': Banner,
     'v-order': Order,
-    'v-invitation': Invitation
+    'v-invitation': Invitation,
+    'v-conversion': Conversion,
+    'v-binding': Bind
   },
   data() {
     return {
@@ -344,6 +361,7 @@ export default {
       tabPosition: 'left',
       activeTab: 'tab-first',
       activeNames: 'first',
+      courseCodeNames: 'first',
       activeOrder: 'orderFirst',
       bconfig: {
         banner_type: 'profile'
@@ -429,7 +447,8 @@ export default {
       readyOrderLoad: true,
       invalidOrderLoad: true,
       overTimeData: [],
-      centerDialogVisible: false
+      centerDialogVisible: false,
+      invitationCodeList: []
     }
   },
   computed: {
@@ -486,6 +505,7 @@ export default {
         this.overStudyCurriculumList()
       }
     },
+    handleCourseCode(item) {},
     // 切换 我的学习中分类
     changeNav(item) {
       if (this.activeNames == 'third') {
@@ -742,6 +762,12 @@ export default {
         })
       })
     },
+    // 获取已经添加的课程兑换码
+    getUsedInvitationCodeList() {
+      home.getUsedInvitationCodeList().then(response => {
+        this.invitationCodeList = response.data.usedInvitationCodeList
+      })
+    },
     // 格式化时间戳
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -814,6 +840,7 @@ export default {
       // 判断企业多份是否弹出框
       // if (!persistStore.get('paynumbermsg')) {
       this.getAlertbox()
+      this.getUsedInvitationCodeList()
     }
     this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid
@@ -824,6 +851,9 @@ export default {
     }
     this.$bus.$on('studyCourse', data => {
       this.studyCurriculumList()
+    })
+    this.$bus.$on('reGetCode', data => {
+      this.getUsedInvitationCodeList()
     })
   },
   created() {
@@ -872,8 +902,7 @@ export default {
   #pane-tab-third .el-tabs__header {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
   }
-  #pane-tab-sixth,
-  #pane-tab-seventh {
+  #pane-tab-sixth {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
     overflow: hidden;
@@ -1043,6 +1072,9 @@ export default {
   }
 }
 .profile {
+  .content.noOrder {
+    box-shadow: 0px 3px 9px rgba(198, 194, 210, 0.36);
+  }
   .content .noCourse {
     width: 100%;
     height: 600px;

@@ -1,31 +1,32 @@
 <template>
-  <div class="main clearfix bindCourse">
+  <div class="bindCourse">
     <div class="courseList">
       <div class="title clearfix">
-        <span>课程兑换码</span>
+        <span>绑定邀请码</span>
         <el-button v-show="!courseList.addNewID" class="fr addClass" @click="addID" round>新增课程兑换码</el-button>
-      </div>
-      <div class="courseIDList">
-        <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
-          <span>课程兑换码:</span>
-          <span>{{item.invitation_code}}</span>
-        </div>
       </div>
       <div v-show="courseList.addNewID">
         <div class="courseID">
-          <span>课程兑换码:</span>
-          <input v-model="courseList.inputID" placeholder="请输入您的课程兑换码，区分大小写。">
+          <span>绑定邀请码:</span>
+          <input v-model="courseList.inputID" placeholder=" 请输入您的邀请码">
           <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
         </div>
         <div class="bindInfo">
-          <p>课程兑换码说明：</p>
-          <p>1.输入课程兑换码，绑定兑换购买的课程</p>
-          <p>2.绑定成功后，不可更改。</p>
+          <p>绑定邀请码说明：</p>
+          <p>1.输入邀请码，绑定兑换购买的商品</p>
+          <p>2.绑定成功后，不可更改</p>
         </div>
         <div :class="[{'presentAble':courseList.presentAble},'present']">
           <el-button :disabled="!courseList.presentAble" round @click="detection">提交</el-button>
         </div>
       </div>
+      <div class="courseIDList">
+        <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
+          <span>绑定邀请码：</span>
+          <span>{{item.invitation_code}}</span>
+        </div>
+      </div>
+
     </div>
 
   </div>
