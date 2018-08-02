@@ -153,7 +153,7 @@ export default {
       transition: all 400ms;
       position: absolute;
       top: 5px;
-      left: 0px;
+      left: -4px;
     }
     .courseInfo {
       width: 283px;

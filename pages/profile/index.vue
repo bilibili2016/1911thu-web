@@ -175,7 +175,7 @@
                   </div>
                 </div>
                 <!-- 付款信息 -->
-                <div class="pay bodyItem">
+                <div class="pay bodyItem" v-if="orderDetail.payment_method !== ''">
                   <div class="top">
                     付款信息
                   </div>
@@ -236,9 +236,14 @@
                     <span class="lr">数量</span>
                   </div>
                   <div class="bottom">
-                    <div class="clearfix" v-for="(course,index) in courseList" :key="index">
+                    <div class="bottom-item clearfix" v-for="(course,index) in courseList" :key="index">
                       <div class="courseInfo clearfix">
-                        <img class="fl" :src="course.picture" alt="">
+                        <div class="bottomImg">
+                          <!-- 项目图标 -->
+                          <!-- <img class="project-img" :src="projectImg" alt=""> -->
+                          <img class="fl" :src="course.picture" alt="">
+                        </div>
+
                         <div class="fl">
                           <h4>{{course.name}}</h4>
                           <h6>{{course.curriculum_time}}学时</h6>
@@ -353,6 +358,7 @@ export default {
   },
   data() {
     return {
+      projectImg: require('@/assets/images/p4.png'),
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
@@ -466,6 +472,8 @@ export default {
     },
     // 获取订单详情
     getOrderDetail(msg) {
+      console.log(msg)
+
       if (msg === false) {
         this.showOrderList = false
         this.curriculumPayApply()
@@ -968,6 +976,7 @@ export default {
           .bottom {
             background-color: #fafafa;
             padding: 0 50px 0 30px;
+
             .info {
               height: 50px;
               line-height: 50px;
@@ -997,7 +1006,11 @@ export default {
             }
           }
           .bottom {
-            border-bottom: 1px solid #e8d6f7;
+            padding: 0;
+            .bottom-item {
+              border-bottom: 1px solid #e8d6f7;
+              padding: 0 50px 0 30px;
+            }
             .courseInfo {
               float: left;
               width: 80%;
@@ -1006,6 +1019,16 @@ export default {
                 width: 160px;
                 height: 100px;
                 margin-right: 20px;
+              }
+              .bottomImg {
+                position: relative;
+                .project-img {
+                  width: 70px;
+                  height: 30px;
+                  position: absolute;
+                  top: 5px;
+                  left: -4px;
+                }
               }
               h4 {
                 // width: 440px;
