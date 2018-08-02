@@ -731,8 +731,6 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     goDetail(news) {
-      this.nidForm.nids = news.id
-      this.setNid(this.nidForm)
       window.open(window.location.origin + '/news/' + news.id)
     },
     openDetail() {
