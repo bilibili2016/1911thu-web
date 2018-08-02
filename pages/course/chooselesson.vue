@@ -115,7 +115,8 @@ export default {
       loadCourse: false,
       allCheckedId: [],
       idsForm: {
-        cartid: []
+        cartid: [],
+        type: 1
       },
       changeData: []
       // allCheckedArray: []

@@ -38,8 +38,19 @@
           height: 140px;
           border-top: 1px solid #e8d6f7;
           padding: 20px 0 20px 32px;
+
           &:first-child {
             border-top: none;
+          }
+          .courseImg {
+            position: relative;
+          }
+          .project-img {
+            width: 70px;
+            height: 30px;
+            position: absolute;
+            left: -4px;
+            top: 5px;
           }
           img {
             width: 160px;
