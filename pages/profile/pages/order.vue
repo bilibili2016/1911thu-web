@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background:#fff">
     <div class="orderList" v-for="(courseList, index ) in orderData" :key="index">
       <div class="topBar clearfix">
         <span class="fl">订单：{{courseList.order_sn}}</span>
@@ -9,7 +9,11 @@
         <div class="content">
           <div class="course">
             <div class="courseOne" v-for="(course,index) in courseList.orderCurriculumList" :key="index" v-if="index<3">
-              <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
+              <div class="courseImg">
+                <!-- 项目图标 -->
+                <!-- <img class="project-img" src="@/assets/images/p4.png" alt=""> -->
+                <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
+              </div>
               <div class="fl">
                 <h4 @click="goCourseInfo(course,index)">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>

@@ -67,8 +67,8 @@
           <li @click="goLink('tab-third')">我的订单</li>
           <li @click="goLink('tab-fourth')">我的消息</li>
           <li @click="goLink('tab-fifth')">个人设置</li>
-          <li @click="goLink('tab-sixth')">绑定课程</li>
-          <li v-if="this.codeData.length !== 0" @click="goLink('tab-eighth')">专属邀请码</li>
+          <li @click="goLink('tab-sixth')">课程码管理</li>
+          <!-- <li v-if="this.codeData.length !== 0" @click="goLink('tab-sixth')">课程码管理</li> -->
           <li @click="signOuts">退出</li>
         </ul>
       </div>
@@ -253,7 +253,7 @@ export default {
     }
     return {
       isHasClass: true,
-      codeData: [], //专属邀请码根据接口长度判断是否显示
+      //codeData: [], //专属邀请码根据接口长度判断是否显示
       codeListForm: {
         pages: 1,
         limits: null
@@ -1237,19 +1237,19 @@ export default {
     },
     userProtocol() {
       window.open(window.location.origin + '/other/userProtocol')
-    },
-    // 获取专属邀请码列表
-    getCodeList() {
-      home.getCodeList(this.codeListForm).then(response => {
-        if (response.status !== '100100') {
-          this.codeData = response.data.orderInvitationCodeList
-        }
-      })
     }
+    // 获取专属邀请码列表
+    // getCodeList() {
+    //   home.getCodeList(this.codeListForm).then(response => {
+    //     if (response.status !== '100100') {
+    //       this.codeData = response.data.orderInvitationCodeList
+    //     }
+    //   })
+    // }
     // 判断浏览器的ie型
   },
   mounted() {
-    this.getCodeList()
+    // this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
     this.setDid(this.didForm)

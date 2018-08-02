@@ -84,7 +84,7 @@ export default {
               clearInterval(this.interval)
               let paynumber = persistStore.get('paynumber')
               if (Number(paynumber) > 1) {
-                this.goLink('tab-eighth')
+                this.goLink('tab-sixth')
               } else {
                 this.goLink('tab-third')
               }

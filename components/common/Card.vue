@@ -705,7 +705,8 @@ export default {
         numberArr: []
       },
       curriculumcartids: {
-        cartid: null
+        cartid: null,
+        type:1
       },
       kidForm: {
         kids: null

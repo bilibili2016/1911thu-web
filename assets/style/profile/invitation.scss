@@ -1,192 +1,104 @@
 .invitation {
   background-color: #fff;
   margin: 0 auto;
-  box-shadow: 0px 0px 14px rgba(198, 194, 210, .36);
-  border-radius: 6px;
-  h4 {
-    height: 56px;
-    line-height: 56px;
-    padding-left: 30px;
-    font-size: 16px;
-    color: #222;
-    border-bottom: 1px solid #E8D6F7;
-  }
   .table {
     margin: 30px;
     border: 1px solid #E8D6F7;
-    table {
-      width: 100%;
-      border-spacing: 0;
-      tr {
-        font-size: 0;
-      }
-      .tr_header {
-        height: 60px;
-        line-height: 60px;
-        background-color: #EBE7ED;
-        text-align: center;
-        color: #6417A6;
-        font-size: 16px;
-        th {
-          font-weight: 400;
-          background-color: transparent;
-          font-size: 14px;
-          &:last-child {
-            width: 200px;
-          }
-        }
-      }
-      .tr_body {
-        height: 52px;
-        line-height: 52px;
-        background-color: #fafafa;
-        text-align: center;
-        color: #222;
-        font-size: 14px;
-        td {
-          border-bottom: 1px solid #E8D6F7;
-        }
-        &:last-child td {
-          border: none;
-        }
-        &.noCodes {
-          color: #aaa;
-          td {
-            position: relative;
-          }
-          i {
-            background-color: #fff;
-            width: 64px;
-            height: 40px;
-            position: absolute;
-            top: 6px;
-            right: 10px;
-            background: url("~assets/images/loseEfficacy.png") no-repeat;
-          }
-        }
-      }
-    }
-  }
-  .el-table {
-    &:before {
-      height: 0;
-    }
-    .el-table__header-wrapper {
-      tr,
-      th {
-        background-color: #EBE7ED;
-      }
-      th.is-leaf {
-        border: none;
-      }
-    }
-    tr {
-      background-color: #fafafa;
-      &:last-child td {
-        border: none;
-      }
-    }
-    .cell {
+    .tr_header {
+      height: 60px;
+      line-height: 60px;
+      background-color: #EBE7ED;
       text-align: center;
+      font-size: 14px;
       color: #6417A6;
-      font-size: 16px;
-      font-weight: 400;
+      display: flex;
+      justify-content: space-around;
+      span {
+        font-weight: 400;
+        background-color: transparent;
+      }
     }
-    .el-table__body-wrapper .cell {
+    &>div>span:nth-child(1) {
+      width: 20%;
+    }
+    &>div>span:nth-child(2) {
+      width: 10%;
+    }
+    &>div>span:nth-child(3) {
+      width: 20%;
+    }
+    &>div>span:nth-child(4) {
+      width: 10%;
+    }
+    &>div>span:nth-child(5) {
+      width: 10%;
+    }
+    &>div>span:nth-child(6) {
+      width: 30%;
+    }
+    .tr_body {
+      height: 52px;
+      line-height: 52px;
+      background-color: #fafafa;
+      text-align: center;
       color: #222;
-    }
-    td {
+      font-size: 14px;
+      display: flex;
+      justify-content: space-around;
       border-bottom: 1px solid #E8D6F7;
+      &:last-child {
+        border: none;
+      }
+      &.noCodes {
+        color: #aaa;
+        span {
+          position: relative;
+        }
+        i {
+          background-color: #fff;
+          width: 64px;
+          height: 40px;
+          position: absolute;
+          top: 6px;
+          right: 10px;
+          background: url("~assets/images/loseEfficacy.png") no-repeat;
+        }
+      }
+    }
+    .noCodes {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 50px;
+      img {
+        width: 316px;
+        height: 274px;
+        margin-top: 100px;
+      }
+      p {
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        color: #999;
+        font-size: 20px;
+      }
     }
   }
   .rules {
     margin: 0 30px;
     padding-bottom: 50px;
     h5 {
-      line-height: 56px;
+      line-height: 66px;
       height: 56px;
       color: #222;
       font-size: 16px;
     }
     .word {
-      width: 270px;
-      height: 217px;
-      padding: 30px 25px 0 14px;
+      padding: 20px 15px;
       border: 1px solid #E8D6F7;
       p {
-        color: #888;
+        color: #222;
         font-size: 12px;
         line-height: 24px;
-        i {
-          color: #222;
-        }
-      }
-    }
-    div.fr {
-      .el-table {
-        border: 1px solid #E8D6F7;
-        .el-table .hidden-columns {
-          visibility: inherit
-        }
-      }
-      .tables {
-        width: 530px;
-        height: 217px;
-        position: relative;
-        overflow-y: auto;
-        border: 1px solid #E8D6F7;
-      }
-      .recordTable {
-        width: 100%;
-        overflow: hidden;
-        border-spacing: 0;
-        tr {
-          font-size: 0;
-        }
-        .tr_header {
-          display: table;
-          width: 100%;
-          height: 60px;
-          line-height: 60px;
-          background-color: #fafafa;
-          text-align: center;
-          color: #6417A6;
-          font-size: 16px;
-          th {
-            font-weight: 400;
-            background-color: transparent;
-            font-size: 14px;
-            &:last-child {
-              width: 200px;
-            }
-          }
-        }
-        .tr_body {
-          display: inline-table;
-          width: 100%;
-          height: 52px;
-          line-height: 52px;
-          background-color: #fff;
-          text-align: center;
-          color: #222;
-          font-size: 14px;
-          td {
-            font-size: 14px;
-            i {
-              color: #6417a6;
-            }
-          }
-        }
-      }
-      .noCode {
-        width: 528px;
-        text-align: center;
-        background-color: #fff;
-        img {
-          width: 124px;
-          height: 106px;
-          margin-top: 30px;
-        }
       }
     }
   }
