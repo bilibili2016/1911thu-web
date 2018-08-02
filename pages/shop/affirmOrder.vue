@@ -9,7 +9,7 @@
     <div class="affirmOrder" ref="affirmOrder" v-else>
       <div class="contain" v-loading="loadGoods">
         <h3>确认订单</h3>
-        <div class="buyType" v-if="payNumber>1">
+        <!-- <div class="buyType" v-if="payNumber>1">
           <div class="buy">
             <h4>购买方式：</h4>
             <p>
@@ -20,8 +20,7 @@
           <div class="company" v-show="!person">
             <h4 class="clearfix">
               <span class="fl">单位信息：</span>
-              <!-- <span class="fr addCompany" v-else @click="openCompanyInfo">
-                <i class="el-icon-edit-outline"></i> 修改</span> -->
+
             </h4>
             <div class="cpnInfo" v-if="flag">
               <p class="addcp">
@@ -30,16 +29,7 @@
                 暂无信息，请您添加。</p>
             </div>
             <div class="cpnInfo" v-else>
-              <!-- <p class="cpnInfoLi">
-                <span>
-                  <strong>联系人:</strong>{{company.contact_person}}</span>
-                <span>
-                  <strong>公司名称:</strong>{{company.company_name}}</span>
-                <span>
-                  <strong>公司地址:</strong>{{company.address}}</span>
-                <span>
-                  <strong>手机号:</strong>{{company.phone}}</span>
-              </p> -->
+
               <div class="cpnInfoLi">
                 <p>联系人：{{company.contact_person}}</p>
                 <p>公司名称：{{company.company_name}}</p>
@@ -49,7 +39,7 @@
             </div>
 
           </div>
-        </div>
+        </div> -->
         <div class="goodsList">
           <div class="topBar clearfix">
             <span>商品信息</span>
@@ -60,7 +50,12 @@
           <div class="goods">
             <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
               <div class="fl">
-                <img :src="course.picture" alt="">
+                <div class="bottomImg">
+                  <!-- 项目图标 -->
+                  <img v-if="course.type==='2'" class="project-img" :src="projectImg" alt="">
+                  <img :src="course.picture" alt="">
+                </div>
+
               </div>
               <div class="fl">
                 <h5>{{course.title}}</h5>
@@ -70,8 +65,9 @@
               <div class="fr">¥{{course.present_price}}</div>
             </div>
           </div>
-          <div class="invoiceMsg clearfix">
-            <!-- {{isShowTicket}} -->
+          <!-- 发票信息 -->
+          <!-- <div class="invoiceMsg clearfix">
+
             <h4>
               发票信息
               <span>开单位抬头发票须填写纳税人识别号，以免影响报销</span>
@@ -87,7 +83,9 @@
               </span>
               <span class="changeInvoice" @click="showIoc">修改</span>
             </div>
-            <!-- 发票内容 -->
+
+
+
             <div class="ticketInfo" v-show="invoiceForm.choose=='1'&&isShowTicket">
               <p v-if="invoiceForm.ticket === true">发票抬头：个人</p>
               <p v-if="invoiceForm.ticket === false">发票抬头：{{invoiceForm.companyname}}</p>
@@ -116,14 +114,24 @@
               <p>收票人详细地址：{{invoiceForm.address}}</p>
             </div>
 
-          </div>
+          </div> -->
           <div class="orderInfo">
-            <h5>
-              <span>商品数量：{{curriculumSum}}</span>
-              <span>学习人数：{{payNumber}}人</span>
-              <span>商品总金额：¥{{allPrise}}</span>
-            </h5>
-            <p>购买账号：{{nickName}}</p>
+            <p>
+              <span class="left">商品数量：</span>
+              <span class="right">{{curriculumSum}}</span>
+            </p>
+            <p>
+              <span class="left">学习人数：</span>
+              <span class="right">{{payNumber}}人</span>
+            </p>
+            <p>
+              <span class="left">商品总金额：</span>
+              <span class="right">¥{{allPrise}}</span>
+            </p>
+            <p>
+              <span class="left">购买账号：</span>
+              <span class="right">{{nickName}}</span>
+            </p>
           </div>
         </div>
         <div class="bottomBtn clearfix">
@@ -154,7 +162,7 @@
             <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
           </div>
           <div class="formLi clearfix">
-            <!-- <h5 @click="addInvoice" v-show="ticketForm.ticket">新增单位发票</h5> -->
+
             <p class="fl"></p>
             <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
               <input type="text" v-model="ticketForm.companyname" placeholder="新增单位发票抬头">
@@ -180,7 +188,7 @@
             </p>
             <p class="word" v-show="!ticketForm.isRadio">
               <i class="el-icon-warning"> </i>将有专人与您联系，请您留意，感谢您的支持！
-              <!-- <input type="text" v-model="ticketForm.others" placeholder="请输入发票内容"> -->
+
             </p>
           </div>
           <div class="formLi clearfix">
@@ -447,6 +455,7 @@
         </el-form>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -457,6 +466,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
+      projectImg: require('@/assets/images/p4.png'),
       address: '',
       flag: true,
       person: true,
@@ -1272,7 +1282,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.goodsList(this.addArray).then(res => {
           if (res.status === 0) {
-            this.curriculumLists = res.data.curriculumLists
+            console.log(res)
+
+            this.curriculumLists = res.data.curriculumProjectLists
             this.curriculumSum = res.data.curriculumSum
             this.payNumber = res.data.payNumber
             this.allPrise = res.data.goodsAmount
@@ -1360,6 +1372,7 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
+                console.log(response)
                 persistStore.set('phone', this.companyInfo.phones)
                 this.company.id = response.data.id
                 this.company.contact_person = this.companyInfo.contactperson

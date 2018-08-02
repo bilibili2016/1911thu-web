@@ -45,6 +45,9 @@ export default {
         cids: '',
         indexs: '',
         pids: ''
+      },
+      cgForm: {
+        cgs: null
       }
     }
   },
@@ -64,12 +67,23 @@ export default {
       })
     },
     handleClick(item, index) {
+      console.log(item, '这是是item')
       this.cidform.cids = item.id
       this.cidform.indexs = index
       this.cidform.pids = '0'
       this.$bus.$emit('collegeId', item.id)
-      window.open(window.location.origin + '/course/category')
+      // window.open(window.location.origin + '/course/category')
       this.setCid(this.cidform)
+      // 设置cg 2代表顶部列表
+      this.cgForm.cgs = '1'
+      this.setCg(this.cgForm)
+      window.open(
+        window.location.origin +
+          '/course/' +
+          item.id +
+          '?type=' +
+          item.is_picture_show
+      )
     }
   },
   mounted() {

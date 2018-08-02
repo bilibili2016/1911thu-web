@@ -26,6 +26,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid', 'setCg']),
     getMore() {
+      console.log(this.linkdata, '这是this.linkdata')
       // 免费课程路由 设置cid pid cindex
       // if (this.linkdata === '/course/category') {
       //   this.setCid(this.cidform)
@@ -35,16 +36,16 @@ export default {
       if (this.linkdata === '/course/classifylesson') {
         this.cgForm.cgs = '1'
         this.setCg(this.cgForm)
-        window.open(window.location.origin + '/course/category')
+        // window.open(window.location.origin + '/course/category')
       } else if (this.linkdata === '/course/freelesson') {
         // 免费课程cgs === '2'
 
         this.setCid(this.cidform)
         this.cgForm.cgs = '2'
         this.setCg(this.cgForm)
-        window.open(window.location.origin + '/course/freelesson')
+        // window.open(window.location.origin + '/course/freelesson')
       } else {
-        window.open(window.location.origin + this.linkdata)
+        // window.open(window.location.origin + this.linkdata)
       }
       this.$emit('getMoreData')
       // window.open(window.location.origin + this.linkdata)

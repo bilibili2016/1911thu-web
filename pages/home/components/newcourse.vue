@@ -3,7 +3,7 @@
     <el-row class="center coursenew">
       <h1 class="clearfix">
         <span class="title">{{titleTwo}}</span>
-        <!-- <span class="fr moredata" @click="getMore(linkone)">查看更多</span> -->
+        <span class="fr moredata" @click="getMore(linkone)">查看更多</span>
       </h1>
       <div class="goodCourse" :data="newData">
         <div class="courseLi clearfix" v-for="(course,index) in newProject" :key="index" @click="courseInfo(course)">
@@ -75,11 +75,14 @@ export default {
           score: 5,
           link: '/project/partypolicy'
         }
-      ]
+      ],
+      cgForm: {
+        cgs: null
+      }
     }
   },
   methods: {
-    ...mapActions('auth', ['setKid']),
+    ...mapActions('auth', ['setKid', 'setCg']),
     courseInfo(item, index) {
       // this.kidForm.kids = item.id
       // persistStore.set('curriculumId', item.id)
@@ -88,10 +91,16 @@ export default {
       this.openDetail(item.link)
     },
     openDetail(link) {
+      // 最新项目点击
+
       window.open(window.location.origin + link)
     },
     getMore(item) {
-      window.open(window.location.origin + item)
+      // this.cgForm.cgs = '2'
+      // this.setCg(this.cgForm)
+
+      // window.open(window.location.origin + item)
+      window.open(window.location.origin + '/course/' + '0' + '?type=' + '1')
     }
   },
   mounted() {}
@@ -153,7 +162,7 @@ export default {
       transition: all 400ms;
       position: absolute;
       top: 5px;
-      left: 0px;
+      left: -4px;
     }
     .courseInfo {
       width: 283px;
