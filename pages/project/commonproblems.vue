@@ -1,4 +1,5 @@
 <template>
+  <!-- 项目详情——问题 -->
   <div class="problems">
     <div class="qustion" v-for="(qus,index) in problems" :key="index">
       <h5>

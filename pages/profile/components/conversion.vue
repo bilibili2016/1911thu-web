@@ -5,14 +5,17 @@
         <table class="recordTable">
           <!--alternate-->
           <tr class="tr_header">
-            <th>邀请好友</th>
+            <th>课程码</th>
+            <th>兑换账户</th>
             <th>类型</th>
             <th>日期</th>
           </tr>
           <tr v-if="recordData&&recordData.length>0" v-for="(code,index) in recordData" :key="index" class="tr_body">
-            <td>{{code.user_name}}通过
-              <i>{{code.invitation_code}}</i> 加入学习</td>
-            <td>课程+项目</td>
+            <td>{{code.invitation_code}}</td>
+            <td>{{code.user_name}}</td>
+            <td v-if="code.type==='1'">课程</td>
+            <td v-if="code.type==='2'">项目</td>
+            <td v-if="code.type==='3'">课程+项目</td>
             <td>{{code.create_time}}</td>
           </tr>
           <div v-if="!recordData||recordData.length<1" class="noCodes">
@@ -72,7 +75,7 @@ export default {
           font-weight: 400;
           background-color: transparent;
           font-size: 14px;
-          width: 33.33%;
+          width: 25%;
         }
       }
       .tr_body {
@@ -89,7 +92,7 @@ export default {
           border-bottom: none;
         }
         td {
-          width: 33.33%;
+          width: 25%;
           font-size: 14px;
           i {
             color: #6417a6;

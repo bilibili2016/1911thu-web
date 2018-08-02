@@ -16,6 +16,9 @@
       span {
         font-weight: 400;
         background-color: transparent;
+        &:last-child {
+          padding-left: 70px;
+        }
       }
     }
     &>div>span:nth-child(1) {
@@ -35,6 +38,7 @@
     }
     &>div>span:nth-child(6) {
       width: 30%;
+      text-align: left;
     }
     .tr_body {
       height: 52px;
@@ -49,6 +53,12 @@
       &:last-child {
         border: none;
       }
+      span {
+        height: 52px;
+        &:last-child {
+          padding-left: 15px;
+        }
+      }
       &.noCodes {
         color: #aaa;
         span {
@@ -56,12 +66,13 @@
         }
         i {
           background-color: #fff;
-          width: 64px;
-          height: 40px;
+          width: 56px;
+          height: 36px;
           position: absolute;
           top: 6px;
           right: 10px;
           background: url("~assets/images/loseEfficacy.png") no-repeat;
+          background-size: contain;
         }
       }
     }

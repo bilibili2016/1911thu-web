@@ -1,6 +1,7 @@
 <template>
   <div class="projectDetail">
-    <div class="proHeader">
+    <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}">
+      <!-- 面包屑 收藏分享 projectDetail.picture-->
       <div class="headerTop clearfix">
         <div class="headerL fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
@@ -20,36 +21,38 @@
           </span>
         </div>
       </div>
-      <h1>党政干部综合能力提升项目</h1>
-      <h3>纯线上与线上下下混合授课模式</h3>
+      <!-- 项目名 -->
+      <h1>{{projectDetail.title}}</h1>
+      <h3>{{projectDetail.deputy_title}}</h3>
       <h5>
-        <span>52 课时</span>
+        <span>{{projectDetail.study_time}} 课时</span>
         <i></i>
-        <span>学习人数 1201</span>
+        <span>学习人数 {{projectDetail.study_number}}</span>
         <i></i>
-        <el-rate v-model="rateModel" disabled></el-rate>
+        <el-rate v-model="projectDetail.score" disabled></el-rate>
       </h5>
       <div class="price clearfix">
         <div class="fl">
-          <i>￥</i>599.00</div>
+          <i>￥</i>{{projectDetail.present_price}}</div>
         <div class="fr">
           <i>加入购物车</i>
           <span>
             <img src="~assets/images/pro_cart.png" alt="">
           </span>
         </div>
+        <div class="study" v-if="projectDetail.curriculumProjectPrivilege">开始学习</div>
       </div>
     </div>
-    <!-- 左侧的课程目录和介绍 -->
+    <!-- 介绍 线上课程 线下课程介绍 用户评价 常见问题-->
     <div class="proContent">
       <el-tabs v-model="activeName" class="proTab">
         <el-tab-pane label="介绍" name="first">
-          <div class="detail" v-html="projectInfo.content" v-loading="loadMsg"></div>
+          <div class="detail" v-html="projectDetail.content" v-loading="loadMsg"></div>
         </el-tab-pane>
         <el-tab-pane label="线上课程介绍" name="second">
-          <v-procourse :projectCourseData="projectCourseData"></v-procourse>
+          <v-procourse :projectCourseData="projectDetail.system"></v-procourse>
         </el-tab-pane>
-        <el-tab-pane label="线下课程介绍" name="third">
+        <el-tab-pane v-if="projectDetail.study_type==='2'" label="线下课程介绍" name="third">
           <v-procourse :projectCourseData="projectCourseData"></v-procourse>
         </el-tab-pane>
         <el-tab-pane label="用户评价" name="fourth">
@@ -64,6 +67,7 @@
 </template>
 
 <script>
+import { home } from '@/lib/v1_sdk/index'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
 import Commonproblems from '@/pages/project/commonproblems'
@@ -78,9 +82,10 @@ export default {
       rateModel: 3,
       activeName: 'first',
       loadMsg: false,
-      projectInfo: {
-        content: ''
+      project: {
+        projectId: '1'
       },
+      projectDetail: {},
       projectCourseData: {
         title: '2门经典线上学课',
         system: [
@@ -88,19 +93,12 @@ export default {
             title: '公共管理',
             course: [
               {
-                headImg: require('@/assets/images/pro_headImg.png'),
+                curriculum_id: '3',
+                teacher_head_img: require('@/assets/images/pro_headImg.png'),
                 title: '创新驱动发展的现状与趋势',
-                teacher: '吴维库',
-                position: '名师学院领域学院院',
-                word:
-                  '吴维库，北京师范大学法学院副教授、清华大学法学博士。基本功扎实，英语专业八级熟悉初高中英语重点，深入研究中高考命题动向讲课生动活波，擅长和学生做朋友。'
-              },
-              {
-                headImg: require('@/assets/images/pro_headImg.png'),
-                title: '创新驱动发展的现状与趋势',
-                teacher: '吴维库',
-                position: '名师学院领域学院院',
-                word:
+                teacher_name: '吴维库',
+                teacher_graduate: '名师学院领域学院院',
+                introduction:
                   '吴维库，北京师范大学法学院副教授、清华大学法学博士。基本功扎实，英语专业八级熟悉初高中英语重点，深入研究中高考命题动向讲课生动活波，擅长和学生做朋友。'
               }
             ]
@@ -109,19 +107,12 @@ export default {
             title: '时政解读',
             course: [
               {
-                headImg: require('@/assets/images/pro_headImg.png'),
+                curriculum_id: '4',
+                teacher_head_img: require('@/assets/images/pro_headImg.png'),
                 title: '创新驱动发展的现状与趋势',
-                teacher: '吴维库',
-                position: '名师学院领域学院院',
-                word:
-                  '吴维库，北京师范大学法学院副教授、清华大学法学博士。基本功扎实，英语专业八级熟悉初高中英语重点，深入研究中高考命题动向讲课生动活波，擅长和学生做朋友。'
-              },
-              {
-                headImg: require('@/assets/images/pro_headImg.png'),
-                title: '创新驱动发展的现状与趋势',
-                teacher: '吴维库',
-                position: '名师学院领域学院院',
-                word:
+                teacher_name: '吴维库',
+                teacher_graduate: '名师学院领域学院院',
+                introduction:
                   '吴维库，北京师范大学法学院副教授、清华大学法学博士。基本功扎实，英语专业八级熟悉初高中英语重点，深入研究中高考命题动向讲课生动活波，擅长和学生做朋友。'
               }
             ]
@@ -211,6 +202,17 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    getProjectInfo() {
+      home.getProjectInfo(this.project).then(res => {
+        this.projectDetail = res.data.curriculumProjectDetail
+        this.projectDetail.score = Number(this.projectDetail.score)
+      })
+    }
+  },
+  mounted() {
+    this.getProjectInfo()
   }
 }
 </script>
