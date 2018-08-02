@@ -240,7 +240,7 @@
                       <div class="courseInfo clearfix">
                         <div class="bottomImg">
                           <!-- 项目图标 -->
-                          <!-- <img class="project-img" :src="projectImg" alt=""> -->
+                          <img v-if="course.type==='2'" class="project-img" :src="projectImg" alt="">
                           <img class="fl" :src="course.picture" alt="">
                         </div>
 

@@ -52,7 +52,7 @@
               <div class="fl">
                 <div class="bottomImg">
                   <!-- 项目图标 -->
-                  <!-- <img class="project-img" :src="projectImg" alt=""> -->
+                  <img v-if="course.type==='2'" class="project-img" :src="projectImg" alt="">
                   <img :src="course.picture" alt="">
                 </div>
 

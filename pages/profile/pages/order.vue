@@ -11,7 +11,7 @@
             <div class="courseOne" v-for="(course,index) in courseList.orderCurriculumList" :key="index" v-if="index<3">
               <div class="courseImg">
                 <!-- 项目图标 -->
-                <!-- <img class="project-img" src="@/assets/images/p4.png" alt=""> -->
+                <img v-if="course.type==='2'" class="project-img" src="@/assets/images/p4.png" alt="">
                 <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
               </div>
               <div class="fl">
