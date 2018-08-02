@@ -134,7 +134,7 @@
               <el-tab-pane name="orderFour">
                 <span class="payOff" slot="label">已失效
                 </span>
-                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="invalidOrderData" v-loading="invalidOrderLoad"></v-order>
+                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
                 <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -743,6 +743,8 @@ export default {
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
+          console.log(this.invalidOrderData)
+
           this.invalidOrderLoad = false
           resolve(true)
         })
