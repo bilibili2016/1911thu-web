@@ -358,7 +358,7 @@ export default {
   },
   data() {
     return {
-      projectImg: require('@/assets/images/p4.png'),
+      projectImg: require('@/assets/images/p4.png'), //项目图标
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
