@@ -142,6 +142,7 @@
         </div>
       </div>
     </div>
+    <v-backtop :data="showCheckedCourse"></v-backtop>
   </div>
 </template>
 
@@ -152,17 +153,20 @@ import { coursedetail, home } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { uniqueArray } from '@/lib/util/helper'
+import BackToTop from '@/components/common/BackToTop.vue'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
     ...mapState('auth', ['kid', 'isCollection'])
   },
   components: {
+    'v-backtop': BackToTop,
     'v-card': CustomCard,
     'v-line': CustomLine
   },
   data() {
     return {
+      showCheckedCourse: false,
       activeName: 'second',
       dialogVisible: false,
       textarea: '',

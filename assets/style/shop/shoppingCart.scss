@@ -6,13 +6,15 @@
     margin: 0 auto;
     .table {
       padding: 40px 0 30px;
+
       .tableHeader {
         height: 60px;
         line-height: 60px;
         background-color: #ebe7ed;
         font-size: 16px;
         color: #222;
-        margin-bottom: 40px;
+        // margin-bottom: 40px;
+        margin-bottom: 20px;
         .courseName {
           margin-left: 120px;
         }
@@ -23,8 +25,12 @@
           margin-left: 140px;
         }
       }
+      // .main-table {
+
+      .select-all-course {
+        margin-bottom: 20px;
+      }
       .tableBody {
-        min-height: 500px;
         & > div {
           background-color: #fff;
           display: flex;
@@ -40,6 +46,16 @@
             display: inline-block;
             width: 690px;
             margin-left: 60px;
+            .project-img {
+              position: relative;
+              .pmsg {
+                position: absolute;
+                top: 5px;
+                left: 0px;
+                width: 70px;
+                height: 30px;
+              }
+            }
             img {
               width: 160px;
               height: 100px;
@@ -88,6 +104,11 @@
           }
         }
       }
+
+      .select-all-project {
+        margin-bottom: 20px;
+      }
+
       .pagination {
         text-align: center;
         height: 30px;

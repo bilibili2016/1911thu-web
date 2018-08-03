@@ -1,6 +1,6 @@
 <template>
   <div class="checkedCourseList">
-    <!-- 购物车列表 -->ß
+    <!-- 购物车列表 -->
     <div class="main" v-loading='loading'>
       <div class="table">
         <div class="tableHeader">
@@ -39,7 +39,8 @@
 
 <script>
 // 总价 多选
-import { home } from '@/lib/v1_sdk/index'
+// import { home } from '@/lib/v1_sdk/index'
+import { checkedCourseList } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -60,7 +61,7 @@ export default {
   methods: {
     curriculumPayApply() {
       return new Promise((resolve, reject) => {
-        home.curriculumPayApply(this.orderForm).then(response => {
+        checkedCourseList.curriculumPayApply(this.orderForm).then(response => {
           this.courseList = response.data.orderCurriculumList
           this.orderDetail = response.data.orderDetail
           this.loading = false

@@ -1,102 +1,6 @@
-.main.bindCourse {
+.bindCourse {
   margin: 0 auto;
   overflow: hidden;
-  .binding {
-    width: 100%;
-    height: auto;
-    float: right;
-    position: relative;
-    background-color: #fff;
-    .title {
-      height: 58px;
-      line-height: 58px;
-      border-bottom: 1px solid #e8d6f7;
-      padding: 0 30px;
-      h4 {
-        height: 58px;
-        line-height: 58px;
-        font-size: 16px;
-        color: #222;
-      }
-    }
-    .courseID {
-      margin-top: 50px;
-      margin-left: 50px;
-      position: relative;
-      span {
-        font-size: 16px;
-        font-weight: 700;
-        color: #222;
-      }
-      .error {
-        font-size: 12px;
-        color: #ff5f5f;
-        position: absolute;
-        bottom: -20px;
-        left: 122px;
-        font-weight: 400;
-      }
-      input {
-        width: 670px;
-        height: 50px;
-        margin-left: 10px;
-        padding-left: 20px;
-        background: rgba(241, 233, 248, 1);
-        border-radius: 4px;
-        &::-webkit-input-placeholder {
-          color: #c897f2;
-          font-weight: 700;
-        }
-      }
-    }
-    .bindInfo {
-      margin-top: 50px;
-      padding-left: 175px;
-      p {
-        font-size: 12px;
-        color: #aaa;
-        font-weight: 700;
-        line-height: 24px;
-      }
-    }
-    .present {
-      text-align: center;
-      margin-top: 80px;
-      padding-bottom: 50px;
-      .el-button.el-button--default.is-round {
-        width: 174px;
-        height: 56px;
-        color: #fff;
-        background: rgba(204, 204, 204, 1);
-        border-radius: 28px;
-      }
-      &.presentAble .el-button.el-button--default.is-round {
-        background: #8f4acb;
-      }
-    }
-    .success {
-      width: 364px;
-      height: 316px;
-      border-radius: 10px;
-      text-align: center;
-      background-color: #fff;
-      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-      position: absolute;
-      top: 70px;
-      left: 50%;
-      margin-left: -182px;
-      img {
-        width: 120px;
-        height: 120px;
-        margin: 69px 0 37px;
-      }
-      p {
-        font-size: 20px;
-        color: #6417a6;
-        line-height: 25px;
-      }
-    }
-  }
   .courseList {
     width: 100%;
     height: auto;
@@ -121,30 +25,37 @@
         line-height: 30px;
         border-radius: 6px;
         margin-top: 13px;
-        border: 1px solid #6417a6;
+        border: none;
         color: #fff;
         background: #6417a6;
         font-weight: 400;
+        transition: all 300ms;
         &:hover {
-          background-color: #6417a6;
+          background-color: #8f4acb;
           color: #fff;
         }
       }
     }
-    .courseIDList .oneID {
-      padding-left: 50px;
-      span {
-        display: inline-block;
-        height: 96px;
-        line-height: 96px;
-        color: #222; // font-weight: 700;
-        margin-right: 38px;
-        font-size: 16px;
-        vertical-align: middle;
+    .courseIDList {
+      margin: 40px 30px 50px;
+      border: 1px solid #E8D6F7;
+      .oneID {
+        height: 52px;
+        line-height: 52px;
+        padding-left: 33px;
+        background-color: #FAFAFA;
+        border-bottom: 1px solid #E8D6F7;
+        &:last-child {
+          border-bottom: none;
+        }
+        span {
+          color: #222;
+          font-size: 14px;
+        }
       }
     }
     .courseID {
-      padding-top: 30px;
+      padding-top: 20px;
       margin: 0 50px;
       position: relative; // border-top: 1px solid #E8D6F7;
       span {
@@ -173,7 +84,7 @@
       }
     }
     .bindInfo {
-      margin-top: 50px;
+      margin-top: 20px;
       padding-left: 175px;
       p {
         font-size: 12px;
@@ -184,8 +95,7 @@
     }
     .present {
       text-align: center;
-      margin-top: 80px;
-      padding-bottom: 50px;
+      margin-top: 20px;
       .el-button.el-button--default.is-round {
         width: 174px;
         height: 56px;

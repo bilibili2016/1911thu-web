@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import { home, auth } from '@/lib/v1_sdk/index'
+// import { home, auth } from '@/lib/v1_sdk/index'
+import { paypublic } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -92,7 +93,7 @@ export default {
     showPayPublic() {
       this.showPay = false
       return new Promise((resolve, reject) => {
-        home.getPayPublicCode(this.payForm).then(res => {
+        paypublic.getPayPublicCode(this.payForm).then(res => {
           if (res.status === 0) {
             this.$message({
               showClose: true,
@@ -118,7 +119,7 @@ export default {
     getPayList() {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
-        home.webPay(this.payListForm).then(response => {
+        paypublic.webPay(this.payListForm).then(response => {
           this.orderDetail = response.data.data.orderDetail
           this.payForm.orderId = response.data.data.orderDetail.id
           this.payForm.phones = persistStore.get('phone')

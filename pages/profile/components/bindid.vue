@@ -1,38 +1,39 @@
 <template>
-  <div class="main clearfix bindCourse">
+  <div class="bindCourse">
     <div class="courseList">
       <div class="title clearfix">
-        <span>课程兑换码</span>
+        <span>绑定邀请码</span>
         <el-button v-show="!courseList.addNewID" class="fr addClass" @click="addID" round>新增课程兑换码</el-button>
-      </div>
-      <div class="courseIDList">
-        <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
-          <span>课程兑换码:</span>
-          <span>{{item.invitation_code}}</span>
-        </div>
       </div>
       <div v-show="courseList.addNewID">
         <div class="courseID">
-          <span>课程兑换码:</span>
-          <input v-model="courseList.inputID" placeholder="请输入您的课程兑换码，区分大小写。">
+          <span>绑定邀请码:</span>
+          <input v-model="courseList.inputID" placeholder=" 请输入您的邀请码">
           <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
         </div>
         <div class="bindInfo">
-          <p>课程兑换码说明：</p>
-          <p>1.输入课程兑换码，绑定兑换购买的课程</p>
-          <p>2.绑定成功后，不可更改。</p>
+          <p>绑定邀请码说明：</p>
+          <p>1.输入邀请码，绑定兑换购买的商品</p>
+          <p>2.绑定成功后，不可更改</p>
         </div>
         <div :class="[{'presentAble':courseList.presentAble},'present']">
-          <el-button :disabled="!courseList.presentAble" round @click="doSubmit">提交</el-button>
+          <el-button :disabled="!courseList.presentAble" round @click="detection">提交</el-button>
         </div>
       </div>
+      <div class="courseIDList">
+        <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
+          <span>绑定邀请码：</span>
+          <span>{{item.invitation_code}}</span>
+        </div>
+      </div>
+
     </div>
 
   </div>
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+import { bindid } from '~/lib/v1_sdk/index'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -83,10 +84,41 @@ export default {
       this.courseList.addNewID = true
       this.$emit('isShowMsg', false)
     },
+    // 检测邀请码内是否包含已绑定的课程
+    detection() {
+      this.bindForm.courseId = this.courseList.inputID
+      bindid.detectionCode(this.bindForm).then(res => {
+        // 判断邀请码内是否包含已绑定的课程
+        if (res.data.is_exist === 1) {
+          this.$confirm(
+            '该邀请码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
+            {
+              confirmButtonText: '坚持绑定',
+              cancelButtonText: '取消',
+              closeOnHashChange: false,
+              // type: 'warning',
+              center: true
+            }
+          )
+            .then(() => {
+              // 添加绑定课程
+              this.doSubmit()
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消绑定'
+              })
+            })
+        } else {
+          this.doSubmit()
+        }
+      })
+    },
     // 添加课程
     doSubmit() {
       this.bindForm.courseId = this.courseList.inputID
-      home.bindingCurriculumPrivate(this.bindForm).then(res => {
+      bindid.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({
             showClose: true,
@@ -114,7 +146,7 @@ export default {
     // 获取已经添加的课程兑换码
     getUsedInvitationCodeList() {
       return new Promise((resolve, reject) => {
-        home.getUsedInvitationCodeList(this.curruntForm).then(response => {
+        bindid.getUsedInvitationCodeList(this.curruntForm).then(response => {
           this.courseList.courseID = response.data.usedInvitationCodeList
           if (
             !this.courseList.courseID ||

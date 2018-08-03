@@ -659,11 +659,31 @@
 
 // 播放页 弹框
 .el-message-box__wrapper {
+  .el-message-box__headerbtn {
+    display: none;
+  }
+  .el-message-box__btns {
+    padding-top: 20px;
+  }
   .el-button--default {
     border-radius: 6px;
+    width: 150px;
+    height: 40px;
+    background-color: #ddd;
+    &:hover {
+      color: #606266;
+      border-color: #ddd;
+    }
+    &.el-button--primary:hover {
+      color: #fff;
+    }
   }
   .el-message-box__btns button:nth-child(2) {
     margin-left: 40px;
+    &:hover {
+      color: #fff;
+      background-color: #8f4acb;
+    }
   }
   .el-button--primary {
     background-color: #6417a6;
@@ -992,7 +1012,8 @@
     #pane-orderFour {
       padding: 0;
     }
-    &#pane-tab-third {
+    &#pane-tab-third,
+    &#pane-tab-seventh {
       .el-card.is-always-shadow {
         background-color: transparent;
         box-shadow: none !important;
@@ -1439,5 +1460,48 @@ input:-webkit-autofill {
     background-color: #9947e2 !important;
     color: #fff !important;
     width: 100%;
+  }
+}
+
+// 项目详情 projectDetail
+.projectDetail {
+  .headerL {
+    .main-crumbs {
+      display: inline-block;
+      .el-breadcrumb__inner {
+        color: #999;
+      }
+      .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+        color: #999 !important;
+      }
+    }
+  } // tab切换
+  .proTab {
+    .el-tabs__header {
+      padding-left: 10px;
+      .el-tabs__nav-wrap {
+        &::after {
+          height: 0; // display: none;
+        }
+        .el-tabs__nav {
+          .el-tabs__active-bar {
+            display: none;
+          }
+          .el-tabs__item {
+            height: 44px;
+            line-height: 44px;
+            padding: 0;
+            margin-right: 60px;
+            &.is-active {
+              background-color: transparent;
+              border-bottom: 2px solid #69189F;
+            }
+          }
+        }
+      }
+    }
+    .el-tabs__content {
+      overflow: inherit;
+    }
   }
 }

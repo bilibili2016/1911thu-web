@@ -67,8 +67,9 @@
           <li @click="goLink('tab-third')">我的订单</li>
           <li @click="goLink('tab-fourth')">我的消息</li>
           <li @click="goLink('tab-fifth')">个人设置</li>
-          <li @click="goLink('tab-sixth')">绑定课程</li>
-          <li v-if="this.codeData.length !== 0" @click="goLink('tab-eighth')">专属邀请码</li>
+          <li @click="goLink('tab-sixth')">兑换码管理</li>
+          <li @click="goLink('tab-seventh')">发票管理</li>
+          <!-- <li v-if="this.codeData.length !== 0" @click="goLink('tab-sixth')">课程码管理</li> -->
           <li @click="signOuts">退出</li>
         </ul>
       </div>
@@ -90,15 +91,16 @@
             <p>1.输入课程兑换码，绑定兑换购买的课程</p>
             <p>2.绑定成功后，不可更改。</p>
           </div>
-          <div :class="['bind',{input:bindForm.isInput}]" @click="goBind">绑定</div>
+          <div :class="['bind',{input:bindForm.isInput}]" @click="detection">绑定</div>
         </div>
       </div>
     </div>
     <!-- 登录注册 -->
     <div class="start" v-if="start">
-      <div class="bgt" @click="close"></div>
+      <div class="bgt"></div>
       <!-- @click="close" -->
       <div class="lrFrame" v-show="lrFrame">
+        <i class="el-icon-close closelrFrom" @click="close"></i>
         <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
           <el-tab-pane label="登录" name="login">
             <!-- 登录 表单-->
@@ -183,6 +185,7 @@
       </div>
       <!-- 微信登录 -->
       <div class="lrFrame wechatLogin" v-show="wechatLogin">
+        <i class="el-icon-close closeWechat" @click="close"></i>
         <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
           <h4 class="clearfix">
             <span>绑定手机账号</span>
@@ -251,7 +254,7 @@ export default {
     }
     return {
       isHasClass: true,
-      codeData: [], //专属邀请码根据接口长度判断是否显示
+      //codeData: [], //专属邀请码根据接口长度判断是否显示
       codeListForm: {
         pages: 1,
         limits: null
@@ -575,6 +578,36 @@ export default {
         })
       }
     },
+    // 检测邀请码内是否包含已绑定的课程
+    detection() {
+      home.detectionCode(this.bindForm).then(res => {
+        // 判断邀请码内是否包含已绑定的课程
+        if (res.data.is_exist === 1) {
+          this.$confirm(
+            '该邀请码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
+            {
+              confirmButtonText: '坚持绑定',
+              cancelButtonText: '取消',
+              closeOnHashChange: false,
+              // type: 'warning',
+              center: true
+            }
+          )
+            .then(() => {
+              // 添加绑定课程
+              this.goBind()
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消绑定'
+              })
+            })
+        } else {
+          this.goBind()
+        }
+      })
+    },
     // 头部绑定课程
     goBind() {
       home.bindingCurriculumPrivate(this.bindForm).then(res => {
@@ -844,7 +877,7 @@ export default {
               this.close()
               this.getUserInfo()
               this.getCount()
-              this.getCodeList()
+              // this.getCodeList()
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
             }
@@ -880,7 +913,7 @@ export default {
               this.close()
               this.getUserInfo()
               this.getCount()
-              this.getCodeList()
+              // this.getCodeList()
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
             }
@@ -903,7 +936,7 @@ export default {
       // } else {
       //   link = 'http://ceshi.1911edu.com/Wapi/Index/wxBack'
       // }
-      if (link === 'http://edu.1911thu.com/') {
+      if (link === 'http://edu.1911thu.com') {
         link = 'http://wapi.1911thu.com/Wapi/Index/wxBack'
         this.WxLogin.appid = 'wx60c7f5b807077a7b'
       } else {
@@ -935,7 +968,7 @@ export default {
           this.setToken(this.tokenForm)
           this.getUserInfo()
           this.getCount()
-          this.getCodeList()
+          // this.getCodeList()
           this.closeWechat()
           this.close()
         } else {
@@ -963,7 +996,7 @@ export default {
           this.setToken(this.tokenForm)
           this.getUserInfo()
           this.getCount()
-          this.getCodeList()
+          // this.getCodeList()
           this.scanCodeShow = false //微信扫码
           this.closeWechat()
         }
@@ -1155,6 +1188,8 @@ export default {
     // 获取用户头像
     getUserInfo() {
       // if (this.isAuthenticated) {
+      // this.$bus.$emit('reLogin', false)
+      // this.$bus.$emit('loginShow', false)
       home.getUserInfo().then(res => {
         if (res.status === '100008') {
           // 设置单点登录
@@ -1205,19 +1240,19 @@ export default {
     },
     userProtocol() {
       window.open(window.location.origin + '/other/userProtocol')
-    },
-    // 获取专属邀请码列表
-    getCodeList() {
-      home.getCodeList(this.codeListForm).then(response => {
-        if (response.status !== '100100') {
-          this.codeData = response.data.orderInvitationCodeList
-        }
-      })
     }
+    // 获取专属邀请码列表
+    // getCodeList() {
+    //   home.getCodeList(this.codeListForm).then(response => {
+    //     if (response.status !== '100100') {
+    //       this.codeData = response.data.orderInvitationCodeList
+    //     }
+    //   })
+    // }
     // 判断浏览器的ie型
   },
   mounted() {
-    this.getCodeList()
+    // this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'
     this.setDid(this.didForm)

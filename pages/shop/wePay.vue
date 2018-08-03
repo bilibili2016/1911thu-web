@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import { home } from '@/lib/v1_sdk/index'
+import { wepay } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import Vue from 'vue'
@@ -240,7 +240,7 @@ export default {
     getPayList(item) {
       this.payListForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
-        home.webPay(this.payListForm).then(response => {
+        wepay.webPay(this.payListForm).then(response => {
           this.loading = false
           this.orderDetail = response.data.data.orderDetail
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
@@ -260,7 +260,7 @@ export default {
     },
     shopCartList() {
       return new Promise((resolve, reject) => {
-        home.shopCartList().then(response => {
+        wepay.shopCartList().then(response => {
           let len = {
             pn: response.data.curriculumCartList.length
           }
@@ -290,7 +290,7 @@ export default {
           clearInterval(this.interval)
         } else {
           this.seconds--
-          home.payResult(this.payListForm).then(response => {
+          wepay.payResult(this.payListForm).then(response => {
             if (response.status === 0) {
               this.wxMask = false
               persistStore.set('payComplete', true)

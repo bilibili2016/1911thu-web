@@ -1,8 +1,15 @@
 <template>
-  <div class="news-list famous-teacher">
+  <div class=" goodLesson news-list famous-teacher">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
 
     <div class="center shadow">
+      <div class="breadCrumb">
+        <span>当前位置：</span>
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>学堂资讯</el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
       <div @click="getNewInfoList"></div>
       <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
       <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>
@@ -15,7 +22,7 @@
 
 <script>
 import CustomBanner from '@/components/common/Banner.vue'
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/pages/news/components/List.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -90,7 +97,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.goodLesson {
+  padding-bottom: 40px;
+}
 .news-list .shadow {
   box-shadow: none;
+}
+.news-list .center {
+  margin-top: 0;
+}
+.news-list .new-card-on {
+  margin-top: 0;
 }
 </style>

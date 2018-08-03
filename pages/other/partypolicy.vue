@@ -33,19 +33,19 @@
           </div>
           <div class="info clearfix">
             <div class="item item-one">
-              <img src="http://papn9j3ys.bkt.clouddn.com/policy-icon1.png" alt="">
+              <img src="@/assets/images/policy-icon1.png" alt="">
               <p>各级党政机关领导干部</p>
             </div>
             <div class="item item-two">
-              <img src="http://papn9j3ys.bkt.clouddn.com/policy-icon2.png" alt="">
+              <img src="@/assets/images/policy-icon2.png" alt="">
               <p>事业单位领导干部</p>
             </div>
             <div class="item item-three">
-              <img src="http://papn9j3ys.bkt.clouddn.com/policy-icon3.png" alt="">
+              <img src="@/assets/images/policy-icon3.png" alt="">
               <p>中青年后备干部</p>
             </div>
             <div class="item item-four">
-              <img src="http://papn9j3ys.bkt.clouddn.com/policy-icon4.png" alt="">
+              <img src="@/assets/images/policy-icon4.png" alt="">
               <p>基层干部等</p>
             </div>
           </div>
@@ -741,5 +741,5 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@import '~assets/style/project/partypolicy.scss';
+@import '~assets/style/other/partypolicy.scss';
 </style>

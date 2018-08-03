@@ -15,11 +15,14 @@
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
 
-    <div class="card-button" v-if="noMoreData">
+    <!-- <div class="card-button" v-if="noMoreData">
       <el-button type="primary">暂无更多数据</el-button>
     </div>
     <div class="card-button" v-else>
       <el-button type="primary">下拉加载更多</el-button>
+    </div> -->
+    <div class="pagination">
+      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
   </div>
 </template>
@@ -45,6 +48,11 @@ export default {
         evaluateLimit: 4,
         isEvaluate: 1
       },
+      pagemsg: {
+        page: 1,
+        pagesize: 5,
+        total: null
+      },
       scrollTopMsg: true,
       noMoreData: false
     }
@@ -53,16 +61,25 @@ export default {
     // 获取精品好课列表
     getNewCourseList() {
       home.getFreeCourseList(this.freeCurriculumForm).then(response => {
-        if (response.data.curriculumList.length === 0) {
-          this.noMoreData = true
-        }
-        this.courseList = this.courseList.concat(response.data.curriculumList)
-        for (var i = 0; i < this.courseList.length; i++) {
-          this.$set(this.courseList[i], 'isCartNew', 0)
-        }
-        this.pageCount = response.data.pageCount
-        this.scrollTopMsg = true
+        // if (response.data.curriculumList.length === 0) {
+        //   this.noMoreData = true
+        // }
+        // this.courseList = this.courseList.concat(response.data.curriculumList)
+        // for (var i = 0; i < this.courseList.length; i++) {
+        //   this.$set(this.courseList[i], 'isCartNew', 0)
+        // }
+        // this.pageCount = response.data.pageCount
+        // this.scrollTopMsg = true
+
+        this.courseList = response.data.curriculumList
+        this.pagemsg.total = Number(response.data.pageCount)
       })
+    },
+    selectPages(val) {
+      this.freeCurriculumForm.pages = val
+      this.pagemsg.page = val
+      this.freeCurriculumForm.limits = this.pagemsg.pagesize
+      this.getNewCourseList()
     },
     // 下拉查看更多
     getMoreData() {
@@ -104,7 +121,7 @@ export default {
     initAll() {
       this.initData()
       this.getNewCourseList()
-      this.downRefresh()
+      // this.downRefresh()
     }
   },
   mounted() {
@@ -112,4 +129,9 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+.goodLesson {
+  padding-bottom: 40px;
+}
+</style>
 

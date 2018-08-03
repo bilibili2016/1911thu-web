@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background:#fff">
     <div class="orderList" v-for="(courseList, index ) in orderData" :key="index">
       <div class="topBar clearfix">
         <span class="fl">订单：{{courseList.order_sn}}</span>
@@ -8,20 +8,36 @@
       <div class="list">
         <div class="content">
           <div class="course">
-            <div class="courseOne" v-for="(course,index) in courseList.orderCurriculumList" :key="index" v-if="index<3">
-              <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
+            <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
+              <div class="courseImg">
+                <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
+              </div>
               <div class="fl">
                 <h4 @click="goCourseInfo(course,index)">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
-            <div class="more" v-if="courseList.orderCurriculumList.length>3" @click="selectPayApply(courseList, index)">
+            <div class="courseOne" v-if="courseList.orderProjectList.length && index<3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
+              <div class="courseImg">
+                <!-- 项目图标 -->
+                <img class="project-img" src="@/assets/images/p4.png" alt="">
+                <img @click="goCourseInfo(project,index)" class="fl" :src="project.picture" alt="">
+              </div>
+              <div class="fl">
+                <h4 @click="goCourseInfo(project,index)">{{project.title}}</h4>
+                <h6>{{project.curriculum_time}}学时</h6>
+              </div>
+            </div>
+            <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList, index)">
               查看更多课程>
             </div>
           </div>
-          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">¥{{courseList.order_amount}}</div>
-          <div class="status height" :style="{height: courseList.orderCurriculumList.length>3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
+          <div class="price height" :style="{height:(courseList.orderCurriculumList.length+courseList.orderProjectList.length) > 3? 3*140+60+'px' :(courseList.orderCurriculumList.length+courseList.orderProjectList.length)*140+'px'}">
+            <p>¥{{courseList.order_amount}}</p>
+            <p v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length<=3)" class="detail" @click="selectPayApply(courseList, index)">订单详情</p>
+          </div>
+          <div class="status height" :style="{height: (courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3? 3*140+60+'px' :(courseList.orderCurriculumList.length+courseList.orderProjectList.length)*140+'px'}">
             <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
             <p class="payReady payed" v-if="courseList.pay_status === '2'">已支付</p>
             <!-- 已完成订单剩余时间 -->

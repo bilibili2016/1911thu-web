@@ -18,6 +18,7 @@
                 <h4>抱歉，现在还没有学习过的课程呦~</h4>
                 <!-- <p>去学习</p> -->
               </div>
+
             </div>
           </el-card>
         </el-tab-pane>
@@ -100,7 +101,7 @@
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="全部" name="orderFirst">
                 <v-order v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" :config="configOne" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
-                <div class="content" v-else>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
@@ -112,7 +113,7 @@
                   <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
                 </span>
                 <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-order>
-                <div class="content" v-else>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
@@ -123,7 +124,7 @@
                 <span class="payOk" slot="label">已完成
                 </span>
                 <v-order v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
-                <div class="content" v-else>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
@@ -133,8 +134,8 @@
               <el-tab-pane name="orderFour">
                 <span class="payOff" slot="label">已失效
                 </span>
-                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="invalidOrderData" v-loading="invalidOrderLoad"></v-order>
-                <div class="content" v-else>
+                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
@@ -146,58 +147,145 @@
 
           <!-- 订单详情 -->
           <div class="orderListDetail" v-else>
-            <!-- <div class="order-top">
-              <div class="orderItem orderInfo ">
-                <div class="title">订单信息</div>
-                <div>
-                  <p>
-                    <span>订单编号：</span>
-                    <span>{{orderDetail.order_sn}}</span>
-
-                  </p>
-                  <p>
-                    <span>下单时间：</span>
-                    <span>{{timestampToTime(orderDetail.create_time)}}</span>
-                  </p>
-                </div>
-              </div>
-              <div class="orderItem payInfo">
-                <div class="title">付款信息</div>
-              </div>
-              <div class="orderItem ticketInfo">
-                <div class="title">发票信息</div>
-              </div>
-            </div> -->
             <div class="table">
               <div class="tableHeader">
                 <span class="goBack" @click="goBack">
-                  <i class="el-icon-arrow-left"></i>上一步</span>
-                <span class="courseName">课程</span>
-                <span class="price">单价</span>
-                <span class="operation">课程数量</span>
+                  <i class="el-icon-arrow-left icon"></i>
+                </span>
+                <span>订单详情</span>
               </div>
               <div class="tableBody">
-                <div v-for="(course,index) in courseList" :key="index">
-                  <div class="courseInfo clearfix">
-                    <img class="fl" :src="course.picture" alt="">
-                    <div class="fl">
-                      <h4>{{course.name}}</h4>
-                      <h6>{{course.curriculum_time}}学时</h6>
-                      <p>讲师：{{course.teacher_name}}</p>
+                <!-- 订单信息 -->
+                <div class="order bodyItem">
+                  <div class="top">
+                    订单信息
+                  </div>
+                  <div class="bottom">
+                    <div class="info clearfix">
+                      <div class="info-fl">
+                        <span>订单编号：</span>
+                        <span>{{orderDetail.order_sn}}</span>
+                      </div>
+                      <div class="info-fr">
+                        <span>下单时间：</span>
+                        <span>{{timestampToTime(orderDetail.create_time)}}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="coursePrice">
-                    ￥{{course.price}}
-                  </div>
-                  <div class="courseOperation">
-                    <i class="el-icon-close"></i>{{course.pay_number}}
+
                   </div>
                 </div>
-              </div>
-              <div class="tableFooter">
-                <p>课程数量：{{courseList.length}}门</p>
-                <p>学习人数：{{orderDetail.pay_number}}人</p>
-                <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
+                <!-- 付款信息 -->
+                <div class="pay bodyItem" v-if="orderDetail.payment_method !== ''">
+                  <div class="top">
+                    付款信息
+                  </div>
+                  <div class="bottom">
+                    <!-- 快捷支付 -->
+                    <div v-if="orderDetail.payment_method !== '3'">
+                      <div class="info clearfix">
+                        <div class="info-fl">
+                          <span>支付方式：</span>
+                          <span>快捷支付</span>
+                        </div>
+                        <div class="info-fr">
+                          <span>支付时间：</span>
+                          <span>{{timestampToTime(orderDetail.pay_time)}}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 公司转账 -->
+                    <div v-else>
+                      <div class="info clearfix">
+                        <div class="info-fl">
+                          <span>支付方式：</span>
+                          <span>公司转账</span>
+                        </div>
+                        <div class="info-fr">
+                          <span>户名：</span>
+                          <span>{{bankInfo.bank_account}}</span>
+                        </div>
+                      </div>
+                      <div class="info clearfix">
+                        <div class="info-fl">
+                          <span>账户：</span>
+                          <span>{{bankInfo.card_number}}</span>
+                        </div>
+                        <div class="info-fr">
+                          <span>开户行：</span>
+                          <span>{{bankInfo.bank_name}}</span>
+                        </div>
+                      </div>
+                      <div class="info clearfix">
+                        <div class="info-fl">
+                          <span>联行号：</span>
+                          <span>{{bankInfo.bank_code}}</span>
+                        </div>
+                        <div class="info-fr">
+                          <span>汇款识别码：</span>
+                          <span>{{bankInfo.identification_code}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 商品信息 -->
+                <div class="goods bodyItem">
+                  <div class="top">
+                    <span class="lf">商品信息</span>
+                    <span class="lm">单价</span>
+                    <span class="lr">数量</span>
+                  </div>
+                  <div class="bottom">
+                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="index">
+                      <div class="courseInfo clearfix">
+                        <div class="bottomImg">
+
+                          <img class="fl" :src="course.picture" alt="">
+                        </div>
+
+                        <div class="fl">
+                          <h4>{{course.name}}</h4>
+                          <h6>{{course.curriculum_time}}学时</h6>
+                          <p>讲师：{{course.teacher_name}}</p>
+                        </div>
+                      </div>
+                      <div class="coursePrice">
+                        ￥{{course.price}}
+                      </div>
+                      <div class="courseOperation">
+                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                      </div>
+                    </div>
+                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="index">
+                      <div class="courseInfo clearfix">
+                        <div class="bottomImg">
+                          <!-- 项目图标 -->
+                          <img class="project-img" :src="projectImg" alt="">
+                          <img class="fl" :src="project.picture" alt="">
+                        </div>
+
+                        <div class="fl">
+                          <h4>{{project.name}}</h4>
+                          <h6>{{project.curriculum_time}}学时</h6>
+                        </div>
+                      </div>
+                      <div class="coursePrice">
+                        ￥{{project.price}}
+                      </div>
+                      <div class="courseOperation">
+                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="tableFooter">
+                    <p>课程数量：{{courseList.length}} 门</p>
+                    <p>学习人数：{{orderDetail.pay_number}} 人</p>
+                    <p>课程数量：{{courseList.length}}门</p>
+                    <p>学习人数：{{orderDetail.pay_number}}人</p>
+                    <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -227,16 +315,69 @@
           <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
         <!-- 绑定Id -->
-        <el-tab-pane name="tab-sixth">
+        <!-- <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
             <i class="icon-bind"></i> 课程兑换码</span>
           <v-bind></v-bind>
-        </el-tab-pane>
-        <!-- 专属邀请码 -->
-        <el-tab-pane name="tab-eighth" v-if="codeData.length">
+        </el-tab-pane> -->
+        <!-- 课程码管理 -->
+        <el-tab-pane class="my-course my-invitation" name="tab-sixth">
           <span slot="label" class="tabList">
-            <i class="icon-code"></i> 专属邀请码</span>
-          <v-invitation :codeData="codeData" :recordData="recordData"></v-invitation>
+            <i class="icon-code"></i> 兑换码管理</span>
+          <el-tabs v-model="courseCodeNames" @tab-click="handleCourseCode">
+            <!-- 课程码管理 课程码列表 -->
+            <el-tab-pane label="课程码列表" name="first">
+              <v-invitation :codeData="codeData"></v-invitation>
+            </el-tab-pane>
+            <!-- 课程码管理 兑换详情 -->
+            <el-tab-pane label="兑换详情" name="second">
+              <v-conversion :recordData="recordData"></v-conversion>
+            </el-tab-pane>
+            <!-- 课程码管理 我的兑换 -->
+            <el-tab-pane label="我的兑换" name="fourth">
+              <v-binding :invitationCodeList='invitationCodeList'></v-binding>
+            </el-tab-pane>
+          </el-tabs>
+        </el-tab-pane>
+
+        <!-- 发票管理 -->
+        <el-tab-pane class="my-course my-order" name="tab-seventh">
+          <span slot="label" class="tabList">
+            <i class="icon-order"></i> 发票管理</span>
+          <!-- 订单 -->
+          <el-card v-if="showOrderList">
+            <el-tabs v-model="activeOrder">
+              <el-tab-pane label="按订单开发票" name="orderFirst">
+                <v-tkorder v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-tkorder>
+                <div class="content noOrder" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，您还没有订单请先去下单购买吧~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane name="orderSecond" label="开票历史">
+                <v-tkhistory v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-tkhistory>
+                <div class="content noOrder" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，没有已经开具的开票~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane name="orderThird">
+                <span class="payOk" slot="label">开票规则
+                </span>
+                <v-tkorder v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-tkorder>
+                <div class="content noOrder" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，没有更多的订单了~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+          </el-card>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -260,6 +401,10 @@ import Binding from '@/pages/profile/components/bindid'
 import Info from '@/pages/profile/components/info'
 import Order from '@/pages/profile/pages/order'
 import Invitation from '@/pages/profile/pages/invitation'
+import Conversion from '@/pages/profile/components/conversion'
+import Bind from '@/pages/profile/components/binding'
+import TicketOrder from '@/pages/profile/pages/ticketOrder'
+import TicketHistory from '@/pages/profile/pages/ticketHistory'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -271,10 +416,16 @@ export default {
     'v-info': Info,
     'v-banner': Banner,
     'v-order': Order,
-    'v-invitation': Invitation
+    'v-invitation': Invitation,
+    'v-conversion': Conversion,
+    'v-binding': Bind,
+    'v-tkorder': TicketOrder,
+    'v-tkhistory': TicketHistory,
+    'v-binding': Bind
   },
   data() {
     return {
+      projectImg: require('@/assets/images/p4.png'), //项目图标
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
@@ -283,6 +434,7 @@ export default {
       tabPosition: 'left',
       activeTab: 'tab-first',
       activeNames: 'first',
+      courseCodeNames: 'first',
       activeOrder: 'orderFirst',
       bconfig: {
         banner_type: 'profile'
@@ -339,6 +491,7 @@ export default {
       codeData: [],
       recordData: [],
       courseList: [],
+      projectList: [],
       companyData: null,
       options: [],
       value: '全部',
@@ -358,7 +511,9 @@ export default {
         ids: null
       },
       collectionData: [],
-      orderDetail: {},
+      orderDetail: {}, //订单详情信息
+      bankInfo: {}, //公司打款信息
+
       showOrderList: true,
       isUpdate: false,
       allOrderLoad: true,
@@ -366,7 +521,8 @@ export default {
       readyOrderLoad: true,
       invalidOrderLoad: true,
       overTimeData: [],
-      centerDialogVisible: false
+      centerDialogVisible: false,
+      invitationCodeList: []
     }
   },
   computed: {
@@ -423,6 +579,7 @@ export default {
         this.overStudyCurriculumList()
       }
     },
+    handleCourseCode(item) {},
     // 切换 我的学习中分类
     changeNav(item) {
       if (this.activeNames == 'third') {
@@ -649,9 +806,13 @@ export default {
     // 我的订单 取消
     getInvalidOrderData() {
       this.orderForm.payStatus = 3
+
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
+          console.log(this.invalidOrderData)
+          // console.log(this.invalidOrderData)
+
           this.invalidOrderLoad = false
           resolve(true)
         })
@@ -677,6 +838,12 @@ export default {
           })
           resolve(true)
         })
+      })
+    },
+    // 获取已经添加的课程兑换码
+    getUsedInvitationCodeList() {
+      home.getUsedInvitationCodeList().then(response => {
+        this.invitationCodeList = response.data.usedInvitationCodeList
       })
     },
     // 格式化时间戳
@@ -707,7 +874,9 @@ export default {
         home.curriculumPayApply(this.orderForm).then(response => {
           if (response.status === 0) {
             this.courseList = response.data.orderCurriculumList
+            this.projectList = response.data.orderProjectList
             this.orderDetail = response.data.orderDetail
+            this.bankInfo = response.data.bankInfo
           }
           resolve(true)
         })
@@ -744,12 +913,14 @@ export default {
       this.getCodeList()
       this.getRecordList()
       this.curriculumPayApply()
+
       // this.getOverTime()
       //过期的我的课程
       this.overStudyCurriculumList()
       // 判断企业多份是否弹出框
       // if (!persistStore.get('paynumbermsg')) {
       this.getAlertbox()
+      this.getUsedInvitationCodeList()
     }
     this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid
@@ -760,6 +931,9 @@ export default {
     }
     this.$bus.$on('studyCourse', data => {
       this.studyCurriculumList()
+    })
+    this.$bus.$on('reGetCode', data => {
+      this.getUsedInvitationCodeList()
     })
   },
   created() {
@@ -798,20 +972,25 @@ export default {
   &.profile .my-course.my-order {
     overflow: initial;
   }
-  &.profile .my-course#pane-tab-third .el-tabs__content {
+  &.profile .my-course#pane-tab-third .el-tabs__content,
+  &.profile .my-course#pane-tab-seventh .el-tabs__content {
     overflow: initial;
   }
   &.profile .my-course .el-tabs__header {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }
-  #pane-tab-third .el-tabs__header {
+  #pane-tab-third .el-tabs__header,
+  #pane-tab-seventh .el-tabs__header {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
   }
-  #pane-tab-sixth,
-  #pane-tab-seventh {
+  #pane-tab-sixth {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
+    overflow: initial;
+    .el-tabs__content {
+      overflow-y: auto;
+    }
     overflow: hidden;
   }
   .el-tabs__content {
@@ -838,112 +1017,169 @@ export default {
   .orderListDetail {
     //订单列表详情
     width: 100%;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     .table {
       .tableHeader {
-        height: 60px;
-        line-height: 60px;
-        background-color: #ebe7ed;
-        font-size: 16px;
+        height: 55px;
+        line-height: 55px;
+        background-color: #fff;
         color: #222;
+<<<<<<< HEAD
         margin-bottom: 43px;
+=======
+        border-bottom: 1px solid #e8d6f7;
+        span {
+          vertical-align: middle;
+        }
+>>>>>>> d85c1cafebebef591e93e6d527160701130cc38a
         .goBack {
-          margin-left: 10px;
+          font-size: 18px;
+          font-weight: 800;
+          margin: 0 15px 0 30px;
           color: #6417a6;
           cursor: pointer;
         }
-        .courseName {
-          margin-left: 75px;
-        }
-        .price {
-          margin-left: 500px;
-        }
-        .operation {
-          margin-left: 70px;
-        }
       }
-      .tableBody > div {
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-        height: 140px;
-        margin-bottom: 20px;
-        border-radius: 6px;
-        box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-        .el-checkbox {
-          line-height: 140px;
-        }
-        .courseInfo {
-          display: inline-block;
-          width: 620px;
-          margin-left: 32px;
-          img {
-            width: 160px;
-            height: 100px;
-            margin-right: 20px;
-          }
-          h4 {
-            width: 440px;
-            height: 42px;
+      .tableBody {
+        padding: 20px 30px 40px 30px;
+        .bodyItem {
+          border: 1px solid #e8d6f7;
+          margin-bottom: 20px;
+          .top {
+            height: 60px;
+            line-height: 60px;
+            background-color: #ebe7ed;
+            color: #6417a6;
             font-size: 16px;
-            color: #332a51;
-            overflow: hidden;
-            padding: 9px 0 0;
-            margin-bottom: 15px;
+            padding-left: 30px;
           }
-          h6 {
-            color: #6d687f;
-            font-size: 12px;
-            padding-bottom: 9px;
-          }
-          p {
-            font-size: 14px;
-            color: #6d687f;
-          }
-        }
-        .coursePrice {
-          display: inline-block;
-          width: 100px;
-          height: 140px;
-          line-height: 140px;
-          text-align: center;
-          color: #ff5f5f;
-          font-size: 16px;
-        }
-        .courseOperation {
-          display: inline-block;
-          width: 76px;
-          height: 140px;
-          line-height: 140px;
-          text-align: center;
-          margin-left: 35px;
-          font-size: 16px;
-          color: #332a51;
-          i {
-            font-size: 12px;
+          .bottom {
+            background-color: #fafafa;
+            padding: 0 50px 0 30px;
+
+            .info {
+              height: 50px;
+              line-height: 50px;
+              font-size: 14px;
+              color: #222;
+              .info-fr,
+              .info-fl {
+                width: 50%;
+                float: left;
+              }
+            }
           }
         }
-      }
-      .tableFooter {
-        p {
-          font-size: 16px;
-          text-align: right;
-          color: #222;
-          line-height: 30px;
+        .goods {
+          .top {
+            padding-right: 50px;
+            .lf {
+              width: 80%;
+            }
+            .lm {
+              width: 10%;
+              text-align: center;
+            }
+            .lr {
+              width: 10%;
+              text-align: right;
+            }
+          }
+          .bottom {
+            padding: 0;
+            .bottom-item {
+              border-bottom: 1px solid #e8d6f7;
+              padding: 0 50px 0 30px;
+            }
+            .courseInfo {
+              float: left;
+              width: 80%;
+              margin-top: 20px;
+              img {
+                width: 160px;
+                height: 100px;
+                margin-right: 20px;
+              }
+              .bottomImg {
+                position: relative;
+                .project-img {
+                  width: 70px;
+                  height: 30px;
+                  position: absolute;
+                  top: 5px;
+                  left: -4px;
+                }
+              }
+              h4 {
+                // width: 440px;
+                height: 42px;
+                font-size: 16px;
+                color: #332a51;
+                overflow: hidden;
+                padding: 9px 0 0;
+                margin-bottom: 15px;
+              }
+              h6 {
+                color: #6d687f;
+                font-size: 12px;
+                padding-bottom: 9px;
+              }
+              p {
+                font-size: 14px;
+                color: #6d687f;
+              }
+            }
+            .coursePrice {
+              float: left;
+              width: 10%;
+              height: 140px;
+              line-height: 140px;
+              text-align: center;
+              color: #ff5f5f;
+              font-size: 16px;
+            }
+            .courseOperation {
+              float: left;
+              width: 10%;
+              height: 140px;
+              line-height: 140px;
+              text-align: right;
+              font-size: 16px;
+              color: #332a51;
+              i {
+                font-size: 12px;
+              }
+            }
+          }
+
+          .tableFooter {
+            background-color: #fafafa;
+            padding: 20px 45px 20px 0;
+            text-align: right;
+            p {
+              font-size: 14px;
+              text-align: right;
+              color: #222;
+              line-height: 30px;
+            }
+            h4 {
+              font-size: 20px;
+              color: #ff5f5f;
+              font-weight: 700;
+              margin-top: 15px;
+            }
+          }
         }
-        h4 {
-          font-size: 24px;
-          color: #ff5f5f;
-          font-weight: 700;
-          margin-top: 28px;
-        }
-        text-align: right;
-        padding: 30px 0 50px;
-        background-color: transparent;
       }
     }
   }
 }
 .profile {
+  .content.noOrder {
+    box-shadow: 0px 3px 9px rgba(198, 194, 210, 0.36);
+  }
   .content .noCourse {
     width: 100%;
     height: 600px;

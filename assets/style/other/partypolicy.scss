@@ -74,7 +74,7 @@
           vertical-align: middle;
         }
       }
-      &>p {
+      & > p {
         font-size: 18px;
         line-height: 32px;
         text-align: center;
@@ -104,27 +104,27 @@
           }
         }
         .modeTop {
-          width: 312px;
-          height: 104px;
+          width: 300px;
+          height: 92px;
           background: rgba(255, 255, 255, 1);
           border-radius: 52px;
-          padding: 20px 0;
+          padding: 11px 0;
           margin-bottom: 106px;
           box-shadow: 9px 0px 16px rgba(100, 23, 166, 0.1);
         }
         .modeBottom {
-          width: 312px;
-          height: 104px;
+          width: 300px;
+          height: 92px;
           background: rgba(255, 255, 255, 1);
           border-radius: 52px;
-          padding: 20px 0;
+          padding: 11px 0;
           box-shadow: 9px 0px 16px rgba(100, 23, 166, 0.1);
         }
         .modeList div {
           span.fl {
-            width: 48px;
-            height: 48px;
-            line-height: 48px;
+            width: 42px;
+            height: 42px;
+            line-height: 42px;
             text-align: center;
             font-size: 30px;
             border-radius: 50%;
@@ -135,7 +135,7 @@
           span.fr {
             width: 220px;
             margin-right: 44px;
-            font-size: 22px;
+            font-size: 20px;
             line-height: 36px;
           }
         }
@@ -253,9 +253,9 @@
             cursor: pointer;
             border-bottom: 2px solid transparent;
             &.checked {
-              background-color: #FFBFA1;
-              color: #FF4401;
-              border-bottom: 2px solid #FF4401;
+              background-color: #ffbfa1;
+              color: #ff4401;
+              border-bottom: 2px solid #ff4401;
             }
           }
         }
@@ -280,7 +280,7 @@
         }
       }
       p {
-        font-size: 18px;
+        font-size: 14px;
         padding: 20px 0;
         color: #999;
       }
@@ -311,7 +311,7 @@
         font-size: 24px;
         color: #fff;
         text-align: center;
-        background-color: #FFAA07;
+        background-color: #ffaa07;
       }
       .content {
         padding: 30px 26px 12px 20px;
@@ -327,13 +327,13 @@
         }
       }
       &:nth-child(2) .title {
-        background-color: #F88E4A;
+        background-color: #f88e4a;
       }
       &:nth-child(3) .title {
-        background-color: #4F86ED;
+        background-color: #4f86ed;
       }
       &:nth-child(4) .title {
-        background-color: #8F53D2;
+        background-color: #8f53d2;
       }
     }
   }
@@ -345,7 +345,7 @@
     color: #fff;
     border-radius: 45px;
     font-size: 20px;
-    background-color: #8F53D2;
+    background-color: #8f53d2;
     position: relative;
     text-align: center;
     span {
@@ -381,7 +381,7 @@
     height: 150px;
     position: absolute;
     left: 0;
-    top: 0;
+    top: -70px;
     right: 0;
     bottom: 0;
     margin: auto;

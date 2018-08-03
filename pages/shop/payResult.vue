@@ -12,18 +12,6 @@
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
-      <!-- <div class="restltMsg restltWord" v-else>
-        <h6>订单：1806201053081435</h6>
-        <p>支付金额：￥2250.00</p>
-        <p>错误原因：账户余额不足</p>
-      </div> -->
-      <!-- <h5 v-if="success">
-        <span @click="choiceCourse">继续选课</span>
-        <span>查看订单</span>
-      </h5>
-      <h5 v-else>
-        <span>重新下单</span>
-      </h5> -->
       <h5>
         <span @click="choiceCourse">继续选课</span>
         <span @click="goMycourse('tab-third')">查看订单</span>
@@ -39,7 +27,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { home } from '@/lib/v1_sdk/index'
+import { payResult } from '@/lib/v1_sdk/index'
 export default {
   data() {
     return {
@@ -76,7 +64,7 @@ export default {
     payComplete() {
       this.payCompleteForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
-        home.payComplete(this.payCompleteForm).then(response => {
+        payResult.payComplete(this.payCompleteForm).then(response => {
           this.payCompleteData = response.data
           this.interval = setInterval(() => {
             if (this.seconds < 1) {
@@ -84,9 +72,9 @@ export default {
               clearInterval(this.interval)
               let paynumber = persistStore.get('paynumber')
               if (Number(paynumber) > 1) {
-                this.goLink('tab-eighth')
+                this.goLink('tab-sixth')
               } else {
-                this.goLink('tab-second')
+                this.goLink('tab-third')
               }
             } else {
               this.seconds--

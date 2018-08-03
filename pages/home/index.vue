@@ -7,7 +7,7 @@
       <!-- 最新项目 -->
       <v-newp :newData="newData" :titleTwo="titleEight" :linkone="linkone"></v-newp>
       <!-- 最新课程 -->
-      <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
+      <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkthree="linkthree"></v-new>
       <!-- 精品好课 -->
       <v-classic :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
       <!-- 免费专区 -->
@@ -63,8 +63,9 @@ export default {
   data() {
     return {
       linkzero: '/course/freelesson',
-      linkone: '/course/newlesson',
+      linkone: '/course/category',
       linktwo: '/course/qualitylesson',
+      linkthree: '/course/newlesson',
       linkfours: '/news/list',
       linkfive: '/news/detail',
       linkSix: '/home/components/teacher',
