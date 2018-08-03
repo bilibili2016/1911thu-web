@@ -15,7 +15,7 @@
         <span v-if="code.type==='1'">课程</span>
         <span v-if="code.type==='2'">项目</span>
         <span v-if="code.type==='3'">课程+项目</span>
-        <span>{{timestampToTime(code.pay_time)}}</span>
+        <span>{{exchangeTime(code.pay_time)}}</span>
         <span>{{code.use_code_number}}</span>
         <span>{{code.expire_days}}</span>
         <span>{{code.order_sn}}
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { timestampToTime } from '@/lib/util/helper'
 export default {
   props: ['codeData'],
   data() {
@@ -53,25 +54,8 @@ export default {
     }
   },
   methods: {
-    timestampToTime(timestamp) {
-      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      let Y = date.getFullYear() + '-'
-      let M =
-        (date.getMonth() + 1 < 10
-          ? '0' + (date.getMonth() + 1)
-          : date.getMonth() + 1) + '-'
-      let D =
-        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-      let h =
-        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
-        ':'
-      let m =
-        (date.getMinutes() * 1 < 10
-          ? '0' + date.getMinutes()
-          : date.getMinutes()) + ':'
-      let s =
-        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
-      return Y + M + D + h + m + s
+    exchangeTime(time) {
+      return timestampToTime(time)
     }
   }
 }

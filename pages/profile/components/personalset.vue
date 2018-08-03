@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+import { home, personalset } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
 import { mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -404,7 +404,7 @@ export default {
       }
       this.$refs[formName].validate(valid => {
         if (valid) {
-          home.perInformation(this.psnForm).then(res => {
+          personalset.perInformation(this.psnForm).then(res => {
             let flag = res.status != 0 ? false : true
             this.$emit('update', flag)
             if (res.status == 0) {
@@ -446,7 +446,7 @@ export default {
             newpasso: encryption(this.changePwd.checkPass)
           }
           return new Promise((resolve, reject) => {
-            home.editPassWord(tmp).then(res => {
+            personalset.editPassWord(tmp).then(res => {
               this.changePwd = {
                 oldPass: '',
                 newPass: '',
@@ -479,7 +479,7 @@ export default {
     },
     // 获取职业列表
     getPositionList() {
-      home.positionList().then(res => {
+      personalset.positionList().then(res => {
         let tmp = res.data
         this.options = tmp.map(item => {
           return { label: item.position_name, value: item.id }

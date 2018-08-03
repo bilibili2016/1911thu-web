@@ -26,7 +26,7 @@ export default {
   methods: {
     ...mapActions('auth', ['setCid', 'setCg']),
     getMore() {
-      console.log(this.linkdata, '这是this.linkdata')
+      // console.log(this.linkdata, '这是this.linkdata')
       // 免费课程路由 设置cid pid cindex
       // if (this.linkdata === '/course/category') {
       //   this.setCid(this.cidform)
