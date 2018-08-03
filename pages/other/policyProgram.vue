@@ -629,6 +629,5 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@import '~assets/style/other/policyProgram1.scss';
-</style>
+
+

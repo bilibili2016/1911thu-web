@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="partypolicy">
     <div class="policyPrograme">
       <div class="banner">
         <div class="text">
@@ -740,6 +740,3 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss">
-@import '~assets/style/other/partypolicy.scss';
-</style>
