@@ -10,7 +10,7 @@
           <span class="price">单价</span>
           <span class="operation">操作</span>
         </div>
-        <div class="maintable" style="min-height:500px;">
+        <div class="maintable">
           <!-- 课程全选 checkbox-->
           <!-- 无课程不显示全选 -->
           <div class="select-all-course" v-if="this.courseList.length> 0">
