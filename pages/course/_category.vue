@@ -1,15 +1,10 @@
 <template>
   <div>
-    <!-- 当经典好课 list不显示 this.cg !=='1' -->
+    <!-- 顶部list -->
+    <div v-loading="loadList">
+      <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectAllCid="selectAllCid" @selectCid="selectCid" @selectAllPid="selectAllPid" @selectPid="selectPid"></v-list>
+    </div>
 
-    <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectAllCid="selectAllCid" @selectCid="selectCid" @selectAllPid="selectAllPid" @selectPid="selectPid"></v-list>
-    <!-- <div class="classList" v-if="this.cg ==='1'">
-      <ul>
-        <li v-for="(item,index) in classList" :key="index" @click="bind(item.id,index)">
-          <span :class="{checked:checkedLi===index? true : false}">{{item.short_name}}</span>
-        </li>
-      </ul>
-    </div> -->
     <div class="center category-style">
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
 
@@ -96,7 +91,8 @@ export default {
       },
       categoryId: '',
       type: '',
-      categoryIndex: ''
+      categoryIndex: '',
+      loadList: false
     }
   },
   methods: {
@@ -168,16 +164,6 @@ export default {
         this.getNewProjectList()
       }
     },
-    // 分页事件
-    handlePageChange(val) {
-      this.pagemsg.page = val
-      this.categoryForm.pages = val
-      home.curriculumList(this.categoryForm).then(res => {
-        this.categoryData = res.data.curriculumList
-        this.pagemsg.total = res.data.pageCount
-        this.loadCourse = false
-      })
-    },
 
     // 获取课程列表
     getcourseList() {
@@ -189,7 +175,6 @@ export default {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
         // console.log(this.pagemsg.total)
-
         this.loadCourse = false
       })
     },
@@ -213,26 +198,12 @@ export default {
         // resolve(true)
       })
     },
-    // 点击竖直列表获取数据
-    recommendCurriculumList() {
-      this.loadCourse = true
-
-      home.getClassicCourseList(this.newsCurriculumForm).then(response => {
-        this.categoryData = response.data.curriculumList
-        // resolve(true)
-        this.loadCourse = false
-      })
-    },
-    // 点击竖直列表
-    bind(id, index) {
-      this.checkedLi = index
-      this.newsCurriculumForm.categoryId = id
-      this.recommendCurriculumList()
-    },
-    // 顶部列表数据
+    // 顶部 列表数据    ---  非 最新项目
     getCidPidList() {
+      this.loadList = true
       home.childCategoryList().then(res => {
         this.cidData = res.data.categoryList
+        this.loadList = false
         //最新项目
         if (this.categoryId === '0') {
           this.pidData = res.data.categoryList[0]
@@ -249,11 +220,12 @@ export default {
         this.loadBanner = false
       })
     },
-    // 获取最新项目上方列表
+    // 顶部列表数据 ---- 最新  项目
     getNewProject() {
+      this.loadList = true
       home.getNewProject().then(res => {
         this.cidData = res.data.categoryList
-
+        this.loadList = false
         //最新项目
         if (this.categoryId === '0') {
           this.pidData = res.data.categoryList[0]
@@ -269,58 +241,20 @@ export default {
           this.pidData = res.data.categoryList[this.categoryIndex]
         }
       })
+    },
+    // 点击 分页分页事件
+    handlePageChange(val) {
+      this.loadCourse = true
+      this.pagemsg.page = val
+      this.categoryForm.pages = val
+      home.curriculumList(this.categoryForm).then(res => {
+        this.loadCourse = false
+        this.categoryData = res.data.curriculumList
+        this.pagemsg.total = res.data.pageCount
+      })
     }
   },
   mounted() {
-    // if (this.cid) {
-    //   this.activeTab = 'first'
-    //   // 设置 最新新项目页面列表 cg = 2
-    //   if (this.cg === '2') {
-    //     this.cidform.pids = '0'
-    //     this.cidform.cids = '0'
-    //     this.cidform.indexs = 0
-    //     // this.pidData = this.cidData[0]
-    //     this.cidBg = 0
-    //     this.pidBg = 0
-    //     this.setCid(this.cidform)
-    //     this.getNewProject()
-    //     // 设置顶部列表 cg = 1
-    //   } else if (this.cg === '1') {
-    //     this.cidBg = this.cid
-    //     this.pidBg = this.pid
-    //     // 获取竖直列表
-    //     // this.getClassicsList()
-    //     this.getCidPidList()
-    //     this.getcourseList()
-    //   }
-    // } else {
-    //   this.activeTab = 'first'
-
-    //   // 无登录时候设置全部选择
-
-    //   this.cidform.cids = '0'
-    //   this.cidform.indexs = 0
-    //   this.cidform.pids = '0'
-    //   this.cidBg = 0
-    //   this.pidBg = 0
-
-    //   // this.pidData = this.cidData[0]
-    //   this.setCid(this.cidform)
-
-    //   // 获取竖直列表
-    //   this.getClassicsList()
-    //   this.getCidPidList()
-    //   this.getcourseList()
-    //   if (this.cg === '2') {
-    //     this.cidform.pids = '0'
-    //     this.cidform.cids = '0'
-    //     this.cidform.indexs = 0
-    //     // this.pidData = this.cidData[0]
-    //     this.cidBg = 0
-    //     this.pidBg = 0
-    //     this.setCid(this.cidform)
-    //   }
-    // }
     this.categoryId = window.location.pathname.split('/')[2]
     this.type = window.location.search.split('=')[1]
     // 非最新项目

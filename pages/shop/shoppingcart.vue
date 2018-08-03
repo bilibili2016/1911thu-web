@@ -827,6 +827,8 @@ export default {
                   message: '已取消结算！'
                 })
               })
+          } else {
+            this.$router.push('/shop/affirmorder')
           }
         })
       } else {
