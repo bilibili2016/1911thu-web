@@ -34,7 +34,7 @@
       <div class="price clearfix">
         <div class="fl">
           <i>￥</i>{{projectDetail.present_price}}</div>
-        <div class="fr">
+        <div class="fr" @click="addShoppingCart">
           <i>加入购物车</i>
           <span>
             <img src="~assets/images/pro_cart.png" alt="">
@@ -86,6 +86,10 @@ export default {
         projectId: '1'
       },
       projectDetail: {},
+      shoppingForm: {
+        type: 2,
+        cartid: ''
+      },
       projectCourseData: {
         title: '2门经典线上学课',
         system: [
@@ -204,10 +208,20 @@ export default {
     }
   },
   methods: {
+    // 获取项目详情
     getProjectInfo() {
       home.getProjectInfo(this.project).then(res => {
         this.projectDetail = res.data.curriculumProjectDetail
         this.projectDetail.score = Number(this.projectDetail.score)
+      })
+    },
+    // 检测购物车中是否存在学习的课程/项目
+    addShoppingCart() {
+      this.shoppingForm.cartid = this.project.projectId
+      home.addShopCart(this.shoppingForm).then(res => {
+        if (res.status === 0) {
+          // 添加购物车成功
+        }
       })
     }
   },
