@@ -38,7 +38,7 @@
 <script>
 import CustomBanner from '@/components/common/Banner.vue'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { other, home } from '~/lib/v1_sdk/index'
+import { news } from '~/lib/v1_sdk/index'
 import { timestampToTime } from '~/lib/util/helper'
 export default {
   computed: {
@@ -82,7 +82,7 @@ export default {
         ids: id
       }
       return new Promise((resolve, reject) => {
-        home.getNewInfoDetail(newsId).then(response => {
+        news.getNewInfoDetail(newsId).then(response => {
           this.newsDetail = response.data.newDetail
           this.newsDetail.create_time = timestampToTime(
             this.newsDetail.create_time

@@ -405,7 +405,7 @@ import Conversion from '@/pages/profile/components/conversion'
 import Bind from '@/pages/profile/components/binding'
 import TicketOrder from '@/pages/profile/pages/ticketOrder'
 import TicketHistory from '@/pages/profile/pages/ticketHistory'
-import { other, home } from '~/lib/v1_sdk/index'
+import { other, home, checkedCourse } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -871,7 +871,7 @@ export default {
     curriculumPayApply() {
       this.orderForm.ids = persistStore.get('order')
       return new Promise((resolve, reject) => {
-        home.curriculumPayApply(this.orderForm).then(response => {
+        checkedCourse.curriculumPayApply(this.orderForm).then(response => {
           if (response.status === 0) {
             this.courseList = response.data.orderCurriculumList
             this.projectList = response.data.orderProjectList
