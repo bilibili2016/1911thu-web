@@ -27,7 +27,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { home } from '@/lib/v1_sdk/index'
+import { payResult } from '@/lib/v1_sdk/index'
 export default {
   data() {
     return {
@@ -64,7 +64,7 @@ export default {
     payComplete() {
       this.payCompleteForm.orderId = persistStore.get('cpyid')
       return new Promise((resolve, reject) => {
-        home.payComplete(this.payCompleteForm).then(response => {
+        payResult.payComplete(this.payCompleteForm).then(response => {
           this.payCompleteData = response.data
           this.interval = setInterval(() => {
             if (this.seconds < 1) {
