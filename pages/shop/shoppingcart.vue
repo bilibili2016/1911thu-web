@@ -4,68 +4,79 @@
     <div class="main" v-loading="loding">
       <div class="table">
         <!-- 头部 -->
+
         <div class="tableHeader" v-if="!isNoMsg">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseName">课程</span>
           <span class="price">单价</span>
           <span class="operation">操作</span>
         </div>
-        <!-- 课程全选 checkbox-->
-        <!-- 无课程不显示全选 -->
-        <div class="select-all-course" v-if="this.courseList.length> 0">
-          <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
-        </div>
-        <!-- 课程列表 start -->
-        <div class="tableBody" v-if="!isNoMsg">
-          <div v-for="(course,index) in courseList" :key="index">
-            <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
-            <div class="courseInfo clearfix">
-              <img class="fl" :src="course.picture" @click="goDetail(course)">
-              <div class="fl">
-                <h4 @click="goDetail(course)">{{course.title}}</h4>
-                <h6>{{course.study_time}}学时</h6>
-                <p>讲师：{{course.teacher_name}}</p>
+        <div style="min-height:500px;" v-if="!isNoMsg">
+          <div class="maintable">
+            <!-- 课程全选 checkbox-->
+            <!-- 无课程不显示全选 -->
+            <div class="select-all-course" v-if="this.courseList.length> 0">
+              <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
+            </div>
+            <!-- 课程列表 start -->
+            <div class="tableBody" v-if="!isNoMsg">
+              <div v-for="(course,index) in courseList" :key="index">
+                <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
+                <div class="courseInfo clearfix">
+                  <img class="fl" :src="course.picture" @click="goDetail(course)">
+                  <div class="fl">
+                    <h4 @click="goDetail(course)">{{course.title}}</h4>
+                    <h6>{{course.study_time}}学时</h6>
+                    <p>讲师：{{course.teacher_name}}</p>
+                  </div>
+                </div>
+                <div class="coursePrice">
+                  ￥{{course.present_price}}
+                </div>
+                <div class="courseOperation" @click="handleDeleteCourse(course,index)">
+                  删除
+                </div>
               </div>
             </div>
-            <div class="coursePrice">
-              ￥{{course.present_price}}
+            <!-- 课程列表 end -->
+
+            <!-- 项目全选 checkbox-->
+            <div class="select-all-project" v-if="this.projectList.length> 0">
+              <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
             </div>
-            <div class="courseOperation" @click="handleDeleteCourse(course,index)">
-              删除
+            <!-- 项目列表 start-->
+            <div class="tableBody" v-if="!isNoMsg">
+
+              <div v-for="(project,index) in projectList" :key="index">
+                <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
+                <div class="courseInfo clearfix">
+                  <div class="project-img">
+                    <img class="fl" :src="project.picture">
+                    <img :src="projectImg" alt="" class="pmsg">
+                  </div>
+
+                  <div class="fl">
+                    <h4>{{project.title}}</h4>
+                    <h6>{{project.study_time}}学时 </h6>
+                    <!-- <p>讲师：{{project.teacher_name}}</p> -->
+                  </div>
+                </div>
+                <div class="coursePrice">
+                  ￥{{project.present_price}}
+                </div>
+                <div class="courseOperation" @click="handleDeleteProject(project,index)">
+                  删除
+                </div>
+              </div>
             </div>
           </div>
+          <!-- 项目列表 end -->
         </div>
-        <!-- 课程列表 end -->
+        <!-- 底部团购优惠提示 -->
+        <div class="tips" id="tips" v-if="!isNoMsg">
+          <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
+        </div>
 
-        <!-- 项目全选 checkbox-->
-        <div class="select-all-project" v-if="this.projectList.length> 0">
-          <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
-        </div>
-        <!-- 项目列表 start-->
-        <div class="tableBody" v-if="!isNoMsg">
-          <div v-for="(project,index) in projectList" :key="index">
-            <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
-            <div class="courseInfo clearfix">
-              <div class="project-img">
-                <img class="fl" :src="project.picture">
-                <img :src="projectImg" alt="" class="pmsg">
-              </div>
-
-              <div class="fl">
-                <h4>{{project.title}}</h4>
-                <h6>{{project.study_time}}学时 </h6>
-                <!-- <p>讲师：{{project.teacher_name}}</p> -->
-              </div>
-            </div>
-            <div class="coursePrice">
-              ￥{{project.present_price}}
-            </div>
-            <div class="courseOperation" @click="handleDeleteProject(project,index)">
-              删除
-            </div>
-          </div>
-        </div>
-        <!-- 项目列表 end -->
         <!-- 无课程以及项目显示提示  -->
         <div class="noMsg-con" v-if="isNoMsg">
           <div class="noMsg-img">
@@ -73,11 +84,6 @@
             <p>您的购物车为空</p>
           </div>
         </div>
-        <!-- 底部团购优惠提示 -->
-        <div class="tips" id="tips" v-if="!isNoMsg">
-          <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
-        </div>
-
         <div id="computedHeight"></div>
         <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="(courseList && courseList.length > 0) || (projectList&& projectList.length>0)">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>

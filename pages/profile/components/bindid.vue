@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+import { bindid } from '~/lib/v1_sdk/index'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -87,7 +87,7 @@ export default {
     // 检测邀请码内是否包含已绑定的课程
     detection() {
       this.bindForm.courseId = this.courseList.inputID
-      home.detectionCode(this.bindForm).then(res => {
+      bindid.detectionCode(this.bindForm).then(res => {
         // 判断邀请码内是否包含已绑定的课程
         if (res.data.is_exist === 1) {
           this.$confirm(
@@ -118,7 +118,7 @@ export default {
     // 添加课程
     doSubmit() {
       this.bindForm.courseId = this.courseList.inputID
-      home.bindingCurriculumPrivate(this.bindForm).then(res => {
+      bindid.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({
             showClose: true,
@@ -146,7 +146,7 @@ export default {
     // 获取已经添加的课程兑换码
     getUsedInvitationCodeList() {
       return new Promise((resolve, reject) => {
-        home.getUsedInvitationCodeList(this.curruntForm).then(response => {
+        bindid.getUsedInvitationCodeList(this.curruntForm).then(response => {
           this.courseList.courseID = response.data.usedInvitationCodeList
           if (
             !this.courseList.courseID ||

@@ -12,7 +12,7 @@
 
         <v-card :data="categoryData" :config="categoryCard"></v-card>
       </div>
-      <div v-else v-loading="loadCourse">
+      <div v-else v-loading="loadCourse" class="noMsg">
         <v-nothing></v-nothing>
       </div>
     </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -327,5 +327,8 @@ export default {
       }
     }
   }
+}
+.noMsg {
+  min-height: 500px;
 }
 </style>
