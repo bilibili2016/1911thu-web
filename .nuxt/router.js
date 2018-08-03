@@ -4,6 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 const _b85f5514 = () => import('../pages/profile/index.vue' /* webpackChunkName: "pages/profile/index" */).then(m => m.default || m)
@@ -73,6 +74,8 @@ const _6f95689a = () => import('../pages/news/_detail.vue' /* webpackChunkName: 
 const _41637b62 = () => import('../pages/course/_category.vue' /* webpackChunkName: "pages/course/_category" */).then(m => m.default || m)
 const _84114f48 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 =======
+=======
+>>>>>>> origin/liyr
 const _01587f57 = () => import('../pages/profile/index.vue' /* webpackChunkName: "pages/profile/index" */).then(m => m.default || m)
 const _121a4c47 = () => import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */).then(m => m.default || m)
 const _d8700ba8 = () => import('../pages/shop/checkedCourseList.vue' /* webpackChunkName: "pages/shop/checkedCourseList" */).then(m => m.default || m)
@@ -139,7 +142,6 @@ const _5f9540bc = () => import('../pages/home/components/info.vue' /* webpackChu
 const _e94002ce = () => import('../pages/news/_detail.vue' /* webpackChunkName: "pages/news/_detail" */).then(m => m.default || m)
 const _47cfc0ce = () => import('../pages/course/_category.vue' /* webpackChunkName: "pages/course/_category" */).then(m => m.default || m)
 const _06d81986 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
->>>>>>> origin/liyr
 
 
 
@@ -200,11 +202,20 @@ export function createRouter () {
     scrollBehavior,
     routes: [
 		{
+<<<<<<< HEAD
+=======
+			path: "/profile",
+			component: _01587f57,
+			name: "profile"
+		},
+		{
+>>>>>>> origin/liyr
 			path: "/home",
-			component: _44f44288,
+			component: _121a4c47,
 			name: "home"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/profile",
 			component: _b85f5514,
@@ -225,6 +236,8 @@ export function createRouter () {
 			component: _7b3ab20e,
 			name: "other-Institutional"
 =======
+=======
+>>>>>>> origin/liyr
 			path: "/shop/checkedCourseList",
 			component: _d8700ba8,
 			name: "shop-checkedCourseList"
@@ -233,14 +246,14 @@ export function createRouter () {
 			path: "/other/ie",
 			component: _1f7b8840,
 			name: "other-ie"
->>>>>>> origin/liyr
 		},
 		{
 			path: "/shop/wePay",
-			component: _352f4a07,
+			component: _025553c6,
 			name: "shop-wePay"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/other/ie",
 			component: _8412633e,
@@ -292,6 +305,8 @@ export function createRouter () {
 			component: _7ff396aa,
 			name: "course-coursedetail"
 =======
+=======
+>>>>>>> origin/liyr
 			path: "/other/aboutUs",
 			component: _f6467512,
 			name: "other-aboutUs"
@@ -325,15 +340,19 @@ export function createRouter () {
 			path: "/shop/affirmOrder",
 			component: _5f413277,
 			name: "shop-affirmOrder"
+<<<<<<< HEAD
 >>>>>>> origin/liyr
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
+=======
+>>>>>>> origin/liyr
 		},
 		{
 			path: "/other/degree",
-			component: _c7ca8cde,
+			component: _903560e0,
 			name: "other-degree"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/other/faceteach",
 			component: _25985183,
@@ -375,6 +394,8 @@ export function createRouter () {
 			component: _7a83b638,
 			name: "news-list"
 =======
+=======
+>>>>>>> origin/liyr
 			path: "/shop/checkedCourse",
 			component: _3efebf6e,
 			name: "shop-checkedCourse"
@@ -393,15 +414,19 @@ export function createRouter () {
 			path: "/other/homeUs",
 			component: _0e7597be,
 			name: "other-homeUs"
+<<<<<<< HEAD
 >>>>>>> origin/liyr
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
+=======
+>>>>>>> origin/liyr
 		},
 		{
 			path: "/course/search",
-			component: _77568aa6,
+			component: _564296f2,
 			name: "course-search"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/shop/payResult",
 			component: _23d4d1f2,
@@ -418,12 +443,14 @@ export function createRouter () {
 			component: _616435f0,
 			name: "other-userProtocol"
 =======
+=======
+>>>>>>> origin/liyr
 			path: "/course/classifycourse",
 			component: _d7b9e804,
 			name: "course-classifycourse"
->>>>>>> origin/liyr
 		},
 		{
+<<<<<<< HEAD
 			path: "/course/classifycourse",
 			component: _0ea359c6,
 			name: "course-classifycourse"
@@ -459,6 +486,13 @@ export function createRouter () {
 			component: _460ac3bc,
 			name: "other-homeUs"
 =======
+=======
+			path: "/shop/shoppingcart",
+			component: _2a7c456c,
+			name: "shop-shoppingcart"
+		},
+		{
+>>>>>>> origin/liyr
 			path: "/course/chooselesson",
 			component: _668b282e,
 			name: "course-chooselesson"
@@ -487,6 +521,7 @@ export function createRouter () {
 			path: "/other/enterprisecustom",
 			component: _07910e54,
 			name: "other-enterprisecustom"
+<<<<<<< HEAD
 >>>>>>> origin/liyr
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
 		},
@@ -516,6 +551,15 @@ export function createRouter () {
 			component: _20baef1e,
 			name: "activity-faceteach"
 =======
+=======
+		},
+		{
+			path: "/other/policyProgram",
+			component: _2282e0de,
+			name: "other-policyProgram"
+		},
+		{
+>>>>>>> origin/liyr
 			path: "/project/projectDetail",
 			component: _1f087bbf,
 			name: "project-projectDetail"
@@ -529,6 +573,7 @@ export function createRouter () {
 			path: "/shop/payResult",
 			component: _7751e431,
 			name: "shop-payResult"
+<<<<<<< HEAD
 >>>>>>> origin/liyr
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
 		},
@@ -569,6 +614,15 @@ export function createRouter () {
 			component: _29151597,
 			name: "other-enterprisecustom"
 =======
+=======
+		},
+		{
+			path: "/shop/test",
+			component: _fe19ef14,
+			name: "shop-test"
+		},
+		{
+>>>>>>> origin/liyr
 			path: "/course/newlesson",
 			component: _26a9bbc9,
 			name: "course-newlesson"
@@ -592,6 +646,7 @@ export function createRouter () {
 			path: "/course/player",
 			component: _7c23a540,
 			name: "course-player"
+<<<<<<< HEAD
 >>>>>>> origin/liyr
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
 		},
@@ -621,6 +676,15 @@ export function createRouter () {
 			component: _01b1e954,
 			name: "home-components-tab"
 =======
+=======
+		},
+		{
+			path: "/project/partypolicy",
+			component: _39628a66,
+			name: "project-partypolicy"
+		},
+		{
+>>>>>>> origin/liyr
 			path: "/course/components/Filter",
 			component: _b22c9fbc,
 			name: "course-components-Filter"
@@ -649,6 +713,7 @@ export function createRouter () {
 			path: "/home/components/project",
 			component: _69063cfb,
 			name: "home-components-project"
+<<<<<<< HEAD
 >>>>>>> origin/liyr
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
 		},
@@ -656,6 +721,13 @@ export function createRouter () {
 			path: "/other/ie",
 			component: _8412633e,
 			name: "other-ie"
+=======
+		},
+		{
+			path: "/profile/pages/invitation",
+			component: _178a844f,
+			name: "profile-pages-invitation"
+>>>>>>> origin/liyr
 		},
 		{
 			path: "/profile/components/binding",
@@ -664,7 +736,7 @@ export function createRouter () {
 		},
 		{
 			path: "/home/components/forgotpassword",
-			component: _68c861e6,
+			component: _5082834c,
 			name: "home-components-forgotpassword"
 		},
 		{
@@ -684,22 +756,17 @@ export function createRouter () {
 		},
 		{
 			path: "/home/components/partner",
-			component: _49fa5a89,
+			component: _49b741ac,
 			name: "home-components-partner"
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
 		},
 		{
-<<<<<<< HEAD
-			path: "/home/components/teacherResource",
-			component: _8b415a5e,
-			name: "home-components-teacherResource"
-=======
 			path: "/profile/pages/ticketHistory",
 			component: _5ce0e1bc,
 			name: "profile-pages-ticketHistory"
->>>>>>> origin/liyr
 		},
 		{
+<<<<<<< HEAD
 			path: "/home/components/evaluate",
 			component: _064ce0a8,
 			name: "home-components-evaluate"
@@ -718,11 +785,19 @@ export function createRouter () {
 		{
 =======
 >>>>>>> origin/liyr
+=======
+			path: "/profile/pages/ticketOrder",
+			component: _100d6b48,
+			name: "profile-pages-ticketOrder"
+		},
+		{
+>>>>>>> origin/liyr
 			path: "/home/components/famous",
-			component: _3054906c,
+			component: _8a0fc9ee,
 			name: "home-components-famous"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/profile/pages/ticketHistory",
 			component: _b7aa79fe,
@@ -737,11 +812,14 @@ export function createRouter () {
 		{
 =======
 >>>>>>> origin/liyr
+=======
+>>>>>>> origin/liyr
 			path: "/home/components/free",
-			component: _7a8e870a,
+			component: _0d6e390c,
 			name: "home-components-free"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/profile/components/conversion",
 			component: _16a5c7d3,
@@ -803,6 +881,8 @@ export function createRouter () {
 			component: _2d2b77bc,
 			name: "home-components-newcourse"
 =======
+=======
+>>>>>>> origin/liyr
 			path: "/course/components/List",
 			component: _2e6e2270,
 			name: "course-components-List"
@@ -846,6 +926,7 @@ export function createRouter () {
 			path: "/home/components/teacherResource",
 			component: _5b61b31c,
 			name: "home-components-teacherResource"
+<<<<<<< HEAD
 >>>>>>> origin/liyr
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
 		},
@@ -914,8 +995,27 @@ export function createRouter () {
 =======
 >>>>>>> origin/liyr
 >>>>>>> 6dddeb1bef987cb59bcd30d344faaf3255675eba
+=======
+		},
+		{
+			path: "/home/components/info",
+			component: _5f9540bc,
+			name: "home-components-info"
+		},
+		{
+			path: "/news/:detail?",
+			component: _e94002ce,
+			name: "news-detail"
+		},
+		{
+			path: "/course/:category?",
+			component: _47cfc0ce,
+			name: "course-category"
+		},
+		{
+>>>>>>> origin/liyr
 			path: "/",
-			component: _84114f48,
+			component: _06d81986,
 			name: "index"
 		}
     ],
