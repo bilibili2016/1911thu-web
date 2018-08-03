@@ -236,10 +236,11 @@
                     <span class="lr">数量</span>
                   </div>
                   <div class="bottom">
-                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="index">
+                    <div class="bottom-item clearfix" v-for="(course,index) in courseList" :key="index">
                       <div class="courseInfo clearfix">
                         <div class="bottomImg">
-
+                          <!-- 项目图标 -->
+                          <img v-if="course.type==='2'" class="project-img" :src="projectImg" alt="">
                           <img class="fl" :src="course.picture" alt="">
                         </div>
 
@@ -253,33 +254,13 @@
                         ￥{{course.price}}
                       </div>
                       <div class="courseOperation">
-                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
-                      </div>
-                    </div>
-                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="index">
-                      <div class="courseInfo clearfix">
-                        <div class="bottomImg">
-                          <!-- 项目图标 -->
-                          <img class="project-img" :src="projectImg" alt="">
-                          <img class="fl" :src="project.picture" alt="">
-                        </div>
-
-                        <div class="fl">
-                          <h4>{{project.name}}</h4>
-                          <h6>{{project.curriculum_time}}学时</h6>
-                        </div>
-                      </div>
-                      <div class="coursePrice">
-                        ￥{{project.price}}
-                      </div>
-                      <div class="courseOperation">
-                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                        <i class="el-icon-close"></i>{{course.pay_number}}
                       </div>
                     </div>
                   </div>
                   <div class="tableFooter">
-                    <p>课程数量：{{courseList.length}} 门</p>
-                    <p>学习人数：{{orderDetail.pay_number}} 人</p>
+                    <p>课程数量：{{courseList.length}}门</p>
+                    <p>学习人数：{{orderDetail.pay_number}}人</p>
                     <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
                   </div>
                 </div>
@@ -311,6 +292,12 @@
             <i class="icon-set"></i> 个人设置</span>
           <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
+        <!-- 绑定Id -->
+        <!-- <el-tab-pane name="tab-sixth">
+          <span slot="label" class="tabList">
+            <i class="icon-bind"></i> 课程兑换码</span>
+          <v-bind></v-bind>
+        </el-tab-pane> -->
         <!-- 课程码管理 -->
         <el-tab-pane class="my-course my-invitation" name="tab-sixth">
           <span slot="label" class="tabList">
@@ -329,45 +316,6 @@
               <v-binding :invitationCodeList='invitationCodeList'></v-binding>
             </el-tab-pane>
           </el-tabs>
-        </el-tab-pane>
-        <!-- 发票管理 -->
-        <el-tab-pane class="my-course my-order" name="tab-seventh">
-          <span slot="label" class="tabList">
-            <i class="icon-order"></i> 发票管理</span>
-          <!-- 订单 -->
-          <el-card v-if="showOrderList">
-            <el-tabs v-model="activeOrder">
-              <el-tab-pane label="按订单开发票" name="orderFirst">
-                <v-tkorder v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-tkorder>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，您还没有订单请先去下单购买吧~</h4>
-                  </div>
-                </div>
-              </el-tab-pane>
-              <el-tab-pane name="orderSecond" label="开票历史">
-                <v-tkhistory v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-tkhistory>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，没有已经开具的开票~</h4>
-                  </div>
-                </div>
-              </el-tab-pane>
-              <el-tab-pane name="orderThird">
-                <span class="payOk" slot="label">开票规则
-                </span>
-                <v-tkorder v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-tkorder>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，没有更多的订单了~</h4>
-                  </div>
-                </div>
-              </el-tab-pane>
-            </el-tabs>
-          </el-card>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -393,8 +341,6 @@ import Order from '@/pages/profile/pages/order'
 import Invitation from '@/pages/profile/pages/invitation'
 import Conversion from '@/pages/profile/components/conversion'
 import Bind from '@/pages/profile/components/binding'
-import TicketOrder from '@/pages/profile/pages/ticketOrder'
-import TicketHistory from '@/pages/profile/pages/ticketHistory'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -408,9 +354,7 @@ export default {
     'v-order': Order,
     'v-invitation': Invitation,
     'v-conversion': Conversion,
-    'v-binding': Bind,
-    'v-tkorder': TicketOrder,
-    'v-tkhistory': TicketHistory
+    'v-binding': Bind
   },
   data() {
     return {
@@ -480,7 +424,6 @@ export default {
       codeData: [],
       recordData: [],
       courseList: [],
-      projectList: [],
       companyData: null,
       options: [],
       value: '全部',
@@ -529,8 +472,6 @@ export default {
     },
     // 获取订单详情
     getOrderDetail(msg) {
-      console.log(msg)
-
       if (msg === false) {
         this.showOrderList = false
         this.curriculumPayApply()
@@ -800,7 +741,7 @@ export default {
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
-          console.log(this.invalidOrderData)
+          // console.log(this.invalidOrderData)
 
           this.invalidOrderLoad = false
           resolve(true)
@@ -863,7 +804,6 @@ export default {
         home.curriculumPayApply(this.orderForm).then(response => {
           if (response.status === 0) {
             this.courseList = response.data.orderCurriculumList
-            this.projectList = response.data.orderProjectList
             this.orderDetail = response.data.orderDetail
             this.bankInfo = response.data.bankInfo
           }
@@ -960,25 +900,20 @@ export default {
   &.profile .my-course.my-order {
     overflow: initial;
   }
-  &.profile .my-course#pane-tab-third .el-tabs__content,
-  &.profile .my-course#pane-tab-seventh .el-tabs__content {
+  &.profile .my-course#pane-tab-third .el-tabs__content {
     overflow: initial;
   }
   &.profile .my-course .el-tabs__header {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }
-  #pane-tab-third .el-tabs__header,
-  #pane-tab-seventh .el-tabs__header {
+  #pane-tab-third .el-tabs__header {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
   }
   #pane-tab-sixth {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
-    overflow: initial;
-    .el-tabs__content {
-      overflow-y: auto;
-    }
+    overflow: hidden;
   }
   .el-tabs__content {
     .el-tabs__item {
