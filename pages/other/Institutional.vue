@@ -172,7 +172,7 @@
 </template>
 
 <script>
-import { auth, home } from '~/lib/v1_sdk/index'
+import { auth, other } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import BackToTop from '@/components/common/BackToTop.vue'
@@ -382,7 +382,7 @@ export default {
           //   return false
           // }
           return new Promise((resolve, reject) => {
-            home.addCompany(this.company).then(response => {
+            other.addCompany(this.company).then(response => {
               if (response.status === 0) {
                 this.$message({
                   showClose: true,
@@ -507,7 +507,7 @@ export default {
         return false
       } else {
         return new Promise((resolve, reject) => {
-          home.searchCompanyList(this.company).then(res => {
+          other.searchCompanyList(this.company).then(res => {
             for (var i = 0; i < res.data.companyList.length; i++) {
               this.$set(
                 res.data.companyList[i],
