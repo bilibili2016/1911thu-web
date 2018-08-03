@@ -279,9 +279,7 @@
 
                   </div>
                   <div class="tableFooter">
-                    <p>课程数量：{{courseList.length}} 门</p>
-                    <p>学习人数：{{orderDetail.pay_number}} 人</p>
-                    <p>课程数量：{{courseList.length}}门</p>
+                    <p>课程数量：{{courseList.length+projectList.length}}门</p>
                     <p>学习人数：{{orderDetail.pay_number}}人</p>
                     <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
                   </div>
