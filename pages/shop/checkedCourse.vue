@@ -43,7 +43,8 @@
 </template>
 
 <script>
-import { home } from '@/lib/v1_sdk/index'
+// import { home } from '@/lib/v1_sdk/index'
+import { checkedCourse } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -77,7 +78,7 @@ export default {
     curriculumPayApply() {
       this.loding = true
       return new Promise((resolve, reject) => {
-        home.curriculumPayApply().then(response => {
+        checkedCourse.curriculumPayApply().then(response => {
           this.curriculumPayData = response.data.curriculumPayApply
           for (let item of response.data.curriculumPayApply) {
             item.create_time = this.timestampToTime(item.create_time)
