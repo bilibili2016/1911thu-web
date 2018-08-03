@@ -12,7 +12,7 @@
 
         <v-card :data="categoryData" :config="categoryCard"></v-card>
       </div>
-      <div v-else v-loading="loadCourse">
+      <div v-else v-loading="loadCourse" class="noMsg">
         <v-nothing></v-nothing>
       </div>
     </div>
@@ -327,5 +327,8 @@ export default {
       }
     }
   }
+}
+.noMsg {
+  min-height: 500px;
 }
 </style>
