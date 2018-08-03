@@ -348,8 +348,7 @@
   }
   .system {
     padding-bottom: 60px;
-    background: url('~assets/images/inlineBg.png') center top no-repeat,
-      url('~assets/images/underLineBg.png') center bottom no-repeat;
+    background: url('~assets/images/inlineBg.png') center top no-repeat, url('~assets/images/underLineBg.png') center bottom no-repeat;
     background-size: contain;
     .studyCourse .title .text {
       color: #fff;
@@ -556,6 +555,7 @@
     font-size: 20px;
     background-color: #8f53d2;
     position: relative;
+    text-align: center;
     span {
       width: 710px;
       height: 90px;
