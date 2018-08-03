@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['data', 'config'],
   data() {
