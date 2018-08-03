@@ -79,7 +79,7 @@
         </div>
 
         <div id="computedHeight"></div>
-        <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="courseList && courseList.length > 0">
+        <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="(courseList && courseList.length > 0) || (projectList&& projectList.length>0)">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
             <span class="deleteChecked" @click="handleDeleteAll">删除选中的课程</span>
