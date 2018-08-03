@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
