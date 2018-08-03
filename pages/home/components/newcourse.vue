@@ -73,7 +73,7 @@ export default {
           study_time: '18',
           study_number: '20',
           score: 5,
-          link: '/project/partypolicy'
+          link: '/other/partypolicy'
         }
       ],
       cgForm: {
@@ -143,10 +143,10 @@ export default {
       //   width: 230px;
       //   height: 140px;
       // }
-      .courseInfo {
-        // padding: 10px;
-        // padding: 0 30px 0 20px;
-      }
+      // .courseInfo {
+      // padding: 10px;
+      // padding: 0 30px 0 20px;
+      // }
     }
 
     div.fl .teacher-picture {

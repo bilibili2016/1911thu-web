@@ -67,7 +67,7 @@
           <li @click="goLink('tab-third')">我的订单</li>
           <li @click="goLink('tab-fourth')">我的消息</li>
           <li @click="goLink('tab-fifth')">个人设置</li>
-          <li @click="goLink('tab-sixth')">课程码管理</li>
+          <li @click="goLink('tab-sixth')">兑换码管理</li>
           <li @click="goLink('tab-seventh')">发票管理</li>
           <!-- <li v-if="this.codeData.length !== 0" @click="goLink('tab-sixth')">课程码管理</li> -->
           <li @click="signOuts">退出</li>

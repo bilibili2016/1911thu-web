@@ -741,5 +741,5 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@import '~assets/style/project/partypolicy.scss';
+@import '~assets/style/other/partypolicy.scss';
 </style>

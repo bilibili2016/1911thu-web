@@ -58,4 +58,24 @@
       }
     }
   }
+  .noData {
+    width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 8px 0px 21px rgba(39, 0, 77, .07);
+    img {
+      width: 316px;
+      height: 274px;
+      margin-top: 50px;
+    }
+    p {
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      color: #999;
+      font-size: 20px;
+    }
+  }
 }
