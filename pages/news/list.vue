@@ -24,7 +24,8 @@
 import CustomBanner from '@/components/common/Banner.vue'
 import CustomCard from '@/pages/news/components/List.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
-import { other, home } from '~/lib/v1_sdk/index'
+// import { other, home } from '~/lib/v1_sdk/index'
+import { news } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
@@ -71,7 +72,7 @@ export default {
       this.newsInfoForm.pages = 1
       this.newsInfoForm.limits = 6
       return new Promise((resolve, reject) => {
-        home.getNewInfoList(this.newsInfoForm).then(response => {
+        news.getNewInfoList(this.newsInfoForm).then(response => {
           this.pagemsg.total = Number(response.data.pageCount)
           this.newsList = response.data.newsList
         })
@@ -82,7 +83,7 @@ export default {
       this.pagemsg.page = val
       this.newsInfoForm.limits = this.pagemsg.pagesize
       return new Promise((resolve, reject) => {
-        home.getNewInfoList(this.newsInfoForm).then(response => {
+        news.getNewInfoList(this.newsInfoForm).then(response => {
           this.pagemsg.total = Number(response.data.pageCount)
           this.newsList = response.data.newsList
         })

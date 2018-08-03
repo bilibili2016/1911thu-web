@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { auth, home } from '~/lib/v1_sdk/index'
+import { auth, other } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import BackToTop from '@/components/common/BackToTop.vue'
@@ -225,7 +225,7 @@ export default {
             return false
           }
           return new Promise((resolve, reject) => {
-            home.addCompany(this.company).then(response => {
+            other.addCompany(this.company).then(response => {
               if (response.status === 0) {
                 this.$message({
                   showClose: true,

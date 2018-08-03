@@ -40,7 +40,7 @@
 <script>
 // 总价 多选
 // import { home } from '@/lib/v1_sdk/index'
-import { checkedCourseList } from '@/lib/v1_sdk/index'
+import { checkedCourse } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -61,7 +61,7 @@ export default {
   methods: {
     curriculumPayApply() {
       return new Promise((resolve, reject) => {
-        checkedCourseList.curriculumPayApply(this.orderForm).then(response => {
+        checkedCourse.curriculumPayApply(this.orderForm).then(response => {
           this.courseList = response.data.orderCurriculumList
           this.orderDetail = response.data.orderDetail
           this.loading = false
