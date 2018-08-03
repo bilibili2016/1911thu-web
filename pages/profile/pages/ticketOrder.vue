@@ -238,7 +238,7 @@ export default {
     text-align: right;
     font-size: 16px;
     margin-top: 30px;
-    // color: #222;
+    color: #222;
     position: relative;
     &.bottomBarFixed {
       width: 896px;
@@ -276,7 +276,7 @@ export default {
   }
   .el-checkbox {
     padding-left: 41px;
-    // color: #222;
+    color: #222;
     font-size: 16px;
     .el-checkbox__inner {
       border-color: #6417a6;
@@ -296,7 +296,7 @@ export default {
         background-color: #6417a6;
       }
       & + .el-checkbox__label {
-        // color: #222;
+        color: #222;
       }
     }
   }
