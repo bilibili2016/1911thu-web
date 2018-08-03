@@ -3,24 +3,24 @@
   <div class="projectevaluate">
     <div class="evlHead clearfix">
       <div class="fl">
-        <span>{{evaluateData.grade}}</span>
-        <el-rate disabled v-model="evaluateData.rate"></el-rate>
+        <span>{{evaluateInfo.totalScore}}</span>
+        <el-rate disabled v-model="evaluateInfo.totalScore"></el-rate>
       </div>
       <div class="fr">
-        {{evaluateData.number}}人评价 好评度{{evaluateData.degree}}%
+        {{evaluateInfo.totalEvaluate}}人评价 好评度{{evaluateInfo.degree}}%
       </div>
     </div>
-    <div class="evaluateList">
-      <div class="evl" v-for="(evl,index) in evaluateData.evlList" :key="index">
+    <div class="evaluateList">{{evaluateData}}
+      <div class="evl" v-for="(evl,index) in evaluateData" :key="index">
         <div class="evlperson clearfix">
-          <img class="fl" :src="evl.headImg" alt="">
+          <img class="fl" :src="evl.head_img" alt="">
           <div class="fl">
-            <p>{{evl.evlUser}}</p>
-            <p>{{evl.time}}</p>
+            <p>{{evl.nick_name}}</p>
+            <p>{{evl.create_time}}</p>
           </div>
           <el-rate disabled class="rate fr" v-model="evl.rate"></el-rate>
         </div>
-        <p class="evlContent">{{evl.evlWord}}</p>
+        <p class="evlContent">{{evl.evaluate_content}}</p>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  props: ['evaluateData']
+  props: ['evaluateData', 'evaluateInfo']
 }
 </script>
 

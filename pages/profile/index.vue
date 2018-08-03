@@ -279,6 +279,8 @@
 
                   </div>
                   <div class="tableFooter">
+                    <p>课程数量：{{courseList.length}} 门</p>
+                    <p>学习人数：{{orderDetail.pay_number}} 人</p>
                     <p>课程数量：{{courseList.length}}门</p>
                     <p>学习人数：{{orderDetail.pay_number}}人</p>
                     <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
@@ -337,6 +339,46 @@
             </el-tab-pane>
           </el-tabs>
         </el-tab-pane>
+
+        <!-- 发票管理 -->
+        <el-tab-pane class="my-course my-order" name="tab-seventh">
+          <span slot="label" class="tabList">
+            <i class="icon-order"></i> 发票管理</span>
+          <!-- 订单 -->
+          <el-card v-if="showOrderList">
+            <el-tabs v-model="activeOrder">
+              <el-tab-pane label="按订单开发票" name="orderFirst">
+                <v-tkorder v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-tkorder>
+                <div class="content noOrder" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，您还没有订单请先去下单购买吧~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane name="orderSecond" label="开票历史">
+                <v-tkhistory v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-tkhistory>
+                <div class="content noOrder" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，没有已经开具的开票~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane name="orderThird">
+                <span class="payOk" slot="label">开票规则
+                </span>
+                <v-tkorder v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-tkorder>
+                <div class="content noOrder" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，没有更多的订单了~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+          </el-card>
+        </el-tab-pane>
       </el-tabs>
     </div>
     <!-- 专属邀请码弹框 -->
@@ -361,6 +403,8 @@ import Order from '@/pages/profile/pages/order'
 import Invitation from '@/pages/profile/pages/invitation'
 import Conversion from '@/pages/profile/components/conversion'
 import Bind from '@/pages/profile/components/binding'
+import TicketOrder from '@/pages/profile/pages/ticketOrder'
+import TicketHistory from '@/pages/profile/pages/ticketHistory'
 import { other, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -374,6 +418,9 @@ export default {
     'v-order': Order,
     'v-invitation': Invitation,
     'v-conversion': Conversion,
+    'v-binding': Bind,
+    'v-tkorder': TicketOrder,
+    'v-tkhistory': TicketHistory,
     'v-binding': Bind
   },
   data() {
@@ -493,6 +540,8 @@ export default {
     },
     // 获取订单详情
     getOrderDetail(msg) {
+      console.log(msg)
+
       if (msg === false) {
         this.showOrderList = false
         this.curriculumPayApply()
@@ -759,9 +808,11 @@ export default {
     // 我的订单 取消
     getInvalidOrderData() {
       this.orderForm.payStatus = 3
+
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
+          console.log(this.invalidOrderData)
           // console.log(this.invalidOrderData)
 
           this.invalidOrderLoad = false
@@ -864,6 +915,7 @@ export default {
       this.getCodeList()
       this.getRecordList()
       this.curriculumPayApply()
+
       // this.getOverTime()
       //过期的我的课程
       this.overStudyCurriculumList()
@@ -922,19 +974,25 @@ export default {
   &.profile .my-course.my-order {
     overflow: initial;
   }
-  &.profile .my-course#pane-tab-third .el-tabs__content {
+  &.profile .my-course#pane-tab-third .el-tabs__content,
+  &.profile .my-course#pane-tab-seventh .el-tabs__content {
     overflow: initial;
   }
   &.profile .my-course .el-tabs__header {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }
-  #pane-tab-third .el-tabs__header {
+  #pane-tab-third .el-tabs__header,
+  #pane-tab-seventh .el-tabs__header {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
   }
   #pane-tab-sixth {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
+    overflow: initial;
+    .el-tabs__content {
+      overflow-y: auto;
+    }
     overflow: hidden;
   }
   .el-tabs__content {

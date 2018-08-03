@@ -1015,6 +1015,7 @@ export default {
         document.getElementById('tableFooter').offsetTop +
         this.headerHeight +
         10
+      console.log(this.tableFooteroffsetTop)
 
       if (this.tableFooteroffsetTop > this.windowHeight) {
         this.isFixed = true
