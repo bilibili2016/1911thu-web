@@ -722,7 +722,8 @@ export default {
       },
       isCart: 0,
       isCartNew: 0,
-      isClick: false
+      isClick: false,
+      type: window.location.search.split('=')[1]
     }
   },
   computed: {
@@ -735,7 +736,12 @@ export default {
       window.open(window.location.origin + '/news/' + news.id)
     },
     openDetail() {
-      window.open(window.location.origin + '/course/coursedetail')
+      if(this.type === 0){
+         window.open(window.location.origin + '/course/coursedetail')
+      } else {
+         window.open(window.location.origin + '/project/projectDetail')
+      }
+
       // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
@@ -1041,10 +1047,20 @@ export default {
       })
     },
     selectCid2(item, index) {
-      this.kidForm.kids = item.id
-      persistStore.set('curriculumId', item.id)
-      this.setKid(this.kidForm)
-      this.curriculumcartids.cartid = item.id
+      // 项目相关的card跳转
+
+       if(this.type === 0){
+        // 课程相关的card跳转
+        this.kidForm.kids = item.id
+        persistStore.set('curriculumId', item.id)
+        this.setKid(this.kidForm)
+        this.curriculumcartids.cartid = item.id
+       } else {
+         console.log(item, '这是item')
+          persistStore.set('projectId', item.id)
+          // window.open(window.location.origin + '/course/coursedetail')
+       }
+
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1

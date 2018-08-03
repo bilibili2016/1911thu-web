@@ -73,6 +73,7 @@ import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
 import Commonproblems from '@/pages/project/commonproblems'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {
     'v-procourse': Procourse,
@@ -178,6 +179,7 @@ export default {
     }
   },
   mounted() {
+    this.project.projectId = persistStore.get('projectId')
     this.getProjectInfo()
     this.getEvaluateList()
 
