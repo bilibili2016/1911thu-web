@@ -188,7 +188,7 @@ export default {
         .course {
           display: none;
           width: 245px;
-          // color: #222;
+          color: #222;
           position: absolute;
           right: -200px;
           background-color: #fff;
