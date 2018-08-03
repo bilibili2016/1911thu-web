@@ -12,11 +12,11 @@
       line-height: 58px;
       border-bottom: 1px solid #e8d6f7;
       padding: 0 30px;
-      &>span {
+      & > span {
         height: 58px;
         line-height: 58px;
         font-size: 16px;
-        color: #222;
+        // color: #222;
       }
       .el-button.is-round {
         width: 110px;
@@ -38,18 +38,18 @@
     }
     .courseIDList {
       margin: 40px 30px 50px;
-      border: 1px solid #E8D6F7;
+      border: 1px solid #e8d6f7;
       .oneID {
         height: 52px;
         line-height: 52px;
         padding-left: 33px;
-        background-color: #FAFAFA;
-        border-bottom: 1px solid #E8D6F7;
+        background-color: #fafafa;
+        border-bottom: 1px solid #e8d6f7;
         &:last-child {
           border-bottom: none;
         }
         span {
-          color: #222;
+          // color: #222;
           font-size: 14px;
         }
       }
@@ -60,7 +60,7 @@
       position: relative; // border-top: 1px solid #E8D6F7;
       span {
         font-size: 16px; // font-weight: 700;
-        color: #222;
+        // color: #222;
       }
       .error {
         font-size: 12px;

@@ -85,7 +85,7 @@ export default {
         line-height: 52px;
         background-color: #fafafa;
         text-align: center;
-        color: #222;
+        // color: #222;
         font-size: 14px;
         border-bottom: 1px solid #e8d6f7;
         &:last-child {
