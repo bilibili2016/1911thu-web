@@ -2117,20 +2117,19 @@ export default {
       }
       .study {
         // padding: 30px 40px 0;
-        padding: 20px 0 0 0;
+        padding: 15px 0 0 0;
         border-top: 1px rgba(232, 214, 247, 1) solid; // margin-top: 65px;
         p {
           font-size: 14px;
           font-family: MicrosoftYaHei;
-          color: rgba(34, 34, 34, 1);
-          line-height: 30px;
-          margin-bottom: 20px;
-          height: 94px;
-          // border: 1px red solid;
+          color: #222222;
+          line-height: 25px;
+          margin-bottom: 25px;
+          height: 123px;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp: 5;
           -webkit-box-orient: vertical;
           &.soldOut {
             text-decoration: underline;

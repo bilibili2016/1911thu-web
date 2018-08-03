@@ -8,7 +8,7 @@
       <div class="list">
         <div class="content">
           <div class="course">
-            <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="index">
+            <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
               <div class="courseImg">
                 <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
               </div>
@@ -18,7 +18,7 @@
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
-            <div class="courseOne" v-if="courseList.orderProjectList.length && index<3" v-for="(project,index) in courseList.orderProjectList" :key="index">
+            <div class="courseOne" v-if="courseList.orderProjectList.length && index<3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
               <div class="courseImg">
                 <!-- 项目图标 -->
                 <img class="project-img" src="@/assets/images/p4.png" alt="">
@@ -29,7 +29,7 @@
                 <h6>{{project.curriculum_time}}学时</h6>
               </div>
             </div>
-            <div class="more" v-if="courseList.orderCurriculumList.length>3" @click="selectPayApply(courseList, index)">
+            <div class="more" v-if="(courseList.orderCurriculumList.length || courseList.orderProjectList.length)>3" @click="selectPayApply(courseList, index)">
               查看更多课程>
             </div>
           </div>
