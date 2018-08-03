@@ -3,12 +3,19 @@
     <!-- 购物车列表 -->
     <div class="main" v-loading="loding">
       <div class="table">
+        <!-- 头部 -->
         <div class="tableHeader" v-if="!isNoMsg">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseName">课程</span>
           <span class="price">单价</span>
           <span class="operation">操作</span>
         </div>
+        <!-- 课程全选 checkbox-->
+        <!-- 无课程不显示全选 -->
+        <div class="select-all-course" v-if="this.courseList.length> 0">
+          <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
+        </div>
+        <!-- 课程列表 start -->
         <div class="tableBody" v-if="!isNoMsg">
           <div v-for="(course,index) in courseList" :key="index">
             <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
@@ -23,25 +30,59 @@
             <div class="coursePrice">
               ￥{{course.present_price}}
             </div>
-            <div class="courseOperation" @click="handleDelete(course,index)">
+            <div class="courseOperation" @click="handleDeleteCourse(course,index)">
               删除
             </div>
           </div>
         </div>
+        <!-- 课程列表 end -->
+
+        <!-- 项目全选 checkbox-->
+        <div class="select-all-project" v-if="this.projectList.length> 0">
+          <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
+        </div>
+        <!-- 项目列表 start-->
+        <div class="tableBody" v-if="!isNoMsg">
+          <div v-for="(project,index) in projectList" :key="index">
+            <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
+            <div class="courseInfo clearfix">
+              <div class="project-img">
+                <img class="fl" :src="project.picture">
+                <img :src="projectImg" alt="" class="pmsg">
+              </div>
+
+              <div class="fl">
+                <h4>{{project.title}}</h4>
+                <h6>{{project.study_time}}学时 </h6>
+                <!-- <p>讲师：{{project.teacher_name}}</p> -->
+              </div>
+            </div>
+            <div class="coursePrice">
+              ￥{{project.present_price}}
+            </div>
+            <div class="courseOperation" @click="handleDeleteProject(project,index)">
+              删除
+            </div>
+          </div>
+        </div>
+        <!-- 项目列表 end -->
+        <!-- 无课程以及项目显示提示  -->
         <div class="noMsg-con" v-if="isNoMsg">
           <div class="noMsg-img">
             <img :src="noMsg" alt="">
             <p>您的购物车为空</p>
           </div>
         </div>
+        <!-- 底部团购优惠提示 -->
         <div class="tips" id="tips" v-if="!isNoMsg">
           <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
         </div>
+
         <div id="computedHeight"></div>
         <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="courseList && courseList.length > 0">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
-            <!-- <span class="deleteChecked">删除选中的课程</span> -->
+            <span class="deleteChecked" @click="handleDeleteAll">删除选中的课程</span>
             <span class="person">购买人数：</span>
             <el-input-number v-model="numForm.number" :step="1" :min="1" :max="9999" class="courseNumberInput" @change="changeNumber"></el-input-number>
             <!-- <span class="number clearfix">
@@ -56,7 +97,7 @@
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
-            <i>{{this.addArray.curriculumcartid.length}}</i> 门课程</span>
+            <i>{{Number(this.addArray.curriculumcartid.length) + Number(this.projectAddArray.projectcartid.length)}} </i> 门课程</span>
         </div>
       </div>
     </div>
@@ -114,6 +155,7 @@ export default {
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
       showInfo: false,
       selectAll: false,
+
       checked: [],
       isIndeterminate: true,
       numForm: {
@@ -190,7 +232,13 @@ export default {
         ]
       },
       arraySum: 0,
+      projectArraySum: 0,
+      // 删除课程 data
       curriculumcartids: {
+        cartid: null
+      },
+      // 删除项目 data
+      projectcartids: {
         cartid: null
       },
       addArray: {
@@ -200,6 +248,13 @@ export default {
         //记录所有课程兑换码，全不选作为参数传入，没有修改
         curriculumcartid: []
       },
+      projectAddArray: {
+        projectcartid: []
+      },
+      removeProjectArray: {
+        //记录所有课程兑换码，全不选作为参数传入，没有修改
+        projectcartid: []
+      },
       isRest: true,
       companyForm: {
         companyname: '1911'
@@ -207,7 +262,15 @@ export default {
       restaurants: [],
       timeout: null,
       windowHeight: '',
-      tipsHeight: ''
+      tipsHeight: '',
+      projectList: '',
+      selectAllCourse: '',
+      selectAllProject: '',
+      projectImg: require('@/assets/images/p4.png'),
+      deleteAllData: {
+        projectcartid: [],
+        curriculumcartid: []
+      }
     }
   },
   mounted() {
@@ -237,21 +300,31 @@ export default {
     ...mapGetters('auth', ['isAuthenticated']),
     prices() {
       let p = (
-        Number(this.arraySum) *
+        Number(this.arraySum + this.projectArraySum) *
         10 *
         (Number(this.numForm.number) * 10) /
         100
       ).toFixed(2)
+
       return Math.abs(p)
     },
     canSubmit() {
-      if (this.addArray.curriculumcartid.length <= 0) {
-        // this.$message({
-        //   showClose: true,
-        //   message: '请您选择课程哦'
-        // })
+      // console.log(
+      //   this.addArray.curriculumcartid.length <= 0,
+      //   'this.addArray.curriculumcartid.length'
+      // )
+      // console.log(
+      //   this.projectAddArray.projectcartid.length <= 0,
+      //   'this.projectAddArray.projectcartid.length'
+      // )
+      if (
+        this.addArray.curriculumcartid.length <= 0 &&
+        this.projectAddArray.projectcartid.length <= 0
+      ) {
+        return false
+      } else {
+        return true
       }
-      return this.addArray.curriculumcartid.length > 0
     }
   },
   watch: {
@@ -310,18 +383,15 @@ export default {
       if (this.companyInfo.companyname === '') {
         return false
       } else {
-        return new Promise((resolve, reject) => {
-          home.searchCompanyList(this.companyInfo).then(res => {
-            for (var i = 0; i < res.data.companyList.length; i++) {
-              this.$set(
-                res.data.companyList[i],
-                'value',
-                res.data.companyList[i].company_name
-              )
-            }
-            this.restaurants = res.data.companyList
-            resolve(true)
-          })
+        home.searchCompanyList(this.companyInfo).then(res => {
+          for (var i = 0; i < res.data.companyList.length; i++) {
+            this.$set(
+              res.data.companyList[i],
+              'value',
+              res.data.companyList[i].company_name
+            )
+          }
+          this.restaurants = res.data.companyList
         })
       }
     },
@@ -335,107 +405,240 @@ export default {
         this.numForm.number = str.replace(this.numForm.number, 1)
       }
     },
+    // 点击全选 课程 + 项目
     handleSelectAll() {
       this.isRest = true
     },
+    // 点击全选 --- 课程
+    handleSelectCourseAll() {
+      this.handleSelectCourseAllChange(this.selectAllCourse)
+    },
+    // 点击全选 --- 项目
+    handleSelectProjectAll() {
+      this.handleSelectProjectAllChange(this.selectAllProject)
+    },
+    // 获取 购物车列表
     shopCartList() {
       this.arraySum = 0
+      this.projectArraySum = 0
       this.addArray.curriculumcartid = []
-      return new Promise((resolve, reject) => {
-        home.shopCartList().then(response => {
-          let body = response.data.curriculumCartList.map(item => {
-            // this.addArray.curriculumcartid.push(item.id)      //默认不选中
-            // this.arraySum =
-            //   (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-            //   10
+      this.projectAddArray.projectcartid = []
 
-            this.removeArray.curriculumcartid.push(item.id)
-            if (item.is_checked === 0) {
-              //未选中
-              return Object.assign({}, item, {
-                checkMsg: false
-              })
-            } else if (item.is_checked === 1) {
-              //选中
-              this.addArray.curriculumcartid.push(item.id)
-              this.arraySum =
-                (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-                10
+      home.shopCartList().then(response => {
+        let body = response.data.curriculumCartList.map(item => {
+          // this.addArray.curriculumcartid.push(item.id)      //默认不选中
+          // this.arraySum =
+          //   (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+          //   10
 
-              return Object.assign({}, item, {
-                checkMsg: true
-              })
-            }
-          })
-          this.courseList = body
-          // this.selectAll = true
-          this.loding = false
-          this.numForm.number = response.data.number
+          this.removeArray.curriculumcartid.push(item.id)
 
-          this.setProductsNum({ pn: this.courseList.length })
-          if (this.courseList.length == 0) {
-            this.isNoMsg = true
-            // this.selectAll = false
-          }
+          if (item.is_checked === 0) {
+            //未选中
+            return Object.assign({}, item, {
+              checkMsg: false
+            })
+          } else if (item.is_checked === 1) {
+            //选中
+            this.addArray.curriculumcartid.push(item.id)
 
-          if (this.addArray.curriculumcartid.length == this.courseList.length) {
-            this.selectAll = true
-            this.isRest = true
-          } else {
-            this.selectAll = false
-            this.isRest = false
+            this.arraySum =
+              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+              10
+
+            return Object.assign({}, item, {
+              checkMsg: true
+            })
           }
         })
+
+        this.courseList = body
+        // this.selectAll = true
+        this.loding = false
+
+        this.numForm.number = response.data.number
+
+        this.setProductsNum({ pn: this.courseList.length })
+
+        // 判断最初获取课程长度是否相等
+        if (this.addArray.curriculumcartid.length == this.courseList.length) {
+          this.selectAllCourse = true
+          this.isRest = true
+        } else {
+          this.selectAllCourse = false
+          this.isRest = false
+        }
+
+        // 获取项目列表
+        let projectListData = response.data.projectCartList.map(item => {
+          this.removeProjectArray.projectcartid.push(item.id)
+          if (item.is_checked === 0) {
+            return Object.assign({}, item, {
+              checkMsg: false
+            })
+          } else if (item.is_checked === 1) {
+            this.projectAddArray.projectcartid.push(item.id)
+            // 计算 项目价格
+            this.projectArraySum =
+              (Number(this.projectArraySum) * 10 +
+                Number(item.present_price) * 10) /
+              10
+
+            return Object.assign({}, item, {
+              checkMsg: true
+            })
+          }
+        })
+        // 将处理后数据给了projectList
+
+        this.projectList = projectListData
+
+        // 判断课程长度是否相等
+        if (
+          this.projectAddArray.projectcartid.length == this.projectList.length
+        ) {
+          this.selectAllProject = true
+          this.isRest = true
+        } else {
+          this.selectAllProject = false
+          this.isRest = false
+        }
+        if (this.selectAllProject === true && this.selectAllProject === true) {
+          this.selectAll = true
+        }
+
+        // 判断课程和项目都没有时候显示购物车为空 img
+        if (this.courseList.length == 0 && this.projectList.length == 0) {
+          this.isNoMsg = true
+          // this.selectAll = false
+        }
       })
     },
+    // 点击选中 取消课程的复选框   ----课程 单选
     handleSelectChange(item, index) {
       let shopIndex = indexOf(this.addArray.curriculumcartid, item.id)
       if (shopIndex >= 0) {
         //未选中
-        return new Promise((resolve, reject) => {
-          home
-            .shopCartremoveChecked({ curriculumcartid: item.id })
-            .then(res => {
-              this.addArray.curriculumcartid.splice(shopIndex, 1)
-              this.arraySum =
-                (Number(this.arraySum) * 10 - Number(item.present_price) * 10) /
-                10
-              if (
-                this.addArray.curriculumcartid.length == this.courseList.length
-              ) {
-                this.selectAll = true
-                this.isRest = true
-              } else {
-                this.selectAll = false
-                this.isRest = false
-              }
-              resolve(true)
-            })
+        home.shopCartremoveChecked({ curriculumcartid: item.id }).then(res => {
+          this.addArray.curriculumcartid.splice(shopIndex, 1)
+          this.arraySum =
+            (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10
+
+          if (this.addArray.curriculumcartid.length == this.courseList.length) {
+            this.selectAllCourse = true
+            this.isRest = true
+          } else {
+            this.selectAllCourse = false
+
+            // 单选 时候取消一个取消所有全选
+            this.selectAll = false
+            this.isRest = false
+          }
         })
       } else {
         //选中
-        return new Promise((resolve, reject) => {
-          home.shopCartaddChecked({ curriculumcartid: item.id }).then(res => {
-            this.addArray.curriculumcartid.push(item.id)
-            this.arraySum =
-              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-              10
+        home.shopCartaddChecked({ curriculumcartid: item.id }).then(res => {
+          // 将选中课程id放入到课程数组
+          this.addArray.curriculumcartid.push(item.id)
+          // 计算价钱
+          this.arraySum =
+            (Number(this.arraySum) * 10 + Number(item.present_price) * 10) / 10
+          // 当选中id数组长度和获取数据长度相同时，全选
+          if (this.addArray.curriculumcartid.length == this.courseList.length) {
+            this.selectAllCourse = true
+            this.isRest = true
+            // 当一个一个点单选时候若全部单选选中，顶部全选状态的改变判断
             if (
-              this.addArray.curriculumcartid.length == this.courseList.length
+              this.selectAllCourse === true &&
+              this.selectAllProject === true
             ) {
               this.selectAll = true
               this.isRest = true
+            }
+          } else {
+            this.selectAllCourse = false
+            this.isRest = false
+          }
+        })
+
+        // if (this.selectAllCourse === true && this.selectAllProject === true) {
+        //   this.selectAll = true
+        //   this.isRest = false
+        // }
+      }
+    },
+    // 点击选中 项目的复选框   ---项目 单选
+    handleSelectProjectChange(item, index) {
+      let shopIndex = indexOf(this.projectAddArray.projectcartid, item.id)
+      if (shopIndex >= 0) {
+        //未选中
+
+        home
+          .shopCartremoveProjectChecked({ projectcartid: item.id })
+          .then(res => {
+            this.projectAddArray.projectcartid.splice(shopIndex, 1)
+            this.projectArraySum =
+              (Number(this.projectArraySum) * 10 -
+                Number(item.present_price) * 10) /
+              10
+
+            if (
+              this.projectAddArray.projectcartid.length ==
+              this.projectList.length
+            ) {
+              this.selectAllProject = true
+              this.isRest = true
             } else {
+              this.selectAllProject = false
+
+              // 单选 时候取消一个取消所有全选
               this.selectAll = false
               this.isRest = false
             }
-            resolve(true)
           })
+      } else {
+        //选中
+        home.shopCartaddProjectChecked({ projectcartid: item.id }).then(res => {
+          this.projectAddArray.projectcartid.push(item.id)
+          this.projectArraySum =
+            (Number(this.projectArraySum) * 10 +
+              Number(item.present_price) * 10) /
+            10
+          if (
+            this.projectAddArray.projectcartid.length == this.projectList.length
+          ) {
+            this.selectAllProject = true
+            this.isRest = true
+
+            // 当一个一个点单选时候若全部单选选中，顶部全选状态的改变判断
+            if (
+              this.selectAllCourse === true &&
+              this.selectAllProject === true
+            ) {
+              this.selectAll = true
+              this.isRest = true
+            }
+          } else {
+            this.selectAllProject = false
+            this.isRest = false
+          }
         })
+
+        // if (this.selectAllCourse === true && this.selectAllProject === true) {
+        //   this.selectAll = true
+        //   this.isRest = false
+        // }
       }
     },
+    // 点击选择全部  ---- 项目 +课程
     handleSelectAllChange(val) {
-      if (this.courseList && this.courseList.length > 0) {
+      if (
+        (this.courseList && this.courseList.length > 0) ||
+        (this.projectList && this.projectList.length > 0)
+      ) {
+        // 课程全选按钮 的选择
+        this.selectAllCourse = val
+        // 课程部分全选
         this.courseList.forEach(item => {
           item.checkMsg = val
         })
@@ -452,18 +655,129 @@ export default {
 
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
           //全选
-          return new Promise((resolve, reject) => {
-            home.shopCartaddChecked(this.addArray).then(res => {
-              resolve(true)
-            })
-          })
+
+          home.shopCartaddChecked(this.addArray).then(res => {})
         } else {
           //全不选
-          return new Promise((resolve, reject) => {
-            home.shopCartremoveChecked(this.removeArray).then(res => {
-              resolve(true)
-            })
+
+          home.shopCartremoveChecked(this.removeArray).then(res => {})
+        }
+
+        // 项目部分 全选
+        this.selectAllProject = val
+        this.projectList.forEach(item => {
+          item.checkMsg = val
+        })
+        this.projectArraySum = 0
+        this.projectAddArray.projectcartid = []
+        if (val) {
+          this.projectList.forEach(item => {
+            this.projectAddArray.projectcartid.push(item.id)
+            this.projectArraySum =
+              (Number(this.projectArraySum) * 10 +
+                Number(item.present_price) * 10) /
+              10
           })
+        }
+
+        if (
+          this.projectAddArray.projectcartid.length == this.projectList.length
+        ) {
+          //全选
+
+          home.shopCartaddProjectChecked(this.projectAddArray).then(res => {})
+        } else {
+          //全不选
+
+          home
+            .shopCartremoveProjectChecked(this.removeProjectArray)
+            .then(res => {})
+        }
+      }
+    },
+
+    // 点击选择全部 ---- 课程
+    handleSelectCourseAllChange(val) {
+      if (this.courseList && this.courseList.length > 0) {
+        // 课程部分全选
+
+        this.courseList.forEach(item => {
+          item.checkMsg = val
+        })
+        this.arraySum = 0
+        this.addArray.curriculumcartid = []
+        if (val) {
+          this.courseList.forEach(item => {
+            this.addArray.curriculumcartid.push(item.id)
+            this.arraySum =
+              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+              10
+          })
+        }
+
+        if (this.addArray.curriculumcartid.length == this.courseList.length) {
+          //全选
+
+          home.shopCartaddChecked(this.addArray).then(res => {})
+        } else {
+          //全不选
+
+          home.shopCartremoveChecked(this.removeArray).then(res => {})
+        }
+        // 设置整个全选按钮状态
+
+        if (val === false) {
+          this.selectAll = val
+          this.isRest = false
+        } else {
+          if (this.selectAllCourse === true && this.selectAllProject === true) {
+            this.selectAll = true
+            this.isRest = false
+          }
+        }
+      }
+    },
+    // 点击选择全部 ---- 项目
+    handleSelectProjectAllChange(val) {
+      if (this.projectList && this.projectList.length > 0) {
+        // 项目部分 全选
+        this.projectList.forEach(item => {
+          item.checkMsg = val
+        })
+        this.projectArraySum = 0
+        this.projectAddArray.projectcartid = []
+        if (val) {
+          this.projectList.forEach(item => {
+            this.projectAddArray.projectcartid.push(item.id)
+            this.projectArraySum =
+              (Number(this.projectArraySum) * 10 +
+                Number(item.present_price) * 10) /
+              10
+          })
+        }
+        if (
+          this.projectAddArray.projectcartid.length == this.projectList.length
+        ) {
+          //全选
+
+          home.shopCartaddProjectChecked(this.projectAddArray).then(res => {})
+        } else {
+          //全不选
+
+          home
+            .shopCartremoveProjectChecked(this.removeProjectArray)
+            .then(res => {})
+        }
+      }
+      // 设置整个全选按钮状态
+
+      if (val === false) {
+        this.selectAll = val
+        this.isRest = false
+      } else {
+        if (this.selectAllCourse === true && this.selectAllProject === true) {
+          this.selectAll = true
+          this.isRest = false
         }
       }
     },
@@ -478,7 +792,6 @@ export default {
     // },
     showCommit() {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
-      // console.log(this.numForm.number)
 
       if (this.numForm.number === 1) {
         home.existCourse().then(res => {
@@ -547,6 +860,15 @@ export default {
       }
     },
     handleSelect(item, index) {},
+
+    // 点击购物车下面加减
+    changeNumber() {
+      if (typeof this.numForm.number !== 'number' || this.numForm.number < 1) {
+        this.numForm.number = 1
+      }
+      this.changeCartNumber()
+    },
+    // 发送购物车的购买人数
     changeCartNumber() {
       return new Promise((resolve, reject) => {
         home.changeCartNumber(this.numForm).then(res => {
@@ -554,54 +876,82 @@ export default {
         })
       })
     },
-    changeNumber() {
-      if (typeof this.numForm.number !== 'number' || this.numForm.number < 1) {
-        this.numForm.number = 1
-      }
-      this.changeCartNumber()
-    },
     addPaySubmit(formName) {
       this.$router.push('/shop/checkedcourse')
       this.$refs[formName].validate(valid => {
         if (valid) {
-          return new Promise((resolve, reject) => {
-            home.addPaySubmit(this.companyInfo).then(response => {
-              if (response.status === '100100') {
-                this.$message({
-                  showClose: true,
-                  type: 'error',
-                  message: response.msg
-                })
-              } else if (response.status === 0) {
-                this.setProductsNum(0)
-                this.$bus.$emit('updateCount')
+          home.addPaySubmit(this.companyInfo).then(response => {
+            if (response.status === '100100') {
+              this.$message({
+                showClose: true,
+                type: 'error',
+                message: response.msg
+              })
+            } else if (response.status === 0) {
+              this.setProductsNum(0)
+              this.$bus.$emit('updateCount')
 
-                this.showInfo = false
-              }
-              resolve(true)
-            })
+              this.showInfo = false
+            }
           })
         } else {
           return false
         }
       })
     },
-    handleDelete(item, index) {
+    // 删除课程  ---- 课程
+    handleDeleteCourse(item, index) {
       this.curriculumcartids.cartid = item.id
       this.loding = true
-      return new Promise((resolve, reject) => {
-        home.delShopCart(this.curriculumcartids).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '删除成功'
-          })
-          // this.handleSelectChange(item, index);
-          // this.courseList.splice(index, 1);
-          this.shopCartList()
-          // this.getNum()
-          this.loding = false
+
+      home.delCourseShopCart(this.curriculumcartids).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '删除成功'
         })
+        // this.handleSelectChange(item, index);
+        // this.courseList.splice(index, 1);
+        this.shopCartList()
+        // this.getNum()
+        this.loding = false
+      })
+    },
+    // 删除 项目 ---- 项目
+    handleDeleteProject(item, index) {
+      this.projectcartids.cartid = item.id
+      this.loding = true
+
+      home.delProjectShopCart(this.projectcartids).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '删除成功'
+        })
+        // this.handleSelectChange(item, index);
+        // this.courseList.splice(index, 1);
+        this.shopCartList()
+        // this.getNum()
+        this.loding = false
+      })
+    },
+    // 全选删除  --- 项目 + 课程
+    handleDeleteAll() {
+      this.deleteAllData.projectcartid = this.projectAddArray.projectcartid
+      this.deleteAllData.curriculumcartid = this.addArray.curriculumcartid
+      this.loding = true
+
+      home.delAllShopCart(this.deleteAllData).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '删除成功'
+        })
+        // this.handleSelectChange(item, index);
+        // this.courseList.splice(index, 1);
+        this.shopCartList()
+        // this.getNum()
+        this.loding = false
       })
     },
     async handleGetCode() {
@@ -611,28 +961,25 @@ export default {
         this.companyInfo.seconds === 30
       ) {
         if (this.companyInfo.captchaDisable === true) {
-          return new Promise((resolve, reject) => {
-            auth.smsCodes(this.companyInfo).then(response => {
-              this.$message({
-                showClose: true,
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
-              })
-              this.companyInfo.captchaDisable = false
-              this.companyInfo.getCode =
-                this.companyInfo.seconds + '秒后重新发送'
-              let interval = setInterval(() => {
-                if (this.companyInfo.seconds <= 0) {
-                  this.companyInfo.getCode = '获取验证码'
-                  this.companyInfo.seconds = 30
-                  this.companyInfo.captchaDisable = true
-                  clearInterval(interval)
-                } else {
-                  this.companyInfo.getCode =
-                    --this.companyInfo.seconds + '秒后重新发送'
-                }
-              }, 1000)
+          auth.smsCodes(this.companyInfo).then(response => {
+            this.$message({
+              showClose: true,
+              type: response.status === 0 ? 'success' : 'error',
+              message: response.msg
             })
+            this.companyInfo.captchaDisable = false
+            this.companyInfo.getCode = this.companyInfo.seconds + '秒后重新发送'
+            let interval = setInterval(() => {
+              if (this.companyInfo.seconds <= 0) {
+                this.companyInfo.getCode = '获取验证码'
+                this.companyInfo.seconds = 30
+                this.companyInfo.captchaDisable = true
+                clearInterval(interval)
+              } else {
+                this.companyInfo.getCode =
+                  --this.companyInfo.seconds + '秒后重新发送'
+              }
+            }, 1000)
           })
         }
       }
