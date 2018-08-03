@@ -174,7 +174,7 @@ export default {
             p {
               line-height: 30px;
               font-size: 16px;
-              color: #222;
+              // color: #222;
             }
           }
         }

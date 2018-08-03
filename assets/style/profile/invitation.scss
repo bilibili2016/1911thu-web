@@ -3,14 +3,14 @@
   margin: 0 auto;
   .table {
     margin: 30px;
-    border: 1px solid #E8D6F7;
+    border: 1px solid #e8d6f7;
     .tr_header {
       height: 60px;
       line-height: 60px;
-      background-color: #EBE7ED;
+      background-color: #ebe7ed;
       text-align: center;
       font-size: 14px;
-      color: #6417A6;
+      color: #6417a6;
       display: flex;
       justify-content: space-around;
       span {
@@ -21,22 +21,22 @@
         }
       }
     }
-    &>div>span:nth-child(1) {
+    & > div > span:nth-child(1) {
       width: 20%;
     }
-    &>div>span:nth-child(2) {
+    & > div > span:nth-child(2) {
       width: 10%;
     }
-    &>div>span:nth-child(3) {
+    & > div > span:nth-child(3) {
       width: 20%;
     }
-    &>div>span:nth-child(4) {
+    & > div > span:nth-child(4) {
       width: 10%;
     }
-    &>div>span:nth-child(5) {
+    & > div > span:nth-child(5) {
       width: 10%;
     }
-    &>div>span:nth-child(6) {
+    & > div > span:nth-child(6) {
       width: 30%;
       text-align: left;
     }
@@ -45,11 +45,11 @@
       line-height: 52px;
       background-color: #fafafa;
       text-align: center;
-      color: #222;
+      // color: #222;
       font-size: 14px;
       display: flex;
       justify-content: space-around;
-      border-bottom: 1px solid #E8D6F7;
+      border-bottom: 1px solid #e8d6f7;
       &:last-child {
         border: none;
       }
@@ -71,7 +71,7 @@
           position: absolute;
           top: 6px;
           right: 10px;
-          background: url("~assets/images/loseEfficacy.png") no-repeat;
+          background: url('~assets/images/loseEfficacy.png') no-repeat;
           background-size: contain;
         }
       }
@@ -100,14 +100,14 @@
     h5 {
       line-height: 66px;
       height: 56px;
-      color: #222;
+      // color: #222;
       font-size: 16px;
     }
     .word {
       padding: 20px 15px;
-      border: 1px solid #E8D6F7;
+      border: 1px solid #e8d6f7;
       p {
-        color: #222;
+        // color: #222;
         font-size: 12px;
         line-height: 24px;
       }
