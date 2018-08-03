@@ -168,7 +168,7 @@
                       </div>
                       <div class="info-fr">
                         <span>下单时间：</span>
-                        <span>{{exchangeTime(orderDetail.create_time)}}</span>
+                        <span>{{timestampToTime(orderDetail.create_time)}}</span>
                       </div>
                     </div>
 
@@ -189,7 +189,7 @@
                         </div>
                         <div class="info-fr">
                           <span>支付时间：</span>
-                          <span>{{exchangeTime(orderDetail.pay_time)}}</span>
+                          <span>{{timestampToTime(orderDetail.pay_time)}}</span>
                         </div>
                       </div>
                     </div>
@@ -344,7 +344,7 @@
             <i class="icon-order"></i> 发票管理</span>
           <!-- 订单 -->
           <el-card v-if="showOrderList">
-            <el-tabs v-model="activeTicket">
+            <el-tabs v-model="activeOrder">
               <el-tab-pane label="按订单开发票" name="orderFirst">
                 <v-tkorder v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-tkorder>
                 <div class="content noOrder" v-else>
@@ -403,12 +403,7 @@ import Conversion from '@/pages/profile/components/conversion'
 import Bind from '@/pages/profile/components/binding'
 import TicketOrder from '@/pages/profile/pages/ticketOrder'
 import TicketHistory from '@/pages/profile/pages/ticketHistory'
-<<<<<<< HEAD
-import { timestampToTime } from '@/lib/util/helper'
-import { other, home, conversion } from '~/lib/v1_sdk/index'
-=======
 import { other, home, checkedCourse } from '~/lib/v1_sdk/index'
->>>>>>> dev
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -439,7 +434,6 @@ export default {
       activeNames: 'first',
       courseCodeNames: 'first',
       activeOrder: 'orderFirst',
-      activeTicket: 'orderFirst',
       bconfig: {
         banner_type: 'profile'
       },
@@ -589,9 +583,12 @@ export default {
       if (this.activeNames == 'third') {
         // 我的课程 收藏的项目
         this.collectionForm.categoryId = item
-        profile.collectionList(this.collectionForm).then(response => {
-          this.collectionData = response.data.curriculumList
-          this.pagemsg2.total = response.data.pageCount
+        return new Promise((resolve, reject) => {
+          home.collectionList(this.collectionForm).then(response => {
+            this.collectionData = response.data.curriculumList
+            this.pagemsg2.total = response.data.pageCount
+            resolve(true)
+          })
         })
       } else {
         if (this.activeNames == 'first') {
@@ -811,6 +808,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
+          console.log(this.invalidOrderData)
+          // console.log(this.invalidOrderData)
+
           this.invalidOrderLoad = false
           resolve(true)
         })
@@ -825,14 +825,14 @@ export default {
         })
       })
     },
-    // 兑换码管理 课程码列表
+    // 专属邀请码 邀请记录
     getRecordList() {
       return new Promise((resolve, reject) => {
-        conversion.getRecordList(this.codeListForm).then(response => {
+        home.getRecordList(this.codeListForm).then(response => {
           this.recordData = response.data.usedInvitationCodeList
           var that = this
           this.recordData.forEach(function(v, i, arr) {
-            v.create_time = that.exchangeTime(v.create_time)
+            v.create_time = that.timestampToTime(v.create_time)
           })
           resolve(true)
         })
@@ -845,8 +845,25 @@ export default {
       })
     },
     // 格式化时间戳
-    exchangeTime(time) {
-      return timestampToTime(time)
+    timestampToTime(timestamp) {
+      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let Y = date.getFullYear() + '-'
+      let M =
+        (date.getMonth() + 1 < 10
+          ? '0' + (date.getMonth() + 1)
+          : date.getMonth() + 1) + '-'
+      let D =
+        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
+      let h =
+        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
+        ':'
+      let m =
+        (date.getMinutes() * 1 < 10
+          ? '0' + date.getMinutes()
+          : date.getMinutes()) + ':'
+      let s =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
+      return Y + M + D + h + m + s
     },
     // 订单详情
     curriculumPayApply() {
@@ -1006,7 +1023,7 @@ export default {
         height: 55px;
         line-height: 55px;
         background-color: #fff;
-        color: #222;
+        // color: #222;
         border-bottom: 1px solid #e8d6f7;
         span {
           vertical-align: middle;
@@ -1040,7 +1057,7 @@ export default {
               height: 50px;
               line-height: 50px;
               font-size: 14px;
-              color: #222;
+              // color: #222;
               .info-fr,
               .info-fl {
                 width: 50%;
@@ -1138,7 +1155,7 @@ export default {
             p {
               font-size: 14px;
               text-align: right;
-              color: #222;
+              // color: #222;
               line-height: 30px;
             }
             h4 {
