@@ -936,7 +936,7 @@ export default {
       // } else {
       //   link = 'http://ceshi.1911edu.com/Wapi/Index/wxBack'
       // }
-      if (link === 'http://edu.1911thu.com/') {
+      if (link === 'http://edu.1911thu.com') {
         link = 'http://wapi.1911thu.com/Wapi/Index/wxBack'
         this.WxLogin.appid = 'wx60c7f5b807077a7b'
       } else {
@@ -1188,6 +1188,8 @@ export default {
     // 获取用户头像
     getUserInfo() {
       // if (this.isAuthenticated) {
+      // this.$bus.$emit('reLogin', false)
+      // this.$bus.$emit('loginShow', false)
       home.getUserInfo().then(res => {
         if (res.status === '100008') {
           // 设置单点登录
