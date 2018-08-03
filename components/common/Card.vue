@@ -423,15 +423,14 @@
       </div>
     </template>
 
-    <!-- 新闻列表  newLists-->
-    <template v-if="config.card_type==='newLists' ">
+    <!-- 新闻列表（已拆出）  newLists-->
+    <!-- <template v-if="config.card_type==='newLists' ">
       <div class="newOrFreeCourseList newsList center goodlesson">
         <div class="course clearfix bottom " v-for="(course,index) in newsList " :key="index " @click="goDetail(course)">
           <el-card class="fl " :body-style="{ padding: '0px' } ">
-            <!-- 课程封面 -->
+
             <img :src="course.picture" class="image " alt=" ">
-            <!-- 老师封面 -->
-            <!-- <img v-if="config.teacher" :src="course.teacher_picture " class="image " alt=" "> -->
+
 
           </el-card>
           <div class="particulars fl " style="width:560px;">
@@ -440,32 +439,6 @@
               <p class="small-title">{{course.introduce}}</p>
               <p>{{course.introduction}}</p>
             </div>
-
-            <!-- <div class="study clearfix"> -->
-            <!-- <span class="fl"><img src="../../assets/images/ren.png" alt=""> {{course.study_number}}人加入学习</span> -->
-            <!-- <span class="coin" v-if="course.is_free =='1'">￥ {{course.present_price}}</span> -->
-            <!-- <span class="coin mfree" v-if="course.is_free == '2'">免费</span> -->
-            <!-- <div class="fr common-button-half"> -->
-            <!-- <el-button type="primary" plain @click="buyNewCourse(course)"> -->
-            <!-- <img src="@/assets/images/shopcard.png" alt=""> -->
-
-            <!-- </el-button> -->
-            <!-- </div> -->
-            <!-- <div class="fr common-button-half-right">
-                <el-button type="primary" plain @click="buyNewCourse(course)"> 加入购物车</el-button>
-              </div> -->
-            <!-- <div class="fr common-button-half-right" v-if="course.is_free == '2'"> -->
-
-            <!-- <el-button type="primary" plain @click="courseInfo(course) "> 立即学习</el-button> -->
-            <!-- </div> -->
-
-            <!-- <div class="fr common-button-half-right" v-if="course.is_free == '1'"> -->
-            <!-- 是否在购物车{{course.is_cart}} {{course.isCartNew}} -->
-            <!-- <el-button type="primary" plain @click="goBuyNewLesson(true,course,index)"> 加入购物车 </el-button> -->
-            <!-- {{item.isCartNew}} -->
-            <!-- </div> -->
-
-            <!-- </div> -->
           </div>
           <div class="Newtime">
             <p class="timeDetail"> {{timestampToTime2(course.create_time)}}</p>
@@ -476,7 +449,7 @@
           </div>
         </div>
       </div>
-    </template>
+    </template> -->
 
     <!-- coursedetail 页面 -->
     <template v-if="config.card_type === 'goodplay'">
@@ -635,8 +608,8 @@
         </div>
       </div>
     </template>
-    <!-- 新上好课详情 页面  资讯详情页面-->
-    <template v-if="config.card_type === 'goodplayTwo'">
+    <!-- 新上好课详情 页面  资讯详情页面（没有用）-->
+    <!-- <template v-if="config.card_type === 'goodplayTwo'">
       <div class="courseList center">
         <div class="course clearfix boxshadow-none" v-for="(course,index) in newsList" :key="index" style="box-shadow:none;">
           <el-card class="fl" :body-style="{ padding: '0px' }">
@@ -660,7 +633,7 @@
           </div>
         </div>
       </div>
-    </template>
+    </template> -->
 
   </div>
 </template>
@@ -706,7 +679,7 @@ export default {
       },
       curriculumcartids: {
         cartid: null,
-        type:1
+        type: 1
       },
       kidForm: {
         kids: null
