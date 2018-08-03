@@ -52,7 +52,7 @@
               <div class="fl">
                 <div class="bottomImg">
                   <!-- 项目图标 -->
-                  <img v-if="course.type==='2'" class="project-img" :src="projectImg" alt="">
+                  <img v-if="course.type =='2'" class="project-img" :src="projectImg" alt="">
                   <img :src="course.picture" alt="">
                 </div>
 
@@ -60,7 +60,7 @@
               <div class="fl">
                 <h5>{{course.title}}</h5>
                 <h6>{{course.study_time}}学时</h6>
-                <p>讲师：{{course.teacher_name}}</p>
+                <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
               </div>
               <div class="fr">¥{{course.present_price}}</div>
             </div>
@@ -460,7 +460,8 @@
 </template>
 
 <script>
-import { home, auth } from '@/lib/v1_sdk/index'
+// import { home, auth } from '@/lib/v1_sdk/index'
+import { affirmOrder } from '@/lib/v1_sdk/index'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -671,8 +672,8 @@ export default {
   },
   mounted() {
     this.goodsList()
-    this.getRegionList()
-    this.getInvoiceDetail()
+    // this.getRegionList()
+    // this.getInvoiceDetail()
     this.resize()
   },
   methods: {
@@ -1244,24 +1245,26 @@ export default {
     },
     // 提交订单
     commitOrder() {
-      this.company.id
-        ? (this.commitOrders.companyId = this.company.id)
-        : (this.commitOrders.companyId = '')
-      if (this.person) {
-        this.commitOrders.types = 1
-      } else {
-        this.commitOrders.types = 2
-        if (this.commitOrders.companyId == '') {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: '您还没有绑定单位，请选择个人购买！'
-          })
-          return false
-        }
-      }
+      // this.company.id
+      //   ? (this.commitOrders.companyId = this.company.id)
+      //   : (this.commitOrders.companyId = '')
+      // console.log(this.company.id)
+
+      // if (this.person) {
+      //   this.commitOrders.types = 1
+      // } else {
+      //   this.commitOrders.types = 2
+      //   if (this.commitOrders.companyId == '') {
+      //     this.$message({
+      //       showClose: true,
+      //       type: 'error',
+      //       message: '您还没有绑定单位，请选择个人购买！'
+      //     })
+      //     return false
+      //   }
+      // }
       return new Promise((resolve, reject) => {
-        home.commitOrder(this.commitOrders).then(res => {
+        affirmOrder.commitOrder().then(res => {
           if (res.status === 0) {
             persistStore.set('cpyid', res.data.id)
             this.$router.push('/shop/wepay')
@@ -1280,7 +1283,7 @@ export default {
     goodsList() {
       this.loadGoods = true
       return new Promise((resolve, reject) => {
-        home.goodsList(this.addArray).then(res => {
+        affirmOrder.goodsList(this.addArray).then(res => {
           if (res.status === 0) {
             console.log(res)
 
