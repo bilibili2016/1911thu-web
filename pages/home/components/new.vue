@@ -4,7 +4,7 @@
       <!-- <v-title :data="titleTwo"></v-title> -->
       <h1 class="clearfix">
         <span class="title">{{titleTwo}}</span>
-        <span class="fr moredata" @click="getMore(linkone)">查看更多</span>
+        <span class="fr moredata" @click="getMore(linkthree)">查看更多</span>
       </h1>
       <v-card ref="card" :data="newData" :config="config" @selectCid="selectCid"></v-card>
       <!-- <v-more :linkdata="linkone"></v-more> -->
@@ -18,7 +18,7 @@ import CustomCard from '@/components/common/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 import { mapActions } from 'vuex'
 export default {
-  props: ['config', 'newData', 'titleTwo', 'linkone'],
+  props: ['config', 'newData', 'titleTwo', 'linkthree'],
   components: {
     'v-title': CustomTitle,
     'v-card': CustomCard,
