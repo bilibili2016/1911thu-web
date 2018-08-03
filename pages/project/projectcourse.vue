@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setKid']),
+    // 跳转课程详情
     goCourseDetail(item) {
       persistStore.set('curriculumId', item.curriculum_id)
       this.kidForm.kids = item.curriculum_id

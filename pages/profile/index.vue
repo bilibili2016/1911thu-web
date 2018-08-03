@@ -405,7 +405,7 @@ import Conversion from '@/pages/profile/components/conversion'
 import Bind from '@/pages/profile/components/binding'
 import TicketOrder from '@/pages/profile/pages/ticketOrder'
 import TicketHistory from '@/pages/profile/pages/ticketHistory'
-import { other, home } from '~/lib/v1_sdk/index'
+import { other, home, profile } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -585,12 +585,9 @@ export default {
       if (this.activeNames == 'third') {
         // 我的课程 收藏的项目
         this.collectionForm.categoryId = item
-        return new Promise((resolve, reject) => {
-          home.collectionList(this.collectionForm).then(response => {
-            this.collectionData = response.data.curriculumList
-            this.pagemsg2.total = response.data.pageCount
-            resolve(true)
-          })
+        profile.collectionList(this.collectionForm).then(response => {
+          this.collectionData = response.data.curriculumList
+          this.pagemsg2.total = response.data.pageCount
         })
       } else {
         if (this.activeNames == 'first') {
@@ -810,9 +807,6 @@ export default {
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
-          console.log(this.invalidOrderData)
-          // console.log(this.invalidOrderData)
-
           this.invalidOrderLoad = false
           resolve(true)
         })
