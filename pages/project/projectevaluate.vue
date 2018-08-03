@@ -10,7 +10,7 @@
         {{evaluateInfo.totalEvaluate}}人评价 好评度{{evaluateInfo.degree}}%
       </div>
     </div>
-    <div class="evaluateList">{{evaluateData}}
+    <div class="evaluateList">
       <div class="evl" v-for="(evl,index) in evaluateData" :key="index">
         <div class="evlperson clearfix">
           <img class="fl" :src="evl.head_img" alt="">

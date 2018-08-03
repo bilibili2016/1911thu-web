@@ -156,7 +156,7 @@ export default {
     },
     // 获取项目评论
     getEvaluateList() {
-      projectDetail.getEvaluateList(this.evaluateForm).then(res => {
+      home.getEvaluateList(this.evaluateForm).then(res => {
         this.evaluateData = res.data.evaluateList
         this.evaluateInfo = res.data.totalEvaluateInfo
 
