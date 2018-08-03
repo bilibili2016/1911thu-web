@@ -1,4 +1,4 @@
-<template v-if="config.type=='ticket'">
+<template>
   <!-- 按订单开发票 -->
   <div class="ticketOrder">
     <div class="orderList" v-for="(courseList, index ) in orderData" :key="index">
@@ -7,7 +7,7 @@
         <span class="fr">{{timestampToTime(courseList.create_time)}}</span>
       </div>
       <div class="list">
-        <div class="content">{{config}}
+        <div class="content">
           <div class="check">
             <el-checkbox v-model="checkMsg" @change="handleSelectChange()"></el-checkbox>
           </div>
@@ -27,7 +27,21 @@
         </div>
       </div>
     </div>
-
+    <!-- 定位用 -->
+    <div class="bottomPosition" if="bottomPosition"></div>
+    <div class="bottomBar" id="bottomBar" ref="bottomBar" :class="{bottomBarFixed:isFixed}">
+      <span class="fl">
+        <el-checkbox v-model="checkMsg " @change="handleSelectChange() "></el-checkbox>
+        全选
+      </span>
+      <span class="money ">
+        <i>2</i> 个订单，
+        <strong>共：
+          <i>¥138.00</i>
+        </strong>
+      </span>
+      <span class="next ">下一步</span>
+    </div>
   </div>
 </template>
 
@@ -39,6 +53,12 @@ export default {
   props: ['orderData'],
   data() {
     return {
+      index: 0,
+      isFixed: false,
+      bottomBaroffsetTop: '',
+      windowHeight: '',
+      headerHeight: '',
+      bottomPositionHeight: '',
       checkMsg: false,
       noData: false,
       orderForm: {
@@ -132,7 +152,55 @@ export default {
       this.setGid(this.gidForm)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', item)
+    },
+    //bottomBar根据页面滚动位置设置定位
+    addClass() {
+      if (document.getElementById('bottomPosition')) {
+        var bottomPositionHeight = parseInt(
+          document.getElementById('bottomPosition').offsetTop + 120 //170:tips本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
+        )
+      }
+      this.scroll = parseInt(
+        document.documentElement.scrollTop || document.body.scrollTop
+      )
+      let scrollIns = parseInt(this.scroll + this.windowHeight)
+
+      if (
+        scrollIns > this.bottomBaroffsetTop ||
+        scrollIns > bottomPositionHeight
+      ) {
+        this.isFixed = false
+      } else {
+        this.isFixed = true
+      }
     }
+  },
+  mounted() {
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.headerHeight = document.getElementsByClassName(
+      'headerBox'
+    )[0].offsetHeight
+    this.windowHeight = document.documentElement.clientHeight
+
+    window.addEventListener('scroll', this.addClass)
+  },
+  updated() {
+    this.index++
+    if (this.index === 1 && document.getElementById('bottomBar')) {
+      this.bottomBaroffsetTop =
+        document.getElementById('bottomBar').offsetTop + this.headerHeight + 10
+      console.log(this.bottomBaroffsetTop, 'this.bottomBaroffsetTop')
+
+      if (this.bottomBaroffsetTop > this.windowHeight) {
+        this.isFixed = true
+      } else {
+        this.isFixed = false
+      }
+    }
+  },
+  deactivated() {
+    window.removeEventListener('scroll', this.addClass)
   }
 }
 </script>
@@ -144,32 +212,6 @@ export default {
       .content {
         .check {
           width: 110px;
-          .el-checkbox {
-            padding-left: 41px;
-            color: #222;
-            font-size: 16px;
-            .el-checkbox__inner {
-              border-color: #6417a6;
-              width: 18px;
-              height: 18px;
-              border-radius: 4px;
-              background-color: transparent;
-              &:after {
-                height: 9px;
-                left: 6px;
-                top: 2px;
-              }
-            }
-            .el-checkbox__input.is-checked {
-              & .el-checkbox__inner {
-                border-color: #6417a6;
-                background-color: #6417a6;
-              }
-              & + .el-checkbox__label {
-                color: #222;
-              }
-            }
-          }
         }
         .course {
           width: 670px;
@@ -181,6 +223,77 @@ export default {
         .price {
           border-right: none;
         }
+      }
+    }
+  }
+  .bottomBar {
+    height: 60px;
+    line-height: 60px;
+    background-color: #ebe7ed;
+    text-align: right;
+    font-size: 16px;
+    margin-top: 30px;
+    color: #222;
+    position: relative;
+    &.bottomBarFixed {
+      width: 1100px;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0 auto;
+    }
+    span.fl {
+      .el-checkbox {
+        padding-right: 18px;
+      }
+    }
+    .next {
+      width: 140px;
+      height: 60px;
+      text-align: center;
+      background-color: #6417a6;
+      color: #fff;
+      vertical-align: top;
+    }
+    .money {
+      margin-right: 40px;
+      i {
+        color: #ff5f5f;
+      }
+      strong {
+        font-size: 18px;
+        font-weight: 400;
+        i {
+          font-weight: 700;
+          font-size: 24px;
+        }
+      }
+    }
+  }
+  .el-checkbox {
+    padding-left: 41px;
+    color: #222;
+    font-size: 16px;
+    .el-checkbox__inner {
+      border-color: #6417a6;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background-color: transparent;
+      &:after {
+        height: 9px;
+        left: 6px;
+        top: 2px;
+      }
+    }
+    .el-checkbox__input.is-checked {
+      & .el-checkbox__inner {
+        border-color: #6417a6;
+        background-color: #6417a6;
+      }
+      & + .el-checkbox__label {
+        color: #222;
       }
     }
   }

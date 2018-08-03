@@ -8,7 +8,7 @@
       </div>
       <div class="list">
         <div class="content">
-          <div class="course">{{config}}
+          <div class="course">
             <div class="courseOne" v-for="(course,index) in courseList.orderCurriculumList" :key="index" v-if="index<3">
               <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
               <div class="fl">
