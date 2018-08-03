@@ -1,5 +1,6 @@
-<template>
-  <div style="background:#fff">
+  <template>
+  <!-- 开发票历史 -->
+  <div class="tickeHietory">
     <div class="orderList" v-for="(courseList, index ) in orderData" :key="index">
       <div class="topBar clearfix">
         <span class="fl">订单：{{courseList.order_sn}}</span>
@@ -8,46 +9,31 @@
       <div class="list">
         <div class="content">
           <div class="course">
-            <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="index">
-              <div class="courseImg">
-                <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
-              </div>
+            <div class="courseOne" v-for="(course,index) in courseList.orderCurriculumList" :key="index" v-if="index<3">
+              <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
               <div class="fl">
                 <h4 @click="goCourseInfo(course,index)">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
-            <div class="courseOne" v-if="courseList.orderProjectList.length && index<3" v-for="(project,index) in courseList.orderProjectList" :key="index">
-              <div class="courseImg">
-                <!-- 项目图标 -->
-                <img class="project-img" src="@/assets/images/p4.png" alt="">
-                <img @click="goCourseInfo(project,index)" class="fl" :src="project.picture" alt="">
-              </div>
-              <div class="fl">
-                <h4 @click="goCourseInfo(project,index)">{{project.title}}</h4>
-                <h6>{{project.curriculum_time}}学时</h6>
-              </div>
-            </div>
-            <div class="more" v-if="courseList.orderCurriculumList.length>3" @click="selectPayApply(courseList, index)">
-              查看更多课程>
-            </div>
           </div>
-          <div class="price height" :style="{height:(courseList.orderCurriculumList.length || courseList.orderProjectList.length) > 3? 3*140+60+'px' :(courseList.orderCurriculumList.length+courseList.orderProjectList.length)*140+'px'}">
+          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
             <p>¥{{courseList.order_amount}}</p>
-            <p v-if="(courseList.orderCurriculumList.length<=3 || courseList.orderProjectList.length<=3)" class="detail" @click="selectPayApply(courseList, index)">订单详情</p>
           </div>
-          <div class="status height" :style="{height: (courseList.orderCurriculumList.length || courseList.orderProjectList.length)>3? 3*140+60+'px' :(courseList.orderCurriculumList.length+courseList.orderProjectList.length)*140+'px'}">
-            <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
-            <p class="payReady payed" v-if="courseList.pay_status === '2'">已支付</p>
-            <!-- 已完成订单剩余时间 -->
-            <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
-            <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day<1">已过期</p>
-            <p class="payClose" v-if="courseList.pay_status === '3'">已关闭</p>
-            <p>
-              <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id)">立即支付</span>
-              <span class="buy" v-if="courseList.pay_status === '3'" @click="goShopping(courseList.id)">立即购买</span>
-            </p>
+          <div class="number height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
+            <div>
+              <p>1张发票</p>
+              <p>含3个订单</p>
+            </div>
+            <div>
+              <i class="el-icon-arrow-right"></i>
+            </div>
+          </div>
+          <div class="status height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
+            <div>已发出
+              <i class="el-icon-arrow-right"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -64,6 +50,7 @@ export default {
   props: ['orderData'],
   data() {
     return {
+      checkMsg: false,
       noData: false,
       orderForm: {
         pages: 1,
@@ -85,10 +72,6 @@ export default {
       this.setKid(this.kidForm)
       persistStore.set('curriculumId', item.curriculum_id)
       this.$router.push('/course/coursedetail')
-    },
-    selectPayApply(item, index) {
-      persistStore.set('order', item.id)
-      this.$emit('goOrderDetail', false)
     },
     goShopping(id) {
       this.orderForm.ids = id
@@ -134,6 +117,7 @@ export default {
         })
       })
     },
+    handleSelectChange() {},
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
       let Y = date.getFullYear() + '-'
@@ -163,3 +147,42 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.tickeHietory {
+  background-color: #fff;
+  .orderList {
+    .list {
+      .content {
+        .course {
+          width: 500px;
+          .courseOne {
+            width: 500px;
+            h4 {
+              width: 285px;
+            }
+          }
+        }
+        .number {
+          width: 130px;
+          border-right: 1px solid #e8d6f7;
+          padding: 0 10px;
+          justify-content: space-around;
+          flex-wrap: nowrap;
+          flex-direction: row;
+          div {
+            width: auto;
+            p {
+              line-height: 30px;
+              font-size: 16px;
+              color: #222;
+            }
+          }
+        }
+        .status {
+          width: 130px;
+        }
+      }
+    }
+  }
+}
+</style>

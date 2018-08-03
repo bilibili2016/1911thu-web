@@ -12,13 +12,15 @@
       <!-- codeData&&codeData.length> -->
       <div v-if="codeData&&codeData.length>0" v-for="(code,index) in codeData" :key="index" :class="code.use_code_number==='0'?'noCodes tr_body':'tr_body' ">
         <span>{{code.invitation_code}}</span>
-        <span>课程</span>
+        <span v-if="code.type==='1'">课程</span>
+        <span v-if="code.type==='2'">项目</span>
+        <span v-if="code.type==='3'">课程+项目</span>
         <span>{{timestampToTime(code.pay_time)}}</span>
-        <span>{{code.use_code_number}}
+        <span>{{code.use_code_number}}</span>
+        <span>{{code.expire_days}}</span>
+        <span>{{code.order_sn}}
           <i></i>
         </span>
-        <span>344</span>
-        <span>RCM2018072324872565</span>
       </div>
       <div v-if="!codeData||codeData.length<1" class="noCodes">
         <img :src="noMsgImg" alt="">

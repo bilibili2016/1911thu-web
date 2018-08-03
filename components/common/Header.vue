@@ -68,6 +68,7 @@
           <li @click="goLink('tab-fourth')">我的消息</li>
           <li @click="goLink('tab-fifth')">个人设置</li>
           <li @click="goLink('tab-sixth')">课程码管理</li>
+          <li @click="goLink('tab-seventh')">发票管理</li>
           <!-- <li v-if="this.codeData.length !== 0" @click="goLink('tab-sixth')">课程码管理</li> -->
           <li @click="signOuts">退出</li>
         </ul>
@@ -876,7 +877,7 @@ export default {
               this.close()
               this.getUserInfo()
               this.getCount()
-              this.getCodeList()
+              // this.getCodeList()
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
             }
@@ -912,7 +913,7 @@ export default {
               this.close()
               this.getUserInfo()
               this.getCount()
-              this.getCodeList()
+              // this.getCodeList()
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
             }
@@ -967,7 +968,7 @@ export default {
           this.setToken(this.tokenForm)
           this.getUserInfo()
           this.getCount()
-          this.getCodeList()
+          // this.getCodeList()
           this.closeWechat()
           this.close()
         } else {
@@ -995,7 +996,7 @@ export default {
           this.setToken(this.tokenForm)
           this.getUserInfo()
           this.getCount()
-          this.getCodeList()
+          // this.getCodeList()
           this.scanCodeShow = false //微信扫码
           this.closeWechat()
         }

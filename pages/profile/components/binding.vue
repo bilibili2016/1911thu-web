@@ -7,19 +7,22 @@
     <div class="bindingRecord">
       <div class="brHeader">
         <span>课程码</span>
-        <span>兑换账户</span>
+        <span>类型</span>
         <span>兑换日期</span>
-        <span>课程列表</span>
+        <span>兑换课程信息</span>
       </div>
       <div class="brBody" v-for="(code,index) in invitationCodeList" :key="index">
         <div>{{code.invitation_code}}</div>
-        <div>13621842637</div>
-        <div>2018-06-25</div>
+        <div v-if="code.type==='1'">课程</div>
+        <div v-if="code.type==='2'">项目</div>
+        <div v-if="code.type==='3'">课程+项目</div>
+        <div>{{code.create_time}}</div>
         <div class="courseList">查看
           <div class="course">
-            <p>大数据时代的人力资源管理</p>
-            <p>绿色经济与可持续发展</p>
-            <p>不同制度条件下的相关激励机制研究</p>
+            <span></span>
+            <p v-for="(course,index) in code.orderCurriculumList" :key="index">
+              <i v-if="course.type=='2'"></i>{{course.title}}
+            </p>
           </div>
         </div>
       </div>
@@ -118,7 +121,9 @@ export default {
 
 <style scoped lang="scss">
 .binding {
-  margin: 0 30px 50px;
+  margin: 0 30px 0;
+  padding: 0 0 50px;
+  min-height: 500px;
   .bindInput {
     margin: 20px 0;
     border: 1px solid #e8d6f7;
@@ -148,7 +153,7 @@ export default {
       line-height: 60px;
       background-color: #ebe7ed;
       span {
-        width: 25%;
+        width: 19%;
         text-align: center;
       }
     }
@@ -161,29 +166,58 @@ export default {
         border: none;
       }
       & > div {
-        width: 25%;
+        width: 19%;
         display: inline-block;
         text-align: center;
       }
       .courseList {
         position: relative;
         transition: all 300ms;
+        cursor: pointer;
         &:hover {
           color: #8f4acb;
-          // .course {
-          //   display: inline;
-          // }
+          .course {
+            display: inline;
+          }
         }
         .course {
           display: none;
+          width: 245px;
           color: #222;
           position: absolute;
-          top: 52px;
-          right: 0;
+          right: -200px;
           background-color: #fff;
           padding: 15px;
           border-radius: 10px;
+          margin-bottom: 30px;
           box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+          z-index: 100;
+          span {
+            width: 14px;
+            height: 14px;
+            background-color: #fff;
+            transform: rotate(45deg);
+            position: absolute;
+            left: -6px;
+            top: 20px;
+          }
+          p {
+            width: 100%;
+            line-height: 30px;
+            height: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            i {
+              width: 42px;
+              height: 18px;
+              display: inline-block;
+              background: url('~assets/images/p4.png') no-repeat;
+              background-position: top center;
+              background-size: 42px 18px;
+              vertical-align: middle;
+            }
+          }
         }
       }
     }

@@ -9,7 +9,7 @@
     <div class="affirmOrder" ref="affirmOrder" v-else>
       <div class="contain" v-loading="loadGoods">
         <h3>确认订单</h3>
-        <div class="buyType" v-if="payNumber>1">
+        <!-- <div class="buyType" v-if="payNumber>1">
           <div class="buy">
             <h4>购买方式：</h4>
             <p>
@@ -20,8 +20,7 @@
           <div class="company" v-show="!person">
             <h4 class="clearfix">
               <span class="fl">单位信息：</span>
-              <!-- <span class="fr addCompany" v-else @click="openCompanyInfo">
-                <i class="el-icon-edit-outline"></i> 修改</span> -->
+
             </h4>
             <div class="cpnInfo" v-if="flag">
               <p class="addcp">
@@ -30,16 +29,7 @@
                 暂无信息，请您添加。</p>
             </div>
             <div class="cpnInfo" v-else>
-              <!-- <p class="cpnInfoLi">
-                <span>
-                  <strong>联系人:</strong>{{company.contact_person}}</span>
-                <span>
-                  <strong>公司名称:</strong>{{company.company_name}}</span>
-                <span>
-                  <strong>公司地址:</strong>{{company.address}}</span>
-                <span>
-                  <strong>手机号:</strong>{{company.phone}}</span>
-              </p> -->
+
               <div class="cpnInfoLi">
                 <p>联系人：{{company.contact_person}}</p>
                 <p>公司名称：{{company.company_name}}</p>
@@ -49,7 +39,7 @@
             </div>
 
           </div>
-        </div>
+        </div> -->
         <div class="goodsList">
           <div class="topBar clearfix">
             <span>商品信息</span>
@@ -60,18 +50,24 @@
           <div class="goods">
             <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
               <div class="fl">
-                <img :src="course.picture" alt="">
+                <div class="bottomImg">
+                  <!-- 项目图标 -->
+                  <img v-if="course.type =='2'" class="project-img" :src="projectImg" alt="">
+                  <img :src="course.picture" alt="">
+                </div>
+
               </div>
               <div class="fl">
                 <h5>{{course.title}}</h5>
                 <h6>{{course.study_time}}学时</h6>
-                <p>讲师：{{course.teacher_name}}</p>
+                <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
               </div>
               <div class="fr">¥{{course.present_price}}</div>
             </div>
           </div>
-          <div class="invoiceMsg clearfix">
-            <!-- {{isShowTicket}} -->
+          <!-- 发票信息 -->
+          <!-- <div class="invoiceMsg clearfix">
+
             <h4>
               发票信息
               <span>开单位抬头发票须填写纳税人识别号，以免影响报销</span>
@@ -87,7 +83,9 @@
               </span>
               <span class="changeInvoice" @click="showIoc">修改</span>
             </div>
-            <!-- 发票内容 -->
+
+
+
             <div class="ticketInfo" v-show="invoiceForm.choose=='1'&&isShowTicket">
               <p v-if="invoiceForm.ticket === true">发票抬头：个人</p>
               <p v-if="invoiceForm.ticket === false">发票抬头：{{invoiceForm.companyname}}</p>
@@ -116,14 +114,24 @@
               <p>收票人详细地址：{{invoiceForm.address}}</p>
             </div>
 
-          </div>
+          </div> -->
           <div class="orderInfo">
-            <h5>
-              <span>商品数量：{{curriculumSum}}</span>
-              <span>学习人数：{{payNumber}}人</span>
-              <span>商品总金额：¥{{allPrise}}</span>
-            </h5>
-            <p>购买账号：{{nickName}}</p>
+            <p>
+              <span class="left">商品数量：</span>
+              <span class="right">{{curriculumSum}}</span>
+            </p>
+            <p>
+              <span class="left">学习人数：</span>
+              <span class="right">{{payNumber}}人</span>
+            </p>
+            <p>
+              <span class="left">商品总金额：</span>
+              <span class="right">¥{{allPrise}}</span>
+            </p>
+            <p>
+              <span class="left">购买账号：</span>
+              <span class="right">{{nickName}}</span>
+            </p>
           </div>
         </div>
         <div class="bottomBtn clearfix">
@@ -154,7 +162,7 @@
             <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
           </div>
           <div class="formLi clearfix">
-            <!-- <h5 @click="addInvoice" v-show="ticketForm.ticket">新增单位发票</h5> -->
+
             <p class="fl"></p>
             <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
               <input type="text" v-model="ticketForm.companyname" placeholder="新增单位发票抬头">
@@ -180,7 +188,7 @@
             </p>
             <p class="word" v-show="!ticketForm.isRadio">
               <i class="el-icon-warning"> </i>将有专人与您联系，请您留意，感谢您的支持！
-              <!-- <input type="text" v-model="ticketForm.others" placeholder="请输入发票内容"> -->
+
             </p>
           </div>
           <div class="formLi clearfix">
@@ -447,6 +455,7 @@
         </el-form>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -457,6 +466,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
+      projectImg: require('@/assets/images/p4.png'),
       address: '',
       flag: true,
       person: true,
@@ -661,8 +671,8 @@ export default {
   },
   mounted() {
     this.goodsList()
-    this.getRegionList()
-    this.getInvoiceDetail()
+    // this.getRegionList()
+    // this.getInvoiceDetail()
     this.resize()
   },
   methods: {
@@ -972,186 +982,186 @@ export default {
       this.addInvoiceInfo()
     },
     // 添加发票信息
-    addInvoiceInfo() {
-      if (this.choose === '1') {
-        if (this.ticketForm.isRadio) {
-          this.ticketForm.others = '培训费'
-        } else {
-          this.ticketForm.others = '其他'
-        }
-        return new Promise((resolve, reject) => {
-          home.addInvoiceInfo(this.ticketForm).then(res => {
-            if (res.status === 0) {
-              this.$message({
-                showClose: true,
-                type: 'success',
-                message: res.msg
-              })
-              this.invoiceForm.choose = this.choose
-              this.invoiceForm.types = this.ticketForm.types
-              this.commitOrders.ticketId = res.data.invoice_id
-              this.invoiceForm.companyname = this.ticketForm.companyname
-              this.invoiceForm.number = this.ticketForm.number
-              this.invoiceForm.address = this.ticketForm.address
-              this.invoiceForm.others = this.ticketForm.others
-              this.invoiceForm.tel = this.ticketForm.tel
-              this.invoiceForm.name = this.ticketForm.name
-              this.invoiceForm.province_name = this.getProvince(
-                this.province,
-                this.ticketForm.province
-              )
-              this.invoiceForm.city_name = this.getCity(
-                this.city,
-                this.ticketForm.city
-              )
-              this.invoiceForm.area_name = this.getArea(
-                this.area,
-                this.ticketForm.area
-              )
-              this.invoiceForm.radio = Number(this.ticketForm.radio)
-              this.invoiceForm.ticket = false
-              this.isShowTicket = true
-              this.commitOrders.ticketId = res.data.invoice_id
-              this.close()
-              if (this.ticketForm.types == 1) {
-                this.invoiceForm.ticket = true
-              }
-            } else {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: res.msg
-              })
-            }
-            resolve(true)
-          })
-        })
-      } else {
-        if (this.zzTicketForm.isRadio) {
-          this.zzTicketForm.others = '培训费'
-        } else {
-          this.zzTicketForm.others = '其他'
-        }
-        return new Promise((resolve, reject) => {
-          home.addInvoiceInfo(this.zzTicketForm).then(res => {
-            if (res.status === 0) {
-              this.$message({
-                showClose: true,
-                type: 'success',
-                message: res.msg
-              })
-              this.invoiceForm.choose = this.choose
-              this.invoiceForm.types = this.zzTicketForm.types
-              this.invoiceForm.companyname = this.zzTicketForm.companyname
-              this.invoiceForm.number = this.zzTicketForm.number
-              this.invoiceForm.zcadd = this.zzTicketForm.zcadd
-              this.invoiceForm.address = this.zzTicketForm.address
-              this.invoiceForm.name = this.zzTicketForm.name
-              this.invoiceForm.tel = this.zzTicketForm.tel
-              this.invoiceForm.others = this.zzTicketForm.others
-              this.invoiceForm.bank = this.zzTicketForm.bank
-              this.invoiceForm.account = this.zzTicketForm.account
-              this.invoiceForm.phones = this.zzTicketForm.phones
-              this.invoiceForm.province_name = this.getProvince(
-                this.zzprovince,
-                this.zzTicketForm.province
-              )
-              this.invoiceForm.city_name = this.getCity(
-                this.zzcity,
-                this.zzTicketForm.city
-              )
-              this.invoiceForm.area_name = this.getArea(
-                this.zzarea,
-                this.zzTicketForm.area
-              )
-              this.invoiceForm.radio = Number(this.zzTicketForm.radio)
-              this.invoiceForm.ticket = false
-              this.isShowTicket = true
-              this.commitOrders.ticketId = res.data.invoice_id
-              this.close()
-              this.stepOne = true
-              this.stepTwo = false
-              this.stepThree = false
-            } else {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: res.msg
-              })
-            }
-            resolve(true)
-          })
-        })
-      }
-    },
+    // addInvoiceInfo() {
+    //   if (this.choose === '1') {
+    //     if (this.ticketForm.isRadio) {
+    //       this.ticketForm.others = '培训费'
+    //     } else {
+    //       this.ticketForm.others = '其他'
+    //     }
+    //     return new Promise((resolve, reject) => {
+    //       home.addInvoiceInfo(this.ticketForm).then(res => {
+    //         if (res.status === 0) {
+    //           this.$message({
+    //             showClose: true,
+    //             type: 'success',
+    //             message: res.msg
+    //           })
+    //           this.invoiceForm.choose = this.choose
+    //           this.invoiceForm.types = this.ticketForm.types
+    //           this.commitOrders.ticketId = res.data.invoice_id
+    //           this.invoiceForm.companyname = this.ticketForm.companyname
+    //           this.invoiceForm.number = this.ticketForm.number
+    //           this.invoiceForm.address = this.ticketForm.address
+    //           this.invoiceForm.others = this.ticketForm.others
+    //           this.invoiceForm.tel = this.ticketForm.tel
+    //           this.invoiceForm.name = this.ticketForm.name
+    //           this.invoiceForm.province_name = this.getProvince(
+    //             this.province,
+    //             this.ticketForm.province
+    //           )
+    //           this.invoiceForm.city_name = this.getCity(
+    //             this.city,
+    //             this.ticketForm.city
+    //           )
+    //           this.invoiceForm.area_name = this.getArea(
+    //             this.area,
+    //             this.ticketForm.area
+    //           )
+    //           this.invoiceForm.radio = Number(this.ticketForm.radio)
+    //           this.invoiceForm.ticket = false
+    //           this.isShowTicket = true
+    //           this.commitOrders.ticketId = res.data.invoice_id
+    //           this.close()
+    //           if (this.ticketForm.types == 1) {
+    //             this.invoiceForm.ticket = true
+    //           }
+    //         } else {
+    //           this.$message({
+    //             showClose: true,
+    //             type: 'error',
+    //             message: res.msg
+    //           })
+    //         }
+    //         resolve(true)
+    //       })
+    //     })
+    //   } else {
+    //     if (this.zzTicketForm.isRadio) {
+    //       this.zzTicketForm.others = '培训费'
+    //     } else {
+    //       this.zzTicketForm.others = '其他'
+    //     }
+    //     return new Promise((resolve, reject) => {
+    //       home.addInvoiceInfo(this.zzTicketForm).then(res => {
+    //         if (res.status === 0) {
+    //           this.$message({
+    //             showClose: true,
+    //             type: 'success',
+    //             message: res.msg
+    //           })
+    //           this.invoiceForm.choose = this.choose
+    //           this.invoiceForm.types = this.zzTicketForm.types
+    //           this.invoiceForm.companyname = this.zzTicketForm.companyname
+    //           this.invoiceForm.number = this.zzTicketForm.number
+    //           this.invoiceForm.zcadd = this.zzTicketForm.zcadd
+    //           this.invoiceForm.address = this.zzTicketForm.address
+    //           this.invoiceForm.name = this.zzTicketForm.name
+    //           this.invoiceForm.tel = this.zzTicketForm.tel
+    //           this.invoiceForm.others = this.zzTicketForm.others
+    //           this.invoiceForm.bank = this.zzTicketForm.bank
+    //           this.invoiceForm.account = this.zzTicketForm.account
+    //           this.invoiceForm.phones = this.zzTicketForm.phones
+    //           this.invoiceForm.province_name = this.getProvince(
+    //             this.zzprovince,
+    //             this.zzTicketForm.province
+    //           )
+    //           this.invoiceForm.city_name = this.getCity(
+    //             this.zzcity,
+    //             this.zzTicketForm.city
+    //           )
+    //           this.invoiceForm.area_name = this.getArea(
+    //             this.zzarea,
+    //             this.zzTicketForm.area
+    //           )
+    //           this.invoiceForm.radio = Number(this.zzTicketForm.radio)
+    //           this.invoiceForm.ticket = false
+    //           this.isShowTicket = true
+    //           this.commitOrders.ticketId = res.data.invoice_id
+    //           this.close()
+    //           this.stepOne = true
+    //           this.stepTwo = false
+    //           this.stepThree = false
+    //         } else {
+    //           this.$message({
+    //             showClose: true,
+    //             type: 'error',
+    //             message: res.msg
+    //           })
+    //         }
+    //         resolve(true)
+    //       })
+    //     })
+    //   }
+    // },
     // 获取发票信息
-    getTicket() {
-      return new Promise((resolve, reject) => {
-        home.getTicket(this.invoiceForm).then(res => {
-          if (res.status === 0) {
-            if (this.invoiceForm.types == 1 || this.invoiceForm.types == 2) {
-              this.ticketForm.saveioc = res.data.type == '1' ? false : true
-              if (this.invoiceForm.types == 1) {
-                this.ticketForm.companyname = ''
-              } else {
-                this.ticketForm.companyname = res.data.invoice_name
-              }
-              this.ticketForm.number = res.data.invoice_number
-              this.ticketForm.name = res.data.consignee
-              this.ticketForm.tel = res.data.phone
-              this.ticketForm.province = res.data.province
-              this.ticketForm.city = res.data.city
-              this.city = this.getRegion(
-                this.province,
-                this.ticketForm.province
-              )
-              this.ticketForm.area = res.data.area
-              this.area = this.getRegion(this.city, this.ticketForm.city)
-              this.ticketForm.address = res.data.address
-              this.ticketForm.radio = Number(res.data.content_type)
-              this.ticketForm.others = res.data.content
-              this.ticketForm.ticket = false
-              this.commitOrders.ticketId = res.data.id
-              if (this.ticketForm.radio == 2) {
-                this.ticketForm.isRadio = false
-              } else {
-                this.ticketForm.isRadio = true
-              }
-            }
-            if (this.invoiceForm.types == 3) {
-              this.ticketForm.saveioc = res.data.type == '1' ? false : true
-              this.zzTicketForm.companyname = res.data.invoice_name
-              this.zzTicketForm.zcadd = res.data.company_address
-              this.zzTicketForm.phones = res.data.company_phone
-              this.zzTicketForm.bank = res.data.bank_name
-              this.zzTicketForm.account = res.data.bank_card
-              this.zzTicketForm.number = res.data.invoice_number
-              this.zzTicketForm.name = res.data.consignee
-              this.zzTicketForm.tel = res.data.phone
-              this.zzTicketForm.province = res.data.province
-              this.zzcity = this.getRegion(
-                this.zzprovince,
-                this.zzTicketForm.province
-              )
-              this.zzTicketForm.city = res.data.city
-              this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city)
-              this.zzTicketForm.area = res.data.area
-              this.zzTicketForm.address = res.data.address
-              this.zzTicketForm.others = res.data.content
-              this.zzTicketForm.radio = Number(res.data.content_type)
-              this.commitOrders.ticketId = res.data.id
-              if (this.zzTicketForm.radio == 2) {
-                this.zzTicketForm.isRadio = false
-              } else {
-                this.zzTicketForm.isRadio = true
-              }
-            }
-            // this.getRegion('', this.ticketForm.province)
-          }
-          resolve(true)
-        })
-      })
-    },
+    // getTicket() {
+    //   return new Promise((resolve, reject) => {
+    //     home.getTicket(this.invoiceForm).then(res => {
+    //       if (res.status === 0) {
+    //         if (this.invoiceForm.types == 1 || this.invoiceForm.types == 2) {
+    //           this.ticketForm.saveioc = res.data.type == '1' ? false : true
+    //           if (this.invoiceForm.types == 1) {
+    //             this.ticketForm.companyname = ''
+    //           } else {
+    //             this.ticketForm.companyname = res.data.invoice_name
+    //           }
+    //           this.ticketForm.number = res.data.invoice_number
+    //           this.ticketForm.name = res.data.consignee
+    //           this.ticketForm.tel = res.data.phone
+    //           this.ticketForm.province = res.data.province
+    //           this.ticketForm.city = res.data.city
+    //           this.city = this.getRegion(
+    //             this.province,
+    //             this.ticketForm.province
+    //           )
+    //           this.ticketForm.area = res.data.area
+    //           this.area = this.getRegion(this.city, this.ticketForm.city)
+    //           this.ticketForm.address = res.data.address
+    //           this.ticketForm.radio = Number(res.data.content_type)
+    //           this.ticketForm.others = res.data.content
+    //           this.ticketForm.ticket = false
+    //           this.commitOrders.ticketId = res.data.id
+    //           if (this.ticketForm.radio == 2) {
+    //             this.ticketForm.isRadio = false
+    //           } else {
+    //             this.ticketForm.isRadio = true
+    //           }
+    //         }
+    //         if (this.invoiceForm.types == 3) {
+    //           this.ticketForm.saveioc = res.data.type == '1' ? false : true
+    //           this.zzTicketForm.companyname = res.data.invoice_name
+    //           this.zzTicketForm.zcadd = res.data.company_address
+    //           this.zzTicketForm.phones = res.data.company_phone
+    //           this.zzTicketForm.bank = res.data.bank_name
+    //           this.zzTicketForm.account = res.data.bank_card
+    //           this.zzTicketForm.number = res.data.invoice_number
+    //           this.zzTicketForm.name = res.data.consignee
+    //           this.zzTicketForm.tel = res.data.phone
+    //           this.zzTicketForm.province = res.data.province
+    //           this.zzcity = this.getRegion(
+    //             this.zzprovince,
+    //             this.zzTicketForm.province
+    //           )
+    //           this.zzTicketForm.city = res.data.city
+    //           this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city)
+    //           this.zzTicketForm.area = res.data.area
+    //           this.zzTicketForm.address = res.data.address
+    //           this.zzTicketForm.others = res.data.content
+    //           this.zzTicketForm.radio = Number(res.data.content_type)
+    //           this.commitOrders.ticketId = res.data.id
+    //           if (this.zzTicketForm.radio == 2) {
+    //             this.zzTicketForm.isRadio = false
+    //           } else {
+    //             this.zzTicketForm.isRadio = true
+    //           }
+    //         }
+    //         // this.getRegion('', this.ticketForm.province)
+    //       }
+    //       resolve(true)
+    //     })
+    //   })
+    // },
     // 切换普通发票下的省
     changeTicketp(v) {
       this.ticketForm.city = ''
@@ -1234,24 +1244,26 @@ export default {
     },
     // 提交订单
     commitOrder() {
-      this.company.id
-        ? (this.commitOrders.companyId = this.company.id)
-        : (this.commitOrders.companyId = '')
-      if (this.person) {
-        this.commitOrders.types = 1
-      } else {
-        this.commitOrders.types = 2
-        if (this.commitOrders.companyId == '') {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: '您还没有绑定单位，请选择个人购买！'
-          })
-          return false
-        }
-      }
+      // this.company.id
+      //   ? (this.commitOrders.companyId = this.company.id)
+      //   : (this.commitOrders.companyId = '')
+      // console.log(this.company.id)
+
+      // if (this.person) {
+      //   this.commitOrders.types = 1
+      // } else {
+      //   this.commitOrders.types = 2
+      //   if (this.commitOrders.companyId == '') {
+      //     this.$message({
+      //       showClose: true,
+      //       type: 'error',
+      //       message: '您还没有绑定单位，请选择个人购买！'
+      //     })
+      //     return false
+      //   }
+      // }
       return new Promise((resolve, reject) => {
-        home.commitOrder(this.commitOrders).then(res => {
+        home.commitOrder().then(res => {
           if (res.status === 0) {
             persistStore.set('cpyid', res.data.id)
             this.$router.push('/shop/wepay')
@@ -1272,7 +1284,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.goodsList(this.addArray).then(res => {
           if (res.status === 0) {
-            this.curriculumLists = res.data.curriculumLists
+            console.log(res)
+
+            this.curriculumLists = res.data.curriculumProjectLists
             this.curriculumSum = res.data.curriculumSum
             this.payNumber = res.data.payNumber
             this.allPrise = res.data.goodsAmount
@@ -1360,6 +1374,7 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
+                console.log(response)
                 persistStore.set('phone', this.companyInfo.phones)
                 this.company.id = response.data.id
                 this.company.contact_person = this.companyInfo.contactperson
