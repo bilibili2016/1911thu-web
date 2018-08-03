@@ -81,12 +81,6 @@ export default {
       this.pagemsg.page = val
       this.newsCurriculumForm.limits = this.pagemsg.pagesize
       this.getNewCourseList()
-      // return new Promise((resolve, reject) => {
-      //   home.getNewInfoList(this.newsInfoForm).then(response => {
-      //     this.pagemsg.total = Number(response.data.pageCount)
-      //     this.newsList = response.data.newsList
-      //   })
-      // })
     },
     // 下拉查看更多
     getMoreData() {

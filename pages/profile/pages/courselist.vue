@@ -48,7 +48,7 @@
 
 <script>
 // 总价 多选
-import { home } from '@/lib/v1_sdk/index'
+import { home, checkedCourse } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -72,7 +72,7 @@ export default {
     },
     curriculumPayApply() {
       return new Promise((resolve, reject) => {
-        home.curriculumPayApply(this.orderForm).then(response => {
+        checkedCourse.curriculumPayApply(this.orderForm).then(response => {
           this.courseList = response.data.orderCurriculumList
           // response.data.curriculumPayApply[this.payIndex].CurriculumPayApplyList
           // this.companyInfo.number =
