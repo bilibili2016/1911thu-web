@@ -52,7 +52,7 @@
               <div class="fl">
                 <div class="bottomImg">
                   <!-- 项目图标 -->
-                  <img v-if="course.type==='2'" class="project-img" :src="projectImg" alt="">
+                  <img v-if="course.type =='2'" class="project-img" :src="projectImg" alt="">
                   <img :src="course.picture" alt="">
                 </div>
 
@@ -60,7 +60,7 @@
               <div class="fl">
                 <h5>{{course.title}}</h5>
                 <h6>{{course.study_time}}学时</h6>
-                <p>讲师：{{course.teacher_name}}</p>
+                <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
               </div>
               <div class="fr">¥{{course.present_price}}</div>
             </div>
@@ -671,8 +671,8 @@ export default {
   },
   mounted() {
     this.goodsList()
-    this.getRegionList()
-    this.getInvoiceDetail()
+    // this.getRegionList()
+    // this.getInvoiceDetail()
     this.resize()
   },
   methods: {
@@ -982,186 +982,186 @@ export default {
       this.addInvoiceInfo()
     },
     // 添加发票信息
-    addInvoiceInfo() {
-      if (this.choose === '1') {
-        if (this.ticketForm.isRadio) {
-          this.ticketForm.others = '培训费'
-        } else {
-          this.ticketForm.others = '其他'
-        }
-        return new Promise((resolve, reject) => {
-          home.addInvoiceInfo(this.ticketForm).then(res => {
-            if (res.status === 0) {
-              this.$message({
-                showClose: true,
-                type: 'success',
-                message: res.msg
-              })
-              this.invoiceForm.choose = this.choose
-              this.invoiceForm.types = this.ticketForm.types
-              this.commitOrders.ticketId = res.data.invoice_id
-              this.invoiceForm.companyname = this.ticketForm.companyname
-              this.invoiceForm.number = this.ticketForm.number
-              this.invoiceForm.address = this.ticketForm.address
-              this.invoiceForm.others = this.ticketForm.others
-              this.invoiceForm.tel = this.ticketForm.tel
-              this.invoiceForm.name = this.ticketForm.name
-              this.invoiceForm.province_name = this.getProvince(
-                this.province,
-                this.ticketForm.province
-              )
-              this.invoiceForm.city_name = this.getCity(
-                this.city,
-                this.ticketForm.city
-              )
-              this.invoiceForm.area_name = this.getArea(
-                this.area,
-                this.ticketForm.area
-              )
-              this.invoiceForm.radio = Number(this.ticketForm.radio)
-              this.invoiceForm.ticket = false
-              this.isShowTicket = true
-              this.commitOrders.ticketId = res.data.invoice_id
-              this.close()
-              if (this.ticketForm.types == 1) {
-                this.invoiceForm.ticket = true
-              }
-            } else {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: res.msg
-              })
-            }
-            resolve(true)
-          })
-        })
-      } else {
-        if (this.zzTicketForm.isRadio) {
-          this.zzTicketForm.others = '培训费'
-        } else {
-          this.zzTicketForm.others = '其他'
-        }
-        return new Promise((resolve, reject) => {
-          home.addInvoiceInfo(this.zzTicketForm).then(res => {
-            if (res.status === 0) {
-              this.$message({
-                showClose: true,
-                type: 'success',
-                message: res.msg
-              })
-              this.invoiceForm.choose = this.choose
-              this.invoiceForm.types = this.zzTicketForm.types
-              this.invoiceForm.companyname = this.zzTicketForm.companyname
-              this.invoiceForm.number = this.zzTicketForm.number
-              this.invoiceForm.zcadd = this.zzTicketForm.zcadd
-              this.invoiceForm.address = this.zzTicketForm.address
-              this.invoiceForm.name = this.zzTicketForm.name
-              this.invoiceForm.tel = this.zzTicketForm.tel
-              this.invoiceForm.others = this.zzTicketForm.others
-              this.invoiceForm.bank = this.zzTicketForm.bank
-              this.invoiceForm.account = this.zzTicketForm.account
-              this.invoiceForm.phones = this.zzTicketForm.phones
-              this.invoiceForm.province_name = this.getProvince(
-                this.zzprovince,
-                this.zzTicketForm.province
-              )
-              this.invoiceForm.city_name = this.getCity(
-                this.zzcity,
-                this.zzTicketForm.city
-              )
-              this.invoiceForm.area_name = this.getArea(
-                this.zzarea,
-                this.zzTicketForm.area
-              )
-              this.invoiceForm.radio = Number(this.zzTicketForm.radio)
-              this.invoiceForm.ticket = false
-              this.isShowTicket = true
-              this.commitOrders.ticketId = res.data.invoice_id
-              this.close()
-              this.stepOne = true
-              this.stepTwo = false
-              this.stepThree = false
-            } else {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: res.msg
-              })
-            }
-            resolve(true)
-          })
-        })
-      }
-    },
+    // addInvoiceInfo() {
+    //   if (this.choose === '1') {
+    //     if (this.ticketForm.isRadio) {
+    //       this.ticketForm.others = '培训费'
+    //     } else {
+    //       this.ticketForm.others = '其他'
+    //     }
+    //     return new Promise((resolve, reject) => {
+    //       home.addInvoiceInfo(this.ticketForm).then(res => {
+    //         if (res.status === 0) {
+    //           this.$message({
+    //             showClose: true,
+    //             type: 'success',
+    //             message: res.msg
+    //           })
+    //           this.invoiceForm.choose = this.choose
+    //           this.invoiceForm.types = this.ticketForm.types
+    //           this.commitOrders.ticketId = res.data.invoice_id
+    //           this.invoiceForm.companyname = this.ticketForm.companyname
+    //           this.invoiceForm.number = this.ticketForm.number
+    //           this.invoiceForm.address = this.ticketForm.address
+    //           this.invoiceForm.others = this.ticketForm.others
+    //           this.invoiceForm.tel = this.ticketForm.tel
+    //           this.invoiceForm.name = this.ticketForm.name
+    //           this.invoiceForm.province_name = this.getProvince(
+    //             this.province,
+    //             this.ticketForm.province
+    //           )
+    //           this.invoiceForm.city_name = this.getCity(
+    //             this.city,
+    //             this.ticketForm.city
+    //           )
+    //           this.invoiceForm.area_name = this.getArea(
+    //             this.area,
+    //             this.ticketForm.area
+    //           )
+    //           this.invoiceForm.radio = Number(this.ticketForm.radio)
+    //           this.invoiceForm.ticket = false
+    //           this.isShowTicket = true
+    //           this.commitOrders.ticketId = res.data.invoice_id
+    //           this.close()
+    //           if (this.ticketForm.types == 1) {
+    //             this.invoiceForm.ticket = true
+    //           }
+    //         } else {
+    //           this.$message({
+    //             showClose: true,
+    //             type: 'error',
+    //             message: res.msg
+    //           })
+    //         }
+    //         resolve(true)
+    //       })
+    //     })
+    //   } else {
+    //     if (this.zzTicketForm.isRadio) {
+    //       this.zzTicketForm.others = '培训费'
+    //     } else {
+    //       this.zzTicketForm.others = '其他'
+    //     }
+    //     return new Promise((resolve, reject) => {
+    //       home.addInvoiceInfo(this.zzTicketForm).then(res => {
+    //         if (res.status === 0) {
+    //           this.$message({
+    //             showClose: true,
+    //             type: 'success',
+    //             message: res.msg
+    //           })
+    //           this.invoiceForm.choose = this.choose
+    //           this.invoiceForm.types = this.zzTicketForm.types
+    //           this.invoiceForm.companyname = this.zzTicketForm.companyname
+    //           this.invoiceForm.number = this.zzTicketForm.number
+    //           this.invoiceForm.zcadd = this.zzTicketForm.zcadd
+    //           this.invoiceForm.address = this.zzTicketForm.address
+    //           this.invoiceForm.name = this.zzTicketForm.name
+    //           this.invoiceForm.tel = this.zzTicketForm.tel
+    //           this.invoiceForm.others = this.zzTicketForm.others
+    //           this.invoiceForm.bank = this.zzTicketForm.bank
+    //           this.invoiceForm.account = this.zzTicketForm.account
+    //           this.invoiceForm.phones = this.zzTicketForm.phones
+    //           this.invoiceForm.province_name = this.getProvince(
+    //             this.zzprovince,
+    //             this.zzTicketForm.province
+    //           )
+    //           this.invoiceForm.city_name = this.getCity(
+    //             this.zzcity,
+    //             this.zzTicketForm.city
+    //           )
+    //           this.invoiceForm.area_name = this.getArea(
+    //             this.zzarea,
+    //             this.zzTicketForm.area
+    //           )
+    //           this.invoiceForm.radio = Number(this.zzTicketForm.radio)
+    //           this.invoiceForm.ticket = false
+    //           this.isShowTicket = true
+    //           this.commitOrders.ticketId = res.data.invoice_id
+    //           this.close()
+    //           this.stepOne = true
+    //           this.stepTwo = false
+    //           this.stepThree = false
+    //         } else {
+    //           this.$message({
+    //             showClose: true,
+    //             type: 'error',
+    //             message: res.msg
+    //           })
+    //         }
+    //         resolve(true)
+    //       })
+    //     })
+    //   }
+    // },
     // 获取发票信息
-    getTicket() {
-      return new Promise((resolve, reject) => {
-        home.getTicket(this.invoiceForm).then(res => {
-          if (res.status === 0) {
-            if (this.invoiceForm.types == 1 || this.invoiceForm.types == 2) {
-              this.ticketForm.saveioc = res.data.type == '1' ? false : true
-              if (this.invoiceForm.types == 1) {
-                this.ticketForm.companyname = ''
-              } else {
-                this.ticketForm.companyname = res.data.invoice_name
-              }
-              this.ticketForm.number = res.data.invoice_number
-              this.ticketForm.name = res.data.consignee
-              this.ticketForm.tel = res.data.phone
-              this.ticketForm.province = res.data.province
-              this.ticketForm.city = res.data.city
-              this.city = this.getRegion(
-                this.province,
-                this.ticketForm.province
-              )
-              this.ticketForm.area = res.data.area
-              this.area = this.getRegion(this.city, this.ticketForm.city)
-              this.ticketForm.address = res.data.address
-              this.ticketForm.radio = Number(res.data.content_type)
-              this.ticketForm.others = res.data.content
-              this.ticketForm.ticket = false
-              this.commitOrders.ticketId = res.data.id
-              if (this.ticketForm.radio == 2) {
-                this.ticketForm.isRadio = false
-              } else {
-                this.ticketForm.isRadio = true
-              }
-            }
-            if (this.invoiceForm.types == 3) {
-              this.ticketForm.saveioc = res.data.type == '1' ? false : true
-              this.zzTicketForm.companyname = res.data.invoice_name
-              this.zzTicketForm.zcadd = res.data.company_address
-              this.zzTicketForm.phones = res.data.company_phone
-              this.zzTicketForm.bank = res.data.bank_name
-              this.zzTicketForm.account = res.data.bank_card
-              this.zzTicketForm.number = res.data.invoice_number
-              this.zzTicketForm.name = res.data.consignee
-              this.zzTicketForm.tel = res.data.phone
-              this.zzTicketForm.province = res.data.province
-              this.zzcity = this.getRegion(
-                this.zzprovince,
-                this.zzTicketForm.province
-              )
-              this.zzTicketForm.city = res.data.city
-              this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city)
-              this.zzTicketForm.area = res.data.area
-              this.zzTicketForm.address = res.data.address
-              this.zzTicketForm.others = res.data.content
-              this.zzTicketForm.radio = Number(res.data.content_type)
-              this.commitOrders.ticketId = res.data.id
-              if (this.zzTicketForm.radio == 2) {
-                this.zzTicketForm.isRadio = false
-              } else {
-                this.zzTicketForm.isRadio = true
-              }
-            }
-            // this.getRegion('', this.ticketForm.province)
-          }
-          resolve(true)
-        })
-      })
-    },
+    // getTicket() {
+    //   return new Promise((resolve, reject) => {
+    //     home.getTicket(this.invoiceForm).then(res => {
+    //       if (res.status === 0) {
+    //         if (this.invoiceForm.types == 1 || this.invoiceForm.types == 2) {
+    //           this.ticketForm.saveioc = res.data.type == '1' ? false : true
+    //           if (this.invoiceForm.types == 1) {
+    //             this.ticketForm.companyname = ''
+    //           } else {
+    //             this.ticketForm.companyname = res.data.invoice_name
+    //           }
+    //           this.ticketForm.number = res.data.invoice_number
+    //           this.ticketForm.name = res.data.consignee
+    //           this.ticketForm.tel = res.data.phone
+    //           this.ticketForm.province = res.data.province
+    //           this.ticketForm.city = res.data.city
+    //           this.city = this.getRegion(
+    //             this.province,
+    //             this.ticketForm.province
+    //           )
+    //           this.ticketForm.area = res.data.area
+    //           this.area = this.getRegion(this.city, this.ticketForm.city)
+    //           this.ticketForm.address = res.data.address
+    //           this.ticketForm.radio = Number(res.data.content_type)
+    //           this.ticketForm.others = res.data.content
+    //           this.ticketForm.ticket = false
+    //           this.commitOrders.ticketId = res.data.id
+    //           if (this.ticketForm.radio == 2) {
+    //             this.ticketForm.isRadio = false
+    //           } else {
+    //             this.ticketForm.isRadio = true
+    //           }
+    //         }
+    //         if (this.invoiceForm.types == 3) {
+    //           this.ticketForm.saveioc = res.data.type == '1' ? false : true
+    //           this.zzTicketForm.companyname = res.data.invoice_name
+    //           this.zzTicketForm.zcadd = res.data.company_address
+    //           this.zzTicketForm.phones = res.data.company_phone
+    //           this.zzTicketForm.bank = res.data.bank_name
+    //           this.zzTicketForm.account = res.data.bank_card
+    //           this.zzTicketForm.number = res.data.invoice_number
+    //           this.zzTicketForm.name = res.data.consignee
+    //           this.zzTicketForm.tel = res.data.phone
+    //           this.zzTicketForm.province = res.data.province
+    //           this.zzcity = this.getRegion(
+    //             this.zzprovince,
+    //             this.zzTicketForm.province
+    //           )
+    //           this.zzTicketForm.city = res.data.city
+    //           this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city)
+    //           this.zzTicketForm.area = res.data.area
+    //           this.zzTicketForm.address = res.data.address
+    //           this.zzTicketForm.others = res.data.content
+    //           this.zzTicketForm.radio = Number(res.data.content_type)
+    //           this.commitOrders.ticketId = res.data.id
+    //           if (this.zzTicketForm.radio == 2) {
+    //             this.zzTicketForm.isRadio = false
+    //           } else {
+    //             this.zzTicketForm.isRadio = true
+    //           }
+    //         }
+    //         // this.getRegion('', this.ticketForm.province)
+    //       }
+    //       resolve(true)
+    //     })
+    //   })
+    // },
     // 切换普通发票下的省
     changeTicketp(v) {
       this.ticketForm.city = ''
@@ -1244,24 +1244,26 @@ export default {
     },
     // 提交订单
     commitOrder() {
-      this.company.id
-        ? (this.commitOrders.companyId = this.company.id)
-        : (this.commitOrders.companyId = '')
-      if (this.person) {
-        this.commitOrders.types = 1
-      } else {
-        this.commitOrders.types = 2
-        if (this.commitOrders.companyId == '') {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: '您还没有绑定单位，请选择个人购买！'
-          })
-          return false
-        }
-      }
+      // this.company.id
+      //   ? (this.commitOrders.companyId = this.company.id)
+      //   : (this.commitOrders.companyId = '')
+      // console.log(this.company.id)
+
+      // if (this.person) {
+      //   this.commitOrders.types = 1
+      // } else {
+      //   this.commitOrders.types = 2
+      //   if (this.commitOrders.companyId == '') {
+      //     this.$message({
+      //       showClose: true,
+      //       type: 'error',
+      //       message: '您还没有绑定单位，请选择个人购买！'
+      //     })
+      //     return false
+      //   }
+      // }
       return new Promise((resolve, reject) => {
-        home.commitOrder(this.commitOrders).then(res => {
+        home.commitOrder().then(res => {
           if (res.status === 0) {
             persistStore.set('cpyid', res.data.id)
             this.$router.push('/shop/wepay')
