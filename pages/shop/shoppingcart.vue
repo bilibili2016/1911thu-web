@@ -137,7 +137,7 @@
 
 <script>
 import { indexOf } from 'lodash'
-import { home, auth } from '@/lib/v1_sdk/index'
+import { shopcart, auth } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 // import { mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
@@ -383,7 +383,7 @@ export default {
       if (this.companyInfo.companyname === '') {
         return false
       } else {
-        home.searchCompanyList(this.companyInfo).then(res => {
+        shopcart.searchCompanyList(this.companyInfo).then(res => {
           for (var i = 0; i < res.data.companyList.length; i++) {
             this.$set(
               res.data.companyList[i],
@@ -424,7 +424,7 @@ export default {
       this.addArray.curriculumcartid = []
       this.projectAddArray.projectcartid = []
 
-      home.shopCartList().then(response => {
+      shopcart.shopCartList().then(response => {
         let body = response.data.curriculumCartList.map(item => {
           // this.addArray.curriculumcartid.push(item.id)      //默认不选中
           // this.arraySum =
@@ -519,25 +519,30 @@ export default {
       let shopIndex = indexOf(this.addArray.curriculumcartid, item.id)
       if (shopIndex >= 0) {
         //未选中
-        home.shopCartremoveChecked({ curriculumcartid: item.id }).then(res => {
-          this.addArray.curriculumcartid.splice(shopIndex, 1)
-          this.arraySum =
-            (Number(this.arraySum) * 10 - Number(item.present_price) * 10) / 10
+        shopcart
+          .shopCartremoveChecked({ curriculumcartid: item.id })
+          .then(res => {
+            this.addArray.curriculumcartid.splice(shopIndex, 1)
+            this.arraySum =
+              (Number(this.arraySum) * 10 - Number(item.present_price) * 10) /
+              10
 
-          if (this.addArray.curriculumcartid.length == this.courseList.length) {
-            this.selectAllCourse = true
-            this.isRest = true
-          } else {
-            this.selectAllCourse = false
+            if (
+              this.addArray.curriculumcartid.length == this.courseList.length
+            ) {
+              this.selectAllCourse = true
+              this.isRest = true
+            } else {
+              this.selectAllCourse = false
 
-            // 单选 时候取消一个取消所有全选
-            this.selectAll = false
-            this.isRest = false
-          }
-        })
+              // 单选 时候取消一个取消所有全选
+              this.selectAll = false
+              this.isRest = false
+            }
+          })
       } else {
         //选中
-        home.shopCartaddChecked({ curriculumcartid: item.id }).then(res => {
+        shopcart.shopCartaddChecked({ curriculumcartid: item.id }).then(res => {
           // 将选中课程id放入到课程数组
           this.addArray.curriculumcartid.push(item.id)
           // 计算价钱
@@ -573,7 +578,7 @@ export default {
       if (shopIndex >= 0) {
         //未选中
 
-        home
+        shopcart
           .shopCartremoveProjectChecked({ projectcartid: item.id })
           .then(res => {
             this.projectAddArray.projectcartid.splice(shopIndex, 1)
@@ -598,31 +603,34 @@ export default {
           })
       } else {
         //选中
-        home.shopCartaddProjectChecked({ projectcartid: item.id }).then(res => {
-          this.projectAddArray.projectcartid.push(item.id)
-          this.projectArraySum =
-            (Number(this.projectArraySum) * 10 +
-              Number(item.present_price) * 10) /
-            10
-          if (
-            this.projectAddArray.projectcartid.length == this.projectList.length
-          ) {
-            this.selectAllProject = true
-            this.isRest = true
-
-            // 当一个一个点单选时候若全部单选选中，顶部全选状态的改变判断
+        shopcart
+          .shopCartaddProjectChecked({ projectcartid: item.id })
+          .then(res => {
+            this.projectAddArray.projectcartid.push(item.id)
+            this.projectArraySum =
+              (Number(this.projectArraySum) * 10 +
+                Number(item.present_price) * 10) /
+              10
             if (
-              this.selectAllCourse === true &&
-              this.selectAllProject === true
+              this.projectAddArray.projectcartid.length ==
+              this.projectList.length
             ) {
-              this.selectAll = true
+              this.selectAllProject = true
               this.isRest = true
+
+              // 当一个一个点单选时候若全部单选选中，顶部全选状态的改变判断
+              if (
+                this.selectAllCourse === true &&
+                this.selectAllProject === true
+              ) {
+                this.selectAll = true
+                this.isRest = true
+              }
+            } else {
+              this.selectAllProject = false
+              this.isRest = false
             }
-          } else {
-            this.selectAllProject = false
-            this.isRest = false
-          }
-        })
+          })
 
         // if (this.selectAllCourse === true && this.selectAllProject === true) {
         //   this.selectAll = true
@@ -656,11 +664,11 @@ export default {
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
           //全选
 
-          home.shopCartaddChecked(this.addArray).then(res => {})
+          shopcart.shopCartaddChecked(this.addArray).then(res => {})
         } else {
           //全不选
 
-          home.shopCartremoveChecked(this.removeArray).then(res => {})
+          shopcart.shopCartremoveChecked(this.removeArray).then(res => {})
         }
 
         // 项目部分 全选
@@ -685,11 +693,13 @@ export default {
         ) {
           //全选
 
-          home.shopCartaddProjectChecked(this.projectAddArray).then(res => {})
+          shopcart
+            .shopCartaddProjectChecked(this.projectAddArray)
+            .then(res => {})
         } else {
           //全不选
 
-          home
+          shopcart
             .shopCartremoveProjectChecked(this.removeProjectArray)
             .then(res => {})
         }
@@ -718,11 +728,11 @@ export default {
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
           //全选
 
-          home.shopCartaddChecked(this.addArray).then(res => {})
+          shopcart.shopCartaddChecked(this.addArray).then(res => {})
         } else {
           //全不选
 
-          home.shopCartremoveChecked(this.removeArray).then(res => {})
+          shopcart.shopCartremoveChecked(this.removeArray).then(res => {})
         }
         // 设置整个全选按钮状态
 
@@ -760,11 +770,13 @@ export default {
         ) {
           //全选
 
-          home.shopCartaddProjectChecked(this.projectAddArray).then(res => {})
+          shopcart
+            .shopCartaddProjectChecked(this.projectAddArray)
+            .then(res => {})
         } else {
           //全不选
 
-          home
+          shopcart
             .shopCartremoveProjectChecked(this.removeProjectArray)
             .then(res => {})
         }
@@ -794,7 +806,7 @@ export default {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
 
       if (this.numForm.number === 1) {
-        home.existCourse().then(res => {
+        shopcart.existCourse().then(res => {
           if (res.data.is_exist_curriculum === 1) {
             this.$confirm(
               '您所购买的商品与已购商品重复，建议您慎重选择，如果您继续购买，该订单将生成专属邀请码，需绑定后学习，绑定后重复商品将进行有效期累加。',
@@ -871,7 +883,7 @@ export default {
     // 发送购物车的购买人数
     changeCartNumber() {
       return new Promise((resolve, reject) => {
-        home.changeCartNumber(this.numForm).then(res => {
+        shopcart.changeCartNumber(this.numForm).then(res => {
           resolve(true)
         })
       })
@@ -880,7 +892,7 @@ export default {
       this.$router.push('/shop/checkedcourse')
       this.$refs[formName].validate(valid => {
         if (valid) {
-          home.addPaySubmit(this.companyInfo).then(response => {
+          shopcart.addPaySubmit(this.companyInfo).then(response => {
             if (response.status === '100100') {
               this.$message({
                 showClose: true,
@@ -904,7 +916,7 @@ export default {
       this.curriculumcartids.cartid = item.id
       this.loding = true
 
-      home.delCourseShopCart(this.curriculumcartids).then(response => {
+      shopcart.delCourseShopCart(this.curriculumcartids).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
@@ -922,7 +934,7 @@ export default {
       this.projectcartids.cartid = item.id
       this.loding = true
 
-      home.delProjectShopCart(this.projectcartids).then(response => {
+      shopcart.delProjectShopCart(this.projectcartids).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
@@ -941,7 +953,7 @@ export default {
       this.deleteAllData.curriculumcartid = this.addArray.curriculumcartid
       this.loding = true
 
-      home.delAllShopCart(this.deleteAllData).then(response => {
+      shopcart.delAllShopCart(this.deleteAllData).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
