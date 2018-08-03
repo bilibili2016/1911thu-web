@@ -16,7 +16,7 @@
         <div v-if="code.type==='1'">课程</div>
         <div v-if="code.type==='2'">项目</div>
         <div v-if="code.type==='3'">课程+项目</div>
-        <div>{{code.create_time}}</div>
+        <div>{{exchangeTime(code.create_time)}}</div>
         <div class="courseList">查看
           <div class="course">
             <span></span>
@@ -36,6 +36,7 @@
 
 <script>
 import { home } from '~/lib/v1_sdk/index'
+import { timestampToTime } from '@/lib/util/helper'
 import { mapGetters } from 'vuex'
 export default {
   props: ['invitationCodeList'],
@@ -48,6 +49,10 @@ export default {
     }
   },
   methods: {
+    // 时间戳转日期格式
+    exchangeTime(time) {
+      return timestampToTime(time)
+    },
     // 检测邀请码内是否包含已绑定的课程
     detection() {
       if (
