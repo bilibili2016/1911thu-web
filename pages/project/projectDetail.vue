@@ -67,8 +67,7 @@
 </template>
 
 <script>
-import { home } from '@/lib/v1_sdk/index'
-import { projectDetail } from '@/lib/v1_sdk/project/projectDetail'
+import { home, projectDetail } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
@@ -157,22 +156,27 @@ export default {
     },
     // 获取项目评论
     getEvaluateList() {
-      home.getEvaluateList(this.evaluateForm).then(res => {
+      projectDetail.getEvaluateList(this.evaluateForm).then(res => {
         this.evaluateData = res.data.evaluateList
         this.evaluateInfo = res.data.totalEvaluateInfo
 
         this.evaluateDataLoad = false
       })
     },
-    // 检测购物车中是否存在学习的课程/项目
+    // 项目加入购物车
     addShoppingCart() {
       this.shoppingForm.cartid = this.project.projectId
       home.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
-          res.data.productsNum
           this.setProductsNum({
-            pn: res.data.productsNum
+            pn: Number(res.data.curriculumNumber)
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
           })
         }
       })
