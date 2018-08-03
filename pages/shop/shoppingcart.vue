@@ -10,58 +10,61 @@
           <span class="price">单价</span>
           <span class="operation">操作</span>
         </div>
-        <!-- 课程全选 checkbox-->
-        <!-- 无课程不显示全选 -->
-        <div class="select-all-course" v-if="this.courseList.length> 0">
-          <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
-        </div>
-        <!-- 课程列表 start -->
-        <div class="tableBody" v-if="!isNoMsg">
-          <div v-for="(course,index) in courseList" :key="index">
-            <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
-            <div class="courseInfo clearfix">
-              <img class="fl" :src="course.picture" @click="goDetail(course)">
-              <div class="fl">
-                <h4 @click="goDetail(course)">{{course.title}}</h4>
-                <h6>{{course.study_time}}学时</h6>
-                <p>讲师：{{course.teacher_name}}</p>
+        <div class="maintable" style="min-height:500px;">
+          <!-- 课程全选 checkbox-->
+          <!-- 无课程不显示全选 -->
+          <div class="select-all-course" v-if="this.courseList.length> 0">
+            <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
+          </div>
+          <!-- 课程列表 start -->
+          <div class="tableBody" v-if="!isNoMsg">
+            <div v-for="(course,index) in courseList" :key="index">
+              <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
+              <div class="courseInfo clearfix">
+                <img class="fl" :src="course.picture" @click="goDetail(course)">
+                <div class="fl">
+                  <h4 @click="goDetail(course)">{{course.title}}</h4>
+                  <h6>{{course.study_time}}学时</h6>
+                  <p>讲师：{{course.teacher_name}}</p>
+                </div>
               </div>
-            </div>
-            <div class="coursePrice">
-              ￥{{course.present_price}}
-            </div>
-            <div class="courseOperation" @click="handleDeleteCourse(course,index)">
-              删除
+              <div class="coursePrice">
+                ￥{{course.present_price}}
+              </div>
+              <div class="courseOperation" @click="handleDeleteCourse(course,index)">
+                删除
+              </div>
             </div>
           </div>
-        </div>
-        <!-- 课程列表 end -->
+          <!-- 课程列表 end -->
 
-        <!-- 项目全选 checkbox-->
-        <div class="select-all-project" v-if="this.projectList.length> 0">
-          <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
-        </div>
-        <!-- 项目列表 start-->
-        <div class="tableBody" v-if="!isNoMsg">
-          <div v-for="(project,index) in projectList" :key="index">
-            <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
-            <div class="courseInfo clearfix">
-              <div class="project-img">
-                <img class="fl" :src="project.picture">
-                <img :src="projectImg" alt="" class="pmsg">
-              </div>
+          <!-- 项目全选 checkbox-->
+          <div class="select-all-project" v-if="this.projectList.length> 0">
+            <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
+          </div>
+          <!-- 项目列表 start-->
+          <div class="tableBody" v-if="!isNoMsg">
 
-              <div class="fl">
-                <h4>{{project.title}}</h4>
-                <h6>{{project.study_time}}学时 </h6>
-                <!-- <p>讲师：{{project.teacher_name}}</p> -->
+            <div v-for="(project,index) in projectList" :key="index">
+              <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
+              <div class="courseInfo clearfix">
+                <div class="project-img">
+                  <img class="fl" :src="project.picture">
+                  <img :src="projectImg" alt="" class="pmsg">
+                </div>
+
+                <div class="fl">
+                  <h4>{{project.title}}</h4>
+                  <h6>{{project.study_time}}学时 </h6>
+                  <!-- <p>讲师：{{project.teacher_name}}</p> -->
+                </div>
               </div>
-            </div>
-            <div class="coursePrice">
-              ￥{{project.present_price}}
-            </div>
-            <div class="courseOperation" @click="handleDeleteProject(project,index)">
-              删除
+              <div class="coursePrice">
+                ￥{{project.present_price}}
+              </div>
+              <div class="courseOperation" @click="handleDeleteProject(project,index)">
+                删除
+              </div>
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@
     margin: 0 auto;
     .table {
       padding: 40px 0 30px;
+
       .tableHeader {
         height: 60px;
         line-height: 60px;
@@ -24,11 +25,12 @@
           margin-left: 140px;
         }
       }
+      // .main-table {
+
       .select-all-course {
         margin-bottom: 20px;
       }
       .tableBody {
-        // min-height: 500px;
         & > div {
           background-color: #fff;
           display: flex;
@@ -102,9 +104,11 @@
           }
         }
       }
+
       .select-all-project {
         margin-bottom: 20px;
       }
+
       .pagination {
         text-align: center;
         height: 30px;
