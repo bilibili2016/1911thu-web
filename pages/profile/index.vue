@@ -236,11 +236,10 @@
                     <span class="lr">数量</span>
                   </div>
                   <div class="bottom">
-                    <div class="bottom-item clearfix" v-for="(course,index) in courseList" :key="index">
+                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="index">
                       <div class="courseInfo clearfix">
                         <div class="bottomImg">
-                          <!-- 项目图标 -->
-                          <img v-if="course.type==='2'" class="project-img" :src="projectImg" alt="">
+
                           <img class="fl" :src="course.picture" alt="">
                         </div>
 
@@ -254,9 +253,30 @@
                         ￥{{course.price}}
                       </div>
                       <div class="courseOperation">
-                        <i class="el-icon-close"></i>{{course.pay_number}}
+                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
                       </div>
                     </div>
+                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="index">
+                      <div class="courseInfo clearfix">
+                        <div class="bottomImg">
+                          <!-- 项目图标 -->
+                          <img class="project-img" :src="projectImg" alt="">
+                          <img class="fl" :src="project.picture" alt="">
+                        </div>
+
+                        <div class="fl">
+                          <h4>{{project.name}}</h4>
+                          <h6>{{project.curriculum_time}}学时</h6>
+                        </div>
+                      </div>
+                      <div class="coursePrice">
+                        ￥{{project.price}}
+                      </div>
+                      <div class="courseOperation">
+                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                      </div>
+                    </div>
+
                   </div>
                   <div class="tableFooter">
                     <p>课程数量：{{courseList.length}}门</p>
@@ -424,6 +444,7 @@ export default {
       codeData: [],
       recordData: [],
       courseList: [],
+      projectList: [],
       companyData: null,
       options: [],
       value: '全部',
@@ -804,6 +825,7 @@ export default {
         home.curriculumPayApply(this.orderForm).then(response => {
           if (response.status === 0) {
             this.courseList = response.data.orderCurriculumList
+            this.projectList = response.data.orderProjectList
             this.orderDetail = response.data.orderDetail
             this.bankInfo = response.data.bankInfo
           }
