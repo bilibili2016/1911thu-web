@@ -323,7 +323,7 @@
         <!-- 课程码管理 -->
         <el-tab-pane class="my-course my-invitation" name="tab-sixth">
           <span slot="label" class="tabList">
-            <i class="icon-code"></i> 课程码管理</span>
+            <i class="icon-code"></i> 兑换码管理</span>
           <el-tabs v-model="courseCodeNames" @tab-click="handleCourseCode">
             <!-- 课程码管理 课程码列表 -->
             <el-tab-pane label="课程码列表" name="first">
