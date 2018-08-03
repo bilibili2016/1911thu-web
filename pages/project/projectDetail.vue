@@ -1,6 +1,6 @@
 <template>
   <div class="projectDetail">
-    <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}">
+    <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}" v-loading="projectDetailLoad">
       <!-- 面包屑 收藏分享 projectDetail.picture-->
       <div class="headerTop clearfix">
         <div class="headerL fl">
@@ -47,19 +47,19 @@
     <div class="proContent">
       <el-tabs v-model="activeName" class="proTab">
         <el-tab-pane label="介绍" name="first">
-          <div class="detail" v-html="projectDetail.content" v-loading="loadMsg"></div>
+          <div class="detail" v-html="projectDetail.content" v-loading="projectDetailLoad"></div>
         </el-tab-pane>
         <el-tab-pane label="线上课程介绍" name="second">
-          <v-procourse :projectCourseData="projectDetail.system"></v-procourse>
+          <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad"></v-procourse>
         </el-tab-pane>
         <el-tab-pane v-if="projectDetail.study_type==='2'" label="线下课程介绍" name="third">
-          <v-procourse :projectCourseData="projectCourseData"></v-procourse>
+          <v-procourse :projectCourseData="projectCourseData" v-loading="underlineLoad"></v-procourse>
         </el-tab-pane>
         <el-tab-pane label="用户评价" name="fourth">
-          <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo"></v-proevaluate>
+          <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo" v-loading="evaluateDataLoad"></v-proevaluate>
         </el-tab-pane>
         <el-tab-pane label="常见问题" name="fifth">
-          <v-proproblems :problems="problems"></v-proproblems>
+          <v-proproblems :problems="problems" v-loading="problemLoad"></v-proproblems>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -68,6 +68,8 @@
 
 <script>
 import { home } from '@/lib/v1_sdk/index'
+import { projectDetail } from '@/lib/v1_sdk/project/projectDetail'
+import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
 import Commonproblems from '@/pages/project/commonproblems'
@@ -79,6 +81,11 @@ export default {
   },
   data() {
     return {
+      projectDetailLoad: true,
+      inlineLoad: true,
+      underlineLoad: true,
+      evaluateDataLoad: true,
+      problemLoad: true,
       rateModel: 3,
       activeName: 'first',
       loadMsg: false,
@@ -136,18 +143,24 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     // 获取项目详情
     getProjectInfo() {
-      home.getProjectInfo(this.project).then(res => {
+      projectDetail.getProjectInfo(this.project).then(res => {
         this.projectDetail = res.data.curriculumProjectDetail
         this.projectDetail.score = Number(this.projectDetail.score)
+        this.projectDetailLoad = false
+        this.inlineLoad = false
+        this.underlineLoad = false
       })
     },
     // 获取项目评论
     getEvaluateList() {
-      home.getEvaluateList(this.evaluateForm).then(res => {
+      projectDetail.getEvaluateList(this.evaluateForm).then(res => {
         this.evaluateData = res.data.evaluateList
         this.evaluateInfo = res.data.totalEvaluateInfo
+
+        this.evaluateDataLoad = false
       })
     },
     // 检测购物车中是否存在学习的课程/项目
@@ -156,6 +169,10 @@ export default {
       home.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
+          res.data.productsNum
+          this.setProductsNum({
+            pn: res.data.productsNum
+          })
         }
       })
     }
@@ -163,6 +180,8 @@ export default {
   mounted() {
     this.getProjectInfo()
     this.getEvaluateList()
+
+    this.problemLoad = false
   }
 }
 </script>

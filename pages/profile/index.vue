@@ -540,8 +540,6 @@ export default {
     },
     // 获取订单详情
     getOrderDetail(msg) {
-      console.log(msg)
-
       if (msg === false) {
         this.showOrderList = false
         this.curriculumPayApply()

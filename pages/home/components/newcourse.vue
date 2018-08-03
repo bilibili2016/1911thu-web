@@ -73,7 +73,7 @@ export default {
           study_time: '18',
           study_number: '20',
           score: 5,
-          link: '/project/partypolicy'
+          link: '/other/partypolicy'
         }
       ],
       cgForm: {
