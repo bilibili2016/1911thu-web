@@ -56,7 +56,7 @@
           <v-procourse :projectCourseData="projectCourseData"></v-procourse>
         </el-tab-pane>
         <el-tab-pane label="用户评价" name="fourth">
-          <v-proevaluate :evaluateData="evaluateData"></v-proevaluate>
+          <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo"></v-proevaluate>
         </el-tab-pane>
         <el-tab-pane label="常见问题" name="fifth">
           <v-proproblems :problems="problems"></v-proproblems>
@@ -90,87 +90,15 @@ export default {
         type: 2,
         cartid: ''
       },
-      projectCourseData: {
-        title: '2门经典线上学课',
-        system: [
-          {
-            title: '公共管理',
-            course: [
-              {
-                curriculum_id: '3',
-                teacher_head_img: require('@/assets/images/pro_headImg.png'),
-                title: '创新驱动发展的现状与趋势',
-                teacher_name: '吴维库',
-                teacher_graduate: '名师学院领域学院院',
-                introduction:
-                  '吴维库，北京师范大学法学院副教授、清华大学法学博士。基本功扎实，英语专业八级熟悉初高中英语重点，深入研究中高考命题动向讲课生动活波，擅长和学生做朋友。'
-              }
-            ]
-          },
-          {
-            title: '时政解读',
-            course: [
-              {
-                curriculum_id: '4',
-                teacher_head_img: require('@/assets/images/pro_headImg.png'),
-                title: '创新驱动发展的现状与趋势',
-                teacher_name: '吴维库',
-                teacher_graduate: '名师学院领域学院院',
-                introduction:
-                  '吴维库，北京师范大学法学院副教授、清华大学法学博士。基本功扎实，英语专业八级熟悉初高中英语重点，深入研究中高考命题动向讲课生动活波，擅长和学生做朋友。'
-              }
-            ]
-          }
-        ]
+      evaluateForm: {
+        pages: '',
+        limits: '',
+        ids: 2,
+        types: 2,
+        isRecommend: 2
       },
-      evaluateData: {
-        grade: 9.8,
-        rate: 5,
-        number: 50,
-        degree: 99,
-        evlList: [
-          {
-            headImg: require('@/assets/images/pro_headImg.png'),
-            evlUser: '小菠萝萝',
-            time: '2018-06-30',
-            rate: 4,
-            evlWord:
-              '基础语法学习到二维数组，希望自己再接再厉，坚持学习，完成基础课程的学习，加油！ 对课程的总结有几点： 1、基础知识点讲解比较细致，易懂，哪怕你只有一点计算机基础，认真听完全可以听懂的。'
-          },
-          {
-            headImg: require('@/assets/images/pro_headImg.png'),
-            evlUser: '小菠萝萝',
-            time: '2018-06-30',
-            rate: 4,
-            evlWord:
-              '基础语法学习到二维数组，希望自己再接再厉，坚持学习，完成基础课程的学习，加油！ 对课程的总结有几点： 1、基础知识点讲解比较细致，易懂，哪怕你只有一点计算机基础，认真听完全可以听懂的。'
-          },
-          {
-            headImg: require('@/assets/images/pro_headImg.png'),
-            evlUser: '小菠萝萝',
-            time: '2018-06-30',
-            rate: 4,
-            evlWord:
-              '基础语法学习到二维数组，希望自己再接再厉，坚持学习，完成基础课程的学习，加油！ 对课程的总结有几点： 1、基础知识点讲解比较细致，易懂，哪怕你只有一点计算机基础，认真听完全可以听懂的。'
-          },
-          {
-            headImg: require('@/assets/images/pro_headImg.png'),
-            evlUser: '小菠萝萝',
-            time: '2018-06-30',
-            rate: 4,
-            evlWord:
-              '基础语法学习到二维数组，希望自己再接再厉，坚持学习，完成基础课程的学习，加油！ 对课程的总结有几点： 1、基础知识点讲解比较细致，易懂，哪怕你只有一点计算机基础，认真听完全可以听懂的。'
-          },
-          {
-            headImg: require('@/assets/images/pro_headImg.png'),
-            evlUser: '小菠萝萝',
-            time: '2018-06-30',
-            rate: 4,
-            evlWord:
-              '基础语法学习到二维数组，希望自己再接再厉，坚持学习，完成基础课程的学习，加油！ 对课程的总结有几点： 1、基础知识点讲解比较细致，易懂，哪怕你只有一点计算机基础，认真听完全可以听懂的。'
-          }
-        ]
-      },
+      evaluateInfo: {},
+      evaluateData: [],
       problems: [
         {
           qustion: '购买课程之后如何加入学员群？',
@@ -215,6 +143,13 @@ export default {
         this.projectDetail.score = Number(this.projectDetail.score)
       })
     },
+    // 获取项目评论
+    getEvaluateList() {
+      home.getEvaluateList(this.evaluateForm).then(res => {
+        this.evaluateData = res.data.evaluateList
+        this.evaluateInfo = res.data.totalEvaluateInfo
+      })
+    },
     // 检测购物车中是否存在学习的课程/项目
     addShoppingCart() {
       this.shoppingForm.cartid = this.project.projectId
@@ -227,6 +162,7 @@ export default {
   },
   mounted() {
     this.getProjectInfo()
+    this.getEvaluateList()
   }
 }
 </script>

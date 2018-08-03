@@ -59,6 +59,7 @@ export default {
       windowHeight: '',
       headerHeight: '',
       bottomPositionHeight: '',
+      restaurants: [],
       checkMsg: false,
       noData: false,
       orderForm: {
@@ -157,7 +158,7 @@ export default {
     addClass() {
       if (document.getElementById('bottomPosition')) {
         var bottomPositionHeight = parseInt(
-          document.getElementById('bottomPosition').offsetTop + 120 //170:tips本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
+          document.getElementById('bottomPosition').offsetTop + 60 //170:tips本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
         )
       }
       this.scroll = parseInt(
@@ -185,17 +186,21 @@ export default {
 
     window.addEventListener('scroll', this.addClass)
   },
-  updated() {
-    this.index++
-    if (this.index === 1 && document.getElementById('bottomBar')) {
-      this.bottomBaroffsetTop =
-        document.getElementById('bottomBar').offsetTop + this.headerHeight + 10
-      console.log(this.bottomBaroffsetTop, 'this.bottomBaroffsetTop')
+  watch: {
+    headerHeight(val, oldval) {
+      this.index++
+      if (this.index === 1 && document.getElementById('bottomBar')) {
+        this.bottomBaroffsetTop =
+          document.getElementById('bottomBar').offsetTop +
+          this.headerHeight +
+          10
+        console.log(this.bottomBaroffsetTop)
 
-      if (this.bottomBaroffsetTop > this.windowHeight) {
-        this.isFixed = true
-      } else {
-        this.isFixed = false
+        if (this.bottomBaroffsetTop > this.windowHeight) {
+          this.isFixed = true
+        } else {
+          this.isFixed = false
+        }
       }
     }
   },
@@ -236,10 +241,8 @@ export default {
     color: #222;
     position: relative;
     &.bottomBarFixed {
-      width: 1100px;
+      width: 896px;
       position: fixed;
-      left: 0;
-      right: 0;
       bottom: 0;
       margin: 0 auto;
     }
