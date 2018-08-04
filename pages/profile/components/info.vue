@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+import { info } from '~/lib/v1_sdk/index'
 import { mapGetters } from 'vuex'
 export default {
   data() {
@@ -30,8 +30,8 @@ export default {
     // 获取我的消息列表
     getInfo() {
       return new Promise((resolve, reject) => {
-        home.userMessage(this.curruntForm).then(res => {
-          this.infoList = ''
+        info.userMessage(this.curruntForm).then(res => {
+          this.infoList = res.data.userMessage
           let noMsg = this.infoList && this.infoList.length > 0 ? false : true
           this.$emit('noMsg', noMsg)
         })
@@ -47,3 +47,12 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+.content {
+  min-height: 100px;
+  height: auto;
+  .text {
+    margin: 20px 0;
+  }
+}
+</style>

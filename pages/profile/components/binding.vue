@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+import { binding } from '~/lib/v1_sdk/index'
 import { timestampToTime } from '@/lib/util/helper'
 import { mapGetters } from 'vuex'
 export default {
@@ -65,7 +65,7 @@ export default {
           message: '请输入正确的邀请码！'
         })
       } else {
-        home.detectionCode(this.bindForm).then(res => {
+        binding.detectionCode(this.bindForm).then(res => {
           // 判断邀请码内是否包含已绑定的课程
           if (res.data.is_exist === 1) {
             this.$confirm(
@@ -94,9 +94,9 @@ export default {
         })
       }
     },
-    // 添加课程
+    // 添加课程 绑定
     doSubmit() {
-      home.bindingCurriculumPrivate(this.bindForm).then(res => {
+      binding.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({
             showClose: true,

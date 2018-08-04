@@ -194,7 +194,7 @@ export default {
           document.getElementById('bottomBar').offsetTop +
           this.headerHeight +
           10
-        console.log(this.bottomBaroffsetTop)
+        // console.log(this.bottomBaroffsetTop)
 
         if (this.bottomBaroffsetTop > this.windowHeight) {
           this.isFixed = true

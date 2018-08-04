@@ -223,7 +223,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { getQueryString } from '@/lib/util/helper'
-import { other, auth, home } from '~/lib/v1_sdk/index'
+import { other, auth, home, shopcart } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { MessageBox } from 'element-ui'
@@ -535,18 +535,7 @@ export default {
     ...mapState('auth', ['token', 'productsNum']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
-  mounted() {
-    let me = this
-    this.getCount()
 
-    this.$bus
-      .$on('loginShow', data => {
-        this.loginCardShow()
-      })
-      .$on('updateCount', () => {
-        me.getCount()
-      })
-  },
   methods: {
     ...mapActions('auth', [
       'signIn',
@@ -658,14 +647,14 @@ export default {
       this.bannerMsg = false
     },
     getCount() {
-      return new Promise((resolve, reject) => {
-        home.shopCartList().then(response => {
-          let body = response.data.curriculumCartList
-          let len = {
-            pn: body.length
-          }
-          this.setProductsNum(len)
-        })
+      shopcart.shopCartList().then(response => {
+        let body =
+          Number(response.data.curriculumCartList.length) +
+          Number(response.data.projectCartList.length)
+        let len = {
+          pn: body
+        }
+        this.setProductsNum(len)
       })
     },
     changeImg(what) {
@@ -1252,6 +1241,16 @@ export default {
     // 判断浏览器的ie型
   },
   mounted() {
+    let me = this
+    this.getCount()
+
+    this.$bus
+      .$on('loginShow', data => {
+        this.loginCardShow()
+      })
+      .$on('updateCount', () => {
+        me.getCount()
+      })
     // this.getCodeList()
     this.$bus.$emit('bannerShow', false)
     this.didForm.dids = '0'

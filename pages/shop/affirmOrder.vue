@@ -1285,7 +1285,7 @@ export default {
       return new Promise((resolve, reject) => {
         affirmOrder.goodsList(this.addArray).then(res => {
           if (res.status === 0) {
-            console.log(res)
+            // console.log(res)
 
             this.curriculumLists = res.data.curriculumProjectLists
             this.curriculumSum = res.data.curriculumSum
@@ -1375,7 +1375,7 @@ export default {
                   message: response.msg
                 })
               } else if (response.status === 0) {
-                console.log(response)
+                // console.log(response)
                 persistStore.set('phone', this.companyInfo.phones)
                 this.company.id = response.data.id
                 this.company.contact_person = this.companyInfo.contactperson

@@ -66,7 +66,7 @@ export default {
       })
     },
     handleClick(item, index) {
-      console.log(item, '这是是item')
+      // console.log(item, '这是是item')
       this.cidform.cids = item.id
       this.cidform.indexs = index
       this.cidform.pids = '0'

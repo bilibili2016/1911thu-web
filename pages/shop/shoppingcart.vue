@@ -463,8 +463,11 @@ export default {
         this.loding = false
 
         this.numForm.number = response.data.number
+        let count =
+          Number(response.data.curriculumCartList.length) +
+          Number(response.data.projectCartList.length)
 
-        this.setProductsNum({ pn: this.courseList.length })
+        this.setProductsNum({ pn: count })
 
         // 判断最初获取课程长度是否相等
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
@@ -1035,7 +1038,7 @@ export default {
         document.getElementById('tableFooter').offsetTop +
         this.headerHeight +
         10
-      console.log(this.tableFooteroffsetTop)
+      // console.log(this.tableFooteroffsetTop)
 
       if (this.tableFooteroffsetTop > this.windowHeight) {
         this.isFixed = true

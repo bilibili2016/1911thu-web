@@ -279,9 +279,7 @@
 
                   </div>
                   <div class="tableFooter">
-                    <p>课程数量：{{courseList.length}} 门</p>
-                    <p>学习人数：{{orderDetail.pay_number}} 人</p>
-                    <p>课程数量：{{courseList.length}}门</p>
+                    <p>课程数量：{{courseList.length+projectList.length}}门</p>
                     <p>学习人数：{{orderDetail.pay_number}}人</p>
                     <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
                   </div>
@@ -1025,7 +1023,7 @@ export default {
         height: 55px;
         line-height: 55px;
         background-color: #fff;
-        color: #222;
+        // color: #222;
         border-bottom: 1px solid #e8d6f7;
         span {
           vertical-align: middle;
@@ -1059,7 +1057,7 @@ export default {
               height: 50px;
               line-height: 50px;
               font-size: 14px;
-              color: #222;
+              // color: #222;
               .info-fr,
               .info-fl {
                 width: 50%;
@@ -1157,7 +1155,7 @@ export default {
             p {
               font-size: 14px;
               text-align: right;
-              color: #222;
+              // color: #222;
               line-height: 30px;
             }
             h4 {
