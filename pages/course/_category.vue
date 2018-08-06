@@ -9,18 +9,19 @@
       <!-- 选择全部 最新和最热 -->
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
 
-      <!-- 非选课的下面 课程列表 -->
+      <!-- 学院筛选页面 课程列表 -->
       <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
         <v-card :data="categoryData" :config="categoryCard"></v-card>
       </div>
-      <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
+      <!-- 选课页面 课程列表 -->
       <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
-        <v-card :data="categoryData" :config="configSevent"></v-card>
+        <v-choose :data="categoryData" :config="configSevent"></v-choose>
       </div>
       <!-- 无课程时候显示 -->
       <div v-else v-loading="loadCourse" class="noMsg">
         <v-nothing></v-nothing>
       </div>
+      <div v-show="categoryData.length !=0" class="allChecked" @click="allChecked">全选</div>
     </div>
     <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
   </div>
@@ -28,6 +29,7 @@
 
 <script>
 import CustomCard from '@/components/card/Card.vue'
+import ChooseCard from '@/components/common/Card.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -39,6 +41,7 @@ import Page from '@/components/common/Pagination'
 export default {
   components: {
     'v-card': CustomCard,
+    'v-choose': ChooseCard,
     'v-nothing': SearchNothing,
     'v-list': List,
     'v-filter': Filter,
@@ -104,113 +107,26 @@ export default {
         card: 'home',
         types: 'buy'
       },
-      xid: '0'
+      xid: '0',
+      // 我要选课
+      curriculumListForm: {
+        categoryIda: null,
+        categoryIdb: null,
+        sortBy: 1,
+        pages: 1,
+        limits: 8
+      },
+      allCheckedId: [],
+      idsForm: {
+        cartid: [],
+        type: 1
+      },
+      changeData: []
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid']),
-    selectCid(item, index) {
-      this.categoryForm.pages = 1
-      this.pidBg = 0
-      this.cidBg = item.id
-      this.pidData = this.cidData[index]
-      this.cidform.cids = item.id
-      this.cidform.pids = '0'
-      this.cidform.indexs = index
-      this.setCid(this.cidform)
-      if (this.type === '0') {
-        this.getcourseList()
-      } else {
-        this.getNewProjectList()
-      }
-    },
-    selectPid(item, index) {
-      this.categoryForm.pages = 1
-      this.pidBg = item.id
-      this.cidform.pids = item.id
-      this.cidform.cids = this.cid
-      this.cidform.indexs = this.cindex
-      this.setCid(this.cidform)
-      if (this.type === '0') {
-        this.getcourseList()
-      } else {
-        this.getNewProjectList()
-      }
-    },
-
-    selectAllCid() {
-      this.categoryForm.pages = 1
-      this.cidform.cids = '0'
-      this.cidform.indexs = 0
-      this.cidform.pids = '0'
-      this.cidBg = 0
-      this.pidBg = 0
-
-      this.pidData = this.cidData[0]
-      this.setCid(this.cidform)
-      if (this.type === '0') {
-        this.getcourseList()
-      } else {
-        this.getNewProjectList()
-      }
-    },
-    selectAllPid() {
-      this.categoryForm.pages = 1
-      this.cidform.pids = '0'
-      this.pidBg = 0
-
-      this.setCid(this.cidform)
-      if (this.type === '0') {
-        this.getcourseList()
-      } else {
-        this.getNewProjectList()
-      }
-    },
-    selectActiveTab(item) {
-      item.name === 'second'
-        ? (this.categoryForm.sortBy = 1)
-        : (this.categoryForm.sortBy = 2)
-      if (this.type === '0') {
-        this.getcourseList()
-      } else {
-        this.getNewProjectList()
-      }
-    },
-
-    // 获取课程列表
-    getcourseList() {
-      this.loadCourse = true
-      this.categoryForm.cids = this.cid
-      this.categoryForm.pids = this.pid
-
-      home.curriculumListNew(this.categoryForm).then(res => {
-        this.categoryData = res.data.curriculumList
-        this.pagemsg.total = res.data.pageCount
-        // console.log(this.pagemsg.total)
-        this.loadCourse = false
-      })
-    },
-    // 获取项目列表
-    getNewProjectList() {
-      this.loadCourse = true
-      this.categoryForm.cids = this.cid
-      this.categoryForm.pids = this.pid
-      home.curriculumProjectList(this.categoryForm).then(res => {
-        this.categoryData = res.data.curriculumProjectList
-        this.pagemsg.total = res.data.pageCount
-        // console.log(this.pagemsg.total)
-
-        this.loadCourse = false
-      })
-    },
-    // 获取竖直分类列表
-    getClassicsList() {
-      home.getClassicsList(this.classList).then(response => {
-        this.classList = response.data.categoryList
-        // resolve(true)
-      })
-    },
-    // 顶部 列表数据    ---  非 最新项目
+    ...mapActions('auth', ['setCid', 'setProductsNum']),
+    // 获取顶部分类列表数据list    ---  非 最新项目
     getCidPidList() {
       this.loadList = true
       home.childCategoryList().then(res => {
@@ -232,7 +148,7 @@ export default {
         this.loadBanner = false
       })
     },
-    // 顶部列表数据 ---- 最新  项目
+    // 获取顶部分类列表数据list ---- 最新 项目
     getNewProject() {
       this.loadList = true
       home.getNewProject().then(res => {
@@ -254,7 +170,153 @@ export default {
         }
       })
     },
-    // 点击 分页分页事件
+    // 下面 card list 列表  --- 学院点进去
+    getcourseList() {
+      this.loadCourse = true
+      this.categoryForm.cids = this.cid
+      this.categoryForm.pids = this.pid
+
+      home.curriculumListNew(this.categoryForm).then(res => {
+        this.categoryData = res.data.curriculumList
+        this.pagemsg.total = res.data.pageCount
+        // console.log(this.pagemsg.total)
+        this.loadCourse = false
+      })
+    },
+    // 下面 card list 列表   --- 项目 查看更多 点进去
+    getNewProjectList() {
+      this.loadCourse = true
+      this.categoryForm.cids = this.cid
+      this.categoryForm.pids = this.pid
+      home.curriculumProjectList(this.categoryForm).then(res => {
+        this.categoryData = res.data.curriculumProjectList
+        this.pagemsg.total = res.data.pageCount
+        // console.log(this.pagemsg.total)
+
+        this.loadCourse = false
+      })
+    },
+    // 下面 card list 列表  --- 我要选课页面
+    curriculumList() {
+      console.log('进我要选课了')
+      this.loadCourse = true
+      this.curriculumListForm.categoryIda = window.location.pathname.split(
+        '/'
+      )[2]
+      this.curriculumListForm.categoryIdb = this.pid
+      home.curriculumList(this.curriculumListForm).then(response => {
+        this.categoryData = response.data.curriculumList
+        this.pagemsg.total = response.data.pageCount
+
+        for (let item of response.data.curriculumList) {
+          this.$set(item, 'checkmsg', false)
+        }
+
+        this.loadCourse = false
+        var that = this
+        for (let item of response.data.curriculumList) {
+          this.allCheckedId.push(item.id)
+        }
+      })
+    },
+    // 我要选课页面 点击全选
+    allChecked() {
+      this.idsForm.cartid = this.allCheckedId
+      this.changeData = this.allCheckedId
+
+      return new Promise((resolve, reject) => {
+        home.addShopCart(this.idsForm).then(response => {
+          if (response.status === 0) {
+            this.categoryData.forEach(function(v, i, arr) {
+              v.is_checked = true
+            })
+            this.setProductsNum({
+              //设置购物车数量
+              pn: response.data.curriculumNumber
+            })
+          } else {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: response.msg
+            })
+          }
+          resolve(true)
+        })
+      })
+    },
+    // 点击分类列表    学院
+    selectCid(item, index) {
+      this.categoryForm.pages = 1
+      this.pidBg = 0
+      this.cidBg = item.id
+      this.pidData = this.cidData[index]
+      this.cidform.cids = item.id
+      this.cidform.pids = '0'
+      this.cidform.indexs = index
+      this.setCid(this.cidform)
+      if (this.type === '0') {
+        this.getcourseList()
+      } else {
+        this.getNewProjectList()
+      }
+    },
+    // 点击分类列表  分类
+    selectPid(item, index) {
+      this.categoryForm.pages = 1
+      this.pidBg = item.id
+      this.cidform.pids = item.id
+      this.cidform.cids = this.cid
+      this.cidform.indexs = this.cindex
+      this.setCid(this.cidform)
+      if (this.type === '0') {
+        this.getcourseList()
+      } else {
+        this.getNewProjectList()
+      }
+    },
+    // 点击分类列表  学院 全部
+    selectAllCid() {
+      this.categoryForm.pages = 1
+      this.cidform.cids = '0'
+      this.cidform.indexs = 0
+      this.cidform.pids = '0'
+      this.cidBg = 0
+      this.pidBg = 0
+
+      this.pidData = this.cidData[0]
+      this.setCid(this.cidform)
+      if (this.type === '0') {
+        this.getcourseList()
+      } else {
+        this.getNewProjectList()
+      }
+    },
+    // 点击分类列表 分类 全部
+    selectAllPid() {
+      this.categoryForm.pages = 1
+      this.cidform.pids = '0'
+      this.pidBg = 0
+
+      this.setCid(this.cidform)
+      if (this.type === '0') {
+        this.getcourseList()
+      } else {
+        this.getNewProjectList()
+      }
+    },
+    // 点击 最新最热 筛选
+    selectActiveTab(item) {
+      item.name === 'second'
+        ? (this.categoryForm.sortBy = 1)
+        : (this.categoryForm.sortBy = 2)
+      if (this.type === '0') {
+        this.getcourseList()
+      } else {
+        this.getNewProjectList()
+      }
+    },
+    // 点击 底部分页分页事件
     handlePageChange(val) {
       this.loadCourse = true
       this.pagemsg.page = val
@@ -267,19 +329,30 @@ export default {
     }
   },
   mounted() {
+    // 获取学院的id
     this.categoryId = window.location.pathname.split('/')[2]
-
+    // 获取是学院还是项目
     this.type = window.location.search.split('=')[1].split('&')[0]
+    // 获取是 选课还是 学院
     this.xid = window.location.search.split('=')[2]
-    console.log(window.location.search.split('=')[1], '这是type的值')
-    // 非最新项目
+    // 点击顶部学院 或者 点击我要选课 页面
     if (this.type === '0') {
-      this.cidBg = window.location.pathname.split('/')[2]
-      this.pidBg = this.pid
-      this.getCidPidList()
-      this.getcourseList()
+      // 点击顶部学院
+      if (this.xid === '0') {
+        this.cidBg = window.location.pathname.split('/')[2]
+        this.pidBg = this.pid
+        this.getCidPidList()
+        this.getcourseList()
+      } else {
+        // 点击我要选课逻辑
+        this.cidBg = window.location.pathname.split('/')[2]
+        this.pidBg = this.pid
+        this.getCidPidList()
+        // 我要选课 card list
+        this.curriculumList()
+      }
     } else {
-      // 最新项目逻辑
+      // 点击最新项目 查看更多 页面
       this.cidBg = window.location.pathname.split('/')[2]
       //判断是否为最新项目
       if (this.categoryId === '0') {
