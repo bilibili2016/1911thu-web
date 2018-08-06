@@ -18,10 +18,10 @@
               </div>
             </div>
           </div>
-          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
+          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+'px' :courseList.orderCurriculumList.length*140+'px'}">
             <p>¥{{courseList.order_amount}}</p>
           </div>
-          <div class="number height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
+          <div class="number height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+'px' :courseList.orderCurriculumList.length*140+'px'}">
             <div>
               <p>1张发票</p>
               <p>含3个订单</p>
@@ -30,7 +30,7 @@
               <i class="el-icon-arrow-right"></i>
             </div>
           </div>
-          <div class="status height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
+          <div class="status height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+'px' :courseList.orderCurriculumList.length*140+'px'}">
             <div>已发出
               <i class="el-icon-arrow-right"></i>
             </div>
