@@ -4,7 +4,7 @@
     <div class="orderList" v-for="(courseList, index ) in orderData" :key="index">
       <div class="topBar clearfix">
         <span class="fl">订单：{{courseList.order_sn}}</span>
-        <span class="fr">{{timestampToTime(courseList.create_time)}}</span>
+        <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
       </div>
       <div class="list">
         <div class="content">
@@ -12,7 +12,7 @@
             <div class="courseOne" v-for="(course,index) in courseList.orderCurriculumList" :key="index" v-if="index<3">
               <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
               <div class="fl">
-                <h4 @click="goCourseInfo(course,index)">{{course.title}}</h4>
+                <h4 @click="goCourseInfo(course,index)">{{course.order_title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
@@ -43,8 +43,9 @@
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+import { home, tickethistory } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
+import { timestampToTime } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['orderData'],
@@ -118,25 +119,9 @@ export default {
       })
     },
     handleSelectChange() {},
-    timestampToTime(timestamp) {
-      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      let Y = date.getFullYear() + '-'
-      let M =
-        (date.getMonth() + 1 < 10
-          ? '0' + (date.getMonth() + 1)
-          : date.getMonth() + 1) + '-'
-      let D =
-        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-      let h =
-        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
-        ':'
-      let m =
-        (date.getMinutes() * 1 < 10
-          ? '0' + date.getMinutes()
-          : date.getMinutes()) + ':'
-      let s =
-        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
-      return Y + M + D + h + m + s
+    // 时间戳转日期格式
+    exchangeTime(time) {
+      return timestampToTime(time)
     },
     goLink(item) {
       this.gidForm.gids = item
