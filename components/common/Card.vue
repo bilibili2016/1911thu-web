@@ -714,6 +714,7 @@ export default {
       // this.$router.push('/course/coursedetail')
     },
     selCheckboxChange(item, index) {
+      console.log(item, '这是item')
       let len = this.productsNum
       if (item.is_checked === false) {
         item.is_checked = false

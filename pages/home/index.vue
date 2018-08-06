@@ -2,7 +2,7 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-tab :items="items" :classify="classify" :courses="courses"></v-tab>
+      <v-carousel :items="items" :classify="classify" :courses="courses"></v-carousel>
       <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
       <v-newp :newData="newData" :titleTwo="titleEight" :linkone="linkone"></v-newp>
@@ -14,7 +14,6 @@
       <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
       <!-- 名师智库 -->
       <v-famous :teachers="teachers" :titleFore="titleFore" :linkSeven="linkSeven"></v-famous>
-      <!-- <v-teacherresource :teacherResource="teacherResource" :titleSix="titleSix"></v-teacherresource> -->
 
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
@@ -30,35 +29,26 @@
 </template>
 
 <script>
-import teacherResource from '@/pages/home/components/teacherResource.vue'
-import Tab from '@/pages/home/components/tab.vue'
-import Project from '@/pages/home/components/project.vue'
-import Free from '@/pages/home/components/free.vue'
-import New from '@/pages/home/components/new.vue'
+import Carousel from '@/pages/home/components/carousel.vue'
 import Newp from '@/pages/home/components/newcourse.vue'
+import New from '@/pages/home/components/new.vue'
 import Classic from '@/pages/home/components/classic.vue'
+import Free from '@/pages/home/components/free.vue'
 import Famous from '@/pages/home/components/famous.vue'
-import Evaluate from '@/pages/home/components/evaluate.vue'
 import Info from '@/pages/home/components/info.vue'
-import Partner from '@/pages/home/components/partner.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
-import { store as persistStore } from '~/lib/core/store'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { home, newlesson } from '~/lib/v1_sdk/index'
 export default {
   components: {
-    'v-partner': Partner,
-    'v-info': Info,
-    'v-evaluate': Evaluate,
-    'v-famous': Famous,
-    'v-classic': Classic,
-    'v-free': Free,
+    'v-carousel': Carousel,
     'v-newp': Newp,
     'v-new': New,
-    'v-tab': Tab,
-    'v-project': Project,
-    'v-backtotop': BackToTop,
-    'v-teacherresource': teacherResource
+    'v-classic': Classic,
+    'v-free': Free,
+    'v-famous': Famous,
+    'v-info': Info,
+    'v-backtotop': BackToTop
   },
   data() {
     return {
@@ -109,29 +99,7 @@ export default {
       ding: {
         card_type: 'ding'
       },
-      dingData: [
-        // {
-        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
-        //   title: '面授、线下活动',
-        //   content:
-        //     '中共中央办公厅国务院办公厅印发关于党政机关停止新建楼堂馆所和清理办楼堂馆所和清理办...',
-        //   link: '/other/faceteach'
-        // },
-        // {
-        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
-        //   title: '单位课程定制',
-        //   content:
-        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-        //   link: '/other/enterprisecustom'
-        // },
-        // {
-        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
-        //   title: '学位项目',
-        //   content:
-        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-        //   link: '/other/degree'
-        // }
-      ],
+      dingData: [],
       numSrc: require('@/assets/images/home_num.png'),
       value1: 4,
       imgList: [],
@@ -212,22 +180,22 @@ export default {
   },
   created() {},
   computed: {
-    ...mapState('auth', ['did'])
+    ...mapState('auth', [])
   },
   methods: {
     ...mapActions('auth', ['signOut']),
     async getAll() {
       await Promise.all([
         this.getBanner(),
-        this.getClassifyList(),
+        // this.getClassifyList(),
         this.getFreeCourseList(),
         this.getNewCourseList(),
         this.getClassicCourseList(),
         this.getTeacherList(),
         // this.getEvaluateList(),
-        this.getNewsInfoList(),
-        this.getPartnerList(),
-        this.getPointList()
+        this.getNewsInfoList()
+        // this.getPartnerList(),
+        // this.getPointList()
       ])
     },
     // 获取banner
@@ -300,10 +268,7 @@ export default {
       }
     })
 
-    if (this.did === '0') {
-      this.getAll()
-    } else {
-    }
+    this.getAll()
     this.$bus.$on('reLogin', data => {
       this.getAll()
     })
