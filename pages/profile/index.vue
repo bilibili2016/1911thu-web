@@ -346,7 +346,7 @@
           <el-card v-if="showOrderList">
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="按订单开发票" name="orderFirst">
-                <v-tkorder v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-tkorder>
+                <v-tkorder v-if="readyOrderData  && readyOrderData.length>0" :orderData="readyOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-tkorder>
                 <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -355,7 +355,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane name="orderSecond" label="开票历史">
-                <v-tkhistory v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-tkhistory>
+                <v-tkhistory v-if="historyOrderData && historyOrderData.length>0" :orderData="historyOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-tkhistory>
                 <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -403,7 +403,13 @@ import Conversion from '@/pages/profile/components/conversion'
 import Bind from '@/pages/profile/components/binding'
 import TicketOrder from '@/pages/profile/pages/ticketOrder'
 import TicketHistory from '@/pages/profile/pages/ticketHistory'
-import { other, home, checkedCourse } from '~/lib/v1_sdk/index'
+import {
+  other,
+  home,
+  checkedCourse,
+  conversion,
+  tickethistory
+} from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -486,6 +492,7 @@ export default {
       unfinishedOrderData: [],
       readyOrderData: [],
       invalidOrderData: [],
+      historyOrderData: [],
       codeData: [],
       recordData: [],
       courseList: [],
@@ -518,6 +525,7 @@ export default {
       unfinishedOrderLoad: true,
       readyOrderLoad: true,
       invalidOrderLoad: true,
+      historyOrderLoad: true,
       overTimeData: [],
       centerDialogVisible: false,
       invitationCodeList: []
@@ -796,6 +804,11 @@ export default {
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.readyOrderData = response.data.orderList
+          this.readyOrderData.forEach(v => {
+            v.checked = false
+          })
+          console.log(this.readyOrderData)
+
           this.readyOrderLoad = false
           resolve(true)
         })
@@ -808,12 +821,16 @@ export default {
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
-          console.log(this.invalidOrderData)
-          // console.log(this.invalidOrderData)
-
           this.invalidOrderLoad = false
           resolve(true)
         })
+      })
+    },
+    // 开票历史
+    getHistoryOrderData() {
+      home.tickethistory(this.orderForm).then(response => {
+        this.historyOrderData = response.data.invoiceList
+        this.historyOrderLoad = false
       })
     },
     // 获取专属邀请码列表
@@ -828,7 +845,7 @@ export default {
     // 专属邀请码 邀请记录
     getRecordList() {
       return new Promise((resolve, reject) => {
-        home.getRecordList(this.codeListForm).then(response => {
+        conversion.getRecordList(this.codeListForm).then(response => {
           this.recordData = response.data.usedInvitationCodeList
           var that = this
           this.recordData.forEach(function(v, i, arr) {
@@ -869,7 +886,7 @@ export default {
     curriculumPayApply() {
       this.orderForm.ids = persistStore.get('order')
       return new Promise((resolve, reject) => {
-        checkedCourse.curriculumPayApply(this.orderForm).then(response => {
+        home.curriculumPayApply(this.orderForm).then(response => {
           if (response.status === 0) {
             this.courseList = response.data.orderCurriculumList
             this.projectList = response.data.orderProjectList
