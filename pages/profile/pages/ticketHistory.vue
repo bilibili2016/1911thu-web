@@ -1,27 +1,27 @@
   <template>
   <!-- 开发票历史 -->
   <div class="tickeHietory">
-    <div class="orderList" v-for="(courseList, index ) in orderData" :key="index">
+    <div class="orderList">
       <div class="topBar clearfix">
-        <span class="fl">订单：{{courseList.order_sn}}</span>
-        <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
+        <span class="fl"></span>
+        <!-- <span class="fr">{{exchangeTime(ticket.create_time)}}</span> -->
       </div>
       <div class="list">
         <div class="content">
           <div class="course">
-            <div class="courseOne" v-for="(course,index) in courseList.orderCurriculumList" :key="index" v-if="index<3">
-              <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
+            <div class="courseOne" v-for="(ticket, index ) in orderData" :key="index">
+              <img @click="goCourseInfo(ticket,index)" class="fl" :src="ticket.picture" alt="">
               <div class="fl">
-                <h4 @click="goCourseInfo(course,index)">{{course.order_title}}</h4>
-                <h6>{{course.curriculum_time}}学时</h6>
-                <p>讲师：{{course.teacher_name}}</p>
+                <h4 @click="goCourseInfo(ticket,index)">{{ticket.order_title}}</h4>
+                <h6>{{ticket.curriculum_time}}学时</h6>
+                <p>讲师：{{ticket.teacher_name}}</p>
               </div>
             </div>
           </div>
-          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+'px' :courseList.orderCurriculumList.length*140+'px'}">
+          <div class="price height">
             <p>¥{{courseList.order_amount}}</p>
           </div>
-          <div class="number height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+'px' :courseList.orderCurriculumList.length*140+'px'}">
+          <div class="number height">
             <div>
               <p>1张发票</p>
               <p>含3个订单</p>
@@ -30,7 +30,7 @@
               <i class="el-icon-arrow-right"></i>
             </div>
           </div>
-          <div class="status height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+'px' :courseList.orderCurriculumList.length*140+'px'}">
+          <div class="status height" :style="{height:courseList.invoiceList.length > 3? 3*140+'px' :courseList.invoiceList.length*140+'px'}">
             <div>已发出
               <i class="el-icon-arrow-right"></i>
             </div>

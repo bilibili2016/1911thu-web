@@ -8,6 +8,7 @@
       <div class="list">
         <div class="content">
           <div class="course">
+            <!-- 课程列表 -->
             <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
               <div class="courseImg">
                 <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
@@ -18,6 +19,7 @@
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
+            <!-- 项目列表 -->
             <!-- 课程项目显示3个-->
             <div class="courseOne" v-if="courseList.orderProjectList.length && index<3 &&courseList.orderCurriculumList.length+courseList.orderProjectList.length<=3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
               <div class="courseImg">

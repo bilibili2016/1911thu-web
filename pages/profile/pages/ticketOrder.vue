@@ -9,10 +9,12 @@
       <div class="list">
         <div class="content">
           <div class="check">
-            <el-checkbox v-model="courseList.checked" @change="handleSelectChange(1,courseList,index)"></el-checkbox>
+            <!-- <el-checkbox v-model="courseList.checked" @change="handleSelectChange(1,courseList,index)"></el-checkbox> -->
+            <el-checkbox @change="handleSelectChange(1,courseList,index)"></el-checkbox>
           </div>
           <div class="course">
-            <div class="courseOne" v-for="(course,index) in courseList.orderCurriculumList" :key="index" v-if="index<3">
+            <!-- 课程列表 -->
+            <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
               <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
               <div class="fl">
                 <h4 @click="goCourseInfo(course,index)">{{course.title}}</h4>
@@ -20,9 +22,26 @@
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
             </div>
+            <!-- 项目列表 -->
+            <div class="courseOne" v-if="courseList.orderProjectList.length && index<3 && courseList.orderCurriculumList.length+courseList.orderProjectList.length<=3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
+              <div class="courseImg">
+                <!-- 项目图标 -->
+                <img class="project-img" src="@/assets/images/p4.png" alt="">
+                <img @click="goCourseInfo(project,index)" class="fl" :src="project.picture" alt="">
+              </div>
+              <div class="fl">
+                <h4 @click="goCourseInfo(project,index)">{{project.title}}</h4>
+                <h6>{{project.curriculum_time}}学时</h6>
+              </div>
+            </div>
+            <div class="more" :data="courseList.orderCurriculumList.length+courseList.orderProjectList.length" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList, index)">
+              查看更多课程>
+            </div>
           </div>
-          <div class="price height" :style="{height:courseList.orderCurriculumList.length > 3? 3*140+60+'px' :courseList.orderCurriculumList.length*140+'px'}">
+
+          <div class="price height" :style="{height:(courseList.orderCurriculumList.length+courseList.orderProjectList.length) > 3? 3*140+60+'px' :(courseList.orderCurriculumList.length+courseList.orderProjectList.length)*140+'px'}">
             <p>¥{{courseList.order_amount}}</p>
+
           </div>
         </div>
       </div>
@@ -125,7 +144,7 @@
           </div>
           <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
           <div class="operation">
-            <span @click="addInvoiceBefor">保存</span>
+            <span class="a" @click="addInvoiceBefor">保存</span>
             <span @click="close">取消</span>
           </div>
         </div>
@@ -316,7 +335,7 @@
               </p>
             </div>
             <div class="operation">
-              <span @click="addZZTicketBefore">保存</span>
+              <span class="2" @click="addZZTicketBefore">保存</span>
               <span @click="nextStep('stepTwo')">返回</span>
             </div>
           </div>
@@ -337,6 +356,7 @@ export default {
   props: ['orderData'],
   data() {
     return {
+      singleCheck: '',
       index: 0,
       checkedNum: 1,
       isFixed: false,
@@ -357,6 +377,7 @@ export default {
       kidForm: {
         kid: ''
       },
+      orderID: [],
       gidForm: { gids: null },
       choose: '1',
       commitOrders: {},
@@ -499,13 +520,28 @@ export default {
       persistStore.set('curriculumId', item.curriculum_id)
       this.$router.push('/course/coursedetail')
     },
+    selectPayApply(item, index) {
+      persistStore.set('order', item.id)
+      this.$emit('goTicketDetail', false)
+    },
     // 选择要开发票的订单
     handleSelectChange(type, item, index) {
+      console.log(item.checked)
       if (type == 1) {
         if (item.checked) {
+          let itemIndex = this.checkedArr.indexOf(item.id)
           item.checked = false
+          this.checkedArr.splice(itemIndex, 1)
         } else {
+          this.checkedArr.push(item.id)
           item.checked = true
+        }
+        console.log(this.checkedArr)
+
+        if (this.checkedArr.length == this.orderData.length) {
+          this.checkMsg = true
+        } else {
+          this.checkMsg = false
         }
       } else {
         this.selectAll()
@@ -928,6 +964,7 @@ export default {
         } else {
           this.ticketForm.others = '其他'
         }
+        this.ticketForm.orderID = this.checkedArr
         return new Promise((resolve, reject) => {
           home.addInvoiceInfo(this.ticketForm).then(res => {
             if (res.status === 0) {
@@ -1124,6 +1161,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.orderData)
+
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.headerHeight = document.getElementsByClassName(
@@ -1131,7 +1170,7 @@ export default {
     )[0].offsetHeight
     this.windowHeight = document.documentElement.clientHeight
 
-    window.addEventListener('scroll', this.addClass)
+    // window.addEventListener('scroll', this.addClass)
     this.getRegionList()
   },
   watch: {
@@ -1171,21 +1210,21 @@ export default {
       if (val) {
         persistStore.set('address', val)
       }
-    },
-    headerHeight(val, oldval) {
-      this.index++
-      if (this.index === 1 && document.getElementById('bottomBar')) {
-        this.bottomBaroffsetTop =
-          document.getElementById('bottomBar').offsetTop +
-          this.headerHeight +
-          10
-        if (this.bottomBaroffsetTop > this.windowHeight) {
-          this.isFixed = true
-        } else {
-          this.isFixed = false
-        }
-      }
     }
+    // headerHeight(val, oldval) {
+    //   this.index++
+    //   if (this.index === 1 && document.getElementById('bottomBar')) {
+    //     this.bottomBaroffsetTop =
+    //       document.getElementById('bottomBar').offsetTop +
+    //       this.headerHeight +
+    //       10
+    //     if (this.bottomBaroffsetTop > this.windowHeight) {
+    //       this.isFixed = true
+    //     } else {
+    //       this.isFixed = false
+    //     }
+    //   }
+    // }
   },
   deactivated() {
     window.removeEventListener('scroll', this.addClass)
