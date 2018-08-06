@@ -48,11 +48,5 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.content {
-  min-height: 100px;
-  height: auto;
-  .text {
-    margin: 20px 0;
-  }
-}
+@import '~assets/style/profile/info.scss';
 </style>
