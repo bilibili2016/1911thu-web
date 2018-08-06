@@ -6,12 +6,18 @@
     </div>
 
     <div class="center category-style">
+      <!-- 选择全部 最新和最热 -->
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
 
-      <div class="carlist" v-if="categoryData.length" v-loading="loadCourse">
-
+      <!-- 非选课的下面 课程列表 -->
+      <!-- <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
         <v-card :data="categoryData" :config="categoryCard"></v-card>
+      </div> -->
+      <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
+      <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
+        <v-card :data="categoryData" :config="configSevent"></v-card>
       </div>
+      <!-- 无课程时候显示 -->
       <div v-else v-loading="loadCourse" class="noMsg">
         <v-nothing></v-nothing>
       </div>
@@ -92,7 +98,13 @@ export default {
       categoryId: '',
       type: '',
       categoryIndex: '',
-      loadList: false
+      loadList: false,
+      configSevent: {
+        card_type: 'shoucang',
+        card: 'home',
+        types: 'buy'
+      },
+      xid: '0'
     }
   },
   methods: {
@@ -256,7 +268,10 @@ export default {
   },
   mounted() {
     this.categoryId = window.location.pathname.split('/')[2]
-    this.type = window.location.search.split('=')[1]
+
+    this.type = window.location.search.split('=')[1].split('&')[0]
+    this.xid = window.location.search.split('=')[2]
+    console.log(window.location.search.split('=')[1], '这是type的值')
     // 非最新项目
     if (this.type === '0') {
       this.cidBg = window.location.pathname.split('/')[2]
