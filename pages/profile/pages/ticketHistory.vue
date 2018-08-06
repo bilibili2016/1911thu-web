@@ -43,7 +43,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { home, tickethistory } from '~/lib/v1_sdk/index'
+=======
+import { order } from '~/lib/v1_sdk/index'
+>>>>>>> dev
 import { mapActions } from 'vuex'
 import { timestampToTime } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
@@ -77,7 +81,7 @@ export default {
     goShopping(id) {
       this.orderForm.ids = id
       return new Promise((resolve, reject) => {
-        home.buyAgain(this.orderForm).then(response => {
+        order.buyAgain(this.orderForm).then(response => {
           if (response.status === 0) {
             this.$router.push('/shop/shoppingCart')
           } else {
@@ -99,7 +103,7 @@ export default {
       //取消订单
       this.orderForm.ids = id
       return new Promise((resolve, reject) => {
-        home.cancelOrder(this.orderForm).then(response => {
+        order.cancelOrder(this.orderForm).then(response => {
           if (response.status === 0) {
             this.$emit('handleUpdate', true)
             this.$message({

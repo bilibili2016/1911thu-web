@@ -886,7 +886,7 @@ export default {
     curriculumPayApply() {
       this.orderForm.ids = persistStore.get('order')
       return new Promise((resolve, reject) => {
-        checkedCourse.curriculumPayApply(this.orderForm).then(response => {
+        home.curriculumPayApply(this.orderForm).then(response => {
           if (response.status === 0) {
             this.courseList = response.data.orderCurriculumList
             this.projectList = response.data.orderProjectList

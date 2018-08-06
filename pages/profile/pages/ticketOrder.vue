@@ -329,6 +329,7 @@
 <script>
 import { home, ticketorder } from '~/lib/v1_sdk/index'
 import { timestampToTime } from '@/lib/util/helper'
+import { order } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
