@@ -2,7 +2,9 @@
   <div>
     <div class="card-category profile">
       <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
-        <el-card shadow="never" body-style="padding: 0;" :class="['itemBox',{'learn':config.mask}]" @click.native="handleLinkDetail(card,index)">
+        <el-card shadow="never" body-style="padding: 0;" :class="['itemBox',{'learn':config.mask}]">
+          <!-- 选课使用的勾选 -->
+          <el-checkbox v-model="card.is_checked " @change="selCheckboxChange(card,index) " style="position:absolute;top:10px;right:10px; " v-if="config.types==='buy' "></el-checkbox>
           <!-- 项目封面 蒙层-->
           <div class="new-style " v-if="config.new==='true' ">
             <img :src="newTag " alt=" ">
@@ -53,6 +55,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { shopcart, home } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['data', 'config'],
@@ -65,6 +68,13 @@ export default {
       xidForm: {
         xids: ''
       },
+      curriculumcartid: {
+        numberArr: []
+      },
+      curriculumcartids: {
+        cartid: null,
+        type: 1
+      },
       isIndex: true,
       newTag: require('@/assets/images/new.png'),
       jinImg: require('@/assets/images/jin.png'),
@@ -73,29 +83,62 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setXid']),
-    handleLinkDetail(item) {
-      if (!this.isIndex) {
-        if (this.type === '0') {
-          this.kidForm.kids = item.id
-          persistStore.set('curriculumId', item.id)
-          this.setKid(this.kidForm)
-          this.openDetail('/course/coursedetail')
-        } else {
-          persistStore.set('projectId', item.id)
-          this.openDetail('/project/ProjectDetail')
-        }
-      }
-    },
     openDetail(link) {
       window.open(window.location.origin + link)
     },
     goDetail(item) {
+      // 判断当前页是否是在首页
       if (this.isIndex) {
         this.kidForm.kids = item.id
         persistStore.set('curriculumId', item.id)
         this.setKid(this.kidForm)
         this.openDetail('/course/coursedetail')
+      } else {
+        // 分类列表页
+        if (this.type === '0') {
+          // 课程-转到课程详情
+          this.kidForm.kids = item.id
+          persistStore.set('curriculumId', item.id)
+          this.setKid(this.kidForm)
+          this.openDetail('/course/coursedetail')
+        } else {
+          // 项目-项目详情
+          persistStore.set('projectId', item.id)
+          this.openDetail('/project/ProjectDetail')
+        }
       }
+    },
+    // 我要选课 -选择课程
+    selCheckboxChange(item, index) {
+      if (item.is_checked === false) {
+        item.is_checked = false
+        this.curriculumcartid.numberArr.push(item.id)
+        this.curriculumcartids.cartid = item.id
+        this.delShopCart()
+      } else {
+        item.is_checked = true
+        this.curriculumcartids.cartid = item.id
+        this.curriculumcartid.numberArr.pop()
+        this.addShopCart()
+      }
+    },
+    // 添加购物车
+    addShopCart() {
+      home.addShopCart(this.curriculumcartids).then(response => {
+        this.setProductsNum({
+          pn: response.data.curriculumNumber
+        })
+      })
+    },
+    // 取消勾选
+    delShopCart() {
+      return new Promise((resolve, reject) => {
+        shopcart.delCourseShopCart(this.curriculumcartids).then(response => {
+          this.setProductsNum({
+            pn: response.data.curriculumNumber
+          })
+        })
+      })
     }
   },
   mounted() {
@@ -106,7 +149,6 @@ export default {
     } else {
       this.isIndex = true
     }
-    console.log(this.isIndex, 'this.isIndex')
   }
 }
 </script>
