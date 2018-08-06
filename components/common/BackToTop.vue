@@ -116,12 +116,12 @@ export default {
     },
     checkCourse() {
       if (this.isAuthenticated) {
-        this.goLink('/course/chooselesson')
+        // this.goLink('/course/chooselesson')
         // 整合后的跳转
 
-        // window.open(
-        //   window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
-        // )
+        window.open(
+          window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
+        )
         // this.showNotLogin = false
       } else {
         // this.showNotLogin = true

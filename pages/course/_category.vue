@@ -10,9 +10,9 @@
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
 
       <!-- 非选课的下面 课程列表 -->
-      <!-- <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
+      <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
         <v-card :data="categoryData" :config="categoryCard"></v-card>
-      </div> -->
+      </div>
       <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
       <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
         <v-card :data="categoryData" :config="configSevent"></v-card>
