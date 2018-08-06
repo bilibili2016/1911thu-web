@@ -101,7 +101,9 @@ export default {
       // this.setCg(this.cgForm)
 
       // window.open(window.location.origin + item)
-      window.open(window.location.origin + '/course/' + '0' + '?type=' + '1')
+      window.open(
+        window.location.origin + '/course/' + '0' + '?type=' + '1' + '&xid=0'
+      )
     }
   },
   mounted() {}

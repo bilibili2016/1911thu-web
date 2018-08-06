@@ -10,18 +10,18 @@
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
 
       <!-- 学院筛选页面 课程列表 -->
-      <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
+      <div class="carlist" v-if="categoryData.length > 0 && xid === '0'" v-loading="loadCourse">
         <v-card :data="categoryData" :config="categoryCard"></v-card>
       </div>
       <!-- 选课页面 课程列表 -->
-      <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
+      <div class="carlist" v-if="categoryData.length > 0 && xid === '1'" v-loading="loadCourse">
         <v-choose :data="categoryData" :config="configSevent"></v-choose>
       </div>
       <!-- 无课程时候显示 -->
-      <div v-else v-loading="loadCourse" class="noMsg">
+      <div v-if="categoryData.length < 0" v-loading="loadCourse" class="noMsg">
         <v-nothing></v-nothing>
       </div>
-      <div v-show="categoryData.length !=0" class="allChecked" @click="allChecked">全选</div>
+      <div v-show="categoryData.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
     </div>
     <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
   </div>
