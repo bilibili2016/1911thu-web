@@ -116,26 +116,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.newsDetail {
-  .news-banner {
-    height: 148px;
-    overflow: hidden;
-    position: relative;
-    img {
-      width: 100%;
-      height: 148px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-    }
-  }
-  .detail .newsContent h3 {
-    margin: 0;
-    padding: 59px 45px 0;
-  }
-}
-</style>
 

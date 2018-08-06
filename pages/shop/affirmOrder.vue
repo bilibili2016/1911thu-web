@@ -1500,12 +1500,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.invoice {
-  span {
-    display: inline-block;
-    margin-right: 20px;
-  }
-}
-</style>

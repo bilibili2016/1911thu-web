@@ -29,7 +29,7 @@
                 <h6>{{project.curriculum_time}}学时</h6>
               </div>
             </div>
-            <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList, index)">
+            <div class="more" :data="courseList.orderCurriculumList.length+courseList.orderProjectList.length" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList, index)">
               查看更多课程>
             </div>
           </div>
