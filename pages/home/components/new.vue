@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-none">
+  <!-- 最新课程 -->
+  <div class="bg-none new">
     <el-row class="center">
       <!-- <v-title :data="titleTwo"></v-title> -->
       <h1 class="clearfix">
@@ -38,35 +39,12 @@ export default {
       this.setKid(this.kidForm)
     },
     getMore(item) {
-      window.open(window.location.origin + item)
+      window.open(window.location.origin + '/course/components/' + '1')
     }
   }
 }
 </script>
-<style lang="scss" scoped>
-h1 {
-  color: #222;
-  margin: 70px 0px 50px;
-  .title {
-    padding-top: 10px;
-  }
-  .moredata {
-    width: 128px;
-    height: 40px;
-    line-height: 38px;
-    text-align: center;
-    border: 1px solid #888;
-    border-radius: 20px;
-    font-size: 16px;
-    color: #666;
-    -webkit-transition: all 300ms;
-    transition: all 300ms;
-    cursor: pointer;
-  }
-  .moredata:hover {
-    color: #fff;
-    background-color: #8f4acb;
-    border-color: #8f4acb;
-  }
-}
+
+<style scoped lang="scss">
+@import '~assets/style/home/new.scss';
 </style>

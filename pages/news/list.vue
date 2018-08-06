@@ -96,18 +96,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.goodLesson {
-  padding-bottom: 40px;
-}
-.news-list .shadow {
-  box-shadow: none;
-}
-.news-list .center {
-  margin-top: 0;
-}
-.news-list .new-card-on {
-  margin-top: 0;
-}
-</style>

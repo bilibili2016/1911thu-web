@@ -170,39 +170,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@charset "utf-8";
-* {
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: '微软雅黑';
-}
-ul li {
-  list-style: none;
-}
-.clearfixs {
-  *zoom: 1;
-}
-.clearfixs:before,
-.clearfixs:after {
-  display: table;
-  line-height: 0;
-  content: '';
-}
-.clearfixs:after {
-  clear: both;
-}
-.popup-container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  // background-color: #4e37b3;
-  background: url('http://papn9j3ys.bkt.clouddn.com/banner4.png') no-repeat;
-  background-size: 100% 100%;
-  overflow: hidden;
-}
+@import '~assets/style/home/tab.scss';
 </style>
 
 

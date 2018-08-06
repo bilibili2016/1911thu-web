@@ -1,4 +1,5 @@
 <template>
+  <!-- 名师智库 -->
   <div class="teachers">
     <!-- <v-title :data="titleFore"></v-title> -->
     <h1 class="clearfix">
@@ -52,33 +53,4 @@ export default {
   mounted() {}
 }
 </script>
-<style lang="scss" scoped>
-.teachers {
-  h1 {
-    width: 1100px;
-    margin: 0 auto;
-    color: #fff;
-    padding: 70px 0px 50px;
-    .title {
-      padding-top: 10px;
-    }
-    .moredata {
-      width: 128px;
-      height: 40px;
-      line-height: 38px;
-      text-align: center;
-      border: 1px solid #888;
-      border-radius: 20px;
-      font-size: 16px;
-      color: #fff;
-      transition: all 300ms;
-      cursor: pointer;
-      &:hover {
-        color: #fff;
-        background-color: #8f4acb;
-        border-color: #8f4acb;
-      }
-    }
-  }
-}
-</style>
+

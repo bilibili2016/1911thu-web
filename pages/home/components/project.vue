@@ -41,61 +41,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.project {
-  width: 1100px;
-  margin: 30px auto 0;
-  font-size: 0;
-  ul {
-    display: flex;
-    li {
-      &:hover div {
-        margin-top: -10px;
-        p {
-          opacity: 1;
-        }
-      }
-      div {
-        width: 275px;
-        height: 100px;
-        cursor: pointer;
-        transition: all 300ms;
-        position: relative;
-        img {
-          width: 275px;
-          height: 100px;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-        h4 {
-          width: 200px;
-          height: 18px;
-          overflow: hidden;
-          font-size: 16px;
-          color: #fff;
-          position: absolute;
-          left: 20px;
-          top: 20px;
-        }
-        p {
-          font-size: 12px;
-          color: #fff;
-          width: 200px;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-          overflow: hidden;
-          line-height: 18px;
-          position: absolute;
-          top: 50px;
-          left: 20px;
-          opacity: 0.5;
-          transition: all 300ms;
-        }
-      }
-    }
-  }
-}
+@import '~assets/style/home/project.scss';
 </style>
 
 

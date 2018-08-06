@@ -80,11 +80,13 @@ export default {
         window.location.origin +
           '/course/' +
           item.id +
-          '?type=' +
-          item.is_picture_show
+          '?pid=' +
+          item.is_picture_show +
+          '&xid=0'
       )
     }
   },
+  // +'&xid=1'
   mounted() {
     this.getClassifyList()
   }

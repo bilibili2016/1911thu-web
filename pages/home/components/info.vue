@@ -1,4 +1,5 @@
 <template>
+  <!-- 学堂资讯 -->
   <div class="home-info bg-none">
     <el-row class="info-center center">
       <!-- <v-title :data="titleFive"></v-title> -->
