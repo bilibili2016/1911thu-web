@@ -506,7 +506,6 @@ export default {
         } else {
           item.checked = true
         }
-        console.log(item.checked)
       } else {
         this.selectAll()
       }
