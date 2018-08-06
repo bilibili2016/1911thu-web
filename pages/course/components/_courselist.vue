@@ -10,82 +10,107 @@
       <span>当前位置：</span>
       <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>精品好课</el-breadcrumb-item>
+        <el-breadcrumb-item>{{coursename}}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
 
+    <div class="pagination">
+      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
+    </div>
     <!-- <div class="card-button" v-if="noMoreData">
       <el-button type="primary">暂无更多数据</el-button>
     </div>
     <div class="card-button" v-else>
       <el-button type="primary">下拉加载更多</el-button>
     </div> -->
-    <div class="pagination">
-      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
-    </div>
   </div>
 </template>
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
 import { home, newlesson } from '~/lib/v1_sdk/index'
+import CustomPagination from '@/components/common/Pagination.vue'
 export default {
   components: {
-    'v-card': CustomCard
+    'v-card': CustomCard,
+    'v-page': CustomPagination
   },
   data() {
     return {
       config: {
         card_type: 'goodlesson',
-        teacher: true
+        teacher: false
       },
       courseList: [],
       pageCount: null,
-      goodCurriculumForm: {
+      newsCurriculumForm: {
         pages: 1,
         limits: 5,
         evaluateLimit: 4,
-        isEvaluate: 1
+        isevaluate: 1
       },
       pagemsg: {
         page: 1,
         pagesize: 5,
         total: null
       },
+      goodCurriculumForm: {
+        pages: 1,
+        limits: 5,
+        evaluateLimit: 4,
+        isEvaluate: 1
+      },
       scrollTopMsg: true,
-      noMoreData: false
+      noMoreData: false,
+      cidNumber: null,
+      coursename: null
     }
   },
   methods: {
-    // 获取精品好课列表
+    // 获取最新课程列表
+    getCourseList() {
+      if (this.cidNumber === '1') {
+        this.getNewCourseList()
+      } else if (this.cidNumber === '2') {
+        this.getClassicCourseList()
+      } else {
+        this.getFreeCourseList()
+      }
+    },
+    // 最新课程列表
     getNewCourseList() {
-      home.getClassicCourseList(this.goodCurriculumForm).then(response => {
-        // if (response.data.curriculumList.length === 0) {
-        //   this.noMoreData = true
-        // }
-        // this.courseList = this.courseList.concat(response.data.curriculumList)
-        // for (var i = 0; i < this.courseList.length; i++) {
-        //   this.$set(this.courseList[i], 'isCartNew', 0)
-        // }
-        // this.pageCount = response.data.pageCount
-        // this.scrollTopMsg = true
-
+      console.log('1')
+      home.getNewCourseList(this.newsCurriculumForm).then(response => {
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)
+        this.coursename = '最新课程'
       })
     },
+    // 获取经典课程列表
+    getClassicCourseList() {
+      console.log('2')
+      home.getClassicCourseList(this.newsCurriculumForm).then(response => {
+        this.courseList = response.data.curriculumList
+        this.pagemsg.total = Number(response.data.pageCount)
+        this.coursename = '精品好课'
+      })
+    },
+    // 获取最新课程列表
+    getFreeCourseList() {
+      console.log('3')
+      home.getFreeCourseList(this.newsCurriculumForm).then(response => {
+        this.courseList = response.data.curriculumList
+        this.pagemsg.total = Number(response.data.pageCount)
+        this.coursename = '免费课程'
+      })
+    },
+    // 点击下面分页按钮
     selectPages(val) {
-      this.goodCurriculumForm.pages = val
+      this.newsCurriculumForm.pages = val
       this.pagemsg.page = val
-      this.goodCurriculumForm.limits = this.pagemsg.pagesize
-      this.getNewCourseList()
-      // return new Promise((resolve, reject) => {
-      //   home.getNewInfoList(this.newsInfoForm).then(response => {
-      //     this.pagemsg.total = Number(response.data.pageCount)
-      //     this.newsList = response.data.newsList
-      //   })
-      // })
+      this.newsCurriculumForm.limits = this.pagemsg.pagesize
+      this.getCourseList()
     },
     // 下拉查看更多
     getMoreData() {
@@ -96,11 +121,11 @@ export default {
           message: '没有更多课程了！'
         })
       } else {
-        this.goodCurriculumForm.pages = this.goodCurriculumForm.pages + 1
+        this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
         this.getNewCourseList()
       }
     },
-    // 监听下拉刷新方法
+    // 监听下拉刷新方法 -- 暂时不用
     downRefresh() {
       window.addEventListener('scroll', () => {
         var scrollTop =
@@ -109,20 +134,12 @@ export default {
           document.documentElement.clientHeight || document.body.clientHeight
         var scrollHeight =
           document.documentElement.scrollHeight || document.body.scrollHeight
-
-        if (scrollTop + windowHeight === scrollHeight) {
+        if (scrollTop + windowHeight == scrollHeight) {
           if (this.scrollTopMsg === true) {
             this.scrollTopMsg = false
-            this.goodCurriculumForm.pages = this.goodCurriculumForm.pages + 1
+            this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
             this.getNewCourseList()
           }
-        } else if (scrollTop + windowHeight > scrollHeight) {
-          if (this.scrollTopMsg === true) {
-            this.scrollTopMsg = false
-            this.goodCurriculumForm.pages = this.goodCurriculumForm.pages + 1
-            this.getNewCourseList()
-          }
-        } else {
         }
       })
     },
@@ -134,11 +151,13 @@ export default {
     // 初始化所有方法
     initAll() {
       this.initData()
-      this.getNewCourseList()
+      this.getCourseList()
       // this.downRefresh()
     }
   },
   mounted() {
+    this.cidNumber = window.location.pathname.split('/')[2]
+    // console.log(cidNumber, '这是cid')
     this.initAll()
   }
 }

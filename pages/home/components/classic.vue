@@ -64,7 +64,8 @@ export default {
       window.open(window.location.origin + '/course/coursedetail')
     },
     getMore(item) {
-      window.open(window.location.origin + item)
+      // window.open(window.location.origin + item)
+      window.open(window.location.origin + '/course/components/' + '2')
     }
   }
 }

@@ -38,7 +38,8 @@ export default {
       this.setKid(this.kidForm)
     },
     getMore(item) {
-      window.open(window.location.origin + item)
+      // window.open(window.location.origin + item)
+      window.open(window.location.origin + '/course/components/' + '3')
     }
   }
 }
