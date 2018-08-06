@@ -43,11 +43,8 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import { home, tickethistory } from '~/lib/v1_sdk/index'
-=======
 import { order } from '~/lib/v1_sdk/index'
->>>>>>> dev
 import { mapActions } from 'vuex'
 import { timestampToTime } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
