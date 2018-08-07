@@ -97,18 +97,10 @@ export default {
       window.open(window.location.origin + link)
     },
     getMore(item) {
-      // this.cgForm.cgs = '2'
-      // this.setCg(this.cgForm)
-
-      // window.open(window.location.origin + item)
       window.open(
         window.location.origin + '/course/' + '0' + '?type=' + '1' + '&xid=0'
       )
     }
-  },
-  mounted() {}
+  }
 }
 </script>
-<style scoped lang="scss">
-@import '~assets/style/home/newcourse.scss';
-</style>

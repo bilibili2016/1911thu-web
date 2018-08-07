@@ -236,7 +236,7 @@
                     <span class="lr">数量</span>
                   </div>
                   <div class="bottom">
-                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="index">
+                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="course in courseList" :key="course.id">
                       <div class="courseInfo clearfix">
                         <div class="bottomImg">
 
@@ -256,7 +256,7 @@
                         <i class="el-icon-close"></i>{{orderDetail.pay_number}}
                       </div>
                     </div>
-                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="index">
+                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="project in projectList" :key="project.id">
                       <div class="courseInfo clearfix">
                         <div class="bottomImg">
                           <!-- 项目图标 -->
@@ -342,11 +342,13 @@
         <el-tab-pane class="my-course my-order" name="tab-seventh">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 发票管理</span>
-          <!-- 订单 -->
-          <el-card v-if="showOrderList">
+          <!-- 发票 -->
+          <el-card v-if="showTicketList">
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="按订单开发票" name="orderFirst">
-                <v-tkorder v-if="readyOrderData  && readyOrderData.length>0" :orderData="readyOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-tkorder>
+                <v-tkorder v-if="readyOrderData  && readyOrderData.length>0" :orderData="readyOrderData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
+                <!-- <v-test></v-test> -->
+                <!-- <v-test v-if="readyOrderData  && readyOrderData.length>0" :orderData="readyOrderData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-test> -->
                 <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
@@ -366,16 +368,86 @@
               <el-tab-pane name="orderThird">
                 <span class="payOk" slot="label">开票规则
                 </span>
-                <v-tkorder v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-tkorder>
-                <div class="content noOrder" v-else>
+                <v-tkrules v-loading="readyOrderLoad"></v-tkrules>
+                <!-- <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
                   </div>
-                </div>
+                </div> -->
               </el-tab-pane>
             </el-tabs>
           </el-card>
+          <!-- 发票详情 -->
+          <div class="orderListDetail" v-else>
+            <div class="table">
+              <div class="tableHeader">
+                <span class="goBack" @click="goTicketBack">
+                  <i class="el-icon-arrow-left icon"></i>
+                </span>
+                <span>发票详情</span>
+              </div>
+              <div class="tableBody">
+
+                <!-- 商品信息 -->
+                <div class="goods bodyItem">
+                  <div class="top">
+                    <span class="lf">商品信息</span>
+                    <span class="lm">单价</span>
+                    <span class="lr">数量</span>
+                  </div>
+                  <div class="bottom">
+                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="index">
+                      <div class="courseInfo clearfix">
+                        <div class="bottomImg">
+
+                          <img class="fl" :src="course.picture" alt="">
+                        </div>
+
+                        <div class="fl">
+                          <h4>{{course.name}}</h4>
+                          <h6>{{course.curriculum_time}}学时</h6>
+                          <p>讲师：{{course.teacher_name}}</p>
+                        </div>
+                      </div>
+                      <div class="coursePrice">
+                        ￥{{course.price}}
+                      </div>
+                      <div class="courseOperation">
+                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                      </div>
+                    </div>
+                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="project.id">
+                      <div class="courseInfo clearfix">
+                        <div class="bottomImg">
+                          <!-- 项目图标 -->
+                          <img class="project-img" :src="projectImg" alt="">
+                          <img class="fl" :src="project.picture" alt="">
+                        </div>
+
+                        <div class="fl">
+                          <h4>{{project.name}}</h4>
+                          <h6>{{project.curriculum_time}}学时</h6>
+                        </div>
+                      </div>
+                      <div class="coursePrice">
+                        ￥{{project.price}}
+                      </div>
+                      <div class="courseOperation">
+                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="tableFooter">
+                    <p>课程数量：{{courseList.length+projectList.length}}门</p>
+                    <p>学习人数：{{orderDetail.pay_number}}人</p>
+                    <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -404,6 +476,7 @@ import Conversion from '@/pages/profile/components/conversion'
 import Bind from '@/pages/profile/components/binding'
 import TicketOrder from '@/pages/profile/pages/ticketOrder'
 import TicketHistory from '@/pages/profile/pages/ticketHistory'
+import TicketRules from '@/pages/profile/pages/ticketRules'
 import {
   other,
   home,
@@ -427,7 +500,8 @@ export default {
     'v-binding': Bind,
     'v-tkorder': TicketOrder,
     'v-tkhistory': TicketHistory,
-    'v-binding': Bind
+    'v-binding': Bind,
+    'v-tkrules': TicketRules
   },
   data() {
     return {
@@ -519,6 +593,7 @@ export default {
       bankInfo: {}, //公司打款信息
 
       showOrderList: true,
+      showTicketList: true,
       isUpdate: false,
       allOrderLoad: true,
       unfinishedOrderLoad: true,
@@ -550,6 +625,13 @@ export default {
         this.curriculumPayApply()
       }
     },
+    //获取发票详情
+    getTicketDetail(msg) {
+      if (msg === false) {
+        this.showTicketList = false
+        this.curriculumPayApply()
+      }
+    },
     // 我的消息空页面展示
     isNoMyMsg(isShow) {
       this.noMyMsg = isShow
@@ -561,6 +643,10 @@ export default {
     // 订单详情 返回上一步到我的订单
     goBack() {
       this.showOrderList = true
+    },
+    //发票详情 返回上一步
+    goTicketBack() {
+      this.showTicketList = true
     },
     // 切换tab时保存tab的name刷新就还是在这个tab
     handleClick(item) {
@@ -803,11 +889,9 @@ export default {
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.readyOrderData = response.data.orderList
-          this.readyOrderData.forEach(v => {
-            v.checked = false
+          this.readyOrderData.forEach(item => {
+            item.checked = false
           })
-          console.log(this.readyOrderData)
-
           this.readyOrderLoad = false
           resolve(true)
         })
@@ -827,7 +911,9 @@ export default {
     },
     // 开票历史
     getHistoryOrderData() {
-      home.tickethistory(this.orderForm).then(response => {
+      home.tickethistory().then(response => {
+        console.log(response)
+
         this.historyOrderData = response.data.invoiceList
         this.historyOrderLoad = false
       })
@@ -927,6 +1013,7 @@ export default {
       this.getCodeList()
       this.getRecordList()
       this.curriculumPayApply()
+      this.getHistoryOrderData()
 
       // this.getOverTime()
       //过期的我的课程

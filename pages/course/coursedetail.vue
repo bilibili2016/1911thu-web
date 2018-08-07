@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/pages/course/components/Card.vue'
 import CustomLine from '@/components/common/Line.vue'
 import { coursedetail, home } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
