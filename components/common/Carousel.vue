@@ -1,12 +1,13 @@
 <template>
-  <div class="carousel">
-    <el-carousel :interval="5000" class="lbt indexBanner">
-      <el-carousel-item v-for="(img,index) in items" :key="index">
-        <img :src="img.picture" alt="" @click="handleLink(img)">
-      </el-carousel-item>
-    </el-carousel>
+  <div class="banner">
+    <div class="carousel">
+      <el-carousel :interval="5000" class="lbt indexBanner">
+        <el-carousel-item v-for="(img,index) in items" :key="index">
+          <img :src="img.picture" alt="" @click="handleLink(img)">
+        </el-carousel-item>
+      </el-carousel>
+    </div>
   </div>
-
 </template>
 
 <script>
