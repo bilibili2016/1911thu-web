@@ -3,9 +3,6 @@
   .orderList {
     .list {
       .content {
-        .check {
-          width: 110px;
-        }
         .course {
           width: 670px;
           .courseOne {
@@ -88,6 +85,30 @@
       & + .el-checkbox__label {
         color: #222;
       }
+    }
+  }
+
+  .check {
+    width: 110px;
+    text-align: center;
+    .el-checkbox {
+      display: none;
+    }
+    .el-checkbox-label:before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #6417a6;
+      border-radius: 4px;
+      // background-image: url(img/scheduling_icon_uncheck2.png);
+      // background-size: 100%;
+    }
+    .el-checkbox:checked + .el-checkbox-label:before {
+      background-image: url('~assets/images/icon-checked.png');
+      background-size: 100%;
+      border: none;
     }
   }
 }

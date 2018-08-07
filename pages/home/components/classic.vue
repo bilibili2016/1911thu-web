@@ -35,7 +35,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import CustomTitle from '@/components/common/Title.vue'
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 export default {
   props: ['classicData', 'titleThree', 'linktwo'],
@@ -66,7 +66,7 @@ export default {
     },
     getMore(item) {
       // window.open(window.location.origin + item)
-      window.open(window.location.origin + '/course/components/' + '2')
+      window.open(window.location.origin + '/course/pages/' + '2')
     }
   }
 }

@@ -31,7 +31,7 @@
 
 <script>
 import Search from '@/components/common/Search.vue'
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { home } from '~/lib/v1_sdk/index'
@@ -54,7 +54,7 @@ export default {
       getData: [],
       config: {
         card_type: 'profile',
-        card: 'home'
+        new: 'false'
       },
       pagemsg: {
         page: 1,
