@@ -38,7 +38,7 @@ import Info from '@/pages/home/components/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
 import { mapState, mapActions } from 'vuex'
-import { home, newlesson } from '~/lib/v1_sdk/index'
+import { home } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-carousel': Carousel,
@@ -193,7 +193,7 @@ export default {
     },
     // 获取新上好课列表
     getNewCourseList() {
-      newlesson.getNewCourseList(this.courseForm).then(response => {
+      home.getNewCourseList(this.courseForm).then(response => {
         this.newData = response.data.curriculumList
       })
     },
