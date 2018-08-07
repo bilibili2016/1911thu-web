@@ -14,7 +14,7 @@
       </div>
       <h5>
         <span @click="choiceCourse">继续选课</span>
-        <span @click="goMycourse('tab-third')">查看订单</span>
+        <span @click="goMycourse('tab-fourth')">查看订单</span>
       </h5>
       <div class="goback">
         <span>
@@ -74,7 +74,7 @@ export default {
               if (Number(paynumber) > 1) {
                 this.goLink('tab-sixth')
               } else {
-                this.goLink('tab-third')
+                this.goLink('tab-fourth')
               }
             } else {
               this.seconds--

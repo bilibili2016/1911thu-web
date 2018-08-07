@@ -189,7 +189,8 @@ export default {
         tag: []
       },
       addCollectionForm: {
-        curriculumId: null
+        curriculumId: '',
+        types: 2
       },
       collectMsg: 0,
       iseve: 0,
@@ -266,7 +267,12 @@ export default {
       } else {
         this.$set(val, 'isCheck', true)
       }
-      this.addEvaluateForm.tag.push(val.value)
+      this.addEvaluateForm.tag = []
+      this.btnData.forEach((v, i) => {
+        if (v.isCheck === true) {
+          this.addEvaluateForm.tag.push(v.value)
+        }
+      })
     },
     handleCourse(item, index) {
       this.ischeck = item.id
@@ -573,31 +579,26 @@ export default {
     },
     // 添加收藏
     addCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      return new Promise((resolve, reject) => {
-        coursedetail.addCollection(this.addCollectionForm).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '添加收藏成功'
-          })
-          this.collectMsg = 1
+      this.addCollectionForm.curriculumId = persistStore.get('projectId')
+      coursedetail.addCollection(this.addCollectionForm).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '添加收藏成功'
         })
+        this.collectMsg = 1
       })
     },
     // 删除收藏
     deleteCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      return new Promise((resolve, reject) => {
-        coursedetail.deleteCollection(this.addCollectionForm).then(response => {
-          // this.collectMsg = response.data.curriculumDetail.is_collection
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '取消收藏成功'
-          })
-          this.collectMsg = 0
+      this.addCollectionForm.curriculumId = persistStore.get('projectId')
+      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '取消收藏成功'
         })
+        this.collectMsg = 0
       })
     },
     // 为播放器上当的播放按钮添加点击事件

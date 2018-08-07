@@ -11,14 +11,14 @@
           </el-breadcrumb>
         </div>
         <div class="headerR fr">
-          <span class="collection">
+          <span :class="['collection',{'bag': this.collectMsg === 1}]" @click="collection">
             <i class="el-icon-star-on"></i>
             <span>收藏 </span>
           </span>
-          <span class="">
+          <!-- <span class="">
             <i class="el-icon-share"></i>
             <span>分享 </span>
-          </span>
+          </span> -->
         </div>
       </div>
       <!-- 项目名 -->
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { home, projectDetail } from '@/lib/v1_sdk/index'
+import { home, projectDetail, coursedetail } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
@@ -87,8 +87,13 @@ export default {
       evaluateDataLoad: true,
       problemLoad: true,
       rateModel: 3,
+      collectMsg: 0,
       activeName: 'first',
       loadMsg: false,
+      addCollectionForm: {
+        curriculumId: '',
+        types: 2
+      },
       project: {
         projectId: '1'
       },
@@ -184,9 +189,43 @@ export default {
     // 跳转到项目播放页
     goProjectPlayer() {
       window.open(window.location.origin + '/project/projectPlayer')
+    },
+    // 判断是收藏还是为收藏
+    collection() {
+      if (this.collectMsg === 1) {
+        this.deleteCollection()
+      } else {
+        this.addCollection()
+      }
+    },
+    // 添加收藏
+    addCollection() {
+      this.addCollectionForm.curriculumId = persistStore.get('projectId')
+      coursedetail.addCollection(this.addCollectionForm).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '添加收藏成功'
+        })
+        this.collectMsg = 1
+      })
+    },
+    // 删除收藏
+    deleteCollection() {
+      this.addCollectionForm.curriculumId = persistStore.get('projectId')
+      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '取消收藏成功'
+        })
+        this.collectMsg = 0
+      })
     }
   },
   mounted() {
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.project.projectId = persistStore.get('projectId')
     this.getProjectInfo()
     this.getEvaluateList()
