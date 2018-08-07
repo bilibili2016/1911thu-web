@@ -10,8 +10,6 @@
         <div class="list">
           <div class="content">
             <div class="check">
-              <!-- <el-checkbox v-model="courseList.checked" @change="handleSelectSingle(1,courseList)"></el-checkbox> -->
-              <!-- <el-checkbox ref="checkbox" @change="handleSelectSingle(1,courseList,index)"></el-checkbox> -->
               <input type="checkbox" class="el-checkbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(1,courseList)">
               <label :for="courseList.id" class="el-checkbox-label"></label>
             </div>
@@ -41,7 +39,6 @@
                 查看更多课程>
               </div>
             </div>
-
             <div class="price height" :style="{height:(courseList.orderCurriculumList.length+courseList.orderProjectList.length) > 3? 3*140+60+'px' :(courseList.orderCurriculumList.length+courseList.orderProjectList.length)*140+'px'}">
               <p>¥{{courseList.order_amount}}</p>
 
@@ -338,7 +335,7 @@
                 </p>
               </div>
               <div class="operation">
-                <span class="2" @click="addZZTicketBefore">保存</span>
+                <span @click="addZZTicketBefore">保存</span>
                 <span @click="nextStep('stepTwo')">返回</span>
               </div>
             </div>
@@ -991,9 +988,10 @@ export default {
     },
     // 添加发票信息
     addInvoiceInfo() {
-      console.log(this.checkedArr)
-
       this.ticketForm.orderID = this.checkedArr
+      this.zzTicketForm.orderID = this.checkedArr
+      console.log(this.ticketForm)
+
       if (this.choose === '1') {
         if (this.ticketForm.isRadio) {
           this.ticketForm.others = '培训费'
@@ -1095,6 +1093,7 @@ export default {
               this.stepOne = true
               this.stepTwo = false
               this.stepThree = false
+              this.getUnTicketData()
             } else {
               this.$message({
                 showClose: true,
@@ -1134,6 +1133,8 @@ export default {
         // this.orderData = response.data.orderList
         this.ticketOrderData = response.data.orderList
         this.$refs.checkbox.forEach(v => {
+          console.log(v)
+
           v.checked = false
         })
       })
