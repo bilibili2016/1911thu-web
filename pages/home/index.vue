@@ -2,7 +2,7 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-carousel :items="items" :courses="courses"></v-carousel>
+      <v-carousel :items="items"></v-carousel>
       <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
       <v-newp :newData="newData" :title="newprojecttitle" :link="linknewproject"></v-newp>
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import Carousel from '@/pages/home/components/carousel.vue'
+import Carousel from '@/components/common/Carousel.vue'
 import Newp from '@/pages/home/components/newproject.vue'
 
-import Famous from '@/pages/home/components/famous.vue'
-import Info from '@/pages/home/components/info.vue'
+import Famous from '@/pages/home/famous.vue'
+import Info from '@/pages/home/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
 import { mapState, mapActions } from 'vuex'
