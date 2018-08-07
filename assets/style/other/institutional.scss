@@ -80,13 +80,17 @@
       position: absolute;
       left: 0;
       right: 0;
+      top: 0;
+      bottom: 0;
       width: 700px;
       margin: auto;
       color: #fff;
-      margin-top: 110px;
+      // margin-top: 110px;
+
       .top-h1 {
         font-size: 46px;
         margin-bottom: 50px;
+        color: #fff;
       }
       .top-desc {
         font-size: 22px;
