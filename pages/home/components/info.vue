@@ -3,8 +3,8 @@
   <div class="home-info bg-none">
     <el-row class="info-center center">
       <!-- <v-title :data="titleFive"></v-title> -->
-      <h1 class="clearfix">{{titleFive}}
-        <span class="fr" @click="getMore(linkfour)">查看更多</span>
+      <h1 class="clearfix">{{title}}
+        <span class="fr" @click="getMore(link)">查看更多</span>
       </h1>
       <div v-loading="load" class="newsUl clearfix">
         <!-- <v-card ref="card" :infoDesc="infoDesc" :config="infoTwo"></v-card> -->
@@ -52,9 +52,11 @@ export default {
     'infoArticle',
     'infoTwo',
     'infoOne',
-    'titleFive',
+
     'linkfour',
-    'linkfive'
+    'linkfive',
+    'link',
+    'title'
   ],
   data() {
     return {

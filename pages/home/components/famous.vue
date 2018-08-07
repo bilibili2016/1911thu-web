@@ -1,11 +1,7 @@
 <template>
   <!-- 名师智库 -->
   <div class="teachers">
-    <!-- <v-title :data="titleFore"></v-title> -->
-    <h1 class="clearfix">
-      <span class="title">{{titleFore}}</span>
-      <span class="fr moredata" @click="getMore(linkSeven)">查看更多</span>
-    </h1>
+    <v-title :title="title" :link="link"></v-title>
     <div class="cardList ">
       <div class="item" v-for="(teacher,index) in teachers" :key="index" @click="goTeacherInfo(teacher,index)">
         <div class="item-img">
@@ -24,7 +20,7 @@
 import CustomTitle from '@/components/common/Title.vue'
 import { mapActions } from 'vuex'
 export default {
-  props: ['teachers', 'titleFore', 'linkSeven'],
+  props: ['teachers', 'title', 'link'],
   data() {
     return {
       tidForm: {
