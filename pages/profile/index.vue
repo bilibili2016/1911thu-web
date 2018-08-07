@@ -475,13 +475,7 @@ import Bind from '@/pages/profile/components/binding'
 import TicketOrder from '@/pages/profile/pages/ticketOrder'
 import TicketHistory from '@/pages/profile/pages/ticketHistory'
 import TicketRules from '@/pages/profile/pages/ticketRules'
-import {
-  other,
-  home,
-  checkedCourse,
-  conversion,
-  tickethistory
-} from '~/lib/v1_sdk/index'
+import { profileHome } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -676,7 +670,7 @@ export default {
         // 我的课程 收藏的项目
         this.collectionForm.categoryId = item
         return new Promise((resolve, reject) => {
-          home.collectionList(this.collectionForm).then(response => {
+          profileHome.collectionList(this.collectionForm).then(response => {
             this.collectionData = response.data.curriculumList
             this.pagemsg2.total = response.data.pageCount
             resolve(true)
@@ -690,7 +684,7 @@ export default {
           this.styleForm.pages = 1
           this.styleForm.limits = 12
           return new Promise((resolve, reject) => {
-            home.studyCurriculumList(this.styleForm).then(response => {
+            profileHome.studyCurriculumList(this.styleForm).then(response => {
               this.newDataing = response.data.curriculumList
               this.pagemsg1.total = response.data.pageCount
               for (let item of response.data.curriculumList) {
@@ -706,7 +700,7 @@ export default {
           this.styleForm.pages = 1
           this.styleForm.limits = 12
           return new Promise((resolve, reject) => {
-            home.studyCurriculumList(this.styleForm).then(response => {
+            profileHome.studyCurriculumList(this.styleForm).then(response => {
               this.newDataReady = response.data.curriculumList
               this.pagemsg2.total = response.data.pageCount
               resolve(true)
@@ -720,7 +714,7 @@ export default {
           this.pagemsg2.page = 1
           this.styleForm.types = 4
           return new Promise((resolve, reject) => {
-            home.studyCurriculumList(this.styleForm).then(response => {
+            profileHome.studyCurriculumList(this.styleForm).then(response => {
               this.overTimeData = response.data.curriculumList
               for (var i = 0; i < this.overTimeData.length; i++) {
                 this.$set(this.overTimeData[i], 'overtime', true)
@@ -734,7 +728,7 @@ export default {
     // 获取我的学习右侧的分类
     childCategoryList() {
       return new Promise((resolve, reject) => {
-        home.childCategoryList().then(response => {
+        profileHome.childCategoryList().then(response => {
           if (response.status === 0) {
             response.data.categoryList.forEach((element, i) => {
               this.options[i] = {}
@@ -753,7 +747,7 @@ export default {
       this.styleForm.pages = 1
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
-        home.studyCurriculumList(this.styleForm).then(response => {
+        profileHome.studyCurriculumList(this.styleForm).then(response => {
           this.newDataing = response.data.curriculumList
           this.pagemsg1.total = response.data.pageCount
           for (let item of response.data.curriculumList) {
@@ -769,7 +763,7 @@ export default {
       this.styleForm.pages = val
       this.styleForm.types = 1
       return new Promise((resolve, reject) => {
-        home.studyCurriculumList(this.styleForm).then(response => {
+        profileHome.studyCurriculumList(this.styleForm).then(response => {
           this.newDataing = response.data.curriculumList
           this.pagemsg1.total = response.data.pageCount
           for (let item of response.data.curriculumList) {
@@ -785,7 +779,7 @@ export default {
       this.styleForm.pages = 0
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
-        home.studyCurriculumList(this.styleForm).then(response => {
+        profileHome.studyCurriculumList(this.styleForm).then(response => {
           this.studyData = response.data.curriculumList
           for (let item of response.data.curriculumList) {
             item.percent = Number(item.percent)
@@ -801,7 +795,7 @@ export default {
       this.styleForm.pages = 1
       this.styleForm.limits = 12
       return new Promise((resolve, reject) => {
-        home.studyCurriculumList(this.styleForm).then(response => {
+        profileHome.studyCurriculumList(this.styleForm).then(response => {
           this.newDataReady = response.data.curriculumList
           this.pagemsg2.total = response.data.pageCount
           resolve(true)
@@ -815,7 +809,7 @@ export default {
       this.styleForm.pages = 1
       this.styleForm.types = 4
       return new Promise((resolve, reject) => {
-        home.studyCurriculumList(this.styleForm).then(response => {
+        profileHome.studyCurriculumList(this.styleForm).then(response => {
           this.overTimeData = response.data.curriculumList
           for (var i = 0; i < this.overTimeData.length; i++) {
             this.$set(this.overTimeData[i], 'overtime', true)
@@ -830,7 +824,7 @@ export default {
       this.styleForm.pages = val
       this.styleForm.types = 1
       return new Promise((resolve, reject) => {
-        home.studyCurriculumList(this.styleForm).then(response => {
+        profileHome.studyCurriculumList(this.styleForm).then(response => {
           this.newDataReady = response.data.curriculumList
           this.pagemsg2.total = response.data.pageCount
           resolve(true)
@@ -841,7 +835,7 @@ export default {
     collectionList() {
       this.collectionForm.categoryId = 0
       return new Promise((resolve, reject) => {
-        home.collectionList(this.collectionForm).then(response => {
+        profileHome.collectionList(this.collectionForm).then(response => {
           this.collectionData = response.data.curriculumList
           this.pagemsg3.total = response.data.pageCount
           resolve(true)
@@ -853,7 +847,7 @@ export default {
       this.pagemsg3.page = val
       this.collectionForm.pages = val
       return new Promise((resolve, reject) => {
-        home.collectionList(this.collectionForm).then(response => {
+        profileHome.collectionList(this.collectionForm).then(response => {
           this.collectionData = response.data.curriculumList
           this.pagemsg3.total = response.data.pageCount
           resolve(true)
@@ -864,7 +858,7 @@ export default {
     getAllOrderData() {
       this.orderForm.payStatus = 0
       return new Promise((resolve, reject) => {
-        home.getAllOrderData(this.orderForm).then(response => {
+        profileHome.getAllOrderData(this.orderForm).then(response => {
           this.allOrderData = response.data.orderList
           this.allOrderLoad = false
           resolve(true)
@@ -875,7 +869,7 @@ export default {
     getUnfinishedOrderData() {
       this.orderForm.payStatus = 1
       return new Promise((resolve, reject) => {
-        home.getAllOrderData(this.orderForm).then(response => {
+        profileHome.getAllOrderData(this.orderForm).then(response => {
           this.unfinishedOrderData = response.data.orderList
           this.unfinishedOrderLoad = false
           resolve(true)
@@ -886,7 +880,7 @@ export default {
     getReadyOrderData() {
       this.orderForm.payStatus = 2
       return new Promise((resolve, reject) => {
-        home.getAllOrderData(this.orderForm).then(response => {
+        profileHome.getAllOrderData(this.orderForm).then(response => {
           this.readyOrderData = response.data.orderList
           this.readyOrderLoad = false
           resolve(true)
@@ -899,7 +893,7 @@ export default {
       this.orderForm.payStatus = 3
 
       return new Promise((resolve, reject) => {
-        home.getAllOrderData(this.orderForm).then(response => {
+        profileHome.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
           this.invalidOrderLoad = false
           resolve(true)
@@ -909,7 +903,7 @@ export default {
     //未开发票列表
     getUnTicketData() {
       this.orderForm.payStatus = 2
-      home.orderNotInvoice().then(response => {
+      profileHome.orderNotInvoice().then(response => {
         this.unTicketData = response.data.orderList
         this.readyOrderLoad = false
         console.log(this.unTicketData)
@@ -917,7 +911,7 @@ export default {
     },
     // 开票历史
     getHistoryOrderData() {
-      home.tickethistory().then(response => {
+      profileHome.tickethistory().then(response => {
         this.historyOrderData = response.data.invoiceList
         this.historyOrderLoad = false
       })
@@ -925,7 +919,7 @@ export default {
     // 获取专属邀请码列表
     getCodeList() {
       return new Promise((resolve, reject) => {
-        home.getCodeList(this.codeListForm).then(response => {
+        profileHome.getCodeList(this.codeListForm).then(response => {
           this.codeData = response.data.orderInvitationCodeList
           resolve(true)
         })
@@ -934,7 +928,7 @@ export default {
     // 专属邀请码 邀请记录
     getRecordList() {
       return new Promise((resolve, reject) => {
-        conversion.getRecordList(this.codeListForm).then(response => {
+        profileHome.getRecordList(this.codeListForm).then(response => {
           this.recordData = response.data.usedInvitationCodeList
           var that = this
           this.recordData.forEach(function(v, i, arr) {
@@ -946,7 +940,7 @@ export default {
     },
     // 获取已经添加的课程兑换码
     getUsedInvitationCodeList() {
-      home.getUsedInvitationCodeList().then(response => {
+      profileHome.getUsedInvitationCodeList().then(response => {
         this.invitationCodeList = response.data.usedInvitationCodeList
       })
     },
@@ -975,7 +969,7 @@ export default {
     curriculumPayApply() {
       this.orderForm.ids = persistStore.get('order')
       return new Promise((resolve, reject) => {
-        home.curriculumPayApply(this.orderForm).then(response => {
+        profileHome.curriculumPayApply(this.orderForm).then(response => {
           if (response.status === 0) {
             this.courseList = response.data.orderCurriculumList
             this.projectList = response.data.orderProjectList

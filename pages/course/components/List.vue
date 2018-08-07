@@ -65,11 +65,4 @@ export default {
 <style scoped lang="scss">
 // 因兼容问题暂时组件引入
 @import '~assets/style/course/category';
-.btnBg {
-  .el-button {
-    background-color: rgba(143, 74, 203, 1);
-    color: #fff;
-    border: none;
-  }
-}
 </style>

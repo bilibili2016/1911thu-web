@@ -110,7 +110,7 @@
 
 
 <script>
-import { other, auth, home, players, coursedetail } from '~/lib/v1_sdk/index'
+import { auth, projectPlayer } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -300,7 +300,7 @@ export default {
     },
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
-        coursedetail.getEvaluateTags().then(response => {
+        projectPlayer.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('5')
@@ -350,7 +350,7 @@ export default {
     addShopCart() {
       this.curriculumcartids.cartid = this.kid
       return new Promise((resolve, reject) => {
-        home.addShopCart(this.curriculumcartids).then(response => {
+        projectPlayer.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push('/shop/shoppingcart')
         })
       })
@@ -409,7 +409,7 @@ export default {
       } else {
         this.curriculumcartids.cartid = item[0].curriculum_id
         return new Promise((resolve, reject) => {
-          home.addShopCart(this.curriculumcartids).then(response => {
+          projectPlayer.addShopCart(this.curriculumcartids).then(response => {
             // window.open(window.location.origin + '/shop/shoppingcart')
             this.$message({
               type: 'success',
@@ -454,7 +454,7 @@ export default {
       socket.on('reconnect', function(msg) {})
 
       // 获取播放url
-      players.getPlayerInfos(this.playerForm).then(response => {
+      projectPlayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
           this.playing = this.pauseImg
           this.goShoppingCart(response.msg)
@@ -528,16 +528,18 @@ export default {
     getCurriculumPlayInfo() {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          this.player = response.data.curriculumDetail
-          this.iseve = response.data.curriculumDetail.is_evaluate
-          this.bought = response.data.curriculumPrivilege
-          this.isStudy = response.data.curriculumDetail.is_study
-          this.courseList = response.data.curriculumCatalogList
-          this.collectMsg = response.data.curriculumDetail.is_collection
-          this.curriculumPrivilege = response.data.curriculumPrivilege
-          this.isFreeCourse = response.data.curriculumDetail.is_free
-        })
+        projectPlayer
+          .getCurriculumPlayInfo(this.playerDetailForm)
+          .then(response => {
+            this.player = response.data.curriculumDetail
+            this.iseve = response.data.curriculumDetail.is_evaluate
+            this.bought = response.data.curriculumPrivilege
+            this.isStudy = response.data.curriculumDetail.is_study
+            this.courseList = response.data.curriculumCatalogList
+            this.collectMsg = response.data.curriculumDetail.is_collection
+            this.curriculumPrivilege = response.data.curriculumPrivilege
+            this.isFreeCourse = response.data.curriculumDetail.is_free
+          })
       })
     },
     // 反馈问题
@@ -545,7 +547,7 @@ export default {
       this.problem.curriculumId = persistStore.get('curriculumId')
       this.problem.curriculumcatalogid = persistStore.get('catalogId')
       return new Promise((resolve, reject) => {
-        home.reportProblem(this.problem).then(response => {
+        projectPlayer.reportProblem(this.problem).then(response => {
           if (response.status === '100100') {
             this.$message({
               showClose: true,
@@ -599,7 +601,7 @@ export default {
 
       // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
       return new Promise((resolve, reject) => {
-        coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
+        projectPlayer.addEvaluate(this.addEvaluateForm).then(response => {
           if (response.status === '100100') {
             this.$message({
               showClose: true,
@@ -634,7 +636,7 @@ export default {
     addCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        coursedetail.addCollection(this.addCollectionForm).then(response => {
+        projectPlayer.addCollection(this.addCollectionForm).then(response => {
           this.$message({
             showClose: true,
             type: 'success',
@@ -648,15 +650,17 @@ export default {
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
-        coursedetail.deleteCollection(this.addCollectionForm).then(response => {
-          // this.collectMsg = response.data.curriculumDetail.is_collection
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '取消收藏成功'
+        projectPlayer
+          .deleteCollection(this.addCollectionForm)
+          .then(response => {
+            // this.collectMsg = response.data.curriculumDetail.is_collection
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: '取消收藏成功'
+            })
+            this.collectMsg = 0
           })
-          this.collectMsg = 0
-        })
       })
     },
     // 为播放器上当的播放按钮添加点击事件
@@ -672,7 +676,7 @@ export default {
         // console.log(event)
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
-          players.getPlayerInfos(that.playerForm).then(response => {
+          projectPlayer.getPlayerInfos(that.playerForm).then(response => {
             if (response.status === '100100') {
               that.playing = that.pauseImg
               that.goShoppingCart(response.msg)

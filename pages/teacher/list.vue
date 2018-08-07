@@ -1,5 +1,5 @@
 <template>
-  <div class="news-list ">
+  <div class="news-list">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow">
       <div @click="getNewInfoList"></div>
@@ -15,7 +15,7 @@
 import CustomBanner from '@/components/common/Banner.vue'
 import CustomCard from '@/pages/teacher/components/Card.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
-import { other, home } from '~/lib/v1_sdk/index'
+import { list } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   components: {
@@ -63,7 +63,7 @@ export default {
       this.teacherForm.pages = 1
       this.teacherForm.limits = 7
       return new Promise((resolve, reject) => {
-        home.getTeacherList(this.teacherForm).then(response => {
+        list.getTeacherList(this.teacherForm).then(response => {
           this.pagemsg.total = Number(response.data.pageCount)
           this.famousList = response.data.teacherList
         })
@@ -74,7 +74,7 @@ export default {
       this.pagemsg.page = val
       this.teacherForm.limits = this.pagemsg.pagesize
       return new Promise((resolve, reject) => {
-        home.getTeacherList(this.teacherForm).then(response => {
+        list.getTeacherList(this.teacherForm).then(response => {
           this.pagemsg.total = Number(response.data.pageCount)
           this.famousList = response.data.teacherList
         })

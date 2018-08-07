@@ -485,28 +485,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.detail {
-  span {
-    display: inline !important;
-    line-height: 40px;
-  }
-}
-.container {
-  .shareIcons {
-    .social-share {
-      width: 190px;
-      height: 94px;
-      line-height: 94px;
-      text-align: center;
-      background: rgba(255, 255, 255, 1);
-      border-radius: 4px;
-      box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-    }
-    .social-share .social-share-icon {
-      margin-right: 20px !important;
-    }
-  }
-}
-</style>
 
