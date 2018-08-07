@@ -368,13 +368,13 @@
               <el-tab-pane name="orderThird">
                 <span class="payOk" slot="label">开票规则
                 </span>
-                <v-tkorder v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goTicketDetail="getOrderDetail" v-loading="readyOrderLoad"></v-tkorder>
-                <div class="content noOrder" v-else>
+                <v-tkrules v-loading="readyOrderLoad"></v-tkrules>
+                <!-- <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
                   </div>
-                </div>
+                </div> -->
               </el-tab-pane>
             </el-tabs>
           </el-card>
@@ -397,7 +397,7 @@
                     <span class="lr">数量</span>
                   </div>
                   <div class="bottom">
-                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="course.id">
+                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="index">
                       <div class="courseInfo clearfix">
                         <div class="bottomImg">
 
@@ -475,7 +475,7 @@ import Conversion from '@/pages/profile/components/conversion'
 import Bind from '@/pages/profile/components/binding'
 import TicketOrder from '@/pages/profile/pages/ticketOrder'
 import TicketHistory from '@/pages/profile/pages/ticketHistory'
-import Test from '@/pages/profile/pages/test'
+import TicketRules from '@/pages/profile/pages/ticketRules'
 import {
   other,
   home,
@@ -499,7 +499,7 @@ export default {
     'v-tkorder': TicketOrder,
     'v-tkhistory': TicketHistory,
     'v-binding': Bind,
-    'v-test': Test
+    'v-tkrules': TicketRules
   },
   data() {
     return {

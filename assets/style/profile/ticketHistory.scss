@@ -1,0 +1,205 @@
+.tickeHietory {
+  background-color: #fff;
+  .orderList {
+    .list {
+      .content {
+        .course {
+          width: 500px;
+          .courseOne {
+            width: 500px;
+            h4 {
+              width: 285px;
+            }
+          }
+        }
+        .price {
+          height: 140px;
+        }
+
+        .number {
+          cursor: pointer;
+          width: 130px;
+          height: 140px;
+          border-right: 1px solid #e8d6f7;
+          padding: 0 10px;
+          justify-content: space-around;
+          flex-wrap: nowrap;
+          flex-direction: row;
+          div {
+            width: auto;
+            p {
+              line-height: 30px;
+              font-size: 16px;
+              color: #222;
+            }
+          }
+        }
+        .status {
+          width: 130px;
+          height: 140px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .ticketPopup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 200;
+    .content {
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      z-index: 300;
+      width: 747px;
+      min-height: 233px;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 300px;
+      .title {
+        height: 60px;
+        line-height: 60px;
+        padding: 0 30px 0 40px;
+        border-bottom: 1px solid #e8d6f7;
+        .fl {
+          float: left;
+          font-size: 16px;
+          color: #222;
+        }
+        .fr {
+          float: right;
+          i {
+            font-size: 18px;
+            color: #6417a6;
+            font-weight: 600;
+          }
+        }
+      }
+      .bottomCon {
+        padding: 30px 30px 40px 30px;
+
+        .items {
+          border: 1px solid #e8d6f7;
+          .item-list {
+            height: 50px;
+            line-height: 50px;
+            font-size: 14px;
+            color: #222;
+            background-color: #fafafa;
+            border-bottom: 1px solid #e8d6f7;
+            &:last-child {
+              border-bottom: none;
+            }
+            div {
+              float: left;
+              width: 25%;
+              text-align: center;
+            }
+            .code {
+              text-align: left;
+              padding-left: 20px;
+              width: 30%;
+            }
+            .time {
+              width: 25%;
+            }
+            .num {
+              width: 25%;
+            }
+            .price {
+              width: 20%;
+              text-align: right;
+              padding-right: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .statusPopup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 200;
+    .content {
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      z-index: 300;
+      width: 747px;
+      min-height: 233px;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 420px;
+      .title {
+        height: 60px;
+        line-height: 60px;
+        padding: 0 30px 0 40px;
+        border-bottom: 1px solid #e8d6f7;
+        .fl {
+          float: left;
+          font-size: 16px;
+          color: #222;
+        }
+        .fr {
+          float: right;
+          i {
+            font-size: 18px;
+            color: #6417a6;
+            font-weight: 600;
+          }
+        }
+      }
+      .bottomCon {
+        padding: 30px 30px 40px 30px;
+        .top {
+          height: 50px;
+          line-height: 50px;
+          color: #6417a6;
+          font-size: 16px;
+          background-color: #ebe7ed;
+          padding-left: 20px;
+        }
+        .item-one {
+          margin-bottom: 10px;
+
+          .bottom {
+            line-height: 24px;
+            color: #222;
+            font-size: 14px;
+            padding: 10px 0 10px 20px;
+            background-color: #fafafa;
+            span {
+              display: inline-block;
+              width: 50%;
+            }
+          }
+        }
+        .item-two {
+          .bottom {
+            line-height: 24px;
+            color: #222;
+            font-size: 14px;
+            padding: 10px 0 10px 20px;
+            background-color: #fafafa;
+          }
+        }
+      }
+    }
+  }
+}

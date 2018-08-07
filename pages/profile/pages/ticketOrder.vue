@@ -9,8 +9,8 @@
       <div class="list">
         <div class="content">
           <div class="check">
-            <!-- <el-checkbox v-model="courseList.checked" @change="handleSelectChange(1,courseList,index)"></el-checkbox> -->
-            <el-checkbox @change="handleSelectChange(1,courseList,index)"></el-checkbox>
+            <!-- <el-checkbox v-model="courseList.checked" @change="handleSelectSingle(1,courseList)"></el-checkbox> -->
+            <el-checkbox ref="checkbox" @change="handleSelectSingle(1,courseList,index)"></el-checkbox>
           </div>
           <div class="course">
             <!-- 课程列表 -->
@@ -50,7 +50,7 @@
     <div class="bottomPosition" if="bottomPosition"></div>
     <div class="bottomBar" id="bottomBar" ref="bottomBar" :class="{bottomBarFixed:isFixed}">
       <span class="fl">
-        <el-checkbox v-model="checkMsg " @change="handleSelectChange(2) "></el-checkbox>
+        <el-checkbox v-model="checkMsg " @change="handleSelectAll"></el-checkbox>
         全选
       </span>
       <span class="money ">
@@ -356,6 +356,7 @@ export default {
   props: ['orderData'],
   data() {
     return {
+      ticketOrderData: '',
       singleCheck: '',
       index: 0,
       checkedNum: 1,
@@ -525,36 +526,52 @@ export default {
       this.$emit('goTicketDetail', false)
     },
     // 选择要开发票的订单
-    handleSelectChange(type, item, index) {
-      console.log(item.checked)
-      if (type == 1) {
-        if (item.checked) {
-          let itemIndex = this.checkedArr.indexOf(item.id)
-          item.checked = false
-          this.checkedArr.splice(itemIndex, 1)
-        } else {
-          this.checkedArr.push(item.id)
-          item.checked = true
-        }
-        console.log(this.checkedArr)
-
-        if (this.checkedArr.length == this.orderData.length) {
-          this.checkMsg = true
-        } else {
-          this.checkMsg = false
-        }
+    handleSelectSingle(type, item, index) {
+      let itemIndex = this.checkedArr.indexOf(item.id)
+      if (itemIndex >= 0) {
+        //未选中
+        this.checkedArr.splice(itemIndex, 1)
       } else {
-        this.selectAll()
+        //选中
+        this.checkedArr.push(item.id)
       }
+      console.log(this.checkedArr)
+
+      if (this.checkedArr.length == this.ticketOrderData.length) {
+        this.checkMsg = true
+      } else {
+        this.checkMsg = false
+      }
+
+      // if (type == 1) {
+      //   if (item.checked) {
+      //     let itemIndex = this.checkedArr.indexOf(item.id)
+      //     // item.checked = false
+      //     this.checkedArr.splice(itemIndex, 1)
+      //   } else {
+      //     this.checkedArr.push(item.id)
+      //     // item.checked = true
+      //   }
+      //   console.log(this.checkedArr)
+
+      //   if (this.checkedArr.length == this.orderData.length) {
+      //     this.checkMsg = true
+      //   } else {
+      //     this.checkMsg = false
+      //   }
+      // } else {
+      //   this.selectAll()
+      // }
     },
     // 全选
-    selectAll() {
-      if (this.checkedNum === 1) {
+    handleSelectAll(val) {
+      if (val) {
+        this.checkedArr = []
         this.orderData.forEach(v => {
           v.checked = true
           this.checkedArr.push(v.id)
         })
-        this.checkedNum = 2
+        // this.checkedNum = 2
       } else {
         this.orderData.forEach(v => {
           v.checked = false
@@ -1162,7 +1179,7 @@ export default {
   },
   mounted() {
     console.log(this.orderData)
-
+    this.ticketOrderData = this.orderData
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.headerHeight = document.getElementsByClassName(
@@ -1225,104 +1242,9 @@ export default {
     //     }
     //   }
     // }
-  },
-  deactivated() {
-    window.removeEventListener('scroll', this.addClass)
   }
 }
 </script>
-<style lang="scss">
-.ticketOrder {
-  background-color: #fff;
-  .orderList {
-    .list {
-      .content {
-        .check {
-          width: 110px;
-        }
-        .course {
-          width: 670px;
-          .courseOne {
-            width: 670px;
-            padding-left: 0;
-          }
-        }
-        .price {
-          border-right: none;
-        }
-      }
-    }
-  }
-  .bottomBar {
-    height: 60px;
-    line-height: 60px;
-    background-color: #ebe7ed;
-    text-align: right;
-    font-size: 16px;
-    margin-top: 30px;
-    color: #222;
-    position: relative;
-    &.bottomBarFixed {
-      width: 896px;
-      position: fixed;
-      bottom: 0;
-      margin: 0 auto;
-      z-index: 2;
-    }
-    span.fl {
-      .el-checkbox {
-        padding-right: 18px;
-      }
-    }
-    .next {
-      width: 140px;
-      height: 60px;
-      text-align: center;
-      background-color: #6417a6;
-      color: #fff;
-      vertical-align: top;
-      cursor: pointer;
-    }
-    .money {
-      margin-right: 40px;
-      i {
-        color: #ff5f5f;
-      }
-      strong {
-        font-size: 18px;
-        font-weight: 400;
-        i {
-          font-weight: 700;
-          font-size: 24px;
-        }
-      }
-    }
-  }
-  .el-checkbox {
-    padding-left: 41px;
-    color: #222;
-    font-size: 16px;
-    .el-checkbox__inner {
-      border-color: #6417a6;
-      width: 18px;
-      height: 18px;
-      border-radius: 4px;
-      background-color: transparent;
-      &:after {
-        height: 9px;
-        left: 6px;
-        top: 2px;
-      }
-    }
-    .el-checkbox__input.is-checked {
-      & .el-checkbox__inner {
-        border-color: #6417a6;
-        background-color: #6417a6;
-      }
-      & + .el-checkbox__label {
-        color: #222;
-      }
-    }
-  }
-}
+<style lang="scss" lang="scss">
+@import '~assets/style/profile/ticketOrder';
 </style>
