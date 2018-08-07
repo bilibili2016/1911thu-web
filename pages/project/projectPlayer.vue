@@ -2,7 +2,7 @@
   <div class="playerBox clearfix" ref="playerBox">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <div class="playTop" @click="goLink()">
-        <i class="el-icon-arrow-left"></i>{{player.title}}
+        <i class="el-icon-arrow-left"></i>{{projectDetail.title}}
       </div>
       <div class="playInner" ref="playInner">
         <div id="mediaPlayer" ref="mediaPlayer" style="width:100%; height:100%;"></div>
@@ -36,33 +36,22 @@
       </div>
     </div>
     <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
-      <div v-show="mediaRInner" class="inner">
-        <h5 class="title">{{player.title}}</h5>
-        <!-- <div class="teacher clearfix">
-          <img class="fl" :src="player.head_img" alt="" @click="goTeacherInfo(player.teacher_id)">
-          <div class="playername fl" @click="goTeacherInfo(player.teacher_id)">
-            <div>{{player.is_car === 1 ? false : true}}</div>
-            <div>{{player.teacher_name}}</div>
-            <div>{{player.graduate}}</div>
-            <div>{{player.is_cart}}</div>
-          </div>
-          <div v-if="player.is_cart === 1">
-            <div class="fr shopcart" @click="playerBuy(courseList, player)"><img src="@/assets/images/shopcart2.png" alt=""></div>
-          </div>
-          <div v-else>{{player.is_cart}}</div>
-        </div> -->
-        <div class="courseList" ref="courseList">
-          <div class="chapter" v-for="(section,index) in courseList" :key="index">
-            <h4>{{section.title}}</h4>
-            <div class="knobble clearfix" v-for="(bar,index) in section.childList" :key="index" @click="handleCourse(bar,index)" :class="{cli:ischeck == bar.id?true:false}">
-              <span class="fl playIcon" v-show="ischeck == bar.id?false:true">
-                <i class="el-icon-caret-right"></i>
-              </span>
-              <span class="fl playImg" v-show="ischeck == bar.id?true:false">
-                <img :src="playing" alt="" ref="videoButton">
-              </span>
-              <span class="fl barName">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)</span>
-              <span class="barNameHover">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)</span>
+      <div v-show="mediaRInner" class="inner" ref="inner">
+        <div v-for="(course,index) in courseList" :key="index" ref="courseList">
+          <h5 class="title">{{course.curriculum_title}}</h5>
+          <div class="courseList">
+            <div class="chapter" v-for="(section,index) in course.curriculumCatalogList" :key="index">
+              <h4>{{section.title}}</h4>
+              <div class="knobble clearfix" v-for="(bar,index) in section.catalogList" :key="index" @click="handleCourse(bar,index)" :class="{cli:ischeck == bar.id?true:false}">
+                <span class="fl playIcon" v-show="ischeck == bar.id?false:true">
+                  <i class="el-icon-caret-right"></i>
+                </span>
+                <span class="fl playImg" v-show="ischeck == bar.id?true:false">
+                  <img :src="playing" alt="" ref="videoButton">
+                </span>
+                <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)</span>
+                <span class="barNameHover">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)</span>
+              </div>
             </div>
           </div>
         </div>
@@ -110,7 +99,14 @@
 
 
 <script>
-import { other, auth, home, players, coursedetail } from '~/lib/v1_sdk/index'
+import {
+  other,
+  auth,
+  home,
+  players,
+  coursedetail,
+  projectDetail
+} from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -140,27 +136,8 @@ export default {
       playImg: require('@/assets/images/playImg.gif'),
       pauseImg: require('@/assets/images/video.png'),
       player: {},
-      courseList: [
-        {
-          section: '第一章 图的基本概念',
-          knobbles: [
-            {
-              number: '1-1',
-              barName: '课程概述',
-              duration: '32分钟',
-              percentage: 30,
-              isFree: true
-            },
-            {
-              number: '1-1',
-              barName: '课程概述',
-              duration: '32分钟',
-              percentage: 30,
-              isFree: true
-            }
-          ]
-        }
-      ],
+      courseList: [],
+      projectDetail: {},
       problem: {
         curriculumId: null,
         content: '',
@@ -198,6 +175,9 @@ export default {
       playerDetailForm: {
         curriculumId: ''
       },
+      projectForm: {
+        ids: ''
+      },
       tidForm: {
         tids: null
       },
@@ -212,8 +192,8 @@ export default {
       addCollectionForm: {
         curriculumId: null
       },
-      collectMsg: 1,
-      iseve: 1,
+      collectMsg: 0,
+      iseve: 0,
       bought: false,
       isStudy: false,
       getdefaultForm: {
@@ -233,34 +213,37 @@ export default {
       rateModel: 5,
       addEvaluateForm: {
         ids: '',
-        evaluatecontent: '',
+        curriculumId: '',
+        types: 2,
         scores: '',
-        types: 1,
-        tag: [],
-        curriculumcatalogid: ''
+        evaluateContent: '',
+        tag: []
+      },
+      shoppingForm: {
+        cartid: '',
+        type: 2
       }
     }
   },
   methods: {
     ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
-    isHasClass() {
-      let myVideo = document.getElementById('movd')
-      // console.log(myVideo)
-      if (myVideo == null) {
-        return
-      }
-      if (myVideo.getAttribute('class')) {
-        // 存在class属性
+    // isHasClass() {
+    //   let myVideo = document.getElementById('movd')
+    //   if (myVideo == null) {
+    //     return
+    //   }
+    //   if (myVideo.getAttribute('class')) {
+    //     // 存在class属性
 
-        // 方式2
-        if (myVideo.className.indexOf('vjs-paused') > -1) {
-          this.videoState = false
-          // console.log('包含 test 这个class')
-        } else {
-          this.videoState = true
-        }
-      }
-    },
+    //     // 方式2
+    //     if (myVideo.className.indexOf('vjs-paused') > -1) {
+    //       this.videoState = false
+    //       // console.log('包含 test 这个class')
+    //     } else {
+    //       this.videoState = true
+    //     }
+    //   }
+    // },
     signOuts() {
       this.signOut()
       persistStore.clearAll()
@@ -284,8 +267,6 @@ export default {
       } else {
         this.$set(val, 'isCheck', true)
       }
-
-      // this.borderIndex = index
       this.addEvaluateForm.tag.push(val.value)
     },
     handleCourse(item, index) {
@@ -315,16 +296,7 @@ export default {
       } else {
         this.$set(val, 'isCheck', true)
       }
-
-      // this.borderIndex = index
       this.addEvaluateForm.tag.push(val.value)
-    },
-    // 去老师详情
-    goTeacherInfo(id) {
-      this.tidForm.tids = Number(id)
-
-      this.setTid(this.tidForm)
-      window.open(window.location.origin + '/home/components/teacher')
     },
     // 提示跳转购车
     goShoppingCart(msg) {
@@ -336,27 +308,31 @@ export default {
         center: true
       })
         .then(() => {
-          // 未购买课程跳转到购物车
+          // 未购买课程跳转到购物车-点击去购买
           this.addShopCart()
         })
         .catch(() => {
+          // 点击取消
           // this.$message({
           //   type: 'info',
           //   message: '已取消删除'
           // })
         })
     },
-    // 添加购物车
+    // 项目加入购物车
     addShopCart() {
-      this.curriculumcartids.cartid = this.kid
-      return new Promise((resolve, reject) => {
-        home.addShopCart(this.curriculumcartids).then(response => {
+      home.addShopCart(this.shoppingForm).then(res => {
+        if (res.status === 0) {
+          // 添加购物车成功
           this.$router.push('/shop/shoppingcart')
-        })
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+        }
       })
-    },
-    selTypeChange(index) {
-      this.radioBtn = index
     },
     showRpt() {
       this.showReportBug = true
@@ -376,10 +352,11 @@ export default {
     resize() {
       if (this.$refs.playerBox) {
         const h = this.$refs.playerBox.offsetHeight
+        console.log(this.$refs.mediaL.style)
         this.$refs.mediaL.style.height = h + 'px'
         this.$refs.mediaR.style.height = h + 'px'
-        this.$refs.courseList.style.height = h - 140 + 'px'
         this.$refs.playInner.style.height = h - 100 + 'px'
+        this.$refs.inner.style.height = h - 100 + 'px'
       }
     },
     fold() {
@@ -388,7 +365,6 @@ export default {
         this.mediaRInner = false
         this.mediaRIcon = 'el-icon-arrow-left'
         this.mediaLW = 100
-        this.$refs.movd.children[0].style.width = this.mediaLW + '%'
       } else {
         this.mediaRW = 22
         this.mediaRInner = true
@@ -398,26 +374,7 @@ export default {
       // this.resize();
     },
     goLink() {
-      this.$router.push('/course/coursedetail')
-    },
-    playerBuy(item, info) {
-      if (info.is_cart === 1) {
-        // this.$alert('商品已在购物车内', '温馨提示', {
-        //   confirmButtonText: '确定',
-        //   callback: action => {}
-        // })
-      } else {
-        this.curriculumcartids.cartid = item[0].curriculum_id
-        return new Promise((resolve, reject) => {
-          home.addShopCart(this.curriculumcartids).then(response => {
-            // window.open(window.location.origin + '/shop/shoppingcart')
-            this.$message({
-              type: 'success',
-              message: '添加购物车成功'
-            })
-          })
-        })
-      }
+      this.$router.push('/project/projectdetail')
     },
     getPlayerInfo() {
       if (typeof TcPlayer === 'undefined') {
@@ -510,34 +467,33 @@ export default {
         }
         // 监听暂停事件
         if (msg.type == 'pause') {
-          that.isHasClass()
+          // that.isHasClass()
           that.playing = that.pauseImg
           clearInterval(that.interval)
           socket.emit('watchRecordingTime_disconnect')
         }
         // 监听播放器音量改变
         if (msg.type == 'volumechange') {
-          that.isHasClass()
+          // that.isHasClass()
           persistStore.set('volume', window.qcplayer.volume())
         }
       }
 
-      this.isHasClass()
+      // this.isHasClass()
     },
     // 获取视频播放参数
     getCurriculumPlayInfo() {
-      this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
-      return new Promise((resolve, reject) => {
-        players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          this.player = response.data.curriculumDetail
-          this.iseve = response.data.curriculumDetail.is_evaluate
-          this.bought = response.data.curriculumPrivilege
-          this.isStudy = response.data.curriculumDetail.is_study
-          this.courseList = response.data.curriculumCatalogList
-          this.collectMsg = response.data.curriculumDetail.is_collection
-          this.curriculumPrivilege = response.data.curriculumPrivilege
-          this.isFreeCourse = response.data.curriculumDetail.is_free
-        })
+      this.projectForm.ids = persistStore.get('projectId')
+      projectDetail.getPlayerList(this.projectForm).then(response => {
+        this.projectDetail = response.data.curriculumProjectDetail
+        this.courseList = response.data.curriculumProjectDetail.curriculumList
+        this.shoppingForm.cartid = response.data.curriculumProjectDetail.id
+        this.bought =
+          response.data.curriculumProjectDetail.curriculumProjectPrivilege
+        this.isFreeCourse = response.data.curriculumProjectDetail.is_free
+        //   this.iseve = response.data.curriculumDetail.is_evaluate
+        //   this.isStudy = response.data.curriculumDetail.is_study
+        //   this.collectMsg = response.data.curriculumDetail.is_collection
       })
     },
     // 反馈问题
@@ -589,37 +545,33 @@ export default {
         return false
       }
 
-      this.addEvaluateForm.ids = persistStore.get('curriculumId')
-      this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
-      this.addEvaluateForm.evaluatecontent = this.word
+      this.addEvaluateForm.ids = this.shoppingForm.cartid
+      this.addEvaluateForm.curriculumId = persistStore.get('curriculumId')
+      this.addEvaluateForm.evaluateContent = this.word
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-
-      // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
-      return new Promise((resolve, reject) => {
-        coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'warning',
-              message: response.msg
-            })
-          } else {
-            this.addEvaluateForm.tag = []
-            for (let item of this.btnData) {
-              this.$set(item, 'isCheck', false)
-            }
-            this.word = ''
-            this.showEvaluate = false
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
+      projectdetail.addEvaluate(this.addEvaluateForm).then(response => {
+        if (response.status === '100100') {
+          this.$message({
+            showClose: true,
+            type: 'warning',
+            message: response.msg
+          })
+        } else {
+          this.addEvaluateForm.tag = []
+          for (let item of this.btnData) {
+            this.$set(item, 'isCheck', false)
           }
-        })
+          this.word = ''
+          this.showEvaluate = false
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
+          })
+        }
       })
     },
     // 判断是收藏还是为收藏
@@ -683,19 +635,19 @@ export default {
     }
   },
   mounted() {
-    this.videoState = document.getElementById('movd')
-    this.resize()
+    // this.videoState = document.getElementById('movd')
     // 分享暂时注释
     // var $config = {
     //   url: 'http://www.1911edu.com/'
     // }
 
     // socialShare('.social-share', $config)
-    window.addEventListener('resize', this.resize)
+
     // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
-
+    this.resize()
+    window.addEventListener('resize', this.resize)
     this.getPlayerInfo()
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
@@ -703,7 +655,7 @@ export default {
       // 获取评论接口
       this.getEvaluateTags()
 
-    this.isHasClass()
+    // this.isHasClass()
     this.addPlay()
   },
   watch: {
@@ -723,6 +675,11 @@ export default {
   display: none;
 }
 .playerBox {
+  .mediaR .inner {
+    padding: 0;
+    margin-top: 50px;
+    overflow-y: auto;
+  }
   .shareIcond {
     opacity: 0;
     display: none;

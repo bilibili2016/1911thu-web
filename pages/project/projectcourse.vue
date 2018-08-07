@@ -12,7 +12,7 @@
             <h6>{{course.teacher_name}} {{course.teacher_graduate}}</h6>
             <p>{{course.introduction}}</p>
           </div>
-          <img class="fr" src="~assets/images/pro_player.png" alt="">
+          <img class="fr" src="~assets/images/pro_player.png" alt="" @click="goProjectPlayer">
         </div>
       </div>
     </div>
@@ -42,6 +42,10 @@ export default {
       this.kidForm.kids = item.curriculum_id
       this.setKid(this.kidForm)
       window.open(window.location.origin + '/course/coursedetail')
+    },
+    // 跳转到项目播放页
+    goProjectPlayer() {
+      window.open(window.location.origin + '/project/projectPlayer')
     }
   }
 }
