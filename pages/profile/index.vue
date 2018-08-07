@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fifth'"></v-banner>
+    <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-sixth'"></v-banner>
     <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
         <!-- 我的首页 -->
@@ -92,8 +92,70 @@
           </el-card>
 
         </el-tab-pane>
+        <!-- 我的项目 -->
+        <el-tab-pane class="my-course" name="tab-third">
+          <span slot="label" class="tabList">
+            <i class="icon-course"></i> 我的项目</span>
+          <el-card class="changeNav">
+            <el-tabs v-model="activeProject" @tab-click="handleProject">
+              <!-- 我的项目 学习中 -->
+              <el-tab-pane label="学习中" name="first">
+                <v-card v-if="studyProjectData  && studyProjectData.length>0" :data="studyProjectData" :config="configOne"></v-card>
+                <div class="pagination" v-if="studyProjectData  && studyProjectData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="projectPageStudy.pagesize" :pager-count="5" :page-count="projectPageStudy.pagesize" :current-page="projectPageStudy.page" :total="projectPageStudy.total" @current-change="studyProjectPageChange"></el-pagination>
+                </div>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有学习中的项目呦~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+              <!-- 我的项目 已完成 -->
+              <el-tab-pane label="已完成" name="second">
+                <v-card v-if="readyProjectData && readyProjectData.length>0" :data="readyProjectData" :config="configTwo"></v-card>
+                <div class="pagination" v-if="readyProjectData && readyProjectData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="projectPageReady.pagesize" :pager-count="5" :page-count="projectPageReady.pagesize" :current-page="projectPageReady.page" :total="projectPageReady.total" @current-change="studyProjectPageChange"></el-pagination>
+                </div>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有已经完成的项目呦~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+              <!-- 我的项目 已过期 -->
+              <el-tab-pane label="已过期" name="fourth">
+                <v-card v-if="expiredProjectData && expiredProjectData.length>0" :data="expiredProjectData" :config="configFour"></v-card>
+                <div class="pagination" v-if="expiredProjectData && expiredProjectData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="projectPageExpired.pagesize" :pager-count="5" :page-count="projectPageExpired.pagesize" :current-page="projectPageExpired.page" :total="projectPageExpired.total" @current-change="expiredProjectPageChange"></el-pagination>
+                </div>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有已过期的项目呦~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+              <!-- 我的项目 我的收藏 -->
+              <el-tab-pane label="我的收藏" name="third">
+                <v-card v-if="collectProjectData && collectProjectData.length>0" :data="collectProjectData" :config="configZero"></v-card>
+                <div class="pagination" v-if="collectProjectData && collectProjectData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="projectPageCollect.pagesize" :pager-count="5" :page-count="projectPageCollect.pagesize" :current-page="projectPageCollect.page" :total="projectPageCollect.total" @current-change="collectProjectPageChange"></el-pagination>
+                </div>
+                <div class="content" v-else>
+                  <div class="noCourse">
+                    <img :src="noMsgImg" alt="">
+                    <h4>抱歉，现在还没有已经收藏的项目呦~</h4>
+                  </div>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+          </el-card>
+
+        </el-tab-pane>
         <!-- 我的订单 -->
-        <el-tab-pane class="my-course my-order" name="tab-third">
+        <el-tab-pane class="my-course my-order" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
           <!-- 订单 -->
@@ -289,7 +351,7 @@
           </div>
         </el-tab-pane>
         <!-- 我的消息 -->
-        <el-tab-pane class="my-info" name="tab-fourth">
+        <el-tab-pane class="my-info" name="tab-fifth">
           <span slot="label" class="tabList">
             <i class="icon-message"></i> 我的消息</span>
           <el-card class="card-style">
@@ -307,7 +369,7 @@
           </el-card>
         </el-tab-pane>
         <!-- 个人设置 -->
-        <el-tab-pane name="tab-fifth">
+        <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
             <i class="icon-set"></i> 个人设置</span>
           <v-person @update="updateUserInfo"></v-person>
@@ -319,7 +381,7 @@
           <v-bind></v-bind>
         </el-tab-pane> -->
         <!-- 课程码管理 -->
-        <el-tab-pane class="my-course my-invitation" name="tab-sixth">
+        <el-tab-pane class="my-course my-invitation" name="tab-seventh">
           <span slot="label" class="tabList">
             <i class="icon-code"></i> 兑换码管理</span>
           <el-tabs v-model="courseCodeNames" @tab-click="handleCourseCode">
@@ -339,7 +401,7 @@
         </el-tab-pane>
 
         <!-- 发票管理 -->
-        <el-tab-pane class="my-course my-order" name="tab-seventh">
+        <el-tab-pane class="my-course my-order" name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 发票管理</span>
           <!-- 发票 -->
@@ -415,7 +477,7 @@
                         <i class="el-icon-close"></i>{{orderDetail.pay_number}}
                       </div>
                     </div>
-                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="project.id">
+                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="project in projectList" :key="project.id">
                       <div class="courseInfo clearfix">
                         <div class="bottomImg">
                           <!-- 项目图标 -->
@@ -462,7 +524,7 @@
 </template>
 
 <script>
-import CustomCard from '@/components/card/Card.vue'
+import CustomCard from '@/pages/profile/components/card.vue'
 import CustomList from '@/pages/profile/components/list.vue'
 import Banner from '@/components/common/Banner.vue'
 import PersonalSet from '@/pages/profile/components/personalset.vue'
@@ -512,6 +574,7 @@ export default {
       tabPosition: 'left',
       activeTab: 'tab-first',
       activeNames: 'first',
+      activeProject: 'first',
       courseCodeNames: 'first',
       activeOrder: 'orderFirst',
       bconfig: {
@@ -552,6 +615,35 @@ export default {
         total: 12
       },
       pagemsg3: {
+        page: 1,
+        pagesize: 12,
+        total: 12
+      },
+      projectForm: {
+        types: 1,
+        pages: '',
+        limits: ''
+      },
+      studyProjectData: [],
+      readyProjectData: [],
+      expiredProjectData: [],
+      collectProjectData: [],
+      projectPageStudy: {
+        page: 1,
+        pagesize: 12,
+        total: 12
+      },
+      projectPageReady: {
+        page: 1,
+        pagesize: 12,
+        total: 12
+      },
+      projectPageExpired: {
+        page: 1,
+        pagesize: 12,
+        total: 12
+      },
+      projectPageCollect: {
         page: 1,
         pagesize: 12,
         total: 12
@@ -669,18 +761,18 @@ export default {
         this.overStudyCurriculumList()
       }
     },
+    // 我的项目子类切换
+    handleProject() {},
+    // 兑换码管理子类切换
     handleCourseCode(item) {},
     // 切换 我的学习中分类
     changeNav(item) {
       if (this.activeNames == 'third') {
         // 我的课程 收藏的项目
         this.collectionForm.categoryId = item
-        return new Promise((resolve, reject) => {
-          home.collectionList(this.collectionForm).then(response => {
-            this.collectionData = response.data.curriculumList
-            this.pagemsg2.total = response.data.pageCount
-            resolve(true)
-          })
+        home.collectionList(this.collectionForm).then(response => {
+          this.collectionData = response.data.curriculumList
+          this.pagemsg3.total = response.data.pageCount
         })
       } else {
         if (this.activeNames == 'first') {
@@ -852,12 +944,9 @@ export default {
     collectionPageChange(val) {
       this.pagemsg3.page = val
       this.collectionForm.pages = val
-      return new Promise((resolve, reject) => {
-        home.collectionList(this.collectionForm).then(response => {
-          this.collectionData = response.data.curriculumList
-          this.pagemsg3.total = response.data.pageCount
-          resolve(true)
-        })
+      home.collectionList(this.collectionForm).then(response => {
+        this.collectionData = response.data.curriculumList
+        this.pagemsg3.total = response.data.pageCount
       })
     },
     // 我的订单 全部
@@ -871,6 +960,95 @@ export default {
         })
       })
     },
+    // 我的项目 公共
+    getProjectData(type) {
+      home.getProjectList(this.projectForm).then(response => {
+        if (type === '1') {
+          this.studyProjectData = response.data.studyProjectList
+          this.projectPageStudy.total = response.data.pageCount
+          for (let item of response.data.studyProjectList) {
+            item.percent = Number(item.percent)
+          }
+        }
+        if (type === '2') {
+          this.readyProjectData = response.data.studyProjectList
+          this.projectPageReady.total = response.data.pageCount
+          for (let item of response.data.studyProjectList) {
+            item.percent = Number(item.percent)
+          }
+        }
+        if (type === '3') {
+          this.expiredProjectData = response.data.studyProjectList
+          this.projectPageExpired.total = response.data.pageCount
+          for (let item of response.data.studyProjectList) {
+            item.percent = Number(item.percent)
+          }
+        }
+      })
+    },
+    // 我的项目 学习中
+    getProjectOneList() {
+      this.projectForm.types = 1
+      this.projectForm.pages = 1
+      this.projectForm.limits = 12
+      this.getProjectData('1')
+    },
+    // 我的项目-学习中 分页切换
+    studyProjectPageChange(val) {
+      this.projectPageStudy.page = val
+      this.projectForm.pages = val
+      this.projectForm.types = 1
+      this.getProjectData('1')
+    },
+    // 我的项目 已完成
+    getProjectTwoList() {
+      this.projectForm.types = 2
+      this.projectForm.pages = 1
+      this.projectForm.limits = 12
+      this.getProjectData('2')
+    },
+    // 我的项目-学习中 分页切换
+    readyProjectPageChange(val) {
+      this.projectPageReady.page = val
+      this.projectForm.pages = val
+      this.projectForm.types = 1
+      this.getProjectData('2')
+    },
+    // 我的项目 已过期
+    getProjectThreeList() {
+      this.projectForm.types = 3
+      this.projectForm.pages = 1
+      this.projectForm.limits = 12
+      this.getProjectData('3')
+    },
+    // 我的项目-学习中 分页切换
+    expiredProjectPageChange(val) {
+      this.projectPageReady.page = val
+      this.projectForm.pages = val
+      this.projectForm.types = 1
+      this.getProjectData('3')
+    },
+    // 我的项目 收藏
+    getProjectFourList() {
+      this.projectForm.types = 2
+      this.projectForm.pages = 1
+      this.projectForm.limits = 12
+      home.getProjectCollectList(this.projectForm).then(response => {
+        this.collectProjectData = response.data.collectionCurriculumProjectList
+        this.projectPageCollect.total = response.data.pageCount
+      })
+    },
+    // 我的项目-收藏 分页切换
+    collectProjectPageChange(val) {
+      this.projectPageReady.page = val
+      this.projectForm.pages = val
+      this.projectForm.types = 1
+      home.getProjectCollectList(this.projectForm).then(response => {
+        this.collectProjectData = response.data.collectionCurriculumProjectList
+        this.projectPageCollect.total = response.data.pageCount
+      })
+    },
+
     // 我的订单 待支付
     getUnfinishedOrderData() {
       this.orderForm.payStatus = 1
@@ -1008,6 +1186,10 @@ export default {
       this.studydataList()
       this.studyCurriculumList()
       this.readyStudyCurriculumList()
+      this.getProjectOneList()
+      this.getProjectTwoList()
+      this.getProjectThreeList()
+      this.getProjectFourList()
       this.childCategoryList()
       this.collectionList()
       this.getAllOrderData()
@@ -1049,354 +1231,5 @@ export default {
 }
 </script>
 <style scope lang="scss">
-.bigTab {
-  width: 1140px;
-  & > div > div.el-tabs__content {
-    width: 926px;
-    padding: 15px;
-    margin-top: -15px;
-    box-shadow: none;
-    .changeNav {
-      position: relative;
-      .el-select {
-        position: absolute;
-        right: 0;
-        top: 9px;
-        z-index: 5;
-        .el-input__inner {
-          border: none;
-          padding: 0;
-          text-align: center;
-        }
-      }
-    }
-    .pagination {
-      margin: 10px 0 40px;
-    }
-  }
-  &.profile .my-course.my-order {
-    overflow: initial;
-  }
-  &.profile .my-course#pane-tab-third .el-tabs__content,
-  &.profile .my-course#pane-tab-seventh .el-tabs__content {
-    overflow: initial;
-  }
-  &.profile .my-course .el-tabs__header {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-  }
-  #pane-tab-third .el-tabs__header,
-  #pane-tab-seventh .el-tabs__header {
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-  }
-  #pane-tab-sixth {
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-    border-radius: 6px;
-    overflow: initial;
-    .el-tabs__content {
-      overflow-y: auto;
-    }
-    overflow: hidden;
-  }
-  .el-tabs__content {
-    .el-tabs__item {
-      span {
-        position: relative;
-        i {
-          position: absolute;
-          top: 5px;
-          right: -18px;
-          width: 18px;
-          height: 18px;
-          line-height: 18px;
-          text-align: center;
-          border-radius: 50%;
-          font-size: 12px;
-          color: #fff;
-          display: inline-block;
-          background-color: #ff5f5f;
-        }
-      }
-    }
-  }
-  .orderListDetail {
-    //订单列表详情
-    width: 100%;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 6px;
-    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-    .table {
-      .tableHeader {
-        height: 55px;
-        line-height: 55px;
-        background-color: #fff;
-        // color: #222;
-        border-bottom: 1px solid #e8d6f7;
-        span {
-          vertical-align: middle;
-        }
-        .goBack {
-          font-size: 18px;
-          font-weight: 800;
-          margin: 0 15px 0 30px;
-          color: #6417a6;
-          cursor: pointer;
-        }
-      }
-      .tableBody {
-        padding: 20px 30px 40px 30px;
-        .bodyItem {
-          border: 1px solid #e8d6f7;
-          margin-bottom: 20px;
-          .top {
-            height: 60px;
-            line-height: 60px;
-            background-color: #ebe7ed;
-            color: #6417a6;
-            font-size: 16px;
-            padding-left: 30px;
-          }
-          .bottom {
-            background-color: #fafafa;
-            padding: 0 50px 0 30px;
-
-            .info {
-              height: 50px;
-              line-height: 50px;
-              font-size: 14px;
-              // color: #222;
-              .info-fr,
-              .info-fl {
-                width: 50%;
-                float: left;
-              }
-            }
-          }
-        }
-        .goods {
-          .top {
-            padding-right: 50px;
-            .lf {
-              width: 80%;
-            }
-            .lm {
-              width: 10%;
-              text-align: center;
-            }
-            .lr {
-              width: 10%;
-              text-align: right;
-            }
-          }
-          .bottom {
-            padding: 0;
-            .bottom-item {
-              border-bottom: 1px solid #e8d6f7;
-              padding: 0 50px 0 30px;
-            }
-            .courseInfo {
-              float: left;
-              width: 80%;
-              margin-top: 20px;
-              img {
-                width: 160px;
-                height: 100px;
-                margin-right: 20px;
-              }
-              .bottomImg {
-                position: relative;
-                .project-img {
-                  width: 70px;
-                  height: 30px;
-                  position: absolute;
-                  top: 5px;
-                  left: -4px;
-                }
-              }
-              h4 {
-                // width: 440px;
-                height: 42px;
-                font-size: 16px;
-                color: #332a51;
-                overflow: hidden;
-                padding: 9px 0 0;
-                margin-bottom: 15px;
-              }
-              h6 {
-                color: #6d687f;
-                font-size: 12px;
-                padding-bottom: 9px;
-              }
-              p {
-                font-size: 14px;
-                color: #6d687f;
-              }
-            }
-            .coursePrice {
-              float: left;
-              width: 10%;
-              height: 140px;
-              line-height: 140px;
-              text-align: center;
-              color: #ff5f5f;
-              font-size: 16px;
-            }
-            .courseOperation {
-              float: left;
-              width: 10%;
-              height: 140px;
-              line-height: 140px;
-              text-align: right;
-              font-size: 16px;
-              color: #332a51;
-              i {
-                font-size: 12px;
-              }
-            }
-          }
-
-          .tableFooter {
-            background-color: #fafafa;
-            padding: 20px 45px 20px 0;
-            text-align: right;
-            p {
-              font-size: 14px;
-              text-align: right;
-              // color: #222;
-              line-height: 30px;
-            }
-            h4 {
-              font-size: 20px;
-              color: #ff5f5f;
-              font-weight: 700;
-              margin-top: 15px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-.profile {
-  .content.noOrder {
-    box-shadow: 0px 3px 9px rgba(198, 194, 210, 0.36);
-  }
-  .content .noCourse {
-    width: 100%;
-    height: 600px;
-    background-color: #fff;
-    text-align: center;
-    &.fillTop {
-      margin-top: -50px;
-    }
-    img {
-      width: 316px;
-      height: 274px;
-      margin-top: 100px;
-    }
-    h4 {
-      height: 70px;
-      line-height: 70px;
-      text-align: center;
-      color: #999;
-      font-size: 20px;
-    }
-    p {
-      width: 140px;
-      height: 36px;
-      line-height: 36px;
-      margin: 0 auto;
-      border-radius: 18px;
-      background: #6417a6;
-      color: #fff;
-      transition: all 300ms;
-      font-size: 14px;
-      &:hover {
-        background-color: #8f4acb;
-      }
-    }
-  }
-  .tabList {
-    i {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-bottom: -4px;
-      &.icon-home {
-        background: url('~assets/images/icon_home1.png') no-repeat center;
-        background-size: contain;
-      }
-      &.icon-course {
-        background: url('~assets/images/icon_course1.png') no-repeat center;
-        background-size: contain;
-      }
-      &.icon-order {
-        background: url('~assets/images/icon_order1.png') no-repeat center;
-        background-size: contain;
-      }
-      &.icon-message {
-        background: url('~assets/images/icon_message1.png') no-repeat center;
-        background-size: contain;
-      }
-      &.icon-set {
-        background: url('~assets/images/icon_set1.png') no-repeat center;
-        background-size: contain;
-      }
-      &.icon-bind {
-        background: url('~assets/images/icon_bind1.png') no-repeat center;
-        background-size: contain;
-      }
-      &.icon-choose {
-        background: url('~assets/images/icon_choose1.png') no-repeat center;
-        background-size: contain;
-      }
-      &.icon-code {
-        background: url('~assets/images/icon_code1.png') no-repeat center;
-        background-size: contain;
-      }
-      &.icon-company {
-        background: url('~assets/images/icon_company1.png') no-repeat center;
-        background-size: contain;
-      }
-    }
-  }
-  .el-tabs__item.is-active i {
-    &.icon-home {
-      background: url('~assets/images/icon_home2.png') no-repeat center;
-      background-size: contain;
-    }
-    &.icon-course {
-      background: url('~assets/images/icon_course2.png') no-repeat center;
-      background-size: contain;
-    }
-    &.icon-order {
-      background: url('~assets/images/icon_order2.png') no-repeat center;
-      background-size: contain;
-    }
-    &.icon-message {
-      background: url('~assets/images/icon_message2.png') no-repeat center;
-      background-size: contain;
-    }
-    &.icon-set {
-      background: url('~assets/images/icon_set2.png') no-repeat center;
-      background-size: contain;
-    }
-    &.icon-bind {
-      background: url('~assets/images/icon_bind2.png') no-repeat center;
-      background-size: contain;
-    }
-    &.icon-choose {
-      background: url('~assets/images/icon_choose2.png') no-repeat center;
-      background-size: contain;
-    }
-    &.icon-code {
-      background: url('~assets/images/icon_code2.png') no-repeat center;
-      background-size: contain;
-    }
-    &.icon-company {
-      background: url('~assets/images/icon_company2.png') no-repeat center;
-      background-size: contain;
-    }
-  }
-}
+@import '~assets/style/profile/home';
 </style>

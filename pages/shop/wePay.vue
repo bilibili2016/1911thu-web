@@ -314,6 +314,8 @@ export default {
   }
 }
 </script>
-
+<style scoped>
+@import '@/assets/style/shop/wepay.scss';
+</style>
 
 

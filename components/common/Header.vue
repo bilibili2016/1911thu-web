@@ -64,11 +64,12 @@
         <ul class="subPages">
           <li @click="goLink('tab-first')">我的首页</li>
           <li @click="goLink('tab-second')">我的课程</li>
-          <li @click="goLink('tab-third')">我的订单</li>
-          <li @click="goLink('tab-fourth')">我的消息</li>
-          <li @click="goLink('tab-fifth')">个人设置</li>
-          <li @click="goLink('tab-sixth')">兑换码管理</li>
-          <li @click="goLink('tab-seventh')">发票管理</li>
+          <li @click="goLink('tab-third')">我的项目</li>
+          <li @click="goLink('tab-fourth')">我的订单</li>
+          <li @click="goLink('tab-fifth')">我的消息</li>
+          <li @click="goLink('tab-sixth')">个人设置</li>
+          <li @click="goLink('tab-seventh')">兑换码管理</li>
+          <li @click="goLink('tab-eighth')">发票管理</li>
           <!-- <li v-if="this.codeData.length !== 0" @click="goLink('tab-sixth')">课程码管理</li> -->
           <li @click="signOuts">退出</li>
         </ul>

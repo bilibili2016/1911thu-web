@@ -12,7 +12,7 @@
         </span>
         <!-- {{bar}} -->
         <p @click="handleCatalog(index,catalog)">
-          <span class="fl barName">{{bar.video_number}}{{bar.title}}({{bar.video_time}}分钟)</span>
+          <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{bar.video_time}}分钟)</span>
           <span v-if="bar.percent === 0"></span>
           <span v-else>
             <!-- 课程目录进度条 -->

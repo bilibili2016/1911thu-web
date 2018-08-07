@@ -15,7 +15,7 @@
       line-height: 56px;
       padding: 0 25px;
       font-size: 12px;
-      color: #BDBCCF;
+      color: #bdbccf;
       .headerL {
         color: #999;
         .main-crumbs {
@@ -29,7 +29,7 @@
         }
       }
       .headerR {
-        font-size: #BDBCCF;
+        font-size: #bdbccf;
         span {
           cursor: pointer;
           i {
@@ -38,6 +38,9 @@
         }
         .collection {
           margin-right: 21px;
+          .bag {
+            color: #6417a6;
+          }
         }
       }
     }
@@ -59,7 +62,7 @@
       font-size: 16px;
       height: 20px;
       line-height: 20px;
-      color: #C4C3D5;
+      color: #c4c3d5;
       text-align: center;
       .el-rate {
         display: inline-block;
@@ -70,7 +73,7 @@
         height: 12px;
         width: 1px;
         margin: 0 17px;
-        background-color: #BDBCCF;
+        background-color: #bdbccf;
       }
     }
     .price {
@@ -84,7 +87,7 @@
         i {
           font-size: 24px;
         }
-        color: #FD0E19;
+        color: #fd0e19;
       }
       .study {
         float: right;
@@ -95,8 +98,8 @@
         text-align: center;
         margin-right: 20px;
         border-radius: 24px;
-        border: 1px solid #FD0E19;
-        color: #FD0E19;
+        border: 1px solid #fd0e19;
+        color: #fd0e19;
         cursor: pointer;
       }
       .fr {
@@ -105,7 +108,7 @@
         line-height: 48px;
         margin-top: 25px;
         border-radius: 24px;
-        background-color: #FD0E19;
+        background-color: #fd0e19;
         text-align: center;
         i {
           display: inline-block;
