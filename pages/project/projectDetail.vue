@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { projectDetail } from '@/lib/v1_sdk/index'
+import { projectDetail, projectPlayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
@@ -193,7 +193,7 @@ export default {
     },
     // 判断是收藏还是为收藏
     collection() {
-      if (this.collectMsg === 1) {
+      if (this.collectMsg === true) {
         this.deleteCollection()
       } else {
         this.addCollection()
@@ -202,25 +202,25 @@ export default {
     // 添加收藏
     addCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      coursedetail.addCollection(this.addCollectionForm).then(response => {
+      projectPlayer.addCollection(this.addCollectionForm).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
           message: '添加收藏成功'
         })
-        this.collectMsg = 1
+        this.collectMsg = true
       })
     },
     // 删除收藏
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
+      projectPlayer.deleteCollection(this.addCollectionForm).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
           message: '取消收藏成功'
         })
-        this.collectMsg = 0
+        this.collectMsg = false
       })
     }
   },

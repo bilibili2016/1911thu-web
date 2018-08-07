@@ -7,7 +7,6 @@
         <span class="fr" @click="getMore(link)">查看更多</span>
       </h1>
       <div v-loading="load" class="newsUl clearfix">
-        <!-- <v-card ref="card" :infoDesc="infoDesc" :config="infoTwo"></v-card> -->
         <div class="newsCarousel fl">
           <el-carousel :interval="4000">
             <el-carousel-item v-for="(item,index) in infoDesc" :key="index" v-if="index<4">
@@ -19,18 +18,7 @@
             </el-carousel-item>
           </el-carousel>
         </div>
-        <div class="info-list">
-          <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index<3">
-            <div class="info-box clearfix" @click="selectDetail(index,card,linkfive)">
-              <img class="titleImg fl" :src="card.picture" alt="">
-              <div class="fl">
-                <h4>{{card.title}}</h4>
-                <p>{{card.introduce}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- <v-card ref="card" :infoArticle="infoArticle" :config="infoOne" :linkdata="linkfour" :linkfive="linkfive"></v-card> -->
+        <v-info :infoArticle='infoArticle' :link="linkfive"></v-info>
       </div>
     </el-row>
   </div>
@@ -39,10 +27,12 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import CustomCard from '@/components/card/Card.vue'
+import CustomInfo from '@/pages/news/components/Info.vue'
 import CustomTitle from '@/components/common/Title.vue'
 export default {
   components: {
     'v-card': CustomCard,
+    'v-info': CustomInfo,
     'v-title': CustomTitle
   },
   props: [
@@ -50,7 +40,6 @@ export default {
     'infoArticle',
     'infoTwo',
     'infoOne',
-
     'linkfour',
     'linkfive',
     'link',

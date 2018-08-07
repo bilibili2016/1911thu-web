@@ -38,7 +38,7 @@ import Info from '@/pages/home/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
 import { mapState, mapActions } from 'vuex'
-import { home, newlesson } from '~/lib/v1_sdk/index'
+import { home, newlesson, news } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-carousel': Carousel,
@@ -218,7 +218,7 @@ export default {
     // },
     // 学堂资讯
     getNewsInfoList() {
-      home.getNewsInfoList(this.newsInfoForm).then(response => {
+      news.getNewsInfoList(this.newsInfoForm).then(response => {
         this.infoDesc = response.data.outerList
         this.infoArticle = response.data.innerList
       })
