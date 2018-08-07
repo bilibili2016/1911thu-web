@@ -5,7 +5,7 @@
       <!-- <v-title :data="titleTwo"></v-title> -->
       <h1 class="clearfix">
         <span class="title">{{titleTwo}}</span>
-        <span class="fr moredata" @click="getMore(linkthree)">查看更多</span>
+        <span class="fr moredata" @click="getMore(linkthree)">查看更多1</span>
       </h1>
       <v-card ref="card" :data="newData" :config="config" @selectCid="selectCid"></v-card>
       <!-- <v-more :linkdata="linkone"></v-more> -->
@@ -39,7 +39,7 @@ export default {
       this.setKid(this.kidForm)
     },
     getMore(item) {
-      window.open(window.location.origin + '/course/components/' + '1')
+      window.open(window.location.origin + '/course/pages/' + '1')
     }
   }
 }

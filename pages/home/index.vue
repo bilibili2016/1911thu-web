@@ -59,7 +59,7 @@ export default {
       linkfours: '/news/list',
       linkfive: '/news/detail',
       linkSix: '/home/components/teacher',
-      linkSeven: '/famous/list',
+      linkSeven: '/teacher/list',
       freeData: [],
       newData: [],
       classicData: [],

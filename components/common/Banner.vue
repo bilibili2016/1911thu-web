@@ -48,6 +48,8 @@
 </template>
 
 <script>
+// banner 组件
+// 学堂资讯组件
 import { home } from '~/lib/v1_sdk/index'
 import { mapGetters, mapActions } from 'vuex'
 export default {

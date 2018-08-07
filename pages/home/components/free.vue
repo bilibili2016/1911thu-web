@@ -40,7 +40,7 @@ export default {
     },
     getMore(item) {
       // window.open(window.location.origin + item)
-      window.open(window.location.origin + '/course/components/' + '3')
+      window.open(window.location.origin + '/course/pages/' + '3')
     }
   }
 }
