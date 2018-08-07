@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { projectDetail } from '@/lib/v1_sdk/index'
+import { projectDetail, projectPlayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
@@ -202,7 +202,7 @@ export default {
     // 添加收藏
     addCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      coursedetail.addCollection(this.addCollectionForm).then(response => {
+      projectPlayer.addCollection(this.addCollectionForm).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
@@ -214,7 +214,7 @@ export default {
     // 删除收藏
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
+      projectPlayer.deleteCollection(this.addCollectionForm).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
