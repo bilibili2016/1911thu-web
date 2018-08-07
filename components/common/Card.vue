@@ -423,185 +423,29 @@
       </div>
     </template>
 
-    <!-- coursedetail 页面 -->
-    <template v-if="config.card_type === 'goodplay'">
-      <div class="courseList center">
-        <!-- v-for="(course,index) in courseList -->
-        <div class="course clearfix  ">
-          <el-card class="fl" :body-style="{ padding: '0px' }">
-            <div class="goodplay">
-              <img :src="courseList.picture" class="image">
-              <div class="mask"></div>
-              <div class="common-button btn-bg">
-                <!-- 用户已登录 -->
-                <div v-if="isAuthenticated">
-                  <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">立即学习1</el-button> -->
-                  <!-- <el-button type="primary" plain @click="goPlay(courseList)" v-if="privileMsg === false">立即观看2</el-button> -->
+    <!-- 新闻列表（已拆出）  newLists-->
+    <!-- <template v-if="config.card_type==='newLists' ">
+      <div class="newOrFreeCourseList newsList center goodlesson">
+        <div class="course clearfix bottom " v-for="(course,index) in newsList " :key="index " @click="goDetail(course)">
+          <el-card class="fl " :body-style="{ padding: '0px' } ">
 
-                  <div class="playBtn-detail" v-if="privileMsg === true">
-                    <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goLink(linkdata)">
-                  </div>
-                  <div class="playBtn-detail" v-if="privileMsg === false">
-                    <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goPlay(courseList)">
-                  </div>
-                </div>
-                <!-- 用户未登录 -->
-                <div v-else class="playBtn-detail">
-                  <!-- <el-button type="primary" plain @click="goBuy3()" v-if="privileMsg === false">立即观看3</el-button> -->
-                  <img src="http://papn9j3ys.bkt.clouddn.com/play.png" alt="" @click="goBuy3()" v-if="privileMsg === false">
-                </div>
-              </div>
-            </div>
+            <img :src="course.picture" class="image " alt=" ">
+
+
           </el-card>
-          <div class="particularss fr">
-            <div class="currentclum">
-              <h4>{{courseList.title}}</h4>
-              <!-- ==(免费2)={{courseList.is_free}} 是否购买{{privileMsg}} 是否学习（1已学习）{{courseList.is_study }} -->
-              <!-- 团购价更优，团购电话：010-62701911 -->
-              <!-- <div class="tg">团购价更优，团购电话：010-62701911</div> -->
-              <!-- 判断是否免费 is_free(2是免费)-->
-              <div v-if="courseList.is_free === '2'">
-                <div class="clum" v-if="courseList.is_study === 1">
-                  <span class="fl coursenum">
-                    <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
-                </div>
-                <div v-else>
-                  <span class="fl coursenum">
-                    <span>{{courseList.study_time}}学时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
-                  <span class="rate">
-                    <el-rate disabled v-model="courseList.score"></el-rate>
-                  </span>
-                  <!-- <span class="coins">￥ {{courseList.present_price}}</span> -->
-                </div>
-                <div class="study clearfix bought" v-if="courseList.is_study === 1">
-                  <h4 class="clearfix">
-                    <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
-                    <p>已学时长</p>
-                  </h4>
-                  <div class="common-button">
-                    <div>
-                      <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
-                    </div>
-                    <div>
-                      <!-- <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button> -->
-                    </div>
-                    <div class="lineProgress">
-                      <h5>已完成{{courseList.percent}}%</h5>
-                      <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
-                    </div>
-                  </div>
-                </div>
-                <div class="study clearfix" v-else>
-                  <p>{{courseList.introduction}}</p>
-                  <!-- <p class="soldOut fl" v-if="courseList.status =='2'">此课程已下架</p> -->
-                  <div class="common-button">
-                    <div v-if="isAuthenticated">
-                      <!-- <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习6</el-button> -->
-                      <!-- 免费课程=登录之后的开始学习 -->
-                      <el-button type="primary" :disabled="isClick" plain @click="goLink(linkdata)" v-if="courseList.is_free === '2'">开始学习</el-button>
-                    </div>
-                    <div v-else>
-                      <!-- 免费课程=未登录之后的立即学习 -->
-                      <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">立即学习</el-button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div v-if="courseList.is_free === '1'">
-
-                <!-- 已经学习了 左侧 courseList.is_study === 1 -->
-                <div class="clum" v-if="courseList.is_study === 1">
-                  <span class="fl coursenum">
-                    <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
-                </div>
-
-                <!-- 未学习 左侧  courseList.is_study === 2 -->
-                <div v-else>
-                  <span class="fl coursenum">
-                    <span>{{courseList.study_time}}学时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
-                  <span class="rate">
-                    <el-rate disabled v-model="courseList.score"></el-rate>
-                  </span>
-                  <span class="coins">￥ {{courseList.present_price}}</span>
-                </div>
-
-                <!-- 已经学习了 右侧是 courseList.is_study === 1 -->
-                <div class="study clearfix bought" v-if="courseList.is_study === 1">
-                  <!-- <div >
-                    <p>{{courseList.introduction}}</p>
-                    <div class="common-button">
-                      <div v-if="privileMsg === true">
-                        <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习3</el-button>
-                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车2</el-button>
-                      </div>
-                      <div v-else>
-                        <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="privileMsg === false">加入购物车11</el-button>
-                      </div>
-                    </div>
-                  </div> -->
-                  <div>
-                    <h4 class="clearfix">
-                      <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
-                      <p>已学时长</p>
-                      <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
-                    </h4>
-                    <div class="common-button">
-                      <div>
-                        <el-button type="primary" plain @click="goPlay(courseList)">继续学习</el-button>
-                      </div>
-                      <!--  v-if="courseList.status =='1'" -->
-                      <div>
-                        <el-button type="primary" plain @click="goBuy(true,courseList)" style="margin-right:30px;">加入购物车</el-button>
-                      </div>
-                      <div class="lineProgress">
-                        <h5>已完成{{courseList.percent}}%</h5>
-                        <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- 未学习 右侧  courseList.is_study === 2 -->
-                <div class="study clearfix" v-else>
-                  <p>{{courseList.introduction}}</p>
-                  <div class="common-button">
-                    <div v-if="isAuthenticated">
-                      <el-button type="primary" plain @click="goLink(linkdata)" v-if="privileMsg === true">开始学习</el-button>
-                      <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)" v-if="courseList.is_free === '1'">加入购物车</el-button>
-                    </div>
-                    <div v-else>
-                      <el-button type="primary" :disabled="isClick" plain @click="goBuy()" v-if="privileMsg === false">加入购物车</el-button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </template>
-    <!-- 新上好课详情 页面  资讯详情页面（没有用）-->
-    <!-- <template v-if="config.card_type === 'goodplayTwo'">
-      <div class="courseList center">
-        <div class="course clearfix boxshadow-none" v-for="(course,index) in newsList" :key="index" style="box-shadow:none;">
-          <el-card class="fl" :body-style="{ padding: '0px' }">
-            <div style="position:relative;" class="img-wrap" @click="selectDetail(index,course,linksix)">
-              <img :src="course.picture" class="image">
-            </div>
-          </el-card>
-          <div class="particulars fr" style="width:640px;">
-            <div class="currentclum">
-              <h4 @click="selectDetail(index,course,linksix)">{{course.title}}</h4>
-            </div>
-            <div class="bordernone">
-              <p>{{course.introduce}}</p>
-            </div>
-            <div>
-              <p class="fl time">{{timestampToTime(course.create_time)}}</p>
-              <p class="fr more" @click="selectDetail(index,course,linksix)">阅读全文 >></p>
+          <div class="particulars fl " style="width:560px;">
+            <div class="currentclum ">
+              <h4>{{course.title}}</h4>
+              <p class="small-title">{{course.introduce}}</p>
+              <p>{{course.introduction}}</p>
             </div>
           </div>
-          <div class="lines" v-if="index !== 0">
+          <div class="Newtime">
+            <p class="timeDetail"> {{timestampToTime2(course.create_time)}}</p>
+            <p class="timeLink" @click="goDetail(course)">
+              <span class="line"></span>
+              <img src="@/assets/images/newList-icon.png" alt="">
+            </p>
           </div>
         </div>
       </div>
@@ -860,29 +704,26 @@ export default {
     // 点击加入购物车
     detailAddShopCarts(newIndex) {
       this.curriculumcartids.cartid = this.kid
-
-      return new Promise((resolve, reject) => {
-        home.addShopCart(this.curriculumcartids).then(response => {
-          // this.$router.push('/shop/shoppingcart')
-          let len = Number(this.productsNum) + 1
-          this.setProductsNum({
-            pn: len
-          })
-
-          this.isCart = 1
-          this.isCartNew = 1
-          this.isClick = false
-          this.$message({
-            type: 'success',
-            message: '加入购物车成功'
-          })
-          // 设置newlesson 第一次加入购物车的状态
-          for (var i = 0; i < this.courseList.length; i++) {
-            if (i === newIndex) {
-              this.$set(this.courseList[i], 'isCartNew', 1)
-            }
-          }
+      home.addShopCart(this.curriculumcartids).then(response => {
+        // this.$router.push('/shop/shoppingcart')
+        let len = Number(this.productsNum) + 1
+        this.setProductsNum({
+          pn: len
         })
+
+        this.isCart = 1
+        this.isCartNew = 1
+        this.isClick = false
+        this.$message({
+          type: 'success',
+          message: '加入购物车成功'
+        })
+        // 设置newlesson 第一次加入购物车的状态
+        for (var i = 0; i < this.courseList.length; i++) {
+          if (i === newIndex) {
+            this.$set(this.courseList[i], 'isCartNew', 1)
+          }
+        }
       })
 
       for (var i = 0; i < this.data.length; i++) {

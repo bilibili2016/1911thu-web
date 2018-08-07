@@ -24,7 +24,7 @@
             <!-- 判断是否免费 is_free(2是免费)-->
 
             <!-- 公共项目标题 -->
-            <h4>{{courseList.title}}</h4>
+            <h4>{{courseList.title}} </h4>
             <!-- 免费课程 未学习 start-->
             <div v-if=" courseList.is_free === '2' && courseList.is_study === 0 ">
               <!-- 学时 以及 学习人数 星级 价钱-->
@@ -81,23 +81,51 @@
                 </span>
               </div>
               <!-- 课程介绍 未购买 学习按钮-->
-              <div class="study clearfix" v-if="privileMsg === false">
+              <div class="study clearfix">
                 <p>{{courseList.introduction}}</p>
-                <div class="common-button">
+                <div class=" common-button ">
                   <!-- 未购买 购买判断  未购买-->
-                  <div v-if="privileMsg === false">
-                    <el-button type="primary" :disabled="isClick" plain @click="handleFreeNoneStudy(courseList)">加入购物车</el-button>
+                  <div v-if="privileMsg===false ">
+                    <el-button type="primary " :disabled="isClick" plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
                   </div>
                   <!-- 未购买 购买判断  已购买-->
-                  <div v-if="privileMsg === true">
-                    <el-button type="primary" :disabled="isClick" plain @click="goBuy(true,courseList)">立即学习</el-button>
+                  <div v-if="privileMsg===true ">
+                    <el-button type="primary " :disabled="isClick " plain @click="handleFreeNoneStudy(courseList)">立即学习</el-button>
                   </div>
                 </div>
               </div>
             </div>
             <!-- 收费课程  未购买 未学习 end -->
             <!-- 收费课程 已学习 说明已经购买  start-->
+            <div v-if=" courseList.is_free === '1' && courseList.is_study === 1 ">
+              <!-- 学时 以及 学习人数 星级 价钱-->
+              <div class="clum">
+                <span class="fl coursenum">
+                  <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
+              </div>
+              <!-- 课程介绍 未购买 学习按钮-->
+              <div class="study clearfix bought">
+                <h4 class="clearfix">
+                  <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
+                  <p>已学时长</p>
+                  <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
+                </h4>
+                <div class="common-button">
 
+                  <div>
+                    <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                  </div>
+                  <div>
+                    <el-button type="primary" plain @click="handleAddShopCart(courseList)" style="margin-right:30px;">加入购物车</el-button>
+                  </div>
+                  <div class="lineProgress">
+                    <h5>已完成{{courseList.percent}}%</h5>
+                    <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
+                  </div>
+                </div>
+              </div>
+
+            </div>
             <!-- 收费课程 已学习 说明已经购买  end-->
           </div>
         </div>
@@ -111,6 +139,7 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import { home } from '~/lib/v1_sdk/index'
 export default {
   props: ['courseList', 'privileMsg'],
   computed: {
@@ -120,10 +149,15 @@ export default {
   data() {
     return {
       playImg: 'http://papn9j3ys.bkt.clouddn.com/play.png',
-      two_is_cart: 0
+      two_is_cart: 0,
+      curriculumcartids: {
+        cartid: null,
+        type: 1
+      }
     }
   },
   methods: {
+    ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     // 获取默认小节 跳转 章节id和小节id
     getDefaultCurriculumCatalogId(item) {
       persistStore.set(
@@ -190,34 +224,18 @@ export default {
     // 添加购物车函数
     addCourseShopCart(item) {
       console.log(item, '这是item')
-      this.curriculumcartids.cartid = card.id
-      // home.addShopCart(this.curriculumcartids).then(response => {
-
-      //   let len = Number(this.productsNum) + 1
-      //   this.setProductsNum({
-      //     pn: len
-      //   })
-
-      //   this.two_is_cart = 1
-      //   this.isCartNew = 1
-      //   this.isClick = false
-      //   this.$message({
-      //     type: 'success',
-      //     message: '加入购物车成功'
-      //   })
-      //   // 设置newlesson 第一次加入购物车的状态
-      //   for (var i = 0; i < this.courseList.length; i++) {
-      //     if (i === newIndex) {
-      //       this.$set(this.courseList[i], 'isCartNew', 1)
-      //     }
-      //   }
-      // })
-
-      // for (var i = 0; i < this.data.length; i++) {
-      //   if (i === index) {
-      //     this.$set(this.data[i], 'is_checked', true)
-      //   }
-      // }
+      this.curriculumcartids.cartid = item.id
+      home.addShopCart(this.curriculumcartids).then(response => {
+        let len = Number(this.productsNum) + 1
+        this.setProductsNum({
+          pn: len
+        })
+        this.two_is_cart = 1
+        this.$message({
+          type: 'success',
+          message: '加入购物车成功'
+        })
+      })
     }
   }
 }
