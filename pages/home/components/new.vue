@@ -15,7 +15,7 @@
 
 <script>
 import CustomTitle from '@/components/common/Title.vue'
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 import { mapActions } from 'vuex'
 export default {

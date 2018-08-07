@@ -3,7 +3,7 @@
     <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-fifth'"></v-banner>
     <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
-        <!-- 我的信息 -->
+        <!-- 我的首页 -->
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label" class="tabList">
             <i class="icon-home"></i> 我的首页</span>
@@ -12,7 +12,7 @@
               <span>最近学习</span>
             </div>
             <div class="content">
-              <v-card v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-card>
+              <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
               <div v-else class="noCourse fillTop">
                 <img :src="noMsgImg" alt="">
                 <h4>抱歉，现在还没有学习过的课程呦~</h4>
@@ -34,7 +34,7 @@
             <el-tabs v-model="activeNames" @tab-click="handleActive">
               <!-- 我的课程 学习中 -->
               <el-tab-pane label="学习中" name="first">
-                <v-card v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-card>
+                <v-list v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-list>
                 <div class="pagination" v-if="newDataing  && newDataing.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="pagemsg1.pagesize" :pager-count="5" :page-count="pagemsg1.pagesize" :current-page="pagemsg1.page" :total="pagemsg1.total" @current-change="studyPageChange"></el-pagination>
                 </div>
@@ -48,7 +48,7 @@
               </el-tab-pane>
               <!-- 我的课程 已完成 -->
               <el-tab-pane label="已完成" name="second">
-                <v-card v-if="newDataReady && newDataReady.length>0" :data="newDataReady" :config="configTwo"></v-card>
+                <v-list v-if="newDataReady && newDataReady.length>0" :data="newDataReady" :config="configTwo"></v-list>
                 <div class="pagination" v-if="newDataReady && newDataReady.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
                 </div>
@@ -62,7 +62,7 @@
               </el-tab-pane>
               <!-- 我的课程 已过期 -->
               <el-tab-pane label="已过期" name="fourth">
-                <v-card v-if="overTimeData && overTimeData.length>0" :data="overTimeData" :config="configFour"></v-card>
+                <v-list v-if="overTimeData && overTimeData.length>0" :data="overTimeData" :config="configFour"></v-list>
                 <div class="pagination" v-if="overTimeData && overTimeData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
                 </div>
@@ -76,7 +76,7 @@
               </el-tab-pane>
               <!-- 我的课程 我的收藏 -->
               <el-tab-pane label="我的收藏" name="third">
-                <v-card v-if="collectionData && collectionData.length>0" :data="collectionData" :config="configZero"></v-card>
+                <v-list v-if="collectionData && collectionData.length>0" :data="collectionData" :config="configZero"></v-list>
                 <div class="pagination" v-if="collectionData && collectionData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="pagemsg3.pagesize" :pager-count="5" :page-count="pagemsg3.pagesize" :current-page="pagemsg3.page" :total="pagemsg3.total" @current-change="collectionPageChange"></el-pagination>
                 </div>
@@ -393,6 +393,7 @@
 
 <script>
 import CustomCard from '@/components/common/Card.vue'
+import CustomList from '@/pages/profile/components/list.vue'
 import Banner from '@/components/common/Banner.vue'
 import PersonalSet from '@/pages/profile/components/personalset.vue'
 import Binding from '@/pages/profile/components/bindid'
@@ -415,6 +416,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {
     'v-card': CustomCard,
+    'v-list': CustomList,
     'v-person': PersonalSet,
     'v-bind': Binding,
     'v-info': Info,
@@ -450,18 +452,15 @@ export default {
       },
       configOne: {
         card_type: 'profile',
-        card: 'learning',
-        mask: true
+        card: 'learning'
       },
       configTwo: {
         card_type: 'profile',
-        card: 'already',
-        mask: true
+        card: 'already'
       },
       configFour: {
         card_type: 'profile',
-        card: 'overtime',
-        mask: true
+        card: 'overtime'
       },
       newData: [],
       styleForm: {

@@ -14,7 +14,7 @@
         </div>
       </div>
     </template>
-    <!-- profile个人信息模板 新上好课模板 学习中-->
+    <!-- profile 新上好课模板   个人中心的课程列表页已经拆出-->
     <template v-if="config.card_type === 'profile'">
       <div class="card-category profile">
         <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
@@ -104,7 +104,7 @@
         </div>
       </div>
     </template>
-    <!-- 我要选课 我的收藏-->
+    <!-- 我要选课 我的收藏已拆出-->
     <template v-if="config.card_type==='shoucang' ">
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">

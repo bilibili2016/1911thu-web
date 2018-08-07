@@ -9,19 +9,26 @@
       <!-- 选择全部 最新和最热 -->
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
 
-      <!-- 学院筛选页面 课程列表 -->
-      <div class="carlist" v-if="categoryData.length > 0 && xid === '0'" v-loading="loadCourse">
-        <v-card :data="categoryData" :config="categoryCard"></v-card>
+      <!-- 非选课的下面 课程列表 -->
+      <div v-if="xid === '0'">
+        <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
+          <v-card :data="categoryData" :config="categoryCard"></v-card>
+        </div>
+        <div v-else v-loading="loadCourse" class="noMsg">
+          <v-nothing></v-nothing>
+        </div>
       </div>
-      <!-- 选课页面 课程列表 -->
-      <div class="carlist" v-if="categoryData.length > 0 && xid === '1'" v-loading="loadCourse">
-        <v-choose :data="categoryData" :config="configSevent"></v-choose>
+      <div v-if="xid === '1'">
+        <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
+        <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
+          <v-card :data="categoryData" :config="configSevent"></v-card>
+        </div>
+        <!-- 无课程时候显示 -->
+        <div v-else v-loading="loadCourse" class="noMsg">
+          <v-nothing></v-nothing>
+        </div>
+        <div v-show="categoryData.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
       </div>
-      <!-- 无课程时候显示 -->
-      <div v-if="categoryData.length < 0" v-loading="loadCourse" class="noMsg">
-        <v-nothing></v-nothing>
-      </div>
-      <div v-show="categoryData.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
     </div>
     <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
   </div>

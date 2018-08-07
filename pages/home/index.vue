@@ -66,13 +66,11 @@ export default {
       showCheckedCourse: false,
       configZero: {
         card_type: 'profile',
-        card: 'home',
         new: 'false',
         free: 'true'
       },
       configOne: {
         card_type: 'profile',
-        card: 'home',
         new: 'true'
       },
       infoOne: {
