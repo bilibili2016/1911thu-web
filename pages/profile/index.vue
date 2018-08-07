@@ -956,7 +956,7 @@ export default {
     },
     // 我的项目 公共
     getProjectData(type) {
-      home.getProjectList(this.projectForm).then(response => {
+      profileHome.getProjectList(this.projectForm).then(response => {
         if (type === '1') {
           this.studyProjectData = response.data.studyProjectList
           this.projectPageStudy.total = response.data.pageCount
@@ -1027,7 +1027,7 @@ export default {
       this.projectForm.types = 2
       this.projectForm.pages = 1
       this.projectForm.limits = 12
-      home.getProjectCollectList(this.projectForm).then(response => {
+      profileHome.getProjectCollectList(this.projectForm).then(response => {
         this.collectProjectData = response.data.collectionCurriculumProjectList
         this.projectPageCollect.total = response.data.pageCount
       })
@@ -1037,7 +1037,7 @@ export default {
       this.projectPageReady.page = val
       this.projectForm.pages = val
       this.projectForm.types = 1
-      home.getProjectCollectList(this.projectForm).then(response => {
+      profileHome.getProjectCollectList(this.projectForm).then(response => {
         this.collectProjectData = response.data.collectionCurriculumProjectList
         this.projectPageCollect.total = response.data.pageCount
       })
