@@ -464,7 +464,7 @@
 </template>
 
 <script>
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 import CustomList from '@/pages/profile/components/list.vue'
 import Banner from '@/components/common/Banner.vue'
 import PersonalSet from '@/pages/profile/components/personalset.vue'

@@ -40,7 +40,7 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 import CustomTitle from '@/components/common/Title.vue'
 export default {
   components: {

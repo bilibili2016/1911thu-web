@@ -36,7 +36,6 @@
 
 <script>
 import CustomCard from '@/components/card/Card.vue'
-import ChooseCard from '@/components/common/Card.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
@@ -48,7 +47,6 @@ import Page from '@/components/common/Pagination'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-choose': ChooseCard,
     'v-nothing': SearchNothing,
     'v-list': List,
     'v-filter': Filter,

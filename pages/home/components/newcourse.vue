@@ -36,7 +36,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import CustomTitle from '@/components/common/Title.vue'
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 export default {
   props: ['newData', 'titleTwo', 'linkone'],

@@ -54,6 +54,14 @@
 </template>
 
 <script>
+// 默认配置选项
+// newimg       最新课程 左上角 new 图片
+// chooseCourse 选课 右上角 checkbox
+// maskRight    图片上方 蒙层 以及右箭头
+// studybutton  我的课程 学习中等 图片上方 继续学习 开始学习按钮
+// optiontitle  副标题
+// timenumrate  学时 人数 星级
+// freeprice   免费
 import { mapActions } from 'vuex'
 import { shopcart, home } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'

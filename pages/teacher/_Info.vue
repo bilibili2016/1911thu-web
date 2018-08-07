@@ -22,7 +22,7 @@
 <script>
 import { home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/components/card/Card.vue'
 export default {
   components: {
     'v-card': CustomCard

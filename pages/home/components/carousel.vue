@@ -15,7 +15,7 @@
 </template>
 
 <script>
-// import Card from '@/components/common/Card.vue'
+// import Card from '@/components/card/Card.vue'
 import Carousel from '@/components/common/Carousel.vue'
 // import Tab from '@/components/common/Tab.vue'
 export default {
