@@ -2,10 +2,7 @@
   <!-- 最新项目 -->
   <div class="bg newProject">
     <el-row class="center coursenew">
-      <h1 class="clearfix">
-        <span class="title">{{titleTwo}}</span>
-        <span class="fr moredata" @click="getMore(linkone)">查看更多</span>
-      </h1>
+      <v-title :title="title" :link="link"></v-title>
       <div class="goodCourse project" :data="newData">
         <div class="courseLi clearfix" v-for="(course,index) in newProject" :key="index" @click="courseInfo(course)">
           <div class="fl">
@@ -27,7 +24,7 @@
           </div>
         </div>
       </div>
-      <!-- <v-more :linkdata="linktwo"></v-more> -->
+
     </el-row>
   </div>
 </template>
@@ -39,7 +36,7 @@ import CustomTitle from '@/components/common/Title.vue'
 import CustomCard from '@/components/card/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 export default {
-  props: ['newData', 'titleTwo', 'linkone'],
+  props: ['newData', 'title', 'link'],
   components: {
     'v-title': CustomTitle,
     'v-card': CustomCard,

@@ -2,10 +2,11 @@
   <!-- 精品好课 -->
   <div class="bg">
     <el-row class="center">
-      <h1 class="clearfix">
+      <!-- <h1 class="clearfix">
         <span class="title">{{titleThree}}</span>
         <span class="fr moredata" @click="getMore(linktwo)">查看更多</span>
-      </h1>
+      </h1> -->
+      <v-title :title="title" :link="link"></v-title>
       <div class="goodCourse" :data="classicData">
         <div class="courseLi clearfix" v-for="(course,index) in classicData" :key="index" @click="courseInfo(course)">
           <div class="fl">
@@ -38,7 +39,7 @@ import CustomTitle from '@/components/common/Title.vue'
 import CustomCard from '@/components/card/Card.vue'
 import CustomMore from '@/components/common/More.vue'
 export default {
-  props: ['classicData', 'titleThree', 'linktwo'],
+  props: ['classicData', 'title', 'link'],
   components: {
     'v-title': CustomTitle,
     'v-card': CustomCard,

@@ -47,20 +47,13 @@
         </div>
       </div>
     </transition>
-    <div>
-      <v-unlogged v-if="showNotLogin" @showTips='showTips'></v-unlogged>
-    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import CustomUnlogged from '@/components/common/Unlogged.vue'
 /* eslint-disable */
 export default {
-  components: {
-    'v-unlogged': CustomUnlogged
-  },
   props: [
     // {
     //   visibilityHeight: {

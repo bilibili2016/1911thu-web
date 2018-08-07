@@ -5,22 +5,22 @@
       <v-carousel :items="items" :courses="courses"></v-carousel>
       <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
-      <v-newp :newData="newData" :titleTwo="titleEight" :linkone="linkone"></v-newp>
+      <v-newp :newData="newData" :title="newprojecttitle" :link="linknewproject"></v-newp>
       <!-- 最新课程 -->
-      <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkthree="linkthree"></v-new>
+      <v-new :config="configOne" :newData="newData" :title="newcoursetitle" :link="linknewcourse"></v-new>
       <!-- 精品好课 -->
-      <v-classic :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
+      <v-classic :classicData="classicData" :title="classiccoursetitle" :link="linkclassiccourse"></v-classic>
       <!-- 免费专区 -->
-      <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
+      <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free>
       <!-- 名师智库 -->
-      <v-famous :teachers="teachers" :titleFore="titleFore" :linkSeven="linkSeven"></v-famous>
+      <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous>
 
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 用户评价 -->
       <!-- <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate> -->
       <!-- 学堂资讯 -->
-      <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive="titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
+      <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo"></v-info>
       <!-- 合作伙伴 -->
       <!-- <v-partner :data="partnerList.list"></v-partner> -->
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
@@ -30,7 +30,7 @@
 
 <script>
 import Carousel from '@/pages/home/components/carousel.vue'
-import Newp from '@/pages/home/components/newcourse.vue'
+import Newp from '@/pages/home/components/newproject.vue'
 import New from '@/pages/home/components/new.vue'
 import Classic from '@/pages/home/components/classic.vue'
 import Free from '@/pages/home/components/free.vue'
@@ -52,11 +52,20 @@ export default {
   },
   data() {
     return {
-      linkzero: '/course/freelesson',
-      linkone: '/course/category',
-      linktwo: '/course/qualitylesson',
-      linkthree: '/course/newlesson',
-      linkfours: '/news/list',
+      linknewproject: '/course/' + '0' + '?type=' + '1' + '&xid=0',
+      newprojecttitle: '最新项目',
+      linknewcourse: '/course/pages/1',
+      newcoursetitle: '最新课程',
+      linkclassiccourse: '/course/pages/2',
+      classiccoursetitle: '精品好课',
+      linkfreecourse: '/course/pages/3',
+      freecoursetitle: '免费专区',
+      linkfamouscourse: '/teacher/list',
+      famoustitle: '名师智库',
+      linkfamouscourse: '/teacher/list',
+      infotitle: '学堂资讯',
+      linkinfo: '/news/list',
+
       linkfive: '/news/detail',
       linkSix: '/home/components/teacher',
       linkSeven: '/teacher/list',
@@ -79,13 +88,7 @@ export default {
       infoTwo: {
         card_type: 'infoTwo'
       },
-      titleOne: '免费专区',
-      titleTwo: '最新课程',
-      titleThree: '精品好课',
-      titleFore: '名师智库',
-      titleFour: '用户评价',
-      titleFive: '学堂资讯',
-      titleEight: '最新项目',
+
       partnerList: {
         list: [],
         pages: 1,
