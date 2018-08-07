@@ -193,7 +193,7 @@ export default {
     },
     // 判断是收藏还是为收藏
     collection() {
-      if (this.collectMsg === 1) {
+      if (this.collectMsg === true) {
         this.deleteCollection()
       } else {
         this.addCollection()
@@ -208,7 +208,7 @@ export default {
           type: 'success',
           message: '添加收藏成功'
         })
-        this.collectMsg = 1
+        this.collectMsg = true
       })
     },
     // 删除收藏
@@ -220,7 +220,7 @@ export default {
           type: 'success',
           message: '取消收藏成功'
         })
-        this.collectMsg = 0
+        this.collectMsg = false
       })
     }
   },
