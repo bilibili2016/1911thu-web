@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import Carousel from '@/components/common/carousel.vue'
+import Carousel from '@/pages/home/components/carousel.vue'
 import Newp from '@/pages/home/components/newproject.vue'
 
 import Famous from '@/pages/home/components/famous.vue'
