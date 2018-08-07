@@ -26,16 +26,16 @@
   &.profile .my-course.my-order {
     overflow: initial;
   }
-  &.profile .my-course#pane-tab-third .el-tabs__content,
-  &.profile .my-course#pane-tab-seventh .el-tabs__content {
+  &.profile .my-course#pane-tab-fourth .el-tabs__content,
+  &.profile .my-course#pane-tab-eighth .el-tabs__content {
     overflow: initial;
   }
   &.profile .my-course .el-tabs__header {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }
-  #pane-tab-third .el-tabs__header,
-  #pane-tab-seventh .el-tabs__header {
+  #pane-tab-fourth .el-tabs__header,
+  #pane-tab-eighth .el-tabs__header {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
   }
   #pane-tab-sixth {
