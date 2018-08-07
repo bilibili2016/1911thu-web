@@ -346,13 +346,11 @@
           <el-card v-if="showTicketList">
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="按订单开发票" name="orderFirst">
-                <v-tkorder v-if="readyOrderData  && readyOrderData.length>0" :orderData="readyOrderData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
-                <!-- <v-test></v-test> -->
-                <!-- <v-test v-if="readyOrderData  && readyOrderData.length>0" :orderData="readyOrderData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-test> -->
+                <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
                 <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
-                    <h4>抱歉，您还没有订单请先去下单购买吧~</h4>
+                    <h4>抱歉，您还没有订单需要开票</h4>
                   </div>
                 </div>
               </el-tab-pane>
@@ -564,6 +562,7 @@ export default {
       allOrderData: [],
       unfinishedOrderData: [],
       readyOrderData: [],
+      unTicketData: [],
       invalidOrderData: [],
       historyOrderData: [],
       codeData: [],
@@ -889,14 +888,12 @@ export default {
       return new Promise((resolve, reject) => {
         home.getAllOrderData(this.orderForm).then(response => {
           this.readyOrderData = response.data.orderList
-          this.readyOrderData.forEach(item => {
-            item.checked = false
-          })
           this.readyOrderLoad = false
           resolve(true)
         })
       })
     },
+
     // 我的订单 取消
     getInvalidOrderData() {
       this.orderForm.payStatus = 3
@@ -909,11 +906,18 @@ export default {
         })
       })
     },
+    //未开发票列表
+    getUnTicketData() {
+      this.orderForm.payStatus = 2
+      home.orderNotInvoice().then(response => {
+        this.unTicketData = response.data.orderList
+        this.readyOrderLoad = false
+        console.log(this.unTicketData)
+      })
+    },
     // 开票历史
     getHistoryOrderData() {
       home.tickethistory().then(response => {
-        console.log(response)
-
         this.historyOrderData = response.data.invoiceList
         this.historyOrderLoad = false
       })
@@ -1014,7 +1018,7 @@ export default {
       this.getRecordList()
       this.curriculumPayApply()
       this.getHistoryOrderData()
-
+      this.getUnTicketData()
       // this.getOverTime()
       //过期的我的课程
       this.overStudyCurriculumList()
