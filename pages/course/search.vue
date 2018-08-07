@@ -34,7 +34,7 @@ import Search from '@/components/common/Search.vue'
 import CustomCard from '@/components/card/Card.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
-import { home } from '~/lib/v1_sdk/index'
+import { search } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {
@@ -86,7 +86,7 @@ export default {
     searchCurriculumList() {
       this.loadSearch = true
       return new Promise((resolve, reject) => {
-        home.searchCurriculumList(this.searchForm).then(response => {
+        search.searchCurriculumList(this.searchForm).then(response => {
           this.searchData = response.data.curriculumList
           if (response.data.curriculumList.length === 0) {
             this.result = false
@@ -108,7 +108,7 @@ export default {
     // 获取猜你喜欢列表
     getLikeList() {
       return new Promise((resolve, reject) => {
-        home.getLikeList(this.getLikeForm).then(response => {
+        search.getLikeList(this.getLikeForm).then(response => {
           this.getData = response.data.curriculumList
           if (this.getData !== 0) {
             this.loadinged = false

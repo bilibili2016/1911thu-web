@@ -37,7 +37,7 @@
 <script>
 import CustomCard from '@/components/card/Card.vue'
 import SearchNothing from '@/components/common/SearchNothing.vue'
-import { home, players } from '~/lib/v1_sdk/index'
+import { home, players, category } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 
@@ -134,7 +134,7 @@ export default {
     // 获取顶部分类列表数据list    ---  非 最新项目
     getCidPidList() {
       this.loadList = true
-      home.childCategoryList().then(res => {
+      category.childCategoryList().then(res => {
         this.cidData = res.data.categoryList
         this.loadList = false
         //最新项目
@@ -156,7 +156,7 @@ export default {
     // 获取顶部分类列表数据list ---- 最新 项目
     getNewProject() {
       this.loadList = true
-      home.getNewProject().then(res => {
+      category.getNewProject().then(res => {
         this.cidData = res.data.categoryList
         this.loadList = false
         //最新项目
@@ -181,7 +181,7 @@ export default {
       this.categoryForm.cids = this.cid
       this.categoryForm.pids = this.pid
 
-      home.curriculumListNew(this.categoryForm).then(res => {
+      category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
         // console.log(this.pagemsg.total)
@@ -193,7 +193,7 @@ export default {
       this.loadCourse = true
       this.categoryForm.cids = this.cid
       this.categoryForm.pids = this.pid
-      home.curriculumProjectList(this.categoryForm).then(res => {
+      category.curriculumProjectList(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumProjectList
         this.pagemsg.total = res.data.pageCount
         // console.log(this.pagemsg.total)
@@ -209,7 +209,7 @@ export default {
         '/'
       )[2]
       this.curriculumListForm.categoryIdb = this.pid
-      home.curriculumList(this.curriculumListForm).then(response => {
+      category.curriculumList(this.curriculumListForm).then(response => {
         this.categoryData = response.data.curriculumList
         this.pagemsg.total = response.data.pageCount
 
@@ -230,7 +230,7 @@ export default {
       this.changeData = this.allCheckedId
 
       return new Promise((resolve, reject) => {
-        home.addShopCart(this.idsForm).then(response => {
+        category.addShopCart(this.idsForm).then(response => {
           if (response.status === 0) {
             this.categoryData.forEach(function(v, i, arr) {
               v.is_checked = true
@@ -326,7 +326,7 @@ export default {
       this.loadCourse = true
       this.pagemsg.page = val
       this.categoryForm.pages = val
-      home.curriculumList(this.categoryForm).then(res => {
+      category.curriculumList(this.categoryForm).then(res => {
         this.loadCourse = false
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount

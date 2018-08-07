@@ -29,7 +29,7 @@
 
 <script>
 import CustomCard from '@/pages/course/components/ListCard.vue'
-import { home, newlesson } from '~/lib/v1_sdk/index'
+import { categorylist } from '~/lib/v1_sdk/index'
 import CustomPagination from '@/components/common/Pagination.vue'
 export default {
   components: {
@@ -81,7 +81,7 @@ export default {
     // 最新课程列表
     getNewCourseList() {
       console.log('1')
-      home.getNewCourseList(this.newsCurriculumForm).then(response => {
+      categorylist.getNewCourseList(this.newsCurriculumForm).then(response => {
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '最新课程'
@@ -90,16 +90,18 @@ export default {
     // 获取经典课程列表
     getClassicCourseList() {
       console.log('2')
-      home.getClassicCourseList(this.newsCurriculumForm).then(response => {
-        this.courseList = response.data.curriculumList
-        this.pagemsg.total = Number(response.data.pageCount)
-        this.coursename = '精品好课'
-      })
+      categorylist
+        .getClassicCourseList(this.newsCurriculumForm)
+        .then(response => {
+          this.courseList = response.data.curriculumList
+          this.pagemsg.total = Number(response.data.pageCount)
+          this.coursename = '精品好课'
+        })
     },
     // 获取最新课程列表
     getFreeCourseList() {
       console.log('3')
-      home.getFreeCourseList(this.newsCurriculumForm).then(response => {
+      categorylist.getFreeCourseList(this.newsCurriculumForm).then(response => {
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '免费课程'

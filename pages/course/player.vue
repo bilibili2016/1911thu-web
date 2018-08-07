@@ -355,7 +355,7 @@ export default {
     addShopCart() {
       this.curriculumcartids.cartid = this.kid
       return new Promise((resolve, reject) => {
-        home.addShopCart(this.curriculumcartids).then(response => {
+        players.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push('/shop/shoppingcart')
         })
       })
@@ -415,7 +415,7 @@ export default {
       } else {
         this.curriculumcartids.cartid = item[0].curriculum_id
         return new Promise((resolve, reject) => {
-          home.addShopCart(this.curriculumcartids).then(response => {
+          players.addShopCart(this.curriculumcartids).then(response => {
             // this.$router.push('/shop/shoppingCart')
             // window.open(window.location.origin + '/shop/shoppingcart')
             this.$message({
@@ -554,7 +554,7 @@ export default {
       this.problem.curriculumId = persistStore.get('curriculumId')
       this.problem.curriculumcatalogid = persistStore.get('catalogId')
       return new Promise((resolve, reject) => {
-        home.reportProblem(this.problem).then(response => {
+        players.reportProblem(this.problem).then(response => {
           // this.closeReport()
 
           if (response.status === '100100') {

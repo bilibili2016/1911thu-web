@@ -45,7 +45,7 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { home } from '~/lib/v1_sdk/index'
+import { category } from '~/lib/v1_sdk/index'
 export default {
   props: ['courseList'],
   computed: {
@@ -97,7 +97,7 @@ export default {
     // 添加购物车函数
     addCourseShopCart(item) {
       this.curriculumcartids.cartid = item.id
-      home.addShopCart(this.curriculumcartids).then(response => {
+      category.addShopCart(this.curriculumcartids).then(response => {
         let len = Number(this.productsNum) + 1
         this.setProductsNum({
           pn: len
