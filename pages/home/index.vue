@@ -2,7 +2,7 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-carousel :items="items" :classify="classify" :courses="courses"></v-carousel>
+      <v-carousel :items="items" :courses="courses"></v-carousel>
       <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
       <v-newp :newData="newData" :titleTwo="titleEight" :linkone="linkone"></v-newp>
@@ -110,32 +110,6 @@ export default {
         limit: null,
         types: 1
       },
-      classify: [
-        {
-          category_name: '干部网络学院',
-          id: '1'
-        },
-        {
-          category_name: '在线商学院',
-          id: '17'
-        },
-        {
-          category_name: '职场学院',
-          id: '19'
-        },
-        {
-          category_name: '党政委托项目',
-          id: '16'
-        },
-        {
-          category_name: '企业内训项目',
-          id: '18'
-        },
-        {
-          category_name: '管理公开项目',
-          id: '20'
-        }
-      ],
       classtext: [],
       courses: [],
       notLogin: false,
@@ -180,7 +154,6 @@ export default {
       loginMsg: false
     }
   },
-  created() {},
   computed: {
     ...mapState('auth', [])
   },

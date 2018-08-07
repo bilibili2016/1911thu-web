@@ -49,8 +49,7 @@ export default {
     getMore(item) {
       window.open(window.location.origin + item)
     }
-  },
-  mounted() {}
+  }
 }
 </script>
 

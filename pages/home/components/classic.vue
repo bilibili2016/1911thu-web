@@ -72,7 +72,3 @@ export default {
 }
 </script>
 
-<style scpoed lang="scss">
-@import '~assets/style/home/classic.scss';
-</style>
-
