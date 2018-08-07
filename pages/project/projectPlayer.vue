@@ -719,48 +719,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.displays {
-  display: none;
-}
-.playerBox {
-  .shareIcond {
-    opacity: 0;
-    display: none;
-    margin-top: -104px;
-    width: 121px;
-    height: 56px;
-    border-radius: 4px;
-    position: absolute;
-    transition: all 300ms;
-    top: 55px;
-    right: 0px;
-    z-index: 99999;
-    i {
-      display: inline-block;
-      width: 55.4px;
-      line-height: 36px;
-      text-align: center;
-      color: #222;
-      font-size: 12px;
-      margin: 0;
-      &:hover {
-        color: #8f4acb;
-      }
-    }
-    img {
-      width: 100px;
-      height: 100px;
-      margin: 15px 0 0 2.7px;
-      display: block;
-      cursor: pointer;
-    }
-  }
-}
-.share {
-  &:hover .shareIcond {
-    opacity: 1;
-    display: inline-block;
-  }
-}
+@import '~assets/style/project/projectPlayer';
 </style>
 

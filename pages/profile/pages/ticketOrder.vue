@@ -558,7 +558,7 @@ export default {
       // console.log(this.orderPrice)
 
       this.orderNum = this.checkedArr.length
-      console.log(this.checkedArr)
+      // console.log(this.checkedArr)
       if (this.checkedArr.length == this.ticketOrderData.length) {
         this.checkMsg = true
       } else {
@@ -591,7 +591,7 @@ export default {
       }
 
       this.orderNum = this.checkedArr.length
-      console.log(this.checkedArr)
+      // console.log(this.checkedArr)
     },
     // 时间戳转日期格式
     exchangeTime(time) {
@@ -990,7 +990,7 @@ export default {
     addInvoiceInfo() {
       this.ticketForm.orderID = this.checkedArr
       this.zzTicketForm.orderID = this.checkedArr
-      console.log(this.ticketForm)
+      // console.log(this.ticketForm)
 
       if (this.choose === '1') {
         if (this.ticketForm.isRadio) {
@@ -1130,11 +1130,8 @@ export default {
     //未开发票列表
     getUnTicketData() {
       home.orderNotInvoice().then(response => {
-        // this.orderData = response.data.orderList
         this.ticketOrderData = response.data.orderList
         this.$refs.checkbox.forEach(v => {
-          console.log(v)
-
           v.checked = false
         })
       })
@@ -1259,20 +1256,6 @@ export default {
         persistStore.set('address', val)
       }
     }
-    // headerHeight(val, oldval) {
-    //   this.index++
-    //   if (this.index === 1 && document.getElementById('bottomBar')) {
-    //     this.bottomBaroffsetTop =
-    //       document.getElementById('bottomBar').offsetTop +
-    //       this.headerHeight +
-    //       10
-    //     if (this.bottomBaroffsetTop > this.windowHeight) {
-    //       this.isFixed = true
-    //     } else {
-    //       this.isFixed = false
-    //     }
-    //   }
-    // }
   }
 }
 </script>

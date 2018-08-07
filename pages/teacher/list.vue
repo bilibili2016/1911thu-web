@@ -89,7 +89,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.news-list .shadow {
-  box-shadow: none;
-}
+@import '~assets/style/teacher/list';
 </style>
