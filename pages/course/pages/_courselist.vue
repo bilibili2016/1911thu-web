@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import CustomCard from '@/components/common/Card.vue'
+import CustomCard from '@/pages/course/components/ListCard.vue'
 import { home, newlesson } from '~/lib/v1_sdk/index'
 import CustomPagination from '@/components/common/Pagination.vue'
 export default {
