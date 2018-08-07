@@ -1,5 +1,5 @@
 <template>
-  <div class="goodLesson new-lesson">
+  <div class="goodLesson new-lesson" style="padding-bottom: 40px;">
     <div class="topImg">
       <div class="top-con">
         <p class="desc-one">走心课程</p>
@@ -162,9 +162,5 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss">
-.goodLesson {
-  padding-bottom: 40px;
-}
-</style>
+
 

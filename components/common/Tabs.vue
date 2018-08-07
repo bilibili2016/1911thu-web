@@ -94,29 +94,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.dropdown {
-  width: 200px;
-  margin-left: 50px;
-  .item {
-    display: inline-block;
-  }
-  .el-dropdown {
-    margin-left: 38px;
-  }
-}
-.dropdown {
-  .el-dropdown-menu {
-    padding: 0px;
-  }
-  .el-dropdown-menu__item {
-    list-style: none;
-    line-height: 100px;
-    padding: 5px 30px;
-    margin: 0;
-    font-size: 14px;
-    color: #606266;
-    cursor: pointer;
-    outline: none;
-  }
-}
+@import '~assets/style/components/tabs';
 </style>

@@ -111,37 +111,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main-crumb {
-  height: 85px;
-  .main-crumbs {
-    display: inline-block;
-    line-height: 85px;
-    height: 85px;
-  }
-  .fr {
-    .collect {
-      height: 85px;
-      .line-center {
-        line-height: 85px;
-        img {
-          width: 18px;
-          height: 18px;
-          display: inline-block;
-          padding: 0px;
-          margin: 0px;
-          margin-right: 4px;
-          vertical-align: middle;
-        }
-        span {
-          font-size: 14px;
-          font-family: MicrosoftYaHei;
-          color: rgba(136, 136, 136, 1);
-          line-height: 0px;
-          display: inline;
-          padding-right: 10px;
-        }
-      }
-    }
-  }
-}
+@import '~assets/style/components/line';
 </style>
