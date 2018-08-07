@@ -423,34 +423,6 @@
       </div>
     </template>
 
-    <!-- 新闻列表（已拆出）  newLists-->
-    <!-- <template v-if="config.card_type==='newLists' ">
-      <div class="newOrFreeCourseList newsList center goodlesson">
-        <div class="course clearfix bottom " v-for="(course,index) in newsList " :key="index " @click="goDetail(course)">
-          <el-card class="fl " :body-style="{ padding: '0px' } ">
-
-            <img :src="course.picture" class="image " alt=" ">
-
-
-          </el-card>
-          <div class="particulars fl " style="width:560px;">
-            <div class="currentclum ">
-              <h4>{{course.title}}</h4>
-              <p class="small-title">{{course.introduce}}</p>
-              <p>{{course.introduction}}</p>
-            </div>
-          </div>
-          <div class="Newtime">
-            <p class="timeDetail"> {{timestampToTime2(course.create_time)}}</p>
-            <p class="timeLink" @click="goDetail(course)">
-              <span class="line"></span>
-              <img src="@/assets/images/newList-icon.png" alt="">
-            </p>
-          </div>
-        </div>
-      </div>
-    </template> -->
-
   </div>
 </template>
 
