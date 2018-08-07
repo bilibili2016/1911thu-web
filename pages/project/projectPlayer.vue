@@ -23,13 +23,13 @@
 
         </span> -->
 
-        <span class="fl elt" @click="showElt" v-if="this.iseve === 0">
+        <span class="fl elt" @click="showElt" v-if="this.iseve === false">
           <i class="el-icon-edit"></i>课程评价
         </span>
-        <span class="fl elt" v-else :class=" { bag: this.iseve === 1 }">
+        <span class="fl elt" v-else :class=" { bag: this.iseve === true }">
           <i class="el-icon-edit"></i>已评价
         </span>
-        <span class="fl collection" @click="collection" :class=" { bag: this.collectMsg === 1 }">
+        <span class="fl collection" @click="collection" :class=" { bag: this.collectMsg === true }">
           <i class="el-icon-star-on"></i>
           <span>收藏</span>
         </span>
@@ -192,10 +192,9 @@ export default {
         curriculumId: '',
         types: 2
       },
-      collectMsg: 0,
-      iseve: 0,
+      collectMsg: false,
+      iseve: false,
       bought: false,
-      isStudy: false,
       getdefaultForm: {
         curriculumid: ''
       },
@@ -206,7 +205,6 @@ export default {
       tidForm: {
         tids: ''
       },
-      curriculumPrivilege: false,
       btnData: [],
       reTagBtn: [],
       tagGroup: '',
@@ -482,12 +480,22 @@ export default {
         this.projectDetail = response.data.curriculumProjectDetail
         this.courseList = response.data.curriculumProjectDetail.curriculumList
         this.shoppingForm.cartid = response.data.curriculumProjectDetail.id
+        persistStore.set(
+          'curriculumId',
+          response.data.curriculumProjectDetail.defaultCurriculumCatalog
+            .curriculum_id
+        )
+        persistStore.set(
+          'catalogId',
+          response.data.curriculumProjectDetail.defaultCurriculumCatalog
+            .curriculumCatalog_id
+        )
         this.bought =
           response.data.curriculumProjectDetail.curriculumProjectPrivilege
         this.isFreeCourse = response.data.curriculumProjectDetail.is_free
-        //   this.iseve = response.data.curriculumDetail.is_evaluate
-        //   this.isStudy = response.data.curriculumDetail.is_study
-        //   this.collectMsg = response.data.curriculumDetail.is_collection
+        this.iseve =
+          response.data.curriculumProjectDetail.is_evaluateCurriculumProject
+        this.collectMsg = response.data.curriculumProjectDetail.is_Collection
       })
     },
     // 反馈问题
@@ -571,7 +579,7 @@ export default {
     },
     // 判断是收藏还是为收藏
     collection() {
-      if (this.collectMsg === 1) {
+      if (this.collectMsg === true) {
         this.deleteCollection()
       } else {
         this.addCollection()
@@ -586,7 +594,7 @@ export default {
           type: 'success',
           message: '添加收藏成功'
         })
-        this.collectMsg = 1
+        this.collectMsg = true
       })
     },
     // 删除收藏
@@ -598,7 +606,7 @@ export default {
           type: 'success',
           message: '取消收藏成功'
         })
-        this.collectMsg = 0
+        this.collectMsg = false
       })
     },
     // 为播放器上当的播放按钮添加点击事件
