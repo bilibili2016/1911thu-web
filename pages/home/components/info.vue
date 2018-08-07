@@ -27,13 +27,11 @@
                 <h4>{{card.title}}</h4>
                 <p>{{card.introduce}}</p>
               </div>
-
             </div>
           </div>
         </div>
         <!-- <v-card ref="card" :infoArticle="infoArticle" :config="infoOne" :linkdata="linkfour" :linkfive="linkfive"></v-card> -->
       </div>
-
     </el-row>
   </div>
 </template>
