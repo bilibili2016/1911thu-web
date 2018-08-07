@@ -83,7 +83,7 @@
           <el-rate v-model="rateModel" @change="changeRate"></el-rate>
 
         </h6>
-        <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+        <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="['detail-btngrounp',{borderColor: item.isCheck}]">
           {{item.value}}
         </div>
         <el-input type="textarea" :rows="4" placeholder="其它想说的" v-model="word">
@@ -100,7 +100,6 @@
 
 <script>
 import {
-  other,
   auth,
   home,
   players,
@@ -280,23 +279,13 @@ export default {
       this.getPlayerInfo()
     },
     getEvaluateTags() {
-      return new Promise((resolve, reject) => {
-        coursedetail.getEvaluateTags().then(response => {
-          // this.btnData = response.data.evaluateTags['1']
-          this.tagGroup = response.data.evaluateTags
-          this.changeRate('5')
-          this.btnDatas = response.data.evaluateTags
-          // this.tagGroup = response.data.evaluateTags
-        })
+      coursedetail.getEvaluateTags().then(response => {
+        // this.btnData = response.data.evaluateTags['1']
+        this.tagGroup = response.data.evaluateTags
+        this.changeRate('5')
+        this.btnDatas = response.data.evaluateTags
+        // this.tagGroup = response.data.evaluateTags
       })
-    },
-    getBtnContent(val, index) {
-      if (val.isCheck === true) {
-        this.$set(val, 'isCheck', false)
-      } else {
-        this.$set(val, 'isCheck', true)
-      }
-      this.addEvaluateForm.tag.push(val.value)
     },
     // 提示跳转购车
     goShoppingCart(msg) {
@@ -352,7 +341,6 @@ export default {
     resize() {
       if (this.$refs.playerBox) {
         const h = this.$refs.playerBox.offsetHeight
-        console.log(this.$refs.mediaL.style)
         this.$refs.mediaL.style.height = h + 'px'
         this.$refs.mediaR.style.height = h + 'px'
         this.$refs.playInner.style.height = h - 100 + 'px'
@@ -525,15 +513,15 @@ export default {
     // 增加评论
     addEvaluate() {
       //免费课程不购买可以评价
-      if (!this.bought && this.isFreeCourse !== 2) {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '您还没有购买该课程，请先购买后再来评论吧！'
-        })
-        this.showEvaluate = false
-        return false
-      }
+      // if (!this.bought && this.isFreeCourse !== 2) {
+      //   this.$message({
+      //     showClose: true,
+      //     type: 'error',
+      //     message: '您还没有购买该课程，请先购买后再来评论吧！'
+      //   })
+      //   this.showEvaluate = false
+      //   return false
+      // }
       if (this.word.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.word
       } else {
@@ -544,6 +532,7 @@ export default {
         })
         return false
       }
+      console.log(this.tagGroup)
 
       this.addEvaluateForm.ids = this.shoppingForm.cartid
       this.addEvaluateForm.curriculumId = persistStore.get('curriculumId')
@@ -552,7 +541,7 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      projectdetail.addEvaluate(this.addEvaluateForm).then(response => {
+      projectDetail.addEvaluate(this.addEvaluateForm).then(response => {
         if (response.status === '100100') {
           this.$message({
             showClose: true,
@@ -640,9 +629,7 @@ export default {
     // var $config = {
     //   url: 'http://www.1911edu.com/'
     // }
-
     // socialShare('.social-share', $config)
-
     // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
@@ -654,13 +641,10 @@ export default {
     ;(this.seconds = 10000000),
       // 获取评论接口
       this.getEvaluateTags()
-
-    // this.isHasClass()
     this.addPlay()
   },
   watch: {
     videoState(flag) {
-      // console.log(flag)
       if (flag) {
         this.playing = this.playImg
       } else {

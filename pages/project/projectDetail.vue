@@ -40,7 +40,7 @@
             <img src="~assets/images/pro_cart.png" alt="">
           </span>
         </div>
-        <div class="study" v-if="projectDetail.curriculumProjectPrivilege">开始学习</div>
+        <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
       </div>
     </div>
     <!-- 介绍 线上课程 线下课程介绍 用户评价 常见问题-->
@@ -180,6 +180,10 @@ export default {
           })
         }
       })
+    },
+    // 跳转到项目播放页
+    goProjectPlayer() {
+      window.open(window.location.origin + '/project/projectPlayer')
     }
   },
   mounted() {
