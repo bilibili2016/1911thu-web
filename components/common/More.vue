@@ -55,21 +55,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card-button {
-  width: 174px;
-  margin: 10px auto 60px;
-  cursor: pointer;
-  .el-button {
-    width: 174px;
-    height: 56px;
-    border-radius: 38px;
-    background-color: #6417a6;
-    transition: background 300ms;
-    border: none;
-    font-weight: 400;
-    &:hover {
-      background-color: #8f4acb;
-    }
-  }
-}
+@import '~assets/style/components/more';
 </style>

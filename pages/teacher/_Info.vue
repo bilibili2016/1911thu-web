@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+import { teacherInfo } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import CustomCard from '@/components/card/Card.vue'
 export default {
@@ -48,14 +48,14 @@ export default {
   methods: {
     getTeacherInfo() {
       return new Promise((resolve, reject) => {
-        home.getTeacherInfo(this.tidForm).then(response => {
+        teacherInfo.getTeacherInfo(this.tidForm).then(response => {
           this.teacherData = response.data.teacherInfo
         })
       })
     },
     getTeacherCourse() {
       return new Promise((resolve, reject) => {
-        home.getTeacherCourse(this.tidForm).then(response => {
+        teacherInfo.getTeacherCourse(this.tidForm).then(response => {
           this.teacherCourse = response.data.curriculumList
         })
       })

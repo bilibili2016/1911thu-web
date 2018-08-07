@@ -354,9 +354,8 @@
 </template>
 
 <script>
-import { home, ticketorder } from '~/lib/v1_sdk/index'
+import { ticketorder } from '~/lib/v1_sdk/index'
 import { timestampToTime } from '@/lib/util/helper'
-import { order } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
@@ -864,7 +863,7 @@ export default {
     },
     // 获取三级联动省市县列表
     getRegionList() {
-      home.getRegionList({ region_code: '' }).then(res => {
+      ticketorder.getRegionList({ region_code: '' }).then(res => {
         this.mapregionList = res.data.regionList
         this.province = this.mapregionList.map(item => {
           return Object.assign({}, item, {
@@ -1000,7 +999,7 @@ export default {
         }
 
         return new Promise((resolve, reject) => {
-          home.addInvoiceInfo(this.ticketForm).then(res => {
+          ticketorder.addInvoiceInfo(this.ticketForm).then(res => {
             if (res.status === 0) {
               this.$message({
                 showClose: true,
@@ -1054,7 +1053,7 @@ export default {
           this.zzTicketForm.others = '其他'
         }
         return new Promise((resolve, reject) => {
-          home.addInvoiceInfo(this.zzTicketForm).then(res => {
+          ticketorder.addInvoiceInfo(this.zzTicketForm).then(res => {
             if (res.status === 0) {
               this.$message({
                 showClose: true,
@@ -1129,7 +1128,7 @@ export default {
     },
     //未开发票列表
     getUnTicketData() {
-      home.orderNotInvoice().then(response => {
+      ticketorder.orderNotInvoice().then(response => {
         this.ticketOrderData = response.data.orderList
         this.$refs.checkbox.forEach(v => {
           v.checked = false

@@ -460,7 +460,6 @@
 </template>
 
 <script>
-// import { home, auth } from '@/lib/v1_sdk/index'
 import { affirmOrder } from '@/lib/v1_sdk/index'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'

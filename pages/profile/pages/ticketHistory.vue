@@ -97,8 +97,7 @@
 </template>
 
 <script>
-import { home, tickethistory } from '~/lib/v1_sdk/index'
-import { order } from '~/lib/v1_sdk/index'
+import { ticketHistory } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { timestampToTime } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
@@ -160,7 +159,7 @@ export default {
     goShopping(id) {
       this.orderForm.ids = id
       return new Promise((resolve, reject) => {
-        order.buyAgain(this.orderForm).then(response => {
+        ticketHistory.buyAgain(this.orderForm).then(response => {
           if (response.status === 0) {
             this.$router.push('/shop/shoppingCart')
           } else {
@@ -182,7 +181,7 @@ export default {
       //取消订单
       this.orderForm.ids = id
       return new Promise((resolve, reject) => {
-        order.cancelOrder(this.orderForm).then(response => {
+        ticketHistory.cancelOrder(this.orderForm).then(response => {
           if (response.status === 0) {
             this.$emit('handleUpdate', true)
             this.$message({
@@ -212,9 +211,6 @@ export default {
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', item)
     }
-  },
-  mounted() {
-    console.log(this.orderData)
   }
 }
 </script>

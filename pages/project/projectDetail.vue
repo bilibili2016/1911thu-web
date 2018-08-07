@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { home, projectDetail, coursedetail } from '@/lib/v1_sdk/index'
+import { projectDetail } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
@@ -172,7 +172,7 @@ export default {
     // 项目加入购物车
     addShoppingCart() {
       this.shoppingForm.cartid = this.project.projectId
-      home.addShopCart(this.shoppingForm).then(res => {
+      projectDetail.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
           this.setProductsNum({

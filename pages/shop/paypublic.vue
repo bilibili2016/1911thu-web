@@ -49,7 +49,6 @@
 </template>
 
 <script>
-// import { home, auth } from '@/lib/v1_sdk/index'
 import { paypublic } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {

@@ -1,0 +1,30 @@
+img {
+  width: 585px;
+  height: 324px;
+  display: block;
+  margin: 134px auto 0;
+}
+h4 {
+  font-size: 18px;
+  color: #888;
+  margin: 40px 0 30px;
+  text-align: center;
+}
+p {
+  text-align: center;
+  padding-bottom: 200px;
+  span {
+    display: inline-block;
+    width: 154px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #6417a6;
+    color: #fff;
+    cursor: pointer;
+    transition: all 300ms;
+    &:hover {
+      background-color: #8f4acb;
+    }
+  }
+}
