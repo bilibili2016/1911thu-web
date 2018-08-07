@@ -11,7 +11,7 @@
           </el-breadcrumb>
         </div>
         <div class="headerR fr">
-          <span :class="['collection',{'bag': this.collectMsg === 1}]" @click="collection">
+          <span :class="['collection',{'bag': this.collectMsg === true}]" @click="collection">
             <i class="el-icon-star-on"></i>
             <span>收藏 </span>
           </span>
@@ -87,7 +87,7 @@ export default {
       evaluateDataLoad: true,
       problemLoad: true,
       rateModel: 3,
-      collectMsg: 0,
+      collectMsg: false,
       activeName: 'first',
       loadMsg: false,
       addCollectionForm: {
@@ -153,6 +153,7 @@ export default {
     getProjectInfo() {
       projectDetail.getProjectInfo(this.project).then(res => {
         this.projectDetail = res.data.curriculumProjectDetail
+        this.collectMsg = res.data.curriculumProjectDetail.is_Collection
         this.projectDetail.score = Number(this.projectDetail.score)
         this.projectDetailLoad = false
         this.inlineLoad = false
