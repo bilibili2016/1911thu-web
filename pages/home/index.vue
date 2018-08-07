@@ -7,11 +7,12 @@
       <!-- 最新项目 -->
       <v-newp :newData="newData" :title="newprojecttitle" :link="linknewproject"></v-newp>
       <!-- 最新课程 -->
-      <v-new :config="configOne" :newData="newData" :title="newcoursetitle" :link="linknewcourse"></v-new>
+      <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse"></v-course>
       <!-- 精品好课 -->
-      <v-classic :classicData="classicData" :title="classiccoursetitle" :link="linkclassiccourse"></v-classic>
+      <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse"></v-course>
       <!-- 免费专区 -->
-      <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free>
+      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-course>
+      <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
       <!-- 名师智库 -->
       <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous>
 
@@ -29,26 +30,23 @@
 </template>
 
 <script>
-import Carousel from '@/pages/home/components/carousel.vue'
+import Carousel from '@/components/common/carousel.vue'
 import Newp from '@/pages/home/components/newproject.vue'
-import New from '@/pages/home/components/new.vue'
-import Classic from '@/pages/home/components/classic.vue'
-import Free from '@/pages/home/components/free.vue'
+
 import Famous from '@/pages/home/components/famous.vue'
 import Info from '@/pages/home/components/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
+import HomeCourse from '@/pages/home/components/homecourse.vue'
 import { mapState, mapActions } from 'vuex'
 import { home, newlesson } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-carousel': Carousel,
     'v-newp': Newp,
-    'v-new': New,
-    'v-classic': Classic,
-    'v-free': Free,
     'v-famous': Famous,
     'v-info': Info,
-    'v-backtotop': BackToTop
+    'v-backtotop': BackToTop,
+    'v-course': HomeCourse
   },
   data() {
     return {
@@ -82,6 +80,7 @@ export default {
         card_type: 'profile',
         new: 'true'
       },
+      classicConfig: {},
       infoOne: {
         card_type: 'infoOne'
       },
