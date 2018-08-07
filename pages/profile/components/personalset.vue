@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { home, personalset } from '~/lib/v1_sdk/index'
+import { personalset } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
 import { mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -373,7 +373,7 @@ export default {
     },
     // 获取用户信息
     getUserInfo() {
-      home.getUserInfo().then(res => {
+      personalset.getUserInfo().then(res => {
         this.psnForm = res.data.userInfo
         if (this.psnForm.company_name && this.psnForm.company_name != '') {
           this.hasCompany = true
@@ -426,7 +426,7 @@ export default {
     },
     // 获取省市区
     getRegionList() {
-      home.getRegionList({ region_code: '' }).then(res => {
+      personalset.getRegionList({ region_code: '' }).then(res => {
         this.mapregionList = res.data.regionList
         this.province = this.mapregionList.map(item => {
           return Object.assign({}, item, {

@@ -50,7 +50,7 @@
 <script>
 // banner 组件
 // 学堂资讯组件
-import { home } from '~/lib/v1_sdk/index'
+import { banner } from '~/lib/v1_sdk/index'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   props: ['bannerImg', 'config', 'isUpdate', 'isShowUpAvtor'],
@@ -101,7 +101,7 @@ export default {
       this.fileForm.FILESS = []
       reader.onloadend = () => {
         this.fileForm.FILESS.push(reader.result)
-        home.uploadHeadImg(this.fileForm).then(response => {
+        banner.uploadHeadImg(this.fileForm).then(response => {
           this.avator = response.data.full_path
           this.$message({
             showClose: true,
@@ -133,7 +133,7 @@ export default {
       return Y + M + D + h + m + s
     },
     getUserInfo() {
-      home.getUserInfo().then(res => {
+      banner.getUserInfo().then(res => {
         this.userInfo = res.data.userInfo
         this.time.hour = parseInt(this.userInfo.study_curriculum_time / 3600)
         this.time.minutes = parseInt(

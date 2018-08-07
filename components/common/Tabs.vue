@@ -28,7 +28,7 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { home, newlesson } from '~/lib/v1_sdk/index'
+import { home } from '~/lib/v1_sdk/index'
 export default {
   data() {
     return {
