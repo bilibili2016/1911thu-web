@@ -1,4 +1,5 @@
 .newProject {
+  background-color: #fff;
   .coursenew {
     padding-bottom: 50px;
   }
@@ -133,5 +134,23 @@
       background-color: #8f4acb;
       border-color: #8f4acb;
     }
+  }
+}
+
+.freeCourse {
+  background-color: #f8f8fd;
+  .card-list {
+    &:hover {
+      .el-card {
+        .el-card__body {
+          .el-row {
+            background-color: #fff !important;
+          }
+        }
+      }
+    }
+  }
+  .el-row {
+    background-color: #f8f8fd;
   }
 }
