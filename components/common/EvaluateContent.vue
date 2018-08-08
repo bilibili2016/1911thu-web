@@ -1,4 +1,5 @@
 <template>
+    <!-- 用户评价内容（查看更多）弹框 -->
     <div>
         <div class="commentator clearfix" v-for="(item,index) in evaluteData" :key="index" v-if="index<3">
             <img class="fl" :src="item.head_img" alt="">

@@ -87,6 +87,7 @@
         </div>
       </div>
     </div>
+    <!-- <v-evaluatecase v-show="showEvaluate" :isClose="isClose" :courseList="courseList" @closeEvaluate="closeEvaluate"> </v-evaluatecase> -->
     <div class="evaluate" v-show="showEvaluate">
       <div class="note">
         <h4>课程评价
@@ -124,6 +125,7 @@ export default {
   },
   data() {
     return {
+      isClose: true, //评论组件是否有关闭按钮
       isFreeCourse: '',
       videoState: false,
       showReportBug: false,
@@ -507,7 +509,7 @@ export default {
               that.seconds--
               // console.log(that.seconds, '这是时间')
               let playTime = window.qcplayer.currentTime()
-              console.log(playTime, '这是时间')
+              // console.log(playTime, '这是时间')
               socket.emit(
                 'watchRecordingTime',
                 persistStore.get('curriculumId'),
@@ -540,13 +542,12 @@ export default {
       this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       return new Promise((resolve, reject) => {
         players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          // console.log(response)
-          // console.log(response.data.curriculumDetail, '9999')
           this.player = response.data.curriculumDetail
           this.iseve = response.data.curriculumDetail.is_evaluate
           this.bought = response.data.curriculumPrivilege
           this.isStudy = response.data.curriculumDetail.is_study
           this.courseList = response.data.curriculumCatalogList
+
           this.collectMsg = response.data.curriculumDetail.is_collection
           this.curriculumPrivilege = response.data.curriculumPrivilege
           this.isFreeCourse = response.data.curriculumDetail.is_free

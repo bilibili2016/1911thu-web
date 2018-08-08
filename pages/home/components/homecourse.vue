@@ -3,8 +3,12 @@
   <div class="new" :class="{ bgnone : config.card_type !== 'profile'}">
     <el-row class="center">
       <v-title :title="title" :link="link"></v-title>
-      <v-card ref="card" :data="data" :config="config" @selectCid="selectCid" v-if="config.card_type"></v-card>
-      <v-classic :data="data" :config="config" v-else></v-classic>
+      <!-- 经典课程 card -->
+      <v-classic :data="data" :config="config" v-if="config.home_type ==='cardthree'"></v-classic>
+      <!-- 项目card -->
+      <v-shortlist :cardData="data" v-if="config.home_type ==='cardtwo'"></v-shortlist>
+      <!-- 非经典 项目 card -->
+      <v-card ref="card" :data="data" :config="config" @selectCid="selectCid" v-if="config.home_type ==='cardone'"></v-card>
     </el-row>
   </div>
 </template>
@@ -13,14 +17,15 @@
 import CustomTitle from '@/components/common/Title.vue'
 import CustomCard from '@/components/card/Card.vue'
 import ClassicCard from '@/components/card/ClassicCard.vue'
-
+import ShortList from '@/pages/project/components/shortList.vue'
 import { mapActions } from 'vuex'
 export default {
   props: ['config', 'data', 'title', 'link'],
   components: {
     'v-title': CustomTitle,
     'v-card': CustomCard,
-    'v-classic': ClassicCard
+    'v-classic': ClassicCard,
+    'v-shortlist': ShortList
   },
   data() {
     return {

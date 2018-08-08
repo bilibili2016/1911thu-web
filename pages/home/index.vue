@@ -3,28 +3,21 @@
     <el-main class="home">
       <!-- 头部导航 -->
       <v-carousel :items="items" :config="configCarousel"></v-carousel>
-      <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
-      <v-newp :data="projectData" :title="newprojecttitle" :link="linknewproject"></v-newp>
+      <v-course :config="projectConfig" :data="projectData" :title="newprojecttitle" :link="linknewproject"></v-course>
       <!-- 免费专区 -->
       <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="freeCourse"></v-course>
       <!-- 最新课程 -->
       <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse"></v-course>
       <!-- 精品好课 -->
       <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse"></v-course>
-
       <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
       <!-- 名师智库 -->
       <!-- <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous> -->
-
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
-      <!-- 用户评价 -->
-      <!-- <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate> -->
       <!-- 学堂资讯 -->
       <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo"></v-info>
-      <!-- 合作伙伴 -->
-      <!-- <v-partner :data="partnerList.list"></v-partner> -->
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>
@@ -32,9 +25,8 @@
 
 <script>
 import Carousel from '@/components/common/Carousel.vue'
-import Newp from '@/pages/home/components/newproject.vue'
 
-import Famous from '@/pages/home/famous.vue'
+// import Famous from '@/pages/home/famous.vue'
 import Info from '@/pages/home/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
@@ -43,8 +35,7 @@ import { home, news } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-carousel': Carousel,
-    'v-newp': Newp,
-    'v-famous': Famous,
+    // 'v-famous': Famous,
     'v-info': Info,
     'v-backtotop': BackToTop,
     'v-course': HomeCourse
@@ -77,13 +68,22 @@ export default {
       configZero: {
         card_type: 'profile',
         new: 'false',
-        free: 'true'
+        free: 'true',
+        home_type: 'cardone'
       },
       configOne: {
         card_type: 'profile',
-        new: 'true'
+        new: 'true',
+        home_type: 'cardone'
       },
-      classicConfig: {},
+      classicConfig: {
+        card_type: 'classic',
+        home_type: 'cardthree'
+      },
+      projectConfig: {
+        card_type: 'project',
+        home_type: 'cardtwo'
+      },
       infoOne: {
         card_type: 'infoOne'
       },
@@ -156,7 +156,7 @@ export default {
       },
       projectForm: {
         pages: 1,
-        limits: 2
+        limits: 4
       },
       loginMsg: false
     }
