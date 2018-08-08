@@ -6,15 +6,16 @@
       <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
       <v-newp :newData="newData" :title="newprojecttitle" :link="linknewproject"></v-newp>
+      <!-- 免费专区 -->
+      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="freeCourse"></v-course>
       <!-- 最新课程 -->
       <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse"></v-course>
       <!-- 精品好课 -->
       <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse"></v-course>
-      <!-- 免费专区 -->
-      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-course>
+
       <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
       <!-- 名师智库 -->
-      <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous>
+      <!-- <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous> -->
 
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->

@@ -8,65 +8,36 @@
     </div>
     <div class="affirmOrder" ref="affirmOrder" v-else>
       <div class="contain" v-loading="loadGoods">
-        <h3>确认订单</h3>
-        <!-- <div class="buyType" v-if="payNumber>1">
-          <div class="buy">
-            <h4>购买方式：</h4>
-            <p>
-              <span :class={checked:person} @click="buyType('1')">个人购买</span>
-              <span :class={checked:!person} @click="buyType('2')">单位购买</span>
-            </p>
-          </div>
-          <div class="company" v-show="!person">
-            <h4 class="clearfix">
-              <span class="fl">单位信息：</span>
-
-            </h4>
-            <div class="cpnInfo" v-if="flag">
-              <p class="addcp">
-                <span class="fl addCompany" v-if="flag" @click="openCompanyInfo">
-                  <i class="el-icon-circle-plus-outline"></i> 添加单位信息</span>
-                暂无信息，请您添加。</p>
+        <!-- 头部banner -->
+        <v-banner :config="affirmOrder"></v-banner>
+        <div class="main">
+          <div class="goodsList">
+            <div class="topBar clearfix">
+              <span>商品信息</span>
+              <span class="fr goBack" @click="goLink">
+                <img class="editOutline" src="@/assets/images/shopCart-icon.png" alt=""> 返回修改购物车
+              </span>
             </div>
-            <div class="cpnInfo" v-else>
+            <div class="goods">
+              <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
+                <div class="fl">
+                  <div class="bottomImg">
+                    <!-- 项目图标 -->
+                    <img v-if="course.type =='2'" class="project-img" :src="projectImg" alt="">
+                    <img :src="course.picture" alt="">
+                  </div>
 
-              <div class="cpnInfoLi">
-                <p>联系人：{{company.contact_person}}</p>
-                <p>公司名称：{{company.company_name}}</p>
-                <p>公司地址：{{company.address}}</p>
-                <p>手机号：{{company.phone}}</p>
-              </div>
-            </div>
-
-          </div>
-        </div> -->
-        <div class="goodsList">
-          <div class="topBar clearfix">
-            <span>商品信息</span>
-            <span class="fr goBack" @click="goLink">
-              <img class="editOutline" src="@/assets/images/shopCart-icon.png" alt=""> 返回修改购物车
-            </span>
-          </div>
-          <div class="goods">
-            <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
-              <div class="fl">
-                <div class="bottomImg">
-                  <!-- 项目图标 -->
-                  <img v-if="course.type =='2'" class="project-img" :src="projectImg" alt="">
-                  <img :src="course.picture" alt="">
                 </div>
-
+                <div class="fl">
+                  <h5>{{course.title}}</h5>
+                  <h6>{{course.study_time}}学时</h6>
+                  <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
+                </div>
+                <div class="fr">¥{{course.present_price}}</div>
               </div>
-              <div class="fl">
-                <h5>{{course.title}}</h5>
-                <h6>{{course.study_time}}学时</h6>
-                <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
-              </div>
-              <div class="fr">¥{{course.present_price}}</div>
             </div>
-          </div>
-          <!-- 发票信息 -->
-          <!-- <div class="invoiceMsg clearfix">
+            <!-- 发票信息 -->
+            <!-- <div class="invoiceMsg clearfix">
 
             <h4>
               发票信息
@@ -115,29 +86,30 @@
             </div>
 
           </div> -->
-          <div class="orderInfo">
-            <p>
-              <span class="left">商品数量：</span>
-              <span class="right">{{curriculumSum}}</span>
-            </p>
-            <p>
-              <span class="left">学习人数：</span>
-              <span class="right">{{payNumber}}人</span>
-            </p>
-            <p>
-              <span class="left">商品总金额：</span>
-              <span class="right">¥{{allPrise}}</span>
-            </p>
-            <p>
-              <span class="left">购买账号：</span>
-              <span class="right">{{nickName}}</span>
-            </p>
+            <div class="orderInfo">
+              <p>
+                <span class="left">商品数量：</span>
+                <span class="right">{{curriculumSum}}</span>
+              </p>
+              <p>
+                <span class="left">学习人数：</span>
+                <span class="right">{{payNumber}}人</span>
+              </p>
+              <p>
+                <span class="left">商品总金额：</span>
+                <span class="right">¥{{allPrise}}</span>
+              </p>
+              <p>
+                <span class="left">购买账号：</span>
+                <span class="right">{{nickName}}</span>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="bottomBtn clearfix">
-          <p class="allPrice">应付金额：¥{{allPrise}}</p>
-          <p class="commitOrder" @click="commitOrder">提交订单</p>
-          <!-- <h6>我有疑问，需要反馈?</h6> -->
+          <div class="bottomBtn clearfix">
+            <p class="allPrice">应付金额：¥{{allPrise}}</p>
+            <p class="commitOrder" @click="commitOrder">提交订单</p>
+            <!-- <h6>我有疑问，需要反馈?</h6> -->
+          </div>
         </div>
       </div>
 
@@ -463,9 +435,17 @@
 import { affirmOrder } from '@/lib/v1_sdk/index'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
+import Banner from '@/pages/shop/components/banner'
 export default {
+  components: {
+    'v-banner': Banner
+  },
   data() {
     return {
+      affirmOrder: {
+        type: 'affirmOrder',
+        text: '确认订单'
+      },
       projectImg: require('@/assets/images/p4.png'),
       address: '',
       flag: true,

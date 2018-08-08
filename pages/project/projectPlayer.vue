@@ -99,7 +99,7 @@
 
 
 <script>
-import { auth, projectPlayer } from '~/lib/v1_sdk/index'
+import { auth, projectplayer } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -278,7 +278,7 @@ export default {
     },
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
-        projectPlayer.getEvaluateTags().then(response => {
+        projectplayer.getEvaluateTags().then(response => {
           // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('5')
@@ -310,7 +310,7 @@ export default {
     },
     // 项目加入购物车
     addShopCart() {
-      projectPlayer.addShopCart(this.shoppingForm).then(res => {
+      projectplayer.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
           this.$router.push('/shop/shoppingcart')
@@ -399,7 +399,7 @@ export default {
       socket.on('reconnect', function(msg) {})
 
       // 获取播放url
-      projectPlayer.getPlayerInfos(this.playerForm).then(response => {
+      projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
           this.playing = this.pauseImg
           this.goShoppingCart(response.msg)
@@ -472,7 +472,7 @@ export default {
     // 获取视频播放参数
     getCurriculumPlayInfo() {
       this.projectForm.ids = persistStore.get('projectId')
-      projectPlayer.getPlayerList(this.projectForm).then(response => {
+      projectplayer.getPlayerList(this.projectForm).then(response => {
         this.projectDetail = response.data.curriculumProjectDetail
         this.courseList = response.data.curriculumProjectDetail.curriculumList
         this.shoppingForm.cartid = response.data.curriculumProjectDetail.id
@@ -499,7 +499,7 @@ export default {
       this.problem.curriculumId = persistStore.get('curriculumId')
       this.problem.curriculumcatalogid = persistStore.get('catalogId')
       return new Promise((resolve, reject) => {
-        projectPlayer.reportProblem(this.problem).then(response => {
+        projectplayer.reportProblem(this.problem).then(response => {
           if (response.status === '100100') {
             this.$message({
               showClose: true,
@@ -551,7 +551,7 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      projectPlayer.addEvaluate(this.addEvaluateForm).then(response => {
+      projectplayer.addEvaluate(this.addEvaluateForm).then(response => {
         if (response.status === '100100') {
           this.$message({
             showClose: true,
@@ -584,7 +584,7 @@ export default {
     // 添加收藏
     addCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      projectPlayer.addCollection(this.addCollectionForm).then(response => {
+      projectplayer.addCollection(this.addCollectionForm).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
@@ -596,7 +596,7 @@ export default {
     // 删除收藏
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      projectPlayer.deleteCollection(this.addCollectionForm).then(response => {
+      projectplayer.deleteCollection(this.addCollectionForm).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
@@ -618,7 +618,7 @@ export default {
         // console.log(event)
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
-          projectPlayer.getPlayerInfos(that.playerForm).then(response => {
+          projectplayer.getPlayerInfos(that.playerForm).then(response => {
             if (response.status === '100100') {
               that.playing = that.pauseImg
               that.goShoppingCart(response.msg)

@@ -1,9 +1,8 @@
 <template>
   <div class="wepay" ref="wepay">
     <div class="checkedCourse-wepay">
-      <div class="banner">
-        <div>支付中心</div>
-      </div>
+      <!-- 头部banner -->
+      <v-banner :config="wePay"></v-banner>
       <div class="main">
         <div>
           <div class="company">
@@ -104,10 +103,18 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import Vue from 'vue'
 import VueQrcode from '@xkeshi/vue-qrcode'
+import Banner from '@/pages/shop/components/banner'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
+  components: {
+    'v-banner': Banner
+  },
   data() {
     return {
+      wePay: {
+        type: 'wePay',
+        text: '支付中心'
+      },
       company: '北京分分形状科技有限公司',
       time: '2018-06-05 09：30：05',
       showReportBug: false,

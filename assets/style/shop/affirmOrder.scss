@@ -1,6 +1,9 @@
 .affirmOrder {
   width: 100%;
   position: relative;
+  .main {
+    margin-top: -50px;
+  }
   .contain {
     padding-bottom: 70px;
     background: url('http://papn9j3ys.bkt.clouddn.com/orderBanners.png')

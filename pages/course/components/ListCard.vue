@@ -116,6 +116,16 @@ export default {
       } else {
         this.teacherImg = true
       }
+    },
+    //课程详情
+    courseInfo(item, index) {
+      this.kidForm.kids = item.id
+      persistStore.set('curriculumId', item.id)
+      this.setKid(this.kidForm)
+      this.openDetail()
+    },
+    openDetail() {
+      window.open(window.location.origin + '/course/coursedetail')
     }
   },
   mounted() {
