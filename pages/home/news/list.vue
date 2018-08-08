@@ -22,7 +22,7 @@
 
 <script>
 import CustomBanner from '@/components/common/Banner.vue'
-import CustomCard from '@/pages/news/components/List.vue'
+import CustomCard from '@/pages/home/news/components/List.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
 // import { other, home } from '~/lib/v1_sdk/index'
 import { news } from '~/lib/v1_sdk/index'

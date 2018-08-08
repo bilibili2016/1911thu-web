@@ -27,7 +27,7 @@
 import Carousel from '@/components/common/Carousel.vue'
 
 import Famous from '@/pages/home/famous.vue'
-import Info from '@/pages/home/info.vue'
+import Info from '@/pages/home/news/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
 import { mapState, mapActions } from 'vuex'
@@ -54,9 +54,9 @@ export default {
       famoustitle: '名师智库',
       linkfamouscourse: '/teacher/list',
       infotitle: '学堂资讯',
-      linkinfo: '/news/list',
+      linkinfo: '/home/news/list',
 
-      linkfive: '/news/detail',
+      linkfive: 'home/news/detail',
       linkSix: '/home/components/teacher',
       linkSeven: '/teacher/list',
       freeData: [],

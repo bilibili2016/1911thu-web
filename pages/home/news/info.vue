@@ -15,7 +15,7 @@
 
 <script>
 import CustomCard from '@/components/card/Card.vue'
-import CustomInfo from '@/pages/news/components/Info.vue'
+import CustomInfo from '@/pages/home/news/components/Info.vue'
 import CustomTitle from '@/components/common/Title.vue'
 import Carousel from '@/components/common/Carousel.vue'
 export default {
