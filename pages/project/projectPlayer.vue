@@ -1,5 +1,5 @@
 <template>
-  <div class="playerBox clearfix" ref="playerBox">
+  <div class="projectPlayer clearfix" ref="playerBox">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <div class="playTop" @click="goLink()">
         <i class="el-icon-arrow-left"></i>{{projectDetail.title}}
@@ -85,6 +85,7 @@
       </div>
     </div>
     <el-button type="text" @click="goShoppingCart"></el-button>
+    <!-- <v-pay></v-pay> -->
   </div>
 </template>
 
@@ -95,11 +96,13 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
 import Repore from '@/components/common/Report.vue'
+import Pay from '@/components/common/pay.vue'
 
 export default {
   components: {
     'v-evaluatecase': EvaluateCase,
-    'v-report': Repore
+    'v-report': Repore,
+    'v-pay': Pay
   },
   computed: {
     ...mapState('auth', ['kid', 'tid']),
