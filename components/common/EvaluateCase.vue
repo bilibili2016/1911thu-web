@@ -1,36 +1,42 @@
 <template>
+  <!-- 课程评价 -->
   <div class="evaluate-tag">
-    <h4>课程评价</h4>
-    <div class="personal">
-      <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
-      <span class="rate">课程评分:</span>
-      <span class="ratem">
-        <el-rate v-model="rateModel" @change="changeRate"></el-rate>
-      </span>
-      <div class="bthgrop">
-        <span>
-          <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
-            {{item.value}}
-          </div>
-          <input type="text">
+    <div class="note">
+      <h4>课程评价
+        <i v-show="isClose" class="el-icon-close fr" @click="closeEvaluate"></i>
+      </h4>
+      <div class="personal">
+        <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
+        <span class="rate">课程评分:</span>
+        <span class="ratem">
+          <el-rate v-model="rateModel" @change="changeRate"></el-rate>
         </span>
-      </div>
-      <div class="area">
-        <el-input type="textarea" :rows="3" placeholder="其它想说的" v-model="textarea" maxlength="100">
-        </el-input>
-      </div>
-      <div class="submit">
-        <el-button type="primary" @click="addEvaluate()">提交</el-button>
+        <div class="bthgrop">
+          <span>
+            <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+              {{item.value}}
+            </div>
+            <input type="text">
+          </span>
+        </div>
+        <div class="area">
+          <el-input type="textarea" :rows="3" placeholder="其它想说的" v-model="textarea" maxlength="100">
+          </el-input>
+        </div>
+        <div class="submit">
+          <el-button type="primary" @click="addEvaluate">提交</el-button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { uniqueArray } from '@/lib/util/helper'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  props: ['courseList'],
+  props: ['courseList', 'isClose'],
   data() {
     return {
       reTagBtn: [],
@@ -130,15 +136,25 @@ export default {
       } else {
         this.$set(val, 'isCheck', true)
         this.addEvaluateForm.tag.push(val.value)
-        // this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
+        this.addEvaluateForm.tag = uniqueArray(this.addEvaluateForm.tag)
       }
+    },
+    //关闭
+    closeEvaluate() {
+      this.$emit('closeEvaluate')
+      // this.showEvaluate = false
+      // this.radioBtn = ''
+      // this.word = ''
     }
   },
   mounted() {
+    console.log(222)
+
     this.getEvaluateTags()
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~assets/style/components/evaluateCase.scss';
 </style>

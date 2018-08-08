@@ -70,7 +70,7 @@
             <!-- 弹窗 -->
             <el-dialog title="课程评价 " :visible.sync="dialogVisible " width="30% " :before-close="handleClose ">
               <div v-loading="loadMsg " class="topDiv ">
-                <!-- 评价内容组件 -->
+                <!-- 用户评价内容组件 -->
                 <v-evaluate :evaluteData="commentator " class="dialog-line "></v-evaluate>
               </div>
               <div class="pagination course-style ">
@@ -108,7 +108,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { uniqueArray } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
-import Evaluate from '@/pages/course/components/Evaluate.vue'
+import EvaluateContent from '@/components/common/EvaluateContent.vue'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
 export default {
   computed: {
@@ -119,11 +119,12 @@ export default {
     'v-backtop': BackToTop,
     'v-card': CustomCard,
     'v-line': CustomLine,
-    'v-evaluate': Evaluate,
+    'v-evaluate': EvaluateContent,
     'v-evaluatecase': EvaluateCase
   },
   data() {
     return {
+      isClose: false, //评论组件是否有关闭按钮
       showCheckedCourse: false,
       activeName: 'second',
       dialogVisible: false,
@@ -239,7 +240,7 @@ export default {
       } else {
         this.$set(val, 'isCheck', true)
         this.addEvaluateForm.tag.push(val.value)
-        this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
+        this.addEvaluateForm.tag = this.uniqueArray(this.addEvaluateForm.tag)
       }
     },
     // 评论-提交评论接口
@@ -440,7 +441,7 @@ export default {
       this.getEvaluateList()
       this.getCourseList()
       this.getdefaultCurriculumCatalog()
-      this.getEvaluateTags()
+      // this.getEvaluateTags()  //已提取到评论组件中调用
     }
   },
   mounted() {
