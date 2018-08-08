@@ -505,7 +505,9 @@ export default {
               clearInterval(that.interval)
             } else {
               that.seconds--
+              // console.log(that.seconds, '这是时间')
               let playTime = window.qcplayer.currentTime()
+              console.log(playTime, '这是时间')
               socket.emit(
                 'watchRecordingTime',
                 persistStore.get('curriculumId'),

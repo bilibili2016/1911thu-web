@@ -1,42 +1,44 @@
 <template>
   <div class="catalog">
     <!-- {{catalogs}} -->
+    <!-- 遍历章节 -->
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
       <h4>{{catalog.title}} </h4>
       <!-- {{privileMsg}} -->
       <!-- {{privileMsg}}  1{{isAuthenticated}} -->
+      <!-- 遍历小节 -->
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index">
-        <!-- {{bar}} -->
+
         <span class="fl playIcon">
           <i class="el-icon-caret-right"></i>
         </span>
-        <!-- {{bar}} -->
+
         <p @click="handleCatalog(index,catalog)">
           <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{bar.video_time}}分钟)</span>
-          <span v-if="bar.percent === 0"></span>
-          <span v-else>
-            <!-- 课程目录进度条 -->
-            <span v-if="privileMsg === true">
+          <!-- 用户已购买 并且进度大于零 -->
+          <span v-if="privileMsg === true">
+            <span v-if="bar.percent > 0">
+              <!-- 课程目录进度条 -->
               <el-progress :percentage="bar.percent" :show-text="false"></el-progress>
             </span>
-
           </span>
-          <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
-          <!-- {{bar}} -->
+
+          <!-- 用户 登录 -->
+
           <span v-if="isAuthenticated" class="fr">
             <span v-if="privileMsg === false">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看1</span>
               <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
             </span>
             <span v-if="privileMsg === true">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
-              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看2</span>
+              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看3</span>
             </span>
           </span>
           <span v-else class="fr clearfix">
-            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
-            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
-            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
+            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看4{{bar.is_free}}==={{bar.look_at}}</span>
+            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看5{{bar.is_free}}==={{bar.look_at}}</span>
+            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程6{{bar.is_free}}==={{bar.look_at}}</span>
           </span>
         </p>
         <span v-if="privileMsg === true">
@@ -62,12 +64,17 @@ export default {
       curriculumcartids: {
         cartid: null
       },
-      percents: 50
+      percents: 50,
+      playerForm: {
+        curriculumId: '',
+        catalogId: '',
+        autoplay: true
+      }
     }
   },
   methods: {
     goLink(item) {
-      this.$router.push(item)
+      // this.$router.push(item)
     },
     goBuy(item, index) {
       if (this.isAuthenticated) {
@@ -91,12 +98,19 @@ export default {
         .addClass('checked')
     },
     handleCatalog(index, item) {
+      // console.log(index, '这是index')
+      // console.log(item, 'item')
       let curriculum_id = item.childList[index].curriculum_id
       let catalog_id = item.childList[index].id
       let video_time = item.childList[index].second
       persistStore.set('video_time', video_time)
       persistStore.set('curriculumId', curriculum_id)
       persistStore.set('catalogId', catalog_id)
+
+      this.playerForm.curriculumId = curriculum_id
+      this.playerForm.catalogId = catalog_id
+      console.log(this.playerForm)
+      this.$bus.$emit('updateCourse', this.playerForm)
     },
     buyMask() {
       this.$message({

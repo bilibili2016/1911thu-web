@@ -157,6 +157,11 @@ export default {
       curriculumcartids: {
         cartid: null,
         type: 1
+      },
+      playerForm: {
+        curriculumId: '',
+        catalogId: '',
+        autoplay: true
       }
     }
   },
@@ -170,7 +175,10 @@ export default {
       )
       persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
 
-      window.open(window.location.origin + '/course/player')
+      // window.open(window.location.origin + '/course/player')
+      this.playerForm.curriculumId = item.defaultCurriculumCatalog.curriculum_id
+      this.playerForm.catalogId = item.defaultCurriculumCatalog.id
+      this.$bus.$emit('updateCourse', this.playerForm)
     },
     // 左侧播放按钮事件
     handleImgPlay(item) {
