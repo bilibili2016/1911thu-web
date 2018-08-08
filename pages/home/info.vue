@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
 import CustomCard from '@/components/card/Card.vue'
 import CustomInfo from '@/pages/news/components/Info.vue'
 import CustomTitle from '@/components/common/Title.vue'
@@ -26,22 +25,11 @@ export default {
     'v-title': CustomTitle,
     'v-carousel': Carousel
   },
-  props: [
-    'infoDesc',
-    'infoArticle',
-    'infoTwo',
-    'infoOne',
-    'linkfour',
-    'linkfive',
-    'link',
-    'title'
-  ],
+  props: ['infoDesc', 'infoArticle', 'linkfive', 'link', 'title'],
   data() {
     return {
       infoDescs: null,
       infoArticles: null,
-      infoTwos: null,
-      infoOnes: null,
       load: false,
       nidForm: {
         nids: null
