@@ -22,9 +22,7 @@
               <el-progress :percentage="bar.percent" :show-text="false"></el-progress>
             </span>
           </span>
-
           <!-- 用户 登录 -->
-
           <span v-if="isAuthenticated" class="fr">
             <span v-if="privileMsg === false">
               <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
