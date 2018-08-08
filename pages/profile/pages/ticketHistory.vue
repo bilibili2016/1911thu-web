@@ -128,7 +128,7 @@ export default {
     //开票详情弹框
     handleTicketPopup(id) {
       let ticketId = { ID: id }
-      tickethistory.invoiceOrderDetail(ticketId).then(response => {
+      ticketHistory.invoiceOrderDetail(ticketId).then(response => {
         this.isTicketPopup = true
         this.TicketPopupData = response.data.invoiceOrderList
       })
@@ -140,7 +140,7 @@ export default {
     //发票详情弹框
     handleStatusPopup(id) {
       let invoiceID = { ID: id }
-      tickethistory.invoiceDetail(invoiceID).then(response => {
+      ticketHistory.invoiceDetail(invoiceID).then(response => {
         this.isStatusPopup = true
         this.StatusPopupData = response.data
       })
