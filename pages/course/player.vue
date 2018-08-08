@@ -477,6 +477,8 @@ export default {
           })
         } else {
           // 初始化播放器
+          console.log(this.playerForm, '这是播放的章节id和小节id')
+          console.log(response.data.playAuthInfo, '这是返回的')
           this.tcplayer.mp4 = response.data.playAuthInfo.video_address
           this.players = new TcPlayer('mediaPlayer', this.tcplayer)
           window.qcplayer = this.players

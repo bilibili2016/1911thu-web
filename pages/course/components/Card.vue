@@ -4,16 +4,17 @@
       <!-- v-for="(course,index) in courseList -->
       <div class="course clearfix  ">
         <el-card class="fl" :body-style="{ padding: '0px' }">
-          <div class="goodplay">
+          <!-- <div class="goodplay">
             <img :src="courseList.picture" class="image">
             <div class="mask">1</div>
-            <div class="common-button btn-bg">
-              <!-- 登录 不登录 播放按钮 -->
-              <div class="playBtn-detail">
+            <div class="common-button btn-bg"> -->
+          <!-- 登录 不登录 播放按钮 -->
+          <!-- <div class="playBtn-detail">
                 <img :src="playImg" alt="" @click="handleImgPlay(courseList)">
               </div>
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
+          <v-player></v-player>
         </el-card>
         <div class="particularss fr">
           <div class="currentclum">
@@ -40,7 +41,7 @@
                 <!-- 课程介绍 -->
                 <p>{{courseList.introduction}}</p>
                 <div class="common-button">
-                  <el-button type="primary" :disabled="isClick" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
+                  <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
                 </div>
               </div>
 
@@ -86,11 +87,11 @@
                 <div class=" common-button ">
                   <!-- 未购买 购买判断  未购买-->
                   <div v-if="privileMsg===false ">
-                    <el-button type="primary " :disabled="isClick" plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
+                    <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
                   </div>
                   <!-- 未购买 购买判断  已购买-->
                   <div v-if="privileMsg===true ">
-                    <el-button type="primary " :disabled="isClick " plain @click="handleFreeNoneStudy(courseList)">立即学习</el-button>
+                    <el-button type="primary " plain @click="handleFreeNoneStudy(courseList)">立即学习</el-button>
                   </div>
                 </div>
               </div>
@@ -139,7 +140,11 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
+import CardPlayer from '@/pages/course/components/CardPlayer'
 export default {
+  components: {
+    'v-player': CardPlayer
+  },
   props: ['courseList', 'privileMsg'],
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
