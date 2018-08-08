@@ -51,12 +51,12 @@
                 <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
                   <div class="project-img">
-                    <img class="fl" :src="project.picture">
+                    <img class="fl" :src="project.picture" @click="goProjectDetail(project)">
                     <img :src="projectImg" alt="" class="pmsg">
                   </div>
 
                   <div class="fl">
-                    <h4>{{project.title}}</h4>
+                    <h4 @click="goProjectDetail(project)">{{project.title}}</h4>
                     <h6>{{project.study_time}}学时 </h6>
                     <!-- <p>讲师：{{project.teacher_name}}</p> -->
                   </div>
@@ -349,6 +349,10 @@ export default {
       this.setKid(kidForm)
       persistStore.set('curriculumId', item.id)
       this.$router.push('/course/coursedetail')
+    },
+    goProjectDetail(item) {
+      persistStore.set('projectId', item.id)
+      this.$router.push('/project/projectdetail')
     },
     loadAll() {
       return []

@@ -158,7 +158,7 @@ export default {
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
       this.setTid(this.tidForm)
-      window.open(window.location.origin + '/home/components/teacher')
+      window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
     },
     addShopCarts() {
       this.curriculumcartids.cartid = this.kid

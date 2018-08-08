@@ -64,9 +64,7 @@ export default {
       linkfamouscourse: '/teacher/list',
       infotitle: '学堂资讯',
       linkinfo: '/news/list',
-
       linkfive: '/news/detail',
-      linkSix: '/home/components/teacher',
       linkSeven: '/teacher/list',
       freeData: [],
       newData: [],

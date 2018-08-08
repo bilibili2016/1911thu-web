@@ -406,7 +406,7 @@
             <i class="icon-order"></i> 发票管理</span>
           <!-- 发票 -->
           <el-card v-if="showTicketList">
-            <el-tabs v-model="activeOrder">
+            <el-tabs v-model="activeOrder" @tab-click="handleTicket">
               <el-tab-pane label="按订单开发票" name="orderFirst">
                 <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
                 <div class="content noOrder" v-else>
@@ -1087,6 +1087,14 @@ export default {
           resolve(true)
         })
       })
+    },
+    handleTicket(item) {
+      if (item.name === 'orderFirst') {
+        this.getUnTicketData()
+      }
+      if (item.name === 'orderSecond') {
+        this.getHistoryOrderData()
+      }
     },
     //未开发票列表
     getUnTicketData() {

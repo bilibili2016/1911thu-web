@@ -39,8 +39,7 @@ export default {
     goTeacherInfo(item, index) {
       this.tidForm.tids = item.id
       this.setTid(this.tidForm)
-      window.open(window.location.origin + '/home/components/teacher')
-      // this.goLink('/home/components/teacher')
+      window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
     },
     getMore(item) {
       window.open(window.location.origin + item)
