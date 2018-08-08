@@ -38,7 +38,7 @@ import Info from '@/pages/home/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
 import { mapState, mapActions } from 'vuex'
-import { home } from '~/lib/v1_sdk/index'
+import { home, news } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-carousel': Carousel,
