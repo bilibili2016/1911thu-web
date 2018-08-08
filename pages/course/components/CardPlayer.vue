@@ -1,0 +1,207 @@
+<template>
+  <div class="playInner" ref="playInner">
+    <div id="mediaPlayer" ref="mediaPlayer" style="width:100%; height:100%;"></div>
+  </div>
+</template>
+
+<script>
+import { coursedetail, players } from '~/lib/v1_sdk/index'
+import { store as persistStore } from '~/lib/core/store'
+export default {
+  data() {
+    return {
+      playerForm: {
+        curriculumId: '',
+        catalogId: ''
+      },
+      tcplayer: {
+        mp4: '',
+        width: '100%',
+        height: '100%',
+        live: false //是否是直播类型
+      },
+      autoplay: false,
+      playerDetailForm: {
+        curriculumId: ''
+      },
+      defaultPlayerInfo: {
+        curriculumId: ''
+      },
+      getdefaultForm: {
+        curriculumid: ''
+      },
+      players: '',
+      ceshiUrl: 'http://ceshi.1911thu.com',
+      localUrl: 'http://localhost:8080',
+      wapiUrl: 'http://wapi.1911thu.com:2120',
+      seconds: 500000,
+      link: '',
+      socket: null
+    }
+  },
+  methods: {
+    // 课程-获取默认 的课程id 以及小节id
+    getdefaultCurriculumCatalog() {
+      this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
+      coursedetail
+        .getdefaultCurriculumCatalog(this.getdefaultForm)
+        .then(res => {
+          console.log(res, '这是返回')
+          this.playerForm.curriculumId =
+            res.data.defaultCurriculumCatalog.curriculum_id
+          this.playerForm.catalogId = res.data.defaultCurriculumCatalog.id
+          // 获取播放的url
+          this.getdefaultPlayerUrl()
+        })
+    },
+    // 根据 课程id以及小节id 获取url
+    getdefaultPlayerUrl() {
+      // 判断socket 连接
+      let origin = window.location.origin
+      if (origin === this.ceshiUrl || origin == this.localUrl) {
+        this.link = 'http://ceshi.1911thu.com:2120'
+      } else {
+        this.link = 'http://wapi.1911thu.com:2120'
+      }
+      // 新建socket
+      var socket = new io(this.link)
+      // 连接socket
+      socket.on('connect', () => {
+        socket.emit('login', persistStore.get('token'))
+      })
+      // 断线重连
+      socket.on('reconnect', function(msg) {})
+
+      players.getPlayerInfos(this.playerForm).then(res => {
+        this.$refs.mediaPlayer.innerHTML = ''
+        this.tcplayer.mp4 = res.data.playAuthInfo.video_address
+        this.players = new TcPlayer('mediaPlayer', this.tcplayer)
+        window.qcplayer = this.players
+
+        if (this.autoplay) {
+          window.qcplayer.play()
+        }
+      })
+      let that = this
+      this.tcplayer.listener = function(msg) {
+        // 播放开始启动计时器
+        if (msg.type == 'play') {
+          that.interval = setInterval(() => {
+            if (that.seconds <= 0) {
+              that.seconds = 1
+              that.courseList.success = false
+              that.courseList.inputID = ''
+              socket.emit('watchRecordingTime_disconnect')
+              clearInterval(that.interval)
+            } else {
+              that.seconds--
+              let playTime = window.qcplayer.currentTime()
+              console.log(playTime, '这是时间')
+              socket.emit(
+                'watchRecordingTime',
+                persistStore.get('curriculumId'),
+                persistStore.get('catalogId'),
+                playTime
+              )
+            }
+          }, 1000)
+          that.ischeck = persistStore.get('catalogId')
+          that.playing = that.playImg
+        }
+        // 监听暂停事件
+        if (msg.type == 'pause') {
+          // that.isHasClass()
+          that.playing = that.pauseImg
+          clearInterval(that.interval)
+          socket.emit('watchRecordingTime_disconnect')
+        }
+        // 监听播放器音量改变
+        if (msg.type == 'volumechange') {
+          // that.isHasClass()
+          persistStore.set('volume', window.qcplayer.volume())
+        }
+      }
+    },
+    // 建立socket连接
+    // linksocket() {
+    //   // 判断socket 连接
+    //   let origin = window.location.origin
+    //   if (origin === this.ceshiUrl || origin == this.localUrl) {
+    //     this.link = 'http://ceshi.1911thu.com:2120'
+    //   } else {
+    //     this.link = 'http://wapi.1911thu.com:2120'
+    //   }
+    //   // 新建socket
+    //   socket = new io(this.link)
+    //   // 连接socket
+    //   socket.on('connect', () => {
+    //     socket.emit('login', persistStore.get('token'))
+    //   })
+    //   // 断线重连
+    //   socket.on('reconnect', function(msg) {})
+    // },
+    // 对播放器事件的监听
+    addEventPlayer() {
+      let that = this
+      this.tcplayer.listener = function(msg) {
+        // 播放开始启动计时器
+        if (msg.type == 'play') {
+          that.interval = setInterval(() => {
+            if (that.seconds <= 0) {
+              that.seconds = 1
+              that.courseList.success = false
+              that.courseList.inputID = ''
+              that.socket.emit('watchRecordingTime_disconnect')
+              clearInterval(that.interval)
+            } else {
+              that.seconds--
+              let playTime = window.qcplayer.currentTime()
+              console.log(playTime, '这是时间')
+              that.socket.emit(
+                'watchRecordingTime',
+                persistStore.get('curriculumId'),
+                persistStore.get('catalogId'),
+                playTime
+              )
+            }
+          }, 1000)
+          that.ischeck = persistStore.get('catalogId')
+          that.playing = that.playImg
+        }
+        // 监听暂停事件
+        if (msg.type == 'pause') {
+          // that.isHasClass()
+          that.playing = that.pauseImg
+          clearInterval(that.interval)
+          socket.emit('watchRecordingTime_disconnect')
+        }
+        // 监听播放器音量改变
+        if (msg.type == 'volumechange') {
+          // that.isHasClass()
+          persistStore.set('volume', window.qcplayer.volume())
+        }
+      }
+    },
+    rePlay() {
+      // this.linksocket()
+      this.getdefaultPlayerUrl()
+      // this.addEventPlayer()
+    }
+  },
+  mounted() {
+    this.getdefaultCurriculumCatalog()
+    this.$bus.$on('updateCourse', data => {
+      this.playerForm = data
+      this.autoplay = data.autoplay
+      this.rePlay()
+    })
+  }
+}
+</script>
+
+<style scoped>
+.playInner {
+  width: 480px;
+  height: 312px;
+}
+</style>
