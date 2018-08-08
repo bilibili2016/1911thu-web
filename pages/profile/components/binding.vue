@@ -105,6 +105,7 @@ export default {
           })
           this.$bus.$emit('studyCourse')
           this.$bus.$emit('reGetCode')
+          this.$bus.$emit('studyProject')
           this.bindForm.courseId = ''
           this.$bus.$emit('updateCourse', true)
         } else if (res.status === '100100') {

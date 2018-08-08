@@ -1233,6 +1233,9 @@ export default {
     this.$bus.$on('reGetCode', data => {
       this.getUsedInvitationCodeList()
     })
+    this.$bus.$on('studyProject', data => {
+      this.getProjectOneList()
+    })
   },
   created() {
     this.$bus.$on('selectProfileIndex', data => {

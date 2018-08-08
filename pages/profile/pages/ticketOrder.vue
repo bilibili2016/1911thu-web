@@ -24,7 +24,7 @@
                 </div>
               </div>
               <!-- 项目列表 -->
-              <div class="courseOne" v-if="courseList.orderProjectList.length && index<3 && courseList.orderCurriculumList.length+courseList.orderProjectList.length<=3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
+              <div class="courseOne" v-if="courseList.orderProjectList.length && index<3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
                 <div class="courseImg">
                   <!-- 项目图标 -->
                   <img class="project-img" src="@/assets/images/p4.png" alt="">
