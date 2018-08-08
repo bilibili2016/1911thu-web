@@ -27,18 +27,18 @@
 
           <span v-if="isAuthenticated" class="fr">
             <span v-if="privileMsg === false">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看1</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
               <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
             </span>
             <span v-if="privileMsg === true">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看2</span>
-              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看3</span>
+              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
             </span>
           </span>
           <span v-else class="fr clearfix">
-            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看4{{bar.is_free}}==={{bar.look_at}}</span>
-            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看5{{bar.is_free}}==={{bar.look_at}}</span>
-            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程6{{bar.is_free}}==={{bar.look_at}}</span>
+            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
+            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
+            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
           </span>
         </p>
         <span v-if="privileMsg === true">
