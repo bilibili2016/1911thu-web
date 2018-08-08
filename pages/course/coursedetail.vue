@@ -154,7 +154,8 @@ export default {
       privileMsg: true,
       collectMsg: 2,
       addCollectionForm: {
-        curriculumId: null
+        curriculumId: null,
+        types: 1
       },
       getdefaultForm: {
         curriculumid: ''
@@ -203,7 +204,7 @@ export default {
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
       this.setTid(this.tidForm)
-      window.open(window.location.origin + '/home/components/teacher')
+      window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
     },
     //标签-获取课程标签列表
     getEvaluateTags() {
@@ -424,7 +425,7 @@ export default {
     initData() {
       this.kidForm.ids = this.kid
       this.evaluateListForm.ids = this.kid
-      this.activeName = 'first'
+      this.activeName = 'second'
       document.getElementsByClassName('headerBox')[0].style.display = 'inline'
       document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     },

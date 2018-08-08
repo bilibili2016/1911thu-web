@@ -552,15 +552,12 @@ export default {
         })
         return false
       }
-      // console.log(this.tagGroup)
-
       this.addEvaluateForm.ids = this.shoppingForm.cartid
-      this.addEvaluateForm.curriculumId = persistStore.get('curriculumId')
+      this.addEvaluateForm.curriculumcatalogid = persistStore.get(
+        'curriculumId'
+      )
       this.addEvaluateForm.evaluateContent = this.word
-      this.addEvaluateForm.scores = this.rateModel
-      this.addEvaluateForm.tag = this.addEvaluateForm.tag
-        .toString()
-        .replace(/,/g, '#')
+      this.addEvaluateForm.scores = this.rateModel.toString().replace(/,/g, '#')
       projectplayer.addProjectEvaluate(this.addEvaluateForm).then(response => {
         if (response.status === '100100') {
           this.$message({

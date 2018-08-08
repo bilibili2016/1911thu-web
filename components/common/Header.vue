@@ -275,6 +275,7 @@ export default {
           this.bindForm.isBind = false
           if (window.location.pathname === '/profile') {
             this.$bus.$emit('studyCourse')
+            this.$bus.$emit('studyProject')
           }
           this.goLink('tab-second')
         } else if (res.status === '100100') {

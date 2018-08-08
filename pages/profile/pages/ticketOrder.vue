@@ -24,14 +24,14 @@
                 </div>
               </div>
               <!-- 项目列表 -->
-              <div class="courseOne" v-if="courseList.orderProjectList.length && index<3 && courseList.orderCurriculumList.length+courseList.orderProjectList.length<=3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
+              <div class="courseOne" v-if="courseList.orderProjectList.length && index<3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
                 <div class="courseImg">
                   <!-- 项目图标 -->
                   <img class="project-img" src="@/assets/images/p4.png" alt="">
-                  <img @click="goCourseInfo(project,index)" class="fl" :src="project.picture" alt="">
+                  <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
                 </div>
                 <div class="fl">
-                  <h4 @click="goCourseInfo(project,index)">{{project.title}}</h4>
+                  <h4 @click="goProjrctInfo(project)">{{project.title}}</h4>
                   <h6>{{project.curriculum_time}}学时</h6>
                 </div>
               </div>
@@ -530,6 +530,10 @@ export default {
       this.setKid(this.kidForm)
       persistStore.set('curriculumId', item.curriculum_id)
       this.$router.push('/course/coursedetail')
+    },
+    goProjrctInfo(item) {
+      persistStore.set('projectId', item.curriculum_id)
+      this.$router.push('/project/projectdetail')
     },
     selectPayApply(item, index) {
       persistStore.set('order', item.id)

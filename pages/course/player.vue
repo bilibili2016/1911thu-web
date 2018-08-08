@@ -331,7 +331,7 @@ export default {
       this.tidForm.tids = Number(id)
 
       this.setTid(this.tidForm)
-      window.open(window.location.origin + '/home/components/teacher')
+      window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
     },
     // 提示跳转购车
     goShoppingCart(msg) {
