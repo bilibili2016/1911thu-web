@@ -125,7 +125,7 @@
                 </div>
               </el-tab-pane>
               <!-- 我的项目 已过期 -->
-              <el-tab-pane label="已过期" name="fourth">
+              <el-tab-pane label="已过期" name="third">
                 <v-card v-if="expiredProjectData && expiredProjectData.length>0" :data="expiredProjectData" :config="configFour"></v-card>
                 <div class="pagination" v-if="expiredProjectData && expiredProjectData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="projectPageExpired.pagesize" :pager-count="5" :page-count="projectPageExpired.pagesize" :current-page="projectPageExpired.page" :total="projectPageExpired.total" @current-change="expiredProjectPageChange"></el-pagination>
@@ -138,7 +138,7 @@
                 </div>
               </el-tab-pane>
               <!-- 我的项目 我的收藏 -->
-              <el-tab-pane label="我的收藏" name="third">
+              <el-tab-pane label="我的收藏" name="fourth">
                 <v-card v-if="collectProjectData && collectProjectData.length>0" :data="collectProjectData" :config="configZero"></v-card>
                 <div class="pagination" v-if="collectProjectData && collectProjectData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="projectPageCollect.pagesize" :pager-count="5" :page-count="projectPageCollect.pagesize" :current-page="projectPageCollect.page" :total="projectPageCollect.total" @current-change="collectProjectPageChange"></el-pagination>
@@ -756,7 +756,17 @@ export default {
       }
     },
     // 我的项目子类切换
-    handleProject() {},
+    handleProject(item) {
+      if (item.name == 'first') {
+        this.getProjectOneList()
+      } else if (item.name == 'second') {
+        this.getProjectTwoList()
+      } else if (item.name == 'third') {
+        this.getProjectThreeList()
+      } else if (item.name == 'fourth') {
+        this.getProjectFourList()
+      }
+    },
     // 兑换码管理子类切换
     handleCourseCode(item) {},
     // 切换 我的学习中分类
