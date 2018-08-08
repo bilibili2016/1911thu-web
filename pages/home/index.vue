@@ -4,7 +4,7 @@
       <!-- 头部导航 -->
       <v-carousel :items="items" :config="configCarousel"></v-carousel>
       <!-- 最新项目 -->
-      <v-course :config="projectConfig" :data="projectData" :title="newprojecttitle" :link="linknewproject"></v-course>
+      <v-course :config="projectConfig" :data="projectData" :title="newprojecttitle" :link="linknewproject" style="background-color:#fff"></v-course>
       <!-- 免费专区 -->
       <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="freeCourse"></v-course>
       <!-- 最新课程 -->
