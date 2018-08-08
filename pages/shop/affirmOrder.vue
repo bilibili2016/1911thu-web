@@ -108,12 +108,13 @@
           <div class="bottomBtn clearfix">
             <p class="allPrice">应付金额：¥{{allPrise}}</p>
             <p class="commitOrder" @click="commitOrder">提交订单</p>
-            <!-- <h6>我有疑问，需要反馈?</h6> -->
+            <h6 @click="showRpt">我有疑问，需要反馈?</h6>
           </div>
         </div>
       </div>
-
     </div>
+    <!-- 报告问题 -->
+    <v-report :config="config"></v-report>
     <!-- 发票信息 -->
     <div class="invoiceShadow" v-show="showInvoice">
       <div class="invoiceInfo" ref="invoiceInfo">
@@ -436,9 +437,11 @@ import { affirmOrder } from '@/lib/v1_sdk/index'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 import Banner from '@/pages/shop/components/banner'
+import Repore from '@/components/common/Report.vue'
 export default {
   components: {
-    'v-banner': Banner
+    'v-banner': Banner,
+    'v-report': Repore
   },
   data() {
     return {
@@ -448,6 +451,9 @@ export default {
       },
       projectImg: require('@/assets/images/p4.png'),
       address: '',
+      config: {
+        type: 2
+      },
       flag: true,
       person: true,
       showInfo: false,
@@ -668,6 +674,9 @@ export default {
       if (windowHeight - 120 < 600) {
         this.$refs.invoiceInfo.style.height = windowHeight - 120 + 'px'
       }
+    },
+    showRpt() {
+      this.$bus.$emit('openReport')
     },
     retfNumber() {
       if (
