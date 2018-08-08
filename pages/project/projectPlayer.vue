@@ -29,10 +29,9 @@
         <span class="fl elt" v-else :class=" { bag: this.iseve === true }">
           <i class="el-icon-edit"></i>已评价
         </span>
-        <span class="fl collection" @click="collection" :class=" { bag: this.collectMsg === true }">
-          <i class="el-icon-star-on"></i>
-          <span>收藏</span>
-        </span>
+        <!-- 收藏分享 -->
+        <v-collection :collectData="collectMsg" class="projectCollect"></v-collection>
+
       </div>
     </div>
     <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
@@ -73,6 +72,7 @@
       </div>
     </div>
 
+    <!-- 项目评价弹框组件 -->
     <!-- <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="courseList" @closeEvaluate="closeEvaluate"> </v-evaluatecase> -->
     <div class="evaluate" v-show="showEvaluate">
       <div class="note">
@@ -105,10 +105,12 @@ import { auth, projectplayer } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
+import Collection from '@/components/common/Collection.vue'
 
 export default {
   components: {
-    'v-evaluatecase': EvaluateCase
+    'v-evaluatecase': EvaluateCase,
+    'v-collection': Collection
   },
   computed: {
     ...mapState('auth', ['kid', 'tid']),
@@ -195,7 +197,8 @@ export default {
         curriculumId: '',
         types: 2
       },
-      collectMsg: false,
+      // collectMsg: false,
+      collectMsg: 2,
       iseve: false,
       bought: false,
       getdefaultForm: {
@@ -499,7 +502,12 @@ export default {
         this.isFreeCourse = response.data.curriculumProjectDetail.is_free
         this.iseve =
           response.data.curriculumProjectDetail.is_evaluateCurriculumProject
-        this.collectMsg = response.data.curriculumProjectDetail.is_Collection
+        if (response.data.curriculumProjectDetail.is_Collection) {
+          this.collectMsg = 1
+        } else {
+          this.collectMsg = 2
+        }
+        // this.collectMsg = response.data.curriculumProjectDetail.is_Collection
         // 播放所需数据加载完成后加载播放器数据
         this.getPlayerInfo()
       })

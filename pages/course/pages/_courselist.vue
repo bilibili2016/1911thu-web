@@ -7,11 +7,9 @@
       </div>
     </div>
     <div class="breadCrumb">
-      <span>当前位置：</span>
-      <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>{{coursename}}</el-breadcrumb-item>
-      </el-breadcrumb>
+      <!-- 面包屑组件 -->
+      <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
 
@@ -31,13 +29,19 @@
 import CustomCard from '@/pages/course/components/ListCard.vue'
 import { categorylist } from '~/lib/v1_sdk/index'
 import CustomPagination from '@/components/common/Pagination.vue'
+import BreadCrumb from '@/components/common/BreadCrumb.vue'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-page': CustomPagination
+    'v-page': CustomPagination,
+    'v-breadcrumb': BreadCrumb
   },
   data() {
     return {
+      BreadCrumb: {
+        type: 'goodlesson',
+        text: ''
+      },
       config: {
         card_type: 'goodlesson',
         teacher: false
@@ -84,6 +88,7 @@ export default {
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '最新课程'
+        this.BreadCrumb.text = this.coursename
       })
     },
     // 获取经典课程列表
@@ -94,6 +99,7 @@ export default {
           this.courseList = response.data.curriculumList
           this.pagemsg.total = Number(response.data.pageCount)
           this.coursename = '精品好课'
+          this.BreadCrumb.text = this.coursename
         })
     },
     // 获取最新课程列表
@@ -102,6 +108,7 @@ export default {
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '免费课程'
+        this.BreadCrumb.text = this.coursename
       })
     },
     // 点击下面分页按钮

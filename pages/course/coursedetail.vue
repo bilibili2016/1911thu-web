@@ -4,29 +4,13 @@
       <!-- 面包屑 收藏分享 -->
       <div class="main-crumb">
         <div class="fl">
-          <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>课程详情</el-breadcrumb-item>
-          </el-breadcrumb>
+          <!-- 面包屑组件 -->
+          <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
         </div>
         <div class="fr">
-          <div class="collect">
-            <div class="line-center">
-              <span @click="collection" :class=" { bag: collectMsg === 1}">
-                <i class="el-icon-star-on"></i>
-                <!-- {{isCollection}} -->
-                <span>收藏 </span>
-              </span>
-              <!-- 分享暂时注释 -->
-              <!-- <span>
-                <i class="el-icon-share"></i>
-                <span> 分享 </span>
-                <div class="shareIcons">
-                  <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
-                </div>
-              </span> -->
-            </div>
-          </div>
+          <!-- 收藏分享 -->
+          <v-collection :collectData="collectMsg"></v-collection>
+
         </div>
       </div>
       <!-- 顶部的card -->
@@ -46,7 +30,8 @@
       </div>
       <div style="width:345px" class="fr">
         <!-- 讲师介绍 -->
-        <div class="teacher" v-loading="loadTeacher">
+        <v-teacherintro v-loading="loadTeacher" :courseList="courseList"></v-teacherintro>
+        <!-- <div class="teacher">
           <h4>讲师介绍</h4>
           <div class="personal clearfix">
             <img class="fl" :src="courseList.head_img" alt="" @click="goTeacherInfo(courseList.teacher_id)">
@@ -55,15 +40,15 @@
               <h6>{{courseList.graduate}}</h6>
             </div>
             <p>{{courseList.teacher_content}}</p>
-
           </div>
-        </div>
+        </div> -->
         <!-- 课程评价 -->
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
         <!-- 已经学习（1） -->
         <!-- {{courseList.is_study}} == {{courseList.is_evaluate}} -->
         <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
 
+        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
         <!-- 课程评价的弹窗 -->
         <div class="evaluate-tag shadow " v-show="dialogVisible ">
           <div class="personal ">
@@ -110,6 +95,9 @@ import { uniqueArray } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
+import BreadCrumb from '@/components/common/BreadCrumb.vue'
+import TeacherIntro from '@/pages/course/pages/teacherIntro.vue'
+import Collection from '@/components/common/Collection.vue'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
@@ -120,10 +108,17 @@ export default {
     'v-card': CustomCard,
     'v-line': CustomLine,
     'v-evaluate': EvaluateContent,
-    'v-evaluatecase': EvaluateCase
+    'v-evaluatecase': EvaluateCase,
+    'v-breadcrumb': BreadCrumb,
+    'v-teacherintro': TeacherIntro,
+    'v-collection': Collection
   },
   data() {
     return {
+      BreadCrumb: {
+        type: 'courseDetail',
+        text: '课程详情'
+      },
       isClose: false, //评论组件是否有关闭按钮
       showCheckedCourse: false,
       activeName: 'second',
