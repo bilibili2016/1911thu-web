@@ -72,6 +72,9 @@ export default {
       socket.on('reconnect', function(msg) {})
 
       players.getPlayerInfos(this.playerForm).then(res => {
+        // if (res.status === '100006') {
+        //   this.$bus.$emit('loginShow', true)
+        // }
         this.$refs.mediaPlayer.innerHTML = ''
         this.tcplayer.mp4 = res.data.playAuthInfo.video_address
         this.players = new TcPlayer('mediaPlayer', this.tcplayer)

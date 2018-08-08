@@ -70,17 +70,21 @@ export default {
       configZero: {
         card_type: 'profile',
         new: 'false',
-        free: 'true'
+        free: 'true',
+        home_type: 'cardone'
       },
       configOne: {
         card_type: 'profile',
-        new: 'true'
+        new: 'true',
+        home_type: 'cardone'
       },
       classicConfig: {
-        card_type: 'classic'
+        card_type: 'classic',
+        home_type: 'cardthree'
       },
       projectConfig: {
-        card_type: 'project'
+        card_type: 'project',
+        home_type: 'cardtwo'
       },
       infoOne: {
         card_type: 'infoOne'
