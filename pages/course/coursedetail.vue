@@ -62,33 +62,8 @@
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
         <!-- 已经学习（1） -->
         <!-- {{courseList.is_study}} == {{courseList.is_evaluate}} -->
+        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
 
-        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
-        <!-- <div class=" evaluate-tag " v-show="courseList.is_study !=0 && courseList.is_evaluate==0 ">
-          <h4>课程评价</h4>
-          <div class="personal ">
-            <div class="title ">请问该课程对您有帮忙吗？快来评个分吧！</div>
-            <span class="rate ">课程评分:</span>
-            <span class="ratem ">
-              <el-rate v-model="rateModel " @change="changeRate "></el-rate>
-            </span>
-            <div class="bthgrop ">
-              <span>
-                <div v-for="(item,index) in btnData " :key="index " @click="getBtnContent(item,index) " :class="{borderColor: item.isCheck} " class="detail-btngrounp ">
-                  {{item.value}}
-                </div>
-                <input type="text ">
-              </span>
-            </div>
-            <div class="area ">
-              <el-input type="textarea " :rows="3 " placeholder="其它想说的 " v-model="textarea " maxlength="100 ">
-              </el-input>
-            </div>
-            <div class="submit ">
-              <el-button type="primary " @click="addEvaluate() ">提交</el-button>
-            </div>
-          </div>
-        </div> -->
         <!-- 课程评价的弹窗 -->
         <div class="evaluate-tag shadow " v-show="dialogVisible ">
           <div class="personal ">
