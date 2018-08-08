@@ -52,13 +52,10 @@
         <el-tab-pane label="线上课程介绍" name="second">
           <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad"></v-procourse>
         </el-tab-pane>
-        <el-tab-pane v-if="projectDetail.study_type==='2'" label="线下课程介绍" name="third">
-          <v-procourse :projectCourseData="projectCourseData" v-loading="underlineLoad"></v-procourse>
-        </el-tab-pane>
-        <el-tab-pane label="用户评价" name="fourth">
+        <el-tab-pane label="用户评价" name="third">
           <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo" v-loading="evaluateDataLoad"></v-proevaluate>
         </el-tab-pane>
-        <el-tab-pane label="常见问题" name="fifth">
+        <el-tab-pane label="常见问题" name="fourth">
           <v-proproblems :problems="problems" v-loading="problemLoad"></v-proproblems>
         </el-tab-pane>
       </el-tabs>
@@ -67,7 +64,7 @@
 </template>
 
 <script>
-import { projectDetail, projectPlayer } from '@/lib/v1_sdk/index'
+import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
@@ -83,7 +80,6 @@ export default {
     return {
       projectDetailLoad: true,
       inlineLoad: true,
-      underlineLoad: true,
       evaluateDataLoad: true,
       problemLoad: true,
       rateModel: 3,
@@ -151,18 +147,17 @@ export default {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     // 获取项目详情
     getProjectInfo() {
-      projectDetail.getProjectInfo(this.project).then(res => {
+      projectdetail.getProjectInfo(this.project).then(res => {
         this.projectDetail = res.data.curriculumProjectDetail
         this.collectMsg = res.data.curriculumProjectDetail.is_Collection
         this.projectDetail.score = Number(this.projectDetail.score)
         this.projectDetailLoad = false
         this.inlineLoad = false
-        this.underlineLoad = false
       })
     },
     // 获取项目评论
     getEvaluateList() {
-      projectDetail.getEvaluateList(this.evaluateForm).then(res => {
+      projectdetail.getEvaluateList(this.evaluateForm).then(res => {
         this.evaluateData = res.data.evaluateList
         this.evaluateInfo = res.data.totalEvaluateInfo
 
@@ -172,7 +167,7 @@ export default {
     // 项目加入购物车
     addShoppingCart() {
       this.shoppingForm.cartid = this.project.projectId
-      projectDetail.addShopCart(this.shoppingForm).then(res => {
+      projectdetail.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
           this.setProductsNum({
@@ -202,7 +197,7 @@ export default {
     // 添加收藏
     addCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      projectPlayer.addCollection(this.addCollectionForm).then(response => {
+      projectplayer.addCollection(this.addCollectionForm).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
@@ -214,7 +209,7 @@ export default {
     // 删除收藏
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      projectPlayer.deleteCollection(this.addCollectionForm).then(response => {
+      projectplayer.deleteCollection(this.addCollectionForm).then(response => {
         this.$message({
           showClose: true,
           type: 'success',
