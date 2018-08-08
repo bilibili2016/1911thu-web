@@ -31,17 +31,7 @@
       <div style="width:345px" class="fr">
         <!-- 讲师介绍 -->
         <v-teacherintro v-loading="loadTeacher" :courseList="courseList"></v-teacherintro>
-        <!-- <div class="teacher">
-          <h4>讲师介绍</h4>
-          <div class="personal clearfix">
-            <img class="fl" :src="courseList.head_img" alt="" @click="goTeacherInfo(courseList.teacher_id)">
-            <div class="fl">
-              <h5 @click="goTeacherInfo(courseList.teacher_id)">{{courseList.teacher_name}}</h5>
-              <h6>{{courseList.graduate}}</h6>
-            </div>
-            <p>{{courseList.teacher_content}}</p>
-          </div>
-        </div> -->
+
         <!-- 课程评价 -->
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
         <!-- 已经学习（1） -->
