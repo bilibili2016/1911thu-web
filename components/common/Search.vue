@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+import { conSearch } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -38,7 +38,7 @@ export default {
     },
     searchHotWord() {
       return new Promise((resolve, reject) => {
-        home.searchHotWord(this.searchForm).then(response => {
+        conSearch.searchHotWord(this.searchForm).then(response => {
           if (response.status === 0) {
             this.hotSearchRecord = response.data.hotSearchRecord
           }

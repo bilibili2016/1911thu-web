@@ -224,7 +224,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { getQueryString } from '@/lib/util/helper'
-import { other, auth, home, shopcart } from '~/lib/v1_sdk/index'
+import { auth, header } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { MessageBox } from 'element-ui'
@@ -570,7 +570,7 @@ export default {
     },
     // 检测邀请码内是否包含已绑定的课程
     detection() {
-      home.detectionCode(this.bindForm).then(res => {
+      header.detectionCode(this.bindForm).then(res => {
         // 判断邀请码内是否包含已绑定的课程
         if (res.data.is_exist === 1) {
           this.$confirm(
@@ -600,7 +600,7 @@ export default {
     },
     // 头部绑定课程
     goBind() {
-      home.bindingCurriculumPrivate(this.bindForm).then(res => {
+      header.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({
             showClose: true,
@@ -648,7 +648,7 @@ export default {
       this.bannerMsg = false
     },
     getCount() {
-      shopcart.shopCartList().then(response => {
+      header.shopCartList().then(response => {
         let body =
           Number(response.data.curriculumCartList.length) +
           Number(response.data.projectCartList.length)
@@ -1180,7 +1180,7 @@ export default {
       // if (this.isAuthenticated) {
       // this.$bus.$emit('reLogin', false)
       // this.$bus.$emit('loginShow', false)
-      home.getUserInfo().then(res => {
+      header.getUserInfo().then(res => {
         if (res.status === '100008') {
           // 设置单点登录
           this.didForm.dids = '1'

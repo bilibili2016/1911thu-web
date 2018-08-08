@@ -51,7 +51,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { other, auth, home } from '~/lib/v1_sdk/index'
+import { auth, line } from '~/lib/v1_sdk/index'
 export default {
   props: ['catalogs', 'privileMsg'],
   computed: {
@@ -79,7 +79,7 @@ export default {
     },
     addShopCart() {
       return new Promise((resolve, reject) => {
-        home.addShopCart(this.curriculumcartids).then(response => {
+        line.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push('/shop/shoppingcart')
         })
       })

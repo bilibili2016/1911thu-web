@@ -63,7 +63,7 @@
 // timenumrate  学时 人数 星级
 // freeprice   免费
 import { mapActions } from 'vuex'
-import { shopcart, home } from '~/lib/v1_sdk/index'
+import { card } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['data', 'config'],
@@ -132,7 +132,7 @@ export default {
     },
     // 添加购物车
     addShopCart() {
-      home.addShopCart(this.curriculumcartids).then(response => {
+      card.addShopCart(this.curriculumcartids).then(response => {
         this.setProductsNum({
           pn: response.data.curriculumNumber
         })
@@ -141,7 +141,7 @@ export default {
     // 取消勾选
     delShopCart() {
       return new Promise((resolve, reject) => {
-        shopcart.delCourseShopCart(this.curriculumcartids).then(response => {
+        card.delCourseShopCart(this.curriculumcartids).then(response => {
           this.setProductsNum({
             pn: response.data.curriculumNumber
           })
