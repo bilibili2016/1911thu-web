@@ -2,7 +2,7 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-carousel :items="items"></v-carousel>
+      <v-carousel :items="items" :config="configCarousel"></v-carousel>
       <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
       <v-newp :data="projectData" :title="newprojecttitle" :link="linknewproject"></v-newp>
@@ -73,6 +73,9 @@ export default {
       classicData: [],
       projectData: [],
       showCheckedCourse: false,
+      configCarousel: {
+        carousel: 'home'
+      },
       configZero: {
         card_type: 'profile',
         new: 'false',

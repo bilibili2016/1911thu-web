@@ -5,7 +5,7 @@
       <v-title :title="title" :link="link"></v-title>
       <div v-loading="load" class="newsUl clearfix">
         <!-- 左边新闻轮播 -->
-        <v-swiper :swiperData="infoDesc"></v-swiper>
+        <v-carousel :swiperData="infoDesc" :config="configCarousel"></v-carousel>
         <!-- 右边新闻列表组件 -->
         <v-info :infoArticle='infoArticle' :link="linkfive"></v-info>
       </div>
@@ -18,13 +18,13 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import CustomCard from '@/components/card/Card.vue'
 import CustomInfo from '@/pages/news/components/Info.vue'
 import CustomTitle from '@/components/common/Title.vue'
-import CustomSwiper from '@/pages/news/components/Swiper.vue'
+import Carousel from '@/components/common/Carousel.vue'
 export default {
   components: {
     'v-card': CustomCard,
     'v-info': CustomInfo,
     'v-title': CustomTitle,
-    'v-swiper': CustomSwiper
+    'v-carousel': Carousel
   },
   props: [
     'infoDesc',
@@ -45,6 +45,9 @@ export default {
       load: false,
       nidForm: {
         nids: null
+      },
+      configCarousel: {
+        carousel: 'news'
       }
     }
   },
