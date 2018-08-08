@@ -370,9 +370,6 @@ export default {
         return
       }
       this.$refs.mediaPlayer.innerHTML = ''
-      this.playerForm.curriculumId = persistStore.get('curriculumId')
-      this.playerForm.catalogId = persistStore.get('catalogId')
-
       var link = window.location.origin
       // if (
       //   link === 'http://frontend.1911edu.com' ||
@@ -399,6 +396,10 @@ export default {
       socket.on('reconnect', function(msg) {})
 
       // 获取播放url
+      this.playerForm.curriculumId = persistStore.get('curriculumId')
+      this.playerForm.catalogId = persistStore.get('catalogId')
+      console.log(persistStore.get('curriculumId'))
+      console.log(persistStore.get('catalogId'))
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
           this.playing = this.pauseImg
@@ -476,6 +477,8 @@ export default {
         this.projectDetail = response.data.curriculumProjectDetail
         this.courseList = response.data.curriculumProjectDetail.curriculumList
         this.shoppingForm.cartid = response.data.curriculumProjectDetail.id
+        console.log(response.data)
+
         persistStore.set(
           'curriculumId',
           response.data.curriculumProjectDetail.defaultCurriculumCatalog
@@ -492,6 +495,8 @@ export default {
         this.iseve =
           response.data.curriculumProjectDetail.is_evaluateCurriculumProject
         this.collectMsg = response.data.curriculumProjectDetail.is_Collection
+        // 播放所需数据加载完成后加载播放器数据
+        this.getPlayerInfo()
       })
     },
     // 反馈问题
@@ -640,7 +645,6 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
     this.resize()
     window.addEventListener('resize', this.resize)
-    this.getPlayerInfo()
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
     ;(this.seconds = 10000000),
