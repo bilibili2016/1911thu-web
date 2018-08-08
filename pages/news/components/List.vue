@@ -1,5 +1,5 @@
 <template>
-    <!-- 新闻列表  newLists-->
+    <!-- 新闻列表页  newLists-->
     <div class=" newsList">
         <div class="course clearfix bottom " v-for="(news,index) in newsList " :key="index " @click="newsDetail(news)">
             <el-card class="fl " :body-style="{ padding: '0px' } ">

@@ -10,6 +10,8 @@
     justify-content: space-between;
     flex-wrap: wrap;
     .courseLi {
+      float: left;
+      margin-right: 30px;
       width: 534px;
       height: 160px;
       margin-bottom: 50px;
@@ -19,6 +21,9 @@
       transition: all 400ms;
       position: relative;
       cursor: pointer;
+      &:last-child {
+        margin-right: 0;
+      }
       &:hover {
         box-shadow: 0 6px 18px 0 rgba(73, 28, 156, 0.36);
         padding: 0;

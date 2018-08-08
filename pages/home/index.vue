@@ -5,7 +5,7 @@
       <v-carousel :items="items"></v-carousel>
       <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
       <!-- 最新项目 -->
-      <v-newp :newData="newData" :title="newprojecttitle" :link="linknewproject"></v-newp>
+      <v-newp :data="projectData" :title="newprojecttitle" :link="linknewproject"></v-newp>
       <!-- 免费专区 -->
       <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="freeCourse"></v-course>
       <!-- 最新课程 -->
@@ -71,6 +71,7 @@ export default {
       freeData: [],
       newData: [],
       classicData: [],
+      projectData: [],
       showCheckedCourse: false,
       configZero: {
         card_type: 'profile',
@@ -152,6 +153,10 @@ export default {
         page: 1,
         limits: 4
       },
+      projectForm: {
+        pages: 1,
+        limits: 2
+      },
       loginMsg: false
     }
   },
@@ -169,9 +174,10 @@ export default {
         this.getClassicCourseList(),
         this.getTeacherList(),
         // this.getEvaluateList(),
-        this.getNewsInfoList()
+        this.getNewsInfoList(),
         // this.getPartnerList(),
         // this.getPointList()
+        this.getProjectList()
       ])
     },
     // 获取banner
@@ -184,6 +190,12 @@ export default {
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
         this.classify = response.data.categoryList
+      })
+    },
+    //获取项目列表
+    getProjectList() {
+      home.getProjectList(this.projectForm).then(response => {
+        this.projectData = response.data.curriculumProjectList
       })
     },
     // 获取免费课程列表
