@@ -80,7 +80,6 @@ export default {
     },
     // 最新课程列表
     getNewCourseList() {
-      console.log('1')
       categorylist.getNewCourseList(this.newsCurriculumForm).then(response => {
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)
@@ -89,7 +88,6 @@ export default {
     },
     // 获取经典课程列表
     getClassicCourseList() {
-      console.log('2')
       categorylist
         .getClassicCourseList(this.newsCurriculumForm)
         .then(response => {
@@ -100,7 +98,6 @@ export default {
     },
     // 获取最新课程列表
     getFreeCourseList() {
-      console.log('3')
       categorylist.getFreeCourseList(this.newsCurriculumForm).then(response => {
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)

@@ -75,7 +75,6 @@ export default {
     },
     // 添加购物车
     handleAddShopCart(item) {
-      console.log(item, '这是item')
       // 第一次点击 没有 在购物车
       if (item.is_cart === 0) {
         if (this.two_is_cart === 0) {

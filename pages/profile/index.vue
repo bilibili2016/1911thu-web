@@ -1094,7 +1094,6 @@ export default {
       profileHome.orderNotInvoice().then(response => {
         this.unTicketData = response.data.orderList
         this.readyOrderLoad = false
-        console.log(this.unTicketData)
       })
     },
     // 开票历史

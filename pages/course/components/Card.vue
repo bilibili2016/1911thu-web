@@ -235,7 +235,6 @@ export default {
     },
     // 添加购物车函数
     addCourseShopCart(item) {
-      console.log(item, '这是item')
       this.curriculumcartids.cartid = item.id
       category.addShopCart(this.curriculumcartids).then(response => {
         let len = Number(this.productsNum) + 1

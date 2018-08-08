@@ -176,10 +176,11 @@ export default {
         } else {
           this.$message({
             showClose: true,
-            type: 'error',
+            type: 'info',
             message: res.msg
           })
         }
+        this.$router.push('/shop/shoppingcart')
       })
     },
     // 跳转到项目播放页

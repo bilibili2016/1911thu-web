@@ -398,8 +398,6 @@ export default {
       // 获取播放url
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
-      console.log(persistStore.get('curriculumId'))
-      console.log(persistStore.get('catalogId'))
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
           this.playing = this.pauseImg
@@ -477,8 +475,6 @@ export default {
         this.projectDetail = response.data.curriculumProjectDetail
         this.courseList = response.data.curriculumProjectDetail.curriculumList
         this.shoppingForm.cartid = response.data.curriculumProjectDetail.id
-        console.log(response.data)
-
         persistStore.set(
           'curriculumId',
           response.data.curriculumProjectDetail.defaultCurriculumCatalog
@@ -547,8 +543,6 @@ export default {
         })
         return false
       }
-      console.log(this.tagGroup)
-
       this.addEvaluateForm.ids = this.shoppingForm.cartid
       this.addEvaluateForm.curriculumId = persistStore.get('curriculumId')
       this.addEvaluateForm.evaluateContent = this.word
