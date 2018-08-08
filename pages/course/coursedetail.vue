@@ -62,48 +62,49 @@
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
         <!-- 已经学习（1） -->
         <!-- {{courseList.is_study}} == {{courseList.is_evaluate}} -->
-        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
+        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
+        <!-- <div class=" evaluate-tag " v-show="courseList.is_study !=0 && courseList.is_evaluate==0 ">
           <h4>课程评价</h4>
-          <div class="personal">
-            <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
-            <span class="rate">课程评分:</span>
-            <span class="ratem">
-              <el-rate v-model="rateModel" @change="changeRate"></el-rate>
+          <div class="personal ">
+            <div class="title ">请问该课程对您有帮忙吗？快来评个分吧！</div>
+            <span class="rate ">课程评分:</span>
+            <span class="ratem ">
+              <el-rate v-model="rateModel " @change="changeRate "></el-rate>
             </span>
-            <div class="bthgrop">
+            <div class="bthgrop ">
               <span>
-                <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+                <div v-for="(item,index) in btnData " :key="index " @click="getBtnContent(item,index) " :class="{borderColor: item.isCheck} " class="detail-btngrounp ">
                   {{item.value}}
                 </div>
-                <input type="text">
+                <input type="text ">
               </span>
             </div>
-            <div class="area">
-              <el-input type="textarea" :rows="3" placeholder="其它想说的" v-model="textarea" maxlength="100">
+            <div class="area ">
+              <el-input type="textarea " :rows="3 " placeholder="其它想说的 " v-model="textarea " maxlength="100 ">
               </el-input>
             </div>
-            <div class="submit">
-              <el-button type="primary" @click="addEvaluate()">提交</el-button>
+            <div class="submit ">
+              <el-button type="primary " @click="addEvaluate() ">提交</el-button>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- 课程评价的弹窗 -->
-        <div class="evaluate-tag shadow" v-show="dialogVisible">
-          <div class="personal">
+        <div class="evaluate-tag shadow " v-show="dialogVisible ">
+          <div class="personal ">
             <!-- 弹窗 -->
-            <el-dialog title="课程评价" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-              <div v-loading="loadMsg" class="topDiv">
+            <el-dialog title="课程评价 " :visible.sync="dialogVisible " width="30% " :before-close="handleClose ">
+              <div v-loading="loadMsg " class="topDiv ">
                 <!-- 评价内容组件 -->
-                <v-evaluate :evaluteData="commentator" class="dialog-line"></v-evaluate>
+                <v-evaluate :evaluteData="commentator " class="dialog-line "></v-evaluate>
               </div>
-              <div class="pagination course-style">
-                <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
+              <div class="pagination course-style ">
+                <el-pagination :id="pagemsg.total " v-show="pagemsg.total!='0' " background layout="prev, pager, next " :page-size="pagemsg.pagesize " :page-count="pagemsg.pagesize " :current-page="pagemsg.page " :total="pagemsg.total " @current-change="handleCurrentChange "></el-pagination>
               </div>
             </el-dialog>
           </div>
         </div>
         <!-- 用户评论 列表-->
-        <div class="evaluate" v-loading="loadEvaluate">
+        <div class="evaluate " v-loading="loadEvaluate ">
           <h4>用户评价
             <span v-if="pageCount>3" @click="getMore">查看更多></span>
           </h4>
@@ -132,6 +133,7 @@ import { store as persistStore } from '~/lib/core/store'
 import { uniqueArray } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import Evaluate from '@/pages/course/components/Evaluate.vue'
+import EvaluateCase from '@/components/common/EvaluateCase.vue'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
@@ -141,7 +143,8 @@ export default {
     'v-backtop': BackToTop,
     'v-card': CustomCard,
     'v-line': CustomLine,
-    'v-evaluate': Evaluate
+    'v-evaluate': Evaluate,
+    'v-evaluatecase': EvaluateCase
   },
   data() {
     return {
@@ -245,6 +248,7 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
+
       this.addEvaluateForm.tag = []
     },
     // 标签-点击获取标签内容
@@ -446,6 +450,11 @@ export default {
       this.activeName = 'first'
       document.getElementsByClassName('headerBox')[0].style.display = 'inline'
       document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    },
+    //评论之后的回调
+    cbList() {
+      this.getCourseDetail()
+      this.getEvaluateList()
     },
     //拉取服务器数据 初始化所有方法
     initAll() {
