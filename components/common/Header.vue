@@ -210,10 +210,12 @@ export default {
       'setPwd',
       'setDid'
     ]),
+    // 关闭头部绑定课程
     closeEcg() {
       this.bindForm.courseId = ''
       this.bindForm.isBind = false
     },
+    // 打开头部绑定课程
     addEcg() {
       if (this.token) {
         this.bindForm.isBind = true
@@ -286,6 +288,7 @@ export default {
         }
       })
     },
+    // 兼容IE
     explorer() {
       if (!!window.ActiveXObject || 'ActiveXObject' in window) {
         this.judegExplorer = true
@@ -293,9 +296,11 @@ export default {
         this.judegExplorer = false
       }
     },
+    // 关闭头部广告栏
     closeBanner() {
       this.bannerMsg = false
     },
+    // 获取购物车数量
     getCount() {
       if (this.isAuthenticated) {
         header.shopCartList().then(response => {
@@ -309,9 +314,11 @@ export default {
         })
       }
     },
+    // 改变鼠标悬浮时的DownApp二维码
     changeImg(what) {
       what == 'android' ? (this.iphones = false) : (this.iphones = true)
     },
+    // 跳转-我的课程
     goMycourse(item) {
       this.gidForm.gids = item
       this.setGid(this.gidForm)
@@ -324,24 +331,25 @@ export default {
         }
       })
     },
+    // 去购物车
     goLinks() {
       this.$router.push('/shop/shoppingcart')
     },
-    goLink(item) {
-      this.$bus.$emit('selectProfileIndex', '123')
-      // persistStore.set('selectTab', item)
-    },
+    // 登录
     login() {
       this.$bus.$emit('loginShow')
     },
+    // 登出
     signOuts() {
       this.signOut()
       persistStore.clearAll()
       this.$router.push('/')
     },
+    // 注册
     register() {
       this.$bus.$emit('registerShow')
     },
+    // 搜索
     goSearch(item) {
       this.search = this.search.replace(/[ ]/g, '')
       if (
@@ -366,9 +374,11 @@ export default {
         })
       }
     },
+    // 搜索跳转到搜索页
     goSearchd(item) {
       this.$router.push(item)
     },
+    // 回首页
     backHome() {
       this.$router.push('/')
     },
@@ -431,6 +441,7 @@ export default {
       })
       // }
     },
+    // 用户协议
     userProtocol() {
       window.open(window.location.origin + '/other/userProtocol')
     }
@@ -473,6 +484,7 @@ export default {
     this.explorer()
   },
   watch: {
+    // 绑定兑换码
     'bindForm.courseId'(val, oldval) {
       if (val == '') {
         this.bindForm.showErr = true
