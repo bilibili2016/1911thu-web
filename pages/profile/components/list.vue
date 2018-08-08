@@ -104,6 +104,7 @@
 </template>
 
 <script>
+import { profileHome } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -161,7 +162,7 @@ export default {
     },
     addShopCarts() {
       this.curriculumcartids.cartid = this.kid
-      home.addShopCart(this.curriculumcartids).then(response => {
+      profileHome.addShopCart(this.curriculumcartids).then(response => {
         this.$router.push('/shop/shoppingcart')
       })
       for (var i = 0; i < this.data.length; i++) {

@@ -46,7 +46,6 @@ export default {
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(res => {
-          console.log(res, '这是返回')
           this.playerForm.curriculumId =
             res.data.defaultCurriculumCatalog.curriculum_id
           this.playerForm.catalogId = res.data.defaultCurriculumCatalog.id
@@ -96,7 +95,6 @@ export default {
             } else {
               that.seconds--
               let playTime = window.qcplayer.currentTime()
-              console.log(playTime, '这是时间')
               socket.emit(
                 'watchRecordingTime',
                 persistStore.get('curriculumId'),
@@ -156,7 +154,6 @@ export default {
             } else {
               that.seconds--
               let playTime = window.qcplayer.currentTime()
-              console.log(playTime, '这是时间')
               that.socket.emit(
                 'watchRecordingTime',
                 persistStore.get('curriculumId'),

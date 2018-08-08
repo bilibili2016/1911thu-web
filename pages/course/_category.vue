@@ -203,7 +203,6 @@ export default {
     },
     // 下面 card list 列表  --- 我要选课页面
     curriculumList() {
-      console.log('进我要选课了')
       this.loadCourse = true
       this.curriculumListForm.categoryIda = window.location.pathname.split(
         '/'

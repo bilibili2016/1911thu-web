@@ -107,7 +107,6 @@ export default {
 
       this.playerForm.curriculumId = curriculum_id
       this.playerForm.catalogId = catalog_id
-      console.log(this.playerForm)
       this.$bus.$emit('updateCourse', this.playerForm)
     },
     buyMask() {
