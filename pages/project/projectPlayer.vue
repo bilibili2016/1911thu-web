@@ -72,6 +72,8 @@
         </div>
       </div>
     </div>
+
+    <!-- <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="courseList" @closeEvaluate="closeEvaluate"> </v-evaluatecase> -->
     <div class="evaluate" v-show="showEvaluate">
       <div class="note">
         <h4>课程评价
@@ -89,7 +91,7 @@
         <el-input type="textarea" :rows="4" placeholder="其它想说的" v-model="word">
         </el-input>
         <div class="commitBug">
-          <el-button round @click.native="addEvaluate">提交</el-button>
+          <el-button round @click.native="addProjectEvaluate">提交</el-button>
         </div>
       </div>
     </div>
@@ -102,13 +104,20 @@
 import { auth, projectplayer } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import EvaluateCase from '@/components/common/EvaluateCase.vue'
+
 export default {
+  components: {
+    'v-evaluatecase': EvaluateCase
+  },
   computed: {
     ...mapState('auth', ['kid', 'tid']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
+
   data() {
     return {
+      isClose: true,
       isFreeCourse: '',
       videoState: false,
       showReportBug: false,
@@ -176,10 +185,10 @@ export default {
       },
       addEvaluateForm: {
         ids: null,
+        curriculumcatalogid: '',
+        type: 2,
         evaluatecontent: null,
         scores: null,
-        types: 1,
-        curriculumcatalogid: '',
         tag: []
       },
       addCollectionForm: {
@@ -398,8 +407,8 @@ export default {
       // 获取播放url
       this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.catalogId = persistStore.get('catalogId')
-      console.log(persistStore.get('curriculumId'))
-      console.log(persistStore.get('catalogId'))
+      // console.log(persistStore.get('curriculumId'))
+      // console.log(persistStore.get('catalogId'))
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
           this.playing = this.pauseImg
@@ -477,7 +486,6 @@ export default {
         this.projectDetail = response.data.curriculumProjectDetail
         this.courseList = response.data.curriculumProjectDetail.curriculumList
         this.shoppingForm.cartid = response.data.curriculumProjectDetail.id
-        console.log(response.data)
 
         persistStore.set(
           'curriculumId',
@@ -526,7 +534,7 @@ export default {
       })
     },
     // 增加评论
-    addEvaluate() {
+    addProjectEvaluate() {
       //免费课程不购买可以评价
       // if (!this.bought && this.isFreeCourse !== 2) {
       //   this.$message({
@@ -547,7 +555,7 @@ export default {
         })
         return false
       }
-      console.log(this.tagGroup)
+      // console.log(this.tagGroup)
 
       this.addEvaluateForm.ids = this.shoppingForm.cartid
       this.addEvaluateForm.curriculumId = persistStore.get('curriculumId')
@@ -556,7 +564,7 @@ export default {
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      projectplayer.addEvaluate(this.addEvaluateForm).then(response => {
+      projectplayer.addProjectEvaluate(this.addEvaluateForm).then(response => {
         if (response.status === '100100') {
           this.$message({
             showClose: true,
