@@ -58,3 +58,16 @@
     }
   }
 }
+
+.dialog-line {
+  border-bottom: none !important;
+  .evaluate-tag .el-dialog {
+    min-height: 508px !important;
+  }
+  .commentator {
+    border-bottom: 1px solid #e8d6f7;
+    .fr {
+      float: none !important;
+    }
+  }
+}

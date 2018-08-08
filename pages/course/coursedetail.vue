@@ -93,20 +93,8 @@
             <!-- 弹窗 -->
             <el-dialog title="课程评价" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
               <div v-loading="loadMsg" class="topDiv">
-                <div v-for="(item,index) in commentator" :key="index" class="dialog-line">
-                  <div class="commentator clearfix">
-                    <img class="fl" :src="item.head_img" alt="">
-                    <div class="fl">
-                      <p style="margin:5px 0 8px;">{{item.nick_name}}</p>
-                      <p class="time">{{item.create_time}}</p>
-                    </div>
-                    <div class="rates">
-                      <el-rate disabled v-model="item.score" class="itemBox-rate fl"></el-rate>
-                    </div>
-                    <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
-                    <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
-                  </div>
-                </div>
+                <!-- 评价内容组件 -->
+                <v-evaluate :evaluteData="commentator" class="dialog-line"></v-evaluate>
               </div>
               <div class="pagination course-style">
                 <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
@@ -125,19 +113,8 @@
               <el-rate disabled v-model="sumUserStart" class="itemBox-rate fl"></el-rate>
               <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
             </div>
-            <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index" v-if="index<3">
-              <img class="fl" :src="item.head_img" alt="">
-              <div class="fl">
-                <p style="margin:3px 0 8px;">{{item.nick_name}}</p>
-                <p class="time">{{item.create_time}}</p>
-              </div>
-              <div style="margin-top:10px;">
-                <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
-              </div>
-              <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
-              <h5 v-else-if="item.evaluate_content===''">{{item.tags}}</h5>
-              <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
-            </div>
+            <!-- 评价内容组件 -->
+            <v-evaluate :evaluteData="commentators"></v-evaluate>
           </div>
         </div>
       </div>
@@ -154,6 +131,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { uniqueArray } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
+import Evaluate from '@/pages/course/components/Evaluate.vue'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
@@ -162,7 +140,8 @@ export default {
   components: {
     'v-backtop': BackToTop,
     'v-card': CustomCard,
-    'v-line': CustomLine
+    'v-line': CustomLine,
+    'v-evaluate': Evaluate
   },
   data() {
     return {

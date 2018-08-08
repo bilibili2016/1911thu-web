@@ -1,0 +1,49 @@
+<template>
+    <!-- 项目列表card组件[首页]-->
+    <div class="goodCourse project clearfix">
+        <div class="courseLi clearfix" v-for="(course,index) in cardData" :key="index" @click="courseInfo(course)">
+            <div class="fl">
+                <img :src="projectImg" alt="" class="project-img">
+                <img :src="course.picture" alt="" class="teacher-picture">
+            </div>
+            <div class="fr courseInfo">
+                <h4>{{course.title}}</h4>
+                <h5>{{course.deputy_title}}</h5>
+                <p v-if="course.is_free === '1'" class="money">￥{{course.present_price}}</p>
+                <p v-else class="money">免费</p>
+                <h6 class="clearfix">
+                    <p class="fl">{{course.study_time}}学时 <img :src="stydyNum" alt=""> {{course.study_number}}</p>
+                    <p class="fr">
+                        <el-rate disabled v-model="course.score" class="itemBox-rate"></el-rate>
+                    </p>
+                </h6>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import { store as persistStore } from '~/lib/core/store'
+export default {
+  props: ['cardData'],
+  data() {
+    return {
+      projectImg: require('@/assets/images/p4.png'),
+      stydyNum: require('@/assets/images/home_num.png')
+    }
+  },
+  methods: {
+    //项目详情
+    courseInfo(item, index) {
+      persistStore.set('projectId', item.id)
+      this.openDetail('/project/ProjectDetail')
+    },
+    openDetail(link) {
+      window.open(window.location.origin + link)
+    }
+  }
+}
+</script>
+
+<style scoped>
+</style>

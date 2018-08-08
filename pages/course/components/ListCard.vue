@@ -1,5 +1,5 @@
 <template>
-  <div data="23455">
+  <div>
     <div class="newOrFreeCourseList center goodlesson">
       <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index " @click="courseInfo(course) ">
         <el-card class="fl " :body-style="{ padding: '0px' } ">

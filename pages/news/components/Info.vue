@@ -1,5 +1,5 @@
 <template>
-  <!-- 学堂资讯 -->
+  <!-- 学堂资讯新闻列表[首页]-->
   <div class="info-list">
     <div v-for="(card,index) in infoArticle" :index="index" :key="card.id" class="info" v-if="index<3">
       <div class="info-box clearfix" @click="selectDetail(index,card,linkfive)">
