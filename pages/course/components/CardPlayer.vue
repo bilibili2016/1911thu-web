@@ -7,7 +7,11 @@
 <script>
 import { coursedetail, players } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
+import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
+  },
   data() {
     return {
       playerForm: {
@@ -43,9 +47,11 @@ export default {
     // 课程-获取默认 的课程id 以及小节id
     getdefaultCurriculumCatalog() {
       this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
+      // console.log(this.getdefaultForm, '123')
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(res => {
+          // console.log(res, '这是res1234')
           this.playerForm.curriculumId =
             res.data.defaultCurriculumCatalog.curriculum_id
           this.playerForm.catalogId = res.data.defaultCurriculumCatalog.id
@@ -75,6 +81,7 @@ export default {
         // if (res.status === '100006') {
         //   this.$bus.$emit('loginShow', true)
         // }
+        // console.log(res, '这是res')
         this.$refs.mediaPlayer.innerHTML = ''
         this.tcplayer.mp4 = res.data.playAuthInfo.video_address
         this.players = new TcPlayer('mediaPlayer', this.tcplayer)
@@ -189,11 +196,20 @@ export default {
     }
   },
   mounted() {
-    this.getdefaultCurriculumCatalog()
+    // 如果已经登录 调用默认课程信息
+    if (this.isAuthenticated) {
+      this.getdefaultCurriculumCatalog()
+    } else {
+      // 未登录 不调用
+    }
+
     this.$bus.$on('updateCourse', data => {
       this.playerForm = data
       this.autoplay = data.autoplay
       this.rePlay()
+    })
+    this.$bus.$on('reupdatecourse', () => {
+      this.getdefaultCurriculumCatalog()
     })
   }
 }

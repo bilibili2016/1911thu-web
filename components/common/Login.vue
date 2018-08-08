@@ -664,6 +664,9 @@ export default {
               this.$bus.$emit('updateCount') //获取购物车数量
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
+
+              // 未登录后登陆更新课程详情页
+              this.$bus.$emit('reupdatecourse')
             }
             this.isloginClick = false
             this.isloading = false
@@ -698,6 +701,8 @@ export default {
               this.$bus.$emit('updateCount') //获取购物车数量
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
+              // 未登录后登陆更新课程详情页
+              this.$bus.$emit('reupdatecourse')
             }
             this.isloginClick = false
             this.isloading = false
