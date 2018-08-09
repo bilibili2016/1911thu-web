@@ -35,7 +35,3 @@ export default {
   props: ['evaluateData', 'evaluateInfo']
 }
 </script>
-
-<style scoped lang="scss">
-@import '~assets/style/project/projectEvaluate';
-</style>

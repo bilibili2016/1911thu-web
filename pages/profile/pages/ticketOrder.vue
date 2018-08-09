@@ -62,7 +62,7 @@
         <span class="next " @click="showIoc">下一步</span>
       </div>
       <!-- 发票弹框 -->
-      <div class="invoiceShadow" v-show="showInvoice">
+      <div class="invoiceTicket" v-show="showInvoice">
         <div class="invoiceInfo" ref="invoiceInfo">
           <h3 class="clearfix">发票信息
             <i class="el-icon-close fr" @click="close"></i>
@@ -557,7 +557,7 @@ export default {
           10
         ).toFixed(2)
       }
-      // console.log(this.orderPrice)
+      console.log(this.orderPrice)
 
       this.orderNum = this.checkedArr.length
       // console.log(this.checkedArr)
@@ -569,8 +569,6 @@ export default {
     },
     // 全选
     handleSelectAll(val) {
-      // console.log(this.$refs.checkbox)
-
       if (val) {
         this.checkedArr = []
         this.orderPrice = 0
@@ -607,8 +605,16 @@ export default {
     },
     // 展示修改发票信息弹框
     showIoc() {
-      this.showInvoice = true
-      this.getTicket()
+      if (this.checkedArr.length > 0) {
+        this.showInvoice = true
+        this.getTicket()
+      } else {
+        this.$message({
+          showClose: true,
+          type: 'info',
+          message: '请先选择要开具发票的订单！'
+        })
+      }
     },
     // 验证普通发票 中的纳税人识别号
     retfNumber() {
@@ -882,6 +888,7 @@ export default {
       if (v === '1') {
         this.choose = '1'
         this.invoiceForm.types = '1'
+        this.chooseCompany('1')
         this.nextStep('stepOne')
       } else {
         this.choose = '2'
@@ -1038,6 +1045,8 @@ export default {
               if (this.ticketForm.types == 1) {
                 this.invoiceForm.ticket = true
               }
+              this.orderNum = 0
+              this.orderPrice = 0
               this.getUnTicketData()
             } else {
               this.$message({
@@ -1261,6 +1270,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" lang="scss">
-@import '~assets/style/profile/ticketOrder';
-</style>
+

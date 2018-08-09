@@ -84,7 +84,7 @@
       </div>
     </div>
     <el-button type="text" @click="goShoppingCart"></el-button>
-    <!-- <v-pay></v-pay> -->
+    <v-pay></v-pay>
   </div>
 </template>
 
@@ -464,6 +464,14 @@ export default {
           // that.isHasClass()
           persistStore.set('volume', window.qcplayer.volume())
         }
+        // 监听播放停止事件
+        if (msg.type == 'ended') {
+          // 未购买且试看
+          // if(this.bought&&this){
+
+          // }
+          that.$bus.$emit('openPay')
+        }
       }
 
       // this.isHasClass()
@@ -634,7 +642,8 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-@import '~assets/style/project/projectPlayer';
-</style>
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 

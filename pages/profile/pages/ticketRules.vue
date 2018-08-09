@@ -14,7 +14,3 @@
 <script>
 export default {}
 </script>
-
-<style scoped lang="scss">
-@import '~assets/style/profile/ticketRules';
-</style>

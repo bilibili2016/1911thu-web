@@ -1,6 +1,6 @@
 <template>
     <!-- 确认订单，支付中心头部banner -->
-    <div class="banner">
+    <div class="shopBanner">
         <div>{{config.text}}</div>
     </div>
 </template>
@@ -10,7 +10,3 @@ export default {
   props: ['config']
 }
 </script>
-
-<style scoped lang="scss">
-@import '~assets/style/shop/banner.scss';
-</style>

@@ -17,7 +17,7 @@
 import CustomTitle from '@/components/common/Title.vue'
 import CustomCard from '@/components/card/Card.vue'
 import ClassicCard from '@/components/card/ClassicCard.vue'
-import ShortList from '@/pages/project/components/shortList.vue'
+import ShortList from '@/pages/project/components/ShortList.vue'
 import { mapActions } from 'vuex'
 export default {
   props: ['config', 'data', 'title', 'link'],

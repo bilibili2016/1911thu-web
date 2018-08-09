@@ -2,10 +2,8 @@
   <div class=" goodLesson news-list famous-teacher">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow">
-      <div class="breadCrumb">
-        <!-- 面包屑组件 -->
-        <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-      </div>
+      <!-- 面包屑组件 -->
+      <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
       <div @click="getNewInfoList"></div>
       <v-card :newsList="newsList" :config="config" :linksix='linksix' class="new-card-on"></v-card>
     </div>

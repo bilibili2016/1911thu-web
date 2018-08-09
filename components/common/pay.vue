@@ -42,8 +42,8 @@ export default {
     }
   },
   mounted() {
-    this.$bus.$on('openReport', data => {
-      this.showReportBug = true
+    this.$bus.$on('openPay', data => {
+      this.showPay = true
     })
   }
 }
@@ -104,6 +104,7 @@ export default {
         color: #222;
       }
       .img {
+        display: block;
         width: 110px;
         height: 110px;
         background-color: #cccccc;

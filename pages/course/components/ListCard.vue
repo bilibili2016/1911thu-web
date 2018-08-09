@@ -138,5 +138,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
+// 组件兼容
 @import '~assets/style/course/listCard';
 </style>
