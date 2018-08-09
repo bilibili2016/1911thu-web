@@ -19,24 +19,8 @@
               </span>
             </div>
             <div class="goods">
-              <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
-                <div class="fl">
-                  <div class="bottomImg">
-                    <!-- 项目图标 -->
-                    <img v-if="course.type =='2'" class="project-img" :src="projectImg" alt="">
-                    <img :src="course.picture" alt="">
-                  </div>
-
-                </div>
-                <div class="fl">
-                  <h5>{{course.title}}</h5>
-                  <h6>{{course.study_time}}学时</h6>
-                  <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
-                </div>
-                <div class="fr">¥{{course.present_price}}</div>
-              </div>
+              <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
             </div>
-
             <div class="orderInfo">
               <p>
                 <span class="left">商品数量：</span>
@@ -389,10 +373,12 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 import Banner from '@/pages/shop/components/banner'
 import Repore from '@/components/common/Report.vue'
+import List from '@/pages/shop/components/List'
 export default {
   components: {
     'v-banner': Banner,
-    'v-report': Repore
+    'v-report': Repore,
+    'v-list': List
   },
   data() {
     return {
