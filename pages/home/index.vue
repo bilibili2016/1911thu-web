@@ -26,7 +26,7 @@
 <script>
 import Carousel from '@/components/common/Carousel.vue'
 
-import Famous from '@/pages/home/famous.vue'
+import Famous from '@/pages/home/teacher/famous.vue'
 import Info from '@/pages/home/news/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
