@@ -1,5 +1,5 @@
 <template>
-  <div class="playInner" ref="playInner">
+  <div data="222" class="playInner" ref="playInner">
     <div id="mediaPlayer" ref="mediaPlayer" style="width:100%; height:100%;"></div>
   </div>
 </template>

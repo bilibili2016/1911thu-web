@@ -163,12 +163,12 @@
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="全部" name="orderFirst">
                 <v-order v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" :config="configOne" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
-                <!-- <div class="content noOrder" v-else>
+                <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
                   </div>
-                </div> -->
+                </div>
               </el-tab-pane>
               <el-tab-pane name="orderSecond">
                 <span class="payCut" slot="label">未完成
