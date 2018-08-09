@@ -57,7 +57,7 @@ export default {
     this.getNewInfoList()
   },
   methods: {
-    ...mapActions('auth', ['setNid']),
+    // ...mapActions('auth', ['setNid']),
     getNewInfoList() {
       this.teacherForm.pages = 1
       this.teacherForm.limits = 7
@@ -80,8 +80,8 @@ export default {
       })
     },
     checkdetail(index) {
-      this.nidForm.nids = index
-      this.setNid(this.nidForm)
+      // this.nidForm.nids = index
+      // this.setNid(this.nidForm)
     }
   }
 }

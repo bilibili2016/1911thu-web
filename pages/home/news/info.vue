@@ -31,9 +31,6 @@ export default {
       infoDescs: null,
       infoArticles: null,
       load: false,
-      nidForm: {
-        nids: null
-      },
       configCarousel: {
         carousel: 'news'
       }

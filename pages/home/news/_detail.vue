@@ -37,13 +37,9 @@
 
 <script>
 import CustomBanner from '@/components/common/Banner.vue'
-import { mapState, mapActions, mapGetters } from 'vuex'
 import { news } from '~/lib/v1_sdk/index'
 import { timestampToTime } from '~/lib/util/helper'
 export default {
-  computed: {
-    ...mapState('auth', ['nid'])
-  },
   components: {
     'v-banner': CustomBanner
   },
@@ -81,25 +77,23 @@ export default {
       let newsId = {
         ids: id
       }
-      return new Promise((resolve, reject) => {
-        news.getNewInfoDetail(newsId).then(response => {
-          this.newsDetail = response.data.newDetail
-          this.newsDetail.create_time = timestampToTime(
-            this.newsDetail.create_time
-          )
-          if (response.data.beforeNews.id) {
-            me.beforeNews = response.data.beforeNews
-          } else {
-            me.beforeNews.title = '暂无'
-          }
-          if (response.data.afterNews.id) {
-            me.afterNews = response.data.afterNews
-          } else {
-            me.afterNews.title = '暂无'
-          }
-          // me.afterNews = response.data.afterNews
-          this.loading = false
-        })
+
+      news.getNewInfoDetail(newsId).then(response => {
+        this.newsDetail = response.data.newDetail
+        this.newsDetail.create_time = timestampToTime(
+          this.newsDetail.create_time
+        )
+        if (response.data.beforeNews.id) {
+          me.beforeNews = response.data.beforeNews
+        } else {
+          me.beforeNews.title = '暂无'
+        }
+        if (response.data.afterNews.id) {
+          me.afterNews = response.data.afterNews
+        } else {
+          me.afterNews.title = '暂无'
+        }
+        this.loading = false
       })
     }
   },

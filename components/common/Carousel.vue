@@ -33,14 +33,11 @@ export default {
     return {
       kidForm: {
         kids: ''
-      },
-      nidForm: {
-        nids: null
       }
     }
   },
   methods: {
-    ...mapActions('auth', ['setKid', 'setNid']),
+    ...mapActions('auth', ['setKid']),
     handleLink(img) {
       this.kidForm.kids = img.jump_id
       persistStore.set('curriculumId', img.jump_id)
@@ -48,8 +45,6 @@ export default {
       // window.open(window.location.origin + '/course/coursedetail')
     },
     goDetail(news) {
-      this.nidForm.nids = news.id
-      this.setNid(this.nidForm)
       window.open(window.location.origin + '/home/news/' + news.id)
     }
   }

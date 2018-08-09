@@ -6,13 +6,13 @@
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
-        <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <v-tabs></v-tabs>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
+
       <div :class="['HREntry' ,{islogined : isAuthenticated }]">
         <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
           <i></i>
@@ -39,6 +39,7 @@
           <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
       </div>
+
       <!-- 登录注册按钮 -->
       <v-lrbtn v-if="!isAuthenticated"></v-lrbtn>
 

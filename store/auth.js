@@ -12,7 +12,7 @@ persistStore.defaults({
   pid: null,
   gid: null,
   hsg: null,
-  nid: null,
+
   kid: null,
   isShowTip: null,
   productsNum: null,
@@ -30,7 +30,6 @@ let pid = persistStore.get('pid')
 let did = persistStore.get('did')
 let gid = persistStore.get('gid')
 let hsg = persistStore.get('hsg')
-let nid = persistStore.get('nid')
 let kid = persistStore.get('kid')
 let isShowTip = persistStore.get('isShowTip')
 let productsNum = persistStore.get('productsNum')
@@ -49,7 +48,6 @@ export const MUTATION = {
   setDid: 'set-did',
   setGid: 'set-gid',
   setHsg: 'set-hsg',
-  setNid: 'set-nid',
   setKid: 'set-kid',
   setIsShowTip: 'set-isShowTip',
   setProductsNum: 'set-productsNum',
@@ -65,7 +63,7 @@ export const state = () => ({
   pid,
   gid,
   hsg,
-  nid,
+  // nid,
   kid,
   isShowTip,
   productsNum,
@@ -120,9 +118,6 @@ export const mutations = {
   },
   [MUTATION.setHsg](state, { hsg }) {
     state.hsg = hsg
-  },
-  [MUTATION.setNid](state, { nid }) {
-    state.nid = nid
   },
   [MUTATION.setKid](state, { kid }) {
     state.kid = kid
@@ -320,20 +315,6 @@ export const actions = {
       let hsg = hsgs
       persistStore.set('hsg', hsg)
       commit(MUTATION.setHsg, { hsg })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return gid
-  },
-  async setNid({ commit, state }, { nids }) {
-    try {
-      let nid = nids
-      persistStore.set('nid', nid)
-      commit(MUTATION.setNid, { nid })
     } catch (e) {
       if (e instanceof ServerError) {
         log.error(e)
