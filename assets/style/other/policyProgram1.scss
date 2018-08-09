@@ -7,7 +7,7 @@
     position: relative;
     width: 100%;
     height: 500px;
-    background: url('~assets/images/program-bg.jpg') no-repeat;
+    background: url('http://papn9j3ys.bkt.clouddn.com/program-bg.jpg') no-repeat;
     background-size: 100% 100%;
     z-index: 0;
     .text {
@@ -348,7 +348,9 @@
   }
   .system {
     padding-bottom: 60px;
-    background: url('~assets/images/inlineBg.png') center top no-repeat, url('~assets/images/underLineBg.png') center bottom no-repeat;
+    background: url('http://papn9j3ys.bkt.clouddn.com/inlineBg.png') center top
+        no-repeat,
+      url('~assets/images/underLineBg.png') center bottom no-repeat;
     background-size: contain;
     .studyCourse .title .text {
       color: #fff;
@@ -380,7 +382,8 @@
         }
         .titleOne {
           height: 95px;
-          background: url('~assets/images/systemBorderBg1.png') no-repeat;
+          background: url('http://papn9j3ys.bkt.clouddn.com/systemBorderBg1.png')
+            no-repeat;
           background-size: cover;
           th {
             border-top-right-radius: 10px;
@@ -422,7 +425,8 @@
       &.tableTwo {
         .titleOne {
           height: 95px;
-          background: url('~assets/images/systemBorderBg2.png') no-repeat;
+          background: url('http://papn9j3ys.bkt.clouddn.com/systemBorderBg2.png')
+            no-repeat;
           background-size: cover;
         }
         .titleTwo {
@@ -446,7 +450,8 @@
         .titleOne {
           width: 100%;
           height: 95px;
-          background: url('~assets/images/systemBorderBg3.png') no-repeat;
+          background: url('http://papn9j3ys.bkt.clouddn.com/systemBorderBg3.png')
+            no-repeat;
           background-size: cover;
         }
         .titleTwo {

@@ -88,13 +88,13 @@
           padding: 100px 40px 90px;
           display: flex;
           justify-content: space-around;
-          background: url('~assets/images/modeBg.png') no-repeat;
+          background: url('http://papn9j3ys.bkt.clouddn.com/modeBg.png') no-repeat;
           background-size: contain;
           .modeCenter {
             width: 290px;
             height: 314px;
             padding: 103px 60px 114px;
-            background: url('~assets/images/modeCenter.png') no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/modeCenter.png') no-repeat;
             background-size: cover;
             p {
               width: 170px;
@@ -199,7 +199,7 @@
           }
           .titleOne {
             height: 95px;
-            background: url('~assets/images/systemBorderBg1.png') no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/systemBorderBg1.png') no-repeat;
             background-size: cover;
             th {
               border-top-right-radius: 10px;
@@ -241,7 +241,8 @@
         &.tableTwo {
           .titleOne {
             height: 95px;
-            background: url('~assets/images/systemBorderBg2.png') no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/systemBorderBg2.png')
+              no-repeat;
             background-size: cover;
           }
           .titleTwo {
@@ -265,7 +266,8 @@
           .titleOne {
             width: 100%;
             height: 95px;
-            background: url('~assets/images/systemBorderBg3.png') no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/systemBorderBg3.png')
+              no-repeat;
             background-size: cover;
           }
           .titleTwo {

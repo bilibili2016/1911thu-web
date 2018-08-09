@@ -83,7 +83,7 @@ export default {
       ceilSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop11.png',
       wxSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
       qqSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
-      topSrc: require('@/assets/images/home_backtop03.png')
+      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png'
     }
   },
   mounted() {

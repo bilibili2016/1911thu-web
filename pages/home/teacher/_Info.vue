@@ -39,7 +39,7 @@ export default {
       tidForm: {
         tids: null
       },
-      teacherBg: require('@/assets/images/teacher_bg.png')
+      teacherBg: 'http://papn9j3ys.bkt.clouddn.com/teacher_bg.png'
     }
   },
   methods: {

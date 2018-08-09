@@ -37,7 +37,7 @@
         <div class="fr" @click="addShoppingCart">
           <i>加入购物车</i>
           <span>
-            <img src="~assets/images/pro_cart.png" alt="">
+            <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
           </span>
         </div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>

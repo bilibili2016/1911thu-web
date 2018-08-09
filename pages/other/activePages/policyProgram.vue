@@ -32,19 +32,19 @@
           </div>
           <div class="info clearfix">
             <div class="item item-one">
-              <img src="@/assets/images/policy-icon1.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/policy-icon1.png" alt="">
               <p>各级党政机关领导干部</p>
             </div>
             <div class="item item-two">
-              <img src="@/assets/images/policy-icon2.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/policy-icon2.png" alt="">
               <p>事业单位领导干部</p>
             </div>
             <div class="item item-three">
-              <img src="@/assets/images/policy-icon3.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/policy-icon3.png" alt="">
               <p>中青年后备干部</p>
             </div>
             <div class="item item-four">
-              <img src="@/assets/images/policy-icon4.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/policy-icon4.png" alt="">
               <p>基层干部等</p>
             </div>
           </div>
@@ -226,9 +226,9 @@
       <!-- 线下面授课程 -->
       <div class="studyCourse">
         <div class="title">
-          <img class="titlt-icon-left" src="@/assets/images/policy-pic05.png" alt="">
+          <img class="titlt-icon-left" src="http://papn9j3ys.bkt.clouddn.com/policy-pic05.png" alt="">
           <span class="text">课程及师资介绍</span>
-          <img class="titlt-icon-right" src="@/assets/images/policy-pic06.png" alt="">
+          <img class="titlt-icon-right" src="http://papn9j3ys.bkt.clouddn.com/policy-pic06.png" alt="">
         </div>
         <div class="studyInfo">
           <h5>
