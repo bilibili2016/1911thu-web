@@ -9,12 +9,12 @@
         <div class="code">
           <div class="codeL">
             <p>微信</p>
-            <p class="img"></p>
+            <qrcode :value="wechat" :options="{ size: 120 }" class="qrcode"></qrcode>
           </div>
           <div class="codeC"></div>
           <div class="codeR">
             <p>支付宝</p>
-            <p class="img"></p>
+            <qrcode :value="alipay" :options="{ size: 120 }" class="qrcode"></qrcode>
           </div>
         </div>
         <div class="bottomWord">
@@ -27,22 +27,57 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import VueQrcode from '@xkeshi/vue-qrcode'
 import { store as persistStore } from '~/lib/core/store'
-import { home } from '~/lib/v1_sdk/index'
+import { home, pay } from '~/lib/v1_sdk/index'
+Vue.component(VueQrcode.name, VueQrcode)
 export default {
   props: ['config'],
   data() {
     return {
-      showPay: false
+      showPay: false,
+      codeForm: {
+        type: '2',
+        ids: ''
+      },
+      wechat: '',
+      alipay: ''
     }
   },
   methods: {
     close() {
       this.showPay = false
+    },
+    // 轮询扫码结果
+    getStatus() {
+      this.interval = setInterval(() => {
+        if (this.seconds <= 0) {
+          clearInterval(this.interval)
+        } else {
+          this.seconds--
+          wepay.payResult(this.payListForm).then(response => {
+            if (response.status === 0) {
+              this.wxMask = false
+              this.$router.push('/shop/payresult')
+              clearInterval(this.interval)
+            }
+          })
+        }
+      }, 1000)
+    },
+    // 获取去二维码的方法
+    getCode() {
+      this.codeForm.ids = persistStore.get('projectId')
+      pay.getCode(this.codeForm).then(response => {
+        this.wechat = response.data.code_url
+        this.alipay = response.data.qr_code
+      })
     }
   },
   mounted() {
     this.$bus.$on('openPay', data => {
+      this.getCode()
       this.showPay = true
     })
   }

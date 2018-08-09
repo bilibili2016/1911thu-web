@@ -124,6 +124,7 @@ export default {
       ischeck: '',
       mediaRW: 22,
       mediaLW: 78,
+      isTry: '',
       mediaRInner: true,
       fileID: '',
       appID: '',
@@ -222,28 +223,14 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['signOut']),
-    // isHasClass() {
-    //   let myVideo = document.getElementById('movd')
-    //   if (myVideo == null) {
-    //     return
-    //   }
-    //   if (myVideo.getAttribute('class')) {
-    //     // 存在class属性
 
-    //     // 方式2
-    //     if (myVideo.className.indexOf('vjs-paused') > -1) {
-    //       this.videoState = false
-    //       // console.log('包含 test 这个class')
-    //     } else {
-    //       this.videoState = true
-    //     }
-    //   }
-    // },
+    // 登出
     signOuts() {
       this.signOut()
       persistStore.clearAll()
       this.$router.push('/')
     },
+    // 切换星级
     changeRate(val) {
       this.reTagBtn = []
       this.tagGroup[val].map((item, i) => {
@@ -256,6 +243,7 @@ export default {
       this.btnData = this.reTagBtn
       this.addEvaluateForm.tag = []
     },
+    // 添加评论
     getBtnContent(val, index) {
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)
@@ -269,6 +257,7 @@ export default {
         }
       })
     },
+    // 点击小节播放
     handleCourse(item, index) {
       this.ischeck = item.id
       this.playing = this.pauseImg
@@ -278,7 +267,9 @@ export default {
       this.clickMsg = true
       this.autoplay = true
       this.getPlayerInfo()
+      this.isTry = item.look_at
     },
+    // 获取评论tag
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         projectplayer.getEvaluateTags().then(response => {
@@ -326,12 +317,15 @@ export default {
         }
       })
     },
+    // 打开报告问题
     showRpt() {
       this.$bus.$emit('openReport')
     },
+    // 展示评论
     showElt() {
       this.showEvaluate = true
     },
+    // 关闭评论
     closeEvaluate() {
       this.showEvaluate = false
       this.radioBtn = ''
@@ -467,13 +461,11 @@ export default {
         // 监听播放停止事件
         if (msg.type == 'ended') {
           // 未购买且试看
-          // if(this.bought&&this){
-
-          // }
-          that.$bus.$emit('openPay')
+          if (!that.bought && that.isTry == '2') {
+            that.$bus.$emit('openPay')
+          }
         }
       }
-
       // this.isHasClass()
     },
     // 获取视频播放参数
@@ -510,16 +502,6 @@ export default {
     },
     // 增加评论
     addProjectEvaluate() {
-      //免费课程不购买可以评价
-      // if (!this.bought && this.isFreeCourse !== 2) {
-      //   this.$message({
-      //     showClose: true,
-      //     type: 'error',
-      //     message: '您还没有购买该课程，请先购买后再来评论吧！'
-      //   })
-      //   this.showEvaluate = false
-      //   return false
-      // }
       if (this.word.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.word
       } else {
@@ -600,7 +582,6 @@ export default {
         } else if (window.event) {
           window.event.cancelBubble = true
         }
-        // console.log(event)
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
           projectplayer.getPlayerInfos(that.playerForm).then(response => {
