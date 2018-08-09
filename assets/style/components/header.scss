@@ -37,6 +37,14 @@ body {
         background-position: 0 0;
       }
     }
+    .backHome {
+      width: 30px;
+      cursor: pointer;
+    }
+    .teach {
+      width: 60px;
+      cursor: pointer;
+    }
     .search {
       width: 260px;
       height: 34px;
@@ -85,10 +93,10 @@ body {
       }
     }
     .HREntry {
-      margin-left: 60px;
+      margin-left: 20px;
       height: 20px;
       &.islogined {
-        margin-left: 100px;
+        margin-left: 60px;
         height: 20px;
       }
       span {

@@ -4,17 +4,23 @@
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
 
     <div class="main">
-      <div class="headerLogo fl" @click="goSearchd('/')">
+      <div class="headerLogo fl" @click="goLinker('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
       </div>
+      <div class="backHome">
+        <span @click="goLinker('/')">首页</span>
+      </div>
       <v-tabs></v-tabs>
+      <div class="teach" @click="goLinker('/home/famous')">
+        <span>名师智库</span>
+      </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
 
       <div :class="['HREntry' ,{islogined : isAuthenticated }]">
-        <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
+        <span class="hrin center" @click="goSearchd('/other/activePages/institutional')">单位入口
           <i></i>
         </span>
         <span class="center" @click="addEcg" style="width:90px;">课程兑换码
@@ -34,7 +40,7 @@
             </div>
           </div>
         </div>
-        <div class="shoppingCart" v-show="isAuthenticated" @click="goSearchd('/shop/shoppingcart')">
+        <div class="shoppingCart" v-show="isAuthenticated" @click="goLinker('/shop/shoppingcart')">
           <span class="cartIcon"></span>
           <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
@@ -121,7 +127,7 @@ export default {
         }
       ],
       isHasClass: true,
-      //codeData: [], //专属邀请码根据接口长度判断是否显示
+      //codeData: [], //专属兑换码根据接口长度判断是否显示
       codeListForm: {
         pages: 1,
         limits: null
@@ -222,42 +228,46 @@ export default {
       if (this.token) {
         this.bindForm.isBind = true
       } else {
-        this.$alert('抱歉，您还未登录，请先登录吧！', '温馨提示', {
-          confirmButtonText: '确定',
-          callback: action => {
-            if (action === 'cancel') {
-            } else {
-              this.signOuts()
-              this.$bus.$emit('loginShow', true)
+        this.$alert(
+          '您暂未登陆，无法绑定兑换码，请先完成用户登录！',
+          '温馨提示',
+          {
+            confirmButtonText: '确定',
+            callback: action => {
+              if (action === 'cancel') {
+              } else {
+                this.signOuts()
+                this.$bus.$emit('loginShow', true)
+              }
             }
           }
-        })
+        )
       }
     },
-    // 检测邀请码内是否包含已绑定的课程
+    // 检测兑换码内是否包含已绑定的课程
     detection() {
       header.detectionCode(this.bindForm).then(res => {
-        // 判断邀请码内是否包含已绑定的课程
+        // 判断兑换码内是否包含已绑定的课程
         if (res.data.is_exist === 1) {
           this.$confirm(
-            '该邀请码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
+            '该兑换码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
             {
-              confirmButtonText: '坚持绑定',
-              cancelButtonText: '取消',
+              confirmButtonText: '取消',
+              cancelButtonText: '坚持绑定',
               closeOnHashChange: false,
               // type: 'warning',
               center: true
             }
           )
             .then(() => {
-              // 添加绑定课程
-              this.goBind()
-            })
-            .catch(() => {
               this.$message({
                 type: 'info',
                 message: '已取消绑定'
               })
+            })
+            .catch(() => {
+              // 添加绑定课程
+              this.goBind()
             })
         } else {
           this.goBind()
@@ -362,12 +372,12 @@ export default {
       ) {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
-          case '/other/search':
+          case '/other/pages/search':
             this.$router.go()
             break
           default:
-            this.$router.push('/other/search')
-            // window.open(window.location.origin + '/other/search')
+            this.$router.push('/other/pages/search')
+            // window.open(window.location.origin + '/other/pages/search')
             break
         }
       } else {
@@ -377,13 +387,9 @@ export default {
         })
       }
     },
-    // 搜索跳转到搜索页
-    goSearchd(item) {
+    // 跳转到指定页
+    goLinker(item) {
       this.$router.push(item)
-    },
-    // 回首页
-    backHome() {
-      this.$router.push('/')
     },
     goLink(item) {
       this.gidForm.gids = item
@@ -446,9 +452,9 @@ export default {
     },
     // 用户协议
     userProtocol() {
-      window.open(window.location.origin + '/other/userProtocol')
+      window.open(window.location.origin + '/other/activePages/userProtocol')
     }
-    // 获取专属邀请码列表
+    // 获取专属兑换码列表
     // getCodeList() {
     //   home.getCodeList(this.codeListForm).then(response => {
     //     if (response.status !== '100100') {

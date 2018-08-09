@@ -16,7 +16,7 @@
             <td v-if="code.type==='1'">课程</td>
             <td v-if="code.type==='2'">项目</td>
             <td v-if="code.type==='3'">课程+项目</td>
-            <td>{{code.create_time}}</td>
+            <td>{{exchangeTime(code.create_time)}}</td>
           </tr>
           <div v-if="!recordData||recordData.length<1" class="noCodes">
             <img :src="noMsgImg" alt="">
@@ -29,11 +29,17 @@
 </template>
 
 <script>
+import { timestampToYMD } from '@/lib/util/helper'
 export default {
   props: ['recordData'],
   data() {
     return {
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png'
+    }
+  },
+  methods: {
+    exchangeTime(time) {
+      return timestampToYMD(time)
     }
   }
 }

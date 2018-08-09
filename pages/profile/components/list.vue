@@ -19,14 +19,21 @@
               <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div class="common-button btn-bgs ">
+              <!-- 学习中 -->
               <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <!-- 已过期 -->
               <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
                   加入购物车
                 </span>
               </el-button>
-              <el-button v-if="card.percent > 0&&!card.overtime" type="primary" plain @click="goToPlay(card)">
+              <!-- 学习中 -->
+              <el-button v-if="card.percent > 0&&!card.overtime&&config.card==='learning'" type="primary" plain @click="goToPlay(card)">
                 <span>继续学习</span>
+              </el-button>
+              <!-- 已完成 -->
+              <el-button v-if="card.percent===100&&config.card==='already'" type="primary" plain @click="goToPlay(card)">
+                <span>再次学习</span>
               </el-button>
             </div>
             <el-row @click.native="selectCid(card,index)">
