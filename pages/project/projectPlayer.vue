@@ -643,8 +643,4 @@ export default {
   }
 }
 </script>
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
 
