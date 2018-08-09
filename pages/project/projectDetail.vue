@@ -40,6 +40,7 @@
             <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
           </span>
         </div>
+        <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
       </div>
     </div>

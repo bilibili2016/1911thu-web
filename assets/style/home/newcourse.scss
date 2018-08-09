@@ -76,9 +76,7 @@
           transition: all 400ms;
           overflow: hidden;
           text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
+          white-space: nowrap;
         }
         h5 {
           height: 23px;
@@ -88,9 +86,7 @@
           font-size: 14px;
           overflow: hidden;
           text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
+          white-space: nowrap;
         }
         h6 {
           color: #93999f;

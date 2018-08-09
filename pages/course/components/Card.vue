@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="courseList center">
+    <div class="curriculumList center">
       <!-- v-for="(course,index) in courseList -->
       <div class="course clearfix  ">
         <el-card class="fl" :body-style="{ padding: '0px' }">
