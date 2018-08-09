@@ -202,7 +202,7 @@
       <div class="distinctive">
         <div class="lietOne">
           <div class="dttImg fl">
-            <img src="~assets/images/distinctive_1.png" alt="">
+            <img src="http://papn9j3ys.bkt.clouddn.com/distinctive_1.png" alt="">
           </div>
           <h4 class="fl">项目特色</h4>
           <div class="inner">
@@ -217,7 +217,7 @@
         </div>
         <div class="lietOne">
           <div class="dttImg fl">
-            <img src="~assets/images/distinctive_2.png" alt="">
+            <img src="http://papn9j3ys.bkt.clouddn.com/distinctive_2.png" alt="">
           </div>
           <h4 class="fl">学习收获</h4>
           <div class="inner">
