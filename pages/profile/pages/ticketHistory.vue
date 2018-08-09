@@ -214,6 +214,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-@import '~assets/style/profile/ticketHistory';
-</style>

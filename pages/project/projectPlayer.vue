@@ -635,7 +635,5 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-@import '~assets/style/project/projectPlayer';
-</style>
+
 
