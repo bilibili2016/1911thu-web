@@ -103,7 +103,7 @@ export default {
   props: ['config', 'data'],
   data() {
     return {
-      readyImg: require('@/assets/images/ready.png'),
+      readyImg: 'http://papn9j3ys.bkt.clouddn.com/ready.png',
       overTimeImg: 'http://papn9j3ys.bkt.clouddn.com/overtime.png',
       jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
       kidForm: {
