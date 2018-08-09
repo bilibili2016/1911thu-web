@@ -1,5 +1,5 @@
 <template>
-  <div class="playerBox clearfix" ref="playerBox">
+  <div class="projectPlayer clearfix" ref="playerBox">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <div class="playTop" @click="goLink()">
         <i class="el-icon-arrow-left"></i>{{projectDetail.title}}
@@ -59,20 +59,8 @@
         <i :class="mediaRIcon"></i>
       </div>
     </div>
-    <div class="reportBug" v-show="showReportBug">
-      <div class="note">
-        <h4>报告问题
-          <i @click="closeReport" class="el-icon-close fr"></i>
-        </h4>
-        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem.content">
-        </el-input>
-        <div class="commitBug">
-          <el-button @click="reportProblem">提交</el-button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 项目评价弹框组件 -->
+    <!-- 报告问题 -->
+    <v-report :config="config"></v-report>
     <!-- <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="courseList" @closeEvaluate="closeEvaluate"> </v-evaluatecase> -->
     <div class="evaluate" v-show="showEvaluate">
       <div class="note">
@@ -96,6 +84,7 @@
       </div>
     </div>
     <el-button type="text" @click="goShoppingCart"></el-button>
+    <!-- <v-pay></v-pay> -->
   </div>
 </template>
 
@@ -105,11 +94,15 @@ import { auth, projectplayer } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
+import Repore from '@/components/common/Report.vue'
+import Pay from '@/components/common/pay.vue'
 import Collection from '@/components/common/Collection.vue'
 
 export default {
   components: {
     'v-evaluatecase': EvaluateCase,
+    'v-report': Repore,
+    'v-pay': Pay,
     'v-collection': Collection
   },
   computed: {
@@ -142,11 +135,6 @@ export default {
       player: {},
       courseList: [],
       projectDetail: {},
-      problem: {
-        curriculumId: null,
-        content: '',
-        curriculumcatalogid: ''
-      },
       word: '',
       evaluate: {
         eltnum: 5,
@@ -226,6 +214,9 @@ export default {
       shoppingForm: {
         cartid: '',
         type: 2
+      },
+      config: {
+        type: 1
       }
     }
   },
@@ -336,13 +327,10 @@ export default {
       })
     },
     showRpt() {
-      this.showReportBug = true
+      this.$bus.$emit('openReport')
     },
     showElt() {
       this.showEvaluate = true
-    },
-    closeReport() {
-      this.showReportBug = false
     },
     closeEvaluate() {
       this.showEvaluate = false
@@ -510,32 +498,6 @@ export default {
         // this.collectMsg = response.data.curriculumProjectDetail.is_Collection
         // 播放所需数据加载完成后加载播放器数据
         this.getPlayerInfo()
-      })
-    },
-    // 反馈问题
-    reportProblem() {
-      this.problem.curriculumId = persistStore.get('curriculumId')
-      this.problem.curriculumcatalogid = persistStore.get('catalogId')
-      return new Promise((resolve, reject) => {
-        projectplayer.reportProblem(this.problem).then(response => {
-          if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-          } else {
-            this.closeReport()
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-          }
-          if (this.word === '') {
-            return
-          }
-        })
       })
     },
     // 增加评论
