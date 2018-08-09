@@ -1,4 +1,5 @@
 <template>
+    <!-- 确认订单，支付中心头部banner -->
     <div class="banner">
         <div>{{config.text}}</div>
     </div>

@@ -2,7 +2,7 @@
   <div class="faceteach">
     <div class="banner">
       <div class="banner-img">
-        <!-- <img :src="faceImg" alt="" class="banner-img"> -->
+
         <div class="text">
           <p class="text-desc1">面授及线下活动</p>
           <p class="text-line"></p>

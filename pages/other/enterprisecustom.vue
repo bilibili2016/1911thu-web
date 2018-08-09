@@ -1,7 +1,6 @@
 <template>
   <div class="custom">
     <div class="topImg">
-      <!-- <img src="http://papn9j3ys.bkt.clouddn.com/custom.png" alt=""> -->
       <div class="top-con">
         <p class="top-title">企业课程定制服务</p>
         <div class="line">

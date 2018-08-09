@@ -19,7 +19,8 @@
               <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
             </div>
             <!-- 课程列表 start -->
-            <div class="tableBody" v-if="!isNoMsg">
+            <v-list :config="courseType" :data="courseList" v-if="!isNoMsg"></v-list>
+            <!-- <div class="tableBody" v-if="!isNoMsg">
               <div v-for="(course,index) in courseList" :key="index">
                 <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
@@ -37,7 +38,7 @@
                   删除
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- 课程列表 end -->
 
             <!-- 项目全选 checkbox-->
@@ -45,8 +46,8 @@
               <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
             </div>
             <!-- 项目列表 start-->
-            <div class="tableBody" v-if="!isNoMsg">
-
+            <v-list :config="projectType" :data="projectList" v-if="!isNoMsg"></v-list>
+            <!-- <div class="tableBody" v-if="!isNoMsg">
               <div v-for="(project,index) in projectList" :key="index">
                 <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
@@ -58,7 +59,7 @@
                   <div class="fl">
                     <h4 @click="goProjectDetail(project)">{{project.title}}</h4>
                     <h6>{{project.study_time}}学时 </h6>
-                    <!-- <p>讲师：{{project.teacher_name}}</p> -->
+
                   </div>
                 </div>
                 <div class="coursePrice">
@@ -68,7 +69,7 @@
                   删除
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <!-- 项目列表 end -->
         </div>
@@ -148,9 +149,19 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 // import { mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
+import List from '@/pages/shop/components/List'
 export default {
+  components: {
+    'v-list': List
+  },
   data() {
     return {
+      courseType: {
+        type: 'course'
+      },
+      projectType: {
+        type: 'project'
+      },
       headerHeight: '',
       tableFooteroffsetTop: '',
       index: 0,
@@ -286,6 +297,25 @@ export default {
       this.shopCartList()
     }
     this.$bus.$emit('bannerShow', false)
+    this.$bus.$on('handleSelectChange', data => {
+      this.handleSelectChange(data.course, data.index)
+    })
+    this.$bus.$on('goDetail', data => {
+      this.goDetail(data.course, data.index)
+    })
+    this.$bus.$on('handleDeleteCourse', data => {
+      this.handleDeleteCourse(data.course, data.index)
+    })
+
+    this.$bus.$on('handleSelectProjectChange', data => {
+      this.handleSelectProjectChange(data.project, data.index)
+    })
+    this.$bus.$on('goProjectDetail', data => {
+      this.goProjectDetail(data.project, data.index)
+    })
+    this.$bus.$on('handleDeleteProject', data => {
+      this.handleDeleteProject(data.project, data.index)
+    })
     // this.getNum()
     this.restaurants = this.loadAll()
     this.headerHeight = document.getElementsByClassName(
