@@ -1,13 +1,7 @@
 <template>
   <div class="headerBox">
-    <div class="recommend" v-if="bannerMsg">
-      <div>
-        <img src="@/assets/images/hr_discounts1.png" alt="">
-        <span>优惠专题入口</span>
-        <img src="@/assets/images/hr_discounts2.png" alt="">
-        <i class="el-icon-close" @click="closeBanner"></i>
-      </div>
-    </div>
+
+    <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
 
     <!-- <el-select v-model="value" @change="changeNav">
       <el-option v-for="(item,index) in options" :key="index" :label="item.label" :value="item.value">
@@ -51,51 +45,23 @@
           <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
       </div>
-      <div class="lrBtn" v-if="!isAuthenticated">
-        <!-- @click="login" -->
-        <span class="login" @click="login">登录</span>
-        <!-- @click="register" -->
-        <span class="register" @click="register">注册</span>
-      </div>
+      <!-- 登录注册按钮 -->
+      <v-lrbtn v-if="!isAuthenticated"></v-lrbtn>
+
       <div class="headImg" v-else>
         <span>
           <img :src="user.userImg" alt="" @click="goLink('tab-first')">
         </span>
+        <!-- 个人中心下拉框 -->
         <ul class="subPages">
-          <li @click="goLink('tab-first')">我的首页</li>
-          <li @click="goLink('tab-second')">我的课程</li>
-          <li @click="goLink('tab-third')">我的项目</li>
-          <li @click="goLink('tab-fourth')">我的订单</li>
-          <li @click="goLink('tab-fifth')">我的消息</li>
-          <li @click="goLink('tab-sixth')">个人设置</li>
-          <li @click="goLink('tab-seventh')">兑换码管理</li>
-          <li @click="goLink('tab-eighth')">发票管理</li>
-          <!-- <li v-if="this.codeData.length !== 0" @click="goLink('tab-sixth')">课程码管理</li> -->
+          <li v-for="(item,index) in subPagesData" :key="index" @click="goLink(item.link)">{{item.text}}</li>
           <li @click="signOuts">退出</li>
         </ul>
       </div>
     </div>
     <!-- 兑换码弹框 -->
-    <div class="exchange" v-show="bindForm.isBind">
-      <div class="innerWord">
-        <i class="el-icon-close closeEcg" @click="closeEcg"></i>
-        <div class="changeContent">
-          <div class="changeInput">
-            <span>课程兑换码:</span>
-            <input v-model="bindForm.courseId" placeholder="请输入您的课程兑换码，区分大小写。">
-            <p>
-              <span>{{bindForm.error}}</span>
-            </p>
-          </div>
-          <div class="changeTips">
-            <p>课程兑换码说明：</p>
-            <p>1.输入课程兑换码，绑定兑换购买的课程</p>
-            <p>2.绑定成功后，不可更改。</p>
-          </div>
-          <div :class="['bind',{input:bindForm.isInput}]" @click="detection">绑定</div>
-        </div>
-      </div>
-    </div>
+    <v-code v-show="bindForm.isBind" :bindForm="bindForm"></v-code>
+
     <!-- 登录注册 -->
     <v-login></v-login>
   </div>
@@ -111,13 +77,53 @@ import { MessageBox } from 'element-ui'
 import { encryption } from '~/lib/util/helper'
 import Tabs from '@/components/common/Tabs.vue'
 import Login from '@/pages/auth/Login.vue'
+import Discount from '@/components/common/Discount.vue'
+import CodeCase from '@/components/common/CodeCase.vue'
+import LRBtn from '@/components/common/LRBtn.vue'
 export default {
   components: {
     'v-tabs': Tabs,
-    'v-login': Login
+    'v-login': Login,
+    'v-discount': Discount,
+    'v-code': CodeCase,
+    'v-lrbtn': LRBtn
   },
   data() {
     return {
+      subPagesData: [
+        {
+          link: 'tab-first',
+          text: '我的首页'
+        },
+        {
+          link: 'tab-second',
+          text: '我的课程'
+        },
+        {
+          link: 'tab-third',
+          text: '我的项目'
+        },
+        {
+          link: 'tab-fourth',
+          text: '我的订单'
+        },
+        {
+          link: 'tab-fifth',
+          text: '我的消息'
+        },
+        {
+          link: 'tab-sixth',
+          text: '个人设置'
+        },
+        {
+          link: 'tab-seventh',
+          text: '兑换码管理'
+        },
+        {
+          link: 'tab-eighth',
+          text: '发票管理'
+        }
+      ],
       isHasClass: true,
       //codeData: [], //专属邀请码根据接口长度判断是否显示
       codeListForm: {
@@ -483,6 +489,19 @@ export default {
       this.signOut()
     }
     this.explorer()
+
+    this.$bus.$on('closeEcg', data => {
+      this.closeEcg()
+    })
+    this.$bus.$on('detection', data => {
+      this.detection()
+    })
+    this.$bus.$on('login', data => {
+      this.login()
+    })
+    this.$bus.$on('register', data => {
+      this.register()
+    })
   },
   watch: {
     // 绑定兑换码

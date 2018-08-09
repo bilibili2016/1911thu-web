@@ -19,73 +19,8 @@
               </span>
             </div>
             <div class="goods">
-              <div class="oneGoods clearfix" v-for="(course,index) in curriculumLists" :key="index">
-                <div class="fl">
-                  <div class="bottomImg">
-                    <!-- 项目图标 -->
-                    <img v-if="course.type =='2'" class="project-img" :src="projectImg" alt="">
-                    <img :src="course.picture" alt="">
-                  </div>
-
-                </div>
-                <div class="fl">
-                  <h5>{{course.title}}</h5>
-                  <h6>{{course.study_time}}学时</h6>
-                  <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
-                </div>
-                <div class="fr">¥{{course.present_price}}</div>
-              </div>
+              <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
             </div>
-            <!-- 发票信息 -->
-            <!-- <div class="invoiceMsg clearfix">
-
-            <h4>
-              发票信息
-              <span>开单位抬头发票须填写纳税人识别号，以免影响报销</span>
-            </h4>
-            <div :class="['invoice',{'noTicket':!isShowTicket}]">
-              <span v-show="isShowTicket">
-                <i class="choose" v-show="invoiceForm.choose=='1'">普通发票</i>
-                <i class="choose" v-show="invoiceForm.choose=='2'">增值税专用发票</i>
-              </span>
-
-              <span class="invoiceWord" v-show="!isShowTicket">
-                <span>不开发票</span>
-              </span>
-              <span class="changeInvoice" @click="showIoc">修改</span>
-            </div>
-
-
-
-            <div class="ticketInfo" v-show="invoiceForm.choose=='1'&&isShowTicket">
-              <p v-if="invoiceForm.ticket === true">发票抬头：个人</p>
-              <p v-if="invoiceForm.ticket === false">发票抬头：{{invoiceForm.companyname}}</p>
-              <p v-if="invoiceForm.ticket === false">纳税人识别号：{{invoiceForm.number}}</p>
-              <p v-if="invoiceForm.radio == 1">发票内容：培训费</p>
-              <p v-if="invoiceForm.radio == 2">发票内容：{{invoiceForm.others}}</p>
-              <p>收票人姓名：{{invoiceForm.name}}</p>
-              <p>收票人手机号：{{invoiceForm.tel}}</p>
-              <p>收票人省份：{{invoiceForm.province_name }}{{invoiceForm.city_name}}{{invoiceForm.area_name}}
-              </p>
-              <p>详细地址：{{invoiceForm.address}}</p>
-            </div>
-            <div class="ticketInfo" v-show="invoiceForm.choose=='2'&&isShowTicket">
-              <p>开票方式：订单完成后开票</p>
-              <p v-if="invoiceForm.radio == 1">发票内容：培训费</p>
-              <p v-if="invoiceForm.radio == 2">发票内容：{{invoiceForm.others}}</p>
-              <p v-if="invoiceForm.ticket === false">单位名称：{{invoiceForm.companyname}}</p>
-              <p v-if="invoiceForm.ticket === false">纳税人识别号：{{invoiceForm.number}}</p>
-              <p>注册地址：{{invoiceForm.zcadd}}</p>
-              <p>联系电话：{{invoiceForm.phones}}</p>
-              <p>开户银行：{{invoiceForm.bank}}</p>
-              <p>银行账号：{{invoiceForm.account}}</p>
-              <p>收票人姓名：{{invoiceForm.name}}</p>
-              <p>收票人手机号：{{invoiceForm.tel}}</p>
-              <p>收票人省份：{{invoiceForm.province_name}}{{invoiceForm.city_name}}{{invoiceForm.area_name}}</p>
-              <p>收票人详细地址：{{invoiceForm.address}}</p>
-            </div>
-
-          </div> -->
             <div class="orderInfo">
               <p>
                 <span class="left">商品数量：</span>
@@ -438,10 +373,12 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 import Banner from '@/pages/shop/components/banner'
 import Repore from '@/components/common/Report.vue'
+import List from '@/pages/shop/components/List'
 export default {
   components: {
     'v-banner': Banner,
-    'v-report': Repore
+    'v-report': Repore,
+    'v-list': List
   },
   data() {
     return {

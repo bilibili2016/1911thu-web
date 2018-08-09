@@ -36,8 +36,6 @@
         <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
         <!-- 已经学习（1） -->
         <!-- {{courseList.is_study}} == {{courseList.is_evaluate}} -->
-        <!-- <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :courseList="courseList" @changeList="cbList"> </v-evaluatecase> -->
-
         <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
         <!-- 课程评价的弹窗 -->
         <div class="evaluate-tag shadow " v-show="dialogVisible ">

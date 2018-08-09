@@ -135,7 +135,30 @@
           width: 160px;
           height: 100px;
         }
-
+        .coursePrice {
+          float: right;
+          display: inline-block;
+          width: 100px;
+          height: 140px;
+          text-align: center;
+          color: #ff5f5f;
+          font-size: 16px;
+          line-height: 78px;
+          // margin-left: 158px;
+        }
+        .courseNumber {
+          display: inline-block;
+          width: 39px;
+          height: 140px;
+          text-align: center;
+          color: #332a51;
+          font-size: 16px;
+          line-height: 78px;
+          margin-left: 70px;
+          i {
+            font-size: 12px;
+          }
+        }
         .bottomImg {
           position: relative;
           .project-img {

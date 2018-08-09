@@ -15,7 +15,8 @@
             </div>
             <div class="content">
               <div class="course">
-                <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="takeupMsg">
+                <v-list :config="wePay" :data="orderCurriculumLists" v-if="takeupMsg"></v-list>
+                <!-- <div class="courseOne" v-for="(course,index) in orderCurriculumLists" :key="index" v-if="takeupMsg">
                   <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
                   <div class="fl">
                     <h4 @click="goCourseInfo(course,index)">{{course.name}}</h4>
@@ -28,7 +29,7 @@
                   <div class="courseNumber">
                     <i class="el-icon-close"></i>{{course.pay_number}}
                   </div>
-                </div>
+                </div> -->
                 <div class="more">
                   支付方式
                 </div>
@@ -104,10 +105,12 @@ import { store as persistStore } from '~/lib/core/store'
 import Vue from 'vue'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import Banner from '@/pages/shop/components/banner'
+import List from '@/pages/shop/components/List'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   components: {
-    'v-banner': Banner
+    'v-banner': Banner,
+    'v-list': List
   },
   data() {
     return {
@@ -323,6 +326,7 @@ export default {
 </script>
 <style scoped>
 @import '@/assets/style/shop/wepay.scss';
+/* @import '@/assets/style/shop/affirmOrder.scss'; */
 </style>
 
 
