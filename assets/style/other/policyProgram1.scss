@@ -1,7 +1,8 @@
 .policyPrograme {
   width: 100%;
   height: auto;
-  background: url(~assets/images/program-big-bg.png) no-repeat;
+  background: url('http://papn9j3ys.bkt.clouddn.com/program-big-bg.png')
+    no-repeat;
   background-size: 100% 100%;
   .banner {
     position: relative;
@@ -348,7 +349,8 @@
     padding-bottom: 60px;
     background: url('http://papn9j3ys.bkt.clouddn.com/inlineBg.png') center top
         no-repeat,
-      url('~assets/images/underLineBg.png') center bottom no-repeat;
+      url('http://papn9j3ys.bkt.clouddn.com/underLineBg.png') center bottom
+        no-repeat;
     background-size: contain;
     .studyCourse .title .text {
       color: #fff;
@@ -485,7 +487,8 @@
             width: 150px;
             padding-right: 24px;
             text-align: right;
-            background: url('~assets/images/studyTitleBg.png') no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/studyTitleBg.png')
+              no-repeat;
             background-size: contain;
           }
           span {
