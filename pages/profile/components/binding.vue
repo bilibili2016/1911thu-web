@@ -20,7 +20,7 @@
         <div class="courseList">查看
           <div class="course">
             <span></span>
-            <p v-for="(course,index) in code.orderCurriculumList" :key="index">
+            <p v-for="(course,index) in code.orderCurriculumList" :key="index" @click="handleLink(course)">
               <i v-if="course.type=='2'"></i>{{course.title}}
             </p>
           </div>
@@ -38,6 +38,7 @@
 import { binding } from '~/lib/v1_sdk/index'
 import { timestampToYMD } from '@/lib/util/helper'
 import { mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['invitationCodeList'],
   data() {
@@ -49,6 +50,16 @@ export default {
     }
   },
   methods: {
+    // 跳转课程或项目详情
+    handleLink(item) {
+      if (item.type === '1') {
+        persistStore.set('curriculumId', item.curriculum_id)
+        window.open(window.location.origin + '/course/coursedetail')
+      } else {
+        persistStore.set('projectId', item.curriculum_id)
+        window.open(window.location.origin + '/project/ProjectDetail')
+      }
+    },
     // 时间戳转日期格式
     exchangeTime(time) {
       return timestampToYMD(time)

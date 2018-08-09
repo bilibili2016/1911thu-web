@@ -24,7 +24,7 @@
         </span> -->
 
         <span class="fl elt" @click="showElt" v-if="this.iseve === false">
-          <i class="el-icon-edit"></i>课程评价
+          <i class="el-icon-edit"></i>项目评价
         </span>
         <span class="fl elt" v-else :class=" { bag: this.iseve === true }">
           <i class="el-icon-edit"></i>已评价
@@ -64,7 +64,7 @@
     <!-- <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="courseList" @closeEvaluate="closeEvaluate"> </v-evaluatecase> -->
     <div class="evaluate" v-show="showEvaluate">
       <div class="note">
-        <h4>课程评价
+        <h4>项目评价
           <i class="el-icon-close fr" @click="closeEvaluate"></i>
         </h4>
         <h5>请问该课程对您有帮忙吗？快来评个分吧！</h5>
