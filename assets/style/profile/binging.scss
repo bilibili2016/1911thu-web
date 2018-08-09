@@ -86,6 +86,10 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            transition: all 400ms;
+            &:hover {
+              color: #6417a6;
+            }
             i {
               width: 42px;
               height: 18px;

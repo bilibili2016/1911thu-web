@@ -20,7 +20,7 @@
         <div class="courseList">查看
           <div class="course">
             <span></span>
-            <p v-for="(course,index) in code.orderCurriculumList" :key="index">
+            <p v-for="(course,index) in code.orderCurriculumList" :key="index" @click="goDetail(course)">
               <i v-if="course.type=='2'"></i>{{course.title}}
             </p>
           </div>
@@ -37,7 +37,8 @@
 <script>
 import { binding } from '~/lib/v1_sdk/index'
 import { timestampToYMD } from '@/lib/util/helper'
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['invitationCodeList'],
   data() {
@@ -45,13 +46,28 @@ export default {
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       bindForm: {
         courseId: ''
+      },
+      kidForm: {
+        kids: ''
       }
     }
   },
   methods: {
+    ...mapActions('auth', ['setKid']),
     // 时间戳转日期格式
     exchangeTime(time) {
       return timestampToYMD(time)
+    },
+    goDetail(item) {
+      if (item.type === '1') {
+        persistStore.set('curriculumId', item.curriculum_id)
+        this.kidForm.kids = item.curriculum_id
+        this.setKid(this.kidForm)
+        window.open(window.location.origin + '/course/coursedetail')
+      } else {
+        persistStore.set('projectId', item.curriculum_id)
+        window.open(window.location.origin + '/project/projectdetail')
+      }
     },
     // 检测兑换码内是否包含已绑定的课程
     detection() {

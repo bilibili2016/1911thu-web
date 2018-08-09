@@ -113,6 +113,9 @@
           color: rgba(51, 42, 81, 1);
           overflow: hidden;
           transition: all 500ms linear;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           &.itemBoxTitle {
             .title {
               display: block;

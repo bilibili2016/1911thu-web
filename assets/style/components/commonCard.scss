@@ -85,7 +85,7 @@
     .itemBox {
       cursor: pointer;
       width: 250px;
-      height: 294px;
+      height: 285px;
       display: flex;
       border-radius: 0;
       flex-direction: column;
@@ -130,15 +130,13 @@
             .title {
               display: block;
               line-height: 20px;
-              height: 38px;
+              height: 25px;
               color: #1c1f21;
               margin-top: 16px;
               padding-right: 15px;
               overflow: hidden;
               text-overflow: ellipsis;
-              display: -webkit-box;
-              -webkit-box-orient: vertical;
-              -webkit-line-clamp: 2;
+              white-space: nowrap;
             }
             .deputyTitle {
               height: 20px;

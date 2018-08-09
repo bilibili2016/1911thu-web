@@ -847,7 +847,7 @@ export default {
     // },
     showCommit() {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
-
+      // 否则的话就提醒如何绑定
       if (this.numForm.number === 1) {
         shopcart.existCourse().then(res => {
           if (res.data.is_exist_curriculum === 1) {
@@ -875,7 +875,26 @@ export default {
           }
         })
       } else {
-        this.$router.push('/shop/affirmorder')
+        this.$confirm(
+          '您购买了多份课程，支付成功后请前往‘个人中心-兑换码管理’查看生成的课程码，绑定兑换码后，购买的课程或项目即可观看。',
+          {
+            confirmButtonText: '去结算',
+            cancelButtonText: '取消',
+            closeOnHashChange: false,
+            // type: 'warning',
+            center: true
+          }
+        )
+          .then(() => {
+            this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
+          })
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消结算！'
+            })
+          })
+        // this.$router.push('/shop/affirmorder')
       }
 
       // this.showInfo = true
