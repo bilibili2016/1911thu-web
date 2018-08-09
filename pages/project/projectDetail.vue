@@ -68,7 +68,7 @@ import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import Procourse from '@/pages/project/projectCourse'
 import Proevaluate from '@/pages/project/projectevaluate'
-import Commonproblems from '@/pages/project/commonProblems'
+import Commonproblems from '@/pages/project/commonproblems'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {
