@@ -45,8 +45,9 @@ export default {
   methods: {
     ...mapActions('auth', ['setGid']),
     choiceCourse() {
-      // clearInterval(this.interval)
-      window.open(window.location.origin + '/course/chooselesson')
+      window.open(
+        window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
+      )
     },
     goMycourse(item) {
       this.gidForm.gids = item
@@ -70,12 +71,7 @@ export default {
             if (this.seconds < 1) {
               this.seconds = 0
               clearInterval(this.interval)
-              let paynumber = persistStore.get('paynumber')
-              if (Number(paynumber) > 1) {
-                this.goLink('tab-sixth')
-              } else {
-                this.goLink('tab-fourth')
-              }
+              this.goLink('tab-seven')
             } else {
               this.seconds--
             }

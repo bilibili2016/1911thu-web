@@ -1,11 +1,11 @@
 .dropdown {
-  width: 200px;
-  margin-left: 50px;
+  width: 190px;
+  margin-left: 10px;
   .item {
     display: inline-block;
   }
-  .el-dropdown {
-    margin-left: 38px;
+  .el-dropdown:nth-child(2) {
+    margin-left: 15px;
   }
 }
 .dropdown {

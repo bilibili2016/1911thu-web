@@ -2,18 +2,18 @@
   <div class="bindCourse">
     <div class="courseList">
       <div class="title clearfix">
-        <span>绑定邀请码</span>
+        <span>绑定兑换码</span>
         <el-button v-show="!courseList.addNewID" class="fr addClass" @click="addID" round>新增课程兑换码</el-button>
       </div>
       <div v-show="courseList.addNewID">
         <div class="courseID">
-          <span>绑定邀请码:</span>
-          <input v-model="courseList.inputID" placeholder=" 请输入您的邀请码">
+          <span>绑定兑换码:</span>
+          <input v-model="courseList.inputID" placeholder=" 请输入您的兑换码">
           <span class="error" v-show="courseList.showErr">{{courseList.error}}</span>
         </div>
         <div class="bindInfo">
-          <p>绑定邀请码说明：</p>
-          <p>1.输入邀请码，绑定兑换购买的商品</p>
+          <p>绑定兑换码说明：</p>
+          <p>1.输入兑换码，绑定兑换购买的商品</p>
           <p>2.绑定成功后，不可更改</p>
         </div>
         <div :class="[{'presentAble':courseList.presentAble},'present']">
@@ -22,7 +22,7 @@
       </div>
       <div class="courseIDList">
         <div class="oneID" v-for="(item,index) in courseList.courseID" :key="index">
-          <span>绑定邀请码：</span>
+          <span>绑定兑换码：</span>
           <span>{{item.invitation_code}}</span>
         </div>
       </div>
@@ -84,14 +84,14 @@ export default {
       this.courseList.addNewID = true
       this.$emit('isShowMsg', false)
     },
-    // 检测邀请码内是否包含已绑定的课程
+    // 检测兑换码内是否包含已绑定的课程
     detection() {
       this.bindForm.courseId = this.courseList.inputID
       bindid.detectionCode(this.bindForm).then(res => {
-        // 判断邀请码内是否包含已绑定的课程
+        // 判断兑换码内是否包含已绑定的课程
         if (res.data.is_exist === 1) {
           this.$confirm(
-            '该邀请码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
+            '该兑换码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
             {
               confirmButtonText: '坚持绑定',
               cancelButtonText: '取消',

@@ -163,12 +163,12 @@
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="全部" name="orderFirst">
                 <v-order v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" :config="configOne" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
-                <div class="content noOrder" v-else>
+                <!-- <div class="content noOrder" v-else>
                   <div class="noCourse">
                     <img :src="noMsgImg" alt="">
                     <h4>抱歉，没有更多的订单了~</h4>
                   </div>
-                </div>
+                </div> -->
               </el-tab-pane>
               <el-tab-pane name="orderSecond">
                 <span class="payCut" slot="label">未完成
@@ -511,15 +511,6 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-    <!-- 专属邀请码弹框 -->
-    <div class="invitationCodeBox">
-      <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center :show-close="false">
-        <span class="text">绑定优惠码，好课看不停</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="invitationConfim">确 定</el-button>
-        </span>
-      </el-dialog>
-    </div>
   </div>
 </template>
 
@@ -686,7 +677,6 @@ export default {
       invalidOrderLoad: true,
       historyOrderLoad: true,
       overTimeData: [],
-      centerDialogVisible: false,
       invitationCodeList: []
     }
   },
@@ -1111,26 +1101,16 @@ export default {
         this.historyOrderLoad = false
       })
     },
-    // 获取专属邀请码列表
+    // 获取专属兑换码列表
     getCodeList() {
-      return new Promise((resolve, reject) => {
-        profileHome.getCodeList(this.codeListForm).then(response => {
-          this.codeData = response.data.orderInvitationCodeList
-          resolve(true)
-        })
+      profileHome.getCodeList(this.codeListForm).then(response => {
+        this.codeData = response.data.orderInvitationCodeList
       })
     },
-    // 专属邀请码 邀请记录
+    // 专属兑换码 邀请记录
     getRecordList() {
-      return new Promise((resolve, reject) => {
-        profileHome.getRecordList(this.codeListForm).then(response => {
-          this.recordData = response.data.usedInvitationCodeList
-          var that = this
-          this.recordData.forEach(function(v, i, arr) {
-            v.create_time = that.timestampToTime(v.create_time)
-          })
-          resolve(true)
-        })
+      profileHome.getRecordList(this.codeListForm).then(response => {
+        this.recordData = response.data.usedInvitationCodeList
       })
     },
     // 获取已经添加的课程兑换码
@@ -1174,22 +1154,6 @@ export default {
           resolve(true)
         })
       })
-    },
-    // 判断是否显示绑定邀请码弹框
-    getAlertbox() {
-      if (
-        Number(persistStore.get('paynumber')) > 1 &&
-        persistStore.get('payComplete')
-      ) {
-        if (!persistStore.get('paynumbermsg')) {
-          this.centerDialogVisible = true
-        }
-      }
-    },
-    // 确认提示框
-    invitationConfim() {
-      this.centerDialogVisible = false
-      persistStore.set('paynumbermsg', '1')
     }
   },
   mounted() {
@@ -1215,9 +1179,6 @@ export default {
       // this.getOverTime()
       //过期的我的课程
       this.overStudyCurriculumList()
-      // 判断企业多份是否弹出框
-      // if (!persistStore.get('paynumbermsg')) {
-      this.getAlertbox()
       this.getUsedInvitationCodeList()
     }
     this.$bus.$emit('bannerShow', false)

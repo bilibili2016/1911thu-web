@@ -1,7 +1,7 @@
 <template>
   <div class="binding">
     <div class="bindInput clearfix">
-      <input type="text" v-model="bindForm.courseId" placeholder=" 请输入您的邀请码">
+      <input type="text" v-model="bindForm.courseId" placeholder=" 请输入您的兑换码">
       <span class="fr" @click="detection">确定</span>
     </div>
     <div class="bindingRecord">
@@ -36,7 +36,7 @@
 
 <script>
 import { binding } from '~/lib/v1_sdk/index'
-import { timestampToTime } from '@/lib/util/helper'
+import { timestampToYMD } from '@/lib/util/helper'
 import { mapGetters } from 'vuex'
 export default {
   props: ['invitationCodeList'],
@@ -51,9 +51,9 @@ export default {
   methods: {
     // 时间戳转日期格式
     exchangeTime(time) {
-      return timestampToTime(time)
+      return timestampToYMD(time)
     },
-    // 检测邀请码内是否包含已绑定的课程
+    // 检测兑换码内是否包含已绑定的课程
     detection() {
       if (
         this.bindForm.courseId == '' ||
@@ -62,14 +62,14 @@ export default {
         this.$message({
           showClose: true,
           type: 'error',
-          message: '请输入正确的邀请码！'
+          message: '请输入正确的兑换码！'
         })
       } else {
         binding.detectionCode(this.bindForm).then(res => {
-          // 判断邀请码内是否包含已绑定的课程
+          // 判断兑换码内是否包含已绑定的课程
           if (res.data.is_exist === 1) {
             this.$confirm(
-              '该邀请码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
+              '该兑换码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
               {
                 confirmButtonText: '坚持绑定',
                 cancelButtonText: '取消',

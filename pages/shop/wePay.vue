@@ -253,10 +253,6 @@ export default {
           this.orderCurriculumLists = response.data.data.orderCurriculumLists
           this.code_url = response.data.code_url
           this.qr_code = response.data.qr_code
-          persistStore.set(
-            'paynumber',
-            response.data.data.orderDetail.pay_number
-          )
           this.shopCartList()
           resolve(true)
           if (item === 'recode') {
@@ -300,7 +296,6 @@ export default {
           wepay.payResult(this.payListForm).then(response => {
             if (response.status === 0) {
               this.wxMask = false
-              persistStore.set('payComplete', true)
               this.$router.push('/shop/payresult')
               clearInterval(this.interval)
             }

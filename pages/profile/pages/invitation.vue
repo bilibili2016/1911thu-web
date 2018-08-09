@@ -29,11 +29,11 @@
     </div>
     <div class="rules clearfix">
       <div class="rulesInfo">
-        <h5>邀请规则</h5>
+        <h5>兑换规则</h5>
         <div class="word">
           <p>1、每一位好友通过您分享的兑换码成功加入课程，兑换码的使用次数将减少一次；</p>
           <p>2、兑换码使用次数用尽，该兑换码失效；</p>
-          <p>3、项目兑换码，绑定之后存入我的项目，项目兑换码，绑定之后存入我的课程，项目+兑换码，绑定之后分别存入我的项目、我的课程；</p>
+          <p>3、项目兑换码，绑定之后存入我的项目，课程兑换码，绑定之后存入我的课程，项目+课程兑换码，绑定之后分别存入我的项目、我的课程；</p>
           <p>4、若通过不正当手段获得兑换码，1911学堂有权撤销兑换码；</p>
         </div>
       </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { timestampToTime } from '@/lib/util/helper'
+import { timestampToYMD } from '@/lib/util/helper'
 export default {
   props: ['codeData'],
   data() {
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     exchangeTime(time) {
-      return timestampToTime(time)
+      return timestampToYMD(time)
     }
   }
 }

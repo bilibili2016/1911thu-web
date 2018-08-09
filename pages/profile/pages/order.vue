@@ -20,9 +20,10 @@
               </div>
             </div>
             <!-- 项目列表 -->
-            <!-- 课程项目显示3个-->
-            <div class="courseOne" v-for="(project,index) in courseList.orderProjectList" :key="project.id" v-if="courseList.orderProjectList.length && index<3">
+            <!-- 课程项目共显示3个-->
+            <div class="courseOne" v-for="(project,index) in courseList.orderProjectList" :key="project.id" v-if="courseList.orderProjectList.length && index<Number(courseList.orderCurriculumList.length)<3?3-Number(courseList.orderCurriculumList.length):0">
               <div class="courseImg">
+                <!-- 党政干部与企事业单位高管的终身学堂 -->
                 <!-- 项目图标 -->
                 <img class="project-img" src="@/assets/images/p4.png" alt="">
                 <img @click="goProjectInfo(project)" class="fl" :src="project.picture" alt="">
@@ -80,8 +81,15 @@ export default {
       gidForm: { gids: null }
     }
   },
+  mounted() {
+    this.arrLength()
+  },
   methods: {
     ...mapActions('auth', ['setGid', 'setKid']),
+    // 查询数组的长度
+    arrLength() {
+      // console.log(this.orderData)
+    },
     goCourseInfo(item, index) {
       this.kidForm.kids = item.curriculum_id
       persistStore.set('kid', item.curriculum_id)

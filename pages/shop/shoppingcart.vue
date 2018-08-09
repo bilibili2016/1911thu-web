@@ -517,7 +517,7 @@ export default {
           this.isRest = false
         }
         if (this.selectAllProject === true && this.selectAllProject === true) {
-          this.selectAll = true
+          // this.selectAll = true
         }
 
         // 判断课程和项目都没有时候显示购物车为空 img
@@ -822,7 +822,7 @@ export default {
         shopcart.existCourse().then(res => {
           if (res.data.is_exist_curriculum === 1) {
             this.$confirm(
-              '您所购买的商品与已购商品重复，建议您慎重选择，如果您继续购买，该订单将生成专属邀请码，需绑定后学习，绑定后重复商品将进行有效期累加。',
+              '您所购买的商品与已购商品重复，建议您慎重选择，如果您继续购买，该订单将生成专属兑换码，需绑定后学习，绑定后重复商品将进行有效期累加。',
               {
                 confirmButtonText: '去结算',
                 cancelButtonText: '取消',

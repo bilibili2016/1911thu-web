@@ -106,8 +106,7 @@
                 </el-radio-group>
               </p>
               <p class="word" v-show="!ticketForm.isRadio">
-                <i class="el-icon-warning"> </i>将有专人与您联系，请您留意，感谢您的支持！
-
+                <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
               </p>
             </div>
             <div class="formLi clearfix">
@@ -171,7 +170,7 @@
                   </el-radio-group>
                 </p>
                 <p class="word" v-show="!zzTicketForm.isRadio">
-                  <i class="el-icon-warning"> </i> 将有专人与您联系，请您留意，感谢您的支持！
+                  <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
                 </p>
               </div>
               <div class="formLi clearfix">
