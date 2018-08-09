@@ -30,7 +30,7 @@ export default {
       this.nidForm.nids = course.id
       this.setNid(this.nidForm)
       this.$emit('checkdetail', course.id)
-      window.open(window.location.origin + '/news/' + course.id)
+      window.open(window.location.origin + '/home/news/' + course.id)
     }
   }
 }

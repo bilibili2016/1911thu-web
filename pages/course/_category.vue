@@ -337,7 +337,7 @@ export default {
     this.categoryId = window.location.pathname.split('/')[2]
     // 获取是学院还是项目
     this.type = window.location.search.split('=')[1].split('&')[0]
-    // 获取是 选课还是 学院
+    // 获取是 选课 还是 学院
     this.xid = window.location.search.split('=')[2]
     // 点击顶部学院 或者 点击我要选课 页面
     if (this.type === '0') {
@@ -350,7 +350,9 @@ export default {
       } else {
         // 点击我要选课逻辑
         this.cidBg = window.location.pathname.split('/')[2]
-        this.pidBg = this.pid
+        this.cidform.pids = '0'
+        // this.cidform.cids = '0'
+        this.setCid(this.cidform)
         this.getCidPidList()
         // 我要选课 card list
         this.curriculumList()

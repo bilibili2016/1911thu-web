@@ -59,6 +59,7 @@ export default {
         kids: null
       },
       two_is_cart: 0,
+      cart: 0,
       curriculumcartids: {
         cartid: null,
         type: 1
@@ -73,18 +74,21 @@ export default {
       this.setKid(this.kidForm)
       window.open(window.location.origin + '/course/coursedetail')
     },
+    // 设置购物车中 is_cart 改变
+    handleChangeIsCart(item) {
+      for (let i of this.courseList) {
+        if (i === item) {
+          i.is_cart = 1
+        }
+      }
+    },
     // 添加购物车
-    handleAddShopCart(item) {
+    handleAddShopCart(item, cart) {
+      console.log(item, '这是item')
       // 第一次点击 没有 在购物车
       if (item.is_cart === 0) {
-        if (this.two_is_cart === 0) {
-          this.addCourseShopCart(item)
-        } else {
-          this.$message({
-            type: 'success',
-            message: '您的商品已经在购物车里面'
-          })
-        }
+        this.addCourseShopCart(item)
+        this.handleChangeIsCart(item)
       } else {
         // 第一次点击 在购物车
         this.$message({

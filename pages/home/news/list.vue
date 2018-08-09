@@ -4,11 +4,9 @@
 
     <div class="center shadow">
       <div class="breadCrumb">
-        <span>当前位置：</span>
-        <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>学堂资讯</el-breadcrumb-item>
-        </el-breadcrumb>
+        <!-- 面包屑组件 -->
+        <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+
       </div>
       <div @click="getNewInfoList"></div>
       <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
@@ -22,19 +20,25 @@
 
 <script>
 import CustomBanner from '@/components/common/Banner.vue'
-import CustomCard from '@/pages/news/components/List.vue'
+import CustomCard from '@/pages/home/news/components/List.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
 // import { other, home } from '~/lib/v1_sdk/index'
 import { news } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import BreadCrumb from '@/components/common/BreadCrumb.vue'
 export default {
   components: {
     'v-card': CustomCard,
     'v-page': CustomPagination,
-    'v-banner': CustomBanner
+    'v-banner': CustomBanner,
+    'v-breadcrumb': BreadCrumb
   },
   data() {
     return {
+      BreadCrumb: {
+        type: 'news',
+        text: '学堂资讯'
+      },
       bannerImg: 'http://papn9j3ys.bkt.clouddn.com/newList-bg.png',
       linksix: '/news/detail',
       configs: {

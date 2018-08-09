@@ -4,7 +4,7 @@
       <!-- 头部导航 -->
       <v-carousel :items="items" :config="configCarousel"></v-carousel>
       <!-- 最新项目 -->
-      <v-course :config="projectConfig" :data="projectData" :title="newprojecttitle" :link="linknewproject"></v-course>
+      <v-course :config="projectConfig" :data="projectData" :title="newprojecttitle" :link="linknewproject" style="background-color:#fff"></v-course>
       <!-- 免费专区 -->
       <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="freeCourse"></v-course>
       <!-- 最新课程 -->
@@ -27,7 +27,7 @@
 import Carousel from '@/components/common/Carousel.vue'
 
 import Famous from '@/pages/home/famous.vue'
-import Info from '@/pages/home/info.vue'
+import Info from '@/pages/home/news/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
 import { mapState, mapActions } from 'vuex'
@@ -54,8 +54,10 @@ export default {
       famoustitle: '名师智库',
       linkfamouscourse: '/teacher/list',
       infotitle: '学堂资讯',
-      linkinfo: '/news/list',
-      linkfive: '/news/detail',
+      linkinfo: '/home/news/list',
+
+      linkfive: 'home/news/detail',
+      linkSix: '/home/components/teacher',
       linkSeven: '/teacher/list',
       freeData: [],
       newData: [],

@@ -109,7 +109,7 @@ export default {
     //   url: 'http://edu.1911thu.com/news/' + this.nid
     // }
     // socialShare('.social-share', $config)
-    let nid = window.location.pathname.split('/')[2]
+    let nid = window.location.pathname.split('/')[3]
     this.getNewInfoDetail(nid)
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
