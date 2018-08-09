@@ -19,7 +19,6 @@
 <script>
 import { home } from '~/lib/v1_sdk/index'
 import CustomTitle from '@/components/common/Title.vue'
-import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -40,13 +39,10 @@ export default {
     'v-title': CustomTitle
   },
   methods: {
-    ...mapActions('auth', ['setTid']),
     goLink(item) {
       this.$router.push(item)
     },
     goTeacherInfo(item, index) {
-      this.tidForm.tids = item.id
-      this.setTid(this.tidForm)
       window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
     },
     getMore(item) {

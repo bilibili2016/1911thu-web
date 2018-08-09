@@ -134,7 +134,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid', 'setTid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid']),
     selectCid(item, index) {
       this.kidForm.kids = item.id
       persistStore.set('curriculumId', item.id)
@@ -164,8 +164,8 @@ export default {
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
-      this.setTid(this.tidForm)
-      window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
+
+      window.open(window.location.origin + '/home/teacher/' + this.tidForm.tids)
     },
     addShopCarts() {
       this.curriculumcartids.cartid = this.kid

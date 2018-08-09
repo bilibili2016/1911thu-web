@@ -120,7 +120,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   computed: {
-    ...mapState('auth', ['kid', 'tid']),
+    ...mapState('auth', ['kid']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
   data() {
@@ -249,7 +249,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
+    ...mapActions('auth', ['setHsg', 'signOut']),
     isHasClass() {
       let myVideo = document.getElementById('movd')
       // console.log(myVideo)
@@ -330,7 +330,6 @@ export default {
     goTeacherInfo(id) {
       this.tidForm.tids = Number(id)
 
-      this.setTid(this.tidForm)
       window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
     },
     // 提示跳转购车

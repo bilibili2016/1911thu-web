@@ -6,22 +6,21 @@
     <div class="main">
       <div class="headerLogo fl" @click="goLinker('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
-        <!-- <img src="@/assets/images/logo.png" alt=""> -->
       </div>
       <div class="backHome">
         <span @click="goLinker('/')">首页</span>
       </div>
       <v-tabs></v-tabs>
-      <div class="teach" @click="goLinker('/home/famous')">
+      <div class="teach" @click="goLinker('/home/teacher/list')">
         <span>名师智库</span>
       </div>
       <div class="search">
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
-      <div :class="['HREntry' ,{islogined : isAuthenticated }]">
 
-        <span class="hrin center" @click="goLinker('/other/institutional')">单位入口
+      <div :class="['HREntry' ,{islogined : isAuthenticated }]">
+        <span class="hrin center" @click="goSearchd('/other/activePages/institutional')">单位入口
           <i></i>
         </span>
         <span class="center" @click="addEcg" style="width:90px;">课程兑换码
@@ -46,6 +45,7 @@
           <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
       </div>
+
       <!-- 登录注册按钮 -->
       <v-lrbtn v-if="!isAuthenticated"></v-lrbtn>
 
@@ -372,12 +372,12 @@ export default {
       ) {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
-          case '/other/search':
+          case '/other/pages/search':
             this.$router.go()
             break
           default:
-            this.$router.push('/other/search')
-            // window.open(window.location.origin + '/other/search')
+            this.$router.push('/other/pages/search')
+            // window.open(window.location.origin + '/other/pages/search')
             break
         }
       } else {
@@ -452,7 +452,7 @@ export default {
     },
     // 用户协议
     userProtocol() {
-      window.open(window.location.origin + '/other/userProtocol')
+      window.open(window.location.origin + '/other/activePages/userProtocol')
     }
     // 获取专属兑换码列表
     // getCodeList() {

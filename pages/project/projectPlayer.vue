@@ -221,7 +221,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg', 'setTid', 'signOut']),
+    ...mapActions('auth', ['setHsg', 'signOut']),
     // isHasClass() {
     //   let myVideo = document.getElementById('movd')
     //   if (myVideo == null) {

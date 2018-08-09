@@ -20,14 +20,10 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['courseList'],
   data() {
-    return {
-      tidForm: {
-        tids: ''
-      }
-    }
+    return {}
   },
   methods: {
-    ...mapActions('auth', ['setTid', 'setIsCollection']),
+    ...mapActions('auth', ['setIsCollection']),
     handleLinkTeacher(item) {
       this.$emit('handleLinkTeacher', item.teacher_id)
     }

@@ -18,7 +18,7 @@
 export default {
   methods: {
     handleLink() {
-      window.open(window.location.origin + '/other/homeUs')
+      window.open(window.location.origin + '/other/pages/homeUs')
     }
   }
 }
