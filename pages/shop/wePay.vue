@@ -36,16 +36,16 @@
                 <div class="method">
                   <div class="center">
                     <div class="wx fl" @click="selectWx" :class="{borderColor: wxMsg}">
-                      <img src="@/assets/images/wxp.png" alt="">
-                      <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="wxMsg">
+                      <img src="http://papn9j3ys.bkt.clouddn.com/wxp.png" alt="">
+                      <img src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" class="okImg" v-if="wxMsg">
                     </div>
                     <div class="pub fr" @click="selectPub" :class="{borderColor: pubMsg}">
-                      <img src="@/assets/images/payPublic.png" alt="">
-                      <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="pubMsg">
+                      <img src="http://papn9j3ys.bkt.clouddn.com/payPublic.png" alt="">
+                      <img src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" class="okImg" v-if="pubMsg">
                     </div>
                     <div class="zfb fr" @click="selectZfb" :class="{borderColor: zfbMsg}">
-                      <img src="@/assets/images/zfb.png" alt="">
-                      <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="zfbMsg">
+                      <img src="http://papn9j3ys.bkt.clouddn.com/zfb.png" alt="">
+                      <img src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" class="okImg" v-if="zfbMsg">
                     </div>
                   </div>
                 </div>

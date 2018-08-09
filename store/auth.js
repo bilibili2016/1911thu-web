@@ -8,16 +8,11 @@ persistStore.defaults({
   token: null,
   cid: null,
   cg: null,
-  did: null,
   pid: null,
   gid: null,
-  hsg: null,
 
   kid: null,
-  isShowTip: null,
   productsNum: null,
-  number: null,
-  index: null,
   cindex: null
 })
 let user = persistStore.get('user')
@@ -26,14 +21,9 @@ let cid = persistStore.get('cid')
 let cg = persistStore.get('cg')
 let cindex = persistStore.get('cindex')
 let pid = persistStore.get('pid')
-let did = persistStore.get('did')
 let gid = persistStore.get('gid')
-let hsg = persistStore.get('hsg')
 let kid = persistStore.get('kid')
-let isShowTip = persistStore.get('isShowTip')
 let productsNum = persistStore.get('productsNum')
-let number = persistStore.get('number')
-let index = persistStore.get('index')
 
 export const MUTATION = {
   signIn: 'sign-in',
@@ -43,29 +33,19 @@ export const MUTATION = {
   setCid: 'set-cid',
   setCg: 'set-cg',
   setPid: 'set-pid',
-  setDid: 'set-did',
   setGid: 'set-gid',
-  setHsg: 'set-hsg',
   setKid: 'set-kid',
-  setIsShowTip: 'set-isShowTip',
-  setProductsNum: 'set-productsNum',
-  setNumber: 'set-number',
-  setIndex: 'set-index'
+  setProductsNum: 'set-productsNum'
 }
 export const state = () => ({
   user,
   token,
   cid,
-  did,
   pid,
   gid,
-  hsg,
   // nid,
   kid,
-  isShowTip,
   productsNum,
-  number,
-  index,
   cindex,
   cg
 })
@@ -75,9 +55,6 @@ export const getters = {
   },
   getProductsNum(state) {
     return state.productsNum
-  },
-  isShowTip(state) {
-    return state.isShowTip
   }
 }
 
@@ -106,48 +83,17 @@ export const mutations = {
   [MUTATION.setPid](state, { pid }) {
     state.pid = pid
   },
-  [MUTATION.setDid](state, { did }) {
-    state.did = did
-  },
   [MUTATION.setGid](state, { gid }) {
     state.gid = gid
-  },
-  [MUTATION.setHsg](state, { hsg }) {
-    state.hsg = hsg
   },
   [MUTATION.setKid](state, { kid }) {
     state.kid = kid
   },
-  [MUTATION.setIsShowTip](state, { isShowTip }) {
-    state.isShowTip = isShowTip
-  },
   [MUTATION.setProductsNum](state, { productsNum }) {
     state.productsNum = productsNum
-  },
-  [MUTATION.setNumber](state, { number }) {
-    state.number = number
-  },
-  [MUTATION.setIndex](state, { index }) {
-    state.index = index
   }
 }
 export const actions = {
-  // 单点登录标记
-  async setDid({ commit, state }, { dids }) {
-    try {
-      let did = dids
-
-      persistStore.set('did', did)
-      commit(MUTATION.setDid, { did })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return did
-  },
   async setToken({ commit, state }, { tokens }) {
     try {
       let token = tokens
@@ -303,20 +249,6 @@ export const actions = {
     }
     return gid
   },
-  async setHsg({ commit, state }, { hsgs }) {
-    try {
-      let hsg = hsgs
-      persistStore.set('hsg', hsg)
-      commit(MUTATION.setHsg, { hsg })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return gid
-  },
   async setKid({ commit, state }, { kids }) {
     try {
       let kid = kids
@@ -331,20 +263,6 @@ export const actions = {
     }
     return kid
   },
-  async setIsShowTip({ commit, state }, { isShowTips }) {
-    try {
-      let isShowTip = isShowTips
-      persistStore.set('isShowTip', isShowTip)
-      commit(MUTATION.setIsShowTip, { isShowTip })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return isShowTip
-  },
   async setProductsNum({ commit, state }, { pn }) {
     try {
       let productsNum = pn
@@ -358,33 +276,5 @@ export const actions = {
       }
     }
     return productsNum
-  },
-  async setNumber({ commit, state }, { numbers }) {
-    try {
-      let number = numbers
-      persistStore.set('number', number)
-      commit(MUTATION.setNumber, { number })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return productsNum
-  },
-  async setIndex({ commit, state }, { indexs }) {
-    try {
-      let index = indexs
-      persistStore.set('index', index)
-      commit(MUTATION.setIndex, { index })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return gid
   }
 }

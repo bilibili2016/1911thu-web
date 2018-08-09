@@ -14,5 +14,4 @@
 // console.log(store.getters['auth/isAuthenticated'])
 // console.log(window.location.pathname, '这是参数')
 // if(window.location.pathname === '/course/player'){
-//   this.setHsg(this.hsgForm)
 // }

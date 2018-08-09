@@ -6,7 +6,6 @@
         <span class="top-desc">About us</span>
       </div>
     </div>
-    <!-- <div class="left"></div> -->
     <div class="content" id="content">
       <el-tabs type="card" tab-position="left" @tab-click="handleClick">
 
@@ -33,7 +32,7 @@
 </template>
 
 <script>
-import { About, auth } from '@/lib/v1_sdk/index'
+import { About } from '@/lib/v1_sdk/index'
 export default {
   data() {
     return {

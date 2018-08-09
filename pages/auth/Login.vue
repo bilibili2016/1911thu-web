@@ -408,9 +408,6 @@ export default {
         '/profile',
         '/shop/wepay'
       ],
-      didForm: {
-        dids: ''
-      },
       mobileloginmsg: false
     }
   },
@@ -427,7 +424,6 @@ export default {
       'signOut',
       'setToken',
       'setPwd',
-      'setDid'
     ]),
     // 验证手机登录还是账号密码登录
     mobilelogin() {
@@ -901,7 +897,6 @@ export default {
   },
   mounted() {
     let me = this
-    this.setDid(this.didForm)
     this.$bus.$on('loginShow', data => {
       this.loginCardShow()
     })

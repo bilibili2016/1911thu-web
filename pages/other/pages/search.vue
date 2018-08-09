@@ -85,35 +85,32 @@ export default {
     },
     searchCurriculumList() {
       this.loadSearch = true
-      return new Promise((resolve, reject) => {
-        search.searchCurriculumList(this.searchForm).then(response => {
-          this.searchData = response.data.curriculumList
-          if (response.data.curriculumList.length === 0) {
-            this.result = false
-            this.courseNumber = 0
-            this.getLikeList()
-          } else {
-            this.result = true
-            this.pagemsg.total = Math.ceil(
-              response.data.curriculumList.length / 20
-            )
-            this.courseNumber = response.data.curriculumList.length
-            this.loading = false
-          }
-          resolve(true)
-          this.loadSearch = false
-        })
+
+      search.searchCurriculumList(this.searchForm).then(response => {
+        this.searchData = response.data.curriculumList
+        if (response.data.curriculumList.length === 0) {
+          this.result = false
+          this.courseNumber = 0
+          this.getLikeList()
+        } else {
+          this.result = true
+          this.pagemsg.total = Math.ceil(
+            response.data.curriculumList.length / 20
+          )
+          this.courseNumber = response.data.curriculumList.length
+          this.loading = false
+        }
+
+        this.loadSearch = false
       })
     },
     // 获取猜你喜欢列表
     getLikeList() {
-      return new Promise((resolve, reject) => {
-        search.getLikeList(this.getLikeForm).then(response => {
-          this.getData = response.data.curriculumList
-          if (this.getData !== 0) {
-            this.loadinged = false
-          }
-        })
+      search.getLikeList(this.getLikeForm).then(response => {
+        this.getData = response.data.curriculumList
+        if (this.getData !== 0) {
+          this.loadinged = false
+        }
       })
     }
   },

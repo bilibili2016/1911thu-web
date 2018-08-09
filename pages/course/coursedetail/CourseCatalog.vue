@@ -12,6 +12,9 @@
 </template>
 
 <script>
+/**
+ * 组件名字
+ */
 import CustomLine from '@/components/common/Line.vue'
 export default {
   props: ['activeName', 'courseList', 'loadMsg', 'catalogs', 'privileMsg'],

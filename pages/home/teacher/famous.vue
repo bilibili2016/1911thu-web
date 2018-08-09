@@ -43,7 +43,7 @@ export default {
       this.$router.push(item)
     },
     goTeacherInfo(item, index) {
-      window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
+      window.open(window.location.origin + '/home/teacher/' + this.tidForm.tids)
     },
     getMore(item) {
       window.open(window.location.origin + item)
