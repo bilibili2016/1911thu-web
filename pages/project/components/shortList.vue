@@ -1,7 +1,7 @@
 <template>
   <!-- 项目列表card组件[首页]-->
   <div class="shortlist">
-    <div class="goodCourse project clearfix">
+    <div class="goodCourse project">
       <div class="courseLi clearfix" v-for="(course,index) in cardData" :key="index" @click="courseInfo(course)">
         <div class="fl">
           <img :src="projectImg" alt="" class="project-img">
@@ -57,8 +57,6 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     .courseLi {
-      float: left;
-      margin-right: 15px;
       width: 534px;
       height: 160px;
       margin-bottom: 50px;
@@ -68,7 +66,7 @@ export default {
       transition: all 400ms;
       position: relative;
       cursor: pointer;
-      &:last-child {
+      &:nth-child(2n) {
         margin-right: 0;
       }
       &:hover {

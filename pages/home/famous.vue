@@ -1,7 +1,7 @@
 <template>
   <!-- 名师智库 -->
   <div class="teachers">
-    <v-title :title="title" :link="link"></v-title>
+    <v-title :title="famoustitle" :link="linkfamouscourse"></v-title>
     <div class="cardList ">
       <div class="item" v-for="(teacher,index) in teachers" :key="index" @click="goTeacherInfo(teacher,index)">
         <div class="item-img">
@@ -17,15 +17,23 @@
 </template>
 
 <script>
+import { home } from '~/lib/v1_sdk/index'
 import CustomTitle from '@/components/common/Title.vue'
 import { mapActions } from 'vuex'
 export default {
-  props: ['teachers', 'title', 'link'],
   data() {
     return {
       tidForm: {
         tids: null
-      }
+      },
+      teacherForm: {
+        pages: 1,
+        limits: 7,
+        recommend: 1
+      },
+      famoustitle: '名师智库',
+      teachers: [],
+      linkfamouscourse: '/teacher/list'
     }
   },
   components: {
@@ -43,7 +51,16 @@ export default {
     },
     getMore(item) {
       window.open(window.location.origin + item)
+    },
+    getTeacherList() {
+      home.getTeacherList(this.teacherForm).then(response => {
+        this.teachers = response.data.teacherList
+        // this.teacherResource = response.data.teacherList
+      })
     }
+  },
+  mounted() {
+    this.getTeacherList()
   }
 }
 </script>
