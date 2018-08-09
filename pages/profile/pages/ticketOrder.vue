@@ -24,7 +24,7 @@
                 </div>
               </div>
               <!-- 项目列表 -->
-              <div class="courseOne" v-if="courseList.orderProjectList.length && index<3" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
+              <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
                 <div class="courseImg">
                   <!-- 项目图标 -->
                   <img class="project-img" src="@/assets/images/p4.png" alt="">
@@ -523,6 +523,14 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid', 'setKid']),
+    computedLength(course, project, index) {
+      let projectLength = course.length > 3 ? 0 : 3 - course.length
+      if (index < projectLength) {
+        return true
+      } else {
+        return false
+      }
+    },
     goCourseInfo(item, index) {
       this.kidForm.kids = item.curriculum_id
       persistStore.set('kid', item.curriculum_id)
