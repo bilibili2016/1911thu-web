@@ -13,7 +13,7 @@
 
 <script>
 import CustomBanner from '@/components/common/Banner.vue'
-import CustomCard from '@/pages/teacher/components/Card.vue'
+import CustomCard from '@/pages/home/teacher/components/Card.vue'
 import CustomPagination from '@/components/common/Pagination.vue'
 import { list } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'

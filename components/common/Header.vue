@@ -110,7 +110,7 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { MessageBox } from 'element-ui'
 import { encryption } from '~/lib/util/helper'
 import Tabs from '@/components/common/Tabs.vue'
-import Login from '@/components/common/Login.vue'
+import Login from '@/pages/auth/Login.vue'
 export default {
   components: {
     'v-tabs': Tabs,
