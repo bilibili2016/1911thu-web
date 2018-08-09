@@ -66,7 +66,7 @@
 <script>
 import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
-import Procourse from '@/pages/project/projectCourse'
+import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
 import Commonproblems from '@/pages/project/commonproblems'
 import { store as persistStore } from '~/lib/core/store'
@@ -144,7 +144,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     // 获取项目详情
     getProjectInfo() {
       projectdetail.getProjectInfo(this.project).then(res => {
