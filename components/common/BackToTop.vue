@@ -40,7 +40,7 @@
       <div class="back-to-ceiling customStyleThree" v-show="true" @click="checkCourse">
 
         <div class="line-wrap">
-          <img src="@/assets/images/chooseCourse-icon.gif" alt="">
+          <img src="http://papn9j3ys.bkt.clouddn.com/chooseCourse-icon.gif" alt="">
           <!-- <div class="line-centerd">
             <span>我要选课</span>
           </div> -->

@@ -6,8 +6,6 @@
     justify-content: space-between;
     flex-wrap: wrap;
     .courseLi {
-      float: left;
-      margin-right: 15px;
       width: 534px;
       height: 160px;
       margin-bottom: 50px;
@@ -17,7 +15,7 @@
       transition: all 400ms;
       position: relative;
       cursor: pointer;
-      &:last-child {
+      &:nth-child(2n) {
         margin-right: 0;
       }
       &:hover {

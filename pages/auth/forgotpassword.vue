@@ -4,7 +4,7 @@
     <div class="start forgot">
       <div class="lrFrame">
         <div class="logo">
-          <img src="@/assets/images/1911xt.png" alt="">
+          <img src="http://papn9j3ys.bkt.clouddn.com/1911xt.png" alt="">
         </div>
         <div class="pwd">
           <span>忘记密码</span>

@@ -316,9 +316,6 @@ export default {
         })
       }
     },
-    goSearchd(item) {
-      this.$router.push(item)
-    },
     // 跳转到指定页
     goLinker(item) {
       this.$router.push(item)

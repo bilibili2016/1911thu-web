@@ -4,16 +4,16 @@
       <!-- v-for="(course,index) in courseList -->
       <div class="course clearfix  ">
         <el-card class="fl" :body-style="{ padding: '0px' }">
-          <!-- <div class="goodplay">
+          <div class="goodplay" v-if="isShowCover">
             <img :src="courseList.picture" class="image">
             <div class="mask">1</div>
-            <div class="common-button btn-bg"> -->
-          <!-- 登录 不登录 播放按钮 -->
-          <!-- <div class="playBtn-detail">
+            <div class="common-button btn-bg">
+              <!-- 登录 不登录 播放按钮 -->
+              <div class="playBtn-detail">
                 <img :src="playImg" alt="" @click="handleImgPlay(courseList)">
               </div>
-            </div> -->
-          <!-- </div> -->
+            </div>
+          </div>
           <v-player></v-player>
         </el-card>
         <div class="particularss fr">
@@ -88,6 +88,7 @@
                   <!-- 未购买 购买判断  未购买-->
                   <div v-if="privileMsg===false ">
                     <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
+                    <el-button type="primary " plain @click="freeStudy(courseList) ">免费试看</el-button>
                   </div>
                   <!-- 未购买 购买判断  已购买-->
                   <div v-if="privileMsg===true ">
@@ -130,7 +131,6 @@
             <!-- 收费课程 已学习 说明已经购买  end-->
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -152,6 +152,7 @@ export default {
   },
   data() {
     return {
+      isShowCover: true,
       playImg: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       two_is_cart: 0,
       curriculumcartids: {
@@ -167,6 +168,15 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
+    // 免费试看
+    freeStudy(item) {
+      if (this.isAuthenticated) {
+        this.getDefaultCurriculumCatalogId(item)
+      } else {
+        // 当用户未登录
+        this.$bus.$emit('loginShow', true)
+      }
+    },
     // 获取默认小节 跳转 章节id和小节id
     getDefaultCurriculumCatalogId(item) {
       persistStore.set(
@@ -184,14 +194,8 @@ export default {
     handleImgPlay(item) {
       // 用户已登录
       if (this.isAuthenticated) {
-        // 用户已购买
-        if (this.privileMsg === true) {
-          window.open(window.location.origin + '/course/player')
-        } else {
-          // 用户未购买
-          // console.log(item, '这是item')
-          this.getDefaultCurriculumCatalogId(item)
-        }
+        this.isShowCover = false
+        this.getDefaultCurriculumCatalogId(item)
       } else {
         // 未登录直接弹出登录
         this.$bus.$emit('loginShow', true)

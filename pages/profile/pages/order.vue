@@ -21,7 +21,7 @@
             </div>
             <!-- 项目列表 -->
             <!-- 课程项目共显示3个-->
-            <div class="courseOne" v-for="(project,index) in courseList.orderProjectList" :key="project.id" v-if="courseList.orderProjectList.length && index<Number(courseList.orderCurriculumList.length)<3?3-Number(courseList.orderCurriculumList.length):0">
+            <div class="courseOne" v-for="(project,index) in courseList.orderProjectList" :key="project.id" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)">
               <div class="courseImg">
                 <!-- 党政干部与企事业单位高管的终身学堂 -->
                 <!-- 项目图标 -->
@@ -86,6 +86,14 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid', 'setKid']),
+    computedLength(course, project, index) {
+      let projectLength = course.length > 3 ? 0 : 3 - course.length
+      if (index < projectLength) {
+        return true
+      } else {
+        return false
+      }
+    },
     // 查询数组的长度
     arrLength() {
       // console.log(this.orderData)

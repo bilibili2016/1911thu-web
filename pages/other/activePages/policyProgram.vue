@@ -14,9 +14,9 @@
       <div class="content-inner">
         <div class="program-bg">
           <div class="title">
-            <img class="titlt-icon-left" src="@/assets/images/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon1.png" alt="">
             <span class="text">项目背景</span>
-            <img class="titlt-icon-right" src="@/assets/images/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon2.png" alt="">
           </div>
           <div class="desc">
             <p>干部教育培训是建设高素质干部队伍的先导性、基础性、战略性工程，在推进中国特色社会主义伟大事业和党的建设中具有不可替代的地位和作用。中央组织部办公厅印发的《干部教育培训工作条例》中明确强调，干部教育培训是传播党的理论和路线方针政策的重要载体，是建设学习型、服务型、创新型马克思主义执政党的有效抓手，是提高干部教育培训质量效益的基础保障。</p>
@@ -26,9 +26,9 @@
         </div>
         <div class="study-info">
           <div class="title">
-            <img class="titlt-icon-left" src="@/assets/images/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon1.png" alt="">
             <span class="text">学习对象</span>
-            <img class="titlt-icon-right" src="@/assets/images/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon2.png" alt="">
           </div>
           <div class="info clearfix">
             <div class="item item-one">
@@ -51,9 +51,9 @@
         </div>
         <div class="teach-info">
           <div class="title">
-            <img class="titlt-icon-left" src="@/assets/images/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon1.png" alt="">
             <span class="text">线上模式</span>
-            <img class="titlt-icon-right" src="@/assets/images/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon2.png" alt="">
           </div>
           <div class="item clearfix">
             <div class="left">
@@ -108,9 +108,9 @@
         </div>
         <div class="other-info">
           <div class="title">
-            <img class="titlt-icon-left" src="@/assets/images/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon1.png" alt="">
             <span class="text">学习方式及优势</span>
-            <img class="titlt-icon-right" src="@/assets/images/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon2.png" alt="">
           </div>
           <div class="study-content clearfix">
             <div class="info info1">
@@ -155,7 +155,7 @@
         <div class="distinctive">
           <div class="lietOne">
             <div class="dttImg fl">
-              <img src="~assets/images/distinctive_1.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/distinctive_1.png" alt="">
             </div>
             <h4 class="fl">项目特色</h4>
             <div class="inner">
@@ -170,7 +170,7 @@
           </div>
           <div class="lietOne">
             <div class="dttImg fl">
-              <img src="~assets/images/distinctive_2.png" alt="">
+              <img src="http://papn9j3ys.bkt.clouddn.com/distinctive_2.png" alt="">
             </div>
             <h4 class="fl">学习收获</h4>
             <div class="inner">
@@ -187,9 +187,9 @@
         </div>
         <div class="course">
           <div class="title">
-            <img class="titlt-icon-left" src="@/assets/images/program-yellow-icon1.png" alt="">
+            <img class="titlt-icon-left" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon1.png" alt="">
             <span class="text">授课师资</span>
-            <img class="titlt-icon-right" src="@/assets/images/program-yellow-icon2.png" alt="">
+            <img class="titlt-icon-right" src="http://papn9j3ys.bkt.clouddn.com/program-yellow-icon2.png" alt="">
           </div>
           <p class="course-info">师资是一个培训项目质量的关键，良好的师资队伍是学员学习收益最大化的保障。本项目授课师资由三支队伍组成：</p>
           <div class="course-item clearfix">

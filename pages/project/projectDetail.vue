@@ -6,7 +6,7 @@
         <div class="headerL fl">
           <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>分类列表</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/course/16?pid=1&xid=0' }">分类列表</el-breadcrumb-item>
             <el-breadcrumb-item>项目详情</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -26,9 +26,9 @@
       <h3>{{projectDetail.deputy_title}}</h3>
       <h5>
         <span>{{projectDetail.study_time}} 课时</span>
-        <i></i>
+        <i class="line"></i>
         <span>学习人数 {{projectDetail.study_number}}</span>
-        <i></i>
+        <i class="line"></i>
         <el-rate v-model="projectDetail.score" disabled></el-rate>
       </h5>
       <div class="price clearfix">
@@ -66,9 +66,9 @@
 <script>
 import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
-import Procourse from '@/pages/project/projectCourse'
+import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
-import Commonproblems from '@/pages/project/commonProblems'
+import Commonproblems from '@/pages/project/commonproblems'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {
@@ -144,7 +144,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     // 获取项目详情
     getProjectInfo() {
       projectdetail.getProjectInfo(this.project).then(res => {
@@ -160,7 +160,6 @@ export default {
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
         this.evaluateData = res.data.evaluateList
         this.evaluateInfo = res.data.totalEvaluateInfo
-
         this.evaluateDataLoad = false
       })
     },

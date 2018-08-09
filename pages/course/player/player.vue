@@ -12,7 +12,7 @@
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
           <div class="ewCode">
-            <img src="@/assets/images/attentionWechat2.png" alt="">
+            <img src="http://papn9j3ys.bkt.clouddn.com/attentionWechat2.png" alt="">
             <i></i>
           </div>
         </span>
@@ -144,7 +144,7 @@ export default {
       radioBtn: '',
       playing: '',
       playImg: require('@/assets/images/playImg.gif'),
-      pauseImg: require('@/assets/images/video.png'),
+      pauseImg: require('http://papn9j3ys.bkt.clouddn.com/video.png'),
       // gifImg: require('@/assets/images/playImg.gif'),
       player: {},
       courseList: [
