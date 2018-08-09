@@ -1116,6 +1116,7 @@ export default {
     getUsedInvitationCodeList() {
       profileHome.getUsedInvitationCodeList().then(response => {
         this.invitationCodeList = response.data.usedInvitationCodeList
+        console.log(this.invitationCodeList)
       })
     },
     // 格式化时间戳
