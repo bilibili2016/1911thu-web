@@ -896,7 +896,7 @@ export default {
     },
     // 打开用户注册协议
     userProtocol() {
-      window.open(window.location.origin + '/other/userProtocol')
+      window.open(window.location.origin + '/other/activePages/userProtocol')
     }
   },
   mounted() {

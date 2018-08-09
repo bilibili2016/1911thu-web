@@ -274,17 +274,17 @@ export default {
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_7.png',
           title: '单位课程定制',
-          link: '/other/enterprisecustom'
+          link: '/other/activePages/enterprisecustom'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_8.png',
           title: '学位项目',
-          link: '/other/degree'
+          link: '/other/activePages/degree'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_9.png',
           title: '面授及线下活动',
-          link: '/other/faceteach'
+          link: '/other/activePages/faceteach'
         }
       ],
       buyList: [

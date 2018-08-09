@@ -14,7 +14,7 @@
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
       <div :class="['HREntry' ,{islogined : isAuthenticated }]">
-        <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
+        <span class="hrin center" @click="goSearchd('/other/activePages/institutional')">单位入口
           <i></i>
         </span>
         <span class="center" @click="addEcg" style="width:90px;">课程兑换码
@@ -361,12 +361,12 @@ export default {
       ) {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
-          case '/other/search':
+          case '/other/pages/search':
             this.$router.go()
             break
           default:
-            this.$router.push('/other/search')
-            // window.open(window.location.origin + '/other/search')
+            this.$router.push('/other/pages/search')
+            // window.open(window.location.origin + '/other/pages/search')
             break
         }
       } else {
@@ -445,7 +445,7 @@ export default {
     },
     // 用户协议
     userProtocol() {
-      window.open(window.location.origin + '/other/userProtocol')
+      window.open(window.location.origin + '/other/activePages/userProtocol')
     }
     // 获取专属邀请码列表
     // getCodeList() {
