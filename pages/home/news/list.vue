@@ -3,11 +3,8 @@
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
 
     <div class="center shadow">
-      <div class="breadCrumb">
-        <!-- 面包屑组件 -->
-        <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-
-      </div>
+      <!-- 面包屑组件 -->
+      <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
       <div @click="getNewInfoList"></div>
       <!-- <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card> -->
       <v-card :newsList="newsList" :config="config" :linksix='linksix' @checkdetail="checkdetail" class="new-card-on"></v-card>

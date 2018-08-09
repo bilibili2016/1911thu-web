@@ -15,6 +15,16 @@
       left: 0;
     }
   }
+  .breadCrumb {
+    height: 80px;
+    line-height: 80px;
+    width: 1100px;
+    margin: 0 auto;
+    div {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
   .detail .newsContent h3 {
     margin: 0;
     padding: 59px 45px 0;
@@ -38,11 +48,12 @@
     cursor: pointer;
   }
   .el-breadcrumb {
-    width: 1100px;
-    height: 84px;
-    line-height: 84px;
-    margin: 0 auto;
+    // width: 1100px;
+    // height: 84px;
+    // line-height: 84px;
+    // margin: 0 auto;
     font-size: 14px;
+    line-height: 1;
   }
   .detail {
     width: 1100px;
@@ -87,7 +98,7 @@
         line-height: 30px;
         color: #222;
         text-align: center;
-        margin: 59px 45px 0;
+        margin: 30px 45px 0;
       }
       .time {
         font-size: 14px;

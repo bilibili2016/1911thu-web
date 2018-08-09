@@ -3,12 +3,8 @@
     <div class="news-banner">
       <img :src="bannerImg" alt="">
     </div>
-    <!-- 面包屑 -->
-    <el-breadcrumb class="news" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>当前位置</el-breadcrumb-item>
-      <el-breadcrumb-item class="home" @click.native="getMore('/')">首页</el-breadcrumb-item>
-      <el-breadcrumb-item class="current">新闻资讯</el-breadcrumb-item>
-    </el-breadcrumb>
+    <!-- 面包屑组件 -->
+    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
     <!-- 新闻内容 -->
     <div class="detail">
       <!-- 分享暂时注释 -->
@@ -40,15 +36,21 @@ import CustomBanner from '@/components/common/Banner.vue'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { news } from '~/lib/v1_sdk/index'
 import { timestampToTime } from '~/lib/util/helper'
+import BreadCrumb from '@/components/common/BreadCrumb.vue'
 export default {
   computed: {
     ...mapState('auth', ['nid'])
   },
   components: {
-    'v-banner': CustomBanner
+    'v-banner': CustomBanner,
+    'v-breadcrumb': BreadCrumb
   },
   data() {
     return {
+      BreadCrumb: {
+        type: 'newsDetail',
+        text: '新闻资讯'
+      },
       bannerImg: 'http://papn9j3ys.bkt.clouddn.com/profile_banner03.png',
       newsDetail: {},
       loading: true,

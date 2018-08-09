@@ -1,4 +1,5 @@
 <template>
+  <!-- 我的消息 -->
   <div>
     <template>
       <div class="content clearfix" v-for="(card,index) in infoList" :index="index" :key="card.id">
@@ -48,5 +49,6 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+// 页面有兼容
 @import '~assets/style/profile/info.scss';
 </style>
