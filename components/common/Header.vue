@@ -46,7 +46,6 @@
         </div>
       </div>
 
-
       <div class="lrBtn" v-if="!isAuthenticated">
         <span class="login" @click="login">登录</span>
 
@@ -356,12 +355,12 @@ export default {
       ) {
         persistStore.set('key', this.search)
         switch (window.location.pathname) {
-          case '/course/search':
+          case '/other/search':
             this.$router.go()
             break
           default:
-            this.$router.push('/course/search')
-            // window.open(window.location.origin + '/course/search')
+            this.$router.push('/other/search')
+            // window.open(window.location.origin + '/other/search')
             break
         }
       } else {

@@ -39,9 +39,6 @@ export default {
     selectCid(val) {
       this.kidForm.kids = val
       this.setKid(this.kidForm)
-    },
-    getMore(item) {
-      window.open(window.location.origin + '/course/pages/' + '1')
     }
   }
 }
