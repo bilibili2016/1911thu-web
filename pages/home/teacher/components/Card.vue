@@ -24,7 +24,7 @@ export default {
   props: ['famousList'],
   methods: {
     handleLinkTeacherInfo(item) {
-      window.open(window.location.origin + '/teacher/' + item.id)
+      window.open(window.location.origin + '/home/teacher/' + item.id)
     }
   }
 }

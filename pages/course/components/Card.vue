@@ -166,7 +166,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid', 'setTid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid']),
     // 获取默认小节 跳转 章节id和小节id
     getDefaultCurriculumCatalogId(item) {
       persistStore.set(

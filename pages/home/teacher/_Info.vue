@@ -27,9 +27,6 @@ export default {
   components: {
     'v-card': CustomCard
   },
-  computed: {
-    ...mapState('auth', ['tid'])
-  },
   data() {
     return {
       config: {

@@ -11,7 +11,7 @@
         <span @click="goLinker('/')">首页</span>
       </div>
       <v-tabs></v-tabs>
-      <div class="teach" @click="goLinker('/home/famous')">
+      <div class="teach" @click="goLinker('/home/teacher/list')">
         <span>名师智库</span>
       </div>
       <div class="search">

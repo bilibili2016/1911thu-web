@@ -144,7 +144,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid', 'setTid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid']),
     // 获取项目详情
     getProjectInfo() {
       projectdetail.getProjectInfo(this.project).then(res => {

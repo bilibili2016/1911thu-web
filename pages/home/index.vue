@@ -26,7 +26,7 @@
 <script>
 import Carousel from '@/components/common/Carousel.vue'
 
-import Famous from '@/pages/home/teacher/famous.vue'
+// import Famous from '@/pages/home/teacher/famous.vue'
 import Info from '@/pages/home/news/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import HomeCourse from '@/pages/home/components/homecourse.vue'
@@ -35,7 +35,7 @@ import { home, news } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-carousel': Carousel,
-    'v-famous': Famous,
+    // 'v-famous': Famous,
     'v-info': Info,
     'v-backtotop': BackToTop,
     'v-course': HomeCourse
