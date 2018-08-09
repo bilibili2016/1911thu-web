@@ -62,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    let tid = window.location.pathname.split('/')[2]
+    let tid = window.location.pathname.split('/')[3]
     this.tidForm.tids = tid
     this.getTeacherInfo()
     this.getTeacherCourse()

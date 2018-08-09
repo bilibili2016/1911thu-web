@@ -9,10 +9,6 @@
       </div>
     </div>
 
-    <!-- <el-select v-model="value" @change="changeNav">
-      <el-option v-for="(item,index) in options" :key="index" :label="item.label" :value="item.value">
-      </el-option>
-    </el-select> -->
     <div class="main">
       <div class="headerLogo fl" @click="goSearchd('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
@@ -24,11 +20,9 @@
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
       <div :class="['HREntry' ,{islogined : isAuthenticated }]">
-
         <span class="hrin center" @click="goSearchd('/other/institutional')">单位入口
           <i></i>
         </span>
-
         <span class="center" @click="addEcg" style="width:90px;">课程兑换码
           <i></i>
         </span>
@@ -51,10 +45,11 @@
           <i v-if="productsNum>0">{{productsNum}}</i>
         </div>
       </div>
+
+
       <div class="lrBtn" v-if="!isAuthenticated">
-        <!-- @click="login" -->
         <span class="login" @click="login">登录</span>
-        <!-- @click="register" -->
+
         <span class="register" @click="register">注册</span>
       </div>
       <div class="headImg" v-else>
@@ -74,6 +69,7 @@
           <li @click="signOuts">退出</li>
         </ul>
       </div>
+
     </div>
     <!-- 兑换码弹框 -->
     <div class="exchange" v-show="bindForm.isBind">

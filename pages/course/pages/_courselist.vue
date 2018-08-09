@@ -9,10 +9,8 @@
     <div class="breadCrumb">
       <!-- 面包屑组件 -->
       <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
-
     <div class="pagination">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>

@@ -10,7 +10,6 @@
         <div class="fr">
           <!-- 收藏分享 -->
           <v-collection :collectData="collectMsg"></v-collection>
-
         </div>
       </div>
       <!-- 顶部的card -->
@@ -19,56 +18,18 @@
       </div>
       <!-- 左侧的课程目录和介绍 -->
       <div class="content fl">
-        <el-tabs v-model="activeName">
-          <el-tab-pane label="介绍" name="first">
-            <div class="detail descript" v-html="courseList.content" v-loading="loadMsg"></div>
-          </el-tab-pane>
-          <el-tab-pane label="目录" name="second">
-            <v-line :catalogs="catalogs" :privileMsg="privileMsg"></v-line>
-          </el-tab-pane>
-        </el-tabs>
+        <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg"></v-coursecatelog>
       </div>
+
       <div style="width:345px" class="fr">
         <!-- 讲师介绍 -->
-        <v-teacherintro v-loading="loadTeacher" :courseList="courseList"></v-teacherintro>
-
-        <!-- 课程评价 -->
-        <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
-        <!-- 已经学习（1） -->
-        <!-- {{courseList.is_study}} == {{courseList.is_evaluate}} -->
-        <!-- <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :courseList="courseList" @changeList="cbList"> </v-evaluatecase> -->
-
+        <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
+        <!-- 课程评价-->
         <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
-        <!-- 课程评价的弹窗 -->
-        <div class="evaluate-tag shadow " v-show="dialogVisible ">
-          <div class="personal ">
-            <!-- 弹窗 -->
-            <el-dialog title="课程评价 " :visible.sync="dialogVisible " width="30% " :before-close="handleClose ">
-              <div v-loading="loadMsg " class="topDiv ">
-                <!-- 用户评价内容组件 -->
-                <v-evaluate :evaluteData="commentator " class="dialog-line "></v-evaluate>
-              </div>
-              <div class="pagination course-style ">
-                <el-pagination :id="pagemsg.total " v-show="pagemsg.total!='0' " background layout="prev, pager, next " :page-size="pagemsg.pagesize " :page-count="pagemsg.pagesize " :current-page="pagemsg.page " :total="pagemsg.total " @current-change="handleCurrentChange "></el-pagination>
-              </div>
-            </el-dialog>
-          </div>
-        </div>
+        <!-- 用户评价  查看更多 -->
+        <v-evaluatedialog :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
         <!-- 用户评论 列表-->
-        <div class="evaluate " v-loading="loadEvaluate ">
-          <h4>用户评价
-            <span v-if="pageCount>3" @click="getMore">查看更多></span>
-          </h4>
-          <div v-loading="loadMsg">
-            <div class="score">
-              <span class="fl">{{totalEvaluateInfo.totalScore}}</span>
-              <el-rate disabled v-model="sumUserStart" class="itemBox-rate fl"></el-rate>
-              <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
-            </div>
-            <!-- 评价内容组件 -->
-            <v-evaluate :evaluteData="commentators"></v-evaluate>
-          </div>
-        </div>
+        <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
       </div>
     </div>
     <v-backtop :data="showCheckedCourse"></v-backtop>
@@ -86,8 +47,11 @@ import BackToTop from '@/components/common/BackToTop.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
-import TeacherIntro from '@/pages/course/pages/teacherIntro.vue'
+import TeacherIntro from '@/pages/course/coursedetail/teacherIntro.vue'
 import Collection from '@/components/common/Collection.vue'
+import UserEvaluate from '@/pages/course/coursedetail/UserEvaluate.vue'
+import EvaluateDialog from '@/pages/course/coursedetail/EvaluateDialog.vue'
+import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
@@ -101,7 +65,10 @@ export default {
     'v-evaluatecase': EvaluateCase,
     'v-breadcrumb': BreadCrumb,
     'v-teacherintro': TeacherIntro,
-    'v-collection': Collection
+    'v-collection': Collection,
+    'v-userevaluate': UserEvaluate,
+    'v-evaluatedialog': EvaluateDialog,
+    'v-coursecatelog': CourseCatalog
   },
   data() {
     return {
@@ -170,9 +137,6 @@ export default {
         totalScore: null
       },
       defaultCatalogId: '',
-      tidForm: {
-        tids: ''
-      },
       tagGroup: '',
       reTagBtn: [],
       configShare: {
@@ -180,28 +144,25 @@ export default {
         sites: ['qzone', 'qq', 'weibo', 'wechat'],
         source: 'http://www.1911edu.com/'
       },
-      sumUserStart: null
+      sumUserStart: 0
     }
   },
   methods: {
-    ...mapActions('auth', ['setTid', 'setIsCollection']),
-    // 跳转老师详情页面
-    goTeacherInfo(id) {
-      this.tidForm.tids = id * 1
-      this.setTid(this.tidForm)
-      window.open(window.location.origin + '/teacher/' + this.tidForm.tids)
+    ...mapActions('auth', ['setIsCollection']),
+    // 跳转老师详情
+    handleLinkTeacher(item) {
+      window.open(window.location.origin + '/home/teacher/' + item)
     },
-    //标签-获取课程标签列表
+    //标签 - 获取课程标签列表
     getEvaluateTags() {
       coursedetail.getEvaluateTags().then(response => {
         this.tagGroup = response.data.evaluateTags
-
         this.btnDatas = response.data.evaluateTags
-        this.changeRate('5')
+        this.handleChangeRate('5')
       })
     },
-    // 标签-点击评价改变星级
-    changeRate(val) {
+    // 标签 - 点击评价改变星级
+    handleChangeRate(val) {
       this.reTagBtn = []
       this.tagGroup[val].map((item, i) => {
         let obj = new Object()
@@ -211,10 +172,9 @@ export default {
         this.reTagBtn.push(obj)
       })
       this.btnData = this.reTagBtn
-
       this.addEvaluateForm.tag = []
     },
-    // 标签-点击获取标签内容
+    // 标签 - 点击获取标签内容
     getBtnContent(val, index) {
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)
@@ -316,7 +276,7 @@ export default {
     },
     // 评论-关闭查看更多-评论弹框
     handleClose(done) {
-      done()
+      this.dialogVisible = false
     },
     // 课程-获取课程详情
     getCourseDetail() {
@@ -427,7 +387,8 @@ export default {
       this.getEvaluateList()
       this.getCourseList()
       this.getdefaultCurriculumCatalog()
-      // this.getEvaluateTags()  //已提取到评论组件中调用
+      // 获取 评论列表
+      // this.getEvaluateTags() //已提取到评论组件中调用
     }
   },
   mounted() {
