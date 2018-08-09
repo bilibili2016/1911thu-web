@@ -283,7 +283,7 @@ export default {
       projectList: '',
       selectAllCourse: '',
       selectAllProject: '',
-      projectImg: require('@/assets/images/p4.png'),
+      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png',
       deleteAllData: {
         projectcartid: [],
         curriculumcartid: []

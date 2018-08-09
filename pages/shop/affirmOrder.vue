@@ -15,7 +15,7 @@
             <div class="topBar clearfix">
               <span>商品信息</span>
               <span class="fr goBack" @click="goLink">
-                <img class="editOutline" src="@/assets/images/shopCart-icon.png" alt=""> 返回修改购物车
+                <img class="editOutline" src="http://papn9j3ys.bkt.clouddn.com/shopCart-icon.png" alt=""> 返回修改购物车
               </span>
             </div>
             <div class="goods">
@@ -386,7 +386,7 @@ export default {
         type: 'affirmOrder',
         text: '确认订单'
       },
-      projectImg: require('@/assets/images/p4.png'),
+      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png',
       address: '',
       config: {
         type: 2

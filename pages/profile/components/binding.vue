@@ -20,7 +20,11 @@
         <div class="courseList">查看
           <div class="course">
             <span></span>
+<<<<<<< HEAD
             <p v-for="(course,index) in code.orderCurriculumList" :key="index" @click="goDetail(course)">
+=======
+            <p v-for="(course,index) in code.orderCurriculumList" :key="index" @click="handleLink(course)">
+>>>>>>> dev
               <i v-if="course.type=='2'"></i>{{course.title}}
             </p>
           </div>
@@ -37,7 +41,11 @@
 <script>
 import { binding } from '~/lib/v1_sdk/index'
 import { timestampToYMD } from '@/lib/util/helper'
+<<<<<<< HEAD
 import { mapState, mapGetters, mapActions } from 'vuex'
+=======
+import { mapGetters } from 'vuex'
+>>>>>>> dev
 import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['invitationCodeList'],
@@ -53,7 +61,20 @@ export default {
     }
   },
   methods: {
+<<<<<<< HEAD
     ...mapActions('auth', ['setKid']),
+=======
+    // 跳转课程或项目详情
+    handleLink(item) {
+      if (item.type === '1') {
+        persistStore.set('curriculumId', item.curriculum_id)
+        window.open(window.location.origin + '/course/coursedetail')
+      } else {
+        persistStore.set('projectId', item.curriculum_id)
+        window.open(window.location.origin + '/project/ProjectDetail')
+      }
+    },
+>>>>>>> dev
     // 时间戳转日期格式
     exchangeTime(time) {
       return timestampToYMD(time)

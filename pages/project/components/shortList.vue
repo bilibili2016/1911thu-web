@@ -31,7 +31,7 @@ export default {
   props: ['cardData'],
   data() {
     return {
-      projectImg: require('@/assets/images/p4.png'),
+      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png',
       stydyNum: require('@/assets/images/home_num.png')
     }
   },

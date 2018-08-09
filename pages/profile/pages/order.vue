@@ -25,7 +25,7 @@
               <div class="courseImg">
                 <!-- 党政干部与企事业单位高管的终身学堂 -->
                 <!-- 项目图标 -->
-                <img class="project-img" src="@/assets/images/p4.png" alt="">
+                <img class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
                 <img @click="goProjectInfo(project)" class="fl" :src="project.picture" alt="">
               </div>
               <div class="fl">

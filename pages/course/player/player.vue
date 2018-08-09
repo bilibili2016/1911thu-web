@@ -143,7 +143,7 @@ export default {
       mediaRIcon: 'el-icon-arrow-right',
       radioBtn: '',
       playing: '',
-      playImg: require('@/assets/images/playImg.gif'),
+      playImg: 'http://papn9j3ys.bkt.clouddn.com/playImg.gif',
       pauseImg: 'http://papn9j3ys.bkt.clouddn.com/video.png',
       // gifImg: require('@/assets/images/playImg.gif'),
       player: {},

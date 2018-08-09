@@ -549,7 +549,7 @@ export default {
   },
   data() {
     return {
-      projectImg: require('@/assets/images/p4.png'), //项目图标
+      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png', //项目图标
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
@@ -1116,6 +1116,7 @@ export default {
     getUsedInvitationCodeList() {
       profileHome.getUsedInvitationCodeList().then(response => {
         this.invitationCodeList = response.data.usedInvitationCodeList
+        console.log(this.invitationCodeList)
       })
     },
     // 格式化时间戳

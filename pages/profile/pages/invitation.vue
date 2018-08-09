@@ -18,7 +18,7 @@
         <span>{{exchangeTime(code.pay_time)}}</span>
         <span>{{code.use_code_number}}</span>
         <span>{{code.expire_days}}</span>
-        <span>{{code.order_sn}}
+        <span class="orderNum" @click="handleMyOrder">{{code.order_sn}}
           <i></i>
         </span>
       </div>
@@ -44,16 +44,28 @@
 
 <script>
 import { timestampToYMD } from '@/lib/util/helper'
+import { mapState, mapActions, mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['codeData'],
   data() {
     return {
       noCodes: true,
       number: '0',
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png'
+      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      gidForm: {
+        gids: ''
+      }
     }
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
+    handleMyOrder() {
+      this.gidForm.gids = 'tab-fourth'
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
+      this.$bus.$emit('selectProfileIndex', 'tab-fourth')
+    },
     exchangeTime(time) {
       return timestampToYMD(time)
     }

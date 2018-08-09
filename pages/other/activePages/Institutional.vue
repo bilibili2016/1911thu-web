@@ -216,7 +216,8 @@ export default {
             cids: '1',
             indexs: '',
             pids: '0'
-          }
+          },
+          is_picture_show: '0'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_2.png',
@@ -227,7 +228,8 @@ export default {
             cids: '17',
             indexs: '1',
             pids: '0'
-          }
+          },
+          is_picture_show: '0'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_3.png',
@@ -237,7 +239,8 @@ export default {
             cids: '19',
             indexs: '2',
             pids: '0'
-          }
+          },
+          is_picture_show: '0'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_4.png',
@@ -247,7 +250,8 @@ export default {
             cids: '16',
             indexs: '3',
             pids: '0'
-          }
+          },
+          is_picture_show: '1'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_5.png',
@@ -257,7 +261,8 @@ export default {
             cids: '18',
             indexs: '4',
             pids: '0'
-          }
+          },
+          is_picture_show: '1'
         },
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_6.png',
@@ -340,13 +345,23 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setCid']),
-    goCourseList(li) {
-      this.setCid(li.cidform)
+    goCourseList(item) {
+      this.setCid(item.cidform)
       // window.open()
-      if (li.cidform.cids !== '20') {
-        window.open(window.location.origin + '/course/category')
-      }
+      // if (item.cidform.cids !== '20') {
+      //   window.open(window.location.origin + '/course/category')
+      // }
       // window.open(window.location.origin + '/course/category')
+      if (item.cidform.cids !== '20') {
+        window.open(
+          window.location.origin +
+            '/course/' +
+            item.cidform.cids +
+            '?pid=' +
+            item.is_picture_show +
+            '&xid=0'
+        )
+      }
     },
     handleScroll() {
       if (this.move) {

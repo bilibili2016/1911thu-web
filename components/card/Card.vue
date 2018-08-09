@@ -84,8 +84,9 @@ export default {
         type: 1
       },
       isIndex: true,
+      jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
       newTag: 'http://papn9j3ys.bkt.clouddn.com/new.png',
-      jinImg: require('@/assets/images/jin.png'),
+
       numSrc: require('@/assets/images/home_num.png')
     }
   },

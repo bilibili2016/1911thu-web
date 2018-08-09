@@ -37,7 +37,7 @@
         <div class="fr" @click="addShoppingCart">
           <i>加入购物车</i>
           <span>
-            <img src="~assets/images/pro_cart.png" alt="">
+            <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
           </span>
         </div>
         <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
@@ -67,9 +67,9 @@
 <script>
 import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
-import Procourse from '@/pages/project/projectcourse'
+import Procourse from '@/pages/project/projectCourse'
 import Proevaluate from '@/pages/project/projectevaluate'
-import Commonproblems from '@/pages/project/commonproblems'
+import Commonproblems from '@/pages/project/commonProblems'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {
