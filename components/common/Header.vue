@@ -20,7 +20,7 @@
       </div>
 
       <div :class="['HREntry' ,{islogined : isAuthenticated }]">
-        <span class="hrin center" @click="goSearchd('/other/activePages/institutional')">单位入口
+        <span class="hrin center" @click="goLinker('/other/activePages/institutional')">单位入口
           <i></i>
         </span>
         <span class="center" @click="addEcg" style="width:90px;">课程兑换码
