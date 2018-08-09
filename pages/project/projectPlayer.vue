@@ -131,7 +131,7 @@ export default {
       radioBtn: '',
       playing: '',
       playImg: require('@/assets/images/playImg.gif'),
-      pauseImg: require('http://papn9j3ys.bkt.clouddn.com/video.png'),
+      pauseImg: 'http://papn9j3ys.bkt.clouddn.com/video.png',
       player: {},
       courseList: [],
       projectDetail: {},
