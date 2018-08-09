@@ -5,7 +5,6 @@
       <div class="top-text">
         <h1 class="top-h1">1911学堂</h1>
         <p class="top-desc">源自清华、面向世界，集聚清华大学、北京大学等国内外知名高校师资， 为党政干部与企事业单位高管提供与时俱进的终身教育解决方案。
-
         </p>
         <div class="top-button" @click="handleScroll">
           填写联系方式，免费申请课程体验。
