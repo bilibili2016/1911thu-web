@@ -319,9 +319,5 @@ export default {
   }
 }
 </script>
-<style scoped>
-@import '@/assets/style/shop/wepay.scss';
-/* @import '@/assets/style/shop/affirmOrder.scss'; */
-</style>
 
 
