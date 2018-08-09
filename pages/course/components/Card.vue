@@ -88,6 +88,7 @@
                   <!-- 未购买 购买判断  未购买-->
                   <div v-if="privileMsg===false ">
                     <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
+                    <el-button type="primary " plain @click="freeStudy(courseList) ">免费试看</el-button>
                   </div>
                   <!-- 未购买 购买判断  已购买-->
                   <div v-if="privileMsg===true ">
@@ -167,6 +168,15 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
+    // 免费试看
+    freeStudy(item) {
+      if (this.isAuthenticated) {
+        this.getDefaultCurriculumCatalogId(item)
+      } else {
+        // 当用户未登录
+        this.$bus.$emit('loginShow', true)
+      }
+    },
     // 获取默认小节 跳转 章节id和小节id
     getDefaultCurriculumCatalogId(item) {
       persistStore.set(
