@@ -221,7 +221,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg', 'signOut']),
+    ...mapActions('auth', ['signOut']),
     // isHasClass() {
     //   let myVideo = document.getElementById('movd')
     //   if (myVideo == null) {
@@ -612,7 +612,6 @@ export default {
     //   url: 'http://www.1911edu.com/'
     // }
     // socialShare('.social-share', $config)
-    // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
     this.resize()

@@ -99,7 +99,6 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
-    ...mapActions('auth', ['setIsShowTip']),
     handleScroll() {
       this.visible = window.pageYOffset > this.visibilityHeight
       // this.visible = true

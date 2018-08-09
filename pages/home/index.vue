@@ -52,13 +52,8 @@ export default {
       freecoursetitle: '免费专区',
       linkfamouscourse: '/teacher/list',
       famoustitle: '名师智库',
-      linkfamouscourse: '/teacher/list',
       infotitle: '学堂资讯',
       linkinfo: '/home/news/list',
-
-      linkfive: 'home/news/detail',
-      linkSix: '/home/components/teacher',
-      linkSeven: '/teacher/list',
       freeData: [],
       newData: [],
       classicData: [],

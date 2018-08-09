@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
 export default {

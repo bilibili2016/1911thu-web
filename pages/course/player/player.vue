@@ -249,7 +249,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setHsg', 'signOut']),
+    ...mapActions('auth', ['signOut']),
     isHasClass() {
       let myVideo = document.getElementById('movd')
       // console.log(myVideo)
@@ -707,7 +707,6 @@ export default {
 
     // socialShare('.social-share', $config)
     window.addEventListener('resize', this.resize)
-    // this.setHsg(this.hsgForm)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
 

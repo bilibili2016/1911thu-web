@@ -196,10 +196,7 @@ export default {
         '/shop/shoppingcart',
         '/profile',
         '/shop/wepay'
-      ],
-      didForm: {
-        dids: ''
-      }
+      ]
     }
   },
   computed: {
@@ -215,8 +212,7 @@ export default {
       'setProductsNum',
       'signOut',
       'setToken',
-      'setPwd',
-      'setDid'
+      'setPwd'
     ]),
     // 关闭头部绑定课程
     closeEcg() {
@@ -405,8 +401,6 @@ export default {
       header.getUserInfo().then(res => {
         if (res.status === '100008') {
           // 设置单点登录
-          this.didForm.dids = '1'
-          this.setDid(this.didForm)
           this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
             confirmButtonText: '确定',
             callback: action => {
@@ -418,8 +412,6 @@ export default {
           })
         } else if (res.status === '100100') {
           // 设置单点登录
-          // this.didForm.dids = '1'
-          // this.setDid(this.didForm)
           if (this.authPath.indexOf(window.location.pathname) > 0) {
             this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
               confirmButtonText: '确定',
@@ -431,8 +423,6 @@ export default {
           }
         } else {
           // 设置单点登录
-          this.didForm.dids = '0'
-          this.setDid(this.didForm)
           this.userInfo = res.data.userInfo
           persistStore.set('nickName', this.userInfo.nick_name)
           persistStore.set('phone', this.userInfo.user_name)
@@ -471,8 +461,6 @@ export default {
       me.getCount()
     })
     this.$bus.$emit('bannerShow', false)
-    this.didForm.dids = '0'
-    this.setDid(this.didForm)
     this.$bus.$on('bannerShow', data => {
       if (data === true) {
         this.bannerMsg = true

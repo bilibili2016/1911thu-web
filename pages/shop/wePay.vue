@@ -36,7 +36,7 @@
                 <div class="method">
                   <div class="center">
                     <div class="wx fl" @click="selectWx" :class="{borderColor: wxMsg}">
-                      <img src="@/assets/images/wxp.png" alt="">
+                      <img src="http://papn9j3ys.bkt.clouddn.com/wxp.png" alt="">
                       <img src="@/assets/images/ok.png" alt="" class="okImg" v-if="wxMsg">
                     </div>
                     <div class="pub fr" @click="selectPub" :class="{borderColor: pubMsg}">

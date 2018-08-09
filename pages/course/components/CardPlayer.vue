@@ -130,24 +130,6 @@ export default {
         }
       }
     },
-    // 建立socket连接
-    // linksocket() {
-    //   // 判断socket 连接
-    //   let origin = window.location.origin
-    //   if (origin === this.ceshiUrl || origin == this.localUrl) {
-    //     this.link = 'http://ceshi.1911thu.com:2120'
-    //   } else {
-    //     this.link = 'http://wapi.1911thu.com:2120'
-    //   }
-    //   // 新建socket
-    //   socket = new io(this.link)
-    //   // 连接socket
-    //   socket.on('connect', () => {
-    //     socket.emit('login', persistStore.get('token'))
-    //   })
-    //   // 断线重连
-    //   socket.on('reconnect', function(msg) {})
-    // },
     // 对播放器事件的监听
     addEventPlayer() {
       let that = this
