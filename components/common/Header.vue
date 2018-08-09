@@ -1,8 +1,7 @@
 <template>
   <div class="headerBox">
-
+    <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
-
     <div class="main">
       <div class="headerLogo fl" @click="goLinker('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
@@ -10,6 +9,7 @@
       <div class="backHome">
         <span @click="goLinker('/')">首页</span>
       </div>
+      <!-- 课程，项目 -->
       <v-tabs></v-tabs>
       <div class="teach" @click="goLinker('/home/teacher/list')">
         <span>名师智库</span>
@@ -18,52 +18,15 @@
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
-
-      <div :class="['HREntry' ,{islogined : isAuthenticated }]">
-        <span class="hrin center" @click="goLinker('/other/activePages/institutional')">单位入口
-          <i></i>
-        </span>
-        <span class="center" @click="addEcg" style="width:90px;">课程兑换码
-          <i></i>
-        </span>
-        <!-- <span class="center" v-show="isAuthenticated" @click="goMycourse('tab-second')">我的课程</span> -->
-        <div class="downLoad">
-          <i class="phone"></i>
-          <div class="downApp clearfix">
-            <i :class={iphone:!iphones} class="downIcon fl"></i>
-            <div class="changeType fr">
-              <span>下载1911学堂APP</span>
-              <span @mouseenter="changeImg('iphone')">
-                <i></i>AppStore下载</span>
-              <span @mouseenter="changeImg('android')">
-                <i></i>Android下载</span>
-            </div>
-          </div>
-        </div>
-        <div class="shoppingCart" v-show="isAuthenticated" @click="goLinker('/shop/shoppingcart')">
-          <span class="cartIcon"></span>
-          <i v-if="productsNum>0">{{productsNum}}</i>
-        </div>
-      </div>
-
+      <!-- 单位入口，课程兑换码，下载，购物车 -->
+      <v-hrin :class="['HREntry' ,{islogined : isAuthenticated }]"></v-hrin>
       <!-- 登录注册按钮 -->
       <v-lrbtn v-if="!isAuthenticated"></v-lrbtn>
-
-      <div class="headImg" v-else>
-        <span>
-          <img :src="user.userImg" alt="" @click="goLink('tab-first')">
-        </span>
-        <!-- 个人中心下拉框 -->
-        <ul class="subPages">
-          <li v-for="(item,index) in subPagesData" :key="index" @click="goLink(item.link)">{{item.text}}</li>
-          <li @click="signOuts">退出</li>
-        </ul>
-      </div>
-
+      <!-- 个人中心（头像） -->
+      <v-headerimg v-else :data="user"></v-headerimg>
     </div>
     <!-- 兑换码弹框 -->
     <v-code v-show="bindForm.isBind" :bindForm="bindForm"></v-code>
-
     <!-- 登录注册 -->
     <v-login></v-login>
   </div>
@@ -79,53 +42,23 @@ import { MessageBox } from 'element-ui'
 import { encryption } from '~/lib/util/helper'
 import Tabs from '@/components/common/Tabs.vue'
 import Login from '@/pages/auth/Login.vue'
-import Discount from '@/components/common/Discount.vue'
-import CodeCase from '@/components/common/CodeCase.vue'
-import LRBtn from '@/components/common/LRBtn.vue'
+import Discount from '@/components/header/Discount.vue'
+import CodeCase from '@/components/header/CodeCase.vue'
+import LRBtn from '@/components/header/LRBtn.vue'
+import HeaderImg from '@/components/header/HeaderImg.vue'
+import HREntry from '@/components/header/HREntry.vue'
 export default {
   components: {
     'v-tabs': Tabs,
     'v-login': Login,
     'v-discount': Discount,
     'v-code': CodeCase,
-    'v-lrbtn': LRBtn
+    'v-lrbtn': LRBtn,
+    'v-headerimg': HeaderImg,
+    'v-hrin': HREntry
   },
   data() {
     return {
-      subPagesData: [
-        {
-          link: 'tab-first',
-          text: '我的首页'
-        },
-        {
-          link: 'tab-second',
-          text: '我的课程'
-        },
-        {
-          link: 'tab-third',
-          text: '我的项目'
-        },
-        {
-          link: 'tab-fourth',
-          text: '我的订单'
-        },
-        {
-          link: 'tab-fifth',
-          text: '我的消息'
-        },
-        {
-          link: 'tab-sixth',
-          text: '个人设置'
-        },
-        {
-          link: 'tab-seventh',
-          text: '兑换码管理'
-        },
-        {
-          link: 'tab-eighth',
-          text: '发票管理'
-        }
-      ],
       isHasClass: true,
       //codeData: [], //专属兑换码根据接口长度判断是否显示
       codeListForm: {
@@ -387,6 +320,9 @@ export default {
         })
       }
     },
+    goSearchd(item) {
+      this.$router.push(item)
+    },
     // 跳转到指定页
     goLinker(item) {
       this.$router.push(item)
@@ -503,6 +439,15 @@ export default {
     })
     this.$bus.$on('register', data => {
       this.register()
+    })
+    this.$bus.$on('goLink', data => {
+      this.goLink(data)
+    })
+    this.$bus.$on('signOuts', data => {
+      this.signOuts()
+    })
+    this.$bus.$on('addEcg', data => {
+      this.addEcg()
     })
   },
   watch: {

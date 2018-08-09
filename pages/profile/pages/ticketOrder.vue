@@ -1270,6 +1270,4 @@ export default {
   }
 }
 </script>
-<style lang="scss" lang="scss">
-@import '~assets/style/profile/ticketOrder';
-</style>
+

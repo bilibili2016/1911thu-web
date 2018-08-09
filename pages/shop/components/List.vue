@@ -1,6 +1,6 @@
 <template>
     <div>
-        <!-- 课程列表 -->
+        <!-- 购物车课程列表 -->
         <div v-if="config.type=='course'" class="tableBody">
             <div v-for="(course,index) in data" :key="index">
                 <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <!-- 项目列表 -->
+        <!-- 购物车项目列表 -->
         <div class="tableBody" v-if="config.type=='project'">
             <div v-for="(project,index) in data" :key="index">
                 <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
@@ -105,6 +105,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>
