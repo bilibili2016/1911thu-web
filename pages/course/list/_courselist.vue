@@ -72,13 +72,24 @@ export default {
   methods: {
     // 获取最新课程列表
     getCourseList() {
-      if (this.cidNumber === '1') {
+      if (this.cidNumber === '0') {
+        this.getProjectList()
+      } else if (this.cidNumber === '1') {
         this.getNewCourseList()
       } else if (this.cidNumber === '2') {
         this.getClassicCourseList()
       } else {
         this.getFreeCourseList()
       }
+    },
+    //获取最新项目列表
+    getProjectList() {
+      categorylist.getProjectList(this.newsCurriculumForm).then(response => {
+        this.courseList = response.data.curriculumProjectList
+        this.pagemsg.total = Number(response.data.pageCount)
+        this.coursename = '最新项目'
+        this.BreadCrumb.text = this.coursename
+      })
     },
     // 最新课程列表
     getNewCourseList() {

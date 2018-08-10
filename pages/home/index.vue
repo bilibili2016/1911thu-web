@@ -42,7 +42,8 @@ export default {
   },
   data() {
     return {
-      linknewproject: '/course/' + '0' + '?type=' + '1' + '&xid=0',
+      // linknewproject: '/course/' + '0' + '?type=' + '1' + '&xid=0',
+      linknewproject: '/course/list/0',
       newprojecttitle: '最新项目',
       linknewcourse: '/course/list/1',
       newcoursetitle: '最新课程',
