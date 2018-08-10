@@ -20,7 +20,7 @@
             </div>
             <div class="common-button btn-bgs ">
               <!-- 学习中 -->
-              <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="goToPlay(card)">开始学习</el-button>
+              <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="selectCid(card)">开始学习</el-button>
               <!-- 已过期 -->
               <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
@@ -28,11 +28,11 @@
                 </span>
               </el-button>
               <!-- 学习中 -->
-              <el-button v-if="card.percent > 0&&!card.overtime&&config.card==='learning'" type="primary" plain @click="goToPlay(card)">
+              <el-button v-if="card.percent > 0&&!card.overtime&&config.card==='learning'" type="primary" plain @click="selectCid(card)">
                 <span>继续学习</span>
               </el-button>
               <!-- 已完成 -->
-              <el-button v-if="card.percent===100&&config.card==='already'" type="primary" plain @click="goToPlay(card)">
+              <el-button v-if="card.percent===100&&config.card==='already'" type="primary" plain @click="selectCid(card)">
                 <span>再次学习</span>
               </el-button>
             </div>
