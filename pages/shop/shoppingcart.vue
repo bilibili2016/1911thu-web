@@ -72,6 +72,54 @@
             </div>
           </div>
           <!-- 项目列表 end -->
+
+          <!-- 失效课程列表 start -->
+          <div class="tableBody loseEfficacy" v-if="!isNoMsg">
+            <div v-for="(course,index) in loseEfficacyc" :key="index">
+              <div class="lost">失效</div>
+              <div class="courseInfo clearfix">
+                <img class="fl" :src="course.picture" @click="goDetail(course)">
+                <div class="fl">
+                  <h4 @click="goDetail(course)">{{course.title}}</h4>
+                  <h6>{{course.study_time}}学时</h6>
+                  <p>讲师：{{course.teacher_name}}</p>
+                </div>
+              </div>
+              <div class="coursePrice">
+                ￥{{course.present_price}}
+              </div>
+              <div class="courseOperation" @click="handleDeleteCourse(course,index)">
+                删除
+              </div>
+            </div>
+          </div>
+          <!-- 失效课程列表 end -->
+
+          <!-- 失效项目列表 start -->
+          <div class="tableBody loseEfficacy" v-if="!isNoMsg">
+            <div v-for="(project,index) in loseEfficacyp" :key="index">
+              <div class="lost">失效</div>
+              <div class="courseInfo clearfix">
+                <div class="project-img">
+                  <img class="fl" :src="project.picture" @click="goProjectDetail(project)">
+                  <img :src="projectImg" alt="" class="pmsg">
+                </div>
+
+                <div class="fl">
+                  <h4 @click="goProjectDetail(project)">{{project.title}}</h4>
+                  <h6>{{project.study_time}}学时 </h6>
+
+                </div>
+              </div>
+              <div class="coursePrice">
+                ￥{{project.present_price}}
+              </div>
+              <div class="courseOperation" @click="handleDeleteProject(project,index)">
+                删除
+              </div>
+            </div>
+          </div>
+          <!-- 失效项目列表 end -->
         </div>
         <!-- 底部团购优惠提示 -->
         <div class="tips" id="tips" v-if="!isNoMsg">
@@ -172,8 +220,9 @@ export default {
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
       showInfo: false,
       selectAll: false,
-
       checked: [],
+      loseEfficacyc: [], //失效课程列表
+      loseEfficacyp: [], //失效项目列表
       isIndeterminate: true,
       numForm: {
         number: 1
@@ -468,6 +517,8 @@ export default {
       this.projectAddArray.projectcartid = []
 
       shopcart.shopCartList().then(response => {
+        console.log(response.data)
+
         let body = response.data.curriculumCartList.map(item => {
           // this.addArray.curriculumcartid.push(item.id)      //默认不选中
           // this.arraySum =
@@ -508,11 +559,11 @@ export default {
 
         // 判断最初获取课程长度是否相等
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
-          console.log('1')
+          // console.log('1')
           this.selectAllCourse = true
           this.isRest = true
         } else {
-          console.log('2')
+          // console.log('2')
           this.selectAllCourse = false
           this.isRest = false
         }
@@ -560,6 +611,9 @@ export default {
           this.isNoMsg = true
           // this.selectAll = false
         }
+        // 获取下架课程、项目列表
+        this.loseEfficacyc = response.data.downCurriculumCartList
+        this.loseEfficacyp = response.data.downProjectCartList
       })
     },
     // 点击选中 取消课程的复选框   ----课程 单选
