@@ -19,8 +19,8 @@
               <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
             </div>
             <!-- 课程列表 start -->
-            <v-list :config="courseType" :data="courseList" v-if="!isNoMsg"></v-list>
-            <!-- <div class="tableBody" v-if="!isNoMsg">
+            <!-- <v-list :config="courseType" :data="courseList" v-if="!isNoMsg"></v-list> -->
+            <div class="tableBody" v-if="!isNoMsg">
               <div v-for="(course,index) in courseList" :key="index">
                 <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
@@ -38,7 +38,7 @@
                   删除
                 </div>
               </div>
-            </div> -->
+            </div>
             <!-- 课程列表 end -->
 
             <!-- 项目全选 checkbox-->
@@ -46,8 +46,8 @@
               <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
             </div>
             <!-- 项目列表 start-->
-            <v-list :config="projectType" :data="projectList" v-if="!isNoMsg"></v-list>
-            <!-- <div class="tableBody" v-if="!isNoMsg">
+            <!-- <v-list :config="projectType" :data="projectList" v-if="!isNoMsg"></v-list> -->
+            <div class="tableBody" v-if="!isNoMsg">
               <div v-for="(project,index) in projectList" :key="index">
                 <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
@@ -69,7 +69,7 @@
                   删除
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
           <!-- 项目列表 end -->
         </div>
@@ -294,30 +294,33 @@ export default {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     if (this.isAuthenticated) {
+      // 获取购车列表
       this.shopCartList()
     }
-    this.$bus.$emit('bannerShow', false)
-    this.$bus.$on('handleSelectChange', data => {
-      this.handleSelectChange(data.course, data.index)
-    })
-    this.$bus.$on('goDetail', data => {
-      this.goDetail(data.course, data.index)
-    })
-    this.$bus.$on('handleDeleteCourse', data => {
-      this.handleDeleteCourse(data.course, data.index)
-    })
+    // this.$bus.$emit('bannerShow', false)
+    // this.$bus.$on('handleSelectChange', data => {
+    //   this.handleSelectChange(data.course, data.index)
+    // })
+    // this.$bus.$on('goDetail', data => {
+    //   this.goDetail(data.course, data.index)
+    // })
+    // this.$bus.$on('handleDeleteCourse', data => {
+    //   this.handleDeleteCourse(data.course, data.index)
+    // })
 
-    this.$bus.$on('handleSelectProjectChange', data => {
-      this.handleSelectProjectChange(data.project, data.index)
-    })
-    this.$bus.$on('goProjectDetail', data => {
-      this.goProjectDetail(data.project, data.index)
-    })
-    this.$bus.$on('handleDeleteProject', data => {
-      this.handleDeleteProject(data.project, data.index)
-    })
+    // this.$bus.$on('handleSelectProjectChange', data => {
+    //   this.handleSelectProjectChange(data.project, data.index)
+    // })
+    // this.$bus.$on('goProjectDetail', data => {
+    //   this.goProjectDetail(data.project, data.index)
+    // })
+    // this.$bus.$on('handleDeleteProject', data => {
+    //   this.handleDeleteProject(data.project, data.index)
+    // })
     // this.getNum()
-    this.restaurants = this.loadAll()
+    // this.restaurants = this.loadAll()
+
+    // 寛高设置
     this.headerHeight = document.getElementsByClassName(
       'headerBox'
     )[0].offsetHeight
@@ -505,9 +508,11 @@ export default {
 
         // 判断最初获取课程长度是否相等
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
+          console.log('1')
           this.selectAllCourse = true
           this.isRest = true
         } else {
+          console.log('2')
           this.selectAllCourse = false
           this.isRest = false
         }
@@ -546,8 +551,8 @@ export default {
           this.selectAllProject = false
           this.isRest = false
         }
-        if (this.selectAllProject === true && this.selectAllProject === true) {
-          // this.selectAll = true
+        if (this.selectAllCourse === true && this.selectAllProject === true) {
+          this.selectAll = true
         }
 
         // 判断课程和项目都没有时候显示购物车为空 img
