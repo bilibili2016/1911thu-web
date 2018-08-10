@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="courseList center">
+    <div class="curriculumList center">
       <!-- v-for="(course,index) in courseList -->
       <div class="course clearfix  ">
         <el-card class="fl" :body-style="{ padding: '0px' }">
@@ -179,6 +179,7 @@ export default {
     },
     // 获取默认小节 跳转 章节id和小节id
     getDefaultCurriculumCatalogId(item) {
+      this.isShowCover = false
       persistStore.set(
         'curriculumId',
         item.defaultCurriculumCatalog.curriculum_id
@@ -194,7 +195,7 @@ export default {
     handleImgPlay(item) {
       // 用户已登录
       if (this.isAuthenticated) {
-        this.isShowCover = false
+        // this.isShowCover = false
         this.getDefaultCurriculumCatalogId(item)
       } else {
         // 未登录直接弹出登录
@@ -207,6 +208,7 @@ export default {
       if (this.isAuthenticated) {
         // // 用户已经购买 以及 课程为免费 获取默认播放id
         if (this.privileMsg === true) {
+          // this.isShowCover = false
           this.getDefaultCurriculumCatalogId(item)
         } else {
           // 用户未购买 点击 加入购物车按钮

@@ -565,8 +565,6 @@ export default {
           10
         ).toFixed(2)
       }
-      console.log(this.orderPrice)
-
       this.orderNum = this.checkedArr.length
       // console.log(this.checkedArr)
       if (this.checkedArr.length == this.ticketOrderData.length) {

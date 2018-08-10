@@ -40,6 +40,7 @@
             <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
           </span>
         </div>
+        <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
       </div>
     </div>
@@ -66,9 +67,9 @@
 <script>
 import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
-import Procourse from '@/pages/project/projectCourse'
+import Procourse from '@/pages/project/projectcourse'
 import Proevaluate from '@/pages/project/projectevaluate'
-import Commonproblems from '@/pages/project/commonProblems'
+import Commonproblems from '@/pages/project/commonproblems'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {

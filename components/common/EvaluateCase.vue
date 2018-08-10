@@ -148,8 +148,6 @@ export default {
     }
   },
   mounted() {
-    console.log(222)
-
     this.getEvaluateTags()
   }
 }
