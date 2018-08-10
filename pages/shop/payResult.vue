@@ -12,13 +12,27 @@
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
-      <h5>
-        <span @click="choiceCourse">继续选课</span>
-        <span @click="goMycourse('tab-fourth')">查看订单</span>
-      </h5>
-      <div class="goback">
-        <span>
-          <i>{{seconds}}</i>s后</span>前往个人中心</div>
+      <div v-if="hasCode">
+        <h5>
+          <span @click="choiceCourse">继续选课</span>
+          <span @click="goMycourse('tab-fourth')">查看订单</span>
+        </h5>
+        <div class="goback">
+          <span>
+            <i>{{seconds}}</i>s后</span>前往个人中心</div>
+      </div>
+      <div v-else>
+        <div class="tips">
+          <p>您购买的商品已生成兑换码</p>
+          <p>请前往
+            <span>“我的中心 —兑换码管理”</span>查看，兑换后可观看课程
+          </p>
+        </div>
+        <p class="sure">
+          <span @click="goMycourse('tab-seventh')">确定</span>
+        </p>
+      </div>
+
     </div>
 
   </div>
@@ -35,6 +49,7 @@ export default {
       payCompleteForm: {
         orderId: null
       },
+      hasCode: false,
       payCompleteData: {},
       gidForm: { gids: null },
       seconds: 5,
@@ -64,14 +79,15 @@ export default {
     },
     payComplete() {
       this.payCompleteForm.orderId = persistStore.get('cpyid')
-      return new Promise((resolve, reject) => {
-        payResult.payComplete(this.payCompleteForm).then(response => {
-          this.payCompleteData = response.data
+      payResult.payComplete(this.payCompleteForm).then(response => {
+        this.payCompleteData = response.data
+        if (response.data.pay_number === '1') {
+          this.hasCode = true
           this.interval = setInterval(() => {
             if (this.seconds < 1) {
               this.seconds = 0
               clearInterval(this.interval)
-              this.goLink('tab-seventh')
+              this.goLink('tab-first')
             } else {
               this.seconds--
             }
@@ -79,8 +95,9 @@ export default {
               clearInterval(this.interval)
             }
           }, 1000)
-          resolve(true)
-        })
+        } else {
+          this.hasCode = false
+        }
       })
     },
     goLink(item) {

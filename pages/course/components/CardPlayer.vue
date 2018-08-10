@@ -105,11 +105,22 @@ export default {
             } else {
               that.seconds--
               let playTime = window.qcplayer.currentTime()
+              /**
+               * socket.emit()6个参数
+               * 1、watchRecordingTime固定参数
+               * 2、课程ID
+               * 3、小节ID
+               * 4、当前播放时间
+               * 5、项目播放的时候为项目ID，课程播放为空
+               * 6、type:1是课程，2是项目
+               */
               socket.emit(
                 'watchRecordingTime',
                 persistStore.get('curriculumId'),
                 persistStore.get('catalogId'),
-                playTime
+                playTime,
+                '',
+                1
               )
             }
           }, 1000)

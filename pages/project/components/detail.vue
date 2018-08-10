@@ -1,25 +1,39 @@
 <template>
   <div>
+    <!-- 项目详情页上部分-项目信息 -->
     <h1>{{projectDetail.title}}</h1>
     <h3>{{projectDetail.deputy_title}}</h3>
-    <h5>
-      <span>{{projectDetail.study_time}} 课时</span>
-      <i class="line"></i>
-      <span>学习人数 {{projectDetail.study_number}}</span>
-      <i class="line"></i>
-      <el-rate v-model="projectDetail.score" disabled></el-rate>
-    </h5>
-    <div class="price clearfix">
-      <div class="fl">
-        <i>￥</i>{{projectDetail.present_price}}</div>
-      <div class="fr" @click="addShoppingCart">
-        <i>加入购物车</i>
-        <span>
-          <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
-        </span>
+    <div class="detail clearfix">
+      <div class="some">
+        <div>
+          <h5>课时</h5>
+          <p>
+            <span>{{projectDetail.study_time}}</span> 课时</p>
+        </div>
+        <div>
+          <h6>学习人数</h6>
+          <p>
+            <span>{{projectDetail.study_number}}</span> 人</p>
+        </div>
+        <div>
+          <h6>综合评分</h6>
+          <p>
+            <span></span>{{projectDetail.score}} 分</p>
+        </div>
       </div>
-      <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
-      <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
+      <div class="fr buy">
+        <div class="price">
+          <i>￥</i>{{projectDetail.present_price}}</div>
+        <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
+        <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
+        <div class="addShoppingCart" @click="addShoppingCart">
+          <i>加入购物车</i>
+          <span>
+            <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
+          </span>
+        </div>
+      </div>
+
     </div>
 
   </div>

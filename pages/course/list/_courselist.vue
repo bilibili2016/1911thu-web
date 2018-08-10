@@ -14,12 +14,7 @@
     <div class="pagination">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
-    <!-- <div class="card-button" v-if="noMoreData">
-      <el-button type="primary">暂无更多数据</el-button>
-    </div>
-    <div class="card-button" v-else>
-      <el-button type="primary">下拉加载更多</el-button>
-    </div> -->
+
   </div>
 </template>
 
