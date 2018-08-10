@@ -88,6 +88,12 @@ export default {
     },
     // 添加购物车
     handleAddShopCart(item, cart) {
+      if (this.cidNumber === '0') {
+        this.curriculumcartids.type = 2
+      } else {
+        this.curriculumcartids.type = 1
+      }
+
       // 第一次点击 没有 在购物车
       if (item.is_cart === 0) {
         this.addCourseShopCart(item)
