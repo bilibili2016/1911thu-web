@@ -19,8 +19,8 @@
               <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
             </div>
             <!-- 课程列表 start -->
-            <v-list :config="courseType" :data="courseList" v-if="!isNoMsg"></v-list>
-            <!-- <div class="tableBody" v-if="!isNoMsg">
+            <!-- <v-list :config="courseType" :data="courseList" v-if="!isNoMsg"></v-list> -->
+            <div class="tableBody" v-if="!isNoMsg">
               <div v-for="(course,index) in courseList" :key="index">
                 <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
@@ -38,7 +38,7 @@
                   删除
                 </div>
               </div>
-            </div> -->
+            </div>
             <!-- 课程列表 end -->
 
             <!-- 项目全选 checkbox-->
@@ -46,8 +46,8 @@
               <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
             </div>
             <!-- 项目列表 start-->
-            <v-list :config="projectType" :data="projectList" v-if="!isNoMsg"></v-list>
-            <!-- <div class="tableBody" v-if="!isNoMsg">
+            <!-- <v-list :config="projectType" :data="projectList" v-if="!isNoMsg"></v-list> -->
+            <div class="tableBody" v-if="!isNoMsg">
               <div v-for="(project,index) in projectList" :key="index">
                 <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
@@ -69,7 +69,7 @@
                   删除
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
           <!-- 项目列表 end -->
         </div>
@@ -547,7 +547,7 @@ export default {
           this.isRest = false
         }
         if (this.selectAllProject === true && this.selectAllProject === true) {
-          // this.selectAll = true
+          this.selectAll = true
         }
 
         // 判断课程和项目都没有时候显示购物车为空 img
