@@ -182,12 +182,10 @@ export default {
         scores: null,
         tag: []
       },
-      addCollectionForm: {
-        curriculumId: '',
-        types: 2
+      collectMsg: {
+        types: 2,
+        isCollect: 0
       },
-      // collectMsg: false,
-      collectMsg: 2,
       iseve: false,
       bought: false,
       getdefaultForm: {
@@ -491,11 +489,10 @@ export default {
         this.iseve =
           response.data.curriculumProjectDetail.is_evaluateCurriculumProject
         if (response.data.curriculumProjectDetail.is_Collection) {
-          this.collectMsg = 1
+          this.collectMsg.isCollect = 1
         } else {
-          this.collectMsg = 2
+          this.collectMsg.isCollect = 0
         }
-        // this.collectMsg = response.data.curriculumProjectDetail.is_Collection
         // 播放所需数据加载完成后加载播放器数据
         this.getPlayerInfo()
       })
@@ -538,38 +535,6 @@ export default {
             message: response.msg
           })
         }
-      })
-    },
-    // 判断是收藏还是为收藏
-    collection() {
-      if (this.collectMsg === true) {
-        this.deleteCollection()
-      } else {
-        this.addCollection()
-      }
-    },
-    // 添加收藏
-    addCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      projectplayer.addCollection(this.addCollectionForm).then(response => {
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '添加收藏成功'
-        })
-        this.collectMsg = true
-      })
-    },
-    // 删除收藏
-    deleteCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      projectplayer.deleteCollection(this.addCollectionForm).then(response => {
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '取消收藏成功'
-        })
-        this.collectMsg = false
       })
     },
     // 为播放器上当的播放按钮添加点击事件
