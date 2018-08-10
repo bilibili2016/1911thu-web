@@ -232,7 +232,7 @@ import NoMsg from '@/pages/profile/pages/noMsg.vue'
 import CustomCard from '@/pages/profile/components/Card.vue'
 import CustomList from '@/pages/profile/components/List.vue'
 import Banner from '@/components/common/Banner.vue'
-import PersonalSet from '@/pages/profile/pages/personalSet.vue'
+import PersonalSet from '@/pages/profile/personalSet/personalSet.vue'
 import Info from '@/pages/profile/components/Info'
 import Order from '@/pages/profile/components/OrderList'
 import Detail from '@/pages/profile/components/Detail'
@@ -982,6 +982,9 @@ export default {
     })
     this.$bus.$on('goOrderDetail', data => {
       this.getOrderDetail(data)
+    })
+    this.$bus.$on('updateUserInfo', data => {
+      this.updateUserInfo(data)
     })
   },
   created() {
