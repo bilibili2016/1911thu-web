@@ -71,7 +71,6 @@
                 <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
               </el-form-item>
             </el-form>
-
             <input type="password" class="hideInput">
           </div>
         </el-tab-pane>
