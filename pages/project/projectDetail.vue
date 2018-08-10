@@ -78,10 +78,7 @@ export default {
         projectId: '1'
       },
       projectDetail: {},
-      shoppingForm: {
-        type: 2,
-        cartid: ''
-      },
+
       evaluateForm: {
         pages: '',
         limits: '',

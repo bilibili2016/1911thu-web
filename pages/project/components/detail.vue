@@ -26,12 +26,34 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import { projectdetail } from '@/lib/v1_sdk/index'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['projectDetail'],
+  data() {
+    return {
+      project: {
+        projectId: '1'
+      },
+      shoppingForm: {
+        type: 2,
+        cartid: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
+  },
   methods: {
+    ...mapActions('auth', ['setProductsNum']),
     // 跳转到项目播放页
     goProjectPlayer() {
-      window.open(window.location.origin + '/project/projectPlayer')
+      if (this.isAuthenticated) {
+        window.open(window.location.origin + '/project/projectPlayer')
+      } else {
+        this.$bus.$emit('loginShow', true)
+      }
     },
     // 项目加入购物车
     addShoppingCart() {
@@ -52,6 +74,9 @@ export default {
         this.$router.push('/shop/shoppingcart')
       })
     }
+  },
+  mounted() {
+    this.project.projectId = persistStore.get('projectId')
   }
 }
 </script>
