@@ -26,10 +26,8 @@
           </div>
         </div>
       </div>
-      <div v-if="!invitationCodeList||invitationCodeList.length<1" class="noCodes">
-        <img :src="noMsgImg" alt="">
-        <p>抱歉，现在还没有课程码~</p>
-      </div>
+      <v-nomsg v-if="!invitationCodeList||invitationCodeList.length<1" class="noCodes" :config="noMsg"></v-nomsg>
+
     </div>
   </div>
 </template>
@@ -39,8 +37,12 @@ import { binding } from '~/lib/v1_sdk/index'
 import { timestampToYMD } from '@/lib/util/helper'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import NoMsg from '@/pages/profile/pages/noMsg.vue'
 export default {
   props: ['invitationCodeList'],
+  components: {
+    'v-nomsg': NoMsg
+  },
   data() {
     return {
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
@@ -49,6 +51,10 @@ export default {
       },
       kidForm: {
         kids: ''
+      },
+      noMsg: {
+        type: 'myCode',
+        text: '抱歉，现在还没有课程码~'
       }
     }
   },
