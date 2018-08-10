@@ -51,42 +51,7 @@
             </el-form-item>
           </el-form>
           <!-- 展示个人信息 -->
-          <div v-if="showInfo" class="psnInfo">
-            <ul>
-              <li>
-                <span>昵称：</span>
-                <span>{{psnForm.nick_name}}</span>
-              </li>
-              <li>
-                <span>性别：</span>
-                <span>{{getSex(psnForm.sex)}}</span>
-              </li>
-              <li>
-                <span>生日：</span>
-                <span>{{formatDate(psnForm.birthday)}}</span>
-              </li>
-              <li>
-                <span>所在地区：</span>
-                <span>{{psnForm.province_name}}{{psnForm.city_name}}{{psnForm.area_name}}</span>
-              </li>
-              <li>
-                <span>职位：</span>
-                <span>{{psnForm.position_name}}</span>
-              </li>
-              <li>
-                <span>邮箱：</span>
-                <span>{{psnForm.email}}</span>
-              </li>
-              <li>
-                <span>手机号：</span>
-                <span class="default">{{psnForm.user_name}}</span>
-              </li>
-              <li>
-                <span>单位信息：</span>
-                <span class="default">{{psnForm.company_name}}</span>
-              </li>
-            </ul>
-          </div>
+          <v-showPer v-if="showInfo" :data="psnForm"></v-showPer>
         </el-tab-pane>
         <!-- 修改密码 -->
         <el-tab-pane label="修改密码" name="second">
@@ -106,7 +71,6 @@
                 <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
               </el-form-item>
             </el-form>
-
             <input type="password" class="hideInput">
           </div>
         </el-tab-pane>
@@ -127,7 +91,11 @@ import { personalset } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
 import { mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import ShowPerson from '@/pages/profile/pages/showPerson'
 export default {
+  components: {
+    'v-showPer': ShowPerson
+  },
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {

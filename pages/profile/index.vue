@@ -13,11 +13,7 @@
             </div>
             <div class="content">
               <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
-              <div v-else class="noCourse fillTop">
-                <img :src="noMsgImg" alt="">
-                <h4>抱歉，现在还没有学习过的课程呦~</h4>
-                <!-- <p>去学习</p> -->
-              </div>
+              <v-nomsg class="fillTop" v-else :config="noMsgOne"></v-nomsg>
             </div>
           </el-card>
         </el-tab-pane>
@@ -26,10 +22,6 @@
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
           <el-card class="changeNav">
-            <!-- <el-select v-model="value" @change="changeNav">
-              <el-option v-for="(item,index) in options" :key="index" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select> -->
             <el-tabs v-model="activeNames" @tab-click="handleActive">
               <!-- 我的课程 学习中 -->
               <el-tab-pane label="学习中" name="first">
@@ -37,13 +29,8 @@
                 <div class="pagination" v-if="newDataing  && newDataing.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="pagemsg1.pagesize" :pager-count="5" :page-count="pagemsg1.pagesize" :current-page="pagemsg1.page" :total="pagemsg1.total" @current-change="studyPageChange"></el-pagination>
                 </div>
-                <div class="content" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，现在还没有学习中的课程呦~</h4>
-                    <!-- <p>去学习</p> -->
-                  </div>
-                </div>
+                <v-nomsg v-else :config="noMsgTwo"></v-nomsg>
+
               </el-tab-pane>
               <!-- 我的课程 已完成 -->
               <el-tab-pane label="已完成" name="second">
@@ -51,13 +38,8 @@
                 <div class="pagination" v-if="newDataReady && newDataReady.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
                 </div>
-                <div class="content" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，现在还没有已经完成的课程呦~</h4>
-                    <!-- <p>去学习</p> -->
-                  </div>
-                </div>
+                <v-nomsg v-else :config="noMsgThree"></v-nomsg>
+
               </el-tab-pane>
               <!-- 我的课程 已过期 -->
               <el-tab-pane label="已过期" name="fourth">
@@ -65,13 +47,8 @@
                 <div class="pagination" v-if="overTimeData && overTimeData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
                 </div>
-                <div class="content" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，现在还没有已过期的课程呦~</h4>
-                    <!-- <p>去学习</p> -->
-                  </div>
-                </div>
+                <v-nomsg v-else :config="noMsgFour"></v-nomsg>
+
               </el-tab-pane>
               <!-- 我的课程 我的收藏 -->
               <el-tab-pane label="我的收藏" name="third">
@@ -79,13 +56,8 @@
                 <div class="pagination" v-if="collectionData && collectionData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="pagemsg3.pagesize" :pager-count="5" :page-count="pagemsg3.pagesize" :current-page="pagemsg3.page" :total="pagemsg3.total" @current-change="collectionPageChange"></el-pagination>
                 </div>
-                <div class="content" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，现在还没有已经收藏的课程呦~</h4>
-                    <!-- <p>去学习</p> -->
-                  </div>
-                </div>
+                <v-nomsg v-else :config="noMsgFive"></v-nomsg>
+
               </el-tab-pane>
             </el-tabs>
           </el-card>
@@ -103,12 +75,8 @@
                 <div class="pagination" v-if="studyProjectData  && studyProjectData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="projectPageStudy.pagesize" :pager-count="5" :page-count="projectPageStudy.pagesize" :current-page="projectPageStudy.page" :total="projectPageStudy.total" @current-change="studyProjectPageChange"></el-pagination>
                 </div>
-                <div class="content" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，现在还没有学习中的项目呦~</h4>
-                  </div>
-                </div>
+                <v-nomsg v-else :config="noMsgSix"></v-nomsg>
+
               </el-tab-pane>
               <!-- 我的项目 已完成 -->
               <el-tab-pane label="已完成" name="second">
@@ -116,12 +84,8 @@
                 <div class="pagination" v-if="readyProjectData && readyProjectData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="projectPageReady.pagesize" :pager-count="5" :page-count="projectPageReady.pagesize" :current-page="projectPageReady.page" :total="projectPageReady.total" @current-change="studyProjectPageChange"></el-pagination>
                 </div>
-                <div class="content" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，现在还没有已经完成的项目呦~</h4>
-                  </div>
-                </div>
+                <v-nomsg v-else :config="noMsgSeven"></v-nomsg>
+
               </el-tab-pane>
               <!-- 我的项目 已过期 -->
               <el-tab-pane label="已过期" name="third">
@@ -129,12 +93,8 @@
                 <div class="pagination" v-if="expiredProjectData && expiredProjectData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="projectPageExpired.pagesize" :pager-count="5" :page-count="projectPageExpired.pagesize" :current-page="projectPageExpired.page" :total="projectPageExpired.total" @current-change="expiredProjectPageChange"></el-pagination>
                 </div>
-                <div class="content" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，现在还没有已过期的项目呦~</h4>
-                  </div>
-                </div>
+                <v-nomsg v-else :config="noMsgEight"></v-nomsg>
+
               </el-tab-pane>
               <!-- 我的项目 我的收藏 -->
               <el-tab-pane label="我的收藏" name="fourth">
@@ -142,12 +102,8 @@
                 <div class="pagination" v-if="collectProjectData && collectProjectData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="projectPageCollect.pagesize" :pager-count="5" :page-count="projectPageCollect.pagesize" :current-page="projectPageCollect.page" :total="projectPageCollect.total" @current-change="collectProjectPageChange"></el-pagination>
                 </div>
-                <div class="content" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，现在还没有已经收藏的项目呦~</h4>
-                  </div>
-                </div>
+                <v-nomsg v-else :config="noMsgNine"></v-nomsg>
+
               </el-tab-pane>
             </el-tabs>
           </el-card>
@@ -161,193 +117,37 @@
           <el-card v-if="showOrderList">
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="全部" name="orderFirst">
-                <v-order v-if="allOrderData  && allOrderData.length>0" :orderData="allOrderData" :config="configOne" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，没有更多的订单了~</h4>
-                  </div>
-                </div>
+                <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
+                <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+
               </el-tab-pane>
               <el-tab-pane name="orderSecond">
                 <span class="payCut" slot="label">未完成
                   <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
                 </span>
-                <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :orderData="unfinishedOrderData" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-order>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，没有更多的订单了~</h4>
-                  </div>
-                </div>
+                <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :data="unfinishedOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-order>
+                <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+
               </el-tab-pane>
               <el-tab-pane name="orderThird">
                 <span class="payOk" slot="label">已完成
                 </span>
-                <v-order v-if="readyOrderData && readyOrderData.length>0" :orderData="readyOrderData" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，没有更多的订单了~</h4>
-                  </div>
-                </div>
+                <v-order v-if="readyOrderData && readyOrderData.length>0" :data="readyOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
+                <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+
               </el-tab-pane>
               <el-tab-pane name="orderFour">
                 <span class="payOff" slot="label">已失效
                 </span>
-                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :orderData="invalidOrderData" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，没有更多的订单了~</h4>
-                  </div>
-                </div>
+                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :data="invalidOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
+                <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+
               </el-tab-pane>
             </el-tabs>
           </el-card>
-
           <!-- 订单详情 -->
-          <div class="orderListDetail" v-else>
-            <div class="table">
-              <div class="tableHeader">
-                <span class="goBack" @click="goBack">
-                  <i class="el-icon-arrow-left icon"></i>
-                </span>
-                <span>订单详情</span>
-              </div>
-              <div class="tableBody">
-                <!-- 订单信息 -->
-                <div class="order bodyItem">
-                  <div class="top">
-                    订单信息
-                  </div>
-                  <div class="bottom">
-                    <div class="info clearfix">
-                      <div class="info-fl">
-                        <span>订单编号：</span>
-                        <span>{{orderDetail.order_sn}}</span>
-                      </div>
-                      <div class="info-fr">
-                        <span>下单时间：</span>
-                        <span>{{timestampToTime(orderDetail.create_time)}}</span>
-                      </div>
-                    </div>
+          <v-detail v-else :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :config="orderType"></v-detail>
 
-                  </div>
-                </div>
-                <!-- 付款信息 -->
-                <div class="pay bodyItem" v-if="orderDetail.payment_method !== ''">
-                  <div class="top">
-                    付款信息
-                  </div>
-                  <div class="bottom">
-                    <!-- 快捷支付 -->
-                    <div v-if="orderDetail.payment_method !== '3'">
-                      <div class="info clearfix">
-                        <div class="info-fl">
-                          <span>支付方式：</span>
-                          <span>快捷支付</span>
-                        </div>
-                        <div class="info-fr">
-                          <span>支付时间：</span>
-                          <span>{{timestampToTime(orderDetail.pay_time)}}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- 公司转账 -->
-                    <div v-else>
-                      <div class="info clearfix">
-                        <div class="info-fl">
-                          <span>支付方式：</span>
-                          <span>公司转账</span>
-                        </div>
-                        <div class="info-fr">
-                          <span>户名：</span>
-                          <span>{{bankInfo.bank_account}}</span>
-                        </div>
-                      </div>
-                      <div class="info clearfix">
-                        <div class="info-fl">
-                          <span>账户：</span>
-                          <span>{{bankInfo.card_number}}</span>
-                        </div>
-                        <div class="info-fr">
-                          <span>开户行：</span>
-                          <span>{{bankInfo.bank_name}}</span>
-                        </div>
-                      </div>
-                      <div class="info clearfix">
-                        <div class="info-fl">
-                          <span>联行号：</span>
-                          <span>{{bankInfo.bank_code}}</span>
-                        </div>
-                        <div class="info-fr">
-                          <span>汇款识别码：</span>
-                          <span>{{bankInfo.identification_code}}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- 商品信息 -->
-                <div class="goods bodyItem">
-                  <div class="top">
-                    <span class="lf">商品信息</span>
-                    <span class="lm">单价</span>
-                    <span class="lr">数量</span>
-                  </div>
-                  <div class="bottom">
-                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="course in courseList" :key="course.id">
-                      <div class="courseInfo clearfix">
-                        <div class="bottomImg">
-
-                          <img class="fl" :src="course.picture" alt="">
-                        </div>
-
-                        <div class="fl">
-                          <h4>{{course.name}}</h4>
-                          <h6>{{course.curriculum_time}}学时</h6>
-                          <p>讲师：{{course.teacher_name}}</p>
-                        </div>
-                      </div>
-                      <div class="coursePrice">
-                        ￥{{course.price}}
-                      </div>
-                      <div class="courseOperation">
-                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
-                      </div>
-                    </div>
-                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="project in projectList" :key="project.id">
-                      <div class="courseInfo clearfix">
-                        <div class="bottomImg">
-                          <!-- 项目图标 -->
-                          <img class="project-img" :src="projectImg" alt="">
-                          <img class="fl" :src="project.picture" alt="">
-                        </div>
-
-                        <div class="fl">
-                          <h4>{{project.name}}</h4>
-                          <h6>{{project.curriculum_time}}学时</h6>
-                        </div>
-                      </div>
-                      <div class="coursePrice">
-                        ￥{{project.price}}
-                      </div>
-                      <div class="courseOperation">
-                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="tableFooter">
-                    <p>课程数量：{{courseList.length+projectList.length}}门</p>
-                    <p>学习人数：{{orderDetail.pay_number}}人</p>
-                    <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
@@ -358,13 +158,8 @@
               <span>我的消息</span>
             </div>
             <v-info @noMsg="isNoMyMsg"></v-info>
-            <div class="content" v-show="noMyMsg">
-              <div class="noCourse" v-if="noMyMsg">
-                <img :src="noMsgImg" alt="">
-                <h4>抱歉，现在还没有我的消息呦~</h4>
-                <!-- <p>去学习</p> -->
-              </div>
-            </div>
+            <v-nomsg v-show="noMyMsg" :config="noMsgEle"></v-nomsg>
+
           </el-card>
         </el-tab-pane>
         <!-- 个人设置 -->
@@ -408,105 +203,24 @@
             <el-tabs v-model="activeOrder" @tab-click="handleTicket">
               <el-tab-pane label="按订单开发票" name="orderFirst">
                 <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，您还没有订单需要开票</h4>
-                  </div>
-                </div>
+                <v-nomsg class="noOrder" v-else :config="noMsgTwl"></v-nomsg>
+
               </el-tab-pane>
               <el-tab-pane name="orderSecond" label="开票历史">
                 <v-tkhistory v-if="historyOrderData && historyOrderData.length>0" :orderData="historyOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-tkhistory>
-                <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，没有已经开具的开票~</h4>
-                  </div>
-                </div>
+                <v-nomsg class="noOrder" v-else :config="noMsgThi"></v-nomsg>
+
               </el-tab-pane>
               <el-tab-pane name="orderThird">
                 <span class="payOk" slot="label">开票规则
                 </span>
                 <v-tkrules v-loading="readyOrderLoad"></v-tkrules>
-                <!-- <div class="content noOrder" v-else>
-                  <div class="noCourse">
-                    <img :src="noMsgImg" alt="">
-                    <h4>抱歉，没有更多的订单了~</h4>
-                  </div>
-                </div> -->
               </el-tab-pane>
             </el-tabs>
           </el-card>
           <!-- 发票详情 -->
-          <div class="orderListDetail" v-else>
-            <div class="table">
-              <div class="tableHeader">
-                <span class="goBack" @click="goTicketBack">
-                  <i class="el-icon-arrow-left icon"></i>
-                </span>
-                <span>发票详情</span>
-              </div>
-              <div class="tableBody">
+          <v-detail v-else :config="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail"></v-detail>
 
-                <!-- 商品信息 -->
-                <div class="goods bodyItem">
-                  <div class="top">
-                    <span class="lf">商品信息</span>
-                    <span class="lm">单价</span>
-                    <span class="lr">数量</span>
-                  </div>
-                  <div class="bottom">
-                    <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="index">
-                      <div class="courseInfo clearfix">
-                        <div class="bottomImg">
-
-                          <img class="fl" :src="course.picture" alt="">
-                        </div>
-
-                        <div class="fl">
-                          <h4>{{course.name}}</h4>
-                          <h6>{{course.curriculum_time}}学时</h6>
-                          <p>讲师：{{course.teacher_name}}</p>
-                        </div>
-                      </div>
-                      <div class="coursePrice">
-                        ￥{{course.price}}
-                      </div>
-                      <div class="courseOperation">
-                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
-                      </div>
-                    </div>
-                    <div class="bottom-item clearfix" v-if="projectList.length" v-for="project in projectList" :key="project.id">
-                      <div class="courseInfo clearfix">
-                        <div class="bottomImg">
-                          <!-- 项目图标 -->
-                          <img class="project-img" :src="projectImg" alt="">
-                          <img class="fl" :src="project.picture" alt="">
-                        </div>
-
-                        <div class="fl">
-                          <h4>{{project.name}}</h4>
-                          <h6>{{project.curriculum_time}}学时</h6>
-                        </div>
-                      </div>
-                      <div class="coursePrice">
-                        ￥{{project.price}}
-                      </div>
-                      <div class="courseOperation">
-                        <i class="el-icon-close"></i>{{orderDetail.pay_number}}
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="tableFooter">
-                    <p>课程数量：{{courseList.length+projectList.length}}门</p>
-                    <p>学习人数：{{orderDetail.pay_number}}人</p>
-                    <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -514,16 +228,18 @@
 </template>
 
 <script>
-import CustomCard from '@/pages/profile/components/card.vue'
-import CustomList from '@/pages/profile/components/list.vue'
+import NoMsg from '@/pages/profile/pages/noMsg.vue'
+import CustomCard from '@/pages/profile/components/Card.vue'
+import CustomList from '@/pages/profile/components/List.vue'
 import Banner from '@/components/common/Banner.vue'
-import PersonalSet from '@/pages/profile/components/personalset.vue'
-import Binding from '@/pages/profile/components/bindid'
-import Info from '@/pages/profile/components/info'
-import Order from '@/pages/profile/pages/order'
+import PersonalSet from '@/pages/profile/pages/personalSet.vue'
+import Binding from '@/pages/profile/components/BindId'
+import Info from '@/pages/profile/components/Info'
+import Order from '@/pages/profile/components/OrderList'
+import Detail from '@/pages/profile/components/Detail'
 import Invitation from '@/pages/profile/pages/invitation'
-import Conversion from '@/pages/profile/components/conversion'
-import Bind from '@/pages/profile/components/binding'
+import Conversion from '@/pages/profile/components/Conversion'
+import Bind from '@/pages/profile/components/Binding'
 import TicketOrder from '@/pages/profile/pages/ticketOrder'
 import TicketHistory from '@/pages/profile/pages/ticketHistory'
 import TicketRules from '@/pages/profile/pages/ticketRules'
@@ -539,16 +255,25 @@ export default {
     'v-info': Info,
     'v-banner': Banner,
     'v-order': Order,
+    'v-detail': Detail,
     'v-invitation': Invitation,
     'v-conversion': Conversion,
     'v-binding': Bind,
     'v-tkorder': TicketOrder,
+    // 'v-ticketorderdetail': TicketOrderDetail,
     'v-tkhistory': TicketHistory,
     'v-binding': Bind,
-    'v-tkrules': TicketRules
+    'v-tkrules': TicketRules,
+    'v-nomsg': NoMsg
   },
   data() {
     return {
+      orderType: {
+        type: 'order'
+      },
+      ticketType: {
+        type: 'ticket'
+      },
       projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png', //项目图标
       isShowNoCourse: false,
       noMyMsg: false,
@@ -580,6 +305,58 @@ export default {
       configFour: {
         card_type: 'profile',
         card: 'overtime'
+      },
+      noMsgOne: {
+        type: 'index',
+        text: '抱歉，现在还没有学习过的课程呦~'
+      },
+      noMsgTwo: {
+        type: 'myCourse',
+        text: '抱歉，现在还没有学习中的课程呦~'
+      },
+      noMsgThree: {
+        type: 'myCourse',
+        text: '抱歉，现在还没有已经完成的课程呦~'
+      },
+      noMsgFour: {
+        type: 'myCourse',
+        text: '抱歉，现在还没有已过期的课程呦~'
+      },
+      noMsgFive: {
+        type: 'myCourse',
+        text: '抱歉，现在还没有已经收藏的课程呦~'
+      },
+      noMsgSix: {
+        type: 'myProject',
+        text: '抱歉，现在还没有学习中的项目呦~'
+      },
+      noMsgSeven: {
+        type: 'myProject',
+        text: '抱歉，现在还没有已经完成的项目呦~'
+      },
+      noMsgEight: {
+        type: 'myProject',
+        text: '抱歉，现在还没有已过期的项目呦~'
+      },
+      noMsgNine: {
+        type: 'myProject',
+        text: '抱歉，现在还没有已经收藏的项目呦~'
+      },
+      noMsgTen: {
+        type: 'myOrder',
+        text: '抱歉，没有更多的订单了~'
+      },
+      noMsgEle: {
+        type: 'myInfo',
+        text: '抱歉，现在还没有我的消息呦~'
+      },
+      noMsgTwl: {
+        type: 'myTicket',
+        text: '抱歉，您还没有订单需要开票~'
+      },
+      noMsgThi: {
+        type: 'myTicket',
+        text: '抱歉，没有已经开具的开票~'
       },
       newData: [],
       styleForm: {
@@ -1196,6 +973,18 @@ export default {
     })
     this.$bus.$on('studyProject', data => {
       this.getProjectOneList()
+    })
+    this.$bus.$on('goBack', () => {
+      this.goBack()
+    })
+    this.$bus.$on('goTicketBack', () => {
+      this.goTicketBack()
+    })
+    this.$bus.$on('goTicketDetail', data => {
+      this.getTicketDetail(data)
+    })
+    this.$bus.$on('goOrderDetail', data => {
+      this.getOrderDetail(data)
     })
   },
   created() {
