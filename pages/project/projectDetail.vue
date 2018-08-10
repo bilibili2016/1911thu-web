@@ -1,48 +1,18 @@
 <template>
   <div class="projectDetail">
     <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}" v-loading="projectDetailLoad">
-      <!-- 面包屑 收藏分享 projectDetail.picture-->
       <div class="headerTop clearfix">
         <div class="headerL fl">
-          <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item :to="{ path: '/course/16?pid=1&xid=0' }">分类列表</el-breadcrumb-item>
-            <el-breadcrumb-item>项目详情</el-breadcrumb-item>
-          </el-breadcrumb>
+          <!-- 面包屑组件 -->
+          <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
         </div>
         <div class="headerR fr">
-          <span :class="['collection',{'bag': this.collectMsg === true}]" @click="collection">
-            <i class="el-icon-star-on"></i>
-            <span>收藏 </span>
-          </span>
-          <!-- <span class="">
-            <i class="el-icon-share"></i>
-            <span>分享 </span>
-          </span> -->
+          <!-- 收藏分享 -->
+          <v-collection :collectData="collectMsg"></v-collection>
         </div>
       </div>
-      <!-- 项目名 -->
-      <h1>{{projectDetail.title}}</h1>
-      <h3>{{projectDetail.deputy_title}}</h3>
-      <h5>
-        <span>{{projectDetail.study_time}} 课时</span>
-        <i class="line"></i>
-        <span>学习人数 {{projectDetail.study_number}}</span>
-        <i class="line"></i>
-        <el-rate v-model="projectDetail.score" disabled></el-rate>
-      </h5>
-      <div class="price clearfix">
-        <div class="fl">
-          <i>￥</i>{{projectDetail.present_price}}</div>
-        <div class="fr" @click="addShoppingCart">
-          <i>加入购物车</i>
-          <span>
-            <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
-          </span>
-        </div>
-        <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
-        <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
-      </div>
+      <!-- 项目详情基本信息 -->
+      <v-detail :projectDetail="projectDetail"></v-detail>
     </div>
     <!-- 介绍 线上课程 线下课程介绍 用户评价 常见问题-->
     <div class="proContent">
@@ -67,6 +37,9 @@
 <script>
 import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
+import Collection from '@/components/common/Collection.vue'
+import BreadCrumb from '@/components/common/BreadCrumb.vue'
+import Detail from '@/pages/project/components/detail'
 import Procourse from '@/pages/project/projectCourse'
 import Proevaluate from '@/pages/project/projectEvaluate'
 import Commonproblems from '@/pages/project/commonProblems'
@@ -75,16 +48,26 @@ export default {
   components: {
     'v-procourse': Procourse,
     'v-proevaluate': Proevaluate,
-    'v-proproblems': Commonproblems
+    'v-breadcrumb': BreadCrumb,
+    'v-proproblems': Commonproblems,
+    'v-collection': Collection,
+    'v-detail': Detail
   },
   data() {
     return {
+      BreadCrumb: {
+        type: 'courseDetail',
+        text: '项目详情'
+      },
       projectDetailLoad: true,
       inlineLoad: true,
       evaluateDataLoad: true,
       problemLoad: true,
       rateModel: 3,
-      collectMsg: false,
+      collectMsg: {
+        isCollect: 0,
+        types: 2
+      },
       activeName: 'first',
       loadMsg: false,
       addCollectionForm: {
@@ -95,10 +78,7 @@ export default {
         projectId: '1'
       },
       projectDetail: {},
-      shoppingForm: {
-        type: 2,
-        cartid: ''
-      },
+
       evaluateForm: {
         pages: '',
         limits: '',
@@ -150,10 +130,14 @@ export default {
     getProjectInfo() {
       projectdetail.getProjectInfo(this.project).then(res => {
         this.projectDetail = res.data.curriculumProjectDetail
-        this.collectMsg = res.data.curriculumProjectDetail.is_Collection
         this.projectDetail.score = Number(this.projectDetail.score)
         this.projectDetailLoad = false
         this.inlineLoad = false
+        if (res.data.curriculumProjectDetail.is_Collection) {
+          this.collectMsg.isCollect = 1
+        } else {
+          this.collectMsg.isCollect = 0
+        }
       })
     },
     // 获取项目评论
@@ -162,61 +146,6 @@ export default {
         this.evaluateData = res.data.evaluateList
         this.evaluateInfo = res.data.totalEvaluateInfo
         this.evaluateDataLoad = false
-      })
-    },
-    // 项目加入购物车
-    addShoppingCart() {
-      this.shoppingForm.cartid = this.project.projectId
-      projectdetail.addShopCart(this.shoppingForm).then(res => {
-        if (res.status === 0) {
-          // 添加购物车成功
-          this.setProductsNum({
-            pn: Number(res.data.curriculumNumber)
-          })
-        } else {
-          this.$message({
-            showClose: true,
-            type: 'info',
-            message: res.msg
-          })
-        }
-        this.$router.push('/shop/shoppingcart')
-      })
-    },
-    // 跳转到项目播放页
-    goProjectPlayer() {
-      window.open(window.location.origin + '/project/projectPlayer')
-    },
-    // 判断是收藏还是为收藏
-    collection() {
-      if (this.collectMsg === true) {
-        this.deleteCollection()
-      } else {
-        this.addCollection()
-      }
-    },
-    // 添加收藏
-    addCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      projectplayer.addCollection(this.addCollectionForm).then(response => {
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '添加收藏成功'
-        })
-        this.collectMsg = true
-      })
-    },
-    // 删除收藏
-    deleteCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('projectId')
-      projectplayer.deleteCollection(this.addCollectionForm).then(response => {
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '取消收藏成功'
-        })
-        this.collectMsg = false
       })
     }
   },

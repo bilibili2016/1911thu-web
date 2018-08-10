@@ -104,7 +104,10 @@ export default {
         isRecommend: ''
       },
       privileMsg: true,
-      collectMsg: 2,
+      collectMsg: {
+        types: 1,
+        isCollect: 0
+      },
       addCollectionForm: {
         curriculumId: null,
         types: 1
@@ -290,7 +293,7 @@ export default {
         this.privileMsg = response.data.curriculumPrivilege
         this.content = response.data.curriculumPrivilege
         this.loadTeacher = false
-        this.collectMsg = response.data.curriculumDetail.is_collection
+        this.collectMsg.isCollect = response.data.curriculumDetail.is_collection
       })
     },
     // 课程-获取课程列表
@@ -317,47 +320,6 @@ export default {
             response.data.defaultCurriculumCatalog.id
           )
         })
-    },
-    // 收藏-判断是收藏还是未收藏
-    collection() {
-      if (this.isAuthenticated) {
-        if (this.collectMsg === 1) {
-          this.deleteCollection()
-          this.collectMsg = 2
-        } else {
-          this.addCollection()
-          this.collectMsg = 1
-        }
-      } else {
-        this.$bus.$emit('loginShow', true)
-      }
-    },
-    // 收藏-添加收藏
-    addCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      return new Promise((resolve, reject) => {
-        coursedetail.addCollection(this.addCollectionForm).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '添加收藏成功'
-          })
-          this.collectMsg = 1
-        })
-      })
-    },
-    // 收藏-删除收藏
-    deleteCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
-        this.collectMsg = response.data.curriculumDetail.is_collection
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '取消收藏成功'
-        })
-        this.collectMsg = 0
-      })
     },
     // 分享 默认设置
     // shareDefault() {

@@ -1,0 +1,85 @@
+<template>
+  <div>
+    <h1>{{projectDetail.title}}</h1>
+    <h3>{{projectDetail.deputy_title}}</h3>
+    <h5>
+      <span>{{projectDetail.study_time}} 课时</span>
+      <i class="line"></i>
+      <span>学习人数 {{projectDetail.study_number}}</span>
+      <i class="line"></i>
+      <el-rate v-model="projectDetail.score" disabled></el-rate>
+    </h5>
+    <div class="price clearfix">
+      <div class="fl">
+        <i>￥</i>{{projectDetail.present_price}}</div>
+      <div class="fr" @click="addShoppingCart">
+        <i>加入购物车</i>
+        <span>
+          <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
+        </span>
+      </div>
+      <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
+      <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import { projectdetail } from '@/lib/v1_sdk/index'
+import { store as persistStore } from '~/lib/core/store'
+export default {
+  props: ['projectDetail'],
+  data() {
+    return {
+      project: {
+        projectId: '1'
+      },
+      shoppingForm: {
+        type: 2,
+        cartid: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
+  },
+  methods: {
+    ...mapActions('auth', ['setProductsNum']),
+    // 跳转到项目播放页
+    goProjectPlayer() {
+      if (this.isAuthenticated) {
+        window.open(window.location.origin + '/project/projectPlayer')
+      } else {
+        this.$bus.$emit('loginShow', true)
+      }
+    },
+    // 项目加入购物车
+    addShoppingCart() {
+      this.shoppingForm.cartid = this.project.projectId
+      projectdetail.addShopCart(this.shoppingForm).then(res => {
+        if (res.status === 0) {
+          // 添加购物车成功
+          this.setProductsNum({
+            pn: Number(res.data.curriculumNumber)
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'info',
+            message: res.msg
+          })
+        }
+        this.$router.push('/shop/shoppingcart')
+      })
+    }
+  },
+  mounted() {
+    this.project.projectId = persistStore.get('projectId')
+  }
+}
+</script>
+
+<style scoped>
+</style>

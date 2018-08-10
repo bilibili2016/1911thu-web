@@ -1,21 +1,20 @@
 <template>
-    <div data="22" class="collect">
-        <div class="line-center">
-            <span class="collectSpan" @click="collection" :class=" { bag: collectMsg === 1}">
-                <i class="el-icon-star-on"></i>
-                <!-- {{isCollection}} -->
-                <span>收藏 </span>
-            </span>
-            <!-- 分享暂时注释 -->
-            <!-- <span>
+  <div data="22" class="collect">
+    <div class="line-center">
+      <span class="collectSpan" @click="collection" :class=" { bag: collectData.isCollect == 1}">
+        <i class="el-icon-star-on"></i>
+        <span>收藏</span>
+      </span>
+      <!-- 分享暂时注释 -->
+      <!-- <span>
                 <i class="el-icon-share"></i>
                 <span> 分享 </span>
                 <div class="shareIcons">
                   <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
                 </div>
               </span> -->
-        </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -26,29 +25,26 @@ export default {
   props: ['collectData'],
   data() {
     return {
-      collectMsg: '',
       addCollectionForm: {
-        curriculumId: null
+        curriculumId: null,
+        types: ''
       }
     }
   },
-  mounted() {
-    this.collectMsg = this.collectData
-  },
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
-    ...mapState('auth', ['kid', 'isCollection'])
+    ...mapState('auth', ['kid'])
   },
   methods: {
     // 收藏-判断是收藏还是未收藏
     collection() {
       if (this.isAuthenticated) {
-        if (this.collectMsg === 1) {
+        if (this.collectData.isCollect === 1) {
           this.deleteCollection()
-          this.collectMsg = 2
+          this.collectData.isCollect = 0
         } else {
           this.addCollection()
-          this.collectMsg = 1
+          this.collectData.isCollect = 1
         }
       } else {
         this.$bus.$emit('loginShow', true)
@@ -57,28 +53,43 @@ export default {
     // 收藏-添加收藏
     addCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      return new Promise((resolve, reject) => {
-        coursedetail.addCollection(this.addCollectionForm).then(response => {
+      this.addCollectionForm.types = this.collectData.types
+      coursedetail.addCollection(this.addCollectionForm).then(response => {
+        if (response.status === 0) {
           this.$message({
             showClose: true,
             type: 'success',
             message: '添加收藏成功'
           })
-          this.collectMsg = 1
-        })
+          this.collectData.isCollect = 1
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
       })
     },
     // 收藏-删除收藏
     deleteCollection() {
       this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      this.addCollectionForm.types = this.collectData.types
       coursedetail.deleteCollection(this.addCollectionForm).then(response => {
-        this.collectMsg = response.data.curriculumDetail.is_collection
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '取消收藏成功'
-        })
-        this.collectMsg = 0
+        if (response.status === 0) {
+          this.collectData.isCollect = 0
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: '取消收藏成功'
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
       })
     }
   }

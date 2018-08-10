@@ -3,11 +3,14 @@
     <div class="newOrFreeCourseList center goodlesson">
       <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index " @click="courseInfo(course) ">
         <el-card class="fl " :body-style="{ padding: '0px' } ">
-
-          <!-- 老师封面 -->
-          <img v-if="!teacherImg" :src="course.teacher_picture " class="image " alt=" ">
-          <!-- 课程封面 -->
-          <img :src="course.picture" class="image " alt=" " v-else>
+          <div class="courseImg">
+            <!-- 项目图标 -->
+            <img v-if="cidNumber==='0'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
+            <!-- 老师封面 -->
+            <img v-if="!teacherImg" :src="course.teacher_picture " class="image" alt=" ">
+            <!-- 课程封面 -->
+            <img :src="course.picture" class="image" alt=" " v-else>
+          </div>
         </el-card>
 
         <div class="particulars fr ">
@@ -53,6 +56,7 @@ export default {
   },
   data() {
     return {
+      cidNumber: '',
       peopleImg: require('@/assets/images/ren.png'),
       teacherImg: true,
       kidForm: {
@@ -132,6 +136,7 @@ export default {
   },
   mounted() {
     this.isTeacherPage()
+    this.cidNumber = window.location.pathname.split('/')[3]
   }
 }
 </script>
