@@ -10,42 +10,9 @@
     background-position: top center;
     background-size: cover;
     box-shadow: 8px 0px 21px rgba(39, 0, 77, 0.07);
-    .headerTop {
-      height: 56px;
-      line-height: 56px;
-      padding: 0 25px;
-      font-size: 12px;
-      color: #bdbccf;
-      .headerL {
-        color: #999;
-        .main-crumbs {
-          display: inline-block;
-          .el-breadcrumb__inner {
-            color: #999;
-          }
-          .el-breadcrumb__item:last-child .el-breadcrumb__inner {
-            color: #999 !important;
-          }
-        }
-      }
-      .headerR {
-        font-size: #bdbccf;
-        span {
-          cursor: pointer;
-          i {
-            margin-right: 9px;
-          }
-        }
-        .collection {
-          margin-right: 21px;
-          .bag {
-            color: #6417a6;
-          }
-        }
-      }
-    }
     h1 {
-      margin-top: 76px;
+      margin: 0;
+      padding-top: 140px;
       font-size: 46px;
       color: #fff;
       text-align: center;
@@ -53,82 +20,105 @@
     h3 {
       font-size: 24px;
       line-height: 30px;
-      margin-top: 20px;
+      margin-top: 30px;
       color: #fff;
       text-align: center;
     }
-    h5 {
-      margin-top: 45px;
-      font-size: 16px;
-      height: 20px;
-      line-height: 20px;
-      color: #c4c3d5;
-      text-align: center;
-      .el-rate {
-        display: inline-block;
-        vertical-align: top;
-      }
-      i.line {
-        display: inline-block;
-        height: 12px;
-        width: 1px;
-        margin: 0 17px;
-        background-color: #bdbccf;
-      }
-    }
-    .price {
-      margin-top: 100px;
+
+    .detail {
+      margin-top: 170px;
       height: 98px;
-      line-height: 98px;
-      padding: 0 40px;
       background: #fff;
-      .fl {
-        font-size: 32px;
-        i {
-          font-size: 24px;
-        }
-        color: #fd0e19;
-      }
-      .study {
-        float: right;
-        width: 120px;
-        height: 48px;
-        margin-top: 25px;
-        line-height: 48px;
-        text-align: center;
-        margin-right: 20px;
-        border-radius: 24px;
-        border: 1px solid #fd0e19;
-        color: #fd0e19;
-        cursor: pointer;
-      }
-      .fr {
-        width: 200px;
-        height: 48px;
-        line-height: 48px;
-        margin-top: 25px;
-        border-radius: 24px;
-        background-color: #fd0e19;
-        text-align: center;
-        i {
+      .some {
+        display: inline;
+        div {
           display: inline-block;
-          color: #fff;
-          font-size: 16px;
-          padding-right: 20px;
-          line-height: 20px;
-          margin-top: 14px;
-          border-right: 1px solid #fff;
-          cursor: pointer;
-        }
-        span {
-          padding-left: 20px;
+          width: 120px;
+          height: 40px;
+          margin-top: 29px;
+          text-align: center;
           vertical-align: top;
-          cursor: pointer;
-          img {
-            width: 23px;
-            height: 24px;
-            margin-top: 12px;
+          color: #545c63;
+          border-right: 1px solid #e0e4e7;
+          h5,
+          h6 {
+            height: 20px;
+            line-height: 20px;
+            margin-top: -8px;
+            font-size: 14px;
           }
+          h6 {
+            font-size: 12px;
+          }
+          p {
+            font-size: 14px;
+            span {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      .buy {
+        height: 98px;
+        margin-right: 40px;
+        text-align: right;
+        & > div {
+          display: inline-block;
+        }
+        .price {
+          height: 98px;
+          line-height: 98px;
+          margin-right: 20px;
+          font-size: 32px;
+          i {
+            font-size: 24px;
+          }
+          color: #fd0e19;
+        }
+        .addShoppingCart {
+          width: 200px;
+          height: 48px;
+          line-height: 48px;
+          margin-top: 25px;
+          border-radius: 24px;
+          background-color: #641ca1;
+          text-align: center;
+          vertical-align: top;
+          i {
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            font-size: 16px;
+            padding-right: 20px;
+            margin-top: 15px;
+            vertical-align: top;
+            border-right: 1px solid #fff;
+            color: #fff;
+            cursor: pointer;
+          }
+          span {
+            padding-left: 20px;
+            vertical-align: top;
+            cursor: pointer;
+            img {
+              width: 23px;
+              height: 24px;
+              margin-top: 12px;
+            }
+          }
+        }
+        .study {
+          width: 120px;
+          height: 48px;
+          margin-top: 25px;
+          margin-right: 20px;
+          line-height: 48px;
+          text-align: center;
+          border-radius: 24px;
+          border: 1px solid #641ca1;
+          vertical-align: top;
+          color: #641ca1;
+          cursor: pointer;
         }
       }
     }

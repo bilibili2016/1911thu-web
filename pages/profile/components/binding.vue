@@ -122,6 +122,24 @@ export default {
     },
     // 添加课程 绑定
     doSubmit() {
+      this.$confirm('绑定成功！', {
+        confirmButtonText: '确定',
+        showCancelButton: false,
+        center: true
+      })
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+      return false
       binding.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({
@@ -129,6 +147,7 @@ export default {
             type: 'success',
             message: res.msg
           })
+
           this.$bus.$emit('studyCourse')
           this.$bus.$emit('reGetCode')
           this.$bus.$emit('studyProject')

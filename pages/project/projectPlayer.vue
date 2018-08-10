@@ -36,24 +36,7 @@
     </div>
     <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
       <div v-show="mediaRInner" class="inner" ref="inner">
-        <div v-for="(course,index) in courseList" :key="index" ref="courseList">
-          <h5 class="title">{{course.curriculum_title}}</h5>
-          <div class="courseList">
-            <div class="chapter" v-for="(section,index) in course.curriculumCatalogList" :key="index">
-              <h4>{{section.title}}</h4>
-              <div class="knobble clearfix" v-for="(bar,index) in section.catalogList" :key="index" @click="handleCourse(bar,index)" :class="{cli:ischeck == bar.id?true:false}">
-                <span class="fl playIcon" v-show="ischeck == bar.id?false:true">
-                  <i class="el-icon-caret-right"></i>
-                </span>
-                <span class="fl playImg" v-show="ischeck == bar.id?true:false">
-                  <img :src="playing" alt="" ref="videoButton">
-                </span>
-                <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)</span>
-                <span class="barNameHover">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <v-list :courseList="courseList" :playing="playing" :ischeck="ischeck"></v-list>
       </div>
       <div class="fold" @click="fold">
         <i :class="mediaRIcon"></i>
@@ -61,8 +44,9 @@
     </div>
     <!-- 报告问题 -->
     <v-report :config="config"></v-report>
-    <!-- <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="courseList" @closeEvaluate="closeEvaluate"> </v-evaluatecase> -->
-    <div class="evaluate" v-show="showEvaluate">
+    <!-- 写评价 -->
+    <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="courseList" :config="configEvaluste" @closeEvaluate="closeEvaluate"> </v-evaluatecase>
+    <!-- <div class="evaluate" v-show="showEvaluate">
       <div class="note">
         <h4>项目评价
           <i class="el-icon-close fr" @click="closeEvaluate"></i>
@@ -82,8 +66,7 @@
           <el-button round @click.native="addProjectEvaluate">提交</el-button>
         </div>
       </div>
-    </div>
-    <el-button type="text" @click="goShoppingCart"></el-button>
+    </div> -->
     <v-pay></v-pay>
   </div>
 </template>
@@ -96,6 +79,7 @@ import { store as persistStore } from '~/lib/core/store'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
 import Repore from '@/components/common/Report.vue'
 import Pay from '@/components/common/pay.vue'
+import List from '@/pages/project/components/courseList.vue'
 import Collection from '@/components/common/Collection.vue'
 
 export default {
@@ -103,13 +87,13 @@ export default {
     'v-evaluatecase': EvaluateCase,
     'v-report': Repore,
     'v-pay': Pay,
-    'v-collection': Collection
+    'v-collection': Collection,
+    'v-list': List
   },
   computed: {
     ...mapState('auth', ['kid', 'tid']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
-
   data() {
     return {
       isClose: true,
@@ -120,6 +104,9 @@ export default {
       showEvaluate: false,
       curriculumcartids: {
         cartid: null
+      },
+      configEvaluste: {
+        type: 2
       },
       ischeck: '',
       mediaRW: 22,
@@ -256,7 +243,7 @@ export default {
       })
     },
     // 点击小节播放
-    handleCourse(item, index) {
+    handleCourse(item) {
       this.ischeck = item.id
       this.playing = this.pauseImg
       persistStore.set('curriculumId', item.curriculum_id)
@@ -292,13 +279,7 @@ export default {
           // 未购买课程跳转到购物车-点击去购买
           this.addShopCart()
         })
-        .catch(() => {
-          // 点击取消
-          // this.$message({
-          //   type: 'info',
-          //   message: '已取消删除'
-          // })
-        })
+        .catch(() => {})
     },
     // 项目加入购物车
     addShopCart() {
@@ -329,7 +310,7 @@ export default {
       this.radioBtn = ''
       this.word = ''
     },
-    // 改变屏幕宽度
+    // 改变屏幕宽度重置播放器大小
     resize() {
       if (this.$refs.playerBox) {
         const h = this.$refs.playerBox.offsetHeight
@@ -339,6 +320,7 @@ export default {
         this.$refs.inner.style.height = h - 100 + 'px'
       }
     },
+    // 隐藏右侧课程列表
     fold() {
       if (this.$refs.mediaR.offsetWidth != 0) {
         this.mediaRW = 0
@@ -433,11 +415,22 @@ export default {
             } else {
               that.seconds--
               let playTime = window.qcplayer.currentTime()
+              /**
+               * socket.emit()6个参数
+               * 1、watchRecordingTime固定参数
+               * 2、课程ID
+               * 3、小节ID
+               * 4、当前播放时间
+               * 5、项目播放的时候为项目ID，课程播放为空
+               * 6、type:1是课程，2是项目
+               */
               socket.emit(
                 'watchRecordingTime',
                 persistStore.get('curriculumId'),
                 persistStore.get('catalogId'),
-                playTime
+                playTime,
+                that.projectForm.ids,
+                2
               )
             }
           }, 1000)
@@ -458,6 +451,8 @@ export default {
         }
         // 监听播放停止事件
         if (msg.type == 'ended') {
+          console.log(123)
+
           // 未购买且试看
           if (!that.bought && that.isTry == '2') {
             that.$bus.$emit('openPay')
@@ -560,18 +555,15 @@ export default {
     }
   },
   mounted() {
-    // this.videoState = document.getElementById('movd')
-    // 分享暂时注释
-    // var $config = {
-    //   url: 'http://www.1911edu.com/'
-    // }
-    // socialShare('.social-share', $config)
     document.getElementsByClassName('headerBox')[0].style.display = 'none'
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
     this.resize()
     window.addEventListener('resize', this.resize)
     this.getCurriculumPlayInfo()
     this.$bus.$emit('hideHeader', true)
+    this.$bus.$on('clickCatalog', data => {
+      this.handleCourse(data)
+    })
     ;(this.seconds = 10000000),
       // 获取评论接口
       this.getEvaluateTags()
