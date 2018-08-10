@@ -89,8 +89,10 @@ export default {
     // 添加购物车
     handleAddShopCart(item, cart) {
       if (this.cidNumber === '0') {
+        //项目
         this.curriculumcartids.type = 2
       } else {
+        //课程
         this.curriculumcartids.type = 1
       }
 
