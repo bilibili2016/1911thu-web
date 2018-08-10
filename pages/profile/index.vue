@@ -233,7 +233,6 @@ import CustomCard from '@/pages/profile/components/Card.vue'
 import CustomList from '@/pages/profile/components/List.vue'
 import Banner from '@/components/common/Banner.vue'
 import PersonalSet from '@/pages/profile/pages/personalSet.vue'
-import Binding from '@/pages/profile/components/BindId'
 import Info from '@/pages/profile/components/Info'
 import Order from '@/pages/profile/components/OrderList'
 import Detail from '@/pages/profile/components/Detail'
@@ -251,14 +250,12 @@ export default {
     'v-card': CustomCard,
     'v-list': CustomList,
     'v-person': PersonalSet,
-    'v-bind': Binding,
     'v-info': Info,
     'v-banner': Banner,
     'v-order': Order,
     'v-detail': Detail,
     'v-invitation': Invitation,
     'v-conversion': Conversion,
-    'v-binding': Bind,
     'v-tkorder': TicketOrder,
     // 'v-ticketorderdetail': TicketOrderDetail,
     'v-tkhistory': TicketHistory,

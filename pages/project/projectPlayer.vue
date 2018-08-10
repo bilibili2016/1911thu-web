@@ -78,8 +78,8 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
 import Repore from '@/components/common/Report.vue'
-import Pay from '@/components/common/pay.vue'
-import List from '@/pages/project/components/courseList.vue'
+import Pay from '@/components/common/Pay.vue'
+import List from '@/pages/project/components/CourseList.vue'
 import Collection from '@/components/common/Collection.vue'
 
 export default {
