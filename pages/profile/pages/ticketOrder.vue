@@ -1,51 +1,10 @@
 <template>
   <!-- 按订单开发票 -->
   <div class="ticketOrder">
-    <div v-if="ticketOrderData.length">
-      <div class="orderList" v-for="(courseList, index ) in ticketOrderData" :key="index">
-        <div class="topBar clearfix">
-          <span class="fl">订单：{{courseList.order_sn}}</span>
-          <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
-        </div>
-        <div class="list">
-          <div class="content">
-            <div class="check">
-              <input type="checkbox" class="el-checkbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(1,courseList)">
-              <label :for="courseList.id" class="el-checkbox-label"></label>
-            </div>
-            <div class="course">
-              <!-- 课程列表 -->
-              <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
-                <img @click="goCourseInfo(course,index)" class="fl" :src="course.picture" alt="">
-                <div class="fl">
-                  <h4 @click="goCourseInfo(course,index)">{{course.title}}</h4>
-                  <h6>{{course.curriculum_time}}学时</h6>
-                  <p>讲师：{{course.teacher_name}}</p>
-                </div>
-              </div>
-              <!-- 项目列表 -->
-              <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
-                <div class="courseImg">
-                  <!-- 项目图标 -->
-                  <img class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
-                  <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
-                </div>
-                <div class="fl">
-                  <h4 @click="goProjrctInfo(project)">{{project.title}}</h4>
-                  <h6>{{project.curriculum_time}}学时</h6>
-                </div>
-              </div>
-              <div class="more" :data="courseList.orderCurriculumList.length+courseList.orderProjectList.length" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList, index)">
-                查看更多课程>
-              </div>
-            </div>
-            <div class="price height" :style="{height:(courseList.orderCurriculumList.length+courseList.orderProjectList.length) > 3? 3*140+60+'px' :(courseList.orderCurriculumList.length+courseList.orderProjectList.length)*140+'px'}">
-              <p>¥{{courseList.order_amount}}</p>
+    <div>
+      <!-- 发票订单列表 -->
+      <v-ticketlist :data="ticketOrderData" :config="ticketType"></v-ticketlist>
 
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- 定位用 -->
       <div class="bottomPosition" if="bottomPosition"></div>
       <div class="bottomBar" id="bottomBar" ref="bottomBar" :class="{bottomBarFixed:isFixed}">
@@ -342,13 +301,6 @@
         </div>
       </div>
     </div>
-
-    <div class="content noOrder" v-else>
-      <div class="noCourse">
-        <img :src="noMsgImg" alt="">
-        <h4>抱歉，您还没有订单需要开票</h4>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -358,10 +310,17 @@ import { timestampToTime } from '@/lib/util/helper'
 import { mapActions } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
+import TicketOrderList from '@/pages/profile/components/OrderList'
 export default {
   props: ['orderData'],
+  components: {
+    'v-ticketlist': TicketOrderList
+  },
   data() {
     return {
+      ticketType: {
+        type: 'ticket'
+      },
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       orderPrice: 0,
       orderNum: 0,
@@ -523,31 +482,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid', 'setKid']),
-    computedLength(course, project, index) {
-      let projectLength = course.length > 3 ? 0 : 3 - course.length
-      if (index < projectLength) {
-        return true
-      } else {
-        return false
-      }
-    },
-    goCourseInfo(item, index) {
-      this.kidForm.kids = item.curriculum_id
-      persistStore.set('kid', item.curriculum_id)
-      this.setKid(this.kidForm)
-      persistStore.set('curriculumId', item.curriculum_id)
-      this.$router.push('/course/coursedetail')
-    },
-    goProjrctInfo(item) {
-      persistStore.set('projectId', item.curriculum_id)
-      this.$router.push('/project/projectdetail')
-    },
-    selectPayApply(item, index) {
-      persistStore.set('order', item.id)
-      this.$emit('goTicketDetail', false)
-    },
+
     // 选择要开发票的订单
-    handleSelectSingle(type, item, index) {
+    handleSelectSingle(item) {
       let itemIndex = this.checkedArr.indexOf(item.id)
       if (itemIndex >= 0) {
         //未选中
@@ -575,13 +512,16 @@ export default {
     },
     // 全选
     handleSelectAll(val) {
+      var checkboxList = document.getElementsByClassName('singleCheckbox')
       if (val) {
         this.checkedArr = []
         this.orderPrice = 0
-        this.$refs.checkbox.forEach(v => {
-          v.checked = true
-          this.checkedArr.push(v.id)
-        })
+        // var checkboxList = document.getElementsByClassName('singleCheckbox')
+        for (var i = 0; i < checkboxList.length; i++) {
+          checkboxList[i].checked = true
+          this.checkedArr.push(checkboxList[i].id)
+        }
+
         this.ticketOrderData.forEach(item => {
           this.orderPrice = (
             (Number(this.orderPrice) * 10 + Number(item.order_amount) * 10) /
@@ -589,25 +529,17 @@ export default {
           ).toFixed(2)
         })
       } else {
-        this.$refs.checkbox.forEach(v => {
-          v.checked = false
-        })
+        for (var i = 0; i < checkboxList.length; i++) {
+          checkboxList[i].checked = false
+          this.checkedArr.push(checkboxList[i].id)
+        }
+
         this.checkedArr = []
         this.orderPrice = 0
       }
 
       this.orderNum = this.checkedArr.length
       // console.log(this.checkedArr)
-    },
-    // 时间戳转日期格式
-    exchangeTime(time) {
-      return timestampToTime(time)
-    },
-    goLink(item) {
-      this.gidForm.gids = item
-      this.setGid(this.gidForm)
-      this.$router.push('/profile')
-      this.$bus.$emit('selectProfileIndex', item)
     },
     // 展示修改发票信息弹框
     showIoc() {
@@ -1148,9 +1080,10 @@ export default {
     getUnTicketData() {
       ticketorder.orderNotInvoice().then(response => {
         this.ticketOrderData = response.data.orderList
-        this.$refs.checkbox.forEach(v => {
-          v.checked = false
-        })
+        var checkboxList = document.getElementsByClassName('singleCheckbox')
+        for (var i = 0; i < checkboxList.length; i++) {
+          checkboxList[i].checked = false
+        }
       })
     },
     // 获取发票信息
@@ -1234,6 +1167,9 @@ export default {
 
     // window.addEventListener('scroll', this.addClass)
     this.getRegionList()
+    this.$bus.$on('handleSelectSingle', data => {
+      this.handleSelectSingle(data)
+    })
   },
   watch: {
     province(val) {

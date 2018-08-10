@@ -18,10 +18,8 @@
             <td v-if="code.type==='3'">课程+项目</td>
             <td>{{exchangeTime(code.create_time)}}</td>
           </tr>
-          <div v-if="!recordData||recordData.length<1" class="noCodes">
-            <img :src="noMsgImg" alt="">
-            <p>抱歉，现在还没有课程码~</p>
-          </div>
+          <v-nomsg v-if="!recordData||recordData.length<1" class="noCodes" :config="noMsg"></v-nomsg>
+
         </table>
       </div>
     </div>
@@ -30,11 +28,19 @@
 
 <script>
 import { timestampToYMD } from '@/lib/util/helper'
+import NoMsg from '@/pages/profile/pages/noMsg.vue'
 export default {
   props: ['recordData'],
+  components: {
+    'v-nomsg': NoMsg
+  },
   data() {
     return {
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png'
+      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      noMsg: {
+        type: 'myCode',
+        text: '抱歉，现在还没有课程码~'
+      }
     }
   },
   methods: {

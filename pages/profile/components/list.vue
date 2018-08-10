@@ -130,7 +130,8 @@ export default {
       curriculumcartids: {
         cartid: null,
         type: 1
-      }
+      },
+      cidNumber: ''
     }
   },
   methods: {
