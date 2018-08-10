@@ -129,7 +129,8 @@ export default {
         '/shop/shoppingcart',
         '/profile',
         '/shop/wepay'
-      ]
+      ],
+      getHttp: false
     }
   },
   computed: {
@@ -246,13 +247,19 @@ export default {
     getCount() {
       if (this.isAuthenticated) {
         header.shopCartList().then(response => {
-          let body =
-            Number(response.data.curriculumCartList.length) +
-            Number(response.data.projectCartList.length)
-          let len = {
-            pn: body
+          if (response.status === '100008') {
+            this.getHttp = false
+          } else {
+            if (response.data) {
+              let body =
+                Number(response.data.curriculumCartList.length) +
+                Number(response.data.projectCartList.length)
+              let len = {
+                pn: body
+              }
+              this.setProductsNum(len)
+            }
           }
-          this.setProductsNum(len)
         })
       }
     },
@@ -328,11 +335,10 @@ export default {
     },
     // 获取用户头像
     getUserInfo() {
-      // if (this.isAuthenticated) {
-      // this.$bus.$emit('reLogin', false)
-      // this.$bus.$emit('loginShow', false)
       header.getUserInfo().then(res => {
         if (res.status === '100008') {
+          this.getHttp = false
+          persistStore.set('isSingleLogin', false)
           // 设置单点登录
           this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
             confirmButtonText: '确定',
@@ -344,6 +350,8 @@ export default {
             }
           })
         } else if (res.status === '100100') {
+          this.getHttp = false
+          persistStore.set('isSingleLogin', false)
           // 设置单点登录
           if (this.authPath.indexOf(window.location.pathname) > 0) {
             this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
@@ -355,6 +363,11 @@ export default {
             })
           }
         } else {
+          if (persistStore.get('isSingleLogin') === false) {
+            this.$bus.$emit('isSingleLogin', false)
+          }
+          this.getAll()
+          persistStore.set('isSingleLogin', true)
           // 设置单点登录
           this.userInfo = res.data.userInfo
           persistStore.set('nickName', this.userInfo.nick_name)
@@ -376,7 +389,7 @@ export default {
     // 用户协议
     userProtocol() {
       window.open(window.location.origin + '/other/activePages/userProtocol')
-    }
+    },
     // 获取专属兑换码列表
     // getCodeList() {
     //   home.getCodeList(this.codeListForm).then(response => {
@@ -386,10 +399,20 @@ export default {
     //   })
     // }
     // 判断浏览器的ie型
+    getAll() {
+      this.getCount()
+
+      if (!this.token) {
+        this.signOut()
+      }
+      this.explorer()
+    }
   },
   mounted() {
     let me = this
-    this.getCount()
+
+    this.getUserInfo()
+    // 非单点登录 getHttp为true
     this.$bus.$on('updateCount', () => {
       me.getCount()
     })
@@ -401,17 +424,13 @@ export default {
         this.bannerMsg = false
       }
     })
-    this.getUserInfo()
+
     this.$bus.$on('changeimg', data => {
       this.user.userImg = data
     })
     this.$bus.$on('getUserInfo', data => {
       this.getUserInfo()
     })
-    if (!this.token) {
-      this.signOut()
-    }
-    this.explorer()
 
     this.$bus.$on('closeEcg', data => {
       this.closeEcg()
@@ -421,6 +440,7 @@ export default {
     })
     this.$bus.$on('login', data => {
       this.login()
+      this.getUserInfo()
     })
     this.$bus.$on('register', data => {
       this.register()

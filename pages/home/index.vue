@@ -155,29 +155,33 @@ export default {
         pages: 1,
         limits: 4
       },
-      loginMsg: false
+      loginMsg: false,
+      getHttp: false
     }
   },
   computed: {
     ...mapState('auth', [])
   },
+  created() {},
   methods: {
     ...mapActions('auth', ['signOut']),
-    async getAll() {
-      await Promise.all([
-        this.getBanner(),
-        // this.getClassifyList(),
-        this.getFreeCourseList(),
-        this.getNewCourseList(),
-        this.getClassicCourseList(),
-        this.getTeacherList(),
-        // this.getEvaluateList(),
-        this.getNewsInfoList(),
-        this.$bus.$emit('updateCount'),
-        // this.getPartnerList(),
-        // this.getPointList()
-        this.getProjectList()
-      ])
+    getAll() {
+      // await Promise.all([
+
+      // ])
+
+      // this.getClassifyList(),
+      this.getBanner()
+      this.getFreeCourseList()
+
+      this.getClassicCourseList()
+      this.getTeacherList()
+      // this.getEvaluateList(),
+      this.getNewsInfoList()
+      this.$bus.$emit('updateCount')
+      // this.getPartnerList(),
+      // this.getPointList()
+      this.getProjectList()
     },
     // 获取banner
     getBanner() {
@@ -206,7 +210,13 @@ export default {
     // 获取新上好课列表
     getNewCourseList() {
       home.getNewCourseList(this.courseForm).then(response => {
-        this.newData = response.data.curriculumList
+        if (response.status === '100008') {
+          this.getHttp = false
+        } else {
+          this.getHttp = true
+          this.newData = response.data.curriculumList
+          this.getAll()
+        }
       })
     },
     // 获取精品好课列表
@@ -248,6 +258,9 @@ export default {
       })
     }
   },
+  created() {
+    this.getNewCourseList()
+  },
   mounted() {
     this.$bus.$on('loginMsg', data => {
       if (data === true) {
@@ -255,11 +268,13 @@ export default {
       }
     })
 
-    this.getAll()
     this.$bus.$on('reLogin', data => {
       this.getAll()
     })
     this.$bus.$emit('bannerShow', false)
+    this.$bus.$on('isSingleLogin', data => {
+      this.getNewCourseList()
+    })
   }
 }
 </script>
