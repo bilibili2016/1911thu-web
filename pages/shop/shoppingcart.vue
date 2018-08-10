@@ -517,7 +517,7 @@ export default {
       this.projectAddArray.projectcartid = []
 
       shopcart.shopCartList().then(response => {
-        console.log(response.data)
+        // console.log(response.data)
 
         let body = response.data.curriculumCartList.map(item => {
           // this.addArray.curriculumcartid.push(item.id)      //默认不选中
