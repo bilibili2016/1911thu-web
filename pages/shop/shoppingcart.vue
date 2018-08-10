@@ -294,30 +294,33 @@ export default {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     if (this.isAuthenticated) {
+      // 获取购车列表
       this.shopCartList()
     }
-    this.$bus.$emit('bannerShow', false)
-    this.$bus.$on('handleSelectChange', data => {
-      this.handleSelectChange(data.course, data.index)
-    })
-    this.$bus.$on('goDetail', data => {
-      this.goDetail(data.course, data.index)
-    })
-    this.$bus.$on('handleDeleteCourse', data => {
-      this.handleDeleteCourse(data.course, data.index)
-    })
+    // this.$bus.$emit('bannerShow', false)
+    // this.$bus.$on('handleSelectChange', data => {
+    //   this.handleSelectChange(data.course, data.index)
+    // })
+    // this.$bus.$on('goDetail', data => {
+    //   this.goDetail(data.course, data.index)
+    // })
+    // this.$bus.$on('handleDeleteCourse', data => {
+    //   this.handleDeleteCourse(data.course, data.index)
+    // })
 
-    this.$bus.$on('handleSelectProjectChange', data => {
-      this.handleSelectProjectChange(data.project, data.index)
-    })
-    this.$bus.$on('goProjectDetail', data => {
-      this.goProjectDetail(data.project, data.index)
-    })
-    this.$bus.$on('handleDeleteProject', data => {
-      this.handleDeleteProject(data.project, data.index)
-    })
+    // this.$bus.$on('handleSelectProjectChange', data => {
+    //   this.handleSelectProjectChange(data.project, data.index)
+    // })
+    // this.$bus.$on('goProjectDetail', data => {
+    //   this.goProjectDetail(data.project, data.index)
+    // })
+    // this.$bus.$on('handleDeleteProject', data => {
+    //   this.handleDeleteProject(data.project, data.index)
+    // })
     // this.getNum()
-    this.restaurants = this.loadAll()
+    // this.restaurants = this.loadAll()
+
+    // 寛高设置
     this.headerHeight = document.getElementsByClassName(
       'headerBox'
     )[0].offsetHeight
@@ -505,9 +508,11 @@ export default {
 
         // 判断最初获取课程长度是否相等
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
+          console.log('1')
           this.selectAllCourse = true
           this.isRest = true
         } else {
+          console.log('2')
           this.selectAllCourse = false
           this.isRest = false
         }
@@ -546,7 +551,7 @@ export default {
           this.selectAllProject = false
           this.isRest = false
         }
-        if (this.selectAllProject === true && this.selectAllProject === true) {
+        if (this.selectAllCourse === true && this.selectAllProject === true) {
           this.selectAll = true
         }
 
