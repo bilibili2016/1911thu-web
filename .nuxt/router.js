@@ -16,10 +16,10 @@ const _7bdc4d44 = () => import('../pages/course/coursedetail/teacherIntro.vue' /
 const _c2dce71e = () => import('../pages/shop/payResult.vue' /* webpackChunkName: "pages/shop/payResult" */).then(m => m.default || m)
 const _3eb1e902 = () => import('../pages/project/projectDetail.vue' /* webpackChunkName: "pages/project/projectDetail" */).then(m => m.default || m)
 const _95906a92 = () => import('../pages/shop/affirmOrder.vue' /* webpackChunkName: "pages/shop/affirmOrder" */).then(m => m.default || m)
-const _162dee5a = () => import('../pages/project/commonProblems.vue' /* webpackChunkName: "pages/project/commonProblems" */).then(m => m.default || m)
+const _0c629a3a = () => import('../pages/project/commonproblems.vue' /* webpackChunkName: "pages/project/commonproblems" */).then(m => m.default || m)
 const _894cd6c6 = () => import('../pages/shop/paypublic.vue' /* webpackChunkName: "pages/shop/paypublic" */).then(m => m.default || m)
-const _9a3a436e = () => import('../pages/project/projectCourse.vue' /* webpackChunkName: "pages/project/projectCourse" */).then(m => m.default || m)
-const _eb036372 = () => import('../pages/project/projectEvaluate.vue' /* webpackChunkName: "pages/project/projectEvaluate" */).then(m => m.default || m)
+const _3c110229 = () => import('../pages/project/projectcourse.vue' /* webpackChunkName: "pages/project/projectcourse" */).then(m => m.default || m)
+const _fe9a0bb2 = () => import('../pages/project/projectevaluate.vue' /* webpackChunkName: "pages/project/projectevaluate" */).then(m => m.default || m)
 const _f1091520 = () => import('../pages/auth/forgotpassword.vue' /* webpackChunkName: "pages/auth/forgotpassword" */).then(m => m.default || m)
 const _099d1907 = () => import('../pages/auth/Login.vue' /* webpackChunkName: "pages/auth/Login" */).then(m => m.default || m)
 const _12ce39d1 = () => import('../pages/shop/components/banner.vue' /* webpackChunkName: "pages/shop/components/banner" */).then(m => m.default || m)
@@ -194,9 +194,9 @@ export function createRouter () {
 			name: "shop-affirmOrder"
 		},
 		{
-			path: "/project/commonProblems",
-			component: _162dee5a,
-			name: "project-commonProblems"
+			path: "/project/commonproblems",
+			component: _0c629a3a,
+			name: "project-commonproblems"
 		},
 		{
 			path: "/shop/paypublic",
@@ -204,14 +204,14 @@ export function createRouter () {
 			name: "shop-paypublic"
 		},
 		{
-			path: "/project/projectCourse",
-			component: _9a3a436e,
-			name: "project-projectCourse"
+			path: "/project/projectcourse",
+			component: _3c110229,
+			name: "project-projectcourse"
 		},
 		{
-			path: "/project/projectEvaluate",
-			component: _eb036372,
-			name: "project-projectEvaluate"
+			path: "/project/projectevaluate",
+			component: _fe9a0bb2,
+			name: "project-projectevaluate"
 		},
 		{
 			path: "/auth/forgotpassword",

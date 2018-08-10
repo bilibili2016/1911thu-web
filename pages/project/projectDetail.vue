@@ -39,10 +39,10 @@ import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import Collection from '@/components/common/Collection.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
-import Procourse from '@/pages/project/projectCourse'
-import Proevaluate from '@/pages/project/projectEvaluate'
-import Commonproblems from '@/pages/project/commonProblems'
 import Detail from '@/pages/project/components/detail'
+import Procourse from '@/pages/project/projectcourse'
+import Proevaluate from '@/pages/project/projectevaluate'
+import Commonproblems from '@/pages/project/commonproblems'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   components: {

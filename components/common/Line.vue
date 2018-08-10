@@ -98,6 +98,7 @@ export default {
     handleCatalog(index, item) {
       // console.log(index, '这是index')
       // console.log(item, 'item')
+      document.getElementsByClassName('goodplay')[0].style.display = 'none' //立即观看隐藏课程播放的覆盖层
       let curriculum_id = item.childList[index].curriculum_id
       let catalog_id = item.childList[index].id
       let video_time = item.childList[index].second
