@@ -328,9 +328,6 @@ export default {
     },
     // 获取用户头像
     getUserInfo() {
-      // if (this.isAuthenticated) {
-      // this.$bus.$emit('reLogin', false)
-      // this.$bus.$emit('loginShow', false)
       header.getUserInfo().then(res => {
         if (res.status === '100008') {
           // 设置单点登录
@@ -377,15 +374,6 @@ export default {
     userProtocol() {
       window.open(window.location.origin + '/other/activePages/userProtocol')
     }
-    // 获取专属兑换码列表
-    // getCodeList() {
-    //   home.getCodeList(this.codeListForm).then(response => {
-    //     if (response.status !== '100100') {
-    //       this.codeData = response.data.orderInvitationCodeList
-    //     }
-    //   })
-    // }
-    // 判断浏览器的ie型
   },
   mounted() {
     let me = this
