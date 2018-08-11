@@ -10,10 +10,10 @@ persistStore.defaults({
   cg: null,
   pid: null,
   gid: null,
-
   kid: null,
   productsNum: null,
-  cindex: null
+  cindex: null,
+  personalForm: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
@@ -24,6 +24,7 @@ let pid = persistStore.get('pid')
 let gid = persistStore.get('gid')
 let kid = persistStore.get('kid')
 let productsNum = persistStore.get('productsNum')
+let personalForm = persistStore.get('personalForm')
 
 export const MUTATION = {
   signIn: 'sign-in',
@@ -35,7 +36,8 @@ export const MUTATION = {
   setPid: 'set-pid',
   setGid: 'set-gid',
   setKid: 'set-kid',
-  setProductsNum: 'set-productsNum'
+  setProductsNum: 'set-productsNum',
+  setPersonalForm: 'set-personalForm'
 }
 export const state = () => ({
   user,
@@ -47,7 +49,8 @@ export const state = () => ({
   kid,
   productsNum,
   cindex,
-  cg
+  cg,
+  personalForm
 })
 export const getters = {
   isAuthenticated(state) {
@@ -91,6 +94,9 @@ export const mutations = {
   },
   [MUTATION.setProductsNum](state, { productsNum }) {
     state.productsNum = productsNum
+  },
+  [MUTATION.setPersonalForm](state, { personalForm }) {
+    state.personalForm = personalForm
   }
 }
 export const actions = {
@@ -276,5 +282,19 @@ export const actions = {
       }
     }
     return productsNum
+  },
+  async setPersonalForm({ commit, state }, { personalForms }) {
+    try {
+      let personalForm = personalForms
+      persistStore.set('personalForm', personalForm)
+      commit(MUTATION.setPersonalForm, { personalForm })
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return personalForm
   }
 }

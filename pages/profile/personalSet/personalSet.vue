@@ -6,7 +6,7 @@
         <!-- 填写个人信息 -->
         <el-tab-pane label="基础信息" name="first">
           <!-- 设置个人信息 -->
-          <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" @changeStatus="changeStatus"></v-setPer>
+          <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" @changeStatus="changeStatus" @getUserInfo="getUserInfo"></v-setPer>
           <!-- 展示个人信息 -->
           <v-showPer v-if="showInfo" :data="psnForm"></v-showPer>
         </el-tab-pane>
@@ -106,7 +106,7 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
-    ...mapActions('auth', ['signOut']),
+    ...mapActions('auth', ['signOut', 'personalForm']),
     // 切换展示/编辑个人信息
     changeCard() {
       this.showInfo = false
@@ -142,6 +142,8 @@ export default {
     // 获取用户信息
     getUserInfo() {
       personalset.getUserInfo().then(res => {
+        // this.personalForm = res.data.userInfo
+        persistStore.set('personalForm', res.data.userInfo)
         this.psnForm = res.data.userInfo
         if (this.psnForm.company_name && this.psnForm.company_name != '') {
           this.hasCompany = true
