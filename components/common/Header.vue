@@ -60,20 +60,8 @@ export default {
   data() {
     return {
       isHasClass: true,
-      //codeData: [], //专属兑换码根据接口长度判断是否显示
-      codeListForm: {
-        pages: 1,
-        limits: null
-      },
-      isloading: false, //注册按钮点击之后loading（体验）
-      codeInterval: null, //注册获取验证码定时循环
-      codeClick: false, //判断是否点击过 获取验证码（防重）
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
-      isClick: true, //判断是否点击过注册按钮（防重）
-      isloginClick: false,
-      searchImg: require('@/assets/images/search.png'),
       bannerMsg: false,
-      downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
       iphones: false,
       bindForm: {
         courseId: '',
@@ -85,44 +73,15 @@ export default {
       loadLogin: false,
       search: '',
       shoppingCartNum: 1,
-      tokenForm: {
-        tokens: '123'
-      },
+
       bgMsg: false,
       user: {
         userImg: ''
       },
       QRcode: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
-      wechatLogin: false,
-      bindTelShow: false,
-      scanCodeShow: false,
-      bindSuccessShow: false,
-      bindTelData: {
-        phones: '',
-        codes: '',
-        getCode: '获取验证码',
-        seconds: 30,
-        types: 1,
-        openid: null,
-        companyCodes: '',
-        captchaDisable: false,
-        exist: false,
-        checked: false
-      },
-      getwxtime: null,
+
       gidForm: {
         gids: null
-      },
-      tokenForm: {
-        tokens: ''
-      },
-      pwdForm: {
-        pwds: null
-      },
-      currentURL: null,
-      errorTel: {
-        tel: null,
-        msg: null
       },
       authPath: [
         '/shop/affirmorder',
