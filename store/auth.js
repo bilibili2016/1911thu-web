@@ -10,7 +10,6 @@ persistStore.defaults({
   cg: null,
   pid: null,
   gid: null,
-
   kid: null,
   productsNum: null,
   cindex: null

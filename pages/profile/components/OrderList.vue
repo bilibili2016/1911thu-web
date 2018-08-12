@@ -7,12 +7,9 @@
         <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
       </div>
       <div class="list">
+
         <div class="content">
-          <!-- 发票 -->
-          <div class="check" v-show="config.type==='ticket'">
-            <input type="checkbox" class="el-checkbox singleCheckbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(courseList)">
-            <label :for="courseList.id" class="el-checkbox-label"></label>
-          </div>
+
           <div class="course">
             <!-- 课程列表 -->
             <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
@@ -142,10 +139,6 @@ export default {
         }
       })
     },
-    //发票订单单选
-    handleSelectSingle(item) {
-      this.$bus.$emit('handleSelectSingle', item)
-    },
     //课程详情
     goCourseInfo(item, index) {
       this.kidForm.kids = item.curriculum_id
@@ -159,7 +152,6 @@ export default {
       persistStore.set('projectId', item.curriculum_id)
       this.$router.push('/project/projectdetail')
     },
-
     //列表详情
     selectPayApply(item, type) {
       persistStore.set('order', item.id)
