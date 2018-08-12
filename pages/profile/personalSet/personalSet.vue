@@ -8,7 +8,7 @@
           <!-- 设置个人信息 -->
           <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" @changeStatus="changeStatus" @getUserInfo="getUserInfo"></v-setPer>
           <!-- 展示个人信息 -->
-          <v-showPer v-if="showInfo" :data="psnForm"></v-showPer>
+          <v-showPer v-if="showInfo" :psnForm="psnForm"></v-showPer>
         </el-tab-pane>
         <!-- 修改密码 -->
         <el-tab-pane label="修改密码" name="second">
@@ -31,9 +31,9 @@ import { personalset } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
 import { mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import ShowPerson from '@/pages/profile/personalSet/components/showPersonal'
-import SetPerson from '@/pages/profile/personalSet/components/setPersonal'
-import SetPassword from '@/pages/profile/personalSet/components/updatePassword'
+import ShowPerson from '@/pages/profile/personalSet/showPersonal'
+import SetPerson from '@/pages/profile/personalSet/setPersonal'
+import SetPassword from '@/pages/profile/personalSet/updatePassword'
 export default {
   components: {
     'v-showPer': ShowPerson,
@@ -106,7 +106,6 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
-    ...mapActions('auth', ['signOut', 'personalForm']),
     // 切换展示/编辑个人信息
     changeCard() {
       this.showInfo = false
@@ -142,8 +141,6 @@ export default {
     // 获取用户信息
     getUserInfo() {
       personalset.getUserInfo().then(res => {
-        // this.personalForm = res.data.userInfo
-        persistStore.set('personalForm', res.data.userInfo)
         this.psnForm = res.data.userInfo
         if (this.psnForm.company_name && this.psnForm.company_name != '') {
           this.hasCompany = true

@@ -39,26 +39,9 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
-  props: ['data'],
-  data() {
-    return {
-      psnForm: ''
-    }
-  },
-  computed: {
-    ...mapState('auth', ['personalForm']),
-    ...mapGetters('auth', ['personalForm'])
-  },
-  mounted() {
-    console.log(222)
-
-    this.psnForm = this.personalForm
-    console.log(this.personalForm)
-  },
+  props: ['psnForm'],
   methods: {
-    ...mapActions('auth', ['personalForm']),
     // 切换性别
     getSex(sex) {
       if (sex == 1) {

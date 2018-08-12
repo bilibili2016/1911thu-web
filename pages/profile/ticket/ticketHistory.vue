@@ -1,6 +1,7 @@
   <template>
   <!-- 开发票历史 -->
   <div class="tickeHietory">
+    <!-- 历史列表 -->
     <div class="orderList" v-for="(ticket, index ) in orderData" :key="index">
       <div class="topBar clearfix">
         <span class="fl"></span>
@@ -41,58 +42,11 @@
       </div>
     </div>
     <!-- 发票弹框 -->
-    <div class="ticketPopup" v-show="isTicketPopup">
-      <div class="content">
-        <div class="title clearfix">
-          <span class="fl">开票详情</span>
-          <span class="fr" @click="closeTicketPopup">
-            <i class="el-icon-close"></i>
-          </span>
-        </div>
-        <div class="bottomCon">
-          <div class="items">
-            <div class="item-list clearfix" v-for="(item,index) in TicketPopupData" :key="index">
-              <div class="code">{{item.order_sn}}</div>
-              <div class="time">{{exchangeTime(item.create_time)}}</div>
-              <div class="num">{{item.project_number}}个项目，{{item.curriculum_number}}个课程</div>
-              <div class="price">{{item.pay_amount}}元</div>
-            </div>
+    <v-detailpop v-show="isTicketPopup" :data="TicketPopupData" @closeTicketPopup="closeTicketPopup"></v-detailpop>
 
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- 状态弹框 -->
-    <div class="statusPopup" v-show="isStatusPopup">
-      <div class="content">
-        <div class="title clearfix">
-          <span class="fl">发票详情</span>
-          <span class="fr" @click="closeStatusPopup">
-            <i class="el-icon-close"></i>
-          </span>
-        </div>
-        <div class="bottomCon">
-          <div class="item-one">
-            <div class="top">接收信息</div>
-            <div class="bottom">
-              <span>收件人：{{StatusPopupData.consignee}}</span>
-              <span>电话：{{StatusPopupData.phone}}</span>
-              <span>地址：{{StatusPopupData.address}}</span>
-            </div>
-          </div>
-          <div class="item-two">
-            <div class="top">发票信息</div>
-            <div class="bottom">
-              <div v-if="StatusPopupData.type=='1' || StatusPopupData.type=='2'">发票类型：普通发票</div>
-              <div v-else>发票类型：增值税专用发票</div>
-              <div>发票抬头：{{StatusPopupData.company_name}}</div>
-              <div>发票内容：{{StatusPopupData.content}}</div>
-              <div>纳税人识别号：{{StatusPopupData.invoice_number}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <v-statuspop v-show="isStatusPopup" :data="StatusPopupData" @closeStatusPopup="closeStatusPopup"></v-statuspop>
+
   </div>
 </template>
 
@@ -101,8 +55,14 @@ import { ticketHistory } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { timestampToTime } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
+import DetailPopup from '@/pages/profile/ticket/detailPopup'
+import StatusPopup from '@/pages/profile/ticket/statusPopup'
 export default {
   props: ['orderData'],
+  components: {
+    'v-detailpop': DetailPopup,
+    'v-statuspop': StatusPopup
+  },
   data() {
     return {
       isTicketPopup: false,

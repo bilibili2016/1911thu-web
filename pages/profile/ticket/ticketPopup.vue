@@ -1,302 +1,278 @@
 <template>
-  <!-- 按订单开发票 -->
-  <div class="ticketOrder">
-    <div>
-      <!-- 发票订单列表 -->
-      <v-ticketlist :data="ticketOrderData" :config="ticketType"></v-ticketlist>
-
-      <!-- 定位用 -->
-      <div class="bottomPosition" if="bottomPosition"></div>
-      <div class="bottomBar" id="bottomBar" ref="bottomBar" :class="{bottomBarFixed:isFixed}">
-        <span class="fl">
-          <el-checkbox v-model="checkMsg " @change="handleSelectAll"></el-checkbox>
-          全选
+  <div class="invoiceTicket">
+    <div class="invoiceInfo" ref="invoiceInfo">
+      <h3 class="clearfix">发票信息
+        <i class="el-icon-close fr" @click="close"></i>
+      </h3>
+      <div class="header">
+        <span :class="{checked:choose=='1'?true:false}" @click="chooseTicket('1')">普通发票
+          <i></i>
         </span>
-        <span class="money ">
-          <i>{{orderNum}}</i> 个订单，
-          <strong>共：
-            <i>¥{{orderPrice}}</i>
-          </strong>
+        <span :class="{checked:choose=='2'?true:false}" @click="chooseTicket('2')">增值税专用发票
+          <i></i>
         </span>
-        <span class="next " @click="showIoc">下一步</span>
       </div>
-      <!-- 发票弹框 -->
-      <div class="invoiceTicket" v-show="showInvoice">
-        <div class="invoiceInfo" ref="invoiceInfo">
-          <h3 class="clearfix">发票信息
-            <i class="el-icon-close fr" @click="close"></i>
-          </h3>
-          <div class="header">
-            <span :class="{checked:choose=='1'?true:false}" @click="chooseTicket('1')">普通发票
-              <i></i>
-            </span>
-            <span :class="{checked:choose=='2'?true:false}" @click="chooseTicket('2')">增值税专用发票
-              <i></i>
-            </span>
-          </div>
-          <div class="invoiceForm" v-show="choose=='1'">
-            <div class="formLi clearfix">
-              <p class="fl">发票抬头</p>
-              <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
-            </div>
-            <div class="formLi clearfix">
+      <div class="invoiceForm" v-show="choose=='1'">
+        <div class="formLi clearfix">
+          <p class="fl">发票抬头</p>
+          <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
+        </div>
+        <div class="formLi clearfix">
 
-              <p class="fl"></p>
-              <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
-                <input type="text" v-model="ticketForm.companyname" placeholder="新增单位发票抬头">
-              </p>
-            </div>
-            <div class="formLi clearfix" v-show="ticketForm.saveioc">
-              <p class="fl">纳税人识别号</p>
-              <p class="fr">
-                <input type="text" v-model="ticketForm.number" @blur="retfNumber" placeholder="输入纳税人识别号">
-              </p>
-            </div>
-            <div class="formLi clearfix">
-              <p class="fl">发票内容</p>
-              <p class="fr radioBtn">
-                <el-radio-group v-model="ticketForm.radio" @change="isTicket">
-                  <el-radio :label="1">培训费
-                    <i></i>
-                  </el-radio>
-                  <el-radio :label="2">其他
-                    <i></i>
-                  </el-radio>
-                </el-radio-group>
-              </p>
-              <p class="word" v-show="!ticketForm.isRadio">
-                <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
-              </p>
-            </div>
-            <div class="formLi clearfix">
-              <p class="fl">收票人姓名</p>
-              <p class="fr">
-                <input type="text" v-model="ticketForm.name" placeholder="输入收票人姓名">
-              </p>
-            </div>
-            <div class="formLi clearfix">
-              <p class="fl">收票人手机</p>
-              <p class="fr">
-                <input type="text" v-model="ticketForm.tel" placeholder="输入收票人手机号">
-              </p>
-            </div>
-            <div class="formLi clearfix">
-              <p class="fl">收票人省份</p>
-              <p class="fr province">
-                <el-select v-model="ticketForm.province" placeholder="省" @change="changeTicketp">
-                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
-                </el-select>
-                <el-select v-model="ticketForm.city" placeholder="市">
-                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
-                </el-select>
-                <el-select v-model="ticketForm.area" placeholder="区">
-                  <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
-                </el-select>
-              </p>
-            </div>
-            <div class="formLi clearfix">
-              <p class="fl">详细地址</p>
-              <p class="fr">
-                <input type="text" v-model="ticketForm.address" placeholder="请输入收票人的详细地址">
-              </p>
+          <p class="fl"></p>
+          <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
+            <input type="text" v-model="ticketForm.companyname" placeholder="新增单位发票抬头">
+          </p>
+        </div>
+        <div class="formLi clearfix" v-show="ticketForm.saveioc">
+          <p class="fl">纳税人识别号</p>
+          <p class="fr">
+            <input type="text" v-model="ticketForm.number" @blur="retfNumber" placeholder="输入纳税人识别号">
+          </p>
+        </div>
+        <div class="formLi clearfix">
+          <p class="fl">发票内容</p>
+          <p class="fr radioBtn">
+            <el-radio-group v-model="ticketForm.radio" @change="isTicket">
+              <el-radio :label="1">培训费
+                <i></i>
+              </el-radio>
+              <el-radio :label="2">其他
+                <i></i>
+              </el-radio>
+            </el-radio-group>
+          </p>
+          <p class="word" v-show="!ticketForm.isRadio">
+            <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
+          </p>
+        </div>
+        <div class="formLi clearfix">
+          <p class="fl">收票人姓名</p>
+          <p class="fr">
+            <input type="text" v-model="ticketForm.name" placeholder="输入收票人姓名">
+          </p>
+        </div>
+        <div class="formLi clearfix">
+          <p class="fl">收票人手机</p>
+          <p class="fr">
+            <input type="text" v-model="ticketForm.tel" placeholder="输入收票人手机号">
+          </p>
+        </div>
+        <div class="formLi clearfix">
+          <p class="fl">收票人省份</p>
+          <p class="fr province">
+            <el-select v-model="ticketForm.province" placeholder="省" @change="changeTicketp">
+              <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
+            </el-select>
+            <el-select v-model="ticketForm.city" placeholder="市">
+              <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
+            </el-select>
+            <el-select v-model="ticketForm.area" placeholder="区">
+              <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
+            </el-select>
+          </p>
+        </div>
+        <div class="formLi clearfix">
+          <p class="fl">详细地址</p>
+          <p class="fr">
+            <input type="text" v-model="ticketForm.address" placeholder="请输入收票人的详细地址">
+          </p>
+        </div>
+        <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
+        <div class="operation">
+          <span class="a" @click="addInvoiceBefor">保存</span>
+          <span @click="close">取消</span>
+        </div>
+      </div>
+      <div class="invoiceForm zzTicket" v-show="choose=='2'">
+        <div class="stepOne" v-show="stepOne">
+          <div class="formLi clearfix">
+            <p class="fl">开票方式</p>
+            <p class="fr readyOrderTicket">
+              <span>订单完成后开票
+                <i></i>
+              </span>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">发票内容</p>
+            <p class="fr radioBtn">
+              <el-radio-group v-model="zzTicketForm.radio" @change="iszzTicket">
+                <el-radio :label="1">培训费
+                  <i></i>
+                </el-radio>
+                <el-radio :label="2">其他
+                  <i></i>
+                </el-radio>
+              </el-radio-group>
+            </p>
+            <p class="word" v-show="!zzTicketForm.isRadio">
+              <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <div class="step">
+              <span class="stepCheck">1.选择开票方式</span>
+              <i></i>
+              <span>2.填写或核对公司信息</span>
+              <i></i>
+              <span>3.填写收票人信息</span>
             </div>
             <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
-            <div class="operation">
-              <span class="a" @click="addInvoiceBefor">保存</span>
-              <span @click="close">取消</span>
+          </div>
+          <div class="operation">
+            <span @click="nextStep('stepTwo')">下一步</span>
+            <span @click="close">取消</span>
+          </div>
+        </div>
+        <div class="stepTwo" v-show="stepTwo">
+          <div class="formLi clearfix">
+            <p class="fl">开票方式</p>
+            <p class="fr readyOrderTicket">
+              <span>订单完成后开票
+                <i></i>
+              </span>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <div class="step">
+              <span class="stepCheck">1.选择开票方式</span>
+              <i></i>
+              <span class="stepCheck">2.填写或核对公司信息</span>
+              <i></i>
+              <span>3.填写收票人信息</span>
             </div>
           </div>
-          <div class="invoiceForm zzTicket" v-show="choose=='2'">
-            <div class="stepOne" v-show="stepOne">
-              <div class="formLi clearfix">
-                <p class="fl">开票方式</p>
-                <p class="fr readyOrderTicket">
-                  <span>订单完成后开票
-                    <i></i>
-                  </span>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">发票内容</p>
-                <p class="fr radioBtn">
-                  <el-radio-group v-model="zzTicketForm.radio" @change="iszzTicket">
-                    <el-radio :label="1">培训费
-                      <i></i>
-                    </el-radio>
-                    <el-radio :label="2">其他
-                      <i></i>
-                    </el-radio>
-                  </el-radio-group>
-                </p>
-                <p class="word" v-show="!zzTicketForm.isRadio">
-                  <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <div class="step">
-                  <span class="stepCheck">1.选择开票方式</span>
-                  <i></i>
-                  <span>2.填写或核对公司信息</span>
-                  <i></i>
-                  <span>3.填写收票人信息</span>
-                </div>
-                <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
-              </div>
-              <div class="operation">
-                <span @click="nextStep('stepTwo')">下一步</span>
-                <span @click="close">取消</span>
-              </div>
+          <div class="formLi clearfix">
+            <p class="fl">
+              <i>*</i>单位名称</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.companyname" @change="reCompanyname" placeholder="请输入单位名称">
+              <span class="tips" v-show="tipsCompanyname&&companyname">
+                <i class="el-icon-success"></i>
+              </span>
+              <span class="tips" v-show="!tipsCompanyname&&companyname">
+                <i class="el-icon-warning"></i>单位名称不正确！</span>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">
+              <i>*</i>纳税人识别号</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.number" @change="reNumber" placeholder="请输入纳税人识别号">
+              <span class="tips" v-show="tipsNumber&&number">
+                <i class="el-icon-success"></i>
+              </span>
+              <span class="tips" v-show="!tipsNumber&&number">
+                <i class="el-icon-warning"></i>纳税人识别号不正确！</span>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">
+              <i>*</i>注册地址</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.zcadd" @change="reZcadd" placeholder="请输入注册地址">
+              <span class="tips" v-show="tipsZcadd&&zcadd">
+                <i class="el-icon-success"></i>
+              </span>
+              <span class="tips" v-show="!tipsZcadd&&zcadd">
+                <i class="el-icon-warning"></i>注册地址不能为空！</span>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">
+              <i>*</i>联系电话</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.phones" @change="rePhone" placeholder="请输入联系电话">
+              <span class="tips" v-show="tipsPhones&&phones">
+                <i class="el-icon-success"></i>
+              </span>
+              <span class="tips" v-show="!tipsPhones&&phones">
+                <i class="el-icon-warning"></i>联系电话不正确！</span>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">
+              <i>*</i>开户银行</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.bank" @change="reBank" placeholder="请输入开户银行">
+              <span class="tips" v-show="tipsBank&&bank">
+                <i class="el-icon-success"></i>
+              </span>
+              <span class="tips" v-show="!tipsBank&&bank">
+                <i class="el-icon-warning"></i>开户银行不能为空！</span>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">
+              <i>*</i>银行账号</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账号">
+              <span class="tips" v-show="tipsAccount&&account">
+                <i class="el-icon-success"></i>
+              </span>
+              <span class="tips" v-show="!tipsAccount&&account">
+                <i class="el-icon-warning"></i>银行账号不正确！</span>
+            </p>
+          </div>
+          <div class="operation">
+            <span @click="nextStep('stepThree')">下一步</span>
+            <span @click="nextStep('stepOne')">返回</span>
+          </div>
+        </div>
+        <div class="stepThree" v-show="stepThree">
+          <div class="formLi clearfix">
+            <p class="fl">开票方式</p>
+            <p class="fr readyOrderTicket">
+              <span>订单完成后开票
+                <i></i>
+              </span>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <div class="step">
+              <span class="stepCheck">1.选择开票方式</span>
+              <i></i>
+              <span class="stepCheck">2.填写或核对公司信息</span>
+              <i></i>
+              <span class="stepCheck">3.填写收票人信息</span>
             </div>
-            <div class="stepTwo" v-show="stepTwo">
-              <div class="formLi clearfix">
-                <p class="fl">开票方式</p>
-                <p class="fr readyOrderTicket">
-                  <span>订单完成后开票
-                    <i></i>
-                  </span>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <div class="step">
-                  <span class="stepCheck">1.选择开票方式</span>
-                  <i></i>
-                  <span class="stepCheck">2.填写或核对公司信息</span>
-                  <i></i>
-                  <span>3.填写收票人信息</span>
-                </div>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">
-                  <i>*</i>单位名称</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.companyname" @change="reCompanyname" placeholder="请输入单位名称">
-                  <span class="tips" v-show="tipsCompanyname&&companyname">
-                    <i class="el-icon-success"></i>
-                  </span>
-                  <span class="tips" v-show="!tipsCompanyname&&companyname">
-                    <i class="el-icon-warning"></i>单位名称不正确！</span>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">
-                  <i>*</i>纳税人识别号</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.number" @change="reNumber" placeholder="请输入纳税人识别号">
-                  <span class="tips" v-show="tipsNumber&&number">
-                    <i class="el-icon-success"></i>
-                  </span>
-                  <span class="tips" v-show="!tipsNumber&&number">
-                    <i class="el-icon-warning"></i>纳税人识别号不正确！</span>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">
-                  <i>*</i>注册地址</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.zcadd" @change="reZcadd" placeholder="请输入注册地址">
-                  <span class="tips" v-show="tipsZcadd&&zcadd">
-                    <i class="el-icon-success"></i>
-                  </span>
-                  <span class="tips" v-show="!tipsZcadd&&zcadd">
-                    <i class="el-icon-warning"></i>注册地址不能为空！</span>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">
-                  <i>*</i>联系电话</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.phones" @change="rePhone" placeholder="请输入联系电话">
-                  <span class="tips" v-show="tipsPhones&&phones">
-                    <i class="el-icon-success"></i>
-                  </span>
-                  <span class="tips" v-show="!tipsPhones&&phones">
-                    <i class="el-icon-warning"></i>联系电话不正确！</span>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">
-                  <i>*</i>开户银行</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.bank" @change="reBank" placeholder="请输入开户银行">
-                  <span class="tips" v-show="tipsBank&&bank">
-                    <i class="el-icon-success"></i>
-                  </span>
-                  <span class="tips" v-show="!tipsBank&&bank">
-                    <i class="el-icon-warning"></i>开户银行不能为空！</span>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">
-                  <i>*</i>银行账号</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账号">
-                  <span class="tips" v-show="tipsAccount&&account">
-                    <i class="el-icon-success"></i>
-                  </span>
-                  <span class="tips" v-show="!tipsAccount&&account">
-                    <i class="el-icon-warning"></i>银行账号不正确！</span>
-                </p>
-              </div>
-              <div class="operation">
-                <span @click="nextStep('stepThree')">下一步</span>
-                <span @click="nextStep('stepOne')">返回</span>
-              </div>
-            </div>
-            <div class="stepThree" v-show="stepThree">
-              <div class="formLi clearfix">
-                <p class="fl">开票方式</p>
-                <p class="fr readyOrderTicket">
-                  <span>订单完成后开票
-                    <i></i>
-                  </span>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <div class="step">
-                  <span class="stepCheck">1.选择开票方式</span>
-                  <i></i>
-                  <span class="stepCheck">2.填写或核对公司信息</span>
-                  <i></i>
-                  <span class="stepCheck">3.填写收票人信息</span>
-                </div>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">收票人姓名</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.name" placeholder="输入收票人姓名">
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">收票人手机</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.tel" placeholder="输入收票人手机号">
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">收票人省份</p>
-                <p class="fr province">
-                  <el-select v-model="zzTicketForm.province" placeholder="省" @change="changezzTicketp">
-                    <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzprovince" :key="'prov'+index"></el-option>
-                  </el-select>
-                  <el-select v-model="zzTicketForm.city" placeholder="市">
-                    <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzcity" :key="'city'+index"></el-option>
-                  </el-select>
-                  <el-select v-model="zzTicketForm.area" placeholder="区">
-                    <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzarea" :key="'area'+index"></el-option>
-                  </el-select>
-                </p>
-              </div>
-              <div class="formLi clearfix">
-                <p class="fl">详细地址</p>
-                <p class="fr">
-                  <input type="text" v-model="zzTicketForm.address" placeholder="请输入收票人的详细地址">
-                </p>
-              </div>
-              <div class="operation">
-                <span @click="addZZTicketBefore">保存</span>
-                <span @click="nextStep('stepTwo')">返回</span>
-              </div>
-            </div>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">收票人姓名</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.name" placeholder="输入收票人姓名">
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">收票人手机</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.tel" placeholder="输入收票人手机号">
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">收票人省份</p>
+            <p class="fr province">
+              <el-select v-model="zzTicketForm.province" placeholder="省" @change="changezzTicketp">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzprovince" :key="'prov'+index"></el-option>
+              </el-select>
+              <el-select v-model="zzTicketForm.city" placeholder="市">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzcity" :key="'city'+index"></el-option>
+              </el-select>
+              <el-select v-model="zzTicketForm.area" placeholder="区">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzarea" :key="'area'+index"></el-option>
+              </el-select>
+            </p>
+          </div>
+          <div class="formLi clearfix">
+            <p class="fl">详细地址</p>
+            <p class="fr">
+              <input type="text" v-model="zzTicketForm.address" placeholder="请输入收票人的详细地址">
+            </p>
+          </div>
+          <div class="operation">
+            <span @click="addZZTicketBefore">保存</span>
+            <span @click="nextStep('stepTwo')">返回</span>
           </div>
         </div>
       </div>
@@ -306,16 +282,11 @@
 
 <script>
 import { ticketorder } from '~/lib/v1_sdk/index'
-import { timestampToTime } from '@/lib/util/helper'
 import { mapActions } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
-import TicketOrderList from '@/pages/profile/components/OrderList'
 export default {
-  props: ['orderData'],
-  components: {
-    'v-ticketlist': TicketOrderList
-  },
+  props: ['checkedArr'],
   data() {
     return {
       ticketType: {
@@ -329,7 +300,7 @@ export default {
       index: 0,
       checkedNum: 1,
       isFixed: false,
-      checkedArr: [],
+      // checkedArr: [],
       bottomBaroffsetTop: '',
       windowHeight: '',
       headerHeight: '',
@@ -482,78 +453,6 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid', 'setKid']),
-
-    // 选择要开发票的订单
-    handleSelectSingle(item) {
-      let itemIndex = this.checkedArr.indexOf(item.id)
-      if (itemIndex >= 0) {
-        //未选中
-        this.checkedArr.splice(itemIndex, 1)
-        this.orderPrice = (
-          (Number(this.orderPrice) * 10 - Number(item.order_amount) * 10) /
-          10
-        ).toFixed(2)
-      } else {
-        //选中
-        this.checkedArr.push(item.id)
-
-        this.orderPrice = (
-          (Number(this.orderPrice) * 10 + Number(item.order_amount) * 10) /
-          10
-        ).toFixed(2)
-      }
-      this.orderNum = this.checkedArr.length
-      // console.log(this.checkedArr)
-      if (this.checkedArr.length == this.ticketOrderData.length) {
-        this.checkMsg = true
-      } else {
-        this.checkMsg = false
-      }
-    },
-    // 全选
-    handleSelectAll(val) {
-      var checkboxList = document.getElementsByClassName('singleCheckbox')
-      if (val) {
-        this.checkedArr = []
-        this.orderPrice = 0
-        // var checkboxList = document.getElementsByClassName('singleCheckbox')
-        for (var i = 0; i < checkboxList.length; i++) {
-          checkboxList[i].checked = true
-          this.checkedArr.push(checkboxList[i].id)
-        }
-
-        this.ticketOrderData.forEach(item => {
-          this.orderPrice = (
-            (Number(this.orderPrice) * 10 + Number(item.order_amount) * 10) /
-            10
-          ).toFixed(2)
-        })
-      } else {
-        for (var i = 0; i < checkboxList.length; i++) {
-          checkboxList[i].checked = false
-          this.checkedArr.push(checkboxList[i].id)
-        }
-
-        this.checkedArr = []
-        this.orderPrice = 0
-      }
-
-      this.orderNum = this.checkedArr.length
-      // console.log(this.checkedArr)
-    },
-    // 展示修改发票信息弹框
-    showIoc() {
-      if (this.checkedArr.length > 0) {
-        this.showInvoice = true
-        this.getTicket()
-      } else {
-        this.$message({
-          showClose: true,
-          type: 'info',
-          message: '请先选择要开具发票的订单！'
-        })
-      }
-    },
     // 验证普通发票 中的纳税人识别号
     retfNumber() {
       if (
@@ -700,14 +599,6 @@ export default {
       } else {
         this.ticketForm.isRadio = true
         this.ticketForm.others = '培训费'
-      }
-    },
-    // 购买类型 个人/企业
-    buyType(type) {
-      if (type === '1') {
-        this.person = true
-      } else {
-        this.person = false
       }
     },
     // 切换普通发票下的省
@@ -979,13 +870,15 @@ export default {
               this.invoiceForm.ticket = false
               this.isShowTicket = true
               this.commitOrders.ticketId = res.data.invoice_id
-              this.close()
+              // this.close()
+              this.$emit('handleClose')
               if (this.ticketForm.types == 1) {
                 this.invoiceForm.ticket = true
               }
               this.orderNum = 0
               this.orderPrice = 0
-              this.getUnTicketData()
+              // this.getUnTicketData()
+              this.$emit('getUnTicketData')
             } else {
               this.$message({
                 showClose: true,
@@ -1038,11 +931,13 @@ export default {
               this.invoiceForm.ticket = false
               this.isShowTicket = true
               this.commitOrders.ticketId = res.data.invoice_id
-              this.close()
+              // this.close()
+              this.$emit('handleClose')
               this.stepOne = true
               this.stepTwo = false
               this.stepThree = false
-              this.getUnTicketData()
+              // this.getUnTicketData()
+              this.$emit('getUnTicketData')
             } else {
               this.$message({
                 showClose: true,
@@ -1054,37 +949,6 @@ export default {
           })
         })
       }
-    },
-    //bottomBar根据页面滚动位置设置定位
-    addClass() {
-      if (document.getElementById('bottomPosition')) {
-        var bottomPositionHeight = parseInt(
-          document.getElementById('bottomPosition').offsetTop + 60 //170:tips本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
-        )
-      }
-      this.scroll = parseInt(
-        document.documentElement.scrollTop || document.body.scrollTop
-      )
-      let scrollIns = parseInt(this.scroll + this.windowHeight)
-
-      if (
-        scrollIns > this.bottomBaroffsetTop ||
-        scrollIns > bottomPositionHeight
-      ) {
-        this.isFixed = false
-      } else {
-        this.isFixed = true
-      }
-    },
-    //未开发票列表
-    getUnTicketData() {
-      ticketorder.orderNotInvoice().then(response => {
-        this.ticketOrderData = response.data.orderList
-        var checkboxList = document.getElementsByClassName('singleCheckbox')
-        for (var i = 0; i < checkboxList.length; i++) {
-          checkboxList[i].checked = false
-        }
-      })
     },
     // 获取发票信息
     getTicket() {
@@ -1151,25 +1015,14 @@ export default {
     },
     // 关闭表单
     close() {
-      this.showInfo = false
-      this.showInvoice = false
+      this.$emit('handleClose')
+      // this.showInfo = false
+      // this.showInvoice = false
     }
   },
   mounted() {
-    // console.log(this.orderData)
-    this.ticketOrderData = this.orderData
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.headerHeight = document.getElementsByClassName(
-      'headerBox'
-    )[0].offsetHeight
-    this.windowHeight = document.documentElement.clientHeight
-
-    // window.addEventListener('scroll', this.addClass)
     this.getRegionList()
-    this.$bus.$on('handleSelectSingle', data => {
-      this.handleSelectSingle(data)
-    })
+    this.getTicket()
   },
   watch: {
     province(val) {
@@ -1213,3 +1066,5 @@ export default {
 }
 </script>
 
+<style scoped>
+</style>
