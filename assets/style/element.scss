@@ -1486,3 +1486,7 @@ input:-webkit-autofill {
     }
   }
 }
+
+input::-webkit-input-safebox-button {
+  display: none;
+}

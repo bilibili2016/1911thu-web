@@ -294,6 +294,7 @@ export default {
         this.courseList = response.data.curriculumDetail
         persistStore.set('curriculumId', response.data.curriculumDetail.id)
         this.privileMsg = response.data.curriculumPrivilege
+
         this.content = response.data.curriculumPrivilege
         this.loadTeacher = false
         this.collectMsg.isCollect = response.data.curriculumDetail.is_collection
@@ -358,6 +359,12 @@ export default {
   },
   mounted() {
     this.initAll()
+  },
+  watch: {
+    //在当前页面进行登录操作更新状态
+    isAuthenticated(val) {
+      this.getCourseDetail()
+    }
   }
 }
 </script>

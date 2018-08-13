@@ -322,13 +322,14 @@
           }
         }
         .allPrice {
-          width: 300px;
+          width: auto;
           height: 60px;
           line-height: 60px;
           padding-right: 30px;
           text-align: right;
           color: #ff5f5f;
           font-size: 30px;
+          margin-left: 20px;
         }
         .commitOrder .el-button {
           border: none;
@@ -437,5 +438,18 @@
         }
       }
     }
+  }
+}
+.el-message-box.shopcartPop {
+  width: 510px;
+  height: 240px;
+  border-radius: 10px;
+  .el-message-box__content {
+    text-align: left;
+    padding: 10px 40px 0 40px;
+  }
+  .el-message-box__btns {
+    margin-top: 40px;
+    padding-top: 0;
   }
 }

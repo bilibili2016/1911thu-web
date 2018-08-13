@@ -59,17 +59,10 @@
         <ul class="list clearfix">
           <li v-for="li in courseList" :key="li.id" class="list-item" @click="goCourseList(li)">
             <p class="item-desc1">{{li.title}}</p>
-            <!-- <p class=item-desc2>{{li.number}}</p> -->
           </li>
-          <!-- <li v-for="(item,index) in project" :key="index" @click="handleLink(item)" class="list-item list-icon clearfix">
-            <div class="item-img">
-              <img :src="item.src" alt="">
-            </div>
-            <div class="item-desc">
-              <p class="item-desc-text">{{item.title}}</p>
-              <p class=item-desc-more>了解更多></p>
-            </div>
-          </li> -->
+          <li class="list-item" style="cursor:inherit">
+            <p class="item-desc1">......</p>
+          </li>
 
         </ul>
         <div class="course-bottom">
@@ -263,16 +256,6 @@ export default {
             pids: '0'
           },
           is_picture_show: '1'
-        },
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_6.png',
-          title: '......',
-          number: '（11个行业，110余门课程）',
-          cidform: {
-            cids: '20',
-            indexs: '5',
-            pids: '0'
-          }
         }
       ],
       project: [
