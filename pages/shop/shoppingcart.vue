@@ -915,7 +915,8 @@ export default {
                 cancelButtonText: '取消',
                 closeOnHashChange: false,
                 // type: 'warning',
-                center: true
+                center: true,
+                customClass: 'shopcartPop'
               }
             )
               .then(() => {
@@ -939,7 +940,8 @@ export default {
             cancelButtonText: '取消',
             closeOnHashChange: false,
             // type: 'warning',
-            center: true
+            center: true,
+            customClass: 'shopcartPop'
           }
         )
           .then(() => {
@@ -1073,7 +1075,17 @@ export default {
       this.deleteAllData.projectcartid = this.projectAddArray.projectcartid
       this.deleteAllData.curriculumcartid = this.addArray.curriculumcartid
       this.loding = true
-
+      if (
+        this.deleteAllData.projectcartid.length === 0 &&
+        this.deleteAllData.curriculumcartid.length === 0
+      ) {
+        this.$message({
+          showClose: true,
+          message: '请选择要删除的课程'
+        })
+        this.loding = false
+        return false
+      }
       shopcart.delAllShopCart(this.deleteAllData).then(response => {
         this.$message({
           showClose: true,

@@ -182,7 +182,7 @@
             <i class="icon-code"></i> 兑换码管理</span>
           <el-tabs v-model="courseCodeNames" @tab-click="handleCourseCode">
             <!-- 课程码管理 课程码列表 -->
-            <el-tab-pane label="课程码列表" name="first">
+            <el-tab-pane label="兑换码列表" name="first">
               <v-invitation :codeData="codeData"></v-invitation>
             </el-tab-pane>
             <!-- 课程码管理 兑换详情 -->

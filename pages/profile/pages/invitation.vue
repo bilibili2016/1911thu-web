@@ -2,7 +2,7 @@
   <div class="invitation">
     <div class="table">
       <div class="tr_header">
-        <span>课程码</span>
+        <span>兑换码</span>
         <span>类型</span>
         <span>购买日期</span>
         <span>可用个数</span>
