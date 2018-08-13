@@ -133,13 +133,19 @@ export default {
     },
     //课程详情
     courseInfo(item, index) {
-      this.kidForm.kids = item.id
-      persistStore.set('curriculumId', item.id)
-      this.setKid(this.kidForm)
-      this.openDetail()
+      if (this.cidNumber === '0') {
+        // 项目-项目详情
+        persistStore.set('projectId', item.id)
+        this.openDetail('/project/ProjectDetail')
+      } else {
+        this.kidForm.kids = item.id
+        persistStore.set('curriculumId', item.id)
+        this.setKid(this.kidForm)
+        this.openDetail('/course/coursedetail')
+      }
     },
-    openDetail() {
-      window.open(window.location.origin + '/course/coursedetail')
+    openDetail(link) {
+      window.open(window.location.origin + link)
     }
   },
   mounted() {
