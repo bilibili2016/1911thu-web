@@ -71,9 +71,16 @@
           position: absolute;
           top: 6px;
           right: 10px;
-          background: url('http://papn9j3ys.bkt.clouddn.com/loseEfficacy.png')
-            no-repeat;
-          background-size: contain;
+          &.efficacy {
+            background: url('http://papn9j3ys.bkt.clouddn.com/loseEfficacy.png')
+              no-repeat;
+            background-size: contain;
+          }
+          &.used {
+            background: url('http://papn9j3ys.bkt.clouddn.com/used.png')
+              no-repeat;
+            background-size: contain;
+          }
         }
       }
     }

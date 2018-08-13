@@ -12,7 +12,7 @@
 
           <div class="course">
             <!-- 课程列表 -->
-            <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
+            <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="course in courseList.orderCurriculumList" :key="course.id">
               <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
               <div class="fl">
                 <h4 @click="goCourseInfo(course)">{{course.title}}</h4>
@@ -21,7 +21,7 @@
               </div>
             </div>
             <!-- 项目列表 -->
-            <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
+            <div class="courseOne" v-if="courseList.orderProjectList" v-for="project in courseList.orderProjectList" :key="project.id">
               <div class="courseImg">
                 <!-- 项目图标 -->
                 <img class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
@@ -32,14 +32,14 @@
                 <h6>{{project.curriculum_time}}学时</h6>
               </div>
             </div>
-            <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
+            <!-- <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
               查看更多课程>
-            </div>
+            </div> -->
           </div>
           <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
             <p>¥{{courseList.order_amount}}</p>
             <!-- 订单 -->
-            <p v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length<=3) && config.type==='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
+            <p v-if="config.type==='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
           </div>
           <!-- 订单 -->
           <div v-show="config.type==='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
@@ -84,13 +84,14 @@ export default {
     ...mapActions('auth', ['setGid', 'setKid']),
     //根据列表长度计算高度
     computedHeight(course, project) {
-      let height =
-        course.length + project.length > 3
-          ? 3 * 140 + 60 + 'px'
-          : (course.length + project.length) * 140 + 'px'
+      // let height =
+      //   course.length + project.length > 3
+      //     ? 3 * 140 + 60 + 'px'
+      //     : (course.length + project.length) * 140 + 'px'
+      let height = (course.length + project.length) * 140 + 'px'
       return height
     },
-    //计算项目列表显示数量
+    //计算项目列表显示数量 现在默认全部显示，暂时用不到该方法
     computedLength(course, project, index) {
       let projectLength = course.length > 3 ? 0 : 3 - course.length
       if (index < projectLength) {

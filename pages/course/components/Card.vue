@@ -62,7 +62,9 @@
                   <p>已学时长</p>
                 </h4>
                 <div class="common-button">
-                  <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                  <!-- 免费课程学习到100后显示再次学习 -->
+                  <el-button v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                  <el-button v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   <div class="lineProgress">
                     <h5>已完成{{courseList.percent}}%</h5>
                     <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
@@ -92,7 +94,8 @@
                   </div>
                   <!-- 未购买 购买判断  已购买-->
                   <div v-if="privileMsg===true ">
-                    <el-button type="primary " plain @click="handleFreeNoneStudy(courseList)">立即学习</el-button>
+                    <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
+                    <el-button type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
                   </div>
                 </div>
               </div>
@@ -113,12 +116,14 @@
                   <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
                 </h4>
                 <div class="common-button">
-
-                  <div>
+                  <!-- 学习到100后显示再次学习，否则显示继续学习 -->
+                  <div v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100">
+                    <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
                     <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                   </div>
-                  <div>
-                    <el-button type="primary" plain @click="handleAddShopCart(courseList)" style="margin-right:30px;">加入购物车</el-button>
+                  <div v-if="Number(courseList.percent)===100">
+                    <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
+                    <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   </div>
                   <div class="lineProgress">
                     <h5>已完成{{courseList.percent}}%</h5>

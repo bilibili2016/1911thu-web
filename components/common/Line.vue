@@ -62,6 +62,7 @@ export default {
       curriculumcartids: {
         cartid: null
       },
+      move: true,
       percents: 50,
       playerForm: {
         curriculumId: '',
@@ -98,7 +99,9 @@ export default {
     handleCatalog(index, item) {
       // console.log(index, '这是index')
       // console.log(item, 'item')
-      document.getElementsByClassName('goodplay')[0].style.display = 'none' //立即观看隐藏课程播放的覆盖层
+      if (document.getElementsByClassName('goodplay')[0]) {
+        document.getElementsByClassName('goodplay')[0].style.display = 'none' //立即观看隐藏课程播放的覆盖层
+      }
       let curriculum_id = item.childList[index].curriculum_id
       let catalog_id = item.childList[index].id
       let video_time = item.childList[index].second
@@ -109,6 +112,7 @@ export default {
       this.playerForm.curriculumId = curriculum_id
       this.playerForm.catalogId = catalog_id
       this.$bus.$emit('updateCourse', this.playerForm)
+      document.body.scrollTop = document.documentElement.scrollTop = 0
     },
     buyMask() {
       this.$message({
