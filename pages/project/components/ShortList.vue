@@ -2,7 +2,7 @@
   <!-- 项目列表card组件[首页]-->
   <div class="shortlist">
     <div class="goodCourse project">
-      <div class="courseLi clearfix" v-for="(course,index) in cardData" :key="index" @click="courseInfo(course)">
+      <div class="courseLi clearfix" v-for="(course,index) in cardData" :key="index" @click="projectInfo(course)">
         <div class="fl">
           <img :src="projectImg" alt="" class="project-img">
           <img :src="course.picture" alt="" class="teacher-picture">
@@ -37,12 +37,11 @@ export default {
   },
   methods: {
     //项目详情
-    courseInfo(item, index) {
+    projectInfo(item, index) {
       persistStore.set('projectId', item.id)
-      this.openDetail('/project/ProjectDetail')
-    },
-    openDetail(link) {
-      window.open(window.location.origin + link)
+      window.open(
+        window.location.origin + '/project/ProjectDetail?id=' + item.id
+      )
     }
   }
 }

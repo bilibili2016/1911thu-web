@@ -45,7 +45,7 @@
     <!-- 报告问题 -->
     <v-report :config="config"></v-report>
     <!-- 写评价 -->
-    <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="courseList" :config="configEvaluste" @closeEvaluate="closeEvaluate"> </v-evaluatecase>
+    <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="projectDetail" :config="configEvaluste" @closeEvaluate="closeEvaluate"> </v-evaluatecase>
     <!-- <div class="evaluate" v-show="showEvaluate">
       <div class="note">
         <h4>项目评价
@@ -451,8 +451,6 @@ export default {
         }
         // 监听播放停止事件
         if (msg.type == 'ended') {
-          console.log(123)
-
           // 未购买且试看
           if (!that.bought && that.isTry == '2') {
             that.$bus.$emit('openPay')
