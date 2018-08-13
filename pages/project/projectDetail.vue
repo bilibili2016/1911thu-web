@@ -36,7 +36,7 @@
 
 <script>
 import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Collection from '@/components/common/Collection.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import Detail from '@/pages/project/components/Detail'
@@ -124,6 +124,9 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapGetters('auth', ['isAuthenticated'])
+  },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     // 获取项目详情
@@ -152,7 +155,10 @@ export default {
   mounted() {
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.project.projectId = persistStore.get('projectId')
+    if (this.isAuthenticated) {
+      this.project.projectId = persistStore.get('projectId')
+    }
+
     this.getProjectInfo()
     this.getEvaluateList()
 

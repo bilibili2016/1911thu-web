@@ -9,7 +9,7 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <div class="mask-style" @click="selectCid(card,index)">
+            <div class="mask-style" @click="openDetail(card)">
               <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
             </div>
             <div class="bgImgs">
@@ -29,7 +29,7 @@
                 <span>继续学习</span>
               </el-button>
             </div>
-            <el-row @click.native="selectCid(card,index)">
+            <el-row @click.native="openDetail(card)">
               <!-- 课程标题 -->
               <div class="item">
                 <p class="itemBox-name itemBoxTitle">
@@ -68,7 +68,7 @@
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
           <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
-            <div @click="courseInfo(card,index) ">
+            <div @click="openDetail(card) ">
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
@@ -120,20 +120,8 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
-    selectCid(item, index) {
-      this.kidForm.kids = item.id
-      persistStore.set('curriculumId', item.id)
-      this.setKid(this.kidForm)
-      this.curriculumcartids.cartid = item.id
-      this.openDetail()
-    },
-    courseInfo(item, index) {
-      this.kidForm.kids = item.id
-      persistStore.set('curriculumId', item.id)
-      this.setKid(this.kidForm)
-      this.openDetail()
-    },
-    openDetail() {
+    openDetail(item) {
+      persistStore.set('projectId', item.id)
       window.open(window.location.origin + '/project/projectDetail')
     },
     goToPlay(item) {

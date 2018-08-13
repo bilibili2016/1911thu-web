@@ -72,6 +72,11 @@ export default {
         card_type: 'profile',
         card: 'home'
       },
+      configSevent: {
+        card_type: 'shoucang',
+        card: 'home',
+        types: 'buy'
+      },
       pagemsg: {
         page: 1,
         pagesize: 12,
@@ -107,11 +112,6 @@ export default {
       type: '',
       categoryIndex: '',
       loadList: false,
-      configSevent: {
-        card_type: 'shoucang',
-        card: 'home',
-        types: 'buy'
-      },
       xid: '0',
       // 我要选课
       curriculumListForm: {

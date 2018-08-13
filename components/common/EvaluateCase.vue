@@ -20,7 +20,7 @@
           </span>
         </div>
         <div class="area">
-          <el-input type="textarea" :rows="3" placeholder="其它想说的" v-model="textarea" maxlength="100">
+          <el-input type="textarea" resize="none" :rows="3" placeholder="其它想说的" v-model="textarea" maxlength="100">
           </el-input>
         </div>
         <div class="submit">
@@ -52,7 +52,8 @@ export default {
         scores: '',
         types: 1,
         tag: []
-      }
+      },
+      flag: false
     }
   },
   methods: {
@@ -82,9 +83,11 @@ export default {
       if (this.config.type === 1) {
         this.addEvaluateForm.ids = persistStore.get('curriculumId')
         this.addEvaluateForm.types = 1
+        this.flag = this.courseList.is_study
       } else {
         this.addEvaluateForm.ids = persistStore.get('projectId')
         this.addEvaluateForm.types = 2
+        this.flag = this.courseList.is_CurriculumProjectStudy
       }
       if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
@@ -94,13 +97,12 @@ export default {
           type: 'warning',
           message: '请输入少于100个字符！'
         })
-        return false
       }
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
         .toString()
         .replace(/,/g, '#')
-      if (this.courseList.is_study) {
+      if (this.flag) {
         coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
           if (response.status === '100100') {
             this.$message({

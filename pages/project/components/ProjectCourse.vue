@@ -45,7 +45,11 @@ export default {
     },
     // 跳转到项目播放页
     goProjectPlayer() {
-      window.open(window.location.origin + '/project/projectPlayer')
+      if (this.isAuthenticated) {
+        window.open(window.location.origin + '/project/projectPlayer')
+      } else {
+        this.$bus.$emit('loginShow', true)
+      }
     }
   }
 }
