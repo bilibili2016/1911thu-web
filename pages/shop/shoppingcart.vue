@@ -122,9 +122,9 @@
           <!-- 失效项目列表 end -->
         </div>
         <!-- 底部团购优惠提示 -->
-        <div class="tips" id="tips" v-if="!isNoMsg">
-          <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911
-        </div>
+        <!-- <div class="tips" id="tips" v-if="!isNoMsg"> -->
+        <!-- <img src="@/assets/images/sale.png" alt="">购买多人课程，价格更优惠，详情请咨询010-6217 1911 -->
+        <!-- </div> -->
 
         <!-- 无课程以及项目显示提示  -->
         <div class="noMsg-con" v-if="isNoMsg">
@@ -328,7 +328,7 @@ export default {
       restaurants: [],
       timeout: null,
       windowHeight: '',
-      tipsHeight: '',
+      computedHeight: '',
       projectList: '',
       selectAllCourse: '',
       selectAllProject: '',
@@ -517,8 +517,6 @@ export default {
       this.projectAddArray.projectcartid = []
 
       shopcart.shopCartList().then(response => {
-        // console.log(response.data)
-
         let body = response.data.curriculumCartList.map(item => {
           // this.addArray.curriculumcartid.push(item.id)      //默认不选中
           // this.arraySum =
@@ -1121,9 +1119,9 @@ export default {
     },
     //tableFooter根据页面滚动位置设置定位
     addClass() {
-      if (document.getElementById('tips')) {
-        var tipsHeight = parseInt(
-          document.getElementById('tips').offsetTop + 170 //170:tips本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
+      if (document.getElementById('computedHeight')) {
+        var computedHeight = parseInt(
+          document.getElementById('computedHeight').offsetTop + 170 //170:computedHeight本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
         )
       }
       this.scroll = parseInt(
@@ -1131,7 +1129,7 @@ export default {
       )
       let scrollIns = parseInt(this.scroll + this.windowHeight)
 
-      if (scrollIns > this.tableFooteroffsetTop || scrollIns > tipsHeight) {
+      if (scrollIns > this.tableFooteroffsetTop || scrollIns > computedHeight) {
         this.isFixed = false
       } else {
         this.isFixed = true

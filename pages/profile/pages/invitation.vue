@@ -10,7 +10,7 @@
         <span>所属订单</span>
       </div>
       <!-- codeData&&codeData.length> -->
-      <div v-if="codeData&&codeData.length>0" v-for="(code,index) in codeData" :key="index" :class="code.use_code_number==='0'?'noCodes tr_body':'tr_body' ">
+      <div v-if="codeData&&codeData.length>0" v-for="(code,index) in codeData" :key="index" :class="code.use_code_number==='0'||code.expire_days==='0'?'noCodes tr_body':'tr_body' ">
         <span>{{code.invitation_code}}</span>
         <span v-if="code.type==='1'">课程</span>
         <span v-if="code.type==='2'">项目</span>
@@ -19,7 +19,8 @@
         <span>{{code.use_code_number}}</span>
         <span>{{code.expire_days}}</span>
         <span class="orderNum" @click="handleMyOrder">{{code.order_sn}}
-          <i></i>
+          <i class="efficacy" v-if="code.expire_days==='0'"></i>
+          <i class="used" v-if="code.use_code_number==='0'"></i>
         </span>
       </div>
       <div v-if="!codeData||codeData.length<1" class="noCodes">
