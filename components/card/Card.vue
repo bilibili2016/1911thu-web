@@ -152,6 +152,9 @@ export default {
   },
   mounted() {
     // type类型决定当前列表的类型：0-课程；1-项目
+
+    console.log(this.data, '这是data')
+
     if (window.location.search.split('=')[1]) {
       this.isIndex = false
       this.type = window.location.search.split('=')[1].substr(0, 1)
