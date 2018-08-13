@@ -6,9 +6,6 @@ import { auth, ServerError } from '~/lib/v1_sdk'
 persistStore.defaults({
   user: null,
   token: null,
-  cid: null,
-  cg: null,
-  pid: null,
   gid: null,
   kid: null,
   productsNum: null,
@@ -16,10 +13,6 @@ persistStore.defaults({
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
-let cid = persistStore.get('cid')
-let cg = persistStore.get('cg')
-let cindex = persistStore.get('cindex')
-let pid = persistStore.get('pid')
 let gid = persistStore.get('gid')
 let kid = persistStore.get('kid')
 let productsNum = persistStore.get('productsNum')
@@ -29,9 +22,6 @@ export const MUTATION = {
   signOut: 'sign-out',
   refresh: 'refresh',
   me: 'me',
-  setCid: 'set-cid',
-  setCg: 'set-cg',
-  setPid: 'set-pid',
   setGid: 'set-gid',
   setKid: 'set-kid',
   setProductsNum: 'set-productsNum'
@@ -39,14 +29,10 @@ export const MUTATION = {
 export const state = () => ({
   user,
   token,
-  cid,
-  pid,
   gid,
   // nid,
   kid,
-  productsNum,
-  cindex,
-  cg
+  productsNum
 })
 export const getters = {
   isAuthenticated(state) {
@@ -69,18 +55,6 @@ export const mutations = {
   },
   [MUTATION.me](state, { user }) {
     state.user = user
-  },
-  [MUTATION.setCid](state, { cid, cindex, pid, kid }) {
-    state.cid = cid
-    state.cindex = cindex
-    state.pid = pid
-    state.kid = kid
-  },
-  [MUTATION.setCg](state, { cg }) {
-    state.cg = cg
-  },
-  [MUTATION.setPid](state, { pid }) {
-    state.pid = pid
   },
   [MUTATION.setGid](state, { gid }) {
     state.gid = gid
@@ -171,68 +145,6 @@ export const actions = {
     } catch (e) {
       log.error(e)
     }
-  },
-  async companySignIn({ commit, state }, { email, password }) {
-    let user
-    try {
-      let tokens = await auth.companySignIn({ email, password })
-      token = 'JWT ' + tokens.token
-      persistStore.set('token', token)
-      commit(MUTATION.signIn, { token, user })
-      return tokens
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return user
-  }, // 设置点击tab分类大类id 小类id 以及大类的index
-  async setCid({ commit, state }, { cids, indexs, pids, kids }) {
-    try {
-      let [cid, cindex, pid, kid] = [cids, indexs, pids, kids]
-      persistStore.set('cid', cid)
-      persistStore.set('cindex', cindex)
-      persistStore.set('pid', pid)
-      persistStore.set('kid', kid)
-      commit(MUTATION.setCid, { cid, cindex, pid, kid })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return cid
-  }, // 设置category 传入类型 （tab进入,经典课程，免费课程,选课)
-  async setCg({ commit, state }, { cgs }) {
-    try {
-      let cg = cgs
-      persistStore.set('cg', cg)
-      commit(MUTATION.setCg, { cg })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return pid
-  },
-  async setPid({ commit, state }, { pids }) {
-    try {
-      let pid = pids
-      persistStore.set('pid', pid)
-      commit(MUTATION.setPid, { pid })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return pid
   },
   async setGid({ commit, state }, { gids }) {
     try {

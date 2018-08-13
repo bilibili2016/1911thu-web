@@ -5,7 +5,7 @@
         <table class="recordTable">
           <!--alternate-->
           <tr class="tr_header">
-            <th>课程码</th>
+            <th>兑换码</th>
             <th>兑换账户</th>
             <th>类型</th>
             <th>日期</th>

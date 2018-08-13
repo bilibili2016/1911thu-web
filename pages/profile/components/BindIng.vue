@@ -6,10 +6,10 @@
     </div>
     <div class="bindingRecord">
       <div class="brHeader">
-        <span>课程码</span>
+        <span>兑换码</span>
         <span>类型</span>
         <span>兑换日期</span>
-        <span>兑换课程信息</span>
+        <span>兑换信息</span>
       </div>
       <div class="brBody" v-for="(code,index) in invitationCodeList" :key="index">
         <div>{{code.invitation_code}}</div>

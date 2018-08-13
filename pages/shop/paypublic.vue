@@ -22,6 +22,7 @@
             </p>
             <p class="fl showTel" v-show="showTel">
               <input type="text" v-model="changeForm.tel" placeholder="请输入手机号码">
+              <i v-show="isAlertMsg">{{alertMsg}}</i>
               <span @click="againGet">获取汇款识别码</span>
             </p>
           </div>
@@ -57,6 +58,8 @@ export default {
       showPay: false,
       showTel: false,
       code: '',
+      isAlertMsg: false,
+      alertMsg: '请输入手机号',
       changeForm: {
         tel: null
       },
@@ -73,18 +76,27 @@ export default {
   methods: {
     changeTel() {
       this.showTel = true
+      this.changeForm.tel = ''
     },
     againGet() {
+      if (this.changeForm.tel == '') {
+        this.isAlertMsg = true
+        this.alertMsg = '请输入手机号'
+        return false
+      }
       if (
         this.changeForm.tel === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.changeForm.tel)
       ) {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '手机号格式错误！'
-        })
+        // this.$message({
+        //   showClose: true,
+        //   type: 'error',
+        //   message: '手机号格式错误！'
+        // })
+        this.isAlertMsg = true
+        this.alertMsg = '手机号格式错误！'
       } else {
+        this.isAlertMsg = false
         this.payForm.phones = this.changeForm.tel
         this.showPayPublic()
       }

@@ -51,7 +51,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid', 'setKid', 'setCg', 'setPid']),
     // 获取项目以及学院列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
@@ -67,22 +66,19 @@ export default {
     },
     handleClick(item, index) {
       // console.log(item, '这是是item')
-      this.cidform.cids = item.id
-      this.cidform.indexs = index
-      this.cidform.pids = '0'
+
       this.$bus.$emit('collegeId', item.id)
-      // window.open(window.location.origin + '/course/category')
-      this.setCid(this.cidform)
-      // 设置cg 2代表顶部列表
-      this.cgForm.cgs = '1'
-      this.setCg(this.cgForm)
+
       window.open(
         window.location.origin +
-          '/course/' +
+          '/course/category' +
+          '?cid=' +
           item.id +
-          '?pid=' +
+          '&cp=' +
           item.is_picture_show +
-          '&xid=0'
+          '&xid=0' +
+          '&pid=' +
+          '0'
       )
     }
   },

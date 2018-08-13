@@ -112,7 +112,15 @@ export default {
         // 整合后的跳转
 
         window.open(
-          window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
+          window.location.origin +
+            '/course/category' +
+            '?cid=' +
+            '0' +
+            '&cp=' +
+            '1' +
+            '&xid=1' +
+            '&pids=' +
+            '0'
         )
         // this.showNotLogin = false
       } else {
