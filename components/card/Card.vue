@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card-category profile">
+    <div class="card-category profile 333">
       <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
         <el-card shadow="never" body-style="padding: 0;" :class="['itemBox',{'learn':config.mask}]">
           <!-- 选课使用的勾选 -->
@@ -101,7 +101,10 @@ export default {
         this.kidForm.kids = item.id
         persistStore.set('curriculumId', item.id)
         this.setKid(this.kidForm)
-        this.openDetail('/course/coursedetail')
+        // this.openDetail('/course/coursedetail')
+        window.open(
+          window.location.origin + '/course/coursedetail?kid=' + item.id
+        )
       } else {
         // 分类列表页
         if (this.type === '0') {

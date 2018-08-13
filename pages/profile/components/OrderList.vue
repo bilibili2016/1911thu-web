@@ -7,9 +7,7 @@
         <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
       </div>
       <div class="list">
-
         <div class="content">
-
           <div class="course">
             <!-- 课程列表 -->
             <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="course in courseList.orderCurriculumList" :key="course.id">
