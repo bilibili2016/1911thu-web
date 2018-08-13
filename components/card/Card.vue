@@ -9,6 +9,10 @@
           <div class="new-style " v-if="config.new==='true' ">
             <img :src="newTag " alt=" ">
           </div>
+          <!-- 项目列表页显示小标志，选择课程页不显示 -->
+          <div class="projectImg" v-if="type==='1'&&config.card_type==='profile'">
+            <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
+          </div>
           <div class="mask-style" @click="goDetail(card)">
             <img :src="jinImg" alt="" class="jin-style">
           </div>
@@ -152,6 +156,7 @@ export default {
     }
   },
   mounted() {
+    // isIndex判断是否在首页 true在首页
     // type类型决定当前列表的类型：0-课程；1-项目
     if (window.location.search.split('=')[2]) {
       this.isIndex = false

@@ -71,6 +71,10 @@ export default {
     },
     // 项目加入购物车
     addShoppingCart() {
+      if (!this.isAuthenticated) {
+        this.$bus.$emit('loginShow', true)
+        return false
+      }
       this.shoppingForm.cartid = this.project.projectId
       projectdetail.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
