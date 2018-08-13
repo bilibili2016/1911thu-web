@@ -6,10 +6,10 @@
     </div>
     <div class="bindingRecord">
       <div class="brHeader">
-        <span>课程码</span>
+        <span>兑换码</span>
         <span>类型</span>
         <span>兑换日期</span>
-        <span>兑换课程信息</span>
+        <span>兑换信息</span>
       </div>
       <div class="brBody" v-for="(code,index) in invitationCodeList" :key="index">
         <div>{{code.invitation_code}}</div>
@@ -128,24 +128,6 @@ export default {
     },
     // 添加课程 绑定
     doSubmit() {
-      this.$confirm('绑定成功！', {
-        confirmButtonText: '确定',
-        showCancelButton: false,
-        center: true
-      })
-        .then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
-      return false
       binding.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({

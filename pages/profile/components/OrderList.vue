@@ -122,7 +122,7 @@ export default {
     //去支付
     goPay(id) {
       persistStore.set('cpyid', id)
-      this.$router.push('/shop/wepay')
+      this.$router.push('/shop/' + id)
     },
     //去购物车
     goShopping(id) {
