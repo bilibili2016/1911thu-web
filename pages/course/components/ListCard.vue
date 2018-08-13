@@ -144,6 +144,7 @@ export default {
         this.openDetail('/course/coursedetail')
       }
     },
+
     openDetail(link) {
       window.open(window.location.origin + link)
     }
