@@ -4,23 +4,19 @@
     <div v-loading="loadList">
       <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectAllCid="selectAllCid" @selectCid="selectCid" @selectAllPid="selectAllPid" @selectPid="selectPid"></v-list>
     </div>
-
     <div class="center category-style">
       <!-- 选择全部 最新和最热 -->
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
-
       <!-- 非选课的下面 课程列表 -->
-
       <div v-if="xid === '0'">
         <!-- -->
-        <div class="carlist" v-if="categoryData.length>0" v-loading="loadCourse">
+        <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
           <v-card :data="categoryData" :config="categoryCard"></v-card>
         </div>
         <div v-else v-loading="loadCourse" class="noMsg">
           <v-nothing></v-nothing>
         </div>
       </div>
-
       <div v-if="xid === '1'">
         <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
         <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
@@ -43,7 +39,7 @@ import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players, category } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-
+import { splitUrl } from '~/lib/util/helper'
 import List from '@/pages/course/components/List'
 import Filter from '@/pages/course/components/Filter'
 import Page from '@/components/common/Pagination'
@@ -69,7 +65,6 @@ export default {
       pidBg: 0,
       activeTab: '',
       categoryData: [],
-
       categoryCard: {
         card_type: 'profile',
         card: 'home'
@@ -79,7 +74,6 @@ export default {
         pagesize: 12,
         total: 5
       },
-
       categoryForm: {
         cids: null,
         pids: null,
@@ -225,12 +219,8 @@ export default {
     // 下面 card list 列表  --- 学院点进去
     getcourseList() {
       this.loadCourse = true
-      this.categoryForm.cids = window.location.search
-        .split('&')[0]
-        .split('=')[1]
-      this.categoryForm.pids = window.location.search
-        .split('&')[3]
-        .split('=')[1]
+      this.categoryForm.cids = splitUrl(0, 1)
+      this.categoryForm.pids = splitUrl(3, 1)
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         console.log(this.categoryData, '这是res')
@@ -242,21 +232,15 @@ export default {
     // 下面 card list 列表   --- 项目 查看更多 点进去
     getNewProjectList() {
       this.loadCourse = true
-      this.categoryForm.cids = window.location.search
-        .split('&')[0]
-        .split('=')[1]
-      this.categoryForm.pids = window.location.search
-        .split('&')[3]
-        .split('=')[1]
+      this.categoryForm.cids = splitUrl(0, 1)
+      this.categoryForm.pids = splitUrl(3, 1)
       category.curriculumProjectList(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumProjectList
         this.pagemsg.total = res.data.pageCount
         // console.log(this.pagemsg.total)
-
         this.loadCourse = false
       })
     },
-
     // 获取顶部分类列表数据list    ---  非 最新项目
     getCidPidList() {
       this.loadList = true
@@ -275,7 +259,6 @@ export default {
           }
           this.pidData = res.data.categoryList[this.categoryIndex]
         }
-
         this.loadBanner = false
       })
     },
@@ -301,7 +284,6 @@ export default {
         }
       })
     },
-
     // 下面 card list 列表  --- 我要选课页面
     curriculumList() {
       this.loadCourse = true
@@ -312,11 +294,9 @@ export default {
       category.curriculumList(this.curriculumListForm).then(response => {
         this.categoryData = response.data.curriculumList
         this.pagemsg.total = response.data.pageCount
-
         for (let item of response.data.curriculumList) {
           this.$set(item, 'checkmsg', false)
         }
-
         this.loadCourse = false
         var that = this
         for (let item of response.data.curriculumList) {
@@ -328,7 +308,6 @@ export default {
     allChecked() {
       this.idsForm.cartid = this.allCheckedId
       this.changeData = this.allCheckedId
-
       return new Promise((resolve, reject) => {
         category.addShopCart(this.idsForm).then(response => {
           if (response.status === 0) {
@@ -350,7 +329,6 @@ export default {
         })
       })
     },
-
     // 点击 最新最热 筛选
     selectActiveTab(item) {
       item.name === 'second'
@@ -376,32 +354,31 @@ export default {
   },
   mounted() {
     // 获取学院的id
-    this.categoryId = window.location.search.split('&')[0].split('=')[1]
+    this.categoryId = splitUrl(0, 1)
     // 获取是学院还是项目 学院 cp为 1 项目 cp为0
-    this.cp = window.location.search.split('&')[1].split('=')[1]
+    this.cp = splitUrl(1, 1)
     // 获取是 选课(1) 还是 学院(0)
-    this.xid = window.location.search.split('&')[2].split('=')[1]
-    // console.log(this.xid, '这是xid')
+    this.xid = splitUrl(2, 1)
     // 点击顶部学院 或者 点击我要选课 页面
     // pid 分类的id
-    this.pids = window.location.search.split('&')[3].split('=')[1]
+    this.pids = splitUrl(3, 1)
     if (this.cp === '0') {
       // 点击顶部学院
       if (this.xid === '0') {
-        this.cidBg = window.location.search.split('&')[0].split('=')[1]
+        this.cidBg = splitUrl(0, 1)
         this.pidBg = this.pids
         this.getCidPidList()
         this.getcourseList()
       } else {
         // 点击我要选课逻辑
-        this.cidBg = window.location.search.split('&')[0].split('=')[1]
+        this.cidBg = splitUrl(0, 1)
         this.getCidPidList()
         // 我要选课 card list
         this.curriculumList()
       }
     } else {
       // 点击最新项目 查看更多 页面
-      this.cidBg = window.location.search.split('&')[0].split('=')[1]
+      this.cidBg = splitUrl(0, 1)
       //判断是否为最新项目
       if (this.categoryId === '0') {
       }
