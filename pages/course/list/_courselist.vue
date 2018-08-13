@@ -1,10 +1,11 @@
 <template>
   <div class="goodLesson new-lesson" style="padding-bottom: 40px;">
     <div class="topImg">
-      <div class="top-con">
-        <p class="desc-one">走心课程</p>
-        <p class="desc-two">实力覆盖</p>
-      </div>
+      <img v-if="cidNumber==='0'" :src="projectImg" alt="">
+      <img v-else-if="cidNumber==='1'" :src="courseImg" alt="">
+      <img v-else-if="cidNumber==='2'" :src="goodCourseImg" alt="">
+      <img v-else :src="freeImg" alt="">
+
     </div>
     <div class="breadCrumb">
       <!-- 面包屑组件 -->
@@ -31,6 +32,10 @@ export default {
   },
   data() {
     return {
+      projectImg: 'http://papn9j3ys.bkt.clouddn.com/banner-project.png',
+      freeImg: 'http://papn9j3ys.bkt.clouddn.com/banner-free.png',
+      courseImg: 'http://papn9j3ys.bkt.clouddn.com/banner-course.jpg',
+      goodCourseImg: 'http://papn9j3ys.bkt.clouddn.com/banner-goodCourse.png',
       BreadCrumb: {
         type: 'goodlesson',
         text: ''

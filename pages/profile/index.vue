@@ -4,19 +4,21 @@
     <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
         <!-- 我的首页 -->
-        <el-tab-pane class="my-home" name="tab-first">
-          <span slot="label" class="tabList">
-            <i class="icon-home"></i> 我的首页</span>
-          <el-card class="card-style">
-            <div slot="header" class="clearfix">
-              <span>最近学习</span>
-            </div>
-            <div class="content">
-              <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
-              <v-nomsg class="fillTop" v-else :config="noMsgOne"></v-nomsg>
-            </div>
-          </el-card>
-        </el-tab-pane>
+        <div>
+          <el-tab-pane class="my-home" name="tab-first">
+            <span slot="label" class="tabList">
+              <i class="icon-home"></i> 我的首页</span>
+            <el-card class="card-style">
+              <div slot="header" class="clearfix">
+                <span>最近学习</span>
+              </div>
+              <div class="content">
+                <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
+                <v-nomsg class="fillTop" v-else :config="noMsgOne"></v-nomsg>
+              </div>
+            </el-card>
+          </el-tab-pane>
+        </div>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
@@ -238,7 +240,7 @@ import Order from '@/pages/profile/components/OrderList'
 import Detail from '@/pages/profile/components/Detail'
 import Invitation from '@/pages/profile/pages/invitation'
 import Conversion from '@/pages/profile/components/Conversion'
-import Bind from '@/pages/profile/components/Binding'
+import Bind from '@/pages/profile/components/BindIng'
 import TicketOrder from '@/pages/profile/ticket/ticketOrder'
 import TicketHistory from '@/pages/profile/ticket/ticketHistory'
 import TicketRules from '@/pages/profile/ticket/ticketRules'
@@ -659,12 +661,10 @@ export default {
       this.styleForm.categoryId = 0
       this.styleForm.pages = 1
       this.styleForm.limits = 12
-      return new Promise((resolve, reject) => {
-        profileHome.studyCurriculumList(this.styleForm).then(response => {
-          this.newDataReady = response.data.curriculumList
-          this.pagemsg2.total = response.data.pageCount
-          resolve(true)
-        })
+
+      profileHome.studyCurriculumList(this.styleForm).then(response => {
+        this.newDataReady = response.data.curriculumList
+        this.pagemsg2.total = response.data.pageCount
       })
     },
     // 我的课程 已过期的项目

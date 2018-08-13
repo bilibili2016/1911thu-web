@@ -55,24 +55,21 @@
         </el-tab-pane>
 
         <!-- 注册表单 -->
+
         <el-tab-pane label="注册" name="register">
+          <!-- <v-register :data="registerData" @wechatLogined="wechatLogined" @alreadySignin="alreadySignin" @close="close" @verifyRgTel="verifyRgTel"></v-register> -->
           <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
             <el-form-item prop="phones">
               <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
             </el-form-item>
             <el-form-item prop="codes">
               <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-              <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
               <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
-              <!--  -->
             </el-form-item>
             <el-form-item prop="passwords">
               <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
             </el-form-item>
-            <!-- <el-form-item prop="companyCodes">
-                <el-input v-model="registerData.companyCodes" placeholder="绑定单位ID"></el-input>
-                <span class="bindCompany">(可选)</span>
-              </el-form-item> -->
+
             <el-form-item prop="">
               <el-checkbox-group v-model="registerData.checked">
                 <el-checkbox label="同意" name="checked"></el-checkbox>
@@ -129,7 +126,11 @@ import { auth, header } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { encryption } from '~/lib/util/helper'
+import Register from '@/pages/auth/Register'
 export default {
+  components: {
+    'v-register': Register
+  },
   data() {
     var validatePass = (rule, value, callback) => {
       if (!/^[A-Za-z0-9]+$/.test(value)) {
@@ -423,7 +424,7 @@ export default {
       'setProductsNum',
       'signOut',
       'setToken',
-      'setPwd',
+      'setPwd'
     ]),
     // 验证手机登录还是账号密码登录
     mobilelogin() {
@@ -533,8 +534,6 @@ export default {
     verifyRgTel() {
       this.codeClick = true
       if (this.errorTel.tel === this.registerData.phones) {
-        zxc
-
         this.$message({
           showClose: true,
           type: 'error',

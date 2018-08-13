@@ -69,7 +69,8 @@ export default {
       }
     },
     getStatus() {
-      this.payListForm.orderId = persistStore.get('cpyid')
+      let cpyid = window.location.pathname.split('/')[2]
+      this.payListForm.orderId = cpyid
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
           clearInterval(this.interval)
@@ -79,7 +80,7 @@ export default {
             if (response.status === 0) {
               clearInterval(this.interval)
               this.$bus.$emit('closeCode')
-              this.$router.push('/shop/payresult')
+              this.$router.push('/shop/result/' + cpyid)
             }
           })
         }
