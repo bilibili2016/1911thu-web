@@ -4,26 +4,26 @@
       <!-- 头部banner -->
       <v-banner :config="wePay"></v-banner>
       <div class="main">
-        <div>
-          <div class="company">
-            <div class="title clearfix">
-              <span class="fl">订单：{{orderDetail.order_sn}}</span>
-              <span class="fr fr-up" @click="takeUp" v-if="takeupMsg === true">收起
-                <i class="el-icon-arrow-down"></i>
-              </span>
-              <span class="fr" @click="takeUp" v-if="takeupMsg === false">展开</span>
-            </div>
-            <div class="content">
-              <div class="course">
-                <!-- 购买课程列表 -->
-                <v-list :config="wePay" :data="orderCurriculumLists" v-if="takeupMsg"></v-list>
-                <!-- 支付类型选择-支付 -->
-                <v-paytype :orderDetail="orderDetail" :codeData="codeData"></v-paytype>
-              </div>
-            </div>
 
+        <div class="company">
+          <div class="title clearfix">
+            <span class="fl">订单：{{orderDetail.order_sn}}</span>
+            <span class="fr fr-up" @click="takeUp" v-if="takeupMsg === true">收起
+              <i class="el-icon-arrow-down"></i>
+            </span>
+            <span class="fr" @click="takeUp" v-if="takeupMsg === false">展开</span>
           </div>
+          <div class="content">
+            <div class="course">
+              <!-- 购买课程列表 -->
+              <v-list :config="wePay" :data="orderCurriculumLists" v-if="takeupMsg"></v-list>
+              <!-- 支付类型选择-支付 -->
+              <v-paytype :orderDetail="orderDetail" :codeData="codeData"></v-paytype>
+            </div>
+          </div>
+
         </div>
+
       </div>
       <!-- 支付二维码展示 -->
       <v-qrcode :orderDetail='orderDetail'></v-qrcode>
@@ -59,19 +59,6 @@ export default {
         type: 'wePay',
         text: '支付中心'
       },
-      company: '北京分分形状科技有限公司',
-      time: '2018-06-05 09：30：05',
-      courseList: [],
-      curriculumPayData: [],
-      allPrice: '69.00',
-      status: '等待审核',
-      time: null,
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
-      noData: false,
-      loding: true,
-      kidForm: {
-        kids: null
-      },
       payListForm: {
         orderId: null
       },
@@ -94,7 +81,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('auth', ['kid']),
+    // ...mapState('auth', ['kid']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
@@ -102,48 +89,34 @@ export default {
     takeUp() {
       this.takeupMsg = !this.takeupMsg
     },
-    selectPayApply(item, index) {
-      persistStore.set('pay', index)
-      persistStore.set('price', item.totalPresentPrice)
-      this.$router.push('/shop/checkedcourselist')
-    },
 
     goLink(item) {
       this.$router.push(item)
-    },
-    goCourseInfo(item, index) {
-      this.kidForm.kids = item.curriculum_id
-      persistStore.set('kid', item.curriculum_id)
-      this.setKid(this.kidForm)
-      this.$router.push('/course/coursedetail')
     },
     // 获取订单id列表
     getPayList(item) {
       let cpyid = window.location.pathname.split('/')[2]
       this.payListForm.orderId = cpyid
-      return new Promise((resolve, reject) => {
-        wepay.webPay(this.payListForm).then(response => {
-          this.loading = false
-          this.orderDetail = response.data.data.orderDetail
-          this.orderCurriculumLists = response.data.data.orderCurriculumLists
-          this.codeData.code_url = response.data.code_url
-          this.codeData.qr_code = response.data.qr_code
-          this.shopCartList()
-          resolve(true)
-          if (item === 'recode') {
-            this.$bus.$emit('addPaySubmit')
-          }
-        })
+
+      wepay.webPay(this.payListForm).then(response => {
+        this.loading = false
+        this.orderDetail = response.data.data.orderDetail
+        this.orderCurriculumLists = response.data.data.orderCurriculumLists
+        this.codeData.code_url = response.data.code_url
+        this.codeData.qr_code = response.data.qr_code
+        this.shopCartList()
+
+        if (item === 'recode') {
+          this.$bus.$emit('addPaySubmit')
+        }
       })
     },
     shopCartList() {
-      return new Promise((resolve, reject) => {
-        wepay.shopCartList().then(response => {
-          let len = {
-            pn: response.data.curriculumCartList.length
-          }
-          this.setProductsNum(len)
-        })
+      wepay.shopCartList().then(response => {
+        let len = {
+          pn: response.data.curriculumCartList.length
+        }
+        this.setProductsNum(len)
       })
     }
   },

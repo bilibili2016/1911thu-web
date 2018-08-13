@@ -14,8 +14,8 @@
       </div>
       <div v-if="hasCode">
         <h5>
-          <span @click="choiceCourse">继续选课</span>
-          <span @click="goMycourse('tab-fourth')">查看订单</span>
+          <span @click="handleChoiceCourse">继续选课</span>
+          <span @click="handleLinkProfile('tab-fourth')">查看订单</span>
         </h5>
         <div class="goback">
           <span>
@@ -40,7 +40,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
 import { payResult } from '@/lib/v1_sdk/index'
 export default {
   data() {
@@ -59,12 +58,14 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid']),
-    choiceCourse() {
+    // 继续选课
+    handleChoiceCourse() {
       window.open(
         window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
       )
     },
-    goMycourse(item) {
+    // 点击查看订单
+    handleLinkProfile(item) {
       this.gidForm.gids = item
       this.setGid(this.gidForm)
       this.$router.push('/profile')
@@ -78,7 +79,8 @@ export default {
       })
     },
     payComplete() {
-      this.payCompleteForm.orderId = persistStore.get('cpyid')
+      this.payCompleteForm.orderId = window.location.pathname.split('/')[3]
+
       payResult.payComplete(this.payCompleteForm).then(response => {
         this.payCompleteData = response.data
         if (response.data.pay_number === '1') {
@@ -87,7 +89,7 @@ export default {
             if (this.seconds < 1) {
               this.seconds = 0
               clearInterval(this.interval)
-              this.goLink('tab-first')
+              // this.goLink('tab-first')
             } else {
               this.seconds--
             }
