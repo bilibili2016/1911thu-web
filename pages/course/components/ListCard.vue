@@ -16,7 +16,7 @@
         <div class="particulars fr ">
           <!-- 课程标题副标题 课程介绍 -->
           <div class="currentclum ">
-            <h4 @click="courseInfo(course)">{{course.title}}</h4>
+            <h4>{{course.title}}</h4>
             <p class="small-title">{{course.deputy_title}}</p>
             <p class="title-desc">{{course.introduction}}</p>
           </div>
