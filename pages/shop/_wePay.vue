@@ -44,6 +44,7 @@ import Banner from '@/pages/shop/components/banner'
 import List from '@/pages/shop/components/List'
 import PayType from '@/pages/shop/wepay/payType'
 import Qrcode from '@/pages/shop/wepay/qrcode'
+import { setPagesHeight } from '~/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   components: {
@@ -153,15 +154,8 @@ export default {
     if (this.isAuthenticated) {
       this.getPayList()
     }
-    let headerHeight = document.getElementsByClassName('headerBox')[0]
-      .offsetHeight
-    let footerHeight = document.getElementsByClassName('footerBox')[0]
-      .offsetHeight
-    let windowHeight = document.documentElement.clientHeight
-    // console.log(windowHeight)
+    setPagesHeight()
 
-    this.$refs.wepay.style.minHeight =
-      windowHeight - headerHeight - footerHeight + 'px'
     this.$bus.$on('getPayList', data => {
       this.getPayList(data)
     })
