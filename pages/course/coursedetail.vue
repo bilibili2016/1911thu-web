@@ -25,7 +25,7 @@
         <!-- 讲师介绍 -->
         <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
         <!-- 课程评价-->
-        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :config="configCourse" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
+        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
         <!-- 用户评价  查看更多 -->
         <v-evaluatedialog :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
         <!-- 用户评论 列表-->
@@ -75,9 +75,6 @@ export default {
       BreadCrumb: {
         type: 'courseDetail',
         text: '课程详情'
-      },
-      configCourse: {
-        type: 1
       },
       isClose: false, //评论组件是否有关闭按钮
       showCheckedCourse: false,

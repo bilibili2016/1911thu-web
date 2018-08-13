@@ -1,6 +1,6 @@
 .dropdown {
   width: 190px;
-  margin-left: 10px;
+  margin-left: 30px;
   .item {
     display: inline-block;
   }
@@ -9,6 +9,9 @@
   }
 }
 .dropdown {
+  .el-dropdown {
+    color: #222;
+  }
   .el-dropdown-menu {
     padding: 0px;
   }
