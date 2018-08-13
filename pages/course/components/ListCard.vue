@@ -133,7 +133,7 @@ export default {
     },
     //课程详情
     courseInfo(item, index) {
-      if (this.cidNumber === '0') {
+      if (window.location.pathname.split('/')[3] === '0') {
         // 项目-项目详情
         persistStore.set('projectId', item.id)
         this.openDetail('/project/ProjectDetail')
