@@ -16,7 +16,7 @@
         <div class="particulars fr ">
           <!-- 课程标题副标题 课程介绍 -->
           <div class="currentclum ">
-            <h4 @click="courseInfo(course)">{{course.title}}</h4>
+            <h4>{{course.title}}</h4>
             <p class="small-title">{{course.deputy_title}}</p>
             <p class="title-desc">{{course.introduction}}</p>
           </div>
@@ -133,7 +133,7 @@ export default {
     },
     //课程详情
     courseInfo(item, index) {
-      if (this.cidNumber === '0') {
+      if (window.location.pathname.split('/')[3] === '0') {
         // 项目-项目详情
         persistStore.set('projectId', item.id)
         this.openDetail('/project/ProjectDetail')
@@ -144,6 +144,7 @@ export default {
         this.openDetail('/course/coursedetail')
       }
     },
+
     openDetail(link) {
       window.open(window.location.origin + link)
     }

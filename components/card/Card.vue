@@ -96,7 +96,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid', 'setXid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid']),
     openDetail(link) {
       window.open(window.location.origin + link)
     },
