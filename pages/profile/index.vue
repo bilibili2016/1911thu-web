@@ -241,9 +241,9 @@ import Detail from '@/pages/profile/components/Detail'
 import Invitation from '@/pages/profile/pages/invitation'
 import Conversion from '@/pages/profile/components/Conversion'
 import Bind from '@/pages/profile/components/Binding'
-import TicketOrder from '@/pages/profile/pages/ticketOrder'
-import TicketHistory from '@/pages/profile/pages/ticketHistory'
-import TicketRules from '@/pages/profile/pages/ticketRules'
+import TicketOrder from '@/pages/profile/ticket/ticketOrder'
+import TicketHistory from '@/pages/profile/ticket/ticketHistory'
+import TicketRules from '@/pages/profile/ticket/ticketRules'
 import { profileHome } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -864,6 +864,10 @@ export default {
       this.orderForm.payStatus = 2
       profileHome.orderNotInvoice().then(response => {
         this.unTicketData = response.data.orderList
+        this.unTicketData.forEach(item => {
+          item.checked = false
+        })
+
         this.readyOrderLoad = false
       })
     },

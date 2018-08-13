@@ -235,9 +235,9 @@ export default {
             let flag = res.status != 0 ? false : true
             // this.$emit('update', flag)
             this.$bus.$emit('updateUserInfo', flag)
-
             if (res.status == 0) {
-              this.getUserInfo()
+              // this.getUserInfo()
+              this.$emit('getUserInfo')
             } else {
               this.$message({
                 showClose: true,

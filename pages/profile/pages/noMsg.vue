@@ -1,11 +1,11 @@
 <template>
-    <div class="content">
-        <div class="noCourse">
-            <img :src="noMsgImg" alt="">
-            <h4>{{config.text}}</h4>
-            <!-- <p>去学习</p> -->
-        </div>
+  <!-- 无数据 -->
+  <div class="content">
+    <div class="noCourse">
+      <img :src="noMsgImg" alt="">
+      <h4>{{config.text}}</h4>
     </div>
+  </div>
 </template>
 
 <script>
