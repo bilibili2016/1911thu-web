@@ -59,12 +59,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setKid']),
     // 跳转课程或项目详情
     handleLink(item) {
       if (item.type === '1') {
         persistStore.set('curriculumId', item.curriculum_id)
-        window.open(window.location.origin + '/course/coursedetail')
+        window.open(
+          window.location.origin +
+            '/course/coursedetail?kid=' +
+            item.curriculum_id
+        )
       } else {
         persistStore.set('projectId', item.curriculum_id)
         window.open(window.location.origin + '/project/ProjectDetail')
@@ -78,8 +81,11 @@ export default {
       if (item.type === '1') {
         persistStore.set('curriculumId', item.curriculum_id)
         this.kidForm.kids = item.curriculum_id
-        this.setKid(this.kidForm)
-        window.open(window.location.origin + '/course/coursedetail')
+        window.open(
+          window.location.origin +
+            '/course/coursedetail?kid=' +
+            item.curriculum_id
+        )
       } else {
         persistStore.set('projectId', item.curriculum_id)
         window.open(window.location.origin + '/project/projectdetail')

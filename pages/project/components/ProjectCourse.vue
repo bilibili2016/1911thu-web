@@ -41,7 +41,11 @@ export default {
       persistStore.set('curriculumId', item.curriculum_id)
       this.kidForm.kids = item.curriculum_id
       this.setKid(this.kidForm)
-      window.open(window.location.origin + '/course/coursedetail')
+      window.open(
+        window.location.origin +
+          '/course/coursedetail?kid=' +
+          item.curriculum_id
+      )
     },
     // 跳转到项目播放页
     goProjectPlayer() {

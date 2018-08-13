@@ -76,7 +76,9 @@ export default {
     handleLinkCourseDetail(item) {
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
-      window.open(window.location.origin + '/course/coursedetail')
+      window.open(
+        window.location.origin + '/course/coursedetail?kid=' + item.id
+      )
     },
     // 设置购物车中 is_cart 改变
     handleChangeIsCart(item) {
@@ -141,7 +143,9 @@ export default {
         this.kidForm.kids = item.id
         persistStore.set('curriculumId', item.id)
         this.setKid(this.kidForm)
-        this.openDetail('/course/coursedetail')
+        window.open(
+          window.location.origin + '/course/coursedetail?kid=' + item.id
+        )
       }
     },
     openDetail(link) {
