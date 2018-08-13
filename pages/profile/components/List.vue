@@ -141,16 +141,16 @@ export default {
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
       this.curriculumcartids.cartid = item.id
-      this.openDetail()
+      this.openDetail(item.id)
     },
     courseInfo(item, index) {
       this.kidForm.kids = item.id
       persistStore.set('curriculumId', item.id)
       this.setKid(this.kidForm)
-      this.openDetail()
+      this.openDetail(item.id)
     },
-    openDetail() {
-      window.open(window.location.origin + '/course/coursedetail')
+    openDetail(ID) {
+      window.open(window.location.origin + '/course/coursedetail?kid=' + ID)
     },
     goToPlay(item) {
       persistStore.set('curriculumId', item.id)

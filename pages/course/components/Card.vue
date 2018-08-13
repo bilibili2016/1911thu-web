@@ -156,7 +156,7 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
-    ...mapState('auth', ['token', 'productsNum', 'kid'])
+    ...mapState('auth', ['token', 'productsNum'])
   },
   data() {
     return {
@@ -175,7 +175,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid']),
+    ...mapActions('auth', ['setProductsNum']),
     // 免费试看
     freeStudy(item) {
       if (this.isAuthenticated) {
