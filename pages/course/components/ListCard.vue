@@ -74,8 +74,8 @@ export default {
     ...mapActions('auth', ['setKid', 'setProductsNum']),
     // 点击跳转课程详情页
     handleLinkCourseDetail(item) {
-      persistStore.set('curriculumId', item.id)
-      this.setKid(this.kidForm)
+      // persistStore.set('curriculumId', item.id)
+      // this.setKid(this.kidForm)
       window.open(
         window.location.origin + '/course/coursedetail?kid=' + item.id
       )
@@ -141,8 +141,8 @@ export default {
         this.openDetail('/project/ProjectDetail')
       } else {
         this.kidForm.kids = item.id
-        persistStore.set('curriculumId', item.id)
-        this.setKid(this.kidForm)
+        // persistStore.set('curriculumId', item.id)
+        // this.setKid(this.kidForm)
         window.open(
           window.location.origin + '/course/coursedetail?kid=' + item.id
         )

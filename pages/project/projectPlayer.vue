@@ -242,7 +242,7 @@ export default {
     handleCourse(item) {
       this.ischeck = item.id
       this.playing = this.pauseImg
-      persistStore.set('curriculumId', item.curriculum_id)
+      // persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
       clearInterval(this.interval)
       this.clickMsg = true
@@ -364,7 +364,9 @@ export default {
       socket.on('reconnect', function(msg) {})
 
       // 获取播放url
-      this.playerForm.curriculumId = persistStore.get('curriculumId')
+      // this.playerForm.curriculumId = persistStore.get('curriculumId')
+      this.playerForm.curriculumId = splitUrl(0, 1)
+
       this.playerForm.catalogId = persistStore.get('catalogId')
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
@@ -420,7 +422,8 @@ export default {
                */
               socket.emit(
                 'watchRecordingTime',
-                persistStore.get('curriculumId'),
+                // persistStore.get('curriculumId'),
+                splitUrl(0, 1),
                 persistStore.get('catalogId'),
                 playTime,
                 that.projectForm.ids,

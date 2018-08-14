@@ -1,5 +1,5 @@
 <template>
-  <div data="22" class="collect">
+  <div class="collect">
     <div class="line-center">
       <span class="collectSpan" @click="collection" :class=" { bag: collectData.isCollect == 1}">
         <i class="el-icon-star-on"></i>
@@ -21,6 +21,7 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { coursedetail } from '~/lib/v1_sdk/index'
+import { splitUrl } from '@/lib/util/helper'
 export default {
   props: ['collectData'],
   data() {
@@ -52,7 +53,8 @@ export default {
     },
     // 收藏-添加收藏
     addCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      // this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      this.addCollectionForm.curriculumId = splitUrl(0, 1)
       this.addCollectionForm.types = this.collectData.types
       coursedetail.addCollection(this.addCollectionForm).then(response => {
         if (response.status === 0) {
@@ -73,7 +75,9 @@ export default {
     },
     // 收藏-删除收藏
     deleteCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      // this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      this.addCollectionForm.curriculumId = splitUrl(0, 1)
+
       this.addCollectionForm.types = this.collectData.types
       coursedetail.deleteCollection(this.addCollectionForm).then(response => {
         if (response.status === 0) {

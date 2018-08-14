@@ -118,6 +118,7 @@
 import { other, auth, home, players, coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import { splitUrl } from '@/lib/util/helper'
 export default {
   computed: {
     ...mapState('auth', ['kid']),
@@ -298,7 +299,7 @@ export default {
     handleCourse(item, index) {
       this.ischeck = item.id
       this.playing = this.pauseImg
-      persistStore.set('curriculumId', item.curriculum_id)
+      // persistStore.set('curriculumId', item.curriculum_id)
       persistStore.set('catalogId', item.id)
       clearInterval(this.interval)
       this.clickMsg = true
@@ -434,7 +435,10 @@ export default {
         return
       }
       this.$refs.mediaPlayer.innerHTML = ''
-      this.playerForm.curriculumId = persistStore.get('curriculumId')
+
+      // this.playerForm.curriculumId = persistStore.get('curriculumId')
+      this.playerForm.curriculumId = splitUrl(0, 1)
+
       this.playerForm.catalogId = persistStore.get('catalogId')
 
       var link = window.location.origin
@@ -512,7 +516,8 @@ export default {
               // console.log(playTime, '这是时间')
               socket.emit(
                 'watchRecordingTime',
-                persistStore.get('curriculumId'),
+                // persistStore.get('curriculumId'),
+                splitUrl(0, 1),
                 persistStore.get('catalogId'),
                 playTime
               )
@@ -539,7 +544,9 @@ export default {
     },
     // 获取视频播放参数
     getCurriculumPlayInfo() {
-      this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
+      // this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
+      this.playerDetailForm.curriculumId = splitUrl(0, 1)
+
       return new Promise((resolve, reject) => {
         players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
           this.player = response.data.curriculumDetail
@@ -556,7 +563,9 @@ export default {
     },
     // 反馈问题
     reportProblem() {
-      this.problem.curriculumId = persistStore.get('curriculumId')
+      // this.problem.curriculumId = persistStore.get('curriculumId')
+      this.problem.curriculumId = splitUrl(0, 1)
+
       this.problem.curriculumcatalogid = persistStore.get('catalogId')
       return new Promise((resolve, reject) => {
         players.reportProblem(this.problem).then(response => {
@@ -605,7 +614,9 @@ export default {
         return false
       }
 
-      this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      // this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.ids = splitUrl(0, 1)
+
       this.addEvaluateForm.curriculumcatalogid = persistStore.get('catalogId')
       this.addEvaluateForm.evaluatecontent = this.word
       this.addEvaluateForm.scores = this.rateModel
@@ -648,7 +659,9 @@ export default {
     },
     // 添加收藏
     addCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      // this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      this.addCollectionForm.curriculumId = splitUrl(0, 1)
+
       return new Promise((resolve, reject) => {
         coursedetail.addCollection(this.addCollectionForm).then(response => {
           this.$message({
@@ -662,7 +675,9 @@ export default {
     },
     // 删除收藏
     deleteCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      // this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
+      this.addCollectionForm.curriculumId = splitUrl(0, 1)
+
       return new Promise((resolve, reject) => {
         coursedetail.deleteCollection(this.addCollectionForm).then(response => {
           // this.collectMsg = response.data.curriculumDetail.is_collection

@@ -19,6 +19,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { home } from '~/lib/v1_sdk/index'
+import { splitUrl } from '@/lib/util/helper'
 export default {
   props: ['config'],
   data() {
@@ -40,7 +41,8 @@ export default {
     // 反馈问题
     reportProblem() {
       if (this.config.type === 1) {
-        this.problem.curriculumId = persistStore.get('curriculumId')
+        // this.problem.curriculumId = persistStore.get('curriculumId')
+        this.problem.curriculumId = splitUrl(0, 1)
         this.problem.curriculumcatalogid = persistStore.get('catalogId')
         this.problem.types = 1
       } else if (this.config.type === 2) {

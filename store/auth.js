@@ -7,14 +7,14 @@ persistStore.defaults({
   user: null,
   token: null,
   gid: null,
-  kid: null,
+  // kid: null,
   productsNum: null,
   cindex: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
 let gid = persistStore.get('gid')
-let kid = persistStore.get('kid')
+// let kid = persistStore.get('kid')
 let productsNum = persistStore.get('productsNum')
 
 export const MUTATION = {
@@ -23,7 +23,7 @@ export const MUTATION = {
   refresh: 'refresh',
   me: 'me',
   setGid: 'set-gid',
-  setKid: 'set-kid',
+  // setKid: 'set-kid',
   setProductsNum: 'set-productsNum'
 }
 export const state = () => ({
@@ -31,7 +31,7 @@ export const state = () => ({
   token,
   gid,
   // nid,
-  kid,
+  // kid,
   productsNum
 })
 export const getters = {
@@ -59,9 +59,9 @@ export const mutations = {
   [MUTATION.setGid](state, { gid }) {
     state.gid = gid
   },
-  [MUTATION.setKid](state, { kid }) {
-    state.kid = kid
-  },
+  // [MUTATION.setKid](state, { kid }) {
+  //   state.kid = kid
+  // },
   [MUTATION.setProductsNum](state, { productsNum }) {
     state.productsNum = productsNum
   }
@@ -160,20 +160,20 @@ export const actions = {
     }
     return gid
   },
-  async setKid({ commit, state }, { kids }) {
-    try {
-      let kid = kids
-      persistStore.set('kid', kid)
-      commit(MUTATION.setKid, { kid })
-    } catch (e) {
-      if (e instanceof ServerError) {
-        log.error(e)
-      } else {
-        throw e
-      }
-    }
-    return kid
-  },
+  // async setKid({ commit, state }, { kids }) {
+  //   try {
+  //     let kid = kids
+  //     persistStore.set('kid', kid)
+  //     commit(MUTATION.setKid, { kid })
+  //   } catch (e) {
+  //     if (e instanceof ServerError) {
+  //       log.error(e)
+  //     } else {
+  //       throw e
+  //     }
+  //   }
+  //   return kid
+  // },
   async setProductsNum({ commit, state }, { pn }) {
     try {
       let productsNum = pn

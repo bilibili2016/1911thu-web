@@ -8,6 +8,7 @@
 import { coursedetail, players } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { splitUrl } from '@/lib/util/helper'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
@@ -46,8 +47,9 @@ export default {
   methods: {
     // 课程-获取默认 的课程id 以及小节id
     getdefaultCurriculumCatalog() {
-      this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
-      // console.log(this.getdefaultForm, '123')
+      // this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
+      this.getdefaultForm.curriculumid = splitUrl(0, 1)
+
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(res => {
@@ -116,7 +118,8 @@ export default {
                */
               socket.emit(
                 'watchRecordingTime',
-                persistStore.get('curriculumId'),
+                // persistStore.get('curriculumId'),
+                splitUrl(0, 1),
                 persistStore.get('catalogId'),
                 playTime,
                 '',
@@ -159,7 +162,8 @@ export default {
               let playTime = window.qcplayer.currentTime()
               that.socket.emit(
                 'watchRecordingTime',
-                persistStore.get('curriculumId'),
+                // persistStore.get('curriculumId'),
+                splitUrl(0, 1),
                 persistStore.get('catalogId'),
                 playTime
               )

@@ -38,7 +38,7 @@ export default {
     ...mapActions('auth', ['setKid']),
     selectCid(val) {
       this.kidForm.kids = val
-      this.setKid(this.kidForm)
+      // this.setKid(this.kidForm)
     }
   }
 }

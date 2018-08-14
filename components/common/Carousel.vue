@@ -40,8 +40,8 @@ export default {
     ...mapActions('auth', ['setKid']),
     handleLink(img) {
       this.kidForm.kids = img.jump_id
-      persistStore.set('curriculumId', img.jump_id)
-      this.setKid(this.kidForm)
+      // persistStore.set('curriculumId', img.jump_id)
+      // this.setKid(this.kidForm)
       // window.open(
       //   window.location.origin + '/course/coursedetail?kid=' + img.jump_id
       // )
