@@ -18,7 +18,7 @@
         <div>
           <h6>综合评分</h6>
           <p>
-            <span></span>{{projectDetail.score}} 分</p>
+            <span>{{projectDetail.score}}</span> 分</p>
         </div>
       </div>
       <div class="fr buy">
@@ -26,12 +26,7 @@
           <i>￥</i>{{projectDetail.present_price}}</div>
         <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
-        <div class="addShoppingCart" @click="addShoppingCart">
-          <i>加入购物车</i>
-          <span>
-            <img src="http://papn9j3ys.bkt.clouddn.com/pro_cart.png" alt="">
-          </span>
-        </div>
+        <div class="addShoppingCart" @click="addShoppingCart">加入购物车</div>
       </div>
 
     </div>

@@ -44,11 +44,11 @@
                 </p>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps" v-if="config.card==='learning' ">
+              <div class="line-wraps" v-if="config.card==='learning'">
                 <div class="line-centers ">
                   <span class="studyPercent">已学习{{card.percent}}%</span>
                   <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
-                  <el-progress v-if="card.percent>0" :percentage="card.percent "></el-progress>
+                  <el-progress v-if="card.percent>0" :percentage="card.percent"></el-progress>
                 </div>
               </div>
               <div v-if="config.card==='already' ">

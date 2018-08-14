@@ -29,7 +29,7 @@
           </p>
         </div>
         <p class="sure">
-          <span @click="goMycourse('tab-seventh')">确定</span>
+          <span @click="goLink('tab-seventh')">确定</span>
         </p>
       </div>
 
@@ -54,7 +54,7 @@ export default {
       seconds: 5,
       link: null,
       interval: null,
-      ref: '' //根据购买的类型（课程/项目）自动跳转到对应页面
+      links: ''
     }
   },
   methods: {
@@ -95,22 +95,25 @@ export default {
 
       payResult.payComplete(this.payCompleteForm).then(response => {
         this.payCompleteData = response.data
+        if (response.data.curriculumListType == '1') {
+          // 订单内只有课程
+          this.links = 'tab-second'
+        }
+        if (response.data.curriculumListType == '2') {
+          // 订单内只有项目
+          this.links = 'tab-third'
+        }
+        if (response.data.curriculumListType == '3') {
+          // 订单内课程+项目
+          this.links = 'tab-first'
+        }
         if (response.data.pay_number === '1') {
           this.hasCode = true
           this.interval = setInterval(() => {
             if (this.seconds < 1) {
               this.seconds = 0
               clearInterval(this.interval)
-              if (this.ref === '1') {
-                //课程
-                this.goLink('tab-second')
-              } else if (this.ref === '2') {
-                //项目
-                this.goLink('tab-third')
-              } else {
-                //课程+项目
-                this.goLink('tab-first')
-              }
+              this.goLink(this.links)
             } else {
               this.seconds--
             }

@@ -41,14 +41,12 @@ export default {
     // 反馈问题
     reportProblem() {
       if (this.config.type === 1) {
-        // this.problem.curriculumId = persistStore.get('curriculumId')
         this.problem.curriculumId = splitUrl(0, 1)
         this.problem.curriculumcatalogid = persistStore.get('catalogId')
-        // this.problem.curriculumcatalogid = splitUrl(1, 1)
         this.problem.types = 1
       } else if (this.config.type === 2) {
-        this.problem.curriculumId = ''
-        this.problem.curriculumcatalogid = ''
+        this.problem.curriculumId = this.config.curriculumId
+        this.problem.curriculumcatalogid = this.config.catalogId
         this.problem.types = 2
       }
 

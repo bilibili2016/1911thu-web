@@ -51,6 +51,7 @@
 
 <script>
 import { paypublic } from '@/lib/v1_sdk/index'
+import { splitUrl } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -128,7 +129,7 @@ export default {
     },
     // 获取订单id列表
     getPayList() {
-      this.payListForm.orderId = persistStore.get('cpyid')
+      this.payListForm.orderId = splitUrl(0, 1)
       return new Promise((resolve, reject) => {
         paypublic.webPay(this.payListForm).then(response => {
           this.orderDetail = response.data.data.orderDetail

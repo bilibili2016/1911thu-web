@@ -54,7 +54,7 @@ export default {
       },
       noMsg: {
         type: 'myCode',
-        text: '抱歉，现在还没有课程码~'
+        text: '抱歉，现在还没有兑换码~'
       }
     }
   },
