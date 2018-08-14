@@ -54,7 +54,7 @@ export default {
       },
       projectList: [],
       courseList: [],
-      ref: ''
+      ref: '' //根据购买的课程/项目/项目+课程，支付完成之后默认跳转到个人中心相应页面
     }
   },
   methods: {
@@ -134,7 +134,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.data, '222')
     this.getType()
     this.$bus.$on('clearInterval', dat => {
       clearInterval(this.interval)
