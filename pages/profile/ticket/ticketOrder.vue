@@ -195,8 +195,7 @@ export default {
     },
     //项目详情
     goProjrctInfo(item) {
-      persistStore.set('projectId', item.curriculum_id)
-      this.$router.push('/project/projectdetail')
+      this.$router.push('/project/projectdetail?id=' + item.curriculum_id)
     },
     //列表详情
     selectPayApply(item, type) {

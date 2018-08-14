@@ -9,6 +9,9 @@
           <div class="new-style " v-if="config.new==='true' ">
             <img :src="newTag " alt=" ">
           </div>
+          <div class="projectImg" v-if="cp==='1'">
+            <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
+          </div>
           <div class="mask-style" @click="goDetail(card)">
             <img :src="jinImg" alt="" class="jin-style">
           </div>
@@ -83,6 +86,7 @@ export default {
         cartid: null,
         type: 1
       },
+      cp: '',
       isIndex: true,
       jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
       newTag: 'http://papn9j3ys.bkt.clouddn.com/new.png',
@@ -116,8 +120,7 @@ export default {
           )
         } else {
           // 项目-项目详情
-          persistStore.set('projectId', item.id)
-          this.openDetail('/project/ProjectDetail')
+          this.openDetail('/project/projectdetail?id=' + item.id)
         }
       }
     },
@@ -159,7 +162,7 @@ export default {
     // cp类型决定当前列表的类型：0-课程；1-项目
     if (window.location.search.split('=')[2]) {
       this.isIndex = false
-      this.type = window.location.search.split('=')[1].substr(0, 1)
+      this.cp = window.location.search.split('=')[2].substr(0, 1)
     } else {
       this.isIndex = true
     }
