@@ -145,6 +145,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
+import { splitUrl } from '~/lib/util/helper'
 import CardPlayer from '@/pages/course/components/CardPlayer'
 export default {
   components: {
@@ -192,8 +193,14 @@ export default {
       //   'curriculumId',
       //   item.defaultCurriculumCatalog.curriculum_id
       // )
-      persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
-
+      // persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
+      this.$router.push(
+        '/course/coursedetail' +
+          '?kid=' +
+          splitUrl(0, 1) +
+          '&bid=' +
+          item.defaultCurriculumCatalog.id
+      )
       // window.open(window.location.origin + '/course/player')
       this.playerForm.curriculumId = item.defaultCurriculumCatalog.curriculum_id
       this.playerForm.catalogId = item.defaultCurriculumCatalog.id

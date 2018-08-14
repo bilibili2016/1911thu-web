@@ -300,7 +300,10 @@ export default {
       this.ischeck = item.id
       this.playing = this.pauseImg
       // persistStore.set('curriculumId', item.curriculum_id)
-      persistStore.set('catalogId', item.id)
+      // persistStore.set('catalogId', item.id)
+      this.$router.push(
+        '/course/coursedetail' + '?kid=' + splitUrl(0, 1) + '&bid=' + item.id
+      )
       clearInterval(this.interval)
       this.clickMsg = true
       this.autoplay = true
@@ -439,7 +442,8 @@ export default {
       // this.playerForm.curriculumId = persistStore.get('curriculumId')
       this.playerForm.curriculumId = splitUrl(0, 1)
 
-      this.playerForm.catalogId = persistStore.get('catalogId')
+      // this.playerForm.catalogId = persistStore.get('catalogId')
+      this.playerForm.catalogId = splitUrl(1, 1)
 
       var link = window.location.origin
       // if (

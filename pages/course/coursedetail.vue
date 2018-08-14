@@ -324,10 +324,17 @@ export default {
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {
-          persistStore.set(
-            'catalogId',
-            response.data.defaultCurriculumCatalog.id
+          this.$router.push(
+            '/course/coursedetail' +
+              '?kid=' +
+              splitUrl(0, 1) +
+              '&bid=' +
+              response.data.defaultCurriculumCatalog.id
           )
+          // persistStore.set(
+          //   'catalogId',
+          //   response.data.defaultCurriculumCatalog.id
+          // )
         })
     },
     // 分享 默认设置

@@ -44,6 +44,7 @@ export default {
         // this.problem.curriculumId = persistStore.get('curriculumId')
         this.problem.curriculumId = splitUrl(0, 1)
         this.problem.curriculumcatalogid = persistStore.get('catalogId')
+        // this.problem.curriculumcatalogid = splitUrl(1, 1)
         this.problem.types = 1
       } else if (this.config.type === 2) {
         this.problem.curriculumId = ''
