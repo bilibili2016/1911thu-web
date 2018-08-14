@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 首页课程列表、课程分类列表、项目分类列表 -->
     <div class="card-category profile">
       <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
         <el-card shadow="never" body-style="padding: 0;" :class="['itemBox',{'learn':config.mask}]">
@@ -43,7 +44,8 @@
                 </span>
               </p>
             </div>
-            <div class="line-wrap" v-if="config.new||config.free">
+            <!-- <div class="line-wrap" v-if="config.new||config.free"> -->
+            <div class="line-wrap">
               <div class="line-center">
                 <p class="price freePrise" v-if="card.is_free == '1'">￥{{card.present_price}}</p>
                 <p class="freePrise" v-if="card.is_free === '2'">免费</p>

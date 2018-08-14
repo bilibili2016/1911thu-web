@@ -301,12 +301,12 @@
             background-color: rgba(255, 255, 255, 0);
           }
           .el-button--primary {
-            color: #6417a6;
-            &.is-plain {
-              border-color: #6417a6;
+            border-color: #6417a6;
+            span {
+              color: #6417a6;
             }
             &:hover {
-              color: #fff;
+              color: #fff !important;
               background-color: #8f4acb;
               &.is-plain {
                 border-color: #8f4acb;
