@@ -101,10 +101,11 @@ export default {
       this.pubMsg = false
     },
     selectPub() {
+      let urlLen = window.location.pathname.split('/')
       this.wxMsg = false
       this.zfbMsg = false
       this.pubMsg = true
-      this.$router.push('/shop/payPublic')
+      this.$router.push('/shop/payPublic?orderID=' + urlLen[urlLen.length - 1])
     }
   },
   mounted() {
