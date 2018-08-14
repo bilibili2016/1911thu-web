@@ -106,7 +106,7 @@ export default {
       let catalog_id = item.childList[index].id
       let video_time = item.childList[index].second
       persistStore.set('video_time', video_time)
-      persistStore.set('curriculumId', curriculum_id)
+      // persistStore.set('curriculumId', curriculum_id)
       persistStore.set('catalogId', catalog_id)
 
       this.playerForm.curriculumId = curriculum_id

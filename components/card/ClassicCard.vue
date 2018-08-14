@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     handleLink(item) {
-      persistStore.set('curriculumId', item.id)
+      // persistStore.set('curriculumId', item.id)
       window.open(
         window.location.origin + '/course/coursedetail?kid=' + item.id
       )

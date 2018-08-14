@@ -1,16 +1,7 @@
 <template>
   <div class="projectDetail">
     <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}" v-loading="projectDetailLoad">
-      <!-- <div class="headerTop clearfix">
-        <div class="headerL fl">
-          面包屑组件
-          <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-        </div>
-        <div class="headerR fr">
-          收藏分享
-          <v-collection :collectData="collectMsg"></v-collection>
-        </div>
-      </div> -->
+
       <!-- 项目详情基本信息 -->
       <v-detail :projectDetail="projectDetail"></v-detail>
     </div>
@@ -37,7 +28,6 @@
 <script>
 import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions, mapGetters } from 'vuex'
-import Collection from '@/components/common/Collection.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import Detail from '@/pages/project/components/Detail'
 import Procourse from '@/pages/project/components/ProjectCourse'
@@ -50,7 +40,6 @@ export default {
     'v-proevaluate': Proevaluate,
     'v-breadcrumb': BreadCrumb,
     'v-proproblems': Commonproblems,
-    'v-collection': Collection,
     'v-detail': Detail
   },
   data() {

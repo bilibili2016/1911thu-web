@@ -123,10 +123,12 @@ export default {
         type: 1
       },
       changeData: [],
-      cp: ''
+      cp: '',
+      cidNumber: ''
       // pids: '0'
     }
   },
+
   methods: {
     ...mapActions('auth', ['setProductsNum']),
     // 点击分类列表    学院
@@ -143,13 +145,21 @@ export default {
           '0'
       )
       this.categoryForm.pages = 1
+
+      // 点击cid时候 cid选中 pid置为 0
       this.$bus.$emit('cid', item.id)
+      // 为了点击pid，保存cid
+      this.cidNumber = item.id
+      this.$bus.$emit('pid', '0')
+      // 设置点击 cid 获取piddata
+      this.pidData = this.cidData[index]
+
       if (this.cp === '0') {
         // 调取课程的数据
-        this.getcourseList()
+        this.getcourseList(item.id, null)
       } else {
         // 调取项目的数据
-        this.getNewProjectList()
+        this.getNewProjectList(item.id, null)
       }
     },
     // 点击分类列表  分类
@@ -167,10 +177,12 @@ export default {
           item.id
       )
       this.$bus.$emit('pid', item.id)
+      // cp 为 0 调用课程
       if (this.cp === '0') {
-        this.getcourseList()
+        this.getcourseList(null, item.id)
       } else {
-        this.getNewProjectList()
+        // cp 为 1 调用项目
+        this.getNewProjectList(null, item.id)
       }
     },
     // 点击分类列表  学院 全部
@@ -187,11 +199,13 @@ export default {
           '&pids=' +
           '0'
       )
-      this.$bus.$emit('cid', item.id)
+      // 点击全部 cid 和pid 都为 0
+      this.$bus.$emit('cid', '0')
+      this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
-        this.getcourseList()
+        this.getcourseList(null, null)
       } else {
-        this.getNewProjectList()
+        this.getNewProjectList(null, null)
       }
     },
     // 点击分类列表 分类 全部
@@ -208,7 +222,8 @@ export default {
           '&pids=' +
           '0'
       )
-      this.$bus.$emit('pid', item.id)
+      // this.$bus.$emit('cid', this.cidNumber)
+      this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
         this.getcourseList()
       } else {
@@ -216,10 +231,22 @@ export default {
       }
     },
     // 下面 card list 列表  --- 学院点进去
-    getcourseList() {
+    getcourseList(itemCid, itemPid) {
       this.loadCourse = true
-      this.categoryForm.cids = splitUrl(0, 1)
-      this.categoryForm.pids = splitUrl(3, 1)
+      if (itemCid) {
+        this.categoryForm.cids = itemCid
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = splitUrl(3, 1)
+      } else if (itemPid) {
+        this.categoryForm.cids = splitUrl(0, 1)
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = itemPid
+      } else {
+        this.categoryForm.cids = '0'
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = '0'
+      }
+
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         console.log(this.categoryData, '这是res')
@@ -229,8 +256,21 @@ export default {
       })
     },
     // 下面 card list 列表   --- 项目 查看更多 点进去
-    getNewProjectList() {
+    getNewProjectList(itemCid, itemPid) {
       this.loadCourse = true
+      if (itemCid) {
+        this.categoryForm.cids = itemCid
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = splitUrl(3, 1)
+      } else if (itemPid) {
+        this.categoryForm.cids = splitUrl(0, 1)
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = itemPid
+      } else {
+        this.categoryForm.cids = '0'
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = '0'
+      }
       this.categoryForm.cids = splitUrl(0, 1)
       this.categoryForm.pids = splitUrl(3, 1)
       category.curriculumProjectList(this.categoryForm).then(res => {
