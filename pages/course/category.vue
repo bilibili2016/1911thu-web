@@ -128,6 +128,7 @@ export default {
       // pids: '0'
     }
   },
+
   methods: {
     ...mapActions('auth', ['setProductsNum']),
     // 点击分类列表    学院
