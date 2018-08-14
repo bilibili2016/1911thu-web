@@ -38,7 +38,6 @@
 
 <script>
 import CustomCard from '@/pages/course/components/Card.vue'
-import CustomLine from '@/components/common/Line.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -60,7 +59,6 @@ export default {
   components: {
     'v-backtop': BackToTop,
     'v-card': CustomCard,
-    'v-line': CustomLine,
     'v-evaluate': EvaluateContent,
     'v-evaluatecase': EvaluateCase,
     'v-breadcrumb': BreadCrumb,
