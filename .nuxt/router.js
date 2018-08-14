@@ -4,6 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
@@ -182,6 +183,8 @@ const _84114f48 = () => import('../pages/index.vue' /* webpackChunkName: "pages/
 =======
 >>>>>>> dev
 =======
+=======
+>>>>>>> origin/liyr
 const _121a4c47 = () => import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */).then(m => m.default || m)
 const _01587f57 = () => import('../pages/profile/index.vue' /* webpackChunkName: "pages/profile/index" */).then(m => m.default || m)
 const _2a7c456c = () => import('../pages/shop/shoppingcart.vue' /* webpackChunkName: "pages/shop/shoppingcart" */).then(m => m.default || m)
@@ -264,9 +267,12 @@ const _4592c8f4 = () => import('../pages/course/list/_courselist.vue' /* webpack
 const _ab017362 = () => import('../pages/home/news/_detail.vue' /* webpackChunkName: "pages/home/news/_detail" */).then(m => m.default || m)
 const _a9061342 = () => import('../pages/shop/_wePay.vue' /* webpackChunkName: "pages/shop/_wePay" */).then(m => m.default || m)
 const _06d81986 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+<<<<<<< HEAD
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+>>>>>>> origin/liyr
 
 
 
@@ -329,6 +335,7 @@ export function createRouter () {
 		{
 			path: "/home",
 <<<<<<< HEAD
+<<<<<<< HEAD
 			component: _44f44288,
 =======
 <<<<<<< HEAD
@@ -345,10 +352,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _121a4c47,
+>>>>>>> origin/liyr
 			name: "home"
 		},
 		{
 			path: "/profile",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _b85f5514,
 =======
@@ -366,10 +377,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _01587f57,
+>>>>>>> origin/liyr
 			name: "profile"
 		},
 		{
 			path: "/shop/shoppingcart",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _fa6417ea,
 =======
@@ -387,10 +402,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _2a7c456c,
+>>>>>>> origin/liyr
 			name: "shop-shoppingcart"
 		},
 		{
 			path: "/auth/forgotpassword",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _6e9c788f,
 =======
@@ -408,10 +427,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _380814a0,
+>>>>>>> origin/liyr
 			name: "auth-forgotpassword"
 		},
 		{
 			path: "/auth/Login",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _36cd71f0,
 =======
@@ -429,10 +452,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _9c815e72,
+>>>>>>> origin/liyr
 			name: "auth-Login"
 		},
 		{
 			path: "/course/category",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _4d0f457c,
 =======
@@ -450,10 +477,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _69347b1d,
+>>>>>>> origin/liyr
 			name: "course-category"
 		},
 		{
 			path: "/project/projectPlayer",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _3e447d6e,
 =======
@@ -471,10 +502,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _4c8d9362,
+>>>>>>> origin/liyr
 			name: "project-projectPlayer"
 		},
 		{
 			path: "/project/projectDetail",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _f8d87a44,
 =======
@@ -492,10 +527,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _1f087bbf,
+>>>>>>> origin/liyr
 			name: "project-projectDetail"
 		},
 		{
 			path: "/auth/Register",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _076214d4,
 =======
@@ -513,10 +552,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _64ea3eb5,
+>>>>>>> origin/liyr
 			name: "auth-Register"
 		},
 		{
 			path: "/shop/paypublic",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _409cda1e,
 =======
@@ -534,10 +577,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _d7cc2746,
+>>>>>>> origin/liyr
 			name: "shop-paypublic"
 		},
 		{
 			path: "/course/coursedetail",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _7ff396aa,
 =======
@@ -555,10 +602,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _1559d86a,
+>>>>>>> origin/liyr
 			name: "course-coursedetail",
 			children: [
 				{
 					path: "UserEvaluate",
+<<<<<<< HEAD
 <<<<<<< HEAD
 					component: _15932199,
 =======
@@ -576,10 +627,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+					component: _08c47bd0,
+>>>>>>> origin/liyr
 					name: "course-coursedetail-UserEvaluate"
 				},
 				{
 					path: "EvaluateDialog",
+<<<<<<< HEAD
 <<<<<<< HEAD
 					component: _582b0d96,
 =======
@@ -597,10 +652,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+					component: _33e0eb56,
+>>>>>>> origin/liyr
 					name: "course-coursedetail-EvaluateDialog"
 				},
 				{
 					path: "CourseCatalog",
+<<<<<<< HEAD
 <<<<<<< HEAD
 					component: _47b5b739,
 =======
@@ -618,10 +677,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+					component: _22ff269a,
+>>>>>>> origin/liyr
 					name: "course-coursedetail-CourseCatalog"
 				},
 				{
 					path: "teacherIntro",
+<<<<<<< HEAD
 <<<<<<< HEAD
 					component: _2bc9209f,
 =======
@@ -639,12 +702,16 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+					component: _11d3c11e,
+>>>>>>> origin/liyr
 					name: "course-coursedetail-teacherIntro"
 				}
 			]
 		},
 		{
 			path: "/shop/affirmOrder",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _12809810,
 =======
@@ -662,10 +729,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _5f413277,
+>>>>>>> origin/liyr
 			name: "shop-affirmOrder"
 		},
 		{
 			path: "/profile/pages/invitation",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _f9181660,
 =======
@@ -683,10 +754,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _178a844f,
+>>>>>>> origin/liyr
 			name: "profile-pages-invitation"
 		},
 		{
 			path: "/profile/ticket/statusPopup",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _ab86863a,
 =======
@@ -704,10 +779,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _da252ebc,
+>>>>>>> origin/liyr
 			name: "profile-ticket-statusPopup"
 		},
 		{
 			path: "/shop/wepay/qrcode",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _74cf0226,
 =======
@@ -725,10 +804,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _1c7d5387,
+>>>>>>> origin/liyr
 			name: "shop-wepay-qrcode"
 		},
 		{
 			path: "/shop/affirmorder/noMsg",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _4ea6126e,
 =======
@@ -746,10 +829,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _a8614bf0,
+>>>>>>> origin/liyr
 			name: "shop-affirmorder-noMsg"
 		},
 		{
 			path: "/profile/personalSet/setPersonal",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _bebb874e,
 =======
@@ -767,10 +854,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _8edbe00c,
+>>>>>>> origin/liyr
 			name: "profile-personalSet-setPersonal"
 		},
 		{
 			path: "/other/pages/search",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _4a27ebd8,
 =======
@@ -788,10 +879,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _cf7872d2,
+>>>>>>> origin/liyr
 			name: "other-pages-search"
 		},
 		{
 			path: "/course/components/Filter",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _12d320a3,
 =======
@@ -809,10 +904,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _b22c9fbc,
+>>>>>>> origin/liyr
 			name: "course-components-Filter"
 		},
 		{
 			path: "/course/components/ListCard",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _ab18fb8e,
 =======
@@ -830,10 +929,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _d9b7a410,
+>>>>>>> origin/liyr
 			name: "course-components-ListCard"
 		},
 		{
 			path: "/other/activePages/policyProgram",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _5b88e868,
 =======
@@ -851,10 +954,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _2ba94126,
+>>>>>>> origin/liyr
 			name: "other-activePages-policyProgram"
 		},
 		{
 			path: "/profile/components/List",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _6f85133b,
 =======
@@ -872,10 +979,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _00af17dc,
+>>>>>>> origin/liyr
 			name: "profile-components-List"
 		},
 		{
 			path: "/shop/components/List",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _52657338,
 =======
@@ -893,10 +1004,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _0d5d6d63,
+>>>>>>> origin/liyr
 			name: "shop-components-List"
 		},
 		{
 			path: "/other/activePages/Institutional",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _bf5a4bc6,
 =======
@@ -914,10 +1029,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _8f7aa484,
+>>>>>>> origin/liyr
 			name: "other-activePages-Institutional"
 		},
 		{
 			path: "/profile/personalSet/personalSet",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _dcb564ce,
 =======
@@ -935,10 +1054,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _acd5bd8c,
+>>>>>>> origin/liyr
 			name: "profile-personalSet-personalSet"
 		},
 		{
 			path: "/other/activePages/userProtocol",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _3398ff19,
 =======
@@ -956,10 +1079,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _8f009950,
+>>>>>>> origin/liyr
 			name: "other-activePages-userProtocol"
 		},
 		{
 			path: "/project/components/ShortList",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _a9608d06,
 =======
@@ -977,10 +1104,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _2a84717c,
+>>>>>>> origin/liyr
 			name: "project-components-ShortList"
 		},
 		{
 			path: "/course/components/CardPlayer",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _94515588,
 =======
@@ -998,10 +1129,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _350c0d3b,
+>>>>>>> origin/liyr
 			name: "course-components-CardPlayer"
 		},
 		{
 			path: "/profile/components/OrderList",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _4e3f0dbf,
 =======
@@ -1019,10 +1154,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _65187484,
+>>>>>>> origin/liyr
 			name: "profile-components-OrderList"
 		},
 		{
 			path: "/profile/ticket/ticketPopup",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _e55401ee,
 =======
@@ -1040,10 +1179,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _7606aac8,
+>>>>>>> origin/liyr
 			name: "profile-ticket-ticketPopup"
 		},
 		{
 			path: "/course/player/player",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _7a28407e,
 =======
@@ -1061,10 +1204,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _0d07f280,
+>>>>>>> origin/liyr
 			name: "course-player-player"
 		},
 		{
 			path: "/shop/affirmorder/orderInfo",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _54085936,
 =======
@@ -1082,10 +1229,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _82a701b8,
+>>>>>>> origin/liyr
 			name: "shop-affirmorder-orderInfo"
 		},
 		{
 			path: "/other/pages/homeUs",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _a57eb0e6,
 =======
@@ -1103,10 +1254,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _0946fb68,
+>>>>>>> origin/liyr
 			name: "other-pages-homeUs"
 		},
 		{
 			path: "/profile/personalSet/showPersonal",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _bcf1c354,
 =======
@@ -1124,10 +1279,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _f0dc8256,
+>>>>>>> origin/liyr
 			name: "profile-personalSet-showPersonal"
 		},
 		{
 			path: "/home/news/info",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _0a084520,
 =======
@@ -1145,10 +1304,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _5d85575f,
+>>>>>>> origin/liyr
 			name: "home-news-info"
 		},
 		{
 			path: "/home/teacher/list",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _83b64c36,
 =======
@@ -1166,10 +1329,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _65d32b46,
+>>>>>>> origin/liyr
 			name: "home-teacher-list"
 		},
 		{
 			path: "/course/components/Card",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _7618660a,
 =======
@@ -1187,10 +1354,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _cfd39f8c,
+>>>>>>> origin/liyr
 			name: "course-components-Card"
 		},
 		{
 			path: "/other/activePages/faceteach",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _5e6cd912,
 =======
@@ -1208,10 +1379,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _e85cb59a,
+>>>>>>> origin/liyr
 			name: "other-activePages-faceteach"
 		},
 		{
 			path: "/other/activePages/degree",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _15fa173c,
 =======
@@ -1229,10 +1404,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _edccf83e,
+>>>>>>> origin/liyr
 			name: "other-activePages-degree"
 		},
 		{
 			path: "/profile/ticket/ticketOrder",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _ca8e16aa,
 =======
@@ -1250,10 +1429,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _f92cbf2c,
+>>>>>>> origin/liyr
 			name: "profile-ticket-ticketOrder"
 		},
 		{
 			path: "/profile/ticket/ticketRules",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _3669b9d4,
 =======
@@ -1271,10 +1454,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _1f1a6593,
+>>>>>>> origin/liyr
 			name: "profile-ticket-ticketRules"
 		},
 		{
 			path: "/home/components/homecourse",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _e8f8e8ee,
 =======
@@ -1292,10 +1479,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _74343748,
+>>>>>>> origin/liyr
 			name: "home-components-homecourse"
 		},
 		{
 			path: "/profile/ticket/detailPopup",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _b99b2138,
 =======
@@ -1313,10 +1504,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _e839c9ba,
+>>>>>>> origin/liyr
 			name: "profile-ticket-detailPopup"
 		},
 		{
 			path: "/project/components/ProjectEvaluate",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _07f5e8d5,
 =======
@@ -1334,10 +1529,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _d44b34d8,
+>>>>>>> origin/liyr
 			name: "project-components-ProjectEvaluate"
 		},
 		{
 			path: "/profile/pages/courselist",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _fff88f20,
 =======
@@ -1355,10 +1554,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _141a47ef,
+>>>>>>> origin/liyr
 			name: "profile-pages-courselist"
 		},
 		{
 			path: "/other/activePages/partypolicy",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _1fec77f2,
 =======
@@ -1376,10 +1579,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _f162805a,
+>>>>>>> origin/liyr
 			name: "other-activePages-partypolicy"
 		},
 		{
 			path: "/profile/pages/noMsg",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _1a9a0bce,
 =======
@@ -1397,10 +1604,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _6812773a,
+>>>>>>> origin/liyr
 			name: "profile-pages-noMsg"
 		},
 		{
 			path: "/project/components/Detail",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _0179c99e,
 =======
@@ -1418,10 +1629,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _1f95ac02,
+>>>>>>> origin/liyr
 			name: "project-components-Detail"
 		},
 		{
 			path: "/shop/wepay/payType",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _e60742cc,
 =======
@@ -1439,10 +1654,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _49cf8d4e,
+>>>>>>> origin/liyr
 			name: "shop-wepay-payType"
 		},
 		{
 			path: "/home/teacher/famous",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _6d917602,
 =======
@@ -1460,10 +1679,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _3a1e19ba,
+>>>>>>> origin/liyr
 			name: "home-teacher-famous"
 		},
 		{
 			path: "/project/components/ProjectCourse",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _5a087752,
 =======
@@ -1481,10 +1704,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _8df33654,
+>>>>>>> origin/liyr
 			name: "project-components-ProjectCourse"
 		},
 		{
 			path: "/other/activePages/enterprisecustom",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _419a81b0,
 =======
@@ -1502,10 +1729,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _6d173be7,
+>>>>>>> origin/liyr
 			name: "other-activePages-enterprisecustom"
 		},
 		{
 			path: "/profile/components/BindId",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _224b2ad6,
 =======
@@ -1523,10 +1754,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _44d46a14,
+>>>>>>> origin/liyr
 			name: "profile-components-BindId"
 		},
 		{
 			path: "/profile/components/BindIng",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _0085e558,
 =======
@@ -1544,10 +1779,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _2d92ddd2,
+>>>>>>> origin/liyr
 			name: "profile-components-BindIng"
 		},
 		{
 			path: "/profile/personalSet/updatePassword",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _08f7b686,
 =======
@@ -1565,10 +1804,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _ed2ebd08,
+>>>>>>> origin/liyr
 			name: "profile-personalSet-updatePassword"
 		},
 		{
 			path: "/shop/shopCart/allCheck",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _2deaf1a6,
 =======
@@ -1586,10 +1829,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _87a62b28,
+>>>>>>> origin/liyr
 			name: "shop-shopCart-allCheck"
 		},
 		{
 			path: "/project/components/CourseList",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _0773ca26,
 =======
@@ -1607,10 +1854,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _6ed61207,
+>>>>>>> origin/liyr
 			name: "project-components-CourseList"
 		},
 		{
 			path: "/project/components/CommonProblems",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _0d9c6be8,
 =======
@@ -1628,10 +1879,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _57098d26,
+>>>>>>> origin/liyr
 			name: "project-components-CommonProblems"
 		},
 		{
 			path: "/profile/components/Conversion",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _4a26d81a,
 =======
@@ -1649,10 +1904,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _424edbd4,
+>>>>>>> origin/liyr
 			name: "profile-components-Conversion"
 		},
 		{
 			path: "/shop/affirmorder/backShopCart",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _4dcd0e04,
 =======
@@ -1670,10 +1929,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _95a15436,
+>>>>>>> origin/liyr
 			name: "shop-affirmorder-backShopCart"
 		},
 		{
 			path: "/course/components/List",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _15a68b89,
 =======
@@ -1691,10 +1954,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _2e6e2270,
+>>>>>>> origin/liyr
 			name: "course-components-List"
 		},
 		{
 			path: "/profile/components/Detail",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _e40887a4,
 =======
@@ -1712,10 +1979,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _7cb71c8f,
+>>>>>>> origin/liyr
 			name: "profile-components-Detail"
 		},
 		{
 			path: "/shop/components/banner",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _650f235c,
 =======
@@ -1733,10 +2004,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _beca5cde,
+>>>>>>> origin/liyr
 			name: "shop-components-banner"
 		},
 		{
 			path: "/home/news/list",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _4fa21910,
 =======
@@ -1754,10 +2029,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _b9c1a962,
+>>>>>>> origin/liyr
 			name: "home-news-list"
 		},
 		{
 			path: "/shop/affirmorder/orderBtn",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _0bf90016,
 =======
@@ -1775,10 +2054,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _2e823f54,
+>>>>>>> origin/liyr
 			name: "shop-affirmorder-orderBtn"
 		},
 		{
 			path: "/profile/components/Info",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _29eb3f4b,
 =======
@@ -1796,10 +2079,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _89d57828,
+>>>>>>> origin/liyr
 			name: "profile-components-Info"
 		},
 		{
 			path: "/profile/components/Card",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _1ed254ad,
 =======
@@ -1817,10 +2104,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _a0074d64,
+>>>>>>> origin/liyr
 			name: "profile-components-Card"
 		},
 		{
 			path: "/profile/ticket/ticketHistory",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _79e43c9e,
 =======
@@ -1838,10 +2129,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _424299b0,
+>>>>>>> origin/liyr
 			name: "profile-ticket-ticketHistory"
 		},
 		{
 			path: "/profile/components/TabSingle",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _3bfd2470,
 =======
@@ -1859,10 +2154,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _899c4722,
+>>>>>>> origin/liyr
 			name: "profile-components-TabSingle"
 		},
 		{
 			path: "/home/news/components/Info",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _5bf38a25,
 =======
@@ -1880,10 +2179,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _4aaeea86,
+>>>>>>> origin/liyr
 			name: "home-news-components-Info"
 		},
 		{
 			path: "/home/news/components/List",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _bce543d6,
 =======
@@ -1901,10 +2204,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _df6e8314,
+>>>>>>> origin/liyr
 			name: "home-news-components-List"
 		},
 		{
 			path: "/home/teacher/components/Card",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _802310dc,
 =======
@@ -1922,10 +2229,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _3f232f91,
+>>>>>>> origin/liyr
 			name: "home-teacher-components-Card"
 		},
 		{
 			path: "/shop/result/:payResult?",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _b43289b6,
 =======
@@ -1943,10 +2254,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _79091e64,
+>>>>>>> origin/liyr
 			name: "shop-result-payResult"
 		},
 		{
 			path: "/home/teacher/:Info?",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _65e765f6,
 =======
@@ -1964,10 +2279,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _97f97e96,
+>>>>>>> origin/liyr
 			name: "home-teacher-Info"
 		},
 		{
 			path: "/course/list/:courselist?",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _4c0c96e5,
 =======
@@ -1985,10 +2304,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _4592c8f4,
+>>>>>>> origin/liyr
 			name: "course-list-courselist"
 		},
 		{
 			path: "/home/news/:detail?",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _02d0f4ee,
 =======
@@ -2006,10 +2329,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _ab017362,
+>>>>>>> origin/liyr
 			name: "home-news-detail"
 		},
 		{
 			path: "/shop/:wePay?",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _583c6f84,
 =======
@@ -2027,10 +2354,14 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _a9061342,
+>>>>>>> origin/liyr
 			name: "shop-wePay"
 		},
 		{
 			path: "/",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			component: _84114f48,
 =======
@@ -2048,6 +2379,9 @@ export function createRouter () {
 >>>>>>> origin/liyr
 >>>>>>> dev
 >>>>>>> 1411456c52173afb746630b25b801b2e1164367a
+=======
+			component: _06d81986,
+>>>>>>> origin/liyr
 			name: "index"
 		}
     ],
