@@ -2,67 +2,70 @@
   <!-- 按订单开发票 -->
   <div class="ticketOrder">
     <div>
-      <!-- 发票订单列表 -->
-      <div class="orderList" v-for="(courseList, index ) in ticketOrderData" :key="index">
-        <div class="topBar clearfix">
-          <span class="fl">订单：{{courseList.order_sn}}</span>
-          <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
-        </div>
-        <div class="list">
-          <div class="content">
-            <!-- 发票 -->
-            <div class="orderChecked">
-              <input type="checkbox" class="el-checkbox singleCheckbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(courseList)">
-              <label :for="courseList.id" class="el-checkbox-label"></label>
-            </div>
-            <div class="course">
-              <!-- 课程列表 -->
-              <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
-                <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
-                <div class="fl">
-                  <h4 @click="goCourseInfo(course)">{{course.title}}</h4>
-                  <h6>{{course.curriculum_time}}学时</h6>
-                  <p>讲师：{{course.teacher_name}}</p>
+      <div v-if="ticketOrderData.length>0">
+        <!-- 发票订单列表 -->
+        <div class="orderList" v-for="(courseList, index ) in ticketOrderData" :key="index">
+          <div class="topBar clearfix">
+            <span class="fl">订单：{{courseList.order_sn}}</span>
+            <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
+          </div>
+          <div class="list">
+            <div class="content">
+              <!-- 发票 -->
+              <div class="orderChecked">
+                <input type="checkbox" class="el-checkbox singleCheckbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(courseList)">
+                <label :for="courseList.id" class="el-checkbox-label"></label>
+              </div>
+              <div class="course">
+                <!-- 课程列表 -->
+                <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
+                  <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
+                  <div class="fl">
+                    <h4 @click="goCourseInfo(course)">{{course.title}}</h4>
+                    <h6>{{course.curriculum_time}}学时</h6>
+                    <p>讲师：{{course.teacher_name}}</p>
+                  </div>
+                </div>
+                <!-- 项目列表 -->
+                <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
+                  <div class="courseImg">
+                    <!-- 项目图标 -->
+                    <img class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
+                    <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
+                  </div>
+                  <div class="fl">
+                    <h4 @click="goProjrctInfo(project)">{{project.title}}</h4>
+                    <h6>{{project.curriculum_time}}学时</h6>
+                  </div>
+                </div>
+                <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList)">
+                  查看更多课程>
                 </div>
               </div>
-              <!-- 项目列表 -->
-              <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
-                <div class="courseImg">
-                  <!-- 项目图标 -->
-                  <img class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
-                  <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
-                </div>
-                <div class="fl">
-                  <h4 @click="goProjrctInfo(project)">{{project.title}}</h4>
-                  <h6>{{project.curriculum_time}}学时</h6>
-                </div>
+              <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
+                <p>¥{{courseList.order_amount}}</p>
               </div>
-              <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList)">
-                查看更多课程>
-              </div>
-            </div>
-            <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
-              <p>¥{{courseList.order_amount}}</p>
-            </div>
 
+            </div>
           </div>
         </div>
+        <!-- 定位用 -->
+        <div class="bottomPosition" if="bottomPosition"></div>
+        <div class="bottomBar" id="bottomBar" ref="bottomBar">
+          <span class="fl">
+            <el-checkbox v-model="checkMsg " @change="handleSelectAll"></el-checkbox>
+            全选
+          </span>
+          <span class="money ">
+            <i>{{orderNum}}</i> 个订单，
+            <strong>共：
+              <i>¥{{orderPrice}}</i>
+            </strong>
+          </span>
+          <span class="next " @click="showIoc">下一步</span>
+        </div>
       </div>
-      <!-- 定位用 -->
-      <div class="bottomPosition" if="bottomPosition"></div>
-      <div class="bottomBar" id="bottomBar" ref="bottomBar">
-        <span class="fl">
-          <el-checkbox v-model="checkMsg " @change="handleSelectAll"></el-checkbox>
-          全选
-        </span>
-        <span class="money ">
-          <i>{{orderNum}}</i> 个订单，
-          <strong>共：
-            <i>¥{{orderPrice}}</i>
-          </strong>
-        </span>
-        <span class="next " @click="showIoc">下一步</span>
-      </div>
+      <v-nomsg class="noOrder" v-else :config="noMsgTwl"></v-nomsg>
       <!-- 发票弹框 -->
       <v-ticket v-show="showInvoice" :checkedArr="checkedArr" @handleClose="close" @getUnTicketData="getUnTicketData"></v-ticket>
     </div>
@@ -75,13 +78,20 @@ import { timestampToTime } from '@/lib/util/helper'
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import TicketPop from '@/pages/profile/ticket/ticketPopup'
+import NoMsg from '@/pages/profile/pages/noMsg.vue'
 export default {
   props: ['orderData'],
+
   components: {
-    'v-ticket': TicketPop
+    'v-ticket': TicketPop,
+    'v-nomsg': NoMsg
   },
   data() {
     return {
+      noMsgTwl: {
+        type: 'myTicket',
+        text: '抱歉，您还没有订单需要开票~'
+      },
       ticketType: {
         type: 'ticket'
       },

@@ -18,7 +18,7 @@
               <!-- 购买课程列表 -->
               <v-list :config="wePay" :data="orderCurriculumLists" v-if="takeupMsg"></v-list>
               <!-- 支付类型选择-支付 -->
-              <v-paytype :orderDetail="orderDetail" :codeData="codeData" :data="orderCurriculumLists"></v-paytype>
+              <v-paytype :orderDetail="orderDetail" :codeData="codeData" :listData="orderCurriculumLists"></v-paytype>
             </div>
           </div>
 

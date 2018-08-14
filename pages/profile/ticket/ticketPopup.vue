@@ -271,7 +271,7 @@
             </p>
           </div>
           <div class="operation">
-            <span @click="addZZTicketBefore">保存</span>
+            <span class="333" @click="addZZTicketBefore">保存</span>
             <span @click="nextStep('stepTwo')">返回</span>
           </div>
         </div>
@@ -870,15 +870,16 @@ export default {
               this.invoiceForm.ticket = false
               this.isShowTicket = true
               this.commitOrders.ticketId = res.data.invoice_id
-              // this.close()
-              this.$emit('handleClose')
+
               if (this.ticketForm.types == 1) {
                 this.invoiceForm.ticket = true
               }
               this.orderNum = 0
               this.orderPrice = 0
               // this.getUnTicketData()
+              this.$bus.$emit('chengeItem')
               this.$emit('getUnTicketData')
+              this.$emit('handleClose')
             } else {
               this.$message({
                 showClose: true,
@@ -937,6 +938,7 @@ export default {
               this.stepTwo = false
               this.stepThree = false
               // this.getUnTicketData()
+              this.$bus.$emit('chengeItem')
               this.$emit('getUnTicketData')
             } else {
               this.$message({
