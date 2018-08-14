@@ -96,8 +96,9 @@ export default {
     },
     // 获取订单id列表
     getPayList(item) {
+      let urlArr = window.location.href.split('/')
       let cpyid = persistStore.get('cpyid')
-      this.payListForm.orderId = cpyid
+      this.payListForm.orderId = urlArr[urlArr.length - 1]
 
       wepay.webPay(this.payListForm).then(response => {
         this.loading = false

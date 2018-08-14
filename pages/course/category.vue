@@ -146,7 +146,7 @@ export default {
       this.$bus.$emit('cid', item.id)
       if (this.cp === '0') {
         // 调取课程的数据
-        this.getcourseList()
+        this.getcourseList(item.id, null)
       } else {
         // 调取项目的数据
         this.getNewProjectList()
@@ -167,9 +167,11 @@ export default {
           item.id
       )
       this.$bus.$emit('pid', item.id)
+      // cp 为 0 调用课程
       if (this.cp === '0') {
-        this.getcourseList()
+        this.getcourseList(null, item.id)
       } else {
+        // cp 为 1 调用项目
         this.getNewProjectList()
       }
     },
@@ -216,10 +218,18 @@ export default {
       }
     },
     // 下面 card list 列表  --- 学院点进去
-    getcourseList() {
+    getcourseList(itemCid, itemPid) {
       this.loadCourse = true
-      this.categoryForm.cids = splitUrl(0, 1)
-      this.categoryForm.pids = splitUrl(3, 1)
+      if (itemCid) {
+        this.categoryForm.cids = itemCid
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = splitUrl(3, 1)
+      } else {
+        this.categoryForm.cids = splitUrl(0, 1)
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = itemPid
+      }
+
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         console.log(this.categoryData, '这是res')
@@ -286,10 +296,8 @@ export default {
     // 下面 card list 列表  --- 我要选课页面
     curriculumList() {
       this.loadCourse = true
-      this.curriculumListForm.categoryIda = window.location.pathname.split(
-        '/'
-      )[2]
-      this.curriculumListForm.categoryIdb = window.location.search.split('=')[3]
+      this.curriculumListForm.categoryIda = splitUrl(0, 1)
+      this.curriculumListForm.categoryIdb = splitUrl(3, 1)
       category.curriculumList(this.curriculumListForm).then(response => {
         this.categoryData = response.data.curriculumList
         this.pagemsg.total = response.data.pageCount
@@ -371,9 +379,9 @@ export default {
       } else {
         // 点击我要选课逻辑
         this.cidBg = splitUrl(0, 1)
+        this.pidBg = this.pids
         this.getCidPidList()
-        // 我要选课 card list
-        this.curriculumList()
+        this.getcourseList()
       }
     } else {
       // 点击最新项目 查看更多 页面

@@ -107,7 +107,7 @@ export default {
       ischeck: '',
       mediaRW: 22,
       mediaLW: 78,
-      isTry: '',
+      lookAt: '',
       mediaRInner: true,
       fileID: '',
       appID: '',
@@ -242,13 +242,13 @@ export default {
     handleCourse(item) {
       this.ischeck = item.id
       this.playing = this.pauseImg
-      // persistStore.set('curriculumId', item.curriculum_id)
-      persistStore.set('catalogId', item.id)
+      this.playerForm.curriculumId = item.curriculum_id
+      this.playerForm.catalogId = item.id
       clearInterval(this.interval)
       this.clickMsg = true
       this.autoplay = true
       this.getPlayerInfo()
-      this.isTry = item.look_at
+      this.lookAt = item.look_at
     },
     // 获取评论tag
     getEvaluateTags() {
@@ -360,14 +360,35 @@ export default {
       socket.on('connect', function() {
         socket.emit('login', persistStore.get('token'))
       })
+
+      // 后端推送来消息时
+      socket.on('new_msg', function(msg) {
+        console.log(msg)
+        //支付成功
+        if (msg.pay_status == '0') {
+          //执行重新播放视频
+          // getPlayAuth(curriculum_catalog_id, curriculum_id)
+          this.$message({
+            showClose: true,
+            type: 'warning',
+            message: msg.msg
+          })
+        }
+        //支付失败
+        if (msg.pay_status == '100100') {
+          this.$message({
+            showClose: true,
+            type: 'warning',
+            message: msg.msg
+          })
+          return false
+        }
+      })
+
       // 断线重连
       socket.on('reconnect', function(msg) {})
 
       // 获取播放url
-      // this.playerForm.curriculumId = persistStore.get('curriculumId')
-      this.playerForm.curriculumId = splitUrl(0, 1)
-
-      this.playerForm.catalogId = persistStore.get('catalogId')
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
           this.playing = this.pauseImg
@@ -422,16 +443,15 @@ export default {
                */
               socket.emit(
                 'watchRecordingTime',
-                // persistStore.get('curriculumId'),
-                splitUrl(0, 1),
-                persistStore.get('catalogId'),
+                that.playerForm.curriculumId,
+                that.playerForm.catalogId,
                 playTime,
                 that.projectForm.ids,
                 2
               )
             }
           }, 1000)
-          that.ischeck = persistStore.get('catalogId')
+          that.ischeck = that.playerForm.catalogId
           that.playing = that.playImg
         }
         // 监听暂停事件
@@ -449,7 +469,9 @@ export default {
         // 监听播放停止事件
         if (msg.type == 'ended') {
           // 未购买且试看
-          if (!that.bought && that.isTry == '2') {
+          // console.log(that.bought)
+          // console.log(that.lookAt)
+          if (!that.bought && that.lookAt == '2') {
             that.$bus.$emit('openPay')
           }
         }
@@ -458,21 +480,14 @@ export default {
     },
     // 获取视频播放参数
     getCurriculumPlayInfo() {
-      this.projectForm.ids = persistStore.get('projectId')
       projectplayer.getPlayerList(this.projectForm).then(response => {
         this.projectDetail = response.data.curriculumProjectDetail
         this.courseList = response.data.curriculumProjectDetail.curriculumList
         this.shoppingForm.cartid = response.data.curriculumProjectDetail.id
-        persistStore.set(
-          'curriculumId',
-          response.data.curriculumProjectDetail.defaultCurriculumCatalog
-            .curriculum_id
-        )
-        persistStore.set(
-          'catalogId',
-          response.data.curriculumProjectDetail.defaultCurriculumCatalog
-            .curriculumCatalog_id
-        )
+        this.playerForm.curriculumId =
+          response.data.curriculumProjectDetail.defaultCurriculumCatalog.curriculum_id
+        this.playerForm.catalogId =
+          response.data.curriculumProjectDetail.defaultCurriculumCatalog.curriculumCatalog_id
         this.bought =
           response.data.curriculumProjectDetail.curriculumProjectPrivilege
         this.isFreeCourse = response.data.curriculumProjectDetail.is_free
@@ -483,6 +498,10 @@ export default {
         } else {
           this.collectMsg.isCollect = 0
         }
+        // 获取到小节对象里的look_at
+        this.lookAt =
+          response.data.curriculumProjectDetail.defaultCurriculumCatalog.look_at
+        // console.log(this.projectDetail)
         // 播放所需数据加载完成后加载播放器数据
         this.getPlayerInfo()
       })
@@ -534,14 +553,19 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'none'
     this.resize()
     window.addEventListener('resize', this.resize)
-    this.getCurriculumPlayInfo()
+    if (this.isAuthenticated) {
+      this.projectForm.ids = window.location.search.split('=')[1]
+      this.getCurriculumPlayInfo()
+      this.getEvaluateTags()
+    } else {
+      this.$bus.$emit('loginShow', true)
+    }
     this.$bus.$emit('hideHeader', true)
     this.$bus.$on('clickCatalog', data => {
       this.handleCourse(data)
     })
     this.seconds = 10000000
     // 获取评论接口
-    this.getEvaluateTags()
   },
   watch: {
     videoState(flag) {

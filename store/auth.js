@@ -8,8 +8,7 @@ persistStore.defaults({
   token: null,
   gid: null,
   // kid: null,
-  productsNum: null,
-  cindex: null
+  productsNum: null
 })
 let user = persistStore.get('user')
 let token = persistStore.get('token')
