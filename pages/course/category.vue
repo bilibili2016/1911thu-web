@@ -149,7 +149,7 @@ export default {
         this.getcourseList(item.id, null)
       } else {
         // 调取项目的数据
-        this.getNewProjectList()
+        this.getNewProjectList(item.id, null)
       }
     },
     // 点击分类列表  分类
@@ -172,7 +172,7 @@ export default {
         this.getcourseList(null, item.id)
       } else {
         // cp 为 1 调用项目
-        this.getNewProjectList()
+        this.getNewProjectList(null, item.id)
       }
     },
     // 点击分类列表  学院 全部
@@ -189,11 +189,11 @@ export default {
           '&pids=' +
           '0'
       )
-      this.$bus.$emit('cid', item.id)
+      this.$bus.$emit('cid', '0')
       if (this.cp === '0') {
-        this.getcourseList()
+        this.getcourseList(null, null)
       } else {
-        this.getNewProjectList()
+        this.getNewProjectList(null, null)
       }
     },
     // 点击分类列表 分类 全部
@@ -224,10 +224,14 @@ export default {
         this.categoryForm.cids = itemCid
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = splitUrl(3, 1)
-      } else {
+      } else if (itemPid) {
         this.categoryForm.cids = splitUrl(0, 1)
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = itemPid
+      } else {
+        this.categoryForm.cids = '0'
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = '0'
       }
 
       category.curriculumListNew(this.categoryForm).then(res => {
@@ -239,8 +243,21 @@ export default {
       })
     },
     // 下面 card list 列表   --- 项目 查看更多 点进去
-    getNewProjectList() {
+    getNewProjectList(itemCid, itemPid) {
       this.loadCourse = true
+      if (itemCid) {
+        this.categoryForm.cids = itemCid
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = splitUrl(3, 1)
+      } else if (itemPid) {
+        this.categoryForm.cids = splitUrl(0, 1)
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = itemPid
+      } else {
+        this.categoryForm.cids = '0'
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = '0'
+      }
       this.categoryForm.cids = splitUrl(0, 1)
       this.categoryForm.pids = splitUrl(3, 1)
       category.curriculumProjectList(this.categoryForm).then(res => {
