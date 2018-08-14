@@ -35,13 +35,19 @@ export default {
       getdefaultForm: {
         curriculumid: ''
       },
+      closeCoverNum: 0,
       players: '',
       ceshiUrl: 'http://ceshi.1911thu.com',
       localUrl: 'http://localhost:8080',
       wapiUrl: 'http://wapi.1911thu.com:2120',
       seconds: 500000,
       link: '',
-      socket: null
+      socket: null,
+      bought: '',
+      lookAt: '',
+      pay: {
+        type: 1
+      }
     }
   },
   methods: {
@@ -53,10 +59,11 @@ export default {
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(res => {
-          // console.log(res, '这是res1234')
           this.playerForm.curriculumId =
             res.data.defaultCurriculumCatalog.curriculum_id
           this.playerForm.catalogId = res.data.defaultCurriculumCatalog.id
+          this.bought = res.data.defaultCurriculumCatalog.curriculumPrivilege
+          this.lookAt = res.data.defaultCurriculumCatalog.look_at
           // 获取播放的url
           this.getdefaultPlayerUrl()
         })
@@ -76,6 +83,29 @@ export default {
       socket.on('connect', () => {
         socket.emit('login', persistStore.get('token'))
       })
+      // 支付推送来消息时
+      socket.on('new_msg', function(msg) {
+        //支付成功
+        if (msg.pay_status == '0') {
+          //执行重新播放视频
+          that.$message({
+            showClose: true,
+            type: 'warning',
+            message: msg.msg
+          })
+          that.$bus.$emit('closePay')
+          window.location.reload()
+        }
+        //支付失败
+        if (msg.pay_status == '100100') {
+          that.$message({
+            showClose: true,
+            type: 'warning',
+            message: msg.msg
+          })
+          return false
+        }
+      })
       // 断线重连
       socket.on('reconnect', function(msg) {})
 
@@ -84,13 +114,26 @@ export default {
         //   this.$bus.$emit('loginShow', true)
         // }
         // console.log(res, '这是res')
-        this.$refs.mediaPlayer.innerHTML = ''
-        this.tcplayer.mp4 = res.data.playAuthInfo.video_address
-        this.players = new TcPlayer('mediaPlayer', this.tcplayer)
-        window.qcplayer = this.players
-
-        if (this.autoplay) {
-          window.qcplayer.play()
+        if (res.status === 0) {
+          this.$refs.mediaPlayer.innerHTML = ''
+          this.tcplayer.mp4 = res.data.playAuthInfo.video_address
+          this.players = new TcPlayer('mediaPlayer', this.tcplayer)
+          window.qcplayer = this.players
+          if (this.autoplay) {
+            window.qcplayer.play()
+          }
+          if (this.closeCoverNum > 0) {
+            this.$bus.$emit('closeCover')
+          } else {
+            this.closeCoverNum++
+          }
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+          return false
         }
       })
       let that = this
@@ -141,6 +184,13 @@ export default {
         if (msg.type == 'volumechange') {
           // that.isHasClass()
           persistStore.set('volume', window.qcplayer.volume())
+        }
+        // 监听播放停止事件
+        if (msg.type == 'ended') {
+          // 未购买且试看
+          if (!that.bought && that.lookAt == '2') {
+            that.$bus.$emit('openPay', that.pay)
+          }
         }
       }
     },

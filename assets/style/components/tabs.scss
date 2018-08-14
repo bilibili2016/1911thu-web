@@ -11,6 +11,9 @@
 .dropdown {
   .el-dropdown {
     color: #222;
+    .el-dropdown-link:hover {
+      // border-bottom: 2px solid #6417a6;
+    }
   }
   .el-dropdown-menu {
     padding: 0px;

@@ -256,20 +256,26 @@ export default {
         this.categoryForm.pids = '0'
       }
 
-      category.curriculumListNew(this.categoryForm).then(res => {
-        this.categoryData = res.data.curriculumList
-        this.pagemsg.total = res.data.pageCount
-        this.allCheckedId = []
-        for (let item of res.data.curriculumList) {
-          if (!item.is_checked) {
-            this.allCheckedId.push(item.id)
+      if (this.xid === '1') {
+        // 选课页面用新接口
+        category.chooseCurriculumList(this.categoryForm).then(res => {
+          this.categoryData = res.data.curriculumList
+          this.loadCourse = false
+        })
+      } else {
+        // 非选课页面
+        category.curriculumListNew(this.categoryForm).then(res => {
+          this.categoryData = res.data.curriculumList
+          this.pagemsg.total = res.data.pageCount
+          this.allCheckedId = []
+          for (let item of res.data.curriculumList) {
+            if (!item.is_checked) {
+              this.allCheckedId.push(item.id)
+            }
           }
-        }
-        // console.log(this.allCheckedId, '全选数组')
-
-        // console.log(this.pagemsg.total)
-        this.loadCourse = false
-      })
+          this.loadCourse = false
+        })
+      }
     },
     // 下面 card list 列表   --- 项目 查看更多 点进去
     getNewProjectList(itemCid, itemPid) {

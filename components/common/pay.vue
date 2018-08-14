@@ -9,12 +9,16 @@
         <div class="code">
           <div class="codeL">
             <p>微信</p>
-            <qrcode :value="wechat" :options="{ size: 120 }" class="qrcode"></qrcode>
+            <div v-loading="loading" class="codeBox">
+              <qrcode v-show="!loading" :value="wechat" :options="{ size: 120 }" class="qrcode"></qrcode>
+            </div>
           </div>
           <div class="codeC"></div>
           <div class="codeR">
             <p>支付宝</p>
-            <qrcode :value="alipay" :options="{ size: 120 }" class="qrcode"></qrcode>
+            <div v-loading="loading" class="codeBox">
+              <qrcode v-show="!loading" :value="alipay" :options="{ size: 120 }" class="qrcode"></qrcode>
+            </div>
           </div>
         </div>
         <div class="bottomWord">
@@ -41,6 +45,7 @@ export default {
         type: '2',
         ids: ''
       },
+      loading: true,
       wechat: '',
       alipay: ''
     }
@@ -55,13 +60,22 @@ export default {
       pay.getCode(this.codeForm).then(response => {
         this.wechat = response.data.code_url
         this.alipay = response.data.qr_code
+        this.loading = false
       })
     }
   },
   mounted() {
     this.$bus.$on('openPay', data => {
+      if (data.type === 2) {
+        this.codeForm.type = 2
+      } else {
+        this.codeForm.type = 1
+      }
       this.getCode()
       this.showPay = true
+    })
+    this.$bus.$on('closePay', data => {
+      this.close()
     })
   }
 }

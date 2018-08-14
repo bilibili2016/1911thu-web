@@ -32,6 +32,7 @@
         <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
       </div>
     </div>
+    <v-pay></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
   </div>
 </template>
@@ -44,6 +45,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { uniqueArray, splitUrl } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
+import Pay from '@/components/common/Pay.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
@@ -59,6 +61,7 @@ export default {
   },
   components: {
     'v-backtop': BackToTop,
+    'v-pay': Pay,
     'v-card': CustomCard,
     'v-line': CustomLine,
     'v-evaluate': EvaluateContent,

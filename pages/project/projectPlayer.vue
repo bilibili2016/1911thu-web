@@ -192,6 +192,9 @@ export default {
       },
       config: {
         type: 1
+      },
+      pay: {
+        type: 2
       }
     }
   },
@@ -355,19 +358,18 @@ export default {
         socket.emit('login', persistStore.get('token'))
       })
 
-      // 后端推送来消息时
+      // 支付推送来消息时
       socket.on('new_msg', function(msg) {
-        console.log(msg)
         //支付成功
         if (msg.pay_status == '0') {
           //执行重新播放视频
-          // getPlayAuth(curriculum_catalog_id, curriculum_id)
           that.$message({
             showClose: true,
             type: 'warning',
             message: msg.msg
           })
-          this.getInit()
+          that.$bus.$emit('closePay')
+          that.getInit()
         }
         //支付失败
         if (msg.pay_status == '100100') {
@@ -466,7 +468,7 @@ export default {
         if (msg.type == 'ended') {
           // 未购买且试看
           if (!that.bought && that.lookAt == '2') {
-            that.$bus.$emit('openPay')
+            that.$bus.$emit('openPay', that.pay)
           }
         }
       }

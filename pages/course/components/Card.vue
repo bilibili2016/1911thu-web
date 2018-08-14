@@ -187,12 +187,11 @@ export default {
     },
     // 获取默认小节 跳转 章节id和小节id
     getDefaultCurriculumCatalogId(item) {
-      this.isShowCover = false
       // persistStore.set(
       //   'curriculumId',
       //   item.defaultCurriculumCatalog.curriculum_id
       // )
-      persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
+      // persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
 
       // window.open(window.location.origin + '/course/player')
       this.playerForm.curriculumId = item.defaultCurriculumCatalog.curriculum_id
@@ -245,6 +244,9 @@ export default {
         })
       }
     },
+    closeCover() {
+      this.isShowCover = false
+    },
     // 添加购物车函数
     addCourseShopCart(item) {
       this.curriculumcartids.cartid = item.id
@@ -260,6 +262,11 @@ export default {
         })
       })
     }
+  },
+  mounted() {
+    this.$bus.$on('closeCover', data => {
+      this.closeCover()
+    })
   }
 }
 </script>
