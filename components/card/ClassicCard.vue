@@ -1,5 +1,5 @@
 <template>
-  <div class="goodCourse">
+  <div class="goodCourse 3333">
     <div class="courseLi clearfix" v-for="(course,index) in data" :key="index" @click="handleLink(course)">
       <div class="fl">
         <img :src="course.teacher_picture" alt="">
@@ -33,7 +33,9 @@ export default {
   methods: {
     handleLink(item) {
       persistStore.set('curriculumId', item.id)
-      window.open(window.location.origin + '/course/coursedetail')
+      window.open(
+        window.location.origin + '/course/coursedetail?kid=' + item.id
+      )
     }
   }
 }

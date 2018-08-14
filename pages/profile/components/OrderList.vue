@@ -7,9 +7,7 @@
         <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
       </div>
       <div class="list">
-
         <div class="content">
-
           <div class="course">
             <!-- 课程列表 -->
             <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="course in courseList.orderCurriculumList" :key="course.id">
@@ -146,7 +144,7 @@ export default {
       persistStore.set('kid', item.curriculum_id)
       this.setKid(this.kidForm)
       persistStore.set('curriculumId', item.curriculum_id)
-      this.$router.push('/course/coursedetail')
+      this.$router.push('/course/coursedetail?kid=' + item.curriculum_id)
     },
     //项目详情
     goProjrctInfo(item) {

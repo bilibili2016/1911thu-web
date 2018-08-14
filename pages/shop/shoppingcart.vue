@@ -430,7 +430,7 @@ export default {
       }
       this.setKid(kidForm)
       persistStore.set('curriculumId', item.id)
-      this.$router.push('/course/coursedetail')
+      this.$router.push('/course/coursedetail?kid=' + item.id)
     },
     goProjectDetail(item) {
       persistStore.set('projectId', item.id)
