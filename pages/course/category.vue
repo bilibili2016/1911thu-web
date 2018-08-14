@@ -20,7 +20,7 @@
       <div v-if="xid === '1'">
         <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
         <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
-          <v-card :data="categoryData" :config="configSevent"></v-card>
+          <v-card :data="categoryData" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
         <div v-else v-loading="loadCourse" class="noMsg">
@@ -124,11 +124,18 @@ export default {
       },
       changeData: [],
       cp: '',
-      cidNumber: ''
+      categoryId: '',
+      pidNumber: ''
       // pids: '0'
     }
   },
-
+  watch: {
+    isUpdate(val) {
+      if (val) {
+        this.getUserInfo()
+      }
+    }
+  },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
     // 点击分类列表    学院
@@ -149,7 +156,7 @@ export default {
       // 点击cid时候 cid选中 pid置为 0
       this.$bus.$emit('cid', item.id)
       // 为了点击pid，保存cid
-      this.cidNumber = item.id
+      this.categoryId = item.id
       this.$bus.$emit('pid', '0')
       // 设置点击 cid 获取piddata
       this.pidData = this.cidData[index]
@@ -177,6 +184,7 @@ export default {
           item.id
       )
       this.$bus.$emit('pid', item.id)
+      this.pidNumber = item.id
       // cp 为 0 调用课程
       if (this.cp === '0') {
         this.getcourseList(null, item.id)
@@ -222,12 +230,13 @@ export default {
           '&pids=' +
           '0'
       )
-      // this.$bus.$emit('cid', this.cidNumber)
+      // this.$bus.$emit('cid', this.categoryId)
       this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
-        this.getcourseList()
+        // 点pid 全部，cid 保持
+        this.getcourseList(this.categoryId, '0')
       } else {
-        this.getNewProjectList()
+        this.getNewProjectList(this.categoryId, '0')
       }
     },
     // 下面 card list 列表  --- 学院点进去
@@ -249,8 +258,15 @@ export default {
 
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
-        console.log(this.categoryData, '这是res')
         this.pagemsg.total = res.data.pageCount
+        this.allCheckedId = []
+        for (let item of res.data.curriculumList) {
+          if (!item.is_checked) {
+            this.allCheckedId.push(item.id)
+          }
+        }
+        // console.log(this.allCheckedId, '全选数组')
+
         // console.log(this.pagemsg.total)
         this.loadCourse = false
       })
@@ -266,13 +282,12 @@ export default {
         this.categoryForm.cids = splitUrl(0, 1)
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = itemPid
+        // console.log(this.categoryForm, '123')
       } else {
         this.categoryForm.cids = '0'
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = '0'
       }
-      this.categoryForm.cids = splitUrl(0, 1)
-      this.categoryForm.pids = splitUrl(3, 1)
       category.curriculumProjectList(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumProjectList
         this.pagemsg.total = res.data.pageCount
@@ -355,6 +370,7 @@ export default {
               //设置购物车数量
               pn: response.data.curriculumNumber
             })
+            this.allCheckedId = []
           } else {
             this.$message({
               showClose: true,
@@ -386,7 +402,27 @@ export default {
         this.loadCourse = false
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
+        this.allCheckedId = []
+        for (let item of res.data.curriculumList) {
+          if (!item.is_checked) {
+            this.allCheckedId.push(item.id)
+          }
+        }
       })
+    },
+    //处理单选
+    selCheckboxChange(val) {
+      if (val.is_checked === false) {
+        //不勾选 增加全选值
+        this.allCheckedId.push(val.id)
+      } else {
+        //勾选  删除全选值
+        this.allCheckedId.forEach((item, index) => {
+          if (item === val.id) {
+            this.allCheckedId.splice(index, 1)
+          }
+        })
+      }
     }
   },
   mounted() {
@@ -399,19 +435,22 @@ export default {
     // 点击顶部学院 或者 点击我要选课 页面
     // pid 分类的id
     this.pids = splitUrl(3, 1)
+    // cp 为0 选课 页面
     if (this.cp === '0') {
       // 点击顶部学院
       if (this.xid === '0') {
         this.cidBg = splitUrl(0, 1)
         this.pidBg = this.pids
         this.getCidPidList()
-        this.getcourseList()
+        // 获取刷新后数据，使用url cid pid
+        this.getcourseList(this.categoryId, this.pids)
       } else {
-        // 点击我要选课逻辑
+        // 选课页面 逻辑
         this.cidBg = splitUrl(0, 1)
         this.pidBg = this.pids
         this.getCidPidList()
-        this.getcourseList()
+        // 选课页面 获取刷新后数据，使用url cid pid
+        this.getcourseList(this.categoryId, this.pids)
       }
     } else {
       // 点击最新项目 查看更多 页面
@@ -420,7 +459,8 @@ export default {
       if (this.categoryId === '0') {
       }
       this.getNewProject()
-      this.getNewProjectList()
+      // 项目页面 获取刷新后数据，使用url cid pid
+      this.getNewProjectList(this.categoryId, this.pids)
     }
     document.getElementsByClassName('headerBox')[0].style.display = 'inline'
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
