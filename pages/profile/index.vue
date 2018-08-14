@@ -202,18 +202,18 @@
             <i class="icon-order"></i> 发票管理</span>
           <!-- 发票 -->
           <el-card v-if="showTicketList">
-            <el-tabs v-model="activeOrder" @tab-click="handleTicket">
-              <el-tab-pane label="按订单开发票" name="orderFirst">
+            <el-tabs v-model="activeTicket" @tab-click="handleTicket">
+              <el-tab-pane label="按订单开发票" name="ticketFirst">
                 <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
                 <v-nomsg class="noOrder" v-else :config="noMsgTwl"></v-nomsg>
 
               </el-tab-pane>
-              <el-tab-pane name="orderSecond" label="开票历史">
+              <el-tab-pane name="ticketSecond" label="开票历史">
                 <v-tkhistory v-if="historyOrderData && historyOrderData.length>0" :orderData="historyOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-tkhistory>
                 <v-nomsg class="noOrder" v-else :config="noMsgThi"></v-nomsg>
 
               </el-tab-pane>
-              <el-tab-pane name="orderThird">
+              <el-tab-pane name="ticketThird">
                 <span class="payOk" slot="label">开票规则
                 </span>
                 <v-tkrules v-loading="readyOrderLoad"></v-tkrules>
@@ -285,6 +285,7 @@ export default {
       activeProject: 'first',
       courseCodeNames: 'first',
       activeOrder: 'orderFirst',
+      activeTicket: 'ticketFirst',
       bconfig: {
         banner_type: 'profile'
       },
@@ -852,10 +853,10 @@ export default {
       })
     },
     handleTicket(item) {
-      if (item.name === 'orderFirst') {
+      if (item.name === 'ticketFirst') {
         this.getUnTicketData()
       }
-      if (item.name === 'orderSecond') {
+      if (item.name === 'ticketSecond') {
         this.getHistoryOrderData()
       }
     },
@@ -932,6 +933,12 @@ export default {
           resolve(true)
         })
       })
+    },
+    chengeItem() {
+      console.log('jinlaile')
+
+      this.activeTicket = 'ticketSecond'
+      this.getHistoryOrderData()
     }
   },
   mounted() {
@@ -989,6 +996,9 @@ export default {
     })
     this.$bus.$on('updateUserInfo', data => {
       this.updateUserInfo(data)
+    })
+    this.$bus.$on('chengeItem', data => {
+      this.chengeItem()
     })
   },
   created() {
