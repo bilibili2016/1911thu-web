@@ -307,6 +307,10 @@
         background: url('~assets/images/icon_company1.png') no-repeat center;
         background-size: contain;
       }
+      &.icon-ticket {
+        background: url('~assets/images/icon_ticket1.png') no-repeat center;
+        background-size: contain;
+      }
     }
   }
   .el-tabs__item.is-active i {
@@ -344,6 +348,10 @@
     }
     &.icon-company {
       background: url('~assets/images/icon_company2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-ticket {
+      background: url('~assets/images/icon_ticket2.png') no-repeat center;
       background-size: contain;
     }
   }

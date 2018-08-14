@@ -199,7 +199,7 @@
         <!-- 发票管理 -->
         <el-tab-pane class="my-course my-order" name="tab-eighth">
           <span slot="label" class="tabList">
-            <i class="icon-order"></i> 发票管理</span>
+            <i class="icon-ticket"></i> 发票管理</span>
           <!-- 发票 -->
           <el-card v-if="showTicketList">
             <el-tabs v-model="activeTicket" @tab-click="handleTicket">

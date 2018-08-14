@@ -36,7 +36,7 @@
       </div>
     </div>
     <!-- 报告问题 -->
-    <v-report :config="config"></v-report>
+    <v-report :config="playerForm"></v-report>
     <!-- 写评价 -->
     <div class="evaluate" v-show="showEvaluate">
       <div class="note">
@@ -129,7 +129,8 @@ export default {
       },
       playerForm: {
         curriculumId: '',
-        catalogId: ''
+        catalogId: '',
+        type: 2
       },
       autoplay: false,
       currentTime: '',
@@ -189,9 +190,6 @@ export default {
       shoppingForm: {
         cartid: '',
         type: 2
-      },
-      config: {
-        type: 1
       },
       pay: {
         type: 2
