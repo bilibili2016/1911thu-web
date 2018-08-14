@@ -2,7 +2,9 @@
   <div class="projectPlayer clearfix" ref="playerBox">
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <div class="playTop" @click="goLink()">
-        <i class="el-icon-arrow-left"></i>{{projectDetail.title}}
+        <span>
+          <i class="el-icon-arrow-left"></i>{{projectDetail.title}}
+        </span>
       </div>
       <div class="playInner" ref="playInner">
         <div id="mediaPlayer" ref="mediaPlayer" style="width:100%; height:100%;"></div>
@@ -239,8 +241,6 @@ export default {
       this.clickMsg = true
       this.autoplay = true
       this.lookAt = item.look_at
-      console.log(item)
-
       this.getPlayerInfo()
     },
     // 获取评论tag
@@ -320,7 +320,6 @@ export default {
         this.mediaRIcon = 'el-icon-arrow-right'
         this.mediaLW = 78
       }
-      // this.resize();
     },
     goLink() {
       this.$router.push(
@@ -332,6 +331,7 @@ export default {
         location.reload()
         return
       }
+      let that = this
       var link = window.location.origin
       // if (
       //   link === 'http://frontend.1911edu.com' ||
@@ -362,15 +362,16 @@ export default {
         if (msg.pay_status == '0') {
           //执行重新播放视频
           // getPlayAuth(curriculum_catalog_id, curriculum_id)
-          this.$message({
+          that.$message({
             showClose: true,
             type: 'warning',
             message: msg.msg
           })
+          this.getInit()
         }
         //支付失败
         if (msg.pay_status == '100100') {
-          this.$message({
+          that.$message({
             showClose: true,
             type: 'warning',
             message: msg.msg
@@ -412,7 +413,7 @@ export default {
           }
         }
       })
-      let that = this
+
       // 事件监听集合
       this.tcplayer.listener = function(msg) {
         // 播放开始启动计时器
@@ -464,8 +465,6 @@ export default {
         // 监听播放停止事件
         if (msg.type == 'ended') {
           // 未购买且试看
-          console.log(that.bought)
-          console.log(that.lookAt)
           if (!that.bought && that.lookAt == '2') {
             that.$bus.$emit('openPay')
           }
@@ -493,10 +492,9 @@ export default {
         } else {
           this.collectMsg.isCollect = 0
         }
-        // 获取到小节对象里的look_at
+        // 获取到默认播放小节里的是否试看
         this.lookAt =
           response.data.curriculumProjectDetail.defaultCurriculumCatalog.look_at
-        // console.log(this.projectDetail)
         // 播放所需数据加载完成后加载播放器数据
         this.getPlayerInfo()
       })
@@ -541,6 +539,10 @@ export default {
           })
         }
       })
+    },
+    getInit() {
+      this.getCurriculumPlayInfo()
+      this.getEvaluateTags()
     }
   },
   mounted() {
@@ -550,8 +552,7 @@ export default {
     window.addEventListener('resize', this.resize)
     if (this.isAuthenticated) {
       this.projectForm.ids = window.location.search.split('=')[1]
-      this.getCurriculumPlayInfo()
-      this.getEvaluateTags()
+      this.getInit()
     } else {
       // this.$router.push('/')
       this.$router.push(

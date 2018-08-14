@@ -51,7 +51,7 @@ export default {
     },
     // 获取去二维码的方法
     getCode() {
-      this.codeForm.ids = persistStore.get('projectId')
+      this.codeForm.ids = window.location.search.split('=')[1]
       pay.getCode(this.codeForm).then(response => {
         this.wechat = response.data.code_url
         this.alipay = response.data.qr_code
