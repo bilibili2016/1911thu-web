@@ -154,7 +154,14 @@ export default {
     },
     goToPlay(item) {
       // persistStore.set('curriculumId', item.id)
-      persistStore.set('catalogId', item.catalog_id)
+      // persistStore.set('catalogId', item.catalog_id)
+      this.$router.push(
+        '/course/coursedetail' +
+          '?kid=' +
+          splitUrl(0, 1) +
+          '&bid=' +
+          item.catalog_id
+      )
       window.open(window.location.origin + '/course/player')
     },
     // 已过期商品直接加入购物车
