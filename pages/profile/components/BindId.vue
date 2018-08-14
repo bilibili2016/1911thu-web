@@ -3,7 +3,7 @@
     <div class="courseList">
       <div class="title clearfix">
         <span>绑定兑换码</span>
-        <el-button v-show="!courseList.addNewID" class="fr addClass" @click="addID" round>新增课程兑换码</el-button>
+        <el-button v-show="!courseList.addNewID" class="fr addClass" @click="addID" round>新增兑换码</el-button>
       </div>
       <div v-show="courseList.addNewID">
         <div class="courseID">
@@ -72,7 +72,7 @@ export default {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '请您输入正确的课程兑换码！'
+            message: '请您输入正确的兑换码！'
           })
         }
       }
@@ -143,7 +143,7 @@ export default {
         }
       })
     },
-    // 获取已经添加的课程兑换码
+    // 获取已经添加的兑换码
     getUsedInvitationCodeList() {
       return new Promise((resolve, reject) => {
         bindid.getUsedInvitationCodeList(this.curruntForm).then(response => {

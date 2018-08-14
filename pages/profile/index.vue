@@ -173,7 +173,7 @@
         <!-- 绑定Id -->
         <!-- <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
-            <i class="icon-bind"></i> 课程兑换码</span>
+            <i class="icon-bind"></i> 兑换码</span>
           <v-bind></v-bind>
         </el-tab-pane> -->
         <!-- 课程码管理 -->
@@ -890,7 +890,7 @@ export default {
         this.recordData = response.data.usedInvitationCodeList
       })
     },
-    // 获取已经添加的课程兑换码
+    // 获取已经添加的兑换码
     getUsedInvitationCodeList() {
       profileHome.getUsedInvitationCodeList().then(response => {
         this.invitationCodeList = response.data.usedInvitationCodeList

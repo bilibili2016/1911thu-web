@@ -18,7 +18,7 @@
         <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
         <i class="el-icon-search" @click="goSearch"></i>
       </div>
-      <!-- 单位入口，课程兑换码，下载，购物车 -->
+      <!-- 单位入口，兑换码，下载，购物车 -->
       <v-hrin :class="['HREntry' ,{islogined : isAuthenticated }]"></v-hrin>
       <!-- 登录注册按钮 -->
       <v-lrbtn v-if="!isAuthenticated"></v-lrbtn>
@@ -428,7 +428,7 @@ export default {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '请您输入正确的课程兑换码！'
+            message: '请您输入正确的兑换码！'
           })
         }
       }
