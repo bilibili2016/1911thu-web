@@ -107,7 +107,10 @@ export default {
         // persistStore.set('curriculumId', item.id)
         // this.setKid(this.kidForm)
         window.open(
-          window.location.origin + '/course/coursedetail?kid=' + item.id
+          window.location.origin +
+            '/course/coursedetail?kid=' +
+            item.id +
+            '&bid=-1'
         )
       } else {
         // 分类列表页

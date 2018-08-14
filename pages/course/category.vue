@@ -262,12 +262,8 @@ export default {
         this.pagemsg.total = res.data.pageCount
         this.allCheckedId = []
         for (let item of res.data.curriculumList) {
-          if (!item.is_checked) {
-            this.allCheckedId.push(item.id)
-          }
+          this.allCheckedId.push(item.id)
         }
-        // console.log(this.allCheckedId, '全选数组')
-
         // console.log(this.pagemsg.total)
         this.loadCourse = false
       })
@@ -372,7 +368,11 @@ export default {
               //设置购物车数量
               pn: response.data.curriculumNumber
             })
-            this.allCheckedId = []
+            this.$message({
+              showClose: true,
+              type: 'success',
+              message: response.msg
+            })
           } else {
             this.$message({
               showClose: true,
@@ -406,9 +406,7 @@ export default {
         this.pagemsg.total = res.data.pageCount
         this.allCheckedId = []
         for (let item of res.data.curriculumList) {
-          if (!item.is_checked) {
-            this.allCheckedId.push(item.id)
-          }
+          this.allCheckedId.push(item.id)
         }
       })
     },
