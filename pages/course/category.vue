@@ -245,7 +245,7 @@ export default {
       if (itemCid) {
         this.categoryForm.cids = itemCid
         // 将点击的id获取url中 不可以截取会发生 延迟
-        this.categoryForm.pids = splitUrl(3, 1)
+        this.categoryForm.pids = '0'
       } else if (itemPid) {
         this.categoryForm.cids = splitUrl(0, 1)
         // 将点击的id获取url中 不可以截取会发生 延迟
@@ -277,7 +277,7 @@ export default {
       if (itemCid) {
         this.categoryForm.cids = itemCid
         // 将点击的id获取url中 不可以截取会发生 延迟
-        this.categoryForm.pids = splitUrl(3, 1)
+        this.categoryForm.pids = '0'
       } else if (itemPid) {
         this.categoryForm.cids = splitUrl(0, 1)
         // 将点击的id获取url中 不可以截取会发生 延迟
