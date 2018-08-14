@@ -475,8 +475,6 @@ export default {
     // 获取视频播放参数
     getCurriculumPlayInfo() {
       projectplayer.getPlayerList(this.projectForm).then(response => {
-        console.log(222)
-
         this.projectDetail = response.data.curriculumProjectDetail
         this.courseList = response.data.curriculumProjectDetail.curriculumList
         this.shoppingForm.cartid = response.data.curriculumProjectDetail.id

@@ -25,7 +25,7 @@
       </div>
       <div v-if="!codeData||codeData.length<1" class="noCodes">
         <img :src="noMsgImg" alt="">
-        <p>抱歉，现在还没有课程码~</p>
+        <p>抱歉，现在还没有兑换码~</p>
       </div>
     </div>
     <div class="rules clearfix">

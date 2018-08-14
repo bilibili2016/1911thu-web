@@ -428,7 +428,7 @@ export default {
           this.$message({
             showClose: true,
             type: 'error',
-            message: '请您输入正确的课程兑换码！'
+            message: '请您输入正确的绑定兑换码！'
           })
         }
       }

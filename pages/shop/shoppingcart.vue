@@ -922,10 +922,10 @@ export default {
                 this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
               })
               .catch(() => {
-                this.$message({
-                  type: 'info',
-                  message: '已取消结算！'
-                })
+                // this.$message({
+                //   type: 'info',
+                //   message: '已取消结算！'
+                // })
               })
           } else {
             this.$router.push('/shop/affirmorder')
@@ -933,7 +933,7 @@ export default {
         })
       } else {
         this.$confirm(
-          '您购买了多份课程，支付成功后请前往‘个人中心-兑换码管理’查看生成的课程码，绑定兑换码后，购买的课程或项目即可观看。',
+          '您购买了多份课程，支付成功后请前往‘个人中心-兑换码管理’查看生成的兑换码，绑定兑换码后，购买的课程或项目即可观看。',
           {
             confirmButtonText: '去结算',
             cancelButtonText: '取消',

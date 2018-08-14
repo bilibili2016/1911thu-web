@@ -5,15 +5,15 @@
             <i class="el-icon-close closeEcg" @click="closeEcg"></i>
             <div class="changeContent">
                 <div class="changeInput">
-                    <span>课程兑换码:</span>
-                    <input v-model="bindForm.courseId" placeholder="请输入您的课程兑换码，区分大小写。">
+                    <span>绑定兑换码:</span>
+                    <input v-model="bindForm.courseId" placeholder="请输入您的兑换码，区分大小写。">
                     <p>
                         <span>{{bindForm.error}}</span>
                     </p>
                 </div>
                 <div class="changeTips">
-                    <p>课程兑换码说明：</p>
-                    <p>1.输入课程兑换码，绑定兑换购买的课程</p>
+                    <p>绑定兑换码说明：</p>
+                    <p>1.输入兑换码，绑定兑换购买的课程</p>
                     <p>2.绑定成功后，不可更改。</p>
                 </div>
                 <div :class="['bind',{input:bindForm.isInput}]" @click="detection">绑定</div>
