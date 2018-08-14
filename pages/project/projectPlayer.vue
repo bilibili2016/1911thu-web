@@ -45,8 +45,7 @@
     <!-- 报告问题 -->
     <v-report :config="config"></v-report>
     <!-- 写评价 -->
-    <v-evaluatecase class="evaluate" v-show="showEvaluate" :isClose="isClose" :courseList="projectDetail" :config="configEvaluste" @closeEvaluate="closeEvaluate"> </v-evaluatecase>
-    <!-- <div class="evaluate" v-show="showEvaluate">
+    <div class="evaluate" v-show="showEvaluate">
       <div class="note">
         <h4>项目评价
           <i class="el-icon-close fr" @click="closeEvaluate"></i>
@@ -60,13 +59,13 @@
         <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="['detail-btngrounp',{borderColor: item.isCheck}]">
           {{item.value}}
         </div>
-        <el-input type="textarea" :rows="4" placeholder="其它想说的" v-model="word">
+        <el-input type="textarea" resize="none" :rows="4" placeholder="其它想说的" v-model="word">
         </el-input>
         <div class="commitBug">
           <el-button round @click.native="addProjectEvaluate">提交</el-button>
         </div>
       </div>
-    </div> -->
+    </div>
     <v-pay></v-pay>
   </div>
 </template>
@@ -104,9 +103,6 @@ export default {
       showEvaluate: false,
       curriculumcartids: {
         cartid: null
-      },
-      configEvaluste: {
-        type: 2
       },
       ischeck: '',
       mediaRW: 22,
@@ -258,11 +254,9 @@ export default {
     getEvaluateTags() {
       return new Promise((resolve, reject) => {
         projectplayer.getEvaluateTags().then(response => {
-          // this.btnData = response.data.evaluateTags['1']
           this.tagGroup = response.data.evaluateTags
           this.changeRate('5')
           this.btnDatas = response.data.evaluateTags
-          // this.tagGroup = response.data.evaluateTags
         })
       })
     },
@@ -503,11 +497,11 @@ export default {
         return false
       }
       this.addEvaluateForm.ids = this.shoppingForm.cartid
-      this.addEvaluateForm.curriculumcatalogid = persistStore.get(
-        'curriculumId'
-      )
+      this.addEvaluateForm.curriculumcatalogid = this.playerForm.curriculumId
+      this.addEvaluateForm.catalogId = this.playerForm.catalogId
       this.addEvaluateForm.evaluateContent = this.word
       this.addEvaluateForm.scores = this.rateModel.toString().replace(/,/g, '#')
+      this.addEvaluateForm.tag = this.addEvaluateForm.tag.join('#')
       projectplayer.addProjectEvaluate(this.addEvaluateForm).then(response => {
         if (response.status === '100100') {
           this.$message({
@@ -516,6 +510,7 @@ export default {
             message: response.msg
           })
         } else {
+          this.getCurriculumPlayInfo()
           this.addEvaluateForm.tag = []
           for (let item of this.btnData) {
             this.$set(item, 'isCheck', false)
@@ -526,27 +521,6 @@ export default {
             showClose: true,
             type: 'success',
             message: response.msg
-          })
-        }
-      })
-    },
-    // 为播放器上当的播放按钮添加点击事件
-    addPlay() {
-      var that = this
-      document.addEventListener('click', function(e) {
-        event = e || window.event
-        if (event.stopPropagation) {
-          event.stopPropagation()
-        } else if (window.event) {
-          window.event.cancelBubble = true
-        }
-        var target = event.path[3].classList[0]
-        if (target == 'vjs-big-play-button') {
-          projectplayer.getPlayerInfos(that.playerForm).then(response => {
-            if (response.status === '100100') {
-              that.playing = that.pauseImg
-              that.goShoppingCart(response.msg)
-            }
           })
         }
       })
@@ -562,10 +536,9 @@ export default {
     this.$bus.$on('clickCatalog', data => {
       this.handleCourse(data)
     })
-    ;(this.seconds = 10000000),
-      // 获取评论接口
-      this.getEvaluateTags()
-    this.addPlay()
+    this.seconds = 10000000
+    // 获取评论接口
+    this.getEvaluateTags()
   },
   watch: {
     videoState(flag) {

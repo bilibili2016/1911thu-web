@@ -53,7 +53,8 @@ export default {
       gidForm: { gids: null },
       seconds: 5,
       link: null,
-      interval: null
+      interval: null,
+      ref: '' //根据购买的类型（课程/项目）自动跳转到对应页面
     }
   },
   methods: {
@@ -89,7 +90,16 @@ export default {
             if (this.seconds < 1) {
               this.seconds = 0
               clearInterval(this.interval)
-              this.goLink('tab-first')
+              if (this.ref === '1') {
+                //课程
+                this.goLink('tab-second')
+              } else if (this.ref === '2') {
+                //项目
+                this.goLink('tab-third')
+              } else {
+                //课程+项目
+                this.goLink('tab-first')
+              }
             } else {
               this.seconds--
             }
@@ -111,6 +121,8 @@ export default {
     }
   },
   mounted() {
+    // console.log(this.$route.query.ref)
+    this.ref = this.$route.query.ref
     this.payComplete()
     this.link = this.$route.path
   }

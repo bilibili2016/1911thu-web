@@ -9,10 +9,6 @@
           <div class="new-style " v-if="config.new==='true' ">
             <img :src="newTag " alt=" ">
           </div>
-          <!-- 项目列表页显示小标志，选择课程页不显示 -->
-          <div class="projectImg" v-if="cp==='1'&&config.card_type==='profile'">
-            <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
-          </div>
           <div class="mask-style" @click="goDetail(card)">
             <img :src="jinImg" alt="" class="jin-style">
           </div>
@@ -69,12 +65,11 @@
 import { mapActions } from 'vuex'
 import { card } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { splitUrl } from '~/lib/util/helper'
 export default {
   props: ['data', 'config'],
   data() {
     return {
-      cp: '',
+      type: '',
       kidForm: {
         kids: ''
       },
@@ -96,7 +91,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid']),
+    ...mapActions('auth', ['setProductsNum', 'setKid', 'setXid']),
     openDetail(link) {
       window.open(window.location.origin + link)
     },
@@ -106,15 +101,19 @@ export default {
         this.kidForm.kids = item.id
         persistStore.set('curriculumId', item.id)
         this.setKid(this.kidForm)
-        this.openDetail('/course/coursedetail')
+        window.open(
+          window.location.origin + '/course/coursedetail?kid=' + item.id
+        )
       } else {
         // 分类列表页
-        if (this.cp === '0') {
+        if (this.type === '0') {
           // 课程-转到课程详情
           this.kidForm.kids = item.id
           persistStore.set('curriculumId', item.id)
           this.setKid(this.kidForm)
-          this.openDetail('/course/coursedetail')
+          window.open(
+            window.location.origin + '/course/coursedetail?kid=' + item.id
+          )
         } else {
           // 项目-项目详情
           persistStore.set('projectId', item.id)
@@ -157,12 +156,11 @@ export default {
   },
   mounted() {
     // isIndex判断是否在首页 true在首页
-    // type类型决定当前列表的类型：0-课程；1-项目
+    // cp类型决定当前列表的类型：0-课程；1-项目
     if (window.location.search.split('=')[2]) {
       this.isIndex = false
-      this.cp = splitUrl(1, 1)
+      this.type = window.location.search.split('=')[1].substr(0, 1)
     } else {
-      // 是在首页
       this.isIndex = true
     }
   }

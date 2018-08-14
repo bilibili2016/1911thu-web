@@ -42,7 +42,9 @@ export default {
       this.kidForm.kids = img.jump_id
       persistStore.set('curriculumId', img.jump_id)
       this.setKid(this.kidForm)
-      // window.open(window.location.origin + '/course/coursedetail')
+      // window.open(
+      //   window.location.origin + '/course/coursedetail?kid=' + img.jump_id
+      // )
     },
     goDetail(news) {
       window.open(window.location.origin + '/home/news/' + news.id)

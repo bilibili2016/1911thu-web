@@ -36,7 +36,7 @@ import { uniqueArray } from '@/lib/util/helper'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  props: ['courseList', 'isClose', 'config'],
+  props: ['courseList', 'isClose'],
   data() {
     return {
       reTagBtn: [],
@@ -80,15 +80,9 @@ export default {
     },
     // 评论-提交评论接口
     addEvaluate() {
-      if (this.config.type === 1) {
-        this.addEvaluateForm.ids = persistStore.get('curriculumId')
-        this.addEvaluateForm.types = 1
-        this.flag = this.courseList.is_study
-      } else {
-        this.addEvaluateForm.ids = persistStore.get('projectId')
-        this.addEvaluateForm.types = 2
-        this.flag = this.courseList.is_CurriculumProjectStudy
-      }
+      this.addEvaluateForm.ids = this.courseList.id
+      this.addEvaluateForm.curriculumcatalogid = this.courseList.defaultCurriculumCatalog.id
+      this.flag = this.courseList.is_study
       if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
       } else {

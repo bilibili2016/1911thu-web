@@ -38,7 +38,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import { wepay } from '@/lib/v1_sdk/index'
 export default {
-  props: ['orderDetail', 'codeData'],
+  props: ['orderDetail', 'codeData', 'data'],
   data() {
     return {
       wxMsg: true,
@@ -51,7 +51,10 @@ export default {
       },
       payListForm: {
         orderId: null
-      }
+      },
+      projectList: [],
+      courseList: [],
+      ref: ''
     }
   },
   methods: {
@@ -71,6 +74,20 @@ export default {
     getStatus() {
       let cpyid = window.location.pathname.split('/')[2]
       this.payListForm.orderId = cpyid
+      if (this.courseList.length !== 0 && this.projectList.length === 0) {
+        //课程
+        this.ref = 1
+      } else if (
+        this.courseList.length === 0 &&
+        this.projectList.length !== 0
+      ) {
+        //项目
+        this.ref = 2
+      } else {
+        //项目+课程
+        this.ref = 3
+      }
+
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
           clearInterval(this.interval)
@@ -80,7 +97,10 @@ export default {
             if (response.status === 0) {
               clearInterval(this.interval)
               this.$bus.$emit('closeCode')
-              this.$router.push('/shop/result/' + cpyid)
+              this.$router.push({
+                path: '/shop/result/' + cpyid,
+                query: { ref: this.ref }
+              })
             }
           })
         }
@@ -101,9 +121,21 @@ export default {
       this.zfbMsg = false
       this.pubMsg = true
       this.$router.push('/shop/payPublic')
+    },
+    //获取课程和项目列表
+    getType() {
+      this.data.forEach(item => {
+        if (item.type === '1') {
+          this.courseList.push(item)
+        } else {
+          this.projectList.push(item)
+        }
+      })
     }
   },
   mounted() {
+    console.log(this.data, '222')
+    this.getType()
     this.$bus.$on('clearInterval', dat => {
       clearInterval(this.interval)
     })

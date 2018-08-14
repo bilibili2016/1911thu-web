@@ -25,7 +25,7 @@
         <!-- 讲师介绍 -->
         <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
         <!-- 课程评价-->
-        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :config="configCourse" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
+        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList"> </v-evaluatecase>
         <!-- 用户评价  查看更多 -->
         <v-evaluatedialog :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
         <!-- 用户评论 列表-->
@@ -42,7 +42,7 @@ import CustomLine from '@/components/common/Line.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray } from '@/lib/util/helper'
+import { uniqueArray, splitUrl } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
@@ -54,8 +54,8 @@ import EvaluateDialog from '@/pages/course/coursedetail/EvaluateDialog.vue'
 import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
 export default {
   computed: {
-    ...mapGetters('auth', ['isAuthenticated']),
-    ...mapState('auth', ['kid', 'isCollection'])
+    ...mapGetters('auth', ['isAuthenticated'])
+    // ...mapState('auth', ['kid', 'isCollection'])
   },
   components: {
     'v-backtop': BackToTop,
@@ -75,9 +75,6 @@ export default {
       BreadCrumb: {
         type: 'courseDetail',
         text: '课程详情'
-      },
-      configCourse: {
-        type: 1
       },
       isClose: false, //评论组件是否有关闭按钮
       showCheckedCourse: false,
@@ -287,7 +284,8 @@ export default {
     // 课程-获取课程详情
     getCourseDetail() {
       this.loadTeacher = true
-      this.kidForm.ids = persistStore.get('curriculumId')
+      // this.kidForm.ids = persistStore.get('curriculumId')
+      this.kidForm.ids = splitUrl(0, 1)
 
       coursedetail.getCourseDetail(this.kidForm).then(response => {
         this.loadMsg = false
@@ -334,8 +332,11 @@ export default {
     // },
     // 初始化默认data
     initData() {
-      this.kidForm.ids = this.kid
-      this.evaluateListForm.ids = this.kid
+      // this.kidForm.ids = this.kid
+      //  this.evaluateListForm.ids = this.kid
+      this.kidForm.ids = splitUrl(0, 1)
+      this.evaluateListForm.ids = splitUrl(0, 1)
+
       this.activeName = 'second'
       document.getElementsByClassName('headerBox')[0].style.display = 'inline'
       document.getElementsByClassName('footerBox')[0].style.display = 'inline'

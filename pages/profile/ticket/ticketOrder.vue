@@ -91,7 +91,10 @@ export default {
       ticketOrderData: [],
       checkedArr: [],
       checkMsg: false,
-      showInvoice: false
+      showInvoice: false,
+      kidForm: {
+        kids: ''
+      }
     }
   },
   methods: {
@@ -188,7 +191,7 @@ export default {
       persistStore.set('kid', item.curriculum_id)
       this.setKid(this.kidForm)
       persistStore.set('curriculumId', item.curriculum_id)
-      this.$router.push('/course/coursedetail')
+      this.$router.push('/course/coursedetail?kid=' + item.curriculum_id)
     },
     //项目详情
     goProjrctInfo(item) {

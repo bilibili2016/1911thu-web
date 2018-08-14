@@ -404,7 +404,8 @@ export default {
       // this.resize();
     },
     goLink() {
-      this.$router.push('/course/coursedetail')
+      this.$router.push('/course/coursedetail?kid=')
+
       // window.open(window.location.origin + '/course/coursedetail')
     },
     playerBuy(item, info) {

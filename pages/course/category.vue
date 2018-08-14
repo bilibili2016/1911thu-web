@@ -131,7 +131,6 @@ export default {
     ...mapActions('auth', ['setProductsNum']),
     // 点击分类列表    学院
     selectCid(item, index) {
-      console.log(item, '这是item')
       this.$router.push(
         '/course/category' +
           '?cid=' +
