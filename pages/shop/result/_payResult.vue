@@ -61,8 +61,19 @@ export default {
     ...mapActions('auth', ['setGid']),
     // 继续选课
     handleChoiceCourse() {
+      // window.open(
+      //   window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
+      // )
       window.open(
-        window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
+        window.location.origin +
+          '/course/category' +
+          '?cid=' +
+          '0' +
+          '&cp=' +
+          '0' +
+          '&xid=1' +
+          '&pids=' +
+          '0'
       )
     },
     // 点击查看订单

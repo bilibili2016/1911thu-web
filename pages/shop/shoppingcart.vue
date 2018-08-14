@@ -311,14 +311,14 @@ export default {
         curriculumcartid: []
       },
       removeArray: {
-        //记录所有课程兑换码，全不选作为参数传入，没有修改
+        //记录所有兑换码，全不选作为参数传入，没有修改
         curriculumcartid: []
       },
       projectAddArray: {
         projectcartid: []
       },
       removeProjectArray: {
-        //记录所有课程兑换码，全不选作为参数传入，没有修改
+        //记录所有兑换码，全不选作为参数传入，没有修改
         projectcartid: []
       },
       isRest: true,

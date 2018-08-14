@@ -20,7 +20,7 @@
           </span>
         </div>
         <div class="area">
-          <el-input type="textarea" resize="none" :rows="3" placeholder="其它想说的" v-model="textarea" maxlength="100">
+          <el-input type="textarea" resize="none" :rows="3" placeholder="其它想说的(最长不超过100字)" v-model="textarea" maxlength="100">
           </el-input>
         </div>
         <div class="submit">

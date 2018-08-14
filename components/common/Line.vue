@@ -52,6 +52,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { auth, line } from '~/lib/v1_sdk/index'
+import { splitUrl } from '~/lib/util/helper'
 export default {
   props: ['catalogs', 'privileMsg'],
   computed: {
@@ -107,8 +108,11 @@ export default {
       let video_time = item.childList[index].second
       persistStore.set('video_time', video_time)
       // persistStore.set('curriculumId', curriculum_id)
-      persistStore.set('catalogId', catalog_id)
+      // persistStore.set('catalogId', catalog_id)
 
+      this.$router.push(
+        '/course/coursedetail' + '?kid=' + splitUrl(0, 1) + '&bid=' + catalog_id
+      )
       this.playerForm.curriculumId = curriculum_id
       this.playerForm.catalogId = catalog_id
       this.$bus.$emit('updateCourse', this.playerForm)

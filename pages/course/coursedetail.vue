@@ -39,7 +39,6 @@
 
 <script>
 import CustomCard from '@/pages/course/components/Card.vue'
-import CustomLine from '@/components/common/Line.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -63,7 +62,6 @@ export default {
     'v-backtop': BackToTop,
     'v-pay': Pay,
     'v-card': CustomCard,
-    'v-line': CustomLine,
     'v-evaluate': EvaluateContent,
     'v-evaluatecase': EvaluateCase,
     'v-breadcrumb': BreadCrumb,
@@ -329,10 +327,17 @@ export default {
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {
-          persistStore.set(
-            'catalogId',
-            response.data.defaultCurriculumCatalog.id
+          this.$router.push(
+            '/course/coursedetail' +
+              '?kid=' +
+              splitUrl(0, 1) +
+              '&bid=' +
+              response.data.defaultCurriculumCatalog.id
           )
+          // persistStore.set(
+          //   'catalogId',
+          //   response.data.defaultCurriculumCatalog.id
+          // )
         })
     },
     // 分享 默认设置
