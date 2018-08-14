@@ -127,6 +127,7 @@ export default {
     },
     // 我要选课 -选择课程
     selCheckboxChange(item, index) {
+      this.$emit('selCheckboxChange', item) //改变全选按钮保存的数组值
       if (item.is_checked === false) {
         item.is_checked = false
         this.curriculumcartid.numberArr.push(item.id)
