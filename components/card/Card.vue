@@ -65,11 +65,12 @@
 import { mapActions } from 'vuex'
 import { card } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
+import { splitUrl } from '~/lib/util/helper'
 export default {
   props: ['data', 'config'],
   data() {
     return {
-      type: '',
+      cp: '',
       kidForm: {
         kids: ''
       },
@@ -106,7 +107,7 @@ export default {
         )
       } else {
         // 分类列表页
-        if (this.type === '0') {
+        if (this.cp === '0') {
           // 课程-转到课程详情
           this.kidForm.kids = item.id
           persistStore.set('curriculumId', item.id)
@@ -159,7 +160,8 @@ export default {
     // cp类型决定当前列表的类型：0-课程；1-项目
     if (window.location.search.split('=')[2]) {
       this.isIndex = false
-      this.type = window.location.search.split('=')[1].substr(0, 1)
+      this.cp = splitUrl(1, 1)
+      console.log(this.cp, '这是cp')
     } else {
       this.isIndex = true
     }

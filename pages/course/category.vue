@@ -146,7 +146,7 @@ export default {
       this.$bus.$emit('cid', item.id)
       if (this.cp === '0') {
         // 调取课程的数据
-        this.getcourseList()
+        this.getcourseList(item.id, null)
       } else {
         // 调取项目的数据
         this.getNewProjectList()
@@ -167,9 +167,11 @@ export default {
           item.id
       )
       this.$bus.$emit('pid', item.id)
+      // cp 为 0 调用课程
       if (this.cp === '0') {
-        this.getcourseList()
+        this.getcourseList(null, item.id)
       } else {
+        // cp 为 1 调用项目
         this.getNewProjectList()
       }
     },
@@ -216,10 +218,18 @@ export default {
       }
     },
     // 下面 card list 列表  --- 学院点进去
-    getcourseList() {
+    getcourseList(itemCid, itemPid) {
       this.loadCourse = true
-      this.categoryForm.cids = splitUrl(0, 1)
-      this.categoryForm.pids = splitUrl(3, 1)
+      if (itemCid) {
+        this.categoryForm.cids = itemCid
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = splitUrl(3, 1)
+      } else {
+        this.categoryForm.cids = splitUrl(0, 1)
+        // 将点击的id获取url中 不可以截取会发生 延迟
+        this.categoryForm.pids = itemPid
+      }
+
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         console.log(this.categoryData, '这是res')
