@@ -286,10 +286,8 @@ export default {
     // 下面 card list 列表  --- 我要选课页面
     curriculumList() {
       this.loadCourse = true
-      this.curriculumListForm.categoryIda = window.location.pathname.split(
-        '/'
-      )[2]
-      this.curriculumListForm.categoryIdb = window.location.search.split('=')[3]
+      this.curriculumListForm.categoryIda = splitUrl(0, 1)
+      this.curriculumListForm.categoryIdb = splitUrl(3, 1)
       category.curriculumList(this.curriculumListForm).then(response => {
         this.categoryData = response.data.curriculumList
         this.pagemsg.total = response.data.pageCount
@@ -371,9 +369,9 @@ export default {
       } else {
         // 点击我要选课逻辑
         this.cidBg = splitUrl(0, 1)
+        this.pidBg = this.pids
         this.getCidPidList()
-        // 我要选课 card list
-        this.curriculumList()
+        this.getcourseList()
       }
     } else {
       // 点击最新项目 查看更多 页面

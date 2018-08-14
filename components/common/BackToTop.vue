@@ -120,7 +120,7 @@ export default {
             '0' +
             '&xid=1' +
             '&pids=' +
-            '2'
+            '0'
         )
         // this.showNotLogin = false
       } else {
