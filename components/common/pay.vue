@@ -30,7 +30,7 @@
 import Vue from 'vue'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import { store as persistStore } from '~/lib/core/store'
-import { home, pay } from '~/lib/v1_sdk/index'
+import { home, pay, wepay } from '~/lib/v1_sdk/index'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   props: ['config'],
@@ -48,23 +48,6 @@ export default {
   methods: {
     close() {
       this.showPay = false
-    },
-    // 轮询扫码结果
-    getStatus() {
-      this.interval = setInterval(() => {
-        if (this.seconds <= 0) {
-          clearInterval(this.interval)
-        } else {
-          this.seconds--
-          wepay.payResult(this.payListForm).then(response => {
-            if (response.status === 0) {
-              this.wxMask = false
-              this.$router.push('/shop/payresult')
-              clearInterval(this.interval)
-            }
-          })
-        }
-      }, 1000)
     },
     // 获取去二维码的方法
     getCode() {

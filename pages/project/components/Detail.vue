@@ -64,7 +64,11 @@ export default {
     // 跳转到项目播放页
     goProjectPlayer() {
       if (this.isAuthenticated) {
-        window.open(window.location.origin + '/project/projectPlayer')
+        window.open(
+          window.location.origin +
+            '/project/projectPlayer?id=' +
+            window.location.search.split('=')[1]
+        )
       } else {
         this.$bus.$emit('loginShow', true)
       }
@@ -94,7 +98,7 @@ export default {
     }
   },
   mounted() {
-    this.project.projectId = persistStore.get('projectId')
+    this.project.projectId = window.location.search.split('=')[1]
   }
 }
 </script>
