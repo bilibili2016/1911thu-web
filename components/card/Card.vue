@@ -118,7 +118,10 @@ export default {
         } else {
           // 项目-项目详情
           persistStore.set('projectId', item.id)
-          this.openDetail('/project/ProjectDetail')
+          // this.openDetail('/project/ProjectDetail?id=' + item.id)
+          window.open(
+            window.location.origin + '/project/ProjectDetail?id=' + item.id
+          )
         }
       }
     },
