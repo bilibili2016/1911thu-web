@@ -18,7 +18,7 @@
             <p>{{evl.nick_name}}</p>
             <p>{{evl.create_time}}</p>
           </div>
-          <el-rate disabled class="rate fr" v-model="evl.rate"></el-rate>
+          <el-rate disabled class="rate fr" v-model="evl.score"></el-rate>
         </div>
         <p class="evlContent">{{evl.evaluate_content}}</p>
       </div>

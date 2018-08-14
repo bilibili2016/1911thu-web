@@ -32,6 +32,9 @@
         .chapter {
           padding: 0 5px 40px;
           border-bottom: 1px solid #e8d6f7;
+          &:last-child {
+            border-bottom: none;
+          }
           h4 {
             line-height: 76px;
             font-size: 16px;
