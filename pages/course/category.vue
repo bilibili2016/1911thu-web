@@ -239,6 +239,7 @@ export default {
         this.getNewProjectList(this.categoryId, '0')
       }
     },
+
     // 下面 card list 列表  --- 学院点进去
     getcourseList(itemCid, itemPid) {
       this.loadCourse = true
@@ -271,6 +272,7 @@ export default {
         this.loadCourse = false
       })
     },
+
     // 下面 card list 列表   --- 项目 查看更多 点进去
     getNewProjectList(itemCid, itemPid) {
       this.loadCourse = true
