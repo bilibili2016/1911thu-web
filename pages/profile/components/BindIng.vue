@@ -62,7 +62,7 @@ export default {
     // 跳转课程或项目详情
     handleLink(item) {
       if (item.type === '1') {
-        persistStore.set('curriculumId', item.curriculum_id)
+        // persistStore.set('curriculumId', item.curriculum_id)
         window.open(
           window.location.origin +
             '/course/coursedetail?kid=' +
@@ -79,7 +79,7 @@ export default {
     },
     goDetail(item) {
       if (item.type === '1') {
-        persistStore.set('curriculumId', item.curriculum_id)
+        // persistStore.set('curriculumId', item.curriculum_id)
         this.kidForm.kids = item.curriculum_id
         window.open(
           window.location.origin +

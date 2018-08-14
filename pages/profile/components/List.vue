@@ -138,22 +138,22 @@ export default {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
     selectCid(item, index) {
       this.kidForm.kids = item.id
-      persistStore.set('curriculumId', item.id)
-      this.setKid(this.kidForm)
+      // persistStore.set('curriculumId', item.id)
+      // this.setKid(this.kidForm)
       this.curriculumcartids.cartid = item.id
       this.openDetail(item.id)
     },
     courseInfo(item, index) {
       this.kidForm.kids = item.id
-      persistStore.set('curriculumId', item.id)
-      this.setKid(this.kidForm)
+      // persistStore.set('curriculumId', item.id)
+      // this.setKid(this.kidForm)
       this.openDetail(item.id)
     },
     openDetail(ID) {
       window.open(window.location.origin + '/course/coursedetail?kid=' + ID)
     },
     goToPlay(item) {
-      persistStore.set('curriculumId', item.id)
+      // persistStore.set('curriculumId', item.id)
       persistStore.set('catalogId', item.catalog_id)
       window.open(window.location.origin + '/course/player')
     },

@@ -100,8 +100,8 @@ export default {
       // 判断当前页是否是在首页
       if (this.isIndex) {
         this.kidForm.kids = item.id
-        persistStore.set('curriculumId', item.id)
-        this.setKid(this.kidForm)
+        // persistStore.set('curriculumId', item.id)
+        // this.setKid(this.kidForm)
         window.open(
           window.location.origin + '/course/coursedetail?kid=' + item.id
         )
@@ -110,8 +110,8 @@ export default {
         if (this.cp === '0') {
           // 课程-转到课程详情
           this.kidForm.kids = item.id
-          persistStore.set('curriculumId', item.id)
-          this.setKid(this.kidForm)
+          // persistStore.set('curriculumId', item.id)
+          // this.setKid(this.kidForm)
           window.open(
             window.location.origin + '/course/coursedetail?kid=' + item.id
           )

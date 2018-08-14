@@ -194,7 +194,9 @@ export default {
     },
     // 评论-提交评论接口
     addEvaluate() {
-      this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      // this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.ids = splitUrl(0, 1)
+
       if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
       } else {
@@ -251,7 +253,8 @@ export default {
       this.pagemsg.page = val
       this.evaluateListForm.pages = val
       this.evaluateListForm.limits = 3
-      this.evaluateListForm.ids = persistStore.get('curriculumId')
+      // this.evaluateListForm.ids = persistStore.get('curriculumId')
+      this.evaluateListForm.ids = splitUrl(0, 1)
 
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
         this.loadMsg = false
@@ -262,7 +265,9 @@ export default {
     // 评论-获取评论列表
     getEvaluateList() {
       this.loadEvaluate = true
-      this.evaluateListForm.ids = persistStore.get('curriculumId')
+      // this.evaluateListForm.ids = persistStore.get('curriculumId')
+      this.evaluateListForm.ids = splitUrl(0, 1)
+
       return new Promise((resolve, reject) => {
         coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
@@ -290,7 +295,7 @@ export default {
       coursedetail.getCourseDetail(this.kidForm).then(response => {
         this.loadMsg = false
         this.courseList = response.data.curriculumDetail
-        persistStore.set('curriculumId', response.data.curriculumDetail.id)
+        // persistStore.set('curriculumId', response.data.curriculumDetail.id)
         this.privileMsg = response.data.curriculumPrivilege
 
         this.content = response.data.curriculumPrivilege
@@ -300,7 +305,9 @@ export default {
     },
     // 课程-获取课程列表
     getCourseList() {
-      this.kidForm.ids = persistStore.get('curriculumId')
+      // this.kidForm.ids = persistStore.get('curriculumId')
+      this.kidForm.ids = splitUrl(0, 1)
+
       coursedetail.getCourseList(this.kidForm).then(response => {
         this.catalogs = response.data.curriculumCatalogList
         for (let item of this.catalogs) {
@@ -313,7 +320,9 @@ export default {
     },
     // 课程-获取默认播放信息
     getdefaultCurriculumCatalog() {
-      this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
+      // this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
+      this.getdefaultForm.curriculumid = splitUrl(0, 1)
+
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {

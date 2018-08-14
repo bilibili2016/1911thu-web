@@ -131,7 +131,7 @@ export default {
     // 已过期商品直接加入购物车
     goShoppingCart(item) {
       this.kidForm.kids = item.id
-      this.setKid(this.kidForm)
+      // this.setKid(this.kidForm)
       this.addShopCarts()
     },
     addShopCarts() {
