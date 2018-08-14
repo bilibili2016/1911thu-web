@@ -89,7 +89,8 @@ export default {
         '/profile',
         '/shop/wepay'
       ],
-      getHttp: false
+      getHttp: false,
+      skip: '' //兑换码类型
     }
   },
   computed: {
@@ -172,13 +173,25 @@ export default {
             type: 'success',
             message: res.msg
           })
+          if (res.data.invitation_code_type == '1') {
+            //兑换码内只有课程
+            this.skip = 'tab-second'
+          }
+          if (res.data.invitation_code_type == '2') {
+            //兑换码内只有项目
+            this.skip = 'tab-third'
+          }
+          if (res.data.invitation_code_type == '3') {
+            //兑换码项目+课程
+            this.skip = 'tab-first'
+          }
           this.bindForm.courseId = ''
           this.bindForm.isBind = false
           if (window.location.pathname === '/profile') {
             this.$bus.$emit('studyCourse')
             this.$bus.$emit('studyProject')
           }
-          this.goLink('tab-second')
+          this.goLink(this.skip)
         } else if (res.status === '100100') {
           this.bindForm.showErr = true
           this.$message({

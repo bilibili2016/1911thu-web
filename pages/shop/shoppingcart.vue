@@ -921,12 +921,7 @@ export default {
               .then(() => {
                 this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
               })
-              .catch(() => {
-                this.$message({
-                  type: 'info',
-                  message: '已取消结算！'
-                })
-              })
+              .catch(() => {})
           } else {
             this.$router.push('/shop/affirmorder')
           }

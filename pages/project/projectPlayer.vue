@@ -195,7 +195,8 @@ export default {
       },
       pay: {
         type: 2
-      }
+      },
+      currentTime: 0
     }
   },
   methods: {
@@ -236,6 +237,9 @@ export default {
     },
     // 点击小节播放
     handleCourse(item) {
+      if (this.playerForm.catalogId === item.id) {
+        return false
+      }
       this.ischeck = item.id
       this.playing = this.pauseImg
       this.playerForm.curriculumId = item.curriculum_id
@@ -369,7 +373,7 @@ export default {
             message: msg.msg
           })
           that.$bus.$emit('closePay')
-          that.getInit()
+          location.reload()
         }
         //支付失败
         if (msg.pay_status == '100100') {
@@ -384,8 +388,12 @@ export default {
 
       // 断线重连
       socket.on('reconnect', function(msg) {})
-      // 销毁播放器
-      this.$refs.mediaPlayer.innerHTML = ''
+      // 播放器如果存在就销毁播放器，重新创建
+      if (this.players) {
+        this.players.destroy()
+      }
+      // window.qcplayer.destroy()
+      // this.$refs.mediaPlayer.innerHTML = ''
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
@@ -406,10 +414,6 @@ export default {
           this.tcplayer.mp4 = response.data.playAuthInfo.video_address
           this.players = new TcPlayer('mediaPlayer', this.tcplayer)
           window.qcplayer = this.players
-          if (persistStore.get('volume')) {
-            let volume = persistStore.get('volume')
-            window.qcplayer.volume(volume)
-          }
           if (this.autoplay) {
             window.qcplayer.play()
           }
@@ -459,11 +463,6 @@ export default {
           clearInterval(that.interval)
           socket.emit('watchRecordingTime_disconnect')
         }
-        // 监听播放器音量改变
-        if (msg.type == 'volumechange') {
-          // that.isHasClass()
-          persistStore.set('volume', window.qcplayer.volume())
-        }
         // 监听播放停止事件
         if (msg.type == 'ended') {
           // 未购买且试看
@@ -471,14 +470,22 @@ export default {
             that.$bus.$emit('openPay', that.pay)
           }
         }
+        // 视频卡顿的时候出现加载的动画
+        // if (msg.type == 'timeupdate') {
+        //   // 未购买且试看
+        //   this.currentTime = window.qcplayer.currentTime()
+        //   if (this.currentTime === window.qcplayer.currentTime()) {
+        //     document.getElementsByClassName('vcp-loading')[0].style.display =
+        //       'block'
+        //   }
+        //   console.log(this.currentTime, '------', window.qcplayer.currentTime())
+        // }
       }
       // this.isHasClass()
     },
     // 获取视频播放参数
     getCurriculumPlayInfo() {
       projectplayer.getPlayerList(this.projectForm).then(response => {
-        console.log(222)
-
         this.projectDetail = response.data.curriculumProjectDetail
         this.courseList = response.data.curriculumProjectDetail.curriculumList
         this.shoppingForm.cartid = response.data.curriculumProjectDetail.id
