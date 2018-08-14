@@ -123,7 +123,8 @@ export default {
         type: 1
       },
       changeData: [],
-      cp: ''
+      cp: '',
+      cidNumber: ''
       // pids: '0'
     }
   },
@@ -143,7 +144,15 @@ export default {
           '0'
       )
       this.categoryForm.pages = 1
+
+      // 点击cid时候 cid选中 pid置为 0
       this.$bus.$emit('cid', item.id)
+      // 为了点击pid，保存cid
+      this.cidNumber = item.id
+      this.$bus.$emit('pid', '0')
+      // 设置点击 cid 获取piddata
+      this.pidData = this.cidData[index]
+
       if (this.cp === '0') {
         // 调取课程的数据
         this.getcourseList(item.id, null)
@@ -189,7 +198,9 @@ export default {
           '&pids=' +
           '0'
       )
+      // 点击全部 cid 和pid 都为 0
       this.$bus.$emit('cid', '0')
+      this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
         this.getcourseList(null, null)
       } else {
@@ -210,7 +221,8 @@ export default {
           '&pids=' +
           '0'
       )
-      this.$bus.$emit('pid', item.id)
+      // this.$bus.$emit('cid', this.cidNumber)
+      this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
         this.getcourseList()
       } else {
