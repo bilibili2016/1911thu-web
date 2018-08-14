@@ -117,10 +117,10 @@ export default {
             '?cid=' +
             '0' +
             '&cp=' +
-            '1' +
+            '0' +
             '&xid=1' +
             '&pids=' +
-            '0'
+            '2'
         )
         // this.showNotLogin = false
       } else {
