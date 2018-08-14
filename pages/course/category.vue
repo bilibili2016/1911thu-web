@@ -19,14 +19,14 @@
       </div>
       <div v-if="xid === '1'">
         <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
-        <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
-          <v-card :data="categoryData" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
+        <div class="carlist" v-if="categoryDataChoose.length&& xid === '1'" v-loading="loadCourse">
+          <v-card :data="categoryDataChoose" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
         <div v-else v-loading="loadCourse" class="noMsg">
           <v-nothing></v-nothing>
         </div>
-        <div v-show="categoryData.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
+        <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
       </div>
     </div>
     <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
@@ -65,14 +65,19 @@ export default {
       pidBg: 0,
       activeTab: '',
       categoryData: [],
+      categoryDataChoose: [],
       categoryCard: {
         card_type: 'profile',
-        card: 'home'
+        card: 'home',
+        new: 'false',
+        free: 'true'
       },
       configSevent: {
         card_type: 'shoucang',
         card: 'home',
-        types: 'buy'
+        types: 'buy',
+        new: 'false',
+        free: 'true'
       },
       pagemsg: {
         page: 1,
@@ -145,8 +150,12 @@ export default {
       this.pidData = this.cidData[index]
 
       if (this.cp === '0') {
-        // 调取课程的数据
-        this.getCourseCardList(item.id, null)
+        if (this.xid === '0') {
+          // 调取课程的数据
+          this.getCourseCardList(item.id, null)
+        } else {
+          this.getCourseCardChooseList(item.id, null)
+        }
       } else {
         // 调取项目的数据
         this.getProjectCardList(item.id, null)
@@ -171,6 +180,13 @@ export default {
       // cp 为 0 调用课程
       if (this.cp === '0') {
         this.getCourseCardList(null, item.id)
+
+        if (this.xid === '0') {
+          // 调取课程的数据
+          this.getCourseCardList(null, item.id)
+        } else {
+          this.getCourseCardChooseList(null, item.id)
+        }
       } else {
         // cp 为 1 调用项目
         this.getProjectCardList(null, item.id)
@@ -195,6 +211,13 @@ export default {
       this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
         this.getCourseCardList(null, null)
+
+        if (this.xid === '0') {
+          // 调取课程的数据
+          this.getCourseCardList(null, null)
+        } else {
+          this.getCourseCardChooseList(null, null)
+        }
       } else {
         this.getProjectCardList(null, null)
       }
@@ -217,6 +240,12 @@ export default {
       this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
         // 点pid 全部，cid 保持
+        if (this.xid === '0') {
+          // 调取课程的数据
+          this.getCourseCardList(this.categoryId, '0')
+        } else {
+          this.getCourseCardChooseList(this.categoryId, '0')
+        }
         this.getCourseCardList(this.categoryId, '0')
       } else {
         this.getProjectCardList(this.categoryId, '0')
@@ -246,6 +275,22 @@ export default {
       this.setParamsPidCid(itemCid, itemPid)
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
+        this.pagemsg.total = res.data.pageCount
+        // this.allCheckedId = []
+        // for (let item of res.data.curriculumList) {
+        //   this.allCheckedId.push(item.id)
+        // }
+        // console.log(this.pagemsg.total)
+        this.loadCourse = false
+      })
+    },
+    // 选课 card 列表
+    getCourseCardChooseList(itemCid, itemPid) {
+      this.loadCourse = true
+
+      this.setParamsPidCid(itemCid, itemPid)
+      category.chooseCurriculumList(this.categoryForm).then(res => {
+        this.categoryDataChoose = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
         this.allCheckedId = []
         for (let item of res.data.curriculumList) {
@@ -335,7 +380,7 @@ export default {
 
       category.addShopCart(this.idsForm).then(response => {
         if (response.status === 0) {
-          this.categoryData.forEach(function(v, i, arr) {
+          this.categoryDataChoose.forEach(function(v, i, arr) {
             v.is_checked = true
           })
           this.setProductsNum({
@@ -362,7 +407,11 @@ export default {
         ? (this.categoryForm.sortBy = 1)
         : (this.categoryForm.sortBy = 2)
       if (this.cp === '0') {
-        this.getCourseCardList()
+        if (this.xid === '0') {
+          this.getCourseCardList()
+        } else {
+          this.getCourseCardChooseList()
+        }
       } else {
         this.getProjectCardList()
       }
@@ -372,15 +421,13 @@ export default {
       this.loadCourse = true
       this.pagemsg.page = val
       this.categoryForm.pages = val
-      category.curriculumList(this.categoryForm).then(res => {
-        this.loadCourse = false
-        this.categoryData = res.data.curriculumList
-        this.pagemsg.total = res.data.pageCount
-        this.allCheckedId = []
-        for (let item of res.data.curriculumList) {
-          this.allCheckedId.push(item.id)
-        }
-      })
+      let categoryId = splitUrl(0, 1)
+      let pids = splitUrl(3, 1)
+      if (this.xid === '0') {
+        this.getCourseCardList(categoryId, pids)
+      } else {
+        this.getCourseCardChooseList(categoryId, pids)
+      }
     },
     //处理单选
     selCheckboxChange(val) {
@@ -419,8 +466,12 @@ export default {
       if (this.cp === '0') {
         // 无论是选课页面，还是顶部选课进来
         this.getCourseList()
-        // 获取刷新后数据，使用url cid pid
-        this.getCourseCardList(this.categoryId, this.pids)
+        if (this.xid === '0') {
+          // 获取刷新后数据，使用url cid pid
+          this.getCourseCardList(this.categoryId, this.pids)
+        } else {
+          this.getCourseCardChooseList(this.categoryId, this.pids)
+        }
       } else {
         this.getProjectList()
         // 项目页面 获取刷新后数据，使用url cid pid
