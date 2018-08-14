@@ -101,11 +101,12 @@ export default {
       this.payListForm.orderId = urlArr[urlArr.length - 1]
 
       wepay.webPay(this.payListForm).then(response => {
-        this.loading = false
+        // this.loading = false
         this.orderDetail = response.data.data.orderDetail
         this.orderCurriculumLists = response.data.data.orderCurriculumLists
         this.codeData.code_url = response.data.code_url
         this.codeData.qr_code = response.data.qr_code
+        this.$bus.$emit('load', false)
         this.shopCartList()
 
         if (item === 'recode') {
