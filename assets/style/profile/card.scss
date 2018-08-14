@@ -38,6 +38,16 @@
             z-index: 1;
           }
         }
+        .projectImg {
+          position: absolute;
+          .project-img {
+            width: 60px;
+            height: 28px;
+            position: absolute;
+            left: 0;
+            top: 5px;
+          }
+        }
         .mask-style {
           width: 250px;
           height: 160px;

@@ -20,7 +20,7 @@
       <div v-if="xid === '1'">
         <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
         <div class="carlist" v-if="categoryData.length&& xid === '1'" v-loading="loadCourse">
-          <v-card :data="categoryData" :config="configSevent"></v-card>
+          <v-card :data="categoryData" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
         <div v-else v-loading="loadCourse" class="noMsg">
@@ -258,8 +258,15 @@ export default {
 
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
-
         this.pagemsg.total = res.data.pageCount
+        this.allCheckedId = []
+        for (let item of res.data.curriculumList) {
+          if (!item.is_checked) {
+            this.allCheckedId.push(item.id)
+          }
+        }
+        // console.log(this.allCheckedId, '全选数组')
+
         // console.log(this.pagemsg.total)
         this.loadCourse = false
       })
@@ -363,6 +370,7 @@ export default {
               //设置购物车数量
               pn: response.data.curriculumNumber
             })
+            this.allCheckedId = []
           } else {
             this.$message({
               showClose: true,
@@ -394,7 +402,27 @@ export default {
         this.loadCourse = false
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
+        this.allCheckedId = []
+        for (let item of res.data.curriculumList) {
+          if (!item.is_checked) {
+            this.allCheckedId.push(item.id)
+          }
+        }
       })
+    },
+    //处理单选
+    selCheckboxChange(val) {
+      if (val.is_checked === false) {
+        //不勾选 增加全选值
+        this.allCheckedId.push(val.id)
+      } else {
+        //勾选  删除全选值
+        this.allCheckedId.forEach((item, index) => {
+          if (item === val.id) {
+            this.allCheckedId.splice(index, 1)
+          }
+        })
+      }
     }
   },
   mounted() {

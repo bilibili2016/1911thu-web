@@ -9,6 +9,9 @@
           <div class="new-style " v-if="config.new==='true' ">
             <img :src="newTag " alt=" ">
           </div>
+          <div class="projectImg" v-if="cp==='1'">
+            <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
+          </div>
           <div class="mask-style" @click="goDetail(card)">
             <img :src="jinImg" alt="" class="jin-style">
           </div>
@@ -84,6 +87,7 @@ export default {
         cartid: null,
         type: 1
       },
+      cp: '',
       isIndex: true,
       jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
       newTag: 'http://papn9j3ys.bkt.clouddn.com/new.png',
@@ -117,16 +121,13 @@ export default {
           )
         } else {
           // 项目-项目详情
-          persistStore.set('projectId', item.id)
-          // this.openDetail('/project/ProjectDetail?id=' + item.id)
-          window.open(
-            window.location.origin + '/project/ProjectDetail?id=' + item.id
-          )
+          this.openDetail('/project/projectdetail?id=' + item.id)
         }
       }
     },
     // 我要选课 -选择课程
     selCheckboxChange(item, index) {
+      this.$emit('selCheckboxChange', item) //改变全选按钮保存的数组值
       if (item.is_checked === false) {
         item.is_checked = false
         this.curriculumcartid.numberArr.push(item.id)

@@ -137,8 +137,7 @@ export default {
     courseInfo(item, index) {
       if (window.location.pathname.split('/')[3] === '0') {
         // 项目-项目详情
-        persistStore.set('projectId', item.id)
-        this.openDetail('/project/ProjectDetail')
+        this.openDetail('/project/projectdetail?id=' + item.id)
       } else {
         this.kidForm.kids = item.id
         // persistStore.set('curriculumId', item.id)

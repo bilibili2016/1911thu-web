@@ -69,8 +69,11 @@ export default {
             item.curriculum_id
         )
       } else {
-        persistStore.set('projectId', item.curriculum_id)
-        window.open(window.location.origin + '/project/ProjectDetail')
+        window.open(
+          window.location.origin +
+            '/project/projectdetail?id' +
+            item.curriculum_id
+        )
       }
     },
     // 时间戳转日期格式
@@ -87,8 +90,11 @@ export default {
             item.curriculum_id
         )
       } else {
-        persistStore.set('projectId', item.curriculum_id)
-        window.open(window.location.origin + '/project/projectdetail')
+        window.open(
+          window.location.origin +
+            '/project/projectdetail?id=' +
+            item.curriculum_id
+        )
       }
     },
     // 检测兑换码内是否包含已绑定的课程

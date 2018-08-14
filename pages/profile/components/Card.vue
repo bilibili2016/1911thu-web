@@ -9,6 +9,9 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
+            <div class="projectImg">
+              <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
+            </div>
             <div class="mask-style" @click="openDetail(card)">
               <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
             </div>
@@ -72,6 +75,9 @@
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
+              <div class="projectImg">
+                <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
+              </div>
               <div class="mask-style ">
                 <img :src="jinImg " alt=" " class="jin-style ">
               </div>
@@ -121,12 +127,14 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
     openDetail(item) {
-      persistStore.set('projectId', item.id)
-      window.open(window.location.origin + '/project/projectDetail')
+      window.open(
+        window.location.origin + '/project/projectdetail?id=' + item.id
+      )
     },
     goToPlay(item) {
-      persistStore.set('projectId', item.id)
-      window.open(window.location.origin + '/project/projectPlayer')
+      window.open(
+        window.location.origin + '/project/projectPlayer?id=' + item.id
+      )
     },
     // 已过期商品直接加入购物车
     goShoppingCart(item) {

@@ -15,14 +15,6 @@
           </div>
         </span>
         <span class="fl problem" @click="showRpt">报告问题</span>
-        <!-- <span class="fr share" style="position:reletive">
-          <i class="el-icon-share "></i>分享
-          <span class="shareIcond">
-            <span class="social-share" data-sites="weibo,qq,wechat"></span>
-          </span>
-
-        </span> -->
-
         <span class="fl elt" @click="showElt" v-if="this.iseve === false">
           <i class="el-icon-edit"></i>项目评价
         </span>
@@ -31,7 +23,6 @@
         </span>
         <!-- 收藏分享 -->
         <v-collection :collectData="collectMsg" class="projectCollect"></v-collection>
-
       </div>
     </div>
     <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
@@ -247,8 +238,10 @@ export default {
       clearInterval(this.interval)
       this.clickMsg = true
       this.autoplay = true
-      this.getPlayerInfo()
       this.lookAt = item.look_at
+      console.log(item)
+
+      this.getPlayerInfo()
     },
     // 获取评论tag
     getEvaluateTags() {
@@ -330,14 +323,15 @@ export default {
       // this.resize();
     },
     goLink() {
-      this.$router.push('/project/projectdetail')
+      this.$router.push(
+        '/project/projectdetail?id=' + window.location.search.split('=')[1]
+      )
     },
     getPlayerInfo() {
       if (typeof TcPlayer === 'undefined') {
         location.reload()
         return
       }
-      this.$refs.mediaPlayer.innerHTML = ''
       var link = window.location.origin
       // if (
       //   link === 'http://frontend.1911edu.com' ||
@@ -387,7 +381,8 @@ export default {
 
       // 断线重连
       socket.on('reconnect', function(msg) {})
-
+      // 销毁播放器
+      this.$refs.mediaPlayer.innerHTML = ''
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
@@ -469,8 +464,8 @@ export default {
         // 监听播放停止事件
         if (msg.type == 'ended') {
           // 未购买且试看
-          // console.log(that.bought)
-          // console.log(that.lookAt)
+          console.log(that.bought)
+          console.log(that.lookAt)
           if (!that.bought && that.lookAt == '2') {
             that.$bus.$emit('openPay')
           }
@@ -558,6 +553,10 @@ export default {
       this.getCurriculumPlayInfo()
       this.getEvaluateTags()
     } else {
+      // this.$router.push('/')
+      this.$router.push(
+        '/project/projectdetail?id=' + window.location.search.split('=')[1]
+      )
       this.$bus.$emit('loginShow', true)
     }
     this.$bus.$emit('hideHeader', true)

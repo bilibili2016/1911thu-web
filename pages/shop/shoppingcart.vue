@@ -433,8 +433,7 @@ export default {
       this.$router.push('/course/coursedetail?kid=' + item.id)
     },
     goProjectDetail(item) {
-      persistStore.set('projectId', item.id)
-      this.$router.push('/project/projectdetail')
+      this.$router.push('/project/projectdetail?id=' + item.id)
     },
     loadAll() {
       return []

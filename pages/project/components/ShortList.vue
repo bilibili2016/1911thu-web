@@ -38,9 +38,8 @@ export default {
   methods: {
     //项目详情
     projectInfo(item, index) {
-      persistStore.set('projectId', item.id)
       window.open(
-        window.location.origin + '/project/ProjectDetail?id=' + item.id
+        window.location.origin + '/project/projectdetail?id=' + item.id
       )
     }
   }
