@@ -327,24 +327,18 @@ export default {
     ...mapState('auth', ['token'])
   },
   methods: {
-    ...mapActions('auth', ['setCid']),
     goCourseList(item) {
-      this.setCid(item.cidform)
-      // window.open()
-      // if (item.cidform.cids !== '20') {
-      //   window.open(window.location.origin + '/course/category')
-      // }
-      // window.open(window.location.origin + '/course/category')
-      if (item.cidform.cids !== '20') {
-        window.open(
-          window.location.origin +
-            '/course/' +
-            item.cidform.cids +
-            '?pid=' +
-            item.is_picture_show +
-            '&xid=0'
-        )
-      }
+      window.open(
+        window.location.origin +
+          '/course/category' +
+          '?cid=' +
+          item.cidform.cids +
+          '&cp=' +
+          item.is_picture_show +
+          '&xid=0' +
+          '&pid=' +
+          '0'
+      )
     },
     handleScroll() {
       if (this.move) {

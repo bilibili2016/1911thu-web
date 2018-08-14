@@ -86,24 +86,7 @@ export default {
         pages: 1,
         limits: 12
       },
-      cidform: {
-        cids: '',
-        indexs: '',
-        pids: ''
-      },
-      cgForm: {
-        cgs: null
-      },
-      checkedLi: null,
-      // 竖直列表
-      newsCurriculumForm: {
-        pages: 0,
-        limits: 100,
-        categoryId: null,
-        evaluateLimit: null,
-        sortBy: null,
-        onOff: 0
-      },
+
       categoryId: '',
       type: '',
       categoryIndex: '',
@@ -138,7 +121,7 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
-    // 点击分类列表    学院
+    // 学院 item
     selectCid(item, index) {
       this.$router.push(
         '/course/category' +
@@ -163,13 +146,13 @@ export default {
 
       if (this.cp === '0') {
         // 调取课程的数据
-        this.getcourseList(item.id, null)
+        this.getCourseCardList(item.id, null)
       } else {
         // 调取项目的数据
-        this.getNewProjectList(item.id, null)
+        this.getProjectCardList(item.id, null)
       }
     },
-    // 点击分类列表  分类
+    // 分类 item
     selectPid(item, index) {
       this.categoryForm.pages = 1
       this.$router.push(
@@ -187,13 +170,13 @@ export default {
       this.pidNumber = item.id
       // cp 为 0 调用课程
       if (this.cp === '0') {
-        this.getcourseList(null, item.id)
+        this.getCourseCardList(null, item.id)
       } else {
         // cp 为 1 调用项目
-        this.getNewProjectList(null, item.id)
+        this.getProjectCardList(null, item.id)
       }
     },
-    // 点击分类列表  学院 全部
+    // 学院全部
     selectAllCid() {
       this.categoryForm.pages = 1
       this.$router.push(
@@ -211,12 +194,12 @@ export default {
       this.$bus.$emit('cid', '0')
       this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
-        this.getcourseList(null, null)
+        this.getCourseCardList(null, null)
       } else {
-        this.getNewProjectList(null, null)
+        this.getProjectCardList(null, null)
       }
     },
-    // 点击分类列表 分类 全部
+    // 分类 全部
     selectAllPid() {
       this.categoryForm.pages = 1
       this.$router.push(
@@ -234,44 +217,13 @@ export default {
       this.$bus.$emit('pid', '0')
       if (this.cp === '0') {
         // 点pid 全部，cid 保持
-        this.getcourseList(this.categoryId, '0')
+        this.getCourseCardList(this.categoryId, '0')
       } else {
-        this.getNewProjectList(this.categoryId, '0')
+        this.getProjectCardList(this.categoryId, '0')
       }
     },
-
-    // 下面 card list 列表  --- 学院点进去
-    getcourseList(itemCid, itemPid) {
-      this.loadCourse = true
-      if (itemCid) {
-        this.categoryForm.cids = itemCid
-        // 将点击的id获取url中 不可以截取会发生 延迟
-        this.categoryForm.pids = '0'
-      } else if (itemPid) {
-        this.categoryForm.cids = splitUrl(0, 1)
-        // 将点击的id获取url中 不可以截取会发生 延迟
-        this.categoryForm.pids = itemPid
-      } else {
-        this.categoryForm.cids = '0'
-        // 将点击的id获取url中 不可以截取会发生 延迟
-        this.categoryForm.pids = '0'
-      }
-
-      category.curriculumListNew(this.categoryForm).then(res => {
-        this.categoryData = res.data.curriculumList
-        this.pagemsg.total = res.data.pageCount
-        this.allCheckedId = []
-        for (let item of res.data.curriculumList) {
-          this.allCheckedId.push(item.id)
-        }
-        // console.log(this.pagemsg.total)
-        this.loadCourse = false
-      })
-    },
-
-    // 下面 card list 列表   --- 项目 查看更多 点进去
-    getNewProjectList(itemCid, itemPid) {
-      this.loadCourse = true
+    // 点击cid pid 获取 card列表
+    setParamsPidCid(itemCid, itemPid) {
       if (itemCid) {
         this.categoryForm.cids = itemCid
         // 将点击的id获取url中 不可以截取会发生 延迟
@@ -286,6 +238,28 @@ export default {
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = '0'
       }
+    },
+    // 课程 card 列表
+    getCourseCardList(itemCid, itemPid) {
+      this.loadCourse = true
+
+      this.setParamsPidCid(itemCid, itemPid)
+      category.curriculumListNew(this.categoryForm).then(res => {
+        this.categoryData = res.data.curriculumList
+        this.pagemsg.total = res.data.pageCount
+        this.allCheckedId = []
+        for (let item of res.data.curriculumList) {
+          this.allCheckedId.push(item.id)
+        }
+        // console.log(this.pagemsg.total)
+        this.loadCourse = false
+      })
+    },
+
+    // 项目 card列表
+    getProjectCardList(itemCid, itemPid) {
+      this.loadCourse = true
+      this.setParamsPidCid(itemCid, itemPid)
       category.curriculumProjectList(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumProjectList
         this.pagemsg.total = res.data.pageCount
@@ -293,17 +267,17 @@ export default {
         this.loadCourse = false
       })
     },
-    // 获取顶部分类列表数据list    ---  非 最新项目
-    getCidPidList() {
+    // 课程 顶部 list
+    getCourseList() {
       this.loadList = true
       category.childCategoryList().then(res => {
         this.cidData = res.data.categoryList
         this.loadList = false
-        //最新项目
+        // 选课进入 categoryId 为 0
         if (this.categoryId === '0') {
           this.pidData = res.data.categoryList[0]
         } else {
-          // 最新项目之外
+          // 顶部 课程进入
           for (let item of res.data.categoryList) {
             if (item.id === this.categoryId) {
               this.categoryIndex = res.data.categoryList.indexOf(item)
@@ -314,8 +288,8 @@ export default {
         this.loadBanner = false
       })
     },
-    // 获取顶部分类列表数据list ---- 最新 项目
-    getNewProject() {
+    // 项目 顶部 list
+    getProjectList() {
       this.loadList = true
       category.getNewProject().then(res => {
         this.cidData = res.data.categoryList
@@ -337,51 +311,49 @@ export default {
       })
     },
     // 下面 card list 列表  --- 我要选课页面
-    curriculumList() {
-      this.loadCourse = true
-      this.curriculumListForm.categoryIda = splitUrl(0, 1)
-      this.curriculumListForm.categoryIdb = splitUrl(3, 1)
-      category.curriculumList(this.curriculumListForm).then(response => {
-        this.categoryData = response.data.curriculumList
-        this.pagemsg.total = response.data.pageCount
-        for (let item of response.data.curriculumList) {
-          this.$set(item, 'checkmsg', false)
-        }
-        this.loadCourse = false
-        var that = this
-        for (let item of response.data.curriculumList) {
-          this.allCheckedId.push(item.id)
-        }
-      })
-    },
+    // curriculumList() {
+    //   this.loadCourse = true
+    //   this.curriculumListForm.categoryIda = splitUrl(0, 1)
+    //   this.curriculumListForm.categoryIdb = splitUrl(3, 1)
+    //   category.curriculumList(this.curriculumListForm).then(response => {
+    //     this.categoryData = response.data.curriculumList
+    //     this.pagemsg.total = response.data.pageCount
+    //     for (let item of response.data.curriculumList) {
+    //       this.$set(item, 'checkmsg', false)
+    //     }
+    //     this.loadCourse = false
+    //     var that = this
+    //     for (let item of response.data.curriculumList) {
+    //       this.allCheckedId.push(item.id)
+    //     }
+    //   })
+    // },
     // 我要选课页面 点击全选
     allChecked() {
       this.idsForm.cartid = this.allCheckedId
       this.changeData = this.allCheckedId
-      return new Promise((resolve, reject) => {
-        category.addShopCart(this.idsForm).then(response => {
-          if (response.status === 0) {
-            this.categoryData.forEach(function(v, i, arr) {
-              v.is_checked = true
-            })
-            this.setProductsNum({
-              //设置购物车数量
-              pn: response.data.curriculumNumber
-            })
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-          } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: response.msg
-            })
-          }
-          resolve(true)
-        })
+
+      category.addShopCart(this.idsForm).then(response => {
+        if (response.status === 0) {
+          this.categoryData.forEach(function(v, i, arr) {
+            v.is_checked = true
+          })
+          this.setProductsNum({
+            //设置购物车数量
+            pn: response.data.curriculumNumber
+          })
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
       })
     },
     // 点击 最新最热 筛选
@@ -390,9 +362,9 @@ export default {
         ? (this.categoryForm.sortBy = 1)
         : (this.categoryForm.sortBy = 2)
       if (this.cp === '0') {
-        this.getcourseList()
+        this.getCourseCardList()
       } else {
-        this.getNewProjectList()
+        this.getProjectCardList()
       }
     },
     // 点击 底部分页分页事件
@@ -423,47 +395,43 @@ export default {
           }
         })
       }
+    },
+    initHeader() {
+      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    },
+    // 初始化params参数
+    initParams() {
+      // categoryId 学院 id
+      this.categoryId = splitUrl(0, 1)
+      // cp(1)项目 cp(0)
+      this.cp = splitUrl(1, 1)
+      // 获取是 选课(1) 还是 学院(0)
+      this.xid = splitUrl(2, 1)
+      // pid 分类的id
+      this.pids = splitUrl(3, 1)
+      // 初始化背景
+      this.cidBg = splitUrl(0, 1)
+      this.pidBg = splitUrl(3, 1)
+    },
+    initListCard() {
+      // cp(0) 课程 cp(1) 项目
+      if (this.cp === '0') {
+        // 无论是选课页面，还是顶部选课进来
+        this.getCourseList()
+        // 获取刷新后数据，使用url cid pid
+        this.getCourseCardList(this.categoryId, this.pids)
+      } else {
+        this.getProjectList()
+        // 项目页面 获取刷新后数据，使用url cid pid
+        this.getProjectCardList(this.categoryId, this.pids)
+      }
     }
   },
   mounted() {
-    // 获取学院的id
-    this.categoryId = splitUrl(0, 1)
-    // 获取是学院还是项目 学院 cp为 1 项目 cp为0
-    this.cp = splitUrl(1, 1)
-    // 获取是 选课(1) 还是 学院(0)
-    this.xid = splitUrl(2, 1)
-    // 点击顶部学院 或者 点击我要选课 页面
-    // pid 分类的id
-    this.pids = splitUrl(3, 1)
-    // cp 为0 选课 页面
-    if (this.cp === '0') {
-      // 点击顶部学院
-      if (this.xid === '0') {
-        this.cidBg = splitUrl(0, 1)
-        this.pidBg = this.pids
-        this.getCidPidList()
-        // 获取刷新后数据，使用url cid pid
-        this.getcourseList(this.categoryId, this.pids)
-      } else {
-        // 选课页面 逻辑
-        this.cidBg = splitUrl(0, 1)
-        this.pidBg = this.pids
-        this.getCidPidList()
-        // 选课页面 获取刷新后数据，使用url cid pid
-        this.getcourseList(this.categoryId, this.pids)
-      }
-    } else {
-      // 点击最新项目 查看更多 页面
-      this.cidBg = splitUrl(0, 1)
-      //判断是否为最新项目
-      if (this.categoryId === '0') {
-      }
-      this.getNewProject()
-      // 项目页面 获取刷新后数据，使用url cid pid
-      this.getNewProjectList(this.categoryId, this.pids)
-    }
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.initParams()
+    this.initListCard()
+    this.initHeader()
   }
 }
 </script>
