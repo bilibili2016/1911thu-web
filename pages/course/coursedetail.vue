@@ -277,7 +277,6 @@ export default {
           this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
-          console.log(this.commentators)
 
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           let totalEvaluateInfo = response.data.totalEvaluateInfo

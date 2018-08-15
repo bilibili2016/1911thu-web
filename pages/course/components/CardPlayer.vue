@@ -8,7 +8,7 @@
 import { coursedetail, players } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { splitUrl } from '@/lib/util/helper'
+import { splitUrl, message } from '@/lib/util/helper'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
@@ -88,21 +88,13 @@ export default {
         //支付成功
         if (msg.pay_status == '0') {
           //执行重新播放视频
-          that.$message({
-            showClose: true,
-            type: 'warning',
-            message: msg.msg
-          })
+          message(that, 'warning', msg.msg)
           that.$bus.$emit('closePay')
           window.location.reload()
         }
         //支付失败
         if (msg.pay_status == '100100') {
-          that.$message({
-            showClose: true,
-            type: 'warning',
-            message: msg.msg
-          })
+          message(that, 'warning', msg.msg)
           return false
         }
       })
@@ -128,11 +120,7 @@ export default {
             this.closeCoverNum++
           }
         } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: res.msg
-          })
+          message(this, 'warning', res.msg)
           return false
         }
       })
@@ -242,13 +230,6 @@ export default {
     }
   },
   mounted() {
-    // 如果已经登录 调用默认课程信息
-    if (this.isAuthenticated) {
-      this.getdefaultCurriculumCatalog()
-    } else {
-      // 未登录 不调用
-    }
-
     this.$bus.$on('updateCourse', data => {
       this.playerForm = data
       this.autoplay = data.autoplay

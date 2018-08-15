@@ -12,7 +12,7 @@
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
-      <div v-if="hasCode">
+      <div v-if="hasCode" v-show="showMsg">
         <h5>
           <span @click="handleChoiceCourse">继续选课</span>
           <span @click="handleLinkProfile('tab-fourth')">查看订单</span>
@@ -21,7 +21,7 @@
           <span>
             <i>{{seconds}}</i>s后</span>前往个人中心</div>
       </div>
-      <div v-else>
+      <div v-else v-show="showMsg">
         <div class="tips">
           <p>您购买的商品已生成兑换码</p>
           <p>请前往
@@ -54,7 +54,8 @@ export default {
       seconds: 5,
       link: null,
       interval: null,
-      links: ''
+      links: '',
+      showMsg: false
     }
   },
   methods: {
@@ -95,6 +96,7 @@ export default {
 
       payResult.payComplete(this.payCompleteForm).then(response => {
         this.payCompleteData = response.data
+        this.showMsg = true
         if (response.data.curriculumListType == '1') {
           // 订单内只有课程
           this.links = 'tab-second'

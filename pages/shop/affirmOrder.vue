@@ -34,6 +34,7 @@ import orderInfo from '@/pages/shop/affirmorder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
 import noMsg from '@/pages/shop/affirmorder/noMsg'
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
+import { message } from '@/lib/util/helper'
 export default {
   components: {
     'v-banner': Banner,
@@ -104,10 +105,7 @@ export default {
           newWindow.location.href =
             window.location.origin + '/shop/' + res.data.id
         } else {
-          this.$message({
-            type: 'error',
-            message: res.msg
-          })
+          message(this, 'error', res.msg)
         }
       })
     },
@@ -126,11 +124,7 @@ export default {
           }
           this.loadGoods = false
         } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: res.msg
-          })
+          message(this, 'error', res.msg)
           let timer = setInterval(() => {
             if (this.noMsg.backSeconds <= 1) {
               clearInterval(timer)

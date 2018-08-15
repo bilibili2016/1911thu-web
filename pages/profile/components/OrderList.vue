@@ -63,6 +63,7 @@ import { timestampToTime } from '@/lib/util/helper'
 import { order } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import { message } from '@/lib/util/helper'
 export default {
   props: ['data', 'config'],
   data() {
@@ -104,17 +105,9 @@ export default {
       order.cancelOrder(this.orderForm).then(response => {
         if (response.status === 0) {
           this.$emit('handleUpdate', true)
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '订单已取消！'
-          })
+          message(this, 'success', '订单已取消！')
         } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: response.msg
-          })
+          message(this, 'error', response.msg)
         }
       })
     },
@@ -130,11 +123,7 @@ export default {
         if (response.status === 0) {
           this.$router.push('/shop/shoppingCart')
         } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: response.msg
-          })
+          message(this, 'error', response.msg)
         }
       })
     },
