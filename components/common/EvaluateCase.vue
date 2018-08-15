@@ -1,6 +1,6 @@
 <template>
   <!-- 课程评价 -->
-  <div class="evaluate-tag">
+  <div class="evaluate-tag" v-if="config.card_type!=='project'">
     <div class="note">
       <h4>课程评价
         <i v-show="isClose" class="el-icon-close fr" @click="closeEvaluate"></i>
@@ -36,7 +36,7 @@ import { uniqueArray } from '@/lib/util/helper'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  props: ['courseList', 'isClose'],
+  props: ['courseList', 'isClose', 'config'],
   data() {
     return {
       reTagBtn: [],

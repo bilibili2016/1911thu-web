@@ -20,7 +20,6 @@
       <div class="content fl">
         <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config"></v-coursecatelog>
       </div>
-
       <div style="width:345px" class="fr">
         <!-- 讲师介绍 -->
         <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
@@ -75,7 +74,8 @@ export default {
     return {
       BreadCrumb: {
         type: 'courseDetail',
-        text: '课程详情'
+        text: '课程详情',
+        project: '项目详情'
       },
       isClose: false, //评论组件是否有关闭按钮
       showCheckedCourse: false,
@@ -91,7 +91,7 @@ export default {
       commentators: [],
       pageCount: null,
       config: {
-        card_type: 'course'
+        card_type: 'project'
       },
       courseList: {},
       kidForm: {
@@ -330,7 +330,7 @@ export default {
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {
           this.$router.push(
-            '/course/coursedetail' +
+            '/course/detail' +
               '?kid=' +
               splitUrl(0, 1) +
               '&bid=' +

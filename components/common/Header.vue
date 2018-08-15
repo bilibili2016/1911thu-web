@@ -3,11 +3,11 @@
     <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
-      <div class="headerLogo fl" @click="goLinker('/')">
+      <div class="headerLogo fl" @click="goLinkersHome('/')">
         <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
       </div>
       <div class="backHome">
-        <span @click="goLinker('/')">首页</span>
+        <span @click="goLinkersHome('/')">首页</span>
       </div>
       <!-- 课程，项目 -->
       <v-tabs></v-tabs>
@@ -299,6 +299,14 @@ export default {
     goLinker(item) {
       this.$router.push(item)
     },
+    // (window.location.origin)
+    goLinkers(item) {
+      this.$router.replace('/')
+    },
+    goLinkersHome(item) {
+      this.$router.push('/')
+      this.$bus.$emit('getUserInfo')
+    },
     goLink(item) {
       this.gidForm.gids = item
       this.setGid(this.gidForm)
@@ -307,7 +315,9 @@ export default {
     },
     // 获取用户头像
     getUserInfo() {
+      console.log('进getUserInfo接口了')
       header.getUserInfo().then(res => {
+        // console.log(res, '这是res')
         if (res.status === '100008') {
           this.getHttp = false
           persistStore.set('isSingleLogin', false)

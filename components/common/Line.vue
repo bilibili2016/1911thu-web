@@ -8,8 +8,8 @@
       <!-- {{privileMsg}}  1{{isAuthenticated}} -->
       <!-- 遍历小节 -->
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index">
-
-        <span class="fl playIcon">
+        <!-- 小节上 左侧播放图片 项目中的 课程详情不展示-->
+        <span class="fl playIcon" v-if="config.card_type!=='project'">
           <i class="el-icon-caret-right"></i>
         </span>
 
@@ -23,21 +23,25 @@
             </span>
           </span>
           <!-- 用户 登录 -->
-          <span v-if="isAuthenticated" class="fr">
-            <span v-if="privileMsg === false">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
-              <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
+          <!-- 项目 中课程详情 不显示按钮 config.card_type!=='project'-->
+          <span v-if="config.card_type!=='project'" class="fr">
+            <span v-if="isAuthenticated" class="fr">
+              <span v-if="privileMsg === false">
+                <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
+                <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
+              </span>
+              <span v-if="privileMsg === true">
+                <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+                <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+              </span>
             </span>
-            <span v-if="privileMsg === true">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
-              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+            <span v-else class="fr clearfix">
+              <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
+              <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
+              <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
             </span>
           </span>
-          <span v-else class="fr clearfix">
-            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
-            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
-            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
-          </span>
+
         </p>
         <span v-if="privileMsg === true">
           <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
@@ -54,7 +58,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { auth, line } from '~/lib/v1_sdk/index'
 import { splitUrl } from '~/lib/util/helper'
 export default {
-  props: ['catalogs', 'privileMsg'],
+  props: ['catalogs', 'privileMsg', 'config'],
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },
