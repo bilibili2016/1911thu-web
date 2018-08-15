@@ -1,34 +1,34 @@
 <template>
-    <div>
-        <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
-            <el-form-item prop="phones">
-                <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
-            </el-form-item>
-            <el-form-item prop="codes">
-                <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-                <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
-            </el-form-item>
-            <el-form-item prop="passwords">
-                <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
-            </el-form-item>
+  <div>
+    <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
+      <el-form-item prop="phones">
+        <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
+      </el-form-item>
+      <el-form-item prop="codes">
+        <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
+        <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
+      </el-form-item>
+      <el-form-item prop="passwords">
+        <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
+      </el-form-item>
 
-            <el-form-item prop="">
-                <el-checkbox-group v-model="registerData.checked">
-                    <el-checkbox label="同意" name="checked"></el-checkbox>
-                </el-checkbox-group>
-            </el-form-item>
-            <el-row>
-                <el-button :disabled="isClick" class="registerUser " :class="{noSubmit:isHasClass}" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
-            </el-row>
-        </el-form>
-        <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
-        <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
-    </div>
+      <el-form-item prop="">
+        <el-checkbox-group v-model="registerData.checked">
+          <el-checkbox label="同意" name="checked"></el-checkbox>
+        </el-checkbox-group>
+      </el-form-item>
+      <el-row>
+        <el-button :disabled="isClick" class="registerUser " :class="{noSubmit:isHasClass}" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
+      </el-row>
+    </el-form>
+    <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
+    <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
+  </div>
 </template>
 
 <script>
 import { auth, header } from '~/lib/v1_sdk/index'
-import { encryption } from '~/lib/util/helper'
+import { encryption, message } from '~/lib/util/helper'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 export default {
   props: ['data'],
@@ -180,11 +180,13 @@ export default {
           if (valid) {
             this.loadLogin = true
             auth.signUp(this.registerData).then(response => {
-              this.$message({
-                showClose: true,
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
-              })
+              // this.$message({
+              //   showClose: true,
+              //   type: response.status === 0 ? 'success' : 'error',
+              //   message: response.msg
+              // })
+              let types = response.status === 0 ? 'success' : 'error'
+              message(this, types, response.msg)
               if (response.status === 0) {
                 // this.alreadySignin()
                 // this.close()
