@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 首页课程列表、课程分类列表、项目分类列表 -->
-    <div class="card-category profile">
+    <div class="homeCard card-category profile">
       <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
         <el-card shadow="never" body-style="padding: 0;" :class="['itemBox',{'learn':config.mask}]">
           <!-- 选课使用的勾选 -->

@@ -68,7 +68,7 @@
         <!-- 我的项目 -->
         <el-tab-pane class="my-course" name="tab-third">
           <span slot="label" class="tabList">
-            <i class="icon-course"></i> 我的项目</span>
+            <i class="icon-project"></i> 我的项目</span>
           <el-card class="changeNav">
             <el-tabs v-model="activeProject" @tab-click="handleProject">
               <!-- 我的项目 学习中 -->
@@ -932,7 +932,7 @@ export default {
     },
     chengeItem() {
       this.activeTicket = 'ticketSecond'
-      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
       this.getHistoryOrderData()
     }
   },
