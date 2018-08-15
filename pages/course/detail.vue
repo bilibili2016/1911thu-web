@@ -357,8 +357,6 @@ export default {
       this.evaluateListForm.ids = splitUrl(0, 1)
 
       this.activeName = 'second'
-      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     },
     //评论之后的回调
     cbList() {

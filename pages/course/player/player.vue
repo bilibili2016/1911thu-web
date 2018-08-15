@@ -727,8 +727,6 @@ export default {
 
     // socialShare('.social-share', $config)
     window.addEventListener('resize', this.resize)
-    document.getElementsByClassName('headerBox')[0].style.display = 'none'
-    document.getElementsByClassName('footerBox')[0].style.display = 'none'
 
     this.getPlayerInfo()
     this.getCurriculumPlayInfo()

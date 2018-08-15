@@ -47,6 +47,7 @@ import CodeCase from '@/components/header/CodeCase.vue'
 import LRBtn from '@/components/header/LRBtn.vue'
 import HeaderImg from '@/components/header/HeaderImg.vue'
 import HREntry from '@/components/header/HREntry.vue'
+import { message } from '@/lib/util/helper'
 export default {
   components: {
     'v-tabs': Tabs,
@@ -150,10 +151,11 @@ export default {
             }
           )
             .then(() => {
-              this.$message({
-                type: 'info',
-                message: '已取消绑定'
-              })
+              // this.$message({
+              //   type: 'info',
+              //   message: '已取消绑定'
+              // })
+              message(this, 'info', '已取消绑定')
             })
             .catch(() => {
               // 添加绑定课程
@@ -168,11 +170,12 @@ export default {
     goBind() {
       header.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: res.msg
-          })
+          // this.$message({
+          //   showClose: true,
+          //   type: 'success',
+          //   message: res.msg
+          // })
+          message(this, 'success', res.msg)
           if (res.data.invitation_code_type == '1') {
             //兑换码内只有课程
             this.skip = 'tab-second'
@@ -194,11 +197,12 @@ export default {
           this.goLink(this.skip)
         } else if (res.status === '100100') {
           this.bindForm.showErr = true
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: res.msg
-          })
+          // this.$message({
+          //   showClose: true,
+          //   type: 'error',
+          //   message: res.msg
+          // })
+          message(this, 'error', res.msg)
           this.bindForm.error = res.msg
         }
       })
@@ -289,10 +293,11 @@ export default {
             break
         }
       } else {
-        this.$message({
-          type: 'error',
-          message: '请输入不包含特殊字符且小于30个字符的关键词！'
-        })
+        // this.$message({
+        //   type: 'error',
+        //   message: '请输入不包含特殊字符且小于30个字符的关键词！'
+        // })
+        message(this, 'error', '请输入不包含特殊字符且小于30个字符的关键词！')
       }
     },
     // 跳转到指定页
@@ -391,6 +396,8 @@ export default {
     }
   },
   mounted() {
+    // message('success', '测试数据')
+
     let me = this
 
     this.getUserInfo()
@@ -398,15 +405,22 @@ export default {
     this.$bus.$on('updateCount', () => {
       me.getCount()
     })
-    this.$bus.$emit('bannerShow', false)
-    this.$bus.$on('bannerShow', data => {
-      if (data === true) {
-        this.bannerMsg = true
-      } else {
-        this.bannerMsg = false
-      }
+    // this.$bus.$emit('bannerShow', false)
+    // this.$bus.$on('bannerShow', data => {
+    //   if (data === true) {
+    //     this.bannerMsg = true
+    //   } else {
+    //     this.bannerMsg = false
+    //   }
+    // })
+    // 监听 优惠专题入口的banner 显示
+    this.$bus.$on('bannerImgShow', () => {
+      this.bannerMsg = true
     })
-
+    // 监听 优惠专题入口的banner 隐藏
+    this.$bus.$on('bannerImgHide', () => {
+      this.bannerMsg = false
+    })
     this.$bus.$on('changeimg', data => {
       this.user.userImg = data
     })
@@ -448,11 +462,12 @@ export default {
           this.bindForm.showErr = false
           this.bindForm.isInput = true
         } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: '请您输入正确的兑换码！'
-          })
+          // this.$message({
+          //   showClose: true,
+          //   type: 'error',
+          //   message: '请您输入正确的兑换码！'
+          // })
+          message(this, 'error', '请您输入正确的兑换码！')
         }
       }
     }

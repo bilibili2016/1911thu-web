@@ -21,7 +21,7 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { coursedetail } from '~/lib/v1_sdk/index'
-import { splitUrl } from '@/lib/util/helper'
+import { splitUrl, message } from '@/lib/util/helper'
 export default {
   props: ['collectData'],
   data() {
@@ -58,18 +58,10 @@ export default {
       this.addCollectionForm.types = this.collectData.types
       coursedetail.addCollection(this.addCollectionForm).then(response => {
         if (response.status === 0) {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '添加收藏成功'
-          })
+          message(this, 'success', '添加收藏成功')
           this.collectData.isCollect = 1
         } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: response.msg
-          })
+          message(this, 'error', response.msg)
         }
       })
     },
@@ -82,17 +74,9 @@ export default {
       coursedetail.deleteCollection(this.addCollectionForm).then(response => {
         if (response.status === 0) {
           this.collectData.isCollect = 0
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '取消收藏成功'
-          })
+          message(this, 'success', '取消收藏成功')
         } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: response.msg
-          })
+          message(this, 'error', response.msg)
         }
       })
     }

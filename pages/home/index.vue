@@ -272,7 +272,7 @@ export default {
     this.$bus.$on('reLogin', data => {
       this.getAll()
     })
-    this.$bus.$emit('bannerShow', false)
+    // this.$bus.$emit('bannerShow', false)
     this.$bus.$on('isSingleLogin', data => {
       this.getNewCourseList()
     })

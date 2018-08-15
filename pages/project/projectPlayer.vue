@@ -44,7 +44,7 @@
           <i class="el-icon-close fr" @click="closeEvaluate"></i>
         </h4>
         <h5>请问该课程对您有帮忙吗？快来评个分吧！</h5>
-        <h6>课程评分：
+        <h6>项目评分：
 
           <el-rate v-model="rateModel" @change="changeRate"></el-rate>
 
@@ -555,8 +555,6 @@ export default {
     }
   },
   mounted() {
-    document.getElementsByClassName('headerBox')[0].style.display = 'none'
-    document.getElementsByClassName('footerBox')[0].style.display = 'none'
     this.resize()
     window.addEventListener('resize', this.resize)
     if (this.isAuthenticated) {
@@ -584,6 +582,15 @@ export default {
         this.playing = this.pauseImg
       }
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('headerFooterHide')
+    })
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$bus.$emit('headerFooterShow')
+    next(vm => {})
   }
 }
 </script>

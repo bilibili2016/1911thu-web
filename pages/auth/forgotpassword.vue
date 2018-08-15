@@ -120,6 +120,7 @@ export default {
               type: 'error',
               message: '您的手机号还未注册！'
             })
+
             this.bindTelData.captchaDisable = true
           } else if (response.status === '100100') {
             this.$message({

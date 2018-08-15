@@ -446,8 +446,7 @@ export default {
       }
     },
     initHeader() {
-      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+
     },
     // 初始化params参数
     initParams() {

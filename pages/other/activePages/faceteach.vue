@@ -51,10 +51,7 @@ export default {
       cenImg: 'http://papn9j3ys.bkt.clouddn.com/ccenter.png'
     }
   },
-  mounted() {
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-  }
+  mounted() {}
 }
 </script>
 
