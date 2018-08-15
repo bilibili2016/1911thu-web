@@ -4,7 +4,8 @@
     <span v-show="config.position">当前位置：</span>
     <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item v-if="config.project">{{config.project}}</el-breadcrumb-item>
+      <!-- 跳转到项目分类列表 -->
+      <el-breadcrumb-item :to="{ path: '/course/category?cid=16&cp=1&xid=0&pid=0' }" v-if="config.project">{{config.project}}</el-breadcrumb-item>
       <el-breadcrumb-item>{{config.text}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
