@@ -15,16 +15,37 @@ body {
   // background-color: #fff;
   // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04);
   flex: 0 0 auto;
+  white-space: nowrap;
   .main {
-    width: 1100px;
+    // width: 1100px;
+    width: 84%;
     height: 90px;
+    box-sizing: border-box;
     margin: 0 auto;
     display: flex;
     align-items: center;
+    white-space: nowrap;
+    position: relative;
+    .header-fl {
+      // float: left;
+      white-space: nowrap;
+      width: 535px;
+      height: 50px;
+      position: absolute;
+      left: 0;
+    }
+    .header-fr {
+      // float: right;
+      position: absolute;
+      right: 0;
+      white-space: nowrap;
+      width: 550px;
+    }
     .headerLogo {
       width: 130px;
       height: 50px;
       cursor: pointer;
+      float: left;
       img {
         width: 130px;
         height: 50px;
@@ -39,27 +60,106 @@ body {
       }
     }
     .backHome {
-      width: 30px;
-      margin-left: 37px;
+      width: 35px;
+      margin: 0 30px;
       cursor: pointer;
+      font-size: 16px;
+      float: left;
+      line-height: 50px;
+      box-sizing: border-box;
+      &:hover {
+        border-bottom: 2px solid #6417a6;
+        color: #6417a6;
+      }
     }
+
+    .dropdown {
+      float: left;
+      line-height: 50px;
+      .dropItem {
+        float: left;
+        box-sizing: border-box;
+        position: relative;
+        margin-right: 40px;
+        .el-dropdown-link {
+          font-size: 16px;
+          color: #222;
+          i.el-icon-arrow-down {
+            display: none;
+            width: 17px;
+            position: absolute;
+            right: -18px;
+            top: 18px;
+          }
+        }
+        .drops {
+          display: none;
+          position: absolute;
+          left: -32px;
+          top: 53px;
+          background-color: #fff;
+          width: 126px;
+          ul {
+            width: 100%;
+            padding-top: 17px;
+            li {
+              width: 100%;
+              height: 60px;
+              line-height: 60px;
+              text-align: center;
+              font-size: 16px;
+              color: #222;
+              background-color: #fff;
+
+              &:hover {
+                background-color: #eee;
+                color: #6417a6;
+              }
+            }
+          }
+        }
+        &:hover {
+          border-bottom: 2px solid #6417a6;
+          .el-dropdown-link {
+            color: #6417a6;
+            i.el-icon-arrow-down {
+              display: block;
+            }
+          }
+
+          .drops {
+            display: block;
+          }
+        }
+      }
+    }
+
     .teach {
-      width: 60px;
-      margin-left: 20px;
+      // margin-left: 20px;
       cursor: pointer;
+      float: left;
+      line-height: 50px;
+      font-size: 16px;
+      color: #222;
+      &:hover {
+        border-bottom: 2px solid #6417a6;
+        color: #6417a6;
+      }
     }
     .search {
       width: 170px;
-      height: 34px;
-      line-height: 34px; // margin-left: 289px;
-      margin-left: 48px;
+      height: 30px;
       border-bottom: 1px solid #7d7d7d;
       position: relative;
+      float: right;
+      margin-top: 6px;
+      line-height: 32px;
       input {
         width: 150px;
         height: 28px;
         font-size: 14px;
         color: #222;
+        text-indent: 0.5em;
       }
       input::-webkit-input-placeholder {
         color: #aaa;
@@ -94,25 +194,28 @@ body {
       }
     }
     .HREntry {
-      margin-left: 54px;
-      height: 20px;
+      float: right;
+      // line-height: 50px;
       &.islogined {
-        margin-left: 70px;
-        height: 20px;
       }
       span {
         color: #222;
-        width: 90px;
-        padding: 0 10px 0 10px;
-        text-align: right;
-        vertical-align: top;
+        float: left;
         cursor: pointer;
         transition: all 300ms;
-        &.center {
-          margin-top: 3px;
+        &.topCenter {
+          margin-top: 17px;
+        }
+        &.topCode {
+          margin: 17px 15px 0 50px;
         }
         &.hrin {
+          width: 100px;
+          height: 17px;
+          text-align: center;
           position: relative;
+          border-left: 1px solid #222;
+          border-right: 1px solid #222;
           i {
             display: inline-block;
             width: 45px;
@@ -121,8 +224,8 @@ body {
               no-repeat;
             background-size: contain;
             position: absolute;
-            top: -25px;
-            right: -10px;
+            top: -26px;
+            right: 3px;
           }
         }
       }
@@ -130,7 +233,7 @@ body {
         display: inline-block;
         padding: 0;
         width: auto;
-        margin-right: 22px;
+        margin: 15px 0 0 20px;
         position: relative;
         cursor: pointer;
         vertical-align: top;
@@ -166,10 +269,11 @@ body {
         color: #8f4acb;
       }
       .downLoad {
-        height: 40px;
+        // height: 40px;
         display: inline-block;
         position: relative;
-        padding: 0 22px;
+        // padding: 0 22px;
+        margin: 16px 0 0 15px;
         cursor: pointer;
         &:hover .downApp {
           opacity: 1;
@@ -180,6 +284,7 @@ body {
           display: inline-block;
           width: 14px;
           height: 20px;
+          margin-bottom: -6px;
           cursor: pointer;
           background: url('~assets/images/phone.png') no-repeat;
           background-size: contain;
@@ -267,12 +372,18 @@ body {
         }
       }
     }
+
     .lrBtn {
+      float: right;
+      margin-left: 30px;
+      height: 34px;
+      margin-top: 14px;
+      padding-top: 2px;
       span {
-        width: 40px;
-        height: 34px;
-        line-height: 34px;
-        text-align: center;
+        // width: 40px;
+        // height: 34px;
+        // line-height: 34px;
+        // text-align: center;
         font-size: 16px;
         cursor: pointer;
         transition: all 300ms;
@@ -285,6 +396,8 @@ body {
       height: 44px;
       position: relative;
       cursor: pointer;
+      float: right;
+      margin-left: 30px;
       &:hover .subPages {
         opacity: 1;
         display: block;
@@ -324,8 +437,8 @@ body {
           cursor: pointer;
           transition: all 300ms;
           &:hover {
-            background-color: #9a5cd0;
-            color: #fff;
+            background-color: #eee;
+            color: #9a5cd0;
           }
         }
       }
@@ -679,4 +792,8 @@ body {
 }
 .mobile-login {
   float: left;
+}
+
+.firstLogin .el-button {
+  margin: 65px 0 0 -96px !important;
 }

@@ -17,10 +17,10 @@
         <el-select v-model="psnForm.province" placeholder="省">
           <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
         </el-select>
-        <el-select v-model="psnForm.city" placeholder="市">
+        <el-select v-model="psnForm.city" placeholder="市" no-data-text="请先选择所在省份">
           <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
         </el-select>
-        <el-select v-model="psnForm.area" placeholder="区">
+        <el-select v-model="psnForm.area" placeholder="区" no-data-text="请先选择所在城市">
           <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
         </el-select>
       </el-form-item>

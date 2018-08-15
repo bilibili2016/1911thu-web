@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pay" v-show="showPay">
+    <div class="pay">
       <div class="note">
         <i @click="close" class="el-icon-close fr"></i>
         <h4>尊敬的用户，该课程需

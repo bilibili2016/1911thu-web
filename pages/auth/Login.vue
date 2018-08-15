@@ -9,7 +9,7 @@
         <el-tab-pane label="登录" name="login">
           <!-- 登录 表单-->
           <!-- 账号密码登录-->
-          <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === false">
+          <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm firstLogin" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === false">
             <!-- 账号密码登录 -->
             <div>
               <el-form-item prop="phonenum">
