@@ -139,12 +139,13 @@
           <span class="courseNumber clearfix">
             <span class="deleteChecked" @click="handleDeleteAll">删除选中的课程</span>
             <span class="person">购买人数：</span>
-            <el-input-number v-model="numForm.number" :step="1" :min="1" :max="9999" class="courseNumberInput" @change="changeNumber"></el-input-number>
-            <!-- <span class="number clearfix">
-                <i class="fl minus el-icon-minus"  @click="delNumber"></i>
-                <input type="text" class="fl num" v-model="numForm.number" @input="setPatten" @blur="changeNumber">
-                <i class="fl add el-icon-plus" @click="addNumber"></i>
-              </span> -->
+            <!-- onselectstart方法为禁止多次点击选中文本 -->
+            <span class="number clearfix" unselectable="on" onselectstart="return false;">
+              <i class="fl minus" v-if="numForm.number<=1">-</i>
+              <i class="fl minus" v-else @click="delNumber">-</i>
+              <input type="text" class="fl num" v-model="numForm.number" @blur="changeNumber">
+              <i class="fl add" @click="addNumber">+</i>
+            </span>
           </span>
           <span class="commitOrder fr">
             <el-button class="notGray" @click="showCommit" v-if="canSubmit">去结算</el-button>
@@ -488,13 +489,6 @@ export default {
     },
     handleSelect(item) {
       this.companyInfo.companyname = item
-    },
-    setPatten() {
-      let reg = new RegExp('/^[0-9]*$/')
-      if (!reg.test(this.numForm.number)) {
-        let str = this.numForm.number.toString()
-        this.numForm.number = str.replace(this.numForm.number, 1)
-      }
     },
     // 点击全选 课程 + 项目
     handleSelectAll() {
@@ -989,10 +983,21 @@ export default {
       }
     },
     handleSelect(item, index) {},
-
+    delNumber() {
+      if (this.numForm.number <= 1) {
+        this.numForm.number = 1
+      } else {
+        this.numForm.number--
+      }
+      this.changeCartNumber()
+    },
+    addNumber() {
+      this.numForm.number++
+      this.changeCartNumber()
+    },
     // 点击购物车下面加减
     changeNumber() {
-      if (typeof this.numForm.number !== 'number' || this.numForm.number < 1) {
+      if (!/^[0-9]*$/.test(this.numForm.number) || this.numForm.number < 1) {
         this.numForm.number = 1
       }
       this.changeCartNumber()

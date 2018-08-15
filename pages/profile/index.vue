@@ -170,12 +170,6 @@
             <i class="icon-set"></i> 个人设置</span>
           <v-person @update="updateUserInfo"></v-person>
         </el-tab-pane>
-        <!-- 绑定Id -->
-        <!-- <el-tab-pane name="tab-sixth">
-          <span slot="label" class="tabList">
-            <i class="icon-bind"></i> 兑换码</span>
-          <v-bind></v-bind>
-        </el-tab-pane> -->
         <!-- 课程码管理 -->
         <el-tab-pane class="my-course my-invitation" name="tab-seventh">
           <span slot="label" class="tabList">
@@ -854,6 +848,8 @@ export default {
     },
     handleTicket(item) {
       if (item.name === 'ticketFirst') {
+        // 消除上次默认选中
+        this.$bus.$emit('CloseAllChecked')
         this.getUnTicketData()
       }
       if (item.name === 'ticketSecond') {
@@ -935,9 +931,8 @@ export default {
       })
     },
     chengeItem() {
-      console.log('jinlaile')
-
       this.activeTicket = 'ticketSecond'
+      window.scrollTo(0, 0)
       this.getHistoryOrderData()
     }
   },

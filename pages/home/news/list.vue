@@ -28,6 +28,7 @@ export default {
     return {
       BreadCrumb: {
         type: 'news',
+        position: true, //是否显示当前位置
         text: '学堂资讯'
       },
       bannerImg: 'http://papn9j3ys.bkt.clouddn.com/newList-bg.png',

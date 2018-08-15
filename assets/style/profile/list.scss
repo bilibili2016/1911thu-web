@@ -134,18 +134,21 @@
         }
       }
       // 已过期的图片
-      .readyImg {
+      .readyImg,
+      .overtime {
         width: 75px;
         height: 49px;
         position: absolute;
-        top: 40%;
-        left: 94%;
-        margin-left: -70px;
-        margin-top: -20px;
+        top: 20%;
+        left: 65%;
         img {
           width: 75px;
           height: 49px;
         }
+      }
+      .overtime {
+        top: 24%;
+        left: 70%;
       }
       .line-wrap {
         width: 100%;
@@ -211,7 +214,7 @@
           color: rgba(136, 136, 136, 1);
         }
         .already {
-          transition: all 500ms linear;
+          color: #888;
         }
       }
       &.learn {

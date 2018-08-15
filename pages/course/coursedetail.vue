@@ -75,6 +75,7 @@ export default {
     return {
       BreadCrumb: {
         type: 'courseDetail',
+        position: false, //是否显示当前位置
         text: '课程详情'
       },
       isClose: false, //评论组件是否有关闭按钮

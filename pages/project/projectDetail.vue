@@ -28,7 +28,6 @@
 <script>
 import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
 import { mapActions, mapGetters } from 'vuex'
-import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import Detail from '@/pages/project/components/Detail'
 import Procourse from '@/pages/project/components/ProjectCourse'
 import Proevaluate from '@/pages/project/components/ProjectEvaluate'
@@ -38,16 +37,11 @@ export default {
   components: {
     'v-procourse': Procourse,
     'v-proevaluate': Proevaluate,
-    'v-breadcrumb': BreadCrumb,
     'v-proproblems': Commonproblems,
     'v-detail': Detail
   },
   data() {
     return {
-      BreadCrumb: {
-        type: 'courseDetail',
-        text: '项目详情'
-      },
       projectDetailLoad: true,
       inlineLoad: true,
       evaluateDataLoad: true,

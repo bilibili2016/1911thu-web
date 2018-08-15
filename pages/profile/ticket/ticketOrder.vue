@@ -66,8 +66,10 @@
         </div>
       </div>
       <v-nomsg class="noOrder" v-else :config="noMsgTwl"></v-nomsg>
-      <!-- 发票弹框 -->
-      <v-ticket v-show="showInvoice" :checkedArr="checkedArr" @handleClose="close" @getUnTicketData="getUnTicketData"></v-ticket>
+      <!-- 发票弹框 第一步：填写发票信息-->
+      <v-ticket v-show="showInvoice" :checkedArr="checkedArr" @handleClose="close"></v-ticket>
+      <!-- 发票弹框 第二步：确认发票信息并提交-->
+      <v-comfirm :price="orderPrice" @getUnTicketData="getUnTicketData"></v-comfirm>
     </div>
   </div>
 </template>
@@ -78,12 +80,14 @@ import { timestampToTime } from '@/lib/util/helper'
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import TicketPop from '@/pages/profile/ticket/ticketPopup'
+import TicketConfirm from '@/pages/profile/ticket/ticketConfirm'
 import NoMsg from '@/pages/profile/pages/noMsg.vue'
 export default {
   props: ['orderData'],
 
   components: {
     'v-ticket': TicketPop,
+    'v-comfirm': TicketConfirm,
     'v-nomsg': NoMsg
   },
   data() {
@@ -102,6 +106,7 @@ export default {
       checkedArr: [],
       checkMsg: false,
       showInvoice: false,
+
       kidForm: {
         kids: ''
       }
@@ -129,7 +134,6 @@ export default {
         ).toFixed(2)
       }
       this.orderNum = this.checkedArr.length
-      console.log(this.checkedArr)
       if (this.checkedArr.length == this.ticketOrderData.length) {
         this.checkMsg = true
       } else {
@@ -236,6 +240,9 @@ export default {
   },
   mounted() {
     this.ticketOrderData = this.orderData
+    this.$bus.$on('CloseAllChecked', data => {
+      this.handleSelectAll(false)
+    })
   }
 }
 </script>

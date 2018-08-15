@@ -268,6 +268,13 @@
 
 .main-crumb {
   height: 85px;
+  .breadCrumb {
+    & > span {
+      line-height: 85px;
+      vertical-align: top;
+    }
+  }
+
   .main-crumbs {
     display: inline-block;
     line-height: 85px;
@@ -288,7 +295,7 @@
       height: 85px;
       .line-center {
         line-height: 85px;
-        & > span {
+        .collectSpan {
           font-size: 14px;
           height: 60px;
           vertical-align: middle;

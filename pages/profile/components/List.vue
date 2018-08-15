@@ -48,19 +48,21 @@
                 <div class="line-centers ">
                   <span class="studyPercent">已学习{{card.percent}}%</span>
                   <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
-                  <el-progress v-if="card.percent>0" :percentage="card.percent"></el-progress>
+                  <el-progress v-if="card.percent>0" :percentage="card.percent" :show-text="false"></el-progress>
                 </div>
               </div>
               <div v-if="config.card==='already' ">
                 <div class="line-centers ">
-                  <div class="already">已完成100%</div>
+                  <!-- <div class="already">已完成100%</div> -->
+                  <span class="already">已完成100%</span>
+                  <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
                 </div>
               </div>
               <div class="readyImg " v-if="config.card==='already' ">
                 <img :src="readyImg " alt=" ">
               </div>
               <!-- 我的课程 已过期的图片 -->
-              <div class="readyImg " v-if="config.card==='overtime' ">
+              <div class="overtime " v-if="config.card==='overtime' ">
                 <img :src="overTimeImg" alt=" ">
               </div>
               <!-- 我的课程 已过期的副标题 -->

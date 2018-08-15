@@ -161,9 +161,8 @@ export default {
                */
               socket.emit(
                 'watchRecordingTime',
-                // persistStore.get('curriculumId'),
                 splitUrl(0, 1),
-                persistStore.get('catalogId'),
+                splitUrl(1, 1),
                 playTime,
                 '',
                 1

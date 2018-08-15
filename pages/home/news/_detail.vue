@@ -45,6 +45,7 @@ export default {
     return {
       BreadCrumb: {
         type: 'newsDetail',
+        position: true, //是否显示当前位置
         text: '新闻资讯'
       },
       bannerImg: 'http://papn9j3ys.bkt.clouddn.com/profile_banner03.png',

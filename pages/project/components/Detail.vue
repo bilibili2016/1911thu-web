@@ -1,9 +1,21 @@
 <template>
   <div>
+    <!-- 面包屑 收藏分享 -->
+    <div class="main-crumb">
+      <div class="fl">
+        <!-- 面包屑组件 -->
+        <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+      </div>
+      <div class="fr">
+        <!-- 收藏分享 -->
+        <v-collection :collectData="collectMsg"></v-collection>
+      </div>
+    </div>
     <!-- 项目详情页上部分-项目信息 -->
     <h1>{{projectDetail.title}}</h1>
     <h3>{{projectDetail.deputy_title}}</h3>
     <div class="detail clearfix">
+
       <div class="some">
         <div>
           <h5>课时</h5>
@@ -36,14 +48,29 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import BreadCrumb from '@/components/common/BreadCrumb.vue'
+import Collection from '@/components/common/Collection.vue'
 import { projectdetail } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 export default {
+  components: {
+    'v-breadcrumb': BreadCrumb,
+    'v-collection': Collection
+  },
   props: ['projectDetail'],
   data() {
     return {
       project: {
         projectId: '1'
+      },
+      BreadCrumb: {
+        type: 'projectDetail',
+        position: false, //是否显示当前位置
+        text: '项目详情'
+      },
+      collectMsg: {
+        types: 2,
+        isCollect: 0
       },
       shoppingForm: {
         type: 2,
@@ -94,6 +121,7 @@ export default {
   },
   mounted() {
     this.project.projectId = window.location.search.split('=')[1]
+    this.collectMsg.isCollect = this.projectDetail.is_Collection
   }
 }
 </script>

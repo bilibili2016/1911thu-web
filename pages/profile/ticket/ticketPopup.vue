@@ -27,7 +27,7 @@
         <div class="formLi clearfix" v-show="ticketForm.saveioc">
           <p class="fl">纳税人识别号</p>
           <p class="fr">
-            <input type="text" v-model="ticketForm.number" @blur="retfNumber" placeholder="输入纳税人识别号">
+            <input type="text" v-model="ticketForm.number" @change="retfNumber" placeholder="输入纳税人识别号">
           </p>
         </div>
         <div class="formLi clearfix">
@@ -80,7 +80,7 @@
         </div>
         <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
         <div class="operation">
-          <span class="a" @click="addInvoiceBefor">保存</span>
+          <span class="a" @click="addInvoiceBefor">下一步</span>
           <span @click="close">取消</span>
         </div>
       </div>
@@ -271,7 +271,7 @@
             </p>
           </div>
           <div class="operation">
-            <span class="333" @click="addZZTicketBefore">保存</span>
+            <span class="333" @click="addZZTicketBefore">下一步</span>
             <span @click="nextStep('stepTwo')">返回</span>
           </div>
         </div>
@@ -293,8 +293,6 @@ export default {
         type: 'ticket'
       },
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
-      orderPrice: 0,
-      orderNum: 0,
       ticketOrderData: [],
       singleCheck: '',
       index: 0,
@@ -320,7 +318,6 @@ export default {
       orderID: [],
       gidForm: { gids: null },
       choose: '1',
-      commitOrders: {},
       ticketForm: {
         companyname: null,
         ticket: true,
@@ -343,26 +340,7 @@ export default {
       },
 
       invoiceForm: {
-        invoiceId: '',
-        choose: '1',
-        companyname: null,
-        ticket: true,
-        number: null,
-        phones: null,
-        bank: null,
-        account: null,
-        address: null,
-        province: null,
-        city: null,
-        area: null,
-        name: null,
-        tel: null,
-        radio: 1,
-        types: '', //发票类型
-        saveioc: false,
-        isRadio: true,
-        others: null,
-        ids: null
+        types: '' //发票类型
       },
       zzTicketForm: {
         companyname: '',
@@ -630,12 +608,19 @@ export default {
         this.ticketForm.number = ''
       }
       if (this.ticketForm.types == 2) {
-        if (!this.tfNumber) {
+        if (
+          this.ticketForm.number.length == 15 ||
+          this.ticketForm.number.length == 18 ||
+          this.ticketForm.number.length == 20
+        ) {
+          this.tfNumber = true
+        } else {
           this.$message({
             showClose: true,
             type: 'error',
             message: '请输入正确的纳税人识别号！'
           })
+          this.tfNumber = false
           return false
         }
       }
@@ -826,130 +811,52 @@ export default {
     },
     // 添加发票信息
     addInvoiceInfo() {
-      this.ticketForm.orderID = this.checkedArr
-      this.zzTicketForm.orderID = this.checkedArr
-      // console.log(this.ticketForm)
-
       if (this.choose === '1') {
+        this.ticketForm.orderID = this.checkedArr
         if (this.ticketForm.isRadio) {
           this.ticketForm.others = '培训费'
         } else {
           this.ticketForm.others = '其他'
         }
+        // 地址编码转换成地址名展示发票信息框展示用
+        this.ticketForm.province_name = this.getProvince(
+          this.province,
+          this.ticketForm.province
+        )
+        this.ticketForm.city_name = this.getCity(
+          this.city,
+          this.ticketForm.city
+        )
+        this.ticketForm.area_name = this.getArea(
+          this.area,
+          this.ticketForm.area
+        )
 
-        return new Promise((resolve, reject) => {
-          ticketorder.addInvoiceInfo(this.ticketForm).then(res => {
-            if (res.status === 0) {
-              this.$message({
-                showClose: true,
-                type: 'success',
-                message: res.msg
-              })
-              this.invoiceForm.choose = this.choose
-              this.invoiceForm.types = this.ticketForm.types
-              this.commitOrders.ticketId = res.data.invoice_id
-              this.invoiceForm.companyname = this.ticketForm.companyname
-              this.invoiceForm.number = this.ticketForm.number
-              this.invoiceForm.address = this.ticketForm.address
-              this.invoiceForm.others = this.ticketForm.others
-              this.invoiceForm.tel = this.ticketForm.tel
-              this.invoiceForm.name = this.ticketForm.name
-              this.invoiceForm.province_name = this.getProvince(
-                this.province,
-                this.ticketForm.province
-              )
-              this.invoiceForm.city_name = this.getCity(
-                this.city,
-                this.ticketForm.city
-              )
-              this.invoiceForm.area_name = this.getArea(
-                this.area,
-                this.ticketForm.area
-              )
-              this.invoiceForm.radio = Number(this.ticketForm.radio)
-              this.invoiceForm.ticket = false
-              this.isShowTicket = true
-              this.commitOrders.ticketId = res.data.invoice_id
-
-              if (this.ticketForm.types == 1) {
-                this.invoiceForm.ticket = true
-              }
-              this.orderNum = 0
-              this.orderPrice = 0
-              // this.getUnTicketData()
-              this.$bus.$emit('chengeItem')
-              this.$emit('getUnTicketData')
-              this.$emit('handleClose')
-            } else {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: res.msg
-              })
-            }
-            resolve(true)
-          })
-        })
+        this.$emit('handleClose')
+        this.$bus.$emit('showConfirm', this.ticketForm)
       } else {
+        this.zzTicketForm.orderID = this.checkedArr
         if (this.zzTicketForm.isRadio) {
           this.zzTicketForm.others = '培训费'
         } else {
           this.zzTicketForm.others = '其他'
         }
-        return new Promise((resolve, reject) => {
-          ticketorder.addInvoiceInfo(this.zzTicketForm).then(res => {
-            if (res.status === 0) {
-              this.$message({
-                showClose: true,
-                type: 'success',
-                message: res.msg
-              })
-              this.invoiceForm.choose = this.choose
-              this.invoiceForm.types = this.zzTicketForm.types
-              this.invoiceForm.companyname = this.zzTicketForm.companyname
-              this.invoiceForm.number = this.zzTicketForm.number
-              this.invoiceForm.zcadd = this.zzTicketForm.zcadd
-              this.invoiceForm.address = this.zzTicketForm.address
-              this.invoiceForm.name = this.zzTicketForm.name
-              this.invoiceForm.tel = this.zzTicketForm.tel
-              this.invoiceForm.others = this.zzTicketForm.others
-              this.invoiceForm.bank = this.zzTicketForm.bank
-              this.invoiceForm.account = this.zzTicketForm.account
-              this.invoiceForm.phones = this.zzTicketForm.phones
-              this.invoiceForm.province_name = this.getProvince(
-                this.zzprovince,
-                this.zzTicketForm.province
-              )
-              this.invoiceForm.city_name = this.getCity(
-                this.zzcity,
-                this.zzTicketForm.city
-              )
-              this.invoiceForm.area_name = this.getArea(
-                this.zzarea,
-                this.zzTicketForm.area
-              )
-              this.invoiceForm.radio = Number(this.zzTicketForm.radio)
-              this.invoiceForm.ticket = false
-              this.isShowTicket = true
-              this.commitOrders.ticketId = res.data.invoice_id
-              // this.close()
-              this.$emit('handleClose')
-              this.stepOne = true
-              this.stepTwo = false
-              this.stepThree = false
-              // this.getUnTicketData()
-              this.$bus.$emit('chengeItem')
-              this.$emit('getUnTicketData')
-            } else {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: res.msg
-              })
-            }
-            resolve(true)
-          })
-        })
+        // 地址编码转换成地址名展示发票信息框展示用
+        this.zzTicketForm.province_name = this.getProvince(
+          this.zzprovince,
+          this.zzTicketForm.province
+        )
+        this.zzTicketForm.city_name = this.getCity(
+          this.zzcity,
+          this.zzTicketForm.city
+        )
+        this.zzTicketForm.area_name = this.getArea(
+          this.zzarea,
+          this.zzTicketForm.area
+        )
+        this.nextStep('stepOne')
+        this.$emit('handleClose')
+        this.$bus.$emit('showConfirm', this.zzTicketForm)
       }
     },
     // 获取发票信息
@@ -976,7 +883,6 @@ export default {
             this.ticketForm.radio = Number(res.data.content_type)
             this.ticketForm.others = res.data.content
             this.ticketForm.ticket = false
-            this.commitOrders.ticketId = res.data.id
             if (this.ticketForm.radio == 2) {
               this.ticketForm.isRadio = false
             } else {
@@ -1005,7 +911,6 @@ export default {
             this.zzTicketForm.address = res.data.address
             this.zzTicketForm.others = res.data.content
             this.zzTicketForm.radio = Number(res.data.content_type)
-            this.commitOrders.ticketId = res.data.id
             if (this.zzTicketForm.radio == 2) {
               this.zzTicketForm.isRadio = false
             } else {
