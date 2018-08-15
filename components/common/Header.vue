@@ -3,32 +3,38 @@
     <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
-      <div class="headerLogo fl" @click="goLinkersHome('/')">
-        <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
+      <div class="header-fl clearfix">
+        <div class="headerLogo fl" @click="goLinkersHome('/')">
+          <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
+        </div>
+        <div class="backHome">
+          <span @click="goLinkersHome('/')">首页</span>
+        </div>
+        <!-- 课程，项目 -->
+        <v-tabs></v-tabs>
+        <div class="teach" @click="goLinker('/home/teacher/list')">
+          <span>名师智库</span>
+        </div>
       </div>
-      <div class="backHome">
-        <span @click="goLinkersHome('/')">首页</span>
+      <div class="header-fr clearfix">
+        <!-- 登录注册按钮 -->
+        <v-lrbtn v-if="!isAuthenticated"></v-lrbtn>
+        <!-- 个人中心（头像） -->
+        <v-headerimg v-else :data="user"></v-headerimg>
+        <!-- 单位入口，兑换码，下载，购物车 -->
+        <v-hrin :class="['HREntry' ,{islogined : isAuthenticated }]"></v-hrin>
+        <div class="search">
+          <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
+          <i class="el-icon-search" @click="goSearch"></i>
+        </div>
+
       </div>
-      <!-- 课程，项目 -->
-      <v-tabs></v-tabs>
-      <div class="teach" @click="goLinker('/home/teacher/list')">
-        <span>名师智库</span>
-      </div>
-      <div class="search">
-        <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
-        <i class="el-icon-search" @click="goSearch"></i>
-      </div>
-      <!-- 单位入口，兑换码，下载，购物车 -->
-      <v-hrin :class="['HREntry' ,{islogined : isAuthenticated }]"></v-hrin>
-      <!-- 登录注册按钮 -->
-      <v-lrbtn v-if="!isAuthenticated"></v-lrbtn>
-      <!-- 个人中心（头像） -->
-      <v-headerimg v-else :data="user"></v-headerimg>
+      <!-- 兑换码弹框 -->
+      <v-code v-show="bindForm.isBind" :bindForm="bindForm"></v-code>
+      <!-- 登录注册 -->
+      <v-login></v-login>
     </div>
-    <!-- 兑换码弹框 -->
-    <v-code v-show="bindForm.isBind" :bindForm="bindForm"></v-code>
-    <!-- 登录注册 -->
-    <v-login></v-login>
+
   </div>
 </template>
 

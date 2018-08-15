@@ -105,4 +105,7 @@ export default {
   mounted() {}
 }
 </script>
+<style lang="scss" scoped>
+@import '~assets/style/other/enterpriseCustom';
+</style>
 
