@@ -935,9 +935,9 @@ export default {
       })
     },
     chengeItem() {
-      console.log('jinlaile')
-
       this.activeTicket = 'ticketSecond'
+      document.documentElement.scrollTop = 0
+      // ('html,body').animate({scrollTop: '0px'}, 800)
       this.getHistoryOrderData()
     }
   },
