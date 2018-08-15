@@ -50,7 +50,7 @@ export default {
       province: [],
       city: [],
       activeName: 'first',
-      hasPersonalInfo: true,
+      hasPersonalInfo: false,
       showPwd: true,
       updateSuccess: false,
       options: [],
