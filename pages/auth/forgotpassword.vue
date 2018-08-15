@@ -38,7 +38,7 @@
 <script>
 import { checkPhone, checkCode, checkPassord } from '~/lib/util/validatefn'
 import { auth } from '~/lib/v1_sdk/index'
-import { encryption } from '~/lib/util/helper'
+import { encryption, message } from '~/lib/util/helper'
 export default {
   data() {
     return {
@@ -115,18 +115,20 @@ export default {
       return new Promise((resolve, reject) => {
         auth.verifyPhone(this.fpData).then(response => {
           if (response.status === 0) {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: '您的手机号还未注册！'
-            })
+            // this.$message({
+            //   showClose: true,
+            //   type: 'error',
+            //   message: '您的手机号还未注册！'
+            // })
+            message(this, 'error', '您的手机号还未注册！')
             this.bindTelData.captchaDisable = true
           } else if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: response.msg
-            })
+            // this.$message({
+            //   showClose: true,
+            //   type: 'error',
+            //   message: response.msg
+            // })
+            message(this, 'error', response.msg)
             this.bindTelData.captchaDisable = true
           } else {
             if (this.bindTelData.seconds === 30) {
@@ -141,11 +143,13 @@ export default {
       this.fpData.ectpwd = encryption(this.fpData.password)
       return new Promise((resolve, reject) => {
         auth.forgetPasswordAjax(this.fpData).then(response => {
-          this.$message({
-            showClose: true,
-            type: response.status === 0 ? 'success' : 'error',
-            message: response.msg
-          })
+          // this.$message({
+          //   showClose: true,
+          //   type: response.status === 0 ? 'success' : 'error',
+          //   message: response.msg
+          // })
+          let types = response.status === 0 ? 'success' : 'error'
+          message(this, types, response.msg)
           if (response.status === 0) {
             this.$router.push('/')
           }
@@ -156,11 +160,13 @@ export default {
       if (!this.captchaDisable) {
         return new Promise((resolve, reject) => {
           auth.smsCodes(this.fpData).then(response => {
-            this.$message({
-              showClose: true,
-              type: response.status === 0 ? 'success' : 'error',
-              message: response.msg
-            })
+            let types = response.status === 0 ? 'success' : 'error'
+            message(this, types, response.msg)
+            // this.$message({
+            //   showClose: true,
+            //   type: response.status === 0 ? 'success' : 'error',
+            //   message: response.msg
+            // })
             if (response.status === 0) {
               this.captchaDisable = true
               this.fpData.getCode = this.fpData.seconds + '秒后重新发送'

@@ -52,6 +52,7 @@
 // 学堂资讯组件
 import { banner } from '~/lib/v1_sdk/index'
 import { mapGetters, mapActions } from 'vuex'
+import { message } from '@/lib/util/helper'
 export default {
   props: ['bannerImg', 'config', 'isUpdate', 'isShowUpAvtor'],
   computed: {
@@ -103,11 +104,7 @@ export default {
         this.fileForm.FILESS.push(reader.result)
         banner.uploadHeadImg(this.fileForm).then(response => {
           this.avator = response.data.full_path
-          this.$message({
-            showClose: true,
-            message: response.msg,
-            type: 'success'
-          })
+          message(this, 'success', response.msg)
           this.$bus.$emit('changeimg', this.avator)
         })
       }

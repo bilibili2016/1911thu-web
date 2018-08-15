@@ -1,6 +1,6 @@
 <template>
   <!-- 课程评价 -->
-  <div class="evaluate-tag">
+  <div class="evaluate-tag" v-if="config.card_type!=='project'">
     <div class="note">
       <h4>课程评价
         <i v-show="isClose" class="el-icon-close fr" @click="closeEvaluate"></i>
@@ -35,8 +35,9 @@
 import { uniqueArray } from '@/lib/util/helper'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
+import { message } from '@/lib/util/helper'
 export default {
-  props: ['courseList', 'isClose'],
+  props: ['courseList', 'isClose', 'config'],
   data() {
     return {
       reTagBtn: [],
@@ -86,11 +87,7 @@ export default {
       if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
       } else {
-        this.$message({
-          showClose: true,
-          type: 'warning',
-          message: '请输入少于100个字符！'
-        })
+        message(this, 'warning', '请输入少于100个字符！')
       }
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
@@ -99,31 +96,29 @@ export default {
       if (this.flag) {
         coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
           if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'warning',
-              message: response.msg
-            })
+            message(this, 'warning', response.msg)
           } else {
             this.addEvaluateForm.tag = []
             for (let item of this.btnData) {
               this.$set(item, 'isCheck', false)
             }
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
+            // this.$message({
+            //   showClose: true,
+            //   type: 'success',
+            //   message: response.msg
+            // })
+            message(this, 'success', response.msg)
             this.$emit('changeList')
           }
         })
         // this.addEvaluateForm.tag = []
       } else {
-        this.$message({
-          showClose: true,
-          type: 'warning',
-          message: '您还没有观看过此课程，请先去观看吧！'
-        })
+        // this.$message({
+        //   showClose: true,
+        //   type: 'warning',
+        //   message: '您还没有观看过此课程，请先去观看吧！'
+        // })
+        message(this, 'warning', '您还没有观看过此课程，请先去观看吧！')
       }
     },
     // 标签-点击获取标签内容

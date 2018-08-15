@@ -6,8 +6,9 @@
         <el-card class="fl" :body-style="{ padding: '0px' }">
           <div class="goodplay" v-if="isShowCover">
             <img :src="courseList.picture" class="image">
-            <div class="mask">1</div>
-            <div class="common-button btn-bg">
+            <!-- <div class="mask">1</div> -->
+            <!-- project 页面的课程详情 不显示一些东西 -->
+            <div class="common-button btn-bg" v-if="config.card_type !== 'project'">
               <!-- 登录 不登录 播放按钮 -->
               <div class="playBtn-detail">
                 <img :src="playImg" alt="" @click="handleImgPlay(courseList)">
@@ -40,7 +41,8 @@
               <div class="study clearfix">
                 <!-- 课程介绍 -->
                 <p>{{courseList.introduction}}</p>
-                <div class="common-button">
+
+                <div class="common-button" v-if="config.card_type !== 'project'">
                   <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
                 </div>
               </div>
@@ -63,8 +65,12 @@
                 </h4>
                 <div class="common-button">
                   <!-- 免费课程学习到100后显示再次学习 -->
-                  <el-button v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
-                  <el-button v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
+                  <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
+                  <div v-if="config.card_type !== 'project'">
+                    <el-button v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                    <el-button v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
+                  </div>
+
                   <div class="lineProgress">
                     <h5>已完成{{courseList.percent}}%</h5>
                     <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
@@ -82,11 +88,13 @@
                 <span class="rate">
                   <el-rate disabled v-model="courseList.score"></el-rate>
                 </span>
+                <span class="coins" v-if="config.card_type !== 'project'">￥ {{courseList.present_price}} </span>
               </div>
               <!-- 课程介绍 未购买 学习按钮-->
               <div class="study clearfix">
                 <p>{{courseList.introduction}}</p>
-                <div class=" common-button ">
+                <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
+                <div class=" common-button " v-if="config.card_type !== 'project'">
                   <!-- 未购买 购买判断  未购买-->
                   <div v-if="privileMsg===false ">
                     <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
@@ -115,15 +123,18 @@
                   <p>已学时长</p>
                   <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
                 </h4>
+                <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
                 <div class="common-button">
                   <!-- 学习到100后显示再次学习，否则显示继续学习 -->
-                  <div v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100">
-                    <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
-                    <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
-                  </div>
-                  <div v-if="Number(courseList.percent)===100">
-                    <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
-                    <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
+                  <div v-if="config.card_type !== 'project'">
+                    <div v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100">
+                      <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
+                      <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                    </div>
+                    <div v-if="Number(courseList.percent)===100">
+                      <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
+                      <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
+                    </div>
                   </div>
                   <div class="lineProgress">
                     <h5>已完成{{courseList.percent}}%</h5>
@@ -151,7 +162,7 @@ export default {
   components: {
     'v-player': CardPlayer
   },
-  props: ['courseList', 'privileMsg'],
+  props: ['courseList', 'privileMsg', 'config'],
   mounted() {
     // console.log(this.privileMsg)
   },

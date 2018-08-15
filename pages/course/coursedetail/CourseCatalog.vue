@@ -5,7 +5,7 @@
         <div class="detail descript" v-html="courseList.content" v-loading="loadMsg"></div>
       </el-tab-pane>
       <el-tab-pane label="目录" name="second">
-        <v-line :catalogs="catalogs" :privileMsg="privileMsg"></v-line>
+        <v-line :catalogs="catalogs" :privileMsg="privileMsg" :config="config"></v-line>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -17,7 +17,14 @@
  */
 import CustomLine from '@/components/common/Line.vue'
 export default {
-  props: ['activeName', 'courseList', 'loadMsg', 'catalogs', 'privileMsg'],
+  props: [
+    'activeName',
+    'courseList',
+    'loadMsg',
+    'catalogs',
+    'privileMsg',
+    'config'
+  ],
   components: {
     'v-line': CustomLine
   }

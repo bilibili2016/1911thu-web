@@ -11,9 +11,7 @@ export default {
     'v-home': Home
   },
   mounted() {
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    this.$bus.$emit('bannerShow', false)
+    // this.$bus.$emit('bannerShow', false)
     setPagesHeight()
   }
 }

@@ -19,7 +19,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { home } from '~/lib/v1_sdk/index'
-import { splitUrl } from '@/lib/util/helper'
+import { splitUrl, message } from '@/lib/util/helper'
 export default {
   props: ['config'],
   data() {
@@ -52,18 +52,10 @@ export default {
 
       home.reportProblem(this.problem).then(response => {
         if (response.status === '100100') {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: response.msg
-          })
+          message(this, 'success', response.msg)
         } else {
           this.closeReport()
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: response.msg
-          })
+          message(this, 'success', response.msg)
         }
         if (this.word === '') {
           return

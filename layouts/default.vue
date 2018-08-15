@@ -1,12 +1,12 @@
 <template>
   <el-container class="is-vertical layout-default">
-    <Header :class="{ showMsg : this.hsg }"></Header>
+    <Header v-if="hfshow"></Header>
     <el-container>
       <el-main>
         <nuxt/>
       </el-main>
     </el-container>
-    <Footer></Footer>
+    <Footer v-if="hfshow"></Footer>
   </el-container>
 </template>
 <script>
@@ -19,13 +19,18 @@ export default {
     Footer
   },
   data() {
-    return {}
-  },
-  computed: {
-    ...mapState('auth', ['hsg'])
+    return {
+      hfshow: true
+    }
   },
   mounted() {
     // console.log(window.location.origin, '123')
+    this.$bus.$on('headerFooterShow', () => {
+      this.hfshow = true
+    })
+    this.$bus.$on('headerFooterHide', () => {
+      this.hfshow = false
+    })
   }
 }
 </script>

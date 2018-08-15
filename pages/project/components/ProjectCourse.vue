@@ -42,9 +42,7 @@ export default {
       this.kidForm.kids = item.curriculum_id
       // this.setKid(this.kidForm)
       window.open(
-        window.location.origin +
-          '/course/coursedetail?kid=' +
-          item.curriculum_id
+        window.location.origin + '/course/detail?kid=' + item.curriculum_id
       )
     },
     // 跳转到项目播放页

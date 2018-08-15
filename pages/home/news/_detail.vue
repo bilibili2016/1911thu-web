@@ -108,8 +108,6 @@ export default {
     // socialShare('.social-share', $config)
     let nid = window.location.pathname.split('/')[3]
     this.getNewInfoDetail(nid)
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
   }
 }
 </script>

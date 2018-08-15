@@ -961,10 +961,9 @@ export default {
       this.overStudyCurriculumList()
       this.getUsedInvitationCodeList()
     }
-    this.$bus.$emit('bannerShow', false)
+    // this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+
     if (this.$route.query.tab) {
       this.activeTab = this.$route.query.tab
     }

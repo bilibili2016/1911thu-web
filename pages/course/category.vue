@@ -195,6 +195,7 @@ export default {
     // 学院全部
     selectAllCid() {
       this.categoryForm.pages = 1
+      this.categoryId = '0'
       this.$router.push(
         '/course/category' +
           '?cid=' +
@@ -225,6 +226,7 @@ export default {
     // 分类 全部
     selectAllPid() {
       this.categoryForm.pages = 1
+      console.log(this.categoryId, '123')
       this.$router.push(
         '/course/category' +
           '?cid=' +
@@ -444,8 +446,7 @@ export default {
       }
     },
     initHeader() {
-      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+
     },
     // 初始化params参数
     initParams() {

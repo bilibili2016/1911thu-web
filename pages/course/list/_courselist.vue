@@ -12,8 +12,8 @@
       <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
     </div>
     <v-card :courseList="courseList" :config="config"></v-card>
-    <div class="pagination">
-      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
+    <div class="pagination" v-if="pageMsgs">
+      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
 
   </div>
@@ -67,7 +67,8 @@ export default {
       scrollTopMsg: true,
       noMoreData: false,
       cidNumber: null,
-      coursename: null
+      coursename: null,
+      pageMsgs: false
     }
   },
   methods: {
@@ -90,6 +91,7 @@ export default {
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '最新项目'
         this.BreadCrumb.text = this.coursename
+        this.pageMsgs = true
       })
     },
     // 最新课程列表
@@ -99,6 +101,7 @@ export default {
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '最新课程'
         this.BreadCrumb.text = this.coursename
+        this.pageMsgs = true
       })
     },
     // 获取经典课程列表
@@ -110,6 +113,7 @@ export default {
           this.pagemsg.total = Number(response.data.pageCount)
           this.coursename = '精品好课'
           this.BreadCrumb.text = this.coursename
+          this.pageMsgs = true
         })
     },
     // 获取最新课程列表
@@ -119,6 +123,7 @@ export default {
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '免费课程'
         this.BreadCrumb.text = this.coursename
+        this.pageMsgs = true
       })
     },
     // 点击下面分页按钮

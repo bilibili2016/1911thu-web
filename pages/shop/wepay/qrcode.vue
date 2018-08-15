@@ -50,6 +50,9 @@ export default {
     this.$bus.$on('closeCode', data => {
       this.unloggedClick()
     })
+    this.$bus.$on('load', data => {
+      this.loading = data
+    })
   }
 }
 </script>

@@ -173,6 +173,10 @@ export default {
   components: {
     'v-backtotop': BackToTop
   },
+
+  watch: {
+    $route: 'fetchDate'
+  },
   data() {
     var validatePhone = (rule, value, callback) => {
       if (!/^[A-Za-z0-9]+$/.test(value)) {
@@ -327,6 +331,9 @@ export default {
     ...mapState('auth', ['token'])
   },
   methods: {
+    fetchDate() {
+      console.log('123')
+    },
     goCourseList(item) {
       window.open(
         window.location.origin +
@@ -518,7 +525,7 @@ export default {
   },
   mounted() {
     this.company.userID = this.token
-    this.$bus.$emit('bannerShow', true)
+    // this.$bus.$emit('bannerShow', true)
     window.addEventListener('scroll', this.pageScroll)
     this.headerHeight = document.getElementsByClassName(
       'headerBox'
@@ -538,6 +545,15 @@ export default {
     } else {
       this.$refs.rgihtGo.style.marginLeft = '18px'
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('bannerImgShow')
+    })
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$bus.$emit('bannerImgHide')
+    next(vm => {})
   },
   deactivated() {
     window.removeEventListener('scroll', this.pageScroll)

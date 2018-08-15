@@ -13,7 +13,7 @@
           <div class="projectImg" v-if="cp==='1'">
             <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
           </div>
-          <div class="mask-style" @click="goDetail(card)">
+          <div class="mask-style" @click="handleLinkDetail(card)">
             <img :src="jinImg" alt="" class="jin-style">
           </div>
           <!-- 项目封面 图片 -->
@@ -26,7 +26,7 @@
           </div>
           <el-row>
             <!-- 名字 -->
-            <div class="item" @click="goDetail(card)">
+            <div class="item" @click="handleLinkDetail(card)">
               <p class="itemBox-name itemBoxTitle">
                 <span class="title">{{card.title}}</span>
                 <span class="deputyTitle fl">{{card.deputy_title}}</span>
@@ -98,16 +98,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid', 'setXid']),
+    ...mapActions('auth', ['setProductsNum']),
     openDetail(link) {
       window.open(window.location.origin + link)
     },
-    goDetail(item) {
+    handleLinkDetail(item) {
       // 判断当前页是否是在首页
       if (this.isIndex) {
-        this.kidForm.kids = item.id
-        // persistStore.set('curriculumId', item.id)
-        // this.setKid(this.kidForm)
         window.open(
           window.location.origin + '/course/coursedetail?kid=' + item.id
         )
@@ -115,9 +112,6 @@ export default {
         // 分类列表页
         if (this.cp === '0') {
           // 课程-转到课程详情
-          this.kidForm.kids = item.id
-          // persistStore.set('curriculumId', item.id)
-          // this.setKid(this.kidForm)
           window.open(
             window.location.origin + '/course/coursedetail?kid=' + item.id
           )

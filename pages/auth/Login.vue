@@ -125,7 +125,7 @@ import { store as persistStore } from '~/lib/core/store'
 import { auth, header } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
-import { encryption } from '~/lib/util/helper'
+import { encryption, message } from '~/lib/util/helper'
 import Register from '@/pages/auth/Register'
 export default {
   components: {
@@ -469,10 +469,14 @@ export default {
         if (this.bindTelData.captchaDisable === false) {
           return new Promise((resolve, reject) => {
             auth.smsCodes(data).then(response => {
-              this.$message({
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
-              })
+              // this.$message({
+              //   type: response.status === 0 ? 'success' : 'error',
+              //   message: response.msg
+              // })
+
+              let types = response.status === 0 ? 'success' : 'error'
+              message(this, types, response.msg)
+
               this.bindTelData.captchaDisable = true
               this.bindTelData.getCode =
                 this.bindTelData.seconds + '秒后重新发送'
@@ -496,19 +500,24 @@ export default {
     // 手机验证码 登录时候
     async handleMobileGetCode() {
       if (!/^[1][3,4,5,6,7,8][0-9]{9}$/.test(this.registerMobileData.phones)) {
-        this.$message({
-          type: 'error',
-          message: '请输入正确手机号'
-        })
+        // this.$message({
+        //   type: 'error',
+        //   message: '请输入正确手机号'
+        // })
+
+        message(this, 'error', '请输入正确手机号')
       } else {
         if (this.bindTelData.seconds === 30) {
           if (this.bindTelData.captchaDisable === false) {
             return new Promise((resolve, reject) => {
               auth.smsCodes(this.registerMobileData).then(response => {
-                this.$message({
-                  type: response.status === 0 ? 'success' : 'error',
-                  message: response.msg
-                })
+                // this.$message({
+                //   type: response.status === 0 ? 'success' : 'error',
+                //   message: response.msg
+                // })
+                let types = response.status === 0 ? 'success' : 'error'
+                message(this, types, response.msg)
+
                 this.bindTelData.captchaDisable = true
                 this.bindTelData.getCode =
                   this.bindTelData.seconds + '秒后重新发送'
@@ -534,11 +543,12 @@ export default {
     verifyRgTel() {
       this.codeClick = true
       if (this.errorTel.tel === this.registerData.phones) {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: this.errorTel.msg
-        })
+        // this.$message({
+        //   showClose: true,
+        //   type: 'error',
+        //   message: this.errorTel.msg
+        // })
+        message(this, 'error', this.errorTel.msg)
         this.codeClick = false
       } else {
         if (this.bindTelData.seconds == 30) {
@@ -546,11 +556,12 @@ export default {
             if (response.status !== 0) {
               this.errorTel.tel = this.registerData.phones
               this.errorTel.msg = response.msg
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: response.msg
-              })
+              // this.$message({
+              //   showClose: true,
+              //   type: 'error',
+              //   message: response.msg
+              // })
+              message(this, 'error', response.msg)
               this.bindTelData.captchaDisable = true
               this.codeClick = false
             } else {
@@ -571,11 +582,12 @@ export default {
         return new Promise((resolve, reject) => {
           auth.verifywechat(this.bindTelData).then(response => {
             if (response.status != 0) {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: response.msg
-              })
+              // this.$message({
+              //   showClose: true,
+              //   type: 'error',
+              //   message: response.msg
+              // })
+              message(this, 'error', response.msg)
               this.bindTelData.captchaDisable = true
             } else {
               this.bindTelData.captchaDisable = false
@@ -592,11 +604,13 @@ export default {
       this.loginData.ectpwd = encryption(this.registerData.passwords)
       this.loadLogin = true
       this.signIn(this.loginData).then(response => {
-        this.$message({
-          showClose: true,
-          type: response.status === 0 ? 'success' : 'error',
-          message: response.msg
-        })
+        // this.$message({
+        //   showClose: true,
+        //   type: response.status === 0 ? 'success' : 'error',
+        //   message: response.msg
+        // })
+        let types = response.status === 0 ? 'success' : 'error'
+        message(this, types, response.msg)
         if (response.status === 0) {
           this.close()
           this.getUserInfo()
@@ -614,11 +628,13 @@ export default {
           if (valid) {
             this.loadLogin = true
             auth.signUp(this.registerData).then(response => {
-              this.$message({
-                showClose: true,
-                type: response.status === 0 ? 'success' : 'error',
-                message: response.msg
-              })
+              // this.$message({
+              //   showClose: true,
+              //   type: response.status === 0 ? 'success' : 'error',
+              //   message: response.msg
+              // })
+              let types = response.status === 0 ? 'success' : 'error'
+              message(this, types, response.msg)
               if (response.status === 0) {
                 this.alreadySignin()
                 this.close()
@@ -647,12 +663,13 @@ export default {
           // this.loadLogin = true
 
           this.signIn(this.loginData).then(response => {
-            this.$message({
-              showClose: true,
-              type: response.status === 0 ? 'success' : 'error',
-              message: response.msg
-            })
-
+            // this.$message({
+            //   showClose: true,
+            //   type: response.status === 0 ? 'success' : 'error',
+            //   message: response.msg
+            // })
+            let types = response.status === 0 ? 'success' : 'error'
+            message(this, types, response.msg)
             if (response.status === 0) {
               this.close()
               this.getUserInfo()
@@ -685,11 +702,13 @@ export default {
           // this.loadLogin = true
 
           this.signInmobile(this.registerMobileData).then(response => {
-            this.$message({
-              showClose: true,
-              type: response.status === 0 ? 'success' : 'error',
-              message: response.msg
-            })
+            // this.$message({
+            //   showClose: true,
+            //   type: response.status === 0 ? 'success' : 'error',
+            //   message: response.msg
+            // })
+            let types = response.status === 0 ? 'success' : 'error'
+            message(this, types, response.msg)
             if (response.status === 0) {
               this.close()
               this.getUserInfo()
@@ -739,11 +758,13 @@ export default {
       this.loadLogin = true
       auth.loginWechat(this.bindTelData).then(response => {
         if (response.status === 0) {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '登录成功！'
-          })
+          // this.$message({
+          //   showClose: true,
+          //   type: 'success',
+          //   message: '登录成功！'
+          // })
+          //  let types = response.status === 0 ? 'success' : 'error'
+          message(this, 'success', '登录成功')
           this.tokenForm.tokens = response.data.token
           this.setToken(this.tokenForm)
           this.getUserInfo()
@@ -751,11 +772,12 @@ export default {
           this.closeWechat()
           this.close()
         } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: response.msg
-          })
+          // this.$message({
+          //   showClose: true,
+          //   type: 'error',
+          //   message: response.msg
+          // })
+          message(this, 'error', response.msg)
         }
         this.loadLogin = false
       })
@@ -785,11 +807,12 @@ export default {
           this.bindTelData.openid = response.data.openid
           clearInterval(this.getwxtime)
         } else if (response.status === 100100) {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: response.msg
-          })
+          // this.$message({
+          //   showClose: true,
+          //   type: 'error',
+          //   message: response.msg
+          // })
+          message(this, 'error', message.msg)
         }
       })
     },
