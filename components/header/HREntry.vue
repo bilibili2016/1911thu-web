@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <span class="center" @click="addEcg">兑换码
-      <i></i>
-    </span>
-    <span class="hrin center" @click="goSearchd('/other/activePages/institutional')">单位入口
+  <div class="clearfix">
+    <span class="topCenter topCode" @click="addEcg">兑换码</span>
+    <span class="hrin topCenter" @click="goSearchd('/other/activePages/institutional')">单位入口
       <i></i>
     </span>
 

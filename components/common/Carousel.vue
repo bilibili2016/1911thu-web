@@ -4,7 +4,7 @@
       <div class="carousel">
         <el-carousel :interval="5000" class="lbt indexBanner">
           <el-carousel-item v-for="(img,index) in items" :key="index">
-            <img :src="img.picture" alt="" @click="handleLink(img)">
+            <img id="innerImg" :src="img.picture" alt="" @click="handleLink(img)">
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -48,6 +48,16 @@ export default {
     },
     goDetail(news) {
       window.open(window.location.origin + '/home/news/' + news.id)
+    }
+  },
+  mounted() {
+    let Dwidth = document.documentElement.clientWidth
+    if (Dwidth > 1920) {
+      document.getElementsByClassName('el-carousel')[0].style.width =
+        1920 + 'px'
+    } else {
+      document.getElementsByClassName('el-carousel')[0].style.width =
+        Dwidth + 'px'
     }
   }
 }

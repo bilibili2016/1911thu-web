@@ -1,25 +1,29 @@
 <template>
-  <div class="fl dropdown">
+  <div class="fl dropdown clearfix">
 
-    <el-dropdown>
+    <div class="dropItem">
       <span class="el-dropdown-link">
         全部课程
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for="(item,index) in categoryArr" :key="index" @click.native="handleClick(item)">{{item.category_name}}</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-
-    <el-dropdown>
+      <div class="drops">
+        <ul>
+          <li v-for="(item,index) in categoryArr" :key="index" @click="handleClick(item)">{{item.category_name}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dropItem">
       <span class="el-dropdown-link">
         培训项目
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for="(item,index) in projectArr" :key="index" @click.native="handleClick(item)">{{item.category_name}}</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+      <div class="drops">
+        <ul>
+          <li v-for="(item,index) in projectArr" :key="index" @click="handleClick(item)">{{item.category_name}}</li>
+        </ul>
+      </div>
+
+    </div>
 
   </div>
 
@@ -65,7 +69,7 @@ export default {
       })
     },
     handleClick(item, index) {
-      // console.log(item, '这是是item')
+      console.log(item, '这是是item')
 
       this.$bus.$emit('collegeId', item.id)
 

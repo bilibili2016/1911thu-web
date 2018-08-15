@@ -9,8 +9,11 @@
   z-index: 99999;
   .note {
     position: absolute;
-    top: 15%;
-    left: 16%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
     // margin-top: -185px;
     // margin-left: -290px;
     width: 580px;

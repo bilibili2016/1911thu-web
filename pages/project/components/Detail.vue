@@ -65,6 +65,7 @@ export default {
       },
       BreadCrumb: {
         type: 'projectDetail',
+        project: '分类列表',
         position: false, //是否显示当前位置
         text: '项目详情'
       },
