@@ -1080,7 +1080,7 @@ export default {
       ) {
         this.$message({
           showClose: true,
-          message: '请选择要删除的课程'
+          message: '请选择要删除的课程/项目'
         })
         this.loding = false
         return false
