@@ -1,5 +1,5 @@
 <template>
-  <div class="wepay" ref="wepay">
+  <div class="wepay" ref="wepay" v-loading="loading">
     <div class="checkedCourse-wepay">
       <!-- 头部banner -->
       <v-banner :config="wePay"></v-banner>
@@ -78,7 +78,8 @@ export default {
       val: '',
       interval: '',
       seconds: 1000000,
-      takeupMsg: false
+      takeupMsg: false,
+      loading: false
     }
   },
   computed: {
@@ -96,12 +97,13 @@ export default {
     },
     // 获取订单id列表
     getPayList(item) {
+      this.loading = true
       let urlArr = window.location.href.split('/')
       // let cpyid = persistStore.get('cpyid')
       this.payListForm.orderId = urlArr[urlArr.length - 1]
 
       wepay.webPay(this.payListForm).then(response => {
-        // this.loading = false
+        this.loading = false
         this.orderDetail = response.data.data.orderDetail
         this.orderCurriculumLists = response.data.data.orderCurriculumLists
         this.codeData.code_url = response.data.code_url
@@ -124,7 +126,6 @@ export default {
     }
   },
   mounted() {
-
     if (this.isAuthenticated) {
       this.getPayList()
     }
