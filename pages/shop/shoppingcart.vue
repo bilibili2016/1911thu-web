@@ -431,10 +431,16 @@ export default {
       }
       // this.setKid(kidForm)
       // persistStore.set('curriculumId', item.id)
-      this.$router.push('/course/coursedetail?kid=' + item.id)
+      // this.$router.push('/course/coursedetail?kid=' + item.id)
+      window.open(
+        window.location.origin + '/course/coursedetail?kid=' + item.id
+      )
     },
     goProjectDetail(item) {
-      this.$router.push('/project/projectdetail?id=' + item.id)
+      // this.$router.push('/project/projectdetail?id=' + item.id)
+      window.open(
+        window.location.origin + '/project/projectdetail?id=' + item.id
+      )
     },
     loadAll() {
       return []
@@ -898,9 +904,15 @@ export default {
     showCommit() {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
       // 否则的话就提醒如何绑定
-      if (this.numForm.number === 1) {
+
+      console.log(this.numForm.number == '1', '这是点击数量')
+      if (this.numForm.number == '1') {
         shopcart.existCourse().then(res => {
-          if (res.data.is_exist_curriculum === 1) {
+          console.log(res, '这是res')
+          if (
+            res.data.is_exist_curriculum === 1 ||
+            res.data.is_exist_project === 1
+          ) {
             this.$confirm(
               '您所购买的商品与已购商品重复，建议您慎重选择，如果您继续购买，该订单将生成专属兑换码，需绑定后学习，绑定后重复商品将进行有效期累加。',
               {
