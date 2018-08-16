@@ -327,7 +327,6 @@ export default {
     },
     // 获取用户头像
     getUserInfo() {
-      console.log('进getUserInfo接口了')
       header.getUserInfo().then(res => {
         // console.log(res, '这是res')
         if (res.status === '100008') {
