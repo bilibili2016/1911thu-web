@@ -17,7 +17,7 @@
           <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{bar.video_time}}分钟)</span>
           <!-- 用户已购买 并且进度大于零 -->
           <span v-if="privileMsg === true">
-            <span v-if="bar.percent > 0">
+            <span v-if="bar.percent > 0&&config.card_type!=='project'">
               <!-- 课程目录进度条 -->
               <el-progress :percentage="bar.percent" :show-text="false"></el-progress>
             </span>
@@ -43,7 +43,7 @@
           </span>
 
         </p>
-        <span v-if="privileMsg === true">
+        <span v-if="privileMsg === true&&config.card_type!=='project'">
           <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
         </span>
 

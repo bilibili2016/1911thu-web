@@ -71,7 +71,7 @@
                     <el-button v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   </div>
 
-                  <div class="lineProgress">
+                  <div class="lineProgress" v-if="config.card_type !== 'project'">
                     <h5>已完成{{courseList.percent}}%</h5>
                     <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
                   </div>
@@ -136,7 +136,7 @@
                       <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                     </div>
                   </div>
-                  <div class="lineProgress">
+                  <div class="lineProgress" v-if="config.card_type !== 'project'">
                     <h5>已完成{{courseList.percent}}%</h5>
                     <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
                   </div>
