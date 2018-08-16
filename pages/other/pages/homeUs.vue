@@ -1,5 +1,5 @@
 <template>
-  <div class="homeUs">
+  <div class="homeUs" v-loading="loading">
     <div class="topImg">
       <div class="top-content">
         <span class="top-con">关于我们</span>
