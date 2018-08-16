@@ -7,13 +7,13 @@
       <!-- {{privileMsg}} -->
       <!-- {{privileMsg}}  1{{isAuthenticated}} -->
       <!-- 遍历小节 -->
-      <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index">
+      <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="handleCatalog(index,catalog)">
         <!-- 小节上 左侧播放图片 项目中的 课程详情不展示-->
         <span class="fl playIcon" v-if="config.card_type!=='project'">
           <i class="el-icon-caret-right"></i>
         </span>
 
-        <p @click="handleCatalog(index,catalog)">
+        <p>
           <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{bar.video_time}}分钟)</span>
           <!-- 用户已购买 并且进度大于零 -->
           <span v-if="privileMsg === true">
@@ -28,7 +28,7 @@
             <span v-if="isAuthenticated" class="fr">
               <span v-if="privileMsg === false">
                 <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
-                <span class="fr freePlay" v-else @click.stop="goBuy(catalog,index)">购买课程</span>
+                <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
               </span>
               <span v-if="privileMsg === true">
                 <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
@@ -38,7 +38,7 @@
             <span v-else class="fr clearfix">
               <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
               <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
-              <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click.stop="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
+              <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
             </span>
           </span>
 
@@ -102,18 +102,14 @@ export default {
         .addClass('checked')
     },
     handleCatalog(index, item) {
-      // console.log(index, '这是index')
-      // console.log(item, 'item')
-      if (document.getElementsByClassName('goodplay')[0]) {
-        document.getElementsByClassName('goodplay')[0].style.display = 'none' //立即观看隐藏课程播放的覆盖层
-      }
+      //立即观看隐藏课程播放的覆盖层
+      // if (document.getElementsByClassName('goodplay')[0]) {
+      //   document.getElementsByClassName('goodplay')[0].style.display = 'none'
+      // }
       let curriculum_id = item.childList[index].curriculum_id
       let catalog_id = item.childList[index].id
       let video_time = item.childList[index].second
       persistStore.set('video_time', video_time)
-      // persistStore.set('curriculumId', curriculum_id)
-      // persistStore.set('catalogId', catalog_id)
-
       this.$router.push(
         '/course/coursedetail' + '?kid=' + splitUrl(0, 1) + '&bid=' + catalog_id
       )

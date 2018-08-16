@@ -194,7 +194,8 @@ export default {
       pay: {
         type: 2
       },
-      currentTime: 0
+      currentTime: 0,
+      nextCatalogId: '' //默认播放下一小节id
     }
   },
   methods: {
@@ -386,12 +387,6 @@ export default {
 
       // 断线重连
       socket.on('reconnect', function(msg) {})
-      // 播放器如果存在就销毁播放器，重新创建
-      if (this.players) {
-        this.players.destroy()
-      }
-      // window.qcplayer.destroy()
-      // this.$refs.mediaPlayer.innerHTML = ''
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
@@ -408,6 +403,10 @@ export default {
             }
           })
         } else {
+          // 播放器如果存在就销毁播放器，重新创建
+          if (this.players) {
+            this.players.destroy()
+          }
           // 初始化播放器
           this.tcplayer.mp4 = response.data.playAuthInfo.video_address
           this.players = new TcPlayer('mediaPlayer', this.tcplayer)
@@ -415,6 +414,7 @@ export default {
           if (this.autoplay) {
             window.qcplayer.play()
           }
+          this.nextCatalogId = response.data.nextCatalogId
         }
       })
 
@@ -456,7 +456,6 @@ export default {
         }
         // 监听暂停事件
         if (msg.type == 'pause') {
-          // that.isHasClass()
           that.playing = that.pauseImg
           clearInterval(that.interval)
           socket.emit('watchRecordingTime_disconnect')
@@ -466,20 +465,15 @@ export default {
           // 未购买且试看
           if (!that.bought && that.lookAt == '2') {
             that.$bus.$emit('openPay', that.pay)
+          } else {
+            if (that.nextCatalogId !== '') {
+              that.playerForm.catalogId = that.nextCatalogId
+              that.autoplay = true
+              that.getPlayerInfo()
+            }
           }
         }
-        // 视频卡顿的时候出现加载的动画
-        // if (msg.type == 'timeupdate') {
-        //   // 未购买且试看
-        //   this.currentTime = window.qcplayer.currentTime()
-        //   if (this.currentTime === window.qcplayer.currentTime()) {
-        //     document.getElementsByClassName('vcp-loading')[0].style.display =
-        //       'block'
-        //   }
-        //   console.log(this.currentTime, '------', window.qcplayer.currentTime())
-        // }
       }
-      // this.isHasClass()
     },
     // 获取视频播放参数
     getCurriculumPlayInfo() {
