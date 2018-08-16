@@ -59,7 +59,7 @@
               </div>
               <!-- 时间 学习按钮  进度条-->
               <div class="study clearfix bought">
-                <h4 class="clearfix">
+                <h4 class="clearfix" v-if="config.card_type !== 'project'">
                   <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                   <p>已学时长</p>
                 </h4>
@@ -101,7 +101,7 @@
                     <el-button type="primary " plain @click="freeStudy(courseList) ">免费试看</el-button>
                   </div>
                   <!-- 未购买 购买判断  已购买-->
-                  <div v-if="privileMsg===true ">
+                  <div v-if="privileMsg===true">
                     <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
                     <el-button type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
                   </div>
@@ -118,7 +118,7 @@
               </div>
               <!-- 课程介绍 未购买 学习按钮-->
               <div class="study clearfix bought">
-                <h4 class="clearfix">
+                <h4 class="clearfix" v-if="config.card_type !== 'project'">
                   <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                   <p>已学时长</p>
                   <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
