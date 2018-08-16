@@ -77,7 +77,7 @@
                 <div class="pagination" v-if="studyProjectData  && studyProjectData.length>0">
                   <el-pagination background layout="prev, pager, next" :page-size="projectPageStudy.pagesize" :pager-count="5" :page-count="projectPageStudy.pagesize" :current-page="projectPageStudy.page" :total="projectPageStudy.total" @current-change="studyProjectPageChange"></el-pagination>
                 </div>
-                <v-nomsg v-else :config="noMsgSix"></v-nomsg>
+                <v-nomsg v-else :config="noMsgSix" v-show="false"></v-nomsg>
 
               </el-tab-pane>
               <!-- 我的项目 已完成 -->

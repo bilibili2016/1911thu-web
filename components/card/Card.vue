@@ -107,9 +107,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
-    openDetail(link) {
-      window.open(window.location.origin + link)
-    },
+    // openDetail(link) {
+    //   window.open(window.location.origin + link)
+    // },
     handleLinkDetail(item) {
       // 判断当前页是否是在首页
       if (this.isIndex) {

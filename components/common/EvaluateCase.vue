@@ -88,6 +88,7 @@ export default {
         this.addEvaluateForm.evaluatecontent = this.textarea
       } else {
         message(this, 'warning', '请输入少于100个字符！')
+        return false
       }
       this.addEvaluateForm.scores = this.rateModel
       this.addEvaluateForm.tag = this.addEvaluateForm.tag
@@ -102,11 +103,7 @@ export default {
             for (let item of this.btnData) {
               this.$set(item, 'isCheck', false)
             }
-            // this.$message({
-            //   showClose: true,
-            //   type: 'success',
-            //   message: response.msg
-            // })
+
             message(this, 'success', response.msg)
             this.$emit('changeList')
           }

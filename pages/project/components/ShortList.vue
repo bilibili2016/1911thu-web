@@ -40,12 +40,6 @@ export default {
       }
     }
   },
-  computed() {
-    if (this.cardData.length != 0) {
-      this.isLoading = false
-    } else {
-    }
-  },
   methods: {
     //项目详情
     projectInfo(item, index) {
