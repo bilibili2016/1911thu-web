@@ -4,6 +4,10 @@
   background-position: top center;
   background-size: auto;
   .main-crumb {
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // z-index: 20;
     padding: 0 30px;
     color: #bdbccf;
     span {
@@ -25,6 +29,31 @@
     background-position: top center;
     background-size: cover;
     box-shadow: 8px 0px 21px rgba(39, 0, 77, 0.07);
+    position: relative;
+    .header-mask {
+      // position: absolute;
+      // top: 0;
+      // left: 0;
+      // width: 100%;
+      // height: 300px;
+      opacity: 0.7;
+      background: -webkit-linear-gradient(
+        rgba(22, 17, 26, 0.7),
+        rgba(22, 17, 26, 0)
+      ); /* Safari 5.1 - 6.0 */
+      background: -o-linear-gradient(
+        rgba(22, 17, 26, 0.7),
+        rgba(22, 17, 26, 0)
+      ); /* Opera 11.1 - 12.0 */
+      background: -moz-linear-gradient(
+        rgba(22, 17, 26, 0.7),
+        rgba(22, 17, 26, 0)
+      ); /* Firefox 3.6 - 15 */
+      background: linear-gradient(
+        rgba(22, 17, 26, 0.7),
+        rgba(22, 17, 26, 0)
+      ); /* 标准的语法 */
+    }
     h1 {
       margin: 0;
       padding-top: 75px;
