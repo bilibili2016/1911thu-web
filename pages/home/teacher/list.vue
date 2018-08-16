@@ -1,11 +1,11 @@
 <template>
-  <div class="news-list">
+  <div class="news-list" v-loading="load">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow">
       <div @click="getNewInfoList"></div>
       <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
     </div>
-    <div class="pagination">
+    <div class="pagination" v-show="!load">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
   </div>
@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       bannerImg: 'http://papn9j3ys.bkt.clouddn.com/famousTeacher-bg.png',
+      load: true,
       configs: {
         banner_type: 'famousList'
       },
@@ -37,7 +38,7 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 7,
+        pagesize: 5,
         total: null
       }
     }
@@ -52,6 +53,7 @@ export default {
       list.getTeacherList(this.teacherForm).then(response => {
         this.pagemsg.total = Number(response.data.pageCount)
         this.famousList = response.data.teacherList
+        this.load = false
       })
     },
     selectPages(val) {

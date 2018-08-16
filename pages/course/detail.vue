@@ -52,6 +52,7 @@ import Collection from '@/components/common/Collection.vue'
 import UserEvaluate from '@/pages/course/coursedetail/UserEvaluate.vue'
 import EvaluateDialog from '@/pages/course/coursedetail/EvaluateDialog.vue'
 import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
+import { message } from '@/lib/util/helper'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
@@ -201,11 +202,7 @@ export default {
       if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
       } else {
-        this.$message({
-          showClose: true,
-          type: 'warning',
-          message: '请输入少于100个字符！'
-        })
+        message(this, 'warning', '请输入少于100个字符！')
         return false
       }
       this.addEvaluateForm.scores = this.rateModel
@@ -215,32 +212,20 @@ export default {
       if (this.courseList.is_study) {
         coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
           if (response.status === '100100') {
-            this.$message({
-              showClose: true,
-              type: 'warning',
-              message: response.msg
-            })
+            message(this, 'warning', response.msg)
           } else {
             this.addEvaluateForm.tag = []
             for (let item of this.btnData) {
               this.$set(item, 'isCheck', false)
             }
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
+            message(this, 'success', response.msg)
             this.getCourseDetail()
             this.getEvaluateList()
           }
         })
         // this.addEvaluateForm.tag = []
       } else {
-        this.$message({
-          showClose: true,
-          type: 'warning',
-          message: '您还没有观看过此课程，请先去观看吧！'
-        })
+        message(this, 'warning', '您还没有观看过此课程，请先去观看吧！')
       }
     },
     // 评论-点击评论查看更多
@@ -276,8 +261,6 @@ export default {
           this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
-          console.log(this.commentators)
-
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           let totalEvaluateInfo = response.data.totalEvaluateInfo
           this.sumUserStart = Number(totalEvaluateInfo.totalScore)

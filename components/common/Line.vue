@@ -56,7 +56,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { auth, line } from '~/lib/v1_sdk/index'
-import { splitUrl } from '~/lib/util/helper'
+import { splitUrl, message } from '~/lib/util/helper'
 export default {
   props: ['catalogs', 'privileMsg', 'config'],
   computed: {
@@ -102,10 +102,13 @@ export default {
         .addClass('checked')
     },
     handleCatalog(index, item) {
-      //立即观看隐藏课程播放的覆盖层
-      // if (document.getElementsByClassName('goodplay')[0]) {
-      //   document.getElementsByClassName('goodplay')[0].style.display = 'none'
-      // }
+      if (!this.isAuthenticated) {
+        this.$bus.$emit('loginShow', true)
+        return false
+      }
+      if (this.config.card_type === 'project') {
+        return false
+      }
       let curriculum_id = item.childList[index].curriculum_id
       let catalog_id = item.childList[index].id
       let video_time = item.childList[index].second
@@ -119,7 +122,7 @@ export default {
       document.body.scrollTop = document.documentElement.scrollTop = 0
     },
     buyMask() {
-      message(this, 'success', '请登录后,进行试看')
+      // message(this, 'warning', '请登录后,进行学习')
       this.$bus.$emit('loginShow', true)
     }
   }

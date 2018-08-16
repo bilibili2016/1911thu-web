@@ -1,6 +1,6 @@
 <template>
-  <div class="projectDetail">
-    <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}" v-loading="projectDetailLoad">
+  <div class="projectDetail" v-loading="projectDetailLoad">
+    <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}">
 
       <!-- 项目详情基本信息 -->
       <v-detail :projectDetail="projectDetail"></v-detail>
@@ -9,7 +9,7 @@
     <div class="proContent">
       <el-tabs v-model="activeName" class="proTab">
         <el-tab-pane label="介绍" name="first">
-          <div class="detail" v-html="projectDetail.content" v-loading="projectDetailLoad"></div>
+          <div class="detail" v-html="projectDetail.content"></div>
         </el-tab-pane>
         <el-tab-pane label="线上课程介绍" name="second">
           <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad"></v-procourse>
@@ -33,6 +33,7 @@ import Procourse from '@/pages/project/components/ProjectCourse'
 import Proevaluate from '@/pages/project/components/ProjectEvaluate'
 import Commonproblems from '@/pages/project/components/CommonProblems'
 import { store as persistStore } from '~/lib/core/store'
+import { splitUrl, message } from '@/lib/util/helper'
 export default {
   components: {
     'v-procourse': Procourse,
@@ -136,7 +137,7 @@ export default {
     }
   },
   mounted() {
-    this.project.projectId = window.location.search.split('=')[1]
+    this.project.projectId = splitUrl(0, 1)
     this.getProjectInfo()
     this.getEvaluateList()
 

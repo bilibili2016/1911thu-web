@@ -6,7 +6,7 @@
         共找到 {{courseNumber}} 门“ {{searchForm.searchword}} ”相关课程
       </div>
       <div v-if="result" v-loading="loadSearch">
-        <v-card :data="searchData" :config="config" v-loading="loading" element-loading-text="拼命加载中" element-loading-background="#fff"></v-card>
+        <v-card :data="searchData" :config="config" element-loading-text="拼命加载中" element-loading-background="#fff"></v-card>
         <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg"></v-page>
         <v-backtotop></v-backtotop>
       </div>
@@ -71,7 +71,6 @@ export default {
       getLikeForm: {
         limits: 4
       },
-      loading: false,
       loadinged: true,
       result: true,
       courseNumber: 0
@@ -80,12 +79,10 @@ export default {
   methods: {
     handleSearchs(val) {
       this.searchForm.searchword = persistStore.get('key')
-      this.loading = true
       this.searchCurriculumList()
     },
     searchCurriculumList() {
       this.loadSearch = true
-
       search.searchCurriculumList(this.searchForm).then(response => {
         this.searchData = response.data.curriculumList
         if (response.data.curriculumList.length === 0) {
@@ -98,7 +95,6 @@ export default {
             response.data.curriculumList.length / 20
           )
           this.courseNumber = response.data.curriculumList.length
-          this.loading = false
         }
 
         this.loadSearch = false
