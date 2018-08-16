@@ -3,9 +3,7 @@
  *
  * @param {Object} context
  */
-export default function({ store, redirect }) {
-  console.log('验证了')
-}
+export default function({ store, redirect }) {}
 // console.log(store.getters['auth/isAuthenticated'])
 
 // if(window.location.pathname === '/course/player'){

@@ -110,13 +110,17 @@
         border-radius: 28px;
         cursor: pointer;
         padding-left: 40px;
+        position: relative;
         span.right {
           display: inline-block;
+          position: absolute;
+          top: 0;
+          right: 0;
           width: 56px;
           height: 100%;
           background-color: #fff;
           border-radius: 50%;
-          margin-left: 18px;
+          // margin-left: 18px;
           font-size: 24px;
           color: #6417a6;
           text-align: center;

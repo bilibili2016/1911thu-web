@@ -1,5 +1,5 @@
 <template>
-  <div class="teacher home-teacher">
+  <div class="teacher home-teacher" v-loading="loading">
     <div class="tcInfo">
       <img :src="teacherBg" alt="">
       <div>
@@ -39,28 +39,28 @@ export default {
       tidForm: {
         tids: null
       },
-      teacherBg: 'http://papn9j3ys.bkt.clouddn.com/teacher_bg.png'
+      teacherBg: 'http://papn9j3ys.bkt.clouddn.com/teacher_bg.png',
+      loading: false
     }
   },
   methods: {
     getTeacherInfo() {
-      return new Promise((resolve, reject) => {
-        teacherInfo.getTeacherInfo(this.tidForm).then(response => {
-          this.teacherData = response.data.teacherInfo
-        })
+      teacherInfo.getTeacherInfo(this.tidForm).then(response => {
+        this.teacherData = response.data.teacherInfo
+        this.loading = false
       })
     },
     getTeacherCourse() {
-      return new Promise((resolve, reject) => {
-        teacherInfo.getTeacherCourse(this.tidForm).then(response => {
-          this.teacherCourse = response.data.curriculumList
-        })
+      teacherInfo.getTeacherCourse(this.tidForm).then(response => {
+        this.teacherCourse = response.data.curriculumList
+        this.loading = false
       })
     }
   },
   mounted() {
     let tid = window.location.pathname.split('/')[3]
     this.tidForm.tids = tid
+    this.loading = true
     this.getTeacherInfo()
     this.getTeacherCourse()
   }

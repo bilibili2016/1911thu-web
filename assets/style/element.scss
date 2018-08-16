@@ -4,6 +4,9 @@
 
 /* Button */
 
+html {
+  font-family: '\5FAE\8F6F\96C5\9ED1', 'Microsoft Yahei';
+}
 .el-button--large {
   padding: $--button-large-padding-vertical $--button-large-padding-horizontal;
   font-size: $--button-large-font-size;
@@ -994,7 +997,7 @@
     .el-tabs__item.is-active {
       background: #fff;
       font-size: 16px;
-      font-family: MicrosoftYaHei;
+      font-family: '微软雅黑', 'Microsoft Yahei';
       color: rgba(154, 92, 208, 1); // padding: 4px 20px 4px 20px;
       border-bottom: 2px solid #6417a6;
     }
@@ -1100,6 +1103,7 @@
     height: 30px;
     border-radius: 50%;
     border: none;
+    z-index: 20;
     background-color: rgba(255, 255, 255, 0.6);
     &:after {
       height: 12px;
@@ -1150,7 +1154,7 @@
   .el-dialog__title {
     line-height: 24px;
     font-size: 16px;
-    font-family: MicrosoftYaHei;
+    font-family: '微软雅黑', 'Microsoft Yahei';
     color: rgba(34, 34, 34, 1);
   }
   .el-dialog__body {
@@ -1496,4 +1500,10 @@ input:-webkit-autofill {
 
 input::-webkit-input-safebox-button {
   display: none;
+}
+
+.home {
+  .index-project {
+    min-height: 510px;
+  }
 }
