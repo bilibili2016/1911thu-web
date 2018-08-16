@@ -156,7 +156,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
-import { splitUrl } from '~/lib/util/helper'
+import { splitUrl, message } from '~/lib/util/helper'
 import CardPlayer from '@/pages/course/components/CardPlayer'
 export default {
   components: {
@@ -249,17 +249,11 @@ export default {
         if (this.two_is_cart === 0) {
           this.addCourseShopCart(item)
         } else {
-          this.$message({
-            type: 'success',
-            message: '您的商品已经在购物车里面'
-          })
+          message(this, 'success', '您的商品已经在购物车里面')
         }
       } else {
         // 第一次点击 在购物车
-        this.$message({
-          type: 'success',
-          message: '您的商品已经在购物车里面'
-        })
+        message(this, 'success', '您的商品已经在购物车里面')
       }
     },
     closeCover() {
@@ -274,10 +268,7 @@ export default {
           pn: len
         })
         this.two_is_cart = 1
-        this.$message({
-          type: 'success',
-          message: '加入购物车成功'
-        })
+        message(this, 'success', '加入购物车成功')
       })
     },
     changeURLArg(url, arg, arg_val) {
