@@ -180,9 +180,7 @@ export default {
       }
     },
     rePlay() {
-      // this.linksocket()
       this.getdefaultPlayerUrl()
-      // this.addEventPlayer()
     }
   },
   mounted() {

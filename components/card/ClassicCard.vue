@@ -23,19 +23,26 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
+import { open } from '~/lib/util/helper'
 export default {
   props: ['data'],
   data() {
     return {
-      stydyNum: require('@/assets/images/home_num.png')
+      stydyNum: require('@/assets/images/home_num.png'),
+      coursedetail: {
+        base: '',
+        kid: null
+      }
     }
   },
   methods: {
     handleLink(item) {
       // persistStore.set('curriculumId', item.id)
-      window.open(
-        window.location.origin + '/course/coursedetail?kid=' + item.id
-      )
+      this.coursedetail = item.id
+      open(this.coursedetail)
+      // window.open(
+      //   window.location.origin + '/course/coursedetail?kid=' + item.id
+      // )
     }
   }
 }

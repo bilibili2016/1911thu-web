@@ -12,7 +12,7 @@
 <script>
 import Header from '~/components/common/Header'
 import Footer from '~/components/common/Footer'
-import { mapState, mapActions, mapGetters } from 'vuex'
+
 import { setPagesHeight } from '~/lib/util/helper'
 export default {
   components: {

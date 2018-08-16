@@ -604,11 +604,6 @@ export default {
       this.loginData.ectpwd = encryption(this.registerData.passwords)
       this.loadLogin = true
       this.signIn(this.loginData).then(response => {
-        // this.$message({
-        //   showClose: true,
-        //   type: response.status === 0 ? 'success' : 'error',
-        //   message: response.msg
-        // })
         let types = response.status === 0 ? 'success' : 'error'
         message(this, types, response.msg)
         if (response.status === 0) {
@@ -628,16 +623,11 @@ export default {
           if (valid) {
             this.loadLogin = true
             auth.signUp(this.registerData).then(response => {
-              // this.$message({
-              //   showClose: true,
-              //   type: response.status === 0 ? 'success' : 'error',
-              //   message: response.msg
-              // })
-              let types = response.status !== 0 ? 'success' : 'error'
-              message(this, types, response.msg)
               if (response.status === 0) {
                 this.alreadySignin()
                 this.close()
+              } else {
+                message(this, 'error', response.msg)
               }
               this.loadLogin = false
               this.isClick = false

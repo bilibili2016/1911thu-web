@@ -126,7 +126,7 @@ export default {
         this.bindForm.isBind = true
       } else {
         this.$alert(
-          '您暂未登陆，无法绑定兑换码，请先完成用户登录！',
+          '您暂未登录，无法绑定兑换码，请先完成用户登录！',
           '温馨提示',
           {
             confirmButtonText: '确定',
