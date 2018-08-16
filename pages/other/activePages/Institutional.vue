@@ -518,7 +518,7 @@ export default {
       }
     },
     knowDetail() {
-      this.$router.push('/other/enterprisecustom')
+      this.$router.push('/other/activePages/enterprisecustom')
     }
   },
   mounted() {
@@ -536,13 +536,6 @@ export default {
     }
 
     this.buttonFormTop = this.$refs.buttonForm.offsetTop
-
-    //处理火狐一像素差的问题
-    if (navigator.userAgent.indexOf('Firefox') > 0) {
-      this.$refs.rgihtGo.style.marginLeft = '19px'
-    } else {
-      this.$refs.rgihtGo.style.marginLeft = '18px'
-    }
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {

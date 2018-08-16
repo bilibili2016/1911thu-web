@@ -34,7 +34,7 @@
 
 <script>
 import { binding } from '~/lib/v1_sdk/index'
-import { timestampToYMD } from '@/lib/util/helper'
+import { timestampToYMD, open } from '@/lib/util/helper'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import NoMsg from '@/pages/profile/pages/noMsg.vue'
@@ -62,40 +62,22 @@ export default {
     // 跳转课程或项目详情
     handleLink(item) {
       if (item.type === '1') {
-        // persistStore.set('curriculumId', item.curriculum_id)
-        window.open(
-          window.location.origin +
-            '/course/coursedetail?kid=' +
-            item.curriculum_id
-        )
+        let courseDetail = {
+          base: '/course/coursedetail',
+          kid: item.curriculum_id
+        }
+        open(courseDetail)
       } else {
-        window.open(
-          window.location.origin +
-            '/project/projectdetail?id=' +
-            item.curriculum_id
-        )
+        let courseDetail = {
+          base: '/project/projectdetail',
+          kid: item.curriculum_id
+        }
+        open(courseDetail)
       }
     },
     // 时间戳转日期格式
     exchangeTime(time) {
       return timestampToYMD(time)
-    },
-    goDetail(item) {
-      if (item.type === '1') {
-        // persistStore.set('curriculumId', item.curriculum_id)
-        this.kidForm.kids = item.curriculum_id
-        window.open(
-          window.location.origin +
-            '/course/coursedetail?kid=' +
-            item.curriculum_id
-        )
-      } else {
-        window.open(
-          window.location.origin +
-            '/project/projectdetail?id=' +
-            item.curriculum_id
-        )
-      }
     },
     // 检测兑换码内是否包含已绑定的课程
     detection() {

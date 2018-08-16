@@ -5,7 +5,7 @@
       <el-dialog title="课程评价 " :visible.sync="dialogVisible " width="30% " :before-close="handleClose ">
         <div v-loading="loadMsg " class="topDiv ">
           <!-- 用户评价内容组件 -->
-          <v-evaluate :evaluteData="commentator " class="dialog-line"></v-evaluate>
+          <v-evaluate v-loading="evaluateLoading" :evaluteData="commentator " class="dialog-line"></v-evaluate>
         </div>
         <div class="pagination course-style ">
           <el-pagination :id="pagemsg.total " v-show="pagemsg.total!='0' " background layout="prev, pager, next " :page-size="pagemsg.pagesize " :page-count="pagemsg.pagesize " :current-page="pagemsg.page " :total="pagemsg.total " @current-change="handleCurrentChange"></el-pagination>
@@ -18,7 +18,13 @@
 <script>
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
 export default {
-  props: ['dialogVisible', 'commentator', 'pagemsg', 'loadMsg'],
+  props: [
+    'dialogVisible',
+    'commentator',
+    'pagemsg',
+    'loadMsg',
+    'evaluateLoading'
+  ],
   components: {
     'v-evaluate': EvaluateContent
   },

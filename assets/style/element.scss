@@ -4,6 +4,9 @@
 
 /* Button */
 
+html {
+  font-family: '微软雅黑', 'Microsoft Yahei';
+}
 .el-button--large {
   padding: $--button-large-padding-vertical $--button-large-padding-horizontal;
   font-size: $--button-large-font-size;
@@ -1496,4 +1499,10 @@ input:-webkit-autofill {
 
 input::-webkit-input-safebox-button {
   display: none;
+}
+
+.home {
+  .index-project {
+    min-height: 510px;
+  }
 }
