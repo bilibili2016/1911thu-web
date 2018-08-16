@@ -120,9 +120,14 @@ export default {
       })
     }
   },
+  watch: {
+    // 检测数据中的收藏 数据过来慢
+    projectDetail(val, old) {
+      this.collectMsg.isCollect = val.is_Collection
+    }
+  },
   mounted() {
     this.project.projectId = window.location.search.split('=')[1]
-    this.collectMsg.isCollect = this.projectDetail.is_Collection
   }
 }
 </script>
