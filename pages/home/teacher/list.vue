@@ -5,7 +5,7 @@
       <div @click="getNewInfoList"></div>
       <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
     </div>
-    <div class="pagination">
+    <div class="pagination" v-show="famousList.length!=0">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
   </div>

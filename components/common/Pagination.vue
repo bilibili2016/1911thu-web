@@ -10,7 +10,7 @@
 export default {
   props: ['pagemsg'],
   mounted() {
-    // console.log(this.pagemsg)
+    console.log(this.pagemsg)
   },
   methods: {
     handlePageChange(val) {
