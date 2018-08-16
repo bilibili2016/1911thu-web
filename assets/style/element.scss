@@ -5,7 +5,7 @@
 /* Button */
 
 html {
-  font-family: '微软雅黑', 'Microsoft Yahei';
+  font-family: '\5FAE\8F6F\96C5\9ED1', 'Microsoft Yahei';
 }
 .el-button--large {
   padding: $--button-large-padding-vertical $--button-large-padding-horizontal;
@@ -1103,6 +1103,7 @@ html {
     height: 30px;
     border-radius: 50%;
     border: none;
+    z-index: 20;
     background-color: rgba(255, 255, 255, 0.6);
     &:after {
       height: 12px;
