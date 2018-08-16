@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header-mask">
     <!-- 面包屑 收藏分享 -->
     <div class="main-crumb">
       <div class="fl">

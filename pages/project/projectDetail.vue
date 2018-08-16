@@ -1,7 +1,7 @@
 <template>
   <div class="projectDetail" v-loading="projectDetailLoad">
     <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}">
-
+      <!-- <div class="header-mask"></div> -->
       <!-- 项目详情基本信息 -->
       <v-detail :projectDetail="projectDetail"></v-detail>
     </div>
