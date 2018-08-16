@@ -35,7 +35,6 @@ export default {
       getdefaultForm: {
         curriculumid: ''
       },
-      closeCoverNum: 0,
       players: '',
       ceshiUrl: 'http://ceshi.1911thu.com',
       localUrl: 'http://localhost:8080',
@@ -114,11 +113,7 @@ export default {
           if (this.autoplay) {
             window.qcplayer.play()
           }
-          if (this.closeCoverNum > 0) {
-            this.$bus.$emit('closeCover')
-          } else {
-            this.closeCoverNum++
-          }
+          this.$bus.$emit('closeCover')
         } else {
           message(this, 'warning', res.msg)
           return false
