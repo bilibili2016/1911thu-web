@@ -144,7 +144,8 @@
               <i class="fl minus" v-if="numForm.number<=1">-</i>
               <i class="fl minus" v-else @click="delNumber">-</i>
               <input type="text" class="fl num" v-model="numForm.number" @blur="changeNumber">
-              <i class="fl add" @click="addNumber">+</i>
+              <i class="fl add" v-if="numForm.number>=9999">+</i>
+              <i class="fl add" v-else @click="addNumber">+</i>
             </span>
           </span>
           <span class="commitOrder fr">
@@ -199,6 +200,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 import List from '@/pages/shop/components/List'
+import { message } from '@/lib/util/helper'
 export default {
   components: {
     'v-list': List
@@ -948,10 +950,7 @@ export default {
             this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
           })
           .catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消结算！'
-            })
+            message(this, 'info', '已取消结算！')
           })
         // this.$router.push('/shop/affirmorder')
       }
@@ -1012,15 +1011,17 @@ export default {
       if (!/^[0-9]*$/.test(this.numForm.number) || this.numForm.number < 1) {
         this.numForm.number = 1
       }
+      if (
+        !/^[0-9]*$/.test(this.numForm.number) ||
+        this.numForm.number >= 9999
+      ) {
+        this.numForm.number = 9999
+      }
       this.changeCartNumber()
     },
     // 发送购物车的购买人数
     changeCartNumber() {
-      return new Promise((resolve, reject) => {
-        shopcart.changeCartNumber(this.numForm).then(res => {
-          resolve(true)
-        })
-      })
+      shopcart.changeCartNumber(this.numForm).then(res => {})
     },
     addPaySubmit(formName) {
       this.$router.push('/shop/checkedcourse')
@@ -1028,11 +1029,7 @@ export default {
         if (valid) {
           shopcart.addPaySubmit(this.companyInfo).then(response => {
             if (response.status === '100100') {
-              this.$message({
-                showClose: true,
-                type: 'error',
-                message: response.msg
-              })
+              message(this, 'error', response.msg)
             } else if (response.status === 0) {
               this.setProductsNum(0)
               this.$bus.$emit('updateCount')
@@ -1051,11 +1048,7 @@ export default {
       this.loding = true
 
       shopcart.delCourseShopCart(this.curriculumcartids).then(response => {
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '删除成功'
-        })
+        message(this, 'success', '删除成功')
         // this.handleSelectChange(item, index);
         // this.courseList.splice(index, 1);
         this.shopCartList()
@@ -1069,11 +1062,7 @@ export default {
       this.loding = true
 
       shopcart.delProjectShopCart(this.projectcartids).then(response => {
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '删除成功'
-        })
+        message(this, 'success', '删除成功')
         // this.handleSelectChange(item, index);
         // this.courseList.splice(index, 1);
         this.shopCartList()
@@ -1090,19 +1079,12 @@ export default {
         this.deleteAllData.projectcartid.length === 0 &&
         this.deleteAllData.curriculumcartid.length === 0
       ) {
-        this.$message({
-          showClose: true,
-          message: '请选择要删除的课程'
-        })
+        message(this, 'success', '请选择要删除的课程')
         this.loding = false
         return false
       }
       shopcart.delAllShopCart(this.deleteAllData).then(response => {
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '删除成功'
-        })
+        message(this, 'success', '删除成功')
         // this.handleSelectChange(item, index);
         // this.courseList.splice(index, 1);
         this.shopCartList()
@@ -1118,11 +1100,11 @@ export default {
       ) {
         if (this.companyInfo.captchaDisable === true) {
           auth.smsCodes(this.companyInfo).then(response => {
-            this.$message({
-              showClose: true,
-              type: response.status === 0 ? 'success' : 'error',
-              message: response.msg
-            })
+            message(
+              this,
+              response.status === 0 ? 'success' : 'error',
+              response.msg
+            )
             this.companyInfo.captchaDisable = false
             this.companyInfo.getCode = this.companyInfo.seconds + '秒后重新发送'
             let interval = setInterval(() => {
