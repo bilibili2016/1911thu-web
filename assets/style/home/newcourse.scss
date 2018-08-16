@@ -18,7 +18,7 @@
       background-color: #fff;
       // border-radius: 16px;
       box-shadow: 0px 0px 12px rgba(3, 2, 9, 0.28);
-      transition: all 400ms;
+      transition: all 300ms;
       position: relative;
       cursor: pointer;
       &:last-child {
@@ -52,13 +52,13 @@
         width: 250px;
         height: 160px;
         overflow: hidden;
-        transition: all 400ms;
+        transition: all 300ms;
       }
       div.fl .project-img {
         width: 70px;
         height: 30px;
         overflow: hidden;
-        transition: all 400ms;
+        transition: all 300ms;
         position: absolute;
         top: 5px;
         left: -4px;
@@ -66,14 +66,14 @@
       .courseInfo {
         width: 283px;
         padding: 10px 30px 10px 20px;
-        transition: all 400ms;
+        transition: all 300ms;
         h4 {
           width: 235px;
           margin-top: 5px;
           color: #1c1f21;
           font-size: 16px;
           line-height: 22px;
-          transition: all 400ms;
+          transition: all 300ms;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;

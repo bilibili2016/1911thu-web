@@ -40,17 +40,19 @@ export default {
     ...mapActions('auth', ['setKid']),
     handleLink(img) {
       this.kidForm.kids = img.jump_id
-      // persistStore.set('curriculumId', img.jump_id)
-      // this.setKid(this.kidForm)
-      // window.open(
-      //   window.location.origin + '/course/coursedetail?kid=' + img.jump_id
-      // )
     },
     goDetail(news) {
       window.open(window.location.origin + '/home/news/' + news.id)
     }
   },
   mounted() {
+    // this.$nextTick(() => {
+    //   console.log(document.getElementsByClassName('el-carousel__item').length)
+    // })
+
+    // console.log(document.getElementsByClassName('el-carousel__item')[0].style)
+    // document.getElementsByClassName('el-carousel__item')[0].style.marginLeft =
+    //   '400px'
     let Dwidth = document.documentElement.clientWidth
     if (Dwidth > 1920) {
       document.getElementsByClassName('el-carousel')[0].style.width =

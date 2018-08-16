@@ -5,6 +5,7 @@
       <span class="el-dropdown-link">
         全部课程
         <i class="el-icon-arrow-down el-icon--right"></i>
+        <span class="downLine"></span>
       </span>
       <div class="drops">
         <ul>
@@ -16,6 +17,7 @@
       <span class="el-dropdown-link">
         培训项目
         <i class="el-icon-arrow-down el-icon--right"></i>
+        <span class="downLine"></span>
       </span>
       <div class="drops">
         <ul>
