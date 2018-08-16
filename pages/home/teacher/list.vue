@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       bannerImg: 'http://papn9j3ys.bkt.clouddn.com/famousTeacher-bg.png',
+      load: true,
       configs: {
         banner_type: 'famousList'
       },
@@ -37,7 +38,7 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 7,
+        pagesize: 5,
         total: null
       },
       loading: false

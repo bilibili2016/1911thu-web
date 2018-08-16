@@ -1,5 +1,5 @@
 <template>
-  <div class=" goodLesson news-list famous-teacher">
+  <div class=" goodLesson news-list famous-teacher" v-loading="load">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow">
       <!-- 面包屑组件 -->
@@ -7,7 +7,7 @@
       <div @click="getNewInfoList"></div>
       <v-card :newsList="newsList" :config="config" :linksix='linksix' class="new-card-on"></v-card>
     </div>
-    <div class="pagination">
+    <div class="pagination" v-show="!load">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
   </div>
@@ -31,6 +31,7 @@ export default {
         position: true, //是否显示当前位置
         text: '学堂资讯'
       },
+      load: true,
       bannerImg: 'http://papn9j3ys.bkt.clouddn.com/newList-bg.png',
       linksix: '/news/detail',
       configs: {
@@ -61,6 +62,7 @@ export default {
       news.getNewInfoList(this.newsInfoForm).then(response => {
         this.pagemsg.total = Number(response.data.pageCount)
         this.newsList = response.data.newsList
+        this.load = false
       })
     },
     selectPages(val) {

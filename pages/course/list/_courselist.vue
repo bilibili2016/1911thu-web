@@ -23,6 +23,7 @@ import CustomCard from '@/pages/course/components/ListCard.vue'
 import { categorylist } from '~/lib/v1_sdk/index'
 import CustomPagination from '@/components/common/Pagination.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
+import { message } from '~/lib/util/helper'
 export default {
   components: {
     'v-card': CustomCard,
@@ -144,11 +145,7 @@ export default {
     // 下拉查看更多
     getMoreData() {
       if (this.pageCount === this.courseList.length) {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '没有更多课程了！'
-        })
+        message(this, 'error', '没有更多课程了！')
       } else {
         this.newsCurriculumForm.pages = this.newsCurriculumForm.pages + 1
         this.getNewCourseList()
