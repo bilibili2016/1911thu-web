@@ -48,6 +48,7 @@
                 <div class="line-centers ">
                   <span class="studyPercent">已学习{{card.percent}}%</span>
                   <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
+                  <span class="studyIsFree" v-else>免费</span>
                   <el-progress v-if="card.percent>0" :percentage="card.percent" :show-text="false"></el-progress>
                 </div>
               </div>

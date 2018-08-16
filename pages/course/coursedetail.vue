@@ -27,7 +27,7 @@
         <!-- 课程评价-->
         <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
         <!-- 用户评价  查看更多 -->
-        <v-evaluatedialog :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
+        <v-evaluatedialog :evaluateLoading="evaluateLoading" :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
         <!-- 用户评论 列表-->
         <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
       </div>
@@ -73,6 +73,7 @@ export default {
   },
   data() {
     return {
+      evaluateLoading: true,
       BreadCrumb: {
         type: 'courseDetail',
         position: false, //是否显示当前位置
@@ -272,9 +273,10 @@ export default {
       this.evaluateListForm.limits = 3
       // this.evaluateListForm.ids = persistStore.get('curriculumId')
       this.evaluateListForm.ids = splitUrl(0, 1)
-
+      this.evaluateLoading = true
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
         this.loadMsg = false
+        this.evaluateLoading = false
         this.pagemsg.total = response.data.pageCount
         this.commentator = response.data.evaluateList
       })

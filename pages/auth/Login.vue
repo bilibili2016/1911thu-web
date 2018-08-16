@@ -633,7 +633,7 @@ export default {
               //   type: response.status === 0 ? 'success' : 'error',
               //   message: response.msg
               // })
-              let types = response.status === 0 ? 'success' : 'error'
+              let types = response.status !== 0 ? 'success' : 'error'
               message(this, types, response.msg)
               if (response.status === 0) {
                 this.alreadySignin()
