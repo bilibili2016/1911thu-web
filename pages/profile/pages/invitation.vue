@@ -66,7 +66,7 @@ export default {
       this.setGid(this.gidForm)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', 'tab-fourth')
-      console.log(item, '123')
+
       persistStore.set('order', item)
       this.$bus.$emit('goOrderDetaild', item)
     },

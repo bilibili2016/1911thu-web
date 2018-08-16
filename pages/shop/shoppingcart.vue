@@ -907,10 +907,8 @@ export default {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
       // 否则的话就提醒如何绑定
 
-      console.log(this.numForm.number == '1', '这是点击数量')
       if (this.numForm.number == '1') {
         shopcart.existCourse().then(res => {
-          console.log(res, '这是res')
           if (
             res.data.is_exist_curriculum === 1 ||
             res.data.is_exist_project === 1

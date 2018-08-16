@@ -717,7 +717,6 @@ export default {
       this.orderForm.payStatus = 0
       return new Promise((resolve, reject) => {
         profileHome.getAllOrderData(this.orderForm).then(response => {
-          console.log(response.data, '这是全部订单')
           this.allOrderData = response.data.orderList
           this.allOrderLoad = false
           resolve(true)
@@ -880,7 +879,7 @@ export default {
     // 获取专属兑换码列表
     getCodeList() {
       profileHome.getCodeList(this.codeListForm).then(response => {
-        console.log(response, '这是兑换码列表')
+
         this.codeData = response.data.orderInvitationCodeList
       })
     },

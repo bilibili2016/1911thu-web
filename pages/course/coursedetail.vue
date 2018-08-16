@@ -154,8 +154,6 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log('前一页 from = ' + from.query.key)
-      console.log('准备进入的页面是  to = ' + to.query.key)
       // if (from.query.key) {
       //   if (to.query.key > from.query.key) {
       //     this.transitionName = 'slide-fade'
@@ -400,9 +398,6 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    console.log(to, '这是to')
-    console.log(from, '这是from')
-    console.log(next, '这是next')
     // this.$bus.$emit('headerFooterShow')
     next(vm => {})
   }

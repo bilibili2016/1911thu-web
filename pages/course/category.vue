@@ -139,7 +139,7 @@ export default {
           '&pids=' +
           '0'
       )
-      console.log(this.$ref, 'content')
+
       this.categoryForm.pages = 1
 
       // 点击cid时候 cid选中 pid置为 0
@@ -227,7 +227,7 @@ export default {
     // 分类 全部
     selectAllPid() {
       this.categoryForm.pages = 1
-      console.log(this.categoryId, '123')
+
       this.$router.push(
         '/course/category' +
           '?cid=' +

@@ -176,7 +176,6 @@ export default {
     if (window.location.search.split('=')[2]) {
       this.isIndex = false
       this.cp = splitUrl(1, 1)
-      console.log(this.cp, '这是cp')
     } else {
       this.isIndex = true
     }

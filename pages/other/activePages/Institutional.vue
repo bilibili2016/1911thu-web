@@ -331,9 +331,7 @@ export default {
     ...mapState('auth', ['token'])
   },
   methods: {
-    fetchDate() {
-      console.log('123')
-    },
+    fetchDate() {},
     goCourseList(item) {
       window.open(
         window.location.origin +
