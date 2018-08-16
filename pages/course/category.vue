@@ -2,7 +2,7 @@
   <div>
     <!-- 顶部list -->
     <div v-loading="loadList">
-      <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectAllCid="selectAllCid" @selectCid="selectCid" @selectAllPid="selectAllPid" @selectPid="selectPid"></v-list>
+      <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectAllCid="selectAllCid" @selectCid="selectCid" @selectAllPid="selectAllPid" @selectPid="selectPid" :loadList="loadList"></v-list>
     </div>
     <div class="center category-style">
       <!-- 选择全部 最新和最热 -->
@@ -19,11 +19,11 @@
       </div>
       <div v-if="xid === '1'">
         <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
-        <div class="carlist" v-if="categoryDataChoose.length&& xid === '1'" v-loading="loadCourse">
+        <div class="carlist" v-if="categoryDataChoose.length&& xid === '1'" v-loading="loadCourse" ref="content">
           <v-card :data="categoryDataChoose" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
-        <div v-else v-loading="loadCourse" class="noMsg">
+        <div v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<0 && !loadCourse">
           <v-nothing></v-nothing>
         </div>
         <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
@@ -139,6 +139,7 @@ export default {
           '&pids=' +
           '0'
       )
+      console.log(this.$ref, 'content')
       this.categoryForm.pages = 1
 
       // 点击cid时候 cid选中 pid置为 0
@@ -445,9 +446,7 @@ export default {
         })
       }
     },
-    initHeader() {
-
-    },
+    initHeader() {},
     // 初始化params参数
     initParams() {
       // categoryId 学院 id

@@ -1,5 +1,5 @@
 <template>
-  <div class="goodLesson new-lesson" style="padding-bottom: 40px;" v-loading="load">
+  <div class="goodLesson new-lesson" style="padding-bottom: 40px;" v-loading="loading">
     <div class="topImg" :class="{
       projectImg:cidNumber==='0', courseImg:cidNumber==='1', goodCourseImg:cidNumber==='2', freeImg:cidNumber==='3',
     }">
@@ -9,11 +9,12 @@
       <!-- 面包屑组件 -->
       <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
     </div>
-    <v-card :courseList="courseList" :config="config"></v-card>
-    <div class="pagination" v-if="pageMsgs" v-show="!load">
-      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
+    <div>
+      <v-card :courseList="courseList" :config="config"></v-card>
+      <div class="pagination" v-if="pageMsgs">
+        <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -30,7 +31,6 @@ export default {
   },
   data() {
     return {
-      load: true,
       projectImg: 'http://papn9j3ys.bkt.clouddn.com/banner-project.png',
       freeImg: 'http://papn9j3ys.bkt.clouddn.com/banner-free.png',
       courseImg: 'http://papn9j3ys.bkt.clouddn.com/banner-course.jpg',
@@ -67,7 +67,8 @@ export default {
       noMoreData: false,
       cidNumber: null,
       coursename: null,
-      pageMsgs: false
+      pageMsgs: false,
+      loading: false
     }
   },
   methods: {
@@ -85,48 +86,52 @@ export default {
     },
     //获取最新项目列表
     getProjectList() {
+      this.loading = true
       categorylist.getProjectList(this.newsCurriculumForm).then(response => {
+        this.loading = false
         this.courseList = response.data.curriculumProjectList
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '最新项目'
         this.BreadCrumb.text = this.coursename
         this.pageMsgs = true
-        this.load = false
       })
     },
     // 最新课程列表
     getNewCourseList() {
+      this.loading = true
       categorylist.getNewCourseList(this.newsCurriculumForm).then(response => {
+        this.loading = false
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '最新课程'
         this.BreadCrumb.text = this.coursename
         this.pageMsgs = true
-        this.load = false
       })
     },
     // 获取经典课程列表
     getClassicCourseList() {
+      this.loading = true
       categorylist
         .getClassicCourseList(this.newsCurriculumForm)
         .then(response => {
+          this.loading = false
           this.courseList = response.data.curriculumList
           this.pagemsg.total = Number(response.data.pageCount)
           this.coursename = '精品好课'
           this.BreadCrumb.text = this.coursename
           this.pageMsgs = true
-          this.load = false
         })
     },
     // 获取最新课程列表
     getFreeCourseList() {
+      this.loading = true
       categorylist.getFreeCourseList(this.newsCurriculumForm).then(response => {
+        this.loading = false
         this.courseList = response.data.curriculumList
         this.pagemsg.total = Number(response.data.pageCount)
         this.coursename = '免费课程'
         this.BreadCrumb.text = this.coursename
         this.pageMsgs = true
-        this.load = false
       })
     },
     // 点击下面分页按钮

@@ -177,7 +177,7 @@ export default {
       this.getFreeCourseList()
 
       this.getClassicCourseList()
-      this.getTeacherList()
+      // this.getTeacherList()
       // this.getEvaluateList(),
       this.getNewsInfoList()
       this.$bus.$emit('updateCount')

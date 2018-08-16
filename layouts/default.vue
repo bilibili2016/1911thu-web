@@ -12,7 +12,8 @@
 <script>
 import Header from '~/components/common/Header'
 import Footer from '~/components/common/Footer'
-import { mapState, mapActions, mapGetters } from 'vuex'
+
+import { setPagesHeight } from '~/lib/util/helper'
 export default {
   components: {
     Header,
@@ -24,6 +25,7 @@ export default {
     }
   },
   mounted() {
+    setPagesHeight()
     // console.log(window.location.origin, '123')
     this.$bus.$on('headerFooterShow', () => {
       this.hfshow = true
