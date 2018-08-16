@@ -42,6 +42,7 @@ export default {
   },
   data() {
     return {
+      windowWidth: '',
       // linknewproject: '/course/' + '0' + '?type=' + '1' + '&xid=0',
       linknewproject: '/course/list/0',
       newprojecttitle: '最新项目',
@@ -188,6 +189,16 @@ export default {
     getBanner() {
       home.getBannerList(this.itemsData).then(response => {
         this.items = response.data.bannerList
+        //设置banner溢出居中显示
+        this.$nextTick(() => {
+          let imgArr = document.getElementsByClassName('el-carousel__item')
+          if (this.windowWidth <= 1920) {
+            let marginLeft = (1920 - this.windowWidth) / 2
+            for (var i = 0; i < imgArr.length; i++) {
+              imgArr[i].style.marginLeft = -marginLeft + 'px'
+            }
+          }
+        })
       })
     },
     // 获取分类列表
@@ -263,6 +274,8 @@ export default {
     this.getNewCourseList()
   },
   mounted() {
+    this.windowWidth = document.documentElement.clientWidth
+
     this.$bus.$on('loginMsg', data => {
       if (data === true) {
         this.loginMsg = true

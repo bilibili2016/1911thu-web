@@ -1,10 +1,8 @@
 <template>
   <div class="goodLesson new-lesson" style="padding-bottom: 40px;">
-    <div class="topImg">
-      <img v-if="cidNumber==='0'" :src="projectImg" alt="">
-      <img v-else-if="cidNumber==='1'" :src="courseImg" alt="">
-      <img v-else-if="cidNumber==='2'" :src="goodCourseImg" alt="">
-      <img v-else :src="freeImg" alt="">
+    <div class="topImg" :class="{
+      projectImg:cidNumber==='0', courseImg:cidNumber==='1', goodCourseImg:cidNumber==='2', freeImg:cidNumber==='3',
+    }">
 
     </div>
     <div class="breadCrumb">
