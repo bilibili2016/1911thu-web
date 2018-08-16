@@ -27,20 +27,24 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
+import { open } from '@/lib/util/helper'
 export default {
   props: ['cardData'],
   data() {
     return {
       projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png',
-      stydyNum: require('@/assets/images/home_num.png')
+      stydyNum: require('@/assets/images/home_num.png'),
+      projectdetail: {
+        base: '/project/projectdetail',
+        kid: ''
+      }
     }
   },
   methods: {
     //项目详情
     projectInfo(item, index) {
-      window.open(
-        window.location.origin + '/project/projectdetail?id=' + item.id
-      )
+      this.projectdetail.kid = item.id
+      open(this.projectdetail)
     }
   }
 }
