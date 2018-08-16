@@ -179,16 +179,17 @@ export default {
         if (this.registerData.checked) {
           if (valid) {
             this.loadLogin = true
+
             auth.signUp(this.registerData).then(response => {
               // this.$message({
               //   showClose: true,
               //   type: response.status === 0 ? 'success' : 'error',
               //   message: response.msg
               // })
-              let types = response.status === 0 ? 'success' : 'error'
+              let types = response.status !== 0 ? 'success' : 'error'
               message(this, types, response.msg)
               if (response.status === 0) {
-                // this.alreadySignin()
+                // this.alreadySignin(
                 // this.close()
                 this.$emit('alreadySignin')
                 this.$emit('close')
