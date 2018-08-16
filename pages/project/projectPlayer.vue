@@ -73,7 +73,7 @@ import Repore from '@/components/common/Report.vue'
 import Pay from '@/components/common/Pay.vue'
 import List from '@/pages/project/components/CourseList.vue'
 import Collection from '@/components/common/Collection.vue'
-
+import { message } from '@/lib/util/helper'
 export default {
   components: {
     'v-evaluatecase': EvaluateCase,
