@@ -9,7 +9,7 @@
         </div>
         <div class="fr">
           <!-- 收藏分享 -->
-          <v-collection :collectData="collectMsg"></v-collection>
+          <!-- <v-collection :collectData="collectMsg"></v-collection> -->
         </div>
       </div>
       <!-- 顶部的card -->
