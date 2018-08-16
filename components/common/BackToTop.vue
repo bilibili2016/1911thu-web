@@ -17,15 +17,15 @@
     </transition>
     <transition :name="transitionName">
       <!-- <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=1060962187"> -->
-      <a href="http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes">
-        <div class="back-to-ceiling hasColor customStyleFour" v-show="visible">
+      <!-- <a href="http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes"> -->
+      <div class="back-to-ceiling hasColor customStyleFour" v-show="visible" @click="handleopen">
 
-          <span></span>
-          <div class="telShow">
-            <p>点击咨询在线qq</p>
-          </div>
+        <span></span>
+        <div class="telShow">
+          <p>点击咨询在线qq</p>
         </div>
-      </a>
+      </div>
+      <!-- </a> -->
     </transition>
     <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
@@ -154,6 +154,9 @@ export default {
     easeInOutQuad(t, b, c, d) {
       if ((t /= d / 2) < 1) return c / 2 * t * t + b
       return -c / 2 * (--t * (t - 2) - 1) + b
+    },
+    handleopen() {
+      window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')
     }
   }
 }
