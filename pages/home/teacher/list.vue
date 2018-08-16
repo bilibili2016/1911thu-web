@@ -1,5 +1,5 @@
 <template>
-  <div class="news-list" v-loading="load">
+  <div class="news-list" v-loading="loading">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow">
       <div @click="getNewInfoList"></div>
@@ -40,7 +40,8 @@ export default {
         page: 1,
         pagesize: 5,
         total: null
-      }
+      },
+      loading: false
     }
   },
   mounted() {
@@ -50,10 +51,11 @@ export default {
     getNewInfoList() {
       this.teacherForm.pages = 1
       this.teacherForm.limits = 7
+      this.loading = true
       list.getTeacherList(this.teacherForm).then(response => {
         this.pagemsg.total = Number(response.data.pageCount)
         this.famousList = response.data.teacherList
-        this.load = false
+        this.loading = false
       })
     },
     selectPages(val) {

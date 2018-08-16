@@ -37,7 +37,8 @@ export default {
   data() {
     return {
       titleListData: '',
-      listCon: []
+      listCon: [],
+      loading: false
     }
   },
   // computed:
@@ -45,7 +46,9 @@ export default {
     //左侧菜单栏
     titleList() {
       return new Promise((resolve, reject) => {
+        this.loading = true
         About.titleList().then(res => {
+          // this.loading = false
           this.titleListData = res.data
           this.titleListData.map(item => {
             this.getDetail(item.id)
@@ -59,6 +62,7 @@ export default {
       return new Promise((resolve, reject) => {
         About.aboutDetail({ id: ID }).then(res => {
           this.listCon.push(res.data)
+          this.loading = false
           resolve(true)
         })
       })

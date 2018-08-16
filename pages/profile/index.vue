@@ -148,7 +148,7 @@
             </el-tabs>
           </el-card>
           <!-- 订单详情 -->
-          <v-detail v-else :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :config="orderType"></v-detail>
+          <v-detail v-else :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :config="orderType" v-loading="detailMsg"></v-detail>
 
         </el-tab-pane>
         <!-- 我的消息 -->
@@ -447,7 +447,8 @@ export default {
       invalidOrderLoad: true,
       historyOrderLoad: true,
       overTimeData: [],
-      invitationCodeList: []
+      invitationCodeList: [],
+      detailMsg: false
     }
   },
   computed: {
@@ -716,6 +717,7 @@ export default {
       this.orderForm.payStatus = 0
       return new Promise((resolve, reject) => {
         profileHome.getAllOrderData(this.orderForm).then(response => {
+          console.log(response.data, '这是全部订单')
           this.allOrderData = response.data.orderList
           this.allOrderLoad = false
           resolve(true)
@@ -878,6 +880,7 @@ export default {
     // 获取专属兑换码列表
     getCodeList() {
       profileHome.getCodeList(this.codeListForm).then(response => {
+        console.log(response, '这是兑换码列表')
         this.codeData = response.data.orderInvitationCodeList
       })
     },
@@ -918,16 +921,16 @@ export default {
     // 订单详情
     curriculumPayApply() {
       this.orderForm.ids = persistStore.get('order')
-      return new Promise((resolve, reject) => {
-        profileHome.curriculumPayApply(this.orderForm).then(response => {
-          if (response.status === 0) {
-            this.courseList = response.data.orderCurriculumList
-            this.projectList = response.data.orderProjectList
-            this.orderDetail = response.data.orderDetail
-            this.bankInfo = response.data.bankInfo
-          }
-          resolve(true)
-        })
+
+      this.detailMsg = true
+      profileHome.curriculumPayApply(this.orderForm).then(response => {
+        if (response.status === 0) {
+          this.detailMsg = false
+          this.courseList = response.data.orderCurriculumList
+          this.projectList = response.data.orderProjectList
+          this.orderDetail = response.data.orderDetail
+          this.bankInfo = response.data.bankInfo
+        }
       })
     },
     chengeItem() {
@@ -993,6 +996,11 @@ export default {
     })
     this.$bus.$on('chengeItem', data => {
       this.chengeItem()
+    })
+    this.$bus.$on('goOrderDetaild', data => {
+      // this.orderDetail = []
+      // this.courseList = []
+      this.getOrderDetail(false)
     })
   },
   created() {

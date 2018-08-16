@@ -46,12 +46,13 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
 export default {
   props: ['courseList'],
   computed: {
+    ...mapGetters('auth', ['isAuthenticated']),
     ...mapState('auth', ['token', 'productsNum', 'kid'])
   },
   data() {
@@ -97,17 +98,22 @@ export default {
         //课程
         this.curriculumcartids.type = 1
       }
-
-      // 第一次点击 没有 在购物车
-      if (item.is_cart === 0) {
-        this.addCourseShopCart(item)
-        this.handleChangeIsCart(item)
+      // 判断是否登录
+      if (this.isAuthenticated) {
+        // 第一次点击 没有 在购物车
+        if (item.is_cart === 0) {
+          this.addCourseShopCart(item)
+          this.handleChangeIsCart(item)
+        } else {
+          // 第一次点击 在购物车
+          this.$message({
+            type: 'success',
+            message: '您的商品已经在购物车里面'
+          })
+        }
       } else {
-        // 第一次点击 在购物车
-        this.$message({
-          type: 'success',
-          message: '您的商品已经在购物车里面'
-        })
+        // 当用户未登录
+        this.$bus.$emit('loginShow', true)
       }
     },
     // 添加购物车函数
