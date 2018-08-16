@@ -67,7 +67,8 @@
                   <!-- 免费课程学习到100后显示再次学习 -->
                   <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
                   <div v-if="config.card_type !== 'project'">
-                    <el-button v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                    <!-- Number(courseList.percent)== 0 -->
+                    <el-button v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                     <el-button v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   </div>
 
@@ -127,7 +128,7 @@
                 <div class="common-button">
                   <!-- 学习到100后显示再次学习，否则显示继续学习 -->
                   <div v-if="config.card_type !== 'project'">
-                    <div v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100">
+                    <div v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100">
                       <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
                       <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                     </div>
