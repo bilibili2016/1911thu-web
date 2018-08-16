@@ -56,7 +56,7 @@
         border-radius: 50%;
         margin: 0 auto;
         text-align: center;
-        transition: all 0.5s;
+        transition: all 300ms;
         margin-bottom: 30px;
         img {
           display: inline-block;
@@ -64,7 +64,7 @@
           height: 150px;
           border-radius: 50%;
           margin-top: 3px;
-          transition: all 0.5s;
+          transition: all 300ms;
         }
       }
       .item-desc {

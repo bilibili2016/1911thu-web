@@ -3,13 +3,15 @@
     <div class="result">
       <img v-if="success" src="http://papn9j3ys.bkt.clouddn.com/success.png" alt="">
       <img v-else src="http://papn9j3ys.bkt.clouddn.com/error.png" alt="">
-      <h4 v-if="success">支付成功！</h4>
+      <h4 v-if="!success">支付成功！</h4>
       <h4 v-else>支付失败！</h4>
       <div class="restltMsg" v-if="success">
         <p>
           <span>订单：{{payCompleteData.order_sn}}</span>
           <span> | </span>
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
+          <span>支付金额：￥22</span>
+
         </p>
       </div>
       <div v-if="hasCode" v-show="showMsg">
@@ -23,9 +25,9 @@
       </div>
       <div v-else v-show="showMsg">
         <div class="tips">
-          <p>您购买的商品已生成兑换码</p>
+          <p class="tips-one">您购买的商品已生成兑换码</p>
           <p>请前往
-            <span>“我的中心 —兑换码管理”</span>查看，兑换后可观看课程
+            <span class="tips-two">“我的中心 —兑换码管理”</span>查看，兑换后可观看课程
           </p>
         </div>
         <p class="sure">
