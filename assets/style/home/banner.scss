@@ -18,7 +18,13 @@
   .el-carousel {
     margin: 0 auto;
   }
+
+  .el-carousel__item {
+    width: 1920px;
+    // margin-left: -300px;
+  }
   .el-carousel__item img {
+    width: 1920px;
     height: 420px;
     margin: 0 auto;
   }
