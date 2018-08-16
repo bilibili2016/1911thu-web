@@ -91,7 +91,7 @@
         height: 210px;
         padding: 55px 63px 51px 62px;
         text-align: left;
-        transition: all 0.5s;
+        transition: all 300ms;
         margin-right: 1px;
         // border-left: 2px solid rgba(255, 255, 255, 0);
         z-index: 1;
@@ -102,7 +102,7 @@
           width: 2px;
           height: 210px;
           background: rgba(145, 94, 222, 1);
-          transition: all 0.5s;
+          transition: all 300ms;
         }
         .line-inner {
           position: absolute;
@@ -112,7 +112,7 @@
           height: 210px;
           background-color: rgba(255, 255, 255, 1);
           // background: rgba(145, 94, 222, 1);
-          transition: all 0.5s;
+          transition: all 300ms;
           // z-index: -1；;
         }
         .item-title {

@@ -119,11 +119,6 @@ export default {
       document.body.scrollTop = document.documentElement.scrollTop = 0
     },
     buyMask() {
-      // this.$message({
-      //   showClose: true,
-      //   message: '请登录后,进行试看',
-      //   type: 'success'
-      // })
       message(this, 'success', '请登录后,进行试看')
       this.$bus.$emit('loginShow', true)
     }
