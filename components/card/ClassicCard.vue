@@ -30,19 +30,15 @@ export default {
     return {
       stydyNum: require('@/assets/images/home_num.png'),
       coursedetail: {
-        base: '',
+        base: '/course/coursedetail',
         kid: null
       }
     }
   },
   methods: {
     handleLink(item) {
-      // persistStore.set('curriculumId', item.id)
-      this.coursedetail = item.id
+      this.coursedetail.kid = item.id
       open(this.coursedetail)
-      // window.open(
-      //   window.location.origin + '/course/coursedetail?kid=' + item.id
-      // )
     }
   }
 }

@@ -107,9 +107,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
-    openDetail(link) {
-      window.open(window.location.origin + link)
-    },
+    // openDetail(link) {
+    //   window.open(window.location.origin + link)
+    // },
     handleLinkDetail(item) {
       // 判断当前页是否是在首页
       if (this.isIndex) {
@@ -176,7 +176,6 @@ export default {
     if (window.location.search.split('=')[2]) {
       this.isIndex = false
       this.cp = splitUrl(1, 1)
-      console.log(this.cp, '这是cp')
     } else {
       this.isIndex = true
     }

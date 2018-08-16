@@ -111,7 +111,7 @@ export default {
           // 订单内课程+项目
           this.links = 'tab-first'
         }
-        if (response.data.pay_number === '1') {
+        if (response.data.invitation_code === '') {
           this.hasCode = true
           this.interval = setInterval(() => {
             if (this.seconds < 1) {
