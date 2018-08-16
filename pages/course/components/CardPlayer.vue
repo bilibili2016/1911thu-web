@@ -40,6 +40,7 @@ export default {
       localUrl: 'http://localhost:8080',
       wapiUrl: 'http://wapi.1911thu.com:2120',
       seconds: 500000,
+      nextCatalogId: '', //下一小节的播放id
       link: '',
       socket: null,
       bought: '',
@@ -106,13 +107,17 @@ export default {
         // }
         // console.log(res, '这是res')
         if (res.status === 0) {
-          this.$refs.mediaPlayer.innerHTML = ''
+          // 先销毁播放器再用新参数进行播放
+          if (this.players) {
+            this.players.destroy()
+          }
           this.tcplayer.mp4 = res.data.playAuthInfo.video_address
           this.players = new TcPlayer('mediaPlayer', this.tcplayer)
           window.qcplayer = this.players
           if (this.autoplay) {
             window.qcplayer.play()
           }
+          this.nextCatalogId = res.data.nextCatalogId
           this.$bus.$emit('closeCover')
         } else {
           message(this, 'warning', res.msg)
@@ -153,68 +158,24 @@ export default {
             }
           }, 1000)
           that.ischeck = persistStore.get('catalogId')
-          that.playing = that.playImg
         }
         // 监听暂停事件
         if (msg.type == 'pause') {
-          // that.isHasClass()
-          that.playing = that.pauseImg
           clearInterval(that.interval)
           socket.emit('watchRecordingTime_disconnect')
-        }
-        // 监听播放器音量改变
-        if (msg.type == 'volumechange') {
-          // that.isHasClass()
-          persistStore.set('volume', window.qcplayer.volume())
         }
         // 监听播放停止事件
         if (msg.type == 'ended') {
           // 未购买且试看
           if (!that.bought && that.lookAt == '2') {
             that.$bus.$emit('openPay', that.pay)
-          }
-        }
-      }
-    },
-    // 对播放器事件的监听
-    addEventPlayer() {
-      let that = this
-      this.tcplayer.listener = function(msg) {
-        // 播放开始启动计时器
-        if (msg.type == 'play') {
-          that.interval = setInterval(() => {
-            if (that.seconds <= 0) {
-              that.seconds = 1
-              that.courseList.success = false
-              that.courseList.inputID = ''
-              that.socket.emit('watchRecordingTime_disconnect')
-              clearInterval(that.interval)
-            } else {
-              that.seconds--
-              let playTime = window.qcplayer.currentTime()
-              that.socket.emit(
-                'watchRecordingTime',
-                // persistStore.get('curriculumId'),
-                splitUrl(0, 1),
-                persistStore.get('catalogId'),
-                playTime
-              )
+          } else {
+            // 如果当前小节播放完成，直接播放下一小节
+            if (that.nextCatalogId !== '') {
+              that.playerForm.catalogId = that.nextCatalogId
+              that.getdefaultPlayerUrl()
             }
-          }, 1000)
-          that.ischeck = persistStore.get('catalogId')
-          that.playing = that.playImg
-        }
-        // 监听暂停事件
-        if (msg.type == 'pause') {
-          // that.isHasClass()
-          that.playing = that.pauseImg
-          clearInterval(that.interval)
-          socket.emit('watchRecordingTime_disconnect')
-        }
-        // 监听播放器音量改变
-        if (msg.type == 'volumechange') {
-          // that.isHasClass()
-          persistStore.set('volume', window.qcplayer.volume())
+          }
         }
       }
     },
