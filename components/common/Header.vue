@@ -130,6 +130,7 @@ export default {
           '温馨提示',
           {
             confirmButtonText: '确定',
+            center: true,
             callback: action => {
               if (action === 'cancel') {
               } else {

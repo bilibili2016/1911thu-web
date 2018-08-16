@@ -275,6 +275,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.data)
+
     this.psnForm = this.data
     if (this.isAuthenticated) {
       this.getPositionList()

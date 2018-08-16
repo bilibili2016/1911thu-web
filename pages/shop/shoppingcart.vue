@@ -1079,7 +1079,7 @@ export default {
         this.deleteAllData.projectcartid.length === 0 &&
         this.deleteAllData.curriculumcartid.length === 0
       ) {
-        message(this, 'success', '请选择要删除的课程')
+        message(this, 'info', '请选择要删除的课程')
         this.loding = false
         return false
       }

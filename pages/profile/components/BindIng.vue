@@ -21,7 +21,7 @@
           <div class="course">
             <span></span>
             <p v-for="(course,index) in code.orderCurriculumList" :key="index" @click="handleLink(course)">
-              <i v-if="course.type=='2'"></i>{{course.title}}
+              <i v-if="course.type=='2'">项目</i>{{course.title}}
             </p>
           </div>
         </div>
