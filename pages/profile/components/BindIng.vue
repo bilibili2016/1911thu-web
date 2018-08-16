@@ -71,7 +71,7 @@ export default {
       } else {
         window.open(
           window.location.origin +
-            '/project/projectdetail?id' +
+            '/project/projectdetail?id=' +
             item.curriculum_id
         )
       }

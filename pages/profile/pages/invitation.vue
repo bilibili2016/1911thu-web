@@ -18,7 +18,7 @@
         <span>{{exchangeTime(code.pay_time)}}</span>
         <span>{{code.use_code_number}}</span>
         <span>{{code.expire_days}}</span>
-        <span class="orderNum" @click="handleMyOrder">{{code.order_sn}}
+        <span class="orderNum" @click="handleMyOrder(code.id)">{{code.order_sn}}
           <i class="efficacy" v-if="code.expire_days==='0'"></i>
           <i class="used" v-if="code.use_code_number==='0'"></i>
         </span>
@@ -61,11 +61,14 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid']),
-    handleMyOrder() {
+    handleMyOrder(item) {
       this.gidForm.gids = 'tab-fourth'
       this.setGid(this.gidForm)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', 'tab-fourth')
+      console.log(item, '123')
+      persistStore.set('order', item)
+      this.$bus.$emit('goOrderDetaild', item)
     },
     exchangeTime(time) {
       return timestampToYMD(time)
