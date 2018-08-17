@@ -10,7 +10,7 @@
         <span v-else>发票详情</span>
       </div>
       <div class="tableBody">
-        <div v-show="config.type==='order'">
+        <div v-if="config.type==='order'">
           <!-- 订单信息 -->
           <div class="order bodyItem">
             <div class="top">
@@ -50,7 +50,7 @@
                 </div>
               </div>
               <!-- 公司转账 -->
-              <div v-if="bankInfo">
+              <div v-else>
                 <div class="info clearfix">
                   <div class="info-fl">
                     <span>支付方式：</span>
@@ -94,27 +94,26 @@
             <span class="lr">数量</span>
           </div>
           <div class="bottom">
-            <div class="bottom-item clearfix" v-if="courseList.length" v-for="course in courseList" :key="course.id">
+            <div class="bottom-item clearfix" v-if="courseList.length" v-for="course in courseList">
               <div class="courseInfo clearfix">
                 <div class="bottomImg">
-
                   <img class="fl" :src="course.picture" alt="">
                 </div>
 
                 <div class="fl">
-                  <h4>{{course.name}}</h4>
+                  <h4>{{course.title}}</h4>
                   <h6>{{course.curriculum_time}}学时</h6>
                   <p>讲师：{{course.teacher_name}}</p>
                 </div>
               </div>
               <div class="coursePrice">
-                ￥{{course.price}}
+                ￥{{course.present_price}}
               </div>
               <div class="courseOperation">
                 <i class="el-icon-close"></i>{{orderDetail.pay_number}}
               </div>
             </div>
-            <div class="bottom-item clearfix" v-if="projectList.length" v-for="project in projectList" :key="project.id">
+            <div class="bottom-item clearfix" v-if="projectList.length" v-for="project in projectList">
               <div class="courseInfo clearfix">
                 <div class="bottomImg">
                   <!-- 项目图标 -->
@@ -123,12 +122,12 @@
                 </div>
 
                 <div class="fl">
-                  <h4>{{project.name}}</h4>
+                  <h4>{{project.title}}</h4>
                   <h6>{{project.curriculum_time}}学时</h6>
                 </div>
               </div>
               <div class="coursePrice">
-                ￥{{project.price}}
+                ￥{{project.present_price}}
               </div>
               <div class="courseOperation">
                 <i class="el-icon-close"></i>{{orderDetail.pay_number}}
