@@ -83,10 +83,6 @@ export default {
     ...mapActions('auth', ['setGid', 'setKid']),
     //根据列表长度计算高度
     computedHeight(course, project) {
-      // let height =
-      //   course.length + project.length > 3
-      //     ? 3 * 140 + 60 + 'px'
-      //     : (course.length + project.length) * 140 + 'px'
       let height = (course.length + project.length) * 140 + 'px'
       return height
     },
@@ -129,15 +125,12 @@ export default {
     },
     //课程详情
     goCourseInfo(item, index) {
-      this.kidForm.kids = item.curriculum_id
-      // persistStore.set('kid', item.curriculum_id)
-      // this.setKid(this.kidForm)
-      // persistStore.set('curriculumId', item.curriculum_id)
-      this.$router.push('/course/coursedetail?kid=' + item.curriculum_id)
+      this.kidForm.kids = item.id
+      this.$router.push('/course/coursedetail?kid=' + item.id)
     },
     //项目详情
     goProjrctInfo(item) {
-      this.$router.push('/project/projectdetail?id=' + item.curriculum_id)
+      this.$router.push('/project/projectdetail?kid=' + item.id)
     },
     //列表详情
     selectPayApply(item, type) {
