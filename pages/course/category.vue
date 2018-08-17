@@ -257,10 +257,17 @@ export default {
     // 点击cid pid 获取 card列表
     setParamsPidCid(itemCid, itemPid) {
       if (itemCid) {
+        // console.log('1')
         this.categoryForm.cids = itemCid
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = '0'
+        if (itemCid && itemPid) {
+          this.categoryForm.cids = splitUrl(0, 1)
+          // 将点击的id获取url中 不可以截取会发生 延迟
+          this.categoryForm.pids = splitUrl(3, 1)
+        }
       } else if (itemPid) {
+        // console.log('2')
         this.categoryForm.cids = splitUrl(0, 1)
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = itemPid
