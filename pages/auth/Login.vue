@@ -29,7 +29,7 @@
           <!-- 账号密码登录 end-->
 
           <!-- 手机验证码登录-->
-          <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm " v-if="mobileloginmsg === true">
+          <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm telLogin" v-if="mobileloginmsg === true">
             <!-- 手机验证码登录 -->
             <div v-if="mobileloginmsg === true">
               <el-form-item prop="phones">
