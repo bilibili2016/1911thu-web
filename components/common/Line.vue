@@ -102,17 +102,26 @@ export default {
         .addClass('checked')
     },
     handleCatalog(index, item) {
+      // 是否为项目下的课程
       if (this.config.card_type === 'project') {
         return false
       } else {
+        // 是否登录
         if (!this.isAuthenticated) {
           this.$bus.$emit('loginShow', true)
           return false
         }
+        // 该课程是否为未购买 且不可试看
+        if (
+          this.privileMsg === false &&
+          item.childList[index].look_at === '1'
+        ) {
+          this.curriculumcartids.cartid = item.childList[index].curriculum_id
+          this.addShopCart()
+          return false
+        }
         let curriculum_id = item.childList[index].curriculum_id
         let catalog_id = item.childList[index].id
-        let video_time = item.childList[index].second
-        persistStore.set('video_time', video_time)
         this.$router.push(
           '/course/coursedetail' +
             '?kid=' +
