@@ -19,7 +19,7 @@
               </div>
             </div>
             <!-- 项目列表 -->
-            <div class="courseOne" v-if="courseList.orderProjectList" v-for="(project,index) in courseList.orderProjectList">
+            <div class="courseOne" v-if="courseList.orderProjectList.length" v-for="(project,index) in courseList.orderProjectList">
               <div class="courseImg">
                 <!-- 项目图标 -->
                 <img class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
