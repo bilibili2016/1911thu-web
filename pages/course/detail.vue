@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import CustomCard from '@/pages/course/components/Card.vue'
+import CustomCard from '@/pages/course/components/CardProject.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
