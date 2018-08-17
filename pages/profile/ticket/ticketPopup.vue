@@ -656,6 +656,14 @@ export default {
           this.tfNumber = false
           return false
         }
+        if (this.ticketForm.companyname === '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入正确的发票抬头！'
+          })
+          return false
+        }
       }
       if (
         Trim(this.ticketForm.tel) === '' ||
@@ -665,6 +673,14 @@ export default {
           showClose: true,
           type: 'error',
           message: '请输入正确的手机号！'
+        })
+        return false
+      }
+      if (this.ticketForm.address === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请输入详细地址信息！'
         })
         return false
       }
