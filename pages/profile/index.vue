@@ -923,11 +923,14 @@ export default {
       this.detailMsg = true
       profileHome.curriculumPayApply(this.orderForm).then(response => {
         if (response.status === 0) {
+          console.log(response, '这是response1233')
           this.detailMsg = false
           this.courseList = response.data.orderCurriculumList
           this.projectList = response.data.orderProjectList
           this.orderDetail = response.data.orderDetail
-          this.bankInfo = response.data.bankInfo
+          if (response.data.orderDetail) {
+            this.bankInfo = response.data.bankInfo
+          }
         }
       })
     },
