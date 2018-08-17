@@ -466,7 +466,7 @@ export default {
           if (!that.bought && that.lookAt == '2') {
             that.$bus.$emit('openPay', that.pay)
           } else {
-            if (that.nextCatalogId !== '') {
+            if (that.nextCatalogId !== '' && that.bought) {
               that.playerForm.catalogId = that.nextCatalogId
               that.autoplay = true
               that.getPlayerInfo()
