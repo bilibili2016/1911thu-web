@@ -200,11 +200,6 @@ export default {
     },
     // 获取默认小节 跳转 章节id和小节id
     getDefaultCurriculumCatalogId(item) {
-      // persistStore.set(
-      //   'curriculumId',
-      //   item.defaultCurriculumCatalog.curriculum_id
-      // )
-      // persistStore.set('catalogId', item.defaultCurriculumCatalog.id)
       this.$router.push(
         '/course/coursedetail' +
           '?kid=' +
@@ -212,10 +207,11 @@ export default {
           '&bid=' +
           item.defaultCurriculumCatalog.id
       )
+      this.$bus.$emit('reupdatecourse')
       // window.open(window.location.origin + '/course/player')
-      this.playerForm.curriculumId = item.defaultCurriculumCatalog.curriculum_id
-      this.playerForm.catalogId = item.defaultCurriculumCatalog.id
-      this.$bus.$emit('updateCourse', this.playerForm)
+      // this.playerForm.curriculumId = item.defaultCurriculumCatalog.curriculum_id
+      // this.playerForm.catalogId = item.defaultCurriculumCatalog.id
+      // this.$bus.$emit('updateCourse', this.playerForm)
     },
     // 左侧播放按钮事件
     handleImgPlay(item) {

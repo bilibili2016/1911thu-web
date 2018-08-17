@@ -45,6 +45,7 @@ export default {
       socket: null,
       bought: '',
       lookAt: '',
+      isFree: '',
       pay: {
         type: 1
       }
@@ -53,17 +54,14 @@ export default {
   methods: {
     // 课程-获取默认 的课程id 以及小节id
     getdefaultCurriculumCatalog() {
-      // this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
       this.getdefaultForm.curriculumid = splitUrl(0, 1)
-
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(res => {
           this.playerForm.curriculumId =
             res.data.defaultCurriculumCatalog.curriculum_id
           this.playerForm.catalogId = res.data.defaultCurriculumCatalog.id
-          this.bought = res.data.defaultCurriculumCatalog.curriculumPrivilege
-          this.lookAt = res.data.defaultCurriculumCatalog.look_at
+          this.autoplay = true
           // 获取播放的url
           this.getdefaultPlayerUrl()
         })
@@ -114,6 +112,9 @@ export default {
           this.tcplayer.mp4 = res.data.playAuthInfo.video_address
           this.players = new TcPlayer('mediaPlayer', this.tcplayer)
           window.qcplayer = this.players
+          this.bought = res.data.curriculumPrivilege
+          this.lookAt = res.data.look_at
+          this.isFree = res.data.is_free
           if (this.autoplay) {
             window.qcplayer.play()
           }
@@ -166,8 +167,8 @@ export default {
         }
         // 监听播放停止事件
         if (msg.type == 'ended') {
-          // 未购买且试看
-          if (!that.bought && that.lookAt == '2') {
+          // 不免费 未购买 试看的课程弹出快捷支付弹框
+          if (that.isFree === '1' && !that.bought && that.lookAt == '2') {
             that.$bus.$emit('openPay', that.pay)
           } else {
             // 如果当前小节播放完成，直接播放下一小节

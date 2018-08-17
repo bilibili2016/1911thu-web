@@ -284,6 +284,7 @@
 import { ticketorder } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import { Trim } from '~/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['checkedArr'],
@@ -434,7 +435,7 @@ export default {
     // 验证普通发票 中的纳税人识别号
     retfNumber() {
       if (
-        this.ticketForm.number == '' ||
+        Trim(this.ticketForm.number) == '' ||
         !/^[A-Z0-9]+$/.test(this.ticketForm.number)
       ) {
         this.$message({
@@ -463,7 +464,7 @@ export default {
     },
     // 验证增值税发票 中的纳税人识别号
     reCompanyname() {
-      if (this.zzTicketForm.companyname == '') {
+      if (Trim(this.zzTicketForm.companyname) == '') {
         this.tipsCompanyname = false
         this.companyname = true
       } else {
@@ -474,7 +475,7 @@ export default {
     // 验证增值税发票 中的纳税人识别号
     reNumber() {
       if (
-        this.zzTicketForm.number == '' ||
+        Trim(this.zzTicketForm.number) == '' ||
         !/^[A-Z0-9]+$/.test(this.zzTicketForm.number)
       ) {
         this.tipsNumber = false
@@ -495,7 +496,7 @@ export default {
     },
     // 验证增值税发票 注册地址
     reZcadd() {
-      if (this.zzTicketForm.zcadd == '') {
+      if (Trim(this.zzTicketForm.zcadd) == '') {
         this.tipsZcadd = false
         this.zcadd = true
       } else {
@@ -505,7 +506,7 @@ export default {
     },
     // 验证增值税发票 注册地址
     reBank() {
-      if (this.zzTicketForm.bank == '') {
+      if (Trim(this.zzTicketForm.bank) == '') {
         this.tipsBank = false
         this.bank = true
       } else {
@@ -516,7 +517,7 @@ export default {
     // 添加增值税发票验证
     addZZTicketBefore() {
       if (
-        this.zzTicketForm.number == '' ||
+        Trim(this.zzTicketForm.number) == '' ||
         !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
       ) {
         this.$message({
@@ -528,7 +529,7 @@ export default {
       }
 
       if (
-        this.zzTicketForm.tel === '' ||
+        Trim(this.zzTicketForm.tel) === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.zzTicketForm.tel)
       ) {
         this.$message({
@@ -538,12 +539,44 @@ export default {
         })
         return false
       }
+      if (Trim(this.ticketForm.province) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请选择省份！'
+        })
+        return false
+      }
+      if (Trim(this.zzTicketForm.city) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请选择城市！'
+        })
+        return false
+      }
+      if (Trim(this.zzTicketForm.area) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请选择大区/县！'
+        })
+        return false
+      }
+      if (Trim(this.zzTicketForm.address) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请填写收票人的详细地址！'
+        })
+        return false
+      }
       this.addInvoiceInfo()
     },
     // 验证增值税发票 中的联系电话
     rePhone() {
       if (
-        this.zzTicketForm.phones == '' ||
+        Trim(this.zzTicketForm.phones) == '' ||
         !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
           this.zzTicketForm.phones
         )
@@ -559,7 +592,7 @@ export default {
     reAccount() {
       // !/^[0-9 ]+$/.test(this.zzTicketForm.account)
       if (
-        this.zzTicketForm.account == '' ||
+        Trim(this.zzTicketForm.account) == '' ||
         this.zzTicketForm.account.length > 50
       ) {
         this.tipsAccount = false
@@ -625,7 +658,7 @@ export default {
         }
       }
       if (
-        this.ticketForm.tel === '' ||
+        Trim(this.ticketForm.tel) === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.ticketForm.tel)
       ) {
         this.$message({
@@ -635,6 +668,39 @@ export default {
         })
         return false
       }
+      if (Trim(this.ticketForm.province) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请选择省份！'
+        })
+        return false
+      }
+      if (Trim(this.ticketForm.city) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请选择城市！'
+        })
+        return false
+      }
+      if (Trim(this.ticketForm.area) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请选择大区/县！'
+        })
+        return false
+      }
+      if (Trim(this.ticketForm.address) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请填写收票人的详细地址！'
+        })
+        return false
+      }
+
       this.addInvoiceInfo()
     },
     //根据省市区列表 摘出对应省市区
@@ -723,14 +789,14 @@ export default {
         this.stepThree = false
       }
       if (item === 'stepThree') {
-        if (this.zzTicketForm.companyname == '') {
+        if (Trim(this.zzTicketForm.companyname) == '') {
           this.$message({
             showClose: true,
             type: 'error',
             message: '请输入单位名称！'
           })
           return false
-        } else if (this.zzTicketForm.zcadd == '') {
+        } else if (Trim(this.zzTicketForm.zcadd) == '') {
           this.$message({
             showClose: true,
             type: 'error',
@@ -738,7 +804,7 @@ export default {
           })
           return false
         } else if (
-          this.zzTicketForm.phones == '' ||
+          Trim(this.zzTicketForm.phones) == '' ||
           !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
             this.zzTicketForm.phones
           )
@@ -749,7 +815,7 @@ export default {
             message: '请输入正确的联系电话！'
           })
           return false
-        } else if (this.zzTicketForm.bank == '') {
+        } else if (Trim(this.zzTicketForm.bank) == '') {
           this.$message({
             showClose: true,
             type: 'error',
@@ -757,7 +823,7 @@ export default {
           })
           return false
         } else if (
-          this.zzTicketForm.account == '' ||
+          Trim(this.zzTicketForm.account) == '' ||
           this.zzTicketForm.account.length > 50
         ) {
           this.$message({
@@ -768,7 +834,7 @@ export default {
           return false
         }
         if (
-          this.zzTicketForm.number == '' ||
+          Trim(this.zzTicketForm.number) == '' ||
           !/^[A-Z0-9]+$/.test(this.zzTicketForm.number)
         ) {
           this.$message({
