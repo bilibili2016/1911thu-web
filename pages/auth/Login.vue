@@ -29,11 +29,7 @@
           <!-- 账号密码登录 end-->
 
           <!-- 手机验证码登录-->
-<<<<<<< HEAD
-          <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm telLogin" v-if="mobileloginmsg === true">
-=======
           <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm " v-if="mobileloginmsg === true">
->>>>>>> origin/liyr
             <!-- 手机验证码登录 -->
             <div v-if="mobileloginmsg === true">
               <el-form-item prop="phones">
@@ -51,11 +47,7 @@
             <el-row>
               <div @click="forget">忘记密码?</div>
               <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
-<<<<<<< HEAD
-              <el-button class="liginBtn" :disabled="isloginClick" @click="signInsMobile('loginDatamobile')">登录</el-button>
-=======
               <el-button class="codeLogin" :disabled="isloginClick" @click="signInsMobile('loginDatamobile')">登录</el-button>
->>>>>>> origin/liyr
             </el-row>
           </el-form>
           <!-- 手机验证码登录 end-->
