@@ -59,7 +59,7 @@
               </div>
               <!-- 时间 学习按钮  进度条-->
               <div class="study clearfix bought">
-                <h4 class="clearfix">
+                <h4 class="clearfix" v-if="config.card_type !== 'project'">
                   <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                   <p>已学时长</p>
                 </h4>
@@ -67,11 +67,12 @@
                   <!-- 免费课程学习到100后显示再次学习 -->
                   <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
                   <div v-if="config.card_type !== 'project'">
-                    <el-button v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                    <!-- Number(courseList.percent)== 0 -->
+                    <el-button v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                     <el-button v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   </div>
 
-                  <div class="lineProgress">
+                  <div class="lineProgress" v-if="config.card_type !== 'project'">
                     <h5>已完成{{courseList.percent}}%</h5>
                     <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
                   </div>
@@ -101,7 +102,7 @@
                     <el-button type="primary " plain @click="freeStudy(courseList) ">免费试看</el-button>
                   </div>
                   <!-- 未购买 购买判断  已购买-->
-                  <div v-if="privileMsg===true ">
+                  <div v-if="privileMsg===true">
                     <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
                     <el-button type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
                   </div>
@@ -118,7 +119,7 @@
               </div>
               <!-- 课程介绍 未购买 学习按钮-->
               <div class="study clearfix bought">
-                <h4 class="clearfix">
+                <h4 class="clearfix" v-if="config.card_type !== 'project'">
                   <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
                   <p>已学时长</p>
                   <!-- <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p> -->
@@ -127,7 +128,7 @@
                 <div class="common-button">
                   <!-- 学习到100后显示再次学习，否则显示继续学习 -->
                   <div v-if="config.card_type !== 'project'">
-                    <div v-if="Number(courseList.percent)>0&&Number(courseList.percent)<100">
+                    <div v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100">
                       <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
                       <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                     </div>
@@ -136,7 +137,7 @@
                       <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                     </div>
                   </div>
-                  <div class="lineProgress">
+                  <div class="lineProgress" v-if="config.card_type !== 'project'">
                     <h5>已完成{{courseList.percent}}%</h5>
                     <el-progress :stroke-width="14" color="#6417a6" :show-text="false" :percentage="courseList.percent"></el-progress>
                   </div>

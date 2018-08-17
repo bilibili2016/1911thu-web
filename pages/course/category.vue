@@ -406,17 +406,19 @@ export default {
     },
     // 点击 最新最热 筛选
     selectActiveTab(item) {
+      let categoryId = splitUrl(0, 1)
+      let pids = splitUrl(3, 1)
       item.name === 'second'
         ? (this.categoryForm.sortBy = 1)
         : (this.categoryForm.sortBy = 2)
       if (this.cp === '0') {
         if (this.xid === '0') {
-          this.getCourseCardList()
+          this.getCourseCardList(categoryId, pids)
         } else {
-          this.getCourseCardChooseList()
+          this.getCourseCardChooseList(categoryId, pids)
         }
       } else {
-        this.getProjectCardList()
+        this.getProjectCardList(categoryId, pids)
       }
     },
     // 点击 底部分页分页事件

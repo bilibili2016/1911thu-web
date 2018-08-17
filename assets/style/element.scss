@@ -997,7 +997,7 @@ html {
     .el-tabs__item.is-active {
       background: #fff;
       font-size: 16px;
-      font-family: '微软雅黑', 'Microsoft Yahei';
+      font-family: '微软雅黑', 'Microsoft Yahei' !important;
       color: rgba(154, 92, 208, 1); // padding: 4px 20px 4px 20px;
       border-bottom: 2px solid #6417a6;
     }
@@ -1154,7 +1154,7 @@ html {
   .el-dialog__title {
     line-height: 24px;
     font-size: 16px;
-    font-family: '微软雅黑', 'Microsoft Yahei';
+    font-family: '微软雅黑', 'Microsoft Yahei' !important;
     color: rgba(34, 34, 34, 1);
   }
   .el-dialog__body {
