@@ -137,6 +137,7 @@ export default {
     }
   },
   mounted() {
+    window.history.go(-1)
     // console.log(this.$route.query.ref)
     this.ref = this.$route.query.ref
     this.payComplete()

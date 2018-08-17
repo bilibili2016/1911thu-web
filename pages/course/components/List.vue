@@ -66,6 +66,7 @@ export default {
   mounted() {
     this.cid = window.location.search.split('&')[0].split('=')[1]
     this.pid = window.location.search.split('&')[3].split('=')[1]
+
     this.$bus.$on('pid', data => {
       this.pid = data
     })

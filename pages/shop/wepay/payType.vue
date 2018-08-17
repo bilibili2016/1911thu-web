@@ -71,6 +71,8 @@ export default {
     },
     getStatus() {
       let cpyid = window.location.pathname.split('/')[2]
+      console.log(cpyid)
+
       this.payListForm.orderId = cpyid
 
       this.interval = setInterval(() => {
