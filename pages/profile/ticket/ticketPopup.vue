@@ -676,7 +676,6 @@ export default {
         })
         return false
       }
-<<<<<<< HEAD
       if (this.ticketForm.address === '') {
         this.$message({
           showClose: true,
@@ -685,7 +684,6 @@ export default {
         })
         return false
       }
-=======
       if (Trim(this.ticketForm.province) === '') {
         this.$message({
           showClose: true,
@@ -719,7 +717,6 @@ export default {
         return false
       }
 
->>>>>>> dev
       this.addInvoiceInfo()
     },
     //根据省市区列表 摘出对应省市区
