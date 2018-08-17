@@ -136,7 +136,6 @@
                 </span>
                 <v-order v-if="readyOrderData && readyOrderData.length>0" :data="readyOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
                 <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
-
               </el-tab-pane>
               <el-tab-pane name="orderFour">
                 <span class="payOff" slot="label">已失效

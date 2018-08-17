@@ -257,6 +257,8 @@ export default {
     setParamsPidCid(itemCid, itemPid) {
       if (itemCid) {
         console.log('1')
+        console.log(itemCid, 'itemCid')
+        console.log(itemPid, 'itemPid')
         this.categoryForm.cids = itemCid
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = '0'
@@ -307,8 +309,8 @@ export default {
 
     // 项目 card列表
     getProjectCardList(itemCid, itemPid) {
-      console.log(itemCid, 'itemCid')
-      console.log(itemPid, 'itemPid')
+      // console.log(itemCid, 'itemCid')
+      // console.log(itemPid, 'itemPid')
       this.loadCourse = true
       this.setParamsPidCid(itemCid, itemPid)
       category.curriculumProjectList(this.categoryForm).then(res => {
