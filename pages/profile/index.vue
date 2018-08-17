@@ -879,7 +879,6 @@ export default {
     // 获取专属兑换码列表
     getCodeList() {
       profileHome.getCodeList(this.codeListForm).then(response => {
-
         this.codeData = response.data.orderInvitationCodeList
       })
     },
