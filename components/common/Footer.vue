@@ -8,7 +8,7 @@
         <span @click="handleLink('first')">关于我们</span>
       </div>
       <div class="copyright fr">
-        京ICP证 98278361836726381号 一九一一未来教育科技（北京）有限公司 版权所有
+        京ICP证 18040329号 一九一一未来教育科技（北京）有限公司 版权所有
       </div>
     </div>
   </div>

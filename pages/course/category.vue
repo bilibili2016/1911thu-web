@@ -181,7 +181,6 @@ export default {
       // cp 为 0 调用课程
       if (this.cp === '0') {
         this.getCourseCardList(null, item.id)
-
         if (this.xid === '0') {
           // 调取课程的数据
           this.getCourseCardList(null, item.id)
@@ -257,17 +256,12 @@ export default {
     // 点击cid pid 获取 card列表
     setParamsPidCid(itemCid, itemPid) {
       if (itemCid) {
-        // console.log('1')
+        console.log('1')
         this.categoryForm.cids = itemCid
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = '0'
-        if (itemCid && itemPid) {
-          this.categoryForm.cids = splitUrl(0, 1)
-          // 将点击的id获取url中 不可以截取会发生 延迟
-          this.categoryForm.pids = splitUrl(3, 1)
-        }
       } else if (itemPid) {
-        // console.log('2')
+        console.log('2')
         this.categoryForm.cids = splitUrl(0, 1)
         // 将点击的id获取url中 不可以截取会发生 延迟
         this.categoryForm.pids = itemPid
@@ -313,6 +307,8 @@ export default {
 
     // 项目 card列表
     getProjectCardList(itemCid, itemPid) {
+      console.log(itemCid, 'itemCid')
+      console.log(itemPid, 'itemPid')
       this.loadCourse = true
       this.setParamsPidCid(itemCid, itemPid)
       category.curriculumProjectList(this.categoryForm).then(res => {
