@@ -403,18 +403,22 @@ export default {
             }
           })
         } else {
-          // 播放器如果存在就销毁播放器，重新创建
-          if (this.players) {
-            this.players.destroy()
+          if (!that.bought && that.lookAt == '1') {
+            this.goShoppingCart('您还未购买该项目，请先去购买吧！')
+          } else {
+            // 播放器如果存在就销毁播放器，重新创建
+            if (this.players) {
+              this.players.destroy()
+            }
+            // 初始化播放器
+            this.tcplayer.mp4 = response.data.playAuthInfo.video_address
+            this.players = new TcPlayer('mediaPlayer', this.tcplayer)
+            window.qcplayer = this.players
+            if (this.autoplay) {
+              window.qcplayer.play()
+            }
+            this.nextCatalogId = response.data.nextCatalogId
           }
-          // 初始化播放器
-          this.tcplayer.mp4 = response.data.playAuthInfo.video_address
-          this.players = new TcPlayer('mediaPlayer', this.tcplayer)
-          window.qcplayer = this.players
-          if (this.autoplay) {
-            window.qcplayer.play()
-          }
-          this.nextCatalogId = response.data.nextCatalogId
         }
       })
 
