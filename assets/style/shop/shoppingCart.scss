@@ -219,7 +219,7 @@
             i {
               width: 30px;
               height: 30px;
-              line-height: 22px;
+              line-height: 24px;
               text-align: center;
               float: left;
               font-size: 30px;
@@ -230,6 +230,9 @@
               &:hover {
                 background-color: #8f4acb;
                 color: #fff;
+              }
+              &.add {
+                line-height: 30px;
               }
             }
             input.num {
