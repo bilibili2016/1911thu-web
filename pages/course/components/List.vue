@@ -49,6 +49,7 @@ export default {
     this.cid = window.location.search.split('&')[0].split('=')[1]
     console.log(this.cid, '这是cid')
     this.pid = window.location.search.split('&')[3].split('=')[1]
+
     this.$bus.$on('pid', data => {
       this.pid = data
     })
