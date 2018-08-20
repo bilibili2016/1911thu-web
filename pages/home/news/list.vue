@@ -1,6 +1,6 @@
 <template>
-  <div class=" goodLesson news-list famous-teacher" v-loading="load">
-    <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
+  <div class="goodLesson news-list famous-teacher" v-loading="load">
+    <v-banner :bannerImg="bannerImg" :config="configs" class="singleList"></v-banner>
     <div class="center shadow">
       <!-- 面包屑组件 -->
       <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
