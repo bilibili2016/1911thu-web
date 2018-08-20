@@ -5,9 +5,9 @@
         <div class="college">
           <li class="title" v-if="!loadList">学院：</li>
           <ul>
-            <li :class="{btnBg: this.cid === '0' ? true : false }" v-if="!loadList">
+            <!-- <li :class="{btnBg: this.cid === '0' ? true : false }" v-if="!loadList">
               <el-button @click="selectAllCid">全部</el-button>
-            </li>
+            </li> -->
             <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
               <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
             </li>
@@ -16,9 +16,9 @@
         <div class="classification">
           <li class="title" v-if="!loadList">分类：</li>
           <ul>
-            <li :class="{btnBg: this.pid === '0' ? true : false }" v-if="!loadList">
+            <!-- <li :class="{btnBg: this.pid === '0' ? true : false }" v-if="!loadList">
               <el-button @click="selectAllPid">全部</el-button>
-            </li>
+            </li> -->
             <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid === items.id ? true : false }">
               <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
             </li>
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      cid: '0',
+      cid: null,
       pid: '0',
       cindex: null,
       cg: null
@@ -65,6 +65,7 @@ export default {
   },
   mounted() {
     this.cid = window.location.search.split('&')[0].split('=')[1]
+    console.log(this.cid, '这是cid')
     this.pid = window.location.search.split('&')[3].split('=')[1]
     this.$bus.$on('pid', data => {
       this.pid = data
