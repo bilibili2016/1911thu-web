@@ -123,7 +123,11 @@ export default {
   watch: {
     // 检测数据中的收藏 数据过来慢
     projectDetail(val, old) {
-      this.collectMsg.isCollect = val.is_Collection
+      if (val.is_Collection) {
+        this.collectMsg.isCollect = 1
+      } else {
+        this.collectMsg.isCollect = 0
+      }
     }
   },
   mounted() {

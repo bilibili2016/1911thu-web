@@ -35,7 +35,6 @@
           <div class="name">
             <p>{{userInfo.nick_name}}</p>
             <p>{{userInfo.company_name}}</p>
-            <!-- <p style="color:black">{{userInfo}}</p> -->
           </div>
           <div class="time">
             <p>{{time.hour}}小时{{time.minutes}}分钟</p>
@@ -81,6 +80,9 @@ export default {
     if (this.isAuthenticated) {
       this.getUserInfo()
     }
+    this.$bus.$on('reUserInfo', data => {
+      this.getUserInfo()
+    })
   },
   watch: {
     isUpdate(val) {

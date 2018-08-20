@@ -3,9 +3,9 @@
     <div class="result">
       <img v-if="success" src="http://papn9j3ys.bkt.clouddn.com/success.png" alt="">
       <img v-else src="http://papn9j3ys.bkt.clouddn.com/error.png" alt="">
-      <h4 v-if="!success">支付成功！</h4>
+      <h4 v-if="success">支付成功！</h4>
       <h4 v-else>支付失败！</h4>
-      <div class="restltMsg" v-if="!success">
+      <div class="restltMsg" v-if="success">
         <p>
           <span>订单：{{payCompleteData.order_sn}}</span>
           <span> | </span>
@@ -41,6 +41,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { payResult } from '@/lib/v1_sdk/index'
+import { banBackSpace } from '@/lib/util/helper'
 export default {
   data() {
     return {
@@ -126,14 +127,6 @@ export default {
         } else {
           this.hasCode = false
         }
-
-        //禁止浏览器的后退按钮
-        window.addEventListener('popstate', () => {
-          console.log(222)
-
-          window.history.pushState('forward', null, '#')
-          window.history.forward(1)
-        })
       })
     },
     goLink(item) {

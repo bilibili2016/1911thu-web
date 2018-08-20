@@ -7,7 +7,7 @@
         <el-rate disabled v-model="evaluateInfo.totalScore"></el-rate>
       </div>
       <div class="fr">
-        {{evaluateInfo.totalEvaluate}}人评价 好评度{{evaluateInfo.degree}}%
+        {{evaluateInfo.totalEvaluate}}人评价 好评度{{evaluateInfo.evaluatePercent}}%
       </div>
     </div>
     <div class="evaluateList" v-if="evaluateData&&evaluateData.length>0">

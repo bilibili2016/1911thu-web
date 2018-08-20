@@ -1,8 +1,9 @@
 <template>
   <div>
     <!-- 顶部list -->
-    <div v-loading="loadList">
-      <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectAllCid="selectAllCid" @selectCid="selectCid" @selectAllPid="selectAllPid" @selectPid="selectPid" :loadList="loadList"></v-list>
+    <div>
+      <!-- :loadList="loadList" -->
+      <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectCid="selectCid" @selectPid="selectPid"></v-list>
     </div>
     <div class="center category-style">
       <!-- 选择全部 最新和最热 -->
@@ -23,7 +24,7 @@
           <v-card :data="categoryDataChoose" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
-        <div v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<0 && !loadCourse">
+        <div v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<=0 && !loadCourse">
           <v-nothing></v-nothing>
         </div>
         <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
@@ -39,7 +40,7 @@ import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players, category } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { splitUrl } from '~/lib/util/helper'
+import { splitUrl, openUrl } from '~/lib/util/helper'
 import List from '@/pages/course/components/List'
 import Filter from '@/pages/course/components/Filter'
 import Page from '@/components/common/Pagination'
@@ -113,7 +114,167 @@ export default {
       changeData: [],
       cp: '',
       categoryId: '',
-      pidNumber: ''
+      pidNumber: '',
+      allData: {
+        category_name: '全部',
+        id: '0',
+        parent_id: '1',
+        picture: '',
+        short_name: ''
+      },
+      allCourseData: {
+        category_name: '全部',
+        childList: [
+          {
+            category_name: '公共管理/履职能力',
+            id: '2',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '时政解读',
+            id: '3',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '法律法规',
+            id: '4',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '政府绩效管理',
+            id: '5',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '经济治理与城市规划',
+            id: '6',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '城市治理',
+            id: '7',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '应急管理',
+            id: '8',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '国际形势及安全治理',
+            id: '9',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '创新驱动发展',
+            id: '10',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '社会治理',
+            id: '11',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '一带一路与国际合作',
+            id: '12',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '乡村振兴',
+            id: '13',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '新闻宣传',
+            id: '14',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          },
+          {
+            category_name: '人文素养',
+            id: '15',
+            parent_id: '1',
+            picture: '',
+            short_name: ''
+          }
+        ],
+        id: '0',
+        parent_id: '0',
+        picture: 'http://p8p47jzeo.bkt.clouddn.com/1531894819',
+        short_name: '全部'
+      },
+      allProjectData: {
+        category_name: '全部',
+        childList: [
+          {
+            category_name: '党政干部综合项目',
+            id: '21',
+            parent_id: '16',
+            picture: 'http://p8p47jzeo.bkt.clouddn.com/1530691988',
+            short_name: '党政干部综合项目'
+          },
+          {
+            category_name: '军转系统研修项目',
+            id: '22',
+            parent_id: '16',
+            picture: 'http://p8p47jzeo.bkt.clouddn.com/1530692025',
+            short_name: '军转系统研修项目'
+          },
+          {
+            category_name: '教育系统研修项目',
+            id: '24',
+            parent_id: '16',
+            picture: 'http://p8p47jzeo.bkt.clouddn.com/1530692056',
+            short_name: '教育系统研修项目'
+          },
+          {
+            category_name: '体育系统研修项目',
+            id: '27',
+            parent_id: '16',
+            picture: 'http://p8p47jzeo.bkt.clouddn.com/1530692083',
+            short_name: '体育系统研修项目'
+          }
+        ],
+        id: '0',
+        parent_id: '0',
+        picture: 'http://p8p47jzeo.bkt.clouddn.com/1531894819',
+        short_name: '全部'
+      },
+      selectCidItem: '',
+      selectPidItem: '',
+      selectUrl: {
+        base: '/course/category',
+        cid: '',
+        cp: '',
+        xid: '',
+        pids: ''
+      }
       // pids: '0'
     }
   },
@@ -126,171 +287,104 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
-    // 学院 item
-    selectCid(item, index) {
-      this.$router.push(
-        '/course/category' +
-          '?cid=' +
-          item.id +
-          '&cp=' +
-          this.cp +
-          '&xid=' +
-          this.xid +
-          '&pids=' +
-          '0'
-      )
-
+    // 公共 获取list 方法
+    getHeaderList(type) {
+      if (type === 'course') {
+        this.loadList = true
+        category.childCategoryList().then(res => {
+          this.handleData(this.allCourseData, res)
+          this.loadList = false
+        })
+      } else {
+        this.loadList = true
+        category.getNewProject().then(res => {
+          this.handleData(this.allProjectData, res)
+          this.loadList = false
+        })
+      }
+    },
+    // 处理数据 拼接全部数据
+    handleData(data, res) {
+      this.cidData = res.data.categoryList
+      this.cidData.unshift(data)
+      for (let item of this.cidData) {
+        item.childList.unshift(this.allData)
+      }
+      this.loadList = false
+      for (let item of this.cidData) {
+        if (item.id === this.categoryId) {
+          this.categoryIndex = this.cidData.indexOf(item)
+        }
+      }
+      this.pidData = this.cidData[this.categoryIndex]
+    },
+    handelOpenUrl() {
+      this.selectUrl.cid = this.selectCidItem
+      this.selectUrl.pids = this.selectPidItem
+      this.selectUrl.cp = this.cp
+      this.selectUrl.xid = this.xid
+      openUrl(this.selectUrl, this)
+    },
+    // 设置 cid pid 公共函数
+    handleSelect(type, item, index) {
+      if (type === 'cidType') {
+        this.selectCidItem = item.id
+        this.selectPidItem = '0'
+        this.$bus.$emit('cid', item.id)
+        this.categoryId = item.id
+        this.pidData = this.cidData[index]
+      } else {
+        this.selectCidItem = this.categoryId
+        this.selectPidItem = item.id
+        this.pidNumber = item.id
+      }
+      this.handelOpenUrl()
       this.categoryForm.pages = 1
-
-      // 点击cid时候 cid选中 pid置为 0
-      this.$bus.$emit('cid', item.id)
-      // 为了点击pid，保存cid
-      this.categoryId = item.id
-      this.$bus.$emit('pid', '0')
-      // 设置点击 cid 获取piddata
-      this.pidData = this.cidData[index]
-
+      this.$bus.$emit('pid', this.selectPidItem)
+      // 设置调取 card数据 ---
+      this.handleSelectCard(this.selectCidItem, this.selectPidItem)
+    },
+    handleSelectCard(selectCidItem, selectPidItem) {
       if (this.cp === '0') {
         if (this.xid === '0') {
           // 调取课程的数据
-          this.getCourseCardList(item.id, null)
+          this.getCourseCardList(selectCidItem, selectPidItem)
         } else {
-          this.getCourseCardChooseList(item.id, null)
+          this.getCourseCardChooseList(selectCidItem, selectPidItem)
         }
       } else {
         // 调取项目的数据
-        this.getProjectCardList(item.id, null)
+        // 点击学院 分类为 0
+        this.getProjectCardList(selectCidItem, selectPidItem)
       }
+    },
+    // 学院 item
+    selectCid(item, index) {
+      this.handleSelect('cidType', item, index)
     },
     // 分类 item
     selectPid(item, index) {
-      this.categoryForm.pages = 1
-      this.$router.push(
-        '/course/category' +
-          '?cid=' +
-          this.categoryId +
-          '&cp=' +
-          this.cp +
-          '&xid=' +
-          this.xid +
-          '&pids=' +
-          item.id
-      )
-      this.$bus.$emit('pid', item.id)
-      this.pidNumber = item.id
-      // cp 为 0 调用课程
-      if (this.cp === '0') {
-        this.getCourseCardList(null, item.id)
-        if (this.xid === '0') {
-          // 调取课程的数据
-          this.getCourseCardList(null, item.id)
-        } else {
-          this.getCourseCardChooseList(null, item.id)
-        }
-      } else {
-        // cp 为 1 调用项目
-        this.getProjectCardList(null, item.id)
-      }
-    },
-    // 学院全部
-    selectAllCid() {
-      this.categoryForm.pages = 1
-      this.categoryId = '0'
-      this.$router.push(
-        '/course/category' +
-          '?cid=' +
-          '0' +
-          '&cp=' +
-          this.cp +
-          '&xid=' +
-          this.xid +
-          '&pids=' +
-          '0'
-      )
-      // 点击全部 cid 和pid 都为 0
-      this.$bus.$emit('cid', '0')
-      this.$bus.$emit('pid', '0')
-      if (this.cp === '0') {
-        this.getCourseCardList(null, null)
-
-        if (this.xid === '0') {
-          // 调取课程的数据
-          this.getCourseCardList(null, null)
-        } else {
-          this.getCourseCardChooseList(null, null)
-        }
-      } else {
-        this.getProjectCardList(null, null)
-      }
-    },
-    // 分类 全部
-    selectAllPid() {
-      this.categoryForm.pages = 1
-
-      this.$router.push(
-        '/course/category' +
-          '?cid=' +
-          this.categoryId +
-          '&cp=' +
-          this.cp +
-          '&xid=' +
-          this.xid +
-          '&pids=' +
-          '0'
-      )
-      // this.$bus.$emit('cid', this.categoryId)
-      this.$bus.$emit('pid', '0')
-      if (this.cp === '0') {
-        // 点pid 全部，cid 保持
-        if (this.xid === '0') {
-          // 调取课程的数据
-          this.getCourseCardList(this.categoryId, '0')
-        } else {
-          this.getCourseCardChooseList(this.categoryId, '0')
-        }
-        this.getCourseCardList(this.categoryId, '0')
-      } else {
-        this.getProjectCardList(this.categoryId, '0')
-      }
+      this.handleSelect('pidType', item, index)
     },
     // 点击cid pid 获取 card列表
     setParamsPidCid(itemCid, itemPid) {
-      if (itemCid) {
-        this.categoryForm.cids = itemCid
-        // 将点击的id获取url中 不可以截取会发生 延迟
-        this.categoryForm.pids = '0'
-      } else if (itemPid) {
-        this.categoryForm.cids = splitUrl(0, 1)
-        // 将点击的id获取url中 不可以截取会发生 延迟
-        this.categoryForm.pids = itemPid
-        // console.log(this.categoryForm, '123')
-      } else {
-        this.categoryForm.cids = '0'
-        // 将点击的id获取url中 不可以截取会发生 延迟
-        this.categoryForm.pids = '0'
-      }
+      this.categoryForm.cids = itemCid
+      this.categoryForm.pids = itemPid
     },
     // 课程 card 列表
     getCourseCardList(itemCid, itemPid) {
       this.loadCourse = true
-
       this.setParamsPidCid(itemCid, itemPid)
 
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
-        // this.allCheckedId = []
-        // for (let item of res.data.curriculumList) {
-        //   this.allCheckedId.push(item.id)
-        // }
-        // console.log(this.pagemsg.total)
         this.loadCourse = false
       })
     },
     // 选课 card 列表
     getCourseCardChooseList(itemCid, itemPid) {
       this.loadCourse = true
-
       this.setParamsPidCid(itemCid, itemPid)
       category.chooseCurriculumList(this.categoryForm).then(res => {
         this.categoryDataChoose = res.data.curriculumList
@@ -299,11 +393,9 @@ export default {
         for (let item of res.data.curriculumList) {
           this.allCheckedId.push(item.id)
         }
-        // console.log(this.pagemsg.total)
         this.loadCourse = false
       })
     },
-
     // 项目 card列表
     getProjectCardList(itemCid, itemPid) {
       this.loadCourse = true
@@ -315,72 +407,11 @@ export default {
         this.loadCourse = false
       })
     },
-    // 课程 顶部 list
-    getCourseList() {
-      this.loadList = true
-      category.childCategoryList().then(res => {
-        this.cidData = res.data.categoryList
-        this.loadList = false
-        // 选课进入 categoryId 为 0
-        if (this.categoryId === '0') {
-          this.pidData = res.data.categoryList[0]
-        } else {
-          // 顶部 课程进入
-          for (let item of res.data.categoryList) {
-            if (item.id === this.categoryId) {
-              this.categoryIndex = res.data.categoryList.indexOf(item)
-            }
-          }
-          this.pidData = res.data.categoryList[this.categoryIndex]
-        }
-        this.loadBanner = false
-      })
-    },
-    // 项目 顶部 list
-    getProjectList() {
-      this.loadList = true
-      category.getNewProject().then(res => {
-        this.cidData = res.data.categoryList
-        this.loadList = false
-        //最新项目
-        if (this.categoryId === '0') {
-          this.pidData = res.data.categoryList[0]
-          // this.cidform.cids = '0'
-          // this.setCid(this.cidform)
-        } else {
-          // 最新项目之外
-          for (let item of res.data.categoryList) {
-            if (item.id === this.categoryId) {
-              this.categoryIndex = res.data.categoryList.indexOf(item)
-            }
-          }
-          this.pidData = res.data.categoryList[this.categoryIndex]
-        }
-      })
-    },
-    // 下面 card list 列表  --- 我要选课页面
-    // curriculumList() {
-    //   this.loadCourse = true
-    //   this.curriculumListForm.categoryIda = splitUrl(0, 1)
-    //   this.curriculumListForm.categoryIdb = splitUrl(3, 1)
-    //   category.curriculumList(this.curriculumListForm).then(response => {
-    //     this.categoryData = response.data.curriculumList
-    //     this.pagemsg.total = response.data.pageCount
-    //     for (let item of response.data.curriculumList) {
-    //       this.$set(item, 'checkmsg', false)
-    //     }
-    //     this.loadCourse = false
-    //     var that = this
-    //     for (let item of response.data.curriculumList) {
-    //       this.allCheckedId.push(item.id)
-    //     }
-    //   })
-    // },
+
     // 我要选课页面 点击全选
     allChecked() {
       this.idsForm.cartid = this.allCheckedId
       this.changeData = this.allCheckedId
-
       category.addShopCart(this.idsForm).then(response => {
         if (response.status === 0) {
           this.categoryDataChoose.forEach(function(v, i, arr) {
@@ -448,7 +479,6 @@ export default {
         })
       }
     },
-    initHeader() {},
     // 初始化params参数
     initParams() {
       // categoryId 学院 id
@@ -465,27 +495,18 @@ export default {
       this.pidBg = splitUrl(3, 1)
     },
     initListCard() {
-      // cp(0) 课程 cp(1) 项目
+      // cp(0) 课程 cp(1)
       if (this.cp === '0') {
-        // 无论是选课页面，还是顶部选课进来
-        this.getCourseList()
-        if (this.xid === '0') {
-          // 获取刷新后数据，使用url cid pid
-          this.getCourseCardList(this.categoryId, this.pids)
-        } else {
-          this.getCourseCardChooseList(this.categoryId, this.pids)
-        }
+        this.getHeaderList('course')
       } else {
-        this.getProjectList()
-        // 项目页面 获取刷新后数据，使用url cid pid
-        this.getProjectCardList(this.categoryId, this.pids)
+        this.getHeaderList('project')
       }
+      this.handleSelectCard(this.categoryId, this.categoryId)
     }
   },
   mounted() {
     this.initParams()
     this.initListCard()
-    this.initHeader()
   }
 }
 </script>

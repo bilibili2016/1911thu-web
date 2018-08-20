@@ -527,7 +527,14 @@ export default {
         })
         return false
       }
-
+      if (Trim(this.zzTicketForm.name) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请填写收票人姓名！'
+        })
+        return false
+      }
       if (
         Trim(this.zzTicketForm.tel) === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.zzTicketForm.tel)
@@ -563,6 +570,7 @@ export default {
         })
         return false
       }
+
       if (Trim(this.zzTicketForm.address) === '') {
         this.$message({
           showClose: true,
@@ -664,6 +672,14 @@ export default {
           })
           return false
         }
+      }
+      if (Trim(this.ticketForm.name) === '') {
+        this.$message({
+          showClose: true,
+          type: 'error',
+          message: '请输入正确的收票人姓名！'
+        })
+        return false
       }
       if (
         Trim(this.ticketForm.tel) === '' ||
