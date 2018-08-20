@@ -70,7 +70,7 @@ export default {
     return {
       orderForm: {
         pages: 1,
-        limits: null,
+        limits: 20,
         payStatus: null,
         ids: null
       },

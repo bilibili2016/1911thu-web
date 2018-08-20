@@ -120,6 +120,9 @@
             <el-tabs v-model="activeOrder">
               <el-tab-pane label="全部" name="orderFirst">
                 <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
+                <div class="pagination" v-if="allOrderData  && allOrderData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg4.pagesize" :current-page="pagemsg4.page" :total="pagemsg4.total" @current-change="getAllOrderDataChange"></el-pagination>
+                </div>
                 <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
 
               </el-tab-pane>
@@ -128,6 +131,9 @@
                   <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
                 </span>
                 <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :data="unfinishedOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-order>
+                <div class="pagination" v-if="unfinishedOrderData  && unfinishedOrderData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg5.pagesize" :current-page="pagemsg5.page" :total="pagemsg5.total" @current-change="unfinishedOrderDataChange"></el-pagination>
+                </div>
                 <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
 
               </el-tab-pane>
@@ -135,12 +141,18 @@
                 <span class="payOk" slot="label">已完成
                 </span>
                 <v-order v-if="readyOrderData && readyOrderData.length>0" :data="readyOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
+                <div class="pagination" v-if="readyOrderData  && readyOrderData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg6.pagesize" :pager-count="5" :page-count="pagemsg6.pagesize" :current-page="pagemsg6.page" :total="pagemsg6.total" @current-change="getReadyOrderDataChange"></el-pagination>
+                </div>
                 <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
               </el-tab-pane>
               <el-tab-pane name="orderFour">
                 <span class="payOff" slot="label">已失效
                 </span>
                 <v-order v-if="invalidOrderData && invalidOrderData.length>0" :data="invalidOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
+                <div class="pagination" v-if="invalidOrderData  && invalidOrderData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg7.pagesize" :pager-count="5" :page-count="pagemsg7.pagesize" :current-page="pagemsg7.page" :total="pagemsg7.total" @current-change="invalidOrderDataChange"></el-pagination>
+                </div>
                 <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
 
               </el-tab-pane>
@@ -198,11 +210,17 @@
             <el-tabs v-model="activeTicket" @tab-click="handleTicket">
               <el-tab-pane label="按订单开发票" name="ticketFirst">
                 <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
+                <div class="pagination" v-if="unTicketData  && unTicketData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg8.pagesize" :pager-count="5" :page-count="pagemsg8.pagesize" :current-page="pagemsg8.page" :total="pagemsg8.total" @current-change="unTicketDataChange"></el-pagination>
+                </div>
                 <v-nomsg class="noOrder" v-else :config="noMsgTwl"></v-nomsg>
 
               </el-tab-pane>
               <el-tab-pane name="ticketSecond" label="开票历史">
                 <v-tkhistory v-if="historyOrderData && historyOrderData.length>0" :orderData="historyOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-tkhistory>
+                <div class="pagination" v-if="historyOrderData  && historyOrderData.length>0">
+                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg9.pagesize" :pager-count="5" :page-count="pagemsg9.pagesize" :current-page="pagemsg9.page" :total="pagemsg9.total" @current-change="historyOrderDataChange"></el-pagination>
+                </div>
                 <v-nomsg class="noOrder" v-else :config="noMsgThi"></v-nomsg>
 
               </el-tab-pane>
@@ -373,6 +391,36 @@ export default {
         pagesize: 12,
         total: 12
       },
+      pagemsg4: {
+        page: 1,
+        pagesize: 20,
+        total: 12
+      },
+      pagemsg5: {
+        page: 1,
+        pagesize: 20,
+        total: 12
+      },
+      pagemsg6: {
+        page: 1,
+        pagesize: 20,
+        total: 12
+      },
+      pagemsg7: {
+        page: 1,
+        pagesize: 20,
+        total: 12
+      },
+      pagemsg8: {
+        page: 1,
+        pagesize: 20,
+        total: 12
+      },
+      pagemsg9: {
+        page: 1,
+        pagesize: 20,
+        total: 12
+      },
       projectForm: {
         types: 1,
         pages: '',
@@ -429,9 +477,17 @@ export default {
       },
       orderForm: {
         pages: 1,
-        limits: null,
+        limits: 20,
         payStatus: null,
         ids: null
+      },
+      orderNotInvoiceForm: {
+        pages: 1,
+        limits: 20
+      },
+      tickethistoryForm: {
+        pages: 1,
+        limits: 5
       },
       collectionData: [],
       orderDetail: {}, //订单详情信息
@@ -463,6 +519,7 @@ export default {
         this.getInvalidOrderData()
       }
     },
+
     // 获取订单详情
     getOrderDetail(msg) {
       if (msg === false) {
@@ -718,8 +775,19 @@ export default {
         profileHome.getAllOrderData(this.orderForm).then(response => {
           this.allOrderData = response.data.orderList
           this.allOrderLoad = false
+          this.pagemsg4.total = response.data.orderTotal
           resolve(true)
         })
+      })
+    },
+    // 我的订单-全部 分页切换
+    getAllOrderDataChange(val) {
+      this.pagemsg4.page = val
+      this.orderForm.payStatus = 0
+      this.orderForm.pages = val
+      profileHome.getAllOrderData(this.orderForm).then(response => {
+        this.allOrderData = response.data.orderList
+        this.allOrderLoad = false
       })
     },
     // 我的项目 公共
@@ -818,8 +886,19 @@ export default {
         profileHome.getAllOrderData(this.orderForm).then(response => {
           this.unfinishedOrderData = response.data.orderList
           this.unfinishedOrderLoad = false
+          this.pagemsg5.total = response.data.orderTotal
           resolve(true)
         })
+      })
+    },
+    // 我的订单-待支付 分页切换
+    unfinishedOrderDataChange(val) {
+      this.pagemsg5.page = val
+      this.orderForm.payStatus = 1
+      this.orderForm.pages = val
+      profileHome.getAllOrderData(this.orderForm).then(response => {
+        this.unfinishedOrderData = response.data.orderList
+        this.unfinishedOrderLoad = false
       })
     },
     // 我的订单 已支付
@@ -829,23 +908,44 @@ export default {
         profileHome.getAllOrderData(this.orderForm).then(response => {
           this.readyOrderData = response.data.orderList
           this.readyOrderLoad = false
+          this.pagemsg6.total = response.data.orderTotal
           resolve(true)
         })
       })
     },
-
+    // 我的订单-已支付 分页切换
+    getReadyOrderDataChange(val) {
+      this.pagemsg6.page = val
+      this.orderForm.payStatus = 2
+      this.orderForm.pages = val
+      profileHome.getAllOrderData(this.orderForm).then(response => {
+        this.readyOrderData = response.data.orderList
+        this.readyOrderLoad = false
+      })
+    },
     // 我的订单 取消
     getInvalidOrderData() {
       this.orderForm.payStatus = 3
-
       return new Promise((resolve, reject) => {
         profileHome.getAllOrderData(this.orderForm).then(response => {
           this.invalidOrderData = response.data.orderList
           this.invalidOrderLoad = false
+          this.pagemsg7.total = response.data.orderTotal
           resolve(true)
         })
       })
     },
+    // 我的订单-取消 分页切换
+    invalidOrderDataChange(val) {
+      this.pagemsg7.page = val
+      this.orderForm.payStatus = 3
+      this.orderForm.pages = val
+      profileHome.getAllOrderData(this.orderForm).then(response => {
+        this.invalidOrderData = response.data.orderList
+        this.invalidOrderLoad = false
+      })
+    },
+
     handleTicket(item) {
       if (item.name === 'ticketFirst') {
         // 消除上次默认选中
@@ -858,19 +958,40 @@ export default {
     },
     //未开发票列表
     getUnTicketData() {
-      this.orderForm.payStatus = 2
-      profileHome.orderNotInvoice().then(response => {
+      profileHome.orderNotInvoice(this.orderNotInvoiceForm).then(response => {
+        this.unTicketData = response.data.orderList
+        this.pagemsg8.total = response.data.orderTotal
+        this.unTicketData.forEach(item => {
+          item.checked = false
+        })
+        this.readyOrderLoad = false
+      })
+    },
+    // 未开发票列表 分页切换
+    unTicketDataChange(val) {
+      this.pagemsg8.page = val
+      this.orderNotInvoiceForm.pages = val
+      profileHome.orderNotInvoice(this.orderNotInvoiceForm).then(response => {
         this.unTicketData = response.data.orderList
         this.unTicketData.forEach(item => {
           item.checked = false
         })
-
         this.readyOrderLoad = false
       })
     },
     // 开票历史
     getHistoryOrderData() {
-      profileHome.tickethistory().then(response => {
+      profileHome.tickethistory(this.tickethistoryForm).then(response => {
+        this.historyOrderData = response.data.invoiceList
+        this.pagemsg9.total = response.data.invoiceTotal
+        this.historyOrderLoad = false
+      })
+    },
+    // 开票历史  分页切换
+    historyOrderDataChange(val) {
+      this.pagemsg9.page = val
+      this.tickethistoryForm.pages = val
+      profileHome.tickethistory(this.tickethistoryForm).then(response => {
         this.historyOrderData = response.data.invoiceList
         this.historyOrderLoad = false
       })
@@ -922,7 +1043,6 @@ export default {
       this.detailMsg = true
       profileHome.curriculumPayApply(this.orderForm).then(response => {
         if (response.status === 0) {
-          console.log(response, '这是response1233')
           this.detailMsg = false
           this.courseList = response.data.orderCurriculumList
           this.projectList = response.data.orderProjectList
