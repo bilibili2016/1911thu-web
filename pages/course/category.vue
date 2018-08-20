@@ -375,6 +375,7 @@ export default {
     getCourseCardList(itemCid, itemPid) {
       this.loadCourse = true
       this.setParamsPidCid(itemCid, itemPid)
+
       category.curriculumListNew(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
@@ -485,6 +486,7 @@ export default {
       this.categoryId = splitUrl(0, 1)
       // cp(1)项目 cp(0)
       this.cp = splitUrl(1, 1)
+
       // 获取是 选课(1) 还是 学院(0)
       this.xid = splitUrl(2, 1)
       // pid 分类的id

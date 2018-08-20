@@ -777,6 +777,7 @@ body {
     height: 40px;
     text-align: center;
     line-height: 40px;
+    position: relative;
     span {
       vertical-align: top;
       font-weight: 700;
@@ -794,7 +795,10 @@ body {
     }
   }
   i {
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    // float: right;
     width: 20px;
     height: 20px;
     margin-top: 10px;
