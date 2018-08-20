@@ -23,7 +23,7 @@
           <v-card :data="categoryDataChoose" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
-        <div v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<0 && !loadCourse">
+        <div v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<=0 && !loadCourse">
           <v-nothing></v-nothing>
         </div>
         <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>

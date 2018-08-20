@@ -169,6 +169,8 @@ export default {
         if (msg.type == 'ended') {
           // 不免费 未购买 试看的课程弹出快捷支付弹框
           if (that.isFree === '1' && !that.bought && that.lookAt == '2') {
+            // 取消全屏
+            window.qcplayer.fullscreen(false)
             that.$bus.$emit('openPay', that.pay)
           } else {
             // 如果当前小节播放完成，直接播放下一小节

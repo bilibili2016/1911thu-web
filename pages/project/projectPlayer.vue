@@ -468,6 +468,8 @@ export default {
         if (msg.type == 'ended') {
           // 未购买且试看
           if (!that.bought && that.lookAt == '2') {
+            // 取消全屏
+            window.qcplayer.fullscreen(false)
             that.$bus.$emit('openPay', that.pay)
           } else {
             if (that.nextCatalogId !== '' && that.bought) {
