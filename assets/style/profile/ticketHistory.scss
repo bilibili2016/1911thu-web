@@ -7,8 +7,12 @@
           width: 500px;
           .courseOne {
             width: 500px;
+            img {
+              cursor: auto;
+            }
             h4 {
               width: 285px;
+              cursor: auto;
             }
           }
         }
@@ -167,7 +171,9 @@
         }
       }
       .bottomCon {
-        padding: 30px 30px 40px 30px;
+        height: 360px;
+        overflow-y: auto;
+        padding: 30px;
         .top {
           height: 50px;
           line-height: 50px;

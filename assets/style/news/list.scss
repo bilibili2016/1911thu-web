@@ -340,6 +340,13 @@
 //列表页
 .goodLesson {
   padding-bottom: 40px !important;
+  .singleList {
+    .news-banner {
+      img {
+        margin: 0 auto;
+      }
+    }
+  }
 }
 .news-list .shadow {
   box-shadow: none !important;

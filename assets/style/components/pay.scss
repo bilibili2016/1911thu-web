@@ -3,10 +3,12 @@
   height: 100%;
   position: fixed;
   left: 0;
+  right: 0;
   top: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
   overflow: hidden;
-  z-index: 99999;
+  z-index: 9999999999;
   .note {
     position: absolute;
     top: 0;
@@ -14,19 +16,19 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    // margin-top: -185px;
-    // margin-left: -290px;
     width: 580px;
     height: 370px;
     background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
+    z-index: 9999999999;
     i.el-icon-close {
       position: absolute;
       right: 15px;
       top: 15px;
       font-size: 20px;
       color: #6417a6;
+      z-index: 99999999999;
     }
     h4 {
       font-size: 16px;

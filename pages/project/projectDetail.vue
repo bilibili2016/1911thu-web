@@ -12,7 +12,7 @@
           <div class="detail" v-html="projectDetail.content"></div>
         </el-tab-pane>
         <el-tab-pane label="线上课程介绍" name="second">
-          <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad"></v-procourse>
+          <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad" :id="project.projectId"></v-procourse>
         </el-tab-pane>
         <el-tab-pane label="用户评价" name="third">
           <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo" v-loading="evaluateDataLoad"></v-proevaluate>

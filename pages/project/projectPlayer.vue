@@ -403,18 +403,22 @@ export default {
             }
           })
         } else {
-          // 播放器如果存在就销毁播放器，重新创建
-          if (this.players) {
-            this.players.destroy()
+          if (!that.bought && that.lookAt == '1') {
+            this.goShoppingCart('您还未购买该项目，请先去购买吧！')
+          } else {
+            // 播放器如果存在就销毁播放器，重新创建
+            if (this.players) {
+              this.players.destroy()
+            }
+            // 初始化播放器
+            this.tcplayer.mp4 = response.data.playAuthInfo.video_address
+            this.players = new TcPlayer('mediaPlayer', this.tcplayer)
+            window.qcplayer = this.players
+            if (this.autoplay) {
+              window.qcplayer.play()
+            }
+            this.nextCatalogId = response.data.nextCatalogId
           }
-          // 初始化播放器
-          this.tcplayer.mp4 = response.data.playAuthInfo.video_address
-          this.players = new TcPlayer('mediaPlayer', this.tcplayer)
-          window.qcplayer = this.players
-          if (this.autoplay) {
-            window.qcplayer.play()
-          }
-          this.nextCatalogId = response.data.nextCatalogId
         }
       })
 
@@ -464,9 +468,11 @@ export default {
         if (msg.type == 'ended') {
           // 未购买且试看
           if (!that.bought && that.lookAt == '2') {
+            // 取消全屏
+            window.qcplayer.fullscreen(false)
             that.$bus.$emit('openPay', that.pay)
           } else {
-            if (that.nextCatalogId !== '') {
+            if (that.nextCatalogId !== '' && that.bought) {
               that.playerForm.catalogId = that.nextCatalogId
               that.autoplay = true
               that.getPlayerInfo()

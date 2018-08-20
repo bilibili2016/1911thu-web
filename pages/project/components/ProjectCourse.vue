@@ -24,7 +24,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { splitUrl, message, open } from '@/lib/util/helper'
 export default {
-  props: ['projectCourseData'],
+  props: ['projectCourseData', 'id'],
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },
@@ -32,10 +32,6 @@ export default {
     return {
       kidForm: {
         ids: null
-      },
-      detail: {
-        base: '/course/detail',
-        kid: ''
       },
       projectPlayer: {
         base: '/project/projectPlayer',
@@ -47,8 +43,13 @@ export default {
     ...mapActions('auth', ['setKid']),
     // 跳转课程详情
     goCourseDetail(item) {
-      this.detail.kid = item.curriculum_id
-      open(this.detail)
+      window.open(
+        window.location.origin +
+          '/course/detail?kid=' +
+          item.curriculum_id +
+          '&pid=' +
+          this.id
+      )
     },
     // 跳转到项目播放页
     goProjectPlayer() {
