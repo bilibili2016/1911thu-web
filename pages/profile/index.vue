@@ -4,164 +4,34 @@
     <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
         <!-- 我的首页 -->
-        <div>
-          <el-tab-pane class="my-home" name="tab-first">
-            <span slot="label" class="tabList">
-              <i class="icon-home"></i> 我的首页</span>
-            <el-card class="card-style">
-              <div slot="header" class="clearfix">
-                <span>最近学习</span>
-              </div>
-              <div class="content">
-                <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
-                <v-nomsg class="fillTop" v-else :config="noMsgOne"></v-nomsg>
-              </div>
-            </el-card>
-          </el-tab-pane>
-        </div>
+        <el-tab-pane class="my-home" name="tab-first">
+          <span slot="label" class="tabList">
+            <i class="icon-home"></i> 我的首页</span>
+          <v-myhome :studyData="studyData" :configZero="configZero" :noMsgOne="noMsgOne"></v-myhome>
+        </el-tab-pane>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
-          <el-card class="changeNav">
-            <el-tabs v-model="activeNames" @tab-click="handleActive">
-              <!-- 我的课程 学习中 -->
-              <el-tab-pane label="学习中" name="first">
-                <v-list v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-list>
-                <div class="pagination" v-if="newDataing  && newDataing.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg1.pagesize" :pager-count="5" :page-count="pagemsg1.pagesize" :current-page="pagemsg1.page" :total="pagemsg1.total" @current-change="studyPageChange"></el-pagination>
-                </div>
-                <v-nomsg v-else :config="noMsgTwo"></v-nomsg>
-
-              </el-tab-pane>
-              <!-- 我的课程 已完成 -->
-              <el-tab-pane label="已完成" name="second">
-                <v-list v-if="newDataReady && newDataReady.length>0" :data="newDataReady" :config="configTwo"></v-list>
-                <div class="pagination" v-if="newDataReady && newDataReady.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
-                </div>
-                <v-nomsg v-else :config="noMsgThree"></v-nomsg>
-
-              </el-tab-pane>
-              <!-- 我的课程 已过期 -->
-              <el-tab-pane label="已过期" name="fourth">
-                <v-list v-if="overTimeData && overTimeData.length>0" :data="overTimeData" :config="configFour"></v-list>
-                <div class="pagination" v-if="overTimeData && overTimeData.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg2.pagesize" :pager-count="5" :page-count="pagemsg2.pagesize" :current-page="pagemsg2.page" :total="pagemsg2.total" @current-change="readyStudyPageChange"></el-pagination>
-                </div>
-                <v-nomsg v-else :config="noMsgFour"></v-nomsg>
-
-              </el-tab-pane>
-              <!-- 我的课程 我的收藏 -->
-              <el-tab-pane label="我的收藏" name="third">
-                <v-list v-if="collectionData && collectionData.length>0" :data="collectionData" :config="configZero"></v-list>
-                <div class="pagination" v-if="collectionData && collectionData.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="pagemsg3.pagesize" :pager-count="5" :page-count="pagemsg3.pagesize" :current-page="pagemsg3.page" :total="pagemsg3.total" @current-change="collectionPageChange"></el-pagination>
-                </div>
-                <v-nomsg v-else :config="noMsgFive"></v-nomsg>
-
-              </el-tab-pane>
-            </el-tabs>
-          </el-card>
-
+          <v-mycourse :activeNames="activeNames" :newDataing="newDataing" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="newDataReady" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="overTimeData" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :pagemsg3="pagemsg3" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="readyStudyPageChange" @studyPageChange="studyPageChange" @collectionPageChange="collectionPageChange" @handleActive="handleActive"></v-mycourse>
         </el-tab-pane>
         <!-- 我的项目 -->
         <el-tab-pane class="my-course" name="tab-third">
           <span slot="label" class="tabList">
             <i class="icon-project"></i> 我的项目</span>
-          <el-card class="changeNav">
-            <el-tabs v-model="activeProject" @tab-click="handleProject">
-              <!-- 我的项目 学习中 -->
-              <el-tab-pane label="学习中" name="first">
-                <v-card v-if="studyProjectData  && studyProjectData.length>0" :data="studyProjectData" :config="configOne"></v-card>
-                <div class="pagination" v-if="studyProjectData  && studyProjectData.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="projectPageStudy.pagesize" :pager-count="5" :page-count="projectPageStudy.pagesize" :current-page="projectPageStudy.page" :total="projectPageStudy.total" @current-change="studyProjectPageChange"></el-pagination>
-                </div>
-                <v-nomsg v-else :config="noMsgSix"></v-nomsg>
-
-              </el-tab-pane>
-              <!-- 我的项目 已完成 -->
-              <el-tab-pane label="已完成" name="second">
-                <v-card v-if="readyProjectData && readyProjectData.length>0" :data="readyProjectData" :config="configTwo"></v-card>
-                <div class="pagination" v-if="readyProjectData && readyProjectData.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="projectPageReady.pagesize" :pager-count="5" :page-count="projectPageReady.pagesize" :current-page="projectPageReady.page" :total="projectPageReady.total" @current-change="studyProjectPageChange"></el-pagination>
-                </div>
-                <v-nomsg v-else :config="noMsgSeven"></v-nomsg>
-
-              </el-tab-pane>
-              <!-- 我的项目 已过期 -->
-              <el-tab-pane label="已过期" name="third">
-                <v-card v-if="expiredProjectData && expiredProjectData.length>0" :data="expiredProjectData" :config="configFour"></v-card>
-                <div class="pagination" v-if="expiredProjectData && expiredProjectData.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="projectPageExpired.pagesize" :pager-count="5" :page-count="projectPageExpired.pagesize" :current-page="projectPageExpired.page" :total="projectPageExpired.total" @current-change="expiredProjectPageChange"></el-pagination>
-                </div>
-                <v-nomsg v-else :config="noMsgEight"></v-nomsg>
-
-              </el-tab-pane>
-              <!-- 我的项目 我的收藏 -->
-              <el-tab-pane label="我的收藏" name="fourth">
-                <v-card v-if="collectProjectData && collectProjectData.length>0" :data="collectProjectData" :config="configZero"></v-card>
-                <div class="pagination" v-if="collectProjectData && collectProjectData.length>0">
-                  <el-pagination background layout="prev, pager, next" :page-size="projectPageCollect.pagesize" :pager-count="5" :page-count="projectPageCollect.pagesize" :current-page="projectPageCollect.page" :total="projectPageCollect.total" @current-change="collectProjectPageChange"></el-pagination>
-                </div>
-                <v-nomsg v-else :config="noMsgNine"></v-nomsg>
-
-              </el-tab-pane>
-            </el-tabs>
-          </el-card>
-
+          <v-myproject @studyProjectPageChange="studyProjectPageChange" @expiredProjectPageChange="expiredProjectPageChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configZero" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configFour="configFour" :expiredProjectData="expiredProjectData" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configTwo="configTwo" :studyProjectData="studyProjectData" :configOne="configOne" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="readyProjectData"></v-myproject>
         </el-tab-pane>
         <!-- 我的订单 -->
         <el-tab-pane class="my-course my-order" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
-          <!-- 订单 -->
-          <el-card v-if="showOrderList">
-            <el-tabs v-model="activeOrder">
-              <el-tab-pane label="全部" name="orderFirst">
-                <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
-                <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
-
-              </el-tab-pane>
-              <el-tab-pane name="orderSecond">
-                <span class="payCut" slot="label">未完成
-                  <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
-                </span>
-                <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :data="unfinishedOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-order>
-                <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
-
-              </el-tab-pane>
-              <el-tab-pane name="orderThird">
-                <span class="payOk" slot="label">已完成
-                </span>
-                <v-order v-if="readyOrderData && readyOrderData.length>0" :data="readyOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
-                <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
-              </el-tab-pane>
-              <el-tab-pane name="orderFour">
-                <span class="payOff" slot="label">已失效
-                </span>
-                <v-order v-if="invalidOrderData && invalidOrderData.length>0" :data="invalidOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
-                <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
-
-              </el-tab-pane>
-            </el-tabs>
-          </el-card>
-          <!-- 订单详情 -->
-          <v-detail v-else :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :config="orderType" v-loading="detailMsg"></v-detail>
-
+          <v-myorder :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList"></v-myorder>
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
           <span slot="label" class="tabList">
             <i class="icon-message"></i> 我的消息</span>
-          <el-card class="card-style">
-            <div slot="header" class="clearfix">
-              <span>我的消息</span>
-            </div>
-            <v-info @noMsg="isNoMyMsg"></v-info>
-            <v-nomsg v-show="noMyMsg" :config="noMsgEle"></v-nomsg>
-
-          </el-card>
+          <v-myinfo :noMyMsg="noMyMsg" :noMsgEle="noMsgEle" @isNoMyMsg="isNoMyMsg"></v-myinfo>
         </el-tab-pane>
         <!-- 个人设置 -->
         <el-tab-pane name="tab-sixth">
@@ -173,49 +43,16 @@
         <el-tab-pane class="my-course my-invitation" name="tab-seventh">
           <span slot="label" class="tabList">
             <i class="icon-code"></i> 兑换码管理</span>
-          <el-tabs v-model="courseCodeNames" @tab-click="handleCourseCode">
-            <!-- 课程码管理 课程码列表 -->
-            <el-tab-pane label="兑换码列表" name="first">
-              <v-invitation :codeData="codeData"></v-invitation>
-            </el-tab-pane>
-            <!-- 课程码管理 兑换详情 -->
-            <el-tab-pane label="兑换详情" name="second">
-              <v-conversion :recordData="recordData"></v-conversion>
-            </el-tab-pane>
-            <!-- 课程码管理 我的兑换 -->
-            <el-tab-pane label="我的兑换" name="fourth">
-              <v-binding :invitationCodeList='invitationCodeList'></v-binding>
-            </el-tab-pane>
-          </el-tabs>
+          <!-- 'codeData', 'recordData', 'invitationCodeList' -->
+          <v-mycode :codeData="codeData" :recordData="recordData" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode"></v-mycode>
         </el-tab-pane>
 
         <!-- 发票管理 -->
         <el-tab-pane class="my-course my-order" name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-ticket"></i> 发票管理</span>
-          <!-- 发票 -->
-          <el-card v-if="showTicketList">
-            <el-tabs v-model="activeTicket" @tab-click="handleTicket">
-              <el-tab-pane label="按订单开发票" name="ticketFirst">
-                <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
-                <v-nomsg class="noOrder" v-else :config="noMsgTwl"></v-nomsg>
 
-              </el-tab-pane>
-              <el-tab-pane name="ticketSecond" label="开票历史">
-                <v-tkhistory v-if="historyOrderData && historyOrderData.length>0" :orderData="historyOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-tkhistory>
-                <v-nomsg class="noOrder" v-else :config="noMsgThi"></v-nomsg>
-
-              </el-tab-pane>
-              <el-tab-pane name="ticketThird">
-                <span class="payOk" slot="label">开票规则
-                </span>
-                <v-tkrules v-loading="readyOrderLoad"></v-tkrules>
-              </el-tab-pane>
-            </el-tabs>
-          </el-card>
-          <!-- 发票详情 -->
-          <v-detail v-else :config="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail"></v-detail>
-
+          <v-myticket :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail"></v-myticket>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -223,40 +60,32 @@
 </template>
 
 <script>
-import NoMsg from '@/pages/profile/pages/noMsg.vue'
-import CustomCard from '@/pages/profile/components/Card.vue'
-import CustomList from '@/pages/profile/components/List.vue'
 import Banner from '@/components/common/Banner.vue'
 import PersonalSet from '@/pages/profile/personalSet/personalSet.vue'
-import Info from '@/pages/profile/components/Info'
-import Order from '@/pages/profile/components/OrderList'
-import Detail from '@/pages/profile/components/Detail'
-import Invitation from '@/pages/profile/pages/invitation'
-import Conversion from '@/pages/profile/components/Conversion'
-import Bind from '@/pages/profile/components/BindIng'
-import TicketOrder from '@/pages/profile/ticket/ticketOrder'
-import TicketHistory from '@/pages/profile/ticket/ticketHistory'
-import TicketRules from '@/pages/profile/ticket/ticketRules'
+
 import { profileHome } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import MyHome from '@/pages/profile/pages/myHome'
+import myCourse from '@/pages/profile/pages/myCourse'
+import myProject from '@/pages/profile/pages/myProject'
+import myOrder from '@/pages/profile/pages/myOrder'
+import myInfo from '@/pages/profile/pages/myInfo'
+import myCode from '@/pages/profile/pages/myCode'
+import myTicket from '@/pages/profile/pages/myTicket'
 export default {
   components: {
-    'v-card': CustomCard,
-    'v-list': CustomList,
     'v-person': PersonalSet,
-    'v-info': Info,
+
     'v-banner': Banner,
-    'v-order': Order,
-    'v-detail': Detail,
-    'v-invitation': Invitation,
-    'v-conversion': Conversion,
-    'v-tkorder': TicketOrder,
-    // 'v-ticketorderdetail': TicketOrderDetail,
-    'v-tkhistory': TicketHistory,
-    'v-binding': Bind,
-    'v-tkrules': TicketRules,
-    'v-nomsg': NoMsg
+
+    'v-myhome': MyHome,
+    'v-mycourse': myCourse,
+    'v-myproject': myProject,
+    'v-myorder': myOrder,
+    'v-myinfo': myInfo,
+    'v-mycode': myCode,
+    'v-myticket': myTicket
   },
   data() {
     return {

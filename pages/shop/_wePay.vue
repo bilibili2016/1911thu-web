@@ -36,7 +36,6 @@
 <script>
 import { wepay } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
 import Vue from 'vue'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import Repore from '@/components/common/Report.vue'
