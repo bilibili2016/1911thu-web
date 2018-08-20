@@ -3,7 +3,6 @@
   <div class="teacher">
     <h4>讲师介绍</h4>
     <div class="personal clearfix">
-      <!-- @click="goTeacherInfo(courseList.teacher_id)" -->
       <img class="fl" :src="courseList.head_img" alt="" @click="handleLinkTeacher(courseList)">
       <div class="fl">
         <h5 @click="handleLinkTeacher(courseList)">{{courseList.teacher_name}}</h5>
@@ -15,8 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
+import { mapActions } from 'vuex'
 export default {
   props: ['courseList'],
   data() {

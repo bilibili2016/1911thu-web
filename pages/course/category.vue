@@ -393,7 +393,6 @@ export default {
         for (let item of res.data.curriculumList) {
           this.allCheckedId.push(item.id)
         }
-        // console.log(this.pagemsg.total)
         this.loadCourse = false
       })
     },
