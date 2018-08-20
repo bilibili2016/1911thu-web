@@ -85,10 +85,14 @@
           vertical-align: middle;
         }
         .goBack {
+          width: 20px;
           font-size: 18px;
           font-weight: 800;
-          margin: 0 15px 0 30px;
+          margin-left: 30px;
           color: #6417a6;
+          cursor: pointer;
+        }
+        .detailText {
           cursor: pointer;
         }
       }
