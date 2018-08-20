@@ -238,6 +238,7 @@ export default {
             if (res.status == 0) {
               // this.getUserInfo()
               this.$emit('getUserInfo')
+              this.$bus.$emit('reUserInfo')
             } else {
               this.$message({
                 showClose: true,

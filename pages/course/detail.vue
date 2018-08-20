@@ -67,7 +67,7 @@ export default {
         text: '课程详情',
         project: '项目详情',
         projectCourse: true,
-        projectCourseId: ''
+        projectId: ''
       },
       kidForm: {
         kid: ''
@@ -113,7 +113,10 @@ export default {
         totalEvaluate: null,
         totalScore: null
       },
-      sumUserStart: 0
+      sumUserStart: 0,
+      project: {
+        projectId: ''
+      }
     }
   },
   methods: {
@@ -209,8 +212,10 @@ export default {
   },
   mounted() {
     this.initAll()
+    // 获取课程id
     this.BreadCrumb.projectCourseId = splitUrl(0, 1)
-    console.log(this.BreadCrumb.projectCourseId)
+    // 获取项目id
+    this.BreadCrumb.projectId = splitUrl(1, 1)
   },
   watch: {
     //在当前页面进行登录操作更新状态
