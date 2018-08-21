@@ -6,7 +6,8 @@
         <el-card class="fl" :body-style="{ padding: '0px' }">
           <div class="goodplay" v-if="isShowCover">
             <div class="img-con">
-              <img :src="courseList.picture" class="image">
+              <img v-if="whichPage==='0'" :src="courseList.picture" class="image">
+              <img v-else :src="courseList.teacher_picture" class="image">''
             </div>
             <!-- <div class="mask">1</div> -->
 
@@ -174,6 +175,7 @@ export default {
   },
   data() {
     return {
+      whichPage: '',
       isShowCover: true,
       playImg: 'http://papn9j3ys.bkt.clouddn.com/play.png',
       two_is_cart: 0,
@@ -206,7 +208,9 @@ export default {
           '?kid=' +
           splitUrl(0, 1) +
           '&bid=' +
-          item.defaultCurriculumCatalog.id
+          item.defaultCurriculumCatalog.id +
+          '&page=' +
+          splitUrl(2, 1)
       )
       this.$bus.$emit('reupdatecourse')
       // window.open(window.location.origin + '/course/player')
@@ -287,6 +291,7 @@ export default {
     }
   },
   mounted() {
+    this.whichPage = splitUrl(1, 1)
     this.$bus.$on('closeCover', data => {
       this.closeCover()
     })

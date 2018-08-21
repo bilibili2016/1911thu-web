@@ -17,7 +17,7 @@
               订单信息
             </div>
             <div class="bottom">
-              <div class="info clearfix">
+              <div class="info clearfix" v-show="!(JSON.stringify(orderDetail) === '{}')">
                 <div class="info-fl">
                   <span>订单编号：</span>
                   <span>{{orderDetail.order_sn}}</span>
@@ -45,13 +45,13 @@
                   </div>
                   <div class="info-fr">
                     <span>支付时间：</span>
-                    <span>{{changeTime(orderDetail.pay_time)}}</span>
+                    <span v-show="!(JSON.stringify(orderDetail) === '{}')">{{changeTime(orderDetail.pay_time)}}</span>
                   </div>
                 </div>
               </div>
               <!-- 公司转账 -->
               <div v-else>
-                <div class="info clearfix">
+                <div class="info clearfix" v-show="!(JSON.stringify(bankInfo) === '{}')">
                   <div class="info-fl">
                     <span>支付方式：</span>
                     <span>公司转账</span>
@@ -94,7 +94,7 @@
             <span class="lr">数量</span>
           </div>
           <div class="bottom">
-            <div class="bottom-item clearfix" v-if="courseList.length" v-for="course in courseList">
+            <div class="bottom-item clearfix" v-if="courseList.length !==0" v-for="course in courseList">
               <div class="courseInfo clearfix">
                 <div class="bottomImg">
                   <img class="fl" :src="course.picture" alt="">

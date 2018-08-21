@@ -29,7 +29,9 @@
             <div class="item" @click="handleLinkDetail(card)">
               <p class="itemBox-name itemBoxTitle">
                 <span class="title">{{card.title}}</span>
-                <span class="deputyTitle fl">{{card.deputy_title}}</span>
+                <!-- 首页二级标题展示 老师+职称 -->
+                <span v-if="config.card_type === 'profile'" class="deputyTitle fl">{{card.teacher_name+'&nbsp;&nbsp;'+card.graduate}}</span>
+                <span v-else class="deputyTitle fl">{{card.deputy_title}}</span>
               </p>
               <p class="itemBox-info">
                 <span>
@@ -97,7 +99,8 @@ export default {
       numSrc: require('@/assets/images/home_num.png'),
       coursedetail: {
         base: '/course/coursedetail',
-        kid: null
+        kid: null,
+        page: 0
       },
       projectdetail: {
         base: '/project/projectdetail',
@@ -115,24 +118,16 @@ export default {
       if (this.isIndex) {
         this.coursedetail.kid = item.id
         open(this.coursedetail)
-
-        // window.open(
-        //   window.location.origin + '/course/coursedetail?kid=' + item.id
-        // )
       } else {
         // 分类列表页
         if (this.cp === '0') {
           // 课程-转到课程详情
-          // window.open(
-          //   window.location.origin + '/course/coursedetail?kid=' + item.id
-          // )
           this.coursedetail.kid = item.id
           open(this.coursedetail)
         } else {
           // 项目-项目详情
           this.projectdetail.kid = item.id
           open(this.projectdetail)
-          // this.openDetail('/project/projectdetail?id=' + item.id)
         }
       }
     },

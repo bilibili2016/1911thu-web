@@ -49,6 +49,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
+import { open } from '@/lib/util/helper'
 export default {
   props: ['courseList'],
   computed: {
@@ -68,6 +69,15 @@ export default {
       curriculumcartids: {
         cartid: null,
         type: 1
+      },
+      courseDetail: {
+        base: '/course/coursedetail',
+        kid: null,
+        page: 0
+      },
+      projectDetail: {
+        base: '/project/projectdetail',
+        kid: null
       }
     }
   },
@@ -75,11 +85,12 @@ export default {
     ...mapActions('auth', ['setKid', 'setProductsNum']),
     // 点击跳转课程详情页
     handleLinkCourseDetail(item) {
-      // persistStore.set('curriculumId', item.id)
-      // this.setKid(this.kidForm)
-      window.open(
-        window.location.origin + '/course/coursedetail?kid=' + item.id
-      )
+      if (this.cidNumber === '2') {
+        this.courseDetail.page = 1
+      } else {
+        this.courseDetail.page = 0
+      }
+      open(this.courseDetail)
     },
     // 设置购物车中 is_cart 改变
     handleChangeIsCart(item) {
@@ -141,21 +152,20 @@ export default {
     },
     //课程详情
     courseInfo(item, index) {
-      if (window.location.pathname.split('/')[3] === '0') {
+      if (this.cidNumber === '0') {
         // 项目-项目详情
-        this.openDetail('/project/projectdetail?id=' + item.id)
+        this.projectDetail.kid = item.id
+        open(this.projectDetail)
       } else {
         this.kidForm.kids = item.id
-        // persistStore.set('curriculumId', item.id)
-        // this.setKid(this.kidForm)
-        window.open(
-          window.location.origin + '/course/coursedetail?kid=' + item.id
-        )
+        this.courseDetail.kid = item.id
+        if (this.cidNumber === '2') {
+          this.courseDetail.page = 1
+        } else {
+          this.courseDetail.page = 0
+        }
+        open(this.courseDetail)
       }
-    },
-
-    openDetail(link) {
-      window.open(window.location.origin + link)
     }
   },
   mounted() {

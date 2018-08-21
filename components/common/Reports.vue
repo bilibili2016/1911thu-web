@@ -5,7 +5,7 @@
         <h4>报告问题
           <i @click="closeReport" class="el-icon-close fr"></i>
         </h4>
-        <el-input type="textarea" :rows="4" placeholder="请详细描述您遇到的问题" v-model="problem.content">
+        <el-input type="textarea" :rows="4" maxlength="70" placeholder="请详细描述您遇到的问题" v-model="problem.content">
         </el-input>
         <div class="commitBug">
           <el-button @click="reportProblem">提交</el-button>
