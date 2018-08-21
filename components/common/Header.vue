@@ -122,7 +122,6 @@ export default {
     ...mapState('auth', ['token', 'productsNum']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
-
   methods: {
     ...mapActions('auth', ['setGid', 'setProductsNum', 'signOut']),
     // 跳转 公共路由方法
