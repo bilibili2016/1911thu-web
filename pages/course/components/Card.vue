@@ -167,9 +167,7 @@ export default {
     'v-player': CardPlayer
   },
   props: ['courseList', 'privileMsg', 'config'],
-  mounted() {
-    // console.log(this.privileMsg)
-  },
+  mounted() {},
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
     ...mapState('auth', ['token', 'productsNum'])

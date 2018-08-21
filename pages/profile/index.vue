@@ -872,28 +872,30 @@ export default {
   },
   mounted() {
     if (this.isAuthenticated) {
-      this.studydataList()
-      this.studyCurriculumList()
-      this.readyStudyCurriculumList()
-      this.getProjectOneList()
-      this.getProjectTwoList()
-      this.getProjectThreeList()
-      this.getProjectFourList()
-      this.childCategoryList()
-      this.collectionList()
-      this.getAllOrderData()
-      this.getUnfinishedOrderData()
-      this.getReadyOrderData()
-      this.getInvalidOrderData()
-      this.getCodeList()
-      this.getRecordList()
-      this.curriculumPayApply()
-      this.getHistoryOrderData()
-      this.getUnTicketData()
-      // this.getOverTime()
-      //过期的我的课程
-      this.overStudyCurriculumList()
-      this.getUsedInvitationCodeList()
+      if (persistStore.get('isSingleLogin')) {
+        this.studydataList()
+        this.studyCurriculumList()
+        this.readyStudyCurriculumList()
+        this.getProjectOneList()
+        this.getProjectTwoList()
+        this.getProjectThreeList()
+        this.getProjectFourList()
+        this.childCategoryList()
+        this.collectionList()
+        this.getAllOrderData()
+        this.getUnfinishedOrderData()
+        this.getReadyOrderData()
+        this.getInvalidOrderData()
+        this.getCodeList()
+        this.getRecordList()
+        this.curriculumPayApply()
+        this.getHistoryOrderData()
+        this.getUnTicketData()
+        // this.getOverTime()
+        //过期的我的课程
+        this.overStudyCurriculumList()
+        this.getUsedInvitationCodeList()
+      }
     }
     // this.$bus.$emit('bannerShow', false)
     this.activeTab = this.gid

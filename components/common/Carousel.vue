@@ -46,13 +46,6 @@ export default {
     }
   },
   mounted() {
-    // this.$nextTick(() => {
-    //   console.log(document.getElementsByClassName('el-carousel__item').length)
-    // })
-
-    // console.log(document.getElementsByClassName('el-carousel__item')[0].style)
-    // document.getElementsByClassName('el-carousel__item')[0].style.marginLeft =
-    //   '400px'
     let Dwidth = document.documentElement.clientWidth
     if (Dwidth > 1920) {
       document.getElementsByClassName('el-carousel')[0].style.width =

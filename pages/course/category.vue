@@ -403,7 +403,6 @@ export default {
       category.curriculumProjectList(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumProjectList
         this.pagemsg.total = res.data.pageCount
-        // console.log(this.pagemsg.total)
         this.loadCourse = false
       })
     },
