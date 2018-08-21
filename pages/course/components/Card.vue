@@ -5,10 +5,13 @@
       <div class="course clearfix  ">
         <el-card class="fl" :body-style="{ padding: '0px' }">
           <div class="goodplay" v-if="isShowCover">
-            <img :src="courseList.picture" class="image">
+            <div class="img-con">
+              <img :src="courseList.picture" class="image">
+            </div>
             <!-- <div class="mask">1</div> -->
+
             <!-- project 页面的课程详情 不显示一些东西 -->
-            <div class="common-button btn-bg" v-if="config.card_type !== 'project'">
+            <div class="common-button btn-bg" v-if="config.card_type !== 'project'"> -->
               <!-- 登录 不登录 播放按钮 -->
               <div class="playBtn-detail">
                 <img :src="playImg" alt="" @click="handleImgPlay(courseList)">
@@ -164,9 +167,7 @@ export default {
     'v-player': CardPlayer
   },
   props: ['courseList', 'privileMsg', 'config'],
-  mounted() {
-    // console.log(this.privileMsg)
-  },
+  mounted() {},
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
     ...mapState('auth', ['token', 'productsNum'])

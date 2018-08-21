@@ -36,7 +36,6 @@
 <script>
 import { wepay } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
 import Vue from 'vue'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import Repore from '@/components/common/Report.vue'
@@ -104,13 +103,20 @@ export default {
 
       wepay.webPay(this.payListForm).then(response => {
         this.loading = false
+        if (response.status === '100100') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+          return false
+        }
         this.orderDetail = response.data.data.orderDetail
         this.orderCurriculumLists = response.data.data.orderCurriculumLists
         this.codeData.code_url = response.data.code_url
         this.codeData.qr_code = response.data.qr_code
         this.$bus.$emit('load', false)
         this.shopCartList()
-
         if (item === 'recode') {
           this.$bus.$emit('addPaySubmit')
         }

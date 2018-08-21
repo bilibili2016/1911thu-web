@@ -71,8 +71,6 @@ export default {
       })
     },
     handleClick(item, index) {
-      console.log(item, '这是是item')
-
       this.$bus.$emit('collegeId', item.id)
 
       window.open(

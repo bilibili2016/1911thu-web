@@ -71,6 +71,7 @@ export default {
     },
     getStatus() {
       let cpyid = window.location.pathname.split('/')[2]
+
       this.payListForm.orderId = cpyid
 
       this.interval = setInterval(() => {
@@ -119,5 +120,3 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>

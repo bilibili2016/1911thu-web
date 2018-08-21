@@ -322,13 +322,21 @@ export default {
     goLink(item) {
       this.gidForm.gids = item
       this.setGid(this.gidForm)
+      this.getUserInfo()
       this.$router.push('/profile')
+
+      this.$bus.$emit('selectProfileIndex', item)
+    },
+    openWindow(item) {
+      this.gidForm.gids = item
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
+      // window.open(window.location.origin + '/profile')
       this.$bus.$emit('selectProfileIndex', item)
     },
     // 获取用户头像
     getUserInfo() {
       header.getUserInfo().then(res => {
-        // console.log(res, '这是res')
         if (res.status === '100008') {
           this.getHttp = false
           persistStore.set('isSingleLogin', false)
@@ -449,6 +457,7 @@ export default {
     })
     this.$bus.$on('goLink', data => {
       this.goLink(data)
+      // this.openWindow(data)
     })
     this.$bus.$on('signOuts', data => {
       this.signOuts()
