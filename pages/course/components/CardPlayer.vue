@@ -126,7 +126,8 @@ export default {
         type: 1
       },
       socket: '',
-      playAuthInfo: {}
+      playAuthInfo: {},
+      index: 0
     }
   },
   methods: {
@@ -222,6 +223,7 @@ export default {
     // 播放开始--启动计时器
     playerPlay() {
       let that = this
+      clearInterval(this.interval)
       // 播放开始启动计时器
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
@@ -266,9 +268,11 @@ export default {
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
+      clearInterval(this.interval)
       // 不免费 未购买 试看的课程弹出快捷支付弹框
       if (this.isFree === '1' && !this.bought && this.lookAt == '2') {
         // 取消全屏
+        this.player.fullscreenService.cancelFullScreen()
         this.$bus.$emit('openPay', this.pay)
       } else {
         // 如果当前小节播放完成，直接播放下一小节
@@ -285,11 +289,18 @@ export default {
        * 2、当前播放时长_currentTime
        */
       if (Number(freeTime) < Number(currentTime)) {
+        this.index++
         this.player.pause()
-        clearInterval(this.interval)
-        this.playerEnded()
-        console.log(123)
+        if (this.index < 2) {
+          this.playerEnded()
+        }
       }
+    },
+    closePayed() {
+      this.index = 0
+      this.player.seek(0)
+      this.autoplay = false
+      this.getdefaultPlayerUrl()
     }
   },
   mounted() {
@@ -300,6 +311,10 @@ export default {
     })
     this.$bus.$on('reupdatecourse', () => {
       this.getdefaultCurriculumCatalog()
+    })
+    // 支付框关闭后的回调
+    this.$bus.$on('closePayed', () => {
+      this.closePayed()
     })
   }
 }

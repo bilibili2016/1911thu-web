@@ -32,7 +32,7 @@
         <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
       </div>
     </div>
-    <v-pay></v-pay>
+    <v-pay @closePay="closePayed"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
   </div>
 </template>
@@ -377,6 +377,10 @@ export default {
     cbList() {
       this.getCourseDetail()
       this.getEvaluateList()
+    },
+    // 支付弹框关闭的回调
+    closePayed() {
+      this.$bus.$emit('closePayed')
     },
     //拉取服务器数据 初始化所有方法
     initAll() {

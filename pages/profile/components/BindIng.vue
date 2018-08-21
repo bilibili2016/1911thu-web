@@ -97,22 +97,22 @@ export default {
             this.$confirm(
               '该兑换码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
               {
-                confirmButtonText: '坚持绑定',
-                cancelButtonText: '取消',
+                confirmButtonText: '取消',
+                cancelButtonText: '坚持绑定',
                 closeOnHashChange: false,
                 // type: 'warning',
                 center: true
               }
             )
               .then(() => {
-                // 添加绑定课程
-                this.doSubmit()
-              })
-              .catch(() => {
                 this.$message({
                   type: 'info',
                   message: '已取消绑定'
                 })
+              })
+              .catch(() => {
+                // 添加绑定课程
+                this.doSubmit()
               })
           } else {
             this.doSubmit()

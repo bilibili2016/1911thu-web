@@ -423,6 +423,7 @@ export default {
     closePayed() {
       this.autoplay = false
       this.index = 0
+      this.player.seek(0)
       this.getPlayerInfo()
     },
     getPlayerInfo() {
@@ -527,6 +528,7 @@ export default {
     // 播放开始--启动计时器
     playerPlay() {
       let that = this
+      clearInterval(this.interval)
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
           this.seconds = 1
@@ -572,9 +574,11 @@ export default {
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
+      clearInterval(this.interval)
       // 未购买且试看
       if (!this.bought && this.lookAt == '2') {
         // 取消全屏
+        this.player.fullscreenService.cancelFullScreen()
         this.$bus.$emit('openPay', this.pay)
       } else {
         if (this.nextCatalogId !== '' && this.bought) {
