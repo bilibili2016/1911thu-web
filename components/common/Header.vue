@@ -1,36 +1,26 @@
 <template>
   <div class="headerBox">
     <!-- 优惠主题入口 -->
-    <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
+    <v-discount v-if="bannerMsg" @closeBanner="!bannerMsg"></v-discount>
     <div class="main">
       <div class="header-fl clearfix">
-        <div class="headerLogo fl" @click="goLinkersHome('/')">
-          <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
-        </div>
-        <div class="backHome">
-          <span @click="goLinkersHome('/')">首页</span>
-        </div>
-        <!-- 课程，项目 -->
-        <v-tabs></v-tabs>
-        <div class="teach" @click="goLinker('/home/teacher/list')">
-          <span>名师智库</span>
-        </div>
+        <!-- logo -->
+        <v-logo @handleLink="handleLink"></v-logo>
+        <!-- 首页 课程项目下拉 名师智库-->
+        <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
       </div>
       <div class="header-fr clearfix">
         <!-- 登录注册按钮 -->
-        <v-lrbtn v-if="!isAuthenticated"></v-lrbtn>
+        <v-lrbtn v-if="!isAuthenticated" @login="login" @register="register"></v-lrbtn>
         <!-- 个人中心（头像） -->
-        <v-headerimg v-else :data="user"></v-headerimg>
+        <v-headerimg v-else :data="user" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
         <!-- 单位入口，兑换码，下载，购物车 -->
-        <v-hrin :class="['HREntry' ,{islogined : isAuthenticated }]"></v-hrin>
-        <div class="search">
-          <input type="text" placeholder="请输入课程、老师" v-model="search" @keyup.enter="goSearch">
-          <i class="el-icon-search" @click="goSearch"></i>
-        </div>
-
+        <v-enter :class="['HREntry' ,{islogined : isAuthenticated }]" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter>
+        <!-- 搜索 -->
+        <v-search @handleSearch="handleSearch"></v-search>
       </div>
       <!-- 兑换码弹框 -->
-      <v-code v-show="bindForm.isBind" :bindForm="bindForm"></v-code>
+      <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
       <!-- 登录注册 -->
       <v-login></v-login>
     </div>
@@ -40,32 +30,53 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
-import { getQueryString } from '@/lib/util/helper'
-import { auth, header } from '~/lib/v1_sdk/index'
+import { getQueryString, open } from '@/lib/util/helper'
+import { auth, header, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { MessageBox } from 'element-ui'
 import { encryption } from '~/lib/util/helper'
-import Tabs from '@/components/common/Tabs.vue'
+import HomeSelect from '@/components/common/HomeSelect.vue'
 import Login from '@/pages/auth/Login.vue'
 import Discount from '@/components/header/Discount.vue'
 import CodeCase from '@/components/header/CodeCase.vue'
+
+import HomeLogo from '@/components/header/HomeLogo.vue'
+import { message } from '@/lib/util/helper'
 import LRBtn from '@/components/header/LRBtn.vue'
 import HeaderImg from '@/components/header/HeaderImg.vue'
 import HREntry from '@/components/header/HREntry.vue'
-import { message } from '@/lib/util/helper'
+import HeaderSearch from '@/components/header/HeaderSearch.vue'
 export default {
   components: {
-    'v-tabs': Tabs,
+    'v-homeselect': HomeSelect,
     'v-login': Login,
     'v-discount': Discount,
     'v-code': CodeCase,
     'v-lrbtn': LRBtn,
     'v-headerimg': HeaderImg,
-    'v-hrin': HREntry
+    'v-enter': HREntry,
+    'v-logo': HomeLogo,
+    'v-search': HeaderSearch
   },
   data() {
     return {
+      // 顶部列表
+      curruntForm: {
+        pages: 1,
+        limits: '',
+        evaluateLimit: null,
+        isevaluate: 1
+      },
+      categoryArr: [],
+      projectArr: [],
+      categoryLink: {
+        base: '/course/category',
+        cid: '',
+        cp: '',
+        xid: '0',
+        pid: '0'
+      },
       isHasClass: true,
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
       bannerMsg: false,
@@ -106,22 +117,59 @@ export default {
   },
 
   methods: {
-    ...mapActions('auth', [
-      'signIn',
-      'signInmobile',
-      'setGid',
-      'setProductsNum',
-      'signOut',
-      'setToken',
-      'setPwd'
-    ]),
-    // 关闭头部绑定课程
-    closeEcg() {
+    ...mapActions('auth', ['setGid', 'setProductsNum', 'signOut']),
+    // 跳转 公共路由方法
+    handleLink(data) {
+      this.$router.push(data)
+    },
+    // 下拉列表
+    getClassifyList() {
+      home.getClassifyList(this.curruntForm).then(response => {
+        for (let item of response.data.categoryList) {
+          if (item.is_picture_show === '0') {
+            this.categoryArr.push(item)
+          } else {
+            this.projectArr.push(item)
+          }
+        }
+        // this.classify = response.data.categoryList
+      })
+    },
+    // 下拉列表 跳转
+    handleSelectItem(item) {
+      this.$bus.$emit('collegeId', item.id)
+      this.categoryLink.cid = item.id
+      this.categoryLink.cp = item.is_picture_show
+      open(this.categoryLink)
+    },
+    // 搜索
+    handleSearch(item) {
+      this.search = item.replace(/[ ]/g, '')
+      if (
+        !/[@#\$%\^&\*]+/g.test(this.search) &&
+        this.search !== '' &&
+        this.search.length < 30
+      ) {
+        persistStore.set('key', this.search)
+        switch (window.location.pathname) {
+          case '/other/pages/search':
+            this.$router.go()
+            break
+          default:
+            this.$router.push('/other/pages/search')
+            break
+        }
+      } else {
+        message(this, 'error', '请输入不包含特殊字符且小于30个字符的关键词！')
+      }
+    },
+    // 兑换码 --- 关闭头部绑定课程
+    handleCloseEcg() {
       this.bindForm.courseId = ''
       this.bindForm.isBind = false
     },
-    // 打开头部绑定课程
-    addEcg() {
+    // 兑换码 --- 打开头部绑定课程
+    handleAddEcg() {
       if (this.token) {
         this.bindForm.isBind = true
       } else {
@@ -134,7 +182,7 @@ export default {
             callback: action => {
               if (action === 'cancel') {
               } else {
-                this.signOuts()
+                this.handleSignOut()
                 this.$bus.$emit('loginShow', true)
               }
             }
@@ -142,8 +190,8 @@ export default {
         )
       }
     },
-    // 检测兑换码内是否包含已绑定的课程
-    detection() {
+    // 兑换码 --检测兑换码内是否包含已绑定的课程
+    handleDetection() {
       header.detectionCode(this.bindForm).then(res => {
         // 判断兑换码内是否包含已绑定的课程
         if (res.data.is_exist === 1) {
@@ -158,30 +206,21 @@ export default {
             }
           )
             .then(() => {
-              // this.$message({
-              //   type: 'info',
-              //   message: '已取消绑定'
-              // })
               message(this, 'info', '已取消绑定')
             })
             .catch(() => {
               // 添加绑定课程
-              this.goBind()
+              this.handleBind()
             })
         } else {
-          this.goBind()
+          this.handleBind()
         }
       })
     },
-    // 头部绑定课程
-    goBind() {
+    // 兑换码 -- 头部绑定课程
+    handleBind() {
       header.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
-          // this.$message({
-          //   showClose: true,
-          //   type: 'success',
-          //   message: res.msg
-          // })
           message(this, 'success', res.msg)
           if (res.data.invitation_code_type == '1') {
             //兑换码内只有课程
@@ -204,30 +243,36 @@ export default {
           this.goLink(this.skip)
         } else if (res.status === '100100') {
           this.bindForm.showErr = true
-          // this.$message({
-          //   showClose: true,
-          //   type: 'error',
-          //   message: res.msg
-          // })
           message(this, 'error', res.msg)
           this.bindForm.error = res.msg
         }
       })
     },
-    // 兼容IE
-    explorer() {
-      if (!!window.ActiveXObject || 'ActiveXObject' in window) {
-        this.judegExplorer = true
-      } else {
-        this.judegExplorer = false
-      }
+    // 个人中心 跳转
+    handleLinkProfile(item) {
+      this.gidForm.gids = item
+      this.setGid(this.gidForm)
+      this.getUserInfo()
+      this.$router.push('/profile')
+      this.$bus.$emit('selectProfileIndex', item)
     },
-    // 关闭头部广告栏
-    closeBanner() {
-      this.bannerMsg = false
+    // 个人中心 退出
+    handleSignOut() {
+      this.signOut()
+      this.$router.push('/')
+      persistStore.clearAll()
     },
-    // 获取购物车数量
-    getCount() {
+    // 个人中心 登录
+    login() {
+      this.$bus.$emit('loginShow')
+    },
+
+    // 个人中心 注册
+    register() {
+      this.$bus.$emit('registerShow')
+    },
+    // 个人中心 购物车数量
+    getShopCartNum() {
       if (this.isAuthenticated) {
         header.shopCartList().then(response => {
           if (response.status === '100008') {
@@ -246,97 +291,11 @@ export default {
         })
       }
     },
-    // 改变鼠标悬浮时的DownApp二维码
-    changeImg(what) {
-      what == 'android' ? (this.iphones = false) : (this.iphones = true)
-    },
-    // 跳转-我的课程
-    goMycourse(item) {
-      this.gidForm.gids = item
-      this.setGid(this.gidForm)
-      this.$router.push('/profile')
-      this.$bus.$emit('selectProfileIndex', item)
-      this.$router.push({
-        path: '/profile',
-        query: {
-          tab: item
-        }
-      })
-    },
-    // 去购物车
-    goLinks() {
-      this.$router.push('/shop/shoppingcart')
-    },
-    // 登录
-    login() {
-      this.$bus.$emit('loginShow')
-    },
-    // 登出
-    signOuts() {
-      this.signOut()
-      persistStore.clearAll()
-      this.$router.push('/')
-    },
-    // 注册
-    register() {
-      this.$bus.$emit('registerShow')
-    },
-    // 搜索
-    goSearch(item) {
-      this.search = this.search.replace(/[ ]/g, '')
-      if (
-        !/[@#\$%\^&\*]+/g.test(this.search) &&
-        this.search !== '' &&
-        this.search.length < 30
-      ) {
-        persistStore.set('key', this.search)
-        switch (window.location.pathname) {
-          case '/other/pages/search':
-            this.$router.go()
-            break
-          default:
-            this.$router.push('/other/pages/search')
-            // window.open(window.location.origin + '/other/pages/search')
-            break
-        }
-      } else {
-        // this.$message({
-        //   type: 'error',
-        //   message: '请输入不包含特殊字符且小于30个字符的关键词！'
-        // })
-        message(this, 'error', '请输入不包含特殊字符且小于30个字符的关键词！')
-      }
-    },
-    // 跳转到指定页
-    goLinker(item) {
-      this.$router.push(item)
-    },
-    // (window.location.origin)
-    goLinkers(item) {
-      this.$router.replace('/')
-    },
-    goLinkersHome(item) {
-      this.$router.push('/')
-      this.$bus.$emit('getUserInfo')
-    },
-    goLink(item) {
-      this.gidForm.gids = item
-      this.setGid(this.gidForm)
-      this.getUserInfo()
-      this.$router.push('/profile')
 
-      this.$bus.$emit('selectProfileIndex', item)
-    },
-    openWindow(item) {
-      this.gidForm.gids = item
-      this.setGid(this.gidForm)
-      this.$router.push('/profile')
-      // window.open(window.location.origin + '/profile')
-      this.$bus.$emit('selectProfileIndex', item)
-    },
-    // 获取用户头像
+    // 个人中心 用户头像
     getUserInfo() {
       header.getUserInfo().then(res => {
+        // console.log(res, 'replaceState')
         if (res.status === '100008') {
           this.getHttp = false
           persistStore.set('isSingleLogin', false)
@@ -344,7 +303,7 @@ export default {
           this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
             confirmButtonText: '确定',
             callback: action => {
-              this.signOuts()
+              this.handleSignOut()
               //初始化首页数据
               this.$bus.$emit('reLogin', true)
               this.$bus.$emit('loginShow', true)
@@ -358,7 +317,7 @@ export default {
             this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
               confirmButtonText: '确定',
               callback: action => {
-                this.signOuts()
+                this.handleSignOut()
                 this.$bus.$emit('loginShow', true)
               }
             })
@@ -387,84 +346,62 @@ export default {
       })
       // }
     },
-    // 用户协议
-    userProtocol() {
-      window.open(window.location.origin + '/other/activePages/userProtocol')
-    },
-    // 获取专属兑换码列表
-    // getCodeList() {
-    //   home.getCodeList(this.codeListForm).then(response => {
-    //     if (response.status !== '100100') {
-    //       this.codeData = response.data.orderInvitationCodeList
-    //     }
-    //   })
-    // }
     // 判断浏览器的ie型
     getAll() {
-      this.getCount()
-
+      this.getShopCartNum()
       if (!this.token) {
         this.signOut()
       }
-      this.explorer()
+    },
+    onBusEvent() {
+      // 监听 优惠专题入口的banner 隐藏
+      this.$bus.$on('bannerImg', data => {
+        this.bannerMsg = data
+      })
+      // 更换头像
+      this.$bus.$on('changeimg', data => {
+        this.user.userImg = data
+      })
+      // 重新拉取用户信息
+      this.$bus.$on('getUserInfo', data => {
+        this.getUserInfo()
+      })
+      // 获取购物车数量
+      this.$bus.$on('updateCount', () => {
+        this.getShopCartNum()
+      })
+    },
+    // 兼容IE
+    explorer() {
+      if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+        this.judegExplorer = true
+      } else {
+        this.judegExplorer = false
+      }
     }
   },
   mounted() {
-    // message('success', '测试数据')
-
-    let me = this
+    // 获取顶部课程列表
+    this.getClassifyList()
 
     this.getUserInfo()
     // 非单点登录 getHttp为true
-    this.$bus.$on('updateCount', () => {
-      me.getCount()
-    })
-    // this.$bus.$emit('bannerShow', false)
-    // this.$bus.$on('bannerShow', data => {
-    //   if (data === true) {
-    //     this.bannerMsg = true
-    //   } else {
-    //     this.bannerMsg = false
-    //   }
-    // })
-    // 监听 优惠专题入口的banner 显示
-    this.$bus.$on('bannerImgShow', () => {
-      this.bannerMsg = true
-    })
-    // 监听 优惠专题入口的banner 隐藏
-    this.$bus.$on('bannerImgHide', () => {
-      this.bannerMsg = false
-    })
-    this.$bus.$on('changeimg', data => {
-      this.user.userImg = data
-    })
-    this.$bus.$on('getUserInfo', data => {
-      this.getUserInfo()
-    })
 
-    this.$bus.$on('closeEcg', data => {
-      this.closeEcg()
-    })
-    this.$bus.$on('detection', data => {
-      this.detection()
-    })
-    this.$bus.$on('login', data => {
-      this.login()
-      this.getUserInfo()
-    })
-    this.$bus.$on('register', data => {
-      this.register()
-    })
-    this.$bus.$on('goLink', data => {
-      this.goLink(data)
-      // this.openWindow(data)
-    })
-    this.$bus.$on('signOuts', data => {
-      this.signOuts()
-    })
-    this.$bus.$on('addEcg', data => {
-      this.addEcg()
-    })
+    this.onBusEvent()
+    // this.$bus.$on('login', data => {
+    //   this.login()
+    //   this.getUserInfo()
+    // })
+    // this.$bus.$on('register', data => {
+    //   this.register()
+    // })
+    // this.$bus.$on('goLink', data => {
+    //   this.goLink(data)
+    //   // this.openWindow(data)
+    // })
+    // this.$bus.$on('handleSignOut', data => {
+    //   this.handleSignOut()
+    // })
   },
   watch: {
     // 绑定兑换码

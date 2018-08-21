@@ -62,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.pagemsg8)
+    // console.log(this.pagemsg8)
   },
   methods: {
     handleTicket() {

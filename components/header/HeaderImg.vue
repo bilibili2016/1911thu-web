@@ -1,14 +1,14 @@
 <template>
-    <div class="headImg">
-        <span>
-            <img :src="data.userImg" alt="" @click="goLink('tab-first')">
-        </span>
-        <!-- 个人中心下拉框 -->
-        <ul class="subPages">
-            <li v-for="(item,index) in subPagesData" :key="index" @click="goLink(item.link)">{{item.text}}</li>
-            <li @click="signOuts">退出</li>
-        </ul>
-    </div>
+  <div class="headImg">
+    <span>
+      <img :src="data.userImg" alt="" @click="handleLinkProfile('tab-first')">
+    </span>
+    <!-- 个人中心下拉框 -->
+    <ul class="subPages">
+      <li v-for="(item,index) in subPagesData" :key="index" @click="handleLinkProfile(item.link)">{{item.text}}</li>
+      <li @click="handleSignOut">退出</li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -53,11 +53,11 @@ export default {
     }
   },
   methods: {
-    goLink(link) {
-      this.$bus.$emit('goLink', link)
+    handleLinkProfile(data) {
+      this.$emit('handleLinkProfile', data)
     },
-    signOuts() {
-      this.$bus.$emit('signOuts')
+    handleSignOut() {
+      this.$emit('handleSignOut')
     }
   }
 }

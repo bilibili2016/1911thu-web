@@ -539,11 +539,11 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.$bus.$emit('bannerImgShow')
+      vm.$bus.$emit('bannerImg', true)
     })
   },
   beforeRouteLeave(to, from, next) {
-    this.$bus.$emit('bannerImgHide')
+    this.$bus.$emit('bannerImg', false)
     next(vm => {})
   },
   deactivated() {
