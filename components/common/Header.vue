@@ -4,24 +4,16 @@
     <v-discount v-if="bannerMsg" @closeBanner="!bannerMsg"></v-discount>
     <div class="main">
       <div class="header-fl clearfix">
-        <!-- logo -->
         <v-logo @handleLink="handleLink"></v-logo>
-        <!-- 首页 课程项目下拉 名师智库-->
         <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
       </div>
       <div class="header-fr clearfix">
-        <!-- 登录注册按钮 -->
         <v-lrbtn v-if="!isAuthenticated" @login="login" @register="register"></v-lrbtn>
-        <!-- 个人中心（头像） -->
         <v-headerimg v-else :data="user" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
-        <!-- 单位入口，兑换码，下载，购物车 -->
         <v-enter :class="['HREntry' ,{islogined : isAuthenticated }]" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter>
-        <!-- 搜索 -->
         <v-search @handleSearch="handleSearch"></v-search>
       </div>
-      <!-- 兑换码弹框 -->
       <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
-      <!-- 登录注册 -->
       <v-login></v-login>
     </div>
 
@@ -33,9 +25,7 @@ import { store as persistStore } from '~/lib/core/store'
 import { getQueryString, open } from '@/lib/util/helper'
 import { auth, header, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { checkPhone, checkCode } from '~/lib/util/validatefn'
-import { MessageBox } from 'element-ui'
-import { encryption } from '~/lib/util/helper'
+import { validateSearch } from '~/lib/util/validate'
 import HomeSelect from '@/components/common/HomeSelect.vue'
 import Login from '@/pages/auth/Login.vue'
 import Discount from '@/components/header/Discount.vue'
@@ -58,6 +48,22 @@ export default {
     'v-enter': HREntry,
     'v-logo': HomeLogo,
     'v-search': HeaderSearch
+  },
+  watch: {
+    // 绑定兑换码
+    'bindForm.courseId'(val, oldval) {
+      if (val == '') {
+        this.bindForm.showErr = true
+        this.bindForm.isInput = false
+      } else {
+        if (/^[A-Za-z0-9]+$/.test(val)) {
+          this.bindForm.showErr = false
+          this.bindForm.isInput = true
+        } else {
+          message(this, 'error', '请您输入正确的兑换码！')
+        }
+      }
+    }
   },
   data() {
     return {
@@ -137,7 +143,6 @@ export default {
     },
     // 下拉列表 跳转
     handleSelectItem(item) {
-      this.$bus.$emit('collegeId', item.id)
       this.categoryLink.cid = item.id
       this.categoryLink.cp = item.is_picture_show
       open(this.categoryLink)
@@ -145,20 +150,9 @@ export default {
     // 搜索
     handleSearch(item) {
       this.search = item.replace(/[ ]/g, '')
-      if (
-        !/[@#\$%\^&\*]+/g.test(this.search) &&
-        this.search !== '' &&
-        this.search.length < 30
-      ) {
+      if (validateSearch(this.search)) {
         persistStore.set('key', this.search)
-        switch (window.location.pathname) {
-          case '/other/pages/search':
-            this.$router.go()
-            break
-          default:
-            this.$router.push('/other/pages/search')
-            break
-        }
+        this.handleLink('/other/pages/search')
       } else {
         message(this, 'error', '请输入不包含特殊字符且小于30个字符的关键词！')
       }
@@ -217,30 +211,35 @@ export default {
         }
       })
     },
+    invitationCodeType(item) {
+      switch (item) {
+        case '1':
+          //兑换码内只有课程
+          this.skip = 'tab-second'
+          break
+        case '2':
+          //兑换码内只有项目
+          this.skip = 'tab-third'
+          break
+        case '3':
+          //兑换码内只有项目 +课程
+          this.skip = 'tab-first'
+          break
+      }
+    },
     // 兑换码 -- 头部绑定课程
     handleBind() {
       header.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           message(this, 'success', res.msg)
-          if (res.data.invitation_code_type == '1') {
-            //兑换码内只有课程
-            this.skip = 'tab-second'
-          }
-          if (res.data.invitation_code_type == '2') {
-            //兑换码内只有项目
-            this.skip = 'tab-third'
-          }
-          if (res.data.invitation_code_type == '3') {
-            //兑换码项目+课程
-            this.skip = 'tab-first'
-          }
+          this.invitationCodeType(res.data.invitation_code_type)
           this.bindForm.courseId = ''
           this.bindForm.isBind = false
+          this.handleLinkProfile(this.skip)
           if (window.location.pathname === '/profile') {
             this.$bus.$emit('studyCourse')
             this.$bus.$emit('studyProject')
           }
-          this.goLink(this.skip)
         } else if (res.status === '100100') {
           this.bindForm.showErr = true
           message(this, 'error', res.msg)
@@ -274,79 +273,80 @@ export default {
     // 个人中心 购物车数量
     getShopCartNum() {
       if (this.isAuthenticated) {
-        header.shopCartList().then(response => {
-          if (response.status === '100008') {
+        header.shopCartList().then(res => {
+          if (res.status === '100008') {
             this.getHttp = false
           } else {
-            if (response.data) {
-              let body =
-                Number(response.data.curriculumCartList.length) +
-                Number(response.data.projectCartList.length)
-              let len = {
-                pn: body
-              }
-              this.setProductsNum(len)
+            if (res.data) {
+              this.setProductsNum({
+                pn:
+                  Number(res.data.curriculumCartList.length) +
+                  Number(res.data.projectCartList.length)
+              })
             }
           }
         })
       }
     },
-
+    // 个人中心 重新登录 弹框
+    reLoginAlert(type, res) {
+      this.getHttp = false
+      persistStore.set('isSingleLogin', false)
+      this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
+        confirmButtonText: '确定',
+        callback: action => {
+          this.handleSignOut()
+          //初始化首页数据
+          this.$bus.$emit('loginShow', true)
+          if (type) {
+            this.$bus.$emit('reLogin', true)
+          }
+        }
+      })
+    },
+    // 个人中心 单点登录 逻辑 判断
+    isSingleLogin(res) {
+      if (res.status === '100008') {
+        // 设置单点登录
+        this.reLoginAlert(true, res)
+      } else if (res.status === '100100') {
+        // 设置单点登录
+        if (this.authPath.indexOf(window.location.pathname) > 0) {
+          this.reLoginAlert(true, res)
+        }
+      } else {
+        if (persistStore.get('isSingleLogin') === false) {
+          this.$bus.$emit('isSingleLogin', false)
+        }
+        this.getAll()
+        persistStore.set('isSingleLogin', true)
+        // 设置用户信息
+        this.setUserInfo(res)
+      }
+    },
+    // 个人中心 个人信息设置
+    setUserInfo(res) {
+      this.userInfo = res.data.userInfo
+      persistStore.set('nickName', this.userInfo.nick_name)
+      persistStore.set('phone', this.userInfo.user_name)
+      if (this.userInfo.head_img && this.userInfo.head_img != '') {
+        this.user.userImg = this.userInfo.head_img
+      } else {
+        this.user.userImg =
+          'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
+      }
+      if (/^\//.test(this.userInfo.head_img)) {
+        this.user.userImg =
+          'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
+      }
+    },
     // 个人中心 用户头像
     getUserInfo() {
       header.getUserInfo().then(res => {
         // console.log(res, 'replaceState')
-        if (res.status === '100008') {
-          this.getHttp = false
-          persistStore.set('isSingleLogin', false)
-          // 设置单点登录
-          this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
-            confirmButtonText: '确定',
-            callback: action => {
-              this.handleSignOut()
-              //初始化首页数据
-              this.$bus.$emit('reLogin', true)
-              this.$bus.$emit('loginShow', true)
-            }
-          })
-        } else if (res.status === '100100') {
-          this.getHttp = false
-          persistStore.set('isSingleLogin', false)
-          // 设置单点登录
-          if (this.authPath.indexOf(window.location.pathname) > 0) {
-            this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
-              confirmButtonText: '确定',
-              callback: action => {
-                this.handleSignOut()
-                this.$bus.$emit('loginShow', true)
-              }
-            })
-          }
-        } else {
-          if (persistStore.get('isSingleLogin') === false) {
-            this.$bus.$emit('isSingleLogin', false)
-          }
-          this.getAll()
-          persistStore.set('isSingleLogin', true)
-          // 设置单点登录
-          this.userInfo = res.data.userInfo
-          persistStore.set('nickName', this.userInfo.nick_name)
-          persistStore.set('phone', this.userInfo.user_name)
-          if (this.userInfo.head_img && this.userInfo.head_img != '') {
-            this.user.userImg = this.userInfo.head_img
-          } else {
-            this.user.userImg =
-              'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
-          }
-          if (/^\//.test(this.userInfo.head_img)) {
-            this.user.userImg =
-              'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
-          }
-        }
+        this.isSingleLogin(res)
       })
-      // }
     },
-    // 判断浏览器的ie型
     getAll() {
       this.getShopCartNum()
       if (!this.token) {
@@ -383,46 +383,9 @@ export default {
   mounted() {
     // 获取顶部课程列表
     this.getClassifyList()
-
     this.getUserInfo()
     // 非单点登录 getHttp为true
-
     this.onBusEvent()
-    // this.$bus.$on('login', data => {
-    //   this.login()
-    //   this.getUserInfo()
-    // })
-    // this.$bus.$on('register', data => {
-    //   this.register()
-    // })
-    // this.$bus.$on('goLink', data => {
-    //   this.goLink(data)
-    //   // this.openWindow(data)
-    // })
-    // this.$bus.$on('handleSignOut', data => {
-    //   this.handleSignOut()
-    // })
-  },
-  watch: {
-    // 绑定兑换码
-    'bindForm.courseId'(val, oldval) {
-      if (val == '') {
-        this.bindForm.showErr = true
-        this.bindForm.isInput = false
-      } else {
-        if (/^[A-Za-z0-9]+$/.test(val)) {
-          this.bindForm.showErr = false
-          this.bindForm.isInput = true
-        } else {
-          // this.$message({
-          //   showClose: true,
-          //   type: 'error',
-          //   message: '请您输入正确的兑换码！'
-          // })
-          message(this, 'error', '请您输入正确的兑换码！')
-        }
-      }
-    }
   }
 }
 </script>
