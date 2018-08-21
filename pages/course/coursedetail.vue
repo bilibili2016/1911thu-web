@@ -315,7 +315,6 @@ export default {
         this.courseList = response.data.curriculumDetail
         // persistStore.set('curriculumId', response.data.curriculumDetail.id)
         this.privileMsg = response.data.curriculumPrivilege
-        console.log(this.privileMsg)
 
         this.content = response.data.curriculumPrivilege
         this.loadTeacher = false

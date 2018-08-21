@@ -53,6 +53,7 @@ export default {
   methods: {
     close() {
       this.showPay = false
+      this.$emit('closePay')
     },
     // 获取去二维码的方法
     getCode() {
