@@ -25,6 +25,82 @@ export default {
         height: '100%',
         live: false //是否是直播类型
       },
+      aliPlayer: {
+        id: 'mediaPlayer', //播放器id
+        width: '100%',
+        height: '100%',
+        autoplay: false, //自动播放
+        vid: '', //点播播放的两个参数之一
+        playauth: '', //点播播放的两个参数之二
+        skinLayout: [
+          {
+            name: 'H5Loading',
+            align: 'cc'
+          },
+          {
+            name: 'errorDisplay',
+            align: 'tlabs',
+            x: 0,
+            y: 0
+          },
+          {
+            name: 'infoDisplay'
+          },
+          {
+            name: 'tooltip',
+            align: 'blabs',
+            x: 0,
+            y: 56
+          },
+          {
+            name: 'thumbnail'
+          },
+          {
+            name: 'controlBar',
+            align: 'blabs',
+            x: 0,
+            y: 0,
+            children: [
+              {
+                name: 'progress',
+                align: 'blabs',
+                x: 0,
+                y: 44
+              },
+              {
+                name: 'playButton',
+                align: 'tl',
+                x: 15,
+                y: 12
+              },
+              {
+                name: 'timeDisplay',
+                align: 'tl',
+                x: 10,
+                y: 7
+              },
+              {
+                name: 'fullScreenButton',
+                align: 'tr',
+                x: 10,
+                y: 12
+              },
+              {
+                name: 'setting',
+                align: 'tr',
+                x: 15,
+                y: 12
+              },
+              {
+                name: 'volume',
+                align: 'tr',
+                x: 5,
+                y: 10
+              }
+            ]
+          }
+        ]
+      },
       autoplay: false,
       playerDetailForm: {
         curriculumId: ''
@@ -36,19 +112,20 @@ export default {
         curriculumid: ''
       },
       players: '',
+      player: '',
       ceshiUrl: 'http://ceshi.1911thu.com',
       localUrl: 'http://localhost:8080',
       wapiUrl: 'http://wapi.1911thu.com:2120',
       seconds: 500000,
       nextCatalogId: '', //下一小节的播放id
       link: '',
-      socket: null,
       bought: '',
       lookAt: '',
       isFree: '',
       pay: {
         type: 1
-      }
+      },
+      socket: ''
     }
   },
   methods: {
@@ -69,6 +146,7 @@ export default {
     // 根据 课程id以及小节id 获取url
     getdefaultPlayerUrl() {
       // 判断socket 连接
+      let that = this
       let origin = window.location.origin
       if (origin === this.ceshiUrl || origin == this.localUrl) {
         this.link = 'http://ceshi.1911thu.com:2120'
@@ -76,13 +154,13 @@ export default {
         this.link = 'http://wapi.1911thu.com:2120'
       }
       // 新建socket
-      var socket = new io(this.link)
+      this.socket = new io(this.link)
       // 连接socket
-      socket.on('connect', () => {
-        socket.emit('login', persistStore.get('token'))
+      this.socket.on('connect', () => {
+        that.socket.emit('login', persistStore.get('token'))
       })
       // 支付推送来消息时
-      socket.on('new_msg', function(msg) {
+      this.socket.on('new_msg', function(msg) {
         //支付成功
         if (msg.pay_status == '0') {
           //执行重新播放视频
@@ -97,93 +175,100 @@ export default {
         }
       })
       // 断线重连
-      socket.on('reconnect', function(msg) {})
-
+      this.socket.on('reconnect', function(msg) {})
+      // this.player = new Aliplayer(this.aliPlayer)
       players.getPlayerInfos(this.playerForm).then(res => {
-        // if (res.status === '100006') {
-        //   this.$bus.$emit('loginShow', true)
-        // }
-        // console.log(res, '这是res')
         if (res.status === 0) {
-          // 先销毁播放器再用新参数进行播放
-          if (this.players) {
-            this.players.destroy()
+          // 播放参数播放
+          this.aliPlayer.vid = res.data.playAuthInfo.video_id
+          this.aliPlayer.playauth = res.data.playAuthInfo.playAuth
+
+          if (this.player) {
+            // 用vid和playauth切换播放器播放
+            this.player.reloaduserPlayInfoAndVidRequestMts(
+              this.aliPlayer.vid,
+              this.aliPlayer.playauth
+            )
+          } else {
+            // 不存在 直接创建播放器
+            this.player = new Aliplayer(this.aliPlayer)
           }
-          this.tcplayer.mp4 = res.data.playAuthInfo.video_address
-          this.players = new TcPlayer('mediaPlayer', this.tcplayer)
-          window.qcplayer = this.players
+
           this.bought = res.data.curriculumPrivilege
           this.lookAt = res.data.look_at
           this.isFree = res.data.is_free
-          if (this.autoplay) {
-            window.qcplayer.play()
-          }
           this.nextCatalogId = res.data.nextCatalogId
           this.$bus.$emit('closeCover')
+          this.player.on('ready', this.readyPlay)
+          this.player.on('play', this.playerPlay)
+          this.player.on('pause', this.playerPause)
+          this.player.on('ended', this.playerEnded)
         } else {
           message(this, 'warning', res.msg)
           return false
         }
       })
-      let that = this
-      this.tcplayer.listener = function(msg) {
-        // 播放开始启动计时器
-        if (msg.type == 'play') {
-          that.interval = setInterval(() => {
-            if (that.seconds <= 0) {
-              that.seconds = 1
-              that.courseList.success = false
-              that.courseList.inputID = ''
-              socket.emit('watchRecordingTime_disconnect')
-              clearInterval(that.interval)
-            } else {
-              that.seconds--
-              let playTime = window.qcplayer.currentTime()
-              /**
-               * socket.emit()6个参数
-               * 1、watchRecordingTime固定参数
-               * 2、课程ID
-               * 3、小节ID
-               * 4、当前播放时间
-               * 5、项目播放的时候为项目ID，课程播放为空
-               * 6、type:1是课程，2是项目
-               */
-              socket.emit(
-                'watchRecordingTime',
-                splitUrl(0, 1),
-                splitUrl(1, 1),
-                playTime,
-                '',
-                1
-              )
-            }
-          }, 1000)
-          that.ischeck = persistStore.get('catalogId')
-        }
-        // 监听暂停事件
-        if (msg.type == 'pause') {
-          clearInterval(that.interval)
-          socket.emit('watchRecordingTime_disconnect')
-        }
-        // 监听播放停止事件
-        if (msg.type == 'ended') {
-          // 不免费 未购买 试看的课程弹出快捷支付弹框
-          if (that.isFree === '1' && !that.bought && that.lookAt == '2') {
-            // 取消全屏
-            window.qcplayer.fullscreen(false)
-            that.$bus.$emit('openPay', that.pay)
-          } else {
-            // 如果当前小节播放完成，直接播放下一小节
-            if (that.nextCatalogId !== '') {
-              that.playerForm.catalogId = that.nextCatalogId
-              that.getdefaultPlayerUrl()
-            }
-          }
-        }
-      }
     },
     rePlay() {
       this.getdefaultPlayerUrl()
+    },
+    readyPlay() {
+      if (this.autoplay) {
+        this.player.play()
+      }
+    },
+    // 播放开始--启动计时器
+    playerPlay() {
+      let that = this
+      // 播放开始启动计时器
+      this.interval = setInterval(() => {
+        if (this.seconds <= 0) {
+          this.seconds = 1
+          this.courseList.success = false
+          this.courseList.inputID = ''
+          that.socket.emit('watchRecordingTime_disconnect')
+          clearInterval(this.interval)
+        } else {
+          this.seconds--
+          let playTime = this.player.getCurrentTime()
+          /**
+           * socket.emit()6个参数
+           * 1、watchRecordingTime固定参数
+           * 2、课程ID
+           * 3、小节ID
+           * 4、当前播放时间
+           * 5、项目播放的时候为项目ID，课程播放为空
+           * 6、type:1是课程，2是项目
+           */
+          that.socket.emit(
+            'watchRecordingTime',
+            splitUrl(0, 1),
+            splitUrl(1, 1),
+            playTime,
+            '',
+            1
+          )
+        }
+      }, 1000)
+    },
+    // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
+    playerPause() {
+      clearInterval(this.interval)
+      this.socket.emit('watchRecordingTime_disconnect')
+    },
+    // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
+    playerEnded() {
+      // 不免费 未购买 试看的课程弹出快捷支付弹框
+      if (this.isFree === '1' && !this.bought && this.lookAt == '2') {
+        // 取消全屏
+        this.$bus.$emit('openPay', this.pay)
+      } else {
+        // 如果当前小节播放完成，直接播放下一小节
+        if (this.nextCatalogId !== '') {
+          this.playerForm.catalogId = this.nextCatalogId
+          this.getdefaultPlayerUrl()
+        }
+      }
     }
   },
   mounted() {

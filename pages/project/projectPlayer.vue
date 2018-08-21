@@ -7,7 +7,8 @@
         </span>
       </div>
       <div class="playInner" ref="playInner">
-        <div id="mediaPlayer" ref="mediaPlayer" style="width:100%; height:100%;"></div>
+        <!-- <div id="mediaPlayer" ref="mediaPlayer" style="width:100%; height:100%;"></div> -->
+        <div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>
       </div>
       <div class="playBottom clearfix">
         <span class="fl usePhone">手机观看
@@ -109,7 +110,6 @@ export default {
       playing: '',
       playImg: 'http://papn9j3ys.bkt.clouddn.com/playImg.gif',
       pauseImg: 'http://papn9j3ys.bkt.clouddn.com/video.png',
-      player: {},
       courseList: [],
       projectDetail: {},
       word: '',
@@ -142,6 +142,16 @@ export default {
         height: '100%',
         live: false //是否是直播类型
       },
+      aliPlayer: {
+        id: 'mediaPlayer', //播放器id
+        width: '100%',
+        height: '100%',
+        autoplay: false, //自动播放
+        // source: '//player.alicdn.com/video/aliyunmedia.mp4', //播放url
+        vid: '', //点播播放的两个参数之一
+        playauth: '', //点播播放的两个参数之二
+        isLive: false
+      },
       playerDetailForm: {
         curriculumId: ''
       },
@@ -170,7 +180,7 @@ export default {
       },
       seconds: 500000,
       time: '',
-      players: '',
+      player: '',
       clickMsg: false,
       tidForm: {
         tids: ''
@@ -195,6 +205,7 @@ export default {
         type: 2
       },
       currentTime: 0,
+      socket: '',
       nextCatalogId: '' //默认播放下一小节id
     }
   },
@@ -296,12 +307,20 @@ export default {
     // 展示评论
     showElt() {
       this.showEvaluate = true
+      // 展示评论-暂停播放器
+      if (this.player) {
+        this.player.pause()
+      }
     },
     // 关闭评论
     closeEvaluate() {
       this.showEvaluate = false
       this.radioBtn = ''
       this.word = ''
+      // 关闭评论-播放器继续播放
+      if (this.player) {
+        this.player.play()
+      }
     },
     // 改变屏幕宽度重置播放器大小
     resize() {
@@ -333,10 +352,6 @@ export default {
       )
     },
     getPlayerInfo() {
-      if (typeof TcPlayer === 'undefined') {
-        location.reload()
-        return
-      }
       let that = this
       var link = window.location.origin
       // if (
@@ -355,14 +370,13 @@ export default {
       } else {
         link = 'http://wapi.1911thu.com:2120'
       }
-      var socket = new io(link) //'http://ceshi.1911edu.com:2120'
+      this.socket = new io(link) //'http://ceshi.1911edu.com:2120'
       // 连接socket
-      socket.on('connect', function() {
-        socket.emit('login', persistStore.get('token'))
+      this.socket.on('connect', function() {
+        that.socket.emit('login', persistStore.get('token'))
       })
-
       // 支付推送来消息时
-      socket.on('new_msg', function(msg) {
+      this.socket.on('new_msg', function(msg) {
         //支付成功
         if (msg.pay_status == '0') {
           //执行重新播放视频
@@ -386,7 +400,7 @@ export default {
       })
 
       // 断线重连
-      socket.on('reconnect', function(msg) {})
+      this.socket.on('reconnect', function(msg) {})
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
@@ -406,78 +420,88 @@ export default {
           if (!that.bought && that.lookAt == '1') {
             this.goShoppingCart('您还未购买该项目，请先去购买吧！')
           } else {
+            // this.aliPlayer.source = response.data.playAuthInfo.video_address
+            this.aliPlayer.vid = response.data.playAuthInfo.video_id
+            this.aliPlayer.playauth = response.data.playAuthInfo.playAuth
             // 播放器如果存在就销毁播放器，重新创建
-            if (this.players) {
-              this.players.destroy()
-            }
-            // 初始化播放器
-            this.tcplayer.mp4 = response.data.playAuthInfo.video_address
-            this.players = new TcPlayer('mediaPlayer', this.tcplayer)
-            window.qcplayer = this.players
-            if (this.autoplay) {
-              window.qcplayer.play()
+            if (this.player) {
+              // 切换vid和playauth播放参数
+              this.player.reloaduserPlayInfoAndVidRequestMts(
+                that.aliPlayer.vid,
+                that.aliPlayer.playauth
+              )
+            } else {
+              // 不存在 直接创建播放器
+              this.player = new Aliplayer(this.aliPlayer)
             }
             this.nextCatalogId = response.data.nextCatalogId
+            this.player.on('ready', this.readyPlay)
+            this.player.on('play', this.playerPlay)
+            this.player.on('pause', this.playerPause)
+            this.player.on('ended', this.playerEnded)
           }
         }
       })
+    },
+    // 播放器加载完成后
+    readyPlay() {
+      if (this.autoplay) {
+        this.player.play()
+      }
+    },
+    // 播放开始--启动计时器
+    playerPlay() {
+      let that = this
+      this.interval = setInterval(() => {
+        if (this.seconds <= 0) {
+          this.seconds = 1
+          this.courseList.success = false
+          this.courseList.inputID = ''
+          that.socket.emit('watchRecordingTime_disconnect')
+          clearInterval(this.interval)
+        } else {
+          this.seconds--
+          let playTime = this.player.getCurrentTime()
+          /**
+           * socket.emit()6个参数
+           * 1、watchRecordingTime固定参数
+           * 2、课程ID
+           * 3、小节ID
+           * 4、当前播放时间
+           * 5、项目播放的时候为项目ID，课程播放为空
+           * 6、type:1是课程，2是项目
+           */
+          that.socket.emit(
+            'watchRecordingTime',
+            this.playerForm.curriculumId,
+            this.playerForm.catalogId,
+            playTime,
+            this.projectForm.ids,
+            2
+          )
+        }
+      }, 1000)
+      this.ischeck = this.playerForm.catalogId
+      this.playing = this.playImg
+    },
+    // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
+    playerPause() {
+      this.playing = this.pauseImg
+      clearInterval(this.interval)
+      this.socket.emit('watchRecordingTime_disconnect')
+    },
+    // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
+    playerEnded() {
+      // 未购买且试看
+      if (!this.bought && this.lookAt == '2') {
+        // 取消全屏
 
-      // 事件监听集合
-      this.tcplayer.listener = function(msg) {
-        // 播放开始启动计时器
-        if (msg.type == 'play') {
-          that.interval = setInterval(() => {
-            if (that.seconds <= 0) {
-              that.seconds = 1
-              that.courseList.success = false
-              that.courseList.inputID = ''
-              socket.emit('watchRecordingTime_disconnect')
-              clearInterval(that.interval)
-            } else {
-              that.seconds--
-              let playTime = window.qcplayer.currentTime()
-              /**
-               * socket.emit()6个参数
-               * 1、watchRecordingTime固定参数
-               * 2、课程ID
-               * 3、小节ID
-               * 4、当前播放时间
-               * 5、项目播放的时候为项目ID，课程播放为空
-               * 6、type:1是课程，2是项目
-               */
-              socket.emit(
-                'watchRecordingTime',
-                that.playerForm.curriculumId,
-                that.playerForm.catalogId,
-                playTime,
-                that.projectForm.ids,
-                2
-              )
-            }
-          }, 1000)
-          that.ischeck = that.playerForm.catalogId
-          that.playing = that.playImg
-        }
-        // 监听暂停事件
-        if (msg.type == 'pause') {
-          that.playing = that.pauseImg
-          clearInterval(that.interval)
-          socket.emit('watchRecordingTime_disconnect')
-        }
-        // 监听播放停止事件
-        if (msg.type == 'ended') {
-          // 未购买且试看
-          if (!that.bought && that.lookAt == '2') {
-            // 取消全屏
-            window.qcplayer.fullscreen(false)
-            that.$bus.$emit('openPay', that.pay)
-          } else {
-            if (that.nextCatalogId !== '' && that.bought) {
-              that.playerForm.catalogId = that.nextCatalogId
-              that.autoplay = true
-              that.getPlayerInfo()
-            }
-          }
+        this.$bus.$emit('openPay', this.pay)
+      } else {
+        if (this.nextCatalogId !== '' && this.bought) {
+          this.playerForm.catalogId = this.nextCatalogId
+          this.autoplay = true
+          this.getPlayerInfo()
         }
       }
     },
@@ -496,6 +520,7 @@ export default {
         this.isFreeCourse = response.data.curriculumProjectDetail.is_free
         this.iseve =
           response.data.curriculumProjectDetail.is_evaluateCurriculumProject
+        this.aliPlayer.cover = response.data.curriculumProjectDetail.picture
         if (response.data.curriculumProjectDetail.is_Collection) {
           this.collectMsg.isCollect = 1
         } else {
@@ -546,6 +571,7 @@ export default {
             type: 'success',
             message: response.msg
           })
+          this.closeEvaluate()
         }
       })
     },
@@ -561,7 +587,6 @@ export default {
       this.projectForm.ids = window.location.search.split('=')[1]
       this.getInit()
     } else {
-      // this.$router.push('/')
       this.$router.push(
         '/project/projectdetail?id=' + window.location.search.split('=')[1]
       )
