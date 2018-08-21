@@ -6,8 +6,8 @@
         <span class="goBack" @click="goBack(config.type)">
           <i class="el-icon-arrow-left icon"></i>
         </span>
-        <span v-if="config.type==='order'">订单详情</span>
-        <span v-else>发票详情</span>
+        <span @click="goBack(config.type)" v-if="config.type==='order'" class="detailText">订单详情</span>
+        <span @click="goBack(config.type)" class="detailText" v-else>发票详情</span>
       </div>
       <div class="tableBody">
         <div v-if="config.type==='order'">

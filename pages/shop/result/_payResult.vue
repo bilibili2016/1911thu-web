@@ -6,11 +6,11 @@
       <h4 v-if="success">支付成功！</h4>
       <h4 v-else>支付失败！</h4>
       <div class="restltMsg" v-if="success">
-        <p>
+        <!-- <p>
           <span>订单：{{payCompleteData.order_sn}}</span>
           <span> | </span>
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
-        </p>
+        </p> -->
       </div>
       <div v-if="hasCode" v-show="showMsg">
         <h5>
@@ -41,6 +41,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { payResult } from '@/lib/v1_sdk/index'
+import { banBackSpace } from '@/lib/util/helper'
 export default {
   data() {
     return {
@@ -126,6 +127,11 @@ export default {
         } else {
           this.hasCode = false
         }
+
+        //禁止后退键 作用于Firefox、Opera
+        // document.onkeypress = banBackSpace
+        //禁止后退键 作用于IE、Chrome
+        // document.onkeydown = banBackSpace
       })
     },
     goLink(item) {
@@ -137,10 +143,17 @@ export default {
     }
   },
   mounted() {
+    // window.history.go(-1)
     // console.log(this.$route.query.ref)
     this.ref = this.$route.query.ref
     this.payComplete()
     this.link = this.$route.path
+
+    //禁止浏览器的后退
+    history.pushState(null, null, document.URL)
+    window.addEventListener('popstate', function() {
+      history.pushState(null, null, document.URL)
+    })
   }
 }
 </script>

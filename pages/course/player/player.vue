@@ -253,7 +253,7 @@ export default {
     ...mapActions('auth', ['signOut']),
     isHasClass() {
       let myVideo = document.getElementById('movd')
-      // console.log(myVideo)
+
       if (myVideo == null) {
         return
       }
@@ -263,7 +263,6 @@ export default {
         // 方式2
         if (myVideo.className.indexOf('vjs-paused') > -1) {
           this.videoState = false
-          // console.log('包含 test 这个class')
         } else {
           this.videoState = true
         }

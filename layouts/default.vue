@@ -26,7 +26,6 @@ export default {
   },
   mounted() {
     setPagesHeight()
-    // console.log(window.location.origin, '123')
     this.$bus.$on('headerFooterShow', () => {
       this.hfshow = true
     })

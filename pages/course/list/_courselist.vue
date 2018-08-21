@@ -183,7 +183,7 @@ export default {
   },
   mounted() {
     this.cidNumber = window.location.pathname.split('/')[3]
-    // console.log(cidNumber, '这是cid')
+
     this.initAll()
   }
 }

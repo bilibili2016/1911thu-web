@@ -84,7 +84,11 @@ import TicketConfirm from '@/pages/profile/ticket/ticketConfirm'
 import NoMsg from '@/pages/profile/pages/noMsg.vue'
 export default {
   props: ['orderData'],
-
+  watch: {
+    orderData() {
+      this.ticketOrderData = this.orderData
+    }
+  },
   components: {
     'v-ticket': TicketPop,
     'v-comfirm': TicketConfirm,
