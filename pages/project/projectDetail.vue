@@ -1,9 +1,11 @@
 <template>
   <div class="projectDetail" v-loading="projectDetailLoad">
-    <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}">
-      <!-- <div class="header-mask"></div> -->
+    <!-- <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}"> -->
+    <div class="proHeader">
+      <div class="proHeader-mask"></div>
+      <img class="proHeader-img" :src="projectDetail.picture" alt="">
       <!-- 项目详情基本信息 -->
-      <v-detail :projectDetail="projectDetail"></v-detail>
+      <v-detail :projectDetail="projectDetail" class="proHeader-detail"></v-detail>
     </div>
     <!-- 介绍 线上课程 线下课程介绍 用户评价 常见问题-->
     <div class="proContent">

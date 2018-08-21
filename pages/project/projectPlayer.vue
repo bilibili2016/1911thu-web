@@ -559,7 +559,8 @@ export default {
             message: response.msg
           })
         } else {
-          this.getCurriculumPlayInfo()
+          this.iseve = true
+          // this.getCurriculumPlayInfo()
           this.addEvaluateForm.tag = []
           for (let item of this.btnData) {
             this.$set(item, 'isCheck', false)

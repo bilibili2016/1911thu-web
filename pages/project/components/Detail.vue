@@ -4,7 +4,7 @@
     <div class="main-crumb">
       <div class="fl">
         <!-- 面包屑组件 -->
-        <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+        <v-breadcrumb :config="BreadCrumb" class="BreadCrumb"></v-breadcrumb>
       </div>
       <div class="fr">
         <!-- 收藏分享 -->
@@ -15,7 +15,6 @@
     <h1>{{projectDetail.title}}</h1>
     <h3>{{projectDetail.deputy_title}}</h3>
     <div class="detail clearfix">
-
       <div class="some">
         <div>
           <h5>课时</h5>
