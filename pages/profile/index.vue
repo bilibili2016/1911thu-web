@@ -256,6 +256,7 @@ export default {
         pagesize: 12,
         total: 12
       },
+
       projectPageCollect: {
         page: 1,
         pagesize: 12,
