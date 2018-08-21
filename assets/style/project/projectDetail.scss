@@ -2,7 +2,7 @@
   padding: 0 0 100px;
   background: url('http://papn9j3ys.bkt.clouddn.com/pro_detailbg.png') no-repeat;
   background-position: top center;
-  background-size: auto;
+  background-size: 100% 440px;
   .main-crumb {
     // position: absolute;
     // top: 0;
@@ -20,40 +20,62 @@
       .el-breadcrumb__separator {
         color: #bdbccf;
       }
+      .el-breadcrumb__inner:hover {
+        color: #fff !important;
+      }
+      .el-breadcrumb__inner {
+        color: #bdbccf !important;
+      }
     }
   }
   .proHeader {
     width: 1100px;
+    height: 490px;
     margin: 0 auto;
-    background: url('http://papn9j3ys.bkt.clouddn.com/pro_banner.png') no-repeat;
+    // background: url('http://papn9j3ys.bkt.clouddn.com/pro_banner.png') no-repeat;
     background-position: top center;
-    background-size: cover;
+    background-size: 100% 390px;
     box-shadow: 8px 0px 21px rgba(39, 0, 77, 0.07);
     position: relative;
-    .header-mask {
-      // position: absolute;
-      // top: 0;
-      // left: 0;
-      // width: 100%;
-      // height: 300px;
-      // opacity: 0.7;
-      // background: -webkit-linear-gradient(
-      //   rgba(22, 17, 26, 0.7),
-      //   rgba(22, 17, 26, 0)
-      // ); /* Safari 5.1 - 6.0 */
-      // background: -o-linear-gradient(
-      //   rgba(22, 17, 26, 0.7),
-      //   rgba(22, 17, 26, 0)
-      // ); /* Opera 11.1 - 12.0 */
-      // background: -moz-linear-gradient(
-      //   rgba(22, 17, 26, 0.7),
-      //   rgba(22, 17, 26, 0)
-      // ); /* Firefox 3.6 - 15 */
-      // background: linear-gradient(
-      //   rgba(22, 17, 26, 0.7),
-      //   rgba(22, 17, 26, 0)
-      // ); /* 标准的语法 */
+    .BreadCrumb {
     }
+    .proHeader-img {
+      width: 100%;
+      height: 390px;
+      z-index: 1;
+    }
+    .proHeader-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 390px;
+      opacity: 0.9;
+      z-index: 10;
+      background: -webkit-linear-gradient(
+        rgba(22, 17, 26, 0.9),
+        rgba(22, 17, 26, 0)
+      ); /* Safari 5.1 - 6.0 */
+      background: -o-linear-gradient(
+        rgba(22, 17, 26, 0.9),
+        rgba(22, 17, 26, 0)
+      ); /* Opera 11.1 - 12.0 */
+      background: -moz-linear-gradient(
+        rgba(22, 17, 26, 0.9),
+        rgba(22, 17, 26, 0)
+      ); /* Firefox 3.6 - 15 */
+      background: linear-gradient(
+        rgba(22, 17, 26, 0.9),
+        rgba(22, 17, 26, 0)
+      ); /* 标准的语法 */
+    }
+    .header-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
     h1 {
       margin: 0;
       padding-top: 75px;
@@ -70,9 +92,12 @@
     }
 
     .detail {
-      margin-top: 170px;
+      margin-top: 120px;
       height: 98px;
       background: #fff;
+      box-shadow: 0px 8px 21px 0px rgba(39, 0, 77, 0.07);
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
       .some {
         display: inline;
         div {
@@ -130,6 +155,9 @@
           text-align: center;
           vertical-align: top;
           cursor: pointer;
+          &:hover {
+            background-color: #8f4acb;
+          }
         }
         .study {
           width: 120px;
@@ -143,13 +171,21 @@
           vertical-align: top;
           color: #641ca1;
           cursor: pointer;
+          &:hover {
+            background-color: #641ca1;
+            color: #fff;
+          }
         }
       }
+    }
+
+    .proHeader-detail {
+      z-index: 20;
     }
   }
   .proContent {
     clear: both;
-    padding-top: 35px;
+    padding-top: 40px;
     .proTab {
       width: 1130px;
       margin: 0 auto;
@@ -158,5 +194,15 @@
         padding: 28px;
       }
     }
+    .el-tabs__content {
+      margin-top: 30px !important;
+    }
+  }
+
+  .bag {
+    color: #fff !important;
+  }
+  .main-crumb .fr .collect .line-center .collectSpan:hover {
+    color: #fff;
   }
 }

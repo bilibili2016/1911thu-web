@@ -9,10 +9,10 @@
 export default {
   methods: {
     login() {
-      this.$bus.$emit('login')
+      this.$emit('login')
     },
     register() {
-      this.$bus.$emit('register')
+      this.$emit('register')
     }
   }
 }

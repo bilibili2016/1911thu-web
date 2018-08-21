@@ -1,7 +1,7 @@
 <template>
   <div class="news-list" v-loading="loading">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
-    <div class="center shadow">
+    <div class="center shadow teacherList">
       <div @click="getNewInfoList"></div>
       <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
     </div>

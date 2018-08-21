@@ -1,7 +1,7 @@
 <template>
   <div class="clearfix">
     <span class="topCenter topCode" @click="addEcg">兑换码</span>
-    <span class="hrin topCenter" @click="goSearchd('/other/activePages/institutional')">单位入口
+    <span class="hrin topCenter" @click="handleLink('/other/activePages/institutional')">单位入口
       <i></i>
     </span>
 
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="shoppingCart" v-show="isAuthenticated" @click="goLinker('/shop/shoppingcart')">
+    <div class="shoppingCart" v-show="isAuthenticated" @click="handleLink('/shop/shoppingcart')">
       <span class="cartIcon"></span>
       <i v-if="productsNum>0">{{productsNum}}</i>
     </div>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -34,28 +34,22 @@ export default {
     }
   },
   computed: {
-    ...mapState('auth', ['token', 'productsNum']),
+    ...mapState('auth', ['productsNum']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
-    goSearchd(item) {
-      this.$router.push(item)
+    handleLink(data) {
+      this.$emit('handleLink', data)
     },
     // 打开头部绑定课程
     addEcg() {
-      this.$bus.$emit('addEcg')
+      this.$emit('addEcg')
     },
     // 改变鼠标悬浮时的DownApp二维码
     changeImg(what) {
+      S
       what == 'android' ? (this.iphones = false) : (this.iphones = true)
-    },
-    // 跳转到指定页
-    goLinker(item) {
-      this.$router.push(item)
     }
   }
 }
 </script>
-
-<style scoped>
-</style>

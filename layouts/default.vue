@@ -24,7 +24,27 @@ export default {
       hfshow: true
     }
   },
+  methods: {
+    //设置选中样式
+    fetchUrl() {
+      let pathName = window.location.pathname
+      let headerClass = document.getElementsByClassName('headerClass')
+      if (pathName === '/') {
+        //首页
+        for (var i = 0; i < headerClass.length; i++) {
+          headerClass[i].remove('active')
+        }
+        headerClass[0].classList.add('active')
+      } else if (pathName === '/home/teacher/list') {
+        for (var i = 0; i < headerClass.length; i++) {
+          headerClass[i].remove('active')
+        }
+        headerClass[3].classList.add('active')
+      }
+    }
+  },
   mounted() {
+    // this.fetchUrl()
     setPagesHeight()
     this.$bus.$on('headerFooterShow', () => {
       this.hfshow = true
@@ -33,6 +53,9 @@ export default {
       this.hfshow = false
     })
   }
+  // watch: {
+  //   $route: 'fetchData'
+  // }
 }
 </script>
 <style lang="scss" scoped>

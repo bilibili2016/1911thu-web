@@ -6,17 +6,19 @@
       </div>
       <div class="content">
         <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
-        <!-- <v-nomsg class="fillTop" v-else :config="noMsgOne"></v-nomsg> -->
+        <v-nomsg class="fillTop" v-else :config="noMsgOne"></v-nomsg>
       </div>
     </el-card>
   </div>
 </template>
 
 <script>
+import NoMsg from '@/pages/profile/pages/noMsg.vue'
 import CustomList from '@/pages/profile/components/List.vue'
 export default {
   props: ['studyData', 'configZero', 'noMsgOne'],
   components: {
+    'v-nomsg': NoMsg,
     'v-list': CustomList
   }
 }

@@ -76,6 +76,10 @@ body {
         color: #6417a6;
       }
     }
+    .backHome.active {
+      border-bottom: 2px solid #6417a6;
+      color: #6417a6;
+    }
 
     .dropdown {
       float: left;
@@ -164,6 +168,10 @@ body {
         border-bottom: 2px solid #6417a6;
         color: #6417a6;
       }
+    }
+    .teach.active {
+      border-bottom: 2px solid #6417a6;
+      color: #6417a6;
     }
     .search {
       width: 200px;
