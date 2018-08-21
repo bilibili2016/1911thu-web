@@ -139,7 +139,7 @@ body {
           }
         }
         &:hover {
-          border-bottom: 2px solid #6417a6;
+          // border-bottom: 2px solid #6417a6;
           .el-dropdown-link {
             color: #6417a6;
             i.el-icon-arrow-down {
@@ -151,6 +151,15 @@ body {
           }
 
           .drops {
+            display: block;
+          }
+        }
+      }
+      .dropItem.active {
+        .el-dropdown-link {
+          color: #6417a6;
+
+          .downLine {
             display: block;
           }
         }
@@ -534,7 +543,9 @@ body {
           }
         }
         .changeTips {
-          padding-left: 120px;
+          // padding-left: 120px;
+          width: 430px;
+          margin: 0 auto;
           p {
             color: #aaa;
             font-size: 12px;

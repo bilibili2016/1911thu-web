@@ -206,7 +206,7 @@ export default {
     //课程详情
     goCourseInfo(item, index) {
       this.kidForm.kids = item.id
-      this.$router.push('/course/coursedetail?kid=' + item.id)
+      this.$router.push('/course/coursedetail?kid=' + item.id + '&page=0')
     },
     //项目详情
     goProjrctInfo(item) {

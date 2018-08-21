@@ -127,7 +127,9 @@ export default {
             '?kid=' +
             splitUrl(0, 1) +
             '&bid=' +
-            catalog_id
+            catalog_id +
+            '&page=' +
+            splitUrl(2, 1)
         )
         this.playerForm.curriculumId = curriculum_id
         this.playerForm.catalogId = catalog_id
