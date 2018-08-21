@@ -79,7 +79,8 @@ export default {
       },
       coursedetail: {
         base: '/course/coursedetail',
-        kid: ''
+        kid: '',
+        page: 0
       },
       projectdetail: {
         base: '/project/projectdetail',
@@ -136,13 +137,11 @@ export default {
       this.kidForm.kids = item.id
       this.coursedetail.kid = item.id
       open(this.coursedetail)
-      // this.$router.push('/course/coursedetail?kid=' + item.id)
     },
     //项目详情
     goProjrctInfo(item) {
       this.projectdetail.kid = item.id
       open(this.projectdetail)
-      // this.$router.push('/project/this.coursedetail?kid=' + item.id)
     },
     //列表详情
     selectPayApply(item, type) {

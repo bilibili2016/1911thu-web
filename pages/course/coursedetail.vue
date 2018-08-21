@@ -349,12 +349,10 @@ export default {
               '?kid=' +
               splitUrl(0, 1) +
               '&bid=' +
-              response.data.defaultCurriculumCatalog.id
+              response.data.defaultCurriculumCatalog.id +
+              '&page=' +
+              splitUrl(1, 1)
           )
-          // persistStore.set(
-          //   'catalogId',
-          //   response.data.defaultCurriculumCatalog.id
-          // )
         })
     },
     // 分享 默认设置

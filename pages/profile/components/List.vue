@@ -153,7 +153,9 @@ export default {
       this.openDetail(item.id)
     },
     openDetail(ID) {
-      window.open(window.location.origin + '/course/coursedetail?kid=' + ID)
+      window.open(
+        window.location.origin + '/course/coursedetail?kid=' + ID + '&page=0'
+      )
     },
     goToPlay(item) {
       // persistStore.set('curriculumId', item.id)
@@ -163,7 +165,9 @@ export default {
           '?kid=' +
           splitUrl(0, 1) +
           '&bid=' +
-          item.catalog_id
+          item.catalog_id +
+          '?kid=' +
+          splitUrl(2, 1)
       )
       window.open(window.location.origin + '/course/player')
     },

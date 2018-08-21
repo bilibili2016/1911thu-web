@@ -103,6 +103,9 @@
     }
     .orderNum {
       cursor: pointer;
+      &:hover {
+        color: #6417a6;
+      }
     }
   }
   .rules {
