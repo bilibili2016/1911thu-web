@@ -4,11 +4,17 @@
     <el-tabs v-model="activeTicket" @tab-click="handleTicket">
       <el-tab-pane label="按订单开发票" name="ticketFirst">
         <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
+        <div class="pagination" v-if="unTicketData && unTicketData.length>0">
+          <el-pagination background layout="prev, pager, next" :page-size="pagemsg8.pagesize" :pager-count="5" :page-count="pagemsg8.pagesize" :current-page="pagemsg8.page" :total="pagemsg8.total" @current-change="unTicketDataChange"></el-pagination>
+        </div>
         <v-nomsg class="noOrder" v-else :config="noMsgTwl"></v-nomsg>
 
       </el-tab-pane>
       <el-tab-pane name="ticketSecond" label="开票历史">
         <v-tkhistory v-if="historyOrderData && historyOrderData.length>0" :orderData="historyOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-tkhistory>
+        <div class="pagination" v-if="historyOrderData && historyOrderData.length>0">
+          <el-pagination background layout="prev, pager, next" :page-size="pagemsg9.pagesize" :pager-count="5" :page-count="pagemsg9.pagesize" :current-page="pagemsg9.page" :total="pagemsg9.total" @current-change="historyOrderDataChange"></el-pagination>
+        </div>
         <v-nomsg class="noOrder" v-else :config="noMsgThi"></v-nomsg>
       </el-tab-pane>
       <el-tab-pane name="ticketThird">
@@ -39,7 +45,9 @@ export default {
     'ticketType',
     'courseList',
     'projectList',
-    'orderDetail'
+    'orderDetail',
+    'pagemsg8',
+    'pagemsg9'
   ],
   components: {
     'v-tkorder': TicketOrder,
@@ -53,6 +61,9 @@ export default {
       activeTicket: 'ticketFirst'
     }
   },
+  mounted() {
+    console.log(this.pagemsg8)
+  },
   methods: {
     handleTicket() {
       this.$emit('handleTicket')
@@ -62,6 +73,12 @@ export default {
     },
     getTicketDetail() {
       this.$emit('getTicketDetail')
+    },
+    unTicketDataChange(val) {
+      this.$emit('unTicketDataChange', val)
+    },
+    historyOrderDataChange(val) {
+      this.$emit('historyOrderDataChange', val)
     }
   }
 }

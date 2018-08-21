@@ -25,7 +25,7 @@
         <el-tab-pane class="my-course my-order" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
-          <v-myorder :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList"></v-myorder>
+          <v-myorder :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getAllOrderDataChange="getAllOrderDataChange" @unfinishedOrderDataChange="unfinishedOrderDataChange" @getReadyOrderDataChange="getReadyOrderDataChange" @invalidOrderDataChange="invalidOrderDataChange"></v-myorder>
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
@@ -52,7 +52,7 @@
           <span slot="label" class="tabList">
             <i class="icon-ticket"></i> 发票管理</span>
 
-          <v-myticket :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail"></v-myticket>
+          <v-myticket :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange"></v-myticket>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -256,6 +256,7 @@ export default {
         pagesize: 12,
         total: 12
       },
+
       projectPageCollect: {
         page: 1,
         pagesize: 12,
@@ -298,7 +299,7 @@ export default {
       },
       tickethistoryForm: {
         pages: 1,
-        limits: 5
+        limits: 20
       },
       collectionData: [],
       orderDetail: {}, //订单详情信息
@@ -795,6 +796,7 @@ export default {
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
         this.historyOrderData = response.data.invoiceList
         this.pagemsg9.total = response.data.invoiceTotal
+
         this.historyOrderLoad = false
       })
     },
