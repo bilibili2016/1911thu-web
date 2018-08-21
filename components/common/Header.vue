@@ -380,89 +380,11 @@ export default {
     }
   },
   mounted() {
-<<<<<<< HEAD
     // 获取顶部课程列表
     this.getClassifyList()
     this.getUserInfo()
     // 非单点登录 getHttp为true
     this.onBusEvent()
-=======
-    // message('success', '测试数据')
-    // this.activeClass()
-    let me = this
-    this.getUserInfo()
-    // 非单点登录 getHttp为true
-    this.$bus.$on('updateCount', () => {
-      me.getCount()
-    })
-    // this.$bus.$emit('bannerShow', false)
-    // this.$bus.$on('bannerShow', data => {
-    //   if (data === true) {
-    //     this.bannerMsg = true
-    //   } else {
-    //     this.bannerMsg = false
-    //   }
-    // })
-    // 监听 优惠专题入口的banner 显示
-    this.$bus.$on('bannerImgShow', () => {
-      this.bannerMsg = true
-    })
-    // 监听 优惠专题入口的banner 隐藏
-    this.$bus.$on('bannerImgHide', () => {
-      this.bannerMsg = false
-    })
-    this.$bus.$on('changeimg', data => {
-      this.user.userImg = data
-    })
-    this.$bus.$on('getUserInfo', data => {
-      this.getUserInfo()
-    })
-
-    this.$bus.$on('closeEcg', data => {
-      this.closeEcg()
-    })
-    this.$bus.$on('detection', data => {
-      this.detection()
-    })
-    this.$bus.$on('login', data => {
-      this.login()
-      this.getUserInfo()
-    })
-    this.$bus.$on('register', data => {
-      this.register()
-    })
-    this.$bus.$on('goLink', data => {
-      this.goLink(data)
-    })
-    this.$bus.$on('signOuts', data => {
-      this.signOuts()
-    })
-    this.$bus.$on('addEcg', data => {
-      this.addEcg()
-    })
-  },
-  watch: {
-    // 绑定兑换码
-    'bindForm.courseId'(val, oldval) {
-      if (val == '') {
-        this.bindForm.showErr = true
-        this.bindForm.isInput = false
-      } else {
-        if (/^[A-Za-z0-9]+$/.test(val)) {
-          this.bindForm.showErr = false
-          this.bindForm.isInput = true
-        } else {
-          // this.$message({
-          //   showClose: true,
-          //   type: 'error',
-          //   message: '请您输入正确的兑换码！'
-          // })
-          message(this, 'error', '请您输入正确的兑换码！')
-        }
-      }
-    }
-    // this.activeClass()
->>>>>>> origin/liyr
   }
 }
 </script>
