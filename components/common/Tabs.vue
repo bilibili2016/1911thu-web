@@ -1,7 +1,6 @@
 <template>
   <div class="fl dropdown clearfix">
-
-    <div class="dropItem">
+    <div class="dropItem headerClass">
       <span class="el-dropdown-link">
         全部课程
         <i class="el-icon-arrow-down el-icon--right"></i>
@@ -13,7 +12,7 @@
         </ul>
       </div>
     </div>
-    <div class="dropItem">
+    <div class="dropItem headerClass">
       <span class="el-dropdown-link">
         培训项目
         <i class="el-icon-arrow-down el-icon--right"></i>
@@ -71,10 +70,7 @@ export default {
       })
     },
     handleClick(item, index) {
-      console.log(item, '这是是item')
-
       this.$bus.$emit('collegeId', item.id)
-
       window.open(
         window.location.origin +
           '/course/category' +

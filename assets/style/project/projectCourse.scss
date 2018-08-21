@@ -9,10 +9,10 @@
   }
   .system {
     padding: 0 30px 30px;
-    border-radius: 6px;
+    border-radius: 10px;
     margin-bottom: 30px;
-    box-shadow: 8px 0px 21px rgba(39, 0, 77, 0.07);
-    &>h4 {
+    box-shadow: 0px 0px 21px rgba(39, 0, 77, 0.07);
+    & > h4 {
       height: 76px;
       line-height: 76px;
     }

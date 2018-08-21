@@ -7,12 +7,12 @@
         <div class="headerLogo fl" @click="goLinkersHome('/')">
           <img src="http://papn9j3ys.bkt.clouddn.com/logo.png" alt="">
         </div>
-        <div class="backHome">
+        <div class="backHome headerClass">
           <span @click="goLinkersHome('/')">首页</span>
         </div>
         <!-- 课程，项目 -->
         <v-tabs></v-tabs>
-        <div class="teach" @click="goLinker('/home/teacher/list')">
+        <div class="teach headerClass" @click="goLinker('/home/teacher/list')">
           <span>名师智库</span>
         </div>
       </div>
@@ -104,7 +104,6 @@ export default {
     ...mapState('auth', ['token', 'productsNum']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
-
   methods: {
     ...mapActions('auth', [
       'signIn',
@@ -403,9 +402,8 @@ export default {
   },
   mounted() {
     // message('success', '测试数据')
-
+    // this.activeClass()
     let me = this
-
     this.getUserInfo()
     // 非单点登录 getHttp为true
     this.$bus.$on('updateCount', () => {
@@ -477,6 +475,7 @@ export default {
         }
       }
     }
+    // this.activeClass()
   }
 }
 </script>
