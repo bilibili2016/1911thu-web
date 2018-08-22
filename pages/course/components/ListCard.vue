@@ -85,6 +85,7 @@ export default {
     ...mapActions('auth', ['setKid', 'setProductsNum']),
     // 点击跳转课程详情页
     handleLinkCourseDetail(item) {
+      this.courseDetail.kid = item.id
       if (this.cidNumber === '2') {
         this.courseDetail.page = 1
       } else {

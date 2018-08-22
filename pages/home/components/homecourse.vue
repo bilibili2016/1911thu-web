@@ -21,9 +21,6 @@ import ShortList from '@/pages/project/components/ShortList.vue'
 import { mapActions } from 'vuex'
 export default {
   props: ['config', 'data', 'title', 'link'],
-  mounted() {
-    // console.log(this.config)
-  },
   components: {
     'v-title': CustomTitle,
     'v-card': CustomCard,
