@@ -47,12 +47,14 @@ export default {
       },
       loading: true,
       wechat: '',
-      alipay: ''
+      alipay: '',
+      flag: true
     }
   },
   methods: {
     close() {
       this.showPay = false
+      this.$emit('closePay')
     },
     // 获取去二维码的方法
     getCode() {
@@ -61,6 +63,7 @@ export default {
         this.wechat = response.data.code_url
         this.alipay = response.data.qr_code
         this.loading = false
+        this.flag = true
       })
     }
   },
@@ -71,7 +74,10 @@ export default {
       } else {
         this.codeForm.type = 1
       }
-      this.getCode()
+      if (this.flag) {
+        this.getCode()
+        this.flag = false
+      }
       this.showPay = true
     })
     this.$bus.$on('closePay', data => {

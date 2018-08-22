@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-    <v-pay></v-pay>
+    <v-pay @closePay="closePayed"></v-pay>
   </div>
 </template>
 
@@ -150,7 +150,73 @@ export default {
         // source: '//player.alicdn.com/video/aliyunmedia.mp4', //播放url
         vid: '', //点播播放的两个参数之一
         playauth: '', //点播播放的两个参数之二
-        isLive: false
+        isLive: false,
+        skinLayout: [
+          {
+            name: 'bigPlayButton',
+            align: 'cc'
+          },
+          {
+            name: 'H5Loading',
+            align: 'cc'
+          },
+          {
+            name: 'infoDisplay'
+          },
+          {
+            name: 'tooltip',
+            align: 'blabs',
+            x: 0,
+            y: 56
+          },
+          {
+            name: 'thumbnail'
+          },
+          {
+            name: 'controlBar',
+            align: 'blabs',
+            x: 0,
+            y: 0,
+            children: [
+              {
+                name: 'progress',
+                align: 'blabs',
+                x: 0,
+                y: 44
+              },
+              {
+                name: 'playButton',
+                align: 'tl',
+                x: 15,
+                y: 12
+              },
+              {
+                name: 'timeDisplay',
+                align: 'tl',
+                x: 10,
+                y: 7
+              },
+              {
+                name: 'fullScreenButton',
+                align: 'tr',
+                x: 10,
+                y: 12
+              },
+              {
+                name: 'setting',
+                align: 'tr',
+                x: 15,
+                y: 12
+              },
+              {
+                name: 'volume',
+                align: 'tr',
+                x: 5,
+                y: 10
+              }
+            ]
+          }
+        ] //播放器控件配置
       },
       playerDetailForm: {
         curriculumId: ''
@@ -206,7 +272,10 @@ export default {
       },
       currentTime: 0,
       socket: '',
-      nextCatalogId: '' //默认播放下一小节id
+      playAuthInfo: {},
+      nextCatalogId: '', //默认播放下一小节id
+      interval: '',
+      index: 0
     }
   },
   methods: {
@@ -351,6 +420,12 @@ export default {
         '/project/projectdetail?id=' + window.location.search.split('=')[1]
       )
     },
+    closePayed() {
+      this.autoplay = false
+      this.index = 0
+      this.player.seek(0)
+      this.getPlayerInfo()
+    },
     getPlayerInfo() {
       let that = this
       var link = window.location.origin
@@ -420,6 +495,7 @@ export default {
           if (!that.bought && that.lookAt == '1') {
             this.goShoppingCart('您还未购买该项目，请先去购买吧！')
           } else {
+            this.playAuthInfo = response.data.playAuthInfo
             // this.aliPlayer.source = response.data.playAuthInfo.video_address
             this.aliPlayer.vid = response.data.playAuthInfo.video_id
             this.aliPlayer.playauth = response.data.playAuthInfo.playAuth
@@ -452,6 +528,7 @@ export default {
     // 播放开始--启动计时器
     playerPlay() {
       let that = this
+      clearInterval(this.interval)
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
           this.seconds = 1
@@ -462,6 +539,10 @@ export default {
         } else {
           this.seconds--
           let playTime = this.player.getCurrentTime()
+          // 试看的课程
+          if (this.playAuthInfo.is_try_see) {
+            this.preview(this.playAuthInfo.free_time, playTime)
+          }
           /**
            * socket.emit()6个参数
            * 1、watchRecordingTime固定参数
@@ -486,22 +567,40 @@ export default {
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
     playerPause() {
+      this.player.pause()
       this.playing = this.pauseImg
       clearInterval(this.interval)
       this.socket.emit('watchRecordingTime_disconnect')
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
+      clearInterval(this.interval)
       // 未购买且试看
       if (!this.bought && this.lookAt == '2') {
         // 取消全屏
-
+        this.player.fullscreenService.cancelFullScreen()
         this.$bus.$emit('openPay', this.pay)
       } else {
         if (this.nextCatalogId !== '' && this.bought) {
           this.playerForm.catalogId = this.nextCatalogId
           this.autoplay = true
           this.getPlayerInfo()
+        }
+      }
+    },
+    // 试看的课程方法
+    preview(freeTime, currentTime) {
+      /**
+       * 1、试看时长_freeTime
+       * 2、当前播放时长_currentTime
+       */
+      let that = this
+      if (Number(freeTime) < Number(currentTime)) {
+        this.index++
+        this.player.pause()
+        clearInterval(this.interval)
+        if (this.index < 2) {
+          this.playerEnded()
         }
       }
     },

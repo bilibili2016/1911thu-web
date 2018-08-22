@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="backHome">
+    <div class="backHome headerClass">
       <span @click="handleLink('/')">首页</span>
     </div>
     <div class="fl dropdown clearfix">
 
-      <div class="dropItem">
+      <div class="dropItem headerClass">
         <span class="el-dropdown-link">
           全部课程
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -17,7 +17,7 @@
           </ul>
         </div>
       </div>
-      <div class="dropItem">
+      <div class="dropItem headerClass">
         <span class="el-dropdown-link">
           培训项目
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -32,7 +32,7 @@
       </div>
 
     </div>
-    <div class="teach" @click="handleLink('/home/teacher/list')">
+    <div class="teach headerClass" @click="handleLink('/home/teacher/list')">
       <span>名师智库</span>
     </div>
   </div>

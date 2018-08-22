@@ -32,7 +32,7 @@
         <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
       </div>
     </div>
-    <v-pay></v-pay>
+    <v-pay @closePay="closePayed"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
   </div>
 </template>
@@ -315,7 +315,6 @@ export default {
         this.courseList = response.data.curriculumDetail
         // persistStore.set('curriculumId', response.data.curriculumDetail.id)
         this.privileMsg = response.data.curriculumPrivilege
-        console.log(this.privileMsg)
 
         this.content = response.data.curriculumPrivilege
         this.loadTeacher = false
@@ -350,12 +349,10 @@ export default {
               '?kid=' +
               splitUrl(0, 1) +
               '&bid=' +
-              response.data.defaultCurriculumCatalog.id
+              response.data.defaultCurriculumCatalog.id +
+              '&page=' +
+              splitUrl(1, 1)
           )
-          // persistStore.set(
-          //   'catalogId',
-          //   response.data.defaultCurriculumCatalog.id
-          // )
         })
     },
     // 分享 默认设置
@@ -378,6 +375,10 @@ export default {
     cbList() {
       this.getCourseDetail()
       this.getEvaluateList()
+    },
+    // 支付弹框关闭的回调
+    closePayed() {
+      this.$bus.$emit('closePayed')
     },
     //拉取服务器数据 初始化所有方法
     initAll() {

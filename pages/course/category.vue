@@ -68,7 +68,7 @@ export default {
       categoryData: [],
       categoryDataChoose: [],
       categoryCard: {
-        card_type: 'profile',
+        card_type: 'category',
         card: 'home',
         new: 'false',
         free: 'true'

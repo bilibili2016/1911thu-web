@@ -32,7 +32,7 @@
           <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
         </el-tab-pane>
         <el-tab-pane name="orderFour">
-          <span class="payOff" slot="label">已失效
+          <span class="payOff" slot="label">已关闭
           </span>
           <v-order v-if="invalidOrderData && invalidOrderData.length>0" :data="invalidOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
           <div class="pagination" v-if="invalidOrderData && invalidOrderData.length>0">

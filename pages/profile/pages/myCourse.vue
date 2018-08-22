@@ -77,14 +77,14 @@ export default {
     handleActive() {
       this.$emit('handleActive')
     },
-    readyStudyPageChange() {
-      this.$emit('readyStudyPageChange')
+    readyStudyPageChange(val) {
+      this.$emit('readyStudyPageChange', val)
     },
-    studyPageChange() {
-      this.$emit('studyPageChange')
+    studyPageChange(val) {
+      this.$emit('studyPageChange', val)
     },
-    collectionPageChange() {
-      this.$emit('collectionPageChange')
+    collectionPageChange(val) {
+      this.$emit('collectionPageChange', val)
     },
     handleActive(item) {
       this.$emit('handleActive', item)

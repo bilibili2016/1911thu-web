@@ -13,7 +13,7 @@
 import Header from '~/components/common/Header'
 import Footer from '~/components/common/Footer'
 
-import { setPagesHeight } from '~/lib/util/helper'
+import { setPagesHeight, splitUrl } from '~/lib/util/helper'
 export default {
   components: {
     Header,
@@ -25,26 +25,41 @@ export default {
     }
   },
   methods: {
-    //设置选中样式
+    //设置头部homeSelect选中样式
     fetchUrl() {
       let pathName = window.location.pathname
       let headerClass = document.getElementsByClassName('headerClass')
       if (pathName === '/') {
         //首页
         for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].remove('active')
+          headerClass[i].classList.remove('active')
         }
         headerClass[0].classList.add('active')
       } else if (pathName === '/home/teacher/list') {
         for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].remove('active')
+          headerClass[i].classList.remove('active')
         }
         headerClass[3].classList.add('active')
+      } else if (pathName === '/course/category') {
+        for (var i = 0; i < headerClass.length; i++) {
+          headerClass[i].classList.remove('active')
+        }
+        if (splitUrl(1, 1) === '0') {
+          //课程
+          headerClass[1].classList.add('active')
+        } else if (splitUrl(1, 1) === '1') {
+          //项目
+          headerClass[2].classList.add('active')
+        }
+      } else {
+        for (var i = 0; i < headerClass.length; i++) {
+          headerClass[i].classList.remove('active')
+        }
       }
     }
   },
   mounted() {
-    // this.fetchUrl()
+    this.fetchUrl()
     setPagesHeight()
     this.$bus.$on('headerFooterShow', () => {
       this.hfshow = true
@@ -52,10 +67,10 @@ export default {
     this.$bus.$on('headerFooterHide', () => {
       this.hfshow = false
     })
+  },
+  watch: {
+    $route: 'fetchUrl'
   }
-  // watch: {
-  //   $route: 'fetchData'
-  // }
 }
 </script>
 <style lang="scss" scoped>

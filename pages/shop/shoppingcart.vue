@@ -431,11 +431,11 @@ export default {
       let kidForm = {
         kids: item.id
       }
-      // this.setKid(kidForm)
-      // persistStore.set('curriculumId', item.id)
-      // this.$router.push('/course/coursedetail?kid=' + item.id)
       window.open(
-        window.location.origin + '/course/coursedetail?kid=' + item.id
+        window.location.origin +
+          '/course/coursedetail?kid=' +
+          item.id +
+          '&page=0'
       )
     },
     goProjectDetail(item) {

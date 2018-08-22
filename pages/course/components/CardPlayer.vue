@@ -125,7 +125,9 @@ export default {
       pay: {
         type: 1
       },
-      socket: ''
+      socket: '',
+      playAuthInfo: {},
+      index: 0
     }
   },
   methods: {
@@ -180,6 +182,7 @@ export default {
       players.getPlayerInfos(this.playerForm).then(res => {
         if (res.status === 0) {
           // 播放参数播放
+          this.playAuthInfo = res.data.playAuthInfo
           this.aliPlayer.vid = res.data.playAuthInfo.video_id
           this.aliPlayer.playauth = res.data.playAuthInfo.playAuth
 
@@ -220,6 +223,7 @@ export default {
     // 播放开始--启动计时器
     playerPlay() {
       let that = this
+      clearInterval(this.interval)
       // 播放开始启动计时器
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
@@ -231,6 +235,10 @@ export default {
         } else {
           this.seconds--
           let playTime = this.player.getCurrentTime()
+          // 试看的课程
+          if (this.playAuthInfo.is_try_see) {
+            this.preview(this.playAuthInfo.free_time, playTime)
+          }
           /**
            * socket.emit()6个参数
            * 1、watchRecordingTime固定参数
@@ -253,14 +261,18 @@ export default {
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
     playerPause() {
-      clearInterval(this.interval)
+      let that = this
+      this.player.pause()
+      clearInterval(that.interval)
       this.socket.emit('watchRecordingTime_disconnect')
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
+      clearInterval(this.interval)
       // 不免费 未购买 试看的课程弹出快捷支付弹框
       if (this.isFree === '1' && !this.bought && this.lookAt == '2') {
         // 取消全屏
+        this.player.fullscreenService.cancelFullScreen()
         this.$bus.$emit('openPay', this.pay)
       } else {
         // 如果当前小节播放完成，直接播放下一小节
@@ -269,6 +281,26 @@ export default {
           this.getdefaultPlayerUrl()
         }
       }
+    },
+    // 试看的课程方法
+    preview(freeTime, currentTime) {
+      /**
+       * 1、试看时长_freeTime
+       * 2、当前播放时长_currentTime
+       */
+      if (Number(freeTime) < Number(currentTime)) {
+        this.index++
+        this.player.pause()
+        if (this.index < 2) {
+          this.playerEnded()
+        }
+      }
+    },
+    closePayed() {
+      this.index = 0
+      this.player.seek(0)
+      this.autoplay = false
+      this.getdefaultPlayerUrl()
     }
   },
   mounted() {
@@ -279,6 +311,10 @@ export default {
     })
     this.$bus.$on('reupdatecourse', () => {
       this.getdefaultCurriculumCatalog()
+    })
+    // 支付框关闭后的回调
+    this.$bus.$on('closePayed', () => {
+      this.closePayed()
     })
   }
 }

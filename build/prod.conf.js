@@ -19,10 +19,6 @@ config.sentry = {
   // },
   {
     rel: 'stylesheet',
-    href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
-  },
-  {
-    rel: 'stylesheet',
     href:
       'https://g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css'
   },
@@ -35,15 +31,6 @@ config.sentry = {
   (config.head.script = [
     {
       src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
-      async: true
-    },
-    {
-      src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
-      async: true
-    },
-    {
-      src:
-        'http://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js',
       async: true
     },
     {
