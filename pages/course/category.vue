@@ -14,7 +14,7 @@
         <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
           <v-card :data="categoryData" :config="categoryCard"></v-card>
         </div>
-        <div v-else v-loading="loadCourse" class="noMsg">
+        <div v-if="categoryData.length === 0 &&loadStart === false" v-loading="loadCourse" class="noMsg">
           <v-nothing></v-nothing>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
       </div>
     </div>
-    <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange"></v-page>
+    <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange" v-if="!loadCourse"></v-page>
   </div>
 </template>
 
@@ -65,6 +65,7 @@ export default {
       cidBg: 0,
       pidBg: 0,
       activeTab: '',
+      loadStart: true,
       categoryData: [],
       categoryDataChoose: [],
       categoryCard: {
@@ -377,6 +378,7 @@ export default {
       this.setParamsPidCid(itemCid, itemPid)
 
       category.curriculumListNew(this.categoryForm).then(res => {
+        this.loadStart = false
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
         this.loadCourse = false
