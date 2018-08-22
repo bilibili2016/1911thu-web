@@ -49,9 +49,26 @@
         transition: all 400ms ease;
         background-color: #fff;
         z-index: 20;
+        .search {
+          position: relative;
+          background-color: #ededed;
+          .el-input {
+            .el-input__inner {
+              font-size: 14px;
+              border: none !important;
+              background-color: #ededed;
+            }
+          }
+          .el-icon-search {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+          }
+        }
         ul {
           width: 100%;
           cursor: pointer;
+          border-top: 1px solid #ddd;
           li {
             width: 100%;
             height: 40px;
@@ -158,7 +175,7 @@
         .item {
           width: 430px;
           float: left;
-          margin-right: 50px;
+          margin-right: 85px;
           &:last-child {
             margin-right: 0;
           }
@@ -184,14 +201,24 @@
             float: left;
           }
           .liChecked {
-            float: right;
+            width: 100%;
             margin-right: 10px;
             margin-bottom: -2px;
+            position: relative;
             .el-checkbox {
               display: none;
             }
-            .el-checkbox-label:before {
+            .el-checkbox-label {
+              display: inline-block;
+              height: 40px;
+              width: 100%;
+            }
+            .el-checkbox-label:after {
+              position: absolute;
+              top: 11px;
+              right: 10px;
               content: '';
+              text-align: right;
               display: inline-block;
               vertical-align: middle;
               width: 18px;
@@ -199,8 +226,9 @@
               border: 1px solid #6417a6;
               border-radius: 4px;
               margin-bottom: 5px;
+              margin-left: 270px;
             }
-            .el-checkbox:checked + .el-checkbox-label:before {
+            .el-checkbox:checked + .el-checkbox-label:after {
               background-image: url('~assets/images/icon-checked.png');
               background-size: 100%;
               border: none;
@@ -293,7 +321,7 @@
             margin-right: 30px;
           }
           .discount-left {
-            margin-right: 15px;
+            margin-right: 10px;
           }
           .totalPrice-left {
             margin-right: 20px;

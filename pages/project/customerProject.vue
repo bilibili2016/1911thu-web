@@ -35,7 +35,7 @@
 
                     <div class="pull-down-text" v-if="isShowNumSelect">
                         <ul>
-                            <li v-for="(n) in 31" :key="n" @click.stop="chooseNum(n)">{{(n-1)+20}}</li>
+                            <li v-for="(n) in 31" :key="n" @click.stop="chooseNum((n-1)+20)">{{(n-1)+20}}</li>
                         </ul>
                     </div>
                 </div>
@@ -119,13 +119,15 @@
                                     </span>
                                 </div>
                                 <div class="pull-down-text" v-if="isShowSearchSelect">
+                                    <div class="search" @click.stop="handleFocus">
+                                        <el-input placeholder="请输入搜索内容"></el-input>
+                                        <i class="el-icon-search"></i>
+                                    </div>
                                     <ul>
-                                        <li v-for="(n) in 31" :key="n" class="clearfix" @click.stop="chooseSearch(n)">
-                                            <div class="text">{{n}}</div>
-
+                                        <li v-for="(item,index) in searchCourseData" :key="index" class="clearfix" @click.stop="chooseSearch(item)">
                                             <div class="liChecked">
-                                                <input type="checkbox" class="el-checkbox singleCheckbox" ref="checkbox" :id="n">
-                                                <label :for="n" class="el-checkbox-label"></label>
+                                                <input type="checkbox" class="el-checkbox" ref="checkbox" :id="item.id" @click.stop="chooseSearchInput">
+                                                <label :for="item.id" class="el-checkbox-label">{{item.title}}</label>
                                             </div>
                                         </li>
                                     </ul>
@@ -134,7 +136,7 @@
 
                         </div>
                         <div class="item">
-                            <span class="add">确认添加</span>
+                            <span class="add" @click="addChooseCourse">确认添加</span>
                         </div>
 
                     </div>
@@ -146,7 +148,7 @@
                             <div class="courseTitle">{{item.title}}</div>
                             <div class="time">{{item.time}}学时</div>
                             <div class="price">{{item.price}}元</div>
-                            <div class="operater">删除</div>
+                            <div class="operater" @click="deleteChooseCourse(index)">删除</div>
                         </div>
                     </div>
                 </div>
@@ -198,21 +200,45 @@ export default {
       trainCollege: '',
       trainCourse: '',
       trainSearch: '',
-      checkedCourseData: [
+      chooseCourseData: [],
+      searchCourseData: [
         {
           title: '抓住用户心里，就能精准运营抓住用户心里',
           time: '10',
-          price: '200'
+          price: '200',
+          id: 1
         },
         {
           title: '数据挖掘：理论与算法',
           time: '10',
-          price: '200'
+          price: '200',
+          id: 2
         },
         {
           title: '经营决策分析',
           time: '10',
-          price: '200'
+          price: '200',
+          id: 3
+        }
+      ],
+      checkedCourseData: [
+        {
+          title: '抓住用户心里，就能精准运营抓住用户心里',
+          time: '10',
+          price: '200',
+          id: 1
+        },
+        {
+          title: '数据挖掘：理论与算法',
+          time: '10',
+          price: '200',
+          id: 2
+        },
+        {
+          title: '经营决策分析',
+          time: '10',
+          price: '200',
+          id: 3
         }
       ],
       courseData: [
@@ -234,6 +260,17 @@ export default {
     }
   },
   methods: {
+    //添加已选课程
+    addChooseCourse() {
+      //   this.checkedCourseData = this.chooseCourseData
+    },
+    //删除已选课程
+    deleteChooseCourse(index) {
+      this.checkedCourseData.splice(index, 1)
+    },
+    handleFocus() {
+      this.isShowSearchSelect = true
+    },
     //培训人数-下拉
     handleNumSelect() {
       this.isShowNumSelect = !this.isShowNumSelect
@@ -294,10 +331,30 @@ export default {
       this.trainCourse = val
       this.isShowCourseSelect = false
     },
+    //选择按课程搜索，阻止点击li时，label触发两次
+    chooseSearchInput(e) {
+      e.stopPropagation()
+    },
     //选择按课程搜索
-    chooseSearch(val) {
-      this.trainSearch = val
+    chooseSearch(item) {
+      console.log(this.chooseCourseData)
+
+      let arrIndex
+      this.chooseCourseData.forEach((n, index) => {
+        if (n.id === item.id) {
+          arrIndex = index
+        }
+      })
+      console.log(arrIndex)
+
       this.isShowSearchSelect = true
+      if (arrIndex >= 0) {
+        //未选中
+        this.chooseCourseData.splice(arrIndex, 1)
+      } else {
+        //选中
+        this.chooseCourseData.push(item)
+      }
     },
     documentHandler(e) {
       this.isShowNumSelect = false
@@ -305,6 +362,14 @@ export default {
       this.isShowCollegeSelect = false
       this.isShowCourseSelect = false
       this.isShowSearchSelect = false
+    }
+  },
+  watch: {
+    chooseCourseData(val) {
+      this.trainSearch = ''
+      val.forEach((n, index) => {
+        this.trainSearch += n.title + ','
+      })
     }
   }
 }

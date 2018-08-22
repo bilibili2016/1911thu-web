@@ -54,6 +54,13 @@
 
           <v-myticket :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange"></v-myticket>
         </el-tab-pane>
+
+        <!-- 自定制项目 -->
+        <el-tab-pane class="my-course my-customerProject" name="tab-eighth">
+          <span slot="label" class="tabList">
+            <i class="icon-customerProject"></i> 自定制项目</span>
+
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
