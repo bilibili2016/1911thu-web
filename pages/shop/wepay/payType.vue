@@ -24,6 +24,9 @@
       请在24小时以内支付完成，如未完成此订单将自动关闭，需重新购买！
       <span class="fr">应付金额：¥{{orderDetail.order_amount}}</span>
     </div>
+    <div class="restTime">
+      <i class="el-icon-time"></i>{{restTime}}
+    </div>
     <div class="fr pay">
       <el-button @click="addPaySubmit">立即支付</el-button>
     </div>
@@ -36,6 +39,7 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
+import { timestampToTime } from '~/lib/util/helper'
 import { wepay } from '@/lib/v1_sdk/index'
 export default {
   props: ['orderDetail', 'codeData', 'listData'],
@@ -52,7 +56,13 @@ export default {
       payListForm: {
         orderId: null
       },
-      projectList: []
+      projectList: [],
+      restTime: '',
+      countdown: {
+        hour: '',
+        minutes: '',
+        seconds: ''
+      }
     }
   },
   methods: {
@@ -107,6 +117,47 @@ export default {
       this.zfbMsg = false
       this.pubMsg = true
       this.$router.push('/shop/payPublic?orderID=' + urlLen[urlLen.length - 1])
+    },
+    time() {
+      setInterval(data => {
+        if (this.orderDetail.create_time) {
+          let mss = new Date() - new Date(this.orderDetail.create_time * 1000)
+          this.MillisecondToDate(mss)
+        }
+      }, 1000)
+    },
+    MillisecondToDate(msd) {
+      var time = 24 * 60 * 60 - parseFloat(msd) / 1000
+      if (null != time && '' != time) {
+        if (time > 60 && time < 60 * 60) {
+          time =
+            parseInt(time / 60.0) +
+            '分钟' +
+            parseInt((parseFloat(time / 60.0) - parseInt(time / 60.0)) * 60) +
+            '秒'
+        } else if (time >= 60 * 60 && time < 60 * 60 * 24) {
+          time =
+            parseInt(time / 3600.0) +
+            '小时' +
+            parseInt(
+              (parseFloat(time / 3600.0) - parseInt(time / 3600.0)) * 60
+            ) +
+            '分钟' +
+            parseInt(
+              (parseFloat(
+                (parseFloat(time / 3600.0) - parseInt(time / 3600.0)) * 60
+              ) -
+                parseInt(
+                  (parseFloat(time / 3600.0) - parseInt(time / 3600.0)) * 60
+                )) *
+                60
+            ) +
+            '秒'
+        } else {
+          time = '订单已过期！'
+        }
+      }
+      this.restTime = time
     }
   },
   mounted() {
@@ -116,6 +167,7 @@ export default {
     this.$bus.$on('addPaySubmit', dat => {
       this.addPaySubmit()
     })
+    this.time()
   }
 }
 </script>

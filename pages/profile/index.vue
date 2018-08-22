@@ -44,7 +44,7 @@
           <span slot="label" class="tabList">
             <i class="icon-code"></i> 兑换码管理</span>
           <!-- 'codeData', 'recordData', 'invitationCodeList' -->
-          <v-mycode :codeData="codeData" :recordData="recordData" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode"></v-mycode>
+          <v-mycode :codeData="codeData" :recordData="recordData" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode" @recordList="recordList" @searchCodeList="searchCodeList"></v-mycode>
         </el-tab-pane>
 
         <!-- 发票管理 -->
@@ -285,7 +285,13 @@ export default {
       },
       codeListForm: {
         pages: 1,
-        limits: null
+        limits: null,
+        ordersn: ''
+      },
+      getCodeListForm: {
+        pages: 1,
+        limits: null,
+        code: ''
       },
       orderForm: {
         pages: 1,
@@ -809,16 +815,31 @@ export default {
         this.historyOrderLoad = false
       })
     },
-    // 获取专属兑换码列表
+    // 搜索 兑换码列表
+    searchCodeList(data) {
+      this.codeListForm.ordersn = data
+      this.getCodeList()
+    },
+    // 获取 兑换码列表
     getCodeList() {
       profileHome.getCodeList(this.codeListForm).then(response => {
         this.codeData = response.data.orderInvitationCodeList
+        this.codeListForm.ordersn = ''
       })
     },
-    // 专属兑换码 邀请记录
+    // 兑换详情页的搜索
+    recordList(data) {
+      this.getCodeListForm.code = data
+      console.log(data)
+      console.log(this.getCodeListForm.code)
+
+      this.getRecordList()
+    },
+    // 邀请记录--兑换详情
     getRecordList() {
-      profileHome.getRecordList(this.codeListForm).then(response => {
+      profileHome.getRecordList(this.getCodeListForm).then(response => {
         this.recordData = response.data.usedInvitationCodeList
+        this.getCodeListForm.code = ''
       })
     },
     // 获取已经添加的兑换码

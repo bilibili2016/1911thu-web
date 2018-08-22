@@ -103,7 +103,7 @@
                   <!-- 未购买 购买判断  未购买-->
                   <div v-if="privileMsg===false ">
                     <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
-                    <el-button type="primary " plain @click="freeStudy(courseList) ">立即试看</el-button>
+                    <el-button v-if="courseList.is_free_video" type="primary " plain @click="freeStudy(courseList) ">立即试看</el-button>
                   </div>
                   <!-- 未购买 购买判断  已购买-->
                   <div v-if="privileMsg===true">

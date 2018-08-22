@@ -1,6 +1,12 @@
 <template>
   <div class="bottomBtn clearfix">
     <p class="allPrice">应付金额：¥{{data}}</p>
+    <div class="orderInfo" v-if="config.type==='customAffirmOrder'">
+      <p>
+        <span class="left">购买账号：</span>
+        <span class="right">QWEQWEQWE</span>
+      </p>
+    </div>
     <p class="commitOrder" @click="commitOrder">提交订单</p>
     <h6 v-if="config.type==='affirmOrder'" @click="showRpt">我有疑问，需要反馈?</h6>
   </div>
