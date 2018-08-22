@@ -264,7 +264,6 @@ export default {
     login() {
       this.$bus.$emit('loginShow')
     },
-
     // 个人中心 注册
     register() {
       this.$bus.$emit('registerShow')
