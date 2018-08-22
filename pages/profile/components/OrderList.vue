@@ -157,7 +157,7 @@ export default {
       // return timestampToTime(time)
       let newTime = new Date()
       time = new Date(time * 1000)
-      console.log(newTime - time)
+      // console.log(newTime - time)
     }
   }
 }

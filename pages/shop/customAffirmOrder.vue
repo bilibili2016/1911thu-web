@@ -1,21 +1,21 @@
 <template>
   <div>
     <v-nomsg :data="noMsg" v-if="isNoMsg"></v-nomsg>
-    <div class="affirmOrder" ref="affirmOrder" v-else>
+    <div class="customAffirmOrder" ref="affirmOrder" v-else>
       <div class="contain" v-loading="loadGoods">
         <!-- 头部banner -->
-        <v-banner :config="affirmOrder"></v-banner>
+        <v-banner :config="customAffirmOrder"></v-banner>
         <div class="main">
           <div class="goodsList">
-            <v-backshopcart @handleLinkShopCart="handleLinkShopCart" :config="affirmOrder"></v-backshopcart>
+            <v-backshopcart @handleLinkShopCart="handleReport" :config="customAffirmOrder"></v-backshopcart>
             <!-- 商品列表 -->
             <div class="goods">
-              <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
+              <v-card :config="customAffirmOrder" :data="curriculumLists"></v-card>
             </div>
             <!-- 商品信息 -->
             <v-orderinfo :data="orderinfo"></v-orderinfo>
           </div>
-          <v-orderbtn :data="orderinfo.goodsAmount" @commitOrder="handleSubmitOrder" @showRpt="handleReport" :config="affirmOrder"></v-orderbtn>
+          <v-orderbtn :data="orderinfo.goodsAmount" @commitOrder="handleSubmitOrder" @showRpt="handleReport" :config="customAffirmOrder"></v-orderbtn>
         </div>
       </div>
     </div>
@@ -29,8 +29,8 @@ import { affirmOrder } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import Banner from '@/pages/shop/components/banner'
 import Repore from '@/components/common/Reports.vue'
-import List from '@/pages/shop/components/List'
-import orderInfo from '@/pages/shop/affirmorder/orderInfo'
+import Card from '@/pages/shop/components/card'
+import orderInfo from '@/pages/shop/customAffirmOrder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
 import noMsg from '@/pages/shop/affirmorder/noMsg'
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
@@ -40,7 +40,7 @@ export default {
   components: {
     'v-banner': Banner,
     'v-report': Repore,
-    'v-list': List,
+    'v-card': Card,
     'v-orderinfo': orderInfo,
     'v-orderbtn': orderBtn,
     'v-nomsg': noMsg,
@@ -48,8 +48,8 @@ export default {
   },
   data() {
     return {
-      affirmOrder: {
-        type: 'affirmOrder',
+      customAffirmOrder: {
+        type: 'customAffirmOrder',
         text: '确认订单'
       },
       config: {
