@@ -3,7 +3,7 @@
     <el-tabs v-model="courseCodeNames" @tab-click="handleCourseCode">
       <!-- 课程码管理 课程码列表 -->
       <el-tab-pane label="兑换码列表" name="first">
-        <v-invitation :codeData="codeData"></v-invitation>
+        <v-invitation :codeData="codeData" :allCode="allCode"></v-invitation>
       </el-tab-pane>
       <!-- 课程码管理 兑换详情 -->
       <el-tab-pane label="兑换详情" name="second">
@@ -22,7 +22,7 @@ import Invitation from '@/pages/profile/pages/invitation'
 import Conversion from '@/pages/profile/components/Conversion'
 import Bind from '@/pages/profile/components/BindIng'
 export default {
-  props: ['codeData', 'recordData', 'invitationCodeList'],
+  props: ['codeData', 'recordData', 'invitationCodeList', 'allCode'],
   components: {
     'v-invitation': Invitation,
     'v-conversion': Conversion,
@@ -41,5 +41,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+

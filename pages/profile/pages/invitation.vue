@@ -1,6 +1,6 @@
 <template>
-  <div class="invitation">
-    <div class="table">
+  <div class="invitation" v-loading="allCode">
+    <div class="table" :class="{ minheight : allCode}">
       <div class="tr_header">
         <span>兑换码</span>
         <span>类型</span>
@@ -23,7 +23,8 @@
           <i class="used" v-if="code.use_code_number==='0'"></i>
         </span>
       </div>
-      <div v-if="!codeData||codeData.length<1" class="noCodes">
+
+      <div v-if="codeData.length == 0&& !allCode" class="noCodes">
         <img :src="noMsgImg" alt="">
         <p>抱歉，现在还没有兑换码~</p>
       </div>
@@ -48,7 +49,7 @@ import { timestampToYMD } from '@/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  props: ['codeData'],
+  props: ['codeData', 'allCode'],
   data() {
     return {
       noCodes: true,
@@ -76,3 +77,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.minheight {
+  min-height: 400px;
+}
+</style>

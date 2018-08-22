@@ -4,11 +4,14 @@
       <el-tabs v-model="activeNames" @tab-click="handleActive">
         <!-- 我的课程 学习中 -->
         <el-tab-pane label="学习中" name="first">
-          <v-list v-if="newDataing  && newDataing.length>0" :data="newDataing" :config="configOne"></v-list>
+          <div :class="{ minheight : allCourseLoad}" v-loading="allCourseLoad">
+            <v-list :data="newDataing" :config="configOne" v-if="newDataing  && newDataing.length>0"></v-list>
+          </div>
+
           <div class="pagination" v-if="newDataing  && newDataing.length>0">
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg1.pagesize" :pager-count="5" :page-count="pagemsg1.pagesize" :current-page="pagemsg1.page" :total="pagemsg1.total" @current-change="studyPageChange"></el-pagination>
           </div>
-          <v-nomsg v-else :config="noMsgTwo"></v-nomsg>
+          <v-nomsg v-if="newDataing.length== 0&& !allCourseLoad" :config="noMsgTwo"></v-nomsg>
 
         </el-tab-pane>
         <!-- 我的课程 已完成 -->
@@ -62,7 +65,8 @@ export default {
     'collectionData',
     'pagemsg3',
     'configZero',
-    'noMsgFive'
+    'noMsgFive',
+    'allCourseLoad'
   ],
   components: {
     'v-nomsg': NoMsg,
@@ -94,4 +98,7 @@ export default {
 </script>
 
 <style scoped>
+.minheight {
+  min-height: 400px;
+}
 </style>

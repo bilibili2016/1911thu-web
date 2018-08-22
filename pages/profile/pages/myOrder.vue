@@ -4,11 +4,14 @@
     <el-card v-if="showOrderList">
       <el-tabs v-model="activeOrder">
         <el-tab-pane label="全部" name="orderFirst">
-          <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
+          <div :class="{ minheight : allTicket}" v-loading="allOrderLoadAll">
+            <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail"></v-order>
+          </div>
+
           <div class="pagination" v-if="allOrderData && allOrderData.length>0">
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg4.pagesize" :current-page="pagemsg4.page" :total="pagemsg4.total" @current-change="getAllOrderDataChange"></el-pagination>
           </div>
-          <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+          <v-nomsg class="noOrder" v-if="allOrderData.length == 0 && !allOrderLoad" :config="noMsgTen"></v-nomsg>
 
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
@@ -79,7 +82,8 @@ export default {
     'pagemsg4',
     'pagemsg5',
     'pagemsg6',
-    'pagemsg7'
+    'pagemsg7',
+    'allOrderLoadAll'
   ],
   data() {
     return {

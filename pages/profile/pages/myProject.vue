@@ -4,11 +4,15 @@
       <el-tabs v-model="activeProject" @tab-click="handleProject">
         <!-- 我的项目 学习中 -->
         <el-tab-pane label="学习中" name="first">
-          <v-card v-if="studyProjectData  && studyProjectData.length>0" :data="studyProjectData" :config="configOne"></v-card>
+          <!-- {{allProjectLoad}} -->
+          <div :class="{ minheight : allProjectLoad}" v-loading="allProjectLoad">
+            <v-card v-if="studyProjectData  && studyProjectData.length>0" :data="studyProjectData" :config="configOne"></v-card>
+          </div>
+
           <div class="pagination" v-if="studyProjectData  && studyProjectData.length>0">
             <el-pagination background layout="prev, pager, next" :page-size="projectPageStudy.pagesize" :pager-count="5" :page-count="projectPageStudy.pagesize" :current-page="projectPageStudy.page" :total="projectPageStudy.total" @current-change="studyProjectPageChange"></el-pagination>
           </div>
-          <v-nomsg v-else :config="noMsgSix"></v-nomsg>
+          <v-nomsg v-if="studyProjectData.length == 0 && !allProjectLoad" :config="noMsgSix"></v-nomsg>
 
         </el-tab-pane>
         <!-- 我的项目 已完成 -->
@@ -69,7 +73,8 @@ export default {
     'collectProjectData',
     'configZero',
     'projectPageCollect',
-    'noMsgNine'
+    'noMsgNine',
+    'allProjectLoad'
   ],
   data() {
     return {
@@ -94,4 +99,7 @@ export default {
 </script>
 
 <style scoped>
+.minheight {
+  min-height: 400px;
+}
 </style>
