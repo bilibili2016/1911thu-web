@@ -961,7 +961,6 @@ export default {
     getTicket() {
       ticketorder.getLastTicket(this.invoiceForm).then(res => {
         if (res.status === 0) {
-          res.data = ''
           if (res.data.type == '1' || res.data.type == '2') {
             this.ticketForm.saveioc = res.data.type == '1' ? false : true
             if (res.data.type == '1') {

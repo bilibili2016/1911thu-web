@@ -29,7 +29,7 @@
         <span>20人</span>
         <span>22学时</span>
         <span>5天</span>
-        <span class="coursePrice">5天</span>
+        <span class="coursePrice">￥5</span>
       </div>
     </div>
   </div>
