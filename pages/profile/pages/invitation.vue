@@ -1,7 +1,7 @@
 <template>
-  <div class="invitation clearfix">
+  <div class="invitation" v-loading="allCode">
     <v-search @search="search"></v-search>
-    <div class="table">
+    <div class="table" :class="{ minheight : allCode}">
       <div class="tr_header">
         <span>兑换码</span>
         <span>类型</span>
@@ -24,7 +24,8 @@
           <i class="used" v-if="code.use_code_number==='0'"></i>
         </span>
       </div>
-      <div v-if="!codeData||codeData.length<1" class="noCodes">
+
+      <div v-if="codeData.length == 0&& !allCode" class="noCodes">
         <img :src="noMsgImg" alt="">
         <p>抱歉，现在还没有兑换码~</p>
       </div>
@@ -50,7 +51,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import Search from '@/pages/profile/components/search.vue'
 export default {
-  props: ['codeData'],
+  props: ['codeData', 'allCode'],
   components: {
     'v-search': Search
   },
@@ -84,3 +85,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.minheight {
+  min-height: 400px;
+}
+</style>

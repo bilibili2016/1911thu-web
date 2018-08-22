@@ -61,7 +61,7 @@
             <p class="item-desc1">{{li.title}}</p>
           </li>
           <li class="list-item" @click="goCustomerProject">
-            <p class="item-desc1 customerProject">自定制项目 >></p>
+            <p class="item-desc1 customer-project">自定制项目 >></p>
           </li>
 
         </ul>

@@ -5,8 +5,11 @@
         <span>最近学习</span>
       </div>
       <div class="content">
-        <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
-        <v-nomsg class="fillTop" v-else :config="noMsgOne"></v-nomsg>
+        <div :class="{ minheight : allHome}" v-loading="allHome">
+          <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
+        </div>
+
+        <v-nomsg class="fillTop" v-if="studyData.length == 0&& !allHome" :config="noMsgOne"></v-nomsg>
       </div>
     </el-card>
   </div>
@@ -16,7 +19,7 @@
 import NoMsg from '@/pages/profile/pages/noMsg.vue'
 import CustomList from '@/pages/profile/components/List.vue'
 export default {
-  props: ['studyData', 'configZero', 'noMsgOne'],
+  props: ['studyData', 'configZero', 'noMsgOne', 'allHome'],
   components: {
     'v-nomsg': NoMsg,
     'v-list': CustomList
@@ -25,4 +28,7 @@ export default {
 </script>
 
 <style scoped>
+.minheight {
+  min-height: 400px;
+}
 </style>
