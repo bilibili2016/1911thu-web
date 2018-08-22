@@ -26,6 +26,7 @@ import { getQueryString, open } from '@/lib/util/helper'
 import { auth, header, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { validateSearch } from '~/lib/util/validate'
+import { checkSearch } from '~/lib/util/validatefn'
 import HomeSelect from '@/components/common/HomeSelect.vue'
 import Login from '@/pages/auth/Login.vue'
 import Discount from '@/components/header/Discount.vue'
@@ -146,15 +147,14 @@ export default {
       this.categoryLink.cp = item.is_picture_show
       open(this.categoryLink)
     },
+    handleSearchData(item) {
+      persistStore.set('key', item)
+      this.handleLink('/other/pages/search')
+    },
     // 搜索
     handleSearch(item) {
       this.search = item.replace(/[ ]/g, '')
-      if (validateSearch(this.search)) {
-        persistStore.set('key', this.search)
-        this.handleLink('/other/pages/search')
-      } else {
-        message(this, 'error', '请输入不包含特殊字符且小于30个字符的关键词！')
-      }
+      checkSearch(this.search, this.handleSearchData)
     },
     // 兑换码 --- 关闭头部绑定课程
     handleCloseEcg() {
@@ -264,7 +264,6 @@ export default {
     login() {
       this.$bus.$emit('loginShow')
     },
-
     // 个人中心 注册
     register() {
       this.$bus.$emit('registerShow')
