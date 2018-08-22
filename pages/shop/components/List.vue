@@ -1,0 +1,107 @@
+<template>
+  <div>
+    <!-- 购物车课程列表 -->
+    <div v-if="config.type=='course'" class="tableBody">
+      <div v-for="(course,index) in data" :key="index">
+        <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
+        <div class="courseInfo clearfix">
+          <img class="fl" :src="course.picture" @click="goDetail(course)">
+          <div class="fl">
+            <h4 @click="goDetail(course)">{{course.title}}</h4>
+            <h6>{{course.study_time}}学时</h6>
+            <p>讲师：{{course.teacher_name}}</p>
+          </div>
+        </div>
+        <div class="coursePrice">
+          ￥{{course.present_price}}
+        </div>
+        <div class="courseOperation" @click="handleDeleteCourse(course,index)">
+          删除
+        </div>
+      </div>
+    </div>
+    <!-- 购物车项目列表 -->
+    <div class="tableBody" v-if="config.type=='project'">
+      <div v-for="(project,index) in data" :key="index">
+        <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
+        <div class="courseInfo clearfix">
+          <div class="project-img">
+            <img class="fl" :src="project.picture" @click="goProjectDetail(project,index)">
+            <img :src="projectImg" alt="" class="pmsg">
+          </div>
+
+          <div class="fl">
+            <h4 @click="goProjectDetail(project,index)">{{project.title}}</h4>
+            <h6>{{project.study_time}}学时 </h6>
+            <!-- <p>讲师：{{project.teacher_name}}</p> -->
+          </div>
+        </div>
+        <div class="coursePrice">
+          ￥{{project.present_price}}
+        </div>
+        <div class="courseOperation" @click="handleDeleteProject(project,index)">
+          删除
+        </div>
+      </div>
+    </div>
+    <!-- 确认订单，支付中心列表 -->
+    <div v-if="config.type=='wePay' || config.type=='affirmOrder'">
+      <div class="clearfix" :class="{oneGoods:config.type=='affirmOrder',courseOne:config.type=='wePay'}" v-for="(course,index) in data" :key="index">
+        <div class="fl">
+          <div class="bottomImg">
+            <!-- 项目图标 -->
+            <img v-if="course.type =='2'" class="project-img" :src="projectImg" alt="">
+            <img :src="course.picture" alt="">
+          </div>
+        </div>
+        <div class="fl">
+          <h5>{{course.title}}</h5>
+          <h6>{{course.study_time}}学时</h6>
+          <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
+        </div>
+
+        <div class="coursePrice">
+          ￥{{course.present_price}}
+        </div>
+        <div v-if="config.type=='wePay'" class="courseNumber">
+          <i class="el-icon-close "></i>{{course.pay_number}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['config', 'data'],
+  data() {
+    return {
+      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png'
+    }
+  },
+  methods: {
+    // 点击选中 取消课程的复选框   ----课程 单选
+    handleSelectChange(course, index) {
+      this.$bus.$emit('handleSelectChange', { course, index })
+    },
+    goDetail(course, index) {
+      this.$bus.$emit('goDetail', { course, index })
+    },
+    // 删除课程  ---- 课程
+    handleDeleteCourse(course, index) {
+      this.$bus.$emit('handleDeleteCourse', { course, index })
+    },
+    // 点击选中 项目的复选框   ---项目 单选
+    handleSelectProjectChange(project, index) {
+      this.$bus.$emit('handleSelectProjectChange', { project, index })
+    },
+    goProjectDetail(project, index) {
+      this.$bus.$emit('goProjectDetail', { project, index })
+    },
+    // 删除 项目 ---- 项目
+    handleDeleteProject(project, index) {
+      this.$bus.$emit('handleDeleteProject', { project, index })
+    }
+  }
+}
+</script>

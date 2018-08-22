@@ -33,11 +33,12 @@ td {
   margin: 0;
   padding: 0;
 }
-
+html {
+}
 body {
   margin: 0 auto;
   background-color: #fff;
-  font-family: '微软雅黑', 'Microsoft Yahei';
+  font-family: Arial, '微软雅黑';
   color: #222;
   -webkit-font-smoothing: antialiased;
 }
@@ -104,7 +105,7 @@ textarea {
 /* 清除浮动 */
 
 .clearfix:after {
-  content: "";
+  content: '';
   height: 0;
   line-height: 0;
   display: block;

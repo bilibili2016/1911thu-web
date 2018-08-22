@@ -13,10 +13,10 @@
   .topBar {
     height: 60px;
     line-height: 60px;
-    background-color: #EBE7ED;
+    background-color: #ebe7ed;
     padding: 0 30px;
     span.fl {
-      color: #332A51;
+      color: #332a51;
       font-size: 16px;
     }
     span.fr {
@@ -31,6 +31,7 @@
       justify-content: center;
       align-items: center;
       background-color: #fff;
+
       .course {
         width: 640px;
         .courseOne {
@@ -38,8 +39,19 @@
           height: 140px;
           border-top: 1px solid #e8d6f7;
           padding: 20px 0 20px 32px;
+
           &:first-child {
             border-top: none;
+          }
+          .courseImg {
+            position: relative;
+          }
+          .project-img {
+            width: 60px;
+            height: 28px;
+            position: absolute;
+            left: 0;
+            top: 0;
           }
           img {
             width: 160px;
@@ -107,8 +119,13 @@
       .price {
         width: 132px;
         color: #ff5f5f;
-        border-left: 1px solid #E8D6F7;
-        border-right: 1px solid #E8D6F7;
+        border-left: 1px solid #e8d6f7;
+        border-right: 1px solid #e8d6f7;
+        .detail {
+          margin-top: 15px;
+          color: #6417a6;
+          cursor: pointer;
+        }
       }
       .status {
         width: 132px;
@@ -117,7 +134,7 @@
           width: 133px;
           text-align: center;
           &.cancelOrder {
-            color: #6D687F;
+            color: #6d687f;
             cursor: pointer;
           }
           &.payReady {
@@ -125,11 +142,11 @@
             margin-top: 5px;
             &.payed {
               margin: 0;
-              color: #06BB09;
+              color: #06bb09;
             }
           }
           &.payClose {
-            color: #332A51;
+            color: #332a51;
           }
           span {
             width: 90px;
@@ -143,13 +160,13 @@
             cursor: pointer;
             transition: all 300ms;
             &.pay {
-              background-color: #FFAE5F;
+              background-color: #ffae5f;
               &:hover {
                 background-color: rgb(238, 144, 20);
               }
             }
             &.buy {
-              background-color: #6417A6;
+              background-color: #6417a6;
               &:hover {
                 background-color: #8f4acb;
               }

@@ -1,34 +1,23 @@
 @import './element-variables';
 // Font
-$font-family: 'PingFang SC',
-Tahoma,
-Helvetica,
-Arial,
-STXihei,
-"华文细黑",
-"Microsoft YaHei",
-"微软雅黑",
-SimSun,
-"宋体",
-Heiti,
-"黑体",
-sans-serif;
+$font-family: 'Microsoft YaHei', '微软雅黑', 'PingFang SC', Tahoma, Helvetica,
+  Arial, STXihei, '华文细黑', SimSun, '宋体', Heiti, '黑体', sans-serif;
 //
 // Typography
 // --------------------------------------------------
-$headings-font-family : inherit !default;
-$headings-font-weight : 400 !default;
-$headings-line-height : 1.1 !default;
-$headings-color : inherit !default;
-$font-size-base : 14px !default;
-$font-size-large : ceil(($font-size-base * 1.25)) !default; // ~18px
-$font-size-small : ceil(($font-size-base * 0.85)) !default; // ~12px
-$font-size-h1 : floor(($font-size-base * 2.15)) !default; // ~36px
-$font-size-h2 : floor(($font-size-base * 2.15)) !default; // ~30px
-$font-size-h3 : ceil(($font-size-base * 1.7)) !default; // ~24px
-$font-size-h4 : ceil(($font-size-base * 1.25)) !default; // ~18px
-$font-size-h5 : $font-size-base !default;
-$font-size-h6 : ceil(($font-size-base * 0.85)) !default; // ~12px
+$headings-font-family: inherit !default;
+$headings-font-weight: 400 !default;
+$headings-line-height: 1.1 !default;
+$headings-color: inherit !default;
+$font-size-base: 14px !default;
+$font-size-large: ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
+$font-size-h1: floor(($font-size-base * 2.15)) !default; // ~36px
+$font-size-h2: floor(($font-size-base * 2.15)) !default; // ~30px
+$font-size-h3: ceil(($font-size-base * 1.7)) !default; // ~24px
+$font-size-h4: ceil(($font-size-base * 1.25)) !default; // ~18px
+$font-size-h5: $font-size-base !default;
+$font-size-h6: ceil(($font-size-base * 0.85)) !default; // ~12px
 // Headings
 // -------------------------
 h1,

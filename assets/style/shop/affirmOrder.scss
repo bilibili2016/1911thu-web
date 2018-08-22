@@ -1,9 +1,13 @@
 .affirmOrder {
   width: 100%;
   position: relative;
+  .main {
+    margin-top: -50px;
+  }
   .contain {
     padding-bottom: 70px;
-    background: url('http://papn9j3ys.bkt.clouddn.com/orderBanners.png') no-repeat;
+    background: url('http://papn9j3ys.bkt.clouddn.com/orderBanners.png')
+      no-repeat;
     background-position: top center;
     background-size: 100%;
   }
@@ -15,6 +19,7 @@
     padding: 0 30px;
     line-height: 88px;
     height: 88px;
+    // cursor: inherit
   }
   .buyType {
     width: 1100px;
@@ -43,14 +48,14 @@
         position: relative;
         overflow: hidden;
         border: 1px solid #8f4acb;
-        transition: all 400ms;
+        transition: all 300ms;
         border: 1px #8f4acb solid;
         &.checked {
           background-color: #8f4acb;
           border: none;
           color: #fff;
           &:before {
-            content: url(~assets/images/checked.png);
+            content: url(http://papn9j3ys.bkt.clouddn.com/checked.png);
             width: 32px;
             height: 32px;
             position: absolute;
@@ -131,6 +136,40 @@
           width: 160px;
           height: 100px;
         }
+        .coursePrice {
+          float: right;
+          display: inline-block;
+          width: 100px;
+          height: 140px;
+          text-align: center;
+          color: #ff5f5f;
+          font-size: 16px;
+          line-height: 78px;
+          // margin-left: 158px;
+        }
+        .courseNumber {
+          display: inline-block;
+          width: 39px;
+          height: 140px;
+          text-align: center;
+          color: #332a51;
+          font-size: 16px;
+          line-height: 78px;
+          margin-left: 70px;
+          i {
+            font-size: 12px;
+          }
+        }
+        .bottomImg {
+          position: relative;
+          .project-img {
+            width: 70px;
+            height: 30px;
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+        }
         .fl h5 {
           line-height: 25px;
           height: 50px;
@@ -174,7 +213,8 @@
           text-align: right;
           padding-right: 20px;
           font-weight: 400;
-          background: url('~assets/images/ticketTips.png') no-repeat;
+          background: url('http://papn9j3ys.bkt.clouddn.com/ticketTips.png')
+            no-repeat;
         }
       }
       .invoice {
@@ -206,9 +246,10 @@
       }
     }
     .orderInfo {
+      width: 100%;
       float: right;
-      margin-right: 30px;
-      margin-top: 30px;
+      padding-right: 30px;
+      margin-top: 60px;
       padding-bottom: 10px;
       border-bottom: 1px solid #e8d6f7;
       h5,
@@ -223,7 +264,15 @@
         }
       }
       p {
-        line-height: 40px;
+        line-height: 28px;
+        text-align: right;
+      }
+      .left {
+        width: 120px;
+        text-align: right;
+      }
+      .right {
+        width: 180px;
         text-align: right;
       }
     }
@@ -262,7 +311,6 @@
     }
   }
 }
-
 .invoiceShadow {
   width: 100%;
   height: 100%;
@@ -306,7 +354,7 @@
             bottom: -1px;
             width: 24px;
             height: 24px;
-            background: url('~assets/images/ok.png') no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/ok.png') no-repeat;
             background-size: contain;
           }
         }
@@ -379,7 +427,8 @@
                 bottom: 0;
                 width: 24px;
                 height: 24px;
-                background: url('~assets/images/ok.png') no-repeat;
+                background: url('http://papn9j3ys.bkt.clouddn.com/ok.png')
+                  no-repeat;
                 background-size: contain;
               }
             }
@@ -392,7 +441,8 @@
               bottom: 0;
               width: 24px;
               height: 24px;
-              background: url('~assets/images/ok.png') no-repeat;
+              background: url('http://papn9j3ys.bkt.clouddn.com/ok.png')
+                no-repeat;
               background-size: contain;
             }
             span {

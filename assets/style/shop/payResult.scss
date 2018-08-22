@@ -13,7 +13,7 @@
 }
 
 .result {
-  width: 450px;
+  width: 520px;
   margin: 121px auto;
   padding: 0 0 145px;
   img {
@@ -75,6 +75,42 @@
       &:nth-child(2) {
         margin-left: 40px;
       }
+    }
+  }
+  .tips {
+    width: 520px;
+    margin-top: 30px;
+    height: 92px;
+    font-size: 16px;
+    color: #7f7b83;
+    padding: 16px 0;
+    background-color: #f6eefd;
+    text-align: center;
+    p {
+      line-height: 30px;
+      span {
+        color: #5b20a0;
+      }
+    }
+    .tips-one {
+      color: #7f7b83;
+    }
+    .tips-two {
+      color: #333;
+    }
+  }
+  .sure {
+    text-align: center;
+    margin-top: 30px;
+    span {
+      width: 150px;
+      height: 40px;
+      cursor: pointer;
+      line-height: 40px;
+      text-align: center;
+      color: #fff;
+      background: rgba(91, 32, 160, 1);
+      border-radius: 6px;
     }
   }
 }

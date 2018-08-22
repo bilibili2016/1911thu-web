@@ -4,29 +4,12 @@
       <!-- 面包屑 收藏分享 -->
       <div class="main-crumb">
         <div class="fl">
-          <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
-            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>课程详情</el-breadcrumb-item>
-          </el-breadcrumb>
+          <!-- 面包屑组件 -->
+          <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
         </div>
         <div class="fr">
-          <div class="collect">
-            <div class="line-center">
-              <span @click="collection" :class=" { bag: collectMsg === 1}">
-                <i class="el-icon-star-on"></i>
-                <!-- {{isCollection}} -->
-                <span>收藏 </span>
-              </span>
-              <!-- 分享暂时注释 -->
-              <!-- <span>
-                <i class="el-icon-share"></i>
-                <span> 分享 </span>
-                <div class="shareIcons">
-                  <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
-                </div>
-              </span> -->
-            </div>
-          </div>
+          <!-- 收藏分享 -->
+          <v-collection :collectData="collectMsg"></v-collection>
         </div>
       </div>
       <!-- 顶部的card -->
@@ -35,134 +18,69 @@
       </div>
       <!-- 左侧的课程目录和介绍 -->
       <div class="content fl">
-        <el-tabs v-model="activeName">
-          <el-tab-pane label="介绍" name="first">
-            <div class="detail descript" v-html="courseList.content" v-loading="loadMsg"></div>
-          </el-tab-pane>
-          <el-tab-pane label="目录" name="second">
-            <v-line :catalogs="catalogs" :privileMsg="privileMsg"></v-line>
-          </el-tab-pane>
-        </el-tabs>
+        <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config"></v-coursecatelog>
       </div>
+
       <div style="width:345px" class="fr">
         <!-- 讲师介绍 -->
-        <div class="teacher" v-loading="loadTeacher">
-          <h4>讲师介绍</h4>
-          <div class="personal clearfix">
-            <img class="fl" :src="courseList.head_img" alt="" @click="goTeacherInfo(courseList.teacher_id)">
-            <div class="fl">
-              <h5 @click="goTeacherInfo(courseList.teacher_id)">{{courseList.teacher_name}}</h5>
-              <h6>{{courseList.graduate}}</h6>
-            </div>
-            <p>{{courseList.teacher_content}}</p>
-
-          </div>
-        </div>
-        <!-- 课程评价 -->
-        <!-- v-show="courseList.is_study != 0 && courseList.is_evaluate==0 " -->
-        <!-- 已经学习（1） -->
-        <!-- {{courseList.is_study}} == {{courseList.is_evaluate}} -->
-        <div class="evaluate-tag" v-show="courseList.is_study != 0 && courseList.is_evaluate==0 ">
-          <h4>课程评价</h4>
-          <div class="personal">
-            <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
-            <span class="rate">课程评分:</span>
-            <span class="ratem">
-              <el-rate v-model="rateModel" @change="changeRate"></el-rate>
-            </span>
-            <div class="bthgrop">
-              <span>
-                <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
-                  {{item.value}}
-                </div>
-                <input type="text">
-              </span>
-            </div>
-            <div class="area">
-              <el-input type="textarea" :rows="3" placeholder="其它想说的" v-model="textarea" maxlength="100">
-              </el-input>
-            </div>
-            <div class="submit">
-              <el-button type="primary" @click="addEvaluate()">提交</el-button>
-            </div>
-          </div>
-        </div>
-        <!-- 课程评价的弹窗 -->
-        <div class="evaluate-tag shadow" v-show="dialogVisible">
-          <div class="personal">
-            <!-- 弹窗 -->
-            <el-dialog title="课程评价" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-              <div v-loading="loadMsg" class="topDiv">
-                <div v-for="(item,index) in commentator" :key="index" class="dialog-line">
-                  <div class="commentator clearfix">
-                    <img class="fl" :src="item.head_img" alt="">
-                    <div class="fl">
-                      <p style="margin:5px 0 8px;">{{item.nick_name}}</p>
-                      <p class="time">{{item.create_time}}</p>
-                    </div>
-                    <div class="rates">
-                      <el-rate disabled v-model="item.score" class="itemBox-rate fl"></el-rate>
-                    </div>
-                    <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
-                    <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="pagination course-style">
-                <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handleCurrentChange"></el-pagination>
-              </div>
-            </el-dialog>
-          </div>
-        </div>
+        <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
+        <!-- 课程评价-->
+        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
+        <!-- 用户评价  查看更多 -->
+        <v-evaluatedialog :evaluateLoading="evaluateLoading" :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
         <!-- 用户评论 列表-->
-        <div class="evaluate" v-loading="loadEvaluate">
-          <h4>用户评价
-            <span v-if="pageCount>3" @click="getMore">查看更多></span>
-          </h4>
-          <div v-loading="loadMsg">
-            <div class="score">
-              <span class="fl">{{totalEvaluateInfo.totalScore}}</span>
-              <el-rate disabled v-model="sumUserStart" class="itemBox-rate fl"></el-rate>
-              <span class="fr">{{totalEvaluateInfo.totalEvaluate}}人评价 好评度{{totalEvaluateInfo.evaluatePercent}}%</span>
-            </div>
-            <div class="commentator clearfix" v-for="(item,index) in commentators" :key="index" v-if="index<3">
-              <img class="fl" :src="item.head_img" alt="">
-              <div class="fl">
-                <p style="margin:3px 0 8px;">{{item.nick_name}}</p>
-                <p class="time">{{item.create_time}}</p>
-              </div>
-              <div style="margin-top:10px;">
-                <el-rate disabled v-model="item.score" class="itemBox-rate fr"></el-rate>
-              </div>
-              <h5 v-if="item.tags ===''">{{item.evaluate_content}}</h5>
-              <h5 v-else-if="item.evaluate_content===''">{{item.tags}}</h5>
-              <h5 v-else>{{item.tags}}，{{item.evaluate_content}}</h5>
-            </div>
-          </div>
-        </div>
+        <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
       </div>
     </div>
+    <v-pay @closePay="closePayed"></v-pay>
+    <v-backtop :data="showCheckedCourse"></v-backtop>
   </div>
 </template>
 
 <script>
-import CustomCard from '@/components/common/Card.vue'
-import CustomLine from '@/components/common/Line.vue'
-import { coursedetail, home } from '~/lib/v1_sdk/index'
+import CustomCard from '@/pages/course/components/Card.vue'
+import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray } from '@/lib/util/helper'
+import { uniqueArray, splitUrl } from '@/lib/util/helper'
+import BackToTop from '@/components/common/BackToTop.vue'
+import Pay from '@/components/common/Pay.vue'
+import EvaluateContent from '@/components/common/EvaluateContent.vue'
+import EvaluateCase from '@/components/common/EvaluateCase.vue'
+import BreadCrumb from '@/components/common/BreadCrumb.vue'
+import TeacherIntro from '@/pages/course/coursedetail/teacherIntro.vue'
+import Collection from '@/components/common/Collection.vue'
+import UserEvaluate from '@/pages/course/coursedetail/UserEvaluate.vue'
+import EvaluateDialog from '@/pages/course/coursedetail/EvaluateDialog.vue'
+import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
 export default {
   computed: {
-    ...mapGetters('auth', ['isAuthenticated']),
-    ...mapState('auth', ['kid', 'isCollection'])
+    ...mapGetters('auth', ['isAuthenticated'])
+    // ...mapState('auth', ['kid', 'isCollection'])
   },
   components: {
+    'v-backtop': BackToTop,
+    'v-pay': Pay,
     'v-card': CustomCard,
-    'v-line': CustomLine
+    'v-evaluate': EvaluateContent,
+    'v-evaluatecase': EvaluateCase,
+    'v-breadcrumb': BreadCrumb,
+    'v-teacherintro': TeacherIntro,
+    'v-collection': Collection,
+    'v-userevaluate': UserEvaluate,
+    'v-evaluatedialog': EvaluateDialog,
+    'v-coursecatelog': CourseCatalog
   },
   data() {
     return {
+      evaluateLoading: true,
+      BreadCrumb: {
+        type: 'courseDetail',
+        position: false, //是否显示当前位置
+        text: '课程详情'
+      },
+      isClose: false, //评论组件是否有关闭按钮
+      showCheckedCourse: false,
       activeName: 'second',
       dialogVisible: false,
       textarea: '',
@@ -175,7 +93,7 @@ export default {
       commentators: [],
       pageCount: null,
       config: {
-        card_type: 'goodplay'
+        card_type: 'course'
       },
       courseList: {},
       kidForm: {
@@ -189,9 +107,13 @@ export default {
         isRecommend: ''
       },
       privileMsg: true,
-      collectMsg: 2,
+      collectMsg: {
+        types: 1,
+        isCollect: 0
+      },
       addCollectionForm: {
-        curriculumId: null
+        curriculumId: null,
+        types: 1
       },
       getdefaultForm: {
         curriculumid: ''
@@ -221,9 +143,6 @@ export default {
         totalScore: null
       },
       defaultCatalogId: '',
-      tidForm: {
-        tids: ''
-      },
       tagGroup: '',
       reTagBtn: [],
       configShare: {
@@ -231,28 +150,38 @@ export default {
         sites: ['qzone', 'qq', 'weibo', 'wechat'],
         source: 'http://www.1911edu.com/'
       },
-      sumUserStart: null
+      sumUserStart: 0
+    }
+  },
+  watch: {
+    $route(to, from) {
+      // if (from.query.key) {
+      //   if (to.query.key > from.query.key) {
+      //     this.transitionName = 'slide-fade'
+      //   } else {
+      //     this.transitionName = 'slide-left'
+      //   }
+      // } else {
+      //   this.transitionName = 'slide-fade'
+      // }
     }
   },
   methods: {
-    ...mapActions('auth', ['setTid', 'setIsCollection']),
-    // 跳转老师详情页面
-    goTeacherInfo(id) {
-      this.tidForm.tids = id * 1
-      this.setTid(this.tidForm)
-      window.open(window.location.origin + '/home/components/teacher')
+    ...mapActions('auth', ['setIsCollection']),
+    // 跳转老师详情
+    handleLinkTeacher(item) {
+      window.open(window.location.origin + '/home/teacher/' + item)
     },
-    //标签-获取课程标签列表
+    //标签 - 获取课程标签列表
     getEvaluateTags() {
       coursedetail.getEvaluateTags().then(response => {
         this.tagGroup = response.data.evaluateTags
-
         this.btnDatas = response.data.evaluateTags
-        this.changeRate('5')
+        this.handleChangeRate('5')
       })
     },
-    // 标签-点击评价改变星级
-    changeRate(val) {
+    // 标签 - 点击评价改变星级
+    handleChangeRate(val) {
       this.reTagBtn = []
       this.tagGroup[val].map((item, i) => {
         let obj = new Object()
@@ -264,7 +193,7 @@ export default {
       this.btnData = this.reTagBtn
       this.addEvaluateForm.tag = []
     },
-    // 标签-点击获取标签内容
+    // 标签 - 点击获取标签内容
     getBtnContent(val, index) {
       if (val.isCheck === true) {
         this.$set(val, 'isCheck', false)
@@ -276,12 +205,14 @@ export default {
       } else {
         this.$set(val, 'isCheck', true)
         this.addEvaluateForm.tag.push(val.value)
-        this.addEvaluateForm.tag = this.unique(this.addEvaluateForm.tag)
+        this.addEvaluateForm.tag = this.uniqueArray(this.addEvaluateForm.tag)
       }
     },
     // 评论-提交评论接口
     addEvaluate() {
-      this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      // this.addEvaluateForm.ids = persistStore.get('curriculumId')
+      this.addEvaluateForm.ids = splitUrl(0, 1)
+
       if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
       } else {
@@ -338,10 +269,12 @@ export default {
       this.pagemsg.page = val
       this.evaluateListForm.pages = val
       this.evaluateListForm.limits = 3
-      this.evaluateListForm.ids = persistStore.get('curriculumId')
-
+      // this.evaluateListForm.ids = persistStore.get('curriculumId')
+      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.evaluateLoading = true
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
         this.loadMsg = false
+        this.evaluateLoading = false
         this.pagemsg.total = response.data.pageCount
         this.commentator = response.data.evaluateList
       })
@@ -349,7 +282,9 @@ export default {
     // 评论-获取评论列表
     getEvaluateList() {
       this.loadEvaluate = true
-      this.evaluateListForm.ids = persistStore.get('curriculumId')
+      // this.evaluateListForm.ids = persistStore.get('curriculumId')
+      this.evaluateListForm.ids = splitUrl(0, 1)
+
       return new Promise((resolve, reject) => {
         coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
@@ -357,6 +292,7 @@ export default {
           this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
           this.commentators = response.data.evaluateList
+
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           let totalEvaluateInfo = response.data.totalEvaluateInfo
           this.sumUserStart = Number(totalEvaluateInfo.totalScore)
@@ -366,26 +302,30 @@ export default {
     },
     // 评论-关闭查看更多-评论弹框
     handleClose(done) {
-      done()
+      this.dialogVisible = false
     },
     // 课程-获取课程详情
     getCourseDetail() {
       this.loadTeacher = true
-      this.kidForm.ids = persistStore.get('curriculumId')
+      // this.kidForm.ids = persistStore.get('curriculumId')
+      this.kidForm.ids = splitUrl(0, 1)
 
       coursedetail.getCourseDetail(this.kidForm).then(response => {
         this.loadMsg = false
         this.courseList = response.data.curriculumDetail
-        persistStore.set('curriculumId', response.data.curriculumDetail.id)
+        // persistStore.set('curriculumId', response.data.curriculumDetail.id)
         this.privileMsg = response.data.curriculumPrivilege
+
         this.content = response.data.curriculumPrivilege
         this.loadTeacher = false
-        this.collectMsg = response.data.curriculumDetail.is_collection
+        this.collectMsg.isCollect = response.data.curriculumDetail.is_collection
       })
     },
     // 课程-获取课程列表
     getCourseList() {
-      this.kidForm.ids = persistStore.get('curriculumId')
+      // this.kidForm.ids = persistStore.get('curriculumId')
+      this.kidForm.ids = splitUrl(0, 1)
+
       coursedetail.getCourseList(this.kidForm).then(response => {
         this.catalogs = response.data.curriculumCatalogList
         for (let item of this.catalogs) {
@@ -398,56 +338,22 @@ export default {
     },
     // 课程-获取默认播放信息
     getdefaultCurriculumCatalog() {
-      this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
+      // this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
+      this.getdefaultForm.curriculumid = splitUrl(0, 1)
+
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {
-          persistStore.set(
-            'catalogId',
-            response.data.defaultCurriculumCatalog.id
+          this.$router.replace(
+            '/course/coursedetail' +
+              '?kid=' +
+              splitUrl(0, 1) +
+              '&bid=' +
+              response.data.defaultCurriculumCatalog.id +
+              '&page=' +
+              splitUrl(1, 1)
           )
         })
-    },
-    // 收藏-判断是收藏还是未收藏
-    collection() {
-      if (this.isAuthenticated) {
-        if (this.collectMsg === 1) {
-          this.deleteCollection()
-          this.collectMsg = 2
-        } else {
-          this.addCollection()
-          this.collectMsg = 1
-        }
-      } else {
-        this.$bus.$emit('loginShow', true)
-      }
-    },
-    // 收藏-添加收藏
-    addCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      return new Promise((resolve, reject) => {
-        coursedetail.addCollection(this.addCollectionForm).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '添加收藏成功'
-          })
-          this.collectMsg = 1
-        })
-      })
-    },
-    // 收藏-删除收藏
-    deleteCollection() {
-      this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
-      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
-        this.collectMsg = response.data.curriculumDetail.is_collection
-        this.$message({
-          showClose: true,
-          type: 'success',
-          message: '取消收藏成功'
-        })
-        this.collectMsg = 0
-      })
     },
     // 分享 默认设置
     // shareDefault() {
@@ -458,11 +364,21 @@ export default {
     // },
     // 初始化默认data
     initData() {
-      this.kidForm.ids = this.kid
-      this.evaluateListForm.ids = this.kid
-      this.activeName = 'first'
-      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+      // this.kidForm.ids = this.kid
+      //  this.evaluateListForm.ids = this.kid
+      this.kidForm.ids = splitUrl(0, 1)
+      this.evaluateListForm.ids = splitUrl(0, 1)
+
+      this.activeName = 'second'
+    },
+    //评论之后的回调
+    cbList() {
+      this.getCourseDetail()
+      this.getEvaluateList()
+    },
+    // 支付弹框关闭的回调
+    closePayed() {
+      this.$bus.$emit('closePayed')
     },
     //拉取服务器数据 初始化所有方法
     initAll() {
@@ -472,37 +388,24 @@ export default {
       this.getEvaluateList()
       this.getCourseList()
       this.getdefaultCurriculumCatalog()
-      this.getEvaluateTags()
+      // 获取 评论列表
+      // this.getEvaluateTags() //已提取到评论组件中调用
     }
   },
   mounted() {
     this.initAll()
+  },
+  watch: {
+    //在当前页面进行登录操作更新状态
+    isAuthenticated(val) {
+      this.getCourseDetail()
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    // this.$bus.$emit('headerFooterShow')
+    next(vm => {})
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.detail {
-  span {
-    display: inline !important;
-    line-height: 40px;
-  }
-}
-.container {
-  .shareIcons {
-    .social-share {
-      width: 190px;
-      height: 94px;
-      line-height: 94px;
-      text-align: center;
-      background: rgba(255, 255, 255, 1);
-      border-radius: 4px;
-      box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-    }
-    .social-share .social-share-icon {
-      margin-right: 20px !important;
-    }
-  }
-}
-</style>
 

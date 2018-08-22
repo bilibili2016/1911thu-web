@@ -12,7 +12,8 @@ config.analyze = {
   // },
   {
     rel: 'stylesheet',
-    href: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css'
+    href:
+      'https://g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css'
   },
   {
     rel: 'stylesheet',
@@ -22,16 +23,16 @@ config.analyze = {
 ]),
   (config.head.script = [
     {
-      src: 'http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js',
+      src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
+      async: true
+    },
+    {
+      src: 'https://g.alicdn.com/de/prismplayer/2.7.2/aliplayer-h5-min.js',
       async: true
     },
     {
       src:
-        'http://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js',
-      async: true
-    },
-    {
-      src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
+        'https://player.alicdn.com/aliplayer/presentation/js/aliplayercomponents.min.js',
       async: true
     },
     {
@@ -42,16 +43,13 @@ config.analyze = {
       src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
       async: true
     },
-    // { src: 'http://pcgdozq49.bkt.clouddn.com/social-share.min.js', async: true }
     {
       src:
         'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
       async: true
     }
   ]),
-  (config.render = {
-    resourceHints: false
-  })
+  (config.render = { resourceHints: false }) // 阿里播放器样式 // 阿里播放器 // { src: 'http://pcgdozq49.bkt.clouddn.com/social-share.min.js', async: true }
 // {
 //   src:
 //     'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',

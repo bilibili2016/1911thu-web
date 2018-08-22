@@ -22,6 +22,7 @@
             </p>
             <p class="fl showTel" v-show="showTel">
               <input type="text" v-model="changeForm.tel" placeholder="请输入手机号码">
+              <i v-show="isAlertMsg">{{alertMsg}}</i>
               <span @click="againGet">获取汇款识别码</span>
             </p>
           </div>
@@ -49,7 +50,8 @@
 </template>
 
 <script>
-import { home, auth } from '@/lib/v1_sdk/index'
+import { paypublic } from '@/lib/v1_sdk/index'
+import { splitUrl } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -57,6 +59,8 @@ export default {
       showPay: false,
       showTel: false,
       code: '',
+      isAlertMsg: false,
+      alertMsg: '请输入手机号',
       changeForm: {
         tel: null
       },
@@ -73,18 +77,27 @@ export default {
   methods: {
     changeTel() {
       this.showTel = true
+      this.changeForm.tel = ''
     },
     againGet() {
+      if (this.changeForm.tel == '') {
+        this.isAlertMsg = true
+        this.alertMsg = '请输入手机号'
+        return false
+      }
       if (
         this.changeForm.tel === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.changeForm.tel)
       ) {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '手机号格式错误！'
-        })
+        // this.$message({
+        //   showClose: true,
+        //   type: 'error',
+        //   message: '手机号格式错误！'
+        // })
+        this.isAlertMsg = true
+        this.alertMsg = '手机号格式错误！'
       } else {
+        this.isAlertMsg = false
         this.payForm.phones = this.changeForm.tel
         this.showPayPublic()
       }
@@ -92,7 +105,7 @@ export default {
     showPayPublic() {
       this.showPay = false
       return new Promise((resolve, reject) => {
-        home.getPayPublicCode(this.payForm).then(res => {
+        paypublic.getPayPublicCode(this.payForm).then(res => {
           if (res.status === 0) {
             this.$message({
               showClose: true,
@@ -116,9 +129,9 @@ export default {
     },
     // 获取订单id列表
     getPayList() {
-      this.payListForm.orderId = persistStore.get('cpyid')
+      this.payListForm.orderId = splitUrl(0, 1)
       return new Promise((resolve, reject) => {
-        home.webPay(this.payListForm).then(response => {
+        paypublic.webPay(this.payListForm).then(response => {
           this.orderDetail = response.data.data.orderDetail
           this.payForm.orderId = response.data.data.orderDetail.id
           this.payForm.phones = persistStore.get('phone')
@@ -132,6 +145,3 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss">
-@import '~assets/style/shop/payPublic';
-</style>

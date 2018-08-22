@@ -1,52 +1,41 @@
 <template>
   <div class="invitation">
-    <h4>专属邀请码</h4>
     <div class="table">
-      <table :data="codeData">
-        <tr class="tr_header">
-          <th>专属邀请码</th>
-          <th>购买日期</th>
-          <th>可用个数</th>
-        </tr>
-        <tr v-for="(code,index) in codeData" :key="index" :class="number === code.use_code_number ?'noCodes tr_body':'tr_body' ">
-          <td>{{code.invitation_code}}</td>
-          <td>{{timestampToTime(code.pay_time)}}</td>
-          <td>{{code.use_code_number}}
-            <i></i>
-          </td>
-        </tr>
-      </table>
+      <div class="tr_header">
+        <span>兑换码</span>
+        <span>类型</span>
+        <span>购买日期</span>
+        <span>可用个数</span>
+        <span>剩余天数</span>
+        <span>所属订单</span>
+      </div>
+      <!-- codeData&&codeData.length> -->
+      <div v-if="codeData&&codeData.length>0" v-for="(code,index) in codeData" :key="index" :class="code.use_code_number==='0'||code.expire_days==='0'?'noCodes tr_body':'tr_body' ">
+        <span>{{code.invitation_code}}</span>
+        <span v-if="code.type==='1'">课程</span>
+        <span v-if="code.type==='2'">项目</span>
+        <span v-if="code.type==='3'">课程+项目</span>
+        <span>{{exchangeTime(code.pay_time)}}</span>
+        <span>{{code.use_code_number}}</span>
+        <span>{{code.expire_days}}</span>
+        <span class="orderNum" @click="handleMyOrder(code.id)">{{code.order_sn}}
+          <i class="efficacy" v-if="code.expire_days==='0'"></i>
+          <i class="used" v-if="code.use_code_number==='0'"></i>
+        </span>
+      </div>
+      <div v-if="!codeData||codeData.length<1" class="noCodes">
+        <img :src="noMsgImg" alt="">
+        <p>抱歉，现在还没有兑换码~</p>
+      </div>
     </div>
     <div class="rules clearfix">
-      <div class="fl">
-        <h5>邀请规则</h5>
+      <div class="rulesInfo">
+        <h5>兑换规则</h5>
         <div class="word">
-          <p>
-            <i>1、</i>每一位好友通过您分享的邀请码成功加入课程，邀请码的使用次数将减少一次；</p>
-          <p>
-            <i>2、</i>邀请码使用次数用尽，该邀请码失效；</p>
-          <p>
-            <i>3、</i>若通过不正当手段获得邀请码，1911学堂有权撤销邀请码；</p>
-        </div>
-      </div>
-      <div class="fr">
-        <h5>邀请记录</h5>
-        <div class="tables">
-          <table :data="recordData" class="recordTable">
-            <!--alternate-->
-            <tr class="tr_header">
-              <th>邀请好友</th>
-              <th>日期</th>
-            </tr>
-            <tr v-for="(code,index) in recordData" :key="index" :class="number === code.use_code_number ?'noCodes tr_body':'tr_body' ">
-              <td>{{code.user_name}}通过
-                <i>{{code.invitation_code}}</i> 加入学习</td>
-              <td>{{code.create_time}}</td>
-            </tr>
-          </table>
-          <div class="noCode" v-if="recordData.length === 0">
-            <img :src="noMsgImg" alt="">
-          </div>
+          <p>1、每一位好友通过您分享的兑换码成功加入课程，兑换码的使用次数将减少一次；</p>
+          <p>2、兑换码使用次数用尽，该兑换码失效；</p>
+          <p>3、项目兑换码，绑定之后存入我的项目，兑换码，绑定之后存入我的课程，项目+兑换码，绑定之后分别存入我的项目、我的课程；</p>
+          <p>4、若通过不正当手段获得兑换码，1911学堂有权撤销兑换码；</p>
         </div>
       </div>
     </div>
@@ -55,35 +44,34 @@
 </template>
 
 <script>
+import { timestampToYMD } from '@/lib/util/helper'
+import { mapState, mapActions, mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
 export default {
-  props: ['codeData', 'recordData'],
+  props: ['codeData'],
   data() {
     return {
       noCodes: true,
       number: '0',
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png'
+      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      gidForm: {
+        gids: ''
+      }
     }
   },
   methods: {
-    timestampToTime(timestamp) {
-      var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000
-      let Y = date.getFullYear() + '-'
-      let M =
-        (date.getMonth() + 1 < 10
-          ? '0' + (date.getMonth() + 1)
-          : date.getMonth() + 1) + '-'
-      let D =
-        (date.getDate() * 1 < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-      let h =
-        (date.getHours() * 1 < 10 ? '0' + date.getHours() : date.getHours()) +
-        ':'
-      let m =
-        (date.getMinutes() * 1 < 10
-          ? '0' + date.getMinutes()
-          : date.getMinutes()) + ':'
-      let s =
-        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
-      return Y + M + D + h + m + s
+    ...mapActions('auth', ['setGid']),
+    handleMyOrder(item) {
+      this.gidForm.gids = 'tab-fourth'
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
+      this.$bus.$emit('selectProfileIndex', 'tab-fourth')
+
+      persistStore.set('order', item)
+      this.$bus.$emit('goOrderDetaild', item)
+    },
+    exchangeTime(time) {
+      return timestampToYMD(time)
     }
   }
 }

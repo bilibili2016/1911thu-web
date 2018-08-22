@@ -17,6 +17,7 @@ xcuserdata/
 .classpath
 .tags
 jsconfig.json
+.env
 
 # OS
 .DS_Store

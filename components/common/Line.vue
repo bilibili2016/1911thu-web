@@ -1,45 +1,49 @@
 <template>
   <div class="catalog">
     <!-- {{catalogs}} -->
+    <!-- 遍历章节 -->
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
       <h4>{{catalog.title}} </h4>
       <!-- {{privileMsg}} -->
       <!-- {{privileMsg}}  1{{isAuthenticated}} -->
-      <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index">
-        <!-- {{bar}} -->
-        <span class="fl playIcon">
+      <!-- 遍历小节 -->
+      <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="handleCatalog(index,catalog)">
+        <!-- 小节上 左侧播放图片 项目中的 课程详情不展示-->
+        <span class="fl playIcon" v-if="config.card_type!=='project'">
           <i class="el-icon-caret-right"></i>
         </span>
-        <!-- {{bar}} -->
-        <p @click="handleCatalog(index,catalog)">
-          <span class="fl barName">{{bar.video_number}}{{bar.title}}({{bar.video_time}}分钟)</span>
-          <span v-if="bar.percent === 0"></span>
-          <span v-else>
-            <!-- 课程目录进度条 -->
-            <span v-if="privileMsg === true">
+
+        <p>
+          <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{bar.video_time}}分钟)</span>
+          <!-- 用户已购买 并且进度大于零 -->
+          <span v-if="privileMsg === true">
+            <span v-if="bar.percent > 0&&config.card_type!=='project'">
+              <!-- 课程目录进度条 -->
               <el-progress :percentage="bar.percent" :show-text="false"></el-progress>
             </span>
+          </span>
+          <!-- 用户 登录 -->
+          <!-- 项目 中课程详情 不显示按钮 config.card_type!=='project'-->
+          <span v-if="config.card_type!=='project'" class="fr">
+            <span v-if="isAuthenticated" class="fr">
+              <span v-if="privileMsg === false">
+                <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
+                <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
+              </span>
+              <span v-if="privileMsg === true">
+                <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+                <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+              </span>
+            </span>
+            <span v-else class="fr clearfix">
+              <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
+              <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
+              <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
+            </span>
+          </span>
 
-          </span>
-          <!-- <span class="fl free" v-if="bar.look_at === '2'">免费</span> -->
-          <!-- {{bar}} -->
-          <span v-if="isAuthenticated" class="fr">
-            <span v-if="privileMsg === false">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
-              <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
-            </span>
-            <span v-if="privileMsg === true">
-              <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
-              <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
-            </span>
-          </span>
-          <span v-else class="fr clearfix">
-            <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
-            <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
-            <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
-          </span>
         </p>
-        <span v-if="privileMsg === true">
+        <span v-if="privileMsg === true&&config.card_type!=='project'">
           <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
         </span>
 
@@ -51,9 +55,10 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { other, auth, home } from '~/lib/v1_sdk/index'
+import { auth, line } from '~/lib/v1_sdk/index'
+import { splitUrl, message } from '~/lib/util/helper'
 export default {
-  props: ['catalogs', 'privileMsg'],
+  props: ['catalogs', 'privileMsg', 'config'],
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },
@@ -62,12 +67,18 @@ export default {
       curriculumcartids: {
         cartid: null
       },
-      percents: 50
+      move: true,
+      percents: 50,
+      playerForm: {
+        curriculumId: '',
+        catalogId: '',
+        autoplay: true
+      }
     }
   },
   methods: {
     goLink(item) {
-      this.$router.push(item)
+      // this.$router.push(item)
     },
     goBuy(item, index) {
       if (this.isAuthenticated) {
@@ -79,7 +90,7 @@ export default {
     },
     addShopCart() {
       return new Promise((resolve, reject) => {
-        home.addShopCart(this.curriculumcartids).then(response => {
+        line.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push('/shop/shoppingcart')
         })
       })
@@ -91,19 +102,43 @@ export default {
         .addClass('checked')
     },
     handleCatalog(index, item) {
-      let curriculum_id = item.childList[index].curriculum_id
-      let catalog_id = item.childList[index].id
-      let video_time = item.childList[index].second
-      persistStore.set('video_time', video_time)
-      persistStore.set('curriculumId', curriculum_id)
-      persistStore.set('catalogId', catalog_id)
+      // 是否为项目下的课程
+      if (this.config.card_type === 'project') {
+        return false
+      } else {
+        // 是否登录
+        if (!this.isAuthenticated) {
+          this.$bus.$emit('loginShow', true)
+          return false
+        }
+        // 该课程是否为未购买 且不可试看
+        if (
+          this.privileMsg === false &&
+          item.childList[index].look_at === '1'
+        ) {
+          this.curriculumcartids.cartid = item.childList[index].curriculum_id
+          this.addShopCart()
+          return false
+        }
+        let curriculum_id = item.childList[index].curriculum_id
+        let catalog_id = item.childList[index].id
+        this.$router.push(
+          '/course/coursedetail' +
+            '?kid=' +
+            splitUrl(0, 1) +
+            '&bid=' +
+            catalog_id +
+            '&page=' +
+            splitUrl(2, 1)
+        )
+        this.playerForm.curriculumId = curriculum_id
+        this.playerForm.catalogId = catalog_id
+        this.$bus.$emit('updateCourse', this.playerForm)
+        document.body.scrollTop = document.documentElement.scrollTop = 0
+      }
     },
     buyMask() {
-      this.$message({
-        showClose: true,
-        message: '请登录后,进行试看',
-        type: 'success'
-      })
+      // message(this, 'warning', '请登录后,进行学习')
       this.$bus.$emit('loginShow', true)
     }
   }
@@ -111,37 +146,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main-crumb {
-  height: 85px;
-  .main-crumbs {
-    display: inline-block;
-    line-height: 85px;
-    height: 85px;
-  }
-  .fr {
-    .collect {
-      height: 85px;
-      .line-center {
-        line-height: 85px;
-        img {
-          width: 18px;
-          height: 18px;
-          display: inline-block;
-          padding: 0px;
-          margin: 0px;
-          margin-right: 4px;
-          vertical-align: middle;
-        }
-        span {
-          font-size: 14px;
-          font-family: MicrosoftYaHei;
-          color: rgba(136, 136, 136, 1);
-          line-height: 0px;
-          display: inline;
-          padding-right: 10px;
-        }
-      }
-    }
-  }
-}
+@import '~assets/style/components/line';
 </style>

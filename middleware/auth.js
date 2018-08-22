@@ -3,16 +3,9 @@
  *
  * @param {Object} context
  */
-// export default function({ store, redirect }) {
-//   if (!store.getters['auth/isAuthenticated']) {
-//     console.log('验证了')
-//     return redirect('/')
-//   } else {
-//     console.log('没验证')
-//   }
-// }
+export default function({ store, redirect }) {}
 // console.log(store.getters['auth/isAuthenticated'])
-// console.log(window.location.pathname, '这是参数')
+
 // if(window.location.pathname === '/course/player'){
-//   this.setHsg(this.hsgForm)
+
 // }

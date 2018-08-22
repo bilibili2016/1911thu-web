@@ -6,25 +6,31 @@
     margin: 0 auto;
     .table {
       padding: 40px 0 30px;
+
       .tableHeader {
         height: 60px;
         line-height: 60px;
         background-color: #ebe7ed;
         font-size: 16px;
         color: #222;
-        margin-bottom: 40px;
+        // margin-bottom: 40px;
+        margin-bottom: 20px;
         .courseName {
           margin-left: 120px;
         }
         .price {
-          margin-left: 552px;
+          margin-left: 596px;
         }
         .operation {
-          margin-left: 140px;
+          margin-left: 126px;
         }
       }
+      // .main-table {
+
+      .select-all-course {
+        margin-bottom: 20px;
+      }
       .tableBody {
-        min-height: 500px;
         & > div {
           background-color: #fff;
           display: flex;
@@ -39,7 +45,17 @@
           .courseInfo {
             display: inline-block;
             width: 690px;
-            margin-left: 60px;
+            margin-left: 70px;
+            .project-img {
+              position: relative;
+              .pmsg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 60px;
+                height: 28px;
+              }
+            }
             img {
               width: 160px;
               height: 100px;
@@ -87,7 +103,39 @@
             cursor: pointer;
           }
         }
+        &.loseEfficacy {
+          & > div {
+            background-color: #f6f6f6;
+            box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+            .lost {
+              margin-left: 30px;
+              width: 79px;
+              height: 30px;
+              line-height: 30px;
+              text-align: center;
+              background: rgba(235, 231, 237, 1);
+              color: #222;
+              font-size: 16px;
+            }
+            .courseInfo {
+              margin-left: 30px;
+              h4,
+              h6,
+              p {
+                color: #ccc;
+              }
+            }
+            .coursePrice {
+              color: #ccc;
+            }
+          }
+        }
       }
+
+      .select-all-project {
+        margin-bottom: 20px;
+      }
+
       .pagination {
         text-align: center;
         height: 30px;
@@ -118,9 +166,9 @@
       .tips {
         width: 1100px;
         margin: 0 auto;
-        height: 50px;
+        // height: 50px;
         background-color: #fcf7d9;
-        line-height: 50px;
+        // line-height: 50px;
         margin-bottom: 20px;
         color: #fd7576;
         img {
@@ -148,53 +196,6 @@
 
         .courseNumber {
           margin-left: 47px;
-          .courseNumberInput {
-            border: 1px solid #6417a6;
-            width: 134px;
-            height: 31px;
-            background-color: #fff; // height: 34px;
-            vertical-align: middle;
-            span {
-              width: 30px;
-              height: 29px;
-              line-height: 30px;
-            }
-            .el-input {
-              height: 30px;
-            }
-            .el-input__inner {
-              height: 30px;
-              line-height: 30px;
-              padding: 0 40px;
-              background-color: transparent;
-              vertical-align: top;
-            }
-            .el-input-number__decrease,
-            .el-input-number__increase {
-              background-color: #6417a6;
-              margin-top: -1px;
-              transition: all 300ms;
-              font-size: 16px;
-              &:hover {
-                background-color: #8f4acb;
-                i {
-                  color: #fff;
-                }
-              }
-            }
-            .el-input-number__decrease {
-              margin-left: -1px;
-              border-right: 1px solid #6417a6;
-              background-color: #6417a6;
-            }
-            .el-input-number__increase {
-              margin-right: -1px;
-              border-left: 1px solid #6417a6;
-            }
-            .el-input__inner {
-              border: none !important;
-            }
-          }
           .deleteChecked {
             font-size: 16px;
             color: #222;
@@ -211,22 +212,35 @@
           }
           .number {
             vertical-align: middle;
+            // 禁止多次点击选中文本
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;
             i {
               width: 30px;
               height: 30px;
-              line-height: 30px;
+              line-height: 24px;
               text-align: center;
               float: left;
-              font-size: 20px;
-              font-weight: 700;
+              font-size: 30px;
               border: 1px solid #6417a6;
               transition: all 300ms;
               cursor: pointer;
-              &.minus:hover,
-              &.add:hover {
+              color: #6417a6;
+              &:hover {
                 background-color: #8f4acb;
                 color: #fff;
               }
+              &.add {
+                line-height: 30px;
+              }
+            }
+            input.num {
+              width: 40px;
+              height: 30px;
+              text-align: center;
+              border-top: 1px solid #6417a6;
+              border-bottom: 1px solid #6417a6;
             }
             .deleteChecked {
               font-size: 16px;
@@ -234,53 +248,21 @@
               margin-right: 47px;
               cursor: pointer;
             }
-            .el-icon-minus,
-            .el-icon-plus {
-              color: #6417a6;
-            }
             .person {
               font-size: 16px;
               color: #222;
             }
-            .number {
-              vertical-align: middle;
-              i {
-                width: 30px;
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                float: left;
-                font-size: 20px;
-                font-weight: 700;
-                border: 1px solid #6417a6;
-                transition: all 300ms;
-                cursor: pointer;
-                &.minus:hover,
-                &.add:hover {
-                  background-color: #8f4acb;
-                  color: #fff;
-                }
-              }
-              .num {
-                width: 64px;
-                height: 30px;
-                border-top: 1px solid #6417a6;
-                border-bottom: 1px solid #6417a6;
-                font-weight: 400;
-                font-size: 16px;
-                text-align: center;
-              }
-            }
           }
         }
         .allPrice {
-          width: 300px;
+          width: auto;
           height: 60px;
           line-height: 60px;
           padding-right: 30px;
           text-align: right;
           color: #ff5f5f;
           font-size: 30px;
+          margin-left: 20px;
         }
         .commitOrder .el-button {
           border: none;
@@ -305,7 +287,7 @@
         }
       }
       .el-checkbox {
-        padding-left: 41px;
+        padding-left: 50px;
         color: #222;
         font-size: 16px;
         .el-checkbox__inner {
@@ -389,5 +371,18 @@
         }
       }
     }
+  }
+}
+.el-message-box.shopcartPop {
+  width: 510px;
+  height: 240px;
+  border-radius: 10px;
+  .el-message-box__content {
+    text-align: left;
+    padding: 10px 40px 0 40px;
+  }
+  .el-message-box__btns {
+    margin-top: 40px;
+    padding-top: 0;
   }
 }

@@ -35,7 +35,6 @@
           <div class="name">
             <p>{{userInfo.nick_name}}</p>
             <p>{{userInfo.company_name}}</p>
-            <!-- <p style="color:black">{{userInfo}}</p> -->
           </div>
           <div class="time">
             <p>{{time.hour}}小时{{time.minutes}}分钟</p>
@@ -48,8 +47,11 @@
 </template>
 
 <script>
-import { home } from '~/lib/v1_sdk/index'
+// banner 组件
+// 学堂资讯组件
+import { banner } from '~/lib/v1_sdk/index'
 import { mapGetters, mapActions } from 'vuex'
+import { message } from '@/lib/util/helper'
 export default {
   props: ['bannerImg', 'config', 'isUpdate', 'isShowUpAvtor'],
   computed: {
@@ -78,6 +80,9 @@ export default {
     if (this.isAuthenticated) {
       this.getUserInfo()
     }
+    this.$bus.$on('reUserInfo', data => {
+      this.getUserInfo()
+    })
   },
   watch: {
     isUpdate(val) {
@@ -99,13 +104,9 @@ export default {
       this.fileForm.FILESS = []
       reader.onloadend = () => {
         this.fileForm.FILESS.push(reader.result)
-        home.uploadHeadImg(this.fileForm).then(response => {
+        banner.uploadHeadImg(this.fileForm).then(response => {
           this.avator = response.data.full_path
-          this.$message({
-            showClose: true,
-            message: response.msg,
-            type: 'success'
-          })
+          message(this, 'success', response.msg)
           this.$bus.$emit('changeimg', this.avator)
         })
       }
@@ -131,7 +132,7 @@ export default {
       return Y + M + D + h + m + s
     },
     getUserInfo() {
-      home.getUserInfo().then(res => {
+      banner.getUserInfo().then(res => {
         this.userInfo = res.data.userInfo
         this.time.hour = parseInt(this.userInfo.study_curriculum_time / 3600)
         this.time.minutes = parseInt(
@@ -165,74 +166,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.news-banner {
-  height: 148px;
-  overflow: hidden;
-  position: relative;
-  img {
-    // width: 1920px;
-    width: 100%;
-    height: 148px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    // left: 50%;
-    // top: 0;
-    // margin-left: -960px;
-  }
-}
-.news-list {
-  .news-banner {
-    position: relative;
-    height: 300px !important;
-    img {
-      height: 300px;
-    }
-    .newLsit-desc {
-      position: absolute;
-      top: 50px;
-      right: 200px;
-      width: 190px;
-      color: #fff;
-      text-align: right;
-      .title {
-        font-size: 46px;
-      }
-      .line {
-        width: 46px;
-        height: 4px;
-        background: rgba(255, 255, 255, 1);
-        margin: 32px 0 28px 0;
-      }
-      .small-title {
-        font-size: 33px;
-        margin-bottom: 20px;
-      }
-      .desc {
-        font-size: 20px;
-      }
-    }
-  }
-}
-.famousTeacher {
-  position: relative;
-  height: 300px !important;
-  img {
-    height: 300px;
-  }
-  .desc {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    line-height: 300px;
-    font-size: 56px;
-    color: #fff;
-    line-height: 300px;
-    text-align: center;
-  }
-}
+@import '~assets/style/components/banner';
 </style>

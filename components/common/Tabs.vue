@@ -1,35 +1,39 @@
 <template>
-  <div class="fl dropdown">
-
-    <el-dropdown>
+  <div class="fl dropdown clearfix">
+    <div class="dropItem headerClass">
       <span class="el-dropdown-link">
-        学院
+        全部课程
         <i class="el-icon-arrow-down el-icon--right"></i>
+        <span class="downLine"></span>
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for="(item,index) in categoryArr" :key="index" @click.native="handleClick(item)">{{item.category_name}}</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-
-    <el-dropdown>
+      <div class="drops">
+        <ul>
+          <li v-for="(item,index) in categoryArr" :key="index" @click="handleClick(item)">{{item.category_name}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dropItem headerClass">
       <span class="el-dropdown-link">
-        项目
+        培训项目
         <i class="el-icon-arrow-down el-icon--right"></i>
+        <span class="downLine"></span>
       </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item v-for="(item,index) in projectArr" :key="index" @click.native="handleClick(item)">{{item.category_name}}</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+      <div class="drops">
+        <ul>
+          <li v-for="(item,index) in projectArr" :key="index" @click="handleClick(item)">{{item.category_name}}</li>
+        </ul>
+      </div>
+
+    </div>
 
   </div>
 
-  </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { home, newlesson } from '~/lib/v1_sdk/index'
+import { home } from '~/lib/v1_sdk/index'
 export default {
   data() {
     return {
@@ -45,11 +49,13 @@ export default {
         cids: '',
         indexs: '',
         pids: ''
+      },
+      cgForm: {
+        cgs: null
       }
     }
   },
   methods: {
-    ...mapActions('auth', ['setCid', 'setPid', 'setKid', 'setCg', 'setPid']),
     // 获取项目以及学院列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
@@ -64,14 +70,21 @@ export default {
       })
     },
     handleClick(item, index) {
-      this.cidform.cids = item.id
-      this.cidform.indexs = index
-      this.cidform.pids = '0'
       this.$bus.$emit('collegeId', item.id)
-      window.open(window.location.origin + '/course/category')
-      this.setCid(this.cidform)
+      window.open(
+        window.location.origin +
+          '/course/category' +
+          '?cid=' +
+          item.id +
+          '&cp=' +
+          item.is_picture_show +
+          '&xid=0' +
+          '&pid=' +
+          '0'
+      )
     }
   },
+  // +'&xid=1'
   mounted() {
     this.getClassifyList()
   }
@@ -79,29 +92,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.dropdown {
-  width: 200px;
-  margin-left: 50px;
-  .item {
-    display: inline-block;
-  }
-  .el-dropdown {
-    margin-left: 38px;
-  }
-}
-.dropdown {
-  .el-dropdown-menu {
-    padding: 0px;
-  }
-  .el-dropdown-menu__item {
-    list-style: none;
-    line-height: 100px;
-    padding: 5px 30px;
-    margin: 0;
-    font-size: 14px;
-    color: #606266;
-    cursor: pointer;
-    outline: none;
-  }
-}
+@import '~assets/style/components/tabs';
 </style>

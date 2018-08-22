@@ -5,34 +5,20 @@
         <i></i>
       </div>
       <div class="companyInfo fl">
-        <span @click="goLink('first')">关于我们</span>
-        <!-- <span class="line">|</span> -->
-        <!-- <span>加入我们</span> -->
+        <span @click="handleLink('first')">关于我们</span>
       </div>
       <div class="copyright fr">
-        京ICP证 98278361836726381号 一九一一未来教育科技（北京）有限公司 版权所有
+        京ICP证 18040329号 一九一一未来教育科技（北京）有限公司 版权所有
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
-  data() {
-    return {
-      indexData: {
-        indexs: null
-      }
-    }
-  },
   methods: {
-    ...mapActions('auth', ['setIndex']),
-    goLink(num) {
-      this.indexData.indexs = num
-      this.setIndex(this.indexData)
-      // this.$router.push('/other/homeUs')
-      window.open(window.location.origin + '/other/homeUs')
+    handleLink() {
+      window.open(window.location.origin + '/other/pages/homeUs')
     }
   }
 }

@@ -25,7 +25,7 @@
     .college {
       height: 78px;
       border-bottom: 1px rgba(232, 214, 247, 1) solid;
-      &>li {
+      & > li {
         display: inline-block;
         height: 78px;
         line-height: 78px;
@@ -49,12 +49,11 @@
       }
       .title {
         font-size: 14px;
-        font-family: MicrosoftYaHei;
         color: rgba(34, 34, 34, 1);
       }
     }
     .classification {
-      &>li {
+      & > li {
         display: inline-block;
         height: 50px;
         line-height: 50px;
@@ -127,8 +126,64 @@
   position: fixed;
   top: 500px;
   left: 93%; // margin-left: 300px;
-  background: url("~assets/images/allChecked.png");
+  background: url('http://papn9j3ys.bkt.clouddn.com/allChecked.png');
   background-size: cover;
   z-index: 9;
   cursor: pointer;
+}
+
+.classList {
+  width: 1272px;
+  margin: 0 auto;
+  position: fixed;
+  top: 190px;
+  left: 50%;
+  margin-left: -636px;
+  z-index: 1;
+  ul {
+    width: 95px;
+    border-radius: 6px;
+    background-color: #6417a6;
+    color: #fff;
+    font-size: 14px;
+    position: absolute;
+    left: -20px;
+    top: 0;
+    text-align: center;
+    overflow: hidden;
+    li {
+      height: 76px;
+      line-height: 76px;
+      cursor: pointer;
+      transition: all 300ms;
+      span {
+        width: 100%;
+        height: 100%;
+        padding: 0 5px;
+        &.checked {
+          background-color: #8f4acb;
+        }
+      }
+      &:hover {
+        color: #fafafa;
+      }
+      &:nth-child(2) {
+        line-height: 76px;
+      }
+      &:nth-child(3) {
+        line-height: 76px;
+      }
+    }
+  }
+}
+.noMsg {
+  min-height: 500px;
+}
+
+.btnBg {
+  .el-button {
+    background-color: rgba(143, 74, 203, 1);
+    color: #fff;
+    border: none;
+  }
 }

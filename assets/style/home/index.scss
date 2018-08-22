@@ -1,9 +1,15 @@
-@import './evaluate';
-@import './famous';
-@import './info';
-@import './partner';
+// @import './evaluate';
+@import './famous'; //名师智库
+@import './info'; //学堂资讯
+// @import './partner';
 @import './banner';
 @import './backtotop';
-// @import './hrEntry';
-@import './teacher';
-@import './hrEntryNew';
+// @import './forgotpassword'; //忘记密码
+@import './free'; //免费专区
+@import './carousel';
+@import './classic';
+@import './new';
+@import './newcourse';
+@import './teacher'; //教师详情
+
+@import '../project/shortList';

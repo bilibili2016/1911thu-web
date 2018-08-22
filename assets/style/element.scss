@@ -4,23 +4,33 @@
 
 /* Button */
 
+html {
+  font-family: Arial, '微软雅黑';
+}
 .el-button--large {
   padding: $--button-large-padding-vertical $--button-large-padding-horizontal;
   font-size: $--button-large-font-size;
   border-radius: $--button-large-border-radius;
 }
 
-.el-button+.el-button {
+.el-button + .el-button {
   margin: 0 10px;
 }
 
-.el-button+.el-dropdown {
+.el-button + .el-dropdown {
   margin: 0 10px;
 }
 
 // 重置鼠标悬浮输入框时鼠标状态
 .el-input__inner {
   cursor: auto !important;
+}
+//头部
+.dropdown {
+  .el-dropdown {
+    font-size: 16px;
+    color: #222;
+  }
 }
 
 /* Menu */
@@ -659,11 +669,31 @@
 
 // 播放页 弹框
 .el-message-box__wrapper {
+  .el-message-box__headerbtn {
+    display: none;
+  }
+  .el-message-box__btns {
+    padding-top: 20px;
+  }
   .el-button--default {
     border-radius: 6px;
+    width: 150px;
+    height: 40px;
+    background-color: #ddd;
+    &:hover {
+      color: #606266;
+      border-color: #ddd;
+    }
+    &.el-button--primary:hover {
+      color: #fff;
+    }
   }
   .el-message-box__btns button:nth-child(2) {
     margin-left: 40px;
+    &:hover {
+      color: #fff;
+      background-color: #8f4acb;
+    }
   }
   .el-button--primary {
     background-color: #6417a6;
@@ -854,7 +884,7 @@
   .el-tabs__nav {
     width: 100%;
   }
-  &>div>div.el-tabs__content {
+  & > div > div.el-tabs__content {
     box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     border-radius: 6px;
   }
@@ -908,10 +938,10 @@
       box-shadow: none;
     }
   }
-  &>.el-tabs {
+  & > .el-tabs {
     padding: 10px;
   }
-  &>.el-tabs--left,
+  & > .el-tabs--left,
   .el-tabs--right {
     overflow: auto;
   }
@@ -967,7 +997,6 @@
     .el-tabs__item.is-active {
       background: #fff;
       font-size: 16px;
-      font-family: MicrosoftYaHei;
       color: rgba(154, 92, 208, 1); // padding: 4px 20px 4px 20px;
       border-bottom: 2px solid #6417a6;
     }
@@ -992,16 +1021,21 @@
     #pane-orderFour {
       padding: 0;
     }
-    &#pane-tab-third {
+    &#pane-tab-fourth,
+    &#pane-tab-eighth {
       .el-card.is-always-shadow {
         background-color: transparent;
         box-shadow: none !important;
       }
-      .el-tabs__content {
-        background-color: #fafafa;
-      }
+      // .el-tabs__content {
+      //   background-color: #fafafa;
+      // }
     }
   }
+}
+// 头部分类切换-鼠标悬浮小手状态
+.el-dropdown-link {
+  cursor: pointer;
 }
 
 // 设置card 的goodLesson 左边的大小
@@ -1050,7 +1084,7 @@
         position: relative;
         overflow: hidden;
       }
-      .el-radio__input.is-checked+.el-radio__label {
+      .el-radio__input.is-checked + .el-radio__label {
         background-color: #8f4acb;
         color: #fff;
         border: none;
@@ -1068,6 +1102,7 @@
     height: 30px;
     border-radius: 50%;
     border: none;
+    z-index: 20;
     background-color: rgba(255, 255, 255, 0.6);
     &:after {
       height: 12px;
@@ -1118,12 +1153,11 @@
   .el-dialog__title {
     line-height: 24px;
     font-size: 16px;
-    font-family: MicrosoftYaHei;
     color: rgba(34, 34, 34, 1);
   }
   .el-dialog__body {
     padding: 0px 20px;
-    &>div {
+    & > div {
       // height: 450px;
       overflow: hidden;
     }
@@ -1354,30 +1388,6 @@ input:-webkit-autofill {
   }
 }
 
-// 邀请码弹窗
-.invitationCodeBox {
-  .el-dialog--center {
-    width: 360px !important;
-    height: 170px;
-    margin-top: 35vh !important;
-    border-radius: 6px;
-    .el-dialog__body {
-      padding: 17px 20px 19px;
-    }
-    .el-button--primary {
-      border-radius: 5px;
-    }
-    .el-button {
-      padding: 12px 61px;
-    }
-    .text {
-      font-size: 16px;
-      text-align: center;
-      display: block;
-    }
-  }
-}
-
 //课程详情
 .courseDetail {
   .main-header .card .courseList .course .el-card.is-always-shadow {
@@ -1413,7 +1423,8 @@ input:-webkit-autofill {
   width: 130px;
 }
 
-.dropdown {}
+.dropdown {
+}
 
 .el-dropdown-menu {
   padding: 0px !important;
@@ -1434,10 +1445,63 @@ input:-webkit-autofill {
   font-size: 14px;
   color: #606266;
   cursor: pointer;
-  outline: none; // position: absolute;
+  outline: none;
+  transition: all 300ms;
   &:hover {
-    background-color: #9947e2 !important;
-    color: #fff !important;
+    background-color: #dddddd !important;
+    color: #6417a6 !important;
     width: 100%;
+  }
+}
+// 项目详情 projectDetail
+.projectDetail {
+  .headerL {
+    .main-crumbs {
+      display: inline-block;
+      .el-breadcrumb__inner {
+        color: #999;
+      }
+      .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+        color: #999 !important;
+      }
+    }
+  } // tab切换
+  .proTab {
+    .el-tabs__header {
+      padding-left: 10px;
+      .el-tabs__nav-wrap {
+        &::after {
+          height: 0; // display: none;
+        }
+        .el-tabs__nav {
+          .el-tabs__active-bar {
+            display: none;
+          }
+          .el-tabs__item {
+            height: 44px;
+            line-height: 44px;
+            padding: 0;
+            margin-right: 60px;
+            &.is-active {
+              background-color: transparent;
+              border-bottom: 2px solid #69189f;
+            }
+          }
+        }
+      }
+    }
+    .el-tabs__content {
+      overflow: inherit;
+    }
+  }
+}
+
+input::-webkit-input-safebox-button {
+  display: none;
+}
+
+.home {
+  .index-project {
+    min-height: 510px;
   }
 }

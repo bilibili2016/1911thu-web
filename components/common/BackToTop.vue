@@ -17,16 +17,15 @@
     </transition>
     <transition :name="transitionName">
       <!-- <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=1060962187"> -->
-      <a href="http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes">
-        <div class="back-to-ceiling hasColor customStyleFour" v-show="visible">
+      <!-- <a href="http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes"> -->
+      <div class="back-to-ceiling hasColor customStyleFour" v-show="visible" @click="handleopen">
 
-          <span></span>
-          <div class="telShow">
-            <p>点击咨询在线qq</p>
-
-          </div>
+        <span></span>
+        <div class="telShow">
+          <p>点击咨询在线qq</p>
         </div>
-      </a>
+      </div>
+      <!-- </a> -->
     </transition>
     <transition :name="transitionName">
       <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
@@ -41,27 +40,20 @@
       <div class="back-to-ceiling customStyleThree" v-show="true" @click="checkCourse">
 
         <div class="line-wrap">
-          <img src="@/assets/images/chooseCourse-icon.gif" alt="">
+          <img src="http://papn9j3ys.bkt.clouddn.com/chooseCourse-icon.gif" alt="">
           <!-- <div class="line-centerd">
             <span>我要选课</span>
           </div> -->
         </div>
       </div>
     </transition>
-    <div>
-      <v-unlogged v-if="showNotLogin" @showTips='showTips'></v-unlogged>
-    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import CustomUnlogged from '@/components/common/Unlogged.vue'
 /* eslint-disable */
 export default {
-  components: {
-    'v-unlogged': CustomUnlogged
-  },
   props: [
     // {
     //   visibilityHeight: {
@@ -91,7 +83,7 @@ export default {
       ceilSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop11.png',
       wxSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
       qqSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
-      topSrc: require('@/assets/images/home_backtop03.png')
+      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png'
     }
   },
   mounted() {
@@ -107,7 +99,6 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
-    ...mapActions('auth', ['setIsShowTip']),
     handleScroll() {
       this.visible = window.pageYOffset > this.visibilityHeight
       // this.visible = true
@@ -117,7 +108,20 @@ export default {
     },
     checkCourse() {
       if (this.isAuthenticated) {
-        this.goLink('/course/chooselesson')
+        // this.goLink('/course/chooselesson')
+        // 整合后的跳转
+
+        window.open(
+          window.location.origin +
+            '/course/category' +
+            '?cid=' +
+            '0' +
+            '&cp=' +
+            '0' +
+            '&xid=1' +
+            '&pids=' +
+            '0'
+        )
         // this.showNotLogin = false
       } else {
         // this.showNotLogin = true
@@ -150,6 +154,9 @@ export default {
     easeInOutQuad(t, b, c, d) {
       if ((t /= d / 2) < 1) return c / 2 * t * t + b
       return -c / 2 * (--t * (t - 2) - 1) + b
+    },
+    handleopen() {
+      window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')
     }
   }
 }

@@ -9,9 +9,7 @@
 <script>
 export default {
   props: ['pagemsg'],
-  mounted() {
-    // console.log(this.pagemsg)
-  },
+  mounted() {},
   methods: {
     handlePageChange(val) {
       this.$emit('handlePageChange', val)
@@ -25,12 +23,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.center {
-  width: 1100px;
-  margin: 0 auto;
-  .pagination {
-    text-align: center;
-    margin: 77px 0px 127px 0px;
-  }
-}
+@import '~assets/style/components/pagination';
 </style>

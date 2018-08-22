@@ -2,87 +2,87 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-tab :items="items" :classify="classify" :courses="courses"></v-tab>
-      <!-- <v-project :dingData="dingData" :config="ding"></v-project> -->
+      <v-carousel :items="items" :config="configCarousel"></v-carousel>
       <!-- 最新项目 -->
-      <v-newp :newData="newData" :titleTwo="titleEight" :linkone="linkone"></v-newp>
-      <!-- 最新课程 -->
-      <v-new :config="configOne" :newData="newData" :titleTwo="titleTwo" :linkone="linkone"></v-new>
-      <!-- 精品好课 -->
-      <v-classic :classicData="classicData" :titleThree="titleThree" :linktwo="linktwo"></v-classic>
+      <v-course :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" style="background-color:#fff" class="index-project"></v-course>
       <!-- 免费专区 -->
-      <v-free :config="configZero" :freeData="freeData" :titleOne="titleOne" :linkzero="linkzero"></v-free>
+      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="freeCourse index-free"></v-course>
+      <!-- 最新课程 -->
+      <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse" class="index-course"></v-course>
+      <!-- 精品好课 -->
+      <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse"></v-course>
+      <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
       <!-- 名师智库 -->
-      <v-famous :teachers="teachers" :titleFore="titleFore" :linkSeven="linkSeven"></v-famous>
-      <!-- <v-teacherresource :teacherResource="teacherResource" :titleSix="titleSix"></v-teacherresource> -->
-
+      <!-- <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous> -->
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
-      <!-- 用户评价 -->
-      <!-- <v-evaluate :titleFour="titleFour" :evaluateData="evaluateData"></v-evaluate> -->
       <!-- 学堂资讯 -->
-      <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :titleFive="titleFive" :linkfour="linkfours" :linkfive="linkfive"></v-info>
-      <!-- 合作伙伴 -->
-      <!-- <v-partner :data="partnerList.list"></v-partner> -->
+      <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new"></v-info>
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>
 </template>
 
 <script>
-import teacherResource from '@/pages/home/components/teacherResource.vue'
-import Tab from '@/pages/home/components/tab.vue'
-import Project from '@/pages/home/components/project.vue'
-import Free from '@/pages/home/components/free.vue'
-import New from '@/pages/home/components/new.vue'
-import Newp from '@/pages/home/components/newcourse.vue'
-import Classic from '@/pages/home/components/classic.vue'
-import Famous from '@/pages/home/components/famous.vue'
-import Evaluate from '@/pages/home/components/evaluate.vue'
-import Info from '@/pages/home/components/info.vue'
-import Partner from '@/pages/home/components/partner.vue'
+import Carousel from '@/components/common/Carousel.vue'
+
+// import Famous from '@/pages/home/teacher/famous.vue'
+import Info from '@/pages/home/news/info.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
-import { store as persistStore } from '~/lib/core/store'
-import { mapState, mapActions, mapGetters } from 'vuex'
-import { home, newlesson } from '~/lib/v1_sdk/index'
+import HomeCourse from '@/pages/home/components/homecourse.vue'
+import { mapState, mapActions } from 'vuex'
+import { home, news } from '~/lib/v1_sdk/index'
 export default {
   components: {
-    'v-partner': Partner,
+    'v-carousel': Carousel,
+    // 'v-famous': Famous,
     'v-info': Info,
-    'v-evaluate': Evaluate,
-    'v-famous': Famous,
-    'v-classic': Classic,
-    'v-free': Free,
-    'v-newp': Newp,
-    'v-new': New,
-    'v-tab': Tab,
-    'v-project': Project,
     'v-backtotop': BackToTop,
-    'v-teacherresource': teacherResource
+    'v-course': HomeCourse
   },
   data() {
     return {
-      linkzero: '/course/freelesson',
-      linkone: '/course/newlesson',
-      linktwo: '/course/qualitylesson',
-      linkfours: '/news/list',
-      linkfive: '/news/detail',
-      linkSix: '/home/components/teacher',
-      linkSeven: '/famous/list',
+      projectLoading: true,
+      windowWidth: '',
+      // linknewproject: '/course/' + '0' + '?type=' + '1' + '&xid=0',
+      linknewproject: '/course/list/0',
+      newprojecttitle: '最新项目',
+      linknewcourse: '/course/list/1',
+      newcoursetitle: '最新课程',
+      linkclassiccourse: '/course/list/2',
+      classiccoursetitle: '精品好课',
+      linkfreecourse: '/course/list/3',
+      freecoursetitle: '免费专区',
+      linkfamouscourse: '/teacher/list',
+      famoustitle: '名师智库',
+      infotitle: '学堂资讯',
+      linkinfo: '/home/news/list',
       freeData: [],
       newData: [],
       classicData: [],
+      projectData: [],
       showCheckedCourse: false,
+      configCarousel: {
+        carousel: 'home'
+      },
       configZero: {
         card_type: 'profile',
-        card: 'home',
         new: 'false',
-        free: 'true'
+        free: 'true',
+        home_type: 'cardone'
       },
       configOne: {
         card_type: 'profile',
-        card: 'home',
-        new: 'true'
+        new: 'true',
+        home_type: 'cardone'
+      },
+      classicConfig: {
+        card_type: 'classic',
+        home_type: 'cardthree'
+      },
+      projectConfig: {
+        card_type: 'project',
+        home_type: 'cardtwo'
       },
       infoOne: {
         card_type: 'infoOne'
@@ -90,13 +90,7 @@ export default {
       infoTwo: {
         card_type: 'infoTwo'
       },
-      titleOne: '免费专区',
-      titleTwo: '最新课程',
-      titleThree: '精品好课',
-      titleFore: '名师智库',
-      titleFour: '用户评价',
-      titleFive: '学堂资讯',
-      titleEight: '最新项目',
+
       partnerList: {
         list: [],
         pages: 1,
@@ -110,29 +104,7 @@ export default {
       ding: {
         card_type: 'ding'
       },
-      dingData: [
-        // {
-        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro3.817a75e.png',
-        //   title: '面授、线下活动',
-        //   content:
-        //     '中共中央办公厅国务院办公厅印发关于党政机关停止新建楼堂馆所和清理办楼堂馆所和清理办...',
-        //   link: '/other/faceteach'
-        // },
-        // {
-        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro2.b8c7f5f.png',
-        //   title: '单位课程定制',
-        //   content:
-        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-        //   link: '/other/enterprisecustom'
-        // },
-        // {
-        //   picture: 'http://papn9j3ys.bkt.clouddn.com/pro1.68e8047.png',
-        //   title: '学位项目',
-        //   content:
-        //     '中共中央办公厅、国务院办公厅印发《关于党政机关停止新建楼堂馆所和清理办...',
-        //   link: '/other/degree'
-        // }
-      ],
+      dingData: [],
       numSrc: require('@/assets/images/home_num.png'),
       value1: 4,
       imgList: [],
@@ -141,32 +113,6 @@ export default {
         limit: null,
         types: 1
       },
-      classify: [
-        {
-          category_name: '干部网络学院',
-          id: '1'
-        },
-        {
-          category_name: '在线商学院',
-          id: '17'
-        },
-        {
-          category_name: '职场学院',
-          id: '19'
-        },
-        {
-          category_name: '党政委托项目',
-          id: '16'
-        },
-        {
-          category_name: '企业内训项目',
-          id: '18'
-        },
-        {
-          category_name: '管理公开项目',
-          id: '20'
-        }
-      ],
       classtext: [],
       courses: [],
       notLogin: false,
@@ -208,39 +154,66 @@ export default {
         page: 1,
         limits: 4
       },
-      loginMsg: false
+      projectForm: {
+        pages: 1,
+        limits: 4
+      },
+      loginMsg: false,
+      getHttp: false
     }
   },
-  created() {},
   computed: {
-    ...mapState('auth', ['did'])
+    ...mapState('auth', [])
   },
+  created() {},
   methods: {
     ...mapActions('auth', ['signOut']),
-    async getAll() {
-      await Promise.all([
-        this.getBanner(),
-        this.getClassifyList(),
-        this.getFreeCourseList(),
-        this.getNewCourseList(),
-        this.getClassicCourseList(),
-        this.getTeacherList(),
-        // this.getEvaluateList(),
-        this.getNewsInfoList(),
-        this.getPartnerList(),
-        this.getPointList()
-      ])
+    getAll() {
+      // await Promise.all([
+
+      // ])
+
+      // this.getClassifyList(),
+      this.getBanner()
+      this.getFreeCourseList()
+
+      this.getClassicCourseList()
+      // this.getTeacherList()
+      // this.getEvaluateList(),
+      this.getNewsInfoList()
+      this.$bus.$emit('updateCount')
+      // this.getPartnerList(),
+      // this.getPointList()
+      this.getProjectList()
     },
     // 获取banner
     getBanner() {
       home.getBannerList(this.itemsData).then(response => {
         this.items = response.data.bannerList
+        //设置banner溢出居中显示
+        this.$nextTick(() => {
+          let imgArr = document.getElementsByClassName('el-carousel__item')
+          if (this.windowWidth <= 1920) {
+            let marginLeft = (1920 - this.windowWidth) / 2
+            for (var i = 0; i < imgArr.length; i++) {
+              imgArr[i].style.marginLeft = -marginLeft + 'px'
+            }
+          }
+        })
       })
     },
     // 获取分类列表
     getClassifyList() {
       home.getClassifyList(this.curruntForm).then(response => {
         this.classify = response.data.categoryList
+      })
+    },
+    //获取项目列表
+    getProjectList() {
+      this.projectLoading = true
+      home.getProjectList(this.projectForm).then(response => {
+        this.projectLoading = false
+        this.projectData = response.data.curriculumProjectList
       })
     },
     // 获取免费课程列表
@@ -251,8 +224,14 @@ export default {
     },
     // 获取新上好课列表
     getNewCourseList() {
-      newlesson.getNewCourseList(this.courseForm).then(response => {
-        this.newData = response.data.curriculumList
+      home.getNewCourseList(this.courseForm).then(response => {
+        if (response.status === '100008') {
+          this.getHttp = false
+        } else {
+          this.getHttp = true
+          this.newData = response.data.curriculumList
+          this.getAll()
+        }
       })
     },
     // 获取精品好课列表
@@ -276,7 +255,7 @@ export default {
     // },
     // 学堂资讯
     getNewsInfoList() {
-      home.getNewsInfoList(this.newsInfoForm).then(response => {
+      news.getNewsInfoList(this.newsInfoForm).then(response => {
         this.infoDesc = response.data.outerList
         this.infoArticle = response.data.innerList
       })
@@ -294,21 +273,27 @@ export default {
       })
     }
   },
+  created() {
+    this.getNewCourseList()
+  },
   mounted() {
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+    this.windowWidth = document.documentElement.clientWidth
+
     this.$bus.$on('loginMsg', data => {
       if (data === true) {
         this.loginMsg = true
       }
     })
 
-    if (this.did === '0') {
-      this.getAll()
-    } else {
-    }
     this.$bus.$on('reLogin', data => {
       this.getAll()
     })
-    this.$bus.$emit('bannerShow', false)
+    // this.$bus.$emit('bannerShow', false)
+    this.$bus.$on('isSingleLogin', data => {
+      this.getNewCourseList()
+    })
   }
 }
 </script>
