@@ -77,14 +77,14 @@ export default {
     }
   },
   methods: {
-    studyProjectPageChange() {
-      this.$emit('studyProjectPageChange')
+    studyProjectPageChange(val) {
+      this.$emit('studyProjectPageChange', val)
     },
-    expiredProjectPageChange() {
-      this.$emit('expiredProjectPageChange')
+    expiredProjectPageChange(val) {
+      this.$emit('expiredProjectPageChange', val)
     },
-    collectProjectPageChange() {
-      this.$emit('collectProjectPageChange')
+    collectProjectPageChange(val) {
+      this.$emit('collectProjectPageChange', val)
     },
     handleProject() {
       this.$emit('handleProject')
