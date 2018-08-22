@@ -60,8 +60,8 @@
           <li v-for="li in courseList" :key="li.id" class="list-item" @click="goCourseList(li)">
             <p class="item-desc1">{{li.title}}</p>
           </li>
-          <li class="list-item" style="cursor:inherit">
-            <p class="item-desc1">......</p>
+          <li class="list-item" @click="goCustomerProject">
+            <p class="item-desc1 customerProject">自定制项目 >></p>
           </li>
 
         </ul>
@@ -168,6 +168,7 @@ import { auth, institutional } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import BackToTop from '@/components/common/BackToTop.vue'
+import { open } from '@/lib/util/helper'
 import $ from 'jquery'
 export default {
   components: {
@@ -323,6 +324,9 @@ export default {
           { required: true, message: '请输入验证码', trigger: 'blur' },
           { validator: checkCode, trigger: 'blur' }
         ]
+      },
+      customerProject: {
+        base: '/project/customerProject'
       }
     }
   },
@@ -519,6 +523,10 @@ export default {
     },
     knowDetail() {
       this.$router.push('/other/activePages/enterprisecustom')
+    },
+    //跳转到自定制项目
+    goCustomerProject() {
+      open(this.customerProject)
     }
   },
   mounted() {
