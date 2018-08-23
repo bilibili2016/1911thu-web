@@ -63,9 +63,6 @@ export default {
     ...mapActions('auth', ['setGid']),
     // 继续选课
     handleChoiceCourse() {
-      // window.open(
-      //   window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
-      // )
       window.open(
         window.location.origin +
           '/course/category' +
@@ -127,11 +124,6 @@ export default {
         } else {
           this.hasCode = false
         }
-
-        //禁止后退键 作用于Firefox、Opera
-        // document.onkeypress = banBackSpace
-        //禁止后退键 作用于IE、Chrome
-        // document.onkeydown = banBackSpace
       })
     },
     goLink(item) {
