@@ -1,18 +1,16 @@
 .conversion {
   margin: 30px 30px 0;
   padding-bottom: 50px;
-  & > div {
+  .tables {
+    clear: both;
+    position: relative;
+    overflow-y: auto;
+    border: 1px solid #e8d6f7;
     .el-table {
       border: 1px solid #e8d6f7;
       .el-table .hidden-columns {
         visibility: inherit;
       }
-    }
-    .tables {
-      clear: both;
-      position: relative;
-      overflow-y: auto;
-      border: 1px solid #e8d6f7;
     }
     .recordTable {
       width: 100%;

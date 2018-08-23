@@ -275,7 +275,8 @@ export default {
       playAuthInfo: {},
       nextCatalogId: '', //默认播放下一小节id
       interval: '',
-      index: 0
+      index: 0,
+      playerEnd: true
     }
   },
   methods: {
@@ -510,6 +511,7 @@ export default {
               // 不存在 直接创建播放器
               this.player = new Aliplayer(this.aliPlayer)
             }
+
             this.nextCatalogId = response.data.nextCatalogId
             this.player.on('ready', this.readyPlay)
             this.player.on('play', this.playerPlay)
@@ -564,6 +566,7 @@ export default {
       }, 1000)
       this.ischeck = this.playerForm.catalogId
       this.playing = this.playImg
+      this.playerEnd = true
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
     playerPause() {
@@ -574,17 +577,21 @@ export default {
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
-      clearInterval(this.interval)
-      // 未购买且试看
-      if (!this.bought && this.lookAt == '2') {
-        // 取消全屏
-        this.player.fullscreenService.cancelFullScreen()
-        this.$bus.$emit('openPay', this.pay)
-      } else {
-        if (this.nextCatalogId !== '' && this.bought) {
-          this.playerForm.catalogId = this.nextCatalogId
-          this.autoplay = true
-          this.getPlayerInfo()
+      if (this.playerEnd) {
+        this.playerEnd = false
+        clearInterval(this.interval)
+        // 未购买且试看
+        if (!this.bought && this.lookAt == '2') {
+          // 取消全屏
+          this.player.fullscreenService.cancelFullScreen()
+          this.$bus.$emit('openPay', this.pay)
+          this.playerEnd = true
+        } else {
+          if (this.nextCatalogId !== '' && this.bought) {
+            this.playerForm.catalogId = this.nextCatalogId
+            this.autoplay = true
+            this.getPlayerInfo()
+          }
         }
       }
     },
