@@ -35,6 +35,7 @@ import TicketOrder from '@/pages/profile/ticket/ticketOrder'
 import NoMsg from '@/pages/profile/pages/noMsg.vue'
 import TicketHistory from '@/pages/profile/ticket/ticketHistory'
 import TicketRules from '@/pages/profile/ticket/ticketRules'
+import ticketDetail from '@/pages/profile/components/Detail'
 export default {
   props: [
     'showTicketList',
@@ -54,10 +55,10 @@ export default {
   ],
   components: {
     'v-tkorder': TicketOrder,
-    // 'v-ticketorderdetail': TicketOrderDetail,
     'v-tkhistory': TicketHistory,
     'v-tkrules': TicketRules,
-    'v-nomsg': NoMsg
+    'v-nomsg': NoMsg,
+    'v-detail': ticketDetail
   },
   data() {
     return {
