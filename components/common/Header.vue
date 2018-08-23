@@ -129,7 +129,12 @@ export default {
     },
     // 跳转 公共路由方法
     handleLink(data) {
-      this.$router.push(data)
+      if (window.location.pathname === data) {
+        let ID = Math.random()
+        this.$router.push({ path: data, query: { ID } })
+      } else {
+        this.$router.push(data)
+      }
     },
     // 下拉列表
     getClassifyList() {
