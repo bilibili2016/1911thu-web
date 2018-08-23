@@ -7,25 +7,25 @@
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label" class="tabList">
             <i class="icon-home"></i> 我的首页</span>
-          <v-myhome :studyData="studyData" :configZero="configZero" :noMsgOne="noMsgOne"></v-myhome>
+          <v-myhome :allHome="allHome" :studyData="studyData" :configZero="configZero" :noMsgOne="noMsgOne"></v-myhome>
         </el-tab-pane>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
-          <v-mycourse :activeNames="activeNames" :newDataing="newDataing" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="newDataReady" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="overTimeData" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :pagemsg3="pagemsg3" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="readyStudyPageChange" @studyPageChange="studyPageChange" @collectionPageChange="collectionPageChange" @handleActive="handleActive"></v-mycourse>
+          <v-mycourse :allCourseLoad="allCourseLoad" :activeNames="activeNames" :newDataing="newDataing" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="newDataReady" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="overTimeData" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :pagemsg3="pagemsg3" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="readyStudyPageChange" @studyPageChange="studyPageChange" @collectionPageChange="collectionPageChange" @handleActive="handleActive"></v-mycourse>
         </el-tab-pane>
         <!-- 我的项目 -->
         <el-tab-pane class="my-course" name="tab-third">
           <span slot="label" class="tabList">
             <i class="icon-project"></i> 我的项目</span>
-          <v-myproject @studyProjectPageChange="studyProjectPageChange" @expiredProjectPageChange="expiredProjectPageChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configZero" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configFour="configFour" :expiredProjectData="expiredProjectData" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configTwo="configTwo" :studyProjectData="studyProjectData" :configOne="configOne" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="readyProjectData"></v-myproject>
+          <v-myproject :allProjectLoad="allProjectLoad" @studyProjectPageChange="studyProjectPageChange" @expiredProjectPageChange="expiredProjectPageChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configZero" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configFour="configFour" :expiredProjectData="expiredProjectData" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configTwo="configTwo" :studyProjectData="studyProjectData" :configOne="configOne" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="readyProjectData"></v-myproject>
         </el-tab-pane>
         <!-- 我的订单 -->
         <el-tab-pane class="my-course my-order" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
-          <v-myorder :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getAllOrderDataChange="getAllOrderDataChange" @unfinishedOrderDataChange="unfinishedOrderDataChange" @getReadyOrderDataChange="getReadyOrderDataChange" @invalidOrderDataChange="invalidOrderDataChange"></v-myorder>
+          <v-myorder :allOrderLoadAll="allOrderLoadAll" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getAllOrderDataChange="getAllOrderDataChange" @unfinishedOrderDataChange="unfinishedOrderDataChange" @getReadyOrderDataChange="getReadyOrderDataChange" @invalidOrderDataChange="invalidOrderDataChange"></v-myorder>
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
@@ -44,7 +44,7 @@
           <span slot="label" class="tabList">
             <i class="icon-code"></i> 兑换码管理</span>
           <!-- 'codeData', 'recordData', 'invitationCodeList' -->
-          <v-mycode :codeData="codeData" :recordData="recordData" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode"></v-mycode>
+          <v-mycode :codeData="codeData" :recordData="recordData" :allCode="allCode" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode" @recordList="recordList" @searchCodeList="searchCodeList"></v-mycode>
         </el-tab-pane>
 
         <!-- 发票管理 -->
@@ -52,8 +52,15 @@
           <span slot="label" class="tabList">
             <i class="icon-ticket"></i> 发票管理</span>
 
-          <v-myticket :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange"></v-myticket>
+          <v-myticket :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange"></v-myticket>
         </el-tab-pane>
+
+        <!-- 自定制项目 -->
+        <!-- <el-tab-pane class="my-course my-customerProject" name="tab-eighth">
+          <span slot="label" class="tabList">
+            <i class="icon-customerProject"></i> 自定制项目</span>
+
+        </el-tab-pane> -->
       </el-tabs>
     </div>
   </div>
@@ -76,9 +83,7 @@ import myTicket from '@/pages/profile/pages/myTicket'
 export default {
   components: {
     'v-person': PersonalSet,
-
     'v-banner': Banner,
-
     'v-myhome': MyHome,
     'v-mycourse': myCourse,
     'v-myproject': myProject,
@@ -285,7 +290,13 @@ export default {
       },
       codeListForm: {
         pages: 1,
-        limits: null
+        limits: null,
+        ordersn: ''
+      },
+      getCodeListForm: {
+        pages: 1,
+        limits: null,
+        code: ''
       },
       orderForm: {
         pages: 1,
@@ -304,7 +315,6 @@ export default {
       collectionData: [],
       orderDetail: {}, //订单详情信息
       bankInfo: {}, //公司打款信息
-
       showOrderList: true,
       showTicketList: true,
       isUpdate: false,
@@ -315,7 +325,13 @@ export default {
       historyOrderLoad: true,
       overTimeData: [],
       invitationCodeList: [],
-      detailMsg: false
+      detailMsg: false,
+      allOrderLoadAll: false,
+      allProjectLoad: false,
+      allCourseLoad: false,
+      allTicket: false,
+      allCode: false,
+      allHome: false
     }
   },
   computed: {
@@ -414,15 +430,12 @@ export default {
           this.styleForm.categoryId = item
           this.styleForm.pages = 1
           this.styleForm.limits = 12
-          return new Promise((resolve, reject) => {
-            profileHome.studyCurriculumList(this.styleForm).then(response => {
-              this.newDataing = response.data.curriculumList
-              this.pagemsg1.total = response.data.pageCount
-              for (let item of response.data.curriculumList) {
-                item.percent = Number(item.percent)
-              }
-              resolve(true)
-            })
+          profileHome.studyCurriculumList(this.styleForm).then(response => {
+            this.newDataing = response.data.curriculumList
+            this.pagemsg1.total = response.data.pageCount
+            for (let item of response.data.curriculumList) {
+              item.percent = Number(item.percent)
+            }
           })
         } else if (this.activeNames == 'second') {
           // 我的课程 已完成的项目
@@ -477,15 +490,14 @@ export default {
       this.styleForm.categoryId = 0
       this.styleForm.pages = 1
       this.styleForm.limits = 12
-      return new Promise((resolve, reject) => {
-        profileHome.studyCurriculumList(this.styleForm).then(response => {
-          this.newDataing = response.data.curriculumList
-          this.pagemsg1.total = response.data.pageCount
-          for (let item of response.data.curriculumList) {
-            item.percent = Number(item.percent)
-          }
-          resolve(true)
-        })
+      this.allCourseLoad = true
+      profileHome.studyCurriculumList(this.styleForm).then(response => {
+        this.allCourseLoad = false
+        this.newDataing = response.data.curriculumList
+        this.pagemsg1.total = response.data.pageCount
+        for (let item of response.data.curriculumList) {
+          item.percent = Number(item.percent)
+        }
       })
     },
     // 学习中 分页切换
@@ -509,14 +521,13 @@ export default {
       this.styleForm.types = 3
       this.styleForm.pages = 0
       this.styleForm.limits = 12
-      return new Promise((resolve, reject) => {
-        profileHome.studyCurriculumList(this.styleForm).then(response => {
-          this.studyData = response.data.curriculumList
-          for (let item of response.data.curriculumList) {
-            item.percent = Number(item.percent)
-          }
-          resolve(true)
-        })
+      this.allHome = true
+      profileHome.studyCurriculumList(this.styleForm).then(response => {
+        this.allHome = false
+        this.studyData = response.data.curriculumList
+        for (let item of response.data.curriculumList) {
+          item.percent = Number(item.percent)
+        }
       })
     },
     // 我的首页 已完成
@@ -583,13 +594,12 @@ export default {
     // 我的订单 全部
     getAllOrderData() {
       this.orderForm.payStatus = 0
-      return new Promise((resolve, reject) => {
-        profileHome.getAllOrderData(this.orderForm).then(response => {
-          this.allOrderData = response.data.orderList
-          this.allOrderLoad = false
-          this.pagemsg4.total = response.data.orderTotal
-          resolve(true)
-        })
+      this.allOrderLoadAll = true
+
+      profileHome.getAllOrderData(this.orderForm).then(response => {
+        this.allOrderData = response.data.orderList
+        this.allOrderLoadAll = false
+        this.pagemsg4.total = response.data.orderTotal
       })
     },
     // 我的订单-全部 分页切换
@@ -604,7 +614,9 @@ export default {
     },
     // 我的项目 公共
     getProjectData(type) {
+      this.allProjectLoad = true
       profileHome.getProjectList(this.projectForm).then(response => {
+        this.allProjectLoad = false
         if (type === '1') {
           this.studyProjectData = response.data.studyProjectList
           this.projectPageStudy.total = response.data.pageCount
@@ -770,8 +782,11 @@ export default {
     },
     //未开发票列表
     getUnTicketData() {
+      this.allTicket = true
       profileHome.orderNotInvoice(this.orderNotInvoiceForm).then(response => {
+        this.allTicket = false
         this.unTicketData = response.data.orderList
+
         this.pagemsg8.total = response.data.orderTotal
         this.unTicketData.forEach(item => {
           item.checked = false
@@ -809,16 +824,33 @@ export default {
         this.historyOrderLoad = false
       })
     },
-    // 获取专属兑换码列表
+    // 搜索 兑换码列表
+    searchCodeList(data) {
+      this.codeListForm.ordersn = data
+      this.getCodeList()
+    },
+    // 获取 兑换码列表
     getCodeList() {
+      this.allCode = true
       profileHome.getCodeList(this.codeListForm).then(response => {
+        this.allCode = false
         this.codeData = response.data.orderInvitationCodeList
+        this.codeListForm.ordersn = ''
       })
     },
-    // 专属兑换码 邀请记录
+    // 兑换详情页的搜索
+    recordList(data) {
+      this.getCodeListForm.code = data
+      console.log(data)
+      console.log(this.getCodeListForm.code)
+
+      this.getRecordList()
+    },
+    // 邀请记录--兑换详情
     getRecordList() {
-      profileHome.getRecordList(this.codeListForm).then(response => {
+      profileHome.getRecordList(this.getCodeListForm).then(response => {
         this.recordData = response.data.usedInvitationCodeList
+        this.getCodeListForm.code = ''
       })
     },
     // 获取已经添加的兑换码

@@ -1,4 +1,5 @@
 .customerProject {
+  background-color: #f7f9fb;
   font-size: 16px;
   color: #222;
   .title {
@@ -6,7 +7,7 @@
     font-size: 20px;
     width: 1100px;
     margin: 0 auto;
-    margin-top: 30px;
+    padding-top: 30px;
   }
   .content {
     width: 1020px;
@@ -15,12 +16,85 @@
     .con-item {
       height: auto;
       margin-bottom: 20px;
-
       .fl {
         width: 95px;
+        line-height: 40px;
       }
       .fr {
         width: 925px;
+      }
+    }
+    .fr.selectFr {
+      position: relative;
+      .el-input {
+        width: 240px;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        .el-input__inner {
+          padding-right: 40px;
+        }
+      }
+      .pull-down-text {
+        position: absolute;
+        top: 41px;
+        left: 0;
+        width: 240px;
+        height: 120px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        border: 1px solid #ddd;
+        margin-top: 1px;
+        color: #222;
+        transition: all 400ms ease;
+        background-color: #fff;
+        z-index: 20;
+        .search {
+          position: relative;
+          background-color: #ededed;
+          .el-input {
+            .el-input__inner {
+              font-size: 14px;
+              border: none !important;
+              background-color: #ededed;
+            }
+          }
+          .el-icon-search {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+          }
+        }
+        ul {
+          width: 100%;
+          cursor: pointer;
+          border-top: 1px solid #ddd;
+          li {
+            width: 100%;
+            height: 40px;
+            font-size: 14px;
+            color: #222;
+            padding-left: 10px;
+            line-height: 40px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            &:hover {
+              background-color: #ededed;
+            }
+          }
+        }
+      }
+      .pull-down {
+        position: absolute;
+        top: 1px;
+        left: 201px;
+        width: 38px;
+        height: 38px;
+        border-left: 1px solid #dddddd;
+        background-color: #ededed;
+        .el-icon-caret-bottom {
+          margin: 12px;
+        }
       }
     }
     .name {
@@ -43,7 +117,7 @@
       .fr {
         .el-textarea {
           .el-textarea__inner {
-            padding-bottom: 30px;
+            padding-bottom: 50px;
           }
         }
       }
@@ -55,9 +129,253 @@
         color: #aaaaaa;
       }
     }
+    .obj {
+      height: 40px;
+      line-height: 40px;
+    }
+    .num {
+    }
+    .style {
+      height: 40px;
+      line-height: 40px;
+      .fr.selectFr {
+        .el-input {
+          width: 140px;
+          margin-left: 20px;
+          margin-right: 30px;
+        }
+        .pull-down {
+          left: 217px;
+        }
+        .pull-down-text {
+          width: 140px;
+          left: 116px;
+        }
+        .price {
+          color: #cd1f1f;
+        }
+      }
+    }
+
+    .con-detail {
+      width: 100%;
+      background-color: #fff;
+      padding: 30px 45px 40px 30px;
+      .deatil-item {
+        margin-bottom: 30px;
+        .detail-title {
+          font-size: 16px;
+          color: #6417a6;
+          margin-bottom: 20px;
+        }
+        .itemCon {
+          margin-bottom: 20px;
+          width: 100%;
+          height: 40px;
+        }
+        .item {
+          width: 430px;
+          float: left;
+          margin-right: 85px;
+          &:last-child {
+            margin-right: 0;
+          }
+          .fl {
+            width: 110px;
+            line-height: 40px;
+          }
+          .fr {
+            width: 320px;
+            .el-input {
+              width: 100%;
+            }
+            .pull-down-text {
+              width: 320px;
+            }
+          }
+          .fr.selectFr {
+            .pull-down {
+              left: 281px !important;
+            }
+          }
+          .text {
+            float: left;
+          }
+          .liChecked {
+            width: 100%;
+            margin-right: 10px;
+            margin-bottom: -2px;
+            position: relative;
+            .el-checkbox {
+              display: none;
+            }
+            .el-checkbox-label {
+              display: inline-block;
+              height: 40px;
+              width: 100%;
+            }
+            .el-checkbox-label:after {
+              position: absolute;
+              top: 11px;
+              right: 10px;
+              content: '';
+              text-align: right;
+              display: inline-block;
+              vertical-align: middle;
+              width: 18px;
+              height: 18px;
+              border: 1px solid #6417a6;
+              border-radius: 4px;
+              margin-bottom: 5px;
+              margin-left: 270px;
+            }
+            .el-checkbox:checked + .el-checkbox-label:after {
+              background-image: url('~assets/images/icon-checked.png');
+              background-size: 100%;
+              border: none;
+            }
+          }
+          .add {
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            background: rgba(94, 6, 140, 1);
+          }
+        }
+        .deTable {
+          width: 100%;
+          background-color: #f7f9fb;
+          border: 1px solid #dfe1e3;
+          .deItem {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 30px 0 20px;
+            border-bottom: 1px solid #dfe1e3;
+            &:last-child {
+              border-bottom: none;
+            }
+            .courseTitle {
+              width: 45%;
+              float: left;
+            }
+            .time {
+              width: 10%;
+              float: left;
+              text-align: center;
+            }
+            .price {
+              width: 10%;
+              float: left;
+              text-align: center;
+            }
+            .operater {
+              width: 35%;
+              float: left;
+              text-align: right;
+              color: #cd1f1f;
+              cursor: pointer;
+            }
+          }
+          .courseItem {
+            .courseTitle {
+              width: 30%;
+              float: left;
+            }
+            .time {
+              width: 15%;
+              float: left;
+              text-align: center;
+            }
+            .price {
+              width: 15%;
+              float: left;
+              text-align: center;
+            }
+            .num {
+              width: 15%;
+              float: left;
+              text-align: center;
+            }
+            .total {
+              width: 25%;
+              float: left;
+            }
+          }
+          .discount {
+            color: #cd1f1f;
+            font-size: 14px;
+            text-align: right;
+            margin: 15px 0;
+            margin-right: 30px;
+          }
+          .totalPrice {
+            color: #cd1f1f;
+            font-size: 20px;
+            text-align: right;
+            margin-bottom: 15px;
+            margin-right: 30px;
+          }
+          .discount-left {
+            margin-right: 10px;
+          }
+          .totalPrice-left {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+    .btns {
+      width: 320px;
+      margin: 0 auto;
+      margin-top: 40px;
+      padding-bottom: 60px;
+      .btn {
+        width: 130px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 20px;
+        border: 1px solid #5e068c;
+        margin-right: 60px;
+        color: #5e068c;
+        cursor: pointer;
+        &:last-child {
+          margin-right: 0;
+        }
+        &.active,
+        &:hover {
+          background-color: #5e068c;
+          color: #fff;
+        }
+      }
+    }
   }
   .el-input {
     .el-input__inner {
+    }
+  }
+  .el-radio {
+    .el-radio__inner {
+      width: 18px;
+      height: 18px;
+      border-color: #572281;
+    }
+    .el-radio__input.is-checked .el-radio__inner {
+      background-color: #fff;
+    }
+    .el-radio__inner::after {
+      width: 10px;
+      height: 10px;
+      background-color: #572281;
+    }
+    .el-radio__input.is-checked + .el-radio__label {
+      color: #344;
     }
   }
 }

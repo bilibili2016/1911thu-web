@@ -4,11 +4,14 @@
     <el-card v-if="showOrderList">
       <el-tabs v-model="activeOrder">
         <el-tab-pane label="全部" name="orderFirst">
-          <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="allOrderLoad"></v-order>
-          <div class="pagination" v-if="allOrderData && allOrderData.length>0">
+          <div :class="{ minheight : allOrderLoadAll}" v-loading="allOrderLoadAll">
+            <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail"></v-order>
+          </div>
+
+          <div class="pagination" v-if="allOrderData && allOrderData.length>19">
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg4.pagesize" :current-page="pagemsg4.page" :total="pagemsg4.total" @current-change="getAllOrderDataChange"></el-pagination>
           </div>
-          <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+          <v-nomsg class="noOrder" v-if="allOrderData.length == 0 && !allOrderLoad" :config="noMsgTen"></v-nomsg>
 
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
@@ -16,29 +19,29 @@
             <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
           </span>
           <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :data="unfinishedOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-order>
-          <div class="pagination" v-if="unfinishedOrderData && unfinishedOrderData.length>0">
+          <div class="pagination" v-if="unfinishedOrderData && unfinishedOrderData.length>19">
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg5.pagesize" :pager-count="5" :page-count="pagemsg5.pagesize" :current-page="pagemsg5.page" :total="pagemsg5.total" @current-change="unfinishedOrderDataChange"></el-pagination>
           </div>
-          <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+          <v-nomsg class="noOrder" v-if="unfinishedOrderData.length == 0" :config="noMsgTen"></v-nomsg>
 
         </el-tab-pane>
         <el-tab-pane name="orderThird">
           <span class="payOk" slot="label">已完成
           </span>
           <v-order v-if="readyOrderData && readyOrderData.length>0" :data="readyOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
-          <div class="pagination" v-if="readyOrderData && readyOrderData.length>0">
+          <div class="pagination" v-if="readyOrderData && readyOrderData.length>19">
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg6.pagesize" :pager-count="5" :page-count="pagemsg6.pagesize" :current-page="pagemsg6.page" :total="pagemsg6.total" @current-change="getReadyOrderDataChange"></el-pagination>
           </div>
-          <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+          <v-nomsg class="noOrder" v-if="readyOrderData.length == 0" :config="noMsgTen"></v-nomsg>
         </el-tab-pane>
         <el-tab-pane name="orderFour">
           <span class="payOff" slot="label">已关闭
           </span>
           <v-order v-if="invalidOrderData && invalidOrderData.length>0" :data="invalidOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
-          <div class="pagination" v-if="invalidOrderData && invalidOrderData.length>0">
+          <div class="pagination" v-if="invalidOrderData && invalidOrderData.length>19">
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg7.pagesize" :pager-count="5" :page-count="pagemsg7.pagesize" :current-page="pagemsg7.page" :total="pagemsg7.total" @current-change="invalidOrderDataChange"></el-pagination>
           </div>
-          <v-nomsg class="noOrder" v-else :config="noMsgTen"></v-nomsg>
+          <v-nomsg class="noOrder" v-if="invalidOrderData.length==0" :config="noMsgTen"></v-nomsg>
 
         </el-tab-pane>
       </el-tabs>
@@ -79,7 +82,8 @@ export default {
     'pagemsg4',
     'pagemsg5',
     'pagemsg6',
-    'pagemsg7'
+    'pagemsg7',
+    'allOrderLoadAll'
   ],
   data() {
     return {

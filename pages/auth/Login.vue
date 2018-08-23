@@ -86,6 +86,7 @@
     </div>
     <!-- 微信登录 -->
     <div class="lrFrame wechatLogin" v-show="wechatLogin">
+      <i class="el-icon-back wechatBack" @click="back"></i>
       <i class="el-icon-close closeWechat" @click="close"></i>
       <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
         <h4 class="clearfix">
@@ -820,6 +821,11 @@ export default {
         this.loginData.showPwd = true
         this.loginData.pwdType = 'text'
       }
+    },
+    // 微信扫码返回上一步
+    back() {
+      this.close()
+      this.loginCardShow()
     },
     // 关闭登录注册
     close() {
