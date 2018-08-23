@@ -835,7 +835,7 @@ export default {
       this.pagemsg9.page = val
       this.tickethistoryForm.pages = val
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
-        console.log(response, 'response2')
+        // console.log(response, 'response')
         this.historyOrderData = response.data.invoiceList
         this.historyOrderLoad = false
       })
