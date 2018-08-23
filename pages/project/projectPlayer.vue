@@ -147,7 +147,6 @@ export default {
         width: '100%',
         height: '100%',
         autoplay: false, //自动播放
-        // source: '//player.alicdn.com/video/aliyunmedia.mp4', //播放url
         vid: '', //点播播放的两个参数之一
         playauth: '', //点播播放的两个参数之二
         isLive: false,
@@ -275,8 +274,7 @@ export default {
       playAuthInfo: {},
       nextCatalogId: '', //默认播放下一小节id
       interval: '',
-      index: 0,
-      playerEnd: true
+      index: 0
     }
   },
   methods: {
@@ -497,20 +495,23 @@ export default {
             this.goShoppingCart('您还未购买该项目，请先去购买吧！')
           } else {
             this.playAuthInfo = response.data.playAuthInfo
-            // this.aliPlayer.source = response.data.playAuthInfo.video_address
             this.aliPlayer.vid = response.data.playAuthInfo.video_id
             this.aliPlayer.playauth = response.data.playAuthInfo.playAuth
             // 播放器如果存在就销毁播放器，重新创建
             if (this.player) {
+              this.player.dispose()
+              this.$refs.playInner.innerHTML =
+                '<div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>'
+              // this.player = new Aliplayer(this.aliPlayer)
+              // $('#mediaPlayer').empty()
               // 切换vid和playauth播放参数
-              this.player.reloaduserPlayInfoAndVidRequestMts(
-                that.aliPlayer.vid,
-                that.aliPlayer.playauth
-              )
-            } else {
-              // 不存在 直接创建播放器
-              this.player = new Aliplayer(this.aliPlayer)
+              // this.player.reloaduserPlayInfoAndVidRequestMts(
+              //   that.aliPlayer.vid,
+              //   that.aliPlayer.playauth
+              // )
             }
+            // 创建播放器
+            this.player = new Aliplayer(this.aliPlayer)
 
             this.nextCatalogId = response.data.nextCatalogId
             this.player.on('ready', this.readyPlay)
@@ -566,7 +567,6 @@ export default {
       }, 1000)
       this.ischeck = this.playerForm.catalogId
       this.playing = this.playImg
-      this.playerEnd = true
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
     playerPause() {
@@ -577,21 +577,24 @@ export default {
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
-      if (this.playerEnd) {
-        this.playerEnd = false
-        clearInterval(this.interval)
+      clearInterval(this.interval)
+      if (!this.bought && this.lookAt == '2') {
         // 未购买且试看
-        if (!this.bought && this.lookAt == '2') {
-          // 取消全屏
-          this.player.fullscreenService.cancelFullScreen()
-          this.$bus.$emit('openPay', this.pay)
-          this.playerEnd = true
-        } else {
-          if (this.nextCatalogId !== '' && this.bought) {
-            this.playerForm.catalogId = this.nextCatalogId
-            this.autoplay = true
-            this.getPlayerInfo()
-          }
+        // 取消全屏
+        this.player.fullscreenService.cancelFullScreen()
+        this.$bus.$emit('openPay', this.pay)
+      } else {
+        // 已购买并且有下一小节
+        if (this.nextCatalogId !== '' && this.bought) {
+          this.playerForm.catalogId = this.nextCatalogId
+          this.autoplay = true
+          this.getPlayerInfo()
+        }
+        // 已购买且没有下一小节了
+        if (this.nextCatalogId == '' && this.bought) {
+          this.playing = this.pauseImg
+          clearInterval(this.interval)
+          this.socket.emit('watchRecordingTime_disconnect')
         }
       }
     },

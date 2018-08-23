@@ -22,9 +22,14 @@
                     <div class="bottom">
                         <div v-if="data.type=='1' || data.type=='2'">发票类型：普通发票</div>
                         <div v-else>发票类型：增值税专用发票</div>
-                        <div>发票抬头：{{data.company_name}}</div>
+                        <div v-if="data.type=='2' || data.type=='3'">发票抬头：{{data.company_name}}</div>
+                        <div v-else>发票抬头：个人</div>
                         <div>发票内容：{{data.content}}</div>
-                        <div>纳税人识别号：{{data.invoice_number}}</div>
+                        <div v-if="data.type=='2' || data.type=='3'">纳税人识别号：{{data.invoice_number}}</div>
+                        <div v-if="data.type=='3'">注册地址：{{data.company_address}}</div>
+                        <div v-if="data.type=='3'">联系电话：{{data.company_phone}}</div>
+                        <div v-if="data.type=='3'">开户银行：{{data.bank_name}}</div>
+                        <div v-if="data.type=='3'">银行账号：{{data.bank_card}}</div>
                     </div>
                 </div>
             </div>

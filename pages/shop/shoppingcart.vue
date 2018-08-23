@@ -141,11 +141,11 @@
             <span class="person">购买人数：</span>
             <!-- onselectstart方法为禁止多次点击选中文本 -->
             <span class="number clearfix" unselectable="on" onselectstart="return false;">
-              <i class="fl minus" v-if="numForm.number<=1">-</i>
-              <i class="fl minus" v-else @click="delNumber">-</i>
+              <span class="fl minus" v-if="numForm.number<=1">-</span>
+              <span class="fl minus" v-else @click="delNumber">-</span>
               <input type="text" class="fl num" v-model="numForm.number" @blur="changeNumber">
-              <i class="fl add" v-if="numForm.number>=9999">+</i>
-              <i class="fl add" v-else @click="addNumber">+</i>
+              <span class="fl add" v-if="numForm.number>=9999">+</span>
+              <span class="fl add" v-else @click="addNumber">+</span>
             </span>
           </span>
           <span class="commitOrder fr">

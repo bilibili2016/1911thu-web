@@ -270,10 +270,16 @@
       .left {
         width: 120px;
         text-align: right;
+        vertical-align: middle;
       }
       .right {
         width: 180px;
+        line-height: 28px;
+        vertical-align: middle;
         text-align: right;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }

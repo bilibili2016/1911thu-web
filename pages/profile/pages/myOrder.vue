@@ -91,8 +91,8 @@ export default {
     }
   },
   methods: {
-    getUpdateMsg() {
-      this.$emit('getUpdateMsg')
+    getUpdateMsg(data) {
+      this.$emit('getUpdateMsg', data)
     },
     getOrderDetail() {
       this.$emit('getOrderDetail')

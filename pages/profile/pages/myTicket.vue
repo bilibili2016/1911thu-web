@@ -4,7 +4,7 @@
     <el-tabs v-model="activeTicket" @tab-click="handleTicket">
       <el-tab-pane label="按订单开发票" name="ticketFirst">
         <div v-loading="allTicket" :class="{ minheight : allTicket}">
-          <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
+          <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" @chengeItem="chengeItem" v-loading="readyOrderLoad"></v-tkorder>
         </div>
 
         <div class="pagination" v-if="unTicketData && unTicketData.length>19">
@@ -35,6 +35,7 @@ import TicketOrder from '@/pages/profile/ticket/ticketOrder'
 import NoMsg from '@/pages/profile/pages/noMsg.vue'
 import TicketHistory from '@/pages/profile/ticket/ticketHistory'
 import TicketRules from '@/pages/profile/ticket/ticketRules'
+import ticketDetail from '@/pages/profile/components/Detail'
 export default {
   props: [
     'showTicketList',
@@ -54,10 +55,10 @@ export default {
   ],
   components: {
     'v-tkorder': TicketOrder,
-    // 'v-ticketorderdetail': TicketOrderDetail,
     'v-tkhistory': TicketHistory,
     'v-tkrules': TicketRules,
-    'v-nomsg': NoMsg
+    'v-nomsg': NoMsg,
+    'v-detail': ticketDetail
   },
   data() {
     return {
@@ -73,6 +74,10 @@ export default {
     },
     getUpdateMsg() {
       this.$emit('getUpdateMsg')
+    },
+    chengeItem() {
+      this.activeTicket = 'ticketSecond'
+      document.documentElement.scrollTop = 0
     },
     getTicketDetail() {
       this.$emit('getTicketDetail')
