@@ -127,7 +127,8 @@ export default {
       },
       socket: '',
       playAuthInfo: {},
-      index: 0
+      index: 0,
+      playerEnd: true
     }
   },
   methods: {
@@ -258,6 +259,7 @@ export default {
           )
         }
       }, 1000)
+      this.playerEnd = true
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
     playerPause() {
@@ -268,17 +270,22 @@ export default {
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
-      clearInterval(this.interval)
-      // 不免费 未购买 试看的课程弹出快捷支付弹框
-      if (this.isFree === '1' && !this.bought && this.lookAt == '2') {
-        // 取消全屏
-        this.player.fullscreenService.cancelFullScreen()
-        this.$bus.$emit('openPay', this.pay)
-      } else {
-        // 如果当前小节播放完成，直接播放下一小节
-        if (this.nextCatalogId !== '') {
-          this.playerForm.catalogId = this.nextCatalogId
-          this.getdefaultPlayerUrl()
+      // 播放结束过滤 --避免播放结束后的指数次回调
+      if (this.playerEnd) {
+        this.playerEnd = false
+        clearInterval(this.interval)
+        // 不免费 未购买 试看的课程弹出快捷支付弹框
+        if (this.isFree === '1' && !this.bought && this.lookAt == '2') {
+          // 取消全屏
+          this.player.fullscreenService.cancelFullScreen()
+          this.$bus.$emit('openPay', this.pay)
+          this.playerEnd = true
+        } else {
+          // 如果当前小节播放完成，直接播放下一小节
+          if (this.nextCatalogId !== '') {
+            this.playerForm.catalogId = this.nextCatalogId
+            this.getdefaultPlayerUrl()
+          }
         }
       }
     },

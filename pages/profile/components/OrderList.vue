@@ -4,7 +4,7 @@
     <div class="orderList" v-for="(courseList, index ) in data" :key="index">
       <div class="topBar clearfix">
         <span class="fl">订单：{{courseList.order_sn}}</span>
-        <span class="fr">{{exchangeTime(courseList.create_time)}}{{courseList.create_time}}</span>
+        <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
       </div>
       <div class="list">
         <div class="content">
@@ -154,10 +154,7 @@ export default {
     },
     // 时间戳转日期格式
     exchangeTime(time) {
-      // return timestampToTime(time)
-      let newTime = new Date()
-      time = new Date(time * 1000)
-      // console.log(newTime - time)
+      return timestampToTime(time)
     }
   }
 }

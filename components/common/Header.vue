@@ -1,7 +1,7 @@
 <template>
   <div class="headerBox">
     <!-- 优惠主题入口 -->
-    <v-discount v-if="bannerMsg" @closeBanner="!bannerMsg"></v-discount>
+    <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
       <div class="header-fl clearfix">
         <v-logo @handleLink="handleLink"></v-logo>
@@ -124,6 +124,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid', 'setProductsNum', 'signOut']),
+    closeBanner() {
+      this.bannerMsg = false
+    },
     // 跳转 公共路由方法
     handleLink(data) {
       this.$router.push(data)

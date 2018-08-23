@@ -1,5 +1,6 @@
 <template>
   <div class="invitation" v-loading="allCode">
+    <v-search @search="search"></v-search>
     <div class="table" :class="{ minheight : allCode}">
       <div class="tr_header">
         <span>兑换码</span>
@@ -48,8 +49,12 @@
 import { timestampToYMD } from '@/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import Search from '@/pages/profile/components/search.vue'
 export default {
   props: ['codeData', 'allCode'],
+  components: {
+    'v-search': Search
+  },
   data() {
     return {
       noCodes: true,
@@ -73,6 +78,9 @@ export default {
     },
     exchangeTime(time) {
       return timestampToYMD(time)
+    },
+    search(data) {
+      this.$emit('searchOrder', data)
     }
   }
 }

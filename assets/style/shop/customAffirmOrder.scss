@@ -268,7 +268,6 @@
         text-align: right;
       }
       .left {
-        width: 120px;
         text-align: right;
       }
       .right {
@@ -285,7 +284,7 @@
       text-align: right;
       color: #ff5f5f;
       font-size: 20px;
-      padding: 39px 30px 29px 0;
+      padding: 39px 30px 0 0;
     }
     .commitOrder {
       float: right;
@@ -298,6 +297,10 @@
       text-align: center;
       margin-right: 30px;
       cursor: pointer;
+    }
+    .orderInfo {
+      text-align: right;
+      padding: 20px 30px;
     }
     h6 {
       float: right;
