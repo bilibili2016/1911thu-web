@@ -19,8 +19,7 @@
       </div>
       <div class="ticketBox" v-else>
         <p>发票类型：增值税专用发票</p>
-        <p v-if="ticketForm.types ===1">发票抬头：个人</p>
-        <p v-else>发票抬头：{{ticketForm.companyname}}</p>
+        <p>发票抬头：{{ticketForm.companyname}}</p>
         <p>税号：{{ticketForm.number}}</p>
         <p>注册地址：{{ticketForm.zcadd}}</p>
         <p>联系电话：{{ticketForm.phones}}</p>
@@ -36,7 +35,8 @@
       <p class="tips" v-if="money">{{tip}}</p>
       <p class="tips" v-else>{{tips}}</p>
       <div class="confirm">
-        <span @click="confirm">提交</span>
+        <span @click="back(ticketForm.types)" class="back">返回</span>
+        <span @click="confirm" class="confirm">提交</span>
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@ export default {
             type: 'success',
             message: res.msg
           })
-          this.$bus.$emit('chengeItem')
+          this.$emit('chengeItem')
           this.$emit('getUnTicketData')
           this.confirmInvoice = false
         } else {
@@ -76,17 +76,20 @@ export default {
         }
       })
     },
+    // 关闭当前的提交框 打开信息输入框
+    back() {
+      this.close()
+      this.$emit('goBack')
+    },
+    // 关闭当前提交框
     close() {
-      this.$bus.$emit('closeConfirm')
+      this.confirmInvoice = false
     }
   },
   mounted() {
     this.$bus.$on('showConfirm', data => {
       this.ticketForm = data
       this.confirmInvoice = true
-    })
-    this.$bus.$on('closeConfirm', data => {
-      this.confirmInvoice = false
     })
     this.price = Number(this.price)
     if (this.price < 200) {

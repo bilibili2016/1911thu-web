@@ -69,7 +69,7 @@
       <!-- 发票弹框 第一步：填写发票信息-->
       <v-ticket v-show="showInvoice" :checkedArr="checkedArr" @handleClose="close"></v-ticket>
       <!-- 发票弹框 第二步：确认发票信息并提交-->
-      <v-comfirm :price="orderPrice" @getUnTicketData="getUnTicketData"></v-comfirm>
+      <v-comfirm :price="orderPrice" @getUnTicketData="getUnTicketData" @chengeItem="chengeItem" @goBack="goBack"></v-comfirm>
     </div>
   </div>
 </template>
@@ -197,6 +197,14 @@ export default {
           checkboxList[i].checked = false
         }
       })
+    },
+    // 切换到兑换详情
+    chengeItem() {
+      this.$emit('chengeItem')
+    },
+    // 开纸质发票 提交发票的时候 返回
+    goBack() {
+      this.showIoc()
     },
     // 关闭表单
     close() {

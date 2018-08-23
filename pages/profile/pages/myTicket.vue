@@ -4,7 +4,7 @@
     <el-tabs v-model="activeTicket" @tab-click="handleTicket">
       <el-tab-pane label="按订单开发票" name="ticketFirst">
         <div v-loading="allTicket" :class="{ minheight : allTicket}">
-          <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
+          <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" @chengeItem="chengeItem" v-loading="readyOrderLoad"></v-tkorder>
         </div>
 
         <div class="pagination" v-if="unTicketData && unTicketData.length>0">
@@ -73,6 +73,10 @@ export default {
     },
     getUpdateMsg() {
       this.$emit('getUpdateMsg')
+    },
+    chengeItem() {
+      this.activeTicket = 'ticketSecond'
+      document.documentElement.scrollTop = 0
     },
     getTicketDetail() {
       this.$emit('getTicketDetail')
