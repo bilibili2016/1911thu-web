@@ -809,6 +809,7 @@ export default {
     // 开票历史
     getHistoryOrderData() {
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
+        console.log(response, 'response1')
         this.historyOrderData = response.data.invoiceList
         this.pagemsg9.total = response.data.invoiceTotal
 
@@ -820,6 +821,7 @@ export default {
       this.pagemsg9.page = val
       this.tickethistoryForm.pages = val
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
+        console.log(response, 'response2')
         this.historyOrderData = response.data.invoiceList
         this.historyOrderLoad = false
       })
