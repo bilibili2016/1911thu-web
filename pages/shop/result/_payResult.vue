@@ -25,7 +25,7 @@
         <div class="tips">
           <p class="tips-one">您购买的商品已生成兑换码</p>
           <p>请前往
-            <span class="tips-two">“我的中心 —兑换码管理”</span>查看，兑换后可观看课程
+            <span class="tips-two">“我的中心 — 兑换码管理”</span>查看，兑换后可观看课程
           </p>
         </div>
         <p class="sure">
