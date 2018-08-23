@@ -14,7 +14,7 @@
     </p>
     <p>
       <span class="left">购买账号：</span>
-      <span class="right">{{data.nickName}}</span>
+      <span class="right" :title="data.nickName">{{data.nickName}}</span>
     </p>
   </div>
 </template>

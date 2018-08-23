@@ -35,7 +35,7 @@
       <p class="tips" v-if="money">{{tip}}</p>
       <p class="tips" v-else>{{tips}}</p>
       <div class="confirm">
-        <span @click="back(ticketForm.types)" class="back">返回</span>
+        <span @click="back" class="back">返回</span>
         <span @click="confirm" class="confirm">提交</span>
       </div>
     </div>

@@ -350,19 +350,22 @@ export default {
       )
     },
     handleScroll() {
-      if (this.move) {
-        this.interval = setInterval(() => {
-          this.backPosition += 50
-          if (this.backPosition > this.buttonFormTop) {
-            this.move = true
-            this.backPosition = 0
-            clearInterval(this.interval)
-          } else {
-            this.move = false
-            window.scrollTo(0, this.backPosition)
-          }
-        }, 16.7)
-      }
+      window.scrollTo(0, this.buttonFormTop)
+      // if (this.move) {
+      //   console.log(this.buttonFormTop, 'this.buttonFormTop')
+
+      //   this.interval = setInterval(() => {
+      //     this.backPosition += 50
+      //     if (this.backPosition > this.buttonFormTop) {
+      //       this.move = true
+      //       this.backPosition = 0
+      //       clearInterval(this.interval)
+      //     } else {
+      //       this.move = false
+      //       window.scrollTo(0, this.backPosition)
+      //     }
+      //   }, 0.01)
+      // }
     },
     handleLink(item) {
       window.open(window.location.origin + item.link)

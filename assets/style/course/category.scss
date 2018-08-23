@@ -1,6 +1,7 @@
 .center {
   width: 1100px;
   margin: 0 auto;
+
   .header {
     height: 84px;
     .rightPages {
@@ -19,6 +20,7 @@
   .center {
     width: 1100px;
     margin: 0 auto;
+    // min-height: 500px;
     &.category {
       padding-bottom: 20px;
     }
@@ -77,7 +79,7 @@
     }
     .carlist {
       height: 1400px;
-      min-height: 320px;
+      // min-height: 320px;
     }
     .el-button {
       font-weight: 400;
