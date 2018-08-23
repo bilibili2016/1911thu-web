@@ -5,7 +5,7 @@
       <el-tabs v-model="activeOrder">
         <el-tab-pane label="全部" name="orderFirst">
           <div :class="{ minheight : allOrderLoadAll}" v-loading="allOrderLoadAll">
-            <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail"></v-order>
+            <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" @detection="detection"></v-order>
           </div>
 
           <div class="pagination" v-if="allOrderData && allOrderData.length>19">
@@ -108,6 +108,9 @@ export default {
     },
     invalidOrderDataChange(val) {
       this.$emit('invalidOrderDataChange', val)
+    },
+    detection() {
+      this.$emit('detection')
     }
   }
 }

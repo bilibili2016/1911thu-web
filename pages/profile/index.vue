@@ -25,7 +25,7 @@
         <el-tab-pane class="my-course my-order" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
-          <v-myorder :allOrderLoadAll="allOrderLoadAll" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="getUpdateMsg" @getAllOrderDataChange="getAllOrderDataChange" @unfinishedOrderDataChange="unfinishedOrderDataChange" @getReadyOrderDataChange="getReadyOrderDataChange" @invalidOrderDataChange="invalidOrderDataChange"></v-myorder>
+          <v-myorder @detection="SearchOrderData" :allOrderLoadAll="allOrderLoadAll" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="getUpdateMsg" @getAllOrderDataChange="getAllOrderDataChange" @unfinishedOrderDataChange="unfinishedOrderDataChange" @getReadyOrderDataChange="getReadyOrderDataChange" @invalidOrderDataChange="invalidOrderDataChange"></v-myorder>
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
@@ -302,7 +302,8 @@ export default {
         pages: 1,
         limits: 20,
         payStatus: null,
-        ids: null
+        ids: null,
+        startTime: null
       },
       orderNotInvoiceForm: {
         pages: 1,
@@ -610,6 +611,19 @@ export default {
       profileHome.getAllOrderData(this.orderForm).then(response => {
         this.allOrderData = response.data.orderList
         this.allOrderLoad = false
+      })
+    },
+    // 我的订单 - 搜索
+    SearchOrderData(val) {
+      this.orderForm.payStatus = 0
+      // this.allOrderLoadAll = true
+      this.orderForm.startTime = ''
+      this.orderForm.endTime = ''
+      profileHome.getAllOrderData(this.orderForm).then(response => {
+        // this.allOrderData = response.data.orderList
+        // this.allOrderLoadAll = false
+        // this.pagemsg4.total = response.data.orderTotal
+        console.log(response, 'response')
       })
     },
     // 我的项目 公共
