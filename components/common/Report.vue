@@ -52,7 +52,7 @@ export default {
 
       home.reportProblem(this.problem).then(response => {
         if (response.status === '100100') {
-          message(this, 'success', response.msg)
+          message(this, 'error', response.msg)
         } else {
           this.closeReport()
           message(this, 'success', response.msg)
