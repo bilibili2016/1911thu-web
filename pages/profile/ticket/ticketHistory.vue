@@ -1,7 +1,7 @@
   <template>
   <!-- 开发票历史 -->
   <div class="tickeHietory">
-    {{orderData}}
+    <!-- {{orderData}} -->
     <!-- 历史列表 -->
     <div class="orderList" v-for="(ticket, index ) in orderData" :key="index">
       <div class="topBar clearfix">
