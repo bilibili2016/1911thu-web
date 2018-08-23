@@ -1,6 +1,16 @@
 <template>
   <!-- 我的订单，我的发票列表 -->
   <div>
+    <div>
+      <!-- 时间筛选 -->
+      <!-- <div class="block">
+        <div class="demonstration fl">根据成交时间搜索: </div>
+        <div class="fl">
+          <el-date-picker v-model="value6" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+          </el-date-picker>
+        </div>
+      </div> -->
+    </div>
     <div class="orderList" v-for="(courseList, index ) in data" :key="index">
       <div class="topBar clearfix">
         <span class="fl">订单：{{courseList.order_sn}}</span>
@@ -10,6 +20,7 @@
         <div class="content">
           <div class="course">
             <!-- 课程列表 -->
+            <!-- <div>1</div> -->
             <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="(course,index) in courseList.orderCurriculumList">
               <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
               <div class="fl">
@@ -19,6 +30,7 @@
               </div>
             </div>
             <!-- 项目列表 -->
+            <!-- <div>2</div> -->
             <div class="courseOne" v-if="courseList.orderProjectList.length" v-for="(project,index) in courseList.orderProjectList">
               <div class="courseImg">
                 <!-- 项目图标 -->
@@ -68,6 +80,38 @@ export default {
   props: ['data', 'config'],
   data() {
     return {
+      value6: '',
+      pickerOptions2: {
+        shortcuts: [
+          {
+            text: '最近一周',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+              picker.$emit('pick', [start, end])
+            }
+          },
+          {
+            text: '最近一个月',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+              picker.$emit('pick', [start, end])
+            }
+          },
+          {
+            text: '最近三个月',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+              picker.$emit('pick', [start, end])
+            }
+          }
+        ]
+      },
       orderForm: {
         pages: 1,
         limits: 20,
@@ -161,4 +205,14 @@ export default {
 </script>
 
 <style scoped>
+/* .block {
+  padding: 25px 0px;
+  font-size: 16px;
+  .demonstration {
+    /* padding-right: 30px; */
+/* margin-right: 30px; */
+/* display: inline; */
+/* margin: 12px 20px 0px 0px;
+  }
+}  */
 </style>
