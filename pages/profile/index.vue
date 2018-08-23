@@ -51,16 +51,15 @@
         <el-tab-pane class="my-course my-order" name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-ticket"></i> 发票管理</span>
-
           <v-myticket :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange"></v-myticket>
         </el-tab-pane>
 
         <!-- 自定制项目 -->
-        <!-- <el-tab-pane class="my-course my-customerProject" name="tab-eighth">
+        <el-tab-pane class="my-course my-customerProject" name="tab-nine">
           <span slot="label" class="tabList">
-            <i class="icon-customerProject"></i> 自定制项目</span>
-
-        </el-tab-pane> -->
+            <i class="icon-cusProject"></i>&nbsp;自定制项目</span>
+          <v-myCustomerProject></v-myCustomerProject>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -80,6 +79,8 @@ import myOrder from '@/pages/profile/pages/myOrder'
 import myInfo from '@/pages/profile/pages/myInfo'
 import myCode from '@/pages/profile/pages/myCode'
 import myTicket from '@/pages/profile/pages/myTicket'
+import myCustomerProject from '@/pages/profile/pages/myCustomerProject'
+
 export default {
   components: {
     'v-person': PersonalSet,
@@ -90,7 +91,8 @@ export default {
     'v-myorder': myOrder,
     'v-myinfo': myInfo,
     'v-mycode': myCode,
-    'v-myticket': myTicket
+    'v-myticket': myTicket,
+    'v-myCustomerProject': myCustomerProject
   },
   data() {
     return {

@@ -113,6 +113,11 @@ export default {
   mounted() {
     this.handleSearchs()
     // this.$bus.$emit('bannerShow', false)
+  },
+  watch: {
+    $route(to, from) {
+      this.handleSearchs()
+    }
   }
 }
 </script>
