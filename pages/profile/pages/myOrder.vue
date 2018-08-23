@@ -4,7 +4,9 @@
     <el-card v-if="showOrderList">
       <el-tabs v-model="activeOrder">
         <el-tab-pane label="全部" name="orderFirst">
-          <div :class="{ minheight : allTicket}" v-loading="allOrderLoadAll">
+          <!-- <div :class="{ minheight : allTicket}" v-loading="allOrderLoadAll"> -->
+          <div v-loading="allOrderLoadAll">
+
             <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail"></v-order>
           </div>
 

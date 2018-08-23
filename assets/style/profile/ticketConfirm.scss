@@ -52,14 +52,22 @@
     .confirm {
       padding-bottom: 30px;
       text-align: center;
-      span {
+      .btn {
         width: 150px;
         height: 40px;
         line-height: 40px;
         border-radius: 6px;
-        background-color: #6417a6;
+
         color: #fff;
         cursor: pointer;
+      }
+      .submit {
+        background-color: #6417a6;
+      }
+      .return {
+        background-color: #ddd;
+        color: #666;
+        margin-left: 30px;
       }
     }
   }

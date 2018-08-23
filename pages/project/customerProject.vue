@@ -5,29 +5,29 @@
             <div class="con-item name clearfix">
                 <div class="fl">项目名称：</div>
                 <div class="fr">
-                    <el-input placeholder=""></el-input>
+                    <el-input v-model="projectForm.name"></el-input>
                     <span class="input-inner">不超过30字</span>
                 </div>
             </div>
             <div class="con-item desc clearfix">
                 <div class="fl">项目简介：</div>
                 <div class="fr">
-                    <el-input type="textarea" :rows="3" maxlength="500" placeholder=""></el-input>
+                    <el-input type="textarea" v-model="projectForm.desc" :rows="3" maxlength="500" placeholder=""></el-input>
                 </div>
                 <span class="input-inner">不超过500字</span>
             </div>
             <div class="con-item obj clearfix">
                 <div class="fl">培训对象：</div>
                 <div class="fr">
-                    <el-radio v-model="objRadio" label="1">党政/事业单位</el-radio>
-                    <el-radio v-model="objRadio" label="2">企业单位</el-radio>
+                    <el-radio v-model="projectForm.objRadio" label="1">党政/事业单位</el-radio>
+                    <el-radio v-model="projectForm.objRadio" label="2">企业单位</el-radio>
                 </div>
             </div>
             <div class="con-item num clearfix">
                 <div class="fl">培训人数：</div>
                 <div class="fr selectFr">
                     <div @click.stop="handleNumSelect">
-                        <el-input placeholder="请选择人数" v-model="trainNum" readonly="true"></el-input>
+                        <el-input placeholder="请选择人数" v-model="projectForm.trainNum" readonly="true"></el-input>
                         <span class="pull-down">
                             <i class="el-icon-caret-bottom"></i>
                         </span>
@@ -43,23 +43,21 @@
             <div class="con-item style clearfix">
                 <div class="fl">培训方式：</div>
                 <div class="fr ">
-                    <el-radio v-model="styleRadio" label="1">线上</el-radio>
-                    <el-radio v-model="styleRadio" label="2">线上+线下</el-radio>
+                    <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio>
+                    <el-radio v-model="projectForm.styleRadio" label="2">线上+线下</el-radio>
                 </div>
             </div>
-            <div class="con-item style clearfix" v-if="styleRadio==='2'">
+            <div class="con-item style day clearfix" v-if="projectForm.styleRadio==='2'">
                 <div class="fl"></div>
                 <div class="fr selectFr">
                     <div @click.stop="handleDaySelect" class="select-con">
                         <span>线下培训天数</span>
-                        <el-input placeholder="请选择天数" v-model="trainDay" readonly="true"></el-input>
+                        <el-input placeholder="请选择天数" v-model="projectForm.trainDay" readonly="true"></el-input>
                         <span class="pull-down">
                             <i class="el-icon-caret-bottom"></i>
                         </span>
                         <span>
-                            <span class="price" v-if="objRadio==='1'">60000</span>
-                            <span class="price" v-else>80000</span>
-                            元/天
+                            <span class="price">{{projectForm.offlinePrice}}</span>元/天
                         </span>
                     </div>
 
@@ -78,7 +76,7 @@
                             <div class="fl">学院分类：</div>
                             <div class="fr selectFr">
                                 <div @click.stop="handleCollegeSelect">
-                                    <el-input placeholder="请选择分类" v-model="trainCollege" readonly="true"></el-input>
+                                    <el-input placeholder="请选择分类" v-model="projectForm.trainCollege" readonly="true"></el-input>
                                     <span class="pull-down">
                                         <i class="el-icon-caret-bottom"></i>
                                     </span>
@@ -94,7 +92,7 @@
                             <div class="fl">课程分类：</div>
                             <div class="fr selectFr">
                                 <div @click.stop="handleCourseSelect">
-                                    <el-input placeholder="请选择分类" v-model="trainCourse" readonly="true"></el-input>
+                                    <el-input placeholder="请选择分类" v-model="projectForm.trainCourse" readonly="true"></el-input>
                                     <span class="pull-down">
                                         <i class="el-icon-caret-bottom"></i>
                                     </span>
@@ -113,7 +111,7 @@
                             <div class="fl">按课程搜索：</div>
                             <div class="fr selectFr">
                                 <div @click.stop="handleSearchSelect">
-                                    <el-input placeholder="请选择分类" v-model="trainSearch" readonly="true"></el-input>
+                                    <el-input placeholder="请选择分类" v-model="projectForm.trainSearch" readonly="true"></el-input>
                                     <span class="pull-down">
                                         <i class="el-icon-caret-bottom"></i>
                                     </span>
@@ -155,21 +153,30 @@
                 <div class="deatil-item clearfix">
                     <div class="detail-title">课程结算</div>
                     <div class="deTable">
-                        <div class="deItem courseItem clearfix" v-for="(item,index) in courseData" :key="index">
-                            <div class="courseTitle">{{item.title}}</div>
-                            <div class="time">{{item.time}}学时</div>
-                            <div class="price">{{item.price}}元</div>
-                            <div class="num">x {{item.num}}</div>
-                            <div class="total">= {{item.total}}元</div>
+                        <!-- 线上课程 -->
+                        <div class="deItem courseItem clearfix">
+                            <div class="courseTitle">线上课程</div>
+                            <div class="time">{{projectForm.onlineTime}}学时</div>
+                            <div class="price">{{projectForm.onlinePrice}}元/人</div>
+                            <div class="num">x {{projectForm.trainNum}}人</div>
+                            <div class="total">= {{onlineTotalPrice}}元</div>
+                        </div>
+                        <!-- 线下课程（培训方式为线上+线上显示） -->
+                        <div class="deItem courseItem clearfix" v-if="projectForm.styleRadio==='2'">
+                            <div class="courseTitle">线下课程</div>
+                            <div class="time">{{projectForm.trainDay*8}}学时</div>
+                            <div class="price">{{projectForm.offlinePrice}}元/天</div>
+                            <div class="num">x {{projectForm.trainDay}}天</div>
+                            <div class="total">= {{offlineTotalPrice}}元</div>
                         </div>
                         <div>
                             <p class="discount">
                                 <span class="discount-left">9.5折</span>
-                                <span>优惠20500元</span>
+                                <span>优惠{{discountPrice}}元</span>
                             </p>
                             <p class="totalPrice">
                                 <span class="totalPrice-left">总计</span>
-                                <span>20500元</span>
+                                <span>{{totalPrice}}元</span>
                             </p>
                         </div>
                     </div>
@@ -188,18 +195,11 @@
 export default {
   data() {
     return {
-      objRadio: '1',
-      styleRadio: '1',
       isShowNumSelect: false,
       isShowDaySelect: false,
       isShowCollegeSelect: false,
       isShowCourseSelect: false,
       isShowSearchSelect: false,
-      trainNum: 20,
-      trainDay: 1,
-      trainCollege: '',
-      trainCourse: '',
-      trainSearch: '',
       chooseCourseData: [],
       searchCourseData: [
         {
@@ -224,20 +224,20 @@ export default {
       checkedCourseData: [
         {
           title: '抓住用户心里，就能精准运营抓住用户心里',
-          time: '10',
-          price: '200',
+          time: 100,
+          price: 100,
           id: 1
         },
         {
           title: '数据挖掘：理论与算法',
-          time: '10',
-          price: '200',
+          time: 20,
+          price: 200,
           id: 2
         },
         {
           title: '经营决策分析',
-          time: '10',
-          price: '200',
+          time: 30,
+          price: 300,
           id: 3
         }
       ],
@@ -256,7 +256,53 @@ export default {
           num: '20人',
           total: '4000'
         }
-      ]
+      ],
+      projectForm: {
+        name: '', //项目名称
+        desc: '', //项目简介
+        objRadio: '1', //培训对象
+        trainNum: 20, //培训人数
+        styleRadio: '1', //培训方式
+        trainDay: 1, //线下培训天数
+        trainCollege: '', //学院分类
+        trainCourse: '', //课程分类
+        trainSearch: '', //课程搜索
+        onlineTime: 0, //课程结算-线上课程总学时
+        onlinePrice: 0, //课程结算-线上课程价钱
+        onlineTotalPrice: '', //课程结算-线上课程总价钱
+        offlinePrice: 60000, //线下培训费用
+        offlineTotalPrice: '', //课程结算-线上课程总价钱
+        discountPrice: 0, //优惠价钱
+        totalPrice: 0 //项目总价钱
+      },
+      offlinePrice: 0,
+      onlinePrice: 0
+    }
+  },
+  computed: {
+    //计算线下课程总价钱
+    offlineTotalPrice() {
+      this.projectForm.offlineTotalPrice =
+        this.projectForm.offlinePrice * this.projectForm.trainDay
+      return this.projectForm.offlineTotalPrice
+    },
+    //计算线上课程总价钱
+    onlineTotalPrice() {
+      this.projectForm.onlineTotalPrice =
+        this.projectForm.onlinePrice * this.projectForm.trainNum
+      return this.projectForm.onlineTotalPrice
+    },
+    //计算自定制项目总价钱
+    totalPrice() {
+      this.projectForm.totalPrice =
+        this.projectForm.offlineTotalPrice + this.projectForm.onlineTotalPrice
+      return this.projectForm.totalPrice
+    },
+    //计算自定制项目的优惠价钱（9.5折）
+    discountPrice() {
+      this.projectForm.discountPrice =
+        this.projectForm.totalPrice * (1 - 0.95).toFixed(2)
+      return this.projectForm.discountPrice
     }
   },
   methods: {
@@ -267,6 +313,9 @@ export default {
     //删除已选课程
     deleteChooseCourse(index) {
       this.checkedCourseData.splice(index, 1)
+      console.log(this.checkedCourseData)
+
+      this.computedPrice()
     },
     handleFocus() {
       this.isShowSearchSelect = true
@@ -313,22 +362,22 @@ export default {
     },
     //选择培训人数
     chooseNum(val) {
-      this.trainNum = val
+      this.projectForm.trainNum = val
       this.isShowNumSelect = false
     },
     //选择线下培训天数
     chooseDay(val) {
-      this.trainDay = val
+      this.projectForm.trainDay = val
       this.isShowDaySelect = false
     },
     //选择学院分类
     chooseCollege(val) {
-      this.trainCollege = val
+      this.projectForm.trainCollege = val
       this.isShowCollegeSelect = false
     },
     //选择课程分类
     chooseCourse(val) {
-      this.trainCourse = val
+      this.projectForm.trainCourse = val
       this.isShowCourseSelect = false
     },
     //选择按课程搜索，阻止点击li时，label触发两次
@@ -337,15 +386,12 @@ export default {
     },
     //选择按课程搜索
     chooseSearch(item) {
-      console.log(this.chooseCourseData)
-
       let arrIndex
       this.chooseCourseData.forEach((n, index) => {
         if (n.id === item.id) {
           arrIndex = index
         }
       })
-      console.log(arrIndex)
 
       this.isShowSearchSelect = true
       if (arrIndex >= 0) {
@@ -362,14 +408,36 @@ export default {
       this.isShowCollegeSelect = false
       this.isShowCourseSelect = false
       this.isShowSearchSelect = false
+    },
+    computedPrice() {
+      //初始化
+      this.projectForm.onlineTime = 0
+      this.projectForm.onlinePrice = 0
+      this.checkedCourseData.forEach((n, index) => {
+        this.projectForm.onlineTime += Number(n.time)
+        this.projectForm.onlinePrice += Number(n.price)
+      })
     }
+  },
+  mounted() {
+    this.computedPrice()
   },
   watch: {
     chooseCourseData(val) {
-      this.trainSearch = ''
+      this.projectForm.trainSearch = ''
       val.forEach((n, index) => {
-        this.trainSearch += n.title + ','
+        this.projectForm.trainSearch += n.title + ','
       })
+    },
+    //培训对象 --线下课程费用
+    'projectForm.objRadio'(val) {
+      if (val === '1') {
+        //党政
+        this.projectForm.offlinePrice = 60000
+      } else {
+        //企业
+        this.projectForm.offlinePrice = 80000
+      }
     }
   }
 }

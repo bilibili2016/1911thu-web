@@ -56,11 +56,11 @@
         </el-tab-pane>
 
         <!-- 自定制项目 -->
-        <el-tab-pane class="my-course my-customerProject" name="tab-eighth">
+        <!-- <el-tab-pane class="my-course my-customerProject" name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-customerProject"></i> 自定制项目</span>
 
-        </el-tab-pane>
+        </el-tab-pane> -->
       </el-tabs>
     </div>
   </div>
@@ -83,9 +83,7 @@ import myTicket from '@/pages/profile/pages/myTicket'
 export default {
   components: {
     'v-person': PersonalSet,
-
     'v-banner': Banner,
-
     'v-myhome': MyHome,
     'v-mycourse': myCourse,
     'v-myproject': myProject,
@@ -317,7 +315,6 @@ export default {
       collectionData: [],
       orderDetail: {}, //订单详情信息
       bankInfo: {}, //公司打款信息
-
       showOrderList: true,
       showTicketList: true,
       isUpdate: false,
