@@ -37,6 +37,7 @@
       <p class="tips" v-else>{{tips}}</p>
       <div class="confirm">
         <span class="btn submit" @click="confirm">提交</span>
+        <span class="btn return" @click="returnPage">返回</span>
       </div>
     </div>
   </div>
@@ -78,7 +79,8 @@ export default {
     },
     close() {
       this.$bus.$emit('closeConfirm')
-    }
+    },
+    returnPage() {}
   },
   mounted() {
     this.$bus.$on('showConfirm', data => {
