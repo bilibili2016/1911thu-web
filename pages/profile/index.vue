@@ -83,9 +83,7 @@ import myTicket from '@/pages/profile/pages/myTicket'
 export default {
   components: {
     'v-person': PersonalSet,
-
     'v-banner': Banner,
-
     'v-myhome': MyHome,
     'v-mycourse': myCourse,
     'v-myproject': myProject,
@@ -317,7 +315,6 @@ export default {
       collectionData: [],
       orderDetail: {}, //订单详情信息
       bankInfo: {}, //公司打款信息
-
       showOrderList: true,
       showTicketList: true,
       isUpdate: false,

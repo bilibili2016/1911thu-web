@@ -36,7 +36,7 @@
       <p class="tips" v-if="money">{{tip}}</p>
       <p class="tips" v-else>{{tips}}</p>
       <div class="confirm">
-        <span @click="confirm">提交</span>
+        <span class="btn submit" @click="confirm">提交</span>
       </div>
     </div>
   </div>
