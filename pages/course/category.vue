@@ -10,18 +10,20 @@
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
       <!-- 非选课的下面 课程列表 -->
       <div v-if="xid === '0'">
-        <!-- -->
-        <div class="carlist" v-if="categoryData.length&&xid === '0'" v-loading="loadCourse">
-          <v-card :data="categoryData" :config="categoryCard"></v-card>
+
+        <div class="carlist" v-loading="loadCourseAll" :class="{ minheights : loadCourseAll}">
+          <v-card :data="categoryData" :config="categoryCard" v-if="categoryData.length&&xid === '0'"></v-card>
         </div>
-        <div v-if="categoryData.length === 0 &&loadStart === false" v-loading="loadCourse" class="noMsg">
+        <div v-if="categoryData.length == 0 &&!loadCourseAll" class="noMsg">
           <v-nothing></v-nothing>
         </div>
       </div>
+
       <div v-if="xid === '1'">
+        <!-- {{categoryDataChoose}} -->
         <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
-        <div class="carlist" v-if="categoryDataChoose.length&& xid === '1'" v-loading="loadCourse" ref="content">
-          <v-card :data="categoryDataChoose" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
+        <div class="carlist" v-loading="loadCourse" ref="content" :class="{ minheights : loadCourse}">
+          <v-card :data="categoryDataChoose" v-if="categoryDataChoose.length&& xid === '1'" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
         <div v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<=0 && !loadCourse">
@@ -60,7 +62,8 @@ export default {
       cidData: [],
       pidData: [],
       loadBanner: true,
-      loadCourse: true,
+      loadCourse: false,
+      loadCourseAll: false,
       classList: [],
       cidBg: 0,
       pidBg: 0,
@@ -374,14 +377,13 @@ export default {
     },
     // 课程 card 列表
     getCourseCardList(itemCid, itemPid) {
-      this.loadCourse = true
+      this.loadCourseAll = true
       this.setParamsPidCid(itemCid, itemPid)
 
       category.curriculumListNew(this.categoryForm).then(res => {
-        this.loadStart = false
+        this.loadCourseAll = false
         this.categoryData = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
-        this.loadCourse = false
       })
     },
     // 选课 card 列表
@@ -389,6 +391,7 @@ export default {
       this.loadCourse = true
       this.setParamsPidCid(itemCid, itemPid)
       category.chooseCurriculumList(this.categoryForm).then(res => {
+        console.log(res)
         this.categoryDataChoose = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
         this.allCheckedId = []
@@ -400,12 +403,12 @@ export default {
     },
     // 项目 card列表
     getProjectCardList(itemCid, itemPid) {
-      this.loadCourse = true
+      this.loadCourseAll = true
       this.setParamsPidCid(itemCid, itemPid)
       category.curriculumProjectList(this.categoryForm).then(res => {
         this.categoryData = res.data.curriculumProjectList
         this.pagemsg.total = res.data.pageCount
-        this.loadCourse = false
+        this.loadCourseAll = false
       })
     },
 
@@ -515,4 +518,7 @@ export default {
 <style scoped lang="scss">
 // 因兼容问题暂时组件引入
 @import '~assets/style/course/category';
+.minheights {
+  min-height: 500px;
+}
 </style>

@@ -3,7 +3,8 @@
     <div class="banner">
       <div class="center category-style">
         <div class="college">
-          <li class="title" v-if="!loadList">学院：</li>
+          <!-- v-if="!loadList" -->
+          <li class="title">学院：</li>
           <ul>
             <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
               <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
@@ -11,7 +12,8 @@
           </ul>
         </div>
         <div class="classification">
-          <li class="title" v-if="!loadList">分类：</li>
+          <!-- v-if="!loadList" -->
+          <li class="title">分类：</li>
           <ul>
             <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid === items.id ? true : false }">
               <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
