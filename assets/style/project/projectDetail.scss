@@ -35,7 +35,10 @@
     // background: url('http://papn9j3ys.bkt.clouddn.com/pro_banner.png') no-repeat;
     background-position: top center;
     background-size: 100% 390px;
-    box-shadow: 8px 0px 21px rgba(39, 0, 77, 0.07);
+    box-shadow: 0px 8px 21px 0px rgba(39, 0, 77, 0.07);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
     position: relative;
     .BreadCrumb {
     }
@@ -95,9 +98,6 @@
       margin-top: 120px;
       height: 98px;
       background: #fff;
-      box-shadow: 0px 8px 21px 0px rgba(39, 0, 77, 0.07);
-      border-bottom-right-radius: 10px;
-      border-bottom-left-radius: 10px;
       .some {
         display: inline;
         div {
@@ -199,9 +199,6 @@
     }
   }
 
-  .bag {
-    color: #fff !important;
-  }
   .main-crumb .fr .collect .line-center .collectSpan:hover {
     color: #fff;
   }

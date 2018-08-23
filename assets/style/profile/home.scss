@@ -30,6 +30,9 @@
   &.profile .my-course#pane-tab-eighth .el-tabs__content {
     overflow: initial;
   }
+  &.profile .my-course#pane-tab-eighth .el-tabs__content {
+    position: static;
+  }
   &.profile .my-course .el-tabs__header {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
