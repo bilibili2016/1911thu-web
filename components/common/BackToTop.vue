@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 import { mapActions, mapGetters } from 'vuex'
 /* eslint-disable */
 export default {
@@ -107,7 +108,10 @@ export default {
       this.showNotLogin = show
     },
     checkCourse() {
-      if (this.isAuthenticated) {
+      // this.$bus.$emit('getUserInfo')
+      let token = persistStore.get('token')
+      // console.log(token, 'token')
+      if (this.isAuthenticated && token) {
         // this.goLink('/course/chooselesson')
         // 整合后的跳转
 

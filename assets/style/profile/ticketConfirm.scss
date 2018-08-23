@@ -57,9 +57,14 @@
         height: 40px;
         line-height: 40px;
         border-radius: 6px;
-
         color: #fff;
         cursor: pointer;
+        &.confirm {
+          background-color: #6417a6;
+        }
+        &.back {
+          background-color: #ccc;
+        }
       }
       .submit {
         background-color: #6417a6;

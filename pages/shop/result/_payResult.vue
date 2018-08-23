@@ -25,7 +25,7 @@
         <div class="tips">
           <p class="tips-one">您购买的商品已生成兑换码</p>
           <p>请前往
-            <span class="tips-two">“我的中心 —兑换码管理”</span>查看，兑换后可观看课程
+            <span class="tips-two">“我的中心 — 兑换码管理”</span>查看，兑换后可观看课程
           </p>
         </div>
         <p class="sure">
@@ -63,9 +63,6 @@ export default {
     ...mapActions('auth', ['setGid']),
     // 继续选课
     handleChoiceCourse() {
-      // window.open(
-      //   window.location.origin + '/course/' + '1' + '?pid=' + '0' + '&xid=1'
-      // )
       window.open(
         window.location.origin +
           '/course/category' +
@@ -127,11 +124,6 @@ export default {
         } else {
           this.hasCode = false
         }
-
-        //禁止后退键 作用于Firefox、Opera
-        // document.onkeypress = banBackSpace
-        //禁止后退键 作用于IE、Chrome
-        // document.onkeydown = banBackSpace
       })
     },
     goLink(item) {

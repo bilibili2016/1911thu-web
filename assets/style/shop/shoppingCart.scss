@@ -216,10 +216,10 @@
             -moz-user-select: none;
             -khtml-user-select: none;
             user-select: none;
-            i {
+            span {
               width: 30px;
               height: 30px;
-              line-height: 24px;
+              line-height: 30px;
               text-align: center;
               float: left;
               font-size: 30px;
@@ -231,8 +231,8 @@
                 background-color: #8f4acb;
                 color: #fff;
               }
-              &.add {
-                line-height: 22px;
+              &.minus {
+                line-height: 26px;
               }
             }
             input.num {
