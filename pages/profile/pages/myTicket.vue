@@ -7,17 +7,17 @@
           <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" v-loading="readyOrderLoad"></v-tkorder>
         </div>
 
-        <div class="pagination" v-if="unTicketData && unTicketData.length>0">
+        <div class="pagination" v-if="unTicketData && unTicketData.length>19">
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg8.pagesize" :pager-count="5" :page-count="pagemsg8.pagesize" :current-page="pagemsg8.page" :total="pagemsg8.total" @current-change="unTicketDataChange"></el-pagination>
         </div>
         <v-nomsg class="noOrder" v-if="unTicketData.length==0 && !allTicket" :config="noMsgTwl"></v-nomsg>
       </el-tab-pane>
       <el-tab-pane name="ticketSecond" label="开票历史">
         <v-tkhistory v-if="historyOrderData && historyOrderData.length>0" :orderData="historyOrderData" @handleUpdate="getUpdateMsg" v-loading="unfinishedOrderLoad"></v-tkhistory>
-        <div class="pagination" v-if="historyOrderData && historyOrderData.length>0">
+        <div class="pagination" v-if="historyOrderData && historyOrderData.length>19">
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg9.pagesize" :pager-count="5" :page-count="pagemsg9.pagesize" :current-page="pagemsg9.page" :total="pagemsg9.total" @current-change="historyOrderDataChange"></el-pagination>
         </div>
-        <v-nomsg class="noOrder" v-else :config="noMsgThi"></v-nomsg>
+        <v-nomsg class="noOrder" v-if="historyOrderData.length == 0" :config="noMsgThi"></v-nomsg>
       </el-tab-pane>
       <el-tab-pane name="ticketThird">
         <span class="payOk" slot="label">开票规则

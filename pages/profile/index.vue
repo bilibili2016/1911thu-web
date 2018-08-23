@@ -56,11 +56,11 @@
         </el-tab-pane>
 
         <!-- 自定制项目 -->
-        <el-tab-pane class="my-course my-customerProject" name="tab-eighth">
+        <!-- <el-tab-pane class="my-course my-customerProject" name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-customerProject"></i> 自定制项目</span>
 
-        </el-tab-pane>
+        </el-tab-pane> -->
       </el-tabs>
     </div>
   </div>

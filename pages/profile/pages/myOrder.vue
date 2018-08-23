@@ -15,7 +15,7 @@
 
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
-          <span class="payCut" slot="label">未完成{{unfinishedOrderData.length}}
+          <span class="payCut" slot="label">未完成
             <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
           </span>
           <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :data="unfinishedOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail" v-loading="unfinishedOrderLoad"></v-order>
@@ -26,7 +26,7 @@
 
         </el-tab-pane>
         <el-tab-pane name="orderThird">
-          <span class="payOk" slot="label">已完成{{readyOrderData.length}}
+          <span class="payOk" slot="label">已完成
           </span>
           <v-order v-if="readyOrderData && readyOrderData.length>0" :data="readyOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="readyOrderLoad"></v-order>
           <div class="pagination" v-if="readyOrderData && readyOrderData.length>19">
@@ -35,7 +35,7 @@
           <v-nomsg class="noOrder" v-if="readyOrderData.length == 0" :config="noMsgTen"></v-nomsg>
         </el-tab-pane>
         <el-tab-pane name="orderFour">
-          <span class="payOff" slot="label">已关闭{{invalidOrderData.length}}
+          <span class="payOff" slot="label">已关闭
           </span>
           <v-order v-if="invalidOrderData && invalidOrderData.length>0" :data="invalidOrderData" :config="orderType" @goOrderDetail="getOrderDetail" v-loading="invalidOrderLoad"></v-order>
           <div class="pagination" v-if="invalidOrderData && invalidOrderData.length>19">
