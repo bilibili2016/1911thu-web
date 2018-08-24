@@ -1,0 +1,47 @@
+.cusProject {
+  padding: 40px 40px 40px 45px;
+  .card-list .itemBox {
+    .line-icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      .onlineIcon {
+        width: 60px;
+        height: 28px;
+      }
+      .offlineIcon {
+        width: 100px;
+        height: 28px;
+      }
+    }
+
+    .item {
+      position: relative;
+      .operate {
+        position: absolute;
+        right: 5px;
+        bottom: 0;
+        span {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          margin-right: 20px;
+          &:last-child {
+            margin-right: 0;
+          }
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .buied {
+        position: absolute;
+        right: 5px;
+        bottom: 0;
+        color: #06bb09;
+        cursor: auto;
+      }
+    }
+  }
+}

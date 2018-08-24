@@ -1,16 +1,19 @@
 <template>
   <!-- 我的订单，我的发票列表 -->
   <div>
-    <div>
-      <!-- 时间筛选 -->
-      <!-- <div class="block">
-        <div class="demonstration fl">根据成交时间搜索: </div>
+    <!-- <div>
+      <div class="block">
+        <div class="demonstration fl" style="margin:12px 2px 0px 0px;">根据成交时间搜索: </div>
         <div class="fl">
           <el-date-picker v-model="value6" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
           </el-date-picker>
         </div>
-      </div> -->
-    </div>
+        <div class="search">
+          <el-button round @click="detection" style="margin-left:10px;">搜索</el-button>
+        </div>
+
+      </div>
+    </div> -->
     <div class="orderList" v-for="(courseList, index ) in data" :key="index">
       <div class="topBar clearfix">
         <span class="fl">订单：{{courseList.order_sn}}</span>
@@ -78,6 +81,11 @@ import { store as persistStore } from '~/lib/core/store'
 import { message, open } from '@/lib/util/helper'
 export default {
   props: ['data', 'config'],
+  watch: {
+    value6(data) {
+      // console.log(data, '123')
+    }
+  },
   data() {
     return {
       value6: '',
@@ -134,6 +142,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid', 'setKid']),
+    detection() {
+      this.$emit('detection')
+    },
     //根据列表长度计算高度
     computedHeight(course, project) {
       let height = (course.length + project.length) * 140 + 'px'
@@ -205,14 +216,19 @@ export default {
 </script>
 
 <style scoped>
-/* .block {
-  padding: 25px 0px;
+.block {
+  padding: 25px 0px 0px 0px;
   font-size: 16px;
-  .demonstration {
-    /* padding-right: 30px; */
-/* margin-right: 30px; */
-/* display: inline; */
-/* margin: 12px 20px 0px 0px;
-  }
-}  */
+}
+.demonstration {
+  padding-right: 30px;
+  /* margin-right: 30px; */
+  /* display: inline; */
+  display: inline-block;
+  font-size: 16px;
+  margin: 12px 15px 0px 0px;
+}
+.search {
+  margin-left: 10px;
+}
 </style>

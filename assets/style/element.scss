@@ -1513,3 +1513,14 @@ input::-webkit-input-safebox-button {
     min-height: 510px;
   }
 }
+
+// 轮播图
+// el-carousel__item is-active is-animating
+.home-info {
+  .el-carousel__item {
+    margin-left: 0px !important;
+  }
+  .is-animating {
+    margin-left: 0px !important;
+  }
+}

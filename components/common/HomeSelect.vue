@@ -6,7 +6,7 @@
     <div class="fl dropdown clearfix">
 
       <div class="dropItem headerClass">
-        <span class="el-dropdown-link">
+        <span class="el-dropdown-link" @click="handleSelectItem({id:0,is_picture_show:0})">
           全部课程
           <i class="el-icon-arrow-down el-icon--right"></i>
           <span class="downLine"></span>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="dropItem headerClass">
-        <span class="el-dropdown-link">
+        <span class="el-dropdown-link" @click="handleSelectItem({id:0,is_picture_show:1})">
           培训项目
           <i class="el-icon-arrow-down el-icon--right"></i>
           <span class="downLine"></span>

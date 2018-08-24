@@ -25,7 +25,7 @@
         <el-tab-pane class="my-course my-order" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
-          <v-myorder :allOrderLoadAll="allOrderLoadAll" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="getUpdateMsg" @getAllOrderDataChange="getAllOrderDataChange" @unfinishedOrderDataChange="unfinishedOrderDataChange" @getReadyOrderDataChange="getReadyOrderDataChange" @invalidOrderDataChange="invalidOrderDataChange"></v-myorder>
+          <v-myorder @detection="SearchOrderData" :allOrderLoadAll="allOrderLoadAll" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="getUpdateMsg" @getAllOrderDataChange="getAllOrderDataChange" @unfinishedOrderDataChange="unfinishedOrderDataChange" @getReadyOrderDataChange="getReadyOrderDataChange" @invalidOrderDataChange="invalidOrderDataChange"></v-myorder>
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
@@ -51,16 +51,15 @@
         <el-tab-pane class="my-course my-order" name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-ticket"></i> 发票管理</span>
-
           <v-myticket :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange"></v-myticket>
         </el-tab-pane>
 
         <!-- 自定制项目 -->
-        <!-- <el-tab-pane class="my-course my-customerProject" name="tab-eighth">
+        <el-tab-pane class="my-course my-customerProject" name="tab-nine">
           <span slot="label" class="tabList">
-            <i class="icon-customerProject"></i> 自定制项目</span>
-
-        </el-tab-pane> -->
+            <i class="icon-cusProject"></i>&nbsp;自定制项目</span>
+          <v-myCustomerProject></v-myCustomerProject>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -80,6 +79,8 @@ import myOrder from '@/pages/profile/pages/myOrder'
 import myInfo from '@/pages/profile/pages/myInfo'
 import myCode from '@/pages/profile/pages/myCode'
 import myTicket from '@/pages/profile/pages/myTicket'
+import myCustomerProject from '@/pages/profile/pages/myCustomerProject'
+
 export default {
   components: {
     'v-person': PersonalSet,
@@ -90,7 +91,8 @@ export default {
     'v-myorder': myOrder,
     'v-myinfo': myInfo,
     'v-mycode': myCode,
-    'v-myticket': myTicket
+    'v-myticket': myTicket,
+    'v-myCustomerProject': myCustomerProject
   },
   data() {
     return {
@@ -302,7 +304,8 @@ export default {
         pages: 1,
         limits: 20,
         payStatus: null,
-        ids: null
+        ids: null,
+        startTime: null
       },
       orderNotInvoiceForm: {
         pages: 1,
@@ -612,6 +615,19 @@ export default {
         this.allOrderLoad = false
       })
     },
+    // 我的订单 - 搜索
+    SearchOrderData(val) {
+      this.orderForm.payStatus = 0
+      // this.allOrderLoadAll = true
+      this.orderForm.startTime = ''
+      this.orderForm.endTime = ''
+      profileHome.getAllOrderData(this.orderForm).then(response => {
+        // this.allOrderData = response.data.orderList
+        // this.allOrderLoadAll = false
+        // this.pagemsg4.total = response.data.orderTotal
+        console.log(response, 'response')
+      })
+    },
     // 我的项目 公共
     getProjectData(type) {
       this.allProjectLoad = true
@@ -821,7 +837,7 @@ export default {
       this.pagemsg9.page = val
       this.tickethistoryForm.pages = val
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
-        console.log(response, 'response2')
+        // console.log(response, 'response')
         this.historyOrderData = response.data.invoiceList
         this.historyOrderLoad = false
       })
