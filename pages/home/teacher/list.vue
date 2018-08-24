@@ -6,7 +6,7 @@
       <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
     </div>
     <div class="pagination" v-show="famousList.length!=0">
-      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0'" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
+      <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pagesize: 5,
+        pagesize: 7,
         total: null
       },
       loading: false

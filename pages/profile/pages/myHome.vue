@@ -8,7 +8,9 @@
         <div :class="{ minheight : allHome}" v-loading="allHome">
           <v-list v-if="studyData  && studyData.length>0" :data="studyData" :config="configZero"></v-list>
         </div>
-
+        <div class="pagination" style="padding-bottom:40px;" v-if="pagemsgHome.total>pagemsgHome.pagesize">
+          <el-pagination background layout="prev, pager, next" :page-size="pagemsgHome.pagesize" :pager-count="5" :page-count="pagemsgHome.pagesize" :current-page="pagemsgHome.page" :total="pagemsgHome.total" @current-change="studyDataChange"></el-pagination>
+        </div>
         <v-nomsg class="fillTop" v-if="studyData.length == 0&& !allHome" :config="noMsgOne"></v-nomsg>
       </div>
     </el-card>
@@ -19,10 +21,15 @@
 import NoMsg from '@/pages/profile/pages/noMsg.vue'
 import CustomList from '@/pages/profile/components/List.vue'
 export default {
-  props: ['studyData', 'configZero', 'noMsgOne', 'allHome'],
+  props: ['studyData', 'configZero', 'noMsgOne', 'allHome', 'pagemsgHome'],
   components: {
     'v-nomsg': NoMsg,
     'v-list': CustomList
+  },
+  methods: {
+    studyDataChange(val) {
+      this.$emit('studyDataChange', val)
+    }
   }
 }
 </script>

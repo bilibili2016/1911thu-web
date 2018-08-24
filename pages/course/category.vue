@@ -32,7 +32,7 @@
         <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
       </div>
     </div>
-    <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg" @handlePageChange="handlePageChange" v-if="!loadCourse"></v-page>
+    <v-page :id="pagemsg.total" :data="pagemsg.pagesize" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" :pagemsg="pagemsg" @handlePageChange="handlePageChange" v-if="!loadCourse"></v-page>
   </div>
 </template>
 
@@ -391,7 +391,6 @@ export default {
       this.loadCourse = true
       this.setParamsPidCid(itemCid, itemPid)
       category.chooseCurriculumList(this.categoryForm).then(res => {
-        console.log(res)
         this.categoryDataChoose = res.data.curriculumList
         this.pagemsg.total = res.data.pageCount
         this.allCheckedId = []
@@ -458,7 +457,7 @@ export default {
     },
     // 点击 底部分页分页事件
     handlePageChange(val) {
-      this.loadCourse = true
+      this.loadCourse = false
       this.pagemsg.page = val
       this.categoryForm.pages = val
       let categoryId = splitUrl(0, 1)
