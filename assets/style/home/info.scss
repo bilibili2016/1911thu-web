@@ -3,6 +3,7 @@
     height: 466px;
     .newsCarousel {
       width: 520px;
+
       height: 418px;
       overflow: hidden;
       transition: all 300ms;
@@ -11,7 +12,7 @@
         height: 100%;
         position: relative;
         img {
-          width: 520px;
+          // width: 520px;
           height: 418px;
         }
         h4 {
