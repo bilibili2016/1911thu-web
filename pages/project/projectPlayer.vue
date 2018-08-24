@@ -38,8 +38,10 @@
     </div>
     <!-- 报告问题 -->
     <v-report :config="playerForm"></v-report>
+
+    <v-evaluate @closeEvaluate="closeEvaluate" :showEvaluate="showEvaluate" :shoppingForm="shoppingForm" :playerForm="playerForm"></v-evaluate>
     <!-- 写评价 -->
-    <div class="evaluate" v-show="showEvaluate">
+    <!-- <div class="evaluate" v-show="showEvaluate">
       <div class="note">
         <h4>项目评价
           <i class="el-icon-close fr" @click="closeEvaluate"></i>
@@ -59,7 +61,7 @@
           <el-button round @click.native="addProjectEvaluate">提交</el-button>
         </div>
       </div>
-    </div>
+    </div> -->
     <v-pay @closePay="closePayed"></v-pay>
   </div>
 </template>
@@ -74,6 +76,7 @@ import Repore from '@/components/common/Report.vue'
 import Pay from '@/components/common/Pay.vue'
 import List from '@/pages/project/components/CourseList.vue'
 import Collection from '@/components/common/Collection.vue'
+import Evaluate from '@/pages/project/projectPlayer/evaluate.vue'
 import { message } from '@/lib/util/helper'
 export default {
   components: {
@@ -81,7 +84,8 @@ export default {
     'v-report': Repore,
     'v-pay': Pay,
     'v-collection': Collection,
-    'v-list': List
+    'v-list': List,
+    'v-evaluate': Evaluate
   },
   computed: {
     ...mapState('auth', ['kid', 'tid']),
@@ -112,7 +116,6 @@ export default {
       pauseImg: 'http://papn9j3ys.bkt.clouddn.com/video.png',
       courseList: [],
       projectDetail: {},
-      word: '',
       evaluate: {
         eltnum: 5,
         btnList: [
@@ -226,14 +229,6 @@ export default {
       tidForm: {
         tids: null
       },
-      addEvaluateForm: {
-        ids: null,
-        curriculumcatalogid: '',
-        type: 2,
-        evaluatecontent: null,
-        scores: null,
-        tag: []
-      },
       collectMsg: {
         types: 2,
         isCollect: 0
@@ -250,18 +245,7 @@ export default {
       tidForm: {
         tids: ''
       },
-      btnData: [],
-      reTagBtn: [],
-      tagGroup: '',
       rateModel: 5,
-      addEvaluateForm: {
-        ids: '',
-        curriculumId: '',
-        types: 2,
-        scores: '',
-        evaluateContent: '',
-        tag: []
-      },
       shoppingForm: {
         cartid: '',
         type: 2
@@ -279,152 +263,14 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['signOut']),
-
-    // 登出
-    signOuts() {
-      this.signOut()
-      persistStore.clearAll()
-      this.$router.push('/')
-    },
-    // 切换星级
-    changeRate(val) {
-      this.reTagBtn = []
-      this.tagGroup[val].map((item, i) => {
-        let obj = new Object()
-        obj.value = item
-        obj.index = i
-        obj.isCheck = false
-        this.reTagBtn.push(obj)
-      })
-      this.btnData = this.reTagBtn
-      this.addEvaluateForm.tag = []
-    },
-    // 添加评论
-    getBtnContent(val, index) {
-      if (val.isCheck === true) {
-        this.$set(val, 'isCheck', false)
-      } else {
-        this.$set(val, 'isCheck', true)
-      }
-      this.addEvaluateForm.tag = []
-      this.btnData.forEach((v, i) => {
-        if (v.isCheck === true) {
-          this.addEvaluateForm.tag.push(v.value)
-        }
-      })
-    },
-    // 点击小节播放
-    handleCourse(item) {
-      if (this.playerForm.catalogId === item.id) {
-        return false
-      }
-      this.ischeck = item.id
-      this.playing = this.pauseImg
-      this.playerForm.curriculumId = item.curriculum_id
-      this.playerForm.catalogId = item.id
-      clearInterval(this.interval)
-      this.clickMsg = true
-      this.autoplay = true
-      this.lookAt = item.look_at
-      this.getPlayerInfo()
-    },
-    // 获取评论tag
-    getEvaluateTags() {
-      return new Promise((resolve, reject) => {
-        projectplayer.getEvaluateTags().then(response => {
-          this.tagGroup = response.data.evaluateTags
-          this.changeRate('5')
-          this.btnDatas = response.data.evaluateTags
-        })
-      })
-    },
-    // 提示跳转购车
-    goShoppingCart(msg) {
-      this.$confirm(msg, '提示', {
-        confirmButtonText: '去购买',
-        cancelButtonText: '取消',
-        closeOnHashChange: true,
-        type: 'warning',
-        center: true
-      })
-        .then(() => {
-          // 未购买课程跳转到购物车-点击去购买
-          this.addShopCart()
-        })
-        .catch(() => {})
-    },
-    // 项目加入购物车
-    addShopCart() {
-      projectplayer.addShopCart(this.shoppingForm).then(res => {
-        if (res.status === 0) {
-          // 添加购物车成功
-          this.$router.push('/shop/shoppingcart')
-        } else {
-          this.$message({
-            showClose: true,
-            type: 'error',
-            message: res.msg
-          })
-        }
-      })
-    },
-    // 打开报告问题
-    showRpt() {
-      this.$bus.$emit('openReport')
-    },
-    // 展示评论
-    showElt() {
-      this.showEvaluate = true
-      // 展示评论-暂停播放器
-      if (this.player) {
-        this.player.pause()
-      }
-    },
-    // 关闭评论
-    closeEvaluate() {
-      this.showEvaluate = false
-      this.radioBtn = ''
-      this.word = ''
-      // 关闭评论-播放器继续播放
-      if (this.player) {
-        this.player.play()
-      }
-    },
-    // 改变屏幕宽度重置播放器大小
-    resize() {
-      if (this.$refs.playerBox) {
-        const h = this.$refs.playerBox.offsetHeight
-        this.$refs.mediaL.style.height = h + 'px'
-        this.$refs.mediaR.style.height = h + 'px'
-        this.$refs.playInner.style.height = h - 100 + 'px'
-        this.$refs.inner.style.height = h - 100 + 'px'
-      }
-    },
-    // 隐藏右侧课程列表
-    fold() {
-      if (this.$refs.mediaR.offsetWidth != 0) {
-        this.mediaRW = 0
-        this.mediaRInner = false
-        this.mediaRIcon = 'el-icon-arrow-left'
-        this.mediaLW = 100
-      } else {
-        this.mediaRW = 22
-        this.mediaRInner = true
-        this.mediaRIcon = 'el-icon-arrow-right'
-        this.mediaLW = 78
-      }
-    },
-    goLink() {
-      this.$router.push(
-        '/project/projectdetail?id=' + window.location.search.split('=')[1]
-      )
-    },
+    // 关闭支付二维码、重新获取播放参数
     closePayed() {
       this.autoplay = false
       this.index = 0
       this.player.seek(0)
       this.getPlayerInfo()
     },
+    // 播放参数  wobsocket 播放器创建
     getPlayerInfo() {
       let that = this
       var link = window.location.origin
@@ -497,14 +343,12 @@ export default {
             this.playAuthInfo = response.data.playAuthInfo
             this.aliPlayer.vid = response.data.playAuthInfo.video_id
             this.aliPlayer.playauth = response.data.playAuthInfo.playAuth
-            // 播放器如果存在就销毁播放器，重新创建
+            // 切换播放方法1、播放器如果存在就销毁播放器，重新创建
             if (this.player) {
               this.player.dispose()
               this.$refs.playInner.innerHTML =
                 '<div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>'
-              // this.player = new Aliplayer(this.aliPlayer)
-              // $('#mediaPlayer').empty()
-              // 切换vid和playauth播放参数
+              // 切换播放方法2、切换vid和playauth播放参数
               // this.player.reloaduserPlayInfoAndVidRequestMts(
               //   that.aliPlayer.vid,
               //   that.aliPlayer.playauth
@@ -512,7 +356,6 @@ export default {
             }
             // 创建播放器
             this.player = new Aliplayer(this.aliPlayer)
-
             this.nextCatalogId = response.data.nextCatalogId
             this.player.on('ready', this.readyPlay)
             this.player.on('play', this.playerPlay)
@@ -642,52 +485,106 @@ export default {
         this.getPlayerInfo()
       })
     },
-    // 增加评论
-    addProjectEvaluate() {
-      if (this.word.length < 100) {
-        this.addEvaluateForm.evaluatecontent = this.word
-      } else {
-        this.$message({
-          showClose: true,
-          type: 'warning',
-          message: '请输入少于100个字符！'
-        })
+    // 登出
+    signOuts() {
+      this.signOut()
+      persistStore.clearAll()
+      this.$router.push('/')
+    },
+    // 点击小节播放
+    handleCourse(item) {
+      if (this.playerForm.catalogId === item.id) {
         return false
       }
-      this.addEvaluateForm.ids = this.shoppingForm.cartid
-      this.addEvaluateForm.curriculumcatalogid = this.playerForm.curriculumId
-      this.addEvaluateForm.catalogId = this.playerForm.catalogId
-      this.addEvaluateForm.evaluateContent = this.word
-      this.addEvaluateForm.scores = this.rateModel.toString().replace(/,/g, '#')
-      this.addEvaluateForm.tag = this.addEvaluateForm.tag.join('#')
-      projectplayer.addProjectEvaluate(this.addEvaluateForm).then(response => {
-        if (response.status === '100100') {
-          this.$message({
-            showClose: true,
-            type: 'warning',
-            message: response.msg
-          })
+      this.ischeck = item.id
+      this.playing = this.pauseImg
+      this.playerForm.curriculumId = item.curriculum_id
+      this.playerForm.catalogId = item.id
+      clearInterval(this.interval)
+      this.clickMsg = true
+      this.autoplay = true
+      this.lookAt = item.look_at
+      this.getPlayerInfo()
+    },
+    // 提示跳转购车
+    goShoppingCart(msg) {
+      this.$confirm(msg, '提示', {
+        confirmButtonText: '去购买',
+        cancelButtonText: '取消',
+        closeOnHashChange: true,
+        type: 'warning',
+        center: true
+      })
+        .then(() => {
+          // 未购买课程跳转到购物车-点击去购买
+          this.addShopCart()
+        })
+        .catch(() => {})
+    },
+    // 项目加入购物车
+    addShopCart() {
+      projectplayer.addShopCart(this.shoppingForm).then(res => {
+        if (res.status === 0) {
+          // 添加购物车成功
+          this.$router.push('/shop/shoppingcart')
         } else {
-          this.iseve = true
-          // this.getCurriculumPlayInfo()
-          this.addEvaluateForm.tag = []
-          for (let item of this.btnData) {
-            this.$set(item, 'isCheck', false)
-          }
-          this.word = ''
-          this.showEvaluate = false
           this.$message({
             showClose: true,
-            type: 'success',
-            message: response.msg
+            type: 'error',
+            message: res.msg
           })
-          this.closeEvaluate()
         }
       })
     },
-    getInit() {
-      this.getCurriculumPlayInfo()
-      this.getEvaluateTags()
+    // 打开报告问题
+    showRpt() {
+      this.$bus.$emit('openReport')
+    },
+    // 展示评论
+    showElt() {
+      this.showEvaluate = true
+      // 展示评论-暂停播放器
+      if (this.player) {
+        this.player.pause()
+      }
+    },
+    // 关闭评论
+    closeEvaluate() {
+      this.showEvaluate = false
+      // 关闭评论-播放器继续播放
+      if (this.player) {
+        this.player.play()
+      }
+    },
+    // 改变屏幕宽度重置播放器大小
+    resize() {
+      if (this.$refs.playerBox) {
+        const h = this.$refs.playerBox.offsetHeight
+        this.$refs.mediaL.style.height = h + 'px'
+        this.$refs.mediaR.style.height = h + 'px'
+        this.$refs.playInner.style.height = h - 100 + 'px'
+        this.$refs.inner.style.height = h - 100 + 'px'
+      }
+    },
+    // 隐藏右侧课程列表
+    fold() {
+      if (this.$refs.mediaR.offsetWidth != 0) {
+        this.mediaRW = 0
+        this.mediaRInner = false
+        this.mediaRIcon = 'el-icon-arrow-left'
+        this.mediaLW = 100
+      } else {
+        this.mediaRW = 22
+        this.mediaRInner = true
+        this.mediaRIcon = 'el-icon-arrow-right'
+        this.mediaLW = 78
+      }
+    },
+    // 跳转课程详情
+    goLink() {
+      this.$router.push(
+        '/project/projectdetail?id=' + window.location.search.split('=')[1]
+      )
     }
   },
   mounted() {
@@ -695,7 +592,7 @@ export default {
     window.addEventListener('resize', this.resize)
     if (this.isAuthenticated) {
       this.projectForm.ids = window.location.search.split('=')[1]
-      this.getInit()
+      this.getCurriculumPlayInfo()
     } else {
       this.$router.push(
         '/project/projectdetail?id=' + window.location.search.split('=')[1]
@@ -707,7 +604,6 @@ export default {
       this.handleCourse(data)
     })
     this.seconds = 10000000
-    // 获取评论接口
   },
   watch: {
     videoState(flag) {
