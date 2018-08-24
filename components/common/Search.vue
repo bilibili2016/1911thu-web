@@ -66,10 +66,6 @@ export default {
         persistStore.set('key', this.searchMsg)
         this.$emit('Search', this.searchMsg)
       } else {
-        // this.$message({
-        //   type: 'error',
-        //   message: '请输入不包含特殊字符且小于30个字符的关键词！'
-        // })
         message(this, 'error', '请输入不包含特殊字符且小于30个字符的关键词！')
       }
     },
