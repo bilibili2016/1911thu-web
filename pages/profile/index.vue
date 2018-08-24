@@ -7,7 +7,7 @@
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label" class="tabList">
             <i class="icon-home"></i> 我的首页</span>
-          <v-myhome :allHome="allHome" :studyData="studyData" :configZero="configZero" :noMsgOne="noMsgOne"></v-myhome>
+          <v-myhome :allHome="allHome" :studyData="studyData" :configZero="configZero" :pagemsgHome="pagemsgHome" :noMsgOne="noMsgOne" @studyDataChange="studyDataChange"></v-myhome>
         </el-tab-pane>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
@@ -46,14 +46,12 @@
           <!-- 'codeData', 'recordData', 'invitationCodeList' -->
           <v-mycode :codeData="codeData" :recordData="recordData" :allCode="allCode" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode" @recordList="recordList" @searchCodeList="searchCodeList"></v-mycode>
         </el-tab-pane>
-
         <!-- 发票管理 -->
         <el-tab-pane class="my-course my-order" name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-ticket"></i> 发票管理</span>
           <v-myticket :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange"></v-myticket>
         </el-tab-pane>
-
         <!-- 自定制项目 -->
         <el-tab-pane class="my-course my-customerProject" name="tab-nine">
           <span slot="label" class="tabList">
@@ -68,7 +66,6 @@
 <script>
 import Banner from '@/components/common/Banner.vue'
 import PersonalSet from '@/pages/profile/personalSet/personalSet.vue'
-
 import { profileHome } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -80,7 +77,6 @@ import myInfo from '@/pages/profile/pages/myInfo'
 import myCode from '@/pages/profile/pages/myCode'
 import myTicket from '@/pages/profile/pages/myTicket'
 import myCustomerProject from '@/pages/profile/pages/myCustomerProject'
-
 export default {
   components: {
     'v-person': PersonalSet,
@@ -193,6 +189,11 @@ export default {
         categoryId: 0,
         pages: 0,
         limits: 12
+      },
+      pagemsgHome: {
+        page: 1,
+        pagesize: 12,
+        total: 12
       },
       pagemsg1: {
         page: 1,
@@ -523,7 +524,37 @@ export default {
         })
       })
     },
-    // 我的学习 学习中
+    // 我的首页 最近学习
+    studydataList() {
+      this.styleForm.types = 3
+      this.styleForm.pages = 0
+      this.styleForm.limits = 12
+      this.allHome = true
+      profileHome.studyCurriculumList(this.styleForm).then(response => {
+        this.allHome = false
+        this.studyData = response.data.curriculumList
+        this.pagemsgHome.total = response.data.pageCount
+        for (let item of response.data.curriculumList) {
+          item.percent = Number(item.percent)
+        }
+      })
+    },
+    // 我的首页 最近学习 分页切换
+    studyDataChange(val) {
+      this.styleForm.types = 3
+      this.styleForm.pages = val
+      this.styleForm.limits = 12
+      this.allHome = true
+      this.pagemsgHome.page = val
+      profileHome.studyCurriculumList(this.styleForm).then(response => {
+        this.allHome = false
+        this.studyData = response.data.curriculumList
+        for (let item of response.data.curriculumList) {
+          item.percent = Number(item.percent)
+        }
+      })
+    },
+    // 我的课程 学习中
     studyCurriculumList() {
       this.styleForm.types = 1
       this.styleForm.categoryId = 0
@@ -539,7 +570,7 @@ export default {
         }
       })
     },
-    // 学习中 分页切换
+    // 我的课程 学习中 分页切换
     studyPageChange(val) {
       this.pagemsg1.page = val
       this.styleForm.pages = val
@@ -555,21 +586,7 @@ export default {
         })
       })
     },
-    // 我的首页 最近学习
-    studydataList() {
-      this.styleForm.types = 3
-      this.styleForm.pages = 0
-      this.styleForm.limits = 12
-      this.allHome = true
-      profileHome.studyCurriculumList(this.styleForm).then(response => {
-        this.allHome = false
-        this.studyData = response.data.curriculumList
-        for (let item of response.data.curriculumList) {
-          item.percent = Number(item.percent)
-        }
-      })
-    },
-    // 我的首页 已完成
+    // 我的课程 已完成
     readyStudyCurriculumList() {
       this.styleForm.types = 2
       this.styleForm.categoryId = 0
@@ -579,6 +596,19 @@ export default {
       profileHome.studyCurriculumList(this.styleForm).then(response => {
         this.newDataReady = response.data.curriculumList
         this.pagemsg2.total = response.data.pageCount
+      })
+    },
+    // 我的课程 已完成 分页切换
+    readyStudyPageChange(val) {
+      this.pagemsg2.page = val
+      this.styleForm.pages = val
+      this.styleForm.types = 1
+      return new Promise((resolve, reject) => {
+        profileHome.studyCurriculumList(this.styleForm).then(response => {
+          this.newDataReady = response.data.curriculumList
+          this.pagemsg2.total = response.data.pageCount
+          resolve(true)
+        })
       })
     },
     // 我的课程 已过期的项目
@@ -597,20 +627,7 @@ export default {
         })
       })
     },
-    // 已完成 分页切换
-    readyStudyPageChange(val) {
-      this.pagemsg2.page = val
-      this.styleForm.pages = val
-      this.styleForm.types = 1
-      return new Promise((resolve, reject) => {
-        profileHome.studyCurriculumList(this.styleForm).then(response => {
-          this.newDataReady = response.data.curriculumList
-          this.pagemsg2.total = response.data.pageCount
-          resolve(true)
-        })
-      })
-    },
-    // 我的学习 收藏列表
+    // 我的课程 收藏列表
     collectionList() {
       this.collectionForm.categoryId = 0
       return new Promise((resolve, reject) => {
@@ -621,7 +638,7 @@ export default {
         })
       })
     },
-    // 收藏列表 分页切换
+    //我的课程 收藏列表 分页切换
     collectionPageChange(val) {
       this.pagemsg3.page = val
       this.collectionForm.pages = val
@@ -727,10 +744,8 @@ export default {
     // 开票历史
     getHistoryOrderData() {
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
-        console.log(response, 'response1')
         this.historyOrderData = response.data.invoiceList
         this.pagemsg9.total = response.data.invoiceTotal
-
         this.historyOrderLoad = false
       })
     },
@@ -739,7 +754,6 @@ export default {
       this.pagemsg9.page = val
       this.tickethistoryForm.pages = val
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
-        // console.log(response, 'response')
         this.historyOrderData = response.data.invoiceList
         this.historyOrderLoad = false
       })
@@ -761,9 +775,6 @@ export default {
     // 兑换详情页的搜索
     recordList(data) {
       this.getCodeListForm.code = data
-      console.log(data)
-      console.log(this.getCodeListForm.code)
-
       this.getRecordList()
     },
     // 邀请记录--兑换详情

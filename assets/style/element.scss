@@ -894,8 +894,7 @@ html {
   .el-tabs__item {
     margin: 0px 0px 0px 0px;
     color: #222;
-    height: 76px;
-    padding: 12px;
+    height: 60px;
     font-size: 16px;
     line-height: 60px;
   }
@@ -955,7 +954,7 @@ html {
     .el-tabs__item {
       text-align: left;
       span {
-        padding-left: 15px;
+        padding-left: 10px;
       }
     }
   } // .el-tabs__nav{
@@ -1030,6 +1029,11 @@ html {
       // .el-tabs__content {
       //   background-color: #fafafa;
       // }
+    }
+  }
+  .tabList {
+    i {
+      margin-right: 7px;
     }
   }
 }

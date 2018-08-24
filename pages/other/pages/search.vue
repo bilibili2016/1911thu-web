@@ -7,7 +7,7 @@
       </div>
       <div v-if="result" v-loading="loadSearch">
         <v-card :data="searchData" :config="config" element-loading-text="拼命加载中" element-loading-background="#fff"></v-card>
-        <v-page :id="pagemsg.total" v-show="pagemsg.total!='0'" :pagemsg="pagemsg"></v-page>
+        <v-page :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pageSize" :pagemsg="pagemsg"></v-page>
         <v-backtotop></v-backtotop>
       </div>
       <div class="searchFalse" v-else v-loading="loadSearch">
@@ -58,12 +58,12 @@ export default {
       },
       pagemsg: {
         page: 1,
-        pageSize: 1,
+        pageSize: 8,
         total: null
       },
       searchForm: {
         pages: 1,
-        limits: 20,
+        limits: 8,
         searchword: null,
         categoryid: null,
         sortby: 2

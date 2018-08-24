@@ -10,74 +10,18 @@
           <!-- 登录 表单-->
           <!-- 账号密码登录-->
           <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === false">
-            <!-- 账号密码登录 -->
-            <div>
-              <el-form-item prop="phonenum">
-                <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号" clearable type="text"></el-input>
-              </el-form-item>
-              <el-form-item prop="password">
-                <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
-                <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
-              </el-form-item>
-            </div>
-            <el-row>
-              <div @click="forget">忘记密码?</div>
-              <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
-              <el-button class="firstLogin" :disabled="isloginClick" @click="signIns('loginData')">登录</el-button>
-            </el-row>
+            <v-passwordlogin :loginData="loginData" :mobileloginmsg="mobileloginmsg" :isloginClick="isloginClick" @changePwd="changePwd" @forget="forget" @mobilelogin="mobilelogin" @signIns="signIns"></v-passwordlogin>
           </el-form>
-          <!-- 账号密码登录 end-->
-
           <!-- 手机验证码登录-->
           <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm telLogin" v-if="mobileloginmsg === true">
-            <!-- 手机验证码登录 -->
-            <div v-if="mobileloginmsg === true">
-              <el-form-item prop="phones">
-                <el-input v-model.number="registerMobileData.phones" placeholder="请输入登录手机号" clearable auto-complete="off" type="text"></el-input>
-              </el-form-item>
-              <el-form-item prop="codes" style="display:none">
-                <el-input v-model.number="registerMobileData.codes" placeholder="请输入登录手机号" clearable auto-complete="off" type="text"></el-input>
-              </el-form-item>
-              <el-form-item prop="codes">
-                <el-input class="captcha" v-model="registerMobileData.codes" placeholder="请输入验证码" auto-complete="off" type="text"></el-input>
-                <!-- <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div> -->
-                <el-button type="primary" :disabled="codeClick" class="getCode" @click="handleMobileGetCode('loginDatamobile')" style="line-height:0">{{bindTelData.getCode}}</el-button>
-              </el-form-item>
-            </div>
-            <el-row>
-              <div @click="forget">忘记密码?</div>
-              <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
-              <el-button class="codeLogin" :disabled="isloginClick" @click="signInsMobile('loginDatamobile')">登录</el-button>
-            </el-row>
+            <v-codelogin :mobileloginmsg="mobileloginmsg" :registerMobileData="registerMobileData" :codeClick="codeClick" :bindTelData="bindTelData" :isloginClick="isloginClick" @handleMobileGetCode="handleMobileGetCode" @mobilelogin="mobilelogin" @signInsMobile="signInsMobile" @forget="forget"></v-codelogin>
           </el-form>
-          <!-- 手机验证码登录 end-->
           <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
         </el-tab-pane>
-
-        <!-- 注册表单 -->
-
+        <!-- 注册 -->
         <el-tab-pane label="注册" name="register">
-          <!-- <v-register :data="registerData" @wechatLogined="wechatLogined" @alreadySignin="alreadySignin" @close="close" @verifyRgTel="verifyRgTel"></v-register> -->
-          <el-form :model="registerData" status-icon :rules="registRules" ref="registerData" class="demo-ruleForm">
-            <el-form-item prop="phones">
-              <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
-            </el-form-item>
-            <el-form-item prop="codes">
-              <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
-              <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
-            </el-form-item>
-            <el-form-item prop="passwords">
-              <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
-            </el-form-item>
-
-            <el-form-item prop="">
-              <el-checkbox-group v-model="registerData.checked">
-                <el-checkbox label="同意" name="checked"></el-checkbox>
-              </el-checkbox-group>
-            </el-form-item>
-            <el-row>
-              <el-button :disabled="isClick" class="registerUser " :class="{noSubmit:isHasClass}" v-loading="isloading" @click.native="signUp('registerData')">注册</el-button>
-            </el-row>
+          <el-form :model="registerData" status-icon :rules="registRules" id="registerData" ref="registerData" class="demo-ruleForm">
+            <v-register :registerData="registerData" :codeClick="codeClick" :isClick="isClick" :isloading="isloading" :bindTelData="bindTelData" @verifyRgTel="verifyRgTel" @signUp="signUp"></v-register>
           </el-form>
           <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
           <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
@@ -89,27 +33,10 @@
       <i class="el-icon-back wechatBack" @click="back"></i>
       <i class="el-icon-close closeWechat" @click="close"></i>
       <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
-        <h4 class="clearfix">
-          <span>绑定手机账号</span>
-        </h4>
-        <el-form-item prop="tel">
-          <el-input v-model.number="bindTelData.phones" placeholder="请输入登录手机号"></el-input>
-        </el-form-item>
-        <el-form-item prop="code">
-          <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
-          <div class="getCode" @click="verifyRgTelWX">{{bindTelData.getCode}}</div>
-        </el-form-item>
-        <!-- <el-form-item prop="companyCodes">
-            <el-input v-model="bindTelData.companyCodes" placeholder="绑定单位"></el-input>
-            <span class="bindCompany">(可选)</span>
-          </el-form-item> -->
-        <el-row>
-          <el-button @click.native="loginWechat(bindTelData)">绑定</el-button>
-        </el-row>
+        <v-wechatlogin :bindTelData="bindTelData" @loginWechat="loginWechat" @verifyRgTelWX="verifyRgTelWX"></v-wechatlogin>
       </el-form>
       <div class="scanCode" v-show="scanCodeShow">
         <h4 class="clearfix"></h4>
-        <!-- el-icon-loading -->
         <div class="wxchatIMG" id="wxchatIMG"></div>
       </div>
       <div class="bindSuccess" v-show="bindSuccessShow">
@@ -128,9 +55,16 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { encryption, message } from '~/lib/util/helper'
 import Register from '@/pages/auth/Register'
+import WechatLogin from '@/pages/auth/wechatLogin'
+import CodeLogin from '@/pages/auth/codeLogin'
+import PasswordLogin from '@/pages/auth/passwordLogin'
+
 export default {
   components: {
-    'v-register': Register
+    'v-register': Register,
+    'v-wechatlogin': WechatLogin,
+    'v-codelogin': CodeLogin,
+    'v-passwordlogin': PasswordLogin
   },
   data() {
     var validatePass = (rule, value, callback) => {
@@ -427,8 +361,18 @@ export default {
       'setToken',
       'setPwd'
     ]),
+    //清除计时操作
+    clearTime() {
+      clearInterval(this.codeInterval)
+      this.bindTelData.getCode = '获取验证码'
+      this.bindTelData.seconds = 30
+      this.bindTelData.captchaDisable = false
+      this.codeClick = false
+    },
     // 验证手机登录还是账号密码登录
     mobilelogin() {
+      //切换时清除计时器
+      this.clearTime()
       this.mobileloginmsg = !this.mobileloginmsg
       this.registerMobileData.phones = ''
       this.registerMobileData.codes = ''
@@ -470,11 +414,6 @@ export default {
         if (this.bindTelData.captchaDisable === false) {
           return new Promise((resolve, reject) => {
             auth.smsCodes(data).then(response => {
-              // this.$message({
-              //   type: response.status === 0 ? 'success' : 'error',
-              //   message: response.msg
-              // })
-
               let types = response.status === 0 ? 'success' : 'error'
               message(this, types, response.msg)
 
@@ -501,21 +440,12 @@ export default {
     // 手机验证码 登录时候
     async handleMobileGetCode() {
       if (!/^[1][3,4,5,6,7,8][0-9]{9}$/.test(this.registerMobileData.phones)) {
-        // this.$message({
-        //   type: 'error',
-        //   message: '请输入正确手机号'
-        // })
-
         message(this, 'error', '请输入正确手机号')
       } else {
         if (this.bindTelData.seconds === 30) {
           if (this.bindTelData.captchaDisable === false) {
             return new Promise((resolve, reject) => {
               auth.smsCodes(this.registerMobileData).then(response => {
-                // this.$message({
-                //   type: response.status === 0 ? 'success' : 'error',
-                //   message: response.msg
-                // })
                 let types = response.status === 0 ? 'success' : 'error'
                 message(this, types, response.msg)
 
@@ -544,11 +474,6 @@ export default {
     verifyRgTel() {
       this.codeClick = true
       if (this.errorTel.tel === this.registerData.phones) {
-        // this.$message({
-        //   showClose: true,
-        //   type: 'error',
-        //   message: this.errorTel.msg
-        // })
         message(this, 'error', this.errorTel.msg)
         this.codeClick = false
       } else {
@@ -557,11 +482,6 @@ export default {
             if (response.status !== 0) {
               this.errorTel.tel = this.registerData.phones
               this.errorTel.msg = response.msg
-              // this.$message({
-              //   showClose: true,
-              //   type: 'error',
-              //   message: response.msg
-              // })
               message(this, 'error', response.msg)
               this.bindTelData.captchaDisable = true
               this.codeClick = false
@@ -583,11 +503,6 @@ export default {
         return new Promise((resolve, reject) => {
           auth.verifywechat(this.bindTelData).then(response => {
             if (response.status != 0) {
-              // this.$message({
-              //   showClose: true,
-              //   type: 'error',
-              //   message: response.msg
-              // })
               message(this, 'error', response.msg)
               this.bindTelData.captchaDisable = true
             } else {
@@ -713,6 +628,7 @@ export default {
             this.isloading = false
           })
         } else {
+          this.isloginClick = false
           this.isloading = false
           return false
         }
@@ -809,7 +725,7 @@ export default {
     },
     // 忘记密码
     forget() {
-      this.$router.push('/auth/forgotpassword')
+      this.$router.push('/auth/forgotPassword')
       this.close()
     },
     // 改变密码显示隐藏
@@ -928,11 +844,7 @@ export default {
   watch: {
     // 监测登陆注册切换时清除注册获取验证码定时器
     activeName() {
-      clearInterval(this.codeInterval)
-      this.bindTelData.getCode = '获取验证码'
-      this.bindTelData.seconds = 30
-      this.bindTelData.captchaDisable = false
-      this.codeClick = false
+      this.clearTime()
     },
     'registerData.checked'(val, oldVal) {
       if (val) {
