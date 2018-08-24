@@ -9,6 +9,8 @@ import { coursedetail, players } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { splitUrl, message } from '@/lib/util/helper'
+import playerNextComponent from '~/lib/core/next.js'
+import playerPreviousComponent from '~/lib/core/previous.js'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
@@ -16,6 +18,14 @@ export default {
   data() {
     return {
       playerForm: {
+        curriculumId: '',
+        catalogId: ''
+      },
+      playerPreviousForm: {
+        curriculumId: '',
+        catalogId: ''
+      },
+      playerNextForm: {
         curriculumId: '',
         catalogId: ''
       },
@@ -32,6 +42,18 @@ export default {
         autoplay: false, //自动播放
         vid: '', //点播播放的两个参数之一
         playauth: '', //点播播放的两个参数之二
+        components: [
+          {
+            name: 'playerNextComponent',
+            type: playerNextComponent,
+            args: [this.nextVideo]
+          },
+          {
+            name: 'playerPreviousComponent',
+            type: playerPreviousComponent,
+            args: [this.previousVideo]
+          }
+        ],
         skinLayout: [
           {
             name: 'H5Loading',
@@ -299,6 +321,29 @@ export default {
         }
       }
     },
+    // 切换上一小节按钮
+    previousVideo() {
+      if (this.nextCatalogId !== '') {
+        this.playerForm.curriculumId = this.playerPreviousForm.curriculumId
+        this.playerForm.catalogId = this.playerPreviousForm.catalogId
+        this.autoplay = true
+        this.getdefaultPlayerUrl()
+      } else {
+        message(this, 'warning', '已经是第一节了！')
+      }
+    },
+    // 切换下一小节按钮
+    nextVideo() {
+      if (this.nextCatalogId !== '') {
+        this.playerForm.curriculumId = this.playerNextForm.curriculumId
+        this.playerForm.catalogId = this.playerNextForm.catalogId
+        this.autoplay = true
+        this.getdefaultPlayerUrl()
+      } else {
+        message(this, 'warning', '已经是最后一节了！')
+      }
+    },
+    // 关闭支付
     closePayed() {
       this.index = 0
       this.player.seek(0)
