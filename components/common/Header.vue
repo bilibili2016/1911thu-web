@@ -28,7 +28,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { validateSearch } from '~/lib/util/validate'
 import { checkSearch } from '~/lib/util/validatefn'
 import HomeSelect from '@/components/common/HomeSelect.vue'
-import Login from '@/pages/auth/Login.vue'
+import Login from '@/pages/auth/login.vue'
 import Discount from '@/components/header/Discount.vue'
 import CodeCase from '@/components/header/CodeCase.vue'
 

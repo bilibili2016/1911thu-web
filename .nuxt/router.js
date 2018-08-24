@@ -11,8 +11,8 @@ const _c1976bea = () => import('../pages/project/projectPlayer.vue' /* webpackCh
 const _0239b64d = () => import('../pages/project/projectPlayer/evaluate.vue' /* webpackChunkName: "pages/project/projectPlayer/evaluate" */).then(m => m.default || m)
 const _145fb93b = () => import('../pages/shop/affirmOrder.vue' /* webpackChunkName: "pages/shop/affirmOrder" */).then(m => m.default || m)
 const _753f7450 = () => import('../pages/auth/passwordLogin.vue' /* webpackChunkName: "pages/auth/passwordLogin" */).then(m => m.default || m)
-const _213e6f28 = () => import('../pages/auth/forgotpassword.vue' /* webpackChunkName: "pages/auth/forgotpassword" */).then(m => m.default || m)
-const _73ba631e = () => import('../pages/auth/Register.vue' /* webpackChunkName: "pages/auth/Register" */).then(m => m.default || m)
+const _0da7c6e8 = () => import('../pages/auth/forgotPassword.vue' /* webpackChunkName: "pages/auth/forgotPassword" */).then(m => m.default || m)
+const _87510b5e = () => import('../pages/auth/register.vue' /* webpackChunkName: "pages/auth/register" */).then(m => m.default || m)
 const _5e880bd9 = () => import('../pages/course/category.vue' /* webpackChunkName: "pages/course/category" */).then(m => m.default || m)
 const _192e9728 = () => import('../pages/shop/shoppingcart.vue' /* webpackChunkName: "pages/shop/shoppingcart" */).then(m => m.default || m)
 const _ec5348ec = () => import('../pages/shop/customAffirmOrder.vue' /* webpackChunkName: "pages/shop/customAffirmOrder" */).then(m => m.default || m)
@@ -26,7 +26,7 @@ const _69ae8056 = () => import('../pages/course/coursedetail/CourseCatalog.vue' 
 const _77343fe2 = () => import('../pages/course/coursedetail/teacherIntro.vue' /* webpackChunkName: "pages/course/coursedetail/teacherIntro" */).then(m => m.default || m)
 const _520a423e = () => import('../pages/auth/codeLogin.vue' /* webpackChunkName: "pages/auth/codeLogin" */).then(m => m.default || m)
 const _6c18dd68 = () => import('../pages/project/customerProject.vue' /* webpackChunkName: "pages/project/customerProject" */).then(m => m.default || m)
-const _26eb3a8b = () => import('../pages/auth/Login.vue' /* webpackChunkName: "pages/auth/Login" */).then(m => m.default || m)
+const _a10dcaaa = () => import('../pages/auth/login.vue' /* webpackChunkName: "pages/auth/login" */).then(m => m.default || m)
 const _5a9f5ae8 = () => import('../pages/course/components/List.vue' /* webpackChunkName: "pages/course/components/List" */).then(m => m.default || m)
 const _6ba526a0 = () => import('../pages/profile/ticket/ticketConfirm.vue' /* webpackChunkName: "pages/profile/ticket/ticketConfirm" */).then(m => m.default || m)
 const _0b2fa543 = () => import('../pages/shop/wepay/qrcode.vue' /* webpackChunkName: "pages/shop/wepay/qrcode" */).then(m => m.default || m)
@@ -208,14 +208,14 @@ export function createRouter () {
 			name: "auth-passwordLogin"
 		},
 		{
-			path: "/auth/forgotpassword",
-			component: _213e6f28,
-			name: "auth-forgotpassword"
+			path: "/auth/forgotPassword",
+			component: _0da7c6e8,
+			name: "auth-forgotPassword"
 		},
 		{
-			path: "/auth/Register",
-			component: _73ba631e,
-			name: "auth-Register"
+			path: "/auth/register",
+			component: _87510b5e,
+			name: "auth-register"
 		},
 		{
 			path: "/course/category",
@@ -287,9 +287,9 @@ export function createRouter () {
 			name: "project-customerProject"
 		},
 		{
-			path: "/auth/Login",
-			component: _26eb3a8b,
-			name: "auth-Login"
+			path: "/auth/login",
+			component: _a10dcaaa,
+			name: "auth-login"
 		},
 		{
 			path: "/course/components/List",

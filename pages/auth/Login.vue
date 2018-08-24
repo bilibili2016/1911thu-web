@@ -54,7 +54,7 @@ import { auth, header } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { encryption, message } from '~/lib/util/helper'
-import Register from '@/pages/auth/Register'
+import Register from '@/pages/auth/register'
 import WechatLogin from '@/pages/auth/wechatLogin'
 import CodeLogin from '@/pages/auth/codeLogin'
 import PasswordLogin from '@/pages/auth/passwordLogin'
@@ -725,7 +725,7 @@ export default {
     },
     // 忘记密码
     forget() {
-      this.$router.push('/auth/forgotpassword')
+      this.$router.push('/auth/forgotPassword')
       this.close()
     },
     // 改变密码显示隐藏
