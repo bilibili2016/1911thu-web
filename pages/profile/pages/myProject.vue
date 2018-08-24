@@ -19,7 +19,7 @@
         <el-tab-pane label="已完成" name="second">
           <v-card v-if="readyProjectData && readyProjectData.length>0" :data="readyProjectData" :config="configTwo"></v-card>
           <div class="pagination" v-if="readyProjectData && readyProjectData.length>11">
-            <el-pagination background layout="prev, pager, next" :page-size="projectPageReady.pagesize" :pager-count="5" :page-count="projectPageReady.pagesize" :current-page="projectPageReady.page" :total="projectPageReady.total" @current-change="studyProjectPageChange"></el-pagination>
+            <el-pagination background layout="prev, pager, next" :page-size="projectPageReady.pagesize" :pager-count="5" :page-count="projectPageReady.pagesize" :current-page="projectPageReady.page" :total="projectPageReady.total" @current-change="alreadyProjectPageChange"></el-pagination>
           </div>
           <v-nomsg v-if="readyProjectData.length == 0" :config="noMsgSeven"></v-nomsg>
 
@@ -83,10 +83,14 @@ export default {
   },
   methods: {
     studyProjectPageChange(val) {
-      this.$emit('studyProjectPageChange', val)
+      // console.log(val, '这是val')
+      this.$emit('studyProjectPageChange', 1, val)
+    },
+    alreadyProjectPageChange(val) {
+      this.$emit('alreadyProjectPageChange', 2, val)
     },
     expiredProjectPageChange(val) {
-      this.$emit('expiredProjectPageChange', val)
+      this.$emit('expiredProjectPageChange', 3, val)
     },
     collectProjectPageChange(val) {
       this.$emit('collectProjectPageChange', val)

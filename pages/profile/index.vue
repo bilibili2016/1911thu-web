@@ -19,13 +19,13 @@
         <el-tab-pane class="my-course" name="tab-third">
           <span slot="label" class="tabList">
             <i class="icon-project"></i> 我的项目</span>
-          <v-myproject :allProjectLoad="allProjectLoad" @studyProjectPageChange="studyProjectPageChange" @expiredProjectPageChange="expiredProjectPageChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configZero" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configFour="configFour" :expiredProjectData="expiredProjectData" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configTwo="configTwo" :studyProjectData="studyProjectData" :configOne="configOne" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="readyProjectData"></v-myproject>
+          <v-myproject :allProjectLoad="allProjectLoad" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configZero" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configFour="configFour" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configTwo="configTwo" :studyProjectData="myProjectData1" :configOne="configOne" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
         </el-tab-pane>
         <!-- 我的订单 -->
         <el-tab-pane class="my-course my-order" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
-          <v-myorder @detection="SearchOrderData" :allOrderLoadAll="allOrderLoadAll" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="invalidOrderData" :readyOrderLoad="readyOrderLoad" :readyOrderData="readyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="unfinishedOrderData" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="getUpdateMsg" @getAllOrderDataChange="getAllOrderDataChange" @unfinishedOrderDataChange="unfinishedOrderDataChange" @getReadyOrderDataChange="getReadyOrderDataChange" @invalidOrderDataChange="invalidOrderDataChange"></v-myorder>
+          <v-myorder :orderTotal="orderTotal" :allOrderLoadAll="allOrderLoadAll" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="allOrderData7" :readyOrderLoad="readyOrderLoad" :readyOrderData="allOrderData6" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="allOrderData5" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData4" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="getUpdateMsg" @getAllOrderDataChange="handleMyOrderChange" @unfinishedOrderDataChange="handleMyOrderChange" @getReadyOrderDataChange="handleMyOrderChange" @invalidOrderDataChange="handleMyOrderChange"></v-myorder>
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
@@ -273,6 +273,11 @@ export default {
       newDataing: [],
       newDataReady: [],
       allOrderData: [],
+      allOrderData4: [],
+      allOrderData5: [],
+      allOrderData6: [],
+      allOrderData7: [],
+
       unfinishedOrderData: [],
       readyOrderData: [],
       unTicketData: [],
@@ -334,7 +339,34 @@ export default {
       allCourseLoad: false,
       allTicket: false,
       allCode: false,
-      allHome: false
+      allHome: false,
+      orderTotal: '',
+      myOrderDataArr: [0, 1, 2, 3],
+      myProjectData1: [],
+      myProjectData2: [],
+      myProjectData3: [],
+      myProjectData4: [],
+      myProjectDataArr: [1, 2, 3],
+      myProjectPage1: {
+        types: 1,
+        pages: '',
+        limits: ''
+      },
+      myProjectPage2: {
+        types: 2,
+        pages: '',
+        limits: ''
+      },
+      myProjectPage3: {
+        types: 3,
+        pages: '',
+        limits: ''
+      },
+      myProjectPage4: {
+        types: 4,
+        pages: '',
+        limits: ''
+      }
     }
   },
   computed: {
@@ -345,9 +377,7 @@ export default {
     // 获取我的订单
     getUpdateMsg(msg) {
       if (msg === true) {
-        this.getAllOrderData()
-        this.getUnfinishedOrderData()
-        this.getInvalidOrderData()
+        this.handleInitMyOrderData()
       }
     },
 
@@ -406,13 +436,19 @@ export default {
     // 我的项目子类切换
     handleProject(item) {
       if (item.name == 'first') {
-        this.getProjectOneList()
+        // this.getProjectOneList()
+        // this.studyProjectPageChange(1)
+        this.handleMyProjectChange(1, 1)
       } else if (item.name == 'second') {
-        this.getProjectTwoList()
+        // this.getProjectTwoList()
+        // this.readyProjectPageChange(1)
+        this.handleMyProjectChange(2, 1)
       } else if (item.name == 'third') {
-        this.getProjectThreeList()
+        // this.getProjectThreeList()
+        // this.expiredProjectPageChange(1)
+        this.handleMyProjectChange(3, 1)
       } else if (item.name == 'fourth') {
-        this.getProjectFourList()
+        this.collectProjectPageChange(1)
       }
     },
     // 兑换码管理子类切换
@@ -594,195 +630,61 @@ export default {
         this.pagemsg3.total = response.data.pageCount
       })
     },
-    // 我的订单 全部
-    getAllOrderData() {
-      this.orderForm.payStatus = 0
-      this.allOrderLoadAll = true
-
-      profileHome.getAllOrderData(this.orderForm).then(response => {
-        this.allOrderData = response.data.orderList
-        this.allOrderLoadAll = false
-        this.pagemsg4.total = response.data.orderTotal
-      })
-    },
-    // 我的订单-全部 分页切换
-    getAllOrderDataChange(val) {
-      this.pagemsg4.page = val
-      this.orderForm.payStatus = 0
-      this.orderForm.pages = val
-      profileHome.getAllOrderData(this.orderForm).then(response => {
-        this.allOrderData = response.data.orderList
-        this.allOrderLoad = false
-      })
-    },
-    // 我的订单 - 搜索
-    SearchOrderData(val) {
-      this.orderForm.payStatus = 0
-      // this.allOrderLoadAll = true
-      this.orderForm.startTime = ''
-      this.orderForm.endTime = ''
-      profileHome.getAllOrderData(this.orderForm).then(response => {
-        // this.allOrderData = response.data.orderList
-        // this.allOrderLoadAll = false
-        // this.pagemsg4.total = response.data.orderTotal
-        console.log(response, 'response')
-      })
-    },
-    // 我的项目 公共
-    getProjectData(type) {
-      this.allProjectLoad = true
-      profileHome.getProjectList(this.projectForm).then(response => {
-        this.allProjectLoad = false
-        if (type === '1') {
-          this.studyProjectData = response.data.studyProjectList
-          this.projectPageStudy.total = response.data.pageCount
-          for (let item of response.data.studyProjectList) {
-            item.percent = Number(item.percent)
-          }
-        }
-        if (type === '2') {
-          this.readyProjectData = response.data.studyProjectList
-          this.projectPageReady.total = response.data.pageCount
-          for (let item of response.data.studyProjectList) {
-            item.percent = Number(item.percent)
-          }
-        }
-        if (type === '3') {
-          this.expiredProjectData = response.data.studyProjectList
-          this.projectPageExpired.total = response.data.pageCount
-          for (let item of response.data.studyProjectList) {
-            item.percent = Number(item.percent)
-          }
-        }
-      })
-    },
-    // 我的项目 学习中
-    getProjectOneList() {
-      this.projectForm.types = 1
-      this.projectForm.pages = 1
-      this.projectForm.limits = 12
-      this.getProjectData('1')
-    },
-    // 我的项目-学习中 分页切换
-    studyProjectPageChange(val) {
-      this.projectPageStudy.page = val
-      this.projectForm.pages = val
-      this.projectForm.types = 1
-      this.getProjectData('1')
-    },
-    // 我的项目 已完成
-    getProjectTwoList() {
-      this.projectForm.types = 2
-      this.projectForm.pages = 1
-      this.projectForm.limits = 12
-      this.getProjectData('2')
-    },
-    // 我的项目-学习中 分页切换
-    readyProjectPageChange(val) {
-      this.projectPageReady.page = val
-      this.projectForm.pages = val
-      this.projectForm.types = 1
-      this.getProjectData('2')
-    },
-    // 我的项目 已过期
-    getProjectThreeList() {
-      this.projectForm.types = 3
-      this.projectForm.pages = 1
-      this.projectForm.limits = 12
-      this.getProjectData('3')
-    },
-    // 我的项目-学习中 分页切换
-    expiredProjectPageChange(val) {
-      this.projectPageReady.page = val
-      this.projectForm.pages = val
-      this.projectForm.types = 1
-      this.getProjectData('3')
-    },
-    // 我的项目 收藏
-    getProjectFourList() {
-      this.projectForm.types = 2
-      this.projectForm.pages = 1
-      this.projectForm.limits = 12
-      profileHome.getProjectCollectList(this.projectForm).then(response => {
-        this.collectProjectData = response.data.collectionCurriculumProjectList
-        this.projectPageCollect.total = response.data.pageCount
-      })
-    },
     // 我的项目-收藏 分页切换
     collectProjectPageChange(val) {
       this.projectPageReady.page = val
       this.projectForm.pages = val
-      this.projectForm.types = 1
+      this.projectForm.types = 4
+      this.projectForm.limits = 12
       profileHome.getProjectCollectList(this.projectForm).then(response => {
         this.collectProjectData = response.data.collectionCurriculumProjectList
         this.projectPageCollect.total = response.data.pageCount
       })
     },
 
-    // 我的订单 待支付
-    getUnfinishedOrderData() {
-      this.orderForm.payStatus = 1
-      return new Promise((resolve, reject) => {
-        profileHome.getAllOrderData(this.orderForm).then(response => {
-          this.unfinishedOrderData = response.data.orderList
-          this.unfinishedOrderLoad = false
-          this.pagemsg5.total = response.data.orderTotal
-          resolve(true)
-        })
+    /**
+     * @param status 序号
+     * @param pagenum 页码
+     */
+    // 我的项目公共方法 我的项目分页没做
+    handleMyProjectChange(status, pagenum) {
+      this.projectForm.types = status
+      this.projectForm.pages = pagenum
+      this.projectForm.limits = 12
+      this._data['myProjectPage' + status].page = pagenum
+      profileHome.getProjectList(this.projectForm).then(response => {
+        this._data['myProjectData' + status] = response.data.studyProjectList
+        this._data['myProjectPage' + status].total = response.data.pageCount
+        for (let item of response.data.studyProjectList) {
+          item.percent = Number(item.percent)
+        }
       })
     },
-    // 我的订单-待支付 分页切换
-    unfinishedOrderDataChange(val) {
-      this.pagemsg5.page = val
-      this.orderForm.payStatus = 1
-      this.orderForm.pages = val
+    // 我的项目数据 页面初始化
+    handleInitMyProjectData() {
+      this.myProjectDataArr.map(item => {
+        this.handleMyProjectChange(item, 1)
+      })
+    },
+    /**
+     * @param status 序号
+     * @param pagenum 页码
+     */
+    // 我的订单公共方法
+    handleMyOrderChange(status, pagenum) {
+      this.orderForm.payStatus = status
+      this.orderForm.pages = pagenum
+      this._data['pagemsg' + (status + 4)].page = pagenum
       profileHome.getAllOrderData(this.orderForm).then(response => {
-        this.unfinishedOrderData = response.data.orderList
-        this.unfinishedOrderLoad = false
+        this._data['pagemsg' + (status + 4)].total = response.data.orderTotal
+        this.orderTotal = response.data.orderTotal
+        this._data['allOrderData' + (status + 4)] = response.data.orderList
       })
     },
-    // 我的订单 已支付
-    getReadyOrderData() {
-      this.orderForm.payStatus = 2
-      return new Promise((resolve, reject) => {
-        profileHome.getAllOrderData(this.orderForm).then(response => {
-          this.readyOrderData = response.data.orderList
-          this.readyOrderLoad = false
-          this.pagemsg6.total = response.data.orderTotal
-          resolve(true)
-        })
-      })
-    },
-    // 我的订单-已支付 分页切换
-    getReadyOrderDataChange(val) {
-      this.pagemsg6.page = val
-      this.orderForm.payStatus = 2
-      this.orderForm.pages = val
-      profileHome.getAllOrderData(this.orderForm).then(response => {
-        this.readyOrderData = response.data.orderList
-        this.readyOrderLoad = false
-      })
-    },
-    // 我的订单 取消
-    getInvalidOrderData() {
-      this.orderForm.payStatus = 3
-      return new Promise((resolve, reject) => {
-        profileHome.getAllOrderData(this.orderForm).then(response => {
-          this.invalidOrderData = response.data.orderList
-          this.invalidOrderLoad = false
-          this.pagemsg7.total = response.data.orderTotal
-          resolve(true)
-        })
-      })
-    },
-    // 我的订单-取消 分页切换
-    invalidOrderDataChange(val) {
-      this.pagemsg7.page = val
-      this.orderForm.payStatus = 3
-      this.orderForm.pages = val
-      profileHome.getAllOrderData(this.orderForm).then(response => {
-        this.invalidOrderData = response.data.orderList
-        this.invalidOrderLoad = false
+    // 我的订单数据 页面初始化
+    handleInitMyOrderData() {
+      this.myOrderDataArr.map(item => {
+        this.handleMyOrderChange(item, 1)
       })
     },
 
@@ -923,16 +825,11 @@ export default {
         this.studydataList()
         this.studyCurriculumList()
         this.readyStudyCurriculumList()
-        this.getProjectOneList()
-        this.getProjectTwoList()
-        this.getProjectThreeList()
-        this.getProjectFourList()
+        this.handleInitMyProjectData()
+        this.collectProjectPageChange(1)
         this.childCategoryList()
         this.collectionList()
-        this.getAllOrderData()
-        this.getUnfinishedOrderData()
-        this.getReadyOrderData()
-        this.getInvalidOrderData()
+        this.handleInitMyOrderData()
         this.getCodeList()
         this.getRecordList()
         this.curriculumPayApply()
@@ -957,7 +854,9 @@ export default {
       this.getUsedInvitationCodeList()
     })
     this.$bus.$on('studyProject', data => {
-      this.getProjectOneList()
+      // this.getProjectOneList()
+      // this.studyProjectPageChange(1)
+      this.handleMyProjectChange(1, 1)
     })
     this.$bus.$on('goBack', () => {
       this.goBack()
@@ -978,7 +877,13 @@ export default {
       // this.orderDetail = []
       // this.courseList = []
       this.getOrderDetail(false)
-    })
+    }),
+      // searchDatas
+      this.$bus.$on('searchDatas', (data, num) => {
+        this.orderForm.startTime = data[0]
+        this.orderForm.endTime = data[1]
+        this.handleMyOrderChange(Number(num), 1)
+      })
   },
   created() {
     this.$bus.$on('selectProfileIndex', data => {
