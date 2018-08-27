@@ -19,8 +19,8 @@
 
 <script>
 import Invitation from '@/pages/profile/components/mycode/invitation'
-import Conversion from '@/pages/profile/components/Conversion'
-import Bind from '@/pages/profile/components/BindIng'
+import Conversion from '@/pages/profile/components/mycode/Conversion'
+import Bind from '@/pages/profile/components/mycode/BindIng'
 export default {
   props: ['codeData', 'recordData', 'invitationCodeList', 'allCode'],
   components: {

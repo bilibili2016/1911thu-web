@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Info from '@/pages/profile/components/Info'
+import Info from '@/pages/profile/components/myinfo/Info.vue'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 export default {
   components: {
@@ -28,5 +28,3 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>

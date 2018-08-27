@@ -49,7 +49,7 @@
 import { timestampToYMD } from '@/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import Search from '@/pages/profile/components/search.vue'
+import Search from '@/pages/profile/components/common/search.vue'
 export default {
   props: ['codeData', 'allCode'],
   components: {

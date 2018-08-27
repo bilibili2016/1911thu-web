@@ -31,10 +31,10 @@
 </template>
 
 <script>
-import TicketOrder from '@/pages/profile/ticket/ticketOrder'
+import TicketOrder from '@/pages/profile/components/myticket/ticketOrder'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
-import TicketHistory from '@/pages/profile/ticket/ticketHistory'
-import TicketRules from '@/pages/profile/ticket/ticketRules'
+import TicketHistory from '@/pages/profile/components/myticket/ticketHistory'
+import TicketRules from '@/pages/profile/components/myticket/ticketRules'
 import ticketDetail from '@/pages/profile/components/common/Detail'
 export default {
   props: [

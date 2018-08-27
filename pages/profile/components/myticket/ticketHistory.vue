@@ -56,8 +56,8 @@ import { ticketHistory } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { timestampToTime } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
-import DetailPopup from '@/pages/profile/ticket/detailPopup'
-import StatusPopup from '@/pages/profile/ticket/statusPopup'
+import DetailPopup from '@/pages/profile/components/myticket/detailPopup'
+import StatusPopup from '@/pages/profile/components/myticket/statusPopup'
 export default {
   props: ['orderData'],
   components: {

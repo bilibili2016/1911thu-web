@@ -79,8 +79,8 @@ import { ticketorder } from '~/lib/v1_sdk/index'
 import { timestampToTime } from '@/lib/util/helper'
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import TicketPop from '@/pages/profile/ticket/ticketPopup'
-import TicketConfirm from '@/pages/profile/ticket/ticketConfirm'
+import TicketPop from '@/pages/profile/components/myticket/ticketPopup'
+import TicketConfirm from '@/pages/profile/components/myticket/ticketConfirm'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 export default {
   props: ['orderData'],

@@ -31,9 +31,9 @@ import { personalset } from '~/lib/v1_sdk/index'
 import { encryption } from '~/lib/util/helper'
 import { mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import ShowPerson from '@/pages/profile/personalSet/showPersonal'
-import SetPerson from '@/pages/profile/personalSet/setPersonal'
-import SetPassword from '@/pages/profile/personalSet/updatePassword'
+import ShowPerson from '@/pages/profile/components/mysetting/showPersonal'
+import SetPerson from '@/pages/profile/components/mysetting/setPersonal'
+import SetPassword from '@/pages/profile/components/mysetting/updatePassword'
 export default {
   components: {
     'v-showPer': ShowPerson,

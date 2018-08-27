@@ -28,7 +28,7 @@
 <script>
 import { timestampToYMD } from '@/lib/util/helper'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
-import Search from '@/pages/profile/components/search.vue'
+import Search from '@/pages/profile/components/common/search.vue'
 export default {
   props: ['recordData'],
   components: {
