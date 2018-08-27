@@ -65,9 +65,6 @@ export default {
       activeTicket: 'ticketFirst'
     }
   },
-  mounted() {
-    // console.log(this.pagemsg8)
-  },
   methods: {
     handleTicket() {
       this.$emit('handleTicket')
