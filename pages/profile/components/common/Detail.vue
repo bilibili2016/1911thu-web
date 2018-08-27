@@ -158,9 +158,11 @@ export default {
   methods: {
     goBack(type) {
       if (type === 'order') {
-        this.$bus.$emit('goBack')
+        // this.$bus.$emit('goBack')
+        this.$emit('goBack', true)
       } else {
-        this.$bus.$emit('goTicketBack')
+        // this.$bus.$emit('goTicketBack')
+        this.$emit('goTicketBack', true)
       }
     },
     changeTime(time) {

@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import NoMsg from '@/pages/profile/pages/noMsg.vue'
-import CustomList from '@/pages/profile/components/List.vue'
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
+import CustomList from '@/pages/profile/components/common/List.vue'
 export default {
   props: ['studyData', 'configZero', 'noMsgOne', 'allHome', 'pagemsgHome'],
   components: {
@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     studyDataChange(val) {
-      this.$emit('studyDataChange', val)
+      this.$emit('studyDataChange', 3, val)
     }
   }
 }

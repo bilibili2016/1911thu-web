@@ -11,14 +11,14 @@
       </el-tab-pane>
       <!-- 课程码管理 我的兑换 -->
       <el-tab-pane label="我的兑换" name="fourth">
-        <v-binding :invitationCodeList='invitationCodeList'></v-binding>
+        <v-binding :invitationCodeList='invitationCodeList' @reGetCode="reGetCode" @studyCourse="studyCourse" @studyProject="studyProject"></v-binding>
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
-import Invitation from '@/pages/profile/pages/invitation'
+import Invitation from '@/pages/profile/components/mycode/invitation'
 import Conversion from '@/pages/profile/components/Conversion'
 import Bind from '@/pages/profile/components/BindIng'
 export default {
@@ -37,6 +37,15 @@ export default {
     },
     goSearch(data) {
       this.$emit('recordList', data)
+    },
+    reGetCode() {
+      this.$emit('reGetCode')
+    },
+    studyCourse() {
+      this.$emit('studyCourse', 1, 1)
+    },
+    studyProject() {
+      this.$emit('studyProject', 1, 1)
     }
   },
   data() {

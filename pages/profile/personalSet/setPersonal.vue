@@ -236,7 +236,8 @@ export default {
           personalset.perInformation(this.psnForm).then(res => {
             let flag = res.status != 0 ? false : true
             // this.$emit('update', flag)
-            this.$bus.$emit('updateUserInfo', flag)
+            // this.$bus.$emit('updateUserInfo', flag)
+            this.$emit('updateUserInfo', flag)
             if (res.status == 0) {
               // this.getUserInfo()
               this.$emit('getUserInfo')

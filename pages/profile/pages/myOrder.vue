@@ -52,15 +52,15 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
-    <v-detail v-else :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :config="orderType" v-loading="detailMsg"></v-detail>
+    <v-detail v-else @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :config="orderType" v-loading="detailMsg"></v-detail>
   </div>
 </template>
 
 <script>
-import NoMsg from '@/pages/profile/pages/noMsg.vue'
-import Order from '@/pages/profile/components/OrderList'
-import Detail from '@/pages/profile/components/Detail'
-import DataPick from '@/pages/profile/components/DataPick'
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
+import Order from '@/pages/profile/components/myorder/OrderList'
+import Detail from '@/pages/profile/components/common/Detail'
+import DataPick from '@/pages/profile/components/myorder/DataPick'
 export default {
   watch: {
     searchDatas(data) {
@@ -125,6 +125,12 @@ export default {
     },
     invalidOrderDataChange(val) {
       this.$emit('invalidOrderDataChange', val)
+    },
+    goBack(val) {
+      this.$emit('goBack', val)
+    },
+    goTicketBack(val) {
+      this.$emit('goTicketBack', val)
     }
   }
 }

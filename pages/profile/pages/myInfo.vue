@@ -13,7 +13,7 @@
 
 <script>
 import Info from '@/pages/profile/components/Info'
-import NoMsg from '@/pages/profile/pages/noMsg.vue'
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 export default {
   components: {
     'v-info': Info,

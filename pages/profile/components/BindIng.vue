@@ -6,7 +6,7 @@
     </div>
     <div class="bindingRecord">
       <div class="brHeader">
-        <span>兑换码</span>
+        <span>兑换码1</span>
         <span>类型</span>
         <span>兑换日期</span>
         <span>兑换信息</span>
@@ -37,7 +37,7 @@ import { binding } from '~/lib/v1_sdk/index'
 import { timestampToYMD, open } from '@/lib/util/helper'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import NoMsg from '@/pages/profile/pages/noMsg.vue'
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 export default {
   props: ['invitationCodeList'],
   components: {
@@ -130,9 +130,13 @@ export default {
             type: 'success',
             message: res.msg
           })
-          this.$bus.$emit('studyCourse')
-          this.$bus.$emit('reGetCode')
-          this.$bus.$emit('studyProject')
+          // this.$bus.$emit('studyCourse')
+          this.$emit('studyCourse')
+          // 课程绑定后重新拉取
+          this.$emit('reGetCode')
+          // this.$bus.$emit('reGetCode')
+          // this.$bus.$emit('studyProject')
+          this.$emit('studyProject')
           this.bindForm.courseId = ''
           this.$bus.$emit('updateCourse', true)
         } else if (res.status === '100100') {

@@ -152,9 +152,10 @@ export default {
     selectPayApply(item, type) {
       persistStore.set('order', item.id)
       if (type == 'order') {
-        this.$bus.$emit('goOrderDetail', false)
+        this.$bus.$emit('goOrderDetail', true)
       } else if (type == 'ticket') {
-        this.$bus.$emit('goTicketDetail', false)
+        // this.$bus.$emit('goTicketDetail', false)
+        this.$bus.$emit('goOrderDetail', false)
       }
     },
     // 时间戳转日期格式

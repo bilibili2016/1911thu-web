@@ -81,7 +81,7 @@ import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import TicketPop from '@/pages/profile/ticket/ticketPopup'
 import TicketConfirm from '@/pages/profile/ticket/ticketConfirm'
-import NoMsg from '@/pages/profile/pages/noMsg.vue'
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 export default {
   props: ['orderData'],
   watch: {

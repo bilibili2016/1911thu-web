@@ -74,7 +74,7 @@ export default {
       this.$bus.$emit('selectProfileIndex', 'tab-fourth')
 
       persistStore.set('order', item)
-      this.$bus.$emit('goOrderDetaild', item)
+      this.$bus.$emit('goOrderDetail')
     },
     exchangeTime(time) {
       return timestampToYMD(time)
