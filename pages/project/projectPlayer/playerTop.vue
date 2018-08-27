@@ -13,7 +13,9 @@ export default {
     // 跳转课程详情
     goDetail() {
       this.$router.push(
-        '/project/projectdetail?id=' + window.location.search.split('=')[1]
+        '/project/projectdetail?id=' +
+          window.location.search.split('=')[1] +
+          '&type=1'
       )
     }
   }

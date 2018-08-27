@@ -36,7 +36,8 @@ export default {
       stydyNum: require('@/assets/images/home_num.png'),
       projectdetail: {
         base: '/project/projectdetail',
-        kid: ''
+        kid: '',
+        type: 1
       }
     }
   },

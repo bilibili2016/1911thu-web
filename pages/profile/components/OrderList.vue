@@ -86,7 +86,8 @@ export default {
       },
       projectdetail: {
         base: '/project/projectdetail',
-        kid: ''
+        kid: '',
+        type: 1
       }
     }
   },

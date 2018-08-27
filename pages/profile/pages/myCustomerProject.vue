@@ -5,97 +5,37 @@
                 <span>自定制项目</span>
             </div>
             <div class="cusProject">
-                <div class="card-category profile ">
-                    <div class="card-list ">
-                        <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
-                            <div>
-                                <div class="line-icon">
-                                    <!-- <img class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/online-icon.png" alt=""> -->
-                                    <img class="offlineIcon" src="http://papn9j3ys.bkt.clouddn.com/offline-icon.png" alt="">
-
-                                </div>
-                                <div class="bgImgs ">
-                                    <img src="http://papn9j3ys.bkt.clouddn.com/cusProject-icon.png" alt=" ">
-                                </div>
-                                <el-row>
-                                    <div class="item ">
-                                        <p class="itemBox-name ">
-                                            <span>党政干部综合项目</span>
-                                        </p>
-                                        <div class="deputyTitleOverTime">2018/08/20</div>
-                                        <div class="operate">
-                                            <span><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
-                                            <span><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
-                                        </div>
-                                    </div>
-
-                                </el-row>
-                            </div>
-
-                        </el-card>
-                    </div>
-                    <div class="card-list ">
-                        <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
-                            <div>
-                                <div class="line-icon">
-                                    <!-- <img class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/online-icon.png" alt=""> -->
-                                    <img class="offlineIcon" src="http://papn9j3ys.bkt.clouddn.com/offline-icon.png" alt="">
-
-                                </div>
-                                <div class="bgImgs ">
-                                    <img src="http://papn9j3ys.bkt.clouddn.com/cusProject-icon.png" alt=" ">
-                                </div>
-                                <el-row>
-                                    <div class="item ">
-                                        <p class="itemBox-name ">
-                                            <span>党政干部综合项目</span>
-                                        </p>
-                                        <div class="deputyTitleOverTime">2018/08/20</div>
-                                        <div class="operate">
-                                            <span><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
-                                            <span><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
-                                        </div>
-                                    </div>
-
-                                </el-row>
-                            </div>
-
-                        </el-card>
-                    </div>
-                    <div class="card-list ">
-                        <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
-                            <div>
-                                <div class="line-icon">
-                                    <img class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/online-icon.png" alt="">
-                                    <!-- <img class="offlineIcon" src="http://papn9j3ys.bkt.clouddn.com/offline-icon.png" alt=""> -->
-                                </div>
-                                <div class="bgImgs ">
-                                    <img src="http://papn9j3ys.bkt.clouddn.com/cusProject-icon.png" alt=" ">
-                                </div>
-                                <el-row>
-                                    <div class="item ">
-                                        <p class="itemBox-name ">
-                                            <span>党政干部综合项目</span>
-                                        </p>
-                                        <div class="deputyTitleOverTime">2018/08/20</div>
-                                        <!-- <div class="operate">
-                                            <span><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
-                                            <span><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
-                                        </div> -->
-                                        <div class="buied">已购买</div>
-                                    </div>
-
-                                </el-row>
-                            </div>
-
-                        </el-card>
-                    </div>
-                </div>
+                <v-customercard :customerProjectListData="customerProjectListData"></v-customercard>
             </div>
+            <div class="pagination" v-if="customerPagemsg.total>19">
+                <el-pagination background layout="prev, pager, next" :page-size="customerPagemsg.pagesize" :pager-count="5" :page-count="customerPagemsg.pagesize" :current-page="customerPagemsg.page" :total="customerPagemsg.total" @current-change="customerProjectChange"></el-pagination>
+            </div>
+            <v-nomsg class="noOrder" v-if="customerProjectListData.length == 0" :config="noMsg"></v-nomsg>
         </el-card>
     </div>
 </template>
 
 <script>
-export default {}
+import NoMsg from '@/pages/profile/pages/noMsg.vue'
+import CustomerCard from '@/pages/profile/components/CustomerCard'
+export default {
+  props: ['customerProjectListData', 'customerPagemsg'],
+  data() {
+    return {
+      noMsg: {
+        type: 'myCustomerProject',
+        text: '抱歉，没有自定制项目~'
+      }
+    }
+  },
+  components: {
+    'v-customercard': CustomerCard,
+    'v-nomsg': NoMsg
+  },
+  methods: {
+    customerProjectChange(val) {
+      this.$emit('customerProjectChange', val)
+    }
+  }
+}
 </script>

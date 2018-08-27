@@ -56,7 +56,7 @@
         <el-tab-pane class="my-course my-customerProject" name="tab-nine">
           <span slot="label" class="tabList">
             <i class="icon-cusProject"></i>&nbsp;自定制项目</span>
-          <v-myCustomerProject></v-myCustomerProject>
+          <v-myCustomerProject :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange"></v-myCustomerProject>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -245,6 +245,11 @@ export default {
         pages: '',
         limits: ''
       },
+      customerPagemsg: {
+        page: 1,
+        pagesize: 20,
+        total: 12
+      },
       studyProjectData: [],
       readyProjectData: [],
       expiredProjectData: [],
@@ -278,7 +283,7 @@ export default {
       allOrderData5: [],
       allOrderData6: [],
       allOrderData7: [],
-
+      customerProjectListData: [],
       unfinishedOrderData: [],
       readyOrderData: [],
       unTicketData: [],
@@ -318,6 +323,10 @@ export default {
         limits: 20
       },
       tickethistoryForm: {
+        pages: 1,
+        limits: 20
+      },
+      customerProjectForm: {
         pages: 1,
         limits: 20
       },
@@ -828,6 +837,25 @@ export default {
           }
         }
       })
+    },
+    //自定制项目
+    customerProjectList() {
+      profileHome
+        .customerProjectList(this.customerProjectForm)
+        .then(response => {
+          this.customerProjectListData = response.data.curriculumProjectList
+          this.customerPagemsg.total = response.data.pageCount
+        })
+    },
+    //自定制项目 分页
+    customerProjectChange(val) {
+      this.customerPagemsg.page = val
+      this.customerProjectForm.pages = val
+      profileHome
+        .customerProjectList(this.customerProjectForm)
+        .then(response => {
+          this.customerProjectListData = response.data.curriculumProjectList
+        })
     }
   },
   mounted() {
@@ -850,6 +878,7 @@ export default {
         //过期的我的课程
         this.overStudyCurriculumList()
         this.getUsedInvitationCodeList()
+        this.customerProjectList()
       }
     }
     // this.$bus.$emit('bannerShow', false)

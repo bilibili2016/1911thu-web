@@ -189,7 +189,9 @@ export default {
       this.getCurriculumPlayInfo()
     } else {
       this.$router.push(
-        '/project/projectdetail?id=' + window.location.search.split('=')[1]
+        '/project/projectdetail?kid=' +
+          window.location.search.split('=')[1] +
+          '&type=1'
       )
       this.$bus.$emit('loginShow', true)
     }

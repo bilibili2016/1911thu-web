@@ -107,6 +107,8 @@ export default {
   },
   mounted() {
     this.project.projectId = splitUrl(0, 1)
+    this.project.type = splitUrl(1, 1)
+
     this.getProjectInfo()
     this.getEvaluateList()
 
