@@ -20,35 +20,18 @@
           <span class="payCut" slot="label">未完成
             <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
           </span>
-          <v-datapick :orderNum="orderOne"></v-datapick>
-          <v-order v-if="unfinishedOrderData && unfinishedOrderData.length>0" :data="unfinishedOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail"></v-order>
-          <div class="pagination" v-if="pagemsg4.total>20">
-            <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg4.pagesize" :current-page="pagemsg4.page" :total="pagemsg4.total" @current-change="unfinishedOrderDataChange"></el-pagination>
-          </div>
-          <v-nomsg class="noOrder" v-if="unfinishedOrderData.length == 0" :config="noMsgTen"></v-nomsg>
-
+          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderThird">
           <span class="payOk" slot="label">已完成
           </span>
-          <v-datapick :orderNum="orderTwo"></v-datapick>
-          <v-order v-if="readyOrderData && readyOrderData.length>0" :data="readyOrderData" :config="orderType" @goOrderDetail="getOrderDetail"></v-order>
-          <div class="pagination" v-if="pagemsg6.total>19">
-            <el-pagination background layout="prev, pager, next" :page-size="pagemsg6.pagesize" :pager-count="5" :page-count="pagemsg6.pagesize" :current-page="pagemsg6.page" :total="pagemsg6.total" @current-change="getReadyOrderDataChange"></el-pagination>
-          </div>
-          <v-nomsg class="noOrder" v-if="readyOrderData.length == 0" :config="noMsgTen"></v-nomsg>
+          <v-listtab :order="orderTwo" :data="readyOrderData" :orderType="orderType" :pagemsg="pagemsg6" :noMsg="noMsgTen"></v-listtab>
+
         </el-tab-pane>
         <el-tab-pane name="orderFour">
           <span class="payOff" slot="label">已关闭
           </span>
-          <v-datapick :orderNum="orderThree"></v-datapick>
-          <v-order v-if="invalidOrderData && invalidOrderData.length>0" :data="invalidOrderData" :config="orderType" @goOrderDetail="getOrderDetail"></v-order>
-          {{invalidOrderData.total}}
-          <div class="pagination" v-if="pagemsg7.total>19">
-            <el-pagination background layout="prev, pager, next" :page-size="pagemsg7.pagesize" :pager-count="5" :page-count="pagemsg7.pagesize" :current-page="pagemsg7.page" :total="pagemsg7.total" @current-change="invalidOrderDataChange"></el-pagination>
-          </div>
-          <v-nomsg class="noOrder" v-if="invalidOrderData.length==0" :config="noMsgTen"></v-nomsg>
-
+          <v-listtab :order="orderThree" :data="invalidOrderData" :orderType="orderType" :pagemsg="pagemsg7" :noMsg="noMsgTen"></v-listtab>
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -61,6 +44,7 @@ import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import Order from '@/pages/profile/components/myorder/OrderList'
 import Detail from '@/pages/profile/components/common/Detail'
 import DataPick from '@/pages/profile/components/myorder/DataPick'
+import ListTab from '@/pages/profile/components/common/ListTab.vue'
 export default {
   watch: {
     searchDatas(data) {
@@ -71,7 +55,8 @@ export default {
     'v-nomsg': NoMsg,
     'v-order': Order,
     'v-detail': Detail,
-    'v-datapick': DataPick
+    'v-datapick': DataPick,
+    'v-listtab': ListTab
   },
   props: [
     'showOrderList',
