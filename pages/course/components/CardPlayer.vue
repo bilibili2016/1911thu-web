@@ -1,6 +1,6 @@
 <template>
-  <div class="playInner" ref="playInner">
-    <div id="mediaPlayer" ref="mediaPlayer" style="width:100%; height:100%;"></div>
+  <div class="playInner cardPlayer" ref="playInner">
+    <div id="mediaPlayer" ref="mediaPlayer"></div>
   </div>
 </template>
 
@@ -19,7 +19,8 @@ export default {
     return {
       playerForm: {
         curriculumId: '',
-        catalogId: ''
+        catalogId: '',
+        curriculumType: 1
       },
       playerPreviousForm: {
         curriculumId: '',
@@ -52,74 +53,6 @@ export default {
             name: 'playerPreviousComponent',
             type: playerPreviousComponent,
             args: [this.previousVideo]
-          }
-        ],
-        skinLayout: [
-          {
-            name: 'H5Loading',
-            align: 'cc'
-          },
-          {
-            name: 'errorDisplay',
-            align: 'tlabs',
-            x: 0,
-            y: 0
-          },
-          {
-            name: 'infoDisplay'
-          },
-          {
-            name: 'tooltip',
-            align: 'blabs',
-            x: 0,
-            y: 56
-          },
-          {
-            name: 'thumbnail'
-          },
-          {
-            name: 'controlBar',
-            align: 'blabs',
-            x: 0,
-            y: 0,
-            children: [
-              {
-                name: 'progress',
-                align: 'blabs',
-                x: 0,
-                y: 44
-              },
-              {
-                name: 'playButton',
-                align: 'tl',
-                x: 15,
-                y: 12
-              },
-              {
-                name: 'timeDisplay',
-                align: 'tl',
-                x: 10,
-                y: 7
-              },
-              {
-                name: 'fullScreenButton',
-                align: 'tr',
-                x: 10,
-                y: 12
-              },
-              {
-                name: 'setting',
-                align: 'tr',
-                x: 15,
-                y: 12
-              },
-              {
-                name: 'volume',
-                align: 'tr',
-                x: 5,
-                y: 10
-              }
-            ]
           }
         ]
       },
@@ -212,15 +145,17 @@ export default {
             this.player.dispose()
             this.$refs.playInner.innerHTML =
               '<div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>'
-            // 用vid和playauth切换播放器播放
-            // this.player.reloaduserPlayInfoAndVidRequestMts(
-            //   this.aliPlayer.vid,
-            //   this.aliPlayer.playauth
-            // )
           }
           // 不存在 直接创建播放器
           this.player = new Aliplayer(this.aliPlayer)
+          console.log(res.data)
 
+          // 获取到的下一节的播放信息
+          this.playerNextForm.curriculumId = res.data.nextCurriculumId
+          this.playerNextForm.catalogId = res.data.nextCatalogId
+          // 获取到下一节的播放信息
+          this.playerPreviousForm.curriculumId = res.data.previousCurriculumId
+          this.playerPreviousForm.catalogId = res.data.previousCatalogId
           this.bought = res.data.curriculumPrivilege
           this.lookAt = res.data.look_at
           this.isFree = res.data.is_free
@@ -236,9 +171,11 @@ export default {
         }
       })
     },
+    // 重新获取播放参数、播放视频
     rePlay() {
       this.getdefaultPlayerUrl()
     },
+    // 视频准备好之后执行
     readyPlay() {
       if (this.autoplay) {
         this.player.play()
@@ -302,8 +239,7 @@ export default {
       } else {
         // 如果当前小节播放完成，直接播放下一小节
         if (this.nextCatalogId !== '') {
-          this.playerForm.catalogId = this.nextCatalogId
-          this.getdefaultPlayerUrl()
+          this.nextVideo()
         }
       }
     },
@@ -323,7 +259,7 @@ export default {
     },
     // 切换上一小节按钮
     previousVideo() {
-      if (this.nextCatalogId !== '') {
+      if (this.playerPreviousForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerPreviousForm.curriculumId
         this.playerForm.catalogId = this.playerPreviousForm.catalogId
         this.autoplay = true
@@ -334,7 +270,7 @@ export default {
     },
     // 切换下一小节按钮
     nextVideo() {
-      if (this.nextCatalogId !== '') {
+      if (this.playerNextForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerNextForm.curriculumId
         this.playerForm.catalogId = this.playerNextForm.catalogId
         this.autoplay = true
@@ -367,10 +303,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.playInner {
-  width: 480px;
-  height: 312px;
-}
-</style>

@@ -8,6 +8,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { projectplayer } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
+import { message } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
 export default {
@@ -55,80 +56,17 @@ export default {
             type: playerPreviousComponent,
             args: [this.previousVideo]
           }
-        ],
-        skinLayout: [
-          {
-            name: 'bigPlayButton',
-            align: 'cc'
-          },
-          {
-            name: 'H5Loading',
-            align: 'cc'
-          },
-          {
-            name: 'infoDisplay'
-          },
-          {
-            name: 'tooltip',
-            align: 'blabs',
-            x: 0,
-            y: 56
-          },
-          {
-            name: 'thumbnail'
-          },
-          {
-            name: 'controlBar',
-            align: 'blabs',
-            x: 0,
-            y: 0,
-            children: [
-              {
-                name: 'progress',
-                align: 'blabs',
-                x: 0,
-                y: 44
-              },
-              {
-                name: 'playButton',
-                align: 'tl',
-                x: 15,
-                y: 12
-              },
-              {
-                name: 'timeDisplay',
-                align: 'tl',
-                x: 10,
-                y: 7
-              },
-              {
-                name: 'fullScreenButton',
-                align: 'tr',
-                x: 10,
-                y: 12
-              },
-              {
-                name: 'setting',
-                align: 'tr',
-                x: 15,
-                y: 12
-              },
-              {
-                name: 'volume',
-                align: 'tr',
-                x: 5,
-                y: 10
-              }
-            ]
-          }
-        ] //播放器控件配置
+        ]
       },
       player: '',
       socket: '',
       playAuthInfo: {},
-      nextCatalogId: '', //默认播放下一小节id
       pay: {
         type: 2
+      },
+      course: {
+        catalogId: '',
+        curriculumId: ''
       }
     }
   },
@@ -179,8 +117,9 @@ export default {
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === '100100') {
-          this.changePlayImg(this.pauseImg, this.playerForm.catalogId)
-          this.goShoppingCart(response.msg)
+          message(this, 'error', response.msg)
+          this.playerForm.curriculumId = this.course.curriculumId
+          this.playerForm.catalogId = this.course.catalogId
         } else if (response.status === '100006') {
           this.$alert('您已退出登录，请重新登录', '温馨提示', {
             confirmButtonText: '确定',
@@ -195,7 +134,14 @@ export default {
         } else {
           if (!that.bought && that.lookAt == '1') {
             this.goShoppingCart('您还未购买该项目，请先去购买吧！')
+            // 如果课程未购买，使用保存起来的课程id替换掉不能播放的课程id
+            this.playerForm.curriculumId = this.course.curriculumId
+            this.playerForm.catalogId = this.course.catalogId
           } else {
+            // 把现在播放的课程ID保存起来
+            this.course.curriculumId = this.playerForm.curriculumId
+            this.course.catalogId = this.playerForm.catalogId
+            // 接口返回的播放数据
             this.playAuthInfo = response.data.playAuthInfo
             this.aliPlayer.vid = response.data.playAuthInfo.video_id
             this.aliPlayer.playauth = response.data.playAuthInfo.playAuth
@@ -207,9 +153,13 @@ export default {
             }
             // 创建播放器
             this.player = new Aliplayer(this.aliPlayer)
-            this.nextCatalogId = response.data.nextCatalogId
-            // this.playerPreviousForm.curriculumId = response.data.nextCatalogId
-            // this.playerPreviousForm.catalogId = response.data.nextCatalogId
+            // 获取到的下一节的播放信息playerNextForm
+            this.playerNextForm.curriculumId = response.data.nextCurriculumId
+            this.playerNextForm.catalogId = response.data.nextCatalogId
+            // 获取到下一节的播放信息
+            this.playerPreviousForm.curriculumId =
+              response.data.previousCurriculumId
+            this.playerPreviousForm.catalogId = response.data.previousCatalogId
             this.player.on('ready', this.readyPlay)
             this.player.on('play', this.playerPlay)
             this.player.on('pause', this.playerPause)
@@ -290,9 +240,8 @@ export default {
       } else {
         // 已购买并且有下一小节
         if (this.nextCatalogId !== '' && this.bought) {
-          this.playerForm.catalogId = this.nextCatalogId
           this.autoplay = true
-          this.getPlayerInfo()
+          this.nextVideo()
         }
         // 已购买且没有下一小节了
         if (this.nextCatalogId == '' && this.bought) {
@@ -319,7 +268,7 @@ export default {
     },
     // 切换上一小节按钮
     previousVideo() {
-      if (this.nextCatalogId !== '') {
+      if (this.playerPreviousForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerPreviousForm.curriculumId
         this.playerForm.catalogId = this.playerPreviousForm.catalogId
         this.autoplay = true
@@ -330,7 +279,7 @@ export default {
     },
     // 切换下一小节按钮
     nextVideo() {
-      if (this.nextCatalogId !== '') {
+      if (this.playerNextForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerNextForm.curriculumId
         this.playerForm.catalogId = this.playerNextForm.catalogId
         this.autoplay = true

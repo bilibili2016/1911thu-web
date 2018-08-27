@@ -80,7 +80,8 @@ export default {
       playerForm: {
         curriculumId: '',
         catalogId: '',
-        type: 2
+        curriculumType: 2,
+        projectId: ''
       },
       projectForm: {
         ids: ''
@@ -126,6 +127,7 @@ export default {
         } else {
           this.collectMsg.isCollect = 0
         }
+        this.playerForm.projectId = this.projectForm.ids
         // 获取到默认播放小节里的是否试看
         this.lookAt =
           response.data.curriculumProjectDetail.defaultCurriculumCatalog.look_at
