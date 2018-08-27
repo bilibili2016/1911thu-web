@@ -40,7 +40,7 @@
         top: 41px;
         left: 0;
         width: 240px;
-        height: 120px;
+        max-height: 120px;
         overflow-x: hidden;
         overflow-y: scroll;
         border: 1px solid #ddd;
@@ -52,12 +52,14 @@
         .search {
           position: relative;
           background-color: #ededed;
-          .el-input {
-            .el-input__inner {
-              font-size: 14px;
-              border: none !important;
-              background-color: #ededed;
-            }
+          input {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+            border: none !important;
+            background-color: #ededed;
+            padding-left: 10px;
           }
           .el-icon-search {
             position: absolute;
@@ -73,7 +75,6 @@
             width: 100%;
             height: 40px;
             font-size: 14px;
-            color: #222;
             padding-left: 10px;
             line-height: 40px;
             border-bottom: 1px solid #ddd;
@@ -82,6 +83,15 @@
               background-color: #ededed;
             }
           }
+        }
+        p {
+          width: 100%;
+          height: 40px;
+          line-height: 40px;
+          padding-left: 10px;
+          font-size: 14px;
+          color: #222;
+          text-align: left;
         }
       }
       .pull-down {
@@ -206,15 +216,15 @@
             margin-right: 10px;
             margin-bottom: -2px;
             position: relative;
-            .el-checkbox {
+            .item-checkbox {
               display: none;
             }
-            .el-checkbox-label {
+            .item-checkbox-label {
               display: inline-block;
               height: 40px;
               width: 100%;
             }
-            .el-checkbox-label:after {
+            .item-checkbox-label:after {
               position: absolute;
               top: 11px;
               right: 10px;
@@ -229,7 +239,7 @@
               margin-bottom: 5px;
               margin-left: 270px;
             }
-            .el-checkbox:checked + .el-checkbox-label:after {
+            .item-checkbox:checked + .item-checkbox-label:after {
               background-image: url('~assets/images/icon-checked.png');
               background-size: 100%;
               border: none;

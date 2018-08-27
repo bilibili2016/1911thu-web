@@ -129,7 +129,7 @@ export default {
     },
     // 跳转 公共路由方法
     handleLink(data) {
-      if (window.location.pathname === data) {
+      if (data === '/other/pages/search') {
         let ID = Math.random()
         this.$router.push({ path: data, query: { ID } })
       } else {
