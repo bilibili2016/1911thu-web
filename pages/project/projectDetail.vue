@@ -61,7 +61,8 @@ export default {
         types: 2
       },
       project: {
-        projectId: '1'
+        projectId: '1',
+        types: 1
       },
       projectDetail: {},
 
