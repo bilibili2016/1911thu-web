@@ -8,7 +8,7 @@
                         <img v-if="item.study_type==='2'" class="offlineIcon" src="http://papn9j3ys.bkt.clouddn.com/offline-icon.png" alt="">
                     </div>
                     <div class="bgImgs " @click="gotoDetail(item)">
-                        <img src="http://papn9j3ys.bkt.clouddn.com/cusProject-icon.png" alt=" ">
+                        <img :src="item.picture" alt=" ">
                     </div>
                     <el-row>
                         <div class="item ">
