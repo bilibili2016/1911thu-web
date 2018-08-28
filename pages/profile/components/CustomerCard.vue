@@ -1,14 +1,14 @@
 <template>
     <div class="card-category profile ">
         <div class="card-list " v-for="(item,index) in customerProjectListData" :key="index">
-            <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
+            <el-card shadow="never " body-style="padding: 0; " class="itemBox">
                 <div>
                     <div class="line-icon">
                         <img v-if="item.study_type==='1'" class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/online-icon.png" alt="">
                         <img v-if="item.study_type==='2'" class="offlineIcon" src="http://papn9j3ys.bkt.clouddn.com/offline-icon.png" alt="">
                     </div>
                     <div class="bgImgs " @click="gotoDetail(item)">
-                        <img src="http://papn9j3ys.bkt.clouddn.com/cusProject-icon.png" alt=" ">
+                        <img :src="item.picture" alt=" ">
                     </div>
                     <el-row>
                         <div class="item ">

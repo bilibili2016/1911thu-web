@@ -4,7 +4,7 @@
       <div slot="header" class="clearfix">
         <span>自定制项目</span>
       </div>
-      <div class="cusProject" v-if="customerProjectListData.length > 0">
+      <div class="cusProject myProject" v-if="customerProjectListData.length > 0">
         <v-customercard :customerProjectListData="customerProjectListData" @deleteCustomerProject="deleteCustomerProject"></v-customercard>
       </div>
       <div class="pagination" v-if="customerPagemsg.total>19&&customerProjectListData.length > 0">
