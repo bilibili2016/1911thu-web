@@ -6,7 +6,6 @@
       </div>
       <v-info @noMsg="isNoMyMsg"></v-info>
       <v-nomsg v-show="noMyMsg" :config="noMsgEle"></v-nomsg>
-
     </el-card>
   </div>
 </template>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Queue() {
+      this.dataStore = [];
+      this.enqueue = enqueue;     //入队
+      this.dequeue = dequeue;     //出队
+      this.front = front;         //查看队首元素
+      this.back = back;           //查看队尾元素
+      this.toString = toString;   //显示队列所有元素
+      this.clear = clear;         //清空当前队列
+      this.empty = empty;         //判断当前队列是否为空
+    }
+    function enqueue(element) {
+      this.dataStore.push(element);
+    }
+
+    function dequeue(element) {
+      this.dataStore.shift(element);
+    }
+    function front() {
+      return this.dataStore[0]
+    }
+    function back() {
+      return this.dataStore[this.dataStore.length - 1]
+    }
+    function toString() {
+      return this.dataStore.join('\n');
+    }
+    function clear() {
+      delete this.dataStore;
+      this.dataStor = [];
+    }
+
+    function LinkedList() {
+      let Node = function (element) { // {1}
+        this.element = element;
+        this.next = null;
+      };
+      let length = 0; // {2}
+      let head = null; // {3}
+      this.append = append;
+      this.insert = insert;
+      this.remove = remove;
+      this.print = print;
+    }
+
+
+
+
+
+
+
+
+    function append(element) {
+      let node = new Node(element), //{1}
+        current; //{2}
+      if (head === null) { //列表中第一个节点 //{3}
+        head = node;
+      } else {
+        current = head; //{4}
+        //循环列表，直到找到最后一项
+        while (current.next) {
+          current = current.next;
+        }
+        //找到最后一项，将其next赋为node，建立链接
+        current.next = node; //{5}
+      }
+      length++; //更新列表的长度 //{6} };
+    }
+    let list = new LinkedList();
+    list.append(15);
+    list.append(10);
+
+
+    function findPrev(item) {
+      var currNode = this.head;
+      while (!(currNode.next == null) && (currNode.next.element != item)) {
+        currNode = currNode.next;
+      }
+      return currNode;
+    }
+    //删除节点
+
+    function remove(item) {
+      var prevNode = this.findPrev(item);
+      if (!(prevNode.next == null)) {
+        prevNode.next = prevNode.next.next;
+      }
+    }
+
+    //查找给定节点
+
+    function find(item) {
+      var currNode = this.head;
+      while (currNode.element != item) {
+        currNode = currNode.next;
+      }
+      return currNode;
+    }
+    //插入节点
+
+    function insert(newElement, item) {
+      var newNode = new Node(newElement);
+      var currNode = this.find(item);
+      newNode.next = currNode.next;
+      currNode.next = newNode;
+    }
+
+
+    function Set() {
+      let items = {};
+      this.add = add;
+      this.delete = delete
+        this.has = has
+      this.clear = clear
+      this.size = size
+      this.values = values
+    }
+    let set = new Set()
+    function has(value) {
+      return this.items.hasOwnProperty(value);
+    };
+    function add(value) {
+      if (!this.has(value)) {
+        this.items[value] = value; //{1}
+        return true;
+      }
+      return false;
+    };
+    function remove(value) {
+      if (this.has(value)) {
+        delete this.items[value]; //{2}
+        return true;
+      }
+      return false;
+    };
+    function size() {
+      return Object.keys(items).length; //{4}
+    };
+
+    function values() {
+      let values = [];
+      for (let i = 0, keys = Object.keys(this.items); i < keys.length; i++) {
+        values.push(this.items[keys[i]]);
+      }
+      return values;
+    };
+
+    function union(otherSet) {
+      let unionSet = new Set(); //{1}
+      let values = this.values(); //{2}
+      for (let i = 0; i < values.length; i++) {
+        unionSet.add(values[i]);
+      }
+      values = otherSet.values(); //{3}
+      for (let i = 0; i < values.length; i++) {
+        unionSet.add(values[i]);
+      }
+      return unionSet;
+    };
+
+    let setA = new Set();
+    setA.add(1);
+    setA.add(2);
+    setA.add(3);
+    let setB = new Set();
+    setB.add(3);
+    setB.add(4);
+    setB.add(5);
+    setB.add(6);
+    let unionAB = setA.union(setB);
+    console.log(unionAB.values());
+
+    function intersection(otherSet) {
+      let intersectionSet = new Set(); //{1}
+      let values = this.values();
+      for (let i = 0; i < values.length; i++) { //{2}
+        if (otherSet.has(values[i])) {    //{3}
+          intersectionSet.add(values[i]); //{4}
+        }
+      }
+      return intersectionSet;
+    }
+    let setA = new Set();
+    setA.add(1);
+    setA.add(2);
+    setA.add(3);
+    let setB = new Set();
+    setB.add(2);
+    setB.add(3);
+    setB.add(4);
+    let intersectionAB = setA.intersection(setB);
+    console.log(intersectionAB.values());
+
+
+    function difference(otherSet) {
+      let differenceSet = new Set(); //{1}
+      let values = this.values();
+      for (let i = 0; i < values.length; i++) { //{2}
+        if (!otherSet.has(values[i])) {   //{3}
+          differenceSet.add(values[i]); //{4}
+        }
+      }
+      return differenceSet;
+    };
+
+    let setA = new Set();
+    setA.add(1);
+    setA.add(2);
+    setA.add(3);
+    let setB = new Set();
+    setB.add(2);
+    setB.add(3);
+    setB.add(4);
+    let differenceAB = setA.difference(setB);
+    console.log(differenceAB.values());
+
+
+    function subset(otherSet) {
+      if (this.size() > otherSet.size()) { //{1}
+        return false;
+      } else {
+        let values = this.values();
+        for (let i = 0; i < values.length; i++) { //{2}
+          if (!otherSet.has(values[i])) { //{3}
+            return false; //{4}
+          }
+        }
+        return true; //{5}
+      }
+    };
+
+
+    let setA = new Set();
+    setA.add(1);
+    setA.add(2);
+    let setB = new Set();
+    setB.add(1);
+    setB.add(2);
+    setB.add(3);
+    let setC = new Set();
+    setC.add(2);
+    setC.add(3);
+    setC.add(4);
+    console.log(setA.subset(setB));
+    console.log(setA.subset(setC));
+  </script>
+</body>
+
+</html>

@@ -13,7 +13,8 @@
             <el-pagination background layout="prev, pager, next" :page-size="projectPageStudy.pagesize" :pager-count="5" :page-count="projectPageStudy.pagesize" :current-page="projectPageStudy.page" :total="projectPageStudy.total" @current-change="studyProjectPageChange"></el-pagination>
           </div>
           <v-nomsg v-if="studyProjectData.length == 0 && !allProjectLoad" :config="noMsgSix"></v-nomsg> -->
-          <v-cardtab :data="studyProjectData" :config="configOne" :pagemsg="projectPageStudy" :noMsg="noMsgSix"></v-cardtab>
+          <!-- {{allProjectLoad}}=={{111}} -->
+          <v-cardtab :allLoad="allProjectLoad" :data="studyProjectData" :config="configOne" :pagemsg="projectPageStudy" :noMsg="noMsgSix"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 已完成 -->
         <el-tab-pane label="已完成" name="second" value="2">

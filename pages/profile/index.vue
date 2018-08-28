@@ -402,6 +402,7 @@ export default {
       this.styleForm.limits = 12
       // this.pagemsg2.page = pagenum
       this._data['pagemsg' + status].page = pagenum
+      this.allCourseLoad = true
       profileHome.studyCurriculumList(this.styleForm).then(response => {
         this._data['myCourseData' + status] = response.data.curriculumList
         this._data['pagemsg' + status].total = response.data.pageCount
@@ -414,6 +415,7 @@ export default {
             this.$set(this._data['myCourseData' + status][i], 'overtime', true)
           }
         }
+        this.allCourseLoad = false
       })
     },
     // 我的课程-收藏
@@ -438,12 +440,14 @@ export default {
       this.projectForm.pages = pagenum
       this.projectForm.limits = 12
       this._data['myProjectPage' + status].page = pagenum
+      this.allProjectLoad = true
       profileHome.getProjectList(this.projectForm).then(response => {
         this._data['myProjectData' + status] = response.data.studyProjectList
         this._data['myProjectPage' + status].total = response.data.pageCount
         for (let item of response.data.studyProjectList) {
           item.percent = Number(item.percent)
         }
+        this.allProjectLoad = false
       })
     },
     // 我的项目-收藏
