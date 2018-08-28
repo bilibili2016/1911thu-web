@@ -9,8 +9,13 @@
           <div class="goodsList">
             <v-backshopcart @handleLinkShopCart="handleLinkShopCart" :config="affirmOrder"></v-backshopcart>
             <!-- 商品列表 -->
-            <div class="goods">
+            <!-- <div class="goods">
               <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
+            </div> -->
+
+            <!-- 自定义项目 -->
+            <div class="goods">
+              <v-list :config="customOrder" :data="curriculumLists"></v-list>
             </div>
             <!-- 商品信息 -->
             <v-orderinfo :data="orderinfo"></v-orderinfo>
@@ -52,6 +57,10 @@ export default {
         type: 'affirmOrder',
         text: '确认订单'
       },
+      customOrder: {
+        type: 'customOrder',
+        text: '确认订单'
+      },
       config: {
         type: 2
       },
@@ -60,6 +69,7 @@ export default {
       isNoMsg: false,
       loadGoods: true,
       curriculumLists: [],
+      customculumLists: [],
       curriculumSum: null,
       payNumber: null,
       restaurants: [],
@@ -142,6 +152,7 @@ export default {
     handleGoodsList() {
       this.loadGoods = true
       affirmOrder.goodsList(this.addArray).then(res => {
+        console.log(res, '这是res')
         if (res.status === 0) {
           this.curriculumLists = res.data.curriculumProjectLists
           this.orderinfo = res.data
@@ -164,6 +175,12 @@ export default {
           this.isNoMsg = true
         }
       })
+    },
+    // 自定义项目确认订单
+    handleCustomProject() {
+      affirmOrder.customProject().then(res => {
+        console.log()
+      })
     }
   },
   mounted() {
@@ -171,3 +188,4 @@ export default {
   }
 }
 </script>
+
