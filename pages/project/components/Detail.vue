@@ -51,6 +51,7 @@ import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import Collection from '@/components/common/Collection.vue'
 import { projectdetail } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
+import { splitUrl } from '@/lib/util/helper'
 export default {
   components: {
     'v-breadcrumb': BreadCrumb,
@@ -87,9 +88,7 @@ export default {
     goProjectPlayer() {
       if (this.isAuthenticated) {
         window.open(
-          window.location.origin +
-            '/project/projectPlayer?id=' +
-            window.location.search.split('=')[1]
+          window.location.origin + '/project/projectPlayer?id=' + splitUrl(0, 1)
         )
       } else {
         this.$bus.$emit('loginShow', true)
