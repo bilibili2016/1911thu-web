@@ -131,7 +131,7 @@
                         </div>
                       </li>
                     </ul>
-                    <p v-else>暂无数据</p>
+                    <p v-else>暂无课程</p>
                   </div>
 
                 </div>
@@ -319,6 +319,16 @@ export default {
           throw '请选择线下培训人数'
         }
 
+        if (this.projectForm.type === '1') {
+          //保存操作才验证
+          if (this.projectForm.trainCollege === '') {
+            throw '请选择学院分类'
+          }
+          if (this.projectForm.trainCourse === '') {
+            throw '请选择课程分类'
+          }
+        }
+
         if (this.projectForm.checkedCourse.length === 0) {
           throw '请添加课程'
         }
@@ -335,9 +345,11 @@ export default {
             message(this, 'success', '修改成功')
           }
           if (type === 1) {
+            //保存跳转个人中心定制项目
             this.$router.push('/profile')
             this.$bus.$emit('selectProfileIndex', 'tab-nine')
           } else {
+            //立即购买跳转确认订单
             this.$router.push({
               path: '/shop/affirmorder',
               query: { id: response.data.curriculum_project_id }
@@ -442,6 +454,7 @@ export default {
     },
     //选择学院分类
     chooseCollege(val) {
+      this.searchCourseData = [] //切换清空
       this.projectForm.trainCollege = val.category_name
       this.searchCourseForm.first_ID = val.id
       this.courseCategoryData = val.childList
@@ -462,7 +475,6 @@ export default {
       customerProject.searchCourse(this.searchCourseForm).then(response => {
         this.searchCourseData = response.data.curriculumList
         this.reuseData = response.data.curriculumList
-
         this.searchCourseData.forEach((item, index) => {
           this.searchCourseData[index].checked = false
         })

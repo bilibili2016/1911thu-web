@@ -148,8 +148,6 @@ export default {
           }
           // 不存在 直接创建播放器
           this.player = new Aliplayer(this.aliPlayer)
-          console.log(res.data)
-
           // 获取到的下一节的播放信息
           this.playerNextForm.curriculumId = res.data.nextCurriculumId
           this.playerNextForm.catalogId = res.data.nextCatalogId

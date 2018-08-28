@@ -12,8 +12,13 @@
       </div>
     </div>
     <!-- 项目详情页上部分-项目信息 -->
-    <h1>{{projectDetail.title}}</h1>
-    <h3>{{projectDetail.deputy_title}}</h3>
+    <div class="title-item">
+      <!-- 定制项目不显示标题和副标题 -->
+      <div v-if="projectType.types==='1'">
+        <h1>{{projectDetail.title}}</h1>
+        <h3>{{projectDetail.deputy_title}}</h3>
+      </div>
+    </div>
     <div class="detail clearfix">
       <div class="some">
         <div>
@@ -26,18 +31,24 @@
           <p>
             <span>{{projectDetail.study_number}}</span> 人</p>
         </div>
-        <div>
+        <div v-if="projectType.types==='1'">
           <h6>综合评分</h6>
           <p>
             <span>{{projectDetail.score}}</span> 分</p>
         </div>
       </div>
-      <div class="fr buy">
+      <div class="fr buy" v-if="projectType.types==='1'">
         <div class="price">
           <i>￥</i>{{projectDetail.present_price}}</div>
         <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
         <div class="addShoppingCart" @click="addShoppingCart">加入购物车</div>
+      </div>
+      <div class="fr buy" v-if="projectType.types==='2'">
+        <div class="price">
+          <i>￥</i>{{projectDetail.present_price}}</div>
+        <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即观看</div>
+        <div class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
       </div>
 
     </div>
@@ -51,12 +62,13 @@ import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import Collection from '@/components/common/Collection.vue'
 import { projectdetail } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
+import { splitUrl } from '@/lib/util/helper'
 export default {
   components: {
     'v-breadcrumb': BreadCrumb,
     'v-collection': Collection
   },
-  props: ['projectDetail'],
+  props: ['projectDetail', 'projectType'],
   data() {
     return {
       project: {
@@ -87,9 +99,7 @@ export default {
     goProjectPlayer() {
       if (this.isAuthenticated) {
         window.open(
-          window.location.origin +
-            '/project/projectPlayer?id=' +
-            window.location.search.split('=')[1]
+          window.location.origin + '/project/projectPlayer?id=' + splitUrl(0, 1)
         )
       } else {
         this.$bus.$emit('loginShow', true)
@@ -117,6 +127,13 @@ export default {
         }
         this.$router.push('/shop/shoppingcart')
       })
+    },
+    // 立即购买
+    handleBuy(id) {
+      this.$router.push({
+        path: '/shop/affirmorder',
+        query: { id: id }
+      })
     }
   },
   watch: {
@@ -130,7 +147,8 @@ export default {
     }
   },
   mounted() {
-    this.project.projectId = window.location.search.split('=')[1]
+    // this.project.projectId = window.location.search.split('=')[1]
+    this.project.projectId = splitUrl(0, 1)
   }
 }
 </script>

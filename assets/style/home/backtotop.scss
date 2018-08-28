@@ -151,9 +151,9 @@
       margin: 20px 25px 0;
       width: 120px;
       height: 120px;
-      background: url('~assets/images/iconList.png') no-repeat;
-      background-size: 177px 966px;
-      background-position: 4px -339px;
+      background: url('http://papn9j3ys.bkt.clouddn.com/attentionWechat2.png')
+        no-repeat;
+      background-size: 120px;
     }
     h4 {
       text-align: center;
@@ -218,15 +218,10 @@
   width: 20px;
   height: 13px;
   margin: 20px 15px 15px 15px;
-  background: url('~assets/images/iconList.png') no-repeat;
-  background-size: 177px 966px;
-  background-position: 0 -308px;
 }
 
 .line-wrap {
-  // height: 50px;
-  // width: 100px;
-  cursor: pointer; // border: 1px red solid;
+  cursor: pointer;
 }
 
 .line-centerd {

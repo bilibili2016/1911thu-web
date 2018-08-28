@@ -47,7 +47,6 @@ export default {
     },
     // 改变鼠标悬浮时的DownApp二维码
     changeImg(what) {
-      S
       what == 'android' ? (this.iphones = false) : (this.iphones = true)
     }
   }

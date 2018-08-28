@@ -3,10 +3,9 @@
     <!-- <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}"> -->
     <div class="proHeader">
       <div class="proHeader-mask"></div>
-      <!-- <img class="proHeader-img" :src="customerBanner" alt=""> -->
       <img class="proHeader-img" :src="projectDetail.picture" alt="">
       <!-- 项目详情基本信息 -->
-      <v-detail :projectDetail="projectDetail" class="proHeader-detail"></v-detail>
+      <v-detail :projectDetail="projectDetail" :projectType="project" class="proHeader-detail"></v-detail>
     </div>
     <!-- 介绍 线上课程 线下课程介绍 用户评价 常见问题-->
     <div class="proContent">
@@ -17,10 +16,14 @@
         <el-tab-pane label="线上课程介绍" name="second">
           <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad" :id="project.projectId"></v-procourse>
         </el-tab-pane>
-        <el-tab-pane label="用户评价" name="third">
+        <!-- 定制项目并且项目类型为混合模式显示 -->
+        <el-tab-pane label="线下课程说明" name="third" v-if="project.types === '2' &&projectDetail.study_type==='2' ">
+          <v-offlinedesc></v-offlinedesc>
+        </el-tab-pane>
+        <el-tab-pane label="用户评价" name="fifth" v-if="project.types === '1'">
           <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo" v-loading="evaluateDataLoad"></v-proevaluate>
         </el-tab-pane>
-        <el-tab-pane label="常见问题" name="fourth">
+        <el-tab-pane label="常见问题" name="fourth" v-if="project.types === '1'">
           <v-proproblems v-loading="problemLoad"></v-proproblems>
         </el-tab-pane>
       </el-tabs>
@@ -35,6 +38,7 @@ import Detail from '@/pages/project/components/Detail'
 import Procourse from '@/pages/project/components/ProjectCourse'
 import Proevaluate from '@/pages/project/components/ProjectEvaluate'
 import Commonproblems from '@/pages/project/components/CommonProblems'
+import OfflineDesc from '@/pages/project/components/OfflineDesc'
 import { store as persistStore } from '~/lib/core/store'
 import { splitUrl, message } from '@/lib/util/helper'
 export default {
@@ -42,7 +46,8 @@ export default {
     'v-procourse': Procourse,
     'v-proevaluate': Proevaluate,
     'v-proproblems': Commonproblems,
-    'v-detail': Detail
+    'v-detail': Detail,
+    'v-offlinedesc': OfflineDesc
   },
   data() {
     return {
@@ -113,7 +118,9 @@ export default {
     this.project.types = splitUrl(1, 1)
 
     this.getProjectInfo()
-    this.getEvaluateList()
+    if (this.project.types === '1') {
+      this.getEvaluateList()
+    }
 
     this.problemLoad = false
   }
