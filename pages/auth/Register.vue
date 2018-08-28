@@ -10,7 +10,6 @@
     <el-form-item prop="passwords">
       <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
     </el-form-item>
-
     <el-form-item prop="">
       <el-checkbox-group v-model="registerData.checked">
         <el-checkbox label="同意" name="checked"></el-checkbox>
