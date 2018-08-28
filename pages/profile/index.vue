@@ -56,7 +56,7 @@
         <el-tab-pane class="my-course my-customerProject" name="tab-nine">
           <span slot="label" class="tabList">
             <i class="icon-cusProject"></i>&nbsp;自定制项目</span>
-          <v-myCustomerProject :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange"></v-myCustomerProject>
+          <v-myCustomerProject :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -67,6 +67,7 @@
 import Banner from '@/components/common/Banner.vue'
 import PersonalSet from '@/pages/profile/personalSet/personalSet.vue'
 import { profileHome } from '~/lib/v1_sdk/index'
+import { message } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import MyHome from '@/pages/profile/pages/myHome'
@@ -856,6 +857,17 @@ export default {
         .then(response => {
           this.customerProjectListData = response.data.curriculumProjectList
         })
+    },
+    //删除自定制项目
+    deleteCustomerProject(id) {
+      profileHome.deleteCustomerProject({ id }).then(response => {
+        if (response.status == 0) {
+          message(this, 'success', '删除成功')
+          this.customerProjectList()
+        } else {
+          message(this, 'error', '删除失败')
+        }
+      })
     }
   },
   mounted() {

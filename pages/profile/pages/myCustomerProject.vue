@@ -1,18 +1,18 @@
 <template>
-    <div>
-        <el-card class="changeNav">
-            <div slot="header" class="clearfix">
-                <span>自定制项目</span>
-            </div>
-            <div class="cusProject">
-                <v-customercard :customerProjectListData="customerProjectListData"></v-customercard>
-            </div>
-            <div class="pagination" v-if="customerPagemsg.total>19">
-                <el-pagination background layout="prev, pager, next" :page-size="customerPagemsg.pagesize" :pager-count="5" :page-count="customerPagemsg.pagesize" :current-page="customerPagemsg.page" :total="customerPagemsg.total" @current-change="customerProjectChange"></el-pagination>
-            </div>
-            <v-nomsg class="noOrder" v-if="customerProjectListData.length == 0" :config="noMsg"></v-nomsg>
-        </el-card>
-    </div>
+  <div>
+    <el-card class="changeNav">
+      <div slot="header" class="clearfix">
+        <span>自定制项目</span>
+      </div>
+      <div class="cusProject">
+        <v-customercard :customerProjectListData="customerProjectListData" @deleteCustomerProject="deleteCustomerProject"></v-customercard>
+      </div>
+      <div class="pagination" v-if="customerPagemsg.total>19">
+        <el-pagination background layout="prev, pager, next" :page-size="customerPagemsg.pagesize" :pager-count="5" :page-count="customerPagemsg.pagesize" :current-page="customerPagemsg.page" :total="customerPagemsg.total" @current-change="customerProjectChange"></el-pagination>
+      </div>
+      <v-nomsg class="noOrder" v-if="customerProjectListData.length == 0" :config="noMsg"></v-nomsg>
+    </el-card>
+  </div>
 </template>
 
 <script>
@@ -35,6 +35,9 @@ export default {
   methods: {
     customerProjectChange(val) {
       this.$emit('customerProjectChange', val)
+    },
+    deleteCustomerProject(id) {
+      this.$emit('deleteCustomerProject', id)
     }
   }
 }

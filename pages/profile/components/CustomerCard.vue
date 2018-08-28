@@ -7,7 +7,7 @@
                         <img v-if="item.study_type==='1'" class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/online-icon.png" alt="">
                         <img v-if="item.study_type==='2'" class="offlineIcon" src="http://papn9j3ys.bkt.clouddn.com/offline-icon.png" alt="">
                     </div>
-                    <div class="bgImgs ">
+                    <div class="bgImgs " @click="gotoDetail(item)">
                         <img src="http://papn9j3ys.bkt.clouddn.com/cusProject-icon.png" alt=" ">
                     </div>
                     <el-row>
@@ -18,7 +18,7 @@
                             <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>
                             <div class="operate">
                                 <span @click="editCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
-                                <span><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
+                                <span @click="deleteCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
                             </div>
                         </div>
 
@@ -38,16 +38,31 @@ export default {
     return {
       customerProject: {
         base: '/project/customerProject',
-        sid: '-1',
-        edit: 1
+        sid: '',
+        edit: 2
+      },
+      project: {
+        base: '/project/projectdetail',
+        kid: '',
+        type: 2
       }
     }
   },
   methods: {
+    //跳转项目详情页
+    gotoDetail(item) {
+      this.project.kid = item.id
+      this.project.type = 2
+      open(this.project)
+    },
     //编辑
     editCustomerProject(item) {
       this.customerProject.sid = item.id
       open(this.customerProject)
+    },
+    //删除
+    deleteCustomerProject(item) {
+      this.$emit('deleteCustomerProject', item.id)
     },
     // 时间戳转日期格式
     exchangeTime(time) {

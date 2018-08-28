@@ -3,6 +3,7 @@
     <!-- <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}"> -->
     <div class="proHeader">
       <div class="proHeader-mask"></div>
+      <!-- <img class="proHeader-img" :src="customerBanner" alt=""> -->
       <img class="proHeader-img" :src="projectDetail.picture" alt="">
       <!-- 项目详情基本信息 -->
       <v-detail :projectDetail="projectDetail" class="proHeader-detail"></v-detail>
@@ -45,6 +46,8 @@ export default {
   },
   data() {
     return {
+      customerBanner:
+        'http://papn9j3ys.bkt.clouddn.com/customer-detail-banner.png',
       projectDetailLoad: true,
       inlineLoad: true,
       evaluateDataLoad: true,
@@ -107,7 +110,7 @@ export default {
   },
   mounted() {
     this.project.projectId = splitUrl(0, 1)
-    this.project.type = splitUrl(1, 1)
+    this.project.types = splitUrl(1, 1)
 
     this.getProjectInfo()
     this.getEvaluateList()

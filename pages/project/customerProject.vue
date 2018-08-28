@@ -202,7 +202,6 @@ import { Trim, message, splitUrl } from '~/lib/util/helper'
 export default {
   data() {
     return {
-      type: '', //新增/编辑
       searchInput: '',
       isShowNumSelect: false,
       isShowDaySelect: false,
@@ -220,6 +219,7 @@ export default {
         second_ID: ''
       },
       projectForm: {
+        type: '', //新增/编辑
         customerID: '', //项目ID (编辑)
         name: '', //项目名称
         desc: '', //项目简介
@@ -297,6 +297,11 @@ export default {
     },
     //保存
     saveProject() {
+      this.projectForm.checkedCourse = []
+      this.checkedCourseData.forEach((item, index) => {
+        this.projectForm.checkedCourse.push(item.id)
+      })
+
       try {
         if (Trim(this.projectForm.name) === '') throw '请填写项目名称'
         if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
@@ -309,12 +314,7 @@ export default {
         ) {
           throw '请选择线下培训人数'
         }
-        // if (this.projectForm.trainCollege === '') {
-        //   throw '请选择学院分类'
-        // }
-        // if (this.projectForm.trainCourse === '') {
-        //   throw '请选择课程分类'
-        // }
+
         if (this.projectForm.checkedCourse.length === 0) {
           throw '请添加课程'
         }
@@ -325,7 +325,11 @@ export default {
 
       customerProject.createProject(this.projectForm).then(response => {
         if (response.status == 0) {
-          message(this, 'success', response.msg)
+          if (this.projectForm.type === '1') {
+            message(this, 'success', '创建成功')
+          } else {
+            message(this, 'success', '修改成功')
+          }
           this.$router.push('/profile')
           this.$bus.$emit('selectProfileIndex', 'tab-nine')
         } else {
@@ -353,10 +357,8 @@ export default {
       }, []) //设置cur默认类型为数组，并且初始值为空的数组
       this.projectForm.onlineTime = 0
       this.projectForm.onlinePrice = 0
-      this.projectForm.checkedCourse = []
       //重新计算去重后数组
       this.chooseCourseData.forEach((item, index) => {
-        this.projectForm.checkedCourse.push(item.id)
         this.projectForm.onlineTime += Number(item.curriculum_time)
         this.projectForm.onlinePrice += Number(item.present_price)
       })
@@ -483,21 +485,19 @@ export default {
         .getCustomerProjectInfo(this.projectForm)
         .then(response => {
           let data = response.data.curriculumProjectDetail
-          console.log(response)
+          // console.log(response)
           this.projectForm.name = data.title //项目标题
           this.projectForm.desc = data.introduction //项目简介
           this.projectForm.styleRadio = data.study_type //培训方式
-          this.checkedCourseData = data.curriculumList
-          this.projectForm.trainDay = data.training_number //线下学习天数
+          this.checkedCourseData = data.curriculumList //已选课程
+          this.projectForm.trainDay = data.offline_days //线下培训天数
           this.projectForm.trainNum = data.study_persion_number //培训人数
           this.projectForm.objRadio = data.study_object //培训对象
 
           data.curriculumList.forEach((item, index) => {
-            this.projectForm.checkedCourse.push(item.id)
             this.projectForm.onlineTime += Number(item.curriculum_time)
             this.projectForm.onlinePrice += Number(item.present_price)
           })
-          console.log(this.projectForm.onlinePrice)
         })
     },
     documentHandler(e) {
@@ -521,8 +521,9 @@ export default {
       this.computedPrice()
       this.CategoryList()
       this.projectForm.customerID = splitUrl(0, 1)
-      this.type = splitUrl(1, 1)
-      if (this.type === '1') {
+      this.projectForm.type = splitUrl(1, 1)
+      if (this.projectForm.type === '2') {
+        //1:新增 2:编辑
         this.getCustomerProjectInfo()
       }
     }
