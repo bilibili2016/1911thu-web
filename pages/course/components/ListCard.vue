@@ -77,7 +77,8 @@ export default {
       },
       projectDetail: {
         base: '/project/projectdetail',
-        kid: null
+        kid: null,
+        type: 1
       }
     }
   },

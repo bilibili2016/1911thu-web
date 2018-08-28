@@ -48,6 +48,10 @@ export default {
         {
           link: 'tab-eighth',
           text: '发票管理'
+        },
+        {
+          link: 'tab-nine',
+          text: '自定制项目'
         }
       ]
     }

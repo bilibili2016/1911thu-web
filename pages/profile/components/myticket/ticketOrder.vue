@@ -218,7 +218,7 @@ export default {
     },
     //项目详情
     goProjrctInfo(item) {
-      this.$router.push('/project/projectdetail?kid=' + item.id)
+      this.$router.push('/project/projectdetail?kid=' + item.id + '&type=1')
     },
     //列表详情
     selectPayApply(item, type) {

@@ -95,7 +95,6 @@ export default {
       isIndex: true,
       jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
       newTag: 'http://papn9j3ys.bkt.clouddn.com/new.png',
-
       numSrc: require('@/assets/images/home_num.png'),
       coursedetail: {
         base: '/course/coursedetail',
@@ -104,7 +103,8 @@ export default {
       },
       projectdetail: {
         base: '/project/projectdetail',
-        kid: null
+        kid: null,
+        type: 1
       }
     }
   },

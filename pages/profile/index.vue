@@ -56,7 +56,7 @@
         <el-tab-pane class="my-course my-customerProject" name="tab-nine">
           <span slot="label" class="tabList">
             <i class="icon-cusProject"></i>&nbsp;自定制项目</span>
-          <v-myCustomerProject></v-myCustomerProject>
+          <v-myCustomerProject :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -68,6 +68,7 @@ import Banner from '@/components/common/Banner.vue'
 import MyHome from '@/pages/profile/pages/myHome'
 import PersonalSet from '@/pages/profile/pages/mySettings.vue'
 import { profileHome } from '~/lib/v1_sdk/index'
+import { message } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 
@@ -248,6 +249,11 @@ export default {
         pages: '',
         limits: ''
       },
+      customerPagemsg: {
+        page: 1,
+        pagesize: 20,
+        total: 12
+      },
       studyProjectData: [],
       readyProjectData: [],
       expiredProjectData: [],
@@ -280,6 +286,7 @@ export default {
       allOrderData5: [],
       allOrderData6: [],
       allOrderData7: [],
+      customerProjectListData: [],
       unfinishedOrderData: [],
       readyOrderData: [],
       unTicketData: [],
@@ -319,6 +326,10 @@ export default {
         limits: 20
       },
       tickethistoryForm: {
+        pages: 1,
+        limits: 20
+      },
+      customerProjectForm: {
         pages: 1,
         limits: 20
       },
@@ -579,6 +590,36 @@ export default {
         }
       })
     },
+     //自定制项目
+    customerProjectList() {
+      profileHome
+        .customerProjectList(this.customerProjectForm)
+        .then(response => {
+          this.customerProjectListData = response.data.curriculumProjectList
+          this.customerPagemsg.total = response.data.pageCount
+        })
+    },
+    //自定制项目 分页
+    customerProjectChange(val) {
+      this.customerPagemsg.page = val
+      this.customerProjectForm.pages = val
+      profileHome
+        .customerProjectList(this.customerProjectForm)
+        .then(response => {
+          this.customerProjectListData = response.data.curriculumProjectList
+        })
+    },
+    //删除自定制项目
+    deleteCustomerProject(id) {
+      profileHome.deleteCustomerProject({ id }).then(response => {
+        if (response.status == 0) {
+          message(this, 'success', '删除成功')
+          this.customerProjectList()
+        } else {
+          message(this, 'error', '删除失败')
+        }
+      })
+    },
     // 初始化 bus 事件
     initBusEvent() {
       this.$bus.$on('selectProfileIndex', data => {
@@ -599,7 +640,7 @@ export default {
         this.orderForm.endTime = data[1]
         this.handleMyOrderChange(Number(num), 1)
       })
-    }
+
   },
   mounted() {
     if (this.isAuthenticated) {
@@ -617,6 +658,7 @@ export default {
         this.historyOrderDataChange(1)
         this.unTicketDataChange(1)
         this.getUsedInvitationCodeList()
+        this.customerProjectList()
       }
     }
   }

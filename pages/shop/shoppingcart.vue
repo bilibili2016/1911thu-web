@@ -439,9 +439,11 @@ export default {
       )
     },
     goProjectDetail(item) {
-      // this.$router.push('/project/projectdetail?id=' + item.id)
       window.open(
-        window.location.origin + '/project/projectdetail?id=' + item.id
+        window.location.origin +
+          '/project/projectdetail?kid=' +
+          item.id +
+          '&type=1'
       )
     },
     loadAll() {

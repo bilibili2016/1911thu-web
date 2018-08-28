@@ -72,6 +72,7 @@ export default {
       playerForm: {
         curriculumId: '',
         catalogId: '',
+        curriculumType: 1,
         autoplay: true
       }
     }

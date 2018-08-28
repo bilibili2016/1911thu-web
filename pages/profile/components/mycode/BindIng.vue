@@ -71,7 +71,8 @@ export default {
       } else {
         let courseDetail = {
           base: '/project/projectdetail',
-          kid: item.curriculum_id
+          kid: item.curriculum_id,
+          type: 1
         }
         open(courseDetail)
       }
