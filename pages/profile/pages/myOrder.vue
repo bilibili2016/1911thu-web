@@ -4,17 +4,17 @@
     <el-card v-if="showOrderList">
       <el-tabs v-model="activeOrder">
         <el-tab-pane label="全部" name="orderFirst">
-          <v-datapick :orderNum="orderZero"></v-datapick>
+          <!-- <v-datapick :orderNum="orderZero"></v-datapick> -->
           <!-- {{pagemsg4.total}} -->
-          <div :class="{ minheight : allOrderLoadAll}" v-loading="allOrderLoadAll">
-            <!-- @searchDatas="searchDatas" -->
-            <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail"></v-order>
+          <!-- <div :class="{ minheight : allOrderLoadAll}" v-loading="allOrderLoadAll"> -->
+          <!-- @searchDatas="searchDatas" -->
+          <!-- <v-order v-if="allOrderData  && allOrderData.length>0" :data="allOrderData" :config="orderType" @handleUpdate="getUpdateMsg" @goOrderDetail="getOrderDetail"></v-order>
           </div>
           <div class="pagination" v-if="pagemsg4.total>19">
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg4.pagesize" :current-page="pagemsg4.page" :total="pagemsg4.total" @current-change="getAllOrderDataChange"></el-pagination>
           </div>
-          <v-nomsg class="noOrder" v-if="allOrderData.length == 0 && !allOrderLoadAll" :config="noMsgTen"></v-nomsg>
-
+          <v-nomsg class="noOrder" v-if="allOrderData.length == 0 && !allOrderLoadAll" :config="noMsgTen"></v-nomsg> -->
+          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
           <span class="payCut" slot="label">未完成

@@ -43,7 +43,7 @@ export default {
     'v-nomsg': NoMsg,
     'v-list': CustomList,
     'v-card': CustomCard,
-    'v-cardtab': CustomCard
+    'v-cardtab': CardTab
   },
   props: [
     'studyProjectData',

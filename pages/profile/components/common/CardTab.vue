@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{allLoad}} === {{allLoads}}
     <div :class="{ minheight : allLoad}" v-loading="allLoad">
       <v-list :data="data" :config="config" v-if="data  && data.length>0"></v-list>
     </div>
