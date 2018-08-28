@@ -42,12 +42,14 @@
 import { mapActions } from 'vuex'
 import { payResult } from '@/lib/v1_sdk/index'
 import { banBackSpace } from '@/lib/util/helper'
+import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
       success: true,
       payCompleteForm: {
-        orderId: null
+        orderId: null,
+        attachs: null
       },
       hasCode: false,
       payCompleteData: {},
@@ -91,7 +93,7 @@ export default {
     },
     payComplete() {
       this.payCompleteForm.orderId = window.location.pathname.split('/')[3]
-
+      this.payCompleteForm.attachs = persistStore.get('attach')
       payResult.payComplete(this.payCompleteForm).then(response => {
         this.payCompleteData = response.data
         this.showMsg = true

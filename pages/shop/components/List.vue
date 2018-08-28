@@ -45,7 +45,9 @@
       </div>
     </div>
     <!-- 确认订单，支付中心列表 -->
+    <!-- {{data}} -->
     <div v-if="config.type=='wePay' || config.type=='affirmOrder'">
+      <!-- {{data}} -->
       <div class="clearfix" :class="{oneGoods:config.type=='affirmOrder',courseOne:config.type=='wePay'}" v-for="(course,index) in data" :key="index">
         <div class="fl">
           <div class="bottomImg">
@@ -56,7 +58,7 @@
         </div>
         <div class="fl">
           <h5>{{course.title}}</h5>
-          <h6>{{course.study_time}}学时</h6>
+          <h6>{{course.study_time == '' ? 0 : course.study_time}}学时</h6>
           <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
         </div>
 
@@ -68,6 +70,7 @@
         </div>
       </div>
     </div>
+    <!-- {{config.type=='affirmOrder'}} {{config.type}} -->
     <div class="customProject" v-if="config.type=='customOrder'">
       <!-- 自定义项目课程列表 -->
       <div class="listBar">
@@ -83,22 +86,22 @@
           <span>总价</span>
         </div>
       </div>
-      <div class="clearfix goodsList" v-for="(course,index) in data" :key="index">
+      <div class="clearfix goodsList">
         <div class="fl">
           <div class="bottomImg">
             <!-- 项目图标 -->
-            <img :src="course.picture" alt="">
+            <img :src="data.picture" alt="">
           </div>
-          <h5>{{course.title}}</h5>
-          <h6>{{course.study_time}}学时</h6>
+          <h5>{{data.title}}</h5>
+          <h6>{{data.study_time}}学时</h6>
         </div>
         <div class="fr">
-          <span>线上+线下</span>
-          <span>30学时</span>
-          <span>20人</span>
-          <span>22学时</span>
-          <span>5天</span>
-          <span class="coursePrice">￥5</span>
+          <span>{{data.style_type === '1' ? '线下' : '线上'}}</span>
+          <span>{{data.study_time}}学时</span>
+          <span>{{data.study_persion_number}}人</span>
+          <span>{{(data.offline_days)*8}}学时</span>
+          <span>{{data.offline_days}}天</span>
+          <span class="coursePrice">￥{{data.original_price}}</span>
         </div>
       </div>
     </div>

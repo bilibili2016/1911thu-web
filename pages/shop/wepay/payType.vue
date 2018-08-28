@@ -39,7 +39,7 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
-import { timestampToTime } from '~/lib/util/helper'
+import { timestampToTime, splitUrl } from '~/lib/util/helper'
 import { wepay } from '@/lib/v1_sdk/index'
 export default {
   props: ['orderDetail', 'codeData', 'listData'],
@@ -54,7 +54,8 @@ export default {
         companyId: null
       },
       payListForm: {
-        orderId: null
+        orderId: null,
+        attachs: null
       },
       projectList: [],
       restTime: '',
@@ -80,9 +81,15 @@ export default {
       }
     },
     getStatus() {
-      let cpyid = window.location.pathname.split('/')[2]
-
+      let cpyid = splitUrl(0, 1)
+      let attachs = splitUrl(1, 1)
       this.payListForm.orderId = cpyid
+      this.payListForm.attachs = 2
+      if (attachs == 2) {
+        this.payListForm.attachs = 2
+      } else {
+        this.payListForm.attachs = 1
+      }
 
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
@@ -112,11 +119,11 @@ export default {
       this.pubMsg = false
     },
     selectPub() {
-      let urlLen = window.location.pathname.split('/')
+      let urlLen = splitUrl(0, 1)
       this.wxMsg = false
       this.zfbMsg = false
       this.pubMsg = true
-      this.$router.push('/shop/payPublic?orderID=' + urlLen[urlLen.length - 1])
+      this.$router.push('/shop/payPublic?orderID=' + urlLen)
     },
     time() {
       setInterval(data => {
@@ -161,6 +168,8 @@ export default {
     }
   },
   mounted() {
+    let attachs = splitUrl(1, 1)
+    persistStore.set('attach', attachs)
     this.$bus.$on('clearInterval', dat => {
       clearInterval(this.interval)
     })

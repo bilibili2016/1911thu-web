@@ -4,7 +4,7 @@
     <span class="fr goBack" @click="handleLinkShopCart" v-if="config.type==='affirmOrder'">
       <img class="editOutline" src="http://papn9j3ys.bkt.clouddn.com/shopCart-icon.png" alt=""> 返回修改购物车
     </span>
-    <span class="fr goBack" @click="handleLinkShopCart" v-if="config.type==='customAffirmOrder'">
+    <span class="fr goBack" @click="handleQuestion" v-if="config.type!=='affirmOrder'">
       我有疑问，需要反馈?
     </span>
   </div>
@@ -16,6 +16,9 @@ export default {
   methods: {
     handleLinkShopCart() {
       this.$emit('handleLinkShopCart')
+    },
+    handleQuestion() {
+      this.$emit('handleQuestion')
     }
   }
 }
