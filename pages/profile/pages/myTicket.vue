@@ -67,7 +67,6 @@ export default {
   },
   methods: {
     handleTicket(item) {
-      // console.log(item)
       this.$emit('handleTicket', item.$attrs.value)
     },
     getUpdateMsg() {

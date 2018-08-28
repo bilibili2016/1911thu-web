@@ -71,7 +71,6 @@ export default {
   },
   methods: {
     studyProjectPageChange(val) {
-      // console.log(val, '这是val')
       this.$emit('studyProjectPageChange', 1, val)
     },
     alreadyProjectPageChange(val) {

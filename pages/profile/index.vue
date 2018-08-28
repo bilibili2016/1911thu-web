@@ -7,13 +7,13 @@
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label" class="tabList">
             <i class="icon-home"></i> 我的首页</span>
-          <v-myhome :allCourseLoad="allCourseLoad" :studyData="myCourseData3" :configZero="configZero" :pagemsgHome="pagemsgHome" :noMsgOne="noMsgOne" @studyDataChange="handleMyCourseChange"></v-myhome>
+          <v-myhome :allCourseLoad="allCourseLoad" :studyData="myCourseData3" :configZero="configZero" :pagemsg3="pagemsg3" :noMsgOne="noMsgOne" @studyDataChange="handleMyCourseChange"></v-myhome>
         </el-tab-pane>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
-          <v-mycourse :allCourseLoad="allCourseLoad" :activeNames="activeNames" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :pagemsg3="pagemsg3" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"> </v-mycourse>
+          <v-mycourse :allCourseLoad="allCourseLoad" :activeNames="activeNames" :pagecltcourse="pagecltcourse" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"> </v-mycourse>
         </el-tab-pane>
         <!-- 我的项目 -->
         <el-tab-pane class="my-course" name="tab-third">
@@ -25,7 +25,7 @@
         <el-tab-pane class="my-course my-order" name="tab-fourth">
           <span slot="label" class="tabList">
             <i class="icon-order"></i> 我的订单</span>
-          <v-myorder @goBack="showOrderList = true" @goTicketBack="showTicketList = true" :allOrderLoadAll="allOrderLoadAll" :orderTotal="orderTotal" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="allOrderData7" :readyOrderLoad="readyOrderLoad" :readyOrderData="allOrderData6" :unfinishedOrderLoad="unfinishedOrderLoad" :unfinishedOrderData="allOrderData5" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData4" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="handleInitMyOrderData(true)" @getAllOrderDataChange="handleMyOrderChange" @unfinishedOrderDataChange="handleMyOrderChange" @getReadyOrderDataChange="handleMyOrderChange" @invalidOrderDataChange="handleMyOrderChange"></v-myorder>
+          <v-myorder @goBack="showOrderList = true" @goTicketBack="showTicketList = true" :allOrderLoadAll="allOrderLoadAll" :orderTotal="orderTotal" :detailMsg="detailMsg" :orderType="orderType" :projectList="projectList" :courseList="courseList" :bankInfo="bankInfo" :orderDetail="orderDetail" :invalidOrderLoad="invalidOrderLoad" :invalidOrderData="allOrderData7" :readyOrderLoad="readyOrderLoad" :readyOrderData="allOrderData6" :unfinishedOrderData="allOrderData5" :noMsgTen="noMsgTen" :allOrderLoad="allOrderLoad" :allOrderData="allOrderData4" :showOrderList="showOrderList" :pagemsg4="pagemsg4" :pagemsg5="pagemsg5" :pagemsg6="pagemsg6" :pagemsg7="pagemsg7" @getUpdateMsg="handleInitMyOrderData(true)" @getAllOrderDataChange="handleMyOrderChange" @unfinishedOrderDataChange="handleMyOrderChange" @getReadyOrderDataChange="handleMyOrderChange" @invalidOrderDataChange="handleMyOrderChange"></v-myorder>
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
@@ -44,7 +44,6 @@
         <el-tab-pane class="my-course my-invitation" name="tab-seventh">
           <span slot="label" class="tabList">
             <i class="icon-code"></i> 兑换码管理</span>
-          <!-- 'codeData', 'recordData', 'invitationCodeList' -->
           <v-mycode @reGetCode="getUsedInvitationCodeList" @studyCourse="handleMyCourseChange" @studyProject="handleMyProjectChange" :codeData="codeData" :recordData="recordData" :allCode="allCode" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode" @recordList="recordList" @searchCodeList="searchCodeList"></v-mycode>
         </el-tab-pane>
         <!-- 发票管理 -->
@@ -194,7 +193,7 @@ export default {
         pages: 0,
         limits: 12
       },
-      pagemsgHome: {
+      pagecltcourse: {
         page: 1,
         pagesize: 12,
         total: 12
@@ -330,7 +329,7 @@ export default {
       showTicketList: true,
       isUpdate: false,
       allOrderLoad: true,
-      unfinishedOrderLoad: true,
+      unfinishedOrderLoad: false,
       readyOrderLoad: true,
       invalidOrderLoad: true,
       historyOrderLoad: true,
@@ -420,12 +419,13 @@ export default {
     },
     // 我的课程-收藏
     collectionPageChange(val) {
-      this.pagemsg3.page = val
+      this.pagecltcourse.page = val
       this.collectionForm.pages = val
       this.collectionForm.categoryId = 0
+      this.collectionForm.limits = 12
       profileHome.collectionList(this.collectionForm).then(response => {
         this.collectionData = response.data.curriculumList
-        this.pagemsg3.total = response.data.pageCount
+        this.pagecltcourse.total = response.data.pageCount
       })
     },
     // 我的课程 首页 数据初始化
@@ -490,9 +490,11 @@ export default {
     },
     // 我的发票 未开发票 分页切换
     unTicketDataChange(val) {
+      this.allTicket = true
       this.pagemsg8.page = val
       this.orderNotInvoiceForm.pages = val
       profileHome.orderNotInvoice(this.orderNotInvoiceForm).then(response => {
+        this.allTicket = false
         this.unTicketData = response.data.orderList
         this.unTicketData.forEach(item => {
           item.checked = false
@@ -502,11 +504,12 @@ export default {
     },
     // 我的发票 开票历史 分页切换
     historyOrderDataChange(val) {
+      this.unfinishedOrderLoad = true
       this.pagemsg9.page = val
       this.tickethistoryForm.pages = val
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
         this.historyOrderData = response.data.invoiceList
-        // this.historyOrderLoad = false
+        this.unfinishedOrderLoad = false
       })
     },
     // 我的发票 tab切换 更新数据
@@ -527,9 +530,9 @@ export default {
     },
     // 兑换码 获取 兑换码列表
     getCodeList() {
-      // this.allCode = true
+      this.allCode = true
       profileHome.getCodeList(this.codeListForm).then(response => {
-        // this.allCode = false
+        this.allCode = false
         this.codeData = response.data.orderInvitationCodeList
         this.codeListForm.ordersn = ''
       })
@@ -551,7 +554,7 @@ export default {
     // 兑换码 获取已经添加的兑换码
     getUsedInvitationCodeList() {
       profileHome.getUsedInvitationCodeList().then(response => {
-        // console.log(response, '这是response123')
+
         this.invitationCodeList = response.data.usedInvitationCodeList
       })
     },

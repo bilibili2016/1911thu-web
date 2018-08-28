@@ -13,7 +13,7 @@
         </div>
         <v-nomsg class="fillTop" v-if="studyData.length == 0&& !allHome" :config="noMsgOne"></v-nomsg> -->
         <!-- :allLoad="allCourseLoad"  -->
-        <v-cardtab :allLoad="allCourseLoad" :data="studyData" :config="configZero" :pagemsg="pagemsgHome" :noMsg="noMsgOne" @pageChange="studyDataChange"></v-cardtab>
+        <v-cardtab :allLoad="allCourseLoad" :data="studyData" :config="configZero" :pagemsg="pagemsg3" :noMsg="noMsgOne" @pageChange="studyDataChange"></v-cardtab>
       </div>
     </el-card>
   </div>
@@ -24,13 +24,7 @@ import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import CustomList from '@/pages/profile/components/common/List.vue'
 import CardTab from '@/pages/profile/components/common/CardTab.vue'
 export default {
-  props: [
-    'studyData',
-    'configZero',
-    'noMsgOne',
-    'pagemsgHome',
-    'allCourseLoad'
-  ],
+  props: ['studyData', 'configZero', 'noMsgOne', 'allCourseLoad', 'pagemsg3'],
   components: {
     'v-nomsg': NoMsg,
     'v-list': CustomList,

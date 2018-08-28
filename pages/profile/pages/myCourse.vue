@@ -26,7 +26,7 @@
         </el-tab-pane>
         <!-- 我的课程 我的收藏 -->
         <el-tab-pane label="我的收藏" name="third" value="0">
-          <v-cardtab :data="collectionData" :config="configZero" :pagemsg="pagemsg3" :noMsg="noMsgFive" @pageChange="collectionPageChange"></v-cardtab>
+          <v-cardtab :data="collectionData" :config="configZero" :pagemsg="pagecltcourse" :noMsg="noMsgFive" @pageChange="collectionPageChange"></v-cardtab>
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -54,7 +54,8 @@ export default {
     'pagemsg3',
     'configZero',
     'noMsgFive',
-    'allCourseLoad'
+    'allCourseLoad',
+    'pagecltcourse'
   ],
   components: {
     'v-nomsg': NoMsg,

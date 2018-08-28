@@ -14,18 +14,18 @@
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg4.pagesize" :current-page="pagemsg4.page" :total="pagemsg4.total" @current-change="getAllOrderDataChange"></el-pagination>
           </div>
           <v-nomsg class="noOrder" v-if="allOrderData.length == 0 && !allOrderLoadAll" :config="noMsgTen"></v-nomsg> -->
-          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen"></v-listtab>
+          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
           <span class="payCut" slot="label">未完成
             <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
           </span>
-          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen"></v-listtab>
+          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderThird">
           <span class="payOk" slot="label">已完成
           </span>
-          <v-listtab :order="orderTwo" :data="readyOrderData" :orderType="orderType" :pagemsg="pagemsg6" :noMsg="noMsgTen"></v-listtab>
+          <v-listtab :order="orderTwo" :data="readyOrderData" :orderType="orderType" :pagemsg="pagemsg6" :noMsg="noMsgTen" @pageChange="getReadyOrderDataChange"></v-listtab>
 
         </el-tab-pane>
         <el-tab-pane name="orderFour">
@@ -116,6 +116,9 @@ export default {
     },
     goTicketBack(val) {
       this.$emit('goTicketBack', val)
+    },
+    pageChange(val) {
+      this.$emit('pageChange', val)
     }
   }
 }
