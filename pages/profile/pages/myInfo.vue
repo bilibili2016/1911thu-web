@@ -6,14 +6,13 @@
       </div>
       <v-info @noMsg="isNoMyMsg"></v-info>
       <v-nomsg v-show="noMyMsg" :config="noMsgEle"></v-nomsg>
-
     </el-card>
   </div>
 </template>
 
 <script>
-import Info from '@/pages/profile/components/Info'
-import NoMsg from '@/pages/profile/pages/noMsg.vue'
+import Info from '@/pages/profile/components/myinfo/Info.vue'
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 export default {
   components: {
     'v-info': Info,
@@ -28,5 +27,3 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>

@@ -200,7 +200,7 @@ export default {
     getUserInfo() {
       personalset.getUserInfo().then(res => {
         this.psnForm = res.data.userInfo
-        console.log()
+
         var setObj = {}
         if (this.psnForm.company_name && this.psnForm.company_name != '') {
           setObj.hasCompany = true
@@ -220,7 +220,7 @@ export default {
     },
     // 提交个 人信息表单
     onSubmit(formName) {
-      console.log(this.psnForm, '123')
+
       if (this.psnForm.province !== '') {
         if (this.psnForm.city == '' || this.psnForm.area == '') {
           this.$message({
@@ -236,7 +236,8 @@ export default {
           personalset.perInformation(this.psnForm).then(res => {
             let flag = res.status != 0 ? false : true
             // this.$emit('update', flag)
-            this.$bus.$emit('updateUserInfo', flag)
+            // this.$bus.$emit('updateUserInfo', flag)
+            this.$emit('updateUserInfo', flag)
             if (res.status == 0) {
               // this.getUserInfo()
               this.$emit('getUserInfo')

@@ -245,7 +245,7 @@ export default {
           this.handleLinkProfile(this.skip)
           if (window.location.pathname === '/profile') {
             this.$bus.$emit('studyCourse')
-            this.$bus.$emit('studyProject')
+            // this.$bus.$emit('studyProject')
           }
         } else if (res.status === '100100') {
           this.bindForm.showErr = true

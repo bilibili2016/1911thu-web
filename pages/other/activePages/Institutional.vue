@@ -327,8 +327,8 @@ export default {
       },
       customerProject: {
         base: '/project/customerProject',
-        sid: '-1',
-        edit: 0
+        sid: '',
+        edit: 1
       }
     }
   },

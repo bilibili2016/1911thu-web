@@ -50,7 +50,7 @@ export default {
   methods: {
     // 公共路由方法
     handleLink(data) {
-      this.$emit('handleLink', data)
+      // this.$emit('handleLink', data)
     },
     handleSelectItem(item) {
       this.$emit('handleSelectItem', item)
