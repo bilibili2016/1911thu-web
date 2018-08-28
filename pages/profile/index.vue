@@ -565,7 +565,6 @@ export default {
     // 兑换码 获取已经添加的兑换码
     getUsedInvitationCodeList() {
       profileHome.getUsedInvitationCodeList().then(response => {
-
         this.invitationCodeList = response.data.usedInvitationCodeList
       })
     },
@@ -590,7 +589,7 @@ export default {
         }
       })
     },
-     //自定制项目
+    //自定制项目
     customerProjectList() {
       profileHome
         .customerProjectList(this.customerProjectForm)
@@ -640,7 +639,7 @@ export default {
         this.orderForm.endTime = data[1]
         this.handleMyOrderChange(Number(num), 1)
       })
-
+    }
   },
   mounted() {
     if (this.isAuthenticated) {

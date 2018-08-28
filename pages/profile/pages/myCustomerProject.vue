@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import NoMsg from '@/pages/profile/pages/noMsg.vue'
+import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import CustomerCard from '@/pages/profile/components/CustomerCard'
 export default {
   props: ['customerProjectListData', 'customerPagemsg'],
