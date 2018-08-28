@@ -1,6 +1,8 @@
 .cusProject {
   padding: 40px 40px 40px 45px;
   .card-list .itemBox {
+    height: 240px !important;
+    border-bottom: none !important;
     .line-icon {
       position: absolute;
       left: 0;
@@ -14,9 +16,15 @@
         height: 28px;
       }
     }
-
+    .el-row {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
     .item {
       position: relative;
+      .itemBox-name {
+        padding-top: 10px;
+      }
       .operate {
         position: absolute;
         right: 5px;

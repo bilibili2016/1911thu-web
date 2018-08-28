@@ -12,7 +12,6 @@
       </div>
     </div>
     <!-- 项目详情页上部分-项目信息 -->
-
     <div class="title-item">
       <!-- 定制项目不显示标题和副标题 -->
       <div v-if="projectType.types==='1'">

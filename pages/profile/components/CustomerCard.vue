@@ -1,7 +1,7 @@
 <template>
     <div class="card-category profile ">
         <div class="card-list " v-for="(item,index) in customerProjectListData" :key="index">
-            <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
+            <el-card shadow="never " body-style="padding: 0; " class="itemBox">
                 <div>
                     <div class="line-icon">
                         <img v-if="item.study_type==='1'" class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/online-icon.png" alt="">
