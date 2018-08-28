@@ -129,7 +129,8 @@ export default {
     }
   },
   mounted() {
-    this.project.projectId = window.location.search.split('=')[1]
+    // this.project.projectId = window.location.search.split('=')[1]
+    this.project.projectId = splitUrl(0, 1)
   }
 }
 </script>

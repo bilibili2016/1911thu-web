@@ -2,7 +2,8 @@
   <div class="infoItem">
     <transition :name="transitionName">
       <div class="back-to-ceiling customStyle" @click="backToTop" v-show="visible">
-        <i class="topSrc"></i>
+        <img class="topSrc" :src="topSrc" alt="">
+        <!-- <i class="topSrc"></i> -->
       </div>
     </transition>
     <transition :name="transitionName">

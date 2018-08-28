@@ -1,7 +1,7 @@
 .search {
   width: 100%;
   height: 148px;
-  background-color: #EBE7ED;
+  background-color: #ebe7ed;
   padding-top: 36px;
   .main {
     width: 684px;
@@ -22,10 +22,8 @@
       position: absolute;
       top: 15px;
       right: 27px;
+      font-size: 18px;
       cursor: pointer;
-      background: url("~assets/images/iconList.png") no-repeat;
-      background-size: 177px 966px;
-      background-position: 0 -321px;
     }
     .inline-input {
       width: 90%;
@@ -49,7 +47,7 @@
       margin-right: 15px;
     }
     span:hover {
-      color: #8F4ACB;
+      color: #8f4acb;
     }
     span:nth-child(1):hover {
       color: #000;
