@@ -566,14 +566,7 @@ export default {
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // this.loadLogin = true
-
           this.signIn(this.loginData).then(response => {
-            // this.$message({
-            //   showClose: true,
-            //   type: response.status === 0 ? 'success' : 'error',
-            //   message: response.msg
-            // })
             let types = response.status === 0 ? 'success' : 'error'
             message(this, types, response.msg)
             if (response.status === 0) {
@@ -602,17 +595,9 @@ export default {
     signInsMobile(formName) {
       this.isloginClick = true
       this.isloading = false
-      // this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // this.loadLogin = true
-
           this.signInmobile(this.registerMobileData).then(response => {
-            // this.$message({
-            //   showClose: true,
-            //   type: response.status === 0 ? 'success' : 'error',
-            //   message: response.msg
-            // })
             let types = response.status === 0 ? 'success' : 'error'
             message(this, types, response.msg)
             if (response.status === 0) {
@@ -638,11 +623,6 @@ export default {
     // 从微信拉取二维码
     async wxLogin() {
       var link = window.location.origin
-      // if (link === 'http://www.1911edu.com') {
-      //   link = 'http://api.1911edu.com/Wapi/Index/wxBack'
-      // } else {
-      //   link = 'http://ceshi.1911edu.com/Wapi/Index/wxBack'
-      // }
       if (link === 'http://edu.1911thu.com') {
         link = 'http://wapi.1911thu.com/Wapi/Index/wxBack'
         this.WxLogin.appid = 'wx60c7f5b807077a7b'
@@ -665,12 +645,6 @@ export default {
       this.loadLogin = true
       auth.loginWechat(this.bindTelData).then(response => {
         if (response.status === 0) {
-          // this.$message({
-          //   showClose: true,
-          //   type: 'success',
-          //   message: '登录成功！'
-          // })
-          //  let types = response.status === 0 ? 'success' : 'error'
           message(this, 'success', '登录成功')
           this.tokenForm.tokens = response.data.token
           this.setToken(this.tokenForm)
@@ -679,11 +653,6 @@ export default {
           this.closeWechat()
           this.close()
         } else {
-          // this.$message({
-          //   showClose: true,
-          //   type: 'error',
-          //   message: response.msg
-          // })
           message(this, 'error', response.msg)
         }
         this.loadLogin = false
@@ -696,7 +665,6 @@ export default {
         this.closeWechat()
         return false
       }
-
       auth.getWXAccredit(this.WxLogin).then(response => {
         if (response.status === 0) {
           clearInterval(this.getwxtime)
