@@ -188,8 +188,8 @@
         </div>
       </div>
       <div class="btns ">
-        <span class="btn save active " @click="saveProject ">保存</span>
-        <span class="btn buy ">立即购买</span>
+        <span class="btn save active " @click="saveProject(1) ">保存</span>
+        <span class="btn buy " @click="buyProject(2)">立即购买</span>
       </div>
     </div>
   </div>
@@ -295,8 +295,12 @@ export default {
         this.searchCourseData.push(item)
       })
     },
+    //立即购买
+    buyProject(type) {
+      this.saveProject(type)
+    },
     //保存
-    saveProject() {
+    saveProject(type) {
       this.projectForm.checkedCourse = []
       this.checkedCourseData.forEach((item, index) => {
         this.projectForm.checkedCourse.push(item.id)
@@ -330,8 +334,15 @@ export default {
           } else {
             message(this, 'success', '修改成功')
           }
-          this.$router.push('/profile')
-          this.$bus.$emit('selectProfileIndex', 'tab-nine')
+          if (type === 1) {
+            this.$router.push('/profile')
+            this.$bus.$emit('selectProfileIndex', 'tab-nine')
+          } else {
+            this.$router.push({
+              path: '/shop/affirmorder',
+              query: { id: response.data.curriculum_project_id }
+            })
+          }
         } else {
           message(this, 'error', response.msg)
         }
