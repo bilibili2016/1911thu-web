@@ -19,7 +19,6 @@
       <!-- <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=1060962187"> -->
       <!-- <a href="http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes"> -->
       <div class="back-to-ceiling hasColor customStyleFour" v-show="visible" @click="handleopen">
-
         <span></span>
         <div class="telShow">
           <p>点击咨询在线qq</p>
