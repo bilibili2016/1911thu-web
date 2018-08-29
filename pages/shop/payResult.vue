@@ -41,7 +41,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { payResult } from '@/lib/v1_sdk/index'
-import { banBackSpace } from '@/lib/util/helper'
+import { banBackSpace, splitUrl } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -92,8 +92,8 @@ export default {
       })
     },
     payComplete() {
-      this.payCompleteForm.orderId = window.location.pathname.split('/')[3]
-      this.payCompleteForm.attachs = persistStore.get('attach')
+      this.payCompleteForm.orderId = splitUrl(0, 1)
+      this.payCompleteForm.attachs = splitUrl(1, 1)
       payResult.payComplete(this.payCompleteForm).then(response => {
         this.payCompleteData = response.data
         this.showMsg = true
@@ -142,7 +142,6 @@ export default {
     this.ref = this.$route.query.ref
     this.payComplete()
     this.link = this.$route.path
-
     //禁止浏览器的后退
     history.pushState(null, null, document.URL)
     window.addEventListener('popstate', function() {

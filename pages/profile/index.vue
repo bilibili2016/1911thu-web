@@ -430,12 +430,13 @@ export default {
         for (let item of response.data.curriculumList) {
           item.percent = Number(item.percent)
         }
-        // 已过期 的课程
-        if (status === 4) {
-          for (var i = 0; i < this._data['myCourseData' + status].length; i++) {
-            this.$set(this._data['myCourseData' + status][i], 'overtime', true)
-          }
+        for (var i = 0; i < this._data['myCourseData' + status].length; i++) {
+          this.$set(this._data['myCourseData' + status][i], 'overtime', true)
         }
+        // this._data['myCourseData' + status].map(item => {
+        //   this.$set(item, 'overtime', true)
+        // })
+
         this.allCourseLoad = false
       })
     },
