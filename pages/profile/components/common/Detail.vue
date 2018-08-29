@@ -88,12 +88,26 @@
 
         <!-- 商品信息 -->
         <div class="goods bodyItem">
-          <div class="top">
+          <div class="top" v-if="orderDetail.order_type === '1'">
             <span class="lf">商品信息</span>
             <span class="lm">单价</span>
             <span class="lr">数量</span>
           </div>
+          <div class="top customerProject clearfix" v-if="orderDetail.order_type === '2'">
+            <div class="topLeft">
+              <span class="">商品信息</span>
+            </div>
+            <div class="topRight">
+              <span>培训方式</span>
+              <span>线上课程</span>
+              <span>学习人数</span>
+              <span>线下课程</span>
+              <span>学习天数</span>
+              <span>总价</span>
+            </div>
+          </div>
           <div class="bottom">
+            <!-- 课程 -->
             <div class="bottom-item clearfix" v-if="courseList.length !==0" v-for="course in courseList">
               <div class="courseInfo clearfix">
                 <div class="bottomImg">
@@ -113,32 +127,66 @@
                 <i class="el-icon-close"></i>{{orderDetail.pay_number}}
               </div>
             </div>
-            <div class="bottom-item clearfix" v-if="projectList.length" v-for="project in projectList">
-              <div class="courseInfo clearfix">
-                <div class="bottomImg">
-                  <!-- 项目图标 -->
-                  <img class="project-img" :src="projectImg" alt="">
-                  <img class="fl" :src="project.picture" alt="">
+            <!-- 项目 -->
+            <div v-if="orderDetail.order_type === '1'">
+              <div class="bottom-item clearfix" v-if="projectList.length" v-for="project in projectList">
+                <div class="courseInfo clearfix">
+                  <div class="bottomImg">
+                    <!-- 项目图标 -->
+                    <img class="project-img" :src="projectImg" alt="">
+                    <img class="fl" :src="project.picture" alt="">
+                  </div>
+                  <div class="fl">
+                    <h4>{{project.title}}</h4>
+                    <h6>{{project.curriculum_time}}学时</h6>
+                  </div>
                 </div>
-
-                <div class="fl">
-                  <h4>{{project.title}}</h4>
-                  <h6>{{project.curriculum_time}}学时</h6>
+                <div class="coursePrice">
+                  ￥{{project.present_price}}
+                </div>
+                <div class="courseOperation">
+                  <i class="el-icon-close"></i>{{orderDetail.pay_number}}
                 </div>
               </div>
-              <div class="coursePrice">
-                ￥{{project.present_price}}
-              </div>
-              <div class="courseOperation">
-                <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+            </div>
+            <!-- 自定制项目 -->
+            <div v-else>
+              <div class="bottom-item customerProjectDetail clearfix" v-for="project in projectList">
+                <div class="projectInfo">
+                  <div class="bottomImg">
+                    <!-- 项目图标 -->
+                    <img class="project-img" :src="customerProjectImg" alt="">
+                    <img class="fl" :src="project.picture" alt="">
+                  </div>
+                  <div class="fl">
+                    <h4>{{project.title}}</h4>
+                  </div>
+                </div>
+                <!-- 培训方式 -->
+                <div class="item" v-if="project.study_type === '1'">线上</div>
+                <div class="item" v-else>线上+线下</div>
+                <!-- 线上课程学时 -->
+                <div class="item">{{project.curriculum_time}}学时</div>
+                <!-- 学习人数 -->
+                <div class="item">{{project.study_persion_number}}人</div>
+                <!-- 线下课程学时 -->
+                <div class="item">{{project.offline_study_time}}学时</div>
+                <!-- 学习天数 -->
+                <div class="item">{{project.offline_days}}天</div>
+                <!-- 总价 -->
+                <div class="item price">¥ {{project.present_price}} </div>
               </div>
             </div>
 
           </div>
-          <div class="tableFooter">
+          <div class="tableFooter" v-if="orderDetail.order_type === '1'">
             <p>课程数量：{{courseList.length+projectList.length}}门</p>
             <p>学习人数：{{orderDetail.pay_number}}人</p>
             <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
+          </div>
+          <div class="tableFooter" v-else>
+            <p>9.5折&nbsp;&nbsp;&nbsp;优惠¥{{(orderDetail.order_amount*(1-0.95)).toFixed(2)}}</p>
+            <h4>商品总额：￥{{(orderDetail.order_amount*0.95).toFixed(2)}}</h4>
           </div>
         </div>
       </div>
@@ -152,16 +200,15 @@ export default {
   props: ['config', 'courseList', 'bankInfo', 'orderDetail', 'projectList'],
   data() {
     return {
-      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png' //项目图标
+      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png', //项目图标
+      customerProjectImg: 'http://papn9j3ys.bkt.clouddn.com/p5.png' //定制项目图标
     }
   },
   methods: {
     goBack(type) {
       if (type === 'order') {
-        // this.$bus.$emit('goBack')
         this.$emit('goBack', true)
       } else {
-        // this.$bus.$emit('goTicketBack')
         this.$emit('goTicketBack', true)
       }
     },

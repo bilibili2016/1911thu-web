@@ -24,7 +24,9 @@
             <div class="courseOne" v-if="courseList.orderProjectList.length" v-for="(project,index) in courseList.orderProjectList">
               <div class="courseImg">
                 <!-- 项目图标 -->
-                <img class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
+                <img v-if="project.type==='2'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p5.png" alt="">
+                <img v-else class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
+
                 <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
               </div>
               <div class="fl">
@@ -146,6 +148,7 @@ export default {
     },
     //项目详情
     goProjrctInfo(item) {
+      this.projectdetail.type = item.type
       this.projectdetail.kid = item.id
       open(this.projectdetail)
     },
