@@ -148,7 +148,7 @@ export default {
     handleSubmitOrder() {
       // let newWindow = window.open('about:blank')
       affirmOrder.commitOrder().then(res => {
-        console.log(res, '123')
+        // console.log(res, '123')
         if (res.status === 0) {
           //解决异步加载浏览器会将新打开的页面作为窗口拦截
           // newWindow.location.href =
@@ -182,7 +182,7 @@ export default {
     handleGoodsList() {
       this.loadGoods = true
       affirmOrder.goodsList(this.addArray).then(res => {
-        console.log(res, '这是res')
+        // console.log(res, '这是res')
         if (res.status === 0) {
           this.curriculumLists = res.data.curriculumProjectLists
           this.orderinfo = res.data

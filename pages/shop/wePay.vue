@@ -103,7 +103,6 @@ export default {
       // this.payListForm.orderId = urlArr[urlArr.length - 1]
       this.payListForm.orderId = splitUrl(0, 1)
       this.payListForm.attachs = splitUrl(1, 1)
-      console.log(this.payListForm, '123')
       wepay.webPay(this.payListForm).then(response => {
         this.loading = false
         if (response.status === '100100') {

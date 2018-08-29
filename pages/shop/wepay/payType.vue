@@ -63,7 +63,8 @@ export default {
         hour: '',
         minutes: '',
         seconds: ''
-      }
+      },
+      attachs: null
     }
   },
   methods: {
@@ -101,7 +102,12 @@ export default {
               clearInterval(this.interval)
               this.$bus.$emit('closeCode')
               this.$router.push({
-                path: '/shop/result/' + cpyid
+                path:
+                  '/shop/payResult' +
+                  '?order=' +
+                  cpyid +
+                  '&attach=' +
+                  this.attachs
               })
             }
           })
@@ -168,8 +174,8 @@ export default {
     }
   },
   mounted() {
-    let attachs = splitUrl(1, 1)
-    persistStore.set('attach', attachs)
+    this.attachs = splitUrl(1, 1)
+    persistStore.set('attach', this.attachs)
     this.$bus.$on('clearInterval', dat => {
       clearInterval(this.interval)
     })
