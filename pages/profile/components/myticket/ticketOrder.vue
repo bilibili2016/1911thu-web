@@ -30,7 +30,8 @@
                 <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="project.id">
                   <div class="courseImg">
                     <!-- 项目图标 -->
-                    <img class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
+                    <img v-if="project.type==='2'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p5.png" alt="">
+                    <img v-else class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
                     <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
                   </div>
                   <div class="fl">
@@ -223,7 +224,7 @@ export default {
     //列表详情
     selectPayApply(item, type) {
       persistStore.set('order', item.id)
-      this.$bus.$emit('goTicketDetail', false)
+      this.$emit('goTicketDetail', false)
     },
     // 时间戳转日期格式
     exchangeTime(time) {

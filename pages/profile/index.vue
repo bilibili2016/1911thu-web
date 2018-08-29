@@ -50,7 +50,7 @@
         <el-tab-pane class="my-course my-order" name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-ticket"></i> 发票管理</span>
-          <v-myticket @handleTicket="handleTicketTabChange" :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange"></v-myticket>
+          <v-myticket @handleTicket="handleTicketTabChange" :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange" @goTicketDetail="goTicketDetail" @goTicketBack="goTicketBack"></v-myticket>
         </el-tab-pane>
         <!-- 自定制项目 -->
         <el-tab-pane class="my-course my-customerProject" name="tab-nine">
@@ -262,7 +262,7 @@ export default {
       },
       customerPagemsg: {
         page: 1,
-        pagesize: 20,
+        pagesize: 6,
         total: 12
       },
       studyProjectData: [],
@@ -342,7 +342,7 @@ export default {
       },
       customerProjectForm: {
         pages: 1,
-        limits: 20
+        limits: 6
       },
       collectionData: [],
       orderDetail: {}, //订单详情信息
@@ -580,6 +580,22 @@ export default {
         this.invitationCodeList = response.data.usedInvitationCodeList
       })
     },
+    //获取发票详情
+    goTicketDetail(msg) {
+      this.showTicketList = false
+      this.orderForm.ids = persistStore.get('order')
+      profileHome.curriculumPayApply(this.orderForm).then(response => {
+        if (response.status === 0) {
+          this.courseList = response.data.orderCurriculumList
+          this.projectList = response.data.orderProjectList
+          this.orderDetail = response.data.orderDetail
+        }
+      })
+    },
+    //发票详情-返回发票列表页
+    goTicketBack(val) {
+      this.showTicketList = true
+    },
     // 订单详情
     curriculumPayApply(data) {
       if (data == false) {
@@ -634,6 +650,8 @@ export default {
     // 初始化 bus 事件
     initBusEvent() {
       this.$bus.$on('selectProfileIndex', data => {
+        console.log(data)
+
         this.activeTab = data
       })
       // 头部绑定成功更新

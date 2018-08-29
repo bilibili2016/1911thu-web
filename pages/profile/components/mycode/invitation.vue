@@ -16,6 +16,8 @@
         <span v-if="code.type==='1'">课程</span>
         <span v-if="code.type==='2'">项目</span>
         <span v-if="code.type==='3'">课程+项目</span>
+        <span v-if="code.type==='4'">自定制项目</span>
+
         <span>{{exchangeTime(code.pay_time)}}</span>
         <span>{{code.use_code_number}}</span>
         <span>{{code.expire_days}}</span>
