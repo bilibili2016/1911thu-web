@@ -45,7 +45,9 @@
       </div>
     </div>
     <!-- 确认订单，支付中心列表 -->
+    <!-- {{data}} -->
     <div v-if="config.type=='wePay' || config.type=='affirmOrder'">
+      <!-- {{data}} -->
       <div class="clearfix" :class="{oneGoods:config.type=='affirmOrder',courseOne:config.type=='wePay'}" v-for="(course,index) in data" :key="index">
         <div class="fl">
           <div class="bottomImg">
@@ -56,7 +58,7 @@
         </div>
         <div class="fl">
           <h5>{{course.title}}</h5>
-          <h6>{{course.study_time}}学时</h6>
+          <h6>{{course.study_time == '' ? 0 : course.study_time}}学时</h6>
           <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
         </div>
 
@@ -65,6 +67,41 @@
         </div>
         <div v-if="config.type=='wePay'" class="courseNumber">
           <i class="el-icon-close "></i>{{course.pay_number}}
+        </div>
+      </div>
+    </div>
+    <!-- {{config.type=='affirmOrder'}} {{config.type}} -->
+    <div class="customProject" v-if="config.type=='customOrder'">
+      <!-- 自定义项目课程列表 -->
+      <div class="listBar">
+        <div class="fl">
+          项目名称
+        </div>
+        <div class="fr">
+          <span>培训方式</span>
+          <span>线上课程</span>
+          <span>学习人数</span>
+          <span>线下课程</span>
+          <span>学习天数</span>
+          <span>总价</span>
+        </div>
+      </div>
+      <div class="clearfix goodsList">
+        <div class="fl">
+          <div class="bottomImg">
+            <!-- 项目图标 -->
+            <img :src="data.picture" alt="">
+          </div>
+          <h5>{{data.title}}</h5>
+          <h6>{{data.study_time}}学时</h6>
+        </div>
+        <div class="fr">
+          <span>{{data.style_type === '1' ? '线下' : '线上'}}</span>
+          <span>{{data.study_time}}学时</span>
+          <span>{{data.study_persion_number}}人</span>
+          <span>{{(data.offline_days)*8}}学时</span>
+          <span>{{data.offline_days}}天</span>
+          <span class="coursePrice">￥{{data.original_price}}</span>
         </div>
       </div>
     </div>
@@ -105,3 +142,6 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+@import '~assets/style/shop/card.scss';
+</style>

@@ -7,15 +7,20 @@
         <v-banner :config="affirmOrder"></v-banner>
         <div class="main">
           <div class="goodsList">
-            <v-backshopcart @handleLinkShopCart="handleLinkShopCart" :config="affirmOrder"></v-backshopcart>
+            <v-backshopcart @handleLinkShopCart="handleLinkShopCart" :config="affirmOrder" @handleQuestion="handleReport"></v-backshopcart>
             <!-- 商品列表 -->
+            <!-- <div class="goods">
+              <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
+            </div> -->
+
+            <!-- 自定义项目 -->
             <div class="goods">
               <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
             </div>
             <!-- 商品信息 -->
             <v-orderinfo :data="orderinfo"></v-orderinfo>
           </div>
-          <v-orderbtn :data="orderinfo.goodsAmount" @commitOrder="handleSubmitOrder" @showRpt="handleReport" :config="affirmOrder"></v-orderbtn>
+          <v-orderbtn :data="orderinfo" @commitOrder="handleSubmit" @showRpt="handleReport" :config="affirmOrder"></v-orderbtn>
         </div>
       </div>
     </div>
@@ -25,7 +30,7 @@
 </template>
 
 <script>
-import { affirmOrder } from '@/lib/v1_sdk/index'
+import { affirmOrder, Pay } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import Banner from '@/pages/shop/components/banner'
 import Repore from '@/components/common/Reports.vue'
@@ -34,8 +39,9 @@ import orderInfo from '@/pages/shop/affirmorder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
 import noMsg from '@/pages/shop/affirmorder/noMsg'
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
-import { message } from '@/lib/util/helper'
+import { message, splitUrl } from '@/lib/util/helper'
 import { home } from '~/lib/v1_sdk/index'
+// import { splitUrl, openUrl } from '~/lib/util/helper'
 export default {
   components: {
     'v-banner': Banner,
@@ -52,14 +58,19 @@ export default {
         type: 'affirmOrder',
         text: '确认订单'
       },
+      customOrder: {
+        type: 'customOrder',
+        text: '确认订单'
+      },
       config: {
         type: 2
       },
       flag: true,
       person: true,
       isNoMsg: false,
-      loadGoods: true,
+      loadGoods: false,
       curriculumLists: [],
+      customculumLists: [],
       curriculumSum: null,
       payNumber: null,
       restaurants: [],
@@ -82,6 +93,14 @@ export default {
         curriculumId: null,
         content: '',
         curriculumcatalogid: ''
+      },
+      customId: null,
+      curriculumForm: {
+        curriculumProjectId: null
+      },
+      payForm: {
+        ids: null,
+        type: null
       }
     }
   },
@@ -127,21 +146,43 @@ export default {
     },
     // 点击提交订单
     handleSubmitOrder() {
-      let newWindow = window.open('about:blank')
+      // let newWindow = window.open('about:blank')
       affirmOrder.commitOrder().then(res => {
+        console.log(res, '123')
         if (res.status === 0) {
           //解决异步加载浏览器会将新打开的页面作为窗口拦截
-          newWindow.location.href =
-            window.location.origin + '/shop/' + res.data.id
+          // newWindow.location.href =
+          //   window.location.origin + '/shop/' + res.data.id
+          window.open(
+            window.location.origin +
+              '/shop/wepay?order=' +
+              res.data.id +
+              '&attach=1'
+          )
         } else {
           message(this, 'error', res.msg)
         }
+      })
+    },
+    // 自定义项目 提交订单
+    handleGetCode() {
+      this.payForm.ids = this.customId
+      this.payForm.type = 2
+      affirmOrder.getCode(this.payForm).then(res => {
+        // console.log(res, '这是res123456789')
+        window.open(
+          window.location.origin +
+            '/shop/wepay?order=' +
+            res.data.order_id +
+            '&attach=2'
+        )
       })
     },
     //获取商 品信息 列表
     handleGoodsList() {
       this.loadGoods = true
       affirmOrder.goodsList(this.addArray).then(res => {
+        console.log(res, '这是res')
         if (res.status === 0) {
           this.curriculumLists = res.data.curriculumProjectLists
           this.orderinfo = res.data
@@ -164,10 +205,39 @@ export default {
           this.isNoMsg = true
         }
       })
+    },
+    // 自定义项目确认订单
+    handleCustomProject(val) {
+      this.affirmOrder.type = 'customOrder'
+      this.loadGoods = true
+      this.curriculumForm.curriculumProjectId = val
+      affirmOrder.customProject(this.curriculumForm).then(res => {
+        this.loadGoods = false
+        // console.log(res, '我草')
+        if (res.status === 0) {
+          this.curriculumLists = res.data.curriculumProjectDetail
+          this.orderinfo = res.data.curriculumProjectDetail
+          this.orderinfo.nickName = persistStore.get('nickName')
+        }
+      })
+    },
+    // 提交订单
+    handleSubmit() {
+      if (this.customId) {
+        this.handleGetCode()
+      } else {
+        this.handleSubmitOrder()
+      }
     }
   },
   mounted() {
-    this.handleGoodsList()
+    this.customId = splitUrl(0, 1)
+    if (splitUrl(0, 1)) {
+      this.handleCustomProject(this.customId)
+    } else {
+      this.handleGoodsList()
+    }
   }
 }
 </script>
+

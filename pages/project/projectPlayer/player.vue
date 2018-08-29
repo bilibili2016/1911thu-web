@@ -153,10 +153,10 @@ export default {
             }
             // 创建播放器
             this.player = new Aliplayer(this.aliPlayer)
-            // 获取到的下一节的播放信息playerNextForm
+            // 获取到的下一节的播放信息
             this.playerNextForm.curriculumId = response.data.nextCurriculumId
             this.playerNextForm.catalogId = response.data.nextCatalogId
-            // 获取到下一节的播放信息
+            // 获取到上一节的播放信息
             this.playerPreviousForm.curriculumId =
               response.data.previousCurriculumId
             this.playerPreviousForm.catalogId = response.data.previousCatalogId

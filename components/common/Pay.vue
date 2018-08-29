@@ -35,6 +35,7 @@ import Vue from 'vue'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import { store as persistStore } from '~/lib/core/store'
 import { home, pay, wepay } from '~/lib/v1_sdk/index'
+import { splitUrl } from '@/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   props: ['config'],
@@ -58,7 +59,9 @@ export default {
     },
     // 获取去二维码的方法
     getCode() {
-      this.codeForm.ids = window.location.search.split('=')[1]
+      this.codeForm.ids = splitUrl(0, 1)
+      console.log(this.codeForm.ids)
+
       pay.getCode(this.codeForm).then(response => {
         this.wechat = response.data.code_url
         this.alipay = response.data.qr_code

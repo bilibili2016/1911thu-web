@@ -50,14 +50,6 @@ body {
         width: 130px;
         height: 50px;
       }
-      i {
-        display: inline-block;
-        width: 177px;
-        height: 44px;
-        background: url('~assets/images/iconList.png') no-repeat;
-        background-size: 177px 966px;
-        background-position: 0 0;
-      }
     }
     .backHome {
       width: 35px;
@@ -324,11 +316,13 @@ body {
           height: 20px;
           margin-top: -2px;
           cursor: pointer;
-          background: url('~assets/images/phone.png') no-repeat;
+          background: url('http://papn9j3ys.bkt.clouddn.com/phone.png')
+            no-repeat;
           background-size: contain;
           transition: all 300ms;
           &:hover {
-            background: url('~assets/images/phone2.png') no-repeat;
+            background: url('http://papn9j3ys.bkt.clouddn.com/phone2.png')
+              no-repeat;
             background-size: contain;
           }
         }
@@ -352,13 +346,15 @@ body {
             height: 120px;
             margin-right: 9px;
             transition: all 300ms;
-            background: url('~assets/images/iconList.png') no-repeat;
-            background-size: 177px 966px;
-            background-position: 3px -337px;
+            background: url('http://papn9j3ys.bkt.clouddn.com/attentionWechat2.png')
+              no-repeat;
+            background-size: 120px;
+            // background-position: 3px -337px;
             &.iphone {
-              background: url('~assets/images/iconList.png') no-repeat;
-              background-size: 177px 966px;
-              background-position: 3px -337px;
+              background: url('http://papn9j3ys.bkt.clouddn.com/attentionWechat2.png')
+                no-repeat;
+              background-size: 120px;
+              // background-position: 3px -337px;
             }
           }
           .changeType {
@@ -392,9 +388,9 @@ body {
               height: 20px;
               margin-right: 5px;
               vertical-align: middle;
-              background: url('~assets/images/iconList.png') no-repeat;
-              background-size: 177px 966px;
-              background-position: 0 -90px;
+              background: url('http://papn9j3ys.bkt.clouddn.com/iOS.png')
+                no-repeat;
+              background-size: cover;
             }
             span:nth-child(3) i {
               display: inline-block;
@@ -402,9 +398,9 @@ body {
               height: 20px;
               vertical-align: middle;
               margin-right: 5px;
-              background: url('~assets/images/iconList.png') no-repeat;
-              background-size: 177px 966px;
-              background-position: 0 -112px;
+              background: url('http://papn9j3ys.bkt.clouddn.com/Android.png')
+                no-repeat;
+              background-size: cover;
             }
           }
         }
