@@ -223,9 +223,15 @@ export default {
     },
     // 视频播放的时候拖动进度条触发--完成拖拽 参数返回拖拽点的时间
     changeSeek(time) {
-      // 试看的课程 && 拖动时间 > 试看时间   直接停止
-      if (this.lookAt == '2' && time.paramData > this.playAuthInfo.free_time) {
+      // 未购买&&试看的课程 && 拖动时间 > 试看时间   直接停止
+      if (
+        !this.bought &&
+        this.lookAt == '2' &&
+        time.paramData > this.playAuthInfo.free_time
+      ) {
         this.playerEnded()
+      } else {
+        return false
       }
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
