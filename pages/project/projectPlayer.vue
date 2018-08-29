@@ -189,7 +189,7 @@ export default {
     this.resize()
     window.addEventListener('resize', this.resize)
     if (this.isAuthenticated) {
-      this.projectForm.ids = window.location.search.split('=')[1]
+      this.projectForm.ids = splitUrl(0, 1)
       this.getCurriculumPlayInfo()
     } else {
       this.$router.push(

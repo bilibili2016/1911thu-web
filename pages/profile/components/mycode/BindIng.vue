@@ -6,7 +6,7 @@
     </div>
     <div class="bindingRecord">
       <div class="brHeader">
-        <span>兑换码1</span>
+        <span>兑换码</span>
         <span>类型</span>
         <span>兑换日期</span>
         <span>兑换信息</span>
@@ -16,12 +16,15 @@
         <div v-if="code.type==='1'">课程</div>
         <div v-if="code.type==='2'">项目</div>
         <div v-if="code.type==='3'">课程+项目</div>
+        <div v-if="code.type==='4'">自定制项目</div>
+
         <div>{{exchangeTime(code.create_time)}}</div>
         <div class="courseList">查看
           <div class="course">
             <span></span>
-            <p v-for="(course,index) in code.orderCurriculumList" :key="index" @click="handleLink(course)">
-              <i v-if="course.type=='2'">项目</i>{{course.title}}
+            <p v-for="(course,index) in code.orderCurriculumList" :key="index" @click="handleLink(course,code.type)">
+              <i v-if="code.type==='2'">项目</i>
+              <i v-if="code.type==='4'">自定制项目</i>{{course.title}}
             </p>
           </div>
         </div>
@@ -55,26 +58,33 @@ export default {
       noMsg: {
         type: 'myCode',
         text: '抱歉，现在还没有兑换码~'
+      },
+      courseDetail: {
+        base: '/course/coursedetail',
+        kid: '',
+        page: 0
+      },
+      projectDetail: {
+        base: '/project/projectdetail',
+        kid: '',
+        type: 1
       }
     }
   },
   methods: {
     // 跳转课程或项目详情
-    handleLink(item) {
+    handleLink(item, type) {
       if (item.type === '1') {
-        let courseDetail = {
-          base: '/course/coursedetail',
-          kid: item.curriculum_id,
-          page: 0
-        }
-        open(courseDetail)
+        this.courseDetail.kid = item.curriculum_id
+        open(this.courseDetail)
       } else {
-        let courseDetail = {
-          base: '/project/projectdetail',
-          kid: item.curriculum_id,
-          type: 1
+        if (type === '2') {
+          this.projectDetail.type = 1
+        } else {
+          this.projectDetail.type = 2
         }
-        open(courseDetail)
+        this.projectDetail.kid = item.curriculum_id
+        open(this.projectDetail)
       }
     },
     // 时间戳转日期格式

@@ -77,10 +77,12 @@
         height: 160px;
         overflow: hidden;
         position: relative;
+        img {
+          transition: all 400ms;
+        }
         .coverImg {
           width: 250px;
           height: 160px;
-          transition: all 300ms;
         }
         .project-img {
           width: 60px;
