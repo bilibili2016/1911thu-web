@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { splitUrl } from '@/lib/util/helper'
 export default {
   props: ['data'],
   methods: {
@@ -14,8 +15,9 @@ export default {
     goDetail() {
       this.$router.push(
         '/project/projectdetail?id=' +
-          window.location.search.split('=')[1] +
-          '&type=1'
+          splitUrl(0, 1) +
+          '&type=' +
+          splitUrl(1, 1)
       )
     }
   }

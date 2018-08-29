@@ -3,7 +3,7 @@
     <!-- <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}"> -->
     <div class="proHeader">
       <div class="proHeader-mask"></div>
-      <img class="proHeader-img" :src="projectDetail.picture" alt="">
+      <img class="proHeader-img" :src="projectDetail.study_picture" alt="">
       <!-- 项目详情基本信息 -->
       <v-detail :projectDetail="projectDetail" :projectType="project" class="proHeader-detail"></v-detail>
     </div>

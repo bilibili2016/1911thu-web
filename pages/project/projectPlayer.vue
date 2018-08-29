@@ -4,7 +4,7 @@
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <v-playertop :data="projectDetail.title"></v-playertop>
       <v-player ref="video" :playerForm="playerForm" :isloaded="isloaded" :playerInner="innerHeight" :bought="bought" :isLookAt="lookAt" :isFreeCourse="isFreeCourse" @changePlayImg="changeImg" @falseLoaded="falseLoaded"></v-player>
-      <v-playerbottom :collectMsg="collectMsg" :iseve="iseve" @showRpt="showRpt" @showElt="showElt"></v-playerbottom>
+      <v-playerbottom :collectMsg="collectMsg" :iseve="iseve" @showRpt="showRpt" @showElt="showElt" :config="config"></v-playerbottom>
     </div>
     <!-- 右侧课程小结列表 -->
     <div class="mediaR fl" ref="mediaR" :style="{ width: mediaRW+'%' }">
@@ -36,7 +36,7 @@ import Repore from '@/components/common/Report.vue'
 import Pay from '@/components/common/Pay.vue'
 import List from '@/pages/project/projectPlayer/CourseList.vue'
 import Evaluate from '@/pages/project/projectPlayer/evaluate.vue'
-import { message } from '@/lib/util/helper'
+import { message, splitUrl } from '@/lib/util/helper'
 export default {
   components: {
     'v-playertop': Playertop,
@@ -76,6 +76,9 @@ export default {
       projectDetail: {},
       hsgForm: {
         hsgs: true
+      },
+      config: {
+        type: '1'
       },
       playerForm: {
         curriculumId: '',
@@ -182,6 +185,7 @@ export default {
     }
   },
   mounted() {
+    this.config.type = splitUrl(1, 1)
     this.resize()
     window.addEventListener('resize', this.resize)
     if (this.isAuthenticated) {

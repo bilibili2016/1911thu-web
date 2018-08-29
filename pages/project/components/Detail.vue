@@ -2,12 +2,12 @@
   <div class="header-mask">
     <!-- 面包屑 收藏分享 -->
     <div class="main-crumb">
+      <!-- 面包屑组件 -->
       <div class="fl">
-        <!-- 面包屑组件 -->
         <v-breadcrumb :config="BreadCrumb" class="BreadCrumb"></v-breadcrumb>
       </div>
-      <div class="fr">
-        <!-- 收藏分享 -->
+      <!-- 收藏分享 -->
+      <div class="fr" v-if="projectType.types==='1'">
         <v-collection :collectData="collectMsg"></v-collection>
       </div>
     </div>
@@ -47,7 +47,7 @@
       <div class="fr buy" v-if="projectType.types==='2'">
         <div class="price">
           <i>￥</i>{{projectDetail.present_price}}</div>
-        <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即观看</div>
+        <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即观看</div>
         <div class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
       </div>
 
@@ -99,7 +99,11 @@ export default {
     goProjectPlayer() {
       if (this.isAuthenticated) {
         window.open(
-          window.location.origin + '/project/projectPlayer?id=' + splitUrl(0, 1)
+          window.location.origin +
+            '/project/projectPlayer?id=' +
+            splitUrl(0, 1) +
+            '&type=' +
+            splitUrl(1, 1)
         )
       } else {
         this.$bus.$emit('loginShow', true)
