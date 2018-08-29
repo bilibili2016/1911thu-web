@@ -290,8 +290,7 @@ export default {
         this.offlineCount1 = result.study_object_cost_amount_one //党政事业线下每天培训费用
         this.offlineCount2 = result.study_object_cost_amount_two //企业单位线下每天培训费用
         this.discount = result.discount //折扣
-
-        this.projectForm.offlinePrice = result.study_object_cost_amount_one
+        this.projectForm.offlinePrice = result.study_object_cost_amount_one //线下每天费用
       })
     },
     //搜索
@@ -533,7 +532,6 @@ export default {
         .getCustomerProjectInfo(this.projectForm)
         .then(response => {
           let data = response.data.curriculumProjectDetail
-          // console.log(response)
           this.projectForm.name = data.title //项目标题
           this.projectForm.desc = data.introduction //项目简介
           this.projectForm.styleRadio = data.study_type //培训方式
