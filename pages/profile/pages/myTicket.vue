@@ -4,7 +4,7 @@
     <el-tabs v-model="activeTicket" @tab-click="handleTicket">
       <el-tab-pane label="按订单开发票" name="ticketFirst" value="1">
         <div v-loading="allTicket" :class="{ minheight : allTicket}">
-          <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="getTicketDetail" @chengeItem="chengeItem" v-loading="readyOrderLoad"></v-tkorder>
+          <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="goTicketDetail" @chengeItem="chengeItem" v-loading="readyOrderLoad"></v-tkorder>
         </div>
 
         <div class="pagination" v-if="unTicketData && unTicketData.length>19">
@@ -27,7 +27,7 @@
     </el-tabs>
   </el-card>
   <!-- 发票详情 -->
-  <v-detail v-else :config="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail"></v-detail>
+  <v-detail v-else :config="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" @goTicketBack="goTicketBack"></v-detail>
 </template>
 
 <script>
@@ -76,8 +76,11 @@ export default {
       this.activeTicket = 'ticketSecond'
       document.documentElement.scrollTop = 0
     },
-    getTicketDetail() {
-      this.$emit('getTicketDetail')
+    goTicketDetail() {
+      this.$emit('goTicketDetail')
+    },
+    goTicketBack(val) {
+      this.$emit('goTicketBack', val)
     },
     unTicketDataChange(val) {
       this.$emit('unTicketDataChange', val)
