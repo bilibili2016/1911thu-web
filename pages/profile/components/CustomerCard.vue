@@ -16,12 +16,12 @@
                                 <span>{{item.title}}</span>
                             </p>
                             <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>
-                            <div class="operate">
+                            <div class="operate" v-if="!item.curriculumProjectPrivilege">
                                 <span @click="editCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
                                 <span @click="deleteCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
                             </div>
+                            <div v-else class="buied" @click="handleBuied">已购买</div>
                         </div>
-
                     </el-row>
                 </div>
 
@@ -31,7 +31,7 @@
     </div>
 </template>
 <script>
-import { timestampToYMD, open } from '@/lib/util/helper'
+import { timestampToYMD, open, message } from '@/lib/util/helper'
 export default {
   props: ['customerProjectListData'],
   data() {
@@ -63,6 +63,14 @@ export default {
     //删除
     deleteCustomerProject(item) {
       this.$emit('deleteCustomerProject', item.id)
+    },
+    //已购买
+    handleBuied() {
+      message(
+        this,
+        'warning',
+        '尊敬的用户，已购买的自定制项目不可再编辑，如需修改，请重新定制，谢谢。'
+      )
     },
     // 时间戳转日期格式
     exchangeTime(time) {
