@@ -54,8 +54,13 @@ export default {
     // 跳转到项目播放页
     goProjectPlayer() {
       if (this.isAuthenticated) {
-        this.projectPlayer.kid = splitUrl(0, 1)
-        open(this.projectPlayer)
+        window.open(
+          window.location.origin +
+            '/project/projectPlayer?id=' +
+            splitUrl(0, 1) +
+            '&type=' +
+            splitUrl(1, 1)
+        )
       } else {
         this.$bus.$emit('loginShow', true)
       }

@@ -9,18 +9,20 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <div class="mask-style" @click="selectCid(card,index)">
+            <div class="mask-style" @click="selectCid(card,config.project,card.type)">
               <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
             </div>
             <div class="bgImgs">
-              <img :src="card.picture" alt="">
+              <img v-if="config.project&&card.type==='1'" src="http://papn9j3ys.bkt.clouddn.com/p4.png" class="project-img">
+              <img v-if="config.project&&card.type==='2'" src="http://papn9j3ys.bkt.clouddn.com/p5.png" class="project-img">
+              <img class="coverImg" :src="card.picture" alt="">
             </div>
             <div class="tag">
               <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
             </div>
             <div class="common-button btn-bgs ">
               <!-- 学习中 -->
-              <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="selectCid(card)">开始学习</el-button>
+              <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="study(card,config.project,card.type)">开始学习</el-button>
               <!-- 已过期 -->
               <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
                 <span>
@@ -28,15 +30,15 @@
                 </span>
               </el-button>
               <!-- 学习中 -->
-              <el-button v-if="card.percent > 0&&!card.overtime&&config.card==='learning'" type="primary" plain @click="selectCid(card)">
+              <el-button v-if="card.percent > 0&&!card.overtime&&config.card==='learning'" type="primary" plain @click="study(card,config.project,card.type)">
                 <span>继续学习</span>
               </el-button>
               <!-- 已完成 -->
-              <el-button v-if="card.percent===100&&config.card==='already'" type="primary" plain @click="selectCid(card)">
+              <el-button v-if="card.percent===100&&config.card==='already'" type="primary" plain @click="study(card,config.project,card.type)">
                 <span>再次学习</span>
               </el-button>
             </div>
-            <el-row @click.native="selectCid(card,index)">
+            <el-row @click.native="selectCid(card,config.project,card.type)">
               <!-- 课程标题 -->
               <div class="item">
                 <p class="itemBox-name itemBoxTitle">
@@ -44,7 +46,16 @@
                 </p>
               </div>
               <!-- 学习进度 -->
-              <div class="line-wraps" v-if="config.card==='learning'">
+              <!-- 课程的学习进度 -->
+              <div class="line-wraps" v-if="config.card==='learning'&&config.project">
+                <div class="line-centers ">
+                  <span class="studyPercent">已学习{{card.percent}}%</span>
+                  <span class="studyIsFree">剩余{{card.expire_day}}天</span>
+                  <el-progress v-if="card.percent>0" :percentage="card.percent" :show-text="false"></el-progress>
+                </div>
+              </div>
+              <!-- 项目的学习进度 -->
+              <div class="line-wraps" v-if="config.card==='learning'&&!config.project">
                 <div class="line-centers ">
                   <span class="studyPercent">已学习{{card.percent}}%</span>
                   <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
@@ -78,7 +89,7 @@
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
           <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
-            <div @click="courseInfo(card,index) ">
+            <div @click="selectCid(card,config.project,card.type) ">
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
@@ -97,7 +108,7 @@
                   </p>
                   <div class="deputyTitleOverTime">{{card.deputy_title}}</div>
                 </div>
-                <div class="line-wrap " @click.stop="goTeacherInfo(card.teacher_id) ">
+                <div v-if="!config.project" class="line-wrap " @click.stop="goTeacherInfo(card.teacher_id) ">
                   <div class="line-center">
                     <img :src="card.head_img " alt=" ">
                     <span>{{card.teacher_name}}</span>
@@ -139,22 +150,47 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
-    selectCid(item, index) {
-      this.kidForm.kids = item.id
-      // persistStore.set('curriculumId', item.id)
-      // this.setKid(this.kidForm)
-      this.curriculumcartids.cartid = item.id
-      this.openDetail(item.id)
+    // 开始学习，继续学习，再次学习
+    study(item, flag, type) {
+      if (flag) {
+        this.openProjectPlayer(item.id, type)
+      } else {
+        this.openDetail(item)
+      }
     },
-    courseInfo(item, index) {
-      this.kidForm.kids = item.id
-      // persistStore.set('curriculumId', item.id)
-      // this.setKid(this.kidForm)
-      this.openDetail(item.id)
+    // 进入详情
+    selectCid(item, flag, type) {
+      if (flag) {
+        this.openProjectDetail(item.id, type)
+      } else {
+        this.openDetail(item)
+      }
     },
-    openDetail(ID) {
+    openProjectPlayer(id, type) {
       window.open(
-        window.location.origin + '/course/coursedetail?kid=' + ID + '&page=0'
+        window.location.origin +
+          '/project/projectplayer?kid=' +
+          id +
+          '&type=' +
+          type
+      )
+    },
+    openProjectDetail(id, type) {
+      window.open(
+        window.location.origin +
+          '/project/projectdetail?kid=' +
+          id +
+          '&type=' +
+          type
+      )
+    },
+    openDetail(item) {
+      this.kidForm.kids = item.id
+      window.open(
+        window.location.origin +
+          '/course/coursedetail?kid=' +
+          item.id +
+          '&page=0'
       )
     },
     goToPlay(item) {

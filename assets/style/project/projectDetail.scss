@@ -43,8 +43,11 @@
     .BreadCrumb {
     }
     .proHeader-img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 390px;
+      height: 490px;
       z-index: 1;
     }
     .proHeader-mask {
@@ -52,7 +55,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 390px;
+      height: 490px;
       opacity: 0.9;
       z-index: 10;
       background: -webkit-linear-gradient(
@@ -77,6 +80,7 @@
       top: 0;
       left: 0;
       width: 100%;
+      height: 490px;
     }
     .title-item {
       height: 185px;
@@ -84,7 +88,6 @@
     h1 {
       margin: 0;
       padding-top: 75px;
-      height: 50px;
       font-size: 46px;
       color: #fff;
       text-align: center;
@@ -99,8 +102,11 @@
     }
 
     .detail {
-      margin-top: 120px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
       height: 98px;
+      width: 100%;
       background: #fff;
       .some {
         display: inline;
@@ -111,8 +117,12 @@
           margin-top: 29px;
           text-align: center;
           vertical-align: top;
-          color: #545c63;
           border-right: 1px solid #e0e4e7;
+          color: #545c63;
+
+          &:last-child {
+            border: none;
+          }
           h5,
           h6 {
             height: 20px;
