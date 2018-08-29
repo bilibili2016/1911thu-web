@@ -144,6 +144,17 @@
               text-align: right;
             }
           }
+          .customerProject {
+            .topLeft {
+              float: left;
+            }
+            .topRight {
+              float: right;
+              span {
+                margin-left: 45px;
+              }
+            }
+          }
           .bottom {
             padding: 0;
             .bottom-item {
@@ -153,6 +164,43 @@
             .courseInfo {
               float: left;
               width: 80%;
+              margin-top: 20px;
+              img {
+                width: 160px;
+                height: 100px;
+                margin-right: 20px;
+              }
+              .bottomImg {
+                position: relative;
+                .project-img {
+                  width: 70px;
+                  height: 30px;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                }
+              }
+              h4 {
+                // width: 440px;
+                height: 42px;
+                font-size: 16px;
+                color: #332a51;
+                overflow: hidden;
+                padding: 9px 0 0;
+                margin-bottom: 15px;
+              }
+              h6 {
+                color: #6d687f;
+                font-size: 12px;
+                padding-bottom: 9px;
+              }
+              p {
+                font-size: 14px;
+                color: #6d687f;
+              }
+            }
+            .projectInfo {
+              float: left;
               margin-top: 20px;
               img {
                 width: 160px;
@@ -207,6 +255,21 @@
               color: #332a51;
               i {
                 font-size: 12px;
+              }
+            }
+            .customerProjectDetail {
+              padding-right: 0;
+              .item {
+                float: left;
+                width: 100px;
+                text-align: center;
+                line-height: 100px;
+                font-size: 14px;
+                color: #332a51;
+                &.price {
+                  color: #ff5f5f;
+                  font-size: 16px;
+                }
               }
             }
           }

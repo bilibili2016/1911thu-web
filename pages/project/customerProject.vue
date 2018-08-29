@@ -36,6 +36,7 @@
           <div class="pull-down-text" v-if="isShowNumSelect">
             <ul>
               <li v-for="(n) in 31" :key="n" @click.stop="chooseNum((n-1)+20)">{{(n-1)+20}}</li>
+              <!-- <li v-for="(n) in 31" :key="n" @click.stop="chooseNum(n)">{{n}}</li> -->
             </ul>
           </div>
         </div>
@@ -208,8 +209,8 @@ export default {
       isShowCollegeSelect: false,
       isShowCourseSelect: false,
       isShowSearchSelect: false,
-      chooseCourseData: [],
-      searchCourseData: [],
+      chooseCourseData: [], //课程搜索下拉多选列表
+      searchCourseData: [], //课程搜索
       checkedCourseData: [], //已选课程
       CategoryListData: [], //学院分类
       courseCategoryData: [], //课程分类
@@ -239,9 +240,7 @@ export default {
         totalPrice: 0, //项目总价钱
         projectPrice: 0,
         checkedCourse: []
-      },
-      offlinePrice: 0,
-      onlinePrice: 0
+      }
     }
   },
   computed: {
