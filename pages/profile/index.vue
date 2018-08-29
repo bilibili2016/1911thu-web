@@ -485,8 +485,10 @@ export default {
       this.orderForm.payStatus = status
       this.orderForm.pages = pagenum
       this._data['pagemsg' + (status + 4)].page = pagenum
+      console.log(this.orderForm, '123')
       profileHome.getAllOrderData(this.orderForm).then(response => {
-        this._data['pagemsg' + (status + 4)].total = response.data.orderTotal
+        this._data['pagemsg' + (status + 4)].total =
+          response.data.searchOrderTotal
         this.orderTotal = response.data.orderTotal
         this._data['allOrderData' + (status + 4)] = response.data.orderList
         this.allOrderLoadAll = false
