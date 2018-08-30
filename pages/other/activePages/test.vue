@@ -12,8 +12,6 @@ export default {
       step(data => (this.getCodeListForm.code = data))(this.bb)(data)
     },
     bb(item) {
-      console.log(this.getCodeListForm.code, '我草函数行编程2')
-      // this.getCodeListForm.code = this.getCodeListForm.code
       profileHome.getRecordList(this.getCodeListForm).then(response => {
         // this.recordData = response.data.usedInvitationCodeList
         // this.getCodeListForm.code = ''
