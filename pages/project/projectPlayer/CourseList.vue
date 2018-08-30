@@ -29,14 +29,6 @@ export default {
   data() {
     return {}
   },
-  watch: {
-    playing(val, old) {
-      console.log(val, 'playing')
-    },
-    ischeck(val, old) {
-      console.log(val, 'ischeck')
-    }
-  },
   methods: {
     handleCourse(item) {
       this.$bus.$emit('clickCatalog', item)

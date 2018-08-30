@@ -121,7 +121,10 @@ export default {
           response.data.curriculumProjectDetail.defaultCurriculumCatalog.curriculum_id
         this.playerForm.catalogId =
           response.data.curriculumProjectDetail.defaultCurriculumCatalog.curriculumCatalog_id
-        // this.playerForm.seek = Number(response.data.curriculumProjectDetail.defaultCurriculumCatalog.see_spot)
+        this.playerForm.seek = Number(
+          response.data.curriculumProjectDetail.defaultCurriculumCatalog
+            .see_spot
+        )
         this.bought =
           response.data.curriculumProjectDetail.curriculumProjectPrivilege
         this.isFreeCourse = response.data.curriculumProjectDetail.is_free

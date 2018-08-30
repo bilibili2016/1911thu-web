@@ -178,6 +178,7 @@ export default {
       if (this.bought && this.playerForm.seek != 0) {
         console.log(this.playerForm.seek)
         this.player.seek(this.playerForm.seek)
+        this.playerForm.seek = 0
       }
     },
     // 播放开始--启动计时器

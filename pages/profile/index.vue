@@ -430,8 +430,9 @@ export default {
         for (let item of response.data.curriculumList) {
           item.percent = Number(item.percent)
         }
-        for (var i = 0; i < this._data['myCourseData' + status].length; i++) {
-          this.$set(this._data['myCourseData' + status][i], 'overtime', true)
+        // 为 已过期 的课程添加overtime字段  用于button判断
+        for (var i = 0; i < this._data['myCourseData' + 4].length; i++) {
+          this.$set(this._data['myCourseData' + 4][i], 'overtime', true)
         }
         // this._data['myCourseData' + status].map(item => {
         //   this.$set(item, 'overtime', true)
