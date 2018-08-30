@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-search @Search="handleSearchs"></v-search>
+    <v-search @Search="handleSearchs" :word="searchForm.searchword"></v-search>
     <div class="center">
       <div class="cnums">
         共找到 {{courseNumber}} 门“ {{searchForm.searchword}} ”相关课程

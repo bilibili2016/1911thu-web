@@ -183,8 +183,7 @@ export default {
         this.player.play()
       }
       // 如果课程购买了 判断有没有观看记录，跳转到指定位置播放
-      if (this.bought && this.playerForm.seek != 0) {
-        console.log(this.playerForm.seek)
+      if (this.bought && this.playerForm.seek) {
         this.player.seek(this.playerForm.seek)
         // 跳转到指定位置之后 把播放记录清零
         this.playerForm.seek = 0
