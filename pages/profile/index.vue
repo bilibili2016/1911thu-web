@@ -19,7 +19,7 @@
         <el-tab-pane class="my-course" name="tab-third">
           <span slot="label" class="tabList">
             <i class="icon-project"></i> 我的项目</span>
-          <v-myproject :allProjectLoad="allProjectLoad" :activeProject="activeProject" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configFour="configFour" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configTwo="configTwo" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
+          <v-myproject :allProjectLoad="allProjectLoad" :activeProject="activeProject" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configSeven="configSeven" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configSix="configSix" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
         </el-tab-pane>
         <!-- 我的订单 -->
         <el-tab-pane class="my-course my-order" name="tab-fourth">
@@ -144,6 +144,16 @@ export default {
         card_type: 'shoucang',
         card: 'home',
         position: 'personal',
+        project: true
+      },
+      configSix: {
+        card_type: 'profile',
+        card: 'already',
+        project: true
+      },
+      configSeven: {
+        card_type: 'profile',
+        card: 'overtime',
         project: true
       },
       noMsgOne: {

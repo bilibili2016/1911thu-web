@@ -12,14 +12,14 @@
             <!-- <div class="mask">1</div> -->
 
             <!-- project 页面的课程详情 不显示一些东西 -->
-            <div class="common-button btn-bg" v-if="config.card_type !== 'project'"> -->
+            <div class="common-button btn-bg" v-if="config.card_type !== 'project'">
               <!-- 登录 不登录 播放按钮 -->
               <div class="playBtn-detail">
                 <img :src="playImg" alt="" @click="handleImgPlay(courseList)">
               </div>
             </div>
           </div>
-          <v-player></v-player>
+          <v-player @changePlayImg="changePlayImg"></v-player>
         </el-card>
         <div class="particularss fr">
           <div class="currentclum">
@@ -192,6 +192,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
+    changePlayImg(img, id) {
+      this.$emit('changePlayImg', img, id)
+    },
     // 免费试看
     freeStudy(item) {
       if (this.isAuthenticated) {

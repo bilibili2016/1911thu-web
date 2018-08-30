@@ -24,7 +24,7 @@
               <!-- 学习中 -->
               <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="study(card,config.project,card.type)">开始学习</el-button>
               <!-- 已过期 -->
-              <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
+              <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card,index)">
                 <span>
                   加入购物车
                 </span>
@@ -208,17 +208,17 @@ export default {
       window.open(window.location.origin + '/course/player')
     },
     // 已过期商品直接加入购物车
-    goShoppingCart(item) {
+    goShoppingCart(item, index) {
       this.kidForm.kids = item.id
       this.setKid(this.kidForm)
-      this.addShopCarts()
+      this.addShopCarts(index)
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
 
       window.open(window.location.origin + '/home/teacher/' + this.tidForm.tids)
     },
-    addShopCarts() {
+    addShopCarts(index) {
       this.curriculumcartids.cartid = this.kid
       profileHome.addShopCart(this.curriculumcartids).then(response => {
         this.$router.push('/shop/shoppingcart')

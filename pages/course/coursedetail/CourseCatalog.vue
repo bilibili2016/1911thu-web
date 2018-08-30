@@ -5,7 +5,7 @@
         <div class="detail descript" v-html="courseList.content" v-loading="loadMsg"></div>
       </el-tab-pane>
       <el-tab-pane label="目录" name="second">
-        <v-line :catalogs="catalogs" :privileMsg="privileMsg" :config="config"></v-line>
+        <v-line :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-line>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -23,7 +23,8 @@ export default {
     'loadMsg',
     'catalogs',
     'privileMsg',
-    'config'
+    'config',
+    'changeImg'
   ],
   components: {
     'v-line': CustomLine

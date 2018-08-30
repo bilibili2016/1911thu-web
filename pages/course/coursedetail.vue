@@ -14,11 +14,11 @@
       </div>
       <!-- 顶部的card -->
       <div class="main-header" v-loading="loadMsg">
-        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
+        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg"></v-card>
       </div>
       <!-- 左侧的课程目录和介绍 -->
       <div class="content fl">
-        <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config"></v-coursecatelog>
+        <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-coursecatelog>
       </div>
 
       <div style="width:345px" class="fr">
@@ -150,7 +150,11 @@ export default {
         sites: ['qzone', 'qq', 'weibo', 'wechat'],
         source: 'http://www.1911edu.com/'
       },
-      sumUserStart: 0
+      sumUserStart: 0,
+      changeImg: {
+        img: '',
+        id: ''
+      }
     }
   },
   watch: {
@@ -168,6 +172,10 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setIsCollection']),
+    changePlayImg(img, id) {
+      this.changeImg.img = img
+      this.changeImg.id = id
+    },
     // 跳转老师详情
     handleLinkTeacher(item) {
       window.open(window.location.origin + '/home/teacher/' + item)

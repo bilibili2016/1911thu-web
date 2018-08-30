@@ -23,6 +23,8 @@ export default {
         curriculumType: 1,
         seek: 0
       },
+      playImg: 'http://papn9j3ys.bkt.clouddn.com/playImg.gif',
+      pauseImg: 'http://papn9j3ys.bkt.clouddn.com/video.png',
       playerPreviousForm: {
         curriculumId: '',
         catalogId: ''
@@ -87,6 +89,10 @@ export default {
     }
   },
   methods: {
+    // 切换播放gif
+    changePlayImg(img, id) {
+      this.$emit('changePlayImg', img, id)
+    },
     // 课程-获取默认 的课程id 以及小节id
     getdefaultCurriculumCatalog() {
       this.getdefaultForm.curriculumid = splitUrl(0, 1)
@@ -100,8 +106,17 @@ export default {
             res.data.defaultCurriculumCatalog.see_spot
           )
           this.autoplay = true
-          // 获取播放的url
-          this.getdefaultPlayerUrl()
+          // 判断课程是否是未购买 且不能试看的
+          if (res.data.defaultCurriculumCatalog.curriculumPrivilege) {
+            // 获取播放的url
+            this.getdefaultPlayerUrl()
+          } else {
+            if (res.data.defaultCurriculumCatalog.look_at === '2') {
+              this.getdefaultPlayerUrl()
+            } else {
+              message(this, 'error', '您还未购买该课程，请先去购买吧！')
+            }
+          }
         })
     },
     // 根据 课程id以及小节id 获取url
@@ -227,16 +242,19 @@ export default {
           )
         }
       }, 1000)
+      this.changePlayImg(this.playImg, this.playerForm.catalogId)
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
     playerPause() {
       let that = this
       this.player.pause()
       clearInterval(that.interval)
+      this.changePlayImg(this.pauseImg, this.playerForm.catalogId)
       this.socket.emit('watchRecordingTime_disconnect')
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
+      this.changePlayImg(this.pauseImg, this.playerForm.catalogId)
       // 播放结束过滤 --避免播放结束后的指数次回调
       clearInterval(this.interval)
       // 不免费 未购买 试看的课程弹出快捷支付弹框
