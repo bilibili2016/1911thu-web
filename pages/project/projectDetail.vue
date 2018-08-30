@@ -116,7 +116,6 @@ export default {
   mounted() {
     this.project.projectId = splitUrl(0, 1)
     this.project.types = splitUrl(1, 1)
-
     this.getProjectInfo()
     if (this.project.types === '1') {
       this.getEvaluateList()
