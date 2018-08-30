@@ -20,7 +20,8 @@ export default {
       playerForm: {
         curriculumId: '',
         catalogId: '',
-        curriculumType: 1
+        curriculumType: 1,
+        seek: 0
       },
       playerPreviousForm: {
         curriculumId: '',
@@ -95,6 +96,9 @@ export default {
           this.playerForm.curriculumId =
             res.data.defaultCurriculumCatalog.curriculum_id
           this.playerForm.catalogId = res.data.defaultCurriculumCatalog.id
+          this.playerForm.seek = Number(
+            res.data.defaultCurriculumCatalog.see_spot
+          )
           this.autoplay = true
           // 获取播放的url
           this.getdefaultPlayerUrl()
@@ -177,6 +181,13 @@ export default {
     readyPlay() {
       if (this.autoplay) {
         this.player.play()
+      }
+      // 如果课程购买了 判断有没有观看记录，跳转到指定位置播放
+      if (this.bought && this.playerForm.seek != 0) {
+        console.log(this.playerForm.seek)
+        this.player.seek(this.playerForm.seek)
+        // 跳转到指定位置之后 把播放记录清零
+        this.playerForm.seek = 0
       }
     },
     // 播放开始--启动计时器

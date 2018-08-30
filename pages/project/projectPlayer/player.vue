@@ -174,6 +174,11 @@ export default {
       if (this.autoplay) {
         this.player.play()
       }
+      // 如果课程购买了 判断有没有观看记录，跳转到指定位置播放
+      if (this.bought && this.playerForm.seek != 0) {
+        console.log(this.playerForm.seek)
+        this.player.seek(this.playerForm.seek)
+      }
     },
     // 播放开始--启动计时器
     playerPlay() {
