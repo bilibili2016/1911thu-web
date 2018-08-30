@@ -121,6 +121,7 @@ export default {
           response.data.curriculumProjectDetail.defaultCurriculumCatalog.curriculum_id
         this.playerForm.catalogId =
           response.data.curriculumProjectDetail.defaultCurriculumCatalog.curriculumCatalog_id
+        console.log(this.playerForm.curriculumId, this.playerForm.catalogId)
         this.playerForm.seek = Number(
           response.data.curriculumProjectDetail.defaultCurriculumCatalog
             .see_spot

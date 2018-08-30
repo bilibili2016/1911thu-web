@@ -15,7 +15,6 @@
         <span class="fl playImg" v-show="changeImg.id == bar.id?true:false">
           <img :src="changeImg.img" alt="">
         </span>
-
         <p>
           <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{bar.video_time}}分钟)</span>
           <!-- 用户已购买 并且进度大于零 -->
