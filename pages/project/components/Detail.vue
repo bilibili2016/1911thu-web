@@ -87,7 +87,8 @@ export default {
       shoppingForm: {
         type: 2,
         cartid: ''
-      }
+      },
+      currentType: 1
     }
   },
   computed: {
@@ -151,8 +152,13 @@ export default {
     }
   },
   mounted() {
-    // this.project.projectId = window.location.search.split('=')[1]
     this.project.projectId = splitUrl(0, 1)
+    this.currentType = splitUrl(1, 1)
+    if (this.currentType === '1') {
+      this.BreadCrumb.text = '项目详情'
+    } else {
+      this.BreadCrumb.text = '定制项目详情'
+    }
   }
 }
 </script>

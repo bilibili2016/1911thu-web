@@ -10,7 +10,7 @@
       <div class="pagination" v-if="customerPagemsg.total>11&&customerProjectListData.length > 0">
         <el-pagination background layout="prev, pager, next" :page-size="customerPagemsg.pagesize" :pager-count="5" :page-count="customerPagemsg.pagesize" :current-page="customerPagemsg.page" :total="customerPagemsg.total" @current-change="customerProjectChange"></el-pagination>
       </div>
-      <v-nomsg class="noOrder" v-if="customerProjectListData.length == 0&&!customer" :config="noMsg"></v-nomsg>
+      <v-nomsg v-if="customerProjectListData.length == 0&&!customer" :config="noMsg"></v-nomsg>
     </el-card>
   </div>
 </template>

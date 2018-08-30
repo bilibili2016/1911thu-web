@@ -41,7 +41,6 @@ import noMsg from '@/pages/shop/affirmorder/noMsg'
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
 import { message, splitUrl } from '@/lib/util/helper'
 import { home } from '~/lib/v1_sdk/index'
-// import { splitUrl, openUrl } from '~/lib/util/helper'
 export default {
   components: {
     'v-banner': Banner,
