@@ -262,7 +262,7 @@ export default {
       },
       customerPagemsg: {
         page: 1,
-        pagesize: 6,
+        pagesize: 12,
         total: 12
       },
       studyProjectData: [],
@@ -342,7 +342,7 @@ export default {
       },
       customerProjectForm: {
         pages: 1,
-        limits: 6
+        limits: 12
       },
       collectionData: [],
       orderDetail: {}, //订单详情信息
@@ -663,7 +663,6 @@ export default {
     // 初始化 bus 事件
     initBusEvent() {
       this.$bus.$on('selectProfileIndex', data => {
-        console.log(data, 'eeee')
         this.activeTab = data
       })
       // 头部绑定成功更新
