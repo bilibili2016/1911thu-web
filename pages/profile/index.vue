@@ -13,7 +13,7 @@
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
-          <v-mycourse :allCourseLoad="allCourseLoad" :activeNames="activeNames" :pagecltcourse="pagecltcourse" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"> </v-mycourse>
+          <v-mycourse :allCourseLoad="allCourseLoad" :activeNames="activeNames" :noMsgCourse="noMsgCourse" :pagecltcourse="pagecltcourse" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"> </v-mycourse>
         </el-tab-pane>
         <!-- 我的项目 -->
         <el-tab-pane class="my-course" name="tab-third">
@@ -56,7 +56,7 @@
         <el-tab-pane class="my-course my-customerProject" name="tab-nine">
           <span slot="label" class="tabList">
             <i class="icon-cusProject"></i>&nbsp;自定制项目</span>
-          <v-myCustomerProject :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
+          <v-myCustomerProject :customer="customer" :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -395,7 +395,9 @@ export default {
       myCourseData2: [],
       myCourseData3: [],
       myCourseData4: [],
-      myCourseDataArr: [1, 2, 3, 4]
+      myCourseDataArr: [1, 2, 3, 4],
+      noMsgCourse: false,
+      customer: false
     }
   },
   computed: {
@@ -424,6 +426,7 @@ export default {
       // this.pagemsg2.page = pagenum
       this._data['pagemsg' + status].page = pagenum
       this.allCourseLoad = true
+
       profileHome.studyCurriculumList(this.styleForm).then(response => {
         this._data['myCourseData' + status] = response.data.curriculumList
         this._data['pagemsg' + status].total = response.data.pageCount
@@ -436,6 +439,12 @@ export default {
         // this._data['myCourseData' + status].map(item => {
         //   this.$set(item, 'overtime', true)
         // })
+        // console.log(response, '这是response')
+        // if (response.data.pageCount > 0) {
+        //   this.noMsgCourse = false
+        // } else {
+        //   this.noMsgCourse = true
+        // }
 
         this.allCourseLoad = false
       })
@@ -620,11 +629,13 @@ export default {
     },
     //自定制项目
     customerProjectList() {
+      this.customer = true
       profileHome
         .customerProjectList(this.customerProjectForm)
         .then(response => {
           this.customerProjectListData = response.data.curriculumProjectList
           this.customerPagemsg.total = response.data.pageCount
+          this.customer = false
         })
     },
     //自定制项目 分页
