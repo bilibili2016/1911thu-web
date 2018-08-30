@@ -496,7 +496,6 @@ export default {
       this.orderForm.payStatus = status
       this.orderForm.pages = pagenum
       this._data['pagemsg' + (status + 4)].page = pagenum
-      console.log(this.orderForm, '123')
       profileHome.getAllOrderData(this.orderForm).then(response => {
         this._data['pagemsg' + (status + 4)].total =
           response.data.searchOrderTotal
@@ -652,8 +651,7 @@ export default {
     // 初始化 bus 事件
     initBusEvent() {
       this.$bus.$on('selectProfileIndex', data => {
-        console.log(data)
-
+        console.log(data, 'eeee')
         this.activeTab = data
       })
       // 头部绑定成功更新

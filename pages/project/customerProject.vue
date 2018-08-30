@@ -199,6 +199,8 @@
 <script>
 import { customerProject } from '@/lib/v1_sdk/index'
 import { Trim, message, splitUrl } from '~/lib/util/helper'
+import { mapState, mapActions, mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -224,6 +226,9 @@ export default {
       searchCourseForm: {
         first_ID: '',
         second_ID: ''
+      },
+      gidForm: {
+        gids: null
       },
       projectForm: {
         type: '', //新增/编辑
@@ -279,6 +284,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
     //定制项目模式信息
     customerInfo() {
       customerProject.customerInfo().then(response => {
@@ -365,6 +371,8 @@ export default {
           }
           if (type === 1) {
             //保存跳转个人中心定制项目
+            this.gidForm.gids = 'tab-nine'
+            this.setGid(this.gidForm)
             this.$router.push('/profile')
             this.$bus.$emit('selectProfileIndex', 'tab-nine')
           } else {
