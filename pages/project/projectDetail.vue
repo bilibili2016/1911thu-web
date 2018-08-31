@@ -41,7 +41,7 @@ import Proevaluate from '@/pages/project/components/ProjectEvaluate'
 import Commonproblems from '@/pages/project/components/CommonProblems'
 import OfflineDesc from '@/pages/project/components/OfflineDesc'
 import { store as persistStore } from '~/lib/core/store'
-import { splitUrl, message } from '@/lib/util/helper'
+import { message, matchSplits } from '@/lib/util/helper'
 export default {
   components: {
     'v-procourse': Procourse,
@@ -115,8 +115,8 @@ export default {
     }
   },
   mounted() {
-    this.project.projectId = splitUrl(0, 1)
-    this.project.types = splitUrl(1, 1)
+    this.project.projectId = matchSplits('kid')
+    this.project.types = matchSplits('type')
     this.getProjectInfo()
     if (this.project.types === '1') {
       this.getEvaluateList()

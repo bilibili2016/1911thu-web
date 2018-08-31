@@ -62,7 +62,7 @@ import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import Collection from '@/components/common/Collection.vue'
 import { projectdetail } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { splitUrl, open } from '@/lib/util/helper'
+import { open, matchSplits } from '@/lib/util/helper'
 export default {
   components: {
     'v-breadcrumb': BreadCrumb,
@@ -101,17 +101,10 @@ export default {
       if (this.isAuthenticated) {
         let urlLink = {
           base: '/project/projectPlayer',
-          id: splitUrl(0, 1),
-          type: splitUrl(1, 1)
+          id: matchSplits('id'),
+          type: matchSplits('type')
         }
         open(urlLink)
-        // window.open(
-        //   window.location.origin +
-        //     '/project/projectPlayer?id=' +
-        //     splitUrl(0, 1) +
-        //     '&type=' +
-        //     splitUrl(1, 1)
-        // )
       } else {
         this.$bus.$emit('loginShow', true)
       }
@@ -158,8 +151,8 @@ export default {
     }
   },
   mounted() {
-    this.project.projectId = splitUrl(0, 1)
-    this.currentType = splitUrl(1, 1)
+    this.project.projectId = matchSplits('kid')
+    this.currentType = matchSplits('type')
     if (this.currentType === '1') {
       this.BreadCrumb.text = '项目详情'
     } else {

@@ -198,7 +198,7 @@
 
 <script>
 import { customerProject } from '@/lib/v1_sdk/index'
-import { Trim, message, splitUrl } from '~/lib/util/helper'
+import { Trim, message, matchSplits } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -567,8 +567,8 @@ export default {
       this.customerInfo()
       this.computedPrice()
       this.CategoryList()
-      this.projectForm.customerID = splitUrl(0, 1)
-      this.projectForm.type = splitUrl(1, 1)
+      this.projectForm.customerID = matchSplits('sid')
+      this.projectForm.type = matchSplits('edit')
       if (this.projectForm.type === '2') {
         //1:新增 2:编辑
         this.getCustomerProjectInfo()

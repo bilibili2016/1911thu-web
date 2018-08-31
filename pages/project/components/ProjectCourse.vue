@@ -22,7 +22,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { splitUrl, message, open } from '@/lib/util/helper'
+import { message, open, matchSplits } from '@/lib/util/helper'
 export default {
   props: ['projectCourseData', 'projectId'],
   computed: {
@@ -50,30 +50,16 @@ export default {
         page: 0
       }
       open(urlLink)
-      // window.open(
-      //   window.location.origin +
-      //     '/course/coursedetail?kid=' +
-      //     item.curriculum_id +
-      //     '&pid=' +
-      //     this.id
-      // )
     },
     // 跳转到项目播放页
     goProjectPlayer() {
       if (this.isAuthenticated) {
         let urlLink = {
           base: '/project/projectPlayer',
-          id: splitUrl(0, 1),
-          type: splitUrl(1, 1)
+          id: matchSplits('kid'),
+          type: matchSplits('type')
         }
         open(urlLink)
-        // window.open(
-        //   window.location.origin +
-        //     '/project/projectPlayer?id=' +
-        //     splitUrl(0, 1) +
-        //     '&type=' +
-        //     splitUrl(1, 1)
-        // )
       } else {
         this.$bus.$emit('loginShow', true)
       }

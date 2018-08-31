@@ -207,7 +207,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
-import { splitUrl, message, matchSplits } from '~/lib/util/helper'
+import { message, matchSplits } from '~/lib/util/helper'
 import CardPlayer from '@/pages/course/components/CardPlayer'
 export default {
   components: {
@@ -336,7 +336,7 @@ export default {
     }
   },
   mounted() {
-    this.whichPage = splitUrl(2, 1)
+    this.whichPage = matchSplits('page')
     this.$bus.$on('closeCover', data => {
       this.closeCover()
     })
