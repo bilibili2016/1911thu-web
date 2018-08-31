@@ -41,7 +41,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { payResult } from '@/lib/v1_sdk/index'
-import { banBackSpace, splitUrl } from '@/lib/util/helper'
+import { banBackSpace, matchSplits } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -100,8 +100,8 @@ export default {
       })
     },
     payComplete() {
-      this.payCompleteForm.orderId = splitUrl(0, 1)
-      this.payCompleteForm.attachs = splitUrl(1, 1)
+      this.payCompleteForm.orderId = matchSplits('order')
+      this.payCompleteForm.attachs = matchSplits('attach')
       payResult.payComplete(this.payCompleteForm).then(response => {
         this.payCompleteData = response.data
         this.showMsg = true

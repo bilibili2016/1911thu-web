@@ -39,7 +39,7 @@ import orderInfo from '@/pages/shop/affirmorder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
 import noMsg from '@/pages/shop/affirmorder/noMsg'
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
-import { message, splitUrl, open } from '@/lib/util/helper'
+import { message, matchSplits, open } from '@/lib/util/helper'
 import { home } from '~/lib/v1_sdk/index'
 export default {
   components: {
@@ -257,8 +257,9 @@ export default {
     }
   },
   mounted() {
-    this.customId = splitUrl(0, 1)
-    if (splitUrl(0, 1)) {
+    this.customId = matchSplits('id')
+    // console.log(matchSplits('id'))
+    if (matchSplits('id')) {
       this.handleCustomProject(this.customId)
     } else {
       this.handleGoodsList()

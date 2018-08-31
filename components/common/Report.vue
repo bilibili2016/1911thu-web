@@ -41,6 +41,7 @@ export default {
     // 反馈问题
     reportProblem() {
       if (this.config.type === 1) {
+        // console.log()
         this.problem.curriculumId = splitUrl(0, 1)
         this.problem.curriculumcatalogid = persistStore.get('catalogId')
         this.problem.types = 1

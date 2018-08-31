@@ -51,7 +51,7 @@
 
 <script>
 import { paypublic } from '@/lib/v1_sdk/index'
-import { splitUrl } from '@/lib/util/helper'
+import { matchSplits } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -69,7 +69,8 @@ export default {
         orderId: null
       },
       payListForm: {
-        orderId: null
+        orderId: null,
+        attachs: null
       },
       orderDetail: {}
     }
@@ -129,14 +130,13 @@ export default {
     },
     // 获取订单id列表
     getPayList() {
-      this.payListForm.orderId = splitUrl(0, 1)
-      return new Promise((resolve, reject) => {
-        paypublic.webPay(this.payListForm).then(response => {
-          this.orderDetail = response.data.data.orderDetail
-          this.payForm.orderId = response.data.data.orderDetail.id
-          this.payForm.phones = persistStore.get('phone')
-          resolve(true)
-        })
+      this.payListForm.orderId = matchSplits('orderID')
+      this.payListForm.attachs = matchSplits('attach')
+      console.log(this.payListForm)
+      paypublic.webPay(this.payListForm).then(response => {
+        this.orderDetail = response.data.data.orderDetail
+        this.payForm.orderId = response.data.data.orderDetail.id
+        this.payForm.phones = persistStore.get('phone')
       })
     }
   },
