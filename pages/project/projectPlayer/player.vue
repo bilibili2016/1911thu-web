@@ -8,7 +8,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { projectplayer } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { message, splitUrl } from '@/lib/util/helper'
+import { message, splitUrl, matchSplits } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
 export default {
@@ -355,7 +355,7 @@ export default {
     },
     // 项目加入购物车
     addShopCart() {
-      this.shoppingForm.cartid = splitUrl(0, 1)
+      this.shoppingForm.cartid = matchSplits('id')
       projectplayer.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
@@ -379,7 +379,7 @@ export default {
     }
   },
   mounted() {
-    this.projectForm.ids = splitUrl(0, 1)
+    this.projectForm.ids = matchSplits('id')
     this.$bus.$on('clickCatalog', data => {
       this.handleCourse(data)
     })

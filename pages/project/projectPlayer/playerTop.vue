@@ -7,17 +7,17 @@
 </template>
 
 <script>
-import { splitUrl } from '@/lib/util/helper'
+import { matchSplits } from '@/lib/util/helper'
 export default {
   props: ['data'],
   methods: {
     // 跳转课程详情
     goDetail() {
       this.$router.push(
-        '/project/projectdetail?id=' +
-          splitUrl(0, 1) +
+        '/project/projectdetail?kid=' +
+          matchSplits('id') +
           '&type=' +
-          splitUrl(1, 1)
+          matchSplits('type')
       )
     }
   }

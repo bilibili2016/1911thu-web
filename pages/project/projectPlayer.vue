@@ -36,7 +36,7 @@ import Repore from '@/components/common/Report.vue'
 import Pay from '@/components/common/Pay.vue'
 import List from '@/pages/project/projectPlayer/CourseList.vue'
 import Evaluate from '@/pages/project/projectPlayer/evaluate.vue'
-import { message, splitUrl } from '@/lib/util/helper'
+import { message, matchSplits } from '@/lib/util/helper'
 export default {
   components: {
     'v-playertop': Playertop,
@@ -189,11 +189,11 @@ export default {
     }
   },
   mounted() {
-    this.config.type = splitUrl(1, 1)
+    this.config.type = matchSplits('type')
     this.resize()
     window.addEventListener('resize', this.resize)
     if (this.isAuthenticated) {
-      this.projectForm.ids = splitUrl(0, 1)
+      this.projectForm.ids = matchSplits('id')
       this.getCurriculumPlayInfo()
     } else {
       this.$router.push(
