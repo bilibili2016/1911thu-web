@@ -375,10 +375,6 @@ export default {
     // },
     // 初始化默认data
     initData() {
-      // this.kidForm.ids = this.kid
-      //  this.evaluateListForm.ids = this.kid
-      // var a = matchSplit('page', 0)
-      // console.log(a, '这是a啊啊啊啊啊啊啊')
       this.kidForm.ids = matchSplits('kid')
       this.evaluateListForm.ids = matchSplits('kid')
 
