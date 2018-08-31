@@ -42,7 +42,7 @@ import CustomCard from '@/pages/course/components/Card.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray, splitUrl, matchSplit } from '@/lib/util/helper'
+import { uniqueArray, matchSplits } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import Pay from '@/components/common/Pay.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
@@ -219,7 +219,7 @@ export default {
     // 评论-提交评论接口
     addEvaluate() {
       // this.addEvaluateForm.ids = persistStore.get('curriculumId')
-      this.addEvaluateForm.ids = splitUrl(0, 1)
+      this.addEvaluateForm.ids = matchSplit('kid')
 
       if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
@@ -278,7 +278,7 @@ export default {
       this.evaluateListForm.pages = val
       this.evaluateListForm.limits = 3
       // this.evaluateListForm.ids = persistStore.get('curriculumId')
-      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.evaluateListForm.ids = matchSplits('kid')
       this.evaluateLoading = true
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
         this.loadMsg = false
@@ -291,7 +291,7 @@ export default {
     getEvaluateList() {
       this.loadEvaluate = true
       // this.evaluateListForm.ids = persistStore.get('curriculumId')
-      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.evaluateListForm.ids = matchSplits('kid')
 
       return new Promise((resolve, reject) => {
         coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
@@ -316,7 +316,7 @@ export default {
     getCourseDetail() {
       this.loadTeacher = true
       // this.kidForm.ids = persistStore.get('curriculumId')
-      this.kidForm.ids = splitUrl(0, 1)
+      this.kidForm.ids = matchSplits('kid')
 
       coursedetail.getCourseDetail(this.kidForm).then(response => {
         this.loadMsg = false
@@ -332,7 +332,7 @@ export default {
     // 课程-获取课程列表
     getCourseList() {
       // this.kidForm.ids = persistStore.get('curriculumId')
-      this.kidForm.ids = splitUrl(0, 1)
+      this.kidForm.ids = matchSplits('kid')
 
       coursedetail.getCourseList(this.kidForm).then(response => {
         this.catalogs = response.data.curriculumCatalogList
@@ -347,7 +347,7 @@ export default {
     // 课程-获取默认播放信息
     getdefaultCurriculumCatalog() {
       // this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
-      this.getdefaultForm.curriculumid = splitUrl(0, 1)
+      this.getdefaultForm.curriculumid = matchSplits('kid')
 
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
@@ -355,11 +355,11 @@ export default {
           this.$router.replace(
             '/course/coursedetail' +
               '?kid=' +
-              splitUrl(0, 1) +
+              matchSplits('kid') +
               '&bid=' +
               response.data.defaultCurriculumCatalog.id +
               '&page=' +
-              splitUrl(2, 1)
+              matchSplits('page')
           )
         })
     },
@@ -376,8 +376,8 @@ export default {
       //  this.evaluateListForm.ids = this.kid
       // var a = matchSplit('page', 0)
       // console.log(a, '这是a啊啊啊啊啊啊啊')
-      this.kidForm.ids = splitUrl(0, 1)
-      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.kidForm.ids = matchSplits('kid')
+      this.evaluateListForm.ids = matchSplits('kid')
 
       this.activeName = 'second'
     },
