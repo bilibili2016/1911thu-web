@@ -19,7 +19,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { home } from '~/lib/v1_sdk/index'
-import { splitUrl, message } from '@/lib/util/helper'
+import { message } from '@/lib/util/helper'
 export default {
   props: ['config', 'showReportBug', 'problem'],
   data() {

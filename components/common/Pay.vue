@@ -60,6 +60,7 @@ export default {
     // 获取去二维码的方法
     getCode() {
       this.codeForm.ids = splitUrl(0, 1)
+
       // console.log(this.codeForm.ids)
 
       pay.getCode(this.codeForm).then(response => {
