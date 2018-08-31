@@ -101,7 +101,11 @@ export default {
       if (this.isAuthenticated) {
         let urlLink = {
           base: '/project/projectPlayer',
+<<<<<<< HEAD
           kid: matchSplits('kid'),
+=======
+          id: matchSplits('kid'),
+>>>>>>> dev
           type: matchSplits('type')
         }
         open(urlLink)

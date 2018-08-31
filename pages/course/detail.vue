@@ -38,7 +38,7 @@ import CustomCard from '@/pages/course/components/CardProject.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray, splitUrl, message } from '@/lib/util/helper'
+import { uniqueArray, splitUrl, message, matchSplits } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
@@ -145,7 +145,8 @@ export default {
       this.evaluateListForm.pages = val
       this.evaluateListForm.limits = 3
       // this.evaluateListForm.ids = persistStore.get('curriculumId')
-      this.evaluateListForm.ids = splitUrl(0, 1)
+
+      this.evaluateListForm.ids = matchSplits('kid')
 
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
         this.loadMsg = false
@@ -156,7 +157,7 @@ export default {
     // 评论-获取评论列表
     getEvaluateList() {
       this.loadEvaluate = true
-      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.evaluateListForm.ids = matchSplits('kid')
       return new Promise((resolve, reject) => {
         coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
@@ -201,8 +202,8 @@ export default {
     },
     // 初始化默认data
     initData() {
-      this.kidForm.ids = splitUrl(0, 1)
-      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.kidForm.ids = matchSplits('kid')
+      this.evaluateListForm.ids = matchSplits('kid')
       this.activeName = 'second'
     },
     //拉取服务器数据 初始化所有方法
@@ -218,7 +219,7 @@ export default {
     this.BreadCrumb.projectCourseId = splitUrl(0, 1)
     // 获取项目id
     this.BreadCrumb.projectId = splitUrl(1, 1)
-    console.log(this.BreadCrumb, '66666666')
+
     this.initAll()
   },
   watch: {
