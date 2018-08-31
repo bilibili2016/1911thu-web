@@ -72,7 +72,7 @@
 import { mapActions } from 'vuex'
 import { card } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { splitUrl, open } from '~/lib/util/helper'
+import { open, matchSplits } from '~/lib/util/helper'
 export default {
   props: ['data', 'config'],
   data() {
@@ -168,7 +168,7 @@ export default {
     // cp类型决定当前列表的类型：0-课程；1-项目
     if (window.location.search.split('=')[2]) {
       this.isIndex = false
-      this.cp = splitUrl(1, 1)
+      this.cp = matchSplits('cp')
     } else {
       this.isIndex = true
     }

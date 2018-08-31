@@ -58,7 +58,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { auth, line } from '~/lib/v1_sdk/index'
-import { splitUrl, message } from '~/lib/util/helper'
+import { message, matchSplits } from '~/lib/util/helper'
 export default {
   props: ['catalogs', 'privileMsg', 'config', 'changeImg'],
   computed: {
@@ -128,11 +128,11 @@ export default {
         this.$router.push(
           '/course/coursedetail' +
             '?kid=' +
-            splitUrl(0, 1) +
+            matchSplits('kid') +
             '&bid=' +
             catalog_id +
             '&page=' +
-            splitUrl(2, 1)
+            matchSplits('page')
         )
         this.playerForm.curriculumId = curriculum_id
         this.playerForm.catalogId = catalog_id
