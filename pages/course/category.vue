@@ -486,6 +486,8 @@ export default {
     initParams() {
       // categoryId 学院 id
       this.categoryId = matchSplits('cid')
+      // console.log(matchSplits('cid'))
+      // console.log(matchSplits('cp'))
       // cp(1)项目 cp(0)
       this.cp = matchSplits('cp')
 
