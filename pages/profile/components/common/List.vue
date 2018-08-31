@@ -127,7 +127,7 @@
 <script>
 import { profileHome } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { open } from '@/lib/util/helper'
+import { open, matchSplits } from '@/lib/util/helper'
 
 export default {
   props: ['config', 'data'],
@@ -215,11 +215,11 @@ export default {
       this.$router.push(
         '/course/coursedetail' +
           '?kid=' +
-          splitUrl(0, 1) +
+          matchSplits('kid') +
           '&bid=' +
           item.catalog_id +
-          '?kid=' +
-          splitUrl(2, 1)
+          '?page=' +
+          matchSplits('page')
       )
       window.open(window.location.origin + '/course/player')
     },
