@@ -27,6 +27,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import { open } from '@/lib/util/helper'
 export default {
   props: ['items', 'config', 'swiperData'],
   data() {
@@ -42,6 +43,10 @@ export default {
       this.kidForm.kids = img.jump_id
     },
     goDetail(news) {
+      // let openUrl = {
+      //   base: '/home/news/' + news.id
+      // }
+      // openUrl(openUrl)
       window.open(window.location.origin + '/home/news/' + news.id)
     }
   },

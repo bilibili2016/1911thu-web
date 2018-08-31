@@ -359,7 +359,7 @@ export default {
               '&bid=' +
               response.data.defaultCurriculumCatalog.id +
               '&page=' +
-              splitUrl(1, 1)
+              splitUrl(2, 1)
           )
         })
     },

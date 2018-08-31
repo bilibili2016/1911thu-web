@@ -37,7 +37,6 @@
         <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
             <i class="icon-set"></i> 个人设置</span>
-          <!-- @update="updateUserInfo" -->
           <v-person @updateUserInfo="isUpdate = true"></v-person>
         </el-tab-pane>
         <!-- 课程码管理 -->

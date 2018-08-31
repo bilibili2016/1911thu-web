@@ -215,14 +215,14 @@ export default {
     //课程详情
     goCourseInfo(item, index) {
       this.kidForm.kids = item.id
-      this.$router.push('/course/coursedetail?kid=' + item.id + '&page=0')
+      this.$router.push(`/course/coursedetail?kid=${item.id}&bid=&page=0`)
     },
     //项目详情
     goProjrctInfo(item, type) {
       if (type === '1') {
-        this.$router.push('/project/projectdetail?kid=' + item.id + '&type=1')
+        this.$router.push(`/project/projectdetail?kid=${item.id}&type=1`)
       } else {
-        this.$router.push('/project/projectdetail?kid=' + item.id + '&type=2')
+        this.$router.push(`/project/projectdetail?kid=${item.id}&type=2`)
       }
     },
     //列表详情

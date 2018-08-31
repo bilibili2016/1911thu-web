@@ -127,6 +127,8 @@
 <script>
 import { profileHome } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
+import { open } from '@/lib/util/helper'
+
 export default {
   props: ['config', 'data'],
   data() {
@@ -164,31 +166,50 @@ export default {
       }
     },
     openProjectPlayer(id, type) {
-      window.open(
-        window.location.origin +
-          '/project/projectplayer?kid=' +
-          id +
-          '&type=' +
-          type
-      )
+      let urlLink = {
+        base: '/project/projectplayer',
+        kid: id,
+        type: type
+      }
+      open(urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/project/projectplayer?kid=' +
+      //     id +
+      //     '&type=' +
+      //     type
+      // )
     },
     openProjectDetail(id, type) {
-      window.open(
-        window.location.origin +
-          '/project/projectdetail?kid=' +
-          id +
-          '&type=' +
-          type
-      )
+      let urlLink = {
+        base: '/project/projectdetail',
+        kid: id,
+        type: type
+      }
+      open(urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/project/projectdetail?kid=' +
+      //     id +
+      //     '&type=' +
+      //     type
+      // )
     },
     openDetail(item) {
       this.kidForm.kids = item.id
-      window.open(
-        window.location.origin +
-          '/course/coursedetail?kid=' +
-          item.id +
-          '&page=0'
-      )
+      let urlLink = {
+        base: '/course/coursedetail',
+        kid: item.id,
+        bid: '',
+        page: 0
+      }
+      open(urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/course/coursedetail?kid=' +
+      //     item.id +
+      //     '&page=0'
+      // )
     },
     goToPlay(item) {
       this.$router.push(

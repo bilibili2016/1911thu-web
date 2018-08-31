@@ -62,6 +62,7 @@ export default {
       courseDetail: {
         base: '/course/coursedetail',
         kid: '',
+        bid: '',
         page: 0
       },
       projectDetail: {
