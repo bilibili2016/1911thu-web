@@ -9,7 +9,7 @@
         <span class="right">{{data.nickName}}</span>
       </p>
     </div>
-    <p class="commitOrder fr" @click="commitOrder">提交订单1</p>
+    <p class="commitOrder fr" @click="commitOrder">提交订单</p>
     <h6 v-if="config.type==='affirmOrder'" @click="showRpt">我有疑问，需要反馈?</h6>
   </div>
 </template>
