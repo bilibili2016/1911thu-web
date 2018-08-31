@@ -127,7 +127,7 @@
 <script>
 import { profileHome } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { open } from '@/lib/util/helper'
+import { open, splitUrl } from '@/lib/util/helper'
 
 export default {
   props: ['config', 'data'],

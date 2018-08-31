@@ -42,8 +42,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(splitUrl(0, 1), '8989898')
-    // console.log(matchSplits('id'))
     if (matchSplits('id')) {
       this.course = false
     }

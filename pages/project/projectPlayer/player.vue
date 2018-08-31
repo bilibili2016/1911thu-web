@@ -8,7 +8,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { projectplayer } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { message, splitUrl, matchSplits } from '@/lib/util/helper'
+import { message, matchSplits } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
 export default {
