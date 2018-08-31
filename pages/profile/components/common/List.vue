@@ -38,7 +38,7 @@
                 <span>再次学习</span>
               </el-button>
             </div>
-            <el-row @click.native="study(card,config.project,card.type)">
+            <el-row @click.native="selectCid(card,config.project,card.type)">
               <!-- 课程标题 -->
               <div class="item">
                 <p class="itemBox-name itemBoxTitle">
@@ -152,6 +152,13 @@ export default {
     study(item, flag, type) {
       if (flag) {
         this.openProjectPlayer(item.id, type)
+      } else {
+        this.openDetail(item)
+      }
+    },
+    selectCid(item, flag, type) {
+      if (flag) {
+        this.openProjectDetail(item.id, type)
       } else {
         this.openDetail(item)
       }
