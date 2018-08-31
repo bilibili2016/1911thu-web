@@ -13,7 +13,7 @@
 import Header from '~/components/common/Header'
 import Footer from '~/components/common/Footer'
 
-import { setPagesHeight, splitUrl } from '~/lib/util/helper'
+import { setPagesHeight, matchSplits } from '~/lib/util/helper'
 export default {
   components: {
     Header,
@@ -44,10 +44,11 @@ export default {
         for (var i = 0; i < headerClass.length; i++) {
           headerClass[i].classList.remove('active')
         }
-        if (splitUrl(1, 1) === '0') {
+
+        if (matchSplits('cp') === '0') {
           //课程
           headerClass[1].classList.add('active')
-        } else if (splitUrl(1, 1) === '1') {
+        } else if (matchSplits('cp') === '1') {
           //项目
           headerClass[2].classList.add('active')
         }

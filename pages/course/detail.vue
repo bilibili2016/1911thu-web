@@ -218,6 +218,7 @@ export default {
     this.BreadCrumb.projectCourseId = splitUrl(0, 1)
     // 获取项目id
     this.BreadCrumb.projectId = splitUrl(1, 1)
+    console.log(this.BreadCrumb, '66666666')
     this.initAll()
   },
   watch: {
