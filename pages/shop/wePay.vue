@@ -43,7 +43,7 @@ import Banner from '@/pages/shop/components/banner'
 import List from '@/pages/shop/components/List'
 import PayType from '@/pages/shop/wepay/payType'
 import Qrcode from '@/pages/shop/wepay/qrcode'
-import { setPagesHeight, splitUrl } from '~/lib/util/helper'
+import { setPagesHeight, matchSplits } from '~/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   components: {
@@ -101,8 +101,8 @@ export default {
       // let urlArr = window.location.href.split('/')
       // // let cpyid = persistStore.get('cpyid')
       // this.payListForm.orderId = urlArr[urlArr.length - 1]
-      this.payListForm.orderId = splitUrl(0, 1)
-      this.payListForm.attachs = splitUrl(1, 1)
+      this.payListForm.orderId = matchSplits('order')
+      this.payListForm.attachs = matchSplits('attach')
       wepay.webPay(this.payListForm).then(response => {
         this.loading = false
         if (response.status === '100100') {
