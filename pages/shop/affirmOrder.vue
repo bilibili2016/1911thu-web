@@ -145,7 +145,6 @@ export default {
     },
     // 点击提交订单
     handleSubmitOrder() {
-      console.log('123')
       let newWindow = window.open('about:blank')
       affirmOrder.commitOrder().then(res => {
         // console.log(res, '123')

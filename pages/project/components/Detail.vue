@@ -1,7 +1,7 @@
 <template>
   <div class="header-mask">
     <!-- 面包屑 收藏分享 -->
-    <div class="main-crumb">
+    <div class="main-crumb clearfix">
       <!-- 面包屑组件 -->
       <div class="fl">
         <v-breadcrumb :config="BreadCrumb" class="BreadCrumb"></v-breadcrumb>
@@ -13,8 +13,8 @@
     </div>
     <!-- 项目详情页上部分-项目信息 -->
     <div class="title-item">
-      <!-- 定制项目不显示标题和副标题 -->
-      <div v-if="projectType.types==='1'">
+      <!-- 项目不显示标题和副标题 -->
+      <div v-if="projectType.types==='2'">
         <h1>{{projectDetail.title}}</h1>
         <h3>{{projectDetail.deputy_title}}</h3>
       </div>

@@ -1,35 +1,38 @@
 <template>
   <div class="container courseDetail">
     <div class="main clearfix">
-      <!-- 面包屑 收藏分享 -->
-      <div class="main-crumb">
-        <div class="fl">
-          <!-- 面包屑组件 -->
-          <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+      <div class="topCard">
+        <!-- 面包屑 收藏分享 -->
+        <div class="main-crumb">
+          <div class="fl">
+            <!-- 面包屑组件 -->
+            <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+          </div>
+          <div class="fr">
+            <!-- 收藏分享 -->
+            <v-collection :collectData="collectMsg"></v-collection>
+          </div>
         </div>
-        <div class="fr">
-          <!-- 收藏分享 -->
-          <v-collection :collectData="collectMsg"></v-collection>
+        <!-- 顶部的card -->
+        <div class="main-header" v-loading="loadMsg">
+          <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg"></v-card>
         </div>
       </div>
-      <!-- 顶部的card -->
-      <div class="main-header" v-loading="loadMsg">
-        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg"></v-card>
-      </div>
-      <!-- 左侧的课程目录和介绍 -->
-      <div class="content fl">
-        <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-coursecatelog>
-      </div>
-
-      <div style="width:345px" class="fr">
-        <!-- 讲师介绍 -->
-        <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
-        <!-- 课程评价-->
-        <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
-        <!-- 用户评价  查看更多 -->
-        <v-evaluatedialog :evaluateLoading="evaluateLoading" :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
-        <!-- 用户评论 列表-->
-        <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
+      <div class="bottomCard">
+        <!-- 左侧的课程目录和介绍 -->
+        <div class="content fl">
+          <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-coursecatelog>
+        </div>
+        <div style="width:345px" class="fr">
+          <!-- 讲师介绍 -->
+          <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
+          <!-- 课程评价-->
+          <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
+          <!-- 用户评价  查看更多 -->
+          <v-evaluatedialog :evaluateLoading="evaluateLoading" :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
+          <!-- 用户评论 列表-->
+          <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
+        </div>
       </div>
     </div>
     <v-pay @closePay="closePayed"></v-pay>
@@ -42,7 +45,7 @@ import CustomCard from '@/pages/course/components/Card.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray, splitUrl, matchSplit } from '@/lib/util/helper'
+import { uniqueArray, matchSplits } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import Pay from '@/components/common/Pay.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
@@ -219,7 +222,7 @@ export default {
     // 评论-提交评论接口
     addEvaluate() {
       // this.addEvaluateForm.ids = persistStore.get('curriculumId')
-      this.addEvaluateForm.ids = splitUrl(0, 1)
+      this.addEvaluateForm.ids = matchSplit('kid')
 
       if (this.textarea.length < 100) {
         this.addEvaluateForm.evaluatecontent = this.textarea
@@ -278,7 +281,7 @@ export default {
       this.evaluateListForm.pages = val
       this.evaluateListForm.limits = 3
       // this.evaluateListForm.ids = persistStore.get('curriculumId')
-      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.evaluateListForm.ids = matchSplits('kid')
       this.evaluateLoading = true
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
         this.loadMsg = false
@@ -291,7 +294,7 @@ export default {
     getEvaluateList() {
       this.loadEvaluate = true
       // this.evaluateListForm.ids = persistStore.get('curriculumId')
-      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.evaluateListForm.ids = matchSplits('kid')
 
       return new Promise((resolve, reject) => {
         coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
@@ -316,7 +319,7 @@ export default {
     getCourseDetail() {
       this.loadTeacher = true
       // this.kidForm.ids = persistStore.get('curriculumId')
-      this.kidForm.ids = splitUrl(0, 1)
+      this.kidForm.ids = matchSplits('kid')
 
       coursedetail.getCourseDetail(this.kidForm).then(response => {
         this.loadMsg = false
@@ -332,7 +335,7 @@ export default {
     // 课程-获取课程列表
     getCourseList() {
       // this.kidForm.ids = persistStore.get('curriculumId')
-      this.kidForm.ids = splitUrl(0, 1)
+      this.kidForm.ids = matchSplits('kid')
 
       coursedetail.getCourseList(this.kidForm).then(response => {
         this.catalogs = response.data.curriculumCatalogList
@@ -347,7 +350,7 @@ export default {
     // 课程-获取默认播放信息
     getdefaultCurriculumCatalog() {
       // this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
-      this.getdefaultForm.curriculumid = splitUrl(0, 1)
+      this.getdefaultForm.curriculumid = matchSplits('kid')
 
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
@@ -355,11 +358,11 @@ export default {
           this.$router.replace(
             '/course/coursedetail' +
               '?kid=' +
-              splitUrl(0, 1) +
+              matchSplits('kid') +
               '&bid=' +
               response.data.defaultCurriculumCatalog.id +
               '&page=' +
-              splitUrl(2, 1)
+              matchSplits('page')
           )
         })
     },
@@ -376,8 +379,8 @@ export default {
       //  this.evaluateListForm.ids = this.kid
       // var a = matchSplit('page', 0)
       // console.log(a, '这是a啊啊啊啊啊啊啊')
-      this.kidForm.ids = splitUrl(0, 1)
-      this.evaluateListForm.ids = splitUrl(0, 1)
+      this.kidForm.ids = matchSplits('kid')
+      this.evaluateListForm.ids = matchSplits('kid')
 
       this.activeName = 'second'
     },

@@ -1,11 +1,19 @@
 .container {
-  background-color: #fafafa;
+  background-color: #fff;
   .main {
-    width: 1100px;
-    margin: 0 auto;
     position: relative;
+    .topCard {
+      background-color: #f7f9fb;
+    }
+    .bottomCard {
+      width: 1100px;
+      margin: 0 auto;
+    }
     .main-header {
-      height: 394px;
+      height: 348px;
+      width: 1100px;
+      margin: 0 auto;
+      clear: both;
       .playInner {
         width: 480px;
         height: 312px;
@@ -353,6 +361,8 @@
 
 .main-crumb {
   height: 85px;
+  width: 1100px;
+  margin: 0 auto;
   .breadCrumb {
     & > span {
       line-height: 85px;

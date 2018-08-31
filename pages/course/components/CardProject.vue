@@ -6,7 +6,6 @@
         <el-card class="fl" :body-style="{ padding: '0px' }">
           <div class="goodplay">
             <img :src="courseList.picture" class="image">
-            <!-- <div class="mask">1</div> -->
             <!-- project 页面的课程详情 不显示一些东西 -->
             <div class="common-button btn-bg" v-if="config.card_type !== 'project'">
               <!-- 登录 不登录 播放按钮 -->
@@ -19,24 +18,23 @@
         </el-card>
         <div class="particularss fr">
           <div class="currentclum">
-
             <!-- 公共项目标题 -->
             <h4>{{courseList.title}} </h4>
             <!-- 免费课程 未学习 start-->
-            <div>
-              <div>
+            <div class="study clearfix">
+              <!-- 课程介绍 -->
+              <p>{{courseList.introduction}}</p>
+              <!-- 学时 以及 学习人数 星级 价钱-->
+              <div class="studyInfo">
                 <span class="fl coursenum">
-                  <span>{{courseList.study_time}}学时</span><img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}</span>
-                <span class="rate">
+                  <img src="@/assets/images/icon_id.png" alt="">学习人数：{{courseList.study_number}}</span>
+                <span class="fl coursenum">
+                  <span><img src="@/assets/images/icon_time.png" alt="">总学时：{{courseList.study_time}}</span>
+                </span>
+                <span class="rate">课程评分：
                   <el-rate disabled v-model="courseList.score"></el-rate>
                 </span>
               </div>
-              <!-- 课程介绍 登录 未登录 学习按钮 -->
-              <div class="study clearfix">
-                <!-- 课程介绍 -->
-                <p>{{courseList.introduction}}</p>
-              </div>
-
             </div>
           </div>
         </div>

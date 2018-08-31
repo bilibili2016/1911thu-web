@@ -1,28 +1,32 @@
 <template>
   <div class="container courseDetail">
     <div class="main clearfix">
-      <!-- 面包屑 收藏分享 -->
-      <div class="main-crumb">
-        <div class="fl">
-          <!-- 面包屑组件 -->
-          <v-breadcrumb :config="BreadCrumb" :kidForm="kidForm"></v-breadcrumb>
+      <div class="topCard">
+        <!-- 面包屑 收藏分享 -->
+        <div class="main-crumb clearfix">
+          <div class="fl">
+            <!-- 面包屑组件 -->
+            <v-breadcrumb :config="BreadCrumb" :kidForm="kidForm"></v-breadcrumb>
+          </div>
+        </div>
+        <!-- 顶部的card -->
+        <div class="main-header" v-loading="loadMsg">
+          <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
         </div>
       </div>
-      <!-- 顶部的card -->
-      <div class="main-header" v-loading="loadMsg">
-        <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList"></v-card>
-      </div>
-      <!-- 左侧的课程目录和介绍 -->
-      <div class="content fl">
-        <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-coursecatelog>
-      </div>
-      <div style="width:345px" class="fr">
-        <!-- 讲师介绍 -->
-        <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
-        <!-- 用户评价  查看更多 -->
-        <v-evaluatedialog :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
-        <!-- 用户评论 列表-->
-        <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
+      <div class="bottomCard">
+        <!-- 左侧的课程目录和介绍 -->
+        <div class="content fl">
+          <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-coursecatelog>
+        </div>
+        <div style="width:345px" class="fr">
+          <!-- 讲师介绍 -->
+          <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
+          <!-- 用户评价  查看更多 -->
+          <v-evaluatedialog :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
+          <!-- 用户评论 列表-->
+          <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
+        </div>
       </div>
     </div>
     <v-backtop :data="showCheckedCourse"></v-backtop>
