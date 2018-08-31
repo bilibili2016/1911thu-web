@@ -408,8 +408,6 @@ export default {
     },
     goLink() {
       this.$router.push('/course/coursedetail?kid=')
-
-      // window.open(window.location.origin + '/course/coursedetail')
     },
     playerBuy(item, info) {
       if (info.is_cart === 1) {
@@ -421,8 +419,6 @@ export default {
         this.curriculumcartids.cartid = item[0].curriculum_id
         return new Promise((resolve, reject) => {
           players.addShopCart(this.curriculumcartids).then(response => {
-            // this.$router.push('/shop/shoppingCart')
-            // window.open(window.location.origin + '/shop/shoppingcart')
             this.$message({
               type: 'success',
               message: '添加购物车成功'

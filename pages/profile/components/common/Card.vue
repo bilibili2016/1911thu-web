@@ -109,6 +109,8 @@
 <script>
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
+import { open } from '@/lib/util/helper'
+
 export default {
   props: ['config', 'data'],
   data() {
@@ -131,17 +133,28 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
     openDetail(item) {
-      window.open(
-        window.location.origin +
-          '/project/projectdetail?kid=' +
-          item.id +
-          '&type=1'
-      )
+      let urlLink = {
+        base: '/project/projectdetail',
+        kid: item.id,
+        type: 1
+      }
+      open(urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/project/projectdetail?kid=' +
+      //     item.id +
+      //     '&type=1'
+      // )
     },
     goToPlay(item) {
-      window.open(
-        window.location.origin + '/project/projectPlayer?id=' + item.id
-      )
+      let projectLink = {
+        base: '/project/projectPlayer',
+        id: item.id
+      }
+      open(projectLink)
+      // window.open(
+      //   window.location.origin + '/project/projectPlayer?id=' + item.id
+      // )
     },
     // 已过期商品直接加入购物车
     goShoppingCart(item) {

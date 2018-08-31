@@ -329,6 +329,13 @@ export default {
         base: '/project/customerProject',
         sid: '',
         edit: 1
+      },
+      urlLink: {
+        base: '/course/category',
+        cid: '',
+        cp: '',
+        xid: '',
+        pid: ''
       }
     }
   },
@@ -339,17 +346,11 @@ export default {
   methods: {
     fetchDate() {},
     goCourseList(item) {
-      window.open(
-        window.location.origin +
-          '/course/category' +
-          '?cid=' +
-          item.cidform.cids +
-          '&cp=' +
-          item.is_picture_show +
-          '&xid=0' +
-          '&pid=' +
-          '0'
-      )
+      this.urlLink.cid = item.cidform.cids
+      this.urlLink.cp = item.is_picture_show
+      this.urlLink.xid = 0
+      this.urlLink.pid = 0
+      open(this.urlLink)
     },
     handleScroll() {
       window.scrollTo(0, this.buttonFormTop)

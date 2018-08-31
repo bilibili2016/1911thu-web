@@ -58,24 +58,32 @@ export default {
       link: null,
       interval: null,
       links: '',
-      showMsg: false
+      showMsg: false,
+      urlLink: {
+        base: '/course/category',
+        cid: 0,
+        cp: 0,
+        xid: 1,
+        pids: 0
+      }
     }
   },
   methods: {
     ...mapActions('auth', ['setGid']),
     // 继续选课
     handleChoiceCourse() {
-      window.open(
-        window.location.origin +
-          '/course/category' +
-          '?cid=' +
-          '0' +
-          '&cp=' +
-          '0' +
-          '&xid=1' +
-          '&pids=' +
-          '0'
-      )
+      open(this.urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/course/category' +
+      //     '?cid=' +
+      //     '0' +
+      //     '&cp=' +
+      //     '0' +
+      //     '&xid=1' +
+      //     '&pids=' +
+      //     '0'
+      // )
     },
     // 点击查看订单
     handleLinkProfile(item) {

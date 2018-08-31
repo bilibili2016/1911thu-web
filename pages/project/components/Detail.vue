@@ -62,7 +62,7 @@ import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import Collection from '@/components/common/Collection.vue'
 import { projectdetail } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { splitUrl } from '@/lib/util/helper'
+import { splitUrl, open } from '@/lib/util/helper'
 export default {
   components: {
     'v-breadcrumb': BreadCrumb,
@@ -99,13 +99,19 @@ export default {
     // 跳转到项目播放页
     goProjectPlayer() {
       if (this.isAuthenticated) {
-        window.open(
-          window.location.origin +
-            '/project/projectPlayer?id=' +
-            splitUrl(0, 1) +
-            '&type=' +
-            splitUrl(1, 1)
-        )
+        let urlLink = {
+          base: '/project/projectPlayer',
+          id: splitUrl(0, 1),
+          type: splitUrl(1, 1)
+        }
+        open(urlLink)
+        // window.open(
+        //   window.location.origin +
+        //     '/project/projectPlayer?id=' +
+        //     splitUrl(0, 1) +
+        //     '&type=' +
+        //     splitUrl(1, 1)
+        // )
       } else {
         this.$bus.$emit('loginShow', true)
       }
