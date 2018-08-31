@@ -42,7 +42,7 @@ import CustomCard from '@/pages/course/components/Card.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray, splitUrl } from '@/lib/util/helper'
+import { uniqueArray, splitUrl, matchSplit } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import Pay from '@/components/common/Pay.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
@@ -374,6 +374,8 @@ export default {
     initData() {
       // this.kidForm.ids = this.kid
       //  this.evaluateListForm.ids = this.kid
+      // var a = matchSplit('page', 0)
+      // console.log(a, '这是a啊啊啊啊啊啊啊')
       this.kidForm.ids = splitUrl(0, 1)
       this.evaluateListForm.ids = splitUrl(0, 1)
 

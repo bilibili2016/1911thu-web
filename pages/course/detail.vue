@@ -14,7 +14,7 @@
       </div>
       <!-- 左侧的课程目录和介绍 -->
       <div class="content fl">
-        <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config"></v-coursecatelog>
+        <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-coursecatelog>
       </div>
       <div style="width:345px" class="fr">
         <!-- 讲师介绍 -->
@@ -68,6 +68,10 @@ export default {
         project: '项目详情',
         projectCourse: true,
         projectId: ''
+      },
+      changeImg: {
+        img: '',
+        id: ''
       },
       kidForm: {
         kid: ''
@@ -148,9 +152,7 @@ export default {
     // 评论-获取评论列表
     getEvaluateList() {
       this.loadEvaluate = true
-      // this.evaluateListForm.ids = persistStore.get('curriculumId')
       this.evaluateListForm.ids = splitUrl(0, 1)
-
       return new Promise((resolve, reject) => {
         coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
           this.loadMsg = false
@@ -172,7 +174,6 @@ export default {
     // 课程-获取课程详情
     getCourseDetail() {
       this.loadTeacher = true
-      this.kidForm.ids = splitUrl(0, 1)
       coursedetail.getCourseDetail(this.kidForm).then(response => {
         this.loadMsg = false
         this.courseList = response.data.curriculumDetail
@@ -184,7 +185,6 @@ export default {
     },
     // 课程-获取课程列表
     getCourseList() {
-      this.kidForm.ids = splitUrl(0, 1)
       coursedetail.getCourseList(this.kidForm).then(response => {
         this.catalogs = response.data.curriculumCatalogList
         for (let item of this.catalogs) {
@@ -204,18 +204,17 @@ export default {
     //拉取服务器数据 初始化所有方法
     initAll() {
       this.initData()
-      // this.shareDefault()
       this.getCourseDetail()
       this.getEvaluateList()
       this.getCourseList()
     }
   },
   mounted() {
-    this.initAll()
     // 获取课程id
     this.BreadCrumb.projectCourseId = splitUrl(0, 1)
     // 获取项目id
     this.BreadCrumb.projectId = splitUrl(1, 1)
+    this.initAll()
   },
   watch: {
     //在当前页面进行登录操作更新状态

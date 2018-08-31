@@ -24,7 +24,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { splitUrl, message, open } from '@/lib/util/helper'
 export default {
-  props: ['projectCourseData', 'id'],
+  props: ['projectCourseData', 'projectId'],
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },

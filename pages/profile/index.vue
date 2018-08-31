@@ -489,6 +489,10 @@ export default {
         for (let item of response.data.studyProjectList) {
           item.percent = Number(item.percent)
         }
+        // 为 已过期 的课程添加overtime字段  用于button判断
+        for (var i = 0; i < this._data['myProjectData' + 3].length; i++) {
+          this.$set(this._data['myProjectData' + 3][i], 'overtime', true)
+        }
         this.allProjectLoad = false
       })
     },

@@ -42,7 +42,7 @@ import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players, category } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { splitUrl, openUrl } from '~/lib/util/helper'
+import { splitUrl, openUrl, matchSplits } from '~/lib/util/helper'
 import List from '@/pages/course/components/List'
 import Filter from '@/pages/course/components/Filter'
 import Page from '@/components/common/Pagination'
@@ -440,8 +440,8 @@ export default {
     },
     // 点击 最新最热 筛选
     selectActiveTab(item) {
-      let categoryId = splitUrl(0, 1)
-      let pids = splitUrl(3, 1)
+      let categoryId = matchSplits('cid')
+      let pids = matchSplits('pid')
       item.name === 'second'
         ? (this.categoryForm.sortBy = 1)
         : (this.categoryForm.sortBy = 2)
@@ -460,8 +460,8 @@ export default {
       this.loadCourse = false
       this.pagemsg.page = val
       this.categoryForm.pages = val
-      let categoryId = splitUrl(0, 1)
-      let pids = splitUrl(3, 1)
+      let categoryId = matchSplits('cid')
+      let pids = matchSplits('pid')
       if (this.xid === '0') {
         this.getCourseCardList(categoryId, pids)
       } else {
@@ -485,17 +485,19 @@ export default {
     // 初始化params参数
     initParams() {
       // categoryId 学院 id
-      this.categoryId = splitUrl(0, 1)
+      this.categoryId = matchSplits('cid')
+      // console.log(matchSplits('cid'))
+      // console.log(matchSplits('cp'))
       // cp(1)项目 cp(0)
-      this.cp = splitUrl(1, 1)
+      this.cp = matchSplits('cp')
 
       // 获取是 选课(1) 还是 学院(0)
-      this.xid = splitUrl(2, 1)
+      this.xid = matchSplits('xid')
       // pid 分类的id
-      this.pids = splitUrl(3, 1)
+      this.pids = matchSplits('pid')
       // 初始化背景
-      this.cidBg = splitUrl(0, 1)
-      this.pidBg = splitUrl(3, 1)
+      this.cidBg = matchSplits('cid')
+      this.pidBg = matchSplits('pid')
     },
     initListCard() {
       // cp(0) 课程 cp(1)
