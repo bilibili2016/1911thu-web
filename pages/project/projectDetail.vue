@@ -14,7 +14,7 @@
           <div class="detail" v-html="projectDetail.content"></div>
         </el-tab-pane>
         <el-tab-pane label="线上课程介绍" name="second">
-          <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad" :id="project.projectId"></v-procourse>
+          <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad" :projectId="project.projectId"></v-procourse>
         </el-tab-pane>
         <!-- 定制项目并且项目类型为混合模式显示 -->
         <el-tab-pane label="线下课程说明" name="third" v-if="project.types === '2' &&projectDetail.study_type==='2' ">
