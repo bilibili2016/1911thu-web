@@ -1,7 +1,7 @@
 <template>
   <div class="header-mask">
     <!-- 面包屑 收藏分享 -->
-    <div class="main-crumb">
+    <div class="main-crumb clearfix">
       <!-- 面包屑组件 -->
       <div class="fl">
         <v-breadcrumb :config="BreadCrumb" class="BreadCrumb"></v-breadcrumb>

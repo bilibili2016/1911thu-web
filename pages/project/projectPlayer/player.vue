@@ -64,6 +64,10 @@ export default {
       pay: {
         type: 2
       },
+      shoppingForm: {
+        cartid: '',
+        type: 2
+      },
       course: {
         catalogId: '',
         curriculumId: ''
@@ -176,7 +180,6 @@ export default {
       }
       // 如果课程购买了 判断有没有观看记录，跳转到指定位置播放
       if (this.bought && this.playerForm.seek != 0) {
-        console.log(this.playerForm.seek)
         this.player.seek(this.playerForm.seek)
         this.playerForm.seek = 0
       }
@@ -352,6 +355,7 @@ export default {
     },
     // 项目加入购物车
     addShopCart() {
+      this.shoppingForm.cartid = splitUrl(0, 1)
       projectplayer.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
