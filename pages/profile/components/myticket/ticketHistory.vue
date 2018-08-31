@@ -115,8 +115,9 @@ export default {
       // persistStore.set('kid', item.curriculum_id)
       // this.setKid(this.kidForm)
       // persistStore.set('curriculumId', item.curriculum_id)
+
       this.$router.push(
-        '/course/coursedetail?kid=' + item.curriculum_id + '&page=0'
+        `/course/coursedetail?kid=${item.curriculum_id}&bid=&page=0`
       )
     },
     goShopping(id) {

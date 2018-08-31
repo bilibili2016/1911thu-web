@@ -43,24 +43,37 @@ export default {
     ...mapActions('auth', ['setKid']),
     // 跳转课程详情
     goCourseDetail(item) {
-      window.open(
-        window.location.origin +
-          '/course/detail?kid=' +
-          item.curriculum_id +
-          '&pid=' +
-          this.id
-      )
+      let urlLink = {
+        base: '/course/coursedetail',
+        kid: item.curriculum_id,
+        pid: this.id,
+        page: 0
+      }
+      open(urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/course/coursedetail?kid=' +
+      //     item.curriculum_id +
+      //     '&pid=' +
+      //     this.id
+      // )
     },
     // 跳转到项目播放页
     goProjectPlayer() {
       if (this.isAuthenticated) {
-        window.open(
-          window.location.origin +
-            '/project/projectPlayer?id=' +
-            splitUrl(0, 1) +
-            '&type=' +
-            splitUrl(1, 1)
-        )
+        let urlLink = {
+          base: '/project/projectPlayer',
+          id: splitUrl(0, 1),
+          type: splitUrl(1, 1)
+        }
+        open(urlLink)
+        // window.open(
+        //   window.location.origin +
+        //     '/project/projectPlayer?id=' +
+        //     splitUrl(0, 1) +
+        //     '&type=' +
+        //     splitUrl(1, 1)
+        // )
       } else {
         this.$bus.$emit('loginShow', true)
       }

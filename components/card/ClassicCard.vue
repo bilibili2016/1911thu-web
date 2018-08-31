@@ -33,6 +33,7 @@ export default {
       coursedetail: {
         base: '/course/coursedetail',
         kid: null,
+        bid: '',
         page: 1
       }
     }
