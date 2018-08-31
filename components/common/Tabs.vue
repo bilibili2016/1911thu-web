@@ -1,5 +1,5 @@
 <template>
-  <div class="fl dropdown clearfix">
+  <div class="fl dropdown  333 clearfix">
     <div class="dropItem headerClass">
       <span class="el-dropdown-link">
         全部课程
@@ -34,6 +34,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { home } from '~/lib/v1_sdk/index'
+import { open } from '@/lib/util/helper'
 export default {
   data() {
     return {
@@ -52,6 +53,13 @@ export default {
       },
       cgForm: {
         cgs: null
+      },
+      urlLink: {
+        base: '/course/category',
+        cid: '',
+        cp: '',
+        xid: '',
+        pid: ''
       }
     }
   },
@@ -71,20 +79,24 @@ export default {
     },
     handleClick(item, index) {
       this.$bus.$emit('collegeId', item.id)
-      window.open(
-        window.location.origin +
-          '/course/category' +
-          '?cid=' +
-          item.id +
-          '&cp=' +
-          item.is_picture_show +
-          '&xid=0' +
-          '&pid=' +
-          '0'
-      )
+      this.urlLink.cid = item.id
+      this.urlLink.cp = item.is_picture_show
+      this.urlLink.xid = 0
+      this.urlLink.pid = 0
+      open(this.urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/course/category' +
+      //     '?cid=' +
+      //     item.id +
+      //     '&cp=' +
+      //     item.is_picture_show +
+      //     '&xid=0' +
+      //     '&pid=' +
+      //     '0'
+      // )
     }
   },
-  // +'&xid=1'
   mounted() {
     this.getClassifyList()
   }

@@ -200,7 +200,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 import List from '@/pages/shop/components/List'
-import { message } from '@/lib/util/helper'
+import { message, open } from '@/lib/util/helper'
 export default {
   components: {
     'v-list': List
@@ -431,20 +431,33 @@ export default {
       let kidForm = {
         kids: item.id
       }
-      window.open(
-        window.location.origin +
-          '/course/coursedetail?kid=' +
-          item.id +
-          '&page=0'
-      )
+      let urlLink = {
+        base: '/course/coursedetail',
+        kid: item.id,
+        bid: '',
+        page: 0
+      }
+      open(urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/course/coursedetail?kid=' +
+      //     item.id +
+      //     '&page=0'
+      // )
     },
     goProjectDetail(item) {
-      window.open(
-        window.location.origin +
-          '/project/projectdetail?kid=' +
-          item.id +
-          '&type=1'
-      )
+      let urlLink = {
+        base: '/project/projectdetail',
+        kid: item.id,
+        type: 1
+      }
+      open(urlLink)
+      // window.open(
+      //   window.location.origin +
+      //     '/project/projectdetail?kid=' +
+      //     item.id +
+      //     '&type=1'
+      // )
     },
     loadAll() {
       return []

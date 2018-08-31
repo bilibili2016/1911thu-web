@@ -39,7 +39,7 @@ import orderInfo from '@/pages/shop/affirmorder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
 import noMsg from '@/pages/shop/affirmorder/noMsg'
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
-import { message, splitUrl } from '@/lib/util/helper'
+import { message, splitUrl, open } from '@/lib/util/helper'
 import { home } from '~/lib/v1_sdk/index'
 export default {
   components: {
@@ -145,19 +145,31 @@ export default {
     },
     // 点击提交订单
     handleSubmitOrder() {
-      // let newWindow = window.open('about:blank')
+      let newWindow = window.open('about:blank')
       affirmOrder.commitOrder().then(res => {
         // console.log(res, '123')
         if (res.status === 0) {
           //解决异步加载浏览器会将新打开的页面作为窗口拦截
           // newWindow.location.href =
           //   window.location.origin + '/shop/' + res.data.id
-          window.open(
+          // let urlLink = {
+          //   base: '/shop/wepay',
+          //   order: res.data.id,
+          //   attach: 1
+          // }
+          // open(urlLink)
+          // window.open(
+          //   window.location.origin +
+          //     '/shop/wepay?order=' +
+          //     res.data.id +
+          //     '&attach=1'
+          // )
+          newWindow.location.href =
             window.location.origin +
-              '/shop/wepay?order=' +
-              res.data.id +
-              '&attach=1'
-          )
+            '/shop/wepay/' +
+            '?order=' +
+            res.data.id +
+            '&attach=1'
         } else {
           message(this, 'error', res.msg)
         }
@@ -167,14 +179,28 @@ export default {
     handleGetCode() {
       this.payForm.ids = this.customId
       this.payForm.type = 2
+      let newWindow = window.open('about:blank')
       affirmOrder.getCode(this.payForm).then(res => {
         // console.log(res, '这是res123456789')
-        window.open(
+        // let urlLink = {
+        //   base: '/shop/wepay',
+        //   order: res.data.order_id,
+        //   attach: 2
+        // }
+        // open(urlLink)
+        newWindow.location.href =
           window.location.origin +
-            '/shop/wepay?order=' +
-            res.data.order_id +
-            '&attach=2'
-        )
+          '/shop/wepay/' +
+          '?order=' +
+          res.data.order_id +
+          '&attach=2'
+
+        // window.open(
+        //   window.location.origin +
+        //     '/shop/wepay?order=' +
+        //     res.data.order_id +
+        //     '&attach=2'
+        // )
       })
     },
     //获取商 品信息 列表

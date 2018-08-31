@@ -262,10 +262,6 @@ export default {
           splitUrl(2, 1)
       )
       this.$bus.$emit('reupdatecourse')
-      // window.open(window.location.origin + '/course/player')
-      // this.playerForm.curriculumId = item.defaultCurriculumCatalog.curriculum_id
-      // this.playerForm.catalogId = item.defaultCurriculumCatalog.id
-      // this.$bus.$emit('updateCourse', this.playerForm)
     },
     // 左侧播放按钮事件
     handleImgPlay(item) {
@@ -340,7 +336,7 @@ export default {
     }
   },
   mounted() {
-    this.whichPage = splitUrl(1, 1)
+    this.whichPage = splitUrl(2, 1)
     this.$bus.$on('closeCover', data => {
       this.closeCover()
     })
