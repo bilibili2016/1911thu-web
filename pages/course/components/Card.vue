@@ -207,7 +207,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
-import { splitUrl, message } from '~/lib/util/helper'
+import { message, matchSplits } from '~/lib/util/helper'
 import CardPlayer from '@/pages/course/components/CardPlayer'
 export default {
   components: {
@@ -255,11 +255,11 @@ export default {
       this.$router.push(
         '/course/coursedetail' +
           '?kid=' +
-          splitUrl(0, 1) +
+          matchSplits('kid') +
           '&bid=' +
           item.defaultCurriculumCatalog.id +
           '&page=' +
-          splitUrl(2, 1)
+          matchSplits('page')
       )
       this.$bus.$emit('reupdatecourse')
     },
@@ -336,7 +336,7 @@ export default {
     }
   },
   mounted() {
-    this.whichPage = splitUrl(2, 1)
+    this.whichPage = matchSplits('page')
     this.$bus.$on('closeCover', data => {
       this.closeCover()
     })
