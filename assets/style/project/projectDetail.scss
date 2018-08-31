@@ -207,7 +207,9 @@
       margin: 0 auto;
       padding: 0 15px;
       .detail {
-        // padding: 28px;
+        img {
+          margin-top: -3px;
+        }
       }
       .introduction {
         background-color: #fff;

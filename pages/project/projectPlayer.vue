@@ -16,9 +16,9 @@
       </div>
     </div>
     <!-- 报告问题 -->
-    <v-report :config="playerForm"></v-report>
+    <v-report :config="configReport"></v-report>
     <!-- 写评价 -->
-    <v-evaluate @closeEvaluate="closeEvaluate" :showEvaluate="showEvaluate" :shoppingForm="shoppingForm" :playerForm="playerForm"></v-evaluate>
+    <v-evaluate @closeEvaluate="closeEvaluate" :showEvaluate="showEvaluate" :playerForm="playerForm"></v-evaluate>
     <!-- 扫码支付 -->
     <v-pay></v-pay>
   </div>
@@ -80,6 +80,11 @@ export default {
       config: {
         type: '1'
       },
+      configReport: {
+        type: 2,
+        curriculumId: '',
+        catalogId: ''
+      },
       playerForm: {
         curriculumId: '',
         catalogId: '',
@@ -98,10 +103,6 @@ export default {
       bought: false,
       seconds: 500000,
       time: '',
-      shoppingForm: {
-        cartid: '',
-        type: 2
-      },
       nextCatalogId: '', //默认播放下一小节id
       interval: '',
       index: 0
@@ -149,6 +150,8 @@ export default {
     },
     // 打开报告问题
     showRpt() {
+      this.configReport.curriculumId = this.playerForm.curriculumId
+      this.configReport.catalogId = this.playerForm.catalogId
       this.$bus.$emit('openReport')
     },
     // 展示评论
@@ -193,13 +196,14 @@ export default {
     this.resize()
     window.addEventListener('resize', this.resize)
     if (this.isAuthenticated) {
-      this.projectForm.ids = matchSplits('id')
+      this.projectForm.ids = matchSplits('kid')
       this.getCurriculumPlayInfo()
     } else {
       this.$router.push(
         '/project/projectdetail?kid=' +
-          window.location.search.split('=')[1] +
-          '&type=1'
+          matchSplits('kid') +
+          '&type=' +
+          matchSplits('type')
       )
       this.$bus.$emit('loginShow', true)
     }

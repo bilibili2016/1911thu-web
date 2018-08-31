@@ -355,7 +355,7 @@ export default {
     },
     // 项目加入购物车
     addShopCart() {
-      this.shoppingForm.cartid = matchSplits('id')
+      this.shoppingForm.cartid = matchSplits('kid')
       projectplayer.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
@@ -379,7 +379,7 @@ export default {
     }
   },
   mounted() {
-    this.projectForm.ids = matchSplits('id')
+    this.projectForm.ids = matchSplits('kid')
     this.$bus.$on('clickCatalog', data => {
       this.handleCourse(data)
     })

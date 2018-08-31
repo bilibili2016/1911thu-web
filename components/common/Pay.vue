@@ -35,7 +35,7 @@ import Vue from 'vue'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import { store as persistStore } from '~/lib/core/store'
 import { home, pay, wepay } from '~/lib/v1_sdk/index'
-import { splitUrl } from '@/lib/util/helper'
+import { matchSplits } from '@/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   props: ['config'],
@@ -59,7 +59,7 @@ export default {
     },
     // 获取去二维码的方法
     getCode() {
-      this.codeForm.ids = splitUrl(0, 1)
+      this.codeForm.ids = matchSplits('kid')
 
       // console.log(this.codeForm.ids)
 

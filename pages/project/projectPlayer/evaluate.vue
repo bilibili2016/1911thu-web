@@ -24,11 +24,11 @@
 
 <script>
 import { auth, projectplayer } from '~/lib/v1_sdk/index'
+import { matchSplits } from '@/lib/util/helper'
 export default {
   props: ['showEvaluate', 'shoppingForm', 'playerForm'],
   data() {
     return {
-      // showEvaluate: false,
       btnData: '',
       reTagBtn: '',
       rateModel: 5,
@@ -90,7 +90,7 @@ export default {
         })
         return false
       }
-      this.addEvaluateForm.ids = this.shoppingForm.cartid
+      this.addEvaluateForm.ids = matchSplits('kid')
       this.addEvaluateForm.curriculumId = this.playerForm.curriculumId
       this.addEvaluateForm.catalogId = this.playerForm.catalogId
       this.addEvaluateForm.evaluateContent = this.word
@@ -111,14 +111,13 @@ export default {
             this.$set(item, 'isCheck', false)
           }
           this.word = ''
-          this.showEvaluate = false
           this.$message({
             showClose: true,
             type: 'success',
             message: response.msg
           })
-          this.closeEvaluate()
         }
+        this.closeEvaluate()
       })
     },
     // 获取评论tag

@@ -15,7 +15,7 @@ export default {
     goDetail() {
       this.$router.push(
         '/project/projectdetail?kid=' +
-          matchSplits('id') +
+          matchSplits('kid') +
           '&type=' +
           matchSplits('type')
       )
