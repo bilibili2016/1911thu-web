@@ -18,6 +18,7 @@ import { conSearch } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { message } from '@/lib/util/helper'
 export default {
+  props: ['word'],
   data() {
     return {
       searchMsg: '',
@@ -26,6 +27,11 @@ export default {
         limits: 5,
         pages: 0
       }
+    }
+  },
+  watch: {
+    word(val, old) {
+      this.searchMsg = val
     }
   },
   methods: {

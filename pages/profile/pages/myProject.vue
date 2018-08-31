@@ -18,11 +18,11 @@
         </el-tab-pane>
         <!-- 我的项目 已完成 -->
         <el-tab-pane label="已完成" name="second" value="2">
-          <v-cardtab :data="readyProjectData" :config="configTwo" :pagemsg="projectPageReady" :noMsg="noMsgSeven"></v-cardtab>
+          <v-cardtab :data="readyProjectData" :config="configSix" :pagemsg="projectPageReady" :noMsg="noMsgSeven"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 已过期 -->
         <el-tab-pane label="已过期" name="third" value="3">
-          <v-cardtab :data="expiredProjectData" :config="configFour" :pagemsg="projectPageExpired" :noMsg="noMsgEight"></v-cardtab>
+          <v-cardtab :data="expiredProjectData" :config="configSeven" :pagemsg="projectPageExpired" :noMsg="noMsgEight"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 我的收藏 -->
         <el-tab-pane label="我的收藏" name="fourth" value="0">
@@ -51,11 +51,11 @@ export default {
     'projectPageStudy',
     'noMsgSix',
     'readyProjectData',
-    'configTwo',
+    'configSix',
     'projectPageReady',
     'noMsgSeven',
     'expiredProjectData',
-    'configFour',
+    'configSeven',
     'projectPageExpired',
     'noMsgEight',
     'collectProjectData',

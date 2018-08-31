@@ -11,7 +11,7 @@
               <i class="el-icon-caret-right"></i>
             </span>
             <span class="fl playImg" v-show="ischeck == bar.id?true:false">
-              <img :src="playing" alt="" ref="videoButton">
+              <img :src="playing" alt="">
             </span>
             <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)</span>
             <span class="barNameHover">{{bar.video_number}}{{bar.title}}({{parseInt(bar.video_time / 60)}}分{{parseInt(bar.video_time % 60)}}秒)</span>

@@ -1,18 +1,20 @@
 <template>
   <div class="catalog">
-    <!-- {{catalogs}} -->
     <!-- 遍历章节 -->
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
       <h4>{{catalog.title}} </h4>
-      <!-- {{privileMsg}} -->
-      <!-- {{privileMsg}}  1{{isAuthenticated}} -->
       <!-- 遍历小节 -->
       <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="handleCatalog(index,catalog)">
         <!-- 小节上 左侧播放图片 项目中的 课程详情不展示-->
-        <span class="fl playIcon" v-if="config.card_type!=='project'">
+        <!-- <span class="fl playIcon" v-if="config.card_type!=='project'">
+          <i class="el-icon-caret-right"></i>
+        </span> -->
+        <span class="fl playIcon" v-show="changeImg.id == bar.id?false:true">
           <i class="el-icon-caret-right"></i>
         </span>
-
+        <span class="fl playImg" v-show="changeImg.id == bar.id?true:false">
+          <img :src="changeImg.img" alt="">
+        </span>
         <p>
           <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{bar.video_time}}分钟)</span>
           <!-- 用户已购买 并且进度大于零 -->
@@ -58,7 +60,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { auth, line } from '~/lib/v1_sdk/index'
 import { splitUrl, message } from '~/lib/util/helper'
 export default {
-  props: ['catalogs', 'privileMsg', 'config'],
+  props: ['catalogs', 'privileMsg', 'config', 'changeImg'],
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },

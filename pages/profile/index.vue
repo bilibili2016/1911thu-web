@@ -19,7 +19,7 @@
         <el-tab-pane class="my-course" name="tab-third">
           <span slot="label" class="tabList">
             <i class="icon-project"></i> 我的项目</span>
-          <v-myproject :allProjectLoad="allProjectLoad" :activeProject="activeProject" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configFour="configFour" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configTwo="configTwo" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
+          <v-myproject :allProjectLoad="allProjectLoad" :activeProject="activeProject" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configSeven="configSeven" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configSix="configSix" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
         </el-tab-pane>
         <!-- 我的订单 -->
         <el-tab-pane class="my-course my-order" name="tab-fourth">
@@ -146,6 +146,16 @@ export default {
         position: 'personal',
         project: true
       },
+      configSix: {
+        card_type: 'profile',
+        card: 'already',
+        project: true
+      },
+      configSeven: {
+        card_type: 'profile',
+        card: 'overtime',
+        project: true
+      },
       noMsgOne: {
         type: 'index',
         text: '抱歉，现在还没有学习过的课程呦~'
@@ -262,7 +272,7 @@ export default {
       },
       customerPagemsg: {
         page: 1,
-        pagesize: 6,
+        pagesize: 12,
         total: 12
       },
       studyProjectData: [],
@@ -342,7 +352,7 @@ export default {
       },
       customerProjectForm: {
         pages: 1,
-        limits: 6
+        limits: 12
       },
       collectionData: [],
       orderDetail: {}, //订单详情信息
@@ -433,8 +443,9 @@ export default {
         for (let item of response.data.curriculumList) {
           item.percent = Number(item.percent)
         }
-        for (var i = 0; i < this._data['myCourseData' + status].length; i++) {
-          this.$set(this._data['myCourseData' + status][i], 'overtime', true)
+        // 为 已过期 的课程添加overtime字段  用于button判断
+        for (var i = 0; i < this._data['myCourseData' + 4].length; i++) {
+          this.$set(this._data['myCourseData' + 4][i], 'overtime', true)
         }
         // this._data['myCourseData' + status].map(item => {
         //   this.$set(item, 'overtime', true)
@@ -478,6 +489,10 @@ export default {
         this._data['myProjectPage' + status].total = response.data.pageCount
         for (let item of response.data.studyProjectList) {
           item.percent = Number(item.percent)
+        }
+        // 为 已过期 的课程添加overtime字段  用于button判断
+        for (var i = 0; i < this._data['myProjectData' + 3].length; i++) {
+          this.$set(this._data['myProjectData' + 3][i], 'overtime', true)
         }
         this.allProjectLoad = false
       })
@@ -662,7 +677,6 @@ export default {
     // 初始化 bus 事件
     initBusEvent() {
       this.$bus.$on('selectProfileIndex', data => {
-        console.log(data, 'eeee')
         this.activeTab = data
       })
       // 头部绑定成功更新

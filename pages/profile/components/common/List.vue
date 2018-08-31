@@ -9,7 +9,7 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <div class="mask-style" @click="selectCid(card,config.project,card.type)">
+            <div class="mask-style" @click="study(card,config.project,card.type)">
               <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
             </div>
             <div class="bgImgs">
@@ -24,7 +24,7 @@
               <!-- 学习中 -->
               <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="study(card,config.project,card.type)">开始学习</el-button>
               <!-- 已过期 -->
-              <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="goShoppingCart(card)">
+              <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="addShopCarts(card,index)">
                 <span>
                   加入购物车
                 </span>
@@ -126,7 +126,6 @@
 
 <script>
 import { profileHome } from '~/lib/v1_sdk/index'
-import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   props: ['config', 'data'],
@@ -149,8 +148,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid']),
-    // 开始学习，继续学习，再次学习
+    // flag为true进入项目详情，false进入课程详情
     study(item, flag, type) {
       if (flag) {
         this.openProjectPlayer(item.id, type)
@@ -158,7 +156,6 @@ export default {
         this.openDetail(item)
       }
     },
-    // 进入详情
     selectCid(item, flag, type) {
       if (flag) {
         this.openProjectDetail(item.id, type)
@@ -194,8 +191,6 @@ export default {
       )
     },
     goToPlay(item) {
-      // persistStore.set('curriculumId', item.id)
-      // persistStore.set('catalogId', item.catalog_id)
       this.$router.push(
         '/course/coursedetail' +
           '?kid=' +
@@ -207,19 +202,13 @@ export default {
       )
       window.open(window.location.origin + '/course/player')
     },
-    // 已过期商品直接加入购物车
-    goShoppingCart(item) {
-      this.kidForm.kids = item.id
-      this.setKid(this.kidForm)
-      this.addShopCarts()
-    },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
-
       window.open(window.location.origin + '/home/teacher/' + this.tidForm.tids)
     },
-    addShopCarts() {
-      this.curriculumcartids.cartid = this.kid
+    // 已过期商品直接加入购物车
+    addShopCarts(item, index) {
+      this.curriculumcartids.cartid = item.id
       profileHome.addShopCart(this.curriculumcartids).then(response => {
         this.$router.push('/shop/shoppingcart')
       })

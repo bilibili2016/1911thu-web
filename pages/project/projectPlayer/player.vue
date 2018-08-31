@@ -8,7 +8,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { projectplayer } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { message } from '@/lib/util/helper'
+import { message, splitUrl } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
 export default {
@@ -173,6 +173,12 @@ export default {
     readyPlay() {
       if (this.autoplay) {
         this.player.play()
+      }
+      // 如果课程购买了 判断有没有观看记录，跳转到指定位置播放
+      if (this.bought && this.playerForm.seek != 0) {
+        console.log(this.playerForm.seek)
+        this.player.seek(this.playerForm.seek)
+        this.playerForm.seek = 0
       }
     },
     // 播放开始--启动计时器
@@ -369,6 +375,7 @@ export default {
     }
   },
   mounted() {
+    this.projectForm.ids = splitUrl(0, 1)
     this.$bus.$on('clickCatalog', data => {
       this.handleCourse(data)
     })
