@@ -8,7 +8,7 @@
 import { coursedetail, players } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { splitUrl, message } from '@/lib/util/helper'
+import { message, matchSplits } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
 export default {
@@ -95,7 +95,7 @@ export default {
     },
     // 课程-获取默认 的课程id 以及小节id
     getdefaultCurriculumCatalog() {
-      this.getdefaultForm.curriculumid = splitUrl(0, 1)
+      this.getdefaultForm.curriculumid = matchSplits('kid')
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(res => {
@@ -234,8 +234,8 @@ export default {
            */
           that.socket.emit(
             'watchRecordingTime',
-            splitUrl(0, 1),
-            splitUrl(1, 1),
+            matchSplits('kid'),
+            matchSplits('bid'),
             playTime,
             '',
             1
