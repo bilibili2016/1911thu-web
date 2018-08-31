@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { message, matchSplits } from '@/lib/util/helper'
+import { message, splitUrl } from '@/lib/util/helper'
 export default {
   props: ['data'],
   data() {
@@ -42,7 +42,7 @@ export default {
     }
   },
   mounted() {
-    if (matchSplits('id')) {
+    if (splitUrl(0, 1)) {
       this.course = false
     }
   }
