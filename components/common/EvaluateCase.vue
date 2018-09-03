@@ -25,7 +25,7 @@
           </el-input>
         </div>
         <div class="submit">
-          <el-button type="primary" @click="addEvaluate">提交</el-button>
+          <el-button :class="{canSubmit:textarea!='' || addEvaluateForm.tag.length!=0}" type="primary" @click="addEvaluate">提交</el-button>
         </div>
       </div>
     </div>
