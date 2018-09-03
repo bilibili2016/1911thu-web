@@ -329,9 +329,7 @@ export default {
     },
     // 课程-获取默认播放信息
     getdefaultCurriculumCatalog() {
-      // this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
       this.getdefaultForm.curriculumid = matchSplits('kid')
-
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {

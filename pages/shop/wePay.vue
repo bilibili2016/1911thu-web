@@ -61,7 +61,7 @@ export default {
       },
       payListForm: {
         orderId: null,
-        attachs: null
+        attachs: null //1普通课程和普通项目订单，2 扫码支付和定制项目订单
       },
       orderDetail: {
         order_sn: null,

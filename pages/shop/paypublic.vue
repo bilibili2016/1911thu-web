@@ -66,7 +66,8 @@ export default {
       },
       payForm: {
         phones: null,
-        orderId: null
+        orderId: null,
+        attachs: null
       },
       payListForm: {
         orderId: null,
@@ -90,11 +91,6 @@ export default {
         this.changeForm.tel === '' ||
         !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.changeForm.tel)
       ) {
-        // this.$message({
-        //   showClose: true,
-        //   type: 'error',
-        //   message: '手机号格式错误！'
-        // })
         this.isAlertMsg = true
         this.alertMsg = '手机号格式错误！'
       } else {
@@ -105,34 +101,32 @@ export default {
     },
     showPayPublic() {
       this.showPay = false
-      return new Promise((resolve, reject) => {
-        paypublic.getPayPublicCode(this.payForm).then(res => {
-          if (res.status === 0) {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: res.msg
-            })
-            this.code = res.data.code
-            this.showPay = true
-            if (this.showTel) {
-              this.showTel = false
-            }
-          } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: res.msg
-            })
+      this.payForm.attachs = matchSplits('attach')
+      paypublic.getPayPublicCode(this.payForm).then(res => {
+        if (res.status === 0) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: res.msg
+          })
+          this.code = res.data.code
+          this.showPay = true
+          if (this.showTel) {
+            this.showTel = false
           }
-        })
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+        }
       })
     },
     // 获取订单id列表
     getPayList() {
       this.payListForm.orderId = matchSplits('orderID')
       this.payListForm.attachs = matchSplits('attach')
-      console.log(this.payListForm)
       paypublic.webPay(this.payListForm).then(response => {
         this.orderDetail = response.data.data.orderDetail
         this.payForm.orderId = response.data.data.orderDetail.id

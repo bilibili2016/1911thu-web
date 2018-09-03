@@ -127,8 +127,9 @@ export default {
     },
     //去支付
     goPay(id) {
-      persistStore.set('cpyid', id)
-      this.$router.push('/shop/' + id)
+      window.open(
+        window.location.origin + '/shop/wepay?order=' + id + '&attach=1'
+      )
     },
     //去购物车
     goShopping(id) {
