@@ -32,6 +32,7 @@
           <!-- <v-evaluatedialog :evaluateLoading="evaluateLoading" :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog> -->
           <!-- 用户评论 列表-->
           <!-- <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate> -->
+
         </div>
       </div>
     </div>
