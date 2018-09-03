@@ -1528,3 +1528,16 @@ input::-webkit-input-safebox-button {
     margin-left: 0px !important;
   }
 }
+
+.courseDetail .evaluate-tag {
+  .personal {
+    .area {
+      .el-textarea {
+        .el-textarea__inner {
+          border-radius: 4px !important;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

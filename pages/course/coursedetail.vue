@@ -29,9 +29,9 @@
           <!-- 课程评价-->
           <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
           <!-- 用户评价  查看更多 -->
-          <v-evaluatedialog :evaluateLoading="evaluateLoading" :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
+          <!-- <v-evaluatedialog :evaluateLoading="evaluateLoading" :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog> -->
           <!-- 用户评论 列表-->
-          <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
+          <!-- <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate> -->
         </div>
       </div>
     </div>
