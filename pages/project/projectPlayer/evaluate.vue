@@ -6,13 +6,16 @@
       </h4>
       <h5>请问该课程对您有帮忙吗？快来评个分吧！</h5>
       <h6>项目评分：
-
         <el-rate v-model="rateModel" @change="changeRate"></el-rate>
-
       </h6>
-      <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="['detail-btngrounp',{borderColor: item.isCheck}]">
-        {{item.value}}
+      <div class="bthgrop">
+        <!-- <span> -->
+        <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="['detail-btngrounp',{borderColor: item.isCheck}]">
+          {{item.value}}
+        </div>
+        <!-- </span> -->
       </div>
+
       <el-input type="textarea" resize="none" :rows="4" placeholder="其它想说的" v-model="word">
       </el-input>
       <div class="commitBug">

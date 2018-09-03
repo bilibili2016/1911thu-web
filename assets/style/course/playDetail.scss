@@ -221,18 +221,18 @@
     .teacher {
       width: 340px;
       margin: 42px 0 20px;
-      padding-bottom: 20px;
+      padding-bottom: 40px;
       background-color: #fff;
-      border-radius: 6px;
-      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+      background-color: #f7f9fb;
+      // box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
       h4 {
         padding-left: 25px;
         height: 58px;
         line-height: 58px;
         color: #222;
-        font-size: 16px;
-        font-weight: 700;
-        border-bottom: 1px solid #e8d6f7;
+        font-size: 18px;
+        // font-weight: 700;
+        border-bottom: 1px solid #dddddd;
       }
       .personal {
         text-align: center;
@@ -242,6 +242,7 @@
           margin: 20px;
           border-radius: 50%;
           cursor: pointer;
+          margin-left: 25px;
         }
         div.fl {
           width: 210px;
@@ -260,16 +261,17 @@
         }
         h6 {
           margin-top: 10px;
-          font-size: 14px;
+          font-size: 12px;
           line-height: 20px;
           overflow: hidden;
           height: 40px;
-          color: #666;
+          color: #222;
         }
         p {
           clear: both;
           font-size: 14px;
           padding: 0 20px;
+          padding-left: 25px;
           text-align: left;
           line-height: 26px;
           overflow: hidden;
@@ -287,11 +289,11 @@
       margin-bottom: 50px;
       h4 {
         padding-left: 25px;
-        height: 58px;
-        line-height: 58px;
+        height: 60px;
+        line-height: 60px;
         color: #222;
-        font-size: 16px;
-        border-bottom: 1px solid #e8d6f7;
+        font-size: 18px;
+        border-bottom: 1px solid #ddd;
         span {
           float: right;
           margin-right: 23px;

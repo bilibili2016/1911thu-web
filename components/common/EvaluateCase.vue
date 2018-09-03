@@ -6,18 +6,19 @@
         <i v-show="isClose" class="el-icon-close fr" @click="closeEvaluate"></i>
       </h4>
       <div class="personal">
-        <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div>
-        <span class="rate">课程评分:</span>
+        <!-- <div class="title">请问该课程对您有帮忙吗？快来评个分吧！</div> -->
+        <span class="rate">
+          <span style="color:#F45E61">*</span>课程评分:
+        </span>
         <span class="ratem">
           <el-rate v-model="rateModel" @change="changeRate"></el-rate>
         </span>
         <div class="bthgrop">
-          <span>
-            <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
-              {{item.value}}
-            </div>
-            <input type="text">
-          </span>
+          <!-- <span> -->
+          <div v-for="(item,index) in btnData" :key="index" @click="getBtnContent(item,index)" :class="{borderColor: item.isCheck}" class="detail-btngrounp">
+            {{item.value}}
+          </div>
+          <!-- </span> -->
         </div>
         <div class="area">
           <el-input type="textarea" resize="none" :rows="3" placeholder="其它想说的(最长不超过100字)" v-model="textarea" maxlength="100">
