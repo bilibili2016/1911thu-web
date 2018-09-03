@@ -171,7 +171,7 @@ export default {
     },
     // 兑换码 --- 打开头部绑定课程
     handleAddEcg() {
-      if (this.token) {
+      if (persistStore.get('token')) {
         this.bindForm.isBind = true
       } else {
         this.$alert(

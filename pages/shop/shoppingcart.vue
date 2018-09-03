@@ -533,101 +533,105 @@ export default {
       this.projectAddArray.projectcartid = []
 
       shopcart.shopCartList().then(response => {
-        let body = response.data.curriculumCartList.map(item => {
-          // this.addArray.curriculumcartid.push(item.id)      //默认不选中
-          // this.arraySum =
-          //   (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-          //   10
+        if (response.status === 0) {
+          let body = response.data.curriculumCartList.map(item => {
+            // this.addArray.curriculumcartid.push(item.id)      //默认不选中
+            // this.arraySum =
+            //   (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+            //   10
 
-          this.removeArray.curriculumcartid.push(item.id)
+            this.removeArray.curriculumcartid.push(item.id)
 
-          if (item.is_checked === 0) {
-            //未选中
-            return Object.assign({}, item, {
-              checkMsg: false
-            })
-          } else if (item.is_checked === 1) {
-            //选中
-            this.addArray.curriculumcartid.push(item.id)
+            if (item.is_checked === 0) {
+              //未选中
+              return Object.assign({}, item, {
+                checkMsg: false
+              })
+            } else if (item.is_checked === 1) {
+              //选中
+              this.addArray.curriculumcartid.push(item.id)
 
-            this.arraySum =
-              (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
-              10
+              this.arraySum =
+                (Number(this.arraySum) * 10 + Number(item.present_price) * 10) /
+                10
 
-            return Object.assign({}, item, {
-              checkMsg: true
-            })
+              return Object.assign({}, item, {
+                checkMsg: true
+              })
+            }
+          })
+
+          this.courseList = body
+          // this.selectAll = true
+          this.loding = false
+
+          this.numForm.number = response.data.number
+          let count =
+            Number(response.data.curriculumCartList.length) +
+            Number(response.data.projectCartList.length)
+
+          this.setProductsNum({ pn: count })
+
+          // 判断最初获取课程长度是否相等
+          if (this.addArray.curriculumcartid.length == this.courseList.length) {
+            // console.log('1')
+            this.selectAllCourse = true
+            this.isRest = true
+          } else {
+            // console.log('2')
+            this.selectAllCourse = false
+            this.isRest = false
           }
-        })
 
-        this.courseList = body
-        // this.selectAll = true
-        this.loding = false
+          // 获取项目列表
+          let projectListData = response.data.projectCartList.map(item => {
+            this.removeProjectArray.projectcartid.push(item.id)
+            if (item.is_checked === 0) {
+              return Object.assign({}, item, {
+                checkMsg: false
+              })
+            } else if (item.is_checked === 1) {
+              this.projectAddArray.projectcartid.push(item.id)
+              // 计算 项目价格
+              this.projectArraySum =
+                (Number(this.projectArraySum) * 10 +
+                  Number(item.present_price) * 10) /
+                10
 
-        this.numForm.number = response.data.number
-        let count =
-          Number(response.data.curriculumCartList.length) +
-          Number(response.data.projectCartList.length)
+              return Object.assign({}, item, {
+                checkMsg: true
+              })
+            }
+          })
+          // 将处理后数据给了projectList
 
-        this.setProductsNum({ pn: count })
+          this.projectList = projectListData
 
-        // 判断最初获取课程长度是否相等
-        if (this.addArray.curriculumcartid.length == this.courseList.length) {
-          // console.log('1')
-          this.selectAllCourse = true
-          this.isRest = true
-        } else {
-          // console.log('2')
-          this.selectAllCourse = false
-          this.isRest = false
-        }
-
-        // 获取项目列表
-        let projectListData = response.data.projectCartList.map(item => {
-          this.removeProjectArray.projectcartid.push(item.id)
-          if (item.is_checked === 0) {
-            return Object.assign({}, item, {
-              checkMsg: false
-            })
-          } else if (item.is_checked === 1) {
-            this.projectAddArray.projectcartid.push(item.id)
-            // 计算 项目价格
-            this.projectArraySum =
-              (Number(this.projectArraySum) * 10 +
-                Number(item.present_price) * 10) /
-              10
-
-            return Object.assign({}, item, {
-              checkMsg: true
-            })
+          // 判断课程长度是否相等
+          if (
+            this.projectAddArray.projectcartid.length == this.projectList.length
+          ) {
+            this.selectAllProject = true
+            this.isRest = true
+          } else {
+            this.selectAllProject = false
+            this.isRest = false
           }
-        })
-        // 将处理后数据给了projectList
+          if (this.selectAllCourse === true && this.selectAllProject === true) {
+            this.selectAll = true
+          }
 
-        this.projectList = projectListData
-
-        // 判断课程长度是否相等
-        if (
-          this.projectAddArray.projectcartid.length == this.projectList.length
-        ) {
-          this.selectAllProject = true
-          this.isRest = true
+          // 判断课程和项目都没有时候显示购物车为空 img
+          if (this.courseList.length == 0 && this.projectList.length == 0) {
+            this.isNoMsg = true
+            // this.selectAll = false
+          }
+          // 获取下架课程、项目列表
+          this.loseEfficacyc = response.data.downCurriculumCartList
+          this.loseEfficacyp = response.data.downProjectCartList
         } else {
-          this.selectAllProject = false
-          this.isRest = false
+          message(this, 'warning', response.msg)
         }
-        if (this.selectAllCourse === true && this.selectAllProject === true) {
-          this.selectAll = true
-        }
-
-        // 判断课程和项目都没有时候显示购物车为空 img
-        if (this.courseList.length == 0 && this.projectList.length == 0) {
-          this.isNoMsg = true
-          // this.selectAll = false
-        }
-        // 获取下架课程、项目列表
-        this.loseEfficacyc = response.data.downCurriculumCartList
-        this.loseEfficacyp = response.data.downProjectCartList
       })
     },
     // 点击选中 取消课程的复选框   ----课程 单选
@@ -1161,13 +1165,6 @@ export default {
         document.getElementById('tableFooter').offsetTop +
         this.headerHeight +
         10
-
-      this.tableFooteroffsetTop =
-        document.getElementById('tableFooter').offsetTop +
-        this.headerHeight +
-        10
-      // console.log(this.tableFooteroffsetTop)
-
       if (this.tableFooteroffsetTop > this.windowHeight) {
         this.isFixed = true
       } else {
