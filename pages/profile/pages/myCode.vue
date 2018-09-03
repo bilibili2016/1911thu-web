@@ -29,8 +29,8 @@ export default {
     'v-binding': Bind
   },
   methods: {
-    handleCourseCode() {
-      this.$emit('handleCourseCode')
+    handleCourseCode(item) {
+      this.$emit('handleCourseCode', item)
     },
     searchOrder(data) {
       this.$emit('searchCodeList', data)

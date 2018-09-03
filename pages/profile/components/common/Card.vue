@@ -149,7 +149,7 @@ export default {
     goToPlay(item) {
       let projectLink = {
         base: '/project/projectPlayer',
-        id: item.id
+        kid: item.id
       }
       open(projectLink)
       // window.open(

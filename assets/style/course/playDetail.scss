@@ -340,6 +340,14 @@
         .fl {
           margin-top: 7px;
         }
+        .title {
+          margin: 3px 0px 8px;
+          width: 155px;
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
         .time {
           color: #bbb;
         }
