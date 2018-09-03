@@ -22,9 +22,9 @@
     <div class="detail clearfix">
       <div class="some">
         <div>
-          <h5>课时</h5>
+          <h5>学时</h5>
           <p>
-            <span>{{projectDetail.study_time}}</span> 课时</p>
+            <span>{{projectDetail.study_time}}</span> 学时</p>
         </div>
         <div>
           <h6>学习人数</h6>
