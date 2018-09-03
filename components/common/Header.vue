@@ -132,6 +132,13 @@ export default {
       if (data === '/other/pages/search') {
         let ID = Math.random()
         this.$router.push({ path: data, query: { ID } })
+      } else if (data === '/shop/shoppingcart') {
+        if (persistStore.get('token')) {
+          this.$router.push(data)
+        } else {
+          this.handleSignOut()
+          this.$bus.$emit('loginShow', true)
+        }
       } else {
         this.$router.push(data)
       }

@@ -356,6 +356,8 @@ export default {
     if (this.isAuthenticated) {
       // 获取购车列表
       this.shopCartList()
+    } else {
+      console.log(2222)
     }
     // this.$bus.$emit('bannerShow', false)
     // this.$bus.$on('handleSelectChange', data => {
