@@ -343,13 +343,6 @@ export default {
           )
         })
     },
-    // 分享 默认设置
-    // shareDefault() {
-    //   var $config = {
-    //     url: 'http://www.11911edu.com/'
-    //   }
-    //   socialShare('.social-share', $config)
-    // },
     // 初始化默认data
     initData() {
       this.kidForm.ids = matchSplits('kid')

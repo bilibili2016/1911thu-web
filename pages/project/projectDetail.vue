@@ -22,7 +22,7 @@
           <v-offlinedesc :project="project" :data="projectDetail"></v-offlinedesc>
         </el-tab-pane>
         <el-tab-pane label="用户评价" name="fifth" v-if="project.types === '1'">
-          <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo" v-loading="evaluateDataLoad"></v-proevaluate>
+          <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo" v-loading="evaluateDataLoad" :pagemsg="pagemsg" @handleCurrentChange="handleCurrentChange"></v-proevaluate>
         </el-tab-pane>
         <el-tab-pane label="常见问题" name="fourth" v-if="project.types === '1'">
           <v-proproblems v-loading="problemLoad"></v-proproblems>
@@ -74,11 +74,15 @@ export default {
         types: 1
       },
       projectDetail: {},
-
+      pagemsg: {
+        page: 1,
+        pagesize: 3,
+        total: 5
+      },
       evaluateForm: {
-        pages: '',
-        limits: '',
-        ids: 2,
+        pages: 1,
+        limits: 3,
+        ids: '',
         types: 2,
         isRecommend: 2
       },
@@ -94,19 +98,37 @@ export default {
     // 获取项目详情
     getProjectInfo() {
       projectdetail.getProjectInfo(this.project).then(res => {
-        this.projectDetail = res.data.curriculumProjectDetail
-        this.projectDetail.score = Number(this.projectDetail.score)
-        this.projectDetailLoad = false
-        this.inlineLoad = false
-        if (res.data.curriculumProjectDetail.is_Collection) {
-          this.collectMsg.isCollect = 1
+        if (res.status == '0') {
+          this.projectDetail = res.data.curriculumProjectDetail
+          this.projectDetail.score = Number(this.projectDetail.score)
+          this.projectDetailLoad = false
+          this.inlineLoad = false
+          if (res.data.curriculumProjectDetail.is_Collection) {
+            this.collectMsg.isCollect = 1
+          } else {
+            this.collectMsg.isCollect = 0
+          }
         } else {
-          this.collectMsg.isCollect = 0
+          message(this, 'error', res.msg)
         }
       })
     },
     // 获取项目评论
     getEvaluateList() {
+      this.evaluateForm.ids = matchSplits('kid')
+      projectdetail.getEvaluateList(this.evaluateForm).then(res => {
+        this.evaluateData = res.data.evaluateList
+        this.evaluateInfo = res.data.totalEvaluateInfo
+        this.evaluateDataLoad = false
+        this.pagemsg.total = res.data.pageCount
+      })
+    },
+    //评论分页
+    handleCurrentChange(val) {
+      this.pagemsg.page = val
+      this.evaluateForm.pages = val
+      this.evaluateForm.limits = 3
+      this.evaluateForm.ids = matchSplits('kid')
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
         this.evaluateData = res.data.evaluateList
         this.evaluateInfo = res.data.totalEvaluateInfo

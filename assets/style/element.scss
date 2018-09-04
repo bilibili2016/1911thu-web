@@ -1540,3 +1540,8 @@ input::-webkit-input-safebox-button {
     }
   }
 }
+.my-order {
+  .el-tabs__content {
+    overflow: inherit !important;
+  }
+}

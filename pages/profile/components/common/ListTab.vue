@@ -2,7 +2,7 @@
   <div>
     <v-datapick :orderNum="order"></v-datapick>
     <div :class="{ minheight : allOrderLoadAll}" v-loading="allOrderLoadAll">
-      <v-order v-if="data && data.length>0" :data="data" :config="orderType" @goOrderDetail="getOrderDetail"></v-order>
+      <v-order v-if="data && data.length>0" :data="data" :config="orderType" @goOrderDetail="getOrderDetail" @handleUpdate="handleUpdate"></v-order>
     </div>
     <div class="pagination" v-if="pagemsg.total>19">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="pageChange"></el-pagination>
@@ -28,7 +28,10 @@ export default {
     pageChange(val) {
       this.$emit('pageChange', val)
     },
-    getOrderDetail() {}
+    getOrderDetail() {},
+    handleUpdate() {
+      this.$emit('handleUpdate')
+    }
   }
 }
 </script>

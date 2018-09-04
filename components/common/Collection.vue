@@ -5,14 +5,6 @@
         <i class="el-icon-star-on"></i>
         <span>收藏</span>
       </span>
-      <!-- 分享暂时注释 -->
-      <!-- <span>
-                <i class="el-icon-share"></i>
-                <span> 分享 </span>
-                <div class="shareIcons">
-                  <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
-                </div>
-              </span> -->
     </div>
   </div>
 </template>
