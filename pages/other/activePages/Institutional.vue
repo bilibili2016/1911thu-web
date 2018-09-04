@@ -164,6 +164,7 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 import { auth, institutional } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
@@ -523,7 +524,11 @@ export default {
     },
     //跳转到自定制项目
     goCustomerProject() {
-      open(this.customerProject)
+      if (this.isAuthenticated && persistStore.get('token')) {
+        open(this.customerProject)
+      } else {
+        this.$bus.$emit('loginShow')
+      }
     }
   },
   mounted() {
