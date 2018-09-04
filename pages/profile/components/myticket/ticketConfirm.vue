@@ -67,6 +67,7 @@ export default {
           this.$emit('chengeItem')
           this.$emit('getUnTicketData')
           this.confirmInvoice = false
+          this.$bus.$emit('historyOrderDataChange', 1)
         } else {
           this.$message({
             showClose: true,

@@ -94,14 +94,18 @@ export default {
     // 获取项目详情
     getProjectInfo() {
       projectdetail.getProjectInfo(this.project).then(res => {
-        this.projectDetail = res.data.curriculumProjectDetail
-        this.projectDetail.score = Number(this.projectDetail.score)
-        this.projectDetailLoad = false
-        this.inlineLoad = false
-        if (res.data.curriculumProjectDetail.is_Collection) {
-          this.collectMsg.isCollect = 1
+        if (res.status == '0') {
+          this.projectDetail = res.data.curriculumProjectDetail
+          this.projectDetail.score = Number(this.projectDetail.score)
+          this.projectDetailLoad = false
+          this.inlineLoad = false
+          if (res.data.curriculumProjectDetail.is_Collection) {
+            this.collectMsg.isCollect = 1
+          } else {
+            this.collectMsg.isCollect = 0
+          }
         } else {
-          this.collectMsg.isCollect = 0
+          message(this, 'error', res.msg)
         }
       })
     },
