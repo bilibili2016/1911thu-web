@@ -266,7 +266,6 @@ export default {
       this.pagemsg.page = val
       this.evaluateListForm.pages = val
       this.evaluateListForm.limits = 3
-      // this.evaluateListForm.ids = persistStore.get('curriculumId')
       this.evaluateListForm.ids = matchSplits('kid')
       this.evaluateLoading = true
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
@@ -274,7 +273,7 @@ export default {
         this.evaluateLoading = false
         this.pagemsg.total = response.data.pageCount
         this.commentator = response.data.evaluateList
-        this.activeName = 'third'
+        window.scrollTo(0, 436)
       })
     },
     // 评论-获取评论列表
