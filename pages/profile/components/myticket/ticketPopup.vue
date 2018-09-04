@@ -546,7 +546,12 @@ export default {
         })
         return false
       }
+<<<<<<< HEAD
       if (this.zzTicketForm.province === '') {
+=======
+
+      if (Trim(this.zzTicketForm.province) === '') {
+>>>>>>> origin/liyr
         this.$message({
           showClose: true,
           type: 'error',
