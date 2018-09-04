@@ -17,13 +17,6 @@
           </div>
         </span>
         <span class="fl problem" @click="showRpt">报告问题</span>
-        <!-- <span class="fr share" style="position:reletive">
-          <i class="el-icon-share "></i>分享
-          <span class="shareIcond">
-            <span class="social-share" data-sites="weibo,qq,wechat"></span>
-          </span>
-
-        </span> -->
 
         <span class="fl elt" @click="showElt" v-if="this.iseve === 0">
           <i class="el-icon-edit"></i>课程评价
@@ -715,12 +708,6 @@ export default {
   mounted() {
     this.videoState = document.getElementById('movd')
     this.resize()
-    // 分享暂时注释
-    // var $config = {
-    //   url: 'http://www.1911edu.com/'
-    // }
-
-    // socialShare('.social-share', $config)
     window.addEventListener('resize', this.resize)
 
     this.getPlayerInfo()

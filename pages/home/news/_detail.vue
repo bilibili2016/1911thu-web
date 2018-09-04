@@ -7,13 +7,6 @@
     <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
     <!-- 新闻内容 -->
     <div class="detail">
-      <!-- 分享暂时注释 -->
-      <!-- <div class="topbar">
-        <span>分享：</span>
-        <div class="shareIcons">
-          <div class="social-share" data-sites="weibo,qq,wechat" style=""></div>
-        </div>
-      </div> -->
       <div class="newsContent" v-loading='loading'>
         <h3>{{newsDetail.title}}</h3>
         <p class="time">{{newsDetail.create_time}}</p>
@@ -101,11 +94,6 @@ export default {
     }
   },
   mounted() {
-    // 分享暂时注释
-    // var $config = {
-    //   url: 'http://edu.1911thu.com/news/' + this.nid
-    // }
-    // socialShare('.social-share', $config)
     let nid = window.location.pathname.split('/')[3]
     this.getNewInfoDetail(nid)
   }

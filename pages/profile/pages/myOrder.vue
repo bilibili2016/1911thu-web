@@ -20,7 +20,7 @@
           <span class="payCut" slot="label">未完成
             <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
           </span>
-          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange"></v-listtab>
+          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange" @handleUpdate="handleUpdate"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderThird">
           <span class="payOk" slot="label">已完成
@@ -119,6 +119,9 @@ export default {
     },
     pageChange(val) {
       this.$emit('pageChange', val)
+    },
+    handleUpdate() {
+      this.$emit('handleUpdate', 1, 1)
     }
   }
 }

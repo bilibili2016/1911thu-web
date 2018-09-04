@@ -147,11 +147,17 @@
       line-height: 40px;
     }
     .num {
+      .divClick {
+        width: 240px;
+      }
     }
     .style {
       height: 40px;
       line-height: 40px;
       .fr.selectFr {
+        .divClick {
+          width: 140px;
+        }
         .el-input {
           width: 140px;
           margin-left: 20px;

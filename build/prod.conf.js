@@ -21,11 +21,6 @@ config.sentry = {
     rel: 'stylesheet',
     href:
       'https://g.alicdn.com/de/prismplayer/2.7.2/skins/default/aliplayer-min.css'
-  },
-  {
-    rel: 'stylesheet',
-    href:
-      'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css'
   }
 ]),
   (config.head.script = [
@@ -44,13 +39,8 @@ config.sentry = {
     {
       src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
       async: true
-    },
-    {
-      src:
-        'https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js',
-      async: true
     }
   ]),
-  (config.render = { resourceHints: false }) // { src: 'http://pcgdozq49.bkt.clouddn.com/social-share.min.js', async: true }
+  (config.render = { resourceHints: false })
 
 module.exports = config
