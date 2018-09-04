@@ -500,16 +500,18 @@ export default {
     // 验证手机号是否已经绑定了微信
     verifyRgTelWX() {
       if (this.bindTelData.seconds === 30) {
-        return new Promise((resolve, reject) => {
-          auth.verifywechat(this.bindTelData).then(response => {
-            if (response.status != 0) {
-              message(this, 'error', response.msg)
-              this.bindTelData.captchaDisable = true
-            } else {
-              this.bindTelData.captchaDisable = false
-              this.handleGetCode(this.bindTelData)
-            }
-          })
+        if (!/^[1][3,4,5,6,7,8,9][0-9]{9}$/.test(this.bindTelData.phones)) {
+          message(this, 'error', '请输入正确的手机号！')
+          return false
+        }
+        auth.verifywechat(this.bindTelData).then(response => {
+          if (response.status != 0) {
+            message(this, 'error', response.msg)
+            this.bindTelData.captchaDisable = true
+          } else {
+            this.bindTelData.captchaDisable = false
+            this.handleGetCode(this.bindTelData)
+          }
         })
       }
     },

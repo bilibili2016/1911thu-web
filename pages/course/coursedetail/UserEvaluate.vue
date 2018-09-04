@@ -1,7 +1,7 @@
 <template>
   <div class="evaluate " v-loading="loadEvaluate ">
     <!-- pageCount 评论条数 -->
-    <div v-loading="loadMsg">
+    <div v-loading="loadMsg">{{loadMsg}}
       <div class="score clearfix">
         <span class="fl">{{totalEvaluateInfo.totalEvaluate}}人评价
           <i>好评度{{totalEvaluateInfo.evaluatePercent}}%</i>
