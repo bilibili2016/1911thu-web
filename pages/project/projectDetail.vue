@@ -125,14 +125,10 @@ export default {
     },
     //评论分页
     handleCurrentChange(val) {
-      console.log(val)
-
       this.pagemsg.page = val
       this.evaluateForm.pages = val
       this.evaluateForm.limits = 3
       this.evaluateForm.ids = matchSplits('kid')
-      console.log(this.evaluateForm)
-
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
         this.evaluateData = res.data.evaluateList
         this.evaluateInfo = res.data.totalEvaluateInfo
