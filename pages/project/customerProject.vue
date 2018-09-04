@@ -26,7 +26,7 @@
       <div class="con-item num clearfix">
         <div class="fl">培训人数：</div>
         <div class="fr selectFr">
-          <div @click.stop="handleNumSelect">
+          <div class="divClick" @click.stop="handleNumSelect">
             <el-input placeholder="请选择培训人数" v-model="projectForm.trainNum" readonly="true"></el-input>
             <span class="pull-down">
               <i class="el-icon-caret-bottom"></i>
@@ -50,9 +50,11 @@
       <div class="con-item style day clearfix" v-if="projectForm.styleRadio==='2'">
         <div class="fl"></div>
         <div class="fr selectFr">
-          <div @click.stop="handleDaySelect" class="select-con">
+          <div class="select-con ">
             <span>线下培训天数</span>
-            <el-input placeholder="请选择天数" v-model="projectForm.trainDay" readonly="true"></el-input>
+            <span @click.stop="handleDaySelect">
+              <el-input placeholder="请选择天数" v-model="projectForm.trainDay" readonly="true"></el-input>
+            </span>
             <span class="pull-down">
               <i class="el-icon-caret-bottom"></i>
             </span>
@@ -189,7 +191,7 @@
       </div>
       <div class="btns ">
         <span class="btn save active " @click="saveProject(1) ">保存</span>
-        <span class="btn buy " @click="buyProject(2)">立即购买</span>
+        <span class="btn buy " @click="saveProject(2)">立即购买</span>
       </div>
     </div>
   </div>
@@ -204,6 +206,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      isClick: false,
       searchInput: '',
       isShowNumSelect: false,
       isShowDaySelect: false,
@@ -320,17 +323,16 @@ export default {
         this.searchCourseData.push(item)
       })
     },
-    //立即购买
-    buyProject(type) {
-      this.saveProject(type)
-    },
     //保存
     saveProject(type) {
+      if (this.isClick) {
+        return false
+      }
+      this.isClick = true
       this.projectForm.checkedCourse = []
       this.checkedCourseData.forEach((item, index) => {
         this.projectForm.checkedCourse.push(item.id)
       })
-
       try {
         if (Trim(this.projectForm.name) === '') throw '请填写项目名称'
         if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
@@ -361,8 +363,8 @@ export default {
         message(this, 'error', err)
         return false
       }
-
       customerProject.createProject(this.projectForm).then(response => {
+        this.isClick = false
         if (response.status == 0) {
           if (this.projectForm.type === '1') {
             message(this, 'success', '创建成功')
