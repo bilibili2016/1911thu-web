@@ -78,6 +78,9 @@
             padding-left: 10px;
             line-height: 40px;
             border-bottom: 1px solid #ddd;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
             cursor: pointer;
             &:hover {
               background-color: #ededed;
@@ -223,6 +226,10 @@
               display: inline-block;
               height: 40px;
               width: 100%;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              padding-right: 30px;
             }
             .item-checkbox-label:after {
               position: absolute;
