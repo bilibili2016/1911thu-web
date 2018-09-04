@@ -81,17 +81,6 @@ export default {
     handleChoiceCourse() {
       // console.log(this.urlLink)
       open(this.urlLink)
-      // window.open(
-      //   window.location.origin +
-      //     '/course/category' +
-      //     '?cid=' +
-      //     '0' +
-      //     '&cp=' +
-      //     '0' +
-      //     '&xid=1' +
-      //     '&pids=' +
-      //     '0'
-      // )
     },
     // 点击查看订单
     handleLinkProfile(item) {
