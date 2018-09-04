@@ -546,7 +546,8 @@ export default {
         })
         return false
       }
-      if (Trim(this.ticketForm.province) === '') {
+
+      if (Trim(this.zzTicketForm.province) === '') {
         this.$message({
           showClose: true,
           type: 'error',

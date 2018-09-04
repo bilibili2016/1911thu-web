@@ -5,7 +5,7 @@
       <div class="con-item name clearfix">
         <div class="fl">项目名称：</div>
         <div class="fr">
-          <el-input v-model.trim="projectForm.name"></el-input>
+          <el-input v-model.trim="projectForm.name" maxlength="30"></el-input>
           <span class="input-inner">不超过30字</span>
         </div>
       </div>
