@@ -41,7 +41,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { payResult } from '@/lib/v1_sdk/index'
-import { banBackSpace, matchSplits } from '@/lib/util/helper'
+import { banBackSpace, matchSplits, open } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -65,6 +65,13 @@ export default {
         cp: 0,
         xid: 1,
         pids: 0
+      },
+      coursedetail: {
+        base: '/course/category',
+        cid: 0,
+        cp: 0,
+        xid: 0,
+        pids: 0
       }
     }
   },
@@ -72,18 +79,8 @@ export default {
     ...mapActions('auth', ['setGid']),
     // 继续选课
     handleChoiceCourse() {
+      // console.log(this.urlLink)
       open(this.urlLink)
-      // window.open(
-      //   window.location.origin +
-      //     '/course/category' +
-      //     '?cid=' +
-      //     '0' +
-      //     '&cp=' +
-      //     '0' +
-      //     '&xid=1' +
-      //     '&pids=' +
-      //     '0'
-      // )
     },
     // 点击查看订单
     handleLinkProfile(item) {
@@ -124,6 +121,7 @@ export default {
               this.seconds = 0
               clearInterval(this.interval)
               this.goLink(this.links)
+              // open(this.coursedetail)
             } else {
               this.seconds--
             }

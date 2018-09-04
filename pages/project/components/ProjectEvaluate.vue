@@ -21,7 +21,7 @@
             </div>
             <el-rate disabled class="rate fr" v-model="evl.score"></el-rate>
           </div>
-          <p class="evlContent">{{evl.evaluate_content}}</p>
+          <p class="evlContent">{{evl.tags}}，{{evl.evaluate_content}}</p>
         </div>
       </div>
       <div class="noData" v-else>
