@@ -353,13 +353,13 @@ export default {
         account: '',
         tel: '',
         name: '',
-        province: null,
-        province_name: null,
-        city: null,
-        city_name: null,
-        area: null,
-        area_name: null,
-        address: null,
+        province: '',
+        province_name: '',
+        city: '',
+        city_name: '',
+        area: '',
+        area_name: '',
+        address: '',
         others: '',
         radio: 1,
         isRadio: true,
@@ -546,7 +546,7 @@ export default {
         })
         return false
       }
-      if (Trim(this.ticketForm.province) === '') {
+      if (this.zzTicketForm.province === '') {
         this.$message({
           showClose: true,
           type: 'error',
