@@ -1,7 +1,12 @@
 <template>
     <div class="offlineDesc">
-        <div class="time">
-            5天线下课程，共40学时
+        <!-- 普通项目：暂时用默认的；自定义项目直接用字段 -->
+        <!-- 线下课程介绍暂时是固定的  普通项目的线下课程介绍后台还没做 -->
+        <div class="time" v-if="project.types==='1'">
+            3天线下课程，共24学时
+        </div>
+        <div class="time" v-else>
+            {{data.offline_days}}天线下课程，共{{data.offline_study_time}}学时
         </div>
         <div class="con">
             <div class="teach-info">
@@ -10,7 +15,6 @@
                         <div class="down">
                             <div class="up"></div>
                         </div>
-
                     </div>
                     <div class="right">
                         <p class="title-con">
@@ -75,6 +79,8 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: ['project', 'data']
+}
 </script>
 

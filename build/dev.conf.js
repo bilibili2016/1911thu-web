@@ -31,11 +31,6 @@ config.analyze = {
       async: true
     },
     {
-      src:
-        'https://player.alicdn.com/aliplayer/presentation/js/aliplayercomponents.min.js',
-      async: true
-    },
-    {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
     },

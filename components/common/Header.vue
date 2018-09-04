@@ -239,6 +239,10 @@ export default {
           //兑换码内只有项目 +课程
           this.skip = 'tab-first'
           break
+        case '4':
+          //兑换码内只有自定义项目
+          this.skip = 'tab-third'
+          break
       }
     },
     // 兑换码 -- 头部绑定课程
@@ -249,10 +253,11 @@ export default {
           this.invitationCodeType(res.data.invitation_code_type)
           this.bindForm.courseId = ''
           this.bindForm.isBind = false
-          this.handleLinkProfile(this.skip)
           if (window.location.pathname === '/profile') {
             this.$bus.$emit('studyCourse')
             // this.$bus.$emit('studyProject')
+          } else {
+            this.handleLinkProfile(this.skip)
           }
         } else if (res.status === '100100') {
           this.bindForm.showErr = true

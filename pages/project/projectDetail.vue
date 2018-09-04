@@ -18,8 +18,8 @@
           <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad" :projectId="project.projectId"></v-procourse>
         </el-tab-pane>
         <!-- 定制项目并且项目类型为混合模式显示 -->
-        <el-tab-pane label="线下课程说明" name="third" v-if="project.types === '2' &&projectDetail.study_type==='2' ">
-          <v-offlinedesc></v-offlinedesc>
+        <el-tab-pane label="线下课程说明" name="third" v-if="projectDetail.study_type==='2' ">
+          <v-offlinedesc :project="project" :data="projectDetail"></v-offlinedesc>
         </el-tab-pane>
         <el-tab-pane label="用户评价" name="fifth" v-if="project.types === '1'">
           <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo" v-loading="evaluateDataLoad"></v-proevaluate>
