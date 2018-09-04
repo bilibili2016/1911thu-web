@@ -31,7 +31,7 @@
         <el-tab-pane name="orderFour">
           <span class="payOff" slot="label">已关闭
           </span>
-          <v-listtab :order="orderThree" :data="invalidOrderData" :orderType="orderType" :pagemsg="pagemsg7" :noMsg="noMsgTen"></v-listtab>
+          <v-listtab :order="orderThree" :data="invalidOrderData" :orderType="orderType" :pagemsg="pagemsg7" :noMsg="noMsgTen" @pageChange="closedOrderDataChange"></v-listtab>
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -107,6 +107,9 @@ export default {
     },
     getReadyOrderDataChange(val) {
       this.$emit('getReadyOrderDataChange', 2, val)
+    },
+    closedOrderDataChange(val) {
+      this.$emit('closedOrderDataChange', 3, val)
     },
     invalidOrderDataChange(val) {
       this.$emit('invalidOrderDataChange', val)
