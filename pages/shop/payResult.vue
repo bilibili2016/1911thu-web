@@ -64,7 +64,14 @@ export default {
         cid: 0,
         cp: 0,
         xid: 1,
-        pid: 0
+        pids: 0
+      },
+      coursedetail: {
+        base: '/course/category',
+        cid: 0,
+        cp: 0,
+        xid: 0,
+        pids: 0
       }
     }
   },
@@ -72,6 +79,7 @@ export default {
     ...mapActions('auth', ['setGid']),
     // 继续选课
     handleChoiceCourse() {
+      // console.log(this.urlLink)
       open(this.urlLink)
     },
     // 点击查看订单
@@ -113,6 +121,7 @@ export default {
               this.seconds = 0
               clearInterval(this.interval)
               this.goLink(this.links)
+              // open(this.coursedetail)
             } else {
               this.seconds--
             }
