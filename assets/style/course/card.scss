@@ -267,6 +267,7 @@
           color: #6417a6;
           font-weight: 400;
           transition: all 300ms;
+          background: transparent;
           span {
             color: #6417a6;
           }
@@ -275,6 +276,7 @@
               color: #fff;
             }
             border-color: #8f4acb;
+            background: #8f4acb;
           }
         }
         &.bought {

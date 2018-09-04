@@ -142,10 +142,10 @@
             <!-- onselectstart方法为禁止多次点击选中文本 -->
             <span class="number clearfix" unselectable="on" onselectstart="return false;">
               <span class="fl minus" v-if="numForm.number<=1">
-                <i class="sub">-</i>
+                <i>-</i>
               </span>
               <span class="fl minus" v-else @click="delNumber">
-                <i class="sub">-</i>
+                <i>-</i>
               </span>
               <input type="text" class="fl num" v-model="numForm.number" @blur="changeNumber">
               <span class="fl add" v-if="numForm.number>=9999">
