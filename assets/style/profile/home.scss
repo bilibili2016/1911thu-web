@@ -26,12 +26,12 @@
   &.profile .my-course.my-order {
     overflow: initial;
   }
-  &.profile .my-course#pane-tab-fourth .el-tabs__content,
-  &.profile .my-course#pane-tab-eighth .el-tabs__content {
+  &.profile .my-course#pane-tab-fourth .el-tabs__content {
     overflow: initial;
   }
   &.profile .my-course#pane-tab-eighth .el-tabs__content {
     position: static;
+    overflow: initial;
   }
   &.profile .my-course .el-tabs__header {
     border-top-left-radius: 6px;

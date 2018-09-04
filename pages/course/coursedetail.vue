@@ -54,7 +54,6 @@ import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
-    // ...mapState('auth', ['kid', 'isCollection'])
   },
   components: {
     'v-backtop': BackToTop,

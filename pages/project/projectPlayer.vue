@@ -159,9 +159,12 @@ export default {
       this.$refs.video.isPause()
     },
     // 关闭评论
-    closeEvaluate() {
+    closeEvaluate(item) {
       this.showEvaluate = false
       // 关闭评论-播放器继续播放
+      if (item) {
+        this.iseve = true
+      }
       this.$refs.video.isPlay()
     },
     // 改变屏幕宽度重置播放器大小

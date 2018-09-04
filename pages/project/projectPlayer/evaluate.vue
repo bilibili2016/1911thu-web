@@ -49,10 +49,14 @@ export default {
   },
   methods: {
     // 关闭评论
-    closeEvaluate() {
+    closeEvaluate(type) {
       this.radioBtn = ''
       this.word = ''
-      this.$emit('closeEvaluate')
+      if (type) {
+        this.$emit('closeEvaluate', type)
+      } else {
+        this.$emit('closeEvaluate')
+      }
     },
     // 切换星级
     changeRate(val) {
@@ -107,8 +111,6 @@ export default {
             message: response.msg
           })
         } else {
-          this.iseve = true
-          // this.getCurriculumPlayInfo()
           this.addEvaluateForm.tag = []
           for (let item of this.btnData) {
             this.$set(item, 'isCheck', false)
@@ -120,7 +122,7 @@ export default {
             message: response.msg
           })
         }
-        this.closeEvaluate()
+        this.closeEvaluate(true)
       })
     },
     // 获取评论tag
