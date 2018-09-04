@@ -14,11 +14,11 @@
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg4.pagesize" :current-page="pagemsg4.page" :total="pagemsg4.total" @current-change="getAllOrderDataChange"></el-pagination>
           </div>
           <v-nomsg class="noOrder" v-if="allOrderData.length == 0 && !allOrderLoadAll" :config="noMsgTen"></v-nomsg> -->
-          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange"></v-listtab>
+          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange" @handleUpdate="handleUpdate"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
           <span class="payCut" slot="label">未完成
-            <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{unfinishedOrderData.length}}</i>
+            <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{orderTotal}}</i>
           </span>
           <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange" @handleUpdate="handleUpdate"></v-listtab>
         </el-tab-pane>
@@ -124,6 +124,7 @@ export default {
       this.$emit('pageChange', val)
     },
     handleUpdate() {
+      this.$emit('updateAll', 0, 1)
       this.$emit('handleUpdate', 1, 1)
     }
   }
