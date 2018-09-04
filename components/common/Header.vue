@@ -132,6 +132,13 @@ export default {
       if (data === '/other/pages/search') {
         let ID = Math.random()
         this.$router.push({ path: data, query: { ID } })
+      } else if (data === '/shop/shoppingcart') {
+        if (persistStore.get('token')) {
+          this.$router.push(data)
+        } else {
+          this.handleSignOut()
+          this.$bus.$emit('loginShow', true)
+        }
       } else {
         this.$router.push(data)
       }
@@ -171,7 +178,7 @@ export default {
     },
     // 兑换码 --- 打开头部绑定课程
     handleAddEcg() {
-      if (this.token) {
+      if (persistStore.get('token')) {
         this.bindForm.isBind = true
       } else {
         this.$alert(

@@ -424,6 +424,9 @@ export default {
     },
     // 切换tab时保存tab的name 刷新就还是在这个tab
     handleClick(item) {
+      if (item.name === 'tab-seventh') {
+        this.getCodeList()
+      }
       persistStore.set('gid', item.name)
     },
     // 我的课程 commonmethods
@@ -590,7 +593,17 @@ export default {
       this.getRecordList()
     },
     // 兑换码 管理子类切换
-    handleCourseCode(item) {},
+    handleCourseCode(item) {
+      if (item.name === 'first') {
+        this.getCodeList()
+      }
+      if (item.name === 'second') {
+        this.getRecordList()
+      }
+      if (item.name === 'fourth') {
+        this.getUsedInvitationCodeList()
+      }
+    },
     // 邀请记录--兑换详情
     getRecordList() {
       profileHome.getRecordList(this.getCodeListForm).then(response => {

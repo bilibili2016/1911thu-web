@@ -28,7 +28,6 @@
 import { auth, projectplayer } from '~/lib/v1_sdk/index'
 import { mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import EvaluateCase from '@/components/common/EvaluateCase.vue'
 import Playertop from '@/pages/project/projectPlayer/playerTop.vue'
 import Player from '@/pages/project/projectPlayer/player.vue'
 import PlayerBottom from '@/pages/project/projectPlayer/playerBottom.vue'
@@ -42,7 +41,6 @@ export default {
     'v-playertop': Playertop,
     'v-player': Player,
     'v-playerbottom': PlayerBottom,
-    'v-evaluatecase': EvaluateCase,
     'v-report': Repore,
     'v-pay': Pay,
     'v-list': List,

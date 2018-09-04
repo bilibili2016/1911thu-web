@@ -3,7 +3,7 @@
     <div class="block">
       <div class="demonstration fl" style="margin:12px 2px 0px 0px;">根据成交时间搜索: </div>
       <div class="fl">
-        <el-date-picker v-model="searchDatas" type="daterange" value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions">
+        <el-date-picker v-model="searchDatas" type="daterange" unlink-panels value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions">
         </el-date-picker>
       </div>
       <div class="search">
@@ -20,14 +20,17 @@ export default {
       if (data) {
         this.searchDatas = data
       } else {
-        this.searchDatas = ['', '']
+        this.searchDatas = ''
       }
     }
   },
   props: ['orderNum'],
   data() {
     return {
-      searchDatas: ['', ''],
+      searchDatas: '',
+      formData: {
+        start_time: ''
+      },
       pickerOptions: {
         shortcuts: [
           {

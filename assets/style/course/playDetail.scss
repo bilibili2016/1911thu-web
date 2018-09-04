@@ -94,9 +94,7 @@
       margin-bottom: 80px;
       border-radius: 6px;
       background-color: #fff;
-      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
       .detail {
-        padding: 0 20px;
         p {
           margin: 0;
           width: 100%;
@@ -109,29 +107,28 @@
         }
       }
       .catalog {
-        padding: 0 20px;
         .chapter {
-          padding: 0 5px 40px;
+          padding: 0 0 40px;
           border-bottom: 1px solid #e8d6f7;
           &:last-child {
             border-bottom: none;
           }
           h4 {
-            line-height: 76px;
+            height: 50px;
+            line-height: 60px;
             font-size: 16px;
             color: #222;
-            text-indent: 16px;
           }
           .bar {
-            width: 670px;
+            width: 720px;
             height: 46px;
-            line-height: 46px; // padding: 0 15px;
+            line-height: 46px;
             border-radius: 6px;
             cursor: pointer;
             transition: all 300ms;
             &.checked,
             &:hover {
-              background-color: #f1e9f8;
+              background-color: #f7f9fb;
               span.freePlay {
                 display: inline-block;
                 width: 77px;
@@ -222,18 +219,18 @@
     .teacher {
       width: 340px;
       margin: 42px 0 20px;
-      padding-bottom: 20px;
+      padding-bottom: 40px;
       background-color: #fff;
-      border-radius: 6px;
-      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+      background-color: #f7f9fb;
+      // box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
       h4 {
         padding-left: 25px;
         height: 58px;
         line-height: 58px;
         color: #222;
-        font-size: 16px;
-        font-weight: 700;
-        border-bottom: 1px solid #e8d6f7;
+        font-size: 18px;
+        // font-weight: 700;
+        border-bottom: 1px solid #dddddd;
       }
       .personal {
         text-align: center;
@@ -243,6 +240,7 @@
           margin: 20px;
           border-radius: 50%;
           cursor: pointer;
+          margin-left: 25px;
         }
         div.fl {
           width: 210px;
@@ -261,16 +259,17 @@
         }
         h6 {
           margin-top: 10px;
-          font-size: 14px;
+          font-size: 12px;
           line-height: 20px;
           overflow: hidden;
           height: 40px;
-          color: #666;
+          color: #222;
         }
         p {
           clear: both;
           font-size: 14px;
           padding: 0 20px;
+          padding-left: 25px;
           text-align: left;
           line-height: 26px;
           overflow: hidden;
@@ -278,35 +277,21 @@
           display: -webkit-box;
           -webkit-line-clamp: 10;
           -webkit-box-orient: vertical;
-        } // div {
-        //   font-size: 14px;
-        //   padding: 0 20px;
-        //   line-height: 30px;
-        //   text-align: center;
-        //   overflow: hidden;
-        //   text-overflow: ellipsis;
-        //   display: -webkit-box;
-        //   -webkit-line-clamp: 1;
-        //   -webkit-box-orient: vertical;
-        //   width: 280px;
-        //   margin: 0 auto;
-        // }
+        }
       }
     }
 
     .evaluate {
-      width: 340px;
       background-color: #fff;
       border-radius: 6px;
-      box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
       margin-bottom: 50px;
       h4 {
         padding-left: 25px;
-        height: 58px;
-        line-height: 58px;
+        height: 60px;
+        line-height: 60px;
         color: #222;
-        font-size: 16px;
-        border-bottom: 1px solid #e8d6f7;
+        font-size: 18px;
+        border-bottom: 1px solid #ddd;
         span {
           float: right;
           margin-right: 23px;
@@ -316,29 +301,44 @@
         }
       }
       .score {
-        padding: 0 24px;
-        height: 64px;
-        line-height: 64px;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        font-size: 16px;
+        background-color: #f7f9fb;
+        padding: 0 5px;
         overflow: hidden;
-        span.fl {
-          font-size: 32px;
-          color: #222;
-        }
-        span.fr {
-          font-size: 12px;
+        color: #222;
+        span.fl i {
+          display: inline-block;
+          margin-left: 45px;
         }
         .itemBox-rate {
-          display: inline-block;
-          height: 64px;
-          line-height: 73px;
+          float: right;
+          height: 50px;
+          line-height: 56px;
           margin-left: 20px;
-          vertical-align: middle;
         }
       }
+      .noEvl {
+        color: #b0aeb8;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 40px;
+      }
       .commentator {
-        padding: 20px 25px 20px;
+        padding: 20px 0;
+        border-bottom: 1px solid #ddd;
         .fl {
           margin-top: 7px;
+        }
+        .title {
+          display: block;
+          width: 500px;
+          margin: 3px 0px 8px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .time {
           color: #bbb;

@@ -21,17 +21,14 @@
       <div class="bottomCard">
         <!-- 左侧的课程目录和介绍 -->
         <div class="content fl">
-          <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-coursecatelog>
+          <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg" :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="handleCurrentChange"></v-coursecatelog>
         </div>
         <div style="width:345px" class="fr">
           <!-- 讲师介绍 -->
           <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
           <!-- 课程评价-->
           <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
-          <!-- 用户评价  查看更多 -->
-          <v-evaluatedialog :evaluateLoading="evaluateLoading" :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
-          <!-- 用户评论 列表-->
-          <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
+
         </div>
       </div>
     </div>
@@ -53,8 +50,6 @@ import EvaluateCase from '@/components/common/EvaluateCase.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import TeacherIntro from '@/pages/course/coursedetail/teacherIntro.vue'
 import Collection from '@/components/common/Collection.vue'
-import UserEvaluate from '@/pages/course/coursedetail/UserEvaluate.vue'
-import EvaluateDialog from '@/pages/course/coursedetail/EvaluateDialog.vue'
 import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
 export default {
   computed: {
@@ -70,8 +65,6 @@ export default {
     'v-breadcrumb': BreadCrumb,
     'v-teacherintro': TeacherIntro,
     'v-collection': Collection,
-    'v-userevaluate': UserEvaluate,
-    'v-evaluatedialog': EvaluateDialog,
     'v-coursecatelog': CourseCatalog
   },
   data() {
@@ -85,7 +78,6 @@ export default {
       isClose: false, //评论组件是否有关闭按钮
       showCheckedCourse: false,
       activeName: 'second',
-      dialogVisible: false,
       textarea: '',
       rateModel: 5,
       loadTeacher: false,
@@ -93,7 +85,6 @@ export default {
       linkseven: 'player',
       catalogs: [],
       commentator: [],
-      commentators: [],
       pageCount: null,
       config: {
         card_type: 'course'
@@ -269,11 +260,6 @@ export default {
         })
       }
     },
-    // 评论-点击评论查看更多
-    getMore() {
-      this.dialogVisible = true
-      this.handleCurrentChange(1)
-    },
     // 评论-评论查看更多-分页
     handleCurrentChange(val) {
       this.loadMsg = true
@@ -288,12 +274,12 @@ export default {
         this.evaluateLoading = false
         this.pagemsg.total = response.data.pageCount
         this.commentator = response.data.evaluateList
+        this.activeName = 'third'
       })
     },
     // 评论-获取评论列表
     getEvaluateList() {
       this.loadEvaluate = true
-      // this.evaluateListForm.ids = persistStore.get('curriculumId')
       this.evaluateListForm.ids = matchSplits('kid')
 
       return new Promise((resolve, reject) => {
@@ -302,7 +288,6 @@ export default {
           this.pagemsg.total = response.data.pageCount
           this.pageCount = response.data.pageCount
           this.commentator = response.data.evaluateList
-          this.commentators = response.data.evaluateList
 
           this.totalEvaluateInfo = response.data.totalEvaluateInfo
           let totalEvaluateInfo = response.data.totalEvaluateInfo
@@ -310,10 +295,6 @@ export default {
           this.loadEvaluate = false
         })
       })
-    },
-    // 评论-关闭查看更多-评论弹框
-    handleClose(done) {
-      this.dialogVisible = false
     },
     // 课程-获取课程详情
     getCourseDetail() {
@@ -349,9 +330,7 @@ export default {
     },
     // 课程-获取默认播放信息
     getdefaultCurriculumCatalog() {
-      // this.getdefaultForm.curriculumid = persistStore.get('curriculumId')
       this.getdefaultForm.curriculumid = matchSplits('kid')
-
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {
@@ -377,7 +356,6 @@ export default {
     initData() {
       this.kidForm.ids = matchSplits('kid')
       this.evaluateListForm.ids = matchSplits('kid')
-
       this.activeName = 'second'
     },
     //评论之后的回调

@@ -26,8 +26,9 @@
   }
   .personal {
     // text-align: center
-    width: 294px;
+    // width: 300px;
     margin: 0 auto;
+    padding: 0 25px;
     .title {
       font-size: 14px;
       color: #222;
@@ -42,7 +43,7 @@
       padding-right: 10px;
     }
     .ratem {
-      padding-bottom: 5px;
+      padding-bottom: 17px;
       .el-rate .el-rate__item .el-rate__icon {
         &.hover {
           color: rgb(198, 209, 222);
@@ -70,6 +71,11 @@
         }
       }
       .el-button--primary {
+        color: #fff;
+        background-color: #bbbbcd;
+        border-color: #bbbbcd;
+      }
+      .canSubmit {
         color: #fff;
         background-color: #6417a6;
         border-color: #6417a6;
@@ -207,6 +213,23 @@
           background: #8f4acb;
         }
       }
+    }
+  }
+}
+
+.courseDetail .evaluate-tag {
+  box-shadow: none;
+  background-color: #f7f9fb;
+  border-radius: 0;
+  h4 {
+    font-size: 18px;
+    line-height: 60px;
+    height: 60px;
+    border-bottom-color: #ddd;
+  }
+  .personal {
+    .rate {
+      margin-top: 20px;
     }
   }
 }

@@ -137,10 +137,6 @@ export default {
         })
       })
     },
-    goPay(id) {
-      persistStore.set('cpyid', id)
-      this.$router.push('/shop/wepay')
-    },
     cancelOrder(id) {
       //取消订单
       this.orderForm.ids = id

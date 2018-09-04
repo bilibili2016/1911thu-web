@@ -4,7 +4,7 @@
         <div class="commentator clearfix" v-for="(item,index) in evaluteData" :key="index" v-if="index<3">
             <img class="fl" :src="item.head_img" alt="">
             <div class="fl">
-                <p style="margin:3px 0 8px;">{{item.nick_name}}</p>
+                <p class="title">{{item.nick_name}}</p>
                 <p class="time">{{item.create_time}}</p>
             </div>
             <div style="margin-top:10px;">

@@ -525,6 +525,8 @@ export default {
         if (response.status === 0) {
           this.close()
           this.getUserInfo()
+          // 未登录后登陆后刷新当前页面
+          window.location.reload()
         }
         this.loadLogin = false
       })
@@ -576,8 +578,8 @@ export default {
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
 
-              // 未登录后登陆更新课程详情页
-              this.$bus.$emit('reupdatecourse')
+              // 未登录后登陆后刷新当前页面
+              window.location.reload()
             }
             this.isloginClick = false
             this.isloading = false
@@ -606,8 +608,8 @@ export default {
               this.$bus.$emit('updateCount') //获取购物车数量
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
-              // 未登录后登陆更新课程详情页
-              this.$bus.$emit('reupdatecourse')
+              // 未登录后登陆后刷新当前页面
+              window.location.reload()
             }
             this.isloginClick = false
             this.isloading = false
@@ -652,6 +654,8 @@ export default {
           this.$bus.$emit('updateCount') //获取购物车数量
           this.closeWechat()
           this.close()
+          // 未登录后登陆后刷新当前页面
+          window.location.reload()
         } else {
           message(this, 'error', response.msg)
         }
@@ -674,6 +678,8 @@ export default {
           this.$bus.$emit('updateCount') //获取购物车数量
           this.scanCodeShow = false //微信扫码
           this.closeWechat()
+          // 未登录后登陆后刷新当前页面
+          window.location.reload()
         }
         if (response.status === 100102) {
           this.scanCodeShow = false //微信扫码
