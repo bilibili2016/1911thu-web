@@ -234,8 +234,8 @@ export default {
            */
           that.socket.emit(
             'watchRecordingTime',
-            matchSplits('kid'),
-            matchSplits('bid'),
+            this.playerForm.curriculumId,
+            this.playerForm.catalogId,
             playTime,
             '',
             1
