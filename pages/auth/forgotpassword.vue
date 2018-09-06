@@ -3,7 +3,7 @@
     <!-- 忘记密码 -->
     <div class="start forgot">
       <div class="lrFrame">
-        <div class="logo">
+        <div class="logo" @click="goHome">
           <img src="http://papn9j3ys.bkt.clouddn.com/1911xt.png" alt="">
         </div>
         <div class="pwd">
@@ -11,6 +11,7 @@
         </div>
         <!-- 忘记密码 -->
         <el-form :model="fpData" status-icon :rules="formRules" ref="fpData" class="demo-ruleForm">
+          <input type="password" class="hideInput">
           <el-form-item prop="phones">
             <!-- 手机号 -->
             <el-input v-model="fpData.phones" placeholder="请输入手机号"></el-input>
@@ -28,8 +29,10 @@
           <el-row>
             <el-button @click.native="forgetPasswordAjax">提交</el-button>
           </el-row>
+          <input type="password" class="hideInput">
         </el-form>
         <div class="otherLogin" @click="otherLogin">返回登录</div>
+
       </div>
     </div>
   </div>
@@ -115,19 +118,9 @@ export default {
       return new Promise((resolve, reject) => {
         auth.verifyPhone(this.fpData).then(response => {
           if (response.status === 0) {
-            // this.$message({
-            //   showClose: true,
-            //   type: 'error',
-            //   message: '您的手机号还未注册！'
-            // })
             message(this, 'error', '您的手机号还未注册！')
             this.bindTelData.captchaDisable = true
           } else if (response.status === '100100') {
-            // this.$message({
-            //   showClose: true,
-            //   type: 'error',
-            //   message: response.msg
-            // })
             message(this, 'error', response.msg)
             this.bindTelData.captchaDisable = true
           } else {
@@ -143,15 +136,11 @@ export default {
       this.fpData.ectpwd = encryption(this.fpData.password)
       return new Promise((resolve, reject) => {
         auth.forgetPasswordAjax(this.fpData).then(response => {
-          // this.$message({
-          //   showClose: true,
-          //   type: response.status === 0 ? 'success' : 'error',
-          //   message: response.msg
-          // })
           let types = response.status === 0 ? 'success' : 'error'
           message(this, types, response.msg)
           if (response.status === 0) {
-            this.$router.push('/')
+            this.goHome()
+            this.$bus.$emit('loginShow', true)
           }
         })
       })
@@ -162,11 +151,6 @@ export default {
           auth.smsCodes(this.fpData).then(response => {
             let types = response.status === 0 ? 'success' : 'error'
             message(this, types, response.msg)
-            // this.$message({
-            //   showClose: true,
-            //   type: response.status === 0 ? 'success' : 'error',
-            //   message: response.msg
-            // })
             if (response.status === 0) {
               this.captchaDisable = true
               this.fpData.getCode = this.fpData.seconds + '秒后重新发送'
@@ -185,8 +169,11 @@ export default {
         })
       }
     },
-    otherLogin() {
+    goHome() {
       this.$router.push('/')
+    },
+    otherLogin() {
+      this.goHome()
       this.$bus.$emit('loginShow', true)
     }
   },
