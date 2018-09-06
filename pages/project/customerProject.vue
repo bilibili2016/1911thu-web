@@ -252,7 +252,7 @@ export default {
         offlineTotalPrice: '', //课程结算-线上课程总价钱
         discountPrice: 0, //优惠价钱
         totalPrice: 0, //项目总价钱
-        projectPrice: 0,
+        projectPrice: 0, //项目优惠后的价钱
         checkedCourse: []
       }
     }
@@ -272,11 +272,21 @@ export default {
     },
     //计算自定制项目总价钱
     totalPrice() {
-      this.projectForm.totalPrice =
-        this.projectForm.offlineTotalPrice + this.projectForm.onlineTotalPrice
-      this.projectForm.projectPrice = (
-        this.projectForm.totalPrice - this.projectForm.discountPrice
-      ).toFixed(2)
+      if (this.projectForm.styleRadio === '2') {
+        //线上+线下
+        this.projectForm.totalPrice =
+          this.projectForm.offlineTotalPrice + this.projectForm.onlineTotalPrice
+        this.projectForm.projectPrice = (
+          this.projectForm.totalPrice - this.projectForm.discountPrice
+        ).toFixed(2)
+      } else {
+        //线上
+        this.projectForm.totalPrice = this.projectForm.onlineTotalPrice
+        this.projectForm.projectPrice = (
+          this.projectForm.totalPrice - this.projectForm.discountPrice
+        ).toFixed(2)
+      }
+
       return this.projectForm.totalPrice
     },
     //计算自定制项目的优惠价钱
@@ -363,6 +373,14 @@ export default {
         message(this, 'error', err)
         return false
       }
+
+      //线上课程，线下培训天数参数置空
+      if (this.projectForm.styleRadio === '2') {
+        this.projectForm.trainDay = this.projectForm.trainDay
+      } else {
+        this.projectForm.trainDay = ''
+      }
+
       customerProject.createProject(this.projectForm).then(response => {
         this.isClick = false
         if (response.status == 0) {

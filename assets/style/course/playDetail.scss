@@ -69,13 +69,6 @@
           top: 7px;
           height: 13px;
         }
-        .prism-player .prism-cc-btn {
-          display: none;
-          height: 24px;
-          width: 20px;
-          margin-top: 14px !important;
-          margin-right: 22px !important;
-        }
         .prism-player .prism-setting-btn {
           width: 20px;
           height: 22px;
@@ -85,6 +78,19 @@
         .prism-time-display {
           margin-top: 4px !important;
           margin-left: 20px !important;
+        }
+        // 隐藏设置中的字母和音轨
+        .prism-player .prism-setting-list .prism-setting-cc,
+        .prism-player .prism-setting-list .prism-setting-audio {
+          display: none;
+        }
+        // 隐藏字幕
+        .prism-player .prism-cc-btn {
+          display: none;
+          height: 24px;
+          width: 20px;
+          margin-top: 14px !important;
+          margin-right: 22px !important;
         }
       }
     }
