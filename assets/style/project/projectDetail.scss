@@ -47,7 +47,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 490px;
+      height: 390px;
       z-index: 1;
     }
     .proHeader-mask {
@@ -55,12 +55,12 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 490px;
+      height: 80px;
       opacity: 0.9;
       z-index: 10;
       background: -webkit-linear-gradient(
-        rgba(22, 17, 26, 0.9),
-        rgba(22, 17, 26, 0)
+        rgba(22, 17, 26, 0.7),
+        rgba(22, 17, 26, 0.3)
       ); /* Safari 5.1 - 6.0 */
       background: -o-linear-gradient(
         rgba(22, 17, 26, 0.9),
@@ -103,7 +103,7 @@
 
     .detail {
       position: absolute;
-      bottom: 0;
+      bottom: 2px;
       left: 0;
       height: 98px;
       width: 100%;
