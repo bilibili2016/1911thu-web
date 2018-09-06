@@ -16,7 +16,7 @@ const _77343fe2 = () => import('../pages/course/coursedetail/teacherIntro.vue' /
 const _22ab7a6c = () => import('../pages/course/detail.vue' /* webpackChunkName: "pages/course/detail" */).then(m => m.default || m)
 const _73ba631e = () => import('../pages/auth/Register.vue' /* webpackChunkName: "pages/auth/Register" */).then(m => m.default || m)
 const _145fb93b = () => import('../pages/shop/affirmOrder.vue' /* webpackChunkName: "pages/shop/affirmOrder" */).then(m => m.default || m)
-const _0da7c6e8 = () => import('../pages/auth/forgotPassword.vue' /* webpackChunkName: "pages/auth/forgotPassword" */).then(m => m.default || m)
+const _213e6f28 = () => import('../pages/auth/forgotpassword.vue' /* webpackChunkName: "pages/auth/forgotpassword" */).then(m => m.default || m)
 const _520a423e = () => import('../pages/auth/codeLogin.vue' /* webpackChunkName: "pages/auth/codeLogin" */).then(m => m.default || m)
 const _77813d8a = () => import('../pages/shop/wePay.vue' /* webpackChunkName: "pages/shop/wePay" */).then(m => m.default || m)
 const _192e9728 = () => import('../pages/shop/shoppingcart.vue' /* webpackChunkName: "pages/shop/shoppingcart" */).then(m => m.default || m)
@@ -239,9 +239,9 @@ export function createRouter () {
 			name: "shop-affirmOrder"
 		},
 		{
-			path: "/auth/forgotPassword",
-			component: _0da7c6e8,
-			name: "auth-forgotPassword"
+			path: "/auth/forgotpassword",
+			component: _213e6f28,
+			name: "auth-forgotpassword"
 		},
 		{
 			path: "/auth/codeLogin",
