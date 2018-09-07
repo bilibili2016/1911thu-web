@@ -7,9 +7,10 @@
         <div class="changeInput">
           <span>兑换码:</span>
           <input v-model="bindForm.courseId" placeholder="请输入您的兑换码，区分大小写。">
-          <p>
+          <!-- 错误提醒：绑定码已过期失效 -->
+          <!-- <p>
             <span>{{bindForm.error}}</span>
-          </p>
+          </p> -->
         </div>
         <div class="changeTips">
           <p>兑换码说明：</p>

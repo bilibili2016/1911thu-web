@@ -235,36 +235,7 @@ export default {
       },
       allProjectData: {
         category_name: '全部',
-        childList: [
-          {
-            category_name: '党政干部综合项目',
-            id: '21',
-            parent_id: '16',
-            picture: 'http://p8p47jzeo.bkt.clouddn.com/1530691988',
-            short_name: '党政干部综合项目'
-          },
-          {
-            category_name: '军转系统研修项目',
-            id: '22',
-            parent_id: '16',
-            picture: 'http://p8p47jzeo.bkt.clouddn.com/1530692025',
-            short_name: '军转系统研修项目'
-          },
-          {
-            category_name: '教育系统研修项目',
-            id: '24',
-            parent_id: '16',
-            picture: 'http://p8p47jzeo.bkt.clouddn.com/1530692056',
-            short_name: '教育系统研修项目'
-          },
-          {
-            category_name: '体育系统研修项目',
-            id: '27',
-            parent_id: '16',
-            picture: 'http://p8p47jzeo.bkt.clouddn.com/1530692083',
-            short_name: '体育系统研修项目'
-          }
-        ],
+        childList: [],
         id: '0',
         parent_id: '0',
         picture: 'http://p8p47jzeo.bkt.clouddn.com/1531894819',
