@@ -145,13 +145,22 @@
             }
           }
           .customerProject {
+            padding-right: 0;
             .topLeft {
               float: left;
+              width: 160px;
             }
             .topRight {
               float: right;
+              width: 644px;
+              overflow: hidden;
+              text-align: center;
               span {
-                margin-left: 45px;
+                width: 100px;
+                text-align: center;
+                &:last-child {
+                  width: 144px;
+                }
               }
             }
           }
@@ -259,13 +268,18 @@
             }
             .customerProjectDetail {
               padding-right: 0;
+              padding-left: 10px;
               .item {
                 float: left;
                 width: 100px;
                 text-align: center;
+                margin-top: 20px;
                 line-height: 100px;
                 font-size: 14px;
                 color: #332a51;
+                &:last-child {
+                  width: 144px;
+                }
                 &.price {
                   color: #ff5f5f;
                   font-size: 16px;

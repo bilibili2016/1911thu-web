@@ -254,8 +254,7 @@ export default {
           this.bindForm.courseId = ''
           this.bindForm.isBind = false
           if (window.location.pathname === '/profile') {
-            this.$bus.$emit('studyCourse')
-            // this.$bus.$emit('studyProject')
+            this.$bus.$emit('studyCourse', this.skip)
           } else {
             this.handleLinkProfile(this.skip)
           }

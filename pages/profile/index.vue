@@ -201,11 +201,11 @@ export default {
       },
       noMsgTwl: {
         type: 'myTicket',
-        text: '抱歉，您还没有订单需要开票~'
+        text: '抱歉，您还没有订单需要开发票~'
       },
       noMsgThi: {
         type: 'myTicket',
-        text: '抱歉，没有已经开具的开票~'
+        text: '抱歉，没有已经开具的发票~'
       },
       newData: [],
       styleForm: {
@@ -698,6 +698,10 @@ export default {
       this.$bus.$on('studyCourse', data => {
         this.handleMyCourseChange(1, 1)
         this.handleMyProjectChange(1, 1)
+        console.log(data)
+
+        this.activeTab = data
+        persistStore.set('gid', data)
       })
       // 展示订单详情
       this.$bus.$on('goOrderDetail', data => {
