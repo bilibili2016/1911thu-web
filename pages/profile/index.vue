@@ -205,7 +205,7 @@ export default {
       },
       noMsgThi: {
         type: 'myTicket',
-        text: '抱歉，没有已经开具的开票~'
+        text: '抱歉，没有已经开具的发票~'
       },
       newData: [],
       styleForm: {
