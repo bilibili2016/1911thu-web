@@ -528,7 +528,7 @@ export default {
           this.close()
           this.getUserInfo()
           // 未登录后登陆后刷新当前页面
-          window.location.reload()
+          this.refresh()
         }
         this.loadLogin = false
       })
@@ -581,7 +581,7 @@ export default {
               this.$bus.$emit('reLogin', true)
 
               // 未登录后登陆后刷新当前页面
-              window.location.reload()
+              this.refresh()
             }
             this.isloginClick = false
             this.isloading = false
@@ -611,7 +611,7 @@ export default {
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
               // 未登录后登陆后刷新当前页面
-              window.location.reload()
+              this.refresh()
             }
             this.isloginClick = false
             this.isloading = false
@@ -657,7 +657,7 @@ export default {
           this.closeWechat()
           this.close()
           // 未登录后登陆后刷新当前页面
-          window.location.reload()
+          this.refresh()
         } else {
           message(this, 'error', response.msg)
         }
@@ -681,7 +681,7 @@ export default {
           this.scanCodeShow = false //微信扫码
           this.closeWechat()
           // 未登录后登陆后刷新当前页面
-          window.location.reload()
+          this.refresh()
         }
         if (response.status === 100102) {
           this.scanCodeShow = false //微信扫码
@@ -803,6 +803,14 @@ export default {
     // 打开用户注册协议
     userProtocol() {
       window.open(window.location.origin + '/other/activePages/userProtocol')
+    },
+    // 判断当前页面路由-是否登录后刷新当前页面
+    refresh() {
+      if (window.location.pathname === '/course/coursedetail') {
+        this.$bus.$emit('reCourseData')
+      } else if (window.location.pathname === '/project/projectdetail') {
+        this.$bus.$emit('reProjectData')
+      }
     }
   },
   mounted() {

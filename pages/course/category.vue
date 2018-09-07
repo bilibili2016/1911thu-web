@@ -129,104 +129,104 @@ export default {
       allCourseData: {
         category_name: '全部',
         childList: [
-          {
-            category_name: '公共管理/履职能力',
-            id: '2',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '时政解读',
-            id: '3',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '法律法规',
-            id: '4',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '政府绩效管理',
-            id: '5',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '经济治理与城市规划',
-            id: '6',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '城市治理',
-            id: '7',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '应急管理',
-            id: '8',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '国际形势及安全治理',
-            id: '9',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '创新驱动发展',
-            id: '10',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '社会治理',
-            id: '11',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '一带一路与国际合作',
-            id: '12',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '乡村振兴',
-            id: '13',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '新闻宣传',
-            id: '14',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          },
-          {
-            category_name: '人文素养',
-            id: '15',
-            parent_id: '1',
-            picture: '',
-            short_name: ''
-          }
+          // {
+          //   category_name: '公共管理/履职能力',
+          //   id: '2',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '时政解读',
+          //   id: '3',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '法律法规',
+          //   id: '4',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '政府绩效管理',
+          //   id: '5',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '经济治理与城市规划',
+          //   id: '6',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '城市治理',
+          //   id: '7',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '应急管理',
+          //   id: '8',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '国际形势及安全治理',
+          //   id: '9',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '创新驱动发展',
+          //   id: '10',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '社会治理',
+          //   id: '11',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '一带一路与国际合作',
+          //   id: '12',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '乡村振兴',
+          //   id: '13',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '新闻宣传',
+          //   id: '14',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // },
+          // {
+          //   category_name: '人文素养',
+          //   id: '15',
+          //   parent_id: '1',
+          //   picture: '',
+          //   short_name: ''
+          // }
         ],
         id: '0',
         parent_id: '0',
@@ -249,7 +249,8 @@ export default {
         cp: '',
         xid: '',
         pids: ''
-      }
+      },
+      ListData: []
       // pids: '0'
     }
   },
@@ -278,6 +279,16 @@ export default {
         })
       }
     },
+    // 处理全部的分类
+    makeData(arr, data) {
+      data.forEach((v, i) => {
+        v.childList.forEach((v, i) => {
+          if (i > 0) {
+            arr.push(v)
+          }
+        })
+      })
+    },
     // 处理数据 拼接全部数据
     handleData(data, res) {
       this.cidData = res.data.categoryList
@@ -291,7 +302,9 @@ export default {
           this.categoryIndex = this.cidData.indexOf(item)
         }
       }
+      this.makeData(this.cidData[0].childList, res.data.categoryList)
       this.pidData = this.cidData[this.categoryIndex]
+      console.log(this.cidData)
     },
     handelOpenUrl() {
       this.selectUrl.cid = this.selectCidItem

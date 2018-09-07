@@ -107,14 +107,41 @@ export const actions = {
     }
     return user
   },
-  // 手机验证码     登录
   async signInmobile({ commit, state }, { phones, loginTypes, codes }) {
+    // 手机验证码     登录
     let user
     try {
       let tokens = await auth.signInsmobile({
         phones,
         loginTypes,
         codes
+      })
+      // if (!tokens.data.token) {
+      //   return tokens
+      // }
+      if (tokens.status === 0) {
+        token = tokens.data.token
+        persistStore.set('token', token)
+        // 更新 state
+        commit(MUTATION.signIn, { token })
+      }
+      return tokens
+    } catch (e) {
+      if (e instanceof ServerError) {
+        log.error(e)
+      } else {
+        throw e
+      }
+    }
+    return user
+  },
+  async forgetPasswordAjax({ commit, state }, { phones, ectpwd, code }) {
+    let user
+    try {
+      let tokens = await auth.forgetPasswordAjax({
+        phones,
+        ectpwd,
+        code
       })
       // if (!tokens.data.token) {
       //   return tokens
@@ -158,9 +185,7 @@ export const actions = {
       }
     }
     return gid
-  },
-  // async setKid({ commit, state }, { kids }) {
-  //   try {
+  }, //   try { // async setKid({ commit, state }, { kids }) {
   //     let kid = kids
   //     persistStore.set('kid', kid)
   //     commit(MUTATION.setKid, { kid })

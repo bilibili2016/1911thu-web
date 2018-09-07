@@ -27,7 +27,7 @@
             <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
           </el-form-item>
           <el-row>
-            <el-button @click.native="forgetPasswordAjax">提交</el-button>
+            <el-button @click.native="forgetPassword">提交</el-button>
           </el-row>
           <input type="password" class="hideInput">
         </el-form>
@@ -40,6 +40,7 @@
 
 <script>
 import { checkPhone, checkCode, checkPassord } from '~/lib/util/validatefn'
+import { mapActions } from 'vuex'
 import { auth } from '~/lib/v1_sdk/index'
 import { encryption, message } from '~/lib/util/helper'
 export default {
@@ -104,6 +105,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['forgetPasswordAjax']),
     changePwd() {
       if (this.showPwd) {
         this.showPwd = false
@@ -132,17 +134,17 @@ export default {
         })
       })
     },
-    forgetPasswordAjax() {
+    forgetPassword() {
       this.fpData.ectpwd = encryption(this.fpData.password)
-      return new Promise((resolve, reject) => {
-        auth.forgetPasswordAjax(this.fpData).then(response => {
-          let types = response.status === 0 ? 'success' : 'error'
-          message(this, types, response.msg)
-          if (response.status === 0) {
-            this.goHome()
-            this.$bus.$emit('loginShow', true)
-          }
-        })
+      console.log(this.fpData)
+
+      this.forgetPasswordAjax(this.fpData).then(response => {
+        let types = response.status === 0 ? 'success' : 'error'
+        message(this, types, response.msg)
+        if (response.status === 0) {
+          this.goHome()
+          this.$bus.$emit('getUserInfo')
+        }
       })
     },
     async handleGetCode() {

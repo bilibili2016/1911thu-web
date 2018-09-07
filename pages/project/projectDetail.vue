@@ -145,6 +145,9 @@ export default {
     }
 
     this.problemLoad = false
+    this.$bus.$on('reProjectData', data => {
+      this.getProjectInfo()
+    })
   }
 }
 </script>

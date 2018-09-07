@@ -372,6 +372,9 @@ export default {
   },
   mounted() {
     this.initAll()
+    this.$bus.$on('reCourseData', data => {
+      this.initAll()
+    })
   },
   watch: {
     //在当前页面进行登录操作更新状态
