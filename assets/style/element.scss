@@ -1496,7 +1496,7 @@ input:-webkit-autofill {
       }
     }
     .el-tabs__content {
-      overflow: inherit;
+      overflow: visible;
     }
   }
 }
@@ -1544,6 +1544,6 @@ input::-webkit-input-safebox-button {
 }
 .my-order {
   .el-tabs__content {
-    overflow: inherit !important;
+    overflow: visible !important;
   }
 }
