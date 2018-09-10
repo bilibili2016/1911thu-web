@@ -101,7 +101,7 @@
           <span>{{data.study_persion_number}}人</span>
           <span>{{(data.offline_days)*8}}学时</span>
           <span>{{data.offline_days}}天</span>
-          <span class="coursePrice">￥{{data.original_price}}</span>
+          <span class="coursePrice">￥{{data.present_price}}</span>
         </div>
       </div>
     </div>

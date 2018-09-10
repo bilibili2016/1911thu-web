@@ -20,13 +20,13 @@
     </div>
     <div class="orderInfo" v-if="!course">
       <p>
-        <span class="left" style="width:auto;">共{{1}}件商品,商品总金额：</span>
-        <span class="right" style="width:85px;">¥{{data.original_price}}</span>
-      </p>
-      <p>
-        <span class="left" style="width:auto;">{{9.5}}折</span>
+        <span class="left" style="width:auto;">商品总金额：</span>
         <span class="right" style="width:85px;">¥{{data.present_price}}</span>
       </p>
+      <!-- <p>
+        <span class="left" style="width:auto;">{{9.5}}折</span>
+        <span class="right" style="width:85px;">¥{{data.present_price}}</span>
+      </p> -->
     </div>
   </div>
 

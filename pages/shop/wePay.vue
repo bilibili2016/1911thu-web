@@ -102,7 +102,6 @@ export default {
       // // let cpyid = persistStore.get('cpyid')
       // this.payListForm.orderId = urlArr[urlArr.length - 1]
       this.payListForm.orderId = matchSplits('order')
-      this.payListForm.attachs = matchSplits('attach')
       wepay.webPay(this.payListForm).then(response => {
         this.loading = false
         if (response.status === '100100') {

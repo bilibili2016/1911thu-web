@@ -48,8 +48,8 @@ export default {
     return {
       success: true,
       payCompleteForm: {
-        orderId: null,
-        attachs: null
+        orderId: null
+        // attachs: null
       },
       hasCode: false,
       payCompleteData: {},
@@ -91,7 +91,7 @@ export default {
     },
     payComplete() {
       this.payCompleteForm.orderId = matchSplits('order')
-      this.payCompleteForm.attachs = matchSplits('attach')
+      // this.payCompleteForm.attachs = matchSplits('attach')
       payResult.payComplete(this.payCompleteForm).then(response => {
         this.payCompleteData = response.data
         this.showMsg = true

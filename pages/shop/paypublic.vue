@@ -66,12 +66,12 @@ export default {
       },
       payForm: {
         phones: null,
-        orderId: null,
-        attachs: null
+        orderId: null
+        // attachs: null
       },
       payListForm: {
-        orderId: null,
-        attachs: null
+        orderId: null
+        // attachs: null
       },
       orderDetail: {}
     }
@@ -101,7 +101,7 @@ export default {
     },
     showPayPublic() {
       this.showPay = false
-      this.payForm.attachs = matchSplits('attach')
+      // this.payForm.attachs = matchSplits('attach')
       paypublic.getPayPublicCode(this.payForm).then(res => {
         if (res.status === 0) {
           this.$message({
@@ -126,7 +126,7 @@ export default {
     // 获取订单id列表
     getPayList() {
       this.payListForm.orderId = matchSplits('orderID')
-      this.payListForm.attachs = matchSplits('attach')
+      // this.payListForm.attachs = matchSplits('attach')
       paypublic.webPay(this.payListForm).then(response => {
         this.orderDetail = response.data.data.orderDetail
         this.payForm.orderId = response.data.data.orderDetail.id

@@ -152,16 +152,7 @@ export default {
         if (res.status === 0) {
           //解决异步加载浏览器会将新打开的页面作为窗口拦截
           newWindow.location.href =
-            window.location.origin +
-            '/shop/wepay?order=' +
-            res.data.id +
-            '&attach=1'
-          // window.open(
-          //   window.location.origin +
-          //     '/shop/wepay?order=' +
-          //     res.data.id +
-          //     '&attach=1'
-          // )
+            window.location.origin + '/shop/wepay?order=' + res.data.id
         } else {
           message(this, 'error', res.msg)
         }
@@ -176,16 +167,7 @@ export default {
         // console.log(res, '这是res123456789')
         //解决异步加载浏览器会将新打开的页面作为窗口拦截
         newWindow.location.href =
-          window.location.origin +
-          '/shop/wepay?order=' +
-          res.data.order_id +
-          '&attach=2'
-        // window.open(
-        //   window.location.origin +
-        //     '/shop/wepay?order=' +
-        //     res.data.order_id +
-        //     '&attach=2'
-        // )
+          window.location.origin + '/shop/wepay?order=' + res.data.order_id
       })
     },
     //获取商 品信息 列表
@@ -223,7 +205,6 @@ export default {
       this.curriculumForm.curriculumProjectId = val
       affirmOrder.customProject(this.curriculumForm).then(res => {
         this.loadGoods = false
-        // console.log(res, '我草')
         if (res.status === 0) {
           this.curriculumLists = res.data.curriculumProjectDetail
           this.orderinfo = res.data.curriculumProjectDetail
@@ -241,6 +222,8 @@ export default {
     }
   },
   mounted() {
+    console.log(window.location.search)
+
     if (window.location.search == '') {
       this.handleGoodsList()
     } else {
