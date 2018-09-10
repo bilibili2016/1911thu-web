@@ -5,7 +5,7 @@
       <div class="proHeader-mask"></div>
       <img class="proHeader-img" :src="projectDetail.study_picture" alt="">
       <!-- 项目详情基本信息 -->
-      <v-detail :projectDetail="projectDetail" :projectType="project" class="proHeader-detail"></v-detail>
+      <v-detail :projectDetail="projectDetail" :projectType="project" :studyType="studyType" class="proHeader-detail"></v-detail>
     </div>
     <!-- 介绍 线上课程 线下课程介绍 用户评价 常见问题-->
     <div class="proContent">
@@ -87,7 +87,8 @@ export default {
         isRecommend: 2
       },
       evaluateInfo: {},
-      evaluateData: []
+      evaluateData: [],
+      studyType: ''
     }
   },
   computed: {
@@ -103,6 +104,7 @@ export default {
           this.projectDetail.score = Number(this.projectDetail.score)
           this.projectDetailLoad = false
           this.inlineLoad = false
+          this.studyType = res.data.curriculumProjectDetail.study_type
           if (res.data.curriculumProjectDetail.is_Collection) {
             this.collectMsg.isCollect = 1
           } else {

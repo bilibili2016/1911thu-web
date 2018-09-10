@@ -42,7 +42,8 @@
           <i>￥</i>{{projectDetail.present_price}}</div>
         <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
-        <div class="addShoppingCart" @click="addShoppingCart">加入购物车</div>
+        <div v-if="studyType === '1'" class="addShoppingCart" @click="addShoppingCart">加入购物车</div>
+        <div v-else class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
       </div>
       <div class="fr buy" v-if="projectType.types==='2'">
         <div class="price">
@@ -68,7 +69,7 @@ export default {
     'v-breadcrumb': BreadCrumb,
     'v-collection': Collection
   },
-  props: ['projectDetail', 'projectType'],
+  props: ['projectDetail', 'projectType', 'studyType'],
   data() {
     return {
       project: {

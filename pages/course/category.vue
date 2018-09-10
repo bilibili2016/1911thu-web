@@ -263,9 +263,6 @@ export default {
     getCourseCardList(itemCid, itemPid) {
       this.loadCourseAll = true
       this.setParamsPidCid(itemCid, itemPid)
-      console.log(this.categoryForm, 'this.categoryForm')
-      console.log(itemCid, itemPid, 'this.categoryForm')
-
       category.curriculumListNew(this.categoryForm).then(res => {
         this.loadCourseAll = false
         this.categoryData = res.data.curriculumList
@@ -390,8 +387,6 @@ export default {
       } else {
         this.getHeaderList('project')
       }
-      console.log(this.categoryId, this.categoryId, '123123123')
-
       this.handleSelectCard(this.categoryId, this.pids)
     }
   },
