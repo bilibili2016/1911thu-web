@@ -165,6 +165,7 @@
       }
       .priceAsk {
         font-size: 20px;
+        // amrgin-top
       }
     }
     .style {
@@ -341,8 +342,7 @@
             color: #cd1f1f;
             font-size: 20px;
             text-align: right;
-            margin-bottom: 15px;
-            margin-right: 30px;
+            margin: 10px 30px 15px 0;
           }
           .discount-left {
             margin-right: 10px;

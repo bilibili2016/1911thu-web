@@ -189,7 +189,7 @@
               <div class="total ">= {{offlineTotalPrice.toFixed(2)}}元</div>
             </div>
             <div>
-              <p class="discount " v-if="discount!=='1'">
+              <p class="discount " v-if="discount !='1'">
                 <span class="discount-left ">{{discount*10}}折</span>
                 <span>优惠{{discountPrice.toFixed(2)}}元</span>
               </p>
@@ -616,8 +616,10 @@ export default {
           this.projectForm.offlinePrice = this.one.number_80
         } else if (num > 80 && num <= 100) {
           this.projectForm.offlinePrice = this.one.number_100
-        } else {
+        } else if (num > 100) {
           this.projectForm.offlinePrice = this.one.number_more
+        } else {
+          this.projectForm.offlinePrice = ''
         }
       } else {
         //企业
@@ -627,8 +629,10 @@ export default {
           this.projectForm.offlinePrice = this.two.number_80
         } else if (num > 80 && num <= 100) {
           this.projectForm.offlinePrice = this.two.number_100
-        } else {
+        } else if (num > 100) {
           this.projectForm.offlinePrice = this.two.number_more
+        } else {
+          this.projectForm.offlinePrice = ''
         }
       }
     },
