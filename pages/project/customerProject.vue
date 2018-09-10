@@ -12,7 +12,7 @@
       <div class="con-item desc clearfix">
         <div class="fl">项目简介：</div>
         <div class="fr">
-          <el-input type="textarea" v-model="projectForm.desc" :rows="3" maxlength="500" placeholder=""></el-input>
+          <el-input type="textarea" v-model="projectForm.desc" :rows="3" maxlength="500" placeholder="" autosize></el-input>
         </div>
         <span class="input-inner">不超过500字</span>
       </div>
@@ -33,20 +33,19 @@
       <div class="con-item num clearfix">
         <!-- <div class="fl">请选择培训人数区间：</div> -->
         <div class="fl">培训人数：</div>
-
         <div class="fr selectFr">
           <div class="divClick" @click.stop="handleNumSelect">
-            <el-input placeholder="请选择培训人数" v-model="projectForm.trainNum" readonly="true"></el-input>
-            <span class="pull-down">
+            <el-input placeholder="请输入培训人数" v-model="projectForm.trainNum" maxlength="4" @keyup.native="proving"></el-input>
+            <!-- <span class="pull-down">
               <i class="el-icon-caret-bottom"></i>
-            </span>
+            </span> -->
           </div>
 
-          <div class="pull-down-text" v-if="isShowNumSelect">
+          <!-- <div class="pull-down-text" v-if="isShowNumSelect">
             <ul>
               <li v-for="(n) in (maxNum-minNum+1)" :key="n" @click.stop="chooseNum((n-1)+minNum)">{{(n-1)+minNum}}</li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- <div class="con-item name clearfix">
@@ -69,7 +68,11 @@
             </div>
             <span>
               <span class="price">{{projectForm.offlinePrice}}</span>元/天
+              <i class="el-icon-question priceAsk"></i>
             </span>
+          </div>
+          <div class="descript">
+
           </div>
 
           <div class="pull-down-text" v-if="isShowDaySelect">
@@ -234,6 +237,8 @@ export default {
       checkedCourseData: [], //已选课程
       CategoryListData: [], //学院分类
       courseCategoryData: [], //课程分类
+      one: '', //党政线下培训天数区间对应各费用
+      two: '', //企业线下培训天数区间对应各费用
       reuseData: [],
       searchCourseForm: {
         first_ID: '',
@@ -307,6 +312,13 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid']),
+    proving() {
+      this.projectForm.trainNum = this.projectForm.trainNum.replace(
+        /[^\.\d]/g,
+        ''
+      )
+      this.projectForm.trainNum = this.projectForm.trainNum.replace('.', '')
+    },
     //定制项目模式信息
     customerInfo() {
       customerProject.customerInfo().then(response => {
@@ -315,10 +327,12 @@ export default {
         this.maxNum = result.max_study_person_number //最大培训人数
         this.maxDays = result.max_study_days //最大培训天数
         this.offlineRangeTime = result.offline_oneday_time //线下课时
-        this.offlineCount1 = result.study_object_cost_amount_one //党政事业线下每天培训费用
-        this.offlineCount2 = result.study_object_cost_amount_two //企业单位线下每天培训费用
+        // this.offlineCount1 = result.study_object_cost_amount_one //党政事业线下每天培训费用
+        // this.offlineCount2 = result.study_object_cost_amount_two //企业单位线下每天培训费用
         this.discount = result.discount //折扣
-        this.projectForm.offlinePrice = result.study_object_cost_amount_one //线下每天费用
+
+        this.one = result.study_object_cost_amount_one
+        this.two = result.study_object_cost_amount_two
       })
     },
     //搜索
@@ -592,6 +606,32 @@ export default {
       this.projectForm.onlinePrice = 0
       this.courseComputed()
     },
+    computedNum() {
+      let num = this.projectForm.trainNum
+      if (this.projectForm.objRadio === '1') {
+        //党政
+        if (num > 0 && num <= 50) {
+          this.projectForm.offlinePrice = this.one.number_50
+        } else if (num > 50 && num <= 80) {
+          this.projectForm.offlinePrice = this.one.number_80
+        } else if (num > 80 && num <= 100) {
+          this.projectForm.offlinePrice = this.one.number_100
+        } else {
+          this.projectForm.offlinePrice = this.one.number_more
+        }
+      } else {
+        //企业
+        if (num > 0 && num <= 50) {
+          this.projectForm.offlinePrice = this.two.number_50
+        } else if (num > 50 && num <= 80) {
+          this.projectForm.offlinePrice = this.two.number_80
+        } else if (num > 80 && num <= 100) {
+          this.projectForm.offlinePrice = this.two.number_100
+        } else {
+          this.projectForm.offlinePrice = this.two.number_more
+        }
+      }
+    },
     init() {
       this.customerInfo()
       this.computedPrice()
@@ -620,13 +660,15 @@ export default {
     },
     //培训对象 --线下课程费用
     'projectForm.objRadio'(val) {
-      if (val === '1') {
-        //党政
-        this.projectForm.offlinePrice = this.offlineCount1
-      } else {
-        //企业
-        this.projectForm.offlinePrice = this.offlineCount2
-      }
+      this.computedNum()
+      // if (val === '1') {
+      //   this.projectForm.offlinePrice = this.offlineCount1
+      // } else {
+      //   this.projectForm.offlinePrice = this.offlineCount2
+      // }
+    },
+    'projectForm.trainNum'(val) {
+      this.computedNum()
     }
   }
 }
