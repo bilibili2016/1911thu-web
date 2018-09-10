@@ -82,7 +82,7 @@ export default {
         cid: '',
         cp: '',
         xid: '0',
-        pid: '0'
+        pids: '0'
       },
       isHasClass: true,
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示

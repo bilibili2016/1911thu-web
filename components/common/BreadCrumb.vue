@@ -7,7 +7,7 @@
       <!-- 跳转到项目详情 -->
       <el-breadcrumb-item :to="{ path: '/project/projectdetail?kid='+config.projectId+'&type=1' }" v-if="config.projectCourse && config.text!=='定制项目详情'">{{config.project}}</el-breadcrumb-item>
       <!-- 跳转到项目分类列表 -->
-      <el-breadcrumb-item :to="{ path: '/course/category?cid=16&cp=1&xid=0&pid=0' }" v-if="config.project&&!config.projectCourse &&  config.text!=='定制项目详情'">{{config.project}}</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/course/category?cid=16&cp=1&xid=0&pids=0' }" v-if="config.project&&!config.projectCourse &&  config.text!=='定制项目详情'">{{config.project}}</el-breadcrumb-item>
       <el-breadcrumb-item>{{config.text}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>

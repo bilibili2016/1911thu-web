@@ -128,106 +128,7 @@ export default {
       },
       allCourseData: {
         category_name: '全部',
-        childList: [
-          // {
-          //   category_name: '公共管理/履职能力',
-          //   id: '2',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '时政解读',
-          //   id: '3',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '法律法规',
-          //   id: '4',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '政府绩效管理',
-          //   id: '5',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '经济治理与城市规划',
-          //   id: '6',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '城市治理',
-          //   id: '7',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '应急管理',
-          //   id: '8',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '国际形势及安全治理',
-          //   id: '9',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '创新驱动发展',
-          //   id: '10',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '社会治理',
-          //   id: '11',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '一带一路与国际合作',
-          //   id: '12',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '乡村振兴',
-          //   id: '13',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '新闻宣传',
-          //   id: '14',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // },
-          // {
-          //   category_name: '人文素养',
-          //   id: '15',
-          //   parent_id: '1',
-          //   picture: '',
-          //   short_name: ''
-          // }
-        ],
+        childList: [],
         id: '0',
         parent_id: '0',
         picture: 'http://p8p47jzeo.bkt.clouddn.com/1531894819',
@@ -304,7 +205,6 @@ export default {
       }
       this.makeData(this.cidData[0].childList, res.data.categoryList)
       this.pidData = this.cidData[this.categoryIndex]
-      console.log(this.cidData)
     },
     handelOpenUrl() {
       this.selectUrl.cid = this.selectCidItem
@@ -363,6 +263,8 @@ export default {
     getCourseCardList(itemCid, itemPid) {
       this.loadCourseAll = true
       this.setParamsPidCid(itemCid, itemPid)
+      console.log(this.categoryForm, 'this.categoryForm')
+      console.log(itemCid, itemPid, 'this.categoryForm')
 
       category.curriculumListNew(this.categoryForm).then(res => {
         this.loadCourseAll = false
@@ -470,18 +372,16 @@ export default {
     initParams() {
       // categoryId 学院 id
       this.categoryId = matchSplits('cid')
-      // console.log(matchSplits('cid'))
-      // console.log(matchSplits('cp'))
       // cp(1)项目 cp(0)
       this.cp = matchSplits('cp')
 
       // 获取是 选课(1) 还是 学院(0)
       this.xid = matchSplits('xid')
       // pid 分类的id
-      this.pids = matchSplits('pid')
+      this.pids = matchSplits('pids')
       // 初始化背景
       this.cidBg = matchSplits('cid')
-      this.pidBg = matchSplits('pid')
+      this.pidBg = matchSplits('pids')
     },
     initListCard() {
       // cp(0) 课程 cp(1)
@@ -490,7 +390,9 @@ export default {
       } else {
         this.getHeaderList('project')
       }
-      this.handleSelectCard(this.categoryId, this.categoryId)
+      console.log(this.categoryId, this.categoryId, '123123123')
+
+      this.handleSelectCard(this.categoryId, this.pids)
     }
   },
   mounted() {

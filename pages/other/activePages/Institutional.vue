@@ -336,7 +336,7 @@ export default {
         cid: '',
         cp: '',
         xid: '',
-        pid: ''
+        pids: ''
       }
     }
   },

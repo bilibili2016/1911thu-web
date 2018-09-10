@@ -59,7 +59,7 @@ export default {
         cid: '',
         cp: '',
         xid: '',
-        pid: ''
+        pids: ''
       }
     }
   },
@@ -84,17 +84,6 @@ export default {
       this.urlLink.xid = 0
       this.urlLink.pid = 0
       open(this.urlLink)
-      // window.open(
-      //   window.location.origin +
-      //     '/course/category' +
-      //     '?cid=' +
-      //     item.id +
-      //     '&cp=' +
-      //     item.is_picture_show +
-      //     '&xid=0' +
-      //     '&pid=' +
-      //     '0'
-      // )
     }
   },
   mounted() {
