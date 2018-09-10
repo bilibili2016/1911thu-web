@@ -4,8 +4,8 @@
       <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic5.png" alt="">
       <div class="top-text">
         <h1 class="top-h1">1911学堂</h1>
-        <p class="top-desc">源自清华、面向世界，集聚清华大学、北京大学等国内外知名高校师资， 为党政干部与企事业单位高管提供与时俱进的终身教育解决方案。
-        </p>
+        <p class="top-desc"> 1911学堂可根据政府机关、企事业单位需求，<br>提供系统、权威、实用的培训解决方案，<br>帮助学员提升专业知识和思维能力，助力政府机关、企事业单位高效运转。</p>
+
         <div class="top-button" @click="handleScroll">
           填写联系方式，免费申请课程体验。
           <span class="right" ref="rgihtGo">GO</span>
@@ -14,50 +14,45 @@
     </div>
     <div :class="{topBottom:istopBottom}" ref="topBottom">
       <div class="why">
-        <h3>为什么选择1911学堂</h3>
+        <h3>1911学堂值得您信赖</h3>
         <div class="why-con clearfix">
-          <div class="why-item">
+          <div class="why-item" v-for="(item,index) in imgList" :key="index">
             <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic25.png" alt="">
+              <img :src="item.imgUrl" alt="">
             </div>
-            <p class="item-desc1">雄厚的师资力量</p>
+            <p class="item-desc1">{{item.title}}</p>
             <span class="item-line"></span>
-            <p class="item-desc2">集聚清华大学等国内外知名大学学者教授、各领域精英联合授课。</p>
+            <p class="item-desc2">{{item.text}}</p>
           </div>
-          <div class="why-item">
-            <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic26.png" alt="">
+        </div>
+        <h3>1911学堂培训项目</h3>
+        <div class="projects">
+          <span v-for="(item,index) in projectArr" :key="index" @click="goCourseList(item)">{{item.category_name}}</span>
+          <span @click="goCustomerProject">自定制项目</span>
+        </div>
+      </div>
+      <div class="course serviceDetails">
+        <h3>1911学堂专属定制项目</h3>
+        <p class="course-small-title">如果您有更多、更独特的培训需求，请联系我们，1911学堂将根据单位需求， 为您量身定制高品质培训项目。</p>
+        <div class="service-list clearfix">
+          <div class="service-line"></div>
+          <div class="service-item" v-for="(item,index) in serviceList" :key="index">
+
+            <div class="item-title">
+              <span class="item-index">{{item.num}}.</span>
+              <span>{{item.title}}</span>
             </div>
-            <p class="item-desc1">与时俱进的系统化创新课程体系</p>
-            <span class="item-line"></span>
-            <p class="item-desc2">理论学习与经典实践案例相结合，权威、实战、实用，以解决问题为导向。
-            </p>
-          </div>
-          <div class="why-item">
-            <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic27.png" alt="">
+            <div class="item-desc">
+              {{item.content}}
             </div>
-            <p class="item-desc1">线上+线下自由组合的学习模式</p>
-            <span class="item-line"></span>
-            <p class="item-desc2">基于大数据分析的个性化学习，线上、线下多种 学习模式可供选择，安排灵活。
-            </p>
-          </div>
-          <div class="why-item">
-            <div class="item-img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic28.png" alt="">
-            </div>
-            <p class="item-desc1">清华认证证书</p>
-            <span class="item-line"></span>
-            <p class="item-desc2">完成课程学习并通过相应考核后，可获得清华大 学及相关合作单位认证证书。
-            </p>
           </div>
         </div>
       </div>
-      <div class="course">
+      <!-- <div class="course">
         <h3>1911学堂课程体系</h3>
         <p class="course-small-title">包含560余门课程</p>
         <ul class="list clearfix">
-          <li v-for="li in courseList" :key="li.id" class="list-item" @click="goCourseList(li)">
+          <li v-for="li in projectArr" :key="li.id" class="list-item" @click="goCourseList(li)">
             <p class="item-desc1">{{li.title}}</p>
           </li>
           <li class="list-item" @click="goCustomerProject">
@@ -78,8 +73,8 @@
             <img src="http://papn9j3ys.bkt.clouddn.com/insitituationCourse-bg.png" alt="">
           </div>
         </div>
-      </div>
-      <div class="together">
+      </div> -->
+      <!-- <div class="together">
         <h4>与1911学堂一起</h4>
         <div class="list">
           <div>
@@ -99,31 +94,63 @@
             <p>改善行为模式</p>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="psrocess">
         <div class="route">
-          <h3>购买、学习流程</h3>
+          <h3>课程购买与学习</h3>
           <div class="process-list clearfix">
-            <p><img src="http://papn9j3ys.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
-            <h5>
-              <span v-for="(one,index) in buyList" :key="index">
-                <i class="icon before el-icon-caret-right"></i>
-                <i class="word">{{one}}</i>
-                <i class="icon after el-icon-caret-right"></i>
-              </span>
-            </h5>
+            <div class="fl">
+              <p><img src="http://papn9j3ys.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
+            </div>
+            <div class="fr">
+              <div class="process-info">
+                <h5>
+                  <span v-for="(one,index) in buyListOne" :key="index">
+                    <i class="icon before el-icon-caret-right"></i>
+                    <i class="word">{{one}}</i>
+                    <i class="icon after el-icon-caret-right"></i>
+                  </span>
+                </h5>
+              </div>
+              <div class="process-info">
+                <h5>
+                  <span v-for="(one,index) in buyListTwo" :key="index">
+                    <i class="icon before el-icon-caret-right"></i>
+                    <i class="word">{{one}}</i>
+                    <i class="icon after el-icon-caret-right"></i>
+                  </span>
+                </h5>
+              </div>
+            </div>
+
           </div>
           <div class="process-list clearfix">
-            <p>
-              <img src="http://papn9j3ys.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
-            </p>
-            <h5>
-              <span v-for="(one,index) in studyList" :key="index">
-                <i class="icon before el-icon-caret-right"></i>
-                <i class="word">{{one}}</i>
-                <i class="icon after el-icon-caret-right"></i>
-              </span>
-            </h5>
+            <div class="fl">
+              <p>
+                <img src="http://papn9j3ys.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
+              </p>
+            </div>
+            <div class="fr">
+              <div class="process-info">
+                <h5>
+                  <span v-for="(one,index) in buyListThree" :key="index">
+                    <i class="icon before el-icon-caret-right"></i>
+                    <i class="word">{{one}}</i>
+                    <i class="icon after el-icon-caret-right"></i>
+                  </span>
+                </h5>
+              </div>
+              <div class="process-info">
+                <h5>
+                  <span v-for="(one,index) in buyListFour" :key="index">
+                    <i class="icon before el-icon-caret-right"></i>
+                    <i class="word">{{one}}</i>
+                    <i class="icon after el-icon-caret-right"></i>
+                  </span>
+                </h5>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -131,7 +158,7 @@
       <div class="bottomForm" id="buttom" ref="buttonForm">
         <img class="buttom-bg" src="http://papn9j3ys.bkt.clouddn.com/hrentry-bg.png" alt="">
         <div class="word">
-          <p class="word-desc1">如果您对1911学堂的课程感兴趣，您可以留下您的企业名称和联系方式，60分钟内专业的商务团队会跟您联系。</p>
+          <p class="word-desc1">如果您希望对1911学堂课程及培训项目了解更多，请填写以下信息，我们会在90分钟内与您联系，期待为您创造更好的教育体验。</p>
           <p class="word-desc2">
             <i class="word-desc-bg"></i>您也可以拨打咨询电话：010-62701911</p>
           <div class="formDIv">
@@ -175,7 +202,6 @@ export default {
   components: {
     'v-backtotop': BackToTop
   },
-
   watch: {
     $route: 'fetchDate'
   },
@@ -206,64 +232,33 @@ export default {
       },
       showCheckedCourse: true,
       recommend: true,
-      courseList: [
+      imgList: [
         {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_1.png',
-          title: '干部网络学院',
-          number: '（10余门课程）',
-          cidform: {
-            cids: '1',
-            indexs: '',
-            pids: '0'
-          },
-          is_picture_show: '0'
+          imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic25.png',
+          title: '强大的师资力量',
+          text:
+            '1911学堂已签约超过500名优秀导师，均为 清华大学等一流高校教授、院士及500强企业 高管，师资力量雄厚。'
         },
         {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_2.png',
-          title: '在线商学院',
-          number: '（14个专题，110余门课程）',
-          link: '/other/enterprisecustom',
-          cidform: {
-            cids: '17',
-            indexs: '1',
-            pids: '0'
-          },
-          is_picture_show: '0'
+          imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic26.png',
+          title: '与时俱进的系统化课程体系',
+          text:
+            '1911学堂拥有强大的课程研发能力，根据时代热点与客户需求，不断推出系统、权威、创新、实用的课程体系；'
         },
         {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_3.png',
-          title: '职场学院',
-          number: '（12个模块，160余门课程）',
-          cidform: {
-            cids: '19',
-            indexs: '2',
-            pids: '0'
-          },
-          is_picture_show: '0'
+          imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic27.png',
+          title: '先进的培训模式',
+          text:
+            '1911学堂拥有纯线上培训及线上线下混合式培训等多种模式，可根据客户需求，灵活采用不同的培训模式。'
         },
         {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_4.png',
-          title: '党政委托项目',
-          number: '（14个模块，150余门课程）',
-          cidform: {
-            cids: '16',
-            indexs: '3',
-            pids: '0'
-          },
-          is_picture_show: '1'
-        },
-        {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_5.png',
-          title: '企业内训项目',
-          number: '（6个模块，初期20余门课程）',
-          cidform: {
-            cids: '18',
-            indexs: '4',
-            pids: '0'
-          },
-          is_picture_show: '1'
+          imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic28.png',
+          title: '清华大学认证证书',
+          text:
+            '在1911学堂完成课程学习并通过相应考核后，学员可获得清华大学及相关单位联合颁发的认证证书。'
         }
       ],
+      projectArr: [],
       project: [
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_7.png',
@@ -281,16 +276,41 @@ export default {
           link: '/other/activePages/faceteach'
         }
       ],
-      buyList: [
+      buyListOne: [
+        '直接购买项目',
         '单位入口',
-        '我要选课',
-        '选择课程',
-        '购物车结算',
-        '填写资料，提交订单',
+        '进入项目分类',
+        '选择项目',
+        '加入购物车/立即购买',
         '支付',
-        '学员登录观看'
+        '学员观看'
       ],
-      studyList: ['进入网站或APP', '我的课程', '点击课程封面', '进入视频学习'],
+      buyListTwo: [
+        '自定制项目',
+        '单位入口',
+        '进入自定制项目',
+        '新建项目',
+        '自由搭配课程',
+        '自由搭配课程',
+        '支付',
+        '学员观看'
+      ],
+      buyListThree: [
+        '直接学习',
+        '进入网站或APP',
+        '我的课程/我的项目',
+        '点击封面',
+        '进入视频学习'
+      ],
+      buyListFour: [
+        '绑定兑换码后学习',
+        '首页',
+        '兑换码',
+        '绑定获得的兑换码',
+        '我的课程/我的项目',
+        '点击封面',
+        '进入视频学习'
+      ],
       company: {
         companyname: '',
         person: '',
@@ -337,7 +357,68 @@ export default {
         cp: '',
         xid: '',
         pids: ''
-      }
+      },
+      serviceList: [
+        {
+          title: '了解需求',
+          content:
+            '根据政府单位、企事业单位及团体的培训需求，以问题解决为导向，进行需求调研分析。',
+          num: '01'
+        },
+        {
+          title: '提交方案',
+          content:
+            '根据培训需求分析的结果提交初步的培训解决方案，由委托单位培训负责人提出修改意见。',
+          num: '02'
+        },
+        {
+          title: '沟通细节',
+          content:
+            '对学员的职业、岗位、年龄、学历、认知、态度等细节信息进行沟通分析，了解委托单位的现状及发展战略愿景目标。',
+          num: '03'
+        },
+        {
+          title: '完善方案',
+          content:
+            '根据分析调整修改完善课程内容及授课方式，根据培训需求选择最佳课程及师资人选，并与委托单位达成共识，提交正式的培训方案。',
+          num: '04'
+        },
+        {
+          title: '签订合同',
+          content:
+            '根据双方确认的培训方案，确定培训费用、时间，明确实施计划和双方的责任义务，签订培训合同。',
+          num: '05'
+        },
+        {
+          title: '课前准备',
+          content:
+            '准备上课所需资料、设备、环境布置，与师资沟通协调并调整细节，提前一天布置现场，确保培训质量。',
+          num: '06'
+        },
+        {
+          title: '培训实施',
+          content:
+            '按照培训方案和教学计划组织教师上课，开展课前介绍、课中沟通调整、课后总结点评，根据学员需求反馈调整相关安排。',
+          num: '07'
+        },
+        {
+          title: '评估反馈',
+          content:
+            '培训结束后开展评估工作，了解学员对课程内容、教师及培训整体效果的意见，并提交培训总结报告。',
+          num: '08'
+        },
+        {
+          title: '备案存档',
+          content: '将委托单位的培训资料档案存档,已备后续服务及跟踪调查使用.',
+          num: '09'
+        },
+        {
+          title: '跟进回访',
+          content:
+            '培训结束一段时间后开展后续跟进回访,并提出针对性的建议,形成长期持续的合作,详情可联系我们.',
+          num: '10'
+        }
+      ]
     }
   },
   computed: {
@@ -347,10 +428,10 @@ export default {
   methods: {
     fetchDate() {},
     goCourseList(item) {
-      this.urlLink.cid = item.cidform.cids
+      this.urlLink.cid = item.id
       this.urlLink.cp = item.is_picture_show
       this.urlLink.xid = 0
-      this.urlLink.pid = 0
+      this.urlLink.pids = 0
       open(this.urlLink)
     },
     handleScroll() {
@@ -529,9 +610,19 @@ export default {
       } else {
         this.$bus.$emit('loginShow')
       }
+    },
+    getClassifyList() {
+      institutional.getClassifyList().then(response => {
+        for (let item of response.data.categoryList) {
+          if (item.is_picture_show === '1') {
+            this.projectArr.push(item)
+          }
+        }
+      })
     }
   },
   mounted() {
+    this.getClassifyList()
     this.company.userID = this.token
     // this.$bus.$emit('bannerShow', true)
     window.addEventListener('scroll', this.pageScroll)
