@@ -54,8 +54,8 @@ export default {
         companyId: null
       },
       payListForm: {
-        orderId: null,
-        attachs: null
+        orderId: null
+        // attachs: null
       },
       projectList: [],
       restTime: '',
@@ -63,8 +63,8 @@ export default {
         hour: '',
         minutes: '',
         seconds: ''
-      },
-      attachs: null
+      }
+      // attachs: null
     }
   },
   methods: {
@@ -85,14 +85,14 @@ export default {
       // console.log(matchSplits('order'), 'order')
       // console.log(matchSplits('attach'))
       let cpyid = matchSplits('order')
-      let attachs = matchSplits('attach')
+      // let attachs = matchSplits('attach')
       this.payListForm.orderId = cpyid
-      this.payListForm.attachs = 2
-      if (attachs == 2) {
-        this.payListForm.attachs = 2
-      } else {
-        this.payListForm.attachs = 1
-      }
+      // this.payListForm.attachs = 2
+      // if (attachs == 2) {
+      //   this.payListForm.attachs = 2
+      // } else {
+      //   this.payListForm.attachs = 1
+      // }
 
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
@@ -104,12 +104,7 @@ export default {
               clearInterval(this.interval)
               this.$bus.$emit('closeCode')
               this.$router.push({
-                path:
-                  '/shop/payResult' +
-                  '?order=' +
-                  cpyid +
-                  '&attach=' +
-                  this.attachs
+                path: '/shop/payResult' + '?order=' + cpyid
               })
             }
           })
@@ -131,9 +126,7 @@ export default {
       this.wxMsg = false
       this.zfbMsg = false
       this.pubMsg = true
-      this.$router.push(
-        '/shop/payPublic?orderID=' + urlLen + '&attach=' + this.attachs
-      )
+      this.$router.push('/shop/payPublic?orderID=' + urlLen)
     },
     time() {
       setInterval(data => {
@@ -178,8 +171,8 @@ export default {
     }
   },
   mounted() {
-    this.attachs = matchSplits('attach')
-    persistStore.set('attach', this.attachs)
+    // this.attachs = matchSplits('attach')
+    // persistStore.set('attach', this.attachs)
     this.$bus.$on('clearInterval', dat => {
       clearInterval(this.interval)
     })
