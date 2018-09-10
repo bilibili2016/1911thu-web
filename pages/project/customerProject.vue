@@ -23,8 +23,17 @@
           <el-radio v-model="projectForm.objRadio" label="2">企业单位</el-radio>
         </div>
       </div>
+      <div class="con-item style clearfix">
+        <div class="fl">培训方式：</div>
+        <div class="fr ">
+          <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio>
+          <el-radio v-model="projectForm.styleRadio" label="2">线上+线下</el-radio>
+        </div>
+      </div>
       <div class="con-item num clearfix">
+        <!-- <div class="fl">请选择培训人数区间：</div> -->
         <div class="fl">培训人数：</div>
+
         <div class="fr selectFr">
           <div class="divClick" @click.stop="handleNumSelect">
             <el-input placeholder="请选择培训人数" v-model="projectForm.trainNum" readonly="true"></el-input>
@@ -40,24 +49,24 @@
           </div>
         </div>
       </div>
-      <div class="con-item style clearfix">
-        <div class="fl">培训方式：</div>
-        <div class="fr ">
-          <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio>
-          <el-radio v-model="projectForm.styleRadio" label="2">线上+线下</el-radio>
+      <!-- <div class="con-item name clearfix">
+        <div class="fl">请输入具体人数：</div>
+        <div class="fr">
+          <el-input v-model.trim="projectForm.name" placeholder="请输入1-9999的数字"></el-input>
         </div>
-      </div>
+      </div> -->
       <div class="con-item style day clearfix" v-if="projectForm.styleRadio==='2'">
-        <div class="fl"></div>
+        <div class="fl">线下培训天数：</div>
         <div class="fr selectFr">
           <div class="select-con ">
-            <span>线下培训天数</span>
-            <span @click.stop="handleDaySelect">
-              <el-input placeholder="请选择天数" v-model="projectForm.trainDay" readonly="true"></el-input>
-            </span>
-            <span class="pull-down">
-              <i class="el-icon-caret-bottom"></i>
-            </span>
+            <div class="divClick">
+              <span @click.stop="handleDaySelect">
+                <el-input placeholder="请选择天数" v-model="projectForm.trainDay" readonly="true"></el-input>
+              </span>
+              <span class="pull-down">
+                <i class="el-icon-caret-bottom"></i>
+              </span>
+            </div>
             <span>
               <span class="price">{{projectForm.offlinePrice}}</span>元/天
             </span>

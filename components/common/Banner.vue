@@ -12,12 +12,7 @@
       </div>
     </template>
     <template v-if="config.banner_type === 'famousList'">
-      <div class="famousTeacher">
-        <img :src="bannerImg" alt="">
-        <div class="desc">
-          名师阵容
-        </div>
-      </div>
+      <div class="famousTeacher"></div>
     </template>
 
     <template v-if="config.banner_type === 'profile'">

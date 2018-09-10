@@ -49,19 +49,8 @@
 .famousTeacher {
   position: relative;
   height: 300px !important;
-  img {
-    height: 300px;
-  }
-  .desc {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    line-height: 300px;
-    font-size: 56px;
-    color: #fff;
-    line-height: 300px;
-    text-align: center;
-  }
+  background: url('http://papn9j3ys.bkt.clouddn.com/famousTeacher-bg.png')
+    no-repeat;
+  background-size: 1920px 300px;
+  background-position: center center;
 }
