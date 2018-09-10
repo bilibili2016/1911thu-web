@@ -68,11 +68,46 @@
             </div>
             <span>
               <span class="price">{{projectForm.offlinePrice}}</span>元/天
-              <i class="el-icon-question priceAsk"></i>
+              <i class="el-icon-question priceAsk" @click.stop="handledesc"></i>
             </span>
           </div>
-          <div class="descript">
-
+          <div class="descript-text" v-show="showDesc">
+            <div v-if="projectForm.objRadio === '1'">
+              <p>
+                <span>1-50人：</span>
+                <span>{{one.number_50}}</span>元/天
+              </p>
+              <p>
+                <span>51-80人：</span>
+                <span>{{one.number_80}}</span>元/天
+              </p>
+              <p>
+                <span>81-100人：</span>
+                <span>{{one.number_100}}</span>元/天
+              </p>
+              <p>
+                <span>100人以上：</span>
+                <span>{{one.number_more}}</span>元/天，具体费用请与工作人员联系
+              </p>
+            </div>
+            <div v-else>
+              <p>
+                <span>1-50人：</span>
+                <span>{{two.number_50}}</span>元/天
+              </p>
+              <p>
+                <span>51-80人：</span>
+                <span>{{two.number_80}}</span>元/天
+              </p>
+              <p>
+                <span>81-100人：</span>
+                <span>{{two.number_100}}</span>元/天
+              </p>
+              <p>
+                <span>100人以上：</span>
+                <span>{{two.number_more}}</span>元/天，具体费用请与工作人员联系
+              </p>
+            </div>
           </div>
 
           <div class="pull-down-text" v-if="isShowDaySelect">
@@ -218,6 +253,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      showDesc: false,
       isClick: false,
       searchInput: '',
       isShowNumSelect: false,
@@ -593,12 +629,18 @@ export default {
           this.courseComputed()
         })
     },
+    handledesc() {
+      console.log(222)
+
+      this.showDesc = !this.showDesc
+    },
     documentHandler(e) {
       this.isShowNumSelect = false
       this.isShowDaySelect = false
       this.isShowCollegeSelect = false
       this.isShowCourseSelect = false
       this.isShowSearchSelect = false
+      this.showDesc = false
     },
     computedPrice() {
       //初始化
