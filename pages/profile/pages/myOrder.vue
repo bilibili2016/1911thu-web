@@ -14,13 +14,13 @@
             <el-pagination background layout="prev, pager, next" :page-size="pagemsg4.pagesize" :pager-count="5" :page-count="pagemsg4.pagesize" :current-page="pagemsg4.page" :total="pagemsg4.total" @current-change="getAllOrderDataChange"></el-pagination>
           </div>
           <v-nomsg class="noOrder" v-if="allOrderData.length == 0 && !allOrderLoadAll" :config="noMsgTen"></v-nomsg> -->
-          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange" @handleUpdate="handleUpdate(0)"></v-listtab>
+          <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
           <span class="payCut" slot="label">未完成
             <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{orderTotal}}</i>
           </span>
-          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange" @handleUpdate="handleUpdate(1)"></v-listtab>
+          <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderThird">
           <span class="payOk" slot="label">已完成
@@ -123,12 +123,11 @@ export default {
     pageChange(val) {
       this.$emit('pageChange', val)
     },
-    handleUpdate(status) {
-      if (status == 0) {
-        this.$emit('handleUpdate', 0, 0)
-      } else {
-        this.$emit('handleUpdate', 1, 1)
-      }
+    handleUpdate() {
+      //取消订单 全部/未完成/已关闭都需要更新
+      this.$emit('handleUpdate', 0, 1)
+      this.$emit('handleUpdate', 1, 1)
+      this.$emit('handleUpdate', 3, 1)
     }
   }
 }

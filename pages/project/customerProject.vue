@@ -12,7 +12,7 @@
       <div class="con-item desc clearfix">
         <div class="fl">项目简介：</div>
         <div class="fr">
-          <el-input type="textarea" v-model="projectForm.desc" :rows="3" maxlength="500" placeholder="" autosize></el-input>
+          <el-input type="textarea" v-model.trim="projectForm.desc" :rows="3" maxlength="500" placeholder="" autosize></el-input>
         </div>
         <span class="input-inner">不超过500字</span>
       </div>
@@ -413,6 +413,10 @@ export default {
 
         if (this.projectForm.checkedCourse.length === 0) {
           throw '请添加课程'
+        }
+
+        if (parseFloat(this.projectForm.projectPrice) == 0) {
+          throw '您自定制的项目中不能全部为免费课程，请重新选课'
         }
       } catch (err) {
         message(this, 'error', err)
