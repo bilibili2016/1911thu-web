@@ -185,8 +185,8 @@
             <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
           </div>
           <div class="tableFooter" v-else>
-            <p>9.5折&nbsp;&nbsp;&nbsp;优惠¥{{(orderDetail.order_amount*(1-0.95)).toFixed(2)}}</p>
-            <h4>商品总额：￥{{(orderDetail.order_amount*0.95).toFixed(2)}}</h4>
+            <!-- <p>9.5折&nbsp;&nbsp;&nbsp;优惠¥{{(orderDetail.order_amount*(1-0.95)).toFixed(2)}}</p> -->
+            <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
           </div>
         </div>
       </div>
