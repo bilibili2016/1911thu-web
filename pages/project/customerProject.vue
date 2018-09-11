@@ -31,29 +31,13 @@
         </div>
       </div>
       <div class="con-item num clearfix">
-        <!-- <div class="fl">请选择培训人数区间：</div> -->
         <div class="fl">培训人数：</div>
         <div class="fr selectFr">
           <div class="divClick" @click.stop="handleNumSelect">
             <el-input placeholder="请输入培训人数" v-model="projectForm.trainNum" maxlength="4" @keyup.native="proving"></el-input>
-            <!-- <span class="pull-down">
-              <i class="el-icon-caret-bottom"></i>
-            </span> -->
           </div>
-
-          <!-- <div class="pull-down-text" v-if="isShowNumSelect">
-            <ul>
-              <li v-for="(n) in (maxNum-minNum+1)" :key="n" @click.stop="chooseNum((n-1)+minNum)">{{(n-1)+minNum}}</li>
-            </ul>
-          </div> -->
         </div>
       </div>
-      <!-- <div class="con-item name clearfix">
-        <div class="fl">请输入具体人数：</div>
-        <div class="fr">
-          <el-input v-model.trim="projectForm.name" placeholder="请输入1-9999的数字"></el-input>
-        </div>
-      </div> -->
       <div class="con-item style day clearfix" v-if="projectForm.styleRadio==='2'">
         <div class="fl">线下培训天数：</div>
         <div class="fr selectFr">
@@ -199,7 +183,9 @@
             <div class="deItem clearfix " v-for="(item,index) in checkedCourseData " :key="index ">
               <div class="courseTitle ">{{item.title}}</div>
               <div class="time ">{{item.study_time}}学时</div>
-              <div class="price ">{{item.present_price}}元</div>
+              <div class="price " v-if="item.is_free==='2'">0元</div>
+              <div class="price " v-else>{{item.present_price}}元</div>
+
               <div class="operater " @click="deleteChooseCourse(index) ">删除</div>
             </div>
           </div>
@@ -521,6 +507,9 @@ export default {
     //课程结算
     courseComputed() {
       this.checkedCourseData.forEach((n, index) => {
+        if (n.is_free === '2') {
+          n.present_price = 0
+        }
         this.projectForm.onlineTime += Number(n.study_time)
         this.projectForm.onlinePrice += Number(n.present_price)
       })
