@@ -406,7 +406,7 @@ export default {
         if (Trim(this.projectForm.name) === '') throw '请填写项目名称'
         if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
         if (this.projectForm.objRadio === '') throw '请选择培训对象'
-        if (this.projectForm.trainNum === '') throw '请选择培训人数'
+        if (this.projectForm.trainNum === '') throw '请输入培训人数'
         if (this.projectForm.styleRadio === '') throw '请选择培训方式'
         if (
           this.projectForm.styleRadio === '2' &&
@@ -430,6 +430,7 @@ export default {
         }
       } catch (err) {
         message(this, 'error', err)
+        this.isClick = false
         return false
       }
 
@@ -462,7 +463,29 @@ export default {
             })
           }
         } else {
-          message(this, 'error', response.msg)
+          if (response.msg === '存在下架课程') {
+            let msgData = ''
+            if (response.data.length == 1) {
+              response.data.forEach((item, index) => {
+                msgData += item.title
+              })
+            } else {
+              response.data.forEach((item, index) => {
+                if (index == 0) {
+                  msgData += item.title
+                } else {
+                  msgData += ',' + item.title
+                }
+              })
+            }
+            message(
+              this,
+              'error',
+              `您制定的项目中存在下架课程《${msgData}》，请删除后再提交`
+            )
+          } else {
+            message(this, 'error', response.msg)
+          }
         }
       })
     },
@@ -630,8 +653,6 @@ export default {
         })
     },
     handledesc() {
-      console.log(222)
-
       this.showDesc = !this.showDesc
     },
     documentHandler(e) {
@@ -696,22 +717,23 @@ export default {
   watch: {
     chooseCourseData(val) {
       this.projectForm.trainSearch = ''
-      val.forEach((n, index) => {
-        if (val.length == 1) {
+      if (val.length === 1) {
+        val.forEach((n, index) => {
           this.projectForm.trainSearch += n.title
-        } else {
-          this.projectForm.trainSearch += n.title + ','
-        }
-      })
+        })
+      } else {
+        val.forEach((n, index) => {
+          if (index === 0) {
+            this.projectForm.trainSearch += n.title
+          } else {
+            this.projectForm.trainSearch += ',' + n.title
+          }
+        })
+      }
     },
     //培训对象 --线下课程费用
     'projectForm.objRadio'(val) {
       this.computedNum()
-      // if (val === '1') {
-      //   this.projectForm.offlinePrice = this.offlineCount1
-      // } else {
-      //   this.projectForm.offlinePrice = this.offlineCount2
-      // }
     },
     'projectForm.trainNum'(val) {
       this.computedNum()
