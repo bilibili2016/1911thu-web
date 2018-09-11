@@ -12,11 +12,11 @@ config.sentry = {
   }
 }
 ;(config.head.link = [
-  // {
-  //   rel: 'icon',
-  //   type: 'image/x-icon',
-  //   href: 'http://papn9j3ys.bkt.clouddn.com/favicon.png'
-  // },
+  {
+    rel: 'icon',
+    type: 'image/x-icon',
+    href: 'http://papn9j3ys.bkt.clouddn.com/favicon.png'
+  },
   {
     rel: 'stylesheet',
     href:
