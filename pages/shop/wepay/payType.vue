@@ -54,8 +54,8 @@ export default {
         companyId: null
       },
       payListForm: {
-        orderId: null
-        // attachs: null
+        orderId: null,
+        attachs: 1
       },
       projectList: [],
       restTime: '',
@@ -82,8 +82,6 @@ export default {
       }
     },
     getStatus() {
-      // console.log(matchSplits('order'), 'order')
-      // console.log(matchSplits('attach'))
       let cpyid = matchSplits('order')
       // let attachs = matchSplits('attach')
       this.payListForm.orderId = cpyid
@@ -91,9 +89,7 @@ export default {
       // if (attachs == 2) {
       //   this.payListForm.attachs = 2
       // } else {
-      //   this.payListForm.attachs = 1
       // }
-
       this.interval = setInterval(() => {
         if (this.seconds <= 0) {
           clearInterval(this.interval)
@@ -171,8 +167,6 @@ export default {
     }
   },
   mounted() {
-    // this.attachs = matchSplits('attach')
-    // persistStore.set('attach', this.attachs)
     this.$bus.$on('clearInterval', dat => {
       clearInterval(this.interval)
     })
