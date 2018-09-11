@@ -31,29 +31,13 @@
         </div>
       </div>
       <div class="con-item num clearfix">
-        <!-- <div class="fl">请选择培训人数区间：</div> -->
         <div class="fl">培训人数：</div>
         <div class="fr selectFr">
           <div class="divClick" @click.stop="handleNumSelect">
             <el-input placeholder="请输入培训人数" v-model="projectForm.trainNum" maxlength="4" @keyup.native="proving"></el-input>
-            <!-- <span class="pull-down">
-              <i class="el-icon-caret-bottom"></i>
-            </span> -->
           </div>
-
-          <!-- <div class="pull-down-text" v-if="isShowNumSelect">
-            <ul>
-              <li v-for="(n) in (maxNum-minNum+1)" :key="n" @click.stop="chooseNum((n-1)+minNum)">{{(n-1)+minNum}}</li>
-            </ul>
-          </div> -->
         </div>
       </div>
-      <!-- <div class="con-item name clearfix">
-        <div class="fl">请输入具体人数：</div>
-        <div class="fr">
-          <el-input v-model.trim="projectForm.name" placeholder="请输入1-9999的数字"></el-input>
-        </div>
-      </div> -->
       <div class="con-item style day clearfix" v-if="projectForm.styleRadio==='2'">
         <div class="fl">线下培训天数：</div>
         <div class="fr selectFr">
@@ -199,7 +183,9 @@
             <div class="deItem clearfix " v-for="(item,index) in checkedCourseData " :key="index ">
               <div class="courseTitle ">{{item.title}}</div>
               <div class="time ">{{item.study_time}}学时</div>
-              <div class="price ">{{item.present_price}}元</div>
+              <div class="price " v-if="item.is_free==='2'">0元</div>
+              <div class="price " v-else>{{item.present_price}}元</div>
+
               <div class="operater " @click="deleteChooseCourse(index) ">删除</div>
             </div>
           </div>
@@ -406,7 +392,7 @@ export default {
         if (Trim(this.projectForm.name) === '') throw '请填写项目名称'
         if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
         if (this.projectForm.objRadio === '') throw '请选择培训对象'
-        if (this.projectForm.trainNum === '') throw '请选择培训人数'
+        if (this.projectForm.trainNum === '') throw '请输入培训人数'
         if (this.projectForm.styleRadio === '') throw '请选择培训方式'
         if (
           this.projectForm.styleRadio === '2' &&
@@ -430,6 +416,7 @@ export default {
         }
       } catch (err) {
         message(this, 'error', err)
+        this.isClick = false
         return false
       }
 
@@ -462,7 +449,29 @@ export default {
             })
           }
         } else {
-          message(this, 'error', response.msg)
+          if (response.msg === '存在下架课程') {
+            let msgData = ''
+            if (response.data.length == 1) {
+              response.data.forEach((item, index) => {
+                msgData += item.title
+              })
+            } else {
+              response.data.forEach((item, index) => {
+                if (index == 0) {
+                  msgData += item.title
+                } else {
+                  msgData += ',' + item.title
+                }
+              })
+            }
+            message(
+              this,
+              'error',
+              `您制定的项目中存在下架课程《${msgData}》，请删除后再提交`
+            )
+          } else {
+            message(this, 'error', response.msg)
+          }
         }
       })
     },
@@ -498,6 +507,9 @@ export default {
     //课程结算
     courseComputed() {
       this.checkedCourseData.forEach((n, index) => {
+        if (n.is_free === '2') {
+          n.present_price = 0
+        }
         this.projectForm.onlineTime += Number(n.study_time)
         this.projectForm.onlinePrice += Number(n.present_price)
       })
@@ -630,8 +642,6 @@ export default {
         })
     },
     handledesc() {
-      console.log(222)
-
       this.showDesc = !this.showDesc
     },
     documentHandler(e) {
@@ -696,22 +706,23 @@ export default {
   watch: {
     chooseCourseData(val) {
       this.projectForm.trainSearch = ''
-      val.forEach((n, index) => {
-        if (val.length == 1) {
+      if (val.length === 1) {
+        val.forEach((n, index) => {
           this.projectForm.trainSearch += n.title
-        } else {
-          this.projectForm.trainSearch += n.title + ','
-        }
-      })
+        })
+      } else {
+        val.forEach((n, index) => {
+          if (index === 0) {
+            this.projectForm.trainSearch += n.title
+          } else {
+            this.projectForm.trainSearch += ',' + n.title
+          }
+        })
+      }
     },
     //培训对象 --线下课程费用
     'projectForm.objRadio'(val) {
       this.computedNum()
-      // if (val === '1') {
-      //   this.projectForm.offlinePrice = this.offlineCount1
-      // } else {
-      //   this.projectForm.offlinePrice = this.offlineCount2
-      // }
     },
     'projectForm.trainNum'(val) {
       this.computedNum()
