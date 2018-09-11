@@ -58,6 +58,8 @@ export default {
     }
   },
   mounted() {
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     let tid = window.location.pathname.split('/')[3]
     this.tidForm.tids = tid
     this.loading = true

@@ -61,6 +61,9 @@ export default {
           headerClass[i].classList.remove('active')
         }
       }
+
+      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     }
   },
   mounted() {
