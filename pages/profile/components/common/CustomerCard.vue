@@ -17,11 +17,13 @@
                 <span>{{item.title}}</span>
               </p>
               <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>
-              <div class="operate" v-if="!item.curriculumProjectPrivilege">
+              <!-- 自定义项目下单和已经够买的，不可以修改和删除 -->
+              <div class="operate" v-if="item.is_edit==='1'">
                 <span @click="editCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
                 <span @click="deleteCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
               </div>
-              <div v-else class="buied" @click="handleBuied">已购买</div>
+              <!-- 暂不显示已够买字段 -->
+              <!-- <div v-else class="buied" @click="handleBuied">已购买</div> -->
             </div>
           </el-row>
         </div>

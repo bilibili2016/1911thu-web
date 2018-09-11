@@ -110,7 +110,7 @@ export default {
       this.problem.curriculumcatalogid = this.config.catalogId
       this.problem.types = 2
       home.reportProblem(this.problem).then(response => {
-        if (response.status === '100100') {
+        if (response.status === 100100) {
           message(this, 'success', response.msg)
         } else {
           this.closeReport()

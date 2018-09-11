@@ -4,7 +4,7 @@
       <div class="center category-style">
         <div class="college">
           <!-- v-if="!loadList" -->
-          <li class="title">学院：</li>
+          <li class="title">领域：</li>
           <ul>
             <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
               <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>

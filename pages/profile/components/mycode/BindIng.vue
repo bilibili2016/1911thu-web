@@ -151,7 +151,7 @@ export default {
           this.$emit('studyProject')
           this.bindForm.courseId = ''
           this.$bus.$emit('updateCourse', true)
-        } else if (res.status === '100100') {
+        } else if (res.status === 100100) {
           this.$message({
             showClose: true,
             type: 'error',

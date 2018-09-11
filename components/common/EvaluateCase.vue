@@ -97,7 +97,7 @@ export default {
         .replace(/,/g, '#')
       if (this.flag) {
         coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === '100100') {
+          if (response.status === 100100) {
             message(this, 'warning', response.msg)
           } else {
             this.addEvaluateForm.tag = []

@@ -44,7 +44,8 @@ export default {
       showPay: false,
       codeForm: {
         type: '2',
-        ids: ''
+        ids: '',
+        attachs: 2
       },
       loading: true,
       wechat: '',
@@ -60,9 +61,6 @@ export default {
     // 获取去二维码的方法
     getCode() {
       this.codeForm.ids = matchSplits('kid')
-
-      // console.log(this.codeForm.ids)
-
       pay.getCode(this.codeForm).then(response => {
         this.wechat = response.data.code_url
         this.alipay = response.data.qr_code

@@ -37,6 +37,7 @@
             <span>{{projectDetail.score}}</span> 分</p>
         </div>
       </div>
+      <!-- 普通项目 -->
       <div class="fr buy" v-if="projectType.types==='1'">
         <div class="price">
           <i>￥</i>{{projectDetail.present_price}}</div>
@@ -45,11 +46,12 @@
         <div v-if="studyType === '1'" class="addShoppingCart" @click="addShoppingCart">加入购物车</div>
         <div v-else class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
       </div>
+      <!-- 自定义项目 -->
       <div class="fr buy" v-if="projectType.types==='2'">
         <div class="price">
           <i>￥</i>{{projectDetail.present_price}}</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即观看</div>
-        <div class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
+        <div v-if="projectDetail.is_creator" class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
       </div>
 
     </div>
@@ -135,6 +137,10 @@ export default {
     },
     // 立即购买
     handleBuy(id) {
+      if (!this.isAuthenticated) {
+        this.$bus.$emit('loginShow', true)
+        return false
+      }
       this.$router.push({
         path: '/shop/affirmorder',
         query: { id: id }

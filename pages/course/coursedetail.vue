@@ -230,7 +230,7 @@ export default {
         .replace(/,/g, '#')
       if (this.courseList.is_study) {
         coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === '100100') {
+          if (response.status === 100100) {
             this.$message({
               showClose: true,
               type: 'warning',

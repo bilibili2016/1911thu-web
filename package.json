@@ -54,6 +54,7 @@
     "eslint-plugin-vue": "^4.0.0",
     "loglevel": "^1.6.1",
     "node-sass": "^4.9.2",
-    "sass-loader": "^6.0.7"
+    "sass-loader": "^6.0.7",
+    "webpack-dev-server": "^2.9.7"
   }
 }

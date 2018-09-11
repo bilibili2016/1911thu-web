@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { paypublic } from '@/lib/v1_sdk/index'
+import { paypublic, wepay } from '@/lib/v1_sdk/index'
 import { matchSplits } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
@@ -127,7 +127,7 @@ export default {
     getPayList() {
       this.payListForm.orderId = matchSplits('orderID')
       // this.payListForm.attachs = matchSplits('attach')
-      paypublic.webPay(this.payListForm).then(response => {
+      wepay.webPay(this.payListForm).then(response => {
         this.orderDetail = response.data.data.orderDetail
         this.payForm.orderId = response.data.data.orderDetail.id
         this.payForm.phones = persistStore.get('phone')

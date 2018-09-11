@@ -104,7 +104,7 @@ export default {
       this.addEvaluateForm.scores = this.rateModel.toString().replace(/,/g, '#')
       this.addEvaluateForm.tag = this.addEvaluateForm.tag.join('#')
       projectplayer.addProjectEvaluate(this.addEvaluateForm).then(response => {
-        if (response.status === '100100') {
+        if (response.status === 100100) {
           this.$message({
             showClose: true,
             type: 'warning',

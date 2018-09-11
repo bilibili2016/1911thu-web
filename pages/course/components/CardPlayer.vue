@@ -145,7 +145,7 @@ export default {
           window.location.reload()
         }
         //支付失败
-        if (msg.pay_status == '100100') {
+        if (msg.pay_status == 100100) {
           message(that, 'warning', msg.msg)
           return false
         }

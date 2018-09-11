@@ -104,7 +104,7 @@ export default {
       this.payListForm.orderId = matchSplits('order')
       wepay.webPay(this.payListForm).then(response => {
         this.loading = false
-        if (response.status === '100100') {
+        if (response.status === 100100) {
           this.$message({
             showClose: true,
             type: 'error',

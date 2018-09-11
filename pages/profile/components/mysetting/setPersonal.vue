@@ -35,10 +35,10 @@
       <el-form-item disable label="手机号">
         <el-input v-model="psnForm.user_name" disabled></el-input>
       </el-form-item>
-      <el-form-item label="单位信息" v-if="hasCompany" key="psnForm.company_name">
+      <el-form-item label="单位名称" v-if="hasCompany" key="psnForm.company_name">
         <el-input v-model="psnForm.company_name"></el-input>
       </el-form-item>
-      <el-form-item label="单位信息" v-else>
+      <el-form-item label="单位名称" v-else>
         <el-input v-model="psnForm.company_name"></el-input>
       </el-form-item>
       <el-form-item size="large" class="submit">
@@ -220,7 +220,6 @@ export default {
     },
     // 提交个 人信息表单
     onSubmit(formName) {
-
       if (this.psnForm.province !== '') {
         if (this.psnForm.city == '' || this.psnForm.area == '') {
           this.$message({

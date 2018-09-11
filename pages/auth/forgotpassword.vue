@@ -122,7 +122,7 @@ export default {
           if (response.status === 0) {
             message(this, 'error', '您的手机号还未注册！')
             this.bindTelData.captchaDisable = true
-          } else if (response.status === '100100') {
+          } else if (response.status === 100100) {
             message(this, 'error', response.msg)
             this.bindTelData.captchaDisable = true
           } else {

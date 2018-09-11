@@ -111,7 +111,7 @@ export default {
           location.reload()
         }
         //支付失败
-        if (msg.pay_status == '100100') {
+        if (msg.pay_status == 100100) {
           message(that, 'warning', msg.msg)
           return false
         }
@@ -120,11 +120,11 @@ export default {
       this.socket.on('reconnect', function(msg) {})
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
-        if (response.status === '100100') {
+        if (response.status === 100100) {
           message(this, 'error', response.msg)
           this.playerForm.curriculumId = this.course.curriculumId
           this.playerForm.catalogId = this.course.catalogId
-        } else if (response.status === '100006') {
+        } else if (response.status === 100006) {
           this.$alert('您已退出登录，请重新登录', '温馨提示', {
             confirmButtonText: '确定',
             callback: action => {

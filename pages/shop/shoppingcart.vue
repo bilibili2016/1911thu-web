@@ -1055,7 +1055,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           shopcart.addPaySubmit(this.companyInfo).then(response => {
-            if (response.status === '100100') {
+            if (response.status === 100100) {
               message(this, 'error', response.msg)
             } else if (response.status === 0) {
               this.setProductsNum(0)

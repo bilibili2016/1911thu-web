@@ -258,7 +258,7 @@ export default {
           } else {
             this.handleLinkProfile(this.skip)
           }
-        } else if (res.status === '100100') {
+        } else if (res.status === 100100) {
           this.bindForm.showErr = true
           message(this, 'error', res.msg)
           this.bindForm.error = res.msg
@@ -291,7 +291,7 @@ export default {
     getShopCartNum() {
       if (this.isAuthenticated) {
         header.shopCartList().then(res => {
-          if (res.status === '100008') {
+          if (res.status === 100008) {
             this.getHttp = false
           } else {
             if (res.data) {
@@ -323,10 +323,10 @@ export default {
     },
     // 个人中心 单点登录 逻辑 判断
     isSingleLogin(res) {
-      if (res.status === '100008') {
+      if (res.status === 100008) {
         // 设置单点登录
         this.reLoginAlert(true, res)
-      } else if (res.status === '100100') {
+      } else if (res.status === 100100) {
         // 设置单点登录
         if (this.authPath.indexOf(window.location.pathname) > 0) {
           this.reLoginAlert(true, res)

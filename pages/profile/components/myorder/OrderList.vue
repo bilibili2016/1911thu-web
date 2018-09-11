@@ -53,7 +53,7 @@
             <p class="payClose" v-if="courseList.pay_status === '3'">已关闭</p>
             <p>
               <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id)">立即支付</span>
-              <span class="buy" v-if="courseList.pay_status === '3'" @click="goShopping(courseList.id)">立即购买</span>
+              <span class="buy" v-if="courseList.pay_status === '3'" @click="goShopping(courseList.id,courseList)">立即购买</span>
             </p>
           </div>
         </div>
@@ -132,14 +132,34 @@ export default {
       )
     },
     //去购物车
-    goShopping(id) {
-      this.orderForm.ids = id
-      order.buyAgain(this.orderForm).then(response => {
-        if (response.status === 0) {
-          this.$router.push('/shop/shoppingCart')
+    goShopping(id, courseList) {
+      // 自定义项目和混合项目不加入购物车，直接购买
+      if (courseList.orderProjectList[0].type === '2') {
+        this.goAffirmorder(courseList.orderProjectList[0].id)
+      } else {
+        // 混合项目不加入购物车，直接购买
+        if (
+          courseList.orderProjectList[0].study_type === '2' ||
+          courseList.orderProjectList[0].study_type === '3'
+        ) {
+          this.goAffirmorder(courseList.orderProjectList[0].id)
         } else {
-          message(this, 'error', response.msg)
+          //普通项目 加入购物车购买
+          this.orderForm.ids = id
+          order.buyAgain(this.orderForm).then(response => {
+            if (response.status === 0) {
+              this.$router.push('/shop/shoppingCart')
+            } else {
+              message(this, 'error', response.msg)
+            }
+          })
         }
+      }
+    },
+    goAffirmorder(id) {
+      this.$router.push({
+        path: '/shop/affirmorder',
+        query: { id: id }
       })
     },
     //课程详情

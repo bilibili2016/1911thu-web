@@ -460,10 +460,10 @@ export default {
 
       // 获取播放url
       players.getPlayerInfos(this.playerForm).then(response => {
-        if (response.status === '100100') {
+        if (response.status === 100100) {
           this.playing = this.pauseImg
           this.goShoppingCart(response.msg)
-        } else if (response.status === '100006') {
+        } else if (response.status === 100006) {
           this.$alert('您已退出登录，请重新登录', '温馨提示', {
             confirmButtonText: '确定',
             callback: action => {
@@ -563,7 +563,7 @@ export default {
         players.reportProblem(this.problem).then(response => {
           // this.closeReport()
 
-          if (response.status === '100100') {
+          if (response.status === 100100) {
             this.$message({
               showClose: true,
               type: 'success',
@@ -619,7 +619,7 @@ export default {
       // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
       return new Promise((resolve, reject) => {
         coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === '100100') {
+          if (response.status === 100100) {
             this.$message({
               showClose: true,
               type: 'warning',
@@ -696,7 +696,7 @@ export default {
         var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
           players.getPlayerInfos(that.playerForm).then(response => {
-            if (response.status === '100100') {
+            if (response.status === 100100) {
               that.playing = that.pauseImg
               that.goShoppingCart(response.msg)
             }

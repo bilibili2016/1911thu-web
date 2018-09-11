@@ -48,8 +48,8 @@ export default {
     return {
       success: true,
       payCompleteForm: {
-        orderId: null
-        // attachs: null
+        orderId: null,
+        attachs: 1 //正式订单和临时订单区分：1正式，2临时订单
       },
       hasCode: false,
       payCompleteData: {},
@@ -72,7 +72,6 @@ export default {
     ...mapActions('auth', ['setGid']),
     // 继续选课
     handleChoiceCourse() {
-      // console.log(this.urlLink)
       open(this.urlLink)
     },
     // 点击查看订单
@@ -91,7 +90,6 @@ export default {
     },
     payComplete() {
       this.payCompleteForm.orderId = matchSplits('order')
-      // this.payCompleteForm.attachs = matchSplits('attach')
       payResult.payComplete(this.payCompleteForm).then(response => {
         this.payCompleteData = response.data
         this.showMsg = true
