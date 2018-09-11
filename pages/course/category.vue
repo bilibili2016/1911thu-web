@@ -204,6 +204,8 @@ export default {
         }
       }
       this.makeData(this.cidData[0].childList, res.data.categoryList)
+      console.log(this.cidData)
+
       this.pidData = this.cidData[this.categoryIndex]
     },
     handelOpenUrl() {
@@ -381,7 +383,7 @@ export default {
       this.pidBg = matchSplits('pids')
     },
     initListCard() {
-      // cp(0) 课程 cp(1)
+      // cp(0) 课程 cp(1)项目
       if (this.cp === '0') {
         this.getHeaderList('course')
       } else {

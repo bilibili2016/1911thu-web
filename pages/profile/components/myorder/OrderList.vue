@@ -134,13 +134,17 @@ export default {
     //去购物车
     goShopping(id, courseList) {
       // 自定义项目和混合项目不加入购物车，直接购买
-      if (courseList.orderProjectList[0].type === '2') {
+      if (
+        courseList.orderProjectList.length > 0 &&
+        courseList.orderProjectList[0].type === '2'
+      ) {
         this.goAffirmorder(courseList.orderProjectList[0].id)
       } else {
         // 混合项目不加入购物车，直接购买
         if (
-          courseList.orderProjectList[0].study_type === '2' ||
-          courseList.orderProjectList[0].study_type === '3'
+          courseList.orderProjectList.length > 0 &&
+          (courseList.orderProjectList[0].study_type === '2' ||
+            courseList.orderProjectList[0].study_type === '3')
         ) {
           this.goAffirmorder(courseList.orderProjectList[0].id)
         } else {

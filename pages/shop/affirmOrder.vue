@@ -209,6 +209,8 @@ export default {
           this.curriculumLists = res.data.curriculumProjectDetail
           this.orderinfo = res.data.curriculumProjectDetail
           this.orderinfo.nickName = persistStore.get('nickName')
+        } else {
+          message(this, 'error', res.msg)
         }
       })
     },
