@@ -1,5 +1,29 @@
 <template>
   <div class="customerProject" @click="documentHandler">
+    <div class="banner-cus">
+      <div class="con">
+        <div class="con-text">
+          <div class="text-one">为更好地满足党政机关及企事业单位特定的培训需求，1911学堂推出了自定制项目。</div>
+          <div class="text-two">若1911学堂现有培训项目不能满足您所在单位的培训需求，您可以填写以下页面信息，并在1911学堂课程资源库里挑选合适的课程，形成专属的个性化定制项目。</div>
+          <div class="text-three">完成支付后，自定制项目即时生效。</div>
+        </div>
+      </div>
+    </div>
+    <div class="process">
+      <div class="pro-title">自定制流程</div>
+      <div class="pro-step clearfix">
+        <span class="step">1.填写项目定制信息</span>
+        <span class="arrow"><img :src="imgUlr" alt=""></span>
+        <span class="step">2.立即购买</span>
+        <span class="arrow"><img :src="imgUlr" alt=""></span>
+        <span class="step">3.支付</span>
+        <span class="arrow"><img :src="imgUlr" alt=""></span>
+        <span class="step step4">4.直接学习或绑定兑换码后学习</span>
+      </div>
+      <div class="pro-text">
+        自定制项目是您所在单位的专属项目，不对其他单位展示。除项目定制者之外，其余人员需绑定兑换码才能观看项目。
+      </div>
+    </div>
     <div class="title">项目信息</div>
     <div class="content">
       <div class="con-item name clearfix">
@@ -239,6 +263,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      imgUlr: 'http://papn9j3ys.bkt.clouddn.com/customer-arrow.png',
       showDesc: false,
       isClick: false,
       searchInput: '',
