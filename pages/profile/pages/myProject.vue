@@ -1,19 +1,9 @@
 <template>
   <div>
     <el-card class="changeNav">
-      <el-tabs v-model="activeProject" @tab-click="handleActive">
+      <el-tabs v-model="activeName" @tab-click="handleActive">
         <!-- 我的项目 学习中 -->
         <el-tab-pane label="学习中" name="first" value="1">
-          <!-- {{allProjectLoad}} -->
-          <!-- <div :class="{ minheight : allProjectLoad}" v-loading="allProjectLoad">
-            <v-card v-if="studyProjectData  && studyProjectData.length>0" :data="studyProjectData" :config="configOne"></v-card>
-          </div>
-
-          <div class="pagination" v-if="studyProjectData  && studyProjectData.length>11">
-            <el-pagination background layout="prev, pager, next" :page-size="projectPageStudy.pagesize" :pager-count="5" :page-count="projectPageStudy.pagesize" :current-page="projectPageStudy.page" :total="projectPageStudy.total" @current-change="studyProjectPageChange"></el-pagination>
-          </div>
-          <v-nomsg v-if="studyProjectData.length == 0 && !allProjectLoad" :config="noMsgSix"></v-nomsg> -->
-          <!-- {{allProjectLoad}}=={{111}} -->
           <v-cardtab :allLoad="allProjectLoad" :data="studyProjectData" :config="configOne" :pagemsg="projectPageStudy" :noMsg="noMsgSix"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 已完成 -->
@@ -66,8 +56,13 @@ export default {
   ],
   data() {
     return {
-      activeProject: 'first'
+      activeName: 'first'
     }
+  },
+  mounted() {
+    this.$bus.$on('activeProject', data => {
+      this.activeName = 'first'
+    })
   },
   methods: {
     studyProjectPageChange(val) {
