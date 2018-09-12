@@ -747,7 +747,11 @@ export default {
   },
   mounted() {
     if (this.isAuthenticated) {
-      this.activeTab = this.gid
+      if (this.gid) {
+        this.activeTab = this.gid
+      } else {
+        this.activeTab = 'tab-first'
+      }
       if (persistStore.get('isSingleLogin')) {
         this.initBusEvent()
         this.handleInitMyCourseData() //我的课程
