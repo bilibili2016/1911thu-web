@@ -1,19 +1,9 @@
 <template>
   <div>
     <el-card class="changeNav">
-      <el-tabs v-model="activeNames" @tab-click="handleActive">
+      <el-tabs v-model="activeName" @tab-click="handleActive">
         <!-- 我的课程 学习中 -->
         <el-tab-pane label="学习中" name="first" value="1">
-          <!-- allCourseLoad newDataing  configOne pagemsg1 -->
-          <!-- newDataReady configTwo pagemsg2 -->
-
-          <!-- <div :class="{ minheight : allCourseLoad}" v-loading="allCourseLoad">
-            <v-list :data="newDataing" :config="configOne" v-if="newDataing  && newDataing.length>0"></v-list>
-          </div>
-          <div class="pagination" v-if="newDataing.length>11">
-            <el-pagination background layout="prev, pager, next" :page-size="pagemsg1.pagesize" :pager-count="5" :page-count="pagemsg1.pagesize" :current-page="pagemsg1.page" :total="pagemsg1.total" @current-change="studyPageChange"></el-pagination>
-          </div>
-          <v-nomsg v-if="newDataing.length== 0&& !allCourseLoad" :config="noMsgTwo"></v-nomsg> -->
           <v-cardtab :allLoad="allCourseLoad" :noMsgCourse="noMsgCourse" :data="newDataing" :config="configOne" :pagemsg="pagemsg1" :noMsg="noMsgTwo" @pageChange="studyPageChange"></v-cardtab>
         </el-tab-pane>
         <!-- 我的课程 已完成 -->
@@ -65,8 +55,13 @@ export default {
   },
   data() {
     return {
-      activeNames: 'first'
+      activeName: 'first'
     }
+  },
+  mounted() {
+    this.$bus.$on('activeCourse', data => {
+      this.activeName = 'first'
+    })
   },
   methods: {
     readyStudyPageChange(val) {

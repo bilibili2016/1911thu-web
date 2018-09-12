@@ -28,6 +28,16 @@ export default {
     'v-conversion': Conversion,
     'v-binding': Bind
   },
+  data() {
+    return {
+      courseCodeNames: 'first'
+    }
+  },
+  mounted() {
+    this.$bus.$on('activeCode', data => {
+      this.courseCodeNames = 'first'
+    })
+  },
   methods: {
     handleCourseCode(item) {
       this.$emit('handleCourseCode', item)
@@ -46,11 +56,6 @@ export default {
     },
     studyProject() {
       this.$emit('studyProject', 1, 1)
-    }
-  },
-  data() {
-    return {
-      courseCodeNames: 'first'
     }
   }
 }
