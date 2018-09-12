@@ -1,6 +1,6 @@
 <template>
   <div class="invitation" v-loading="allCode">
-    <v-search @search="search"></v-search>
+    <v-search @search="search" :placeHolder="placeHolder"></v-search>
     <div class="table" :class="{ minheight : allCode}">
       <div class="tr_header">
         <span>兑换码</span>
@@ -59,6 +59,7 @@ export default {
   },
   data() {
     return {
+      placeHolder: '请输入订单号',
       noCodes: true,
       number: '0',
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',

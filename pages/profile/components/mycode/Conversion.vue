@@ -1,6 +1,6 @@
 <template>
   <div class="conversion clearfix">
-    <v-search @search="search"></v-search>
+    <v-search @search="search" :placeHolder="placeHolder"></v-search>
     <div class="tables">
       <table class="recordTable">
         <!--alternate-->
@@ -38,6 +38,7 @@ export default {
   },
   data() {
     return {
+      placeHolder: '请输入兑换码',
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       noMsg: {
         type: 'myCode',

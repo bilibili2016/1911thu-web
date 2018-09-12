@@ -142,15 +142,9 @@ export default {
             type: 'success',
             message: res.msg
           })
-          // this.$bus.$emit('studyCourse')
-          this.$emit('studyCourse')
           // 课程绑定后重新拉取
           this.$emit('reGetCode')
-          // this.$bus.$emit('reGetCode')
-          // this.$bus.$emit('studyProject')
-          this.$emit('studyProject')
           this.bindForm.courseId = ''
-          this.$bus.$emit('updateCourse', true)
         } else if (res.status === 100100) {
           this.$message({
             showClose: true,
