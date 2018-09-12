@@ -17,15 +17,13 @@
       <div class="bottomCard">
         <!-- 左侧的课程目录和介绍 -->
         <div class="content fl">
-          <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg"></v-coursecatelog>
+          <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg" :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="handleCurrentChange"></v-coursecatelog>
         </div>
         <div style="width:345px" class="fr">
           <!-- 讲师介绍 -->
           <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
-          <!-- 用户评价  查看更多 -->
-          <v-evaluatedialog :dialogVisible="dialogVisible" :commentator="commentator" :pagemsg="pagemsg" @pagechange="handleCurrentChange" @handleClose="handleClose"></v-evaluatedialog>
-          <!-- 用户评论 列表-->
-          <v-userevaluate :totalEvaluateInfo="totalEvaluateInfo" :commentators="commentators" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" @more="getMore"></v-userevaluate>
+          <!-- 课程评价-->
+          <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
         </div>
       </div>
     </div>
@@ -38,7 +36,7 @@ import CustomCard from '@/pages/course/components/CardProject.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray, splitUrl, message, matchSplits } from '@/lib/util/helper'
+import { uniqueArray, message, matchSplits } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
 import EvaluateCase from '@/components/common/EvaluateCase.vue'
@@ -117,9 +115,9 @@ export default {
         total: 5
       },
       totalEvaluateInfo: {
-        evaluatePercent: null,
-        totalEvaluate: null,
-        totalScore: null
+        evaluatePercent: '',
+        totalEvaluate: '',
+        totalScore: ''
       },
       sumUserStart: 0,
       project: {
@@ -158,18 +156,15 @@ export default {
     getEvaluateList() {
       this.loadEvaluate = true
       this.evaluateListForm.ids = matchSplits('kid')
-      return new Promise((resolve, reject) => {
-        coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
-          this.loadMsg = false
-          this.pagemsg.total = response.data.pageCount
-          this.pageCount = response.data.pageCount
-          this.commentator = response.data.evaluateList
-          this.commentators = response.data.evaluateList
-          this.totalEvaluateInfo = response.data.totalEvaluateInfo
-          let totalEvaluateInfo = response.data.totalEvaluateInfo
-          this.sumUserStart = Number(totalEvaluateInfo.totalScore)
-          this.loadEvaluate = false
-        })
+      coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
+        this.loadMsg = false
+        this.pagemsg.total = response.data.pageCount
+        this.pageCount = response.data.pageCount
+        this.commentator = response.data.evaluateList
+        this.commentators = response.data.evaluateList
+        this.totalEvaluateInfo = response.data.totalEvaluateInfo
+        this.sumUserStart = Number(this.totalEvaluateInfo.totalScore)
+        this.loadEvaluate = false
       })
     },
     // 评论-关闭查看更多-评论弹框
@@ -216,9 +211,9 @@ export default {
   },
   mounted() {
     // 获取课程id
-    this.BreadCrumb.projectCourseId = splitUrl(0, 1)
+    this.BreadCrumb.projectCourseId = matchSplits('kid')
     // 获取项目id
-    this.BreadCrumb.projectId = splitUrl(1, 1)
+    this.BreadCrumb.projectId = matchSplits('pid')
 
     this.initAll()
   },

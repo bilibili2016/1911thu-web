@@ -44,9 +44,9 @@ export default {
     // 跳转课程详情
     goCourseDetail(item) {
       let urlLink = {
-        base: '/course/coursedetail',
+        base: '/course/detail',
         kid: item.curriculum_id,
-        pid: this.id,
+        pid: this.projectId,
         page: 0
       }
       open(urlLink)

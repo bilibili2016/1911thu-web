@@ -6,13 +6,6 @@
         <el-card class="fl" :body-style="{ padding: '0px' }">
           <div class="goodplay">
             <img :src="courseList.picture" class="image">
-            <!-- project 页面的课程详情 不显示一些东西 -->
-            <div class="common-button btn-bg" v-if="config.card_type !== 'project'">
-              <!-- 登录 不登录 播放按钮 -->
-              <div class="playBtn-detail">
-                <img :src="playImg" alt="" @click="handleImgPlay(courseList)">
-              </div>
-            </div>
           </div>
           <v-player></v-player>
         </el-card>

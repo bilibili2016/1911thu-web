@@ -77,7 +77,9 @@ export default {
         projectId: '1',
         types: 1
       },
-      projectDetail: {},
+      projectDetail: {
+        study_type: 2
+      },
       pagemsg: {
         page: 1,
         pagesize: 3,
