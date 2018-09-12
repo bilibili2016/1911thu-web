@@ -327,9 +327,13 @@ export default {
     selectActiveTab(item) {
       let categoryId = matchSplits('cid')
       let pids = matchSplits('pid')
-      item.name === 'second'
-        ? (this.categoryForm.sortBy = 1)
-        : (this.categoryForm.sortBy = 2)
+
+      item.name === 'first'
+        ? (this.categoryForm.sortBy = 0)
+        : item.name === 'second'
+          ? (this.categoryForm.sortBy = 1)
+          : (this.categoryForm.sortBy = 2)
+
       if (this.cp === '0') {
         if (this.xid === '0') {
           this.getCourseCardList(categoryId, pids)
