@@ -3,9 +3,7 @@
     <div class="pay" v-show="payShadow">
       <div class="note" v-show="showPay">
         <i @click="close" class="el-icon-close fr"></i>
-        <h4>尊敬的用户，试看已结束，请
-          <span>付费</span>观看
-        </h4>
+        <h4>尊敬的用户，试看已结束，请付费观看</h4>
         <div class="goodsInfo" v-show="!loading">
           <div class="userImg">
             <img :src="produceOrderInfo.head_img" alt="">
@@ -21,7 +19,8 @@
           <div v-if="codeForm.type==2">
             <p>项目名称：{{produceOrderInfo.title}}</p>
             <p>
-              <span>项目价格：{{produceOrderInfo.present_price}}元</span>
+              <span>项目价格：
+                <strong>{{produceOrderInfo.present_price}}</strong>元</span>
               <span>项目有效期：365天</span>
             </p>
             <!-- produceOrderInfo.study_type 判断 普通项目类型： 线上 混合 互动-->

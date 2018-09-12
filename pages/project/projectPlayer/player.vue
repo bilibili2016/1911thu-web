@@ -1,5 +1,5 @@
 <template>
-  <div class="playInner" ref="playInner">
+  <div class="playInner" ref="playInner" @dblclick="dblclick">
     <div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>
   </div>
 </template>
@@ -327,6 +327,20 @@ export default {
     isPause() {
       if (this.player) {
         this.player.pause()
+      }
+    },
+    // 双击视频 全屏
+    dblclick() {
+      // 暂时不开放
+      return false
+      // 检测播放器是否存在
+      if (this.player) {
+        // 判断当前播放器是否为全屏状态
+        if (this.player.fullscreenService.getIsFullScreen()) {
+          this.player.fullscreenService.cancelFullScreen()
+        } else {
+          this.player.fullscreenService.requestFullScreen()
+        }
       }
     },
     // 关闭支付二维码、重新获取播放参数

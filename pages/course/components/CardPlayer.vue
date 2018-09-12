@@ -1,5 +1,5 @@
 <template>
-  <div class="playInner cardPlayer" ref="playInner">
+  <div class="playInner cardPlayer" ref="playInner" @dblclick="dblclick">
     <div id="mediaPlayer" ref="mediaPlayer"></div>
   </div>
 </template>
@@ -300,6 +300,20 @@ export default {
         this.getdefaultPlayerUrl()
       } else {
         message(this, 'warning', '已经是最后一节了！')
+      }
+    },
+    // 双击视频 全屏
+    dblclick() {
+      // 暂时不开放
+      return false
+      // 检测播放器是否存在
+      if (this.player) {
+        // 判断当前播放器是否为全屏状态
+        if (this.player.fullscreenService.getIsFullScreen()) {
+          this.player.fullscreenService.cancelFullScreen()
+        } else {
+          this.player.fullscreenService.requestFullScreen()
+        }
       }
     },
     // 关闭支付
