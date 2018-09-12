@@ -351,13 +351,9 @@ export default {
     }
   },
   mounted() {
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     if (this.isAuthenticated) {
       // 获取购车列表
       this.shopCartList()
-    } else {
-      console.log(2222)
     }
     // this.$bus.$emit('bannerShow', false)
     // this.$bus.$on('handleSelectChange', data => {
