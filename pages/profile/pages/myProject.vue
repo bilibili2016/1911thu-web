@@ -4,19 +4,19 @@
       <el-tabs v-model="activeName" @tab-click="handleActive">
         <!-- 我的项目 学习中 -->
         <el-tab-pane label="学习中" name="first" value="1">
-          <v-cardtab :allLoad="allProjectLoad" :data="studyProjectData" :config="configOne" :pagemsg="projectPageStudy" :noMsg="noMsgSix"></v-cardtab>
+          <v-cardtab :allLoad="allProjectLoad" :data="studyProjectData" :config="configOne" :pagemsg="projectPageStudy" :noMsg="noMsgSix" @pageChange="studyProjectPageChange"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 已完成 -->
         <el-tab-pane label="已完成" name="second" value="2">
-          <v-cardtab :data="readyProjectData" :config="configSix" :pagemsg="projectPageReady" :noMsg="noMsgSeven"></v-cardtab>
+          <v-cardtab :data="readyProjectData" :config="configSix" :pagemsg="projectPageReady" :noMsg="noMsgSeven" @pageChange="alreadyProjectPageChange"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 已过期 -->
         <el-tab-pane label="已过期" name="third" value="3">
-          <v-cardtab :data="expiredProjectData" :config="configSeven" :pagemsg="projectPageExpired" :noMsg="noMsgEight"></v-cardtab>
+          <v-cardtab :data="expiredProjectData" :config="configSeven" :pagemsg="projectPageExpired" :noMsg="noMsgEight" @pageChange="expiredProjectPageChange"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 我的收藏 -->
         <el-tab-pane label="我的收藏" name="fourth" value="0">
-          <v-cardtab :data="collectProjectData" :config="configZero" :pagemsg="projectPageCollect" :noMsg="noMsgNine"></v-cardtab>
+          <v-cardtab :data="collectProjectData" :config="configZero" :pagemsg="projectPageCollect" :noMsg="noMsgNine" @pageChange="collectProjectPageChange"></v-cardtab>
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -54,6 +54,7 @@ export default {
     'noMsgNine',
     'allProjectLoad'
   ],
+
   data() {
     return {
       activeName: 'first'
@@ -65,15 +66,19 @@ export default {
     })
   },
   methods: {
+    //学习中
     studyProjectPageChange(val) {
       this.$emit('studyProjectPageChange', 1, val)
     },
+    //已完成
     alreadyProjectPageChange(val) {
       this.$emit('alreadyProjectPageChange', 2, val)
     },
+    //已过期
     expiredProjectPageChange(val) {
       this.$emit('expiredProjectPageChange', 3, val)
     },
+    //我的收藏
     collectProjectPageChange(val) {
       this.$emit('collectProjectPageChange', val)
     },

@@ -12,7 +12,7 @@
         </el-tab-pane>
         <!-- 我的课程 已过期 -->
         <el-tab-pane label="已过期" name="fourth" value="4">
-          <v-cardtab :data="overTimeData" :config="configFour" :pagemsg="pagemsg2" :noMsg="noMsgFour"></v-cardtab>
+          <v-cardtab :data="overTimeData" :config="configFour" :pagemsg="pagemsg2" :noMsg="noMsgFour" @pageChange="overStudyPageChange"></v-cardtab>
         </el-tab-pane>
         <!-- 我的课程 我的收藏 -->
         <el-tab-pane label="我的收藏" name="third" value="0">
@@ -66,6 +66,9 @@ export default {
   methods: {
     readyStudyPageChange(val) {
       this.$emit('readyStudyPageChange', 2, val)
+    },
+    overStudyPageChange(val) {
+      this.$emit('overStudyPageChange', 4, val)
     },
     studyPageChange(val) {
       this.$emit('studyPageChange', 1, val)
