@@ -277,8 +277,6 @@ export default {
     this.getNewCourseList()
   },
   mounted() {
-    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.windowWidth = document.documentElement.clientWidth
 
     this.$bus.$on('loginMsg', data => {
