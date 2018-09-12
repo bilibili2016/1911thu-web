@@ -169,14 +169,9 @@ export default {
         }
       })
     },
-    //初始化data
-    initData() {
-      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-    },
+
     // 初始化所有方法
     initAll() {
-      this.initData()
       this.getCourseList()
       // this.downRefresh()
     }
