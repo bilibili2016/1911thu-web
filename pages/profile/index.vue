@@ -445,7 +445,7 @@ export default {
           break
         case 'tab-seventh': //兑换码管理
           this.$bus.$emit('activeCode')
-          this.getUsedInvitationCodeList()
+          this.getCodeList()
           break
         case 'tab-eighth': //发票管理
           this.$bus.$emit('activeTicket')
