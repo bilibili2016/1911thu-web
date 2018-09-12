@@ -58,7 +58,7 @@
         <div class="fl">培训人数：</div>
         <div class="fr selectFr">
           <div class="divClick" @click.stop="handleNumSelect">
-            <el-input placeholder="请输入培训人数" v-model="projectForm.trainNum" maxlength="4" @keyup.native="proving"></el-input>
+            <el-input placeholder="请输入1-9999的数字" v-model="projectForm.trainNum" maxlength="4" @keyup.native="proving"></el-input>
           </div>
         </div>
       </div>

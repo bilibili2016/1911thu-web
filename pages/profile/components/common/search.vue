@@ -1,6 +1,6 @@
 <template>
   <div class="searchList clearfix">
-    <el-input class="fl" v-model="search.searchWord" placeholder="请输入内容"></el-input>
+    <el-input class="fl" v-model="search.searchWord" :placeholder="placeHolder"></el-input>
     <span class="goSearch fr" @click="goSearch">
       <i class="el-icon-search"></i>
     </span>
@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  props: ['placeHolder'],
   data() {
     return {
       search: {
