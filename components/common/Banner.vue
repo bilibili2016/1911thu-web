@@ -18,7 +18,8 @@
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
-          <img class="topImg" :src="avator" />
+          <!-- <img :class="{avator ==''?'noImg':'topImg'}" :src="avator" /> -->
+          <img :class="{noImg :!avator,topImg:avator}" :src="avator" />
           <div class="up-user-avtor" v-show="isShowUpAvtor">
             <input type="file" @change="add_img" accept="image/png,image/gif,image/jpeg" />
             <span>更换图片</span>

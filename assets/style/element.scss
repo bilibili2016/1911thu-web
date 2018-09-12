@@ -93,8 +93,12 @@ html {
 
 .el-tabs__item {
   height: 76px;
-  line-height: 76px; // color: #fff;
+  line-height: 76px;
   font-weight: 400;
+  // 禁止多次点击选中文字
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
 }
 
 .el-tabs__item.is-active {
@@ -901,7 +905,7 @@ html {
   .el-card__header {
     height: 58px;
     line-height: 58px;
-    padding: 0 20px;
+    padding: 0 30px;
     border-bottom: 1px solid rgba(232, 214, 247, 1);
     color: #222;
     font-size: 16px;

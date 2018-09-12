@@ -16,6 +16,14 @@
     left: 4px;
     top: 54px;
   }
+  img.noImg {
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    top: 54px;
+  }
   .up-user-avtor {
     position: absolute;
     top: 56px;

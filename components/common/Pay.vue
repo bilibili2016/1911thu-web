@@ -27,6 +27,10 @@
         </div>
       </div>
     </div>
+    <!-- config.card_type=='project' -->
+    <div v-show="payResult">
+
+    </div>
   </div>
 </template>
 
@@ -42,6 +46,7 @@ export default {
   data() {
     return {
       showPay: false,
+      payResult: false,
       codeForm: {
         type: '2',
         ids: '',
@@ -84,6 +89,12 @@ export default {
     })
     this.$bus.$on('closePay', data => {
       this.close()
+    })
+    // payResult
+    this.$bus.$on('payResult', data => {
+      if (data) {
+        this.payResult = true
+      }
     })
   }
 }

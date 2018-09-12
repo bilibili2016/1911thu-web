@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <v-pay @closePay="closePayed"></v-pay>
+    <v-pay @closePay="closePayed" :config="config"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
   </div>
 </template>

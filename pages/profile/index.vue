@@ -52,7 +52,7 @@
           <v-myticket @handleTicket="handleTicketTabChange" :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange" @goTicketDetail="goTicketDetail" @goTicketBack="goTicketBack"></v-myticket>
         </el-tab-pane>
         <!-- 自定制项目 -->
-        <el-tab-pane class="my-course my-customerProject" name="tab-nine">
+        <el-tab-pane class="my-course my-customerProject" name="tab-ninth">
           <span slot="label" class="tabList">
             <i class="icon-cusProject"></i>&nbsp;自定制项目</span>
           <v-myCustomerProject :customer="customer" :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
@@ -374,12 +374,10 @@ export default {
       allCode: false,
       allHome: false,
       orderTotal: '',
-      myOrderDataArr: [0, 1, 2, 3],
       myProjectData1: [],
       myProjectData2: [],
       myProjectData3: [],
       myProjectData4: [],
-      myProjectDataArr: [1, 2, 3],
       myProjectPage1: {
         types: 1,
         pages: '',
@@ -404,7 +402,9 @@ export default {
       myCourseData2: [],
       myCourseData3: [],
       myCourseData4: [],
-      myCourseDataArr: [1, 2, 3, 4],
+      myCourseDataArr: [1, 3], //初始化-我的课程  [1,2,3,4]全部
+      myProjectDataArr: [1], //初始化-我的项目  [1,2,3,4]全部
+      myOrderDataArr: [0], //初始化-我的订单  [0，1,2,3]全部
       noMsgCourse: false,
       customer: false
     }
@@ -424,8 +424,36 @@ export default {
     },
     // 切换tab时保存tab的name 刷新就还是在这个tab
     handleClick(item) {
-      if (item.name === 'tab-seventh') {
-        this.getCodeList()
+      switch (item.name) {
+        case 'tab-first': //我的首页
+          this.myCourseDataArr = [3]
+          this.handleInitMyCourseData([3])
+          break
+        case 'tab-second': //我的课程
+          this.myCourseDataArr = [1]
+          this.handleInitMyCourseData([1])
+          break
+        case 'tab-third': //我的项目
+          this.myProjectDataArr = [1]
+          this.handleInitMyProjectData()
+          break
+        case 'tab-fourth': //我的订单
+          this.myOrderDataArr = [0]
+          this.handleInitMyOrderData(true)
+          break
+        case 'tab-fifth': //我的消息
+          break
+        case 'tab-sixth': //个人设置
+          break
+        case 'tab-seventh': //兑换码管理
+          this.getUsedInvitationCodeList()
+          break
+        case 'tab-eighth': //发票管理
+          this.unTicketDataChange(1)
+          break
+        case 'tab-ninth': //自定制项目
+          this.customerProjectList()
+          break
       }
       persistStore.set('gid', item.name)
     },
@@ -698,8 +726,6 @@ export default {
       this.$bus.$on('studyCourse', data => {
         this.handleMyCourseChange(1, 1)
         this.handleMyProjectChange(1, 1)
-        console.log(data)
-
         this.activeTab = data
         persistStore.set('gid', data)
       })
@@ -724,18 +750,17 @@ export default {
       this.activeTab = this.gid
       if (persistStore.get('isSingleLogin')) {
         this.initBusEvent()
-        this.handleInitMyCourseData()
-        this.handleInitMyProjectData()
-        this.collectProjectPageChange(1)
-        this.collectionPageChange(1)
-        this.handleInitMyOrderData(true)
-        this.getCodeList()
-        this.getRecordList()
-        // 获取订单详情
-        this.historyOrderDataChange(1)
-        this.unTicketDataChange(1)
-        this.getUsedInvitationCodeList()
-        this.customerProjectList()
+        this.handleInitMyCourseData() //我的课程
+        this.handleInitMyProjectData() //我的项目
+        // this.collectProjectPageChange(1) //我的项目-收藏
+        // this.collectionPageChange(1) //我的课程-收藏
+        this.handleInitMyOrderData(true) //我的订单
+        this.getCodeList() //兑换码管理-兑换码列表
+        // this.getRecordList()  //兑换码管理-兑换详情
+        // this.getUsedInvitationCodeList()  //兑换码管理-我的兑换
+        // this.historyOrderDataChange(1)  //我的发票 开票历史
+        this.unTicketDataChange(1) //我的发票 按订单开发票
+        this.customerProjectList() //自定义项目
       }
     }
   }

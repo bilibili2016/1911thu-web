@@ -105,6 +105,8 @@ export default {
       this.socket.on('new_msg', function(msg) {
         //支付成功
         if (msg.pay_status == '0') {
+          // 支付成功
+          // this.$bus.$emit('payResult')
           //执行重新播放视频
           message(that, 'warning', msg.msg)
           that.$bus.$emit('closePay')

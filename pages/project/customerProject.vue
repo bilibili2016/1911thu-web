@@ -441,10 +441,10 @@ export default {
           }
           if (type === 1) {
             //保存跳转个人中心定制项目
-            this.gidForm.gids = 'tab-nine'
+            this.gidForm.gids = 'tab-ninth'
             this.setGid(this.gidForm)
             this.$router.push('/profile')
-            this.$bus.$emit('selectProfileIndex', 'tab-nine')
+            this.$bus.$emit('selectProfileIndex', 'tab-ninth')
           } else {
             //立即购买跳转确认订单
             this.$router.push({

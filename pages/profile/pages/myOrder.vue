@@ -2,7 +2,7 @@
   <div>
     <!-- 订单 -->
     <el-card v-if="showOrderList">
-      <el-tabs v-model="activeOrder">
+      <el-tabs v-model="activeOrder" @tab-click="handleOrder">
         <el-tab-pane label="全部" name="orderFirst">
           <!-- <v-datapick :orderNum="orderZero"></v-datapick> -->
           <!-- {{pagemsg4.total}} -->
@@ -128,6 +128,22 @@ export default {
       this.$emit('handleUpdate', 0, 1)
       this.$emit('handleUpdate', 1, 1)
       this.$emit('handleUpdate', 3, 1)
+    },
+    handleOrder(item) {
+      switch (item.name) {
+        case 'orderFirst':
+          this.$emit('handleUpdate', 0, 1)
+          break
+        case 'orderSecond':
+          this.$emit('handleUpdate', 1, 1)
+          break
+        case 'orderThird':
+          this.$emit('handleUpdate', 2, 1)
+          break
+        case 'orderFour':
+          this.$emit('handleUpdate', 3, 1)
+          break
+      }
     }
   }
 }

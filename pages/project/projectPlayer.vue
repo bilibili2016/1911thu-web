@@ -20,7 +20,7 @@
     <!-- 写评价 -->
     <v-evaluate @closeEvaluate="closeEvaluate" :showEvaluate="showEvaluate" :playerForm="playerForm"></v-evaluate>
     <!-- 扫码支付 -->
-    <v-pay></v-pay>
+    <v-pay :config="config"></v-pay>
   </div>
 </template>
 
@@ -76,7 +76,8 @@ export default {
         hsgs: true
       },
       config: {
-        type: '1'
+        type: '1',
+        card_type: 'project'
       },
       configReport: {
         type: 2,
