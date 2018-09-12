@@ -130,9 +130,10 @@ export default {
       let newWindow = window.open('about:blank')
       affirmOrder.commitOrder().then(res => {
         if (res.status === 0) {
+          this.$router.push('/shop/' + res.data.id)
           //解决异步加载浏览器会将新打开的页面作为窗口拦截
-          newWindow.location.href =
-            window.location.origin + '/shop/' + res.data.id
+          // newWindow.location.href =
+          //   window.location.origin + '/shop/' + res.data.id
         } else {
           message(this, 'error', res.msg)
         }
