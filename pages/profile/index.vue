@@ -13,13 +13,13 @@
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
-          <v-mycourse :allCourseLoad="allCourseLoad" :activeNames="activeNames" :noMsgCourse="noMsgCourse" :pagecltcourse="pagecltcourse" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"> </v-mycourse>
+          <v-mycourse :allCourseLoad="allCourseLoad" :noMsgCourse="noMsgCourse" :pagecltcourse="pagecltcourse" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"> </v-mycourse>
         </el-tab-pane>
         <!-- 我的项目 -->
         <el-tab-pane class="my-course" name="tab-third">
           <span slot="label" class="tabList">
             <i class="icon-project"></i> 我的项目</span>
-          <v-myproject :allProjectLoad="allProjectLoad" :activeProject="activeProject" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configSeven="configSeven" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configSix="configSix" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
+          <v-myproject :allProjectLoad="allProjectLoad" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configSeven="configSeven" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configSix="configSix" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
         </el-tab-pane>
         <!-- 我的订单 -->
         <el-tab-pane class="my-course my-order" name="tab-fourth">
@@ -109,11 +109,6 @@ export default {
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       tabPosition: 'left',
       activeTab: 'tab-first',
-      activeNames: 'first',
-      activeProject: 'first',
-      courseCodeNames: 'first',
-      activeOrder: 'orderFirst',
-      activeTicket: 'ticketFirst',
       bconfig: {
         banner_type: 'profile'
       },
@@ -431,14 +426,17 @@ export default {
           break
         case 'tab-second': //我的课程
           this.myCourseDataArr = [1]
+          this.$bus.$emit('activeCourse')
           this.handleInitMyCourseData([1])
           break
         case 'tab-third': //我的项目
           this.myProjectDataArr = [1]
+          this.$bus.$emit('activeProject')
           this.handleInitMyProjectData()
           break
         case 'tab-fourth': //我的订单
           this.myOrderDataArr = [0]
+          this.$bus.$emit('activeOrder')
           this.handleInitMyOrderData(true)
           break
         case 'tab-fifth': //我的消息
@@ -446,9 +444,11 @@ export default {
         case 'tab-sixth': //个人设置
           break
         case 'tab-seventh': //兑换码管理
+          this.$bus.$emit('activeCode')
           this.getUsedInvitationCodeList()
           break
         case 'tab-eighth': //发票管理
+          this.$bus.$emit('activeTicket')
           this.unTicketDataChange(1)
           break
         case 'tab-ninth': //自定制项目
