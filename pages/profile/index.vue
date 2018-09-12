@@ -13,13 +13,13 @@
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
             <i class="icon-course"></i> 我的课程</span>
-          <v-mycourse :allCourseLoad="allCourseLoad" :noMsgCourse="noMsgCourse" :pagecltcourse="pagecltcourse" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"> </v-mycourse>
+          <v-mycourse :allCourseLoad="allCourseLoad" :noMsgCourse="noMsgCourse" :pagecltcourse="pagecltcourse" :newDataing="myCourseData1" :configOne="configOne" :pagemsg1="pagemsg1" :noMsgTwo="noMsgTwo" :newDataReady="myCourseData2" :configTwo="configTwo" :pagemsg2="pagemsg2" :noMsgThree="noMsgThree" :overTimeData="myCourseData4" :configFour="configFour" :noMsgFour="noMsgFour" :collectionData="collectionData" :configZero="configZero" :noMsgFive="noMsgFive" @readyStudyPageChange="handleMyCourseChange" @overStudyPageChange="handleMyCourseChange" @studyPageChange="handleMyCourseChange" @collectionPageChange="collectionPageChange" @handleActive="handleMyCourseChange" @handleActiveCollect="collectionPageChange"> </v-mycourse>
         </el-tab-pane>
         <!-- 我的项目 -->
         <el-tab-pane class="my-course" name="tab-third">
           <span slot="label" class="tabList">
             <i class="icon-project"></i> 我的项目</span>
-          <v-myproject :allProjectLoad="allProjectLoad" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="projectPageExpired" :configSeven="configSeven" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="projectPageReady" :configSix="configSix" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="projectPageStudy" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
+          <v-myproject :allProjectLoad="allProjectLoad" @handleActive="handleMyProjectChange" @handleActiveCollect="collectProjectPageChange" @studyProjectPageChange="handleMyProjectChange" @expiredProjectPageChange="handleMyProjectChange" @alreadyProjectPageChange="handleMyProjectChange" @collectProjectPageChange="collectProjectPageChange" :noMsgNine="noMsgNine" :projectPageCollect="projectPageCollect" :configZero="configFive" :collectProjectData="collectProjectData" :noMsgEight="noMsgEight" :projectPageExpired="myProjectPage3" :configSeven="configSeven" :expiredProjectData="myProjectData3" :noMsgSeven="noMsgSeven" :projectPageReady="myProjectPage2" :configSix="configSix" :studyProjectData="myProjectData1" :configOne="configThree" :projectPageStudy="myProjectPage1" :noMsgSix="noMsgSix" :readyProjectData="myProjectData2"></v-myproject>
         </el-tab-pane>
         <!-- 我的订单 -->
         <el-tab-pane class="my-course my-order" name="tab-fourth">
@@ -212,52 +212,52 @@ export default {
       pagecltcourse: {
         page: 1,
         pagesize: 12,
-        total: 12
+        total: ''
       },
       pagemsg1: {
         page: 1,
         pagesize: 12,
-        total: 12
+        total: ''
       },
       pagemsg2: {
         page: 1,
         pagesize: 12,
-        total: 12
+        total: ''
       },
       pagemsg3: {
         page: 1,
         pagesize: 12,
-        total: 12
+        total: ''
       },
       pagemsg4: {
         page: 1,
         pagesize: 20,
-        total: 12
+        total: ''
       },
       pagemsg5: {
         page: 1,
         pagesize: 20,
-        total: 12
+        total: ''
       },
       pagemsg6: {
         page: 1,
         pagesize: 20,
-        total: 12
+        total: ''
       },
       pagemsg7: {
         page: 1,
         pagesize: 20,
-        total: 12
+        total: ''
       },
       pagemsg8: {
         page: 1,
         pagesize: 20,
-        total: 12
+        total: ''
       },
       pagemsg9: {
         page: 1,
         pagesize: 20,
-        total: 12
+        total: ''
       },
       projectForm: {
         types: 1,
@@ -291,7 +291,7 @@ export default {
       projectPageCollect: {
         page: 1,
         pagesize: 12,
-        total: 12
+        total: ''
       },
       studyData: [],
       newDataing: [],
@@ -375,24 +375,24 @@ export default {
       myProjectData4: [],
       myProjectPage1: {
         types: 1,
-        pages: '',
-        limits: ''
+        pages: 1,
+        limits: 12
       },
       myProjectPage2: {
         types: 2,
-        pages: '',
-        limits: ''
+        pages: 1,
+        limits: 12
       },
       myProjectPage3: {
         types: 3,
-        pages: '',
-        limits: ''
+        pages: 1,
+        limits: 12
       },
-      myProjectPage4: {
-        types: 4,
-        pages: '',
-        limits: ''
-      },
+      // myProjectPage4: {
+      //   types: 4,
+      //   pages: 1,
+      //   limits: 12
+      // },
       myCourseData1: [],
       myCourseData2: [],
       myCourseData3: [],
@@ -507,7 +507,7 @@ export default {
         this.handleMyCourseChange(item, 1)
       })
     },
-    // 我的项目 commonmethods 我的项目分页没做
+    // 我的项目 commonmethods
     handleMyProjectChange(status, pagenum) {
       this.projectForm.types = status
       this.projectForm.pages = pagenum
@@ -531,7 +531,7 @@ export default {
     collectProjectPageChange(val) {
       this.projectPageReady.page = val
       this.projectForm.pages = val
-      this.projectForm.types = 4
+      this.projectForm.types = 2
       this.projectForm.limits = 12
       profileHome.getProjectCollectList(this.projectForm).then(response => {
         this.collectProjectData = response.data.collectionCurriculumProjectList
