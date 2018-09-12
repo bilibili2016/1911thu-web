@@ -172,13 +172,6 @@ export default {
         type: type
       }
       open(urlLink)
-      // window.open(
-      //   window.location.origin +
-      //     '/project/projectplayer?kid=' +
-      //     id +
-      //     '&type=' +
-      //     type
-      // )
     },
     openProjectDetail(id, type) {
       let urlLink = {
@@ -187,13 +180,6 @@ export default {
         type: type
       }
       open(urlLink)
-      // window.open(
-      //   window.location.origin +
-      //     '/project/projectdetail?kid=' +
-      //     id +
-      //     '&type=' +
-      //     type
-      // )
     },
     openDetail(item) {
       this.kidForm.kids = item.id
@@ -204,24 +190,6 @@ export default {
         page: 0
       }
       open(urlLink)
-      // window.open(
-      //   window.location.origin +
-      //     '/course/coursedetail?kid=' +
-      //     item.id +
-      //     '&page=0'
-      // )
-    },
-    goToPlay(item) {
-      this.$router.push(
-        '/course/coursedetail' +
-          '?kid=' +
-          matchSplits('kid') +
-          '&bid=' +
-          item.catalog_id +
-          '?page=' +
-          matchSplits('page')
-      )
-      window.open(window.location.origin + '/course/player')
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1

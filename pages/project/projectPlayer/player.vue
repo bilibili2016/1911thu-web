@@ -105,16 +105,11 @@ export default {
       this.socket.on('new_msg', function(msg) {
         //支付成功
         if (msg.pay_status == '0') {
-          // 支付成功
-          // this.$bus.$emit('payResult')
-          //执行重新播放视频
-          message(that, 'warning', msg.msg)
-          that.$bus.$emit('closePay')
-          location.reload()
+          that.$bus.$emit('payResult', true)
         }
         //支付失败
         if (msg.pay_status == 100100) {
-          message(that, 'warning', msg.msg)
+          that.$bus.$emit('payResult', false)
           return false
         }
       })
@@ -252,6 +247,7 @@ export default {
       if (!this.bought && this.lookAt == '2') {
         // 取消全屏
         this.player.fullscreenService.cancelFullScreen()
+        this.changePlayImg(this.pauseImg, this.playerForm.catalogId)
         this.$bus.$emit('openPay', this.pay)
         this.closePayed()
       } else {

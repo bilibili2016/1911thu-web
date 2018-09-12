@@ -1,11 +1,42 @@
 <template>
   <div>
-    <div class="pay" v-show="showPay">
-      <div class="note">
+    <div class="pay" v-show="payShadow">
+      <div class="note" v-show="showPay">
         <i @click="close" class="el-icon-close fr"></i>
-        <h4>尊敬的用户，该课程需
+        <h4>尊敬的用户，试看已结束，请
           <span>付费</span>观看
         </h4>
+        <div class="goodsInfo" v-show="!loading">
+          <div class="userImg">
+            <img :src="produceOrderInfo.head_img" alt="">
+            <span>{{produceOrderInfo.user_name}}</span>
+          </div>
+          <div v-if="codeForm.type==1">
+            <p>课程名称：{{produceOrderInfo.title}}</p>
+            <p>
+              <span>课程价格：{{produceOrderInfo.present_price}}元</span>
+              <span>项目有效期：365天</span>
+            </p>
+          </div>
+          <div v-if="codeForm.type==2">
+            <p>项目名称：{{produceOrderInfo.title}}</p>
+            <p>
+              <span>项目价格：{{produceOrderInfo.present_price}}元</span>
+              <span>项目有效期：365天</span>
+            </p>
+            <!-- produceOrderInfo.study_type 判断 普通项目类型： 线上 混合 互动-->
+            <p>
+              <span v-if="produceOrderInfo.study_type==='1'">培训方式：线上</span>
+              <span v-else-if="produceOrderInfo.study_type==='2'">培训方式：混合</span>
+              <span v-else-if="produceOrderInfo.study_type==='3'">培训方式：互动</span>
+              <span v-if="produceOrderInfo.study_type==='2'||produceOrderInfo.study_type==='3'">培训人数：{{produceOrderInfo.study_persion_number}}人</span>
+            </p>
+            <!-- 混合项目和互动项目显示线下培训天数 -->
+            <p v-if="produceOrderInfo.study_type==='2'||produceOrderInfo.study_type==='3'">
+              <span>线下培训天数：{{produceOrderInfo.offline_days}}天</span>
+            </p>
+          </div>
+        </div>
         <div class="code">
           <div class="codeL">
             <p>微信</p>
@@ -26,16 +57,34 @@
           <h6>支付后刷新页面观看</h6>
         </div>
       </div>
+      <!-- 支付成功 -->
+      <div class="paySuccess" v-show="paySuccess">
+        <i @click="close" class="el-icon-close fr"></i>
+        <img src="http://papn9j3ys.bkt.clouddn.com/success.png" alt="">
+        <h5>支付成功</h5>
+        <div class="goodsTime">
+          <p>您已购买《{{produceOrderInfo.title}}》</p>
+          <p>
+            <span>有效期365天</span> ，请刷新页面继续观看</p>
+        </div>
+        <div class="goodsBtn">
+          <span @click="paySuccessful()">确定</span>
+        </div>
+      </div>
+      <!-- 支付失败 -->
+      <div class="payError" v-show="payError">
+        <i @click="close" class="el-icon-close fr"></i>
+        <img src="http://papn9j3ys.bkt.clouddn.com/error.png" alt="">
+        <h5>支付失败</h5>
+      </div>
     </div>
-    <!-- config.card_type=='project' -->
-    <div v-show="payResult">
 
-    </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import { mapActions } from 'vuex'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import { store as persistStore } from '~/lib/core/store'
 import { home, pay, wepay } from '~/lib/v1_sdk/index'
@@ -45,8 +94,10 @@ export default {
   props: ['config'],
   data() {
     return {
+      payShadow: false,
       showPay: false,
-      payResult: false,
+      paySuccess: false,
+      payError: false,
       codeForm: {
         type: '2',
         ids: '',
@@ -55,23 +106,45 @@ export default {
       loading: true,
       wechat: '',
       alipay: '',
-      flag: true
+      flag: true,
+      produceOrderInfo: {},
+      gidForm: {
+        gids: ''
+      }
     }
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
     close() {
+      this.payShadow = false
       this.showPay = false
-      this.$emit('closePay')
+      this.paySuccess = false
+      this.payError = false
     },
     // 获取去二维码的方法
     getCode() {
       this.codeForm.ids = matchSplits('kid')
       pay.getCode(this.codeForm).then(response => {
+        this.produceOrderInfo = response.data.produceOrderInfo
         this.wechat = response.data.code_url
         this.alipay = response.data.qr_code
         this.loading = false
         this.flag = true
       })
+    },
+    paySuccessful() {
+      if (this.codeForm.type === 1) {
+        location.reload()
+      } else {
+        if (this.produceOrderInfo.study_type == '1') {
+          location.reload()
+        } else {
+          this.gidForm.gids = 'tab-seventh'
+          this.setGid(this.gidForm)
+          this.$router.push('/profile')
+          this.$bus.$emit('selectProfileIndex', 'tab-seventh')
+        }
+      }
     }
   },
   mounted() {
@@ -85,15 +158,22 @@ export default {
         this.getCode()
         this.flag = false
       }
+      this.payShadow = true
       this.showPay = true
     })
     this.$bus.$on('closePay', data => {
       this.close()
     })
-    // payResult
+    // 支付结果
     this.$bus.$on('payResult', data => {
       if (data) {
-        this.payResult = true
+        this.showPay = false
+        this.paySuccess = true
+        this.payError = false
+      } else {
+        this.showPay = false
+        this.paySuccess = false
+        this.payError = true
       }
     })
   }

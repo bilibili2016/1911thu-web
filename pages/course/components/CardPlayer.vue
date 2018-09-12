@@ -139,14 +139,11 @@ export default {
       this.socket.on('new_msg', function(msg) {
         //支付成功
         if (msg.pay_status == '0') {
-          //执行重新播放视频
-          message(that, 'warning', msg.msg)
-          that.$bus.$emit('closePay')
-          window.location.reload()
+          that.$bus.$emit('payResult', true)
         }
         //支付失败
         if (msg.pay_status == 100100) {
-          message(that, 'warning', msg.msg)
+          that.$bus.$emit('payResult', false)
           return false
         }
       })

@@ -54,4 +54,23 @@
       }
     }
   }
+  .noData {
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 50px;
+    border-radius: 6px;
+    text-align: center;
+    img {
+      width: 316px;
+      height: 274px;
+      margin-top: 20px;
+    }
+    p {
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      color: #999;
+      font-size: 20px;
+    }
+  }
 }
