@@ -197,7 +197,7 @@ export default {
     this.config.type = matchSplits('type')
     this.resize()
     window.addEventListener('resize', this.resize)
-    if (this.isAuthenticated) {
+    if (persistStore.get('token')) {
       this.projectForm.ids = matchSplits('kid')
       this.getCurriculumPlayInfo()
     } else {

@@ -108,10 +108,7 @@ export default {
       this.showNotLogin = show
     },
     checkCourse() {
-      // this.$bus.$emit('getUserInfo')
-      let token = persistStore.get('token')
-      // console.log(token, 'token')
-      if (this.isAuthenticated && token) {
+      if (persistStore.get('token')) {
         // this.goLink('/course/chooselesson')
         // 整合后的跳转
 

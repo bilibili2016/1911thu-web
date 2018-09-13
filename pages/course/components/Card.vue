@@ -243,7 +243,7 @@ export default {
     },
     // 免费试看
     freeStudy(item) {
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         this.getDefaultCurriculumCatalogId(item)
       } else {
         // 当用户未登录
@@ -266,7 +266,7 @@ export default {
     // 左侧播放按钮事件
     handleImgPlay(item) {
       // 用户已登录
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         this.getDefaultCurriculumCatalogId(item)
       } else {
         // 未登录直接弹出登录
@@ -276,7 +276,7 @@ export default {
     // 点击立即学习按钮
     handleFreeNoneStudy(item) {
       // 当用户登录
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         // // 用户已经购买 以及 课程为免费 获取默认播放id
         if (this.privileMsg === true) {
           this.getDefaultCurriculumCatalogId(item)

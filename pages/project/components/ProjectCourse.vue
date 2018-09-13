@@ -53,7 +53,7 @@ export default {
     },
     // 跳转到项目播放页
     goProjectPlayer() {
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         let urlLink = {
           base: '/project/projectPlayer',
           kid: matchSplits('kid'),

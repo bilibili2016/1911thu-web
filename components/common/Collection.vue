@@ -31,7 +31,7 @@ export default {
   methods: {
     // 收藏-判断是收藏还是未收藏
     collection() {
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         if (this.collectData.isCollect === 1) {
           this.deleteCollection()
           this.collectData.isCollect = 0
