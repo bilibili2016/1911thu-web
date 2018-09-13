@@ -127,12 +127,10 @@ export default {
     },
     // 获取评论tag
     getEvaluateTags() {
-      return new Promise((resolve, reject) => {
-        projectplayer.getEvaluateTags().then(response => {
-          this.tagGroup = response.data.evaluateTags
-          this.changeRate('5')
-          this.btnDatas = response.data.evaluateTags
-        })
+      projectplayer.getEvaluateTags().then(response => {
+        this.tagGroup = response.data.evaluateTags
+        this.changeRate('5')
+        this.btnDatas = response.data.evaluateTags
       })
     }
   },
