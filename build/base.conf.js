@@ -37,9 +37,9 @@ const config = {
     API_STARDUST_BASE_URL: env.API_STARDUST_BASE_URL,
     API_STARDUST_TIMEOUT: env.API_STARDUST_TIMEOUT
   },
-  entry: {
-    app: ['babel-polyfill', '~/plugins/main']
-  },
+  // entry: {
+  //   app: ['babel-polyfill', '~/plugins/main']
+  // },
   head: {
     title: '1911学堂-党政干部与企事业单位高管的终身学堂',
     meta: [
