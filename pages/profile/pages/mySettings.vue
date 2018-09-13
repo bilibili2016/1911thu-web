@@ -131,11 +131,16 @@ export default {
     },
     // 切换个人信息/修改密码
     handleClick(tab, event) {
-      if (tab.name == 'first') {
-        this.showIcon = true
-        this.getUserInfo()
+      if (persistStore.get('token')) {
+        if (tab.name == 'first') {
+          this.showIcon = true
+          this.getUserInfo()
+        } else {
+          this.showIcon = false
+        }
       } else {
-        this.showIcon = false
+        this.$router.push('/')
+        this.$bus.$emit('loginShow', true)
       }
     },
     // 获取用户信息
