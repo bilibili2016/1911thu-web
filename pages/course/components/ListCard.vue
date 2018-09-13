@@ -105,6 +105,8 @@ export default {
     },
     // 添加购物车
     handleAddShopCart(item, cart) {
+      // console.log(this.isAuthenticated)
+
       if (this.cidNumber === '0') {
         //项目
         this.curriculumcartids.type = 2
