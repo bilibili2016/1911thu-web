@@ -371,6 +371,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.isAuthenticated)
+
     this.initAll()
     this.$bus.$on('reCourseData', data => {
       this.initAll()

@@ -35,6 +35,8 @@ export const state = () => ({
 })
 export const getters = {
   isAuthenticated(state) {
+    // console.log(state.token)
+
     return !isNull(state.token)
   },
   getProductsNum(state) {
