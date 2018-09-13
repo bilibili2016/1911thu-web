@@ -22,8 +22,6 @@
         <div style="width:345px" class="fr">
           <!-- 讲师介绍 -->
           <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
-          <!-- 课程评价-->
-          <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
         </div>
       </div>
     </div>
@@ -78,7 +76,6 @@ export default {
       kidForm: {
         kid: ''
       },
-      isClose: false, //评论组件是否有关闭按钮
       showCheckedCourse: false,
       activeName: 'first',
       dialogVisible: false,

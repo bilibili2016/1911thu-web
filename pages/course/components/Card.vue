@@ -12,7 +12,7 @@
             <!-- <div class="mask">1</div> -->
 
             <!-- project 页面的课程详情 不显示一些东西 -->
-            <div class="common-button btn-bg" v-if="config.card_type !== 'project'">
+            <div class="common-button btn-bg">
               <!-- 登录 不登录 播放按钮 -->
               <div class="playBtn-detail">
                 <img :src="playImg" alt="" @click="handleImgPlay(courseList)">
@@ -48,7 +48,7 @@
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
                 </div>
-                <div class="common-button" v-if="config.card_type !== 'project'">
+                <div class="common-button">
                   <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
                 </div>
               </div>
@@ -72,19 +72,9 @@
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
                 </div>
-                <!-- <h4 class="clearfix" v-if="config.card_type !== 'project'">
-                  <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
-                  <p>已学时长</p>
-                </h4> -->
-                <!-- 学时 以及 学习人数 星级 价钱-->
-                <!-- <div class="clum">
-                  <span class="fl coursenum">
-                    <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习
-                  </span>
-                </div> -->
                 <div class="common-button">
                   <!-- 学习进度 -->
-                  <div class="lineProgress" v-if="config.card_type !== 'project'">
+                  <div class="lineProgress">
                     <h5 class="clearfix">
                       <span class="fl">学习进度</span>
                       <span class="fr">已完成{{courseList.percent}}%</span>
@@ -93,7 +83,7 @@
                   </div>
                   <!-- 免费课程学习到100后显示再次学习 -->
                   <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
-                  <div class="fr" v-if="config.card_type !== 'project'">
+                  <div class="fr">
                     <el-button v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                     <el-button v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   </div>
@@ -118,9 +108,9 @@
                   <span class="rate">课程评分：
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
-                  <span class="coins" v-if="config.card_type !== 'project'">￥ {{courseList.present_price}} </span>
+                  <span class="coins">￥ {{courseList.present_price}} </span>
                 </div>
-                <div v-if="config.card_type !== 'project'">
+                <div>
                   <!-- 项目课程 详情 不展示按钮 -->
                   <div class=" common-button " v-if="courseList.is_study===0">
                     <!-- 未购买 购买判断  未购买-->
@@ -157,45 +147,8 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
-            <!-- 收费课程  未购买 未学习 end -->
-            <!-- 收费课程 已学习 说明已经购买  start-->
-            <!-- <div v-if=" courseList.is_free === '1' && courseList.curriculumPrivilege"> -->
-
-            <!-- 学时 以及 学习人数 星级 价钱-->
-            <!-- <div class="clum">
-                <span class="fl coursenum">
-                  <img src="@/assets/images/home_num.png" alt=""> {{courseList.study_number}}人正在学习</span>
-              </div> -->
-            <!-- 课程介绍 未购买 学习按钮-->
-            <!-- <div class="study clearfix bought"> -->
-            <!-- <h4 class="clearfix" v-if="config.card_type !== 'project'">
-                  <p>{{parseInt(courseList.study_curriculum_time / 60)}}分钟{{parseInt(courseList.study_curriculum_time % 60)}}秒</p>
-                  <p>已学时长</p>
-                  <p class="soldOut" v-if="courseList.status =='2'">此课程已下架</p>
-                </h4> -->
-            <!-- 课程介绍 -->
-            <!-- <p>{{courseList.introduction}}</p> -->
-            <!-- 学时 以及 学习人数 星级 价钱-->
-            <!-- <div class="studyInfo"> -->
-            <!-- <span class="fl coursenum">
-                  <img src="@/assets/images/icon_id.png" alt="">学习人数：{{courseList.study_number}}</span>
-                <span class="fl coursenum">
-                  <span><img src="@/assets/images/icon_time.png" alt="">总学时：{{courseList.study_time}}</span>
-                </span>
-                <span class="rate">课程评分：
-                  <el-rate disabled v-model="courseList.score"></el-rate>
-                </span>
-                <span class="coins" v-if="config.card_type !== 'project'">￥ {{courseList.present_price}} </span>
-              </div>
-
-            </div> -->
-
-            <!-- </div> -->
-            <!-- 收费课程  未购买 未学习 end -->
-            <!-- 收费课程 已学习 说明已经购买  end-->
           </div>
         </div>
       </div>

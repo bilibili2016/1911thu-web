@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="bottomCard">
-        <!-- 左侧的课程目录和介绍 -->
+        <!-- 左侧的课程目录和介绍和评论 -->
         <div class="content fl">
           <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg" :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="handleCurrentChange"></v-coursecatelog>
         </div>
