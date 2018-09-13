@@ -302,14 +302,12 @@ export default {
       this.getPlayerInfo()
     },
     getEvaluateTags() {
-      return new Promise((resolve, reject) => {
-        coursedetail.getEvaluateTags().then(response => {
-          // this.btnData = response.data.evaluateTags['1']
-          this.tagGroup = response.data.evaluateTags
-          this.changeRate('5')
-          this.btnDatas = response.data.evaluateTags
-          // this.tagGroup = response.data.evaluateTags
-        })
+      coursedetail.getEvaluateTags().then(response => {
+        // this.btnData = response.data.evaluateTags['1']
+        this.tagGroup = response.data.evaluateTags
+        this.changeRate('5')
+        this.btnDatas = response.data.evaluateTags
+        // this.tagGroup = response.data.evaluateTags
       })
     },
     getBtnContent(val, index) {
@@ -351,10 +349,8 @@ export default {
     // 添加购物车
     addShopCart() {
       this.curriculumcartids.cartid = this.kid
-      return new Promise((resolve, reject) => {
-        players.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingcart')
-        })
+      players.addShopCart(this.curriculumcartids).then(response => {
+        this.$router.push('/shop/shoppingcart')
       })
     },
     selTypeChange(index) {
@@ -410,12 +406,10 @@ export default {
         // })
       } else {
         this.curriculumcartids.cartid = item[0].curriculum_id
-        return new Promise((resolve, reject) => {
-          players.addShopCart(this.curriculumcartids).then(response => {
-            this.$message({
-              type: 'success',
-              message: '添加购物车成功'
-            })
+        players.addShopCart(this.curriculumcartids).then(response => {
+          this.$message({
+            type: 'success',
+            message: '添加购物车成功'
           })
         })
       }
@@ -539,18 +533,16 @@ export default {
       // this.playerDetailForm.curriculumId = persistStore.get('curriculumId')
       this.playerDetailForm.curriculumId = splitUrl(0, 1)
 
-      return new Promise((resolve, reject) => {
-        players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
-          this.player = response.data.curriculumDetail
-          this.iseve = response.data.curriculumDetail.is_evaluate
-          this.bought = response.data.curriculumPrivilege
-          this.isStudy = response.data.curriculumDetail.is_study
-          this.courseList = response.data.curriculumCatalogList
+      players.getCurriculumPlayInfo(this.playerDetailForm).then(response => {
+        this.player = response.data.curriculumDetail
+        this.iseve = response.data.curriculumDetail.is_evaluate
+        this.bought = response.data.curriculumPrivilege
+        this.isStudy = response.data.curriculumDetail.is_study
+        this.courseList = response.data.curriculumCatalogList
 
-          this.collectMsg = response.data.curriculumDetail.is_collection
-          this.curriculumPrivilege = response.data.curriculumPrivilege
-          this.isFreeCourse = response.data.curriculumDetail.is_free
-        })
+        this.collectMsg = response.data.curriculumDetail.is_collection
+        this.curriculumPrivilege = response.data.curriculumPrivilege
+        this.isFreeCourse = response.data.curriculumDetail.is_free
       })
     },
     // 反馈问题
@@ -559,28 +551,26 @@ export default {
       this.problem.curriculumId = splitUrl(0, 1)
 
       this.problem.curriculumcatalogid = persistStore.get('catalogId')
-      return new Promise((resolve, reject) => {
-        players.reportProblem(this.problem).then(response => {
-          // this.closeReport()
+      players.reportProblem(this.problem).then(response => {
+        // this.closeReport()
 
-          if (response.status === 100100) {
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-          } else {
-            this.closeReport()
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
-          }
-          if (this.word === '') {
-            return
-          }
-        })
+        if (response.status === 100100) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
+          })
+        } else {
+          this.closeReport()
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
+          })
+        }
+        if (this.word === '') {
+          return
+        }
       })
     },
     // 增加评论
@@ -617,28 +607,26 @@ export default {
         .replace(/,/g, '#')
 
       // console.log(this.addEvaluateForm, '这是this.addEvaluateForm')
-      return new Promise((resolve, reject) => {
-        coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === 100100) {
-            this.$message({
-              showClose: true,
-              type: 'warning',
-              message: response.msg
-            })
-          } else {
-            this.addEvaluateForm.tag = []
-            for (let item of this.btnData) {
-              this.$set(item, 'isCheck', false)
-            }
-            this.word = ''
-            this.showEvaluate = false
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: response.msg
-            })
+      coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
+        if (response.status === 100100) {
+          this.$message({
+            showClose: true,
+            type: 'warning',
+            message: response.msg
+          })
+        } else {
+          this.addEvaluateForm.tag = []
+          for (let item of this.btnData) {
+            this.$set(item, 'isCheck', false)
           }
-        })
+          this.word = ''
+          this.showEvaluate = false
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: response.msg
+          })
+        }
       })
     },
     // 判断是收藏还是为收藏
@@ -654,15 +642,13 @@ export default {
       // this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       this.addCollectionForm.curriculumId = splitUrl(0, 1)
 
-      return new Promise((resolve, reject) => {
-        coursedetail.addCollection(this.addCollectionForm).then(response => {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '添加收藏成功'
-          })
-          this.collectMsg = 1
+      coursedetail.addCollection(this.addCollectionForm).then(response => {
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '添加收藏成功'
         })
+        this.collectMsg = 1
       })
     },
     // 删除收藏
@@ -670,16 +656,14 @@ export default {
       // this.addCollectionForm.curriculumId = persistStore.get('curriculumId')
       this.addCollectionForm.curriculumId = splitUrl(0, 1)
 
-      return new Promise((resolve, reject) => {
-        coursedetail.deleteCollection(this.addCollectionForm).then(response => {
-          // this.collectMsg = response.data.curriculumDetail.is_collection
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: '取消收藏成功'
-          })
-          this.collectMsg = 0
+      coursedetail.deleteCollection(this.addCollectionForm).then(response => {
+        // this.collectMsg = response.data.curriculumDetail.is_collection
+        this.$message({
+          showClose: true,
+          type: 'success',
+          message: '取消收藏成功'
         })
+        this.collectMsg = 0
       })
     },
     // 为播放器上当的播放按钮添加点击事件

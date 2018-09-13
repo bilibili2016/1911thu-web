@@ -32,12 +32,10 @@ export default {
   methods: {
     // 获取我的消息列表
     getInfo() {
-      return new Promise((resolve, reject) => {
-        info.userMessage(this.curruntForm).then(res => {
-          this.infoList = res.data.userMessage
-          let noMsg = this.infoList && this.infoList.length > 0 ? false : true
-          this.$emit('noMsg', noMsg)
-        })
+      info.userMessage(this.curruntForm).then(res => {
+        this.infoList = res.data.userMessage
+        let noMsg = this.infoList && this.infoList.length > 0 ? false : true
+        this.$emit('noMsg', noMsg)
       })
     }
   },

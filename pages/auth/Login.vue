@@ -412,8 +412,36 @@ export default {
     async handleGetCode(data) {
       if (this.bindTelData.seconds === 30) {
         if (this.bindTelData.captchaDisable === false) {
-          return new Promise((resolve, reject) => {
-            auth.smsCodes(data).then(response => {
+          auth.smsCodes(data).then(response => {
+            let types = response.status === 0 ? 'success' : 'error'
+            message(this, types, response.msg)
+
+            this.bindTelData.captchaDisable = true
+            this.bindTelData.getCode = this.bindTelData.seconds + '秒后重新发送'
+            this.codeInterval = setInterval(() => {
+              if (this.bindTelData.seconds <= 0) {
+                this.bindTelData.getCode = '获取验证码'
+                this.bindTelData.seconds = 30
+                this.bindTelData.captchaDisable = false
+                this.codeClick = false
+                clearInterval(this.codeInterval)
+              } else {
+                this.bindTelData.getCode =
+                  --this.bindTelData.seconds + '秒后重新发送'
+              }
+            }, 1000)
+          })
+        }
+      }
+    },
+    // 手机验证码 登录时候
+    async handleMobileGetCode() {
+      if (!/^[1][3,4,5,6,7,8][0-9]{9}$/.test(this.registerMobileData.phones)) {
+        message(this, 'error', '请输入正确手机号')
+      } else {
+        if (this.bindTelData.seconds === 30) {
+          if (this.bindTelData.captchaDisable === false) {
+            auth.smsCodes(this.registerMobileData).then(response => {
               let types = response.status === 0 ? 'success' : 'error'
               message(this, types, response.msg)
 
@@ -432,39 +460,6 @@ export default {
                     --this.bindTelData.seconds + '秒后重新发送'
                 }
               }, 1000)
-            })
-          })
-        }
-      }
-    },
-    // 手机验证码 登录时候
-    async handleMobileGetCode() {
-      if (!/^[1][3,4,5,6,7,8][0-9]{9}$/.test(this.registerMobileData.phones)) {
-        message(this, 'error', '请输入正确手机号')
-      } else {
-        if (this.bindTelData.seconds === 30) {
-          if (this.bindTelData.captchaDisable === false) {
-            return new Promise((resolve, reject) => {
-              auth.smsCodes(this.registerMobileData).then(response => {
-                let types = response.status === 0 ? 'success' : 'error'
-                message(this, types, response.msg)
-
-                this.bindTelData.captchaDisable = true
-                this.bindTelData.getCode =
-                  this.bindTelData.seconds + '秒后重新发送'
-                this.codeInterval = setInterval(() => {
-                  if (this.bindTelData.seconds <= 0) {
-                    this.bindTelData.getCode = '获取验证码'
-                    this.bindTelData.seconds = 30
-                    this.bindTelData.captchaDisable = false
-                    this.codeClick = false
-                    clearInterval(this.codeInterval)
-                  } else {
-                    this.bindTelData.getCode =
-                      --this.bindTelData.seconds + '秒后重新发送'
-                  }
-                }, 1000)
-              })
             })
           }
         }
