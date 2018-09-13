@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
+
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import CustomList from '@/pages/profile/components/common/List.vue'
 import CustomCard from '@/pages/profile/components/common/Card.vue'
@@ -86,10 +88,15 @@ export default {
       this.$emit('handleProject')
     },
     handleActive(item) {
-      if (item.$attrs.value == '0') {
-        this.$emit('handleActiveCollect', 1)
+      if (persistStore.get('token')) {
+        if (item.$attrs.value == '0') {
+          this.$emit('handleActiveCollect', 1)
+        } else {
+          this.$emit('handleActive', item.$attrs.value, 1)
+        }
       } else {
-        this.$emit('handleActive', item.$attrs.value, 1)
+        this.$router.push('/')
+        this.$bus.$emit('loginShow', true)
       }
     }
   }

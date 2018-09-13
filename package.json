@@ -5,7 +5,7 @@
   "author": "Little partners from Stardust",
   "private": true,
   "scripts": {
-    "dev": "nuxt -c build/dev.conf.js",
+    "dev": "nuxt --host 0.0.0.0 -c build/dev.conf.js",
     "build": "nuxt build -c build/prod.conf.js",
     "start": "NODE_ENV=production nuxt start -c build/prod.conf.js",
     "generate": "nuxt generate -c build/prod.conf.js",
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
+    "babel-polyfill": "^6.26.0",
     "element-theme": "^2.0.1",
     "element-theme-chalk": "^2.0.11",
     "es3-compatible-webpack-plugin": "^1.0.2",

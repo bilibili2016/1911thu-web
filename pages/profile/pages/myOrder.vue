@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
+
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import Order from '@/pages/profile/components/myorder/OrderList'
 import Detail from '@/pages/profile/components/common/Detail'
@@ -125,19 +127,24 @@ export default {
       this.$emit('handleUpdate', 3, 1)
     },
     handleOrder(item) {
-      switch (item.name) {
-        case 'orderFirst':
-          this.$emit('handleUpdate', 0, 1)
-          break
-        case 'orderSecond':
-          this.$emit('handleUpdate', 1, 1)
-          break
-        case 'orderThird':
-          this.$emit('handleUpdate', 2, 1)
-          break
-        case 'orderFour':
-          this.$emit('handleUpdate', 3, 1)
-          break
+      if (persistStore.get('token')) {
+        switch (item.name) {
+          case 'orderFirst':
+            this.$emit('handleUpdate', 0, 1)
+            break
+          case 'orderSecond':
+            this.$emit('handleUpdate', 1, 1)
+            break
+          case 'orderThird':
+            this.$emit('handleUpdate', 2, 1)
+            break
+          case 'orderFour':
+            this.$emit('handleUpdate', 3, 1)
+            break
+        }
+      } else {
+        this.$router.push('/')
+        this.$bus.$emit('loginShow', true)
       }
     }
   }
