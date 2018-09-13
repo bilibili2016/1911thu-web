@@ -173,25 +173,26 @@
                   <span class="pull-down ">
                     <i class="el-icon-caret-bottom "></i>
                   </span>
-                </div>
-                <div class="pull-down-text " v-if="isShowSearchSelect">
-                  <div>
-                    <div class="search " @click.stop="handleFocus ">
-                      <input placeholder="请输入搜索内容" v-model="searchInput" type="text" v-on:input="handleSearchChange(searchInput)">
-                      <i class="el-icon-search "></i>
+                  <div class="pull-down-text " v-if="isShowSearchSelect">
+                    <div>
+                      <div class="search " @click.stop="handleFocus ">
+                        <input placeholder="请输入搜索内容" v-model="searchInput" type="text" v-on:input="handleSearchChange(searchInput)">
+                        <i class="el-icon-search "></i>
+                      </div>
+                      <ul v-if="searchCourseData.length!=0">
+                        <li v-for="(item,index) in searchCourseData " :key="index " class="clearfix ">
+                          <div class="liChecked" @click.stop="chooseSearch(item) ">
+                            <input type="checkbox" v-model="item.checked" class="item-checkbox " ref="checkbox " :id="item.id " @click.stop="chooseSearchInput ">
+                            <label :for="item.id " class="item-checkbox-label ">{{item.title}}</label>
+                          </div>
+                        </li>
+                      </ul>
+                      <p v-else>暂无课程</p>
                     </div>
-                    <ul v-if="searchCourseData.length!=0">
-                      <li v-for="(item,index) in searchCourseData " :key="index " class="clearfix ">
-                        <div class="liChecked" @click.stop="chooseSearch(item) ">
-                          <input type="checkbox" v-model="item.checked" class="item-checkbox " ref="checkbox " :id="item.id " @click.stop="chooseSearchInput ">
-                          <label :for="item.id " class="item-checkbox-label ">{{item.title}}</label>
-                        </div>
-                      </li>
-                    </ul>
-                    <p v-else>暂无课程</p>
-                  </div>
 
+                  </div>
                 </div>
+
               </div>
 
             </div>
