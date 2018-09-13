@@ -419,43 +419,48 @@ export default {
     },
     // 切换tab时保存tab的name 刷新就还是在这个tab
     handleClick(item) {
-      switch (item.name) {
-        case 'tab-first': //我的首页
-          this.myCourseDataArr = [3]
-          this.handleInitMyCourseData([3])
-          break
-        case 'tab-second': //我的课程
-          this.myCourseDataArr = [1]
-          this.$bus.$emit('activeCourse')
-          this.handleInitMyCourseData([1])
-          break
-        case 'tab-third': //我的项目
-          this.myProjectDataArr = [1]
-          this.$bus.$emit('activeProject')
-          this.handleInitMyProjectData()
-          break
-        case 'tab-fourth': //我的订单
-          this.myOrderDataArr = [0]
-          this.$bus.$emit('activeOrder')
-          this.handleInitMyOrderData(true)
-          break
-        case 'tab-fifth': //我的消息
-          break
-        case 'tab-sixth': //个人设置
-          break
-        case 'tab-seventh': //兑换码管理
-          this.$bus.$emit('activeCode')
-          this.getCodeList()
-          break
-        case 'tab-eighth': //发票管理
-          this.$bus.$emit('activeTicket')
-          this.unTicketDataChange(1)
-          break
-        case 'tab-ninth': //自定制项目
-          this.customerProjectList()
-          break
+      if (persistStore.get('token')) {
+        switch (item.name) {
+          case 'tab-first': //我的首页
+            this.myCourseDataArr = [3]
+            this.handleInitMyCourseData([3])
+            break
+          case 'tab-second': //我的课程
+            this.myCourseDataArr = [1]
+            this.$bus.$emit('activeCourse')
+            this.handleInitMyCourseData([1])
+            break
+          case 'tab-third': //我的项目
+            this.myProjectDataArr = [1]
+            this.$bus.$emit('activeProject')
+            this.handleInitMyProjectData()
+            break
+          case 'tab-fourth': //我的订单
+            this.myOrderDataArr = [0]
+            this.$bus.$emit('activeOrder')
+            this.handleInitMyOrderData(true)
+            break
+          case 'tab-fifth': //我的消息
+            break
+          case 'tab-sixth': //个人设置
+            break
+          case 'tab-seventh': //兑换码管理
+            this.$bus.$emit('activeCode')
+            this.getCodeList()
+            break
+          case 'tab-eighth': //发票管理
+            this.$bus.$emit('activeTicket')
+            this.unTicketDataChange(1)
+            break
+          case 'tab-ninth': //自定制项目
+            this.customerProjectList()
+            break
+        }
+        persistStore.set('gid', item.name)
+      } else {
+        this.$router.push('/')
+        this.$bus.$emit('loginShow', true)
       }
-      persistStore.set('gid', item.name)
     },
     // 我的课程 commonmethods
     handleMyCourseChange(status, pagenum) {

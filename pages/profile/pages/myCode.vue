@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 import Invitation from '@/pages/profile/components/mycode/invitation'
 import Conversion from '@/pages/profile/components/mycode/Conversion'
 import Bind from '@/pages/profile/components/mycode/BindIng'
@@ -40,7 +41,12 @@ export default {
   },
   methods: {
     handleCourseCode(item) {
-      this.$emit('handleCourseCode', item)
+      if (persistStore.get('token')) {
+        this.$emit('handleCourseCode', item)
+      } else {
+        this.$router.push('/')
+        this.$bus.$emit('loginShow', true)
+      }
     },
     searchOrder(data) {
       this.$emit('searchCodeList', data)
