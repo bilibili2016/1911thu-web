@@ -161,6 +161,7 @@
     .playInner {
       width: 100%;
       height: 100%;
+      position: relative;
       background-color: #000;
       .prism-big-play-btn {
         left: 50% !important;
@@ -168,21 +169,27 @@
         margin-left: -32px;
         margin-top: -32px;
       }
-      .prism-player .prism-volume-control {
-        left: auto !important;
-        right: 125px;
-      }
-      .prism-player .prism-fullscreen-btn {
-        margin-top: 15px !important;
-        width: 24px;
-        height: 24px;
-      }
-      .prism-player .prism-thumbnail {
-        border: none;
-      }
-      .prism-player .prism-play-btn {
-        width: 28px;
-        height: 28px;
+      .prism-player {
+        .prism-volume-control {
+          left: auto !important;
+          right: 125px;
+        }
+        .prism-fullscreen-btn {
+          margin-top: 15px !important;
+          width: 24px;
+          height: 24px;
+        }
+        .prism-thumbnail {
+          border: none;
+        }
+        .prism-play-btn {
+          width: 28px;
+          height: 28px;
+        }
+        // 隐藏阿里自带报错信息
+        .prism-ErrorMessage {
+          display: none !important;
+        }
       }
       .player-olympic-player-next {
         width: 24px;
@@ -242,6 +249,10 @@
         width: 20px;
         margin-top: 14px !important;
         margin-right: 22px !important;
+      }
+      .error .errorMsg {
+        width: 56%;
+        margin-left: -28%;
       }
     }
   }

@@ -136,8 +136,6 @@ export default {
     },
     forgetPassword() {
       this.fpData.ectpwd = encryption(this.fpData.password)
-      console.log(this.fpData)
-
       this.forgetPasswordAjax(this.fpData).then(response => {
         let types = response.status === 0 ? 'success' : 'error'
         message(this, types, response.msg)

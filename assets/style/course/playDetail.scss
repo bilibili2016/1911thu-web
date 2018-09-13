@@ -84,6 +84,10 @@
         .prism-player .prism-setting-list .prism-setting-audio {
           display: none;
         }
+        // 隐藏阿里自带报错信息
+        .prism-player .prism-ErrorMessage {
+          display: none !important;
+        }
         // 隐藏字幕
         .prism-player .prism-cc-btn {
           display: none;

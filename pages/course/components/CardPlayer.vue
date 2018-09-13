@@ -1,6 +1,7 @@
 <template>
   <div class="playInner cardPlayer" ref="playInner" @dblclick="dblclick">
     <div id="mediaPlayer" ref="mediaPlayer"></div>
+    <v-error :showError="showError" :errorMsg="errorMsg" @getPlayerInfo="rePlay"></v-error>
   </div>
 </template>
 
@@ -11,12 +12,17 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { message, matchSplits } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
+import PlayerError from '@/components/common/PlayerError.vue'
 export default {
+  components: {
+    'v-error': PlayerError
+  },
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   data() {
     return {
+      showError: false,
       playerForm: {
         curriculumId: '',
         catalogId: '',
@@ -85,7 +91,8 @@ export default {
       },
       socket: '',
       playAuthInfo: {},
-      index: 0
+      index: 0,
+      errorMsg: ''
     }
   },
   methods: {
@@ -179,6 +186,7 @@ export default {
           this.player.on('play', this.playerPlay)
           this.player.on('pause', this.playerPause)
           this.player.on('ended', this.playerEnded)
+          this.player.on('error', this.playerError)
         } else {
           message(this, 'warning', res.msg)
           return false
@@ -265,6 +273,11 @@ export default {
           this.nextVideo()
         }
       }
+    },
+    // 播放器报错
+    playerError(error) {
+      this.showError = true
+      this.errorMsg = error.paramData.error_msg
     },
     // 试看的课程方法
     preview(freeTime, currentTime) {
