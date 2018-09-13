@@ -101,7 +101,7 @@ export default {
     ...mapActions('auth', ['setProductsNum']),
     // 跳转到项目播放页
     goProjectPlayer() {
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         let urlLink = {
           base: '/project/projectPlayer',
           kid: matchSplits('kid'),
@@ -114,7 +114,7 @@ export default {
     },
     // 项目加入购物车
     addShoppingCart() {
-      if (!this.isAuthenticated) {
+      if (!persistStore.get('token')) {
         this.$bus.$emit('loginShow', true)
         return false
       }
@@ -137,7 +137,7 @@ export default {
     },
     // 立即购买
     handleBuy(id) {
-      if (!this.isAuthenticated) {
+      if (!persistStore.get('token')) {
         this.$bus.$emit('loginShow', true)
         return false
       }

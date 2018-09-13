@@ -279,7 +279,7 @@ export default {
   },
   mounted() {
     this.psnForm = this.data
-    if (this.isAuthenticated) {
+    if (persistStore.get('token')) {
       this.getPositionList()
       this.getRegionList()
     }

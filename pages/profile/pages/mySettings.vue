@@ -168,7 +168,7 @@ export default {
     }
   },
   mounted() {
-    if (this.isAuthenticated) {
+    if (persistStore.get('token')) {
       this.getUserInfo()
       // this.getPositionList()
       // this.getRegionList()

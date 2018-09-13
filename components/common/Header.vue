@@ -289,7 +289,7 @@ export default {
     },
     // 个人中心 购物车数量
     getShopCartNum() {
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         header.shopCartList().then(res => {
           if (res.status === 100008) {
             this.getHttp = false

@@ -746,7 +746,7 @@ export default {
     }
   },
   mounted() {
-    if (this.isAuthenticated) {
+    if (persistStore.get('token')) {
       if (this.gid) {
         this.activeTab = this.gid
       } else {

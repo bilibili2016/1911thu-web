@@ -17,6 +17,8 @@
 <script>
 import { info } from '~/lib/v1_sdk/index'
 import { mapGetters } from 'vuex'
+import { store as persistStore } from '~/lib/core/store'
+
 export default {
   data() {
     return {
@@ -40,7 +42,7 @@ export default {
     }
   },
   mounted() {
-    if (this.isAuthenticated) {
+    if (persistStore.get('token')) {
       this.getInfo()
     }
   }
