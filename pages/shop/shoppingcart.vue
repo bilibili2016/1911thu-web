@@ -351,7 +351,7 @@ export default {
     }
   },
   mounted() {
-    if (this.isAuthenticated) {
+    if (persistStore.get('token')) {
       // 获取购车列表
       this.shopCartList()
     }

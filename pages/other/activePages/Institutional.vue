@@ -605,7 +605,7 @@ export default {
     },
     //跳转到自定制项目
     goCustomerProject() {
-      if (this.isAuthenticated && persistStore.get('token')) {
+      if (persistStore.get('token')) {
         open(this.customerProject)
       } else {
         this.$bus.$emit('loginShow')

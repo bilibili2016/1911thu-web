@@ -45,6 +45,7 @@
 <script>
 // banner 组件
 // 学堂资讯组件
+import { store as persistStore } from '~/lib/core/store'
 import { banner } from '~/lib/v1_sdk/index'
 import { mapGetters, mapActions } from 'vuex'
 import { message } from '@/lib/util/helper'
@@ -73,7 +74,7 @@ export default {
     }
   },
   mounted() {
-    if (this.isAuthenticated) {
+    if (persistStore.get('token')) {
       this.getUserInfo()
     }
     this.$bus.$on('reUserInfo', data => {
