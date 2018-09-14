@@ -63,7 +63,9 @@
         <h5>支付成功</h5>
         <div class="goodsTime">
           <p>您已购买《{{produceOrderInfo.title}}》</p>
-          <p>
+          <p v-if="produceOrderInfo.study_type==='2'||produceOrderInfo.study_type==='3'">
+            <span>有效期365天</span> ，请绑定兑换码后继续观看</p>
+          <p v-else>
             <span>有效期365天</span> ，请刷新页面继续观看</p>
         </div>
         <div class="goodsBtn">

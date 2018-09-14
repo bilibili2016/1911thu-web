@@ -188,7 +188,7 @@ export default {
           if (this.loadingFlag) {
             this.loadingFlag = false
             this.playLoading = setInterval(() => {
-              this.playerLoad()
+              this.playerLoad(true)
             }, 500)
           }
 
@@ -204,12 +204,17 @@ export default {
       })
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad() {
-      document.getElementsByClassName('prism-big-play-btn')[0].style.display =
-        'none'
-      if (document.getElementsByClassName('prism-hide')[0]) {
-        document.getElementsByClassName('prism-hide')[0].className =
-          'prism-loading'
+    playerLoad(flag) {
+      if (flag) {
+        document.getElementsByClassName('prism-big-play-btn')[0].className =
+          'prism-big-play-btn hideBtn'
+        if (document.getElementsByClassName('prism-hide')[0]) {
+          document.getElementsByClassName('prism-hide')[0].className =
+            'prism-loading'
+        }
+      } else {
+        document.getElementsByClassName('prism-big-play-btn')[0].className =
+          'prism-big-play-btn'
       }
     },
     // 重新获取播放参数、播放视频

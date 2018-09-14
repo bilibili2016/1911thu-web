@@ -354,6 +354,7 @@ export default {
       } else {
         this.getCourseCardChooseList(categoryId, pids)
       }
+      document.body.scrollTop = document.documentElement.scrollTop = 0
     },
     //处理单选
     selCheckboxChange(val) {

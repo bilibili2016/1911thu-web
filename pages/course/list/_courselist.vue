@@ -141,6 +141,7 @@ export default {
       this.pagemsg.page = val
       this.newsCurriculumForm.limits = this.pagemsg.pagesize
       this.getCourseList()
+      document.body.scrollTop = document.documentElement.scrollTop = 0
     },
     // 下拉查看更多
     getMoreData() {

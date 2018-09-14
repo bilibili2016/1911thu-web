@@ -27,6 +27,7 @@ export default {
   methods: {
     pageChange(val) {
       this.$emit('pageChange', val)
+      document.body.scrollTop = document.documentElement.scrollTop = 172
     },
     getOrderDetail() {},
     handleUpdate() {

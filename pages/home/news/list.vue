@@ -73,6 +73,7 @@ export default {
         this.pagemsg.total = Number(response.data.pageCount)
         this.newsList = response.data.newsList
       })
+      document.body.scrollTop = document.documentElement.scrollTop = 0
     }
   }
 }

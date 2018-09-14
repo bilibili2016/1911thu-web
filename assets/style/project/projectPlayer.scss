@@ -168,6 +168,9 @@
         top: 50%;
         margin-left: -32px;
         margin-top: -32px;
+        &.hideBtn {
+          display: none !important;
+        }
       }
       .prism-player {
         .prism-volume-control {
