@@ -84,7 +84,7 @@ export default {
       this.$emit('getUpdateMsg')
     },
     chengeItem() {
-      this.activeTicket = 'ticketSecond'
+      this.activeName = 'ticketSecond'
       document.documentElement.scrollTop = 0
     },
     goTicketDetail() {
