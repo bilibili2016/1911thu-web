@@ -655,13 +655,15 @@ export default {
     },
     //获取发票详情
     goTicketDetail(msg) {
-      this.showTicketList = false
       this.orderForm.ids = persistStore.get('order')
       profileHome.curriculumPayApply(this.orderForm).then(response => {
         if (response.status === 0) {
           this.courseList = response.data.orderCurriculumList
           this.projectList = response.data.orderProjectList
           this.orderDetail = response.data.orderDetail
+          this.showTicketList = false
+        } else {
+          message(this, 'error', response.msg)
         }
       })
     },
@@ -671,11 +673,6 @@ export default {
     },
     // 订单详情
     curriculumPayApply(data) {
-      if (data == false) {
-        this.showTicketList = false
-      } else {
-        this.showOrderList = false
-      }
       this.orderForm.ids = persistStore.get('order')
       this.detailMsg = true
       profileHome.curriculumPayApply(this.orderForm).then(response => {
@@ -687,6 +684,14 @@ export default {
           if (response.data.orderDetail) {
             this.bankInfo = response.data.bankInfo
           }
+
+          if (data == false) {
+            this.showTicketList = false
+          } else {
+            this.showOrderList = false
+          }
+        } else {
+          message(this, 'error', response.msg)
         }
       })
     },
