@@ -34,8 +34,11 @@
             <div v-else>
               <p class="coin">￥ {{course.present_price}}</p>
               <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
-              <div class="fr common-button-half-right">
-                <el-button type="primary" plain @click.stop="handleAddShopCart(course)"> 加入购物车 </el-button>
+              <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">
+                <el-button type="primary" plain @click.stop="goBuy(course)">立即购买</el-button>
+              </div>
+              <div class="fr common-button-half-right" v-else>
+                <el-button type="primary" plain @click.stop="handleAddShopCart(course)">加入购物车</el-button>
               </div>
             </div>
           </div>
@@ -129,6 +132,13 @@ export default {
         // 当用户未登录
         this.$bus.$emit('loginShow', true)
       }
+    },
+    // 立即购买
+    goBuy(item) {
+      this.$router.push({
+        path: '/shop/affirmorder',
+        query: { id: item.id }
+      })
     },
     // 添加购物车函数
     addCourseShopCart(item) {

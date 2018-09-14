@@ -457,16 +457,6 @@ export default {
         if (response.status === 100100) {
           this.playing = this.pauseImg
           this.goShoppingCart(response.msg)
-        } else if (response.status === 100006) {
-          this.$alert('您已退出登录，请重新登录', '温馨提示', {
-            confirmButtonText: '确定',
-            callback: action => {
-              this.signOuts()
-              //初始化首页数据
-              this.$bus.$emit('reLogin', true)
-              this.$bus.$emit('loginShow', true)
-            }
-          })
         } else {
           // 初始化播放器
           // console.log(this.playerForm, '这是播放的章节id和小节id')
