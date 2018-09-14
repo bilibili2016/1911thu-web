@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="bottomCard">
-        <!-- 左侧的课程目录和介绍 -->
+        <!-- 左侧的课程目录和介绍和评论 -->
         <div class="content fl">
           <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg" :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="handleCurrentChange"></v-coursecatelog>
         </div>
@@ -279,19 +279,16 @@ export default {
     getEvaluateList() {
       this.loadEvaluate = true
       this.evaluateListForm.ids = matchSplits('kid')
+      coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
+        this.loadMsg = false
+        this.pagemsg.total = response.data.pageCount
+        this.pageCount = response.data.pageCount
+        this.commentator = response.data.evaluateList
 
-      return new Promise((resolve, reject) => {
-        coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
-          this.loadMsg = false
-          this.pagemsg.total = response.data.pageCount
-          this.pageCount = response.data.pageCount
-          this.commentator = response.data.evaluateList
-
-          this.totalEvaluateInfo = response.data.totalEvaluateInfo
-          let totalEvaluateInfo = response.data.totalEvaluateInfo
-          this.sumUserStart = Number(totalEvaluateInfo.totalScore)
-          this.loadEvaluate = false
-        })
+        this.totalEvaluateInfo = response.data.totalEvaluateInfo
+        let totalEvaluateInfo = response.data.totalEvaluateInfo
+        this.sumUserStart = Number(totalEvaluateInfo.totalScore)
+        this.loadEvaluate = false
       })
     },
     // 课程-获取课程详情

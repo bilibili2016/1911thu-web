@@ -1,0 +1,49 @@
+// 展示新的报错信息
+.error {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #333;
+  z-index: 9999;
+  .errorMsg {
+    width: 80%;
+    height: 200px;
+    background-color: #000000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -40%;
+    border-radius: 10px;
+    h5 {
+      height: 52px;
+      text-align: center;
+      margin: 40px 0;
+      line-height: 26px;
+      padding: 0 20px;
+      color: #fff;
+      font-size: 16px;
+    }
+    p {
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      span {
+        width: 150px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 5px;
+        background-color: #6417a6;
+        margin: 0 15px;
+        cursor: pointer;
+        &:first-child {
+          color: #666;
+          background-color: #ddd;
+        }
+      }
+    }
+  }
+}

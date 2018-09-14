@@ -1,6 +1,7 @@
 <template>
   <div class="playInner" ref="playInner" @dblclick="dblclick">
     <div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>
+    <v-error :showError="showError" :errorMsg="errorMsg" @getPlayerInfo="getPlayerInfo"></v-error>
   </div>
 </template>
 
@@ -11,7 +12,11 @@ import { store as persistStore } from '~/lib/core/store'
 import { message, matchSplits } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
+import PlayerError from '@/components/common/PlayerError.vue'
 export default {
+  components: {
+    'v-error': PlayerError
+  },
   props: [
     'playerForm',
     'isloaded',
@@ -22,6 +27,7 @@ export default {
   ],
   data() {
     return {
+      showError: false,
       projectForm: {
         ids: ''
       },
@@ -71,7 +77,8 @@ export default {
       course: {
         catalogId: '',
         curriculumId: ''
-      }
+      },
+      errorMsg: ''
     }
   },
   methods: {
@@ -166,6 +173,7 @@ export default {
             this.player.on('pause', this.playerPause)
             this.player.on('completeSeek', this.changeSeek)
             this.player.on('ended', this.playerEnded)
+            this.player.on('error', this.playerError)
           }
         }
       })
@@ -263,6 +271,11 @@ export default {
           this.socket.emit('watchRecordingTime_disconnect')
         }
       }
+    },
+    // 播放器报错
+    playerError(error) {
+      this.showError = true
+      this.errorMsg = error.paramData.error_msg
     },
     // 试看的课程方法
     preview(freeTime, currentTime) {

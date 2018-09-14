@@ -9,6 +9,7 @@ let env = process.env
 // }
 let dotenv = dotenvConfig.parsed
 var es3ifyPlugin = require('es3ify-webpack-plugin')
+var babelPloyfill = require('babel-polyfill')
 
 /**
  * 检查值是否为 true
@@ -36,6 +37,9 @@ const config = {
     // stardust 接口配置
     API_STARDUST_BASE_URL: env.API_STARDUST_BASE_URL,
     API_STARDUST_TIMEOUT: env.API_STARDUST_TIMEOUT
+  },
+  entry: {
+    app: ['babel-polyfill', '~/plugins/main']
   },
   head: {
     title: '1911学堂-党政干部与企事业单位高管的终身学堂',

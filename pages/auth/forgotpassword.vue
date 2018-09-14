@@ -117,27 +117,23 @@ export default {
     },
     // 验证手机号是否存在
     verifyRgTel() {
-      return new Promise((resolve, reject) => {
-        auth.verifyPhone(this.fpData).then(response => {
-          if (response.status === 0) {
-            message(this, 'error', '您的手机号还未注册！')
-            this.bindTelData.captchaDisable = true
-          } else if (response.status === 100100) {
-            message(this, 'error', response.msg)
-            this.bindTelData.captchaDisable = true
-          } else {
-            if (this.bindTelData.seconds === 30) {
-              this.bindTelData.captchaDisable = false
-              this.handleGetCode(this.registerData)
-            }
+      auth.verifyPhone(this.fpData).then(response => {
+        if (response.status === 0) {
+          message(this, 'error', '您的手机号还未注册！')
+          this.bindTelData.captchaDisable = true
+        } else if (response.status === 100100) {
+          message(this, 'error', response.msg)
+          this.bindTelData.captchaDisable = true
+        } else {
+          if (this.bindTelData.seconds === 30) {
+            this.bindTelData.captchaDisable = false
+            this.handleGetCode(this.registerData)
           }
-        })
+        }
       })
     },
     forgetPassword() {
       this.fpData.ectpwd = encryption(this.fpData.password)
-      console.log(this.fpData)
-
       this.forgetPasswordAjax(this.fpData).then(response => {
         let types = response.status === 0 ? 'success' : 'error'
         message(this, types, response.msg)
@@ -149,25 +145,23 @@ export default {
     },
     async handleGetCode() {
       if (!this.captchaDisable) {
-        return new Promise((resolve, reject) => {
-          auth.smsCodes(this.fpData).then(response => {
-            let types = response.status === 0 ? 'success' : 'error'
-            message(this, types, response.msg)
-            if (response.status === 0) {
-              this.captchaDisable = true
-              this.fpData.getCode = this.fpData.seconds + '秒后重新发送'
-              let interval = setInterval(() => {
-                if (this.fpData.seconds <= 0) {
-                  this.fpData.getCode = '获取验证码'
-                  this.fpData.seconds = 30
-                  this.captchaDisable = false
-                  clearInterval(interval)
-                } else {
-                  this.fpData.getCode = --this.fpData.seconds + '秒后重新发送'
-                }
-              }, 1000)
-            }
-          })
+        auth.smsCodes(this.fpData).then(response => {
+          let types = response.status === 0 ? 'success' : 'error'
+          message(this, types, response.msg)
+          if (response.status === 0) {
+            this.captchaDisable = true
+            this.fpData.getCode = this.fpData.seconds + '秒后重新发送'
+            let interval = setInterval(() => {
+              if (this.fpData.seconds <= 0) {
+                this.fpData.getCode = '获取验证码'
+                this.fpData.seconds = 30
+                this.captchaDisable = false
+                clearInterval(interval)
+              } else {
+                this.fpData.getCode = --this.fpData.seconds + '秒后重新发送'
+              }
+            }, 1000)
+          }
         })
       }
     },

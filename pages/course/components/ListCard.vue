@@ -113,7 +113,7 @@ export default {
         this.curriculumcartids.type = 1
       }
       // 判断是否登录
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
           this.addCourseShopCart(item)

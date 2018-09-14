@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 import TicketOrder from '@/pages/profile/components/myticket/ticketOrder'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import TicketHistory from '@/pages/profile/components/myticket/ticketHistory'
@@ -72,7 +73,12 @@ export default {
   },
   methods: {
     handleTicket(item) {
-      this.$emit('handleTicket', item.$attrs.value)
+      if (persistStore.get('token')) {
+        this.$emit('handleTicket', item.$attrs.value)
+      } else {
+        this.$router.push('/')
+        this.$bus.$emit('loginShow', true)
+      }
     },
     getUpdateMsg() {
       this.$emit('getUpdateMsg')

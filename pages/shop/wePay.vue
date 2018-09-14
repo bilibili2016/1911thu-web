@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 import { wepay } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import Vue from 'vue'
@@ -133,7 +134,7 @@ export default {
     }
   },
   mounted() {
-    if (this.isAuthenticated) {
+    if (persistStore.get('token')) {
       this.getPayList()
     }
     setPagesHeight()

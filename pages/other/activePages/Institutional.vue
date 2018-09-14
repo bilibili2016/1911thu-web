@@ -461,26 +461,24 @@ export default {
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          return new Promise((resolve, reject) => {
-            institutional.addCompany(this.company).then(response => {
-              if (response.status === 0) {
-                this.$message({
-                  showClose: true,
-                  type: 'success',
-                  message: '单位信息提交成功'
-                })
-                this.company.companyname = ''
-                this.company.person = ''
-                this.company.codes = ''
-                this.company.phones = ''
-              } else {
-                this.$message({
-                  showClose: true,
-                  type: 'error',
-                  message: response.msg
-                })
-              }
-            })
+          institutional.addCompany(this.company).then(response => {
+            if (response.status === 0) {
+              this.$message({
+                showClose: true,
+                type: 'success',
+                message: '单位信息提交成功'
+              })
+              this.company.companyname = ''
+              this.company.person = ''
+              this.company.codes = ''
+              this.company.phones = ''
+            } else {
+              this.$message({
+                showClose: true,
+                type: 'error',
+                message: response.msg
+              })
+            }
           })
         }
       })
@@ -510,27 +508,25 @@ export default {
         this.codeClick = true
       }
       if (!this.company.captchaDisable && this.company.seconds == 30) {
-        return new Promise((resolve, reject) => {
-          auth.smsCodes(this.company).then(response => {
-            this.$message({
-              showClose: true,
-              type: response.status === 0 ? 'success' : 'error',
-              message: response.msg
-            })
-            this.company.captchaDisable = true
-            this.company.getCode = this.company.seconds + '秒后重新发送'
-            let interval = setInterval(() => {
-              if (this.company.seconds <= 0) {
-                this.company.getCode = '获取验证码'
-                this.company.seconds = 30
-                this.company.captchaDisable = false
-                this.codeClick = false
-                clearInterval(interval)
-              } else {
-                this.company.getCode = --this.company.seconds + '秒后重新发送'
-              }
-            }, 1000)
+        auth.smsCodes(this.company).then(response => {
+          this.$message({
+            showClose: true,
+            type: response.status === 0 ? 'success' : 'error',
+            message: response.msg
           })
+          this.company.captchaDisable = true
+          this.company.getCode = this.company.seconds + '秒后重新发送'
+          let interval = setInterval(() => {
+            if (this.company.seconds <= 0) {
+              this.company.getCode = '获取验证码'
+              this.company.seconds = 30
+              this.company.captchaDisable = false
+              this.codeClick = false
+              clearInterval(interval)
+            } else {
+              this.company.getCode = --this.company.seconds + '秒后重新发送'
+            }
+          }, 1000)
         })
       }
     },
@@ -585,18 +581,16 @@ export default {
       if (this.company.companyname === '') {
         return false
       } else {
-        return new Promise((resolve, reject) => {
-          institutional.searchCompanyList(this.company).then(res => {
-            for (var i = 0; i < res.data.companyList.length; i++) {
-              this.$set(
-                res.data.companyList[i],
-                'value',
-                res.data.companyList[i].company_name
-              )
-            }
-            this.restaurants = res.data.companyList
-            resolve(true)
-          })
+        institutional.searchCompanyList(this.company).then(res => {
+          for (var i = 0; i < res.data.companyList.length; i++) {
+            this.$set(
+              res.data.companyList[i],
+              'value',
+              res.data.companyList[i].company_name
+            )
+          }
+          this.restaurants = res.data.companyList
+          resolve(true)
         })
       }
     },
@@ -605,7 +599,7 @@ export default {
     },
     //跳转到自定制项目
     goCustomerProject() {
-      if (this.isAuthenticated && persistStore.get('token')) {
+      if (persistStore.get('token')) {
         open(this.customerProject)
       } else {
         this.$bus.$emit('loginShow')

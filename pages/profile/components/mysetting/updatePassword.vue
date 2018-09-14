@@ -1,22 +1,22 @@
 <template>
-    <div class="changePwd">
-        <input type="password" class="hideInput">
-        <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autoComplete="off">
-            <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
-                <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne"></el-input>
-            </el-form-item>
-            <el-form-item label="新密码：" prop="newPass">
-                <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="确认新密码：" prop="checkPass">
-                <el-input type="password" v-model="changePwd.checkPass" auto-complete="off"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
-            </el-form-item>
-        </el-form>
-        <input type="password" class="hideInput">
-    </div>
+  <div class="changePwd">
+    <input type="password" class="hideInput">
+    <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autoComplete="off">
+      <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
+        <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne"></el-input>
+      </el-form-item>
+      <el-form-item label="新密码：" prop="newPass">
+        <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="确认新密码：" prop="checkPass">
+        <el-input type="password" v-model="changePwd.checkPass" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
+      </el-form-item>
+    </el-form>
+    <input type="password" class="hideInput">
+  </div>
 </template>
 
 <script>
@@ -93,32 +93,30 @@ export default {
             newpass: encryption(this.changePwd.newPass),
             newpasso: encryption(this.changePwd.checkPass)
           }
-          return new Promise((resolve, reject) => {
-            personalset.editPassWord(tmp).then(res => {
-              this.changePwd = {
-                oldPass: '',
-                newPass: '',
-                checkPass: ''
-              }
-              if (res.status == 0) {
-                this.$alert('修改成功，请重新登录！', '温馨提示', {
-                  confirmButtonText: '确定',
-                  callback: action => {
-                    this.$router.push('/')
-                    this.signOut()
-                    this.$bus.$emit('loginShow', true)
-                  }
-                })
-                persistStore.clearAll()
-              } else {
-                let msg = res.msg
-                this.$message({
-                  showClose: true,
-                  type: 'error',
-                  message: res.msg
-                })
-              }
-            })
+          personalset.editPassWord(tmp).then(res => {
+            this.changePwd = {
+              oldPass: '',
+              newPass: '',
+              checkPass: ''
+            }
+            if (res.status == 0) {
+              this.$alert('修改成功，请重新登录！', '温馨提示', {
+                confirmButtonText: '确定',
+                callback: action => {
+                  this.$router.push('/')
+                  this.signOut()
+                  this.$bus.$emit('loginShow', true)
+                }
+              })
+              persistStore.clearAll()
+            } else {
+              let msg = res.msg
+              this.$message({
+                showClose: true,
+                type: 'error',
+                message: res.msg
+              })
+            }
           })
         } else {
           return false

@@ -108,10 +108,7 @@ export default {
       this.showNotLogin = show
     },
     checkCourse() {
-      // this.$bus.$emit('getUserInfo')
-      let token = persistStore.get('token')
-      // console.log(token, 'token')
-      if (this.isAuthenticated && token) {
+      if (persistStore.get('token')) {
         // this.goLink('/course/chooselesson')
         // 整合后的跳转
 
@@ -135,7 +132,6 @@ export default {
     backToTop() {
       if (this.move) {
         const start = window.pageYOffset
-        console.log(start, '这是start')
         let i = 0
         this.interval = setInterval(() => {
           const next = Math.floor(

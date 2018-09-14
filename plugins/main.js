@@ -1,6 +1,7 @@
 /**
  * 这个文件并不是入口只是用来完成一些在其余代码执行之前的初始化工作
  */
+// import 'babel-polyfill'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import { log } from '../lib/core/logger'
@@ -61,6 +62,9 @@ if (isIE(8)) {
 }
 // ...
 if (isIE(9)) {
-  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
-  // IE 9
+  // window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+  if (process.client) {
+    console.log('process.client')
+    window.history.replaceState = window.history.replaceState || function() {}
+  }
 }

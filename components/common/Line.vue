@@ -84,7 +84,7 @@ export default {
       // this.$router.push(item)
     },
     goBuy(item, index) {
-      if (this.isAuthenticated) {
+      if (persistStore.get('token')) {
         this.curriculumcartids.cartid = item.curriculum_id
         this.addShopCart()
       } else {
@@ -92,10 +92,8 @@ export default {
       }
     },
     addShopCart() {
-      return new Promise((resolve, reject) => {
-        line.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingcart')
-        })
+      line.addShopCart(this.curriculumcartids).then(response => {
+        this.$router.push('/shop/shoppingcart')
       })
     },
     checked(index) {
@@ -110,7 +108,7 @@ export default {
         return false
       } else {
         // 是否登录
-        if (!this.isAuthenticated) {
+        if (!persistStore.get('token')) {
           this.$bus.$emit('loginShow', true)
           return false
         }

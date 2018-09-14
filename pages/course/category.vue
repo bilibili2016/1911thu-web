@@ -204,8 +204,6 @@ export default {
         }
       }
       this.makeData(this.cidData[0].childList, res.data.categoryList)
-      console.log(this.cidData)
-
       this.pidData = this.cidData[this.categoryIndex]
     },
     handelOpenUrl() {

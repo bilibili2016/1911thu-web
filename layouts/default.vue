@@ -67,7 +67,7 @@ export default {
     }
   },
   mounted() {
-    this.fetchUrl()
+    // this.fetchUrl()
     setPagesHeight()
     this.$bus.$on('headerFooterShow', () => {
       this.hfshow = true
@@ -75,10 +75,10 @@ export default {
     this.$bus.$on('headerFooterHide', () => {
       this.hfshow = false
     })
-  },
-  watch: {
-    $route: 'fetchUrl'
   }
+  // watch: {
+  //   $route: 'fetchUrl'
+  // }
 }
 </script>
 <style lang="scss" scoped>

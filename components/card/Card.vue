@@ -154,11 +154,9 @@ export default {
     },
     // 取消勾选
     delShopCart() {
-      return new Promise((resolve, reject) => {
-        card.delCourseShopCart(this.curriculumcartids).then(response => {
-          this.setProductsNum({
-            pn: response.data.curriculumNumber
-          })
+      card.delCourseShopCart(this.curriculumcartids).then(response => {
+        this.setProductsNum({
+          pn: response.data.curriculumNumber
         })
       })
     }
