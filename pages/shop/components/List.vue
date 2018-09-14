@@ -97,9 +97,9 @@
         </div>
         <div class="fr">
           <span>{{data.style_type === '1' ? '线下' : '线上'}}</span>
-          <span>{{data.study_time}}学时</span>
+          <span>{{data.oline_study_time}}学时</span>
           <span>{{data.study_persion_number}}人</span>
-          <span>{{(data.offline_days)*8}}学时</span>
+          <span>{{(data.offline_study_time)}}学时</span>
           <span>{{data.offline_days}}天</span>
           <span class="coursePrice">￥{{data.present_price}}</span>
         </div>
