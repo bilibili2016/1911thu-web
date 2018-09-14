@@ -122,42 +122,38 @@ export default {
     },
     goShopping(id) {
       this.orderForm.ids = id
-      return new Promise((resolve, reject) => {
-        ticketHistory.buyAgain(this.orderForm).then(response => {
-          if (response.status === 0) {
-            this.$router.push('/shop/shoppingCart')
-          } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: response.msg
-            })
-          }
-          resolve(true)
-        })
+      ticketHistory.buyAgain(this.orderForm).then(response => {
+        if (response.status === 0) {
+          this.$router.push('/shop/shoppingCart')
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
+        resolve(true)
       })
     },
     cancelOrder(id) {
       //取消订单
       this.orderForm.ids = id
-      return new Promise((resolve, reject) => {
-        ticketHistory.cancelOrder(this.orderForm).then(response => {
-          if (response.status === 0) {
-            this.$emit('handleUpdate', true)
-            this.$message({
-              showClose: true,
-              type: 'success',
-              message: '订单已取消！'
-            })
-          } else {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: response.msg
-            })
-          }
-          resolve(true)
-        })
+      ticketHistory.cancelOrder(this.orderForm).then(response => {
+        if (response.status === 0) {
+          this.$emit('handleUpdate', true)
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: '订单已取消！'
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: response.msg
+          })
+        }
+        resolve(true)
       })
     },
     handleSelectChange() {},

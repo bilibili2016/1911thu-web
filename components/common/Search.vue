@@ -44,13 +44,11 @@ export default {
       cb(results)
     },
     searchHotWord() {
-      return new Promise((resolve, reject) => {
-        conSearch.searchHotWord(this.searchForm).then(response => {
-          if (response.status === 0) {
-            this.hotSearchRecord = response.data.hotSearchRecord
-          }
-          resolve(true)
-        })
+      conSearch.searchHotWord(this.searchForm).then(response => {
+        if (response.status === 0) {
+          this.hotSearchRecord = response.data.hotSearchRecord
+        }
+        resolve(true)
       })
     },
     createFilter(queryString) {

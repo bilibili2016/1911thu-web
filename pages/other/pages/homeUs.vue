@@ -45,26 +45,22 @@ export default {
   methods: {
     //左侧菜单栏
     titleList() {
-      return new Promise((resolve, reject) => {
-        this.loading = true
-        About.titleList().then(res => {
-          // this.loading = false
-          this.titleListData = res.data
-          this.titleListData.map(item => {
-            this.getDetail(item.id)
-          })
-          resolve(true)
+      this.loading = true
+      About.titleList().then(res => {
+        // this.loading = false
+        this.titleListData = res.data
+        this.titleListData.map(item => {
+          this.getDetail(item.id)
         })
+        resolve(true)
       })
     },
     //菜单对应各详情页
     getDetail(ID) {
-      return new Promise((resolve, reject) => {
-        About.aboutDetail({ id: ID }).then(res => {
-          this.listCon.push(res.data)
-          this.loading = false
-          resolve(true)
-        })
+      About.aboutDetail({ id: ID }).then(res => {
+        this.listCon.push(res.data)
+        this.loading = false
+        resolve(true)
       })
     },
     handleClick() {

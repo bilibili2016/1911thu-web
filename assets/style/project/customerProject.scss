@@ -394,21 +394,21 @@
               border-bottom: none;
             }
             .courseTitle {
-              width: 45%;
+              width: 35%;
               float: left;
             }
             .time {
-              width: 10%;
+              width: 20%;
               float: left;
               text-align: center;
             }
             .price {
-              width: 10%;
+              width: 20%;
               float: left;
               text-align: center;
             }
             .operater {
-              width: 35%;
+              width: 25%;
               float: left;
               text-align: right;
               color: #cd1f1f;
@@ -417,16 +417,16 @@
           }
           .courseItem {
             .courseTitle {
-              width: 30%;
+              width: 35%;
               float: left;
             }
             .time {
-              width: 15%;
+              width: 20%;
               float: left;
               text-align: center;
             }
             .price {
-              width: 15%;
+              width: 20%;
               float: left;
               text-align: center;
             }
@@ -436,8 +436,9 @@
               text-align: center;
             }
             .total {
-              width: 25%;
+              width: 10%;
               float: left;
+              text-align: right;
             }
           }
           .discount {

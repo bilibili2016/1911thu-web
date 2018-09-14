@@ -92,10 +92,8 @@ export default {
       }
     },
     addShopCart() {
-      return new Promise((resolve, reject) => {
-        line.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingcart')
-        })
+      line.addShopCart(this.curriculumcartids).then(response => {
+        this.$router.push('/shop/shoppingcart')
       })
     },
     checked(index) {
