@@ -211,7 +211,9 @@
               <div class="price " v-if="item.is_free==='2'">0元</div>
               <div class="price " v-else>{{item.present_price}}元</div>
 
-              <div class="operater " @click="deleteChooseCourse(index) ">删除</div>
+              <div class="operater " @click="deleteChooseCourse(index) ">
+                <span>删除</span>
+              </div>
             </div>
           </div>
         </div>
