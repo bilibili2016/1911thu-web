@@ -305,7 +305,7 @@ export default {
     // 播放器报错
     playerError(error) {
       this.showError = true
-      this.errorMsg = error.paramData.error_msg
+      this.errorMsg = error.paramData.display_msg
     },
     // 试看的课程方法
     preview(freeTime, currentTime) {
