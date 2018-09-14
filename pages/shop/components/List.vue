@@ -96,7 +96,7 @@
           <h6>{{data.study_time}}学时</h6>
         </div>
         <div class="fr">
-          <span>{{data.style_type === '1' ? '线下' : '线上'}}</span>
+          <span>{{data.study_type === '1' ? '线上' : '线上+线下'}}</span>
           <span>{{data.oline_study_time}}学时</span>
           <span>{{data.study_persion_number}}人</span>
           <span>{{(data.offline_study_time)}}学时</span>
