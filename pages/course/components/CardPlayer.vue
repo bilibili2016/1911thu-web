@@ -92,7 +92,9 @@ export default {
       socket: '',
       playAuthInfo: {},
       index: 0,
-      errorMsg: ''
+      errorMsg: '',
+      playLoading: '',
+      loadingFlag: true
     }
   },
   methods: {
@@ -182,6 +184,14 @@ export default {
           this.isFree = res.data.is_free
           this.nextCatalogId = res.data.nextCatalogId
           this.$bus.$emit('closeCover')
+          // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
+          if (this.loadingFlag) {
+            this.loadingFlag = false
+            this.playLoading = setInterval(() => {
+              this.playerLoad()
+            }, 500)
+          }
+
           this.player.on('ready', this.readyPlay)
           this.player.on('play', this.playerPlay)
           this.player.on('pause', this.playerPause)
@@ -193,12 +203,24 @@ export default {
         }
       })
     },
+    // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
+    playerLoad() {
+      document.getElementsByClassName('prism-big-play-btn')[0].style.display =
+        'none'
+      if (document.getElementsByClassName('prism-hide')[0]) {
+        document.getElementsByClassName('prism-hide')[0].className =
+          'prism-loading'
+      }
+    },
     // 重新获取播放参数、播放视频
     rePlay() {
       this.getdefaultPlayerUrl()
     },
     // 视频准备好之后执行
     readyPlay() {
+      clearInterval(this.playLoading)
+      this.playerLoad(false)
+      this.loadingFlag = true
       if (this.autoplay) {
         this.player.play()
       }
@@ -211,6 +233,7 @@ export default {
     },
     // 播放开始--启动计时器
     playerPlay() {
+      clearInterval(this.playLoading)
       let that = this
       clearInterval(this.interval)
       // 播放开始启动计时器

@@ -78,7 +78,9 @@ export default {
         catalogId: '',
         curriculumId: ''
       },
-      errorMsg: ''
+      errorMsg: '',
+      playLoading: '',
+      loadingFlag: true
     }
   },
   methods: {
@@ -164,6 +166,13 @@ export default {
             // 获取到的下一节的播放信息
             this.playerNextForm.curriculumId = response.data.nextCurriculumId
             this.playerNextForm.catalogId = response.data.nextCatalogId
+            // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
+            if (this.loadingFlag) {
+              this.loadingFlag = false
+              this.playLoading = setInterval(() => {
+                this.playerLoad(true)
+              }, 500)
+            }
             // 获取到上一节的播放信息
             this.playerPreviousForm.curriculumId =
               response.data.previousCurriculumId
@@ -178,8 +187,26 @@ export default {
         }
       })
     },
+    // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
+    playerLoad(flag) {
+      if (flag) {
+        document.getElementsByClassName('prism-big-play-btn')[0].style.display =
+          'none'
+        if (document.getElementsByClassName('prism-hide')[0]) {
+          document.getElementsByClassName('prism-hide')[0].className =
+            'prism-loading'
+        }
+      } else {
+        document.getElementsByClassName('prism-big-play-btn')[0].style.display =
+          'block'
+      }
+    },
     // 播放器加载完成后
     readyPlay() {
+      clearInterval(this.playLoading)
+      this.playerLoad(false)
+      this.loadingFlag = true
+
       if (this.autoplay) {
         this.player.play()
       }
@@ -191,6 +218,7 @@ export default {
     },
     // 播放开始--启动计时器
     playerPlay() {
+      clearInterval(this.playLoading)
       let that = this
       clearInterval(this.interval)
       this.interval = setInterval(() => {
