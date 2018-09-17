@@ -174,17 +174,6 @@ export default {
           message(this, 'error', response.msg)
           this.playerForm.curriculumId = this.course.curriculumId
           this.playerForm.catalogId = this.course.catalogId
-        } else if (response.status == 100007 || response.status == 100008) {
-          this.$alert(response.msg, '温馨提示', {
-            confirmButtonText: '确定',
-            callback: action => {
-              this.$router.push('/')
-              this.signOut()
-              //初始化首页数据
-              this.$bus.$emit('reLogin', true)
-              this.$bus.$emit('loginShow', true)
-            }
-          })
         }
       })
     },

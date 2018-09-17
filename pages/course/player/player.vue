@@ -667,7 +667,7 @@ export default {
           window.event.cancelBubble = true
         }
         // console.log(event)
-        var target = event.path[3].classList[0]
+        // var target = event.path[3].classList[0]
         if (target == 'vjs-big-play-button') {
           players.getPlayerInfos(that.playerForm).then(response => {
             if (response.status === 100100) {

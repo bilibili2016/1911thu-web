@@ -36,12 +36,6 @@ export default {
     }
   },
   methods: {
-    bind(index) {
-      $('.classList ul li').removeClass('checked')
-      $('.classList ul li')
-        .eq(index)
-        .addClass('checked')
-    },
     handleClick() {}
   },
   components: {

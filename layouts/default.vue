@@ -1,12 +1,12 @@
 <template>
   <el-container class="is-vertical layout-default">
-    <Header v-if="hfshow"></Header>
+    <Header v-show="hfshow"></Header>
     <el-container>
       <el-main>
         <nuxt/>
       </el-main>
     </el-container>
-    <Footer v-if="hfshow"></Footer>
+    <Footer v-show="hfshow"></Footer>
   </el-container>
 </template>
 <script>
@@ -60,13 +60,11 @@ export default {
           headerClass[i].classList.remove('active')
         }
       }
-      if (this.hfshow) {
-        document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-        document.getElementsByClassName('footerBox')[0].style.display = 'inline'
-      }
     }
   },
   mounted() {
+    document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+    document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.fetchUrl()
     setPagesHeight()
     this.$bus.$on('headerFooterShow', () => {

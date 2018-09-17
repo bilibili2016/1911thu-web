@@ -214,6 +214,10 @@ export default {
     next(vm => {
       vm.$bus.$emit('headerFooterHide')
     })
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$bus.$emit('headerFooterShow')
+    next()
   }
 }
 </script>
