@@ -389,7 +389,6 @@ export default {
   watch: {
     closePay(val) {
       if (val) {
-        console.log(val, '22')
         this.closePayed()
       }
     }
