@@ -41,12 +41,9 @@ export default {
     ...mapActions('auth', ['setKid']),
     handleLink(img) {
       this.kidForm.kids = img.jump_id
+      window.open(img.jump_url)
     },
     goDetail(news) {
-      // let openUrl = {
-      //   base: '/home/news/' + news.id
-      // }
-      // openUrl(openUrl)
       window.open(window.location.origin + '/home/news/' + news.id)
     }
   },
