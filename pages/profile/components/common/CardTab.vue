@@ -3,10 +3,10 @@
     <div :class="{ minheight : allLoad}" v-loading="allLoad">
       <v-list :data="data" :config="config" v-if="data  && data.length>0"></v-list>
     </div>
-    <div class="pagination" v-if="pagemsg.total>11">
+    <div class="pagination" v-if="pagemsg.total>11 && data.length!= 0">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="PageChange"></el-pagination>
     </div>
-    <v-nomsg v-if="data.length== 0&& !allLoad" :config="noMsg"></v-nomsg>
+    <v-nomsg v-if="data.length== 0&& !allLoad" :config="noMsg"></v-nomsg>！
   </div>
 </template>
 
