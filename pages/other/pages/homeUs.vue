@@ -33,6 +33,8 @@
 
 <script>
 import { About } from '@/lib/v1_sdk/index'
+import { setTitle } from '~/lib/util/helper'
+
 export default {
   data() {
     return {
@@ -73,8 +75,7 @@ export default {
     }
   },
   mounted() {
-    this.$route.meta.title = '关于我们-1911学堂'
-    // document.getElementsByTagName('title')[0].innerText = '关于我们-1911学堂'
+    setTitle('关于我们-1911学堂')
     this.titleList()
   }
 }

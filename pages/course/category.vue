@@ -42,7 +42,7 @@ import SearchNothing from '@/components/common/SearchNothing.vue'
 import { home, players, category } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { openUrl, matchSplits } from '~/lib/util/helper'
+import { openUrl, matchSplits, setTitle } from '~/lib/util/helper'
 import List from '@/pages/course/components/List'
 import Filter from '@/pages/course/components/Filter'
 import Page from '@/components/common/Pagination'
@@ -398,6 +398,13 @@ export default {
   mounted() {
     this.initParams()
     this.initListCard()
+    if (matchSplits('cp') === '0') {
+      //课程
+      setTitle('全部课程-1911学堂')
+    } else if (matchSplits('cp') === '1') {
+      //项目
+      setTitle('培训项目-1911学堂')
+    }
   }
 }
 </script>

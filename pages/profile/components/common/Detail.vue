@@ -164,7 +164,8 @@
                 </div>
                 <!-- 培训方式 -->
                 <div class="item" v-if="project.study_type === '1'">线上</div>
-                <div class="item" v-else>线上+线下</div>
+                <div class="item" v-if="project.study_type === '2'">混合</div>
+                <div class="item" v-else>互动</div>
                 <!-- 线上课程学时 -->
                 <div class="item">{{project.curriculum_time}}学时</div>
                 <!-- 学习人数 -->
