@@ -119,14 +119,13 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid']),
-    ...mapMutations(['setClosePay']),
+    ...mapMutations('auth', ['setClosePay']),
     close() {
       this.payShadow = false
       this.showPay = false
       this.paySuccess = false
       this.payError = false
-      this.setClosePay(true)
-      console.log(this.closePay)
+      this.setClosePay({ closePay: true })
     },
     // 获取去二维码的方法
     getCode() {
