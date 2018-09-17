@@ -21,7 +21,7 @@
         <span>{{exchangeTime(code.pay_time)}}</span>
         <span>{{code.use_code_number}}</span>
         <span>{{code.expire_days}}</span>
-        <span class="orderNum" @click="handleMyOrder(code.id)">{{code.order_sn}}
+        <span class="orderNum" @click="handleMyOrder(code)">{{code.order_sn}}
           <i class="efficacy" v-if="code.expire_days==='0'"></i>
           <i class="used" v-if="code.use_code_number==='0'"></i>
         </span>
@@ -62,6 +62,8 @@ export default {
       placeHolder: '请输入订单号',
       noCodes: true,
       number: '0',
+      searchType: 2,
+      orderNum: 0,
       noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
       gidForm: {
         gids: ''
@@ -75,9 +77,12 @@ export default {
       this.setGid(this.gidForm)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', 'tab-fourth')
-
-      persistStore.set('order', item)
-      this.$bus.$emit('goOrderDetail')
+      this.$bus.$emit(
+        'searchDatas',
+        item.order_sn,
+        this.searchType,
+        this.orderNum
+      )
     },
     exchangeTime(time) {
       return timestampToYMD(time)

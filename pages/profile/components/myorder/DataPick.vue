@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       searchDatas: '',
+      searchType: 1,
       formData: {
         start_time: ''
       },
@@ -66,7 +67,12 @@ export default {
   },
   methods: {
     detection() {
-      this.$bus.$emit('searchDatas', this.searchDatas, this.orderNum)
+      this.$bus.$emit(
+        'searchDatas',
+        this.searchDatas,
+        this.searchType,
+        this.orderNum
+      )
     }
   },
   mounted() {}

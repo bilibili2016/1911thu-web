@@ -252,7 +252,7 @@ export default {
       pagemsg8: {
         page: 1,
         pagesize: 20,
-        total: ''
+        total: 20
       },
       pagemsg9: {
         page: 1,
@@ -334,7 +334,8 @@ export default {
         limits: 20,
         payStatus: null,
         ids: null,
-        startTime: null
+        startTime: null,
+        orderSn: null
       },
       orderNotInvoiceForm: {
         pages: 1,
@@ -744,10 +745,16 @@ export default {
         this.curriculumPayApply(data)
       })
       // 我的订单 事件搜索
-      this.$bus.$on('searchDatas', (data, num) => {
-        this.orderForm.startTime = data[0]
-        this.orderForm.endTime = data[1]
-        this.handleMyOrderChange(Number(num), 1)
+      this.$bus.$on('searchDatas', (data, type, num) => {
+        // 按照事件搜索订单
+        if (type === 1) {
+          this.orderForm.startTime = data[0]
+          this.orderForm.endTime = data[1]
+          this.handleMyOrderChange(Number(num), 1)
+        } else {
+          this.orderForm.orderSn = data
+          this.handleMyOrderChange(Number(num), 1)
+        }
       })
       // 发票管理 开票历史 由于层级较深
       this.$bus.$on('historyOrderDataChange', data => {
