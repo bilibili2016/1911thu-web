@@ -359,10 +359,12 @@ export default {
     },
     // 个人中心 用户头像
     getUserInfo() {
-      header.getUserInfo().then(res => {
-        // console.log(res, 'replaceState')
-        this.isSingleLogin(res)
-      })
+      if (persistStore.get('token')) {
+        header.getUserInfo().then(res => {
+          // console.log(res, 'replaceState')
+          this.isSingleLogin(res)
+        })
+      }
     },
     getAll() {
       this.getShopCartNum()

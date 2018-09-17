@@ -51,7 +51,7 @@
 
 <script>
 import { paypublic, wepay } from '@/lib/v1_sdk/index'
-import { matchSplits } from '@/lib/util/helper'
+import { matchSplits, message } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -135,7 +135,13 @@ export default {
     }
   },
   mounted() {
-    this.getPayList()
+    if (persistStore.get('token')) {
+      this.getPayList()
+    } else {
+      message(this, 'error', '您未登录,请先登录!')
+      this.$router.push('/')
+      this.$bus.$emit('loginShow', true)
+    }
   }
 }
 </script>
