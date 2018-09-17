@@ -7,7 +7,7 @@
           <div class="goodplay" v-if="isShowCover">
             <div class="img-con">
               <img v-if="whichPage==='0'" :src="courseList.picture" class="image">
-              <img v-else :src="courseList.teacher_picture" class="image">''
+              <img v-else :src="courseList.teacher_picture" class="image">
             </div>
             <!-- <div class="mask">1</div> -->
 

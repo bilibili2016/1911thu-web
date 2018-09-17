@@ -15,23 +15,24 @@ let token = persistStore.get('token')
 let gid = persistStore.get('gid')
 // let kid = persistStore.get('kid')
 let productsNum = persistStore.get('productsNum')
-
+let closePay = false
 export const MUTATION = {
   signIn: 'sign-in',
   signOut: 'sign-out',
   refresh: 'refresh',
   me: 'me',
   setGid: 'set-gid',
-  // setKid: 'set-kid',
-  setProductsNum: 'set-productsNum'
-}
+  setProductsNum: 'set-productsNum',
+  setClosePay: 'setClosePay'
+} // setKid: 'set-kid',
 export const state = () => ({
   user,
   token,
   gid,
   // nid,
   // kid,
-  productsNum
+  productsNum,
+  closePay
 })
 export const getters = {
   isAuthenticated(state) {
@@ -57,12 +58,12 @@ export const mutations = {
   },
   [MUTATION.setGid](state, { gid }) {
     state.gid = gid
-  },
-  // [MUTATION.setKid](state, { kid }) {
-  //   state.kid = kid
-  // },
+  }, // }, //   state.kid = kid // [MUTATION.setKid](state, { kid }) {
   [MUTATION.setProductsNum](state, { productsNum }) {
     state.productsNum = productsNum
+  },
+  [MUTATION.setClosePay](state, { closePay }) {
+    state.closePay = closePay
   }
 }
 export const actions = {

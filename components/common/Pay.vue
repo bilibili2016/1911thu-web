@@ -85,7 +85,7 @@
 
 <script>
 import Vue from 'vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import { store as persistStore } from '~/lib/core/store'
 import { home, pay, wepay } from '~/lib/v1_sdk/index'
@@ -114,13 +114,19 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('auth', ['closePay'])
+  },
   methods: {
     ...mapActions('auth', ['setGid']),
+    ...mapMutations(['setClosePay']),
     close() {
       this.payShadow = false
       this.showPay = false
       this.paySuccess = false
       this.payError = false
+      this.setClosePay(true)
+      console.log(this.closePay)
     },
     // 获取去二维码的方法
     getCode() {
@@ -161,9 +167,6 @@ export default {
       }
       this.payShadow = true
       this.showPay = true
-    })
-    this.$bus.$on('closePay', data => {
-      this.close()
     })
     // 支付结果
     this.$bus.$on('payResult', data => {

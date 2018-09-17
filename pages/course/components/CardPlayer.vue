@@ -18,6 +18,7 @@ export default {
     'v-error': PlayerError
   },
   computed: {
+    ...mapState('auth', ['closePay']),
     ...mapGetters('auth', ['isAuthenticated'])
   },
   data() {
@@ -376,6 +377,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.closePay)
+
     this.$bus.$on('updateCourse', data => {
       this.playerForm = data
       this.autoplay = data.autoplay
@@ -383,10 +386,6 @@ export default {
     })
     this.$bus.$on('reupdatecourse', () => {
       this.getdefaultCurriculumCatalog()
-    })
-    // 支付框关闭后的回调
-    this.$bus.$on('closePayed', () => {
-      this.closePayed()
     })
   }
 }
