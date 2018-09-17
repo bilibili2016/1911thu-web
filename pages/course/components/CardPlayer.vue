@@ -191,12 +191,22 @@ export default {
               this.playerLoad(true)
             }, 500)
           }
-
           this.player.on('ready', this.readyPlay)
           this.player.on('play', this.playerPlay)
           this.player.on('pause', this.playerPause)
           this.player.on('ended', this.playerEnded)
           this.player.on('error', this.playerError)
+        } else if (response.status == 100007 || response.status == 100008) {
+          this.$alert(response.msg, '温馨提示', {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.$router.push('/')
+              this.signOut()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
+              this.$bus.$emit('loginShow', true)
+            }
+          })
         } else {
           message(this, 'warning', res.msg)
           return false

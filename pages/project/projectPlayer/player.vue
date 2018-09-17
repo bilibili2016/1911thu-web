@@ -126,22 +126,7 @@ export default {
       this.socket.on('reconnect', function(msg) {})
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
-        if (response.status === 100100) {
-          message(this, 'error', response.msg)
-          this.playerForm.curriculumId = this.course.curriculumId
-          this.playerForm.catalogId = this.course.catalogId
-        } else if (response.status === 100006) {
-          this.$alert('您已退出登录，请重新登录', '温馨提示', {
-            confirmButtonText: '确定',
-            callback: action => {
-              this.$router.push('/')
-              this.signOut()
-              //初始化首页数据
-              this.$bus.$emit('reLogin', true)
-              this.$bus.$emit('loginShow', true)
-            }
-          })
-        } else {
+        if (response.status === 0) {
           if (!that.bought && that.lookAt == '1') {
             this.goShoppingCart('您还未购买该项目，请先去购买吧！')
             // 如果课程未购买，使用保存起来的课程id替换掉不能播放的课程id
@@ -184,6 +169,21 @@ export default {
             this.player.on('ended', this.playerEnded)
             this.player.on('error', this.playerError)
           }
+        } else if (response.status === 100100) {
+          message(this, 'error', response.msg)
+          this.playerForm.curriculumId = this.course.curriculumId
+          this.playerForm.catalogId = this.course.catalogId
+        } else if (response.status == 100007 || response.status == 100008) {
+          this.$alert(response.msg, '温馨提示', {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.$router.push('/')
+              this.signOut()
+              //初始化首页数据
+              this.$bus.$emit('reLogin', true)
+              this.$bus.$emit('loginShow', true)
+            }
+          })
         }
       })
     },
