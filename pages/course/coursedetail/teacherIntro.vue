@@ -1,7 +1,7 @@
 <template>
   <!-- 讲师介绍 -->
   <div class="teacher">
-    <h4>讲师介绍</h4>
+    <h4>导师介绍</h4>
     <div class="personal clearfix">
       <img class="fl" :src="courseList.head_img" alt="" @click="handleLinkTeacher(courseList)">
       <div class="fl">
