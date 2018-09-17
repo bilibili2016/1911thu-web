@@ -53,6 +53,15 @@
         cursor: pointer;
       }
     }
+    &:hover {
+      .el-row {
+        .item {
+          .itemBox-name {
+            color: #5f068d;
+          }
+        }
+      }
+    }
   }
 }
 .my-customerProject {

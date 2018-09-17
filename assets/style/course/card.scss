@@ -31,7 +31,7 @@
       .personInfo {
         width: 100%;
         height: 132px;
-        background-color: #6417a6;
+        background-color: #773084;
         cursor: pointer;
         img {
           float: left;
@@ -263,20 +263,20 @@
 
         .common-button .is-plain {
           border-radius: 20px;
-          border-color: #6417a6;
-          color: #6417a6;
+          border-color: #773084;
+          color: #773084;
           font-weight: 400;
           transition: all 300ms;
           background: transparent;
           span {
-            color: #6417a6;
+            color: #773084;
           }
           &:hover {
             span {
               color: #fff;
             }
-            border-color: #8f4acb;
-            background: #8f4acb;
+            border-color: #5f068d;
+            background: #5f068d;
           }
         }
         &.bought {
@@ -292,7 +292,7 @@
                 font-size: 12px;
               }
               .fl {
-                color: #6417a6;
+                color: #773084;
               }
             }
             .el-progress-bar {
@@ -301,7 +301,7 @@
                 background-color: #e4e4ef;
               }
               .el-progress-bar__inner {
-                background-color: #6417a6;
+                background-color: #773084;
               }
             }
           }
@@ -324,7 +324,7 @@
     height: 56px;
     line-height: 56px;
     border-radius: 28px;
-    color: #6417a6;
+    color: #773084;
     padding: 0;
     border: none;
     font-size: 16px;

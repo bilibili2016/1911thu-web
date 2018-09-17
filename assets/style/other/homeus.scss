@@ -83,8 +83,8 @@
     }
     // &:hover {
     //   background-color: #fff;
-    //   color: #6417a6;
-    //   border-left-color: #6417a6;
+    //   color: #773084;
+    //   border-left-color: #773084;
     // }
 
     .arrow-icon {
@@ -102,9 +102,9 @@
     }
     .el-tabs--left.el-tabs--card .el-tabs__item.is-left.is-active,
     .el-tabs--left.el-tabs--card .el-tabs__item.is-left:hover {
-      border-left: 2px solid #6417a6;
+      border-left: 2px solid #5f068d;
       background-color: #fafafa;
-      color: #6417a6;
+      color: #5f068d;
       .arrow-icon {
         background: url('~assets/images/homeUs-icon2.png') no-repeat;
       }
@@ -205,7 +205,7 @@
           line-height: 40px;
           text-align: center;
           color: #fff;
-          background-color: #6417a6;
+          background-color: #773084;
           border-radius: 3px;
           margin-top: 50px;
           font-size: 14px;
@@ -225,9 +225,9 @@
             line-height: 40px;
             text-align: center;
             font-size: 14px;
-            color: #6417a6;
+            color: #773084;
             background-color: #fff;
-            border: 1px solid #6417a6;
+            border: 1px solid #773084;
             margin-right: 10px;
             cursor: pointer;
           }
@@ -270,10 +270,10 @@
         height: 40px;
         line-height: 40px;
         border: none;
-        border: 1px solid #6417a6;
+        border: 1px solid #773084;
         margin-right: 10px;
         font-size: 14px;
-        color: #6417a6;
+        color: #773084;
         padding: 0;
         text-align: center;
       }
@@ -291,10 +291,10 @@
       // .el-tabs--border-card
       //   > .el-tabs__header
       //   .el-tabs__item:not(.is-disabled):hover {
-      //   color: #6417a6;
+      //   color: #773084;
       // }
       .is-active {
-        background-color: #6417a6;
+        background-color: #773084;
         color: #fff;
       }
     }
@@ -304,7 +304,7 @@
         margin-top: 40px;
         .title {
           font-size: 18px;
-          color: #6417a6;
+          color: #773084;
           margin-bottom: 10px;
         }
         div {
@@ -322,7 +322,7 @@
           cursor: pointer;
           margin-top: 10px;
           &:hover {
-            color: #6417a6;
+            color: #5f068d;
           }
         }
         .help-left {

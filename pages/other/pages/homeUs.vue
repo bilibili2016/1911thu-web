@@ -73,6 +73,8 @@ export default {
     }
   },
   mounted() {
+    this.$route.meta.title = '关于我们-1911学堂'
+    // document.getElementsByTagName('title')[0].innerText = '关于我们-1911学堂'
     this.titleList()
   }
 }

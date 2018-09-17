@@ -46,7 +46,7 @@
 
         </p>
         <span v-if="privileMsg === true&&config.card_type!=='project'">
-          <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#6417A6"></el-progress>
+          <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#773084"></el-progress>
         </span>
 
       </div>

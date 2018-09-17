@@ -277,8 +277,9 @@ export default {
     this.getNewCourseList()
   },
   mounted() {
+    document.getElementsByTagName('title')[0].innerText =
+      '1911学堂-党政干部与企事业单位高管的终身学堂'
     this.windowWidth = document.documentElement.clientWidth
-
     this.$bus.$on('loginMsg', data => {
       if (data === true) {
         this.loginMsg = true

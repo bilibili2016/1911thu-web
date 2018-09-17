@@ -14,7 +14,7 @@
   h3 {
     width: 1100px;
     margin: 0 auto;
-    color: #8f4acb;
+    color: #773084;
     font-size: 24px;
     padding: 0 30px;
     line-height: 88px;
@@ -47,11 +47,11 @@
         text-align: center;
         position: relative;
         overflow: hidden;
-        border: 1px solid #8f4acb;
+        border: 1px solid #773084;
         transition: all 300ms;
-        border: 1px #8f4acb solid;
+        border: 1px #773084 solid;
         &.checked {
-          background-color: #8f4acb;
+          background-color: #773084;
           border: none;
           color: #fff;
           &:before {
@@ -68,7 +68,7 @@
     .company {
       border-top: 1px solid #e8d6f7;
       span.addCompany {
-        color: #8f4acb;
+        color: #773084;
         font-size: 16px;
         cursor: pointer;
       }
@@ -105,7 +105,7 @@
       font-size: 16px;
       color: #222;
       span.fr {
-        color: #8f4acb;
+        color: #773084;
         font-size: 14px;
       }
       .goBack {
@@ -225,7 +225,7 @@
           border-bottom: 1px solid #e8d6f7;
         }
         .changeInvoice {
-          color: #6417a6;
+          color: #773084;
           cursor: pointer;
           vertical-align: top;
         }
@@ -298,7 +298,7 @@
       width: 160px;
       height: 40px;
       line-height: 40px;
-      background-color: #6417a6;
+      background-color: #773084;
       color: #fff;
       border-radius: 6px;
       text-align: center;
@@ -307,7 +307,7 @@
     }
     h6 {
       float: right;
-      color: #8f4acb;
+      color: #773084;
       font-size: 14px;
       cursor: pointer;
       text-align: right;
@@ -349,8 +349,8 @@
         margin-right: 30px;
         cursor: pointer;
         &.checked {
-          background-color: #8f4acb;
-          border-color: #8f4acb;
+          background-color: #773084;
+          border-color: #773084;
           color: #fff;
           position: relative;
           &:after {
@@ -374,7 +374,7 @@
       color: #222;
       border-bottom: 1px solid #e8d6f7;
       i {
-        color: #6417a6;
+        color: #773084;
         font-size: 20px;
         margin-top: 19px;
         font-weight: 700;
@@ -415,7 +415,7 @@
                 width: 370px;
               }
               span {
-                color: #6417a6;
+                color: #773084;
                 cursor: pointer;
               }
             }
@@ -424,7 +424,7 @@
               height: 34px;
               line-height: 34px;
               text-align: center;
-              background-color: #8f4acb;
+              background-color: #773084;
               color: #fff;
               position: relative;
               i {
@@ -459,10 +459,10 @@
               border-radius: 6px;
               margin-right: 30px;
               cursor: pointer;
-              border: 1px solid #6417a6;
+              border: 1px solid #773084;
               &.checked {
-                background-color: #8f4acb;
-                border-color: #8f4acb;
+                background-color: #773084;
+                border-color: #773084;
                 color: #fff;
               }
             }
@@ -499,12 +499,12 @@
         }
         h5 {
           padding-left: 130px;
-          color: #6417a6;
+          color: #773084;
           cursor: pointer;
           margin-bottom: 10px;
         }
         &.clearfix .check {
-          border: 2px solid #8f4acb !important;
+          border: 2px solid #773084 !important;
           position: relative;
         }
         .step {
@@ -514,7 +514,7 @@
             border: 1px solid#ddd;
             &.stepCheck {
               color: #222;
-              border: 1px solid #6417a6;
+              border: 1px solid #773084;
             }
           }
           i {
@@ -523,7 +523,7 @@
             height: 1px;
             margin: 0 10px;
             vertical-align: middle;
-            background-color: #6417a6;
+            background-color: #773084;
           }
         }
         .smallTip {
@@ -589,11 +589,11 @@
         border-radius: 6px;
         transition: all 300ms;
         &:first-child {
-          background-color: #6417a6;
+          background-color: #773084;
           color: #fff;
           margin-right: 30px;
           &:hover {
-            background-color: #8f4acb;
+            background-color: #5f068d;
           }
         }
       }
@@ -625,7 +625,7 @@
       height: 76px;
       text-align: center;
       line-height: 76px; // padding-left: 50px;
-      color: #6417a6;
+      color: #773084;
     }
     .companyInfo {
       .el-form-item {
@@ -638,7 +638,7 @@
           height: 40px;
           border-radius: 6px;
           margin-left: -80px;
-          background-color: #6417a6;
+          background-color: #773084;
           color: #fff;
         }
       }
@@ -651,7 +651,7 @@
           text-align: center;
           border-radius: 6px;
           background-color: #eee;
-          color: #6417a6;
+          color: #773084;
           font-size: 12px;
           cursor: pointer;
         }

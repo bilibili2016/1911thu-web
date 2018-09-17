@@ -66,7 +66,7 @@
           transition: all 300ms;
         }
         &:hover .tabs-title {
-          color: #6417a6;
+          color: #5f068d;
           background: rgba(233, 208, 255, 1);
         }
         .tabs-content {
@@ -85,7 +85,7 @@
             h4 {
               width: 100%;
               line-height: 30px;
-              color: #6417a6;
+              color: #773084;
               cursor: pointer;
               span {
                 width: 82%;
@@ -104,7 +104,7 @@
                 margin-right: 20px;
                 cursor: pointer;
                 &:hover {
-                  color: #6417a6;
+                  color: #5f068d;
                 }
               }
             }
@@ -200,7 +200,7 @@
           color: #222; // line-height: 40px;
           margin: 19px 0px 12px 0px;
           &:hover {
-            color: #8f4acb;
+            color: #5f068d;
           }
         }
         p {

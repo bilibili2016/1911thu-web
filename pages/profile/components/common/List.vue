@@ -9,10 +9,10 @@
             <div class="new-style" v-if="config.new === 'true'">
               <img :src="newTag" alt="">
             </div>
-            <div class="mask-style" @click="study(card,config.project,card.type)">
+            <div class="mask-style">
               <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
             </div>
-            <div class="bgImgs">
+            <div class="bgImgs" @click="selectCid(card,config.project,card.type)">
               <img v-if="config.project&&card.type==='1'" src="http://papn9j3ys.bkt.clouddn.com/p4.png" class="project-img">
               <img v-if="config.project&&card.type==='2'" src="http://papn9j3ys.bkt.clouddn.com/p5.png" class="project-img">
               <img class="coverImg" :src="card.picture" alt="">
@@ -38,10 +38,10 @@
                 <span>再次学习</span>
               </el-button>
             </div>
-            <el-row @click.native="selectCid(card,config.project,card.type)">
+            <el-row>
               <!-- 课程标题 -->
               <div class="item">
-                <p class="itemBox-name itemBoxTitle">
+                <p class="itemBox-name itemBoxTitle" @click="selectCid(card,config.project,card.type)">
                   <span>{{card.title}}</span>
                 </p>
               </div>
@@ -65,7 +65,6 @@
               </div>
               <div v-if="config.card==='already' ">
                 <div class="line-centers ">
-                  <!-- <div class="already">已完成100%</div> -->
                   <span class="already">已完成100%</span>
                   <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
                 </div>
@@ -89,21 +88,21 @@
       <div class="card-category profile ">
         <div v-for="(card,index) in data " :index="index " :key="card.id " class="card-list ">
           <el-card shadow="never " body-style="padding: 0; " class="itemBox collect">
-            <div @click="selectCid(card,config.project,card.type) ">
+            <div>
               <div class="new-style " v-if="config.new==='true' ">
                 <img :src="newTag " alt=" ">
               </div>
-              <div class="mask-style ">
+              <div class="mask-style " @click="selectCid(card,config.project,card.type) ">
                 <img :src="jinImg " alt=" " class="jin-style ">
               </div>
               <!-- 我的首页的图片背景 -->
-              <div class="bgImgs ">
+              <div class="bgImgs " @click="selectCid(card,config.project,card.type) ">
                 <img :src="card.picture " alt=" ">
               </div>
               <!-- 我的课程的 我的收藏 -->
               <el-row>
                 <div class="item ">
-                  <p class="itemBox-name ">
+                  <p class="itemBox-name" @click="selectCid(card,config.project,card.type) ">
                     <span>{{card.title}}</span>
                   </p>
                   <div class="deputyTitleOverTime">{{card.deputy_title}}</div>

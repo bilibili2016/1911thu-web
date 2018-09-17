@@ -27,7 +27,7 @@
         color: #222; // line-height: 40px;
         margin: 19px 0px 12px 0px;
         &:hover {
-          color: #8f4acb;
+          color: #5f068d;
         }
       }
       p {
@@ -357,7 +357,7 @@
       .personInfo {
         width: 100%;
         height: 132px;
-        background-color: #6417a6;
+        background-color: #773084;
         cursor: pointer;
         img {
           float: left;
@@ -466,8 +466,8 @@
             width: 140px;
             height: 36px;
             line-height: 36px;
-            border: 1px solid #6417a6;
-            color: #6417a6;
+            border: 1px solid #773084;
+            color: #773084;
             text-align: center;
             border-radius: 18px;
             cursor: pointer;
@@ -489,7 +489,7 @@
         margin: 10px 40px;
       }
       .more {
-        color: #6417a6;
+        color: #773084;
         font-size: 14px;
         margin: 10px 40px;
         cursor: pointer;
@@ -531,8 +531,8 @@
           &:nth-child(2) {
             width: 140px;
             height: 36px;
-            line-height: 36px; // border: 1px solid #6417a6;
-            // color: #6417a6;
+            line-height: 36px; // border: 1px solid #773084;
+            // color: #773084;
             text-align: center;
             border-radius: 18px;
             cursor: pointer;
@@ -607,8 +607,8 @@
   width: 140px;
   height: 36px;
   line-height: 36px;
-  border: 1px solid #6417a6;
-  color: #6417a6;
+  border: 1px solid #773084;
+  color: #773084;
   text-align: center;
   border-radius: 18px;
   cursor: pointer;
@@ -616,7 +616,7 @@
 
 .btn:hover {
   color: #fff;
-  background-color: #6417a6;
+  background-color: #5f068d;
 }
 
 .btn-class {
@@ -697,7 +697,7 @@
       }
       .title {
         transition: all 500ms linear;
-        color: #8f4acb !important;
+        color: #773084 !important;
       }
     }
     .new-style img {
