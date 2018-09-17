@@ -44,7 +44,7 @@ import Banner from '@/pages/shop/components/banner'
 import List from '@/pages/shop/components/List'
 import PayType from '@/pages/shop/wepay/payType'
 import Qrcode from '@/pages/shop/wepay/qrcode'
-import { setPagesHeight, matchSplits } from '~/lib/util/helper'
+import { setPagesHeight, matchSplits, message } from '~/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   components: {
@@ -136,6 +136,10 @@ export default {
   mounted() {
     if (persistStore.get('token')) {
       this.getPayList()
+    } else {
+      message(this, 'error', '您未登录,请先登录!')
+      this.$router.push('/')
+      this.$bus.$emit('loginShow', true)
     }
     setPagesHeight()
 
