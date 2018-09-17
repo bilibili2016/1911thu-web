@@ -212,42 +212,42 @@ export default {
       pagecltcourse: {
         page: 1,
         pagesize: 12,
-        total: ''
+        total: 12
       },
       pagemsg1: {
         page: 1,
         pagesize: 12,
-        total: ''
+        total: 12
       },
       pagemsg2: {
         page: 1,
         pagesize: 12,
-        total: ''
+        total: 12
       },
       pagemsg3: {
         page: 1,
         pagesize: 12,
-        total: ''
+        total: 12
       },
       pagemsg4: {
         page: 1,
         pagesize: 20,
-        total: ''
+        total: 20
       },
       pagemsg5: {
         page: 1,
         pagesize: 20,
-        total: ''
+        total: 20
       },
       pagemsg6: {
         page: 1,
         pagesize: 20,
-        total: ''
+        total: 20
       },
       pagemsg7: {
         page: 1,
         pagesize: 20,
-        total: ''
+        total: 20
       },
       pagemsg8: {
         page: 1,
@@ -257,7 +257,7 @@ export default {
       pagemsg9: {
         page: 1,
         pagesize: 20,
-        total: ''
+        total: 20
       },
       projectForm: {
         types: 1,
@@ -438,12 +438,14 @@ export default {
             break
           case 'tab-fourth': //我的订单
             this.myOrderDataArr = [0]
+            this.showOrderList = true
             this.$bus.$emit('activeOrder')
             this.handleInitMyOrderData(true)
             break
           case 'tab-fifth': //我的消息
             break
           case 'tab-sixth': //个人设置
+            this.$bus.$emit('activeSet')
             break
           case 'tab-seventh': //兑换码管理
             this.$bus.$emit('activeCode')

@@ -262,6 +262,10 @@ export default {
           this.bindForm.showErr = true
           message(this, 'error', res.msg)
           this.bindForm.error = res.msg
+        } else {
+          message(this, 'error', res.msg)
+          this.bindForm.isBind = false
+          this.login()
         }
       })
     },
@@ -279,7 +283,7 @@ export default {
       this.$router.push('/')
       persistStore.clearAll()
     },
-    // 个人中心 登录
+    // 个人中心 登录ZRlUuF
     login() {
       this.$bus.$emit('loginShow')
     },

@@ -178,6 +178,9 @@ export default {
       // this.getPositionList()
       // this.getRegionList()
     }
+    this.$bus.$on('activeSet', () => {
+      this.activeName = 'first'
+    })
   }
 }
 </script>
