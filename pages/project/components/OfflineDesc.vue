@@ -2,7 +2,7 @@
     <div class="offlineDesc">
         <!-- 普通项目的线下课程介绍 -->
         <div v-if="project.types==='1'">
-            <div v-if="!data.offline_content" v-html="data.offline_content"></div>
+            <div v-if="data.offline_content" v-html="data.offline_content"></div>
             <div class="noData" v-else>
                 <img src="http://papn9j3ys.bkt.clouddn.com/noMsg.png" alt="">
                 <p>暂无线下课程目录！</p>

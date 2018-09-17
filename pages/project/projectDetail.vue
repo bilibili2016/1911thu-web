@@ -157,6 +157,11 @@ export default {
     this.$bus.$on('reProjectData', data => {
       this.getProjectInfo()
     })
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('headerFooterShow')
+    })
   }
 }
 </script>

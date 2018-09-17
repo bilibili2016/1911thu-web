@@ -181,7 +181,7 @@ export default {
       // this.getTeacherList()
       // this.getEvaluateList(),
       this.getNewsInfoList()
-      this.$bus.$emit('updateCount')
+      // this.$bus.$emit('updateCount')
       // this.getPartnerList(),
       // this.getPointList()
       this.getProjectList()

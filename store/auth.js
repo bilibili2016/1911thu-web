@@ -58,8 +58,9 @@ export const mutations = {
   },
   [MUTATION.setGid](state, { gid }) {
     state.gid = gid
-  }, // }, //   state.kid = kid // [MUTATION.setKid](state, { kid }) {
+  },
   [MUTATION.setProductsNum](state, { productsNum }) {
+    // }, //   state.kid = kid // [MUTATION.setKid](state, { kid }) {
     state.productsNum = productsNum
   },
   [MUTATION.setClosePay](state, { closePay }) {

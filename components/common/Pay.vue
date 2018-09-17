@@ -3,7 +3,7 @@
     <div class="pay" v-show="payShadow">
       <div class="note" v-show="showPay">
         <i @click="close" class="el-icon-close fr"></i>
-        <h4>尊敬的用户，试看已结束，请付费观看</h4>
+        <h4> 尊敬的用户，试看已结束，请付费观看 </h4>
         <div class="goodsInfo" v-show="!loading">
           <div class="userImg">
             <img :src="produceOrderInfo.head_img" alt="">
@@ -119,14 +119,13 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid']),
-    ...mapMutations(['setClosePay']),
+    ...mapMutations('auth', ['setClosePay']),
     close() {
       this.payShadow = false
       this.showPay = false
       this.paySuccess = false
       this.payError = false
-      this.setClosePay(true)
-      console.log(this.closePay)
+      this.setClosePay({ closePay: true })
     },
     // 获取去二维码的方法
     getCode() {

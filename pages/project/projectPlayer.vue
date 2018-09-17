@@ -207,19 +207,13 @@ export default {
           '&type=' +
           matchSplits('type')
       )
-      this.$bus.$emit('loginShow', true)
     }
-    this.$bus.$emit('hideHeader', true)
     this.seconds = 10000000
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit('headerFooterHide')
     })
-  },
-  beforeRouteLeave(to, from, next) {
-    this.$bus.$emit('headerFooterShow')
-    next(vm => {})
   }
 }
 </script>

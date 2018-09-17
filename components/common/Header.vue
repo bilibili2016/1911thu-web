@@ -331,7 +331,7 @@ export default {
         if (this.authPath.indexOf(window.location.pathname) > 0) {
           this.reLoginAlert(true, res)
         }
-      } else {
+      } else if (res.status === 0) {
         if (persistStore.get('isSingleLogin') === false) {
           this.$bus.$emit('isSingleLogin', false)
         }

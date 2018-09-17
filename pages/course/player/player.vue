@@ -686,7 +686,7 @@ export default {
 
     this.getPlayerInfo()
     this.getCurriculumPlayInfo()
-    this.$bus.$emit('hideHeader', true)
+    // this.$bus.$emit('hideHeader', true)
     ;(this.seconds = 10000000),
       // 获取评论接口
       this.getEvaluateTags()

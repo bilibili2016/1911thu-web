@@ -61,18 +61,23 @@ export default {
           headerClass[i].classList.remove('active')
         }
       }
-
-      document.getElementsByClassName('headerBox')[0].style.display = 'inline'
-      document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+      if (this.hfshow) {
+        document.getElementsByClassName('headerBox')[0].style.display = 'inline'
+        document.getElementsByClassName('footerBox')[0].style.display = 'inline'
+      }
     }
   },
   mounted() {
     this.fetchUrl()
     setPagesHeight()
     this.$bus.$on('headerFooterShow', () => {
+      console.log('headerFooterShow')
+
       this.hfshow = true
     })
     this.$bus.$on('headerFooterHide', () => {
+      console.log('headerFooterHide')
+
       this.hfshow = false
     })
   },

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import { projectplayer } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { message, matchSplits } from '@/lib/util/helper'
@@ -85,6 +85,7 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['signOut']),
+    ...mapMutations('auth', ['setClosePay']),
     // 播放参数  wobsocket 播放器创建
     getPlayerInfo() {
       let that = this
@@ -390,6 +391,7 @@ export default {
       this.index = 0
       this.player.seek(0)
       this.getPlayerInfo()
+      this.setClosePay({ closePay: false })
     },
     // 提示跳转购车
     goShoppingCart(msg) {
@@ -429,6 +431,11 @@ export default {
     },
     playerInner(val, old) {
       this.$refs.playInner.style.height = val + 'px'
+    },
+    closePay(val) {
+      if (val) {
+        this.closePayed()
+      }
     }
   },
   mounted() {

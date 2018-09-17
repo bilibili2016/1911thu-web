@@ -11,6 +11,8 @@
       <el-form-item label="确认新密码：" prop="checkPass">
         <el-input type="password" v-model="changePwd.checkPass" auto-complete="off"></el-input>
       </el-form-item>
+      <p class="forgetPassword">如果您忘记原密码，建议通过
+        <span @click="forget">找回密码</span>来修改密码！</p>
       <el-form-item>
         <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
       </el-form-item>
@@ -122,6 +124,9 @@ export default {
           return false
         }
       })
+    },
+    forget() {
+      this.$router.push('/auth/forgotPassword')
     }
   }
 }

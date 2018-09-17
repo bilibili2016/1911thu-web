@@ -459,6 +459,31 @@ export default {
         this.projectForm.trainDay = ''
       }
 
+      if (type === 2) {
+        this.$confirm(
+          '1、点击确定后，系统会为您生成订单，提交订单后，您所定制项目的相关信息不可再修改。2、如需修改，请点击取消，在定制项目页面修改内容，或保存后在个人中心的“自定制项目”模块查看并修改。',
+          '温馨提示',
+          {
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            closeOnHashChange: false,
+            // type: 'warning',
+            center: true
+          }
+        )
+          .then(() => {
+            // 添加绑定课程
+            this.save(type)
+          })
+          .catch(() => {
+            this.isClick = false
+            message(this, 'info', '已取消')
+          })
+      } else {
+        this.save(type)
+      }
+    },
+    save(type) {
       customerProject.createProject(this.projectForm).then(response => {
         this.isClick = false
         if (response.status == 0) {

@@ -8,7 +8,7 @@
 <script>
 import { coursedetail, players } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import { message, matchSplits } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
@@ -99,6 +99,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('auth', ['setClosePay']),
     // 切换播放gif
     changePlayImg(img, id) {
       this.$emit('changePlayImg', img, id)
@@ -374,11 +375,11 @@ export default {
       this.player.seek(0)
       this.autoplay = false
       this.getdefaultPlayerUrl()
+      this.setClosePay({ closePay: false })
+      console.log(this.closePay)
     }
   },
   mounted() {
-    console.log(this.closePay)
-
     this.$bus.$on('updateCourse', data => {
       this.playerForm = data
       this.autoplay = data.autoplay
@@ -387,6 +388,13 @@ export default {
     this.$bus.$on('reupdatecourse', () => {
       this.getdefaultCurriculumCatalog()
     })
+  },
+  watch: {
+    closePay(val) {
+      if (val) {
+        this.closePayed()
+      }
+    }
   }
 }
 </script>
