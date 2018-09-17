@@ -36,9 +36,8 @@
       </div>
     </transition>
     <transition :name="transitionName" v-if="data">
-
-      <div class="back-to-ceiling customStyleThree" v-show="true" @click="checkCourse">
-
+      <!-- web端我要选课功能隐藏 -->
+      <div class="back-to-ceiling customStyleThree" v-show="false" @click="checkCourse">
         <div class="line-wrap">
           <img src="http://papn9j3ys.bkt.clouddn.com/chooseCourse-icon.gif" alt="">
           <!-- <div class="line-centerd">
