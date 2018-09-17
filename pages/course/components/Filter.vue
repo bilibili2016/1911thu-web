@@ -11,7 +11,7 @@
         </div>
         <!-- <div class="fr rightPages">
           <span v-show="hideSwitch">
-            <el-switch v-model="onOff" active-color="#8F4ACB" inactive-color="#ddd">
+            <el-switch v-model="onOff" active-color="#773084" inactive-color="#ddd">
             </el-switch>隐藏已参加课程
           </span>
         </div> -->

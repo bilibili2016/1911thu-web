@@ -13,7 +13,7 @@
           </div>
           <el-row>
             <div class="item ">
-              <p class="itemBox-name ">
+              <p class="itemBox-name " @click="gotoDetail(item)">
                 <span>{{item.title}}</span>
               </p>
               <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>

@@ -599,8 +599,8 @@ html {
   }
   .el-button--primary.is-plain:hover {
     transition: all 300ms;
-    background: #773084;
-    border-color: #773084;
+    background: #5f068d;
+    border-color: #5f068d;
     color: #fff;
   }
   &.btn-bgs {
@@ -611,7 +611,7 @@ html {
     }
     .el-button--primary.is-plain:hover {
       transition: all 300ms;
-      background: #773084;
+      background: #5f068d;
       color: #fff;
     }
   }
@@ -633,8 +633,8 @@ html {
   }
   .el-button--primary.is-plain:hover {
     transition: all 300ms;
-    background: #773084;
-    border-color: #773084;
+    background: #5f068d;
+    border-color: #5f068d;
     color: #fff;
   }
 }
@@ -653,8 +653,8 @@ html {
   }
   .el-button--primary.is-plain:hover {
     transition: all 300ms;
-    background: #773084;
-    border-color: #773084;
+    background: #5f068d;
+    border-color: #5f068d;
     color: #fff;
   }
 }
@@ -696,7 +696,7 @@ html {
     margin-left: 40px;
     &:hover {
       color: #fff;
-      background-color: #773084;
+      background-color: #5f068d;
     }
   }
   .el-button--primary {
@@ -708,8 +708,8 @@ html {
   }
   .el-button--primary:hover,
   .el-button--primary:focus {
-    background-color: #773084;
-    border-color: #773084;
+    background-color: #5f068d;
+    border-color: #5f068d;
   }
 }
 
@@ -720,7 +720,7 @@ html {
       color: #773084;
     }
     &:hover span {
-      color: #773084;
+      color: #5f068d;
     }
   }
 }
@@ -785,7 +785,7 @@ html {
         margin-left: 0;
       }
       &:hover {
-        color: #773084;
+        color: #5f068d;
       }
     }
   }
@@ -876,7 +876,7 @@ html {
           margin-left: 20px;
         }
         &:hover {
-          color: #773084;
+          color: #5f068d;
         }
       }
     }
@@ -1247,7 +1247,7 @@ html {
           margin-left: 20px;
         }
         &:hover {
-          color: #773084;
+          color: #5f068d;
         }
       }
     }
@@ -1457,7 +1457,7 @@ input:-webkit-autofill {
   transition: all 300ms;
   &:hover {
     background-color: #dddddd !important;
-    color: #773084 !important;
+    color: #5f068d !important;
     width: 100%;
   }
 }
@@ -1493,7 +1493,7 @@ input:-webkit-autofill {
             margin-right: 60px;
             &.is-active {
               background-color: transparent;
-              border-bottom: 2px solid #69189f;
+              border-bottom: 2px solid #773084;
             }
           }
         }

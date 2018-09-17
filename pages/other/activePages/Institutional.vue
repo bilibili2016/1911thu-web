@@ -616,6 +616,7 @@ export default {
     }
   },
   mounted() {
+    document.getElementsByTagName('title')[0].innerText = '单位入口-1911学堂'
     this.getClassifyList()
     this.company.userID = this.token
     // this.$bus.$emit('bannerShow', true)

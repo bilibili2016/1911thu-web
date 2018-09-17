@@ -45,6 +45,7 @@ export default {
     }
   },
   mounted() {
+    document.getElementsByTagName('title')[0].innerText = '名师智库-1911学堂'
     this.getNewInfoList()
   },
   methods: {

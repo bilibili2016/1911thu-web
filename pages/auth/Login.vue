@@ -642,6 +642,18 @@ export default {
     // 微信绑定手机号
     async loginWechat() {
       this.loadLogin = true
+      try {
+        if (this.bindTelData.phones === '') {
+          throw '请输入手机号'
+        }
+        if (this.bindTelData.codes === '') {
+          throw '请输入验证码'
+        }
+      } catch (error) {
+        message(this, 'error', error)
+        return false
+      }
+
       auth.loginWechat(this.bindTelData).then(response => {
         if (response.status === 0) {
           message(this, 'success', '登录成功')
