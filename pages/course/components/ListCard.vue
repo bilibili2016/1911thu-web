@@ -135,10 +135,14 @@ export default {
     },
     // 立即购买
     goBuy(item) {
-      this.$router.push({
-        path: '/shop/affirmorder',
-        query: { id: item.id }
-      })
+      if (persistStore.get('token')) {
+        this.$router.push({
+          path: '/shop/affirmorder',
+          query: { id: item.id }
+        })
+      } else {
+        this.$bus.$emit('loginShow', true)
+      }
     },
     // 添加购物车函数
     addCourseShopCart(item) {
