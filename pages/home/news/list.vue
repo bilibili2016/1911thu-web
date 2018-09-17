@@ -18,6 +18,8 @@ import CustomBanner from '@/components/common/Banner.vue'
 import CustomCard from '@/pages/home/news/components/List.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import { news } from '~/lib/v1_sdk/index'
+import { setTitle } from '~/lib/util/helper'
+
 export default {
   components: {
     'v-card': CustomCard,
@@ -54,6 +56,7 @@ export default {
   },
   mounted() {
     this.getNewInfoList()
+    setTitle('学堂资讯-1911学堂')
   },
   methods: {
     getNewInfoList() {

@@ -23,7 +23,7 @@ import CustomCard from '@/pages/course/components/ListCard.vue'
 import { categorylist } from '~/lib/v1_sdk/index'
 import CustomPagination from '@/components/common/Pagination.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
-import { message } from '~/lib/util/helper'
+import { message, setTitle } from '~/lib/util/helper'
 export default {
   components: {
     'v-card': CustomCard,
@@ -179,8 +179,16 @@ export default {
   },
   mounted() {
     this.cidNumber = window.location.pathname.split('/')[3]
-
     this.initAll()
+    if (this.cidNumber === '0') {
+      setTitle('最新项目-1911学堂')
+    } else if (this.cidNumber === '1') {
+      setTitle('最新课程-1911学堂')
+    } else if (this.cidNumber === '2') {
+      setTitle('精品课程-1911学堂')
+    } else if (this.cidNumber === '3') {
+      setTitle('免费专区-1911学堂')
+    }
   }
 }
 </script>
