@@ -551,16 +551,19 @@ export default {
           } else {
             this.isClick = false
             this.isloading = false
+            this.loadLogin = false
             return false
           }
         } else {
           this.isClick = false
           this.isloading = false
+          this.loadLogin = false
         }
       })
     },
     // 账号密码 登录 请求
     signIns(formName) {
+      this.isloginClick = true
       this.isloading = false
       this.loginData.ectpwd = encryption(this.loginData.password)
       this.$refs[formName].validate(valid => {

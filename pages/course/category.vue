@@ -404,6 +404,7 @@ export default {
     this.initParams()
     this.initListCard()
   },
+
   updated() {
     if (matchSplits('cp') === '0') {
       //课程
