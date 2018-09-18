@@ -160,6 +160,7 @@ export default {
     handleSelectItem(item) {
       this.categoryLink.cid = item.id
       this.categoryLink.cp = item.is_picture_show
+      // this.$router.push('')
       open(this.categoryLink)
     },
     handleSearchData(item) {
