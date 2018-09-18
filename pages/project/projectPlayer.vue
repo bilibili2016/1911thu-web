@@ -3,7 +3,7 @@
     <!-- 左侧播放器 -->
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <v-playertop :data="projectDetail.title"></v-playertop>
-      <v-player ref="video" :playerForm="playerForm" :isloaded="isloaded" :playerInner="innerHeight" :bought="bought" :isLookAt="lookAt" :isFreeCourse="isFreeCourse" @changePlayImg="changeImg" @falseLoaded="falseLoaded"></v-player>
+      <v-player ref="video" :playerForm="playerForm" :isloaded="isloaded" :playerInner="innerHeight" :bought="bought" :isFreeCourse="isFreeCourse" @changePlayImg="changeImg" @falseLoaded="falseLoaded" @buyProject="buyProject"></v-player>
       <v-playerbottom :collectMsg="collectMsg" :iseve="iseve" @showRpt="showRpt" @showElt="showElt" :config="config"></v-playerbottom>
     </div>
     <!-- 右侧课程小结列表 -->
@@ -65,7 +65,7 @@ export default {
       ischeck: '',
       mediaRW: 22,
       mediaLW: 78,
-      lookAt: '',
+      // lookAt: '',
       mediaRInner: true,
       mediaRIcon: 'el-icon-arrow-right',
       radioBtn: '',
@@ -104,7 +104,10 @@ export default {
       time: '',
       nextCatalogId: '', //默认播放下一小节id
       interval: '',
-      index: 0
+      index: 0,
+      shoppingForm: {
+        cartid: ''
+      }
     }
   },
   methods: {
@@ -136,8 +139,8 @@ export default {
         }
         this.playerForm.projectId = this.projectForm.ids
         // 获取到默认播放小节里的是否试看
-        this.lookAt =
-          response.data.curriculumProjectDetail.defaultCurriculumCatalog.look_at
+        // this.lookAt =
+        //   response.data.curriculumProjectDetail.defaultCurriculumCatalog.look_at
         // 播放所需数据加载完成后加载播放器数据
         this.isloaded = true
       })
@@ -190,6 +193,63 @@ export default {
         this.mediaRInner = true
         this.mediaRIcon = 'el-icon-arrow-right'
         this.mediaLW = 78
+      }
+    },
+    // 购买项目
+    buyProject() {
+      this.$confirm('您还未购买该项目，请先去购买吧！', '提示', {
+        confirmButtonText: '去购买',
+        cancelButtonText: '取消',
+        closeOnHashChange: true,
+        type: 'warning',
+        center: true
+      })
+        .then(() => {
+          // 未购买课程跳转到购物车-点击去购买
+          this.addShopCart()
+        })
+        .catch(() => {})
+    },
+    // 提示跳转购车
+    goShoppingCart(msg) {
+      this.$confirm(msg, '提示', {
+        confirmButtonText: '去购买',
+        cancelButtonText: '取消',
+        closeOnHashChange: true,
+        type: 'warning',
+        center: true
+      })
+        .then(() => {
+          // 未购买课程跳转到购物车-点击去购买
+          this.addShopCart()
+        })
+        .catch(() => {})
+    },
+    // 项目加入购物车
+    addShopCart() {
+      if (this.config.type == '1' && this.projectDetail.study_type == '1') {
+        this.shoppingForm.cartid = matchSplits('kid')
+        projectplayer.addShopCart(this.shoppingForm).then(res => {
+          if (res.status === 0) {
+            // 添加购物车成功
+            this.$router.push('/shop/shoppingcart')
+          } else {
+            message(this, 'error', res.msg)
+          }
+        })
+      } else {
+        this.goBuy(this.projectDetail)
+      }
+    },
+    // 立即购买
+    goBuy(item) {
+      if (persistStore.get('token')) {
+        this.$router.push({
+          path: '/shop/affirmorder',
+          query: { id: item.id }
+        })
+      } else {
+        this.$bus.$emit('loginShow', true)
       }
     }
   },

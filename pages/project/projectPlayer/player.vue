@@ -17,14 +17,7 @@ export default {
   components: {
     'v-error': PlayerError
   },
-  props: [
-    'playerForm',
-    'isloaded',
-    'playerInner',
-    'isFreeCourse',
-    'bought',
-    'isLookAt'
-  ],
+  props: ['playerForm', 'isloaded', 'playerInner', 'isFreeCourse', 'bought'],
   data() {
     return {
       showError: false,
@@ -128,8 +121,13 @@ export default {
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === 0) {
-          if (!that.bought && that.lookAt == '1') {
-            this.goShoppingCart('您还未购买该项目，请先去购买吧！')
+          // 没购买 && 不是免费 && 不能试看
+          if (
+            !that.bought &&
+            response.data.is_free == '1' &&
+            !response.data.playAuthInfo.is_try_see
+          ) {
+            this.$emit('buyProject')
             // 如果课程未购买，使用保存起来的课程id替换掉不能播放的课程id
             this.playerForm.curriculumId = this.course.curriculumId
             this.playerForm.catalogId = this.course.catalogId
@@ -222,7 +220,14 @@ export default {
           this.seconds--
           let playTime = this.player.getCurrentTime()
           // 试看的课程
+          console.log(this.playAuthInfo)
+
           if (this.playAuthInfo.is_try_see) {
+            console.log(
+              this.playAuthInfo.is_try_see,
+              'this.playAuthInfo.is_try_see'
+            )
+
             this.preview(this.playAuthInfo.free_time, playTime)
           }
           /**
@@ -258,7 +263,7 @@ export default {
       // 未购买&&试看的课程 && 拖动时间 > 试看时间   直接停止
       if (
         !this.bought &&
-        this.lookAt == '2' &&
+        this.playAuthInfo.is_try_see &&
         time.paramData > this.playAuthInfo.free_time
       ) {
         this.playerEnded()
@@ -270,10 +275,12 @@ export default {
     playerEnded() {
       clearInterval(this.interval)
       // 未购买且试看
-      if (!this.bought && this.lookAt == '2') {
+      if (!this.bought && this.playAuthInfo.is_try_see) {
         // 取消全屏
         this.player.fullscreenService.cancelFullScreen()
+        // 暂停播放小节ico
         this.changePlayImg(this.pauseImg, this.playerForm.catalogId)
+        // 打开扫码支付弹框
         this.$bus.$emit('openPay', this.pay)
         this.closePayed()
       } else {
@@ -297,6 +304,8 @@ export default {
     },
     // 试看的课程方法
     preview(freeTime, currentTime) {
+      console.log(freeTime, currentTime)
+
       /**
        * 1、试看时长_freeTime
        * 2、当前播放时长_currentTime
@@ -341,7 +350,7 @@ export default {
       this.playerForm.catalogId = item.id
       clearInterval(this.interval)
       this.autoplay = true
-      this.lookAt = item.look_at
+      // this.isLookAt = item.look_at
       this.getPlayerInfo()
     },
     // 切换播放gif
@@ -381,39 +390,12 @@ export default {
       this.player.seek(0)
       this.getPlayerInfo()
       this.setClosePay({ closePay: false })
-    },
-    // 提示跳转购车
-    goShoppingCart(msg) {
-      this.$confirm(msg, '提示', {
-        confirmButtonText: '去购买',
-        cancelButtonText: '取消',
-        closeOnHashChange: true,
-        type: 'warning',
-        center: true
-      })
-        .then(() => {
-          // 未购买课程跳转到购物车-点击去购买
-          this.addShopCart()
-        })
-        .catch(() => {})
-    },
-    // 项目加入购物车
-    addShopCart() {
-      this.shoppingForm.cartid = matchSplits('kid')
-      projectplayer.addShopCart(this.shoppingForm).then(res => {
-        if (res.status === 0) {
-          // 添加购物车成功
-          this.$router.push('/shop/shoppingcart')
-        } else {
-          message(this, 'error', res.msg)
-        }
-      })
     }
   },
   watch: {
     isloaded(val, old) {
       if (val) {
-        this.lookAt = this.isLookAt
+        // this.lookAt = this.isLookAt
         this.getPlayerInfo()
         this.$emit('falseLoaded')
       }

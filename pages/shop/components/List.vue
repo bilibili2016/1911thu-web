@@ -66,13 +66,18 @@
           ￥{{course.present_price}}
         </div>
         <div v-if="config.type=='wePay'" class="courseNumber">
-          <i class="el-icon-close "></i>{{course.pay_number}}
+          <div v-if="course.project_type=='2'||course.study_type=='2'||course.study_type=='3'">
+            {{course.pay_number}}人
+          </div>
+          <div v-else>
+            <i class="el-icon-close "></i>{{course.pay_number}}
+          </div>
         </div>
       </div>
     </div>
     <!-- {{config.type=='affirmOrder'}} {{config.type}} -->
+    <!-- 自定义项目确认订单 -->
     <div class="customProject" v-if="config.type=='customOrder'">
-      <!-- 自定义项目课程列表 -->
       <div class="listBar">
         <div class="fl">
           项目名称
