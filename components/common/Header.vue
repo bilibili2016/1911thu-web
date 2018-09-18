@@ -326,12 +326,12 @@ export default {
     },
     // 个人中心 重新登录 弹框
     reLoginAlert(type, res) {
+      this.handleSignOut()
       this.getHttp = false
       persistStore.set('isSingleLogin', false)
       this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
         confirmButtonText: '确定',
         callback: action => {
-          this.handleSignOut()
           //初始化首页数据
           this.$bus.$emit('loginShow', true)
           if (type) {
@@ -419,9 +419,9 @@ export default {
     }
   },
   mounted() {
+    this.getUserInfo()
     // 获取顶部课程列表
     this.getClassifyList()
-    this.getUserInfo()
     // 非单点登录 getHttp为true
     this.onBusEvent()
   }
