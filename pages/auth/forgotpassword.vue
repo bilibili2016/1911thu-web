@@ -173,9 +173,14 @@ export default {
       this.$bus.$emit('loginShow', true)
     }
   },
-  mounted() {
-    document.getElementsByClassName('headerBox')[0].style.display = 'none'
-    document.getElementsByClassName('footerBox')[0].style.display = 'none'
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('headerFooterHide')
+    })
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$bus.$emit('headerFooterShow')
+    next()
   }
 }
 </script>

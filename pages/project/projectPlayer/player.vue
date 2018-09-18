@@ -170,7 +170,7 @@ export default {
             this.player.on('ended', this.playerEnded)
             this.player.on('error', this.playerError)
           }
-        } else if (response.status === 100100) {
+        } else {
           message(this, 'error', response.msg)
           this.playerForm.curriculumId = this.course.curriculumId
           this.playerForm.catalogId = this.course.catalogId
