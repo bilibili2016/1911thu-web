@@ -260,7 +260,7 @@
 
 <script>
 import { customerProject } from '@/lib/v1_sdk/index'
-import { Trim, message, matchSplits } from '~/lib/util/helper'
+import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -784,6 +784,9 @@ export default {
     'projectForm.trainNum'(val) {
       this.computedNum()
     }
+  },
+  updated() {
+    setTitle('自定制项目-1911学堂')
   }
 }
 </script>

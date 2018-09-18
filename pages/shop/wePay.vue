@@ -44,7 +44,12 @@ import Banner from '@/pages/shop/components/banner'
 import List from '@/pages/shop/components/List'
 import PayType from '@/pages/shop/wepay/payType'
 import Qrcode from '@/pages/shop/wepay/qrcode'
-import { setPagesHeight, matchSplits, message } from '~/lib/util/helper'
+import {
+  setPagesHeight,
+  matchSplits,
+  message,
+  setTitle
+} from '~/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   components: {
@@ -146,6 +151,9 @@ export default {
     this.$bus.$on('getPayList', data => {
       this.getPayList(data)
     })
+  },
+  updated() {
+    setTitle('支付中心-1911学堂')
   }
 }
 </script>

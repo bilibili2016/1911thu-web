@@ -28,7 +28,6 @@
           <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
           <!-- 课程评价-->
           <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"> </v-evaluatecase>
-
         </div>
       </div>
     </div>
@@ -42,7 +41,7 @@ import CustomCard from '@/pages/course/components/Card.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray, matchSplits } from '@/lib/util/helper'
+import { uniqueArray, matchSplits, setTitle } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import Pay from '@/components/common/Pay.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
@@ -148,19 +147,6 @@ export default {
         img: '',
         id: ''
       }
-    }
-  },
-  watch: {
-    $route(to, from) {
-      // if (from.query.key) {
-      //   if (to.query.key > from.query.key) {
-      //     this.transitionName = 'slide-fade'
-      //   } else {
-      //     this.transitionName = 'slide-left'
-      //   }
-      // } else {
-      //   this.transitionName = 'slide-fade'
-      // }
     }
   },
   methods: {
@@ -378,6 +364,9 @@ export default {
     isAuthenticated(val) {
       this.getCourseDetail()
     }
+  },
+  updated() {
+    setTitle('课程详情-1911学堂')
   },
   beforeRouteLeave(to, from, next) {
     // this.$bus.$emit('headerFooterShow')

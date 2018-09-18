@@ -208,7 +208,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 import List from '@/pages/shop/components/List'
-import { message, open } from '@/lib/util/helper'
+import { message, open, setTitle } from '@/lib/util/helper'
 export default {
   components: {
     'v-list': List
@@ -351,6 +351,7 @@ export default {
     }
   },
   mounted() {
+    setTitle('购物车-1911学堂')
     if (persistStore.get('token')) {
       // 获取购车列表
       this.shopCartList()
