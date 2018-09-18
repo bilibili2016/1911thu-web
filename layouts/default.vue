@@ -67,9 +67,11 @@ export default {
     document.getElementsByClassName('footerBox')[0].style.display = 'inline'
     this.fetchUrl()
     setPagesHeight()
+    // 进入路由隐藏header和footer
     this.$bus.$on('headerFooterShow', () => {
       this.hfshow = true
     })
+    // 出路由显示header和footer
     this.$bus.$on('headerFooterHide', () => {
       this.hfshow = false
     })

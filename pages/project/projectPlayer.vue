@@ -210,11 +210,13 @@ export default {
     }
     this.seconds = 10000000
   },
+  // 进入路由隐藏header和footer
   beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit('headerFooterHide')
     })
   },
+  // 出路由显示header和footer
   beforeRouteLeave(to, from, next) {
     this.$bus.$emit('headerFooterShow')
     next()
