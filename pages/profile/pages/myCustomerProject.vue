@@ -3,6 +3,9 @@
     <el-card class="changeNav">
       <div slot="header" class="clearfix">
         <span>自定制项目</span>
+        <span class="customer-add" @click="handleCustomerAdd">
+          <i class="el-icon-circle-plus-outline add-icon"></i>新增
+        </span>
       </div>
       <div class="cusProject myProject" v-loading="customer" :class="{ minheight : customer}">
         <v-customercard :customerProjectListData="customerProjectListData" @deleteCustomerProject="deleteCustomerProject" v-if="customerProjectListData.length > 0"></v-customercard>
@@ -16,8 +19,11 @@
 </template>
 
 <script>
+import { store as persistStore } from '~/lib/core/store'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import CustomerCard from '@/pages/profile/components/common/CustomerCard'
+import { open } from '@/lib/util/helper'
+
 export default {
   props: ['customerProjectListData', 'customerPagemsg', 'customer'],
   data() {
@@ -25,6 +31,11 @@ export default {
       noMsg: {
         type: 'myCustomerProject',
         text: '抱歉，没有自定制项目~'
+      },
+      customerProject: {
+        base: '/project/customerProject',
+        sid: '',
+        edit: 1
       }
     }
   },
@@ -33,6 +44,14 @@ export default {
     'v-nomsg': NoMsg
   },
   methods: {
+    handleCustomerAdd() {
+      //跳转到自定制项目
+      if (persistStore.get('token')) {
+        open(this.customerProject)
+      } else {
+        this.$bus.$emit('loginShow')
+      }
+    },
     customerProjectChange(val) {
       this.$emit('customerProjectChange', val)
     },

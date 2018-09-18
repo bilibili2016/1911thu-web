@@ -12,7 +12,7 @@
           <p>确认后，请在7天内付清款项，超过10天未对账系统自动会取消订单。到账周期为3个工作日。</p>
           <p class="showPay" @click="showPayPublic">确认并获取汇款识别码</p>
           <p class="tips">
-            <i class="el-icon-warning"></i>汇款时将识别码填写至汇款单"用途"栏，超出1个工作日未对账，请提供订单号及汇款底单邮件至XXXXXX@1911thu.com</p>
+            <i class="el-icon-warning"></i>汇款时将识别码填写至汇款单"用途"栏，超出1个工作日未对账，请提供订单号及汇款底单邮件至hkd@1911thu.com</p>
         </div>
         <div class="pay" v-show="showPay">
           <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
