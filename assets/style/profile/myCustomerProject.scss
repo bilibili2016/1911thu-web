@@ -1,3 +1,18 @@
+.customer-add {
+  position: relative;
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+  .add-icon {
+    position: absolute;
+    left: -25px;
+    top: 18px;
+    color: #773084;
+    font-size: 22px;
+    margin-right: 5px;
+  }
+}
+
 .cusProject {
   padding: 40px 40px 40px 45px;
   .card-list .itemBox {

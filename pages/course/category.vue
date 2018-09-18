@@ -406,6 +406,10 @@ export default {
       setTitle('培训项目-1911学堂')
     }
   }
+  // updated() {
+  //   console.log(document.getElementsByTagName('title')[0].innerText)
+  //   document.getElementsByTagName('title')[0].innerText = '222'
+  // }
 }
 </script>
 

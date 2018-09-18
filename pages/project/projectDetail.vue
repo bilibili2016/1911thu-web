@@ -1,6 +1,6 @@
 <template>
   <div class="projectDetail" v-loading="projectDetailLoad">
-    <img :src="projectDetail.study_picture" alt="" class="bg-banner">
+    <!-- <img :src="projectDetail.study_picture" alt="" class="bg-banner"> -->
     <!-- <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}"> -->
     <div class="proHeader">
       <div class="proHeader-mask"></div>
