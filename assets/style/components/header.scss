@@ -343,15 +343,13 @@ body {
             height: 120px;
             margin-right: 9px;
             transition: all 300ms;
-            background: url('http://papn9j3ys.bkt.clouddn.com/attentionWechat2.png')
+            background: url('http://papn9j3ys.bkt.clouddn.com/android.png')
               no-repeat;
             background-size: 120px;
-            // background-position: 3px -337px;
             &.iphone {
-              background: url('http://papn9j3ys.bkt.clouddn.com/attentionWechat2.png')
+              background: url('http://papn9j3ys.bkt.clouddn.com/ios.png')
                 no-repeat;
               background-size: 120px;
-              // background-position: 3px -337px;
             }
           }
           .changeType {
@@ -371,11 +369,11 @@ body {
             span:nth-child(3) {
               height: 36px;
               line-height: 36px;
-              background-color: #773084;
+              background-color: #ccc;
               border-radius: 18px;
               color: #fff;
               margin-top: 8px;
-              &:hover {
+              &.iphone {
                 background-color: #773084;
               }
             }

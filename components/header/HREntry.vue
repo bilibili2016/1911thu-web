@@ -8,12 +8,12 @@
     <div class="downLoad">
       <i class="phone"></i>
       <div class="downApp clearfix">
-        <i :class={iphone:!iphones} class="downIcon fl"></i>
+        <i :class={iphone:iphones} class="downIcon fl"></i>
         <div class="changeType fr">
           <span>下载1911学堂APP</span>
-          <span @mouseenter="changeImg('iphone')">
+          <span @mouseenter="changeImg('iphone')" :class={iphone:iphones}>
             <i></i>AppStore下载</span>
-          <span @mouseenter="changeImg('android')">
+          <span @mouseenter="changeImg('android')" :class={iphone:!iphones}>
             <i></i>Android下载</span>
         </div>
       </div>
@@ -30,7 +30,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      iphones: false
+      iphones: true
     }
   },
   computed: {
@@ -47,7 +47,7 @@ export default {
     },
     // 改变鼠标悬浮时的DownApp二维码
     changeImg(what) {
-      what == 'android' ? (this.iphones = false) : (this.iphones = true)
+      what == 'iphone' ? (this.iphones = true) : (this.iphones = false)
     }
   }
 }
