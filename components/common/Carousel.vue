@@ -34,14 +34,28 @@ export default {
     return {
       kidForm: {
         kids: ''
+      },
+      courseDetail: {
+        base: '/course/coursedetail',
+        kid: null,
+        bid: '',
+        page: 0
       }
     }
   },
   methods: {
     ...mapActions('auth', ['setKid']),
     handleLink(img) {
-      this.kidForm.kids = img.jump_id
-      window.open(img.jump_url)
+      // jump_type = 0  普通跳转 根据jump_url地址跳转
+      // jump_type = 1  跳转至课程详情 jump_id 课程id
+      // jump_type = 2  跳转至专题详情 jump_id 专题id
+      if (img.jump_type == '0' && img.jump_url != '') {
+        window.open(img.jump_url)
+      }
+      if (img.jump_type == '1' && img.jump_id != '') {
+        this.courseDetail.kid = img.jump_id
+        open(this.courseDetail)
+      }
     },
     goDetail(news) {
       window.open(window.location.origin + '/home/news/' + news.id)

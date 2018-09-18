@@ -8,7 +8,7 @@
       <!-- 项目详情基本信息 -->
       <v-detail :projectDetail="projectDetail" :projectType="project" :studyType="studyType" class="proHeader-detail"></v-detail>
     </div>
-    <!-- 介绍 线上课程 线下课程介绍 用户评价 常见问题-->
+    <!-- 介绍 线上课程 线下课程说明 用户评价 常见问题-->
     <div class="proContent">
       <el-tabs v-model="activeName" class="proTab">
         <el-tab-pane label="介绍" name="first">
@@ -16,14 +16,14 @@
           <div class="introduction" v-html="projectDetail.introduction" v-if="project.types === '2'"></div>
         </el-tab-pane>
         <!-- 混合项目中的互动 和 自定制项目 显示 -->
-        <el-tab-pane label="线下课程目录" name="third" v-if="projectDetail.study_type =='3' ">
+        <el-tab-pane label="线下课程说明" name="third" v-if="projectDetail.study_type =='3' ">
           <v-offlinedesc :project="project" :data="projectDetail"></v-offlinedesc>
         </el-tab-pane>
         <el-tab-pane label="线上课程目录" name="second">
           <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad" :projectId="project.projectId"></v-procourse>
         </el-tab-pane>
         <!-- 混合项目 和 自定制项目 显示 -->
-        <el-tab-pane label="线下课程目录" name="third" v-if="projectDetail.study_type =='2' ">
+        <el-tab-pane label="线下课程说明" name="third" v-if="projectDetail.study_type =='2' ">
           <v-offlinedesc :project="project" :data="projectDetail"></v-offlinedesc>
         </el-tab-pane>
         <el-tab-pane label="用户评价" name="fifth" v-if="project.types == '1'">
