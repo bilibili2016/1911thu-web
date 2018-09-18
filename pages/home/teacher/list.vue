@@ -15,6 +15,7 @@
 import CustomBanner from '@/components/common/Banner.vue'
 import CustomCard from '@/pages/home/teacher/components/Card.vue'
 import { list } from '~/lib/v1_sdk/index'
+import { setTitle } from '@/lib/util/helper'
 export default {
   components: {
     'v-card': CustomCard,
@@ -45,7 +46,7 @@ export default {
     }
   },
   mounted() {
-    document.getElementsByTagName('title')[0].innerText = '名师智库-1911学堂'
+    setTitle('名师智库-1911学堂')
     this.getNewInfoList()
   },
   methods: {

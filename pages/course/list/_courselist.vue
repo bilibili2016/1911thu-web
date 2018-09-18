@@ -180,13 +180,15 @@ export default {
   mounted() {
     this.cidNumber = window.location.pathname.split('/')[3]
     this.initAll()
-    if (this.cidNumber === '0') {
+  },
+  updated() {
+    if (this.cidNumber == '0') {
       setTitle('最新项目-1911学堂')
-    } else if (this.cidNumber === '1') {
+    } else if (this.cidNumber == '1') {
       setTitle('最新课程-1911学堂')
-    } else if (this.cidNumber === '2') {
+    } else if (this.cidNumber == '2') {
       setTitle('精品课程-1911学堂')
-    } else if (this.cidNumber === '3') {
+    } else if (this.cidNumber == '3') {
       setTitle('免费专区-1911学堂')
     }
   }

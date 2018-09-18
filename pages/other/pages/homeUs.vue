@@ -75,8 +75,10 @@ export default {
     }
   },
   mounted() {
-    setTitle('关于我们-1911学堂')
     this.titleList()
+  },
+  updated() {
+    setTitle('关于我们-1911学堂')
   }
 }
 </script>

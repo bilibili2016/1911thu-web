@@ -170,7 +170,6 @@ export default {
       //   }
       // })
       // console.log(this.categoryLink)
-
       open(this.categoryLink)
     },
     handleSearchData(item) {

@@ -67,7 +67,7 @@ import Banner from '@/components/common/Banner.vue'
 import MyHome from '@/pages/profile/pages/myHome'
 import PersonalSet from '@/pages/profile/pages/mySettings.vue'
 import { profileHome } from '~/lib/v1_sdk/index'
-import { message } from '~/lib/util/helper'
+import { message, setTitle } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 
@@ -765,6 +765,7 @@ export default {
     }
   },
   mounted() {
+    setTitle('个人中心-1911学堂')
     if (persistStore.get('token')) {
       if (this.gid) {
         this.activeTab = this.gid

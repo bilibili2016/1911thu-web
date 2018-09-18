@@ -412,7 +412,9 @@
               float: left;
               text-align: right;
               color: #cd1f1f;
-              cursor: pointer;
+              span {
+                cursor: pointer;
+              }
             }
           }
           .courseItem {
