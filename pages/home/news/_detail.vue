@@ -27,7 +27,7 @@
 <script>
 import CustomBanner from '@/components/common/Banner.vue'
 import { news } from '~/lib/v1_sdk/index'
-import { timestampToTime } from '~/lib/util/helper'
+import { timestampToTime, message } from '~/lib/util/helper'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
 export default {
   components: {
@@ -73,6 +73,11 @@ export default {
       let newsId = {
         ids: id
       }
+      console.log(id)
+      if (this.newsDetail.id == id) {
+        message(this, 'info', '暂无更多内容！')
+        return false
+      }
 
       news.getNewInfoDetail(newsId).then(response => {
         this.newsDetail = response.data.newDetail
@@ -90,6 +95,7 @@ export default {
           me.afterNews.title = '暂无'
         }
         this.loading = false
+        document.body.scrollTop = document.documentElement.scrollTop = 0
       })
     }
   },

@@ -21,12 +21,12 @@
     </div>
     <div class="text">
       <i class="el-icon-warning"></i>
-      请在24小时以内支付完成，如未完成此订单将自动关闭，需重新购买！
+      请在14天内支付完成，如未完成此订单将自动关闭，需重新购买！
       <span class="fr">应付金额：¥{{orderDetail.order_amount}}</span>
     </div>
-    <div class="restTime">
+    <!-- <div class="restTime">
       <i class="el-icon-time"></i>{{restTime}}
-    </div>
+    </div> -->
     <div class="fr pay">
       <el-button @click="addPaySubmit">立即支付</el-button>
     </div>
@@ -179,7 +179,7 @@ export default {
     this.$bus.$on('addPaySubmit', dat => {
       this.addPaySubmit()
     })
-    this.time()
+    // this.time()
   }
 }
 </script>
