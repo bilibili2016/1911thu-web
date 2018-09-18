@@ -201,6 +201,12 @@ export default {
     // 兑换码 --检测兑换码内是否包含已绑定的课程
     handleDetection() {
       header.detectionCode(this.bindForm).then(res => {
+        if (res.status != 0) {
+          message(this, 'error', res.msg)
+          this.bindForm.isBind = false
+          this.login()
+          return false
+        }
         // 判断兑换码内是否包含已绑定的课程
         if (res.data.is_exist === 1) {
           this.$confirm(
@@ -248,8 +254,9 @@ export default {
     // 兑换码 -- 头部绑定课程
     handleBind() {
       header.bindingCurriculumPrivate(this.bindForm).then(res => {
+        let error = res.status === 0 ? 'success' : 'error'
+        message(this, error, res.msg)
         if (res.status === 0) {
-          message(this, 'success', res.msg)
           this.invitationCodeType(res.data.invitation_code_type)
           this.bindForm.courseId = ''
           this.bindForm.isBind = false
@@ -260,10 +267,8 @@ export default {
           }
         } else if (res.status === 100100) {
           this.bindForm.showErr = true
-          message(this, 'error', res.msg)
           this.bindForm.error = res.msg
         } else {
-          message(this, 'error', res.msg)
           this.bindForm.isBind = false
           this.login()
         }
