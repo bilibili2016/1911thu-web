@@ -489,7 +489,6 @@ export default {
         // this._data['myCourseData' + status].map(item => {
         //   this.$set(item, 'overtime', true)
         // })
-        // console.log(response, '这是response')
         // if (response.data.pageCount > 0) {
         //   this.noMsgCourse = false
         // } else {

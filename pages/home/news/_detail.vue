@@ -73,7 +73,6 @@ export default {
       let newsId = {
         ids: id
       }
-      console.log(id)
       if (this.newsDetail.id == id) {
         message(this, 'info', '暂无更多内容！')
         return false

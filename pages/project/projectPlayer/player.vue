@@ -220,14 +220,7 @@ export default {
           this.seconds--
           let playTime = this.player.getCurrentTime()
           // 试看的课程
-          console.log(this.playAuthInfo)
-
           if (this.playAuthInfo.is_try_see) {
-            console.log(
-              this.playAuthInfo.is_try_see,
-              'this.playAuthInfo.is_try_see'
-            )
-
             this.preview(this.playAuthInfo.free_time, playTime)
           }
           /**
@@ -304,8 +297,6 @@ export default {
     },
     // 试看的课程方法
     preview(freeTime, currentTime) {
-      console.log(freeTime, currentTime)
-
       /**
        * 1、试看时长_freeTime
        * 2、当前播放时长_currentTime

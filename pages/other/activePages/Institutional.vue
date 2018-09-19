@@ -437,7 +437,6 @@ export default {
     handleScroll() {
       window.scrollTo(0, this.buttonFormTop)
       // if (this.move) {
-      //   console.log(this.buttonFormTop, 'this.buttonFormTop')
 
       //   this.interval = setInterval(() => {
       //     this.backPosition += 50

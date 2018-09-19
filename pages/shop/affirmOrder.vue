@@ -170,7 +170,6 @@ export default {
     handleGoodsList() {
       this.loadGoods = true
       affirmOrder.goodsList(this.addArray).then(res => {
-        // console.log(res, '这是res')
         if (res.status === 0) {
           this.curriculumLists = res.data.curriculumProjectLists
           this.orderinfo = res.data

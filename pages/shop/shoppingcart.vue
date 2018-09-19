@@ -407,14 +407,6 @@ export default {
       return Math.abs(p)
     },
     canSubmit() {
-      // console.log(
-      //   this.addArray.curriculumcartid.length <= 0,
-      //   'this.addArray.curriculumcartid.length'
-      // )
-      // console.log(
-      //   this.projectAddArray.projectcartid.length <= 0,
-      //   'this.projectAddArray.projectcartid.length'
-      // )
       if (
         this.addArray.curriculumcartid.length <= 0 &&
         this.projectAddArray.projectcartid.length <= 0
@@ -581,11 +573,9 @@ export default {
 
           // 判断最初获取课程长度是否相等
           if (this.addArray.curriculumcartid.length == this.courseList.length) {
-            // console.log('1')
             this.selectAllCourse = true
             this.isRest = true
           } else {
-            // console.log('2')
             this.selectAllCourse = false
             this.isRest = false
           }

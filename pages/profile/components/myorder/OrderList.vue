@@ -10,7 +10,6 @@
         <div class="content">
           <div class="course">
             <!-- 课程列表 -->
-            <!-- <div>1</div> -->
             <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="(course,index) in courseList.orderCurriculumList">
               <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
               <div class="fl">
@@ -20,7 +19,6 @@
               </div>
             </div>
             <!-- 项目列表 -->
-            <!-- <div>2</div> -->
             <div class="courseOne" v-if="courseList.orderProjectList.length" v-for="(project,index) in courseList.orderProjectList">
               <div class="courseImg">
                 <!-- 项目图标 -->

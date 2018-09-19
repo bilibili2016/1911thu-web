@@ -365,7 +365,6 @@ export default {
       this.autoplay = false
       this.getdefaultPlayerUrl()
       this.setClosePay({ closePay: false })
-      console.log(this.closePay)
     }
   },
   mounted() {
