@@ -7,7 +7,7 @@
         <div class="goodsInfo" v-show="!loading">
           <div class="userImg">
             <img :src="produceOrderInfo.head_img" alt="">
-            <span>{{produceOrderInfo.user_name}}</span>
+            <span>{{produceOrderInfo.nick_name}}</span>
           </div>
           <div v-if="codeForm.type==1">
             <p>课程名称：{{produceOrderInfo.title}}</p>

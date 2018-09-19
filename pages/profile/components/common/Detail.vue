@@ -144,9 +144,20 @@
                 <div class="coursePrice">
                   ￥{{project.present_price}}
                 </div>
-                <div class="courseOperation">
-                  <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                <div v-if="courseList.length !==0">
+                  <div class="courseOperation">
+                    <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                  </div>
                 </div>
+                <div v-else>
+                  <div class="courseOperation" v-if="project.study_type === '1' ">
+                    <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                  </div>
+                  <div class="courseOperation" v-else>
+                    {{orderDetail.pay_number}}人
+                  </div>
+                </div>
+
               </div>
             </div>
             <!-- 自定制项目 -->
