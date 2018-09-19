@@ -148,18 +148,21 @@
             padding-right: 0;
             .topLeft {
               float: left;
-              width: 160px;
+              width: 140px;
             }
             .topRight {
               float: right;
-              width: 644px;
+              width: 664px;
               overflow: hidden;
               text-align: center;
               span {
-                width: 100px;
+                width: 16%;
                 text-align: center;
                 &:last-child {
                   width: 144px;
+                }
+                &.totalPrice {
+                  width: 20%;
                 }
               }
             }
@@ -209,12 +212,13 @@
               }
             }
             .projectInfo {
+              width: 160px;
               float: left;
               margin-top: 20px;
               img {
                 width: 160px;
                 height: 100px;
-                margin-right: 20px;
+                // margin-right: 20px;
               }
               .bottomImg {
                 position: relative;
@@ -227,7 +231,7 @@
                 }
               }
               h4 {
-                width: 170px;
+                width: 160px;
                 height: 42px;
                 font-size: 16px;
                 color: #332a51;
@@ -244,6 +248,10 @@
                 font-size: 14px;
                 color: #6d687f;
               }
+            }
+            .infoRight {
+              float: left;
+              width: 664px;
             }
             .coursePrice {
               float: left;
@@ -271,7 +279,7 @@
               padding-left: 10px;
               .item {
                 float: left;
-                width: 100px;
+                width: 16%;
                 text-align: center;
                 margin-top: 20px;
                 line-height: 100px;
@@ -281,6 +289,7 @@
                   width: 144px;
                 }
                 &.price {
+                  width: 20%;
                   color: #ff5f5f;
                   font-size: 16px;
                 }

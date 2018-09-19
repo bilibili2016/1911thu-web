@@ -237,13 +237,13 @@ export default {
           imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic25.png',
           title: '强大的师资力量',
           text:
-            '1911学堂已签约超过500名优秀导师，均为 清华大学等一流高校教授、院士及500强企业 高管，师资力量雄厚。'
+            '1911学堂已签约超过500名优秀导师，均为清华大学等一流高校教授、院士及500强企业高管，师资力量雄厚。'
         },
         {
           imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic26.png',
           title: '与时俱进的系统化课程体系',
           text:
-            '1911学堂拥有强大的课程研发能力，根据时代热点与客户需求，不断推出系统、权威、创新、实用的课程体系；'
+            '1911学堂拥有强大的课程研发能力，根据时代热点与客户需求，不断推出系统、权威、创新、实用的课程体系。'
         },
         {
           imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic27.png',
