@@ -161,6 +161,7 @@ export default {
         this.getUserInfo()
       }
     }
+    // $route: 'detectRoute'
   },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
@@ -394,10 +395,17 @@ export default {
       }
       this.handleSelectCard(this.categoryId, this.pids)
     }
+    // detectRoute() {
+    //   this.initParams()
+    //   this.initListCard()
+    // }
   },
   mounted() {
     this.initParams()
     this.initListCard()
+  },
+
+  updated() {
     if (matchSplits('cp') === '0') {
       //课程
       setTitle('全部课程-1911学堂')

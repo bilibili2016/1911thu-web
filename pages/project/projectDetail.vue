@@ -1,6 +1,6 @@
 <template>
   <div class="projectDetail" v-loading="projectDetailLoad">
-    <img :src="projectDetail.study_picture" alt="" class="bg-banner">
+    <!-- <img :src="projectDetail.study_picture" alt="" class="bg-banner"> -->
     <!-- <div class="proHeader" :style="{'background-image':'url('+projectDetail.picture+')'}"> -->
     <div class="proHeader">
       <div class="proHeader-mask"></div>
@@ -46,7 +46,7 @@ import Proevaluate from '@/pages/project/components/ProjectEvaluate'
 import Commonproblems from '@/pages/project/components/CommonProblems'
 import OfflineDesc from '@/pages/project/components/OfflineDesc'
 import { store as persistStore } from '~/lib/core/store'
-import { message, matchSplits } from '@/lib/util/helper'
+import { message, matchSplits, setTitle } from '@/lib/util/helper'
 export default {
   components: {
     'v-procourse': Procourse,
@@ -157,6 +157,9 @@ export default {
     this.$bus.$on('reProjectData', data => {
       this.getProjectInfo()
     })
+  },
+  updated() {
+    setTitle('项目详情-1911学堂')
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {

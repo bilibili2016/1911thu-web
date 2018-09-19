@@ -67,7 +67,7 @@ import Banner from '@/components/common/Banner.vue'
 import MyHome from '@/pages/profile/pages/myHome'
 import PersonalSet from '@/pages/profile/pages/mySettings.vue'
 import { profileHome } from '~/lib/v1_sdk/index'
-import { message } from '~/lib/util/helper'
+import { message, setTitle } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 
@@ -439,6 +439,7 @@ export default {
           case 'tab-fourth': //我的订单
             this.myOrderDataArr = [0]
             this.showOrderList = true
+            this.orderForm.orderSn = ''
             this.$bus.$emit('activeOrder')
             this.handleInitMyOrderData(true)
             break
@@ -554,6 +555,11 @@ export default {
     },
     // 我的订单 commonmethods
     handleMyOrderChange(status, pagenum) {
+      //默认清空搜索条件
+      this.orderForm.startTime = ''
+      this.orderForm.endTime = ''
+      this.orderForm.orderSn = ''
+
       this.allOrderLoadAll = true
       this.orderForm.payStatus = status
       this.orderForm.pages = pagenum
@@ -748,23 +754,42 @@ export default {
       })
       // 我的订单 事件搜索
       this.$bus.$on('searchDatas', (data, type, num) => {
-        // 按照事件搜索订单
+        // 按照事件搜索订单 时间
         if (type === 1) {
           this.orderForm.startTime = data[0]
           this.orderForm.endTime = data[1]
-          this.handleMyOrderChange(Number(num), 1)
+          this.handleOrderSearch(Number(num), 1)
         } else {
+          //兑换码订单号搜索
           this.orderForm.orderSn = data
-          this.handleMyOrderChange(Number(num), 1)
+          this.$bus.$emit('activeOrder')
+          this.handleOrderSearch(Number(num), 1)
         }
       })
       // 发票管理 开票历史 由于层级较深
       this.$bus.$on('historyOrderDataChange', data => {
         this.historyOrderDataChange(1)
       })
+    },
+    //兑换码搜索/订单时间搜索
+    handleOrderSearch(status, pagenum) {
+      this.allOrderLoadAll = true
+      this.orderForm.payStatus = status
+      this.orderForm.pages = pagenum
+      this._data['pagemsg' + (status + 4)].page = pagenum
+      profileHome.getAllOrderData(this.orderForm).then(response => {
+        this._data['pagemsg' + (status + 4)].total =
+          response.data.searchOrderTotal
+        if (status === 1) {
+          this.orderTotal = response.data.orderTotal
+        }
+        this._data['allOrderData' + (status + 4)] = response.data.orderList
+        this.allOrderLoadAll = false
+      })
     }
   },
   mounted() {
+    setTitle('个人中心-1911学堂')
     if (persistStore.get('token')) {
       if (this.gid) {
         this.activeTab = this.gid

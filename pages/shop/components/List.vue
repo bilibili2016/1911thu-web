@@ -103,7 +103,7 @@
         <div class="fr">
           <span v-if="data.study_type === '1'">线上</span>
           <span v-if="data.study_type === '2'">混合</span>
-          <span v-else>互动</span>
+          <span v-if="data.study_type === '3'">互动</span>
           <span>{{data.oline_study_time}}学时</span>
           <span>{{data.study_persion_number}}人</span>
           <span>{{(data.offline_study_time)}}学时</span>

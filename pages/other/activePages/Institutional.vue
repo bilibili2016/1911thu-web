@@ -196,7 +196,7 @@ import { auth, institutional } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import BackToTop from '@/components/common/BackToTop.vue'
-import { open } from '@/lib/util/helper'
+import { open, setTitle } from '@/lib/util/helper'
 import $ from 'jquery'
 export default {
   components: {
@@ -616,7 +616,7 @@ export default {
     }
   },
   mounted() {
-    document.getElementsByTagName('title')[0].innerText = '单位入口-1911学堂'
+    setTitle('单位入口-1911学堂')
     this.getClassifyList()
     this.company.userID = this.token
     // this.$bus.$emit('bannerShow', true)

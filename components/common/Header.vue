@@ -160,7 +160,16 @@ export default {
     handleSelectItem(item) {
       this.categoryLink.cid = item.id
       this.categoryLink.cp = item.is_picture_show
-      // this.$router.push('')
+      // this.$router.push({
+      //   path: '/course/category',
+      //   query: {
+      //     cid: item.id,
+      //     cp: item.is_picture_show,
+      //     pids: 0,
+      //     xid: 0
+      //   }
+      // })
+      // console.log(this.categoryLink)
       open(this.categoryLink)
     },
     handleSearchData(item) {
