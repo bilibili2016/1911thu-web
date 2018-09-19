@@ -410,6 +410,8 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
+
     /**
      * @param status 序号
      * @param pagenum 页码
@@ -460,6 +462,12 @@ export default {
             this.customerProjectList()
             break
         }
+        let gidForm = {
+          gids: item.name
+        }
+        this.setGid(gidForm)
+        this.$bus.$emit('selectProfileIndex', item.name)
+
         persistStore.set('gid', item.name)
       } else {
         this.$router.push('/')
