@@ -30,7 +30,8 @@
     overflow: initial;
   }
   &.profile .my-course#pane-tab-eighth .el-tabs__content {
-    position: static !important;
+    // position: static !important;
+    // 兼容ie11 发票弹框显示一部分
     overflow: visible !important;
   }
   &.profile .my-course .el-tabs__header {
@@ -320,6 +321,7 @@
 .profile {
   .content.noOrder {
     box-shadow: 0px 3px 9px rgba(198, 194, 210, 0.36);
+    width: 896px;
   }
   .content .noCourse {
     width: 100%;
