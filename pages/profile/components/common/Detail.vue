@@ -103,7 +103,7 @@
               <span>学习人数</span>
               <span>线下课程</span>
               <span>学习天数</span>
-              <span>总价</span>
+              <span class="totalPrice">总价</span>
             </div>
           </div>
           <div class="bottom">
@@ -162,20 +162,22 @@
                     <h4>{{project.title}}</h4>
                   </div>
                 </div>
-                <!-- 培训方式 -->
-                <div class="item" v-if="project.study_type === '1'">线上</div>
-                <div class="item" v-if="project.study_type === '2'">混合</div>
-                <div class="item" v-else>互动</div>
-                <!-- 线上课程学时 -->
-                <div class="item">{{project.curriculum_time}}学时</div>
-                <!-- 学习人数 -->
-                <div class="item">{{project.study_persion_number}}人</div>
-                <!-- 线下课程学时 -->
-                <div class="item">{{project.offline_study_time}}学时</div>
-                <!-- 学习天数 -->
-                <div class="item">{{project.offline_days}}天</div>
-                <!-- 总价 -->
-                <div class="item price">¥ {{project.present_price}} </div>
+                <div class="infoRight">
+                  <!-- 培训方式 -->
+                  <div class="item" v-if="project.study_type === '1'">线上</div>
+                  <div class="item" v-if="project.study_type === '2'">混合</div>
+                  <div class="item" v-if="project.study_type === '3'">互动</div>
+                  <!-- 线上课程学时 -->
+                  <div class="item">{{project.curriculum_time}}学时</div>
+                  <!-- 学习人数 -->
+                  <div class="item">{{project.study_persion_number}}人</div>
+                  <!-- 线下课程学时 -->
+                  <div class="item">{{project.offline_study_time}}学时</div>
+                  <!-- 学习天数 -->
+                  <div class="item">{{project.offline_days}}天</div>
+                  <!-- 总价 -->
+                  <div class="item price">¥ {{project.present_price}} </div>
+                </div>
               </div>
             </div>
 
@@ -219,6 +221,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>
