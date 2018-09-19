@@ -1,6 +1,9 @@
 <template>
   <div class="playInner" ref="playInner" @dblclick="dblclick">
     <div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>
+    <!-- 播放按钮 -->
+    <div class="playVideo" v-show="playVideo" @click="action" ref="playVideo"></div>
+    <!-- 播放器报错信息 -->
     <v-error :showError="showError" :errorMsg="errorMsg" @getPlayerInfo="getPlayerInfo"></v-error>
   </div>
 </template>
@@ -71,9 +74,11 @@ export default {
         catalogId: '',
         curriculumId: ''
       },
+      node: '',
       errorMsg: '',
       playLoading: '',
-      loadingFlag: true
+      loadingFlag: true,
+      playVideo: false //根据当前视频加载的状态，判断是否显示播放按钮
     }
   },
   methods: {
@@ -121,6 +126,8 @@ export default {
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === 0) {
+          // 先给默认播放的小节暂停
+          this.changePlayImg(this.pauseImg, this.playerForm.catalogId)
           // 没购买 && 不是免费 && 不能试看
           if (
             !that.bought &&
@@ -142,8 +149,7 @@ export default {
             // 切换播放方法1、播放器如果存在就销毁播放器，重新创建
             if (this.player) {
               this.player.dispose()
-              this.$refs.playInner.innerHTML =
-                '<div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>'
+              this.$refs.playInner.insertBefore(this.node, this.$refs.playVideo)
             }
             // 创建播放器
             this.player = new Aliplayer(this.aliPlayer)
@@ -176,23 +182,17 @@ export default {
       })
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad(flag) {
-      if (flag) {
-        document.getElementsByClassName('prism-big-play-btn')[0].className =
-          'prism-big-play-btn hideBtn'
-        if (document.getElementsByClassName('prism-hide')[0]) {
-          document.getElementsByClassName('prism-hide')[0].className =
-            'prism-loading'
-        }
-      } else {
-        document.getElementsByClassName('prism-big-play-btn')[0].className =
-          'prism-big-play-btn'
+    playerLoad() {
+      if (document.getElementsByClassName('prism-hide')[0]) {
+        document.getElementsByClassName('prism-hide')[0].className =
+          'prism-loading'
       }
     },
     // 播放器加载完成后
     readyPlay() {
       clearInterval(this.playLoading)
       this.playerLoad(false)
+      this.playVideo = true
       this.loadingFlag = true
 
       if (this.autoplay) {
@@ -206,6 +206,7 @@ export default {
     },
     // 播放开始--启动计时器
     playerPlay() {
+      this.playVideo = false
       clearInterval(this.playLoading)
       let that = this
       clearInterval(this.interval)
@@ -246,6 +247,7 @@ export default {
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
     playerPause() {
+      this.playVideo = true
       this.player.pause()
       this.changePlayImg(this.pauseImg, this.playerForm.catalogId)
       clearInterval(this.interval)
@@ -266,6 +268,7 @@ export default {
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
     playerEnded() {
+      this.playVideo = true
       clearInterval(this.interval)
       // 未购买且试看
       if (!this.bought && this.playAuthInfo.is_try_see) {
@@ -381,6 +384,23 @@ export default {
       this.player.seek(0)
       this.getPlayerInfo()
       this.setClosePay({ closePay: false })
+    },
+    // 改 原播放按钮
+    action() {
+      if (!this.player) return
+      if (
+        this.player.getStatus() == 'pause' ||
+        this.player.getStatus() == 'loading' ||
+        this.player.getStatus() == 'ready' ||
+        this.player.getStatus() == 'ended'
+      ) {
+        this.player.play()
+        this.playVideo = false
+      }
+      if (this.player.getStatus() == 'playing') {
+        this.player.pause()
+        this.playVideo = true
+      }
     }
   },
   watch: {
@@ -405,6 +425,7 @@ export default {
     this.$bus.$on('clickCatalog', data => {
       this.handleCourse(data)
     })
+    this.node = this.$refs.mediaPlayer
   }
 }
 </script>

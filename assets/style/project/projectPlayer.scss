@@ -163,14 +163,25 @@
       height: 100%;
       position: relative;
       background-color: #000;
+      .playVideo {
+        background: url('http://papn9j3ys.bkt.clouddn.com/bigplay.png')
+          no-repeat;
+        background-size: contain;
+        width: 64px;
+        height: 64px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        z-index: 1000;
+      }
       .prism-big-play-btn {
+        display: none !important;
         left: 50% !important;
         top: 50%;
         margin-left: -32px;
         margin-top: -32px;
-        &.hideBtn {
-          display: none !important;
-        }
       }
       .prism-player {
         .prism-volume-control {
