@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="pay" v-show="payShadow">
-      <div class="note" v-show="showPay">
+      <div class="note" v-show="showPay" id="note">
         <i @click="close" class="el-icon-close fr"></i>
         <h4> 尊敬的用户，试看已结束，请付费观看 </h4>
         <div class="goodsInfo" v-show="!loading">

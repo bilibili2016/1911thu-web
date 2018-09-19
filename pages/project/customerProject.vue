@@ -254,6 +254,7 @@
         <span class="btn buy " @click="saveProject(2)">立即购买</span>
       </div>
     </div>
+    <v-mask v-show="showPop" @handleConfirm="handleConfirm" @handleCancle="handleCancle"></v-mask>
   </div>
 </template>
 
@@ -262,10 +263,14 @@
 import { customerProject } from '@/lib/v1_sdk/index'
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
-
+import Mask from '@/pages/project/components/CustomerPop'
 export default {
+  components: {
+    'v-mask': Mask
+  },
   data() {
     return {
+      showPop: false,
       imgUlr: 'http://papn9j3ys.bkt.clouddn.com/customer-arrow.png',
       showDesc: false,
       isClick: false,
@@ -406,6 +411,15 @@ export default {
         this.searchCourseData.push(item)
       })
     },
+    handleCancle() {
+      this.showPop = false
+      this.isClick = false
+      message(this, 'info', '已取消')
+    },
+    handleConfirm() {
+      this.showPop = false
+      this.save(2)
+    },
     //保存
     saveProject(type) {
       if (this.isClick) {
@@ -460,25 +474,7 @@ export default {
       }
 
       if (type === 2) {
-        this.$confirm(
-          '1、点击确定后，系统会为您生成订单，提交订单后，您所定制项目的相关信息不可再修改。2、如需修改，请点击取消，在定制项目页面修改内容，或保存后在个人中心的“自定制项目”模块查看并修改。',
-          '温馨提示',
-          {
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
-            closeOnHashChange: false,
-            // type: 'warning',
-            center: true
-          }
-        )
-          .then(() => {
-            // 添加绑定课程
-            this.save(type)
-          })
-          .catch(() => {
-            this.isClick = false
-            message(this, 'info', '已取消')
-          })
+        this.showPop = true
       } else {
         this.save(type)
       }

@@ -1,12 +1,11 @@
 <template>
   <!-- 发票 -->
   <el-card v-if="showTicketList">
-    <el-tabs v-model="activeName" @tab-click="handleTicket">
+    <el-tabs v-model="activeName" @tab-click="handleTicket" class="222">
       <el-tab-pane label="按订单开发票" name="ticketFirst" value="1">
         <div v-loading="allTicket" :class="{ minheight : allTicket}">
           <v-tkorder v-if="unTicketData  && unTicketData.length>0" :orderData="unTicketData" @handleUpdate="getUpdateMsg" @goTicketDetail="goTicketDetail" @chengeItem="chengeItem" v-loading="readyOrderLoad"></v-tkorder>
         </div>
-
         <div class="pagination" v-if="unTicketData && unTicketData.length>19">
           <el-pagination background layout="prev, pager, next" :page-size="pagemsg8.pagesize" :pager-count="5" :page-count="pagemsg8.pagesize" :current-page="pagemsg8.page" :total="pagemsg8.total" @current-change="unTicketDataChange"></el-pagination>
         </div>
