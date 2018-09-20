@@ -44,7 +44,10 @@ export default {
 }
 </script>
 <style>
-.bgnone {
+.bgfff {
+  background-color: #fff;
+}
+.bgf8f8fd {
   background-color: #f8f8fd;
 }
 </style>

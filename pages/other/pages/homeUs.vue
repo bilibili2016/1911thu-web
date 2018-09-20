@@ -3,7 +3,7 @@
     <div class="topImg">
       <div class="top-content">
         <span class="top-con">关于我们</span>
-        <span class="top-desc">About us</span>
+        <span class="top-desc">About Us</span>
       </div>
     </div>
     <div class="content" id="content">

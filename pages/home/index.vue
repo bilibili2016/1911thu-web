@@ -4,20 +4,20 @@
       <!-- 头部导航 -->
       <v-carousel :items="items" :config="configCarousel"></v-carousel>
       <!-- 最新项目 -->
-      <v-course :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" style="background-color:#fff" class="index-project"></v-course>
-      <!-- 免费专区 -->
-      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="freeCourse index-free"></v-course>
+      <v-course :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgfff"></v-course>
       <!-- 最新课程 -->
-      <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse" class="index-course"></v-course>
+      <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse" class="index-course bgf8f8fd"></v-course>
+      <!-- 免费专区 -->
+      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgfff"></v-course>
       <!-- 精品好课 -->
-      <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse"></v-course>
+      <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgf8f8fd"></v-course>
       <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
       <!-- 名师智库 -->
       <!-- <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous> -->
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 学堂资讯 -->
-      <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new"></v-info>
+      <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgfff"></v-info>
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>

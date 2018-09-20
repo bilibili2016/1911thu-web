@@ -39,8 +39,10 @@
       </div>
       <!-- 普通项目 -->
       <div class="fr buy" v-if="projectType.types==='1'">
-        <div class="price">
-          <i>￥</i>{{projectDetail.present_price}}</div>
+        <div class="price" v-if="projectDetail.study_type=='1'">
+          <i>￥</i>{{money}}/人</div>
+        <div class="price" v-else>
+          <i>￥</i>{{money}}/班</div>
         <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
         <div v-if="studyType === '1'" class="addShoppingCart" @click="addShoppingCart">加入购物车</div>
@@ -49,7 +51,7 @@
       <!-- 自定义项目 -->
       <div class="fr buy" v-if="projectType.types==='2'">
         <div class="price">
-          <i>￥</i>{{projectDetail.present_price}}</div>
+          <i>￥</i>{{money}}</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即观看</div>
         <div v-if="projectDetail.is_creator" class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
       </div>
@@ -91,7 +93,8 @@ export default {
         type: 2,
         cartid: ''
       },
-      currentType: 1
+      currentType: 1,
+      money: 0
     }
   },
   computed: {
@@ -150,6 +153,13 @@ export default {
   watch: {
     // 检测数据中的收藏 数据过来慢
     projectDetail(val, old) {
+      if (this.projectDetail.present_price) {
+        if (this.projectDetail.present_price >= 10000) {
+          this.money = this.projectDetail.present_price / 10000 + '万'
+        } else {
+          this.money = this.projectDetail.present_price + '元'
+        }
+      }
       if (val.is_Collection) {
         this.collectMsg.isCollect = 1
       } else {
