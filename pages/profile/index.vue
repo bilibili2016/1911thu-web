@@ -817,6 +817,14 @@ export default {
         this.unTicketDataChange(1) //我的发票 按订单开发票
         this.customerProjectList() //自定义项目
       }
+    } else {
+      let data = {
+        type: false,
+        res: {
+          msg: '您的账号在其它位置登录了'
+        }
+      }
+      this.$bus.$emit('reLoginAlertPop', data)
     }
   }
 }
