@@ -12,8 +12,9 @@
           <div v-if="codeForm.type==1">
             <p>课程名称：{{produceOrderInfo.title}}</p>
             <p>
-              <span>课程价格：{{produceOrderInfo.present_price}}元</span>
-              <span>项目有效期：365天</span>
+              <span>课程价格：
+                <strong>{{produceOrderInfo.present_price}}</strong>元</span>
+              <span>课程有效期：365天</span>
             </p>
           </div>
           <div v-if="codeForm.type==2">
