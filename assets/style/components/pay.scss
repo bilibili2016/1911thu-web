@@ -15,10 +15,11 @@
     // left: 0;
     // right: 0;
     // bottom: 0;
+    position: relative;
     vertical-align: middle;
     margin: 0 auto;
     width: 700px;
-    margin-top: 150px;
+    margin-top: 130px;
     // height: 530px;
     background-color: #fff;
     border-radius: 10px;
@@ -42,12 +43,12 @@
       &:after {
         content: '——';
         position: absolute;
-        right: 21%;
+        right: 19%;
       }
       &:before {
         content: '——';
         position: absolute;
-        left: 21%;
+        left: 19%;
       }
     }
     .goodsInfo {
