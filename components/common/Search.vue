@@ -47,8 +47,9 @@ export default {
       conSearch.searchHotWord(this.searchForm).then(response => {
         if (response.status === 0) {
           this.hotSearchRecord = response.data.hotSearchRecord
+        } else {
+          message(this, 'error', response.msg)
         }
-        resolve(true)
       })
     },
     createFilter(queryString) {

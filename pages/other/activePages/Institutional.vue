@@ -589,7 +589,6 @@ export default {
             )
           }
           this.restaurants = res.data.companyList
-          resolve(true)
         })
       }
     },

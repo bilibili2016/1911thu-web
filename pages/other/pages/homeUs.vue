@@ -54,7 +54,6 @@ export default {
         this.titleListData.map(item => {
           this.getDetail(item.id)
         })
-        resolve(true)
       })
     },
     //菜单对应各详情页
@@ -62,7 +61,6 @@ export default {
       About.aboutDetail({ id: ID }).then(res => {
         this.listCon.push(res.data)
         this.loading = false
-        resolve(true)
       })
     },
     handleClick() {

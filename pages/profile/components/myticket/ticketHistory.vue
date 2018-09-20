@@ -140,7 +140,6 @@ export default {
             message: response.msg
           })
         }
-        resolve(true)
       })
     },
     cancelOrder(id) {
@@ -161,7 +160,6 @@ export default {
             message: response.msg
           })
         }
-        resolve(true)
       })
     },
     handleSelectChange() {},
