@@ -92,7 +92,7 @@ export default {
       categoryForm: {
         cids: null,
         pids: null,
-        sortBy: 1,
+        sortBy: 0,
         pages: 1,
         limits: 12
       },
@@ -106,7 +106,7 @@ export default {
       curriculumListForm: {
         categoryIda: null,
         categoryIdb: null,
-        sortBy: 1,
+        sortBy: 0,
         pages: 1,
         limits: 8
       },
