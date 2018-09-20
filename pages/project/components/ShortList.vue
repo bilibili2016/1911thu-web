@@ -10,8 +10,8 @@
         <div class="fr courseInfo">
           <h4>{{course.title}}</h4>
           <h5>{{course.deputy_title}}</h5>
-          <p v-if="course.is_free === '1'" class="money">￥{{course.present_price}}</p>
-          <p v-else class="money">免费</p>
+          <p v-if="(course.is_free === '1'&&course.study_type=='2')||(course.is_free === '1'&&course.study_type=='3')" class="money">￥{{changeManey(course.present_price)}}/班</p>
+          <p v-if="(course.is_free === '1'&&course.study_type=='1')" class="money">￥{{changeManey(course.present_price)}}/人</p>
           <h6 class="clearfix">
             <p class="fl">{{course.study_time}}学时 <img :src="stydyNum" alt=""> {{course.study_number}}</p>
             <p class="fr">
@@ -46,6 +46,13 @@ export default {
     projectInfo(item, index) {
       this.projectdetail.kid = item.id
       open(this.projectdetail)
+    },
+    changeManey(money) {
+      if (money >= 10000) {
+        return money / 10000 + '万'
+      } else {
+        return money + '元'
+      }
     }
   }
 }
