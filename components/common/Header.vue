@@ -424,6 +424,9 @@ export default {
     this.getClassifyList()
     // 非单点登录 getHttp为true
     this.onBusEvent()
+    this.$bus.$on('reLoginAlertPop', data => {
+      this.reLoginAlert(data.type, data.res)
+    })
   }
 }
 </script>
