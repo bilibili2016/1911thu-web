@@ -15,33 +15,37 @@
             <i class="el-icon-warning"></i>汇款时将识别码填写至汇款单"用途"栏，超出1个工作日未对账，请提供订单号及汇款底单邮件至hkd@1911thu.com</p>
         </div>
         <div class="pay" v-show="showPay">
-          <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
-          <div class="changeTel clearfix">
-            <p class="fl">您的汇款验证码 {{code}} 已发送手机{{payForm.phones}}
-              <span @click="changeTel">发送至其它手机</span>
-            </p>
-            <p class="fl showTel" v-show="showTel">
-              <input type="text" v-model="changeForm.tel" placeholder="请输入手机号码">
-              <i v-show="isAlertMsg">{{alertMsg}}</i>
-              <span @click="againGet">获取汇款识别码</span>
-            </p>
+          <div v-show="false">
+            <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
+            <div class="changeTel clearfix">
+              <p class="fl">您的汇款验证码 {{code}} 已发送手机{{payForm.phones}}
+                <span @click="changeTel">发送至其它手机</span>
+              </p>
+              <p class="fl showTel" v-show="showTel">
+                <input type="text" v-model="changeForm.tel" placeholder="请输入手机号码">
+                <i v-show="isAlertMsg">{{alertMsg}}</i>
+                <span @click="againGet">获取汇款识别码</span>
+              </p>
+            </div>
+            <h6>
+              <i class="el-icon-warning"></i>注意事项：汇款时需要注意以下信息，请牢记！</h6>
+            <div class="warn">
+              <p>1. 您的汇款识别码为:{{code}}，线下公司转账需将此汇款识别码填写至电汇凭证的【汇款用途】、【附言】、【摘要】栏内，汇款识别码组成：（XT+订单号）。 （提醒：因不同银行备注字段不同，最好是将所有的可填写备注的地方都填写上汇款识别码）。 </p>
+              <p>2. 线下公司转账订单，一个识别码对应一个订单和相应的金额，请勿多转账或者少转账。</p>
+              <p>3. 请在7天内付清款项，超过10天未对账系统自动会取消订单。到账周期为3个工作日。</p>
+            </div>
           </div>
-          <h6>
-            <i class="el-icon-warning"></i>注意事项：汇款时需要注意以下信息，请牢记！</h6>
-          <div class="warn">
-            <p>1. 您的汇款识别码为:{{code}}，线下公司转账需将此汇款识别码填写至电汇凭证的【汇款用途】、【附言】、【摘要】栏内，汇款识别码组成：（XT+订单号）。 （提醒：因不同银行备注字段不同，最好是将所有的可填写备注的地方都填写上汇款识别码）。 </p>
-            <p>2. 线下公司转账订单，一个识别码对应一个订单和相应的金额，请勿多转账或者少转账。</p>
-            <p>3. 请在7天内付清款项，超过10天未对账系统自动会取消订单。到账周期为3个工作日。</p>
-          </div>
-          <h6>
-            <i class="el-icon-warning"></i>注意事项：汇款时需要注意以下信息，请牢记！</h6>
-          <div class="account">
-            <p>户名：一九一一未来教育科技(北京)有限公司</p>
-            <p>账户：8110701013101386732</p>
-            <p>开户行：中信银行北京海淀支行</p>
-            <p>联行号：302100011155</p>
-            <p>汇付识别码：{{code}}</p>
-            <p>订单号：{{orderDetail.order_sn}}</p>
+          <div v-show="true">
+            <h6 style="margin-top:0">
+              <i class="el-icon-warning"></i>注意事项：汇款时需要注意以下信息，请牢记！</h6>
+            <div class="account">
+              <p>户名：一九一一未来教育科技(北京)有限公司</p>
+              <p>账户：8110701013101386732</p>
+              <p>开户行：中信银行北京海淀支行</p>
+              <p>联行号：302100011155</p>
+              <!-- <p>汇付识别码：{{code}}</p> -->
+              <p>订单号：{{orderDetail.order_sn}}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -56,7 +60,7 @@ import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
     return {
-      showPay: false,
+      showPay: true,
       showTel: false,
       code: '',
       isAlertMsg: false,
