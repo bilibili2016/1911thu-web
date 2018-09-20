@@ -120,7 +120,7 @@
 
           <div class="pull-down-text" v-if="isShowDaySelect">
             <ul>
-              <li v-for="(n) in maxDays" :key="n" @click.stop="chooseDay(n)">{{n}}</li>
+              <li v-for="(item,index) in maxDays" :key="index" @click.stop="chooseDay(item)">{{item}}</li>
             </ul>
           </div>
         </div>
@@ -130,7 +130,7 @@
           <div class="detail-title">选择线上课程</div>
           <div class="itemCon">
             <div class="item clearfix">
-              <div class="fl">学院分类：</div>
+              <div class="fl">领域：</div>
               <div class="fr selectFr">
                 <div @click.stop="handleCollegeSelect">
                   <el-input placeholder="请选择分类" v-model="projectForm.trainCollege" readonly="true"></el-input>
@@ -164,7 +164,7 @@
               </div>
             </div>
           </div>
-          <div class="itemCon ">
+          <div class="itemCon courseSearch">
             <div class="item clearfix ">
               <div class="fl ">按课程搜索：</div>
               <div class="fr selectFr ">
@@ -210,7 +210,6 @@
               <div class="time ">{{item.study_time}}学时</div>
               <div class="price " v-if="item.is_free==='2'">0元</div>
               <div class="price " v-else>{{item.present_price}}元</div>
-
               <div class="operater ">
                 <span @click="deleteChooseCourse(index) ">删除</span>
               </div>
@@ -282,7 +281,7 @@ export default {
       isShowSearchSelect: false,
       minNum: 0, //最小培训人数
       maxNum: 0, //最大培训人数
-      maxDays: 0, //最大培训天数
+      maxDays: [], //最大培训天数
       offlineRangeTime: 0, //线下课时
       offlineCount1: 0, //党政事业线下每天培训费用
       offlineCount2: 0, //企业单位线下每天培训费用
@@ -432,7 +431,7 @@ export default {
       })
       try {
         if (Trim(this.projectForm.name) === '') throw '请填写项目名称'
-        if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
+        // if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
         if (this.projectForm.objRadio === '') throw '请选择培训对象'
         if (this.projectForm.trainNum === '') throw '请输入培训人数'
         if (this.projectForm.styleRadio === '') throw '请选择培训方式'
