@@ -192,11 +192,12 @@ export default {
     readyPlay() {
       clearInterval(this.playLoading)
       this.playerLoad(false)
-      this.playVideo = true
       this.loadingFlag = true
-
-      if (this.autoplay) {
+      if (this.aliPlayer.autoplay) {
+        this.playVideo = false
         this.player.play()
+      } else {
+        this.playVideo = true
       }
       // 如果课程购买了 判断有没有观看记录，跳转到指定位置播放
       if (this.bought && this.playerForm.seek != 0) {
@@ -282,7 +283,8 @@ export default {
       } else {
         // 已购买并且有下一小节
         if (this.nextCatalogId !== '' && this.bought) {
-          this.autoplay = true
+          this.aliPlayer.autoplay = true
+          this.playVideo = false
           this.nextVideo()
         }
         // 已购买且没有下一小节了
@@ -318,7 +320,8 @@ export default {
       if (this.playerPreviousForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerPreviousForm.curriculumId
         this.playerForm.catalogId = this.playerPreviousForm.catalogId
-        this.autoplay = true
+        this.aliPlayer.autoplay = true
+        this.playVideo = false
         this.getPlayerInfo()
       } else {
         message(this, 'warning', '已经是第一节了！')
@@ -329,7 +332,8 @@ export default {
       if (this.playerNextForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerNextForm.curriculumId
         this.playerForm.catalogId = this.playerNextForm.catalogId
-        this.autoplay = true
+        this.aliPlayer.autoplay = true
+        this.playVideo = false
         this.getPlayerInfo()
       } else {
         message(this, 'warning', '已经是最后一节了！')
@@ -343,8 +347,8 @@ export default {
       this.playerForm.curriculumId = item.curriculum_id
       this.playerForm.catalogId = item.id
       clearInterval(this.interval)
-      this.autoplay = true
-      // this.isLookAt = item.look_at
+      this.aliPlayer.autoplay = true
+      this.playVideo = false
       this.getPlayerInfo()
     },
     // 切换播放gif
@@ -379,7 +383,7 @@ export default {
     },
     // 关闭支付二维码、重新获取播放参数
     closePayed() {
-      this.autoplay = false
+      this.aliPlayer.autoplay = false
       this.index = 0
       this.player.seek(0)
       this.getPlayerInfo()

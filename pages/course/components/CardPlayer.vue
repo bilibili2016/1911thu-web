@@ -120,7 +120,7 @@ export default {
           this.playerForm.seek = Number(
             res.data.defaultCurriculumCatalog.see_spot
           )
-          this.autoplay = true
+          this.aliPlayer.autoplay = true
           // 判断课程是否是未购买 且不能试看的
           if (res.data.defaultCurriculumCatalog.curriculumPrivilege) {
             // 获取播放的url
@@ -223,11 +223,14 @@ export default {
     // 视频准备好之后执行
     readyPlay() {
       clearInterval(this.playLoading)
-      this.playerLoad(false)
+      this.playerLoad()
       this.playVideo = true
       this.loadingFlag = true
-      if (this.autoplay) {
+      if (this.aliPlayer.autoplay) {
+        this.playVideo = false
         this.player.play()
+      } else {
+        this.playVideo = true
       }
       // 如果课程购买了 判断有没有观看记录，跳转到指定位置播放
       if (this.bought && this.playerForm.seek) {
@@ -329,7 +332,7 @@ export default {
       if (this.playerPreviousForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerPreviousForm.curriculumId
         this.playerForm.catalogId = this.playerPreviousForm.catalogId
-        this.autoplay = true
+        this.aliPlayer.autoplay = true
         this.getdefaultPlayerUrl()
       } else {
         message(this, 'warning', '已经是第一节了！')
@@ -340,7 +343,7 @@ export default {
       if (this.playerNextForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerNextForm.curriculumId
         this.playerForm.catalogId = this.playerNextForm.catalogId
-        this.autoplay = true
+        this.aliPlayer.autoplay = true
         this.getdefaultPlayerUrl()
       } else {
         message(this, 'warning', '已经是最后一节了！')
@@ -364,7 +367,7 @@ export default {
     closePayed() {
       this.index = 0
       this.player.seek(0)
-      this.autoplay = false
+      this.aliPlayer.autoplay = false
       this.getdefaultPlayerUrl()
       this.setClosePay({ closePay: false })
     },
@@ -389,7 +392,7 @@ export default {
   mounted() {
     this.$bus.$on('updateCourse', data => {
       this.playerForm = data
-      this.autoplay = data.autoplay
+      this.aliPlayer.autoplay = data.autoplay
       this.rePlay()
     })
     this.$bus.$on('reupdatecourse', () => {
