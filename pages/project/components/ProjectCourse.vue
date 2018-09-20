@@ -12,7 +12,7 @@
             <h6>{{course.teacher_name}} {{course.teacher_graduate}}</h6>
             <p>{{course.introduction}}</p>
           </div>
-          <img class="fr" src="~assets/images/pro_player.png" alt="" @click="goProjectPlayer()">
+          <img class="fr" src="http://papn9j3ys.bkt.clouddn.com/projectCoursePlay.png" alt="" @click="goProjectPlayer()">
         </div>
       </div>
     </div>

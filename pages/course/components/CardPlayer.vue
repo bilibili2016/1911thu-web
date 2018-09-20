@@ -301,6 +301,7 @@ export default {
         // 取消全屏
         this.player.fullscreenService.cancelFullScreen()
         this.$bus.$emit('openPay', this.pay)
+        this.closePayed()
       } else {
         // 如果当前小节播放完成，直接播放下一小节
         if (this.nextCatalogId !== '') {
@@ -368,6 +369,7 @@ export default {
       this.index = 0
       this.player.seek(0)
       this.aliPlayer.autoplay = false
+      this.playVideo = false
       this.getdefaultPlayerUrl()
       this.setClosePay({ closePay: false })
     },

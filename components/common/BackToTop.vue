@@ -36,12 +36,13 @@
       </div>
     </transition>
     <transition :name="transitionName" v-if="data">
-      <!-- web端我要选课功能隐藏 -->
-      <div class="back-to-ceiling customStyleThree" v-show="false" @click="checkCourse">
+      <!-- web端我要选课功能 暂时显示为 自定制项目  -->
+      <div class="back-to-ceiling customStyleThree" @click="goCustomerProject">
         <div class="line-wrap">
-          <img src="http://papn9j3ys.bkt.clouddn.com/chooseCourse-icon.gif" alt="">
+          <!-- <img src="http://papn9j3ys.bkt.clouddn.com/chooseCourse-icon.gif" alt=""> -->
+          <img src="http://papn9j3ys.bkt.clouddn.com/customProject-gif.gif" alt="">
           <!-- <div class="line-centerd">
-            <span>我要选课</span>
+            <span>定制项目</span>
           </div> -->
         </div>
       </div>
@@ -52,6 +53,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { mapActions, mapGetters } from 'vuex'
+import { open } from '@/lib/util/helper'
 /* eslint-disable */
 export default {
   props: [
@@ -83,7 +85,12 @@ export default {
       ceilSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop11.png',
       wxSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
       qqSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
-      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png'
+      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png',
+      customerProject: {
+        base: '/project/customerProject',
+        sid: '',
+        edit: 1
+      }
     }
   },
   mounted() {
@@ -106,6 +113,15 @@ export default {
     showTips(show) {
       this.showNotLogin = show
     },
+    //跳转到自定制项目
+    goCustomerProject() {
+      if (persistStore.get('token')) {
+        open(this.customerProject)
+      } else {
+        this.$bus.$emit('loginShow')
+      }
+    },
+    // 我要选课
     checkCourse() {
       if (persistStore.get('token')) {
         // this.goLink('/course/chooselesson')
