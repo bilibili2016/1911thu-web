@@ -34,7 +34,7 @@
             <div v-else>
               <p class="coin" v-if="cidNumber==='0'">
                 <span v-if="course.study_type === '1'">￥{{course.present_price}}元/人</span>
-                <span v-else>￥{{course.present_price/10000}}万/班</span>
+                <span v-else>￥{{changeManey(course.present_price)}}/班</span>
               </p>
               <p class="coin" v-else>￥ {{course.present_price}}</p>
 
@@ -187,6 +187,13 @@ export default {
           this.courseDetail.page = 0
         }
         open(this.courseDetail)
+      }
+    },
+    changeManey(money) {
+      if (money >= 10000) {
+        return money / 10000 + '万'
+      } else {
+        return money + '元'
       }
     }
   },
