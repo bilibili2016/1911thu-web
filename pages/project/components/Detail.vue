@@ -55,9 +55,7 @@
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即观看</div>
         <div v-if="projectDetail.is_creator" class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
       </div>
-
     </div>
-
   </div>
 </template>
 

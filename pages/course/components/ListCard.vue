@@ -32,7 +32,12 @@
             </div>
             <!-- 收费课程展示 -->
             <div v-else>
-              <p class="coin">￥ {{course.present_price}}</p>
+              <p class="coin" v-if="cidNumber==='0'">
+                <span v-if="course.study_type === '1'">￥{{course.present_price}}元/人</span>
+                <span v-else>￥{{course.present_price/10000}}万/班</span>
+              </p>
+              <p class="coin" v-else>￥ {{course.present_price}}</p>
+
               <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
               <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">
                 <el-button type="primary" plain @click.stop="goBuy(course)">立即购买</el-button>
