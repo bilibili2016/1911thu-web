@@ -48,6 +48,7 @@
               <!-- <p>订单号：{{orderDetail.order_sn}}</p> -->
             </div>
           </div>
+          <div class="confirmBtn" @click="handleConfirm">确定</div>
         </div>
       </div>
     </div>
@@ -136,6 +137,24 @@ export default {
         this.orderDetail = response.data.data.orderDetail
         this.payForm.orderId = response.data.data.orderDetail.id
         this.payForm.phones = persistStore.get('phone')
+      })
+    },
+    handleConfirm() {
+      paypublic.getPayPublicCode(this.payForm).then(res => {
+        if (res.status === 0) {
+          this.$message({
+            showClose: true,
+            type: 'success',
+            message: res.msg
+          })
+          this.code = res.data.code
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+        }
       })
     }
   },
