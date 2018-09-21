@@ -48,7 +48,7 @@
               <!-- <p>订单号：{{orderDetail.order_sn}}</p> -->
             </div>
           </div>
-          <div class="confirmBtn" @click="handleConfirm">确定</div>
+          <!-- <div class="confirmBtn" @click="handleConfirm">确定</div> -->
         </div>
       </div>
     </div>
@@ -137,6 +137,8 @@ export default {
         this.orderDetail = response.data.data.orderDetail
         this.payForm.orderId = response.data.data.orderDetail.id
         this.payForm.phones = persistStore.get('phone')
+
+        this.handleConfirm()
       })
     },
     handleConfirm() {
