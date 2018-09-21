@@ -10,7 +10,10 @@
         <div class="fr courseInfo">
           <h4>{{course.title}}</h4>
           <h5>{{course.deputy_title}}</h5>
-          <p v-if="course.is_free === '1'" class="money">￥{{course.present_price}}</p>
+          <p v-if="course.is_free === '1'" class="money">
+            <span v-if="course.study_type === '1'">￥{{course.present_price}}元/人</span>
+            <span v-else>￥{{course.present_price/10000}}万/班</span>
+          </p>
           <p v-else class="money">免费</p>
           <h6 class="clearfix">
             <p class="fl">{{course.study_time}}学时 <img :src="stydyNum" alt=""> {{course.study_number}}</p>
@@ -30,6 +33,9 @@ import { store as persistStore } from '~/lib/core/store'
 import { open } from '@/lib/util/helper'
 export default {
   props: ['cardData'],
+  mounted() {
+    console.log(this.cardData)
+  },
   data() {
     return {
       projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png',

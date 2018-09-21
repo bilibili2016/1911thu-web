@@ -39,8 +39,12 @@
       </div>
       <!-- 普通项目 -->
       <div class="fr buy" v-if="projectType.types==='1'">
-        <div class="price">
-          <i>￥</i>{{projectDetail.present_price}}</div>
+        <div class="price" v-if="projectDetail.study_type === '1'">
+          <i>￥</i>{{projectDetail.present_price}}元/人</div>
+        <div class="price" v-else-if="projectDetail.study_type === '2' || projectDetail.study_type === '3'">
+          <span v-if="projectDetail.present_price">
+            <i>￥</i>{{(projectDetail.present_price/10000)}}万/班</span>
+        </div>
         <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
         <div v-if="studyType === '1'" class="addShoppingCart" @click="addShoppingCart">加入购物车</div>
@@ -48,14 +52,16 @@
       </div>
       <!-- 自定义项目 -->
       <div class="fr buy" v-if="projectType.types==='2'">
-        <div class="price">
-          <i>￥</i>{{projectDetail.present_price}}</div>
+        <div class="price" v-if="projectDetail.study_type === '1'">
+          <i>￥</i>{{projectDetail.present_price}}元/人</div>
+        <div class="price" v-else>
+          <span v-if="projectDetail.present_price">
+            <i>￥</i>{{(projectDetail.present_price/10000)}}万/班</span>
+        </div>
         <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即观看</div>
         <div v-if="projectDetail.is_creator" class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
       </div>
-
     </div>
-
   </div>
 </template>
 
