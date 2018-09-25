@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="detail clearfix">
-      <div class="some">
+      <div class="some fl">
         <div>
           <h5>学时</h5>
           <p>
@@ -36,6 +36,12 @@
           <p>
             <span>{{projectDetail.score}}</span> 分</p>
         </div>
+      </div>
+      <div class="changeType fr">
+        选择模式:
+        <el-button :class="{'checked':projectDetail.study_type==='1'}" :disabled="projectDetail.is_Collection" @click="handleLine(projectDetail.id)">线上</el-button>
+        <el-button :class="{'checked':projectDetail.study_type==='2'}" :disabled="projectDetail.is_Collection" @click="handleLine(projectDetail.id)">混合</el-button>
+        <el-button :class="{'checked':projectDetail.study_type==='3'}" :disabled="projectDetail.is_Collection" @click="handleLine(projectDetail.id)">互动</el-button>
       </div>
       <!-- 普通项目 -->
       <div class="fr buy" v-if="projectType.types==='1'">
@@ -136,6 +142,14 @@ export default {
         this.$router.push('/shop/shoppingcart')
       })
     },
+    handleLine(id) {
+      let urlLink = {
+        base: '/project/projectdetail',
+        kid: id,
+        type: 1
+      }
+      open(urlLink)
+    },
     // 立即购买
     handleBuy(id) {
       if (!persistStore.get('token')) {
@@ -176,6 +190,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>
