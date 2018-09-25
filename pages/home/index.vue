@@ -169,8 +169,6 @@ export default {
   methods: {
     ...mapActions('auth', ['signOut']),
     getAll() {
-      console.log(333)
-
       this.getBanner()
       this.getFreeCourseList()
 
@@ -224,13 +222,13 @@ export default {
       home.getNewCourseList(this.courseForm).then(response => {
         if (response.status === 100008) {
           this.getHttp = false
-          let data = {
-            type: false,
-            res: {
-              msg: '您的账号在其它位置登录了'
-            }
-          }
-          this.$bus.$emit('reLoginAlertPop', data)
+          // let data = {
+          //   type: false,
+          //   res: {
+          //     msg: '您的账号在其它位置登录了'
+          //   }
+          // }
+          // this.$bus.$emit('reLoginAlertPop', '')
         } else {
           this.getHttp = true
           this.newData = response.data.curriculumList
