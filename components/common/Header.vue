@@ -145,14 +145,19 @@ export default {
     },
     // 下拉列表
     getClassifyList() {
+      this.categoryArr = []
+      this.projectArr = []
       home.getClassifyList(this.curruntForm).then(response => {
-        for (let item of response.data.categoryList) {
-          if (item.is_picture_show === '0') {
-            this.categoryArr.push(item)
-          } else {
-            this.projectArr.push(item)
+        if (response.status === 0) {
+          for (let item of response.data.categoryList) {
+            if (item.is_picture_show === '0') {
+              this.categoryArr.push(item)
+            } else {
+              this.projectArr.push(item)
+            }
           }
         }
+
         // this.classify = response.data.categoryList
       })
     },
@@ -352,7 +357,7 @@ export default {
         }
       } else if (res.status === 0) {
         if (persistStore.get('isSingleLogin') === false) {
-          this.$bus.$emit('isSingleLogin', false)
+          this.$bus.$emit('getNewCourseList', false)
         }
         this.getAll()
         persistStore.set('isSingleLogin', true)
@@ -377,7 +382,7 @@ export default {
       }
     },
     // 个人中心 用户头像
-    getUserInfo() {
+    getUserInfo(flag) {
       if (persistStore.get('token')) {
         header.getUserInfo().then(res => {
           // console.log(res, 'replaceState')
@@ -402,11 +407,14 @@ export default {
       })
       // 重新拉取用户信息
       this.$bus.$on('getUserInfo', data => {
-        this.getUserInfo()
+        this.getUserInfo(data)
       })
       // 获取购物车数量
       this.$bus.$on('updateCount', () => {
         this.getShopCartNum()
+      })
+      this.$bus.$on('isSingleLogin', data => {
+        this.isSingleLogin(data)
       })
     },
     // 兼容IE
@@ -426,6 +434,9 @@ export default {
     this.onBusEvent()
     this.$bus.$on('reLoginAlertPop', data => {
       this.reLoginAlert(data.type, data.res)
+    })
+    this.$bus.$on('getClassifyList', data => {
+      this.getClassifyList()
     })
   }
 }

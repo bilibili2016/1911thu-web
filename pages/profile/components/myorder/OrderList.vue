@@ -13,7 +13,7 @@
             <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="(course,index) in courseList.orderCurriculumList">
               <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
               <div class="fl">
-                <h4 @click="goCourseInfo(course)">{{course.title}}</h4>
+                <h4 @click="goCourseInfo(course)" :title="course.title">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
                 <p>讲师：{{course.teacher_name}}</p>
               </div>
@@ -28,7 +28,7 @@
                 <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
               </div>
               <div class="fl">
-                <h4 @click="goProjrctInfo(project)">{{project.title}}</h4>
+                <h4 @click="goProjrctInfo(project)" :title="project.title">{{project.title}}</h4>
                 <h6>{{project.curriculum_time}}学时</h6>
               </div>
             </div>

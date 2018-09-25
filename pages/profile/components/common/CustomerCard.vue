@@ -14,7 +14,7 @@
           <el-row>
             <div class="item ">
               <p class="itemBox-name " @click="gotoDetail(item)">
-                <span>{{item.title}}</span>
+                <span :title="item.title">{{item.title}}</span>
               </p>
               <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>
               <!-- 自定义项目下单和已经够买的，不可以修改和删除 -->

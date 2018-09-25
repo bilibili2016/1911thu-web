@@ -5,7 +5,7 @@
         <img class="teacherImg" :src="course.teacher_picture" alt="">
       </div>
       <div class="fr courseInfo">
-        <h4>{{course.title}}</h4>
+        <h4 :title="course.title">{{course.title}}</h4>
         <!-- <h5>{{course.deputy_title}}</h5> -->
         <h5>{{course.teacher_name+'&nbsp;&nbsp;'+course.graduate}}</h5>
 

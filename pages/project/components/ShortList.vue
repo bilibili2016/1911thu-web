@@ -8,7 +8,7 @@
           <img :src="course.picture" alt="" class="teacher-picture">
         </div>
         <div class="fr courseInfo">
-          <h4>{{course.title}}</h4>
+          <h4 :title="course.title">{{course.title}}</h4>
           <h5>{{course.deputy_title}}</h5>
           <p v-if="(course.is_free === '1'&&course.study_type=='2')||(course.is_free === '1'&&course.study_type=='3')" class="money">￥{{changeManey(course.present_price)}}/班</p>
           <p v-if="(course.is_free === '1'&&course.study_type=='1')" class="money">￥{{changeManey(course.present_price)}}/人</p>

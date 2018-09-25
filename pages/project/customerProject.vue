@@ -130,7 +130,7 @@
           <div class="detail-title">选择线上课程</div>
           <div class="itemCon">
             <div class="item clearfix">
-              <div class="fl">领域：</div>
+              <div class="fl">领域分类：</div>
               <div class="fr selectFr">
                 <div @click.stop="handleCollegeSelect">
                   <el-input placeholder="请选择分类" v-model="projectForm.trainCollege" readonly="true"></el-input>
@@ -431,7 +431,7 @@ export default {
       })
       try {
         if (Trim(this.projectForm.name) === '') throw '请填写项目名称'
-        // if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
+        if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
         if (this.projectForm.objRadio === '') throw '请选择培训对象'
         if (this.projectForm.trainNum === '') throw '请输入培训人数'
         if (this.projectForm.styleRadio === '') throw '请选择培训方式'
