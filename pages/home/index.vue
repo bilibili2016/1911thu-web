@@ -180,6 +180,7 @@ export default {
       // this.getPartnerList(),
       // this.getPointList()
       this.getProjectList()
+      this.$bus.$emit('getClassifyList')
     },
     // 获取banner
     getBanner() {
@@ -222,13 +223,7 @@ export default {
       home.getNewCourseList(this.courseForm).then(response => {
         if (response.status === 100008) {
           this.getHttp = false
-          // let data = {
-          //   type: false,
-          //   res: {
-          //     msg: '您的账号在其它位置登录了'
-          //   }
-          // }
-          // this.$bus.$emit('reLoginAlertPop', '')
+          this.$bus.$emit('getUserInfo')
         } else {
           this.getHttp = true
           this.newData = response.data.curriculumList
@@ -289,10 +284,10 @@ export default {
     })
 
     this.$bus.$on('reLogin', data => {
-      this.getAll()
+      this.getNewCourseList()
     })
     // this.$bus.$emit('bannerShow', false)
-    this.$bus.$on('isSingleLogin', data => {
+    this.$bus.$on('getNewCourseList', data => {
       this.getNewCourseList()
     })
   }

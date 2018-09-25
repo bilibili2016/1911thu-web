@@ -577,7 +577,6 @@ export default {
               this.$bus.$emit('updateCount') //获取购物车数量
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
-
               // 未登录后登陆后刷新当前页面
               this.refresh()
             }

@@ -5,7 +5,7 @@
       <div class="info-box clearfix" @click="selectDetail(card)">
         <img class="titleImg fl" :src="card.picture" alt="">
         <div class="fl">
-          <h4>{{card.title}}</h4>
+          <h4 :title="card.title">{{card.title}}</h4>
           <p>{{card.introduce}}</p>
         </div>
       </div>

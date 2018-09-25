@@ -42,7 +42,7 @@
               <!-- 课程标题 -->
               <div class="item">
                 <p class="itemBox-name itemBoxTitle" @click="selectCid(card,config.project,card.type)">
-                  <span>{{card.title}}</span>
+                  <span :title="card.title">{{card.title}}</span>
                 </p>
               </div>
               <!-- 学习进度 -->
@@ -103,7 +103,7 @@
               <el-row>
                 <div class="item ">
                   <p class="itemBox-name" @click="selectCid(card,config.project,card.type) ">
-                    <span>{{card.title}}</span>
+                    <span :title="card.title">{{card.title}}</span>
                   </p>
                   <div class="deputyTitleOverTime">{{card.deputy_title}}</div>
                 </div>

@@ -28,7 +28,7 @@
             <!-- 名字 -->
             <div class="item" @click="handleLinkDetail(card)">
               <p class="itemBox-name itemBoxTitle">
-                <span class="title">{{card.title}}</span>
+                <span class="title" :title="card.title">{{card.title}}</span>
                 <!-- 首页二级标题展示 老师+职称 -->
                 <span v-if="config.card_type === 'profile'" class="deputyTitle fl">{{card.teacher_name+'&nbsp;&nbsp;'+card.graduate}}</span>
                 <span v-else class="deputyTitle fl">{{card.deputy_title}}</span>
