@@ -363,6 +363,7 @@ export default {
         persistStore.set('isSingleLogin', true)
         // 设置用户信息
         this.setUserInfo(res)
+        this.getClassifyList()
       }
     },
     // 个人中心 个人信息设置
@@ -428,8 +429,7 @@ export default {
   },
   mounted() {
     this.getUserInfo()
-    // 获取顶部课程列表
-    this.getClassifyList()
+
     // 非单点登录 getHttp为true
     this.onBusEvent()
     this.$bus.$on('reLoginAlertPop', data => {
@@ -438,6 +438,11 @@ export default {
     this.$bus.$on('getClassifyList', data => {
       this.getClassifyList()
     })
+
+    if (!persistStore.get('token')) {
+      // 获取顶部课程列表
+      this.getClassifyList()
+    }
   }
 }
 </script>

@@ -180,7 +180,7 @@ export default {
       // this.getPartnerList(),
       // this.getPointList()
       this.getProjectList()
-      this.$bus.$emit('getClassifyList')
+      // this.$bus.$emit('getClassifyList')
     },
     // 获取banner
     getBanner() {
@@ -199,11 +199,11 @@ export default {
       })
     },
     // 获取分类列表
-    getClassifyList() {
-      home.getClassifyList(this.curruntForm).then(response => {
-        this.classify = response.data.categoryList
-      })
-    },
+    // getClassifyList() {
+    //   home.getClassifyList(this.curruntForm).then(response => {
+    //     this.classify = response.data.categoryList
+    //   })
+    // },
     //获取项目列表
     getProjectList() {
       this.projectLoading = true
