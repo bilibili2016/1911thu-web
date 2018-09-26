@@ -18,7 +18,6 @@
           <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
         </div>
         <div class="formLi clearfix">
-
           <p class="fl"></p>
           <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
             <input type="text" v-model="ticketForm.companyname" placeholder="新增单位发票抬头">
@@ -29,6 +28,9 @@
           <p class="fr">
             <input type="text" v-model="ticketForm.number" @change="retfNumber" placeholder="输入纳税人识别号">
           </p>
+            <p class="word parent">
+              <i class="el-icon-warning"> </i>政府、事业单位选填，企业必填
+            </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">发票内容</p>
@@ -655,6 +657,8 @@ export default {
           this.ticketForm.number.length == 18 ||
           this.ticketForm.number.length == 20
         ) {
+          this.tfNumber = true
+        } else if (this.ticketForm.number == '') {
           this.tfNumber = true
         } else {
           this.$message({

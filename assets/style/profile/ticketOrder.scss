@@ -107,7 +107,7 @@
         font-size: 14px;
         margin-top: 16px;
         .formLi {
-          margin-bottom: 15px;
+          margin-bottom: 12px;
           p {
             line-height: 34px;
             input {
@@ -194,11 +194,15 @@
               margin-left: 130px;
               line-height: 20px;
               padding-top: 10px;
+              &.parent {
+                color: #ff5f5f;
+              }
               input {
                 margin-top: 10px;
               }
               i {
                 color: #ff5f5f;
+                margin-right: 3px;
               }
             }
             &.province {
