@@ -170,14 +170,18 @@ export default {
       if (type === 'course') {
         this.loadList = true
         category.childCategoryList().then(res => {
-          this.handleData(this.allCourseData, res)
-          this.loadList = false
+          if (res.status === 0) {
+            this.handleData(this.allCourseData, res)
+            this.loadList = false
+          }
         })
       } else {
         this.loadList = true
         category.getNewProject().then(res => {
-          this.handleData(this.allProjectData, res)
-          this.loadList = false
+          if (res.status === 0) {
+            this.handleData(this.allProjectData, res)
+            this.loadList = false
+          }
         })
       }
     },
@@ -265,9 +269,11 @@ export default {
       this.loadCourseAll = true
       this.setParamsPidCid(itemCid, itemPid)
       category.curriculumListNew(this.categoryForm).then(res => {
-        this.loadCourseAll = false
-        this.categoryData = res.data.curriculumList
-        this.pagemsg.total = res.data.pageCount
+        if (res.status === 0) {
+          this.loadCourseAll = false
+          this.categoryData = res.data.curriculumList
+          this.pagemsg.total = res.data.pageCount
+        }
       })
     },
     // 选课 card 列表
@@ -275,13 +281,15 @@ export default {
       this.loadCourse = true
       this.setParamsPidCid(itemCid, itemPid)
       category.chooseCurriculumList(this.categoryForm).then(res => {
-        this.categoryDataChoose = res.data.curriculumList
-        this.pagemsg.total = res.data.pageCount
-        this.allCheckedId = []
-        for (let item of res.data.curriculumList) {
-          this.allCheckedId.push(item.id)
+        if (res.status === 0) {
+          this.categoryDataChoose = res.data.curriculumList
+          this.pagemsg.total = res.data.pageCount
+          this.allCheckedId = []
+          for (let item of res.data.curriculumList) {
+            this.allCheckedId.push(item.id)
+          }
+          this.loadCourse = false
         }
-        this.loadCourse = false
       })
     },
     // 项目 card列表
@@ -289,9 +297,11 @@ export default {
       this.loadCourseAll = true
       this.setParamsPidCid(itemCid, itemPid)
       category.curriculumProjectList(this.categoryForm).then(res => {
-        this.categoryData = res.data.curriculumProjectList
-        this.pagemsg.total = res.data.pageCount
-        this.loadCourseAll = false
+        if (res.status === 0) {
+          this.categoryData = res.data.curriculumProjectList
+          this.pagemsg.total = res.data.pageCount
+          this.loadCourseAll = false
+        }
       })
     },
 

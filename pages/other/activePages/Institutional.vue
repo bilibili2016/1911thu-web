@@ -658,15 +658,11 @@ export default {
     },
     getClassifyList() {
       institutional.getClassifyList().then(response => {
-        if (response.status === 100008) {
-          let data = { type: true, res: response }
-          this.$bus.$emit('reLoginAlertPop', data)
-          return false
-        }
-
-        for (let item of response.data.categoryList) {
-          if (item.is_picture_show === '1') {
-            this.projectArr.push(item)
+        if (response.status === 0) {
+          for (let item of response.data.categoryList) {
+            if (item.is_picture_show === '1') {
+              this.projectArr.push(item)
+            }
           }
         }
       })
@@ -674,7 +670,7 @@ export default {
   },
   mounted() {
     setTitle('单位入口-1911学堂')
-    this.getClassifyList()
+    // this.getClassifyList()
     this.company.userID = this.token
     // this.$bus.$emit('bannerShow', true)
     window.addEventListener('scroll', this.pageScroll)
