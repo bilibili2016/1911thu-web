@@ -89,24 +89,28 @@ export default {
     getProjectList() {
       this.loading = true
       categorylist.getProjectList(this.newsCurriculumForm).then(response => {
-        this.loading = false
-        this.courseList = response.data.curriculumProjectList
-        this.pagemsg.total = Number(response.data.pageCount)
-        this.coursename = '最新项目'
-        this.BreadCrumb.text = this.coursename
-        this.pageMsgs = true
+        if (response.status === 0) {
+          this.loading = false
+          this.courseList = response.data.curriculumProjectList
+          this.pagemsg.total = Number(response.data.pageCount)
+          this.coursename = '最新项目'
+          this.BreadCrumb.text = this.coursename
+          this.pageMsgs = true
+        }
       })
     },
     // 最新课程列表
     getNewCourseList() {
       this.loading = true
       categorylist.getNewCourseList(this.newsCurriculumForm).then(response => {
-        this.loading = false
-        this.courseList = response.data.curriculumList
-        this.pagemsg.total = Number(response.data.pageCount)
-        this.coursename = '最新课程'
-        this.BreadCrumb.text = this.coursename
-        this.pageMsgs = true
+        if (response.status === 0) {
+          this.loading = false
+          this.courseList = response.data.curriculumList
+          this.pagemsg.total = Number(response.data.pageCount)
+          this.coursename = '最新课程'
+          this.BreadCrumb.text = this.coursename
+          this.pageMsgs = true
+        }
       })
     },
     // 获取经典课程列表
@@ -115,24 +119,28 @@ export default {
       categorylist
         .getClassicCourseList(this.newsCurriculumForm)
         .then(response => {
-          this.loading = false
-          this.courseList = response.data.curriculumList
-          this.pagemsg.total = Number(response.data.pageCount)
-          this.coursename = '精品好课'
-          this.BreadCrumb.text = this.coursename
-          this.pageMsgs = true
+          if (response.status === 0) {
+            this.loading = false
+            this.courseList = response.data.curriculumList
+            this.pagemsg.total = Number(response.data.pageCount)
+            this.coursename = '精品好课'
+            this.BreadCrumb.text = this.coursename
+            this.pageMsgs = true
+          }
         })
     },
     // 获取最新课程列表
     getFreeCourseList() {
       this.loading = true
       categorylist.getFreeCourseList(this.newsCurriculumForm).then(response => {
-        this.loading = false
-        this.courseList = response.data.curriculumList
-        this.pagemsg.total = Number(response.data.pageCount)
-        this.coursename = '免费课程'
-        this.BreadCrumb.text = this.coursename
-        this.pageMsgs = true
+        if (response.status === 0) {
+          this.loading = false
+          this.courseList = response.data.curriculumList
+          this.pagemsg.total = Number(response.data.pageCount)
+          this.coursename = '免费课程'
+          this.BreadCrumb.text = this.coursename
+          this.pageMsgs = true
+        }
       })
     },
     // 点击下面分页按钮

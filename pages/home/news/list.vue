@@ -63,9 +63,11 @@ export default {
       this.newsInfoForm.pages = 1
       this.newsInfoForm.limits = 6
       news.getNewInfoList(this.newsInfoForm).then(response => {
-        this.pagemsg.total = Number(response.data.pageCount)
-        this.newsList = response.data.newsList
-        this.load = false
+        if (response.status === 0) {
+          this.pagemsg.total = Number(response.data.pageCount)
+          this.newsList = response.data.newsList
+          this.load = false
+        }
       })
     },
     selectPages(val) {
