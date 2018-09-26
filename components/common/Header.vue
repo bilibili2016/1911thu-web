@@ -115,6 +115,7 @@ export default {
         '/shop/wepay'
       ],
       getHttp: false,
+      pass: true,
       skip: '' //兑换码类型
     }
   },
@@ -337,6 +338,7 @@ export default {
       this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
         confirmButtonText: '确定',
         callback: action => {
+          this.pass = true
           //初始化首页数据
           this.$bus.$emit('loginShow', true)
           if (type) {
@@ -364,6 +366,7 @@ export default {
         // 设置用户信息
         this.setUserInfo(res)
         this.getClassifyList()
+        this.pass = true
       }
     },
     // 个人中心 个人信息设置
@@ -384,6 +387,10 @@ export default {
     },
     // 个人中心 用户头像
     getUserInfo(flag) {
+      if (!this.pass) {
+        return false
+      }
+      this.pass = false
       if (persistStore.get('token')) {
         header.getUserInfo().then(res => {
           // console.log(res, 'replaceState')

@@ -55,6 +55,11 @@ export default {
       this.teacherForm.limits = 7
       this.loading = true
       list.getTeacherList(this.teacherForm).then(response => {
+        if (response.status === 100008) {
+          let data = { type: true, res: response }
+          this.$bus.$emit('reLoginAlertPop', data)
+          return false
+        }
         this.pagemsg.total = Number(response.data.pageCount)
         this.famousList = response.data.teacherList
         this.loading = false
