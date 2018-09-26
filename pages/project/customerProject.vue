@@ -51,7 +51,8 @@
         <div class="fl">培训方式：</div>
         <div class="fr ">
           <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio>
-          <el-radio v-model="projectForm.styleRadio" label="2">线上+线下</el-radio>
+          <el-radio v-model="projectForm.styleRadio" label="2">混合</el-radio>
+          <el-radio v-model="projectForm.styleRadio" label="3">互动</el-radio>
         </div>
       </div>
       <div class="con-item num clearfix">
