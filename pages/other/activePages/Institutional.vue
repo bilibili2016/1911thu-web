@@ -16,6 +16,30 @@
       <div class="why">
         <h3>1911学堂值得您信赖</h3>
         <div class="why-con clearfix">
+          <div class="img">
+            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon.png" alt="">
+          </div>
+          <div class="con-text">
+            <div class="first text clearfix">
+              <div class="left">我们的使命和承诺</div>
+              <div class="right">源自清华、面向世界，博学笃行、人文日新。</div>
+              <div class="con-shadow"></div>
+            </div>
+            <div class="second text clearfix">
+              <div class="left">多元化培训模式</div>
+              <div class="right">结合线上人机交互优势和线下人文互动优势，研发了纯线上、混合式、互动式三种培训模式供您选择。
+                <div class="con-shadow"></div>
+              </div>
+            </div>
+            <div class="third text clearfix">
+              <div class="left">知识即服务</div>
+              <div class="right">1911学堂是一个以“知识即服务”（KaaS）为运营模式的继续教育平台，为学习者提供全链条服务。
+                <div class="con-shadow"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="why-con clearfix">
           <div class="why-item" v-for="(item,index) in imgList" :key="index">
             <div class="item-img">
               <img :src="item.imgUrl" alt="">
@@ -29,10 +53,39 @@
         <div class="projects">
           <span v-for="(item,index) in projectArr" :key="index" @click="goCourseList(item)">{{item.category_name}}</span>
           <span @click="goCustomerProject">自定制项目</span>
-        </div>
+        </div> -->
       </div>
-      <div class="course serviceDetails">
+      <div class="course serviceDetails clearfix">
         <h3>1911学堂专属定制项目</h3>
+        <div class="course-left courseCon clearfix">
+          <div class="img">
+            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon1.png" alt="">
+            <div>委托定制</div>
+          </div>
+          <div class="con">
+            <div class="text">
+              学堂根据贵单位的特定需求，为您量身定制、研发设计针对性、个性化的学习方案及培训项目安排。
+            </div>
+            <div class="button" @click="handleScroll">
+              立即咨询
+            </div>
+          </div>
+        </div>
+        <div class="course-right courseCon clearfix">
+          <div class="img">
+            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon2.png" alt="">
+            <div>自定制</div>
+          </div>
+          <div class="con">
+            <div class="text">
+              贵单位可在学堂平台自行选择师资及课程，或提出具体的学习需求，形成独有的人才培养规划及培训班设置方案。
+            </div>
+            <div class="button" @click="goCustomerProject">
+              开始自定制
+            </div>
+          </div>
+        </div>
+        <!-- <h3>1911学堂专属定制项目</h3>
         <p class="course-small-title">如果您有更多、更独特的培训需求，请联系我们，1911学堂将根据单位需求， 为您量身定制高品质培训项目。</p>
         <div class="service-list clearfix">
           <div class="service-line"></div>
@@ -46,7 +99,7 @@
               {{item.content}}
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- <div class="course">
         <h3>1911学堂课程体系</h3>
@@ -605,6 +658,12 @@ export default {
     },
     getClassifyList() {
       institutional.getClassifyList().then(response => {
+        if (response.status === 100008) {
+          let data = { type: true, res: response }
+          this.$bus.$emit('reLoginAlertPop', data)
+          return false
+        }
+
         for (let item of response.data.categoryList) {
           if (item.is_picture_show === '1') {
             this.projectArr.push(item)
