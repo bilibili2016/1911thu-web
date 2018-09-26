@@ -39,9 +39,7 @@
       </div>
       <div class="changeType fr">
         选择模式:
-        <el-button :class="{'checked':projectDetail.study_type==='1'}" :disabled="projectDetail.is_Collection" @click="handleLine(projectDetail.id)">线上</el-button>
-        <el-button :class="{'checked':projectDetail.study_type==='2'}" :disabled="projectDetail.is_Collection" @click="handleLine(projectDetail.id)">混合</el-button>
-        <el-button :class="{'checked':projectDetail.study_type==='3'}" :disabled="projectDetail.is_Collection" @click="handleLine(projectDetail.id)">互动</el-button>
+        <el-button v-for="(course,index) in projectDetail.relationProjectData" :key="index" :class="{'checked':course.select_status}" :disabled="course.id===''" @click="handleLine(course.id)">{{patternArr[index]}}</el-button>
       </div>
       <!-- 普通项目 -->
       <div class="fr buy" v-if="projectType.types==='1'">
@@ -83,6 +81,7 @@ export default {
       project: {
         projectId: '1'
       },
+      patternArr: ['线上', '混合', '互动'],
       BreadCrumb: {
         type: 'projectDetail',
         project: '分类列表',

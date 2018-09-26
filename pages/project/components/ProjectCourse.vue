@@ -2,7 +2,7 @@
   <!-- 项目线上课程列表 -->
   <div class="projectCourse">
     <!-- <h3>{{projectCourseData}}</h3> -->
-    <div class="system" v-for="(item,index) in projectCourseData" :key="index">
+    <div class="system" v-for="(item,index) in projectCourseData" :key="index" v-if="projectCourseData.length>0">
       <h4>{{item.system_name}}</h4>
       <div class="course">
         <div class="courseOne clearfix" v-for="(course,index) in item.curriculumList" :key="index">
@@ -14,9 +14,13 @@
           </div>
           <img class="fr" src="http://papn9j3ys.bkt.clouddn.com/projectCoursePlay.png" alt="" @click="goProjectPlayer()">
         </div>
+        </div>
+      </div>
+      <div class="noData" v-else>
+        <img src="http://papn9j3ys.bkt.clouddn.com/noMsg.png" alt="">
+        <p>还没有评论，快去抢沙发！</p>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

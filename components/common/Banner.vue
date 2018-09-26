@@ -74,7 +74,7 @@ export default {
     }
   },
   mounted() {
-    if (persistStore.get('token')) {
+    if (persistStore.get('token') && this.config.banner_type === 'profile') {
       this.getUserInfo()
     }
     this.$bus.$on('reUserInfo', data => {
