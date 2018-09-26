@@ -335,7 +335,6 @@ export default {
       this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
         confirmButtonText: '确定',
         callback: action => {
-          this.pass = true
           //初始化首页数据
           this.$bus.$emit('loginShow', true)
           if (type) {
@@ -363,8 +362,8 @@ export default {
         // 设置用户信息
         this.setUserInfo(res)
         this.getClassifyList()
-        this.pass = true
       }
+      this.pass = true
     },
     // 个人中心 个人信息设置
     setUserInfo(res) {
@@ -384,17 +383,12 @@ export default {
     },
     // 个人中心 用户头像
     getUserInfo() {
-      console.log(this.pass, 'this.pass')
-
       if (!this.pass) {
         return false
       }
       this.pass = false
-      console.log(persistStore.get('token'))
-
       if (persistStore.get('token')) {
         header.getUserInfo().then(res => {
-          console.log(res, 'replaceState')
           this.isSingleLogin(res)
         })
       }
