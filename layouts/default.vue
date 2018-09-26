@@ -3,7 +3,7 @@
     <Header v-show="hfshow"></Header>
     <el-container>
       <el-main>
-        <nuxt/>
+        <nuxt />
       </el-main>
     </el-container>
     <Footer v-show="hfshow"></Footer>
@@ -29,6 +29,7 @@ export default {
     fetchUrl() {
       let pathName = window.location.pathname
       let headerClass = document.getElementsByClassName('headerClass')
+      this.$bus.$emit('getUserInfo')
 
       if (pathName === '/') {
         //首页

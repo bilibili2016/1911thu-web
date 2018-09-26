@@ -220,12 +220,16 @@ export default {
     // 获取新上好课列表
     getNewCourseList() {
       home.getNewCourseList(this.courseForm).then(response => {
-        if (response.status === 100008) {
-          this.$bus.$emit('getUserInfo')
-        } else {
+        if (response.status === 0) {
           this.newData = response.data.curriculumList
           this.getAll()
         }
+
+        // if (response.status === 100008) {
+        //   this.$bus.$emit('getUserInfo')
+        // } else {
+        //   this.newData = response.data.curriculumList
+        // }
       })
     },
     // 获取精品好课列表

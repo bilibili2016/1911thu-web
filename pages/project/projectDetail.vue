@@ -110,7 +110,7 @@ export default {
     // 获取项目详情
     getProjectInfo() {
       projectdetail.getProjectInfo(this.project).then(res => {
-        if (res.status == '0') {
+        if (res.status == 0) {
           this.projectDetail = res.data.curriculumProjectDetail
           this.projectDetail.score = Number(this.projectDetail.score)
           this.projectDetailLoad = false
@@ -121,7 +121,7 @@ export default {
           } else {
             this.collectMsg.isCollect = 0
           }
-        } else {
+        } else if (res.status == 100100) {
           message(this, 'error', res.msg)
         }
       })
@@ -130,10 +130,12 @@ export default {
     getEvaluateList() {
       this.evaluateForm.ids = matchSplits('kid')
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
-        this.evaluateData = res.data.evaluateList
-        this.evaluateInfo = res.data.totalEvaluateInfo
-        this.evaluateDataLoad = false
-        this.pagemsg.total = res.data.pageCount
+        if (res.status == 0) {
+          this.evaluateData = res.data.evaluateList
+          this.evaluateInfo = res.data.totalEvaluateInfo
+          this.evaluateDataLoad = false
+          this.pagemsg.total = res.data.pageCount
+        }
       })
     },
     //评论分页
@@ -143,9 +145,11 @@ export default {
       this.evaluateForm.limits = 3
       this.evaluateForm.ids = matchSplits('kid')
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
-        this.evaluateData = res.data.evaluateList
-        this.evaluateInfo = res.data.totalEvaluateInfo
-        this.evaluateDataLoad = false
+        if (res.status == 0) {
+          this.evaluateData = res.data.evaluateList
+          this.evaluateInfo = res.data.totalEvaluateInfo
+          this.evaluateDataLoad = false
+        }
       })
     }
   },

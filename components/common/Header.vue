@@ -386,8 +386,8 @@ export default {
       if (!this.pass) {
         return false
       }
-      this.pass = false
       if (persistStore.get('token')) {
+        this.pass = false
         header.getUserInfo().then(res => {
           this.isSingleLogin(res)
         })
@@ -430,7 +430,7 @@ export default {
     }
   },
   mounted() {
-    this.getUserInfo()
+    // this.getUserInfo()
 
     this.onBusEvent()
     this.$bus.$on('reLoginAlertPop', data => {
