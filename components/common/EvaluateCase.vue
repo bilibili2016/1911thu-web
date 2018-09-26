@@ -62,9 +62,11 @@ export default {
     //标签-获取课程标签列表
     getEvaluateTags() {
       coursedetail.getEvaluateTags().then(response => {
-        this.tagGroup = response.data.evaluateTags
-        this.btnDatas = response.data.evaluateTags
-        this.changeRate('5')
+        if (response.status === 0) {
+          this.tagGroup = response.data.evaluateTags
+          this.btnDatas = response.data.evaluateTags
+          this.changeRate('5')
+        }
       })
     },
     // 标签-点击评价改变星级

@@ -3,25 +3,25 @@
     <div class="news-banner">
       <img :src="bannerImg" alt="">
     </div>
-    <!-- 面包屑组件 -->
-    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-    <!-- 新闻内容 -->
-    <div class="detail">
-      <div class="newsContent" v-loading='loading'>
-        <h3>{{newsDetail.title}}</h3>
-        <p class="time">{{newsDetail.create_time}}</p>
-        <div class="newsInner" v-html="newsDetail.content"></div>
-        <div class="next clearfix">
-          <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇
-            <i>{{beforeNews.title}}</i>
-          </span>
-          <span class="fr" v-if="afterNews" @click="getNewInfoDetail(afterNews.id)">下一篇
-            <i>{{afterNews.title}}</i>
-          </span>
+      <!-- 面包屑组件 -->
+      <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+      <!-- 新闻内容 -->
+      <div class="detail">
+        <div class="newsContent" v-loading='loading'>
+          <h3>{{newsDetail.title}}</h3>
+          <p class="time">{{newsDetail.create_time}}</p>
+          <div class="newsInner" v-html="newsDetail.content"></div>
+          <div class="next clearfix">
+            <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇
+              <i>{{beforeNews.title}}</i>
+            </span>
+            <span class="fr" v-if="afterNews" @click="getNewInfoDetail(afterNews.id)">下一篇
+              <i>{{afterNews.title}}</i>
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -79,22 +79,24 @@ export default {
       }
 
       news.getNewInfoDetail(newsId).then(response => {
-        this.newsDetail = response.data.newDetail
-        this.newsDetail.create_time = timestampToTime(
-          this.newsDetail.create_time
-        )
-        if (response.data.beforeNews.id) {
-          me.beforeNews = response.data.beforeNews
-        } else {
-          me.beforeNews.title = '暂无'
+        if (response.status === 0) {
+          this.newsDetail = response.data.newDetail
+          this.newsDetail.create_time = timestampToTime(
+            this.newsDetail.create_time
+          )
+          if (response.data.beforeNews.id) {
+            me.beforeNews = response.data.beforeNews
+          } else {
+            me.beforeNews.title = '暂无'
+          }
+          if (response.data.afterNews.id) {
+            me.afterNews = response.data.afterNews
+          } else {
+            me.afterNews.title = '暂无'
+          }
+          this.loading = false
+          document.body.scrollTop = document.documentElement.scrollTop = 0
         }
-        if (response.data.afterNews.id) {
-          me.afterNews = response.data.afterNews
-        } else {
-          me.afterNews.title = '暂无'
-        }
-        this.loading = false
-        document.body.scrollTop = document.documentElement.scrollTop = 0
       })
     }
   },

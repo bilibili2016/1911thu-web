@@ -216,10 +216,13 @@ export default {
     // 兑换码 --检测兑换码内是否包含已绑定的课程
     handleDetection() {
       header.detectionCode(this.bindForm).then(res => {
-        if (res.status != 0) {
+        if (res.status === 100100) {
           message(this, 'error', res.msg)
           this.bindForm.isBind = false
-          this.login()
+          return false
+        } else {
+          this.bindForm.isBind = false
+          this.isSingleLogin(res)
           return false
         }
         // 判断兑换码内是否包含已绑定的课程
@@ -285,7 +288,7 @@ export default {
           this.bindForm.error = res.msg
         } else {
           this.bindForm.isBind = false
-          this.login()
+          this.isSingleLogin(res)
         }
       })
     },

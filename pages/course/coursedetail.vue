@@ -159,14 +159,6 @@ export default {
     handleLinkTeacher(item) {
       window.open(window.location.origin + '/home/teacher/' + item)
     },
-    //标签 - 获取课程标签列表
-    getEvaluateTags() {
-      coursedetail.getEvaluateTags().then(response => {
-        this.tagGroup = response.data.evaluateTags
-        this.btnDatas = response.data.evaluateTags
-        this.handleChangeRate('5')
-      })
-    },
     // 标签 - 点击评价改变星级
     handleChangeRate(val) {
       this.reTagBtn = []
@@ -216,13 +208,13 @@ export default {
         .replace(/,/g, '#')
       if (this.courseList.is_study) {
         coursedetail.addEvaluate(this.addEvaluateForm).then(response => {
-          if (response.status === '100100') {
+          if (response.status === 100100) {
             this.$message({
               showClose: true,
               type: 'warning',
               message: response.msg
             })
-          } else {
+          } else if (response.status === 0) {
             this.addEvaluateForm.tag = []
             for (let item of this.btnData) {
               this.$set(item, 'isCheck', false)
@@ -254,11 +246,13 @@ export default {
       this.evaluateListForm.ids = matchSplits('kid')
       this.evaluateLoading = true
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
-        this.loadMsg = false
-        this.evaluateLoading = false
-        this.pagemsg.total = response.data.pageCount
-        this.commentator = response.data.evaluateList
-        window.scrollTo(0, 436)
+        if (response.status === 0) {
+          this.loadMsg = false
+          this.evaluateLoading = false
+          this.pagemsg.total = response.data.pageCount
+          this.commentator = response.data.evaluateList
+          window.scrollTo(0, 436)
+        }
       })
     },
     // 评论-获取评论列表
@@ -266,15 +260,17 @@ export default {
       this.loadEvaluate = true
       this.evaluateListForm.ids = matchSplits('kid')
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
-        this.loadMsg = false
-        this.pagemsg.total = response.data.pageCount
-        this.pageCount = response.data.pageCount
-        this.commentator = response.data.evaluateList
+        if (response.status === 0) {
+          this.loadMsg = false
+          this.pagemsg.total = response.data.pageCount
+          this.pageCount = response.data.pageCount
+          this.commentator = response.data.evaluateList
 
-        this.totalEvaluateInfo = response.data.totalEvaluateInfo
-        let totalEvaluateInfo = response.data.totalEvaluateInfo
-        this.sumUserStart = Number(totalEvaluateInfo.totalScore)
-        this.loadEvaluate = false
+          this.totalEvaluateInfo = response.data.totalEvaluateInfo
+          let totalEvaluateInfo = response.data.totalEvaluateInfo
+          this.sumUserStart = Number(totalEvaluateInfo.totalScore)
+          this.loadEvaluate = false
+        }
       })
     },
     // 课程-获取课程详情
@@ -284,14 +280,17 @@ export default {
       this.kidForm.ids = matchSplits('kid')
 
       coursedetail.getCourseDetail(this.kidForm).then(response => {
-        this.loadMsg = false
-        this.courseList = response.data.curriculumDetail
-        // persistStore.set('curriculumId', response.data.curriculumDetail.id)
-        this.privileMsg = response.data.curriculumPrivilege
+        if (response.status === 0) {
+          this.loadMsg = false
+          this.courseList = response.data.curriculumDetail
+          // persistStore.set('curriculumId', response.data.curriculumDetail.id)
+          this.privileMsg = response.data.curriculumPrivilege
 
-        this.content = response.data.curriculumPrivilege
-        this.loadTeacher = false
-        this.collectMsg.isCollect = response.data.curriculumDetail.is_collection
+          this.content = response.data.curriculumPrivilege
+          this.loadTeacher = false
+          this.collectMsg.isCollect =
+            response.data.curriculumDetail.is_collection
+        }
       })
     },
     // 课程-获取课程列表
@@ -300,11 +299,13 @@ export default {
       this.kidForm.ids = matchSplits('kid')
 
       coursedetail.getCourseList(this.kidForm).then(response => {
-        this.catalogs = response.data.curriculumCatalogList
-        for (let item of this.catalogs) {
-          for (let i of item.childList) {
-            i.second = i.video_time
-            i.video_time = Math.round(i.video_time / 60)
+        if (response.status === 0) {
+          this.catalogs = response.data.curriculumCatalogList
+          for (let item of this.catalogs) {
+            for (let i of item.childList) {
+              i.second = i.video_time
+              i.video_time = Math.round(i.video_time / 60)
+            }
           }
         }
       })
@@ -315,15 +316,17 @@ export default {
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {
-          this.$router.replace(
-            '/course/coursedetail' +
-              '?kid=' +
-              matchSplits('kid') +
-              '&bid=' +
-              response.data.defaultCurriculumCatalog.id +
-              '&page=' +
-              matchSplits('page')
-          )
+          if (response.status === 0) {
+            this.$router.replace(
+              '/course/coursedetail' +
+                '?kid=' +
+                matchSplits('kid') +
+                '&bid=' +
+                response.data.defaultCurriculumCatalog.id +
+                '&page=' +
+                matchSplits('page')
+            )
+          }
         })
     },
     // 初始化默认data
@@ -349,8 +352,6 @@ export default {
       this.getEvaluateList()
       this.getCourseList()
       this.getdefaultCurriculumCatalog()
-      // 获取 评论列表
-      // this.getEvaluateTags() //已提取到评论组件中调用
     }
   },
   mounted() {
