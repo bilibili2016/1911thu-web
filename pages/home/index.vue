@@ -158,8 +158,7 @@ export default {
         pages: 1,
         limits: 4
       },
-      loginMsg: false,
-      getHttp: false
+      loginMsg: false
     }
   },
   computed: {
@@ -222,10 +221,8 @@ export default {
     getNewCourseList() {
       home.getNewCourseList(this.courseForm).then(response => {
         if (response.status === 100008) {
-          this.getHttp = false
           this.$bus.$emit('getUserInfo')
         } else {
-          this.getHttp = true
           this.newData = response.data.curriculumList
           this.getAll()
         }
