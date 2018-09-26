@@ -114,7 +114,6 @@ export default {
         '/profile',
         '/shop/wepay'
       ],
-      getHttp: false,
       pass: true,
       skip: '' //兑换码类型
     }
@@ -317,7 +316,6 @@ export default {
       if (persistStore.get('token')) {
         header.shopCartList().then(res => {
           if (res.status === 100008) {
-            this.getHttp = false
           } else {
             if (res.data) {
               this.setProductsNum({
@@ -333,7 +331,6 @@ export default {
     // 个人中心 重新登录 弹框
     reLoginAlert(type, res) {
       this.handleSignOut()
-      this.getHttp = false
       persistStore.set('isSingleLogin', false)
       this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
         confirmButtonText: '确定',
@@ -386,14 +383,18 @@ export default {
       }
     },
     // 个人中心 用户头像
-    getUserInfo(flag) {
+    getUserInfo() {
+      console.log(this.pass, 'this.pass')
+
       if (!this.pass) {
         return false
       }
       this.pass = false
+      console.log(persistStore.get('token'))
+
       if (persistStore.get('token')) {
         header.getUserInfo().then(res => {
-          // console.log(res, 'replaceState')
+          console.log(res, 'replaceState')
           this.isSingleLogin(res)
         })
       }
@@ -415,7 +416,7 @@ export default {
       })
       // 重新拉取用户信息
       this.$bus.$on('getUserInfo', data => {
-        this.getUserInfo(data)
+        this.getUserInfo()
       })
       // 获取购物车数量
       this.$bus.$on('updateCount', () => {
@@ -437,7 +438,6 @@ export default {
   mounted() {
     this.getUserInfo()
 
-    // 非单点登录 getHttp为true
     this.onBusEvent()
     this.$bus.$on('reLoginAlertPop', data => {
       this.reLoginAlert(data.type, data.res)
