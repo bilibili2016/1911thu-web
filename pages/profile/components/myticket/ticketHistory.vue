@@ -81,7 +81,8 @@ export default {
       kidForm: {
         kid: ''
       },
-      gidForm: { gids: null }
+      gidForm: { gids: null },
+      responseData: { type: true, res: '' }
     }
   },
   methods: {
@@ -90,6 +91,11 @@ export default {
     handleTicketPopup(id) {
       let ticketId = { ID: id }
       ticketHistory.invoiceOrderDetail(ticketId).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         document.getElementsByClassName('el-tabs__content')[7].style.position =
           '-ms-page'
         this.isTicketPopup = true
@@ -106,6 +112,11 @@ export default {
     handleStatusPopup(id) {
       let invoiceID = { ID: id }
       ticketHistory.invoiceDetail(invoiceID).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         document.getElementsByClassName('el-tabs__content')[7].style.position =
           '-ms-page'
         this.isStatusPopup = true

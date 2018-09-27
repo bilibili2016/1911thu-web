@@ -14,11 +14,11 @@
       <div class="pro-step clearfix">
         <span class="step">1.填写项目定制信息</span>
         <span class="arrow"><img :src="imgUlr" alt=""></span>
-        <span class="step">2.立即购买</span>
-        <span class="arrow"><img :src="imgUlr" alt=""></span>
-        <span class="step">3.支付</span>
-        <span class="arrow"><img :src="imgUlr" alt=""></span>
-        <span class="step step4">4.直接学习或绑定兑换码后学习</span>
+          <span class="step">2.立即购买</span>
+          <span class="arrow"><img :src="imgUlr" alt=""></span>
+            <span class="step">3.支付</span>
+            <span class="arrow"><img :src="imgUlr" alt=""></span>
+              <span class="step step4">4.直接学习或绑定兑换码后学习</span>
       </div>
       <div class="pro-text">
         自定制项目是您所在单位的专属项目，不对其他单位展示。除项目定制者之外，其余人员需绑定兑换码才能观看项目。
@@ -323,7 +323,8 @@ export default {
         totalPrice: 0, //项目总价钱
         projectPrice: 0, //项目优惠后的价钱
         checkedCourse: []
-      }
+      },
+      responseData: { type: true, res: '' }
     }
   },
   computed: {
@@ -377,17 +378,19 @@ export default {
     //定制项目模式信息
     customerInfo() {
       customerProject.customerInfo().then(response => {
-        let result = response.data
-        this.minNum = result.min_study_person_number //最小培训人数
-        this.maxNum = result.max_study_person_number //最大培训人数
-        this.maxDays = result.max_study_days //最大培训天数
-        this.offlineRangeTime = result.offline_oneday_time //线下课时
-        // this.offlineCount1 = result.study_object_cost_amount_one //党政事业线下每天培训费用
-        // this.offlineCount2 = result.study_object_cost_amount_two //企业单位线下每天培训费用
-        this.discount = result.discount //折扣
+        if (response.status === 0) {
+          let result = response.data
+          this.minNum = result.min_study_person_number //最小培训人数
+          this.maxNum = result.max_study_person_number //最大培训人数
+          this.maxDays = result.max_study_days //最大培训天数
+          this.offlineRangeTime = result.offline_oneday_time //线下课时
+          // this.offlineCount1 = result.study_object_cost_amount_one //党政事业线下每天培训费用
+          // this.offlineCount2 = result.study_object_cost_amount_two //企业单位线下每天培训费用
+          this.discount = result.discount //折扣
 
-        this.one = result.study_object_cost_amount_one
-        this.two = result.study_object_cost_amount_two
+          this.one = result.study_object_cost_amount_one
+          this.two = result.study_object_cost_amount_two
+        }
       })
     },
     //搜索
@@ -531,7 +534,9 @@ export default {
     //学院/课程分类
     CategoryList() {
       customerProject.CategoryList().then(response => {
-        this.CategoryListData = response.data.categoryList
+        if (response.status === 0) {
+          this.CategoryListData = response.data.categoryList
+        }
       })
     },
     //添加已选课程
@@ -683,15 +688,17 @@ export default {
       customerProject
         .getCustomerProjectInfo(this.projectForm)
         .then(response => {
-          let data = response.data.curriculumProjectDetail
-          this.projectForm.name = data.title //项目标题
-          this.projectForm.desc = data.introduction //项目简介
-          this.projectForm.styleRadio = data.study_type //培训方式
-          this.checkedCourseData = data.curriculumList //已选课程
-          this.projectForm.trainDay = data.offline_days //线下培训天数
-          this.projectForm.trainNum = data.study_persion_number //培训人数
-          this.projectForm.objRadio = data.study_object //培训对象
-          this.courseComputed()
+          if (response.status === 0) {
+            let data = response.data.curriculumProjectDetail
+            this.projectForm.name = data.title //项目标题
+            this.projectForm.desc = data.introduction //项目简介
+            this.projectForm.styleRadio = data.study_type //培训方式
+            this.checkedCourseData = data.curriculumList //已选课程
+            this.projectForm.trainDay = data.offline_days //线下培训天数
+            this.projectForm.trainNum = data.study_persion_number //培训人数
+            this.projectForm.objRadio = data.study_object //培训对象
+            this.courseComputed()
+          }
         })
     },
     handledesc() {

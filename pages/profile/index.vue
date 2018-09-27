@@ -402,7 +402,8 @@ export default {
       myProjectDataArr: [1], //初始化-我的项目  [1,2,3,4]全部
       myOrderDataArr: [0], //初始化-我的订单  [0，1,2,3]全部
       noMsgCourse: false,
-      customer: false
+      customer: false,
+      responseData: { type: true, res: '' }
     }
   },
   computed: {
@@ -485,6 +486,11 @@ export default {
       this.allCourseLoad = true
 
       profileHome.studyCurriculumList(this.styleForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this._data['myCourseData' + status] = response.data.curriculumList
         this._data['pagemsg' + status].total = response.data.pageCount
         for (let item of response.data.curriculumList) {
@@ -513,6 +519,11 @@ export default {
       this.collectionForm.categoryId = 0
       this.collectionForm.limits = 12
       profileHome.collectionList(this.collectionForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this.collectionData = response.data.curriculumList
         this.pagecltcourse.total = response.data.pageCount
       })
@@ -531,6 +542,11 @@ export default {
       this._data['myProjectPage' + status].page = pagenum
       this.allProjectLoad = true
       profileHome.getProjectList(this.projectForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this._data['myProjectData' + status] = response.data.studyProjectList
         this._data['myProjectPage' + status].total = response.data.pageCount
         for (let item of response.data.studyProjectList) {
@@ -550,6 +566,11 @@ export default {
       this.projectForm.types = 2
       this.projectForm.limits = 12
       profileHome.getProjectCollectList(this.projectForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this.collectProjectData = response.data.collectionCurriculumProjectList
         this.projectPageCollect.total = response.data.pageCount
       })
@@ -572,6 +593,11 @@ export default {
       this.orderForm.pages = pagenum
       this._data['pagemsg' + (status + 4)].page = pagenum
       profileHome.getAllOrderData(this.orderForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this._data['pagemsg' + (status + 4)].total =
           response.data.searchOrderTotal
         if (status === 1) {
@@ -595,6 +621,11 @@ export default {
       this.pagemsg8.page = val
       this.orderNotInvoiceForm.pages = val
       profileHome.orderNotInvoice(this.orderNotInvoiceForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this.allTicket = false
         this.unTicketData = response.data.orderList
         this.unTicketData.forEach(item => {
@@ -609,6 +640,11 @@ export default {
       this.pagemsg9.page = val
       this.tickethistoryForm.pages = val
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this.historyOrderData = response.data.invoiceList
 
         this.unfinishedOrderLoad = false
@@ -634,6 +670,11 @@ export default {
     getCodeList() {
       this.allCode = true
       profileHome.getCodeList(this.codeListForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this.allCode = false
         this.codeData = response.data.orderInvitationCodeList
         this.codeListForm.ordersn = ''
@@ -659,6 +700,11 @@ export default {
     // 邀请记录--兑换详情
     getRecordList() {
       profileHome.getRecordList(this.getCodeListForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this.recordData = response.data.usedInvitationCodeList
         this.getCodeListForm.code = ''
       })
@@ -666,6 +712,11 @@ export default {
     // 兑换码 获取已经添加的兑换码
     getUsedInvitationCodeList() {
       profileHome.getUsedInvitationCodeList().then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this.invitationCodeList = response.data.usedInvitationCodeList
       })
     },
@@ -678,6 +729,10 @@ export default {
           this.projectList = response.data.orderProjectList
           this.orderDetail = response.data.orderDetail
           this.showTicketList = false
+        } else if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
         } else {
           message(this, 'error', response.msg)
         }
@@ -689,6 +744,8 @@ export default {
     },
     // 订单详情
     curriculumPayApply(data) {
+      console.log(334456888)
+
       this.orderForm.ids = persistStore.get('order')
       this.detailMsg = true
       profileHome.curriculumPayApply(this.orderForm).then(response => {
@@ -706,6 +763,10 @@ export default {
           } else {
             this.showOrderList = false
           }
+        } else if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
         } else {
           message(this, 'error', response.msg)
         }
@@ -717,6 +778,11 @@ export default {
       profileHome
         .customerProjectList(this.customerProjectForm)
         .then(response => {
+          if (response.status === 100008) {
+            this.responseData.res = response
+            this.$bus.$emit('reLoginAlertPop', this.responseData)
+            return false
+          }
           this.customerProjectListData = response.data.curriculumProjectList
           this.customerPagemsg.total = response.data.pageCount
           this.customer = false
@@ -729,6 +795,11 @@ export default {
       profileHome
         .customerProjectList(this.customerProjectForm)
         .then(response => {
+          if (response.status === 100008) {
+            this.responseData.res = response
+            this.$bus.$emit('reLoginAlertPop', this.responseData)
+            return false
+          }
           this.customerProjectListData = response.data.curriculumProjectList
         })
     },
@@ -738,6 +809,10 @@ export default {
         if (response.status == 0) {
           message(this, 'success', '删除成功')
           this.customerProjectList()
+        } else if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
         } else {
           message(this, 'error', '删除失败')
         }
@@ -785,6 +860,11 @@ export default {
       this.orderForm.pages = pagenum
       this._data['pagemsg' + (status + 4)].page = pagenum
       profileHome.getAllOrderData(this.orderForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
+        }
         this._data['pagemsg' + (status + 4)].total =
           response.data.searchOrderTotal
         if (status === 1) {
@@ -826,6 +906,10 @@ export default {
       }
       this.$bus.$emit('reLoginAlertPop', data)
     }
+  },
+  beforeDestroy() {
+    this.$bus.$off('goOrderDetail')
+    this.$bus.$off('searchDatas')
   }
 }
 </script>

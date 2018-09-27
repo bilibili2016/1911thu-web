@@ -27,39 +27,39 @@
 
                 <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
               </div>
-              <div class="fl">
-                <h4 @click="goProjrctInfo(project)" :title="project.title">{{project.title}}</h4>
-                <h6>{{project.curriculum_time}}学时</h6>
+                <div class="fl">
+                  <h4 @click="goProjrctInfo(project)" :title="project.title">{{project.title}}</h4>
+                  <h6>{{project.curriculum_time}}学时</h6>
+                </div>
               </div>
-            </div>
-            <!-- <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
+              <!-- <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
               查看更多课程>
             </div> -->
-          </div>
-          <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
-            <p>¥{{courseList.order_amount}}</p>
+            </div>
+            <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
+              <p>¥{{courseList.order_amount}}</p>
+              <!-- 订单 -->
+              <p v-if="config.type==='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
+            </div>
             <!-- 订单 -->
-            <p v-if="config.type==='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
-          </div>
-          <!-- 订单 -->
-          <div v-show="config.type==='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
-            <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
-            <p class="payReady payed" v-if="courseList.pay_status === '2'">已支付</p>
-            <p class="cancelOrder" v-if="courseList.pay_status === '5'" style="cursor: inherit">审核中</p>
+            <div v-show="config.type==='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
+              <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
+              <p class="payReady payed" v-if="courseList.pay_status === '2'">已支付</p>
+              <p class="cancelOrder" v-if="courseList.pay_status === '5'" style="cursor: inherit">审核中</p>
 
-            <!-- 已完成订单剩余时间 -->
-            <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
-            <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day<1">已过期</p>
-            <p class="payClose" v-if="courseList.pay_status === '3'">已关闭</p>
-            <p>
-              <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id)">立即支付</span>
-              <span class="buy" v-if="courseList.pay_status === '3'" @click="goShopping(courseList.id,courseList)">立即购买</span>
-            </p>
+              <!-- 已完成订单剩余时间 -->
+              <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
+              <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day<1">已过期</p>
+              <p class="payClose" v-if="courseList.pay_status === '3'">已关闭</p>
+              <p>
+                <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id)">立即支付</span>
+                <span class="buy" v-if="courseList.pay_status === '3'" @click="goShopping(courseList.id,courseList)">立即购买</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -91,7 +91,8 @@ export default {
         base: '/project/projectdetail',
         kid: '',
         type: 1
-      }
+      },
+      responseData: { type: true, res: '' }
     }
   },
   methods: {
@@ -120,6 +121,10 @@ export default {
         if (response.status === 0) {
           this.$emit('handleUpdate', true)
           message(this, 'success', '订单已取消！')
+        } else if (response.status === 100008) {
+          this.responseData.res = response
+          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          return false
         } else {
           message(this, 'error', response.msg)
         }
