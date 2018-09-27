@@ -33,9 +33,11 @@ export default {
     // 获取我的消息列表
     getInfo() {
       info.userMessage(this.curruntForm).then(res => {
-        this.infoList = res.data.userMessage
-        let noMsg = this.infoList && this.infoList.length > 0 ? false : true
-        this.$emit('noMsg', noMsg)
+        if (res.status === 0) {
+          this.infoList = res.data.userMessage
+          let noMsg = this.infoList && this.infoList.length > 0 ? false : true
+          this.$emit('noMsg', noMsg)
+        }
       })
     }
   },

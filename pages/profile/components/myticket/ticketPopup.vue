@@ -80,7 +80,7 @@
             <input type="text" v-model="ticketForm.address" placeholder="请输入收票人的详细地址">
           </p>
         </div>
-        <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
+        <p class="smallTip">发票将在订单提交之后5个工作日内寄出</p>
         <div class="operation">
           <span class="a" @click="addInvoiceBefor">下一步</span>
           <span @click="close">取消</span>
@@ -120,7 +120,7 @@
               <i></i>
               <span>3.填写收票人信息</span>
             </div>
-            <p class="smallTip">发票将在订单完成之后3-5个工作日寄出</p>
+            <p class="smallTip">发票将在订单提交之后5个工作日内寄出</p>
           </div>
           <div class="operation">
             <span @click="nextStep('stepTwo')">下一步</span>
