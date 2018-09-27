@@ -26,25 +26,25 @@
             <div v-if="course.is_free =='2'">
               <p class="coin">免费</p>
               <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
-              <div class="fr common-button-half-right">
-                <el-button type="primary" plain @click.stop="handleLinkCourseDetail(course)"> 立即学习</el-button>
-              </div>
+                <div class="fr common-button-half-right">
+                  <el-button type="primary" plain @click.stop="handleLinkCourseDetail(course)"> 立即学习</el-button>
+                </div>
             </div>
             <!-- 收费课程展示 -->
             <div v-else>
               <p class="coin" v-if="cidNumber==='0'">
-                <span v-if="course.study_type === '1'">￥{{changeManey(course.present_price)}}/人</span>
-                <span v-else>￥{{changeManey(course.present_price)}}/班</span>
+                <span v-if="course.study_type === '1'">￥{{course.present_price}}/人</span>
+                <span v-else>￥{{course.present_price}}/班</span>
               </p>
               <p class="coin" v-else>￥ {{course.present_price}}</p>
 
               <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
-              <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">
-                <el-button type="primary" plain @click.stop="goBuy(course)">立即购买</el-button>
-              </div>
-              <div class="fr common-button-half-right" v-else>
-                <el-button type="primary" plain @click.stop="handleAddShopCart(course)">加入购物车</el-button>
-              </div>
+                <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">
+                  <el-button type="primary" plain @click.stop="goBuy(course)">立即购买</el-button>
+                </div>
+                <div class="fr common-button-half-right" v-else>
+                  <el-button type="primary" plain @click.stop="handleAddShopCart(course)">加入购物车</el-button>
+                </div>
             </div>
           </div>
         </div>
