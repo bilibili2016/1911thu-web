@@ -20,7 +20,7 @@
                 <div class="company-info" style="margin-bottom:40px">
                   <h1>{{con.title}}</h1>
                 </div>
-                <div v-html="con.content"></div>
+                <div class="contentInfo" v-html="con.content"></div>
               </div>
             </div>
           </el-card>
@@ -80,4 +80,9 @@ export default {
   }
 }
 </script>
+<style  lang="scss">
+.contentInfo p {
+  display: inline !important;
+}
+</style>
 

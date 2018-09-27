@@ -32,11 +32,10 @@
         <p>详细地址：{{ticketForm.address}}</p>
         <p>发票金额：{{price}}元</p>
       </div>
-      <p class="tips" v-if="money">{{tip}}</p>
-      <p class="tips" v-else>{{tips}}</p>
+      <!-- <p class="tips">{{tip}}</p> -->
       <div class="confirm">
         <span @click="back" class="back">返回</span>
-        <span @click="confirm" class="confirm">提交</span>
+        <span @click="confirm">提交</span>
       </div>
     </div>
   </div>
@@ -48,11 +47,10 @@ export default {
   props: ['price'],
   data() {
     return {
-      tip: '开票金额不足200元，需额外支付邮费，目前只支持货到付款',
-      tips: '开票金额满200包邮',
+      tip: '邮费：全部免邮费。',
+      // tips: '开票金额满200包邮',
       confirmInvoice: false,
-      ticketForm: {},
-      money: false
+      ticketForm: {}
     }
   },
   methods: {
@@ -69,8 +67,7 @@ export default {
           this.confirmInvoice = false
           document.getElementsByClassName(
             'el-tabs__content'
-          )[7].style.position =
-            'relative'
+          )[7].style.position = 'relative'
           this.$bus.$emit('historyOrderDataChange', 1)
         } else {
           this.$message({
@@ -100,12 +97,6 @@ export default {
         '-ms-page'
       this.confirmInvoice = true
     })
-    this.price = Number(this.price)
-    if (this.price < 200) {
-      this.money = true
-    } else {
-      this.money = false
-    }
   }
 }
 </script>

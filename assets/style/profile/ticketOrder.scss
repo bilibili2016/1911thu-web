@@ -254,9 +254,8 @@
             }
           }
           .smallTip {
-            font-size: 14px;
             color: #888;
-            text-align: center;
+            padding-bottom: 10px;
           }
         }
         &.zzTicket {
@@ -297,8 +296,9 @@
           }
         }
         .smallTip {
+          margin-left: 130px;
+          width: 420px;
           color: #888;
-          text-align: center;
           padding-bottom: 10px;
         }
       }
