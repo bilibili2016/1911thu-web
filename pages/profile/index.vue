@@ -895,18 +895,18 @@ export default {
         this.activeTab = 'tab-first'
       }
       if (persistStore.get('isSingleLogin')) {
-        // this.initBusEvent()
-        // this.handleInitMyCourseData() //我的课程
-        // this.handleInitMyProjectData() //我的项目
-        // // this.collectProjectPageChange(1) //我的项目-收藏
-        // // this.collectionPageChange(1) //我的课程-收藏
-        // this.handleInitMyOrderData(true) //我的订单
-        // this.getCodeList() //兑换码管理-兑换码列表
-        // // this.getRecordList()  //兑换码管理-兑换详情
-        // // this.getUsedInvitationCodeList()  //兑换码管理-我的兑换
-        // // this.historyOrderDataChange(1)  //我的发票 开票历史
-        // this.unTicketDataChange(1) //我的发票 按订单开发票
-        // this.customerProjectList() //自定义项目
+        this.initBusEvent()
+        this.handleInitMyCourseData() //我的课程
+        this.handleInitMyProjectData() //我的项目
+        // this.collectProjectPageChange(1) //我的项目-收藏
+        // this.collectionPageChange(1) //我的课程-收藏
+        this.handleInitMyOrderData(true) //我的订单
+        this.getCodeList() //兑换码管理-兑换码列表
+        // this.getRecordList()  //兑换码管理-兑换详情
+        // this.getUsedInvitationCodeList()  //兑换码管理-我的兑换
+        // this.historyOrderDataChange(1)  //我的发票 开票历史
+        this.unTicketDataChange(1) //我的发票 按订单开发票
+        this.customerProjectList() //自定义项目
       }
     } else {
       let data = {
