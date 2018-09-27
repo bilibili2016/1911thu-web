@@ -468,7 +468,6 @@ export default {
         }
         this.setGid(gidForm)
         this.$bus.$emit('selectProfileIndex', item.name)
-
         persistStore.set('gid', item.name)
       } else {
         this.$router.push('/')
