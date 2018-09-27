@@ -199,23 +199,24 @@ export default {
     // 获取用户信息
     getUserInfo() {
       personalset.getUserInfo().then(res => {
-        this.psnForm = res.data.userInfo
-
-        var setObj = {}
-        if (this.psnForm.company_name && this.psnForm.company_name != '') {
-          setObj.hasCompany = true
-          persistStore.set('cpnc', this.psnForm.company_code)
-        } else {
-          setObj.hasCompany = false
+        if (res.status === 0) {
+          this.psnForm = res.data.userInfo
+          var setObj = {}
+          if (this.psnForm.company_name && this.psnForm.company_name != '') {
+            setObj.hasCompany = true
+            persistStore.set('cpnc', this.psnForm.company_code)
+          } else {
+            setObj.hasCompany = false
+          }
+          if (res.data.userInfo.is_update === 1) {
+            setObj.showInfo = true
+            setObj.hasPersonalInfo = false
+          } else {
+            setObj.showInfo = false
+            setObj.hasPersonalInfo = true
+          }
+          this.$emit('changeStatus', setObj)
         }
-        if (res.data.userInfo.is_update === 1) {
-          setObj.showInfo = true
-          setObj.hasPersonalInfo = false
-        } else {
-          setObj.showInfo = false
-          setObj.hasPersonalInfo = true
-        }
-        this.$emit('changeStatus', setObj)
       })
     },
     // 提交个 人信息表单

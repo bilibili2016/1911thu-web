@@ -146,19 +146,21 @@ export default {
     // 获取用户信息
     getUserInfo() {
       personalset.getUserInfo().then(res => {
-        this.psnForm = res.data.userInfo
-        if (this.psnForm.company_name && this.psnForm.company_name != '') {
-          this.hasCompany = true
-          persistStore.set('cpnc', this.psnForm.company_code)
-        } else {
-          this.hasCompany = false
-        }
-        if (res.data.userInfo.is_update === 1) {
-          this.showInfo = true
-          this.hasPersonalInfo = false
-        } else {
-          this.showInfo = false
-          this.hasPersonalInfo = true
+        if (res.status === 0) {
+          this.psnForm = res.data.userInfo
+          if (this.psnForm.company_name && this.psnForm.company_name != '') {
+            this.hasCompany = true
+            persistStore.set('cpnc', this.psnForm.company_code)
+          } else {
+            this.hasCompany = false
+          }
+          if (res.data.userInfo.is_update === 1) {
+            this.showInfo = true
+            this.hasPersonalInfo = false
+          } else {
+            this.showInfo = false
+            this.hasPersonalInfo = true
+          }
         }
       })
     },

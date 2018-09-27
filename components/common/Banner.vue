@@ -130,33 +130,34 @@ export default {
     },
     getUserInfo() {
       banner.getUserInfo().then(res => {
-        this.userInfo = res.data.userInfo
-        this.time.hour = parseInt(this.userInfo.study_curriculum_time / 3600)
-        this.time.minutes = parseInt(
-          (parseFloat(this.userInfo.study_curriculum_time / 3600.0) -
-            parseInt(this.userInfo.study_curriculum_time / 3600.0)) *
-            60
-        )
-        this.time.second = parseInt(
-          (parseFloat(
-            (parseFloat(this.userInfo.study_curriculum_time / 3600.0) -
-              parseInt(this.userInfo.study_curriculum_time / 3600.0)) *
-              60
-          ) -
-            parseInt(
-              (parseFloat(this.userInfo.study_curriculum_time / 3600.0) -
-                parseInt(this.userInfo.study_curriculum_time / 3600.0)) *
-                60
-            )) *
-            60
-        )
-
-        if (this.userInfo.head_img && this.userInfo.head_img != '') {
-          this.avator = this.userInfo.head_img
-        } else {
-          this.avator = 'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
+        if (res.status === 0) {
+          this.userInfo = res.data.userInfo
+          // 已学习时长
+          this.changeTime(this.userInfo.study_curriculum_time)
+          // 头像
+          if (this.userInfo.head_img && this.userInfo.head_img != '') {
+            this.avator = this.userInfo.head_img
+          } else {
+            this.avator =
+              'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
+          }
         }
       })
+    },
+    changeTime(timing) {
+      this.time.hour = parseInt(timing / 3600)
+      this.time.minutes = parseInt(
+        (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
+      )
+      this.time.second = parseInt(
+        (parseFloat(
+          (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
+        ) -
+          parseInt(
+            (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
+          )) *
+          60
+      )
     }
   }
 }

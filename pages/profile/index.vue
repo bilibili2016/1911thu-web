@@ -488,7 +488,7 @@ export default {
       profileHome.studyCurriculumList(this.styleForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this._data['myCourseData' + status] = response.data.curriculumList
@@ -522,7 +522,7 @@ export default {
       profileHome.collectionList(this.collectionForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this.collectionData = response.data.curriculumList
@@ -546,7 +546,7 @@ export default {
       profileHome.getProjectList(this.projectForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this._data['myProjectData' + status] = response.data.studyProjectList
@@ -571,7 +571,7 @@ export default {
       profileHome.getProjectCollectList(this.projectForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this.collectProjectData =
@@ -600,7 +600,7 @@ export default {
       profileHome.getAllOrderData(this.orderForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this._data['pagemsg' + (status + 4)].total =
@@ -629,7 +629,7 @@ export default {
       profileHome.orderNotInvoice(this.orderNotInvoiceForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this.allTicket = false
@@ -649,7 +649,7 @@ export default {
       profileHome.tickethistory(this.tickethistoryForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this.historyOrderData = response.data.invoiceList
@@ -680,7 +680,7 @@ export default {
       profileHome.getCodeList(this.codeListForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this.allCode = false
@@ -711,7 +711,7 @@ export default {
       profileHome.getRecordList(this.getCodeListForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this.recordData = response.data.usedInvitationCodeList
@@ -724,7 +724,7 @@ export default {
       profileHome.getUsedInvitationCodeList().then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this.invitationCodeList = response.data.usedInvitationCodeList
@@ -742,7 +742,7 @@ export default {
           this.showTicketList = false
         } else if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else {
           message(this, 'error', response.msg)
@@ -774,7 +774,7 @@ export default {
           }
         } else if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else {
           message(this, 'error', response.msg)
@@ -789,7 +789,7 @@ export default {
         .then(response => {
           if (response.status === 100008) {
             this.responseData.res = response
-            this.$bus.$emit('reLoginAlertPop', this.responseData)
+            this.$router.push('/')
             return false
           } else if (response.status === 0) {
             this.customerProjectListData = response.data.curriculumProjectList
@@ -807,7 +807,7 @@ export default {
         .then(response => {
           if (response.status === 100008) {
             this.responseData.res = response
-            this.$bus.$emit('reLoginAlertPop', this.responseData)
+            this.$router.push('/')
             return false
           } else if (response.status === 0) {
             this.customerProjectListData = response.data.curriculumProjectList
@@ -822,7 +822,7 @@ export default {
           this.customerProjectList()
         } else if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else {
           message(this, 'error', '删除失败')
@@ -873,7 +873,7 @@ export default {
       profileHome.getAllOrderData(this.orderForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
+          this.$router.push('/')
           return false
         } else if (response.status === 0) {
           this._data['pagemsg' + (status + 4)].total =
@@ -896,18 +896,18 @@ export default {
         this.activeTab = 'tab-first'
       }
       if (persistStore.get('isSingleLogin')) {
-        this.initBusEvent()
-        this.handleInitMyCourseData() //我的课程
-        this.handleInitMyProjectData() //我的项目
-        // this.collectProjectPageChange(1) //我的项目-收藏
-        // this.collectionPageChange(1) //我的课程-收藏
-        this.handleInitMyOrderData(true) //我的订单
-        this.getCodeList() //兑换码管理-兑换码列表
-        // this.getRecordList()  //兑换码管理-兑换详情
-        // this.getUsedInvitationCodeList()  //兑换码管理-我的兑换
-        // this.historyOrderDataChange(1)  //我的发票 开票历史
-        this.unTicketDataChange(1) //我的发票 按订单开发票
-        this.customerProjectList() //自定义项目
+        // this.initBusEvent()
+        // this.handleInitMyCourseData() //我的课程
+        // this.handleInitMyProjectData() //我的项目
+        // // this.collectProjectPageChange(1) //我的项目-收藏
+        // // this.collectionPageChange(1) //我的课程-收藏
+        // this.handleInitMyOrderData(true) //我的订单
+        // this.getCodeList() //兑换码管理-兑换码列表
+        // // this.getRecordList()  //兑换码管理-兑换详情
+        // // this.getUsedInvitationCodeList()  //兑换码管理-我的兑换
+        // // this.historyOrderDataChange(1)  //我的发票 开票历史
+        // this.unTicketDataChange(1) //我的发票 按订单开发票
+        // this.customerProjectList() //自定义项目
       }
     } else {
       let data = {

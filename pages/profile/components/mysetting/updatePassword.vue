@@ -1,7 +1,7 @@
 <template>
   <div class="changePwd">
-    <input type="password" class="hideInput">
     <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autoComplete="off">
+      <input type="password" class="hideInput">
       <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
         <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne"></el-input>
       </el-form-item>
@@ -13,11 +13,11 @@
       </el-form-item>
       <!-- <p class="forgetPassword">如果您忘记原密码，建议通过
         <span @click="forget">找回密码</span>来修改密码！</p> -->
+      <input type="password" class="hideInput">
       <el-form-item>
         <el-button type="primary" @click="submitForm('changePwd')">提交</el-button>
       </el-form-item>
     </el-form>
-    <input type="password" class="hideInput">
   </div>
 </template>
 
@@ -101,6 +101,9 @@ export default {
               newPass: '',
               checkPass: ''
             }
+            if (res.status == 100008) {
+              this.$router.push('/')
+            }
             if (res.status == 0) {
               this.$alert('修改成功，请重新登录！', '温馨提示', {
                 confirmButtonText: '确定',
@@ -111,7 +114,7 @@ export default {
                 }
               })
               persistStore.clearAll()
-            } else {
+            } else if (res.status == 100100) {
               let msg = res.msg
               this.$message({
                 showClose: true,
