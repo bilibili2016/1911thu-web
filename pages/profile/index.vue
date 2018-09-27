@@ -490,26 +490,27 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
-        }
-        this._data['myCourseData' + status] = response.data.curriculumList
-        this._data['pagemsg' + status].total = response.data.pageCount
-        for (let item of response.data.curriculumList) {
-          item.percent = Number(item.percent)
-        }
-        // 为 已过期 的课程添加overtime字段  用于button判断
-        for (var i = 0; i < this._data['myCourseData' + 4].length; i++) {
-          this.$set(this._data['myCourseData' + 4][i], 'overtime', true)
-        }
-        // this._data['myCourseData' + status].map(item => {
-        //   this.$set(item, 'overtime', true)
-        // })
-        // if (response.data.pageCount > 0) {
-        //   this.noMsgCourse = false
-        // } else {
-        //   this.noMsgCourse = true
-        // }
+        } else if (response.status === 0) {
+          this._data['myCourseData' + status] = response.data.curriculumList
+          this._data['pagemsg' + status].total = response.data.pageCount
+          for (let item of response.data.curriculumList) {
+            item.percent = Number(item.percent)
+          }
+          // 为 已过期 的课程添加overtime字段  用于button判断
+          for (var i = 0; i < this._data['myCourseData' + 4].length; i++) {
+            this.$set(this._data['myCourseData' + 4][i], 'overtime', true)
+          }
+          // this._data['myCourseData' + status].map(item => {
+          //   this.$set(item, 'overtime', true)
+          // })
+          // if (response.data.pageCount > 0) {
+          //   this.noMsgCourse = false
+          // } else {
+          //   this.noMsgCourse = true
+          // }
 
-        this.allCourseLoad = false
+          this.allCourseLoad = false
+        }
       })
     },
     // 我的课程-收藏
@@ -523,9 +524,10 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this.collectionData = response.data.curriculumList
+          this.pagecltcourse.total = response.data.pageCount
         }
-        this.collectionData = response.data.curriculumList
-        this.pagecltcourse.total = response.data.pageCount
       })
     },
     // 我的课程 首页 数据初始化
@@ -546,17 +548,18 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this._data['myProjectData' + status] = response.data.studyProjectList
+          this._data['myProjectPage' + status].total = response.data.pageCount
+          for (let item of response.data.studyProjectList) {
+            item.percent = Number(item.percent)
+          }
+          // 为 已过期 的课程添加overtime字段  用于button判断
+          for (var i = 0; i < this._data['myProjectData' + 3].length; i++) {
+            this.$set(this._data['myProjectData' + 3][i], 'overtime', true)
+          }
+          this.allProjectLoad = false
         }
-        this._data['myProjectData' + status] = response.data.studyProjectList
-        this._data['myProjectPage' + status].total = response.data.pageCount
-        for (let item of response.data.studyProjectList) {
-          item.percent = Number(item.percent)
-        }
-        // 为 已过期 的课程添加overtime字段  用于button判断
-        for (var i = 0; i < this._data['myProjectData' + 3].length; i++) {
-          this.$set(this._data['myProjectData' + 3][i], 'overtime', true)
-        }
-        this.allProjectLoad = false
       })
     },
     // 我的项目-收藏
@@ -570,9 +573,11 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this.collectProjectData =
+            response.data.collectionCurriculumProjectList
+          this.projectPageCollect.total = response.data.pageCount
         }
-        this.collectProjectData = response.data.collectionCurriculumProjectList
-        this.projectPageCollect.total = response.data.pageCount
       })
     },
     // 我的项目数据 页面初始化
@@ -597,14 +602,15 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this._data['pagemsg' + (status + 4)].total =
+            response.data.searchOrderTotal
+          if (status === 1) {
+            this.orderTotal = response.data.orderTotal
+          }
+          this._data['allOrderData' + (status + 4)] = response.data.orderList
+          this.allOrderLoadAll = false
         }
-        this._data['pagemsg' + (status + 4)].total =
-          response.data.searchOrderTotal
-        if (status === 1) {
-          this.orderTotal = response.data.orderTotal
-        }
-        this._data['allOrderData' + (status + 4)] = response.data.orderList
-        this.allOrderLoadAll = false
       })
     },
     // 我的订单数据 页面初始化
@@ -625,13 +631,14 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this.allTicket = false
+          this.unTicketData = response.data.orderList
+          this.unTicketData.forEach(item => {
+            item.checked = false
+          })
+          this.readyOrderLoad = false
         }
-        this.allTicket = false
-        this.unTicketData = response.data.orderList
-        this.unTicketData.forEach(item => {
-          item.checked = false
-        })
-        this.readyOrderLoad = false
       })
     },
     // 我的发票 开票历史 分页切换
@@ -644,10 +651,11 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
-        }
-        this.historyOrderData = response.data.invoiceList
+        } else if (response.status === 0) {
+          this.historyOrderData = response.data.invoiceList
 
-        this.unfinishedOrderLoad = false
+          this.unfinishedOrderLoad = false
+        }
       })
     },
     // 我的发票 tab切换 更新数据
@@ -674,10 +682,11 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this.allCode = false
+          this.codeData = response.data.orderInvitationCodeList
+          this.codeListForm.ordersn = ''
         }
-        this.allCode = false
-        this.codeData = response.data.orderInvitationCodeList
-        this.codeListForm.ordersn = ''
       })
     },
     // 兑换码 兑换详情页的搜索
@@ -704,9 +713,10 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this.recordData = response.data.usedInvitationCodeList
+          this.getCodeListForm.code = ''
         }
-        this.recordData = response.data.usedInvitationCodeList
-        this.getCodeListForm.code = ''
       })
     },
     // 兑换码 获取已经添加的兑换码
@@ -716,8 +726,9 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this.invitationCodeList = response.data.usedInvitationCodeList
         }
-        this.invitationCodeList = response.data.usedInvitationCodeList
       })
     },
     //获取发票详情
@@ -744,8 +755,6 @@ export default {
     },
     // 订单详情
     curriculumPayApply(data) {
-      console.log(334456888)
-
       this.orderForm.ids = persistStore.get('order')
       this.detailMsg = true
       profileHome.curriculumPayApply(this.orderForm).then(response => {
@@ -782,10 +791,11 @@ export default {
             this.responseData.res = response
             this.$bus.$emit('reLoginAlertPop', this.responseData)
             return false
+          } else if (response.status === 0) {
+            this.customerProjectListData = response.data.curriculumProjectList
+            this.customerPagemsg.total = response.data.pageCount
+            this.customer = false
           }
-          this.customerProjectListData = response.data.curriculumProjectList
-          this.customerPagemsg.total = response.data.pageCount
-          this.customer = false
         })
     },
     //自定制项目 分页
@@ -799,8 +809,9 @@ export default {
             this.responseData.res = response
             this.$bus.$emit('reLoginAlertPop', this.responseData)
             return false
+          } else if (response.status === 0) {
+            this.customerProjectListData = response.data.curriculumProjectList
           }
-          this.customerProjectListData = response.data.curriculumProjectList
         })
     },
     //删除自定制项目
@@ -864,14 +875,15 @@ export default {
           this.responseData.res = response
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
+        } else if (response.status === 0) {
+          this._data['pagemsg' + (status + 4)].total =
+            response.data.searchOrderTotal
+          if (status === 1) {
+            this.orderTotal = response.data.orderTotal
+          }
+          this._data['allOrderData' + (status + 4)] = response.data.orderList
+          this.allOrderLoadAll = false
         }
-        this._data['pagemsg' + (status + 4)].total =
-          response.data.searchOrderTotal
-        if (status === 1) {
-          this.orderTotal = response.data.orderTotal
-        }
-        this._data['allOrderData' + (status + 4)] = response.data.orderList
-        this.allOrderLoadAll = false
       })
     }
   },
