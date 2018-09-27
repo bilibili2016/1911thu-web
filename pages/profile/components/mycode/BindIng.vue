@@ -69,7 +69,8 @@ export default {
         base: '/project/projectdetail',
         kid: '',
         type: 1
-      }
+      },
+      responseData: { type: true, res: '' }
     }
   },
   methods: {
@@ -105,6 +106,11 @@ export default {
         })
       } else {
         binding.detectionCode(this.bindForm).then(res => {
+          if (res.status === 100008) {
+            this.responseData.res = res
+            this.$bus.$emit('reLoginAlertPop', this.responseData)
+            return false
+          }
           // 判断兑换码内是否包含已绑定的课程
           if (res.data.is_exist === 1) {
             this.$confirm(
