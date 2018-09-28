@@ -42,7 +42,6 @@ export const getters = {
     return state.productsNum
   }
 }
-
 export const mutations = {
   [MUTATION.signIn](state, { token }) {
     state.token = token
@@ -187,7 +186,8 @@ export const actions = {
       }
     }
     return gid
-  }, //   try { // async setKid({ commit, state }, { kids }) {
+  },
+  //   try { // async setKid({ commit, state }, { kids }) {
   //     let kid = kids
   //     persistStore.set('kid', kid)
   //     commit(MUTATION.setKid, { kid })

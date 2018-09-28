@@ -27,7 +27,7 @@
             <span>{{projectDetail.study_time}}</span> 学时</p>
         </div>
         <div>
-          <h6>学习人数</h6>
+          <h6>已学习人数</h6>
           <p>
             <span>{{projectDetail.study_number}}</span> 人</p>
         </div>
@@ -37,11 +37,11 @@
             <span>{{projectDetail.score}}</span> 分</p>
         </div>
       </div>
-      <div class="changeType fr">
+      <div class="changeType fr" v-if="projectType.types==='1'">
         选择模式:
         <el-button v-for="(course,index) in projectDetail.relationProjectData" :key="index" :class="{'checked':course.select_status}" :disabled="course.id===''" @click="handleLine(course.id)">{{patternArr[index]}}</el-button>
       </div>
-      <div class="fr buy">
+      <div class="fr buy" :class="{buyTop:projectType.types==='2'}">
         <div class="price" v-if="projectDetail.study_type=='1'">
           <i>￥</i>{{projectDetail.present_price}}/人</div>
         <div class="price" v-else>
