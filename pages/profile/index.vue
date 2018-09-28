@@ -7,7 +7,7 @@
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label" class="tabList">
             <i class="icon-home"></i> 我的首页</span>
-          <v-myhome :allCourseLoad="allCourseLoad" :studyData="myCourseData3" :configZero="configZero" :pagemsg3="pagemsg3" :noMsgOne="noMsgOne" @studyDataChange="handleMyCourseChange"></v-myhome>
+          <v-myhome :allCourseLoad="allCourseLoad" :studyData="myCourseData3" :studyProjectData="myProjectData4" :configZero="configZero" :configFive="configFive" :pagemsg3="pagemsg3" :noMsgOne="noMsgOne" :noMsgOnes="noMsgOnes" @studyDataChange="handleMyCourseChange" @studyProjectChange="handleMyProjectChange"></v-myhome>
         </el-tab-pane>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
@@ -153,6 +153,10 @@ export default {
       noMsgOne: {
         type: 'index',
         text: '抱歉，现在还没有学习过的课程呦~'
+      },
+      noMsgOnes: {
+        type: 'index',
+        text: '抱歉，现在还没有学习过的项目呦~'
       },
       noMsgTwo: {
         type: 'myCourse',
@@ -389,11 +393,11 @@ export default {
         pages: 1,
         limits: 12
       },
-      // myProjectPage4: {
-      //   types: 4,
-      //   pages: 1,
-      //   limits: 12
-      // },
+      myProjectPage4: {
+        types: 4,
+        pages: 1,
+        limits: 12
+      },
       myCourseData1: [],
       myCourseData2: [],
       myCourseData3: [],
@@ -427,6 +431,7 @@ export default {
         switch (item.name) {
           case 'tab-first': //我的首页
             this.myCourseDataArr = [3]
+            this.$bus.$emit('activeHome')
             this.handleInitMyCourseData([3])
             break
           case 'tab-second': //我的课程

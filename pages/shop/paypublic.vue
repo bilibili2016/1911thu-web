@@ -134,21 +134,23 @@ export default {
       this.payListForm.orderId = matchSplits('orderID')
       // this.payListForm.attachs = matchSplits('attach')
       wepay.webPay(this.payListForm).then(response => {
-        this.orderDetail = response.data.data.orderDetail
-        this.payForm.orderId = response.data.data.orderDetail.id
-        this.payForm.phones = persistStore.get('phone')
-
-        this.handleConfirm()
+        if (response.status === 0) {
+          this.orderDetail = response.data.data.orderDetail
+          this.payForm.orderId = response.data.data.orderDetail.id
+          this.payForm.phones = persistStore.get('phone')
+          this.handleConfirm()
+        } else {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: res.msg
+          })
+        }
       })
     },
     handleConfirm() {
       paypublic.getPayPublicCode(this.payForm).then(res => {
         if (res.status === 0) {
-          this.$message({
-            showClose: true,
-            type: 'success',
-            message: res.msg
-          })
           this.code = res.data.code
         } else {
           this.$message({
