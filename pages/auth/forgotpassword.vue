@@ -6,36 +6,36 @@
         <div class="logo" @click="goHome">
           <img src="http://papn9j3ys.bkt.clouddn.com/1911-logo.png" alt="">
         </div>
-        <div class="pwd">
-          <span>忘记密码</span>
-        </div>
-        <!-- 忘记密码 -->
-        <el-form :model="fpData" status-icon :rules="formRules" ref="fpData" class="demo-ruleForm">
-          <input type="password" class="hideInput">
-          <el-form-item prop="phones">
-            <!-- 手机号 -->
-            <el-input v-model="fpData.phones" placeholder="请输入手机号"></el-input>
-          </el-form-item>
-          <el-form-item prop="code" class="clearfix">
-            <!-- 验证码 -->
-            <el-input class="captcha" v-model.number="fpData.code" placeholder="请输入短信验证码"></el-input>
-            <div class="getCode" @click="verifyRgTel">{{fpData.getCode}}</div>
-          </el-form-item>
-          <el-form-item prop="password">
-            <!-- 密码 -->
-            <el-input :type="pwdType" v-model="fpData.password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
-            <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
-          </el-form-item>
-          <el-row>
-            <el-button @click.native="forgetPassword">提交</el-button>
-          </el-row>
-          <input type="password" class="hideInput">
+          <div class="pwd">
+            <span>忘记密码</span>
+          </div>
+          <!-- 忘记密码 -->
+          <el-form :model="fpData" status-icon :rules="formRules" ref="fpData" class="demo-ruleForm">
+            <input type="password" class="hideInput">
+            <el-form-item prop="phones">
+              <!-- 手机号 -->
+              <el-input v-model="fpData.phones" placeholder="请输入手机号"></el-input>
+            </el-form-item>
+            <el-form-item prop="code" class="clearfix">
+              <!-- 验证码 -->
+              <el-input class="captcha" v-model.number="fpData.code" placeholder="请输入短信验证码"></el-input>
+              <div class="getCode" @click="verifyRgTel">{{fpData.getCode}}</div>
+            </el-form-item>
+            <el-form-item prop="password">
+              <!-- 密码 -->
+              <el-input :type="pwdType" v-model="fpData.password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
+              <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
+            </el-form-item>
+            <el-row>
+              <el-button @click.native="forgetPassword">提交</el-button>
+            </el-row>
+            <input type="password" class="hideInput">
         </el-form>
-        <div class="otherLogin" @click="otherLogin">返回登录</div>
+            <div class="otherLogin" @click="otherLogin">返回登录</div>
 
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
