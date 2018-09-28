@@ -349,6 +349,10 @@
           margin-top: 30px;
           cursor: pointer;
           float: right;
+          &:hover {
+            background-color: #5f068d;
+            color: #fff;
+          }
         }
       }
     }
