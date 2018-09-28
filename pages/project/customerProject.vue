@@ -69,7 +69,7 @@
           <div class="select-con ">
             <div class="divClick">
               <span @click.stop="handleDaySelect">
-                <el-input placeholder="请选择天数" v-model="projectForm.trainDay" readonly="true"></el-input>
+                <el-input placeholder="请选择天数" v-model="projectForm.trainDay" readonly></el-input>
               </span>
               <span class="pull-down">
                 <i class="el-icon-caret-bottom"></i>
@@ -134,7 +134,7 @@
               <div class="fl">领域分类：</div>
               <div class="fr selectFr">
                 <div @click.stop="handleCollegeSelect">
-                  <el-input placeholder="请选择分类" v-model="projectForm.trainCollege" readonly="true"></el-input>
+                  <el-input placeholder="请选择分类" v-model="projectForm.trainCollege" readonly></el-input>
                   <span class="pull-down">
                     <i class="el-icon-caret-bottom"></i>
                   </span>
@@ -150,7 +150,7 @@
               <div class="fl">课程分类：</div>
               <div class="fr selectFr">
                 <div @click.stop="handleCourseSelect">
-                  <el-input placeholder="请选择分类" v-model="projectForm.trainCourse" readonly="true"></el-input>
+                  <el-input placeholder="请选择分类" v-model="projectForm.trainCourse" readonly></el-input>
                   <span class="pull-down">
                     <i class="el-icon-caret-bottom"></i>
                   </span>
@@ -170,7 +170,7 @@
               <div class="fl ">按课程搜索：</div>
               <div class="fr selectFr ">
                 <div @click.stop="handleSearchSelect ">
-                  <el-input placeholder="请选择分类 " v-model="projectForm.trainSearch " readonly="true"></el-input>
+                  <el-input placeholder="请选择分类 " v-model="projectForm.trainSearch " readonly></el-input>
                   <span class="pull-down ">
                     <i class="el-icon-caret-bottom "></i>
                   </span>
