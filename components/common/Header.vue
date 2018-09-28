@@ -220,32 +220,33 @@ export default {
           message(this, 'error', res.msg)
           this.bindForm.isBind = false
           return false
-        } else {
+        } else if (res.status === 100008) {
           this.bindForm.isBind = false
           this.isSingleLogin(res)
           return false
-        }
-        // 判断兑换码内是否包含已绑定的课程
-        if (res.data.is_exist === 1) {
-          this.$confirm(
-            '该兑换码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
-            {
-              confirmButtonText: '取消',
-              cancelButtonText: '坚持绑定',
-              closeOnHashChange: false,
-              // type: 'warning',
-              center: true
-            }
-          )
-            .then(() => {
-              message(this, 'info', '已取消绑定')
-            })
-            .catch(() => {
-              // 添加绑定课程
-              this.handleBind()
-            })
         } else {
-          this.handleBind()
+          // 判断兑换码内是否包含已绑定的课程
+          if (res.data.is_exist === 1) {
+            this.$confirm(
+              '该兑换码所包含商品与已购商品重复，如继续绑定，重复商品将进行有效时间累加。',
+              {
+                confirmButtonText: '取消',
+                cancelButtonText: '坚持绑定',
+                closeOnHashChange: false,
+                // type: 'warning',
+                center: true
+              }
+            )
+              .then(() => {
+                message(this, 'info', '已取消绑定')
+              })
+              .catch(() => {
+                // 添加绑定课程
+                this.handleBind()
+              })
+          } else {
+            this.handleBind()
+          }
         }
       })
     },
