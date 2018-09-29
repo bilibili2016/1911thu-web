@@ -8,7 +8,7 @@
         </el-tab-pane>
         <!-- 我的课程 已完成 -->
         <el-tab-pane label="项目学习" name="second" value="2">
-          <v-cardtab :data="studyProjectData" :config="configFive" :pagemsg="pagemsg3" :noMsg="noMsgOnes" @pageChange="studyProjectChange"></v-cardtab>
+          <v-cardtab :data="studyProjectData" :config="configFive" :pagemsg="myProjectPage" :noMsg="noMsgOnes" @pageChange="studyProjectChange"></v-cardtab>
         </el-tab-pane>
       </el-tabs>
     </el-card>
@@ -27,6 +27,7 @@ export default {
     'noMsgOne',
     'allCourseLoad',
     'pagemsg3',
+    'myProjectPage',
     'noMsgOnes',
     'studyProjectData',
     'configFive'

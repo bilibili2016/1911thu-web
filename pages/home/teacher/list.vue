@@ -73,6 +73,7 @@ export default {
       list.getTeacherList(this.teacherForm).then(response => {
         this.pagemsg.total = Number(response.data.pageCount)
         this.famousList = response.data.teacherList
+        document.body.scrollTop = document.documentElement.scrollTop = 0
       })
     }
   }
