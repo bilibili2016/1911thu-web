@@ -6,7 +6,7 @@
         <!-- 发票订单列表 -->
         <div class="orderList" v-for="(courseList, index ) in ticketOrderData" :key="index">
           <div class="topBar clearfix">
-            <span class="fl">订单：{{courseList.order_sn}}</span>
+            <span class="fl">订单号：{{courseList.order_sn}}</span>
             <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
           </div>
           <div class="list">

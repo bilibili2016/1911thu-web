@@ -16,9 +16,11 @@
       line-height: 92px;
       height: 92px;
       font-size: 16px;
-      i {
-        color: #ff5f5f;
-      }
+    }
+    .orderInfo {
+      font-size: 18px;
+      color: #773084;
+      line-height: 95px;
     }
     .container {
       width: 1100px;
@@ -32,6 +34,25 @@
         color: #222;
         padding: 0 30px;
         border-bottom: 1px solid #e8d6f7;
+      }
+      .orderId {
+        font-size: 20px;
+        .left {
+          float: left;
+          font-size: 16px;
+          .num {
+            color: #773084;
+            // font-size: 20px;
+          }
+        }
+        .right {
+          float: right;
+          color: #fd0e19;
+          font-size: 16px;
+        }
+      }
+      .con-title {
+        padding-left: 0;
       }
       .pay {
         padding: 0 30px 20px;

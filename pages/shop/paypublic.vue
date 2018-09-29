@@ -1,13 +1,16 @@
 <template>
   <div class="payPublic">
     <div class="contain">
-      <h3 class="clearfix">订单提交成功，请尽快付款！订单号：{{orderDetail.order_sn}}
-        <span class="fr">应付金额
-          <i>{{orderDetail.order_amount}}</i>元</span>
-      </h3>
+      <h3 class="clearfix orderInfo">订单提交成功，请尽快付款！</h3>
       <div class="container">
         <!-- <h4>线下汇款（到账周期为3个工作日)</h4> -->
-        <h4>1911学堂收款信息</h4>
+        <!-- <h4>1911学堂收款信息</h4> -->
+        <h4 class="clearfix orderId">
+          <span class="left">订单号：
+            <span class="num">{{orderDetail.order_sn}}</span>
+          </span>
+          <span class="right">应付金额：¥{{orderDetail.order_amount}}</span>
+        </h4>
         <div class="pay" v-show="!showPay">
           <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
           <p>确认后，请在7天内付清款项，超过10天未对账系统自动会取消订单。到账周期为3个工作日。</p>
@@ -29,7 +32,7 @@
               </p>
             </div>
             <h6>
-              <i class="el-icon-warning"></i>注意事项：汇款时需要注意以下信息，请牢记！</h6>
+              <i class="el-icon-warning"></i>&nbsp;&nbsp;注意事项：汇款时需要注意以下信息，请牢记！</h6>
             <div class="warn">
               <p>1. 您的汇款识别码为:{{code}}，线下公司转账需将此汇款识别码填写至电汇凭证的【汇款用途】、【附言】、【摘要】栏内，汇款识别码组成：（XT+订单号）。 （提醒：因不同银行备注字段不同，最好是将所有的可填写备注的地方都填写上汇款识别码）。 </p>
               <p>2. 线下公司转账订单，一个识别码对应一个订单和相应的金额，请勿多转账或者少转账。</p>
@@ -37,16 +40,17 @@
             </div>
           </div>
           <div v-show="true">
-            <h6 style="margin-top:0">
-              <i class="el-icon-warning"></i>注意事项：请在汇款用途、附言或摘要栏内填上对应的订单号</h6>
+            <h4 class="con-title">1911学堂收款信息</h4>
             <div class="account">
-              <p>户名：一九一一未来教育科技(北京)有限公司</p>
-              <p>账户：8110701013101386732</p>
+              <p>户&nbsp;&nbsp;&nbsp;名：一九一一未来教育科技（北京）有限公司</p>
               <p>开户行：中信银行北京海淀支行</p>
-              <p>联行号：302100011155</p>
+              <p>账&nbsp;&nbsp;&nbsp;号：8110701013101386732</p>
+              <p>联行号：302100011155（非必填项）</p>
               <!-- <p>汇付识别码：{{code}}</p> -->
               <!-- <p>订单号：{{orderDetail.order_sn}}</p> -->
             </div>
+            <h6 style="margin-top:0">
+              <i class="el-icon-warning"></i>&nbsp;&nbsp;注意事项：请在汇款用途、附言或摘要栏内填上对应的订单号</h6>
           </div>
           <!-- <div class="confirmBtn" @click="handleConfirm">确定</div> -->
         </div>

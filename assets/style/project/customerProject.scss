@@ -55,11 +55,11 @@
     background-size: 1115px 291px;
     background-position: center center;
     .pro-title {
-      padding-top: 130px;
+      padding-top: 120px;
       font-size: 24px;
       color: #4449fc;
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
     .pro-step {
       width: 880px;
@@ -91,7 +91,10 @@
     }
     .pro-text {
       font-size: 14px;
+      line-height: 20px;
       color: #222;
+      width: 730px;
+      margin: 0 auto;
     }
   }
   .title {
