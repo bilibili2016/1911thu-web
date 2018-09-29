@@ -277,6 +277,9 @@ export default {
             '',
             1
           )
+          if (this.playVideo) {
+            this.playVideo = false
+          }
         }
       }, 1000)
       this.changePlayImg(this.playImg, this.playerForm.catalogId)

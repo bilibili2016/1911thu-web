@@ -242,6 +242,9 @@ export default {
             this.projectForm.ids,
             2
           )
+          if (this.playVideo) {
+            this.playVideo = false
+          }
         }
       }, 1000)
       this.changePlayImg(this.playImg, this.playerForm.catalogId)
@@ -264,6 +267,7 @@ export default {
       ) {
         this.playerEnded()
       } else {
+        this.playVideo = false
         return false
       }
     },
