@@ -55,7 +55,13 @@
                       <div class="line-center" v-if="cp==='0'&&card.is_free === '1'">
                         <p class="price freePrise">￥{{card.present_price}}</p>
                       </div>
-                      <div class="line-center" v-else>
+                      <div class="line-center" v-if="!isIndex&&card.is_free === '2'">
+                        <p class="freePrise">免费</p>
+                      </div>
+                      <div class="line-center" v-if="isIndex&&card.is_free === '1'">
+                        <p class="freePrise">￥{{card.present_price}}</p>
+                      </div>
+                      <div class="line-center" v-if="isIndex&&card.is_free === '2'">
                         <p class="freePrise">免费</p>
                       </div>
                     </div>

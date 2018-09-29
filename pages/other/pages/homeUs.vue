@@ -80,9 +80,4 @@ export default {
   }
 }
 </script>
-<style  lang="scss">
-.contentInfo p {
-  display: inline !important;
-}
-</style>
 
