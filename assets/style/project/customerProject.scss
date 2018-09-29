@@ -394,8 +394,11 @@
               border-bottom: none;
             }
             .courseTitle {
-              width: 35%;
+              width: 40%;
               float: left;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
             }
             .time {
               width: 15%;
@@ -408,7 +411,7 @@
               text-align: center;
             }
             .operater {
-              width: 35%;
+              width: 30%;
               float: left;
               text-align: right;
               color: #cd1f1f;
@@ -419,7 +422,7 @@
           }
           .courseItem {
             .courseTitle {
-              width: 35%;
+              width: 40%;
               float: left;
             }
             .time {
@@ -433,7 +436,7 @@
               text-align: center;
             }
             .num {
-              width: 15%;
+              width: 10%;
               float: left;
               text-align: center;
             }
