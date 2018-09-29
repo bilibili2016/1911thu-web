@@ -169,19 +169,19 @@ const config = {
           screw_ie8: false
         }
       })
-    ]
-    // extend(config, { isDev, isClient }) {
-    //   // 可以在此观察、修改 webpack 配置
-
-    //   if (isDev && isClient) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     })
-    //   }
-    // }
+    ],
+    extend(config, { isDev, isClient }) {
+      console.log(config)
+      // 可以在此观察、修改 webpack 配置
+      // if (isDev && isClient) {
+      //   config.module.rules.push({
+      //     enforce: 'pre',
+      //     test: /\.(js|vue)$/,
+      //     loader: 'eslint-loader',
+      //     exclude: /(node_modules)/
+      //   })
+      // }
+    }
   }
 }
 

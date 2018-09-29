@@ -62,9 +62,9 @@ if (isIE(8)) {
 }
 // ...
 if (isIE(9)) {
-  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
-  // if (process.client) {
-  //   console.log('process.client')
-  //   window.history.replaceState = window.history.replaceState || function() {}
-  // }
+  // window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+  if (process.client) {
+    console.log('process.client111')
+    window.history.replaceState = window.history.replaceState || function() {}
+  }
 }

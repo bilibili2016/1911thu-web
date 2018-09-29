@@ -90,24 +90,28 @@ export default {
     handleTicketPopup(id) {
       let ticketId = { ID: id }
       ticketHistory.invoiceOrderDetail(ticketId).then(response => {
+        document.getElementsByClassName('el-tabs__content')[7].style.position = '-ms-page'
         this.isTicketPopup = true
         this.TicketPopupData = response.data.invoiceOrderList
       })
     },
     //关闭开票详情弹框
     closeTicketPopup() {
+      document.getElementsByClassName('el-tabs__content')[7].style.position = 'relative'
       this.isTicketPopup = false
     },
     //发票详情弹框
     handleStatusPopup(id) {
       let invoiceID = { ID: id }
       ticketHistory.invoiceDetail(invoiceID).then(response => {
+        document.getElementsByClassName('el-tabs__content')[7].style.position = '-ms-page'
         this.isStatusPopup = true
         this.StatusPopupData = response.data
       })
     },
     //关闭
     closeStatusPopup() {
+      document.getElementsByClassName('el-tabs__content')[7].style.position = 'relative'
       this.isStatusPopup = false
     },
     goCourseInfo(item, index) {

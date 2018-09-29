@@ -66,7 +66,8 @@ export default {
           })
           this.$emit('chengeItem')
           this.$emit('getUnTicketData')
-          this.confirmInvoice = false
+          this.confirmInvoice = false 
+          document.getElementsByClassName('el-tabs__content')[7].style.position = 'relative'
           this.$bus.$emit('historyOrderDataChange', 1)
         } else {
           this.$message({
@@ -85,12 +86,14 @@ export default {
     // 关闭当前提交框
     close() {
       this.confirmInvoice = false
+      document.getElementsByClassName('el-tabs__content')[7].style.position = 'relative'
     }
   },
   mounted() {
     this.$bus.$on('showConfirm', data => {
       this.ticketForm = data
       this.confirmInvoice = true
+      document.getElementsByClassName('el-tabs__content')[7].style.position = '-ms-page'
     })
     this.price = Number(this.price)
     if (this.price < 200) {

@@ -178,6 +178,10 @@ export default {
     // 展示修改发票信息弹框
     showIoc() {
       if (this.checkedArr.length > 0) {
+        console.log(document.getElementsByClassName('el-tabs__content')[7]);
+        document.getElementsByClassName('el-tabs__content')[7].style.position = '-ms-page'
+        
+        // document.getElementById('pane-tab-eighth').childNodes('el-tabs__content').style.position = '-ms-page'
         this.showInvoice = true
         // this.getTicket()
       } else {
@@ -211,6 +215,10 @@ export default {
     close() {
       this.showInfo = false
       this.showInvoice = false
+      document.getElementsByClassName('el-tabs__content')[7].style.position = 'relative'
+      console.log( document.getElementById('pane-tab-eighth').childNodes);
+      
+      // document.getElementById('pane-tab-eighth').childNodes('el-tabs__content').style.position = 'relative'
     },
     //课程详情
     goCourseInfo(item, index) {
