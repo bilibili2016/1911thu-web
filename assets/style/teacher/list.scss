@@ -1,3 +1,8 @@
 .news-list .shadow {
   box-shadow: none;
 }
+.news-list.teacherList {
+  .teacherList-img {
+    border-radius: 80px;
+  }
+}
