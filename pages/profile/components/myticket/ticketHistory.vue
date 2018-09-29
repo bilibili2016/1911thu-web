@@ -96,7 +96,7 @@ export default {
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
         }
-        document.getElementsByClassName('el-tabs__content')[7].style.position =
+        document.getElementsByClassName('el-tabs__content')[8].style.position =
           '-ms-page'
         this.isTicketPopup = true
         this.TicketPopupData = response.data.invoiceOrderList
@@ -104,7 +104,7 @@ export default {
     },
     //关闭开票详情弹框
     closeTicketPopup() {
-      document.getElementsByClassName('el-tabs__content')[7].style.position =
+      document.getElementsByClassName('el-tabs__content')[8].style.position =
         'relative'
       this.isTicketPopup = false
     },
@@ -117,7 +117,7 @@ export default {
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
         }
-        document.getElementsByClassName('el-tabs__content')[7].style.position =
+        document.getElementsByClassName('el-tabs__content')[8].style.position =
           '-ms-page'
         this.isStatusPopup = true
         this.StatusPopupData = response.data
@@ -125,7 +125,7 @@ export default {
     },
     //关闭
     closeStatusPopup() {
-      document.getElementsByClassName('el-tabs__content')[7].style.position =
+      document.getElementsByClassName('el-tabs__content')[8].style.position =
         'relative'
       this.isStatusPopup = false
     },
