@@ -22,10 +22,6 @@ import { open } from '@/lib/util/helper'
 export default {
   methods: {
     handleLink() {
-      // let urlLink = {
-      //   base: '/other/pages/homeUs'
-      // }
-      // open(urlLink)
       window.open(window.location.origin + '/other/pages/homeUs')
     },
     handleClick() {

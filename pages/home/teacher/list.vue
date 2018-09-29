@@ -1,5 +1,5 @@
 <template>
-  <div class="news-list" v-loading="loading">
+  <div class="news-list teacherList" v-loading="loading">
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow teacherList">
       <div @click="getNewInfoList"></div>
