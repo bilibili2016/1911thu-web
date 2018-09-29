@@ -6,7 +6,7 @@
       <h4>{{item.system_name}}</h4>
       <div class="course">
         <div class="courseOne clearfix" v-for="(course,index) in item.curriculumList" :key="index">
-          <img class="fl" :src="course.teacher_head_img" alt="" @click="goCourseDetail(course)">
+          <img class="fl course-img" :src="course.teacher_head_img" alt="" @click="goCourseDetail(course)">
           <div class="fl" @click="goCourseDetail(course)">
             <h5>{{course.title}}</h5>
             <h6>{{course.teacher_name}} {{course.teacher_graduate}}</h6>
@@ -14,13 +14,13 @@
           </div>
           <img class="fr" src="http://papn9j3ys.bkt.clouddn.com/projectCoursePlay.png" alt="" @click="goProjectPlayer()">
         </div>
-        </div>
-      </div>
-      <div class="noData" v-else>
-        <img src="http://papn9j3ys.bkt.clouddn.com/noMsg.png" alt="">
-        <p>还没有评论，快去抢沙发！</p>
       </div>
     </div>
+    <div class="noData" v-else>
+      <img src="http://papn9j3ys.bkt.clouddn.com/noMsg.png" alt="">
+      <p>还没有评论，快去抢沙发！</p>
+    </div>
+  </div>
 </template>
 
 <script>

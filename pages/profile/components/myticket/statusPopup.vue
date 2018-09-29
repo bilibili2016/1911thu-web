@@ -14,7 +14,7 @@
                     <div class="bottom">
                         <span>收件人：{{data.consignee}}</span>
                         <span>电话：{{data.phone}}</span>
-                        <span>地址：{{data.address}}</span>
+                        <span>地址：{{data.province_name+data.city_name+data.area_name+data.address}}</span>
                     </div>
                 </div>
                 <div class="item-two">

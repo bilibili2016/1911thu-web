@@ -22,6 +22,12 @@
         height: 158px;
         margin-bottom: 20px;
         background: rgba(250, 250, 250, 1);
+        .course-img {
+          display: inline-block;
+          width: 80px;
+          height: 80px;
+          border-radius: 40px;
+        }
         &:last-child {
           margin-bottom: 0;
         }
