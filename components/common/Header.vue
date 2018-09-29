@@ -1,5 +1,6 @@
 <template>
   <div class="headerBox">
+    <!-- 测试 123 -->
     <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
