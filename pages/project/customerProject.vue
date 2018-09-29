@@ -14,11 +14,11 @@
       <div class="pro-step clearfix">
         <span class="step">1.填写项目定制信息</span>
         <span class="arrow"><img :src="imgUlr" alt=""></span>
-          <span class="step">2.立即购买</span>
-          <span class="arrow"><img :src="imgUlr" alt=""></span>
-            <span class="step">3.支付</span>
-            <span class="arrow"><img :src="imgUlr" alt=""></span>
-              <span class="step step4">4.直接学习或绑定兑换码后学习</span>
+        <span class="step">2.立即购买</span>
+        <span class="arrow"><img :src="imgUlr" alt=""></span>
+        <span class="step">3.支付</span>
+        <span class="arrow"><img :src="imgUlr" alt=""></span>
+        <span class="step step4">4.直接学习或绑定兑换码后学习</span>
       </div>
       <div class="pro-text">
         自定制项目是您所在单位的专属项目，不对其他单位展示。除项目定制者之外，其余人员需绑定兑换码才能观看项目。
@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-      <div class="con-item style day clearfix" v-if="projectForm.styleRadio==='2'">
+      <div class="con-item style day clearfix" v-if="projectForm.styleRadio!=='1'">
         <div class="fl">线下培训天数：</div>
         <div class="fr selectFr">
           <div class="select-con ">
@@ -229,7 +229,7 @@
               <div class="total ">= {{onlineTotalPrice.toFixed(2)}}元</div>
             </div>
             <!-- 线下课程（培训方式为线上+线上显示） -->
-            <div class="deItem courseItem clearfix " v-if="projectForm.styleRadio==='2' ">
+            <div class="deItem courseItem clearfix " v-if="projectForm.styleRadio!=='1' ">
               <div class="courseTitle ">线下课程</div>
               <div class="time ">{{projectForm.trainDay*offlineRangeTime}}学时</div>
               <div class="price ">{{projectForm.offlinePrice}}元/天</div>
@@ -342,7 +342,7 @@ export default {
     },
     //计算自定制项目总价钱
     totalPrice() {
-      if (this.projectForm.styleRadio === '2') {
+      if (this.projectForm.styleRadio !== '1') {
         //线上+线下
         this.projectForm.totalPrice =
           this.projectForm.offlineTotalPrice + this.projectForm.onlineTotalPrice
@@ -440,7 +440,7 @@ export default {
         if (this.projectForm.trainNum === '') throw '请输入培训人数'
         if (this.projectForm.styleRadio === '') throw '请选择培训方式'
         if (
-          this.projectForm.styleRadio === '2' &&
+          this.projectForm.styleRadio !== '1' &&
           this.projectForm.trainDay === ''
         ) {
           throw '请选择线下培训天数'
@@ -470,7 +470,7 @@ export default {
       }
 
       //线上课程，线下培训天数参数置空
-      if (this.projectForm.styleRadio === '2') {
+      if (this.projectForm.styleRadio !== '1') {
         this.projectForm.trainDay = this.projectForm.trainDay
       } else {
         this.projectForm.trainDay = ''
@@ -694,7 +694,9 @@ export default {
             this.projectForm.desc = data.introduction //项目简介
             this.projectForm.styleRadio = data.study_type //培训方式
             this.checkedCourseData = data.curriculumList //已选课程
-            this.projectForm.trainDay = data.offline_days //线下培训天数
+            this.projectForm.trainDay =
+              parseFloat(data.offline_days) == 0 ? '' : data.offline_days //线下培训天数
+
             this.projectForm.trainNum = data.study_persion_number //培训人数
             this.projectForm.objRadio = data.study_object //培训对象
             this.courseComputed()
