@@ -178,7 +178,7 @@ export default {
     // 展示修改发票信息弹框
     showIoc() {
       if (this.checkedArr.length > 0) {
-        document.getElementsByClassName('el-tabs__content')[7].style.position =
+        document.getElementsByClassName('el-tabs__content')[8].style.position =
           '-ms-page'
         this.showInvoice = true
         // this.getTicket()
@@ -211,7 +211,7 @@ export default {
     },
     // 关闭表单
     close() {
-      document.getElementsByClassName('el-tabs__content')[7].style.position =
+      document.getElementsByClassName('el-tabs__content')[8].style.position =
         'relative'
       this.showInfo = false
       this.showInvoice = false
