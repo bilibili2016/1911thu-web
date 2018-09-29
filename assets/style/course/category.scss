@@ -47,6 +47,12 @@
             // padding: 10px 20px;
             background-color: #773084;
           }
+          &:hover {
+            .el-button {
+              background-color: #5f068d;
+              color: #fff;
+            }
+          }
         }
       }
       .title {
@@ -73,6 +79,12 @@
           cursor: pointer;
           span {
             background-color: #773084;
+          }
+          &:hover {
+            .el-button {
+              background-color: #5f068d;
+              color: #fff;
+            }
           }
         }
       }

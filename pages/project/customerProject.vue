@@ -53,6 +53,16 @@
           <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio>
           <el-radio v-model="projectForm.styleRadio" label="2">混合</el-radio>
           <el-radio v-model="projectForm.styleRadio" label="3">互动</el-radio>
+          <i class="el-icon-question styleAsk">
+            <div class="descript-text">
+              <div>
+                <p>纯线上：完全在线学习</p>
+                <p>混合式：线上为主，线下为辅</p>
+                <p>互动式：线下为主，线上为辅</p>
+
+              </div>
+            </div>
+          </i>
         </div>
       </div>
       <div class="con-item num clearfix">
@@ -77,46 +87,49 @@
             </div>
             <span>
               <span class="price">{{projectForm.offlinePrice}}</span>元/天
-              <i class="el-icon-question priceAsk" @click.stop="handledesc"></i>
+              <i class="el-icon-question priceAsk" @click.stop="handledesc">
+
+                <div class="descript-text">
+                  <div v-if="projectForm.objRadio === '1'">
+                    <p>
+                      <span>1-50人：</span>
+                      <span>{{one.number_50}}</span>元/天
+                    </p>
+                    <p>
+                      <span>51-80人：</span>
+                      <span>{{one.number_80}}</span>元/天
+                    </p>
+                    <p>
+                      <span>81-100人：</span>
+                      <span>{{one.number_100}}</span>元/天
+                    </p>
+                    <p>
+                      <span>100人以上：</span>
+                      <span>{{one.number_more}}</span>元/天，具体费用请与工作人员联系
+                    </p>
+                  </div>
+                  <div v-else>
+                    <p>
+                      <span>1-50人：</span>
+                      <span>{{two.number_50}}</span>元/天
+                    </p>
+                    <p>
+                      <span>51-80人：</span>
+                      <span>{{two.number_80}}</span>元/天
+                    </p>
+                    <p>
+                      <span>81-100人：</span>
+                      <span>{{two.number_100}}</span>元/天
+                    </p>
+                    <p>
+                      <span>100人以上：</span>
+                      <span>{{two.number_more}}</span>元/天，具体费用请与工作人员联系
+                    </p>
+                  </div>
+                </div>
+
+              </i>
             </span>
-          </div>
-          <div class="descript-text" v-show="showDesc">
-            <div v-if="projectForm.objRadio === '1'">
-              <p>
-                <span>1-50人：</span>
-                <span>{{one.number_50}}</span>元/天
-              </p>
-              <p>
-                <span>51-80人：</span>
-                <span>{{one.number_80}}</span>元/天
-              </p>
-              <p>
-                <span>81-100人：</span>
-                <span>{{one.number_100}}</span>元/天
-              </p>
-              <p>
-                <span>100人以上：</span>
-                <span>{{one.number_more}}</span>元/天，具体费用请与工作人员联系
-              </p>
-            </div>
-            <div v-else>
-              <p>
-                <span>1-50人：</span>
-                <span>{{two.number_50}}</span>元/天
-              </p>
-              <p>
-                <span>51-80人：</span>
-                <span>{{two.number_80}}</span>元/天
-              </p>
-              <p>
-                <span>81-100人：</span>
-                <span>{{two.number_100}}</span>元/天
-              </p>
-              <p>
-                <span>100人以上：</span>
-                <span>{{two.number_more}}</span>元/天，具体费用请与工作人员联系
-              </p>
-            </div>
           </div>
 
           <div class="pull-down-text" v-if="isShowDaySelect">
@@ -202,6 +215,10 @@
             </div>
 
           </div>
+        </div>
+        <div class="deatil-item clearfix ">
+          <div class="detail-title ">选择线下课程</div>
+          <div class=" ">学堂会根据您的需求及所选线上课程内容，为您合理设计体系化的线下课程安排。</div>
         </div>
         <div class="deatil-item clearfix ">
           <div class="detail-title ">已选课程</div>

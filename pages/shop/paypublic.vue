@@ -51,6 +51,7 @@
             </div>
             <h6 style="margin-top:0">
               <i class="el-icon-warning"></i>&nbsp;&nbsp;注意事项：请在汇款用途、附言或摘要栏内填上对应的订单号</h6>
+            <div style="margin-top:10px">收到汇款后我们将与您取得联系,详细沟通项目方案、确定具体安排,并为您开具发票!</div>
           </div>
           <!-- <div class="confirmBtn" @click="handleConfirm">确定</div> -->
         </div>
