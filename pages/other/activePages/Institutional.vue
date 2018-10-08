@@ -21,7 +21,7 @@
           </div>
             <div class="con-text">
               <div class="first text clearfix">
-                <div class="left">我们的使命和承诺</div>
+                <div class="left">我们的理念</div>
                 <div class="right">源自清华、面向世界，博学笃行、人文日新。</div>
                 <div class="con-shadow"></div>
               </div>

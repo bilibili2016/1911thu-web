@@ -73,6 +73,13 @@
         &.default {
           color: #773084;
         }
+        &.oneLine {
+          width: 700px;
+          height: 50px;
+          line-height: 50px;
+          overflow: hidden;
+          vertical-align: middle;
+        }
       }
     }
   }

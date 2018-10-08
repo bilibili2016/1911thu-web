@@ -24,15 +24,15 @@
       </li>
       <li>
         <span>邮箱：</span>
-        <span>{{psnForm.email}}</span>
+        <span class="oneLine">{{psnForm.email}}</span>
       </li>
       <li>
         <span>手机号：</span>
         <span class="default">{{psnForm.user_name}}</span>
       </li>
       <li>
-        <span>单位信息：</span>
-        <span class="default">{{psnForm.company_name}}</span>
+        <span>单位名称：</span>
+        <span class="default oneLine">{{psnForm.company_name}}</span>
       </li>
     </ul>
   </div>
