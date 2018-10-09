@@ -14,11 +14,11 @@
       <div class="pro-step clearfix">
         <span class="step">1.填写项目定制信息</span>
         <span class="arrow"><img :src="imgUlr" alt=""></span>
-          <span class="step">2.立即购买</span>
-          <span class="arrow"><img :src="imgUlr" alt=""></span>
-            <span class="step">3.支付</span>
-            <span class="arrow"><img :src="imgUlr" alt=""></span>
-              <span class="step step4">4.直接学习或绑定兑换码后学习</span>
+        <span class="step">2.立即购买</span>
+        <span class="arrow"><img :src="imgUlr" alt=""></span>
+        <span class="step">3.支付</span>
+        <span class="arrow"><img :src="imgUlr" alt=""></span>
+        <span class="step step4">4.直接学习或绑定兑换码后学习</span>
       </div>
       <div class="pro-text">
         自定制项目是您所在单位的专属项目，不对其他单位展示。除项目定制者之外，其余人员需绑定兑换码才能观看项目。如有任何问题，请拨打咨询电话：010-62701911
