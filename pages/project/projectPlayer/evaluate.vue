@@ -110,7 +110,8 @@ export default {
             type: 'warning',
             message: response.msg
           })
-        } else {
+          this.closeEvaluate(false)
+        } else if (response.status === 0) {
           this.addEvaluateForm.tag = []
           for (let item of this.btnData) {
             this.$set(item, 'isCheck', false)
@@ -121,8 +122,8 @@ export default {
             type: 'success',
             message: response.msg
           })
+          this.closeEvaluate(true)
         }
-        this.closeEvaluate(true)
       })
     },
     // 获取评论tag
