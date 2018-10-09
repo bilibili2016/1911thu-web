@@ -259,6 +259,7 @@
         color: #cd1f1f;
       }
       .priceAsk {
+        color: #aaa;
         font-size: 20px;
         cursor: pointer;
         &:hover {
@@ -296,6 +297,7 @@
         font-size: 20px;
         margin-left: 10px;
         cursor: pointer;
+        color: #aaa;
         &:hover {
           .descript-text {
             display: block;
