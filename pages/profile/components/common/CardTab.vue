@@ -16,6 +16,7 @@ import CustomList from '@/pages/profile/components/common/List.vue'
 import CardTab from '@/pages/profile/components/common/CardTab.vue'
 export default {
   props: ['data', 'config', 'pagemsg', 'noMsg', 'allLoad'],
+
   components: {
     'v-nomsg': NoMsg,
     'v-list': CustomList,
