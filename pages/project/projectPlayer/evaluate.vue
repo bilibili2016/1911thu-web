@@ -2,7 +2,7 @@
   <div class="evaluate" v-show="showEvaluate">
     <div class="note">
       <h4>项目评价
-        <i class="el-icon-close fr" @click="closeEvaluate"></i>
+        <i class="el-icon-close fr" @click="closeEvaluate(false)"></i>
       </h4>
       <h5>请问该课程对您有帮忙吗？快来评个分吧！</h5>
       <h6>项目评分：
