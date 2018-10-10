@@ -40,6 +40,11 @@ export default {
         kid: null,
         bid: '',
         page: 0
+      },
+      projectDetail: {
+        base: '/project/projectdetail',
+        kid: null,
+        type: 1
       }
     }
   },
@@ -48,13 +53,17 @@ export default {
     handleLink(img) {
       // jump_type = 0  普通跳转 根据jump_url地址跳转
       // jump_type = 1  跳转至课程详情 jump_id 课程id
-      // jump_type = 2  跳转至专题详情 jump_id 专题id
+      // jump_type = 2  跳转至项目详情 jump_id 项目id
       if (img.jump_type == '0' && img.jump_url != '') {
         window.open(img.jump_url)
       }
       if (img.jump_type == '1' && img.jump_id != '') {
         this.courseDetail.kid = img.jump_id
         open(this.courseDetail)
+      }
+      if (img.jump_type == '2' && img.jump_id != '') {
+        this.projectDetail.kid = img.jump_id
+        open(this.projectDetail)
       }
     },
     goDetail(news) {

@@ -22,7 +22,7 @@ config.analyze = {
       async: true
     },
     {
-      src: 'https://g.alicdn.com/de/prismplayer/2.7.2/aliplayer-h5-min.js',
+      src: 'http://pcgdozq49.bkt.clouddn.com/aliplayer-h5-min.js',
       async: true
     },
     {
@@ -30,7 +30,8 @@ config.analyze = {
       async: true
     },
     {
-      src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
+      // src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
+      src: 'http://pcgdozq49.bkt.clouddn.com/socket.io.js',
       async: true
     }
   ]),

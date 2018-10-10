@@ -177,7 +177,7 @@
         z-index: 1000;
       }
       .prism-big-play-btn {
-        display: none !important;
+        visibility: hidden;
         left: 50% !important;
         top: 50%;
         margin-left: -32px;

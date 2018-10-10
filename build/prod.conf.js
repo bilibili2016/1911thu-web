@@ -29,14 +29,14 @@ config.sentry = {
       async: true
     },
     {
-      src: 'https://g.alicdn.com/de/prismplayer/2.7.2/aliplayer-h5-min.js',
+      src: 'http://pcgdozq49.bkt.clouddn.com/aliplayer-h5-min.js',
       async: true
     },
     {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
     },
-    { src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js', async: true }
+    { src: 'http://pcgdozq49.bkt.clouddn.com/socket.io.js', async: true }
   ]),
   (config.render = { resourceHints: false })
 

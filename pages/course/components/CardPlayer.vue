@@ -1,5 +1,5 @@
 <template>
-  <div class="playInner cardPlayer" ref="playInner" @dblclick="dblclick">
+  <div class="playInner cardPlayer" ref="playInner" @click="playMedia" @dblclick="dblclick">
     <div id="mediaPlayer" ref="mediaPlayer"></div>
     <!-- 播放按钮 -->
     <div class="playVideo" v-show="playVideo" @click="action" ref="playVideo"></div>
@@ -25,6 +25,7 @@ export default {
   },
   data() {
     return {
+      clickTime: '',
       node: '',
       showError: false,
       playerForm: {
@@ -238,6 +239,8 @@ export default {
         // 跳转到指定位置之后 把播放记录清零
         this.playerForm.seek = 0
       }
+      // 增加空格，上下左右键盘操作视频
+      this.keyboard()
     },
     // 播放开始--启动计时器
     playerPlay() {
@@ -353,19 +356,87 @@ export default {
         message(this, 'warning', '已经是最后一节了！')
       }
     },
+    // 点击播放器进行播放或暂停
+    playMedia(item) {
+      clearTimeout(this.clickTime)
+      this.clickTime = setTimeout(() => {
+        // 如果点击的当前这个标签是 mediaPlayer 才执行
+        if (this.player && item.path[1].id == 'mediaPlayer') {
+          if (this.playVideo) {
+            this.player.play()
+          } else {
+            this.player.pause()
+          }
+        }
+      }, 300)
+    },
     // 双击视频 全屏
-    dblclick() {
-      // 暂时不开放
-      return false
+    dblclick(item) {
+      clearTimeout(this.clickTime)
       // 检测播放器是否存在
-      if (this.player) {
+      if (this.player && item.path[1].id == 'mediaPlayer') {
         // 判断当前播放器是否为全屏状态
         if (this.player.fullscreenService.getIsFullScreen()) {
+          let bigPlay = document.getElementsByClassName('prism-big-play-btn')[0]
+          bigPlay.style.visibility = 'hidden'
           this.player.fullscreenService.cancelFullScreen()
         } else {
+          let bigPlay = document.getElementsByClassName('prism-big-play-btn')[0]
+          bigPlay.style.visibility = 'visible'
           this.player.fullscreenService.requestFullScreen()
         }
       }
+    },
+    // 增加空格，上下左右键盘操作视频
+    keyboard() {
+      let man = this
+      window.onkeydown = function(e) {
+        if (!man.player.fullscreenService.getIsFullScreen()) {
+          return false
+        }
+        // 空格 播放暂停
+        if (e.keyCode == 32) {
+          if (man.player) {
+            if (man.playVideo) {
+              man.player.play()
+            } else {
+              man.player.pause()
+            }
+          }
+        }
+        if (e.keyCode == 37) {
+          man.speedRetreat()
+        }
+        if (e.keyCode == 39) {
+          man.speedAdvance()
+        }
+        if (e.keyCode == 38) {
+          man.volumeUp()
+        }
+        if (e.keyCode == 40) {
+          man.volumeDown()
+        }
+      }
+    },
+    // 快退
+    speedRetreat() {
+      this.player.seek(this.player.getCurrentTime() * 1 - 5)
+    },
+    // 快进
+    speedAdvance() {
+      this.player.seek(this.player.getCurrentTime() * 1 + 5)
+    },
+    // 音量增加
+    volumeUp() {
+      let volum = this.player.getVolume()
+      volum = volum > 0.9 ? 1 : volum + 0.1
+      this.player.setVolume(volum)
+    },
+    // 音量减小
+    volumeDown() {
+      let volum = this.player.getVolume()
+      volum = volum < 0.1 ? 0 : volum - 0.1
+      this.player.setVolume(volum)
     },
     // 关闭支付
     closePayed() {
