@@ -54,11 +54,12 @@
   .el-tabs__content {
     .el-tabs__item {
       span {
+        height: 57px;
         position: relative;
         i {
           position: absolute;
           top: 5px;
-          right: -18px;
+          right: -16px;
           width: 18px;
           height: 18px;
           line-height: 18px;

@@ -28,9 +28,9 @@
           <p class="fr">
             <input type="text" v-model="ticketForm.number" @change="retfNumber" placeholder="输入纳税人识别号">
           </p>
-            <p class="word parent">
-              <i class="el-icon-warning"> </i>政府、事业单位选填，企业必填
-            </p>
+          <p class="word parent">
+            <i class="el-icon-warning"> </i>政府、事业单位选填，企业必填
+          </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">发票内容</p>
@@ -436,17 +436,35 @@ export default {
     ...mapActions('auth', ['setGid', 'setKid']),
     // 验证普通发票 中的纳税人识别号
     retfNumber() {
-      if (
-        Trim(this.ticketForm.number) == '' ||
-        !/^[A-Z0-9]+$/.test(this.ticketForm.number)
-      ) {
-        this.$message({
-          showClose: true,
-          type: 'error',
-          message: '请输入正确的纳税人识别号！'
-        })
-        this.tfNumber = false
-      } else {
+      // if (
+      //   Trim(this.ticketForm.number) == '' ||
+      //   !/^[A-Z0-9]+$/.test(this.ticketForm.number)
+      // ) {
+      //   this.$message({
+      //     showClose: true,
+      //     type: 'error',
+      //     message: '请输入正确的纳税人识别号！'
+      //   })
+      //   this.tfNumber = false
+      // } else {
+      //   if (
+      //     this.ticketForm.number.length == 15 ||
+      //     this.ticketForm.number.length == 18 ||
+      //     this.ticketForm.number.length == 20
+      //   ) {
+      //     this.tfNumber = true
+      //   } else {
+      //     this.$message({
+      //       showClose: true,
+      //       type: 'error',
+      //       message: '请输入正确的纳税人识别号！'
+      //     })
+      //     this.tfNumber = false
+      //     return false
+      //   }
+      // }
+
+      if (Trim(this.ticketForm.number) !== '') {
         if (
           this.ticketForm.number.length == 15 ||
           this.ticketForm.number.length == 18 ||

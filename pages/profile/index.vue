@@ -404,7 +404,7 @@ export default {
       myCourseData4: [],
       myCourseDataArr: [1, 3], //初始化-我的课程  [1,2,3,4]全部
       myProjectDataArr: [1], //初始化-我的项目  [1,2,3,4]全部
-      myOrderDataArr: [0], //初始化-我的订单  [0，1,2,3]全部
+      myOrderDataArr: [0, 1], //初始化-我的订单  [0，1,2,3]全部
       noMsgCourse: false,
       customer: false,
       responseData: { type: true, res: '' }
@@ -445,7 +445,7 @@ export default {
             this.handleInitMyProjectData()
             break
           case 'tab-fourth': //我的订单
-            this.myOrderDataArr = [0]
+            this.myOrderDataArr = [0, 1]
             this.showOrderList = true
             this.orderForm.orderSn = ''
             this.$bus.$emit('activeOrder')

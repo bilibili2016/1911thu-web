@@ -990,17 +990,24 @@ html {
     .el-tabs__active-bar {
       display: none;
     }
+    // #tab-orderFirst.is-active {
+    //   border-bottom: 2px solid #773084;
+    // }
     .el-tabs__item.is-active {
       background: #fff;
       font-size: 16px;
       color: #773084; // padding: 4px 20px 4px 20px;
-      border-bottom: 2px solid #773084;
+      span {
+        border-bottom: 2px solid #773084;
+      }
     }
     .el-tabs__item {
+      width: 80px;
       height: 57px;
+      text-align: center;
       line-height: 57px;
       padding: 0;
-      margin-left: 30px;
+      // margin-left: 30px;
     } // .el-tab-pane {
     // padding: 50px 41px 0 44px;
     // }
