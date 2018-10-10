@@ -46,7 +46,7 @@
           <v-mycode @reGetCode="getUsedInvitationCodeList" @studyCourse="handleMyCourseChange" @studyProject="handleMyProjectChange" :codeData="codeData" :recordData="recordData" :allCode="allCode" :invitationCodeList="invitationCodeList" @handleCourseCode="handleCourseCode" @recordList="recordList" @searchCodeList="searchCodeList"></v-mycode>
         </el-tab-pane>
         <!-- 发票管理 -->
-        <el-tab-pane class="my-course my-order" name="tab-eighth">
+        <el-tab-pane class="my-course  " name="tab-eighth">
           <span slot="label" class="tabList">
             <i class="icon-ticket"></i> 发票管理 </span>
           <v-myticket @handleTicket="handleTicketTabChange" :allTicket="allTicket" :showTicketList="showTicketList" :unTicketData="unTicketData" :readyOrderLoad="readyOrderLoad" :noMsgTwl="noMsgTwl" :historyOrderData="historyOrderData" :unfinishedOrderLoad="unfinishedOrderLoad" :noMsgThi="noMsgThi" :ticketType="ticketType" :courseList="courseList" :projectList="projectList" :orderDetail="orderDetail" :pagemsg8="pagemsg8" :pagemsg9="pagemsg9" @unTicketDataChange="unTicketDataChange" @historyOrderDataChange="historyOrderDataChange" @goTicketDetail="goTicketDetail" @goTicketBack="goTicketBack"></v-myticket>
