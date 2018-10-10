@@ -2,7 +2,7 @@
   <div>
     <!-- 订单 -->
     <el-card v-if="showOrderList">
-      <el-tabs v-model="activeName" @tab-click="handleOrder">
+      <el-tabs class="orderCard" v-model="activeName" @tab-click="handleOrder">
         <el-tab-pane name="orderFirst">
           <span class="" slot="label">全部</span>
           <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>

@@ -974,13 +974,7 @@ html {
     .el-tabs__header {
       box-shadow: none;
     }
-    &.my-order {
-      box-shadow: none;
-      border-radius: 6px;
-      .el-tabs__header {
-        background-color: #fff;
-      }
-    }
+
     .el-card__body {
       padding: 0px; // padding-left: 20px;
     }
@@ -997,20 +991,60 @@ html {
       background: #fff;
       font-size: 16px;
       color: #773084; // padding: 4px 20px 4px 20px;
-      span {
-        border-bottom: 2px solid #773084;
-      }
+      border-bottom: 2px solid #773084;
     }
+
+    // .orderCard.el-tabs__item.is-active {
+    //   background: #fff;
+    //   font-size: 16px;
+    //   color: #773084; // padding: 4px 20px 4px 20px;
+    //   span {
+    //     border-bottom: 2px solid #773084;
+    //   }
+    // }
     .el-tabs__item {
-      width: 80px;
+      // width: 80px;
       height: 57px;
-      text-align: center;
+      // text-align: center;
       line-height: 57px;
       padding: 0;
-      // margin-left: 30px;
-    } // .el-tab-pane {
+      margin-left: 30px;
+    }
+    // .orderCard.el-tabs__item {
+    //   width: 80px !important;
+    //   height: 57px;
+    //   text-align: center !important;
+    //   line-height: 57px;
+    //   padding: 0;
+    //   margin-left: 0 !important;
+    // } // .el-tab-pane {
     // padding: 50px 41px 0 44px;
     // }
+
+    &.my-order {
+      box-shadow: none;
+      border-radius: 6px;
+      .el-tabs__header {
+        background-color: #fff;
+      }
+      .el-tabs__item.is-active {
+        background: #fff;
+        font-size: 16px;
+        color: #773084; // padding: 4px 20px 4px 20px;
+        border-bottom: none !important;
+        span {
+          border-bottom: 2px solid #773084 !important;
+        }
+      }
+      .el-tabs__item {
+        width: 80px !important;
+        height: 57px;
+        text-align: center !important;
+        line-height: 57px;
+        padding: 0;
+        margin-left: 0 !important;
+      }
+    }
     .el-progress-bar__outer {
       background-color: #ffdb5f;
     }
