@@ -171,6 +171,7 @@ export default {
 
         this.checkedArr = []
         this.orderPrice = 0
+        this.checkMsg = false
       }
 
       this.orderNum = this.checkedArr.length
