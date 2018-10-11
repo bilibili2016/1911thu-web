@@ -44,12 +44,13 @@
           <!-- 订单 -->
           <div v-show="config.type==='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
             <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
-            <p class="payReady payed" v-if="courseList.pay_status === '2'">已支付</p>
+            <p class="payReady payed" v-if="courseList.pay_status === '2' || courseList.pay_status === '6'">已支付</p>
             <p class="cancelOrder" v-if="courseList.pay_status === '5'" style="cursor: inherit">审核中</p>
+            <!-- <p class="cancelOrder" v-if="courseList.pay_status === '6'" style="cursor: inherit">退款中</p> -->
 
             <!-- 已完成订单剩余时间 -->
-            <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
-            <p class="payReady" v-if="courseList.pay_status === '2'&&courseList.expire_day<1">已过期</p>
+            <p class="payReady" v-if="(courseList.pay_status === '2'  || courseList.pay_status === '6')&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
+            <p class="payReady" v-if="(courseList.pay_status === '2'  || courseList.pay_status === '6')&&courseList.expire_day<1">已过期</p>
             <p class="payClose" v-if="courseList.pay_status === '3'">已关闭</p>
             <p>
               <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id)">立即支付</span>
