@@ -89,6 +89,7 @@ export default {
   methods: {
     ...mapActions('auth', ['signOut']),
     ...mapMutations('auth', ['setClosePay']),
+    // 直接去购买
     gobuy() {
       this.$emit('gobuy')
     },
