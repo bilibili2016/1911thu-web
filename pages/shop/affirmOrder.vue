@@ -39,7 +39,7 @@ import orderInfo from '@/pages/shop/affirmorder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
 import noMsg from '@/pages/shop/affirmorder/noMsg'
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
-import { message, splitUrl, setTitle } from '@/lib/util/helper'
+import { message, splitUrl, setTitle, Trim } from '@/lib/util/helper'
 import { home } from '~/lib/v1_sdk/index'
 // import { splitUrl, openUrl } from '~/lib/util/helper'
 export default {
@@ -128,6 +128,11 @@ export default {
       this.problem.curriculumId = this.config.curriculumId
       this.problem.curriculumcatalogid = this.config.catalogId
       this.problem.types = 2
+      if (Trim(this.problem.content) === '') {
+        message(this, 'error', '请输入要反馈的问题！')
+        return false
+      }
+      this.problem.content = Trim(this.problem.content)
       home.reportProblem(this.problem).then(response => {
         if (response.status === 100100) {
           message(this, 'success', response.msg)

@@ -19,7 +19,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { home } from '~/lib/v1_sdk/index'
-import { matchSplits, message } from '@/lib/util/helper'
+import { matchSplits, message, Trim } from '@/lib/util/helper'
 export default {
   props: ['config'],
   data() {
@@ -50,6 +50,11 @@ export default {
         this.problem.types = 2
       }
 
+      if (Trim(this.problem.content) === '') {
+        message(this, 'error', '请输入要反馈的问题！')
+        return false
+      }
+      this.problem.content = Trim(this.problem.content)
       home.reportProblem(this.problem).then(response => {
         if (response.status === 100100) {
           message(this, 'error', response.msg)
