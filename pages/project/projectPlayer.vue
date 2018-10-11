@@ -3,7 +3,7 @@
     <!-- 左侧播放器 -->
     <div class="mediaL fl" ref="mediaL" :style="{ width: mediaLW+'%' }">
       <v-playertop :data="projectDetail.title"></v-playertop>
-      <v-player ref="video" :playerForm="playerForm" :isloaded="isloaded" :playerInner="innerHeight" :bought="bought" :isFreeCourse="isFreeCourse" @changePlayImg="changeImg" @falseLoaded="falseLoaded" @buyProject="buyProject"></v-player>
+      <v-player ref="video" :playerForm="playerForm" :isloaded="isloaded" :playerInner="innerHeight" :bought="bought" :isFreeCourse="isFreeCourse" @changePlayImg="changeImg" @falseLoaded="falseLoaded" @buyProject="buyProject" @gobuy="addShopCart"></v-player>
       <v-playerbottom :collectMsg="collectMsg" :iseve="iseve" @showRpt="showRpt" @showElt="showElt" :config="config"></v-playerbottom>
     </div>
     <!-- 右侧课程小结列表 -->

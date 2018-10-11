@@ -19,7 +19,7 @@
               </div>
             </div>
           </div>
-          <v-player @changePlayImg="changePlayImg"></v-player>
+          <v-player @changePlayImg="changePlayImg" @gobuy="handleAddShopCart(courseList)"></v-player>
         </el-card>
         <div class="particularss fr">
           <div class="currentclum">

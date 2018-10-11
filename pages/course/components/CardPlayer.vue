@@ -3,6 +3,8 @@
     <div id="mediaPlayer" ref="mediaPlayer"></div>
     <!-- 播放按钮 -->
     <div class="playVideo" v-show="playVideo" @click="action" ref="playVideo"></div>
+    <!-- 试看提示 -->
+    <div class="isTrySee" v-show="isTrySee">试看<span>{{isTrySeeTime}}</span>分钟，观看完整版请<span class="gobuy" @click="gobuy">购买</span></div>
     <v-error :showError="showError" :errorMsg="errorMsg" @getPlayerInfo="rePlay"></v-error>
   </div>
 </template>
@@ -25,6 +27,8 @@ export default {
   },
   data() {
     return {
+      isTrySee: false,
+      isTrySeeTime: 0,
       clickTime: '',
       node: '',
       showError: false,
@@ -105,6 +109,9 @@ export default {
   },
   methods: {
     ...mapMutations('auth', ['setClosePay']),
+    gobuy() {
+      this.$emit('gobuy')
+    },
     // 切换播放gif
     changePlayImg(img, id) {
       this.$emit('changePlayImg', img, id)
@@ -190,6 +197,8 @@ export default {
           this.bought = res.data.curriculumPrivilege
           this.lookAt = res.data.look_at
           this.isFree = res.data.is_free
+          console.log(this.bought, this.lookAt == '2', Number(this.isFree))
+
           this.nextCatalogId = res.data.nextCatalogId
           this.$bus.$emit('closeCover')
           // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
@@ -207,6 +216,13 @@ export default {
         } else {
           message(this, 'warning', res.msg)
           return false
+        }
+        // 根据课程 是否购买&&是否试看 判断是否显示文字
+        if (!this.bought && this.lookAt == '2') {
+          this.isTrySee = true
+          this.isTrySeeTime = Math.round((Number(this.isFree) / 60) * 100) / 100
+        } else {
+          this.isTrySee = false
         }
       })
     },

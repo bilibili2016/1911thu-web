@@ -3,6 +3,8 @@
     <div class="prism-player" id="mediaPlayer" ref="mediaPlayer"></div>
     <!-- 播放按钮 -->
     <div class="playVideo" v-show="playVideo" @click="action" ref="playVideo"></div>
+    <!-- 试看提示 -->
+    <div class="isTrySee" v-show="isTrySee">试看<span>{{isTrySeeTime}}</span>分钟，观看完整版请<span class="gobuy" @click="gobuy">购买</span></div>
     <!-- 播放器报错信息 -->
     <v-error :showError="showError" :errorMsg="errorMsg" @getPlayerInfo="getPlayerInfo"></v-error>
   </div>
@@ -23,6 +25,8 @@ export default {
   props: ['playerForm', 'isloaded', 'playerInner', 'isFreeCourse', 'bought'],
   data() {
     return {
+      isTrySee: false,
+      isTrySeeTime: 0,
       clickTime: '',
       showError: false,
       projectForm: {
@@ -85,6 +89,9 @@ export default {
   methods: {
     ...mapActions('auth', ['signOut']),
     ...mapMutations('auth', ['setClosePay']),
+    gobuy() {
+      this.$emit('gobuy')
+    },
     // 播放参数  wobsocket 播放器创建
     getPlayerInfo() {
       let that = this
@@ -179,6 +186,14 @@ export default {
           message(this, 'error', response.msg)
           this.playerForm.curriculumId = this.course.curriculumId
           this.playerForm.catalogId = this.course.catalogId
+        }
+        // 根据课程 是否购买&&是否试看 判断是否显示文字
+        if (!that.bought && response.data.playAuthInfo.is_try_see) {
+          this.isTrySee = true
+          this.isTrySeeTime =
+            Math.round((response.data.playAuthInfo.free_time / 60) * 100) / 100
+        } else {
+          this.isTrySee = false
         }
       })
     },
