@@ -441,6 +441,7 @@ export default {
       } else {
         if (this.bindTelData.seconds === 30) {
           if (this.bindTelData.captchaDisable === false) {
+            this.codeClick = true
             auth.smsCodes(this.registerMobileData).then(response => {
               let types = response.status === 0 ? 'success' : 'error'
               message(this, types, response.msg)
@@ -456,6 +457,7 @@ export default {
                   this.codeClick = false
                   clearInterval(this.codeInterval)
                 } else {
+                  this.codeClick = true
                   this.bindTelData.getCode =
                     --this.bindTelData.seconds + '秒后重新发送'
                 }
