@@ -466,7 +466,7 @@ export default {
         if (this.projectForm.type === '1') {
           //保存操作才验证
           if (this.projectForm.trainCollege === '') {
-            throw '请选择学院分类'
+            throw '请选择领域分类'
           }
           if (this.projectForm.trainCourse === '') {
             throw '请选择课程分类'

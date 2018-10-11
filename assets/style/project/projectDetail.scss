@@ -19,18 +19,18 @@
     padding: 0 30px;
     color: #bdbccf;
     .fr .collect .line-center > span {
-      color: #bdbccf;
+      color: #fff;
     }
     .main-crumbs {
       .el-breadcrumb__inner,
       .el-breadcrumb__separator {
-        color: #bdbccf;
+        color: #fff;
       }
       .el-breadcrumb__inner:hover {
         color: #fff !important;
       }
       .el-breadcrumb__inner {
-        color: #bdbccf !important;
+        color: #fff !important;
       }
     }
   }
@@ -177,7 +177,8 @@
         margin-right: 40px;
         text-align: right;
         & > div {
-          display: inline-block;
+          float: left;
+          // display: inline-block;
         }
         .price {
           height: 36px;
