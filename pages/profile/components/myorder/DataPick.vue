@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="block">
-      <div class="demonstration fl" style="margin:12px 2px 0px 0px;">根据成交时间搜索: </div>
+      <div class="demonstration fl" style="margin:12px 2px 0px 0px;">根据成交日期搜索: </div>
       <div class="fl">
-        <el-date-picker v-model="searchDatas" type="daterange" unlink-panels value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions">
+        <el-date-picker v-model="startDay" type="date" value-format="timestamp" placeholder="选择开始日期">
         </el-date-picker>
+        <span class="dataPickSpan">至</span>
+        <el-date-picker v-model="endDay" type="date" value-format="timestamp" placeholder="选择结束日期">
+        </el-date-picker>
+
       </div>
       <div class="search">
         <el-button round @click="detection" style="margin-left:10px;">搜索</el-button>
@@ -14,59 +18,28 @@
 </template>
 
 <script>
+import { message, open } from '@/lib/util/helper'
+import { timestampToYMD } from '@/lib/util/helper'
+
 export default {
-  watch: {
-    searchDatas(data) {
-      if (data) {
-        this.searchDatas = data
-      } else {
-        this.searchDatas = ''
-      }
-    }
-  },
   props: ['orderNum'],
   data() {
     return {
-      searchDatas: '',
-      searchType: 1,
-      formData: {
-        start_time: ''
-      },
-      pickerOptions: {
-        shortcuts: [
-          {
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
-          }
-        ]
-      }
+      startDay: '',
+      endDay: '',
+      searchDatas: [],
+      searchType: 1
     }
   },
   methods: {
     detection() {
+      this.searchDatas = []
+      if (this.endDay < this.startDay) {
+        message(this, 'error', '结束日期不能小于开始日期!')
+        return false
+      }
+      this.searchDatas.push(timestampToYMD(this.startDay))
+      this.searchDatas.push(timestampToYMD(this.endDay))
       this.$bus.$emit(
         'searchDatas',
         this.searchDatas,
@@ -92,5 +65,8 @@ export default {
 }
 .search {
   margin-left: 10px;
+}
+.dataPickSpan {
+  margin: 0 20px;
 }
 </style>

@@ -59,16 +59,33 @@ export default {
     },
     goDetail(news) {
       window.open(window.location.origin + '/home/news/' + news.id)
+    },
+    setWidth() {
+      let Dwidth = document.documentElement.clientWidth
+      if (Dwidth > 1920) {
+        document.getElementsByClassName('el-carousel')[0].style.width =
+          1920 + 'px'
+      } else {
+        document.getElementsByClassName('el-carousel')[0].style.width =
+          Dwidth + 'px'
+      }
     }
   },
   mounted() {
-    let Dwidth = document.documentElement.clientWidth
-    if (Dwidth > 1920) {
-      document.getElementsByClassName('el-carousel')[0].style.width =
-        1920 + 'px'
-    } else {
-      document.getElementsByClassName('el-carousel')[0].style.width =
-        Dwidth + 'px'
+    this.setWidth()
+    window.onresize = () => {
+      return (() => {
+        this.setWidth()
+
+        let Dwidth = document.documentElement.clientWidth
+        let imgArr = document.getElementsByClassName('el-carousel__item')
+        if (Dwidth <= 1920) {
+          let marginLeft = (1920 - Dwidth) / 2
+          for (var i = 0; i < imgArr.length; i++) {
+            imgArr[i].style.marginLeft = -marginLeft + 'px'
+          }
+        }
+      })()
     }
   }
 }
