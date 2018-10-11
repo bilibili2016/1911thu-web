@@ -1,6 +1,9 @@
 <template>
   <div>
     <el-form :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
+      <el-form-item label="学号" prop="student_number">
+        <el-input v-model="psnForm.student_number" readonly></el-input>
+      </el-form-item>
       <el-form-item label="昵称" prop="nick_name">
         <el-input v-model="psnForm.nick_name"></el-input>
       </el-form-item>
@@ -79,6 +82,7 @@ export default {
       city: [],
       options: [],
       psnForm: {
+        student_number: '', //学号
         user_name: '', //用户名
         head_img: '', //头像
         nick_name: '', //昵称

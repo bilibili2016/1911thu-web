@@ -3,6 +3,10 @@
   <div class="psnInfo">
     <ul>
       <li>
+        <span>学号：</span>
+        <span>{{psnForm.student_number}}</span>
+      </li>
+      <li>
         <span>昵称：</span>
         <span>{{psnForm.nick_name}}</span>
       </li>
