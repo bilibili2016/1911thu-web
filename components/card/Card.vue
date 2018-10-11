@@ -10,62 +10,62 @@
           <div class="new-style " v-if="config.new==='true' ">
             <img :src="newTag " alt=" ">
           </div>
-            <div class="projectImg" v-if="cp==='1'">
-              <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
+          <div class="projectImg" v-if="cp==='1'">
+            <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
           </div>
-              <div class="mask-style" @click="handleLinkDetail(card)">
-                <img :src="jinImg" alt="" class="jin-style">
+          <div class="mask-style" @click="handleLinkDetail(card)">
+            <img :src="jinImg" alt="" class="jin-style">
           </div>
-                <!-- 项目封面 图片 -->
-                <div class="bgImgs">
-                  <img :src="card.picture" alt="">
+          <!-- 项目封面 图片 -->
+          <div class="bgImgs">
+            <img :src="card.picture" alt="">
           </div>
-                  <!-- 项目标签 -->
-                  <div class="tag">
-                    <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
-                  </div>
-                  <el-row>
-                    <!-- 名字 -->
-                    <div class="item" @click="handleLinkDetail(card)">
-                      <p class="itemBox-name itemBoxTitle">
-                        <span class="title" :title="card.title">{{card.title}}</span>
-                        <!-- 首页二级标题展示 老师+职称 -->
-                        <span v-if="config.card_type === 'profile'" class="deputyTitle fl">{{card.teacher_name+'&nbsp;&nbsp;'+card.graduate}}</span>
-                        <span v-else class="deputyTitle fl">{{card.deputy_title}}</span>
-                      </p>
-                      <p class="itemBox-info">
-                        <span>
-                          {{card.study_time}}学时
-                        </span>
-                        <span class="itemBox-num">
-                          <img :src="numSrc" alt="">
-                          <span>{{card.study_number}}</span>
-                        </span>
-                        <span class="" style="display:inline-block;float:right;padding-right:15px;">
-                          <el-rate disabled v-model="card.score" class="itemBox-rate fr"></el-rate>
-                        </span>
-                      </p>
-                    </div>
-                    <!-- <div class="line-wrap" v-if="config.new||config.free"> -->
-                    <div class="line-wrap">
-                      <div class="line-center" v-if="card.is_free === '1'&&cp==='1'">
-                        <p class="price freePrise" v-if="card.study_type==='1'">￥{{card.present_price}}/人</p>
-                        <p class="price freePrise" v-else>￥{{card.present_price}}/班</p>
-                      </div>
-                      <div class="line-center" v-if="cp==='0'&&card.is_free === '1'">
-                        <p class="price freePrise">￥{{card.present_price}}</p>
-                      </div>
-                      <div class="line-center" v-if="!isIndex&&card.is_free === '2'">
-                        <p class="freePrise">免费</p>
-                      </div>
-                      <div class="line-center" v-if="isIndex&&card.is_free === '1'">
-                        <p class="freePrise">￥{{card.present_price}}</p>
-                      </div>
-                      <div class="line-center" v-if="isIndex&&card.is_free === '2'">
-                        <p class="freePrise">免费</p>
-                      </div>
-                    </div>
-                  </el-row>
+          <!-- 项目标签 -->
+          <div class="tag">
+            <span v-if="card.tag.length !== 0" v-for="(tag,index) in card.tag" :key="index">{{tag}}</span>
+          </div>
+          <el-row>
+            <!-- 名字 -->
+            <div class="item" @click="handleLinkDetail(card)">
+              <p class="itemBox-name itemBoxTitle">
+                <span class="title" :title="card.title">{{card.title}}</span>
+                <!-- 首页二级标题展示 老师+职称 -->
+                <span v-if="config.card_type === 'profile'" class="deputyTitle fl">{{card.teacher_name+'&nbsp;&nbsp;'+card.graduate}}</span>
+                <span v-else class="deputyTitle fl">{{card.deputy_title}}</span>
+              </p>
+              <p class="itemBox-info">
+                <span>
+                  {{card.study_time}}学时
+                </span>
+                <span class="itemBox-num">
+                  <img :src="numSrc" alt="">
+                  <span>{{card.study_number}}</span>
+                </span>
+                <span class="" style="display:inline-block;float:right;padding-right:15px;">
+                  <el-rate disabled v-model="card.score" class="itemBox-rate fr"></el-rate>
+                </span>
+              </p>
+            </div>
+            <!-- <div class="line-wrap" v-if="config.new||config.free"> -->
+            <div class="line-wrap">
+              <div class="line-center" v-if="card.is_free === '1'&&cp==='1'">
+                <p class="price freePrise" v-if="card.study_type==='1'">￥{{card.present_price}}/人</p>
+                <p class="price freePrise" v-else>￥{{card.present_price}}/班</p>
+              </div>
+              <div class="line-center" v-if="cp==='0'&&card.is_free === '1'">
+                <p class="price freePrise">￥{{card.present_price}}</p>
+              </div>
+              <div class="line-center" v-if="!isIndex&&card.is_free === '2'">
+                <p class="freePrise">免费</p>
+              </div>
+              <div class="line-center" v-if="isIndex&&card.is_free === '1'">
+                <p class="freePrise">￥{{card.present_price}}</p>
+              </div>
+              <div class="line-center" v-if="isIndex&&card.is_free === '2'">
+                <p class="freePrise">免费</p>
+              </div>
+            </div>
+          </el-row>
         </el-card>
       </div>
     </div>
