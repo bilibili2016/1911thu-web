@@ -33,16 +33,16 @@
         </el-select>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="psnForm.email"></el-input>
+        <el-input v-model="psnForm.email" maxlength="50"></el-input>
       </el-form-item>
       <el-form-item disable label="手机号">
         <el-input v-model="psnForm.user_name" disabled></el-input>
       </el-form-item>
       <el-form-item label="单位名称" v-if="hasCompany" key="psnForm.company_name">
-        <el-input v-model="psnForm.company_name"></el-input>
+        <el-input v-model="psnForm.company_name" maxlength="30"></el-input>
       </el-form-item>
       <el-form-item label="单位名称" v-else>
-        <el-input v-model="psnForm.company_name"></el-input>
+        <el-input v-model="psnForm.company_name" maxlength="30"></el-input>
       </el-form-item>
       <el-form-item size="large" class="submit">
         <el-button type="primary" class="submitAble" @click="onSubmit('psnForm')" round>提交</el-button>
