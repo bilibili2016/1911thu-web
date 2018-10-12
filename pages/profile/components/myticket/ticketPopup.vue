@@ -663,9 +663,6 @@ export default {
     },
     //普通发票、个人发票 验证
     addInvoiceBefor() {
-      document.getElementsByClassName('bigTab')[0].style.minHeight =
-        document.getElementById('pane-tab-eighth').clientHeight + 'px'
-
       if (this.ticketForm.saveioc) {
         this.ticketForm.types = 2
       } else {
