@@ -11,15 +11,15 @@
           </span>
           <span class="right">应付金额：¥{{orderDetail.order_amount}}</span>
         </h4>
-        <div class="pay" v-show="!showPay">
+        <!-- <div class="pay" v-show="!showPay">
           <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
           <p>确认后，请在7天内付清款项，超过10天未对账系统自动会取消订单。到账周期为3个工作日。</p>
           <p class="showPay" @click="showPayPublic">确认并获取汇款识别码</p>
           <p class="tips">
             <i class="el-icon-warning"></i>汇款时将识别码填写至汇款单"用途"栏，超出1个工作日未对账，请提供订单号及汇款底单邮件至hkd@1911thu.com</p>
-        </div>
+        </div> -->
         <div class="pay" v-show="showPay">
-          <div v-show="false">
+          <!-- <div v-show="false">
             <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
             <div class="changeTel clearfix">
               <p class="fl">您的汇款验证码 {{code}} 已发送手机{{payForm.phones}}
@@ -38,7 +38,7 @@
               <p>2. 线下公司转账订单，一个识别码对应一个订单和相应的金额，请勿多转账或者少转账。</p>
               <p>3. 请在7天内付清款项，超过10天未对账系统自动会取消订单。到账周期为3个工作日。</p>
             </div>
-          </div>
+          </div> -->
           <div v-show="true">
             <h4 class="con-title">1911学堂收款信息</h4>
             <div class="account">
