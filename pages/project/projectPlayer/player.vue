@@ -186,18 +186,19 @@ export default {
             this.player.on('ended', this.playerEnded)
             this.player.on('error', this.playerError)
           }
+          // 根据课程 是否购买&&是否试看 判断是否显示文字
+          if (!that.bought && response.data.playAuthInfo.is_try_see) {
+            this.isTrySee = true
+            this.isTrySeeTime =
+              Math.round((response.data.playAuthInfo.free_time / 60) * 100) /
+              100
+          } else {
+            this.isTrySee = false
+          }
         } else {
           message(this, 'error', response.msg)
           this.playerForm.curriculumId = this.course.curriculumId
           this.playerForm.catalogId = this.course.catalogId
-        }
-        // 根据课程 是否购买&&是否试看 判断是否显示文字
-        if (!that.bought && response.data.playAuthInfo.is_try_see) {
-          this.isTrySee = true
-          this.isTrySeeTime =
-            Math.round((response.data.playAuthInfo.free_time / 60) * 100) / 100
-        } else {
-          this.isTrySee = false
         }
       })
     },
