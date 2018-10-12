@@ -179,8 +179,8 @@ export default {
     // 展示修改发票信息弹框
     showIoc() {
       if (this.checkedArr.length > 0) {
-        document.getElementsByClassName('bigTab')[0].style.height =
-          document.body.clientHeight + 'px'
+        document.getElementsByClassName('bigTab')[0].style.minHeight =
+          document.getElementById('pane-tab-eighth').clientHeight + 'px'
         document.getElementsByClassName('el-tabs__content')[8].style.position =
           '-ms-page'
         this.showInvoice = true
@@ -214,7 +214,7 @@ export default {
     },
     // 关闭表单
     close() {
-      document.getElementsByClassName('bigTab')[0].style.height = 'auto'
+      document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
       document.getElementsByClassName('el-tabs__content')[8].style.position =
         'relative'
       this.showInfo = false

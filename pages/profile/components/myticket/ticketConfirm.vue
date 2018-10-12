@@ -86,7 +86,7 @@ export default {
     // 关闭当前提交框
     close() {
       this.confirmInvoice = false
-      document.getElementsByClassName('bigTab')[0].style.height = 'auto'
+      document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
       document.getElementsByClassName('el-tabs__content')[8].style.position =
         'relative'
     }
@@ -95,8 +95,8 @@ export default {
     this.$bus.$on('showConfirm', data => {
       this.ticketForm = data
       // document.getElementsByClassName('bigTab')[0].style.height= document.body.clientHeight+'px'
-      document.getElementsByClassName('bigTab')[0].style.height =
-        document.body.clientHeight + 'px'
+      document.getElementsByClassName('bigTab')[0].style.minHeight =
+        document.getElementById('pane-tab-eighth').clientHeight + 'px'
       document.getElementsByClassName('el-tabs__content')[8].style.position =
         '-ms-page'
       this.confirmInvoice = true
