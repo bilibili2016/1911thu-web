@@ -28,7 +28,7 @@
       </li>
       <li>
         <span>邮箱：</span>
-        <span class="oneLine">{{psnForm.email}}</span>
+        <span class="oneLine">{{psnForm.email.substring(0,50)}}</span>
       </li>
       <li>
         <span>手机号：</span>
@@ -36,7 +36,7 @@
       </li>
       <li>
         <span>单位名称：</span>
-        <span class="default oneLine">{{psnForm.company_name}}</span>
+        <span class="default oneLine">{{psnForm.company_name.substring(0,30)}}</span>
       </li>
     </ul>
   </div>
