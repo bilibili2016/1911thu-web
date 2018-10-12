@@ -103,8 +103,7 @@ export default {
                 path: '/shop/payResult' + '?order=' + cpyid
               })
             } else {
-              message(this, 'error', res.msg)
-              if (res.status === 100007) {
+              if (response.status == 100007) {
                 this.$router.push('/')
                 this.$bus.$emit('loginShow', true)
               }

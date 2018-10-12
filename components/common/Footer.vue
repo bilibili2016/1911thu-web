@@ -22,7 +22,7 @@ import { open } from '@/lib/util/helper'
 export default {
   methods: {
     handleLink() {
-      window.open(window.location.origin + '/other/pages/homeUs')
+      this.$router.push('/other/pages/homeUs')
     },
     handleClick() {
       window.open('http://papn9j3ys.bkt.clouddn.com/licence.jpg')

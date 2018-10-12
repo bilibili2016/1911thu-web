@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     selectDetail(course) {
-      window.open(window.location.origin + '/home/news/' + course.id)
+      this.$router.push('/home/news/' + course.id)
     }
   }
 }
