@@ -71,12 +71,15 @@ export default {
     },
     setWidth() {
       let Dwidth = document.documentElement.clientWidth
-      if (Dwidth > 1920) {
-        document.getElementsByClassName('el-carousel')[0].style.width =
-          1920 + 'px'
-      } else {
-        document.getElementsByClassName('el-carousel')[0].style.width =
-          Dwidth + 'px'
+
+      if (document.getElementsByClassName('el-carousel').length != 0) {
+        if (Dwidth > 1920) {
+          document.getElementsByClassName('el-carousel')[0].style.width =
+            1920 + 'px'
+        } else {
+          document.getElementsByClassName('el-carousel')[0].style.width =
+            Dwidth + 'px'
+        }
       }
     }
   },
