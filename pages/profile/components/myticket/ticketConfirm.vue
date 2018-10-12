@@ -62,12 +62,9 @@ export default {
             type: 'success',
             message: res.msg
           })
+          this.close()
           this.$emit('chengeItem')
           this.$emit('getUnTicketData')
-          this.confirmInvoice = false
-          document.getElementsByClassName(
-            'el-tabs__content'
-          )[7].style.position = 'relative'
           this.$bus.$emit('historyOrderDataChange', 1)
         } else {
           this.$message({
