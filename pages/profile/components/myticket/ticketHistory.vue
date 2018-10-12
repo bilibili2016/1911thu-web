@@ -96,6 +96,8 @@ export default {
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
         }
+        document.getElementsByClassName('bigTab')[0].style.height =
+          document.body.clientHeight + 'px'
         document.getElementsByClassName('el-tabs__content')[8].style.position =
           '-ms-page'
         this.isTicketPopup = true
@@ -104,6 +106,7 @@ export default {
     },
     //关闭开票详情弹框
     closeTicketPopup() {
+      document.getElementsByClassName('bigTab')[0].style.height = 'auto'
       document.getElementsByClassName('el-tabs__content')[8].style.position =
         'relative'
       this.isTicketPopup = false
@@ -117,6 +120,8 @@ export default {
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
         }
+        document.getElementsByClassName('bigTab')[0].style.height =
+          document.body.clientHeight + 'px'
         document.getElementsByClassName('el-tabs__content')[8].style.position =
           '-ms-page'
         this.isStatusPopup = true
@@ -125,6 +130,7 @@ export default {
     },
     //关闭
     closeStatusPopup() {
+      document.getElementsByClassName('bigTab')[0].style.height = 'auto'
       document.getElementsByClassName('el-tabs__content')[8].style.position =
         'relative'
       this.isStatusPopup = false
