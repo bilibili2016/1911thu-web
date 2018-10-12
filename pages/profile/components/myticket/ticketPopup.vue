@@ -954,6 +954,9 @@ export default {
         )
 
         this.$emit('handleClose')
+        document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
+        document.getElementsByClassName('el-tabs__content')[8].style.position =
+          'relative'
         this.$bus.$emit('showConfirm', this.ticketForm)
       } else {
         this.zzTicketForm.orderID = this.checkedArr
@@ -977,6 +980,9 @@ export default {
         )
         this.nextStep('stepOne')
         this.$emit('handleClose')
+        document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
+        document.getElementsByClassName('el-tabs__content')[8].style.position =
+          'relative'
         this.$bus.$emit('showConfirm', this.zzTicketForm)
       }
     },
