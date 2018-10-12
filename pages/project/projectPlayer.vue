@@ -92,7 +92,8 @@ export default {
         seek: 0
       },
       projectForm: {
-        ids: ''
+        ids: '',
+        curriculumId: ''
       },
       collectMsg: {
         types: 2,
@@ -259,6 +260,12 @@ export default {
     window.addEventListener('resize', this.resize)
     if (persistStore.get('token')) {
       this.projectForm.ids = matchSplits('kid')
+      if (
+        window.location.search.split('=').length == 4 &&
+        window.location.search.split('&')[1].split('=')[0] == 'cid'
+      ) {
+        this.projectForm.curriculumId = matchSplits('cid')
+      }
       this.getCurriculumPlayInfo()
     } else {
       this.$router.push(
