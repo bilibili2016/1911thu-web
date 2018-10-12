@@ -12,7 +12,7 @@
             <h6>{{course.teacher_name}} {{course.teacher_graduate}}</h6>
             <p>{{course.introduction}}</p>
           </div>
-          <img class="fr" src="http://papn9j3ys.bkt.clouddn.com/projectCoursePlay.png" alt="" @click="goProjectPlayer()">
+          <img class="fr" src="http://papn9j3ys.bkt.clouddn.com/projectCoursePlay.png" alt="" @click="goProjectPlayer(course)">
         </div>
       </div>
     </div>
@@ -56,11 +56,12 @@ export default {
       open(urlLink)
     },
     // 跳转到项目播放页
-    goProjectPlayer() {
+    goProjectPlayer(course) {
       if (persistStore.get('token')) {
         let urlLink = {
           base: '/project/projectPlayer',
           kid: matchSplits('kid'),
+          cid: course.curriculum_id,
           type: matchSplits('type')
         }
         open(urlLink)

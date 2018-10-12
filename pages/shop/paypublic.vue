@@ -40,7 +40,7 @@
             </div>
           </div> -->
           <div v-show="true">
-            <h4 class="con-title">1911学堂收款信息</h4>
+            <p class="con-title">1911学堂收款信息</p>
             <div class="account">
               <p>户&nbsp;&nbsp;&nbsp;名：一九一一未来教育科技（北京）有限公司</p>
               <p>开户行：中信银行北京海淀支行</p>
