@@ -3,7 +3,7 @@
     <!-- 测试 123 -->
     <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
-    <div class="main">
+    <div class="main" :class="{'mobile':isMibile,'pc':isMibile}">
       <div class="header-fl clearfix">
         <v-logo @handleLink="handleLink"></v-logo>
         <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
@@ -69,6 +69,7 @@ export default {
   },
   data() {
     return {
+      isMibile: false,
       // 顶部列表
       curruntForm: {
         pages: 1,
@@ -435,11 +436,38 @@ export default {
       } else {
         this.judegExplorer = false
       }
+    },
+    browserRedirect() {
+      var sUserAgent = navigator.userAgent.toLowerCase()
+      var bIsIpad = sUserAgent.match(/ipad/i) == 'ipad'
+      var bIsIphoneOs = sUserAgent.match(/iphone os/i) == 'iphone os'
+      var bIsMidp = sUserAgent.match(/midp/i) == 'midp'
+      var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == 'rv:1.2.3.4'
+      var bIsUc = sUserAgent.match(/ucweb/i) == 'ucweb'
+      var bIsAndroid = sUserAgent.match(/android/i) == 'android'
+      var bIsCE = sUserAgent.match(/windows ce/i) == 'windows ce'
+      var bIsWM = sUserAgent.match(/windows mobile/i) == 'windows mobile'
+      if (
+        bIsIpad ||
+        bIsIphoneOs ||
+        bIsMidp ||
+        bIsUc7 ||
+        bIsUc ||
+        bIsAndroid ||
+        bIsCE ||
+        bIsWM
+      ) {
+        //跳转移动端页面
+        this.isMibile = true
+      } else {
+        //跳转pc端页面
+        this.isMibile = false
+      }
     }
   },
   mounted() {
     // this.getUserInfo()
-
+    this.browserRedirect()
     this.onBusEvent()
     this.$bus.$on('reLoginAlertPop', data => {
       this.reLoginAlert(data.type, data.res)

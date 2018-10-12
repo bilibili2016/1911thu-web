@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card class="changeNav">
+    <el-card class="changeNav my-project">
       <el-tabs v-model="activeName" @tab-click="handleActive">
         <!-- 我的项目 学习中 -->
         <el-tab-pane label="学习中" name="first" value="1">
