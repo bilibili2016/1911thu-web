@@ -17,8 +17,6 @@
       <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
       <v-login></v-login>
     </div>
-    <p>{{isMibile}}</p>
-    <p>{{word}}</p>
   </div>
 </template>
 
