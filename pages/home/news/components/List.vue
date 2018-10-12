@@ -31,7 +31,7 @@ export default {
   methods: {
     //新闻详情页
     newsDetail(news) {
-      window.open(window.location.origin + '/home/news/' + news.id)
+      this.$router.push('/home/news/' + news.id)
     },
     //转换时间格式(格式二)
     changeTime(time) {

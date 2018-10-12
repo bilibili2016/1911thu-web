@@ -15,7 +15,7 @@ export default {
   props: ['title', 'link'],
   methods: {
     handleLinkMore() {
-      window.open(window.location.origin + this.link)
+      this.$router.push(this.link)
     }
   }
 }
