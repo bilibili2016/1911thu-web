@@ -3,7 +3,7 @@
     <!-- 测试 123 -->
     <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
-    <div class="main" :class="{'mobile':isMibile,'pc':!isMibile}">
+    <div class="main">
       <div class="header-fl clearfix">
         <v-logo @handleLink="handleLink"></v-logo>
         <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
@@ -68,8 +68,6 @@ export default {
   },
   data() {
     return {
-      word: '',
-      isMibile: false,
       // 顶部列表
       curruntForm: {
         pages: 1,
@@ -458,13 +456,11 @@ export default {
         bIsWM
       ) {
         //跳转移动端页面
-        this.isMibile = true
+        document.body.classList.add('mobile')
       } else {
         //跳转pc端页面
-        this.isMibile = false
+        document.body.classList.remove('mobile')
       }
-      this.word = sUserAgent
-      console.log(sUserAgent)
     }
   },
   mounted() {
