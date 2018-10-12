@@ -22,8 +22,8 @@
         <span>{{code.use_code_number}}</span>
         <span>{{code.expire_days}}</span>
         <span class="orderNum" @click="handleMyOrder(code)">{{code.order_sn}}
-          <i class="efficacy" v-if="code.expire_days==='0'"></i>
-          <i class="used" v-if="code.use_code_number==='0'"></i>
+          <i class="efficacy" v-if="code.expire_days==0"></i>
+          <i class="used" v-if="code.use_code_number==0"></i>
         </span>
       </div>
 
