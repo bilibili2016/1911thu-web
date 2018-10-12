@@ -410,11 +410,8 @@ export default {
     keyboard() {
       let man = this
       window.onkeydown = function(e) {
-        if (!man.player.fullscreenService.getIsFullScreen()) {
-          return false
-        }
         // 空格 播放暂停
-        if (e.keyCode == 32) {
+        if (e.keyCode == 32 && man.player.fullscreenService.getIsFullScreen()) {
           if (man.player) {
             if (man.playVideo) {
               man.player.play()
@@ -423,16 +420,16 @@ export default {
             }
           }
         }
-        if (e.keyCode == 37) {
+        if (e.keyCode == 37 && man.player.fullscreenService.getIsFullScreen()) {
           man.speedRetreat()
         }
-        if (e.keyCode == 39) {
+        if (e.keyCode == 39 && man.player.fullscreenService.getIsFullScreen()) {
           man.speedAdvance()
         }
-        if (e.keyCode == 38) {
+        if (e.keyCode == 38 && man.player.fullscreenService.getIsFullScreen()) {
           man.volumeUp()
         }
-        if (e.keyCode == 40) {
+        if (e.keyCode == 40 && man.player.fullscreenService.getIsFullScreen()) {
           man.volumeDown()
         }
       }
