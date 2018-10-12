@@ -380,7 +380,11 @@ export default {
       clearTimeout(this.clickTime)
       this.clickTime = setTimeout(() => {
         // 如果点击的当前这个标签是 mediaPlayer 才执行
-        if (this.player && item.path[1].id == 'mediaPlayer') {
+        if (
+          this.player &&
+          (item.target.offsetParent.id == 'mediaPlayer' ||
+            item.path[1].id == 'mediaPlayer')
+        ) {
           if (this.playVideo) {
             this.player.play()
           } else {
