@@ -11,7 +11,7 @@
         <span>所属订单</span>
       </div>
       <!-- codeData&&codeData.length> -->
-      <div v-if="codeData&&codeData.length>0" v-for="(code,index) in codeData" :key="index" :class="code.use_code_number==='0'||code.expire_days==='0'?'noCodes tr_body':'tr_body' ">
+      <div v-if="codeData&&codeData.length>0" v-for="(code,index) in codeData" :key="index" :class="(code.use_code_number==0||code.expire_days==0)?'noCodes tr_body':'tr_body'">
         <span>{{code.invitation_code}}</span>
         <span v-if="code.type==='1'">课程</span>
         <span v-if="code.type==='2'">项目</span>
