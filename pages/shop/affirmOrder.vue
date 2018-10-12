@@ -136,9 +136,9 @@ export default {
       home.reportProblem(this.problem).then(response => {
         if (response.status === 100100) {
           message(this, 'success', response.msg)
-        } else {
+        } else if (response.status === 0) {
           this.closeReport()
-          message(this, 'success', response.msg)
+          message(this, 'success', '提交成功，我们会尽快解决！')
         }
         if (this.word === '') {
           return
