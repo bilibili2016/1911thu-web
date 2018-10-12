@@ -3,7 +3,7 @@
     <!-- 测试 123 -->
     <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
-    <div class="main" :class="{'mobile':isMibile,'pc':isMibile}">
+    <div class="main" :class="{'mobile':isMibile,'pc':!isMibile}">
       <div class="header-fl clearfix">
         <v-logo @handleLink="handleLink"></v-logo>
         <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
@@ -17,7 +17,8 @@
       <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
       <v-login></v-login>
     </div>
-
+    <p>{{isMibile}}</p>
+    <p>{{word}}</p>
   </div>
 </template>
 
@@ -69,6 +70,7 @@ export default {
   },
   data() {
     return {
+      word: '',
       isMibile: false,
       // 顶部列表
       curruntForm: {
@@ -438,7 +440,7 @@ export default {
       }
     },
     browserRedirect() {
-      var sUserAgent = navigator.userAgent.toLowerCase()
+      var sUserAgent = window.navigator.userAgent.toLowerCase()
       var bIsIpad = sUserAgent.match(/ipad/i) == 'ipad'
       var bIsIphoneOs = sUserAgent.match(/iphone os/i) == 'iphone os'
       var bIsMidp = sUserAgent.match(/midp/i) == 'midp'
@@ -463,6 +465,8 @@ export default {
         //跳转pc端页面
         this.isMibile = false
       }
+      this.word = sUserAgent
+      console.log(sUserAgent)
     }
   },
   mounted() {
