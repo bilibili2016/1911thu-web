@@ -197,8 +197,6 @@ export default {
           this.bought = res.data.curriculumPrivilege
           this.lookAt = res.data.look_at
           this.isFree = res.data.is_free
-          console.log(this.bought, this.lookAt == '2', Number(this.isFree))
-
           this.nextCatalogId = res.data.nextCatalogId
           this.$bus.$emit('closeCover')
           // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
@@ -218,9 +216,11 @@ export default {
           return false
         }
         // 根据课程 是否购买&&是否试看 判断是否显示文字
-        if (!this.bought && this.lookAt == '2') {
+        if (!this.bought && res.data.playAuthInfo.is_try_see) {
           this.isTrySee = true
-          this.isTrySeeTime = Math.round((Number(this.isFree) / 60) * 100) / 100
+          this.isTrySeeTime =
+            Math.round((Number(res.data.playAuthInfo.free_time) / 60) * 100) /
+            100
         } else {
           this.isTrySee = false
         }
