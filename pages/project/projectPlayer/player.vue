@@ -375,7 +375,6 @@ export default {
       this.playerForm.catalogId = item.id
       clearInterval(this.interval)
       this.aliPlayer.autoplay = true
-      this.playVideo = false
       this.getPlayerInfo()
     },
     // 切换播放gif
