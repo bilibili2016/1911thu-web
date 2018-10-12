@@ -59,7 +59,7 @@ const config = {
       {
         name: 'viewport',
         // content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
-        content: 'width=device-width'
+        content: 'width=device-width,initial-scale=1.0'
       },
       {
         hid: 'description',
