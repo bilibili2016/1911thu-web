@@ -164,7 +164,6 @@
       position: relative;
       background-color: #000;
       .isTrySee {
-        width: 220px;
         height: 24px;
         line-height: 24px;
         text-align: center;
@@ -175,11 +174,18 @@
         position: absolute;
         left: 10px;
         bottom: 62px;
+        padding: 0 25px 0 15px;
         span {
           color: #ff7c33;
           &.gobuy {
             cursor: pointer;
           }
+        }
+        i.el-icon-error {
+          position: absolute;
+          right: 9px;
+          top: 5px;
+          cursor: pointer;
         }
       }
       .playVideo {

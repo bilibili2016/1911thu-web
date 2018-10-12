@@ -4,7 +4,7 @@
     <!-- 播放按钮 -->
     <div class="playVideo" v-show="playVideo" @click="action" ref="playVideo"></div>
     <!-- 试看提示 -->
-    <div class="isTrySee" v-show="isTrySee">试看<span>{{isTrySeeTime}}</span>分钟，观看完整版请<span class="gobuy" @click="gobuy">购买</span></div>
+    <div class="isTrySee" v-show="isTrySee">试看<span>{{isTrySeeTime}}</span>分钟，观看完整版请<span class="gobuy" @click="gobuy">购买</span><i @click="closeTip" class="el-icon-error"></i></div>
     <v-error :showError="showError" :errorMsg="errorMsg" @getPlayerInfo="rePlay"></v-error>
   </div>
 </template>
@@ -111,6 +111,9 @@ export default {
     ...mapMutations('auth', ['setClosePay']),
     gobuy() {
       this.$emit('gobuy')
+    },
+    closeTip() {
+      this.isTrySee = false
     },
     // 切换播放gif
     changePlayImg(img, id) {

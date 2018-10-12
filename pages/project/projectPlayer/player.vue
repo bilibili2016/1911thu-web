@@ -4,7 +4,7 @@
     <!-- 播放按钮 -->
     <div class="playVideo" v-show="playVideo" @click="action" ref="playVideo"></div>
     <!-- 试看提示 -->
-    <div class="isTrySee" v-show="isTrySee">试看<span>{{isTrySeeTime}}</span>分钟，观看完整版请<span class="gobuy" @click="gobuy">购买</span></div>
+    <div class="isTrySee" v-show="isTrySee">试看<span>{{isTrySeeTime}}</span>分钟，观看完整版请<span class="gobuy" @click="gobuy">购买</span><i @click="closeTip" class="el-icon-error"></i></div>
     <!-- 播放器报错信息 -->
     <v-error :showError="showError" :errorMsg="errorMsg" @getPlayerInfo="getPlayerInfo"></v-error>
   </div>
@@ -92,6 +92,9 @@ export default {
     // 直接去购买
     gobuy() {
       this.$emit('gobuy')
+    },
+    closeTip() {
+      this.isTrySee = false
     },
     // 播放参数  wobsocket 播放器创建
     getPlayerInfo() {

@@ -16,7 +16,7 @@
           <img :src="changeImg.img" alt="">
         </span>
         <p>
-          <span class="fl barName">{{bar.video_number}}、{{bar.title}}({{bar.video_time}}分钟)</span>
+          <span class="fl barName">{{bar.video_number}}.{{bar.title}}({{bar.video_time}}分钟)</span>
           <!-- 用户已购买 并且进度大于零 -->
           <span v-if="privileMsg === true">
             <span v-if="bar.percent > 0&&config.card_type!=='project'">
