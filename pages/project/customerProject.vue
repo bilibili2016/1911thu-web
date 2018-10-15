@@ -216,13 +216,14 @@
 
           </div>
         </div>
-        <div class="deatil-item clearfix ">
+        <!--  -->
+        <div class="deatil-item clearfix" v-if="projectForm.styleRadio!=1">
           <div class="detail-title ">选择线下课程</div>
           <div class=" ">学堂会根据您的需求及所选线上课程内容，为您合理设计体系化的线下课程安排。</div>
         </div>
-        <div class="deatil-item clearfix ">
+        <div class="deatil-item clearfix " v-if="checkedCourseData.length !=0 ">
           <div class="detail-title ">已选课程</div>
-          <div class="deTable " v-if="checkedCourseData.length !=0 ">
+          <div class="deTable ">
             <div class="deItem clearfix " v-for="(item,index) in checkedCourseData " :key="index ">
               <div class="courseTitle ">{{item.title}}</div>
               <div class="time ">{{item.study_time}}学时</div>
