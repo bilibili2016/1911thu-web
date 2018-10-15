@@ -77,13 +77,6 @@ export default {
       },
       categoryArr: [],
       projectArr: [],
-      categoryLink: {
-        base: '/course/category',
-        cid: '',
-        cp: '',
-        xid: '0',
-        pids: '0'
-      },
       isHasClass: true,
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
       bannerMsg: false,
@@ -163,11 +156,8 @@ export default {
     },
     // 下拉列表 跳转
     handleSelectItem(item) {
-      this.categoryLink.cid = item.id
-      this.categoryLink.cp = item.is_picture_show
-      if (window.location.pathname == '/course/category') {
-        location.reload()
-      }
+      console.log(item.is_picture_show)
+
       this.$router.push({
         path: '/course/category',
         query: {
@@ -177,8 +167,9 @@ export default {
           xid: 0
         }
       })
-      // console.log(this.categoryLink)
-      // open(this.categoryLink)
+      // if (window.location.pathname == '/course/category') {
+      //   location.reload()
+      // }
     },
     handleSearchData(item) {
       persistStore.set('key', item)

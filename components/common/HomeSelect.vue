@@ -7,7 +7,7 @@
 
       <div class="dropItem headerClass">
         <span class="el-dropdown-link" @click="handleSelectItem({id:0,is_picture_show:0})">
-          全部课程
+          全部学院
           <i class="el-icon-arrow-down el-icon--right"></i>
           <span class="downLine"></span>
         </span>
