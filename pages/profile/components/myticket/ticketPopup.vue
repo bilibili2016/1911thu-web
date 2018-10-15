@@ -66,7 +66,7 @@
             <el-select v-model="ticketForm.province" placeholder="省" @change="changeTicketp">
               <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
             </el-select>
-            <el-select v-model="ticketForm.city" placeholder="市">
+            <el-select v-model="ticketForm.city" placeholder="市" @change="changeTickeCity">
               <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
             </el-select>
             <el-select v-model="ticketForm.area" placeholder="区">
@@ -258,7 +258,7 @@
               <el-select v-model="zzTicketForm.province" placeholder="省" @change="changezzTicketp">
                 <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzprovince" :key="'prov'+index"></el-option>
               </el-select>
-              <el-select v-model="zzTicketForm.city" placeholder="市">
+              <el-select v-model="zzTicketForm.city" placeholder="市" @change="changezzTickeCity">
                 <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzcity" :key="'city'+index"></el-option>
               </el-select>
               <el-select v-model="zzTicketForm.area" placeholder="区">
@@ -646,9 +646,17 @@ export default {
       this.ticketForm.city = ''
       this.ticketForm.area = ''
     },
+    //切换普通发票下的市
+    changeTickeCity() {
+      this.ticketForm.area = ''
+    },
     // 切换增值税发票下的省
     changezzTicketp(v) {
       this.zzTicketForm.city = ''
+      this.zzTicketForm.area = ''
+    },
+    //切换增值税发票下的市
+    changezzTickeCity() {
       this.zzTicketForm.area = ''
     },
     // 切换增值税发票内容
