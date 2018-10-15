@@ -144,7 +144,7 @@
           <div class="detail-title">选择线上课程</div>
           <div class="itemCon">
             <div class="item clearfix">
-              <div class="fl">领域分类：</div>
+              <div class="fl">学院分类：</div>
               <div class="fr selectFr">
                 <div @click.stop="handleCollegeSelect">
                   <el-input placeholder="请选择分类" v-model="projectForm.trainCollege" readonly></el-input>
@@ -466,7 +466,7 @@ export default {
         if (this.projectForm.type === '1') {
           //保存操作才验证
           if (this.projectForm.trainCollege === '') {
-            throw '请选择领域分类'
+            throw '请选择学院分类'
           }
           if (this.projectForm.trainCourse === '') {
             throw '请选择课程分类'

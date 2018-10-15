@@ -684,6 +684,9 @@ export default {
       }
       auth.getWXAccredit(this.WxLogin).then(response => {
         if (response.status === 0) {
+          console.log(response)
+
+          message(this, 'success', response.msg)
           clearInterval(this.getwxtime)
           this.tokenForm.tokens = response.data.token
           this.setToken(this.tokenForm)
