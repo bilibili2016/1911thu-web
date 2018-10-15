@@ -12,7 +12,8 @@
         </tr>
         <tr v-if="recordData&&recordData.length>0" v-for="(code,index) in recordData" :key="index" class="tr_body">
           <td>{{code.invitation_code}}</td>
-          <td>{{code.user_name}}</td>
+          <td v-if="code.user_name==''">{{code.student_number}}</td>
+          <td v-else>{{code.user_name}}</td>
           <td v-if="code.type==='1'">课程</td>
           <td v-if="code.type==='2'">项目</td>
           <td v-if="code.type==='3'">课程+项目</td>
