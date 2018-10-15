@@ -9,7 +9,7 @@
           <div class="fl">
             <h4 @click="goDetail(course)">{{course.title}}</h4>
             <h6>{{course.study_time}}学时</h6>
-            <p>讲师：{{course.teacher_name}}</p>
+            <p>导师：{{course.teacher_name}}</p>
           </div>
         </div>
         <div class="coursePrice">
@@ -59,7 +59,7 @@
         <div class="fl">
           <h5>{{course.title}}</h5>
           <h6>{{course.study_time == '' ? 0 : course.study_time}}学时</h6>
-          <p v-if="course.type =='1'">讲师：{{course.teacher_name}}</p>
+          <p v-if="course.type =='1'">导师：{{course.teacher_name}}</p>
         </div>
 
         <div class="coursePrice">

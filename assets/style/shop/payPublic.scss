@@ -53,7 +53,7 @@
         }
       }
       .pay {
-        padding: 0 30px 20px;
+        padding: 0 30px 10px;
         h5 {
           line-height: 40px;
           color: #ff5f5f;
@@ -136,6 +136,7 @@
           }
         }
       }
+
       p.con-title {
         height: 56px;
         line-height: 56px;
@@ -158,5 +159,11 @@
         }
       }
     }
+  }
+  .alertText {
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-left: 30px;
   }
 }
