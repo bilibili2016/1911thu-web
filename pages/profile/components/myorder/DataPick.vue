@@ -52,7 +52,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .block {
   padding: 25px 0px 25px 0px;
   font-size: 16px;
@@ -65,6 +65,14 @@ export default {
 }
 .search {
   margin-left: 10px;
+  button {
+    &:hover {
+      background-color: #84488f;
+      transition: all 300ms;
+      border: 1px solid #84488f;
+      color: #fff;
+    }
+  }
 }
 .dataPickSpan {
   margin: 0 20px;
