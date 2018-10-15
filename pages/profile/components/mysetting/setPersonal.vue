@@ -35,8 +35,10 @@
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="psnForm.email" maxlength="50"></el-input>
       </el-form-item>
-      <el-form-item disable label="手机号">
-        <el-input v-model="psnForm.user_name" disabled></el-input>
+      <el-form-item class="telForm" disable label="手机号">
+        <el-input class="telephone" v-model="psnForm.user_name" disabled></el-input>
+        <span v-if="psnForm.user_name==''" class="teledit"><img src="~assets/images/binding.png" alt="">绑定</span>
+        <span v-else class="teledit"><img src="~assets/images/edit.png" alt="">修改</span>
       </el-form-item>
       <el-form-item label="单位名称" v-if="hasCompany" key="psnForm.company_name">
         <el-input v-model="psnForm.company_name" maxlength="30"></el-input>

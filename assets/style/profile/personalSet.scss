@@ -45,6 +45,27 @@
           }
         }
       }
+      .telForm {
+        .telephone {
+          width: 600px;
+          input {
+            width: 600px;
+          }
+        }
+        .teledit {
+          padding: 0 10px;
+          color: #783086;
+          img {
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
+            vertical-align: middle;
+          }
+          &.binding {
+            display: none;
+          }
+        }
+      }
     }
     .el-input__suffix-inner {
       position: absolute;
