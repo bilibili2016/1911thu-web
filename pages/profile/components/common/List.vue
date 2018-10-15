@@ -23,16 +23,17 @@
             <div class="common-button btn-bgs ">
               <!-- 学习中 -->
               <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="study(card,config.project,card.type)">开始学习</el-button>
+
               <!-- 已过期 -->
+              <!-- 定制项目 非创建者不能购买 -->
+              <div v-if="card.type==='2' && !card.is_creator"></div>
 
-              <div v-if="card.type==='2' && !card.is_creator">
-
-              </div>
               <div v-else>
                 <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="addShopCarts(card,index)">
-                  <span>
+                  <span v-if="(card.type==1&&card.study_type==1)||!config.project">
                     加入购物车
                   </span>
+                  <span v-else>立即购买</span>
                 </el-button>
               </div>
 
@@ -203,25 +204,35 @@ export default {
     },
     // 已过期商品直接加入购物车
     addShopCarts(item, index) {
-      if (item.type == '2') {
-        //定制项目
-        this.$router.push({
-          path: '/shop/affirmorder',
-          query: { id: item.id }
+      if (!this.config.project) {
+        this.curriculumcartids.cartid = item.id
+        this.curriculumcartids.type = 1
+        profileHome.addShopCart(this.curriculumcartids).then(response => {
+          this.$router.push('/shop/shoppingcart')
         })
       } else {
-        if (item.study_type == '1') {
-          //1.线上
-          this.curriculumcartids.cartid = item.id
-          profileHome.addShopCart(this.curriculumcartids).then(response => {
-            this.$router.push('/shop/shoppingcart')
-          })
-        } else {
-          //2.混合 3.互动
+        if (item.type == '2') {
+          //定制项目
           this.$router.push({
             path: '/shop/affirmorder',
             query: { id: item.id }
           })
+        } else {
+          //普通项目
+          if (item.study_type == '1') {
+            //1.线上
+            this.curriculumcartids.cartid = item.id
+            this.curriculumcartids.type = 2
+            profileHome.addShopCart(this.curriculumcartids).then(response => {
+              this.$router.push('/shop/shoppingcart')
+            })
+          } else {
+            //2.混合 3.互动
+            this.$router.push({
+              path: '/shop/affirmorder',
+              query: { id: item.id }
+            })
+          }
         }
       }
 

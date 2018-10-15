@@ -28,13 +28,11 @@ import { store as persistStore } from '~/lib/core/store'
 
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import CustomList from '@/pages/profile/components/common/List.vue'
-import CustomCard from '@/pages/profile/components/common/Card.vue'
 import CardTab from '@/pages/profile/components/common/CardTab.vue'
 export default {
   components: {
     'v-nomsg': NoMsg,
     'v-list': CustomList,
-    'v-card': CustomCard,
     'v-cardtab': CardTab
   },
   props: [
