@@ -196,10 +196,28 @@ export default {
     },
     // 已过期商品直接加入购物车
     addShopCarts(item, index) {
-      this.curriculumcartids.cartid = item.id
-      profileHome.addShopCart(this.curriculumcartids).then(response => {
-        this.$router.push('/shop/shoppingcart')
-      })
+      if (item.type == '2') {
+        //定制项目
+        this.$router.push({
+          path: '/shop/affirmorder',
+          query: { id: item.id }
+        })
+      } else {
+        if (item.study_type == '1') {
+          //1.线上
+          this.curriculumcartids.cartid = item.id
+          profileHome.addShopCart(this.curriculumcartids).then(response => {
+            this.$router.push('/shop/shoppingcart')
+          })
+        } else {
+          //2.混合 3.互动
+          this.$router.push({
+            path: '/shop/affirmorder',
+            query: { id: item.id }
+          })
+        }
+      }
+
       for (var i = 0; i < this.data.length; i++) {
         if (i === index) {
           this.$set(this.data[i], 'is_checked', true)

@@ -6,10 +6,10 @@
         <h1 class="top-h1">1911学堂</h1>
         <p class="top-desc"> 1911学堂可根据政府机关、企事业单位需求，<br>提供系统、权威、实用的培训解决方案，<br>帮助学员提升专业知识和思维能力，助力政府机关、企事业单位高效运转。</p>
 
-          <div class="top-button" @click="handleScroll">
-            填写联系方式，免费申请课程体验。
-            <span class="right" ref="rgihtGo">GO</span>
-          </div>
+        <div class="top-button" @click="handleScroll">
+          填写联系方式，免费申请课程体验。
+          <span class="right" ref="rgihtGo">GO</span>
+        </div>
       </div>
     </div>
     <div :class="{topBottom:istopBottom}" ref="topBottom">
@@ -19,27 +19,27 @@
           <div class="img">
             <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon.png" alt="">
           </div>
-            <div class="con-text">
-              <div class="first text clearfix">
-                <div class="left">我们的理念</div>
-                <div class="right">源自清华、面向世界，博学笃行、人文日新。</div>
+          <div class="con-text">
+            <div class="first text clearfix">
+              <div class="left">我们的理念</div>
+              <div class="right">源自清华、面向世界，博学笃行、人文日新。</div>
+              <div class="con-shadow"></div>
+            </div>
+            <div class="second text clearfix">
+              <div class="left">多元化培训模式</div>
+              <div class="right">结合线上人机交互优势和线下人文互动优势，研发了纯线上、混合式、互动式三种培训模式供您选择。
                 <div class="con-shadow"></div>
               </div>
-              <div class="second text clearfix">
-                <div class="left">多元化培训模式</div>
-                <div class="right">结合线上人机交互优势和线下人文互动优势，研发了纯线上、混合式、互动式三种培训模式供您选择。
-                  <div class="con-shadow"></div>
-                </div>
-              </div>
-              <div class="third text clearfix">
-                <div class="left">知识即服务</div>
-                <div class="right">1911学堂是一个以“知识即服务”（KaaS）为运营模式的继续教育平台，为学习者提供全链条服务。
-                  <div class="con-shadow"></div>
-                </div>
+            </div>
+            <div class="third text clearfix">
+              <div class="left">知识即服务</div>
+              <div class="right">1911学堂是一个以“知识即服务”（KaaS）为运营模式的继续教育平台，为学习者提供全链条服务。
+                <div class="con-shadow"></div>
               </div>
             </div>
           </div>
-          <!-- <div class="why-con clearfix">
+        </div>
+        <!-- <div class="why-con clearfix">
           <div class="why-item" v-for="(item,index) in imgList" :key="index">
             <div class="item-img">
               <img :src="item.imgUrl" alt="">
@@ -54,38 +54,38 @@
           <span v-for="(item,index) in projectArr" :key="index" @click="goCourseList(item)">{{item.category_name}}</span>
           <span @click="goCustomerProject">自定制项目</span>
         </div> -->
+      </div>
+      <div class="course serviceDetails clearfix">
+        <h3>1911学堂定制项目</h3>
+        <div class="course-left courseCon clearfix">
+          <div class="img">
+            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon1.png" alt="">
+            <div>委托定制</div>
+          </div>
+          <div class="con">
+            <div class="text">
+              学堂根据贵单位的特定需求，为您量身定制、研发设计针对性、个性化的学习方案及培训项目安排。
+            </div>
+            <div class="button" @click="handleScroll">
+              立即咨询
+            </div>
+          </div>
         </div>
-        <div class="course serviceDetails clearfix">
-          <h3>1911学堂定制项目</h3>
-          <div class="course-left courseCon clearfix">
-            <div class="img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon1.png" alt="">
-              <div>委托定制</div>
+        <div class="course-right courseCon clearfix">
+          <div class="img">
+            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon2.png" alt="">
+            <div>自定制</div>
+          </div>
+          <div class="con">
+            <div class="text">
+              贵单位可在学堂平台自行选择师资及课程，或提出具体的学习需求，形成独有的人才培养规划及培训班设置方案。
             </div>
-            <div class="con">
-              <div class="text">
-                学堂根据贵单位的特定需求，为您量身定制、研发设计针对性、个性化的学习方案及培训项目安排。
-              </div>
-              <div class="button" @click="handleScroll">
-                立即咨询
-              </div>
+            <div class="button" @click="goCustomerProject">
+              开始自定制
             </div>
           </div>
-          <div class="course-right courseCon clearfix">
-            <div class="img">
-              <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon2.png" alt="">
-              <div>自定制</div>
-            </div>
-            <div class="con">
-              <div class="text">
-                贵单位可在学堂平台自行选择师资及课程，或提出具体的学习需求，形成独有的人才培养规划及培训班设置方案。
-              </div>
-              <div class="button" @click="goCustomerProject">
-                开始自定制
-              </div>
-            </div>
-          </div>
-          <!-- <h3>1911学堂专属定制项目</h3>
+        </div>
+        <!-- <h3>1911学堂专属定制项目</h3>
         <p class="course-small-title">如果您有更多、更独特的培训需求，请联系我们，1911学堂将根据单位需求， 为您量身定制高品质培训项目。</p>
         <div class="service-list clearfix">
           <div class="service-line"></div>
@@ -100,8 +100,8 @@
             </div>
           </div>
         </div> -->
-        </div>
-        <!-- <div class="course">
+      </div>
+      <!-- <div class="course">
         <h3>1911学堂课程体系</h3>
         <p class="course-small-title">包含560余门课程</p>
         <ul class="list clearfix">
@@ -127,7 +127,7 @@
           </div>
         </div>
       </div> -->
-        <!-- <div class="together">
+      <!-- <div class="together">
         <h4>与1911学堂一起</h4>
         <div class="list">
           <div>
@@ -148,99 +148,99 @@
           </div>
         </div>
       </div> -->
-        <div class="psrocess">
-          <div class="route">
-            <h3>购买与学习流程</h3>
-            <div class="process-list clearfix">
-              <div class="fl">
-                <p><img src="http://papn9j3ys.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
-              </div>
-              <div class="fr">
-                <div class="process-info">
-                  <h5>
-                    <span v-for="(one,index) in buyListOne" :key="index">
-                      <i class="icon before el-icon-caret-right"></i>
-                      <i class="word">{{one}}</i>
-                      <i class="icon after el-icon-caret-right"></i>
-                    </span>
-                  </h5>
-                </div>
-                <div class="process-info">
-                  <h5>
-                    <span v-for="(one,index) in buyListTwo" :key="index">
-                      <i class="icon before el-icon-caret-right"></i>
-                      <i class="word">{{one}}</i>
-                      <i class="icon after el-icon-caret-right"></i>
-                    </span>
-                  </h5>
-                </div>
-              </div>
-
+      <div class="psrocess">
+        <div class="route">
+          <h3>购买与学习流程</h3>
+          <div class="process-list clearfix">
+            <div class="fl">
+              <p><img src="http://papn9j3ys.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
             </div>
-            <div class="process-list clearfix">
-              <div class="fl">
-                <p>
-                  <img src="http://papn9j3ys.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
-              </p>
+            <div class="fr">
+              <div class="process-info">
+                <h5>
+                  <span v-for="(one,index) in buyListOne" :key="index">
+                    <i class="icon before el-icon-caret-right"></i>
+                    <i class="word">{{one}}</i>
+                    <i class="icon after el-icon-caret-right"></i>
+                  </span>
+                </h5>
               </div>
-              <div class="fr">
-                <div class="process-info">
-                  <h5>
-                    <span v-for="(one,index) in buyListThree" :key="index">
-                      <i class="icon before el-icon-caret-right"></i>
-                      <i class="word">{{one}}</i>
-                      <i class="icon after el-icon-caret-right"></i>
-                    </span>
-                  </h5>
-                </div>
-                <div class="process-info">
-                  <h5>
-                    <span v-for="(one,index) in buyListFour" :key="index">
-                      <i class="icon before el-icon-caret-right"></i>
-                      <i class="word">{{one}}</i>
-                      <i class="icon after el-icon-caret-right"></i>
-                    </span>
-                  </h5>
-                </div>
+              <div class="process-info">
+                <h5>
+                  <span v-for="(one,index) in buyListTwo" :key="index">
+                    <i class="icon before el-icon-caret-right"></i>
+                    <i class="word">{{one}}</i>
+                    <i class="icon after el-icon-caret-right"></i>
+                  </span>
+                </h5>
               </div>
-
             </div>
 
           </div>
-        </div>
-        <div class="bottomForm" id="buttom" ref="buttonForm">
-          <img class="buttom-bg" src="http://papn9j3ys.bkt.clouddn.com/hrentry-bg.png" alt="">
-          <div class="word">
-            <p class="word-desc1">如果您希望对1911学堂课程及培训项目了解更多，请填写以下信息，我们会在90分钟内与您联系，期待为您创造更好的教育体验。</p>
-            <p class="word-desc2">
-              <i class="word-desc-bg"></i>您也可以拨打咨询电话：010-62701911</p>
-            <div class="formDIv">
-              <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-                <el-form-item label="" prop="companyname">
-                  <el-autocomplete class="inline-input" placeholder="您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
-                </el-form-item>
-                <el-form-item label="" prop="person">
-                  <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
-                </el-form-item>
-                <el-form-item label="" prop="phones">
-                  <el-input v-model="company.phones" placeholder="请输入联系方式"></el-input>
-                </el-form-item>
-                <el-form-item label="" prop="code">
-                  <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
-                  <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
-                  <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
-                </el-form-item>
-                <el-form-item>
-                  <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
-                </el-form-item>
-              </el-form>
+          <div class="process-list clearfix">
+            <div class="fl">
+              <p>
+                <img src="http://papn9j3ys.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
+              </p>
             </div>
+            <div class="fr">
+              <div class="process-info">
+                <h5>
+                  <span v-for="(one,index) in buyListThree" :key="index">
+                    <i class="icon before el-icon-caret-right"></i>
+                    <i class="word">{{one}}</i>
+                    <i class="icon after el-icon-caret-right"></i>
+                  </span>
+                </h5>
+              </div>
+              <div class="process-info">
+                <h5>
+                  <span v-for="(one,index) in buyListFour" :key="index">
+                    <i class="icon before el-icon-caret-right"></i>
+                    <i class="word">{{one}}</i>
+                    <i class="icon after el-icon-caret-right"></i>
+                  </span>
+                </h5>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="bottomForm" id="buttom" ref="buttonForm">
+        <img class="buttom-bg" src="http://papn9j3ys.bkt.clouddn.com/hrentry-bg.png" alt="">
+        <div class="word">
+          <p class="word-desc1">如果您希望对1911学堂课程及培训项目了解更多，请填写以下信息，我们会在90分钟内与您联系，期待为您创造更好的教育体验。</p>
+          <p class="word-desc2">
+            <i class="word-desc-bg"></i>您也可以拨打咨询电话：18516821911</p>
+          <div class="formDIv">
+            <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
+              <el-form-item label="" prop="companyname">
+                <el-autocomplete class="inline-input" placeholder="您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+              </el-form-item>
+              <el-form-item label="" prop="person">
+                <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
+              </el-form-item>
+              <el-form-item label="" prop="phones">
+                <el-input v-model="company.phones" placeholder="请输入联系方式"></el-input>
+              </el-form-item>
+              <el-form-item label="" prop="code">
+                <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
+                <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
+                <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
+              </el-form-item>
+              <el-form-item>
+                <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
+              </el-form-item>
+            </el-form>
           </div>
         </div>
       </div>
-
-      <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </div>
+
+    <v-backtotop :data="showCheckedCourse"></v-backtotop>
+  </div>
 </template>
 
 <script>

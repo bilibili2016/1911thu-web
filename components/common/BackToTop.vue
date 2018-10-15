@@ -31,7 +31,7 @@
       <div class="back-to-ceiling hasColor customStyleTwo" v-show="visible">
         <span></span>
         <div class="telShow">
-          <p>咨询电话：010-6270 1911</p>
+          <p>咨询电话：18516821911</p>
         </div>
       </div>
     </transition>
@@ -168,8 +168,8 @@ export default {
       this.$router.push(item)
     },
     easeInOutQuad(t, b, c, d) {
-      if ((t /= d / 2) < 1) return c / 2 * t * t + b
-      return -c / 2 * (--t * (t - 2) - 1) + b
+      if ((t /= d / 2) < 1) return (c / 2) * t * t + b
+      return (-c / 2) * (--t * (t - 2) - 1) + b
     },
     handleopen() {
       window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')

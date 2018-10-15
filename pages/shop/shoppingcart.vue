@@ -28,7 +28,7 @@
                   <div class="fl">
                     <h4 @click="goDetail(course)">{{course.title}}</h4>
                     <h6>{{course.study_time}}学时</h6>
-                    <p>讲师：{{course.teacher_name}}</p>
+                    <p>导师：{{course.teacher_name}}</p>
                   </div>
                 </div>
                 <div class="coursePrice">
@@ -82,7 +82,7 @@
                 <div class="fl">
                   <h4 @click="goDetail(course)">{{course.title}}</h4>
                   <h6>{{course.study_time}}学时</h6>
-                  <p>讲师：{{course.teacher_name}}</p>
+                  <p>导师：{{course.teacher_name}}</p>
                 </div>
               </div>
               <div class="coursePrice">
@@ -398,9 +398,9 @@ export default {
     ...mapGetters('auth', ['isAuthenticated']),
     prices() {
       let p = (
-        Number(this.arraySum + this.projectArraySum) *
-        10 *
-        (Number(this.numForm.number) * 10) /
+        (Number(this.arraySum + this.projectArraySum) *
+          10 *
+          (Number(this.numForm.number) * 10)) /
         100
       ).toFixed(2)
 

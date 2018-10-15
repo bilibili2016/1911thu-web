@@ -117,7 +117,7 @@
                 <div class="fl">
                   <h4>{{course.title}}</h4>
                   <h6>{{course.curriculum_time}}学时</h6>
-                  <p>讲师：{{course.teacher_name}}</p>
+                  <p>导师：{{course.teacher_name}}</p>
                 </div>
               </div>
               <div class="coursePrice">
