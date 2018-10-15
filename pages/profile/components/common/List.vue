@@ -24,11 +24,18 @@
               <!-- 学习中 -->
               <el-button v-if="card.percent < 1&&!card.overtime" type="primary" plain @click="study(card,config.project,card.type)">开始学习</el-button>
               <!-- 已过期 -->
-              <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="addShopCarts(card,index)">
-                <span>
-                  加入购物车
-                </span>
-              </el-button>
+
+              <div v-if="card.type==='2' && !card.is_creator">
+
+              </div>
+              <div v-else>
+                <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="addShopCarts(card,index)">
+                  <span>
+                    加入购物车
+                  </span>
+                </el-button>
+              </div>
+
               <!-- 学习中 -->
               <el-button v-if="card.percent > 0&&!card.overtime&&config.card==='learning'" type="primary" plain @click="study(card,config.project,card.type)">
                 <span>继续学习</span>
