@@ -381,7 +381,8 @@ export default {
       myProjectPage1: {
         types: 1,
         pages: 1,
-        limits: 12
+        limits: 12,
+        pagesize: 12
       },
       myProjectPage2: {
         types: 2,
