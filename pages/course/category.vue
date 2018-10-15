@@ -304,6 +304,7 @@ export default {
           this.pagemsg.total = res.data.pageCount
           this.loadCourseAll = false
         }
+        this.isUrl = true
       })
     },
 
