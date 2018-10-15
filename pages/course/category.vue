@@ -150,7 +150,8 @@ export default {
         pids: ''
       },
       ListData: [],
-      pids: 0
+      pids: 0,
+      isUrl: true
     }
   },
   watch: {
@@ -250,10 +251,12 @@ export default {
     },
     // 学院 item
     selectCid(item, index) {
+      this.isUrl = false
       this.handleSelect('cidType', item, index)
     },
     // 分类 item
     selectPid(item, index) {
+      this.isUrl = false
       this.handleSelect('pidType', item, index)
     },
     // 点击cid pid 获取 card列表
@@ -271,6 +274,7 @@ export default {
           this.categoryData = res.data.curriculumList
           this.pagemsg.total = res.data.pageCount
         }
+        this.isUrl = true
       })
     },
     // 选课 card 列表
@@ -287,6 +291,7 @@ export default {
           }
           this.loadCourse = false
         }
+        this.isUrl = true
       })
     },
     // 项目 card列表
@@ -401,19 +406,26 @@ export default {
         this.getHeaderList('project')
       }
       this.handleSelectCard(this.categoryId, this.pids)
+    },
+    reload() {
+      if (this.isUrl) {
+        location.reload()
+      }
     }
   },
   mounted() {
     this.initParams()
     this.initListCard()
   },
-  // watch: {
-  // $route(v, oldv) {
-  //   if (v.query !== oldv.query) {
-  //     location.reload()
-  //   }
-  // }
-  // },
+  watch: {
+    $route(v, oldv) {
+      console.log(this.isUrl)
+
+      if (v.query !== oldv.query) {
+        this.reload()
+      }
+    }
+  },
   updated() {
     if (matchSplits('cp') === '0') {
       //课程
