@@ -4,7 +4,9 @@
       <div class="center category-style">
         <div class="college">
           <!-- v-if="!loadList" -->
-          <li class="title">学院：</li>
+          <li class="title" v-if="cp == 0">学院：</li>
+          <li class="title" v-if="cp == 1">领域：</li>
+
           <ul>
             <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
               <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
@@ -33,6 +35,7 @@ export default {
     return {
       cid: null,
       pid: '0',
+      cp: '',
       cindex: null,
       cg: null
     }
@@ -51,6 +54,7 @@ export default {
     this.cid = window.location.search.split('&')[0].split('=')[1]
 
     this.pid = window.location.search.split('&')[3].split('=')[1]
+    this.cp = window.location.search.split('&')[1].split('=')[1]
 
     this.$bus.$on('pid', data => {
       this.pid = data
