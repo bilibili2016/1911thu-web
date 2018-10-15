@@ -51,13 +51,13 @@
         <div class="formLi clearfix">
           <p class="fl">收票人姓名</p>
           <p class="fr">
-            <input type="text" v-model="ticketForm.name" placeholder="输入收票人姓名">
+            <input type="text" v-model="ticketForm.name" placeholder="请输入收票人姓名">
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">收票人手机</p>
           <p class="fr">
-            <input type="text" v-model="ticketForm.tel" placeholder="输入收票人手机号">
+            <input type="text" v-model="ticketForm.tel" placeholder="请输入收票人手机号">
           </p>
         </div>
         <div class="formLi clearfix">
