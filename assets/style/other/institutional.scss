@@ -773,9 +773,11 @@
     }
     .el-form {
       width: 960px;
-      height: 400px;
+      height: 60px;
       margin: 0 auto;
       margin-top: 210px;
+      display: flex;
+      flex-wrap: wrap;
       .el-button.el-button--primary {
         width: 264px;
         height: 40px;
@@ -789,7 +791,6 @@
         border-color: none !important;
       }
       .el-form-item {
-        float: left;
         margin-right: 60px;
       }
       .el-form-item__content .el-input__inner::-webkit-input-placeholder {
