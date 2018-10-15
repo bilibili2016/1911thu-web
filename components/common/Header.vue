@@ -177,8 +177,6 @@ export default {
           xid: 0
         }
       })
-      // console.log(this.categoryLink)
-      // open(this.categoryLink)
     },
     handleSearchData(item) {
       persistStore.set('key', item)

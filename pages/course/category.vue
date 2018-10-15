@@ -96,8 +96,6 @@ export default {
         pages: 1,
         limits: 12
       },
-
-      categoryId: '',
       type: '',
       categoryIndex: '',
       loadList: false,
@@ -151,8 +149,8 @@ export default {
         xid: '',
         pids: ''
       },
-      ListData: []
-      // pids: '0'
+      ListData: [],
+      pids: 0
     }
   },
   watch: {
@@ -237,8 +235,8 @@ export default {
       this.handleSelectCard(this.selectCidItem, this.selectPidItem)
     },
     handleSelectCard(selectCidItem, selectPidItem) {
-      if (this.cp === '0') {
-        if (this.xid === '0') {
+      if (this.cp == '0') {
+        if (this.xid == '0') {
           // 调取课程的数据
           this.getCourseCardList(selectCidItem, selectPidItem)
         } else {
@@ -342,8 +340,8 @@ export default {
           ? (this.categoryForm.sortBy = 1)
           : (this.categoryForm.sortBy = 2)
 
-      if (this.cp === '0') {
-        if (this.xid === '0') {
+      if (this.cp == '0') {
+        if (this.xid == '0') {
           this.getCourseCardList(categoryId, pids)
         } else {
           this.getCourseCardChooseList(categoryId, pids)
@@ -359,7 +357,7 @@ export default {
       this.categoryForm.pages = val
       let categoryId = matchSplits('cid')
       let pids = matchSplits('pid')
-      if (this.xid === '0') {
+      if (this.xid == '0') {
         this.getCourseCardList(categoryId, pids)
       } else {
         this.getCourseCardChooseList(categoryId, pids)
@@ -397,7 +395,7 @@ export default {
     },
     initListCard() {
       // cp(0) 课程 cp(1)项目
-      if (this.cp === '0') {
+      if (this.cp == '0') {
         this.getHeaderList('course')
       } else {
         this.getHeaderList('project')
@@ -409,7 +407,13 @@ export default {
     this.initParams()
     this.initListCard()
   },
-
+  // watch: {
+  // $route(v, oldv) {
+  //   if (v.query !== oldv.query) {
+  //     location.reload()
+  //   }
+  // }
+  // },
   updated() {
     if (matchSplits('cp') === '0') {
       //课程
