@@ -36,6 +36,8 @@ import CustomPagination from '@/components/common/Pagination.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { search } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
+import { Trim } from '@/lib/util/helper'
+
 export default {
   components: {
     'v-search': Search,
@@ -83,6 +85,7 @@ export default {
     },
     searchCurriculumList() {
       this.loadSearch = true
+      this.searchForm.searchword = Trim(this.searchForm.searchword)
       search.searchCurriculumList(this.searchForm).then(response => {
         this.searchData = response.data.curriculumList
         if (response.data.curriculumList.length === 0) {
