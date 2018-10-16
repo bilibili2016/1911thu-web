@@ -183,6 +183,10 @@ export default {
     this.$bus.$on('activeSet', () => {
       this.activeName = 'first'
     })
+
+    this.$bus.$on('getUserInfo', () => {
+      this.getUserInfo()
+    })
   }
 }
 </script>
