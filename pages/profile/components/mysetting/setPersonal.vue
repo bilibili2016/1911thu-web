@@ -38,7 +38,7 @@
         </el-form-item>
         <el-form-item class="telForm" disable label="手机号">
           <el-input class="telephone" v-model="psnForm.user_name" disabled></el-input>
-          <span v-if="psnForm.user_name==''" class="teledit"><img src="~assets/images/binding.png" alt="">绑定</span>
+          <span v-if="psnForm.user_name==''" @click="handleBindPhone" class="teledit"><img src="~assets/images/binding.png" alt="">绑定</span>
           <span v-else class="teledit" @click="modifyPhone"><img src="~assets/images/edit.png" alt="">修改</span>
         </el-form-item>
         <el-form-item label="单位名称" v-if="hasCompany" key="psnForm.company_name">
@@ -290,8 +290,14 @@ export default {
     modifyPhone() {
       this.showBindBg = true
     },
+    //关闭弹框
     close() {
       this.showBindBg = false
+    },
+    //绑定手机号
+    handleBindPhone() {
+      this.showBindBg = true
+      this.$bus.$emit('openTwo')
     }
   },
   watch: {

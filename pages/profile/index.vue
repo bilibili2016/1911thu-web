@@ -387,17 +387,20 @@ export default {
       myProjectPage2: {
         types: 2,
         pages: 1,
-        limits: 12
+        limits: 12,
+        pagesize: 12
       },
       myProjectPage3: {
         types: 3,
         pages: 1,
-        limits: 12
+        limits: 12,
+        pagesize: 12
       },
       myProjectPage4: {
         types: 4,
         pages: 1,
-        limits: 12
+        limits: 12,
+        pagesize: 12
       },
       myCourseData1: [],
       myCourseData2: [],
