@@ -156,8 +156,6 @@ export default {
     },
     // 下拉列表 跳转
     handleSelectItem(item) {
-      console.log(item.is_picture_show)
-
       this.$router.push({
         path: '/course/category',
         query: {

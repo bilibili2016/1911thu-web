@@ -1,7 +1,7 @@
 <template>
   <!--绑定手机-->
   <div class="bingPhone">
-    <i class="el-icon-back backPop" @click="back" v-show="!isFirstShow"></i>
+    <i class="el-icon-back backPop" @click="back" v-show="!isFirstShow && isReturnShow"></i>
     <i class="el-icon-close closePop" @click="close"></i>
     <!-- 认证手机号码 -->
     <el-form v-show="isFirstShow" :model="validataPhone" ref="validataPhone" status-icon :rules="validataPhoneRules" class="demo-ruleForm">
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       codeInterval: null,
+      isReturnShow: true,
       isFirstShow: true,
       codeClick: true,
       submitClick: true,
@@ -196,6 +197,7 @@ export default {
   mounted() {
     this.$bus.$on('openTwo', () => {
       this.isFirstShow = false
+      this.isReturnShow = false
     })
   }
 }
