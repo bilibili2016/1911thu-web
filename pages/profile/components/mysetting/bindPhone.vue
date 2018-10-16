@@ -30,7 +30,7 @@
           </el-form-item>
           <el-form-item prop="codes" class="lastItem clearfix">
             <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
-            <el-button class="getCode" @click="getCode">{{bindTelData.getCode}}</el-button>
+            <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div>
           </el-form-item>
           <el-row>
             <el-button class="submit" :disabled="!submitClick" @click.native="submitPhone('bindTelData')">提交</el-button>
@@ -96,11 +96,16 @@ export default {
   methods: {
     back() {
       this.isFirstShow = true
+      this.initData()
     },
     close() {
       this.$emit('close')
       this.isFirstShow = true
       this.validataPhone.phones = ''
+      this.initData()
+    },
+    //初始化数据
+    initData() {
       this.bindTelData.phones = ''
       this.bindTelData.codes = ''
       clearInterval(this.codeInterval)
@@ -122,14 +127,28 @@ export default {
         }
       })
     },
-    //获取验证码
-    getCode() {
-      if (this.bindTelData.seconds === 30 && this.codeClick) {
+    // 验证手机号是否存在
+    verifyRgTel() {
+      if (this.bindTelData.seconds == 30 && this.codeClick) {
         this.codeClick = false
         if (!/^[1][3,4,5,6,7,8,9][0-9]{9}$/.test(this.bindTelData.phones)) {
           message(this, 'error', '请输入正确的手机号！')
+          this.codeClick = true
           return false
         }
+        auth.verifyPhone(this.bindTelData).then(response => {
+          if (response.status !== 0) {
+            message(this, 'error', response.msg)
+            this.codeClick = true
+          } else {
+            this.getCode()
+          }
+        })
+      }
+    },
+    //获取验证码
+    getCode() {
+      if (this.bindTelData.seconds === 30) {
         this.bindTelData.types = 4
         auth.smsCodes(this.bindTelData).then(response => {
           let types = response.status === 0 ? 'success' : 'error'
@@ -159,9 +178,9 @@ export default {
             personalset.editPhone(this.bindTelData).then(res => {
               if (res.status == 0) {
                 message(this, 'success', '绑定成功')
-                this.$emit('close')
-                this.$bus.$emit('getUserInfo')
+                this.$bus.$emit('getUserInfoData', true)
                 this.submitClick = true
+                this.close()
               } else {
                 message(this, 'error', res.msg)
                 this.submitClick = true

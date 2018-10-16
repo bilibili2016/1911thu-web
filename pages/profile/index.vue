@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-banner :config="bconfig" :isUpdate="isUpdate" :isShowUpAvtor="activeTab=='tab-sixth'"></v-banner>
+    <v-banner :config="bconfig" :isShowUpAvtor="activeTab=='tab-sixth'"></v-banner>
     <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
         <!-- 我的首页 -->
@@ -37,7 +37,7 @@
         <el-tab-pane name="tab-sixth">
           <span slot="label" class="tabList">
             <i class="icon-set"></i> 个人设置</span>
-          <v-person @updateUserInfo="isUpdate = true"></v-person>
+          <v-person></v-person>
         </el-tab-pane>
         <!-- 课程码管理 -->
         <el-tab-pane class="my-course my-invitation" name="tab-seventh">

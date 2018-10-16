@@ -50,7 +50,7 @@ import { banner } from '~/lib/v1_sdk/index'
 import { mapGetters, mapActions } from 'vuex'
 import { message } from '@/lib/util/helper'
 export default {
-  props: ['bannerImg', 'config', 'isUpdate', 'isShowUpAvtor'],
+  props: ['bannerImg', 'config', 'isShowUpAvtor'],
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },
@@ -81,13 +81,7 @@ export default {
       this.getUserInfo()
     })
   },
-  watch: {
-    isUpdate(val) {
-      if (val) {
-        this.getUserInfo()
-      }
-    }
-  },
+
   methods: {
     ...mapActions('auth', ['signOut']),
     add_img(event) {

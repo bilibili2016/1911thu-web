@@ -6,7 +6,7 @@
         <!-- 填写个人信息 -->
         <el-tab-pane label="基础信息" name="first">
           <!-- 设置个人信息 -->
-          <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" @changeStatus="changeStatus" @getUserInfo="getUserInfo" @updateUserInfo=" updateUserInfo"></v-setPer>
+          <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" @changeStatus="changeStatus" @getUserInfo="getUserInfo"></v-setPer>
           <!-- 展示个人信息 -->
           <v-showPer v-if="showInfo" :psnForm="psnForm"></v-showPer>
         </el-tab-pane>
@@ -144,10 +144,12 @@ export default {
       }
     },
     // 获取用户信息
-    getUserInfo() {
+    getUserInfo(data) {
       personalset.getUserInfo().then(res => {
         if (res.status === 0) {
           this.psnForm = res.data.userInfo
+          console.log(this.psnForm, 'lll')
+
           if (this.psnForm.company_name && this.psnForm.company_name != '') {
             this.hasCompany = true
             persistStore.set('cpnc', this.psnForm.company_code)
@@ -161,6 +163,11 @@ export default {
             this.showInfo = false
             this.hasPersonalInfo = true
           }
+
+          if (data) {
+            this.showInfo = false
+            this.hasPersonalInfo = true
+          }
         }
       })
     },
@@ -169,9 +176,6 @@ export default {
       this.showInfo = setObj.showInfo
       this.hasCompany = setObj.hasCompany
       this.hasPersonalInfo = setObj.hasPersonalInfo
-    },
-    updateUserInfo(val) {
-      this.$emit('updateUserInfo', val)
     }
   },
   mounted() {
@@ -184,8 +188,8 @@ export default {
       this.activeName = 'first'
     })
 
-    this.$bus.$on('getUserInfo', () => {
-      this.getUserInfo()
+    this.$bus.$on('getUserInfoData', data => {
+      this.getUserInfo(data)
     })
   }
 }

@@ -69,7 +69,6 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 
 export default {
   props: ['data', 'hasCompany'],
-
   data() {
     var nickName = (rule, value, callback) => {
       if (!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
@@ -229,29 +228,6 @@ export default {
         })
       })
     },
-    // 获取用户信息
-    getUserInfo() {
-      personalset.getUserInfo().then(res => {
-        if (res.status === 0) {
-          this.psnForm = res.data.userInfo
-          var setObj = {}
-          if (this.psnForm.company_name && this.psnForm.company_name != '') {
-            setObj.hasCompany = true
-            persistStore.set('cpnc', this.psnForm.company_code)
-          } else {
-            setObj.hasCompany = false
-          }
-          if (res.data.userInfo.is_update === 1) {
-            setObj.showInfo = true
-            setObj.hasPersonalInfo = false
-          } else {
-            setObj.showInfo = false
-            setObj.hasPersonalInfo = true
-          }
-          this.$emit('changeStatus', setObj)
-        }
-      })
-    },
     // 提交个 人信息表单
     onSubmit(formName) {
       if (this.psnForm.province !== '') {
@@ -267,12 +243,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           personalset.perInformation(this.psnForm).then(res => {
-            let flag = res.status != 0 ? false : true
-            // this.$emit('update', flag)
-            // this.$bus.$emit('updateUserInfo', flag)
-            this.$emit('updateUserInfo', flag)
             if (res.status == 0) {
-              // this.getUserInfo()
               this.$emit('getUserInfo')
               this.$bus.$emit('reUserInfo')
             } else {
@@ -301,6 +272,9 @@ export default {
     }
   },
   watch: {
+    data(val) {
+      this.psnForm = this.data
+    },
     province(val) {
       this.city = this.getRegion(val, this.psnForm.province)
       this.area = this.getRegion(this.city, this.psnForm.city)
