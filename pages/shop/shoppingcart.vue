@@ -166,37 +166,6 @@
         </div>
       </div>
     </div>
-    <!-- 提交公司信息 -->
-    <div class="information" @click.self="close" v-show="showInfo">
-      <div class="info">
-        <div class="infoTitle">
-          <h4>为方便我们的沟通，请填写下列信息</h4>
-        </div>
-        <el-form :model="companyInfo" :rules="rules" ref="companyInfo" label-width="136px" class="companyInfo">
-          <el-form-item label="公司名称：" prop="companyname">
-            <!-- <el-input placeholder="请输入公司名称" v-model="companyInfo.companyname"></el-input> -->
-            <el-autocomplete v-model="companyInfo.companyname" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
-          </el-form-item>
-          <el-form-item label="公司地址：" prop="companyaddress">
-            <el-input placeholder="请输入公司地址" v-model="companyInfo.companyaddress"></el-input>
-          </el-form-item>
-          <el-form-item label="联系人：" prop="contactperson">
-            <el-input placeholder="请输入联系人姓名" v-model="companyInfo.contactperson"></el-input>
-          </el-form-item>
-          <el-form-item label="联系方法：" prop="phones">
-            <el-input placeholder="请输入手机号" v-model.number="companyInfo.phones"></el-input>
-          </el-form-item>
-          <el-form-item class="code" label="验证码：" prop="codes">
-            <el-input placeholder="请输入短信验证码" v-model="companyInfo.codes"></el-input>
-            <span @click="handleGetCode">{{companyInfo.getCode}}</span>
-          </el-form-item>
-          <el-form-item class="btnCommit">
-            <el-button type="primary" @click="addPaySubmit('companyInfo')">提交</el-button>
-            <!-- <el-button type="primary" @click="submitForm('companyInfo')">提交</el-button> -->
-          </el-form-item>
-        </el-form>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -229,7 +198,6 @@ export default {
       isNoMsg: false,
       loding: true,
       noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
-      showInfo: false,
       selectAll: false,
       checked: [],
       loseEfficacyc: [], //失效课程列表
@@ -256,58 +224,6 @@ export default {
           value: '111'
         }
       ],
-      companyInfo: {
-        companyname: '',
-        companyaddress: '',
-        contactperson: '',
-        phones: '',
-        codes: '',
-        types: 6,
-        getCode: '获取验证码',
-        seconds: 30,
-        captchaDisable: true
-      },
-      rules: {
-        companyname: [
-          {
-            required: true,
-            message: '请输入公司名称',
-            trigger: 'blur'
-          }
-        ],
-        companyaddress: [
-          {
-            required: true,
-            message: '请填写公司地址',
-            trigger: 'blur'
-          }
-        ],
-        contactperson: [
-          {
-            required: true,
-            message: '请填写联系人姓名',
-            trigger: 'blur'
-          }
-        ],
-        phones: [
-          {
-            required: true,
-            message: '请输入手机号',
-            trigger: 'blur'
-          },
-          {
-            validator: checkPhone,
-            trigger: 'blur'
-          }
-        ],
-        codes: [
-          {
-            required: true,
-            message: '请填写短信验证码',
-            trigger: 'blur'
-          }
-        ]
-      },
       arraySum: 0,
       projectArraySum: 0,
       // 删除课程 data
@@ -357,9 +273,6 @@ export default {
       this.shopCartList()
     }
     // this.$bus.$emit('bannerShow', false)
-    // this.$bus.$on('handleSelectChange', data => {
-    //   this.handleSelectChange(data.course, data.index)
-    // })
     // this.$bus.$on('goDetail', data => {
     //   this.goDetail(data.course, data.index)
     // })
@@ -367,9 +280,6 @@ export default {
     //   this.handleDeleteCourse(data.course, data.index)
     // })
 
-    // this.$bus.$on('handleSelectProjectChange', data => {
-    //   this.handleSelectProjectChange(data.project, data.index)
-    // })
     // this.$bus.$on('goProjectDetail', data => {
     //   this.goProjectDetail(data.project, data.index)
     // })
@@ -489,9 +399,6 @@ export default {
         )
       }
     },
-    handleSelect(item) {
-      this.companyInfo.companyname = item
-    },
     //搜索单位 接口
     searchCompanyList() {
       if (this.companyInfo.companyname === '') {
@@ -508,9 +415,6 @@ export default {
           this.restaurants = res.data.companyList
         })
       }
-    },
-    handleSelect(item) {
-      this.companyInfo.companyname = item
     },
     // 点击全选 课程 + 项目
     handleSelectAll() {
@@ -748,11 +652,6 @@ export default {
               this.isRest = false
             }
           })
-
-        // if (this.selectAllCourse === true && this.selectAllProject === true) {
-        //   this.selectAll = true
-        //   this.isRest = false
-        // }
       }
     },
     // 点击选择全部  ---- 项目 +课程
@@ -910,15 +809,6 @@ export default {
         }
       }
     },
-    // deleteChecked() {
-    //   this.courseList.forEach(item => {
-    //     if (item.checkMsg) {
-    //       let shopIndex = indexOf(this.addArray.curriculumcartid, item.id);
-    //       this.addArray.curriculumcartid.splice(shopIndex, 1);
-    //       this.arraySum = this.arraySum - Number(item.present_price).toFixed(2);
-    //     }
-    //   });
-    // },
     showCommit() {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
       // 否则的话就提醒如何绑定
@@ -966,30 +856,7 @@ export default {
           .catch(() => {
             message(this, 'info', '已取消结算！')
           })
-        // this.$router.push('/shop/affirmorder')
       }
-
-      // this.showInfo = true
-      // this.$router.push('/shop/checkedcourse');
-      //this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
-      // return new Promise((resolve, reject) => {
-      //   home.addChecked(this.addArray).then(res => {
-      //     if (res.status === 0) {
-      //       this.$router.push('/shop/affirmorder')
-      //       // this.shopCartList()
-      //     } else {
-      //       this.$message({
-      //         showClose: true,
-      //         type: 'error',
-      //         message: res.msg
-      //       })
-      //     }
-      //     resolve(true)
-      //   })
-      // })
-    },
-    close() {
-      this.showInfo = false
     },
     querySearch(queryString, cb) {
       var restaurants = this.restaurants
@@ -1007,7 +874,6 @@ export default {
         )
       }
     },
-    handleSelect(item, index) {},
     delNumber() {
       if (this.numForm.number <= 1) {
         this.numForm.number = 1
@@ -1036,25 +902,6 @@ export default {
     // 发送购物车的购买人数
     changeCartNumber() {
       shopcart.changeCartNumber(this.numForm).then(res => {})
-    },
-    addPaySubmit(formName) {
-      this.$router.push('/shop/checkedcourse')
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          shopcart.addPaySubmit(this.companyInfo).then(response => {
-            if (response.status === 100100) {
-              message(this, 'error', response.msg)
-            } else if (response.status === 0) {
-              this.setProductsNum(0)
-              this.$bus.$emit('updateCount')
-
-              this.showInfo = false
-            }
-          })
-        } else {
-          return false
-        }
-      })
     },
     // 删除课程  ---- 课程
     handleDeleteCourse(item, index) {
@@ -1105,36 +952,6 @@ export default {
         // this.getNum()
         this.loding = false
       })
-    },
-    async handleGetCode() {
-      if (
-        this.companyInfo.phones &&
-        /^[1][3,5,6,7,8][0-9]{9}$/.test(this.companyInfo.phones) &&
-        this.companyInfo.seconds === 30
-      ) {
-        if (this.companyInfo.captchaDisable === true) {
-          auth.smsCodes(this.companyInfo).then(response => {
-            message(
-              this,
-              response.status === 0 ? 'success' : 'error',
-              response.msg
-            )
-            this.companyInfo.captchaDisable = false
-            this.companyInfo.getCode = this.companyInfo.seconds + '秒后重新发送'
-            let interval = setInterval(() => {
-              if (this.companyInfo.seconds <= 0) {
-                this.companyInfo.getCode = '获取验证码'
-                this.companyInfo.seconds = 30
-                this.companyInfo.captchaDisable = true
-                clearInterval(interval)
-              } else {
-                this.companyInfo.getCode =
-                  --this.companyInfo.seconds + '秒后重新发送'
-              }
-            }, 1000)
-          })
-        }
-      }
     },
     //tableFooter根据页面滚动位置设置定位
     addClass() {
