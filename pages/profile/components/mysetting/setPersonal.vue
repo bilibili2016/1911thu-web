@@ -1,64 +1,75 @@
 <template>
   <div>
-    <el-form :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
-      <el-form-item label="学号" prop="student_number">
-        <el-input v-model="psnForm.student_number" readonly></el-input>
-      </el-form-item>
-      <el-form-item label="昵称" prop="nick_name">
-        <el-input v-model="psnForm.nick_name"></el-input>
-      </el-form-item>
-      <el-form-item label="性别" prop="sex">
-        <el-radio-group v-model="psnForm.sex">
-          <el-radio label="1">男</el-radio>
-          <el-radio label="2">女</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="生日" prop="birthday">
-        <el-date-picker v-model="psnForm.birthday" type="date" value-format="yyyy-MM-dd"></el-date-picker>
-      </el-form-item>
-      <el-form-item label="所在地区" prop="province">
-        <el-select v-model="psnForm.province" placeholder="省">
-          <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
-        </el-select>
-        <el-select v-model="psnForm.city" placeholder="市" no-data-text="请先选择所在省份">
-          <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
-        </el-select>
-        <el-select v-model="psnForm.area" placeholder="区" no-data-text="请先选择所在城市">
-          <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="职业" prop="position">
-        <el-select v-model="psnForm.position" placeholder="请选择" class="profession">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="邮箱" prop="email">
-        <el-input v-model="psnForm.email" maxlength="50"></el-input>
-      </el-form-item>
-      <el-form-item class="telForm" disable label="手机号">
-        <el-input class="telephone" v-model="psnForm.user_name" disabled></el-input>
-        <span v-if="psnForm.user_name==''" class="teledit"><img src="~assets/images/binding.png" alt="">绑定</span>
-        <span v-else class="teledit" @click="modifyPhone"><img src="~assets/images/edit.png" alt="">修改</span>
-      </el-form-item>
-      <el-form-item label="单位名称" v-if="hasCompany" key="psnForm.company_name">
-        <el-input v-model="psnForm.company_name" maxlength="30"></el-input>
-      </el-form-item>
-      <el-form-item label="单位名称" v-else>
-        <el-input v-model="psnForm.company_name" maxlength="30"></el-input>
-      </el-form-item>
-      <el-form-item size="large" class="submit">
-        <el-button type="primary" class="submitAble" @click="onSubmit('psnForm')" round>提交</el-button>
-      </el-form-item>
-    </el-form>
+    <div>
+      <el-form :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
+        <el-form-item label="学号" prop="student_number">
+          <el-input v-model="psnForm.student_number" readonly></el-input>
+        </el-form-item>
+        <el-form-item label="昵称" prop="nick_name">
+          <el-input v-model="psnForm.nick_name"></el-input>
+        </el-form-item>
+        <el-form-item label="性别" prop="sex">
+          <el-radio-group v-model="psnForm.sex">
+            <el-radio label="1">男</el-radio>
+            <el-radio label="2">女</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="生日" prop="birthday">
+          <el-date-picker v-model="psnForm.birthday" type="date" value-format="yyyy-MM-dd"></el-date-picker>
+        </el-form-item>
+        <el-form-item label="所在地区" prop="province">
+          <el-select v-model="psnForm.province" placeholder="省">
+            <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
+          </el-select>
+          <el-select v-model="psnForm.city" placeholder="市" no-data-text="请先选择所在省份">
+            <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
+          </el-select>
+          <el-select v-model="psnForm.area" placeholder="区" no-data-text="请先选择所在城市">
+            <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="职业" prop="position">
+          <el-select v-model="psnForm.position" placeholder="请选择" class="profession">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="psnForm.email" maxlength="50"></el-input>
+        </el-form-item>
+        <el-form-item class="telForm" disable label="手机号">
+          <el-input class="telephone" v-model="psnForm.user_name" disabled></el-input>
+          <span v-if="psnForm.user_name==''" class="teledit"><img src="~assets/images/binding.png" alt="">绑定</span>
+          <span v-else class="teledit" @click="modifyPhone"><img src="~assets/images/edit.png" alt="">修改</span>
+        </el-form-item>
+        <el-form-item label="单位名称" v-if="hasCompany" key="psnForm.company_name">
+          <el-input v-model="psnForm.company_name" maxlength="30"></el-input>
+        </el-form-item>
+        <el-form-item label="单位名称" v-else>
+          <el-input v-model="psnForm.company_name" maxlength="30"></el-input>
+        </el-form-item>
+        <el-form-item size="large" class="submit">
+          <el-button type="primary" class="submitAble" @click="onSubmit('psnForm')" round>提交</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+    <!-- 修改手机号弹窗 -->
+    <div class="bindBg" v-show="showBindBg">
+      <v-bindphone :bindTelData="bindTelData" :numPhone="psnForm.user_name" @close="close"></v-bindphone>
+    </div>
   </div>
+
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { personalset } from '~/lib/v1_sdk/index'
+import bindPhone from '@/pages/profile/components/mysetting/bindPhone.vue'
+import { checkPhone, checkCode } from '~/lib/util/validatefn'
+
 export default {
   props: ['data', 'hasCompany'],
+
   data() {
     var nickName = (rule, value, callback) => {
       if (!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
@@ -79,6 +90,7 @@ export default {
       callback()
     }
     return {
+      showBindBg: false,
       area: [],
       province: [],
       city: [],
@@ -157,8 +169,23 @@ export default {
             trigger: 'blur'
           }
         ]
+      },
+      bindTelData: {
+        phones: '',
+        codes: '',
+        getCode: '获取验证码',
+        seconds: 30,
+        types: 1,
+        openid: null,
+        companyCodes: '',
+        captchaDisable: false,
+        exist: false,
+        checked: false
       }
     }
+  },
+  components: {
+    'v-bindphone': bindPhone
   },
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
@@ -260,7 +287,12 @@ export default {
       })
     },
     //修改手机号
-    modifyPhone() {}
+    modifyPhone() {
+      this.showBindBg = true
+    },
+    close() {
+      this.showBindBg = false
+    }
   },
   watch: {
     province(val) {
