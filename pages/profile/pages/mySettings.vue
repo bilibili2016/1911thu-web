@@ -148,8 +148,6 @@ export default {
       personalset.getUserInfo().then(res => {
         if (res.status === 0) {
           this.psnForm = res.data.userInfo
-          console.log(this.psnForm, 'lll')
-
           if (this.psnForm.company_name && this.psnForm.company_name != '') {
             this.hasCompany = true
             persistStore.set('cpnc', this.psnForm.company_code)
