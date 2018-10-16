@@ -41,7 +41,9 @@
                 <div class="info clearfix">
                   <div class="info-fl">
                     <span>支付方式：</span>
-                    <span>快捷支付</span>
+                    <span v-if="orderDetail.payment_method == '1'">微信支付</span>
+                    <span v-if="orderDetail.payment_method == '2'">支付宝支付</span>
+
                   </div>
                   <div class="info-fr">
                     <span>支付时间：</span>
@@ -54,7 +56,7 @@
                 <div class="info clearfix" v-show="!(JSON.stringify(bankInfo) === '{}')">
                   <div class="info-fl">
                     <span>支付方式：</span>
-                    <span>公司转账</span>
+                    <span>对公转账</span>
                   </div>
                   <div class="info-fr">
                     <span>户名：</span>
