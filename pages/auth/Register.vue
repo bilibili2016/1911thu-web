@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form-item prop="phones">
-      <el-input v-model.number="registerData.phones" placeholder="请输入登录手机号" clearable></el-input>
+      <el-input v-model.number="registerData.phones" placeholder="请输入注册手机号" clearable></el-input>
     </el-form-item>
     <el-form-item prop="codes">
       <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
@@ -25,7 +25,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import { auth, header } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import { checkCode, checkRegisterPhone } from '~/lib/util/validatefn'
 import { encryption, message } from '~/lib/util/helper'
 export default {
   props: ['registerData', 'codeClick', 'isClick', 'bindTelData', 'isloading'],
@@ -59,18 +59,7 @@ export default {
             trigger: 'blur'
           },
           {
-            validator: checkPhone,
-            trigger: 'blur'
-          }
-        ],
-        phonenum: [
-          {
-            required: true,
-            message: '请输入手机号',
-            trigger: 'blur'
-          },
-          {
-            validator: checkPhone,
+            validator: checkRegisterPhone,
             trigger: 'blur'
           }
         ],

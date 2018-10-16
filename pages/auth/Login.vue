@@ -52,7 +52,11 @@
 import { store as persistStore } from '~/lib/core/store'
 import { auth, header } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import {
+  checkPhone,
+  checkCode,
+  checkRegisterPhone
+} from '~/lib/util/validatefn'
 import { encryption, message } from '~/lib/util/helper'
 import Register from '@/pages/auth/Register'
 import WechatLogin from '@/pages/auth/wechatLogin'
@@ -188,7 +192,7 @@ export default {
             trigger: 'blur'
           },
           {
-            validator: checkPhone,
+            validator: checkRegisterPhone,
             trigger: 'blur'
           }
         ],
