@@ -147,7 +147,7 @@
               <span class="fl minus" v-else @click="delNumber">
                 <i>-</i>
               </span>
-              <input type="text" class="fl num" v-model="numForm.number" @blur="changeNumber">
+              <input type="text" class="fl num" v-model="numForm.number" @blur="changeNumber" onkeyup="value=value.replace(/[^\d]/g,'')">
               <span class="fl add" v-if="numForm.number>=9999">
                 <i>+</i>
               </span>
