@@ -2,11 +2,13 @@
   <div class="teacher home-teacher" v-loading="loading">
     <div class="tcInfo">
       <img :src="teacherBg" alt="">
-      <div>
+      <div class="bg-text">
         <p><img :src="teacherData.head_img" alt=""></p>
-        <h4>{{teacherData.teacher_name}}</h4>
-        <h5>{{teacherData.graduate}}</h5>
-        <h6>{{teacherData.content}}</h6>
+        <div class="desc">
+          <h4>{{teacherData.teacher_name}}</h4>
+          <h5>{{teacherData.graduate}}</h5>
+          <h6>{{teacherData.content}}</h6>
+        </div>
       </div>
 
     </div>
@@ -39,7 +41,7 @@ export default {
       tidForm: {
         tids: null
       },
-      teacherBg: 'http://papn9j3ys.bkt.clouddn.com/teacher_bg.png',
+      teacherBg: 'http://papn9j3ys.bkt.clouddn.com/teacher_bannerBG.png',
       loading: false
     }
   },

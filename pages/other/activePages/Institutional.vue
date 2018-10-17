@@ -524,6 +524,13 @@ export default {
               this.company.person = ''
               this.company.codes = ''
               this.company.phones = ''
+
+              // 初始化验证码倒计时
+              this.company.getCode = '获取验证码'
+              this.company.seconds = 30
+              this.company.captchaDisable = false
+              this.codeClick = false
+              clearInterval(this.interval)
             } else {
               this.$message({
                 showClose: true,
@@ -568,13 +575,13 @@ export default {
           })
           this.company.captchaDisable = true
           this.company.getCode = this.company.seconds + '秒后重新发送'
-          let interval = setInterval(() => {
+          this.interval = setInterval(() => {
             if (this.company.seconds <= 0) {
               this.company.getCode = '获取验证码'
               this.company.seconds = 30
               this.company.captchaDisable = false
               this.codeClick = false
-              clearInterval(interval)
+              clearInterval(this.interval)
             } else {
               this.company.getCode = --this.company.seconds + '秒后重新发送'
             }
