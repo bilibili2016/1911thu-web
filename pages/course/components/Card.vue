@@ -110,23 +110,15 @@
                   </span>
                   <span class="coins">￥ {{courseList.present_price}} </span>
                 </div>
-                <div>
-                  <!-- 项目课程 详情 不展示按钮 -->
-                  <div class=" common-button " v-if="courseList.is_study===0">
-                    <!-- 未购买 购买判断  未购买-->
-                    <div v-if="privileMsg===false ">
-                      <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
-                      <el-button v-if="courseList.is_free_video" type="primary " plain @click="freeStudy(courseList) ">立即试看</el-button>
-                    </div>
-                    <!-- 未购买 购买判断  已购买-->
-                    <div v-if="privileMsg===true">
-                      <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                      <el-button type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
-                    </div>
-                  </div>
-                  <!-- 项目课程 详情 不展示按钮-->
-                  <div class="common-button" v-if="courseList.is_study===1">
-                    <!-- 学习进度 -->
+                <!-- 购买判断  未购买-->
+                <div class=" common-button " v-if="privileMsg==false">
+                  <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
+                  <el-button v-if="courseList.is_free_video" type="primary " plain @click="freeStudy(courseList) ">立即试看</el-button>
+                </div>
+                <!-- 购买判断  已购买-->
+                <div class=" common-button " v-if="privileMsg==true">
+                  <!-- 学习判断  已学习-->
+                  <div v-if="courseList.is_study==1">
                     <div class="lineProgress">
                       <h5 class="clearfix">
                         <span class="fl">学习进度</span>
@@ -146,7 +138,13 @@
                       </div>
                     </div>
                   </div>
+                  <!-- 学习判断  未学习-->
+                  <div v-if="courseList.is_study==0">
+                    <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
+                    <el-button type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
