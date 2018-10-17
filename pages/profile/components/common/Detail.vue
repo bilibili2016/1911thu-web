@@ -78,10 +78,10 @@
                     <span>联行号：</span>
                     <span>{{bankInfo.bank_code}}</span>
                   </div>
-                  <div class="info-fr">
+                  <!-- <div class="info-fr">
                     <span>汇款识别码：</span>
                     <span>{{bankInfo.identification_code}}</span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

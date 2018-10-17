@@ -141,14 +141,14 @@
             <span class="person">购买人数：</span>
             <!-- onselectstart方法为禁止多次点击选中文本 -->
             <span class="number clearfix" unselectable="on" onselectstart="return false;">
-              <span class="fl minus" v-if="numForm.number<=1">
+              <span class="fl minus" style="color:#93999F" v-if="numForm.number<=1">
                 <i>-</i>
               </span>
               <span class="fl minus" v-else @click="delNumber">
                 <i>-</i>
               </span>
               <input type="text" class="fl num" v-model="numForm.number" @blur="changeNumber" onkeyup="value=value.replace(/[^\d]/g,'')">
-              <span class="fl add" v-if="numForm.number>=9999">
+              <span class="fl add" v-if="numForm.number>=9999" @click="moreNumber">
                 <i>+</i>
               </span>
               <span class="fl add" v-else @click="addNumber">
@@ -886,8 +886,14 @@ export default {
       this.numForm.number++
       this.changeCartNumber()
     },
+    moreNumber() {
+      message(this, 'error', '商品数量不能大于9999')
+    },
     // 点击购物车下面加减
     changeNumber() {
+      if (this.numForm.number <= 0) {
+        message(this, 'error', '商品数量必须大于0')
+      }
       if (!/^[0-9]*$/.test(this.numForm.number) || this.numForm.number < 1) {
         this.numForm.number = 1
       }
