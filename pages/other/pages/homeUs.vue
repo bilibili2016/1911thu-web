@@ -17,7 +17,7 @@
           <el-card class="card-style">
             <div v-for="con in listCon" :key="con.id">
               <div v-if="item.id === con.id">
-                <div class="company-info" style="margin-bottom:40px">
+                <div class="company-info">
                   <h1>{{con.title}}</h1>
                 </div>
                 <div class="contentInfo" v-html="con.content"></div>

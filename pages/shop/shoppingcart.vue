@@ -204,26 +204,10 @@ export default {
       loseEfficacyp: [], //失效项目列表
       isIndeterminate: true,
       numForm: {
-        number: 1
+        number: 1, //输入的数量 不能直接用于计算  但是两个值必须随时都相等
+        beforeNumber: 1 // 用于计算的数量，避免输入数量时金额跟着改变
       },
       courseList: '',
-      restaurants: [
-        {
-          value: '11111'
-        },
-        {
-          value: '22'
-        },
-        {
-          value: '222'
-        },
-        {
-          value: '1'
-        },
-        {
-          value: '111'
-        }
-      ],
       arraySum: 0,
       projectArraySum: 0,
       // 删除课程 data
@@ -310,10 +294,9 @@ export default {
       let p = (
         (Number(this.arraySum + this.projectArraySum) *
           10 *
-          (Number(this.numForm.number) * 10)) /
+          (Number(this.numForm.beforeNumber) * 10)) /
         100
       ).toFixed(2)
-
       return Math.abs(p)
     },
     canSubmit() {
@@ -469,6 +452,7 @@ export default {
           this.loding = false
 
           this.numForm.number = response.data.number
+          this.numForm.beforeNumber = response.data.number
           let count =
             Number(response.data.curriculumCartList.length) +
             Number(response.data.projectCartList.length)
@@ -877,16 +861,19 @@ export default {
     delNumber() {
       if (this.numForm.number <= 1) {
         this.numForm.number = 1
+        this.numForm.beforeNumber = 1
       } else {
         this.numForm.number--
+        this.numForm.beforeNumber--
       }
       this.changeCartNumber()
     },
     addNumber() {
       this.numForm.number++
+      this.numForm.beforeNumber++
       this.changeCartNumber()
     },
-    // 点击购物车下面加减
+    // 输入购物车数量
     changeNumber() {
       if (!/^[0-9]*$/.test(this.numForm.number) || this.numForm.number < 1) {
         this.numForm.number = 1
@@ -897,6 +884,7 @@ export default {
       ) {
         this.numForm.number = 9999
       }
+      this.numForm.beforeNumber = this.numForm.number
       this.changeCartNumber()
     },
     // 发送购物车的购买人数
