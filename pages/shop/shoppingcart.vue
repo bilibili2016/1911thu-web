@@ -147,7 +147,7 @@
               <span class="fl minus" v-else @click="delNumber">
                 <i>-</i>
               </span>
-              <input type="text" class="fl num" v-model="numForm.number" @blur="changeNumber" onkeyup="value=value.replace(/[^\d]/g,'')">
+              <input type="text" class="fl num" v-model="numForm.number" @focus="handleFocus" @blur="changeNumber">
               <span class="fl add" v-if="numForm.number>=9999" @click="moreNumber">
                 <i>+</i>
               </span>
@@ -164,6 +164,15 @@
           <span class="checkedNUmber fr">已选择
             <i>{{Number(this.addArray.curriculumcartid.length) + Number(this.projectAddArray.projectcartid.length)}} </i> 门课程</span>
         </div>
+      </div>
+    </div>
+    <!-- 超出限制提醒 -->
+    <div class="alertMask" v-show="isShowAlert">
+      <div class="alertPop">
+        <i class="el-icon-close" @click="handlePopClick"></i>
+        <img src="http://papn9j3ys.bkt.clouddn.com/alert.png" alt="">
+        <p>{{alertText}}</p>
+        <el-button @click="handlePopClick">知道了</el-button>
       </div>
     </div>
   </div>
@@ -184,6 +193,9 @@ export default {
   },
   data() {
     return {
+      lastNum: '',
+      isShowAlert: false,
+      alertText: '商品数量不能大于9999',
       courseType: {
         type: 'course'
       },
@@ -874,12 +886,27 @@ export default {
       this.changeCartNumber()
     },
     moreNumber() {
-      message(this, 'error', '商品数量不能大于9999')
+      this.isShowAlert = true
+      this.alertText = '商品数量不能大于9999'
     },
-    // 点击购物车下面加减
+    // 购买人数输入框获取焦点记录当前数字
+    handleFocus() {
+      this.lastNum = this.numForm.number
+    },
+    // 购买人数输入框失去焦点
     changeNumber() {
+      let reg = /^[0-9]*$/
+      if (!reg.test(this.numForm.number)) {
+        this.isShowAlert = true
+        this.alertText = '商品数量超限'
+        this.numForm.number = this.lastNum
+        return false
+      }
       if (this.numForm.number <= 0) {
-        message(this, 'error', '商品数量必须大于0')
+        this.isShowAlert = true
+        this.alertText = '商品数量必须大于0'
+        this.numForm.number = this.lastNum
+        return false
       }
       if (!/^[0-9]*$/.test(this.numForm.number) || this.numForm.number < 1) {
         this.numForm.number = 1
@@ -964,6 +991,10 @@ export default {
       } else {
         this.isFixed = true
       }
+    },
+    // 关闭超出限制弹窗
+    handlePopClick() {
+      this.isShowAlert = false
     }
   },
   updated() {
