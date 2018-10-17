@@ -15,7 +15,7 @@
               <div class="fl">
                 <h4 @click="goCourseInfo(course)" :title="course.title">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
-                <p>导师：{{course.teacher_name}}</p>
+                <!-- <p>导师：{{course.teacher_name}}</p> -->
               </div>
             </div>
             <!-- 项目列表 -->
