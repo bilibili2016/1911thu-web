@@ -37,7 +37,7 @@
 
 <script>
 import { binding } from '~/lib/v1_sdk/index'
-import { timestampToYMD, open } from '@/lib/util/helper'
+import { timestampToYMD } from '@/lib/util/helper'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'

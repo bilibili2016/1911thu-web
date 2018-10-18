@@ -157,7 +157,7 @@ export default {
     },
     // 跳转老师详情
     handleLinkTeacher(item) {
-      window.open(window.location.origin + '/home/teacher/' + item)
+      this.$router.push('/home/teacher/' + item)
     },
     // 标签 - 点击评价改变星级
     handleChangeRate(val) {

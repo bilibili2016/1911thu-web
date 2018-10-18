@@ -22,7 +22,7 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
-import { getQueryString, open } from '@/lib/util/helper'
+import { getQueryString } from '@/lib/util/helper'
 import { auth, header, home } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { validateSearch } from '~/lib/util/validate'

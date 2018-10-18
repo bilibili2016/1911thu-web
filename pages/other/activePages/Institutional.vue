@@ -399,18 +399,6 @@ export default {
           { validator: checkCode, trigger: 'blur' }
         ]
       },
-      customerProject: {
-        base: '/project/customerProject',
-        sid: '',
-        edit: 1
-      },
-      urlLink: {
-        base: '/course/category',
-        cid: '',
-        cp: '',
-        xid: '',
-        pids: ''
-      },
       serviceList: [
         {
           title: '了解需求',
@@ -481,11 +469,15 @@ export default {
   methods: {
     fetchDate() {},
     goCourseList(item) {
-      this.urlLink.cid = item.id
-      this.urlLink.cp = item.is_picture_show
-      this.urlLink.xid = 0
-      this.urlLink.pids = 0
-      open(this.urlLink)
+      this.$router.push({
+        path: '/course/category',
+        query: {
+          cid: item.id,
+          cp: item.is_picture_show,
+          xid: 0,
+          pids: 0
+        }
+      })
     },
     handleScroll() {
       window.scrollTo(0, this.buttonFormTop)
@@ -503,12 +495,6 @@ export default {
       //     }
       //   }, 0.01)
       // }
-    },
-    handleLink(item) {
-      window.open(window.location.origin + item.link)
-    },
-    goLink(item) {
-      window.open(window.location.origin + item)
     },
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
@@ -658,7 +644,13 @@ export default {
     //跳转到自定制项目
     goCustomerProject() {
       if (persistStore.get('token')) {
-        open(this.customerProject)
+        this.$router.push({
+          path: '/project/customerProject',
+          query: {
+            sid: '',
+            edit: 1
+          }
+        })
       } else {
         this.$bus.$emit('loginShow')
       }

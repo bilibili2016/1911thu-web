@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-import { timestampToYMD, open, message } from '@/lib/util/helper'
+import { timestampToYMD, message } from '@/lib/util/helper'
 export default {
   props: ['customerProjectListData'],
   methods: {

@@ -57,7 +57,6 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
-import { open } from '@/lib/util/helper'
 export default {
   props: ['courseList'],
   computed: {

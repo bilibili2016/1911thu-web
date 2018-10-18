@@ -202,7 +202,7 @@ export default {
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1
-      window.open(window.location.origin + '/home/teacher/' + this.tidForm.tids)
+      this.$router.push('/home/teacher/' + this.tidForm.tids)
     },
     // 已过期商品直接加入购物车
     addShopCarts(item, index) {

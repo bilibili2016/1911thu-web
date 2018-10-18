@@ -84,7 +84,7 @@
 import { mapActions } from 'vuex'
 import { card } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { open, matchSplits } from '~/lib/util/helper'
+import { matchSplits } from '~/lib/util/helper'
 export default {
   props: ['data', 'config'],
   data() {

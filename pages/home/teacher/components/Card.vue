@@ -24,7 +24,7 @@ export default {
   props: ['famousList'],
   methods: {
     handleLinkTeacherInfo(item) {
-      window.open(window.location.origin + '/home/teacher/' + item.id)
+      this.$router.push('/home/teacher/' + item.id)
     }
   }
 }

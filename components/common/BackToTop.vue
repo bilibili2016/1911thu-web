@@ -85,12 +85,7 @@ export default {
       ceilSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop11.png',
       wxSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
       qqSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
-      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png',
-      customerProject: {
-        base: '/project/customerProject',
-        sid: '',
-        edit: 1
-      }
+      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png'
     }
   },
   mounted() {
@@ -116,7 +111,13 @@ export default {
     //跳转到自定制项目
     goCustomerProject() {
       if (persistStore.get('token')) {
-        open(this.customerProject)
+        this.$router.push({
+          path: '/project/customerProject',
+          query: {
+            sid: '',
+            edit: 1
+          }
+        })
       } else {
         this.$bus.$emit('loginShow')
       }

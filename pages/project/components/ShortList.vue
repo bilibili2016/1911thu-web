@@ -27,7 +27,6 @@
 
 <script>
 import { store as persistStore } from '~/lib/core/store'
-import { open } from '@/lib/util/helper'
 export default {
   props: ['cardData'],
   data() {

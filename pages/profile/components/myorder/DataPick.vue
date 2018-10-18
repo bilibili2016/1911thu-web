@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { message, open } from '@/lib/util/helper'
+import { message } from '@/lib/util/helper'
 import { timestampToYMD } from '@/lib/util/helper'
 
 export default {

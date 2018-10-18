@@ -126,7 +126,7 @@ export default {
     ...mapActions('auth', ['setIsCollection']),
     // 跳转老师详情
     handleLinkTeacher(item) {
-      window.open(window.location.origin + '/home/teacher/' + item)
+      this.$router.push('/home/teacher/' + item)
     },
     // 评论-点击评论查看更多
     getMore() {

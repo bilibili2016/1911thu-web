@@ -22,7 +22,6 @@
 import { store as persistStore } from '~/lib/core/store'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import CustomerCard from '@/pages/profile/components/common/CustomerCard'
-import { open } from '@/lib/util/helper'
 
 export default {
   props: ['customerProjectListData', 'customerPagemsg', 'customer'],
@@ -31,11 +30,6 @@ export default {
       noMsg: {
         type: 'myCustomerProject',
         text: '抱歉，没有自定制项目~'
-      },
-      customerProject: {
-        base: '/project/customerProject',
-        sid: '',
-        edit: 1
       }
     }
   },
@@ -47,7 +41,13 @@ export default {
     handleCustomerAdd() {
       //跳转到自定制项目
       if (persistStore.get('token')) {
-        open(this.customerProject)
+        this.$router.push({
+          path: '/project/customerProject',
+          query: {
+            sid: '',
+            edit: 1
+          }
+        })
       } else {
         this.$bus.$emit('loginShow')
       }

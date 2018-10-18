@@ -47,13 +47,14 @@ export default {
     ...mapActions('auth', ['setKid']),
     // 跳转课程详情
     goCourseDetail(item) {
-      let urlLink = {
-        base: '/course/detail',
-        kid: item.curriculum_id,
-        pid: this.projectId,
-        page: 0
-      }
-      open(urlLink)
+      this.$router.push({
+        path: '/course/detail',
+        query: {
+          kid: item.curriculum_id,
+          pid: this.projectId,
+          page: 0
+        }
+      })
     },
     // 跳转到项目播放页
     goProjectPlayer(course) {
