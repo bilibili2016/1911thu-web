@@ -132,7 +132,7 @@ export default {
     verifyRgTel() {
       if (this.bindTelData.seconds == 30 && this.codeClick) {
         this.codeClick = false
-        if (!/^[1][3,4,5,6,7,8,9][0-9]{9}$/.test(this.bindTelData.phones)) {
+        if (!/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.bindTelData.phones)) {
           message(this, 'error', '请输入正确的手机号！')
           this.codeClick = true
           return false

@@ -9,25 +9,25 @@
             <img v-if="item.study_type==='2'" class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/mixture-icon.png" alt="">
             <img v-if="item.study_type==='3'" class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/interaction-icon.png" alt="">
           </div>
-            <div class="bgImgs " @click="gotoDetail(item)">
-              <img :src="item.picture" alt=" ">
+          <div class="bgImgs " @click="gotoDetail(item)">
+            <img :src="item.picture" alt=" ">
           </div>
-              <el-row>
-                <div class="item ">
-                  <p class="itemBox-name " @click="gotoDetail(item)">
-                    <span :title="item.title">{{item.title}}</span>
-                  </p>
-                  <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>
-                  <!-- 自定义项目下单和已经够买的，不可以修改和删除 -->
-                  <div class="operate" v-if="item.is_edit==='1'">
-                    <span @click="editCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
-                      <span @click="deleteCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
-                  </div>
-                  <!-- 暂不显示已够买字段 -->
-                  <!-- <div v-else class="buied" @click="handleBuied">已购买</div> -->
-                </div>
-              </el-row>
+          <el-row>
+            <div class="item ">
+              <p class="itemBox-name " @click="gotoDetail(item)">
+                <span :title="item.title">{{item.title}}</span>
+              </p>
+              <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>
+              <!-- 自定义项目下单和已经够买的，不可以修改和删除 -->
+              <div class="operate" v-if="item.is_edit==='1'">
+                <span @click="editCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
+                <span @click="deleteCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
+              </div>
+              <!-- 暂不显示已够买字段 -->
+              <!-- <div v-else class="buied" @click="handleBuied">已购买</div> -->
             </div>
+          </el-row>
+        </div>
 
       </el-card>
     </div>
@@ -38,31 +38,26 @@
 import { timestampToYMD, open, message } from '@/lib/util/helper'
 export default {
   props: ['customerProjectListData'],
-  data() {
-    return {
-      customerProject: {
-        base: '/project/customerProject',
-        sid: '',
-        edit: 2
-      },
-      project: {
-        base: '/project/projectdetail',
-        kid: '',
-        type: 2
-      }
-    }
-  },
   methods: {
     //跳转项目详情页
     gotoDetail(item) {
-      this.project.kid = item.id
-      this.project.type = 2
-      open(this.project)
+      this.$router.push({
+        path: '/project/projectdetail',
+        query: {
+          kid: item.id,
+          type: 2
+        }
+      })
     },
     //编辑
     editCustomerProject(item) {
-      this.customerProject.sid = item.id
-      open(this.customerProject)
+      this.$router.push({
+        path: '/project/customerProject',
+        query: {
+          sid: item.id,
+          edit: 2
+        }
+      })
     },
     //删除
     deleteCustomerProject(item) {

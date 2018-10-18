@@ -133,18 +133,13 @@ export default {
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid']),
     openDetail(item) {
-      let urlLink = {
-        base: '/project/projectdetail',
-        kid: item.id,
-        type: 1
-      }
-      open(urlLink)
-      // window.open(
-      //   window.location.origin +
-      //     '/project/projectdetail?kid=' +
-      //     item.id +
-      //     '&type=1'
-      // )
+      this.$router.push({
+        path: '/project/projectdetail',
+        query: {
+          kid: item.id,
+          type: 1
+        }
+      })
     },
     goToPlay(item) {
       let projectLink = {
@@ -152,14 +147,10 @@ export default {
         kid: item.id
       }
       open(projectLink)
-      // window.open(
-      //   window.location.origin + '/project/projectPlayer?id=' + item.id
-      // )
     },
     // 已过期商品直接加入购物车
     goShoppingCart(item) {
       this.kidForm.kids = item.id
-      // this.setKid(this.kidForm)
       this.addShopCarts()
     },
     addShopCarts() {

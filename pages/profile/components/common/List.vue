@@ -181,22 +181,24 @@ export default {
       open(urlLink)
     },
     openProjectDetail(id, type) {
-      let urlLink = {
-        base: '/project/projectdetail',
-        kid: id,
-        type: type
-      }
-      open(urlLink)
+      this.$router.push({
+        path: '/project/projectdetail',
+        query: {
+          kid: id,
+          type: type
+        }
+      })
     },
     openDetail(item) {
       this.kidForm.kids = item.id
-      let urlLink = {
-        base: '/course/coursedetail',
-        kid: item.id,
-        bid: '',
-        page: 0
-      }
-      open(urlLink)
+      this.$router.push({
+        path: '/course/coursedetail',
+        query: {
+          kid: item.id,
+          bid: '',
+          page: 0
+        }
+      })
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1

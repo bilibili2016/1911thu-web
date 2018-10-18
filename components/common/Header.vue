@@ -165,9 +165,6 @@ export default {
           xid: 0
         }
       })
-      // if (window.location.pathname == '/course/category') {
-      //   location.reload()
-      // }
     },
     handleSearchData(item) {
       persistStore.set('key', item)

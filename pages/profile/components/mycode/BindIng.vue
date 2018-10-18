@@ -59,17 +59,7 @@ export default {
         type: 'myCode',
         text: '抱歉，现在还没有兑换码~'
       },
-      courseDetail: {
-        base: '/course/coursedetail',
-        kid: '',
-        bid: '',
-        page: 0
-      },
-      projectDetail: {
-        base: '/project/projectdetail',
-        kid: '',
-        type: 1
-      },
+      type: 1,
       responseData: { type: true, res: '' }
     }
   },
@@ -77,16 +67,27 @@ export default {
     // 跳转课程或项目详情
     handleLink(item, type) {
       if (item.type === '1') {
-        this.courseDetail.kid = item.curriculum_id
-        open(this.courseDetail)
+        this.$router.push({
+          path: '/course/coursedetail',
+          query: {
+            kid: item.curriculum_id,
+            bid: '',
+            page: 0
+          }
+        })
       } else {
         if (type === '2') {
-          this.projectDetail.type = 1
+          this.type = 1
         } else {
-          this.projectDetail.type = 2
+          this.type = 2
         }
-        this.projectDetail.kid = item.curriculum_id
-        open(this.projectDetail)
+        this.$router.push({
+          path: '/project/projectdetail',
+          query: {
+            kid: item.curriculum_id,
+            type: this.type
+          }
+        })
       }
     },
     // 时间戳转日期格式

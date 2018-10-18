@@ -553,7 +553,7 @@ export default {
       this.codeClick = true
       if (
         this.company.phones === '' ||
-        !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.company.phones)
+        !/^[1][2,3,5,6,7,8,9][0-9]{9}$/.test(this.company.phones)
       ) {
         this.$message({
           showClose: true,

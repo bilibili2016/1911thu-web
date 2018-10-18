@@ -34,17 +34,6 @@ export default {
     return {
       kidForm: {
         kids: ''
-      },
-      courseDetail: {
-        base: '/course/coursedetail',
-        kid: null,
-        bid: '',
-        page: 0
-      },
-      projectDetail: {
-        base: '/project/projectdetail',
-        kid: null,
-        type: 1
       }
     }
   },
@@ -58,12 +47,23 @@ export default {
         window.open(img.jump_url)
       }
       if (img.jump_type == '1' && img.jump_id != '') {
-        this.courseDetail.kid = img.jump_id
-        open(this.courseDetail)
+        this.$router.push({
+          path: '/course/coursedetail',
+          query: {
+            kid: img.jump_id,
+            bid: '',
+            page: 0
+          }
+        })
       }
       if (img.jump_type == '2' && img.jump_id != '') {
-        this.projectDetail.kid = img.jump_id
-        open(this.projectDetail)
+        this.$router.push({
+          path: '/project/projectdetail',
+          query: {
+            kid: img.jump_id,
+            type: 1
+          }
+        })
       }
     },
     goDetail(news) {

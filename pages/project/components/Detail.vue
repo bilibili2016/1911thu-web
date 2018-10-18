@@ -140,12 +140,13 @@ export default {
       })
     },
     handleLine(id) {
-      let urlLink = {
-        base: '/project/projectdetail',
-        kid: id,
-        type: 1
-      }
-      open(urlLink)
+      this.$router.push({
+        path: '/project/projectdetail',
+        query: {
+          kid: id,
+          type: 1
+        }
+      })
     },
     // 立即购买
     handleBuy(id) {

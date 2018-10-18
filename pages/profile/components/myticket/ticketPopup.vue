@@ -557,7 +557,7 @@ export default {
       }
       if (
         Trim(this.zzTicketForm.tel) === '' ||
-        !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.zzTicketForm.tel)
+        !/^[1][2,3,5,6,7,8,9][0-9]{9}$/.test(this.zzTicketForm.tel)
       ) {
         this.$message({
           showClose: true,
@@ -714,7 +714,7 @@ export default {
       }
       if (
         Trim(this.ticketForm.tel) === '' ||
-        !/^[1][3,5,6,7,8][0-9]{9}$/.test(this.ticketForm.tel)
+        !/^[1][2,3,5,6,7,8,9][0-9]{9}$/.test(this.ticketForm.tel)
       ) {
         this.$message({
           showClose: true,

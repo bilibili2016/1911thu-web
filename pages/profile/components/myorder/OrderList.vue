@@ -68,7 +68,7 @@ import { timestampToTime } from '@/lib/util/helper'
 import { order } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { message, open } from '@/lib/util/helper'
+import { message } from '@/lib/util/helper'
 export default {
   props: ['data', 'config'],
   data() {
@@ -81,17 +81,6 @@ export default {
       },
       kidForm: {
         kid: ''
-      },
-      coursedetail: {
-        base: '/course/coursedetail',
-        kid: '',
-        bid: '',
-        page: 0
-      },
-      projectdetail: {
-        base: '/project/projectdetail',
-        kid: '',
-        type: 1
       },
       responseData: { type: true, res: '' }
     }
@@ -133,9 +122,13 @@ export default {
     },
     //去支付
     goPay(id) {
-      window.open(
-        window.location.origin + '/shop/wepay?order=' + id + '&attach=1'
-      )
+      this.$router.push({
+        path: '/shop/wepay',
+        query: {
+          order: id,
+          attach: 1
+        }
+      })
     },
     //去购物车
     goShopping(id, courseList) {
@@ -175,14 +168,24 @@ export default {
     //课程详情
     goCourseInfo(item, index) {
       this.kidForm.kids = item.id
-      this.coursedetail.kid = item.id
-      open(this.coursedetail)
+      this.$router.push({
+        path: '/course/coursedetail',
+        query: {
+          kid: item.id,
+          bid: '',
+          page: 0
+        }
+      })
     },
     //项目详情
     goProjrctInfo(item) {
-      this.projectdetail.type = item.type
-      this.projectdetail.kid = item.id
-      open(this.projectdetail)
+      this.$router.push({
+        path: '/project/projectdetail',
+        query: {
+          kid: item.id,
+          type: item.type
+        }
+      })
     },
     //列表详情
     selectPayApply(item, type) {

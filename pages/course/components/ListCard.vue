@@ -26,9 +26,9 @@
             <div v-if="course.is_free =='2'">
               <p class="coin">免费</p>
               <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
-                <div class="fr common-button-half-right">
-                  <el-button type="primary" plain @click.stop="handleLinkCourseDetail(course)"> 立即学习</el-button>
-                </div>
+              <div class="fr common-button-half-right">
+                <el-button type="primary" plain @click.stop="handleLinkCourseDetail(course)"> 立即学习</el-button>
+              </div>
             </div>
             <!-- 收费课程展示 -->
             <div v-else>
@@ -39,12 +39,12 @@
               <p class="coin" v-else>￥ {{course.present_price}}</p>
 
               <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
-                <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">
-                  <el-button type="primary" plain @click.stop="goBuy(course)">立即购买</el-button>
-                </div>
-                <div class="fr common-button-half-right" v-else>
-                  <el-button type="primary" plain @click.stop="handleAddShopCart(course)">加入购物车</el-button>
-                </div>
+              <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">
+                <el-button type="primary" plain @click.stop="goBuy(course)">立即购买</el-button>
+              </div>
+              <div class="fr common-button-half-right" v-else>
+                <el-button type="primary" plain @click.stop="handleAddShopCart(course)">加入购物车</el-button>
+              </div>
             </div>
           </div>
         </div>
@@ -74,19 +74,9 @@ export default {
       },
       two_is_cart: 0,
       cart: 0,
+      page: 0,
       curriculumcartids: {
         cartid: null,
-        type: 1
-      },
-      courseDetail: {
-        base: '/course/coursedetail',
-        kid: null,
-        bid: '',
-        page: 0
-      },
-      projectDetail: {
-        base: '/project/projectdetail',
-        kid: null,
         type: 1
       }
     }
@@ -95,13 +85,19 @@ export default {
     ...mapActions('auth', ['setKid', 'setProductsNum']),
     // 点击跳转课程详情页
     handleLinkCourseDetail(item) {
-      this.courseDetail.kid = item.id
       if (this.cidNumber === '2') {
-        this.courseDetail.page = 1
+        this.page = 1
       } else {
-        this.courseDetail.page = 0
+        this.page = 0
       }
-      open(this.courseDetail)
+      this.$router.push({
+        path: '/course/coursedetail',
+        query: {
+          kid: item.id,
+          bid: '',
+          page: 0
+        }
+      })
     },
     // 设置购物车中 is_cart 改变
     handleChangeIsCart(item) {
@@ -176,17 +172,28 @@ export default {
     courseInfo(item, index) {
       if (this.cidNumber === '0') {
         // 项目-项目详情
-        this.projectDetail.kid = item.id
-        open(this.projectDetail)
+        this.$router.push({
+          path: '/project/projectdetail',
+          query: {
+            kid: item.id,
+            type: 1
+          }
+        })
       } else {
         this.kidForm.kids = item.id
-        this.courseDetail.kid = item.id
         if (this.cidNumber === '2') {
-          this.courseDetail.page = 1
+          this.page = 1
         } else {
-          this.courseDetail.page = 0
+          this.page = 0
         }
-        open(this.courseDetail)
+        this.$router.push({
+          path: '/course/coursedetail',
+          query: {
+            kid: item.id,
+            bid: '',
+            page: 0
+          }
+        })
       }
     },
     changeManey(money) {

@@ -17,7 +17,7 @@
             <img :src="jinImg" alt="" class="jin-style">
           </div>
           <!-- 项目封面 图片 -->
-          <div class="bgImgs">
+          <div class="bgImgs" @click="handleLinkDetail(card)">
             <img :src="card.picture" alt="">
           </div>
           <!-- 项目标签 -->
@@ -107,18 +107,7 @@ export default {
       isIndex: true,
       jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
       newTag: 'http://papn9j3ys.bkt.clouddn.com/new.png',
-      numSrc: require('@/assets/images/home_num.png'),
-      coursedetail: {
-        base: '/course/coursedetail',
-        kid: null,
-        bid: '',
-        page: 0
-      },
-      projectdetail: {
-        base: '/project/projectdetail',
-        kid: null,
-        type: 1
-      }
+      numSrc: require('@/assets/images/home_num.png')
     }
   },
   methods: {
@@ -126,18 +115,35 @@ export default {
     handleLinkDetail(item) {
       // 判断当前页是否是在首页
       if (this.isIndex) {
-        this.coursedetail.kid = item.id
-        open(this.coursedetail)
+        this.$router.push({
+          path: '/course/coursedetail',
+          query: {
+            kid: item.id,
+            bid: '',
+            page: 0
+          }
+        })
       } else {
         // 分类列表页
         if (this.cp === '0') {
           // 课程-转到课程详情
-          this.coursedetail.kid = item.id
-          open(this.coursedetail)
+          this.$router.push({
+            path: '/course/coursedetail',
+            query: {
+              kid: item.id,
+              bid: '',
+              page: 0
+            }
+          })
         } else {
           // 项目-项目详情
-          this.projectdetail.kid = item.id
-          open(this.projectdetail)
+          this.$router.push({
+            path: '/project/projectdetail',
+            query: {
+              kid: item.id,
+              type: 1
+            }
+          })
         }
       }
     },
