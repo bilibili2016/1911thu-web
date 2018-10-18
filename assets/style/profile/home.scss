@@ -369,7 +369,7 @@
       height: 20px;
       margin-bottom: -4px;
       &.icon-home {
-        background: url('~assets/images/icon_home1.png') no-repeat center;
+        background: url('~assets/images/icon_index1.png') no-repeat center;
         background-size: contain;
       }
       &.icon-course {
@@ -408,7 +408,7 @@
   }
   .el-tabs__item.is-active i {
     &.icon-home {
-      background: url('~assets/images/icon_home2.png') no-repeat center;
+      background: url('~assets/images/icon_index2.png') no-repeat center;
       background-size: contain;
     }
     &.icon-course {
