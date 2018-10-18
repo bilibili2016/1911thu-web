@@ -19,7 +19,7 @@ export default {
       subPagesData: [
         {
           link: 'tab-first',
-          text: '我的首页'
+          text: '最近学习'
         },
         {
           link: 'tab-second',
