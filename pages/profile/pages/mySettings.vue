@@ -111,7 +111,6 @@ export default {
       this.showInfo = false
       this.hasPersonalInfo = true
     },
-
     // 整理省市区
     getRegion(data, val) {
       let tmp = []
