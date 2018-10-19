@@ -153,7 +153,13 @@ export default {
         cartid: null,
         type: 1
       },
-      cidNumber: ''
+      cidNumber: '',
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
+      }
     }
   },
   methods: {
@@ -191,14 +197,18 @@ export default {
     },
     openDetail(item) {
       this.kidForm.kids = item.id
-      this.$router.push({
-        path: '/course/coursedetail',
-        query: {
-          kid: item.id,
-          bid: '',
-          page: 0
-        }
-      })
+
+      this.courseUrl.kid = item.id
+      open(this.courseUrl)
+
+      // this.$router.push({
+      //   path: '/course/coursedetail',
+      //   query: {
+      //     kid: item.id,
+      //     bid: '',
+      //     page: 0
+      //   }
+      // })
     },
     goTeacherInfo(id) {
       this.tidForm.tids = id * 1

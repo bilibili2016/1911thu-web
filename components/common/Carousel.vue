@@ -34,6 +34,12 @@ export default {
     return {
       kidForm: {
         kids: ''
+      },
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
       }
     }
   },
@@ -47,14 +53,16 @@ export default {
         window.open(img.jump_url)
       }
       if (img.jump_type == '1' && img.jump_id != '') {
-        this.$router.push({
-          path: '/course/coursedetail',
-          query: {
-            kid: img.jump_id,
-            bid: '',
-            page: 0
-          }
-        })
+        this.courseUrl.kid = img.jump_id
+        open(this.courseUrl)
+        // this.$router.push({
+        //   path: '/course/coursedetail',
+        //   query: {
+        //     kid: img.jump_id,
+        //     bid: '',
+        //     page: 0
+        //   }
+        // })
       }
       if (img.jump_type == '2' && img.jump_id != '') {
         this.$router.push({

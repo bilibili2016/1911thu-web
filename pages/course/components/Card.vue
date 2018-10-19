@@ -158,7 +158,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
-import { message, matchSplits } from '~/lib/util/helper'
+import { message, matchSplits, open } from '~/lib/util/helper'
 import CardPlayer from '@/pages/course/components/CardPlayer'
 export default {
   components: {
@@ -184,6 +184,12 @@ export default {
         curriculumId: '',
         catalogId: '',
         autoplay: true
+      },
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
       }
     }
   },
@@ -203,6 +209,9 @@ export default {
     },
     // 获取默认小节 跳转 章节id和小节id
     getDefaultCurriculumCatalogId(item) {
+      this.courseUrl.kid = matchSplits('kid')
+      this.courseUrl.bid = item.defaultCurriculumCatalog.id
+
       this.$router.push(
         '/course/coursedetail' +
           '?kid=' +

@@ -77,7 +77,7 @@
 
 <script>
 import { ticketorder } from '~/lib/v1_sdk/index'
-import { timestampToTime } from '@/lib/util/helper'
+import { timestampToTime, open } from '@/lib/util/helper'
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import TicketPop from '@/pages/profile/components/myticket/ticketPopup'
@@ -114,6 +114,12 @@ export default {
 
       kidForm: {
         kids: ''
+      },
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
       }
     }
   },
@@ -223,7 +229,10 @@ export default {
     //课程详情
     goCourseInfo(item, index) {
       this.kidForm.kids = item.id
-      this.$router.push(`/course/coursedetail?kid=${item.id}&bid=&page=0`)
+
+      this.courseUrl.kid = item.id
+      open(this.courseUrl)
+      // this.$router.push(`/course/coursedetail?kid=${item.id}&bid=&page=0`)
     },
     //项目详情
     goProjrctInfo(item, type) {

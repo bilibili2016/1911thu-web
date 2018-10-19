@@ -186,7 +186,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 import List from '@/pages/shop/components/List'
-import { message, setTitle } from '@/lib/util/helper'
+import { message, setTitle, open } from '@/lib/util/helper'
 export default {
   components: {
     'v-list': List
@@ -259,6 +259,12 @@ export default {
       deleteAllData: {
         projectcartid: [],
         curriculumcartid: []
+      },
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
       }
     }
   },
@@ -335,14 +341,17 @@ export default {
       let kidForm = {
         kids: item.id
       }
-      this.$router.push({
-        path: '/course/coursedetail',
-        query: {
-          kid: item.id,
-          bid: '',
-          page: 0
-        }
-      })
+
+      this.courseUrl.kid = item.id
+      open(this.courseUrl)
+      // this.$router.push({
+      //   path: '/course/coursedetail',
+      //   query: {
+      //     kid: item.id,
+      //     bid: '',
+      //     page: 0
+      //   }
+      // })
     },
     goProjectDetail(item) {
       this.$router.push({
