@@ -196,7 +196,7 @@
 
           </div>
           <div class="tableFooter" v-if="orderDetail.order_type === '1'">
-            <p>课程数量：{{courseList.length+projectList.length}}门</p>
+            <p>商品数量：{{courseList.length+projectList.length}}</p>
             <p>学习人数：{{orderDetail.pay_number}}人</p>
             <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
           </div>

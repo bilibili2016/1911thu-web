@@ -398,15 +398,23 @@ export default {
       clearTimeout(this.clickTime)
       this.clickTime = setTimeout(() => {
         // 如果点击的当前这个标签是 mediaPlayer 才执行
-        if (
-          this.player &&
-          (item.target.offsetParent.id == 'mediaPlayer' ||
-            item.path[1].id == 'mediaPlayer')
-        ) {
-          if (this.playVideo) {
-            this.player.play()
-          } else {
-            this.player.pause()
+        var userAgent = navigator.userAgent //取得浏览器的userAgent字符串
+        var isFirefox = userAgent.indexOf('Firefox') > -1
+        if (isFirefox) {
+          if (this.player && item.target.offsetParent.id == 'mediaPlayer') {
+            if (this.playVideo) {
+              this.player.play()
+            } else {
+              this.player.pause()
+            }
+          }
+        } else {
+          if (this.player && item.path[1].id == 'mediaPlayer') {
+            if (this.playVideo) {
+              this.player.play()
+            } else {
+              this.player.pause()
+            }
           }
         }
       }, 300)
@@ -415,6 +423,8 @@ export default {
     dblclick(item) {
       clearTimeout(this.clickTime)
       // 检测播放器是否存在
+      console.log(item)
+
       if (this.player && item.path[1].id == 'mediaPlayer') {
         // 判断当前播放器是否为全屏状态
         if (this.player.fullscreenService.getIsFullScreen()) {
