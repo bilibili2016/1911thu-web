@@ -180,10 +180,7 @@ export default {
         captchaDisable: false,
         exist: false,
         checked: false
-      },
-      provinceCode: '',
-      cityCode: '',
-      aeraCode: ''
+      }
     }
   },
   components: {
@@ -194,31 +191,43 @@ export default {
   },
   methods: {
     provinceChange(val) {
-      this.provinceCode = ''
-      this.cityCode = ''
       this.psnForm.city_name = ''
       this.psnForm.area_name = ''
       this.psnForm.city = ''
       this.psnForm.area = ''
-      this.provinceCode = val
       if (!this.province && this.province.length == 0) {
         this.getRegionList()
       }
       this.city = this.getRegion(this.province, val)
+      for (let item of this.province) {
+        if (val == item.region_code) {
+          this.psnForm.province_name = item.name
+          this.psnForm.province = item.region_code
+        }
+      }
     },
     cityChange(val) {
-      this.areaCode = ''
       this.psnForm.area_name = ''
       this.psnForm.area = ''
-
-      this.cityCode = val
       if (!this.city && this.city.length == 0) {
         this.getRegionList()
       }
       this.area = this.getRegion(this.city, val)
+
+      for (let item of this.city) {
+        if (val == item.region_code) {
+          this.psnForm.city_name = item.name
+          this.psnForm.city = item.region_code
+        }
+      }
     },
     areaChange(val) {
-      this.areaCode = val
+      for (let item of this.area) {
+        if (val == item.region_code) {
+          this.psnForm.area_name = item.name
+          this.psnForm.area = item.region_code
+        }
+      }
     },
     // 整理省市区
     getRegion(data, val) {
@@ -260,8 +269,8 @@ export default {
     },
     // 提交个 人信息表单
     onSubmit(formName) {
-      if (this.psnForm.province_name !== '') {
-        if (this.psnForm.city_name === '' || this.psnForm.area_name === '') {
+      if (this.psnForm.province !== '') {
+        if (this.psnForm.city === '' || this.psnForm.area === '') {
           this.$message({
             showClose: true,
             type: 'error',
@@ -270,9 +279,6 @@ export default {
           return false
         }
       }
-      this.psnForm.province = this.provinceCode
-      this.psnForm.city = this.cityCode
-      this.psnForm.area = this.areaCode
 
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -310,6 +316,8 @@ export default {
       this.psnForm = this.data
     },
     province(val) {
+      console.log(val, 'vvvv')
+
       this.city = this.getRegion(val, this.psnForm.province)
       this.area = this.getRegion(this.city, this.psnForm.city)
     }
@@ -336,10 +344,6 @@ export default {
   },
   mounted() {
     this.psnForm = this.data
-    this.provinceCode = this.data.province
-    this.cityCode = this.data.city
-    this.areaCode = this.data.area
-
     if (persistStore.get('token')) {
       this.getPositionList()
       this.getRegionList()
