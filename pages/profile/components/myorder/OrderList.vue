@@ -10,7 +10,7 @@
         <div class="content">
           <div class="course">
             <!-- 课程列表 -->
-            <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="(course,index) in courseList.orderCurriculumList">
+            <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="(course,index) in courseList.orderCurriculumList" :key="'course'+index">
               <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
               <div class="fl">
                 <h4 @click="goCourseInfo(course)" :title="course.title">{{course.title}}</h4>
@@ -19,7 +19,7 @@
               </div>
             </div>
             <!-- 项目列表 -->
-            <div class="courseOne" v-if="courseList.orderProjectList.length" v-for="(project,index) in courseList.orderProjectList">
+            <div class="courseOne" v-if="courseList.orderProjectList.length" v-for="(project,index) in courseList.orderProjectList" :key="'project'+index">
               <div class="courseImg">
                 <!-- 项目图标 -->
                 <img v-if="project.type==='2'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p5.png" alt="">
