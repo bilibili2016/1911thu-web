@@ -18,13 +18,13 @@
           <el-date-picker v-model="psnForm.birthday" type="date" value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
         <el-form-item label="所在地区" prop="province">
-          <el-select v-model="psnForm.province" placeholder="省">
+          <el-select v-model="psnForm.province_name" placeholder="省" @change="provinceChange">
             <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
           </el-select>
-          <el-select v-model="psnForm.city" placeholder="市" no-data-text="请先选择所在省份">
+          <el-select v-model="psnForm.city_name" placeholder="市" no-data-text="请先选择所在省份" @change="cityChange">
             <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
           </el-select>
-          <el-select v-model="psnForm.area" placeholder="区" no-data-text="请先选择所在城市">
+          <el-select v-model="psnForm.area_name" placeholder="区" no-data-text="请先选择所在城市" @change="areaChange">
             <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
           </el-select>
         </el-form-item>
@@ -180,7 +180,10 @@ export default {
         captchaDisable: false,
         exist: false,
         checked: false
-      }
+      },
+      provinceCode: '',
+      cityCode: '',
+      aeraCode: ''
     }
   },
   components: {
@@ -190,6 +193,33 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
+    provinceChange(val) {
+      this.provinceCode = ''
+      this.cityCode = ''
+      this.psnForm.city_name = ''
+      this.psnForm.area_name = ''
+      this.psnForm.city = ''
+      this.psnForm.area = ''
+      this.provinceCode = val
+      if (!this.province && this.province.length == 0) {
+        this.getRegionList()
+      }
+      this.city = this.getRegion(this.province, val)
+    },
+    cityChange(val) {
+      this.areaCode = ''
+      this.psnForm.area_name = ''
+      this.psnForm.area = ''
+
+      this.cityCode = val
+      if (!this.city && this.city.length == 0) {
+        this.getRegionList()
+      }
+      this.area = this.getRegion(this.city, val)
+    },
+    areaChange(val) {
+      this.areaCode = val
+    },
     // 整理省市区
     getRegion(data, val) {
       let tmp = []
@@ -230,8 +260,8 @@ export default {
     },
     // 提交个 人信息表单
     onSubmit(formName) {
-      if (this.psnForm.province !== '') {
-        if (this.psnForm.city == '' || this.psnForm.area == '') {
+      if (this.psnForm.province_name !== '') {
+        if (this.psnForm.city_name === '' || this.psnForm.area_name === '') {
           this.$message({
             showClose: true,
             type: 'error',
@@ -240,6 +270,10 @@ export default {
           return false
         }
       }
+      this.psnForm.province = this.provinceCode
+      this.psnForm.city = this.cityCode
+      this.psnForm.area = this.areaCode
+
       this.$refs[formName].validate(valid => {
         if (valid) {
           personalset.perInformation(this.psnForm).then(res => {
@@ -278,28 +312,34 @@ export default {
     province(val) {
       this.city = this.getRegion(val, this.psnForm.province)
       this.area = this.getRegion(this.city, this.psnForm.city)
-    },
-    'psnForm.province'(val, oldval) {
-      if (!this.province && this.province.length == 0) {
-        this.getRegionList()
-      }
-      if (oldval != '') {
-        this.psnForm.city = ''
-      }
-      this.city = this.getRegion(this.province, val)
-    },
-    'psnForm.city'(val, oldval) {
-      if (!this.city && this.city.length == 0) {
-        this.getRegionList()
-      }
-      if (oldval != '') {
-        this.psnForm.area = ''
-      }
-      this.area = this.getRegion(this.city, val)
     }
+    // 'psnForm.province'(val, oldval) {
+    //   console.log(val, oldval)
+
+    //   if (!this.province && this.province.length == 0) {
+    //     this.getRegionList()
+    //   }
+    //   if (oldval != '') {
+    //     this.psnForm.city = ''
+    //   }
+    //   this.city = this.getRegion(this.province, val)
+    // },
+    // 'psnForm.city'(val, oldval) {
+    //   if (!this.city && this.city.length == 0) {
+    //     this.getRegionList()
+    //   }
+    //   if (oldval != '') {
+    //     this.psnForm.area = ''
+    //   }
+    //   this.area = this.getRegion(this.city, val)
+    // }
   },
   mounted() {
     this.psnForm = this.data
+    this.provinceCode = this.data.province
+    this.cityCode = this.data.city
+    this.areaCode = this.data.area
+
     if (persistStore.get('token')) {
       this.getPositionList()
       this.getRegionList()
