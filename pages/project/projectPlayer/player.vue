@@ -465,8 +465,6 @@ export default {
           man.volumeDown()
         }
       }
-      // 是否全屏
-      // console.log(this.player.fullscreenService.getIsFullScreen())
     },
     // 快退
     speedRetreat() {
@@ -474,7 +472,9 @@ export default {
     },
     // 快进
     speedAdvance() {
-      this.player.seek(this.player.getCurrentTime() * 1 + 5)
+      if (this.player.getDuration() - this.player.getCurrentTime() > 5) {
+        this.player.seek(this.player.getCurrentTime() * 1 + 5)
+      }
     },
     // 音量增加
     volumeUp() {

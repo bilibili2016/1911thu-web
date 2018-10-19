@@ -34,6 +34,7 @@
 <script>
 import { About } from '@/lib/v1_sdk/index'
 import { setTitle } from '~/lib/util/helper'
+import { matchSplits } from '~/lib/util/helper'
 
 export default {
   data() {
@@ -54,6 +55,7 @@ export default {
         this.titleListData.map(item => {
           this.getDetail(item.id)
         })
+        this.setAnchor()
       })
     },
     //菜单对应各详情页
@@ -70,6 +72,17 @@ export default {
         document.getElementsByClassName('el-tabs__header')[0].style.height =
           testHeight + 'px'
       }, 200)
+    },
+    // 页面滚动到锚点位置
+    setAnchor() {
+      if (window.location.hash) {
+        setTimeout(() => {
+          var height = document.getElementsByName(
+            window.location.hash.slice(1)
+          )[0].offsetTop
+          window.scrollTo(0, height)
+        }, 1000)
+      }
     }
   },
   mounted() {
