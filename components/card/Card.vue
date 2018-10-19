@@ -84,7 +84,7 @@
 import { mapActions } from 'vuex'
 import { card } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { matchSplits } from '~/lib/util/helper'
+import { matchSplits, open } from '~/lib/util/helper'
 export default {
   props: ['data', 'config'],
   data() {
@@ -107,7 +107,13 @@ export default {
       isIndex: true,
       jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
       newTag: 'http://papn9j3ys.bkt.clouddn.com/new.png',
-      numSrc: require('@/assets/images/home_num.png')
+      numSrc: require('@/assets/images/home_num.png'),
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
+      }
     }
   },
   methods: {
@@ -115,26 +121,30 @@ export default {
     handleLinkDetail(item) {
       // 判断当前页是否是在首页
       if (this.isIndex) {
-        this.$router.push({
-          path: '/course/coursedetail',
-          query: {
-            kid: item.id,
-            bid: '',
-            page: 0
-          }
-        })
+        this.courseUrl.kid = item.id
+        open(this.courseUrl)
+        // this.$router.push({
+        //   path: '/course/coursedetail',
+        //   query: {
+        //     kid: item.id,
+        //     bid: '',
+        //     page: 0
+        //   }
+        // })
       } else {
         // 分类列表页
         if (this.cp === '0') {
           // 课程-转到课程详情
-          this.$router.push({
-            path: '/course/coursedetail',
-            query: {
-              kid: item.id,
-              bid: '',
-              page: 0
-            }
-          })
+          this.courseUrl.kid = item.id
+          open(this.courseUrl)
+          // this.$router.push({
+          //   path: '/course/coursedetail',
+          //   query: {
+          //     kid: item.id,
+          //     bid: '',
+          //     page: 0
+          //   }
+          // })
         } else {
           // 项目-项目详情
           this.$router.push({

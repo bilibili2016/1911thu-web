@@ -54,7 +54,7 @@
 <script>
 import { ticketHistory } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
-import { timestampToTime } from '@/lib/util/helper'
+import { timestampToTime, open } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 import DetailPopup from '@/pages/profile/components/myticket/detailPopup'
 import StatusPopup from '@/pages/profile/components/myticket/statusPopup'
@@ -134,16 +134,6 @@ export default {
       document.getElementsByClassName('el-tabs__content')[8].style.position =
         'relative'
       this.isStatusPopup = false
-    },
-    goCourseInfo(item, index) {
-      this.kidForm.kids = item.curriculum_id
-      // persistStore.set('kid', item.curriculum_id)
-      // this.setKid(this.kidForm)
-      // persistStore.set('curriculumId', item.curriculum_id)
-
-      this.$router.push(
-        `/course/coursedetail?kid=${item.curriculum_id}&bid=&page=0`
-      )
     },
     goShopping(id) {
       this.orderForm.ids = id

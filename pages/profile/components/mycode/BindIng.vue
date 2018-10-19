@@ -37,7 +37,7 @@
 
 <script>
 import { binding } from '~/lib/v1_sdk/index'
-import { timestampToYMD } from '@/lib/util/helper'
+import { timestampToYMD, open } from '@/lib/util/helper'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
@@ -60,21 +60,29 @@ export default {
         text: '抱歉，现在还没有兑换码~'
       },
       type: 1,
-      responseData: { type: true, res: '' }
+      responseData: { type: true, res: '' },
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
+      }
     }
   },
   methods: {
     // 跳转课程或项目详情
     handleLink(item, type) {
       if (item.type === '1') {
-        this.$router.push({
-          path: '/course/coursedetail',
-          query: {
-            kid: item.curriculum_id,
-            bid: '',
-            page: 0
-          }
-        })
+        this.courseUrl.kid = item.curriculum_id
+        open(this.courseUrl)
+        // this.$router.push({
+        //   path: '/course/coursedetail',
+        //   query: {
+        //     kid: item.curriculum_id,
+        //     bid: '',
+        //     page: 0
+        //   }
+        // })
       } else {
         if (type === '2') {
           this.type = 1

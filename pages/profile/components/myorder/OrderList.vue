@@ -68,7 +68,7 @@ import { timestampToTime } from '@/lib/util/helper'
 import { order } from '~/lib/v1_sdk/index'
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { message } from '@/lib/util/helper'
+import { message, open } from '@/lib/util/helper'
 export default {
   props: ['data', 'config'],
   data() {
@@ -82,7 +82,13 @@ export default {
       kidForm: {
         kid: ''
       },
-      responseData: { type: true, res: '' }
+      responseData: { type: true, res: '' },
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
+      }
     }
   },
   methods: {
@@ -168,14 +174,17 @@ export default {
     //课程详情
     goCourseInfo(item, index) {
       this.kidForm.kids = item.id
-      this.$router.push({
-        path: '/course/coursedetail',
-        query: {
-          kid: item.id,
-          bid: '',
-          page: 0
-        }
-      })
+      this.courseUrl.kid = item.id
+      open(this.courseUrl)
+
+      // this.$router.push({
+      //   path: '/course/coursedetail',
+      //   query: {
+      //     kid: item.id,
+      //     bid: '',
+      //     page: 0
+      //   }
+      // })
     },
     //项目详情
     goProjrctInfo(item) {

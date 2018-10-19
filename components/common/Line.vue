@@ -58,7 +58,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { auth, line } from '~/lib/v1_sdk/index'
-import { message, matchSplits } from '~/lib/util/helper'
+import { message, matchSplits, open } from '~/lib/util/helper'
 export default {
   props: ['catalogs', 'privileMsg', 'config', 'changeImg'],
   computed: {
@@ -76,6 +76,12 @@ export default {
         catalogId: '',
         curriculumType: 1,
         autoplay: true
+      },
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
       }
     }
   },
@@ -123,15 +129,20 @@ export default {
         }
         let curriculum_id = item.childList[index].curriculum_id
         let catalog_id = item.childList[index].id
-        this.$router.push(
-          '/course/coursedetail' +
-            '?kid=' +
-            matchSplits('kid') +
-            '&bid=' +
-            catalog_id +
-            '&page=' +
-            matchSplits('page')
-        )
+
+        this.courseUrl.kid = matchSplits('kid')
+        this.courseUrl.bid = catalog_id
+        this.courseUrl.page = matchSplits('page')
+        open(this.courseUrl)
+        // this.$router.push(
+        //   '/course/coursedetail' +
+        //     '?kid=' +
+        //     matchSplits('kid') +
+        //     '&bid=' +
+        //     catalog_id +
+        //     '&page=' +
+        //     matchSplits('page')
+        // )
         this.playerForm.curriculumId = curriculum_id
         this.playerForm.catalogId = catalog_id
         this.$bus.$emit('updateCourse', this.playerForm)

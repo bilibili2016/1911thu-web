@@ -57,6 +57,8 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { category } from '~/lib/v1_sdk/index'
+import { open } from '~/lib/util/helper'
+
 export default {
   props: ['courseList'],
   computed: {
@@ -77,6 +79,12 @@ export default {
       curriculumcartids: {
         cartid: null,
         type: 1
+      },
+      courseUrl: {
+        base: '/course/coursedetail',
+        kid: 0,
+        bid: '',
+        page: 0
       }
     }
   },
@@ -89,14 +97,16 @@ export default {
       } else {
         this.page = 0
       }
-      this.$router.push({
-        path: '/course/coursedetail',
-        query: {
-          kid: item.id,
-          bid: '',
-          page: 0
-        }
-      })
+      this.courseUrl.kid = item.id
+      open(this.courseUrl)
+      // this.$router.push({
+      //   path: '/course/coursedetail',
+      //   query: {
+      //     kid: item.id,
+      //     bid: '',
+      //     page: 0
+      //   }
+      // })
     },
     // 设置购物车中 is_cart 改变
     handleChangeIsCart(item) {
@@ -185,14 +195,17 @@ export default {
         } else {
           this.page = 0
         }
-        this.$router.push({
-          path: '/course/coursedetail',
-          query: {
-            kid: item.id,
-            bid: '',
-            page: 0
-          }
-        })
+
+        this.courseUrl.kid = item.id
+        open(this.courseUrl)
+        // this.$router.push({
+        //   path: '/course/coursedetail',
+        //   query: {
+        //     kid: item.id,
+        //     bid: '',
+        //     page: 0
+        //   }
+        // })
       }
     },
     changeManey(money) {
