@@ -27,7 +27,7 @@ body {
     position: relative;
     .header-fl {
       white-space: nowrap;
-      width: 535px;
+      width: 625px;
       height: 90px;
       padding: 20px 0;
       position: absolute;
@@ -80,7 +80,7 @@ body {
         float: left;
         box-sizing: border-box;
         position: relative;
-        margin-right: 40px;
+        margin-right: 30px;
         .el-dropdown-link {
           font-size: 16px;
           color: #222;
@@ -172,6 +172,18 @@ body {
       border-bottom: 2px solid #773084;
       color: #773084;
     }
+    .VIP {
+      float: left;
+      line-height: 50px;
+      font-size: 16px;
+      color: #222;
+      margin-left: 30px;
+      cursor: pointer;
+    }
+    .VIP.active {
+      border-bottom: 2px solid #773084;
+      color: #773084;
+    }
     .search {
       width: 200px;
       height: 30px;
@@ -236,7 +248,7 @@ body {
           // margin-top: 17px;
         }
         &.topCode {
-          margin: 0 15px 0 50px;
+          margin: 0 15px 0 30px;
         }
         &.hrin {
           width: 100px;

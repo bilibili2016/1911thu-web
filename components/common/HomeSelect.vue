@@ -35,6 +35,9 @@
     <div class="teach headerClass" @click="handleLink('/home/teacher/list')">
       <span>名师智库</span>
     </div>
+    <!-- <div class="VIP headerClass">
+      <span>VIP会员</span>
+    </div> -->
   </div>
 </template>
 
