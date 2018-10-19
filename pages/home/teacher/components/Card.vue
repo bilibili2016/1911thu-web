@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 老师页 -->
     <div class="newOrFreeCourseList famousList center goodlesson">
       <div class="course  clearfix bottom " v-for="(teacher,index) in famousList " :key="index " @click="handleLinkTeacherInfo(teacher)">
         <el-card class="fl " :body-style="{ padding: '0px' } ">
