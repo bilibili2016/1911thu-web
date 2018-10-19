@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 首页课程列表的 更多 -->
     <div class="newOrFreeCourseList center goodlesson">
       <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index " @click="courseInfo(course) ">
         <el-card class="fl " :body-style="{ padding: '0px' } ">

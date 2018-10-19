@@ -380,15 +380,23 @@ export default {
       clearTimeout(this.clickTime)
       this.clickTime = setTimeout(() => {
         // 如果点击的当前这个标签是 mediaPlayer 才执行
-        if (
-          this.player &&
-          (item.target.offsetParent.id == 'mediaPlayer' ||
-            item.path[1].id == 'mediaPlayer')
-        ) {
-          if (this.playVideo) {
-            this.player.play()
-          } else {
-            this.player.pause()
+        var userAgent = navigator.userAgent //取得浏览器的userAgent字符串
+        var isFirefox = userAgent.indexOf('Firefox') > -1
+        if (isFirefox) {
+          if (this.player && item.target.offsetParent.id == 'mediaPlayer') {
+            if (this.playVideo) {
+              this.player.play()
+            } else {
+              this.player.pause()
+            }
+          }
+        } else {
+          if (this.player && item.path[1].id == 'mediaPlayer') {
+            if (this.playVideo) {
+              this.player.play()
+            } else {
+              this.player.pause()
+            }
           }
         }
       }, 300)
@@ -444,7 +452,9 @@ export default {
     },
     // 快进
     speedAdvance() {
-      this.player.seek(this.player.getCurrentTime() * 1 + 5)
+      if (this.player.getDuration() - this.player.getCurrentTime() > 5) {
+        this.player.seek(this.player.getCurrentTime() * 1 + 5)
+      }
     },
     // 音量增加
     volumeUp() {
