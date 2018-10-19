@@ -6,7 +6,7 @@
     <div class="main">
       <div class="header-fl clearfix">
         <v-logo @handleLink="handleLink"></v-logo>
-        <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
+        <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr" :vipArr="vipArr"></v-homeselect>
       </div>
       <div class="header-fr clearfix">
         <v-lrbtn v-if="!isAuthenticated" @login="login" @register="register"></v-lrbtn>
@@ -77,6 +77,20 @@ export default {
       },
       categoryArr: [],
       projectArr: [],
+      vipArr: [
+        {
+          id: 1,
+          name: '干部网络学院VIP'
+        },
+        {
+          id: 2,
+          name: '在线商学院VIP'
+        },
+        {
+          id: 3,
+          name: '超级VIP'
+        }
+      ],
       isHasClass: true,
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
       bannerMsg: false,
@@ -151,7 +165,17 @@ export default {
           }
         }
 
-        // this.classify = response.data.categoryList
+        for (var i = 0; i < this.vipArr.length; i++) {
+          for (var j = 0; j < this.categoryArr.length; j++) {
+            if (i === j) {
+              if (i === 2) {
+                this.vipArr[i].relativeID = 0
+              } else {
+                this.vipArr[i].relativeID = this.categoryArr[j].id
+              }
+            }
+          }
+        }
       })
     },
     // 下拉列表 跳转
