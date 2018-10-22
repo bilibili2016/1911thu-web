@@ -52,7 +52,7 @@ export default {
       linkclassiccourse: '/course/list/2',
       classiccoursetitle: '精品好课',
       linkfreecourse: '/course/list/3',
-      freecoursetitle: '免费专区',
+      freecoursetitle: '限时免费',
       linkfamouscourse: '/teacher/list',
       famoustitle: '名师智库',
       infotitle: '学堂资讯',

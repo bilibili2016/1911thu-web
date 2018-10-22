@@ -77,20 +77,7 @@ export default {
       },
       categoryArr: [],
       projectArr: [],
-      vipArr: [
-        {
-          id: 1,
-          name: '干部网络学院VIP'
-        },
-        {
-          id: 2,
-          name: '在线商学院VIP'
-        },
-        {
-          id: 3,
-          name: '超级VIP'
-        }
-      ],
+      vipArr: [],
       isHasClass: true,
       judegExplorer: false, //判断当前浏览器，如果是IE页面顶部提示
       bannerMsg: false,
@@ -164,17 +151,13 @@ export default {
             }
           }
         }
-
-        for (var i = 0; i < this.vipArr.length; i++) {
-          for (var j = 0; j < this.categoryArr.length; j++) {
-            if (i === j) {
-              if (i === 2) {
-                this.vipArr[i].relativeID = 0
-              } else {
-                this.vipArr[i].relativeID = this.categoryArr[j].id
-              }
-            }
-          }
+      })
+    },
+    // vip下拉列表
+    vipGoodsList() {
+      home.vipGoodsList().then(response => {
+        if (response.status === 0) {
+          this.vipArr = response.data.vipGoodsList
         }
       })
     },
@@ -379,6 +362,7 @@ export default {
         // 设置用户信息
         this.setUserInfo(res)
         this.getClassifyList()
+        this.vipGoodsList()
       }
       this.pass = true
     },
@@ -487,6 +471,7 @@ export default {
     if (!persistStore.get('token')) {
       // 获取顶部课程列表
       this.getClassifyList()
+      this.vipGoodsList()
     }
   }
 }

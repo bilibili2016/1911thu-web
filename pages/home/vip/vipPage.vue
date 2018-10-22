@@ -36,7 +36,8 @@
   </div>
 </template>
 <script>
-import { matchSplits, setTitle } from '@/lib/util/helper'
+import { matchSplits, setTitle, message } from '@/lib/util/helper'
+import { vip } from '@/lib/v1_sdk/index'
 
 export default {
   data() {
@@ -49,6 +50,7 @@ export default {
       lastNum: '',
       alertText: '商品数量不能大于9999',
       vipData: {
+        vipId: '',
         number: 1
       }
     }
@@ -122,11 +124,25 @@ export default {
       }
     },
     //下一步
-    handleConfirm() {}
+    handleConfirm() {
+      this.$router.push(
+        '/shop/affirmorder?id=' +
+          matchSplits('id') +
+          '&type=2&num=' +
+          this.vipData.number
+      )
+      // this.vipData.vipId = matchSplits('id')
+      // vip.addProduceOrderVip(this.vipData).then(res => {
+      //   if (res.status == 0) {
+      //     this.$router.push('/shop/affirmorder?id=' + res.data.id + '&type=2')
+      //   } else {
+      //     message(this, 'error', res.msg)
+      //   }
+      // })
+    }
   },
   mounted() {
-    this.vipID = matchSplits('id')
-    this.relativeID = matchSplits('relativeID')
+    this.relativeID = matchSplits('cid')
   }
 }
 </script>

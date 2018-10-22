@@ -2,6 +2,7 @@
   <div class="bottomBtn clearfix">
     <p class="allPrice" v-if="config.type=='affirmOrder'">应付金额：¥{{data.goodsAmount}}</p>
     <p class="allPrice" v-if="config.type=='customOrder'">应付金额：¥{{data.present_price}}</p>
+    <p class="allPrice" v-if="config.type=='vip'">应付金额：¥{{parseFloat(data.curriculumSum*data.price)}}</p>
     <!-- <p class="allPrice">应付金额：¥{{data.goodsAmount}}</p> -->
     <div class="orderInfos" v-if="config.type=='customOrder'">
       <p>

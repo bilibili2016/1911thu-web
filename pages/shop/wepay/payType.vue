@@ -23,6 +23,7 @@
       <i class="el-icon-warning"></i>
       请在14天内支付完成，如未完成此订单将自动关闭，需重新购买！
       <span class="fr">应付金额：¥{{orderDetail.order_amount}}</span>
+
     </div>
     <!-- <div class="restTime">
       <i class="el-icon-time"></i>{{restTime}}
@@ -45,6 +46,7 @@ export default {
   props: ['orderDetail', 'codeData', 'listData'],
   data() {
     return {
+      orderType: '',
       wxMsg: true,
       zfbMsg: false,
       pubMsg: false,
@@ -172,6 +174,8 @@ export default {
     }
   },
   mounted() {
+    //this.orderType 1:其他订单 2:vip订单
+    this.orderType = matchSplits('type')
     this.$bus.$on('clearInterval', dat => {
       clearInterval(this.interval)
     })

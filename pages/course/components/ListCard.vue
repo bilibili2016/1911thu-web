@@ -150,7 +150,7 @@ export default {
       if (persistStore.get('token')) {
         this.$router.push({
           path: '/shop/affirmorder',
-          query: { id: item.id }
+          query: { id: item.id, type: 1 }
         })
       } else {
         this.$bus.$emit('loginShow', true)

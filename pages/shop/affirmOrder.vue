@@ -13,7 +13,6 @@
               <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
             </div> -->
 
-            <!-- 自定义项目 -->
             <div class="goods">
               <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
             </div>
@@ -39,7 +38,13 @@ import orderInfo from '@/pages/shop/affirmorder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
 import noMsg from '@/pages/shop/affirmorder/noMsg'
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
-import { message, splitUrl, setTitle, Trim } from '@/lib/util/helper'
+import {
+  message,
+  splitUrl,
+  setTitle,
+  Trim,
+  matchSplits
+} from '@/lib/util/helper'
 import { home } from '~/lib/v1_sdk/index'
 // import { splitUrl, openUrl } from '~/lib/util/helper'
 export default {
@@ -95,12 +100,20 @@ export default {
         curriculumcatalogid: ''
       },
       customId: null,
+      orderType: null,
       curriculumForm: {
         curriculumProjectId: null
+      },
+      vipForm: {
+        vipID: ''
       },
       payForm: {
         ids: null,
         type: null
+      },
+      vipForm: {
+        vipId: '',
+        number: ''
       }
     }
   },
@@ -153,7 +166,7 @@ export default {
     handleSubmitOrder() {
       affirmOrder.commitOrder().then(res => {
         if (res.status === 0) {
-          this.$router.push('/shop/wepay?order=' + res.data.id)
+          this.$router.push('/shop/wepay?order=' + res.data.id + '&type=1')
         } else {
           message(this, 'error', res.msg)
           if (res.status === 100007) {
@@ -168,7 +181,16 @@ export default {
       this.payForm.ids = this.customId
       this.payForm.type = 2
       affirmOrder.getCode(this.payForm).then(res => {
-        this.$router.push('/shop/wepay?order=' + res.data.order_id)
+        this.$router.push('/shop/wepay?order=' + res.data.order_id + '&type=1')
+      })
+    },
+    // vip提交订单
+    handleVipConfirm() {
+      this.vipForm.vipId = this.customId
+      this.vipForm.number = matchSplits('num')
+
+      affirmOrder.addProduceOrderVip(this.vipForm).then(res => {
+        this.$router.push('/shop/wepay?order=' + res.data.id + '&type=2')
       })
     },
     //获取商 品信息 列表
@@ -214,10 +236,32 @@ export default {
         }
       })
     },
+    //vip确认订单
+    handleVip(val) {
+      this.affirmOrder.type = 'vip'
+      this.vipForm.vipID = val
+      this.loadGoods = true
+      affirmOrder.produceOrderVip(this.vipForm).then(res => {
+        this.loadGoods = false
+        if (res.status === 0) {
+          this.curriculumLists = res.data.vipGoodsDetail
+          this.orderinfo.curriculumSum = matchSplits('num')
+          this.orderinfo.price = res.data.vipGoodsDetail.present_price
+
+          this.orderinfo.nickName = persistStore.get('nickName')
+        } else {
+          message(this, 'error', res.msg)
+        }
+      })
+    },
     // 提交订单
     handleSubmit() {
       if (this.customId) {
-        this.handleGetCode()
+        if (this.orderType == 2) {
+          this.handleVipConfirm()
+        } else {
+          this.handleGetCode()
+        }
       } else {
         this.handleSubmitOrder()
       }
@@ -227,8 +271,15 @@ export default {
     if (window.location.search == '') {
       this.handleGoodsList()
     } else {
-      this.customId = splitUrl(0, 1)
-      this.handleCustomProject(this.customId)
+      this.customId = matchSplits('id')
+      //this.orderType 1:其他订单 2:vip订单
+      this.orderType = matchSplits('type')
+
+      if (this.orderType == 2) {
+        this.handleVip(this.customId)
+      } else {
+        this.handleCustomProject(this.customId)
+      }
     }
   },
   updated() {

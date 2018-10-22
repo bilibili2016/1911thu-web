@@ -17,13 +17,15 @@
         <span v-if="code.type==='2'">项目</span>
         <span v-if="code.type==='3'">课程+项目</span>
         <span v-if="code.type==='4'">自定制项目</span>
+        <span v-if="code.type==='5'">vip会员</span>
 
         <span>{{exchangeTime(code.pay_time)}}</span>
         <span>{{code.use_code_number}}</span>
         <span>{{code.expire_days}}</span>
         <span class="orderNum" @click="handleMyOrder(code)">{{code.order_sn}}
-          <i class="efficacy" v-if="code.expire_days==0"></i>
-          <i class="used" v-if="code.use_code_number==0"></i>
+          <i class="used" v-if="code.expire_days==0&&code.use_code_number==0"></i>
+          <i class="efficacy" v-else-if="code.expire_days==0"></i>
+          <i class="used" v-else-if="code.use_code_number==0"></i>
         </span>
       </div>
 
