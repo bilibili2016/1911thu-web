@@ -16,7 +16,7 @@
           </ul>
         </div>
       </div>
-      <div class="dropItem headerClass">
+      <!-- <div class="dropItem headerClass">
         <span class="el-dropdown-link" @click="handleSelectItem({id:0,is_picture_show:1})">
           培训项目
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -28,8 +28,10 @@
           </ul>
         </div>
 
-      </div>
-      <div class="dropItem  headerClass vipItem">
+      </div> -->
+      <!-- <div class="dropItem  headerClass vipItem"> -->
+      <div class="dropItem  headerClass ">
+
         <span class="el-dropdown-link">
           VIP会员
           <i class="el-icon-arrow-down el-icon--right"></i>
