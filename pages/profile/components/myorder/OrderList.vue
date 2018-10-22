@@ -32,17 +32,24 @@
                 <h6>{{project.curriculum_time}}学时</h6>
               </div>
             </div>
+            <!-- vip列表 -->
+            <div class="courseOne" v-if="courseList.orderVipList.length" v-for="(vip,index) in courseList.orderVipList" :key="'vip'+index">
+              <img @click="goCourseInfo(course)" class="fl" :src="vip.picture" alt="">
+              <div class="fl">
+                <h4 @click="goCourseInfo(course)" :title="vip.title">{{vip.title}}</h4>
+              </div>
+            </div>
             <!-- <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
               查看更多课程>
             </div> -->
           </div>
-          <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
+          <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
             <p>¥{{courseList.order_amount}}</p>
             <!-- 订单 -->
             <p v-if="config.type==='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
           </div>
           <!-- 订单 -->
-          <div v-show="config.type==='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
+          <div v-show="config.type==='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
             <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
             <p class="payReady payed" v-if="courseList.pay_status === '2' || courseList.pay_status === '6'">已支付</p>
             <p class="cancelOrder" v-if="courseList.pay_status === '5'" style="cursor: inherit">审核中</p>
@@ -53,7 +60,7 @@
             <p class="payReady" v-if="(courseList.pay_status === '2'  || courseList.pay_status === '6')&&courseList.expire_day<1">已过期</p>
             <p class="payClose" v-if="courseList.pay_status === '3' || courseList.pay_status === '4'">已关闭</p>
             <p>
-              <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id)">立即支付</span>
+              <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id,courseList)">立即支付</span>
               <span class="buy" v-if="courseList.pay_status === '3' || courseList.pay_status === '4'" @click="goShopping(courseList.id,courseList)">立即购买</span>
             </p>
           </div>
@@ -97,8 +104,8 @@ export default {
       this.$emit('detection')
     },
     //根据列表长度计算高度
-    computedHeight(course, project) {
-      let height = (course.length + project.length) * 140 + 'px'
+    computedHeight(len) {
+      let height = len * 140 + 'px'
       return height
     },
     //计算项目列表显示数量 现在默认全部显示，暂时用不到该方法
@@ -127,17 +134,36 @@ export default {
       })
     },
     //去支付
-    goPay(id) {
-      this.$router.push({
-        path: '/shop/wepay',
-        query: {
-          order: id,
-          attach: 1
-        }
-      })
+    goPay(id, courseList) {
+      if (courseList.orderVipList.length > 0) {
+        this.$router.push({
+          path: '/shop/wepay',
+          query: {
+            order: id,
+            type: 2
+          }
+        })
+        return false
+      } else {
+        this.$router.push({
+          path: '/shop/wepay',
+          query: {
+            order: id,
+            type: 1
+          }
+        })
+      }
     },
     //去购物车
     goShopping(id, courseList) {
+      //vip项目
+      if (courseList.orderVipList.length > 0) {
+        this.goAffirmorder(
+          courseList.orderVipList[0].id,
+          courseList.orderVipList[0].pay_number
+        )
+        return false
+      }
       // 自定义项目和混合项目不加入购物车，直接购买
       if (
         courseList.orderProjectList.length > 0 &&
@@ -145,7 +171,7 @@ export default {
       ) {
         this.goAffirmorder(courseList.orderProjectList[0].id)
       } else {
-        // 混合项目不加入购物车，直接购买
+        // 混合 互动项目不加入购物车，直接购买
         if (
           courseList.orderProjectList.length > 0 &&
           (courseList.orderProjectList[0].study_type === '2' ||
@@ -153,7 +179,7 @@ export default {
         ) {
           this.goAffirmorder(courseList.orderProjectList[0].id)
         } else {
-          //普通项目 加入购物车购买
+          //线上项目 加入购物车购买
           this.orderForm.ids = id
           order.buyAgain(this.orderForm).then(response => {
             if (response.status === 0) {
@@ -165,11 +191,19 @@ export default {
         }
       }
     },
-    goAffirmorder(id) {
-      this.$router.push({
-        path: '/shop/affirmorder',
-        query: { id: id }
-      })
+    goAffirmorder(id, num) {
+      // VIP需要传递购买份数
+      if (num) {
+        this.$router.push({
+          path: '/shop/affirmorder',
+          query: { id: id, type: 2, num: num }
+        })
+      } else {
+        this.$router.push({
+          path: '/shop/affirmorder',
+          query: { id: id, type: 1 }
+        })
+      }
     },
     //课程详情
     goCourseInfo(item, index) {

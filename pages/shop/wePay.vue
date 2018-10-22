@@ -104,9 +104,6 @@ export default {
     // 获取订单id列表
     getPayList(item) {
       this.loading = true
-      // let urlArr = window.location.href.split('/')
-      // // let cpyid = persistStore.get('cpyid')
-      // this.payListForm.orderId = urlArr[urlArr.length - 1]
       this.payListForm.orderId = matchSplits('order')
       wepay.webPay(this.payListForm).then(response => {
         this.loading = false
@@ -140,6 +137,8 @@ export default {
     }
   },
   mounted() {
+    // console.log(matchSplits('type'))
+
     if (persistStore.get('token')) {
       this.getPayList()
     } else {

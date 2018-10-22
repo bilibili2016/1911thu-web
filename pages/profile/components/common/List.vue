@@ -227,7 +227,7 @@ export default {
           //定制项目
           this.$router.push({
             path: '/shop/affirmorder',
-            query: { id: item.id }
+            query: { id: item.id, type: 1 }
           })
         } else {
           //普通项目
@@ -242,7 +242,7 @@ export default {
             //2.混合 3.互动
             this.$router.push({
               path: '/shop/affirmorder',
-              query: { id: item.id }
+              query: { id: item.id, type: 1 }
             })
           }
         }

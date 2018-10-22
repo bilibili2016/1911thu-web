@@ -44,8 +44,9 @@
         </div>
       </div>
     </div>
+
     <!-- 确认订单，支付中心列表 -->
-    <!-- {{data}} -->
+    <!-- 课程 -->
     <div v-if="config.type=='wePay' || config.type=='affirmOrder'">
       <!-- {{data}} -->
       <div class="clearfix" :class="{oneGoods:config.type=='affirmOrder',courseOne:config.type=='wePay'}" v-for="(course,index) in data" :key="index">
@@ -58,7 +59,7 @@
         </div>
         <div class="fl">
           <h5>{{course.title}}</h5>
-          <h6>{{course.study_time == '' ? 0 : course.study_time}}学时</h6>
+          <h6 v-if="orderType!=2">{{course.study_time == '' ? 0 : course.study_time}}学时</h6>
           <p v-if="course.type =='1'">导师：{{course.teacher_name}}</p>
         </div>
 
@@ -75,7 +76,6 @@
         </div>
       </div>
     </div>
-    <!-- {{config.type=='affirmOrder'}} {{config.type}} -->
     <!-- 自定义项目确认订单 -->
     <div class="customProject" v-if="config.type=='customOrder'">
       <div class="listBar">
@@ -112,14 +112,35 @@
         </div>
       </div>
     </div>
+    <!-- vip确认订单 -->
+    <div v-if="config.type=='vip'">
+      <div class="clearfix oneGoods">
+        <div class="fl">
+          <div class="bottomImg">
+            <!-- 项目图标 -->
+            <img :src="data.picture" alt="">
+          </div>
+        </div>
+        <div class="fl">
+          <h5>{{data.title}}</h5>
+        </div>
+        <div class="coursePrice">
+          ￥{{data.present_price}}
+        </div>
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { matchSplits } from '~/lib/util/helper'
+
 export default {
   props: ['config', 'data'],
   data() {
     return {
+      orderType: '',
       projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png'
     }
   },
@@ -146,6 +167,9 @@ export default {
     handleDeleteProject(project, index) {
       this.$bus.$emit('handleDeleteProject', { project, index })
     }
+  },
+  mounted() {
+    this.orderType = matchSplits('type')
   }
 }
 </script>

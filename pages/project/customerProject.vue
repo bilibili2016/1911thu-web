@@ -519,7 +519,7 @@ export default {
             //立即购买跳转确认订单
             this.$router.push({
               path: '/shop/affirmorder',
-              query: { id: response.data.curriculum_project_id }
+              query: { id: response.data.curriculum_project_id, type: 1 }
             })
           }
         } else {

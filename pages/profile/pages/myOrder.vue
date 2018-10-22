@@ -26,7 +26,7 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
-    <v-detail v-else @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :config="orderType" v-loading="detailMsg"></v-detail>
+    <v-detail v-else @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :vipList="vipList" :config="orderType" v-loading="detailMsg"></v-detail>
   </div>
 </template>
 
@@ -67,6 +67,7 @@ export default {
     'bankInfo',
     'courseList',
     'projectList',
+    'vipList',
     'orderType',
     'detailMsg',
     'pagemsg4',

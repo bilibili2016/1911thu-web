@@ -39,7 +39,8 @@
       </div>
       <div class="changeType fr" v-if="projectType.types==='1'">
         选择模式:
-        <el-button v-for="(course,index) in projectDetail.relationProjectData" :key="index" :class="{'checked':course.select_status}" :disabled="course.id===''" @click="handleLine(course.id)">{{patternArr[index]}}</el-button>
+        <!-- 线上模式不显示 -->
+        <el-button v-for="(course,index) in projectDetail.relationProjectData" v-if="course.study_type!='1'" :key="index" :class="{'checked':course.select_status}" :disabled="course.id===''" @click="handleLine(course.id)">{{patternArr[index]}}</el-button>
       </div>
       <div class="fr buy clearfix" :class="{buyTop:projectType.types==='2'}">
         <div class="price" v-if="projectDetail.study_type=='1'">
@@ -156,7 +157,7 @@ export default {
       }
       this.$router.push({
         path: '/shop/affirmorder',
-        query: { id: id }
+        query: { id: id, type: 1 }
       })
     }
   },

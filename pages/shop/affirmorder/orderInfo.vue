@@ -5,14 +5,25 @@
         <span class="left">商品数量：</span>
         <span class="right">{{data.curriculumSum}}</span>
       </p>
-      <p>
-        <span class="left">学习人数：</span>
-        <span class="right">{{data.payNumber}}人</span>
-      </p>
-      <p>
-        <span class="left">商品总金额：</span>
-        <span class="right">¥{{data.goodsAmount}}</span>
-      </p>
+
+      <div v-if="type!=2">
+        <p>
+          <span class="left">学习人数：</span>
+          <span class="right">{{data.payNumber}}人</span>
+        </p>
+        <p>
+          <span class="left">商品总金额：</span>
+          <span class="right">¥{{data.goodsAmount}}</span>
+        </p>
+      </div>
+      <!-- vip需要计算商品总金额 -->
+      <div v-else>
+        <p>
+          <span class="left">商品总金额：</span>
+          <span class="right">¥{{parseFloat(data.curriculumSum*data.price)}}</span>
+        </p>
+      </div>
+
       <p>
         <span class="left">购买账号：</span>
         <span class="right" :title="data.nickName">{{data.nickName}}</span>
@@ -33,17 +44,24 @@
 </template>
 
 <script>
-import { message, splitUrl } from '@/lib/util/helper'
+import { message, matchSplits } from '@/lib/util/helper'
 export default {
   props: ['data'],
   data() {
     return {
-      course: true
+      course: true,
+      type: ''
     }
   },
   mounted() {
-    if (splitUrl(0, 1)) {
+    if (window.location.search == '') {
+      this.course = true
+    } else if (matchSplits('type') == 1) {
+      this.type = matchSplits('type')
       this.course = false
+    } else {
+      this.type = matchSplits('type')
+      this.course = true
     }
   }
 }

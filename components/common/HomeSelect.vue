@@ -30,14 +30,14 @@
 
       </div>
       <div class="dropItem  headerClass vipItem">
-        <span class="el-dropdown-link" @click="handleVipItem(1,true)">
+        <span class="el-dropdown-link">
           VIP会员
           <i class="el-icon-arrow-down el-icon--right"></i>
           <span class="downLine"></span>
         </span>
         <div class="drops">
           <ul>
-            <li v-for="(item,index) in vipArr" :key="index" @click="handleVipItem(item)">{{item.name}}</li>
+            <li v-for="(item,index) in vipArr" :key="index" @click="handleVipItem(item)">{{item.title}}</li>
           </ul>
         </div>
 
@@ -59,9 +59,6 @@ export default {
   data() {
     return {}
   },
-  mounted() {
-    console.log(this.vipArr)
-  },
   methods: {
     // 公共路由方法
     handleLink(data) {
@@ -71,21 +68,11 @@ export default {
       this.$emit('handleSelectItem', item)
     },
     handleVipItem(item, flag) {
-      if (flag) {
-        this.$router.push({
-          path: '/home/vip/vipPage',
-          query: {
-            id: 1,
-            relativeID: 0
-          }
-        })
-        return
-      }
       this.$router.push({
         path: '/home/vip/vipPage',
         query: {
           id: item.id,
-          relativeID: item.relativeID
+          cid: item.category_id
         }
       })
     }
