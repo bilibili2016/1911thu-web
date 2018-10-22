@@ -90,130 +90,126 @@
 
         <!-- 商品信息 -->
         <div class="goods bodyItem">
-          <div class="top" v-if="orderDetail.order_type === '1'">
-            <span class="lf">商品信息</span>
-            <span class="lm">单价</span>
-            <span class="lr">数量</span>
-          </div>
-          <div class="top customerProject clearfix" v-if="orderDetail.order_type === '2'">
-            <div class="topLeft">
-              <span class="">商品信息</span>
+          <!-- 课程、vip、课程+项目、线上项目-->
+          <div v-if="orderDetail.order_type === '1' ||orderDetail.order_type === '3' || (orderDetail.order_type === '2'&&courseList.length!=0)  || (orderDetail.order_type === '2'&&orderDetail.study_type =='1')">
+            <div class="top">
+              <span class="lf">商品信息</span>
+              <span class="lm">单价</span>
+              <span class="lr">数量</span>
             </div>
-            <div class="topRight">
-              <span>培训方式</span>
-              <span>线上课程</span>
-              <span>学习人数</span>
-              <span>线下课程</span>
-              <span>学习天数</span>
-              <span class="totalPrice">总价</span>
-            </div>
-          </div>
-          <div class="bottom">
-            <!-- 课程 -->
-            <div class="bottom-item clearfix" v-if="courseList.length !==0" v-for="(course,index) in courseList" :key="'course'+index">
-              <div class="courseInfo clearfix">
-                <div class="bottomImg">
-                  <img class="fl" :src="course.picture" alt="">
-                </div>
-
-                <div class="fl">
-                  <h4>{{course.title}}</h4>
-                  <h6>{{course.curriculum_time}}学时</h6>
-                  <!-- <p>导师：{{course.teacher_name}}</p> -->
-                </div>
-              </div>
-              <div class="coursePrice">
-                ￥{{course.present_price}}
-              </div>
-              <div class="courseOperation">
-                <i class="el-icon-close"></i>{{orderDetail.pay_number}}
-              </div>
-            </div>
-            <!-- 项目 -->
-            <div v-if="projectList.length !==0">
-              <!-- 项目 -->
-              <div v-if="orderDetail.order_type === '1'">
-                <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="'project'+index">
-                  <div class="courseInfo clearfix">
-                    <div class="bottomImg">
-                      <!-- 项目图标 -->
-                      <img class="project-img" :src="projectImg" alt="">
-                      <img class="fl" :src="project.picture" alt="">
-                    </div>
-                    <div class="fl">
-                      <h4>{{project.title}}</h4>
-                      <h6>{{project.curriculum_time}}学时</h6>
-                    </div>
-                  </div>
-                  <div class="coursePrice">
-                    ￥{{project.present_price}}
-                  </div>
-                  <div v-if="courseList.length !==0">
-                    <div class="courseOperation">
-                      <i class="el-icon-close"></i>{{orderDetail.pay_number}}
-                    </div>
-                  </div>
-                  <div v-else>
-                    <div class="courseOperation" v-if="project.study_type === '1' ">
-                      <i class="el-icon-close"></i>{{orderDetail.pay_number}}
-                    </div>
-                    <div class="courseOperation" v-else>
-                      {{orderDetail.pay_number}}人
-                    </div>
+            <div class="bottom">
+              <!-- 课程 -->
+              <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="'course'+index">
+                <div class="courseInfo clearfix">
+                  <div class="bottomImg">
+                    <img class="fl" :src="course.picture" alt="">
                   </div>
 
-                </div>
-              </div>
-              <!-- 自定制项目 -->
-              <div v-else>
-                <div class="bottom-item customerProjectDetail clearfix" v-for="(project,index) in projectList" :key="'cus'+index">
-                  <div class="projectInfo">
-                    <div class="bottomImg">
-                      <!-- 项目图标 -->
-                      <img class="project-img" :src="customerProjectImg" alt="">
-                      <img class="fl" :src="project.picture" alt="">
-                    </div>
-                    <div class="fl">
-                      <h4>{{project.title}}</h4>
-                    </div>
-                  </div>
-                  <div class="infoRight">
-                    <!-- 培训方式 -->
-                    <div class="item" v-if="project.study_type === '1'">线上</div>
-                    <div class="item" v-if="project.study_type === '2'">混合</div>
-                    <div class="item" v-if="project.study_type === '3'">互动</div>
-                    <!-- 线上课程学时 -->
-                    <div class="item">{{project.curriculum_time}}学时</div>
-                    <!-- 学习人数 -->
-                    <div class="item">{{project.study_persion_number}}人</div>
-                    <!-- 线下课程学时 -->
-                    <div class="item">{{project.offline_study_time}}学时</div>
-                    <!-- 学习天数 -->
-                    <div class="item">{{project.offline_days}}天</div>
-                    <!-- 总价 -->
-                    <div class="item price">¥ {{project.present_price}} </div>
+                  <div class="fl">
+                    <h4>{{course.title}}</h4>
+                    <h6 v-if="orderDetail.order_type === '1'">{{course.curriculum_time}}学时</h6>
+                    <!-- <p>导师：{{course.teacher_name}}</p> -->
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- vip -->
-            <div class="bottom-item clearfix" v-if="vipList.length !==0" v-for="(vip,index) in vipList" :key="'vip'+index">
-              <div class="courseInfo clearfix">
-                <div class="bottomImg">
-                  <img class="fl" :src="vip.picture" alt="">
+                <div class="coursePrice">
+                  ￥{{course.present_price}}
                 </div>
-                <div class="fl">
-                  <h4>{{vip.title}}</h4>
+                <div class="courseOperation">
+                  <i class="el-icon-close"></i>{{orderDetail.pay_number}}
                 </div>
               </div>
-              <div class="coursePrice">
-                ￥{{vip.present_price}}
+              <!-- 线上项目 -->
+              <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="'project'+index">
+                <div class="courseInfo clearfix">
+                  <div class="bottomImg">
+                    <!-- 项目图标 -->
+                    <img class="project-img" :src="projectImg" alt="">
+                    <img class="fl" :src="project.picture" alt="">
+                  </div>
+                  <div class="fl">
+                    <h4>{{project.title}}</h4>
+                    <h6>{{project.curriculum_time}}学时</h6>
+                  </div>
+                </div>
+                <div class="coursePrice">
+                  ￥{{project.present_price}}
+                </div>
+                <div>
+                  <div class="courseOperation">
+                    <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                  </div>
+                </div>
               </div>
-              <div class="courseOperation">
-                <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+              <!-- vip -->
+              <div class="bottom-item clearfix" v-if="vipList.length" v-for="(vip,index) in vipList" :key="'vip'+index">
+                <div class="courseInfo clearfix">
+                  <div class="bottomImg">
+                    <img class="fl" :src="vip.picture" alt="">
+                  </div>
+
+                  <div class="fl">
+                    <h4>{{vip.title}}</h4>
+                  </div>
+                </div>
+                <div class="coursePrice">
+                  ￥{{vip.present_price}}
+                </div>
+                <div class="courseOperation">
+                  <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                </div>
               </div>
             </div>
           </div>
+          <!-- 标准项目（混合、互动）,定制项目-->
+          <div v-if="orderDetail.order_type === '2' &&courseList.length==0 && orderDetail.study_type !='1'">
+            <div class="top customerProject clearfix">
+              <div class="topLeft">
+                <span class="">商品信息</span>
+              </div>
+              <div class="topRight">
+                <span>培训方式</span>
+                <span>线上课程</span>
+                <span>学习人数</span>
+                <span>线下课程</span>
+                <span>学习天数</span>
+                <span class="totalPrice">总价</span>
+              </div>
+            </div>
+            <div class="bottom">
+              <div class="bottom-item customerProjectDetail clearfix" v-for="(project,index) in projectList" :key="'cus'+index">
+                <div class="projectInfo">
+                  <div class="bottomImg">
+                    <!-- 项目图标 -->
+                    <!-- 标准 -->
+                    <img v-if="orderDetail.project_type==='1'" class="project-img" :src="projectImg" alt="">
+                    <!-- 定制 -->
+                    <img v-if="orderDetail.project_type==='2'" class="project-img" :src="customerProjectImg" alt="">
+                    <img class="fl" :src="project.picture" alt="">
+                  </div>
+                  <div class="fl">
+                    <h4>{{project.title}}</h4>
+                  </div>
+                </div>
+                <div class="infoRight">
+                  <!-- 培训方式 -->
+                  <div class="item" v-if="project.study_type === '1'">线上</div>
+                  <div class="item" v-if="project.study_type === '2'">混合</div>
+                  <div class="item" v-if="project.study_type === '3'">互动</div>
+                  <!-- 线上课程学时 -->
+                  <div class="item">{{project.curriculum_time}}学时</div>
+                  <!-- 学习人数 -->
+                  <div class="item">{{project.study_persion_number}}人</div>
+                  <!-- 线下课程学时 -->
+                  <div class="item">{{project.offline_study_time}}学时</div>
+                  <!-- 学习天数 -->
+                  <div class="item">{{project.offline_days}}天</div>
+                  <!-- 总价 -->
+                  <div class="item price">¥ {{project.present_price}} </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="tableFooter" v-if="orderDetail.order_type === '1'">
             <p>商品数量：{{courseList.length+projectList.length+vipList.length}}</p>
             <p>学习人数：{{orderDetail.pay_number}}人</p>

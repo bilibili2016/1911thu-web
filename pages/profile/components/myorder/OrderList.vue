@@ -186,11 +186,18 @@ export default {
         //课程
         this.addCart(courseList.id)
       } else if (courseList.order_type == '2') {
-        if (courseList.orderProjectList[0].study_type == '1') {
-          //线上
-          this.addCart(courseList.id)
+        //项目
+        if (courseList.project_type == '1') {
+          //标准项目
+          if (courseList.orderProjectList[0].study_type == '1') {
+            //线上
+            this.addCart(courseList.id)
+          } else {
+            //混合 互动
+            this.goAffirmorder(courseList.orderProjectList[0].id)
+          }
         } else {
-          //混合 互动
+          //定制项目
           this.goAffirmorder(courseList.orderProjectList[0].id)
         }
       } else if (courseList.order_type == '3') {
