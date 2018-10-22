@@ -90,8 +90,9 @@
 
         <!-- 商品信息 -->
         <div class="goods bodyItem">
+
           <!-- 课程、vip、课程+项目、线上项目-->
-          <div v-if="orderDetail.order_type === '1' ||orderDetail.order_type === '3' || (orderDetail.order_type === '2'&&courseList.length!=0)  || (orderDetail.order_type === '2'&&orderDetail.study_type =='1')">
+          <div v-if="orderDetail.order_type === '1' ||orderDetail.order_type === '3' || (orderDetail.order_type === '2'&&courseList.length!=0)  || (orderDetail.order_type === '2'&&orderDetail.project_type === '1' &&orderDetail.study_type =='1')">
             <div class="top">
               <span class="lf">商品信息</span>
               <span class="lm">单价</span>
@@ -161,7 +162,9 @@
             </div>
           </div>
           <!-- 标准项目（混合、互动）,定制项目-->
-          <div v-if="orderDetail.order_type === '2' &&courseList.length==0 && orderDetail.study_type !='1'">
+          <!-- <div v-if="orderDetail.order_type === '2' &&courseList.length==0 && orderDetail.study_type !='1'"> -->
+
+          <div v-else>
             <div class="top customerProject clearfix">
               <div class="topLeft">
                 <span class="">商品信息</span>
@@ -209,7 +212,6 @@
               </div>
             </div>
           </div>
-
           <div class="tableFooter" v-if="orderDetail.order_type === '1'">
             <p>商品数量：{{courseList.length+projectList.length+vipList.length}}</p>
             <p>学习人数：{{orderDetail.pay_number}}人</p>
