@@ -170,7 +170,6 @@ export default {
     'v-player': CardPlayer
   },
   props: ['courseList', 'privileMsg', 'config'],
-  mounted() {},
   computed: {
     ...mapGetters('auth', ['isAuthenticated']),
     ...mapState('auth', ['token', 'productsNum'])
@@ -256,18 +255,21 @@ export default {
     },
     // 用户 未购买的逻辑 点击加入购物车逻辑
     handleAddShopCart(item) {
-      console.log(item)
-
-      // 第一次点击 没有 在购物车
-      if (item.is_cart === 0) {
-        if (this.two_is_cart === 0) {
-          this.addCourseShopCart(item)
+      if (persistStore.get('token')) {
+        // 第一次点击 没有 在购物车
+        if (item.is_cart === 0) {
+          if (this.two_is_cart === 0) {
+            this.addCourseShopCart(item)
+          } else {
+            message(this, 'success', '您的商品已经在购物车里面')
+          }
         } else {
+          // 第一次点击 在购物车
           message(this, 'success', '您的商品已经在购物车里面')
         }
       } else {
-        // 第一次点击 在购物车
-        message(this, 'success', '您的商品已经在购物车里面')
+        // 当用户未登录
+        this.$bus.$emit('loginShow', true)
       }
     },
     closeCover() {
@@ -277,12 +279,16 @@ export default {
     addCourseShopCart(item) {
       this.curriculumcartids.cartid = item.id
       category.addShopCart(this.curriculumcartids).then(response => {
-        let len = Number(this.productsNum) + 1
-        this.setProductsNum({
-          pn: len
-        })
-        this.two_is_cart = 1
-        message(this, 'success', '加入购物车成功')
+        if (response.status == 0) {
+          let len = Number(this.productsNum) + 1
+          this.setProductsNum({
+            pn: len
+          })
+          this.two_is_cart = 1
+          message(this, 'success', '加入购物车成功')
+        } else {
+          message(this, 'error', response.msg)
+        }
       })
     },
     changeURLArg(url, arg, arg_val) {
