@@ -256,7 +256,7 @@ export default {
     },
     // 提交订单
     handleSubmit() {
-      if (this.customId) {
+      if (this.customId != -1) {
         if (this.orderType == 2) {
           this.handleVipConfirm()
         } else {
@@ -268,10 +268,14 @@ export default {
     }
   },
   mounted() {
-    if (window.location.search == '') {
+    this.customId = matchSplits('id')
+    if (this.customId == -1) {
+      console.log(111)
+
       this.handleGoodsList()
     } else {
-      this.customId = matchSplits('id')
+      console.log(222)
+
       //this.orderType 1:其他订单 2:vip订单
       this.orderType = matchSplits('type')
 

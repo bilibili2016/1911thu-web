@@ -826,11 +826,19 @@ export default {
               }
             )
               .then(() => {
-                this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
+                this.$router.push({
+                  path: '/shop/affirmorder',
+                  query: { id: -1, type: 1 }
+                })
+                // this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
               })
               .catch(() => {})
           } else {
-            this.$router.push('/shop/affirmorder')
+            this.$router.push({
+              path: '/shop/affirmorder',
+              query: { id: -1, type: 1 }
+            })
+            // this.$router.push('/shop/affirmorder')
           }
         })
       } else {
@@ -846,7 +854,11 @@ export default {
           }
         )
           .then(() => {
-            this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
+            this.$router.push({
+              path: '/shop/affirmorder',
+              query: { id: -1, type: 1 }
+            })
+            // this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
           })
           .catch(() => {
             message(this, 'info', '已取消结算！')

@@ -74,6 +74,7 @@ export default {
     // 跳转课程或项目详情
     handleLink(item, type) {
       if (item.type === '1') {
+        //课程
         this.courseUrl.kid = item.curriculum_id
         open(this.courseUrl)
         // this.$router.push({
@@ -85,7 +86,20 @@ export default {
         //   }
         // })
       } else {
+        if ((type = '5')) {
+          this.$router.push({
+            path: '/course/category',
+            query: {
+              cid: item.category_id,
+              cp: 0,
+              pids: 0,
+              xid: 0
+            }
+          })
+          return false
+        }
         if (type === '2') {
+          //项目
           this.type = 1
         } else {
           this.type = 2

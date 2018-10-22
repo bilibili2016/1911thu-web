@@ -771,7 +771,7 @@ export default {
           this.detailMsg = false
           this.courseList = response.data.orderCurriculumList
           this.projectList = response.data.orderProjectList
-          this.vipList = response.data.ordervipList
+          this.vipList = response.data.orderVipList
 
           this.orderDetail = response.data.orderDetail
           if (response.data.orderDetail) {
