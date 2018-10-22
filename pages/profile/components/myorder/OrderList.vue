@@ -61,7 +61,7 @@
             <p class="payClose" v-if="courseList.pay_status === '3' || courseList.pay_status === '4'">已关闭</p>
             <p>
               <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id,courseList)">立即支付</span>
-              <span class="buy" v-if="courseList.pay_status === '3' || courseList.pay_status === '4'" @click="goShopping(courseList.id,courseList)">立即购买</span>
+              <span class="buy" v-if="courseList.pay_status === '3' || courseList.pay_status === '4'" @click="goShopping(courseList)">立即购买</span>
             </p>
           </div>
         </div>
@@ -154,43 +154,18 @@ export default {
         })
       }
     },
-    //去购物车
-    goShopping(id, courseList) {
-      //vip项目
-      if (courseList.orderVipList.length > 0) {
-        this.goAffirmorder(
-          courseList.orderVipList[0].id,
-          courseList.orderVipList[0].pay_number
-        )
-        return false
-      }
-      // 自定义项目和混合项目不加入购物车，直接购买
-      if (
-        courseList.orderProjectList.length > 0 &&
-        courseList.orderProjectList[0].type === '2'
-      ) {
-        this.goAffirmorder(courseList.orderProjectList[0].id)
-      } else {
-        // 混合 互动项目不加入购物车，直接购买
-        if (
-          courseList.orderProjectList.length > 0 &&
-          (courseList.orderProjectList[0].study_type === '2' ||
-            courseList.orderProjectList[0].study_type === '3')
-        ) {
-          this.goAffirmorder(courseList.orderProjectList[0].id)
+    //加入购物车
+    addCart(id) {
+      this.orderForm.ids = id
+      order.buyAgain(this.orderForm).then(response => {
+        if (response.status === 0) {
+          this.$router.push('/shop/shoppingCart')
         } else {
-          //线上项目 加入购物车购买
-          this.orderForm.ids = id
-          order.buyAgain(this.orderForm).then(response => {
-            if (response.status === 0) {
-              this.$router.push('/shop/shoppingCart')
-            } else {
-              message(this, 'error', response.msg)
-            }
-          })
+          message(this, 'error', response.msg)
         }
-      }
+      })
     },
+    //直接购买
     goAffirmorder(id, num) {
       // VIP需要传递购买份数
       if (num) {
@@ -203,6 +178,27 @@ export default {
           path: '/shop/affirmorder',
           query: { id: id, type: 1 }
         })
+      }
+    },
+    //去购物车
+    goShopping(courseList) {
+      if (courseList.order_type == '1') {
+        //课程
+        this.addCart(courseList.id)
+      } else if (courseList.order_type == '2') {
+        if (courseList.orderProjectList[0].study_type == '1') {
+          //线上
+          this.addCart(courseList.id)
+        } else {
+          //混合 互动
+          this.goAffirmorder(courseList.orderProjectList[0].id)
+        }
+      } else if (courseList.order_type == '3') {
+        //vip会员
+        this.goAffirmorder(
+          courseList.orderVipList[0].id,
+          courseList.orderVipList[0].pay_number
+        )
       }
     },
     //课程详情
