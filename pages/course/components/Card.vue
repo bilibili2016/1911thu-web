@@ -49,12 +49,15 @@
                   </span>
                 </div>
                 <div class="common-button">
+                  <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
                   <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
+
                 </div>
               </div>
 
             </div>
             <!-- 免费课程 未学习 end-->
+
             <!-- 免费课程 已学习 start-->
             <div v-if=" courseList.is_free === '2' && courseList.is_study === 1 ">
               <!-- 时间 学习按钮  进度条-->
@@ -84,8 +87,10 @@
                   <!-- 免费课程学习到100后显示再次学习 -->
                   <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
                   <div class="fr">
+                    <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
                     <el-button v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                     <el-button v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
+
                   </div>
 
                 </div>
@@ -251,6 +256,8 @@ export default {
     },
     // 用户 未购买的逻辑 点击加入购物车逻辑
     handleAddShopCart(item) {
+      console.log(item)
+
       // 第一次点击 没有 在购物车
       if (item.is_cart === 0) {
         if (this.two_is_cart === 0) {
