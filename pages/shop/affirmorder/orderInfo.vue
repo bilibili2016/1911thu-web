@@ -50,18 +50,21 @@ export default {
   data() {
     return {
       course: true,
-      type: ''
+      type: '',
+      id: ''
     }
   },
   mounted() {
-    if (window.location.search == '') {
+    if (matchSplits('id') == -1) {
       this.course = true
-    } else if (matchSplits('type') == 1) {
-      this.type = matchSplits('type')
-      this.course = false
     } else {
-      this.type = matchSplits('type')
-      this.course = true
+      if (matchSplits('type') == 1) {
+        this.type = matchSplits('type')
+        this.course = false
+      } else {
+        this.type = matchSplits('type')
+        this.course = true
+      }
     }
   }
 }
