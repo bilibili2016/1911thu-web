@@ -29,7 +29,7 @@
         </div>
 
       </div>
-      <!-- <div class="dropItem  headerClass vipItem">
+      <div class="dropItem  headerClass vipItem">
         <span class="el-dropdown-link" @click="handleVipItem(1,true)">
           VIP会员
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -41,7 +41,7 @@
           </ul>
         </div>
 
-      </div> -->
+      </div>
 
     </div>
     <div class="teach headerClass" @click="handleLink('/home/teacher/list')">
@@ -58,6 +58,9 @@ export default {
   props: ['categoryArr', 'projectArr', 'vipArr'],
   data() {
     return {}
+  },
+  mounted() {
+    console.log(this.vipArr)
   },
   methods: {
     // 公共路由方法
