@@ -423,7 +423,7 @@ export default {
     dblclick(item) {
       clearTimeout(this.clickTime)
       // 检测播放器是否存在
-      console.log(item)
+      // console.log(item)
 
       if (this.player && item.path[1].id == 'mediaPlayer') {
         // 判断当前播放器是否为全屏状态

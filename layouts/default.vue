@@ -42,7 +42,7 @@ export default {
         for (var i = 0; i < headerClass.length; i++) {
           headerClass[i].classList.remove('active')
         }
-        headerClass[4].classList.add('active')
+        headerClass[3].classList.add('active')
       } else if (pathName === '/course/category') {
         //全部课程/全部项目
         for (var i = 0; i < headerClass.length; i++) {
@@ -56,7 +56,7 @@ export default {
           headerClass[2].classList.add('active')
         }
       } else if (pathName === '/home/vip/vipPage') {
-        //首页
+        //vip会员
         for (var i = 0; i < headerClass.length; i++) {
           headerClass[i].classList.remove('active')
         }

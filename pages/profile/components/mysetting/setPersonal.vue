@@ -316,8 +316,6 @@ export default {
       this.psnForm = this.data
     },
     province(val) {
-      console.log(val, 'vvvv')
-
       this.city = this.getRegion(val, this.psnForm.province)
       this.area = this.getRegion(this.city, this.psnForm.city)
     }

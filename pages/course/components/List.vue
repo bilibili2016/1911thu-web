@@ -6,14 +6,14 @@
           <!-- v-if="!loadList" -->
           <li class="title" v-if="cp == 0">学院：</li>
           <li class="title" v-if="cp == 1">领域：</li>
-
           <ul>
             <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
               <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
             </li>
           </ul>
         </div>
-        <div class="classification">
+        <!-- 课程不展示 -->
+        <div class="classification" v-show="cp == 1">
           <!-- v-if="!loadList" -->
           <li class="title">分类：</li>
           <ul>

@@ -257,7 +257,9 @@
         height: 50px;
       }
       .line-center {
+        position: relative;
         overflow: hidden;
+        width: 100%;
         height: 35px;
         // padding: 0 15px;
         p.price {
@@ -266,9 +268,14 @@
           padding: 0 0px;
         }
         p.freePrise {
+          float: left;
           color: #1c1f21;
           font-size: 14px;
           margin: 4px 0;
+        }
+        p.freeTime {
+          float: right;
+          padding-right: 15px;
         }
         span {
           vertical-align: middle;

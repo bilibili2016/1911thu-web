@@ -56,13 +56,15 @@
                 <p class="price freePrise">￥{{card.present_price}}</p>
               </div>
               <div class="line-center" v-if="!isIndex&&card.is_free === '2'">
-                <p class="freePrise">免费</p>
+                <p class="freePrise">限免</p>
+                <p class="freeTime">剩余{{card.free_end_time}}</p>
               </div>
               <div class="line-center" v-if="isIndex&&card.is_free === '1'">
                 <p class="freePrise">￥{{card.present_price}}</p>
               </div>
-              <div class="line-center" v-if="isIndex&&card.is_free === '2'">
-                <p class="freePrise">免费</p>
+              <div class="line-center clearfix" v-if="isIndex&&card.is_free === '2'">
+                <p class="freePrise">限免</p>
+                <p class="freeTime">剩余{{card.free_end_time}}</p>
               </div>
             </div>
           </el-row>
@@ -84,11 +86,14 @@
 import { mapActions } from 'vuex'
 import { card } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { matchSplits, open } from '~/lib/util/helper'
+import { matchSplits, open, timestampToTime } from '~/lib/util/helper'
+
 export default {
   props: ['data', 'config'],
   data() {
     return {
+      rest: '',
+      _ordertimer: null,
       cp: '',
       kidForm: {
         kids: ''

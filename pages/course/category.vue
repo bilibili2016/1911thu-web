@@ -420,8 +420,6 @@ export default {
   },
   watch: {
     $route(v, oldv) {
-      console.log(this.isUrl)
-
       if (v.query !== oldv.query) {
         this.reload()
       }

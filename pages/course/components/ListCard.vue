@@ -25,7 +25,8 @@
           <div class="study clearfix">
             <!-- 免费课程 展示 -->
             <div v-if="course.is_free =='2'">
-              <p class="coin">免费</p>
+              <p class="coin free"><span class="freetext">限免</span><span>剩余{{course.free_end_time}}</span></p>
+              <!-- <p>剩余{{course.free_end_time}}</p> -->
               <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
               <div class="fr common-button-half-right">
                 <el-button type="primary" plain @click.stop="handleLinkCourseDetail(course)"> 立即学习</el-button>
