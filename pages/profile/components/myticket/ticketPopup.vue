@@ -671,6 +671,9 @@ export default {
     },
     //普通发票、个人发票 验证
     addInvoiceBefor() {
+      if (!this.ticketForm.number) {
+        this.ticketForm.number = ''
+      }
       if (this.ticketForm.saveioc) {
         this.ticketForm.types = 2
       } else {

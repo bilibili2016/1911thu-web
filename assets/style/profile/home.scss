@@ -237,7 +237,7 @@
               }
               h4 {
                 width: 160px;
-                height: 42px;
+                height: 63px;
                 font-size: 16px;
                 color: #332a51;
                 overflow: hidden;
@@ -314,6 +314,13 @@
             h4 {
               font-size: 20px;
               color: #ff5f5f;
+              margin-top: 20px;
+            }
+            .table_lf {
+              width: 100px;
+            }
+            .table_lr {
+              width: 100px;
             }
           }
         }

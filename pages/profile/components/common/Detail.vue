@@ -190,7 +190,7 @@
                     <img class="fl" :src="project.picture" alt="">
                   </div>
                   <div class="fl">
-                    <h4>{{project.title}}</h4>
+                    <h4 class="projectTitle">{{project.title}}</h4>
                   </div>
                 </div>
                 <div class="infoRight">
@@ -213,9 +213,9 @@
             </div>
           </div>
           <div class="tableFooter" v-if="orderDetail.order_type === '1'">
-            <p>商品数量：{{courseList.length+projectList.length+vipList.length}}</p>
-            <p>学习人数：{{orderDetail.pay_number}}人</p>
-            <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
+            <p><span class="table_lf">商品数量：</span><span class="table_lr">{{courseList.length+projectList.length+vipList.length}}</span></p>
+            <p><span class="table_lf">学习人数：</span><span class="table_lr">{{orderDetail.pay_number}}人</span></p>
+            <h4><span class="table_lf">商品总额：</span><span class="table_lr">￥{{orderDetail.order_amount}}</span></h4>
           </div>
           <div class="tableFooter" v-else>
             <!-- <p>9.5折&nbsp;&nbsp;&nbsp;优惠¥{{(orderDetail.order_amount*(1-0.95)).toFixed(2)}}</p> -->

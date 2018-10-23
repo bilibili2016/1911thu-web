@@ -3,14 +3,14 @@
     <el-main class="home">
       <!-- 头部导航 -->
       <v-carousel :items="items" :config="configCarousel"></v-carousel>
-      <!-- 最新项目 -->
-      <v-course :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgfff"></v-course>
       <!-- 最新课程 -->
-      <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse" class="index-course bgf8f8fd"></v-course>
+      <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse" class="index-course bgfff"></v-course>
       <!-- 免费专区 -->
-      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgfff"></v-course>
+      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgf8f8fd"></v-course>
       <!-- 精品好课 -->
-      <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgf8f8fd"></v-course>
+      <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgfff"></v-course>
+      <!-- 最新项目 -->
+      <v-course :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgf8f8fd"></v-course>
       <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
       <!-- 名师智库 -->
       <!-- <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous> -->
@@ -156,7 +156,7 @@ export default {
       },
       projectForm: {
         pages: 1,
-        limits: 4
+        limits: 2
       },
       loginMsg: false
     }
