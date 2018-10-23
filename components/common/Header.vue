@@ -139,12 +139,12 @@ export default {
     },
     // 下拉列表
     getClassifyList() {
-      this.categoryArr = []
-      this.projectArr = []
       home.getClassifyList(this.curruntForm).then(response => {
         if (response.status === 0) {
+          this.categoryArr = []
+          this.projectArr = []
           for (let item of response.data.categoryList) {
-            if (item.is_picture_show === '0') {
+            if (item.is_picture_show == 0) {
               this.categoryArr.push(item)
             } else {
               this.projectArr.push(item)

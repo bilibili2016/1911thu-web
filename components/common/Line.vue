@@ -129,20 +129,6 @@ export default {
         }
         let curriculum_id = item.childList[index].curriculum_id
         let catalog_id = item.childList[index].id
-
-        this.courseUrl.kid = matchSplits('kid')
-        this.courseUrl.bid = catalog_id
-        this.courseUrl.page = matchSplits('page')
-        open(this.courseUrl)
-        // this.$router.push(
-        //   '/course/coursedetail' +
-        //     '?kid=' +
-        //     matchSplits('kid') +
-        //     '&bid=' +
-        //     catalog_id +
-        //     '&page=' +
-        //     matchSplits('page')
-        // )
         this.playerForm.curriculumId = curriculum_id
         this.playerForm.catalogId = catalog_id
         this.$bus.$emit('updateCourse', this.playerForm)
@@ -150,7 +136,6 @@ export default {
       }
     },
     buyMask() {
-      // message(this, 'warning', '请登录后,进行学习')
       this.$bus.$emit('loginShow', true)
     }
   }
