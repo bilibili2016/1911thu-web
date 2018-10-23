@@ -9,8 +9,9 @@
         <div class="pop-title">温馨提示</div>
         <i class="el-icon-close" @click="handlePopClick"></i>
         <div class="con">
-          <p>1、购买多份会员，购买多份会员将生成兑换码，绑定成功后立即生效。</p>
-          <p>2、购买一份会员，购买成功后立即生效。</p>
+          <p>1、购买单份会员，购买成功后立即生效；</p>
+          <p>2、购买多份会员，购买成功后将生成兑换码， 绑定后生效；</p>
+          <p>3、如果您再次购买此会员，将生成兑换码，绑定后生效。</p>
         </div>
         <div class="num clearfix">
           <div class="numText">请选择数量</div>
