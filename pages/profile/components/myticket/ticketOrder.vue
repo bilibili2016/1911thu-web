@@ -42,8 +42,17 @@
                 <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList)">
                   查看更多课程>
                 </div>
+                <!-- VIP订单 -->
+                <div class="courseOne" v-if="courseList.orderVipList.length!=0" v-for="vip in courseList.orderVipList" :key="vip.id">
+                  <img @click="goVipInfo(vip)" class="fl" :src="vip.picture" alt="">
+                  <div class="fl">
+                    <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
+                    <!-- <h6>{{vip.curriculum_time}}学时</h6> -->
+                    <!-- <p>导师：{{course.teacher_name}}</p> -->
+                  </div>
+                </div>
               </div>
-              <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList)}">
+              <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList,courseList.orderVipList)}">
                 <p>¥{{courseList.order_amount}}</p>
               </div>
 
@@ -242,6 +251,16 @@ export default {
         this.$router.push(`/project/projectdetail?kid=${item.id}&type=2`)
       }
     },
+    // Vip详情
+    goVipInfo(vip) {
+      this.$router.push({
+        path: '/home/vip/vipPage',
+        query: {
+          id: vip.id,
+          cid: vip.category_id
+        }
+      })
+    },
     //列表详情
     selectPayApply(item, type) {
       persistStore.set('order', item.id)
@@ -252,12 +271,18 @@ export default {
       return timestampToTime(time)
     },
     //根据列表长度计算高度
-    computedHeight(course, project) {
-      let height =
-        course.length + project.length > 3
-          ? 3 * 140 + 60 + 'px'
-          : (course.length + project.length) * 140 + 'px'
-      return height
+    computedHeight(course, project, vip) {
+      let height
+      if (vip.length != 0) {
+        height = '140px'
+        return height
+      } else {
+        height =
+          course.length + project.length > 3
+            ? 3 * 140 + 60 + 'px'
+            : (course.length + project.length) * 140 + 'px'
+        return height
+      }
     },
     //计算项目列表显示数量
     computedLength(course, project, index) {

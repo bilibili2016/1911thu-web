@@ -12,7 +12,15 @@
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
-      <div v-if="hasCode" v-show="showMsg">
+      <div v-if="!hasCode&&isVipCode" v-show="showMsg">
+        <h5>
+          <span @click="handleLinkProfile('tab-fourth')">查看订单</span>
+        </h5>
+        <div class="goback">
+          <span>
+            <i>{{seconds}}</i>s后</span>前往个人中心</div>
+      </div>
+      <div v-if="!hasCode&&!isVipCode" v-show="showMsg">
         <h5>
           <span @click="handleChoiceCourse">继续选课</span>
           <span @click="handleLinkProfile('tab-fourth')">查看订单</span>
@@ -21,7 +29,7 @@
           <span>
             <i>{{seconds}}</i>s后</span>前往个人中心</div>
       </div>
-      <div v-else v-show="showMsg">
+      <div v-if="hasCode" v-show="showMsg">
         <div class="tips">
           <p class="tips-one">您购买的商品已生成兑换码</p>
           <p>请前往
@@ -41,7 +49,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { payResult } from '@/lib/v1_sdk/index'
-import { banBackSpace, matchSplits } from '@/lib/util/helper'
+import { banBackSpace, matchSplits, message } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
   data() {
@@ -54,11 +62,12 @@ export default {
       hasCode: false,
       payCompleteData: {},
       gidForm: { gids: null },
-      seconds: 5,
+      seconds: 500,
       link: null,
       interval: null,
       links: '',
-      showMsg: false
+      showMsg: false,
+      isVipCode: false
     }
   },
   methods: {
@@ -92,36 +101,47 @@ export default {
     payComplete() {
       this.payCompleteForm.orderId = matchSplits('order')
       payResult.payComplete(this.payCompleteForm).then(response => {
-        this.payCompleteData = response.data
-        this.showMsg = true
-        if (response.data.curriculumListType == '1') {
-          // 订单内只有课程
-          this.links = 'tab-second'
-        }
-        if (response.data.curriculumListType == '2') {
-          // 订单内只有项目
-          this.links = 'tab-third'
-        }
-        if (response.data.curriculumListType == '3') {
-          // 订单内课程+项目
-          this.links = 'tab-first'
-        }
-        if (response.data.invitation_code === '') {
-          this.hasCode = true
-          this.interval = setInterval(() => {
-            if (this.seconds < 1) {
-              this.seconds = 0
-              clearInterval(this.interval)
-              this.goLink(this.links)
-            } else {
-              this.seconds--
-            }
-            if (this.$route.path !== this.link) {
-              clearInterval(this.interval)
-            }
-          }, 1000)
+        if (response.status == 0) {
+          this.payCompleteData = response.data
+          this.showMsg = true
+          if (response.data.curriculumListType == '1') {
+            // 订单内只有课程
+            this.links = 'tab-second'
+          }
+          if (response.data.curriculumListType == '2') {
+            // 订单内只有项目
+            this.links = 'tab-third'
+          }
+          if (response.data.curriculumListType == '3') {
+            // 订单内课程+项目
+            this.links = 'tab-first'
+          }
+          if (response.data.curriculumListType == '5') {
+            // 订单内课程+项目
+            this.isVipCode = true
+            this.links = 'tab-first'
+          }
+          if (response.data.invitation_code === '') {
+            // 需要在判断下是否是VIP订单
+            this.hasCode = false
+            this.interval = setInterval(() => {
+              if (this.seconds < 1) {
+                this.seconds = 0
+                clearInterval(this.interval)
+                this.goLink(this.links)
+              } else {
+                this.seconds--
+              }
+              if (this.$route.path !== this.link) {
+                clearInterval(this.interval)
+              }
+            }, 1000)
+          } else {
+            this.hasCode = true
+          }
         } else {
-          this.hasCode = false
+          this.success = false
+          message(this, 'error', response.msg)
         }
       })
     },

@@ -141,6 +141,13 @@ export default {
       // })
     }
   },
+  watch: {
+    $route(v, oldv) {
+      if (v.query !== oldv.query) {
+        location.reload()
+      }
+    }
+  },
   mounted() {
     this.relativeID = matchSplits('cid')
   }

@@ -34,9 +34,9 @@
             </div>
             <!-- vip列表 -->
             <div class="courseOne" v-if="courseList.orderVipList.length" v-for="(vip,index) in courseList.orderVipList" :key="'vip'+index">
-              <img @click="goCourseInfo(course)" class="fl" :src="vip.picture" alt="">
+              <img @click="goVipInfo(vip)" class="fl" :src="vip.picture" alt="">
               <div class="fl">
-                <h4 @click="goCourseInfo(course)" :title="vip.title">{{vip.title}}</h4>
+                <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
               </div>
             </div>
             <!-- <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
@@ -230,6 +230,17 @@ export default {
         query: {
           kid: item.id,
           type: item.type
+        }
+      })
+    },
+    // Vip详情
+    goVipInfo(vip) {
+      console.log(vip)
+      this.$router.push({
+        path: '/home/vip/vipPage',
+        query: {
+          id: vip.id,
+          cid: vip.category_id
         }
       })
     },

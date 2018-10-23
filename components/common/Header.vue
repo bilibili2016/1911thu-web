@@ -263,6 +263,9 @@ export default {
         case '4':
           //兑换码内只有自定义项目
           this.skip = 'tab-third'
+        case '5':
+          //兑换码内只有自定义项目
+          this.skip = 'tab-first'
           break
       }
     },
