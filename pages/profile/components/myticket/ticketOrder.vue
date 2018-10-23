@@ -58,11 +58,7 @@
                   </div>
                 </div>
               </div>
-<<<<<<< HEAD
-              <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList,courseList.orderVipList)}">
-=======
               <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
->>>>>>> dev
                 <p>¥{{courseList.order_amount}}</p>
               </div>
 
@@ -281,24 +277,9 @@ export default {
       return timestampToTime(time)
     },
     //根据列表长度计算高度
-<<<<<<< HEAD
-    computedHeight(course, project, vip) {
-      let height
-      if (vip.length != 0) {
-        height = '140px'
-        return height
-      } else {
-        height =
-          course.length + project.length > 3
-            ? 3 * 140 + 60 + 'px'
-            : (course.length + project.length) * 140 + 'px'
-        return height
-      }
-=======
     computedHeight(len) {
       let height = len > 3 ? 3 * 140 + 60 + 'px' : len * 140 + 'px'
       return height
->>>>>>> dev
     },
     //计算项目列表显示数量
     computedLength(course, project, index) {
