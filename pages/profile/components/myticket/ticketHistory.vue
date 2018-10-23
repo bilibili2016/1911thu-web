@@ -15,7 +15,7 @@
               <img class="fl" :src="ticket.order_picture" alt="">
               <div class="fl">
                 <h4>{{ticket.order_title}}</h4>
-                <h6>{{ticket.curriculum_time}}学时</h6>
+                <h6 v-if="ticket.order_curriculum_type!='3'">{{ticket.curriculum_time}}学时</h6>
               </div>
             </div>
           </div>
