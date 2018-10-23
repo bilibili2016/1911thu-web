@@ -169,7 +169,7 @@ export default {
             if (this.loadingFlag) {
               this.loadingFlag = false
               this.playLoading = setInterval(() => {
-                this.playerLoad(true)
+                this.playerLoad()
               }, 500)
             }
             // 获取到的下一节的播放信息
@@ -212,7 +212,7 @@ export default {
     // 播放器加载完成后
     readyPlay() {
       clearInterval(this.playLoading)
-      this.playerLoad(false)
+      this.playerLoad()
       this.loadingFlag = true
       if (this.aliPlayer.autoplay) {
         this.playVideo = false
@@ -265,8 +265,11 @@ export default {
             this.projectForm.ids,
             2
           )
-          if (this.playVideo) {
+          // 获取当前的播放状态
+          if (this.player.getStatus() == 'playing') {
             this.playVideo = false
+          } else {
+            this.playVideo = true
           }
         }
       }, 1000)
