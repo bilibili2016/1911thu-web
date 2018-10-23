@@ -169,6 +169,7 @@ export default {
     }
   },
   mounted() {
+    // this.orderType（用来控制展开列表页面字段的显隐）  1:其他订单 2:vip订单
     this.orderType = matchSplits('type')
   }
 }

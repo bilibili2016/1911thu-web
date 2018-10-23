@@ -77,30 +77,21 @@ export default {
         //课程
         this.courseUrl.kid = item.curriculum_id
         open(this.courseUrl)
-        // this.$router.push({
-        //   path: '/course/coursedetail',
-        //   query: {
-        //     kid: item.curriculum_id,
-        //     bid: '',
-        //     page: 0
-        //   }
-        // })
       } else {
-        if ((type = '5')) {
+        if (type == '5') {
+          //vip
           this.$router.push({
-            path: '/course/category',
+            path: '/home/vip/vipPage',
             query: {
-              cid: item.category_id,
-              cp: 0,
-              pids: 0,
-              xid: 0
+              id: item.curriculum_id,
+              cid: item.category_id
             }
           })
           return false
         }
         if (type === '2') {
           //项目
-          this.type = 1
+          this.type = 1 //this.type 跳转页面区分是标准项目（1）还是定制项目（2）
         } else {
           this.type = 2
         }

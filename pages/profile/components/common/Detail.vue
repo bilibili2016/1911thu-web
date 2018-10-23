@@ -161,9 +161,9 @@
               </div>
             </div>
           </div>
+
           <!-- 标准项目（混合、互动）,定制项目-->
           <!-- <div v-if="orderDetail.order_type === '2' &&courseList.length==0 && orderDetail.study_type !='1'"> -->
-
           <div v-else>
             <div class="top customerProject clearfix">
               <div class="topLeft">

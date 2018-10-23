@@ -270,13 +270,9 @@ export default {
   mounted() {
     this.customId = matchSplits('id')
     if (this.customId == -1) {
-      console.log(111)
-
       this.handleGoodsList()
     } else {
-      console.log(222)
-
-      //this.orderType 1:其他订单 2:vip订单
+      //this.orderType  1:其他订单 2:vip订单
       this.orderType = matchSplits('type')
 
       if (this.orderType == 2) {
