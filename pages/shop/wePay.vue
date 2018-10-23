@@ -21,9 +21,7 @@
               <v-paytype :orderDetail="orderDetail" :codeData="codeData" :listData="orderCurriculumLists"></v-paytype>
             </div>
           </div>
-
         </div>
-
       </div>
       <!-- 支付二维码展示 -->
       <v-qrcode :orderDetail='orderDetail'></v-qrcode>
@@ -137,8 +135,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(matchSplits('type'))
-
     if (persistStore.get('token')) {
       this.getPayList()
     } else {
