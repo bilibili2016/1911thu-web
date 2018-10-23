@@ -229,13 +229,12 @@ export default {
         path: '/project/projectdetail',
         query: {
           kid: item.id,
-          type: item.type
+          type: item.project_type
         }
       })
     },
     // Vip详情
     goVipInfo(vip) {
-      console.log(vip)
       this.$router.push({
         path: '/home/vip/vipPage',
         query: {
