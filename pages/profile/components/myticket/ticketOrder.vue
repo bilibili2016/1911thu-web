@@ -40,22 +40,13 @@
                 </div>
                 <!-- vip列表 -->
                 <div class="courseOne" v-if="courseList.orderVipList.length && index<3" v-for="(vip,index) in courseList.orderVipList" :key="vip.id">
-                  <img @click="goCourseInfo(vip)" class="fl" :src="vip.picture" alt="">
+                  <img @click="goVipInfo(vip)" class="fl" :src="vip.picture" alt="">
                   <div class="fl">
-                    <h4 @click="goCourseInfo(vip)" :title="vip.title">{{vip.title}}</h4>
+                    <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
                   </div>
                 </div>
                 <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)>3" @click="selectPayApply(courseList)">
                   查看更多课程>
-                </div>
-                <!-- VIP订单 -->
-                <div class="courseOne" v-if="courseList.orderVipList.length!=0" v-for="vip in courseList.orderVipList" :key="vip.id">
-                  <img @click="goVipInfo(vip)" class="fl" :src="vip.picture" alt="">
-                  <div class="fl">
-                    <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
-                    <!-- <h6>{{vip.curriculum_time}}学时</h6> -->
-                    <!-- <p>导师：{{course.teacher_name}}</p> -->
-                  </div>
                 </div>
               </div>
               <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">

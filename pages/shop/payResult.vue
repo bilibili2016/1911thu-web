@@ -62,7 +62,7 @@ export default {
       hasCode: false,
       payCompleteData: {},
       gidForm: { gids: null },
-      seconds: 500,
+      seconds: 5,
       link: null,
       interval: null,
       links: '',
