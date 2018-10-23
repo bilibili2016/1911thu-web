@@ -23,7 +23,6 @@
                   <div class="fl">
                     <h4 @click="goCourseInfo(course)" :title="course.title">{{course.title}}</h4>
                     <h6>{{course.curriculum_time}}学时</h6>
-                    <!-- <p>导师：{{course.teacher_name}}</p> -->
                   </div>
                 </div>
                 <!-- 项目列表 -->
@@ -39,7 +38,14 @@
                     <h6>{{project.curriculum_time}}学时</h6>
                   </div>
                 </div>
-                <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList)">
+                <!-- vip列表 -->
+                <div class="courseOne" v-if="courseList.orderVipList.length && index<3" v-for="(vip,index) in courseList.orderVipList" :key="vip.id">
+                  <img @click="goCourseInfo(vip)" class="fl" :src="vip.picture" alt="">
+                  <div class="fl">
+                    <h4 @click="goCourseInfo(vip)" :title="vip.title">{{vip.title}}</h4>
+                  </div>
+                </div>
+                <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)>3" @click="selectPayApply(courseList)">
                   查看更多课程>
                 </div>
                 <!-- VIP订单 -->
@@ -52,7 +58,11 @@
                   </div>
                 </div>
               </div>
+<<<<<<< HEAD
               <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList,courseList.orderProjectList,courseList.orderVipList)}">
+=======
+              <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
+>>>>>>> dev
                 <p>¥{{courseList.order_amount}}</p>
               </div>
 
@@ -271,6 +281,7 @@ export default {
       return timestampToTime(time)
     },
     //根据列表长度计算高度
+<<<<<<< HEAD
     computedHeight(course, project, vip) {
       let height
       if (vip.length != 0) {
@@ -283,6 +294,11 @@ export default {
             : (course.length + project.length) * 140 + 'px'
         return height
       }
+=======
+    computedHeight(len) {
+      let height = len > 3 ? 3 * 140 + 60 + 'px' : len * 140 + 'px'
+      return height
+>>>>>>> dev
     },
     //计算项目列表显示数量
     computedLength(course, project, index) {
