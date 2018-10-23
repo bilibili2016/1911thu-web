@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { paypublic, wepay } from '@/lib/v1_sdk/index'
 import { matchSplits, message } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
@@ -86,10 +87,14 @@ export default {
         orderId: null
         // attachs: null
       },
-      orderDetail: {}
+      orderDetail: {},
+      gidForm: {
+        gid: ''
+      }
     }
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
     changeTel() {
       this.showTel = true
       this.changeForm.tel = ''
@@ -116,7 +121,7 @@ export default {
       this.showPay = false
       // this.payForm.attachs = matchSplits('attach')
       paypublic.getPayPublicCode(this.payForm).then(res => {
-        if (res.status === 0) {
+        if (res.status == 0) {
           this.$message({
             showClose: true,
             type: 'success',
@@ -141,23 +146,29 @@ export default {
       this.payListForm.orderId = matchSplits('orderID')
       // this.payListForm.attachs = matchSplits('attach')
       wepay.webPay(this.payListForm).then(response => {
-        if (response.status === 0) {
+        if (response.status == 0) {
           this.orderDetail = response.data.data.orderDetail
           this.payForm.orderId = response.data.data.orderDetail.id
           this.payForm.phones = persistStore.get('phone')
           this.handleConfirm()
+        } else if (response.status == 100101) {
+          this.gidForm.gids = 'tab-fourth'
+          this.setGid(this.gidForm)
+          this.$router.push('/profile')
         } else {
           this.$message({
             showClose: true,
             type: 'error',
-            message: res.msg
+            message: response.msg
           })
         }
       })
     },
     handleConfirm() {
       paypublic.getPayPublicCode(this.payForm).then(res => {
-        if (res.status === 0) {
+        console.log(res)
+
+        if (res.status == 0) {
           this.code = res.data.code
         } else {
           this.$message({
