@@ -37,11 +37,11 @@
             <span>{{projectDetail.score}}</span> 分</p>
         </div>
       </div>
-      <div class="changeType fr" v-if="projectType.types==='1'">
+      <!-- <div class="changeType fr" v-if="projectType.types==='1'">
         选择模式:
-        <!-- 线上模式不显示 -->
+        线上模式不显示
         <el-button v-for="(course,index) in projectDetail.relationProjectData" v-if="course.study_type!='1'" :key="index" :class="{'checked':course.select_status}" :disabled="course.id===''" @click="handleLine(course.id)">{{patternArr[index]}}</el-button>
-      </div>
+      </div> -->
       <div class="fr buy clearfix" :class="{buyTop:projectType.types==='2'}">
         <div class="price" v-if="projectDetail.study_type=='1'">
           <i>￥</i>{{projectDetail.present_price}}/人</div>
