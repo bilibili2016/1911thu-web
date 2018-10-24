@@ -4,7 +4,7 @@
       <span @click="handleLink('/')">首页</span>
     </div>
     <div class="fl dropdown clearfix">
-      <div class="dropItem headerClass">
+      <!-- <div class="dropItem headerClass">
         <span class="el-dropdown-link" @click="handleSelectItem({id:0,is_picture_show:0})">
           全部学院
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -15,7 +15,7 @@
             <li v-for="(item,index) in categoryArr" :key="index" @click="handleSelectItem(item)">{{item.category_name}}</li>
           </ul>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="dropItem headerClass">
         <span class="el-dropdown-link" @click="handleSelectItem({id:0,is_picture_show:1})">
           培训项目
@@ -30,8 +30,7 @@
 
       </div> -->
       <!-- <div class="dropItem  headerClass vipItem"> -->
-      <div class="dropItem  headerClass ">
-
+      <!-- <div class="dropItem  headerClass ">
         <span class="el-dropdown-link">
           VIP会员
           <i class="el-icon-arrow-down el-icon--right"></i>
@@ -42,7 +41,12 @@
             <li v-for="(item,index) in vipArr" :key="index" @click="handleVipItem(item)">{{item.title}}</li>
           </ul>
         </div>
-
+      </div> -->
+      <div class="dropItem headerClass " v-for="(item,index) in vipArr" :key="index" @click="handleVipItem(item,index)" v-if="index<2">
+        <span class="el-dropdown-link">
+          {{item.title}}
+          <span class="downLine"></span>
+        </span>
       </div>
 
     </div>
@@ -69,7 +73,8 @@ export default {
     handleSelectItem(item) {
       this.$emit('handleSelectItem', item)
     },
-    handleVipItem(item, flag) {
+    handleVipItem(item, index) {
+      persistStore.set('selectItem', index)
       this.$router.push({
         path: '/home/vip/vipPage',
         query: {

@@ -12,7 +12,7 @@
 <script>
 import Header from '~/components/common/Header'
 import Footer from '~/components/common/Footer'
-
+import { store as persistStore } from '~/lib/core/store'
 import { setPagesHeight, matchSplits } from '~/lib/util/helper'
 export default {
   components: {
@@ -21,7 +21,9 @@ export default {
   },
   data() {
     return {
-      hfshow: true
+      hfshow: true,
+      index: 0,
+      length: 0
     }
   },
   methods: {
@@ -45,22 +47,28 @@ export default {
         headerClass[3].classList.add('active')
       } else if (pathName === '/course/category') {
         //全部课程/全部项目
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove('active')
-        }
-        if (matchSplits('cp') === '0') {
-          //课程
-          headerClass[1].classList.add('active')
-        } else if (matchSplits('cp') === '1') {
-          //项目
-          headerClass[2].classList.add('active')
-        }
+        // for (var i = 0; i < headerClass.length; i++) {
+        //   headerClass[i].classList.remove('active')
+        // }
+        // if (matchSplits('cp') === '0') {
+        //   //课程
+        //   headerClass[1].classList.add('active')
+        // } else if (matchSplits('cp') === '1') {
+        //   //项目
+        //   headerClass[2].classList.add('active')
+        // }
       } else if (pathName === '/home/vip/vipPage') {
         //vip会员
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove('active')
-        }
-        headerClass[2].classList.add('active')
+        // for (var i = 0; i < headerClass.length; i++) {
+        //   headerClass[i].classList.remove('active')
+        // }
+        // if (persistStore.get('selectItem') == 0) {
+        //   console.log(headerClass)
+        //   headerClass[1].classList.add('active')
+        // } else {
+        //   console.log(headerClass)
+        //   headerClass[2].classList.add('active')
+        // }
       } else {
         //其他
         for (var i = 0; i < headerClass.length; i++) {
@@ -81,6 +89,9 @@ export default {
     // 出路由显示header和footer
     this.$bus.$on('headerFooterHide', () => {
       this.hfshow = false
+    })
+    this.$bus.$on('selectItem', data => {
+      this.index = data
     })
   },
   watch: {

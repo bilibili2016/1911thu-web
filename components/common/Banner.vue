@@ -29,8 +29,19 @@
             </div>
           </div>
           <div class="name">
-            <p>{{userInfo.nick_name}}</p>
-            <p>{{userInfo.company_name}}</p>
+            <p class="nickName">{{userInfo.nick_name}}</p>
+            <!-- <p class="companyName">{{userInfo.company_name}}</p> -->
+            <p class="vipCard">
+              <span v-for="(vip,index) in userInfo.vipPrivateList" :key="index">
+                <el-popover placement="bottom-start" :title="vip.title" width="180" trigger="hover" :content="'剩余'+(vip.expire_days)+'天'">
+                  <el-button slot="reference">
+                    <!-- expire_days -->
+                    <img :src="vip.vip_icon" @click="goVipInfo(vip)">
+                  </el-button>
+                </el-popover>
+              </span>
+
+            </p>
           </div>
           <div class="time">
             <p>{{time.hour}}小时{{time.minutes}}分钟</p>
@@ -101,6 +112,15 @@ export default {
           this.$bus.$emit('changeimg', this.avator)
         })
       }
+    },
+    goVipInfo(vip) {
+      this.$router.push({
+        path: '/home/vip/vipPage',
+        query: {
+          id: vip.id,
+          cid: vip.category_id
+        }
+      })
     },
     timestampToTime(timestamp) {
       var date = new Date(timestamp * 1000) //时间戳为10位需*1000，时间戳为13位的话不需乘1000

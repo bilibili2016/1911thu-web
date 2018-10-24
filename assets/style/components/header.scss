@@ -61,6 +61,7 @@ body {
       float: left;
       line-height: 50px;
       box-sizing: border-box;
+      text-align: center;
       &:hover {
         border-bottom: 2px solid #773084;
         color: #773084;
@@ -84,6 +85,7 @@ body {
         .el-dropdown-link {
           font-size: 16px;
           color: #222;
+          text-align: center;
           i.el-icon-arrow-down {
             display: none;
             width: 17px;
@@ -96,7 +98,7 @@ body {
             position: absolute;
             top: 70px;
             left: 0;
-            width: 65px;
+            width: 100%;
             height: 2px;
             background-color: #773084;
           }

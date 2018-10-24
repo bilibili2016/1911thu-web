@@ -1,5 +1,18 @@
 .news-list .shadow {
   box-shadow: none;
+  .recruit {
+    text-align: right;
+    span {
+      width: 180px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 15px;
+      border: 1px solid #5e068c;
+      color: #5e068c;
+      cursor: pointer;
+    }
+  }
 }
 .news-list.teacherList {
   .teacherList-img {
