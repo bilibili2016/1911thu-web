@@ -132,20 +132,18 @@ export default {
       if (persistStore.get('token')) {
         switch (item.name) {
           case 'orderFirst':
-            this.$emit('handleUpdate', 0, 1)
-            this.$emit('handleUpdate', 1, 1)
+            this.$emit('handleUpdate', 0, 1, true)
+            this.$emit('handleUpdate', 1, 1, true)
             break
           case 'orderSecond':
-            this.$emit('handleUpdate', 1, 1)
+            this.$emit('handleUpdate', 1, 1, true)
             break
           case 'orderThird':
-            this.$emit('handleUpdate', 2, 1)
-            this.$emit('handleUpdate', 1, 1)
+            this.$emit('handleUpdate', 2, 1, true)
 
             break
           case 'orderFour':
-            this.$emit('handleUpdate', 3, 1)
-            this.$emit('handleUpdate', 1, 1)
+            this.$emit('handleUpdate', 3, 1, true)
 
             break
         }
