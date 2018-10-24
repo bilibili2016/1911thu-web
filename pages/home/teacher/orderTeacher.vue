@@ -9,7 +9,7 @@
                         <div class="fr">陈春花</div>
                     </div>
                     <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>导师服务形式：</div>
+                        <div class="fl">导师服务形式：</div>
                         <div class="fr">
                             <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
                                 <el-checkbox v-for="service in serviceList" :label="service" :key="service">{{service}}</el-checkbox>
@@ -140,14 +140,18 @@
                 </div>
 
                 <div class="btns ">
-                    <span class="btn save active ">提交</span>
+                    <span class="btn save active " @click="validate">提交</span>
                 </div>
             </div>
 
         </div>
     </div>
 </template>
+
 <script>
+import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
+import { timestampToYMD } from '@/lib/util/helper'
+
 export default {
   data() {
     return {
@@ -167,6 +171,7 @@ export default {
       numLi: [1, 2, 3, 4],
       timeLi: [1, 2, 3, 4],
       teacherForm: {
+        teacerId: '', //导师ID
         service: ['讲座'], //导师服务形式
         name: '', //姓名
         tel: '', //手机号
@@ -178,6 +183,7 @@ export default {
         content: '', //授课内容
         courseObj: '', //授课对象
         courseNum: '', //授课人数
+        courseTime: '', //授课时长
         projectBudget: '', //项目预算
         otherNeed: '' //其他需求
       }
@@ -224,7 +230,49 @@ export default {
     },
     //多选框
     handleCheckedChange(val) {},
-    handleserviceChange(val) {}
+    handleserviceChange(val) {},
+
+    //表单验证
+    validate() {
+      console.log(this.teacherForm)
+      const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+      const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
+      try {
+        if (Trim(this.teacherForm.name) === '') throw '请填写姓名'
+        if (Trim(this.teacherForm.tel) === '') throw '请填写手机号码'
+        if (!telReg.test(Trim(this.teacherForm.tel)))
+          throw '请填写正确的手机号码'
+        if (Trim(this.teacherForm.email) === '') throw '请填写常用邮箱'
+        if (!emailReg.test(Trim(this.teacherForm.email)))
+          throw '请填写正确的邮箱'
+        if (this.teacherForm.appointmentStartTime === '')
+          throw '请选择预约开始时间'
+        if (this.teacherForm.appointmentendTime === '')
+          throw '请选择预约结束时间'
+        if (
+          this.teacherForm.appointmentStartTime >
+          this.teacherForm.appointmentendTime
+        )
+          throw '预约结束日期不能小于预约开始日期'
+        if (this.teacherForm.courseObj === '') throw '请选择授课对象'
+        if (this.teacherForm.courseNum === '') throw '请选择授课人数'
+        if (this.teacherForm.courseTime === '') throw '请选择授课时长'
+        if (Trim(this.teacherForm.projectBudget) === '') throw '请填写项目预算'
+      } catch (err) {
+        message(this, 'error', err)
+        return false
+      }
+      this.handleSubmit()
+    },
+    handleSubmit() {
+      // 转换日期格式
+      this.teacherForm.appointmentStartTime = timestampToYMD(
+        this.teacherForm.appointmentStartTime
+      )
+      this.teacherForm.appointmentendTime = timestampToYMD(
+        this.teacherForm.appointmentendTime
+      )
+    }
   }
 }
 </script>

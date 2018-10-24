@@ -9,7 +9,7 @@
     font-size: 24px;
     color: #6417a6;
     text-align: center;
-    padding: 50px 0 40px 0;
+    padding: 50px 0 10px 0;
   }
   .con {
     background-color: #f7f9fb;
@@ -172,7 +172,7 @@
         .fr {
           margin: 10px 0;
         }
-        .el-radio {
+        .el-checkbox {
           float: left;
           margin-top: 10px;
         }
@@ -182,7 +182,8 @@
           margin-left: 60px;
         }
         .online {
-          margin-bottom: 30px;
+          margin-bottom: 20px;
+          height: 40px;
         }
         .fr.selectFr {
           .pull-down {

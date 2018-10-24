@@ -46,7 +46,7 @@
       </div>
 
     </div>
-    <div class="teach headerClass" @click="handleLink('/home/teacher/list')">
+    <div class="teach headerClass" @click="handleLink('/home/teacher/orderTeacher')">
       <span>名师智库</span>
     </div>
   </div>

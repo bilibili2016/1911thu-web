@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>联系电话：</div>
+                        <div class="fl"><i class="red">*</i>手机号：</div>
                         <div class="fr">
                             <el-input v-model="teacherForm.tel"></el-input>
                         </div>
@@ -96,7 +96,6 @@
                         <div class="fl"><i class="red">*</i>课程名称：</div>
                         <div class="fr">
                             <el-input v-model="teacherForm.courseName" maxlength="30"></el-input>
-                            <span class="input-inner">不超过30字</span>
                         </div>
                     </div>
                     <div class="con-item courseForm clearfix">
@@ -105,8 +104,8 @@
                             <div class="online clearfix">
 
                                 <div class="select-con ">
-                                    <el-radio v-model="teacherForm.courseForm" label="5">线上课程</el-radio>
-                                    <div class="divClick" @click.stop="handleFormClick">
+                                    <el-checkbox v-model="teacherForm.courseForm" @change="onlineChange" label="线上课程">线上课程</el-checkbox>
+                                    <div class="divClick" @click.stop="handleFormClick" v-show="isOnlineChecked">
                                         <el-input v-model="teacherForm.courseOnline" placeholder="请选择分类" readonly></el-input>
                                         <span class="pull-down">
                                             <i class="el-icon-caret-bottom"></i>
@@ -120,8 +119,8 @@
                                 </div>
                             </div>
                             <div class="offline clearfix">
-                                <el-radio v-model="teacherForm.courseForm" label="6">线下课程</el-radio>
-                                <el-checkbox-group v-model="teacherForm.courseOffline" @change="handleCheckedChange">
+                                <el-checkbox v-model="teacherForm.courseForm" @change="offlineChange" label="线下课程">线下课程</el-checkbox>
+                                <el-checkbox-group v-model="teacherForm.courseOffline" @change="handleCheckedChange" v-show="isOfflineChecked">
                                     <el-checkbox v-for="course in checkBoxList" :label="course" :key="course">{{course}}</el-checkbox>
                                 </el-checkbox-group>
                             </div>
@@ -130,8 +129,9 @@
 
                     <div class="con-item clearfix">
                         <div class="fl">课程所属领域：</div>
-                        <div class="fr selectFr">
-                            <div class="select-con ">
+                        <div class="fr">
+                            <el-input v-model="teacherForm.courseArea"></el-input>
+                            <!-- <div class="select-con ">
                                 <div class="divClick" @click.stop="handleAreaClick">
                                     <span>
                                         <el-input v-model="teacherForm.courseArea" placeholder="请选择分类" readonly></el-input>
@@ -145,56 +145,47 @@
                                 <ul>
                                     <li v-for="(item,index) in onlineLi" :key="index" @click.stop="chooseArea(item)">{{item}}</li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="con-item  clearfix">
                         <div class="fl"><i class="red">*</i>课程受众：</div>
-                        <div class="fr selectFr">
-                            <div class="select-con ">
-                                <div class="divClick" @click.stop="handleAudiencesClick">
-                                    <span>
-                                        <el-input v-model="teacherForm.courseAudiences" placeholder="请选择分类" readonly></el-input>
-                                    </span>
-                                    <span class="pull-down">
-                                        <i class="el-icon-caret-bottom"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="pull-down-text" v-if="isShowAudiences">
-                                <ul>
-                                    <li v-for="(item,index) in onlineLi" :key="index" @click.stop="chooseAudiences(item)">{{item}}</li>
-                                </ul>
-                            </div>
+                        <div class="fr">
+                            <el-checkbox-group v-model="teacherForm.courseAudiences" @change="handleserviceChange">
+                                <el-checkbox v-for="audiences in courseAudiencesList" :label="audiences" :key="audiences">{{audiences}}</el-checkbox>
+                            </el-checkbox-group>
                         </div>
                     </div>
 
                     <div class="con-item desc clearfix">
                         <div class="fl"><i class="red">*</i>课程简介：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.courseDesc" type="textarea" :rows="3" maxlength="500" placeholder="" autosize></el-input>
+                            <el-input v-model="teacherForm.courseDesc" type="textarea" :rows="3" maxlength="500" placeholder="请介绍课程内容，特色亮点以及课程学时数。" autosize></el-input>
                         </div>
                         <span class="input-inner">不超过500字</span>
                     </div>
                 </div>
             </div>
             <div class="btns ">
-                <span class="btn save active ">提交</span>
+                <span class="btn save active" @click="validate">提交</span>
             </div>
 
         </div>
     </div>
 </template>
 <script>
+import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
 export default {
   data() {
     return {
-      Model: '5',
+      isOnlineChecked: false,
+      isOfflineChecked: false,
       isShowArea: false,
       isShowAudiences: false,
       isShowForm: false,
       fileList: [],
       serviceList: ['线上授课', '线下授课', '课程顾问', '其他'],
+      courseAudiencesList: ['线上授课', '线下授课', '课程顾问', '其他'],
       checkBoxList: [
         '大班课',
         '小班课',
@@ -210,18 +201,18 @@ export default {
         unit: '', //所在单位
         duty: '', //职务
         dutyName: '', //职称
-        tel: '', //联系电话
+        tel: '', //手机号
         email: '', //常用邮箱
         direction: '', //研究方向
         service: ['线上授课', '线下授课'], //课程服务
         intro: '', //个人简介
-        resume: '', //简历
+        resume: '', //上传文件简历
         courseName: '', //课程名称
-        courseForm: '5', //课程形式
+        courseForm: [], //课程形式
         courseOnline: '', //课程形式-线上课程-分类
         courseOffline: ['大班课'], //课程形式-线下课程-多选
         courseArea: '', //课程所属领域
-        courseAudiences: '', //课程受众
+        courseAudiences: [], //课程受众
         courseDesc: '' //课程简介
       }
     }
@@ -265,9 +256,24 @@ export default {
       this.teacherForm.courseAudiences = val
       this.isShowAudiences = false
     },
+    onlineChange(val) {
+      if (val) {
+        this.isOnlineChecked = true
+      } else {
+        this.isOnlineChecked = false
+      }
+    },
+    offlineChange(val) {
+      if (val) {
+        this.isOfflineChecked = true
+      } else {
+        this.isOfflineChecked = false
+      }
+    },
     //多选框
     handleCheckedChange(val) {},
     handleserviceChange(val) {},
+    //上传
     beforeAvatarUpload(file) {
       var testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
       const extension = testmsg === 'zip'
@@ -296,6 +302,34 @@ export default {
     },
     handleChange(file, fileList) {
       this.fileList3 = fileList.slice(-3)
+    },
+    // 提交
+    handleSubmit() {
+      console.log(111)
+    },
+    //表单验证
+    validate() {
+      console.log(this.teacherForm)
+      const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+      const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
+      try {
+        if (Trim(this.teacherForm.name) === '') throw '请填写姓名'
+        if (Trim(this.teacherForm.tel) === '') throw '请填写手机号码'
+        if (!telReg.test(Trim(this.teacherForm.tel)))
+          throw '请填写正确的手机号码'
+        if (Trim(this.teacherForm.email) === '') throw '请填写常用邮箱'
+        if (!emailReg.test(Trim(this.teacherForm.email)))
+          throw '请填写正确的邮箱'
+        if (Trim(this.teacherForm.direction) === '') throw '请填写研究方向'
+        if (this.teacherForm.service.length == 0) throw '请选择能提供的课程服务'
+        if (Trim(this.teacherForm.courseName) === '') throw '请填写课程名称'
+        if (this.teacherForm.courseAudiences.length == 0) throw '请选择课程受众'
+        if (Trim(this.teacherForm.courseDesc) === '') throw '请填写课程简介'
+      } catch (err) {
+        message(this, 'error', err)
+        return false
+      }
+      this.handleSubmit()
     }
   }
 }
