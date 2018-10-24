@@ -3,6 +3,7 @@
     <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     <div class="center shadow teacherList">
       <div @click="getNewInfoList"></div>
+      <div class="recruit"> <span>成为1911学堂导师</span> </div>
       <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
     </div>
     <div class="pagination" v-show="famousList.length!=0">

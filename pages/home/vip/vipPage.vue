@@ -37,6 +37,7 @@
   </div>
 </template>
 <script>
+import { store as persistStore } from '~/lib/core/store'
 import { matchSplits, setTitle, message } from '@/lib/util/helper'
 import { vip } from '@/lib/v1_sdk/index'
 
@@ -71,7 +72,11 @@ export default {
     },
     //立即购买
     buyVip() {
-      this.vipPopShow = true
+      if (persistStore.get('token')) {
+        this.vipPopShow = true
+      } else {
+        this.$bus.$emit('loginShow')
+      }
     },
     //关闭购买弹窗
     handlePopClick() {

@@ -14,9 +14,9 @@
         </div>
         <div class="changeTips">
           <p>兑换码说明：</p>
-          <p>1.兑换码是用户在购买多份课程、会员或者复购后生成的6位代码；</p>
-          <p>2.绑定兑换码后，课程或会员身份被激活，请在个人中心查看；</p>
-          <p>3.绑定成功后，不可更改</p>
+          <p>1.兑换码是用户在购买多份课程、多人加入学院、复购等情况下生成的6位代码；</p>
+          <p>2.绑定兑换码后，课程或学院权益被激活，请在个人中心查看；</p>
+          <p>3.绑定成功后，不可更改。</p>
         </div>
         <div v-if="bindForm.isInput" class="bind input" @click="detection">绑定</div>
         <div v-else class="bind">绑定</div>

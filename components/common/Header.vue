@@ -158,6 +158,22 @@ export default {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           this.vipArr = response.data.vipGoodsList
+          // 设置头部选中状态
+          this.$nextTick(() => {
+            let pathName = window.location.pathname
+            let headerClass = document.getElementsByClassName('headerClass')
+            if (pathName === '/home/vip/vipPage') {
+              //vip会员
+              for (var i = 0; i < headerClass.length; i++) {
+                headerClass[i].classList.remove('active')
+              }
+              if (persistStore.get('selectItem') == 0) {
+                headerClass[1].classList.add('active')
+              } else {
+                headerClass[2].classList.add('active')
+              }
+            }
+          })
         }
       })
     },
@@ -364,7 +380,7 @@ export default {
         persistStore.set('isSingleLogin', true)
         // 设置用户信息
         this.setUserInfo(res)
-        this.getClassifyList()
+        // this.getClassifyList()
         this.vipGoodsList()
       }
       this.pass = true
@@ -473,7 +489,7 @@ export default {
 
     if (!persistStore.get('token')) {
       // 获取顶部课程列表
-      this.getClassifyList()
+      // this.getClassifyList()
       this.vipGoodsList()
     }
   }
