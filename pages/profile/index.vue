@@ -596,10 +596,12 @@ export default {
       })
     },
     // 我的订单 commonmethods
-    handleMyOrderChange(status, pagenum) {
-      //默认清空搜索条件
-      this.orderForm.startTime = ''
-      this.orderForm.endTime = ''
+    handleMyOrderChange(status, pagenum, flag) {
+      if (flag) {
+        //默认清空搜索条件
+        this.orderForm.startTime = ''
+        this.orderForm.endTime = ''
+      }
       this.orderForm.orderSn = ''
 
       this.allOrderLoadAll = true
