@@ -31,6 +31,7 @@ export default {
   methods: {
     reservation(teacher) {
       console.log(teacher)
+      this.$router.push('/home/teacher/orderTeacher')
     },
     handleLinkTeacherInfo(item) {
       this.$router.push('/home/teacher/' + item.id)
