@@ -172,7 +172,6 @@ export default {
       this.getFreeCourseList()
 
       this.getClassicCourseList()
-      // this.getTeacherList()
       // this.getEvaluateList(),
       this.getNewsInfoList()
       // this.$bus.$emit('updateCount')
@@ -238,19 +237,6 @@ export default {
         this.classicData = response.data.curriculumList
       })
     },
-
-    getTeacherList() {
-      home.getTeacherList(this.teacherForm).then(response => {
-        this.teachers = response.data.teacherList
-        // this.teacherResource = response.data.teacherList
-      })
-    },
-    // 用户评价
-    // getEvaluateList() {
-    //   home.getEvaluateList(this.evaluateForm).then(response => {
-    //     this.evaluateData = response.data.evaluateList
-    //   })
-    // },
     // 学堂资讯
     getNewsInfoList() {
       news.getNewsInfoList(this.newsInfoForm).then(response => {

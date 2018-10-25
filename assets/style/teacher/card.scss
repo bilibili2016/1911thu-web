@@ -76,12 +76,14 @@
             color: #fff;
           }
           &.reservation {
+            border: 1px solid #6417a6;
             cursor: pointer;
-            background-color: #6417a6;
-            color: #fff;
+            color: #6417a6;
             transition: all 300ms;
+            background-color: transparent;
             &:hover {
               background-color: #6417a6;
+              color: #fff;
             }
           }
         }
