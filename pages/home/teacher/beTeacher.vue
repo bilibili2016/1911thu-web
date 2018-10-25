@@ -80,11 +80,13 @@
                     <div class="con-item style clearfix">
                         <div class="fl">上传简历：</div>
                         <div class="fr">
-                            <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" multiple :file-list="fileList" :beforeUpload="beforeAvatarUpload">
-                                <el-button class="uploadBtn" size="mini" type="primary"></el-button>
-                                <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-                                <i class="el-icon-plus"></i>
-                            </el-upload>
+                            <div class="load" v-show="isShowFile">
+                                <div class="upload">
+                                    <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept=".pdf,.doc,.docx">
+                                </div>
+                                <div class="uploadMask"> <i class="el-icon-plus"></i></div>
+                            </div>
+                            <p v-show="!isShowFile"><span>{{fileName}}</span><span class="deleteFile" @click="deleteFile">删除</span></p>
                         </div>
 
                     </div>
@@ -133,21 +135,6 @@
                         <div class="fl">课程所属领域：</div>
                         <div class="fr">
                             <el-input v-model="teacherForm.courseArea"></el-input>
-                            <!-- <div class="select-con ">
-                                <div class="divClick" @click.stop="handleAreaClick">
-                                    <span>
-                                        <el-input v-model="teacherForm.courseArea" placeholder="请选择分类" readonly></el-input>
-                                    </span>
-                                    <span class="pull-down">
-                                        <i class="el-icon-caret-bottom"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="pull-down-text" v-if="isShowArea">
-                                <ul>
-                                    <li v-for="(item,index) in onlineLi" :key="index" @click.stop="chooseArea(item)">{{item}}</li>
-                                </ul>
-                            </div> -->
                         </div>
                     </div>
                     <div class="con-item courseAudiences clearfix">
@@ -182,6 +169,8 @@ import { list } from '~/lib/v1_sdk/index'
 export default {
   data() {
     return {
+      fileName: '',
+      isShowFile: true,
       isClick: false,
       isOnlineChecked: false,
       isOfflineChecked: false,
@@ -214,9 +203,12 @@ export default {
         courseAudiences: [], //课程受众
         courseDesc: '' //课程简介
       },
-      responseData: { type: true, res: '' }
+      fileForm: {
+        FILESS: []
+      }
     }
   },
+
   methods: {
     //课程形式-线上课程-分类点击
     handleFormClick() {
@@ -248,37 +240,35 @@ export default {
     //多选框
     handleCheckedChange(val) {},
     handleserviceChange(val) {},
-    //上传
-    beforeAvatarUpload(file) {
-      let testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
-      const zipExtension = testmsg === 'zip'
-      const docExtension = testmsg === 'doc'
-      const docxExtension = testmsg === 'docx'
-
-      console.log(file.size)
-      const isLt2M = file.size / 1024 / 1024 < 10
-      if (!zipExtension && !docExtension && !docxExtension) {
-        this.$message({
-          message: '上传文件只能是 zip、doc、docx格式!',
-          type: 'warning'
+    //删除上传的文件
+    deleteFile() {
+      this.isShowFile = true
+      this.fileName = ''
+    },
+    //处理文件上传
+    handleUpload(event) {
+      this.handleFileChange(event)
+    },
+    //处理文件上传
+    handleFileChange(event) {
+      var reader = new FileReader()
+      let imgFiles = event.target.files[0]
+      this.fileName = imgFiles.name
+      var formdata = new window.FormData()
+      formdata.append('file', imgFiles)
+      formdata.file = imgFiles
+      reader.readAsDataURL(imgFiles)
+      this.fileForm.FILESS = []
+      reader.onloadend = () => {
+        this.fileForm.FILESS.push(reader.result)
+        list.uploadResume(this.fileForm).then(res => {
+          if (res.status == 0) {
+            this.teacherForm.resume = res.data.full_path
+            this.isShowFile = !this.isShowFile
+            event.target.value = ''
+          }
         })
       }
-      if (!isLt2M) {
-        this.$message({
-          message: '上传文件大小不能超过 10MB!',
-          type: 'warning'
-        })
-      }
-      return extension || (extension2 && isLt2M)
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview(file) {
-      console.log(file)
-    },
-    handleChange(file, fileList) {
-      this.fileList3 = fileList.slice(-3)
     },
     //选项信息
     getRecruitSelect() {
@@ -343,6 +333,7 @@ export default {
   },
   mounted() {
     this.getRecruitSelect()
+    // console.log(this.uploadUrl)
   }
 }
 </script>
