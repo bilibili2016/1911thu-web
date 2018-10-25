@@ -172,6 +172,12 @@ export default {
               } else {
                 headerClass[2].classList.add('active')
               }
+            } else if (pathName === '/home/teacher/list') {
+              //名师智库
+              for (var i = 0; i < headerClass.length; i++) {
+                headerClass[i].classList.remove('active')
+              }
+              headerClass[3].classList.add('active')
             }
           })
         }
