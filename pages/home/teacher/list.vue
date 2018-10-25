@@ -1,9 +1,11 @@
 <template>
   <div class="news-list teacherList" v-loading="loading">
-    <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
+    <div class="33" @click.stop="beTeacher">
+      <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
+    </div>
     <div class="center shadow teacherList">
       <div @click="getNewInfoList"></div>
-      <div class="recruit" @click="beTeacher"> <span>成为1911学堂导师</span> </div>
+      <!-- <div class="recruit" @click="beTeacher"> <span>成为1911学堂导师</span> </div> -->
       <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
     </div>
     <div class="pagination" v-show="famousList.length!=0">
@@ -24,7 +26,7 @@ export default {
   },
   data() {
     return {
-      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/famousTeacher-bg.png',
+      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/famousTeacher.png',
       load: true,
       configs: {
         banner_type: 'famousList'
