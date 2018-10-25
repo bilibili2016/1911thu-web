@@ -41,10 +41,10 @@ export default {
         headerClass[0].classList.add('active')
       } else if (pathName === '/home/teacher/list') {
         //名师智库
-        // for (var i = 0; i < headerClass.length; i++) {
-        //   headerClass[i].classList.remove('active')
-        // }
-        // headerClass[3].classList.add('active')
+        for (var i = 0; i < headerClass.length; i++) {
+          headerClass[i].classList.remove('active')
+        }
+        headerClass[3].classList.add('active')
       } else if (pathName === '/course/category') {
         //全部课程/全部项目
         // for (var i = 0; i < headerClass.length; i++) {
@@ -59,16 +59,14 @@ export default {
         // }
       } else if (pathName === '/home/vip/vipPage') {
         //vip会员
-        // for (var i = 0; i < headerClass.length; i++) {
-        //   headerClass[i].classList.remove('active')
-        // }
-        // if (persistStore.get('selectItem') == 0) {
-        //   console.log(headerClass)
-        //   headerClass[1].classList.add('active')
-        // } else {
-        //   console.log(headerClass)
-        //   headerClass[2].classList.add('active')
-        // }
+        for (var i = 0; i < headerClass.length; i++) {
+          headerClass[i].classList.remove('active')
+        }
+        if (persistStore.get('selectItem') == 0) {
+          headerClass[1].classList.add('active')
+        } else {
+          headerClass[2].classList.add('active')
+        }
       } else {
         //其他
         for (var i = 0; i < headerClass.length; i++) {

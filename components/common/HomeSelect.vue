@@ -61,9 +61,23 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { home } from '~/lib/v1_sdk/index'
 export default {
-  props: ['categoryArr', 'projectArr', 'vipArr'],
+  // props: ['categoryArr', 'projectArr', 'vipArr'], vipArr不动态获取了
+  props: ['categoryArr', 'projectArr'],
   data() {
-    return {}
+    return {
+      vipArr: [
+        {
+          id: '2',
+          category_id: '1',
+          title: '干部网络学院'
+        },
+        {
+          id: '3',
+          category_id: '17',
+          title: '在线商学院'
+        }
+      ]
+    }
   },
   methods: {
     // 公共路由方法
