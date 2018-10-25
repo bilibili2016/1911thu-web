@@ -1,6 +1,6 @@
 <template>
   <div class="news-list teacherList" v-loading="loading">
-    <div class="33" @click.stop="beTeacher">
+    <div class="banner-con" @click.stop="beTeacher">
       <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     </div>
     <div class="center shadow teacherList">

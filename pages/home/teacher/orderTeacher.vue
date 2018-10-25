@@ -28,7 +28,7 @@
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>手机号：</div>
                         <div class="fr">
-                            <el-input class="tel" v-model="teacherForm.tel"></el-input>
+                            <el-input class="tel" v-model="teacherForm.tel" placeholder="请输入短信验证码"></el-input>
                             <el-input class="verification" v-model="teacherForm.code" placeholder="请输入短信验证码"></el-input>
                             <span class="code" @click="smsCodes">{{telCodes.getCode}}</span>
                         </div>
