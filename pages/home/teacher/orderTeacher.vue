@@ -12,7 +12,7 @@
                         <div class="fl">导师服务形式：</div>
                         <div class="fr">
                             <el-checkbox-group v-model="teacherForm.serviceName" @change="handleserviceChange">
-                                <el-checkbox v-for="service in serviceList" :label="service.name" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
+                                <el-checkbox v-for="service in serviceList" :label="service.id" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
                             </el-checkbox-group>
                         </div>
                     </div>
@@ -28,7 +28,9 @@
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>手机号：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.tel"></el-input>
+                            <el-input class="tel" v-model="teacherForm.tel"></el-input>
+                            <el-input class="verification" v-model="teacherForm.code" placeholder="请输入短信验证码"></el-input>
+                            <span class="code" @click="smsCodes">{{telCodes.getCode}}</span>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
@@ -160,19 +162,18 @@ export default {
       isShowNum: false,
       isShowTime: false,
       serviceList: [],
-      objLi: [
-        '线上授课',
-        '线下授课',
-        '课程顾问',
-        '讲座',
-        '论坛',
-        '咨询',
-        '课题研究'
-      ],
+      objLi: [],
       numLi: [],
       timeLi: [],
       teacher: {
         tids: ''
+      },
+      telCodes: {
+        tel: '',
+        types: 6,
+        seconds: 60,
+        getCode: '获取验证码',
+        send: true
       },
       teacherData: {},
       teacherForm: {
@@ -181,6 +182,7 @@ export default {
         serviceName: [], //导师服务形式
         name: '', //姓名
         tel: '', //手机号
+        code: '', //手机验证码
         unit: '', //单位名称
         duty: '', //职务
         email: '', //常用邮箱
@@ -242,13 +244,8 @@ export default {
     },
     //多选框
     handleserviceChange(val) {
-      this.teacherForm.serviceName = val
-      this.teacherForm.service = []
-      this.serviceList.filter(item => {
-        if (this.teacherForm.serviceName.indexOf(item.name) > -1) {
-          this.teacherForm.service.push(item.id)
-        }
-      })
+      this.teacherForm.service = val
+      console.log(this.teacherForm.service)
     },
 
     //表单验证
@@ -261,6 +258,7 @@ export default {
         if (!telReg.test(Trim(this.teacherForm.tel)))
           throw '请填写正确的手机号码'
         if (Trim(this.teacherForm.email) === '') throw '请填写常用邮箱'
+        if (Trim(this.teacherForm.code) === '') throw '请填写手机号验证码'
         if (!emailReg.test(Trim(this.teacherForm.email)))
           throw '请填写正确的邮箱'
         if (this.teacherForm.appointmentStartTime === '')
@@ -299,6 +297,37 @@ export default {
         this.serviceList = response.data.teacherInfo.offer_service
         this.objLi = response.data.teacherInfo.recipient
       })
+    },
+    async smsCodes() {
+      const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
+      if (
+        Trim(this.teacherForm.tel) === '' ||
+        !telReg.test(Trim(this.teacherForm.tel))
+      ) {
+        message(this, 'error', '请填写正确的手机号码')
+        return false
+      } else {
+        this.telCodes.tel = this.teacherForm.tel
+      }
+      if (this.telCodes.seconds === 60 && this.telCodes.send) {
+        this.telCodes.send = false
+        list.smsCodes(this.telCodes).then(response => {
+          let types = response.status === 0 ? 'success' : 'error'
+          message(this, types, response.msg)
+
+          this.telCodes.getCode = this.telCodes.seconds + '秒后重新发送'
+          this.codeInterval = setInterval(() => {
+            if (this.telCodes.seconds <= 0) {
+              this.telCodes.getCode = '获取验证码'
+              this.telCodes.seconds = 60
+              this.telCodes.send = true
+              clearInterval(this.codeInterval)
+            } else {
+              this.telCodes.getCode = --this.telCodes.seconds + '秒后重新发送'
+            }
+          }, 1000)
+        })
+      }
     },
     // 获取预约导师选项信息
     getTeacherSelect() {
