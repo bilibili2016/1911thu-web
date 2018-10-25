@@ -41,10 +41,10 @@ export default {
         headerClass[0].classList.add('active')
       } else if (pathName === '/home/teacher/list') {
         //名师智库
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove('active')
-        }
-        headerClass[3].classList.add('active')
+        // for (var i = 0; i < headerClass.length; i++) {
+        //   headerClass[i].classList.remove('active')
+        // }
+        // headerClass[3].classList.add('active')
       } else if (pathName === '/course/category') {
         //全部课程/全部项目
         // for (var i = 0; i < headerClass.length; i++) {
