@@ -1589,3 +1589,28 @@ input::-webkit-input-safebox-button {
     overflow: visible !important;
   }
 }
+
+//导师招募
+.beTeacher {
+  .phone {
+    .el-input {
+      width: 320px;
+      margin-right: 30px;
+    }
+    .el-button {
+      width: 118px;
+      height: 40px;
+      text-align: center;
+      // line-height: 40px;
+      // margin-left: 18px;
+      border-radius: 6px;
+      background-color: #eee;
+      color: #773084;
+      font-size: 12px;
+      display: inline-block;
+      vertical-align: middle;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
