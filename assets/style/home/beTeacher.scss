@@ -165,6 +165,13 @@
           color: #aaaaaa;
         }
       }
+      .courseAudiences {
+        .fr {
+          .el-checkbox-group {
+            margin-top: 10px;
+          }
+        }
+      }
       .courseForm {
         .fl {
           margin-top: 10px;
@@ -208,13 +215,17 @@
           }
         }
       }
+      .styleAsk {
+        position: relative;
+      }
       .descript-text {
         display: none;
-        // width: 440px;
+        width: 515px;
+        height: 160px;
         color: #222;
         position: absolute;
-        right: 180px;
-        top: -35px;
+        right: -200px;
+        top: 40px;
         background-color: #fff;
         padding: 15px 20px;
         border-radius: 10px;
@@ -236,17 +247,17 @@
           float: left;
         }
         .el-icon-question.styleAsk {
-          float: left;
+          // float: left;
           font-size: 20px;
           margin-left: 40px;
-          margin-top: 11px;
+          margin-bottom: 9px;
           cursor: pointer;
           color: #aaa;
           &:hover {
             .descript-text {
               display: block;
-              right: 180px;
-              top: -35px;
+              // right: 180px;
+              // top: -35px;
             }
           }
         }
