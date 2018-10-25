@@ -86,9 +86,8 @@ export default {
       },
       players: '',
       player: '',
-      ceshiUrl: 'http://ceshi.1911thu.com',
+      ceshiUrl: 'http://ceshi.1911edu.com',
       localUrl: 'http://localhost:8080',
-      wapiUrl: 'http://wapi.1911thu.com:2120',
       seconds: 500000,
       nextCatalogId: '', //下一小节的播放id
       link: '',
@@ -151,9 +150,9 @@ export default {
       let that = this
       let origin = window.location.origin
       if (origin === this.ceshiUrl || origin == this.localUrl) {
-        this.link = 'http://ceshi.1911thu.com:2120'
+        this.link = 'http://ceshi.1911edu.com:2120'
       } else {
-        this.link = 'http://wapi.1911thu.com:2120'
+        this.link = 'http://api.1911edu.com:2120'
       }
       // 新建socket
       this.socket = new io(this.link)
