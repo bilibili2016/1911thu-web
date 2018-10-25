@@ -347,7 +347,7 @@ export default {
           message(
             this,
             'success',
-            '提交成功，我们的服务人员会尽快与您取得联系！'
+            '提交成功，我们的客服人员会尽快与您取得联系！'
           )
           this.$router.push('/home/teacher/list')
         } else {

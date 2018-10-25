@@ -14,7 +14,7 @@
             <p class="title-desc" v-if="teacher.wish_word">{{teacher.wish_word}}</p>
           </div>
           <div class="teacherBtn">
-            <span class="begin" v-if="teacher.is_teachering">已开课</span>
+            <span class="begin" v-if="teacher.is_teachering" @click="handleLinkTeacherInfo(teacher)">已开课</span>
             <span v-else>筹备中</span>
             <span class="reservation" @click="verifyAppointmentTeacher(teacher)">预约导师</span>
           </div>
