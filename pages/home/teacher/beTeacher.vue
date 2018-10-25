@@ -221,41 +221,15 @@ export default {
     //课程形式-线上课程-分类点击
     handleFormClick() {
       this.isShowForm = !this.isShowForm
-      this.isShowArea = false
-      this.isShowAudiences = false
-    },
-    //课程所属领域点击
-    handleAreaClick() {
-      this.isShowForm = false
-      this.isShowArea = !this.isShowArea
-      this.isShowAudiences = false
-    },
-    //课程受众点击
-    handleAudiencesClick() {
-      this.isShowForm = false
-      this.isShowArea = false
-      this.isShowAudiences = !this.isShowAudiences
     },
     documentHandler(e) {
       this.isShowForm = false
-      this.isShowArea = false
-      this.isShowAudiences = false
     },
     //课程形式-线上课程-分类 下拉选项点击
     chooseOnline(val) {
       this.teacherForm.courseOnline = val.name
       this.teacherForm.courseOnlineID = parseInt(val.id)
       this.isShowForm = false
-    },
-    //课程所属领域分类 下拉选项点击
-    chooseArea(val) {
-      this.teacherForm.courseArea = val
-      this.isShowArea = false
-    },
-    //课程受众分类 下拉选项点击
-    chooseAudiences(val) {
-      this.teacherForm.courseAudiences = val
-      this.isShowAudiences = false
     },
     onlineChange(val) {
       if (val) {
@@ -276,14 +250,16 @@ export default {
     handleserviceChange(val) {},
     //上传
     beforeAvatarUpload(file) {
-      var testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
-      const extension = testmsg === 'zip'
-      const extension2 = testmsg === 'doc'
+      let testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
+      const zipExtension = testmsg === 'zip'
+      const docExtension = testmsg === 'doc'
+      const docxExtension = testmsg === 'docx'
+
       console.log(file.size)
       const isLt2M = file.size / 1024 / 1024 < 10
-      if (!extension && !extension2) {
+      if (!zipExtension && !docExtension && !docxExtension) {
         this.$message({
-          message: '上传文件只能是 zip、doc格式!',
+          message: '上传文件只能是 zip、doc、docx格式!',
           type: 'warning'
         })
       }
@@ -341,7 +317,7 @@ export default {
         return false
       }
       this.isClick = true
-      console.log(this.teacherForm)
+      //   console.log(this.teacherForm)
       const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
       try {
