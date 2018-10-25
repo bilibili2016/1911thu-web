@@ -32,10 +32,12 @@
                             <el-input v-model="teacherForm.dutyName"></el-input>
                         </div>
                     </div>
-                    <div class="con-item name clearfix">
+                    <div class="con-item name phone clearfix">
                         <div class="fl"><i class="red">*</i>手机号：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.tel"></el-input>
+                            <el-input v-model="teacherForm.tel" placeholder="请输入手机号"></el-input>
+                            <el-input v-model="teacherForm.code" placeholder="请输入验证码"></el-input>
+                            <el-button @click="getCode">{{bindTelData.getCode}}</el-button>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
@@ -86,7 +88,7 @@
                                 </div>
                                 <div class="uploadMask"> <i class="el-icon-plus"></i></div>
                             </div>
-                            <p v-show="!isShowFile"><span>{{fileName}}</span><span class="deleteFile" @click="deleteFile">删除</span></p>
+                            <p class="uploadP" v-show="!isShowFile"><span>{{fileName}}</span><span class="deleteFile" @click="deleteFile">删除</span></p>
                         </div>
 
                     </div>
@@ -164,12 +166,14 @@
 </template>
 <script>
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
-import { list } from '~/lib/v1_sdk/index'
+import { auth, list } from '~/lib/v1_sdk/index'
 
 export default {
   data() {
     return {
+      codeInterval: null,
       fileName: '',
+      codeClick: true,
       isShowFile: true,
       isClick: false,
       isOnlineChecked: false,
@@ -189,6 +193,7 @@ export default {
         duty: '', //职务
         dutyName: '', //职称
         tel: '', //手机号
+        code: '', //手机验证码
         email: '', //常用邮箱
         direction: '', //研究方向
         service: [], //课程服务
@@ -205,6 +210,18 @@ export default {
       },
       fileForm: {
         FILESS: []
+      },
+      bindTelData: {
+        phones: '',
+        codes: '',
+        getCode: '获取验证码',
+        seconds: 30,
+        types: 1,
+        openid: null,
+        companyCodes: '',
+        captchaDisable: false,
+        exist: false,
+        checked: false
       }
     }
   },
@@ -240,6 +257,43 @@ export default {
     //多选框
     handleCheckedChange(val) {},
     handleserviceChange(val) {},
+    //获取验证码
+    getCode() {
+      const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
+
+      if (Trim(this.teacherForm.tel) === '') {
+        message(this, 'error', '请填写手机号码')
+        return false
+      }
+      if (!telReg.test(Trim(this.teacherForm.tel))) {
+        message(this, 'error', '请填写正确的手机号码')
+        return false
+      }
+      if (this.codeClick) {
+        this.codeClick = false
+        if (this.bindTelData.seconds === 30) {
+          this.bindTelData.types = 6
+          this.bindTelData.phones = this.teacherForm.tel
+
+          auth.smsCodes(this.bindTelData).then(response => {
+            let types = response.status === 0 ? 'success' : 'error'
+            message(this, types, response.msg)
+            this.bindTelData.getCode = this.bindTelData.seconds + '秒后重新发送'
+            this.codeInterval = setInterval(() => {
+              if (this.bindTelData.seconds <= 1) {
+                this.codeClick = true
+                this.bindTelData.getCode = '获取验证码'
+                this.bindTelData.seconds = 30
+                clearInterval(this.codeInterval)
+              } else {
+                this.bindTelData.getCode =
+                  --this.bindTelData.seconds + '秒后重新发送'
+              }
+            }, 1000)
+          })
+        }
+      }
+    },
     //删除上传的文件
     deleteFile() {
       this.isShowFile = true
