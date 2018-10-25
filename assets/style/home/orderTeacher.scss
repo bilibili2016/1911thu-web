@@ -31,6 +31,9 @@
     }
 
     .fr.selectFr {
+      .divClick {
+        display: inline-block;
+      }
       .pull-down {
         left: 281px !important;
       }

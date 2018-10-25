@@ -6,13 +6,13 @@
                     <div class="desc">请选择您的课程需求</div>
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>导师名称：</div>
-                        <div class="fr">陈春花</div>
+                        <div class="fr">{{teacherData.teacher_name}}</div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl">导师服务形式：</div>
                         <div class="fr">
-                            <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
-                                <el-checkbox v-for="service in serviceList" :label="service" :key="service">{{service}}</el-checkbox>
+                            <el-checkbox-group v-model="teacherForm.serviceName" @change="handleserviceChange">
+                                <el-checkbox v-for="service in serviceList" :label="service.name" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
                             </el-checkbox-group>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                             <div class="select-con ">
                                 <div class="divClick" @click.stop="handlecourseObjClick">
                                     <span>
-                                        <el-input v-model="teacherForm.courseObj" placeholder="请选择授课对象" readonly></el-input>
+                                        <el-input v-model="teacherForm.courseObjName" placeholder="请选择授课对象" readonly></el-input>
                                     </span>
                                     <span class="pull-down">
                                         <i class="el-icon-caret-bottom"></i>
@@ -80,7 +80,7 @@
                             </div>
                             <div class="pull-down-text" v-if="isShowObj">
                                 <ul>
-                                    <li v-for="(item,index) in objLi" :key="index" @click.stop="chooseObj(item)">{{item}}</li>
+                                    <li v-for="(item,index) in objLi" :key="index" @click.stop="chooseObj(item)">{{item.name}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                             <div class="select-con ">
                                 <div class="divClick" @click.stop="handleCourseNumClick">
                                     <span>
-                                        <el-input v-model="teacherForm.courseNum" placeholder="请选择授课人数" readonly></el-input>
+                                        <el-input v-model="teacherForm.courseNumName" placeholder="请选择授课人数" readonly></el-input>
                                     </span>
                                     <span class="pull-down">
                                         <i class="el-icon-caret-bottom"></i>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="pull-down-text" v-if="isShowNum">
                                 <ul>
-                                    <li v-for="(item,index) in numLi" :key="index" @click.stop="chooseNum(item)">{{item}}</li>
+                                    <li v-for="(item,index) in numLi" :key="index" @click.stop="chooseNum(item)">{{item.name}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                             <div class="select-con ">
                                 <div class="divClick" @click.stop="handleCourseTimeClick">
                                     <span>
-                                        <el-input v-model="teacherForm.courseTime" placeholder="请选择授课时长" readonly></el-input>
+                                        <el-input v-model="teacherForm.courseTimeName" placeholder="请选择授课时长" readonly></el-input>
                                     </span>
                                     <span class="pull-down">
                                         <i class="el-icon-caret-bottom"></i>
@@ -120,7 +120,7 @@
                             </div>
                             <div class="pull-down-text" v-if="isShowTime">
                                 <ul>
-                                    <li v-for="(item,index) in timeLi" :key="index" @click.stop="chooseTime(item)">{{item}}</li>
+                                    <li v-for="(item,index) in timeLi" :key="index" @click.stop="chooseTime(item)">{{item.name}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -151,6 +151,7 @@
 <script>
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
 import { timestampToYMD } from '@/lib/util/helper'
+import { teacherInfo, list } from '~/lib/v1_sdk/index'
 
 export default {
   data() {
@@ -158,7 +159,8 @@ export default {
       isShowObj: false,
       isShowNum: false,
       isShowTime: false,
-      serviceList: [
+      serviceList: [],
+      objLi: [
         '线上授课',
         '线下授课',
         '课程顾问',
@@ -167,12 +169,16 @@ export default {
         '咨询',
         '课题研究'
       ],
-      objLi: ['党政干部', '国企高管', '教育系统', '其他'],
-      numLi: [1, 2, 3, 4],
-      timeLi: [1, 2, 3, 4],
+      numLi: [],
+      timeLi: [],
+      teacher: {
+        tids: ''
+      },
+      teacherData: {},
       teacherForm: {
-        teacerId: '', //导师ID
-        service: ['讲座'], //导师服务形式
+        teacherId: '', //导师ID
+        service: [], //导师服务形式id
+        serviceName: [], //导师服务形式
         name: '', //姓名
         tel: '', //手机号
         unit: '', //单位名称
@@ -182,8 +188,11 @@ export default {
         appointmentendTime: '', //预约结束时间
         content: '', //授课内容
         courseObj: '', //授课对象
-        courseNum: '', //授课人数
-        courseTime: '', //授课时长
+        courseObjName: '', //授课对象展示
+        courseNum: '', //授课人数id
+        courseNumName: '', //授课人数
+        courseTime: '', //授课时长id
+        courseTimeName: '', //授课时长
         projectBudget: '', //项目预算
         otherNeed: '' //其他需求
       }
@@ -215,26 +224,35 @@ export default {
     },
     //授课人数-分类-下拉选项点击
     chooseNum(val) {
-      this.teacherForm.courseNum = val
+      this.teacherForm.courseNum = val.id
+      this.teacherForm.courseNumName = val.name
       this.isShowNum = false
     },
     //授课对象-分类-下拉选项点击
     chooseObj(val) {
-      this.teacherForm.courseObj = val
+      this.teacherForm.courseObj = val.id
+      this.teacherForm.courseObjName = val.name
       this.isShowObj = false
     },
     //授课时长-分类-下拉选项点击
     chooseTime(val) {
-      this.teacherForm.courseTime = val
+      this.teacherForm.courseTime = val.id
+      this.teacherForm.courseTimeName = val.name
       this.isShowTime = false
     },
     //多选框
-    handleCheckedChange(val) {},
-    handleserviceChange(val) {},
+    handleserviceChange(val) {
+      this.teacherForm.serviceName = val
+      this.teacherForm.service = []
+      this.serviceList.filter(item => {
+        if (this.teacherForm.serviceName.indexOf(item.name) > -1) {
+          this.teacherForm.service.push(item.id)
+        }
+      })
+    },
 
     //表单验证
     validate() {
-      console.log(this.teacherForm)
       const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
       try {
@@ -263,16 +281,51 @@ export default {
         return false
       }
       this.handleSubmit()
+      this.appointmentTeacher()
     },
+    // 转换日期格式
     handleSubmit() {
-      // 转换日期格式
       this.teacherForm.appointmentStartTime = timestampToYMD(
         this.teacherForm.appointmentStartTime
       )
       this.teacherForm.appointmentendTime = timestampToYMD(
         this.teacherForm.appointmentendTime
       )
+    },
+    // 获取老师详情信息
+    getTeacherInfo() {
+      teacherInfo.getTeacherInfo(this.teacher).then(response => {
+        this.teacherData = response.data.teacherInfo
+        this.serviceList = response.data.teacherInfo.offer_service
+        this.objLi = response.data.teacherInfo.recipient
+      })
+    },
+    // 获取预约导师选项信息
+    getTeacherSelect() {
+      list.getTeacherSelect().then(response => {
+        if (response.status == 0) {
+          this.numLi = response.data.studyNumber
+          this.timeLi = response.data.studyTime
+        }
+      })
+    },
+    // 提交预约导师
+    appointmentTeacher() {
+      this.teacherForm.teacherId = this.teacher.tids
+      list.appointmentTeacher(this.teacherForm).then(response => {
+        let stu = response.status == 0 ? 'success' : 'error'
+        message(this, stu, response.msg)
+        if (response.status == 0) {
+          this.$router.push('/home/teacher/list')
+        }
+      })
     }
+  },
+  mounted() {
+    setTitle('预约导师-1911学堂')
+    this.teacher.tids = matchSplits('id')
+    this.getTeacherInfo()
+    this.getTeacherSelect()
   }
 }
 </script>
