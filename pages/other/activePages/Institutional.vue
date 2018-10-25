@@ -85,6 +85,38 @@
             </div>
           </div>
         </div>
+
+      </div>
+      <div class="course serviceDetails clearfix">
+        <h3 style="padding-top:0px;">1911学堂增值服务</h3>
+        <div class="course-left courseCon clearfix">
+          <div class="img">
+            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon3.png" alt="">
+            <div>互动式</div>
+          </div>
+          <div class="con">
+            <div class="text">
+              1911学堂首创“线下+线上”互动式培训模式，结合线上学习人机交互的技术优势以及线下学习人文互动的情感优势，更能助力学习者实现个性化、阶梯式的成长路径。
+            </div>
+            <div class="button" @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0')">
+              点击查看
+            </div>
+          </div>
+        </div>
+        <div class="course-right courseCon clearfix">
+          <div class="img">
+            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon4.png" alt="">
+            <div>顾问式</div>
+          </div>
+          <div class="con">
+            <div class="text">
+              1911学堂可从数千名师资库中遴选最合适的专家教授，为贵单位提供顾问式、咨询式的智力服务，真正做到学习需求与专家内容的智能匹配，实现“请进来、沉下去”的培训效果。
+            </div>
+            <div class="button" @click="handleLink('/home/teacher/list')">
+              点击查看
+            </div>
+          </div>
+        </div>
         <!-- <h3>1911学堂专属定制项目</h3>
         <p class="course-small-title">如果您有更多、更独特的培训需求，请联系我们，1911学堂将根据单位需求， 为您量身定制高品质培训项目。</p>
         <div class="service-list clearfix">
@@ -640,6 +672,9 @@ export default {
     },
     knowDetail() {
       this.$router.push('/other/activePages/enterprisecustom')
+    },
+    handleLink(url) {
+      this.$router.push(url)
     },
     //跳转到自定制项目
     goCustomerProject() {

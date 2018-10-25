@@ -80,11 +80,17 @@
                     <div class="con-item style clearfix">
                         <div class="fl">上传简历：</div>
                         <div class="fr">
-                            <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :on-preview="handlePreview" :on-remove="handleRemove" multiple :file-list="fileList" :beforeUpload="beforeAvatarUpload">
+                            <div class="load" v-show="isShowFile">
+                                <div class="upload">
+                                    <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept=".pdf,.doc,.docx">
+                                </div>
+                                <div class="uploadMask"> <i class="el-icon-plus"></i></div>
+                            </div>
+                            <p v-show="!isShowFile"><span>{{fileName}}</span><span class="deleteFile" @click="deleteFile">删除</span></p>
+                            <!-- <el-upload class="upload-demo" :action="uploadUrl" name="FIFLS" :on-preview="handlePreview" :http-request="httpRequest" :on-remove="handleRemove" :on-progress="handleProcess" :on-success="handleSuccess" multiple :file-list="fileList" :beforeUpload="beforeAvatarUpload">
                                 <el-button class="uploadBtn" size="mini" type="primary"></el-button>
-                                <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
                                 <i class="el-icon-plus"></i>
-                            </el-upload>
+                            </el-upload> -->
                         </div>
 
                     </div>
@@ -133,21 +139,6 @@
                         <div class="fl">课程所属领域：</div>
                         <div class="fr">
                             <el-input v-model="teacherForm.courseArea"></el-input>
-                            <!-- <div class="select-con ">
-                                <div class="divClick" @click.stop="handleAreaClick">
-                                    <span>
-                                        <el-input v-model="teacherForm.courseArea" placeholder="请选择分类" readonly></el-input>
-                                    </span>
-                                    <span class="pull-down">
-                                        <i class="el-icon-caret-bottom"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="pull-down-text" v-if="isShowArea">
-                                <ul>
-                                    <li v-for="(item,index) in onlineLi" :key="index" @click.stop="chooseArea(item)">{{item}}</li>
-                                </ul>
-                            </div> -->
                         </div>
                     </div>
                     <div class="con-item courseAudiences clearfix">
@@ -182,6 +173,8 @@ import { list } from '~/lib/v1_sdk/index'
 export default {
   data() {
     return {
+      fileName: '',
+      isShowFile: true,
       isClick: false,
       isOnlineChecked: false,
       isOfflineChecked: false,
@@ -214,9 +207,14 @@ export default {
         courseAudiences: [], //课程受众
         courseDesc: '' //课程简介
       },
-      responseData: { type: true, res: '' }
+      fileForm: {
+        FILESS: []
+      },
+      responseData: { type: true, res: '' },
+      uploadUrl: process.env.API_STARDUST_BASE_URL + 'Wapi/Teacher/uploadResume'
     }
   },
+
   methods: {
     //课程形式-线上课程-分类点击
     handleFormClick() {
@@ -248,6 +246,72 @@ export default {
     //多选框
     handleCheckedChange(val) {},
     handleserviceChange(val) {},
+    deleteFile() {
+      this.isShowFile = true
+      this.fileName = ''
+    },
+    handleUpload(event) {
+      this.handleFileChange(event)
+    },
+    handleFileChange(event) {
+      // var that = this
+      var reader = new FileReader()
+      let imgFiles = event.target.files[0]
+      this.fileName = imgFiles.name
+      var formdata = new window.FormData()
+      formdata.append('file', imgFiles)
+      formdata.file = imgFiles
+      reader.readAsDataURL(imgFiles)
+      this.fileForm.FILESS = []
+      reader.onloadend = () => {
+        this.fileForm.FILESS.push(reader.result)
+        list.uploadResume(this.fileForm).then(res => {
+          if (res.status == 0) {
+            this.teacherForm.resume = res.data.full_path
+            this.isShowFile = !this.isShowFile
+          }
+        })
+      }
+    },
+    handleProcess() {
+      //   console.log(333)
+    },
+    handleSuccess(val) {
+      console.log(val, 'ddd')
+    },
+    httpRequest(options) {
+      let file = options.file
+      let filename = file.name
+      if (file) {
+        this.fileReader.readAsDataURL(file)
+      }
+      this.fileReader.onload = () => {
+        let base64Str = this.fileReader.result
+        let config = {
+          url: '/Wapi/Teacher/uploadResume',
+          method: 'post',
+          // file: file,
+          data: {
+            base64Str: base64Str.split(',')[1],
+            name: filename
+          },
+          timeout: 10000,
+          onUploadProgress: function(progressEvent) {
+            // console.log(progressEvent)
+            progressEvent.percent =
+              (progressEvent.loaded / progressEvent.total) * 100
+            options.onProgress(progressEvent, file)
+          }
+        }
+        axios(config)
+          .then(res => {
+            options.onSuccess(res, file)
+          })
+          .catch(err => {
+            options.onError(err)
+          })
+      }
+    },
     //上传
     beforeAvatarUpload(file) {
       let testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
@@ -269,7 +333,7 @@ export default {
           type: 'warning'
         })
       }
-      return extension || (extension2 && isLt2M)
+      return zipExtension || (docExtension && isLt2M)
     },
     handleRemove(file, fileList) {
       console.log(file, fileList)
@@ -343,6 +407,7 @@ export default {
   },
   mounted() {
     this.getRecruitSelect()
+    console.log(this.uploadUrl)
   }
 }
 </script>

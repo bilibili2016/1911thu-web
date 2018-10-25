@@ -261,6 +261,48 @@
             }
           }
         }
+        .load {
+          position: relative;
+        }
+        .upload {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100px;
+          height: 100px;
+          z-index: 10;
+        }
+        .uploadMask {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100px;
+          height: 100px;
+          background-color: #fff;
+          border-color: #dddddd;
+          z-index: 1;
+        }
+        #file {
+          display: block;
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          top: 0;
+           left: 0;
+           outline: none;
+           background-color: transparent;
+           filter: alpha(opacity=0);
+          -moz-opacity: 0;
+          -khtml-opacity: 0;
+          opacity: 0;
+          z-index: 100;
+        }
+        .deleteFile {
+          font-size: 14px;
+          margin-left: 20px;
+          color: #6417a6;
+          cursor: pointer;
+        }
         .el-upload {
           position: relative;
         }
