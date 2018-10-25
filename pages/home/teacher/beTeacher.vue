@@ -87,10 +87,6 @@
                                 <div class="uploadMask"> <i class="el-icon-plus"></i></div>
                             </div>
                             <p v-show="!isShowFile"><span>{{fileName}}</span><span class="deleteFile" @click="deleteFile">删除</span></p>
-                            <!-- <el-upload class="upload-demo" :action="uploadUrl" name="FIFLS" :on-preview="handlePreview" :http-request="httpRequest" :on-remove="handleRemove" :on-progress="handleProcess" :on-success="handleSuccess" multiple :file-list="fileList" :beforeUpload="beforeAvatarUpload">
-                                <el-button class="uploadBtn" size="mini" type="primary"></el-button>
-                                <i class="el-icon-plus"></i>
-                            </el-upload> -->
                         </div>
 
                     </div>
@@ -209,9 +205,7 @@ export default {
       },
       fileForm: {
         FILESS: []
-      },
-      responseData: { type: true, res: '' },
-      uploadUrl: process.env.API_STARDUST_BASE_URL + 'Wapi/Teacher/uploadResume'
+      }
     }
   },
 
@@ -246,15 +240,17 @@ export default {
     //多选框
     handleCheckedChange(val) {},
     handleserviceChange(val) {},
+    //删除上传的文件
     deleteFile() {
       this.isShowFile = true
       this.fileName = ''
     },
+    //处理文件上传
     handleUpload(event) {
       this.handleFileChange(event)
     },
+    //处理文件上传
     handleFileChange(event) {
-      // var that = this
       var reader = new FileReader()
       let imgFiles = event.target.files[0]
       this.fileName = imgFiles.name
@@ -269,80 +265,10 @@ export default {
           if (res.status == 0) {
             this.teacherForm.resume = res.data.full_path
             this.isShowFile = !this.isShowFile
+            event.target.value = ''
           }
         })
       }
-    },
-    handleProcess() {
-      //   console.log(333)
-    },
-    handleSuccess(val) {
-      console.log(val, 'ddd')
-    },
-    httpRequest(options) {
-      let file = options.file
-      let filename = file.name
-      if (file) {
-        this.fileReader.readAsDataURL(file)
-      }
-      this.fileReader.onload = () => {
-        let base64Str = this.fileReader.result
-        let config = {
-          url: '/Wapi/Teacher/uploadResume',
-          method: 'post',
-          // file: file,
-          data: {
-            base64Str: base64Str.split(',')[1],
-            name: filename
-          },
-          timeout: 10000,
-          onUploadProgress: function(progressEvent) {
-            // console.log(progressEvent)
-            progressEvent.percent =
-              (progressEvent.loaded / progressEvent.total) * 100
-            options.onProgress(progressEvent, file)
-          }
-        }
-        axios(config)
-          .then(res => {
-            options.onSuccess(res, file)
-          })
-          .catch(err => {
-            options.onError(err)
-          })
-      }
-    },
-    //上传
-    beforeAvatarUpload(file) {
-      let testmsg = file.name.substring(file.name.lastIndexOf('.') + 1)
-      const zipExtension = testmsg === 'zip'
-      const docExtension = testmsg === 'doc'
-      const docxExtension = testmsg === 'docx'
-
-      console.log(file.size)
-      const isLt2M = file.size / 1024 / 1024 < 10
-      if (!zipExtension && !docExtension && !docxExtension) {
-        this.$message({
-          message: '上传文件只能是 zip、doc、docx格式!',
-          type: 'warning'
-        })
-      }
-      if (!isLt2M) {
-        this.$message({
-          message: '上传文件大小不能超过 10MB!',
-          type: 'warning'
-        })
-      }
-      return zipExtension || (docExtension && isLt2M)
-    },
-    handleRemove(file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview(file) {
-      console.log(file)
-    },
-    handleChange(file, fileList) {
-      this.fileList3 = fileList.slice(-3)
     },
     //选项信息
     getRecruitSelect() {
@@ -407,7 +333,7 @@ export default {
   },
   mounted() {
     this.getRecruitSelect()
-    console.log(this.uploadUrl)
+    // console.log(this.uploadUrl)
   }
 }
 </script>
