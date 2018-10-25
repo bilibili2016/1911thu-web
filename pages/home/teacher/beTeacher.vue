@@ -58,7 +58,7 @@
                             <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
                                 <el-checkbox v-for="(service,index) in offerService" :label="service.id" :key="'service'+index">{{service.name}}</el-checkbox>
                                 <i class="el-icon-question styleAsk">
-                                    <div class="descript-text">
+                                    <div class="descript-text" style="width:530px;">
                                         <div>
                                             <p>线上授课：与1911学堂合作录制在线课程，学员登录1911学堂平台进行学习；</p>
                                             <p>线下授课：授课地点为北京，主要形式包括大班课，小班课以及讲座；</p>
