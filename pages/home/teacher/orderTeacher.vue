@@ -171,7 +171,7 @@ export default {
       telCodes: {
         tel: '',
         types: 6,
-        seconds: 60,
+        seconds: 30,
         getCode: '获取验证码',
         send: true
       },
@@ -299,7 +299,7 @@ export default {
       } else {
         this.telCodes.tel = this.teacherForm.tel
       }
-      if (this.telCodes.seconds === 60 && this.telCodes.send) {
+      if (this.telCodes.seconds === 30 && this.telCodes.send) {
         this.telCodes.send = false
         list.smsCodes(this.telCodes).then(response => {
           let types = response.status === 0 ? 'success' : 'error'
@@ -307,9 +307,9 @@ export default {
 
           this.telCodes.getCode = this.telCodes.seconds + '秒后重新发送'
           this.codeInterval = setInterval(() => {
-            if (this.telCodes.seconds <= 0) {
+            if (this.telCodes.seconds <= 1) {
               this.telCodes.getCode = '获取验证码'
-              this.telCodes.seconds = 60
+              this.telCodes.seconds = 30
               this.telCodes.send = true
               clearInterval(this.codeInterval)
             } else {
