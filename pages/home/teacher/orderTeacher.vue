@@ -325,7 +325,7 @@ export default {
         if (response.status == 0) {
           this.numLi = response.data.studyNumber
           this.timeLi = response.data.studyTime
-          this.serviceList = response.data.teacherInfo.offer_service
+          this.serviceList = response.data.offerService
         }
       })
     },
