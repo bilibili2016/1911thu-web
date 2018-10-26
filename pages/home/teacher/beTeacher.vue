@@ -11,45 +11,45 @@
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>姓名：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.name"></el-input>
+                            <el-input v-model="teacherForm.name" placeholder="请填写您的姓名"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl">所在单位：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.unit"></el-input>
+                            <el-input v-model="teacherForm.unit" placeholder="请填写所在单位"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl">职务：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.duty"></el-input>
+                            <el-input v-model="teacherForm.duty" placeholder="请填写您的职务"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl">职称：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.dutyName"></el-input>
+                            <el-input v-model="teacherForm.dutyName" placeholder="请填写您的职称"></el-input>
                         </div>
                     </div>
                     <div class="con-item name phone clearfix">
                         <div class="fl"><i class="red">*</i>手机号：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.tel" placeholder="请输入手机号"></el-input>
-                            <el-input v-model="teacherForm.code" placeholder="请输入验证码"></el-input>
+                            <el-input v-model="teacherForm.tel" placeholder="请输写手机号"></el-input>
+                            <el-input v-model="teacherForm.code" placeholder="请输写短信验证码"></el-input>
                             <el-button @click="getCode">{{bindTelData.getCode}}</el-button>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>常用邮箱：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.email"></el-input>
+                            <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>研究方向：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.direction"></el-input>
+                            <el-input v-model="teacherForm.direction" placeholder="宏观经济、人工智能、区域发展、一带一路等"></el-input>
                         </div>
                     </div>
                     <div class="con-item style clearfix">
@@ -102,7 +102,7 @@
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>课程名称：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.courseName" maxlength="30"></el-input>
+                            <el-input v-model="teacherForm.courseName" placeholder="请填写您希望开课的名称"></el-input>
                         </div>
                     </div>
                     <div class="con-item courseForm clearfix">
@@ -136,7 +136,7 @@
                     <div class="con-item clearfix">
                         <div class="fl">课程所属领域：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.courseArea"></el-input>
+                            <el-input v-model="teacherForm.courseArea" placeholder="请填写课程所属领域"></el-input>
                         </div>
                     </div>
                     <div class="con-item courseAudiences clearfix">

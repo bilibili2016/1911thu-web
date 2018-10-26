@@ -57,6 +57,11 @@
             <i class="icon-cusProject"></i>&nbsp;自定制项目</span>
           <v-myCustomerProject :customer="customer" :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
         </el-tab-pane>
+        <!-- 考试认证 -->
+        <el-tab-pane class="my-examine" name="tab-ten">
+          <span slot="label" class="tabList">
+            <i class="icon-cusProject"></i>&nbsp;考试认证</span>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>

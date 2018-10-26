@@ -22,33 +22,33 @@
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>姓名：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.name"></el-input>
+                            <el-input v-model="teacherForm.name" placeholder="请填写您的姓名"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>手机号：</div>
                         <div class="fr">
-                            <el-input class="tel" v-model="teacherForm.tel" placeholder="请输入手机号"></el-input>
-                            <el-input class="verification" v-model="teacherForm.code" placeholder="请输入短信验证码"></el-input>
+                            <el-input class="tel" v-model="teacherForm.tel" placeholder="请填写手机号"></el-input>
+                            <el-input class="verification" v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input>
                             <span class="code" @click="smsCodes">{{telCodes.getCode}}</span>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl">单位名称：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.unit"></el-input>
+                            <el-input v-model="teacherForm.unit" placeholder="请填写您的单位名称"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl">职务：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.duty"></el-input>
+                            <el-input v-model="teacherForm.duty" placeholder="请填写您的职务"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>常用邮箱：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.email"></el-input>
+                            <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
@@ -64,7 +64,7 @@
                     <div class="con-item name clearfix">
                         <div class="fl">授课内容：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.content"></el-input>
+                            <el-input v-model="teacherForm.content" placeholder="请填写您希望导师授课的内容"></el-input>
                         </div>
                     </div>
                     <div class="con-item clearfix">
@@ -130,13 +130,13 @@
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>项目预算：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.projectBudget" maxlength="30"></el-input>
+                            <el-input v-model="teacherForm.projectBudget" placeholder="请填写项目预算"></el-input>
                         </div>
                     </div>
                     <div class="con-item name clearfix">
                         <div class="fl">其他需求：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.otherNeed" maxlength="30"></el-input>
+                            <el-input v-model="teacherForm.otherNeed" placeholder="请填写其他需求"></el-input>
                         </div>
                     </div>
                 </div>
@@ -284,7 +284,7 @@ export default {
     getTeacherInfo() {
       teacherInfo.getTeacherInfo(this.teacher).then(response => {
         this.teacherData = response.data.teacherInfo
-        this.serviceList = response.data.teacherInfo.offer_service
+
         this.objLi = response.data.teacherInfo.recipient
       })
     },
@@ -325,6 +325,7 @@ export default {
         if (response.status == 0) {
           this.numLi = response.data.studyNumber
           this.timeLi = response.data.studyTime
+          this.serviceList = response.data.teacherInfo.offer_service
         }
       })
     },
