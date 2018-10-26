@@ -50,19 +50,19 @@ var isIE = function(ver) {
 }
 if (isIE(6)) {
   // IE 6
-  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+  window.location.replace('http://api.1911edu.com/Wapi/ErrorView/index')
 }
 if (isIE(7)) {
   // IE 9
-  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+  window.location.replace('http://api.1911edu.com/Wapi/ErrorView/index')
 }
 if (isIE(8)) {
-  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+  window.location.replace('http://api.1911edu.com/Wapi/ErrorView/index')
   // IE 9
 }
 // ...
 if (isIE(9)) {
-  window.location.replace('http://test.1911thu.com/Wapi/ErrorView/index')
+  window.location.replace('http://api.1911edu.com/Wapi/ErrorView/index')
   // if (process.client) {
   //   console.log('process.client')
   //   window.history.replaceState = window.history.replaceState || function() {}
