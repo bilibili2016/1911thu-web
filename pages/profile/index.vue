@@ -58,10 +58,11 @@
           <v-myCustomerProject :customer="customer" :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
         </el-tab-pane>
         <!-- 考试认证 -->
-        <el-tab-pane class="my-examine" name="tab-ten">
+        <!-- <el-tab-pane class="my-examine" name="tab-ten">
           <span slot="label" class="tabList">
             <i class="icon-cusProject"></i>&nbsp;考试认证</span>
-        </el-tab-pane>
+          <v-myexamine></v-myexamine>
+        </el-tab-pane> -->
       </el-tabs>
     </div>
   </div>
@@ -83,6 +84,8 @@ import myInfo from '@/pages/profile/pages/myInfo'
 import myCode from '@/pages/profile/pages/myCode'
 import myTicket from '@/pages/profile/pages/myTicket'
 import myCustomerProject from '@/pages/profile/pages/myCustomerProject'
+import myExamine from '@/pages/profile/pages/myExamine'
+
 export default {
   components: {
     'v-person': PersonalSet,
@@ -94,7 +97,8 @@ export default {
     'v-myinfo': myInfo,
     'v-mycode': myCode,
     'v-myticket': myTicket,
-    'v-myCustomerProject': myCustomerProject
+    'v-myCustomerProject': myCustomerProject,
+    'v-examine': myExamine
   },
   data() {
     return {
