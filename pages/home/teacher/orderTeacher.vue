@@ -54,10 +54,10 @@
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>预约时间范围：</div>
                         <div class="fr">
-                            <el-date-picker v-model="teacherForm.appointmentStartTime" type="date" value-format="timestamp" placeholder="请选择开始日期">
+                            <el-date-picker v-model="teacherForm.appointmentStartTime" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期">
                             </el-date-picker>
                             <span class="dataPickSpan">至</span>
-                            <el-date-picker v-model="teacherForm.appointmentendTime" type="date" value-format="timestamp" placeholder="请选择结束日期">
+                            <el-date-picker v-model="teacherForm.appointmentEndTime" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择结束日期">
                             </el-date-picker>
                         </div>
                     </div>
@@ -187,7 +187,7 @@ export default {
         duty: '', //职务
         email: '', //常用邮箱
         appointmentStartTime: '', //预约开始时间
-        appointmentendTime: '', //预约结束时间
+        appointmentEndTime: '', //预约结束时间
         content: '', //授课内容
         courseObj: '', //授课对象
         courseObjName: '', //授课对象展示
@@ -252,6 +252,9 @@ export default {
     validate() {
       const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
+
+      let start = new Date(this.teacherForm.appointmentStartTime).getTime()
+      let end = new Date(this.teacherForm.appointmentEndTime).getTime()
       try {
         if (Trim(this.teacherForm.name) === '') throw '请填写姓名'
         if (Trim(this.teacherForm.tel) === '') throw '请填写手机号码'
@@ -263,13 +266,9 @@ export default {
           throw '请填写正确的邮箱'
         if (this.teacherForm.appointmentStartTime === '')
           throw '请选择预约开始时间'
-        if (this.teacherForm.appointmentendTime === '')
+        if (this.teacherForm.appointmentEndTime === '')
           throw '请选择预约结束时间'
-        if (
-          this.teacherForm.appointmentStartTime >
-          this.teacherForm.appointmentendTime
-        )
-          throw '预约结束日期不能小于预约开始日期'
+        if (start > end) throw '预约结束日期不能小于预约开始日期'
         if (this.teacherForm.courseObj === '') throw '请选择授课对象'
         if (this.teacherForm.courseNum === '') throw '请选择授课人数'
         if (this.teacherForm.courseTime === '') throw '请选择授课时长'
@@ -278,18 +277,9 @@ export default {
         message(this, 'error', err)
         return false
       }
-      this.handleSubmit()
       this.appointmentTeacher()
     },
-    // 转换日期格式
-    handleSubmit() {
-      this.teacherForm.appointmentStartTime = timestampToYMD(
-        this.teacherForm.appointmentStartTime
-      )
-      this.teacherForm.appointmentendTime = timestampToYMD(
-        this.teacherForm.appointmentendTime
-      )
-    },
+
     // 获取老师详情信息
     getTeacherInfo() {
       teacherInfo.getTeacherInfo(this.teacher).then(response => {
@@ -342,10 +332,16 @@ export default {
     appointmentTeacher() {
       this.teacherForm.teacherId = this.teacher.tids
       list.appointmentTeacher(this.teacherForm).then(response => {
-        let stu = response.status == 0 ? 'success' : 'error'
-        message(this, stu, response.msg)
-        if (response.status == 0) {
+        //不需要验证是否登录
+        if (response.status === 0) {
+          message(
+            this,
+            'success',
+            '提交成功，我们的客服人员会尽快与您取得联系！'
+          )
           this.$router.push('/home/teacher/list')
+        } else {
+          message(this, 'error', response.msg)
         }
       })
     }
