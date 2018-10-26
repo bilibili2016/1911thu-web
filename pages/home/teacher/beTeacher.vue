@@ -386,6 +386,7 @@ export default {
     }
   },
   mounted() {
+    setTitle('导师招募-1911学堂')
     this.getRecruitSelect()
     // console.log(this.uploadUrl)
   }
