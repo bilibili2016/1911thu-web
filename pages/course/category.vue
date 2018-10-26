@@ -231,6 +231,7 @@ export default {
       }
       this.handelOpenUrl()
       this.categoryForm.pages = 1
+      this.pagemsg.page = 1
       this.$bus.$emit('pid', this.selectPidItem)
       // 设置调取 card数据 ---
       this.handleSelectCard(this.selectCidItem, this.selectPidItem)
