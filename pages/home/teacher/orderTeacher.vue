@@ -54,10 +54,10 @@
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>预约时间范围：</div>
                         <div class="fr">
-                            <el-date-picker v-model="teacherForm.appointmentStartTime" type="date" value-format="timestamp" placeholder="选择开始日期">
+                            <el-date-picker v-model="teacherForm.appointmentStartTime" type="date" value-format="timestamp" placeholder="请选择开始日期">
                             </el-date-picker>
                             <span class="dataPickSpan">至</span>
-                            <el-date-picker v-model="teacherForm.appointmentendTime" type="date" value-format="timestamp" placeholder="选择结束日期">
+                            <el-date-picker v-model="teacherForm.appointmentendTime" type="date" value-format="timestamp" placeholder="请选择结束日期">
                             </el-date-picker>
                         </div>
                     </div>
@@ -245,7 +245,7 @@ export default {
     //多选框
     handleserviceChange(val) {
       this.teacherForm.service = val
-      console.log(this.teacherForm.service)
+      //   console.log(this.teacherForm.service)
     },
 
     //表单验证
