@@ -29,14 +29,14 @@
       <div class="con-item name clearfix">
         <div class="fl">项目名称：</div>
         <div class="fr">
-          <el-input v-model.trim="projectForm.name" maxlength="30"></el-input>
+          <el-input v-model.trim="projectForm.name" maxlength="30" placeholder="请输入项目名称"></el-input>
           <span class="input-inner">不超过30字</span>
         </div>
       </div>
       <div class="con-item desc clearfix">
         <div class="fl">项目简介：</div>
         <div class="fr">
-          <el-input type="textarea" v-model.trim="projectForm.desc" :rows="3" maxlength="500" placeholder="" autosize></el-input>
+          <el-input type="textarea" v-model.trim="projectForm.desc" :rows="3" maxlength="500" placeholder="请输入项目简介" autosize></el-input>
         </div>
         <span class="input-inner">不超过500字</span>
       </div>

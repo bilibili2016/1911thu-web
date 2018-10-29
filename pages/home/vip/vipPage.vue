@@ -1,8 +1,13 @@
 <template>
   <div class="VIP-con">
-    <div class="btns" style="margin-top:300px;">
-      <span class="button" @click="lookCourse">查看课程</span>
-      <span class="button active" @click="buyVip">立即购买</span>
+    <div class="vipBanner" :class="{netWork:page=='0',online:page=='1'}"></div>
+    <div class="con">
+      <img class="conImg" v-if="page=='0'" :src="networkImg" alt="">
+      <img class="conImg" v-if="page=='1'" :src="onlineImg" alt="">
+      <div class="btns">
+        <span class="button" @click="lookCourse">查看课程</span>
+        <span class="button active" @click="buyVip">立即购买</span>
+      </div>
     </div>
     <div class="mask" v-show="vipPopShow">
       <div class="vipPop" v-show="!isShowAlert">
@@ -44,6 +49,8 @@ import { vip } from '@/lib/v1_sdk/index'
 export default {
   data() {
     return {
+      onlineImg: 'http://papn9j3ys.bkt.clouddn.com/online-con.png',
+      networkImg: 'http://papn9j3ys.bkt.clouddn.com/network-con.png',
       vipPopShow: false,
       alertShow: false,
       isShowAlert: false,
@@ -54,7 +61,8 @@ export default {
       vipData: {
         vipId: '',
         number: 1
-      }
+      },
+      page: ''
     }
   },
   methods: {
@@ -156,6 +164,7 @@ export default {
   },
   mounted() {
     this.relativeID = matchSplits('cid')
+    this.page = persistStore.get('selectItem') //0:干部网络学院  1:在线商学院
   }
 }
 </script>
