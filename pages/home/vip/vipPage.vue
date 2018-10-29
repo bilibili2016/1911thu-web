@@ -1,7 +1,7 @@
 <template>
   <div class="VIP-con">
     <div class="vipBanner" :class="{netWork:page=='0',online:page=='1'}"></div>
-    <div class="con">
+    <div class="con-detail">
       <img class="conImg" v-if="page=='0'" :src="networkImg" alt="">
       <img class="conImg" v-if="page=='1'" :src="onlineImg" alt="">
       <div class="btns">

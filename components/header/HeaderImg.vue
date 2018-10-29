@@ -52,6 +52,10 @@ export default {
         {
           link: 'tab-ninth',
           text: '自定制项目'
+        },
+        {
+          link: 'tab-ten',
+          text: '考试认证'
         }
       ]
     }

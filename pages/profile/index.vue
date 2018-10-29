@@ -58,11 +58,11 @@
           <v-myCustomerProject :customer="customer" :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
         </el-tab-pane>
         <!-- 考试认证 -->
-        <!-- <el-tab-pane class="my-course my-examine" name="tab-ten">
+        <el-tab-pane class="my-course my-examine" name="tab-ten">
           <span slot="label" class="tabList">
             <i class="icon-cusProject"></i>&nbsp;考试认证</span>
-          <v-myexamine></v-myexamine>
-        </el-tab-pane> -->
+          <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -84,7 +84,8 @@ import myInfo from '@/pages/profile/pages/myInfo'
 import myCode from '@/pages/profile/pages/myCode'
 import myTicket from '@/pages/profile/pages/myTicket'
 import myCustomerProject from '@/pages/profile/pages/myCustomerProject'
-// import myExamine from '@/pages/profile/components/myexamine/examineRecord'
+import myExamine from '@/pages/profile/pages/myExamine'
+import { certificate } from '~/lib/v1_sdk/index'
 
 export default {
   components: {
@@ -97,8 +98,8 @@ export default {
     'v-myinfo': myInfo,
     'v-mycode': myCode,
     'v-myticket': myTicket,
-    'v-myCustomerProject': myCustomerProject
-    // 'v-myexamine': myExamine
+    'v-myCustomerProject': myCustomerProject,
+    'v-myexamine': myExamine
   },
   data() {
     return {
@@ -282,6 +283,11 @@ export default {
         pagesize: 12,
         total: 12
       },
+      examinePagemsg: {
+        page: 1,
+        pagesize: 5,
+        total: 5
+      },
       studyProjectData: [],
       readyProjectData: [],
       expiredProjectData: [],
@@ -421,7 +427,13 @@ export default {
       myOrderDataArr: [0, 1], //初始化-我的订单  [0，1,2,3]全部
       noMsgCourse: false,
       customer: false,
-      responseData: { type: true, res: '' }
+      examineLoading: false,
+      responseData: { type: true, res: '' },
+      examineListForm: {
+        page: 1,
+        limit: 5
+      },
+      examineListData: []
     }
   },
   computed: {
@@ -480,6 +492,10 @@ export default {
             break
           case 'tab-ninth': //自定制项目
             this.customerProjectList()
+            break
+          case 'tab-ten': //考试认证
+            this.examList()
+            this.$bus.$emit('whichShow', 'list')
             break
         }
         let gidForm = {
@@ -907,6 +923,29 @@ export default {
           this.allOrderLoadAll = false
         }
       })
+    },
+    // 考试认证列表
+    examList() {
+      this.examineLoading = true
+      certificate.examList(this.examineListForm).then(res => {
+        if (res.status == 0) {
+          this.examineListData = res.data.examList
+          this.examinePagemsg = res.data.pageCount
+          this.examineLoading = false
+        }
+      })
+    },
+    // 考试认证列表-分页
+    examineListChange(val) {
+      this.examineLoading = true
+      this.examinePagemsg.page = val
+      this.examineListForm.page = val
+      certificate.examList(this.examineListForm).then(res => {
+        if (res.status == 0) {
+          this.examineListData = res.data
+          this.examineLoading = false
+        }
+      })
     }
   },
   mounted() {
@@ -947,7 +986,6 @@ export default {
   }
 }
 </script>
-
-<style scope lang="scss">
+<style scoped lang="scss">
 @import '~assets/style/profile/home';
 </style>

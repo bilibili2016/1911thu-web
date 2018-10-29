@@ -1,0 +1,74 @@
+.examine {
+  .top-con {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #e8d6f7;
+    padding-left: 30px;
+    font-size: 16px;
+    color: #222;
+  }
+  .certificateList {
+    font-size: 16px;
+    color: #222;
+    .listTitle {
+      height: 60px;
+      line-height: 60px;
+      border-bottom: 1px solid #e8d6f7;
+      padding-left: 30px;
+    }
+    .lists {
+      padding: 0 30px;
+      .item {
+        width: 100%;
+        height: 160px;
+        border-bottom: 1px solid #eeeeee;
+        padding: 30px 0;
+        .item_left {
+          float: left;
+          height: 100px;
+          // vertical-align: middle;
+          img {
+            display: inline-block;
+            width: 160px;
+            height: 100px;
+            vertical-align: middle;
+          }
+          span {
+            display: inline-block;
+            margin-left: 20px;
+            line-height: 100px;
+            vertical-align: middle;
+          }
+        }
+        .item_right {
+          float: right;
+          height: 100px;
+          .btn {
+            width: 110px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            font-size: 14px;
+            background-color: #6417a6;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 20px;
+            margin-top: 70px;
+          }
+          .btn_two {
+            background-color: #fff;
+            color: #6417a6;
+            border: 1px solid #6417a6;
+          }
+          .btn_six {
+            background-color: #ccc;
+          }
+        }
+      }
+      .item:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
