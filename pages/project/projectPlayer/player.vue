@@ -100,7 +100,6 @@ export default {
     getPlayerInfo() {
       let that = this
       var link = window.location.origin
-      console.log(process.env.API_STARDUST_BASE_URL)
 
       if (
         link == 'http://ceshi.1911edu.com' ||
