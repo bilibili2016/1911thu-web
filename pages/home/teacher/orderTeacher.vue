@@ -8,11 +8,23 @@
                         <div class="fl"><i class="red">*</i>导师名称：</div>
                         <div class="fr">{{teacherData.teacher_name}}</div>
                     </div>
-                    <div class="con-item name clearfix">
+                    <div class="con-item name style clearfix">
                         <div class="fl">导师服务形式：</div>
                         <div class="fr">
                             <el-checkbox-group v-model="teacherForm.serviceName" @change="handleserviceChange">
                                 <el-checkbox v-for="service in serviceList" :label="service.id" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
+                                <i class="el-icon-question styleAsk">
+                                    <div class="descript-text" style="width:530px;">
+                                        <div>
+                                            <p>线上授课：与1911学堂合作录制在线课程，学员登录1911学堂平台进行学习；</p>
+                                            <p>线下授课：授课地点为北京，主要形式包括大班课，小班课以及讲座；</p>
+                                            <p>课程顾问：亲临项目所在地，实地授课；</p>
+                                            <p>咨询：项目相关的课程研发、培训流程及活动设计等问题的咨询服务；</p>
+                                            <p>课题研究：基于客户提出的科研主题，协助客户完成相关内容的研究。</p>
+
+                                        </div>
+                                    </div>
+                                </i>
                             </el-checkbox-group>
                         </div>
                     </div>

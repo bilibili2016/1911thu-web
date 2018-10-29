@@ -1,6 +1,30 @@
 .VIP-con {
-  width: 1100px;
-  margin: 0 auto;
+  .vipBanner {
+    position: relative;
+    height: 440px !important;
+    // background: url(http://papn9j3ys.bkt.clouddn.com/network-bg.png) no-repeat;
+    // background-size: 1920px 440px;
+    // background-position: center center;
+  }
+  .netWork {
+    background: url(http://papn9j3ys.bkt.clouddn.com/network-bg.png) no-repeat;
+    background-size: 1920px 440px;
+    background-position: center center;
+  }
+  .online {
+    background: url(http://papn9j3ys.bkt.clouddn.com/online-bg.png) no-repeat;
+    background-size: 1920px 440px;
+    background-position: center center;
+  }
+  .con {
+    width: 1100px;
+    margin: 0 auto;
+    padding-top: 30px;
+    .conImg {
+      width: 1100px;
+      height: 1650px;
+    }
+  }
   .btns {
     width: 320px;
     margin: 0 auto;
@@ -46,7 +70,7 @@
       left: 0;
       margin: auto;
       width: 510px;
-      height: 300px;
+      height: 337px;
       border-radius: 10px;
       background-color: #fff;
       text-align: center;
