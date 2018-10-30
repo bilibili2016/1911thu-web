@@ -78,7 +78,9 @@ export default {
     }
   },
   mounted() {
-    this.examRecordLog()
+    this.$bus.$on('examineRecord', () => {
+      this.examRecordLog()
+    })
   }
 }
 </script>

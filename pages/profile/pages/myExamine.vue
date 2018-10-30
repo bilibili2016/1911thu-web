@@ -88,6 +88,7 @@ export default {
           break
         case 'record':
           this.isShowRecord = true
+          this.$bus.$emit('examineRecord')
           break
         default:
           break
