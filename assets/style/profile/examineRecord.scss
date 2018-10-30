@@ -6,6 +6,7 @@
   color: #222;
   border-bottom: 1px solid #e8d6f7;
   .goBack {
+    float: left;
     margin: 0 15px 0 30px;
     cursor: pointer;
     .icon {
@@ -14,6 +15,13 @@
       color: #6417a6;
       margin-right: 15px;
     }
+  }
+  .goExamine {
+    float: right;
+    font-size: 14px;
+    color: #671ca7;
+    margin-right: 30px;
+    cursor: pointer;
   }
 }
 .examine-btn {
@@ -102,6 +110,31 @@
               border-radius: 4px;
               background-color: #f1e9f8;
               border: none;
+            }
+          }
+        }
+        .tel {
+          .fr {
+            .el-input {
+              width: 240px;
+              margin-right: 20px;
+              vertical-align: middle;
+              .el-input__inner {
+                width: 240px;
+              }
+            }
+            .el-button {
+              width: 118px;
+              height: 50px;
+              text-align: center;
+              border-radius: 4px;
+              background-color: #f1e9f8;
+              color: #773084;
+              font-size: 12px;
+              display: inline-block;
+              vertical-align: middle;
+              border: none;
+              cursor: pointer;
             }
           }
         }

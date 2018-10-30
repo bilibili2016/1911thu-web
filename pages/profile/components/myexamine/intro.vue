@@ -13,6 +13,7 @@
 </template>
 <script>
 export default {
+  props: ['vipID'],
   data() {
     return {
       pageData: {
@@ -27,7 +28,9 @@ export default {
       this.$bus.$emit('whichShow', this.pageData)
     },
     handleExamine() {
-      this.$router.push('/profile/components/myexamine/answerQuestion?id=1')
+      this.$router.push(
+        '/profile/components/myexamine/answerQuestion?id=' + this.vipID
+      )
     }
   }
 }
