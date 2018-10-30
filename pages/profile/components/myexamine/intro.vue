@@ -18,6 +18,10 @@ export default {
   props: ['vipId'],
   data() {
     return {
+      pageData: {
+        id: '',
+        name: ''
+      },
       vipForm: {
         vipId: ''
       }
@@ -25,7 +29,8 @@ export default {
   },
   methods: {
     handleBack() {
-      this.$bus.$emit('whichShow', 'info')
+      this.pageData.name = 'info'
+      this.$bus.$emit('whichShow', this.pageData)
     },
     handleExamine() {
       this.vipForm.vipId = vipId
