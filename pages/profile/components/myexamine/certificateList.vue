@@ -8,7 +8,7 @@
                 </div>
                 <div class="item_right">
                     <!-- 存在证书（证书状态）-->
-                    <div v-if="item.isApplyExam==2">
+                    <div v-if="item.isApplyExam==1">
                         <span v-if="item.isExamRecord!=0" class="btn btn_two" @click="viewRecord(item)">考试记录</span>
                         <span v-if="item.isDoneExamStatus==1" class="btn btn_five" @click="handleLink('/profile/components/myexamine/viewCertificate?id='+item.id)">查看证书</span>
                         <span v-if="item.isDoneExamStatus==2" class="btn btn_four" @click="handleLink('/profile/components/myexamine/reviewing?id='+item.id)">审核中</span>
