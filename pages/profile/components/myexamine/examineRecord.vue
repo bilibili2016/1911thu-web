@@ -1,10 +1,11 @@
 <template>
   <!-- 考试记录 -->
   <div class="examineRecord">
-    <div class="examine-top">
+    <div class="examine-top clearfix">
       <span class="goBack" @click="handleBack">
         <i class=" el-icon-arrow-left icon"></i>考试记录
       </span>
+      <span v-if="restExamineTime!=0" class="goExamine" @click="gotoExamine">去考试（剩余{{restExamineTime}}次）></span>
     </div>
     <div class="bottom">
       <div class="tables">
@@ -17,7 +18,7 @@
           </tr>
           <tr class="tr_body" v-for="(record,index) in recordData" :key="index">
             <td>{{record.exam_name}}</td>
-            <td>{{record.create_time}}</td>
+            <td>{{exchangeTime(record.create_time)}}</td>
             <td>{{record.total_score}}</td>
             <td v-if="record.total_score>=85">优秀</td>
             <td v-if="record.total_score<85 && record.total_score>=75">良好</td>
@@ -32,27 +33,52 @@
 </template>
 <script>
 import { certificate } from '~/lib/v1_sdk/index'
+import { timestampToYMD } from '@/lib/util/helper'
 
 export default {
+  props: ['vipID'],
   data() {
     return {
       recordData: [],
+      restExamineTime: '',
       logForm: {
+        vipID: '',
         page: 1,
         limit: 5
+      },
+      pageData: {
+        id: '',
+        name: ''
       }
     }
   },
   methods: {
-    handleBack() {},
+    handleBack() {
+      this.pageData.name = 'list'
+      this.$bus.$emit('whichShow', this.pageData)
+    },
+    //考试记录列表
     examRecordLog() {
+      this.logForm.vipID = this.vipID
       certificate.examRecordLog(this.logForm).then(res => {
         if (res.status == 0) {
           this.recordData = res.data.examRecordLogList
-          console.log(res)
+          this.restExamineTime = res.data.surplusFrequency
         }
       })
+    },
+    //去考试
+    gotoExamine() {
+      this.pageData.name = 'intro'
+      this.$bus.$emit('whichShow', this.pageData)
+    },
+    // 时间戳转日期格式
+    exchangeTime(time) {
+      return timestampToYMD(time)
     }
+  },
+  mounted() {
+    this.examRecordLog()
   }
 }
 </script>
