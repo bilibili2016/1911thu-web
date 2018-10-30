@@ -12,7 +12,13 @@
         <div class="pagination" v-if="examinePagemsg.total>11&&examineListData.length > 0">
           <el-pagination background layout="prev, pager, next" :page-size="examinePagemsg.pagesize" :pager-count="5" :page-count="examinePagemsg.pagesize" :current-page="examinePagemsg.page" :total="examinePagemsg.total" @current-change="examineListChange"></el-pagination>
         </div>
-        <v-nomsg v-if="examineListData.length == 0&&!examineLoading" :config="noMsg"></v-nomsg>
+        <!-- 空页面 -->
+        <div class="content" v-if="examineListData.length == 0&&!examineLoading">
+          <div class="noCourse" style="text-align:center;margin-top:50px;">
+            <img src="http://papn9j3ys.bkt.clouddn.com/VIP_null.png" alt="">
+            <h4 style="margin-top:10px">加入学院后才会有认证资格呦，快去加入吧!</h4>
+          </div>
+        </div>
       </div>
       <!-- 个人信息填写 -->
       <div class="info" v-show="isShowInfo">
