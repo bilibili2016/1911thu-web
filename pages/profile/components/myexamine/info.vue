@@ -79,6 +79,7 @@ export default {
         return false
       }
       this.pageData.name = 'intro'
+      this.pageData.id = this.vipID
       this.$bus.$emit('whichShow', this.pageData)
     }
   },
@@ -87,7 +88,6 @@ export default {
     this.examineInfo.tel = ''
     this.examineInfo.idNumber = ''
     this.examineInfo.unit = ''
-    console.log(this.vipID, 'fff')
   }
 }
 </script>

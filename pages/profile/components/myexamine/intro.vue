@@ -15,7 +15,7 @@
 import { examine } from '~/lib/v1_sdk/index'
 import { message, matchSplits, getNet } from '@/lib/util/helper'
 export default {
-  props: ['vipId'],
+  props: ['vipID'],
   data() {
     return {
       pageData: {
@@ -28,12 +28,13 @@ export default {
     }
   },
   methods: {
+    //  回到VIP列表页
     handleBack() {
-      this.pageData.name = 'info'
+      this.pageData.name = 'list'
       this.$bus.$emit('whichShow', this.pageData)
     },
     handleExamine() {
-      this.vipForm.vipId = vipId
+      this.vipForm.vipId = this.vipID
       examine.createExamRecordQuestion(this.vipForm).then(response => {
         if (response.status == 0) {
           this.$router.push(
