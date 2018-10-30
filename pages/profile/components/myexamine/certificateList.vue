@@ -48,6 +48,8 @@
 </template>
 <script>
 import { certificate } from '~/lib/v1_sdk/index'
+import { message } from '~/lib/util/helper'
+
 export default {
   props: ['examineListData'],
   data() {
@@ -69,6 +71,8 @@ export default {
         } else if (res.status == 0) {
           this.pageData.name = 'intro'
           this.$bus.$emit('whichShow', this.pageData)
+        } else {
+          message(this, 'error', res.msg)
         }
       })
     },
