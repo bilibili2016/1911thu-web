@@ -184,9 +184,6 @@ export default {
     // 转换时间格式
     changeTime(time) {
       clearInterval(this.interval)
-      console.log(time * 1000)
-      console.log(Date.parse(new Date()))
-
       let date = new Date(time * 1000 - Date.parse(new Date())) / 1000
       this.minute = parseInt(date / 60)
       this.second = date % 60
