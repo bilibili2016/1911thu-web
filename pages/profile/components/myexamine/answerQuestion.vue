@@ -29,7 +29,7 @@
             <div class="progress">
                 <h3>当前进度</h3>
                 <p>{{answerNum}} / {{questionNum}}</p>
-                <el-progress :stroke-width="10" color="#3FBABE" :show-text="false" :percentage="answerNum"></el-progress>
+                <el-progress :stroke-width="10" color="#3FBABE" :show-text="false" :percentage="percent"></el-progress>
             </div>
             <div class="displayCard">
                 <h3>答题卡</h3>
@@ -97,6 +97,7 @@ export default {
       questionNext: {}, // 下一题
       questionNum: 0,
       answerNum: 0,
+      percent: 0,
       selectArr: [], // 返回的问题选项
       testPaper: {}
     }
@@ -108,8 +109,6 @@ export default {
     },
     // 切换问题
     selectQuestion(item) {
-      console.log(this.examForm.examId)
-
       this.examForm.questionId = item.id
       this.questionsDetail()
     },
@@ -161,6 +160,12 @@ export default {
       examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           message(this, 'success', '提交成功！')
+          this.$router.push({
+            path: '/profile/components/myexamine/submitPapers',
+            query: {
+              id: this.examForm.examId
+            }
+          })
         } else {
           message(this, 'error', response.msg)
         }
@@ -232,6 +237,8 @@ export default {
       this.questionCard = response.data.questionList
       this.questionNum = response.data.questionList.length
       this.answerNum = response.data.answerTotal
+      this.percent =
+        (response.data.answerTotal / response.data.questionList.length) * 100
       this.selectItem = this.questionCurrent.id
       if (response.data.questionCurrent.is_right != 0) {
         this.showResult = true

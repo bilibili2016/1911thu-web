@@ -162,6 +162,7 @@ body {
       }
     }
     .displayCard {
+      width: 400px;
       h3 {
         color: #6417a6;
         font-size: 16px;
@@ -170,8 +171,6 @@ body {
       }
       ul {
         font-size: 0;
-        width: 400px;
-        // height: 300px;
         box-sizing: content-box;
         border-top: 1px solid #bfbfbf;
         border-left: 1px solid #bfbfbf;
