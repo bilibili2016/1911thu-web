@@ -60,7 +60,7 @@
         <!-- 考试认证 -->
         <el-tab-pane class="my-course my-examine" name="tab-ten">
           <span slot="label" class="tabList">
-            <i class="icon-cusProject"></i>&nbsp;考试认证</span>
+            <i class="icon-examine"></i>&nbsp;考试认证</span>
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
         </el-tab-pane>
       </el-tabs>
