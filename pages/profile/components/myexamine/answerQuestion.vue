@@ -2,7 +2,7 @@
     <div class="exam clearfix">
         <div class="examTitle">
             <span>{{title}}</span>
-            <span>剩余时间：<i>108</i>分<i>108</i>秒</span>
+            <span>剩余时间：<i>{{minute}}</i>分<i>{{second}}</i>秒</span>
             <!-- <span>剩余时间：{{countDown}}</span> -->
         </div>
         <div class="examLeft fl">
@@ -99,7 +99,9 @@ export default {
       answerNum: 0,
       percent: 0,
       selectArr: [], // 返回的问题选项
-      testPaper: {}
+      testPaper: {},
+      minute: 0,
+      second: 0
     }
   },
   methods: {
@@ -219,6 +221,15 @@ export default {
         )
       })
     },
+    // 转换时间格式
+    changeTime(time) {
+      var date = new Date(time * 1000)
+      this.minute =
+        date.getMinutes() * 1 < 10 ? '0' + date.getMinutes() : date.getMinutes()
+      this.second =
+        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
+      console.log(this.minute, this.second)
+    },
     questionsDetail() {
       examine.questionsDetail(this.examForm).then(response => {
         if (response.status == 0) {
@@ -249,12 +260,13 @@ export default {
       }
       this.questionNext = response.data.questionNext
       this.questionPre = response.data.questionPrevious
+      if (this.countDown != 0) {
+        this.changeTime(this.countDown)
+      }
     }
   },
   mounted() {
     if (persistStore.get('token')) {
-      console.log(window.location.search)
-
       if (window.location.search) {
         this.examForm.examId = matchSplits('id')
         this.questionsDetail()
