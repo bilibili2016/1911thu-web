@@ -6,7 +6,9 @@
       <img class="conImg" v-if="page=='1'" :src="onlineImg" alt="">
       <div class="btns">
         <span class="button" @click="lookCourse">查看课程</span>
-        <span class="button active" @click="buyVip">立即购买</span>
+        <span class="button active" @click="buyVip">加入学院</span>
+        <span class="button btn-three" @click="identificate">申请认证</span>
+
       </div>
     </div>
     <div class="mask" v-show="vipPopShow">
@@ -45,6 +47,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import { matchSplits, setTitle, message } from '@/lib/util/helper'
 import { vip } from '@/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -62,10 +65,15 @@ export default {
         vipId: '',
         number: 1
       },
-      page: ''
+      page: '',
+      gidForm: {
+        gids: null
+      }
     }
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
+
     //查看课程
     lookCourse() {
       this.$router.push({
@@ -153,6 +161,13 @@ export default {
       //     message(this, 'error', res.msg)
       //   }
       // })
+    },
+    //申请认证
+    identificate() {
+      this.gidForm.gids = 'tab-tenth'
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
+      this.$bus.$emit('selectProfileIndex', 'tab-tenth')
     }
   },
   watch: {
