@@ -7,7 +7,7 @@
             </span>
         </div>
         <div class="bottom">
-            <div class="examine-btn ">开始考试</div>
+            <div class="examine-btn " @click="handleExamine">开始考试</div>
         </div>
     </div>
 </template>
@@ -16,6 +16,9 @@ export default {
   methods: {
     handleBack() {
       this.$bus.$emit('whichShow', 'info')
+    },
+    handleExamine() {
+      this.$router.push('/profile/components/myexamine/answerQuestion?id=1')
     }
   }
 }

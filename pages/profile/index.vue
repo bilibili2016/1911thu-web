@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="personalCenter">
     <v-banner :config="bconfig" :isShowUpAvtor="activeTab=='tab-sixth'"></v-banner>
     <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
@@ -969,6 +969,7 @@ export default {
         // this.historyOrderDataChange(1)  //我的发票 开票历史
         this.unTicketDataChange(1) //我的发票 按订单开发票
         this.customerProjectList() //自定义项目
+        this.examList() //考试认证
       }
     } else {
       let data = {

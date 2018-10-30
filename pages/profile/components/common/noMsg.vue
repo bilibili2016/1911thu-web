@@ -1,7 +1,7 @@
 <template>
   <!-- 无数据 -->
   <div class="content">
-    <div class="noCourse">
+    <div class="noCourse" style="text-align:center;margin-top:50px;">
       <img :src="noMsgImg" alt="">
       <h4>{{config.text}}</h4>
     </div>
@@ -18,6 +18,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

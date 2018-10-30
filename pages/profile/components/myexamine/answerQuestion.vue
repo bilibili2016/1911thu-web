@@ -65,6 +65,8 @@
             </div>
         </div>
     </div>
+    </div>
+    </div>
 </template>
 
 <script>
@@ -253,6 +255,8 @@ export default {
   },
   mounted() {
     if (persistStore.get('token')) {
+      console.log(window.location.search)
+
       if (window.location.search) {
         this.examForm.examId = matchSplits('id')
         this.questionsDetail()
