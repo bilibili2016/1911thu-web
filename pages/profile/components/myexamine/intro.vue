@@ -13,9 +13,18 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      pageData: {
+        id: '',
+        name: ''
+      }
+    }
+  },
   methods: {
     handleBack() {
-      this.$bus.$emit('whichShow', 'info')
+      this.pageData.name = 'info'
+      this.$bus.$emit('whichShow', this.pageData)
     },
     handleExamine() {
       this.$router.push('/profile/components/myexamine/answerQuestion?id=1')

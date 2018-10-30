@@ -1,6 +1,6 @@
 <template>
     <!-- 个人信息填写 -->
-    <div class="examine-info">
+    <div class="examine-info" :data='vipID'>
         <div class="examine-top">
             <span class="goBack" @click="handleBack">
                 <i class=" el-icon-arrow-left icon"></i>个人信息填写
@@ -42,6 +42,7 @@
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
 
 export default {
+  props: ['vipID'],
   data() {
     return {
       examineInfo: {
@@ -49,12 +50,17 @@ export default {
         tel: '', //手机号
         idNumber: '', //身份证号
         unit: '' //单位名称
+      },
+      pageData: {
+        id: '',
+        name: ''
       }
     }
   },
   methods: {
     handleBack() {
-      this.$bus.$emit('whichShow', 'list')
+      this.pageData.name = 'list'
+      this.$bus.$emit('whichShow', this.pageData)
     },
     handleNext() {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
@@ -72,7 +78,8 @@ export default {
         message(this, 'error', err)
         return false
       }
-      this.$bus.$emit('whichShow', 'intro')
+      this.pageData.name = 'intro'
+      this.$bus.$emit('whichShow', this.pageData)
     }
   },
   mounted() {
@@ -80,6 +87,7 @@ export default {
     this.examineInfo.tel = ''
     this.examineInfo.idNumber = ''
     this.examineInfo.unit = ''
+    console.log(this.vipID, 'fff')
   }
 }
 </script>

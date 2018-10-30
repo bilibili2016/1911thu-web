@@ -16,15 +16,15 @@
       </div>
       <!-- 个人信息填写 -->
       <div class="info" v-show="isShowInfo">
-        <v-info></v-info>
+        <v-info :vipID="vipID"></v-info>
       </div>
       <!-- 认证资格介绍 -->
       <div class="intro" v-show="isShowIntro">
-        <v-intro></v-intro>
+        <v-intro :vipID="vipID"></v-intro>
       </div>
       <!-- 考试记录 -->
       <div class="record" v-show="isShowRecord">
-        <v-record></v-record>
+        <v-record :vipID="vipID"></v-record>
       </div>
     </el-card>
   </div>
@@ -53,6 +53,7 @@ export default {
       isShowInfo: false,
       isShowIntro: false,
       isShowRecord: false,
+      vipID: '',
       noMsg: {
         type: 'myExamine',
         text: '加入学院后才会有认证资格呦，快去加入吧！'
@@ -63,18 +64,19 @@ export default {
   methods: {
     examineListChange() {
       this.$emit('examineListChange')
-    },
-    showList() {
-      this.$bus.$emit('whichShow', 'list')
     }
+    // showList() {
+    //   this.$bus.$emit('whichShow', 'list')
+    // }
   },
   mounted() {
     this.$bus.$on('whichShow', data => {
+      this.vipID = data.id
       this.isShowList = false
       this.isShowInfo = false
       this.isShowIntro = false
       this.isShowRecord = false
-      switch (data) {
+      switch (data.name) {
         case 'list':
           this.isShowList = true
           break
@@ -87,7 +89,6 @@ export default {
         case 'record':
           this.isShowRecord = true
           break
-
         default:
           break
       }

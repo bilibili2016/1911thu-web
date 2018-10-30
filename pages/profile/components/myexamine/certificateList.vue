@@ -17,7 +17,7 @@
                     <div v-if="item.isApplyExam==0">
                         <!-- 不存在考试记录 -->
                         <div v-if="item.isExamRecord==0">
-                            <span class="btn btn_one" @click="gotoExamine('info')">去考试>></span>
+                            <span class="btn btn_one" @click="gotoExamine(item)">去考试</span>
                         </div>
                         <!-- 存在考试记录 -->
                         <div v-if="item.isExamRecord ==1">
@@ -29,13 +29,13 @@
                             <!-- 考试及格，考试次数没用完，可以具备申请证书 -->
                             <div v-if="item.isDoingExamStatus==1">
                                 <span class="btn btn_two" @click="viewRecord(item)">考试记录</span>
-                                <span v-if="item.examRecordNum <3 && item.examRecordNum>0" class="btn btn_one" @click="gotoExamine('intro')">去考试>></span>
+                                <span v-if="item.examRecordNum <3 && item.examRecordNum>0" class="btn btn_one" @click="gotoExamine(item)">去考试</span>
                                 <span class="btn btn_three">申请证书</span>
                             </div>
                             <!-- 未申请过证书 或者 有考试机会，但考试的都不及格 -->
                             <div v-if="item.isDoingExamStatus==0">
                                 <span v-if="item.isExamRecord==1" class="btn btn_two" @click="viewRecord(item)">考试记录</span>
-                                <span v-if="item.examRecordNum!=0" class="btn btn_one" @click="gotoExamine('intro')">去考试>></span>
+                                <span v-if="item.examRecordNum!=0" class="btn btn_one" @click="gotoExamine(item)">去考试</span>
                             </div>
 
                         </div>
@@ -51,12 +51,26 @@ import { certificate } from '~/lib/v1_sdk/index'
 export default {
   props: ['examineListData'],
   data() {
-    return {}
+    return {
+      pageData: {
+        id: '',
+        name: ''
+      }
+    }
   },
   methods: {
     //去考试
-    gotoExamine(page) {
-      this.$bus.$emit('whichShow', page)
+    gotoExamine(item, page) {
+      this.pageData.id = item.id
+      certificate.validateExamPrivilege({ id: item.id }).then(res => {
+        if (res.status == 100201) {
+          this.pageData.name = 'info'
+          this.$bus.$emit('whichShow', this.pageData)
+        } else if (res.status == 0) {
+          this.pageData.name = 'intro'
+          this.$bus.$emit('whichShow', this.pageData)
+        }
+      })
     },
     //审核中
     handleInreview() {
@@ -64,7 +78,9 @@ export default {
     },
     //查看考试记录
     viewRecord(item) {
-      this.$bus.$emit('whichShow', 'record')
+      this.pageData.id = item.id
+      this.pageData.name = 'record'
+      this.$bus.$emit('whichShow', pageData)
     }
   },
   mounted() {}

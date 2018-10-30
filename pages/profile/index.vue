@@ -495,7 +495,7 @@ export default {
             break
           case 'tab-ten': //考试认证
             this.examList()
-            this.$bus.$emit('whichShow', 'list')
+            this.$bus.$emit('whichShow', { id: '', name: 'list' })
             break
         }
         let gidForm = {
