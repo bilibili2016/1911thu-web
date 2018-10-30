@@ -124,17 +124,19 @@ body {
       color: #6417a6;
       font-size: 16px;
       cursor: pointer;
-      &:hover {
-        background-color: #6417a6;
-        color: #fff;
-      }
-      &:first-child {
+      &.preAnswer {
         border: 1px solid #bbbbbb;
+        background-color: #fff;
         color: #666;
       }
-      &:nth-child(2) {
+      &.nextAnswer {
+        border: 1px solid #dddddd;
         background-color: #dddddd;
         color: #222222;
+        margin: 0 20px;
+      }
+      &.disable {
+        cursor: not-allowed;
       }
     }
   }

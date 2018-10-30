@@ -1,39 +1,40 @@
 <template>
     <div class="exam clearfix">
         <div class="examTitle">
-            <span>干部网络学院考试认证</span>
+            <span>{{title}}</span>
             <span>剩余时间：<i>108</i>分<i>108</i>秒</span>
+            <!-- <span>剩余时间：{{countDown}}</span> -->
         </div>
         <div class="examLeft fl">
             <div class="problem ">
-                <h3 v-if="quesionCurrent.type==1">单选题</h3>
-                <h3 v-if="quesionCurrent.type==2">多选题</h3>
-                <h4>{{quesionCurrent.number}}.{{quesionCurrent.title}}</h4>
+                <h3 v-if="questionCurrent.type==1">单选题</h3>
+                <h3 v-if="questionCurrent.type==2">多选题</h3>
+                <h4>{{questionCurrent.number}}.{{questionCurrent.title}}</h4>
                 <el-checkbox-group v-model="selectIndex" @change="selectOption">
                     <el-checkbox v-for="(option,index) in selectArr" :key="index" :label="option.option_key" :disabled="showResult">{{option.option_key}}.{{option.option_value}}</el-checkbox>
                 </el-checkbox-group>
             </div>
             <div class="result" v-if="showResult">
-                <p class="success" v-if="quesionCurrent.is_right==1"><i class="el-icon-success"></i>答对啦！</p>
-                <p class="error" v-if="quesionCurrent.is_right==2"><i class="el-icon-error"></i>答错啦！</p>
+                <p class="success" v-if="questionCurrent.is_right==1"><i class="el-icon-success"></i>答对啦！</p>
+                <p class="error" v-if="questionCurrent.is_right==2"><i class="el-icon-error"></i>答错啦！</p>
                 <p class="analysis">解析：2018福建公务员考试即将到来，在最后关头考生们一定不要过于松懈，要循序渐进的调整状态，心理、饮食、作息都不可忽视。为便于考生及时知晓成绩，中公教育为考生做出专业的解读。</p>
             </div>
             <div class="commitBtn">
-                <span @click="preAnswer">上一题</span>
-                <span @click="nextAnswer">下一题</span>
-                <span @click="answer">提交</span>
+                <span class="preAnswer" :class="{disable:JSON.stringify(questionPre)=='{}'}" @click="preAnswer">上一题</span>
+                <span class="nextAnswer" :class="{disable:JSON.stringify(questionNext)=='{}'}" @click="nextAnswer">下一题</span>
+                <span @click="answer" :class="{disable:questionCurrent.is_right!=0}">提交</span>
             </div>
         </div>
         <div class="examRight fr">
             <div class="progress">
                 <h3>当前进度</h3>
-                <p>{{answerNum}} / {{quesionNum}}</p>
+                <p>{{answerNum}} / {{questionNum}}</p>
                 <el-progress :stroke-width="10" color="#3FBABE" :show-text="false" :percentage="answerNum"></el-progress>
             </div>
             <div class="displayCard">
                 <h3>答题卡</h3>
                 <ul class="cardList">
-                    <li v-for="(li,index) in quesionCard" :key="index" @click="selectQuestion(li)" :class="[{bgColor: selectItem==li.id},{success:li.is_right==1&&selectItem!=li.id},{error:li.is_right==2&&selectItem!=li.id}]">{{li.number}}</li>
+                    <li v-for="(li,index) in questionCard" :key="index" @click="selectQuestion(li)" :class="[{bgColor: selectItem==li.id},{success:li.is_right==1&&selectItem!=li.id},{error:li.is_right==2&&selectItem!=li.id}]">{{li.number}}</li>
                 </ul>
             </div>
             <div class="commitBtn">
@@ -73,6 +74,8 @@ import { message, matchSplits, getNet } from '@/lib/util/helper'
 export default {
   data() {
     return {
+      title: '',
+      countDown: '',
       selectIndex: [], // 选择的问题选项答案
       selectItem: 0, // 第一道题 当前选项选中项
       qualified: false,
@@ -81,18 +84,18 @@ export default {
       }, // 交卷确认信息
       examForm: {
         examId: '',
-        quesionId: '',
+        questionId: '',
         selectId: []
       }, // 考试需要
       showShadow: false,
       socket: '',
       interval: '',
       showResult: false,
-      quesionCurrent: {}, //题
-      quesionCard: [], //答题卡
-      quesionPre: {}, // 上一题
-      quesionNext: {}, // 下一题
-      quesionNum: 0,
+      questionCurrent: {}, //题
+      questionCard: [], //答题卡
+      questionPre: {}, // 上一题
+      questionNext: {}, // 下一题
+      questionNum: 0,
       answerNum: 0,
       selectArr: [], // 返回的问题选项
       testPaper: {}
@@ -105,12 +108,17 @@ export default {
     },
     // 切换问题
     selectQuestion(item) {
-      this.examForm.quesionId = item.id
+      console.log(this.examForm.examId)
+
+      this.examForm.questionId = item.id
       this.questionsDetail()
     },
     // 提交当前问题
     answer() {
-      this.examForm.quesionId = this.quesionCurrent.id
+      if (this.questionCurrent.is_right != 0) {
+        return false
+      }
+      this.examForm.questionId = this.questionCurrent.id
       examine.addAnswer(this.examForm).then(response => {
         if (response.status == 0) {
           this.setAssignment(response)
@@ -121,8 +129,8 @@ export default {
     },
     // 上一题
     preAnswer() {
-      if (this.quesionPre != [] && this.quesionPre.id) {
-        this.examForm.quesionId = this.quesionPre.id
+      if (this.questionPre != [] && this.questionPre.id) {
+        this.examForm.questionId = this.questionPre.id
         this.questionsDetail()
       } else {
         message(this, 'error', '已经是第一题了!')
@@ -130,8 +138,8 @@ export default {
     },
     // 下一题
     nextAnswer() {
-      if (this.quesionNext != [] && this.quesionNext.id) {
-        this.examForm.quesionId = this.quesionNext.id
+      if (this.questionNext != [] && this.questionNext.id) {
+        this.examForm.questionId = this.questionNext.id
         this.questionsDetail()
       } else {
         message(this, 'error', '已经是最后一题了!')
@@ -139,9 +147,7 @@ export default {
     },
     // 交卷确认信息
     commitExam() {
-      // this.submitForm.recordId = id
-      examine.submitTestPaper(this.submitForm).then(response => {
-        console.log(response)
+      examine.submitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           this.testPaper = response.data
           this.showShadow = true
@@ -152,10 +158,9 @@ export default {
     },
     // 提交考试
     examination() {
-      // this.submitForm.recordId = id
-      examine.addSubmitTestPaper(this.submitForm).then(response => {
-        console.log(response)
+      examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
+          message(this, 'success', '提交成功！')
         } else {
           message(this, 'error', response.msg)
         }
@@ -220,21 +225,23 @@ export default {
     },
     // 赋值
     setAssignment(response) {
-      this.quesionCurrent = response.data.quesionCurrent
-      this.selectArr = response.data.quesionCurrent.option
-      this.quesionCard = response.data.quesionList
-      this.quesionNum = response.data.quesionList.length
+      this.title = response.data.exam_name
+      this.countDown = response.data.expire_time
+      this.questionCurrent = response.data.questionCurrent
+      this.selectArr = response.data.questionCurrent.option
+      this.questionCard = response.data.questionList
+      this.questionNum = response.data.questionList.length
       this.answerNum = response.data.answerTotal
-      this.selectItem = this.quesionCurrent.id
-      if (response.data.quesionCurrent.is_right != 0) {
+      this.selectItem = this.questionCurrent.id
+      if (response.data.questionCurrent.is_right != 0) {
         this.showResult = true
-        this.selectIndex = response.data.quesionCurrent.user_key
+        this.selectIndex = response.data.questionCurrent.user_key
       } else {
         this.selectIndex = []
         this.showResult = false
       }
-      this.quesionNext = response.data.quesionNext
-      this.quesionPre = response.data.quesionPrevious
+      this.questionNext = response.data.questionNext
+      this.questionPre = response.data.questionPrevious
     }
   },
   mounted() {
