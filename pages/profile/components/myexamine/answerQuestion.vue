@@ -70,7 +70,7 @@
 <script>
 import { store as persistStore } from '~/lib/core/store'
 import { examine } from '~/lib/v1_sdk/index'
-import { message, matchSplits, getNet } from '@/lib/util/helper'
+import { message, matchSplits } from '@/lib/util/helper'
 export default {
   data() {
     return {
@@ -177,53 +177,15 @@ export default {
     closeChadow() {
       this.showShadow = false
     },
-    // socket通讯
-    buildSocket() {
-      this.socket = new io(getNet())
-      // 连接socket
-      this.socket.on('connect', function() {
-        that.socket.emit('login', persistStore.get('token'))
-      })
-      // 支付推送来消息时
-      this.socket.on('new_msg', function(msg) {
-        //支付成功
-        if (msg.pay_status == '0') {
-          that.$bus.$emit('payResult', true)
-        }
-        //支付失败
-        if (msg.pay_status == 100100) {
-          that.$bus.$emit('payResult', false)
-          return false
-        }
-      })
-      // 断线重连
-      this.socket.on('reconnect', function(msg) {})
-    },
-    // 考试时间倒计时
-    time() {
-      this.interval = setInterval(() => {
-        /**
-         * socket.emit()6个参数
-         * 1、watchRecordingTime固定参数
-         * 2、课程ID
-         * 3、小节ID
-         * 4、当前播放时间
-         * 5、项目播放的时候为项目ID，课程播放为空
-         * 6、type:1是课程，2是项目
-         */
-        this.socket.emit(
-          'watchRecordingTime',
-          this.playerForm.curriculumId,
-          this.playerForm.catalogId,
-          playTime,
-          this.projectForm.ids,
-          2
-        )
-      })
-    },
     // 转换时间格式
     changeTime(time) {
-      var date = new Date(time * 1000)
+      console.log(time, 'time')
+
+      var timestamp = Date.parse(new Date())
+      var endTimedate = new Date(time * 1000)
+      var date = endTimedate - timestamp
+      console.log(date)
+
       this.minute =
         date.getMinutes() * 1 < 10 ? '0' + date.getMinutes() : date.getMinutes()
       this.second =

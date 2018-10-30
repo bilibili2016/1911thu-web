@@ -58,7 +58,7 @@
           <v-myCustomerProject :customer="customer" :customerProjectListData="customerProjectListData" :customerPagemsg="customerPagemsg" @customerProjectChange="customerProjectChange" @deleteCustomerProject="deleteCustomerProject"></v-myCustomerProject>
         </el-tab-pane>
         <!-- 考试认证 -->
-        <el-tab-pane class="my-course my-examine" name="tab-ten">
+        <el-tab-pane class="my-course my-examine" name="tab-tenth">
           <span slot="label" class="tabList">
             <i class="icon-cusProject"></i>&nbsp;考试认证</span>
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
@@ -493,7 +493,7 @@ export default {
           case 'tab-ninth': //自定制项目
             this.customerProjectList()
             break
-          case 'tab-ten': //考试认证
+          case 'tab-tenth': //考试认证
             this.examList()
             this.$bus.$emit('whichShow', { id: '', name: 'list' })
             break
