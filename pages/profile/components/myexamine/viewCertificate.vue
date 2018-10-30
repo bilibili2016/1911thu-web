@@ -1,18 +1,37 @@
 <template>
-    <!-- 查看证书 -->
-    <div class="viewCertificate">
-        <div class="con">
-            <img :src="certification" alt="">
-        </div>
+  <!-- 查看证书 -->
+  <div class="viewCertificate">
+    <div class="con">
+      <img :src="certification" alt="">
     </div>
+  </div>
 </template>
 <script>
+import { matchSplits, message } from '~/lib/util/helper'
+import { certificate } from '~/lib/v1_sdk/index'
+
 export default {
   props: [],
   data() {
     return {
+      vipID: '',
       certification: 'http://papn9j3ys.bkt.clouddn.com/certificate.png'
     }
+  },
+  methods: {
+    examCertificateDetail() {
+      certificate.examCertificateDetail({ id: this.vipID }).then(res => {
+        if (res.status == 0) {
+          this.certification = res.data.examCertificateDetail.certificate_url
+        } else {
+          message(this, 'error', res.msg)
+        }
+      })
+    }
+  },
+  mounted() {
+    this.vipID = matchSplits('id')
+    this.examCertificateDetail()
   }
 }
 </script>

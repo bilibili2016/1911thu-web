@@ -1,7 +1,7 @@
 <template>
   <!-- 审核中 -->
   <div class="applicant">
-    <p>您已参加过<i>{{number}}</i>次考试，剩余考试次数<i>{{testPaper.surplusFrequency}}</i>次。最高成绩<i>2</i>分，等级<i>优秀</i>，我们会以您的最高成绩颁发证书！证书下发后，您可以在个人中心查看电子版证书，也可申请纸质证书。</p>
+    <p>您已参加过<i>{{number}}</i>次考试，剩余考试次数<i>{{testPaper.surplusFrequency}}</i>次。最高成绩<i>{{testPaper.optimumAchievement}}</i>分，等级<i>{{testPaper.optimumScoreRank}}</i>，我们会以您的最高成绩颁发证书！证书下发后，您可以在个人中心查看电子版证书，也可申请纸质证书。</p>
     <el-checkbox :label="perfileForm.needPaper" @change="IsNeedPaper">需要纸质证书</el-checkbox>
     <div class="conList clearfix">
       <div class="fl">收货人：</div>
@@ -182,16 +182,17 @@ export default {
     // 提交
     addApplyCertificate() {
       examine.addApplyCertificate(this.perfileForm).then(response => {
-        let type = response.status == 0 ? 'success' : 'error'
-        message(this, type, response.msg)
         if (response.status == 0) {
+          message(this, type, '提交成功')
           this.$router.push('/profile/components/myexamine/reviewing')
         } else if (response.status == 100101 || response.status == 100102) {
           this.goProfile('tab-tenth')
           this.$bus.$emit('whichShow', 'info')
+          message(this, 'error', response.msg)
         } else if (response.status == 100103) {
           this.goProfile('tab-tenth')
           this.$bus.$emit('whichShow', 'list')
+          message(this, 'error', response.msg)
         }
       })
     },
