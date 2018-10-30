@@ -138,6 +138,12 @@ body {
       &.disable {
         cursor: not-allowed;
       }
+      &.isOver {
+        color: #fff;
+        background-color: #ddd;
+        border-color: #ddd;
+        cursor: not-allowed;
+      }
     }
   }
   .examRight {
@@ -288,6 +294,11 @@ body {
           cursor: pointer;
           &:last-child {
             background-color: #6417a6;
+            color: #fff;
+          }
+          &.isOver {
+            background-color: #ddd;
+            border-color: #ddd;
             color: #fff;
           }
         }
