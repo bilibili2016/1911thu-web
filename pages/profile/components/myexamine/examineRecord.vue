@@ -37,6 +37,11 @@ import { timestampToYMD } from '@/lib/util/helper'
 
 export default {
   props: ['vipID'],
+  watch: {
+    vipID(newValue, oldValue) {
+      this.examRecordLog()
+    }
+  },
   data() {
     return {
       recordData: [],
@@ -69,6 +74,7 @@ export default {
     },
     //去考试
     gotoExamine() {
+      this.pageData.id = this.vipID
       this.pageData.name = 'intro'
       this.$bus.$emit('whichShow', this.pageData)
     },

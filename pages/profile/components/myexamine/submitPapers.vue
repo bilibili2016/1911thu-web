@@ -3,7 +3,7 @@
   <div class="examination">
     <img src="@/assets/images/reviewing.png" alt="">
     <p>本次考试分数：<i>{{testPaper.answerScoreSum}}</i>分，等级：<i>{{testPaper.scoreRank}}</i></p>
-    <p>您已参加过<i>{{number}}</i>次考,剩余考试次数<i>{{testPaper.surplusFrequency}}</i>考</p>
+    <p>您已参加过<i>{{number}}</i>次考试,剩余考试次数<i>{{testPaper.surplusFrequency}}</i>次</p>
     <div class="applyBtn">
       <span class="again" @click="examination(testPaper.vip_id)" v-if="testPaper.surplusFrequency!=0">再次答题</span>
       <span class="apply" @click="applyFor" v-if="testPaper.doYouPass">申请认证</span>
