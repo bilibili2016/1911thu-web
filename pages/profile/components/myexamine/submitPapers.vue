@@ -21,18 +21,40 @@ export default {
       examForm: {
         examId: ''
       },
-      testPaper: {}
+      testPaper: {},
+      vipForm: {
+        vipId: ''
+      }
     }
   },
   methods: {
     // 再次答题
-    examination() {},
+    examination() {
+      // this.vipForm.vipId
+      if (persistStore.get('token')) {
+        if (this.vipForm.vipId) {
+          examine.createExamRecordQuestion(this.vipForm).then(response => {
+            if (response.status == 0) {
+              this.$router.push(
+                '/profile/components/myexamine/answerQuestion?id=' +
+                  response.data.exam_record_id
+              )
+            } else {
+              message(this, 'error', response.msg)
+            }
+          })
+        } else {
+          message(this, 'error', '无法获取到考试信息！')
+        }
+      }
+    },
     // 申请认证
     applyFor() {},
     getPaperDetail() {
       examine.submitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           this.testPaper = response.data
+          this.vipForm.vipId = response.data.vip_id
           // alreadyAnswerTotal: 4, notAnswerTotal: 0, doYouPass: true, answerScoreSum: "75", answerErrorTotal: 1
         } else {
           message(this, 'error', response.msg)

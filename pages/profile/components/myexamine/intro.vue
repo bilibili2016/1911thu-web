@@ -12,13 +12,33 @@
     </div>
 </template>
 <script>
+import { examine } from '~/lib/v1_sdk/index'
+import { message, matchSplits, getNet } from '@/lib/util/helper'
 export default {
+  props: ['vipId'],
+  data() {
+    return {
+      vipForm: {
+        vipId: ''
+      }
+    }
+  },
   methods: {
     handleBack() {
       this.$bus.$emit('whichShow', 'info')
     },
     handleExamine() {
-      this.$router.push('/profile/components/myexamine/answerQuestion?id=1')
+      this.vipForm.vipId = vipId
+      examine.createExamRecordQuestion(this.vipForm).then(response => {
+        if (response.status == 0) {
+          this.$router.push(
+            '/profile/components/myexamine/answerQuestion?id=' +
+              response.data.exam_record_id
+          )
+        } else {
+          message(this, 'error', response.msg)
+        }
+      })
     }
   }
 }
