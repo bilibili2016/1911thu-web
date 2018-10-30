@@ -3,7 +3,6 @@
         <div class="examTitle">
             <span>{{title}}</span>
             <span>剩余时间：<i>{{minute}}</i>分<i>{{second}}</i>秒</span>
-            <!-- <span>剩余时间：{{countDown}}</span> -->
         </div>
         <div class="examLeft fl">
             <div class="problem ">
@@ -22,7 +21,8 @@
             <div class="commitBtn">
                 <span class="preAnswer" :class="{disable:JSON.stringify(questionPre)=='{}'}" @click="preAnswer">上一题</span>
                 <span class="nextAnswer" :class="{disable:JSON.stringify(questionNext)=='{}'}" @click="nextAnswer">下一题</span>
-                <span @click="answer" :class="{disable:questionCurrent.is_right!=0}">提交</span>
+                <span v-if="isOver" class="isOver">提交</span>
+                <span v-else @click="answer" :class="{disable:questionCurrent.is_right!=0}">提交</span>
             </div>
         </div>
         <div class="examRight fr">
@@ -38,10 +38,11 @@
                 </ul>
             </div>
             <div class="commitBtn">
-                <span @click="commitExam">交卷</span>
+                <span v-if="isOver" class="isOver">交卷</span>
+                <span v-else @click="commitExam">交卷</span>
             </div>
         </div>
-        <div class="shadow" v-show="showShadow">
+        <div class="shadow" v-if="showShadow">
             <div class="popup" v-if="showShadow">
                 <i class="el-icon-close" @click="closeChadow"></i>
                 <p class="grade smile" v-if="testPaper.doYouPass">
@@ -59,7 +60,8 @@
                     <span class="fr">错题数：<i>{{testPaper.answerErrorTotal}}</i></span>
                 </p>
                 <div class="sdwBtn">
-                    <span class="fl" @click="examination">现在交卷</span>
+                    <span class="fl isOver" v-if="isOver">现在交卷</span>
+                    <span class="fl" @click="examination" v-else>现在交卷</span>
                     <span class="fr" @click="closeChadow">继续答题</span>
                 </div>
             </div>
@@ -74,6 +76,7 @@ import { message, matchSplits } from '@/lib/util/helper'
 export default {
   data() {
     return {
+      isOver: false,
       title: '',
       countDown: '',
       selectIndex: [], // 选择的问题选项答案
@@ -159,6 +162,7 @@ export default {
     },
     // 提交考试
     examination() {
+      clearInterval(this.interval)
       examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           message(this, 'success', '提交成功！')
@@ -179,27 +183,42 @@ export default {
     },
     // 转换时间格式
     changeTime(time) {
-      console.log(time, 'time')
+      clearInterval(this.interval)
+      console.log(time * 1000)
+      console.log(Date.parse(new Date()))
 
-      var timestamp = Date.parse(new Date())
-      var endTimedate = new Date(time * 1000)
-      var date = endTimedate - timestamp
-      console.log(date)
-
-      this.minute =
-        date.getMinutes() * 1 < 10 ? '0' + date.getMinutes() : date.getMinutes()
-      this.second =
-        date.getSeconds() * 1 < 10 ? '0' + date.getSeconds() : date.getSeconds()
-      console.log(this.minute, this.second)
+      let date = new Date(time * 1000 - Date.parse(new Date())) / 1000
+      this.minute = parseInt(date / 60)
+      this.second = date % 60
+      this.interval = setInterval(() => {
+        this.second > 0
+          ? this.second--
+          : this.minute > 0
+            ? (this.minute--, (this.second = 59))
+            : (this.minute = 0)
+        if (this.second == 0 && this.minute == 0) {
+          clearInterval(this.interval)
+          this.isOver = true
+        }
+      }, 1000)
     },
+    // 获取试题
     questionsDetail() {
       examine.questionsDetail(this.examForm).then(response => {
         if (response.status == 0) {
           this.setAssignment(response)
         } else {
+          this.goProfile('tab-tenth')
+          this.$bus.$emit('whichShow', 'list')
           message(this, 'error', response.msg)
         }
       })
+    },
+    // 跳转个人中心
+    goProfile(item) {
+      this.gidForm.gids = item
+      this.setGid(this.gidForm)
+      this.$router.push('/profile')
     },
     // 赋值
     setAssignment(response) {
@@ -232,6 +251,9 @@ export default {
       if (window.location.search) {
         this.examForm.examId = matchSplits('id')
         this.questionsDetail()
+        if (this.interval) {
+          clearInterval(this.interval)
+        }
       } else {
         this.$router.push('/profile')
       }
