@@ -9,7 +9,7 @@
                         <div class="fr">{{teacherData.teacher_name}}</div>
                     </div>
                     <div class="con-item name style clearfix">
-                        <div class="fl">导师服务形式：</div>
+                        <div class="fl">导师授课形式：</div>
                         <div class="fr">
                             <el-checkbox-group v-model="teacherForm.serviceName" @change="handleserviceChange">
                                 <el-checkbox v-for="service in serviceList" :label="service.id" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
