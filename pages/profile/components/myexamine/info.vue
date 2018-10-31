@@ -1,50 +1,50 @@
 <template>
-    <!-- 个人信息填写 -->
-    <div class="examine-info" :data='vipID'>
-        <div class="examine-top">
-            <span class="goBack" @click="handleBack">
-                <i class=" el-icon-arrow-left icon"></i>个人信息填写
-            </span>
-        </div>
-        <div class="bottom">
-            <div class="bottom-title">请填写您的真实信息，用于申请认证，信息填写完成后不可更改！</div>
-            <div class="inputs">
-                <div class="items clearfix">
-                    <div class="fl">您的姓名：</div>
-                    <div class="fr">
-                        <el-input v-model="examineInfo.name" placeholder="请输入姓名"></el-input>
-                    </div>
-                </div>
-                <div class="items  clearfix">
-                    <div class="fl">您的手机号：</div>
-                    <div class="fr">
-                        <div class="tel" v-if="phone==''">
-                            <el-input v-model="examineInfo.tel" placeholder="请输入手机号"></el-input>
-                            <el-input v-model="examineInfo.code" placeholder="请输入验证码"></el-input>
-                            <el-button @click="getCode">{{bindTelData.getCode}}</el-button>
-                        </div>
-                        <div v-else>
-                            <el-input v-model="examineInfo.tel" placeholder="请输入手机号" readonly></el-input>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="items clearfix">
-                    <div class="fl">您的身份证号：</div>
-                    <div class="fr">
-                        <el-input v-model="examineInfo.idNumber" placeholder="请输入身份证号"></el-input>
-                    </div>
-                </div>
-                <div class="items clearfix">
-                    <div class="fl">您的单位名称：</div>
-                    <div class="fr">
-                        <el-input v-model="examineInfo.unit" placeholder="请输入单位名称"></el-input>
-                    </div>
-                </div>
-                <div class="examine-btn " @click="handleNext">下一步</div>
-            </div>
-        </div>
+  <!-- 个人信息填写 -->
+  <div class="examine-info" :data='vipID'>
+    <div class="examine-top">
+      <span class="goBack" @click="handleBack">
+        <i class=" el-icon-arrow-left icon"></i>个人信息填写
+      </span>
     </div>
+    <div class="bottom">
+      <div class="bottom-title">请填写您的真实信息，用于申请认证，信息填写完成后不可更改！</div>
+      <div class="inputs">
+        <div class="items clearfix">
+          <div class="fl">您的姓名：</div>
+          <div class="fr">
+            <el-input v-model="examineInfo.name" placeholder="请输入姓名"></el-input>
+          </div>
+        </div>
+        <div class="items  clearfix">
+          <div class="fl">您的手机号：</div>
+          <div class="fr">
+            <div v-if="phone==''">
+              <el-input class=" tel" v-model="examineInfo.tel" placeholder="请输入手机号"></el-input>
+              <el-input class=" tel" v-model="examineInfo.code" placeholder="请输入验证码"></el-input>
+              <el-button @click="getCode">{{bindTelData.getCode}}</el-button>
+            </div>
+            <div v-else>
+              <el-input v-model="examineInfo.tel" placeholder="请输入手机号" readonly></el-input>
+            </div>
+          </div>
+
+        </div>
+        <div class="items clearfix">
+          <div class="fl">您的身份证号：</div>
+          <div class="fr">
+            <el-input v-model="examineInfo.idNumber" placeholder="请输入身份证号"></el-input>
+          </div>
+        </div>
+        <div class="items clearfix">
+          <div class="fl">您的单位名称：</div>
+          <div class="fr">
+            <el-input v-model="examineInfo.unit" placeholder="请输入单位名称"></el-input>
+          </div>
+        </div>
+        <div class="examine-btn " @click="handleNext">下一步</div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
@@ -147,6 +147,8 @@ export default {
           this.pageData.name = 'intro'
           this.pageData.id = this.vipID
           this.$bus.$emit('whichShow', this.pageData)
+        } else {
+          message(this, 'error', res.msg)
         }
       })
     },
