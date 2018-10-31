@@ -57,6 +57,7 @@ export default {
       testPaper: {},
       number: 0,
       perfileForm: {
+        vipID: '',
         needPaper: 1,
         name: '',
         tel: '',
@@ -183,7 +184,7 @@ export default {
     addApplyCertificate() {
       examine.addApplyCertificate(this.perfileForm).then(response => {
         if (response.status == 0) {
-          message(this, type, '提交成功')
+          message(this, 'success', '提交成功')
           this.$router.push('/profile/components/myexamine/reviewing')
         } else if (response.status == 100101 || response.status == 100102) {
           this.goProfile('tab-tenth')
@@ -212,6 +213,7 @@ export default {
   mounted() {
     if (persistStore.get('token')) {
       if (window.location.search) {
+        this.perfileForm.vipID = matchSplits('vipID')
         this.examForm.examId = matchSplits('id')
         // 省市县
         this.getRegionList()

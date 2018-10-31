@@ -609,7 +609,7 @@ body {
       background-color: #fff;
       border-radius: 10px;
       position: absolute;
-      top: 98px;
+      top: 100px;
       left: 50%;
       margin-left: -200px;
       .closelrFrom {
@@ -696,14 +696,14 @@ body {
       }
     }
     .wechatLogin {
-      width: 450px;
+      width: 400px;
       height: auto;
       background-color: #fff;
       border-radius: 10px;
       position: absolute;
-      top: 90px;
+      top: 100px;
       left: 50%;
-      margin-left: -225px;
+      margin-left: -200px;
       z-index: 999;
       padding-bottom: 64px;
       .closeWechat {
@@ -748,8 +748,8 @@ body {
         // }
       }
       .scanCode {
-        width: 450px;
-        height: 500px;
+        width: 400px;
+        height: 380px;
         background-color: #fff;
         border-radius: 10px;
         .wxchatIMG {

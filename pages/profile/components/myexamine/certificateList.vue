@@ -30,7 +30,7 @@
                             <div v-if="item.isDoingExamStatus==1">
                                 <span class="btn btn_two" @click="viewRecord(item)">考试记录</span>
                                 <span v-if="item.examRecordNum <3 && item.examRecordNum>0" class="btn btn_one" @click="gotoExamine(item)">去考试</span>
-                                <span class="btn btn_three" @click="handleLink('/profile/components/myexamine/applicantCertificate?id='+item.exam_record_id)">申请证书</span>
+                                <span class="btn btn_three" @click="handleLink('/profile/components/myexamine/applicantCertificate?id='+item.exam_record_id+'&vipID='+item.id)">申请证书</span>
                             </div>
                             <!-- 未申请过证书 或者 有考试机会，但考试的都不及格 -->
                             <div v-if="item.isDoingExamStatus==0">
