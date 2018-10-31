@@ -1,22 +1,25 @@
 <template>
   <div>
     <!-- 老师页 -->
-    <div class="newOrFreeCourseList famousList center goodlesson">
+    <div class="newOrFreeCourseList">
       <div class="course  clearfix bottom " v-for="(teacher,index) in famousList " :key="index ">
-        <el-card class="fl " :body-style="{ padding: '0px' } ">
-          <!-- 课程封面 -->
-          <img @click="handleLinkTeacherInfo(teacher)" :src="teacher.head_img" class="image teacherList-img" alt=" ">
-        </el-card>
-        <div class="particulars fl ">
-          <div class="currentclum ">
+        <!-- <div class="fl " :body-style="{ padding: '0px' } ">
+          课程封面
+        </div> -->
+        <div class="currentclum clearfix">
+          <img @click="handleLinkTeacherInfo(teacher)" :src="teacher.head_img" class="fl" alt=" ">
+          <div class="fl">
             <h4 @click="handleLinkTeacherInfo(teacher)">{{teacher.teacher_name}}</h4>
             <p class="small-title">{{teacher.graduate}}</p>
-            <p class="title-desc" v-if="teacher.wish_word">{{teacher.wish_word}}</p>
+            <div class="teacherBtn">
+              <span class="begin" v-if="teacher.is_teachering" @click="handleLinkTeacherInfo(teacher)">已开课</span>
+              <span v-else>筹备中</span>
+              <span class="reservation" @click="verifyAppointmentTeacher(teacher)">预约导师</span>
+            </div>
           </div>
-          <div class="teacherBtn">
-            <span class="begin" v-if="teacher.is_teachering" @click="handleLinkTeacherInfo(teacher)">已开课</span>
-            <span v-else>筹备中</span>
-            <span class="reservation" @click="verifyAppointmentTeacher(teacher)">预约导师</span>
+          <div class="title-desc">
+            <h4>祝福语</h4>
+            <p v-if="teacher.wish_word">{{teacher.wish_word}}</p>
           </div>
         </div>
 
