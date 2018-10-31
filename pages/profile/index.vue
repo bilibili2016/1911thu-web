@@ -927,10 +927,14 @@ export default {
     // 考试认证列表
     examList() {
       this.examineLoading = true
-      certificate.examList(this.examineListForm).then(res => {
-        if (res.status == 0) {
-          this.examineListData = res.data.examList
-          this.examinePagemsg = res.data.pageCount
+      certificate.examList(this.examineListForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$router.push('/')
+          return false
+        } else if (response.status == 0) {
+          this.examineListData = response.data.examList
+          this.examinePagemsg = response.data.pageCount
           this.examineLoading = false
         }
       })
@@ -940,9 +944,13 @@ export default {
       this.examineLoading = true
       this.examinePagemsg.page = val
       this.examineListForm.page = val
-      certificate.examList(this.examineListForm).then(res => {
-        if (res.status == 0) {
-          this.examineListData = res.data
+      certificate.examList(this.examineListForm).then(response => {
+        if (response.status === 100008) {
+          this.responseData.res = response
+          this.$router.push('/')
+          return false
+        } else if (response.status == 0) {
+          this.examineListData = response.data
           this.examineLoading = false
         }
       })
