@@ -17,34 +17,54 @@
     background-position: center center;
   }
   .con-detail {
+    position: relative;
     width: 1100px;
     margin: 0 auto;
     padding-top: 30px;
+    padding-bottom: 80px;
     .conImg {
       width: 1100px;
       height: 1650px;
     }
   }
   .btns {
-    width: 450px;
-    margin: 0 auto;
-    margin-top: 40px;
-    padding-bottom: 60px;
+    position: absolute;
+    // left: 0;
+    // right: 0;
+    // top: 0;
+    bottom: 110px;
+    margin: auto;
+    width: 1100px;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 50px;
+    background-color: #ffaa07;
+    // text-align: center;
+    .text {
+      color: #fff;
+      margin-left: 50px;
+      font-size: 24px;
+    }
+    .btn-item {
+      float: right;
+      margin-right: 35px;
+    }
     .button {
       display: inline-block;
       width: 130px;
       height: 40px;
       line-height: 40px;
       text-align: center;
-      border-radius: 6px;
-      border: 1px solid #5e068c;
+      border-radius: 20px;
+      background-color: #fff;
+      // border: 1px solid #5e068c;
       margin-right: 30px;
       color: #5e068c;
       cursor: pointer;
-      &:hover {
-        background-color: #5e068c;
-        color: #fff;
-      }
+      // &:hover {
+      //   background-color: #5e068c;
+      //   color: #fff;
+      // }
     }
     .button.active {
       background-color: #5e068c;
@@ -52,12 +72,12 @@
       // margin-right: 0;
     }
     .btn-three {
-      background-color: #caaa52;
+      background-color: #1f57fe;
       border: none;
       color: #fff;
       margin-right: 0;
       &:hover {
-        background-color: #d4ba74;
+        background-color: #1f57fe;
       }
     }
   }

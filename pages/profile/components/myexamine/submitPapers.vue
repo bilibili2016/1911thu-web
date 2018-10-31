@@ -5,7 +5,7 @@
     <p>本次考试分数：<i>{{testPaper.answerScoreSum}}</i>分，等级：<i>{{testPaper.scoreRank}}</i></p>
     <p>您已参加过<i>{{number}}</i>次考试,剩余考试次数<i>{{testPaper.surplusFrequency}}</i>次</p>
     <div class="applyBtn">
-      <span class="again" @click="examination(testPaper.vip_id)" v-if="testPaper.surplusFrequency!=0">再次答题</span>
+      <span class="again" @click="examination()" v-if="testPaper.surplusFrequency!=0">再次答题</span>
       <span class="apply" @click="applyFor" v-if="testPaper.doYouPass">申请认证</span>
       <span class="noQualification" v-else>不具备认证资格</span>
     </div>
@@ -31,8 +31,7 @@ export default {
   },
   methods: {
     // 再次答题
-    examination(vip) {
-      this.vipForm.vipId = vip
+    examination() {
       if (persistStore.get('token')) {
         if (this.vipForm.vipId) {
           examine.createExamRecordQuestion(this.vipForm).then(response => {
@@ -58,7 +57,9 @@ export default {
     applyFor() {
       this.$router.push(
         '/profile/components/myexamine/applicantCertificate?id=' +
-          this.examForm.examId
+          this.examForm.examId +
+          '&vipID=' +
+          this.vipForm.vipId
       )
     },
     getPaperDetail() {
@@ -66,6 +67,7 @@ export default {
         if (response.status == 0) {
           this.testPaper = response.data
           this.number = 3 - response.data.surplusFrequency
+          this.vipForm.vipId = response.data.vip_id
           // alreadyAnswerTotal: 4, notAnswerTotal: 0, doYouPass: true, answerScoreSum: "75", answerErrorTotal: 1
         } else {
           message(this, 'error', response.msg)

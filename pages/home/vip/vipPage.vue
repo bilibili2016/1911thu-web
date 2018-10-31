@@ -4,11 +4,13 @@
     <div class="con-detail">
       <img class="conImg" v-if="page=='2'" :src="networkImg" alt="">
       <img class="conImg" v-if="page=='3'" :src="onlineImg" alt="">
-      <div class="btns">
-        <span class="button" @click="lookCourse">查看课程</span>
-        <span class="button active" @click="buyVip">加入学院</span>
-        <span class="button btn-three" @click="identificate">申请认证</span>
-
+      <div class="btns clearfix">
+        <span class="text">开启学习之旅！</span>
+        <div class="btn-item">
+          <span class="button" @click="lookCourse">查看课程</span>
+          <span class="button active" @click="buyVip">加入学院</span>
+          <span class="button btn-three" @click="identificate">申请认证</span>
+        </div>
       </div>
     </div>
     <div class="mask" v-show="vipPopShow">
