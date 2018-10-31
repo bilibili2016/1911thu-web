@@ -5,7 +5,6 @@
     </div>
     <div class="center shadow teacherList">
       <div @click="getNewInfoList"></div>
-      <!-- <div class="recruit" @click="beTeacher"> <span>成为1911学堂导师</span> </div> -->
       <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
     </div>
     <div class="pagination" v-show="famousList.length!=0">
@@ -37,12 +36,12 @@ export default {
       famousList: [],
       teacherForm: {
         pages: 1,
-        limits: 7,
+        limits: 8,
         recommend: 0
       },
       pagemsg: {
         page: 1,
-        pagesize: 7,
+        pagesize: 8,
         total: null
       },
       loading: false
@@ -55,7 +54,7 @@ export default {
   methods: {
     getNewInfoList() {
       this.teacherForm.pages = 1
-      this.teacherForm.limits = 7
+      this.teacherForm.limits = 8
       this.loading = true
       list.getTeacherList(this.teacherForm).then(response => {
         if (response.status === 100008) {
