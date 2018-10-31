@@ -1,73 +1,73 @@
 <template>
-    <div class="exam clearfix">
-        <div class="examTitle">
-            <span>{{title}}考试认证</span>
-            <span>剩余时间：<i>{{minute}}</i>分<i>{{second}}</i>秒</span>
-        </div>
-        <div class="examLeft fl">
-            <div class="problem ">
-                <h3 v-if="questionCurrent.type==1">单选题</h3>
-                <h3 v-if="questionCurrent.type==2">多选题</h3>
-                <h4>{{questionCurrent.number}}.{{questionCurrent.title}}</h4>
-                <el-radio v-if="questionCurrent.type==1" v-for="(option,index) in selectArr" :key="index" v-model="selectRadio" :label="option.option_key" :disabled="showResult" @change="shangeRadio">{{option.option_key}}.{{option.option_value}}</el-radio>
-                <el-checkbox-group v-if="questionCurrent.type==2" v-model="selectIndex" @change="selectOption">
-                    <el-checkbox v-for="(option,index) in selectArr" :key="index" :label="option.option_key" :disabled="showResult">{{option.option_key}}.{{option.option_value}}</el-checkbox>
-                </el-checkbox-group>
-            </div>
-            <div class="result" v-if="showResult">
-                <p class="success" v-if="questionCurrent.is_right==1"><i class="el-icon-success"></i>答对啦！</p>
-                <p class="error" v-if="questionCurrent.is_right==2"><i class="el-icon-error"></i>答错啦！</p>
-                <p class="analysis">解析：2018福建公务员考试即将到来，在最后关头考生们一定不要过于松懈，要循序渐进的调整状态，心理、饮食、作息都不可忽视。为便于考生及时知晓成绩，中公教育为考生做出专业的解读。</p>
-            </div>
-            <div class="commitBtn">
-                <span class="preAnswer" :class="{disable:JSON.stringify(questionPre)=='{}'}" @click="preAnswer">上一题</span>
-                <span class="nextAnswer" :class="{disable:JSON.stringify(questionNext)=='{}'}" @click="nextAnswer">下一题</span>
-                <span v-if="isOver" class="isOver">提交</span>
-                <span v-else @click="answer" :class="{disable:questionCurrent.is_right!=0}">提交</span>
-            </div>
-        </div>
-        <div class="examRight fr">
-            <div class="progress">
-                <h3>当前进度</h3>
-                <p>{{answerNum}} / {{questionNum}}</p>
-                <el-progress :stroke-width="10" color="#3FBABE" :show-text="false" :percentage="percent"></el-progress>
-            </div>
-            <div class="displayCard">
-                <h3>答题卡</h3>
-                <ul class="cardList">
-                    <li v-for="(li,index) in questionCard" :key="index" @click="selectQuestion(li)" :class="[{bgColor: selectItem==li.id},{success:li.is_right==1&&selectItem!=li.id},{error:li.is_right==2&&selectItem!=li.id}]">{{li.number}}</li>
-                </ul>
-            </div>
-            <div class="commitBtn">
-                <span v-if="isOver" class="isOver">交卷</span>
-                <span v-else @click="commitExam">交卷</span>
-            </div>
-        </div>
-        <div class="shadow" v-if="showShadow">
-            <div class="popup" v-if="showShadow">
-                <i class="el-icon-close" @click="closeChadow"></i>
-                <p class="grade smile" v-if="testPaper.doYouPass">
-                    <img src="~assets/images/smile.png" class="fl" alt="">
-                    <span>{{testPaper.answerScoreSum}}分</span>
-                    <span>成绩合格！</span>
-                </p>
-                <p class="grade cry" v-else>
-                    <img src="~assets/images/cry.png" class="fl" alt="">
-                    <span>{{testPaper.answerScoreSum}}分</span>
-                    <span>成绩不合格！</span>
-                </p>
-                <p class="clearfix subjectNumber">
-                    <span class="fl">未答题数：<i>{{testPaper.notAnswerTotal}}</i></span>
-                    <span class="fr">错题数：<i>{{testPaper.answerErrorTotal}}</i></span>
-                </p>
-                <div class="sdwBtn">
-                    <span class="fl isOver" v-if="isOver">现在交卷</span>
-                    <span class="fl" @click="examination" v-else>现在交卷</span>
-                    <span class="fr" @click="closeChadow">继续答题</span>
-                </div>
-            </div>
-        </div>
+  <div class="exam clearfix">
+    <div class="examTitle">
+      <span>{{title}}</span>
+      <span>剩余时间：<i>{{minute}}</i>分<i>{{second}}</i>秒</span>
     </div>
+    <div class="examLeft fl">
+      <div class="problem ">
+        <h3 v-if="questionCurrent.type==1">单选题</h3>
+        <h3 v-if="questionCurrent.type==2">多选题</h3>
+        <h4>{{questionCurrent.number}}.{{questionCurrent.title}}</h4>
+        <el-radio v-if="questionCurrent.type==1" v-for="(option,index) in selectArr" :key="index" v-model="selectRadio" :label="option.option_key" :disabled="showResult" @change="shangeRadio">{{option.option_key}}.{{option.option_value}}</el-radio>
+        <el-checkbox-group v-if="questionCurrent.type==2" v-model="selectIndex" @change="selectOption">
+          <el-checkbox v-for="(option,index) in selectArr" :key="index" :label="option.option_key" :disabled="showResult">{{option.option_key}}.{{option.option_value}}</el-checkbox>
+        </el-checkbox-group>
+      </div>
+      <div class="result" v-if="showResult">
+        <p class="success" v-if="questionCurrent.is_right==1"><i class="el-icon-success"></i>答对啦！</p>
+        <p class="error" v-if="questionCurrent.is_right==2"><i class="el-icon-error"></i>答错啦！</p>
+        <p class="analysis">解析：2018福建公务员考试即将到来，在最后关头考生们一定不要过于松懈，要循序渐进的调整状态，心理、饮食、作息都不可忽视。为便于考生及时知晓成绩，中公教育为考生做出专业的解读。</p>
+      </div>
+      <div class="commitBtn">
+        <span class="preAnswer" :class="{disable:JSON.stringify(questionPre)=='{}'}" @click="preAnswer">上一题</span>
+        <span class="nextAnswer" :class="{disable:JSON.stringify(questionNext)=='{}'}" @click="nextAnswer">下一题</span>
+        <span v-if="isOver" class="isOver">提交</span>
+        <span v-else @click="answer" :class="{disable:questionCurrent.is_right!=0}">提交</span>
+      </div>
+    </div>
+    <div class="examRight fr">
+      <div class="progress">
+        <h3>当前进度</h3>
+        <p>{{answerNum}} / {{questionNum}}</p>
+        <el-progress :stroke-width="10" color="#3FBABE" :show-text="false" :percentage="percent"></el-progress>
+      </div>
+      <div class="displayCard">
+        <h3>答题卡</h3>
+        <ul class="cardList">
+          <li v-for="(li,index) in questionCard" :key="index" @click="selectQuestion(li)" :class="[{bgColor: selectItem==li.id},{success:li.is_right==1&&selectItem!=li.id},{error:li.is_right==2&&selectItem!=li.id}]">{{li.number}}</li>
+        </ul>
+      </div>
+      <div class="commitBtn">
+        <span v-if="isOver" class="isOver">交卷</span>
+        <span v-else @click="commitExam">交卷</span>
+      </div>
+    </div>
+    <div class="shadow" v-if="showShadow">
+      <div class="popup" v-if="showShadow">
+        <i class="el-icon-close" @click="closeChadow"></i>
+        <p class="grade smile" v-if="testPaper.doYouPass">
+          <img src="~assets/images/smile.png" class="fl" alt="">
+          <span>{{testPaper.answerScoreSum}}分</span>
+          <span>成绩合格！</span>
+        </p>
+        <p class="grade cry" v-else>
+          <img src="~assets/images/cry.png" class="fl" alt="">
+          <span>{{testPaper.answerScoreSum}}分</span>
+          <span>成绩不合格！</span>
+        </p>
+        <p class="clearfix subjectNumber">
+          <span class="fl">未答题数：<i>{{testPaper.notAnswerTotal}}</i></span>
+          <span class="fr">错题数：<i>{{testPaper.answerErrorTotal}}</i></span>
+        </p>
+        <div class="sdwBtn">
+          <span class="fl isOver" v-if="isOver">现在交卷</span>
+          <span class="fl" @click="examination" v-else>现在交卷</span>
+          <span class="fr" @click="closeChadow">继续答题</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
