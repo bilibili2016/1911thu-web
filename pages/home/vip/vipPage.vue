@@ -13,9 +13,9 @@
         </div>
       </div>
     </div>
-    <div class="join">
+    <!-- <div class="join">
       <img src="" alt="">
-    </div>
+    </div> -->
     <div class="mask" v-show="vipPopShow">
       <div class="vipPop" v-show="!isShowAlert">
         <div class="pop-title">温馨提示</div>
