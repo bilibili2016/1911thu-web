@@ -55,9 +55,10 @@
           line-height: 30px;
           border-radius: 15px;
           margin-right: 30px;
+          color: #fff;
           cursor: pointer;
           &.begin {
-            background-color: #6417a6;
+            background-color: #1f57fe;
             color: #fff;
           }
           &.reservation {
@@ -78,6 +79,7 @@
       padding: 0 15px 15px;
       clear: both;
       background-color: #f7f9fb;
+      border-radius: 6px;
       h5 {
         height: 60px;
         line-height: 60px;
