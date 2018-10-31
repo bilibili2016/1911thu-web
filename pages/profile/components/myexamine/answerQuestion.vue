@@ -9,7 +9,8 @@
                 <h3 v-if="questionCurrent.type==1">单选题</h3>
                 <h3 v-if="questionCurrent.type==2">多选题</h3>
                 <h4>{{questionCurrent.number}}.{{questionCurrent.title}}</h4>
-                <el-checkbox-group v-model="selectIndex" @change="selectOption">
+                <el-radio v-if="questionCurrent.type==1" v-for="(option,index) in selectArr" :key="index" v-model="selectRadio" :label="option.option_key" :disabled="showResult" @change="shangeRadio">{{option.option_key}}.{{option.option_value}}</el-radio>
+                <el-checkbox-group v-if="questionCurrent.type==2" v-model="selectIndex" @change="selectOption">
                     <el-checkbox v-for="(option,index) in selectArr" :key="index" :label="option.option_key" :disabled="showResult">{{option.option_key}}.{{option.option_value}}</el-checkbox>
                 </el-checkbox-group>
             </div>
@@ -79,6 +80,7 @@ export default {
       isOver: false,
       title: '',
       countDown: '',
+      selectRadio: '',
       selectIndex: [], // 选择的问题选项答案
       selectItem: 0, // 第一道题 当前选项选中项
       qualified: false,
@@ -108,7 +110,12 @@ export default {
     }
   },
   methods: {
-    //   选择选项
+    // 选择选项
+    shangeRadio(val) {
+      this.examForm.selectId = []
+      this.examForm.selectId.push(val)
+    },
+    // 选择选项
     selectOption(option) {
       this.examForm.selectId = this.selectIndex
     },
@@ -231,9 +238,14 @@ export default {
       this.selectItem = this.questionCurrent.id
       if (response.data.questionCurrent.is_right != 0) {
         this.showResult = true
-        this.selectIndex = response.data.questionCurrent.user_key
+        if (response.data.questionCurrent.type == 1) {
+          this.selectRadio = response.data.questionCurrent.user_key[0]
+        } else {
+          this.selectIndex = response.data.questionCurrent.user_key
+        }
       } else {
         this.selectIndex = []
+        this.selectRadio = ''
         this.showResult = false
       }
       this.questionNext = response.data.questionNext
