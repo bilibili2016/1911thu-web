@@ -4,7 +4,7 @@
     <div class="con-detail">
       <img class="conImg" v-if="page=='2'" :src="networkImg" alt="">
       <img class="conImg" v-if="page=='3'" :src="onlineImg" alt="">
-      <div class="btns clearfix">
+      <div class="btns clearfix" ref="btns" :class="{bottomHeight:bottom}">
         <span class="text">开启学习之旅！</span>
         <div class="btn-item">
           <span class="button" @click="lookCourse">进入学院学习</span>
@@ -73,7 +73,11 @@ export default {
       page: '',
       gidForm: {
         gids: null
-      }
+      },
+      windowHeight: 0,
+      paperHeight: 0,
+      scrollTop: 0,
+      bottom: false
     }
   },
   methods: {
@@ -177,6 +181,20 @@ export default {
       } else {
         this.$bus.$emit('loginShow', true)
       }
+    },
+    //
+    addClass() {
+      this.windowHeight = document.body.scrollHeight
+      this.paperHeight = document.documentElement.clientHeight
+      this.scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop
+      if (this.windowHeight - this.scrollTop - this.paperHeight <= 100) {
+        this.bottom = true
+      } else {
+        this.bottom = false
+      }
     }
   },
   watch: {
@@ -189,6 +207,9 @@ export default {
   mounted() {
     this.relativeID = matchSplits('cid')
     this.page = matchSplits('id') //2:干部网络学院  3:在线商学院
+    // 寛高设置
+
+    window.addEventListener('scroll', this.addClass)
   }
 }
 </script>
