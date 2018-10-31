@@ -7,11 +7,14 @@
       <div class="btns clearfix">
         <span class="text">开启学习之旅！</span>
         <div class="btn-item">
-          <span class="button" @click="lookCourse">查看课程</span>
+          <span class="button" @click="lookCourse">进入学院学习</span>
           <span class="button active" @click="buyVip">加入学院</span>
-          <span class="button btn-three" @click="identificate">申请认证</span>
+          <span class="button btn-three" @click="identificate">申请结业证书</span>
         </div>
       </div>
+    </div>
+    <div class="join">
+      <img src="" alt="">
     </div>
     <div class="mask" v-show="vipPopShow">
       <div class="vipPop" v-show="!isShowAlert">
