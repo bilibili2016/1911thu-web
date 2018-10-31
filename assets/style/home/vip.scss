@@ -27,6 +27,7 @@
       height: 1650px;
     }
   }
+
   .btns {
     position: absolute;
     // left: 0;
@@ -79,6 +80,18 @@
       &:hover {
         background-color: #1f57fe;
       }
+    }
+  }
+  .join {
+    width: 150px;
+    height: 117px;
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    border: 2px solid #000;
+    img {
+      width: 100%;
+      height: 100%;
     }
   }
   .mask {
