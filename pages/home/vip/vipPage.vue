@@ -166,10 +166,14 @@ export default {
     },
     //申请认证
     identificate() {
-      this.gidForm.gids = 'tab-tenth'
-      this.setGid(this.gidForm)
-      this.$router.push('/profile')
-      this.$bus.$emit('selectProfileIndex', 'tab-tenth')
+      if (persistStore.get('token')) {
+        this.gidForm.gids = 'tab-tenth'
+        this.setGid(this.gidForm)
+        this.$router.push('/profile')
+        this.$bus.$emit('selectProfileIndex', 'tab-tenth')
+      } else {
+        this.$bus.$emit('loginShow', true)
+      }
     }
   },
   watch: {
