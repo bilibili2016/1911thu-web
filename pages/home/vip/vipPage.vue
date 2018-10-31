@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="join">
+    <div class="join" @click="buyVip">
       <img src="http://papn9j3ys.bkt.clouddn.com/joinStudy.gif" alt="">
     </div>
     <div class="mask" v-show="vipPopShow">
