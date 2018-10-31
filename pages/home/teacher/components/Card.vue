@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 老师页 -->
-    <div class="newOrFreeCourseList">
+    <div class="teacherCard">
       <div class="course  clearfix bottom " v-for="(teacher,index) in famousList " :key="index ">
         <!-- <div class="fl " :body-style="{ padding: '0px' } ">
           课程封面
@@ -18,7 +18,7 @@
             </div>
           </div>
           <div class="title-desc">
-            <h4>祝福语</h4>
+            <h5>祝福语</h5>
             <p v-if="teacher.wish_word">{{teacher.wish_word}}</p>
           </div>
         </div>
