@@ -62,11 +62,16 @@ export default {
         for (var i = 0; i < headerClass.length; i++) {
           headerClass[i].classList.remove('active')
         }
-        if (persistStore.get('selectItem') == 0) {
+        if (matchSplits('id') == 2) {
           headerClass[1].classList.add('active')
         } else {
           headerClass[2].classList.add('active')
         }
+        // if (persistStore.get('selectItem') == 0) {
+        //   headerClass[1].classList.add('active')
+        // } else {
+        //   headerClass[2].classList.add('active')
+        // }
       } else {
         //其他
         for (var i = 0; i < headerClass.length; i++) {

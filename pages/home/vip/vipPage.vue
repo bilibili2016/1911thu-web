@@ -1,9 +1,9 @@
 <template>
   <div class="VIP-con">
-    <div class="vipBanner" :class="{netWork:page=='0',online:page=='1'}"></div>
+    <div class="vipBanner" :class="{netWork:page=='2',online:page=='3'}"></div>
     <div class="con-detail">
-      <img class="conImg" v-if="page=='0'" :src="networkImg" alt="">
-      <img class="conImg" v-if="page=='1'" :src="onlineImg" alt="">
+      <img class="conImg" v-if="page=='2'" :src="networkImg" alt="">
+      <img class="conImg" v-if="page=='3'" :src="onlineImg" alt="">
       <div class="btns">
         <span class="button" @click="lookCourse">查看课程</span>
         <span class="button active" @click="buyVip">加入学院</span>
@@ -179,7 +179,7 @@ export default {
   },
   mounted() {
     this.relativeID = matchSplits('cid')
-    this.page = persistStore.get('selectItem') //0:干部网络学院  1:在线商学院
+    this.page = matchSplits('id') //2:干部网络学院  3:在线商学院
   }
 }
 </script>
