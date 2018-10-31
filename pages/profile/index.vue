@@ -480,6 +480,7 @@ export default {
           case 'tab-fifth': //我的消息
             break
           case 'tab-sixth': //个人设置
+            this.$bus.$emit('getUserInfoData')
             this.$bus.$emit('activeSet')
             break
           case 'tab-seventh': //兑换码管理

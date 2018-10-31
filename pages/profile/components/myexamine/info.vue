@@ -147,6 +147,8 @@ export default {
           this.pageData.name = 'intro'
           this.pageData.id = this.vipID
           this.$bus.$emit('whichShow', this.pageData)
+        } else {
+          message(this, 'error', res.msg)
         }
       })
     },
