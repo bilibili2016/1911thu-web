@@ -2,7 +2,7 @@
   <!-- 审核中 -->
   <div class="applicant">
     <p>您已参加过<i>{{number}}</i>次考试，剩余考试次数<i>{{testPaper.surplusFrequency}}</i>次。最高成绩<i>{{testPaper.optimumAchievement}}</i>分，等级<i>{{testPaper.optimumScoreRank}}</i>，我们会以您的最高成绩颁发证书！证书下发后，您可以在个人中心查看电子版证书，也可申请纸质证书。</p>
-    <el-checkbox :label="perfileForm.needPaper" @change="IsNeedPaper">需要纸质证书</el-checkbox>
+    <!-- <el-checkbox :label="perfileForm.needPaper" @change="IsNeedPaper">需要纸质证书</el-checkbox> -->
     <div class="conList clearfix">
       <div class="fl">收货人：</div>
       <div class="fr">

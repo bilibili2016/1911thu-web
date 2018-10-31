@@ -35,6 +35,7 @@ body {
     background-color: #f7f9fc;
     .problem {
       width: 660px;
+      height: 420px;
       float: right;
       margin-right: 42px;
       h3 {
@@ -145,6 +146,9 @@ body {
         }
       }
     }
+    .result {
+      height: 80px;
+    }
   }
   .commitBtn {
     text-align: center;
@@ -186,6 +190,7 @@ body {
     width: 40%;
     height: 100%;
     padding-left: 40px;
+    background-color: #fff;
     .progress {
       h3 {
         color: #6417a6;

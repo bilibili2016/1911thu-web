@@ -7,7 +7,7 @@
     <div class="applyBtn">
       <span class="again" @click="examination(testPaper.vip_id)" v-if="testPaper.surplusFrequency!=0">再次答题</span>
       <span class="apply" @click="applyFor" v-if="testPaper.doYouPass">申请认证</span>
-      <span class="noQualification" v-if="testPaper.surplusFrequency==0">不具备认证资格</span>
+      <span class="noQualification" v-else>不具备认证资格</span>
     </div>
   </div>
 </template>

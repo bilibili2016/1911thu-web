@@ -45,7 +45,7 @@ import Intro from '@/pages/profile/components/myexamine/intro'
 import Record from '@/pages/profile/components/myexamine/examineRecord'
 
 export default {
-  props: ['examineListData', 'examinePagemsg', 'examineLoading'],
+  props: ['examineListData', 'examinePagemsg', 'examineLoading', 'isVip'],
   components: {
     'v-list': List,
     'v-info': Info,

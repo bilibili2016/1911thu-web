@@ -1,7 +1,7 @@
 <template>
     <div class="exam clearfix">
         <div class="examTitle">
-            <span>{{title}}</span>
+            <span>{{title}}考试认证</span>
             <span>剩余时间：<i>{{minute}}</i>分<i>{{second}}</i>秒</span>
         </div>
         <div class="examLeft fl">
