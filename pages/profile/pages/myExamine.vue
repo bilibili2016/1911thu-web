@@ -71,11 +71,19 @@ export default {
     examineListChange() {
       this.$emit('examineListChange')
     }
-    // showList() {
-    //   this.$bus.$emit('whichShow', 'list')
-    // }
   },
   mounted() {
+    if (
+      persistStore.get('whichIntro') &&
+      persistStore.get('whichIntro') != ''
+    ) {
+      this.vipID = persistStore.get('whichIntro')
+      this.isShowList = false
+      this.isShowInfo = false
+      this.isShowIntro = true
+      this.isShowRecord = false
+      persistStore.set('whichIntro', '')
+    }
     this.$bus.$on('whichShow', data => {
       this.vipID = data.id
       this.isShowList = false

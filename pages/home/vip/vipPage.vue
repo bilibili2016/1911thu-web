@@ -43,6 +43,10 @@ export default {
       gidForm: {
         gids: null
       },
+      pageData: {
+        id: '',
+        name: ''
+      },
       windowHeight: 0,
       paperHeight: 0,
       scrollTop: 0,
@@ -84,7 +88,7 @@ export default {
         this.gidForm.gids = 'tab-tenth'
         this.setGid(this.gidForm)
         this.$router.push('/profile')
-        this.$bus.$emit('selectProfileIndex', 'tab-tenth')
+        persistStore.set('whichIntro', matchSplits('id'))
       } else {
         this.$bus.$emit('loginShow', true)
       }
