@@ -3,7 +3,7 @@
         <div class="lists">
             <div class="item clearfix" v-for="(item,index) in examineListData" :key="index">
                 <div class="item_left">
-                    <img :src="item.book_picture" alt="">
+                    <img :src="item.picture" alt="">
                     <span>{{item.book_title}}</span>
                 </div>
                 <div class="item_right">
