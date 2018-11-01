@@ -67,6 +67,7 @@ export default {
         id: '',
         name: ''
       },
+      vipForm: { vipId: '' },
       bindTelData: {
         phones: '',
         codes: '',
@@ -146,9 +147,26 @@ export default {
         if (res.status == 0) {
           this.pageData.name = 'intro'
           this.pageData.id = this.vipID
-          this.$bus.$emit('whichShow', this.pageData)
+          this.vipForm.vipId = this.vipID
+          this.createExamRecordQuestion()
         } else {
           message(this, 'error', res.msg)
+        }
+      })
+    },
+    // 开始考试  跳出考试信息
+    createExamRecordQuestion() {
+      examine.createExamRecordQuestion(this.vipForm).then(response => {
+        if (response.status == 100201) {
+          this.pageData.name = 'info'
+          this.$bus.$emit('whichShow', this.pageData)
+        } else if (response.status == 0) {
+          this.$router.push(
+            '/profile/components/myexamine/answerQuestion?id=' +
+              response.data.exam_record_id
+          )
+        } else {
+          message(this, 'error', response.msg)
         }
       })
     },
