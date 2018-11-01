@@ -63,7 +63,7 @@
         <p v-if="isOver" class="noTime">考试时间已到，请交卷！</p>
         <div class="sdwBtn">
           <span class="gonow" @click="examination">现在交卷</span>
-          <span class="continue" v-if="testPaper.notAnswerTotal>0&&isOver" @click="closeChadow">继续答题</span>
+          <span class="continue" v-if="testPaper.notAnswerTotal>0&&!isOver" @click="closeChadow">继续答题</span>
         </div>
       </div>
     </div>
