@@ -175,6 +175,11 @@ export default {
         if (response.status == 0) {
           this.testPaper = response.data
           this.number = 3 - response.data.surplusFrequency
+          if (!response.data.isApplyExamCertificate) {
+            message(this, 'error', '请查看考试记录，不能申请记录！')
+            this.goProfile('tab-tenth')
+            this.$bus.$emit('whichShow', 'list')
+          }
         } else {
           message(this, 'error', response.msg)
         }
