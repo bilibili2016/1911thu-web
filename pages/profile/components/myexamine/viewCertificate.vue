@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       vipID: '',
-      certification: 'http://papn9j3ys.bkt.clouddn.com/certificate.png'
+      certification: ''
     }
   },
   methods: {
