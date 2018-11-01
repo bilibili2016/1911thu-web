@@ -33,6 +33,11 @@
     </div>
     <v-pay @closePay="closePayed" :config="config"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
+    <div class="join" @click="joinCollege">
+      <img src="http://papn9j3ys.bkt.clouddn.com/joinStudy.gif" alt="">
+    </div>
+    <!-- 会员购买弹窗 -->
+    <v-vipbuy :vipPopShow="vipPopShow" :vipId="vipGoodsDetail.id" @changeVipShow="changeVipShow"></v-vipbuy>
   </div>
 </template>
 
@@ -50,6 +55,8 @@ import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import TeacherIntro from '@/pages/course/coursedetail/teacherIntro.vue'
 import Collection from '@/components/common/Collection.vue'
 import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
+import VipBuy from '@/components/common/VipBuy.vue'
+
 export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
@@ -63,10 +70,13 @@ export default {
     'v-breadcrumb': BreadCrumb,
     'v-teacherintro': TeacherIntro,
     'v-collection': Collection,
-    'v-coursecatelog': CourseCatalog
+    'v-coursecatelog': CourseCatalog,
+    'v-vipbuy': VipBuy
   },
   data() {
     return {
+      vipPopShow: false,
+      isShowAlert: false,
       evaluateLoading: true,
       BreadCrumb: {
         type: 'courseDetail',
@@ -146,7 +156,8 @@ export default {
       changeImg: {
         img: '',
         id: ''
-      }
+      },
+      vipGoodsDetail: ''
     }
   },
   methods: {
@@ -290,6 +301,11 @@ export default {
           this.loadTeacher = false
           this.collectMsg.isCollect =
             response.data.curriculumDetail.is_collection
+
+          this.vipGoodsDetail = response.data.curriculumDetail.vipGoodsDetail
+          if (JSON.stringify(this.vipGoodsDetail) == '{}') {
+            this.vipPopShow = false
+          }
         }
       })
     },
@@ -352,6 +368,18 @@ export default {
       this.getEvaluateList()
       this.getCourseList()
       this.getdefaultCurriculumCatalog()
+    },
+    //加入学院
+    joinCollege() {
+      if (persistStore.get('token')) {
+        this.vipPopShow = true
+      } else {
+        this.$bus.$emit('loginShow')
+      }
+    },
+    //关闭购买弹窗
+    changeVipShow(val) {
+      this.vipPopShow = false
     }
   },
   mounted() {

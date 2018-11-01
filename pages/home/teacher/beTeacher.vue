@@ -1,8 +1,5 @@
 <template>
     <div class="beTeacher" @click="documentHandler">
-        <!-- <div class="teacer-banner">
-
-        </div> -->
         <div class="tip">请填写您的信息！</div>
         <div class="con">
             <div class="personal">

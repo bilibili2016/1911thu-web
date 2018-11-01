@@ -47,7 +47,7 @@
     </div>
 </template>
 <script>
-import { certificate } from '~/lib/v1_sdk/index'
+import { examine } from '~/lib/v1_sdk/index'
 import { message } from '~/lib/util/helper'
 
 export default {
@@ -64,7 +64,7 @@ export default {
     //去考试
     gotoExamine(item, page) {
       this.pageData.id = item.id
-      certificate.validateExamPrivilege({ id: item.id }).then(res => {
+      examine.validateExamPrivilege({ id: item.id }).then(res => {
         if (res.status == 100201) {
           this.pageData.name = 'info'
           this.$bus.$emit('whichShow', this.pageData)
