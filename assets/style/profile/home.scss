@@ -188,7 +188,10 @@
                 margin-right: 20px;
               }
               .bottomImg {
+                width: 160px;
                 position: relative;
+                float: left;
+                margin-right: 20px;
                 .project-img {
                   width: 70px;
                   height: 30px;
@@ -196,6 +199,10 @@
                   top: 0;
                   left: 0;
                 }
+              }
+              .fl {
+                float: left;
+                width: 420px;
               }
               h4 {
                 // width: 440px;
