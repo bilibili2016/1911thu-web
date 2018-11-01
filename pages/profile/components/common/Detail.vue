@@ -103,7 +103,7 @@
               <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="'course'+index">
                 <div class="courseInfo clearfix">
                   <div class="bottomImg">
-                    <img class="fl" :src="course.picture" alt="">
+                    <img class="" :src="course.picture" alt="">
                   </div>
 
                   <div class="fl">
@@ -125,7 +125,7 @@
                   <div class="bottomImg">
                     <!-- 项目图标 -->
                     <img class="project-img" :src="projectImg" alt="">
-                    <img class="fl" :src="project.picture" alt="">
+                    <img class="" :src="project.picture" alt="">
                   </div>
                   <div class="fl">
                     <h4>{{project.title}}</h4>
@@ -145,7 +145,7 @@
               <div class="bottom-item clearfix" v-if="vipList.length" v-for="(vip,index) in vipList" :key="'vip'+index">
                 <div class="courseInfo clearfix">
                   <div class="bottomImg">
-                    <img class="fl" :src="vip.picture" alt="">
+                    <img class="" :src="vip.picture" alt="">
                   </div>
 
                   <div class="fl">
