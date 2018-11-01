@@ -12,7 +12,7 @@
     <div class="conList clearfix">
       <div class="fl">手机号：</div>
       <div class="fr">
-        <el-input v-model="perfileForm.tel" placeholder="请输入请输入手机号"></el-input>
+        <el-input v-model="perfileForm.tel" placeholder="请输入手机号"></el-input>
       </div>
     </div>
     <div class="conList clearfix">
