@@ -56,10 +56,15 @@ export default {
       this.pageData.name = 'list'
       this.$bus.$emit('whichShow', this.pageData)
     },
+    // 开始考试
     handleExamine() {
       this.vipForm.vipId = this.vipID
+      this.pageData.id = this.vipID
       examine.createExamRecordQuestion(this.vipForm).then(response => {
-        if (response.status == 0) {
+        if (response.status == 100201) {
+          this.pageData.name = 'info'
+          this.$bus.$emit('whichShow', this.pageData)
+        } else if (response.status == 0) {
           this.$router.push(
             '/profile/components/myexamine/answerQuestion?id=' +
               response.data.exam_record_id
