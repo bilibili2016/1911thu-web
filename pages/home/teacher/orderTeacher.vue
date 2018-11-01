@@ -296,8 +296,6 @@ export default {
     getTeacherInfo() {
       teacherInfo.getTeacherInfo(this.teacher).then(response => {
         this.teacherData = response.data.teacherInfo
-
-        this.objLi = response.data.teacherInfo.recipient
       })
     },
     async smsCodes() {
@@ -338,6 +336,7 @@ export default {
           this.numLi = response.data.studyNumber
           this.timeLi = response.data.studyTime
           this.serviceList = response.data.offerService
+          this.objLi = response.data.recipient
         }
       })
     },

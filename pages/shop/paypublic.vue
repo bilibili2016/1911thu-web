@@ -166,8 +166,6 @@ export default {
     },
     handleConfirm() {
       paypublic.getPayPublicCode(this.payForm).then(res => {
-        console.log(res)
-
         if (res.status == 0) {
           this.code = res.data.code
         } else {
