@@ -32,7 +32,7 @@
 
 </template>
 <script>
-import { certificate } from '~/lib/v1_sdk/index'
+import { examine } from '~/lib/v1_sdk/index'
 import { timestampToYMD } from '@/lib/util/helper'
 
 export default {
@@ -65,7 +65,7 @@ export default {
     //考试记录列表
     examRecordLog() {
       this.logForm.vipID = this.vipID
-      certificate.examRecordLog(this.logForm).then(res => {
+      examine.examRecordLog(this.logForm).then(res => {
         if (res.status == 0) {
           this.recordData = res.data.examRecordLogList
           this.restExamineTime = res.data.surplusFrequency

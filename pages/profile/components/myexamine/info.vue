@@ -48,7 +48,7 @@
 </template>
 <script>
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
-import { header, auth, certificate } from '~/lib/v1_sdk/index'
+import { header, auth, examine } from '~/lib/v1_sdk/index'
 
 export default {
   props: ['vipID'],
@@ -142,7 +142,7 @@ export default {
         return false
       }
 
-      certificate.saveExamUserInfo(this.examineInfo).then(res => {
+      examine.saveExamUserInfo(this.examineInfo).then(res => {
         if (res.status == 0) {
           this.pageData.name = 'intro'
           this.pageData.id = this.vipID

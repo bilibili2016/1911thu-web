@@ -85,7 +85,7 @@ import myCode from '@/pages/profile/pages/myCode'
 import myTicket from '@/pages/profile/pages/myTicket'
 import myCustomerProject from '@/pages/profile/pages/myCustomerProject'
 import myExamine from '@/pages/profile/pages/myExamine'
-import { certificate } from '~/lib/v1_sdk/index'
+import { examine } from '~/lib/v1_sdk/index'
 
 export default {
   components: {
@@ -928,7 +928,7 @@ export default {
     // 考试认证列表
     examList() {
       this.examineLoading = true
-      certificate.examList(this.examineListForm).then(response => {
+      examine.examList(this.examineListForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
           this.$router.push('/')
@@ -945,7 +945,7 @@ export default {
       this.examineLoading = true
       this.examinePagemsg.page = val
       this.examineListForm.page = val
-      certificate.examList(this.examineListForm).then(response => {
+      examine.examList(this.examineListForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
           this.$router.push('/')

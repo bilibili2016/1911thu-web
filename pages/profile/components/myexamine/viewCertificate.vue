@@ -8,7 +8,7 @@
 </template>
 <script>
 import { matchSplits, message } from '~/lib/util/helper'
-import { certificate } from '~/lib/v1_sdk/index'
+import { examine } from '~/lib/v1_sdk/index'
 
 export default {
   props: [],
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     examCertificateDetail() {
-      certificate.examCertificateDetail({ id: this.vipID }).then(res => {
+      examine.examCertificateDetail({ id: this.vipID }).then(res => {
         if (res.status == 0) {
           this.certification = res.data.examCertificateDetail.certificate_url
         } else {
