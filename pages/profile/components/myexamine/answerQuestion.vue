@@ -45,7 +45,7 @@
     </div>
     <div class="shadow" v-if="showShadow">
       <div class="popup" v-if="showShadow">
-        <i class="el-icon-close" @click="closeChadow"></i>
+        <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i>
         <p class="grade smile" v-if="testPaper.doYouPass">
           <img src="~assets/images/smile.png" class="fl" alt="">
           <span>{{testPaper.answerScoreSum}}分</span>
@@ -60,10 +60,11 @@
           <span class="fl">未答题数：<i>{{testPaper.notAnswerTotal}}</i></span>
           <span class="fr">错题数：<i>{{testPaper.answerErrorTotal}}</i></span>
         </p>
+        <p v-if="isOver" class="noTime">考试时间已到，请交卷！</p>
         <div class="sdwBtn">
-          <span class="fl isOver" v-if="isOver">现在交卷</span>
-          <span class="fl" @click="examination" v-else>现在交卷</span>
-          <span class="fr" @click="closeChadow">继续答题</span>
+          <span class="gonow" v-if="isOver">现在交卷</span>
+          <span class="gonow" @click="examination" v-else>现在交卷</span>
+          <span class="continue" v-if="!isOver" @click="closeChadow">继续答题</span>
         </div>
       </div>
     </div>
@@ -71,6 +72,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { examine } from '~/lib/v1_sdk/index'
 import { message, matchSplits } from '@/lib/util/helper'
@@ -106,10 +108,14 @@ export default {
       selectArr: [], // 返回的问题选项
       testPaper: {},
       minute: 0,
-      second: 0
+      second: 0,
+      gidForm: {
+        gids: ''
+      }
     }
   },
   methods: {
+    ...mapActions('auth', ['setGid']),
     // 选择选项
     shangeRadio(val) {
       this.examForm.selectId = []
@@ -192,6 +198,12 @@ export default {
     changeTime(time) {
       clearInterval(this.interval)
       let date = new Date(time * 1000 - Date.parse(new Date())) / 1000
+      if (date < 0) {
+        clearInterval(this.interval)
+        this.commitExam()
+        this.isOver = true
+        return false
+      }
       this.minute = parseInt(date / 60)
       this.second = date % 60
       this.interval = setInterval(() => {
@@ -202,6 +214,7 @@ export default {
             : (this.minute = 0)
         if (this.second == 0 && this.minute == 0) {
           clearInterval(this.interval)
+          this.commitExam()
           this.isOver = true
         }
       }, 1000)
