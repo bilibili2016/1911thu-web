@@ -2,7 +2,7 @@
     <div class="">
         <div class="lists">
             <div class="item clearfix" v-for="(item,index) in examineListData" :key="index">
-                <div class="item_left">
+                <div class="item_left" @click="goVipDetail(item)">
                     <img :src="item.picture" alt="">
                     <span>{{item.book_title}}</span>
                 </div>
@@ -61,6 +61,11 @@ export default {
     }
   },
   methods: {
+    goVipDetail(item) {
+      this.$router.push(
+        '/home/vip/vipPage?id=' + item.id + '&cid=' + item.category_id
+      )
+    },
     //去考试
     gotoExamine(item, page) {
       this.pageData.id = item.id

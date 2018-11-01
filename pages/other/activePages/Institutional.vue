@@ -180,7 +180,7 @@
           </div>
         </div>
       </div> -->
-      <div class="psrocess">
+      <!-- <div class="psrocess">
         <div class="route">
           <h3>购买与学习流程</h3>
           <div class="process-list clearfix">
@@ -239,7 +239,7 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
       <div class="bottomForm" id="buttom" ref="buttonForm">
         <img class="buttom-bg" src="http://papn9j3ys.bkt.clouddn.com/hrentry-bg.png" alt="">
         <div class="word">
