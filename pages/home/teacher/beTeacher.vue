@@ -32,8 +32,8 @@
                     <div class="con-item name phone clearfix">
                         <div class="fl"><i class="red">*</i>手机号：</div>
                         <div class="fr">
-                            <el-input v-model="teacherForm.tel" placeholder="请输写手机号"></el-input>
-                            <el-input v-model="teacherForm.code" placeholder="请输写短信验证码"></el-input>
+                            <el-input v-model="teacherForm.tel" placeholder="请填写手机号"></el-input>
+                            <el-input v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input>
                             <el-button @click="getCode">{{bindTelData.getCode}}</el-button>
                         </div>
                     </div>
