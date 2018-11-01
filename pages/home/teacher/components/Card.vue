@@ -14,7 +14,7 @@
             <div class="teacherBtn">
               <span class="begin" v-if="teacher.is_teachering" @click="handleLinkTeacherInfo(teacher)">已开课</span>
               <span v-else>筹备中</span>
-              <span class="reservation" @click="verifyAppointmentTeacher(teacher)">预约导师</span>
+              <span class="reservation" @click="reservation(teacher)">预约导师</span>
             </div>
           </div>
           <div class="title-desc">
@@ -46,17 +46,6 @@ export default {
         path: '/home/teacher/orderTeacher',
         query: {
           id: teacher.id
-        }
-      })
-    },
-    // 验证导师是否可以预约
-    verifyAppointmentTeacher(teacher) {
-      this.teacher.tid = teacher.id
-      list.verifyAppointmentTeacher(this.teacher).then(response => {
-        if (response.status == 0) {
-          this.reservation(teacher)
-        } else {
-          message(this, 'error', response.msg)
         }
       })
     },

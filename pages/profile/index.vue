@@ -879,6 +879,7 @@ export default {
         this.handleMyProjectChange(1, 1)
         this.activeTab = data
         persistStore.set('gid', data)
+        console.log(data)
       })
       // 展示订单详情
       this.$bus.$on('goOrderDetail', data => {
