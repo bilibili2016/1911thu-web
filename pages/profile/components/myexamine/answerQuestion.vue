@@ -14,9 +14,9 @@
           <el-checkbox v-for="(option,index) in selectArr" :key="index" :label="option.option_key" :disabled="showResult">{{option.option_key}}.{{option.option_value}}</el-checkbox>
         </el-checkbox-group>
       </div>
-      <div class="result" v-if="showResult">
-        <p class="success" v-if="questionCurrent.is_right==1"><i class="el-icon-success"></i>答对啦！</p>
-        <p class="error" v-if="questionCurrent.is_right==2"><i class="el-icon-error"></i>答错啦！</p>
+      <div class="result">
+        <p class="success" v-if="showResult&&questionCurrent.is_right==1"><i class="el-icon-success"></i>答对啦！</p>
+        <p class="error" v-if="showResult&&questionCurrent.is_right==2"><i class="el-icon-error"></i>答错啦！</p>
         <p class="analysis">解析：2018福建公务员考试即将到来，在最后关头考生们一定不要过于松懈，要循序渐进的调整状态，心理、饮食、作息都不可忽视。为便于考生及时知晓成绩，中公教育为考生做出专业的解读。</p>
       </div>
       <div class="commitBtn">
