@@ -187,7 +187,7 @@
                     <img v-if="orderDetail.project_type==='1'" class="project-img" :src="projectImg" alt="">
                     <!-- 定制 -->
                     <img v-if="orderDetail.project_type==='2'" class="project-img" :src="customerProjectImg" alt="">
-                    <img class="fl" :src="project.picture" alt="">
+                    <img class="" :src="project.picture" alt="">
                   </div>
                   <div class="fl">
                     <h4 class="projectTitle">{{project.title}}</h4>
