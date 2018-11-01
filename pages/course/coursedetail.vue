@@ -33,7 +33,7 @@
     </div>
     <v-pay @closePay="closePayed" :config="config"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
-    <div class="join" @click="joinCollege">
+    <div class="join" @click="joinCollege" v-show="isShowBtn">
       <img src="http://papn9j3ys.bkt.clouddn.com/joinStudy.gif" alt="">
     </div>
     <!-- 会员购买弹窗 -->
@@ -46,7 +46,7 @@ import CustomCard from '@/pages/course/components/Card.vue'
 import { coursedetail } from '~/lib/v1_sdk/index'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { uniqueArray, matchSplits, setTitle } from '@/lib/util/helper'
+import { uniqueArray, matchSplits, setTitle, Trim } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
 import Pay from '@/components/common/Pay.vue'
 import EvaluateContent from '@/components/common/EvaluateContent.vue'
@@ -75,6 +75,7 @@ export default {
   },
   data() {
     return {
+      isShowBtn: false,
       vipPopShow: false,
       isShowAlert: false,
       evaluateLoading: true,
@@ -303,8 +304,10 @@ export default {
             response.data.curriculumDetail.is_collection
 
           this.vipGoodsDetail = response.data.curriculumDetail.vipGoodsDetail
-          if (JSON.stringify(this.vipGoodsDetail) == '{}') {
-            this.vipPopShow = false
+          if (Trim(this.vipGoodsDetail.id) == '') {
+            this.isShowBtn = false
+          } else {
+            this.isShowBtn = true
           }
         }
       })
@@ -371,11 +374,17 @@ export default {
     },
     //加入学院
     joinCollege() {
-      if (persistStore.get('token')) {
-        this.vipPopShow = true
-      } else {
-        this.$bus.$emit('loginShow')
-      }
+      this.$router.push(
+        '/home/vip/vipPage?id=' +
+          this.vipGoodsDetail.id +
+          '&cid=' +
+          this.vipGoodsDetail.category_id
+      )
+      // if (persistStore.get('token')) {
+      //   this.vipPopShow = true
+      // } else {
+      //   this.$bus.$emit('loginShow')
+      // }
     },
     //关闭购买弹窗
     changeVipShow(val) {
