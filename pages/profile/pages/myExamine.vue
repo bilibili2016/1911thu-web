@@ -2,7 +2,7 @@
   <div class="examine">
     <el-card class="changeNav">
       <!-- 列表 -->
-      <div class="list" v-show="isShowList">
+      <div class="list" v-if="isShowList">
         <div class="top-con clearfix">
           <span>考试认证</span>
         </div>
@@ -21,15 +21,15 @@
         </div>
       </div>
       <!-- 个人信息填写 -->
-      <div class="info" v-show="isShowInfo">
+      <div class="info" v-if="isShowInfo">
         <v-info :vipID="vipID"></v-info>
       </div>
       <!-- 认证资格介绍 -->
-      <div class="intro" v-show="isShowIntro">
+      <div class="intro" v-if="isShowIntro">
         <v-intro :vipID="vipID"></v-intro>
       </div>
       <!-- 考试记录 -->
-      <div class="record" v-show="isShowRecord">
+      <div class="record" v-if="isShowRecord">
         <v-record :vipID="vipID"></v-record>
       </div>
     </el-card>

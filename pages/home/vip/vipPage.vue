@@ -50,7 +50,11 @@ export default {
       windowHeight: 0,
       paperHeight: 0,
       scrollTop: 0,
-      bottom: false
+      bottom: false,
+      pageData: {
+        id: '',
+        name: ''
+      }
     }
   },
   components: {

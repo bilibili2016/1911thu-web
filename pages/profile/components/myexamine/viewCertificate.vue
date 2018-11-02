@@ -15,7 +15,11 @@ export default {
   data() {
     return {
       vipID: '',
-      certification: ''
+      certification: '',
+      responseData: {
+        type: true,
+        res: ''
+      }
     }
   },
   methods: {
@@ -23,6 +27,10 @@ export default {
       examine.examCertificateDetail({ id: this.vipID }).then(res => {
         if (res.status == 0) {
           this.certification = res.data.examCertificateDetail.certificate_url
+        } else if (res.status === 100008) {
+          this.responseData.res = res
+          this.$router.push('/')
+          return false
         } else {
           message(this, 'error', res.msg)
         }
