@@ -9,7 +9,7 @@
         <div class="btn-item">
           <span class="button" @click="lookCourse">进入学院学习</span>
           <span class="button active" @click="buyVip">加入学院</span>
-          <span class="button btn-three" @click="identificate">申请结业证书</span>
+          <span class="button btn-three" @click="identificate">申请证书</span>
         </div>
       </div>
     </div>

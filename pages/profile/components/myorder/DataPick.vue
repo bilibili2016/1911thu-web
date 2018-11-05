@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="block">
-      <div class="demonstration fl" style="margin:12px 2px 0px 0px;">根据成交日期搜索: </div>
+      <div class="demonstration fl" style="margin:12px 2px 0px 0px;">根据下单日期搜索: </div>
       <div class="fl">
         <el-date-picker v-model="startDay" type="date" value-format="timestamp" placeholder="选择开始日期">
         </el-date-picker>

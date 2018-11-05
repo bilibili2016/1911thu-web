@@ -3,12 +3,16 @@
     <el-main class="home">
       <!-- 头部导航 -->
       <v-carousel :items="items" :config="configCarousel"></v-carousel>
+      <!-- 干部网络学院 -->
+      <v-course :config="configOne" :data="cadreCourseList" :title="cadreCollegeTitle" :link="cadreCollegeMore" class="index-course bgfff" v-if="cadreCourseList.length>0"></v-course>
+      <!-- 在线商学院 -->
+      <v-course :config="configOne" :data="commercialCourseList" :title="commercialCollegeTitle" :link="commercialCollegeMore" class="index-course bgf8f8fd" v-if="commercialCourseList.length>0"></v-course>
       <!-- 最新课程 -->
-      <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse" class="index-course bgfff"></v-course>
+      <!-- <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse" class="index-course bgfff"></v-course> -->
       <!-- 免费专区 -->
-      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgf8f8fd"></v-course>
+      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgfff" v-if="freeData.length>0"></v-course>
       <!-- 精品好课 -->
-      <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgfff"></v-course>
+      <!-- <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgfff"></v-course> -->
       <!-- 最新项目 -->
       <v-course :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgf8f8fd"></v-course>
       <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
@@ -45,6 +49,10 @@ export default {
       projectLoading: true,
       windowWidth: '',
       // linknewproject: '/course/' + '0' + '?type=' + '1' + '&xid=0',
+      cadreCollegeTitle: '干部网络学院',
+      commercialCollegeTitle: '商学院',
+      cadreCollegeMore: '/course/category?cid=1&cp=0&pids=0&xid=0',
+      commercialCollegeMore: '/course/category?cid=17&cp=0&pids=0&xid=0',
       linknewproject: '/course/list/0',
       newprojecttitle: '最新项目',
       linknewcourse: '/course/list/1',
@@ -61,6 +69,8 @@ export default {
       newData: [],
       classicData: [],
       projectData: [],
+      cadreCourseList: [],
+      commercialCourseList: [],
       showCheckedCourse: false,
       configCarousel: {
         carousel: 'home'
@@ -169,6 +179,7 @@ export default {
     ...mapActions('auth', ['signOut']),
     getAll() {
       this.getBanner()
+      this.getCollegeCourseList()
       this.getFreeCourseList()
 
       this.getClassicCourseList()
@@ -223,18 +234,21 @@ export default {
           this.newData = response.data.curriculumList
           this.getAll()
         }
-
-        // if (response.status === 100008) {
-        //   this.$bus.$emit('getUserInfo')
-        // } else {
-        //   this.newData = response.data.curriculumList
-        // }
       })
     },
     // 获取精品好课列表
     getClassicCourseList() {
       home.getClassicCourseList(this.classicForm).then(response => {
         this.classicData = response.data.curriculumList
+      })
+    },
+    // 获取学院课程列表
+    getCollegeCourseList() {
+      home.getCollegeCourseList().then(response => {
+        // 干部学院
+        this.cadreCourseList = response.data.cadreCurriculumList
+        // 商学院
+        this.commercialCourseList = response.data.commercialCurriculumList
       })
     },
     // 学堂资讯

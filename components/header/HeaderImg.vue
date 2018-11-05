@@ -56,6 +56,10 @@ export default {
         {
           link: 'tab-tenth',
           text: '考试认证'
+        },
+        {
+          link: 'tab-eleventh',
+          text: '我的学院'
         }
       ]
     }

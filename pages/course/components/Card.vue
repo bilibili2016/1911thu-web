@@ -104,6 +104,7 @@
               <div class="study clearfix bought">
                 <p>{{courseList.introduction}}</p>
                 <!-- 学时 以及 学习人数 星级 价钱-->
+                <!-- <h5 @click="vipGoodsDetail(courseList.vipGoodsDetail)">{{courseList.vipGoodsDetail.title}}</h5> -->
                 <div class="studyInfo">
                   <span class="fl coursenum">
                     <img src="@/assets/images/icon_id.png" alt="">学习人数：{{courseList.study_number}}</span>
@@ -201,6 +202,15 @@ export default {
     ...mapActions('auth', ['setProductsNum']),
     changePlayImg(img, id) {
       this.$emit('changePlayImg', img, id)
+    },
+    vipGoodsDetail(item) {
+      this.$router.push({
+        path: '/home/vip/vipPage',
+        query: {
+          id: item.id,
+          cid: item.category_id
+        }
+      })
     },
     // 免费试看
     freeStudy(item) {

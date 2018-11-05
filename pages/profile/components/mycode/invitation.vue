@@ -17,7 +17,7 @@
         <span v-if="code.type==='2'">项目</span>
         <span v-if="code.type==='3'">课程+项目</span>
         <span v-if="code.type==='4'">自定制项目</span>
-        <span v-if="code.type==='5'">vip会员</span>
+        <span v-if="code.type==='5'">学院</span>
 
         <span>{{exchangeTime(code.pay_time)}}</span>
         <span>{{code.use_code_number}}</span>

@@ -117,7 +117,7 @@ export default {
             this.links = 'tab-first'
           }
           if (response.data.curriculumListType == '5') {
-            // 订单内课程+项目
+            // 订单内有VIP
             this.isVipCode = true
             this.links = 'tab-first'
           }

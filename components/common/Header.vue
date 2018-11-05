@@ -265,7 +265,7 @@ export default {
           this.skip = 'tab-third'
           break
         case '5':
-          //兑换码内只有自定义项目
+          //兑换码内只有学院
           this.skip = 'tab-first'
           break
       }

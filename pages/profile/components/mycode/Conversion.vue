@@ -18,7 +18,7 @@
           <td v-if="code.type==='2'">项目</td>
           <td v-if="code.type==='3'">课程+项目</td>
           <td v-if="code.type==='4'">自定制项目</td>
-          <td v-if="code.type==='5'">vip会员</td>
+          <td v-if="code.type==='5'">学院</td>
 
           <td>{{exchangeTime(code.create_time)}}</td>
         </tr>

@@ -63,6 +63,13 @@
             <i class="icon-examine"></i>&nbsp;考试认证</span>
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
         </el-tab-pane>
+        <!-- 我的学院 -->
+        <el-tab-pane class="my-course my-examine" name="tab-eleventh">
+          <span slot="label" class="tabList">
+            <i class="icon-examine"></i>&nbsp;我的学院</span>
+          <v-mycollege :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-mycollege>
+        </el-tab-pane>
+
       </el-tabs>
     </div>
   </div>
@@ -85,6 +92,7 @@ import myCode from '@/pages/profile/pages/myCode'
 import myTicket from '@/pages/profile/pages/myTicket'
 import myCustomerProject from '@/pages/profile/pages/myCustomerProject'
 import myExamine from '@/pages/profile/pages/myExamine'
+import myCollege from '@/pages/profile/pages/myCollege'
 import { examine } from '~/lib/v1_sdk/index'
 
 export default {
@@ -99,7 +107,8 @@ export default {
     'v-mycode': myCode,
     'v-myticket': myTicket,
     'v-myCustomerProject': myCustomerProject,
-    'v-myexamine': myExamine
+    'v-myexamine': myExamine,
+    'v-mycollege': myCollege
   },
   data() {
     return {
