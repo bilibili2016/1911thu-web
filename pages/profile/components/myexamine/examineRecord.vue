@@ -37,11 +37,6 @@ import { timestampToYMD } from '@/lib/util/helper'
 
 export default {
   props: ['vipID'],
-  watch: {
-    vipID(newValue, oldValue) {
-      this.examRecordLog()
-    }
-  },
   data() {
     return {
       recordData: [],
@@ -54,6 +49,10 @@ export default {
       pageData: {
         id: '',
         name: ''
+      },
+      responseData: {
+        type: true,
+        res: ''
       }
     }
   },
@@ -69,6 +68,10 @@ export default {
         if (res.status == 0) {
           this.recordData = res.data.examRecordLogList
           this.restExamineTime = res.data.surplusFrequency
+        } else if (res.status === 100008) {
+          this.responseData.res = res
+          this.$router.push('/')
+          return false
         }
       })
     },
@@ -84,6 +87,8 @@ export default {
     }
   },
   mounted() {
+    this.examRecordLog()
+
     this.$bus.$on('examineRecord', () => {
       this.examRecordLog()
     })

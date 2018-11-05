@@ -71,18 +71,6 @@ export default {
       this.pageData.name = 'intro'
       this.pageData.id = item.id
       this.$bus.$emit('whichShow', this.pageData)
-      // this.pageData.id = item.id
-      // examine.validateExamPrivilege({ id: item.id }).then(res => {
-      //   if (res.status == 100201) {
-      //     this.pageData.name = 'info'
-      //     this.$bus.$emit('whichShow', this.pageData)
-      //   } else if (res.status == 0) {
-      //     this.pageData.name = 'intro'
-      //     this.$bus.$emit('whichShow', this.pageData)
-      //   } else {
-      //     message(this, 'error', res.msg)
-      //   }
-      // })
     },
     //查看考试记录
     viewRecord(item) {
