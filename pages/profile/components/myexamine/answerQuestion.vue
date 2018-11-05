@@ -63,7 +63,7 @@
         <p v-if="isOver" class="noTime">考试时间已到，请交卷！</p>
         <div class="sdwBtn">
           <span class="gonow" @click="examination">现在交卷</span>
-          <span class="continue" v-if="testPaper.notAnswerTotal>0&&isOver" @click="closeChadow">继续答题</span>
+          <span class="continue" v-if="testPaper.notAnswerTotal>0&&!isOver" @click="closeChadow">继续答题</span>
         </div>
       </div>
     </div>
@@ -127,7 +127,7 @@ export default {
     // 切换问题
     selectQuestion(item) {
       this.examForm.questionId = item.id
-      this.questionsDetail()
+      this.changeToken()
     },
     // 提交当前问题
     answer() {
@@ -147,7 +147,7 @@ export default {
     preAnswer() {
       if (this.questionPre != [] && this.questionPre.id) {
         this.examForm.questionId = this.questionPre.id
-        this.questionsDetail()
+        this.changeToken()
       } else {
         message(this, 'error', '已经是第一题了!')
       }
@@ -156,7 +156,7 @@ export default {
     nextAnswer() {
       if (this.questionNext != [] && this.questionNext.id) {
         this.examForm.questionId = this.questionNext.id
-        this.questionsDetail()
+        this.changeToken()
       } else {
         message(this, 'error', '已经是最后一题了!')
       }
@@ -265,13 +265,30 @@ export default {
       if (this.countDown != 0) {
         this.changeTime(this.countDown)
       }
+    },
+    // 登录账号被替换
+    changeToken() {
+      if (persistStore.get('examToken') === persistStore.get('token')) {
+        this.questionsDetail()
+      } else {
+        this.$alert('您已登录其他账号，无法继续考试！', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/')
+          }
+        })
+      }
     }
   },
   mounted() {
     if (persistStore.get('token')) {
       if (window.location.search) {
         this.examForm.examId = matchSplits('id')
-        this.questionsDetail()
+        // 验证token是否有效
+        persistStore.get('examToken')
+          ? this.changeToken()
+          : persistStore.set('examToken', persistStore.get('token')),
+          this.questionsDetail()
         if (this.interval) {
           clearInterval(this.interval)
         }
@@ -291,6 +308,7 @@ export default {
   // 出路由显示header和footer
   beforeRouteLeave(to, from, next) {
     this.$bus.$emit('headerFooterShow')
+    persistStore.set('examToken', '')
     next()
   }
 }
