@@ -6,20 +6,20 @@
         <!-- <div class="fl " :body-style="{ padding: '0px' } ">
           课程封面
         </div> -->
-        <div class="currentclum clearfix">
-          <img @click="handleLinkTeacherInfo(teacher)" :src="teacher.head_img" class="fl" alt=" ">
+        <div class="currentclum clearfix" @click="handleLinkTeacherInfo(teacher)">
+          <img :src="teacher.head_img" class="fl" alt=" ">
           <div class="fl">
-            <h4 @click="handleLinkTeacherInfo(teacher)">{{teacher.teacher_name}}</h4>
+            <h4>{{teacher.teacher_name}}</h4>
             <p class="small-title">{{teacher.graduate}}</p>
             <div class="teacherBtn">
-              <span class="begin" v-if="teacher.is_teachering" @click="handleLinkTeacherInfo(teacher)">已开课</span>
+              <span class="begin" v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
               <span v-else>筹备中</span>
-              <span class="reservation" @click="reservation(teacher)">预约导师</span>
+              <span class="reservation" @click.stop="reservation(teacher)">预约导师</span>
             </div>
           </div>
           <div class="title-desc">
-            <h5>祝福语</h5>
-            <p v-if="teacher.wish_word">{{teacher.wish_word}}</p>
+            <h5>导师介绍</h5>
+            <p v-if="teacher.wish_word">{{teacher.content}}</p>
           </div>
         </div>
 
