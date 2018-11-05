@@ -51,13 +51,13 @@
         <div class="fl">培训方式：</div>
         <div class="fr ">
           <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio>
-          <el-radio v-model="projectForm.styleRadio" label="2">混合</el-radio>
+          <!-- <el-radio v-model="projectForm.styleRadio" label="2">混合</el-radio> -->
           <el-radio v-model="projectForm.styleRadio" label="3">互动</el-radio>
           <i class="el-icon-question styleAsk">
             <div class="descript-text">
               <div>
                 <p>纯线上：完全在线学习</p>
-                <p>混合式：线上为主，线下为辅</p>
+                <!-- <p>混合式：线上为主，线下为辅</p> -->
                 <p>互动式：线下为主，线上为辅</p>
 
               </div>

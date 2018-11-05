@@ -262,6 +262,7 @@
         color: #aaa;
         font-size: 20px;
         cursor: pointer;
+        vertical-align: middle;
         &:hover {
           .descript-text {
             display: block;
@@ -300,11 +301,12 @@
         margin-left: 10px;
         cursor: pointer;
         color: #aaa;
+        vertical-align: middle;
         &:hover {
           .descript-text {
             display: block;
-            right: 410px;
-            top: -35px;
+            right: 480px;
+            top: -20px;
           }
         }
       }

@@ -279,6 +279,19 @@ export default {
           this.invitationCodeType(res.data.invitation_code_type)
           this.bindForm.courseId = ''
           this.bindForm.isBind = false
+          if (JSON.stringify(res.data.vipGoodsDetail) != '{}') {
+            //绑定学院兑换码跳转到学院介绍页
+            this.$router.push({
+              path: '/home/vip/vipPage',
+              query: {
+                id: res.data.vipGoodsDetail.vip_id,
+                cid: res.data.vipGoodsDetail.category_id
+              }
+            })
+            message(this, 'success', '欢迎进入学院！')
+            return false
+          }
+
           if (window.location.pathname === '/profile') {
             this.$bus.$emit('studyCourse', this.skip)
           } else {
