@@ -4,7 +4,13 @@
       <div class="item clearfix" v-for="(item,index) in examineListData" :key="index">
         <div class="item_left" @click="goVipDetail(item)">
           <img :src="item.picture" alt="">
-          <span>{{item.book_title}}</span>
+          <div class="examInfo">
+            <p class="title">{{item.book_title}}</p>
+            <p v-if="item.isExamRecord==0">
+              <span><i class="exam-study"></i> 已完成{{item.totalStudyTime}}学时</span>
+              <span><i class="exam-time"></i> 距可考试剩余{{item.unfinishedStudyTime}}学时</span>
+            </p>
+          </div>
         </div>
         <div class="item_right">
           <!-- 存在证书（证书状态）-->

@@ -1,4 +1,4 @@
-.examine {
+.college {
   .top-con {
     height: 60px;
     line-height: 60px;
@@ -7,17 +7,11 @@
     font-size: 16px;
     color: #222;
   }
-  .certificateList {
+  .collegeList {
     min-height: 320px;
     font-size: 16px;
     color: #222;
-    .listTitle {
-      height: 60px;
-      line-height: 60px;
-      border-bottom: 1px solid #e8d6f7;
-      padding-left: 30px;
-    }
-    .lists {
+    .collegeLists {
       padding: 0 30px;
       .item {
         width: 100%;
@@ -27,7 +21,6 @@
         .item_left {
           float: left;
           height: 100px;
-          // vertical-align: middle;
           img {
             display: inline-block;
             width: 160px;
@@ -35,7 +28,7 @@
             vertical-align: middle;
             cursor: pointer;
           }
-          .examInfo {
+          .collegeInfo {
             margin-left: 20px;
             height: 100px;
             line-height: 50px;
@@ -47,22 +40,22 @@
                 cursor: pointer;
               }
               span {
-                color: #93999f;
+                color: #222222;
                 font-size: 14px;
                 margin-right: 25px;
+                &.college-study {
+                  height: 18px;
+                  background-color: #e4e4ef;
+                  border-radius: 9px;
+                  font-size: 12px;
+                  line-height: 18px;
+                  padding-right: 10px;
+                }
                 i {
-                  display: inline-block;
-                  width: 16px;
-                  height: 16px;
+                  color: #b4b4c8;
+                  font-size: 20px;
+                  margin: -1px 0 0 -1px;
                   vertical-align: middle;
-                }
-                .exam-study {
-                  background: url('~assets/images/exam_study.png') no-repeat;
-                  background-size: cover;
-                }
-                .exam-time {
-                  background: url('~assets/images/icon_time.png') no-repeat;
-                  background-size: cover;
                 }
               }
             }
@@ -84,18 +77,7 @@
             margin-left: 20px;
             margin-top: 70px;
           }
-          .btn_two {
-            background-color: #fff;
-            color: #6417a6;
-            border: 1px solid #6417a6;
-          }
-          .btn_six {
-            background-color: #ccc;
-          }
         }
-      }
-      .item:last-child {
-        border-bottom: none;
       }
     }
   }

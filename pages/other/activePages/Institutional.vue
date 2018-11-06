@@ -39,21 +39,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="why-con clearfix">
-          <div class="why-item" v-for="(item,index) in imgList" :key="index">
-            <div class="item-img">
-              <img :src="item.imgUrl" alt="">
-            </div>
-            <p class="item-desc1">{{item.title}}</p>
-            <span class="item-line"></span>
-            <p class="item-desc2">{{item.text}}</p>
-          </div>
-        </div>
-        <h3>1911学堂培训项目</h3>
-        <div class="projects">
-          <span v-for="(item,index) in projectArr" :key="index" @click="goCourseList(item)">{{item.category_name}}</span>
-          <span @click="goCustomerProject">自定制项目</span>
-        </div> -->
       </div>
       <div class="course serviceDetails clearfix">
         <h3>1911学堂定制项目</h3>
@@ -117,129 +102,7 @@
             </div>
           </div>
         </div>
-        <!-- <h3>1911学堂专属定制项目</h3>
-        <p class="course-small-title">如果您有更多、更独特的培训需求，请联系我们，1911学堂将根据单位需求， 为您量身定制高品质培训项目。</p>
-        <div class="service-list clearfix">
-          <div class="service-line"></div>
-          <div class="service-item" v-for="(item,index) in serviceList" :key="index">
-
-            <div class="item-title">
-              <span class="item-index">{{item.num}}.</span>
-              <span>{{item.title}}</span>
-            </div>
-            <div class="item-desc">
-              {{item.content}}
-            </div>
-          </div>
-        </div> -->
       </div>
-      <!-- <div class="course">
-        <h3>1911学堂课程体系</h3>
-        <p class="course-small-title">包含560余门课程</p>
-        <ul class="list clearfix">
-          <li v-for="li in projectArr" :key="li.id" class="list-item" @click="goCourseList(li)">
-            <p class="item-desc1">{{li.title}}</p>
-          </li>
-          <li class="list-item" @click="goCustomerProject">
-            <p class="item-desc1 customer-project">自定制项目 >></p>
-          </li>
-
-        </ul>
-        <div class="course-bottom">
-          <div class="left">
-            <div class="con">
-              <p class="title">课程定制服务</p>
-              <p class="text">如果您有更多、更独特、更专业的课程需求，请联系我们， 1911学堂将根据需求，为您量身定制高品质的培训课程。
-              </p>
-              <div class="btn" @click="knowDetail">了解详情</div>
-            </div>
-          </div>
-          <div class="right">
-            <img src="http://papn9j3ys.bkt.clouddn.com/insitituationCourse-bg.png" alt="">
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="together">
-        <h4>与1911学堂一起</h4>
-        <div class="list">
-          <div>
-            <img src="http://papn9j3ys.bkt.clouddn.com/together_1.png" alt="">
-            <p>加快知识更新</p>
-          </div>
-          <div>
-            <img src="http://papn9j3ys.bkt.clouddn.com/together_2.png" alt="">
-            <p>转变思维方式</p>
-          </div>
-          <div>
-            <img src="http://papn9j3ys.bkt.clouddn.com/together_3.png" alt="">
-            <p>提高学习能力</p>
-          </div>
-          <div>
-            <img src="http://papn9j3ys.bkt.clouddn.com/together_4.png" alt="">
-            <p>改善行为模式</p>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="psrocess">
-        <div class="route">
-          <h3>购买与学习流程</h3>
-          <div class="process-list clearfix">
-            <div class="fl">
-              <p><img src="http://papn9j3ys.bkt.clouddn.com/cartIcon.png" alt=""> 购买流程</p>
-            </div>
-            <div class="fr">
-              <div class="process-info">
-                <h5>
-                  <span v-for="(one,index) in buyListOne" :key="index">
-                    <i class="icon before el-icon-caret-right"></i>
-                    <i class="word">{{one}}</i>
-                    <i class="icon after el-icon-caret-right"></i>
-                  </span>
-                </h5>
-              </div>
-              <div class="process-info">
-                <h5>
-                  <span v-for="(one,index) in buyListTwo" :key="index">
-                    <i class="icon before el-icon-caret-right"></i>
-                    <i class="word">{{one}}</i>
-                    <i class="icon after el-icon-caret-right"></i>
-                  </span>
-                </h5>
-              </div>
-            </div>
-
-          </div>
-          <div class="process-list clearfix">
-            <div class="fl">
-              <p>
-                <img src="http://papn9j3ys.bkt.clouddn.com/studyIcon.png" alt=""> 学习流程
-              </p>
-            </div>
-            <div class="fr">
-              <div class="process-info">
-                <h5>
-                  <span v-for="(one,index) in buyListThree" :key="index">
-                    <i class="icon before el-icon-caret-right"></i>
-                    <i class="word">{{one}}</i>
-                    <i class="icon after el-icon-caret-right"></i>
-                  </span>
-                </h5>
-              </div>
-              <div class="process-info">
-                <h5>
-                  <span v-for="(one,index) in buyListFour" :key="index">
-                    <i class="icon before el-icon-caret-right"></i>
-                    <i class="word">{{one}}</i>
-                    <i class="icon after el-icon-caret-right"></i>
-                  </span>
-                </h5>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </div> -->
       <div class="bottomForm" id="buttom" ref="buttonForm">
         <img class="buttom-bg" src="http://papn9j3ys.bkt.clouddn.com/hrentry-bg.png" alt="">
         <div class="word">
@@ -317,33 +180,6 @@ export default {
       },
       showCheckedCourse: true,
       recommend: true,
-      imgList: [
-        {
-          imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic25.png',
-          title: '强大的师资力量',
-          text:
-            '1911学堂已签约超过500名优秀导师，均为清华大学等一流高校教授、院士及500强企业高管，师资力量雄厚。'
-        },
-        {
-          imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic26.png',
-          title: '与时俱进的系统化课程体系',
-          text:
-            '1911学堂拥有强大的课程研发能力，根据时代热点与客户需求，不断推出系统、权威、创新、实用的课程体系。'
-        },
-        {
-          imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic27.png',
-          title: '先进的培训模式',
-          text:
-            '1911学堂拥有纯线上培训及线上线下混合式培训等多种模式，可根据客户需求，灵活采用不同的培训模式。'
-        },
-        {
-          imgUrl: 'http://papn9j3ys.bkt.clouddn.com/hrentry-pic28.png',
-          title: '清华大学认证证书',
-          text:
-            '在1911学堂完成课程学习并通过相应考核后，学员可获得清华大学及相关单位联合颁发的认证证书。'
-        }
-      ],
-      projectArr: [],
       project: [
         {
           src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_7.png',
@@ -360,41 +196,6 @@ export default {
           title: '面授及线下活动',
           link: '/other/activePages/faceteach'
         }
-      ],
-      buyListOne: [
-        '直接购买项目',
-        '单位入口',
-        '进入项目分类',
-        '选择项目',
-        '加入购物车/立即购买',
-        '支付',
-        '学员观看'
-      ],
-      buyListTwo: [
-        '自定制项目',
-        '单位入口',
-        '进入自定制项目',
-        '新建项目',
-        '自由搭配课程',
-        '立即购买',
-        '支付',
-        '学员观看'
-      ],
-      buyListThree: [
-        '直接学习',
-        '进入网站或APP',
-        '我的课程/我的项目',
-        '点击封面',
-        '进入视频学习'
-      ],
-      buyListFour: [
-        '绑定兑换码后学习',
-        '首页',
-        '兑换码',
-        '绑定获得的兑换码',
-        '我的课程/我的项目',
-        '点击封面',
-        '进入视频学习'
       ],
       company: {
         companyname: '',
@@ -500,17 +301,6 @@ export default {
   },
   methods: {
     fetchDate() {},
-    goCourseList(item) {
-      this.$router.push({
-        path: '/course/category',
-        query: {
-          cid: item.id,
-          cp: item.is_picture_show,
-          xid: 0,
-          pids: 0
-        }
-      })
-    },
     handleScroll() {
       window.scrollTo(0, this.buttonFormTop)
       // if (this.move) {
@@ -670,9 +460,6 @@ export default {
         })
       }
     },
-    knowDetail() {
-      this.$router.push('/other/activePages/enterprisecustom')
-    },
     handleLink(url) {
       this.$router.push(url)
     },
@@ -689,22 +476,10 @@ export default {
       } else {
         this.$bus.$emit('loginShow')
       }
-    },
-    getClassifyList() {
-      institutional.getClassifyList().then(response => {
-        if (response.status === 0) {
-          for (let item of response.data.categoryList) {
-            if (item.is_picture_show === '1') {
-              this.projectArr.push(item)
-            }
-          }
-        }
-      })
     }
   },
   mounted() {
     setTitle('单位入口-1911学堂')
-    // this.getClassifyList()
     this.company.userID = this.token
     // this.$bus.$emit('bannerShow', true)
     window.addEventListener('scroll', this.pageScroll)

@@ -3,12 +3,23 @@
     <div class="banner-con" @click.stop="beTeacher">
       <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     </div>
+    <div class="teacherLead clearfix">
+      <img class="fl" src="http://papn9j3ys.bkt.clouddn.com/teacherLead.png" alt="">
+      <div class="fr">
+        <p>1911学堂（1911edu.com），源自清华、面向世界，专注于职场教育的在线学堂。</p>
+        <p>由1911集团联合清华大学等全球多所知名高校数百位资深教授及世界500强企业高管精英共同发起的继续教育品牌，基于大数据及自主研发的智慧教学工具，为学堂会员提供纯线上教育服务，以及互动式和顾问式的增值服务。</p>
+        <p>平台目前有近200位授课师资，将面向国内985、211 等知名高校特聘数百位院士、教授、副教授，建立由数千名专家教授组成的师资库，共同构建全球顶尖的高校名师智库。</p>
+      </div>
+    </div>
     <div class="center shadow teacherList">
       <div @click="getNewInfoList"></div>
       <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
     </div>
     <div class="pagination" v-show="famousList.length!=0">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
+    </div>
+    <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn">
+      <img src="http://papn9j3ys.bkt.clouddn.com/toDoTeacher-gif.gif" alt="">
     </div>
   </div>
 </template>
@@ -44,7 +55,9 @@ export default {
         pagesize: 8,
         total: null
       },
-      loading: false
+      loading: false,
+      isShowBtn: false,
+      showRecruitTeacher: true
     }
   },
   mounted() {
@@ -52,6 +65,10 @@ export default {
     this.getNewInfoList()
   },
   methods: {
+    // 加入1911教师
+    joinTeacher() {
+      this.$router.push('/home/teacher/beTeacher')
+    },
     getNewInfoList() {
       this.teacherForm.pages = 1
       this.teacherForm.limits = 8
@@ -65,6 +82,7 @@ export default {
         this.pagemsg.total = Number(response.data.pageCount)
         this.famousList = response.data.teacherList
         this.loading = false
+        this.isShowBtn = true
       })
     },
     beTeacher() {

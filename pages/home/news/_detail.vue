@@ -3,25 +3,25 @@
     <div class="news-banner">
       <img :src="bannerImg" alt="">
     </div>
-      <!-- 面包屑组件 -->
-      <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-      <!-- 新闻内容 -->
-      <div class="detail">
-        <div class="newsContent" v-loading='loading'>
-          <h3>{{newsDetail.title}}</h3>
-          <p class="time">{{newsDetail.create_time}}</p>
-          <div class="newsInner" v-html="newsDetail.content"></div>
-          <div class="next clearfix">
-            <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇
-              <i>{{beforeNews.title}}</i>
-            </span>
-            <span class="fr" v-if="afterNews" @click="getNewInfoDetail(afterNews.id)">下一篇
-              <i>{{afterNews.title}}</i>
-            </span>
-          </div>
+    <!-- 面包屑组件 -->
+    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+    <!-- 新闻内容 -->
+    <div class="detail">
+      <div class="newsContent" v-loading='loading'>
+        <h3>{{newsDetail.title}}</h3>
+        <p class="time">{{newsDetail.create_time}}</p>
+        <div class="newsInner" v-html="newsDetail.content"></div>
+        <div class="next clearfix">
+          <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇
+            <i>{{beforeNews.title}}</i>
+          </span>
+          <span class="fr" v-if="afterNews" @click="getNewInfoDetail(afterNews.id)">下一篇
+            <i>{{afterNews.title}}</i>
+          </span>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -38,6 +38,7 @@ export default {
     return {
       BreadCrumb: {
         type: 'newsDetail',
+        home: true,
         position: true, //是否显示当前位置
         text: '新闻资讯'
       },

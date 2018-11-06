@@ -81,7 +81,10 @@ export default {
       evaluateLoading: true,
       BreadCrumb: {
         type: 'courseDetail',
-        position: false, //是否显示当前位置
+        home: false, //是否显示《首页》
+        category: '',
+        categoryId: '',
+        position: false, //是否显示《当前位置》
         text: '课程详情'
       },
       isClose: false, //评论组件是否有关闭按钮
@@ -304,6 +307,10 @@ export default {
             response.data.curriculumDetail.is_collection
 
           this.vipGoodsDetail = response.data.curriculumDetail.vipGoodsDetail
+          this.BreadCrumb.category =
+            response.data.curriculumDetail.vipGoodsDetail.title
+          this.BreadCrumb.categoryId =
+            response.data.curriculumDetail.vipGoodsDetail.id
           if (Trim(this.vipGoodsDetail.id) == '') {
             this.isShowBtn = false
           } else {

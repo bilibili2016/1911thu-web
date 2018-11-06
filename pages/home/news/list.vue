@@ -30,7 +30,8 @@ export default {
     return {
       BreadCrumb: {
         type: 'news',
-        position: true, //是否显示当前位置
+        home: true, //是否显示 首页
+        position: true, //是否显示 当前位置
         text: '学堂资讯'
       },
       load: true,

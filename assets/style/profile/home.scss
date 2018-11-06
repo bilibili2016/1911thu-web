@@ -422,6 +422,10 @@
         background: url('~assets/images/icon_examine1.png') no-repeat center;
         background-size: contain;
       }
+      &.icon-college {
+        background: url('~assets/images/icon_college1.png') no-repeat center;
+        background-size: contain;
+      }
     }
   }
   .el-tabs__item.is-active i {
@@ -463,6 +467,10 @@
     }
     &.icon-examine {
       background: url('~assets/images/icon_examine2.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-college {
+      background: url('~assets/images/icon_college2.png') no-repeat center;
       background-size: contain;
     }
   }

@@ -66,8 +66,8 @@
         <!-- 我的学院 -->
         <el-tab-pane class="my-course my-examine" name="tab-eleventh">
           <span slot="label" class="tabList">
-            <i class="icon-examine"></i>&nbsp;我的学院</span>
-          <v-mycollege :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-mycollege>
+            <i class="icon-college"></i>&nbsp;我的学院</span>
+          <v-mycollege :collegeListData="collegeListData" :collegeLoading="collegeLoading" :collegePagemsg="collegePagemsg" @collegeListChange="collegeListChange"></v-mycollege>
         </el-tab-pane>
 
       </el-tabs>
@@ -79,7 +79,7 @@
 import Banner from '@/components/common/Banner.vue'
 import MyHome from '@/pages/profile/pages/myHome'
 import PersonalSet from '@/pages/profile/pages/mySettings.vue'
-import { profileHome } from '~/lib/v1_sdk/index'
+import { profileHome, examine, college } from '~/lib/v1_sdk/index'
 import { message, setTitle } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -93,7 +93,6 @@ import myTicket from '@/pages/profile/pages/myTicket'
 import myCustomerProject from '@/pages/profile/pages/myCustomerProject'
 import myExamine from '@/pages/profile/pages/myExamine'
 import myCollege from '@/pages/profile/pages/myCollege'
-import { examine } from '~/lib/v1_sdk/index'
 
 export default {
   components: {
@@ -297,6 +296,11 @@ export default {
         pagesize: 5,
         total: 5
       },
+      collegePagemsg: {
+        page: 1,
+        pagesize: 5,
+        total: 5
+      },
       studyProjectData: [],
       readyProjectData: [],
       expiredProjectData: [],
@@ -437,12 +441,18 @@ export default {
       noMsgCourse: false,
       customer: false,
       examineLoading: false,
+      collegeLoading: false,
       responseData: { type: true, res: '' },
       examineListForm: {
         page: 1,
         limit: 5
       },
-      examineListData: []
+      collegeListForm: {
+        page: 1,
+        limit: 5
+      },
+      examineListData: [],
+      collegeListData: []
     }
   },
   computed: {
@@ -506,6 +516,9 @@ export default {
           case 'tab-tenth': //考试认证
             this.examList()
             this.$bus.$emit('whichShow', { id: '', name: 'list' })
+            break
+          case 'tab-eleventh': //我的学院
+            this.collegeList()
             break
         }
         let gidForm = {
@@ -954,16 +967,29 @@ export default {
       this.examineLoading = true
       this.examinePagemsg.page = val
       this.examineListForm.page = val
-      examine.examList(this.examineListForm).then(response => {
+      this.examList()
+    },
+    // 我的学院列表
+    collegeList() {
+      this.collegeLoading = true
+      college.collegeList(this.collegeListForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response
           this.$router.push('/')
           return false
         } else if (response.status == 0) {
-          this.examineListData = response.data
-          this.examineLoading = false
+          this.collegeListData = response.data.userVipGoodsList
+          this.collegePagemsg = response.data.pageCount
+          this.collegeLoading = false
         }
       })
+    },
+    // 考试认证列表-分页
+    collegeListChange(val) {
+      this.collegeLoading = true
+      this.collegePagemsg.page = val
+      this.collegeListForm.page = val
+      this.collegeList()
     }
   },
   mounted() {
@@ -988,6 +1014,7 @@ export default {
         this.unTicketDataChange(1) //我的发票 按订单开发票
         this.customerProjectList() //自定义项目
         this.examList() //考试认证
+        this.collegeList() //我的学院
       }
     } else {
       let data = {

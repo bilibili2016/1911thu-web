@@ -38,6 +38,7 @@ export default {
       goodCourseImg: 'http://papn9j3ys.bkt.clouddn.com/banner-goodCourse.png',
       BreadCrumb: {
         type: 'goodlesson',
+        home: true,
         position: true, //是否显示当前位置
         text: ''
       },

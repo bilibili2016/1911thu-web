@@ -64,6 +64,7 @@ export default {
     return {
       BreadCrumb: {
         type: 'courseDetail',
+        home: true,
         text: '课程详情',
         project: '项目详情',
         projectCourse: true,

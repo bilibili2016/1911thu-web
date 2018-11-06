@@ -85,6 +85,7 @@ export default {
       patternArr: ['线上', '混合', '互动'],
       BreadCrumb: {
         type: 'projectDetail',
+        home: true,
         project: '分类列表',
         position: false, //是否显示当前位置
         text: '项目详情'
