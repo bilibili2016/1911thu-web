@@ -137,7 +137,7 @@ export default {
           // 第一次点击 在购物车
           this.$message({
             type: 'success',
-            message: '您的商品已经在购物车里面'
+            message: '您的课程已经在购物车里面'
           })
         }
       } else {

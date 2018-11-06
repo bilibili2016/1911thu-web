@@ -271,11 +271,11 @@ export default {
           if (this.two_is_cart === 0) {
             this.addCourseShopCart(item)
           } else {
-            message(this, 'success', '您的商品已经在购物车里面')
+            message(this, 'success', '您的课程已经在购物车里面')
           }
         } else {
           // 第一次点击 在购物车
-          message(this, 'success', '您的商品已经在购物车里面')
+          message(this, 'success', '您的课程已经在购物车里面')
         }
       } else {
         // 当用户未登录

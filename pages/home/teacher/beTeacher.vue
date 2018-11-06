@@ -1,6 +1,16 @@
 <template>
     <div class="beTeacher" @click="documentHandler">
-        <div class="tip">请填写您的信息！</div>
+        <div class="topImg">
+            <h4>导师招募</h4>
+            <div class="wordBox">
+                <div class="word">
+                    <p>这里是1911学堂，现招募优秀导师一起为中国继续教育事业努力，一起为职场人士成长做出贡献！同时使您成为更有价值的奉知者和献智者！</p>
+                    <p>成为1911 学堂“特聘导师”，我们将与您在以下五个方面展开深度合作：录制在线课程视频；开展多元化的线下授课及活动；在实践情境中开展顾问式咨询项目；与相关机构建立横向课题；其他方面的深度合作。</p>
+                    <p>己欲立而立人、己欲达而达人，1911 学堂将国内外顶尖的专家教授汇聚在一起，致力为权威专家打造一个彼此赋能、浓缩价值的同道人脉圈。专家教授不仅在此相聚拓展专业维度，更在此结交学界翘楚，共享资源、共创价值。1911 学堂不仅是职场人士继续教育的圣地，更将成为各位大师名家思想汇集、碰撞、交流和升华的殿堂。</p>
+                    <p>此外，1911 学堂还将为您配备专属导师助理、专业的课程录制团队、后期制作团队以及课程运营和推广团队，把您的宝贵精力应用到必要之处，使您成为更有价值的奉知者和献智者。</p>
+                </div>
+            </div>
+        </div>
         <div class="con">
             <div class="personal">
                 <div class="title">个人信息类</div>
@@ -76,9 +86,9 @@
                         </div>
                         <span class="input-inner">不超过500字</span>
                     </div>
-                    <div class="con-item style clearfix">
+                    <div class="con-item uploadFile clearfix">
                         <div class="fl">上传简历：</div>
-                        <div class="fr">
+                        <div :class="['fr',{'height':isShowFile}]">
                             <div class="load" v-show="isShowFile">
                                 <div class="upload">
                                     <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept=".pdf,.doc,.docx">
