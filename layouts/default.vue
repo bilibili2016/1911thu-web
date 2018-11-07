@@ -57,6 +57,14 @@ export default {
         //   //项目
         //   headerClass[2].classList.add('active')
         // }
+        for (var i = 0; i < headerClass.length; i++) {
+          headerClass[i].classList.remove('active')
+        }
+        if (matchSplits('cid') == 1) {
+          headerClass[1].classList.add('active')
+        } else if (matchSplits('cid') == 17) {
+          headerClass[2].classList.add('active')
+        }
       } else if (pathName === '/home/vip/vipPage') {
         //vip会员
         for (var i = 0; i < headerClass.length; i++) {

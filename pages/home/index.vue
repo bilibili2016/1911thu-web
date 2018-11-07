@@ -2,7 +2,7 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-carousel :items="items" :config="configCarousel"></v-carousel>
+      <v-carousel :items="bannerData" v-loading="bannerLoading" :config="configCarousel"></v-carousel>
       <!-- 干部网络学院 -->
       <v-course :config="configOne" :data="cadreCourseList" :title="cadreCollegeTitle" :link="cadreCollegeMore" class="index-course bgfff" v-if="cadreCourseList.length>0"></v-course>
       <!-- 在线商学院 -->
@@ -21,7 +21,7 @@
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 学堂资讯 -->
-      <v-info :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgfff"></v-info>
+      <v-info v-loading="infoLoading" :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgfff"></v-info>
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>
@@ -46,6 +46,8 @@ export default {
   },
   data() {
     return {
+      bannerLoading: true,
+      infoLoading: true,
       projectLoading: true,
       windowWidth: '',
       // linknewproject: '/course/' + '0' + '?type=' + '1' + '&xid=0',
@@ -118,7 +120,7 @@ export default {
       numSrc: require('@/assets/images/home_num.png'),
       value1: 4,
       imgList: [],
-      items: [],
+      bannerData: [],
       itemsData: {
         limit: null,
         types: 1
@@ -182,7 +184,7 @@ export default {
       this.getCollegeCourseList()
       this.getFreeCourseList()
 
-      this.getClassicCourseList()
+      // this.getClassicCourseList()
       // this.getEvaluateList(),
       this.getNewsInfoList()
       // this.$bus.$emit('updateCount')
@@ -193,18 +195,22 @@ export default {
     },
     // 获取banner
     getBanner() {
+      this.bannerLoading = true
       home.getBannerList(this.itemsData).then(response => {
-        this.items = response.data.bannerList
-        //设置banner溢出居中显示
-        this.$nextTick(() => {
-          let imgArr = document.getElementsByClassName('el-carousel__item')
-          if (this.windowWidth <= 1920) {
-            let marginLeft = (1920 - this.windowWidth) / 2
-            for (var i = 0; i < imgArr.length; i++) {
-              imgArr[i].style.marginLeft = -marginLeft + 'px'
+        if (response.status === 0) {
+          this.bannerLoading = false
+          this.bannerData = response.data.bannerList
+          //设置banner溢出居中显示
+          this.$nextTick(() => {
+            let imgArr = document.getElementsByClassName('el-carousel__item')
+            if (this.windowWidth <= 1920) {
+              let marginLeft = (1920 - this.windowWidth) / 2
+              for (var i = 0; i < imgArr.length; i++) {
+                imgArr[i].style.marginLeft = -marginLeft + 'px'
+              }
             }
-          }
-        })
+          })
+        }
       })
     },
     // 获取分类列表
@@ -224,7 +230,9 @@ export default {
     // 获取免费课程列表
     getFreeCourseList() {
       home.getFreeCourseList(this.freeForm).then(response => {
-        this.freeData = response.data.curriculumList
+        if (response.status === 0) {
+          this.freeData = response.data.curriculumList
+        }
       })
     },
     // 获取新上好课列表
@@ -232,7 +240,6 @@ export default {
       home.getNewCourseList(this.courseForm).then(response => {
         if (response.status === 0) {
           this.newData = response.data.curriculumList
-          this.getAll()
         }
       })
     },
@@ -245,17 +252,23 @@ export default {
     // 获取学院课程列表
     getCollegeCourseList() {
       home.getCollegeCourseList().then(response => {
-        // 干部学院
-        this.cadreCourseList = response.data.cadreCurriculumList
-        // 商学院
-        this.commercialCourseList = response.data.commercialCurriculumList
+        if (response.status === 0) {
+          // 干部学院
+          this.cadreCourseList = response.data.cadreCurriculumList
+          // 商学院
+          this.commercialCourseList = response.data.commercialCurriculumList
+        }
       })
     },
     // 学堂资讯
     getNewsInfoList() {
+      this.infoLoading = true
       news.getNewsInfoList(this.newsInfoForm).then(response => {
-        this.infoDesc = response.data.outerList
-        this.infoArticle = response.data.innerList
+        if (response.status === 0) {
+          this.infoLoading = false
+          this.infoDesc = response.data.outerList
+          this.infoArticle = response.data.innerList
+        }
       })
     },
     // 获取合作伙伴
@@ -271,9 +284,6 @@ export default {
       })
     }
   },
-  created() {
-    this.getNewCourseList()
-  },
   mounted() {
     document.getElementsByTagName('title')[0].innerText =
       '1911学堂-党政干部与企事业单位高管的终身学堂'
@@ -283,14 +293,12 @@ export default {
         this.loginMsg = true
       }
     })
+    this.getAll()
 
     this.$bus.$on('reLogin', data => {
-      this.getNewCourseList()
+      this.getAll()
     })
     // this.$bus.$emit('bannerShow', false)
-    this.$bus.$on('getNewCourseList', data => {
-      this.getNewCourseList()
-    })
   }
 }
 </script>

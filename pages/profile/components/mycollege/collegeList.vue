@@ -42,7 +42,7 @@ export default {
     },
     goCourseList(item) {
       this.$router.push(
-        '/course/category?cid=' + item.id + '&cp=0&pids=0&xid=0'
+        '/course/category?cid=' + item.category_id + '&cp=0&pids=0&xid=0'
       )
     }
   },

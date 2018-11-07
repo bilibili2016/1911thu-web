@@ -80,7 +80,6 @@ export default {
     return {
       isOver: false,
       title: '',
-      countDown: '',
       selectRadio: '',
       selectIndex: [], // 选择的问题选项答案
       selectItem: 0, // 第一道题 当前选项选中项
@@ -195,16 +194,14 @@ export default {
     },
     // 转换时间格式
     changeTime(time) {
-      clearInterval(this.interval)
-      let date = new Date(time * 1000 - Date.parse(new Date())) / 1000
-      if (date < 0) {
+      if (time <= 0) {
         clearInterval(this.interval)
         this.commitExam()
         this.isOver = true
         return false
       }
-      this.minute = parseInt(date / 60)
-      this.second = date % 60
+      this.minute = parseInt(time / 60)
+      this.second = time % 60
       this.interval = setInterval(() => {
         this.second > 0
           ? this.second--
@@ -239,7 +236,6 @@ export default {
     // 赋值
     setAssignment(response) {
       this.title = response.data.exam_name
-      this.countDown = response.data.expire_time
       this.questionCurrent = response.data.questionCurrent
       this.selectArr = response.data.questionCurrent.option
       this.questionCard = response.data.questionList
@@ -262,9 +258,8 @@ export default {
       }
       this.questionNext = response.data.questionNext
       this.questionPre = response.data.questionPrevious
-      if (this.countDown != 0) {
-        this.changeTime(this.countDown)
-      }
+      clearInterval(this.interval)
+      this.changeTime(response.data.surplus_time)
     },
     // 登录账号被替换
     changeToken() {

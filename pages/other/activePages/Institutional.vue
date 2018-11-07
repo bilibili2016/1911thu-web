@@ -125,6 +125,14 @@
                 <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
                 <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
               </el-form-item>
+              <el-form-item label="" prop="">
+                <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="选择回访日期">
+                </el-date-picker>
+              </el-form-item>
+              <el-form-item label="" prop="">
+                <el-radio v-model="company.time" label="上午（09:00-11:30）">上午（09:00-11:30）</el-radio>
+                <el-radio v-model="company.time" label="下午（13:00-17:30）">下午（13:00-17:30）</el-radio>
+              </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
               </el-form-item>
@@ -207,7 +215,9 @@ export default {
         seconds: 30,
         types: 6,
         companyCodes: '',
-        captchaDisable: false
+        captchaDisable: false,
+        date: '',
+        time: ''
       },
       rules: {
         companyname: [
@@ -321,6 +331,14 @@ export default {
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          if (this.company.date == '' || this.company.time == '') {
+            this.$message({
+              showClose: true,
+              type: 'error',
+              message: '请选择日期时间'
+            })
+            return false
+          }
           institutional.addCompany(this.company).then(response => {
             if (response.status === 0) {
               this.$message({
@@ -332,6 +350,8 @@ export default {
               this.company.person = ''
               this.company.codes = ''
               this.company.phones = ''
+              this.company.date = ''
+              this.company.time = ''
 
               // 初始化验证码倒计时
               this.company.getCode = '获取验证码'

@@ -348,7 +348,6 @@ export default {
     // 个人中心 重新登录 弹框
     reLoginAlert(type, res) {
       this.handleSignOut()
-      persistStore.set('isSingleLogin', false)
       this.$alert(res.msg + ',' + '请重新登录', '温馨提示', {
         confirmButtonText: '确定',
         callback: action => {
@@ -371,15 +370,12 @@ export default {
           this.reLoginAlert(true, res)
         }
       } else if (res.status === 0) {
-        if (persistStore.get('isSingleLogin') === false) {
-          this.$bus.$emit('getNewCourseList', false)
-        }
         this.getAll()
         persistStore.set('isSingleLogin', true)
         // 设置用户信息
         this.setUserInfo(res)
         // this.getClassifyList()
-        this.vipGoodsList()
+        // this.vipGoodsList()
       }
       this.pass = true
     },
@@ -476,6 +472,7 @@ export default {
   },
   mounted() {
     // this.getUserInfo()
+    // 当前浏览器是否是移动端
     this.browserRedirect()
     this.onBusEvent()
     this.$bus.$on('reLoginAlertPop', data => {
@@ -488,7 +485,7 @@ export default {
     if (!persistStore.get('token')) {
       // 获取顶部课程列表
       // this.getClassifyList()
-      this.vipGoodsList()
+      // this.vipGoodsList()
     }
   }
 }
