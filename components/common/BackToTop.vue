@@ -40,7 +40,7 @@
       <div class="back-to-ceiling customStyleThree" @click="goCustomerProject">
         <div class="line-wrap">
           <!-- <img src="http://papn9j3ys.bkt.clouddn.com/chooseCourse-icon.gif" alt=""> -->
-          <img src="http://papn9j3ys.bkt.clouddn.com/customProject-gif.gif" alt="">
+          <!-- <img src="http://papn9j3ys.bkt.clouddn.com/customProject-gif.gif" alt=""> -->
           <!-- <div class="line-centerd">
             <span>定制项目</span>
           </div> -->

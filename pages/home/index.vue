@@ -52,7 +52,7 @@ export default {
       windowWidth: '',
       // linknewproject: '/course/' + '0' + '?type=' + '1' + '&xid=0',
       cadreCollegeTitle: '干部网络学院',
-      commercialCollegeTitle: '商学院',
+      commercialCollegeTitle: '在线商学院',
       cadreCollegeMore: '/course/category?cid=1&cp=0&pids=0&xid=0',
       commercialCollegeMore: '/course/category?cid=17&cp=0&pids=0&xid=0',
       linknewproject: '/course/list/0',

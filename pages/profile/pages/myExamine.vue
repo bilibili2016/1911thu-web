@@ -4,7 +4,7 @@
       <!-- 列表 -->
       <div class="list" v-if="isShowList">
         <div class="top-con clearfix">
-          <span>考试认证</span>
+          <span>申请证书</span>
         </div>
         <div class="certificateList" v-loading="examineLoading" :class="{ minheight : examineLoading}">
           <v-list v-if="examineListData.length > 0" :examineListData="examineListData"></v-list>
