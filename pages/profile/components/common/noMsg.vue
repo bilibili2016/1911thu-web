@@ -1,7 +1,7 @@
 <template>
   <!-- 无数据 -->
   <div class="content">
-    <div class="noCourse" style="text-align:center;margin-top:50px;">
+    <div class="noCourse">
       <img :src="noMsgImg" alt="">
       <h4>{{config.text}}</h4>
     </div>

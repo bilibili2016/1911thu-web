@@ -72,7 +72,7 @@
           <span class="next " @click="showIoc">下一步</span>
         </div>
       </div>
-      <v-nomsg class="noOrder" v-else :config="noMsgTwl"></v-nomsg>
+      <v-nomsg class="noOrder " v-else :config="noMsgTwl"></v-nomsg>
       <!-- 发票弹框 第一步：填写发票信息-->
       <v-ticket v-show="showInvoice" :checkedArr="checkedArr" @handleClose="close"></v-ticket>
       <!-- 发票弹框 第二步：确认发票信息并提交-->

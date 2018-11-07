@@ -9,6 +9,12 @@
             <i class="icon-home"></i> 最近学习</span>
           <v-myhome :allCourseLoad="allCourseLoad" :studyData="myCourseData3" :studyProjectData="myProjectData4" :configZero="configZero" :configFive="configFive" :pagemsg3="pagemsg3" :myProjectPage="myProjectPage4" :noMsgOne="noMsgOne" :noMsgOnes="noMsgOnes" @studyDataChange="handleMyCourseChange" @studyProjectChange="handleMyProjectChange"></v-myhome>
         </el-tab-pane>
+          <!-- 我的学院 -->
+        <el-tab-pane class="my-course my-examine" name="tab-eleventh">
+          <span slot="label" class="tabList">
+            <i class="icon-college"></i>&nbsp;我的学院</span>
+          <v-mycollege :collegeListData="collegeListData" :collegeLoading="collegeLoading" :collegePagemsg="collegePagemsg" @collegeListChange="collegeListChange"></v-mycollege>
+        </el-tab-pane>
         <!-- 我的课程 -->
         <el-tab-pane class="my-course" name="tab-second">
           <span slot="label" class="tabList">
@@ -63,12 +69,7 @@
             <i class="icon-examine"></i>&nbsp;考试认证</span>
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
         </el-tab-pane>
-        <!-- 我的学院 -->
-        <el-tab-pane class="my-course my-examine" name="tab-eleventh">
-          <span slot="label" class="tabList">
-            <i class="icon-college"></i>&nbsp;我的学院</span>
-          <v-mycollege :collegeListData="collegeListData" :collegeLoading="collegeLoading" :collegePagemsg="collegePagemsg" @collegeListChange="collegeListChange"></v-mycollege>
-        </el-tab-pane>
+
 
       </el-tabs>
     </div>

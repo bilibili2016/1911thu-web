@@ -1,7 +1,7 @@
 <template>
     <div class="beTeacher" @click="documentHandler">
         <div class="topImg">
-            <h4>预约导师</h4>
+            <h4>导师招募</h4>
             <div class="wordBox">
                 <div class="word">
                     <p>这里是1911学堂，现招募优秀导师一起为中国继续教育事业努力，一起为职场人士成长做出贡献！同时使您成为更有价值的奉知者和献智者！</p>

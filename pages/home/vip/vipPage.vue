@@ -4,7 +4,7 @@
     <div class="con-detail">
       <img class="conImg" v-if="vipDetailData.id=='2'" :src="networkImg" alt="">
       <img class="conImg" v-if="vipDetailData.id=='3'" :src="onlineImg" alt="">
-      <div class="btns clearfix" ref="btns" :class="{bottomHeight:bottom}">
+      <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
         <div class="btn-con">
           <span class="text">入学学费{{vipInfo.present_price}}元</span>
           <div class="btn-item">
@@ -43,7 +43,7 @@ export default {
       windowHeight: 0,
       paperHeight: 0,
       scrollTop: 0,
-      bottom: false,
+      bottom: true,
       vipDetailData: {
         id: ''
       },
@@ -107,8 +107,12 @@ export default {
         window.pageYOffset ||
         document.body.scrollTop
       if (this.windowHeight - this.scrollTop - this.paperHeight <= 100) {
+        console.log(444)
+
         this.bottom = true
       } else {
+        console.log(555)
+
         this.bottom = false
       }
     }
