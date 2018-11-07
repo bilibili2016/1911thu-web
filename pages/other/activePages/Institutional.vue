@@ -106,9 +106,9 @@
       <div class="bottomForm" id="buttom" ref="buttonForm">
         <img class="buttom-bg" src="http://papn9j3ys.bkt.clouddn.com/hrentry-bg.png" alt="">
         <div class="word">
-          <p class="word-desc1">如果您希望对1911学堂课程及培训项目了解更多，请填写以下信息，我们会在90分钟内与您联系，期待为您创造更好的教育体验。</p>
-          <p class="word-desc2">
-            <i class="word-desc-bg"></i>您也可以拨打咨询电话：18516821911</p>
+          <p class="word-desc1">若您想进一步了解、体验我们的培训项目，烦请留下您的联系方式，我们将在预约时间内与您联系。期待为您提供更好的教育体验。</p>
+          <!-- <p class="word-desc2"> -->
+          <!-- <i class="word-desc-bg"></i>您也可以拨打咨询电话：18516821911</p> -->
           <div class="formDIv">
             <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
               <el-form-item label="" prop="companyname">
@@ -118,7 +118,7 @@
                 <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
               </el-form-item>
               <el-form-item label="" prop="phones">
-                <el-input v-model="company.phones" placeholder="请输入联系方式"></el-input>
+                <el-input v-model="company.phones" placeholder="请输入联系人手机号"></el-input>
               </el-form-item>
               <el-form-item label="" prop="code">
                 <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
@@ -211,7 +211,7 @@ export default {
       },
       rules: {
         companyname: [
-          { required: true, message: '请输入单位名', trigger: 'blur' }
+          { required: true, message: '请输入单位名称', trigger: 'blur' }
         ],
         person: [
           { required: true, message: '请输入联系人姓名', trigger: 'blur' }

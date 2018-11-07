@@ -1,36 +1,14 @@
 .orderTeacher {
   padding-top: 40px;
   background-color: #f7f9fb;
+
   .con {
-    .top {
-      width: 1100px;
-      height: 190px;
-      margin: 0 auto;
-      border-radius: 6px;
-      background-color: #fff;
-      padding: 30px;
-      .desc {
-        color: #773084;
-        font-size: 20px;
-        margin-bottom: 30px;
-      }
-      .con-item {
-        margin-bottom: 10px;
-        .fl {
-          width: 120px;
-        }
-        .fr {
-          line-height: 40px;
-          font-size: 16px;
-          color: #222;
-          .tel {
-            width: 320px;
-          }
-          .verification {
-            width: 320px;
-          }
-        }
-      }
+    .tip {
+      text-align: center;
+      font-size: 24px;
+      color: #6417a6;
+      margin: 40px 0 30px 0;
+      padding-top: 40px;
     }
     .dataPickSpan {
       margin: 0 30px;
@@ -45,6 +23,12 @@
       }
     }
     .content {
+      .con-info {
+        padding-bottom: 40px;
+        background-color: #fff;
+        box-shadow: 0px 3px 36px 0px rgba(198, 194, 210, 0.36);
+        border-radius: 10px;
+      }
       .con-item {
         .fr {
           .tel {

@@ -1,20 +1,24 @@
 <template>
   <div class="VIP-con">
-    <div class="vipBanner" :class="{netWork:page=='2',online:page=='3'}"></div>
+    <div class="vipBanner" :class="{netWork:vipDetailData.id=='2',online:vipDetailData.id=='3'}"></div>
     <div class="con-detail">
-      <img class="conImg" v-if="page=='2'" :src="networkImg" alt="">
-      <img class="conImg" v-if="page=='3'" :src="onlineImg" alt="">
+      <img class="conImg" v-if="vipDetailData.id=='2'" :src="networkImg" alt="">
+      <img class="conImg" v-if="vipDetailData.id=='3'" :src="onlineImg" alt="">
       <div class="btns clearfix" ref="btns" :class="{bottomHeight:bottom}">
-        <span class="text">开启学习之旅！</span>
+        <span class="text">入学学费{{vipInfo.present_price}}元</span>
         <div class="btn-item">
-          <span class="button" @click="lookCourse">进入学院学习</span>
+          <!-- 是会员 -->
+          <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
+          <!-- 不是会员 -->
+          <span v-if="!vipInfo.vipPrivate" class="button" @click="lookCourse">查看学院课程</span>
+
           <span class="button active" @click="buyVip">加入学院</span>
           <span class="button btn-three" @click="identificate">申请证书</span>
         </div>
       </div>
     </div>
     <!-- 会员购买弹窗 -->
-    <v-vipbuy :vipPopShow="vipPopShow" :vipId="page" @changeVipShow="changeVipShow"></v-vipbuy>
+    <v-vipbuy :vipPopShow="vipPopShow" :vipId="vipDetailData.id" @changeVipShow="changeVipShow"></v-vipbuy>
   </div>
 </template>
 <script>
@@ -23,38 +27,25 @@ import { matchSplits, setTitle, message } from '@/lib/util/helper'
 import { vip } from '@/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import VipBuy from '@/components/common/VipBuy.vue'
+
 export default {
   data() {
     return {
       onlineImg: 'http://papn9j3ys.bkt.clouddn.com/online-con.png',
       networkImg: 'http://papn9j3ys.bkt.clouddn.com/network-con.png',
       vipPopShow: false,
-      alertShow: false,
-      isShowAlert: false,
-      vipID: '',
       relativeID: '',
-      lastNum: '',
-      alertText: '商品数量不能大于9999',
-      vipData: {
-        vipId: '',
-        number: 1
-      },
-      page: '',
       gidForm: {
         gids: null
-      },
-      pageData: {
-        id: '',
-        name: ''
       },
       windowHeight: 0,
       paperHeight: 0,
       scrollTop: 0,
       bottom: false,
-      pageData: {
-        id: '',
-        name: ''
-      }
+      vipDetailData: {
+        id: ''
+      },
+      vipInfo: ''
     }
   },
   components: {
@@ -97,6 +88,14 @@ export default {
         this.$bus.$emit('loginShow', true)
       }
     },
+    //会员详情
+    vipDetail() {
+      vip.vipGoodsDetail(this.vipDetailData).then(res => {
+        if (res.status == 0) {
+          this.vipInfo = res.data.vipGoodsDetail
+        }
+      })
+    },
     //
     addClass() {
       this.windowHeight = document.body.scrollHeight
@@ -121,9 +120,9 @@ export default {
   },
   mounted() {
     this.relativeID = matchSplits('cid')
-    this.page = matchSplits('id') //2:干部网络学院  3:在线商学院
+    this.vipDetailData.id = matchSplits('id') //2:干部网络学院  3:在线商学院
+    this.vipDetail()
     // 寛高设置
-
     window.addEventListener('scroll', this.addClass)
   }
 }

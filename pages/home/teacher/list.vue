@@ -1,6 +1,6 @@
 <template>
   <div class="news-list teacherList" v-loading="loading">
-    <div class="banner-con" @click.stop="beTeacher">
+    <div class="banner-con">
       <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     </div>
     <div class="teacherLead clearfix">
@@ -18,7 +18,7 @@
     <div class="pagination" v-show="famousList.length!=0">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
-    <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn">
+    <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn" style="cursor:pointer">
       <img src="http://papn9j3ys.bkt.clouddn.com/toDoTeacher-gif.gif" alt="">
     </div>
   </div>

@@ -1,154 +1,161 @@
 <template>
     <div class="beTeacher orderTeacher" @click="documentHandler">
-        <div class="con">
-            <div class="content">
-                <div class="top">
-                    <div class="desc">请选择您的课程需求</div>
-                    <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>导师名称：</div>
-                        <div class="fr">{{teacherData.teacher_name}}</div>
-                    </div>
-                    <div class="con-item name style clearfix">
-                        <div class="fl">导师授课形式：</div>
-                        <div class="fr">
-                            <el-checkbox-group v-model="teacherForm.serviceName" @change="handleserviceChange">
-                                <el-checkbox v-for="service in serviceList" :label="service.id" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
-                                <i class="el-icon-question styleAsk">
-                                    <div class="descript-text" style="width:530px;">
-                                        <div>
-                                            <p>线上授课：与1911学堂合作录制在线课程，学员登录1911学堂平台进行学习；</p>
-                                            <p>线下授课：授课地点为北京，主要形式包括大班课，小班课以及讲座；</p>
-                                            <p>课程顾问：亲临项目所在地，实地授课；</p>
-                                            <p>咨询：项目相关的课程研发、培训流程及活动设计等问题的咨询服务；</p>
-                                            <p>课题研究：基于客户提出的科研主题，协助客户完成相关内容的研究。</p>
-
-                                        </div>
-                                    </div>
-                                </i>
-                            </el-checkbox-group>
+        <div class="topImg">
+            <h4>预约导师</h4>
+            <div class="wordBox">
+                <div class="">
+                    <div class="wordInfo">
+                        <div class="word-item clearfix">
+                            <div class="fl"><i class="red">*</i>导师名称：</div>
+                            <div class="fr">{{teacherData.teacher_name}}</div>
+                        </div>
+                        <div class="word-item clearfix">
+                            <div class="fl">导师服务形式：</div>
+                            <div class="fr">
+                                <el-checkbox-group v-model="teacherForm.serviceName" @change="handleserviceChange">
+                                    <el-checkbox v-for="service in serviceList" :label="service.id" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
+                                </el-checkbox-group>
+                            </div>
+                        </div>
+                        <div class="word-item teacherForm clearfix">
+                            <div class="fl"></div>
+                            <div class="fr">
+                                <p><span class="courseForm">线上授课：</span><span>与1911学堂合作录制在线课程，学员登录1911学堂平台进行学习；</span></p>
+                                <p><span class="courseForm">线下授课：</span><span>授课地点为北京，主要形式包括大班课，小班课以及讲座；</span></p>
+                                <p><span class="courseForm">课程顾问：</span><span>亲临项目所在地，实地授课；</span></p>
+                                <p><span class="courseForm">咨询：</span><span>项目相关的课程研发、培训流程及活动设计等问题的咨询服务；</span></p>
+                                <p><span class="courseForm">课题研究：</span><span>基于客户提出的科研主题，协助客户完成相关内容的研究。</span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="tip">请填写您的信息，让我们能了解您的需求并联系到您。</div>
-                <div>
-                    <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>姓名：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.name" placeholder="请填写您的姓名"></el-input>
+
+            </div>
+        </div>
+        <div class="con">
+            <div class="content">
+                <div class="con-info">
+                    <div class="tip">请填写您的信息，让我们能了解您的需求并联系到您。</div>
+                    <div>
+                        <div class="con-item name clearfix">
+                            <div class="fl"><i class="red">*</i>姓名：</div>
+                            <div class="fr">
+                                <el-input v-model="teacherForm.name" placeholder="请填写您的姓名"></el-input>
+                            </div>
                         </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>手机号：</div>
-                        <div class="fr">
-                            <el-input class="tel" v-model="teacherForm.tel" placeholder="请填写手机号"></el-input>
-                            <el-input class="verification" v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input>
-                            <span class="code" @click="smsCodes">{{telCodes.getCode}}</span>
+                        <div class="con-item name clearfix">
+                            <div class="fl"><i class="red">*</i>手机号：</div>
+                            <div class="fr">
+                                <el-input class="tel" v-model="teacherForm.tel" placeholder="请填写手机号"></el-input>
+                                <el-input class="verification" v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input>
+                                <span class="code" @click="smsCodes">{{telCodes.getCode}}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">单位名称：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.unit" placeholder="请填写您的单位名称"></el-input>
+                        <div class="con-item name clearfix">
+                            <div class="fl">单位名称：</div>
+                            <div class="fr">
+                                <el-input v-model="teacherForm.unit" placeholder="请填写您的单位名称"></el-input>
+                            </div>
                         </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">职务：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.duty" placeholder="请填写您的职务"></el-input>
+                        <div class="con-item name clearfix">
+                            <div class="fl">职务：</div>
+                            <div class="fr">
+                                <el-input v-model="teacherForm.duty" placeholder="请填写您的职务"></el-input>
+                            </div>
                         </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>常用邮箱：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
+                        <div class="con-item name clearfix">
+                            <div class="fl"><i class="red">*</i>常用邮箱：</div>
+                            <div class="fr">
+                                <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
+                            </div>
                         </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>预约时间范围：</div>
-                        <div class="fr">
-                            <el-date-picker v-model="teacherForm.appointmentStartTime" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期">
-                            </el-date-picker>
-                            <span class="dataPickSpan">至</span>
-                            <el-date-picker v-model="teacherForm.appointmentEndTime" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择结束日期">
-                            </el-date-picker>
+                        <div class="con-item name clearfix">
+                            <div class="fl"><i class="red">*</i>预约时间范围：</div>
+                            <div class="fr">
+                                <el-date-picker v-model="teacherForm.appointmentStartTime" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期">
+                                </el-date-picker>
+                                <span class="dataPickSpan">至</span>
+                                <el-date-picker v-model="teacherForm.appointmentEndTime" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择结束日期">
+                                </el-date-picker>
+                            </div>
                         </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">授课内容：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.content" placeholder="请填写您希望导师授课的内容"></el-input>
+                        <div class="con-item name clearfix">
+                            <div class="fl">授课内容：</div>
+                            <div class="fr">
+                                <el-input v-model="teacherForm.content" placeholder="请填写您希望导师授课的内容"></el-input>
+                            </div>
                         </div>
-                    </div>
-                    <div class="con-item clearfix">
-                        <div class="fl"><i class="red">*</i>授课对象：</div>
-                        <div class="fr selectFr">
-                            <div class="select-con ">
-                                <div class="divClick" @click.stop="handlecourseObjClick">
-                                    <span>
-                                        <el-input v-model="teacherForm.courseObjName" placeholder="请选择授课对象" readonly></el-input>
-                                    </span>
-                                    <span class="pull-down">
-                                        <i class="el-icon-caret-bottom"></i>
-                                    </span>
+                        <div class="con-item clearfix">
+                            <div class="fl"><i class="red">*</i>授课对象：</div>
+                            <div class="fr selectFr">
+                                <div class="select-con ">
+                                    <div class="divClick" @click.stop="handlecourseObjClick">
+                                        <span>
+                                            <el-input v-model="teacherForm.courseObjName" placeholder="请选择授课对象" readonly></el-input>
+                                        </span>
+                                        <span class="pull-down">
+                                            <i class="el-icon-caret-bottom"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="pull-down-text" v-if="isShowObj">
+                                    <ul>
+                                        <li v-for="(item,index) in objLi" :key="index" @click.stop="chooseObj(item)">{{item.name}}</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="pull-down-text" v-if="isShowObj">
-                                <ul>
-                                    <li v-for="(item,index) in objLi" :key="index" @click.stop="chooseObj(item)">{{item.name}}</li>
-                                </ul>
-                            </div>
                         </div>
-                    </div>
-                    <div class="con-item clearfix">
-                        <div class="fl"><i class="red">*</i>授课人数：</div>
-                        <div class="fr selectFr">
-                            <div class="select-con ">
-                                <div class="divClick" @click.stop="handleCourseNumClick">
-                                    <span>
-                                        <el-input v-model="teacherForm.courseNumName" placeholder="请选择授课人数" readonly></el-input>
-                                    </span>
-                                    <span class="pull-down">
-                                        <i class="el-icon-caret-bottom"></i>
-                                    </span>
+                        <div class="con-item clearfix">
+                            <div class="fl"><i class="red">*</i>授课人数：</div>
+                            <div class="fr selectFr">
+                                <div class="select-con ">
+                                    <div class="divClick" @click.stop="handleCourseNumClick">
+                                        <span>
+                                            <el-input v-model="teacherForm.courseNumName" placeholder="请选择授课人数" readonly></el-input>
+                                        </span>
+                                        <span class="pull-down">
+                                            <i class="el-icon-caret-bottom"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="pull-down-text" v-if="isShowNum">
+                                    <ul>
+                                        <li v-for="(item,index) in numLi" :key="index" @click.stop="chooseNum(item)">{{item.name}}</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="pull-down-text" v-if="isShowNum">
-                                <ul>
-                                    <li v-for="(item,index) in numLi" :key="index" @click.stop="chooseNum(item)">{{item.name}}</li>
-                                </ul>
-                            </div>
                         </div>
-                    </div>
-                    <div class="con-item clearfix">
-                        <div class="fl"><i class="red">*</i>授课时长：</div>
-                        <div class="fr selectFr">
-                            <div class="select-con ">
-                                <div class="divClick" @click.stop="handleCourseTimeClick">
-                                    <span>
-                                        <el-input v-model="teacherForm.courseTimeName" placeholder="请选择授课时长" readonly></el-input>
-                                    </span>
-                                    <span class="pull-down">
-                                        <i class="el-icon-caret-bottom"></i>
-                                    </span>
+                        <div class="con-item clearfix">
+                            <div class="fl"><i class="red">*</i>授课时长：</div>
+                            <div class="fr selectFr">
+                                <div class="select-con ">
+                                    <div class="divClick" @click.stop="handleCourseTimeClick">
+                                        <span>
+                                            <el-input v-model="teacherForm.courseTimeName" placeholder="请选择授课时长" readonly></el-input>
+                                        </span>
+                                        <span class="pull-down">
+                                            <i class="el-icon-caret-bottom"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="pull-down-text" v-if="isShowTime">
+                                    <ul>
+                                        <li v-for="(item,index) in timeLi" :key="index" @click.stop="chooseTime(item)">{{item.name}}</li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="pull-down-text" v-if="isShowTime">
-                                <ul>
-                                    <li v-for="(item,index) in timeLi" :key="index" @click.stop="chooseTime(item)">{{item.name}}</li>
-                                </ul>
+                        </div>
+                        <div class="con-item name clearfix">
+                            <div class="fl"><i class="red">*</i>项目预算：</div>
+                            <div class="fr">
+                                <el-input v-model="teacherForm.projectBudget" placeholder="请填写项目预算"></el-input>
                             </div>
                         </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>项目预算：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.projectBudget" placeholder="请填写项目预算"></el-input>
-                        </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">其他需求：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.otherNeed" placeholder="请填写其他需求"></el-input>
+                        <div class="con-item name clearfix">
+                            <div class="fl">其他需求：</div>
+                            <div class="fr">
+                                <el-input v-model="teacherForm.otherNeed" placeholder="请填写其他需求"></el-input>
+                            </div>
                         </div>
                     </div>
                 </div>

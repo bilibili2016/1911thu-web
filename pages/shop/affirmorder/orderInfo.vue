@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="orderInfo" v-if="course">
-      <p>
-        <span class="left">商品数量：</span>
-        <span class="right">{{data.curriculumSum}}</span>
-      </p>
 
       <div v-if="type!=2">
+        <p>
+          <span class="left">商品数量：</span>
+          <span class="right">{{data.curriculumSum}}</span>
+        </p>
         <p>
           <span class="left">学习人数：</span>
           <span class="right">{{data.payNumber}}人</span>
@@ -15,19 +15,27 @@
           <span class="left">商品总金额：</span>
           <span class="right">¥{{data.goodsAmount}}</span>
         </p>
+        <p>
+          <span class="left">购买账号：</span>
+          <span class="right" :title="data.nickName">{{data.nickName}}</span>
+        </p>
       </div>
       <!-- vip需要计算商品总金额 -->
       <div v-else>
         <p>
-          <span class="left">商品总金额：</span>
+          <span class="left">入学人数：</span>
+          <span class="right">{{data.curriculumSum}}</span>
+        </p>
+        <p>
+          <span class="left">学费：</span>
           <span class="right">¥{{parseFloat(data.curriculumSum*data.price)}}</span>
+        </p>
+        <p>
+          <span class="left">申请人昵称：</span>
+          <span class="right" :title="data.nickName">{{data.nickName}}</span>
         </p>
       </div>
 
-      <p>
-        <span class="left">购买账号：</span>
-        <span class="right" :title="data.nickName">{{data.nickName}}</span>
-      </p>
     </div>
     <div class="orderInfo" v-if="!course">
       <p>

@@ -56,7 +56,7 @@
             <!-- <p class="cancelOrder" v-if="courseList.pay_status === '6'" style="cursor: inherit">退款中</p> -->
 
             <!-- 已完成订单剩余时间 -->
-            <p class="payReady" v-if="(courseList.pay_status === '2'  || courseList.pay_status === '6')&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
+            <p class="payReady" v-if="courseList.pay_status === '6'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
             <p class="payReady" v-if="(courseList.pay_status === '2'  || courseList.pay_status === '6')&&courseList.expire_day<1">已过期</p>
             <p class="payClose" v-if="courseList.pay_status === '3' || courseList.pay_status === '4'">已关闭</p>
             <p>

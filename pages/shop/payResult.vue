@@ -31,9 +31,9 @@
       </div>
       <div v-if="hasCode" v-show="showMsg">
         <div class="tips">
-          <p class="tips-one">您购买的商品已生成兑换码</p>
+          <p class="tips-one">您的兑换码已经生成</p>
           <p>请前往
-            <span class="tips-two">“我的中心 — 兑换码管理”</span>查看，兑换后可观看课程
+            <span class="tips-two">“我的中心 — 兑换码管理”</span>页面查看，绑定后可观看课程/加入学院
           </p>
         </div>
         <p class="sure">
@@ -117,9 +117,9 @@ export default {
             this.links = 'tab-first'
           }
           if (response.data.curriculumListType == '5') {
-            // 订单内有VIP
+            // 订单内课程+项目
             this.isVipCode = true
-            this.links = 'tab-eleventh'
+            this.links = 'tab-first'
           }
 
           if (response.data.invitation_code === '') {

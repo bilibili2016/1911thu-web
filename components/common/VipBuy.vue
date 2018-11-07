@@ -1,36 +1,38 @@
 <template>
-    <div class="vipBuy">
-        <div class="mask" v-show="vipPopShow">
-            <div class="vipPop" v-show="!isShowAlert">
-                <div class="pop-title">温馨提示</div>
-                <i class="el-icon-close" @click="handlePopClick"></i>
-                <div class="con">
-                    <p>1、购买单份会员，购买成功后立即生效；</p>
-                    <p>2、购买多份会员，购买成功后将生成兑换码， 绑定后生效；</p>
-                    <p>3、如果您再次购买此会员，将生成兑换码，绑定后生效。</p>
-                </div>
-                <div class="num clearfix">
-                    <div class="numText">请选择数量</div>
-                    <div class="numOpr">
-                        <span class="numBtn sub " @click="delNumber">-</span>
-                        <span class="inputText"><input type="text" v-model="vipData.number" @focus="handleFocus" @blur="changeNumber"></span>
-                        <span class="numBtn add" @click="addNumber">+</span>
-                    </div>
-                </div>
-                <div class="btn">
-                    <span class="cancel" @click="handlePopClick">取消</span>
-                    <span class="confirm" @click="handleConfirm">下一步</span>
-                </div>
-            </div>
-
-            <div class="alertPop" v-show="isShowAlert">
-                <i class="el-icon-close" @click="closeAlertPop"></i>
-                <img src="http://papn9j3ys.bkt.clouddn.com/alert.png" alt="">
-                <p>{{alertText}}</p>
-                <el-button @click="closeAlertPop">知道了</el-button>
-            </div>
+  <div class="vipBuy">
+    <div class="mask" v-show="vipPopShow">
+      <div class="vipPop" v-show="!isShowAlert">
+        <div class="pop-title">温馨提示</div>
+        <i class="el-icon-close" @click="handlePopClick"></i>
+        <div class="con">
+          <p>1、所有注册用户可申请入学，申请成功后即刻生效，有效期12个月；</p>
+          <p>2、在学期间，学员可再次申请入学，申请成功后将生成兑换码，该兑换码可通过兑换使用；</p>
+          <p>3、当选择多人入学时，将生成兑换码，本人和他人均可凭兑换码入学院学习。</p>
         </div>
+        <div class="num clearfix">
+          <div class="numText">请选择入学人数</div>
+          <div class="numOpr">
+            <span class="numBtn sub " @click="delNumber">-</span>
+            <span class="inputText"><input type="text" v-model="vipData.number" @focus="handleFocus" @blur="changeNumber"></span>
+            <span class="numBtn add" @click="addNumber">+</span>
+          </div>
+
+        </div>
+        <!-- <div class="studyFee">学费：入学学费{{vipInfo.present_price}}元/人</div> -->
+        <div class="btn">
+          <span class="cancel" @click="handlePopClick">取消</span>
+          <span class="confirm" @click="handleConfirm">下一步</span>
+        </div>
+      </div>
+
+      <div class="alertPop" v-show="isShowAlert">
+        <i class="el-icon-close" @click="closeAlertPop"></i>
+        <img src="http://papn9j3ys.bkt.clouddn.com/alert.png" alt="">
+        <p>{{alertText}}</p>
+        <el-button @click="closeAlertPop">知道了</el-button>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 export default {

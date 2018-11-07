@@ -50,6 +50,49 @@
         color: #222;
         font-size: 16px;
       }
+      // 导师招募
+      .wordInfo {
+        width: 1010px;
+        padding: 30px 40px;
+        background: url('http://papn9j3ys.bkt.clouddn.com/beTeacher_banner2.png')
+          no-repeat bottom;
+        background-size: contain;
+        .word-item {
+          height: auto;
+          margin-bottom: 10px;
+          .fl {
+            float: left;
+            width: 115px;
+            height: 40px;
+            text-align: right;
+            line-height: 40px;
+            font-size: 16px;
+            color: #222;
+            margin-right: 20px;
+            .red {
+              color: #ff5f5f;
+              vertical-align: sub;
+              display: inline-block;
+            }
+          }
+          .fr {
+            float: left;
+            width: 795px;
+            line-height: 40px;
+            font-size: 16px;
+            color: #222;
+          }
+        }
+        .word-item.teacherForm {
+          margin-top: -10px;
+          .fr {
+            line-height: 30px;
+            .courseForm {
+              color: #6417a6;
+            }
+          }
+        }
+      }
     }
   }
   .con {
@@ -61,6 +104,7 @@
       box-shadow: 0px 3px 36px 0px rgba(198, 194, 210, 0.36);
       border-radius: 10px;
       padding-bottom: 20px;
+      background-color: #fff;
     }
 
     .title {
@@ -329,6 +373,7 @@
           width: 100px;
           height: 100px;
           z-index: 10;
+          border: 1px solid #dddddd;
         }
         .uploadMask {
           position: absolute;
@@ -574,10 +619,11 @@
     .course {
       width: 1100px;
       margin: 0 auto;
-      margin-top: 80px;
+      margin-top: 20px;
       box-shadow: 0px 3px 36px 0px rgba(198, 194, 210, 0.36);
       border-radius: 10px;
       padding-bottom: 20px;
+      background-color: #fff;
       .fr.selectFr .pull-down {
         left: 281px;
       }
@@ -607,42 +653,42 @@
         }
       }
     }
-    .el-input {
-      .el-input__inner {
-      }
+  }
+  .el-input {
+    .el-input__inner {
     }
-    .el-radio {
-      .el-radio__inner {
-        width: 18px;
-        height: 18px;
-        border-color: #572281;
-      }
-      .el-radio__input.is-checked .el-radio__inner {
-        background-color: #fff;
-      }
-      .el-radio__inner::after {
-        width: 10px;
-        height: 10px;
-        background-color: #572281;
-      }
-      .el-radio__input.is-checked + .el-radio__label {
-        color: #344;
-      }
+  }
+  .el-radio {
+    .el-radio__inner {
+      width: 18px;
+      height: 18px;
+      border-color: #572281;
     }
-    .el-checkbox:last-child {
-      margin-right: 0;
+    .el-radio__input.is-checked .el-radio__inner {
+      background-color: #fff;
     }
-    .el-checkbox__input {
-      .el-checkbox__inner {
-        width: 18px;
-        height: 18px;
-        border: 1px solid #6417a6;
-        border-radius: 4px;
-      }
+    .el-radio__inner::after {
+      width: 10px;
+      height: 10px;
+      background-color: #572281;
     }
-    .el-checkbox__inner::after {
-      left: 6px;
-      top: 3px;
+    .el-radio__input.is-checked + .el-radio__label {
+      color: #344;
     }
+  }
+  .el-checkbox:last-child {
+    margin-right: 0;
+  }
+  .el-checkbox__input {
+    .el-checkbox__inner {
+      width: 18px;
+      height: 18px;
+      border: 1px solid #6417a6;
+      border-radius: 4px;
+    }
+  }
+  .el-checkbox__inner::after {
+    left: 6px;
+    top: 3px;
   }
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="topBar clearfix">
-    <span>商品信息</span>
+    <span v-if="orderType==1">商品信息</span>
+    <span v-if="orderType==2">入学信息</span>
+
     <span class="fr goBack" @click="handleLinkShopCart" v-if="config.type==='affirmOrder'">
       <img class="editOutline" src="http://papn9j3ys.bkt.clouddn.com/shopCart-icon.png" alt=""> 返回修改购物车
     </span>
@@ -11,8 +13,14 @@
 </template>
 
 <script>
+import { matchSplits } from '@/lib/util/helper'
 export default {
   props: ['data', 'config'],
+  data() {
+    return {
+      orderType: ''
+    }
+  },
   methods: {
     handleLinkShopCart() {
       this.$emit('handleLinkShopCart')
@@ -20,6 +28,9 @@ export default {
     handleQuestion() {
       this.$emit('handleQuestion')
     }
+  },
+  mounted() {
+    this.orderType = matchSplits('type')
   }
 }
 </script>

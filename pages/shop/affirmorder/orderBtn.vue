@@ -10,14 +10,23 @@
         <span class="right">{{data.nickName}}</span>
       </p>
     </div>
-    <p class="commitOrder fr" @click="commitOrder">提交订单</p>
+    <p v-if="orderType==1" class="commitOrder fr" @click="commitOrder">提交订单</p>
+    <p v-if="orderType==2" class="commitOrder fr" @click="commitOrder">提交</p>
+
     <h6 v-if="config.type==='affirmOrder'" @click="showRpt">我有疑问，需要反馈?</h6>
   </div>
 </template>
 
 <script>
+import { matchSplits } from '@/lib/util/helper'
+
 export default {
   props: ['data', 'config'],
+  data() {
+    return {
+      orderType: ''
+    }
+  },
   methods: {
     commitOrder() {
       this.$emit('commitOrder')
@@ -25,6 +34,9 @@ export default {
     showRpt() {
       this.$emit('showRpt')
     }
+  },
+  mounted() {
+    this.orderType = matchSplits('type')
   }
 }
 </script>
