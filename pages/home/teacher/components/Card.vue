@@ -12,9 +12,9 @@
             <h4>{{teacher.teacher_name}}</h4>
             <p class="small-title">{{teacher.graduate}}</p>
             <div class="teacherBtn">
-              <span class="begin" v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
+              <span v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
               <span v-else>筹备中</span>
-              <span class="reservation" @click.stop="reservation(teacher)">预约导师</span>
+              <span @click.stop="reservation(teacher)">预约导师</span>
             </div>
           </div>
           <div class="title-desc">
