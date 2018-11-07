@@ -59,19 +59,13 @@
           margin-right: 30px;
           color: #fff;
           cursor: pointer;
-          &.begin {
-            background-color: #1f57fe;
+          border: 1px solid #6417a6;
+          color: #6417a6;
+          transition: all 300ms;
+          background-color: transparent;
+          &:hover {
+            background-color: #6417a6;
             color: #fff;
-          }
-          &.reservation {
-            border: 1px solid #6417a6;
-            color: #6417a6;
-            transition: all 300ms;
-            background-color: transparent;
-            &:hover {
-              background-color: #6417a6;
-              color: #fff;
-            }
           }
         }
       }
