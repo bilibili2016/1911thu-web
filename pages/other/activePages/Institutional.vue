@@ -117,14 +117,6 @@
               <el-form-item label="" prop="person">
                 <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
               </el-form-item>
-              <el-form-item label="" prop="phones">
-                <el-input v-model="company.phones" placeholder="请输入联系人手机号"></el-input>
-              </el-form-item>
-              <el-form-item label="" prop="code">
-                <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
-                <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
-                <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
-              </el-form-item>
               <el-form-item label="" prop="">
                 <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="选择回访日期">
                 </el-date-picker>
@@ -132,6 +124,14 @@
               <el-form-item label="" prop="">
                 <el-radio v-model="company.time" label="上午（09:00-11:30）">上午（09:00-11:30）</el-radio>
                 <el-radio v-model="company.time" label="下午（13:00-17:30）">下午（13:00-17:30）</el-radio>
+              </el-form-item>
+              <el-form-item label="" prop="phones">
+                <el-input v-model="company.phones" placeholder="请输入联系人手机号"></el-input>
+              </el-form-item>
+              <el-form-item label="" prop="code">
+                <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
+                <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
+                <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
