@@ -54,14 +54,10 @@ export default {
     // 绑定兑换码
     'bindForm.courseId'(val, oldval) {
       if (val == '') {
-        this.bindForm.showErr = true
         this.bindForm.isInput = false
       } else {
         if (/^[A-Za-z0-9]+$/.test(val)) {
-          this.bindForm.showErr = false
           this.bindForm.isInput = true
-        } else {
-          message(this, 'error', '请您输入正确的兑换码！')
         }
       }
     }
@@ -86,7 +82,6 @@ export default {
         courseId: '',
         isBind: false,
         isInput: false,
-        showErr: false,
         error: ''
       },
       loadLogin: false,
@@ -211,6 +206,11 @@ export default {
     },
     // 兑换码 --检测兑换码内是否包含已绑定的课程
     handleDetection() {
+      if (!/^[A-Za-z0-9]{6}$/.test(this.bindForm.courseId)) {
+        message(this, 'error', '请输入正确的兑换码！')
+        this.bindForm.isInput = false
+        return false
+      }
       header.detectionCode(this.bindForm).then(res => {
         if (res.status === 100100) {
           message(this, 'error', res.msg)
@@ -298,7 +298,6 @@ export default {
             this.handleLinkProfile(this.skip)
           }
         } else if (res.status === 100100) {
-          this.bindForm.showErr = true
           this.bindForm.error = res.msg
         } else {
           this.bindForm.isBind = false

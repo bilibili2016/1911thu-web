@@ -107,12 +107,8 @@ export default {
         window.pageYOffset ||
         document.body.scrollTop
       if (this.windowHeight - this.scrollTop - this.paperHeight <= 100) {
-        console.log(444)
-
         this.bottom = true
       } else {
-        console.log(555)
-
         this.bottom = false
       }
     }

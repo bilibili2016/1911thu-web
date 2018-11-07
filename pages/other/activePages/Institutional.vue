@@ -109,7 +109,7 @@
           <p class="word-desc1">若您想进一步了解、体验我们的培训项目，烦请留下您的联系方式，我们将在预约时间内与您联系。期待为您提供更好的教育体验。</p>
           <!-- <p class="word-desc2"> -->
           <!-- <i class="word-desc-bg"></i>您也可以拨打咨询电话：18516821911</p> -->
-          <div class="formDIv">
+          <div>
             <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
               <el-form-item label="" prop="companyname">
                 <el-autocomplete class="inline-input" placeholder="您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
@@ -186,7 +186,7 @@ export default {
         top: 0,
         left: 0
       },
-      showCheckedCourse: true,
+      showCheckedCourse: false,
       recommend: true,
       project: [
         {

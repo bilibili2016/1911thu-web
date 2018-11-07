@@ -8,13 +8,13 @@
           <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
-          <span class="payCut" slot="label">未购买
+          <span class="payCut" slot="label">待付款
             <i v-if="unfinishedOrderData && unfinishedOrderData.length>0">{{orderTotal}}</i>
           </span>
           <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderThird">
-          <span class="payOk" slot="label">已购买
+          <span class="payOk" slot="label">已付款
           </span>
           <v-listtab :order="orderTwo" :data="readyOrderData" :orderType="orderType" :pagemsg="pagemsg6" :noMsg="noMsgTen" @pageChange="getReadyOrderDataChange"></v-listtab>
 
