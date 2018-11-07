@@ -119,7 +119,7 @@ export default {
           if (response.data.curriculumListType == '5') {
             // 订单内课程+项目
             this.isVipCode = true
-            this.links = 'tab-first'
+            this.links = 'tab-eleventh'
           }
 
           if (response.data.invitation_code === '') {
@@ -129,18 +129,6 @@ export default {
               if (this.seconds < 1) {
                 this.seconds = 0
                 clearInterval(this.interval)
-                // if (JSON.stringify(response.data.vipGoodsDetail) != '{}') {
-                //   //购买单份学院倒计时跳转到学院介绍页
-                //   this.$router.push({
-                //     path: '/home/vip/vipPage',
-                //     query: {
-                //       id: response.data.vipGoodsDetail.vip_id,
-                //       cid: response.data.vipGoodsDetail.category_id
-                //     }
-                //   })
-                //   message(this, 'success', '欢迎进入学院！')
-                //   return false
-                // }
                 this.goLink(this.links)
               } else {
                 this.seconds--

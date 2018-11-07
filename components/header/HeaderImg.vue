@@ -22,6 +22,10 @@ export default {
           text: '最近学习'
         },
         {
+          link: 'tab-eleventh',
+          text: '我的学院'
+        },
+        {
           link: 'tab-second',
           text: '我的课程'
         },
@@ -56,10 +60,6 @@ export default {
         {
           link: 'tab-tenth',
           text: '考试认证'
-        },
-        {
-          link: 'tab-eleventh',
-          text: '我的学院'
         }
       ]
     }
