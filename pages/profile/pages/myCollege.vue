@@ -6,8 +6,8 @@
         <div class="top-con clearfix">
           <span>我的学院</span>
         </div>
-        <div class="collegeList" v-loading="collegeLoading" :class="{ minheight : collegeLoading}">
-          <v-list v-if="collegeListData.length > 0" :collegeListData="collegeListData"></v-list>
+        <div class="collegeList" v-if="collegeListData.length > 0" v-loading="collegeLoading" :class="{ minheight : collegeLoading}">
+          <v-list :collegeListData="collegeListData"></v-list>
         </div>
         <div class="pagination" v-if="collegePagemsg.total>11&&collegeListData.length > 0">
           <el-pagination background layout="prev, pager, next" :page-size="collegePagemsg.pagesize" :pager-count="5" :page-count="collegePagemsg.pagesize" :current-page="collegePagemsg.page" :total="collegePagemsg.total" @current-change="examineListChange"></el-pagination>
