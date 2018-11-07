@@ -5,15 +5,17 @@
       <img class="conImg" v-if="vipDetailData.id=='2'" :src="networkImg" alt="">
       <img class="conImg" v-if="vipDetailData.id=='3'" :src="onlineImg" alt="">
       <div class="btns clearfix" ref="btns" :class="{bottomHeight:bottom}">
-        <span class="text">入学学费{{vipInfo.present_price}}元</span>
-        <div class="btn-item">
-          <!-- 是会员 -->
-          <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
-          <!-- 不是会员 -->
-          <span v-if="!vipInfo.vipPrivate" class="button" @click="lookCourse">查看学院课程</span>
+        <div class="btn-con">
+          <span class="text">入学学费{{vipInfo.present_price}}元</span>
+          <div class="btn-item">
+            <!-- 是会员 -->
+            <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
+            <!-- 不是会员 -->
+            <span v-if="!vipInfo.vipPrivate" class="button" @click="lookCourse">查看学院课程</span>
 
-          <span class="button active" @click="buyVip">加入学院</span>
-          <span class="button btn-three" @click="identificate">申请证书</span>
+            <span class="button" @click="buyVip">加入学院</span>
+            <span class="button" @click="identificate">申请证书</span>
+          </div>
         </div>
       </div>
     </div>
