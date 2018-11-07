@@ -291,14 +291,12 @@ export default {
     // 课程-获取课程详情
     getCourseDetail() {
       this.loadTeacher = true
-      // this.kidForm.ids = persistStore.get('curriculumId')
       this.kidForm.ids = matchSplits('kid')
 
       coursedetail.getCourseDetail(this.kidForm).then(response => {
         if (response.status === 0) {
           this.loadMsg = false
           this.courseList = response.data.curriculumDetail
-          // persistStore.set('curriculumId', response.data.curriculumDetail.id)
           this.privileMsg = response.data.curriculumPrivilege
 
           this.content = response.data.curriculumPrivilege
@@ -310,7 +308,7 @@ export default {
           this.BreadCrumb.category =
             response.data.curriculumDetail.vipGoodsDetail.title
           this.BreadCrumb.categoryId =
-            response.data.curriculumDetail.vipGoodsDetail.id
+            response.data.curriculumDetail.vipGoodsDetail.category_id
           if (Trim(this.vipGoodsDetail.id) == '') {
             this.isShowBtn = false
           } else {
