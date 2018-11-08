@@ -9,8 +9,8 @@
         <!-- <h5>{{course.deputy_title}}</h5> -->
         <h5>{{course.teacher_name+'&nbsp;&nbsp;'+course.graduate}}</h5>
 
-        <p v-if="course.is_free === '1'" class="money">￥{{course.present_price}}</p>
-        <p v-if="course.is_free === '2'" class="money">
+        <p v-if="course.is_free == '1'" class="money">￥{{course.present_price}}</p>
+        <p v-if="course.is_free == '2'" class="money">
           <span>限免</span>
           <span style="float:right">剩余{{course.free_end_time}}</span>
         </p>

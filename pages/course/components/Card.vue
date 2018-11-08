@@ -50,7 +50,7 @@
                 </div>
                 <div class="common-button">
                   <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                  <el-button class="studentFree" type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
+                  <el-button :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
                 </div>
               </div>
 
@@ -87,11 +87,9 @@
                   <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
                   <div class="fr">
                     <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                    <el-button class="studentFree" v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
-                    <el-button class="studentFree" v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
-
+                    <el-button :class="{'studentFree':courseList.is_vip}" v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                    <el-button :class="{'studentFree':courseList.is_vip}" v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -135,18 +133,18 @@
                     <div class="fr">
                       <div v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100">
                         <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
-                        <el-button class="studentFree" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                        <el-button :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                       </div>
                       <div v-if="Number(courseList.percent)===100">
                         <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
-                        <el-button class="studentFree" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
+                        <el-button :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                       </div>
                     </div>
                   </div>
                   <!-- 学习判断  未学习-->
                   <div v-if="courseList.is_study==0">
                     <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                    <el-button class="studentFree" type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
+                    <el-button :class="{'studentFree':courseList.is_vip}" type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
                   </div>
                 </div>
 
