@@ -50,8 +50,7 @@
                 </div>
                 <div class="common-button">
                   <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                  <el-button type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
-
+                  <el-button class="studentFree" type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
                 </div>
               </div>
 
