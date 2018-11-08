@@ -513,15 +513,25 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
+    console.log(11111111)
+
     next(vm => {
+      console.log(222222222222)
+
       if (vm.player) {
+        console.log(3333333)
+
         vm.player.pause()
         clearInterval(that.interval)
       }
     })
   },
   beforeRouteLeave(to, from, next) {
+    console.log(444444)
+
     if (this.player) {
+      console.log(55555)
+
       this.player.pause()
       clearInterval(that.interval)
     }
