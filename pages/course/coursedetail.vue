@@ -36,8 +36,6 @@
     <div class="join" @click="joinCollege" v-show="isShowBtn">
       <img src="http://papn9j3ys.bkt.clouddn.com/joinStudy.gif" alt="">
     </div>
-    <!-- 会员购买弹窗 -->
-    <v-vipbuy :vipPopShow="vipPopShow" :vipId="vipGoodsDetail.id" @changeVipShow="changeVipShow"></v-vipbuy>
   </div>
 </template>
 
@@ -55,7 +53,6 @@ import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import TeacherIntro from '@/pages/course/coursedetail/teacherIntro.vue'
 import Collection from '@/components/common/Collection.vue'
 import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
-import VipBuy from '@/components/common/VipBuy.vue'
 
 export default {
   computed: {
@@ -70,8 +67,7 @@ export default {
     'v-breadcrumb': BreadCrumb,
     'v-teacherintro': TeacherIntro,
     'v-collection': Collection,
-    'v-coursecatelog': CourseCatalog,
-    'v-vipbuy': VipBuy
+    'v-coursecatelog': CourseCatalog
   },
   data() {
     return {
@@ -385,11 +381,6 @@ export default {
           '&cid=' +
           this.vipGoodsDetail.category_id
       )
-      // if (persistStore.get('token')) {
-      //   this.vipPopShow = true
-      // } else {
-      //   this.$bus.$emit('loginShow')
-      // }
     },
     //关闭购买弹窗
     changeVipShow(val) {
