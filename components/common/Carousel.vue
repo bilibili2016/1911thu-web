@@ -79,7 +79,6 @@ export default {
     },
     setWidth() {
       let Dwidth = document.documentElement.clientWidth
-
       if (document.getElementsByClassName('el-carousel').length != 0) {
         if (Dwidth > 1920) {
           document.getElementsByClassName('el-carousel')[0].style.width =
