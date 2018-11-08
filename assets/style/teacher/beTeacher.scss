@@ -81,6 +81,9 @@
             line-height: 40px;
             font-size: 16px;
             color: #222;
+            .el-checkbox__label {
+              color: #222;
+            }
           }
         }
         .word-item.teacherForm {

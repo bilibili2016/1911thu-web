@@ -99,8 +99,6 @@ export default {
     })
     // 出路由显示header和footer
     this.$bus.$on('headerFooterShow', () => {
-      console.log(123)
-
       this.hfshow = true
     })
     this.$bus.$on('selectItem', data => {
