@@ -338,6 +338,9 @@ export default {
     },
     // 点击 最新最热 筛选
     selectActiveTab(item) {
+      this.categoryForm.pages = 1
+      this.pagemsg.page = 1
+
       let categoryId = matchSplits('cid')
       let pids = matchSplits('pid')
 
