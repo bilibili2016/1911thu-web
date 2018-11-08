@@ -22,7 +22,7 @@
             <div class="courseOne" v-if="courseList.orderProjectList.length" v-for="(project,index) in courseList.orderProjectList" :key="'project'+index">
               <div class="courseImg">
                 <!-- 项目图标 -->
-                <img v-if="project.project_type==='2'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p5.png" alt="">
+                <img v-if="project.project_type==2" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p5.png" alt="">
                 <img v-else class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
 
                 <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
@@ -46,22 +46,22 @@
           <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
             <p>¥{{courseList.order_amount}}</p>
             <!-- 订单 -->
-            <p v-if="config.type==='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
+            <p v-if="config.type=='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
           </div>
           <!-- 订单 -->
-          <div v-show="config.type==='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
-            <p class="cancelOrder" v-if="courseList.pay_status === '1'" @click="cancelOrder(courseList.id)">取消订单</p>
-            <p class="payReady payed" v-if="courseList.pay_status === '2' || courseList.pay_status === '6'">已支付</p>
-            <p class="cancelOrder" v-if="courseList.pay_status === '5'" style="cursor: inherit">审核中</p>
-            <!-- <p class="cancelOrder" v-if="courseList.pay_status === '6'" style="cursor: inherit">退款中</p> -->
+          <div v-show="config.type=='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
+            <p class="cancelOrder" v-if="courseList.pay_status == '1'" @click="cancelOrder(courseList.id)">取消订单</p>
+            <p class="payReady payed" v-if="courseList.pay_status == '2' || courseList.pay_status == '6'">已支付</p>
+            <p class="cancelOrder" v-if="courseList.pay_status == '5'" style="cursor: inherit">审核中</p>
+            <!-- <p class="cancelOrder" v-if="courseList.pay_status == '6'" style="cursor: inherit">退款中</p> -->
 
             <!-- 已完成订单剩余时间 -->
-            <p class="payReady" v-if="courseList.pay_status === '6'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
-            <p class="payReady" v-if="(courseList.pay_status === '2'  || courseList.pay_status === '6')&&courseList.expire_day<1">已过期</p>
-            <p class="payClose" v-if="courseList.pay_status === '3' || courseList.pay_status === '4'">已关闭</p>
+            <p class="payReady" v-if="courseList.pay_status == '6'&&courseList.expire_day>=1">剩余{{courseList.expire_day}}天</p>
+            <p class="payReady" v-if="(courseList.pay_status == '2'  || courseList.pay_status == '6')&&courseList.expire_day<1">已过期</p>
+            <p class="payClose" v-if="courseList.pay_status == '3' || courseList.pay_status == '4'">已关闭</p>
             <p>
-              <span class="pay" v-if="courseList.pay_status === '1'" @click="goPay(courseList.id,courseList)">立即支付</span>
-              <span class="buy" v-if="courseList.pay_status === '3' || courseList.pay_status === '4'" @click="goShopping(courseList)">立即购买</span>
+              <span class="pay" v-if="courseList.pay_status == '1'" @click="goPay(courseList.id,courseList)">立即支付</span>
+              <span class="buy" v-if="courseList.pay_status == '3' || courseList.pay_status == '4'" @click="goShopping(courseList)">立即购买</span>
             </p>
           </div>
         </div>
