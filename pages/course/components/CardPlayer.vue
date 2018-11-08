@@ -511,6 +511,21 @@ export default {
         this.closePayed()
       }
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (vm.player) {
+        vm.player.pause()
+        clearInterval(that.interval)
+      }
+    })
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.player) {
+      this.player.pause()
+      clearInterval(that.interval)
+    }
+    next()
   }
 }
 </script>
