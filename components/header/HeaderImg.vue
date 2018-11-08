@@ -59,7 +59,7 @@ export default {
         },
         {
           link: 'tab-tenth',
-          text: '考试认证'
+          text: '申请证书'
         }
       ]
     }
