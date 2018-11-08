@@ -50,13 +50,10 @@
         color: #222;
         font-size: 16px;
       }
-      // 导师招募
+      // 预约导师
       .wordInfo {
         width: 1010px;
-        padding: 30px 40px;
-        background: url('http://papn9j3ys.bkt.clouddn.com/beTeacher_banner2.png')
-          no-repeat bottom;
-        background-size: contain;
+        padding: 30px 20px;
         .word-item {
           height: auto;
           margin-bottom: 10px;
@@ -77,7 +74,7 @@
           }
           .fr {
             float: left;
-            width: 795px;
+            width: 830px;
             line-height: 40px;
             font-size: 16px;
             color: #222;
@@ -86,7 +83,11 @@
         .word-item.teacherForm {
           margin-top: -10px;
           .fr {
-            line-height: 30px;
+            width: 750px;
+            background-color: #f7f9fb;
+            padding: 15px 25px;
+            font-size: 14px;
+            line-height: 28px;
             .courseForm {
               color: #6417a6;
             }
@@ -136,7 +137,8 @@
         }
         .fr {
           float: left;
-          width: 900px;
+          width: 860px;
+          position: relative;
         }
       }
       .fr.selectFr {
@@ -254,7 +256,7 @@
         }
         .input-inner {
           position: absolute;
-          right: 47px;
+          right: 10px;
           bottom: 10px;
           font-size: 14px;
           color: #aaaaaa;
@@ -289,10 +291,10 @@
         }
         .fr.selectFr {
           .pull-down {
-            left: 425px;
+            left: 433px;
           }
           .pull-down-text {
-            left: 144px;
+            left: 152px;
           }
         }
 
@@ -344,7 +346,7 @@
         .el-icon-question.styleAsk {
           // float: left;
           font-size: 20px;
-          margin-left: 40px;
+          margin-left: 20px;
           margin-bottom: 9px;
           cursor: pointer;
           color: #aaa;
@@ -690,5 +692,8 @@
   .el-checkbox__inner::after {
     left: 6px;
     top: 3px;
+  }
+  .el-checkbox__label {
+    font-size: 16px;
   }
 }

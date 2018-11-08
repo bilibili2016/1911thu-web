@@ -83,8 +83,9 @@
                         <div class="fl">个人简介：</div>
                         <div class="fr">
                             <el-input type="textarea" v-model="teacherForm.intro" :rows="3" maxlength="500" placeholder="请介绍您在课程相关领域所做过的工作以及获得的荣誉。" autosize></el-input>
+                            <span class="input-inner">不超过500字</span>
                         </div>
-                        <span class="input-inner">不超过500字</span>
+
                     </div>
                     <div class="con-item uploadFile clearfix">
                         <div class="fl">上传简历：</div>
@@ -159,8 +160,9 @@
                         <div class="fl"><i class="red">*</i>课程简介：</div>
                         <div class="fr">
                             <el-input v-model="teacherForm.courseDesc" type="textarea" :rows="3" maxlength="500" placeholder="请介绍课程内容，特色亮点以及课程学时数。" autosize></el-input>
+                            <span class="input-inner">不超过500字</span>
                         </div>
-                        <span class="input-inner">不超过500字</span>
+
                     </div>
                 </div>
             </div>
