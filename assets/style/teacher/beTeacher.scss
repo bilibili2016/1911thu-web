@@ -1,4 +1,5 @@
 .beTeacher {
+  padding-top: 40px;
   background-color: #f7f9fb;
   .teacer-banner {
     width: 100%;
@@ -11,7 +12,7 @@
     margin: 0 auto;
     overflow: hidden;
     background: url('http://papn9j3ys.bkt.clouddn.com/beTeacher_banner1.png')
-      no-repeat 0 20px;
+      no-repeat;
     padding: 20px;
     position: relative;
     h4 {

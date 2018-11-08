@@ -74,7 +74,7 @@
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { examine } from '~/lib/v1_sdk/index'
-import { message, matchSplits } from '@/lib/util/helper'
+import { message, matchSplits, setTitle } from '@/lib/util/helper'
 export default {
   data() {
     return {
@@ -303,6 +303,8 @@ export default {
     }
   },
   mounted() {
+    setTitle('申请证书-1911学堂')
+
     // if (persistStore.get('token')) {
     if (window.location.search) {
       this.examForm.examId = matchSplits('id')

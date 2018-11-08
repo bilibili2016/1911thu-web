@@ -78,7 +78,7 @@ export default {
       this.$router.push('/home/news/' + news.id)
     },
     setWidth() {
-      let Dwidth = document.documentElement.clientWidth
+      let Dwidth = document.body.clientWidth
       if (document.getElementsByClassName('el-carousel').length != 0) {
         if (Dwidth > 1920) {
           document.getElementsByClassName('el-carousel')[0].style.width =
@@ -95,8 +95,7 @@ export default {
     window.onresize = () => {
       return (() => {
         this.setWidth()
-
-        let Dwidth = document.documentElement.clientWidth
+        let Dwidth = document.body.clientWidth
         let imgArr = document.getElementsByClassName('el-carousel__item')
         if (Dwidth <= 1920) {
           let marginLeft = (1920 - Dwidth) / 2
