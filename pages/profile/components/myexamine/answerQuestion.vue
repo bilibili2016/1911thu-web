@@ -130,17 +130,29 @@ export default {
     },
     // 提交当前问题
     answer() {
-      if (this.questionCurrent.is_right != 0) {
-        return false
-      }
-      this.examForm.questionId = this.questionCurrent.id
-      examine.addAnswer(this.examForm).then(response => {
-        if (response.status == 0) {
-          this.setAssignment(response)
-        } else {
-          message(this, 'error', response.msg)
+      if (
+        persistStore.get('examToken') === persistStore.get('token') &&
+        persistStore.get('token') != ''
+      ) {
+        if (this.questionCurrent.is_right != 0) {
+          return false
         }
-      })
+        this.examForm.questionId = this.questionCurrent.id
+        examine.addAnswer(this.examForm).then(response => {
+          if (response.status == 0) {
+            this.setAssignment(response)
+          } else {
+            message(this, 'error', response.msg)
+          }
+        })
+      } else {
+        this.$alert('您已登录其他账号，无法继续考试！', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/')
+          }
+        })
+      }
     },
     // 上一题
     preAnswer() {
@@ -162,14 +174,26 @@ export default {
     },
     // 交卷确认信息
     commitExam() {
-      examine.submitTestPaper(this.examForm).then(response => {
-        if (response.status == 0) {
-          this.testPaper = response.data
-          this.showShadow = true
-        } else {
-          message(this, 'error', response.msg)
-        }
-      })
+      if (
+        persistStore.get('examToken') === persistStore.get('token') &&
+        persistStore.get('token') != ''
+      ) {
+        examine.submitTestPaper(this.examForm).then(response => {
+          if (response.status == 0) {
+            this.testPaper = response.data
+            this.showShadow = true
+          } else {
+            message(this, 'error', response.msg)
+          }
+        })
+      } else {
+        this.$alert('您已登录其他账号，无法继续考试！', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/')
+          }
+        })
+      }
     },
     // 提交考试
     examination() {
@@ -263,7 +287,10 @@ export default {
     },
     // 登录账号被替换
     changeToken() {
-      if (persistStore.get('examToken') === persistStore.get('token')) {
+      if (
+        persistStore.get('examToken') === persistStore.get('token') &&
+        persistStore.get('token') != ''
+      ) {
         this.questionsDetail()
       } else {
         this.$alert('您已登录其他账号，无法继续考试！', '温馨提示', {
@@ -276,23 +303,23 @@ export default {
     }
   },
   mounted() {
-    if (persistStore.get('token')) {
-      if (window.location.search) {
-        this.examForm.examId = matchSplits('id')
-        // 验证token是否有效
-        persistStore.get('examToken')
-          ? this.changeToken()
-          : persistStore.set('examToken', persistStore.get('token')),
-          this.questionsDetail()
-        if (this.interval) {
-          clearInterval(this.interval)
-        }
-      } else {
-        this.$router.push('/profile')
+    // if (persistStore.get('token')) {
+    if (window.location.search) {
+      this.examForm.examId = matchSplits('id')
+      // 验证token是否有效
+      persistStore.get('examToken')
+        ? this.changeToken()
+        : persistStore.set('examToken', persistStore.get('token')),
+        this.questionsDetail()
+      if (this.interval) {
+        clearInterval(this.interval)
       }
     } else {
-      this.$router.push('/')
+      this.$router.push('/profile')
     }
+    // } else {
+    //   this.$router.push('/')
+    // }
   },
   // 进入路由隐藏header和footer
   beforeRouteEnter(to, from, next) {

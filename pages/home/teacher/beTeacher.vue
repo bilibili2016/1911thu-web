@@ -13,7 +13,7 @@
         </div>
         <div class="con">
             <div class="personal">
-                <div class="title">个人信息类</div>
+                <div class="title">个人信息</div>
                 <div class="content">
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>姓名：</div>
@@ -104,7 +104,7 @@
 
             </div>
             <div class="course">
-                <div class="title">您希望在1911学堂开课的内容</div>
+                <div class="title">课程信息</div>
                 <div class="content">
                     <div class="con-item name clearfix">
                         <div class="fl"><i class="red">*</i>课程名称：</div>
