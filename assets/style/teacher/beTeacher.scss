@@ -695,3 +695,19 @@
     top: 3px;
   }
 }
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  font-family: 'Microsoft Yahei';
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  font-family: 'Microsoft Yahei';
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  font-family: 'Microsoft Yahei';
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  font-family: 'Microsoft Yahei';
+}
