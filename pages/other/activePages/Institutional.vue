@@ -150,7 +150,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import { auth, institutional } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { checkPhone, checkCode } from '~/lib/util/validatefn'
+import { checkRegisterPhone, checkCode } from '~/lib/util/validatefn'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { open, setTitle } from '@/lib/util/helper'
 import $ from 'jquery'
@@ -233,7 +233,7 @@ export default {
             trigger: 'blur'
           },
           {
-            validator: checkPhone,
+            validator: checkRegisterPhone,
             trigger: 'blur'
           }
         ],
