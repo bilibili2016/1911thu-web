@@ -190,11 +190,13 @@ export default {
     },
     // 展示修改发票信息弹框
     showIoc() {
+      let conLen = document.getElementsByClassName('el-tabs__content').length
       if (this.checkedArr.length > 0) {
         document.getElementsByClassName('bigTab')[0].style.minHeight =
           document.getElementById('pane-tab-eighth').clientHeight + 'px'
-        document.getElementsByClassName('el-tabs__content')[7].style.position =
-          '-ms-page'
+        document.getElementsByClassName('el-tabs__content')[
+          conLen - 1
+        ].style.position = '-ms-page'
         this.showInvoice = true
         // this.getTicket()
       } else {
@@ -226,9 +228,12 @@ export default {
     },
     // 关闭表单
     close() {
+      let conLen = document.getElementsByClassName('el-tabs__content').length
+
       document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      document.getElementsByClassName('el-tabs__content')[7].style.position =
-        'relative'
+      document.getElementsByClassName('el-tabs__content')[
+        conLen - 1
+      ].style.position = 'relative'
       this.showInfo = false
       this.showInvoice = false
     },

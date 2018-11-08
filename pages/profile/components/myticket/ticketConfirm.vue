@@ -82,20 +82,24 @@ export default {
     },
     // 关闭当前提交框
     close() {
+      let conLen = document.getElementsByClassName('el-tabs__content').length
       this.confirmInvoice = false
       document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      document.getElementsByClassName('el-tabs__content')[7].style.position =
-        'relative'
+      document.getElementsByClassName('el-tabs__content')[
+        conLen - 1
+      ].style.position = 'relative'
     }
   },
   mounted() {
     this.$bus.$on('showConfirm', data => {
       this.ticketForm = data
+      let conLen = document.getElementsByClassName('el-tabs__content').length
       // document.getElementsByClassName('bigTab')[0].style.height= document.body.clientHeight+'px'
       document.getElementsByClassName('bigTab')[0].style.minHeight =
         document.getElementById('pane-tab-eighth').clientHeight + 'px'
-      document.getElementsByClassName('el-tabs__content')[7].style.position =
-        '-ms-page'
+      document.getElementsByClassName('el-tabs__content')[
+        conLen - 1
+      ].style.position = '-ms-page'
       this.confirmInvoice = true
     })
   }

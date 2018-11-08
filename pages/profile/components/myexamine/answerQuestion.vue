@@ -303,7 +303,7 @@ export default {
     }
   },
   mounted() {
-    setTitle('申请证书-1911学堂')
+    setTitle('考试中心-1911学堂')
 
     // if (persistStore.get('token')) {
     if (window.location.search) {

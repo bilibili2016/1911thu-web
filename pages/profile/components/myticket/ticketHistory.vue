@@ -96,19 +96,25 @@ export default {
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
         }
+        let conLen = document.getElementsByClassName('el-tabs__content').length
+
         document.getElementsByClassName('bigTab')[0].style.minHeight =
           document.getElementById('pane-tab-eighth').clientHeight + 'px'
-        document.getElementsByClassName('el-tabs__content')[7].style.position =
-          '-ms-page'
+        document.getElementsByClassName('el-tabs__content')[
+          conLen - 1
+        ].style.position = '-ms-page'
         this.isTicketPopup = true
         this.TicketPopupData = response.data.invoiceOrderList
       })
     },
     //关闭开票详情弹框
     closeTicketPopup() {
+      let conLen = document.getElementsByClassName('el-tabs__content').length
+
       document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      document.getElementsByClassName('el-tabs__content')[7].style.position =
-        'relative'
+      document.getElementsByClassName('el-tabs__content')[
+        conLen - 1
+      ].style.position = 'relative'
       this.isTicketPopup = false
     },
     //发票详情弹框
@@ -120,19 +126,25 @@ export default {
           this.$bus.$emit('reLoginAlertPop', this.responseData)
           return false
         }
+        let conLen = document.getElementsByClassName('el-tabs__content').length
+
         document.getElementsByClassName('bigTab')[0].style.minHeight =
           document.getElementById('pane-tab-eighth').clientHeight + 'px'
-        document.getElementsByClassName('el-tabs__content')[7].style.position =
-          '-ms-page'
+        document.getElementsByClassName('el-tabs__content')[
+          conLen - 1
+        ].style.position = '-ms-page'
         this.isStatusPopup = true
         this.StatusPopupData = response.data
       })
     },
     //关闭
     closeStatusPopup() {
+      let conLen = document.getElementsByClassName('el-tabs__content').length
+
       document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      document.getElementsByClassName('el-tabs__content')[7].style.position =
-        'relative'
+      document.getElementsByClassName('el-tabs__content')[
+        conLen - 1
+      ].style.position = 'relative'
       this.isStatusPopup = false
     },
     goShopping(id) {
