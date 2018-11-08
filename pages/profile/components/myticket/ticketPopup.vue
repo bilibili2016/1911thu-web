@@ -26,7 +26,7 @@
         <div class="formLi clearfix" v-show="ticketForm.saveioc">
           <p class="fl">纳税人识别号</p>
           <p class="fr">
-            <input type="text" v-model="ticketForm.number" @change="retfNumber" placeholder="输入纳税人识别号">
+            <input type="text" v-model="ticketForm.number" @change="retfNumber" placeholder="请输入纳税人识别号">
           </p>
           <p class="word parent">
             <i class="el-icon-warning"> </i>政府、事业单位选填，企业必填
@@ -243,13 +243,13 @@
           <div class="formLi clearfix">
             <p class="fl">收票人姓名</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.name" placeholder="输入收票人姓名">
+              <input type="text" v-model="zzTicketForm.name" placeholder="请输入收票人姓名">
             </p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">收票人手机</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.tel" placeholder="输入收票人手机号">
+              <input type="text" v-model="zzTicketForm.tel" placeholder="请输入收票人手机号">
             </p>
           </div>
           <div class="formLi clearfix">

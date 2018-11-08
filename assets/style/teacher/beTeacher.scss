@@ -50,52 +50,6 @@
         color: #222;
         font-size: 16px;
       }
-      // 导师招募
-      .wordInfo {
-        width: 1010px;
-        padding: 30px 40px;
-        background: url('http://papn9j3ys.bkt.clouddn.com/beTeacher_banner2.png')
-          no-repeat bottom;
-        background-size: contain;
-        .word-item {
-          height: auto;
-          margin-bottom: 10px;
-          .fl {
-            float: left;
-            width: 115px;
-            height: 40px;
-            text-align: right;
-            line-height: 40px;
-            font-size: 16px;
-            color: #222;
-            margin-right: 20px;
-            .red {
-              color: #ff5f5f;
-              vertical-align: sub;
-              display: inline-block;
-            }
-          }
-          .fr {
-            float: left;
-            width: 795px;
-            line-height: 40px;
-            font-size: 16px;
-            color: #222;
-            .el-checkbox__label {
-              color: #222;
-            }
-          }
-        }
-        .word-item.teacherForm {
-          margin-top: -10px;
-          .fr {
-            line-height: 30px;
-            .courseForm {
-              color: #6417a6;
-            }
-          }
-        }
-      }
     }
   }
   .con {
@@ -139,7 +93,8 @@
         }
         .fr {
           float: left;
-          width: 900px;
+          width: 860px;
+          position: relative;
         }
       }
       .fr.selectFr {
@@ -257,7 +212,7 @@
         }
         .input-inner {
           position: absolute;
-          right: 47px;
+          right: 10px;
           bottom: 10px;
           font-size: 14px;
           color: #aaaaaa;
@@ -292,10 +247,10 @@
         }
         .fr.selectFr {
           .pull-down {
-            left: 425px;
+            left: 433px;
           }
           .pull-down-text {
-            left: 144px;
+            left: 152px;
           }
         }
 
@@ -347,7 +302,7 @@
         .el-icon-question.styleAsk {
           // float: left;
           font-size: 20px;
-          margin-left: 40px;
+          margin-left: 20px;
           margin-bottom: 9px;
           cursor: pointer;
           color: #aaa;
@@ -693,6 +648,9 @@
   .el-checkbox__inner::after {
     left: 6px;
     top: 3px;
+  }
+  .el-checkbox__label {
+    font-size: 16px;
   }
 }
 input::-webkit-input-placeholder,

@@ -1,6 +1,6 @@
 <template>
     <div class="beTeacher orderTeacher" @click="documentHandler">
-        <div class="topImg">
+        <div class="order-topImg">
             <h4>预约导师</h4>
             <div class="wordBox">
                 <div class="">
