@@ -3,14 +3,16 @@
     <v-search @Search="handleSearchs" :word="searchForm.searchword"></v-search>
     <div class="center">
       <div class="cnums">
-        共找到 {{courseNumber}} 门“ {{searchForm.searchword}} ”相关课程
+        共找到 {{pagemsg.total}} 门“ {{searchForm.searchword}} ”相关课程
       </div>
-      <div v-if="result" v-loading="loadSearch">
+      <div class="searchResult" v-if="result" v-loading="loadSearch">
         <v-card :data="searchData" :config="config" element-loading-text="拼命加载中" element-loading-background="#fff"></v-card>
-        <v-page :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pageSize" :pagemsg="pagemsg"></v-page>
+        <div class="pagination" v-if="pagemsg.total!=0 && pagemsg.total>pagemsg.pageSize">
+          <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pageSize" :page-count="pagemsg.pageSize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="pageChange"></el-pagination>
+        </div>
         <v-backtotop></v-backtotop>
       </div>
-      <div class="searchFalse" v-else v-loading="loadSearch">
+      <div class="searchFalse" v-if="!result" v-loading="loadSearch">
         <div class="noMsg">
           <img :src="noMsg.img" alt="">
           <p>未找到相关内容</p>
@@ -61,7 +63,7 @@ export default {
       pagemsg: {
         page: 1,
         pageSize: 8,
-        total: null
+        total: 0
       },
       searchForm: {
         pages: 1,
@@ -74,8 +76,7 @@ export default {
         limits: 4
       },
       loadinged: true,
-      result: true,
-      courseNumber: 0
+      result: true
     }
   },
   methods: {
@@ -88,20 +89,21 @@ export default {
       this.searchForm.searchword = Trim(this.searchForm.searchword)
       search.searchCurriculumList(this.searchForm).then(response => {
         this.searchData = response.data.curriculumList
-        if (response.data.curriculumList.length === 0) {
+        if (response.data.pageCount == 0) {
           this.result = false
-          this.courseNumber = 0
+          this.pagemsg.total = 0
           this.getLikeList()
         } else {
           this.result = true
-          this.pagemsg.total = Math.ceil(
-            response.data.curriculumList.length / 20
-          )
-          this.courseNumber = response.data.curriculumList.length
+          this.pagemsg.total = response.data.pageCount
         }
 
         this.loadSearch = false
       })
+    },
+    pageChange(val) {
+      this.searchForm.pages = val
+      this.searchCurriculumList()
     },
     // 获取猜你喜欢列表
     getLikeList() {
