@@ -29,12 +29,12 @@
                 <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="index">
                   <div class="courseImg">
                     <!-- 项目图标 -->
-                    <img v-if="project.type==='2'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p5.png" alt="">
+                    <img v-if="project.project_type==2" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p5.png" alt="">
                     <img v-else class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
-                    <img @click="goProjrctInfo(project,project.type)" class="fl" :src="project.picture" alt="">
+                    <img @click="goProjrctInfo(project,project.project_type)" class="fl" :src="project.picture" alt="">
                   </div>
                   <div class="fl">
-                    <h4 @click="goProjrctInfo(project,project.type)" :title="project.title">{{project.title}}</h4>
+                    <h4 @click="goProjrctInfo(project,project.project_type)" :title="project.title">{{project.title}}</h4>
                     <h6>{{project.curriculum_time}}学时</h6>
                   </div>
                 </div>
