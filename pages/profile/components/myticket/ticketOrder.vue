@@ -193,7 +193,7 @@ export default {
       if (this.checkedArr.length > 0) {
         document.getElementsByClassName('bigTab')[0].style.minHeight =
           document.getElementById('pane-tab-eighth').clientHeight + 'px'
-        document.getElementsByClassName('el-tabs__content')[8].style.position =
+        document.getElementsByClassName('el-tabs__content')[7].style.position =
           '-ms-page'
         this.showInvoice = true
         // this.getTicket()
@@ -227,7 +227,7 @@ export default {
     // 关闭表单
     close() {
       document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      document.getElementsByClassName('el-tabs__content')[8].style.position =
+      document.getElementsByClassName('el-tabs__content')[7].style.position =
         'relative'
       this.showInfo = false
       this.showInvoice = false

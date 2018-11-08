@@ -98,7 +98,7 @@ export default {
         }
         document.getElementsByClassName('bigTab')[0].style.minHeight =
           document.getElementById('pane-tab-eighth').clientHeight + 'px'
-        document.getElementsByClassName('el-tabs__content')[8].style.position =
+        document.getElementsByClassName('el-tabs__content')[7].style.position =
           '-ms-page'
         this.isTicketPopup = true
         this.TicketPopupData = response.data.invoiceOrderList
@@ -107,7 +107,7 @@ export default {
     //关闭开票详情弹框
     closeTicketPopup() {
       document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      document.getElementsByClassName('el-tabs__content')[8].style.position =
+      document.getElementsByClassName('el-tabs__content')[7].style.position =
         'relative'
       this.isTicketPopup = false
     },
@@ -122,7 +122,7 @@ export default {
         }
         document.getElementsByClassName('bigTab')[0].style.minHeight =
           document.getElementById('pane-tab-eighth').clientHeight + 'px'
-        document.getElementsByClassName('el-tabs__content')[8].style.position =
+        document.getElementsByClassName('el-tabs__content')[7].style.position =
           '-ms-page'
         this.isStatusPopup = true
         this.StatusPopupData = response.data
@@ -131,7 +131,7 @@ export default {
     //关闭
     closeStatusPopup() {
       document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      document.getElementsByClassName('el-tabs__content')[8].style.position =
+      document.getElementsByClassName('el-tabs__content')[7].style.position =
         'relative'
       this.isStatusPopup = false
     },

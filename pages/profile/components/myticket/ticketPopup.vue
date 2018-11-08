@@ -966,7 +966,7 @@ export default {
 
         this.$emit('handleClose')
         document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-        document.getElementsByClassName('el-tabs__content')[8].style.position =
+        document.getElementsByClassName('el-tabs__content')[7].style.position =
           'relative'
         this.$bus.$emit('showConfirm', this.ticketForm)
       } else {
@@ -992,7 +992,7 @@ export default {
         this.nextStep('stepOne')
         this.$emit('handleClose')
         document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-        document.getElementsByClassName('el-tabs__content')[8].style.position =
+        document.getElementsByClassName('el-tabs__content')[7].style.position =
           'relative'
         this.$bus.$emit('showConfirm', this.zzTicketForm)
       }

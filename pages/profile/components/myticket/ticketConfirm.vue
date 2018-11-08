@@ -84,7 +84,7 @@ export default {
     close() {
       this.confirmInvoice = false
       document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      document.getElementsByClassName('el-tabs__content')[8].style.position =
+      document.getElementsByClassName('el-tabs__content')[7].style.position =
         'relative'
     }
   },
@@ -94,7 +94,7 @@ export default {
       // document.getElementsByClassName('bigTab')[0].style.height= document.body.clientHeight+'px'
       document.getElementsByClassName('bigTab')[0].style.minHeight =
         document.getElementById('pane-tab-eighth').clientHeight + 'px'
-      document.getElementsByClassName('el-tabs__content')[8].style.position =
+      document.getElementsByClassName('el-tabs__content')[7].style.position =
         '-ms-page'
       this.confirmInvoice = true
     })
