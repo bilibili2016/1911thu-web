@@ -13,7 +13,7 @@
             <p class="small-title">{{teacher.graduate}}</p>
             <div class="teacherBtn">
               <span v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
-              <span v-else>筹备中</span>
+              <span class="preparations" v-else>筹备中</span>
               <span @click.stop="reservation(teacher)">预约导师</span>
             </div>
           </div>
@@ -50,7 +50,9 @@ export default {
       })
     },
     handleLinkTeacherInfo(item) {
-      this.$router.push('/home/teacher/' + item.id)
+      if (item.is_teachering) {
+        this.$router.push('/home/teacher/' + item.id)
+      }
     }
   }
 }
