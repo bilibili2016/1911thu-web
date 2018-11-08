@@ -117,18 +117,18 @@
               <el-form-item label="" prop="person">
                 <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
               </el-form-item>
-              <el-form-item label="" prop="">
+              <el-form-item label="" prop="date">
                 <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="请选择回访日期">
                 </el-date-picker>
               </el-form-item>
-              <el-form-item label="" prop="">
+              <el-form-item label="" prop="time">
                 <el-radio v-model="company.time" label="上午（09:00-11:30）">上午（09:00-11:30）</el-radio>
                 <el-radio v-model="company.time" label="下午（13:00-17:30）">下午（13:00-17:30）</el-radio>
               </el-form-item>
               <el-form-item label="" prop="phones">
                 <el-input v-model="company.phones" placeholder="请输入联系人手机号"></el-input>
               </el-form-item>
-              <el-form-item label="" prop="code">
+              <el-form-item label="" prop="codes">
                 <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
                 <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
                 <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
@@ -240,7 +240,9 @@ export default {
         codes: [
           { required: true, message: '请输入验证码', trigger: 'blur' },
           { validator: checkCode, trigger: 'blur' }
-        ]
+        ],
+        date: [{ required: true, message: '请选择回访日期', trigger: 'blur' }],
+        time: [{ required: true, message: '请选择回访时间段', trigger: 'blur' }]
       },
       serviceList: [
         {
@@ -331,14 +333,14 @@ export default {
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          if (this.company.date == '' || this.company.time == '') {
-            this.$message({
-              showClose: true,
-              type: 'error',
-              message: '请选择回访日期'
-            })
-            return false
-          }
+          // if (this.company.date == '' || this.company.time == '') {
+          //   this.$message({
+          //     showClose: true,
+          //     type: 'error',
+          //     message: '请选择回访日期'
+          //   })
+          //   return false
+          // }
           institutional.addCompany(this.company).then(response => {
             if (response.status === 0) {
               this.$message({
