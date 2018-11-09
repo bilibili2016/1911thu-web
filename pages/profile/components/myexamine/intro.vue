@@ -7,7 +7,7 @@
       </span>
     </div>
     <div class="examine-bottom">
-      <div class="one">1911学堂学员在完成了学院学习后，即可参与在线认证考试，考试通过后根据学员成绩将发放相应证书。本学堂可发放【1911学堂结业证书】或【清华大学在线学习认证证书】两种，每种证书均配有官方唯一认证编码，并可在官方网站进行查询。</div>
+      <div class="one">1911学堂学员在完成了学院学习后，即可参与在线认证考试，考试通过后根据学员成绩将发放相应证书。本学堂可发放【清华大学在线学习认证证书】或【1911学堂结业证书】两种，每种证书均配有官方唯一认证编码，并可在官方网站进行查询。</div>
       <div class="examineImg">
         <img src="http://papn9j3ys.bkt.clouddn.com/certification.png" alt="">
       </div>
