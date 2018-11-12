@@ -5,7 +5,7 @@
       <span class="goBack" @click="handleBack">
         <i class=" el-icon-arrow-left icon"></i>考试记录
       </span>
-      <span v-if="restExamineTime!=0" class="goExamine" @click="gotoExamine">去考试（剩余{{restExamineTime}}次）></span>
+      <span v-if="restExamineTime!=0 && isApplyExam==0" class="goExamine" @click="gotoExamine">去考试（剩余{{restExamineTime}}次）></span>
     </div>
     <div class="bottom">
       <div class="tables">
@@ -41,6 +41,7 @@ export default {
     return {
       recordData: [],
       restExamineTime: '',
+      isApplyExam: '',
       logForm: {
         vipID: '',
         page: 1,
@@ -68,6 +69,7 @@ export default {
         if (res.status == 0) {
           this.recordData = res.data.examRecordLogList
           this.restExamineTime = res.data.surplusFrequency
+          this.isApplyExam = res.data.isApplyExam
         } else if (res.status === 100008) {
           this.responseData.res = res
           this.$router.push('/')
