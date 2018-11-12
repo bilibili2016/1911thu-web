@@ -45,7 +45,8 @@
     </div>
     <div class="shadow" v-if="showShadow">
       <div class="popup" v-if="showShadow">
-        <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i>
+        <i class="el-icon-close" @click="closeChadow"></i>
+        <!-- <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i> -->
         <p class="grade smile" v-if="testPaper.doYouPass">
           <img src="~assets/images/smile.png" class="fl" alt="">
           <span>{{testPaper.answerScoreSum}}分</span>

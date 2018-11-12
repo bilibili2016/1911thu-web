@@ -47,6 +47,12 @@
         </div>
       </div>
     </transition>
+    <!-- 客服 -->
+    <el-dialog class="chatDialog" title="1911学堂秘书" :visible.sync="dialogVisible" width="960px" top="20px" border-radius="5px">
+      <div>
+        <iframe :src="completeTask" height="620" width="100%"></iframe>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -75,6 +81,7 @@ export default {
   ],
   data() {
     return {
+      dialogVisible: false,
       visibilityHeight: 400,
       backPosition: 0,
       transitionName: 'fade',
@@ -85,7 +92,9 @@ export default {
       ceilSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop11.png',
       wxSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
       qqSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
-      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png'
+      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png',
+      completeTask:
+        'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003072'
     }
   },
   mounted() {
@@ -174,6 +183,10 @@ export default {
     },
     handleopen() {
       window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')
+      // window.open(
+      //   'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003068#/'
+      // )
+      // this.dialogVisible = true
     }
   }
 }
