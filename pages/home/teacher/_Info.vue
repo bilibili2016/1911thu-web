@@ -7,7 +7,7 @@
         <div class="desc">
           <h4>{{teacherData.teacher_name}}</h4>
           <h5>{{teacherData.graduate}}</h5>
-          <h6>{{teacherData.wish_word}}</h6>
+          <h6>{{teacherData.content}}</h6>
         </div>
       </div>
 
