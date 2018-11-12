@@ -1,4 +1,5 @@
 <template>
+    <!-- 导师招募 -->
     <div class="beTeacher" @click="documentHandler">
         <div class="topImg">
             <h4>导师招募</h4>
@@ -60,7 +61,7 @@
                         </div>
                     </div>
                     <div class="con-item style clearfix">
-                        <div class="fl"><i class="red">*</i>能提供的课程服务：</div>
+                        <div class="fl">能提供的课程服务：</div>
                         <div class="fr clearfix">
                             <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
                                 <el-checkbox v-for="(service,index) in offerService" :label="service.id" :key="'service'+index">{{service.name}}</el-checkbox>
@@ -72,7 +73,6 @@
                                             <p>课程顾问：亲临项目所在地，实地授课；</p>
                                             <p>咨询：项目相关的课程研发、培训流程及活动设计等问题的咨询服务；</p>
                                             <p>课题研究：基于客户提出的科研主题，协助客户完成相关内容的研究。</p>
-
                                         </div>
                                     </div>
                                 </i>
@@ -108,7 +108,7 @@
                 <div class="title">课程信息</div>
                 <div class="content">
                     <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>课程名称：</div>
+                        <div class="fl">课程名称：</div>
                         <div class="fr">
                             <el-input v-model="teacherForm.courseName" placeholder="请填写您希望开课的名称"></el-input>
                         </div>
@@ -148,7 +148,7 @@
                         </div>
                     </div>
                     <div class="con-item courseAudiences clearfix">
-                        <div class="fl"><i class="red">*</i>课程受众：</div>
+                        <div class="fl">课程受众：</div>
                         <div class="fr">
                             <el-checkbox-group v-model="teacherForm.courseAudiences" @change="handleserviceChange">
                                 <el-checkbox v-for="(audiences,index) in recipient" :label="audiences.id" :key="'audiences'+index">{{audiences.name}}</el-checkbox>
@@ -157,7 +157,7 @@
                     </div>
 
                     <div class="con-item desc clearfix">
-                        <div class="fl"><i class="red">*</i>课程简介：</div>
+                        <div class="fl">课程简介：</div>
                         <div class="fr">
                             <el-input v-model="teacherForm.courseDesc" type="textarea" :rows="3" maxlength="500" placeholder="请介绍课程内容，特色亮点以及课程学时数。" autosize></el-input>
                             <span class="input-inner">不超过500字</span>
@@ -382,10 +382,10 @@ export default {
         if (!emailReg.test(Trim(this.teacherForm.email)))
           throw '请填写正确的邮箱'
         if (Trim(this.teacherForm.direction) === '') throw '请填写研究方向'
-        if (this.teacherForm.service.length == 0) throw '请选择能提供的课程服务'
-        if (Trim(this.teacherForm.courseName) === '') throw '请填写课程名称'
-        if (this.teacherForm.courseAudiences.length == 0) throw '请选择课程受众'
-        if (Trim(this.teacherForm.courseDesc) === '') throw '请填写课程简介'
+        // if (this.teacherForm.service.length == 0) throw '请选择能提供的课程服务'
+        // if (Trim(this.teacherForm.courseName) === '') throw '请填写课程名称'
+        // if (this.teacherForm.courseAudiences.length == 0) throw '请选择课程受众'
+        // if (Trim(this.teacherForm.courseDesc) === '') throw '请填写课程简介'
       } catch (err) {
         message(this, 'error', err)
         this.isClick = false
@@ -397,7 +397,6 @@ export default {
   mounted() {
     setTitle('导师招募-1911学堂')
     this.getRecruitSelect()
-    // console.log(this.uploadUrl)
   }
 }
 </script>
