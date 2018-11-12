@@ -182,11 +182,11 @@ export default {
       return (-c / 2) * (--t * (t - 2) - 1) + b
     },
     handleopen() {
-      window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')
+      // window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')
       // window.open(
       //   'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003068#/'
       // )
-      // this.dialogVisible = true
+      this.dialogVisible = true
     }
   }
 }
