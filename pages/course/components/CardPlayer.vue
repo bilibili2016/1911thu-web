@@ -13,7 +13,7 @@
 import { coursedetail, players } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import { message, matchSplits } from '@/lib/util/helper'
+import { message, matchSplits, getNet } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
 import PlayerError from '@/components/common/PlayerError.vue'
@@ -148,14 +148,8 @@ export default {
     getdefaultPlayerUrl() {
       // 判断socket 连接
       let that = this
-      let origin = window.location.origin
-      if (origin === this.ceshiUrl || origin == this.localUrl) {
-        this.link = 'http://ceshi.1911edu.com:2120'
-      } else {
-        this.link = 'http://api.1911edu.com:2120'
-      }
-      // 新建socket
-      this.socket = new io(this.link)
+      // 新建socket 传地址
+      this.socket = new io(getNet())
       // 连接socket
       this.socket.on('connect', () => {
         that.socket.emit('login', persistStore.get('token'))
@@ -272,6 +266,7 @@ export default {
           this.seconds = 1
           this.courseList.success = false
           this.courseList.inputID = ''
+          // 停止socket
           that.socket.emit('watchRecordingTime_disconnect')
           clearInterval(this.interval)
         } else {
