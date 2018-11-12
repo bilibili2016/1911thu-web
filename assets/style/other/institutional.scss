@@ -680,4 +680,23 @@
       }
     }
   }
+  .timeLabel {
+    .el-radio {
+      .el-radio__inner {
+        width: 18px;
+        height: 18px;
+      }
+      .el-radio__input.is-checked .el-radio__inner {
+        background-color: #ffdb5f;
+        border-color: #ffdb5f;
+      }
+      .el-radio__input.is-checked + .el-radio__label {
+        color: #fff !important;
+      }
+      .el-radio__inner::after {
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
 }
