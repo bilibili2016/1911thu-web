@@ -1,4 +1,5 @@
 <template>
+    <!-- 预约导师 -->
     <div class="beTeacher orderTeacher" @click="documentHandler">
         <div class="order-topImg">
             <h4>预约导师</h4>
@@ -6,25 +7,21 @@
                 <div class="">
                     <div class="wordInfo">
                         <div class="word-item clearfix">
-                            <div class="fl"><i class="red">*</i>导师名称：</div>
+                            <div class="fl"><i class="red">*</i>导师姓名：</div>
                             <div class="fr">{{teacherData.teacher_name}}</div>
                         </div>
                         <div class="word-item clearfix">
-                            <div class="fl">导师合作形式：</div>
-                            <div class="fr">
-                                <el-checkbox-group v-model="teacherForm.serviceName" @change="handleserviceChange">
-                                    <el-checkbox v-for="service in serviceList" :label="service.id" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
-                                </el-checkbox-group>
-                            </div>
+                            <div class="fl">导师职称：</div>
+                            <div class="fr">{{teacherData.graduate}}</div>
                         </div>
                         <div class="word-item teacherForm clearfix">
                             <div class="fl"></div>
                             <div class="fr">
-                                <p><span class="courseForm">线上授课：</span><span>与1911学堂合作录制在线课程，学员登录1911学堂平台进行学习；</span></p>
-                                <p><span class="courseForm">线下授课：</span><span>授课地点为北京，主要形式包括大班课，小班课以及讲座；</span></p>
-                                <p><span class="courseForm">课程顾问：</span><span>亲临项目所在地，实地授课；</span></p>
-                                <p><span class="courseForm">咨询：</span><span>项目相关的课程研发、培训流程及活动设计等问题的咨询服务；</span></p>
-                                <p><span class="courseForm">课题研究：</span><span>基于客户提出的科研主题，协助客户完成相关内容的研究。</span></p>
+                                <p>您可通过以下方式，联系我们预约导师</p>
+                                <p><span class="courseForm">邮箱：</span><span>#客服邮箱#</span></p>
+                                <p><span class="courseForm">电话：</span><span>#商务电话#</span></p>
+                                <p>#商务二维码#</p>
+                                <p><span class="courseForm">添加微信预约导师：</span><span>xuetang</span></p>
                             </div>
                         </div>
                     </div>
@@ -70,7 +67,7 @@
                             </div>
                         </div>
                         <div class="con-item name clearfix">
-                            <div class="fl"><i class="red">*</i>预约时间范围：</div>
+                            <div class="fl">预约时间范围：</div>
                             <div class="fr">
                                 <el-date-picker v-model="teacherForm.appointmentStartTime" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期">
                                 </el-date-picker>
@@ -85,8 +82,27 @@
                                 <el-input v-model="teacherForm.content" placeholder="请填写您希望导师授课的内容"></el-input>
                             </div>
                         </div>
+                        <div class="con-item style clearfix">
+                            <div class="fl">导师合作形式：</div>
+                            <div class="fr">
+                                <el-checkbox-group v-model="teacherForm.serviceName" @change="handleserviceChange">
+                                    <el-checkbox v-for="service in serviceList" :label="service.id" :key="service.id" @click="handleserviceClick(service)">{{service.name}}</el-checkbox>
+                                    <i class="el-icon-question styleAsk">
+                                        <div class="descript-text" style="width:530px;">
+                                            <div>
+                                                <p>线上授课：与1911学堂合作录制在线课程，学员登录1911学堂平台进行学习；</p>
+                                                <p>线下授课：授课地点为北京，主要形式包括大班课，小班课以及讲座；</p>
+                                                <p>课程顾问：亲临项目所在地，实地授课；</p>
+                                                <p>咨询：项目相关的课程研发、培训流程及活动设计等问题的咨询服务；</p>
+                                                <p>课题研究：基于客户提出的科研主题，协助客户完成相关内容的研究。</p>
+                                            </div>
+                                        </div>
+                                    </i>
+                                </el-checkbox-group>
+                            </div>
+                        </div>
                         <div class="con-item clearfix">
-                            <div class="fl"><i class="red">*</i>授课对象：</div>
+                            <div class="fl">授课对象：</div>
                             <div class="fr selectFr">
                                 <div class="select-con ">
                                     <div class="divClick" @click.stop="handlecourseObjClick">
@@ -106,7 +122,7 @@
                             </div>
                         </div>
                         <div class="con-item clearfix">
-                            <div class="fl"><i class="red">*</i>授课人数：</div>
+                            <div class="fl">授课人数：</div>
                             <div class="fr selectFr">
                                 <div class="select-con ">
                                     <div class="divClick" @click.stop="handleCourseNumClick">
@@ -126,7 +142,7 @@
                             </div>
                         </div>
                         <div class="con-item clearfix">
-                            <div class="fl"><i class="red">*</i>授课时长：</div>
+                            <div class="fl">授课时长：</div>
                             <div class="fr selectFr">
                                 <div class="select-con ">
                                     <div class="divClick" @click.stop="handleCourseTimeClick">
@@ -146,7 +162,7 @@
                             </div>
                         </div>
                         <div class="con-item name clearfix">
-                            <div class="fl"><i class="red">*</i>项目预算：</div>
+                            <div class="fl">项目预算：</div>
                             <div class="fr">
                                 <el-input v-model="teacherForm.projectBudget" placeholder="请填写项目预算"></el-input>
                             </div>
@@ -279,19 +295,19 @@ export default {
         if (Trim(this.teacherForm.tel) === '') throw '请填写手机号码'
         if (!telReg.test(Trim(this.teacherForm.tel)))
           throw '请填写正确的手机号码'
-        if (Trim(this.teacherForm.email) === '') throw '请填写常用邮箱'
         if (Trim(this.teacherForm.code) === '') throw '请填写手机号验证码'
+        if (Trim(this.teacherForm.email) === '') throw '请填写常用邮箱'
         if (!emailReg.test(Trim(this.teacherForm.email)))
           throw '请填写正确的邮箱'
-        if (this.teacherForm.appointmentStartTime === '')
-          throw '请选择预约开始时间'
-        if (this.teacherForm.appointmentEndTime === '')
-          throw '请选择预约结束时间'
+        // if (this.teacherForm.appointmentStartTime === '')
+        //   throw '请选择预约开始时间'
+        // if (this.teacherForm.appointmentEndTime === '')
+        //   throw '请选择预约结束时间'
         if (start > end) throw '预约结束日期不能小于预约开始日期'
-        if (this.teacherForm.courseObj === '') throw '请选择授课对象'
-        if (this.teacherForm.courseNum === '') throw '请选择授课人数'
-        if (this.teacherForm.courseTime === '') throw '请选择授课时长'
-        if (Trim(this.teacherForm.projectBudget) === '') throw '请填写项目预算'
+        // if (this.teacherForm.courseObj === '') throw '请选择授课对象'
+        // if (this.teacherForm.courseNum === '') throw '请选择授课人数'
+        // if (this.teacherForm.courseTime === '') throw '请选择授课时长'
+        // if (Trim(this.teacherForm.projectBudget) === '') throw '请填写项目预算'
       } catch (err) {
         message(this, 'error', err)
         return false
