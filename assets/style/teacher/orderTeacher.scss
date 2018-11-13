@@ -72,13 +72,37 @@
         .word-item.teacherForm {
           margin-top: -10px;
           .fr {
+            position: relative;
             width: 750px;
+            height: 175px;
             background-color: #f7f9fb;
             padding: 15px 25px;
             font-size: 14px;
             line-height: 28px;
             .courseForm {
               color: #6417a6;
+            }
+            .info {
+              width: 225px;
+              border-right: 1px solid;
+              margin-top: 30px;
+            }
+            .code {
+              position: absolute;
+              right: 325px;
+              top: 60px;
+              width: 140px;
+              text-align: center;
+              // height: 80px;
+              img {
+                display: block;
+                width: 80px;
+                height: 80px;
+                margin-left: 30px;
+              }
+              span {
+                display: block;
+              }
             }
           }
         }
