@@ -17,11 +17,13 @@
                         <div class="word-item teacherForm clearfix">
                             <div class="fl"></div>
                             <div class="fr">
-                                <p>您可通过以下方式，联系我们预约导师</p>
-                                <p><span class="courseForm">邮箱：</span><span>#客服邮箱#</span></p>
-                                <p><span class="courseForm">电话：</span><span>#商务电话#</span></p>
-                                <p>#商务二维码#</p>
-                                <p><span class="courseForm">添加微信预约导师：</span><span>xuetang</span></p>
+                                <p style="margin-bottom:15px;">您可通过以下方式，联系我们预约导师</p>
+                                <div class="info">
+                                    <p><span class="courseForm">邮箱：</span><span>info@1911thu.com</span></p>
+                                    <p><span class="courseForm">电话：</span><span>18516821911 </span></p>
+                                </div>
+                                <p class="code"><img src="@/assets/images/teacherCode.png" alt=""><span>添加商务微信预约导师</span></p>
+                                <!-- <p><span class="courseForm">添加微信预约导师：</span><span>xuetang</span></p> -->
                             </div>
                         </div>
                     </div>
