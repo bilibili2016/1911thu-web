@@ -247,8 +247,11 @@
 }
 .chatDialog {
   .el-dialog {
+    height: 620px;
     border-radius: 5px;
     overflow: hidden;
+    width: 960px;
+    margin-bottom: 0;
   }
   .el-dialog__header {
     height: 0;
