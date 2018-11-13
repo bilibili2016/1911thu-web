@@ -29,7 +29,7 @@
       <i class="el-icon-time"></i>{{restTime}}
     </div> -->
     <div class="fr pay">
-      <el-button @click="addPaySubmit">立即支付</el-button>
+      <el-button @click="addPaySubmit">下一步</el-button>
     </div>
     <div class="fk fr" @click="showRpt">
       我有疑问，需要反馈?
@@ -78,9 +78,12 @@ export default {
       if (this.wxMsg === true) {
         this.$bus.$emit('showCode', this.codeData.code_url)
         this.getStatus()
-      } else {
+      } else if (this.zfbMsg == true) {
         this.$bus.$emit('showCode', this.codeData.qr_code)
         this.getStatus()
+      } else if (this.pubMsg == true) {
+        let urlLen = matchSplits('order')
+        this.$router.push('/shop/payPublic?orderID=' + urlLen)
       }
     },
     getStatus() {
@@ -125,11 +128,9 @@ export default {
       this.pubMsg = false
     },
     selectPub() {
-      let urlLen = matchSplits('order')
       this.wxMsg = false
       this.zfbMsg = false
       this.pubMsg = true
-      this.$router.push('/shop/payPublic?orderID=' + urlLen)
     },
     time() {
       setInterval(data => {
