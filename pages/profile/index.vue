@@ -649,6 +649,8 @@ export default {
         //默认清空搜索条件
         this.orderForm.startTime = ''
         this.orderForm.endTime = ''
+        this.orderForm.orderSn = ''
+        this.$bus.$emit('clearSearch')
       }
       this.orderForm.orderSn = ''
 
@@ -912,6 +914,7 @@ export default {
         if (type === 1) {
           this.orderForm.startTime = data[0]
           this.orderForm.endTime = data[1]
+          this.orderForm.orderSn = data[2]
           this.handleOrderSearch(Number(num), 1)
         } else {
           //兑换码订单号搜索
