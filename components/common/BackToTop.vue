@@ -51,7 +51,8 @@
     <!-- 客服 -->
     <el-dialog class="chatDialog" title="" :visible.sync="dialogVisible" top="20px">
       <div>
-        <iframe id="service" @load="load" :src="completeTask" height="620" width="100%"></iframe>
+        <iframe id="service" name="myframe" :src="completeTask" height="620" width="100%">
+        </iframe>
       </div>
     </el-dialog>
   </div>
@@ -188,13 +189,6 @@ export default {
       //   'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003068#/'
       // )
       this.dialogVisible = true
-    },
-    load() {
-      // let close = document.getElementsByClassName('close___1JK_r')
-      let iframe = document.getElementById('service')
-      console.log(iframe)
-      let root = iframe.contentWindow.document.getElementById('root')
-      console.log(root)
     }
   }
 }
