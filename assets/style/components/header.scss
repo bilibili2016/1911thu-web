@@ -678,10 +678,6 @@ body {
         border: none;
         cursor: pointer;
       }
-      .el-checkbox {
-        // margin-bottom: 30px;
-        margin-right: 130px; // margin-top: -5px;
-      }
       .bindCompany {
         height: 39px;
         position: absolute;
@@ -692,7 +688,6 @@ body {
         background-color: #fff;
       }
       .el-button {
-        margin-top: 20px;
         position: relative;
       }
     }
@@ -862,9 +857,7 @@ body {
   }
 }
 .userPotal {
-  position: absolute;
-  right: 93px;
-  bottom: 175px;
+  display: inline-block;
   font-size: 12px;
   color: #773084;
   font-weight: 500;

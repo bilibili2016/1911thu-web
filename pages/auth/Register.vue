@@ -13,6 +13,7 @@
     <el-form-item prop="">
       <el-checkbox-group v-model="registerData.checked">
         <el-checkbox label="同意" name="checked"></el-checkbox>
+        <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
       </el-checkbox-group>
     </el-form-item>
     <el-row>
@@ -122,6 +123,9 @@ export default {
     // 注册 请求
     signUp(forName) {
       this.$emit('signUp', forName)
+    },
+    userProtocol() {
+      this.$emit('userProtocol')
     }
   },
   watch: {

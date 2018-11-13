@@ -21,9 +21,8 @@
         <!-- 注册 -->
         <el-tab-pane label="注册" name="register">
           <el-form :model="registerData" status-icon :rules="registRules" id="registerData" ref="registerData" class="demo-ruleForm">
-            <v-register :registerData="registerData" :codeClick="codeClick" :isClick="isClick" :isloading="isloading" :bindTelData="bindTelData" @verifyRgTel="verifyRgTel" @signUp="signUp"></v-register>
+            <v-register :registerData="registerData" :codeClick="codeClick" :isClick="isClick" :isloading="isloading" :bindTelData="bindTelData" @userProtocol="userProtocol" @verifyRgTel="verifyRgTel" @signUp="signUp"></v-register>
           </el-form>
-          <div class="userPotal" @click="userProtocol">1911学堂《用户注册协议》</div>
           <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
         </el-tab-pane>
       </el-tabs>
