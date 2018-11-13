@@ -1,14 +1,25 @@
 <template>
   <div>
-    <div class="block">
+    <div class="searchOrderList clearfix">
+      <el-input class="fl" v-model="searchForm.searchWord" placeholder="请输入订单号、商品名称"></el-input>
+      <span class="goSearch fr" @click="detection">
+        <i class="el-icon-search"></i>
+      </span>
+      <div class="hoverMore">
+        <span class="more">更多筛选条件 <i class="el-icon-arrow-down"></i></span>
+        <ul class="moreList">
+          <li @click="handleShow" v-for="(item,index) in moreList" :key="index">{{item.name}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="block" v-show="isShowTime">
       <div class="demonstration fl" style="margin:12px 2px 0px 0px;">根据下单日期搜索: </div>
       <div class="fl">
-        <el-date-picker v-model="startDay" type="date" value-format="timestamp" placeholder="选择开始日期">
+        <el-date-picker v-model="searchForm.startDay" type="date" value-format="timestamp" placeholder="选择开始日期">
         </el-date-picker>
         <span class="dataPickSpan">至</span>
-        <el-date-picker v-model="endDay" type="date" value-format="timestamp" placeholder="选择结束日期">
+        <el-date-picker v-model="searchForm.endDay" type="date" value-format="timestamp" placeholder="选择结束日期">
         </el-date-picker>
-
       </div>
       <div class="search">
         <el-button round @click="detection" style="margin-left:10px;">搜索</el-button>
@@ -25,56 +36,52 @@ export default {
   props: ['orderNum'],
   data() {
     return {
-      startDay: '',
-      endDay: '',
+      isShowTime: false,
       searchDatas: [],
-      searchType: 1
+      moreList: [{ name: '跟据下单日期搜索' }],
+      searchType: 1,
+      searchForm: {
+        startDay: '',
+        endDay: '',
+        searchWord: ''
+      }
     }
   },
   methods: {
     detection() {
       this.searchDatas = []
-      if (this.endDay < this.startDay) {
+      if (this.searchForm.endDay < this.searchForm.startDay) {
         message(this, 'error', '结束日期不能小于开始日期!')
         return false
       }
-      this.searchDatas.push(timestampToYMD(this.startDay))
-      this.searchDatas.push(timestampToYMD(this.endDay))
+      this.searchDatas.push(timestampToYMD(this.searchForm.startDay))
+      this.searchDatas.push(timestampToYMD(this.searchForm.endDay))
+      this.searchDatas.push(this.searchForm.searchWord)
+
       this.$bus.$emit(
         'searchDatas',
         this.searchDatas,
         this.searchType,
         this.orderNum
       )
+    },
+    goSearch() {},
+    handleShow() {
+      this.isShowTime = true
     }
   },
-  mounted() {}
+  mounted() {
+    this.$bus.$on('clearSearch', () => {
+      console.log(55)
+
+      this.searchForm.startDay = ''
+      this.searchForm.endDay = ''
+      this.searchForm.searchWord = ''
+    })
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.block {
-  padding: 25px 0px 25px 0px;
-  font-size: 16px;
-}
-.demonstration {
-  padding-right: 30px;
-  display: inline-block;
-  font-size: 16px;
-  margin: 12px 15px 0px 0px;
-}
-.search {
-  margin-left: 10px;
-  button {
-    &:hover {
-      background-color: #84488f;
-      transition: all 300ms;
-      border: 1px solid #84488f;
-      color: #fff;
-    }
-  }
-}
-.dataPickSpan {
-  margin: 0 20px;
-}
+@import '~assets/style/profile/dataPick.scss';
 </style>

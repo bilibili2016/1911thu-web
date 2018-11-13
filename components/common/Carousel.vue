@@ -11,11 +11,15 @@
     </div>
     <div class="newsCarousel fl" v-if="config.carousel==='news'">
       <el-carousel :interval="4000">
-        <el-carousel-item v-for="(item,index) in swiperData" :key="index" v-if="index<4">
-          <div class="newsLi" @click="goDetail(item)">
-            <img :src="item.picture" alt="">
-            <h4>{{item.title}}</h4>
-            <p>{{item.introduce}}</p>
+        <!-- <el-carousel-item v-for="(item,index) in swiperData" :key="index" v-if="index<4"> -->
+        <el-carousel-item>
+
+          <div class="newsLi" @click="goDetail(swiperData[0])">
+            <img :src="swiperData[0].picture" alt="">
+            <div class="info">
+              <h4>{{swiperData[0].title}}</h4>
+              <p>{{swiperData[0].introduce}}</p>
+            </div>
           </div>
         </el-carousel-item>
       </el-carousel>

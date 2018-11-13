@@ -1550,6 +1550,14 @@ input:-webkit-autofill {
     }
   }
 }
+.searchOrderList {
+  .el-input {
+    .el-input__inner {
+      height: 40px;
+      border: 1px solid #ebe7ed;
+    }
+  }
+}
 
 input::-webkit-input-safebox-button {
   display: none;

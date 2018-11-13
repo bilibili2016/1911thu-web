@@ -21,7 +21,7 @@
       <!-- 名师大咖秀 -->
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 学堂资讯 -->
-      <v-info v-loading="infoLoading" :infoDesc="infoDesc" :infoArticle="infoArticle" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgfff"></v-info>
+      <v-info v-loading="infoLoading" :newsListData="newsListData" :outNewData="outNewData" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgfff"></v-info>
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
   </div>
@@ -111,8 +111,8 @@ export default {
       teacherResource: [],
       teachers: [],
       evaluateData: [],
-      infoArticle: [],
-      infoDesc: [],
+      newsListData: [],
+      outNewData: [],
       ding: {
         card_type: 'ding'
       },
@@ -170,7 +170,11 @@ export default {
         pages: 1,
         limits: 2
       },
-      loginMsg: false
+      loginMsg: false,
+      newsInfoForm: {
+        pages: 1,
+        limits: 4
+      }
     }
   },
   computed: {
@@ -263,11 +267,11 @@ export default {
     // 学堂资讯
     getNewsInfoList() {
       this.infoLoading = true
-      news.getNewsInfoList(this.newsInfoForm).then(response => {
+      news.getNewInfoList(this.newsInfoForm).then(response => {
         if (response.status === 0) {
           this.infoLoading = false
-          this.infoDesc = response.data.outerList
-          this.infoArticle = response.data.innerList
+          this.newsListData = response.data.newsList
+          this.outNewData = response.data.newsList[0]
         }
       })
     },
