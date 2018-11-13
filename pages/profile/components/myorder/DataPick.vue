@@ -72,8 +72,6 @@ export default {
   },
   mounted() {
     this.$bus.$on('clearSearch', () => {
-      console.log(55)
-
       this.searchForm.startDay = ''
       this.searchForm.endDay = ''
       this.searchForm.searchWord = ''

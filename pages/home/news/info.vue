@@ -18,7 +18,7 @@
         </div>
         <div class="info-list">
           <div v-for="(card,index) in newsListData" :index="index" :key="card.id" class="info" v-if="index>0">
-            <div class="info-box clearfix" @click="selectDetail(card)">
+            <div class="info-box clearfix" @click="goDetail(card)">
               <img class="titleImg fl" :src="card.picture" alt="">
               <div class="fl">
                 <h4 :title="card.title">{{card.title}}</h4>
