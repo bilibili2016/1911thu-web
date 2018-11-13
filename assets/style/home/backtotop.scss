@@ -253,6 +253,7 @@
   .el-dialog__header {
     height: 0;
     padding: 0;
+    display: none;
     .el-dialog__headerbtn {
       top: 20px;
       .el-dialog__close {
