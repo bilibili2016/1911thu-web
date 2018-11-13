@@ -49,7 +49,7 @@
       </div>
     </transition>
     <!-- 客服 -->
-    <el-dialog class="chatDialog" title="1911学堂秘书" :visible.sync="dialogVisible" width="960px" top="20px" border-radius="5px">
+    <el-dialog class="chatDialog" title="" :visible.sync="dialogVisible" width="960px" top="20px" border-radius="5px">
       <div>
         <iframe :src="completeTask" height="620" width="100%"></iframe>
       </div>
