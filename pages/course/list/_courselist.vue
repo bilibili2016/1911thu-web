@@ -94,7 +94,7 @@ export default {
           this.loading = false
           this.courseList = response.data.curriculumProjectList
           this.pagemsg.total = Number(response.data.pageCount)
-          this.coursename = '最新项目'
+          this.coursename = '互动式项目'
           this.BreadCrumb.text = this.coursename
           this.pageMsgs = true
         }
@@ -192,7 +192,7 @@ export default {
   },
   updated() {
     if (this.cidNumber == '0') {
-      setTitle('最新项目-1911学堂')
+      setTitle('互动式项目-1911学堂')
     } else if (this.cidNumber == '1') {
       setTitle('最新课程-1911学堂')
     } else if (this.cidNumber == '2') {

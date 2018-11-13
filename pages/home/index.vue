@@ -56,7 +56,7 @@ export default {
       cadreCollegeMore: '/course/category?cid=1&cp=0&pids=0&xid=0',
       commercialCollegeMore: '/course/category?cid=17&cp=0&pids=0&xid=0',
       linknewproject: '/course/list/0',
-      newprojecttitle: '最新项目',
+      newprojecttitle: '互动式项目',
       linknewcourse: '/course/list/1',
       newcoursetitle: '最新课程',
       linkclassiccourse: '/course/list/2',
