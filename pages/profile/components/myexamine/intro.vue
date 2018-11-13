@@ -76,7 +76,12 @@ export default {
               response.data.exam_record_id
           )
         } else {
-          message(this, 'error', response.msg)
+          this.$message({
+            showClose: true,
+            message: response.msg,
+            type: 'error',
+            duration: 6000
+          })
         }
       })
     }
