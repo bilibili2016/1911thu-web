@@ -438,8 +438,9 @@ body {
       float: right;
       margin-left: 30px;
       height: 34px;
-      margin-top: 32px;
-      padding-top: 2px;
+      // margin-top: 32px;
+      // padding-top: 2px;
+      line-height: 90px;
       span {
         // width: 40px;
         // height: 34px;
@@ -870,4 +871,8 @@ body {
 .firstLogin,
 .codeLogin {
   margin: 65px 0 0 -96px !important;
+}
+
+.mobile-login {
+  width: 100px;
 }

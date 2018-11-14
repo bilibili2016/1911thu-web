@@ -10,7 +10,7 @@
         <el-button type="primary" :disabled="codeClick" class="getCode" @click="handleMobileGetCode('loginDatamobile')" style="line-height:0">{{bindTelData.getCode}}</el-button>
       </el-form-item>
     </div>
-    <el-row>
+    <el-row class="clearfix">
       <div @click="forget">忘记密码?</div>
       <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
       <el-button class="codeLogin" :disabled="isloginClick" @click="signInsMobile('loginDatamobile')">登录</el-button>

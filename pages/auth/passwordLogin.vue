@@ -10,7 +10,7 @@
         <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
       </el-form-item>
     </div>
-    <el-row>
+    <el-row class="clearfix">
       <div @click="forget">忘记密码?</div>
       <div class="mobile-login" style="float:left;" @click="mobilelogin">{{mobileloginmsg === true ? '账号密码登录' : '手机验证码登录'}}</div>
       <el-button class="firstLogin" :disabled="isloginClick" @click="signIns('loginData')">登录</el-button>

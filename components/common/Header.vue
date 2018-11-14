@@ -288,7 +288,12 @@ export default {
                 cid: res.data.vipGoodsDetail.category_id
               }
             })
-            message(this, 'success', '欢迎进入学院！')
+            this.$message({
+              showClose: true,
+              message: '欢迎进入学院！',
+              type: 'success',
+              duration: 4000
+            })
             return false
           }
 
