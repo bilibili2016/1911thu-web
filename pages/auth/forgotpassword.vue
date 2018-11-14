@@ -31,7 +31,7 @@
           </el-row>
           <input type="password" class="hideInput">
         </el-form>
-        <div class="otherLogin" @click="otherLogin">返回登录 <i class="otherLoginIcon"></i></div>
+        <div class="returnLogin" @click="otherLogin">返回登录 <i class="otherLoginIcon"></i></div>
 
       </div>
     </div>

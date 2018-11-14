@@ -3,7 +3,7 @@
     <div class="orderInfo">
       <p>
         <span class="left">共1件商品，商品总金额：</span>
-        <span class="right">¥1000</span>
+        <span class="right">￥1000</span>
       </p>
       <p>
         <span class="left"> 9.5折： </span>
