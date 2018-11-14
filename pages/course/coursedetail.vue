@@ -15,7 +15,7 @@
         </div>
         <!-- 顶部的card -->
         <div class="main-header" v-loading="loadMsg">
-          <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg"></v-card>
+          <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg" @refreshData="refreshData"></v-card>
         </div>
       </div>
       <div class="bottomCard">
@@ -329,6 +329,11 @@ export default {
           }
         }
       })
+    },
+    // 再次回去课程详情数据和课程目录数据
+    refreshData() {
+      this.getCourseDetail()
+      this.getCourseList()
     },
     // 课程-获取默认播放信息
     getdefaultCurriculumCatalog() {

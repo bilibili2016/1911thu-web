@@ -325,6 +325,7 @@ export default {
         // 如果当前小节播放完成，直接播放下一小节
         if (this.nextCatalogId !== '') {
           this.nextVideo()
+          this.$emit('refreshData')
         }
       }
     },

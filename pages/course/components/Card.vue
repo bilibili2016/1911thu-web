@@ -19,7 +19,7 @@
               </div>
             </div>
           </div>
-          <v-player @changePlayImg="changePlayImg" @gobuy="handleAddShopCart(courseList)"></v-player>
+          <v-player @changePlayImg="changePlayImg" @gobuy="handleAddShopCart(courseList)" @refreshData="refreshData"></v-player>
         </el-card>
         <div class="particularss fr">
           <div class="currentclum">
@@ -197,6 +197,9 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum']),
+    refreshData() {
+      this.$emit('refreshData')
+    },
     changePlayImg(img, id) {
       this.$emit('changePlayImg', img, id)
     },
