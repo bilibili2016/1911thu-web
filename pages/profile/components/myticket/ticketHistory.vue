@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="price height">
-            <p>¥{{ticket.total_price}}</p>
+            <p>￥{{ticket.total_price}}</p>
           </div>
           <div class="number height" @click="handleTicketPopup(ticket.id)">
             <div>

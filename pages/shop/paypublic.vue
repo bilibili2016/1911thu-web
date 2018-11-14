@@ -9,7 +9,7 @@
           <span class="left">订单号：
             <span class="num">{{orderDetail.order_sn}}</span>
           </span>
-          <span class="right">应付金额：¥{{orderDetail.order_amount}}</span>
+          <span class="right">应付金额：￥{{orderDetail.order_amount}}</span>
         </h4>
         <!-- <div class="pay" v-show="!showPay">
           <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
