@@ -5,11 +5,11 @@
       <span class="goSearch fr" @click="detection">
         <i class="el-icon-search"></i>
       </span>
-      <div class="hoverMore">
+      <div class="hoverMore" @click="handleShow">
         <span class="more">更多筛选条件 <i class="el-icon-arrow-down"></i></span>
-        <ul class="moreList">
+        <!-- <ul class="moreList">
           <li @click="handleShow" v-for="(item,index) in moreList" :key="index">{{item.name}}</li>
-        </ul>
+        </ul> -->
       </div>
     </div>
     <div class="block" v-show="isShowTime">
@@ -67,7 +67,7 @@ export default {
     },
     goSearch() {},
     handleShow() {
-      this.isShowTime = true
+      this.isShowTime = !this.isShowTime
     }
   },
   mounted() {
