@@ -115,7 +115,7 @@
                 <el-autocomplete class="inline-input" placeholder="您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
               </el-form-item>
               <el-form-item label="" prop="person">
-                <el-input v-model="company.person" placeholder="请输入联系人"></el-input>
+                <el-input v-model="company.person" placeholder="请输入联系人姓名"></el-input>
               </el-form-item>
               <el-form-item label="" prop="date">
                 <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="请选择回访日期">

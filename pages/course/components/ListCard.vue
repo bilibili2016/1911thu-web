@@ -35,10 +35,10 @@
             <!-- 收费课程展示 -->
             <div v-else>
               <p class="coin" v-if="cidNumber==='0'">
-                <span v-if="course.study_type === '1'">￥{{course.present_price}}/人</span>
-                <span v-else>￥{{course.present_price}}/班</span>
+                <span v-if="course.study_type === '1'">¥{{course.present_price}}/人</span>
+                <span v-else>¥{{course.present_price}}/班</span>
               </p>
-              <p class="coin" v-else>￥ {{course.present_price}}</p>
+              <p class="coin" v-else>¥ {{course.present_price}}</p>
 
               <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
               <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">

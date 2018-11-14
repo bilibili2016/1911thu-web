@@ -9,7 +9,7 @@
         <p>
           <span>订单：{{payCompleteData.order_sn}}</span>
           <span> | </span>
-          <span>支付金额：￥{{payCompleteData.order_amount}}</span>
+          <span>支付金额：¥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
       <div v-if="!hasCode&&isVipCode" v-show="showMsg">

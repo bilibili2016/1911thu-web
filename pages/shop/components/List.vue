@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="coursePrice">
-          ￥{{course.present_price}}
+          ¥{{course.present_price}}
         </div>
         <div class="courseOperation" @click="handleDeleteCourse(course,index)">
           删除
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="coursePrice">
-          ￥{{project.present_price}}
+          ¥{{project.present_price}}
         </div>
         <div class="courseOperation" @click="handleDeleteProject(project,index)">
           删除
@@ -64,7 +64,7 @@
         </div>
 
         <div class="coursePrice">
-          ￥{{course.present_price}}
+          ¥{{course.present_price}}
         </div>
         <div v-if="config.type=='wePay'" class="courseNumber">
           <div v-if="course.project_type=='2'||course.study_type=='2'||course.study_type=='3'">
@@ -108,7 +108,7 @@
           <span>{{data.study_persion_number}}人</span>
           <span>{{(data.offline_study_time)}}学时</span>
           <span>{{data.offline_days}}天</span>
-          <span class="coursePrice">￥{{data.present_price}}</span>
+          <span class="coursePrice">¥{{data.present_price}}</span>
         </div>
       </div>
     </div>
@@ -125,7 +125,7 @@
           <h5>{{data.title}}</h5>
         </div>
         <div class="coursePrice">
-          ￥{{data.present_price}}
+          ¥{{data.present_price}}
         </div>
 
       </div>
