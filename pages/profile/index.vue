@@ -643,17 +643,15 @@ export default {
         this.handleMyProjectChange(item, 1)
       })
     },
-    // 我的订单 commonmethods
+    // 我的订单 commonMethods
     handleMyOrderChange(status, pagenum, flag) {
       if (flag) {
-        //默认清空搜索条件
+        //切换标签时默认清空搜索条件
         this.orderForm.startTime = ''
         this.orderForm.endTime = ''
         this.orderForm.orderSn = ''
         this.$bus.$emit('clearSearch')
       }
-      this.orderForm.orderSn = ''
-
       this.allOrderLoadAll = true
       this.orderForm.payStatus = status
       this.orderForm.pages = pagenum
@@ -664,6 +662,16 @@ export default {
           this.$router.push('/')
           return false
         } else if (response.status === 0) {
+          if (
+            this.orderForm.startTime ||
+            this.orderForm.endTime ||
+            this.orderForm.orderSn
+          ) {
+            this.noMsgTen.text = '没有符合条件的订单，请尝试其他搜索条件。'
+          } else {
+            this.noMsgTen.text = '抱歉，没有更多的订单了~'
+          }
+
           this._data['pagemsg' + (status + 4)].total =
             response.data.searchOrderTotal
           if (status === 1) {
@@ -915,12 +923,12 @@ export default {
           this.orderForm.startTime = data[0]
           this.orderForm.endTime = data[1]
           this.orderForm.orderSn = data[2]
-          this.handleOrderSearch(Number(num), 1)
+          this.handleMyOrderChange(Number(num), 1, false)
         } else {
           //兑换码订单号搜索
           this.orderForm.orderSn = data
           this.$bus.$emit('activeOrder')
-          this.handleOrderSearch(Number(num), 1)
+          this.handleMyOrderChange(Number(num), 1, false)
         }
       })
       // 发票管理 开票历史 由于层级较深
@@ -928,28 +936,7 @@ export default {
         this.historyOrderDataChange(1)
       })
     },
-    //兑换码搜索/订单时间搜索
-    handleOrderSearch(status, pagenum) {
-      this.allOrderLoadAll = true
-      this.orderForm.payStatus = status
-      this.orderForm.pages = pagenum
-      this._data['pagemsg' + (status + 4)].page = pagenum
-      profileHome.getAllOrderData(this.orderForm).then(response => {
-        if (response.status === 100008) {
-          this.responseData.res = response
-          this.$router.push('/')
-          return false
-        } else if (response.status === 0) {
-          this._data['pagemsg' + (status + 4)].total =
-            response.data.searchOrderTotal
-          if (status === 1) {
-            this.orderTotal = response.data.orderTotal
-          }
-          this._data['allOrderData' + (status + 4)] = response.data.orderList
-          this.allOrderLoadAll = false
-        }
-      })
-    },
+
     // 考试认证列表
     examList() {
       this.examineLoading = true

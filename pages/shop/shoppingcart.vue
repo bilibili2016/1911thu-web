@@ -32,7 +32,7 @@
                   </div>
                 </div>
                 <div class="coursePrice">
-                  ¥{{course.present_price}}
+                  ￥{{course.present_price}}
                 </div>
                 <div class="courseOperation" @click="handleDeleteCourse(course,index)">
                   删除
@@ -63,7 +63,7 @@
                   </div>
                 </div>
                 <div class="coursePrice">
-                  ¥{{project.present_price}}
+                  ￥{{project.present_price}}
                 </div>
                 <div class="courseOperation" @click="handleDeleteProject(project,index)">
                   删除
@@ -86,7 +86,7 @@
                 </div>
               </div>
               <div class="coursePrice">
-                ¥{{course.present_price}}
+                ￥{{course.present_price}}
               </div>
               <div class="courseOperation" @click="handleDeleteCourse(course,index)">
                 删除
@@ -112,7 +112,7 @@
                 </div>
               </div>
               <div class="coursePrice">
-                ¥{{project.present_price}}
+                ￥{{project.present_price}}
               </div>
               <div class="courseOperation" @click="handleDeleteProject(project,index)">
                 删除
@@ -160,7 +160,7 @@
             <el-button class="notGray" @click="showCommit" v-if="canSubmit">去结算</el-button>
             <el-button class="isGray" v-else @click="showMsg">去结算</el-button>
           </span>
-          <span class="allPrice fr">¥{{prices}}</span>
+          <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
             <i>{{Number(this.addArray.curriculumcartid.length) + Number(this.projectAddArray.projectcartid.length)}} </i> 门课程</span>
         </div>
