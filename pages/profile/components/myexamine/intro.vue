@@ -80,7 +80,7 @@ export default {
             showClose: true,
             message: response.msg,
             type: 'error',
-            duration: 4000
+            duration: 6000
           })
         }
       })
