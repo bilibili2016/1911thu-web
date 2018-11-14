@@ -111,7 +111,7 @@
                   <span class="rate">课程评分：
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
-                  <span class="coins">￥ {{courseList.present_price}} </span>
+                  <span class="coins">¥ {{courseList.present_price}} </span>
                 </div>
                 <!-- 购买判断  未购买-->
                 <div class=" common-button " v-if="privileMsg==false">

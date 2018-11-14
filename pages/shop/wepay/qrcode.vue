@@ -3,7 +3,7 @@
     <div class="unloginner" style="width:374px;height:420px;" v-loading="loading">
       <i class="el-icon-close" @click="unloggedClick"></i>
       <div class="texts">扫一扫付款
-        <span>￥{{orderDetail.order_amount}}</span>
+        <span>¥{{orderDetail.order_amount}}</span>
       </div>
       <div class="update">
         <qrcode :value="val" :options="{ size: 220 }" class="qrcode"></qrcode>
