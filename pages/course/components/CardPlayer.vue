@@ -231,6 +231,7 @@ export default {
     },
     // 重新获取播放参数、播放视频
     rePlay() {
+      this.showError = false
       this.getdefaultPlayerUrl()
     },
     // 视频准备好之后执行
