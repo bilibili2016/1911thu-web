@@ -7,7 +7,7 @@
       </p>
       <p>
         <span class="left"> 9.5折： </span>
-        <span class="right">优惠¥205</span>
+        <span class="right">优惠￥205</span>
       </p>
     </div>
 

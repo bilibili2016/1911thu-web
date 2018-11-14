@@ -13,7 +13,7 @@
         </p>
         <p>
           <span class="left">商品总金额：</span>
-          <span class="right">¥{{data.goodsAmount}}</span>
+          <span class="right">￥{{data.goodsAmount}}</span>
         </p>
         <p>
           <span class="left">购买账号：</span>
@@ -28,7 +28,7 @@
         </p>
         <p>
           <span class="left">学费：</span>
-          <span class="right">¥{{parseFloat(data.curriculumSum*data.price)}}</span>
+          <span class="right">￥{{parseFloat(data.curriculumSum*data.price)}}</span>
         </p>
         <p>
           <span class="left">申请人昵称：</span>
@@ -40,11 +40,11 @@
     <div class="orderInfo" v-if="!course">
       <p>
         <span class="left" style="width:auto;">商品总金额：</span>
-        <span class="right" style="width:85px;">¥{{data.present_price}}</span>
+        <span class="right" style="width:85px;">￥{{data.present_price}}</span>
       </p>
       <!-- <p>
         <span class="left" style="width:auto;">{{9.5}}折</span>
-        <span class="right" style="width:85px;">¥{{data.present_price}}</span>
+        <span class="right" style="width:85px;">￥{{data.present_price}}</span>
       </p> -->
     </div>
   </div>

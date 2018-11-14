@@ -207,7 +207,7 @@
                   <!-- 学习天数 -->
                   <div class="item">{{project.offline_days}}天</div>
                   <!-- 总价 -->
-                  <div class="item price">¥ {{project.present_price}} </div>
+                  <div class="item price">￥{{project.present_price}} </div>
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@
             <h4><span class="table_lf">商品总额：</span><span class="table_lr">￥{{orderDetail.order_amount}}</span></h4>
           </div>
           <div class="tableFooter" v-else>
-            <!-- <p>9.5折&nbsp;&nbsp;&nbsp;优惠¥{{(orderDetail.order_amount*(1-0.95)).toFixed(2)}}</p> -->
+            <!-- <p>9.5折&nbsp;&nbsp;&nbsp;优惠￥{{(orderDetail.order_amount*(1-0.95)).toFixed(2)}}</p> -->
             <h4>商品总额：￥{{orderDetail.order_amount}}</h4>
           </div>
         </div>

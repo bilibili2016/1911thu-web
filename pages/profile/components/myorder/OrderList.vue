@@ -44,7 +44,7 @@
             </div> -->
           </div>
           <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
-            <p>¥{{courseList.order_amount}}</p>
+            <p>￥{{courseList.order_amount}}</p>
             <!-- 订单 -->
             <p v-if="config.type=='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
           </div>

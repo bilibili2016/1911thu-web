@@ -50,7 +50,7 @@
                 </div>
               </div>
               <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
-                <p>¥{{courseList.order_amount}}</p>
+                <p>￥{{courseList.order_amount}}</p>
               </div>
 
             </div>
@@ -66,7 +66,7 @@
           <span class="money ">
             <i>{{orderNum}}</i> 个订单，
             <strong>共：
-              <i>¥{{orderPrice}}</i>
+              <i>￥{{orderPrice}}</i>
             </strong>
           </span>
           <span class="next " @click="showIoc">下一步</span>
