@@ -23,16 +23,19 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      margin: 30px 0 20px 0;
+      margin: 20px 0 20px 0;
     }
     .name {
       font-size: 18px;
       color: #773084;
     }
     .position {
-      font-size: 16px;
+      height: 36px;
+      overflow: hidden;
+      font-size: 14px;
       color: #93999f;
-      margin: 10px 0 30px 0;
+      margin: 10px 0 15px 0;
+      padding: 0 20px;
     }
     .operate {
       .btn {
