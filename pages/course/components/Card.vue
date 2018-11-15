@@ -269,7 +269,7 @@ export default {
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
           if (this.two_is_cart === 0) {
-            this.addCourseShopCart(item)
+            this.goodsNmber(item)
           } else {
             message(this, 'success', '您的课程已经在购物车里面')
           }
@@ -284,6 +284,19 @@ export default {
     },
     closeCover() {
       this.isShowCover = false
+    },
+    // 判断购物车数量
+    goodsNmber(item) {
+      if (this.productsNum < 70) {
+        this.addCourseShopCart(item)
+      } else {
+        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/shop/shoppingcart')
+          }
+        })
+      }
     },
     // 添加购物车函数
     addCourseShopCart(item) {
