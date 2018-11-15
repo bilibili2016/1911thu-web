@@ -113,7 +113,7 @@
                   </div>
                 </div>
                 <div class="coursePrice">
-                  ¥{{course.present_price}}
+                  ￥{{course.present_price}}
                 </div>
                 <div class="courseOperation">
                   <i class="el-icon-close"></i>{{orderDetail.pay_number}}
@@ -133,7 +133,7 @@
                   </div>
                 </div>
                 <div class="coursePrice">
-                  ¥{{project.present_price}}
+                  ￥{{project.present_price}}
                 </div>
                 <div>
                   <div class="courseOperation">
@@ -153,7 +153,7 @@
                   </div>
                 </div>
                 <div class="coursePrice">
-                  ¥{{vip.present_price}}
+                  ￥{{vip.present_price}}
                 </div>
                 <div class="courseOperation">
                   <i class="el-icon-close"></i>{{orderDetail.pay_number}}
@@ -215,7 +215,7 @@
           <div class="tableFooter" v-if="orderDetail.order_type === '1'">
             <p><span class="table_lf">商品数量：</span><span class="table_lr">{{courseList.length+projectList.length+vipList.length}}</span></p>
             <p><span class="table_lf">学习人数：</span><span class="table_lr">{{orderDetail.pay_number}}人</span></p>
-            <h4><span class="table_lf">商品总额：</span><span class="table_lr">¥{{orderDetail.order_amount}}</span></h4>
+            <h4><span class="table_lf">商品总额：</span><span class="table_lr">￥{{orderDetail.order_amount}}</span></h4>
           </div>
           <div class="tableFooter" v-else>
             <!-- <p>9.5折&nbsp;&nbsp;&nbsp;优惠￥{{(orderDetail.order_amount*(1-0.95)).toFixed(2)}}</p> -->
