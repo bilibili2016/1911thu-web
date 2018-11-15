@@ -5,17 +5,17 @@
     </div>
     <div class="method">
       <div class="center">
-        <div class="wx fl" @click="selectWx" :class="{borderColor: wxMsg}">
-          <img src="http://papn9j3ys.bkt.clouddn.com/wxp.png" alt="">
-          <img src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" class="okImg" v-if="wxMsg">
+        <div class="payOne" @click="selectWx" :class="{borderColor: wxMsg}">
+          <img class="payImg" :src="wechatPay" alt="">
+          <img class="payOk" src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" v-if="wxMsg">
         </div>
-        <div class="pub fr" @click="selectPub" :class="{borderColor: pubMsg}">
-          <img src="http://papn9j3ys.bkt.clouddn.com/payPublic.png" alt="">
-          <img src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" class="okImg" v-if="pubMsg">
+        <div class="payOne" @click="selectZfb" :class="{borderColor: zfbMsg}">
+          <img class="payImg" :src="zfbPay" alt="">
+          <img class="payOk" src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" v-if="zfbMsg">
         </div>
-        <div class="zfb fr" @click="selectZfb" :class="{borderColor: zfbMsg}">
-          <img src="http://papn9j3ys.bkt.clouddn.com/zfb.png" alt="">
-          <img src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" class="okImg" v-if="zfbMsg">
+        <div class="payOne" @click="selectPub" :class="{borderColor: pubMsg}">
+          <img class="payImg" src="http://papn9j3ys.bkt.clouddn.com/payPublic.png" alt="">
+          <img class="payOk" src="http://papn9j3ys.bkt.clouddn.com/ok.png" alt="" v-if="pubMsg">
         </div>
       </div>
     </div>
@@ -46,6 +46,8 @@ export default {
   props: ['orderDetail', 'codeData', 'listData'],
   data() {
     return {
+      wechatPay: 'http://papn9j3ys.bkt.clouddn.com/wxp.png',
+      zfbPay: 'http://papn9j3ys.bkt.clouddn.com/zfb.png',
       orderType: '',
       wxMsg: true,
       zfbMsg: false,
@@ -65,8 +67,31 @@ export default {
         hour: '',
         minutes: '',
         seconds: ''
-      }
+      },
+      isWSW: false
       // attachs: null
+    }
+  },
+  watch: {
+    orderDetail(val) {
+      if (val.order_amount >= 500000) {
+        this.$alert(
+          '您的订单支付金额超过50万元，请通过对公转账方式进行支付，感谢配合！',
+          '温馨提示',
+          {
+            confirmButtonText: '确定',
+            callback: action => {}
+          }
+        )
+        this.selectPub()
+        this.isWSW = true
+        this.wechatPay = 'http://papn9j3ys.bkt.clouddn.com/wxpUnclick.png'
+        this.zfbPay = 'http://papn9j3ys.bkt.clouddn.com/zfbUnclick.png'
+      } else {
+        this.wechatPay = 'http://papn9j3ys.bkt.clouddn.com/wxp.png'
+        this.zfbPay = 'http://papn9j3ys.bkt.clouddn.com/zfb.png'
+        this.isWSW = false
+      }
     }
   },
   methods: {
@@ -118,14 +143,18 @@ export default {
       }, 1000)
     },
     selectWx() {
-      this.wxMsg = true
-      this.zfbMsg = false
-      this.pubMsg = false
+      if (!this.isWSW) {
+        this.wxMsg = true
+        this.zfbMsg = false
+        this.pubMsg = false
+      }
     },
     selectZfb() {
-      this.wxMsg = false
-      this.zfbMsg = true
-      this.pubMsg = false
+      if (!this.isWSW) {
+        this.wxMsg = false
+        this.zfbMsg = true
+        this.pubMsg = false
+      }
     },
     selectPub() {
       this.wxMsg = false
@@ -187,4 +216,6 @@ export default {
   }
 }
 </script>
-
+<style lang="scss" scoped>
+@import '~assets/style/shop/paytype.scss';
+</style>

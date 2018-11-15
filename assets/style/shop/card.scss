@@ -79,3 +79,74 @@
     }
   }
 }
+.courseOne {
+  width: 1040px;
+  background-color: #fff;
+  height: 140px;
+  border-bottom: 1px solid #e8d6f7;
+  padding: 20px 0 20px 2px;
+  margin: 0 auto;
+  &:first-child {
+    border-top: none;
+  }
+  img {
+    width: 160px;
+    height: 100px;
+    margin-right: 20px;
+  }
+  h5 {
+    width: 480px;
+    height: 54px;
+    color: #332a51;
+    font-size: 16px;
+    overflow: hidden;
+    padding-top: 9px;
+  }
+  h6 {
+    color: #6d687f;
+    font-size: 12px;
+    margin-bottom: 9px;
+  }
+  p {
+    color: #6d687f;
+    font-size: 14px;
+  }
+  .coursePrice {
+    display: inline-block;
+    width: 100px;
+    height: 140px;
+    text-align: center;
+    color: #ff5f5f;
+    font-size: 16px;
+    line-height: 78px;
+    margin-left: 158px;
+  }
+  .courseNumber {
+    display: inline-block;
+    width: 80px;
+    height: 140px;
+    text-align: center;
+    color: #332a51;
+    font-size: 16px;
+    line-height: 78px;
+    margin-left: 40px;
+    i {
+      font-size: 12px;
+    }
+  }
+  .bottomImg {
+    position: relative;
+    .project-img {
+      width: 70px;
+      height: 30px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    img {
+      width: 160px;
+      height: 100px;
+      display: inline-block;
+    }
+  }
+}
