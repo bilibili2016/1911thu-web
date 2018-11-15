@@ -47,12 +47,12 @@ export default {
       famousList: [],
       teacherForm: {
         pages: 1,
-        limits: 8,
+        limits: 9,
         recommend: 0
       },
       pagemsg: {
         page: 1,
-        pagesize: 8,
+        pagesize: 9,
         total: null
       },
       loading: false,
@@ -71,7 +71,7 @@ export default {
     },
     getNewInfoList() {
       this.teacherForm.pages = 1
-      this.teacherForm.limits = 8
+      this.teacherForm.limits = 9
       this.loading = true
       list.getTeacherList(this.teacherForm).then(response => {
         if (response.status === 100008) {
