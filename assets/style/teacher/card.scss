@@ -7,28 +7,126 @@
   .boxshadow-none {
     position: relative;
   }
+  .teacherList {
+    position: relative;
+    float: left;
+    width: 345px;
+    height: 290px;
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 400ms;
+
+    .teacherImg {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 30px 0 20px 0;
+    }
+    .name {
+      font-size: 18px;
+      color: #773084;
+    }
+    .position {
+      font-size: 16px;
+      color: #93999f;
+      margin: 10px 0 30px 0;
+    }
+    .operate {
+      .btn {
+        width: 110px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        border-radius: 100px;
+        font-size: 14px;
+        color: #773084;
+        border: 1px solid #773084;
+        margin-right: 30px;
+        box-sizing: border-box;
+        cursor: pointer;
+        &:hover {
+          background-color: #6417a6;
+          color: #fff;
+        }
+      }
+      .btn:last-child {
+        margin-right: 0;
+      }
+      .preparation {
+        background-color: #cccccc;
+        color: #fff;
+        cursor: default;
+        border-color: #ccc;
+        &:hover {
+          background-color: #ccc;
+          color: #fff;
+        }
+      }
+    }
+    .mask {
+      width: 100%;
+      height: 210px;
+      position: absolute;
+      left: 0;
+      top: -290px;
+      background: rgba(119, 47, 132, 0.9);
+      text-align: center;
+      padding: 0 25px 20px 25px;
+      overflow: hidden;
+      transition: all 400ms;
+      h4 {
+        font-size: 18px;
+        color: #fff;
+        margin: 20px 0 10px 0;
+      }
+      p {
+        width: 295px;
+        height: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        font-size: 14px;
+        color: #fff;
+        line-height: 28px;
+        text-indent: 2em;
+        text-align: left;
+      }
+    }
+    &:hover {
+      .mask {
+        top: 0;
+      }
+    }
+  }
   .course {
-    width: 535px;
-    height: 325px;
+    width: 345px;
+    height: 290px;
     transition: all 300ms;
-    padding: 30px 20px 20px;
+    // padding: 30px 20px 20px;
     margin-bottom: 20px;
     box-shadow: 0 8px 35px rgba(0, 0, 0, 0.08);
     background-color: #fff;
+    text-align: center;
     .currentclum {
+      width: 100%;
+      height: 100%;
+      text-align: center;
       cursor: pointer;
       img {
+        display: inline-block;
         width: 100px;
         height: 100px;
         border-radius: 50%;
         cursor: pointer;
+        margin: 0 auto;
       }
-      div.fl {
-        width: 370px;
-        overflow: hidden;
-        margin-left: 20px;
-        margin-bottom: 15px;
-      }
+
       h4 {
         width: 100%;
         font-size: 18px;

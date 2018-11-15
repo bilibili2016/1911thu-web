@@ -2,20 +2,30 @@
   <div>
     <!-- 老师页 -->
     <div class="teacherCard">
-      <div class="course  clearfix bottom " v-for="(teacher,index) in famousList " :key="index ">
-        <!-- <div class="fl " :body-style="{ padding: '0px' } ">
-          课程封面
-        </div> -->
+      <div class="teacherList clearfix" v-for="(teacher,index) in famousList " :key="index" @click="handleLinkTeacherInfo(teacher)">
+        <img :src="teacher.head_img" alt="" class="teacherImg">
+        <p class="name">{{teacher.teacher_name}}</p>
+        <p class="position">{{teacher.graduate}}</p>
+        <p class="operate">
+          <span class="btn" v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
+          <span class="btn preparation" v-else>筹备中</span>
+          <span class="btn" @click.stop="reservation(teacher)">预约导师</span>
+        </p>
+        <div class="mask">
+          <h4>导师介绍</h4>
+          <p>{{teacher.content}}</p>
+        </div>
+      </div>
+
+      <!-- <div class="course  clearfix bottom " v-for="(teacher,index) in famousList " :key="index ">
         <div class="currentclum clearfix" @click="handleLinkTeacherInfo(teacher)">
           <img :src="teacher.head_img" class="fl" alt=" ">
-          <div class="fl">
-            <h4>{{teacher.teacher_name}}</h4>
-            <p class="small-title">{{teacher.graduate}}</p>
-            <div class="teacherBtn">
-              <span v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
-              <span class="preparations" v-else>筹备中</span>
-              <span @click.stop="reservation(teacher)">预约导师</span>
-            </div>
+          <h4>{{teacher.teacher_name}}</h4>
+          <p class="small-title">{{teacher.graduate}}</p>
+          <div class="teacherBtn">
+            <span v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
+            <span class="preparations" v-else>筹备中</span>
+            <span @click.stop="reservation(teacher)">预约导师</span>
           </div>
           <div class="title-desc">
             <h5>导师介绍</h5>
@@ -23,7 +33,7 @@
           </div>
         </div>
 
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
