@@ -45,8 +45,8 @@
                     <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
                   </div>
                 </div>
-                <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)>3" @click="selectPayApply(courseList)">
-                  查看更多课程>
+                <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList)">
+                  查看更多>
                 </div>
               </div>
               <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
@@ -274,7 +274,7 @@ export default {
     },
     //根据列表长度计算高度
     computedHeight(len) {
-      let height = len > 3 ? 3 * 140 + 60 + 'px' : len * 140 + 'px'
+      let height = len > 3 ? 3 * 140 + 60 : len * 140
       return height
     },
     //计算项目列表显示数量

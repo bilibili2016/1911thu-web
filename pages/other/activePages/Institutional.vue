@@ -6,10 +6,10 @@
         <h1 class="top-h1">1911学堂</h1>
         <p class="top-desc"> 1911学堂可根据政府机关、企事业单位需求，<br>提供系统、权威、实用的培训解决方案，<br>帮助学员提升专业知识和思维能力，助力政府机关、企事业单位高效运转。</p>
 
-        <div class="top-button" @click="handleScroll">
+        <!-- <div class="top-button" @click="handleScroll">
           填写联系方式，免费申请课程体验。
           <span class="right" ref="rgihtGo">GO</span>
-        </div>
+        </div> -->
       </div>
     </div>
     <div :class="{topBottom:istopBottom}" ref="topBottom">
@@ -519,7 +519,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.$bus.$emit('bannerImg', true)
+      vm.$bus.$emit('bannerImg', false)
     })
   },
   beforeRouteLeave(to, from, next) {

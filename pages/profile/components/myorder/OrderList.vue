@@ -10,7 +10,7 @@
         <div class="content">
           <div class="course">
             <!-- 课程列表 -->
-            <div class="courseOne" v-if="courseList.orderCurriculumList.length" v-for="(course,index) in courseList.orderCurriculumList" :key="'course'+index">
+            <div class="courseOne" v-if="courseList.orderCurriculumList.length&& index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="'course'+index">
               <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
               <div class="fl">
                 <h4 @click="goCourseInfo(course)" :title="course.title">{{course.title}}</h4>
@@ -19,7 +19,7 @@
               </div>
             </div>
             <!-- 项目列表 -->
-            <div class="courseOne" v-if="courseList.orderProjectList.length" v-for="(project,index) in courseList.orderProjectList" :key="'project'+index">
+            <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="'project'+index">
               <div class="courseImg">
                 <!-- 项目图标 -->
                 <img v-if="project.project_type==2" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p5.png" alt="">
@@ -39,9 +39,9 @@
                 <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
               </div>
             </div>
-            <!-- <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
-              查看更多课程>
-            </div> -->
+            <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
+              查看更多>
+            </div>
           </div>
           <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
             <p>￥{{courseList.order_amount}}</p>
@@ -105,10 +105,10 @@ export default {
     },
     //根据列表长度计算高度
     computedHeight(len) {
-      let height = len * 140 + 'px'
+      let height = len > 3 ? 3 * 140 + 60 + 'px' : len * 140 + 'px'
       return height
     },
-    //计算项目列表显示数量 现在默认全部显示，暂时用不到该方法
+    //计算项目列表显示数量
     computedLength(course, project, index) {
       let projectLength = course.length > 3 ? 0 : 3 - course.length
       if (index < projectLength) {
