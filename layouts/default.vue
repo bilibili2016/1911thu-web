@@ -1,12 +1,15 @@
 <template>
   <el-container class="is-vertical layout-default">
     <Header v-show="hfshow"></Header>
-    <el-container>
+    <el-container v-if="!showNetwork">
       <el-main>
         <nuxt />
       </el-main>
     </el-container>
     <Footer v-show="hfshow"></Footer>
+    <div class="no-network" v-show="showNetwork">
+      <img src="@/assets/images/no-network.png" alt="">
+    </div>
   </el-container>
 </template>
 <script>
@@ -22,6 +25,7 @@ export default {
   data() {
     return {
       hfshow: true,
+      showNetwork: false,
       index: 0,
       length: 0
     }
@@ -29,6 +33,13 @@ export default {
   methods: {
     //设置头部homeSelect选中样式
     fetchUrl() {
+      //检测网络连接情况
+      if (navigator.onLine) {
+        this.showNetwork = false
+      } else {
+        this.showNetwork = true
+      }
+
       let pathName = window.location.pathname
       let headerClass = document.getElementsByClassName('headerClass')
       this.$bus.$emit('getUserInfo')
@@ -86,6 +97,24 @@ export default {
           headerClass[i].classList.remove('active')
         }
       }
+    },
+    addHandler(element, type, handler) {
+      if (element.addEventListener) {
+        element.addEventListener(type, handler, false)
+      } else if (element.attachEvent) {
+        element.attachEvent('on' + type, handler)
+      } else {
+        element['on' + type] = handler
+      }
+    },
+    removeHandler(element, type, handler) {
+      if (element.removeEventListener) {
+        element.removeEventListener(type, handler, false)
+      } else if (element.detachEvent) {
+        element.detachEvent('on' + type, handler)
+      } else {
+        element['on' + type] = null
+      }
     }
   },
   mounted() {
@@ -97,12 +126,20 @@ export default {
     this.$bus.$on('headerFooterHide', () => {
       this.hfshow = false
     })
+
     // 出路由显示header和footer
     this.$bus.$on('headerFooterShow', () => {
       this.hfshow = true
     })
     this.$bus.$on('selectItem', data => {
       this.index = data
+    })
+
+    this.addHandler(window, 'online', function() {
+      this.showNetwork = false
+    })
+    this.addHandler(window, 'offline', function() {
+      this.showNetwork = true
     })
   },
   watch: {
