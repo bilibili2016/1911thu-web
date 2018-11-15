@@ -466,16 +466,6 @@ export default {
         bIsCE ||
         bIsWM
       ) {
-        alert(
-          bIsIpad,
-          bIsIphoneOs,
-          bIsMidp,
-          bIsUc7,
-          bIsUc,
-          bIsAndroid,
-          bIsCE,
-          bIsWM
-        )
         //跳转移动端页面
         document.body.classList.add('mobile')
       } else {
