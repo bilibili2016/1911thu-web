@@ -4,7 +4,6 @@
       <!-- 头部banner -->
       <v-banner :config="wePay"></v-banner>
       <div class="main">
-
         <div class="company">
           <div class="title clearfix">
             <span class="fl">订单号：{{orderDetail.order_sn}}</span>
@@ -153,5 +152,7 @@ export default {
   }
 }
 </script>
-
+<style scoped lang="scss">
+@import '~assets/style/shop/wepay';
+</style>
 

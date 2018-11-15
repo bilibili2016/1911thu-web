@@ -154,6 +154,19 @@ export default {
         })
       }
     },
+    // 判断购物车数量
+    goodsNmber(id) {
+      if (this.productsNum < 70) {
+        this.addCart(id)
+      } else {
+        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/shop/shoppingcart')
+          }
+        })
+      }
+    },
     //加入购物车
     addCart(id) {
       this.orderForm.ids = id
@@ -184,14 +197,14 @@ export default {
     goShopping(courseList) {
       if (courseList.order_type == '1') {
         //课程
-        this.addCart(courseList.id)
+        this.goodsNmber(courseList.id)
       } else if (courseList.order_type == '2') {
         //项目
         if (courseList.project_type == '1') {
           //标准项目
           if (courseList.orderProjectList[0].study_type == '1') {
             //线上
-            this.addCart(courseList.id)
+            this.goodsNmber(courseList.id)
           } else {
             //混合 互动
             this.goAffirmorder(courseList.orderProjectList[0].id)
