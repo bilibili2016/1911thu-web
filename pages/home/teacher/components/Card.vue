@@ -32,7 +32,6 @@
             <p v-if="teacher.wish_word">{{teacher.content}}</p>
           </div>
         </div>
-
       </div> -->
     </div>
   </div>
