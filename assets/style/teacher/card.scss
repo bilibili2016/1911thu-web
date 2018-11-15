@@ -1,9 +1,10 @@
 .teacherCard {
-  width: 1100px;
+  width: 1130px;
   margin: 0 auto;
-  display: flex;
+  // display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+
   .boxshadow-none {
     position: relative;
   }
@@ -14,10 +15,12 @@
     height: 290px;
     box-shadow: 0 8px 35px rgba(0, 0, 0, 0.08);
     margin-bottom: 30px;
+    margin-right: 30px;
     text-align: center;
     cursor: pointer;
     overflow: hidden;
     transition: all 400ms;
+    background-color: #fff;
     .teacherImg {
       display: inline-block;
       width: 100px;

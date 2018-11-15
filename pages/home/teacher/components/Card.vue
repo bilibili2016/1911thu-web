@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 老师页 -->
-    <div class="teacherCard">
+    <div class="teacherCard clearfix">
       <div class="teacherList clearfix" v-for="(teacher,index) in famousList " :key="index" @click="handleLinkTeacherInfo(teacher)">
         <img :src="teacher.head_img" alt="" class="teacherImg">
         <p class="name">{{teacher.teacher_name}}</p>
