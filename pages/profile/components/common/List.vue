@@ -214,14 +214,27 @@ export default {
       this.tidForm.tids = id * 1
       this.$router.push('/home/teacher/' + this.tidForm.tids)
     },
+    // 判断购物车数量
+    goodsNmber() {
+      if (this.productsNum < 70) {
+        profileHome.addShopCart(this.curriculumcartids).then(response => {
+          this.$router.push('/shop/shoppingcart')
+        })
+      } else {
+        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/shop/shoppingcart')
+          }
+        })
+      }
+    },
     // 已过期商品直接加入购物车
     addShopCarts(item, index) {
       if (!this.config.project) {
         this.curriculumcartids.cartid = item.id
         this.curriculumcartids.type = 1
-        profileHome.addShopCart(this.curriculumcartids).then(response => {
-          this.$router.push('/shop/shoppingcart')
-        })
+        this.goodsNmber()
       } else {
         if (item.type == '2') {
           //定制项目
@@ -235,9 +248,7 @@ export default {
             //1.线上
             this.curriculumcartids.cartid = item.id
             this.curriculumcartids.type = 2
-            profileHome.addShopCart(this.curriculumcartids).then(response => {
-              this.$router.push('/shop/shoppingcart')
-            })
+            this.goodsNmber()
           } else {
             //2.混合 3.互动
             this.$router.push({

@@ -151,7 +151,20 @@ export default {
     // 已过期商品直接加入购物车
     goShoppingCart(item) {
       this.kidForm.kids = item.id
-      this.addShopCarts()
+      this.goodsNmber()
+    },
+    // 判断购物车数量
+    goodsNmber() {
+      if (this.productsNum < 70) {
+        this.addShopCarts()
+      } else {
+        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/shop/shoppingcart')
+          }
+        })
+      }
     },
     addShopCarts() {
       this.curriculumcartids.cartid = this.kid

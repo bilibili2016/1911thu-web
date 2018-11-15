@@ -55,7 +55,7 @@
           <div v-if="projectDetail.is_creator" class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
         </div>
         <div v-else>
-          <div v-if="projectDetail.study_type === '1'" class="addShoppingCart" @click="addShoppingCart">加入购物车</div>
+          <div v-if="projectDetail.study_type === '1'" class="addShoppingCart" @click="goodsNmber">加入购物车</div>
           <div v-else class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
         </div>
 
@@ -117,6 +117,23 @@ export default {
         open(urlLink)
       } else {
         this.$bus.$emit('loginShow', true)
+      }
+    },
+    // 判断购物车数量
+    goodsNmber() {
+      if (!persistStore.get('token')) {
+        this.$bus.$emit('loginShow', true)
+        return false
+      }
+      if (this.productsNum < 70) {
+        this.addShoppingCart()
+      } else {
+        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/shop/shoppingcart')
+          }
+        })
       }
     },
     // 项目加入购物车

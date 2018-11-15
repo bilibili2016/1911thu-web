@@ -92,9 +92,22 @@ export default {
     goBuy(item, index) {
       if (persistStore.get('token')) {
         this.curriculumcartids.cartid = item.curriculum_id
-        this.addShopCart()
+        this.goodsNmber()
       } else {
         this.$bus.$emit('loginShow', true)
+      }
+    },
+    // 判断购物车数量
+    goodsNmber() {
+      if (this.productsNum < 70) {
+        this.addShopCart()
+      } else {
+        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$router.push('/shop/shoppingcart')
+          }
+        })
       }
     },
     addShopCart() {
