@@ -1,14 +1,11 @@
 <template>
-  <div class="goodLesson new-lesson" style="padding-bottom: 40px;" v-loading="loading">
+  <div class="goodLesson" v-loading="loading">
     <div class="topImg" :class="{
       projectImg:cidNumber==='0', courseImg:cidNumber==='1', goodCourseImg:cidNumber==='2', freeImg:cidNumber==='3',
     }">
-
     </div>
-    <div class="breadCrumb">
-      <!-- 面包屑组件 -->
-      <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-    </div>
+    <!-- 面包屑组件 -->
+    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
     <div>
       <v-card :courseList="courseList" :config="config"></v-card>
       <div class="pagination" v-if="pageMsgs">
@@ -21,13 +18,11 @@
 <script>
 import CustomCard from '@/pages/course/components/ListCard.vue'
 import { categorylist } from '~/lib/v1_sdk/index'
-import CustomPagination from '@/components/common/Pagination.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import { message, setTitle } from '~/lib/util/helper'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-page': CustomPagination,
     'v-breadcrumb': BreadCrumb
   },
   data() {
@@ -183,7 +178,6 @@ export default {
     // 初始化所有方法
     initAll() {
       this.getCourseList()
-      // this.downRefresh()
     }
   },
   mounted() {
@@ -203,5 +197,7 @@ export default {
   }
 }
 </script>
-
+<style scoped lang="scss">
+@import '~assets/style/course/courseList';
+</style>
 

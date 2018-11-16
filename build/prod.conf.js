@@ -25,6 +25,10 @@ config.sentry = {
 ]),
   (config.head.script = [
     {
+      src: 'https://hm.baidu.com/hm.js?218b87493661d1bdd50d23f9ae6ae5f0',
+      async: true
+    },
+    {
       src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
       async: true
     },

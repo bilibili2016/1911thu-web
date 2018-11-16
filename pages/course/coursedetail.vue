@@ -4,14 +4,10 @@
       <div class="topCard">
         <!-- 面包屑 收藏分享 -->
         <div class="main-crumb">
-          <div class="fl">
-            <!-- 面包屑组件 -->
-            <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-          </div>
-          <div class="fr">
-            <!-- 收藏分享 -->
-            <v-collection :collectData="collectMsg"></v-collection>
-          </div>
+          <!-- 面包屑组件 -->
+          <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+          <!-- 收藏分享 -->
+          <v-collection :collectData="collectMsg"></v-collection>
         </div>
         <!-- 顶部的card -->
         <div class="main-header" v-loading="loadMsg">

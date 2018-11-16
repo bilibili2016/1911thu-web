@@ -1,52 +1,50 @@
 <template>
-  <div>
-    <!-- 首页课程列表的 更多 -->
-    <div class="newOrFreeCourseList center goodlesson">
-      <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index " @click="courseInfo(course) ">
-        <el-card class="fl " :body-style="{ padding: '0px' } ">
-          <div class="courseImg">
-            <!-- 项目图标 -->
-            <img v-if="cidNumber==='0'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
-            <!-- 老师封面 -->
-            <img v-if="!teacherImg" :src="course.teacher_picture " class="image" alt=" ">
-            <!-- 课程封面 -->
-            <img :src="course.picture" class="image" alt=" " v-else>
-          </div>
-        </el-card>
+  <!-- 首页课程列表的 更多 -->
+  <div class="newOrFreeCourseList">
+    <div class="course clearfix bottom " v-for="(course,index) in courseList " :key="index " @click="courseInfo(course) ">
+      <el-card class="fl " :body-style="{ padding: '0px' } ">
+        <div class="courseImg">
+          <!-- 项目图标 -->
+          <img v-if="cidNumber==='0'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
+          <!-- 老师封面 -->
+          <img v-if="!teacherImg" :src="course.teacher_picture " class="image" alt=" ">
+          <!-- 课程封面 -->
+          <img :src="course.picture" class="image" alt=" " v-else>
+        </div>
+      </el-card>
 
-        <div class="particulars fr ">
-          <!-- 课程标题副标题 课程介绍 -->
-          <div class="currentclum ">
-            <h4>{{course.title}}</h4>
-            <p class="small-title">{{course.deputy_title}}</p>
-            <p class="title-desc">{{course.introduction}}</p>
-          </div>
+      <div class="particulars fr ">
+        <!-- 课程标题副标题 课程介绍 -->
+        <div class="currentclum ">
+          <h4>{{course.title}}</h4>
+          <p class="small-title">{{course.deputy_title}}</p>
+          <p class="title-desc">{{course.introduction}}</p>
+        </div>
 
-          <div class="study clearfix">
-            <!-- 免费课程 展示 -->
-            <div v-if="course.is_free =='2'">
-              <p class="coin free"><span class="freetext">限免</span><span>剩余{{course.free_end_time}}</span></p>
-              <!-- <p>剩余{{course.free_end_time}}</p> -->
-              <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
-              <div class="fr common-button-half-right">
-                <el-button type="primary" plain @click.stop="handleLinkCourseDetail(course)"> 立即学习</el-button>
-              </div>
+        <div class="study clearfix">
+          <!-- 免费课程 展示 -->
+          <div v-if="course.is_free =='2'">
+            <p class="coin free"><span class="freetext">限免</span><span>剩余{{course.free_end_time}}</span></p>
+            <!-- <p>剩余{{course.free_end_time}}</p> -->
+            <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
+            <div class="fr common-button-half-right">
+              <el-button type="primary" plain @click.stop="handleLinkCourseDetail(course)"> 立即学习</el-button>
             </div>
-            <!-- 收费课程展示 -->
-            <div v-else>
-              <p class="coin" v-if="cidNumber==='0'">
-                <span v-if="course.study_type === '1'">¥{{course.present_price}}/人</span>
-                <span v-else>¥{{course.present_price}}/班</span>
-              </p>
-              <p class="coin" v-else>¥ {{course.present_price}}</p>
+          </div>
+          <!-- 收费课程展示 -->
+          <div v-else>
+            <p class="coin" v-if="cidNumber==='0'">
+              <span v-if="course.study_type === '1'">¥{{course.present_price}}/人</span>
+              <span v-else>¥{{course.present_price}}/班</span>
+            </p>
+            <p class="coin" v-else>¥ {{course.present_price}}</p>
 
-              <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
-              <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">
-                <el-button type="primary" plain @click.stop="goBuy(course)">立即购买</el-button>
-              </div>
-              <div class="fr common-button-half-right" v-else>
-                <el-button type="primary" plain @click.stop="handleAddShopCart(course)">加入购物车</el-button>
-              </div>
+            <span class="fl"><img :src="peopleImg" alt=""> {{course.study_number}}人加入学习</span>
+            <div class="fr common-button-half-right" v-if="course.study_type == '2'||course.study_type == '3'">
+              <el-button type="primary" plain @click.stop="goBuy(course)">立即购买</el-button>
+            </div>
+            <div class="fr common-button-half-right" v-else>
+              <el-button type="primary" plain @click.stop="handleAddShopCart(course)">加入购物车</el-button>
             </div>
           </div>
         </div>

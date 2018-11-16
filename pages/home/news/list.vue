@@ -1,12 +1,10 @@
 <template>
-  <div class="goodLesson news-list famous-teacher" v-loading="load">
+  <div class="news-list" v-loading="load">
     <v-banner :bannerImg="bannerImg" :config="configs" class="singleList"></v-banner>
-    <div class="center shadow">
-      <!-- 面包屑组件 -->
-      <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-      <div @click="getNewInfoList"></div>
-      <v-card :newsList="newsList" :config="config" :linksix='linksix' class="new-card-on"></v-card>
-    </div>
+    <!-- 面包屑组件 -->
+    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+    <div @click="getNewInfoList"></div>
+    <v-card :newsList="newsList" :config="config" :linksix='linksix'></v-card>
     <div class="pagination" v-show="!load">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
@@ -84,3 +82,11 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+.news-list {
+  padding-bottom: 40px;
+  .center {
+    margin-top: 40px;
+  }
+}
+</style>

@@ -11,11 +11,11 @@
         <p>平台目前有近200位授课师资，将面向国内985、211 等知名高校特聘数百位院士、教授、副教授，建立由数千名专家教授组成的师资库，共同构建全球顶尖的高校名师智库。</p>
       </div>
     </div> -->
-    <div class="center shadow teacherList">
+    <div class="center teacherList">
       <div @click="getNewInfoList"></div>
-      <v-card :famousList="famousList" :config="config" class="new-card-on"></v-card>
+      <v-card :famousList="famousList" :config="config"></v-card>
     </div>
-    <div class="pagination" v-show="famousList.length!=0">
+    <div class="pagination" v-if="pagemsg.total>9">
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
     <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn" style="cursor:pointer">

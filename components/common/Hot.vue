@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import CustomPagination from '@/components/common/Pagination.vue'
 export default {
   data() {
     return {
@@ -37,9 +36,6 @@ export default {
   },
   methods: {
     handleClick() {}
-  },
-  components: {
-    'v-page': CustomPagination
   }
 }
 </script>

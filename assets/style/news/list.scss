@@ -2,7 +2,6 @@
 .newsList {
   width: 1100px;
   margin: 0 auto;
-
   .boxshadow-none {
     position: relative;
   }
@@ -22,15 +21,10 @@
     padding: 32px 0;
     border-bottom: 1px solid #eee;
     transition: all 300ms;
-    // border-radius: 6px;
-    // background-color: #fff;
-    // box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     .el-card.is-always-shadow {
       box-shadow: none;
     }
     .el-card {
-      // width: 400px;
-      // height: 392px;
       font-size: 0;
       position: relative;
       .img-wrap {
@@ -335,25 +329,4 @@
       }
     }
   }
-}
-
-//列表页
-.goodLesson {
-  padding-bottom: 40px !important;
-  .singleList {
-    .news-banner {
-      img {
-        margin: 0 auto;
-      }
-    }
-  }
-}
-.news-list .shadow {
-  box-shadow: none !important;
-}
-.news-list .center {
-  margin-top: 0 !important;
-}
-.news-list .new-card-on {
-  margin-top: 0 !important;
 }

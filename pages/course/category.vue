@@ -32,7 +32,9 @@
         <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
       </div>
     </div>
-    <v-page :id="pagemsg.total" :data="pagemsg.pagesize" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" :pagemsg="pagemsg" @handlePageChange="handlePageChange" v-if="!loadCourse"></v-page>
+    <div class="pagination" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize">
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handlePageChange"></el-pagination>
+    </div>
   </div>
 </template>
 
@@ -45,14 +47,12 @@ import { store as persistStore } from '~/lib/core/store'
 import { openUrl, matchSplits, setTitle } from '~/lib/util/helper'
 import List from '@/pages/course/components/List'
 import Filter from '@/pages/course/components/Filter'
-import Page from '@/components/common/Pagination'
 export default {
   components: {
     'v-card': CustomCard,
     'v-nothing': SearchNothing,
     'v-list': List,
-    'v-filter': Filter,
-    'v-page': Page
+    'v-filter': Filter
   },
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])

@@ -18,6 +18,10 @@ config.analyze = {
 ]),
   (config.head.script = [
     {
+      src: 'https://hm.baidu.com/hm.js?b3d07e5a1ff80ed44d2a56cc704327ea',
+      async: true
+    },
+    {
       src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
       async: true
     },

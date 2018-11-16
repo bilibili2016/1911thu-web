@@ -36,13 +36,8 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { uniqueArray, message, matchSplits } from '@/lib/util/helper'
 import BackToTop from '@/components/common/BackToTop.vue'
-import EvaluateContent from '@/components/common/EvaluateContent.vue'
-import EvaluateCase from '@/components/common/EvaluateCase.vue'
 import BreadCrumb from '@/components/common/BreadCrumb.vue'
 import TeacherIntro from '@/pages/course/coursedetail/teacherIntro.vue'
-import Collection from '@/components/common/Collection.vue'
-import UserEvaluate from '@/pages/course/coursedetail/UserEvaluate.vue'
-import EvaluateDialog from '@/pages/course/coursedetail/EvaluateDialog.vue'
 import CourseCatalog from '@/pages/course/coursedetail/CourseCatalog.vue'
 export default {
   computed: {
@@ -51,13 +46,8 @@ export default {
   components: {
     'v-backtop': BackToTop,
     'v-card': CustomCard,
-    'v-evaluate': EvaluateContent,
-    'v-evaluatecase': EvaluateCase,
     'v-breadcrumb': BreadCrumb,
     'v-teacherintro': TeacherIntro,
-    'v-collection': Collection,
-    'v-userevaluate': UserEvaluate,
-    'v-evaluatedialog': EvaluateDialog,
     'v-coursecatelog': CourseCatalog
   },
   data() {

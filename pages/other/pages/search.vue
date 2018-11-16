@@ -34,7 +34,6 @@
 <script>
 import Search from '@/components/common/Search.vue'
 import CustomCard from '@/components/card/Card.vue'
-import CustomPagination from '@/components/common/Pagination.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
 import { search } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
@@ -44,7 +43,6 @@ export default {
   components: {
     'v-search': Search,
     'v-card': CustomCard,
-    'v-page': CustomPagination,
     'v-backtotop': BackToTop
   },
   data() {
