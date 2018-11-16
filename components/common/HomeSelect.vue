@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="headerPage clearfix">
     <div class="backHome headerClass">
       <span @click="handleLink('/')">首页</span>
     </div>
@@ -102,5 +102,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/components/tabs';
+// @import '~assets/style/components/tabs';
 </style>

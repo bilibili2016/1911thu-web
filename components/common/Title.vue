@@ -1,5 +1,5 @@
 <template>
-  <div class="new">
+  <div class="home-title">
     <el-row class="center" :class="{famous: this.title =='名师智库' ? true : false}">
       <h1 class="clearfix">
         <span class="title">{{title}}
@@ -20,5 +20,8 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+@import '~assets/style/components/title.scss';
+</style>
 
 

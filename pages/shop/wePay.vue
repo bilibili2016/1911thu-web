@@ -17,7 +17,7 @@
               <!-- 购买课程列表 -->
               <v-list :config="wePay" :data="orderCurriculumLists" v-if="takeupMsg"></v-list>
               <!-- 支付类型选择-支付 -->
-              <v-paytype :orderDetail="orderDetail" :codeData="codeData" :listData="orderCurriculumLists"></v-paytype>
+              <v-paytype :orderDetail="orderDetail" :codeData="codeData" :listData="orderCurriculumLists" @showRpt="showRpt"></v-paytype>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
       <!-- 支付二维码展示 -->
       <v-qrcode :orderDetail='orderDetail'></v-qrcode>
       <!-- 报告问题 -->
-      <v-report :config="config"></v-report>
+      <v-report :config="config" :showReportBug="showReportBug" @closeReport="closeReport"></v-report>
     </div>
   </div>
 </template>
@@ -58,6 +58,7 @@ export default {
   },
   data() {
     return {
+      showReportBug: false,
       wePay: {
         type: 'wePay',
         text: '支付中心'
@@ -131,6 +132,14 @@ export default {
         }
         this.setProductsNum(len)
       })
+    },
+    //打开问题弹窗
+    showRpt() {
+      this.showReportBug = true
+    },
+    //关闭问题弹窗
+    closeReport() {
+      this.showReportBug = false
     }
   },
   mounted() {

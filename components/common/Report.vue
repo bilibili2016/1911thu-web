@@ -12,7 +12,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -21,10 +20,9 @@ import { store as persistStore } from '~/lib/core/store'
 import { home } from '~/lib/v1_sdk/index'
 import { matchSplits, message, Trim } from '@/lib/util/helper'
 export default {
-  props: ['config'],
+  props: ['config', 'showReportBug'],
   data() {
     return {
-      showReportBug: false,
       problem: {
         types: 1,
         curriculumId: null,
@@ -35,7 +33,7 @@ export default {
   },
   methods: {
     closeReport() {
-      this.showReportBug = false
+      this.$emit('closeReport')
       this.problem.content = ''
     },
     // 反馈问题
@@ -56,6 +54,7 @@ export default {
       }
       this.problem.content = Trim(this.problem.content)
       home.reportProblem(this.problem).then(response => {
+        this.$emit('closeReport')
         if (response.status === 100100) {
           message(this, 'error', response.msg)
         } else if (response.status === 0) {

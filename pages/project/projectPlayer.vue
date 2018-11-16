@@ -16,7 +16,7 @@
       </div>
     </div>
     <!-- 报告问题 -->
-    <v-report :config="configReport"></v-report>
+    <v-report :config="configReport" :showReportBug="showReportBug" @closeReport="closeReport"></v-report>
     <!-- 写评价 -->
     <v-evaluate @closeEvaluate="closeEvaluate" :showEvaluate="showEvaluate" :playerForm="playerForm"></v-evaluate>
     <!-- 扫码支付 -->
@@ -51,6 +51,7 @@ export default {
   },
   data() {
     return {
+      showReportBug: false,
       isClose: true,
       isFreeCourse: '',
       videoState: false,
@@ -157,7 +158,11 @@ export default {
     showRpt() {
       this.configReport.curriculumId = this.playerForm.curriculumId
       this.configReport.catalogId = this.playerForm.catalogId
-      this.$bus.$emit('openReport')
+      this.showReportBug = true
+    },
+    //关闭问题弹窗
+    closeReport() {
+      this.showReportBug = false
     },
     // 展示评论
     showElt() {

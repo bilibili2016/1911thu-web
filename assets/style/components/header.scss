@@ -1,5 +1,5 @@
 body {
-  padding-top: 90px;
+  padding-top: 80px;
   &.mobile {
     zoom: 0.8 !important;
   }
@@ -18,7 +18,7 @@ body {
   .main {
     width: 84%;
     min-width: 1100px;
-    height: 90px;
+    height: 80px;
     box-sizing: border-box;
     margin: 0 auto;
     display: flex;
@@ -28,8 +28,8 @@ body {
     .header-fl {
       white-space: nowrap;
       width: 625px;
-      height: 90px;
-      padding: 20px 0;
+      height: 80px;
+      padding: 12px 0;
       position: absolute;
       left: 0;
       top: 0;
@@ -59,7 +59,7 @@ body {
       cursor: pointer;
       font-size: 16px;
       float: left;
-      line-height: 50px;
+      line-height: 56px;
       box-sizing: border-box;
       text-align: center;
       &:hover {
@@ -74,15 +74,14 @@ body {
 
     .dropdown {
       float: left;
-      height: 90px;
-      line-height: 90px;
-      margin-top: -20px;
+
       .dropItem {
         float: left;
         box-sizing: border-box;
         position: relative;
         margin-right: 30px;
         .el-dropdown-link {
+          line-height: 56px;
           font-size: 16px;
           color: #222;
           text-align: center;
@@ -96,7 +95,7 @@ body {
           .downLine {
             display: none;
             position: absolute;
-            top: 70px;
+            top: 56px;
             left: 0;
             width: 100%;
             height: 2px;
@@ -150,7 +149,6 @@ body {
       .dropItem.active {
         .el-dropdown-link {
           color: #773084;
-
           .downLine {
             display: block;
           }
@@ -173,7 +171,7 @@ body {
       // margin-left: 20px;
       cursor: pointer;
       float: left;
-      line-height: 50px;
+      line-height: 56px;
       font-size: 16px;
       color: #222;
       &:hover {
@@ -207,7 +205,7 @@ body {
       border-bottom: 1px solid #7d7d7d;
       position: relative;
       float: right;
-      margin-top: 30px;
+      margin-top: 25px;
       line-height: 32px;
       input {
         width: 150px;
@@ -251,9 +249,8 @@ body {
     }
     .HREntry {
       float: right;
-      // line-height: 50px;
       font-size: 16px;
-      margin-top: 37px;
+      margin-top: 33px;
       &.islogined {
       }
       span {
@@ -331,7 +328,7 @@ body {
         display: inline-block;
         position: relative;
         cursor: pointer;
-        height: 55px;
+        height: 43px;
         width: 30px;
         text-align: right;
         &:hover .downApp {
@@ -440,7 +437,7 @@ body {
       height: 34px;
       // margin-top: 32px;
       // padding-top: 2px;
-      line-height: 90px;
+      line-height: 80px;
       span {
         // width: 40px;
         // height: 34px;
@@ -508,89 +505,7 @@ body {
       }
     }
   }
-  .exchange {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 200;
-    .innerWord {
-      width: 580px;
-      height: 390px;
-      position: absolute;
-      top: 100px;
-      left: 50%;
-      margin-left: -290px;
-      border-radius: 10px;
-      background-color: #fff;
-      .closeEcg {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        font-size: 30px;
-        color: #773084;
-      }
-      .changeContent {
-        width: 100%;
-        margin-top: 72px;
-        padding: 0 35px;
-        .changeInput {
-          span {
-            color: #222;
-            font-size: 16px;
-            margin-right: 20px;
-          }
-          input {
-            width: 400px;
-            height: 50px;
-            border-radius: 5px;
-            padding-left: 20px;
-            background-color: #f1e9f8;
-            ::placeholder {
-              color: #c099ec;
-              font-size: 14px;
-            }
-          }
-          p {
-            height: 30px;
-            line-height: 30px;
-            span {
-              font-size: 13px;
-              color: #ff5f5f;
-              padding-left: 94px;
-            }
-          }
-        }
-        .changeTips {
-          padding-top: 30px;
-          // padding-left: 120px;
-          width: 430px;
-          margin: 0 auto;
-          p {
-            color: #aaa;
-            font-size: 12px;
-            line-height: 24px;
-          }
-        }
-        .bind {
-          width: 125px;
-          height: 42px;
-          line-height: 42px;
-          text-align: center;
-          color: #fff;
-          margin: 30px auto 0;
-          border-radius: 21px;
-          background-color: #cccccc;
-          cursor: pointer;
-          &.input {
-            background-color: #773084;
-          }
-        }
-      }
-    }
-  }
+
   .start {
     width: 100%;
     height: 100%;

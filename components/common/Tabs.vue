@@ -23,11 +23,8 @@
           <li v-for="(item,index) in projectArr" :key="index" @click="handleClick(item)">{{item.category_name}}</li>
         </ul>
       </div>
-
     </div>
-
   </div>
-
 </template>
 
 <script>
@@ -93,5 +90,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/components/tabs';
+// @import '~assets/style/components/tabs';
 </style>

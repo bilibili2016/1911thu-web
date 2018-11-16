@@ -1,6 +1,6 @@
 <template>
   <!-- 课程列表公共 -->
-  <div class="new" :class="{ bgnone : config.card_type !== 'profile'}">
+  <div class=" " :class="{ bgnone : config.card_type !== 'profile'}">
     <el-row class="center">
       <v-title :title="title" :link="link"></v-title>
       <!-- 精品好课 -->
