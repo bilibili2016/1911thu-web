@@ -103,7 +103,8 @@ export default {
       errorMsg: '',
       playLoading: '',
       loadingFlag: true,
-      playVideo: false //根据当前视频加载的状态，判断是否显示播放按钮
+      playVideo: false, //根据当前视频加载的状态，判断是否显示播放按钮
+      beforeRoute: ''
     }
   },
   methods: {
@@ -240,6 +241,12 @@ export default {
       this.playerLoad()
       this.playVideo = true
       this.loadingFlag = true
+
+      //防止页面发生跳转视频继续播放的情况
+      if (this.beforeRoute != this.$route.path) {
+        return false
+      }
+
       if (this.aliPlayer.autoplay) {
         this.playVideo = false
         this.player.play()
@@ -501,6 +508,7 @@ export default {
       this.getdefaultCurriculumCatalog()
     })
     this.node = this.$refs.mediaPlayer
+    this.beforeRoute = this.$route.path
   },
   watch: {
     closePay(val) {
@@ -509,6 +517,7 @@ export default {
       }
     }
   },
+
   beforeRouteEnter(to, from, next) {
     next(vm => {
       if (vm.player) {
