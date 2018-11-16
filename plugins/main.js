@@ -5,6 +5,7 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import { log } from '../lib/core/logger'
+import { getNetwork } from '../lib/util/helper'
 // const ES3CompatibleWebpackPlugin = require('es3-compatible-webpack-plugin')
 //   .default
 // new ES3CompatibleWebpackPlugin()
@@ -67,4 +68,22 @@ if (isIE(9)) {
   //   console.log('process.client')
   //   window.history.replaceState = window.history.replaceState || function() {}
   // }
+}
+
+if (getNetwork()) {
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?b3d07e5a1ff80ed44d2a56cc704327ea'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+} else {
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?218b87493661d1bdd50d23f9ae6ae5f0'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
 }
