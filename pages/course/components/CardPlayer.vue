@@ -13,7 +13,7 @@
 import { coursedetail, players } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import { message, matchSplits, getNet } from '@/lib/util/helper'
+import { message, matchSplits, getNet, exitScreen } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
 import PlayerError from '@/components/common/PlayerError.vue'
@@ -205,6 +205,7 @@ export default {
           this.player.on('ready', this.readyPlay)
           this.player.on('play', this.playerPlay)
           this.player.on('pause', this.playerPause)
+          this.player.on('cancelFullScreen', this.exitFullScreen)
           this.player.on('ended', this.playerEnded)
           this.player.on('error', this.playerError)
         } else {
@@ -413,6 +414,13 @@ export default {
           this.player.fullscreenService.requestFullScreen()
         }
       }
+    },
+    //  播放器退出全屏事件
+    exitFullScreen() {
+      console.log(123123123123)
+
+      // 退出浏览器全屏
+      exitScreen()
     },
     // 增加空格，上下左右键盘操作视频
     keyboard() {

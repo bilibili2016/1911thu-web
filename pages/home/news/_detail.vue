@@ -10,7 +10,9 @@
       <div class="newsContent" v-loading='loading'>
         <h3>{{newsDetail.title}}</h3>
         <p class="time">{{newsDetail.create_time}}</p>
+        <h4 class="source" v-if="newsDetail.source">新闻来源：{{newsDetail.source}}</h4>
         <div class="newsInner" v-html="newsDetail.content"></div>
+        <h5 class="author" v-if="newsDetail.author">责任编辑：{{newsDetail.author}}</h5>
         <div class="next clearfix">
           <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇
             <i>{{beforeNews.title}}</i>
@@ -97,6 +99,9 @@ export default {
           }
           this.loading = false
           document.body.scrollTop = document.documentElement.scrollTop = 0
+        } else {
+          message(this, 'error', response.msg)
+          this.$router.push('/home/news/list')
         }
       })
     }
@@ -107,4 +112,6 @@ export default {
   }
 }
 </script>
-
+<style lang="scss">
+@import '~assets/style/news/newsDetail';
+</style>
