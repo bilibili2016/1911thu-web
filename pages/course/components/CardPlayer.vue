@@ -104,7 +104,8 @@ export default {
       playLoading: '',
       loadingFlag: true,
       playVideo: false, //根据当前视频加载的状态，判断是否显示播放按钮
-      beforeRoute: ''
+      beforeRoute: '',
+      fullScreen: true
     }
   },
   methods: {
@@ -206,6 +207,7 @@ export default {
           this.player.on('ready', this.readyPlay)
           this.player.on('play', this.playerPlay)
           this.player.on('pause', this.playerPause)
+          this.player.on('requestFullScreen', this.fullScreenTrue)
           this.player.on('cancelFullScreen', this.exitFullScreen)
           this.player.on('ended', this.playerEnded)
           this.player.on('error', this.playerError)
@@ -422,10 +424,19 @@ export default {
         }
       }
     },
+    //  播放器进入全屏事件
+    fullScreenTrue() {
+      document.getElementsByClassName(
+        'prism-big-play-btn'
+      )[0].style.visibility = 'visible'
+      // 用于播放器全屏后大播放按钮显示问题
+      this.fullScreen = true
+    },
     //  播放器退出全屏事件
     exitFullScreen() {
-      console.log(123123123123)
-
+      document.getElementsByClassName(
+        'prism-big-play-btn'
+      )[0].style.visibility = 'hidden'
       // 退出浏览器全屏
       exitScreen()
     },

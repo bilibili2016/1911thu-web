@@ -18,8 +18,11 @@
   .main-crumb {
     padding: 0 30px;
     color: #bdbccf;
-    .fr .collect .line-center > span {
-      color: #fff;
+    .fr .collect {
+      right: 30px;
+      .line-center > span {
+        color: #fff;
+      }
     }
     .main-crumbs {
       .el-breadcrumb__inner,

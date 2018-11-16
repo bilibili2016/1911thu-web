@@ -581,7 +581,6 @@ export default {
             if (response.status === 0) {
               this.close()
               this.getUserInfo()
-              // this.$bus.$emit('updateCount') //获取购物车数量
               persistStore.set('loginMsg', false)
               this.$bus.$emit('reLogin', true)
               // 未登录后登陆后刷新当前页面
