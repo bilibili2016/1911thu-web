@@ -191,7 +191,6 @@ export default {
       // this.getClassicCourseList()
       // this.getEvaluateList(),
       this.getNewsInfoList()
-      // this.$bus.$emit('updateCount')
       // this.getPartnerList(),
       // this.getPointList()
       this.getProjectList()

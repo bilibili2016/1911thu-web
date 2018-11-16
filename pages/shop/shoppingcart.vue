@@ -248,7 +248,6 @@ export default {
       companyForm: {
         companyname: '1911'
       },
-      restaurants: [],
       timeout: null,
       windowHeight: '',
       computedHeight: '',
@@ -341,17 +340,8 @@ export default {
       let kidForm = {
         kids: item.id
       }
-
       this.courseUrl.kid = item.id
       open(this.courseUrl)
-      // this.$router.push({
-      //   path: '/course/coursedetail',
-      //   query: {
-      //     kid: item.id,
-      //     bid: '',
-      //     page: 0
-      //   }
-      // })
     },
     goProjectDetail(item) {
       this.$router.push({
@@ -370,45 +360,6 @@ export default {
         message: '请您先选择课程哦',
         duration: 1000
       })
-    },
-    querySearchAsync(queryString, cb) {
-      queryString = queryString.replace(/^\s+|\s+$/g, '')
-      if (queryString === '') {
-        return false
-      }
-      this.searchCompanyList()
-      var restaurants = this.restaurants
-      var results = queryString
-        ? restaurants.filter(this.createStateFilter(queryString))
-        : restaurants
-      clearTimeout(this.timeout)
-      cb(results)
-    },
-    createStateFilter(queryString) {
-      return state => {
-        return (
-          state.company_name
-            .toLowerCase()
-            .indexOf(queryString.toLowerCase()) === 0
-        )
-      }
-    },
-    //搜索单位 接口
-    searchCompanyList() {
-      if (this.companyInfo.companyname === '') {
-        return false
-      } else {
-        shopcart.searchCompanyList(this.companyInfo).then(res => {
-          for (var i = 0; i < res.data.companyList.length; i++) {
-            this.$set(
-              res.data.companyList[i],
-              'value',
-              res.data.companyList[i].company_name
-            )
-          }
-          this.restaurants = res.data.companyList
-        })
-      }
     },
     // 点击全选 课程 + 项目
     handleSelectAll() {
@@ -863,22 +814,6 @@ export default {
           .catch(() => {
             message(this, 'info', '已取消结算！')
           })
-      }
-    },
-    querySearch(queryString, cb) {
-      var restaurants = this.restaurants
-      var results = queryString
-        ? restaurants.filter(this.createFilter(queryString))
-        : restaurants
-      // 调用 callback 返回建议列表的数据
-      cb(results)
-    },
-    createFilter(queryString) {
-      return restaurant => {
-        return (
-          restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) ===
-          0
-        )
       }
     },
     delNumber() {
