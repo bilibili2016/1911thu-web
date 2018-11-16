@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     showRpt() {
-      this.$bus.$emit('openReport')
+      this.$emit('showRpt')
     },
     addPaySubmit() {
       this.wxMask = true

@@ -24,7 +24,7 @@
       </div>
     </div>
     <!-- 报告问题 -->
-    <v-report :config="config" :showReportBug="showReportBug" @closeReport="closeReport" @reportProblem="reportProblem" :problem="problem"></v-report>
+    <v-report :config="config" :showReportBug="showReportBug" @closeReport="closeReport"></v-report>
   </div>
 </template>
 
@@ -32,7 +32,7 @@
 import { affirmOrder, Pay } from '@/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import Banner from '@/pages/shop/components/banner'
-import Repore from '@/components/common/Reports.vue'
+import Report from '@/components/common/Report.vue'
 import List from '@/pages/shop/components/List'
 import orderInfo from '@/pages/shop/affirmorder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
@@ -50,7 +50,7 @@ import { home } from '~/lib/v1_sdk/index'
 export default {
   components: {
     'v-banner': Banner,
-    'v-report': Repore,
+    'v-report': Report,
     'v-list': List,
     'v-orderinfo': orderInfo,
     'v-orderbtn': orderBtn,
@@ -130,34 +130,33 @@ export default {
   methods: {
     // 报告问题
     handleReport() {
-      // this.$bus.$emit('openReport')
       this.showReportBug = true
     },
     closeReport() {
       this.showReportBug = false
       this.problem.content = ''
     },
-    reportProblem() {
-      this.problem.curriculumId = this.config.curriculumId
-      this.problem.curriculumcatalogid = this.config.catalogId
-      this.problem.types = 2
-      if (Trim(this.problem.content) === '') {
-        message(this, 'error', '请输入要反馈的问题！')
-        return false
-      }
-      this.problem.content = Trim(this.problem.content)
-      home.reportProblem(this.problem).then(response => {
-        if (response.status === 100100) {
-          message(this, 'success', response.msg)
-        } else if (response.status === 0) {
-          this.closeReport()
-          message(this, 'success', '提交成功，我们会尽快解决！')
-        }
-        if (this.word === '') {
-          return
-        }
-      })
-    },
+    // reportProblem() {
+    //   this.problem.curriculumId = this.config.curriculumId
+    //   this.problem.curriculumcatalogid = this.config.catalogId
+    //   this.problem.types = 2
+    //   if (Trim(this.problem.content) === '') {
+    //     message(this, 'error', '请输入要反馈的问题！')
+    //     return false
+    //   }
+    //   this.problem.content = Trim(this.problem.content)
+    //   home.reportProblem(this.problem).then(response => {
+    //     if (response.status === 100100) {
+    //       message(this, 'success', response.msg)
+    //     } else if (response.status === 0) {
+    //       this.closeReport()
+    //       message(this, 'success', '提交成功，我们会尽快解决！')
+    //     }
+    //     if (this.word === '') {
+    //       return
+    //     }
+    //   })
+    // },
     // 返回购物车
     handleLinkShopCart() {
       this.$router.push('/shop/shoppingcart')
