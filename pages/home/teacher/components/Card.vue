@@ -3,17 +3,26 @@
     <!-- 老师页 -->
     <div class="teacherCard clearfix">
       <div class="teacherList clearfix" v-for="(teacher,index) in famousList " :key="index" @click="handleLinkTeacherInfo(teacher)">
-        <img :src="teacher.head_img" alt="" class="teacherImg">
-        <p class="name">{{teacher.teacher_name}}</p>
-        <p class="position">{{teacher.graduate}}</p>
-        <p class="operate">
-          <span class="btn" v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
-          <span class="btn preparation" v-else>筹备中</span>
-          <span class="btn" @click.stop="reservation(teacher)">预约导师</span>
-        </p>
+        <div class="list-con">
+          <img :src="teacher.head_img" alt="" class="teacherImg">
+          <p class="name">{{teacher.teacher_name}}</p>
+          <p class="position">{{teacher.graduate}}</p>
+          <p class="operate">
+            <span class="btn" v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
+            <span class="btn preparation" v-else>筹备中</span>
+            <span class="btn" @click.stop="reservation(teacher)">预约导师</span>
+          </p>
+        </div>
         <div class="mask">
-          <h4>导师介绍</h4>
-          <p>{{teacher.content}}</p>
+          <div class="mask-con">
+            <h4>导师介绍</h4>
+            <p>{{teacher.content}}</p>
+          </div>
+          <p class="operate">
+            <span class="btn" v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
+            <span class="btn preparation" v-else>筹备中</span>
+            <span class="btn" @click.stop="reservation(teacher)">预约导师</span>
+          </p>
         </div>
       </div>
 
