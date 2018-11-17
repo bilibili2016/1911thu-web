@@ -123,6 +123,11 @@ export default {
   mounted() {
     this.relativeID = matchSplits('cid')
     this.vipDetailData.id = matchSplits('id') //2:干部网络学院  3:在线商学院
+    if (this.vipDetailData.id == 2) {
+      setTitle('在线干部学院-1911学堂')
+    } else {
+      setTitle('在线商学院-1911学堂')
+    }
     this.vipDetail()
     // 寛高设置
     window.addEventListener('scroll', this.addClass)

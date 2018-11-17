@@ -42,5 +42,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/shop/orderBtn.scss';
+@import '~assets/style/shop/orderbtn.scss';
 </style>
