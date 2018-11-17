@@ -4,7 +4,6 @@
     <div class="main" v-loading="loding">
       <div class="table">
         <!-- 头部 -->
-
         <div class="tableHeader" v-if="!isNoMsg">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseName">课程</span>
@@ -622,11 +621,11 @@ export default {
               10
           })
         }
-
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
           //全选
-
-          shopcart.shopCartaddChecked(this.addArray).then(res => {})
+          if (this.courseList.length) {
+            shopcart.shopCartaddChecked(this.addArray).then(res => {})
+          }
         } else {
           //全不选
 
@@ -654,10 +653,11 @@ export default {
           this.projectAddArray.projectcartid.length == this.projectList.length
         ) {
           //全选
-
-          shopcart
-            .shopCartaddProjectChecked(this.projectAddArray)
-            .then(res => {})
+          if (this.projectList.length) {
+            shopcart
+              .shopCartaddProjectChecked(this.projectAddArray)
+              .then(res => {})
+          }
         } else {
           //全不选
 
@@ -731,7 +731,6 @@ export default {
           this.projectAddArray.projectcartid.length == this.projectList.length
         ) {
           //全选
-
           shopcart
             .shopCartaddProjectChecked(this.projectAddArray)
             .then(res => {})
@@ -962,5 +961,7 @@ export default {
   }
 }
 </script>
-
+<style lang="scss">
+@import '~assets/style/shop/shoppingCart.scss';
+</style>
 

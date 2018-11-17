@@ -41,13 +41,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.allPrice {
-  padding: 39px 30px 18px 0;
-}
-.orderInfos {
-  text-align: right;
-  color: #93999f;
-  padding: 0px 10px 29px 0;
-}
+<style scoped lang="scss">
+@import '~assets/style/shop/orderBtn.scss';
 </style>

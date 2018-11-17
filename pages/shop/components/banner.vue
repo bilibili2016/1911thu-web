@@ -10,3 +10,6 @@ export default {
   props: ['config']
 }
 </script>
+<style scoped lang="scss">
+@import '~assets/style/shop/banner.scss';
+</style>

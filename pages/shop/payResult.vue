@@ -12,15 +12,7 @@
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
-      <div v-if="!hasCode&&isVipCode" v-show="showMsg">
-        <h5>
-          <span @click="handleLinkProfile('tab-fourth')">查看订单</span>
-        </h5>
-        <div class="goback">
-          <span>
-            <i>{{seconds}}</i>s后</span>前往个人中心</div>
-      </div>
-      <div v-if="!hasCode&&!isVipCode" v-show="showMsg">
+      <div class="restltWord" v-if="!hasCode" v-show="showMsg">
         <h5>
           <!-- <span @click="handleChoiceCourse">继续选课</span> -->
           <span @click="handleLinkProfile('tab-fourth')">查看订单</span>
@@ -29,7 +21,7 @@
           <span>
             <i>{{seconds}}</i>s后</span>前往个人中心</div>
       </div>
-      <div v-if="hasCode" v-show="showMsg">
+      <div class="restltWord" v-if="hasCode" v-show="showMsg">
         <div class="tips">
           <p class="tips-one">您的兑换码已经生成</p>
           <p>请前往
@@ -167,4 +159,7 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+@import '~assets/style/shop/payResult.scss';
+</style>
 

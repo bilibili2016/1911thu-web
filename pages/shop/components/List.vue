@@ -45,8 +45,7 @@
       </div>
     </div>
 
-    <!-- 确认订单，支付中心列表 -->
-    <!-- 课程 -->
+    <!--课程  确认订单\支付中心列表 -->
     <div v-if="config.type=='wePay' || config.type=='affirmOrder'">
       <!-- {{data}} -->
       <div class="clearfix" :class="{oneGoods:config.type=='affirmOrder',courseOne:config.type=='wePay'}" v-for="(course,index) in data" :key="index">

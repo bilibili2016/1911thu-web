@@ -1,6 +1,6 @@
 <template>
   <div class="unlogged" v-if="wxMask">
-    <div class="unloginner" style="width:374px;height:420px;" v-loading="loading">
+    <div class="unloginner" v-loading="loading">
       <i class="el-icon-close" @click="unloggedClick"></i>
       <div class="texts">扫一扫付款
         <span>￥{{orderDetail.order_amount}}</span>
@@ -57,5 +57,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~assets/style/shop/unlogged.scss';
 </style>

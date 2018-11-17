@@ -1,21 +1,6 @@
-.div {
-  width: 100%;
-  background-color: #fafafa;
-}
-
-.goback {
-  width: 100%;
-  text-align: center;
-  margin: 80px auto;
-  i {
-    color: #773084;
-  }
-}
-
 .payResult {
   width: 520px;
   margin: 121px auto;
-  padding: 0 0 145px;
   img {
     width: 114px;
     height: 114px;
@@ -46,71 +31,71 @@
     }
   }
   .restltWord {
-    width: 300px;
-    margin-left: 140px;
-    text-align-last: left;
-    line-height: 30px;
-    p {
+    .goback {
+      width: 100%;
+      text-align: center;
+      margin: 80px auto;
+      i {
+        color: #773084;
+      }
+    }
+    h5 {
       font-size: 16px;
-      color: #666;
-    }
-  }
-  h5 {
-    font-size: 16px;
-    text-align: center;
-    margin-top: 40px;
-    span {
-      width: 160px;
-      height: 40px;
-      line-height: 40px;
       text-align: center;
-      border-radius: 6px;
-      border: 1px solid #773084;
-      font-size: 14px;
-      cursor: pointer;
-      &:first-child {
-        background-color: #773084;
-        color: #fff;
-      }
-      &:nth-child(2) {
-        margin-left: 40px;
-      }
-    }
-  }
-  .tips {
-    width: 520px;
-    margin-top: 30px;
-    height: 92px;
-    font-size: 16px;
-    color: #7f7b83;
-    padding: 16px 0;
-    background-color: #f6eefd;
-    text-align: center;
-    p {
-      line-height: 30px;
+      margin-top: 40px;
       span {
-        color: #5b20a0;
+        width: 160px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 6px;
+        border: 1px solid #773084;
+        font-size: 14px;
+        cursor: pointer;
+        &:first-child {
+          background-color: #773084;
+          color: #fff;
+        }
+        &:nth-child(2) {
+          margin-left: 40px;
+        }
       }
     }
-    .tips-one {
+    .tips {
+      width: 520px;
+      margin-top: 30px;
+      height: 92px;
+      font-size: 16px;
       color: #7f7b83;
-    }
-    .tips-two {
-      color: #333;
-    }
-  }
-  .sure {
-    text-align: center;
-    margin-top: 30px;
-    span {
-      width: 150px;
-      height: 40px;
-      cursor: pointer;
-      line-height: 40px;
+      padding: 16px 0;
+      background-color: #f6eefd;
       text-align: center;
-      color: #fff;
-      background: rgba(91, 32, 160, 1);
-      border-radius: 6px;
+      p {
+        line-height: 30px;
+        span {
+          color: #5b20a0;
+        }
+      }
+      .tips-one {
+        color: #7f7b83;
+      }
+      .tips-two {
+        color: #333;
+      }
+    }
+    .sure {
+      text-align: center;
+      margin-top: 30px;
+      span {
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        background: rgba(91, 32, 160, 1);
+        border-radius: 6px;
+      }
     }
   }
 }

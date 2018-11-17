@@ -189,3 +189,6 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+@import '~assets/style/shop/payPublic.scss';
+</style>

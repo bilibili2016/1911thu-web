@@ -37,6 +37,7 @@
       </div>
 
     </div>
+    <!-- 项目确认订单 -->
     <div class="orderInfo" v-if="!course">
       <p>
         <span class="left" style="width:auto;">商品总金额：</span>
@@ -63,9 +64,11 @@ export default {
     }
   },
   mounted() {
+    // id: -1是课程，其他是项目和会员
     if (matchSplits('id') == -1) {
       this.course = true
     } else {
+      // type：1是项目，2是会员
       if (matchSplits('type') == 1) {
         this.type = matchSplits('type')
         this.course = false
@@ -79,31 +82,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.affirmOrder .goodsList {
-  .orderInfod {
-    width: 100%;
-    float: right;
-    padding-right: 30px;
-    margin-top: 60px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e8d6f7;
-    .left {
-      text-align: right;
-      vertical-align: middle;
-    }
-    .right {
-      width: 85px;
-      line-height: 28px;
-      vertical-align: middle;
-      text-align: right;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
-}
-
-// .orderInfo .right {
-//   width: 85px;
-// }
+@import '~assets/style/shop/orderInfo.scss';
 </style>
