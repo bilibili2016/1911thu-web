@@ -69,7 +69,7 @@ export default {
         {
           id: '2',
           category_id: '1',
-          title: '干部网络学院'
+          title: '在线干部学院'
         },
         {
           id: '3',
