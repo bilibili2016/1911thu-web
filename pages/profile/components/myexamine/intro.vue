@@ -35,7 +35,8 @@
         <p>学员须在入学后的12个月之内完成考试并申领证书，逾期将视为学员自愿放弃考试和申请证书资格。</p>
       </div>
       <div class="bottom">
-        <div class="examine-btn " @click="handleExamine">开始考试</div>
+        <div class="unBtn" v-if="showBtn">开始考试</div>
+        <div class="examine-btn " v-else @click="handleExamine">开始考试</div>
       </div>
     </div>
   </div>
@@ -47,6 +48,7 @@ export default {
   props: ['vipID'],
   data() {
     return {
+      showBtn: true,
       pageData: {
         id: '',
         name: ''
@@ -84,7 +86,21 @@ export default {
           })
         }
       })
+    },
+    //验证权限
+    validateExamPrivilege() {
+      this.vipForm.vipId = this.vipID
+      examine.validateExamPrivilege(this.vipForm).then(response => {
+        if (response.status == 0) {
+          this.showBtn = false
+        } else {
+          message(this, 'error', response.msg)
+        }
+      })
     }
+  },
+  mounted() {
+    this.validateExamPrivilege()
   }
 }
 </script>
