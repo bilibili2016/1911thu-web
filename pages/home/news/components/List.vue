@@ -17,7 +17,7 @@
         <p class="timeDetail"> {{changeTime(news.create_time)}}</p>
         <p class="timeLink" @click="newsDetail(news)">
           <span class="line"></span>
-          <img src="http://papn9j3ys.bkt.clouddn.com/newList-icon.png" alt="">
+          <img src="http://static-image.1911edu.com/newList-icon.png" alt="">
         </p>
       </div>
     </div>

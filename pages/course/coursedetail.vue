@@ -30,7 +30,7 @@
     <v-pay @closePay="closePayed" :config="config"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
     <div class="join" @click="joinCollege" v-show="isShowBtn">
-      <img src="http://papn9j3ys.bkt.clouddn.com/joinStudy.gif" alt="">
+      <img src="http://static-image.1911edu.com/joinStudy.gif" alt="">
     </div>
   </div>
 </template>

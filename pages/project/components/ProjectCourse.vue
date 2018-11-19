@@ -12,12 +12,12 @@
             <h6>{{course.teacher_name}} {{course.teacher_graduate}}</h6>
             <p>{{course.introduction}}</p>
           </div>
-          <img class="fr" src="http://papn9j3ys.bkt.clouddn.com/projectCoursePlay.png" alt="" @click="goProjectPlayer(course)">
+          <img class="fr" src="http://static-image.1911edu.com/projectCoursePlay.png" alt="" @click="goProjectPlayer(course)">
         </div>
       </div>
     </div>
     <div class="noData" v-else>
-      <img src="http://papn9j3ys.bkt.clouddn.com/noMsg.png" alt="">
+      <img src="http://static-image.1911edu.com/noMsg.png" alt="">
       <p>还没有评论，快去抢沙发！</p>
     </div>
   </div>
@@ -73,4 +73,6 @@ export default {
   }
 }
 </script>
-
+<style scoped lang="scss">
+@import '~assets/style/project/projectCourse.scss';
+</style>

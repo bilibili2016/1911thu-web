@@ -27,10 +27,10 @@ export default {
   },
   data() {
     return {
-      projectImg: 'http://papn9j3ys.bkt.clouddn.com/banner-project.png',
-      freeImg: 'http://papn9j3ys.bkt.clouddn.com/banner-free.png',
-      courseImg: 'http://papn9j3ys.bkt.clouddn.com/banner-course.jpg',
-      goodCourseImg: 'http://papn9j3ys.bkt.clouddn.com/banner-goodCourse.png',
+      projectImg: 'http://static-image.1911edu.com/banner-project.png',
+      freeImg: 'http://static-image.1911edu.com/banner-free.png',
+      courseImg: 'http://static-image.1911edu.com/banner-course.jpg',
+      goodCourseImg: 'http://static-image.1911edu.com/banner-goodCourse.png',
       BreadCrumb: {
         type: 'goodlesson',
         home: true,

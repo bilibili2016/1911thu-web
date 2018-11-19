@@ -50,7 +50,7 @@ export default {
       ressult: false,
       loadSearch: false,
       noMsg: {
-        img: 'http://papn9j3ys.bkt.clouddn.com/noSearch.png'
+        img: 'http://static-image.1911edu.com/noSearch.png'
       },
       searchData: [],
       getData: [],

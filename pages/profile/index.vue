@@ -119,12 +119,12 @@ export default {
         type: 'ticket',
         showTicketList: false
       },
-      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png', //项目图标
+      projectImg: 'http://static-image.1911edu.com/p4.png', //项目图标
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
-      avator: 'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png',
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      avator: 'http://static-image.1911edu.com/profile_avator01.png',
+      noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
       tabPosition: 'left',
       activeTab: 'tab-first',
       bconfig: {

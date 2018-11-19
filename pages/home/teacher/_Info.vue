@@ -41,7 +41,7 @@ export default {
       tidForm: {
         tids: null
       },
-      teacherBg: 'http://papn9j3ys.bkt.clouddn.com/teacher_bannerBG.png',
+      teacherBg: 'http://static-image.1911edu.com/teacher_bannerBG.png',
       loading: false
     }
   },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="headerLogo fl" @click="handleLink">
-      <img src="http://papn9j3ys.bkt.clouddn.com/1911-logo.png" alt="">
+      <img src="http://static-image.1911edu.com/1911-logo.png" alt="">
     </div>
 
   </div>

@@ -4,7 +4,7 @@
     <span v-if="orderType==2">入学信息</span>
 
     <span class="fr goBack" @click="handleLinkShopCart" v-if="config.type==='affirmOrder'">
-      <img class="editOutline" src="http://papn9j3ys.bkt.clouddn.com/shopCart-icon.png" alt=""> 返回修改购物车
+      <img class="editOutline" src="http://static-image.1911edu.com/shopCart-icon.png" alt=""> 返回修改购物车
     </span>
     <span class="fr goBack" @click="handleQuestion" v-if="config.type!=='affirmOrder'">
       我有疑问，需要反馈?

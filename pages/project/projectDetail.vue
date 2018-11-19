@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       customerBanner:
-        'http://papn9j3ys.bkt.clouddn.com/customer-detail-banner.png',
+        'http://static-image.1911edu.com/customer-detail-banner.png',
       projectDetailLoad: true,
       inlineLoad: true,
       evaluateDataLoad: true,

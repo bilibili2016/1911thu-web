@@ -4,7 +4,7 @@
     <div class="start forgot">
       <div class="lrFrame">
         <div class="logo" @click="goHome">
-          <img src="http://papn9j3ys.bkt.clouddn.com/1911-logo.png" alt="">
+          <img src="http://static-image.1911edu.com/1911-logo.png" alt="">
         </div>
         <div class="pwd">
           <span>忘记密码</span>

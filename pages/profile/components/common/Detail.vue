@@ -240,8 +240,8 @@ export default {
   ],
   data() {
     return {
-      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png', //项目图标
-      customerProjectImg: 'http://papn9j3ys.bkt.clouddn.com/p5.png' //定制项目图标
+      projectImg: 'http://static-image.1911edu.com/p4.png', //项目图标
+      customerProjectImg: 'http://static-image.1911edu.com/p5.png' //定制项目图标
     }
   },
   methods: {

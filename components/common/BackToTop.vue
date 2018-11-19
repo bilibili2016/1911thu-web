@@ -40,8 +40,8 @@
       <!-- web端我要选课功能 暂时显示为 自定制项目  -->
       <div class="back-to-ceiling customStyleThree" @click="goCustomerProject">
         <div class="line-wrap">
-          <!-- <img src="http://papn9j3ys.bkt.clouddn.com/chooseCourse-icon.gif" alt=""> -->
-          <!-- <img src="http://papn9j3ys.bkt.clouddn.com/customProject-gif.gif" alt=""> -->
+          <!-- <img src="http://static-image.1911edu.com/chooseCourse-icon.gif" alt=""> -->
+          <!-- <img src="http://static-image.1911edu.com/customProject-gif.gif" alt=""> -->
           <!-- <div class="line-centerd">
             <span>定制项目</span>
           </div> -->
@@ -91,10 +91,10 @@ export default {
       visible: false,
       move: true,
       interval: null,
-      ceilSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop11.png',
-      wxSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
-      qqSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop22.png',
-      topSrc: 'http://papn9j3ys.bkt.clouddn.com/home_backtop03.png',
+      ceilSrc: 'http://static-image.1911edu.com/home_backtop11.png',
+      wxSrc: 'http://static-image.1911edu.com/home_backtop22.png',
+      qqSrc: 'http://static-image.1911edu.com/home_backtop22.png',
+      topSrc: 'http://static-image.1911edu.com/home_backtop03.png',
       completeTask:
         'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003072'
     }

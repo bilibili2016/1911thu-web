@@ -4,7 +4,7 @@
       <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     </div>
     <!-- <div class="teacherLead clearfix">
-      <img class="fl" src="http://papn9j3ys.bkt.clouddn.com/teacherLead.png" alt="">
+      <img class="fl" src="http://static-image.1911edu.com/teacherLead.png" alt="">
       <div class="fr">
         <p>1911学堂（1911edu.com），源自清华、面向世界，专注于职场教育的在线学堂。</p>
         <p>由1911集团联合清华大学等全球多所知名高校数百位资深教授及世界500强企业高管精英共同发起的继续教育品牌，基于大数据及自主研发的智慧教学工具，为学堂会员提供纯线上教育服务，以及互动式和顾问式的增值服务。</p>
@@ -19,7 +19,7 @@
       <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
     </div>
     <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn" style="cursor:pointer">
-      <img src="http://papn9j3ys.bkt.clouddn.com/toDoTeacher-gif.gif" alt="">
+      <img src="http://static-image.1911edu.com/toDoTeacher-gif.gif" alt="">
     </div>
   </div>
 </template>
@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/famousTeacher.png',
+      bannerImg: 'http://static-image.1911edu.com/famousTeacher.png',
       load: true,
       configs: {
         banner_type: 'famousList'

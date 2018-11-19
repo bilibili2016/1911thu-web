@@ -169,7 +169,7 @@
     <div class="alertMask" v-show="isShowAlert">
       <div class="alertPop">
         <i class="el-icon-close" @click="handlePopClick"></i>
-        <img src="http://papn9j3ys.bkt.clouddn.com/alert.png" alt="">
+        <img src="http://static-image.1911edu.com/alert.png" alt="">
         <p>{{alertText}}</p>
         <el-button @click="handlePopClick">知道了</el-button>
       </div>
@@ -208,7 +208,7 @@ export default {
       scroll: '',
       isNoMsg: false,
       loding: true,
-      noMsg: 'http://papn9j3ys.bkt.clouddn.com/shopCart-empty.png',
+      noMsg: 'http://static-image.1911edu.com/shopCart-empty.png',
       selectAll: false,
       checked: [],
       loseEfficacyc: [], //失效课程列表
@@ -253,7 +253,7 @@ export default {
       projectList: '',
       selectAllCourse: '',
       selectAllProject: '',
-      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png',
+      projectImg: 'http://static-image.1911edu.com/p4.png',
       deleteAllData: {
         projectcartid: [],
         curriculumcartid: []

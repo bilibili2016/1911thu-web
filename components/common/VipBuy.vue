@@ -27,7 +27,7 @@
 
       <div class="alertPop" v-show="isShowAlert">
         <i class="el-icon-close" @click="closeAlertPop"></i>
-        <img src="http://papn9j3ys.bkt.clouddn.com/alert.png" alt="">
+        <img src="http://static-image.1911edu.com/alert.png" alt="">
         <p>{{alertText}}</p>
         <el-button @click="closeAlertPop">知道了</el-button>
       </div>

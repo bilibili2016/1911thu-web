@@ -153,7 +153,7 @@ export default {
             this.avator = this.userInfo.head_img
           } else {
             this.avator =
-              'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
+              'http://static-image.1911edu.com/profile_avator01.png'
           }
         }
       })

@@ -15,7 +15,7 @@
         <!-- 空页面 -->
         <div class="content" v-if="collegeListData.length == 0&&!collegeLoading">
           <div class="noCourse" style="text-align:center;">
-            <img src="http://papn9j3ys.bkt.clouddn.com/VIP_null.png" alt="">
+            <img src="http://static-image.1911edu.com/VIP_null.png" alt="">
             <h4 style="margin-top:10px">您暂未加入任何学院，快去加入吧！</h4>
           </div>
         </div>

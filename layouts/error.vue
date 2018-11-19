@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h2 v-if="error.statusCode == 404"><img src="http://papn9j3ys.bkt.clouddn.com/404.png" alt=""></h2>
-        <h2 v-else><img src="http://papn9j3ys.bkt.clouddn.com/500.png" alt=""><span>服务器生病了！</span></h2>
+        <h2 v-if="error.statusCode == 404"><img src="http://static-image.1911edu.com/404.png" alt=""></h2>
+        <h2 v-else><img src="http://static-image.1911edu.com/500.png" alt=""><span>服务器生病了！</span></h2>
         <ul>
             <li>
                 <nuxt-link to="/"></nuxt-link>

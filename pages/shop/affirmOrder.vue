@@ -89,7 +89,7 @@ export default {
         payNumber: ''
       },
       noMsg: {
-        img: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+        img: 'http://static-image.1911edu.com/noMsg.png',
         backSeconds: 3
       },
       showReportBug: false,

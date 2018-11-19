@@ -45,7 +45,7 @@ export default {
   props: ['courseList', 'privileMsg', 'config'],
   data() {
     return {
-      playImg: 'http://papn9j3ys.bkt.clouddn.com/play.png'
+      playImg: 'http://static-image.1911edu.com/play.png'
     }
   }
 }

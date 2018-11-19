@@ -13,7 +13,7 @@ export default {
   props: ['config'],
   data() {
     return {
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png'
+      noMsgImg: 'http://static-image.1911edu.com/noMsg.png'
     }
   }
 }

@@ -8,7 +8,7 @@ config.analyze = {
   {
     rel: 'icon',
     type: 'image/x-icon',
-    href: 'http://papn9j3ys.bkt.clouddn.com/favicon.png'
+    href: 'http://static-image.1911edu.com/favicon.png'
   },
   {
     rel: 'stylesheet',
@@ -21,21 +21,15 @@ config.analyze = {
       src: 'https://hm.baidu.com/hm.js?b3d07e5a1ff80ed44d2a56cc704327ea',
       async: true
     },
-    {
-      src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
-      async: true
-    },
-    {
-      src: 'http://pcgdozq49.bkt.clouddn.com/aliplayer-h5-min.js',
-      async: true
-    },
+    { src: 'http://js.1911edu.com/jQuery-1.11.3.js', async: true },
+    { src: 'http://js.1911edu.com/aliplayer-h5-min.js', async: true },
     {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
     },
     {
       // src: 'https://cdn.bootcss.com/socket.io/2.0.3/socket.io.js',
-      src: 'http://pcgdozq49.bkt.clouddn.com/socket.io.js',
+      src: 'http://js.1911edu.com/socket.io.js',
       async: true
     }
   ]),

@@ -176,7 +176,7 @@ export default {
     return {
       whichPage: '',
       isShowCover: true,
-      playImg: 'http://papn9j3ys.bkt.clouddn.com/play.png',
+      playImg: 'http://static-image.1911edu.com/play.png',
       two_is_cart: 0,
       curriculumcartids: {
         cartid: null,
