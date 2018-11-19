@@ -76,6 +76,8 @@ export default {
     gotoExamine(item) {
       this.pageData.name = 'intro'
       this.pageData.id = item.id
+      this.pageData.unfinishedStudyTime = item.unfinishedStudyTime
+
       this.$bus.$emit('whichShow', this.pageData)
     },
     //查看考试记录
