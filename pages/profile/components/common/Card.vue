@@ -10,7 +10,7 @@
               <img :src="newTag" alt="">
             </div>
             <div class="projectImg">
-              <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
+              <img src="http://static-image.1911edu.com/p4.png" alt="" class="project-img">
             </div>
             <div class="mask-style" @click="openDetail(card)">
               <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
@@ -80,7 +80,7 @@
                 <img :src="newTag " alt=" ">
               </div>
               <div class="projectImg">
-                <img src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="" class="project-img">
+                <img src="http://static-image.1911edu.com/p4.png" alt="" class="project-img">
               </div>
               <div class="mask-style ">
                 <img :src="jinImg " alt=" " class="jin-style ">
@@ -115,9 +115,9 @@ export default {
   props: ['config', 'data'],
   data() {
     return {
-      readyImg: 'http://papn9j3ys.bkt.clouddn.com/ready.png',
-      overTimeImg: 'http://papn9j3ys.bkt.clouddn.com/overtime.png',
-      jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
+      readyImg: 'http://static-image.1911edu.com/ready.png',
+      overTimeImg: 'http://static-image.1911edu.com/overtime.png',
+      jinImg: 'http://static-image.1911edu.com/jin.png',
       kidForm: {
         kids: ''
       },

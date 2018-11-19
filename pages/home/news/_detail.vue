@@ -9,8 +9,8 @@
     <div class="detail">
       <div class="newsContent" v-loading='loading'>
         <h3>{{newsDetail.title}}</h3>
-        <p class="time">{{newsDetail.create_time}}</p>
-        <h4 class="source" v-if="newsDetail.source">新闻来源：{{newsDetail.source}}</h4>
+        <p class="time">{{newsDetail.create_time}}&nbsp;&nbsp;&nbsp;新闻来源：{{newsDetail.source}}</p>
+        <!-- <h4 class="source" v-if="newsDetail.source">新闻来源：{{newsDetail.source}}</h4> -->
         <div class="newsInner" v-html="newsDetail.content"></div>
         <h5 class="author" v-if="newsDetail.author">责任编辑：{{newsDetail.author}}</h5>
         <div class="next clearfix">
@@ -44,7 +44,7 @@ export default {
         position: true, //是否显示当前位置
         text: '新闻资讯'
       },
-      bannerImg: 'http://papn9j3ys.bkt.clouddn.com/profile_banner03.png',
+      bannerImg: 'http://static-image.1911edu.com/profile_banner03.png',
       newsDetail: {},
       loading: true,
       afterNews: {

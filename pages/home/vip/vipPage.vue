@@ -33,8 +33,8 @@ import VipBuy from '@/components/common/VipBuy.vue'
 export default {
   data() {
     return {
-      onlineImg: 'http://papn9j3ys.bkt.clouddn.com/online-con.png',
-      networkImg: 'http://papn9j3ys.bkt.clouddn.com/network-con.png',
+      onlineImg: 'http://static-image.1911edu.com/online-con.png',
+      networkImg: 'http://static-image.1911edu.com/network-con.png',
       vipPopShow: false,
       relativeID: '',
       gidForm: {

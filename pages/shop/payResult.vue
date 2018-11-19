@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="payResult">
-      <img v-if="success" src="http://papn9j3ys.bkt.clouddn.com/success.png" alt="">
-      <img v-else src="http://papn9j3ys.bkt.clouddn.com/error.png" alt="">
+      <img v-if="success" src="http://static-image.1911edu.com/success.png" alt="">
+      <img v-else src="http://static-image.1911edu.com/error.png" alt="">
       <h4 v-if="success">支付成功！</h4>
       <h4 v-else>支付失败！</h4>
       <div class="restltMsg" v-if="success">

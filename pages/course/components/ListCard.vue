@@ -5,7 +5,7 @@
       <el-card class="fl " :body-style="{ padding: '0px' } ">
         <div class="courseImg">
           <!-- 项目图标 -->
-          <img v-if="cidNumber==='0'" class="project-img" src="http://papn9j3ys.bkt.clouddn.com/p4.png" alt="">
+          <img v-if="cidNumber==='0'" class="project-img" src="http://static-image.1911edu.com/p4.png" alt="">
           <!-- 老师封面 -->
           <img v-if="!teacherImg" :src="course.teacher_picture " class="image" alt=" ">
           <!-- 课程封面 -->

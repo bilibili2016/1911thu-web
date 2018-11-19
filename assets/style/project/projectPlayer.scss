@@ -68,15 +68,18 @@
           color: #5f068d;
         }
       }
-      .collect {
+      .projectCollect {
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
         .collectSpan {
           height: 50px;
           line-height: 50px;
-          margin-bottom: 30px;
-          font-size: 16px;
-          color: #c0bacc;
           cursor: pointer;
           transition: all 300ms;
+          vertical-align: top;
+          font-size: 16px;
+          color: #c0bacc;
           &:hover {
             color: #5f068d;
           }
@@ -194,8 +197,7 @@
         }
       }
       .playVideo {
-        background: url('http://papn9j3ys.bkt.clouddn.com/bigplay.png')
-          no-repeat;
+        background: url('http://static-image.1911edu.com/bigplay.png') no-repeat;
         background-size: contain;
         width: 64px;
         height: 64px;

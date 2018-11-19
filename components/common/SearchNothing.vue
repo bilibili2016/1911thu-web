@@ -1,7 +1,7 @@
 <template>
   <div class="nothing">
-    <!-- <img src="http://papn9j3ys.bkt.clouddn.com/searchNothing.png" alt=""> -->
-    <img src="http://papn9j3ys.bkt.clouddn.com/noMsg.png" alt="">
+    <!-- <img src="http://static-image.1911edu.com/searchNothing.png" alt=""> -->
+    <img src="http://static-image.1911edu.com/noMsg.png" alt="">
     <p>未找到相关内容</p>
   </div>
 </template>

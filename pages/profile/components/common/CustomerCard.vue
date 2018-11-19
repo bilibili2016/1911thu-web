@@ -5,9 +5,9 @@
       <el-card shadow="never " body-style="padding: 0; " class="itemBox">
         <div>
           <div class="line-icon">
-            <img v-if="item.study_type==='1'" class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/online-icon.png" alt="">
-            <img v-if="item.study_type==='2'" class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/mixture-icon.png" alt="">
-            <img v-if="item.study_type==='3'" class="onlineIcon" src="http://papn9j3ys.bkt.clouddn.com/interaction-icon.png" alt="">
+            <img v-if="item.study_type==='1'" class="onlineIcon" src="http://static-image.1911edu.com/online-icon.png" alt="">
+            <img v-if="item.study_type==='2'" class="onlineIcon" src="http://static-image.1911edu.com/mixture-icon.png" alt="">
+            <img v-if="item.study_type==='3'" class="onlineIcon" src="http://static-image.1911edu.com/interaction-icon.png" alt="">
           </div>
           <div class="bgImgs " @click="gotoDetail(item)">
             <img :src="item.picture" alt=" ">
@@ -20,8 +20,8 @@
               <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>
               <!-- 自定义项目下单和已经够买的，不可以修改和删除 -->
               <div class="operate" v-if="item.is_edit==='1'">
-                <span @click="editCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/edit-icon.png" alt=""></span>
-                <span @click="deleteCustomerProject(item)"><img src="http://papn9j3ys.bkt.clouddn.com/delete-icon.png" alt=""></span>
+                <span @click="editCustomerProject(item)"><img src="http://static-image.1911edu.com/edit-icon.png" alt=""></span>
+                <span @click="deleteCustomerProject(item)"><img src="http://static-image.1911edu.com/delete-icon.png" alt=""></span>
               </div>
               <!-- 暂不显示已够买字段 -->
               <!-- <div v-else class="buied" @click="handleBuied">已购买</div> -->

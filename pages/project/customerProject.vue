@@ -289,7 +289,7 @@ export default {
   data() {
     return {
       showPop: false,
-      imgUlr: 'http://papn9j3ys.bkt.clouddn.com/customer-arrow.png',
+      imgUlr: 'http://static-image.1911edu.com/customer-arrow.png',
       showDesc: false,
       isClick: false,
       searchInput: '',

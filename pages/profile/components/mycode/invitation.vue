@@ -68,7 +68,7 @@ export default {
       number: '0',
       searchType: 2,
       orderNum: 0,
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
       gidForm: {
         gids: ''
       }

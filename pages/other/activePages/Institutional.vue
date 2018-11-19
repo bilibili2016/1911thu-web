@@ -1,7 +1,7 @@
 <template>
   <div class="allInfo">
     <div :class="{ topImg: true, topFixed:istopFixed, topRelative:istopRelative}" ref="topImg">
-      <img src="http://papn9j3ys.bkt.clouddn.com/hrentry-pic5.png" alt="">
+      <img src="http://static-image.1911edu.com/hrentry-pic5.png" alt="">
       <div class="top-text">
         <h1 class="top-h1">1911学堂</h1>
         <p class="top-desc"> 1911学堂可根据政府机关、企事业单位需求，<br>提供系统、权威、实用的培训解决方案，<br>帮助学员提升专业知识和思维能力，助力政府机关、企事业单位高效运转。</p>
@@ -17,7 +17,7 @@
         <h3>1911学堂的特色及优势</h3>
         <div class="why-con clearfix">
           <div class="img">
-            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon.png" alt="">
+            <img src="http://static-image.1911edu.com/institutional-icon.png" alt="">
           </div>
           <div class="con-text">
             <div class="first text clearfix">
@@ -44,7 +44,7 @@
         <h3>1911学堂定制项目</h3>
         <div class="course-left courseCon clearfix">
           <div class="img">
-            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon1.png" alt="">
+            <img src="http://static-image.1911edu.com/institutional-icon1.png" alt="">
             <div>委托定制</div>
           </div>
           <div class="con">
@@ -58,7 +58,7 @@
         </div>
         <div class="course-right courseCon clearfix">
           <div class="img">
-            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon2.png" alt="">
+            <img src="http://static-image.1911edu.com/institutional-icon2.png" alt="">
             <div>自定制</div>
           </div>
           <div class="con">
@@ -76,7 +76,7 @@
         <h3 style="padding-top:0px;">1911学堂增值服务</h3>
         <div class="course-left courseCon clearfix">
           <div class="img">
-            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon3.png" alt="">
+            <img src="http://static-image.1911edu.com/institutional-icon3.png" alt="">
             <div>互动式</div>
           </div>
           <div class="con">
@@ -90,7 +90,7 @@
         </div>
         <div class="course-right courseCon clearfix">
           <div class="img">
-            <img src="http://papn9j3ys.bkt.clouddn.com/institutional-icon4.png" alt="">
+            <img src="http://static-image.1911edu.com/institutional-icon4.png" alt="">
             <div>顾问式</div>
           </div>
           <div class="con">
@@ -104,7 +104,7 @@
         </div>
       </div>
       <div class="bottomForm" id="buttom" ref="buttonForm">
-        <img class="buttom-bg" src="http://papn9j3ys.bkt.clouddn.com/hrentry-bg.png" alt="">
+        <img class="buttom-bg" src="http://static-image.1911edu.com/hrentry-bg.png" alt="">
         <div class="word">
           <p class="word-desc1">若您想进一步了解、体验我们的培训项目，烦请留下您的联系方式，我们将在预约时间内与您联系。期待为您提供更好的教育体验。</p>
           <!-- <p class="word-desc2"> -->
@@ -190,17 +190,17 @@ export default {
       recommend: true,
       project: [
         {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_7.png',
+          src: 'http://static-image.1911edu.com/hrEntry_7.png',
           title: '单位课程定制',
           link: '/other/activePages/enterprisecustom'
         },
         {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_8.png',
+          src: 'http://static-image.1911edu.com/hrEntry_8.png',
           title: '学位项目',
           link: '/other/activePages/degree'
         },
         {
-          src: 'http://papn9j3ys.bkt.clouddn.com/hrEntry_9.png',
+          src: 'http://static-image.1911edu.com/hrEntry_9.png',
           title: '面授及线下活动',
           link: '/other/activePages/faceteach'
         }

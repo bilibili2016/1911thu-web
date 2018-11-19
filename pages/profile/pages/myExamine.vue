@@ -15,7 +15,7 @@
         <!-- 空页面 -->
         <div class="content" v-if="examineListData.length == 0&&!examineLoading">
           <div class="noCourse" style="text-align:center;margin-top:50px;">
-            <img src="http://papn9j3ys.bkt.clouddn.com/VIP_null.png" alt="">
+            <img src="http://static-image.1911edu.com/VIP_null.png" alt="">
             <h4 style="margin-top:10px">加入学院后才会有认证资格呦，快去加入吧!</h4>
           </div>
         </div>

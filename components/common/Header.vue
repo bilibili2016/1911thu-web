@@ -92,7 +92,7 @@ export default {
       user: {
         userImg: ''
       },
-      QRcode: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
+      QRcode: 'http://static-image.1911edu.com/wechatLogin.png',
 
       gidForm: {
         gids: null
@@ -392,11 +392,11 @@ export default {
         this.user.userImg = this.userInfo.head_img
       } else {
         this.user.userImg =
-          'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
+          'http://static-image.1911edu.com/profile_avator01.png'
       }
       if (/^\//.test(this.userInfo.head_img)) {
         this.user.userImg =
-          'http://papn9j3ys.bkt.clouddn.com/profile_avator01.png'
+          'http://static-image.1911edu.com/profile_avator01.png'
       }
     },
     // 个人中心 用户头像

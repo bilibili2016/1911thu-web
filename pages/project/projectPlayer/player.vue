@@ -14,7 +14,7 @@
 import { mapState, mapActions, mapMutations } from 'vuex'
 import { projectplayer } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
-import { message, matchSplits } from '@/lib/util/helper'
+import { message, matchSplits, getNet, exitScreen } from '@/lib/util/helper'
 import playerNextComponent from '~/lib/core/next.js'
 import playerPreviousComponent from '~/lib/core/previous.js'
 import PlayerError from '@/components/common/PlayerError.vue'
@@ -41,8 +41,8 @@ export default {
         catalogId: ''
       },
       index: 0,
-      playImg: 'http://papn9j3ys.bkt.clouddn.com/playImg.gif',
-      pauseImg: 'http://papn9j3ys.bkt.clouddn.com/video.png',
+      playImg: 'http://static-image.1911edu.com/playImg.gif',
+      pauseImg: 'http://static-image.1911edu.com/video.png',
       autoplay: false,
       aliPlayer: {
         id: 'mediaPlayer', //播放器id
@@ -99,25 +99,7 @@ export default {
     // 播放参数  wobsocket 播放器创建
     getPlayerInfo() {
       let that = this
-      var link = window.location.origin
-
-      if (
-        link == 'http://ceshi.1911edu.com' ||
-        link == 'http://localhost:8080'
-      ) {
-        link = 'http://ceshi.1911edu.com:2120'
-      } else {
-        link = 'http://api.1911edu.com:2120'
-      }
-      // if (
-      //   link === 'http://ceshi.1911thu.com' ||
-      //   link == 'http://localhost:8080'
-      // ) {
-      //   link = 'http://ceshi.1911thu.com:2120'
-      // } else {
-      //   link = 'http://wapi.1911thu.com:2120'
-      // }
-      this.socket = new io(link)
+      this.socket = new io(getNet())
       // 连接socket
       this.socket.on('connect', function() {
         that.socket.emit('login', persistStore.get('token'))
@@ -184,6 +166,8 @@ export default {
             this.player.on('play', this.playerPlay)
             this.player.on('pause', this.playerPause)
             this.player.on('completeSeek', this.changeSeek)
+            this.player.on('requestFullScreen', this.fullScreenTrue)
+            this.player.on('cancelFullScreen', this.exitFullScreen)
             this.player.on('ended', this.playerEnded)
             this.player.on('error', this.playerError)
           }
@@ -441,6 +425,22 @@ export default {
           this.player.fullscreenService.requestFullScreen()
         }
       }
+    },
+    //  播放器进入全屏事件
+    fullScreenTrue() {
+      document.getElementsByClassName(
+        'prism-big-play-btn'
+      )[0].style.visibility = 'visible'
+      // 用于播放器全屏后大播放按钮显示问题
+      this.fullScreen = true
+    },
+    //  播放器退出全屏事件
+    exitFullScreen() {
+      document.getElementsByClassName(
+        'prism-big-play-btn'
+      )[0].style.visibility = 'hidden'
+      // 退出浏览器全屏
+      exitScreen()
     },
     // 增加空格，上下左右键盘操作视频
     keyboard() {

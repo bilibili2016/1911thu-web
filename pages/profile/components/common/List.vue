@@ -13,8 +13,8 @@
               <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
             </div>
             <div class="bgImgs" @click="selectCid(card,config.project,card.type)">
-              <img v-if="config.project&&card.type==='1'" src="http://papn9j3ys.bkt.clouddn.com/p4.png" class="project-img">
-              <img v-if="config.project&&card.type==='2'" src="http://papn9j3ys.bkt.clouddn.com/p5.png" class="project-img">
+              <img v-if="config.project&&card.type==='1'" src="http://static-image.1911edu.com/p4.png" class="project-img">
+              <img v-if="config.project&&card.type==='2'" src="http://static-image.1911edu.com/p5.png" class="project-img">
               <img class="coverImg" :src="card.picture" alt="">
             </div>
             <div class="tag">
@@ -140,9 +140,9 @@ export default {
   props: ['config', 'data'],
   data() {
     return {
-      readyImg: 'http://papn9j3ys.bkt.clouddn.com/ready.png',
-      overTimeImg: 'http://papn9j3ys.bkt.clouddn.com/overtime.png',
-      jinImg: 'http://papn9j3ys.bkt.clouddn.com/jin.png',
+      readyImg: 'http://static-image.1911edu.com/ready.png',
+      overTimeImg: 'http://static-image.1911edu.com/overtime.png',
+      jinImg: 'http://static-image.1911edu.com/jin.png',
       kidForm: {
         kids: ''
       },

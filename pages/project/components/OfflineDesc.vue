@@ -4,7 +4,7 @@
         <div v-if="project.types==='1'">
             <div v-if="data.offline_content" v-html="data.offline_content"></div>
             <div class="noData" v-else>
-                <img src="http://papn9j3ys.bkt.clouddn.com/noMsg.png" alt="">
+                <img src="http://static-image.1911edu.com/noMsg.png" alt="">
                 <p>暂无线下课程介绍！</p>
             </div>
         </div>
@@ -37,4 +37,6 @@ export default {
   props: ['project', 'data']
 }
 </script>
-
+<style scoped lang="scss">
+@import '~assets/style/project/offlineDesc.scss';
+</style>

@@ -201,3 +201,6 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '~assets/style/project/detail.scss';
+</style>

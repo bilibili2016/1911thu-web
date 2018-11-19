@@ -71,7 +71,7 @@ const config = {
       // {
       //   rel: 'icon',
       //   type: 'image/x-icon',
-      //   href: 'http://papn9j3ys.bkt.clouddn.com/favicon.png'
+      //   href: 'http://static-image.1911edu.com/favicon.png'
       // }
       // 需要直接加载的 CSS
     ]

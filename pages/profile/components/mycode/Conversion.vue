@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       placeHolder: '请输入兑换码',
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
       noMsg: {
         type: 'myCode',
         text: '抱歉，现在还没有兑换码~'

@@ -38,8 +38,8 @@ export default {
         curriculumType: 1,
         seek: 0
       },
-      playImg: 'http://papn9j3ys.bkt.clouddn.com/playImg.gif',
-      pauseImg: 'http://papn9j3ys.bkt.clouddn.com/video.png',
+      playImg: 'http://static-image.1911edu.com/playImg.gif',
+      pauseImg: 'http://static-image.1911edu.com/video.png',
       playerPreviousForm: {
         curriculumId: '',
         catalogId: ''

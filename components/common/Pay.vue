@@ -60,7 +60,7 @@
       <!-- 支付成功 -->
       <div class="paySuccess" v-show="paySuccess">
         <i @click="close" class="el-icon-close fr"></i>
-        <img src="http://papn9j3ys.bkt.clouddn.com/success.png" alt="">
+        <img src="http://static-image.1911edu.com/success.png" alt="">
         <h5>支付成功</h5>
         <div class="goodsTime">
           <p>您已购买《{{produceOrderInfo.title}}》</p>
@@ -76,7 +76,7 @@
       <!-- 支付失败 -->
       <div class="payError" v-show="payError">
         <i @click="close" class="el-icon-close fr"></i>
-        <img src="http://papn9j3ys.bkt.clouddn.com/error.png" alt="">
+        <img src="http://static-image.1911edu.com/error.png" alt="">
         <h5>支付失败</h5>
       </div>
     </div>

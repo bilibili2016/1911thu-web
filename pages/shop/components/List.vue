@@ -140,7 +140,7 @@ export default {
   data() {
     return {
       orderType: '',
-      projectImg: 'http://papn9j3ys.bkt.clouddn.com/p4.png'
+      projectImg: 'http://static-image.1911edu.com/p4.png'
     }
   },
   methods: {

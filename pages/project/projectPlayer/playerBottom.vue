@@ -2,7 +2,7 @@
   <div class="playBottom clearfix">
     <span class="fl usePhone">手机观看
       <div class="ewCode">
-        <img src="http://papn9j3ys.bkt.clouddn.com/attentionWechat2.png" alt="">
+        <img src="http://static-image.1911edu.com/attentionWechat2.png" alt="">
         <i></i>
       </div>
     </span>

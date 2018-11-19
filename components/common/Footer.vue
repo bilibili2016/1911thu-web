@@ -25,7 +25,7 @@ export default {
       this.$router.push('/other/pages/homeUs')
     },
     handleClick() {
-      window.open('http://papn9j3ys.bkt.clouddn.com/licence.jpg')
+      window.open('http://static-image.1911edu.com/licence.jpg')
     }
   }
 }

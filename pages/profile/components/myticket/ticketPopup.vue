@@ -295,7 +295,7 @@ export default {
       ticketType: {
         type: 'ticket'
       },
-      noMsgImg: 'http://papn9j3ys.bkt.clouddn.com/noMsg.png',
+      noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
       ticketOrderData: [],
       singleCheck: '',
       index: 0,

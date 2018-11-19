@@ -15,7 +15,7 @@ config.sentry = {
   {
     rel: 'icon',
     type: 'image/x-icon',
-    href: 'http://papn9j3ys.bkt.clouddn.com/favicon.png'
+    href: 'http://static-image.1911edu.com/favicon.png'
   },
   {
     rel: 'stylesheet',
@@ -28,19 +28,13 @@ config.sentry = {
       src: 'https://hm.baidu.com/hm.js?218b87493661d1bdd50d23f9ae6ae5f0',
       async: true
     },
-    {
-      src: 'http://parq881t8.bkt.clouddn.com/jquery-1.11.3.min.js',
-      async: true
-    },
-    {
-      src: 'http://pcgdozq49.bkt.clouddn.com/aliplayer-h5-min.js',
-      async: true
-    },
+    { src: 'http://js.1911edu.com/jQuery-1.11.3.js', async: true },
+    { src: 'http://js.1911edu.com/aliplayer-h5-min.js', async: true },
     {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
       async: true
     },
-    { src: 'http://pcgdozq49.bkt.clouddn.com/socket.io.js', async: true }
+    { src: 'http://js.1911edu.com/socket.io.js', async: true }
   ]),
   (config.render = { resourceHints: false })
 

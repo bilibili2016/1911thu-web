@@ -39,7 +39,7 @@
         <div class="wxchatIMG" id="wxchatIMG"></div>
       </div>
       <div class="bindSuccess" v-show="bindSuccessShow">
-        <img src="http://papn9j3ys.bkt.clouddn.com/bindingSuccess.png" alt="">
+        <img src="http://static-image.1911edu.com/bindingSuccess.png" alt="">
         <h5>手机账号绑定成功</h5>
         <p>返回登录 3S</p>
       </div>
@@ -99,7 +99,7 @@ export default {
       codeClick: false, //判断是否点击过 获取验证码（防重）
       isClick: true, //判断是否点击过注册按钮（防重）
       isloginClick: false,
-      downApp: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
+      downApp: 'http://static-image.1911edu.com/wechatLogin.png',
       start: false,
       lrFrame: false,
       islogin: false,
@@ -113,7 +113,7 @@ export default {
         userImg: ''
       },
       activeName: 'login',
-      QRcode: 'http://papn9j3ys.bkt.clouddn.com/wechatLogin.png',
+      QRcode: 'http://static-image.1911edu.com/wechatLogin.png',
       wechatLogin: false,
       bindTelShow: false,
       scanCodeShow: false,
