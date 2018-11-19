@@ -3,14 +3,17 @@
     <div class="banner-con">
       <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     </div>
-    <!-- <div class="teacherLead clearfix">
+    <div class="teacherLead clearfix">
       <img class="fl" src="http://static-image.1911edu.com/teacherLead.png" alt="">
       <div class="fr">
         <p>1911学堂（1911edu.com），源自清华、面向世界，专注于职场教育的在线学堂。</p>
         <p>由1911集团联合清华大学等全球多所知名高校数百位资深教授及世界500强企业高管精英共同发起的继续教育品牌，基于大数据及自主研发的智慧教学工具，为学堂会员提供纯线上教育服务，以及互动式和顾问式的增值服务。</p>
         <p>平台目前有近200位授课师资，将面向国内985、211 等知名高校特聘数百位院士、教授、副教授，建立由数千名专家教授组成的师资库，共同构建全球顶尖的高校名师智库。</p>
       </div>
-    </div> -->
+    </div>
+    <!-- 分类 -->
+    <!-- <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectCid="selectCid" @selectPid="selectPid"></v-list> -->
+
     <div class="center teacherList">
       <div @click="getNewInfoList"></div>
       <v-card :famousList="famousList" :config="config"></v-card>
@@ -28,11 +31,13 @@
 import CustomBanner from '@/components/common/Banner.vue'
 import CustomCard from '@/pages/home/teacher/components/Card.vue'
 import { list } from '~/lib/v1_sdk/index'
+import List from '@/pages/course/components/List'
 import { setTitle } from '@/lib/util/helper'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-banner': CustomBanner
+    'v-banner': CustomBanner,
+    'v-list': List
   },
   data() {
     return {
