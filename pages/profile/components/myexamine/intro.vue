@@ -35,7 +35,10 @@
         <p>学员须在入学后的12个月之内完成考试并申领证书，逾期将视为学员自愿放弃考试和申请证书资格。</p>
       </div>
       <div class="bottom">
-        <div class="unBtn" v-if="showBtn">开始考试</div>
+        <div class="unBtn" v-if="showBtn && unfinishedStudyTime!=0">
+          <p class="btn">开始考试</p>
+          <p class="text">距可考试剩余<span class="time">{{unfinishedStudyTime}}</span>学时</p>
+        </div>
         <div class="examine-btn " v-else @click="handleExamine">开始考试</div>
       </div>
     </div>
@@ -45,7 +48,7 @@
 import { examine } from '~/lib/v1_sdk/index'
 import { message, matchSplits, getNet } from '@/lib/util/helper'
 export default {
-  props: ['vipID'],
+  props: ['vipID', 'unfinishedStudyTime'],
   data() {
     return {
       showBtn: true,

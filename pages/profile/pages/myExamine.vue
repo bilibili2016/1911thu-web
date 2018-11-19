@@ -26,7 +26,7 @@
       </div>
       <!-- 认证资格介绍 -->
       <div class="intro" v-if="isShowIntro">
-        <v-intro :vipID="vipID"></v-intro>
+        <v-intro :vipID="vipID" :unfinishedStudyTime="unfinishedStudyTime"></v-intro>
       </div>
       <!-- 考试记录 -->
       <div class="record" v-if="isShowRecord">
@@ -60,6 +60,7 @@ export default {
       isShowIntro: false,
       isShowRecord: false,
       vipID: '',
+      unfinishedStudyTime: '',
       noMsg: {
         type: 'myExamine',
         text: '加入学院后才会有认证资格呦，快去加入吧！'
@@ -85,6 +86,7 @@ export default {
       persistStore.set('whichIntro', '')
     }
     this.$bus.$on('whichShow', data => {
+      this.unfinishedStudyTime = data.unfinishedStudyTime //剩余多少学时可以考试（介绍页展示）
       this.vipID = data.id
       this.isShowList = false
       this.isShowInfo = false
