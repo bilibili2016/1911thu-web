@@ -33,15 +33,38 @@ body {
       position: absolute;
       left: 0;
       top: 0;
+      &.small {
+        width: 570px;
+        transition: all 300ms;
+        .backHome {
+          transition: all 300ms;
+          margin: 0 15px 0 25px;
+        }
+        .dropdown .dropItem {
+          transition: all 300ms;
+          margin-right: 15px;
+        }
+        .city {
+          transition: all 300ms;
+          margin-left: 15px;
+        }
+      }
     }
     .header-fr {
-      // float: right;
       position: absolute;
       right: 0;
       top: 0;
       white-space: nowrap;
       width: 550px;
       height: 100%;
+      &.small {
+        width: 500px;
+        transition: all 300ms;
+        .search {
+          width: 170px;
+          transition: all 300ms;
+        }
+      }
     }
     .headerLogo {
       width: 145.6px;
