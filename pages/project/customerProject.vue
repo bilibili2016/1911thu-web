@@ -50,7 +50,7 @@
       <div class="con-item style clearfix">
         <div class="fl">培训方式：</div>
         <div class="fr ">
-          <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio>
+          <!-- <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio> -->
           <!-- <el-radio v-model="projectForm.styleRadio" label="2">混合</el-radio> -->
           <el-radio v-model="projectForm.styleRadio" label="3">互动</el-radio>
           <i class="el-icon-question styleAsk">
@@ -141,8 +141,8 @@
       </div>
       <div class="con-detail">
         <div class="deatil-item clearfix">
-          <div class="detail-title">选择线上课程</div>
-          <div class="itemCon">
+          <div class="detail-title">选择学院</div>
+          <!-- <div class="itemCon">
             <div class="item clearfix">
               <div class="fl">学院分类：</div>
               <div class="fr selectFr">
@@ -154,7 +154,7 @@
                 </div>
                 <div class="pull-down-text" v-if="isShowCollegeSelect">
                   <ul>
-                    <li v-for="(item,index) in CategoryListData" :key="index" @click.stop="chooseCollege(item)">{{item.category_name}}</li>
+                    <li v-for="(item,index) in CategoryListData" :key="index" class="clearfix">{{item.category_name}}</li>
                   </ul>
                 </div>
               </div>
@@ -177,31 +177,30 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="itemCon courseSearch">
             <div class="item clearfix ">
-              <div class="fl ">按课程搜索：</div>
+              <div class="fl ">学院分类：</div>
               <div class="fr selectFr ">
                 <div @click.stop="handleSearchSelect ">
-                  <el-input placeholder="请选择分类 " v-model="projectForm.trainSearch " readonly></el-input>
+                  <el-input placeholder="请选择学院分类 " v-model="projectForm.trainSearch " readonly></el-input>
                   <span class="pull-down ">
                     <i class="el-icon-caret-bottom "></i>
                   </span>
                   <div class="pull-down-text " v-if="isShowSearchSelect">
                     <div>
-                      <div class="search " @click.stop="handleFocus ">
+                      <!-- <div class="search " @click.stop="handleFocus ">
                         <input placeholder="请输入搜索内容" v-model="searchInput" type="text" v-on:input="handleSearchChange(searchInput)">
                         <i class="el-icon-search "></i>
-                      </div>
-                      <ul v-if="searchCourseData.length!=0">
-                        <li v-for="(item,index) in searchCourseData " :key="index " class="clearfix ">
+                      </div> -->
+                      <ul>
+                        <li v-for="(item,index) in CategoryListData " :key="index " class="clearfix ">
                           <div class="liChecked" @click.stop="chooseSearch(item) ">
                             <input type="checkbox" v-model="item.checked" class="item-checkbox " ref="checkbox " :id="item.id " @click.stop="chooseSearchInput ">
                             <label :for="item.id " class="item-checkbox-label ">{{item.title}}</label>
                           </div>
                         </li>
                       </ul>
-                      <p v-else>暂无课程</p>
                     </div>
 
                   </div>
@@ -216,17 +215,16 @@
 
           </div>
         </div>
-        <!--  -->
-        <div class="deatil-item clearfix" v-if="projectForm.styleRadio!=1">
+        <!-- <div class="deatil-item clearfix" v-if="projectForm.styleRadio!=1">
           <div class="detail-title ">选择线下课程</div>
           <div class=" ">学堂会根据您的需求及所选线上课程内容，为您合理设计体系化的线下课程安排。</div>
-        </div>
+        </div> -->
         <div class="deatil-item clearfix " v-if="checkedCourseData.length !=0 ">
-          <div class="detail-title ">已选课程</div>
+          <div class="detail-title ">已选学院</div>
           <div class="deTable ">
             <div class="deItem clearfix " v-for="(item,index) in checkedCourseData " :key="index ">
               <div class="courseTitle ">{{item.title}}</div>
-              <div class="time ">{{item.study_time}}学时</div>
+              <!-- <div class="time ">{{item.study_time}}学时</div> -->
               <div class="price " v-if="item.is_free==='2'">0元</div>
               <div class="price " v-else>{{item.present_price}}元</div>
               <div class="operater ">
@@ -241,7 +239,7 @@
             <!-- 线上课程 -->
             <div class="deItem courseItem clearfix ">
               <div class="courseTitle ">线上课程</div>
-              <div class="time ">{{projectForm.onlineTime}}学时</div>
+              <div class="time "> </div>
               <div class="price ">{{projectForm.onlinePrice.toFixed(2)}}元/人</div>
               <div class="num ">x {{projectForm.trainNum}}人</div>
               <div class="total ">= {{onlineTotalPrice.toFixed(2)}}元</div>
@@ -278,7 +276,7 @@
 
 
 <script>
-import { customerProject } from '@/lib/v1_sdk/index'
+import { customerProject, home } from '@/lib/v1_sdk/index'
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import Mask from '@/pages/project/components/CustomerPop'
@@ -327,7 +325,7 @@ export default {
         desc: '', //项目简介
         objRadio: '1', //培训对象
         trainNum: '', //培训人数
-        styleRadio: '1', //培训方式
+        styleRadio: '3', //培训方式
         trainDay: '', //线下培训天数
         trainCollege: '', //学院分类
         trainCourse: '', //课程分类
@@ -466,16 +464,16 @@ export default {
 
         if (this.projectForm.type === '1') {
           //保存操作才验证
-          if (this.projectForm.trainCollege === '') {
-            throw '请选择学院分类'
-          }
-          if (this.projectForm.trainCourse === '') {
-            throw '请选择课程分类'
-          }
+          // if (this.projectForm.trainSearch === '') {
+          //   throw '请选择学院分类'
+          // }
+          // if (this.projectForm.trainCourse === '') {
+          //   throw '请选择课程分类'
+          // }
         }
 
         if (this.projectForm.checkedCourse.length === 0) {
-          throw '请添加课程'
+          throw '请添加学院'
         }
 
         if (parseFloat(this.projectForm.projectPrice) == 0) {
@@ -551,9 +549,9 @@ export default {
     },
     //学院/课程分类
     CategoryList() {
-      customerProject.CategoryList().then(response => {
+      home.vipGoodsList().then(response => {
         if (response.status === 0) {
-          this.CategoryListData = response.data.categoryList
+          this.CategoryListData = response.data.vipGoodsList
         }
       })
     },
@@ -654,7 +652,7 @@ export default {
     //选择学院分类
     chooseCollege(val) {
       this.searchCourseData = [] //切换清空
-      this.projectForm.trainCollege = val.category_name
+      this.projectForm.trainCollege = val.title
       this.searchCourseForm.first_ID = val.id
       this.courseCategoryData = val.childList
       this.projectForm.trainCourse = ''
@@ -664,7 +662,7 @@ export default {
     chooseCourse(val) {
       this.chooseCourseData = []
       this.projectForm.trainSearch = ''
-      this.projectForm.trainCourse = val.category_name
+      this.projectForm.trainCourse = val.title
       this.searchCourseForm.second_ID = val.id
       this.isShowCourseSelect = false
       this.searchCourse()

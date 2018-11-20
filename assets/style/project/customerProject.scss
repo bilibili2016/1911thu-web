@@ -51,8 +51,7 @@
     margin: 0 auto;
     margin-top: -45px;
     text-align: center;
-    background: url('http://static-image.1911edu.com/customer-bg.png')
-      no-repeat;
+    background: url('http://static-image.1911edu.com/customer-bg.png') no-repeat;
     background-size: 1115px 291px;
     background-position: center center;
     .pro-title {
@@ -307,7 +306,7 @@
         &:hover {
           .descript-text {
             display: block;
-            right: 480px;
+            right: 560px;
             top: -20px;
           }
         }
@@ -438,7 +437,7 @@
               text-align: center;
             }
             .price {
-              width: 15%;
+              width: 30%;
               float: left;
               text-align: center;
             }
@@ -459,6 +458,7 @@
             }
             .time {
               width: 15%;
+              height: 50px;
               float: left;
               text-align: center;
             }
