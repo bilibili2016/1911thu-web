@@ -83,9 +83,9 @@
         </div>
         <div class="fr">
           <span>培训方式</span>
-          <span>线上课程</span>
+          <span>线上学时</span>
           <span>学习人数</span>
-          <span>线下课程</span>
+          <span>线下学时</span>
           <span>学习天数</span>
           <span>总价</span>
         </div>
