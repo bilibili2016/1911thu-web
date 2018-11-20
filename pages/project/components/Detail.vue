@@ -48,10 +48,10 @@
           <i>¥</i>{{projectDetail.present_price}}/人</div>
         <div class="price" v-else>
           <i>¥</i>{{projectDetail.present_price}}/班</div>
-        <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div>
-        <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div>
+        <!-- <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div> -->
+        <!-- <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div> -->
 
-        <div v-if="projectType.types==='2'">
+        <div v-if="projectType.types==2">
           <div v-if="projectDetail.is_creator" class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即购买</div>
         </div>
         <div v-else>

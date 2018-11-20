@@ -19,7 +19,7 @@
         <el-tab-pane label="线下课程目录" name="third" v-if="projectDetail.study_type =='3' ">
           <v-offlinedesc :project="project" :data="projectDetail"></v-offlinedesc>
         </el-tab-pane>
-        <el-tab-pane label="线上课程目录" name="second">
+        <el-tab-pane label="学院介绍" name="second">
           <v-procourse :projectCourseData="projectDetail.system" v-loading="inlineLoad" :projectId="project.projectId"></v-procourse>
         </el-tab-pane>
         <!-- 混合项目 和 自定制项目 显示 -->
