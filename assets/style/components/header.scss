@@ -27,7 +27,7 @@ body {
     position: relative;
     .header-fl {
       white-space: nowrap;
-      width: 625px;
+      width: 660px;
       height: 80px;
       padding: 12px 0;
       position: absolute;
@@ -53,6 +53,10 @@ body {
         height: 56px;
       }
     }
+    .headerClass {
+      font-size: 16px;
+      color: #222;
+    }
     .backHome {
       width: 35px;
       margin: 0 30px 0 50px;
@@ -74,7 +78,6 @@ body {
 
     .dropdown {
       float: left;
-
       .dropItem {
         float: left;
         box-sizing: border-box;
@@ -130,7 +133,6 @@ body {
           }
         }
         &:hover {
-          // border-bottom: 2px solid #773084;
           .el-dropdown-link {
             color: #773084;
             i.el-icon-arrow-down {
@@ -140,7 +142,6 @@ body {
               display: block;
             }
           }
-
           .drops {
             display: block;
           }
@@ -180,6 +181,20 @@ body {
       }
     }
     .teach.active {
+      border-bottom: 2px solid #773084;
+      color: #773084;
+    }
+    .city {
+      float: left;
+      cursor: pointer;
+      line-height: 56px;
+      margin-left: 30px;
+      &:hover {
+        border-bottom: 2px solid #773084;
+        color: #773084;
+      }
+    }
+    .city.active {
       border-bottom: 2px solid #773084;
       color: #773084;
     }
@@ -342,8 +357,7 @@ body {
           height: 20px;
           margin-top: -2px;
           cursor: pointer;
-          background: url('http://static-image.1911edu.com/phone.png')
-            no-repeat;
+          background: url('http://static-image.1911edu.com/phone.png') no-repeat;
           background-size: contain;
           transition: all 300ms;
           &:hover {

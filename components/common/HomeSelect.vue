@@ -53,7 +53,7 @@
     <div class="teach headerClass" @click="handleLink('/home/teacher/list')">
       <span>名师智库</span>
     </div>
-    <div class="city headerClass" @click="handleLink('/home/teacher/list')">
+    <div class="city headerClass" @click="handleLink('/home/citySchool/schoolIntro')">
       <span>城市分校</span>
     </div>
   </div>

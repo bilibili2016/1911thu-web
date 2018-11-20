@@ -10,11 +10,18 @@
     </div>
     <!-- 课程不展示 -->
     <div class="classification">
-      <!-- v-if="!loadList" -->
       <h4 class="title">专长领域：</h4>
       <ul>
         <li v-for="(items,index) in childList" :index="index" :key="index" :class="{btnBg: pid === items.id ? true : false }">
           <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
+        </li>
+      </ul>
+    </div>
+    <div class="unit">
+      <h4 class="title">所在单位：</h4>
+      <ul>
+        <li v-for="(item,index) in unitData" :index="index" :key="index" :class="{btnBg: uid === item.id ? true : false }">
+          <el-button @click="selectUid(item,index)">{{item.company_name}}</el-button>
         </li>
       </ul>
     </div>
@@ -23,15 +30,17 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import { list, category } from '~/lib/v1_sdk/index'
+import { list } from '~/lib/v1_sdk/index'
 export default {
   data() {
     return {
+      unitData: [],
       categoryData: [],
       childList: [],
       categoryIndex: 0,
       cid: 0,
       pid: '0',
+      uid: 0,
       cp: '',
       allData: {
         category_name: '全部',
@@ -53,13 +62,18 @@ export default {
       this.$emit('selectCid', item, index)
     },
     // 小类 单个
-    selectPid(items, index) {
-      this.$emit('selectPid', items, index)
+    selectPid(item, index) {
+      this.pid = item.id
+      this.$emit('selectPid', item, index)
+    },
+    selectUid(item, index) {
+      this.uid = item.id
+      this.$emit('selectUid', item, index)
     },
     // 公共 获取list 方法
     getHeaderList() {
       this.loadList = true
-      category.childCategoryList().then(res => {
+      list.teacherCategoryList().then(res => {
         if (res.status === 0) {
           this.handleData(this.allData, res)
           this.loadList = false
@@ -94,11 +108,30 @@ export default {
           this.categoryIndex = this.categoryData.indexOf(item)
         }
       }
+      if (this.categoryData[this.categoryIndex].childList.length == 1) {
+        this.pid = '0'
+        this.$emit('changeCid', this.pid)
+      }
       this.childList = this.categoryData[this.categoryIndex].childList
+    },
+    //教师单位列表
+    teacherCompanyList() {
+      list.teacherCompanyList().then(res => {
+        if (res.status === 0) {
+          // this.handleData(this.allData, res)
+          this.unitData = res.data.teacherCompanyList
+          this.unitData.unshift({
+            company_name: '全部',
+            id: 0
+          })
+          console.log(this.unitData)
+        }
+      })
     }
   },
   mounted() {
     this.getHeaderList()
+    this.teacherCompanyList()
   }
 }
 </script>
