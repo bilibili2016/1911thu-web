@@ -4,11 +4,11 @@
     <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
-      <div class="header-fl clearfix" :class="{small:isSmall}">
+      <div class="header-fl clearfix" :class="{big:isBig}">
         <v-logo @handleLink="handleLink"></v-logo>
         <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr" :vipArr="vipArr"></v-homeselect>
       </div>
-      <div class="header-fr clearfix" :class="{small:isSmall}">
+      <div class="header-fr clearfix" :class="{big:isBig}">
         <v-lrbtn v-if="!isAuthenticated" @login="login" @register="register"></v-lrbtn>
         <v-headerimg v-else :data="user" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
         <v-enter :class="['HREntry' ,{islogined : isAuthenticated }]" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter>
@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-      isSmall: false,
+      isBig: false,
       // 顶部列表
       curruntForm: {
         pages: 1,
@@ -477,7 +477,7 @@ export default {
     },
     resize() {
       let wWidth = window.innerWidth
-      this.isSmall = wWidth < 1420 ? true : false
+      this.isBig = wWidth < 1420 ? false : true
     }
   },
   mounted() {
