@@ -84,6 +84,14 @@
     margin-left: 30px;
     margin-top: 12px;
     cursor: pointer;
+    .el-icon-arrow-down {
+      transition: all 400ms;
+    }
+  }
+  .more.active {
+    .el-icon-arrow-down {
+      transform: rotate(-180deg);
+    }
   }
   .hoverMore {
     float: left;

@@ -91,6 +91,16 @@ export default {
         // } else {
         //   headerClass[2].classList.add('active')
         // }
+      } else if (
+        pathName === '/home/citySchool/schoolApplication' ||
+        pathName === '/home/citySchool/schoolIntro' ||
+        pathName === '/home/citySchool/submitSuccess'
+      ) {
+        //城市分校
+        for (var i = 0; i < headerClass.length; i++) {
+          headerClass[i].classList.remove('active')
+        }
+        headerClass[4].classList.add('active')
       } else {
         //其他
         for (var i = 0; i < headerClass.length; i++) {
