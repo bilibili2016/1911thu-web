@@ -1,14 +1,14 @@
 .teacherCategory {
   width: 1100px;
   margin: 0 auto;
-  background: rgba(235, 231, 237, 1);
   .title {
+    width: 70px;
     display: inline-block;
     font-size: 14px;
     color: rgba(34, 34, 34, 1);
   }
   ul {
-    width: 1050px;
+    width: 1025px;
     display: inline-block;
     vertical-align: top;
     li {
@@ -19,6 +19,14 @@
       cursor: pointer;
       span {
         background-color: #773084;
+      }
+      .el-button {
+        padding: 8px 10px;
+        border-radius: 6px;
+        color: #222222;
+        font-weight: 400;
+        background-color: #ebe7ed;
+        border: none;
       }
       &:hover {
         .el-button {
@@ -54,8 +62,5 @@
     li {
       line-height: 50px;
     }
-  }
-  .el-button {
-    font-weight: 400;
   }
 }

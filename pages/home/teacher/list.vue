@@ -12,7 +12,7 @@
       </div>
     </div>
     <!-- 分类 -->
-    <!-- <v-category @selectOne="selectOne"></v-category> -->
+    <v-category @selectOne="selectOne"></v-category>
 
     <div class="center teacherList">
       <div @click="getNewInfoList"></div>
@@ -105,7 +105,8 @@ export default {
       })
 
       document.body.scrollTop = document.documentElement.scrollTop = 0
-    }
+    },
+    selectOne() {}
   }
 }
 </script>

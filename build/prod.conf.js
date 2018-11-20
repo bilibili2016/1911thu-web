@@ -28,7 +28,7 @@ config.sentry = {
       src: 'https://hm.baidu.com/hm.js?218b87493661d1bdd50d23f9ae6ae5f0',
       async: true
     },
-    { src: 'http://js.1911edu.com/jQuery-1.11.3.js', async: true },
+    { src: 'http://js.1911edu.com/jquery-1.11.3.min.js', async: true },
     { src: 'http://js.1911edu.com/aliplayer-h5-min.js', async: true },
     {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
