@@ -41,19 +41,19 @@
         </div>
       </div>
       <div class="course serviceDetails clearfix">
-        <h3>1911学堂定制项目</h3>
+        <h3>1911学堂互动式项目</h3>
         <div class="course-left courseCon clearfix">
           <div class="img">
-            <img src="http://static-image.1911edu.com/institutional-icon1.png" alt="">
-            <div>委托定制</div>
+            <img src="http://static-image.1911edu.com/institutional-icon3.png" alt="">
+            <div>互动式</div>
           </div>
           <div class="con">
             <div class="text">
-              学堂根据贵单位的特定需求，为您量身定制、研发设计针对性、个性化的学习方案及培训项目安排。
+              1911学堂首创“线下+线上”互动式培训模式，结合线上学习人机交互的技术优势以及线下学习人文互动的情感优势，更能助力学习者实现个性化、阶梯式的成长路径。
             </div>
-            <div class="button" @click="handleScroll">
-              立即咨询
-            </div>
+          </div>
+          <div class="button" @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0')">
+            点击查看
           </div>
         </div>
         <div class="course-right courseCon clearfix">
@@ -65,30 +65,16 @@
             <div class="text">
               贵单位可在学堂平台自行选择师资及课程，或提出具体的学习需求，形成独有的人才培养规划及培训班设置方案。
             </div>
-            <div class="button" @click="goCustomerProject">
-              开始自定制
-            </div>
+          </div>
+          <div class="button" @click="goCustomerProject">
+            开始自定制
           </div>
         </div>
 
       </div>
       <div class="course serviceDetails clearfix">
-        <h3 style="padding-top:0px;">1911学堂增值服务</h3>
+        <h3 style="padding-top:0px;">1911学堂顾问式指导</h3>
         <div class="course-left courseCon clearfix">
-          <div class="img">
-            <img src="http://static-image.1911edu.com/institutional-icon3.png" alt="">
-            <div>互动式</div>
-          </div>
-          <div class="con">
-            <div class="text">
-              1911学堂首创“线下+线上”互动式培训模式，结合线上学习人机交互的技术优势以及线下学习人文互动的情感优势，更能助力学习者实现个性化、阶梯式的成长路径。
-            </div>
-            <div class="button" @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0')">
-              点击查看
-            </div>
-          </div>
-        </div>
-        <div class="course-right courseCon clearfix">
           <div class="img">
             <img src="http://static-image.1911edu.com/institutional-icon4.png" alt="">
             <div>顾问式</div>
@@ -97,9 +83,23 @@
             <div class="text">
               1911学堂可从数千名师资库中遴选最合适的专家教授，为贵单位提供顾问式、咨询式的智力服务，真正做到学习需求与专家内容的智能匹配，实现“请进来、沉下去”的培训效果。
             </div>
-            <div class="button" @click="handleLink('/home/teacher/list')">
-              点击查看
+          </div>
+          <div class="button" @click="handleLink('/home/teacher/list')">
+            点击查看
+          </div>
+        </div>
+        <div class="course-left courseCon clearfix">
+          <div class="img">
+            <img src="http://static-image.1911edu.com/institutional-icon1.png" alt="">
+            <div>委托定制</div>
+          </div>
+          <div class="con">
+            <div class="text">
+              学堂根据贵单位的特定需求，为您量身定制、研发设计针对性、个性化的学习方案及培训项目安排。
             </div>
+          </div>
+          <div class="button" @click="handleScroll">
+            立即咨询
           </div>
         </div>
       </div>

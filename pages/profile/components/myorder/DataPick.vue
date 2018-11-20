@@ -6,7 +6,7 @@
         <i class="el-icon-search"></i>
       </span>
       <div class="hoverMore" @click="handleShow">
-        <span class="more">更多筛选条件 <i class="el-icon-arrow-down"></i></span>
+        <span class="more" :class="{active:active}">更多筛选条件 <i class="el-icon-arrow-down"></i></span>
         <!-- <ul class="moreList">
           <li @click="handleShow" v-for="(item,index) in moreList" :key="index">{{item.name}}</li>
         </ul> -->
@@ -36,6 +36,7 @@ export default {
   props: ['orderNum'],
   data() {
     return {
+      active: false,
       isShowTime: false,
       searchDatas: [],
       moreList: [{ name: '跟据下单日期搜索' }],
@@ -67,6 +68,7 @@ export default {
     },
     goSearch() {},
     handleShow() {
+      this.active = !this.active
       this.isShowTime = !this.isShowTime
     }
   },

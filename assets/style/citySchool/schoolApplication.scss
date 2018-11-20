@@ -70,6 +70,10 @@
           font-size: 16px;
           color: #222;
         }
+        .el-select {
+          width: 320px;
+          margin-right: 30px;
+        }
         .divClick {
           position: relative;
         }
@@ -259,6 +263,12 @@
           background-color: #fff;
           border-color: #dddddd;
         }
+        .uploadP {
+          img {
+            width: 100px;
+            height: 100px;
+          }
+        }
       }
     }
   }
@@ -267,24 +277,17 @@
     margin: 0 auto;
     margin-top: 40px;
     padding-bottom: 60px;
-    .btn {
+
+    .el-button {
       width: 130px;
       height: 40px;
-      line-height: 40px;
       text-align: center;
       border-radius: 20px;
       border: 1px solid #5e068c;
       margin-right: 60px;
-      color: #5e068c;
+      background-color: #5f068d;
+      color: #fff;
       cursor: pointer;
-      &:last-child {
-        margin-right: 0;
-      }
-      &.active,
-      &:hover {
-        background-color: #5f068d;
-        color: #fff;
-      }
     }
   }
   .el-input {

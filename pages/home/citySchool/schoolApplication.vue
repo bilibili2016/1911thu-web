@@ -11,7 +11,7 @@
                             <div class="fl"><i class="red">*</i>城市：</div>
                             <div class="fr selectFr">
                                 <div class="text">请选择您要申请成为分校校长的城市</div>
-                                <div class="pull ">
+                                <!-- <div class="pull ">
                                     <div class="select-con ">
                                         <div class="divClick" @click.stop="handleProvince">
                                             <span>
@@ -44,8 +44,13 @@
                                             <li v-for="(item,index) in objCity" :key="index" @click.stop="chooseCity(item)">{{item.name}}</li>
                                         </ul>
                                     </div>
-                                </div>
-
+                                </div> -->
+                                <el-select v-model="schoolForm.province_name" placeholder="请选择省份" @change="provinceChange">
+                                    <el-option v-for="(p,index) in province" :key="'prov'+index" :label="p.label" :value="p.value"></el-option>
+                                </el-select>
+                                <el-select v-model="schoolForm.city_name" placeholder="请选择城市" no-data-text="请先选择所在省份" @change="cityChange">
+                                    <el-option v-for="(p,index) in city" :key="'city'+index" :label="p.label" :value="p.value"></el-option>
+                                </el-select>
                             </div>
                         </div>
                         <div class="con-item name clearfix">
@@ -103,11 +108,11 @@
                             <div :class="['fr',{'height':isShowFile}]">
                                 <div class="load" v-show="isShowFile">
                                     <div class="upload">
-                                        <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept=".pdf,.doc,.docx">
+                                        <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept="image/png,image/gif,image/jpeg">
                                     </div>
                                     <div class="uploadMask"> <i class="el-icon-plus"></i></div>
                                 </div>
-                                <p class="uploadP" v-show="!isShowFile"><span>{{fileName}}</span><span class="deleteFile" @click="deleteFile">删除</span></p>
+                                <p class="uploadP" v-show="!isShowFile"><img :src="this.schoolForm.businessLicense " alt=""><span class="deleteFile" @click="deleteFile">删除</span></p>
                             </div>
 
                         </div>
@@ -117,30 +122,35 @@
 
         </div>
         <div class="btns ">
-            <span class="btn save active " @click="validate">提交</span>
+            <el-button :disabled="isClick" @click="validate">提交</el-button>
+            <!-- <span class="btn save active " @click="validate">提交</span> -->
         </div>
 
     </div>
 </template>
 <script>
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
-import { personalset } from '~/lib/v1_sdk/index'
+import { list, personalset, school } from '~/lib/v1_sdk/index'
 
 export default {
   data() {
     return {
+      isClick: false,
       isShowProvince: false,
       isShowCity: false,
       objProvince: [],
       objCity: [],
-      area: [],
       province: [],
       city: [],
       mapregionList: {},
       isShowFile: true,
       fileName: '',
+      fileForm: {
+        FILESS: []
+      },
       schoolForm: {
-        province: '', //省份
+        province: '', //省份编码
+        province_name: '', //省份名称
         city: '', //城市编码
         city_name: '', //城市名称
         name: '', //姓名
@@ -155,14 +165,6 @@ export default {
     }
   },
   methods: {
-    //省份点击
-    handleProvince() {},
-    //城市点击
-    handleCity() {},
-    //选择省份
-    chooseProvince() {},
-    //选择城市
-    chooseCity() {},
     //删除上传的文件
     deleteFile() {
       this.isShowFile = true
@@ -182,7 +184,7 @@ export default {
         this.fileForm.FILESS.push(reader.result)
         list.uploadResume(this.fileForm).then(res => {
           if (res.status == 0) {
-            this.teacherForm.resume = res.data.full_path
+            this.schoolForm.businessLicense = res.data.full_path
             this.isShowFile = !this.isShowFile
             event.target.value = ''
           }
@@ -191,6 +193,10 @@ export default {
     },
     //表单验证
     validate() {
+      if (this.isClick) {
+        return false
+      }
+      this.isClick = true
       const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
       try {
@@ -205,17 +211,26 @@ export default {
           throw '请输入正确的邮箱'
       } catch (err) {
         message(this, 'error', err)
+        this.isClick = false
         return false
       }
       this.applicationSchoolmaster()
     },
     //申请分校长
-    applicationSchoolmaster() {},
+    applicationSchoolmaster() {
+      school.doRecruit(this.schoolForm).then(res => {
+        this.isClick = false
+        if (res.status == 0) {
+          this.isClick = true //页面跳转之前不允许点击
+          this.$router.push('/home/citySchool/submitSuccess')
+        } else {
+          message(this, 'error', res.msg)
+        }
+      })
+    },
     provinceChange(val) {
       this.schoolForm.city_name = ''
-      this.schoolForm.area_name = ''
       this.schoolForm.city = ''
-      this.schoolForm.area = ''
       if (!this.province && this.province.length == 0) {
         this.getRegionList()
       }
@@ -228,25 +243,13 @@ export default {
       }
     },
     cityChange(val) {
-      this.schoolForm.area_name = ''
-      this.schoolForm.area = ''
       if (!this.city && this.city.length == 0) {
         this.getRegionList()
       }
-      this.area = this.getRegion(this.city, val)
-
       for (let item of this.city) {
         if (val == item.region_code) {
           this.schoolForm.city_name = item.name
           this.schoolForm.city = item.region_code
-        }
-      }
-    },
-    areaChange(val) {
-      for (let item of this.area) {
-        if (val == item.region_code) {
-          this.schoolForm.area_name = item.name
-          this.schoolForm.area = item.region_code
         }
       }
     },
