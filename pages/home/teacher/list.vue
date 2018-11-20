@@ -12,7 +12,7 @@
       </div>
     </div>
     <!-- 分类 -->
-    <!-- <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectCid="selectCid" @selectPid="selectPid"></v-list> -->
+    <v-category @selectOne="selectOne"></v-category>
 
     <div class="center teacherList">
       <div @click="getNewInfoList"></div>
@@ -31,13 +31,13 @@
 import CustomBanner from '@/components/common/Banner.vue'
 import CustomCard from '@/pages/home/teacher/components/Card.vue'
 import { list } from '~/lib/v1_sdk/index'
-import List from '@/pages/course/components/List'
+import Category from '@/pages/home/teacher/components/teacherCategory'
 import { setTitle } from '@/lib/util/helper'
 export default {
   components: {
     'v-card': CustomCard,
     'v-banner': CustomBanner,
-    'v-list': List
+    'v-category': Category
   },
   data() {
     return {
@@ -105,7 +105,8 @@ export default {
       })
 
       document.body.scrollTop = document.documentElement.scrollTop = 0
-    }
+    },
+    selectOne() {}
   }
 }
 </script>

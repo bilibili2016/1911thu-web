@@ -21,7 +21,7 @@ config.analyze = {
       src: 'https://hm.baidu.com/hm.js?b3d07e5a1ff80ed44d2a56cc704327ea',
       async: true
     },
-    { src: 'http://js.1911edu.com/jQuery-1.11.3.js', async: true },
+    { src: 'http://js.1911edu.com/jquery-1.11.3.min.js', async: true },
     { src: 'http://js.1911edu.com/aliplayer-h5-min.js', async: true },
     {
       src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
