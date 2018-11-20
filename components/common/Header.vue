@@ -476,12 +476,13 @@ export default {
       }
     },
     resize() {
-      window.innerWidth < 1420 ? (this.isSmall = true) : (this.isSmall = false)
+      let wWidth = window.innerWidth
+      this.isSmall = wWidth < 1420 ? true : false
     }
   },
   mounted() {
     this.resize()
-    window.onresize = this.resize
+    window.addEventListener('resize', this.resize)
     // 当前浏览器是否是移动端
     this.browserRedirect()
     this.onBusEvent()
