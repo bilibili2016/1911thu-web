@@ -4,11 +4,11 @@
     <!-- 优惠主题入口 -->
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
-      <div class="header-fl clearfix">
+      <div class="header-fl clearfix" :class="{small:isSmall}">
         <v-logo @handleLink="handleLink"></v-logo>
         <v-homeselect @handleLink="handleLink" @handleSelectItem="handleSelectItem" :projectArr="projectArr" :categoryArr="categoryArr" :vipArr="vipArr"></v-homeselect>
       </div>
-      <div class="header-fr clearfix">
+      <div class="header-fr clearfix" :class="{small:isSmall}">
         <v-lrbtn v-if="!isAuthenticated" @login="login" @register="register"></v-lrbtn>
         <v-headerimg v-else :data="user" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
         <v-enter :class="['HREntry' ,{islogined : isAuthenticated }]" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter>
@@ -64,6 +64,7 @@ export default {
   },
   data() {
     return {
+      isSmall: false,
       // 顶部列表
       curruntForm: {
         pages: 1,
@@ -446,6 +447,7 @@ export default {
         this.judegExplorer = false
       }
     },
+    // 判断浏览器是否是移动端
     browserRedirect() {
       var sUserAgent = window.navigator.userAgent.toLowerCase()
       var bIsIpad = sUserAgent.match(/ipad/i) == 'ipad'
@@ -472,10 +474,14 @@ export default {
         //跳转pc端页面
         document.body.classList.remove('mobile')
       }
+    },
+    resize() {
+      window.innerWidth < 1420 ? (this.isSmall = true) : (this.isSmall = false)
     }
   },
   mounted() {
-    // this.getUserInfo()
+    this.resize()
+    window.onresize = this.resize
     // 当前浏览器是否是移动端
     this.browserRedirect()
     this.onBusEvent()

@@ -56,7 +56,7 @@
           <i class="el-icon-question styleAsk">
             <div class="descript-text">
               <div>
-                <p>纯线上：完全在线学习</p>
+                <!-- <p>纯线上：完全在线学习</p> -->
                 <!-- <p>混合式：线上为主，线下为辅</p> -->
                 <p>互动式：线下为主，线上为辅</p>
 
@@ -90,7 +90,7 @@
               <i class="el-icon-question priceAsk" @click.stop="handledesc">
 
                 <div class="descript-text">
-                  <div v-if="projectForm.objRadio === '1'">
+                  <div v-if="projectForm.objRadio == '1'">
                     <p>
                       <span>1-50人：</span>
                       <span>{{one.number_50}}</span>元/天
@@ -225,7 +225,7 @@
             <div class="deItem clearfix " v-for="(item,index) in checkedCourseData " :key="index ">
               <div class="courseTitle ">{{item.title}}</div>
               <!-- <div class="time ">{{item.study_time}}学时</div> -->
-              <div class="price " v-if="item.is_free==='2'">0元</div>
+              <div class="price " v-if="item.is_free=='2'">0元</div>
               <div class="price " v-else>{{item.present_price}}元</div>
               <div class="operater ">
                 <span @click="deleteChooseCourse(index) ">删除</span>
@@ -234,15 +234,22 @@
           </div>
         </div>
         <div class="deatil-item clearfix ">
-          <div class="detail-title ">课程结算</div>
+          <div class="detail-title ">金额结算</div>
           <div class="deTable ">
             <!-- 线上课程 -->
-            <div class="deItem courseItem clearfix ">
+            <!-- <div class="deItem courseItem clearfix ">
               <div class="courseTitle ">线上课程</div>
               <div class="time "> </div>
               <div class="price ">{{projectForm.onlinePrice.toFixed(2)}}元/人</div>
               <div class="num ">x {{projectForm.trainNum}}人</div>
               <div class="total ">= {{onlineTotalPrice.toFixed(2)}}元</div>
+            </div> -->
+            <div class="deItem courseItem clearfix" v-for="(item,index) in checkedCourseData " :key="index ">
+              <div class="courseTitle ">{{item.title}}</div>
+              <div class="time "> </div>
+              <div class="price ">{{item.present_price}}元/人</div>
+              <div class="num ">x {{projectForm.trainNum}}人</div>
+              <div class="total " :data="onlineTotalPrice">= {{item.present_price*projectForm.trainNum}}元</div>
             </div>
             <!-- 线下课程（培训方式为线上+线上显示） -->
             <div class="deItem courseItem clearfix " v-if="projectForm.styleRadio!=='1' ">
@@ -352,8 +359,11 @@ export default {
     },
     //计算线上课程总价钱
     onlineTotalPrice() {
-      this.projectForm.onlineTotalPrice =
-        this.projectForm.onlinePrice * this.projectForm.trainNum
+      let price = 0
+      this.checkedCourseData.forEach((item, index) => {
+        price += item.present_price * this.projectForm.trainNum
+      })
+      this.projectForm.onlineTotalPrice = price
       return this.projectForm.onlineTotalPrice
     },
     //计算自定制项目总价钱
@@ -394,7 +404,7 @@ export default {
     //定制项目模式信息
     customerInfo() {
       customerProject.customerInfo().then(response => {
-        if (response.status === 0) {
+        if (response.status == 0) {
           let result = response.data
           this.minNum = result.min_study_person_number //最小培训人数
           this.maxNum = result.max_study_person_number //最大培训人数
@@ -406,6 +416,11 @@ export default {
 
           this.one = result.study_object_cost_amount_one
           this.two = result.study_object_cost_amount_two
+          // 获取已编辑信息  解决异步加载顺序的问题
+          if (this.projectForm.type == '2') {
+            //1:新增 2:编辑
+            this.getCustomerProjectInfo()
+          }
         }
       })
     },
@@ -414,7 +429,7 @@ export default {
       var len = this.reuseData.length
       var arr = []
       var reg = new RegExp(val)
-      if (val === '') {
+      if (val == '') {
         arr = this.reuseData
       } else {
         for (var i = 0; i < len; i++) {
@@ -450,29 +465,29 @@ export default {
         this.projectForm.checkedCourse.push(item.id)
       })
       try {
-        if (Trim(this.projectForm.name) === '') throw '请填写项目名称'
-        if (Trim(this.projectForm.desc) === '') throw '请填写项目简介'
-        if (this.projectForm.objRadio === '') throw '请选择培训对象'
-        if (this.projectForm.trainNum === '') throw '请输入培训人数'
-        if (this.projectForm.styleRadio === '') throw '请选择培训方式'
+        if (Trim(this.projectForm.name) == '') throw '请填写项目名称'
+        if (Trim(this.projectForm.desc) == '') throw '请填写项目简介'
+        if (this.projectForm.objRadio == '') throw '请选择培训对象'
+        if (this.projectForm.trainNum == '') throw '请输入培训人数'
+        if (this.projectForm.styleRadio == '') throw '请选择培训方式'
         if (
           this.projectForm.styleRadio !== '1' &&
-          this.projectForm.trainDay === ''
+          this.projectForm.trainDay == ''
         ) {
           throw '请选择线下培训天数'
         }
 
-        if (this.projectForm.type === '1') {
+        if (this.projectForm.type == '1') {
           //保存操作才验证
-          // if (this.projectForm.trainSearch === '') {
+          // if (this.projectForm.trainSearch == '') {
           //   throw '请选择学院分类'
           // }
-          // if (this.projectForm.trainCourse === '') {
+          // if (this.projectForm.trainCourse == '') {
           //   throw '请选择课程分类'
           // }
         }
 
-        if (this.projectForm.checkedCourse.length === 0) {
+        if (this.projectForm.checkedCourse.length == 0) {
           throw '请添加学院'
         }
 
@@ -492,7 +507,7 @@ export default {
         this.projectForm.trainDay = ''
       }
 
-      if (type === 2) {
+      if (type == 2) {
         this.showPop = true
       } else {
         this.save(type)
@@ -502,12 +517,12 @@ export default {
       customerProject.createProject(this.projectForm).then(response => {
         this.isClick = false
         if (response.status == 0) {
-          if (this.projectForm.type === '1') {
+          if (this.projectForm.type == '1') {
             message(this, 'success', '创建成功')
           } else {
             message(this, 'success', '修改成功')
           }
-          if (type === 1) {
+          if (type == 1) {
             //保存跳转个人中心定制项目
             this.gidForm.gids = 'tab-ninth'
             this.setGid(this.gidForm)
@@ -521,7 +536,7 @@ export default {
             })
           }
         } else {
-          if (response.msg === '存在下架课程') {
+          if (response.msg == '存在下架课程') {
             let msgData = ''
             if (response.data.length == 1) {
               response.data.forEach((item, index) => {
@@ -550,7 +565,7 @@ export default {
     //学院/课程分类
     CategoryList() {
       home.vipGoodsList().then(response => {
-        if (response.status === 0) {
+        if (response.status == 0) {
           this.CategoryListData = response.data.vipGoodsList
         }
       })
@@ -581,7 +596,7 @@ export default {
     //课程结算
     courseComputed() {
       this.checkedCourseData.forEach((n, index) => {
-        if (n.is_free === '2') {
+        if (n.is_free == '2') {
           n.present_price = 0
         }
         this.projectForm.onlineTime += Number(n.study_time)
@@ -633,7 +648,7 @@ export default {
 
       this.searchCourseData.forEach((item, index) => {
         this.chooseCourseData.forEach(course => {
-          if (course.id === item.id) {
+          if (course.id == item.id) {
             this.searchCourseData[index].checked = true
           }
         })
@@ -681,7 +696,7 @@ export default {
     chooseSearch(item) {
       let arrIndex
       this.chooseCourseData.forEach((n, index) => {
-        if (n.id === item.id) {
+        if (n.id == item.id) {
           arrIndex = index
         }
       })
@@ -704,7 +719,7 @@ export default {
       customerProject
         .getCustomerProjectInfo(this.projectForm)
         .then(response => {
-          if (response.status === 0) {
+          if (response.status == 0) {
             let data = response.data.curriculumProjectDetail
             this.projectForm.name = data.title //项目标题
             this.projectForm.desc = data.introduction //项目简介
@@ -713,7 +728,7 @@ export default {
             this.projectForm.trainDay =
               parseFloat(data.offline_days) == 0 ? '' : data.offline_days //线下培训天数
 
-            this.projectForm.trainNum = data.study_persion_number //培训人数
+            this.projectForm.trainNum = Number(data.study_persion_number) //培训人数
             this.projectForm.objRadio = data.study_object //培训对象
             this.courseComputed()
           }
@@ -738,7 +753,7 @@ export default {
     },
     computedNum() {
       let num = this.projectForm.trainNum
-      if (this.projectForm.objRadio === '1') {
+      if (this.projectForm.objRadio == '1') {
         //党政
         if (num > 0 && num <= 50) {
           this.projectForm.offlinePrice = this.one.number_50
@@ -772,10 +787,6 @@ export default {
       this.CategoryList()
       this.projectForm.customerID = matchSplits('sid')
       this.projectForm.type = matchSplits('edit')
-      if (this.projectForm.type === '2') {
-        //1:新增 2:编辑
-        this.getCustomerProjectInfo()
-      }
     }
   },
   mounted() {
@@ -784,13 +795,13 @@ export default {
   watch: {
     chooseCourseData(val) {
       this.projectForm.trainSearch = ''
-      if (val.length === 1) {
+      if (val.length == 1) {
         val.forEach((n, index) => {
           this.projectForm.trainSearch += n.title
         })
       } else {
         val.forEach((n, index) => {
-          if (index === 0) {
+          if (index == 0) {
             this.projectForm.trainSearch += n.title
           } else {
             this.projectForm.trainSearch += ',' + n.title
