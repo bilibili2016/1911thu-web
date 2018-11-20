@@ -1648,3 +1648,12 @@ input::-webkit-input-safebox-button {
     margin: auto;
   }
 }
+
+//城市分校长招募
+.schoolApplication {
+  .el-textarea {
+    .el-textarea__inner {
+      padding-bottom: 30px !important;
+    }
+  }
+}
