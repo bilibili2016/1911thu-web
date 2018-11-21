@@ -72,7 +72,7 @@
                         <div class="con-item name clearfix">
                             <div class="fl"><i class="red">*</i>邮箱：</div>
                             <div class="fr">
-                                <el-input v-model="schoolForm.email" placeholder="请输入您的常用邮箱"></el-input>
+                                <el-input v-model="schoolForm.email" placeholder="请输入您的邮箱"></el-input>
                             </div>
                         </div>
                         <div class="con-item name clearfix">
