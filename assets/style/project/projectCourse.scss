@@ -8,7 +8,7 @@
     color: #222;
   }
   .system {
-    padding: 0 30px 30px;
+    padding: 30px 30px 10px;
     border-radius: 10px;
     margin-bottom: 30px;
     box-shadow: 0px 0px 21px rgba(39, 0, 77, 0.07);
@@ -82,6 +82,14 @@
           }
         }
       }
+    }
+  }
+  .college {
+    width: 1040px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    img {
+      width: 100%;
     }
   }
 }

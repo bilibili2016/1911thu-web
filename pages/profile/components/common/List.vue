@@ -216,7 +216,7 @@ export default {
     },
     // 判断购物车数量
     goodsNmber() {
-      if (this.productsNum < 70) {
+      if (persistStore.get('productsNum') < 70) {
         profileHome.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push('/shop/shoppingcart')
         })

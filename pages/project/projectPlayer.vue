@@ -235,7 +235,7 @@ export default {
     },
     // 判断购物车数量
     goodsNmber() {
-      if (this.productsNum < 70) {
+      if (persistStore.get('productsNum') < 70) {
         this.addShopCart()
       } else {
         this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {

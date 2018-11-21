@@ -125,7 +125,7 @@ export default {
         this.$bus.$emit('loginShow', true)
         return false
       }
-      if (this.productsNum < 70) {
+      if (persistStore.get('productsNum') < 70) {
         this.addShoppingCart()
       } else {
         this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {

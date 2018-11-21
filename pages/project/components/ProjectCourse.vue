@@ -2,7 +2,7 @@
   <!-- 项目线上课程列表 -->
   <div class="projectCourse">
     <!-- <h3>{{projectCourseData}}</h3> -->
-    <div class="system" v-for="(item,index) in projectCourseData" :key="index" v-if="projectCourseData.length>0">
+    <!-- <div class="system" v-for="(item,index) in projectCourseData" :key="index" v-if="projectCourseData.length>0">
       <h4>{{item.system_name}}</h4>
       <div class="course">
         <div class="courseOne clearfix" v-for="(course,index) in item.curriculumList" :key="index">
@@ -19,7 +19,11 @@
     <div class="noData" v-else>
       <img src="http://static-image.1911edu.com/noMsg.png" alt="">
       <p>还没有评论，快去抢沙发！</p>
+    </div> -->
+    <div class="system">
+      <div class="college" v-for="vip in vipGoodsList" :key="vip.vip_goodsid" v-html="vip.content" @click="goVipDetail(vip)"></div>
     </div>
+
   </div>
 </template>
 
@@ -28,7 +32,7 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 import { message, open, matchSplits } from '@/lib/util/helper'
 export default {
-  props: ['projectCourseData', 'projectId'],
+  props: ['vipGoodsList', 'projectId'],
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },
@@ -69,6 +73,15 @@ export default {
       } else {
         this.$bus.$emit('loginShow', true)
       }
+    },
+    goVipDetail(vip) {
+      this.$router.push({
+        path: '/home/vip/vipPage',
+        query: {
+          id: vip.vip_goodsid,
+          cid: vip.category_id
+        }
+      })
     }
   }
 }
