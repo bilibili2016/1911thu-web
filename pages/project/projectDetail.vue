@@ -15,7 +15,7 @@
           <div class="detail" v-html="projectDetail.content" v-if="project.types == '1'"></div>
           <div class="introduction" v-html="projectDetail.introduction" v-if="project.types === '2'"></div>
         </el-tab-pane>
-        <el-tab-pane label="学院介绍" name="second">
+        <el-tab-pane label="线上课程" name="second">
           <v-procourse :vipGoodsList="projectDetail.vipGoodsList" v-loading="inlineLoad" :projectId="project.projectId"></v-procourse>
         </el-tab-pane>
         <!-- 互动项目显示 -->
@@ -30,9 +30,9 @@
         <el-tab-pane label="线下课程说明" name="third" v-if="project.types == '2'&&projectDetail.study_type =='2' ">
           <v-offlinedesc :project="project" :data="projectDetail"></v-offlinedesc>
         </el-tab-pane>
-        <el-tab-pane label="用户评价" name="fifth" v-if="project.types == '1'">
+        <!-- <el-tab-pane label="用户评价" name="fifth" v-if="project.types == '1'">
           <v-proevaluate :evaluateData="evaluateData" :evaluateInfo="evaluateInfo" v-loading="evaluateDataLoad" :pagemsg="pagemsg" @handleCurrentChange="handleCurrentChange"></v-proevaluate>
-        </el-tab-pane>
+        </el-tab-pane> -->
         <el-tab-pane label="常见问题" name="fourth" v-if="project.types == '1'">
           <v-proproblems v-loading="problemLoad"></v-proproblems>
         </el-tab-pane>

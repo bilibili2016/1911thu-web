@@ -278,6 +278,10 @@ export default {
         message(this, error, res.msg)
         if (res.status === 0) {
           this.invitationCodeType(res.data.invitation_code_type)
+          // 兑换完成只要不是课程就更新个人中心头部的VIP天数
+          if (res.data.invitation_code_type != 1) {
+            this.$bus.$emit('reUserInfo')
+          }
           this.bindForm.courseId = ''
           this.bindForm.isBind = false
           if (JSON.stringify(res.data.vipGoodsDetail) != '{}') {

@@ -7,9 +7,9 @@
         <v-breadcrumb :config="BreadCrumb" class="BreadCrumb"></v-breadcrumb>
       </div>
       <!-- 收藏分享 -->
-      <div class="fr" v-if="projectType.types==='1'">
+      <!-- <div class="fr" v-if="projectType.types==1">
         <v-collection :collectData="collectMsg"></v-collection>
-      </div>
+      </div> -->
     </div>
     <!-- 项目详情页上部分-项目信息 -->
     <div class="title-item">

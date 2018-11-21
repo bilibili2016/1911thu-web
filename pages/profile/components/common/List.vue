@@ -57,7 +57,7 @@
               <!-- 课程的学习进度 -->
               <div class="line-wraps" v-if="config.card==='learning'&&config.project">
                 <div class="line-centers ">
-                  <span class="studyPercent">已学习{{card.percent}}%</span>
+                  <!-- <span class="studyPercent">已学习{{card.percent}}%</span> -->
                   <span class="studyIsFree">剩余{{card.expire_day}}天</span>
                   <el-progress v-if="card.percent>0" :percentage="card.percent" :show-text="false"></el-progress>
                 </div>
@@ -65,7 +65,7 @@
               <!-- 项目的学习进度 -->
               <div class="line-wraps" v-if="config.card==='learning'&&!config.project">
                 <div class="line-centers ">
-                  <span class="studyPercent">已学习{{card.percent}}%</span>
+                  <!-- <span class="studyPercent">已学习{{card.percent}}%</span> -->
                   <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
                   <span class="studyIsFree" v-else>免费</span>
                   <el-progress v-if="card.percent>0" :percentage="card.percent" :show-text="false"></el-progress>
@@ -73,7 +73,7 @@
               </div>
               <div v-if="config.card==='already' ">
                 <div class="line-centers ">
-                  <span class="already">已完成100%</span>
+                  <!-- <span class="already">已完成100%</span> -->
                   <span class="studyIsFree" v-if="card.is_free === '1'">剩余{{card.expire_day}}天</span>
                 </div>
               </div>
@@ -166,7 +166,8 @@ export default {
     // flag为true进入项目详情，false进入课程详情
     study(item, flag, type) {
       if (flag) {
-        this.openProjectPlayer(item.id, type)
+        // this.openProjectPlayer(item.id, type)
+        this.openDetail(item)
       } else {
         this.openDetail(item)
       }

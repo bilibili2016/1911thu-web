@@ -163,6 +163,10 @@ export default {
             type: 'success',
             message: res.msg
           })
+          // 兑换完成只要不是课程就更新个人中心头部的VIP天数
+          if (res.data.invitation_code_type != 1) {
+            this.$bus.$emit('reUserInfo')
+          }
           // 课程绑定后重新拉取
           this.$emit('reGetCode')
           this.bindForm.courseId = ''
