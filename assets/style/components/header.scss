@@ -315,6 +315,9 @@ body {
             top: -26px;
             right: 3px;
           }
+          &.active {
+            color: #773084;
+          }
         }
       }
       .shoppingCart {

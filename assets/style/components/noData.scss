@@ -12,3 +12,10 @@
     font-size: 20px;
   }
 }
+//购物车限制图片大小
+.shopCartNoData.noData {
+  img {
+    width: 316px;
+    height: 274px;
+  }
+}

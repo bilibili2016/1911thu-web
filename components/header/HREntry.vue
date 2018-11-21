@@ -48,7 +48,21 @@ export default {
     // 改变鼠标悬浮时的DownApp二维码
     changeImg(what) {
       what == 'iphone' ? (this.iphones = true) : (this.iphones = false)
+    },
+    addClass() {
+      let pathName = window.location.pathname
+      if (pathName == '/other/activePages/institutional') {
+        document.getElementsByClassName('hrin')[0].classList.add('active')
+      } else {
+        document.getElementsByClassName('hrin')[0].classList.remove('active')
+      }
     }
+  },
+  mounted() {
+    this.addClass()
+  },
+  watch: {
+    $route: 'addClass'
   }
 }
 </script>

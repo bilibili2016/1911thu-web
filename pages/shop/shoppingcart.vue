@@ -126,12 +126,8 @@
         <!-- </div> -->
 
         <!-- 无课程以及项目显示提示  -->
-        <div class="noMsg-con" v-if="isNoMsg">
-          <div class="noMsg-img">
-            <img :src="noMsg" alt="">
-            <p>您的购物车为空</p>
-          </div>
-        </div>
+        <v-nodata class="shopCartNoData" :pageType="pageType" v-if="isNoMsg"></v-nodata>
+
         <div id="computedHeight"></div>
         <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="(courseList && courseList.length > 0) || (projectList&& projectList.length>0)">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
@@ -185,13 +181,21 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { checkPhone, checkCode } from '~/lib/util/validatefn'
 import { store as persistStore } from '~/lib/core/store'
 import List from '@/pages/shop/components/List'
+import NoData from '@/components/common/NoData.vue'
 import { message, setTitle, open } from '@/lib/util/helper'
 export default {
   components: {
-    'v-list': List
+    'v-list': List,
+    'v-nodata': NoData
   },
   data() {
     return {
+      pageType: {
+        page: 'shoppingCart',
+        text: '您的购物车为空',
+        imgUrl: 'http://static-image.1911edu.com/shopCart-empty.png'
+      },
+      noMsg: 'http://static-image.1911edu.com/shopCart-empty.png',
       lastNum: '',
       isShowAlert: false,
       alertText: '商品数量不能大于9999',
@@ -208,7 +212,6 @@ export default {
       scroll: '',
       isNoMsg: false,
       loding: true,
-      noMsg: 'http://static-image.1911edu.com/shopCart-empty.png',
       selectAll: false,
       checked: [],
       loseEfficacyc: [], //失效课程列表
