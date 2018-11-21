@@ -1,18 +1,57 @@
 .schoolIntro {
-  .btn-con {
-    span {
-      width: 130px;
-      height: 40px;
-      line-height: 40px;
+  .schoolBanner {
+    height: 560px;
+    background: url('http://h5-image.1911edu.com/schoolIntro1.png') no-repeat
+      center;
+    background-size: 1920px 560px;
+    color: #fff;
+    h4 {
+      width: 1100px;
+      margin: 0 auto 85px;
+      padding-top: 87px;
+      font-size: 42px;
       text-align: center;
-      border-radius: 20px;
-      border: 1px solid #5e068c;
-      margin-right: 60px;
-      background-color: #5f068d;
-      color: #fff;
-      cursor: pointer;
-
-      margin: 300px 600px;
+    }
+    p {
+      width: 1100px;
+      margin: 0 auto;
+      text-indent: 2em;
+      font-size: 18px;
+      line-height: 36px;
+    }
+  }
+  .schoolInfo {
+    .schoolImg {
+      display: block;
+      width: 1160px;
+      margin: 0 auto;
+      &.topImg {
+        margin-top: -155px;
+      }
+    }
+    .color {
+      width: 100%;
+      height: 760px;
+      margin: 80px 0;
+      background-color: #485ca0;
+      img {
+        width: 960px;
+        padding-top: 70px;
+      }
+    }
+    p {
+      text-align: center;
+      padding: 40px 0 80px;
+      span {
+        width: 210px;
+        height: 60px;
+        font-size: 24px;
+        line-height: 60px;
+        border-radius: 30px;
+        background-color: #3c60c7;
+        color: #fff;
+        cursor: pointer;
+      }
     }
   }
 }
