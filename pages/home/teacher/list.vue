@@ -19,10 +19,8 @@
       </div>
     </div>
     <!-- 无数据 -->
-    <div class="noData" v-if="famousList.length==0">
-      <img :src="noMsgImg" alt="">
-      <h4>暂无数据</h4>
-    </div>
+    <v-nodata v-if="famousList.length==0" :pageType="pageType"></v-nodata>
+
     <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn" style="cursor:pointer">
       <img src="http://static-image.1911edu.com/toDoTeacher-gif.gif" alt="">
     </div>
@@ -34,16 +32,23 @@ import CustomBanner from '@/components/common/Banner.vue'
 import CustomCard from '@/pages/home/teacher/components/Card.vue'
 import { list } from '~/lib/v1_sdk/index'
 import Category from '@/pages/home/teacher/components/teacherCategory'
+import NoData from '@/components/common/NoData.vue'
+
 import { setTitle } from '@/lib/util/helper'
 export default {
   components: {
     'v-card': CustomCard,
     'v-banner': CustomBanner,
-    'v-category': Category
+    'v-category': Category,
+    'v-nodata': NoData
   },
   data() {
     return {
-      noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
+      pageType: {
+        page: 'teacherList',
+        text: '暂无数据',
+        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
+      },
       bannerImg: 'http://static-image.1911edu.com/famousTeacher.png',
       load: true,
       configs: {

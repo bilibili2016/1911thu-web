@@ -12,7 +12,7 @@
         <img class="schoolImg" src="http://h5-image.1911edu.com/schoolIntro3.png" alt="">
       </div>
       <img class="schoolImg" src="http://h5-image.1911edu.com/schoolIntro4.png" alt="">
-      <p><span>查看分校校址</span></p>
+      <p><span @click="handleLink('/home/citySchool/viewSchoolAddress')">查看分校校址</span></p>
       <img class="schoolImg" src="http://h5-image.1911edu.com/schoolIntro5.png" alt="">
       <p><span @click="handleLink('/home/citySchool/schoolApplication')">立即申请</span></p>
     </div>
