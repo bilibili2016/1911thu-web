@@ -50,7 +50,11 @@ export default {
           headerClass[i].classList.remove('active')
         }
         headerClass[0].classList.add('active')
-      } else if (pathName === '/home/teacher/list') {
+      } else if (
+        pathName === '/home/teacher/list' ||
+        pathName == '/home/teacher/orderTeacher' ||
+        pathName == '/home/teacher/beTeacher'
+      ) {
         //名师智库
         for (var i = 0; i < headerClass.length; i++) {
           headerClass[i].classList.remove('active')
