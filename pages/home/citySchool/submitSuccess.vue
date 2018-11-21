@@ -1,20 +1,18 @@
 <template>
-    <div class="submitSuccess">
-        <div class="icon">
-            <i class="el-icon-circle-check"></i>
-        </div>
-        <div class="alert">提交成功！</div>
-        <div class="desc">感谢您对1911学堂城市分校的关注，我们会在48小时内与您取得联系！</div>
+  <div class="submitSuccess">
+    <div class="icon">
+      <img src="@/assets/images/submit-success.png" alt="">
     </div>
+    <div class="alert">提交成功！</div>
+    <div class="desc">感谢您对1911学堂城市分校的关注，我们会在48小时内与您取得联系！</div>
+  </div>
 </template>
 <style scoped lang="scss">
 .submitSuccess {
   margin-top: 200px;
   width: 100%;
   text-align: center;
-  .icon {
-    font-size: 68px;
-  }
+
   .alert {
     color: #6417a6;
     font-size: 24px;
