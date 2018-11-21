@@ -284,6 +284,7 @@ export default {
     }
   },
   mounted() {
+    setTitle('城市分校校长招募-1911学堂')
     this.getRegionList()
   }
 }

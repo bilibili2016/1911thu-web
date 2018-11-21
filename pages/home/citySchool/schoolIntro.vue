@@ -19,6 +19,8 @@
   </div>
 </template>
 <script>
+import { matchSplits, setTitle, message } from '@/lib/util/helper'
+
 export default {
   data() {
     return {}
@@ -27,6 +29,9 @@ export default {
     handleLink(link) {
       this.$router.push(link)
     }
+  },
+  mounted() {
+    setTitle('城市分校-1911学堂')
   }
 }
 </script>
