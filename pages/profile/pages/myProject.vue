@@ -7,17 +7,17 @@
           <v-cardtab :allLoad="allProjectLoad" :data="studyProjectData" :config="configOne" :pagemsg="projectPageStudy" :noMsg="noMsgSix" @pageChange="studyProjectPageChange"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 已完成 -->
-        <el-tab-pane label="已完成" name="second" value="2">
+        <!-- <el-tab-pane label="已完成" name="second" value="2">
           <v-cardtab :data="readyProjectData" :config="configSix" :pagemsg="projectPageReady" :noMsg="noMsgSeven" @pageChange="alreadyProjectPageChange"></v-cardtab>
-        </el-tab-pane>
+        </el-tab-pane> -->
         <!-- 我的项目 已过期 -->
         <el-tab-pane label="已过期" name="third" value="3">
           <v-cardtab :data="expiredProjectData" :config="configSeven" :pagemsg="projectPageExpired" :noMsg="noMsgEight" @pageChange="expiredProjectPageChange"></v-cardtab>
         </el-tab-pane>
         <!-- 我的项目 我的收藏 -->
-        <el-tab-pane label="我的收藏" name="fourth" value="0">
+        <!-- <el-tab-pane label="我的收藏" name="fourth" value="0">
           <v-cardtab :data="collectProjectData" :config="configZero" :pagemsg="projectPageCollect" :noMsg="noMsgNine" @pageChange="collectProjectPageChange"></v-cardtab>
-        </el-tab-pane>
+        </el-tab-pane> -->
       </el-tabs>
     </el-card>
   </div>

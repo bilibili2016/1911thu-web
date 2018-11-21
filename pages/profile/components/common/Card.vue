@@ -142,11 +142,12 @@ export default {
       })
     },
     goToPlay(item) {
-      let projectLink = {
-        base: '/project/projectPlayer',
-        kid: item.id
-      }
-      open(projectLink)
+      this.openDetail(item)
+      // let projectLink = {
+      //   base: '/project/projectPlayer',
+      //   kid: item.id
+      // }
+      // open(projectLink)
     },
     // 已过期商品直接加入购物车
     goShoppingCart(item) {

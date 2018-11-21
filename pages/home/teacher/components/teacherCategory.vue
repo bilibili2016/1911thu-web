@@ -124,7 +124,6 @@ export default {
             company_name: '全部',
             id: 0
           })
-          console.log(this.unitData)
         }
       })
     }
