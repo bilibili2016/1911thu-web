@@ -3,10 +3,8 @@
         <!-- 普通项目的线下课程介绍 -->
         <div v-if="project.types==='1'">
             <div v-if="data.offline_content" v-html="data.offline_content"></div>
-            <div class="noData" v-else>
-                <img src="http://static-image.1911edu.com/noMsg.png" alt="">
-                <p>暂无线下课程介绍！</p>
-            </div>
+            <!-- 无数据 -->
+            <v-nodata :pageType="pageType" v-else></v-nodata>
         </div>
         <!-- 自定义项目的线下课程介绍 -->
         <div v-if="project.types==='2'">
@@ -33,8 +31,22 @@
 </template>
 
 <script>
+import NoData from '@/components/common/NoData.vue'
+
 export default {
-  props: ['project', 'data']
+  props: ['project', 'data'],
+  components: {
+    'v-nodata': NoData
+  },
+  data() {
+    return {
+      pageType: {
+        page: 'offlineDesc',
+        text: '暂无线下课程介绍！',
+        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
+      }
+    }
+  }
 }
 </script>
 <style scoped lang="scss">

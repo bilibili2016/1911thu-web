@@ -26,9 +26,8 @@
           <v-card :data="categoryDataChoose" v-if="categoryDataChoose.length&& xid === '1'" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
-        <div v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<=0 && !loadCourse">
-          <v-nothing></v-nothing>
-        </div>
+        <v-nodata v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<=0 && !loadCourse" :pageType="pageType"></v-nodata>
+
         <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
       </div>
     </div>
@@ -40,7 +39,8 @@
 
 <script>
 import CustomCard from '@/components/card/Card.vue'
-import SearchNothing from '@/components/common/SearchNothing.vue'
+import NoData from '@/components/common/NoData.vue'
+
 import { home, players, category } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -50,15 +50,20 @@ import Filter from '@/pages/course/components/Filter'
 export default {
   components: {
     'v-card': CustomCard,
-    'v-nothing': SearchNothing,
     'v-list': List,
-    'v-filter': Filter
+    'v-filter': Filter,
+    'v-nodata': NoData
   },
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   data() {
     return {
+      pageType: {
+        page: 'category',
+        text: '未找到相关内容',
+        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
+      },
       cidData: [],
       pidData: [],
       loadBanner: true,

@@ -3,7 +3,7 @@
     <v-banner :config="bconfig" :isShowUpAvtor="activeTab=='tab-sixth'"></v-banner>
     <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
-        <!-- 我的首页 -->
+        <!-- 最近学习 -->
         <el-tab-pane class="my-home" name="tab-first">
           <span slot="label" class="tabList">
             <i class="icon-home"></i> 最近学习</span>

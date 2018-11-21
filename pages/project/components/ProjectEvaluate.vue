@@ -24,10 +24,8 @@
           <p class="evlContent">{{evl.tags}}，{{evl.evaluate_content}}</p>
         </div>
       </div>
-      <div class="noData" v-else>
-        <img src="http://static-image.1911edu.com/noMsg.png" alt="">
-        <p>还没有评论，快去抢沙发！</p>
-      </div>
+      <!-- 无数据 -->
+      <v-nodata :pageType="pageType" v-else></v-nodata>
     </div>
     <div class="pagination course-style ">
       <el-pagination :id="pagemsg.total " v-show="pagemsg.total!='0' " background layout="prev, pager, next " :page-size="pagemsg.pagesize " :page-count="pagemsg.pagesize " :current-page="pagemsg.page " :total="pagemsg.total " @current-change="handleCurrentChange"></el-pagination>
@@ -36,8 +34,22 @@
 </template>
 
 <script>
+import NoData from '@/components/common/NoData.vue'
+
 export default {
   props: ['evaluateData', 'evaluateInfo', 'pagemsg'],
+  components: {
+    'v-nodata': NoData
+  },
+  data() {
+    return {
+      pageType: {
+        page: 'projectEvaluate',
+        text: '还没有评论，快去抢沙发！',
+        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
+      }
+    }
+  },
   methods: {
     handleCurrentChange(val) {
       this.$emit('handleCurrentChange', val)

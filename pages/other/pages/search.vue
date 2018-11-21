@@ -13,10 +13,8 @@
         <v-backtotop></v-backtotop>
       </div>
       <div class="searchFalse" v-if="!result" v-loading="loadSearch">
-        <div class="noMsg">
-          <img :src="noMsg.img" alt="">
-          <p>未找到相关内容</p>
-        </div>
+        <!-- 无数据 -->
+        <v-nodata :pageType="pageType"></v-nodata>
         <div class="doYouLike">
           <div class="clearfix title">
             <p class="fl">猜你喜欢</p>
@@ -35,6 +33,7 @@
 import Search from '@/components/common/Search.vue'
 import CustomCard from '@/components/card/Card.vue'
 import BackToTop from '@/components/common/BackToTop.vue'
+import NoData from '@/components/common/NoData.vue'
 import { search } from '~/lib/v1_sdk/index'
 import { store as persistStore } from '~/lib/core/store'
 import { Trim } from '@/lib/util/helper'
@@ -43,15 +42,18 @@ export default {
   components: {
     'v-search': Search,
     'v-card': CustomCard,
-    'v-backtotop': BackToTop
+    'v-backtotop': BackToTop,
+    'v-nodata': NoData
   },
   data() {
     return {
+      pageType: {
+        page: 'search',
+        text: '未找到相关内容',
+        imgUrl: 'http://static-image.1911edu.com/noSearch.png'
+      },
       ressult: false,
       loadSearch: false,
-      noMsg: {
-        img: 'http://static-image.1911edu.com/noSearch.png'
-      },
       searchData: [],
       getData: [],
       config: {

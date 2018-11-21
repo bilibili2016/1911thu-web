@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-nomsg :data="noMsg" v-if="isNoMsg"></v-nomsg>
+    <!-- 无数据 -->
+    <v-nodata :pageType="pageType" v-if="isNoMsg"></v-nodata>
     <div class="affirmOrder" ref="affirmOrder" v-else>
       <div class="contain" v-loading="loadGoods">
         <!-- 头部banner -->
@@ -36,7 +37,8 @@ import Report from '@/components/common/Report.vue'
 import List from '@/pages/shop/components/List'
 import orderInfo from '@/pages/shop/affirmorder/orderInfo'
 import orderBtn from '@/pages/shop/affirmorder/orderBtn'
-import noMsg from '@/pages/shop/affirmorder/noMsg'
+import NoData from '@/components/common/NoData.vue'
+
 import backShopCart from '@/pages/shop/affirmorder/backShopCart'
 import {
   message,
@@ -46,7 +48,6 @@ import {
   matchSplits
 } from '@/lib/util/helper'
 import { home } from '~/lib/v1_sdk/index'
-// import { splitUrl, openUrl } from '~/lib/util/helper'
 export default {
   components: {
     'v-banner': Banner,
@@ -54,7 +55,7 @@ export default {
     'v-list': List,
     'v-orderinfo': orderInfo,
     'v-orderbtn': orderBtn,
-    'v-nomsg': noMsg,
+    'v-nodata': NoData,
     'v-backshopcart': backShopCart
   },
   data() {
@@ -88,9 +89,10 @@ export default {
         goodsAmount: '',
         payNumber: ''
       },
-      noMsg: {
-        img: 'http://static-image.1911edu.com/noMsg.png',
-        backSeconds: 3
+      pageType: {
+        page: 'affirmOrder',
+        text: `您没有正在进行的订单,3s后将会跳转到首页！`,
+        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
       },
       showReportBug: false,
       problem: {
