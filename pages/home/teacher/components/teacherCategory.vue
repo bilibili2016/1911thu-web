@@ -50,9 +50,6 @@ export default {
       this.categoryIndex = index
       this.processData()
       this.$emit('selectCid', item, index)
-      console.log(this.unitData)
-      console.log(this.categoryData)
-      console.log(this.childList)
     },
     processData() {
       this.$emit('processData')

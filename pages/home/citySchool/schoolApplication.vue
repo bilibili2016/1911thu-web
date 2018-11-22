@@ -114,7 +114,6 @@
                                 </div>
                                 <p class="uploadP" v-show="!isShowFile"><img :src="this.schoolForm.businessLicense " alt=""><span class="deleteFile" @click="deleteFile">删除</span></p>
                             </div>
-
                         </div>
                     </div>
                 </div>
