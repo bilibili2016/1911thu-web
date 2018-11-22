@@ -7,7 +7,7 @@
         <el-select v-model="addressForm.region" placeholder="请选择区域" @change="regionChange">
           <el-option v-for="(p,index) in region" :key="'prov'+index" :label="p.region_name" :value="p.region_id"></el-option>
         </el-select>
-        <el-select v-model="addressForm.province_name" placeholder="请选择省份" @change="provinceChange">
+        <el-select v-model="addressForm.province_name" placeholder="请选择省份" no-data-text="请先选择所在地区" @change="provinceChange">
           <el-option v-for="(p,index) in province" :key="'prov'+index" :label="p.label" :value="p.value"></el-option>
         </el-select>
         <el-select v-model="addressForm.city_name" placeholder="请选择城市" no-data-text="请先选择所在省份" @change="cityChange">
