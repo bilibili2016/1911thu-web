@@ -183,6 +183,7 @@ export default {
 
       if (imgFiles.size / 1024 / 1024 > 2) {
         message(this, 'error', '请上传不超过2M的文件')
+        return false
       }
       reader.onloadend = () => {
         this.fileForm.FILESS.push(reader.result)
