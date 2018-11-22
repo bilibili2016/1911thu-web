@@ -1,38 +1,39 @@
 .teacherCategory {
   width: 1100px;
   margin: 0 auto;
-  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0px 3px 24px 0px rgba(53, 53, 53, 0.1);
+  padding: 0 35px;
   .title {
     width: 70px;
     display: inline-block;
     font-size: 14px;
     color: rgba(34, 34, 34, 1);
+    text-align: right;
   }
   ul {
-    width: 1025px;
+    width: 960px;
     display: inline-block;
     vertical-align: top;
     li {
       list-style: none;
       display: inline-block;
       font-size: 14px;
-      padding-right: 17px;
+      margin-right: 10px;
       cursor: pointer;
       span {
         background-color: #773084;
       }
       .el-button {
-        padding: 8px 10px;
-        border-radius: 6px;
-        color: #222222;
+        color: #93999f;
         font-weight: 400;
-        background-color: #ebe7ed;
         border: none;
+        background: none;
+        padding: 6px 10px;
       }
       &:hover {
         .el-button {
-          background-color: #5f068d;
-          color: #fff;
+          color: #772f84;
         }
       }
       &.btnBg {
@@ -40,23 +41,30 @@
           background-color: #773084;
           color: #fff;
           border: none;
+          border-radius: 4px;
+          padding: 6px 10px;
+          font-size: 14px;
         }
+      }
+      &:first-child {
+        border-radius: 4px;
+        margin: 0 5px 0 8px;
       }
     }
   }
   .college {
-    height: 78px;
-    border-bottom: 1px rgba(232, 214, 247, 1) solid;
+    height: 58px;
+    border-bottom: 1px #f6f6f6 solid;
     .title {
-      height: 78px;
-      line-height: 78px;
+      height: 58px;
+      line-height: 58px;
     }
     li {
-      line-height: 78px;
+      line-height: 58px;
     }
   }
   .classification {
-    border-bottom: 1px rgba(232, 214, 247, 1) solid;
+    border-bottom: 1px #f6f6f6 solid;
     .title {
       height: 50px;
       line-height: 50px;

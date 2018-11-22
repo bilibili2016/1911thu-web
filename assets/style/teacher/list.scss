@@ -2,9 +2,9 @@
   box-shadow: none;
 }
 .news-list.teacherList {
+  background-color: #f7f9fb;
   .te-con {
-    padding-top: 30px;
-    background-color: #f7f9fb;
+    margin-top: 30px;
   }
 
   .teacherList-img {
@@ -17,9 +17,9 @@
   .teacherLead {
     width: 1100px;
     // height: 180px;
-    margin: 42px auto 10px;
-    box-shadow: 0px 6px 46px 0px rgba(53, 53, 53, 0.1);
-    padding: 30px 35px;
+    margin: 40px auto 30px;
+    // box-shadow: 0px 6px 46px 0px rgba(53, 53, 53, 0.1);
+    padding: 10px 35px;
     p {
       color: #1d66b9;
       font-size: 16px;

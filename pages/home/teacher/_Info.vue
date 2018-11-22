@@ -15,7 +15,9 @@
     <div class="courseList">
       <h3>在教的课程</h3>
       <div class="list">
-        <v-card :data="teacherCourse" :config="config"></v-card>
+        <v-card v-if="teacherCourse.length" :data="teacherCourse" :config="config"></v-card>
+        <!-- 无数据 -->
+        <v-nodata v-if="teacherCourse.length==0" :pageType="pageType"></v-nodata>
       </div>
     </div>
   </div>
@@ -25,12 +27,20 @@
 import { teacherInfo } from '~/lib/v1_sdk/index'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import CustomCard from '@/components/card/Card.vue'
+import NoData from '@/components/common/NoData.vue'
+
 export default {
   components: {
-    'v-card': CustomCard
+    'v-card': CustomCard,
+    'v-nodata': NoData
   },
   data() {
     return {
+      pageType: {
+        page: 'teacher/_info',
+        text: '暂无在教的课程',
+        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
+      },
       config: {
         card_type: 'profile',
         card: 'home'

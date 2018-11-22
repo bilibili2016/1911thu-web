@@ -180,9 +180,6 @@ export default {
       formdata.file = imgFiles
       reader.readAsDataURL(imgFiles)
       this.fileForm.FILESS = []
-      console.log(imgFiles)
-
-      console.log(imgFiles.size / 1024 / 1024)
 
       if (imgFiles.size / 1024 / 1024 > 2) {
         message(this, 'error', '请上传不超过2M的文件')
