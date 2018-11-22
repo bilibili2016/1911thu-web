@@ -75,7 +75,16 @@ export default {
       },
       loading: false,
       isShowBtn: false,
-      showRecruitTeacher: true
+      showRecruitTeacher: true,
+      categoryIndex: 0,
+      allData: {
+        category_name: '全部',
+        childList: [],
+        id: '0',
+        parent_id: '0',
+        picture: 'http://p8p47jzeo.bkt.clouddn.com/1531894819',
+        short_name: '全部'
+      }
     }
   },
   methods: {
@@ -191,6 +200,8 @@ export default {
         this.$emit('changeCid', this.pid)
       }
       this.childList = this.categoryData[this.categoryIndex].childList
+      console.log(this.categoryData)
+      console.log(this.childList)
     }
   },
   mounted() {

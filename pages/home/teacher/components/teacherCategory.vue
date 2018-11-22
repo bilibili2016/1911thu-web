@@ -36,18 +36,10 @@ export default {
   data() {
     return {
       categoryIndex: 0,
-      cid: 0,
+      cid: '0',
       pid: '0',
       uid: 0,
       cp: '',
-      allData: {
-        category_name: '全部',
-        childList: [],
-        id: '0',
-        parent_id: '0',
-        picture: 'http://p8p47jzeo.bkt.clouddn.com/1531894819',
-        short_name: '全部'
-      },
       categoryList: []
     }
   },
@@ -58,6 +50,9 @@ export default {
       this.categoryIndex = index
       this.processData()
       this.$emit('selectCid', item, index)
+      console.log(this.unitData)
+      console.log(this.categoryData)
+      console.log(this.childList)
     },
     processData() {
       this.$emit('processData')
