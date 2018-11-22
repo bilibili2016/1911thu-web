@@ -1,6 +1,6 @@
 <template>
   <div class="teacherCategory">
-    <div class="college">
+    <div class="college" v-if="categoryData.length>1">
       <h4 class="title">学院：</h4>
       <ul>
         <li v-for="(item,index) in categoryData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
@@ -9,7 +9,7 @@
       </ul>
     </div>
     <!-- 课程不展示 -->
-    <div class="classification">
+    <div class="classification" v-if="categoryData.length>1">
       <h4 class="title">专长领域：</h4>
       <ul>
         <li v-for="(items,index) in childList" :index="index" :key="index" :class="{btnBg: pid === items.id ? true : false }">
@@ -17,7 +17,7 @@
         </li>
       </ul>
     </div>
-    <div class="unit">
+    <div class="unit" v-if="unitData.length>1">
       <h4 class="title">所在单位：</h4>
       <ul>
         <li v-for="(item,index) in unitData" :index="index" :key="index" :class="{btnBg: uid === item.id ? true : false }">
@@ -32,11 +32,9 @@
 import { mapState, mapActions } from 'vuex'
 import { list } from '~/lib/v1_sdk/index'
 export default {
-  props: ['unitData'],
+  props: ['unitData', 'categoryData', 'childList'],
   data() {
     return {
-      categoryData: [],
-      childList: [],
       categoryIndex: 0,
       cid: 0,
       pid: '0',
@@ -61,6 +59,9 @@ export default {
       this.processData()
       this.$emit('selectCid', item, index)
     },
+    processData() {
+      this.$emit('processData')
+    },
     // 小类 单个
     selectPid(item, index) {
       this.pid = item.id
@@ -69,54 +70,7 @@ export default {
     selectUid(item, index) {
       this.uid = item.id
       this.$emit('selectUid', item, index)
-    },
-    // 公共 获取list 方法
-    getHeaderList() {
-      this.loadList = true
-      list.teacherCategoryList().then(res => {
-        if (res.status === 0) {
-          this.handleData(this.allData, res)
-          this.loadList = false
-        }
-      })
-    },
-    // 处理全部的分类
-    makeData(arr, data) {
-      data.forEach((v, i) => {
-        v.childList.forEach((v, i) => {
-          if (i > 0) {
-            arr.push(v)
-          }
-        })
-      })
-    },
-    // 处理数据 拼接全部数据
-    handleData(data, res) {
-      this.categoryData = res.data.categoryList
-      this.categoryData.unshift(data)
-      for (let item of this.categoryData) {
-        item.childList.unshift(this.allData)
-      }
-      this.loadList = false
-      this.makeData(this.categoryData[0].childList, res.data.categoryList)
-      this.processData()
-    },
-    // 根据一级分类处理分类二级分类
-    processData() {
-      for (let item of this.categoryData) {
-        if (item.id == this.categoryId) {
-          this.categoryIndex = this.categoryData.indexOf(item)
-        }
-      }
-      if (this.categoryData[this.categoryIndex].childList.length == 1) {
-        this.pid = '0'
-        this.$emit('changeCid', this.pid)
-      }
-      this.childList = this.categoryData[this.categoryIndex].childList
     }
-  },
-  mounted() {
-    this.getHeaderList()
   }
 }
 </script>

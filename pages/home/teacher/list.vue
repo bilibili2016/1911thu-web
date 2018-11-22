@@ -8,7 +8,7 @@
       <p>贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。</p>
     </div>
     <!-- 分类 -->
-    <v-category v-if="unitData.length>1" :unitData="unitData" @selectCid="selectCid" @selectPid="selectPid" @selectUid="selectUid" @changeCid="changeCid"></v-category>
+    <v-category :categoryData="categoryData" :childList="childList" :unitData="unitData" @processData="processData" @selectCid="selectCid" @selectPid="selectPid" @selectUid="selectUid" @changeCid="changeCid"></v-category>
     <div class="te-con" v-if="famousList.length">
       <div class="center teacherList">
         <div @click="getNewInfoList"></div>
@@ -44,6 +44,9 @@ export default {
   },
   data() {
     return {
+      unitData: [],
+      categoryData: [],
+      childList: [],
       pageType: {
         page: 'teacherList',
         text: '暂无数据',
@@ -58,7 +61,6 @@ export default {
         card_type: 'famousList'
       },
       famousList: [],
-      unitData: [],
       teacherForm: {
         pages: 1,
         limits: 9,
@@ -143,10 +145,57 @@ export default {
           })
         }
       })
+    },
+    // 公共 获取list 方法
+    getHeaderList() {
+      this.loadList = true
+      list.teacherCategoryList().then(res => {
+        if (res.status === 0) {
+          this.handleData(this.allData, res)
+          this.loadList = false
+        }
+      })
+    },
+    // 处理全部的分类
+    makeData(arr, data) {
+      data.forEach((v, i) => {
+        v.childList.forEach((v, i) => {
+          if (i > 0) {
+            arr.push(v)
+          }
+        })
+      })
+    },
+    // 处理数据 拼接全部数据
+    handleData(data, res) {
+      this.categoryData = res.data.categoryList
+      this.categoryData.unshift(data)
+      if (this.categoryData.length > 1) {
+        for (let item of this.categoryData) {
+          item.childList.unshift(this.allData)
+        }
+        this.loadList = false
+        this.makeData(this.categoryData[0].childList, res.data.categoryList)
+        this.processData()
+      }
+    },
+    // 根据一级分类处理分类二级分类
+    processData() {
+      for (let item of this.categoryData) {
+        if (item.id == this.categoryId) {
+          this.categoryIndex = this.categoryData.indexOf(item)
+        }
+      }
+      if (this.categoryData[this.categoryIndex].childList.length == 1) {
+        this.pid = '0'
+        this.$emit('changeCid', this.pid)
+      }
+      this.childList = this.categoryData[this.categoryIndex].childList
     }
   },
   mounted() {
     setTitle('名师智库-1911学堂')
+    this.getHeaderList()
     this.initTeacherList()
     this.teacherCompanyList()
   }
