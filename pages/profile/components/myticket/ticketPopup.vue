@@ -336,7 +336,7 @@ export default {
         others: null,
         address: null,
         radio: 1,
-        types: 1, //发票类型
+        types: '1', //发票类型
         saveioc: false,
         isRadio: true,
         ids: null
@@ -671,6 +671,16 @@ export default {
     },
     //普通发票、个人发票 验证
     addInvoiceBefor() {
+      if (this.invoiceForm.types == '2') {
+        if (Trim(this.ticketForm.companyname) == '') {
+          this.$message({
+            showClose: true,
+            type: 'error',
+            message: '请输入正确的发票抬头！'
+          })
+          return false
+        }
+      }
       if (!this.ticketForm.number) {
         this.ticketForm.number = ''
       }
