@@ -8,7 +8,7 @@
       <p>贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。</p>
     </div>
     <!-- 分类 -->
-    <v-category @selectCid="selectCid" @selectPid="selectPid" @selectUid="selectUid" @changeCid="changeCid"></v-category>
+    <v-category v-if="unitData.length>1" :unitData="unitData" @selectCid="selectCid" @selectPid="selectPid" @selectUid="selectUid" @changeCid="changeCid"></v-category>
     <div class="te-con" v-if="famousList.length">
       <div class="center teacherList">
         <div @click="getNewInfoList"></div>
@@ -58,6 +58,7 @@ export default {
         card_type: 'famousList'
       },
       famousList: [],
+      unitData: [],
       teacherForm: {
         pages: 1,
         limits: 9,
@@ -130,11 +131,24 @@ export default {
     //一级分类下没有二级分类进行初始化
     changeCid(data) {
       this.teacherForm.pid = data
+    },
+    //教师单位列表
+    teacherCompanyList() {
+      list.teacherCompanyList().then(res => {
+        if (res.status === 0) {
+          this.unitData = res.data.teacherCompanyList
+          this.unitData.unshift({
+            company_name: '全部',
+            id: 0
+          })
+        }
+      })
     }
   },
   mounted() {
     setTitle('名师智库-1911学堂')
     this.initTeacherList()
+    this.teacherCompanyList()
   }
 }
 </script>

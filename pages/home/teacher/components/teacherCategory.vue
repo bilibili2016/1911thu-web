@@ -32,9 +32,9 @@
 import { mapState, mapActions } from 'vuex'
 import { list } from '~/lib/v1_sdk/index'
 export default {
+  props: ['unitData'],
   data() {
     return {
-      unitData: [],
       categoryData: [],
       childList: [],
       categoryIndex: 0,
@@ -113,24 +113,10 @@ export default {
         this.$emit('changeCid', this.pid)
       }
       this.childList = this.categoryData[this.categoryIndex].childList
-    },
-    //教师单位列表
-    teacherCompanyList() {
-      list.teacherCompanyList().then(res => {
-        if (res.status === 0) {
-          // this.handleData(this.allData, res)
-          this.unitData = res.data.teacherCompanyList
-          this.unitData.unshift({
-            company_name: '全部',
-            id: 0
-          })
-        }
-      })
     }
   },
   mounted() {
     this.getHeaderList()
-    this.teacherCompanyList()
   }
 }
 </script>
