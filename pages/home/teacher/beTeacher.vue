@@ -329,6 +329,8 @@ export default {
             this.teacherForm.resume = res.data.full_path
             this.isShowFile = !this.isShowFile
             event.target.value = ''
+          } else {
+            message(this, 'error', res.msg)
           }
         })
       }

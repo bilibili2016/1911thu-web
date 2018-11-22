@@ -180,6 +180,13 @@ export default {
       formdata.file = imgFiles
       reader.readAsDataURL(imgFiles)
       this.fileForm.FILESS = []
+      console.log(imgFiles)
+
+      console.log(imgFiles.size / 1024 / 1024)
+
+      if (imgFiles.size / 1024 / 1024 > 2) {
+        message(this, 'error', '请上传不超过2M的文件')
+      }
       reader.onloadend = () => {
         this.fileForm.FILESS.push(reader.result)
         list.uploadResume(this.fileForm).then(res => {
@@ -187,6 +194,8 @@ export default {
             this.schoolForm.businessLicense = res.data.full_path
             this.isShowFile = !this.isShowFile
             event.target.value = ''
+          } else {
+            message(this, 'error', res.msg)
           }
         })
       }

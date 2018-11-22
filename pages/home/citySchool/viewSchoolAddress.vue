@@ -125,6 +125,7 @@ export default {
       this.addressForm.province = ''
       this.addressForm.city_name = ''
       this.addressForm.city = ''
+      this.city = []
       school.getRegionAreaList({ regionID: val }).then(res => {
         if (res.status == 0) {
           this.mapregionList = res.data.areaList

@@ -14,9 +14,7 @@
         <div class="carlist" v-loading="loadCourseAll" :class="{ minheights : loadCourseAll}">
           <v-card :data="categoryData" :config="categoryCard" v-if="categoryData.length&&xid === '0'"></v-card>
         </div>
-        <div v-if="categoryData.length == 0 &&!loadCourseAll" class="noMsg">
-          <v-nothing></v-nothing>
-        </div>
+        <v-nodata v-loading="loadCourse" class="noMsg" v-if="categoryData.length == 0 &&!loadCourseAll" :pageType="pageType"></v-nodata>
       </div>
 
       <div v-if="xid === '1'">
