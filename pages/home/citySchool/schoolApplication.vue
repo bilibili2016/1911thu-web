@@ -111,7 +111,9 @@
                                         <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept="image/png,image/gif,image/jpeg">
                                     </div>
                                     <div class="uploadMask"> <i class="el-icon-plus"></i></div>
+                                    <div class="limit">图片不能超过2M</div>
                                 </div>
+
                                 <p class="uploadP" v-show="!isShowFile"><img :src="this.schoolForm.businessLicense " alt=""><span class="deleteFile" @click="deleteFile">删除</span></p>
                             </div>
 
@@ -182,7 +184,7 @@ export default {
       this.fileForm.FILESS = []
 
       if (imgFiles.size / 1024 / 1024 > 2) {
-        message(this, 'error', '请上传不超过2M的文件')
+        message(this, 'error', '请上传不超过2M的图片')
         return false
       }
       reader.onloadend = () => {
