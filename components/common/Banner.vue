@@ -34,9 +34,8 @@
             <p class="vipCard">
               <span v-for="(vip,index) in userInfo.vipPrivateList" :key="index">
                 <el-popover placement="bottom-start" :title="vip.title" width="180" trigger="hover" :content="'剩余'+(vip.expire_days)+'天'">
-                  <el-button slot="reference">
-                    <!-- expire_days -->
-                    <img :src="vip.vip_icon" @click="goVipInfo(vip)">
+                  <el-button slot="reference" @click="goVipInfo(vip)">
+                    <img :src="vip.vip_icon">
                   </el-button>
                 </el-popover>
               </span>
@@ -114,6 +113,8 @@ export default {
       }
     },
     goVipInfo(vip) {
+      console.log(vip)
+
       this.$router.push({
         path: '/home/vip/vipPage',
         query: {
@@ -152,8 +153,7 @@ export default {
           if (this.userInfo.head_img && this.userInfo.head_img != '') {
             this.avator = this.userInfo.head_img
           } else {
-            this.avator =
-              'http://static-image.1911edu.com/profile_avator01.png'
+            this.avator = 'http://static-image.1911edu.com/profile_avator01.png'
           }
         }
       })
