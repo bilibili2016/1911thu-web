@@ -39,7 +39,13 @@
 </template>
 
 <script>
-import { checkPhone, checkCode, checkPassord } from '~/lib/util/validatefn'
+import {
+  checkPhone,
+  checkCode,
+  checkPassord,
+  checkRegisterPhone
+} from '~/lib/util/validatefn'
+import { validatePhone } from '~/lib/util/validate'
 import { mapActions } from 'vuex'
 import { auth } from '~/lib/v1_sdk/index'
 import { encryption, message, Trim } from '~/lib/util/helper'
@@ -133,9 +139,19 @@ export default {
       })
     },
     forgetPassword() {
+      this.fpData.code = String(this.fpData.code)
+      this.fpData.password = String(this.fpData.password)
+      if (!validatePhone(this.fpData.phones)) {
+        message(this, 'error', '请输入有效的手机号！')
+        return false
+      }
+      if (Trim(this.fpData.code) == '') {
+        message(this, 'error', '请输入短信验证码')
+        return false
+      }
       if (
-        Trim(this.fpData.ectpwd).length < 8 ||
-        Trim(this.fpData.ectpwd).length > 16
+        Trim(this.fpData.password).length < 8 ||
+        Trim(this.fpData.password).length > 16
       ) {
         message(this, 'error', '8-16位密码，区分大小写，不能用空格')
         return false
