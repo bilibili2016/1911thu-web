@@ -4,11 +4,11 @@
     <div class="card-list " v-for="(item,index) in customerProjectListData" :key="index">
       <el-card shadow="never " body-style="padding: 0; " class="itemBox">
         <div>
-          <div class="line-icon">
+          <!-- <div class="line-icon">
             <img v-if="item.study_type==='1'" class="onlineIcon" src="http://static-image.1911edu.com/online-icon.png" alt="">
             <img v-if="item.study_type==='2'" class="onlineIcon" src="http://static-image.1911edu.com/mixture-icon.png" alt="">
             <img v-if="item.study_type==='3'" class="onlineIcon" src="http://static-image.1911edu.com/interaction-icon.png" alt="">
-          </div>
+          </div> -->
           <div class="bgImgs " @click="gotoDetail(item)">
             <img :src="item.picture" alt=" ">
           </div>
