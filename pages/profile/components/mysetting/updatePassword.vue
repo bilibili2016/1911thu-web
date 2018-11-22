@@ -2,14 +2,15 @@
   <div class="changePwd">
     <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autoComplete="off">
       <input type="password" class="hideInput">
-      <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
-        <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne"></el-input>
+      <el-form-item label="原密码" prop="oldPass" id="onlyForm">
+        <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne" placeholder="请输入您的当前密码"></el-input>
       </el-form-item>
-      <el-form-item label="新密码：" prop="newPass">
-        <el-input type="password" v-model="changePwd.newPass" auto-complete="off"></el-input>
+      <el-form-item label="新密码：" prop="newPass" class="margin">
+        <el-input type="password" v-model="changePwd.newPass" auto-complete="off" placeholder="请输入您的新密码"></el-input>
       </el-form-item>
+      <p class="tips">提示：密码长度至少8位，可以包含字母、数字、标点符号等</p>
       <el-form-item label="确认新密码：" prop="checkPass">
-        <el-input type="password" v-model="changePwd.checkPass" auto-complete="off"></el-input>
+        <el-input type="password" v-model="changePwd.checkPass" auto-complete="off" placeholder="请再次输入您的新密码"></el-input>
       </el-form-item>
       <!-- <p class="forgetPassword">如果您忘记原密码，建议通过
         <span @click="forget">找回密码</span>来修改密码！</p> -->

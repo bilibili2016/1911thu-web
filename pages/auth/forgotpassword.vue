@@ -14,7 +14,7 @@
           <input type="password" class="hideInput">
           <el-form-item prop="phones">
             <!-- 手机号 -->
-            <el-input v-model="fpData.phones" placeholder="请输入手机号"></el-input>
+            <el-input v-model="fpData.phones" placeholder="请输入您的手机号"></el-input>
           </el-form-item>
           <el-form-item prop="code" class="clearfix">
             <!-- 验证码 -->

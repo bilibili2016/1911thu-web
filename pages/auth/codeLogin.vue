@@ -3,10 +3,10 @@
   <div>
     <div v-if="mobileloginmsg">
       <el-form-item prop="phones">
-        <el-input v-model.number="registerMobileData.phones" placeholder="请输入登录手机号" clearable auto-complete="off" type="text"></el-input>
+        <el-input v-model.number="registerMobileData.phones" placeholder="请输入您的手机号" clearable auto-complete="off" type="text"></el-input>
       </el-form-item>
       <el-form-item prop="codes">
-        <el-input class="captcha" v-model="registerMobileData.codes" placeholder="请输入验证码" auto-complete="off" type="text"></el-input>
+        <el-input class="captcha" v-model="registerMobileData.codes" placeholder="请输入短信验证码" auto-complete="off" type="text"></el-input>
         <el-button type="primary" :disabled="codeClick" class="getCode" @click="handleMobileGetCode('loginDatamobile')" style="line-height:0">{{bindTelData.getCode}}</el-button>
       </el-form-item>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="searchOrderList clearfix">
-      <el-input class="fl" v-model="searchForm.searchWord" placeholder="请输入订单号、商品名称"></el-input>
+      <el-input class="fl" v-model="searchForm.searchWord" placeholder="请输入您的订单号或学习内容"></el-input>
       <span class="goSearch fr" @click="detection">
         <i class="el-icon-search"></i>
       </span>

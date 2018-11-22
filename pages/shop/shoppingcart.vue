@@ -132,7 +132,7 @@
         <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="(courseList && courseList.length > 0) || (projectList&& projectList.length>0)">
           <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
-            <span class="deleteChecked" @click="handleDeleteAll">删除选中的课程</span>
+            <span class="deleteChecked" @click="handleDeleteAll">删除选中的内容</span>
             <span class="person">购买人数：</span>
             <!-- onselectstart方法为禁止多次点击选中文本 -->
             <span class="number clearfix" unselectable="on" onselectstart="return false;">
@@ -152,12 +152,12 @@
             </span>
           </span>
           <span class="commitOrder fr">
-            <el-button class="notGray" @click="showCommit" v-if="canSubmit">去结算</el-button>
-            <el-button class="isGray" v-else @click="showMsg">去结算</el-button>
+            <el-button class="notGray" @click="showCommit" v-if="canSubmit">去支付</el-button>
+            <el-button class="isGray" v-else @click="showMsg">去支付</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
-            <i>{{Number(this.addArray.curriculumcartid.length) + Number(this.projectAddArray.projectcartid.length)}} </i> 门课程</span>
+            <i>{{Number(this.addArray.curriculumcartid.length) + Number(this.projectAddArray.projectcartid.length)}} </i> 项内容</span>
         </div>
       </div>
     </div>
@@ -192,7 +192,7 @@ export default {
     return {
       pageType: {
         page: 'shoppingCart',
-        text: '您的购物车为空',
+        text: '您的购物车为空，快去逛逛吧！',
         imgUrl: 'http://static-image.1911edu.com/shopCart-empty.png'
       },
       noMsg: 'http://static-image.1911edu.com/shopCart-empty.png',
@@ -796,7 +796,7 @@ export default {
         })
       } else {
         this.$confirm(
-          '您购买了多份课程，支付成功后请前往‘个人中心-兑换码管理’查看生成的兑换码，绑定兑换码后，购买的课程或项目即可观看。',
+          '您购买了多份学习内容，支付成功后请前往“个人中心-兑换码管理”查看生成的兑换码，绑定后即可学习所购买的学院或课程等内容。',
           {
             confirmButtonText: '去结算',
             cancelButtonText: '取消',

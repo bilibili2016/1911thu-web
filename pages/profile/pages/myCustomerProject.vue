@@ -29,7 +29,7 @@ export default {
     return {
       noMsg: {
         type: 'myCustomerProject',
-        text: '抱歉，您没有自定制项目~'
+        text: '抱歉，您还没有专属的自定制项目~'
       }
     }
   },

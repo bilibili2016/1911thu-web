@@ -140,6 +140,18 @@
       -webkit-box-shadow: 0 0 0px 1000px #f1e9f8 inset !important; //关于解决输入框背景颜色
       // -webkit-text-fill-color: #606266 !important; //关于接输入框文字颜色
     }
+    ::placeholder {
+      font-size: 14px;
+    }
+    .margin {
+      margin-bottom: 12px;
+    }
+    .tips {
+      color: #888;
+      padding-left: 140px;
+      height: 26px;
+      line-height: 26px;
+    }
   }
   .success {
     width: 364px;

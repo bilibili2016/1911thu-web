@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-form-item prop="phones">
-      <el-input v-model.number="registerData.phones" placeholder="请输入注册手机号" clearable></el-input>
+      <el-input v-model.number="registerData.phones" placeholder="请输入您的手机号" clearable></el-input>
     </el-form-item>
     <el-form-item prop="codes">
-      <el-input class="captcha" v-model="registerData.codes" placeholder="请输入验证码"></el-input>
+      <el-input class="captcha" v-model="registerData.codes" placeholder="请输入短信验证码"></el-input>
       <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
     </el-form-item>
     <el-form-item prop="passwords">

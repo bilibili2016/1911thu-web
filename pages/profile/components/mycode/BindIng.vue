@@ -58,7 +58,7 @@ export default {
       },
       noMsg: {
         type: 'myCode',
-        text: '抱歉，现在还没有兑换码~'
+        text: '抱歉，您现在还没有兑换码~'
       },
       type: 1,
       responseData: { type: true, res: '' },

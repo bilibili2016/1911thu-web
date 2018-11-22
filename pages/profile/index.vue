@@ -214,7 +214,7 @@ export default {
       },
       noMsgEle: {
         type: 'myInfo',
-        text: '抱歉，现在还没有我的消息呦~'
+        text: '抱歉，您还没有收到新的消息~'
       },
       noMsgTwl: {
         type: 'myTicket',

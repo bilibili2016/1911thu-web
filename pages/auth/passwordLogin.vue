@@ -3,7 +3,7 @@
   <div>
     <div>
       <el-form-item prop="phonenum">
-        <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入登录手机号/学号" clearable type="text"></el-input>
+        <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入您的手机号/学号" clearable type="text"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>

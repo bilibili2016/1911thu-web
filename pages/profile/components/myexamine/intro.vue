@@ -7,7 +7,7 @@
       </span>
     </div>
     <div class="examine-bottom">
-      <div class="one">1911学堂学员在完成了学院学习后，即可参与在线认证考试，考试通过后根据学员成绩将发放相应证书。本学堂可发放【清华大学在线学习认证证书】或【1911学堂结业证书】两种，每种证书均配有官方唯一认证编码，并可在官方网站进行查询。</div>
+      <div class="one">1911学堂学员在学院完成学习后，即可参加在线认证考试，考试通过后学堂将根据学员成绩发放【清华大学在线学习认证证书】或【1911学堂结业证书】，证书均配有可在官方网站进行查询的唯一认证编码。</div>
       <div class="examineImg">
         <img src="http://static-image.1911edu.com/certification.png" alt="">
       </div>
@@ -17,32 +17,32 @@
       </div>
       <div class="ask">
         <p class="tit">2. 认证考试</p>
-        <p>认证考试中学员需在2小时内完成100道题目的答题，所有试题均为客观题（即单选题、多选题）。题目将从学员已完成的课程中随机抽取。</p>
+        <p>学员需在2小时内作答100道题，所有试题均为客观题（即单选题、多选题）。题目将从学员已完成课程的题库中随机抽取。</p>
       </div>
       <div class="ask">
         <p class="tit">3. 考试规则</p>
-        <p>入学后学员有三次考试机会，系统将在所有考试成绩中取最好成绩作为该学员最终成绩，并根据该成绩为其发放证书。</p>
+        <p>入学后学员有三次考试机会，系统将取其最好成绩作为最终成绩，并发放相应证书。</p>
       </div>
       <div class="ask">
         <p class="tit">4. 颁发证书</p>
-        <p>根据学员成绩，学院将颁发对应的证书：</p>
-        <p>1911学堂证书：当学员成绩在60~69分时，将获得学堂颁发的1911学堂证书；</p>
-        <p>清华大学在线学习认证证书：当学员成绩在70分及以上时，将获得清华大学在线学习认证证书。</p>
-        <p>证书不重复颁发，每个学院对每名学员仅发放一张证书。</p>
+        <p>学院将根据学员考试成绩颁发相应证书，具体规则如下：</p>
+        <p>考试分数为70分及以上时，获得【清华大学在线学习认证证书】；</p>
+        <p>考试分数为60-69分时，获得学堂颁发的【1911学堂结业证书】。</p>
       </div>
       <div class="ask">
         <p class="tit">5. 有效期限</p>
-        <p>学员须在入学后的12个月之内完成考试并申领证书，逾期将视为学员自愿放弃考试和申请证书资格。</p>
+        <p>学员须在入学后的12个月之内完成考试并申领证书，逾期将被视为自愿放弃考试和申请证书资格。</p>
       </div>
       <div class="bottom">
         <div class="unBtn" v-if="showBtn && unfinishedStudyTime!=0">
-          <p class="btn">开始考试</p>
-          <p class="text">距可考试剩余<span class="time">{{unfinishedStudyTime}}</span>学时</p>
+          <p class="btn">参加考试</p>
+          <p class="text">继续学习<span class="time">{{unfinishedStudyTime}}</span>学时可申请参加考试</p>
         </div>
-        <div class="examine-btn " v-else @click="handleExamine">开始考试</div>
+        <div class="examine-btn " v-else @click="handleExamine">参加考试</div>
       </div>
     </div>
   </div>
+
 </template>
 <script>
 import { examine } from '~/lib/v1_sdk/index'
