@@ -27,7 +27,7 @@
             <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
           </el-form-item>
           <el-row>
-            <el-button @click.native="forgetPassword">提交</el-button>
+            <el-button @click.native="forgetPassword()">提交</el-button>
           </el-row>
           <input type="password" class="hideInput">
         </el-form>
@@ -42,7 +42,7 @@
 import { checkPhone, checkCode, checkPassord } from '~/lib/util/validatefn'
 import { mapActions } from 'vuex'
 import { auth } from '~/lib/v1_sdk/index'
-import { encryption, message } from '~/lib/util/helper'
+import { encryption, message, Trim } from '~/lib/util/helper'
 export default {
   data() {
     return {
@@ -133,6 +133,13 @@ export default {
       })
     },
     forgetPassword() {
+      if (
+        Trim(this.fpData.ectpwd).length < 8 ||
+        Trim(this.fpData.ectpwd).length > 16
+      ) {
+        message(this, 'error', '8-16位密码，区分大小写，不能用空格')
+        return false
+      }
       this.fpData.ectpwd = encryption(this.fpData.password)
       this.forgetPasswordAjax(this.fpData).then(response => {
         let types = response.status === 0 ? 'success' : 'error'
