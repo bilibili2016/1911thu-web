@@ -98,9 +98,12 @@ export default {
         if (response.status == 0) {
           this.showBtn = false
         } else {
-          this.showBtn = true
-          this.alertText = response.msg
-          // message(this, 'error', response.msg)
+          if (response.status == 100201) {
+            this.showBtn = false
+          } else {
+            this.showBtn = true
+            this.alertText = response.msg
+          }
         }
       })
     }
