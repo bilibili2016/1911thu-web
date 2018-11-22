@@ -13,8 +13,8 @@
       <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgfff" v-if="freeData.length>0"></v-course>
       <!-- 精品好课 -->
       <!-- <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgfff"></v-course> -->
-      <!-- 最新项目 -->
-      <v-course :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgf8f8fd"></v-course>
+      <!-- 互动式项目 -->
+      <v-course v-if="projectData.length>0" :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgf8f8fd"></v-course>
       <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
       <!-- 名师智库 -->
       <!-- <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous> -->
