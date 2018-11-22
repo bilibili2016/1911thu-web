@@ -1,7 +1,8 @@
 <template>
   <div>
     <div :class="{ minheight : allLoad}" v-loading="allLoad">
-      <v-list :data="data" :config="config" v-if="data  && data.length>0"></v-list>
+      <v-list :data="data" :config="config" v-if="!config.project&&data  && data.length>0"></v-list>
+      <v-card :data="data" :config="config" v-if="config.project&&data  && data.length>0"></v-card>
     </div>
     <div class="pagination" v-if="pagemsg.total>11 && data.length!= 0">
       <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="PageChange"></el-pagination>
@@ -13,14 +14,14 @@
 <script>
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import CustomList from '@/pages/profile/components/common/List.vue'
-import CardTab from '@/pages/profile/components/common/CardTab.vue'
+import Card from '@/pages/profile/components/common/Card.vue'
 export default {
   props: ['data', 'config', 'pagemsg', 'noMsg', 'allLoad'],
 
   components: {
     'v-nomsg': NoMsg,
     'v-list': CustomList,
-    'v-cardtab': CardTab
+    'v-card': Card
   },
   methods: {
     PageChange(val) {
