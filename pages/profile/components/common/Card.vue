@@ -4,7 +4,7 @@
     <!-- 学习中，已完成，已过期， -->
     <template v-if="config.card_type=='profile'">
       <div class="card-category">
-        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list">
+        <div v-for="(card,index) in data" :index="index" :key="card.id" class="card-list" @click="openDetail(card)">
           <el-card shadow="never" body-style="padding: 0;" class="itemBox learn">
             <!-- 项目的封面上区别项目的自定义项目的小标签 -->
             <div class="projectImg">
@@ -16,7 +16,7 @@
               <img v-if="!config.mask" :src="jinImg" alt="" class="jin-style">
             </div>
             <!-- 项目封面 -->
-            <div class="bgImgs" @click="openDetail(card)">
+            <div class="bgImgs">
               <img :src="card.picture" alt="">
             </div>
             <!-- <div class="common-button btn-bgs ">
@@ -46,7 +46,7 @@
             <el-row>
               <!-- 课程标题 -->
               <div class="item">
-                <p class="itemBox-name itemBoxTitle" @click="openDetail(card)">
+                <p class="itemBox-name itemBoxTitle">
                   <span :title="card.title">{{card.title}}</span>
                 </p>
               </div>
