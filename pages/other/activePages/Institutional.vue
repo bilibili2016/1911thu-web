@@ -4,7 +4,7 @@
       <img src="http://static-image.1911edu.com/hrentry-pic5.png" alt="">
       <div class="top-text">
         <h1 class="top-h1">1911学堂</h1>
-        <p class="top-desc"> 1911学堂可根据政府机关、企事业单位需求，<br>提供系统、权威、实用的培训解决方案，<br>帮助学员提升专业知识和思维能力，助力政府机关、企事业单位高效运转。</p>
+        <p class="top-desc">1911学堂根据各政府机关和企业事业单位的需求，量身定制系统、权威、实用的教育培训整体解决方案。在满足学员学习需求的同时，更能助力各单位实现组织的发展战略及目标。</p>
 
         <!-- <div class="top-button" @click="handleScroll">
           填写联系方式，免费申请课程体验。
@@ -26,14 +26,14 @@
               <div class="con-shadow"></div>
             </div>
             <div class="second text clearfix">
-              <div class="left">多元化培训模式</div>
-              <div class="right">结合线上人机交互优势和线下人文互动优势，研发了纯线上、混合式、互动式三种培训模式供您选择。
+              <div class="left">多元化学习模式</div>
+              <div class="right">结合线上人机交互优势和线下人文互动优势，研发了线上学习以及互动式和顾问式三种学习模式。
                 <div class="con-shadow"></div>
               </div>
             </div>
             <div class="third text clearfix">
               <div class="left">知识即服务</div>
-              <div class="right">1911学堂是一个以“知识即服务”（KaaS）为运营模式的继续教育平台，为学习者提供全链条服务。
+              <div class="right">1911学堂，是一个以“知识即服务”（KaaS）为运营模式的在线继续教育平台，为学员提供全链条学习服务
                 <div class="con-shadow"></div>
               </div>
             </div>
@@ -49,7 +49,7 @@
           </div>
           <div class="con">
             <div class="text">
-              1911学堂首创“线下+线上”互动式培训模式，结合线上学习人机交互的技术优势以及线下学习人文互动的情感优势，更能助力学习者实现个性化、阶梯式的成长路径。
+              1911学堂首创“线下+线上”互动式学习模式，更加注重人文互动即师生互动、生生互动，以及提升实践能力、构建学习社群。
             </div>
           </div>
           <div class="button" @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0')">
@@ -59,11 +59,11 @@
         <div class="course-right courseCon clearfix">
           <div class="img">
             <img src="http://static-image.1911edu.com/institutional-icon2.png" alt="">
-            <div>自定制</div>
+            <div>自定制项目</div>
           </div>
           <div class="con">
             <div class="text">
-              贵单位可在学堂平台自行选择师资及课程，或提出具体的学习需求，形成独有的人才培养规划及培训班设置方案。
+              贵单位可在学堂自行选择在线学院，并提出线下学习具体的内容需求，形成定制式、个性化、针对性的人才培养规划及培训项目设置方案。
             </div>
           </div>
           <div class="button" @click="goCustomerProject">
@@ -81,7 +81,7 @@
           </div>
           <div class="con">
             <div class="text">
-              1911学堂可从数千名师资库中遴选最合适的专家教授，为贵单位提供顾问式、咨询式的智力服务，真正做到学习需求与专家内容的智能匹配，实现“请进来、沉下去”的培训效果。
+              您可从学堂数千名导师中遴选最符合贵单位需求的专家教授，为您提供顾问式指导，真正做到学习需求与专家内容的智能匹配，实现“请进来、沉下去”的培训效果。
             </div>
           </div>
           <div class="button" @click="handleLink('/home/teacher/list')">
@@ -91,11 +91,11 @@
         <div class="course-left courseCon clearfix">
           <div class="img">
             <img src="http://static-image.1911edu.com/institutional-icon1.png" alt="">
-            <div>委托定制</div>
+            <div>导师合作</div>
           </div>
           <div class="con">
             <div class="text">
-              学堂根据贵单位的特定需求，为您量身定制、研发设计针对性、个性化的学习方案及培训项目安排。
+              如学堂导师库中没有符合贵单位需求的导师，您可将您需要的授课名称及合作方式告知我们，1911学堂将根据您的需求匹配最适合的专家教授。
             </div>
           </div>
           <div class="button" @click="handleScroll">

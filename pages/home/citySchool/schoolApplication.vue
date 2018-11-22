@@ -130,7 +130,7 @@
 </template>
 <script>
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
-import { list, personalset, school } from '~/lib/v1_sdk/index'
+import { personalset, school } from '~/lib/v1_sdk/index'
 
 export default {
   data() {
@@ -186,7 +186,7 @@ export default {
       }
       reader.onloadend = () => {
         this.fileForm.FILESS.push(reader.result)
-        list.uploadResume(this.fileForm).then(res => {
+        school.uploadLicense(this.fileForm).then(res => {
           if (res.status == 0) {
             this.schoolForm.businessLicense = res.data.full_path
             this.isShowFile = !this.isShowFile

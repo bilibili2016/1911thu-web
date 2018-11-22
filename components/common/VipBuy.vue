@@ -2,14 +2,15 @@
   <div class="vipBuy">
     <div class="mask" v-show="vipPopShow">
       <div class="vipPop" v-show="!isShowAlert">
-        <div class="pop-title">温馨提示</div>
+        <div class="pop-title">入学通知书</div>
         <i class="el-icon-close" @click="handlePopClick"></i>
         <div class="con">
-          <p>亲爱的学员，您好</p>
-          <p class="tab">欢迎加入1911学堂在线干部学院。</p>
-          <p class="tab">本学院学员学籍有效期为12个月，并将在申请成功后即刻生效。在学籍有效期内，您可自由学习本学院中所有在线课程。</p>
-          <p class="tab">在学习期间，您可通过再次申请入学的方式延长学籍。在您申请成功后，系统会自动为您发放学籍兑换码。您可在个人中心兑换码管理页面中绑定兑换码以延长学籍有效期。</p>
-          <p class="tab">当您选择的入学人数>1人时，系统也将为您生成兑换码，您或其他学员均可通过绑定兑换码加入学院进行学习。</p>
+          <p>亲爱的学员：您好！</p>
+          <p class="tab">欢迎加入1911学堂{{pageText}}。</p>
+          <p class="tab">本学院学籍有效期为12个月，并将在申请成功后即刻生效。在学籍有效期内，您可自由学习本学院中所有在线课程。学完100学时课程后，可申请参加考试，通过后可获得认证证书。</p>
+          <p class="tab">在学习期间，您可通过再次申请入学的方式延长学籍。在您申请成功后，系统会自动为您发放学籍兑换码。您可在个人中心兑换码管理页面中绑定兑换码以延长学籍。</p>
+          <p class="tab">当您选择的入学人数大于1人时，系统也将为您生成兑换码，您或其他学员均可通过绑定兑换码加入学院参加学习</p>
+          <p class="tab">祝您学有所获！</p>
         </div>
         <div class="num clearfix">
           <div class="numText">请选择入学人数</div>
@@ -37,10 +38,13 @@
   </div>
 </template>
 <script>
+import { matchSplits, setTitle, message } from '@/lib/util/helper'
+
 export default {
   props: ['vipId', 'vipPopShow'],
   data() {
     return {
+      pageText: '',
       alertShow: false,
       isShowAlert: false,
       alertText: '商品数量不能大于9999',
@@ -111,8 +115,17 @@ export default {
           '&type=2&num=' +
           this.vipData.number
       )
+    },
+    init() {
+      this.vipData.id = matchSplits('id') //2:干部网络学院  3:在线商学院
+      if (this.vipData.id == 2) {
+        this.pageText = '在线干部学院'
+      } else {
+        this.pageText = '在线商学院'
+      }
     }
-  }
+  },
+  mounted() {}
 }
 </script>
 <style lang="scss" scoped>
