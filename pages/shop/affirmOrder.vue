@@ -91,7 +91,7 @@ export default {
       },
       pageType: {
         page: 'affirmOrder',
-        text: `您没有正在进行的订单,3s后将会跳转到首页！`,
+        text: `您没有正在进行的订单,5s后将会跳转到首页！`,
         imgUrl: 'http://static-image.1911edu.com/noMsg.png'
       },
       showReportBug: false,
@@ -116,6 +116,9 @@ export default {
       vipForm: {
         vipId: '',
         number: ''
+      },
+      noMsg: {
+        backSeconds: 5
       }
     }
   },
