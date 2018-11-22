@@ -33,7 +33,7 @@
             </div>
             <div class="third text clearfix">
               <div class="left">知识即服务</div>
-              <div class="right">1911学堂，是一个以“知识即服务”（KaaS）为运营模式的在线继续教育平台，为学员提供全链条学习服务
+              <div class="right">1911学堂，是一个以“知识即服务”（KaaS）为运营模式的在线继续教育平台，为学员提供全链条学习服务。
                 <div class="con-shadow"></div>
               </div>
             </div>
