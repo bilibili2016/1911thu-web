@@ -125,7 +125,14 @@ export default {
       }
     }
   },
-  mounted() {}
+  mounted() {
+    this.init()
+  },
+  watch: {
+    $route(v, oldv) {
+      this.init()
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
