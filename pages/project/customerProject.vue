@@ -3,9 +3,9 @@
     <div class="banner-cus">
       <div class="con">
         <div class="con-text">
-          <div class="text-one">为更好地满足党政机关及企事业单位特定的培训需求，1911学堂推出了自定制项目。</div>
-          <div class="text-two">若1911学堂现有培训项目不能满足您所在单位的培训需求，您可以填写以下页面信息，并在1911学堂课程资源库里挑选合适的课程，形成专属的个性化定制项目。</div>
-          <div class="text-three">完成支付后，自定制项目即时生效。</div>
+          <div class="text-one">1911学堂可为您所在单位提供量身定制的内部培训项目。</div>
+          <div class="text-two">贵单位可在学堂自行选择在线学院，并提出线下学习具体的内容需求，形成定制式、个性化、针对性的人才培养规划及培训项目设置方案。</div>
+          <div class="text-three">支付完成后，自定制项目即时生效。</div>
         </div>
       </div>
     </div>
