@@ -89,6 +89,9 @@ export default {
         goodsAmount: '',
         payNumber: ''
       },
+      noMsg: {
+        backSeconds: 5
+      },
       pageType: {
         page: 'affirmOrder',
         text: `您没有正在进行的订单,5s后将会跳转到首页！`,
@@ -117,9 +120,7 @@ export default {
         vipId: '',
         number: ''
       },
-      noMsg: {
-        backSeconds: 5
-      }
+      timer: ''
     }
   },
   watch: {
@@ -212,12 +213,14 @@ export default {
           }
           this.loadGoods = false
         } else {
-          message(this, 'error', res.msg)
-          let timer = setInterval(() => {
-            if (this.noMsg.backSeconds <= 1) {
-              clearInterval(timer)
+          this.timer = setInterval(() => {
+            if (this.noMsg.backSeconds < 1) {
+              clearInterval(this.timer)
               this.$router.push('/')
             }
+            this.pageType.text = `您没有正在进行的订单,${
+              this.noMsg.backSeconds
+            }s后将会跳转到首页！`
             this.noMsg.backSeconds--
           }, 1000)
           this.isNoMsg = true
@@ -270,6 +273,10 @@ export default {
         this.handleSubmitOrder()
       }
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    clearInterval(this.timer)
+    next()
   },
   mounted() {
     this.customId = matchSplits('id')
