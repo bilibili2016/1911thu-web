@@ -105,12 +105,6 @@ export default {
       this.addressForm.page = 1
       this.pagemsg.page = 1
       this.addressForm.limit = 10
-
-      // console.log(this.addressForm)
-      if (this.addressForm.region == '') {
-        message(this, 'error', '请选择查询条件')
-        return false
-      }
       this.headmasterList()
     },
     selectPages(val) {
