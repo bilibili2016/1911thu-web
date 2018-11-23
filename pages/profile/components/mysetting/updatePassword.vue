@@ -31,7 +31,7 @@ export default {
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'))
+        callback(new Error('请输入原密码'))
       } else {
         if (this.changePwd.checkPass !== '') {
           this.$refs.changePwd.validateField('checkPass')
@@ -41,7 +41,7 @@ export default {
     }
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'))
+        callback(new Error('请输入新密码'))
       } else if (value.length < 8 || value.length > 17) {
         callback(new Error('请输入至少8位最多16位的密码'))
       } else {
