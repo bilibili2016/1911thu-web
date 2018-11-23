@@ -152,8 +152,7 @@ export default {
           if (this.userInfo.head_img && this.userInfo.head_img != '') {
             this.avator = this.userInfo.head_img
           } else {
-            this.avator =
-              'http://static-image.1911edu.com/profile_avator01.png'
+            this.avator = 'http://static-image.1911edu.com/profile_avator01.png'
           }
         }
       })
