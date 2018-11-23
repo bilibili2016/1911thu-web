@@ -7,8 +7,8 @@
     <el-form v-show="isFirstShow" :model="validataPhone" ref="validataPhone" status-icon :rules="validataPhoneRules" class="demo-ruleForm">
       <div class="formInner">
         <div class="first">
-          <h4 class="clearfix">认证手机号码</h4>
-          <p class="text">友情提醒：解绑后，您将无法再使用此手机号进行找回密码和登录等相关操作。</p>
+          <h4 class="clearfix">友情提示</h4>
+          <p class="text">解绑后，您将无法再使用此手机号进行找回密码和登录等相关操作。</p>
           <p class="text num">已绑定手机号：<span>{{numPhone}}</span></p>
           <el-form-item prop="phones">
             <el-input v-model.number="validataPhone.phones" placeholder="请输入您已绑定的手机号"></el-input>

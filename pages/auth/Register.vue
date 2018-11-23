@@ -8,7 +8,7 @@
       <el-button type="primary" :disabled="codeClick" class="getCode" @click="verifyRgTel" style="line-height:0">{{bindTelData.getCode}}</el-button>
     </el-form-item>
     <el-form-item prop="passwords">
-      <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
+      <el-input v-model="registerData.passwords" type="password" placeholder="8-16位密码，包含字母、数字、标点符号等"></el-input>
     </el-form-item>
     <el-form-item prop="">
       <el-checkbox-group v-model="registerData.checked">

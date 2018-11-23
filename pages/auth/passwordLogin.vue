@@ -6,7 +6,7 @@
         <el-input v-model.number="loginData.phonenum" auto-complete="off" placeholder="请输入您的手机号/学号" clearable type="text"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
+        <el-input :type="loginData.pwdType" v-model="loginData.password" auto-complete="off" placeholder="8-16位密码，包含字母、数字、标点符号等"></el-input>
         <span :class="{hidePwd:!loginData.showPwd,showPwd:loginData.showPwd}" @click="changePwd" alt=""></span>
       </el-form-item>
     </div>

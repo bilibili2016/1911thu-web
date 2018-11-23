@@ -8,7 +8,7 @@
       <el-form-item label="新密码：" prop="newPass" class="margin">
         <el-input type="password" v-model="changePwd.newPass" auto-complete="off" placeholder="请输入您的新密码"></el-input>
       </el-form-item>
-      <p class="tips">提示：密码长度至少8位，可以包含字母、数字、标点符号等</p>
+      <p class="tips">提示：8-16位密码，包含字母、数字、标点符号等</p>
       <el-form-item label="确认新密码：" prop="checkPass">
         <el-input type="password" v-model="changePwd.checkPass" auto-complete="off" placeholder="请再次输入您的新密码"></el-input>
       </el-form-item>

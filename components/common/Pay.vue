@@ -3,7 +3,7 @@
     <div class="pay" v-show="payShadow">
       <div class="note" v-show="showPay" id="note">
         <i @click="close" class="el-icon-close fr"></i>
-        <h4> 尊敬的学员，您的试看已结束，支付后可继续学习 </h4>
+        <h4>—— 尊敬的学员，您的试看已结束，支付后可继续学习 ——</h4>
         <div class="goodsInfo" v-show="!loading">
           <div class="userImg">
             <img :src="produceOrderInfo.head_img" alt="">

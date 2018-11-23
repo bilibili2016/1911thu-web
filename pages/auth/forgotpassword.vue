@@ -23,7 +23,7 @@
           </el-form-item>
           <el-form-item prop="password">
             <!-- 密码 -->
-            <el-input :type="pwdType" v-model="fpData.password" placeholder="8-16位密码，区分大小写，不能用空格"></el-input>
+            <el-input :type="pwdType" v-model="fpData.password" placeholder="8-16位密码，包含字母、数字、标点符号等"></el-input>
             <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
           </el-form-item>
           <el-row>

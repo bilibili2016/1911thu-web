@@ -40,16 +40,16 @@
       font-weight: 600;
       text-align: center;
       position: relative;
-      &:after {
-        content: '——';
-        position: absolute;
-        right: 19%;
-      }
-      &:before {
-        content: '——';
-        position: absolute;
-        left: 19%;
-      }
+      // &:after {
+      //   content: '——';
+      //   position: absolute;
+      //   right: 11%;
+      // }
+      // &:before {
+      //   content: '——';
+      //   position: absolute;
+      //   left: 11%;
+      // }
     }
     .goodsInfo {
       // height: 180px;
