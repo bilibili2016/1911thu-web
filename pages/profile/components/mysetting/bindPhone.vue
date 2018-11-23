@@ -25,10 +25,10 @@
         <div class="two">
           <h4 class="clearfix">绑定手机</h4>
           <el-form-item prop="phones">
-            <el-input v-model.number="bindTelData.phones" placeholder="请输入手机号"></el-input>
+            <el-input v-model.number="bindTelData.phones" placeholder="请输入您新的手机号"></el-input>
           </el-form-item>
           <el-form-item prop="codes" class="lastItem clearfix">
-            <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入验证码"></el-input>
+            <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入短信验证码"></el-input>
             <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div>
           </el-form-item>
           <el-row>
