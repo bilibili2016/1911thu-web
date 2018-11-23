@@ -73,6 +73,7 @@ export default {
         pagesize: 9,
         total: null
       },
+      categoryId: 0,
       loading: false,
       isShowBtn: false,
       showRecruitTeacher: true,
@@ -126,7 +127,9 @@ export default {
     },
     //选择一级分类
     selectCid(data, index) {
+      this.categoryId = data.id
       this.teacherForm.cid = data.id
+      this.teacherForm.pid = 0
       this.getNewInfoList()
     },
     //选择二级分类
@@ -200,8 +203,6 @@ export default {
         this.$emit('changeCid', this.pid)
       }
       this.childList = this.categoryData[this.categoryIndex].childList
-      console.log(this.categoryData)
-      console.log(this.childList)
     }
   },
   mounted() {

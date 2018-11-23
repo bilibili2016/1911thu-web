@@ -48,10 +48,8 @@ export default {
     selectCid(item, index) {
       this.cid = item.id
       this.categoryIndex = index
-      this.processData()
+      this.pid = '0'
       this.$emit('selectCid', item, index)
-    },
-    processData() {
       this.$emit('processData')
     },
     // 小类 单个
