@@ -17,7 +17,7 @@
       <div class="result">
         <p class="success" v-if="showResult&&questionCurrent.is_right==1"><i class="el-icon-success"></i>答对啦！</p>
         <p class="error" v-if="showResult&&questionCurrent.is_right==2"><i class="el-icon-error"></i>答错啦！</p>
-        <p class="analysis">解析：2018福建公务员考试即将到来，在最后关头考生们一定不要过于松懈，要循序渐进的调整状态，心理、饮食、作息都不可忽视。为便于考生及时知晓成绩，中公教育为考生做出专业的解读。</p>
+        <p class="analysis">解析：</p>
       </div>
       <div class="commitBtn">
         <span class="preAnswer" :class="{disable:JSON.stringify(questionPre)=='{}'}" @click="preAnswer">上一题</span>
@@ -74,7 +74,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { examine } from '~/lib/v1_sdk/index'
+import { simulationExam } from '~/lib/v1_sdk/index'
 import { message, matchSplits, setTitle } from '@/lib/util/helper'
 export default {
   data() {
@@ -139,7 +139,7 @@ export default {
           return false
         }
         this.examForm.questionId = this.questionCurrent.id
-        examine.addAnswer(this.examForm).then(response => {
+        simulationExam.addAnswer(this.examForm).then(response => {
           if (response.status == 0) {
             this.setAssignment(response)
           } else {
@@ -179,7 +179,7 @@ export default {
         persistStore.get('examToken') === persistStore.get('token') &&
         persistStore.get('token') != ''
       ) {
-        examine.submitTestPaper(this.examForm).then(response => {
+        simulationExam.submitTestPaper(this.examForm).then(response => {
           if (response.status == 0) {
             this.testPaper = response.data
             this.showShadow = true
@@ -199,15 +199,16 @@ export default {
     // 提交考试
     examination() {
       clearInterval(this.interval)
-      examine.addSubmitTestPaper(this.examForm).then(response => {
+      simulationExam.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           message(this, 'success', '提交成功！')
           this.$router.push({
-            path: '/profile/components/myexamine/submitPapers',
+            path: '/profile',
             query: {
               id: this.examForm.examId
             }
           })
+          this.handleBack()
         } else {
           message(this, 'error', response.msg)
         }
@@ -216,6 +217,11 @@ export default {
     // 关闭弹框
     closeChadow() {
       this.showShadow = false
+    },
+    handleBack() {
+      this.goProfile('tab-tenth')
+      this.pageData.name = 'list'
+      this.$bus.$emit('whichShow', this.pageData)
     },
     // 转换时间格式
     changeTime(time) {
@@ -242,7 +248,7 @@ export default {
     },
     // 获取试题
     questionsDetail() {
-      examine.questionsDetail(this.examForm).then(response => {
+      simulationExam.questionsDetail(this.examForm).then(response => {
         if (response.status == 0) {
           this.setAssignment(response)
         } else {
@@ -305,7 +311,6 @@ export default {
   },
   mounted() {
     setTitle('考试中心-1911学堂')
-
     if (window.location.search) {
       this.examForm.examId = matchSplits('id')
       // 验证token是否有效
@@ -319,6 +324,7 @@ export default {
     } else {
       this.$router.push('/profile')
     }
+    this.questionsDetail()
   },
   // 进入路由隐藏header和footer
   beforeRouteEnter(to, from, next) {
@@ -334,6 +340,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>
