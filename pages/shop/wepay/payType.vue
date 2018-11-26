@@ -74,7 +74,21 @@ export default {
   },
   watch: {
     orderDetail(val) {
-      if (val.order_amount >= 500000) {
+      if (val.order_amount > 5000 && val.order_amount < 500000) {
+        this.$alert(
+          '您的订单支付金额超过5000元，建议您通过对公转账方式进行支付，感谢配合！',
+          '温馨提示',
+          {
+            confirmButtonText: '确定',
+            callback: action => {}
+          }
+        )
+        this.wxMsg = false
+        this.zfbMsg = false
+        this.pubMsg = true
+        this.wechatPay = 'http://static-image.1911edu.com/wxp.png'
+        this.zfbPay = 'http://static-image.1911edu.com/zfb.png'
+      } else if (val.order_amount >= 500000) {
         this.$alert(
           '您的订单支付金额超过50万元，请通过对公转账方式进行支付，感谢配合！',
           '温馨提示',

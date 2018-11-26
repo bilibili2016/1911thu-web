@@ -202,8 +202,10 @@
           height: 100px;
           position: relative;
           .limit {
+            line-height: 16px;
             margin-left: 120px;
-            padding-top: 60px;
+            padding-top: 84px;
+            color: #aaa;
           }
         }
         .upload {
