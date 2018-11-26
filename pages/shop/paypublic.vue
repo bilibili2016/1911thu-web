@@ -93,6 +93,12 @@ export default {
       orderDetail: {},
       gidForm: {
         gid: ''
+      },
+      order: {
+        item: {
+          id: ''
+        },
+        type: 'order'
       }
     }
   },
@@ -108,6 +114,8 @@ export default {
       } else if (link == '/profile') {
         this.gidForm.gids = 'tab-fourth'
         this.setGid(this.gidForm)
+        persistStore.set('order', this.payListForm.orderId)
+        persistStore.set('orderDetail', true)
         this.$router.push('/profile')
       }
     },
