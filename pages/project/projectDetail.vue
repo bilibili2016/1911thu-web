@@ -36,10 +36,6 @@
         <el-tab-pane label="常见问题" name="fourth" v-if="project.types == '1'">
           <v-proproblems v-loading="problemLoad"></v-proproblems>
         </el-tab-pane>
-        <!-- 互动式介绍 -->
-        <el-tab-pane label="互动式介绍" name="fifth">
-          <v-proproblems v-loading="problemLoad"></v-proproblems>
-        </el-tab-pane>
       </el-tabs>
     </div>
   </div>

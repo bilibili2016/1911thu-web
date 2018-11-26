@@ -270,6 +270,12 @@ export default {
     exchangeTime(time) {
       return timestampToTime(time)
     }
+  },
+  mounted() {
+    if (persistStore.get('orderDetail')) {
+      this.$bus.$emit('goOrderDetail', true)
+      persistStore.set('orderDetail', false)
+    }
   }
 }
 </script>

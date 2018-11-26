@@ -914,6 +914,8 @@ export default {
       })
       // 展示订单详情
       this.$bus.$on('goOrderDetail', data => {
+        console.log(data, 'data')
+
         this.curriculumPayApply(data)
       })
       // 我的订单 事件搜索
