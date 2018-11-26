@@ -93,12 +93,6 @@ export default {
       orderDetail: {},
       gidForm: {
         gid: ''
-      },
-      order: {
-        item: {
-          id: ''
-        },
-        type: 'order'
       }
     }
   },
