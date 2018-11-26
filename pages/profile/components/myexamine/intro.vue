@@ -33,19 +33,19 @@
         <p class="tit">5. 有效期限</p>
         <p>学员须在入学后的12个月之内完成考试并申领证书，逾期将被视为自愿放弃考试和申请证书资格。</p>
       </div>
-      <div class="bottom">
-        <div class="unBtn" v-if="showBtn">
-          <p class="btn">参加考试</p>
-          <p class="text">{{alertText}}</p>
-        </div>
-        <div class="examine-btn" v-else @click="handleExamine">参加考试</div>
+      <div class="examButton">
+        <div class="examineBtn notExamine" v-if="showBtn">参加考试</div>
+        <div class="examineBtn" v-else @click="handleExamine">参加考试</div>
+        <div class="examineBtn" v-if="showSimulationExam" @click="textExamine">模拟考试</div>
+        <div class="examineBtn notExamine " v-else>模拟考试</div>
+        <p class="text">{{alertText}}</p>
       </div>
     </div>
   </div>
 
 </template>
 <script>
-import { examine } from '~/lib/v1_sdk/index'
+import { examine, simulationExam } from '~/lib/v1_sdk/index'
 import { message, matchSplits, getNet } from '@/lib/util/helper'
 export default {
   props: ['vipID'],
@@ -53,6 +53,7 @@ export default {
     return {
       alertText: '',
       showBtn: true,
+      showSimulationExam: false,
       pageData: {
         id: '',
         name: ''
@@ -91,7 +92,25 @@ export default {
         }
       })
     },
-    //验证权限
+    textExamine() {
+      this.vipForm.vipId = this.vipID
+      simulationExam.createExamRecordQuestion(this.vipForm).then(response => {
+        if (response.status == 0) {
+          this.$router.push(
+            '/profile/components/myexamine/simulationExam?id=' +
+              response.data.exam_record_id
+          )
+        } else {
+          this.$message({
+            showClose: true,
+            message: response.msg,
+            type: 'error',
+            duration: 3000
+          })
+        }
+      })
+    },
+    //验证考试权限
     validateExamPrivilege() {
       this.vipForm.vipId = this.vipID
       examine.validateExamPrivilege(this.vipForm).then(response => {
@@ -106,10 +125,22 @@ export default {
           }
         }
       })
+    },
+    // 验证模拟考试权限
+    validateSimulationExam() {
+      this.vipForm.vipId = this.vipID
+      simulationExam.validateSimulationExam(this.vipForm).then(response => {
+        if (response.status == 0) {
+          this.showSimulationExam = true
+        } else {
+          this.showSimulationExam = false
+        }
+      })
     }
   },
   mounted() {
     this.validateExamPrivilege()
+    this.validateSimulationExam()
   }
 }
 </script>

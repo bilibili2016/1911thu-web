@@ -6,7 +6,7 @@
       <img class="conImg" v-if="vipDetailData.id=='3'" :src="onlineImg" alt="">
       <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
         <div class="btn-con">
-          <span class="text">学费{{vipInfo.present_price}}元</span>
+          <span class="text">学费{{vipInfo.present_price}}元每年</span>
           <div class="btn-item">
             <!-- 是会员 -->
             <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
