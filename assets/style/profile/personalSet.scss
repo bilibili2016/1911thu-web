@@ -144,14 +144,16 @@
       font-size: 14px;
     }
     .margin {
-      margin-bottom: 0;
+      margin-bottom: 0px;
     }
     .tips {
       color: #888;
       padding-left: 140px;
-      height: 26px;
-      line-height: 26px;
-      margin-bottom: 12px;
+      height: 22px;
+      line-height: 22px;
+      // margin-bottom: 10px;
+      text-align: right;
+      margin-right: 100px;
     }
   }
   .success {
