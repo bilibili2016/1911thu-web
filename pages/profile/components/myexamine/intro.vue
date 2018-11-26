@@ -24,15 +24,20 @@
         <p>入学后学员有三次考试机会，系统将取其最好成绩作为最终成绩，并发放相应证书。</p>
       </div>
       <div class="ask">
-        <p class="tit">4. 颁发证书</p>
+        <p class="tit">4. 模拟考试</p>
+        <p>学员在正式考试前，可享有2次模拟考试机会，了解试题形式及内容重点。模拟考试试题由学院题库中随机抽取的100道题组成，两次模拟考试试题不一样。</p>
+      </div>
+      <div class="ask">
+        <p class="tit">5. 颁发证书</p>
         <p>学院将根据学员考试成绩颁发相应证书，具体规则如下：</p>
         <p>考试分数为70分及以上时，获得【清华大学在线学习认证证书】；</p>
         <p>考试分数为60-69分时，获得学堂颁发的【1911学堂结业证书】。</p>
       </div>
       <div class="ask">
-        <p class="tit">5. 有效期限</p>
+        <p class="tit">6. 有效期限</p>
         <p>学员须在入学后的12个月之内完成考试并申领证书，逾期将被视为自愿放弃考试和申请证书资格。</p>
       </div>
+
       <div class="examButton">
         <div class="examineBtn notExamine" v-if="showBtn">参加考试</div>
         <div class="examineBtn" v-else @click="handleExamine">参加考试</div>
