@@ -59,7 +59,7 @@
       <div class="alertText">收到汇款后我们将与您取得联系，详细沟通项目方案、确定具体安排，并为您开具发票!</div>
       <div class="bottomBtn">
         <span @click="goLink('/')">返回首页</span>
-        <span @click="goLink('/profile')">产看订单</span>
+        <span @click="goLink('/profile')">查看订单</span>
       </div>
     </div>
   </div>
