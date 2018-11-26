@@ -95,7 +95,6 @@ export default {
     takeUp() {
       this.takeupMsg = !this.takeupMsg
     },
-
     goLink(item) {
       this.$router.push(item)
     },
