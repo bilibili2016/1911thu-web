@@ -228,9 +228,12 @@
             text-align: center;
             background-color: #3c60c7;
             border-radius: 21px;
-
             color: #fff;
             cursor: pointer;
+            border: none;
+            &:hover {
+              opacity: 0.9;
+            }
           }
         }
       }
