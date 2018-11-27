@@ -43,8 +43,8 @@
             </p>
           </div>
           <div class="time">
+            <p>已学{{userInfo.study_time}}学时</p>
             <p>{{time.hour}}小时{{time.minutes}}分钟</p>
-            <p>已学习时长</p>
           </div>
         </div>
       </div>
@@ -113,8 +113,6 @@ export default {
       }
     },
     goVipInfo(vip) {
-      console.log(vip)
-
       this.$router.push({
         path: '/home/vip/vipPage',
         query: {
