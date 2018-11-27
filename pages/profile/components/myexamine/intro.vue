@@ -35,8 +35,8 @@
       </div>
       <div class="examButton">
         <div class="examineBtn notExamine" v-if="showBtn">参加考试</div>
-        <div class="examineBtn" v-else @click="handleExamine">参加考试</div>
-        <div class="examineBtn" v-if="showSimulationExam" @click="textExamine">模拟考试</div>
+        <div class="examineBtn" v-else @click="handleExamine('1')">参加考试</div>
+        <div class="examineBtn" v-if="showSimulationExam" @click="handleExamine('2')">模拟考试</div>
         <div class="examineBtn notExamine " v-else>模拟考试</div>
         <p class="text">{{alertText}}</p>
       </div>
@@ -45,7 +45,7 @@
 
 </template>
 <script>
-import { examine, simulationExam } from '~/lib/v1_sdk/index'
+import { examine } from '~/lib/v1_sdk/index'
 import { message, matchSplits, getNet } from '@/lib/util/helper'
 export default {
   props: ['vipID'],
@@ -59,7 +59,8 @@ export default {
         name: ''
       },
       vipForm: {
-        vipId: ''
+        vipId: '',
+        type: 1
       }
     }
   },
@@ -70,9 +71,10 @@ export default {
       this.$bus.$emit('whichShow', this.pageData)
     },
     // 开始考试
-    handleExamine() {
+    handleExamine(type) {
       this.vipForm.vipId = this.vipID
       this.pageData.id = this.vipID
+      this.vipForm.type = type
       examine.createExamRecordQuestion(this.vipForm).then(response => {
         if (response.status == 100201) {
           this.pageData.name = 'info'
@@ -92,27 +94,10 @@ export default {
         }
       })
     },
-    textExamine() {
-      this.vipForm.vipId = this.vipID
-      simulationExam.createExamRecordQuestion(this.vipForm).then(response => {
-        if (response.status == 0) {
-          this.$router.push(
-            '/profile/components/myexamine/simulationExam?id=' +
-              response.data.exam_record_id
-          )
-        } else {
-          this.$message({
-            showClose: true,
-            message: response.msg,
-            type: 'error',
-            duration: 3000
-          })
-        }
-      })
-    },
     //验证考试权限
     validateExamPrivilege() {
       this.vipForm.vipId = this.vipID
+      this.vipForm.type = '1'
       examine.validateExamPrivilege(this.vipForm).then(response => {
         if (response.status == 0) {
           this.showBtn = false
@@ -129,7 +114,8 @@ export default {
     // 验证模拟考试权限
     validateSimulationExam() {
       this.vipForm.vipId = this.vipID
-      simulationExam.validateSimulationExam(this.vipForm).then(response => {
+      this.vipForm.type = '2'
+      examine.validateExamPrivilege(this.vipForm).then(response => {
         if (response.status == 0) {
           this.showSimulationExam = true
         } else {
