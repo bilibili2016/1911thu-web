@@ -74,7 +74,7 @@
 <script>
 import { mapActions } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
-import { simulationExam } from '~/lib/v1_sdk/index'
+import { examine } from '~/lib/v1_sdk/index'
 import { message, matchSplits, setTitle } from '@/lib/util/helper'
 export default {
   data() {
@@ -139,7 +139,7 @@ export default {
           return false
         }
         this.examForm.questionId = this.questionCurrent.id
-        simulationExam.addAnswer(this.examForm).then(response => {
+        examine.addAnswer(this.examForm).then(response => {
           if (response.status == 0) {
             this.setAssignment(response)
           } else {
@@ -179,7 +179,7 @@ export default {
         persistStore.get('examToken') === persistStore.get('token') &&
         persistStore.get('token') != ''
       ) {
-        simulationExam.submitTestPaper(this.examForm).then(response => {
+        examine.submitTestPaper(this.examForm).then(response => {
           if (response.status == 0) {
             this.testPaper = response.data
             this.showShadow = true
@@ -199,7 +199,7 @@ export default {
     // 提交考试
     examination() {
       clearInterval(this.interval)
-      simulationExam.addSubmitTestPaper(this.examForm).then(response => {
+      examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           message(this, 'success', '提交成功！')
           this.$router.push({
@@ -248,7 +248,7 @@ export default {
     },
     // 获取试题
     questionsDetail() {
-      simulationExam.questionsDetail(this.examForm).then(response => {
+      examine.questionsDetail(this.examForm).then(response => {
         if (response.status == 0) {
           this.setAssignment(response)
         } else {
