@@ -11,12 +11,15 @@
       <div class="tables">
         <table class="recordTable">
           <tr class="tr_header">
+            <th>考试类型</th>
             <th>考试科目</th>
             <th>时间</th>
             <th>成绩</th>
             <th>等级</th>
           </tr>
           <tr class="tr_body" v-for="(record,index) in recordData" :key="index">
+            <td v-if="record.type=='1'">正式</td>
+            <td v-else>模拟</td>
             <td>{{record.exam_name}}</td>
             <td>{{exchangeTime(record.create_time)}}</td>
             <td>{{record.total_score}}</td>

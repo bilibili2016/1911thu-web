@@ -85,10 +85,17 @@ export default {
           this.pageData.name = 'info'
           this.$bus.$emit('whichShow', this.pageData)
         } else if (response.status == 0) {
-          this.$router.push(
-            '/profile/components/myexamine/answerQuestion?id=' +
-              response.data.exam_record_id
-          )
+          if (type == '1') {
+            this.$router.push(
+              '/profile/components/myexamine/answerQuestion?id=' +
+                response.data.exam_record_id
+            )
+          } else {
+            this.$router.push(
+              '/profile/components/myexamine/simulationExam?id=' +
+                response.data.exam_record_id
+            )
+          }
         } else {
           this.$message({
             showClose: true,

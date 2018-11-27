@@ -310,7 +310,7 @@ export default {
     }
   },
   mounted() {
-    setTitle('考试中心-1911学堂')
+    setTitle('模拟考试中心-1911学堂')
     if (window.location.search) {
       this.examForm.examId = matchSplits('id')
       // 验证token是否有效
