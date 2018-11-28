@@ -18,6 +18,9 @@
         height: 160px;
         border-bottom: 1px solid #eeeeee;
         padding: 30px 0;
+        &:first-child {
+          border: none;
+        }
         .item_left {
           float: left;
           height: 100px;

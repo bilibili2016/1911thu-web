@@ -1,15 +1,8 @@
 <template>
   <div class="binding">
     <div class="bindInput clearfix">
-      <input
-        type="text"
-        v-model="bindForm.courseId"
-        placeholder=" 请输入您的兑换码"
-      >
-      <span
-        class="fr"
-        @click="detection"
-      >绑定</span>
+      <input type="text" v-model="bindForm.courseId" placeholder=" 请输入您的兑换码">
+      <span class="fr" @click="detection">绑定</span>
     </div>
     <div class="bindingRecord">
       <div class="brHeader">
@@ -18,11 +11,7 @@
         <span>兑换日期</span>
         <span>兑换信息</span>
       </div>
-      <div
-        class="brBody"
-        v-for="(code,index) in invitationCodeList"
-        :key="index"
-      >
+      <div class="brBody" v-for="(code,index) in invitationCodeList" :key="index">
         <div>{{code.invitation_code}}</div>
         <div v-if="code.type==='1'">课程</div>
         <div v-if="code.type==='2'">项目</div>
@@ -40,7 +29,8 @@
               @click="handleLink(course,code.type)"
             >
               <i v-if="code.type==='2'">项目</i>
-              <i v-if="code.type==='4'">自定制项目</i>{{course.title}}
+              <i v-if="code.type==='4'">自定制项目</i>
+              {{course.title}}
             </p>
           </div>
         </div>
@@ -50,23 +40,22 @@
         class="noCodes"
         :config="noMsg"
       ></v-nomsg>
-
     </div>
   </div>
 </template>
 
 <script>
-import { binding } from "~/lib/v1_sdk/index";
-import { timestampToYMD, open } from "@/lib/util/helper";
-import { mapState, mapGetters, mapActions } from "vuex";
-import { store as persistStore } from "~/lib/core/store";
-import NoMsg from "@/pages/profile/components/common/noMsg.vue";
+import { binding } from "~/lib/v1_sdk/index"
+import { timestampToYMD, open } from "@/lib/util/helper"
+import { mapState, mapGetters, mapActions } from "vuex"
+import { store as persistStore } from "~/lib/core/store"
+import NoMsg from "@/pages/profile/components/common/noMsg.vue"
 export default {
   props: ["invitationCodeList"],
   components: {
     "v-nomsg": NoMsg
   },
-  data() {
+  data () {
     return {
       noMsgImg: "http://static-image.1911edu.com/noMsg.png",
       bindForm: {
@@ -91,11 +80,11 @@ export default {
   },
   methods: {
     // 跳转课程或项目详情
-    handleLink(item, type) {
+    handleLink (item, type) {
       if (item.type === "1") {
         //课程
-        this.courseUrl.kid = item.curriculum_id;
-        open(this.courseUrl);
+        this.courseUrl.kid = item.curriculum_id
+        open(this.courseUrl)
       } else {
         if (type == "5") {
           //vip
@@ -124,11 +113,11 @@ export default {
       }
     },
     // 时间戳转日期格式
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToYMD(time);
     },
     // 检测兑换码内是否包含已绑定的课程
-    detection() {
+    detection () {
       if (
         this.bindForm.courseId == "" ||
         !/^[A-Za-z0-9]+$/.test(this.bindForm.courseId)
@@ -174,7 +163,7 @@ export default {
       }
     },
     // 添加课程 绑定
-    doSubmit() {
+    doSubmit () {
       binding.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({
@@ -199,7 +188,7 @@ export default {
       });
     }
   },
-  mounted() {}
+  mounted () { }
 };
 </script>
 

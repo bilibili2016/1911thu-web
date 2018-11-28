@@ -95,8 +95,8 @@
   </div>
 </template>
 <script>
-import { Trim, matchSplits, setTitle, message } from '@/lib/util/helper'
-import { personalset, school } from '~/lib/v1_sdk/index'
+import { Trim, matchSplits, setTitle, message } from "@/lib/util/helper";
+import { personalset, school } from "~/lib/v1_sdk/index";
 
 export default {
   data() {
@@ -106,53 +106,53 @@ export default {
       city: [],
       mapregionList: {},
       schoolForm: {
-        province: '', //省份编码
-        province_name: '', //省份名称
-        city: '', //城市编码
-        city_name: '', //城市名称
-        name: '', //姓名
-        tel: '', //电话
-        email: '' //邮箱
+        province: "", //省份编码
+        province_name: "", //省份名称
+        city: "", //城市编码
+        city_name: "", //城市名称
+        name: "", //姓名
+        tel: "", //电话
+        email: "" //邮箱
         // companyName: '', //公司名称
         // markAnalyze: '', //当地市场分析
         // advantageIntro: '', //自身优势介绍
         // jobImagine: '', //未来工作设想
         // businessLicense: '' //营业执照
       }
-    }
+    };
   },
   methods: {
     handleLink(link) {
-      this.$router.push(link)
+      this.$router.push(link);
     },
     provinceChange(val) {
-      this.schoolForm.city_name = ''
-      this.schoolForm.city = ''
+      this.schoolForm.city_name = "";
+      this.schoolForm.city = "";
       if (!this.province && this.province.length == 0) {
-        this.getRegionList()
+        this.getRegionList();
       }
-      this.city = this.getRegion(this.province, val)
+      this.city = this.getRegion(this.province, val);
       for (let item of this.province) {
         if (val == item.region_code) {
-          this.schoolForm.province_name = item.name
-          this.schoolForm.province = item.region_code
+          this.schoolForm.province_name = item.name;
+          this.schoolForm.province = item.region_code;
         }
       }
     },
     cityChange(val) {
       if (!this.city && this.city.length == 0) {
-        this.getRegionList()
+        this.getRegionList();
       }
       for (let item of this.city) {
         if (val == item.region_code) {
-          this.schoolForm.city_name = item.name
-          this.schoolForm.city = item.region_code
+          this.schoolForm.city_name = item.name;
+          this.schoolForm.city = item.region_code;
         }
       }
     },
     // 整理省市区
     getRegion(data, val) {
-      let tmp = []
+      let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
           for (let cit of item.city) {
@@ -161,68 +161,68 @@ export default {
                 label: cit.name,
                 value: cit.region_code
               })
-            )
+            );
           }
         }
       }
-      return tmp
+      return tmp;
     },
     // 获取省市区
     getRegionList() {
-      personalset.getRegionList({ region_code: '' }).then(res => {
-        this.mapregionList = res.data.regionList
+      personalset.getRegionList({ region_code: "" }).then(res => {
+        this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
           return Object.assign({}, item, {
             label: item.name,
             value: item.region_code
-          })
-        })
-      })
+          });
+        });
+      });
     },
     //表单验证
     validate() {
       if (this.isClick) {
-        return false
+        return false;
       }
-      this.isClick = true
-      const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-      const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
+      this.isClick = true;
+      const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+      const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
       try {
-        if (Trim(this.schoolForm.province) === '') throw '请选择省份'
-        if (Trim(this.schoolForm.city) === '') throw '请选择城市'
-        if (Trim(this.schoolForm.name) === '') throw '请输入姓名'
-        if (Trim(this.schoolForm.tel) === '') throw '请输入手机号码'
+        if (Trim(this.schoolForm.province) === "") throw "请选择省份";
+        if (Trim(this.schoolForm.city) === "") throw "请选择城市";
+        if (Trim(this.schoolForm.name) === "") throw "请输入姓名";
+        if (Trim(this.schoolForm.tel) === "") throw "请输入手机号码";
         if (!telReg.test(Trim(this.schoolForm.tel)))
-          throw '请输入正确的手机号码'
-        if (Trim(this.schoolForm.email) === '') throw '请输入邮箱'
+          throw "请输入正确的手机号码";
+        if (Trim(this.schoolForm.email) === "") throw "请输入邮箱";
         if (!emailReg.test(Trim(this.schoolForm.email)))
-          throw '请输入正确的邮箱'
+          throw "请输入正确的邮箱";
       } catch (err) {
-        message(this, 'error', err)
-        this.isClick = false
-        return false
+        message(this, "error", err);
+        this.isClick = false;
+        return false;
       }
-      this.applicationSchoolmaster()
+      this.applicationSchoolmaster();
     },
     //申请分校长
     applicationSchoolmaster() {
       school.doRecruit(this.schoolForm).then(res => {
-        this.isClick = false
+        this.isClick = false;
         if (res.status == 0) {
-          this.isClick = true //页面跳转之前不允许点击
-          this.$router.push('/home/citySchool/submitSuccess')
+          this.isClick = true; //页面跳转之前不允许点击
+          this.$router.push("/home/citySchool/submitSuccess");
         } else {
-          message(this, 'error', res.msg)
+          message(this, "error", res.msg);
         }
-      })
+      });
     }
   },
   mounted() {
-    setTitle('城市分校-1911学堂')
-    this.getRegionList()
+    setTitle("城市分校-1911学堂");
+    this.getRegionList();
   }
-}
+};
 </script>
 <style scoped lang="scss">
-@import '~assets/style/citySchool/schoolIntro.scss';
+@import "~assets/style/citySchool/schoolIntro.scss";
 </style>
