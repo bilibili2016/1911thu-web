@@ -8,6 +8,7 @@
   color: #222;
   text-align: center;
   box-sizing: border-box;
+
   img {
     display: block;
     width: 60px;
@@ -15,18 +16,22 @@
     margin: 0 auto;
     margin-bottom: 40px;
   }
+
   p {
     font-size: 20px;
     line-height: 36px;
     color: #222222;
     text-align: center;
+
     i {
       color: #ff5f5f;
     }
   }
+
   .applyBtn {
     width: 400px;
-    margin: 0 auto;
+    margin: 20px auto 0;
+
     span {
       width: 150px;
       height: 40px;
@@ -37,15 +42,18 @@
       color: #666666;
       margin: 15px;
       cursor: pointer;
+
       &.again {
         color: #6417a6;
         border: 1px solid #6417a6;
       }
+
       &.apply {
         background-color: #6417a6;
         border: 1px solid #6417a6;
         color: #fff;
       }
+
       &.noQualification {
         background-color: #cccccc;
         color: #fff;
