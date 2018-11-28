@@ -241,6 +241,7 @@
           margin: 10px 0;
         }
         .el-checkbox {
+          font-weight: 400 !important;
           float: left;
           margin-top: 10px;
         }
@@ -641,6 +642,9 @@
     .el-radio__input.is-checked + .el-radio__label {
       color: #344;
     }
+  }
+  .el-checkbox {
+    font-weight: normal;
   }
   .el-checkbox:last-child {
     margin-right: 0;
