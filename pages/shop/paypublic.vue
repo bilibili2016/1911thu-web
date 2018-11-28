@@ -18,7 +18,10 @@
           <p class="tips">
             <i class="el-icon-warning"></i>汇款时将识别码填写至汇款单"用途"栏，超出1个工作日未对账，请提供订单号及汇款底单邮件至hkd@1911thu.com</p>
         </div> -->
-        <div class="pay" v-show="showPay">
+        <div
+          class="pay"
+          v-show="showPay"
+        >
           <!-- <div v-show="false">
             <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
             <div class="changeTel clearfix">
@@ -66,18 +69,18 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { paypublic, wepay } from '@/lib/v1_sdk/index'
-import { matchSplits, message } from '@/lib/util/helper'
-import { store as persistStore } from '~/lib/core/store'
+import { mapActions } from "vuex";
+import { paypublic, wepay } from "@/lib/v1_sdk/index";
+import { matchSplits, message } from "@/lib/util/helper";
+import { store as persistStore } from "~/lib/core/store";
 export default {
   data() {
     return {
       showPay: true,
       showTel: false,
-      code: '',
+      code: "",
       isAlertMsg: false,
-      alertMsg: '请输入手机号',
+      alertMsg: "请输入手机号",
       changeForm: {
         tel: null
       },
@@ -92,117 +95,117 @@ export default {
       },
       orderDetail: {},
       gidForm: {
-        gid: ''
+        gid: ""
       }
-    }
+    };
   },
   methods: {
-    ...mapActions('auth', ['setGid']),
+    ...mapActions("auth", ["setGid"]),
     changeTel() {
-      this.showTel = true
-      this.changeForm.tel = ''
+      this.showTel = true;
+      this.changeForm.tel = "";
     },
     goLink(link) {
-      if (link == '/') {
-        this.$router.push('/')
-      } else if (link == '/profile') {
-        this.gidForm.gids = 'tab-fourth'
-        this.setGid(this.gidForm)
-        persistStore.set('order', this.payListForm.orderId)
-        persistStore.set('orderDetail', true)
-        this.$router.push('/profile')
+      if (link == "/") {
+        this.$router.push("/");
+      } else if (link == "/profile") {
+        this.gidForm.gids = "tab-fourth";
+        this.setGid(this.gidForm);
+        persistStore.set("order", this.payListForm.orderId);
+        persistStore.set("orderDetail", true);
+        this.$router.push("/profile");
       }
     },
     againGet() {
-      if (this.changeForm.tel == '') {
-        this.isAlertMsg = true
-        this.alertMsg = '请输入手机号'
-        return false
+      if (this.changeForm.tel == "") {
+        this.isAlertMsg = true;
+        this.alertMsg = "请输入手机号";
+        return false;
       }
       if (
-        this.changeForm.tel === '' ||
+        this.changeForm.tel === "" ||
         !/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.changeForm.tel)
       ) {
-        this.isAlertMsg = true
-        this.alertMsg = '手机号格式错误！'
+        this.isAlertMsg = true;
+        this.alertMsg = "手机号格式错误！";
       } else {
-        this.isAlertMsg = false
-        this.payForm.phones = this.changeForm.tel
-        this.showPayPublic()
+        this.isAlertMsg = false;
+        this.payForm.phones = this.changeForm.tel;
+        this.showPayPublic();
       }
     },
     showPayPublic() {
-      this.showPay = false
+      this.showPay = false;
       // this.payForm.attachs = matchSplits('attach')
       paypublic.getPayPublicCode(this.payForm).then(res => {
         if (res.status == 0) {
           this.$message({
             showClose: true,
-            type: 'success',
+            type: "success",
             message: res.msg
-          })
-          this.code = res.data.code
-          this.showPay = true
+          });
+          this.code = res.data.code;
+          this.showPay = true;
           if (this.showTel) {
-            this.showTel = false
+            this.showTel = false;
           }
         } else {
           this.$message({
             showClose: true,
-            type: 'error',
+            type: "error",
             message: res.msg
-          })
+          });
         }
-      })
+      });
     },
     // 获取订单id列表
     getPayList() {
-      this.payListForm.orderId = matchSplits('orderID')
+      this.payListForm.orderId = matchSplits("orderID");
       // this.payListForm.attachs = matchSplits('attach')
       wepay.webPay(this.payListForm).then(response => {
         if (response.status == 0) {
-          this.orderDetail = response.data.data.orderDetail
-          this.payForm.orderId = response.data.data.orderDetail.id
-          this.payForm.phones = persistStore.get('phone')
-          this.handleConfirm()
+          this.orderDetail = response.data.data.orderDetail;
+          this.payForm.orderId = response.data.data.orderDetail.id;
+          this.payForm.phones = persistStore.get("phone");
+          this.handleConfirm();
         } else if (response.status == 100101) {
-          this.gidForm.gids = 'tab-fourth'
-          this.setGid(this.gidForm)
-          this.$router.push('/profile')
+          this.gidForm.gids = "tab-fourth";
+          this.setGid(this.gidForm);
+          this.$router.push("/profile");
         } else {
           this.$message({
             showClose: true,
-            type: 'error',
+            type: "error",
             message: response.msg
-          })
+          });
         }
-      })
+      });
     },
     handleConfirm() {
       paypublic.getPayPublicCode(this.payForm).then(res => {
         if (res.status == 0) {
-          this.code = res.data.code
+          this.code = res.data.code;
         } else {
           this.$message({
             showClose: true,
-            type: 'error',
+            type: "error",
             message: res.msg
-          })
+          });
         }
-      })
+      });
     }
   },
   mounted() {
-    if (persistStore.get('token')) {
-      this.getPayList()
+    if (persistStore.get("token")) {
+      this.getPayList();
     } else {
-      message(this, 'error', '您未登录,请先登录!')
-      this.$router.push('/')
-      this.$bus.$emit('loginShow', true)
+      message(this, "error", "您未登录,请先登录!");
+      this.$router.push("/");
+      this.$bus.$emit("loginShow", true);
     }
   }
-}
+};
 </script>
 <style scoped lang="scss">
-@import '~assets/style/shop/payPublic.scss';
+@import "~assets/style/shop/payPublic.scss";
 </style>

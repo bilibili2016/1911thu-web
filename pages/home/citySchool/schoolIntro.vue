@@ -7,73 +7,85 @@
       <p>成为1911学堂分校校长，您会得到1911学堂总部的大力支持，并在以下方面获得成长与收益：</p>
     </div>
     <div class="schoolInfo">
-      <img class="schoolImg topImg" src="http://static-image.1911edu.com/schoolIntro2.png" alt="">
+      <img
+        class="schoolImg topImg"
+        src="http://static-image.1911edu.com/schoolIntro2.png"
+        alt=""
+      >
       <div class="color">
         <div class="img"></div>
         <!-- <img class="schoolImg" src="http://static-image.1911edu.com/schoolIntro3.png" alt=""> -->
       </div>
-      <img class="schoolImg" src="http://static-image.1911edu.com/schoolIntro4.png" alt="">
+      <img
+        class="schoolImg"
+        src="http://static-image.1911edu.com/schoolIntro4.png"
+        alt=""
+      >
       <!-- <p><span @click="handleLink('/home/citySchool/viewSchoolAddress')">查看已有分校</span></p> -->
-      <img style="margin-top:80px" class="schoolImg" src="http://static-image.1911edu.com/schoolIntro5.png" alt="">
+      <img
+        style="margin-top:80px"
+        class="schoolImg"
+        src="http://static-image.1911edu.com/schoolIntro5.png"
+        alt=""
+      >
       <!-- <p class="bottom"><span @click="handleLink('/home/citySchool/schoolApplication')">立即申请</span></p> -->
       <div class="apply">
         <div class="applyInputs">
+          <div class="con-item counsel clearfix">
+            <div class="fl">申请咨询：</div>
+            <div class="fr">
+              <p>闫雨辰&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15117961911&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yanyuchen@1911thu.com</p>
+              <p>谢晓辉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18614061911&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xiexiaohui@1911thu.com</p>
+            </div>
+          </div>
+
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>城市：</div>
             <div class="fr selectFr">
               <div class="text">请选择您要申请成为分校校长的城市</div>
-              <!-- <div class="pull ">
-                                    <div class="select-con ">
-                                        <div class="divClick" @click.stop="handleProvince">
-                                            <span>
-                                                <el-input v-model="schoolForm.province" placeholder="请选择省份" readonly></el-input>
-                                            </span>
-                                            <span class="pull-down">
-                                                <i class="el-icon-caret-bottom"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pull-down-text" v-if="isShowProvince">
-                                        <ul>
-                                            <li v-for="(item,index) in objProvince" :key="index" @click.stop="chooseProvince(item)">{{item.name}}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="pull">
-                                    <div class="select-con ">
-                                        <div class="divClick" @click.stop="handleCity">
-                                            <span>
-                                                <el-input v-model="schoolForm.city" placeholder="请选择城市" readonly></el-input>
-                                            </span>
-                                            <span class="pull-down">
-                                                <i class="el-icon-caret-bottom"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="pull-down-text" v-if="isShowCity">
-                                        <ul>
-                                            <li v-for="(item,index) in objCity" :key="index" @click.stop="chooseCity(item)">{{item.name}}</li>
-                                        </ul>
-                                    </div>
-                                </div> -->
-              <el-select v-model="schoolForm.province_name" placeholder="请选择省份" @change="provinceChange">
-                <el-option v-for="(p,index) in province" :key="'prov'+index" :label="p.label" :value="p.value"></el-option>
+              <el-select
+                v-model="schoolForm.province_name"
+                placeholder="请选择省份"
+                @change="provinceChange"
+              >
+                <el-option
+                  v-for="(p,index) in province"
+                  :key="'prov'+index"
+                  :label="p.label"
+                  :value="p.value"
+                ></el-option>
               </el-select>
-              <el-select v-model="schoolForm.city_name" placeholder="请选择城市" no-data-text="请先选择所在省份" @change="cityChange">
-                <el-option v-for="(p,index) in city" :key="'city'+index" :label="p.label" :value="p.value"></el-option>
+              <el-select
+                v-model="schoolForm.city_name"
+                placeholder="请选择城市"
+                no-data-text="请先选择所在省份"
+                @change="cityChange"
+              >
+                <el-option
+                  v-for="(p,index) in city"
+                  :key="'city'+index"
+                  :label="p.label"
+                  :value="p.value"
+                ></el-option>
               </el-select>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>姓名：</div>
             <div class="fr">
-              <el-input v-model="schoolForm.name" placeholder="请输入您的姓名"></el-input>
+              <el-input
+                v-model="schoolForm.name"
+                placeholder="请输入您的姓名"
+              ></el-input>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>电话：</div>
             <div class="fr">
-              <el-input v-model="schoolForm.tel" placeholder="请输入您的手机号"></el-input>
+              <el-input
+                v-model="schoolForm.tel"
+                placeholder="请输入您的手机号"
+              ></el-input>
               <!-- <el-input class="tel" v-model="teacherForm.tel" placeholder="请填写手机号"></el-input> -->
               <!-- <el-input class="verification" v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input> -->
               <!-- <span class="code" @click="smsCodes">{{telCodes.getCode}}</span> -->
@@ -83,11 +95,17 @@
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>邮箱：</div>
             <div class="fr">
-              <el-input v-model="schoolForm.email" placeholder="请输入您的邮箱"></el-input>
+              <el-input
+                v-model="schoolForm.email"
+                placeholder="请输入您的邮箱"
+              ></el-input>
             </div>
           </div>
           <div class="submit">
-            <el-button :disabled="isClick" @click="validate">提交</el-button>
+            <el-button
+              :disabled="isClick"
+              @click="validate"
+            >提交</el-button>
           </div>
         </div>
       </div>

@@ -63,15 +63,15 @@
     }
     .apply {
       width: 100%;
-      height: 644px;
+      height: 703px;
       margin-top: 80px;
       background: url('http://static-image.1911edu.com/schoolApply.png')
         no-repeat center;
-      background-size: 1920px 644px;
+      background-size: 1920px 703px;
       padding-top: 150px;
       .applyInputs {
         width: 765px;
-        height: 410px;
+        height: 520px;
         background-color: #fff;
         margin: 0 auto;
         padding: 40px 0 30px 0;
@@ -101,7 +101,7 @@
         .fr.selectFr {
           .text {
             line-height: 40px;
-            font-size: 16px;
+            font-size: 14px;
             color: #222;
           }
           .el-select {
@@ -215,6 +215,21 @@
               top: 13px;
               font-size: 14px;
               color: #aaaaaa;
+            }
+          }
+        }
+        .counsel {
+          .fr {
+            position: relative;
+            width: 500px;
+            // height: 175px;
+            background-color: #f7f9fb;
+            padding: 15px 25px;
+            font-size: 14px;
+            line-height: 28px;
+            p {
+              text-align: left;
+              padding: 0;
             }
           }
         }
