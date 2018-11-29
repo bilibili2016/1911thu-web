@@ -38,7 +38,7 @@
                     <span>支付方式：</span>
                     <span v-if="orderDetail.payment_method == '1'">微信支付</span>
                     <span v-if="orderDetail.payment_method == '2'">支付宝支付</span>
-                    <span v-if="orderDetail.payment_method == '4'">用户余额</span>
+                    <span v-if="orderDetail.payment_method == '4'">账户余额支付</span>
                   </div>
                   <div class="info-fr">
                     <span>支付时间：</span>
