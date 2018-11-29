@@ -7,23 +7,33 @@
     font-size: 16px;
     color: #222;
   }
+
+  .listParent {
+    height: 600px;
+    overflow: hidden;
+  }
+
   .collegeList {
-    min-height: 320px;
     font-size: 16px;
     color: #222;
+
     .collegeLists {
       padding: 0 30px;
+
       .item {
         width: 100%;
         height: 160px;
         border-bottom: 1px solid #eeeeee;
         padding: 30px 0;
+
         &:first-child {
           border: none;
         }
+
         .item_left {
           float: left;
           height: 100px;
+
           img {
             display: inline-block;
             width: 160px;
@@ -31,21 +41,26 @@
             vertical-align: middle;
             cursor: pointer;
           }
+
           .collegeInfo {
             margin-left: 20px;
             height: 100px;
             line-height: 50px;
             display: inline-block;
             vertical-align: middle;
+
             p {
               width: 100%;
+
               &.title {
                 cursor: pointer;
               }
+
               span {
                 color: #222222;
                 font-size: 14px;
                 margin-right: 25px;
+
                 &.college-study {
                   height: 18px;
                   background-color: #e4e4ef;
@@ -54,6 +69,7 @@
                   line-height: 18px;
                   padding-right: 10px;
                 }
+
                 i {
                   color: #b4b4c8;
                   font-size: 20px;
@@ -64,9 +80,11 @@
             }
           }
         }
+
         .item_right {
           float: right;
           height: 100px;
+
           .btn {
             width: 110px;
             height: 30px;
