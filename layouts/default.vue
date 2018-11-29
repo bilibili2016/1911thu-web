@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     //设置头部homeSelect选中样式
-    fetchUrl() {
+    fetchUrl333() {
       //检测网络连接情况
       if (navigator.onLine) {
         this.showNetwork = false;
