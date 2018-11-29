@@ -112,7 +112,8 @@ export default {
         limits: 4
       },
       loadinged: true,
-      result: true
+      result: true,
+      responseData: { type: true, res: "" }
     };
   },
   methods: {
@@ -124,17 +125,22 @@ export default {
       this.loadSearch = true;
       this.searchForm.searchword = Trim(this.searchForm.searchword);
       search.searchCurriculumList(this.searchForm).then(response => {
-        this.searchData = response.data.curriculumList;
-        if (response.data.pageCount == 0) {
-          this.result = false;
-          this.pagemsg.total = 0;
-          this.getLikeList();
-        } else {
-          this.result = true;
-          this.pagemsg.total = response.data.pageCount;
-        }
-
         this.loadSearch = false;
+        if (response.status == 0) {
+          this.searchData = response.data.curriculumList;
+          if (response.data.pageCount == 0) {
+            this.result = false;
+            this.pagemsg.total = 0;
+            this.getLikeList();
+          } else {
+            this.result = true;
+            this.pagemsg.total = response.data.pageCount;
+          }
+        } else if (response.status == 100008) {
+          this.responseData.res = response;
+          this.$router.push("/");
+          return false;
+        }
       });
     },
     pageChange(val) {
