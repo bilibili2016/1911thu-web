@@ -13,9 +13,7 @@
         <div v-if="config.type==='order'">
           <!-- 订单信息 -->
           <div class="order bodyItem">
-            <div class="top">
-              订单信息
-            </div>
+            <div class="top">订单信息</div>
             <div class="bottom">
               <div class="info clearfix" v-show="!(JSON.stringify(orderDetail) === '{}')">
                 <div class="info-fl">
@@ -27,27 +25,26 @@
                   <span>{{changeTime(orderDetail.create_time)}}</span>
                 </div>
               </div>
-
             </div>
           </div>
           <!-- 付款信息 -->
           <div class="pay bodyItem" v-if="orderDetail.payment_method !== ''">
-            <div class="top">
-              付款信息
-            </div>
+            <div class="top">付款信息</div>
             <div class="bottom">
               <!-- 快捷支付 -->
-              <div v-if="orderDetail.payment_method !== '3'">
+              <div v-if="orderDetail.payment_method != '3'">
                 <div class="info clearfix">
                   <div class="info-fl">
                     <span>支付方式：</span>
                     <span v-if="orderDetail.payment_method == '1'">微信支付</span>
                     <span v-if="orderDetail.payment_method == '2'">支付宝支付</span>
-
+                    <span v-if="orderDetail.payment_method == '4'">用户余额</span>
                   </div>
                   <div class="info-fr">
                     <span>支付时间：</span>
-                    <span v-show="!(JSON.stringify(orderDetail) === '{}')">{{changeTime(orderDetail.pay_time)}}</span>
+                    <span
+                      v-show="!(JSON.stringify(orderDetail) === '{}')"
+                    >{{changeTime(orderDetail.pay_time)}}</span>
                   </div>
                 </div>
               </div>
@@ -81,7 +78,7 @@
                   <!-- <div class="info-fr">
                     <span>汇款识别码：</span>
                     <span>{{bankInfo.identification_code}}</span>
-                  </div> -->
+                  </div>-->
                 </div>
               </div>
             </div>
@@ -90,9 +87,10 @@
 
         <!-- 商品信息 -->
         <div class="goods bodyItem">
-
           <!-- 课程、vip、课程+项目、线上项目-->
-          <div v-if="orderDetail.order_type === '1' ||orderDetail.order_type === '3' || (orderDetail.order_type === '2'&&courseList.length!=0)  || (orderDetail.order_type === '2'&&orderDetail.project_type === '1' &&orderDetail.study_type =='1')">
+          <div
+            v-if="orderDetail.order_type === '1' ||orderDetail.order_type === '3' || (orderDetail.order_type === '2'&&courseList.length!=0)  || (orderDetail.order_type === '2'&&orderDetail.project_type === '1' &&orderDetail.study_type =='1')"
+          >
             <div class="top">
               <span class="lf">商品信息</span>
               <span class="lm">单价</span>
@@ -100,10 +98,15 @@
             </div>
             <div class="bottom">
               <!-- 课程 -->
-              <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="'course'+index">
+              <div
+                class="bottom-item clearfix"
+                v-if="courseList.length"
+                v-for="(course,index) in courseList"
+                :key="'course'+index"
+              >
                 <div class="courseInfo clearfix">
                   <div class="bottomImg">
-                    <img class="" :src="course.picture" alt="">
+                    <img class :src="course.picture" alt>
                   </div>
 
                   <div class="fl">
@@ -112,51 +115,58 @@
                     <!-- <p>导师：{{course.teacher_name}}</p> -->
                   </div>
                 </div>
-                <div class="coursePrice">
-                  ￥{{course.present_price}}
-                </div>
+                <div class="coursePrice">￥{{course.present_price}}</div>
                 <div class="courseOperation">
-                  <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                  <i class="el-icon-close"></i>
+                  {{orderDetail.pay_number}}
                 </div>
               </div>
               <!-- 线上项目 -->
-              <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="'project'+index">
+              <div
+                class="bottom-item clearfix"
+                v-if="projectList.length"
+                v-for="(project,index) in projectList"
+                :key="'project'+index"
+              >
                 <div class="courseInfo clearfix">
                   <div class="bottomImg">
                     <!-- 项目图标 -->
-                    <img class="project-img" :src="projectImg" alt="">
-                    <img class="" :src="project.picture" alt="">
+                    <img class="project-img" :src="projectImg" alt>
+                    <img class :src="project.picture" alt>
                   </div>
                   <div class="fl">
                     <h4>{{project.title}}</h4>
                     <h6>{{project.curriculum_time}}学时</h6>
                   </div>
                 </div>
-                <div class="coursePrice">
-                  ￥{{project.present_price}}
-                </div>
+                <div class="coursePrice">￥{{project.present_price}}</div>
                 <div>
                   <div class="courseOperation">
-                    <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                    <i class="el-icon-close"></i>
+                    {{orderDetail.pay_number}}
                   </div>
                 </div>
               </div>
               <!-- vip -->
-              <div class="bottom-item clearfix" v-if="vipList.length" v-for="(vip,index) in vipList" :key="'vip'+index">
+              <div
+                class="bottom-item clearfix"
+                v-if="vipList.length"
+                v-for="(vip,index) in vipList"
+                :key="'vip'+index"
+              >
                 <div class="courseInfo clearfix">
                   <div class="bottomImg">
-                    <img class="" :src="vip.picture" alt="">
+                    <img class :src="vip.picture" alt>
                   </div>
 
                   <div class="fl">
                     <h4>{{vip.title}}</h4>
                   </div>
                 </div>
-                <div class="coursePrice">
-                  ￥{{vip.present_price}}
-                </div>
+                <div class="coursePrice">￥{{vip.present_price}}</div>
                 <div class="courseOperation">
-                  <i class="el-icon-close"></i>{{orderDetail.pay_number}}
+                  <i class="el-icon-close"></i>
+                  {{orderDetail.pay_number}}
                 </div>
               </div>
             </div>
@@ -167,7 +177,7 @@
           <div v-else>
             <div class="top customerProject clearfix">
               <div class="topLeft">
-                <span class="">商品信息</span>
+                <span class>商品信息</span>
               </div>
               <div class="topRight">
                 <span>培训方式</span>
@@ -179,15 +189,29 @@
               </div>
             </div>
             <div class="bottom">
-              <div class="bottom-item customerProjectDetail clearfix" v-for="(project,index) in projectList" :key="'cus'+index">
+              <div
+                class="bottom-item customerProjectDetail clearfix"
+                v-for="(project,index) in projectList"
+                :key="'cus'+index"
+              >
                 <div class="projectInfo">
                   <div class="bottomImg">
                     <!-- 项目图标 -->
                     <!-- 标准 -->
-                    <img v-if="orderDetail.project_type==='1'" class="project-img" :src="projectImg" alt="">
+                    <img
+                      v-if="orderDetail.project_type==='1'"
+                      class="project-img"
+                      :src="projectImg"
+                      alt
+                    >
                     <!-- 定制 -->
-                    <img v-if="orderDetail.project_type==='2'" class="project-img" :src="customerProjectImg" alt="">
-                    <img class="" :src="project.picture" alt="">
+                    <img
+                      v-if="orderDetail.project_type==='2'"
+                      class="project-img"
+                      :src="customerProjectImg"
+                      alt
+                    >
+                    <img class :src="project.picture" alt>
                   </div>
                   <div class="fl">
                     <h4 class="projectTitle">{{project.title}}</h4>
@@ -207,15 +231,24 @@
                   <!-- 学习天数 -->
                   <div class="item">{{project.offline_days}}天</div>
                   <!-- 总价 -->
-                  <div class="item price">￥{{project.present_price}} </div>
+                  <div class="item price">￥{{project.present_price}}</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="tableFooter" v-if="orderDetail.order_type === '1'">
-            <p><span class="table_lf">商品数量：</span><span class="table_lr">{{courseList.length+projectList.length+vipList.length}}</span></p>
-            <p><span class="table_lf">学习人数：</span><span class="table_lr">{{orderDetail.pay_number}}人</span></p>
-            <h4><span class="table_lf">商品总额：</span><span class="table_lr">￥{{orderDetail.order_amount}}</span></h4>
+            <p>
+              <span class="table_lf">商品数量：</span>
+              <span class="table_lr">{{courseList.length+projectList.length+vipList.length}}</span>
+            </p>
+            <p>
+              <span class="table_lf">学习人数：</span>
+              <span class="table_lr">{{orderDetail.pay_number}}人</span>
+            </p>
+            <h4>
+              <span class="table_lf">商品总额：</span>
+              <span class="table_lr">￥{{orderDetail.order_amount}}</span>
+            </h4>
           </div>
           <div class="tableFooter" v-else>
             <!-- <p>9.5折&nbsp;&nbsp;&nbsp;优惠￥{{(orderDetail.order_amount*(1-0.95)).toFixed(2)}}</p> -->
@@ -238,21 +271,21 @@ export default {
     'projectList',
     'vipList'
   ],
-  data() {
+  data () {
     return {
       projectImg: 'http://static-image.1911edu.com/p4.png', //项目图标
       customerProjectImg: 'http://static-image.1911edu.com/p5.png' //定制项目图标
     }
   },
   methods: {
-    goBack(type) {
+    goBack (type) {
       if (type === 'order') {
         this.$emit('goBack', true)
       } else {
         this.$emit('goTicketBack', true)
       }
     },
-    changeTime(time) {
+    changeTime (time) {
       return timestampToTime(time)
     }
   }
