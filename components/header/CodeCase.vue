@@ -2,11 +2,17 @@
   <!-- 兑换码弹框 -->
   <div class="exchange">
     <div class="innerWord">
-      <i class="el-icon-close closeEcg" @click="closeEcg"></i>
+      <i
+        class="el-icon-close closeEcg"
+        @click="closeEcg"
+      ></i>
       <div class="changeContent">
         <div class="changeInput">
           <span>兑换码:</span>
-          <input v-model="bindForm.courseId" placeholder="请输入您的兑换码，注意区分大小写">
+          <input
+            v-model="bindForm.courseId"
+            placeholder="请输入您的兑换码，注意区分大小写"
+          >
           <!-- 错误提醒：绑定码已过期失效 -->
           <!-- <p>
             <span>{{bindForm.error}}</span>
@@ -20,8 +26,15 @@
           <p>4.每枚兑换码每个学员仅兑换一次，不可重复兑换；</p>
           <p>5.您可在【个人中心】-【兑换码管理】页面中查看您的兑换码使用情况。</p>
         </div>
-        <div v-if="bindForm.isInput" class="bind input" @click="detection">绑定</div>
-        <div v-else class="bind">绑定</div>
+        <div
+          v-if="bindForm.isInput"
+          class="bind input"
+          @click="detection"
+        >绑定</div>
+        <div
+          v-else
+          class="bind"
+        >立即绑定</div>
       </div>
     </div>
   </div>
@@ -29,18 +42,18 @@
 
 <script>
 export default {
-  props: ['bindForm'],
+  props: ["bindForm"],
   methods: {
     closeEcg() {
-      this.$emit('closeEcg')
+      this.$emit("closeEcg");
     },
     detection() {
-      this.$emit('detection')
+      this.$emit("detection");
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/components/codeCase';
+@import "~assets/style/components/codeCase";
 </style>
