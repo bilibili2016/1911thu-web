@@ -28,7 +28,7 @@
                 <p class="code"><img
                     src="http://static-image.1911edu.com/teacherCode.png"
                     alt=""
-                  ><span>添加商务微信预约导师</span></p>
+                  ><span>添加学堂教务微信，预约导师</span></p>
                 <!-- <p><span class="courseForm">添加微信预约导师：</span><span>xuetang</span></p> -->
               </div>
             </div>
