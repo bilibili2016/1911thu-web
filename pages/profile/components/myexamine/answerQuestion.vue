@@ -2,26 +2,60 @@
   <div class="exam clearfix">
     <div class="examTitle">
       <span>{{title}}</span>
-      <span>剩余时间：<i>{{minute}}</i>分<i>{{second}}</i>秒</span>
+      <span>剩余时间：
+        <i>{{minute}}</i>分
+        <i>{{second}}</i>秒
+      </span>
     </div>
     <div class="examLeft fl">
-      <div class="problem ">
+      <div class="problem">
         <h3 v-if="questionCurrent.type==1">单选题</h3>
         <h3 v-if="questionCurrent.type==2">多选题</h3>
         <h4>{{questionCurrent.number}}.{{questionCurrent.title}}</h4>
-        <el-radio v-if="questionCurrent.type==1" v-for="(option,index) in selectArr" :key="index" v-model="selectRadio" :label="option.option_key" :disabled="showResult" @change="shangeRadio">{{option.option_key}}.{{option.option_value}}</el-radio>
-        <el-checkbox-group v-if="questionCurrent.type==2" v-model="selectIndex" @change="selectOption">
-          <el-checkbox v-for="(option,index) in selectArr" :key="index" :label="option.option_key" :disabled="showResult">{{option.option_key}}.{{option.option_value}}</el-checkbox>
+        <el-radio
+          v-if="questionCurrent.type==1"
+          v-for="(option,index) in selectArr"
+          :key="index"
+          v-model="selectRadio"
+          :label="option.option_key"
+          :disabled="showResult"
+          @change="shangeRadio"
+        >{{option.option_key}}.{{option.option_value}}</el-radio>
+        <el-checkbox-group
+          v-if="questionCurrent.type==2"
+          v-model="selectIndex"
+          @change="selectOption"
+        >
+          <el-checkbox
+            v-for="(option,index) in selectArr"
+            :key="index"
+            :label="option.option_key"
+            :disabled="showResult"
+          >{{option.option_key}}.{{option.option_value}}</el-checkbox>
         </el-checkbox-group>
       </div>
       <div class="result">
-        <p class="success" v-if="showResult&&questionCurrent.is_right==1"><i class="el-icon-success"></i>答对啦！</p>
-        <p class="error" v-if="showResult&&questionCurrent.is_right==2"><i class="el-icon-error"></i>答错啦！</p>
-        <p class="analysis">解析：2018福建公务员考试即将到来，在最后关头考生们一定不要过于松懈，要循序渐进的调整状态，心理、饮食、作息都不可忽视。为便于考生及时知晓成绩，中公教育为考生做出专业的解读。</p>
+        <p class="success" v-if="showResult&&questionCurrent.is_right==1">
+          <i class="el-icon-success"></i>答对啦！
+        </p>
+        <p class="error" v-if="showResult&&questionCurrent.is_right==2">
+          <i class="el-icon-error"></i>答错啦！
+        </p>
+        <p
+          class="analysis"
+        >解析：2018福建公务员考试即将到来，在最后关头考生们一定不要过于松懈，要循序渐进的调整状态，心理、饮食、作息都不可忽视。为便于考生及时知晓成绩，中公教育为考生做出专业的解读。</p>
       </div>
       <div class="commitBtn">
-        <span class="preAnswer" :class="{disable:JSON.stringify(questionPre)=='{}'}" @click="preAnswer">上一题</span>
-        <span class="nextAnswer" :class="{disable:JSON.stringify(questionNext)=='{}'}" @click="nextAnswer">下一题</span>
+        <span
+          class="preAnswer"
+          :class="{disable:JSON.stringify(questionPre)=='{}'}"
+          @click="preAnswer"
+        >上一题</span>
+        <span
+          class="nextAnswer"
+          :class="{disable:JSON.stringify(questionNext)=='{}'}"
+          @click="nextAnswer"
+        >下一题</span>
         <span v-if="isOver" class="isOver">提交</span>
         <span v-else @click="answer" :class="{disable:questionCurrent.is_right!=0}">提交</span>
       </div>
@@ -35,7 +69,12 @@
       <div class="displayCard">
         <h3>答题卡</h3>
         <ul class="cardList">
-          <li v-for="(li,index) in questionCard" :key="index" @click="selectQuestion(li)" :class="[{bgColor: selectItem==li.id},{success:li.is_right==1&&selectItem!=li.id},{error:li.is_right==2&&selectItem!=li.id}]">{{li.number}}</li>
+          <li
+            v-for="(li,index) in questionCard"
+            :key="index"
+            @click="selectQuestion(li)"
+            :class="[{bgColor: selectItem==li.id},{success:li.is_right==1&&selectItem!=li.id},{error:li.is_right==2&&selectItem!=li.id}]"
+          >{{li.number}}</li>
         </ul>
       </div>
       <div class="commitBtn">
@@ -48,23 +87,31 @@
         <i class="el-icon-close" @click="closeChadow"></i>
         <!-- <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i> -->
         <p class="grade smile" v-if="testPaper.doYouPass">
-          <img src="~assets/images/smile.png" class="fl" alt="">
+          <img src="~assets/images/smile.png" class="fl" alt>
           <span>{{testPaper.answerScoreSum}}分</span>
           <span>成绩合格！</span>
         </p>
         <p class="grade cry" v-else>
-          <img src="~assets/images/cry.png" class="fl" alt="">
+          <img src="~assets/images/cry.png" class="fl" alt>
           <span>{{testPaper.answerScoreSum}}分</span>
           <span>成绩不合格！</span>
         </p>
         <p class="clearfix subjectNumber">
-          <span class="fl">未答题数：<i>{{testPaper.notAnswerTotal}}</i></span>
-          <span class="fr">错题数：<i>{{testPaper.answerErrorTotal}}</i></span>
+          <span class="fl">未答题数：
+            <i>{{testPaper.notAnswerTotal}}</i>
+          </span>
+          <span class="fr">错题数：
+            <i>{{testPaper.answerErrorTotal}}</i>
+          </span>
         </p>
         <p v-if="isOver" class="noTime">考试时间已到，请交卷！</p>
         <div class="sdwBtn">
           <span class="gonow" @click="examination">现在交卷</span>
-          <span class="continue" v-if="testPaper.notAnswerTotal>0&&!isOver" @click="closeChadow">继续答题</span>
+          <span
+            class="continue"
+            v-if="testPaper.notAnswerTotal>0&&!isOver"
+            @click="closeChadow"
+          >继续答题</span>
         </div>
       </div>
     </div>
@@ -77,7 +124,7 @@ import { store as persistStore } from '~/lib/core/store'
 import { examine } from '~/lib/v1_sdk/index'
 import { message, matchSplits, setTitle } from '@/lib/util/helper'
 export default {
-  data() {
+  data () {
     return {
       isOver: false,
       title: '',
@@ -116,21 +163,21 @@ export default {
   methods: {
     ...mapActions('auth', ['setGid']),
     // 选择选项
-    shangeRadio(val) {
+    shangeRadio (val) {
       this.examForm.selectId = []
       this.examForm.selectId.push(val)
     },
     // 选择选项
-    selectOption(option) {
+    selectOption (option) {
       this.examForm.selectId = this.selectIndex
     },
     // 切换问题
-    selectQuestion(item) {
+    selectQuestion (item) {
       this.examForm.questionId = item.id
       this.changeToken()
     },
     // 提交当前问题
-    answer() {
+    answer () {
       if (
         persistStore.get('examToken') === persistStore.get('token') &&
         persistStore.get('token') != ''
@@ -156,7 +203,7 @@ export default {
       }
     },
     // 上一题
-    preAnswer() {
+    preAnswer () {
       if (this.questionPre != [] && this.questionPre.id) {
         this.examForm.questionId = this.questionPre.id
         this.changeToken()
@@ -165,7 +212,7 @@ export default {
       }
     },
     // 下一题
-    nextAnswer() {
+    nextAnswer () {
       if (this.questionNext != [] && this.questionNext.id) {
         this.examForm.questionId = this.questionNext.id
         this.changeToken()
@@ -174,7 +221,7 @@ export default {
       }
     },
     // 交卷确认信息
-    commitExam() {
+    commitExam () {
       if (
         persistStore.get('examToken') === persistStore.get('token') &&
         persistStore.get('token') != ''
@@ -197,7 +244,7 @@ export default {
       }
     },
     // 提交考试
-    examination() {
+    examination () {
       clearInterval(this.interval)
       examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
@@ -214,11 +261,11 @@ export default {
       })
     },
     // 关闭弹框
-    closeChadow() {
+    closeChadow () {
       this.showShadow = false
     },
     // 转换时间格式
-    changeTime(time) {
+    changeTime (time) {
       if (time <= 0) {
         clearInterval(this.interval)
         this.commitExam()
@@ -231,7 +278,7 @@ export default {
         this.second > 0
           ? this.second--
           : this.minute > 0
-            ? (this.minute--, (this.second = 59))
+            ? (this.minute-- , (this.second = 59))
             : (this.minute = 0)
         if (this.second == 0 && this.minute == 0) {
           clearInterval(this.interval)
@@ -241,7 +288,7 @@ export default {
       }, 1000)
     },
     // 获取试题
-    questionsDetail() {
+    questionsDetail () {
       examine.questionsDetail(this.examForm).then(response => {
         if (response.status == 0) {
           this.setAssignment(response)
@@ -253,13 +300,13 @@ export default {
       })
     },
     // 跳转个人中心
-    goProfile(item) {
+    goProfile (item) {
       this.gidForm.gids = item
       this.setGid(this.gidForm)
       this.$router.push('/profile')
     },
     // 赋值
-    setAssignment(response) {
+    setAssignment (response) {
       this.title = response.data.exam_name
       this.questionCurrent = response.data.questionCurrent
       this.selectArr = response.data.questionCurrent.option
@@ -287,7 +334,7 @@ export default {
       this.changeTime(response.data.surplus_time)
     },
     // 登录账号被替换
-    changeToken() {
+    changeToken () {
       if (
         persistStore.get('examToken') === persistStore.get('token') &&
         persistStore.get('token') != ''
@@ -303,7 +350,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     setTitle('考试中心-1911学堂')
 
     if (window.location.search) {
@@ -318,16 +365,17 @@ export default {
       }
     } else {
       this.$router.push('/profile')
+      message(this, 'error', '获取考试信息错误，请刷新后重试！')
     }
   },
   // 进入路由隐藏header和footer
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit('headerFooterHide')
     })
   },
   // 出路由显示header和footer
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     this.$bus.$emit('headerFooterShow')
     persistStore.set('examToken', '')
     next()
