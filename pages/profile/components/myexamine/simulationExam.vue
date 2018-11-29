@@ -158,7 +158,7 @@ export default {
       second: 0,
       gidForm: {
         gids: ''
-      }
+      },
     }
   },
   methods: {
@@ -250,12 +250,6 @@ export default {
       examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           message(this, 'success', '提交成功！')
-          this.$router.push({
-            path: '/profile',
-            query: {
-              id: this.examForm.examId
-            }
-          })
           this.handleBack()
         } else {
           message(this, 'error', response.msg)
@@ -268,8 +262,7 @@ export default {
     },
     handleBack () {
       this.goProfile('tab-tenth')
-      this.pageData.name = 'list'
-      this.$bus.$emit('whichShow', this.pageData)
+      this.$bus.$emit('whichShow', 'list')
     },
     // 转换时间格式
     changeTime (time) {
