@@ -1,71 +1,79 @@
 <template>
-    <!-- 导师招募 -->
-    <div class="beTeacher" @click="documentHandler">
-        <div class="topImg">
-            <h4>诚聘导师</h4>
-            <div class="wordBox">
-                <div class="word">
-                    <p>1911学堂（1911edu.com），一所源自清华、面向世界、致力于终身教育的互联网学校。我们诚挚邀请您成为1911学堂“特聘导师”！</p>
-                    <p>成为1911 学堂“特聘导师”，我们将与您在五个方面展开深度合作：录制在线课程视频；开展多元化的线下授课及活动；在实践情境中开展顾问式咨询项目；与相关机构建立横向课题；以及其他方面的深度合作。此外，1911 学堂还将为您配备专属导师助理、专业的课程录制和后期制作团队，以及课程运营和推广团队，助您成为更有价值的奉知者和献智者！</p>
-                    <p>己欲立而立人、己欲达而达人，1911学堂将国内外顶尖的专家教授汇聚在一起，致力为权威专家打造一个彼此赋能、共创价值的同道人脉圈，专家教授在此能够拓展专业维度，更能结交学界翘楚、共享资源，提升您的个人品牌及影响力！1911学堂不仅是党政机关、事业单位及企业组织终身学习的学校，更将成为各位大师名家思想汇聚、碰撞和升华的平台。</p>
-                    <p>期待您携手1911学堂，一起为中国继续教育事业做出更大贡献！</p>
-                </div>
-            </div>
+  <!-- 导师招募 -->
+  <div class="beTeacher" @click="documentHandler">
+    <div class="topImg">
+      <h4>诚聘导师</h4>
+      <div class="wordBox">
+        <div class="word">
+          <p>1911学堂（1911edu.com），一所源自清华、面向世界、致力于终身教育的互联网学校。我们诚挚邀请您成为1911学堂“特聘导师”！</p>
+          <p>成为1911 学堂“特聘导师”，我们将与您在五个方面展开深度合作：录制在线课程视频；开展多元化的线下授课及活动；在实践情境中开展顾问式咨询项目；与相关机构建立横向课题；以及其他方面的深度合作。此外，1911 学堂还将为您配备专属导师助理、专业的课程录制和后期制作团队，以及课程运营和推广团队，助您成为更有价值的奉知者和献智者！</p>
+          <p>己欲立而立人、己欲达而达人，1911学堂将国内外顶尖的专家教授汇聚在一起，致力为权威专家打造一个彼此赋能、共创价值的同道人脉圈，专家教授在此能够拓展专业维度，更能结交学界翘楚、共享资源，提升您的个人品牌及影响力！1911学堂不仅是党政机关、事业单位及企业组织终身学习的学校，更将成为各位大师名家思想汇聚、碰撞和升华的平台。</p>
+          <p>期待您携手1911学堂，一起为中国继续教育事业做出更大贡献！</p>
         </div>
-        <div class="con">
-            <div class="personal">
-                <div class="tip">请留下您宝贵的个人信息，期待与您早日合作！</div>
-                <div class="content">
-                    <div class="con-item name clearfix">
-                        <div class="fl"><i class="red">*</i>姓名：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.name" placeholder="请填写您的姓名"></el-input>
-                        </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">所在单位：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.unit" placeholder="请填写您所在的单位名称"></el-input>
-                        </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">职务：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.duty" placeholder="请填写您的职务"></el-input>
-                        </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">职称：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.dutyName" placeholder="请填写您的职称"></el-input>
-                        </div>
-                    </div>
-                    <div class="con-item name phone clearfix">
-                        <div class="fl"><i class="red">*</i>手机号：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.tel" placeholder="请填写您的手机号"></el-input>
-                            <el-input v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input>
-                            <el-button @click="getCode">{{bindTelData.getCode}}</el-button>
-                        </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">常用邮箱：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
-                        </div>
-                    </div>
-                    <div class="con-item name clearfix">
-                        <div class="fl">研究方向：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.direction" placeholder="宏观经济、人工智能、区域发展、一带一路等"></el-input>
-                        </div>
-                    </div>
-                    <div class="con-item style clearfix">
-                        <div class="fl">合作形式：</div>
-                        <div class="fr clearfix">
-                            <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
-                                <el-checkbox v-for="(service,index) in offerService" :label="service.id" :key="'service'+index">{{service.name}}</el-checkbox>
-                                <!-- <i class="el-icon-question styleAsk">
+      </div>
+    </div>
+    <div class="con">
+      <div class="personal">
+        <div class="tip">请留下您宝贵的个人信息，期待与您早日合作！</div>
+        <div class="content">
+          <div class="con-item name clearfix">
+            <div class="fl">
+              <i class="red">*</i>姓名：
+            </div>
+            <div class="fr">
+              <el-input v-model="teacherForm.name" placeholder="请填写您的姓名"></el-input>
+            </div>
+          </div>
+          <div class="con-item name clearfix">
+            <div class="fl">所在单位：</div>
+            <div class="fr">
+              <el-input v-model="teacherForm.unit" placeholder="请填写您所在的单位名称"></el-input>
+            </div>
+          </div>
+          <div class="con-item name clearfix">
+            <div class="fl">职务：</div>
+            <div class="fr">
+              <el-input v-model="teacherForm.duty" placeholder="请填写您的职务"></el-input>
+            </div>
+          </div>
+          <div class="con-item name clearfix">
+            <div class="fl">职称：</div>
+            <div class="fr">
+              <el-input v-model="teacherForm.dutyName" placeholder="请填写您的职称"></el-input>
+            </div>
+          </div>
+          <div class="con-item name phone clearfix">
+            <div class="fl">
+              <i class="red">*</i>手机号：
+            </div>
+            <div class="fr">
+              <el-input v-model="teacherForm.tel" placeholder="请填写您的手机号"></el-input>
+              <el-input v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input>
+              <el-button @click="getCode">{{bindTelData.getCode}}</el-button>
+            </div>
+          </div>
+          <div class="con-item name clearfix">
+            <div class="fl">常用邮箱：</div>
+            <div class="fr">
+              <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
+            </div>
+          </div>
+          <div class="con-item name clearfix">
+            <div class="fl">研究方向：</div>
+            <div class="fr">
+              <el-input v-model="teacherForm.direction" placeholder="宏观经济、人工智能、区域发展、一带一路等"></el-input>
+            </div>
+          </div>
+          <div class="con-item style clearfix">
+            <div class="fl">合作形式：</div>
+            <div class="fr clearfix">
+              <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
+                <el-checkbox
+                  v-for="(service,index) in offerService"
+                  :label="service.id"
+                  :key="'service'+index"
+                >{{service.name}}</el-checkbox>
+                <!-- <i class="el-icon-question styleAsk">
                                     <div class="descript-text" style="width:530px;">
                                         <div>
                                             <p>线上授课：与1911学堂合作录制在线课程，学员登录1911学堂平台进行学习；</p>
@@ -75,42 +83,51 @@
                                             <p>课题研究：基于客户提出的科研主题，协助客户完成相关内容的研究。</p>
                                         </div>
                                     </div>
-                                </i> -->
-                            </el-checkbox-group>
-                        </div>
-                    </div>
-                    <div class="con-item clearfix">
-                        <div class="fl">授课名称：</div>
-                        <div class="fr">
-                            <el-input v-model="teacherForm.courseName" placeholder="请填写您讲授的课程名称"></el-input>
-                        </div>
-                    </div>
-                    <!-- <div class="con-item desc clearfix">
+                </i>-->
+              </el-checkbox-group>
+            </div>
+          </div>
+          <div class="con-item clearfix">
+            <div class="fl">授课名称：</div>
+            <div class="fr">
+              <el-input v-model="teacherForm.courseName" placeholder="请填写您讲授的课程名称"></el-input>
+            </div>
+          </div>
+          <!-- <div class="con-item desc clearfix">
                         <div class="fl">个人简介：</div>
                         <div class="fr">
                             <el-input type="textarea" v-model="teacherForm.intro" :rows="3" maxlength="500" placeholder="请介绍您在课程相关领域所做过的工作以及获得的荣誉。" autosize></el-input>
                             <span class="input-inner">不超过500字</span>
                         </div>
 
-                    </div> -->
-                    <div class="con-item uploadFile clearfix">
-                        <div class="fl">上传简历：</div>
-                        <div :class="['fr',{'height':isShowFile}]">
-                            <div class="load" v-show="isShowFile">
-                                <div class="upload">
-                                    <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept=".pdf,.doc,.docx">
-                                </div>
-                                <div class="uploadMask"> <i class="el-icon-plus"></i></div>
-                            </div>
-                            <p class="uploadP" v-show="!isShowFile"><span>{{fileName}}</span><span class="deleteFile" @click="deleteFile">删除</span></p>
-                        </div>
-
-                    </div>
-
+          </div>-->
+          <div class="con-item uploadFile clearfix">
+            <div class="fl">上传简历：</div>
+            <div :class="['fr',{'height':isShowFile}]">
+              <div class="load" v-show="isShowFile">
+                <div class="upload">
+                  <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    ref="files"
+                    @change="handleFileChange"
+                    accept=".pdf, .doc, .docx"
+                  >
                 </div>
-
+                <div class="uploadMask">
+                  <i class="el-icon-plus"></i>
+                </div>
+              </div>
+              <p class="uploadP" v-show="!isShowFile">
+                <span>{{fileName}}</span>
+                <span class="deleteFile" @click="deleteFile">删除</span>
+              </p>
             </div>
-            <!-- <div class="course">
+          </div>
+        </div>
+      </div>
+      <!-- <div class="course">
                 <div class="title">课程信息</div>
                 <div class="content">
                     <div class="con-item name clearfix">
@@ -171,20 +188,19 @@
 
                     </div>
                 </div>
-            </div> -->
-            <div class="btns ">
-                <span class="btn save active" @click="validate">提交</span>
-            </div>
-
-        </div>
+      </div>-->
+      <div class="btns">
+        <span class="btn save active" @click="validate">提交</span>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 import { Trim, message, matchSplits, setTitle } from '~/lib/util/helper'
 import { auth, list } from '~/lib/v1_sdk/index'
 
 export default {
-  data() {
+  data () {
     return {
       codeInterval: null,
       fileName: '',
@@ -243,26 +259,26 @@ export default {
 
   methods: {
     //课程形式-线上课程-分类点击
-    handleFormClick() {
+    handleFormClick () {
       this.isShowForm = !this.isShowForm
     },
-    documentHandler(e) {
+    documentHandler (e) {
       this.isShowForm = false
     },
     //课程形式-线上课程-分类 下拉选项点击
-    chooseOnline(val) {
+    chooseOnline (val) {
       this.teacherForm.courseOnline = val.name
       this.teacherForm.courseOnlineID = parseInt(val.id)
       this.isShowForm = false
     },
-    onlineChange(val) {
+    onlineChange (val) {
       if (val) {
         this.isOnlineChecked = true
       } else {
         this.isOnlineChecked = false
       }
     },
-    offlineChange(val) {
+    offlineChange (val) {
       if (val) {
         this.isOfflineChecked = true
       } else {
@@ -270,10 +286,10 @@ export default {
       }
     },
     //多选框
-    handleCheckedChange(val) {},
-    handleserviceChange(val) {},
+    handleCheckedChange (val) { },
+    handleserviceChange (val) { },
     //获取验证码
-    getCode() {
+    getCode () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/
 
       if (Trim(this.teacherForm.tel) === '') {
@@ -310,16 +326,16 @@ export default {
       }
     },
     //删除上传的文件
-    deleteFile() {
+    deleteFile () {
       this.isShowFile = true
       this.fileName = ''
     },
     //处理文件上传
-    handleUpload(event) {
+    handleUpload (event) {
       this.handleFileChange(event)
     },
     //处理文件上传
-    handleFileChange(event) {
+    handleFileChange (event) {
       var reader = new FileReader()
       let imgFiles = event.target.files[0]
       this.fileName = imgFiles.name
@@ -342,7 +358,7 @@ export default {
       }
     },
     //选项信息
-    getRecruitSelect() {
+    getRecruitSelect () {
       list.getRecruitSelect().then(res => {
         //不需要验证是否登录
         if (res.status === 0) {
@@ -356,7 +372,7 @@ export default {
       })
     },
     // 提交
-    handleSubmit() {
+    handleSubmit () {
       list.submitBeTeacher(this.teacherForm).then(response => {
         this.isClick = false
         //不需要验证是否登录
@@ -373,7 +389,7 @@ export default {
       })
     },
     //表单验证
-    validate() {
+    validate () {
       if (this.isClick) {
         return false
       }
@@ -402,12 +418,10 @@ export default {
         this.isClick = false
         return false
       }
-      console.log(this.teacherForm)
-
       this.handleSubmit()
     }
   },
-  mounted() {
+  mounted () {
     setTitle('导师招募-1911学堂')
     this.getRecruitSelect()
   }

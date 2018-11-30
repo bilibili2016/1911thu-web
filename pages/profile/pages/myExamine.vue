@@ -6,16 +6,29 @@
         <div class="top-con clearfix">
           <span>申请证书</span>
         </div>
-        <div class="certificateList" v-loading="examineLoading" :class="{ minheight : examineLoading}">
+        <div
+          class="certificateList"
+          v-loading="examineLoading"
+          :class="{ minheight : examineLoading}"
+        >
           <v-list v-if="examineListData.length > 0" :examineListData="examineListData"></v-list>
         </div>
         <div class="pagination" v-if="examinePagemsg.total>11&&examineListData.length > 0">
-          <el-pagination background layout="prev, pager, next" :page-size="examinePagemsg.pagesize" :pager-count="5" :page-count="examinePagemsg.pagesize" :current-page="examinePagemsg.page" :total="examinePagemsg.total" @current-change="examineListChange"></el-pagination>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :page-size="examinePagemsg.pagesize"
+            :pager-count="5"
+            :page-count="examinePagemsg.pagesize"
+            :current-page="examinePagemsg.page"
+            :total="examinePagemsg.total"
+            @current-change="examineListChange"
+          ></el-pagination>
         </div>
         <!-- 空页面 -->
         <div class="content" v-if="examineListData.length == 0&&!examineLoading">
           <div class="noCourse" style="text-align:center;margin-top:50px;">
-            <img src="http://static-image.1911edu.com/VIP_null.png" alt="">
+            <img src="http://static-image.1911edu.com/VIP_null.png" alt>
             <h4 style="margin-top:10px">加入学院后才会有认证资格呦，快去加入吧!</h4>
           </div>
         </div>
@@ -53,7 +66,7 @@ export default {
     'v-record': Record,
     'v-nomsg': NoMsg
   },
-  data() {
+  data () {
     return {
       isShowList: true,
       isShowInfo: false,
@@ -69,11 +82,11 @@ export default {
   },
 
   methods: {
-    examineListChange() {
+    examineListChange () {
       this.$emit('examineListChange')
     }
   },
-  mounted() {
+  mounted () {
     if (
       persistStore.get('whichIntro') &&
       persistStore.get('whichIntro') != ''

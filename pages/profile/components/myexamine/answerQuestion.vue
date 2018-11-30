@@ -2,7 +2,8 @@
   <div class="exam clearfix">
     <div class="examTitle">
       <span>{{title}}</span>
-      <span>剩余时间：
+      <span>
+        剩余时间：
         <i>{{minute}}</i>分
         <i>{{second}}</i>秒
       </span>
@@ -41,9 +42,11 @@
         <p class="error" v-if="showResult&&questionCurrent.is_right==2">
           <i class="el-icon-error"></i>答错啦！
         </p>
-        <p
-          class="analysis"
-        >解析：2018福建公务员考试即将到来，在最后关头考生们一定不要过于松懈，要循序渐进的调整状态，心理、饮食、作息都不可忽视。为便于考生及时知晓成绩，中公教育为考生做出专业的解读。</p>
+        <p class="analysis">解析：</p>
+        <p class="countTime" v-if="isShowTime">
+          自动跳转到下一题倒计时：
+          <span>{{showTime}}s</span>
+        </p>
       </div>
       <div class="commitBtn">
         <span
@@ -97,10 +100,12 @@
           <span>成绩不合格！</span>
         </p>
         <p class="clearfix subjectNumber">
-          <span class="fl">未答题数：
+          <span class="fl">
+            未答题数：
             <i>{{testPaper.notAnswerTotal}}</i>
           </span>
-          <span class="fr">错题数：
+          <span class="fr">
+            错题数：
             <i>{{testPaper.answerErrorTotal}}</i>
           </span>
         </p>
@@ -157,7 +162,10 @@ export default {
       second: 0,
       gidForm: {
         gids: ''
-      }
+      },
+      isShowTime: false,
+      showTime: 5,
+      timer: ''
     }
   },
   methods: {
@@ -173,6 +181,7 @@ export default {
     },
     // 切换问题
     selectQuestion (item) {
+      this.closeCountDown()
       this.examForm.questionId = item.id
       this.changeToken()
     },
@@ -189,6 +198,9 @@ export default {
         examine.addAnswer(this.examForm).then(response => {
           if (response.status == 0) {
             this.setAssignment(response)
+            if (this.questionCurrent.number < this.questionNum) {
+              this.countDown()
+            }
           } else {
             message(this, 'error', response.msg)
           }
@@ -202,8 +214,24 @@ export default {
         })
       }
     },
+    // 倒计时跳转下一题
+    countDown () {
+      this.isShowTime = true
+      this.timer = setInterval(() => {
+        this.showTime < 1 ? this.nextAnswer() : this.showTime--
+      }, 1000);
+    },
+    // 关闭倒计时
+    closeCountDown () {
+      this.isShowTime = false
+      this.showTime = 5
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+    },
     // 上一题
     preAnswer () {
+      this.closeCountDown()
       if (this.questionPre != [] && this.questionPre.id) {
         this.examForm.questionId = this.questionPre.id
         this.changeToken()
@@ -213,6 +241,7 @@ export default {
     },
     // 下一题
     nextAnswer () {
+      this.closeCountDown()
       if (this.questionNext != [] && this.questionNext.id) {
         this.examForm.questionId = this.questionNext.id
         this.changeToken()
@@ -222,6 +251,7 @@ export default {
     },
     // 交卷确认信息
     commitExam () {
+      this.closeCountDown()
       if (
         persistStore.get('examToken') === persistStore.get('token') &&
         persistStore.get('token') != ''

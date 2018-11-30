@@ -1,6 +1,7 @@
 body {
   padding-top: 0;
 }
+
 .exam {
   width: 100%;
   height: 100%;
@@ -10,6 +11,7 @@ body {
   bottom: 0;
   top: 0;
   padding-top: 76px;
+
   .examTitle {
     width: 100%;
     height: 76px;
@@ -20,29 +22,35 @@ body {
     left: 0;
     background-color: #fff;
     box-shadow: 0px 3px 24px 0px rgba(73, 73, 73, 0.14);
+
     span {
       &:first-child {
         width: 495px;
       }
+
       i {
         color: #ff5f5f;
       }
     }
   }
+
   .examLeft {
     width: 60%;
     height: 100%;
     background-color: #f7f9fc;
+
     .problem {
       width: 660px;
       height: 490px;
       float: right;
       margin-right: 42px;
+
       h3 {
         font-size: 18px;
         padding-top: 38px;
         color: #6417a6;
       }
+
       h4 {
         font-size: 16px;
         height: 60px;
@@ -51,6 +59,7 @@ body {
         color: #222222;
         overflow: hidden;
       }
+
       .el-radio {
         display: block;
         width: 654px;
@@ -64,13 +73,16 @@ body {
         cursor: pointer;
         overflow: hidden;
         white-space: normal;
+
         .el-radio__label {
           padding: 0;
         }
+
         &.is-checked {
           color: #6417a6;
           border: 1px solid #6417a6;
           position: relative;
+
           &:after {
             content: ' 」';
             display: inline-block;
@@ -86,19 +98,24 @@ body {
             bottom: -18px;
             transform: rotate(45deg);
           }
-          .el-radio__input.is-disabled + span.el-radio__label {
+
+          .el-radio__input.is-disabled+span.el-radio__label {
             color: #6417a6;
           }
         }
+
         .el-radio__input {
           display: none;
         }
       }
+
       .el-checkbox-group .el-checkbox {
         margin: 0 0 20px 0;
+
         .el-checkbox__input {
           display: none;
         }
+
         .el-checkbox__label {
           display: block;
           width: 654px;
@@ -112,10 +129,12 @@ body {
           cursor: pointer;
           overflow: hidden;
         }
+
         &.is-checked .el-checkbox__label {
           color: #6417a6;
           border: 1px solid #6417a6;
           position: relative;
+
           &:after {
             content: ' 」';
             display: inline-block;
@@ -134,36 +153,58 @@ body {
         }
       }
     }
+
     .result,
     .commitBtn {
       width: 660px;
       float: right;
       margin-right: 42px;
+      position: relative;
+
       p {
         font-size: 20px;
         margin-bottom: 18px;
+
         &.error {
           color: #ff5f5f;
         }
+
         &.success {
           color: greenyellow;
         }
+
         i {
           margin-right: 6px;
         }
+
         &.analysis {
           display: none;
           font-size: 12px;
           color: #666666;
         }
+
+        &.countTime {
+          width: 100%;
+          position: absolute;
+          top: 0;
+          color: #888;
+          text-align: center;
+
+          span {
+            color: #6417a6;
+          }
+        }
       }
     }
+
     .result {
       height: 50px;
     }
   }
+
   .commitBtn {
     text-align: center;
+
     span {
       width: 130px;
       height: 42px;
@@ -176,20 +217,24 @@ body {
       color: #6417a6;
       font-size: 16px;
       cursor: pointer;
+
       &.preAnswer {
         border: 1px solid #bbbbbb;
         background-color: #fff;
         color: #666;
       }
+
       &.nextAnswer {
         border: 1px solid #dddddd;
         background-color: #dddddd;
         color: #222222;
         margin: 0 20px;
       }
+
       &.disable {
         cursor: not-allowed;
       }
+
       &.isOver {
         color: #fff;
         background-color: #ddd;
@@ -198,17 +243,20 @@ body {
       }
     }
   }
+
   .examRight {
     width: 40%;
     height: 100%;
     padding-left: 40px;
     background-color: #fff;
+
     .progress {
       h3 {
         color: #6417a6;
         font-size: 16px;
         padding-top: 40px;
       }
+
       p {
         color: #222;
         font-size: 14px;
@@ -216,23 +264,28 @@ body {
         text-align: right;
         margin: 10px 0;
       }
+
       .el-progress {
         width: 390px;
       }
     }
+
     .displayCard {
       width: 400px;
+
       h3 {
         color: #6417a6;
         font-size: 16px;
         padding-top: 40px;
         margin-bottom: 20px;
       }
+
       ul {
         font-size: 0;
         box-sizing: content-box;
         border-top: 1px solid #bfbfbf;
         border-left: 1px solid #bfbfbf;
+
         li {
           display: inline-block;
           width: 40px;
@@ -244,14 +297,17 @@ body {
           cursor: pointer;
           border-right: 1px solid #bfbfbf;
           border-bottom: 1px solid #bfbfbf;
+
           &.bgColor {
             background-color: #6417a6;
             color: #fff;
           }
+
           &.success {
             background-color: #379a38;
             color: #fff;
           }
+
           &.error {
             background-color: #ff5f5f;
             color: #fff;
@@ -259,10 +315,12 @@ body {
         }
       }
     }
+
     .commitBtn {
       margin-top: 50px;
     }
   }
+
   .shadow {
     width: 100%;
     height: 100%;
@@ -273,6 +331,7 @@ body {
     left: 0;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 100;
+
     .popup {
       width: 440px;
       height: 240px;
@@ -285,6 +344,7 @@ body {
       border-radius: 10px;
       background-color: #fff;
       text-align: center;
+
       .el-icon-close {
         position: absolute;
         right: 20px;
@@ -295,52 +355,64 @@ body {
         z-index: 3;
         cursor: pointer;
       }
+
       p {
         font-size: 16px;
         color: #222;
+
         &.smile {
           color: #379a38;
         }
+
         &.cry {
           color: #ff5f5f;
         }
+
         &.grade {
           width: 200px;
           height: 100px;
           margin: 0 auto;
           padding-top: 40px;
+
           img {
             width: 60px;
             height: 60px;
             display: inline-block;
             margin-right: 20px;
           }
+
           span {
             width: 100px;
             line-height: 30px;
             font-size: 16px;
             text-align: left;
+
             &:first-child {
               font-size: 30px;
             }
           }
         }
+
         &.subjectNumber {
           width: 200px;
           margin: 20px auto 0;
+
           i {
             color: #ff5f5f;
           }
         }
+
         &.noTime {
           color: #ff5f5f;
           font-size: 14px;
           margin-top: 10px;
         }
       }
+
       .sdwBtn {
         margin: 20px auto 0;
         text-align: center;
+
         span {
           width: 150px;
           height: 40px;
@@ -349,15 +421,18 @@ body {
           border-radius: 5px;
           margin: 0 20px;
           cursor: pointer;
+
           &.gonow {
             border: 1px solid #6417a6;
             background-color: #fff;
             color: #6417a6;
           }
+
           &.continue {
             background-color: #6417a6;
             color: #fff;
           }
+
           &.isOver {
             background-color: #ddd;
             border-color: #ddd;

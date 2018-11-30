@@ -43,6 +43,10 @@
           <i class="el-icon-error"></i>答错啦！
         </p>
         <p class="analysis">解析：</p>
+        <p class="countTime" v-if="isShowTime">
+          自动跳转到下一题倒计时：
+          <span>{{showTime}}s</span>
+        </p>
       </div>
       <div class="commitBtn">
         <span
@@ -159,6 +163,13 @@ export default {
       gidForm: {
         gids: ''
       },
+      pageData: {
+        id: '',
+        name: ''
+      },
+      isShowTime: false,
+      showTime: 5,
+      timer: ''
     }
   },
   methods: {
@@ -174,6 +185,7 @@ export default {
     },
     // 切换问题
     selectQuestion (item) {
+      this.closeCountDown()
       this.examForm.questionId = item.id
       this.changeToken()
     },
@@ -190,6 +202,9 @@ export default {
         examine.addAnswer(this.examForm).then(response => {
           if (response.status == 0) {
             this.setAssignment(response)
+            if (this.questionCurrent.number < this.questionNum) {
+              this.countDown()
+            }
           } else {
             message(this, 'error', response.msg)
           }
@@ -203,8 +218,24 @@ export default {
         })
       }
     },
+    // 倒计时跳转下一题
+    countDown () {
+      this.isShowTime = true
+      this.timer = setInterval(() => {
+        this.showTime < 1 ? this.nextAnswer() : this.showTime--
+      }, 1000);
+    },
+    // 关闭倒计时
+    closeCountDown () {
+      this.isShowTime = false
+      this.showTime = 5
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+    },
     // 上一题
     preAnswer () {
+      this.closeCountDown()
       if (this.questionPre != [] && this.questionPre.id) {
         this.examForm.questionId = this.questionPre.id
         this.changeToken()
@@ -214,6 +245,7 @@ export default {
     },
     // 下一题
     nextAnswer () {
+      this.closeCountDown()
       if (this.questionNext != [] && this.questionNext.id) {
         this.examForm.questionId = this.questionNext.id
         this.changeToken()
@@ -223,6 +255,7 @@ export default {
     },
     // 交卷确认信息
     commitExam () {
+      this.closeCountDown()
       if (
         persistStore.get('examToken') === persistStore.get('token') &&
         persistStore.get('token') != ''
@@ -250,7 +283,7 @@ export default {
       examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           message(this, 'success', '提交成功！')
-          this.handleBack()
+          this.handleBack(response.data.vip_id)
         } else {
           message(this, 'error', response.msg)
         }
@@ -260,9 +293,13 @@ export default {
     closeChadow () {
       this.showShadow = false
     },
-    handleBack () {
+    handleBack (id) {
+      this.pageData.id = id
+      this.pageData.name = 'record'
       this.goProfile('tab-tenth')
-      this.$bus.$emit('whichShow', 'list')
+      setTimeout(() => {
+        this.$bus.$emit('whichShow', this.pageData)
+      }, 500);
     },
     // 转换时间格式
     changeTime (time) {
