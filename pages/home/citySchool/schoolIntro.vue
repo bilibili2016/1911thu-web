@@ -31,13 +31,13 @@
       <!-- <p class="bottom"><span @click="handleLink('/home/citySchool/schoolApplication')">立即申请</span></p> -->
       <div class="apply">
         <div class="applyInputs">
-          <div class="con-item counsel clearfix">
+          <!-- <div class="con-item counsel clearfix">
             <div class="fl">申请咨询：</div>
             <div class="fr">
               <p>闫雨辰&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15117961911&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yanyuchen@1911thu.com</p>
               <p>谢晓辉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18614061911&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xiexiaohui@1911thu.com</p>
             </div>
-          </div>
+          </div> -->
 
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>城市：</div>
