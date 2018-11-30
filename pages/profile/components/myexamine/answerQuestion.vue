@@ -187,10 +187,7 @@ export default {
     },
     // 提交当前问题
     answer () {
-      if (
-        persistStore.get('examToken') === persistStore.get('token') &&
-        persistStore.get('token') != ''
-      ) {
+      if (persistStore.get('token') != '' && persistStore.get('examToken') === persistStore.get('token')) {
         if (this.questionCurrent.is_right != 0) {
           return false
         }
@@ -252,10 +249,7 @@ export default {
     // 交卷确认信息
     commitExam () {
       this.closeCountDown()
-      if (
-        persistStore.get('examToken') === persistStore.get('token') &&
-        persistStore.get('token') != ''
-      ) {
+      if (persistStore.get('token') != '' && persistStore.get('examToken') === persistStore.get('token')) {
         examine.submitTestPaper(this.examForm).then(response => {
           if (response.status == 0) {
             this.testPaper = response.data
@@ -365,10 +359,7 @@ export default {
     },
     // 登录账号被替换
     changeToken () {
-      if (
-        persistStore.get('examToken') === persistStore.get('token') &&
-        persistStore.get('token') != ''
-      ) {
+      if (persistStore.get('token') != '' && persistStore.get('examToken') === persistStore.get('token')) {
         this.questionsDetail()
       } else {
         this.$alert('您已登录其他账号，无法继续考试！', '温馨提示', {
