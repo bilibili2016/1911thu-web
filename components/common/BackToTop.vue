@@ -2,7 +2,7 @@
   <div class="infoItem">
     <transition :name="transitionName">
       <div class="back-to-ceiling customStyle" @click="backToTop" v-show="visible">
-        <img class="topSrc" :src="topSrc" alt="">
+        <img class="topSrc" :src="topSrc" alt>
         <!-- <i class="topSrc"></i> -->
       </div>
     </transition>
@@ -17,7 +17,6 @@
       </div>
     </transition>
     <transition :name="transitionName">
-      <!-- <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&key=1060962187"> -->
       <!-- <a href="http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes"> -->
       <div class="back-to-ceiling hasColor customStyleFour" v-show="visible" @click="handleopen">
         <span></span>
@@ -44,15 +43,14 @@
           <!-- <img src="http://static-image.1911edu.com/customProject-gif.gif" alt=""> -->
           <!-- <div class="line-centerd">
             <span>定制项目</span>
-          </div> -->
+          </div>-->
         </div>
       </div>
     </transition>
     <!-- 客服 -->
-    <el-dialog class="chatDialog" title="" :visible.sync="dialogVisible" top="20px">
+    <el-dialog class="chatDialog" title :visible.sync="dialogVisible" top="20px">
       <div>
-        <iframe id="service" name="myframe" :src="completeTask" height="620" width="100%">
-        </iframe>
+        <iframe id="service" name="myframe" :src="completeTask" height="620" width="100%"></iframe>
       </div>
     </el-dialog>
   </div>
@@ -81,7 +79,7 @@ export default {
     // },
     'data'
   ],
-  data() {
+  data () {
     return {
       dialogVisible: false,
       visibilityHeight: 400,
@@ -99,10 +97,10 @@ export default {
         'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003072'
     }
   },
-  mounted() {
+  mounted () {
     window.addEventListener('scroll', this.handleScroll)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
     if (this.interval) {
       clearInterval(this.interval)
@@ -112,15 +110,15 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
-    handleScroll() {
+    handleScroll () {
       this.visible = window.pageYOffset > this.visibilityHeight
       // this.visible = true
     },
-    showTips(show) {
+    showTips (show) {
       this.showNotLogin = show
     },
     //跳转到自定制项目
-    goCustomerProject() {
+    goCustomerProject () {
       if (persistStore.get('token')) {
         this.$router.push({
           path: '/project/customerProject',
@@ -134,21 +132,21 @@ export default {
       }
     },
     // 我要选课
-    checkCourse() {
+    checkCourse () {
       if (persistStore.get('token')) {
         // this.goLink('/course/chooselesson')
         // 整合后的跳转
 
         window.open(
           window.location.origin +
-            '/course/category' +
-            '?cid=' +
-            '0' +
-            '&cp=' +
-            '0' +
-            '&xid=1' +
-            '&pids=' +
-            '0'
+          '/course/category' +
+          '?cid=' +
+          '0' +
+          '&cp=' +
+          '0' +
+          '&xid=1' +
+          '&pids=' +
+          '0'
         )
         // this.showNotLogin = false
       } else {
@@ -156,7 +154,7 @@ export default {
         this.$bus.$emit('loginShow')
       }
     },
-    backToTop() {
+    backToTop () {
       if (this.move) {
         const start = window.pageYOffset
         let i = 0
@@ -176,14 +174,14 @@ export default {
         }, 16.7)
       }
     },
-    goLink(item) {
+    goLink (item) {
       this.$router.push(item)
     },
-    easeInOutQuad(t, b, c, d) {
+    easeInOutQuad (t, b, c, d) {
       if ((t /= d / 2) < 1) return (c / 2) * t * t + b
       return (-c / 2) * (--t * (t - 2) - 1) + b
     },
-    handleopen() {
+    handleopen () {
       // window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')
       // window.open(
       //   'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003068#/'

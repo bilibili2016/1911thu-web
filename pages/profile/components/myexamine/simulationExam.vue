@@ -59,8 +59,9 @@
           :class="{disable:JSON.stringify(questionNext)=='{}'}"
           @click="nextAnswer"
         >下一题</span>
-        <span v-if="isOver" class="isOver">提交</span>
-        <span v-else @click="answer" :class="{disable:questionCurrent.is_right!=0}">提交</span>
+        <span v-if="isOver||questionCurrent.is_right!=0" class="isOver">提交</span>
+        <!-- :class="{disable:questionCurrent.is_right!=0}" -->
+        <span v-else @click="answer">提交</span>
       </div>
     </div>
     <div class="examRight fr">
@@ -87,8 +88,7 @@
     </div>
     <div class="shadow" v-if="showShadow">
       <div class="popup" v-if="showShadow">
-        <i class="el-icon-close" @click="closeChadow"></i>
-        <!-- <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i> -->
+        <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i>
         <p class="grade smile" v-if="testPaper.doYouPass">
           <img src="~assets/images/smile.png" class="fl" alt>
           <span>{{testPaper.answerScoreSum}}分</span>
@@ -191,10 +191,7 @@ export default {
     },
     // 提交当前问题
     answer () {
-      if (
-        persistStore.get('examToken') === persistStore.get('token') &&
-        persistStore.get('token') != ''
-      ) {
+      if (persistStore.get('token') != '' && persistStore.get('testExamToken') === persistStore.get('token')) {
         if (this.questionCurrent.is_right != 0) {
           return false
         }
@@ -256,10 +253,7 @@ export default {
     // 交卷确认信息
     commitExam () {
       this.closeCountDown()
-      if (
-        persistStore.get('examToken') === persistStore.get('token') &&
-        persistStore.get('token') != ''
-      ) {
+      if (persistStore.get('token') != '' && persistStore.get('testExamToken') === persistStore.get('token')) {
         examine.submitTestPaper(this.examForm).then(response => {
           if (response.status == 0) {
             this.testPaper = response.data
@@ -372,10 +366,7 @@ export default {
     },
     // 登录账号被替换
     changeToken () {
-      if (
-        persistStore.get('examToken') === persistStore.get('token') &&
-        persistStore.get('token') != ''
-      ) {
+      if (persistStore.get('token') != '' && persistStore.get('testExamToken') === persistStore.get('token')) {
         this.questionsDetail()
       } else {
         this.$alert('您已登录其他账号，无法继续考试！', '温馨提示', {
@@ -392,9 +383,9 @@ export default {
     if (window.location.search) {
       this.examForm.examId = matchSplits('id')
       // 验证token是否有效
-      persistStore.get('examToken')
+      persistStore.get('testExamToken')
         ? this.changeToken()
-        : (persistStore.set('examToken', persistStore.get('token')),
+        : (persistStore.set('testExamToken', persistStore.get('token')),
           this.questionsDetail())
       if (this.interval) {
         clearInterval(this.interval)
@@ -413,7 +404,7 @@ export default {
   // 出路由显示header和footer
   beforeRouteLeave (to, from, next) {
     this.$bus.$emit('headerFooterShow')
-    persistStore.set('examToken', '')
+    persistStore.set('testExamToken', '')
     next()
   }
 }
