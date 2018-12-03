@@ -19,10 +19,12 @@
       :categoryData="categoryData"
       :childList="childList"
       :unitData="unitData"
+      :sortData="sortData"
       @processData="processData"
       @selectCid="selectCid"
       @selectPid="selectPid"
       @selectUid="selectUid"
+      @selectKid="selectKid"
       @changeCid="changeCid"
     ></v-category>
     <div
@@ -93,6 +95,7 @@ export default {
   },
   data() {
     return {
+      sortData: [],
       unitData: [],
       categoryData: [],
       childList: [],
@@ -115,7 +118,8 @@ export default {
         limits: 9,
         cid: 0,
         pid: 0,
-        uid: 0
+        uid: 0,
+        kid: 0
       },
       pagemsg: {
         page: 1,
@@ -191,6 +195,11 @@ export default {
       this.teacherForm.uid = data.id;
       this.getNewInfoList();
     },
+    //类别
+    selectKid(data, index) {
+      this.teacherForm.kid = data.id;
+      this.getNewInfoList();
+    },
     //一级分类下没有二级分类进行初始化
     changeCid(data) {
       this.teacherForm.pid = data;
@@ -202,6 +211,18 @@ export default {
           this.unitData = res.data.teacherCompanyList;
           this.unitData.unshift({
             company_name: "全部",
+            id: 0
+          });
+        }
+      });
+    },
+    //教师类别列表
+    teacherKindList() {
+      list.teacherKindList().then(res => {
+        if (res.status === 0) {
+          this.sortData = res.data.categoryList;
+          this.sortData.unshift({
+            category_name: "全部",
             id: 0
           });
         }
@@ -258,6 +279,7 @@ export default {
     setTitle("名师智库-1911学堂");
     this.getHeaderList();
     this.initTeacherList();
+    this.teacherKindList();
     this.teacherCompanyList();
     // console.log(persistStore.get("cid"), "llldd");
     // if (persistStore.get("cid") != 0) {

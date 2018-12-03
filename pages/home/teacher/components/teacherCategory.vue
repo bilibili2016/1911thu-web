@@ -1,6 +1,22 @@
 <template>
   <div class="teacherCategory">
     <div
+      class="classsfiy"
+      v-if="sortData.length>1"
+    >
+      <h4 class="title">类别：</h4>
+      <ul class="ulList">
+        <li
+          v-for="(item,index) in sortData"
+          :index="index"
+          :key="index"
+          :class="{btnBg: kid === item.id ? true : false }"
+        >
+          <el-button @click="selectKid(item,index)">{{item.category_name}}</el-button>
+        </li>
+      </ul>
+    </div>
+    <div
       class="college"
       v-if="categoryData.length>1"
     >
@@ -56,13 +72,14 @@
 import { mapState, mapActions } from "vuex";
 import { list } from "~/lib/v1_sdk/index";
 export default {
-  props: ["unitData", "categoryData", "childList"],
+  props: ["unitData", "categoryData", "childList", "sortData"],
   data() {
     return {
       categoryIndex: 0,
       cid: "0",
       pid: "0",
       uid: 0,
+      kid: 0,
       cp: "",
       categoryList: []
     };
@@ -81,9 +98,15 @@ export default {
       this.pid = item.id;
       this.$emit("selectPid", item, index);
     },
+    //所在单位
     selectUid(item, index) {
       this.uid = item.id;
       this.$emit("selectUid", item, index);
+    },
+    //类别
+    selectKid(item, index) {
+      this.uid = item.id;
+      this.$emit("selectKid", item, index);
     }
   }
 };
