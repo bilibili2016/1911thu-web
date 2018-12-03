@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="payResult">
-      <img v-if="success" src="http://static-image.1911edu.com/success.png" alt="">
-      <img v-else src="http://static-image.1911edu.com/error.png" alt="">
+    <div class="payResult" v-if="!collegePay">
+      <img v-if="success" src="http://static-image.1911edu.com/success.png" alt>
+      <img v-else src="http://static-image.1911edu.com/error.png" alt>
       <h4 v-if="success">支付成功！</h4>
       <h4 v-else>支付失败！</h4>
       <div class="restltMsg" v-if="success">
         <p>
           <span>订单：{{payCompleteData.order_sn}}</span>
-          <span> | </span>
+          <span>|</span>
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
@@ -19,12 +19,15 @@
         </h5>
         <div class="goback">
           <span>
-            <i>{{seconds}}</i>s后</span>前往个人中心</div>
+            <i>{{seconds}}</i>s后
+          </span>前往个人中心
+        </div>
       </div>
       <div class="restltWord" v-if="hasCode" v-show="showMsg">
         <div class="tips">
           <p class="tips-one">您的兑换码已经生成</p>
-          <p>请前往
+          <p>
+            请前往
             <span class="tips-two">“我的中心 — 兑换码管理”</span>页面查看，绑定后可观看课程/加入学院
           </p>
         </div>
@@ -32,9 +35,16 @@
           <span @click="goLink('tab-seventh')">确定</span>
         </p>
       </div>
-
     </div>
-
+    <div class="collegePay" v-else>
+      <img src="http://static-image.1911edu.com/collegePay.png" alt>
+      <p>欢迎您加入在线干部学院，成为1911学堂学员，</p>
+      <p>您将在1911学堂开启为期一年的学习之旅，开始学习吧！</p>
+      <div>
+        <span @click="college">返回学院</span>
+        <span @click="study">开始学习</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,7 +54,7 @@ import { payResult } from '@/lib/v1_sdk/index'
 import { banBackSpace, matchSplits, message } from '@/lib/util/helper'
 import { store as persistStore } from '~/lib/core/store'
 export default {
-  data() {
+  data () {
     return {
       success: true,
       payCompleteForm: {
@@ -59,13 +69,15 @@ export default {
       interval: null,
       links: '',
       showMsg: false,
-      isVipCode: false
+      isVipCode: false,
+      collegePay: false,
+      vipGoodsDetail: {}
     }
   },
   methods: {
     ...mapActions('auth', ['setGid']),
     // 继续选课
-    handleChoiceCourse() {
+    handleChoiceCourse () {
       this.$router.push({
         path: '/course/category',
         query: {
@@ -77,7 +89,7 @@ export default {
       })
     },
     // 点击查看订单
-    handleLinkProfile(item) {
+    handleLinkProfile (item) {
       this.gidForm.gids = item
       this.setGid(this.gidForm)
       this.$router.push('/profile')
@@ -90,7 +102,7 @@ export default {
         }
       })
     },
-    payComplete() {
+    payComplete () {
       this.payCompleteForm.orderId = matchSplits('order')
       payResult.payComplete(this.payCompleteForm).then(response => {
         if (response.status == 0) {
@@ -109,9 +121,12 @@ export default {
             this.links = 'tab-first'
           }
           if (response.data.curriculumListType == '5') {
-            // 订单内课程+项目
-            this.isVipCode = true
-            this.links = 'tab-eleventh'
+            // 订单内学院
+            // this.isVipCode = true
+            // this.links = 'tab-eleventh'
+            this.collegePay = true
+            this.vipGoodsDetail = response.data.vipGoodsDetail
+            return false
           }
 
           if (response.data.invitation_code === '') {
@@ -138,28 +153,49 @@ export default {
         }
       })
     },
-    goLink(item) {
+    goLink (item) {
       this.gidForm.gids = item
       this.setGid(this.gidForm)
       clearInterval(this.interval)
       this.$router.push('/profile')
       this.$bus.$emit('selectProfileIndex', item)
+    },
+    college () {
+      this.$router.push({
+        path: '/home/vip/vipPage',
+        query: {
+          id: this.vipGoodsDetail.vip_id,
+          cid: this.vipGoodsDetail.category_id
+        }
+      })
+    },
+    study () {
+      this.$router.push({
+        path: '/course/category',
+        query: {
+          cid: this.vipGoodsDetail.category_id,
+          cp: 0,
+          pids: 0,
+          xid: 0
+        }
+      })
     }
+
   },
-  mounted() {
+  mounted () {
     // window.history.go(-1)
     this.ref = this.$route.query.ref
     this.payComplete()
     this.link = this.$route.path
     //禁止浏览器的后退
     history.pushState(null, null, document.URL)
-    window.addEventListener('popstate', function() {
+    window.addEventListener('popstate', function () {
       history.pushState(null, null, document.URL)
     })
   }
 }
 </script>
 <style scoped lang="scss">
-@import '~assets/style/shop/payResult.scss';
+@import "~assets/style/shop/payResult.scss";
 </style>
 

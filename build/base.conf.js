@@ -43,9 +43,8 @@ const config = {
     app: './src/main.js'
   },
   head: {
-    title: '1911学堂-党政干部与企事业单位高管的终身学堂',
-    meta: [
-      {
+    title: '1911学堂-致力于终身教育的互联网学校',
+    meta: [{
         charset: 'utf-8'
       },
       {
@@ -64,7 +63,7 @@ const config = {
       {
         hid: 'description',
         name: 'description',
-        content: '1911学堂-党政干部与企事业单位高管的终身学堂'
+        content: '1911学堂-致力于终身教育的互联网学校'
       }
     ],
     link: [
@@ -86,31 +85,24 @@ const config = {
   router: {
     base: baseRouter
   },
-  plugins: [
-    {
-      src: '~/plugins/main',
-      ssr: false
-    }
-  ],
+  plugins: [{
+    src: '~/plugins/main',
+    ssr: false
+  }],
   modules: [
     // ['nuxt-i18n', I18N.I18N]
   ],
-  rules: [
-    {
-      test: /.js$/,
-      enforce: 'post', // post-loader处理
-      loader: 'es3ify-loader'
-    }
-  ],
-  postLoaders: [
-    {
-      test: /\.js$/,
-      loaders: ['es3ify-loader']
-    }
-  ],
+  rules: [{
+    test: /.js$/,
+    enforce: 'post', // post-loader处理
+    loader: 'es3ify-loader'
+  }],
+  postLoaders: [{
+    test: /\.js$/,
+    loaders: ['es3ify-loader']
+  }],
   module: {
-    loaders: [
-      {
+    loaders: [{
         test: /.js$/,
         exclude: /node_modules/,
         enforce: 'post', // post-loader处理
@@ -126,18 +118,15 @@ const config = {
         }
       }
     ],
-    postLoaders: [
-      {
-        test: /\.js$/,
-        loaders: ['es3ify-loader']
-      }
-    ]
+    postLoaders: [{
+      test: /\.js$/,
+      loaders: ['es3ify-loader']
+    }]
   },
   build: {
     extractCSS: true,
     vendor: ['axios', 'loglevel'],
-    rules: [
-      {
+    rules: [{
         test: /.js$/,
         enforce: 'post', // post-loader处理
         loader: 'es3ify-loader'
@@ -151,12 +140,10 @@ const config = {
         }
       }
     ],
-    postLoaders: [
-      {
-        test: /\.js$/,
-        loaders: ['es3ify-loader']
-      }
-    ],
+    postLoaders: [{
+      test: /\.js$/,
+      loaders: ['es3ify-loader']
+    }],
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
         compress: {
