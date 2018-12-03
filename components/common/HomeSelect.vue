@@ -42,7 +42,13 @@
           </ul>
         </div>
       </div> -->
-      <div class="dropItem headerClass " v-for="(item,index) in vipArr" :key="index" @click="handleVipItem(item,index)" v-if="index<2">
+      <div
+        class="dropItem headerClass "
+        v-for="(item,index) in vipArr"
+        :key="index"
+        @click="handleVipItem(item,index)"
+        v-if="index<2"
+      >
         <span class="el-dropdown-link">
           {{item.title}}
           <span class="downLine"></span>
@@ -50,58 +56,65 @@
       </div>
 
     </div>
-    <div class="teach headerClass" @click="handleLink('/home/teacher/list')">
+    <div
+      class="teach headerClass"
+      @click="handleLink('/home/teacher/list')"
+    >
       <span>名师智库</span>
     </div>
-    <div class="city headerClass" @click="handleLink('/home/citySchool/schoolIntro')">
+    <div
+      class="city headerClass"
+      @click="handleLink('/home/citySchool/schoolIntro')"
+    >
       <span>城市分校</span>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
-import { home } from '~/lib/v1_sdk/index'
+import { mapState, mapActions, mapGetters } from "vuex";
+import { store as persistStore } from "~/lib/core/store";
+import { home } from "~/lib/v1_sdk/index";
 export default {
   // props: ['categoryArr', 'projectArr', 'vipArr'], vipArr不动态获取了
-  props: ['categoryArr', 'projectArr'],
+  props: ["categoryArr", "projectArr"],
   data() {
     return {
       vipArr: [
         {
-          id: '2',
-          category_id: '1',
-          title: '在线干部学院'
+          id: "2",
+          category_id: "1",
+          title: "在线干部学院"
         },
         {
-          id: '3',
-          category_id: '17',
-          title: '在线商学院'
+          id: "3",
+          category_id: "17",
+          title: "在线商学院"
         }
       ]
-    }
+    };
   },
   methods: {
     // 公共路由方法
     handleLink(data) {
-      this.$emit('handleLink', data)
+      persistStore.set("cid", 0);
+      this.$emit("handleLink", data);
     },
     handleSelectItem(item) {
-      this.$emit('handleSelectItem', item)
+      this.$emit("handleSelectItem", item);
     },
     handleVipItem(item, index) {
-      persistStore.set('selectItem', index)
+      persistStore.set("selectItem", index);
       this.$router.push({
-        path: '/home/vip/vipPage',
+        path: "/home/vip/vipPage",
         query: {
           id: item.id,
           cid: item.category_id
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

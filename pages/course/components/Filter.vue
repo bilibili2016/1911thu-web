@@ -2,12 +2,28 @@
   <div>
     <div class="classification">
       <div class="clsTitle clearfix">
-        <div class="fl hotBtn">
-          <el-tabs v-model="activeName" @tab-click="selectActiveTab">
-            <el-tab-pane label="全部" name="first"></el-tab-pane>
-            <el-tab-pane label="最新" name="second"></el-tab-pane>
-            <el-tab-pane label="最热" name="third"></el-tab-pane>
+        <div class="fl hotBtn clearfix">
+          <el-tabs
+            v-model="activeName"
+            @tab-click="selectActiveTab"
+          >
+            <el-tab-pane
+              label="全部"
+              name="first"
+            ></el-tab-pane>
+            <el-tab-pane
+              label="最新"
+              name="second"
+            ></el-tab-pane>
+            <el-tab-pane
+              label="最热"
+              name="third"
+            ></el-tab-pane>
           </el-tabs>
+          <div
+            class="teacher"
+            @click="handleLink('/home/teacher/list')"
+          >专家委员会</div>
         </div>
         <!-- <div class="fr rightPages">
           <span v-show="hideSwitch">
@@ -21,19 +37,30 @@
 </template>
 
 <script>
+import { matchSplits } from "@/lib/util/helper";
+import { store as persistStore } from "~/lib/core/store";
+
 export default {
   data() {
     return {
-      activeName: 'first',
-      onOff: 'true',
-      hideSwitch: true
-    }
+      activeName: "first",
+      onOff: "true",
+      hideSwitch: true,
+      cid: ""
+    };
   },
   methods: {
     selectActiveTab(tab) {
-      this.$emit('selectActiveTab', tab)
+      this.$emit("selectActiveTab", tab);
+    },
+    handleLink(page) {
+      persistStore.set("cid", this.cid);
+      this.$router.push(page);
     }
+  },
+  mounted() {
+    this.cid = matchSplits("cid");
   }
-}
+};
 </script>
 
