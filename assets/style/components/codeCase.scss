@@ -6,6 +6,7 @@
   top: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 200;
+
   .innerWord {
     width: 580px;
     height: 390px;
@@ -15,6 +16,7 @@
     margin-left: -290px;
     border-radius: 10px;
     background-color: #fff;
+
     .closeEcg {
       position: absolute;
       right: 10px;
@@ -22,30 +24,36 @@
       font-size: 30px;
       color: #773084;
     }
+
     .changeContent {
       width: 100%;
       margin-top: 72px;
       padding: 0 35px;
+
       .changeInput {
         span {
           color: #222;
           font-size: 16px;
           margin-right: 20px;
         }
+
         input {
           width: 400px;
           height: 50px;
           border-radius: 5px;
           padding-left: 20px;
           background-color: #f1e9f8;
+
           ::placeholder {
             color: #c099ec;
             font-size: 14px;
           }
         }
+
         p {
           height: 30px;
           line-height: 30px;
+
           span {
             font-size: 13px;
             color: #ff5f5f;
@@ -53,17 +61,23 @@
           }
         }
       }
+
       .changeTips {
-        padding-top: 30px;
-        // padding-left: 120px;
-        width: 430px;
+        padding-top: 20px;
         margin: 0 auto;
+
+        h4 {
+          font-size: 16px;
+          line-height: 30px;
+        }
+
         p {
           color: #aaa;
           font-size: 12px;
           line-height: 24px;
         }
       }
+
       .bind {
         width: 125px;
         height: 42px;
@@ -74,6 +88,7 @@
         border-radius: 21px;
         background-color: #cccccc;
         cursor: pointer;
+
         &.input {
           background-color: #773084;
         }

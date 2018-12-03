@@ -59,8 +59,9 @@
           :class="{disable:JSON.stringify(questionNext)=='{}'}"
           @click="nextAnswer"
         >下一题</span>
-        <span v-if="isOver" class="isOver">提交</span>
-        <span v-else @click="answer" :class="{disable:questionCurrent.is_right!=0}">提交</span>
+        <span v-if="isOver||questionCurrent.is_right!=0" class="isOver">提交</span>
+        <!-- :class="{disable:questionCurrent.is_right!=0}" -->
+        <span v-else @click="answer">提交</span>
       </div>
     </div>
     <div class="examRight fr">
@@ -87,8 +88,7 @@
     </div>
     <div class="shadow" v-if="showShadow">
       <div class="popup" v-if="showShadow">
-        <i class="el-icon-close" @click="closeChadow"></i>
-        <!-- <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i> -->
+        <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i>
         <p class="grade smile" v-if="testPaper.doYouPass">
           <img src="~assets/images/smile.png" class="fl" alt>
           <span>{{testPaper.answerScoreSum}}分</span>
