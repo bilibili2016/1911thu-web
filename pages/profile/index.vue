@@ -1166,10 +1166,10 @@ export default {
       let data = {
         type: false,
         res: {
-          msg: '您的账号在其它位置登录了'
+          msg: '您还没有登录，请先登录吧！'
         }
       }
-      this.$bus.$emit('reLoginAlertPop', data)
+      this.$bus.$emit('notLogIn', data)
     }
   },
   beforeDestroy () {
