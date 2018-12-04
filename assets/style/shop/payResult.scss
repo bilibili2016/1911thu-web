@@ -1,48 +1,58 @@
 .payResult {
   width: 520px;
   margin: 121px auto;
+
   img {
     width: 114px;
     height: 114px;
     display: block;
     margin: 0 auto;
   }
+
   h4 {
     text-align: center;
     color: #ff5f5f;
     font-size: 20px;
     line-height: 70px;
   }
+
   .restltMsg {
     width: 100%;
     margin: 0 auto;
     line-height: 20px;
+
     p {
       text-align: center;
       color: #222;
       font-size: 16px;
+
       span:nth-child(2) {
         margin: 0 20px;
       }
     }
+
     h6 {
       font-size: 16px;
       color: #222;
     }
   }
+
   .restltWord {
     .goback {
       width: 100%;
       text-align: center;
       margin: 80px auto;
+
       i {
         color: #773084;
       }
     }
+
     h5 {
       font-size: 16px;
       text-align: center;
       margin-top: 40px;
+
       span {
         width: 160px;
         height: 40px;
@@ -52,15 +62,18 @@
         border: 1px solid #773084;
         font-size: 14px;
         cursor: pointer;
+
         &:first-child {
           background-color: #773084;
           color: #fff;
         }
+
         &:nth-child(2) {
           margin-left: 40px;
         }
       }
     }
+
     .tips {
       width: 560px;
       margin-top: 30px;
@@ -71,22 +84,28 @@
       background-color: #f6eefd;
       text-align: center;
       padding: 20px;
+
       p {
         line-height: 30px;
+
         span {
           color: #5b20a0;
         }
       }
+
       .tips-one {
         color: #7f7b83;
       }
+
       .tips-two {
         color: #333;
       }
     }
+
     .sure {
       text-align: center;
       margin-top: 30px;
+
       span {
         width: 150px;
         height: 40px;
@@ -96,6 +115,44 @@
         color: #fff;
         background: rgba(91, 32, 160, 1);
         border-radius: 6px;
+      }
+    }
+  }
+}
+
+.collegePay {
+  padding-top: 112px;
+  text-align: center;
+
+  img {
+    width: 334px;
+    height: 144px;
+  }
+
+  p {
+    width: 420px;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #222;
+    line-height: 32px;
+  }
+
+  div {
+    span {
+      width: 150px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background-color: #5B20A0;
+      border: 1px solid #5B20A0;
+      color: #fff;
+      border-radius: 6px;
+      margin: 30px 10px 0;
+      cursor: pointer;
+
+      &:last-child {
+        background-color: #fff;
+        color: #5B20A0;
       }
     }
   }
