@@ -39,7 +39,7 @@
             </div>
             <div class="second text clearfix">
               <div class="left">多元化学习模式</div>
-              <div class="right">结合线上人机交互优势和线下人文互动优势，研发了线上学习以及互动式和顾问式三种学习模式。
+              <div class="right">以提升学习效能为目标导向，综合考虑学习者的学习习惯及学习目标的要求，结合线上学习人机交互的技术优势以及线下学习人文互动的情感优势，基于学员的学习场景，研发了“线上+线下”混合式学习模式。
                 <div class="con-shadow"></div>
               </div>
             </div>
@@ -53,18 +53,18 @@
         </div>
       </div>
       <div class="course serviceDetails clearfix">
-        <h3>1911学堂互动式项目</h3>
+        <h3>1911学堂混合式项目</h3>
         <div class="course-left courseCon clearfix">
           <div class="img">
             <img
               src="http://static-image.1911edu.com/institutional-icon3.png"
               alt=""
             >
-            <div>互动式</div>
+            <div>标准内训项目</div>
           </div>
           <div class="con">
             <div class="text">
-              1911学堂首创“线下+线上”互动式学习模式，更加注重人文互动即师生互动、生生互动，以及提升实践能力、构建学习社群。
+              1911学堂“线上+线下”混合式学习模式，充分发挥线上线下两种优势，线上学习可以让学员在移动端及PC端随时随地便捷学习；线下学习更加注重人文互动即师生互动、生生互动。
             </div>
           </div>
           <div
@@ -80,7 +80,7 @@
               src="http://static-image.1911edu.com/institutional-icon2.png"
               alt=""
             >
-            <div>自定制项目</div>
+            <div>委托定制项目</div>
           </div>
           <div class="con">
             <div class="text">
@@ -96,7 +96,7 @@
         </div>
 
       </div>
-      <div class="course serviceDetails clearfix">
+      <!-- <div class="course serviceDetails clearfix">
         <h3 style="padding-top:0px;">1911学堂顾问式指导</h3>
         <div class="course-left courseCon clearfix">
           <div class="img">
@@ -138,7 +138,7 @@
             立即咨询
           </div>
         </div>
-      </div>
+      </div> -->
       <div
         class="bottomForm"
         id="buttom"
