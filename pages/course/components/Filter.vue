@@ -20,10 +20,10 @@
               name="third"
             ></el-tab-pane>
           </el-tabs>
-          <div
+          <!-- <div
             class="teacher"
             @click="handleLink('/home/teacher/list')"
-          >学术委员会</div>
+          >学术委员会</div> -->
         </div>
         <!-- <div class="fr rightPages">
           <span v-show="hideSwitch">

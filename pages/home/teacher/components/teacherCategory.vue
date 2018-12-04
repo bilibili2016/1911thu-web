@@ -1,6 +1,6 @@
 <template>
   <div class="teacherCategory">
-    <div
+    <!-- <div
       class="classsfiy"
       v-if="sortData.length>1"
     >
@@ -15,7 +15,7 @@
           <el-button @click="selectKid(item,index)">{{item.category_name}}</el-button>
         </li>
       </ul>
-    </div>
+    </div> -->
     <div
       class="college"
       v-if="categoryData.length>1"
