@@ -298,7 +298,11 @@ export default {
     },
     // 获取职业列表
     getPositionList () {
+      console.log(1111111);
+
       personalset.positionList().then(res => {
+        console.log(222222);
+
         let tmp = res.data
         this.options = tmp.map(item => {
           return { label: item.position_name, value: item.id }
@@ -362,6 +366,10 @@ export default {
   },
   mounted () {
     this.psnForm = this.data
+    if (persistStore.get('gid') && persistStore.get('gid') == "tab-sixth") {
+      this.getPositionList()
+      this.getRegionList()
+    }
     this.$bus.$on('getPositionList', data => {
       this.getPositionList()
       this.getRegionList()
