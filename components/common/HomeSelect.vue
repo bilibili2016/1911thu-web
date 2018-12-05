@@ -1,118 +1,126 @@
 <template>
   <div class="headerPage clearfix">
-    <div class="backHome headerClass">
-      <span @click="handleLink('/')">首页</span>
-    </div>
-    <div class="fl dropdown clearfix">
-      <!-- <div class="dropItem headerClass">
-        <span class="el-dropdown-link" @click="handleSelectItem({id:0,is_picture_show:0})">
-          全部学院
-          <i class="el-icon-arrow-down el-icon--right"></i>
-          <span class="downLine"></span>
-        </span>
-        <div class="drops">
-          <ul>
-            <li v-for="(item,index) in categoryArr" :key="index" @click="handleSelectItem(item)">{{item.category_name}}</li>
-          </ul>
-        </div>
-      </div> -->
-      <!-- <div class="dropItem headerClass">
-        <span class="el-dropdown-link" @click="handleSelectItem({id:0,is_picture_show:1})">
-          培训项目
-          <i class="el-icon-arrow-down el-icon--right"></i>
-          <span class="downLine"></span>
-        </span>
-        <div class="drops">
-          <ul>
-            <li v-for="(item,index) in projectArr" :key="index" @click="handleSelectItem(item)">{{item.category_name}}</li>
-          </ul>
-        </div>
-
-      </div> -->
-      <!-- <div class="dropItem  headerClass vipItem"> -->
-      <!-- <div class="dropItem  headerClass ">
-        <span class="el-dropdown-link">
-          VIP会员
-          <i class="el-icon-arrow-down el-icon--right"></i>
-          <span class="downLine"></span>
-        </span>
-        <div class="drops">
-          <ul>
-            <li v-for="(item,index) in vipArr" :key="index" @click="handleVipItem(item)">{{item.title}}</li>
-          </ul>
-        </div>
-      </div> -->
-      <div
-        class="dropItem headerClass "
-        v-for="(item,index) in vipArr"
-        :key="index"
-        @click="handleVipItem(item,index)"
-        v-if="index<2"
-      >
-        <span class="el-dropdown-link">
-          {{item.title}}
-          <span class="downLine"></span>
-        </span>
-      </div>
-
-    </div>
     <div
-      class="teach headerClass"
-      @click="handleLink('/home/teacher/list')"
-    >
-      <span>名师智库</span>
-    </div>
-    <div
-      class="city headerClass"
-      @click="handleLink('/home/citySchool/schoolIntro')"
-    >
-      <span>城市分校</span>
-    </div>
+      class="item"
+      :class="{active:changeActive==item.id}"
+      v-for="(item,index) in pages"
+      :key="index"
+      @click="handleClick(item,index)"
+    >{{item.title}}</div>
   </div>
 </template>
 
 <script>
+import { matchSplits, setTitle, message } from "@/lib/util/helper";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { home } from "~/lib/v1_sdk/index";
 export default {
-  // props: ['categoryArr', 'projectArr', 'vipArr'], vipArr不动态获取了
   props: ["categoryArr", "projectArr"],
   data() {
     return {
-      vipArr: [
+      changeActive: "",
+      pages: [],
+      item1: [
         {
-          id: "2",
-          category_id: "1",
+          title: "首页",
+          id: "index"
+        }
+      ],
+      item2: [
+        {
+          id: "",
+          category_id: "",
           title: "在线干部学院"
         },
         {
-          id: "3",
-          category_id: "17",
+          id: "",
+          category_id: "",
           title: "在线商学院"
+        }
+      ],
+      item3: [
+        {
+          title: "名师智库",
+          id: "teacher"
+        },
+        {
+          title: "城市分校",
+          id: "school"
         }
       ]
     };
   },
   methods: {
-    // 公共路由方法
-    handleLink(data) {
-      persistStore.set("cid", 0);
-      this.$emit("handleLink", data);
+    handleClick(item, index) {
+      let path = "";
+      switch (item.id) {
+        case "index":
+          this.$router.push({ path: "/" });
+          break;
+        case "teacher":
+          this.$router.push({ path: "/home/teacher/list" });
+          break;
+        case "school":
+          this.$router.push({ path: "/home/citySchool/schoolIntro" });
+          break;
+        default:
+          this.$router.push({
+            path: "/home/vip/vipPage",
+            query: {
+              id: item.id,
+              cid: item.category_id
+            }
+          });
+          break;
+      }
     },
-    handleSelectItem(item) {
-      this.$emit("handleSelectItem", item);
+    changeHeaderActive() {
+      let pathName = window.location.pathname;
+      switch (pathName) {
+        //首页
+        case "/":
+          this.changeActive = "index";
+          break;
+        //名师智库
+        case "/home/teacher/list" ||
+          "/home/teacher/orderTeacher" ||
+          "/home/teacher/beTeacher":
+          this.changeActive = "teacher";
+          break;
+        //城市分校
+        case "/home/citySchool/schoolIntro" || "/home/citySchool/submitSuccess":
+          this.changeActive = "school";
+          break;
+        //分类
+        case "/course/category":
+          this.changeActive = matchSplits("vid");
+          break;
+        //学院
+        case "/home/vip/vipPage":
+          this.changeActive = matchSplits("id");
+          break;
+        default:
+          this.changeActive = -1;
+          break;
+      }
     },
-    handleVipItem(item, index) {
-      persistStore.set("selectItem", index);
-      this.$router.push({
-        path: "/home/vip/vipPage",
-        query: {
-          id: item.id,
-          cid: item.category_id
+    // 学院列表
+    vipGoodsList() {
+      home.vipGoodsList().then(response => {
+        if (response.status === 0) {
+          this.item2 = response.data.vipGoodsList;
+          this.pages = [...this.item1, ...this.item2, ...this.item3];
         }
       });
     }
+  },
+  mounted() {
+    this.vipGoodsList();
+    this.changeHeaderActive(true);
+  },
+  watch: {
+    $route: "changeHeaderActive"
   }
 };
 </script>

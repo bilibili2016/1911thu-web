@@ -1,18 +1,36 @@
 <template>
   <div>
-    <div class="payResult" v-if="!collegePay">
-      <img v-if="success" src="http://static-image.1911edu.com/success.png" alt>
-      <img v-else src="http://static-image.1911edu.com/error.png" alt>
+    <div
+      class="payResult"
+      v-if="!collegePay"
+    >
+      <img
+        v-if="success"
+        src="http://static-image.1911edu.com/success.png"
+        alt
+      >
+      <img
+        v-else
+        src="http://static-image.1911edu.com/error.png"
+        alt
+      >
       <h4 v-if="success">支付成功！</h4>
       <h4 v-else>支付失败！</h4>
-      <div class="restltMsg" v-if="success">
+      <div
+        class="restltMsg"
+        v-if="success"
+      >
         <p>
           <span>订单：{{payCompleteData.order_sn}}</span>
           <span>|</span>
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
-      <div class="restltWord" v-if="!hasCode" v-show="showMsg">
+      <div
+        class="restltWord"
+        v-if="!hasCode"
+        v-show="showMsg"
+      >
         <h5>
           <!-- <span @click="handleChoiceCourse">继续选课</span> -->
           <span @click="handleLinkProfile('tab-fourth')">查看订单</span>
@@ -23,7 +41,11 @@
           </span>前往个人中心
         </div>
       </div>
-      <div class="restltWord" v-if="hasCode" v-show="showMsg">
+      <div
+        class="restltWord"
+        v-if="hasCode"
+        v-show="showMsg"
+      >
         <div class="tips">
           <p class="tips-one">您的兑换码已经生成</p>
           <p>
@@ -36,8 +58,14 @@
         </p>
       </div>
     </div>
-    <div class="collegePay" v-else>
-      <img src="http://static-image.1911edu.com/collegePay.png" alt>
+    <div
+      class="collegePay"
+      v-else
+    >
+      <img
+        src="http://static-image.1911edu.com/collegePay.png"
+        alt
+      >
       <p>欢迎您加入在线干部学院，成为1911学堂学员，</p>
       <p>您将在1911学堂开启为期一年的学习之旅，开始学习吧！</p>
       <div>
@@ -49,12 +77,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { payResult } from '@/lib/v1_sdk/index'
-import { banBackSpace, matchSplits, message } from '@/lib/util/helper'
-import { store as persistStore } from '~/lib/core/store'
+import { mapActions } from "vuex";
+import { payResult } from "@/lib/v1_sdk/index";
+import { banBackSpace, matchSplits, message } from "@/lib/util/helper";
+import { store as persistStore } from "~/lib/core/store";
 export default {
-  data () {
+  data() {
     return {
       success: true,
       payCompleteForm: {
@@ -67,133 +95,134 @@ export default {
       seconds: 5,
       link: null,
       interval: null,
-      links: '',
+      links: "",
       showMsg: false,
       isVipCode: false,
       collegePay: false,
       vipGoodsDetail: {}
-    }
+    };
   },
   methods: {
-    ...mapActions('auth', ['setGid']),
+    ...mapActions("auth", ["setGid"]),
     // 继续选课
-    handleChoiceCourse () {
+    handleChoiceCourse() {
       this.$router.push({
-        path: '/course/category',
+        path: "/course/category",
         query: {
           cid: 0,
           cp: 0,
           xid: 1,
-          pids: 0
+          pids: 0,
+          vid: this.vipGoodsDetail.vip_id
         }
-      })
+      });
     },
     // 点击查看订单
-    handleLinkProfile (item) {
-      this.gidForm.gids = item
-      this.setGid(this.gidForm)
-      this.$router.push('/profile')
-      this.$bus.$emit('selectProfileIndex', item)
-      clearInterval(this.interval)
+    handleLinkProfile(item) {
+      this.gidForm.gids = item;
+      this.setGid(this.gidForm);
+      this.$router.push("/profile");
+      this.$bus.$emit("selectProfileIndex", item);
+      clearInterval(this.interval);
       this.$router.push({
-        path: '/profile',
+        path: "/profile",
         query: {
           tab: item
         }
-      })
+      });
     },
-    payComplete () {
-      this.payCompleteForm.orderId = matchSplits('order')
+    payComplete() {
+      this.payCompleteForm.orderId = matchSplits("order");
       payResult.payComplete(this.payCompleteForm).then(response => {
         if (response.status == 0) {
-          this.payCompleteData = response.data
-          this.showMsg = true
-          if (response.data.curriculumListType == '1') {
+          this.payCompleteData = response.data;
+          this.showMsg = true;
+          if (response.data.curriculumListType == "1") {
             // 订单内只有课程
-            this.links = 'tab-second'
+            this.links = "tab-second";
           }
-          if (response.data.curriculumListType == '2') {
+          if (response.data.curriculumListType == "2") {
             // 订单内只有项目
-            this.links = 'tab-third'
+            this.links = "tab-third";
           }
-          if (response.data.curriculumListType == '3') {
+          if (response.data.curriculumListType == "3") {
             // 订单内课程+项目
-            this.links = 'tab-first'
+            this.links = "tab-first";
           }
-          if (response.data.curriculumListType == '5') {
+          if (response.data.curriculumListType == "5") {
             // 订单内学院
             // this.isVipCode = true
             // this.links = 'tab-eleventh'
-            this.collegePay = true
-            this.vipGoodsDetail = response.data.vipGoodsDetail
-            return false
+            this.collegePay = true;
+            this.vipGoodsDetail = response.data.vipGoodsDetail;
+            return false;
           }
 
-          if (response.data.invitation_code === '') {
+          if (response.data.invitation_code === "") {
             // 需要在判断下是否是VIP订单
-            this.hasCode = false
+            this.hasCode = false;
             this.interval = setInterval(() => {
               if (this.seconds < 1) {
-                this.seconds = 0
-                clearInterval(this.interval)
-                this.goLink(this.links)
+                this.seconds = 0;
+                clearInterval(this.interval);
+                this.goLink(this.links);
               } else {
-                this.seconds--
+                this.seconds--;
               }
               if (this.$route.path !== this.link) {
-                clearInterval(this.interval)
+                clearInterval(this.interval);
               }
-            }, 1000)
+            }, 1000);
           } else {
-            this.hasCode = true
+            this.hasCode = true;
           }
         } else {
-          this.success = false
-          message(this, 'error', response.msg)
+          this.success = false;
+          message(this, "error", response.msg);
         }
-      })
+      });
     },
-    goLink (item) {
-      this.gidForm.gids = item
-      this.setGid(this.gidForm)
-      clearInterval(this.interval)
-      this.$router.push('/profile')
-      this.$bus.$emit('selectProfileIndex', item)
+    goLink(item) {
+      this.gidForm.gids = item;
+      this.setGid(this.gidForm);
+      clearInterval(this.interval);
+      this.$router.push("/profile");
+      this.$bus.$emit("selectProfileIndex", item);
     },
-    college () {
+    college() {
       this.$router.push({
-        path: '/home/vip/vipPage',
+        path: "/home/vip/vipPage",
         query: {
           id: this.vipGoodsDetail.vip_id,
           cid: this.vipGoodsDetail.category_id
         }
-      })
+      });
     },
-    study () {
+    study() {
       this.$router.push({
-        path: '/course/category',
+        path: "/course/category",
         query: {
           cid: this.vipGoodsDetail.category_id,
           cp: 0,
           pids: 0,
-          xid: 0
+          xid: 0,
+          vid: this.vipGoodsDetail.vip_id
         }
-      })
+      });
     }
-
   },
-  mounted () {
+  mounted() {
     // window.history.go(-1)
-    this.ref = this.$route.query.ref
-    this.payComplete()
-    this.link = this.$route.path
+    this.ref = this.$route.query.ref;
+    this.payComplete();
+    this.link = this.$route.path;
     //禁止浏览器的后退
-    history.pushState(null, null, document.URL)
-    window.addEventListener('popstate', function () {
-      history.pushState(null, null, document.URL)
-    })
+    history.pushState(null, null, document.URL);
+    window.addEventListener("popstate", function() {
+      history.pushState(null, null, document.URL);
+    });
   }
-}
+};
 </script>
 <style scoped lang="scss">
 @import "~assets/style/shop/payResult.scss";
