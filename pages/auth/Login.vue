@@ -943,9 +943,9 @@ export default {
     this.$bus.$on("registerShow", data => {
       this.rigisterCardShow();
     });
-    // if (!this.token) {
-    //   this.signOut();
-    // }
+    if (!this.token) {
+      this.signOut();
+    }
   },
   watch: {
     // 监测登陆注册切换时清除注册获取验证码定时器

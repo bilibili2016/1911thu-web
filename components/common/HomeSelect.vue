@@ -93,7 +93,7 @@ export default {
         case "/home/citySchool/submitSuccess":
           this.changeActive = "school";
           break;
-        //分类
+        //课程分类
         case "/course/category":
           this.changeActive = matchSplits("vid");
           break;
@@ -118,7 +118,7 @@ export default {
   },
   mounted() {
     this.vipGoodsList();
-    this.changeHeaderActive(true);
+    this.changeHeaderActive();
   },
   watch: {
     $route: "changeHeaderActive"
