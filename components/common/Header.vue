@@ -13,7 +13,6 @@
       >
         <v-logo @handleLink="handleLink"></v-logo>
         <v-homeselect
-          @changeHeaderActive="changeHeaderActive"
           :projectArr="projectArr"
           :categoryArr="categoryArr"
         ></v-homeselect>
@@ -444,9 +443,9 @@ export default {
     },
     getAll() {
       this.getShopCartNum();
-      // if (!persistStore.get("token")) {
-      //   this.signOut();
-      // }
+      if (!persistStore.get("token")) {
+        this.signOut();
+      }
     },
     onBusEvent() {
       // 监听 优惠专题入口的banner 隐藏
@@ -508,69 +507,8 @@ export default {
     resize() {
       let wWidth = window.innerWidth;
       this.isBig = wWidth < 1420 ? false : true;
-    },
-    //路由切换设置头部选中样式
-    changeHeaderActive() {
-      let pathName = window.location.pathname;
-      let headerClass = document.getElementsByClassName("headerClass");
-      // console.log(headerClass);
-      if (pathName === "/") {
-        //首页
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove("active");
-        }
-        headerClass[0].classList.add("active");
-      } else if (
-        pathName === "/home/teacher/list" ||
-        pathName == "/home/teacher/orderTeacher" ||
-        pathName == "/home/teacher/beTeacher"
-      ) {
-        //名师智库
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove("active");
-        }
-        headerClass[3].classList.add("active");
-      } else if (pathName === "/course/category") {
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove("active");
-        }
-        if (matchSplits("cid") == 1) {
-          headerClass[1].classList.add("active");
-        } else if (matchSplits("cid") == 17) {
-          headerClass[2].classList.add("active");
-        }
-      } else if (pathName === "/home/vip/vipPage") {
-        //学院
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove("active");
-        }
-        if (matchSplits("id") == 2) {
-          headerClass[1].classList.add("active");
-        } else {
-          headerClass[2].classList.add("active");
-        }
-      } else if (
-        pathName == "/home/citySchool/schoolApplication" ||
-        pathName == "/home/citySchool/schoolIntro" ||
-        pathName == "/home/citySchool/submitSuccess" ||
-        pathName == "/home/citySchool/viewSchoolAddress"
-      ) {
-        //城市分校
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove("active");
-        }
-        headerClass[4].classList.add("active");
-      } else {
-        //其他
-        for (var i = 0; i < headerClass.length; i++) {
-          headerClass[i].classList.remove("active");
-        }
-      }
     }
   },
-  // watch: {
-  //   $route: "changeHeaderActive"
-  // },
   mounted() {
     this.resize();
     window.addEventListener("resize", this.resize);
