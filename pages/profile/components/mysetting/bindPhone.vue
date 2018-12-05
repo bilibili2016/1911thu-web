@@ -1,15 +1,8 @@
 <template>
   <!--绑定手机-->
   <div class="bingPhone">
-    <i
-      class="el-icon-back backPop"
-      @click="back"
-      v-show="!isFirstShow && isReturnShow"
-    ></i>
-    <i
-      class="el-icon-close closePop"
-      @click="close"
-    ></i>
+    <i class="el-icon-back backPop" @click="back" v-show="!isFirstShow && isReturnShow"></i>
+    <i class="el-icon-close closePop" @click="close"></i>
     <!-- 认证手机号码 -->
     <el-form
       v-show="isFirstShow"
@@ -23,12 +16,11 @@
         <div class="first">
           <h4 class="clearfix">认证手机号码</h4>
           <p class="text">友情提醒：解绑后，您将无法再使用此手机号进行找回密码和登录等相关操作。</p>
-          <p class="text num">已绑定手机号：<span>{{numPhone}}</span></p>
+          <p class="text num">已绑定手机号：
+            <span>{{numPhone}}</span>
+          </p>
           <el-form-item prop="phones">
-            <el-input
-              v-model.number="validataPhone.phones"
-              placeholder="请输入您已绑定的手机号"
-            ></el-input>
+            <el-input v-model.number="validataPhone.phones" placeholder="请输入您已绑定的手机号"></el-input>
           </el-form-item>
           <el-row>
             <el-button @click.native="nextStep('validataPhone')">下一步</el-button>
@@ -49,24 +41,11 @@
         <div class="two">
           <h4 class="clearfix">绑定手机</h4>
           <el-form-item prop="phones">
-            <el-input
-              v-model.number="bindTelData.phones"
-              placeholder="请输入您新的手机号"
-            ></el-input>
+            <el-input v-model.number="bindTelData.phones" placeholder="请输入您新的手机号"></el-input>
           </el-form-item>
-          <el-form-item
-            prop="codes"
-            class="lastItem clearfix"
-          >
-            <el-input
-              class="captcha"
-              v-model.number="bindTelData.codes"
-              placeholder="请输入短信验证码"
-            ></el-input>
-            <div
-              class="getCode"
-              @click="verifyRgTel"
-            >{{bindTelData.getCode}}</div>
+          <el-form-item prop="codes" class="lastItem clearfix">
+            <el-input class="captcha" v-model.number="bindTelData.codes" placeholder="请输入短信验证码"></el-input>
+            <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div>
           </el-form-item>
           <el-row>
             <el-button
@@ -79,7 +58,6 @@
       </div>
     </el-form>
   </div>
-
 </template>
 
 <script>
@@ -89,7 +67,7 @@ import { message } from "~/lib/util/helper";
 
 export default {
   props: ["bindTelData", "numPhone"],
-  data() {
+  data () {
     return {
       codeInterval: null,
       isReturnShow: true,
@@ -135,18 +113,18 @@ export default {
     };
   },
   methods: {
-    back() {
+    back () {
       this.isFirstShow = true;
       this.initData();
     },
-    close() {
+    close () {
       this.$emit("close");
       this.isFirstShow = true;
       this.validataPhone.phones = "";
       this.initData();
     },
     //初始化数据
-    initData() {
+    initData () {
       this.bindTelData.phones = "";
       this.bindTelData.codes = "";
       clearInterval(this.codeInterval);
@@ -155,7 +133,7 @@ export default {
       this.codeClick = true;
     },
     //   下一步
-    nextStep(formName) {
+    nextStep (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           personalset.confirmPhoneByUser(this.validataPhone).then(res => {
@@ -169,7 +147,7 @@ export default {
       });
     },
     // 验证手机号是否存在
-    verifyRgTel() {
+    verifyRgTel () {
       if (this.bindTelData.seconds == 30 && this.codeClick) {
         this.codeClick = false;
         if (!/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.bindTelData.phones)) {
@@ -188,7 +166,7 @@ export default {
       }
     },
     //获取验证码
-    getCode() {
+    getCode () {
       if (this.bindTelData.seconds === 30) {
         this.bindTelData.types = 4;
         auth.smsCodes(this.bindTelData).then(response => {
@@ -210,7 +188,7 @@ export default {
       }
     },
     //提交
-    submitPhone(formName) {
+    submitPhone (formName) {
       if (this.submitClick) {
         this.submitClick = false;
         this.$refs[formName].validate(valid => {
@@ -219,7 +197,7 @@ export default {
             personalset.editPhone(this.bindTelData).then(res => {
               if (res.status == 0) {
                 message(this, "success", "绑定成功");
-                this.$bus.$emit("getUserInfoData", true);
+                this.$emit('getUserData');
                 this.submitClick = true;
                 this.close();
               } else {
@@ -234,7 +212,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.$bus.$on("openTwo", () => {
       this.isFirstShow = false;
       this.isReturnShow = false;

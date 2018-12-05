@@ -1,12 +1,23 @@
 <template>
   <div class="main">
     <div class="personalSet">
-      <img class="person-edit" src="http://static-image.1911edu.com/edit-info.png" @click="changeCard()" v-if="!hasPersonalInfo&&showIcon" />
+      <img
+        class="person-edit"
+        src="http://static-image.1911edu.com/edit-info.png"
+        @click="changeCard()"
+        v-if="!hasPersonalInfo&&showIcon"
+      >
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <!-- 填写个人信息 -->
         <el-tab-pane label="基础信息" name="first">
           <!-- 设置个人信息 -->
-          <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" @changeStatus="changeStatus" @getUserInfo="getUserInfo"></v-setPer>
+          <v-setPer
+            v-if="hasPersonalInfo"
+            :data="psnForm"
+            :hasCompany="hasCompany"
+            @changeStatus="changeStatus"
+            @getUserData="getUserData"
+          ></v-setPer>
           <!-- 展示个人信息 -->
           <v-showPer v-if="showInfo" :psnForm="psnForm"></v-showPer>
         </el-tab-pane>
@@ -15,7 +26,6 @@
           <v-password v-show="showPwd"></v-password>
         </el-tab-pane>
       </el-tabs>
-
     </div>
     <transition name="fade">
       <div class="success" v-show="updateSuccess">
@@ -35,12 +45,13 @@ import ShowPerson from '@/pages/profile/components/mysetting/showPersonal'
 import SetPerson from '@/pages/profile/components/mysetting/setPersonal'
 import SetPassword from '@/pages/profile/components/mysetting/updatePassword'
 export default {
+  props: ['userInfo'],
   components: {
     'v-showPer': ShowPerson,
     'v-setPer': SetPerson,
     'v-password': SetPassword
   },
-  data() {
+  data () {
     return {
       hasCompany: true,
       showInfo: false,
@@ -79,11 +90,15 @@ export default {
     }
   },
   watch: {
-    province(val) {
+    'userInfo' (v) {
+      this.psnForm = v
+      this.processData()
+    },
+    province (val) {
       this.city = this.getRegion(val, this.psnForm.province)
       this.area = this.getRegion(this.city, this.psnForm.city)
     },
-    'psnForm.province'(val, oldval) {
+    'psnForm.province' (val, oldval) {
       if (!this.province && this.province.length == 0) {
         this.getRegionList()
       }
@@ -92,7 +107,7 @@ export default {
       }
       this.city = this.getRegion(this.province, val)
     },
-    'psnForm.city'(val, oldval) {
+    'psnForm.city' (val, oldval) {
       if (!this.city && this.city.length == 0) {
         this.getRegionList()
       }
@@ -107,12 +122,12 @@ export default {
   },
   methods: {
     // 切换展示/编辑个人信息
-    changeCard() {
+    changeCard () {
       this.showInfo = false
       this.hasPersonalInfo = true
     },
     // 整理省市区
-    getRegion(data, val) {
+    getRegion (data, val) {
       let tmp = []
       for (let item of data) {
         if (item.region_code == val) {
@@ -129,11 +144,11 @@ export default {
       return tmp
     },
     // 切换个人信息/修改密码
-    handleClick(tab, event) {
+    handleClick (tab, event) {
       if (persistStore.get('token')) {
         if (tab.name == 'first') {
           this.showIcon = true
-          this.getUserInfo()
+          this.getUserData()
         } else {
           this.showIcon = false
         }
@@ -142,51 +157,36 @@ export default {
         this.$bus.$emit('loginShow', true)
       }
     },
+    // 处理数据
+    processData (data) {
+      if (this.psnForm.company_name && this.psnForm.company_name != '') {
+        this.hasCompany = true
+        persistStore.set('cpnc', this.psnForm.company_code)
+      } else {
+        this.hasCompany = false
+      }
+      if (this.psnForm.is_update === 1) {
+        this.showInfo = true
+        this.hasPersonalInfo = false
+      } else {
+        this.showInfo = false
+        this.hasPersonalInfo = true
+      }
+    },
     // 获取用户信息
-    getUserInfo(data) {
-      personalset.getUserInfo().then(res => {
-        if (res.status === 0) {
-          this.psnForm = res.data.userInfo
-          if (this.psnForm.company_name && this.psnForm.company_name != '') {
-            this.hasCompany = true
-            persistStore.set('cpnc', this.psnForm.company_code)
-          } else {
-            this.hasCompany = false
-          }
-          if (res.data.userInfo.is_update === 1) {
-            this.showInfo = true
-            this.hasPersonalInfo = false
-          } else {
-            this.showInfo = false
-            this.hasPersonalInfo = true
-          }
-
-          if (data) {
-            this.showInfo = false
-            this.hasPersonalInfo = true
-          }
-        }
-      })
+    getUserData () {
+      this.$emit('getUserData')
     },
     //提交个人信息表单成功后根据用户信息更新值
-    changeStatus(setObj) {
+    changeStatus (setObj) {
       this.showInfo = setObj.showInfo
       this.hasCompany = setObj.hasCompany
       this.hasPersonalInfo = setObj.hasPersonalInfo
     }
   },
-  mounted() {
-    if (persistStore.get('token')) {
-      this.getUserInfo()
-      // this.getPositionList()
-      // this.getRegionList()
-    }
+  mounted () {
     this.$bus.$on('activeSet', () => {
       this.activeName = 'first'
-    })
-
-    this.$bus.$on('getUserInfoData', data => {
-      this.getUserInfo(data)
     })
   }
 }

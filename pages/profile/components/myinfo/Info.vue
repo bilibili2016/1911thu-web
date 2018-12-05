@@ -3,12 +3,8 @@
   <div>
     <template>
       <div class="content clearfix" v-for="(card,index) in infoList" :index="index" :key="card.id">
-        <div class="text fl fc16-222 flh-30">
-          {{card.message}}
-        </div>
-        <div class="time fr f14-888 flh-30">
-          {{card.send_time}}
-        </div>
+        <div class="text fl fc16-222 flh-30">{{card.message}}</div>
+        <div class="time fr f14-888 flh-30">{{card.send_time}}</div>
       </div>
     </template>
   </div>
@@ -20,7 +16,7 @@ import { mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
 
 export default {
-  data() {
+  data () {
     return {
       infoList: [],
       curruntForm: {}
@@ -31,7 +27,7 @@ export default {
   },
   methods: {
     // 获取我的消息列表
-    getInfo() {
+    getInfo () {
       info.userMessage(this.curruntForm).then(res => {
         if (res.status === 0) {
           this.infoList = res.data.userMessage
@@ -41,14 +37,14 @@ export default {
       })
     }
   },
-  mounted() {
-    if (persistStore.get('token')) {
+  mounted () {
+    this.$bus.$on('getInfo', data => {
       this.getInfo()
-    }
+    })
   }
 }
 </script>
 <style scoped lang="scss">
 // 页面有兼容
-@import '~assets/style/profile/info.scss';
+@import "~assets/style/profile/info.scss";
 </style>

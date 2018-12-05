@@ -19,18 +19,48 @@
         </el-form-item>
         <el-form-item label="所在地区" prop="province">
           <el-select v-model="psnForm.province_name" placeholder="省" @change="provinceChange">
-            <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
+            <el-option
+              :label="p.label"
+              :value="p.value"
+              v-for="(p,index) in province"
+              :key="'prov'+index"
+            ></el-option>
           </el-select>
-          <el-select v-model="psnForm.city_name" placeholder="市" no-data-text="请先选择所在省份" @change="cityChange">
-            <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
+          <el-select
+            v-model="psnForm.city_name"
+            placeholder="市"
+            no-data-text="请先选择所在省份"
+            @change="cityChange"
+          >
+            <el-option
+              :label="p.label"
+              :value="p.value"
+              v-for="(p,index) in city"
+              :key="'city'+index"
+            ></el-option>
           </el-select>
-          <el-select v-model="psnForm.area_name" placeholder="区" no-data-text="请先选择所在城市" @change="areaChange">
-            <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
+          <el-select
+            v-model="psnForm.area_name"
+            placeholder="区"
+            no-data-text="请先选择所在城市"
+            @change="areaChange"
+          >
+            <el-option
+              :label="p.label"
+              :value="p.value"
+              v-for="(p,index) in area"
+              :key="'area'+index"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="职业" prop="position">
           <el-select v-model="psnForm.position" placeholder="请选择" class="profession">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
@@ -38,8 +68,12 @@
         </el-form-item>
         <el-form-item class="telForm" disable label="手机号">
           <el-input class="telephone" v-model="psnForm.user_name" disabled></el-input>
-          <span v-if="psnForm.user_name==''" @click="handleBindPhone" class="teledit"><img src="~assets/images/binding.png" alt="">绑定</span>
-          <span v-else class="teledit" @click="modifyPhone"><img src="~assets/images/edit.png" alt="">修改</span>
+          <span v-if="psnForm.user_name==''" @click="handleBindPhone" class="teledit">
+            <img src="~assets/images/binding.png" alt>绑定
+          </span>
+          <span v-else class="teledit" @click="modifyPhone">
+            <img src="~assets/images/edit.png" alt>修改
+          </span>
         </el-form-item>
         <el-form-item label="单位名称" v-if="hasCompany" key="psnForm.company_name">
           <el-input v-model="psnForm.company_name" maxlength="30" placeholder="请输入您的单位名称"></el-input>
@@ -54,10 +88,14 @@
     </div>
     <!-- 修改手机号弹窗 -->
     <div class="bindBg" v-show="showBindBg">
-      <v-bindphone :bindTelData="bindTelData" :numPhone="psnForm.user_name" @close="close"></v-bindphone>
+      <v-bindphone
+        :bindTelData="bindTelData"
+        :numPhone="psnForm.user_name"
+        @close="close"
+        @getUserData="getUserData"
+      ></v-bindphone>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -69,7 +107,7 @@ import { checkPhone, checkCode } from '~/lib/util/validatefn'
 
 export default {
   props: ['data', 'hasCompany'],
-  data() {
+  data () {
     var nickName = (rule, value, callback) => {
       if (!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
         callback(
@@ -190,7 +228,7 @@ export default {
     ...mapGetters('auth', ['isAuthenticated'])
   },
   methods: {
-    provinceChange(val) {
+    provinceChange (val) {
       this.psnForm.city_name = ''
       this.psnForm.area_name = ''
       this.psnForm.city = ''
@@ -206,7 +244,7 @@ export default {
         }
       }
     },
-    cityChange(val) {
+    cityChange (val) {
       this.psnForm.area_name = ''
       this.psnForm.area = ''
       if (!this.city && this.city.length == 0) {
@@ -221,7 +259,7 @@ export default {
         }
       }
     },
-    areaChange(val) {
+    areaChange (val) {
       for (let item of this.area) {
         if (val == item.region_code) {
           this.psnForm.area_name = item.name
@@ -230,7 +268,7 @@ export default {
       }
     },
     // 整理省市区
-    getRegion(data, val) {
+    getRegion (data, val) {
       let tmp = []
       for (let item of data) {
         if (item.region_code == val) {
@@ -247,7 +285,7 @@ export default {
       return tmp
     },
     // 获取省市区
-    getRegionList() {
+    getRegionList () {
       personalset.getRegionList({ region_code: '' }).then(res => {
         this.mapregionList = res.data.regionList
         this.province = this.mapregionList.map(item => {
@@ -259,7 +297,7 @@ export default {
       })
     },
     // 获取职业列表
-    getPositionList() {
+    getPositionList () {
       personalset.positionList().then(res => {
         let tmp = res.data
         this.options = tmp.map(item => {
@@ -268,7 +306,7 @@ export default {
       })
     },
     // 提交个 人信息表单
-    onSubmit(formName) {
+    onSubmit (formName) {
       if (this.psnForm.province !== '') {
         if (this.psnForm.city === '' || this.psnForm.area === '') {
           this.$message({
@@ -284,8 +322,7 @@ export default {
         if (valid) {
           personalset.perInformation(this.psnForm).then(res => {
             if (res.status == 0) {
-              this.$emit('getUserInfo')
-              this.$bus.$emit('reUserInfo')
+              this.getUserData()
             } else {
               this.$message({
                 showClose: true,
@@ -297,55 +334,38 @@ export default {
         }
       })
     },
+    getUserData () {
+      this.$emit('getUserData')
+    },
     //修改手机号
-    modifyPhone() {
+    modifyPhone () {
       this.showBindBg = true
     },
     //关闭弹框
-    close() {
+    close () {
       this.showBindBg = false
     },
     //绑定手机号
-    handleBindPhone() {
+    handleBindPhone () {
       this.showBindBg = true
       this.$bus.$emit('openTwo')
     }
   },
   watch: {
-    data(val) {
+    data (val) {
       this.psnForm = this.data
     },
-    province(val) {
+    province (val) {
       this.city = this.getRegion(val, this.psnForm.province)
       this.area = this.getRegion(this.city, this.psnForm.city)
     }
-    // 'psnForm.province'(val, oldval) {
-    //   console.log(val, oldval)
-
-    //   if (!this.province && this.province.length == 0) {
-    //     this.getRegionList()
-    //   }
-    //   if (oldval != '') {
-    //     this.psnForm.city = ''
-    //   }
-    //   this.city = this.getRegion(this.province, val)
-    // },
-    // 'psnForm.city'(val, oldval) {
-    //   if (!this.city && this.city.length == 0) {
-    //     this.getRegionList()
-    //   }
-    //   if (oldval != '') {
-    //     this.psnForm.area = ''
-    //   }
-    //   this.area = this.getRegion(this.city, val)
-    // }
   },
-  mounted() {
+  mounted () {
     this.psnForm = this.data
-    if (persistStore.get('token')) {
+    this.$bus.$on('getPositionList', data => {
       this.getPositionList()
       this.getRegionList()
-    }
+    })
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="personalCenter">
-    <v-banner :config="bconfig" :isShowUpAvtor="activeTab=='tab-sixth'"></v-banner>
+    <v-banner :config="bconfig" :isShowUpAvtor="activeTab=='tab-sixth'" :userInfo="userInfo"></v-banner>
     <div class="center-tab center profile bigTab" style="min-height:800px;">
       <el-tabs :tab-position="tabPosition" v-model="activeTab" @tab-click="handleClick">
         <!-- 最近学习 -->
@@ -148,7 +148,7 @@
           <span slot="label" class="tabList">
             <i class="icon-set"></i> 个人设置
           </span>
-          <v-person></v-person>
+          <v-person :userInfo="userInfo" @getUserData="getUserInfo"></v-person>
         </el-tab-pane>
         <!-- 课程码管理 -->
         <el-tab-pane class="my-course my-invitation" name="tab-seventh">
@@ -229,7 +229,7 @@
 import Banner from '@/components/common/Banner.vue'
 import MyHome from '@/pages/profile/pages/myHome'
 import PersonalSet from '@/pages/profile/pages/mySettings.vue'
-import { profileHome, examine, college } from '~/lib/v1_sdk/index'
+import { profileHome, examine, college, banner } from '~/lib/v1_sdk/index'
 import { message, setTitle } from '~/lib/util/helper'
 import { mapState, mapActions, mapGetters } from 'vuex'
 import { store as persistStore } from '~/lib/core/store'
@@ -605,7 +605,8 @@ export default {
       collegeListData: [],
       selectItem: {
         name: ''
-      }
+      },
+      userInfo: {}
     }
   },
   computed: {
@@ -650,9 +651,10 @@ export default {
             this.handleInitMyOrderData(true)
             break
           case 'tab-fifth': //我的消息
+            this.$bus.$emit('getInfo')
             break
           case 'tab-sixth': //个人设置
-            this.$bus.$emit('getUserInfoData')
+            this.$bus.$emit('getPositionList')
             this.$bus.$emit('activeSet')
             break
           case 'tab-seventh': //兑换码管理
@@ -1088,6 +1090,9 @@ export default {
       this.$bus.$on('historyOrderDataChange', data => {
         this.historyOrderDataChange(1)
       })
+      this.$bus.$on('reUserInfo', data => {
+        this.getUserInfo()
+      })
     },
 
     // 考试认证列表
@@ -1133,21 +1138,33 @@ export default {
       this.collegePagemsg.page = val
       this.collegeListForm.page = val
       this.collegeList()
-    }
+    },
+    getUserInfo () {
+      banner.getUserInfo().then(res => {
+        if (res.status === 0) {
+          this.userInfo = res.data.userInfo
+          // 头像
+          if (this.userInfo.head_img && this.userInfo.head_img == '') {
+            this.userInfo.head_img = 'http://static-image.1911edu.com/profile_avator01.png'
+          }
+        }
+      })
+    },
   },
   mounted () {
     setTitle('个人中心-1911学堂')
     if (persistStore.get('token')) {
+      this.getUserInfo()
       if (this.gid) {
         this.activeTab = this.gid
       } else {
         this.activeTab = 'tab-first'
       }
+      this.initBusEvent()
       if (persistStore.get('isSingleLogin')) {
         this.selectItem.name = this.activeTab
         this.handleClick(this.selectItem)
         // 以下默认获取全部数据接口变成上面只获取选中项的接口
-        //   this.initBusEvent()
         //   this.handleInitMyCourseData() //我的课程
         //   this.handleInitMyProjectData() //我的项目
         //   // this.collectProjectPageChange(1) //我的项目-收藏

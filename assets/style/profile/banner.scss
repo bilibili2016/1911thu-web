@@ -5,9 +5,11 @@
   background-image: url('http://static-image.1911edu.com/profile_banner01.png');
   background-size: 100% 100%;
   margin-bottom: 64px;
+
   .center-box {
     position: relative;
   }
+
   img.topImg {
     width: 112px;
     height: 112px;
@@ -16,6 +18,7 @@
     left: 4px;
     top: 53px;
   }
+
   img.noImg {
     width: 0;
     height: 0;
@@ -24,6 +27,7 @@
     left: 4px;
     top: 54px;
   }
+
   .up-user-avtor {
     position: absolute;
     top: 55px;
@@ -32,6 +36,7 @@
     height: 110px;
     border-radius: 50%;
     overflow: hidden;
+
     input {
       position: absolute;
       left: 0;
@@ -42,6 +47,7 @@
       opacity: 0;
       z-index: 2;
     }
+
     span {
       display: block;
       position: absolute;
@@ -55,14 +61,17 @@
       background: rgba(143, 74, 203, 0.5);
       cursor: pointer;
     }
+
     .el-upload {
       width: 100%;
     }
   }
+
   .avator {
     float: left;
     height: 148px;
     overflow: hidden;
+
     .img {
       width: 120px;
       height: 120px;
@@ -79,16 +88,19 @@
   width: 1100px;
   margin: 0 auto;
   height: 148px;
+
   .name {
     float: left;
     margin: 64px 0px 0px 33px;
     color: rgba(255, 255, 255, 1);
+
     .nickName {
       font-size: 24px;
       height: 27px;
       width: 700px;
       overflow: hidden;
     }
+
     .companyName {
       font-size: 16px;
       margin-top: 20px;
@@ -96,12 +108,14 @@
       width: 700px;
       overflow: hidden;
     }
+
     .vipCard {
       img {
         width: 20px;
         margin-top: 20px;
         vertical-align: middle;
       }
+
       .el-button {
         background: none;
         margin: 0;
@@ -111,6 +125,7 @@
       }
     }
   }
+
   .time {
     width: 204px;
     float: right;
@@ -120,10 +135,12 @@
     color: #fff;
     overflow: hidden;
     text-align: center;
+
     :nth-child(1) {
       font-size: 20px;
       margin: 0px 0px 15px 0px;
     }
+
     :nth-child(2) {
       font-size: 17px;
     }
