@@ -27,18 +27,7 @@ export default {
           id: "index"
         }
       ],
-      item2: [
-        {
-          id: "",
-          category_id: "",
-          title: "在线干部学院"
-        },
-        {
-          id: "",
-          category_id: "",
-          title: "在线商学院"
-        }
-      ],
+      item2: [],
       item3: [
         {
           title: "名师智库",
