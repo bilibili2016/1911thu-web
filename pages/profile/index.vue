@@ -654,8 +654,8 @@ export default {
             this.$bus.$emit('getInfo')
             break
           case 'tab-sixth': //个人设置
-            this.$bus.$emit('getPositionList')
             this.$bus.$emit('activeSet')
+            this.$bus.$emit('getPositionList')
             break
           case 'tab-seventh': //兑换码管理
             this.$bus.$emit('activeCode')
@@ -1143,10 +1143,6 @@ export default {
       banner.getUserInfo().then(res => {
         if (res.status === 0) {
           this.userInfo = res.data.userInfo
-          // 头像
-          if (this.userInfo.head_img && this.userInfo.head_img == '') {
-            this.userInfo.head_img = 'http://static-image.1911edu.com/profile_avator01.png'
-          }
         }
       })
     },
