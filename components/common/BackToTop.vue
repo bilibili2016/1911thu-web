@@ -12,7 +12,7 @@
         <div class="showCode">
           <i></i>
           <h4>1911学堂官方微信</h4>
-          <p>微信号：xuetang1911</p>
+          <p>微信号：XUETANG_1911</p>
         </div>
       </div>
     </transition>

@@ -165,7 +165,7 @@ export default {
       } else {
         this.hasCompany = false
       }
-      if (this.psnForm.is_update === 1) {
+      if (this.psnForm.is_update == 1) {
         this.showInfo = true
         this.hasPersonalInfo = false
       } else {
