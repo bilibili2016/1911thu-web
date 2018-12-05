@@ -83,13 +83,14 @@ export default {
           this.changeActive = "index";
           break;
         //名师智库
-        case "/home/teacher/list" ||
-          "/home/teacher/orderTeacher" ||
-          "/home/teacher/beTeacher":
+        case "/home/teacher/list":
+        case "/home/teacher/orderTeacher":
+        case "/home/teacher/beTeacher":
           this.changeActive = "teacher";
           break;
         //城市分校
-        case "/home/citySchool/schoolIntro" || "/home/citySchool/submitSuccess":
+        case "/home/citySchool/schoolIntro":
+        case "/home/citySchool/submitSuccess":
           this.changeActive = "school";
           break;
         //分类
