@@ -1,8 +1,18 @@
 <template>
   <div class="collegeLists">
-    <div class="item clearfix" v-for="(item,index) in collegeListData" :key="index">
-      <div class="item_left" @click="goVipDetail(item)">
-        <img :src="item.picture" alt="">
+    <div
+      class="item clearfix"
+      v-for="(item,index) in collegeListData"
+      :key="index"
+    >
+      <div
+        class="item_left"
+        @click="goVipDetail(item)"
+      >
+        <img
+          :src="item.picture"
+          alt=""
+        >
         <div class="collegeInfo">
           <p class="title">{{item.title}}</p>
           <p>
@@ -13,39 +23,46 @@
       </div>
       <div class="item_right">
         <div>
-          <span class="btn" @click="goCourseList(item)">去学习</span>
+          <span
+            class="btn"
+            @click="goCourseList(item)"
+          >去学习</span>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { examine } from '~/lib/v1_sdk/index'
-import { message } from '~/lib/util/helper'
+import { examine } from "~/lib/v1_sdk/index";
+import { message } from "~/lib/util/helper";
+import { store as persistStore } from "~/lib/core/store";
 
 export default {
-  props: ['collegeListData'],
+  props: ["collegeListData"],
   data() {
     return {
       pageData: {
-        id: '',
-        name: ''
+        id: "",
+        name: ""
       },
       percentage: 20
-    }
+    };
   },
   methods: {
     goVipDetail(item) {
       this.$router.push(
-        '/home/vip/vipPage?id=' + item.id + '&cid=' + item.category_id
-      )
+        "/home/vip/vipPage?id=" + item.id + "&cid=" + item.category_id
+      );
     },
     goCourseList(item) {
       this.$router.push(
-        '/course/category?cid=' + item.category_id + '&cp=0&pids=0&xid=0'
-      )
+        "/course/category?cid=" +
+          item.category_id +
+          "&cp=0&pids=0&xid=0&vid=" +
+          item.id
+      );
     }
   },
   mounted() {}
-}
+};
 </script>
