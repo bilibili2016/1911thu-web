@@ -1,12 +1,22 @@
 <template>
   <!-- 我的消息 -->
   <div>
-    <template>
-      <div class="content clearfix" v-for="(card,index) in infoList" :index="index" :key="card.id">
-        <div class="text fl fc16-222 flh-30">{{card.message}}</div>
-        <div class="time fr f14-888 flh-30">{{card.send_time}}</div>
-      </div>
-    </template>
+    <div class="content clearfix" v-for="(card,index) in infoList" :index="index" :key="card.id">
+      <div class="text fl fc16-222 flh-30">{{card.message}}</div>
+      <div class="time fr f14-888 flh-30">{{card.send_time}}</div>
+    </div>
+    <div class="pagination">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :page-size="pagemsg.pagesize"
+        :pager-count="5"
+        :page-count="pagemsg.pagesize"
+        :current-page="pagemsg.page"
+        :total="pagemsg.total"
+        @current-change="historyOrderDataChange"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 
@@ -19,7 +29,15 @@ export default {
   data () {
     return {
       infoList: [],
-      curruntForm: {}
+      curruntForm: {
+        pages: 1,
+        limits: 10
+      },
+      pagemsg: {
+        page: 1,
+        pagesize: 10,
+        total: 10
+      },
     }
   },
   computed: {
@@ -31,10 +49,16 @@ export default {
       info.userMessage(this.curruntForm).then(res => {
         if (res.status === 0) {
           this.infoList = res.data.userMessage
+          this.pagemsg.total = res.data.pageCount;
           let noMsg = this.infoList && this.infoList.length > 0 ? false : true
           this.$emit('noMsg', noMsg)
         }
       })
+    },
+    historyOrderDataChange (val) {
+      this.pagemsg.page = val;
+      this.curruntForm.pages = val;
+      this.getInfo()
     }
   },
   mounted () {

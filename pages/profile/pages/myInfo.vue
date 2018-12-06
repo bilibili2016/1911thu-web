@@ -20,7 +20,7 @@ export default {
   },
   props: ['noMyMsg', 'noMsgEle'],
   methods: {
-    isNoMyMsg(flag) {
+    isNoMyMsg (flag) {
       this.$emit('isNoMyMsg', flag)
     }
   }
