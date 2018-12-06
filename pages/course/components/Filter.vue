@@ -21,6 +21,7 @@
             ></el-tab-pane>
           </el-tabs>
           <div
+            v-if="cid!=0"
             class="teacher"
             @click="handleLink()"
           >学术委员会</div>

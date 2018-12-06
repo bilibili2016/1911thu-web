@@ -69,7 +69,7 @@
           </div>
           <div
             class="button"
-            @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0&vid=')"
+            @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0&vid=-1')"
           >
             点击查看
           </div>
