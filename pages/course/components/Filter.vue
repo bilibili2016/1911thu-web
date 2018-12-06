@@ -20,10 +20,10 @@
               name="third"
             ></el-tab-pane>
           </el-tabs>
-          <!-- <div
+          <div
             class="teacher"
-            @click="handleLink('/home/teacher/list')"
-          >学术委员会</div> -->
+            @click="handleLink()"
+          >学术委员会</div>
         </div>
         <!-- <div class="fr rightPages">
           <span v-show="hideSwitch">
@@ -54,8 +54,7 @@ export default {
       this.$emit("selectActiveTab", tab);
     },
     handleLink(page) {
-      persistStore.set("cid", this.cid);
-      this.$router.push(page);
+      this.$router.push("/home/teacher/list?cid=" + matchSplits("cid"));
     }
   },
   mounted() {

@@ -24,7 +24,6 @@
       @selectCid="selectCid"
       @selectPid="selectPid"
       @selectUid="selectUid"
-      @selectKid="selectKid"
       @changeCid="changeCid"
     ></v-category>
     <div
@@ -83,7 +82,7 @@ import { list } from "~/lib/v1_sdk/index";
 import Category from "@/pages/home/teacher/components/teacherCategory";
 import NoData from "@/components/common/NoData.vue";
 
-import { setTitle } from "@/lib/util/helper";
+import { setTitle, matchSplits } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
@@ -118,8 +117,7 @@ export default {
         limits: 9,
         cid: 0,
         pid: 0,
-        uid: 0,
-        kid: 0
+        uid: 0
       },
       pagemsg: {
         page: 1,
@@ -195,11 +193,7 @@ export default {
       this.teacherForm.uid = data.id;
       this.getNewInfoList();
     },
-    //类别
-    selectKid(data, index) {
-      this.teacherForm.kid = data.id;
-      this.getNewInfoList();
-    },
+
     //一级分类下没有二级分类进行初始化
     changeCid(data) {
       this.teacherForm.pid = data;
@@ -216,25 +210,21 @@ export default {
         }
       });
     },
-    //教师类别列表
-    teacherKindList() {
-      list.teacherKindList().then(res => {
-        if (res.status === 0) {
-          this.sortData = res.data.categoryList;
-          this.sortData.unshift({
-            category_name: "全部",
-            id: 0
-          });
-        }
-      });
-    },
     // 公共 获取list 方法
     getHeaderList() {
       this.loadList = true;
-      list.teacherCategoryList().then(res => {
+      list.childCategoryList().then(res => {
         if (res.status === 0) {
           this.handleData(this.allData, res);
           this.loadList = false;
+
+          if (matchSplits("cid") >= 0) {
+            //从课程分类页跳转过来的 cid
+            this.$bus.$emit("selectChange", matchSplits("cid"));
+          } else {
+            //其他页面跳转过来的 cid=-1
+            this.initTeacherList();
+          }
         }
       });
     },
@@ -250,6 +240,8 @@ export default {
     },
     // 处理数据 拼接全部数据
     handleData(data, res) {
+      console.log(data);
+
       this.categoryData = res.data.categoryList;
       this.categoryData.unshift(data);
       if (this.categoryData.length > 1) {
@@ -278,15 +270,8 @@ export default {
   mounted() {
     setTitle("名师智库-1911学堂");
     this.getHeaderList();
-    this.initTeacherList();
-    this.teacherKindList();
+    // this.initTeacherList();
     this.teacherCompanyList();
-    // console.log(persistStore.get("cid"), "llldd");
-    // if (persistStore.get("cid") != 0) {
-    //   this.selectCid({ id: persistStore.get("cid") });
-    // } else {
-    //   this.initTeacherList();
-    // }
   }
 };
 </script>

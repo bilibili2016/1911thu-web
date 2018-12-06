@@ -482,7 +482,7 @@ export default {
             "success",
             "提交成功，我们的客服人员会尽快与您取得联系！"
           );
-          this.$router.push("/home/teacher/list");
+          this.$router.push("/home/teacher/list?cid=-1");
         } else {
           message(this, "error", response.msg);
         }
