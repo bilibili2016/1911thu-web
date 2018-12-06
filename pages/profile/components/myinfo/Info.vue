@@ -1,11 +1,11 @@
 <template>
   <!-- 我的消息 -->
-  <div>
+  <div v-loading="load">
     <div class="content clearfix" v-for="(card,index) in infoList" :index="index" :key="card.id">
       <div class="text fl fc16-222 flh-30">{{card.message}}</div>
       <div class="time fr f14-888 flh-30">{{card.send_time}}</div>
     </div>
-    <div class="pagination">
+    <div class="pagination" v-if="pagemsg.total>10">
       <el-pagination
         background
         layout="prev, pager, next"
@@ -38,6 +38,7 @@ export default {
         pagesize: 10,
         total: 10
       },
+      load: true
     }
   },
   computed: {
@@ -52,6 +53,7 @@ export default {
           this.pagemsg.total = res.data.pageCount;
           let noMsg = this.infoList && this.infoList.length > 0 ? false : true
           this.$emit('noMsg', noMsg)
+          this.load = false
         }
       })
     },
