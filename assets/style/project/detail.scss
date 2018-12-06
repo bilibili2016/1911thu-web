@@ -4,33 +4,39 @@
   left: 0;
   width: 100%;
   height: 490px;
+
   .main-crumb {
     padding: 0 30px;
+
     .fr .collect {
       right: 30px;
+
       .line-center .collectSpan {
         color: #fff;
+
         &:hover {
           color: #fff;
         }
       }
     }
+
     .main-crumbs {
+
       .el-breadcrumb__inner,
       .el-breadcrumb__separator {
         color: #fff;
       }
+
       .el-breadcrumb__inner:hover {
-        color: #fff !important;
-      }
-      .el-breadcrumb__inner {
-        color: #fff !important;
+        color: #773084;
       }
     }
   }
+
   .title-item {
     height: 185px;
   }
+
   .detail {
     position: absolute;
     bottom: 0;
@@ -38,8 +44,10 @@
     height: 120px;
     width: 100%;
     background: #fff;
+
     .some {
       height: 120px;
+
       div {
         display: inline-block;
         width: 120px;
@@ -49,32 +57,39 @@
         vertical-align: top;
         border-right: 1px solid #e0e4e7;
         color: #545c63;
+
         &:last-child {
           border: none;
         }
+
         h5,
         h6 {
           height: 20px;
           line-height: 20px;
           font-size: 14px;
         }
+
         h6 {
           font-size: 12px;
         }
+
         p {
           font-size: 14px;
+
           span {
             font-size: 20px;
           }
         }
       }
     }
+
     .changeType {
       width: 700px;
       height: 36px;
       margin: 20px 0 8px;
       padding-right: 60px;
       text-align: right;
+
       button {
         display: inline-block;
         width: 68px;
@@ -88,6 +103,7 @@
         border-radius: 10px;
         margin-left: 20px;
         font-size: 14px;
+
         &.checked {
           background-color: #17b0b4;
           color: #fff;
@@ -95,27 +111,34 @@
         }
       }
     }
+
     .buyTop {
       margin-top: 43px;
     }
+
     .buy {
       height: 36px;
       margin-right: 40px;
       text-align: right;
-      & > div {
+
+      &>div {
         float: left;
         // display: inline-block;
       }
+
       .price {
         height: 36px;
         line-height: 120px;
         margin-right: 20px;
         font-size: 24px;
+
         i {
           font-size: 24px;
         }
+
         color: #fd0e19;
       }
+
       .addShoppingCart {
         width: 140px;
         height: 36px;
@@ -128,10 +151,12 @@
         vertical-align: top;
         cursor: pointer;
         transition: all 300ms;
+
         &:hover {
           background-color: #5f068d;
         }
       }
+
       .study {
         width: 120px;
         height: 36px;
@@ -145,6 +170,7 @@
         color: #773084;
         cursor: pointer;
         transition: all 300ms;
+
         &:hover {
           background-color: #5f068d;
           color: #fff;
