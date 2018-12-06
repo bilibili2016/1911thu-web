@@ -48,7 +48,7 @@ export default {
           this.$router.push("/");
           break;
         case "teacher":
-          this.$router.push("/home/teacher/list?cid=-1");
+          this.$router.push("/home/teacher/list");
           break;
         case "school":
           this.$router.push("/home/citySchool/schoolIntro");
@@ -66,6 +66,12 @@ export default {
     },
     changeHeaderActive() {
       let pathName = window.location.pathname;
+
+      //初始化名师智库
+      if (pathName != "/home/teacher/list") {
+        persistStore.set("cid", -1);
+      }
+
       switch (pathName) {
         //首页
         case "/":

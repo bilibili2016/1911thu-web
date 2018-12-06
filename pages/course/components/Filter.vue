@@ -54,7 +54,8 @@ export default {
       this.$emit("selectActiveTab", tab);
     },
     handleLink(page) {
-      this.$router.push("/home/teacher/list?cid=" + matchSplits("cid"));
+      persistStore.set("cid", matchSplits("cid"));
+      this.$router.push("/home/teacher/list");
     }
   },
   mounted() {

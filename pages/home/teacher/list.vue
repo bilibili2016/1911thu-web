@@ -147,13 +147,14 @@ export default {
     initTeacherList() {
       this.teacherForm.pages = 1;
       this.teacherForm.limits = 9;
+      this.pagemsg.page = 1;
       this.getNewInfoList();
     },
     //导师列表翻页
     selectPages(val) {
       this.teacherForm.pages = val;
-      this.pagemsg.page = val;
       this.teacherForm.limits = this.pagemsg.pagesize;
+      this.pagemsg.page = val;
       this.getNewInfoList();
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
@@ -178,22 +179,23 @@ export default {
     },
     //选择一级分类
     selectCid(data, index) {
+      persistStore.set("cid", data.id);
+
       this.categoryId = data.id;
       this.teacherForm.cid = data.id;
       this.teacherForm.pid = 0;
-      this.getNewInfoList();
+      this.initTeacherList();
     },
     //选择二级分类
     selectPid(data, index) {
       this.teacherForm.pid = data.id;
-      this.getNewInfoList();
+      this.initTeacherList();
     },
     //所在单位
     selectUid(data, index) {
       this.teacherForm.uid = data.id;
-      this.getNewInfoList();
+      this.initTeacherList();
     },
-
     //一级分类下没有二级分类进行初始化
     changeCid(data) {
       this.teacherForm.pid = data;
@@ -218,9 +220,9 @@ export default {
           this.handleData(this.allData, res);
           this.loadList = false;
 
-          if (matchSplits("cid") >= 0) {
+          if (persistStore.get("cid") >= 0) {
             //从课程分类页跳转过来的 cid
-            this.$bus.$emit("selectChange", matchSplits("cid"));
+            this.$bus.$emit("selectChange", persistStore.get("cid"));
           } else {
             //其他页面跳转过来的 cid=-1
             this.initTeacherList();
@@ -240,8 +242,6 @@ export default {
     },
     // 处理数据 拼接全部数据
     handleData(data, res) {
-      console.log(data);
-
       this.categoryData = res.data.categoryList;
       this.categoryData.unshift(data);
       if (this.categoryData.length > 1) {
