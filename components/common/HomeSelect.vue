@@ -45,13 +45,13 @@ export default {
       let path = "";
       switch (item.id) {
         case "index":
-          this.$router.push({ path: "/" });
+          this.$router.push("/");
           break;
         case "teacher":
-          this.$router.push({ path: "/home/teacher/list" });
+          this.$router.push("/home/teacher/list?cid=-1");
           break;
         case "school":
-          this.$router.push({ path: "/home/citySchool/schoolIntro" });
+          this.$router.push("/home/citySchool/schoolIntro");
           break;
         default:
           this.$router.push({

@@ -88,9 +88,8 @@ export default {
     // 大类 单个
     selectCid(item, index) {
       this.cid = item.id;
-      this.categoryIndex = index;
       this.pid = "0";
-      this.$emit("selectCid", item, index);
+      this.$emit("selectCid", item);
       this.$emit("processData");
     },
     // 小类 单个
@@ -102,12 +101,12 @@ export default {
     selectUid(item, index) {
       this.uid = item.id;
       this.$emit("selectUid", item, index);
-    },
-    //类别
-    selectKid(item, index) {
-      this.uid = item.id;
-      this.$emit("selectKid", item, index);
     }
+  },
+  mounted() {
+    this.$bus.$on("selectChange", data => {
+      this.selectCid({ id: data });
+    });
   }
 };
 </script>
