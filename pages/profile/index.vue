@@ -1143,9 +1143,9 @@ export default {
         if (res.status === 0) {
           this.userInfo = res.data.userInfo
           if (this.userInfo.head_img && this.userInfo.head_img != "") {
-            this.user.userImg = this.userInfo.head_img;
+            this.userInfo.head_img = this.userInfo.head_img;
           } else {
-            this.user.userImg =
+            this.userInfo.head_img =
               "http://static-image.1911edu.com/defaultHeadImg.jpg";
           }
         }
