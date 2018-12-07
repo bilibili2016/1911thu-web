@@ -273,7 +273,6 @@ export default {
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
-      avator: 'http://static-image.1911edu.com/profile_avator01.png',
       noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
       tabPosition: 'left',
       activeTab: 'tab-first',
@@ -1143,6 +1142,12 @@ export default {
       banner.getUserInfo().then(res => {
         if (res.status === 0) {
           this.userInfo = res.data.userInfo
+          if (this.userInfo.head_img && this.userInfo.head_img != "") {
+            this.userInfo.head_img = this.userInfo.head_img;
+          } else {
+            this.userInfo.head_img =
+              "http://static-image.1911edu.com/defaultHeadImg.jpg";
+          }
         }
       })
     },
