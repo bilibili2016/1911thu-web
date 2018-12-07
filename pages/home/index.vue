@@ -267,8 +267,10 @@ export default {
     getProjectList() {
       this.projectLoading = true;
       home.getProjectList(this.projectForm).then(response => {
-        this.projectLoading = false;
-        this.projectData = response.data.curriculumProjectList;
+        if (response.status === 0) {
+          this.projectLoading = false;
+          this.projectData = response.data.curriculumProjectList;
+        }
       });
     },
     // 获取免费课程列表
