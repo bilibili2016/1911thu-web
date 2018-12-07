@@ -273,7 +273,6 @@ export default {
       isShowNoCourse: false,
       noMyMsg: false,
       study: false,
-      avator: 'http://static-image.1911edu.com/profile_avator01.png',
       noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
       tabPosition: 'left',
       activeTab: 'tab-first',
