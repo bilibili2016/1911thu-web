@@ -10,9 +10,7 @@
       <i class="phone"></i>
       <div class="downApp clearfix">
         <qrcode :value="downloadAppURL" :options="{ size: 120 }" class="qrcode"></qrcode>
-        <div class="changeType fr">
-          <span>下载1911学堂APP</span>
-        </div>
+        <p class="changeType">下载1911学堂APP</p>
       </div>
     </div>
     <div class="shoppingCart" v-show="isAuthenticated" @click="handleLink('/shop/shoppingcart')">
@@ -23,6 +21,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import { mapState, mapGetters } from 'vuex'
 import { getNetwork } from '@/lib/util/helper'
