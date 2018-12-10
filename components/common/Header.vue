@@ -487,6 +487,7 @@ export default {
     resize () {
       let wWidth = window.innerWidth;
       this.isBig = wWidth < 1420 ? false : true;
+      alert(wWidth)
     }
   },
   mounted () {
