@@ -2,7 +2,7 @@ body {
   padding-top: 80px;
 
   &.mobile {
-    zoom: 0.95 !important;
+    zoom: 0.85 !important;
   }
 }
 
@@ -30,7 +30,7 @@ body {
 
     .header-fl {
       white-space: nowrap;
-      width: 570px;
+      width: 580px;
       height: 80px;
       padding: 12px 0;
       position: absolute;
@@ -57,7 +57,7 @@ body {
       right: 0;
       top: 0;
       white-space: nowrap;
-      width: 500px;
+      width: 510px;
       height: 100%;
 
       &.big {
