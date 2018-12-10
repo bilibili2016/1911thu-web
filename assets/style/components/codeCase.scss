@@ -1,98 +1,99 @@
 .exchange {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 200;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 200;
 
-  .innerWord {
-    width: 580px;
-    height: 390px;
-    position: absolute;
-    top: 100px;
-    left: 50%;
-    margin-left: -290px;
-    border-radius: 10px;
-    background-color: #fff;
+	.innerWord {
+		width: 580px;
+		height: 390px;
+		position: absolute;
+		top: 100px;
+		left: 50%;
+		margin-left: -290px;
+		border-radius: 10px;
+		background-color: #fff;
 
-    .closeEcg {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      font-size: 30px;
-      color: #773084;
-    }
+		.closeEcg {
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			font-size: 30px;
+			color: #773084;
+		}
 
-    .changeContent {
-      width: 100%;
-      margin-top: 72px;
-      padding: 0 35px;
+		.changeContent {
+			width: 100%;
+			margin-top: 65px;
+			padding: 0 35px;
+			padding-left: 52px;
 
-      .changeInput {
-        span {
-          color: #222;
-          font-size: 16px;
-          margin-right: 20px;
-        }
+			.changeInput {
+				span {
+					color: #222;
+					font-size: 16px;
+					margin-right: 20px;
+				}
 
-        input {
-          width: 400px;
-          height: 50px;
-          border-radius: 5px;
-          padding-left: 20px;
-          background-color: #f1e9f8;
+				input {
+					width: 400px;
+					height: 50px;
+					border-radius: 5px;
+					padding-left: 20px;
+					background-color: #eee;
 
-          ::placeholder {
-            color: #c099ec;
-            font-size: 14px;
-          }
-        }
+					::placeholder {
+						color: #c099ec;
+						font-size: 14px;
+					}
+				}
 
-        p {
-          height: 30px;
-          line-height: 30px;
+				p {
+					height: 30px;
+					line-height: 30px;
 
-          span {
-            font-size: 13px;
-            color: #ff5f5f;
-            padding-left: 94px;
-          }
-        }
-      }
+					span {
+						font-size: 13px;
+						color: #ff5f5f;
+						padding-left: 94px;
+					}
+				}
+			}
 
-      .changeTips {
-        padding-top: 20px;
-        margin: 0 auto;
+			.changeTips {
+				padding-top: 20px;
+				margin: 0 auto;
 
-        h4 {
-          font-size: 16px;
-          line-height: 30px;
-        }
+				h4 {
+					font-size: 14px;
+					line-height: 30px;
+				}
 
-        p {
-          color: #aaa;
-          font-size: 12px;
-          line-height: 24px;
-        }
-      }
+				p {
+					color: #aaa;
+					font-size: 12px;
+					line-height: 24px;
+				}
+			}
 
-      .bind {
-        width: 125px;
-        height: 42px;
-        line-height: 42px;
-        text-align: center;
-        color: #fff;
-        margin: 30px auto 0;
-        border-radius: 21px;
-        background-color: #cccccc;
-        cursor: pointer;
+			.bind {
+				width: 125px;
+				height: 42px;
+				line-height: 42px;
+				text-align: center;
+				color: #fff;
+				margin: 30px auto 0;
+				border-radius: 21px;
+				background-color: #cccccc;
+				cursor: pointer;
 
-        &.input {
-          background-color: #773084;
-        }
-      }
-    }
-  }
+				&.input {
+					background-color: #773084;
+				}
+			}
+		}
+	}
 }
