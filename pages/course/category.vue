@@ -176,7 +176,7 @@ export default {
         childList: [],
         id: "0",
         parent_id: "0",
-        picture: "http://p8p47jzeo.bkt.clouddn.com/1531894819",
+        picture: "",
         short_name: "全部"
       },
       allProjectData: {
@@ -184,7 +184,7 @@ export default {
         childList: [],
         id: "0",
         parent_id: "0",
-        picture: "http://p8p47jzeo.bkt.clouddn.com/1531894819",
+        picture: "",
         short_name: "全部"
       },
       selectCidItem: "",
