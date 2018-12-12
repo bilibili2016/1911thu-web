@@ -20,7 +20,7 @@
       class="college"
       v-if="categoryData.length>1"
     >
-      <h4 class="title">学院：</h4>
+      <h4 class="title">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;院：</h4>
       <ul class="ulList">
         <li
           v-for="(item,index) in categoryData"
@@ -37,17 +37,19 @@
       class="classification"
       v-if="categoryData.length>1"
     >
-      <h4 class="title">专长领域：</h4>
-      <ul class="ulList">
-        <li
-          v-for="(items,index) in childList"
-          :index="index"
-          :key="index"
-          :class="{btnBg: pid === items.id ? true : false }"
-        >
-          <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
-        </li>
-      </ul>
+      <div class="inner">
+        <h4 class="title">专长领域：</h4>
+        <ul class="ulList">
+          <li
+            v-for="(items,index) in childList"
+            :index="index"
+            :key="index"
+            :class="{btnBg: pid === items.id ? true : false }"
+          >
+            <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
+          </li>
+        </ul>
+      </div>
     </div>
     <div
       class="unit"
