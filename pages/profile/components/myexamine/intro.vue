@@ -35,7 +35,7 @@
       </div>
       <div class="ask">
         <p class="tit">5. 颁发证书</p>
-        <p>学院将根据学员考试成绩颁发相应证书，分数大于60分，即可获得由清华大学与其他相关机构颁发的认证证书；若三次考试均未达到及格标准，则不具备获取证书资格。</p>
+        <p>学院将根据学员考试成绩颁发相应证书，分数大于60分，即可获得清华大学相关部门或国内外其他知名院校颁发的认证证书及1911学堂结业证书。</p>
       </div>
       <div class="ask">
         <p class="tit">6. 有效期限</p>
@@ -82,6 +82,10 @@
         <p>
           <span class="left">您参加考试的学院：</span>
           <span class="right">{{examRuleInfo.title}}</span>
+        </p>
+        <p>
+          <span class="left">考试次数：</span>
+          <span class="right">第xx次</span>
         </p>
         <p>
           <span class="left">考试题数：</span>
