@@ -2,16 +2,20 @@
   <!-- 认证资格介绍 -->
   <div class="examine-intro">
     <div class="examine-top">
-      <span class="goBack" @click="handleBack">
+      <span
+        class="goBack"
+        @click="handleBack"
+      >
         <i class="el-icon-arrow-left icon"></i>认证资格介绍
       </span>
     </div>
     <div class="examine-bottom">
-      <div
-        class="one"
-      >1911学堂学员在学院完成学习后，即可参加在线认证考试，考试通过者将获得清华大学与其他相关机构颁发的认证证书，证书均配有可在官方网站进行查询的唯一认证编码。</div>
+      <div class="one">1911学堂学员在学院完成学习后，即可参加在线认证考试，考试通过者将获得清华大学与其他相关机构颁发的认证证书，证书均配有可在官方网站进行查询的唯一认证编码。</div>
       <div class="examineImg">
-        <img src="http://static-image.1911edu.com/certification.png" alt>
+        <img
+          src="http://static-image.1911edu.com/certification.png"
+          alt
+        >
       </div>
       <div class="ask">
         <p class="tit">1. 学时要求</p>
@@ -39,16 +43,41 @@
       </div>
 
       <div class="examButton">
-        <div class="examineBtn notExamine" v-if="showBtn">参加考试</div>
-        <div class="examineBtn" v-else @click="examRules('1')">参加考试</div>
-        <div class="examineBtn" v-if="showSimulationExam" @click="examRules('2')">模拟考试</div>
-        <div class="examineBtn notExamine" v-else>模拟考试</div>
-        <p class="text">{{alertText}}</p>
+        <div
+          class="examineBtn notExamine"
+          v-if="showBtn"
+        ><span>参加考试</span><span class="alertText">{{alertText}}</span></div>
+        <div
+          class="examineBtn"
+          v-else
+          @click="examRules('1')"
+        >参加考试</div>
+        <div
+          class="examineBtn"
+          v-if="showSimulationExam"
+          @click="examRules('2')"
+        >模拟考试</div>
+        <div
+          class="examineBtn notExamine"
+          v-else
+        >模拟考试
+          <span class="alertText">您已用尽2次模拟考试机会，不能再参加模拟考试。</span>
+        </div>
+        <!-- <p class="text">{{alertText}}</p> -->
       </div>
     </div>
-    <div class="examRules" v-if="showExamRules">
-      <div class="rulesInfo" v-loading="examRuleLoading">
-        <i class="el-icon-close" @click="closeRules"></i>
+    <div
+      class="examRules"
+      v-if="showExamRules"
+    >
+      <div
+        class="rulesInfo"
+        v-loading="examRuleLoading"
+      >
+        <i
+          class="el-icon-close"
+          @click="closeRules"
+        ></i>
         <h4>温馨提示</h4>
         <p>
           <span class="left">您参加考试的学院：</span>
@@ -79,8 +108,8 @@
 import { examine } from "~/lib/v1_sdk/index";
 import { message, matchSplits, getNet } from "@/lib/util/helper";
 export default {
-  props: ['vipID'],
-  data () {
+  props: ["vipID"],
+  data() {
     return {
       alertText: "",
       showBtn: true,
@@ -94,58 +123,58 @@ export default {
         type: 1
       },
       examRuleLoading: true,
-      examRuleInfo: '',
+      examRuleInfo: "",
       showExamRules: false
-    }
+    };
   },
   methods: {
     //  回到VIP列表页
-    handleBack () {
-      this.pageData.name = 'list'
-      this.$bus.$emit('whichShow', this.pageData)
+    handleBack() {
+      this.pageData.name = "list";
+      this.$bus.$emit("whichShow", this.pageData);
     },
     // 考试规则弹框
-    examRules (type) {
-      this.vipForm.vipId = this.vipID
-      this.vipForm.type = type
-      this.examRuleLoading = true
+    examRules(type) {
+      this.vipForm.vipId = this.vipID;
+      this.vipForm.type = type;
+      this.examRuleLoading = true;
       examine.examRuleInfo(this.vipForm).then(response => {
         if (response.status == 0) {
-          this.examRuleLoading = false
-          this.examRuleInfo = response.data.examRuleInfo
-          this.showExamRules = true
+          this.examRuleLoading = false;
+          this.examRuleInfo = response.data.examRuleInfo;
+          this.showExamRules = true;
         } else {
           this.$message({
             showClose: true,
             message: response.msg,
-            type: 'error',
+            type: "error",
             duration: 6000
-          })
+          });
         }
-      })
+      });
     },
     // 关闭规则弹框
-    closeRules () {
-      this.showExamRules = false
+    closeRules() {
+      this.showExamRules = false;
     },
     // 开始考试
-    handleExamine () {
-      this.pageData.id = this.vipID
+    handleExamine() {
+      this.pageData.id = this.vipID;
       examine.createExamRecordQuestion(this.vipForm).then(response => {
         if (response.status == 100201) {
           this.pageData.name = "info";
           this.$bus.$emit("whichShow", this.pageData);
         } else if (response.status == 0) {
-          if (this.vipForm.type == '1') {
+          if (this.vipForm.type == "1") {
             this.$router.push(
-              '/profile/components/myexamine/answerQuestion?id=' +
-              response.data.exam_record_id
-            )
+              "/profile/components/myexamine/answerQuestion?id=" +
+                response.data.exam_record_id
+            );
           } else {
             this.$router.push(
-              '/profile/components/myexamine/simulationExam?id=' +
-              response.data.exam_record_id
-            )
+              "/profile/components/myexamine/simulationExam?id=" +
+                response.data.exam_record_id
+            );
           }
         } else {
           this.$message({
@@ -158,9 +187,9 @@ export default {
       });
     },
     //验证考试权限
-    validateExamPrivilege () {
-      this.vipForm.vipId = this.vipID
-      this.vipForm.type = '1'
+    validateExamPrivilege() {
+      this.vipForm.vipId = this.vipID;
+      this.vipForm.type = "1";
       examine.validateExamPrivilege(this.vipForm).then(response => {
         if (response.status == 0) {
           this.showBtn = false;
@@ -175,9 +204,9 @@ export default {
       });
     },
     // 验证模拟考试权限
-    validateSimulationExam () {
-      this.vipForm.vipId = this.vipID
-      this.vipForm.type = '2'
+    validateSimulationExam() {
+      this.vipForm.vipId = this.vipID;
+      this.vipForm.type = "2";
       examine.validateExamPrivilege(this.vipForm).then(response => {
         if (response.status == 0) {
           this.showSimulationExam = true;
@@ -187,9 +216,9 @@ export default {
       });
     }
   },
-  mounted () {
-    this.validateExamPrivilege()
-    this.validateSimulationExam()
+  mounted() {
+    this.validateExamPrivilege();
+    this.validateSimulationExam();
   }
 };
 </script>
