@@ -24,7 +24,7 @@
             v-if="cid!=0"
             class="teacher"
             @click="handleLink()"
-          >学术委员会</div>
+          >课程研发专家组</div>
         </div>
         <!-- <div class="fr rightPages">
           <span v-show="hideSwitch">
