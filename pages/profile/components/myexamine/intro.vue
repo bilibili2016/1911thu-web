@@ -83,10 +83,10 @@
           <span class="left">您参加考试的学院：</span>
           <span class="right">{{examRuleInfo.title}}</span>
         </p>
-        <p>
+        <!-- <p>
           <span class="left">考试次数：</span>
           <span class="right">第xx次</span>
-        </p>
+        </p> -->
         <p>
           <span class="left">考试题数：</span>
           <span class="right">{{examRuleInfo.question_number}}道</span>
@@ -128,7 +128,8 @@ export default {
       },
       examRuleLoading: true,
       examRuleInfo: "",
-      showExamRules: false
+      showExamRules: false,
+      responseData: { type: true, res: "" }
     };
   },
   methods: {
@@ -197,6 +198,10 @@ export default {
       examine.validateExamPrivilege(this.vipForm).then(response => {
         if (response.status == 0) {
           this.showBtn = false;
+        } else if (response.status == 100008) {
+          this.responseData.res = response;
+          this.$router.push("/");
+          return false;
         } else {
           if (response.status == 100201) {
             this.showBtn = false;
