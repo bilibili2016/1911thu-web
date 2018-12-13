@@ -301,12 +301,14 @@ body {
           z-index: -1;
 
           .qrcode {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
           }
 
           .changeType {
-            width: 140px;
+            margin-top: 10px;
+            width: 150px;
+            text-align: center;
 
             span {
               display: inline-block;

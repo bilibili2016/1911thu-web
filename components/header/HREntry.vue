@@ -9,7 +9,7 @@
     <div class="downLoad">
       <i class="phone"></i>
       <div class="downApp clearfix">
-        <qrcode :value="downloadAppURL" :options="{ size: 120 }" class="qrcode"></qrcode>
+        <qrcode :value="downloadAppURL" :options="{ size: 150 }" class="qrcode"></qrcode>
         <p class="changeType">下载1911学堂APP</p>
       </div>
     </div>
