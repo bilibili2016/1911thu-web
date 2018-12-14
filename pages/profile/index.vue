@@ -1271,8 +1271,6 @@ export default {
       this.$bus.$emit("notLogIn", data);
     }
     this.$bus.$on("handleHeadClick", data => {
-      console.log(data, "lll");
-
       this.handleClick(data);
     });
   },
