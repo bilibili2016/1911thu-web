@@ -460,8 +460,6 @@ export default {
       });
       // 重新拉取用户信息
       this.$bus.$on("getUserInfo", data => {
-        console.log(555);
-
         this.getUserInfo();
       });
       // 获取购物车数量
