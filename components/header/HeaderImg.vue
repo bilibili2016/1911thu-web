@@ -78,6 +78,7 @@ export default {
       let obj = {
         name: data
       };
+
       this.$bus.$emit("handleHeadClick", obj);
     },
     handleSignOut() {
