@@ -9,11 +9,11 @@
         :config="configs"
       ></v-banner>
     </div>
-    <div class="teacherLead clearfix">
+    <!-- <div class="teacherLead clearfix">
       <p>为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。</p>
       <p>1911学堂目前集结了200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者；未来，将建立由数千名全球知名专家教授组成的高端专家导师库，为学员带来权威、前沿、高端的学习体验。</p>
       <p>贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。</p>
-    </div>
+    </div> -->
     <!-- 分类 -->
     <v-category
       :categoryData="categoryData"
@@ -27,33 +27,51 @@
       @selectTips="selectTips"
       @changeCid="changeCid"
     ></v-category>
-    <div
-      class="te-con"
-      v-if="famousList.length"
-    >
-      <div class="center teacherList">
-        <div @click="getNewInfoList"></div>
-        <v-card
-          :famousList="famousList"
-          :config="config"
-        ></v-card>
-      </div>
-      <div
-        class="pagination"
-        v-if="pagemsg.total>9"
-      >
-        <el-pagination
-          :id="pagemsg.total"
-          v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
-          background
-          layout="prev, pager, next"
-          :page-size="pagemsg.pagesize"
-          :pager-count="5"
-          :page-count="pagemsg.pagesize"
-          :current-page="pagemsg.page"
-          :total="pagemsg.total"
-          @current-change="selectPages"
-        ></el-pagination>
+    <div class="te-con clearfix">
+      <div class="con">
+        <div
+          class="left"
+          v-if="famousList.length"
+        >
+          <div class="teacherList">
+            <div @click="getNewInfoList"></div>
+            <v-card
+              :famousList="famousList"
+              :config="config"
+            ></v-card>
+          </div>
+          <div
+            class="pagination"
+            v-if="pagemsg.total>12"
+          >
+            <el-pagination
+              :id="pagemsg.total"
+              v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
+              background
+              layout="prev, pager, next"
+              :page-size="pagemsg.pagesize"
+              :pager-count="5"
+              :page-count="pagemsg.pagesize"
+              :current-page="pagemsg.page"
+              :total="pagemsg.total"
+              @current-change="selectPages"
+            ></el-pagination>
+          </div>
+        </div>
+        <div
+          class="right"
+          id="rightCon"
+          ref="rightCon"
+        >
+          <div
+            class="right-con "
+            :class="{rightFixed:isFixed}"
+          >
+            为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。
+            1911学堂目前集结了200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者；未来，将建立由数千名全球知名专家教授组成的高端专家导师库，为学员带来权威、前沿、高端的学习体验。
+            贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。
+          </div>
+        </div>
       </div>
     </div>
     <!-- 无数据 -->
@@ -95,6 +113,8 @@ export default {
   },
   data() {
     return {
+      fixedTop: 0,
+      isFixed: false,
       sortData: [
         { id: 1, category_name: "学院专家组" },
         { id: 1, category_name: "授课导师" }
@@ -118,14 +138,14 @@ export default {
       famousList: [],
       teacherForm: {
         pages: 1,
-        limits: 9,
+        limits: 12,
         cid: 0,
         pid: 0,
         uid: 0
       },
       pagemsg: {
         page: 1,
-        pagesize: 9,
+        pagesize: 12,
         total: null
       },
       categoryId: 0,
@@ -150,7 +170,7 @@ export default {
     },
     initTeacherList() {
       this.teacherForm.pages = 1;
-      this.teacherForm.limits = 9;
+      this.teacherForm.limits = 12;
       this.pagemsg.page = 1;
       this.getNewInfoList();
     },
@@ -276,6 +296,29 @@ export default {
         this.$emit("changeCid", this.pid);
       }
       this.childList = this.categoryData[this.categoryIndex].childList;
+    },
+    addClass() {
+      console.log(document.getElementById("rightCon").offsetTop);
+      // let top = this.$refs["rightCon"].getBoundingClientRect().top
+      //   console.log(top);
+      // if (document.getElementById("rightCon")) {
+      //   let top = parseInt(document.getElementById("rightCon").offsetTop);
+      //   console.log(top);
+      // }
+
+      this.scroll = parseInt(
+        document.documentElement.scrollTop || document.body.scrollTop
+      );
+      let scrollIns = parseInt(this.scroll + this.windowHeight);
+      console.log(this.scroll, "ddd");
+
+      console.log(this.fixedTop, "nnn");
+
+      if (this.scroll > this.fixedTop) {
+        this.isFixed = true;
+      } else {
+        this.isFixed = false;
+      }
     }
   },
   mounted() {
@@ -283,6 +326,8 @@ export default {
     this.getHeaderList();
     // this.initTeacherList();
     this.teacherCompanyList();
+    window.addEventListener("scroll", this.addClass);
+    this.fixedTop = this.$refs["rightCon"].getBoundingClientRect().top;
   }
 };
 </script>
