@@ -83,10 +83,10 @@
           <span class="left">您参加考试的学院：</span>
           <span class="right">{{examRuleInfo.title}}</span>
         </p>
-        <!-- <p>
+        <p>
           <span class="left">考试次数：</span>
-          <span class="right">第xx次</span>
-        </p> -->
+          <span class="right">第{{examRuleInfo.record_number}}次</span>
+        </p>
         <p>
           <span class="left">考试题数：</span>
           <span class="right">{{examRuleInfo.question_number}}道</span>

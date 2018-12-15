@@ -10,7 +10,6 @@
           <span>申请证书</span>
         </div>
         <div
-          v-show="false"
           class="certificateList"
           v-loading="examineLoading"
           :class="{ minheight : examineLoading}"
