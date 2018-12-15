@@ -1,21 +1,6 @@
 <template>
   <div class="teacherCategory">
-    <!-- <div
-      class="classsfiy"
-      v-if="sortData.length>1"
-    >
-      <h4 class="title">类别：</h4>
-      <ul class="ulList">
-        <li
-          v-for="(item,index) in sortData"
-          :index="index"
-          :key="index"
-          :class="{btnBg: kid === item.id ? true : false }"
-        >
-          <el-button @click="selectKid(item,index)">{{item.category_name}}</el-button>
-        </li>
-      </ul>
-    </div> -->
+
     <div
       class="college"
       v-if="categoryData.length>1"
@@ -32,6 +17,24 @@
         </li>
       </ul>
     </div>
+
+    <!-- <div
+      class="classsfiy"
+      v-if="sortData.length>1"
+    >
+      <h4 class="title">导师介绍：</h4>
+      <ul class="ulList">
+        <li
+          v-for="(item,index) in sortData"
+          :index="index"
+          :key="index"
+          :class="{btnBg: kid === item.id ? true : false }"
+        >
+          <el-button @click="selectKid(item,index)">{{item.category_name}}</el-button>
+        </li>
+      </ul>
+    </div> -->
+
     <!-- 课程不展示 -->
     <div
       class="classification"
@@ -96,14 +99,23 @@ export default {
     },
     // 小类 单个
     selectPid(item, index) {
-      this.pid = item.id;
-      this.$emit("selectPid", item, index);
+      if (this.cid == 0) {
+        //一级分类全部--专长领域下拉点击效果
+        this.cid = item.parent_id;
+        this.pid = item.id;
+        this.$emit("selectTips", item, index);
+        this.$emit("processData");
+      } else {
+        this.pid = item.id;
+        this.$emit("selectPid", item, index);
+      }
     },
     //所在单位
     selectUid(item, index) {
       this.uid = item.id;
       this.$emit("selectUid", item, index);
-    }
+    },
+    selectKid() {}
   },
   mounted() {
     this.$bus.$on("selectChange", data => {

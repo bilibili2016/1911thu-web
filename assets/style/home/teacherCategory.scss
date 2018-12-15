@@ -64,7 +64,7 @@
 	}
 	.classification {
 		position: relative;
-		height: 133px;
+		min-height: 96px;
 		overflow: hidden;
 		transition: all 600ms;
 		.inner {
