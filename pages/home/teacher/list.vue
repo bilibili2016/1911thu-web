@@ -24,10 +24,14 @@
       @selectCid="selectCid"
       @selectPid="selectPid"
       @selectUid="selectUid"
+      @selectKid="selectKid"
       @selectTips="selectTips"
       @changeCid="changeCid"
     ></v-category>
-    <div class="te-con clearfix">
+    <div
+      class="te-con clearfix"
+      id="container"
+    >
       <div class="con">
         <div
           class="left"
@@ -66,11 +70,9 @@
           <div
             class="right-con "
             :class="{rightFixed:isFixed}"
-          >
-            为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。
-            1911学堂目前集结了200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者；未来，将建立由数千名全球知名专家教授组成的高端专家导师库，为学员带来权威、前沿、高端的学习体验。
-            贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。
-          </div>
+            v-if="famousList.length!=0"
+            v-html="introduce"
+          ></div>
         </div>
       </div>
     </div>
@@ -113,15 +115,18 @@ export default {
   },
   data() {
     return {
+      introduce: "",
+      initIntro:
+        '<p class="indent" style="text-indent:2em">为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。</p>' +
+        '<p class="indent" style="text-indent:2em">1911学堂目前集结了200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者；未来，将建立由数千名全球知名专家教授组成的高端专家导师库，为学员带来权威、前沿、高端的学习体验。</p>' +
+        '<p class="indent" style="text-indent:2em">贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。</p>',
       fixedTop: 0,
       isFixed: false,
-      sortData: [
-        { id: 1, category_name: "学院专家组" },
-        { id: 1, category_name: "授课导师" }
-      ],
+      sortData: [],
       unitData: [],
       categoryData: [],
       childList: [],
+      categoryListData: [],
       pageType: {
         page: "teacherList",
         text: "暂无数据",
@@ -141,7 +146,8 @@ export default {
         limits: 12,
         cid: 0,
         pid: 0,
-        uid: 0
+        uid: 0,
+        kid: ""
       },
       pagemsg: {
         page: 1,
@@ -155,11 +161,13 @@ export default {
       categoryIndex: 0,
       allData: {
         category_name: "全部",
+        introduce: "",
         childList: [],
         id: "0",
         parent_id: "0",
         picture: "",
-        short_name: "全部"
+        short_name: "全部",
+        teacherKindList: []
       }
     };
   },
@@ -203,10 +211,16 @@ export default {
     },
     //选择一级分类
     selectCid(data, index) {
+      if (data.id != 0) {
+        this.introduce = data.introduce;
+      } else {
+        this.introduce = this.initIntro;
+      }
       persistStore.set("cid", data.id);
       this.categoryId = data.id;
       this.teacherForm.cid = data.id;
       this.teacherForm.pid = 0;
+      this.teacherForm.kid = 0;
       this.initTeacherList();
     },
     //选择二级分类
@@ -216,6 +230,11 @@ export default {
     },
     //专长领域下拉点击效果
     selectTips(item) {
+      for (var i = 0; i < this.categoryListData.length; i++) {
+        if (this.categoryListData[i].id == item.parent_id) {
+          this.introduce = this.categoryListData[i].introduce;
+        }
+      }
       persistStore.set("cid", item.parent_id);
       this.categoryId = item.parent_id;
       this.teacherForm.cid = item.parent_id;
@@ -225,6 +244,11 @@ export default {
     //所在单位
     selectUid(data, index) {
       this.teacherForm.uid = data.id;
+      this.initTeacherList();
+    },
+    selectKid(item) {
+      this.teacherForm.kid = item.id;
+      this.introduce = item.introduce;
       this.initTeacherList();
     },
     //一级分类下没有二级分类进行初始化
@@ -246,20 +270,46 @@ export default {
     // 公共 获取list 方法
     getHeaderList() {
       this.loadList = true;
-      list.childCategoryList().then(res => {
+      list.teacherCategoryList().then(res => {
         if (res.status === 0) {
+          this.categoryListData = res.data.categoryList;
           this.handleData(this.allData, res);
           this.loadList = false;
-
           if (persistStore.get("cid") >= 0) {
-            //从课程分类页跳转过来的 cid
-            this.$bus.$emit("selectChange", persistStore.get("cid"));
+            let CID = persistStore.get("cid");
+            for (var i = 0; i < this.categoryListData.length; i++) {
+              if (this.categoryListData[i].id == CID) {
+                //从课程分类页跳转过来的 cid
+                this.$bus.$emit("selectChange", this.categoryListData[i]);
+              }
+            }
           } else {
             //其他页面跳转过来的 cid=-1
             this.initTeacherList();
           }
         }
       });
+    },
+    // 处理数据 拼接全部数据
+    handleData(data, res) {
+      this.categoryData = res.data.categoryList;
+      this.categoryData.unshift(data);
+      if (this.categoryData.length > 1) {
+        for (let i = 0; i < this.categoryData.length; i++) {
+          this.categoryData[i].childList.unshift({
+            category_name: "全部",
+            childList: [],
+            id: "0",
+            parent_id: this.categoryData[i].id,
+            picture: "",
+            short_name: "全部",
+            teacherKindList: []
+          });
+        }
+        this.loadList = false;
+        this.makeData(this.categoryData[0].childList, res.data.categoryList);
+        this.processData();
+      }
     },
     // 处理全部的分类
     makeData(arr, data) {
@@ -270,19 +320,6 @@ export default {
           }
         });
       });
-    },
-    // 处理数据 拼接全部数据
-    handleData(data, res) {
-      this.categoryData = res.data.categoryList;
-      this.categoryData.unshift(data);
-      if (this.categoryData.length > 1) {
-        for (let item of this.categoryData) {
-          item.childList.unshift(this.allData);
-        }
-        this.loadList = false;
-        this.makeData(this.categoryData[0].childList, res.data.categoryList);
-        this.processData();
-      }
     },
     // 根据一级分类处理分类二级分类
     processData() {
@@ -296,25 +333,16 @@ export default {
         this.$emit("changeCid", this.pid);
       }
       this.childList = this.categoryData[this.categoryIndex].childList;
+      this.sortData = this.categoryData[this.categoryIndex].teacherKindList;
+      // console.log(this.sortData);
     },
     addClass() {
-      console.log(document.getElementById("rightCon").offsetTop);
-      // let top = this.$refs["rightCon"].getBoundingClientRect().top
-      //   console.log(top);
-      // if (document.getElementById("rightCon")) {
-      //   let top = parseInt(document.getElementById("rightCon").offsetTop);
-      //   console.log(top);
-      // }
-
       this.scroll = parseInt(
         document.documentElement.scrollTop || document.body.scrollTop
       );
       let scrollIns = parseInt(this.scroll + this.windowHeight);
-      console.log(this.scroll, "ddd");
 
-      console.log(this.fixedTop, "nnn");
-
-      if (this.scroll > this.fixedTop) {
+      if (this.scroll > 810) {
         this.isFixed = true;
       } else {
         this.isFixed = false;

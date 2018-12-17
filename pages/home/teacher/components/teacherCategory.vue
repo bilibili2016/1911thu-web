@@ -3,7 +3,7 @@
 
     <div
       class="college"
-      v-if="categoryData.length>1"
+      v-if="categoryData.length>0"
     >
       <h4 class="title">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;院：</h4>
       <ul class="ulList">
@@ -17,10 +17,9 @@
         </li>
       </ul>
     </div>
-
-    <!-- <div
+    <div
       class="classsfiy"
-      v-if="sortData.length>1"
+      v-if="sortData.length>0 && isTeacher"
     >
       <h4 class="title">导师介绍：</h4>
       <ul class="ulList">
@@ -33,12 +32,13 @@
           <el-button @click="selectKid(item,index)">{{item.category_name}}</el-button>
         </li>
       </ul>
-    </div> -->
+    </div>
 
     <!-- 课程不展示 -->
     <div
       class="classification"
-      v-if="categoryData.length>1"
+      :class="{isFirst:isFirst}"
+      v-if="categoryData.length>0"
     >
       <div class="inner">
         <h4 class="title">专长领域：</h4>
@@ -56,7 +56,7 @@
     </div>
     <div
       class="unit"
-      v-if="unitData.length>1"
+      v-if="unitData.length>0"
     >
       <h4 class="title">所在单位：</h4>
       <ul class="ulList">
@@ -80,6 +80,8 @@ export default {
   props: ["unitData", "categoryData", "childList", "sortData"],
   data() {
     return {
+      isTeacher: false,
+      isFirst: true,
       categoryIndex: 0,
       cid: "0",
       pid: "0",
@@ -92,8 +94,18 @@ export default {
   methods: {
     // 大类 单个
     selectCid(item, index) {
+      console.log(item);
+
+      if (item.id == 0) {
+        this.isTeacher = false;
+        this.isFirst = true;
+      } else {
+        this.isTeacher = true;
+        this.isFirst = false;
+      }
       this.cid = item.id;
       this.pid = "0";
+      this.kid = 0;
       this.$emit("selectCid", item);
       this.$emit("processData");
     },
@@ -109,22 +121,36 @@ export default {
         this.pid = item.id;
         this.$emit("selectPid", item, index);
       }
+
+      if (item.parent_id == 0) {
+        this.isFirst = true;
+        this.isTeacher = false;
+      } else {
+        this.isFirst = false;
+        this.isTeacher = true;
+      }
     },
     //所在单位
     selectUid(item, index) {
       this.uid = item.id;
       this.$emit("selectUid", item, index);
     },
-    selectKid() {}
+    selectKid(item, index) {
+      this.kid = item.id;
+      this.$emit("selectKid", item, index);
+    }
   },
   mounted() {
     this.$bus.$on("selectChange", data => {
-      this.selectCid({ id: data });
+      this.selectCid(data);
+    });
+    this.$nextTick(() => {
+      console.log(document.getElementById("container").offsetTop, "nn");
     });
   }
 };
 </script>
 
 <style scoped lang="scss">
-@import "~assets/style/home/teacherCategory.scss";
+@import "~assets/style/teacher/teacherCategory.scss";
 </style>

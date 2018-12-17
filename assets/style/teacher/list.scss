@@ -44,20 +44,25 @@
 	.left {
 		float: left;
 		width: 750px;
+		min-height: 600px;
 	}
 	.right {
-		position: absolute;
-		top: 0;
-		right: 0;
+		// position: absolute;
+		// top: 0;
+		// right: 0;
 		float: left;
 		width: 350px;
 		background-color: #fff;
+		margin-bottom: 30px;
 	}
 	.right-con {
 		width: 350px;
 		padding: 30px 20px;
 		line-height: 30px;
 		background-color: #fff;
+		.indent {
+			text-indent: 2em;
+		}
 	}
 	.rightFixed {
 		position: fixed;
