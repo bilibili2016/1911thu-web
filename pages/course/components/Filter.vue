@@ -8,23 +8,27 @@
             @tab-click="selectActiveTab"
           >
             <el-tab-pane
-              label="全部"
+              label="学院全部课程"
               name="first"
             ></el-tab-pane>
             <el-tab-pane
-              label="最新"
+              label="学院最新课程"
               name="second"
             ></el-tab-pane>
             <el-tab-pane
-              label="最热"
+              label="学院最热课程"
               name="third"
             ></el-tab-pane>
+            <el-tab-pane
+              label="学院专家组介绍"
+              name="four"
+            ></el-tab-pane>
           </el-tabs>
-          <div
+          <!-- <div
             v-if="cid!=0"
             class="teacher"
             @click="handleLink()"
-          >课程研发专家组</div>
+          >课程研发专家组</div> -->
         </div>
         <!-- <div class="fr rightPages">
           <span v-show="hideSwitch">
@@ -52,11 +56,12 @@ export default {
   },
   methods: {
     selectActiveTab(tab) {
-      this.$emit("selectActiveTab", tab);
-    },
-    handleLink(page) {
-      persistStore.set("cid", matchSplits("cid"));
-      this.$router.push("/home/teacher/list");
+      if (tab.name == "four") {
+        persistStore.set("cid", matchSplits("cid"));
+        this.$router.push("/home/teacher/list");
+      } else {
+        this.$emit("selectActiveTab", tab);
+      }
     }
   },
   mounted() {

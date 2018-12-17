@@ -9,11 +9,11 @@
         :config="configs"
       ></v-banner>
     </div>
-    <div class="teacherLead clearfix">
+    <!-- <div class="teacherLead clearfix">
       <p>为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。</p>
       <p>1911学堂目前集结了200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者；未来，将建立由数千名全球知名专家教授组成的高端专家导师库，为学员带来权威、前沿、高端的学习体验。</p>
       <p>贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。</p>
-    </div>
+    </div> -->
     <!-- 分类 -->
     <v-category
       :categoryData="categoryData"
@@ -24,36 +24,56 @@
       @selectCid="selectCid"
       @selectPid="selectPid"
       @selectUid="selectUid"
+      @selectKid="selectKid"
       @selectTips="selectTips"
       @changeCid="changeCid"
     ></v-category>
     <div
-      class="te-con"
-      v-if="famousList.length"
+      class="te-con clearfix"
+      id="container"
     >
-      <div class="center teacherList">
-        <div @click="getNewInfoList"></div>
-        <v-card
-          :famousList="famousList"
-          :config="config"
-        ></v-card>
-      </div>
-      <div
-        class="pagination"
-        v-if="pagemsg.total>9"
-      >
-        <el-pagination
-          :id="pagemsg.total"
-          v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
-          background
-          layout="prev, pager, next"
-          :page-size="pagemsg.pagesize"
-          :pager-count="5"
-          :page-count="pagemsg.pagesize"
-          :current-page="pagemsg.page"
-          :total="pagemsg.total"
-          @current-change="selectPages"
-        ></el-pagination>
+      <div class="con">
+        <div
+          class="left"
+          v-if="famousList.length"
+        >
+          <div class="teacherList">
+            <div @click="getNewInfoList"></div>
+            <v-card
+              :famousList="famousList"
+              :config="config"
+            ></v-card>
+          </div>
+          <div
+            class="pagination"
+            v-if="pagemsg.total>12"
+          >
+            <el-pagination
+              :id="pagemsg.total"
+              v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
+              background
+              layout="prev, pager, next"
+              :page-size="pagemsg.pagesize"
+              :pager-count="5"
+              :page-count="pagemsg.pagesize"
+              :current-page="pagemsg.page"
+              :total="pagemsg.total"
+              @current-change="selectPages"
+            ></el-pagination>
+          </div>
+        </div>
+        <div
+          class="right"
+          id="rightCon"
+          ref="rightCon"
+        >
+          <div
+            class="right-con "
+            :class="{rightFixed:isFixed}"
+            v-if="famousList.length!=0"
+            v-html="introduce"
+          ></div>
+        </div>
       </div>
     </div>
     <!-- 无数据 -->
@@ -95,13 +115,18 @@ export default {
   },
   data() {
     return {
-      sortData: [
-        { id: 1, category_name: "学院专家组" },
-        { id: 1, category_name: "授课导师" }
-      ],
+      introduce: "",
+      initIntro:
+        '<p class="indent" style="text-indent:2em">为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。</p>' +
+        '<p class="indent" style="text-indent:2em">1911学堂目前集结了200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者；未来，将建立由数千名全球知名专家教授组成的高端专家导师库，为学员带来权威、前沿、高端的学习体验。</p>' +
+        '<p class="indent" style="text-indent:2em">贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。</p>',
+      fixedTop: 0,
+      isFixed: false,
+      sortData: [],
       unitData: [],
       categoryData: [],
       childList: [],
+      categoryListData: [],
       pageType: {
         page: "teacherList",
         text: "暂无数据",
@@ -118,14 +143,15 @@ export default {
       famousList: [],
       teacherForm: {
         pages: 1,
-        limits: 9,
+        limits: 12,
         cid: 0,
         pid: 0,
-        uid: 0
+        uid: 0,
+        kid: ""
       },
       pagemsg: {
         page: 1,
-        pagesize: 9,
+        pagesize: 12,
         total: null
       },
       categoryId: 0,
@@ -135,11 +161,13 @@ export default {
       categoryIndex: 0,
       allData: {
         category_name: "全部",
+        introduce: "",
         childList: [],
         id: "0",
         parent_id: "0",
         picture: "",
-        short_name: "全部"
+        short_name: "全部",
+        teacherKindList: []
       }
     };
   },
@@ -150,7 +178,7 @@ export default {
     },
     initTeacherList() {
       this.teacherForm.pages = 1;
-      this.teacherForm.limits = 9;
+      this.teacherForm.limits = 12;
       this.pagemsg.page = 1;
       this.getNewInfoList();
     },
@@ -183,10 +211,16 @@ export default {
     },
     //选择一级分类
     selectCid(data, index) {
+      if (data.id != 0) {
+        this.introduce = data.introduce;
+      } else {
+        this.introduce = this.initIntro;
+      }
       persistStore.set("cid", data.id);
       this.categoryId = data.id;
       this.teacherForm.cid = data.id;
       this.teacherForm.pid = 0;
+      this.teacherForm.kid = 0;
       this.initTeacherList();
     },
     //选择二级分类
@@ -196,6 +230,11 @@ export default {
     },
     //专长领域下拉点击效果
     selectTips(item) {
+      for (var i = 0; i < this.categoryListData.length; i++) {
+        if (this.categoryListData[i].id == item.parent_id) {
+          this.introduce = this.categoryListData[i].introduce;
+        }
+      }
       persistStore.set("cid", item.parent_id);
       this.categoryId = item.parent_id;
       this.teacherForm.cid = item.parent_id;
@@ -205,6 +244,11 @@ export default {
     //所在单位
     selectUid(data, index) {
       this.teacherForm.uid = data.id;
+      this.initTeacherList();
+    },
+    selectKid(item) {
+      this.teacherForm.kid = item.id;
+      this.introduce = item.introduce;
       this.initTeacherList();
     },
     //一级分类下没有二级分类进行初始化
@@ -226,20 +270,46 @@ export default {
     // 公共 获取list 方法
     getHeaderList() {
       this.loadList = true;
-      list.childCategoryList().then(res => {
+      list.teacherCategoryList().then(res => {
         if (res.status === 0) {
+          this.categoryListData = res.data.categoryList;
           this.handleData(this.allData, res);
           this.loadList = false;
-
           if (persistStore.get("cid") >= 0) {
-            //从课程分类页跳转过来的 cid
-            this.$bus.$emit("selectChange", persistStore.get("cid"));
+            let CID = persistStore.get("cid");
+            for (var i = 0; i < this.categoryListData.length; i++) {
+              if (this.categoryListData[i].id == CID) {
+                //从课程分类页跳转过来的 cid
+                this.$bus.$emit("selectChange", this.categoryListData[i]);
+              }
+            }
           } else {
             //其他页面跳转过来的 cid=-1
             this.initTeacherList();
           }
         }
       });
+    },
+    // 处理数据 拼接全部数据
+    handleData(data, res) {
+      this.categoryData = res.data.categoryList;
+      this.categoryData.unshift(data);
+      if (this.categoryData.length > 1) {
+        for (let i = 0; i < this.categoryData.length; i++) {
+          this.categoryData[i].childList.unshift({
+            category_name: "全部",
+            childList: [],
+            id: "0",
+            parent_id: this.categoryData[i].id,
+            picture: "",
+            short_name: "全部",
+            teacherKindList: []
+          });
+        }
+        this.loadList = false;
+        this.makeData(this.categoryData[0].childList, res.data.categoryList);
+        this.processData();
+      }
     },
     // 处理全部的分类
     makeData(arr, data) {
@@ -250,19 +320,6 @@ export default {
           }
         });
       });
-    },
-    // 处理数据 拼接全部数据
-    handleData(data, res) {
-      this.categoryData = res.data.categoryList;
-      this.categoryData.unshift(data);
-      if (this.categoryData.length > 1) {
-        for (let item of this.categoryData) {
-          item.childList.unshift(this.allData);
-        }
-        this.loadList = false;
-        this.makeData(this.categoryData[0].childList, res.data.categoryList);
-        this.processData();
-      }
     },
     // 根据一级分类处理分类二级分类
     processData() {
@@ -276,6 +333,20 @@ export default {
         this.$emit("changeCid", this.pid);
       }
       this.childList = this.categoryData[this.categoryIndex].childList;
+      this.sortData = this.categoryData[this.categoryIndex].teacherKindList;
+      // console.log(this.sortData);
+    },
+    addClass() {
+      this.scroll = parseInt(
+        document.documentElement.scrollTop || document.body.scrollTop
+      );
+      let scrollIns = parseInt(this.scroll + this.windowHeight);
+
+      if (this.scroll > 810) {
+        this.isFixed = true;
+      } else {
+        this.isFixed = false;
+      }
     }
   },
   mounted() {
@@ -283,6 +354,8 @@ export default {
     this.getHeaderList();
     // this.initTeacherList();
     this.teacherCompanyList();
+    window.addEventListener("scroll", this.addClass);
+    this.fixedTop = this.$refs["rightCon"].getBoundingClientRect().top;
   }
 };
 </script>
