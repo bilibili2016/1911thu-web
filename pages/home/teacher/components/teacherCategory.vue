@@ -94,8 +94,6 @@ export default {
   methods: {
     // 大类 单个
     selectCid(item, index) {
-      console.log(item);
-
       if (item.id == 0) {
         this.isTeacher = false;
         this.isFirst = true;
@@ -143,9 +141,6 @@ export default {
   mounted() {
     this.$bus.$on("selectChange", data => {
       this.selectCid(data);
-    });
-    this.$nextTick(() => {
-      console.log(document.getElementById("container").offsetTop, "nn");
     });
   }
 };
