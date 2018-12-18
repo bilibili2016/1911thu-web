@@ -155,7 +155,7 @@ export default {
           this.loading = false;
           this.courseList = response.data.curriculumList;
           this.pagemsg.total = Number(response.data.pageCount);
-          this.coursename = "免费课程";
+          this.coursename = "限时免费";
           this.BreadCrumb.text = this.coursename;
           this.pageMsgs = true;
         }
@@ -214,7 +214,7 @@ export default {
     } else if (this.cidNumber == "2") {
       setTitle("精品课程-1911学堂");
     } else if (this.cidNumber == "3") {
-      setTitle("免费专区-1911学堂");
+      setTitle("限时免费-1911学堂");
     }
   }
 };
