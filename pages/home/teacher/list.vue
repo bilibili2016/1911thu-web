@@ -33,34 +33,38 @@
       id="container"
     >
       <div class="con">
-        <div
-          class="left"
-          v-if="famousList.length"
-        >
-          <div class="teacherList">
-            <div @click="getNewInfoList"></div>
-            <v-card
-              :famousList="famousList"
-              :config="config"
-            ></v-card>
+        <div class="left">
+          <div v-if="famousList.length">
+            <div class="teacherList">
+              <div @click="getNewInfoList"></div>
+              <v-card
+                :famousList="famousList"
+                :config="config"
+              ></v-card>
+            </div>
+            <div
+              class="pagination"
+              v-if="pagemsg.total>12"
+            >
+              <el-pagination
+                :id="pagemsg.total"
+                v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
+                background
+                layout="prev, pager, next"
+                :page-size="pagemsg.pagesize"
+                :pager-count="5"
+                :page-count="pagemsg.pagesize"
+                :current-page="pagemsg.page"
+                :total="pagemsg.total"
+                @current-change="selectPages"
+              ></el-pagination>
+            </div>
           </div>
-          <div
-            class="pagination"
-            v-if="pagemsg.total>12"
-          >
-            <el-pagination
-              :id="pagemsg.total"
-              v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
-              background
-              layout="prev, pager, next"
-              :page-size="pagemsg.pagesize"
-              :pager-count="5"
-              :page-count="pagemsg.pagesize"
-              :current-page="pagemsg.page"
-              :total="pagemsg.total"
-              @current-change="selectPages"
-            ></el-pagination>
-          </div>
+          <!-- 无数据 -->
+          <v-nodata
+            v-else
+            :pageType="pageType"
+          ></v-nodata>
         </div>
         <div
           class="right"
@@ -70,18 +74,11 @@
           <div
             class="right-con "
             :class="{rightFixed:isFixed}"
-            v-if="famousList.length!=0"
             v-html="introduce"
           ></div>
         </div>
       </div>
     </div>
-    <!-- 无数据 -->
-    <v-nodata
-      v-if="famousList.length==0"
-      :pageType="pageType"
-    ></v-nodata>
-
     <div
       class="joinTeacher"
       @click="joinTeacher"
@@ -194,13 +191,13 @@ export default {
     getNewInfoList() {
       this.loading = true;
       list.getTeacherList(this.teacherForm).then(response => {
+        this.loading = false;
         if (response.status === 100008) {
           let data = { type: true, res: response };
           this.$bus.$emit("reLoginAlertPop", data);
         } else if (response.status === 0) {
           this.pagemsg.total = Number(response.data.pageCount);
           this.famousList = response.data.teacherList;
-          this.loading = false;
           this.isShowBtn = true;
         }
       });
