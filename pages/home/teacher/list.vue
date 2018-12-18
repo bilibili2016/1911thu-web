@@ -334,7 +334,6 @@ export default {
       }
       this.childList = this.categoryData[this.categoryIndex].childList;
       this.sortData = this.categoryData[this.categoryIndex].teacherKindList;
-      // console.log(this.sortData);
     },
     addClass() {
       this.scroll = parseInt(
@@ -354,6 +353,7 @@ export default {
     this.getHeaderList();
     // this.initTeacherList();
     this.teacherCompanyList();
+    this.introduce = this.initIntro;
     window.addEventListener("scroll", this.addClass);
     this.fixedTop = this.$refs["rightCon"].getBoundingClientRect().top;
   }
