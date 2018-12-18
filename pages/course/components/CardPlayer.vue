@@ -271,22 +271,23 @@ export default {
     },
     // 视频准备好之后执行
     readyPlay() {
-      clearInterval(this.playLoading);
-      this.playerLoad();
-      this.playVideo = true;
-      this.loadingFlag = true;
-
       //防止页面发生跳转视频继续播放的情况
       if (this.beforeRoute != this.$route.path) {
         return false;
       }
 
+      clearInterval(this.playLoading);
+
+      this.playerLoad();
+      this.playVideo = true;
+      this.loadingFlag = true;
       if (this.aliPlayer.autoplay) {
         this.playVideo = false;
         this.player.play();
       } else {
         this.playVideo = true;
       }
+
       // 如果课程购买了 判断有没有观看记录，跳转到指定位置播放
       if (this.bought && this.playerForm.seek) {
         this.player.seek(this.playerForm.seek);
