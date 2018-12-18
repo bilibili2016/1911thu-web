@@ -353,6 +353,7 @@ export default {
     this.getHeaderList();
     // this.initTeacherList();
     this.teacherCompanyList();
+    this.introduce = this.initIntro;
     window.addEventListener("scroll", this.addClass);
     this.fixedTop = this.$refs["rightCon"].getBoundingClientRect().top;
   }
