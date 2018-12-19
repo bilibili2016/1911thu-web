@@ -33,7 +33,10 @@
       id="container"
     >
       <div class="con">
-        <div class="left">
+        <div
+          class="left"
+          id="leftCon"
+        >
           <div v-if="famousList.length">
             <div class="teacherList">
               <div @click="getNewInfoList"></div>
@@ -200,6 +203,10 @@ export default {
           this.famousList = response.data.teacherList;
           this.isShowBtn = true;
         }
+        this.$nextTick(() => {
+          document.getElementById("leftCon").style.minHeight =
+            document.getElementById("rightCon").clientHeight + "px";
+        });
       });
     },
     //导师招募
