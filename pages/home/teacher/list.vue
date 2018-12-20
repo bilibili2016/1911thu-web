@@ -205,7 +205,7 @@ export default {
         }
         this.$nextTick(() => {
           document.getElementById("leftCon").style.minHeight =
-            document.getElementById("rightCon").clientHeight + "px";
+            document.getElementById("rightCon").clientHeight + 20 + "px";
         });
       });
     },
@@ -340,16 +340,26 @@ export default {
       this.sortData = this.categoryData[this.categoryIndex].teacherKindList;
     },
     addClass() {
-      this.scroll = parseInt(
-        document.documentElement.scrollTop || document.body.scrollTop
-      );
-      let scrollIns = parseInt(this.scroll + this.windowHeight);
-
-      if (this.scroll > 810) {
+      if (
+        document.getElementById("rightCon").getBoundingClientRect().top * 1 -
+          81 <=
+        0
+      ) {
         this.isFixed = true;
       } else {
         this.isFixed = false;
       }
+
+      // this.scroll = parseInt(
+      //   document.documentElement.scrollTop || document.body.scrollTop
+      // );
+      // let scrollIns = parseInt(this.scroll + this.windowHeight);
+
+      // if (this.scroll > 810) {
+      //   this.isFixed = true;
+      // } else {
+      //   this.isFixed = false;
+      // }
     }
   },
   mounted() {
