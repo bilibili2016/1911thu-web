@@ -62,7 +62,7 @@
 		float: left;
 		width: 350px;
 		// height: 600px;
-		max-height: 450px;
+		// max-height: 450px;
 		overflow-y: auto;
 		background-color: #fff;
 		// margin-bottom: 30px;
@@ -71,7 +71,7 @@
 	.right-con {
 		width: 350px;
 		// height: 600px;
-		max-height: 450px;
+		// max-height: 450px;
 		overflow-y: auto;
 		padding: 30px 20px;
 		line-height: 30px;
@@ -88,9 +88,10 @@
 
 	.rightFixed {
 		// height: 600px;
-		max-height: 450px;
+		// max-height: 450px;
 		overflow-y: auto;
 		position: fixed;
 		top: 80px;
+		bottom: 130px;
 	}
 }
