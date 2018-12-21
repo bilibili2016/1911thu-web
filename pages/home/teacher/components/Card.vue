@@ -28,11 +28,11 @@
 
             <span
               class="btn"
-              v-if="teacher.is_meet"
+              v-if="teacher.is_meet ==1"
               @click.stop="reservation(teacher)"
             >预约导师</span>
             <span
-              v-else
+              v-if="teacher.is_meet ==0"
               class="btn unBook"
             >预约导师</span>
           </p>
@@ -57,11 +57,11 @@
             >筹备中</span>
             <span
               class="btn"
-              v-if="teacher.is_meet"
+              v-if="teacher.is_meet ==1"
               @click.stop="reservation(teacher)"
             >预约导师</span>
             <span
-              v-else
+              v-if="teacher.is_meet ==0"
               class="btn unBook"
             >预约导师</span>
 
