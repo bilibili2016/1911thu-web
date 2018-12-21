@@ -2,7 +2,11 @@
   <div>
     <el-main class="home">
       <!-- 头部导航 -->
-      <v-carousel :items="bannerData" v-loading="bannerLoading" :config="configCarousel"></v-carousel>
+      <v-carousel
+        :items="bannerData"
+        v-loading="bannerLoading"
+        :config="configCarousel"
+      ></v-carousel>
       <!-- 干部网络学院 -->
       <v-course
         :config="configOne"
@@ -82,11 +86,11 @@ export default {
     "v-backtotop": BackToTop,
     "v-course": HomeCourse
   },
-  data () {
+  data() {
     return {
-      bannerLoading: true,
-      infoLoading: true,
-      projectLoading: true,
+      bannerLoading: false,
+      infoLoading: false,
+      projectLoading: false,
       windowWidth: "",
       cadreCollegeTitle: "在线干部学院",
       commercialCollegeTitle: "在线商学院",
@@ -217,10 +221,10 @@ export default {
   computed: {
     ...mapState("auth", [])
   },
-  created () { },
+  created() {},
   methods: {
     ...mapActions("auth", ["signOut"]),
-    getAll () {
+    getAll() {
       this.getBanner();
       this.getCollegeCourseList();
       this.getFreeCourseList();
@@ -234,7 +238,7 @@ export default {
       // this.$bus.$emit('getClassifyList')
     },
     // 获取banner
-    getBanner () {
+    getBanner() {
       this.bannerLoading = true;
       home.getBannerList(this.itemsData).then(response => {
         if (response.status === 0) {
@@ -260,7 +264,7 @@ export default {
     //   })
     // },
     //获取项目列表
-    getProjectList () {
+    getProjectList() {
       this.projectLoading = true;
       home.getProjectList(this.projectForm).then(response => {
         if (response.status === 0) {
@@ -270,7 +274,7 @@ export default {
       });
     },
     // 获取免费课程列表
-    getFreeCourseList () {
+    getFreeCourseList() {
       home.getFreeCourseList(this.freeForm).then(response => {
         if (response.status === 0) {
           this.freeData = response.data.curriculumList;
@@ -278,7 +282,7 @@ export default {
       });
     },
     // 获取新上好课列表
-    getNewCourseList () {
+    getNewCourseList() {
       home.getNewCourseList(this.courseForm).then(response => {
         if (response.status === 0) {
           this.newData = response.data.curriculumList;
@@ -286,13 +290,13 @@ export default {
       });
     },
     // 获取精品好课列表
-    getClassicCourseList () {
+    getClassicCourseList() {
       home.getClassicCourseList(this.classicForm).then(response => {
         this.classicData = response.data.curriculumList;
       });
     },
     // 获取学院课程列表
-    getCollegeCourseList () {
+    getCollegeCourseList() {
       home.getCollegeCourseList().then(response => {
         if (response.status === 0) {
           // 干部学院
@@ -303,7 +307,7 @@ export default {
       });
     },
     // 学堂资讯
-    getNewsInfoList () {
+    getNewsInfoList() {
       this.infoLoading = true;
       news.getNewInfoList(this.newsInfoForm).then(response => {
         if (response.status === 0) {
@@ -314,19 +318,19 @@ export default {
       });
     },
     // 获取合作伙伴
-    getPartnerList () {
+    getPartnerList() {
       home.getPartnerList(this.partnerList).then(response => {
         this.partnerList.list = response.data.collaborationEnterpriseList;
       });
     },
     // 获取定制消息
-    getPointList () {
+    getPointList() {
       home.getPointList().then(response => {
         this.dingData = response.data.pointList;
       });
     }
   },
-  mounted () {
+  mounted() {
     document.getElementsByTagName("title")[0].innerText =
       "1911学堂-致力于终身教育的互联网学校";
     this.windowWidth = document.documentElement.clientWidth;
