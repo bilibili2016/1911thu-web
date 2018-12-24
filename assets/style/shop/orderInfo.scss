@@ -34,4 +34,11 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
+
+	.goodsTotal {
+		float: right;
+		text-align: right;
+		width: 180px;
+		line-height: 28px;
+	}
 }
