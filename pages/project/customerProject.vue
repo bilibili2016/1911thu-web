@@ -87,7 +87,7 @@
           <el-radio
             v-model="projectForm.styleRadio"
             label="2"
-          >混合</el-radio>
+          >混合式</el-radio>
           <!-- <el-radio v-model="projectForm.styleRadio" label="3">互动</el-radio> -->
           <i class="el-icon-question styleAsk">
             <div class="descript-text">
