@@ -34,10 +34,13 @@
           label="同意"
           name="checked"
         ></el-checkbox>
-        <div
-          class="userPotal"
-          @click="userProtocol"
-        >1911学堂《用户注册协议》</div>
+        <div class="userPotal">
+          <span>1911学堂</span>
+          <span
+            class="inner"
+            @click="userProtocol"
+          >《用户注册协议》</span>
+        </div>
       </el-checkbox-group>
     </el-form-item>
     <el-row>

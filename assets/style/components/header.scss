@@ -712,9 +712,13 @@ body {
 .userPotal {
 	display: inline-block;
 	font-size: 12px;
-	color: #773084;
+
 	font-weight: 500;
-	cursor: pointer;
+
+	.inner {
+		color: #773084;
+		cursor: pointer;
+	}
 }
 
 .mobile-login {
