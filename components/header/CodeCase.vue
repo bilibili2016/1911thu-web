@@ -2,26 +2,46 @@
   <!-- 兑换码弹框 -->
   <div class="exchange">
     <div class="innerWord">
-      <i class="el-icon-close closeEcg" @click="closeEcg"></i>
+      <i
+        class="el-icon-close closeEcg"
+        @click="closeEcg"
+      ></i>
       <div class="changeContent">
         <div class="changeInput">
-          <span>兑换码:</span>
-          <input v-model="bindForm.courseId" placeholder="请输入您的兑换码，注意区分大小写">
+          <div class="code-icon"> <img
+              src="http://static-image.1911edu.com/code-icon.png"
+              alt=""
+            ></div>
+          <p class="code-text">绑定兑换码</p>
+          <div class="code-input">
+            <input
+              v-model="bindForm.courseId"
+              placeholder="请输入您的兑换码，注意区分大小写"
+            >
+            <span
+              class="bindCode input"
+              v-if="bindForm.isInput"
+              @click="detection"
+            >绑定</span>
+            <span
+              class="bindCode"
+              v-else
+            >立即绑定</span>
+          </div>
+          <p class="code-desc">兑换码是用户为多人办理学籍或购买多门课程生成的6位代码。</p>
           <!-- 错误提醒：绑定码已过期失效 -->
           <!-- <p>
             <span>{{bindForm.error}}</span>
           </p>-->
         </div>
         <div class="changeTips">
-          <h4>兑换码说明：兑换码是用户为多人办理学籍或购买多门课程生成的6位代码。</h4>
           <p>兑换码使用规则：</p>
           <p>1.本兑换码仅用于兑换1911学堂的在线学院学籍或在线课程；</p>
           <p>2.本兑换码一经兑换即刻生效，无法更改；</p>
           <p>3.每枚兑换码每个学员仅兑换一次，不可重复兑换；</p>
           <p>4.您可在【个人中心】-【兑换码管理】页面中查看您的兑换码使用情况。</p>
         </div>
-        <div v-if="bindForm.isInput" class="bind input" @click="detection">绑定</div>
-        <div v-else class="bind">立即绑定</div>
+
       </div>
     </div>
   </div>
@@ -31,10 +51,10 @@
 export default {
   props: ["bindForm"],
   methods: {
-    closeEcg () {
+    closeEcg() {
       this.$emit("closeEcg");
     },
-    detection () {
+    detection() {
       this.$emit("detection");
     }
   }
