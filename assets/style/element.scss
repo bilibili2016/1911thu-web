@@ -496,9 +496,9 @@ html {
 		}
 		.el-input__inner {
 			width: 670px;
-			height: 50px;
-			border-radius: 4px;
-			background-color: #eee;
+			height: 40px;
+			// border-radius: 4px;
+			background-color: #f7f9fd;
 			border: none;
 			&:disabled {
 				color: #773084;
@@ -506,12 +506,8 @@ html {
 			}
 		}
 		.el-radio-group {
-			width: 670px;
-			height: 50px;
-			border-radius: 4px;
-			background-color: #eee;
 			.el-radio {
-				margin-top: 17px;
+				margin-top: 0;
 				margin-left: 26px;
 				&:last-child {
 					margin-left: 61px;
@@ -571,9 +567,9 @@ html {
 		text-align: left;
 		.el-input__inner {
 			width: 670px;
-			height: 50px;
-			border-radius: 4px;
-			background-color: #eee;
+			height: 40px;
+			// border-radius: 4px;
+			background-color: #f7f9fd;
 			border: none;
 			font-size: 20px;
 			color: #000;
