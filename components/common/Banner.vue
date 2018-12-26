@@ -2,8 +2,14 @@
   <div>
     <template v-if="config.banner_type === 'news'">
       <div class="news-banner">
-        <img :src="bannerImg" alt>
-        <div v-if="config.banner_type === 'news'" class="newLsit-desc">
+        <img
+          :src="bannerImg"
+          alt
+        >
+        <div
+          v-if="config.banner_type === 'news'"
+          class="newLsit-desc"
+        >
           <p class="title">NEWS</p>
           <span class="line"></span>
           <p class="small-title">学堂资讯</p>
@@ -22,9 +28,20 @@
             :class="{noImg :!userInfo.head_img,topImg:userInfo.head_img}"
             :src="userInfo.head_img"
           >
-          <div class="up-user-avtor" v-show="isShowUpAvtor">
-            <input type="file" @change="add_img" accept="image/png, image/gif, image/jpeg">
-            <span>更换图片</span>
+          <div
+            class="up-user-avtor"
+            v-show="isShowUpAvtor"
+          >
+            <div class="upload-img">
+              <input
+                type="file"
+                @change="add_img"
+                accept="image/png, image/gif, image/jpeg"
+              >
+            </div>
+            <div class="mask">
+              <span>更换图片</span>
+            </div>
           </div>
           <div class="avator">
             <div class="img"></div>
@@ -33,7 +50,10 @@
             <p class="nickName">{{userInfo.nick_name}}</p>
             <!-- <p class="companyName">{{userInfo.company_name}}</p> -->
             <p class="vipCard">
-              <span v-for="(vip,index) in userInfo.vipPrivateList" :key="index">
+              <span
+                v-for="(vip,index) in userInfo.vipPrivateList"
+                :key="index"
+              >
                 <el-popover
                   placement="bottom-start"
                   :title="vip.title"
@@ -41,7 +61,10 @@
                   trigger="hover"
                   :content="'剩余'+(vip.expire_days)+'天'"
                 >
-                  <el-button slot="reference" @click="goVipInfo(vip)">
+                  <el-button
+                    slot="reference"
+                    @click="goVipInfo(vip)"
+                  >
                     <img :src="vip.vip_icon">
                   </el-button>
                 </el-popover>
@@ -61,16 +84,16 @@
 <script>
 // banner 组件
 // 学堂资讯组件
-import { store as persistStore } from '~/lib/core/store'
-import { banner } from '~/lib/v1_sdk/index'
-import { mapGetters, mapActions } from 'vuex'
-import { message } from '@/lib/util/helper'
+import { store as persistStore } from "~/lib/core/store";
+import { banner } from "~/lib/v1_sdk/index";
+import { mapGetters, mapActions } from "vuex";
+import { message } from "@/lib/util/helper";
 export default {
-  props: ['bannerImg', 'config', 'isShowUpAvtor', 'userInfo'],
+  props: ["bannerImg", "config", "isShowUpAvtor", "userInfo"],
   computed: {
-    ...mapGetters('auth', ['isAuthenticated'])
+    ...mapGetters("auth", ["isAuthenticated"])
   },
-  data () {
+  data() {
     return {
       time: {
         hour: null,
@@ -81,48 +104,48 @@ export default {
         FILESS: []
       },
       imgs: []
-    }
+    };
   },
   watch: {
-    'userInfo' () {
+    userInfo() {
       // 已学习时长
-      this.changeTime(this.userInfo.study_curriculum_time)
+      this.changeTime(this.userInfo.study_curriculum_time);
     }
   },
   methods: {
-    ...mapActions('auth', ['signOut']),
-    add_img (event) {
+    ...mapActions("auth", ["signOut"]),
+    add_img(event) {
       // var that = this
-      var reader = new FileReader()
-      let imgFiles = event.target.files[0]
-      var formdata = new window.FormData()
-      formdata.append('image', imgFiles)
-      formdata.image = imgFiles
-      reader.readAsDataURL(imgFiles)
-      this.fileForm.FILESS = []
+      var reader = new FileReader();
+      let imgFiles = event.target.files[0];
+      var formdata = new window.FormData();
+      formdata.append("image", imgFiles);
+      formdata.image = imgFiles;
+      reader.readAsDataURL(imgFiles);
+      this.fileForm.FILESS = [];
       reader.onloadend = () => {
-        this.fileForm.FILESS.push(reader.result)
+        this.fileForm.FILESS.push(reader.result);
         banner.uploadHeadImg(this.fileForm).then(response => {
-          this.userInfo.head_img = response.data.full_path
-          message(this, 'success', response.msg)
-          this.$bus.$emit('changeimg', response.data.full_path)
-        })
-      }
+          this.userInfo.head_img = response.data.full_path;
+          message(this, "success", response.msg);
+          this.$bus.$emit("changeimg", response.data.full_path);
+        });
+      };
     },
-    goVipInfo (vip) {
+    goVipInfo(vip) {
       this.$router.push({
-        path: '/home/vip/vipPage',
+        path: "/home/vip/vipPage",
         query: {
           id: vip.id,
           cid: vip.category_id
         }
-      })
+      });
     },
-    changeTime (timing) {
-      this.time.hour = parseInt(timing / 3600)
+    changeTime(timing) {
+      this.time.hour = parseInt(timing / 3600);
       this.time.minutes = parseInt(
         (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
-      )
+      );
       this.time.second = parseInt(
         (parseFloat(
           (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
@@ -130,11 +153,11 @@ export default {
           parseInt(
             (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
           )) *
-        60
-      )
+          60
+      );
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
