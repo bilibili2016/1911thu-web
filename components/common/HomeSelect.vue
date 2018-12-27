@@ -37,6 +37,10 @@ export default {
           title: "城市分校",
           id: "school"
         }
+        // {
+        //   title: "证书查询",
+        //   id: "searchCer"
+        // }
       ]
     };
   },
