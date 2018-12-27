@@ -303,13 +303,12 @@ export default {
     },
     // 关闭倒计时
     closeCountDown() {
-      console.log(this.timer, "kkkwww");
+      // console.log(this.timer, "kkkwww");
 
       this.isShowTime = false;
       this.showTime = 5;
       if (this.timer) {
-        console.log(222);
-
+        // console.log(222);
         clearInterval(this.timer);
       }
     },
