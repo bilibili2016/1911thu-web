@@ -258,6 +258,11 @@ export default {
     },
     // 提交当前问题
     answer() {
+      if (this.examForm.selectId.length == 0) {
+        message(this, "error", "请先选择问题答案");
+        return false;
+      }
+
       if (
         persistStore.get("token") != "" &&
         persistStore.get("examToken") === persistStore.get("token")
@@ -425,6 +430,7 @@ export default {
           this.selectIndex = response.data.questionCurrent.user_key;
         }
       } else {
+        this.examForm.selectId = [];
         this.selectIndex = [];
         this.selectRadio = "";
         this.showResult = false;
