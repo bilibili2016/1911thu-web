@@ -20,15 +20,11 @@
               name="third"
             ></el-tab-pane>
             <el-tab-pane
+              v-if="cid!=0"
               label="学院专家组介绍"
               name="four"
             ></el-tab-pane>
           </el-tabs>
-          <!-- <div
-            v-if="cid!=0"
-            class="teacher"
-            @click="handleLink()"
-          >课程研发专家组</div> -->
         </div>
         <!-- <div class="fr rightPages">
           <span v-show="hideSwitch">
