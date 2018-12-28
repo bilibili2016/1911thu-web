@@ -368,10 +368,10 @@ export default {
     },
     // 个人中心 重新登录 弹框
     reLoginAlert(type, res) {
-      this.handleSignOut();
       this.$alert(res.msg + "," + "请重新登录", "温馨提示", {
         confirmButtonText: "确定",
         callback: action => {
+          this.handleSignOut();
           // 展示出登录框
           this.$bus.$emit("loginShow", true);
           //初始化首页数据
@@ -383,10 +383,10 @@ export default {
     },
     // 您未登录请先登录 弹框
     notLogIn(type, res) {
-      this.handleSignOut();
       this.$alert(res.msg, "温馨提示", {
         confirmButtonText: "确定",
         callback: action => {
+          this.handleSignOut();
           // 展示出登录框
           this.$bus.$emit("loginShow", true);
           //初始化首页数据
