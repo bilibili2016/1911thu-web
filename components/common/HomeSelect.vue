@@ -36,11 +36,11 @@ export default {
         {
           title: "城市分校",
           id: "school"
+        },
+        {
+          title: "证书查询",
+          id: "searchCer"
         }
-        // {
-        //   title: "证书查询",
-        //   id: "searchCer"
-        // }
       ]
     };
   },
@@ -56,6 +56,9 @@ export default {
           break;
         case "school":
           this.$router.push("/home/citySchool/schoolIntro");
+          break;
+        case "searchCer":
+          this.$router.push("/home/certification/searchPage");
           break;
         default:
           this.$router.push({
@@ -99,6 +102,10 @@ export default {
         //学院
         case "/home/vip/vipPage":
           this.changeActive = matchSplits("id");
+          break;
+        //证书查询
+        case "/home/certification/searchPage":
+          this.changeActive = "searchCer";
           break;
         default:
           this.changeActive = -1;

@@ -41,9 +41,9 @@
             type="textarea"
             resize="none"
             :rows="3"
-            placeholder="其它想说的(最长不超过100字)"
+            placeholder="其它想说的(最长不超过150字)"
             v-model="textarea"
-            maxlength="100"
+            maxlength="150"
           >
           </el-input>
         </div>

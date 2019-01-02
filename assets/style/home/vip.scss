@@ -1,103 +1,349 @@
 .VIP-con {
-  .vipBanner {
-    position: relative;
-    height: 420px !important;
-  }
-  .netWork {
-    margin: 0 auto;
-    background: url(http://static-image.1911edu.com/network-bg.png) no-repeat;
-    background-size: 1920px 420px;
-    background-position: center center;
-  }
-  .online {
-    margin: 0 auto;
-    background: url(http://static-image.1911edu.com/online-bg.png) no-repeat;
-    background-size: 1920px 420px;
-    background-position: center center;
-    // box-shadow: 0 0 14px #5a73eb;
-  }
-  .con-detail {
-    position: relative;
-    width: 1165px;
-    margin: 0 auto;
-    padding-top: 45px;
-    padding-bottom: 80px;
-    overflow: hidden;
-    .conImg {
-      width: 1165px;
-    }
-  }
+	.vipBanner {
+		position: relative;
+		height: 420px !important;
+	}
 
-  .btns {
-    margin: auto;
-    width: 100%;
-    height: 90px;
-    line-height: 90px;
-    background: #3c60c7;
-    .btn-con {
-      width: 1100px;
-      margin: 0 auto;
-    }
-    .text {
-      color: #fff;
-      font-weight: 600;
-      margin-left: 50px;
-      font-size: 24px;
-    }
-    .btn-item {
-      float: right;
-      margin-right: 35px;
-    }
-    .button {
-      display: inline-block;
-      width: 180px;
-      height: 50px;
-      font-size: 18px;
-      line-height: 50px;
-      text-align: center;
-      border-radius: 25px;
-      background-color: #fff;
-      margin-right: 30px;
-      color: #3c60c7;
-      cursor: pointer;
-      vertical-align: sub;
-      &:hover {
-        transition: all 300ms;
-        opacity: 0.9;
-      }
-    }
-    &.fixedBottom {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-    &.bottomHeight {
-      position: absolute;
-      bottom: 1px;
-      background-color: #fff;
-      .text {
-        color: #3c60c7;
-      }
-      .button {
-        transition: all 300ms;
-        background-color: #3c60c7;
-        color: #fff;
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-    }
-  }
-  // .join {
-  //   width: 200px;
-  //   height: 156px;
-  //   position: fixed;
-  //   bottom: 80px;
-  //   right: 30px;
-  //   img {
-  //     width: 100%;
-  //     height: 100%;
-  //   }
-  // }
+	.netWork {
+		margin: 0 auto;
+		background: url(http://static-image.1911edu.com/network-bg.png) no-repeat;
+		background-size: 1920px 420px;
+		background-position: center center;
+	}
+	.online {
+		margin: 0 auto;
+		background: url(http://static-image.1911edu.com/online-bg.png) no-repeat;
+		background-size: 1920px 420px;
+		background-position: center center;
+		// box-shadow: 0 0 14px #5a73eb;
+	}
+
+	h4.college-title {
+		margin: 70px auto 40px;
+		text-align: center;
+		span {
+			display: inline-block;
+			vertical-align: middle;
+			width: 150px;
+			height: 36px;
+			text-align: center;
+			font-size: 36px;
+			font-weight: bold;
+			background: linear-gradient(90deg, #44a2ca, #485ca0);
+			color: rgba(37, 55, 183, 1);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		&::before {
+			content: "";
+			display: inline-block;
+			width: 23px;
+			height: 37px;
+			background: url("http://static-image.1911edu.com/college-left.png") no-repeat;
+			margin-right: 30px;
+			margin-bottom: -15px;
+		}
+		&::after {
+			content: "";
+			display: inline-block;
+			width: 39px;
+			height: 64px;
+			background: url("http://static-image.1911edu.com/college-right.png") no-repeat;
+			margin-left: 30px;
+			margin-bottom: -30px;
+		}
+	}
+
+	.con-detail {
+		position: relative;
+		width: 1100px;
+		margin: 0 auto;
+		padding-top: 45px;
+		padding-bottom: 110px;
+		// overflow: hidden;
+		color: #222;
+		.con-one {
+			.oneDIV {
+				width: 1000px;
+				margin: 0 auto;
+			}
+			.one-left,
+			.one-right {
+				float: left;
+			}
+			.one-left {
+				width: 280px;
+				height: 195px;
+				margin-right: 66px;
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+			.one-right {
+				width: 650px;
+				font-size: 18px;
+				line-height: 34px;
+				// padding-top: 20px;
+			}
+			.one-bottom {
+				width: 1100px;
+				height: 90px;
+				line-height: 90px;
+				margin-top: 55px;
+				background: url("http://static-image.1911edu.com/college-pic2.png") no-repeat;
+				background-size: cover;
+				span {
+					font-size: 24px;
+					margin-left: 460px;
+				}
+			}
+		}
+		.con-two {
+			.two-text {
+				font-size: 22px;
+				font-weight: 500;
+				line-height: 40px;
+				text-indent: 1em;
+			}
+			.two-desc {
+				width: 1095px;
+				height: 420px;
+				background: url("http://static-image.1911edu.com/college-pic3.png") no-repeat;
+				background-size: cover;
+				margin-top: 30px;
+				.desc-title {
+					font-size: 36px;
+					color: #fff;
+					text-align: center;
+					margin-bottom: 40px;
+					padding-top: 30px;
+					font-weight: bold;
+				}
+				.desc-items {
+					.two-left {
+						width: 220px;
+						float: left;
+						margin-right: 200px;
+						margin-left: 195px;
+					}
+					.two-right {
+						float: left;
+						width: 270px;
+					}
+					.item {
+						margin-bottom: 18px;
+						width: 100%;
+						.index {
+							display: inline-block;
+							width: 30px;
+							height: 30px;
+							border-radius: 50%;
+							font-size: 18px;
+							color: #2537b7;
+							text-align: center;
+							line-height: 30px;
+							margin-right: 15px;
+							background: linear-gradient(0deg, rgba(222, 226, 252, 1) 0%, rgba(255, 255, 255, 1) 100%);
+						}
+						.item-text {
+							font-size: 18px;
+							color: #fff;
+						}
+					}
+				}
+			}
+		}
+		.con-three {
+			.three-text {
+				font-size: 20px;
+				text-align: center;
+				margin-bottom: 35px;
+			}
+			.source {
+				// width
+				.three-item {
+					float: left;
+					width: 340px;
+					height: 80px;
+					background: rgba(255, 255, 255, 1);
+					box-shadow: 0px 0px 36px 0px rgba(198, 194, 210, 0.36);
+					border-radius: 10px;
+					margin: 0 40px 30px 0;
+					img {
+						width: 100%;
+						height: 100%;
+					}
+					&:nth-child(3n + 3) {
+						margin-right: 0;
+					}
+				}
+			}
+		}
+		.con-four {
+			.four-text {
+				width: 900px;
+				margin: 0 auto;
+				.four-left,
+				.four-right {
+					float: left;
+				}
+				.four-left {
+					width: 670px;
+					margin-right: 50px;
+					.circle {
+						width: 14px;
+						height: 14px;
+						background-color: #43a2ca;
+						margin-right: 10px;
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 8px;
+					}
+					.text {
+						width: 640px;
+						display: inline-block;
+						font-size: 20px;
+						line-height: 34px;
+						vertical-align: top;
+					}
+				}
+				.four-right {
+					width: 172px;
+					height: 116px;
+					img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+			.four-certification {
+				width: 989px;
+				height: 699px;
+				margin: 0 auto;
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+		.con-five {
+			width: 1100px;
+			height: 377px;
+			border-radius: 10px;
+			text-align: center;
+			background: url("http://static-image.1911edu.com/college-pic15.png");
+			background-size: cover;
+			box-shadow: 0px 0px 36px 0px rgba(198, 194, 210, 0.36);
+			.college-title {
+				padding-top: 30px;
+				margin-top: 40px;
+			}
+			.text {
+				font-size: 24px;
+				font-weight: 500;
+				color: #6417a6;
+				padding-top: 19px;
+				text-align: center;
+			}
+			.desc {
+				font-size: 18px;
+				color: #222;
+				margin: 40px 0 50px 0;
+				.p-one {
+					color: #6417a6;
+				}
+			}
+			.price {
+				font-size: 18px;
+				color: #6417a6;
+				text-align: center;
+				span {
+					margin-right: 105px;
+					&:first-child {
+						margin-left: 50px;
+					}
+				}
+				.p-two {
+					font-size: 48px;
+				}
+			}
+		}
+		.conImg {
+			width: 1165px;
+		}
+	}
+
+	.btns {
+		margin: auto;
+		width: 100%;
+		height: 90px;
+		line-height: 90px;
+		background: #3c60c7;
+		.btn-con {
+			width: 1100px;
+			margin: 0 auto;
+		}
+		.text {
+			color: #fff;
+			font-weight: 600;
+			margin-left: 50px;
+			font-size: 24px;
+		}
+		.btn-item {
+			float: right;
+			margin-right: 35px;
+		}
+		.button {
+			display: inline-block;
+			width: 180px;
+			height: 50px;
+			font-size: 18px;
+			line-height: 50px;
+			text-align: center;
+			border-radius: 25px;
+			background-color: #fff;
+			margin-right: 30px;
+			color: #3c60c7;
+			cursor: pointer;
+			vertical-align: sub;
+			&:hover {
+				transition: all 300ms;
+				opacity: 0.9;
+			}
+		}
+		&.fixedBottom {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+		&.bottomHeight {
+			position: absolute;
+			bottom: 1px;
+			background-color: #fff;
+			.text {
+				color: #3c60c7;
+			}
+			.button {
+				transition: all 300ms;
+				background-color: #3c60c7;
+				color: #fff;
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+		}
+	}
+	// .join {
+	//   width: 200px;
+	//   height: 156px;
+	//   position: fixed;
+	//   bottom: 80px;
+	//   right: 30px;
+	//   img {
+	//     width: 100%;
+	//     height: 100%;
+	//   }
+	// }
 }

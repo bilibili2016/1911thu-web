@@ -15,12 +15,12 @@
         >
         <div class="examInfo">
           <p class="title">{{item.book_title}}</p>
-          <p v-if="item.unfinishedStudyTime>0">
+          <p>
             <span>
               <i class="exam-study"></i>
               您已学完{{item.totalStudyTime}}学时
             </span>
-            <span>
+            <span v-if="item.unfinishedStudyTime>0">
               <i class="exam-time"></i>
               继续学习{{item.unfinishedStudyTime}}学时可申请参加考试
             </span>
