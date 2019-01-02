@@ -105,6 +105,7 @@ export default {
           break;
         //证书查询
         case "/home/certification/searchPage":
+        case "/home/certification/viewPage":
           this.changeActive = "searchCer";
           break;
         default:
