@@ -189,8 +189,7 @@ export default {
       });
       // 支付推送来消息时
       this.socket.on("new_msg", function(msg) {
-        console.log(msg);
-
+        console.log(msg, "new_msg");
         //支付成功
         if (msg.pay_status == "0") {
           that.$bus.$emit("payResult", true);
