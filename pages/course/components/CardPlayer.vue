@@ -185,7 +185,10 @@ export default {
       this.socket = new io(getNet());
       // 连接socket
       this.socket.on("connect", () => {
+        //用户登录
         that.socket.emit("login", persistStore.get("token"), "ordinaryUser");
+        //用户分组
+        that.socket.emit("userGroup", "ordinaryUser");
       });
       // 支付推送来消息时
       this.socket.on("new_msg", function(msg) {
