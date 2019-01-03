@@ -6,22 +6,34 @@
       </div>
       <div class="bottom">
         <div class="item">
-          <span class="left">请输入证书编号</span>
+          <span class="left">证书编号</span>
           <span class="right">
             <input
               type="text"
               class="num"
+              placeholder="请输入证书编号"
+            >
+          </span>
+        </div>
+        <div class="item">
+          <span class="left">姓名</span>
+          <span class="right">
+            <input
+              type="text"
+              class="num"
+              placeholder="请输入您的姓名"
             >
           </span>
         </div>
         <div class="item">
           <span class="left">
-            请输入验证码
+            验证码
           </span>
           <span class="right">
             <input
               type="text"
               class="code"
+              placeholder="请输入验证码"
             >
             <img
               src=""

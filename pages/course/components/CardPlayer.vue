@@ -185,7 +185,7 @@ export default {
       this.socket = new io(getNet());
       // 连接socket
       this.socket.on("connect", () => {
-        that.socket.emit("login", persistStore.get("token"));
+        that.socket.emit("login", persistStore.get("token"), "ordinaryUser");
       });
       // 支付推送来消息时
       this.socket.on("new_msg", function(msg) {
