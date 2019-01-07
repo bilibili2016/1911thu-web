@@ -7,8 +7,8 @@
       </div>
       <div class="bottom clearfix">
         <div class="item left">
-          <p>姓名：徐楠</p>
-          <p>性别：女</p>
+          <p>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：徐楠</p>
+          <p>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：女</p>
           <p>出生日期：1985年10月1日</p>
           <p>证书编号：19112019020001</p>
         </div>
@@ -16,7 +16,7 @@
           <p>项目名称：在线商学院</p>
           <p>开始时间：2019年1月1日</p>
           <p>结束时间：2019年12月31日</p>
-          <p>学时：100学时</p>
+          <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时：100学时</p>
         </div>
       </div>
     </div>
