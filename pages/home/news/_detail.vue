@@ -120,7 +120,9 @@ export default {
       let newsId = {
         ids: id
       };
+
       if (flag != 1) {
+        //避免支付完成之后重新请求，进入
         if (this.newsDetail.id == id) {
           message(this, "info", "暂无更多内容！");
           return false;
