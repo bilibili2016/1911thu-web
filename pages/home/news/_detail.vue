@@ -77,7 +77,7 @@ export default {
     return {
       nid: "",
       isShowpayPopup: false,
-      isShowpayBar: true,
+      isShowpayBar: false,
       payNewsDetail: "",
       BreadCrumb: {
         type: "newsDetail",
