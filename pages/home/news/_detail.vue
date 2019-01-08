@@ -47,7 +47,7 @@
       <span
         class="btn"
         @click.stop="handlepayNews"
-      >支付一元阅读更多</span>
+      >支付1元阅读更多</span>
     </div>
 
     <v-pay
@@ -110,19 +110,21 @@ export default {
     getMore(item) {
       this.$router.push(item);
     },
-    requestNews() {
-      this.getNewInfoDetail(this.nid);
+    requestNews(flag) {
+      this.getNewInfoDetail(this.nid, flag);
     },
     // 获取资讯详情
-    getNewInfoDetail(id) {
+    getNewInfoDetail(id, flag) {
       let me = this;
       if (!id) return;
       let newsId = {
         ids: id
       };
-      if (this.newsDetail.id == id) {
-        message(this, "info", "暂无更多内容！");
-        return false;
+      if (flag != 1) {
+        if (this.newsDetail.id == id) {
+          message(this, "info", "暂无更多内容！");
+          return false;
+        }
       }
 
       news.getNewInfoDetail(newsId).then(response => {

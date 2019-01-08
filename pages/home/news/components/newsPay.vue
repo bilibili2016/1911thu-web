@@ -108,14 +108,12 @@ export default {
     requestPayResult(id) {
       this.timer = setInterval(() => {
         news.payResultNews({ newsOrderID: id }).then(res => {
-          // console.log(res);
           if (res.status == 0) {
             //支付成功
             message(this, "success", "支付成功");
             this.isShowPop = false;
             document.body.style.position = "static";
-            this.$emit("requestNews");
-            window.location.reload();
+            this.$emit("requestNews", 1);
             clearInterval(this.timer);
           } else if (res.status == 100100) {
             //支付失败
