@@ -36,11 +36,11 @@ export default {
         {
           title: "城市分校",
           id: "school"
-        },
-        {
-          title: "证书查询",
-          id: "searchCer"
         }
+        // {
+        //   title: "证书查询",
+        //   id: "searchCer"
+        // }
       ]
     };
   },
@@ -73,10 +73,20 @@ export default {
     },
     changeHeaderActive() {
       let pathName = window.location.pathname;
-
       //初始化名师智库默认选中学院分类
       if (pathName != "/home/teacher/list") {
         persistStore.set("cid", -1);
+      }
+
+      //新闻详情页 未支付不能滚动页面
+      if (pathName.indexOf("/home/news/") == 0) {
+        if (pathName == "/home/news/list") {
+          document.body.style.position = "static";
+        } else {
+          document.body.style.position = "fixed";
+        }
+      } else {
+        document.body.style.position = "static";
       }
 
       switch (pathName) {

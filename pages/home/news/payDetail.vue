@@ -39,23 +39,6 @@
         </div>
       </div>
     </div>
-
-    <div
-      class="payBar"
-      v-if="isShowpayBar"
-    >
-      <span
-        class="btn"
-        @click.stop="handlepayNews"
-      >支付一元阅读更多</span>
-    </div>
-
-    <v-pay
-      v-if="isShowpayPopup"
-      :payNewsDetail="payNewsDetail"
-      @requestNews="requestNews"
-      @closePop="closePop"
-    ></v-pay>
   </div>
 </template>
 
@@ -64,21 +47,13 @@ import CustomBanner from "@/components/common/Banner.vue";
 import { news } from "~/lib/v1_sdk/index";
 import { timestampToTime, message } from "~/lib/util/helper";
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
-import newsPay from "@/pages/home/news/components/newsPay.vue";
-import { store as persistStore } from "~/lib/core/store";
-
 export default {
   components: {
     "v-banner": CustomBanner,
-    "v-breadcrumb": BreadCrumb,
-    "v-pay": newsPay
+    "v-breadcrumb": BreadCrumb
   },
   data() {
     return {
-      nid: "",
-      isShowpayPopup: false,
-      isShowpayBar: true,
-      payNewsDetail: "",
       BreadCrumb: {
         type: "newsDetail",
         home: true,
@@ -110,9 +85,6 @@ export default {
     getMore(item) {
       this.$router.push(item);
     },
-    requestNews() {
-      this.getNewInfoDetail(this.nid);
-    },
     // 获取资讯详情
     getNewInfoDetail(id) {
       let me = this;
@@ -141,16 +113,6 @@ export default {
           } else {
             me.afterNews.title = "暂无";
           }
-
-          if (response.data.newDetail.news_power == "1") {
-            this.isShowpayBar = true;
-            document.body.style.position = "fixed";
-          } else {
-            this.isShowpayBar = false;
-            document.body.style.position = "static";
-          }
-          this.payNewsDetail = this.newsDetail;
-
           this.loading = false;
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         } else {
@@ -158,24 +120,11 @@ export default {
           this.$router.push("/home/news/list");
         }
       });
-    },
-    //支付新闻
-    handlepayNews() {
-      // this.handleSignOut();
-      if (persistStore.get("token")) {
-        this.isShowpayPopup = true;
-      } else {
-        this.$bus.$emit("loginShow", true);
-      }
-    },
-    //关闭支付弹窗
-    closePop() {
-      this.isShowpayPopup = false;
     }
   },
   mounted() {
-    this.nid = window.location.pathname.split("/")[3];
-    this.getNewInfoDetail(this.nid);
+    let nid = window.location.pathname.split("/")[3];
+    this.getNewInfoDetail(nid);
   }
 };
 </script>
