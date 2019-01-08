@@ -12,7 +12,7 @@
         @click="showInput"
       ></i>
       <div
-        v-show="isShowInput"
+        ref="searchInput"
         class="searchInput"
       >
         <input
@@ -21,10 +21,12 @@
           v-model="search"
           @keyup.enter="handleSearch"
         >
-        <i
-          class="el-icon-search inner-icon"
+        <span
+          class="innerIcon"
           @click="handleSearch"
-        ></i>
+        >
+          <i class="el-icon-search inner-icon"></i>
+        </span>
       </div>
 
     </div>
@@ -42,6 +44,12 @@ export default {
   },
   methods: {
     showInput() {
+      let divHeight = this.$refs.searchInput.style.height;
+      if (divHeight == "40px") {
+        this.$refs.searchInput.style.height = 0 + "px";
+      } else {
+        this.$refs.searchInput.style.height = 40 + "px";
+      }
       this.isShowInput = !this.isShowInput;
     },
     handleSearch() {
