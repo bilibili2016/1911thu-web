@@ -67,6 +67,7 @@ export default {
     changePage() {
       this.isShowInput = false;
       this.search = "";
+      this.$refs.searchInput.style.height = 0 + "px";
     }
   },
   watch: {
