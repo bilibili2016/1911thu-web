@@ -17,6 +17,7 @@
           <p>开始时间：{{viewData.startTime}}</p>
           <p>结束时间：{{viewData.endTime}}</p>
           <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时：{{viewData.time}}学时</p>
+
         </div>
       </div>
     </div>
