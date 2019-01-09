@@ -46,6 +46,7 @@
             maxlength="150"
           >
           </el-input>
+          <p class="reminder">还可以输入{{overFonts}}字</p>
         </div>
         <div class="submit">
           <el-button
@@ -84,6 +85,11 @@ export default {
       },
       flag: false
     };
+  },
+  computed: {
+    overFonts() {
+      return 150 - this.textarea.length;
+    }
   },
   methods: {
     //标签-获取课程标签列表
