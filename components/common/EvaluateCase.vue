@@ -120,10 +120,10 @@ export default {
       this.addEvaluateForm.ids = this.courseList.id;
       this.addEvaluateForm.curriculumcatalogid = this.courseList.defaultCurriculumCatalog.id;
       this.flag = this.courseList.is_study;
-      if (this.textarea.length <= 100) {
+      if (this.textarea.length <= 150) {
         this.addEvaluateForm.evaluatecontent = this.textarea;
       } else {
-        message(this, "warning", "请输入少于100个字符！");
+        message(this, "warning", "请输入少于150个字符！");
         return false;
       }
       this.addEvaluateForm.scores = this.rateModel;
