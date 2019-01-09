@@ -18,7 +18,7 @@
 import { coursedetail, players } from "~/lib/v1_sdk/index";
 import { store as persistStore } from "~/lib/core/store";
 import { mapState, mapGetters, mapMutations } from "vuex";
-import { message, matchSplits, getNet, exitScreen } from "@/lib/util/helper";
+import { message, matchSplits, getNet, exitScreen, requestFullScreen, exitFull } from "@/lib/util/helper";
 import playerNextComponent from "~/lib/core/next.js";
 import playerPreviousComponent from "~/lib/core/previous.js";
 import PlayerError from "@/components/common/PlayerError.vue";
@@ -444,6 +444,7 @@ export default {
     },
     //  播放器进入全屏事件
     fullScreenTrue () {
+      requestFullScreen(document.documentElement)
       document.getElementsByClassName(
         "prism-big-play-btn"
       )[0].style.visibility = "visible";
@@ -456,7 +457,8 @@ export default {
         "prism-big-play-btn"
       )[0].style.visibility = "hidden";
       // 退出浏览器全屏
-      exitScreen();
+      //   exitScreen();
+      exitFull(document.documentElement)
     },
     // 增加空格，上下左右键盘操作视频
     keyboard () {
