@@ -88,7 +88,7 @@
       <div class="con-five">
         <h4 class="college-title"><span>学院学费</span></h4>
         <p class="text">学员优惠 惊喜不断</p>
-        <p class="desc">学员只需<span class="p-one">{{collegeCon.conFive.priceOne}}元</span>即可加入1911学堂在线干部学院，学习价值{{collegeCon.conFive.priceFive}}元的学院全部课程，<span class="p-one">学籍有效期一年。</span></p>
+        <p class="desc">学员只需<span class="p-one">{{collegeCon.conFive.priceOne}}元</span>即可加入1911学堂{{collegeCon.title}}，学习价值{{collegeCon.conFive.priceFive}}元的学院全部课程，<span class="p-one">学籍有效期一年。</span></p>
         <p class="price"><span><i class="p-two">{{collegeCon.conFive.priceTwo}}</i>门课程</span><span>共计<i class="p-two">{{collegeCon.conFive.priceThree}}</i>学时</span><span>学费为<i class="p-two">{{collegeCon.conFive.priceFour}}</i>元/年</span></p>
       </div>
       <div
@@ -185,6 +185,7 @@ export default {
         }
       },
       networkCon: {
+        title: "在线干部学院",
         conOne: {
           right:
             "1911学堂在线干部学院根据党政机关及事业单位的需求，携手清华大学、中央党校（国家行政学院）等多所全球知名院校的顶级专家和资深教授，以及政策制定和政策研究智囊专家，有针对性的研发系统化的课程体系，为各级党政机关与事业单位干部提供全球最优质的数字化课程资源，为学员带来权威、前沿、高端的学习体验。",
@@ -213,9 +214,6 @@ export default {
             ]
           }
         },
-        conFour: {
-          img: "http://static-image.1911edu.com/college-pic16.png"
-        },
         conThree: {
           imgItems: [
             "http://static-image.1911edu.com/college-QH.png",
@@ -226,6 +224,9 @@ export default {
             "http://static-image.1911edu.com/college-RD.png"
           ]
         },
+        conFour: {
+          img: "http://static-image.1911edu.com/college-pic16.png"
+        },
         conFive: {
           priceOne: 1800,
           priceTwo: 78,
@@ -235,6 +236,7 @@ export default {
         }
       },
       onlineCon: {
+        title: "在线商学院",
         conOne: {
           right:
             "1911学堂在线商学院根据企业发展的需求，以解决企业组织的实际管理问题为导向，携手近百位来自清华大学、北京大学、国家发改委、国资委等权威机构的专家学者及智囊团队，整合他们在经济、金融和企业管理等领域深厚的理论功底以及各行业领域丰富的实践经验，有针对性的研发具有实用性的课程体系，为学员提供全球最优质的数字化课程资源，带来权威、前沿、高端的学习体验，助力企业中高层管理人员实现个性化、阶梯式的成长。",
