@@ -174,26 +174,6 @@
     </div>
 
     <div class="schoolInfo">
-
-      <!-- <img
-        class="schoolImg topImg"
-        src="http://static-image.1911edu.com/schoolIntro2.png"
-        alt=""
-      >
-      <div class="color">
-        <div class="img"></div>
-      </div>
-      <img
-        class="schoolImg"
-        src="http://static-image.1911edu.com/schoolIntro4.png"
-        alt=""
-      >
-      <img
-        style="margin-top:80px"
-        class="schoolImg"
-        src="http://static-image.1911edu.com/schoolIntro5.png"
-        alt=""
-      > -->
       <div class="apply">
         <div class="applyInputs">
           <!-- <div class="con-item counsel clearfix">

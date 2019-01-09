@@ -50,13 +50,10 @@ body {
             right: 0;
             top: 0;
             white-space: nowrap;
-            width: 340px;
+            width: 360px;
             height: 100%;
             &.big {
-                width: 340px;
-                // .search {
-                // 	width: 200px;
-                // }
+                width: 360px;
             }
         }
         .headerLogo {
@@ -96,6 +93,8 @@ body {
             }
         }
         .search {
+            width: 20px;
+            height: 20px;
             position: relative;
             float: left;
             margin-top: 25px;
@@ -140,6 +139,9 @@ body {
                 font-weight: 600;
                 color: #666666;
                 cursor: pointer;
+                &:hover {
+                    color: #773084;
+                }
             }
             .searchInput {
                 width: 300px;
