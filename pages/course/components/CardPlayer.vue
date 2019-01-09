@@ -444,7 +444,6 @@ export default {
     },
     //  播放器进入全屏事件
     fullScreenTrue () {
-      requestFullScreen(document.documentElement)
       document.getElementsByClassName(
         "prism-big-play-btn"
       )[0].style.visibility = "visible";
@@ -457,8 +456,7 @@ export default {
         "prism-big-play-btn"
       )[0].style.visibility = "hidden";
       // 退出浏览器全屏
-      //   exitScreen();
-      exitFull(document.documentElement)
+      exitScreen();
     },
     // 增加空格，上下左右键盘操作视频
     keyboard () {
