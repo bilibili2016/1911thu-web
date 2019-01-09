@@ -249,7 +249,7 @@ export default {
           { required: true, message: "昵称不能为空" },
           {
             min: 2,
-            max: 12,
+            max: 18,
             message:
               "请输入至少2位最多18位，可包含汉字，英文字母，数字，下划线",
             trigger: "blur"
