@@ -2,36 +2,20 @@
   <div class="headerBox">
     <!-- 测试 123 -->
     <!-- 优惠主题入口 -->
-    <v-discount
-      v-if="bannerMsg"
-      @closeBanner="closeBanner"
-    ></v-discount>
+    <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
-      <div
-        class="header-fl clearfix"
-        :class="{big:isBig}"
-      >
+      <div class="header-fl clearfix" :class="{big:isBig}">
         <v-logo @handleLink="handleLink"></v-logo>
-        <v-homeselect
-          :projectArr="projectArr"
-          :categoryArr="categoryArr"
-        ></v-homeselect>
+        <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
       </div>
-      <div
-        class="header-fr clearfix"
-        :class="{big:isBig}"
-      >
+      <div class="header-fr clearfix" :class="{big:isBig}">
         <v-search @handleSearch="handleSearch"></v-search>
         <v-enter
           :class="['HREntry' ,{islogined : isAuthenticated }]"
           @handleLink="handleLink"
           @addEcg="handleAddEcg"
         ></v-enter>
-        <v-lrbtn
-          v-if="!isShowLRBtn"
-          @login="login"
-          @register="register"
-        ></v-lrbtn>
+        <v-lrbtn v-if="!isShowLRBtn" @login="login" @register="register"></v-lrbtn>
         <v-headerimg
           v-else
           :data="user"
@@ -83,7 +67,7 @@ export default {
   },
   watch: {
     // 绑定兑换码
-    "bindForm.courseId"(val, oldval) {
+    "bindForm.courseId" (val, oldval) {
       if (val == "") {
         this.bindForm.isInput = false;
       } else {
@@ -93,7 +77,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       isShowLRBtn: false,
       isBig: false,
@@ -145,11 +129,11 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid", "setProductsNum", "signOut"]),
-    closeBanner() {
+    closeBanner () {
       this.bannerMsg = false;
     },
     // 跳转 公共路由方法
-    handleLink(data) {
+    handleLink (data) {
       if (data === "/other/pages/search") {
         let ID = Math.random();
         this.$router.push({ path: data, query: { ID } });
@@ -165,7 +149,7 @@ export default {
       }
     },
     // 下拉列表
-    getClassifyList() {
+    getClassifyList () {
       home.getClassifyList(this.curruntForm).then(response => {
         if (response.status === 0) {
           this.categoryArr = [];
@@ -180,25 +164,26 @@ export default {
         }
       });
     },
-    handleSearchData(item) {
+    handleSearchData (item) {
       persistStore.set("key", item);
       this.handleLink("/other/pages/search");
     },
     // 搜索
-    handleSearch(item) {
+    handleSearch (item) {
       this.search = item.replace(/[ ]/g, "");
       checkSearch(this.search, this.handleSearchData);
     },
     // 兑换码 --- 关闭头部绑定课程
-    handleCloseEcg() {
+    handleCloseEcg () {
       this.bindForm.courseId = "";
       this.bindForm.isBind = false;
     },
     // 兑换码 --- 打开头部绑定课程
-    handleAddEcg() {
+    handleAddEcg () {
       if (persistStore.get("token")) {
         this.bindForm.isBind = true;
       } else {
+        this.handleSignOut();
         this.$alert(
           "您暂未登录，无法绑定兑换码，请先完成用户登录！",
           "温馨提示",
@@ -208,7 +193,6 @@ export default {
             callback: action => {
               if (action === "cancel") {
               } else {
-                this.handleSignOut();
                 this.$bus.$emit("loginShow", true);
               }
             }
@@ -217,7 +201,7 @@ export default {
       }
     },
     // 兑换码 --检测兑换码内是否包含已绑定的课程
-    handleDetection() {
+    handleDetection () {
       if (!/^[A-Za-z0-9]{6}$/.test(this.bindForm.courseId)) {
         message(this, "error", "请输入正确的兑换码！");
         this.bindForm.isInput = false;
@@ -258,7 +242,7 @@ export default {
         }
       });
     },
-    invitationCodeType(item) {
+    invitationCodeType (item) {
       switch (item) {
         case "1":
           //兑换码内只有课程
@@ -283,7 +267,7 @@ export default {
       }
     },
     // 兑换码 -- 头部绑定课程
-    handleBind() {
+    handleBind () {
       header.bindingCurriculumPrivate(this.bindForm).then(res => {
         let error = res.status === 0 ? "success" : "error";
         message(this, error, res.msg);
@@ -327,7 +311,7 @@ export default {
       });
     },
     // 个人中心 跳转
-    handleLinkProfile(item) {
+    handleLinkProfile (item) {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.getUserInfo();
@@ -335,22 +319,22 @@ export default {
       this.$bus.$emit("selectProfileIndex", item);
     },
     // 个人中心 退出
-    handleSignOut() {
+    handleSignOut () {
       this.isShowLRBtn = false;
       this.signOut();
       this.$router.push("/");
       persistStore.clearAll();
     },
     // 个人中心 登录ZRlUuF
-    login() {
+    login () {
       this.$bus.$emit("loginShow");
     },
     // 个人中心 注册
-    register() {
+    register () {
       this.$bus.$emit("registerShow");
     },
     // 个人中心 购物车数量
-    getShopCartNum() {
+    getShopCartNum () {
       if (persistStore.get("token")) {
         header.shopCartList().then(res => {
           if (res.status === 100008) {
@@ -367,11 +351,11 @@ export default {
       }
     },
     // 个人中心 重新登录 弹框
-    reLoginAlert(type, res) {
+    reLoginAlert (type, res) {
+      this.handleSignOut();
       this.$alert(res.msg + "," + "请重新登录", "温馨提示", {
         confirmButtonText: "确定",
         callback: action => {
-          this.handleSignOut();
           // 展示出登录框
           this.$bus.$emit("loginShow", true);
           //初始化首页数据
@@ -382,11 +366,11 @@ export default {
       });
     },
     // 您未登录请先登录 弹框
-    notLogIn(type, res) {
+    notLogIn (type, res) {
+      this.handleSignOut();
       this.$alert(res.msg, "温馨提示", {
         confirmButtonText: "确定",
         callback: action => {
-          this.handleSignOut();
           // 展示出登录框
           this.$bus.$emit("loginShow", true);
           //初始化首页数据
@@ -397,7 +381,7 @@ export default {
       });
     },
     // 个人中心 单点登录 逻辑 判断
-    isSingleLogin(res) {
+    isSingleLogin (res) {
       if (res.status === 100008) {
         // 设置单点登录
         this.reLoginAlert(true, res);
@@ -416,7 +400,7 @@ export default {
       this.pass = true;
     },
     // 个人中心 个人信息设置
-    setUserInfo(res) {
+    setUserInfo (res) {
       this.userInfo = res.data.userInfo;
       persistStore.set("nickName", this.userInfo.nick_name);
       persistStore.set("phone", this.userInfo.user_name);
@@ -428,7 +412,7 @@ export default {
       }
     },
     // 个人中心 用户头像
-    getUserInfo() {
+    getUserInfo () {
       if (!this.pass) {
         return false;
       }
@@ -443,13 +427,13 @@ export default {
         this.isShowLRBtn = false;
       }
     },
-    getAll() {
+    getAll () {
       this.getShopCartNum();
       if (!persistStore.get("token")) {
         this.signOut();
       }
     },
-    onBusEvent() {
+    onBusEvent () {
       // 监听 优惠专题入口的banner 隐藏
       this.$bus.$on("bannerImg", data => {
         this.bannerMsg = data;
@@ -471,7 +455,7 @@ export default {
       });
     },
     // 兼容IE
-    explorer() {
+    explorer () {
       if (!!window.ActiveXObject || "ActiveXObject" in window) {
         this.judegExplorer = true;
       } else {
@@ -479,7 +463,7 @@ export default {
       }
     },
     // 判断浏览器是否是移动端
-    browserRedirect() {
+    browserRedirect () {
       var sUserAgent = window.navigator.userAgent.toLowerCase();
       var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
       var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
@@ -506,12 +490,12 @@ export default {
         document.body.classList.remove("mobile");
       }
     },
-    resize() {
+    resize () {
       let wWidth = window.innerWidth;
       this.isBig = wWidth < 1420 ? false : true;
     }
   },
-  mounted() {
+  mounted () {
     this.resize();
     window.addEventListener("resize", this.resize);
     // 当前浏览器是否是移动端

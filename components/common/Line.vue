@@ -2,18 +2,23 @@
   <div class="catalog">
     <!-- 遍历章节 -->
     <div class="chapter" v-for="(catalog,index) in catalogs" :key="index">
-      <h4>{{catalog.title}} </h4>
+      <h4>{{catalog.title}}</h4>
       <!-- 遍历小节 -->
-      <div class="bar clearfix" v-for="(bar,index) in catalog.childList" :key="index" @click="handleCatalog(index,catalog)">
+      <div
+        class="bar clearfix"
+        v-for="(bar,index) in catalog.childList"
+        :key="index"
+        @click="handleCatalog(index,catalog)"
+      >
         <!-- 小节上 左侧播放图片 项目中的 课程详情不展示-->
         <!-- <span class="fl playIcon" v-if="config.card_type!=='project'">
           <i class="el-icon-caret-right"></i>
-        </span> -->
+        </span>-->
         <span class="fl playIcon" v-show="changeImg.id == bar.id?false:true">
           <i class="el-icon-caret-right"></i>
         </span>
         <span class="fl playImg" v-show="changeImg.id == bar.id?true:false">
-          <img :src="changeImg.img" alt="">
+          <img :src="changeImg.img" alt>
         </span>
         <p>
           <span class="fl barName">{{bar.video_number}}.{{bar.title}}({{bar.video_time}}分钟)</span>
@@ -29,26 +34,56 @@
           <span v-if="config.card_type!=='project'" class="fr">
             <span v-if="isAuthenticated" class="fr">
               <span v-if="privileMsg === false">
-                <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即试看</span>
+                <span
+                  class="fr freePlay"
+                  v-if="bar.look_at === '2' || catalog.isLogin"
+                  @click="goLink('player')"
+                >立即试看</span>
                 <span class="fr freePlay" v-else @click="goBuy(catalog,index)">购买课程</span>
               </span>
               <span v-if="privileMsg === true">
-                <span class="fr freePlay" v-if="bar.look_at === '2' || catalog.isLogin" @click="goLink('player')">立即观看</span>
-                <span class="fr freePlay" v-if="bar.look_at === '1' || catalog.isLogin" @click="goLink('player')">立即观看</span>
+                <span
+                  class="fr freePlay"
+                  v-if="bar.look_at === '2' || catalog.isLogin"
+                  @click="goLink('player')"
+                >立即观看</span>
+                <span
+                  class="fr freePlay"
+                  v-if="bar.look_at === '1' || catalog.isLogin"
+                  @click="goLink('player')"
+                >立即观看</span>
               </span>
             </span>
             <span v-else class="fr clearfix">
-              <span class="fr freePlay" v-if="bar.look_at === '2' && bar.is_free === '1'" @click="buyMask">立即试看{{bar.is_free}}==={{bar.look_at}}</span>
-              <span class="fr freePlay" v-if="bar.is_free === '2'" @click="buyMask">立即观看{{bar.is_free}}==={{bar.look_at}}</span>
-              <span class="fr freePlay" v-if="bar.is_free === '1'&&bar.look_at === '1'" @click="goBuy(catalog,index)">购买课程{{bar.is_free}}==={{bar.look_at}}</span>
+              <span
+                class="fr freePlay"
+                v-if="bar.look_at === '2' && bar.is_free === '1'"
+                @click="buyMask"
+              >立即试看{{bar.is_free}}==={{bar.look_at}}</span>
+              <span
+                class="fr freePlay"
+                v-if="bar.is_free === '2'"
+                @click="buyMask"
+              >立即观看{{bar.is_free}}==={{bar.look_at}}</span>
+              <span
+                class="fr freePlay"
+                v-if="bar.is_free === '1'&&bar.look_at === '1'"
+                @click="goBuy(catalog,index)"
+              >购买课程{{bar.is_free}}==={{bar.look_at}}</span>
             </span>
           </span>
-
         </p>
         <span v-if="privileMsg === true&&config.card_type!=='project'">
-          <el-progress v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0" class="fr" :text-inside="true" :stroke-width="8" :percentage="bar.percentage" :show-text="false" color="#773084"></el-progress>
+          <el-progress
+            v-if="catalog.isLogin == true && bar.isFree == false && bar.percentage>0"
+            class="fr"
+            :text-inside="true"
+            :stroke-width="8"
+            :percentage="bar.percentage"
+            :show-text="false"
+            color="#773084"
+          ></el-progress>
         </span>
-
       </div>
     </div>
   </div>
@@ -64,7 +99,7 @@ export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated'])
   },
-  data() {
+  data () {
     return {
       curriculumcartids: {
         cartid: null
@@ -86,10 +121,10 @@ export default {
     }
   },
   methods: {
-    goLink(item) {
+    goLink (item) {
       // this.$router.push(item)
     },
-    goBuy(item, index) {
+    goBuy (item, index) {
       if (persistStore.get('token')) {
         this.curriculumcartids.cartid = item.curriculum_id
         this.goodsNmber()
@@ -98,7 +133,7 @@ export default {
       }
     },
     // 判断购物车数量
-    goodsNmber() {
+    goodsNmber () {
       if (persistStore.get('productsNum') < 70) {
         this.addShopCart()
       } else {
@@ -110,18 +145,18 @@ export default {
         })
       }
     },
-    addShopCart() {
+    addShopCart () {
       line.addShopCart(this.curriculumcartids).then(response => {
         this.$router.push('/shop/shoppingcart')
       })
     },
-    checked(index) {
+    checked (index) {
       $('.catalog .chapter .bar').removeClass('checked')
       $('.catalog .chapter .bar')
         .eq(index)
         .addClass('checked')
     },
-    handleCatalog(index, item) {
+    handleCatalog (index, item) {
       // 是否为项目下的课程
       if (this.config.card_type === 'project') {
         return false
@@ -148,7 +183,7 @@ export default {
         document.body.scrollTop = document.documentElement.scrollTop = 0
       }
     },
-    buyMask() {
+    buyMask () {
       this.$bus.$emit('loginShow', true)
     }
   }
@@ -156,5 +191,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/components/line';
+@import "~assets/style/components/line";
 </style>

@@ -4,14 +4,11 @@
       <div class="searchWord">
         <el-input
           v-model="searchMsg"
-          placeholder="请输入课程、老师"
+          placeholder="请输入课程、导师"
           class="inline-input"
           @keyup.enter.native="search"
         ></el-input>
-        <i
-          @click="search"
-          class="el-icon-search"
-        ></i>
+        <i @click="search" class="el-icon-search"></i>
       </div>
       <div class="hotWord">
         <span>热搜关键词：</span>
@@ -31,7 +28,7 @@ import { store as persistStore } from "~/lib/core/store";
 import { message } from "@/lib/util/helper";
 export default {
   props: ["word"],
-  data() {
+  data () {
     return {
       searchMsg: "",
       hotSearchRecord: [],
@@ -42,12 +39,12 @@ export default {
     };
   },
   watch: {
-    word(val, old) {
+    word (val, old) {
       this.searchMsg = val;
     }
   },
   methods: {
-    querySearch(queryString, cb) {
+    querySearch (queryString, cb) {
       var restaurants = this.restaurants;
       var results = queryString
         ? restaurants.filter(this.createFilter(queryString))
@@ -55,7 +52,7 @@ export default {
       // 调用 callback 返回建议列表的数据
       cb(results);
     },
-    searchHotWord() {
+    searchHotWord () {
       conSearch.searchHotWord(this.searchForm).then(response => {
         if (response.status === 0) {
           this.hotSearchRecord = response.data.hotSearchRecord;
@@ -64,7 +61,7 @@ export default {
         }
       });
     },
-    createFilter(queryString) {
+    createFilter (queryString) {
       return restaurant => {
         return (
           restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) ===
@@ -72,8 +69,8 @@ export default {
         );
       };
     },
-    handleSelect(item) {},
-    search() {
+    handleSelect (item) { },
+    search () {
       this.searchMsg = this.searchMsg.replace(/[ ]/g, "");
       if (
         !/[@#\$%\^&\*]+/g.test(this.searchMsg) &&
@@ -86,13 +83,13 @@ export default {
         message(this, "error", "请输入不包含特殊字符且小于30个字符的关键词！");
       }
     },
-    selectItem(val, index) {
+    selectItem (val, index) {
       this.searchMsg = val;
       persistStore.set("key", this.searchMsg);
       this.$emit("Search", this.searchMsg);
     }
   },
-  mounted() {
+  mounted () {
     this.searchMsg = persistStore.get("key");
     this.searchHotWord();
   }
