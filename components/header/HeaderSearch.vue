@@ -1,14 +1,31 @@
 <template>
-  <div>
-    <div class="search">
-      <i v-if="!isShowInput" class="el-icon-search out-icon" @click="showInput"></i>
-      <i v-else class="el-icon-close out-icon" @click="showInput"></i>
-      <div ref="searchInput" class="searchInput">
-        <input type="text" placeholder="请输入课程、导师" v-model="search" @keyup.enter="handleSearch">
-        <span class="innerIcon" @click="handleSearch">
-          <i class="el-icon-search inner-icon"></i>
-        </span>
-      </div>
+  <div class="search">
+    <i
+      v-if="!isShowInput"
+      class="el-icon-search out-icon"
+      @click="showInput"
+    ></i>
+    <i
+      v-else
+      class="el-icon-close out-icon"
+      @click="showInput"
+    ></i>
+    <div
+      ref="searchInput"
+      class="searchInput"
+    >
+      <input
+        type="text"
+        placeholder="请输入课程、导师"
+        v-model="search"
+        @keyup.enter="handleSearch"
+      >
+      <span
+        class="innerIcon"
+        @click="handleSearch"
+      >
+        <i class="el-icon-search inner-icon"></i>
+      </span>
     </div>
   </div>
 </template>
@@ -16,14 +33,14 @@
 <script>
 import { message } from "@/lib/util/helper";
 export default {
-  data () {
+  data() {
     return {
       search: null,
       isShowInput: false
     };
   },
   methods: {
-    showInput () {
+    showInput() {
       let divHeight = this.$refs.searchInput.style.height;
       if (divHeight == "40px") {
         this.$refs.searchInput.style.height = 0 + "px";
@@ -32,7 +49,7 @@ export default {
       }
       this.isShowInput = !this.isShowInput;
     },
-    handleSearch () {
+    handleSearch() {
       this.search = this.search.replace(/[ ]/g, "");
       if (
         !/[@#\$%\^&\*]+/g.test(this.search) &&
@@ -44,7 +61,7 @@ export default {
         message(this, "error", "请输入不包含特殊字符且小于30个字符的关键词！");
       }
     },
-    changePage () {
+    changePage() {
       this.isShowInput = false;
       this.search = "";
       this.$refs.searchInput.style.height = 0 + "px";
@@ -55,6 +72,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-</style>
