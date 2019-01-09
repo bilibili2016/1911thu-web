@@ -180,6 +180,9 @@ export default {
   mounted() {
     this.nid = window.location.pathname.split("/")[3];
     this.getNewInfoDetail(this.nid);
+    this.$bus.$on("renewsDetailData", data => {
+      this.getNewInfoDetail(this.nid, 1);
+    });
   }
 };
 </script>

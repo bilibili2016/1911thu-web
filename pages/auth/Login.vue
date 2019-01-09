@@ -928,10 +928,16 @@ export default {
     },
     // 判断当前页面路由-是否登录后刷新当前页面
     refresh() {
-      if (window.location.pathname === "/course/coursedetail") {
+      let pathName = window.location.pathname;
+      if (pathName === "/course/coursedetail") {
         this.$bus.$emit("reCourseData");
-      } else if (window.location.pathname === "/project/projectdetail") {
+      } else if (pathName === "/project/projectdetail") {
         this.$bus.$emit("reProjectData");
+      } else if (
+        pathName.indexOf("/home/news/") == 0 &&
+        pathName != "/home/news/list"
+      ) {
+        this.$bus.$emit("renewsDetailData");
       }
     }
   },
