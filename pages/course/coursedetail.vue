@@ -390,15 +390,29 @@ export default {
         .getdefaultCurriculumCatalog(this.getdefaultForm)
         .then(response => {
           if (response.status === 0) {
-            this.$router.replace(
-              "/course/coursedetail" +
-                "?kid=" +
-                matchSplits("kid") +
-                "&bid=" +
-                response.data.defaultCurriculumCatalog.id +
-                "&page=" +
-                matchSplits("page")
-            );
+            //从个人中心-我的课程-继续学习跳转到课程详情页默认播放
+            if (window.location.search.indexOf("paly") >= 0) {
+              this.$router.replace(
+                "/course/coursedetail" +
+                  "?kid=" +
+                  matchSplits("kid") +
+                  "&bid=" +
+                  response.data.defaultCurriculumCatalog.id +
+                  "&page=" +
+                  matchSplits("page") +
+                  "&play="
+              );
+            } else {
+              this.$router.replace(
+                "/course/coursedetail" +
+                  "?kid=" +
+                  matchSplits("kid") +
+                  "&bid=" +
+                  response.data.defaultCurriculumCatalog.id +
+                  "&page=" +
+                  matchSplits("page")
+              );
+            }
           }
         });
     },

@@ -581,7 +581,7 @@ export default {
     this.beforeRoute = this.$route.path;
 
     //从个人中心-我的课程-继续学习跳转到课程详情页默认播放
-    if (persistStore.get("myCoursePlay")) {
+    if (window.location.search.indexOf("paly") >= 0) {
       this.getdefaultCurriculumCatalog();
     }
   },

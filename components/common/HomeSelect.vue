@@ -90,17 +90,6 @@ export default {
         document.body.style.position = "static";
       }
 
-      /**从个人中心-我的课程-继续学习跳转到课程详情页默认播放
-       *  persistStore.get("myCoursePlay"):
-       *      true:默认播放
-       *      false：不播放
-       */
-      if (pathName == "/course/coursedetail") {
-        persistStore.set("myCoursePlay", persistStore.get("myCoursePlay"));
-      } else {
-        persistStore.set("myCoursePlay", false);
-      }
-
       switch (pathName) {
         //首页
         case "/":

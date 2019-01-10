@@ -247,13 +247,17 @@ export default {
     study(item) {
       this.openDetail(item);
     },
+    //继续学习
     goonStudy(item) {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
-      open(this.courseUrl);
-      console.log(222);
-      this.$bus.$emit("myCoursePlay");
-      persistStore.set("myCoursePlay", true);
+      //从个人中心-我的课程-继续学习跳转到课程详情页默认播放
+      window.open(
+        window.location.origin +
+          "/course/coursedetail?kid=" +
+          item.id +
+          "&bid=&page=0&paly="
+      );
     },
     openDetail(item) {
       this.kidForm.kids = item.id;
