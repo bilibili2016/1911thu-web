@@ -339,6 +339,7 @@ export default {
         if (response.status === 0) {
           this.loadMsg = false;
           this.courseList = response.data.curriculumDetail;
+
           this.privileMsg = response.data.curriculumPrivilege;
 
           this.content = response.data.curriculumPrivilege;
