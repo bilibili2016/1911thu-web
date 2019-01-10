@@ -235,15 +235,12 @@ export default {
     countDown () {
       this.isShowTime = true;
       this.timer = setInterval(() => {
-        console.log('倒计时：' + this.showTime);
-
         this.showTime < 1 ? this.nextAnswer() : this.showTime--;
       }, 1000);
     },
     // 关闭倒计时
     closeCountDown () {
       if (this.timer) {
-        console.log('this.timer存在');
         clearInterval(this.timer);
       }
       this.isShowTime = false;
@@ -261,12 +258,7 @@ export default {
     },
     // 下一题
     nextAnswer () {
-      console.log('下一题触发');
-
       this.closeCountDown();
-
-      console.log('清除完成');
-
       if (this.questionNext != [] && this.questionNext.id) {
         this.examForm.questionId = this.questionNext.id;
         this.changeToken();
