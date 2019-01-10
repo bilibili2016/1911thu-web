@@ -66,7 +66,7 @@
                 v-if="card.percent > 0&&!card.overtime&&config.card=='learning'"
                 type="primary"
                 plain
-                @click="openDetail(card)"
+                @click="goonStudy(card)"
               >
                 <span>继续学习</span>
               </el-button>
@@ -246,6 +246,14 @@ export default {
   methods: {
     study(item) {
       this.openDetail(item);
+    },
+    goonStudy(item) {
+      this.kidForm.kids = item.id;
+      this.courseUrl.kid = item.id;
+      open(this.courseUrl);
+      console.log(222);
+      this.$bus.$emit("myCoursePlay");
+      persistStore.set("myCoursePlay", true);
     },
     openDetail(item) {
       this.kidForm.kids = item.id;

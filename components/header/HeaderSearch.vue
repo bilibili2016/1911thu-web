@@ -35,7 +35,7 @@ import { message } from "@/lib/util/helper";
 export default {
   data() {
     return {
-      search: null,
+      search: "",
       isShowInput: false
     };
   },
