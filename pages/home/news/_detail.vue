@@ -14,17 +14,36 @@
         class="newsContent"
         v-loading='loading'
       >
-        <h3>{{newsDetail.title}}</h3>
-        <p class="time">{{newsDetail.create_time}}&nbsp;&nbsp;&nbsp;新闻来源：{{newsDetail.source}}</p>
-        <!-- <h4 class="source" v-if="newsDetail.source">新闻来源：{{newsDetail.source}}</h4> -->
         <div
-          class="newsInner"
-          v-html="newsDetail.content"
-        ></div>
-        <h5
-          class="author"
-          v-if="newsDetail.author"
-        >责任编辑：{{newsDetail.author}}</h5>
+          class="viewArea"
+          ref="viewArea"
+        >
+          <h3>{{newsDetail.title}}</h3>
+          <p class="time">{{newsDetail.create_time}}&nbsp;&nbsp;&nbsp;新闻来源：{{newsDetail.source}}</p>
+          <!-- <h4 class="source" v-if="newsDetail.source">新闻来源：{{newsDetail.source}}</h4> -->
+          <div
+            class="newsInner"
+            v-html="newsDetail.content"
+          ></div>
+          <h5
+            class="author"
+            v-if="newsDetail.author"
+          >责任编辑：{{newsDetail.author}}</h5>
+
+          <div
+            class="payBar"
+            v-if="isShowpayBar"
+          >
+            <div class="payDiv">
+              <span
+                class="btn"
+                @click.stop="handlepayNews"
+              >支付1元阅读更多</span>
+            </div>
+            <div class="height"></div>
+          </div>
+        </div>
+
         <div class="next clearfix">
           <span
             class="fl"
@@ -38,16 +57,6 @@
           >下一篇&nbsp;&nbsp;&nbsp;&nbsp;{{afterNews.title}}</span>
         </div>
       </div>
-    </div>
-
-    <div
-      class="payBar"
-      v-if="isShowpayBar"
-    >
-      <span
-        class="btn"
-        @click.stop="handlepayNews"
-      >支付1元阅读更多</span>
     </div>
 
     <v-pay
@@ -148,11 +157,12 @@ export default {
 
           if (response.data.newDetail.news_power == "1") {
             this.isShowpayBar = true;
-            document.body.style.position = "fixed";
+            this.$refs.viewArea.style.height = "500px";
           } else {
             this.isShowpayBar = false;
-            document.body.style.position = "static";
+            this.$refs.viewArea.style.height = "auto";
           }
+
           this.payNewsDetail = this.newsDetail;
 
           this.loading = false;

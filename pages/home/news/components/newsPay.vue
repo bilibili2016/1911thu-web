@@ -112,7 +112,8 @@ export default {
             //支付成功
             message(this, "success", "支付成功");
             this.isShowPop = false;
-            document.body.style.position = "static";
+            this.$refs.viewArea.style.height = "auto";
+
             this.$emit("requestNews", 1);
             clearInterval(this.timer);
           } else if (res.status == 100100) {
