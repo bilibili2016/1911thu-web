@@ -140,7 +140,6 @@ export default {
       this.payCompleteForm.orderId = matchSplits("order");
       payResult.payComplete(this.payCompleteForm).then(response => {
         if (response.status == 0) {
-          // response.data.curriculumListType = "1";
           this.load = false;
           this.payCompleteData = response.data;
           this.showMsg = true;
