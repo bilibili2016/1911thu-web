@@ -94,7 +94,7 @@
                 margin: 0 auto;
                 text-align: right;
                 padding-bottom: 20px;
-                border-bottom: 1px solid #ddd;
+                // border-bottom: 1px solid #ddd;
             }
             .newsInner {
                 width: 1020px;
@@ -111,6 +111,7 @@
             height: 95px;
             line-height: 95px;
             color: #773084;
+            border-top: 1px solid #ddd;
             span {
                 font-size: 16px;
                 color: #222;
@@ -150,34 +151,44 @@
             }
         }
     }
-    .payBar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 1100px;
-        height: 100px;
-        text-align: center;
-        margin: 0 auto;
-        background: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-        /* Safari 5.1 - 6.0 */
-        background: -o-linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-        /* Opera 11.1 - 12.0 */
-        background: -moz-linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-        /* Firefox 3.6 - 15 */
-        background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-        /* 标准的语法（必须放在最后） */
-        .btn {
-            width: 150px;
-            height: 40px;
-            line-height: 40px;
-            color: #fff;
-            border-radius: 20px;
+    .viewArea {
+        position: relative;
+        overflow: hidden;
+        .payBar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 1100px;
             text-align: center;
-            background-color: #773084;
             margin: 0 auto;
-            margin-top: 30px;
-            cursor: pointer;
+            .height {
+                height: 40px;
+                background-color: #fff;
+            }
+            .payDiv {
+                height: 110px;
+                background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+                /* Safari 5.1 - 6.0 */
+                background: -o-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+                /* Opera 11.1 - 12.0 */
+                background: -moz-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+                /* Firefox 3.6 - 15 */
+                background: linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+                /* 标准的语法（必须放在最后） */
+                .btn {
+                    width: 150px;
+                    height: 40px;
+                    line-height: 40px;
+                    color: #fff;
+                    border-radius: 20px;
+                    text-align: center;
+                    background-color: #773084;
+                    margin: 0 auto;
+                    margin-top: 75px;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
