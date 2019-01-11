@@ -11,7 +11,8 @@
       <div class="header-fr clearfix" :class="{big:isBig}">
         <v-search @handleSearch="handleSearch"></v-search>
         <v-enter
-          :class="['HREntry' ,{islogined : isAuthenticated }]"
+          class="HREntry"
+          :isShowLRBtn="isShowLRBtn"
           @handleLink="handleLink"
           @addEcg="handleAddEcg"
         ></v-enter>

@@ -13,7 +13,7 @@
         <p class="changeType">下载1911学堂APP</p>
       </div>
     </div>
-    <div class="shoppingCart" v-show="isAuthenticated" @click="handleLink('/shop/shoppingcart')">
+    <div class="shoppingCart" v-if="isShowLRBtn" @click="handleLink('/shop/shoppingcart')">
       <span class="cartIcon"></span>
       <i v-if="productsNum>0">{{productsNum}}</i>
     </div>
@@ -27,6 +27,7 @@ import { mapState, mapGetters } from 'vuex'
 import { getNetwork } from '@/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
+  props: ["isShowLRBtn"],
   data () {
     return {
       downloadAppURL: '',
