@@ -68,7 +68,7 @@
         src="http://static-image.1911edu.com/collegePay.png"
         alt
       >
-      <p>欢迎您加入在线干部学院，成为1911学堂学员，</p>
+      <p>欢迎您加入{{collegeText}}，成为1911学堂学员，</p>
       <p>您将在1911学堂开启为期一年的学习之旅，开始学习吧！</p>
       <div>
         <span @click="college">返回学院</span>
@@ -86,6 +86,7 @@ import { store as persistStore } from "~/lib/core/store";
 export default {
   data() {
     return {
+      collegeText: "",
       success: true,
       payCompleteForm: {
         orderId: null,
@@ -139,7 +140,7 @@ export default {
       this.payCompleteForm.orderId = matchSplits("order");
       payResult.payComplete(this.payCompleteForm).then(response => {
         if (response.status == 0) {
-          response.data.curriculumListType = "1";
+          // response.data.curriculumListType = "1";
           this.load = false;
           this.payCompleteData = response.data;
           this.showMsg = true;
@@ -159,9 +160,15 @@ export default {
             // 订单内学院
             // this.isVipCode = true
             // this.links = 'tab-eleventh'
-
             this.showCollegeResult = true;
             this.vipGoodsDetail = response.data.vipGoodsDetail;
+
+            if (this.vipGoodsDetail.vip_id == 2) {
+              this.collegeText = "在线干部学院";
+            } else {
+              this.collegeText = "在线商学院";
+            }
+
             return false;
           } else {
             this.collegePay = true;
