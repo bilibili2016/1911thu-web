@@ -17,15 +17,16 @@
         <h3 v-if="questionCurrent.type==1">单选题</h3>
         <h3 v-if="questionCurrent.type==2">多选题</h3>
         <h4>{{questionCurrent.number}}.{{questionCurrent.title}}</h4>
-        <el-radio
-          v-if="questionCurrent.type==1"
-          v-for="(option,index) in selectArr"
-          :key="index"
-          v-model="selectRadio"
-          :label="option.option_key"
-          :disabled="showResult"
-          @change="shangeRadio"
-        >{{option.option_key}}.{{option.option_value}}</el-radio>
+        <div v-if="questionCurrent.type==1">
+          <el-radio
+            v-for="(option,index) in selectArr"
+            :key="index"
+            v-model="selectRadio"
+            :label="option.option_key"
+            :disabled="showResult"
+            @change="shangeRadio"
+          >{{option.option_key}}.{{option.option_value}}</el-radio>
+        </div>
         <el-checkbox-group
           v-if="questionCurrent.type==2"
           v-model="selectIndex"
