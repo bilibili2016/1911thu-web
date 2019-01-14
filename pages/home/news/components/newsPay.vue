@@ -100,7 +100,6 @@ export default {
         this.wechat = res.data.code_url;
         this.alipay = res.data.qr_code;
         this.requestPayResult(res.data.order_id);
-
         this.loading = false;
       });
     },
@@ -111,15 +110,13 @@ export default {
           if (res.status == 0) {
             //支付成功
             message(this, "success", "支付成功");
-            this.isShowPop = false;
-            this.$refs.viewArea.style.height = "auto";
-
-            this.$emit("requestNews", 1);
             clearInterval(this.timer);
+            this.isShowPop = false;
+            this.$emit("requestNews", 1);
           } else if (res.status == 100100) {
             //支付失败
-            message(this, "error", "支付失败");
             clearInterval(this.timer);
+            message(this, "error", "支付失败");
           } else if (res.status == 100101) {
             //等待支付中
           }
