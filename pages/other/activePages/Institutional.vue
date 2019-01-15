@@ -128,7 +128,7 @@
               <el-form-item label prop="companyname">
                 <el-autocomplete
                   class="inline-input"
-                  placeholder="您的单位名称"
+                  placeholder="请输入您的单位名称"
                   v-model="company.companyname"
                   :fetch-suggestions="querySearchAsync"
                   :trigger-on-focus="false"
@@ -251,7 +251,7 @@ export default {
       },
       rules: {
         companyname: [
-          { required: true, message: "请输入单位名称", trigger: "blur" }
+          { required: true, message: "请输入您的单位名称", trigger: "blur" }
         ],
         person: [
           { required: true, message: "请输入联系人姓名", trigger: "blur" }
