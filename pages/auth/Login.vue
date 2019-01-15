@@ -515,6 +515,10 @@ export default {
       //this.bindTelShow=true; //绑定手机号
       // this.bindSuccessShow=true; // 登录成功
       this.wxLogin();
+      this.bindTelData.getCode = "获取验证码";
+      this.bindTelData.seconds = 30;
+      this.bindTelData.captchaDisable = false;
+      clearInterval(this.codeInterval);
     },
     // 注册时候获取验证码 this.registerData
     async handleGetCode(data) {

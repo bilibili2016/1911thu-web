@@ -1,16 +1,23 @@
 <template>
   <div class="VIP-con">
-    <div class="vipBanner" :class="{netWork:vipDetailData.id=='2',online:vipDetailData.id=='3'}"></div>
+    <div
+      class="vipBanner"
+      :class="{netWork:vipDetailData.id=='2',online:vipDetailData.id=='3'}"
+    ></div>
     <div class="con-detail">
       <div class="con-one clearfix">
         <div class="oneDIV clearfix">
           <div class="one-left">
-            <img src="http://static-image.1911edu.com/college-pic1.png" alt>
+            <img
+              src="http://static-image.1911edu.com/college-pic1.png"
+              alt
+            >
           </div>
           <div class="one-right">{{collegeCon.conOne.right}}</div>
         </div>
         <div class="one-bottom">
-          <span>{{collegeCon.conOne.bottom}}</span>
+          <span class="left">适合人群</span>
+          <span class="right">{{collegeCon.conOne.bottom}}</span>
         </div>
       </div>
       <div class="con-two">
@@ -50,8 +57,15 @@
         </h4>
         <div class="three-text">本学院授课师资来自以下及其他相关单位</div>
         <div class="source clearfix">
-          <div class="three-item" v-for="(item,index) in collegeCon.conThree.imgItems" :key="index">
-            <img :src="item" alt>
+          <div
+            class="three-item"
+            v-for="(item,index) in collegeCon.conThree.imgItems"
+            :key="index"
+          >
+            <img
+              :src="item"
+              alt
+            >
           </div>
         </div>
       </div>
@@ -65,11 +79,17 @@
             <span class="text">学员学习结束后可申请参加相关考试，考试通过者可获得清华大学相关部门或国内外其他知名院校颁发的认证证书及1911学堂结业证书。</span>
           </div>
           <div class="four-right">
-            <img src="http://static-image.1911edu.com/college-pic13.png" alt>
+            <img
+              src="http://static-image.1911edu.com/college-pic13.png"
+              alt
+            >
           </div>
         </div>
         <div class="four-certification">
-          <img :src="collegeCon.conFour.img" alt>
+          <img
+            :src="collegeCon.conFour.img"
+            alt
+          >
         </div>
       </div>
       <div class="con-five">
@@ -81,9 +101,7 @@
           学员只需
           <span class="p-one">{{collegeCon.conFive.priceOne}}元</span>
           即可加入1911学堂{{collegeCon.title}}，学习价值{{collegeCon.conFive.priceFive}}元的学院全部课程，
-          <span
-            class="p-one"
-          >学籍有效期一年。</span>
+          <span class="p-one">学籍有效期一年。</span>
         </p>
         <p class="price">
           <span>
@@ -99,23 +117,45 @@
           </span>
         </p>
       </div>
-      <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
+      <div
+        class="btns clearfix"
+        ref="btns"
+        :class="{fixedBottom:!bottom,bottomHeight:bottom}"
+      >
         <div class="btn-con">
           <span class="text">学费{{vipInfo.present_price}}元/年</span>
           <div class="btn-item">
             <!-- 是会员 -->
-            <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
+            <span
+              v-if="vipInfo.vipPrivate"
+              class="button"
+              @click="lookCourse"
+            >进入学院学习</span>
             <!-- 不是会员 -->
-            <span v-if="!vipInfo.vipPrivate" class="button" @click="lookCourse">查看学院课程</span>
-            
-            <span class="button" @click="buyVip">申请入学</span>
-            <span class="button" @click="identificate">申请证书</span>
+            <span
+              v-if="!vipInfo.vipPrivate"
+              class="button"
+              @click="lookCourse"
+            >查看学院课程</span>
+
+            <span
+              class="button"
+              @click="buyVip"
+            >申请入学</span>
+            <span
+              class="button"
+              @click="identificate"
+            >申请证书</span>
           </div>
         </div>
       </div>
     </div>
     <!-- 会员购买弹窗 -->
-    <v-vipbuy :vipPopShow="vipPopShow" :vipId="vipDetailData.id" @changeVipShow="changeVipShow"></v-vipbuy>
+    <v-vipbuy
+      :vipPopShow="vipPopShow"
+      :vipId="vipDetailData.id"
+      @changeVipShow="changeVipShow"
+    ></v-vipbuy>
   </div>
 </template>
 <script>
@@ -126,7 +166,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import VipBuy from "@/components/common/VipBuy.vue";
 
 export default {
-  data () {
+  data() {
     return {
       onlineImg: "http://static-image.1911edu.com/online-con.png",
       networkImg: "http://static-image.1911edu.com/network-con.png",
@@ -280,7 +320,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid"]),
     //查看课程
-    lookCourse () {
+    lookCourse() {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -293,7 +333,7 @@ export default {
       });
     },
     //立即购买
-    buyVip () {
+    buyVip() {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -301,11 +341,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow (val) {
+    changeVipShow(val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate () {
+    identificate() {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -316,7 +356,7 @@ export default {
       }
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
@@ -325,7 +365,7 @@ export default {
       });
     },
     //
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -338,7 +378,7 @@ export default {
         this.bottom = false;
       }
     },
-    init () {
+    init() {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id"); //2:干部网络学院  3:在线商学院
       if (this.vipDetailData.id == "2") {
@@ -349,12 +389,12 @@ export default {
     }
   },
   watch: {
-    $route (v, oldv) {
+    $route(v, oldv) {
       this.init();
       this.vipDetail();
     }
   },
-  mounted () {
+  mounted() {
     this.init();
     this.vipDetail();
     // 寛高设置
