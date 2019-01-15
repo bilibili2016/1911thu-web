@@ -53,7 +53,6 @@
       <v-info
         v-if="newsListData.length"
         v-loading="infoLoading"
-        v-if="hasNews"
         :newsListData="newsListData"
         :outNewData="outNewData"
         :infoTwo="infoTwo"
@@ -152,7 +151,6 @@ export default {
       evaluateData: [],
       newsListData: [],
       outNewData: [],
-      hasNews: true,
       ding: {
         card_type: "ding"
       },
@@ -312,11 +310,7 @@ export default {
         if (response.status === 0) {
           this.infoLoading = false;
           this.newsListData = response.data.newsList;
-          if (response.data.newsList.length == 0) {
-            this.hasNews = false
-          } else {
-            this.outNewData = response.data.newsList[0];
-          }
+          this.outNewData = response.data.newsList[0];
         }
       });
     },
