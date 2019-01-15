@@ -51,6 +51,7 @@
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 学堂资讯 -->
       <v-info
+        v-if="newsListData.length"
         v-loading="infoLoading"
         v-if="hasNews"
         :newsListData="newsListData"

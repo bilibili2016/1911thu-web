@@ -70,7 +70,7 @@
           </div>
           <div class="desc-con three">
             <p class="top"><i class="circle"></i>合作内容</p>
-            <p class="bottom">1911学堂城市分校办学内容包括纯线上学习、混合式学习以及其他项目。</p>
+            <p class="bottom">1911学堂城市分校的办学内容包括系列在线学院、混合式项目及单位定制项目等。</p>
           </div>
         </div>
       </div>

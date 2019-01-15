@@ -1,78 +1,78 @@
 .ticketConfirm {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 300;
-  .ticketPop {
-    width: 740px;
-    height: auto;
-    background-color: #fff;
-    border-radius: 10px;
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    overflow-y: auto;
-    margin-left: -360px;
-    h3 {
-      height: 58px;
-      line-height: 58px;
-      padding: 0 30px 0 40px;
-      font-size: 16px;
-      color: #222;
-      border-bottom: 1px solid #e8d6f7;
-      i {
-        color: #773084;
-        font-size: 20px;
-        margin-top: 19px;
-        font-weight: 700;
-      }
-    }
-    .ticketBox {
-      margin: 20px 30px 0;
-      border: 1px solid#e8d6f7;
-      background-color: #fafafa;
-      padding: 15px 0;
-      p {
-        font-size: 14px;
-        color: #222;
-        margin-left: 20px;
-        line-height: 25px;
-      }
-    }
-    .tips {
-      margin: 20px 47px;
-      color: #ff5f5f;
-      font-size: 14px;
-    }
-    .confirm {
-      padding: 30px 0;
-      text-align: center;
-      span {
-        width: 150px;
-        height: 40px;
-        line-height: 40px;
-        border-radius: 6px;
-        margin: 0 30px;
-        color: #fff;
-        cursor: pointer;
-        background-color: #773084;
-        &.back {
-          background-color: #ccc;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 300;
+    .ticketPop {
+        width: 740px;
+        height: auto;
+        background-color: #fff;
+        border-radius: 10px;
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        overflow-y: auto;
+        margin-left: -360px;
+        h3 {
+            height: 58px;
+            line-height: 58px;
+            padding: 0 30px 0 40px;
+            font-size: 16px;
+            color: #222;
+            border-bottom: 1px solid #e8d6f7;
+            i {
+                color: #773084;
+                font-size: 20px;
+                margin-top: 19px;
+                font-weight: 700;
+            }
         }
-      }
-      .submit {
-        background-color: #773084;
-      }
-      .return {
-        background-color: #ddd;
-        color: #666;
-        margin-left: 30px;
-      }
+        .ticketBox {
+            margin: 20px 30px 0;
+            border: 1px solid#e8d6f7;
+            background-color: #fafafa;
+            padding: 15px 0;
+            p {
+                font-size: 14px;
+                color: #222;
+                margin-left: 20px;
+                line-height: 25px;
+            }
+        }
+        .tips {
+            margin: 20px 47px;
+            color: #ff5f5f;
+            font-size: 14px;
+        }
+        .confirm {
+            padding: 30px 0;
+            text-align: center;
+            span {
+                width: 150px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 6px;
+                margin: 0 30px;
+                color: #fff;
+                cursor: pointer;
+                background-color: #773084;
+                &.back {
+                    background-color: #ccc;
+                }
+            }
+            .submit {
+                background-color: #773084;
+            }
+            .return {
+                background-color: #ddd;
+                color: #666;
+                margin-left: 30px;
+            }
+        }
     }
-  }
 }
