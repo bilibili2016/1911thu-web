@@ -5,20 +5,20 @@
         <!-- 面包屑 收藏分享 -->
         <div class="main-crumb">
           <!-- 面包屑组件 -->
-          <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-          <!-- 收藏分享 -->
-          <v-collection :collectData="collectMsg"></v-collection>
+          <div class="breadCrumb">
+            <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+              <el-breadcrumb-item>{{BreadCrumb.category}}</el-breadcrumb-item>
+              <el-breadcrumb-item>{{BreadCrumb.text}}</el-breadcrumb-item>
+            </el-breadcrumb>
+          </div>
         </div>
         <!-- 顶部的card -->
         <div class="main-header" v-loading="loadMsg">
           <v-card
             :courseList="courseList"
             :config="config"
-            :linkdata="linkseven"
-            :privileMsg="privileMsg"
-            :cardetails="courseList"
-            @changePlayImg="changePlayImg"
             @refreshData="refreshData"
+            @changePlayImg="changePlayImg"
           ></v-card>
         </div>
       </div>
@@ -30,7 +30,6 @@
             :courseList="courseList"
             :loadMsg="loadMsg"
             :catalogs="catalogs"
-            :privileMsg="privileMsg"
             :config="config"
             :changeImg="changeImg"
             :totalEvaluateInfo="totalEvaluateInfo"
@@ -44,65 +43,34 @@
         </div>
         <div style="width:345px" class="fr">
           <!-- 讲师介绍 -->
-          <v-teacherintro
-            v-loading="loadTeacher"
-            :courseList="courseList"
-            @handleLinkTeacher="handleLinkTeacher"
-          ></v-teacherintro>
-          <!-- 课程评价-->
-          <v-evaluatecase
-            v-show="courseList.is_study != 0 && courseList.is_evaluate==0"
-            :isClose="isClose"
-            :courseList="courseList"
-            @changeList="cbList"
-            :config="config"
-          ></v-evaluatecase>
+          <v-teacherintro v-loading="loadTeacher" :courseList="courseList"></v-teacherintro>
         </div>
       </div>
-    </div>
-    <v-pay @closePay="closePayed" :config="config"></v-pay>
-    <v-backtop :data="showCheckedCourse"></v-backtop>
-    <div class="join" @click="joinCollege" v-show="isShowBtn">
-      <img src="http://static-image.1911edu.com/joinStudy.gif" alt>
     </div>
   </div>
 </template>
 
 <script>
-import CustomCard from "@/pages/backend/course/components/Card.vue";
 import { coursedetail } from "~/lib/v1_sdk/index";
 import { mapState, mapGetters, mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { uniqueArray, matchSplits, setTitle, Trim } from "@/lib/util/helper";
-import BackToTop from "@/components/common/BackToTop.vue";
-import Pay from "@/components/common/Pay.vue";
-import EvaluateContent from "@/components/common/EvaluateContent.vue";
-import EvaluateCase from "@/components/common/EvaluateCase.vue";
-import BreadCrumb from "@/components/common/BreadCrumb.vue";
-import TeacherIntro from "@/pages/course/coursedetail/teacherIntro.vue";
-import Collection from "@/components/common/Collection.vue";
-import CourseCatalog from "@/pages/course/coursedetail/CourseCatalog.vue";
+import CustomCard from "@/pages/backend/course/components/Card.vue";
+import TeacherIntro from "@/pages/backend/course/components/teacherIntro.vue";
+import CourseCatalog from "@/pages/backend/course/components/CourseCatalog.vue";
 
 export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
   components: {
-    "v-backtop": BackToTop,
-    "v-pay": Pay,
     "v-card": CustomCard,
-    "v-evaluate": EvaluateContent,
-    "v-evaluatecase": EvaluateCase,
-    "v-breadcrumb": BreadCrumb,
     "v-teacherintro": TeacherIntro,
-    "v-collection": Collection,
     "v-coursecatelog": CourseCatalog
   },
   data () {
     return {
-      isShowBtn: false,
       vipPopShow: false,
-      isShowAlert: false,
       evaluateLoading: true,
       BreadCrumb: {
         vipID: "",
@@ -113,14 +81,12 @@ export default {
         position: false, //是否显示《当前位置》
         text: "课程详情"
       },
-      isClose: false, //评论组件是否有关闭按钮
       showCheckedCourse: false,
       activeName: "second",
       textarea: "",
       rateModel: 5,
       loadTeacher: false,
       loadEvaluate: false,
-      linkseven: "player",
       catalogs: [],
       commentator: [],
       pageCount: null,
@@ -138,18 +104,6 @@ export default {
         types: 1,
         isRecommend: ""
       },
-      privileMsg: true,
-      collectMsg: {
-        types: 1,
-        isCollect: 0
-      },
-      addCollectionForm: {
-        curriculumId: null,
-        types: 1
-      },
-      getdefaultForm: {
-        curriculumid: ""
-      },
       loadMsg: true,
       pagemsg: {
         page: 1,
@@ -157,8 +111,6 @@ export default {
         total: 5
       },
       btnData: [],
-      btnDatas: [],
-      borderIndex: 7,
       addEvaluateForm: {
         ids: "",
         evaluatecontent: "",
@@ -174,14 +126,8 @@ export default {
         totalEvaluate: null,
         totalScore: null
       },
-      defaultCatalogId: "",
       tagGroup: "",
       reTagBtn: [],
-      configShare: {
-        url: "http://www.1911edu.com/",
-        sites: ["qzone", "qq", "weibo", "wechat"],
-        source: "http://www.1911edu.com/"
-      },
       sumUserStart: 0,
       changeImg: {
         img: "",
@@ -195,10 +141,6 @@ export default {
     changePlayImg (img, id) {
       this.changeImg.img = img;
       this.changeImg.id = id;
-    },
-    // 跳转老师详情
-    handleLinkTeacher (item) {
-      this.$router.push("/home/teacher/" + item);
     },
     // 标签 - 点击评价改变星级
     handleChangeRate (val) {
@@ -324,12 +266,8 @@ export default {
           this.loadMsg = false;
           this.courseList = response.data.curriculumDetail;
 
-          this.privileMsg = response.data.curriculumPrivilege;
-
           this.content = response.data.curriculumPrivilege;
           this.loadTeacher = false;
-          this.collectMsg.isCollect =
-            response.data.curriculumDetail.is_collection;
 
           this.vipGoodsDetail = response.data.curriculumDetail.vipGoodsDetail;
           this.BreadCrumb.category =
@@ -337,11 +275,6 @@ export default {
           this.BreadCrumb.categoryId =
             response.data.curriculumDetail.vipGoodsDetail.category_id;
           this.BreadCrumb.vipID = this.vipGoodsDetail.id;
-          if (Trim(this.vipGoodsDetail.id) == "") {
-            this.isShowBtn = false;
-          } else {
-            this.isShowBtn = true;
-          }
         }
       });
     },
@@ -371,30 +304,12 @@ export default {
       this.evaluateListForm.ids = matchSplits("kid");
       this.activeName = "second";
     },
-    //评论之后的回调
-    cbList () {
-      this.getCourseDetail();
-      this.getEvaluateList();
-    },
-    // 支付弹框关闭的回调
-    closePayed () {
-      this.$bus.$emit("closePayed");
-    },
     //拉取服务器数据 初始化所有方法
     initAll () {
       this.initData();
       this.getCourseDetail();
       this.getEvaluateList();
       this.getCourseList();
-    },
-    //加入学院
-    joinCollege () {
-      this.$router.push(
-        "/home/vip/vipPage?id=" +
-        this.vipGoodsDetail.id +
-        "&cid=" +
-        this.vipGoodsDetail.category_id
-      );
     },
     //关闭购买弹窗
     changeVipShow (val) {
@@ -416,11 +331,18 @@ export default {
   updated () {
     setTitle("课程详情-1911学堂");
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('backendHeaderShow')
+    })
+  },
   beforeRouteLeave (to, from, next) {
-    // this.$bus.$emit('headerFooterShow')
-    next(vm => { });
+    this.$bus.$emit('backendHeaderHide')
+    next()
   }
 };
 </script>
-
+<style scoped lang="scss">
+@import "~assets/style/components/breadCrumb.scss";
+</style>
 

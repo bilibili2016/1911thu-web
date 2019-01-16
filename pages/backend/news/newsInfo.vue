@@ -4,7 +4,13 @@
       <img :src="bannerImg" alt>
     </div>
     <!-- 面包屑组件 -->
-    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+    <div class="breadCrumb">
+      <span v-show="BreadCrumb.position">当前位置：</span>
+      <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+        <el-breadcrumb-item>首页</el-breadcrumb-item>
+        <el-breadcrumb-item>{{BreadCrumb.text}}</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <!-- 新闻内容 -->
     <div class="detail">
       <div class="newsContent" v-loading="loading">
@@ -21,11 +27,9 @@
 import CustomBanner from "@/components/common/Banner.vue";
 import { news } from "~/lib/v1_sdk/index";
 import { timestampToTime, message, matchSplits } from "~/lib/util/helper";
-import BreadCrumb from "@/components/common/BreadCrumb.vue";
 export default {
   components: {
     "v-banner": CustomBanner,
-    "v-breadcrumb": BreadCrumb
   },
   data () {
     return {
@@ -73,9 +77,19 @@ export default {
   mounted () {
     let nid = matchSplits('nid');
     this.getNewInfoDetail(nid);
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$bus.$emit('backendHeaderShow')
+    })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$bus.$emit('backendHeaderHide')
+    next()
   }
 };
 </script>
 <style lang="scss">
 @import "~assets/style/news/newsDetail";
+@import "~assets/style/components/breadCrumb.scss";
 </style>

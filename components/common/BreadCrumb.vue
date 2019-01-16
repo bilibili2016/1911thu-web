@@ -2,17 +2,11 @@
   <!-- 面包屑 -->
   <div class="breadCrumb">
     <span v-show="config.position">当前位置：</span>
-    <el-breadcrumb
-      separator-class="el-icon-arrow-right"
-      class="main-crumbs"
-    >
-      <el-breadcrumb-item
-        v-if="config.home"
-        :to="{ path: '/' }"
-      >首页</el-breadcrumb-item>
+    <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+      <el-breadcrumb-item v-if="config.home" :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item
         v-if="!config.home&&config.type=='courseDetail'"
-        :to="{ path: '/course/category?cid='+config.categoryId+'&cp=0&pids=0&xid=0&vid='+config.vipID }"
+        :to="{ path: '/home/vip/vipPage?id='+config.vipID+'&cid='+config.categoryId }"
       >{{config.category}}</el-breadcrumb-item>
       <!-- 跳转到项目详情 -->
       <el-breadcrumb-item
@@ -27,7 +21,6 @@
       <el-breadcrumb-item>{{config.text}}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
-
 </template>
 
 <script>

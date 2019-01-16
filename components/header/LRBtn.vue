@@ -8,15 +8,12 @@
 <script>
 export default {
   methods: {
-    login() {
+    login () {
       this.$emit('login')
     },
-    register() {
+    register () {
       this.$emit('register')
     }
   }
 }
 </script>
-
-<style scoped>
-</style>

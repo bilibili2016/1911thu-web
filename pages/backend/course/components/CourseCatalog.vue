@@ -5,12 +5,7 @@
         <div class="detailWord descript" v-html="courseList.content" v-loading="loadMsg"></div>
       </el-tab-pane>
       <el-tab-pane label="课程目录" name="second">
-        <v-line
-          :catalogs="catalogs"
-          :privileMsg="privileMsg"
-          :config="config"
-          :changeImg="changeImg"
-        ></v-line>
+        <v-line :catalogs="catalogs" :config="config" :changeImg="changeImg"></v-line>
       </el-tab-pane>
       <el-tab-pane label="用户评论" name="third">
         <v-userevaluate
@@ -43,7 +38,6 @@ export default {
     'courseList',
     'loadMsg',
     'catalogs',
-    'privileMsg',
     'config',
     'changeImg',
     'totalEvaluateInfo',

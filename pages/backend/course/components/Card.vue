@@ -46,15 +46,6 @@
                   <el-rate disabled v-model="courseList.score"></el-rate>
                 </span>
               </div>
-              <div class="common-button">
-                <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                <el-button
-                  :class="{'studentFree':courseList.is_vip}"
-                  type="primary"
-                  plain
-                  @click="handleFreeNoneStudy(courseList)"
-                >{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
-              </div>
             </div>
           </div>
         </div>
@@ -73,16 +64,14 @@ export default {
   components: {
     "v-player": CardPlayer
   },
-  props: ["courseList", "privileMsg", "config"],
+  props: ["courseList", "config"],
   computed: {
-    ...mapGetters("auth", ["isAuthenticated"]),
     ...mapState("auth", ["token", "productsNum"])
   },
   data () {
     return {
       isShowCover: true,
       playImg: "http://static-image.1911edu.com/play.png",
-      two_is_cart: 0,
       curriculumcartids: {
         cartid: null,
         type: 1
@@ -95,7 +84,6 @@ export default {
     };
   },
   methods: {
-    ...mapActions("auth", ["setProductsNum"]),
     refreshData () {
       this.$emit("refreshData");
     },
@@ -104,82 +92,10 @@ export default {
     },
     // 左侧播放按钮事件
     handleImgPlay (item) {
-      // 用户已登录
-      if (persistStore.get("token")) {
-        //   更新播放数据
-        this.$bus.$emit("reupdatecourse");
-      } else {
-        // 未登录直接弹出登录
-        this.$bus.$emit("loginShow", true);
-      }
-    },
-    // 点击立即学习按钮
-    handleFreeNoneStudy (item) {
-      // 当用户登录
-      if (persistStore.get("token")) {
-        // // 用户已经购买 以及 课程为免费 获取默认播放id
-        if (this.privileMsg === true) {
-          //   更新播放数据
-          this.$bus.$emit("reupdatecourse");
-        } else {
-          // 用户未购买 点击 加入购物车按钮
-          this.handleAddShopCart(item);
-        }
-      } else {
-        // 当用户未登录
-        this.$bus.$emit("loginShow", true);
-      }
-    },
-    // 用户 未购买的逻辑 点击加入购物车逻辑
-    handleAddShopCart (item) {
-      if (persistStore.get("token")) {
-        // 第一次点击 没有 在购物车
-        if (item.is_cart === 0) {
-          if (this.two_is_cart === 0) {
-            this.goodsNmber(item);
-          } else {
-            message(this, "success", "您的课程已经在购物车里面");
-          }
-        } else {
-          // 第一次点击 在购物车
-          message(this, "success", "您的课程已经在购物车里面");
-        }
-      } else {
-        // 当用户未登录
-        this.$bus.$emit("loginShow", true);
-      }
+      this.$bus.$emit("reupdatecourse");
     },
     closeCover () {
       this.isShowCover = false;
-    },
-    // 判断购物车数量
-    goodsNmber (item) {
-      if (persistStore.get("productsNum") < 70) {
-        this.addCourseShopCart(item);
-      } else {
-        this.$alert("您的购物车已满，建议您先去结算或清理", "温馨提示", {
-          confirmButtonText: "确定",
-          callback: action => {
-            this.$router.push("/shop/shoppingcart");
-          }
-        });
-      }
-    },
-    // 添加购物车函数
-    addCourseShopCart (item) {
-      this.curriculumcartids.cartid = item.id;
-      category.addShopCart(this.curriculumcartids).then(response => {
-        if (response.status == 0) {
-          let len = Number(this.productsNum) + 1;
-          this.setProductsNum({
-            pn: len
-          });
-          this.two_is_cart = 1;
-          message(this, "success", "加入购物车成功");
-        } else {
-          message(this, "error", response.msg);
-        }
-      });
     },
   },
   mounted () {

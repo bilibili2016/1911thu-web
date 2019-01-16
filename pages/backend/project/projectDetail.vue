@@ -180,8 +180,12 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.$bus.$emit('headerFooterShow')
+      vm.$bus.$emit('backendHeaderShow')
     })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$bus.$emit('backendHeaderHide')
+    next()
   }
 }
 </script>
