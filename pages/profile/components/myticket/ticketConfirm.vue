@@ -100,19 +100,13 @@ export default {
     // 关闭当前提交框
     close() {
       this.confirmInvoice = false;
-
-      // document.getElementsByClassName("bigTab")[0].style.minHeight = "800px";
-      // document.getElementById("pane-tab-eighth").style.position = "relative";
-      IEPopup("pane-tab-eighth", "relative", 800);
+      IEPopup("pane-tab-eighth", "relative");
     }
   },
   mounted() {
     this.$bus.$on("showConfirm", data => {
       this.ticketForm = data;
-      // document.getElementsByClassName("bigTab")[0].style.minHeight =
-      //   document.getElementById("pane-tab-eighth").clientHeight + "px";
-      // document.getElementById("pane-tab-eighth").style.position = "-ms-page";
-      IEPopup("pane-tab-eighth", "-ms-page", 800);
+      IEPopup("pane-tab-eighth", "-ms-page");
       this.confirmInvoice = true;
     });
   }

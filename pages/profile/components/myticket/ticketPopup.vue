@@ -1181,14 +1181,7 @@ export default {
 
         this.$emit("handleClose");
 
-        IEPopup("pane-tab-eighth", "relative", 800);
-
-        // let conLen = document.getElementsByClassName('el-tabs__content').length
-        // document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-        // document.getElementsByClassName('el-tabs__content')[
-        //   conLen - 1
-        // ].style.position = 'relative'
-
+        IEPopup("pane-tab-eighth", "relative");
         this.$bus.$emit("showConfirm", this.ticketForm);
       } else {
         this.zzTicketForm.orderID = this.checkedArr;
@@ -1212,13 +1205,7 @@ export default {
         );
         this.nextStep("stepOne");
         this.$emit("handleClose");
-        // let conLen = document.getElementsByClassName('el-tabs__content').length
-
-        // document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-        // document.getElementsByClassName('el-tabs__content')[
-        //   conLen - 1
-        // ].style.position = 'relative'
-        IEPopup("pane-tab-eighth", "relative", 800);
+        IEPopup("pane-tab-eighth", "relative");
 
         this.$bus.$emit("showConfirm", this.zzTicketForm);
       }
