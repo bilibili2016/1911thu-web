@@ -103,7 +103,7 @@ export default {
 
       // document.getElementsByClassName("bigTab")[0].style.minHeight = "800px";
       // document.getElementById("pane-tab-eighth").style.position = "relative";
-      IEPopup("pane-tab-eighth", "relative");
+      IEPopup("pane-tab-eighth", "relative", 800);
     }
   },
   mounted() {
@@ -112,7 +112,7 @@ export default {
       // document.getElementsByClassName("bigTab")[0].style.minHeight =
       //   document.getElementById("pane-tab-eighth").clientHeight + "px";
       // document.getElementById("pane-tab-eighth").style.position = "-ms-page";
-      IEPopup("pane-tab-eighth", "-ms-page");
+      IEPopup("pane-tab-eighth", "-ms-page", 800);
       this.confirmInvoice = true;
     });
   }

@@ -293,7 +293,7 @@ export default {
         //   conLen - 1
         // ].style.position = "-ms-page";
 
-        IEPopup("pane-tab-eighth", "-ms-page");
+        IEPopup("pane-tab-eighth", "-ms-page", 800);
         this.showInvoice = true;
         // this.getTicket()
       } else {
@@ -332,7 +332,7 @@ export default {
       //   conLen - 1
       // ].style.position = "relative";
 
-      IEPopup("pane-tab-eighth", "relative");
+      IEPopup("pane-tab-eighth", "relative", 800);
 
       this.showInfo = false;
       this.showInvoice = false;
