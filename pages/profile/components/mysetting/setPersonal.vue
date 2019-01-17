@@ -434,17 +434,19 @@ export default {
     },
     //修改手机号
     modifyPhone() {
-      IEPopup("pane-tab-sixth", "-ms-page", 800);
+      IEPopup("pane-tab-sixth", "-ms-page", 830);
 
       this.showBindBg = true;
     },
     //关闭弹框
     close() {
+      IEPopup("pane-tab-sixth", "relative", 830);
       this.showBindBg = false;
-      IEPopup("pane-tab-sixth", "relative", 800);
     },
     //绑定手机号
     handleBindPhone() {
+      IEPopup("pane-tab-sixth", "-ms-page", 830);
+
       this.showBindBg = true;
       this.$bus.$emit("openTwo");
     }
