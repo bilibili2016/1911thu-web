@@ -1,13 +1,14 @@
 <template>
   <el-container class="is-vertical layout-default">
-    <Header v-show="headerShow"></Header>
-    <backend-header v-show="backendHeader"></backend-header>
+    <Header v-show="HFShow"></Header>
+    <backend-header v-if="backendHF"></backend-header>
     <el-container v-if="!showNetwork">
       <el-main>
         <nuxt/>
       </el-main>
     </el-container>
-    <Footer v-show="footerShow"></Footer>
+    <Footer v-show="HFShow"></Footer>
+    <backend-footer v-if="backendHF"></backend-footer>
     <div class="no-network" v-show="showNetwork">
       <img src="@/assets/images/no-network.png" alt>
     </div>
@@ -16,21 +17,22 @@
 <script>
 import Header from "~/components/common/Header";
 import Footer from "~/components/common/Footer";
-import backendHeader from "~/pages/backend/header/header";
+import backendHeader from "~/pages/backend/public/header";
+import backendFooter from "~/pages/backend/public/footer";
 import { store as persistStore } from "~/lib/core/store";
 import { setPagesHeight, matchSplits } from "~/lib/util/helper";
 export default {
   components: {
     Header,
     Footer,
-    backendHeader
+    backendHeader,
+    backendFooter
   },
   data () {
     return {
-      headerShow: true,
-      footerShow: true,
+      HFShow: true,
       showNetwork: false,
-      backendHeader: false,
+      backendHF: false,
       length: 0
     };
   },
@@ -72,27 +74,23 @@ export default {
 
     // 进入路由隐藏header和footer
     this.$bus.$on("headerFooterHide", () => {
-      this.headerShow = false;
-      this.footerShow = false;
+      this.HFShow = false;
     });
 
     // 出路由显示header和footer
     this.$bus.$on("headerFooterShow", () => {
-      this.headerShow = true;
-      this.footerShow = true;
+      this.HFShow = true;
     });
 
     // 隐藏header 显示backendHeader
     this.$bus.$on("backendHeaderShow", () => {
-      this.headerShow = false;
-      this.footerShow = true;
-      this.backendHeader = true;
+      this.HFShow = false;
+      this.backendHF = true;
     });
     // 显示header 隐藏backendHeader
     this.$bus.$on("backendHeaderHide", () => {
-      this.headerShow = true;
-      this.footerShow = true;
-      this.backendHeader = false;
+      this.HFShow = true;
+      this.backendHF = false;
     });
 
     // 检测网络情况

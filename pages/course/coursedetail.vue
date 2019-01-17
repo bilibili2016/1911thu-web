@@ -10,10 +10,7 @@
           <v-collection :collectData="collectMsg"></v-collection>
         </div>
         <!-- 顶部的card -->
-        <div
-          class="main-header"
-          v-loading="loadMsg"
-        >
+        <div class="main-header" v-loading="loadMsg">
           <v-card
             :courseList="courseList"
             :config="config"
@@ -45,10 +42,7 @@
             @pagechange="handleCurrentChange"
           ></v-coursecatelog>
         </div>
-        <div
-          style="width:345px"
-          class="fr"
-        >
+        <div style="width:345px" class="fr">
           <!-- 讲师介绍 -->
           <v-teacherintro
             v-loading="loadTeacher"
@@ -62,24 +56,14 @@
             :courseList="courseList"
             @changeList="cbList"
             :config="config"
-          > </v-evaluatecase>
+          ></v-evaluatecase>
         </div>
       </div>
     </div>
-    <v-pay
-      @closePay="closePayed"
-      :config="config"
-    ></v-pay>
+    <v-pay @closePay="closePayed" :config="config" @refreshData="refreshData"></v-pay>
     <v-backtop :data="showCheckedCourse"></v-backtop>
-    <div
-      class="join"
-      @click="joinCollege"
-      v-show="isShowBtn"
-    >
-      <img
-        src="http://static-image.1911edu.com/joinStudy.gif"
-        alt=""
-      >
+    <div class="join" @click="joinCollege" v-show="isShowBtn">
+      <img src="http://static-image.1911edu.com/joinStudy.gif" alt>
     </div>
   </div>
 </template>
@@ -114,7 +98,7 @@ export default {
     "v-collection": Collection,
     "v-coursecatelog": CourseCatalog
   },
-  data() {
+  data () {
     return {
       isShowBtn: false,
       vipPopShow: false,
@@ -208,16 +192,16 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setIsCollection"]),
-    changePlayImg(img, id) {
+    changePlayImg (img, id) {
       this.changeImg.img = img;
       this.changeImg.id = id;
     },
     // 跳转老师详情
-    handleLinkTeacher(item) {
+    handleLinkTeacher (item) {
       this.$router.push("/home/teacher/" + item);
     },
     // 标签 - 点击评价改变星级
-    handleChangeRate(val) {
+    handleChangeRate (val) {
       this.reTagBtn = [];
       this.tagGroup[val].map((item, i) => {
         let obj = new Object();
@@ -230,7 +214,7 @@ export default {
       this.addEvaluateForm.tag = [];
     },
     // 标签 - 点击获取标签内容
-    getBtnContent(val, index) {
+    getBtnContent (val, index) {
       if (val.isCheck === true) {
         this.$set(val, "isCheck", false);
         for (var i = 0; i < this.addEvaluateForm.tag.length; i++) {
@@ -245,7 +229,7 @@ export default {
       }
     },
     // 评论-提交评论接口
-    addEvaluate() {
+    addEvaluate () {
       // this.addEvaluateForm.ids = persistStore.get('curriculumId')
       this.addEvaluateForm.ids = matchSplit("kid");
 
@@ -295,7 +279,7 @@ export default {
       }
     },
     // 评论-评论查看更多-分页
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.loadMsg = true;
       this.pagemsg.page = val;
       this.evaluateListForm.pages = val;
@@ -313,7 +297,7 @@ export default {
       });
     },
     // 评论-获取评论列表
-    getEvaluateList() {
+    getEvaluateList () {
       this.loadEvaluate = true;
       this.evaluateListForm.ids = matchSplits("kid");
       coursedetail.getEvaluateLists(this.evaluateListForm).then(response => {
@@ -331,7 +315,7 @@ export default {
       });
     },
     // 课程-获取课程详情
-    getCourseDetail() {
+    getCourseDetail () {
       this.loadTeacher = true;
       this.kidForm.ids = matchSplits("kid");
 
@@ -362,7 +346,7 @@ export default {
       });
     },
     // 课程-获取课程列表
-    getCourseList() {
+    getCourseList () {
       // this.kidForm.ids = persistStore.get('curriculumId')
       this.kidForm.ids = matchSplits("kid");
 
@@ -379,12 +363,12 @@ export default {
       });
     },
     // 再次回去课程详情数据和课程目录数据
-    refreshData() {
+    refreshData () {
       this.getCourseDetail();
       this.getCourseList();
     },
     // 课程-获取默认播放信息
-    getdefaultCurriculumCatalog() {
+    getdefaultCurriculumCatalog () {
       this.getdefaultForm.curriculumid = matchSplits("kid");
       coursedetail
         .getdefaultCurriculumCatalog(this.getdefaultForm)
@@ -394,45 +378,45 @@ export default {
             if (window.location.search.indexOf("paly") >= 0) {
               this.$router.replace(
                 "/course/coursedetail" +
-                  "?kid=" +
-                  matchSplits("kid") +
-                  "&bid=" +
-                  response.data.defaultCurriculumCatalog.id +
-                  "&page=" +
-                  matchSplits("page") +
-                  "&play="
+                "?kid=" +
+                matchSplits("kid") +
+                "&bid=" +
+                response.data.defaultCurriculumCatalog.id +
+                "&page=" +
+                matchSplits("page") +
+                "&play="
               );
             } else {
               this.$router.replace(
                 "/course/coursedetail" +
-                  "?kid=" +
-                  matchSplits("kid") +
-                  "&bid=" +
-                  response.data.defaultCurriculumCatalog.id +
-                  "&page=" +
-                  matchSplits("page")
+                "?kid=" +
+                matchSplits("kid") +
+                "&bid=" +
+                response.data.defaultCurriculumCatalog.id +
+                "&page=" +
+                matchSplits("page")
               );
             }
           }
         });
     },
     // 初始化默认data
-    initData() {
+    initData () {
       this.kidForm.ids = matchSplits("kid");
       this.evaluateListForm.ids = matchSplits("kid");
       this.activeName = "second";
     },
     //评论之后的回调
-    cbList() {
+    cbList () {
       this.getCourseDetail();
       this.getEvaluateList();
     },
     // 支付弹框关闭的回调
-    closePayed() {
+    closePayed () {
       this.$bus.$emit("closePayed");
     },
     //拉取服务器数据 初始化所有方法
-    initAll() {
+    initAll () {
       this.initData();
       // this.shareDefault()
       this.getCourseDetail();
@@ -441,20 +425,20 @@ export default {
       this.getdefaultCurriculumCatalog();
     },
     //加入学院
-    joinCollege() {
+    joinCollege () {
       this.$router.push(
         "/home/vip/vipPage?id=" +
-          this.vipGoodsDetail.id +
-          "&cid=" +
-          this.vipGoodsDetail.category_id
+        this.vipGoodsDetail.id +
+        "&cid=" +
+        this.vipGoodsDetail.category_id
       );
     },
     //关闭购买弹窗
-    changeVipShow(val) {
+    changeVipShow (val) {
       this.vipPopShow = false;
     }
   },
-  mounted() {
+  mounted () {
     this.initAll();
     this.$bus.$on("reCourseData", data => {
       this.initAll();
@@ -462,16 +446,16 @@ export default {
   },
   watch: {
     //在当前页面进行登录操作更新状态
-    isAuthenticated(val) {
+    isAuthenticated (val) {
       this.getCourseDetail();
     }
   },
-  updated() {
+  updated () {
     setTitle("课程详情-1911学堂");
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     // this.$bus.$emit('headerFooterShow')
-    next(vm => {});
+    next(vm => { });
   }
 };
 </script>
