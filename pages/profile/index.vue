@@ -311,7 +311,7 @@ import Banner from "@/components/common/Banner.vue";
 import MyHome from "@/pages/profile/pages/myHome";
 import PersonalSet from "@/pages/profile/pages/mySettings.vue";
 import { profileHome, examine, college, banner } from "~/lib/v1_sdk/index";
-import { message, setTitle } from "~/lib/util/helper";
+import { message, setTitle, IEPopup } from "~/lib/util/helper";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 
@@ -957,6 +957,7 @@ export default {
           return false;
         } else if (response.status === 0) {
           this.historyOrderData = response.data.invoiceList;
+          IEPopup("pane-tab-eighth", "relative");
 
           this.unfinishedOrderLoad = false;
         }

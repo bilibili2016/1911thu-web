@@ -121,11 +121,7 @@ export default {
           this.$bus.$emit("reLoginAlertPop", this.responseData);
           return false;
         }
-
-        // document.getElementsByClassName('bigTab')[0].style.minHeight =
-        //   document.getElementById('pane-tab-eighth').clientHeight + 'px'
-        // document.getElementById('pane-tab-eighth').style.position = '-ms-page'
-        IEPopup("pane-tab-eighth", "-ms-page", 800);
+        IEPopup("pane-tab-eighth", "-ms-page");
 
         this.isTicketPopup = true;
         this.TicketPopupData = response.data.invoiceOrderList;
@@ -133,9 +129,7 @@ export default {
     },
     //关闭开票详情弹框
     closeTicketPopup() {
-      IEPopup("pane-tab-eighth", "relative", 800);
-      // document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      //  document.getElementById('pane-tab-eighth').style.position = 'relative'
+      IEPopup("pane-tab-eighth", "relative");
       this.isTicketPopup = false;
     },
     //发票详情弹框
@@ -148,21 +142,14 @@ export default {
           return false;
         }
 
-        IEPopup("pane-tab-eighth", "-ms-page", 800);
-
-        // document.getElementsByClassName('bigTab')[0].style.minHeight =
-        //   document.getElementById('pane-tab-eighth').clientHeight + 'px'
-        // document.getElementById('pane-tab-eighth').style.position = '-ms-page'
+        IEPopup("pane-tab-eighth", "-ms-page");
         this.isStatusPopup = true;
         this.StatusPopupData = response.data;
       });
     },
     //关闭
     closeStatusPopup() {
-      IEPopup("pane-tab-eighth", "relative", 800);
-
-      // document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-      // document.getElementById('pane-tab-eighth').style.position = 'relative'
+      IEPopup("pane-tab-eighth", "relative");
       this.isStatusPopup = false;
     },
     goShopping(id) {
