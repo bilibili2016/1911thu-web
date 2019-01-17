@@ -110,7 +110,7 @@
 </template>
 <script>
 import { examine } from "~/lib/v1_sdk/index";
-import { message, matchSplits, getNet } from "@/lib/util/helper";
+import { message, matchSplits, getNet, IEPopup } from "@/lib/util/helper";
 export default {
   props: ["vipID"],
   data() {
@@ -140,6 +140,7 @@ export default {
     },
     // 考试规则弹框
     examRules(type) {
+      IEPopup("pane-tab-tenth", "-ms-page");
       this.vipForm.vipId = this.vipID;
       this.vipForm.type = type;
       this.examRuleLoading = true;
@@ -160,6 +161,8 @@ export default {
     },
     // 关闭规则弹框
     closeRules() {
+      IEPopup("pane-tab-tenth", "relative");
+
       this.showExamRules = false;
     },
     // 开始考试

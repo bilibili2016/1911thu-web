@@ -198,6 +198,7 @@ import { store as persistStore } from "~/lib/core/store";
 import { personalset } from "~/lib/v1_sdk/index";
 import bindPhone from "@/pages/profile/components/mysetting/bindPhone.vue";
 import { checkPhone, checkCode } from "~/lib/util/validatefn";
+import { IEPopup } from "~/lib/util/helper";
 
 export default {
   props: ["data", "hasCompany"],
@@ -433,14 +434,19 @@ export default {
     },
     //修改手机号
     modifyPhone() {
+      IEPopup("pane-tab-sixth", "-ms-page", 830);
+
       this.showBindBg = true;
     },
     //关闭弹框
     close() {
+      IEPopup("pane-tab-sixth", "relative", 830);
       this.showBindBg = false;
     },
     //绑定手机号
     handleBindPhone() {
+      IEPopup("pane-tab-sixth", "-ms-page", 830);
+
       this.showBindBg = true;
       this.$bus.$emit("openTwo");
     }

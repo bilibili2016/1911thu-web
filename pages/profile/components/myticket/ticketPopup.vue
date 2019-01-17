@@ -1,32 +1,65 @@
 <template>
   <div class="invoiceTicket">
-    <div class="invoiceInfo" ref="invoiceInfo">
+    <div
+      class="invoiceInfo"
+      ref="invoiceInfo"
+    >
       <h3 class="clearfix">发票信息
-        <i class="el-icon-close fr" @click="close"></i>
+        <i
+          class="el-icon-close fr"
+          @click="close"
+        ></i>
       </h3>
       <div class="header">
-        <span :class="{checked:choose=='1'?true:false}" @click="chooseTicket('1')">普通发票
+        <span
+          :class="{checked:choose=='1'?true:false}"
+          @click="chooseTicket('1')"
+        >普通发票
           <i></i>
         </span>
-        <span :class="{checked:choose=='2'?true:false}" @click="chooseTicket('2')">增值税专用发票
+        <span
+          :class="{checked:choose=='2'?true:false}"
+          @click="chooseTicket('2')"
+        >增值税专用发票
           <i></i>
         </span>
       </div>
-      <div class="invoiceForm" v-show="choose=='1'">
+      <div
+        class="invoiceForm"
+        v-show="choose=='1'"
+      >
         <div class="formLi clearfix">
           <p class="fl">发票抬头</p>
-          <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
+          <h6
+            @click="chooseCompany('1')"
+            :class="ticketForm.saveioc === false?'fr check':'fr'"
+          >个人</h6>
         </div>
         <div class="formLi clearfix">
           <p class="fl"></p>
-          <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
-            <input type="text" v-model="ticketForm.companyname" placeholder="新增单位发票抬头">
+          <p
+            @click="chooseCompany('2')"
+            :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'"
+          >
+            <input
+              type="text"
+              v-model="ticketForm.companyname"
+              placeholder="新增单位发票抬头"
+            >
           </p>
         </div>
-        <div class="formLi clearfix" v-show="ticketForm.saveioc">
+        <div
+          class="formLi clearfix"
+          v-show="ticketForm.saveioc"
+        >
           <p class="fl">纳税人识别号</p>
           <p class="fr">
-            <input type="text" v-model="ticketForm.number" @change="retfNumber" placeholder="请输入纳税人识别号">
+            <input
+              type="text"
+              v-model="ticketForm.number"
+              @change="retfNumber"
+              placeholder="请输入纳税人识别号"
+            >
           </p>
           <p class="word parent">
             <i class="el-icon-warning"> </i>政府、事业单位选填，企业必填
@@ -35,7 +68,10 @@
         <div class="formLi clearfix">
           <p class="fl">发票内容</p>
           <p class="fr radioBtn">
-            <el-radio-group v-model="ticketForm.radio" @change="isTicket">
+            <el-radio-group
+              v-model="ticketForm.radio"
+              @change="isTicket"
+            >
               <el-radio :label="1">培训费
                 <i></i>
               </el-radio>
@@ -44,50 +80,100 @@
               </el-radio>
             </el-radio-group>
           </p>
-          <p class="word" v-show="!ticketForm.isRadio">
+          <p
+            class="word"
+            v-show="!ticketForm.isRadio"
+          >
             <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">收票人姓名</p>
           <p class="fr">
-            <input type="text" v-model="ticketForm.name" placeholder="请输入收票人姓名">
+            <input
+              type="text"
+              v-model="ticketForm.name"
+              placeholder="请输入收票人姓名"
+            >
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">收票人手机</p>
           <p class="fr">
-            <input type="text" v-model="ticketForm.tel" placeholder="请输入收票人手机号">
+            <input
+              type="text"
+              v-model="ticketForm.tel"
+              placeholder="请输入收票人手机号"
+            >
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">收票人省份</p>
           <p class="fr province">
-            <el-select v-model="ticketForm.province" placeholder="省" @change="changeTicketp">
-              <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
+            <el-select
+              v-model="ticketForm.province"
+              placeholder="省"
+              @change="changeTicketp"
+            >
+              <el-option
+                :label="p.label"
+                :value="p.value"
+                v-for="(p,index) in province"
+                :key="'prov'+index"
+              ></el-option>
             </el-select>
-            <el-select v-model="ticketForm.city" placeholder="市" @change="changeTickeCity">
-              <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
+            <el-select
+              v-model="ticketForm.city"
+              placeholder="市"
+              @change="changeTickeCity"
+            >
+              <el-option
+                :label="p.label"
+                :value="p.value"
+                v-for="(p,index) in city"
+                :key="'city'+index"
+              ></el-option>
             </el-select>
-            <el-select v-model="ticketForm.area" placeholder="区">
-              <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
+            <el-select
+              v-model="ticketForm.area"
+              placeholder="区"
+            >
+              <el-option
+                :label="p.label"
+                :value="p.value"
+                v-for="(p,index) in area"
+                :key="'area'+index"
+              ></el-option>
             </el-select>
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">详细地址</p>
           <p class="fr">
-            <input type="text" v-model="ticketForm.address" placeholder="请输入收票人的详细地址">
+            <input
+              type="text"
+              v-model="ticketForm.address"
+              placeholder="请输入收票人的详细地址"
+            >
           </p>
         </div>
         <p class="smallTip">发票将在订单提交之后5个工作日内寄出</p>
         <div class="operation">
-          <span class="a" @click="addInvoiceBefor">下一步</span>
+          <span
+            class="a"
+            @click="addInvoiceBefor"
+          >下一步</span>
           <span @click="close">取消</span>
         </div>
       </div>
-      <div class="invoiceForm zzTicket" v-show="choose=='2'">
-        <div class="stepOne" v-show="stepOne">
+      <div
+        class="invoiceForm zzTicket"
+        v-show="choose=='2'"
+      >
+        <div
+          class="stepOne"
+          v-show="stepOne"
+        >
           <div class="formLi clearfix">
             <p class="fl">开票方式</p>
             <p class="fr readyOrderTicket">
@@ -99,7 +185,10 @@
           <div class="formLi clearfix">
             <p class="fl">发票内容</p>
             <p class="fr radioBtn">
-              <el-radio-group v-model="zzTicketForm.radio" @change="iszzTicket">
+              <el-radio-group
+                v-model="zzTicketForm.radio"
+                @change="iszzTicket"
+              >
                 <el-radio :label="1">培训费
                   <i></i>
                 </el-radio>
@@ -108,7 +197,10 @@
                 </el-radio>
               </el-radio-group>
             </p>
-            <p class="word" v-show="!zzTicketForm.isRadio">
+            <p
+              class="word"
+              v-show="!zzTicketForm.isRadio"
+            >
               <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
             </p>
           </div>
@@ -127,7 +219,10 @@
             <span @click="close">取消</span>
           </div>
         </div>
-        <div class="stepTwo" v-show="stepTwo">
+        <div
+          class="stepTwo"
+          v-show="stepTwo"
+        >
           <div class="formLi clearfix">
             <p class="fl">开票方式</p>
             <p class="fr readyOrderTicket">
@@ -149,11 +244,22 @@
             <p class="fl">
               <i>*</i>单位名称</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.companyname" @change="reCompanyname" placeholder="请输入单位名称">
-              <span class="tips" v-show="tipsCompanyname&&companyname">
+              <input
+                type="text"
+                v-model="zzTicketForm.companyname"
+                @change="reCompanyname"
+                placeholder="请输入单位名称"
+              >
+              <span
+                class="tips"
+                v-show="tipsCompanyname&&companyname"
+              >
                 <i class="el-icon-success"></i>
               </span>
-              <span class="tips" v-show="!tipsCompanyname&&companyname">
+              <span
+                class="tips"
+                v-show="!tipsCompanyname&&companyname"
+              >
                 <i class="el-icon-warning"></i>单位名称不正确！</span>
             </p>
           </div>
@@ -161,11 +267,22 @@
             <p class="fl">
               <i>*</i>纳税人识别号</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.number" @change="reNumber" placeholder="请输入纳税人识别号">
-              <span class="tips" v-show="tipsNumber&&number">
+              <input
+                type="text"
+                v-model="zzTicketForm.number"
+                @change="reNumber"
+                placeholder="请输入纳税人识别号"
+              >
+              <span
+                class="tips"
+                v-show="tipsNumber&&number"
+              >
                 <i class="el-icon-success"></i>
               </span>
-              <span class="tips" v-show="!tipsNumber&&number">
+              <span
+                class="tips"
+                v-show="!tipsNumber&&number"
+              >
                 <i class="el-icon-warning"></i>纳税人识别号不正确！</span>
             </p>
           </div>
@@ -173,11 +290,22 @@
             <p class="fl">
               <i>*</i>注册地址</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.zcadd" @change="reZcadd" placeholder="请输入注册地址">
-              <span class="tips" v-show="tipsZcadd&&zcadd">
+              <input
+                type="text"
+                v-model="zzTicketForm.zcadd"
+                @change="reZcadd"
+                placeholder="请输入注册地址"
+              >
+              <span
+                class="tips"
+                v-show="tipsZcadd&&zcadd"
+              >
                 <i class="el-icon-success"></i>
               </span>
-              <span class="tips" v-show="!tipsZcadd&&zcadd">
+              <span
+                class="tips"
+                v-show="!tipsZcadd&&zcadd"
+              >
                 <i class="el-icon-warning"></i>注册地址不能为空！</span>
             </p>
           </div>
@@ -185,11 +313,22 @@
             <p class="fl">
               <i>*</i>联系电话</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.phones" @change="rePhone" placeholder="请输入联系电话">
-              <span class="tips" v-show="tipsPhones&&phones">
+              <input
+                type="text"
+                v-model="zzTicketForm.phones"
+                @change="rePhone"
+                placeholder="请输入联系电话"
+              >
+              <span
+                class="tips"
+                v-show="tipsPhones&&phones"
+              >
                 <i class="el-icon-success"></i>
               </span>
-              <span class="tips" v-show="!tipsPhones&&phones">
+              <span
+                class="tips"
+                v-show="!tipsPhones&&phones"
+              >
                 <i class="el-icon-warning"></i>联系电话不正确！</span>
             </p>
           </div>
@@ -197,11 +336,22 @@
             <p class="fl">
               <i>*</i>开户银行</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.bank" @change="reBank" placeholder="请输入开户银行">
-              <span class="tips" v-show="tipsBank&&bank">
+              <input
+                type="text"
+                v-model="zzTicketForm.bank"
+                @change="reBank"
+                placeholder="请输入开户银行"
+              >
+              <span
+                class="tips"
+                v-show="tipsBank&&bank"
+              >
                 <i class="el-icon-success"></i>
               </span>
-              <span class="tips" v-show="!tipsBank&&bank">
+              <span
+                class="tips"
+                v-show="!tipsBank&&bank"
+              >
                 <i class="el-icon-warning"></i>开户银行不能为空！</span>
             </p>
           </div>
@@ -209,11 +359,22 @@
             <p class="fl">
               <i>*</i>银行账号</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账号">
-              <span class="tips" v-show="tipsAccount&&account">
+              <input
+                type="text"
+                v-model="zzTicketForm.account"
+                @change="reAccount"
+                placeholder="请输入银行账号"
+              >
+              <span
+                class="tips"
+                v-show="tipsAccount&&account"
+              >
                 <i class="el-icon-success"></i>
               </span>
-              <span class="tips" v-show="!tipsAccount&&account">
+              <span
+                class="tips"
+                v-show="!tipsAccount&&account"
+              >
                 <i class="el-icon-warning"></i>银行账号不正确！</span>
             </p>
           </div>
@@ -222,7 +383,10 @@
             <span @click="nextStep('stepOne')">返回</span>
           </div>
         </div>
-        <div class="stepThree" v-show="stepThree">
+        <div
+          class="stepThree"
+          v-show="stepThree"
+        >
           <div class="formLi clearfix">
             <p class="fl">开票方式</p>
             <p class="fr readyOrderTicket">
@@ -243,37 +407,78 @@
           <div class="formLi clearfix">
             <p class="fl">收票人姓名</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.name" placeholder="请输入收票人姓名">
+              <input
+                type="text"
+                v-model="zzTicketForm.name"
+                placeholder="请输入收票人姓名"
+              >
             </p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">收票人手机</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.tel" placeholder="请输入收票人手机号">
+              <input
+                type="text"
+                v-model="zzTicketForm.tel"
+                placeholder="请输入收票人手机号"
+              >
             </p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">收票人省份</p>
             <p class="fr province">
-              <el-select v-model="zzTicketForm.province" placeholder="省" @change="changezzTicketp">
-                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzprovince" :key="'prov'+index"></el-option>
+              <el-select
+                v-model="zzTicketForm.province"
+                placeholder="省"
+                @change="changezzTicketp"
+              >
+                <el-option
+                  :label="p.label"
+                  :value="p.value"
+                  v-for="(p,index) in zzprovince"
+                  :key="'prov'+index"
+                ></el-option>
               </el-select>
-              <el-select v-model="zzTicketForm.city" placeholder="市" @change="changezzTickeCity">
-                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzcity" :key="'city'+index"></el-option>
+              <el-select
+                v-model="zzTicketForm.city"
+                placeholder="市"
+                @change="changezzTickeCity"
+              >
+                <el-option
+                  :label="p.label"
+                  :value="p.value"
+                  v-for="(p,index) in zzcity"
+                  :key="'city'+index"
+                ></el-option>
               </el-select>
-              <el-select v-model="zzTicketForm.area" placeholder="区">
-                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzarea" :key="'area'+index"></el-option>
+              <el-select
+                v-model="zzTicketForm.area"
+                placeholder="区"
+              >
+                <el-option
+                  :label="p.label"
+                  :value="p.value"
+                  v-for="(p,index) in zzarea"
+                  :key="'area'+index"
+                ></el-option>
               </el-select>
             </p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">详细地址</p>
             <p class="fr">
-              <input type="text" v-model="zzTicketForm.address" placeholder="请输入收票人的详细地址">
+              <input
+                type="text"
+                v-model="zzTicketForm.address"
+                placeholder="请输入收票人的详细地址"
+              >
             </p>
           </div>
           <div class="operation">
-            <span class="333" @click="addZZTicketBefore">下一步</span>
+            <span
+              class="333"
+              @click="addZZTicketBefore"
+            >下一步</span>
             <span @click="nextStep('stepTwo')">返回</span>
           </div>
         </div>
@@ -283,29 +488,29 @@
 </template>
 
 <script>
-import { ticketorder } from '~/lib/v1_sdk/index'
-import { mapActions } from 'vuex'
-import { checkPhone, checkCode } from '~/lib/util/validatefn'
-import { Trim } from '~/lib/util/helper'
-import { store as persistStore } from '~/lib/core/store'
+import { ticketorder } from "~/lib/v1_sdk/index";
+import { mapActions } from "vuex";
+import { checkPhone, checkCode } from "~/lib/util/validatefn";
+import { Trim, IEPopup } from "~/lib/util/helper";
+import { store as persistStore } from "~/lib/core/store";
 export default {
-  props: ['checkedArr'],
+  props: ["checkedArr"],
   data() {
     return {
       ticketType: {
-        type: 'ticket'
+        type: "ticket"
       },
-      noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
+      noMsgImg: "http://static-image.1911edu.com/noMsg.png",
       ticketOrderData: [],
-      singleCheck: '',
+      singleCheck: "",
       index: 0,
       checkedNum: 1,
       isFixed: false,
       // checkedArr: [],
-      bottomBaroffsetTop: '',
-      windowHeight: '',
-      headerHeight: '',
-      bottomPositionHeight: '',
+      bottomBaroffsetTop: "",
+      windowHeight: "",
+      headerHeight: "",
+      bottomPositionHeight: "",
       restaurants: [],
       checkMsg: false,
       noData: false,
@@ -316,11 +521,11 @@ export default {
         ids: null
       },
       kidForm: {
-        kid: ''
+        kid: ""
       },
       orderID: [],
       gidForm: { gids: null },
-      choose: '1',
+      choose: "1",
       ticketForm: {
         companyname: null,
         ticket: true,
@@ -336,33 +541,33 @@ export default {
         others: null,
         address: null,
         radio: 1,
-        types: '1', //发票类型
+        types: "1", //发票类型
         saveioc: false,
         isRadio: true,
         ids: null
       },
 
       invoiceForm: {
-        types: '' //发票类型
+        types: "" //发票类型
       },
       zzTicketForm: {
-        companyname: '',
+        companyname: "",
         ticket: true,
-        number: '',
-        zcadd: '',
-        phones: '',
-        bank: '',
-        account: '',
-        tel: '',
-        name: '',
-        province: '',
-        province_name: '',
-        city: '',
-        city_name: '',
-        area: '',
-        area_name: '',
-        address: '',
-        others: '',
+        number: "",
+        zcadd: "",
+        phones: "",
+        bank: "",
+        account: "",
+        tel: "",
+        name: "",
+        province: "",
+        province_name: "",
+        city: "",
+        city_name: "",
+        area: "",
+        area_name: "",
+        address: "",
+        others: "",
         radio: 1,
         isRadio: true,
         types: 3
@@ -393,47 +598,47 @@ export default {
         companyname: [
           {
             required: true,
-            message: '请输入公司名称',
-            trigger: 'blur'
+            message: "请输入公司名称",
+            trigger: "blur"
           }
         ],
         companyaddress: [
           {
             required: true,
-            message: '请填写公司地址',
-            trigger: 'blur'
+            message: "请填写公司地址",
+            trigger: "blur"
           }
         ],
         contactperson: [
           {
             required: true,
-            message: '请填写联系人姓名',
-            trigger: 'blur'
+            message: "请填写联系人姓名",
+            trigger: "blur"
           }
         ],
         phones: [
           {
             required: true,
-            message: '请输入手机号',
-            trigger: 'blur'
+            message: "请输入手机号",
+            trigger: "blur"
           },
           {
             validator: checkPhone,
-            trigger: 'blur'
+            trigger: "blur"
           }
         ],
         codes: [
           {
             required: true,
-            message: '请填写短信验证码',
-            trigger: 'blur'
+            message: "请填写短信验证码",
+            trigger: "blur"
           }
         ]
       }
-    }
+    };
   },
   methods: {
-    ...mapActions('auth', ['setGid', 'setKid']),
+    ...mapActions("auth", ["setGid", "setKid"]),
     // 验证普通发票 中的纳税人识别号
     retfNumber() {
       // if (
@@ -464,231 +669,231 @@ export default {
       //   }
       // }
 
-      if (Trim(this.ticketForm.number) !== '') {
+      if (Trim(this.ticketForm.number) !== "") {
         if (
           this.ticketForm.number.length == 15 ||
           this.ticketForm.number.length == 18 ||
           this.ticketForm.number.length == 20
         ) {
-          this.tfNumber = true
+          this.tfNumber = true;
         } else {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入正确的纳税人识别号！'
-          })
-          this.tfNumber = false
-          return false
+            type: "error",
+            message: "请输入正确的纳税人识别号！"
+          });
+          this.tfNumber = false;
+          return false;
         }
       }
     },
     // 验证增值税发票 中的纳税人识别号
     reCompanyname() {
-      if (Trim(this.zzTicketForm.companyname) == '') {
-        this.tipsCompanyname = false
-        this.companyname = true
+      if (Trim(this.zzTicketForm.companyname) == "") {
+        this.tipsCompanyname = false;
+        this.companyname = true;
       } else {
-        this.tipsCompanyname = true
-        this.companyname = true
+        this.tipsCompanyname = true;
+        this.companyname = true;
       }
     },
     // 验证增值税发票 中的纳税人识别号
     reNumber() {
       if (
-        Trim(this.zzTicketForm.number) == '' ||
+        Trim(this.zzTicketForm.number) == "" ||
         !/^[A-Z0-9]+$/.test(this.zzTicketForm.number)
       ) {
-        this.tipsNumber = false
-        this.number = true
+        this.tipsNumber = false;
+        this.number = true;
       } else {
         if (
           this.zzTicketForm.number.length == 15 ||
           this.zzTicketForm.number.length == 18 ||
           this.zzTicketForm.number.length == 20
         ) {
-          this.tipsNumber = true
-          this.number = true
+          this.tipsNumber = true;
+          this.number = true;
         } else {
-          this.tipsNumber = false
-          this.number = true
+          this.tipsNumber = false;
+          this.number = true;
         }
       }
     },
     // 验证增值税发票 注册地址
     reZcadd() {
-      if (Trim(this.zzTicketForm.zcadd) == '') {
-        this.tipsZcadd = false
-        this.zcadd = true
+      if (Trim(this.zzTicketForm.zcadd) == "") {
+        this.tipsZcadd = false;
+        this.zcadd = true;
       } else {
-        this.tipsZcadd = true
-        this.zcadd = true
+        this.tipsZcadd = true;
+        this.zcadd = true;
       }
     },
     // 验证增值税发票 注册地址
     reBank() {
-      if (Trim(this.zzTicketForm.bank) == '') {
-        this.tipsBank = false
-        this.bank = true
+      if (Trim(this.zzTicketForm.bank) == "") {
+        this.tipsBank = false;
+        this.bank = true;
       } else {
-        this.tipsBank = true
-        this.bank = true
+        this.tipsBank = true;
+        this.bank = true;
       }
     },
     // 添加增值税发票验证
     addZZTicketBefore() {
       if (
-        Trim(this.zzTicketForm.number) == '' ||
+        Trim(this.zzTicketForm.number) == "" ||
         !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
       ) {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请输入正确的纳税人识别号！'
-        })
-        return false
+          type: "error",
+          message: "请输入正确的纳税人识别号！"
+        });
+        return false;
       }
-      if (Trim(this.zzTicketForm.name) === '') {
+      if (Trim(this.zzTicketForm.name) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请填写收票人姓名！'
-        })
-        return false
+          type: "error",
+          message: "请填写收票人姓名！"
+        });
+        return false;
       }
       if (
-        Trim(this.zzTicketForm.tel) === '' ||
+        Trim(this.zzTicketForm.tel) === "" ||
         !/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.zzTicketForm.tel)
       ) {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请输入正确的手机号！'
-        })
-        return false
+          type: "error",
+          message: "请输入正确的手机号！"
+        });
+        return false;
       }
 
-      if (Trim(this.zzTicketForm.province) === '') {
+      if (Trim(this.zzTicketForm.province) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请选择省份！'
-        })
-        return false
+          type: "error",
+          message: "请选择省份！"
+        });
+        return false;
       }
-      if (Trim(this.zzTicketForm.city) === '') {
+      if (Trim(this.zzTicketForm.city) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请选择城市！'
-        })
-        return false
+          type: "error",
+          message: "请选择城市！"
+        });
+        return false;
       }
-      if (Trim(this.zzTicketForm.area) === '') {
+      if (Trim(this.zzTicketForm.area) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请选择大区/县！'
-        })
-        return false
+          type: "error",
+          message: "请选择大区/县！"
+        });
+        return false;
       }
 
-      if (Trim(this.zzTicketForm.address) === '') {
+      if (Trim(this.zzTicketForm.address) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请填写收票人的详细地址！'
-        })
-        return false
+          type: "error",
+          message: "请填写收票人的详细地址！"
+        });
+        return false;
       }
-      this.addInvoiceInfo()
+      this.addInvoiceInfo();
     },
     // 验证增值税发票 中的联系电话
     rePhone() {
       if (
-        Trim(this.zzTicketForm.phones) == '' ||
+        Trim(this.zzTicketForm.phones) == "" ||
         !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
           this.zzTicketForm.phones
         )
       ) {
-        this.tipsPhones = false
-        this.phones = true
+        this.tipsPhones = false;
+        this.phones = true;
       } else {
-        this.tipsPhones = true
-        this.phones = true
+        this.tipsPhones = true;
+        this.phones = true;
       }
     },
     // 验证增值税发票 中的银行卡号
     reAccount() {
       // !/^[0-9 ]+$/.test(this.zzTicketForm.account)
       if (
-        Trim(this.zzTicketForm.account) == '' ||
+        Trim(this.zzTicketForm.account) == "" ||
         this.zzTicketForm.account.length > 50
       ) {
-        this.tipsAccount = false
-        this.account = true
+        this.tipsAccount = false;
+        this.account = true;
       } else {
-        this.tipsAccount = true
-        this.account = true
+        this.tipsAccount = true;
+        this.account = true;
       }
     },
     // 切换发票内容
     isTicket(item) {
       if (item === 2) {
-        this.ticketForm.isRadio = false
-        this.ticketForm.others = '其他'
+        this.ticketForm.isRadio = false;
+        this.ticketForm.others = "其他";
       } else {
-        this.ticketForm.isRadio = true
-        this.ticketForm.others = '培训费'
+        this.ticketForm.isRadio = true;
+        this.ticketForm.others = "培训费";
       }
     },
     // 切换普通发票下的省
     changeTicketp(v) {
-      this.ticketForm.city = ''
-      this.ticketForm.area = ''
+      this.ticketForm.city = "";
+      this.ticketForm.area = "";
     },
     //切换普通发票下的市
     changeTickeCity() {
-      this.ticketForm.area = ''
+      this.ticketForm.area = "";
     },
     // 切换增值税发票下的省
     changezzTicketp(v) {
-      this.zzTicketForm.city = ''
-      this.zzTicketForm.area = ''
+      this.zzTicketForm.city = "";
+      this.zzTicketForm.area = "";
     },
     //切换增值税发票下的市
     changezzTickeCity() {
-      this.zzTicketForm.area = ''
+      this.zzTicketForm.area = "";
     },
     // 切换增值税发票内容
     iszzTicket(item) {
       if (item === 2) {
-        this.zzTicketForm.isRadio = false
-        this.zzTicketForm.others = '其他'
+        this.zzTicketForm.isRadio = false;
+        this.zzTicketForm.others = "其他";
       } else {
-        this.zzTicketForm.isRadio = true
-        this.zzTicketForm.others = '培训费'
+        this.zzTicketForm.isRadio = true;
+        this.zzTicketForm.others = "培训费";
       }
     },
     //普通发票、个人发票 验证
     addInvoiceBefor() {
-      if (this.invoiceForm.types == '2') {
-        if (Trim(this.ticketForm.companyname) == '') {
+      if (this.invoiceForm.types == "2") {
+        if (Trim(this.ticketForm.companyname) == "") {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入正确的发票抬头！'
-          })
-          return false
+            type: "error",
+            message: "请输入正确的发票抬头！"
+          });
+          return false;
         }
       }
       if (!this.ticketForm.number) {
-        this.ticketForm.number = ''
+        this.ticketForm.number = "";
       }
       if (this.ticketForm.saveioc) {
-        this.ticketForm.types = 2
+        this.ticketForm.types = 2;
       } else {
-        this.ticketForm.types = 1
-        this.ticketForm.number = ''
+        this.ticketForm.types = 1;
+        this.ticketForm.number = "";
       }
       if (this.ticketForm.types == 2) {
         if (
@@ -696,92 +901,92 @@ export default {
           this.ticketForm.number.length == 18 ||
           this.ticketForm.number.length == 20
         ) {
-          this.tfNumber = true
-        } else if (this.ticketForm.number == '') {
-          this.tfNumber = true
+          this.tfNumber = true;
+        } else if (this.ticketForm.number == "") {
+          this.tfNumber = true;
         } else {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入正确的纳税人识别号！'
-          })
-          this.tfNumber = false
-          return false
+            type: "error",
+            message: "请输入正确的纳税人识别号！"
+          });
+          this.tfNumber = false;
+          return false;
         }
-        if (this.ticketForm.companyname === '') {
+        if (this.ticketForm.companyname === "") {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入正确的发票抬头！'
-          })
-          return false
+            type: "error",
+            message: "请输入正确的发票抬头！"
+          });
+          return false;
         }
       }
-      if (Trim(this.ticketForm.name) === '') {
+      if (Trim(this.ticketForm.name) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请输入正确的收票人姓名！'
-        })
-        return false
+          type: "error",
+          message: "请输入正确的收票人姓名！"
+        });
+        return false;
       }
       if (
-        Trim(this.ticketForm.tel) === '' ||
+        Trim(this.ticketForm.tel) === "" ||
         !/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.ticketForm.tel)
       ) {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请输入正确的手机号！'
-        })
-        return false
+          type: "error",
+          message: "请输入正确的手机号！"
+        });
+        return false;
       }
-      if (this.ticketForm.address === '') {
+      if (this.ticketForm.address === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请输入详细地址信息！'
-        })
-        return false
+          type: "error",
+          message: "请输入详细地址信息！"
+        });
+        return false;
       }
-      if (Trim(this.ticketForm.province) === '') {
+      if (Trim(this.ticketForm.province) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请选择省份！'
-        })
-        return false
+          type: "error",
+          message: "请选择省份！"
+        });
+        return false;
       }
-      if (Trim(this.ticketForm.city) === '') {
+      if (Trim(this.ticketForm.city) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请选择城市！'
-        })
-        return false
+          type: "error",
+          message: "请选择城市！"
+        });
+        return false;
       }
-      if (Trim(this.ticketForm.area) === '') {
+      if (Trim(this.ticketForm.area) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请选择大区/县！'
-        })
-        return false
+          type: "error",
+          message: "请选择大区/县！"
+        });
+        return false;
       }
-      if (Trim(this.ticketForm.address) === '') {
+      if (Trim(this.ticketForm.address) === "") {
         this.$message({
           showClose: true,
-          type: 'error',
-          message: '请填写收票人的详细地址！'
-        })
-        return false
+          type: "error",
+          message: "请填写收票人的详细地址！"
+        });
+        return false;
       }
 
-      this.addInvoiceInfo()
+      this.addInvoiceInfo();
     },
     //根据省市区列表 摘出对应省市区
     getRegion(data, val) {
-      let tmp = []
+      let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
           for (let cit of item.city) {
@@ -790,135 +995,135 @@ export default {
                 label: cit.name,
                 value: cit.region_code
               })
-            )
+            );
           }
         }
       }
-      return tmp
+      return tmp;
     },
     // 根据省编码循环省名字
     getProvince(arr, val) {
-      var province = ''
+      var province = "";
       arr.forEach(function(v, i) {
         if (v.region_code === val) {
-          province = v.name
+          province = v.name;
         }
-      })
-      return province
+      });
+      return province;
     },
     // 根据市编码循环市名字
     getCity(arr, val) {
-      var city = ''
+      var city = "";
       arr.forEach(function(v, i) {
         if (v.region_code === val) {
-          city = v.name
+          city = v.name;
         }
-      })
-      return city
+      });
+      return city;
     },
     // 根据区编码循环区名字
     getArea(arr, val) {
-      var area = ''
+      var area = "";
       arr.forEach(function(v, i) {
         if (v.region_code === val) {
-          area = v.name
+          area = v.name;
         }
-      })
-      return area
+      });
+      return area;
     },
     // 获取三级联动省市县列表
     getRegionList() {
-      ticketorder.getRegionList({ region_code: '' }).then(res => {
-        this.mapregionList = res.data.regionList
+      ticketorder.getRegionList({ region_code: "" }).then(res => {
+        this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
           return Object.assign({}, item, {
             label: item.name,
             value: item.region_code
-          })
-        })
-        this.zzprovince = this.province
-      })
+          });
+        });
+        this.zzprovince = this.province;
+      });
     },
     // 切换普通发票/增值税发票
     chooseTicket(v) {
-      if (v === '1') {
-        this.choose = '1'
-        this.invoiceForm.types = '1'
-        this.chooseCompany('1')
-        this.nextStep('stepOne')
+      if (v === "1") {
+        this.choose = "1";
+        this.invoiceForm.types = "1";
+        this.chooseCompany("1");
+        this.nextStep("stepOne");
       } else {
-        this.choose = '2'
-        this.invoiceForm.types = '3'
+        this.choose = "2";
+        this.invoiceForm.types = "3";
       }
-      this.getTicket()
+      this.getTicket();
     },
     // 增值税发票 下一步
     nextStep(item) {
-      if (item === 'stepOne') {
-        this.stepOne = true
-        this.stepTwo = false
-        this.stepThree = false
+      if (item === "stepOne") {
+        this.stepOne = true;
+        this.stepTwo = false;
+        this.stepThree = false;
       }
-      if (item === 'stepTwo') {
-        this.stepOne = false
-        this.stepTwo = true
-        this.stepThree = false
+      if (item === "stepTwo") {
+        this.stepOne = false;
+        this.stepTwo = true;
+        this.stepThree = false;
       }
-      if (item === 'stepThree') {
-        if (Trim(this.zzTicketForm.companyname) == '') {
+      if (item === "stepThree") {
+        if (Trim(this.zzTicketForm.companyname) == "") {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入单位名称！'
-          })
-          return false
-        } else if (Trim(this.zzTicketForm.zcadd) == '') {
+            type: "error",
+            message: "请输入单位名称！"
+          });
+          return false;
+        } else if (Trim(this.zzTicketForm.zcadd) == "") {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入注册地址！'
-          })
-          return false
+            type: "error",
+            message: "请输入注册地址！"
+          });
+          return false;
         } else if (
-          Trim(this.zzTicketForm.phones) == '' ||
+          Trim(this.zzTicketForm.phones) == "" ||
           !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
             this.zzTicketForm.phones
           )
         ) {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入正确的联系电话！'
-          })
-          return false
-        } else if (Trim(this.zzTicketForm.bank) == '') {
+            type: "error",
+            message: "请输入正确的联系电话！"
+          });
+          return false;
+        } else if (Trim(this.zzTicketForm.bank) == "") {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入开户银行！'
-          })
-          return false
+            type: "error",
+            message: "请输入开户银行！"
+          });
+          return false;
         } else if (
-          Trim(this.zzTicketForm.account) == '' ||
+          Trim(this.zzTicketForm.account) == "" ||
           this.zzTicketForm.account.length > 50
         ) {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入正确的银行账号！'
-          })
-          return false
+            type: "error",
+            message: "请输入正确的银行账号！"
+          });
+          return false;
         }
         if (
-          Trim(this.zzTicketForm.number) == '' ||
+          Trim(this.zzTicketForm.number) == "" ||
           !/^[A-Z0-9]+$/.test(this.zzTicketForm.number)
         ) {
           this.$message({
             showClose: true,
-            type: 'error',
-            message: '请输入正确的纳税人识别号！'
-          })
-          return false
+            type: "error",
+            message: "请输入正确的纳税人识别号！"
+          });
+          return false;
         } else {
           if (
             this.zzTicketForm.number.length == 15 ||
@@ -928,203 +1133,195 @@ export default {
           } else {
             this.$message({
               showClose: true,
-              type: 'error',
-              message: '请输入正确的纳税人识别号！'
-            })
-            return false
+              type: "error",
+              message: "请输入正确的纳税人识别号！"
+            });
+            return false;
           }
         }
 
-        this.stepOne = false
-        this.stepTwo = false
-        this.stepThree = true
+        this.stepOne = false;
+        this.stepTwo = false;
+        this.stepThree = true;
       }
     },
     // 普通发票 选择个人/企业
     chooseCompany(v) {
-      if (v === '1') {
-        this.ticketForm.saveioc = false
-        this.invoiceForm.types = '1'
+      if (v === "1") {
+        this.ticketForm.saveioc = false;
+        this.invoiceForm.types = "1";
       } else {
-        this.ticketForm.saveioc = true
-        this.invoiceForm.types = '2'
+        this.ticketForm.saveioc = true;
+        this.invoiceForm.types = "2";
       }
-      this.getTicket()
+      this.getTicket();
     },
     // 添加发票信息
     addInvoiceInfo() {
-      if (this.choose === '1') {
-        this.ticketForm.orderID = this.checkedArr
+      if (this.choose === "1") {
+        this.ticketForm.orderID = this.checkedArr;
         if (this.ticketForm.isRadio) {
-          this.ticketForm.others = '培训费'
+          this.ticketForm.others = "培训费";
         } else {
-          this.ticketForm.others = '其他'
+          this.ticketForm.others = "其他";
         }
         // 地址编码转换成地址名展示发票信息框展示用
         this.ticketForm.province_name = this.getProvince(
           this.province,
           this.ticketForm.province
-        )
+        );
         this.ticketForm.city_name = this.getCity(
           this.city,
           this.ticketForm.city
-        )
+        );
         this.ticketForm.area_name = this.getArea(
           this.area,
           this.ticketForm.area
-        )
+        );
 
-        this.$emit('handleClose')
-        let conLen = document.getElementsByClassName('el-tabs__content').length
+        this.$emit("handleClose");
 
-        document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-        document.getElementsByClassName('el-tabs__content')[
-          conLen - 1
-        ].style.position = 'relative'
-        this.$bus.$emit('showConfirm', this.ticketForm)
+        IEPopup("pane-tab-eighth", "relative");
+        this.$bus.$emit("showConfirm", this.ticketForm);
       } else {
-        this.zzTicketForm.orderID = this.checkedArr
+        this.zzTicketForm.orderID = this.checkedArr;
         if (this.zzTicketForm.isRadio) {
-          this.zzTicketForm.others = '培训费'
+          this.zzTicketForm.others = "培训费";
         } else {
-          this.zzTicketForm.others = '其他'
+          this.zzTicketForm.others = "其他";
         }
         // 地址编码转换成地址名展示发票信息框展示用
         this.zzTicketForm.province_name = this.getProvince(
           this.zzprovince,
           this.zzTicketForm.province
-        )
+        );
         this.zzTicketForm.city_name = this.getCity(
           this.zzcity,
           this.zzTicketForm.city
-        )
+        );
         this.zzTicketForm.area_name = this.getArea(
           this.zzarea,
           this.zzTicketForm.area
-        )
-        this.nextStep('stepOne')
-        this.$emit('handleClose')
-        let conLen = document.getElementsByClassName('el-tabs__content').length
+        );
+        this.nextStep("stepOne");
+        this.$emit("handleClose");
+        IEPopup("pane-tab-eighth", "relative");
 
-        document.getElementsByClassName('bigTab')[0].style.minHeight = '800px'
-        document.getElementsByClassName('el-tabs__content')[
-          conLen - 1
-        ].style.position = 'relative'
-        this.$bus.$emit('showConfirm', this.zzTicketForm)
+        this.$bus.$emit("showConfirm", this.zzTicketForm);
       }
     },
     // 获取发票信息
     getTicket() {
       ticketorder.getLastTicket(this.invoiceForm).then(res => {
         if (res.status === 0) {
-          if (res.data.type == '1' || res.data.type == '2') {
-            this.ticketForm.saveioc = res.data.type == '1' ? false : true
-            if (res.data.type == '1') {
-              this.ticketForm.companyname = ''
+          if (res.data.type == "1" || res.data.type == "2") {
+            this.ticketForm.saveioc = res.data.type == "1" ? false : true;
+            if (res.data.type == "1") {
+              this.ticketForm.companyname = "";
             } else {
-              this.ticketForm.companyname = res.data.invoice_name
+              this.ticketForm.companyname = res.data.invoice_name;
             }
-            this.choose = '1'
-            this.ticketForm.number = res.data.invoice_number
-            this.ticketForm.name = res.data.consignee
-            this.ticketForm.tel = res.data.phone
-            this.ticketForm.province = res.data.province
-            this.ticketForm.city = res.data.city
-            this.city = this.getRegion(this.province, this.ticketForm.province)
-            this.ticketForm.area = res.data.area
-            this.area = this.getRegion(this.city, this.ticketForm.city)
-            this.ticketForm.address = res.data.address
-            this.ticketForm.radio = Number(res.data.content_type)
-            this.ticketForm.others = res.data.content
-            this.ticketForm.ticket = false
+            this.choose = "1";
+            this.ticketForm.number = res.data.invoice_number;
+            this.ticketForm.name = res.data.consignee;
+            this.ticketForm.tel = res.data.phone;
+            this.ticketForm.province = res.data.province;
+            this.ticketForm.city = res.data.city;
+            this.city = this.getRegion(this.province, this.ticketForm.province);
+            this.ticketForm.area = res.data.area;
+            this.area = this.getRegion(this.city, this.ticketForm.city);
+            this.ticketForm.address = res.data.address;
+            this.ticketForm.radio = Number(res.data.content_type);
+            this.ticketForm.others = res.data.content;
+            this.ticketForm.ticket = false;
             if (this.ticketForm.radio == 2) {
-              this.ticketForm.isRadio = false
+              this.ticketForm.isRadio = false;
             } else {
-              this.ticketForm.isRadio = true
+              this.ticketForm.isRadio = true;
             }
           }
-          if (res.data.type == '3') {
-            this.choose = '2'
-            this.ticketForm.saveioc = res.data.type == '1' ? false : true
-            this.zzTicketForm.companyname = res.data.invoice_name
-            this.zzTicketForm.zcadd = res.data.company_address
-            this.zzTicketForm.phones = res.data.company_phone
-            this.zzTicketForm.bank = res.data.bank_name
-            this.zzTicketForm.account = res.data.bank_card
-            this.zzTicketForm.number = res.data.invoice_number
-            this.zzTicketForm.name = res.data.consignee
-            this.zzTicketForm.tel = res.data.phone
-            this.zzTicketForm.province = res.data.province
+          if (res.data.type == "3") {
+            this.choose = "2";
+            this.ticketForm.saveioc = res.data.type == "1" ? false : true;
+            this.zzTicketForm.companyname = res.data.invoice_name;
+            this.zzTicketForm.zcadd = res.data.company_address;
+            this.zzTicketForm.phones = res.data.company_phone;
+            this.zzTicketForm.bank = res.data.bank_name;
+            this.zzTicketForm.account = res.data.bank_card;
+            this.zzTicketForm.number = res.data.invoice_number;
+            this.zzTicketForm.name = res.data.consignee;
+            this.zzTicketForm.tel = res.data.phone;
+            this.zzTicketForm.province = res.data.province;
             this.zzcity = this.getRegion(
               this.zzprovince,
               this.zzTicketForm.province
-            )
-            this.zzTicketForm.city = res.data.city
-            this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city)
-            this.zzTicketForm.area = res.data.area
-            this.zzTicketForm.address = res.data.address
-            this.zzTicketForm.others = res.data.content
-            this.zzTicketForm.radio = Number(res.data.content_type)
+            );
+            this.zzTicketForm.city = res.data.city;
+            this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city);
+            this.zzTicketForm.area = res.data.area;
+            this.zzTicketForm.address = res.data.address;
+            this.zzTicketForm.others = res.data.content;
+            this.zzTicketForm.radio = Number(res.data.content_type);
             if (this.zzTicketForm.radio == 2) {
-              this.zzTicketForm.isRadio = false
+              this.zzTicketForm.isRadio = false;
             } else {
-              this.zzTicketForm.isRadio = true
+              this.zzTicketForm.isRadio = true;
             }
           }
         }
-      })
+      });
     },
     // 关闭表单
     close() {
-      this.$emit('handleClose')
+      this.$emit("handleClose");
       // this.showInfo = false
       // this.showInvoice = false
     }
   },
   mounted() {
-    this.getRegionList()
-    this.getTicket()
+    this.getRegionList();
+    this.getTicket();
   },
   watch: {
     province(val) {
-      this.city = this.getRegion(val, this.ticketForm.province)
-      this.area = this.getRegion(this.city, this.ticketForm.city)
+      this.city = this.getRegion(val, this.ticketForm.province);
+      this.area = this.getRegion(this.city, this.ticketForm.city);
     },
-    'ticketForm.province'(val, oldval) {
+    "ticketForm.province"(val, oldval) {
       if (!this.province && this.province.length == 0) {
-        this.getRegionList()
+        this.getRegionList();
       }
-      this.city = this.getRegion(this.province, val)
+      this.city = this.getRegion(this.province, val);
     },
-    'ticketForm.city'(val, oldval) {
+    "ticketForm.city"(val, oldval) {
       if (!this.city && this.city.length == 0) {
-        this.getRegionList()
+        this.getRegionList();
       }
-      this.area = this.getRegion(this.city, val)
+      this.area = this.getRegion(this.city, val);
     },
     zzprovince(val) {
-      this.zzcity = this.getRegion(val, this.zzTicketForm.province)
-      this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city)
+      this.zzcity = this.getRegion(val, this.zzTicketForm.province);
+      this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city);
     },
-    'zzTicketForm.province'(val, oldval) {
+    "zzTicketForm.province"(val, oldval) {
       if (!this.zzprovince && this.zzprovince.length == 0) {
-        this.getRegionList()
+        this.getRegionList();
       }
-      this.zzcity = this.getRegion(this.zzprovince, val)
+      this.zzcity = this.getRegion(this.zzprovince, val);
     },
-    'zzTicketForm.city'(val, oldval) {
+    "zzTicketForm.city"(val, oldval) {
       if (!this.zzcity && this.zzcity.length == 0) {
-        this.getRegionList()
+        this.getRegionList();
       }
-      this.zzarea = this.getRegion(this.zzcity, val)
+      this.zzarea = this.getRegion(this.zzcity, val);
     },
     address(val) {
       if (val) {
-        persistStore.set('address', val)
+        persistStore.set("address", val);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
