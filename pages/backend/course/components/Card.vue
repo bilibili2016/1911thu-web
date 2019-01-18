@@ -8,20 +8,14 @@
             <div class="img-con">
               <img :src="courseList.picture" class="image">
             </div>
-            <!-- <div class="mask">1</div> -->
-            <!-- project 页面的课程详情 不显示一些东西 -->
             <div class="common-button btn-bg">
-              <!-- 登录 不登录 播放按钮 -->
+              <!-- 播放按钮 -->
               <div class="playBtn-detail">
                 <img :src="playImg" alt @click="handleImgPlay(courseList)">
               </div>
             </div>
           </div>
-          <v-player
-            @changePlayImg="changePlayImg"
-            @gobuy="handleAddShopCart(courseList)"
-            @refreshData="refreshData"
-          ></v-player>
+          <v-player @changePlayImg="changePlayImg" @refreshData="refreshData"></v-player>
         </el-card>
         <div class="particularss fr">
           <div class="currentclum">
@@ -92,7 +86,7 @@ export default {
     },
     // 左侧播放按钮事件
     handleImgPlay (item) {
-      this.$bus.$emit("reupdatecourse");
+      this.$bus.$emit("reupdatecourse", this.courseList.catalog_id);
     },
     closeCover () {
       this.isShowCover = false;

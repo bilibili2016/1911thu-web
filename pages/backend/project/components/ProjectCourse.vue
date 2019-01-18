@@ -2,13 +2,7 @@
   <!-- 项目线上课程列表 -->
   <div class="projectCourse">
     <div class="system" v-if="vipList.length>0">
-      <div
-        class="college"
-        v-for="vip in vipGoodsList"
-        :key="vip.vip_goodsid"
-        v-html="vip.content"
-        @click="goVipDetail(vip)"
-      ></div>
+      <div class="college" v-for="vip in vipGoodsList" :key="vip.vip_goodsid" v-html="vip.content"></div>
     </div>
     <div class="system" v-else>
       <div class="noData">
@@ -38,43 +32,6 @@ export default {
         base: '/project/projectPlayer',
         kid: ''
       }
-    }
-  },
-  methods: {
-    ...mapActions('auth', ['setKid']),
-    // 跳转课程详情
-    goCourseDetail (item) {
-      this.$router.push({
-        path: '/course/detail',
-        query: {
-          kid: item.curriculum_id,
-          pid: this.projectId,
-          page: 0
-        }
-      })
-    },
-    // 跳转到项目播放页
-    goProjectPlayer (course) {
-      if (persistStore.get('token')) {
-        let urlLink = {
-          base: '/project/projectPlayer',
-          kid: matchSplits('kid'),
-          cid: course.curriculum_id,
-          type: matchSplits('type')
-        }
-        open(urlLink)
-      } else {
-        this.$bus.$emit('loginShow', true)
-      }
-    },
-    goVipDetail (vip) {
-      this.$router.push({
-        path: '/home/vip/vipPage',
-        query: {
-          id: vip.vip_goodsid,
-          cid: vip.category_id
-        }
-      })
     }
   },
   watch: {

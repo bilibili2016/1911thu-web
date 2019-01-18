@@ -25,7 +25,7 @@
 
 <script>
 import CustomBanner from "@/components/common/Banner.vue";
-import { news } from "~/lib/v1_sdk/index";
+import { previewapi } from "~/lib/v1_sdk/index";
 import { timestampToTime, message, matchSplits } from "~/lib/util/helper";
 export default {
   components: {
@@ -50,7 +50,6 @@ export default {
     },
     // 获取资讯详情
     getNewInfoDetail (id) {
-      let me = this;
       if (this.newsDetail.id == id || !id) {
         message(this, "info", "暂无更多内容！");
         return false;
@@ -59,7 +58,7 @@ export default {
         ids: id
       };
 
-      news.getNewInfoDetail(newsId).then(response => {
+      previewapi.getNewInfoDetail(newsId).then(response => {
         if (response.status === 0) {
           this.newsDetail = response.data.newDetail;
           this.newsDetail.create_time = timestampToTime(
@@ -69,7 +68,6 @@ export default {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
         } else {
           message(this, "error", response.msg);
-          this.$router.push("/home/news/list");
         }
       });
     }

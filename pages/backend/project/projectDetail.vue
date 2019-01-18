@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
+import { projectdetail, projectplayer, previewapi } from '@/lib/v1_sdk/index'
 import { mapActions, mapGetters } from 'vuex'
 import Detail from '@/pages/backend/project/components/Detail'
 import Procourse from '@/pages/backend/project/components/ProjectCourse'
@@ -76,7 +76,6 @@ export default {
         'http://static-image.1911edu.com/customer-detail-banner.png',
       projectDetailLoad: true,
       inlineLoad: true,
-      evaluateDataLoad: true,
       problemLoad: true,
       rateModel: 3,
       collectMsg: {
@@ -96,20 +95,6 @@ export default {
       projectDetail: {
         study_type: '2'
       },
-      pagemsg: {
-        page: 1,
-        pagesize: 3,
-        total: 5
-      },
-      evaluateForm: {
-        pages: 1,
-        limits: 3,
-        ids: '',
-        types: 2,
-        isRecommend: 2
-      },
-      evaluateInfo: {},
-      evaluateData: []
     }
   },
   computed: {
@@ -119,7 +104,7 @@ export default {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
     // 获取项目详情
     getProjectInfo () {
-      projectdetail.getProjectInfo(this.project).then(res => {
+      previewapi.getProjectInfo(this.project).then(res => {
         if (res.status == 0) {
           this.projectDetail = res.data.curriculumProjectDetail
           this.projectDetail.score = Number(this.projectDetail.score)
@@ -135,40 +120,11 @@ export default {
         }
       })
     },
-    // 获取项目评论
-    getEvaluateList () {
-      this.evaluateForm.ids = matchSplits('kid')
-      projectdetail.getEvaluateList(this.evaluateForm).then(res => {
-        if (res.status == 0) {
-          this.evaluateData = res.data.evaluateList
-          this.evaluateInfo = res.data.totalEvaluateInfo
-          this.evaluateDataLoad = false
-          this.pagemsg.total = res.data.pageCount
-        }
-      })
-    },
-    //评论分页
-    handleCurrentChange (val) {
-      this.pagemsg.page = val
-      this.evaluateForm.pages = val
-      this.evaluateForm.limits = 3
-      this.evaluateForm.ids = matchSplits('kid')
-      projectdetail.getEvaluateList(this.evaluateForm).then(res => {
-        if (res.status == 0) {
-          this.evaluateData = res.data.evaluateList
-          this.evaluateInfo = res.data.totalEvaluateInfo
-          this.evaluateDataLoad = false
-        }
-      })
-    }
   },
   mounted () {
     this.project.projectId = matchSplits('kid')
     this.project.types = matchSplits('type')
     this.getProjectInfo()
-    if (this.project.types === '1') {
-      this.getEvaluateList()
-    }
 
     this.problemLoad = false
     this.$bus.$on('reProjectData', data => {
