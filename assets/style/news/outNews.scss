@@ -1,0 +1,18 @@
+.outNews {
+    .center {
+        width: 1100px;
+        margin: 0 auto;
+    }
+    .newsItems {
+        .item {
+            float: left;
+            width: 200px;
+            height: 100px;
+            border: 1px solid #eee;
+            margin: 0 25px 20px 0;
+            &:nth-child(5n+5) {
+                margin-right: 0;
+            }
+        }
+    }
+}
