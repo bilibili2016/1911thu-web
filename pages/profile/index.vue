@@ -13,6 +13,7 @@
         :tab-position="tabPosition"
         v-model="activeTab"
         @tab-click="handleClick"
+        class="profileContent"
       >
         <!-- 最近学习 -->
         <el-tab-pane
@@ -957,7 +958,7 @@ export default {
           return false;
         } else if (response.status === 0) {
           this.historyOrderData = response.data.invoiceList;
-          IEPopup("pane-tab-eighth", "relative");
+          IEPopup("pane-tab-eighth", "relative", 1);
 
           this.unfinishedOrderLoad = false;
         }

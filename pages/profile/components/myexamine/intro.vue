@@ -140,7 +140,7 @@ export default {
     },
     // 考试规则弹框
     examRules(type) {
-      IEPopup("pane-tab-tenth", "-ms-page");
+      IEPopup("pane-tab-tenth", "-ms-page", 0);
       this.vipForm.vipId = this.vipID;
       this.vipForm.type = type;
       this.examRuleLoading = true;
@@ -161,7 +161,7 @@ export default {
     },
     // 关闭规则弹框
     closeRules() {
-      IEPopup("pane-tab-tenth", "relative");
+      IEPopup("pane-tab-tenth", "relative", 1);
 
       this.showExamRules = false;
     },

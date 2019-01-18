@@ -121,7 +121,7 @@ export default {
           this.$bus.$emit("reLoginAlertPop", this.responseData);
           return false;
         }
-        IEPopup("pane-tab-eighth", "-ms-page");
+        IEPopup("pane-tab-eighth", "-ms-page", 0);
 
         this.isTicketPopup = true;
         this.TicketPopupData = response.data.invoiceOrderList;
@@ -129,7 +129,7 @@ export default {
     },
     //关闭开票详情弹框
     closeTicketPopup() {
-      IEPopup("pane-tab-eighth", "relative");
+      IEPopup("pane-tab-eighth", "relative", 1);
       this.isTicketPopup = false;
     },
     //发票详情弹框
@@ -142,14 +142,14 @@ export default {
           return false;
         }
 
-        IEPopup("pane-tab-eighth", "-ms-page");
+        IEPopup("pane-tab-eighth", "-ms-page", 0);
         this.isStatusPopup = true;
         this.StatusPopupData = response.data;
       });
     },
     //关闭
     closeStatusPopup() {
-      IEPopup("pane-tab-eighth", "relative");
+      IEPopup("pane-tab-eighth", "relative", 1);
       this.isStatusPopup = false;
     },
     goShopping(id) {
