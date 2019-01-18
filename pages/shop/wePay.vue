@@ -121,6 +121,8 @@ export default {
           if (item === 'recode') {
             this.$bus.$emit('addPaySubmit')
           }
+        }else if(response.status === 100110){
+            this.$router.push('/shop/payPublic?orderID=' + this.payListForm.orderId)
         }
       })
     },

@@ -33,6 +33,12 @@
         &:hover {
           color: #999;
         }
+        &.aboutSpan{
+            cursor: auto;
+            &:hover{
+                color: #fff;
+            }
+        }
       }
     }
     .copyright {

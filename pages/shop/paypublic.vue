@@ -164,36 +164,39 @@ export default {
       // this.payListForm.attachs = matchSplits('attach')
       wepay.webPay(this.payListForm).then(response => {
         if (response.status == 0) {
-          this.orderDetail = response.data.data.orderDetail;
-          this.payForm.orderId = response.data.data.orderDetail.id;
-          this.payForm.phones = persistStore.get("phone");
-          this.handleConfirm();
+          this.orderDetail = response.data.orderDetail;
+          this.payForm.orderId = response.data.orderDetail.id;
+        //   this.payForm.phones = persistStore.get("phone");
+        //   this.handleConfirm();
         } else if (response.status == 100101) {
+            // 订单支付已完成
           this.gidForm.gids = "tab-fourth";
           this.setGid(this.gidForm);
           this.$router.push("/profile");
-        } else {
-          this.$message({
-            showClose: true,
-            type: "error",
-            message: response.msg
-          });
+        } else if(response.status == 100110){
+            this.orderDetail = response.data.orderDetail;
+            this.payForm.orderId = response.data.orderDetail.id;
+            this.payForm.phones = persistStore.get("phone");
+            // 订单正在审核中
+            message(this, 'info', '订单正在审核中，请您耐心等待！')
+        }else {
+          message(this, 'error', response.msg)
         }
       });
     },
-    handleConfirm() {
-      paypublic.getPayPublicCode(this.payForm).then(res => {
-        if (res.status == 0) {
-          this.code = res.data.code;
-        } else {
-          this.$message({
-            showClose: true,
-            type: "error",
-            message: res.msg
-          });
-        }
-      });
-    }
+    // handleConfirm() {
+    //   paypublic.getPayPublicCode(this.payForm).then(res => {
+    //     if (res.status == 0) {
+    //       this.code = res.data.code;
+    //     } else {
+    //       this.$message({
+    //         showClose: true,
+    //         type: "error",
+    //         message: res.msg
+    //       });
+    //     }
+    //   });
+    // }
   },
   mounted() {
     if (persistStore.get("token")) {
