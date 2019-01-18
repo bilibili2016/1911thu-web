@@ -68,8 +68,6 @@ export default {
   },
   methods: {
     handleCatalog (index, item) {
-      this.$bus.$emit('loginShow', true)
-
       let curriculum_id = item.childList[index].curriculum_id
       let catalog_id = item.childList[index].id
       this.playerForm.curriculumId = curriculum_id

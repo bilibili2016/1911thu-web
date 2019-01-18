@@ -1,13 +1,13 @@
 <template>
   <el-container class="is-vertical layout-default">
-    <Header v-show="HFShow"></Header>
+    <Header v-if="HFShow"></Header>
     <backend-header v-if="backendHF"></backend-header>
     <el-container v-if="!showNetwork">
       <el-main>
         <nuxt/>
       </el-main>
     </el-container>
-    <Footer v-show="HFShow"></Footer>
+    <Footer v-if="HFShow"></Footer>
     <backend-footer v-if="backendHF"></backend-footer>
     <div class="no-network" v-show="showNetwork">
       <img src="@/assets/images/no-network.png" alt>
