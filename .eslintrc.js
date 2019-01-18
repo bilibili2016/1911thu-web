@@ -8,7 +8,7 @@ module.exports = {
         $: true
     },
     parserOptions: {
-        // parser: 'babel-eslint'
+        parser: 'babel-eslint'
     },
     extends: [
         'standard',
