@@ -1181,7 +1181,7 @@ export default {
 
         this.$emit("handleClose");
 
-        IEPopup("pane-tab-eighth", "relative");
+        IEPopup("pane-tab-eighth", "relative",1);
         this.$bus.$emit("showConfirm", this.ticketForm);
       } else {
         this.zzTicketForm.orderID = this.checkedArr;
@@ -1205,7 +1205,7 @@ export default {
         );
         this.nextStep("stepOne");
         this.$emit("handleClose");
-        IEPopup("pane-tab-eighth", "relative");
+        IEPopup("pane-tab-eighth", "relative",1);
 
         this.$bus.$emit("showConfirm", this.zzTicketForm);
       }

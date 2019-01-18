@@ -286,7 +286,7 @@ export default {
     // 展示修改发票信息弹框
     showIoc() {
       if (this.checkedArr.length > 0) {
-        IEPopup("pane-tab-eighth", "-ms-page");
+        IEPopup("pane-tab-eighth", "-ms-page", 0);
         this.showInvoice = true;
         // this.getTicket()
       } else {
@@ -318,7 +318,7 @@ export default {
     },
     // 关闭表单
     close() {
-      IEPopup("pane-tab-eighth", "relative");
+      IEPopup("pane-tab-eighth", "relative", 1);
 
       this.showInfo = false;
       this.showInvoice = false;

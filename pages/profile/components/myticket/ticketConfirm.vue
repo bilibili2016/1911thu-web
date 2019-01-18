@@ -100,13 +100,13 @@ export default {
     // 关闭当前提交框
     close() {
       this.confirmInvoice = false;
-      IEPopup("pane-tab-eighth", "relative");
+      IEPopup("pane-tab-eighth", "relative", 1);
     }
   },
   mounted() {
     this.$bus.$on("showConfirm", data => {
       this.ticketForm = data;
-      IEPopup("pane-tab-eighth", "-ms-page");
+      IEPopup("pane-tab-eighth", "-ms-page", 0);
       this.confirmInvoice = true;
     });
   }
