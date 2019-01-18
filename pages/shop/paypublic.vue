@@ -6,7 +6,8 @@
         <!-- <h4>线下汇款（到账周期为3个工作日)</h4> -->
         <!-- <h4>1911学堂收款信息</h4> -->
         <h4 class="clearfix orderId">
-          <span class="left">订单号：
+          <span class="left">
+            订单号：
             <span class="num">{{orderDetail.order_sn}}</span>
           </span>
           <span class="right">应付金额：￥{{orderDetail.order_amount}}</span>
@@ -17,11 +18,8 @@
           <p class="showPay" @click="showPayPublic">确认并获取汇款识别码</p>
           <p class="tips">
             <i class="el-icon-warning"></i>汇款时将识别码填写至汇款单"用途"栏，超出1个工作日未对账，请提供订单号及汇款底单邮件至hkd@1911thu.com</p>
-        </div> -->
-        <div
-          class="pay"
-          v-show="showPay"
-        >
+        </div>-->
+        <div class="pay" v-show="showPay">
           <!-- <div v-show="false">
             <h5>尊敬的客户你好，如需企业线下汇款，请点击“确认并获取汇款识别码”。</h5>
             <div class="changeTel clearfix">
@@ -41,7 +39,7 @@
               <p>2. 线下公司转账订单，一个识别码对应一个订单和相应的金额，请勿多转账或者少转账。</p>
               <p>3. 请在7天内付清款项，超过10天未对账系统自动会取消订单。到账周期为3个工作日。</p>
             </div>
-          </div> -->
+          </div>-->
           <div v-show="true">
             <p class="con-title">1911学堂收款信息</p>
             <div class="account">
@@ -53,11 +51,11 @@
               <!-- <p>订单号：{{orderDetail.order_sn}}</p> -->
             </div>
             <h6 style="margin-top:0">
-              <i class="el-icon-warning"></i>&nbsp;&nbsp;注意事项：请在汇款用途、附言或摘要栏内填上对应的订单号。</h6>
+              <i class="el-icon-warning"></i>&nbsp;&nbsp;注意事项：请在汇款用途、附言或摘要栏内填上对应的订单号。
+            </h6>
           </div>
           <!-- <div class="confirmBtn" @click="handleConfirm">确定</div> -->
         </div>
-
       </div>
       <div class="alertText">收到汇款后我们将与您取得联系，详细沟通项目方案、确定具体安排，并为您开具发票!</div>
       <div class="bottomBtn">
@@ -74,7 +72,7 @@ import { paypublic, wepay } from "@/lib/v1_sdk/index";
 import { matchSplits, message } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 export default {
-  data() {
+  data () {
     return {
       showPay: true,
       showTel: false,
@@ -101,11 +99,11 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
-    changeTel() {
+    changeTel () {
       this.showTel = true;
       this.changeForm.tel = "";
     },
-    goLink(link) {
+    goLink (link) {
       if (link == "/") {
         this.$router.push("/");
       } else if (link == "/profile") {
@@ -116,7 +114,7 @@ export default {
         this.$router.push("/profile");
       }
     },
-    againGet() {
+    againGet () {
       if (this.changeForm.tel == "") {
         this.isAlertMsg = true;
         this.alertMsg = "请输入手机号";
@@ -134,7 +132,7 @@ export default {
         this.showPayPublic();
       }
     },
-    showPayPublic() {
+    showPayPublic () {
       this.showPay = false;
       // this.payForm.attachs = matchSplits('attach')
       paypublic.getPayPublicCode(this.payForm).then(res => {
@@ -159,27 +157,27 @@ export default {
       });
     },
     // 获取订单id列表
-    getPayList() {
+    getPayList () {
       this.payListForm.orderId = matchSplits("orderID");
       // this.payListForm.attachs = matchSplits('attach')
       wepay.webPay(this.payListForm).then(response => {
         if (response.status == 0) {
           this.orderDetail = response.data.orderDetail;
           this.payForm.orderId = response.data.orderDetail.id;
-        //   this.payForm.phones = persistStore.get("phone");
-        //   this.handleConfirm();
+          //   this.payForm.phones = persistStore.get("phone");
+          //   this.handleConfirm();
         } else if (response.status == 100101) {
-            // 订单支付已完成
+          // 订单支付已完成
           this.gidForm.gids = "tab-fourth";
           this.setGid(this.gidForm);
           this.$router.push("/profile");
-        } else if(response.status == 100110){
-            this.orderDetail = response.data.orderDetail;
-            this.payForm.orderId = response.data.orderDetail.id;
-            this.payForm.phones = persistStore.get("phone");
-            // 订单正在审核中
-            message(this, 'info', '订单正在审核中，请您耐心等待！')
-        }else {
+        } else if (response.status == 100110) {
+          this.orderDetail = response.data.orderDetail;
+          this.payForm.orderId = response.data.orderDetail.id;
+          this.payForm.phones = persistStore.get("phone");
+          // 订单正在审核中
+          message(this, 'info', '订单正在审核中，请您耐心等待！')
+        } else {
           message(this, 'error', response.msg)
         }
       });
@@ -198,7 +196,7 @@ export default {
     //   });
     // }
   },
-  mounted() {
+  mounted () {
     if (persistStore.get("token")) {
       this.getPayList();
     } else {
