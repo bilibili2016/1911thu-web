@@ -51,7 +51,7 @@
           ></v-teacherintro>
           <!-- 课程评价-->
           <v-evaluatecase
-            v-show="courseList.is_study != 0 && courseList.is_evaluate==0"
+            v-show="courseList.is_study != 0 && courseList.is_evaluate==0&&privileMsg"
             :isClose="isClose"
             :courseList="courseList"
             @changeList="cbList"
