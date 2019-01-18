@@ -165,7 +165,7 @@ export default {
           this.orderDetail = response.data.orderDetail;
           this.payForm.orderId = response.data.orderDetail.id;
           //   this.payForm.phones = persistStore.get("phone");
-          //   this.handleConfirm();
+          this.handleConfirm();
         } else if (response.status == 100101) {
           // 订单支付已完成
           this.gidForm.gids = "tab-fourth";
@@ -182,19 +182,19 @@ export default {
         }
       });
     },
-    // handleConfirm() {
-    //   paypublic.getPayPublicCode(this.payForm).then(res => {
-    //     if (res.status == 0) {
-    //       this.code = res.data.code;
-    //     } else {
-    //       this.$message({
-    //         showClose: true,
-    //         type: "error",
-    //         message: res.msg
-    //       });
-    //     }
-    //   });
-    // }
+    handleConfirm () {
+      paypublic.getPayPublicCode(this.payForm).then(res => {
+        if (res.status == 0) {
+          this.code = res.data.code;
+        } else {
+          this.$message({
+            showClose: true,
+            type: "error",
+            message: res.msg
+          });
+        }
+      });
+    }
   },
   mounted () {
     if (persistStore.get("token")) {
