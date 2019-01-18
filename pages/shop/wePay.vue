@@ -31,37 +31,37 @@
 </template>
 
 <script>
-import { store as persistStore } from '~/lib/core/store'
-import { wepay } from '@/lib/v1_sdk/index'
-import { mapState, mapActions, mapGetters } from 'vuex'
-import Vue from 'vue'
-import VueQrcode from '@xkeshi/vue-qrcode'
-import Repore from '@/components/common/Report.vue'
-import Banner from '@/pages/shop/components/banner'
-import List from '@/pages/shop/components/List'
-import PayType from '@/pages/shop/wepay/payType'
-import Qrcode from '@/pages/shop/wepay/qrcode'
+import { store as persistStore } from "~/lib/core/store";
+import { wepay } from "@/lib/v1_sdk/index";
+import { mapState, mapActions, mapGetters } from "vuex";
+import Vue from "vue";
+import VueQrcode from "@xkeshi/vue-qrcode";
+import Repore from "@/components/common/Report.vue";
+import Banner from "@/pages/shop/components/banner";
+import List from "@/pages/shop/components/List";
+import PayType from "@/pages/shop/wepay/payType";
+import Qrcode from "@/pages/shop/wepay/qrcode";
 import {
   setPagesHeight,
   matchSplits,
   message,
   setTitle
-} from '~/lib/util/helper'
-Vue.component(VueQrcode.name, VueQrcode)
+} from "~/lib/util/helper";
+Vue.component(VueQrcode.name, VueQrcode);
 export default {
   components: {
-    'v-banner': Banner,
-    'v-list': List,
-    'v-report': Repore,
-    'v-paytype': PayType,
-    'v-qrcode': Qrcode
+    "v-banner": Banner,
+    "v-list": List,
+    "v-report": Repore,
+    "v-paytype": PayType,
+    "v-qrcode": Qrcode
   },
-  data() {
+  data () {
     return {
       showReportBug: false,
       wePay: {
-        type: 'wePay',
-        text: '支付中心'
+        type: "wePay",
+        text: "支付中心"
       },
       payListForm: {
         orderId: null,
@@ -73,96 +73,97 @@ export default {
       },
       orderCurriculumLists: [],
       codeData: {
-        code_url: '',
-        qr_code: ''
+        code_url: "",
+        qr_code: ""
       },
       config: {
         type: 2
       },
-      val: '',
-      interval: '',
+      val: "",
+      interval: "",
       seconds: 1000000,
       takeupMsg: false,
       loading: false
-    }
+    };
   },
   computed: {
     // ...mapState('auth', ['kid']),
-    ...mapGetters('auth', ['isAuthenticated'])
+    ...mapGetters("auth", ["isAuthenticated"])
   },
   methods: {
-    ...mapActions('auth', ['setKid', 'setProductsNum']),
-    takeUp() {
-      this.takeupMsg = !this.takeupMsg
+    ...mapActions("auth", ["setKid", "setProductsNum"]),
+    takeUp () {
+      this.takeupMsg = !this.takeupMsg;
     },
-    goLink(item) {
-      this.$router.push(item)
+    goLink (item) {
+      this.$router.push(item);
     },
     // 获取订单id列表
-    getPayList(item) {
-      this.loading = true
-      this.payListForm.orderId = matchSplits('order')
+    getPayList (item) {
+      this.loading = true;
+      this.payListForm.orderId = matchSplits("order");
       wepay.webPay(this.payListForm).then(response => {
-        this.loading = false
+        this.loading = false;
         if (response.status === 100100) {
           this.$message({
             showClose: true,
-            type: 'error',
+            type: "error",
             message: response.msg
-          })
-          return false
+          });
+          return false;
         } else if (response.status === 0) {
-          this.orderDetail = response.data.data.orderDetail
-          this.orderCurriculumLists = response.data.data.orderCurriculumLists
-          this.codeData.code_url = response.data.code_url
-          this.codeData.qr_code = response.data.qr_code
-          this.$bus.$emit('load', false)
-          this.shopCartList()
-          if (item === 'recode') {
-            this.$bus.$emit('addPaySubmit')
+          this.orderDetail = response.data.data.orderDetail;
+          this.orderCurriculumLists = response.data.data.orderCurriculumLists;
+          this.codeData.code_url = response.data.code_url;
+          this.codeData.qr_code = response.data.qr_code;
+          this.$bus.$emit("load", false);
+          this.shopCartList();
+          if (item === "recode") {
+            this.$bus.$emit("addPaySubmit");
           }
-        }else if(response.status === 100110){
-            this.$router.push('/shop/payPublic?orderID=' + this.payListForm.orderId)
+        } else if (response.status === 100110) {
+          this.$router.push(
+            "/shop/payPublic?orderID=" + this.payListForm.orderId
+          );
         }
-      })
+      });
     },
-    shopCartList() {
+    shopCartList () {
       wepay.shopCartList().then(response => {
         let len = {
           pn: response.data.curriculumCartList.length
-        }
-        this.setProductsNum(len)
-      })
+        };
+        this.setProductsNum(len);
+      });
     },
     //打开问题弹窗
-    showRpt() {
-      this.showReportBug = true
+    showRpt () {
+      this.showReportBug = true;
     },
     //关闭问题弹窗
-    closeReport() {
-      this.showReportBug = false
+    closeReport () {
+      this.showReportBug = false;
     }
   },
-  mounted() {
-    if (persistStore.get('token')) {
-      this.getPayList()
+  mounted () {
+    if (persistStore.get("token")) {
+      this.getPayList();
     } else {
-      message(this, 'error', '您未登录,请先登录!')
-      this.$router.push('/')
-      this.$bus.$emit('loginShow', true)
+      message(this, "error", "您未登录,请先登录!");
+      this.$router.push("/");
+      this.$bus.$emit("loginShow", true);
     }
-    setPagesHeight()
+    setPagesHeight();
 
-    this.$bus.$on('getPayList', data => {
-      this.getPayList(data)
-    })
+    this.$bus.$on("getPayList", data => {
+      this.getPayList(data);
+    });
   },
-  updated() {
-    setTitle('支付中心-1911学堂')
+  updated () {
+    setTitle("支付中心-1911学堂");
   }
-}
+};
 </script>
 <style scoped lang="scss">
-@import '~assets/style/shop/wepay';
+@import "~assets/style/shop/wepay";
 </style>
-
