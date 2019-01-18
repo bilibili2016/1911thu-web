@@ -1,6 +1,6 @@
 <template>
   <div
-    class="news-list"
+    class="news-list outNewsList"
     v-loading="load"
   >
     <v-banner
@@ -10,12 +10,25 @@
     ></v-banner>
     <!-- 面包屑组件 -->
     <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
-    <div @click="getNewInfoList"></div>
-    <v-card
-      :newsList="newsList"
-      :config="config"
-      :linksix='linksix'
-    ></v-card>
+    <div class="outNew-con">
+      <div class="con-top">
+        <span class="left">新闻标题</span>
+        <span class="right">新闻来源</span>
+      </div>
+      <div class="con-items">
+        <div
+          class="item"
+          v-for="(item,index) in outNewsList"
+          :key="index"
+        >
+          <span
+            class="left"
+            @click="handleLink(item.media_link)"
+          >{{item.title}}</span>
+          <span class="right">{{item.source}}</span>
+        </div>
+      </div>
+    </div>
     <div
       class="pagination"
       v-show="!load"
@@ -38,14 +51,12 @@
 
 <script>
 import CustomBanner from "@/components/common/Banner.vue";
-import CustomCard from "@/pages/home/news/components/List.vue";
 import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import { news } from "~/lib/v1_sdk/index";
 import { setTitle } from "~/lib/util/helper";
 
 export default {
   components: {
-    "v-card": CustomCard,
     "v-banner": CustomBanner,
     "v-breadcrumb": BreadCrumb
   },
@@ -55,63 +66,59 @@ export default {
         type: "news",
         home: true, //是否显示 首页
         position: true, //是否显示 当前位置
-        text: "学堂资讯"
+        text: "媒体报道"
       },
       load: true,
       bannerImg: "http://static-image.1911edu.com/newList-bg.png",
-      linksix: "/news/detail",
       configs: {
-        banner_type: "news"
+        banner_type: "outNews"
       },
-      config: {
-        card_type: "newLists"
-      },
-      newsList: [],
-      newsInfoForm: {
-        pages: 1,
-        limits: 6
-      },
+      outNewsList: [],
       pagemsg: {
         page: 1,
-        pagesize: 6,
+        pagesize: 20,
         total: null
+      },
+      outNewsForm: {
+        page: 1,
+        limits: 20,
+        type: 2,
+        isRecommend: ""
       }
     };
   },
   mounted() {
-    this.getNewInfoList();
-    setTitle("学堂资讯-1911学堂");
+    this.getOutNewInfoList();
+    setTitle("媒体报道-1911学堂");
   },
   methods: {
-    getNewInfoList() {
-      this.newsInfoForm.pages = 1;
-      this.newsInfoForm.limits = 6;
-      news.getNewInfoList(this.newsInfoForm).then(response => {
+    getOutNewInfoList() {
+      this.outNewsForm.page = 1;
+      this.outNewsForm.limits = 20;
+      news.getNewInfoList(this.outNewsForm).then(response => {
         if (response.status === 0) {
           this.pagemsg.total = Number(response.data.pageCount);
-          this.newsList = response.data.newsList;
+          this.outNewsList = response.data.newsList;
           this.load = false;
         }
       });
     },
     selectPages(val) {
-      this.newsInfoForm.pages = val;
+      this.outNewsForm.page = val;
       this.pagemsg.page = val;
-      this.newsInfoForm.limits = this.pagemsg.pagesize;
-      news.getNewInfoList(this.newsInfoForm).then(response => {
+      this.outNewsForm.limits = this.pagemsg.pagesize;
+      news.getNewInfoList(this.outNewsForm).then(response => {
         this.pagemsg.total = Number(response.data.pageCount);
-        this.newsList = response.data.newsList;
+        this.outNewsList = response.data.newsList;
       });
       document.body.scrollTop = document.documentElement.scrollTop = 0;
+    },
+    handleLink(link) {
+      window.open(link);
     }
   }
 };
 </script>
 <style scoped lang="scss">
-.news-list {
-  padding-bottom: 40px;
-  .center {
-    margin-top: 40px;
-  }
-}
+@import "~assets/style/news/outNewsList";
 </style>

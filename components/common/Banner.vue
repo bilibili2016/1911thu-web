@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="config.banner_type === 'news'">
+    <template v-if="config.banner_type === 'news' || config.banner_type === 'outNews'">
       <div class="news-banner">
         <img
           :src="bannerImg"
@@ -14,6 +14,15 @@
           <span class="line"></span>
           <p class="small-title">学堂资讯</p>
           <p class="desc">School Information</p>
+        </div>
+        <div
+          v-if="config.banner_type === 'outNews'"
+          class="newLsit-desc"
+        >
+          <p class="title">NEWS</p>
+          <span class="line"></span>
+          <p class="small-title">媒体报道</p>
+          <p class="desc">Media Coverage</p>
         </div>
       </div>
     </template>
