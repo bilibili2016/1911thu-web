@@ -6,12 +6,17 @@
         :link="link"
       ></v-title>
       <div class="newsItems clearfix">
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
+        <div
+          class="item"
+          v-for="(item,index) in outNewsListData"
+          :key="index"
+          @click="handleLink(item.media_link)"
+        >
+          <img
+            :src="item.picture"
+            alt=""
+          >
+        </div>
       </div>
     </el-row>
   </div>
@@ -22,9 +27,14 @@ import CustomTitle from "@/components/common/Title.vue";
 
 import { mapActions } from "vuex";
 export default {
-  props: ["config", "data", "title", "link"],
+  props: ["outNewsListData", "config", "data", "title", "link"],
   components: {
     "v-title": CustomTitle
+  },
+  methods: {
+    handleLink(link) {
+      window.open(link);
+    }
   }
 };
 </script>

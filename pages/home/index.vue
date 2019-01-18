@@ -66,6 +66,9 @@
         class="index-new bgfff"
       ></v-info>
       <v-outnews
+        v-if="outNewsListData.length"
+        v-loading="outNewsLoading"
+        :outNewsListData="outNewsListData"
         :title="outNewsTitle"
         :link="outNewsLink"
         class="index-outNews bgf8f8fd"
@@ -95,6 +98,7 @@ export default {
   },
   data() {
     return {
+      outNewsLoading: false,
       bannerLoading: false,
       infoLoading: false,
       projectLoading: false,
@@ -163,6 +167,7 @@ export default {
       evaluateData: [],
       newsListData: [],
       outNewData: [],
+      outNewsListData: [],
       ding: {
         card_type: "ding"
       },
@@ -212,18 +217,20 @@ export default {
         types: null,
         isRecommend: 1
       },
-      newsInfoForm: {
-        page: 1,
-        limits: 4
-      },
       projectForm: {
         pages: 1,
         limits: 2
       },
       loginMsg: false,
       newsInfoForm: {
-        pages: 1,
+        page: 1,
         limits: 4
+      },
+      outNewsForm: {
+        page: 1,
+        limits: 10,
+        type: 2,
+        isRecommend: 1
       }
     };
   },
@@ -244,6 +251,7 @@ export default {
       // this.getPartnerList(),
       // this.getPointList()
       this.getProjectList();
+      this.getOutNewsList();
       // this.$bus.$emit('getClassifyList')
     },
     // 获取banner
@@ -323,6 +331,16 @@ export default {
           this.infoLoading = false;
           this.newsListData = response.data.newsList;
           this.outNewData = response.data.newsList[0];
+        }
+      });
+    },
+    //获取媒体报道
+    getOutNewsList() {
+      this.outNewsLoading = true;
+      news.getNewInfoList(this.outNewsForm).then(response => {
+        if (response.status === 0) {
+          this.outNewsLoading = false;
+          this.outNewsListData = response.data.newsList;
         }
       });
     },
