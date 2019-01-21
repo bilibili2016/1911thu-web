@@ -21,16 +21,9 @@
           class="newsInner"
           v-html="newsDetail.content"
         ></div>
-        <h5
-          class="author"
-          v-if="newsDetail.author"
-        >责任编辑：{{newsDetail.author}}</h5>
+        <h5 class="author" v-if="newsDetail.author">责任编辑：{{newsDetail.author}}</h5>
         <div class="next clearfix">
-          <span
-            class="fl"
-            v-if="beforeNews"
-            @click="getNewInfoDetail(beforeNews.id)"
-          >上一篇&nbsp;&nbsp;&nbsp;&nbsp;{{beforeNews.title}}</span>
+          <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)" >上一篇&nbsp;&nbsp;&nbsp;&nbsp;{{beforeNews.title}}</span>
           <span
             class="fr"
             v-if="afterNews"
