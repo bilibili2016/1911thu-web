@@ -2,50 +2,19 @@
   <div class="headerBox">
     <!-- 测试 123 -->
     <!-- 优惠主题入口 -->
-    <v-discount
-      v-if="bannerMsg"
-      @closeBanner="closeBanner"
-    ></v-discount>
+    <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
-      <div
-        class="header-fl clearfix"
-        :class="{big:isBig}"
-      >
+      <div class="header-fl clearfix" :class="{big:isBig}">
         <v-logo @handleLink="handleLink"></v-logo>
-        <v-homeselect
-          :projectArr="projectArr"
-          :categoryArr="categoryArr"
-        ></v-homeselect>
+        <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
       </div>
-      <div
-        class="header-fr clearfix"
-        :class="{big:isBig}"
-      >
+      <div class="header-fr clearfix" :class="{big:isBig}">
         <v-search @handleSearch="handleSearch"></v-search>
-        <v-enter
-          class="HREntry"
-          :isShowLRBtn="isShowLRBtn"
-          @handleLink="handleLink"
-          @addEcg="handleAddEcg"
-        ></v-enter>
-        <v-lrbtn
-          v-if="!isShowLRBtn"
-          @login="login"
-          @register="register"
-        ></v-lrbtn>
-        <v-headerimg
-          v-else
-          :data="user"
-          @handleLinkProfile="handleLinkProfile"
-          @handleSignOut="handleSignOut"
-        ></v-headerimg>
+        <v-enter class="HREntry" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter>
+        <v-lrbtn v-if="!isShowLRBtn" @login="login" @register="register"></v-lrbtn>
+        <v-headerimg v-else :data="user" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
       </div>
-      <v-code
-        v-show="bindForm.isBind"
-        :bindForm="bindForm"
-        @detection="handleDetection"
-        @closeEcg="handleCloseEcg"
-      ></v-code>
+      <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
       <v-login></v-login>
     </div>
   </div>
