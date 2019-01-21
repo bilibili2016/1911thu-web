@@ -45,10 +45,10 @@ export default {
         this.showNetwork = true;
       }
       let pathName = window.location.pathname;
-      console.log(pathName, "kkkkk");
-
-      //路有改变判断登录状态
-      this.$bus.$emit("getUserInfo");
+      if (pathName != "/backend/news/newsInfo") {
+        //路有改变判断登录状态,后台预览页不需要验证
+        this.$bus.$emit("getUserInfo");
+      }
     },
     addHandler(element, type, handler) {
       if (element.addEventListener) {
