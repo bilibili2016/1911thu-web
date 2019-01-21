@@ -47,7 +47,7 @@ export default {
       let pathName = window.location.pathname;
       if (
         pathName != "/backend/news/newsInfo" &&
-        pathName != "/backend/course/courseDetail" &&
+        pathName != "/backend/course/coursedetail" &&
         pathName != "/backend/project/projectDetail"
       ) {
         //路有改变判断登录状态,后台预览页不需要验证
