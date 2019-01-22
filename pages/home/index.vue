@@ -321,6 +321,7 @@ export default {
     this.$bus.$on("refetchData", data => {
       this.getAll();
     });
+
     // this.$bus.$emit('bannerShow', false)
   }
 };

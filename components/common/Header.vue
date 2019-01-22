@@ -65,7 +65,6 @@ export default {
   },
   data() {
     return {
-      isShowLRBtn: false,
       isBig: false,
       // 顶部列表
       curruntForm: {
@@ -89,10 +88,10 @@ export default {
       loadLogin: false,
       search: "",
       shoppingCartNum: 1,
-
       bgMsg: false,
+      isShowLRBtn: false,
       user: {
-        userImg: ""
+        userImg: "http://static-image.1911edu.com/defaultHeadImg.jpg"
       },
       QRcode: "http://static-image.1911edu.com/wechatLogin.png",
 
@@ -407,7 +406,6 @@ export default {
         header.getUserInfo().then(res => {
           this.isSingleLogin(res);
         });
-
         this.isShowLRBtn = true;
       } else {
         this.isShowLRBtn = false;
@@ -482,6 +480,17 @@ export default {
     }
   },
   mounted() {
+    let pathName = window.location.pathname;
+    if (
+      pathName != "/backend/news/newsInfo" &&
+      pathName != "/backend/course/coursedetail" &&
+      pathName != "/backend/project/projectDetail"
+    ) {
+      //路有改变判断登录状态,后台预览页不需要验证
+      // this.$bus.$emit("getUserInfo");
+      this.getUserInfo();
+    }
+
     this.resize();
     window.addEventListener("resize", this.resize);
     // 当前浏览器是否是移动端

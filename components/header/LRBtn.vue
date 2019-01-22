@@ -8,12 +8,12 @@
 <script>
 export default {
   methods: {
-    login () {
-      this.$emit('login')
+    login() {
+      this.$emit("login");
     },
-    register () {
-      this.$emit('register')
+    register() {
+      this.$emit("register");
     }
   }
-}
+};
 </script>

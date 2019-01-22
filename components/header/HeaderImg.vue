@@ -1,19 +1,11 @@
 <template>
   <div class="headImg">
     <span>
-      <img
-        :src="data.userImg"
-        alt=""
-        @click="handleLinkProfile('tab-first')"
-      >
+      <img :src="data.userImg" alt="" @click="handleLinkProfile('tab-first')">
     </span>
     <!-- 个人中心下拉框 -->
     <ul class="subPages">
-      <li
-        v-for="(item,index) in subPagesData"
-        :key="index"
-        @click="handleLinkProfile(item.link)"
-      >{{item.text}}</li>
+      <li v-for="(item,index) in subPagesData" :key="index" @click="handleLinkProfile(item.link)">{{item.text}}</li>
       <li @click="handleSignOut">退出</li>
     </ul>
   </div>

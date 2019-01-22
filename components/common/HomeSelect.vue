@@ -1,12 +1,6 @@
 <template>
   <div class="headerPage clearfix">
-    <div
-      class="item"
-      :class="{active:changeActive==item.id}"
-      v-for="(item,index) in pages"
-      :key="index"
-      @click="handleClick(item,index)"
-    >{{item.title}}</div>
+    <div class="item" :class="{active:changeActive==item.id}" v-for="(item,index) in pages" :key="index" @click="handleClick(item,index)">{{item.title}}</div>
   </div>
 </template>
 
