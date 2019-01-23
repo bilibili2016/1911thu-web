@@ -1,38 +1,21 @@
 <template>
   <div>
     <!-- 无数据 -->
-    <v-nodata
-      :pageType="pageType"
-      v-if="isNoMsg"
-    ></v-nodata>
-    <div
-      class="affirmOrder"
-      ref="affirmOrder"
-      v-else
-    >
-      <div
-        class="contain"
-        v-loading="loadGoods"
-      >
+    <v-nodata :pageType="pageType" v-if="isNoMsg"></v-nodata>
+    <div class="affirmOrder" ref="affirmOrder" v-else>
+      <div class="contain" v-loading="loadGoods">
         <!-- 头部banner -->
         <v-banner :config="affirmOrder"></v-banner>
         <div class="main">
           <div class="goodsList">
-            <v-backshopcart
-              @handleLinkShopCart="handleLinkShopCart"
-              :config="affirmOrder"
-              @handleQuestion="handleReport"
-            ></v-backshopcart>
+            <v-backshopcart @handleLinkShopCart="handleLinkShopCart" :config="affirmOrder" @handleQuestion="handleReport"></v-backshopcart>
             <!-- 商品列表 -->
             <!-- <div class="goods">
               <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
             </div> -->
 
             <div class="goods">
-              <v-list
-                :config="affirmOrder"
-                :data="curriculumLists"
-              ></v-list>
+              <v-list :config="affirmOrder" :data="curriculumLists"></v-list>
             </div>
             <!-- 商品信息 -->
             <v-orderinfo :data="orderinfo"></v-orderinfo>
@@ -41,12 +24,17 @@
         </div>
       </div>
     </div>
+    <!-- 超出限制提醒 -->
+    <div class="alertMask" v-show="isShowAlert">
+      <div class="alertPop">
+        <i class="el-icon-close" @click="handlePopClick"></i>
+        <img src="http://static-image.1911edu.com/alert.png" alt="">
+        <p>{{alertText}}</p>
+        <el-button @click="handleConfirmClick">知道了</el-button>
+      </div>
+    </div>
     <!-- 报告问题 -->
-    <v-report
-      :config="config"
-      :showReportBug="showReportBug"
-      @closeReport="closeReport"
-    ></v-report>
+    <v-report :config="config" :showReportBug="showReportBug" @closeReport="closeReport"></v-report>
   </div>
 </template>
 
@@ -81,6 +69,8 @@ export default {
   },
   data() {
     return {
+      isShowAlert: false,
+      alertText: "",
       affirmOrder: {
         type: "affirmOrder",
         text: "确认订单"
@@ -155,6 +145,24 @@ export default {
   },
 
   methods: {
+    handlePopClick() {
+      this.isShowAlert = false;
+    },
+    //返回到上一页
+    handleConfirmClick() {
+      if (this.customId != -1) {
+        if (this.orderType == 2) {
+          this.$router.go(-1);
+        } else {
+          //定制项目返回到上一页是定制项目的编辑页
+          this.$router.push(
+            `/project/customerProject?sid=${this.customId}&edit=2`
+          );
+        }
+      } else {
+        this.$router.go(-1);
+      }
+    },
     // 报告问题
     handleReport() {
       this.showReportBug = true;
@@ -189,7 +197,7 @@ export default {
       this.$router.push("/shop/shoppingcart");
     },
     // 点击提交订单
-    handleSubmitOrder() {
+    handleSubmitOrder(price) {
       affirmOrder.commitOrder().then(res => {
         if (res.status === 0) {
           this.$router.push("/shop/wepay?order=" + res.data.id + "&type=1");
@@ -283,7 +291,14 @@ export default {
       });
     },
     // 提交订单
-    handleSubmit() {
+    handleSubmit(price) {
+      if (price > 10000000) {
+        this.isShowAlert = true;
+        this.alertText =
+          "订单金额超过单笔订单限额(1000万),请将订单拆分后重新下单！";
+        return false;
+      }
+
       if (this.customId != -1) {
         if (this.orderType == 2) {
           this.handleVipConfirm();
