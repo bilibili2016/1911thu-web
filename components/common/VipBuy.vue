@@ -1,18 +1,9 @@
 <template>
   <div class="vipBuy">
-    <div
-      class="mask"
-      v-show="vipPopShow"
-    >
-      <div
-        class="vipPop"
-        v-show="!isShowAlert"
-      >
+    <div class="mask" v-show="vipPopShow">
+      <div class="vipPop" v-show="!isShowAlert">
         <div class="pop-title">入学通知书</div>
-        <i
-          class="el-icon-close"
-          @click="handlePopClick"
-        ></i>
+        <i class="el-icon-close" @click="handlePopClick"></i>
         <div class="con">
           <p>亲爱的学员：您好！</p>
           <p class="tab">欢迎您加入1911学堂{{pageText}}！</p>
@@ -25,48 +16,22 @@
         <div class="num clearfix">
           <div class="numText">请选择入学人数</div>
           <div class="numOpr">
-            <span
-              class="numBtn sub "
-              @click="delNumber"
-            >-</span>
-            <span class="inputText"><input
-                type="text"
-                v-model="vipData.number"
-                @focus="handleFocus"
-                @blur="changeNumber"
-              ></span>
-            <span
-              class="numBtn add"
-              @click="addNumber"
-            >+</span>
+            <span class="numBtn sub " @click="delNumber">-</span>
+            <span class="inputText"><input type="text" v-model="vipData.number" @focus="handleFocus" @blur="changeNumber"></span>
+            <span class="numBtn add" @click="addNumber">+</span>
           </div>
 
         </div>
         <!-- <div class="studyFee">学费：入学学费{{vipInfo.present_price}}元/人</div> -->
         <div class="btn">
-          <span
-            class="cancel"
-            @click="handlePopClick"
-          >取消</span>
-          <span
-            class="confirm"
-            @click="handleConfirm"
-          >下一步</span>
+          <span class="cancel" @click="handlePopClick">取消</span>
+          <span class="confirm" @click="handleConfirm">下一步</span>
         </div>
       </div>
 
-      <div
-        class="alertPop"
-        v-show="isShowAlert"
-      >
-        <i
-          class="el-icon-close"
-          @click="closeAlertPop"
-        ></i>
-        <img
-          src="http://static-image.1911edu.com/alert.png"
-          alt=""
-        >
+      <div class="alertPop" v-show="isShowAlert">
+        <i class="el-icon-close" @click="closeAlertPop"></i>
+        <img src="http://static-image.1911edu.com/alert.png" alt="">
         <p>{{alertText}}</p>
         <el-button @click="closeAlertPop">知道了</el-button>
       </div>
@@ -83,7 +48,7 @@ export default {
       pageText: "",
       alertShow: false,
       isShowAlert: false,
-      alertText: "商品数量不能大于9999",
+      alertText: "商品数量不能大于999",
       lastNum: "",
       vipData: {
         vipId: "",
@@ -111,10 +76,10 @@ export default {
     //加
     addNumber() {
       this.vipData.number++;
-      if (this.vipData.number >= 9999) {
+      if (this.vipData.number >= 999) {
         this.isShowAlert = true;
-        this.alertText = "商品数量不能大于9999";
-        this.vipData.number = 9999;
+        this.alertText = "商品数量不能大于999";
+        this.vipData.number = 999;
       }
     },
     // 购买人数输入框获取焦点记录当前数字
@@ -136,9 +101,9 @@ export default {
         this.vipData.number = this.lastNum;
         return false;
       }
-      if (this.vipData.number > 9999) {
+      if (this.vipData.number > 999) {
         this.isShowAlert = true;
-        this.alertText = "商品数量不能大于9999";
+        this.alertText = "商品数量不能大于999";
         this.vipData.number = this.lastNum;
         return false;
       }

@@ -1,63 +1,29 @@
 <template>
-  <div
-    class="shopCart"
-    ref="shopCart"
-  >
+  <div class="shopCart" ref="shopCart">
     <!-- 购物车列表 -->
-    <div
-      class="main"
-      v-loading="loding"
-    >
+    <div class="main" v-loading="loding">
       <div class="table">
         <!-- 头部 -->
-        <div
-          class="tableHeader"
-          v-if="!isNoMsg"
-        >
-          <el-checkbox
-            v-model="selectAll"
-            @change="handleSelectAll"
-          >全选</el-checkbox>
+        <div class="tableHeader" v-if="!isNoMsg">
+          <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseName">课程</span>
           <span class="price">单价</span>
           <span class="operation">操作</span>
         </div>
-        <div
-          style="min-height:500px;"
-          v-if="!isNoMsg"
-        >
+        <div style="min-height:500px;" v-if="!isNoMsg">
           <div class="maintable">
             <!-- 课程全选 checkbox-->
             <!-- 无课程不显示全选 -->
-            <div
-              class="select-all-course"
-              v-if="this.courseList.length> 0"
-            >
-              <el-checkbox
-                v-model="selectAllCourse"
-                @change="handleSelectCourseAll"
-              >课程</el-checkbox>
+            <div class="select-all-course" v-if="this.courseList.length> 0">
+              <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
             </div>
             <!-- 课程列表 start -->
             <!-- <v-list :config="courseType" :data="courseList" v-if="!isNoMsg"></v-list> -->
-            <div
-              class="tableBody"
-              v-if="!isNoMsg"
-            >
-              <div
-                v-for="(course,index) in courseList"
-                :key="index"
-              >
-                <el-checkbox
-                  v-model="course.checkMsg"
-                  @change="handleSelectChange(course,index)"
-                ></el-checkbox>
+            <div class="tableBody" v-if="!isNoMsg">
+              <div v-for="(course,index) in courseList" :key="index">
+                <el-checkbox v-model="course.checkMsg" @change="handleSelectChange(course,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
-                  <img
-                    class="fl"
-                    :src="course.picture"
-                    @click="goDetail(course)"
-                  >
+                  <img class="fl" :src="course.picture" @click="goDetail(course)">
                   <div class="fl">
                     <h4 @click="goDetail(course)">{{course.title}}</h4>
                     <h6>{{course.study_time}}学时</h6>
@@ -67,10 +33,7 @@
                 <div class="coursePrice">
                   ￥{{course.present_price}}
                 </div>
-                <div
-                  class="courseOperation"
-                  @click="handleDeleteCourse(course,index)"
-                >
+                <div class="courseOperation" @click="handleDeleteCourse(course,index)">
                   删除
                 </div>
               </div>
@@ -78,41 +41,18 @@
             <!-- 课程列表 end -->
 
             <!-- 项目全选 checkbox-->
-            <div
-              class="select-all-project"
-              v-if="this.projectList.length> 0"
-            >
-              <el-checkbox
-                v-model="selectAllProject"
-                @change="handleSelectProjectAll"
-              >项目</el-checkbox>
+            <div class="select-all-project" v-if="this.projectList.length> 0">
+              <el-checkbox v-model="selectAllProject" @change="handleSelectProjectAll">项目</el-checkbox>
             </div>
             <!-- 项目列表 start-->
             <!-- <v-list :config="projectType" :data="projectList" v-if="!isNoMsg"></v-list> -->
-            <div
-              class="tableBody"
-              v-if="!isNoMsg"
-            >
-              <div
-                v-for="(project,index) in projectList"
-                :key="index"
-              >
-                <el-checkbox
-                  v-model="project.checkMsg"
-                  @change="handleSelectProjectChange(project,index)"
-                ></el-checkbox>
+            <div class="tableBody" v-if="!isNoMsg">
+              <div v-for="(project,index) in projectList" :key="index">
+                <el-checkbox v-model="project.checkMsg" @change="handleSelectProjectChange(project,index)"></el-checkbox>
                 <div class="courseInfo clearfix">
                   <div class="project-img">
-                    <img
-                      class="fl"
-                      :src="project.picture"
-                      @click="goProjectDetail(project)"
-                    >
-                    <img
-                      :src="projectImg"
-                      alt=""
-                      class="pmsg"
-                    >
+                    <img class="fl" :src="project.picture" @click="goProjectDetail(project)">
+                    <img :src="projectImg" alt="" class="pmsg">
                   </div>
 
                   <div class="fl">
@@ -124,10 +64,7 @@
                 <div class="coursePrice">
                   ￥{{project.present_price}}
                 </div>
-                <div
-                  class="courseOperation"
-                  @click="handleDeleteProject(project,index)"
-                >
+                <div class="courseOperation" @click="handleDeleteProject(project,index)">
                   删除
                 </div>
               </div>
@@ -136,21 +73,11 @@
           <!-- 项目列表 end -->
 
           <!-- 失效课程列表 start -->
-          <div
-            class="tableBody loseEfficacy"
-            v-if="!isNoMsg"
-          >
-            <div
-              v-for="(course,index) in loseEfficacyc"
-              :key="index"
-            >
+          <div class="tableBody loseEfficacy" v-if="!isNoMsg">
+            <div v-for="(course,index) in loseEfficacyc" :key="index">
               <div class="lost">失效</div>
               <div class="courseInfo clearfix">
-                <img
-                  class="fl"
-                  :src="course.picture"
-                  @click="goDetail(course)"
-                >
+                <img class="fl" :src="course.picture" @click="goDetail(course)">
                 <div class="fl">
                   <h4 @click="goDetail(course)">{{course.title}}</h4>
                   <h6>{{course.study_time}}学时</h6>
@@ -160,10 +87,7 @@
               <div class="coursePrice">
                 ￥{{course.present_price}}
               </div>
-              <div
-                class="courseOperation"
-                @click="handleDeleteCourse(course,index)"
-              >
+              <div class="courseOperation" @click="handleDeleteCourse(course,index)">
                 删除
               </div>
             </div>
@@ -171,27 +95,13 @@
           <!-- 失效课程列表 end -->
 
           <!-- 失效项目列表 start -->
-          <div
-            class="tableBody loseEfficacy"
-            v-if="!isNoMsg"
-          >
-            <div
-              v-for="(project,index) in loseEfficacyp"
-              :key="index"
-            >
+          <div class="tableBody loseEfficacy" v-if="!isNoMsg">
+            <div v-for="(project,index) in loseEfficacyp" :key="index">
               <div class="lost">失效</div>
               <div class="courseInfo clearfix">
                 <div class="project-img">
-                  <img
-                    class="fl"
-                    :src="project.picture"
-                    @click="goProjectDetail(project)"
-                  >
-                  <img
-                    :src="projectImg"
-                    alt=""
-                    class="pmsg"
-                  >
+                  <img class="fl" :src="project.picture" @click="goProjectDetail(project)">
+                  <img :src="projectImg" alt="" class="pmsg">
                 </div>
 
                 <div class="fl">
@@ -203,10 +113,7 @@
               <div class="coursePrice">
                 ￥{{project.present_price}}
               </div>
-              <div
-                class="courseOperation"
-                @click="handleDeleteProject(project,index)"
-              >
+              <div class="courseOperation" @click="handleDeleteProject(project,index)">
                 删除
               </div>
             </div>
@@ -219,84 +126,34 @@
         <!-- </div> -->
 
         <!-- 无课程以及项目显示提示  -->
-        <v-nodata
-          class="shopCartNoData"
-          :pageType="pageType"
-          v-if="isNoMsg"
-        ></v-nodata>
+        <v-nodata class="shopCartNoData" :pageType="pageType" v-if="isNoMsg"></v-nodata>
 
         <div id="computedHeight"></div>
-        <div
-          class="tableFooter"
-          id="tableFooter"
-          ref="tableFooter"
-          :class="{tableFooterFixed:isFixed}"
-          v-if="(courseList && courseList.length > 0) || (projectList&& projectList.length>0)"
-        >
-          <el-checkbox
-            v-model="selectAll"
-            @change="handleSelectAll"
-          >全选</el-checkbox>
+        <div class="tableFooter" id="tableFooter" ref="tableFooter" :class="{tableFooterFixed:isFixed}" v-if="(courseList && courseList.length > 0) || (projectList&& projectList.length>0)">
+          <el-checkbox v-model="selectAll" @change="handleSelectAll">全选</el-checkbox>
           <span class="courseNumber clearfix">
-            <span
-              class="deleteChecked"
-              @click="handleDeleteAll"
-            >删除选中的内容</span>
+            <span class="deleteChecked" @click="handleDeleteAll">删除选中的内容</span>
             <span class="person">购买人数：</span>
             <!-- onselectstart方法为禁止多次点击选中文本 -->
-            <span
-              class="number clearfix"
-              unselectable="on"
-              onselectstart="return false;"
-            >
-              <span
-                class="fl minus"
-                style="color:#93999F"
-                v-if="numForm.number<=1"
-              >
+            <span class="number clearfix" unselectable="on" onselectstart="return false;">
+              <span class="fl minus" style="color:#93999F" v-if="numForm.number<=1">
                 <i>-</i>
               </span>
-              <span
-                class="fl minus"
-                v-else
-                @click="delNumber"
-              >
+              <span class="fl minus" v-else @click="delNumber">
                 <i>-</i>
               </span>
-              <input
-                type="text"
-                class="fl num"
-                v-model="numForm.number"
-                @focus="handleFocus"
-                @blur="changeNumber"
-              >
-              <span
-                class="fl add"
-                v-if="numForm.number>=9999"
-                @click="moreNumber"
-              >
+              <input type="text" class="fl num" v-model="numForm.number" @focus="handleFocus" @blur="changeNumber">
+              <span class="fl add" v-if="numForm.number>=999" @click="moreNumber">
                 <i>+</i>
               </span>
-              <span
-                class="fl add"
-                v-else
-                @click="addNumber"
-              >
+              <span class="fl add" v-else @click="addNumber">
                 <i>+</i>
               </span>
             </span>
           </span>
           <span class="commitOrder fr">
-            <el-button
-              class="notGray"
-              @click="showCommit"
-              v-if="canSubmit"
-            >去支付</el-button>
-            <el-button
-              class="isGray"
-              v-else
-              @click="showMsg"
-            >去支付</el-button>
+            <el-button class="notGray" @click="showCommit" v-if="canSubmit">去支付</el-button>
+            <el-button class="isGray" v-else @click="showMsg">去支付</el-button>
           </span>
           <span class="allPrice fr">￥{{prices}}</span>
           <span class="checkedNUmber fr">已选择
@@ -305,19 +162,10 @@
       </div>
     </div>
     <!-- 超出限制提醒 -->
-    <div
-      class="alertMask"
-      v-show="isShowAlert"
-    >
+    <div class="alertMask" v-show="isShowAlert">
       <div class="alertPop">
-        <i
-          class="el-icon-close"
-          @click="handlePopClick"
-        ></i>
-        <img
-          src="http://static-image.1911edu.com/alert.png"
-          alt=""
-        >
+        <i class="el-icon-close" @click="handlePopClick"></i>
+        <img src="http://static-image.1911edu.com/alert.png" alt="">
         <p>{{alertText}}</p>
         <el-button @click="handlePopClick">知道了</el-button>
       </div>
@@ -350,7 +198,7 @@ export default {
       noMsg: "http://static-image.1911edu.com/shopCart-empty.png",
       lastNum: "",
       isShowAlert: false,
-      alertText: "商品数量不能大于9999",
+      alertText: "商品数量不能大于999",
       courseType: {
         type: "course"
       },
@@ -875,7 +723,6 @@ export default {
     showCommit() {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
       // 否则的话就提醒如何绑定
-
       if (this.numForm.number == "1") {
         shopcart.existCourse().then(res => {
           if (
@@ -950,7 +797,7 @@ export default {
     },
     moreNumber() {
       this.isShowAlert = true;
-      this.alertText = "商品数量不能大于9999";
+      this.alertText = "商品数量不能大于999";
     },
     // 购买人数输入框获取焦点记录当前数字
     handleFocus() {
@@ -974,11 +821,8 @@ export default {
       if (!/^[0-9]*$/.test(this.numForm.number) || this.numForm.number < 1) {
         this.numForm.number = 1;
       }
-      if (
-        !/^[0-9]*$/.test(this.numForm.number) ||
-        this.numForm.number >= 9999
-      ) {
-        this.numForm.number = 9999;
+      if (!/^[0-9]*$/.test(this.numForm.number) || this.numForm.number >= 999) {
+        this.numForm.number = 999;
       }
       this.numForm.beforeNumber = this.numForm.number;
       this.changeCartNumber();
