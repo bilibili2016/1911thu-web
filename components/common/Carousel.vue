@@ -34,7 +34,7 @@ import { store as persistStore } from '~/lib/core/store'
 import { open } from '@/lib/util/helper'
 export default {
   props: ['items', 'config', 'swiperData'],
-  data() {
+  data () {
     return {
       kidForm: {
         kids: ''
@@ -49,24 +49,21 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setKid']),
-    handleLink(img) {
+    handleLink (img) {
       // jump_type = 0  普通跳转 根据jump_url地址跳转
       // jump_type = 1  跳转至课程详情 jump_id 课程id
       // jump_type = 2  跳转至项目详情 jump_id 项目id
       if (img.jump_type == '0' && img.jump_url != '') {
-        window.open(img.jump_url)
+        if (/(http|https):\/\/([\w.]+\/?)\S*/.test(img.jump_url)) {
+          window.open(img.jump_url)
+        } else {
+          img.jump_url = 'http://' + img.jump_url
+          window.open(img.jump_url)
+        }
       }
       if (img.jump_type == '1' && img.jump_id != '') {
         this.courseUrl.kid = img.jump_id
         open(this.courseUrl)
-        // this.$router.push({
-        //   path: '/course/coursedetail',
-        //   query: {
-        //     kid: img.jump_id,
-        //     bid: '',
-        //     page: 0
-        //   }
-        // })
       }
       if (img.jump_type == '2' && img.jump_id != '') {
         this.$router.push({
@@ -78,10 +75,10 @@ export default {
         })
       }
     },
-    goDetail(news) {
+    goDetail (news) {
       this.$router.push('/home/news/' + news.id)
     },
-    setWidth() {
+    setWidth () {
       let Dwidth = document.body.clientWidth
       if (document.getElementsByClassName('el-carousel').length != 0) {
         if (Dwidth > 1920) {
@@ -94,7 +91,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.setWidth()
     window.onresize = () => {
       return (() => {
