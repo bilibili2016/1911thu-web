@@ -1229,7 +1229,7 @@ export default {
             this.userInfo.head_img = this.userInfo.head_img;
           } else {
             this.userInfo.head_img =
-              "http://static-image.1911edu.com/defaultHeadImg.jpg";
+              "http://static-image.1911edu.com/defaultHeadImg.png";
           }
         }
       });

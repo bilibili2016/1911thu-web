@@ -91,7 +91,7 @@ export default {
       bgMsg: false,
       isShowLRBtn: false,
       user: {
-        userImg: "http://static-image.1911edu.com/defaultHeadImg.jpg"
+        userImg: "http://static-image.1911edu.com/defaultHeadImg.png"
       },
       QRcode: "http://static-image.1911edu.com/wechatLogin.png",
 
