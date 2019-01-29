@@ -1,8 +1,8 @@
 <template>
   <div class="bottomBtn clearfix">
-    <p class="allPrice" v-if="config.type=='affirmOrder'">应付金额：￥{{data.goodsAmount}}</p>
-    <p class="allPrice" v-if="config.type=='customOrder'">应付金额：￥{{data.present_price}}</p>
-    <p class="allPrice" v-if="config.type=='vip'">应付金额：￥{{parseFloat(data.curriculumSum*data.price)}}</p>
+    <p class="allPrice" v-if="config.type=='affirmOrder'">应付金额：￥<span id="totalPrice">{{data.goodsAmount}}</span></p>
+    <p class="allPrice" v-if="config.type=='customOrder'">应付金额：￥<span id="totalPrice">{{data.present_price}}</span></p>
+    <p class="allPrice" v-if="config.type=='vip'">应付金额：￥<span id="totalPrice">{{parseFloat(data.curriculumSum*data.price)}}</span></p>
     <!-- <p class="allPrice">应付金额：￥{{data.goodsAmount}}</p> -->
     <div class="orderInfos" v-if="config.type=='customOrder'">
       <p>
@@ -18,29 +18,30 @@
 </template>
 
 <script>
-import { matchSplits } from '@/lib/util/helper'
+import { matchSplits } from "@/lib/util/helper";
 
 export default {
-  props: ['data', 'config'],
+  props: ["data", "config"],
   data() {
     return {
-      orderType: ''
-    }
+      orderType: ""
+    };
   },
   methods: {
     commitOrder() {
-      this.$emit('commitOrder')
+      let price = document.getElementById("totalPrice").innerHTML;
+      this.$emit("commitOrder", price);
     },
     showRpt() {
-      this.$emit('showRpt')
+      this.$emit("showRpt");
     }
   },
   mounted() {
-    this.orderType = matchSplits('type')
+    this.orderType = matchSplits("type");
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/shop/orderbtn.scss';
+@import "~assets/style/shop/orderbtn.scss";
 </style>

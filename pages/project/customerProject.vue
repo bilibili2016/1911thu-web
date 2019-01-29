@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="customerProject"
-    @click="documentHandler"
-  >
+  <div class="customerProject" @click="documentHandler">
     <div class="banner-cus">
       <div class="con">
         <div class="con-text">
@@ -17,24 +14,15 @@
       <div class="pro-step clearfix">
         <span class="step">1.填写项目定制信息</span>
         <span class="arrow">
-          <img
-            :src="imgUlr"
-            alt
-          >
+          <img :src="imgUlr" alt>
         </span>
         <span class="step">2.立即购买</span>
         <span class="arrow">
-          <img
-            :src="imgUlr"
-            alt
-          >
+          <img :src="imgUlr" alt>
         </span>
         <span class="step">3.支付</span>
         <span class="arrow">
-          <img
-            :src="imgUlr"
-            alt
-          >
+          <img :src="imgUlr" alt>
         </span>
         <span class="step step4">4.直接学习或绑定兑换码后学习</span>
       </div>
@@ -45,49 +33,29 @@
       <div class="con-item name clearfix">
         <div class="fl">项目名称：</div>
         <div class="fr">
-          <el-input
-            v-model.trim="projectForm.name"
-            maxlength="30"
-            placeholder="请输入项目名称"
-          ></el-input>
+          <el-input v-model.trim="projectForm.name" maxlength="30" placeholder="请输入项目名称"></el-input>
           <span class="input-inner">不超过30字</span>
         </div>
       </div>
       <div class="con-item desc clearfix">
         <div class="fl">项目简介：</div>
         <div class="fr">
-          <el-input
-            type="textarea"
-            v-model.trim="projectForm.desc"
-            :rows="3"
-            maxlength="500"
-            placeholder="请输入项目简介"
-            autosize
-          ></el-input>
+          <el-input type="textarea" v-model.trim="projectForm.desc" :rows="3" maxlength="500" placeholder="请输入项目简介" autosize></el-input>
         </div>
         <span class="input-inner">不超过500字</span>
       </div>
       <div class="con-item obj clearfix">
         <div class="fl">培训对象：</div>
         <div class="fr">
-          <el-radio
-            v-model="projectForm.objRadio"
-            label="1"
-          >党政/事业单位</el-radio>
-          <el-radio
-            v-model="projectForm.objRadio"
-            label="2"
-          >企业单位</el-radio>
+          <el-radio v-model="projectForm.objRadio" label="1">党政/事业单位</el-radio>
+          <el-radio v-model="projectForm.objRadio" label="2">企业单位</el-radio>
         </div>
       </div>
       <div class="con-item style clearfix">
         <div class="fl">培训方式：</div>
         <div class="fr">
           <!-- <el-radio v-model="projectForm.styleRadio" label="1">线上</el-radio> -->
-          <el-radio
-            v-model="projectForm.styleRadio"
-            label="2"
-          >混合式</el-radio>
+          <el-radio v-model="projectForm.styleRadio" label="2">混合式</el-radio>
           <!-- <el-radio v-model="projectForm.styleRadio" label="3">互动</el-radio> -->
           <i class="el-icon-question styleAsk">
             <div class="descript-text">
@@ -103,36 +71,18 @@
       <div class="con-item num clearfix">
         <div class="fl">培训人数：</div>
         <div class="fr selectFr">
-          <div
-            class="divClick"
-            @click.stop="handleNumSelect"
-          >
-            <el-input
-              placeholder="请输入1-9999的数字"
-              v-model="projectForm.trainNum"
-              maxlength="4"
-              @keyup.native="proving"
-            ></el-input>
+          <div class="divClick" @click.stop="handleNumSelect">
+            <el-input placeholder="请输入1-200的数字" v-model="projectForm.trainNum" maxlength="3" @keyup.native="proving"></el-input>
           </div>
         </div>
       </div>
-      <div
-        class="con-item style day clearfix"
-        v-if="projectForm.styleRadio!=='1'"
-      >
+      <div class="con-item style day clearfix" v-if="projectForm.styleRadio!=='1'">
         <div class="fl">线下培训天数：</div>
         <div class="fr selectFr">
           <div class="select-con">
-            <div
-              class="divClick"
-              @click.stop="handleDaySelect"
-            >
+            <div class="divClick" @click.stop="handleDaySelect">
               <span>
-                <el-input
-                  placeholder="请选择天数"
-                  v-model="projectForm.trainDay"
-                  readonly
-                ></el-input>
+                <el-input placeholder="请选择天数" v-model="projectForm.trainDay" readonly></el-input>
               </span>
               <span class="pull-down">
                 <i class="el-icon-caret-bottom"></i>
@@ -140,10 +90,7 @@
             </div>
             <span>
               <span class="price">{{projectForm.offlinePrice}}</span>元/天
-              <i
-                class="el-icon-question priceAsk"
-                @click.stop="handledesc"
-              >
+              <i class="el-icon-question priceAsk" @click.stop="handledesc">
                 <div class="descript-text">
                   <div v-if="projectForm.objRadio == '1'">
                     <p>
@@ -186,16 +133,9 @@
             </span>
           </div>
 
-          <div
-            class="pull-down-text"
-            v-if="isShowDaySelect"
-          >
+          <div class="pull-down-text" v-if="isShowDaySelect">
             <ul>
-              <li
-                v-for="(item,index) in maxDays"
-                :key="index"
-                @click.stop="chooseDay(item)"
-              >{{item}}</li>
+              <li v-for="(item,index) in maxDays" :key="index" @click.stop="chooseDay(item)">{{item}}</li>
             </ul>
           </div>
         </div>
@@ -244,45 +184,21 @@
               <div class="fl">学院分类：</div>
               <div class="fr selectFr">
                 <div @click.stop="handleSearchSelect ">
-                  <el-input
-                    placeholder="请选择学院分类 "
-                    v-model="projectForm.trainSearch "
-                    readonly
-                  ></el-input>
+                  <el-input placeholder="请选择学院分类 " v-model="projectForm.trainSearch " readonly></el-input>
                   <span class="pull-down">
                     <i class="el-icon-caret-bottom"></i>
                   </span>
-                  <div
-                    class="pull-down-text"
-                    v-if="isShowSearchSelect"
-                  >
+                  <div class="pull-down-text" v-if="isShowSearchSelect">
                     <div>
                       <!-- <div class="search " @click.stop="handleFocus ">
                         <input placeholder="请输入搜索内容" v-model="searchInput" type="text" v-on:input="handleSearchChange(searchInput)">
                         <i class="el-icon-search "></i>
                       </div>-->
                       <ul>
-                        <li
-                          v-for="(item,index) in CategoryListData "
-                          :key="index "
-                          class="clearfix"
-                        >
-                          <div
-                            class="liChecked"
-                            @click.stop="chooseSearch(item) "
-                          >
-                            <input
-                              type="checkbox"
-                              v-model="item.checked"
-                              class="item-checkbox"
-                              ref="checkbox "
-                              :id="item.id "
-                              @click.stop="chooseSearchInput "
-                            >
-                            <label
-                              :for="item.id "
-                              class="item-checkbox-label"
-                            >{{item.title}}</label>
+                        <li v-for="(item,index) in CategoryListData " :key="index " class="clearfix">
+                          <div class="liChecked" @click.stop="chooseSearch(item) ">
+                            <input type="checkbox" v-model="item.checked" class="item-checkbox" ref="checkbox " :id="item.id " @click.stop="chooseSearchInput ">
+                            <label :for="item.id " class="item-checkbox-label">{{item.title}}</label>
                           </div>
                         </li>
                       </ul>
@@ -292,11 +208,7 @@
               </div>
             </div>
             <div class="item">
-              <span
-                class="add"
-                :class="{active:chooseCourseData.length}"
-                @click="addChooseCourse "
-              >确认添加</span>
+              <span class="add" :class="{active:chooseCourseData.length}" @click="addChooseCourse ">确认添加</span>
             </div>
           </div>
         </div>
@@ -304,27 +216,14 @@
           <div class="detail-title ">选择线下课程</div>
           <div class=" ">学堂会根据您的需求及所选线上课程内容，为您合理设计体系化的线下课程安排。</div>
         </div>-->
-        <div
-          class="deatil-item clearfix"
-          v-if="checkedCourseData.length !=0 "
-        >
+        <div class="deatil-item clearfix" v-if="checkedCourseData.length !=0 ">
           <div class="detail-title">已选学院</div>
           <div class="deTable">
-            <div
-              class="deItem clearfix"
-              v-for="(item,index) in checkedCourseData "
-              :key="index "
-            >
+            <div class="deItem clearfix" v-for="(item,index) in checkedCourseData " :key="index ">
               <div class="courseTitle">{{item.title}}</div>
               <!-- <div class="time ">{{item.study_time}}学时</div> -->
-              <div
-                class="price"
-                v-if="item.is_free=='2'"
-              >0元</div>
-              <div
-                class="price"
-                v-else
-              >{{item.present_price}}元</div>
+              <div class="price" v-if="item.is_free=='2'">0元</div>
+              <div class="price" v-else>{{item.present_price}}元</div>
               <div class="operater">
                 <span @click="deleteChooseCourse(index) ">删除</span>
               </div>
@@ -342,25 +241,15 @@
               <div class="num ">x {{projectForm.trainNum}}人</div>
               <div class="total ">= {{onlineTotalPrice.toFixed(2)}}元</div>
             </div>-->
-            <div
-              class="deItem courseItem clearfix"
-              v-for="(item,index) in checkedCourseData "
-              :key="index "
-            >
+            <div class="deItem courseItem clearfix" v-for="(item,index) in checkedCourseData " :key="index ">
               <div class="courseTitle">{{item.title}}</div>
               <div class="time"></div>
               <div class="price">{{item.present_price}}元/人</div>
               <div class="num">x {{projectForm.trainNum}}人</div>
-              <div
-                class="total"
-                :data="onlineTotalPrice"
-              >= {{item.present_price*projectForm.trainNum}}元</div>
+              <div class="total" :data="onlineTotalPrice">= {{item.present_price*projectForm.trainNum}}元</div>
             </div>
             <!-- 线下课程（培训方式为线上+线上显示） -->
-            <div
-              class="deItem courseItem clearfix"
-              v-if="projectForm.styleRadio!=='1' "
-            >
+            <div class="deItem courseItem clearfix" v-if="projectForm.styleRadio!=='1' ">
               <div class="courseTitle">线下课程</div>
               <div class="time">{{projectForm.trainDay*offlineRangeTime}}学时</div>
               <div class="price">{{projectForm.offlinePrice}}元/天</div>
@@ -368,10 +257,7 @@
               <div class="total">= {{offlineTotalPrice.toFixed(2)}}元</div>
             </div>
             <div>
-              <p
-                class="discount"
-                v-if="discount !='1'"
-              >
+              <p class="discount" v-if="discount !='1'">
                 <span class="discount-left">{{discount*10}}折</span>
                 <span>优惠{{discountPrice.toFixed(2)}}元</span>
               </p>
@@ -384,21 +270,11 @@
         </div>
       </div>
       <div class="btns">
-        <span
-          class="btn save active"
-          @click="saveProject(1) "
-        >保存</span>
-        <span
-          class="btn buy"
-          @click="saveProject(2)"
-        >立即购买</span>
+        <span class="btn save active" @click="saveProject(1) ">保存</span>
+        <span class="btn buy" @click="saveProject(2)">立即购买</span>
       </div>
     </div>
-    <v-mask
-      v-show="showPop"
-      @handleConfirm="handleConfirm"
-      @handleCancle="handleCancle"
-    ></v-mask>
+    <v-mask v-show="showPop" @handleConfirm="handleConfirm" @handleCancle="handleCancle"></v-mask>
   </div>
 </template>
 
@@ -591,6 +467,7 @@ export default {
         if (Trim(this.projectForm.desc) == "") throw "请填写项目简介";
         if (this.projectForm.objRadio == "") throw "请选择培训对象";
         if (this.projectForm.trainNum == "") throw "请输入培训人数";
+        if (this.projectForm.trainNum > 200) throw "培训人数不能超过200人";
         if (this.projectForm.styleRadio == "") throw "请选择培训方式";
         if (
           this.projectForm.styleRadio !== "1" &&

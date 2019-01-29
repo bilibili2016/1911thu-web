@@ -101,12 +101,14 @@
                 width: 1020px;
                 margin: 0 auto;
                 padding-bottom: 20px;
-                span {
-                    display: block;
+                p {
+                    span {
+                        display: inherit !important;
+                    }
                 }
-                img{
-                    display: inherit;
-                    max-width: 100%;
+                img {
+                    // display: inherit;
+                    // max-width: 100%;
                 }
             }
         }

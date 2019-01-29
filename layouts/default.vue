@@ -4,7 +4,7 @@
     <backend-header v-if="backendHF"></backend-header>
     <el-container v-if="!showNetwork">
       <el-main>
-        <nuxt/>
+        <nuxt />
       </el-main>
     </el-container>
     <Footer v-if="HFShow"></Footer>
@@ -28,7 +28,7 @@ export default {
     backendHeader,
     backendFooter
   },
-  data () {
+  data() {
     return {
       HFShow: true,
       showNetwork: false,
@@ -37,17 +37,24 @@ export default {
     };
   },
   methods: {
-    fetchUrl () {
+    fetchUrl() {
       //检测网络连接情况
       if (navigator.onLine) {
         this.showNetwork = false;
       } else {
         this.showNetwork = true;
       }
-      //路有改变判断登录状态
-      this.$bus.$emit("getUserInfo");
+      let pathName = window.location.pathname;
+      if (
+        pathName != "/backend/news/newsInfo" &&
+        pathName != "/backend/course/coursedetail" &&
+        pathName != "/backend/project/projectDetail"
+      ) {
+        //路有改变判断登录状态,后台预览页不需要验证
+        this.$bus.$emit("getUserInfo");
+      }
     },
-    addHandler (element, type, handler) {
+    addHandler(element, type, handler) {
       if (element.addEventListener) {
         element.addEventListener(type, handler, false);
       } else if (element.attachEvent) {
@@ -56,7 +63,7 @@ export default {
         element["on" + type] = handler;
       }
     },
-    removeHandler (element, type, handler) {
+    removeHandler(element, type, handler) {
       if (element.removeEventListener) {
         element.removeEventListener(type, handler, false);
       } else if (element.detachEvent) {
@@ -66,7 +73,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     document.getElementsByClassName("headerBox")[0].style.display = "inline";
     document.getElementsByClassName("footerBox")[0].style.display = "inline";
     this.fetchUrl();
@@ -94,10 +101,10 @@ export default {
     });
 
     // 检测网络情况
-    this.addHandler(window, "online", function () {
+    this.addHandler(window, "online", function() {
       this.showNetwork = false;
     });
-    this.addHandler(window, "offline", function () {
+    this.addHandler(window, "offline", function() {
       this.showNetwork = true;
     });
   },

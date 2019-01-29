@@ -1,9 +1,6 @@
 <template>
   <!-- 导师招募 -->
-  <div
-    class="beTeacher"
-    @click="documentHandler"
-  >
+  <div class="beTeacher" @click="documentHandler">
     <div class="topImg">
       <h4>诚聘导师</h4>
       <div class="wordBox">
@@ -24,37 +21,25 @@
               <i class="red">*</i>姓名：
             </div>
             <div class="fr">
-              <el-input
-                v-model="teacherForm.name"
-                placeholder="请填写您的姓名"
-              ></el-input>
+              <el-input v-model="teacherForm.name" placeholder="请填写您的姓名"></el-input>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl">所在单位：</div>
             <div class="fr">
-              <el-input
-                v-model="teacherForm.unit"
-                placeholder="请填写您所在的单位名称"
-              ></el-input>
+              <el-input v-model="teacherForm.unit" placeholder="请填写您所在的单位名称"></el-input>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl">职务：</div>
             <div class="fr">
-              <el-input
-                v-model="teacherForm.duty"
-                placeholder="请填写您的职务"
-              ></el-input>
+              <el-input v-model="teacherForm.duty" placeholder="请填写您的职务"></el-input>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl">职称：</div>
             <div class="fr">
-              <el-input
-                v-model="teacherForm.dutyName"
-                placeholder="请填写您的职称"
-              ></el-input>
+              <el-input v-model="teacherForm.dutyName" placeholder="请填写您的职称"></el-input>
             </div>
           </div>
           <div class="con-item name phone clearfix">
@@ -62,47 +47,28 @@
               <i class="red">*</i>手机号：
             </div>
             <div class="fr">
-              <el-input
-                v-model="teacherForm.tel"
-                placeholder="请填写您的手机号"
-              ></el-input>
-              <el-input
-                v-model="teacherForm.code"
-                placeholder="请填写短信验证码"
-              ></el-input>
+              <el-input v-model="teacherForm.tel" placeholder="请填写您的手机号"></el-input>
+              <el-input v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input>
               <el-button @click="getCode">{{bindTelData.getCode}}</el-button>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl">常用邮箱：</div>
             <div class="fr">
-              <el-input
-                v-model="teacherForm.email"
-                placeholder="请填写您的常用邮箱"
-              ></el-input>
+              <el-input v-model="teacherForm.email" placeholder="请填写您的常用邮箱"></el-input>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl">研究方向：</div>
             <div class="fr">
-              <el-input
-                v-model="teacherForm.direction"
-                placeholder="宏观经济、人工智能、区域发展、一带一路等"
-              ></el-input>
+              <el-input v-model="teacherForm.direction" placeholder="宏观经济、人工智能、区域发展、一带一路等"></el-input>
             </div>
           </div>
           <div class="con-item style clearfix">
             <div class="fl">合作形式：</div>
             <div class="fr clearfix">
-              <el-checkbox-group
-                v-model="teacherForm.service"
-                @change="handleserviceChange"
-              >
-                <el-checkbox
-                  v-for="(service,index) in offerService"
-                  :label="service.id"
-                  :key="'service'+index"
-                >{{service.name}}</el-checkbox>
+              <el-checkbox-group v-model="teacherForm.service" @change="handleserviceChange">
+                <el-checkbox v-for="(service,index) in offerService" :label="service.id" :key="'service'+index">{{service.name}}</el-checkbox>
                 <!-- <i class="el-icon-question styleAsk">
                                     <div class="descript-text" style="width:530px;">
                                         <div>
@@ -120,10 +86,7 @@
           <div class="con-item clearfix">
             <div class="fl">授课名称：</div>
             <div class="fr">
-              <el-input
-                v-model="teacherForm.courseName"
-                placeholder="请填写您讲授的课程名称"
-              ></el-input>
+              <el-input v-model="teacherForm.courseName" placeholder="请填写您讲授的课程名称"></el-input>
             </div>
           </div>
           <!-- <div class="con-item desc clearfix">
@@ -137,33 +100,17 @@
           <div class="con-item uploadFile clearfix">
             <div class="fl">上传简历：</div>
             <div :class="['fr',{'height':isShowFile}]">
-              <div
-                class="load"
-                v-show="isShowFile"
-              >
+              <div class="load" v-show="isShowFile">
                 <div class="upload">
-                  <input
-                    type="file"
-                    id="file"
-                    name="file"
-                    ref="files"
-                    @change="handleFileChange"
-                    accept=".pdf, .doc, .docx"
-                  >
+                  <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept=".pdf, .doc, .docx">
                 </div>
                 <div class="uploadMask">
                   <i class="el-icon-plus"></i>
                 </div>
               </div>
-              <p
-                class="uploadP"
-                v-show="!isShowFile"
-              >
+              <p class="uploadP" v-show="!isShowFile">
                 <span>{{fileName}}</span>
-                <span
-                  class="deleteFile"
-                  @click="deleteFile"
-                >删除</span>
+                <span class="deleteFile" @click="deleteFile">删除</span>
               </p>
             </div>
           </div>
@@ -232,10 +179,7 @@
                 </div>
       </div>-->
       <div class="btns">
-        <span
-          class="btn save active"
-          @click="validate"
-        >提交</span>
+        <span class="btn save active" @click="validate">提交</span>
       </div>
     </div>
   </div>

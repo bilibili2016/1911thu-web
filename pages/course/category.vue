@@ -10,71 +10,26 @@
       <v-filter @selectActiveTab="selectActiveTab"></v-filter>
       <!-- 非选课的下面 课程列表 -->
       <div v-if="xid === '0'">
-
-        <div
-          class="carlist"
-          v-loading="loadCourseAll"
-          :class="{ minheights : loadCourseAll}"
-        >
-          <v-card
-            :data="categoryData"
-            :config="categoryCard"
-            v-if="categoryData.length&&xid === '0'"
-          ></v-card>
+        <div class="carlist" v-loading="loadCourseAll" :class="{ minheights : loadCourseAll}">
+          <v-card :data="categoryData" :config="categoryCard" v-if="categoryData.length&&xid === '0'"></v-card>
         </div>
-        <v-nodata
-          v-loading="loadCourse"
-          class="noMsg"
-          v-if="categoryData.length == 0 &&!loadCourseAll"
-          :pageType="pageType"
-        ></v-nodata>
+        <v-nodata class="noMsg" v-if="categoryData.length == 0 &&!loadCourseAll" :pageType="pageType"></v-nodata>
       </div>
 
       <div v-if="xid === '1'">
         <!-- {{categoryDataChoose}} -->
         <!-- 选课的课程列表 <v-card :data="categoryData" :config="configSevent"></v-card>-->
-        <div
-          class="carlist"
-          v-loading="loadCourse"
-          ref="content"
-          :class="{ minheights : loadCourse}"
-        >
-          <v-card
-            :data="categoryDataChoose"
-            v-if="categoryDataChoose.length&& xid === '1'"
-            :config="configSevent"
-            @selCheckboxChange="selCheckboxChange"
-          ></v-card>
+        <div class="carlist" v-loading="loadCourse" ref="content" :class="{ minheights : loadCourse}">
+          <v-card :data="categoryDataChoose" v-if="categoryDataChoose.length&& xid === '1'" :config="configSevent" @selCheckboxChange="selCheckboxChange"></v-card>
         </div>
         <!-- 无课程时候显示 -->
-        <v-nodata
-          v-loading="loadCourse"
-          class="noMsg"
-          v-if="categoryDataChoose.length<=0 && !loadCourse"
-          :pageType="pageType"
-        ></v-nodata>
+        <v-nodata v-loading="loadCourse" class="noMsg" v-if="categoryDataChoose.length<=0 && !loadCourse" :pageType="pageType"></v-nodata>
 
-        <div
-          v-show="categoryDataChoose.length !=0&&xid === '1'"
-          class="allChecked"
-          @click="allChecked"
-        >全选</div>
+        <div v-show="categoryDataChoose.length !=0&&xid === '1'" class="allChecked" @click="allChecked">全选</div>
       </div>
     </div>
-    <div
-      class="pagination"
-      v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
-    >
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        :page-size="pagemsg.pagesize"
-        :pager-count="5"
-        :page-count="pagemsg.pagesize"
-        :current-page="pagemsg.page"
-        :total="pagemsg.total"
-        @current-change="handlePageChange"
-      ></el-pagination>
+    <div class="pagination" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize">
+      <el-pagination background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="handlePageChange"></el-pagination>
     </div>
   </div>
 </template>
@@ -320,11 +275,11 @@ export default {
       this.setParamsPidCid(itemCid, itemPid);
       category.curriculumListNew(this.categoryForm).then(res => {
         if (res.status === 0) {
-          this.loadCourseAll = false;
           this.categoryData = res.data.curriculumList;
           this.pagemsg.total = res.data.pageCount;
         }
         this.isUrl = true;
+        this.loadCourseAll = false;
       });
     },
     // 选课 card 列表
@@ -339,8 +294,8 @@ export default {
           for (let item of res.data.curriculumList) {
             this.allCheckedId.push(item.id);
           }
-          this.loadCourse = false;
         }
+        this.loadCourse = false;
         this.isUrl = true;
       });
     },
@@ -352,9 +307,9 @@ export default {
         if (res.status === 0) {
           this.categoryData = res.data.curriculumProjectList;
           this.pagemsg.total = res.data.pageCount;
-          this.loadCourseAll = false;
         }
         this.isUrl = true;
+        this.loadCourseAll = false;
       });
     },
 

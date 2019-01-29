@@ -9,44 +9,28 @@
       <div class="earnings clearfix">
         <div class="item">
           <p class="img-con ">
-            <img
-              class="img1"
-              src="http://static-image.1911edu.com/school-icon1.png"
-              alt=""
-            >
+            <img class="img1" src="http://static-image.1911edu.com/school-icon1.png" alt="">
           </p>
           <p class="title">品牌赋能</p>
           <p class="text">1911学堂源自清华、面向世界，是终身教育领域的顶级品牌，有其巨大价值的赋能，将迅速提升自身影响力。</p>
         </div>
         <div class="item">
           <p class="img-con ">
-            <img
-              class="img2"
-              src="http://static-image.1911edu.com/school-icon2.png"
-              alt=""
-            >
+            <img class="img2" src="http://static-image.1911edu.com/school-icon2.png" alt="">
           </p>
           <p class="title">资源共享</p>
           <p class="text">城市分校将共享1911学堂课程、导师及行业资源，各地政府、企业与全球名校资源，快速成长为专业领先机构。</p>
         </div>
         <div class="item">
           <p class="img-con ">
-            <img
-              class="img3"
-              src="http://static-image.1911edu.com/school-icon3.png"
-              alt=""
-            >
+            <img class="img3" src="http://static-image.1911edu.com/school-icon3.png" alt="">
           </p>
           <p class="title">合作拓展</p>
           <p class="text">加入1911学堂全球布局，与其他城市分校形成跨地域、跨行业的庞大合作网络体系，创造未来发展的新机遇。</p>
         </div>
         <div class="item">
           <p class="img-con ">
-            <img
-              class="img4"
-              src="http://static-image.1911edu.com/school-icon4.png"
-              alt=""
-            >
+            <img class="img4" src="http://static-image.1911edu.com/school-icon4.png" alt="">
           </p>
           <p class="title">丰厚回报</p>
           <p class="text">1911学堂为各城市分校设计了极具市场竞争力的收益方案，通过深度换位思考，最大程度保障城市分校权益。</p>
@@ -54,10 +38,7 @@
       </div>
       <div class="cooperation clearfix">
         <div class="co-img">
-          <img
-            src="http://static-image.1911edu.com/school-icon5.png"
-            alt=""
-          >
+          <img src="http://static-image.1911edu.com/school-icon5.png" alt="">
         </div>
         <div class="desc">
           <div class="desc-con one">
@@ -70,7 +51,7 @@
           </div>
           <div class="desc-con three">
             <p class="top"><i class="circle"></i>合作内容</p>
-            <p class="bottom">1911学堂城市分校的办学内容包括系列在线学院、混合式项目及单位定制项目等。</p>
+            <p class="bottom">1911学堂城市分校业务内容包括在线学院、混合式标准项目、单位内训项目、国际学位项目。</p>
           </div>
         </div>
       </div>
@@ -95,10 +76,7 @@
             </div>
           </div>
           <div class="middle">
-            <img
-              src="http://static-image.1911edu.com/school-icon7.png"
-              alt=""
-            >
+            <img src="http://static-image.1911edu.com/school-icon7.png" alt="">
           </div>
           <div class="right">
             <div class="item">
@@ -128,23 +106,23 @@
         <div class="itemDiv clearfix">
           <div class="item one">
             <p class="s-title"><span class="level">A</span><span class="">类城市</span></p>
-            <p class="desc">每个城市设置不超过5所分校，包括上海、广州、深圳；</p>
+            <p class="desc">人口超1000万的地级以上城市，每个城市设置不超过5所分校；</p>
           </div>
           <div class="item two">
             <p class="s-title"><span class="level">B</span><span class="">类城市</span></p>
-            <p class="desc">每个城市设置不超过4所分校，包括省会城市（除广州）、天津、重庆、青岛、宁波、大连、厦门；</p>
+            <p class="desc">人口超600万的地级以上城市，每个城市设置不超过4所分校；</p>
           </div>
           <div class="item three">
             <p class="s-title"><span class="level">C</span><span class="">类城市</span></p>
-            <p class="desc">每个城市设置不超过3所分校，包括除A、B类城市外的其它地级城市。</p>
+            <p class="desc">每个城市设置不超过3所分校，包括除A、B类城市外的其它地级行政区；</p>
+          </div>
+          <div class="item four">
+            <p class="s-title"><span class="">县级市</span></p>
+            <p class="desc">每个城市设置不超过1所分校，包括全国所有县级市。</p>
           </div>
         </div>
         <h4 class="title">申请流程</h4>
-        <img
-          src="http://static-image.1911edu.com/school-icon11.png"
-          alt=""
-          class="process"
-        >
+        <img src="http://static-image.1911edu.com/school-icon11.png" alt="" class="process">
         <div class="deadline clearfix">
           <div class="left"><span class="inner">合作期限</span></div>
           <div class="right">
@@ -157,7 +135,7 @@
           <div class="index clearfix">
             <div class="index-left">
               <p class="index-item"><span class="num">1.</span><span class="index-title">品牌授权：</span>授权当地使用1911学堂品牌办学</p>
-              <p class="index-item"><span class="num">2.</span><span class="index-title">认证证书：</span>清华大学与其他机构的认证证书</p>
+              <p class="index-item"><span class="num">2.</span><span class="index-title">认证证书：</span>清华大学相关部门的认证证书&nbsp;&nbsp;&nbsp;</p>
               <p class="index-item"><span class="num">3.</span><span class="index-title">产品支撑：</span>线上课程全提供及技术平台支撑</p>
               <p class="index-item"><span class="num">4.</span><span class="index-title">业务指导：</span>全流程、全周期的业务指导培训</p>
             </div>
@@ -187,49 +165,24 @@
             <div class="fl"><i class="red">*</i>城市：</div>
             <div class="fr selectFr">
               <div class="text">请选择您要申请成为分校校长的城市</div>
-              <el-select
-                v-model="schoolForm.province_name"
-                placeholder="请选择省份"
-                @change="provinceChange"
-              >
-                <el-option
-                  v-for="(p,index) in province"
-                  :key="'prov'+index"
-                  :label="p.label"
-                  :value="p.value"
-                ></el-option>
+              <el-select v-model="schoolForm.province_name" placeholder="请选择省份" @change="provinceChange">
+                <el-option v-for="(p,index) in province" :key="'prov'+index" :label="p.label" :value="p.value"></el-option>
               </el-select>
-              <el-select
-                v-model="schoolForm.city_name"
-                placeholder="请选择城市"
-                no-data-text="请先选择所在省份"
-                @change="cityChange"
-              >
-                <el-option
-                  v-for="(p,index) in city"
-                  :key="'city'+index"
-                  :label="p.label"
-                  :value="p.value"
-                ></el-option>
+              <el-select v-model="schoolForm.city_name" placeholder="请选择城市" no-data-text="请先选择所在省份" @change="cityChange">
+                <el-option v-for="(p,index) in city" :key="'city'+index" :label="p.label" :value="p.value"></el-option>
               </el-select>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>姓名：</div>
             <div class="fr">
-              <el-input
-                v-model="schoolForm.name"
-                placeholder="请输入您的姓名"
-              ></el-input>
+              <el-input v-model="schoolForm.name" placeholder="请输入您的姓名"></el-input>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>电话：</div>
             <div class="fr">
-              <el-input
-                v-model="schoolForm.tel"
-                placeholder="请输入您的手机号"
-              ></el-input>
+              <el-input v-model="schoolForm.tel" placeholder="请输入您的手机号"></el-input>
               <!-- <el-input class="tel" v-model="teacherForm.tel" placeholder="请填写手机号"></el-input> -->
               <!-- <el-input class="verification" v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input> -->
               <!-- <span class="code" @click="smsCodes">{{telCodes.getCode}}</span> -->
@@ -239,17 +192,11 @@
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>邮箱：</div>
             <div class="fr">
-              <el-input
-                v-model="schoolForm.email"
-                placeholder="请输入您的邮箱"
-              ></el-input>
+              <el-input v-model="schoolForm.email" placeholder="请输入您的邮箱"></el-input>
             </div>
           </div>
           <div class="submit">
-            <el-button
-              :disabled="isClick"
-              @click="validate"
-            >提交申请</el-button>
+            <el-button :disabled="isClick" @click="validate">提交申请</el-button>
           </div>
         </div>
       </div>
