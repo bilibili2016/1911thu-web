@@ -1674,3 +1674,11 @@ input::-webkit-credentials-auto-fill-button {
     position: absolute;
     right: 0;
 }
+
+.newsInner {
+    p {
+        span {
+            display: inherit !important;
+        }
+    }
+}
