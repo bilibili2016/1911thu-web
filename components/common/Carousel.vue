@@ -2,12 +2,21 @@
   <div>
     <div class="banner" v-if="config.carousel==='home'">
       <div class="carousel">
-        <el-carousel :interval="5000" class="lbt indexBanner">
+        <el-carousel :interval="500000" class="lbt indexBanner">
           <el-carousel-item v-for="(img,index) in items" :key="index">
-            <div class="videoDiv" v-if="img.jump_type==5">
-              <video class="video" controls="controls">
+            <div class="videoDiv" v-if="img.jump_type==5" @mouseenter="enter()" @mouseleave="leave()">
+              <!-- <video class="video" :src="img.jump_url" controls="controls">
+                您的浏览器不支持 video 标签。
+              </video> -->
+              <video class="video" id="video">
                 <source :src="img.jump_url" type="video/mp4" />
               </video>
+              <div class="playBtn" id="play" v-if="palyVideoShow" @click="palyVideo">
+                <img src="http://static-image.1911edu.com/videoPlay.png" alt="">
+              </div>
+              <div class="playBtn " id="pause" v-if="puseVideoShow" @click="pauseVideo">
+                <img src="http://static-image.1911edu.com/videoPause.png" alt="">
+              </div>
             </div>
             <img v-if="img.jump_type!=5" id="innerImg" :src="img.picture" alt="" @click="handleLink(img)">
           </el-carousel-item>
@@ -41,6 +50,10 @@ export default {
   props: ["items", "config", "swiperData"],
   data() {
     return {
+      timer: null,
+      play: true,
+      palyVideoShow: true,
+      puseVideoShow: false,
       kidForm: {
         kids: ""
       },
@@ -94,6 +107,37 @@ export default {
             Dwidth + "px";
         }
       }
+    },
+    palyVideo() {
+      this.play = false;
+      this.palyVideoShow = false;
+      this.puseVideoShow = true;
+      let video = document.getElementById("video");
+      video.play();
+      this.timer = setInterval(() => {
+        if (document.getElementById("video").ended) {
+          clearInterval(this.timer);
+          video.load();
+          this.play = true;
+          this.palyVideoShow = true;
+          this.puseVideoShow = false;
+        }
+      }, 1000);
+    },
+    pauseVideo() {
+      let video = document.getElementById("video");
+      video.pause();
+      this.play = true;
+      this.palyVideoShow = true;
+      this.puseVideoShow = false;
+    },
+    enter() {
+      if (!this.play) {
+        this.puseVideoShow = true;
+      }
+    },
+    leave() {
+      this.puseVideoShow = false;
     }
   },
   mounted() {
