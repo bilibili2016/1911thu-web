@@ -4,7 +4,12 @@
       <div class="carousel">
         <el-carousel :interval="5000" class="lbt indexBanner">
           <el-carousel-item v-for="(img,index) in items" :key="index">
-            <img id="innerImg" :src="img.picture" alt="" @click="handleLink(img)">
+            <div class="videoDiv" v-if="img.jump_type==5">
+              <video class="video" controls="controls">
+                <source :src="img.jump_url" type="video/mp4" />
+              </video>
+            </div>
+            <img v-if="img.jump_type!=5" id="innerImg" :src="img.picture" alt="" @click="handleLink(img)">
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -29,83 +34,86 @@
 
 
 <script>
-import { mapActions } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
-import { open } from '@/lib/util/helper'
+import { mapActions } from "vuex";
+import { store as persistStore } from "~/lib/core/store";
+import { open } from "@/lib/util/helper";
 export default {
-  props: ['items', 'config', 'swiperData'],
-  data () {
+  props: ["items", "config", "swiperData"],
+  data() {
     return {
       kidForm: {
-        kids: ''
+        kids: ""
       },
       courseUrl: {
-        base: '/course/coursedetail',
+        base: "/course/coursedetail",
         kid: 0,
-        bid: '',
+        bid: "",
         page: 0
       }
-    }
+    };
   },
   methods: {
-    ...mapActions('auth', ['setKid']),
-    handleLink (img) {
+    ...mapActions("auth", ["setKid"]),
+    handleLink(img) {
       // jump_type = 0  普通跳转 根据jump_url地址跳转
       // jump_type = 1  跳转至课程详情 jump_id 课程id
       // jump_type = 2  跳转至项目详情 jump_id 项目id
-      if (img.jump_type == '0' && img.jump_url != '') {
+      if (img.jump_type == "0" && img.jump_url != "") {
         if (/(http|https):\/\/([\w.]+\/?)\S*/.test(img.jump_url)) {
-          window.open(img.jump_url)
+          window.open(img.jump_url);
         } else {
-          img.jump_url = 'http://' + img.jump_url
-          window.open(img.jump_url)
+          img.jump_url = "http://" + img.jump_url;
+          window.open(img.jump_url);
         }
       }
-      if (img.jump_type == '1' && img.jump_id != '') {
-        this.courseUrl.kid = img.jump_id
-        open(this.courseUrl)
+      if (img.jump_type == "1" && img.jump_id != "") {
+        this.courseUrl.kid = img.jump_id;
+        open(this.courseUrl);
       }
-      if (img.jump_type == '2' && img.jump_id != '') {
+      if (img.jump_type == "2" && img.jump_id != "") {
         this.$router.push({
-          path: '/project/projectdetail',
+          path: "/project/projectdetail",
           query: {
             kid: img.jump_id,
             type: 1
           }
-        })
+        });
       }
     },
-    goDetail (news) {
-      this.$router.push('/home/news/' + news.id)
+    goDetail(news) {
+      this.$router.push("/home/news/" + news.id);
     },
-    setWidth () {
-      let Dwidth = document.body.clientWidth
-      if (document.getElementsByClassName('el-carousel').length != 0) {
+    setWidth() {
+      let Dwidth = document.body.clientWidth;
+      if (document.getElementsByClassName("el-carousel").length != 0) {
         if (Dwidth > 1920) {
-          document.getElementsByClassName('el-carousel')[0].style.width =
-            1920 + 'px'
+          document.getElementsByClassName("el-carousel")[0].style.width =
+            1920 + "px";
         } else {
-          document.getElementsByClassName('el-carousel')[0].style.width =
-            Dwidth + 'px'
+          document.getElementsByClassName("el-carousel")[0].style.width =
+            Dwidth + "px";
         }
       }
     }
   },
-  mounted () {
-    this.setWidth()
+  mounted() {
+    // var vdo = document.getElementById("videoPlay");
+    // vdo.play();
+
+    this.setWidth();
     window.onresize = () => {
       return (() => {
-        this.setWidth()
-        let Dwidth = document.body.clientWidth
-        let imgArr = document.getElementsByClassName('el-carousel__item')
+        this.setWidth();
+        let Dwidth = document.body.clientWidth;
+        let imgArr = document.getElementsByClassName("el-carousel__item");
         if (Dwidth <= 1920) {
-          let marginLeft = (1920 - Dwidth) / 2
+          let marginLeft = (1920 - Dwidth) / 2;
           for (var i = 0; i < imgArr.length; i++) {
-            imgArr[i].style.marginLeft = -marginLeft + 'px'
+            imgArr[i].style.marginLeft = -marginLeft + "px";
           }
         }
-      })()
-    }
+      })();
+    };
   }
-}
+};
 </script>
