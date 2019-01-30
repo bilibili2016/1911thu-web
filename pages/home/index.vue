@@ -211,12 +211,7 @@ export default {
         if (response.status === 0) {
           this.bannerLoading = false;
           this.bannerData = response.data.bannerList;
-          //           this.bannerData.forEach((item,index) => {
-          //             console.log(item);
-          //             if(item.jump_type ==5){
-          //  this.bannerData[index].picture = this.bannerData[index].jump_url
-          //             }
-          //           });
+
           //设置banner溢出居中显示
           this.$nextTick(() => {
             let imgArr = document.getElementsByClassName("el-carousel__item");
