@@ -211,6 +211,7 @@ export default {
         if (response.status === 0) {
           this.bannerLoading = false;
           this.bannerData = response.data.bannerList;
+
           //设置banner溢出居中显示
           this.$nextTick(() => {
             let imgArr = document.getElementsByClassName("el-carousel__item");
