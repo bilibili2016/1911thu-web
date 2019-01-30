@@ -2,7 +2,7 @@
   <div>
     <div class="banner" v-if="config.carousel==='home'">
       <div class="carousel">
-        <el-carousel :interval="500000" class="lbt indexBanner">
+        <el-carousel :interval="5000" class="lbt indexBanner">
           <el-carousel-item v-for="(img,index) in items" :key="index">
             <div class="videoDiv" v-if="img.jump_type==5" @mouseenter="enter()" @mouseleave="leave()">
               <!-- <video class="video" :src="img.jump_url" controls="controls">
@@ -108,6 +108,8 @@ export default {
         }
       }
     },
+
+    //播放视频
     palyVideo() {
       this.play = false;
       this.palyVideoShow = false;
@@ -124,6 +126,7 @@ export default {
         }
       }, 1000);
     },
+    //暂停
     pauseVideo() {
       let video = document.getElementById("video");
       video.pause();
@@ -131,19 +134,18 @@ export default {
       this.palyVideoShow = true;
       this.puseVideoShow = false;
     },
+    //鼠标移入
     enter() {
       if (!this.play) {
         this.puseVideoShow = true;
       }
     },
+    //鼠标移开
     leave() {
       this.puseVideoShow = false;
     }
   },
   mounted() {
-    // var vdo = document.getElementById("videoPlay");
-    // vdo.play();
-
     this.setWidth();
     window.onresize = () => {
       return (() => {
