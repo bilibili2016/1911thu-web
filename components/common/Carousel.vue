@@ -4,24 +4,21 @@
       <div class="carousel">
         <el-carousel :interval="5000" class="lbt indexBanner">
           <el-carousel-item v-for="(img,index) in items" :key="index">
-            <div class="videoDiv" v-if="img.jump_type==5" @mouseenter="enter()" @mouseleave="leave()">
-              <!-- <video class="video" :src="img.jump_url" controls="controls">
-                您的浏览器不支持 video 标签。
-              </video> -->
-              <video class="video" id="video">
-                <source :src="img.jump_url" type="video/mp4" />
-              </video>
-              <div class="playBtn" id="play" v-if="palyVideoShow" @click="palyVideo">
-                <img src="http://static-image.1911edu.com/videoPlay.png" alt="">
-              </div>
-              <div class="playBtn " id="pause" v-if="puseVideoShow" @click="pauseVideo">
-                <img src="http://static-image.1911edu.com/videoPause.png" alt="">
-              </div>
+            <div class="videoDiv" v-if="img.jump_type==5" @click="playVideo(img.jump_url)">
+              <img id="innerImg" class="bannerImg" :src="img.picture">
+              <!-- <img class="playImg" src="http://static-image.1911edu.com/videoPlay.png" alt=""> -->
             </div>
-            <img v-if="img.jump_type!=5" id="innerImg" :src="img.picture" alt="" @click="handleLink(img)">
+            <img v-if="img.jump_type!=5" class="bannerImg" id="innerImg" :src="img.picture" alt="" @click="handleLink(img)">
           </el-carousel-item>
         </el-carousel>
       </div>
+    </div>
+    <!-- 首页banner图视频播放弹窗 -->
+    <div class="shadow" v-if="showShadow">
+      <i class="el-icon-close" @click="pauseVideo()"></i>
+      <video class="video" ref="video" controls="controls">
+        <source :src="player.url" type="video/mp4" />
+      </video>
     </div>
     <div class="newsCarousel fl" v-if="config.carousel==='news'">
       <el-carousel :interval="4000">
@@ -48,14 +45,15 @@ import { store as persistStore } from "~/lib/core/store";
 import { open } from "@/lib/util/helper";
 export default {
   props: ["items", "config", "swiperData"],
-  data() {
+  data () {
     return {
       timer: null,
-      play: true,
-      palyVideoShow: true,
-      puseVideoShow: false,
+      showShadow: false,
       kidForm: {
         kids: ""
+      },
+      player: {
+        url: ''
       },
       courseUrl: {
         base: "/course/coursedetail",
@@ -67,7 +65,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setKid"]),
-    handleLink(img) {
+    handleLink (img) {
       // jump_type = 0  普通跳转 根据jump_url地址跳转
       // jump_type = 1  跳转至课程详情 jump_id 课程id
       // jump_type = 2  跳转至项目详情 jump_id 项目id
@@ -93,10 +91,10 @@ export default {
         });
       }
     },
-    goDetail(news) {
+    goDetail (news) {
       this.$router.push("/home/news/" + news.id);
     },
-    setWidth() {
+    setWidth () {
       let Dwidth = document.body.clientWidth;
       if (document.getElementsByClassName("el-carousel").length != 0) {
         if (Dwidth > 1920) {
@@ -108,44 +106,20 @@ export default {
         }
       }
     },
-
-    //播放视频
-    palyVideo() {
-      this.play = false;
-      this.palyVideoShow = false;
-      this.puseVideoShow = true;
-      let video = document.getElementById("video");
-      video.play();
-      this.timer = setInterval(() => {
-        if (document.getElementById("video").ended) {
-          clearInterval(this.timer);
-          video.load();
-          this.play = true;
-          this.palyVideoShow = true;
-          this.puseVideoShow = false;
-        }
-      }, 1000);
+    playVideo (url) {
+      this.player.url = url
+      this.showShadow = true
+      this.$nextTick(() => {
+        this.$refs.video.play();
+      });
     },
     //暂停
-    pauseVideo() {
-      let video = document.getElementById("video");
-      video.pause();
-      this.play = true;
-      this.palyVideoShow = true;
-      this.puseVideoShow = false;
+    pauseVideo () {
+      this.showShadow = false
+      this.$refs.video.pause();
     },
-    //鼠标移入
-    enter() {
-      if (!this.play) {
-        this.puseVideoShow = true;
-      }
-    },
-    //鼠标移开
-    leave() {
-      this.puseVideoShow = false;
-    }
   },
-  mounted() {
+  mounted () {
     this.setWidth();
     window.onresize = () => {
       return (() => {
