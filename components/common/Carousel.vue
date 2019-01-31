@@ -6,7 +6,7 @@
           <el-carousel-item v-for="(img,index) in items" :key="index">
             <div class="videoDiv" v-if="img.jump_type==5" @click="playVideo(img.jump_url)">
               <img id="innerImg" class="bannerImg" :src="img.picture">
-              <!-- <img class="playImg" src="http://static-image.1911edu.com/videoPlay.png" alt=""> -->
+              <img class="playImg" src="http://static-image.1911edu.com/videoPlay.png" alt="">
             </div>
             <img v-if="img.jump_type!=5" class="bannerImg" id="innerImg" :src="img.picture" alt="" @click="handleLink(img)">
           </el-carousel-item>
