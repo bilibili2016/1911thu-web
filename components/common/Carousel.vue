@@ -15,10 +15,12 @@
     </div>
     <!-- 首页banner图视频播放弹窗 -->
     <div class="shadow" v-if="showShadow">
-      <i class="el-icon-close" @click="pauseVideo()"></i>
-      <video class="video" ref="video" controls="controls">
-        <source :src="player.url" type="video/mp4" />
-      </video>
+      <div class="videoBox">
+        <i class="el-icon-close" @click="pauseVideo()"></i>
+        <video class="video" ref="video" controls="controls">
+          <source :src="player.url" type="video/mp4" />
+        </video>
+      </div>
     </div>
     <div class="newsCarousel fl" v-if="config.carousel==='news'">
       <el-carousel :interval="4000">

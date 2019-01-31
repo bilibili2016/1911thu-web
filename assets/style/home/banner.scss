@@ -283,18 +283,27 @@
   background-color: rgba(0, 0, 0, .6);
   z-index: 30;
 
+  .videoBox {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    margin-left: -380px;
+    width: 760px;
+    height: 450px;
+  }
+
   .el-icon-close {
     position: absolute;
-    top: 102px;
+    right: 0;
     font-size: 26px;
-    left: 78%;
+    top: 0;
     color: #fff;
     font-weight: 700;
   }
 
   .video {
     position: absolute;
-    top: 120px;
+    bottom: 0;
     left: 50%;
     margin-left: -360px;
     width: 720px;
