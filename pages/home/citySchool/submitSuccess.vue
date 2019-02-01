@@ -4,7 +4,7 @@
       <img src="@/assets/images/submit-success.png" alt="">
     </div>
     <div class="alert">提交成功！</div>
-    <div class="desc">感谢您对1911学堂城市分校的关注，我们会在48小时内与您取得联系！</div>
+    <div class="desc">感谢您对1911学堂城市分校的关注，我们会尽快与您取得联系！</div>
   </div>
 </template>
 <script>
