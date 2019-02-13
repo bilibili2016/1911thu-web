@@ -11,52 +11,19 @@
         </div>
         <!-- 顶部的card -->
         <div class="main-header" v-loading="loadMsg">
-          <v-card
-            :courseList="courseList"
-            :config="config"
-            :linkdata="linkseven"
-            :privileMsg="privileMsg"
-            :cardetails="courseList"
-            @changePlayImg="changePlayImg"
-            @refreshData="refreshData"
-          ></v-card>
+          <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg" @refreshData="refreshData"></v-card>
         </div>
       </div>
       <div class="bottomCard">
         <!-- 左侧的课程目录和介绍和评论 -->
         <div class="content fl">
-          <v-coursecatelog
-            :activeName="activeName"
-            :courseList="courseList"
-            :loadMsg="loadMsg"
-            :catalogs="catalogs"
-            :privileMsg="privileMsg"
-            :config="config"
-            :changeImg="changeImg"
-            :totalEvaluateInfo="totalEvaluateInfo"
-            :commentator="commentator"
-            :loadEvaluate="loadEvaluate"
-            :pageCount="pageCount"
-            :sumUserStart="sumUserStart"
-            :pagemsg="pagemsg"
-            @pagechange="handleCurrentChange"
-          ></v-coursecatelog>
+          <v-coursecatelog :activeName="activeName" :courseList="courseList" :loadMsg="loadMsg" :catalogs="catalogs" :privileMsg="privileMsg" :config="config" :changeImg="changeImg" :totalEvaluateInfo="totalEvaluateInfo" :commentator="commentator" :loadEvaluate="loadEvaluate" :pageCount="pageCount" :sumUserStart="sumUserStart" :pagemsg="pagemsg" @pagechange="handleCurrentChange"></v-coursecatelog>
         </div>
         <div style="width:345px" class="fr">
           <!-- 讲师介绍 -->
-          <v-teacherintro
-            v-loading="loadTeacher"
-            :courseList="courseList"
-            @handleLinkTeacher="handleLinkTeacher"
-          ></v-teacherintro>
+          <v-teacherintro v-loading="loadTeacher" :courseList="courseList" @handleLinkTeacher="handleLinkTeacher"></v-teacherintro>
           <!-- 课程评价-->
-          <v-evaluatecase
-            v-show="courseList.is_study != 0 && courseList.is_evaluate==0&&privileMsg"
-            :isClose="isClose"
-            :courseList="courseList"
-            @changeList="cbList"
-            :config="config"
-          ></v-evaluatecase>
+          <v-evaluatecase v-show="courseList.is_study != 0 && courseList.is_evaluate==0&&privileMsg" :isClose="isClose" :courseList="courseList" @changeList="cbList" :config="config"></v-evaluatecase>
         </div>
       </div>
     </div>
@@ -387,15 +354,16 @@ export default {
                 "&play="
               );
             } else {
-              this.$router.replace(
-                "/course/coursedetail" +
-                "?kid=" +
-                matchSplits("kid") +
-                "&bid=" +
-                response.data.defaultCurriculumCatalog.id +
-                "&page=" +
-                matchSplits("page")
-              );
+              // 静态部署 重定向会刷新
+              //   this.$router.replace(
+              //     "/course/coursedetail" +
+              //     "?kid=" +
+              //     matchSplits("kid") +
+              //     "&bid=" +
+              //     response.data.defaultCurriculumCatalog.id +
+              //     "&page=" +
+              //     matchSplits("page")
+              //   );
             }
           }
         });
@@ -422,7 +390,7 @@ export default {
       this.getCourseDetail();
       this.getEvaluateList();
       this.getCourseList();
-      this.getdefaultCurriculumCatalog();
+      //   this.getdefaultCurriculumCatalog();
     },
     //加入学院
     joinCollege () {
