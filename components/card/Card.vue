@@ -7,9 +7,9 @@
           <!-- 选课使用的勾选 -->
           <el-checkbox v-model="card.is_checked " @change="selCheckboxChange(card,index) " style="position:absolute;top:10px;right:10px; " v-if="config.types==='buy' "></el-checkbox>
           <!-- 项目封面 蒙层-->
-          <div class="new-style " v-if="config.new==='true' ">
+          <!-- <div class="new-style " v-if="config.new==='true' ">
             <img :src="newTag " alt=" ">
-          </div>
+          </div> -->
           <div class="projectImg" v-if="cp==='1'">
             <img src="http://static-image.1911edu.com/p4.png" alt="" class="project-img">
           </div>
@@ -83,23 +83,23 @@
 // optiontitle  副标题
 // timenumrate  学时 人数 星级
 // freeprice   免费
-import { mapActions } from 'vuex'
-import { card } from '~/lib/v1_sdk/index'
-import { store as persistStore } from '~/lib/core/store'
-import { matchSplits, open, timestampToTime } from '~/lib/util/helper'
+import { mapActions } from "vuex";
+import { card } from "~/lib/v1_sdk/index";
+import { store as persistStore } from "~/lib/core/store";
+import { matchSplits, open, timestampToTime } from "~/lib/util/helper";
 
 export default {
-  props: ['data', 'config'],
+  props: ["data", "config"],
   data() {
     return {
-      rest: '',
+      rest: "",
       _ordertimer: null,
-      cp: '',
+      cp: "",
       kidForm: {
-        kids: ''
+        kids: ""
       },
       xidForm: {
-        xids: ''
+        xids: ""
       },
       curriculumcartid: {
         numberArr: []
@@ -108,26 +108,26 @@ export default {
         cartid: null,
         type: 1
       },
-      cp: '',
+      cp: "",
       isIndex: true,
-      jinImg: 'http://static-image.1911edu.com/jin.png',
-      newTag: 'http://static-image.1911edu.com/new.png',
-      numSrc: require('@/assets/images/home_num.png'),
+      jinImg: "http://static-image.1911edu.com/jin.png",
+      newTag: "http://static-image.1911edu.com/new.png",
+      numSrc: require("@/assets/images/home_num.png"),
       courseUrl: {
-        base: '/course/coursedetail',
+        base: "/course/coursedetail",
         kid: 0,
-        bid: '',
+        bid: "",
         page: 0
       }
-    }
+    };
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum']),
+    ...mapActions("auth", ["setProductsNum"]),
     handleLinkDetail(item) {
       // 判断当前页是否是在首页
       if (this.isIndex) {
-        this.courseUrl.kid = item.id
-        open(this.courseUrl)
+        this.courseUrl.kid = item.id;
+        open(this.courseUrl);
         // this.$router.push({
         //   path: '/course/coursedetail',
         //   query: {
@@ -138,10 +138,10 @@ export default {
         // })
       } else {
         // 分类列表页
-        if (this.cp === '0') {
+        if (this.cp === "0") {
           // 课程-转到课程详情
-          this.courseUrl.kid = item.id
-          open(this.courseUrl)
+          this.courseUrl.kid = item.id;
+          open(this.courseUrl);
           // this.$router.push({
           //   path: '/course/coursedetail',
           //   query: {
@@ -153,41 +153,41 @@ export default {
         } else {
           // 项目-项目详情
           this.$router.push({
-            path: '/project/projectdetail',
+            path: "/project/projectdetail",
             query: {
               kid: item.id,
               type: 1
             }
-          })
+          });
         }
       }
     },
     // 我要选课 -选择课程
     selCheckboxChange(item, index) {
-      this.$emit('selCheckboxChange', item) //改变全选按钮保存的数组值
+      this.$emit("selCheckboxChange", item); //改变全选按钮保存的数组值
       if (item.is_checked === false) {
-        item.is_checked = false
-        this.curriculumcartid.numberArr.push(item.id)
-        this.curriculumcartids.cartid = item.id
-        this.delShopCart()
+        item.is_checked = false;
+        this.curriculumcartid.numberArr.push(item.id);
+        this.curriculumcartids.cartid = item.id;
+        this.delShopCart();
       } else {
-        item.is_checked = true
-        this.curriculumcartids.cartid = item.id
-        this.curriculumcartid.numberArr.pop()
-        this.goodsNmber()
+        item.is_checked = true;
+        this.curriculumcartids.cartid = item.id;
+        this.curriculumcartid.numberArr.pop();
+        this.goodsNmber();
       }
     },
     // 判断购物车数量
     goodsNmber() {
-      if (persistStore.get('productsNum') < 70) {
-        this.addShopCart()
+      if (persistStore.get("productsNum") < 70) {
+        this.addShopCart();
       } else {
-        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
-          confirmButtonText: '确定',
+        this.$alert("您的购物车已满，建议您先去结算或清理", "温馨提示", {
+          confirmButtonText: "确定",
           callback: action => {
-            this.$router.push('/shop/shoppingcart')
+            this.$router.push("/shop/shoppingcart");
           }
-        })
+        });
       }
     },
     // 添加购物车
@@ -195,32 +195,32 @@ export default {
       card.addShopCart(this.curriculumcartids).then(response => {
         this.setProductsNum({
           pn: response.data.curriculumNumber
-        })
-      })
+        });
+      });
     },
     // 取消勾选
     delShopCart() {
       card.delCourseShopCart(this.curriculumcartids).then(response => {
         this.setProductsNum({
           pn: response.data.curriculumNumber
-        })
-      })
+        });
+      });
     }
   },
   mounted() {
     // isIndex判断是否在首页 true在首页
     // cp类型决定当前列表的类型：0-课程；1-项目
-    if (window.location.search.split('=')[2]) {
-      this.isIndex = false
-      this.cp = matchSplits('cp')
+    if (window.location.search.split("=")[2]) {
+      this.isIndex = false;
+      this.cp = matchSplits("cp");
     } else {
-      this.isIndex = true
+      this.isIndex = true;
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/components/commonCard';
+@import "~assets/style/components/commonCard";
 </style>
 
