@@ -69,7 +69,10 @@ export default {
       let pathName = window.location.pathname;
 
       //初始化名师智库默认选中学院分类
-      if (pathName != "/home/teacher/list") {
+      if (
+        pathName != "/home/teacher/list" ||
+        pathName != "/home/teacher/list/"
+      ) {
         persistStore.set("cid", -1);
       }
 
@@ -82,24 +85,33 @@ export default {
         case "/home/teacher/list":
         case "/home/teacher/orderTeacher":
         case "/home/teacher/beTeacher":
+        case "/home/teacher/list/":
+        case "/home/teacher/orderTeacher/":
+        case "/home/teacher/beTeacher/":
           this.changeActive = "teacher";
           break;
         //城市分校
         case "/home/citySchool/schoolIntro":
         case "/home/citySchool/submitSuccess":
+        case "/home/citySchool/schoolIntro/":
+        case "/home/citySchool/submitSuccess/":
           this.changeActive = "school";
           break;
         //课程分类
         case "/course/category":
+        case "/course/category/":
           this.changeActive = matchSplits("vid");
           break;
         //学院
         case "/home/vip/vipPage":
+        case "/home/vip/vipPage/":
           this.changeActive = matchSplits("id");
           break;
         //证书查询
         case "/home/certification/searchPage":
         case "/home/certification/viewPage":
+        case "/home/certification/searchPage/":
+        case "/home/certification/viewPage/":
           this.changeActive = "searchCer";
           break;
         default:
