@@ -1,7 +1,7 @@
 <template>
   <div class="searchCer">
-    <div class="content">
-      <div v-if="isShowSearch">
+    <div class="content" v-if="isShowSearch">
+      <div>
         <div class="top">
           <h4>1911学堂证书查询</h4>
         </div>
@@ -24,19 +24,20 @@
             </span>
             <span class="right">
               <input type="text" class="code" placeholder="请输入验证码" v-model="searchForm.code">
-              <img src="mall.1911thu.com/Publics/VerificationCode/createVcode" onClick="this.src='/Publics/VerificationCode/createVcode/'+new Date().getTime();">
+              <img class="codeImg" :src="searchForm.codeImg" @click="updateCode">
             </span>
           </div>
           <div class="buttonn" @click="searchCer">查询</div>
         </div>
       </div>
-      <v-view v-if="!isShowSearch" :viewData="viewData"></v-view>
     </div>
+    <v-view v-if="!isShowSearch" :viewData="viewData"></v-view>
   </div>
 </template>
 <script>
 import { Trim, matchSplits, setTitle, message } from "@/lib/util/helper";
 import viewPage from "@/pages/home/certification/viewPage.vue";
+import { certification } from "~/lib/v1_sdk/index";
 
 export default {
   components: {
@@ -45,37 +46,52 @@ export default {
   data() {
     return {
       isShowSearch: true,
-      viewData: {
-        name: "徐楠",
-        sex: "女",
-        birthday: "1985年10月1日",
-        number: "19112019020001",
-        projectName: "在线商学院",
-        startTime: "2019年12月31日",
-        endTime: "2019年12月31日",
-        time: 100
-      },
+      viewData: {},
       searchForm: {
         number: "",
         name: "",
-        code: ""
+        code: "",
+        codeImg: "",
+        validateToken: ""
       }
     };
   },
   methods: {
+    //更新验证码
+    updateCode() {
+      this.code();
+    },
+    // 获取图形验证码
+    code() {
+      certification.createVcode().then(res => {
+        if (res.status == 0) {
+          this.searchForm.codeImg = res.data.image_data_base64;
+          this.searchForm.validateToken = res.data.identity_token;
+        }
+      });
+    },
+    //查询证书
     searchCer() {
-      // try {
-      //   if (Trim(this.searchForm.number) === "") throw "请输入证书编号";
-      //   if (Trim(this.searchForm.name) === "") throw "请输入您的姓名";
-      //   if (Trim(this.searchForm.code) === "") throw "请输入验证码";
-      // } catch (err) {
-      //   message(this, "error", err);
-      //   return false;
-      // }
-      this.isShowSearch = false;
-      console.log(this.viewData);
-      this.$router.push("/home/certification/viewPage");
+      try {
+        if (Trim(this.searchForm.number) === "") throw "请输入证书编号";
+        if (Trim(this.searchForm.name) === "") throw "请输入您的姓名";
+        if (Trim(this.searchForm.code) === "") throw "请输入验证码";
+      } catch (err) {
+        message(this, "error", err);
+        return false;
+      }
+      certification.certificateDetail(this.searchForm).then(res => {
+        if (res.status == 0) {
+          this.viewData = res.data.certificateDetail;
+          this.isShowSearch = false;
+        } else {
+          message(this, "error", res.msg);
+        }
+      });
     }
+  },
+  mounted() {
+    this.code();
   }
 };
 </script>
