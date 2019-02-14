@@ -69,7 +69,10 @@ export default {
       let pathName = window.location.pathname;
 
       //初始化名师智库默认选中学院分类
-      if (pathName != "/home/teacher/list") {
+      if (
+        pathName != "/home/teacher/list" ||
+        pathName != "/home/teacher/list/"
+      ) {
         persistStore.set("cid", -1);
       }
 
