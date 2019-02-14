@@ -4,7 +4,7 @@
     <div class="start forgot">
       <div class="lrFrame">
         <div class="logo" @click="goHome">
-          <img src="http://static-image.1911edu.com/1911-logo.png" alt="">
+          <img src="http://static-image.1911edu.com/1911-logo2.png" alt="">
         </div>
         <div class="pwd">
           <span>忘记密码</span>
@@ -50,7 +50,7 @@ import { mapActions } from "vuex";
 import { auth } from "~/lib/v1_sdk/index";
 import { encryption, message, Trim } from "~/lib/util/helper";
 export default {
-  data() {
+  data () {
     return {
       showPwd: false,
       pwdType: "password",
@@ -112,7 +112,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["forgetPasswordAjax"]),
-    changePwd() {
+    changePwd () {
       if (this.showPwd) {
         this.showPwd = false;
         this.pwdType = "password";
@@ -122,7 +122,7 @@ export default {
       }
     },
     // 验证手机号是否存在
-    verifyRgTel() {
+    verifyRgTel () {
       auth.verifyPhone(this.fpData).then(response => {
         if (response.status === 0) {
           message(this, "error", "您的手机号还未注册！");
@@ -138,7 +138,7 @@ export default {
         }
       });
     },
-    forgetPassword() {
+    forgetPassword () {
       this.fpData.code = String(this.fpData.code);
       this.fpData.password = String(this.fpData.password);
       if (!validatePhone(this.fpData.phones)) {
@@ -166,7 +166,7 @@ export default {
         }
       });
     },
-    async handleGetCode() {
+    async handleGetCode () {
       if (!this.captchaDisable) {
         auth.smsCodes(this.fpData).then(response => {
           let types = response.status === 0 ? "success" : "error";
@@ -188,20 +188,20 @@ export default {
         });
       }
     },
-    goHome() {
+    goHome () {
       this.$router.push("/");
     },
-    otherLogin() {
+    otherLogin () {
       this.goHome();
       this.$bus.$emit("loginShow", true);
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     this.$bus.$emit("headerFooterShow");
     next();
   }

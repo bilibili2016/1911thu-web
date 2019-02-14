@@ -94,6 +94,6 @@
 export default {}
 </script>
 <style scoped lang="scss">
-@import '~assets/style/other/userprotocol';
+// @import '~assets/style/other/userprotocol';
 </style>
 
