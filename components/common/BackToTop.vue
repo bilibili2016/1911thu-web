@@ -57,9 +57,9 @@
 </template>
 
 <script>
-import { store as persistStore } from '~/lib/core/store'
-import { mapActions, mapGetters } from 'vuex'
-import { open } from '@/lib/util/helper'
+import { store as persistStore } from "~/lib/core/store";
+import { mapActions, mapGetters } from "vuex";
+import { open } from "@/lib/util/helper";
 /* eslint-disable */
 export default {
   props: [
@@ -77,118 +77,118 @@ export default {
     //     default: 'fade'
     //   }
     // },
-    'data'
+    "data"
   ],
-  data () {
+  data() {
     return {
       dialogVisible: false,
       visibilityHeight: 400,
       backPosition: 0,
-      transitionName: 'fade',
+      transitionName: "fade",
       showNotLogin: false,
       visible: false,
       move: true,
       interval: null,
-      ceilSrc: 'http://static-image.1911edu.com/home_backtop11.png',
-      wxSrc: 'http://static-image.1911edu.com/home_backtop22.png',
-      qqSrc: 'http://static-image.1911edu.com/home_backtop22.png',
-      topSrc: 'http://static-image.1911edu.com/home_backtop03.png',
+      ceilSrc: "http://static-image.1911edu.com/home_backtop11.png",
+      wxSrc: "http://static-image.1911edu.com/home_backtop22.png",
+      qqSrc: "http://static-image.1911edu.com/home_backtop22.png",
+      topSrc: "http://static-image.1911edu.com/home_backtop03.png",
       completeTask:
-        'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003072'
-    }
+        "https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003072"
+    };
   },
-  mounted () {
-    window.addEventListener('scroll', this.handleScroll)
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
   },
-  beforeDestroy () {
-    window.removeEventListener('scroll', this.handleScroll)
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
     if (this.interval) {
-      clearInterval(this.interval)
+      clearInterval(this.interval);
     }
   },
   computed: {
-    ...mapGetters('auth', ['isAuthenticated'])
+    ...mapGetters("auth", ["isAuthenticated"])
   },
   methods: {
-    handleScroll () {
-      this.visible = window.pageYOffset > this.visibilityHeight
+    handleScroll() {
+      this.visible = window.pageYOffset > this.visibilityHeight;
       // this.visible = true
     },
-    showTips (show) {
-      this.showNotLogin = show
+    showTips(show) {
+      this.showNotLogin = show;
     },
     //跳转到自定制项目
-    goCustomerProject () {
-      if (persistStore.get('token')) {
+    goCustomerProject() {
+      if (persistStore.get("token")) {
         this.$router.push({
-          path: '/project/customerProject',
+          path: "/project/customerProject",
           query: {
-            sid: '',
+            sid: "",
             edit: 1
           }
-        })
+        });
       } else {
-        this.$bus.$emit('loginShow')
+        this.$bus.$emit("loginShow");
       }
     },
     // 我要选课
-    checkCourse () {
-      if (persistStore.get('token')) {
+    checkCourse() {
+      if (persistStore.get("token")) {
         // this.goLink('/course/chooselesson')
         // 整合后的跳转
 
         window.open(
           window.location.origin +
-          '/course/category' +
-          '?cid=' +
-          '0' +
-          '&cp=' +
-          '0' +
-          '&xid=1' +
-          '&pids=' +
-          '0'
-        )
+            "/course/category" +
+            "?cid=" +
+            "0" +
+            "&cp=" +
+            "0" +
+            "&xid=1" +
+            "&pids=" +
+            "0"
+        );
         // this.showNotLogin = false
       } else {
         // this.showNotLogin = true
-        this.$bus.$emit('loginShow')
+        this.$bus.$emit("loginShow");
       }
     },
-    backToTop () {
+    backToTop() {
       if (this.move) {
-        const start = window.pageYOffset
-        let i = 0
+        const start = window.pageYOffset;
+        let i = 0;
         this.interval = setInterval(() => {
           const next = Math.floor(
             this.easeInOutQuad(10 * i, start, -start, 500)
-          )
+          );
           if (next <= this.backPosition) {
-            window.scrollTo(0, this.backPosition)
-            clearInterval(this.interval)
-            this.move = true
+            window.scrollTo(0, this.backPosition);
+            clearInterval(this.interval);
+            this.move = true;
           } else {
-            this.move = false
-            window.scrollTo(0, next)
+            this.move = false;
+            window.scrollTo(0, next);
           }
-          i++
-        }, 16.7)
+          i++;
+        }, 16.7);
       }
     },
-    goLink (item) {
-      this.$router.push(item)
+    goLink(item) {
+      this.$router.push(item);
     },
-    easeInOutQuad (t, b, c, d) {
-      if ((t /= d / 2) < 1) return (c / 2) * t * t + b
-      return (-c / 2) * (--t * (t - 2) - 1) + b
+    easeInOutQuad(t, b, c, d) {
+      if ((t /= d / 2) < 1) return (c / 2) * t * t + b;
+      return (-c / 2) * (--t * (t - 2) - 1) + b;
     },
-    handleopen () {
+    handleopen() {
       // window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')
       // window.open(
       //   'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003068#/'
       // )
-      this.dialogVisible = true
+      this.dialogVisible = true;
     }
   }
-}
+};
 </script>
 
