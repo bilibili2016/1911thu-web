@@ -3,6 +3,7 @@
     .content {
         width: 1100px;
         margin: 60px auto 40px;
+        padding-bottom: 40px;
         border-radius: 10px;
         box-shadow: 0px 0px 36px 0px rgba(198, 194, 210, 0.36);
         .top {
@@ -84,12 +85,34 @@
                 line-height: 50px;
                 text-align: center;
                 background-color: #773084;
-                margin: 30px auto 40px;
+                margin: 50px auto 0;
                 font-size: 18px;
                 border-radius: 50px;
                 cursor: pointer;
                 color: #fff;
             }
+            .noDataImg {
+                img {
+                    width: 210px !important;
+                    height: 210px !important;
+                }
+            }
+        }
+        .viewBottom {
+            height: auto;
+        }
+        .goSearch {
+            width: 180px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: #773084;
+            margin: 0 auto;
+            padding-bottom: 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            color: #fff;
         }
     }
     .intro {

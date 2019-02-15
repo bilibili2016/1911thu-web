@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <v-view v-if="!isShowSearch" :viewData="viewData"></v-view>
+    <v-view v-if="!isShowSearch" :viewData="viewData" @goSearch="goSearch"></v-view>
   </div>
 </template>
 <script>
@@ -84,10 +84,23 @@ export default {
         if (res.status == 0) {
           this.viewData = res.data.certificateDetail;
           this.isShowSearch = false;
+        } else if (res.status == 100101) {
+          //为查询到证书
+          this.viewData = "noData";
+          this.isShowSearch = false;
         } else {
           message(this, "error", res.msg);
         }
       });
+    },
+    //重新查询
+    goSearch() {
+      this.isShowSearch = true;
+      this.searchForm.name = "";
+      this.searchForm.number = "";
+      this.searchForm.code = "";
+      this.searchForm.validateToken = "";
+      this.code();
     }
   },
   mounted() {
