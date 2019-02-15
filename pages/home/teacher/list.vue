@@ -1,13 +1,7 @@
 <template>
-  <div
-    class="news-list teacherList"
-    v-loading="loading"
-  >
+  <div class="news-list teacherList" v-loading="loading">
     <div class="banner-con">
-      <v-banner
-        :bannerImg="bannerImg"
-        :config="configs"
-      ></v-banner>
+      <v-banner :bannerImg="bannerImg" :config="configs"></v-banner>
     </div>
     <!-- <div class="teacherLead clearfix">
       <p>为了给党政机关、事业单位及企业组织提供量身定制的个性化及顾问咨询学习模式，1911学堂建立了名师智库为相关单位推荐顾问导师，真正做到学习需求与专家内容的智能匹配。</p>
@@ -15,83 +9,29 @@
       <p>贵单位可根据自己的需求从学堂海量的名师智库中筛选导师，把需求提交给学堂，学堂将根据需求进行智能匹配，推荐最合适的专家教授及行业精英到单位真实的场景中授课、咨询。学员可以与学堂导师进行面对面交流、领略大师风采，在自己熟悉的学习环境中更加有效的掌握学习内容，切实提升问题解决能力和实际应用能力，从而提高学习效能，以实现贵单位“请进来、沉下去”的培训效果。</p>
     </div>-->
     <!-- 分类 -->
-    <v-category
-      :categoryData="categoryData"
-      :childList="childList"
-      :unitData="unitData"
-      :sortData="sortData"
-      @processData="processData"
-      @selectCid="selectCid"
-      @selectPid="selectPid"
-      @selectUid="selectUid"
-      @selectKid="selectKid"
-      @selectTips="selectTips"
-      @changeCid="changeCid"
-    ></v-category>
-    <div
-      class="te-con clearfix"
-      id="container"
-    >
+    <v-category :categoryData="categoryData" :childList="childList" :unitData="unitData" :sortData="sortData" @processData="processData" @selectCid="selectCid" @selectPid="selectPid" @selectUid="selectUid" @selectKid="selectKid" @selectTips="selectTips" @changeCid="changeCid"></v-category>
+    <div class="te-con clearfix" id="container">
       <div class="con">
-        <div
-          class="left"
-          id="leftCon"
-        >
+        <div class="left" id="leftCon">
           <div v-if="famousList.length">
             <div class="teacherList">
               <div @click="getNewInfoList"></div>
-              <v-card
-                :famousList="famousList"
-                :config="config"
-              ></v-card>
+              <v-card :famousList="famousList" :config="config"></v-card>
             </div>
-            <div
-              class="pagination"
-              v-if="pagemsg.total>12"
-            >
-              <el-pagination
-                :id="pagemsg.total"
-                v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
-                background
-                layout="prev, pager, next"
-                :page-size="pagemsg.pagesize"
-                :pager-count="5"
-                :page-count="pagemsg.pagesize"
-                :current-page="pagemsg.page"
-                :total="pagemsg.total"
-                @current-change="selectPages"
-              ></el-pagination>
+            <div class="pagination" v-if="pagemsg.total>12">
+              <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
             </div>
           </div>
           <!-- 无数据 -->
-          <v-nodata
-            v-else
-            :pageType="pageType"
-          ></v-nodata>
+          <v-nodata v-else :pageType="pageType"></v-nodata>
         </div>
-        <div
-          class="right"
-          id="rightCon"
-          ref="rightCon"
-        >
-          <div
-            class="right-con"
-            :class="{rightFixed:isFixed}"
-            v-html="introduce"
-          ></div>
+        <div class="right" id="rightCon" ref="rightCon">
+          <div class="right-con" :class="{rightFixed:isFixed}" v-html="introduce"></div>
         </div>
       </div>
     </div>
-    <div
-      class="joinTeacher"
-      @click="joinTeacher"
-      v-show="isShowBtn"
-      style="cursor:pointer"
-    >
-      <img
-        src="http://static-image.1911edu.com/toDoTeacher-gif.gif"
-        alt
-      >
+    <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn" style="cursor:pointer">
+      <img src="http://static-image.1911edu.com/toDoTeacher-gif.gif" alt>
     </div>
   </div>
 </template>
@@ -113,7 +53,7 @@ export default {
     "v-category": Category,
     "v-nodata": NoData
   },
-  data() {
+  data () {
     return {
       introduce: "",
       initIntro:
@@ -174,25 +114,26 @@ export default {
   },
   methods: {
     // 加入1911教师
-    joinTeacher() {
+    joinTeacher () {
       this.$router.push("/home/teacher/beTeacher");
     },
-    initTeacherList() {
+    initTeacherList () {
       this.teacherForm.pages = 1;
       this.teacherForm.limits = 12;
       this.pagemsg.page = 1;
       this.getNewInfoList();
     },
     //导师列表翻页
-    selectPages(val) {
+    selectPages (val) {
       this.teacherForm.pages = val;
       this.teacherForm.limits = this.pagemsg.pagesize;
       this.pagemsg.page = val;
       this.getNewInfoList();
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      let height = document.getElementById('famousTeacher').offsetHeight
+      document.body.scrollTop = document.documentElement.scrollTop = height;
     },
     //获取导师数据
-    getNewInfoList() {
+    getNewInfoList () {
       this.loading = true;
       list.getTeacherList(this.teacherForm).then(response => {
         this.loading = false;
@@ -211,11 +152,11 @@ export default {
       });
     },
     //导师招募
-    beTeacher() {
+    beTeacher () {
       this.$router.push("/home/teacher/beTeacher");
     },
     //选择一级分类
-    selectCid(data, index) {
+    selectCid (data, index) {
       if (data.id != 0) {
         this.introduce = data.introduce;
       } else {
@@ -229,12 +170,12 @@ export default {
       this.initTeacherList();
     },
     //选择二级分类
-    selectPid(data, index) {
+    selectPid (data, index) {
       this.teacherForm.pid = data.id;
       this.initTeacherList();
     },
     //专长领域下拉点击效果
-    selectTips(item) {
+    selectTips (item) {
       for (var i = 0; i < this.categoryListData.length; i++) {
         if (this.categoryListData[i].id == item.parent_id) {
           this.introduce = this.categoryListData[i].introduce;
@@ -247,21 +188,21 @@ export default {
       this.initTeacherList();
     },
     //所在单位
-    selectUid(data, index) {
+    selectUid (data, index) {
       this.teacherForm.uid = data.id;
       this.initTeacherList();
     },
-    selectKid(item) {
+    selectKid (item) {
       this.teacherForm.kid = item.id;
       this.introduce = item.introduce;
       this.initTeacherList();
     },
     //一级分类下没有二级分类进行初始化
-    changeCid(data) {
+    changeCid (data) {
       this.teacherForm.pid = data;
     },
     //教师单位列表
-    teacherCompanyList() {
+    teacherCompanyList () {
       list.teacherCompanyList().then(res => {
         if (res.status === 0) {
           this.unitData = res.data.teacherCompanyList;
@@ -273,7 +214,7 @@ export default {
       });
     },
     // 公共 获取list 方法
-    getHeaderList() {
+    getHeaderList () {
       this.loadList = true;
       list.teacherCategoryList().then(res => {
         if (res.status === 0) {
@@ -296,7 +237,7 @@ export default {
       });
     },
     // 处理数据 拼接全部数据
-    handleData(data, res) {
+    handleData (data, res) {
       this.categoryData = res.data.categoryList;
       this.categoryData.unshift(data);
       if (this.categoryData.length > 1) {
@@ -317,7 +258,7 @@ export default {
       }
     },
     // 处理全部的分类
-    makeData(arr, data) {
+    makeData (arr, data) {
       data.forEach((v, i) => {
         v.childList.forEach((v, i) => {
           if (i > 0) {
@@ -327,7 +268,7 @@ export default {
       });
     },
     // 根据一级分类处理分类二级分类
-    processData() {
+    processData () {
       for (let item of this.categoryData) {
         if (item.id == this.categoryId) {
           this.categoryIndex = this.categoryData.indexOf(item);
@@ -340,12 +281,12 @@ export default {
       this.childList = this.categoryData[this.categoryIndex].childList;
       this.sortData = this.categoryData[this.categoryIndex].teacherKindList;
     },
-    addClass() {
+    addClass () {
       if (
         document.getElementById("rightCon") &&
         document.getElementById("rightCon").getBoundingClientRect().top * 1 -
-          81 <=
-          0
+        81 <=
+        0
       ) {
         this.isFixed = true;
       } else {
@@ -364,7 +305,7 @@ export default {
       // }
     }
   },
-  mounted() {
+  mounted () {
     setTitle("名师智库-1911学堂");
     this.getHeaderList();
     // this.initTeacherList();

@@ -2,23 +2,14 @@
   <div>
     <template v-if="config.banner_type === 'news' || config.banner_type === 'outNews'">
       <div class="news-banner">
-        <img
-          :src="bannerImg"
-          alt
-        >
-        <div
-          v-if="config.banner_type === 'news'"
-          class="newLsit-desc"
-        >
+        <img :src="bannerImg" alt>
+        <div v-if="config.banner_type === 'news'" class="newLsit-desc">
           <p class="title">NEWS</p>
           <span class="line"></span>
           <p class="small-title">学堂资讯</p>
           <p class="desc">School Information</p>
         </div>
-        <div
-          v-if="config.banner_type === 'outNews'"
-          class="newLsit-desc"
-        >
+        <div v-if="config.banner_type === 'outNews'" class="newLsit-desc">
           <p class="title">NEWS</p>
           <span class="line"></span>
           <p class="small-title">媒体报道</p>
@@ -27,26 +18,16 @@
       </div>
     </template>
     <template v-if="config.banner_type === 'famousList'">
-      <div class="famousTeacher"></div>
+      <div class="famousTeacher" id="famousTeacher"></div>
     </template>
 
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
-          <img
-            :class="{noImg :!userInfo.head_img,topImg:userInfo.head_img}"
-            :src="userInfo.head_img"
-          >
-          <div
-            class="up-user-avtor"
-            v-show="isShowUpAvtor"
-          >
+          <img :class="{noImg :!userInfo.head_img,topImg:userInfo.head_img}" :src="userInfo.head_img">
+          <div class="up-user-avtor" v-show="isShowUpAvtor">
             <div class="upload-img">
-              <input
-                type="file"
-                @change="add_img"
-                accept="image/png, image/gif, image/jpeg"
-              >
+              <input type="file" @change="add_img" accept="image/png, image/gif, image/jpeg">
             </div>
             <div class="mask">
               <span>更换图片</span>
@@ -59,21 +40,9 @@
             <p class="nickName">{{userInfo.nick_name}}</p>
             <!-- <p class="companyName">{{userInfo.company_name}}</p> -->
             <p class="vipCard">
-              <span
-                v-for="(vip,index) in userInfo.vipPrivateList"
-                :key="index"
-              >
-                <el-popover
-                  placement="bottom-start"
-                  :title="vip.title"
-                  width="180"
-                  trigger="hover"
-                  :content="'剩余'+(vip.expire_days)+'天'"
-                >
-                  <el-button
-                    slot="reference"
-                    @click="goVipInfo(vip)"
-                  >
+              <span v-for="(vip,index) in userInfo.vipPrivateList" :key="index">
+                <el-popover placement="bottom-start" :title="vip.title" width="180" trigger="hover" :content="'剩余'+(vip.expire_days)+'天'">
+                  <el-button slot="reference" @click="goVipInfo(vip)">
                     <img :src="vip.vip_icon">
                   </el-button>
                 </el-popover>
@@ -102,7 +71,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data() {
+  data () {
     return {
       time: {
         hour: null,
@@ -116,14 +85,14 @@ export default {
     };
   },
   watch: {
-    userInfo() {
+    userInfo () {
       // 已学习时长
       this.changeTime(this.userInfo.study_curriculum_time);
     }
   },
   methods: {
     ...mapActions("auth", ["signOut"]),
-    add_img(event) {
+    add_img (event) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -141,7 +110,7 @@ export default {
         });
       };
     },
-    goVipInfo(vip) {
+    goVipInfo (vip) {
       this.$router.push({
         path: "/home/vip/vipPage",
         query: {
@@ -150,7 +119,7 @@ export default {
         }
       });
     },
-    changeTime(timing) {
+    changeTime (timing) {
       this.time.hour = parseInt(timing / 3600);
       this.time.minutes = parseInt(
         (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
@@ -162,7 +131,7 @@ export default {
           parseInt(
             (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
           )) *
-          60
+        60
       );
     }
   }
