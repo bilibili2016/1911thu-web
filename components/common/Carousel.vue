@@ -44,7 +44,7 @@
 <script>
 import { mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
-import { open } from "@/lib/util/helper";
+import { open, checkURL } from "@/lib/util/helper";
 export default {
   props: ["items", "config", "swiperData"],
   data () {
@@ -72,12 +72,7 @@ export default {
       // jump_type = 1  跳转至课程详情 jump_id 课程id
       // jump_type = 2  跳转至项目详情 jump_id 项目id
       if (img.jump_type == "0" && img.jump_url != "") {
-        if (/(http|https):\/\/([\w.]+\/?)\S*/.test(img.jump_url)) {
-          window.open(img.jump_url);
-        } else {
-          img.jump_url = "http://" + img.jump_url;
-          window.open(img.jump_url);
-        }
+        window.open(checkURL(img.jump_url));
       }
       if (img.jump_type == "1" && img.jump_id != "") {
         this.courseUrl.kid = img.jump_id;

@@ -25,21 +25,21 @@
 </template>
 
 <script>
-import { formatTime } from '~/lib/util/helper'
+import { formatTime, checkURL } from '~/lib/util/helper'
 export default {
   props: ['newsList'],
   methods: {
     //新闻详情页
-    newsDetail(news) {
-      this.$router.push('/home/news/' + news.id)
+    newsDetail (news) {
+      news.type == '3' ? window.open(checkURL(news.media_link)) : this.$router.push("/home/news/" + news.id)
     },
     //转换时间格式(格式二)
-    changeTime(time) {
+    changeTime (time) {
       return formatTime(time)
     }
   }
 }
 </script>
 <style scoped lang="scss">
-@import '~assets/style/news/list';
+@import "~assets/style/news/list";
 </style>

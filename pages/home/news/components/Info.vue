@@ -16,11 +16,11 @@
 <script>
 export default {
   props: ['infoArticle', 'linkfive'],
-  data() {
+  data () {
     return {}
   },
   methods: {
-    selectDetail(course) {
+    selectDetail (course) {
       this.$router.push('/home/news/' + course.id)
     }
   }
