@@ -1,0 +1,81 @@
+.projectevaluate {
+  width: 1100px;
+  margin: 0 auto;
+  .evlHead {
+    height: 78px;
+    line-height: 78px;
+    background: rgba(247, 247, 247, 1);
+    border-radius: 10px;
+    padding: 0 30px;
+    div.fl {
+      & > span {
+        font-size: 36px;
+      }
+      .el-rate {
+        display: inline-block;
+        height: 78px;
+        line-height: 86px;
+        vertical-align: top;
+        margin-left: 20px;
+      }
+    }
+    div.fr {
+      font-size: 14px;
+      color: #222;
+    }
+  }
+  .evaluateList {
+    margin-top: 22px;
+    padding: 30px 30px 90px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    box-shadow: 0px 0px 21px rgba(39, 0, 77, 0.07);
+    .evl {
+      margin-bottom: 40px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      img {
+        width: 42px;
+        height: 42px;
+      }
+      div.fl {
+        margin-left: 16px;
+        font-size: 14px;
+        color: #222;
+        line-height: 22px;
+        overflow: hidden;
+        p:last-child {
+          color: #b0aeb8;
+          font-size: 12px;
+        }
+      }
+      & > p {
+        font-size: 14px;
+        color: #222;
+        line-height: 30px;
+        margin-top: 10px;
+      }
+    }
+  }
+  .noData {
+    width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0px 0px 21px rgba(39, 0, 77, 0.07);
+    img {
+      width: 316px;
+      height: 274px;
+      margin-top: 50px;
+    }
+    p {
+      height: 70px;
+      line-height: 70px;
+      text-align: center;
+      color: #999;
+      font-size: 20px;
+    }
+  }
+}

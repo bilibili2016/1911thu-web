@@ -1,0 +1,485 @@
+body {
+	padding-top: 0;
+}
+
+.exam {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	top: 0;
+	padding-top: 76px;
+
+	.examTitle {
+		width: 100%;
+		height: 76px;
+		line-height: 76px;
+		// padding-left: 40px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: #fff;
+		box-shadow: 0px 3px 24px 0px rgba(73, 73, 73, 0.14);
+		.title-left {
+			float: left;
+			width: 60%;
+			.title {
+				width: 700px;
+				float: right;
+				text-align: left;
+			}
+		}
+		.title-right {
+			float: left;
+			width: 40%;
+			.overtime {
+				width: 440px;
+				text-align: right;
+			}
+		}
+
+		span {
+			font-size: 20px;
+
+			// &:first-child {
+			// 	width: 495px;
+			// }
+
+			i {
+				color: #ff5f5f;
+			}
+		}
+	}
+
+	.examLeft {
+		width: 60%;
+		height: 100%;
+		background-color: #f7f9fc;
+
+		.problem {
+			width: 660px;
+			height: 490px;
+			float: right;
+			margin-right: 42px;
+
+			h3 {
+				font-size: 18px;
+				padding-top: 38px;
+				color: #6417a6;
+			}
+
+			h4 {
+				font-size: 16px;
+				height: 60px;
+				line-height: 30px;
+				margin: 15px 0;
+				color: #222222;
+				overflow: hidden;
+			}
+
+			.el-radio {
+				display: block;
+				width: 654px;
+				margin: 0 0 20px 0;
+				padding: 12px 18px;
+				line-height: 20px;
+				border: 1px solid transparent;
+				border-radius: 6px;
+				background: rgba(255, 255, 255, 1);
+				box-shadow: 0px 3px 14px 0px rgba(198, 194, 210, 0.36);
+				cursor: pointer;
+				overflow: hidden;
+				white-space: normal;
+
+				.el-radio__label {
+					padding: 0;
+				}
+
+				&.is-checked {
+					color: #6417a6;
+					border: 1px solid #6417a6;
+					position: relative;
+
+					&:after {
+						content: ' 」';
+						display: inline-block;
+						width: 36px;
+						height: 36px;
+						line-height: 28px;
+						font-size: 18px;
+						padding-left: 2px;
+						background-color: #6417a6;
+						color: #fff;
+						position: absolute;
+						right: -18px;
+						bottom: -18px;
+						transform: rotate(45deg);
+					}
+
+					.el-radio__input.is-disabled + span.el-radio__label {
+						color: #6417a6;
+					}
+				}
+
+				.el-radio__input {
+					display: none;
+				}
+			}
+
+			.el-checkbox-group .el-checkbox {
+				margin: 0 0 20px 0;
+
+				.el-checkbox__input {
+					display: none;
+				}
+
+				.el-checkbox__label {
+					display: block;
+					width: 654px;
+					white-space: normal;
+					line-height: 20px;
+					background: rgba(255, 255, 255, 1);
+					box-shadow: 0px 3px 14px 0px rgba(198, 194, 210, 0.36);
+					border-radius: 6px;
+					padding: 12px 18px;
+					border: 1px solid transparent;
+					cursor: pointer;
+					overflow: hidden;
+				}
+
+				&.is-checked .el-checkbox__label {
+					color: #6417a6;
+					border: 1px solid #6417a6;
+					position: relative;
+
+					&:after {
+						content: ' 」';
+						display: inline-block;
+						width: 36px;
+						height: 36px;
+						line-height: 28px;
+						font-size: 18px;
+						padding-left: 2px;
+						background-color: #6417a6;
+						color: #fff;
+						position: absolute;
+						right: -18px;
+						bottom: -18px;
+						transform: rotate(45deg);
+					}
+				}
+			}
+		}
+
+		.result,
+		.commitBtn {
+			width: 660px;
+			float: right;
+			margin-right: 42px;
+			position: relative;
+
+			p {
+				font-size: 20px;
+				margin-bottom: 18px;
+
+				&.error {
+					color: #ff5f5f;
+				}
+
+				&.success {
+					color: #369936;
+				}
+
+				i {
+					margin-right: 6px;
+				}
+
+				&.analysis {
+					display: none;
+					font-size: 12px;
+					color: #666666;
+				}
+
+				&.countTime {
+					width: 100%;
+					position: absolute;
+					top: 0;
+					color: #888;
+					text-align: center;
+
+					span {
+						color: #6417a6;
+					}
+				}
+			}
+		}
+
+		.result {
+			height: 50px;
+		}
+	}
+
+	.commitBtn {
+		width: 401px;
+		text-align: right;
+		.btn-submit {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		span {
+			width: 130px;
+			height: 42px;
+			line-height: 42px;
+			text-align: center;
+			transition: all 300ms;
+			border-radius: 21px;
+			border: 1px solid #6417a6;
+			background-color: #fff;
+			color: #6417a6;
+			font-size: 16px;
+			vertical-align: middle;
+			cursor: pointer;
+			&:hover {
+				background-color: #6417a6;
+				color: #fff;
+			}
+
+			&.unclick {
+				background-color: #bbb;
+				border: 1px solid #bbbbbb;
+				color: #fff;
+				cursor: not-allowed;
+			}
+			&.btnClick {
+				background-color: #fff;
+				border: 1px solid #bbbbbb;
+				color: #222;
+			}
+
+			// &.preAnswer {
+			// 	border: 1px solid #bbbbbb;
+			// 	background-color: #fff;
+			// 	color: #666;
+			// }
+
+			&.nextAnswer {
+				// border: 1px solid #dddddd;
+				// background-color: #dddddd;
+				// color: #222222;
+				margin: 0 20px;
+			}
+
+			&.disable {
+				cursor: not-allowed;
+			}
+
+			&.isOver {
+				color: #fff;
+				background-color: #bbb;
+				border-color: #bbb;
+				cursor: not-allowed;
+			}
+		}
+	}
+
+	.examRight {
+		width: 40%;
+		height: 100%;
+		padding-left: 40px;
+		background-color: #fff;
+
+		.progress {
+			h3 {
+				color: #6417a6;
+				font-size: 16px;
+				padding-top: 40px;
+			}
+
+			p {
+				color: #222;
+				font-size: 14px;
+				width: 390px;
+				text-align: right;
+				margin: 10px 0;
+			}
+
+			.el-progress {
+				width: 400px;
+			}
+		}
+
+		.displayCard {
+			width: 401px;
+
+			h3 {
+				color: #6417a6;
+				font-size: 16px;
+				padding-top: 40px;
+				margin-bottom: 20px;
+			}
+
+			ul {
+				font-size: 0;
+				box-sizing: content-box;
+				border-top: 1px solid #bfbfbf;
+				border-left: 1px solid #bfbfbf;
+
+				li {
+					display: inline-block;
+					width: 40px;
+					height: 30px;
+					line-height: 30px;
+					font-size: 16px;
+					text-align: center;
+					box-sizing: border-box;
+					cursor: pointer;
+					border-right: 1px solid #bfbfbf;
+					border-bottom: 1px solid #bfbfbf;
+
+					&.bgColor {
+						background-color: #6417a6;
+						color: #fff;
+					}
+
+					&.success {
+						background-color: #369936;
+						color: #fff;
+					}
+
+					&.error {
+						background-color: #ff5f5f;
+						color: #fff;
+					}
+				}
+			}
+		}
+
+		.commitBtn {
+			margin-top: 50px;
+		}
+	}
+
+	.shadow {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.6);
+		z-index: 100;
+
+		.popup {
+			width: 440px;
+			height: 240px;
+			position: absolute;
+			top: 50px;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: auto;
+			border-radius: 10px;
+			background-color: #fff;
+			text-align: center;
+
+			.el-icon-close {
+				position: absolute;
+				right: 20px;
+				top: 20px;
+				font-size: 24px;
+				font-weight: 600;
+				color: #773084;
+				z-index: 3;
+				cursor: pointer;
+			}
+
+			p {
+				font-size: 16px;
+				color: #222;
+
+				&.smile {
+					color: #379a38;
+				}
+
+				&.cry {
+					color: #ff5f5f;
+				}
+
+				&.grade {
+					width: 200px;
+					height: 100px;
+					margin: 0 auto;
+					padding-top: 40px;
+
+					img {
+						width: 60px;
+						height: 60px;
+						display: inline-block;
+						margin-right: 20px;
+					}
+
+					span {
+						width: 100px;
+						line-height: 30px;
+						font-size: 16px;
+						text-align: left;
+
+						&:first-child {
+							font-size: 30px;
+						}
+					}
+				}
+
+				&.subjectNumber {
+					width: 200px;
+					margin: 20px auto 0;
+
+					i {
+						color: #ff5f5f;
+					}
+				}
+
+				&.noTime {
+					color: #ff5f5f;
+					font-size: 14px;
+					margin-top: 10px;
+				}
+			}
+
+			.sdwBtn {
+				margin: 20px auto 0;
+				text-align: center;
+
+				span {
+					width: 150px;
+					height: 40px;
+					line-height: 40px;
+					text-align: center;
+					border-radius: 5px;
+					margin: 0 20px;
+					cursor: pointer;
+
+					&.gonow {
+						border: 1px solid #6417a6;
+						background-color: #fff;
+						color: #6417a6;
+					}
+
+					&.continue {
+						background-color: #6417a6;
+						color: #fff;
+					}
+
+					&.isOver {
+						background-color: #ddd;
+						border-color: #ddd;
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+}
