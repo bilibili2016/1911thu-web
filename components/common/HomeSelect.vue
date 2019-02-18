@@ -32,7 +32,7 @@ export default {
           id: "school"
         },
         {
-          title: "证书查询",
+          title: "证书查询33",
           id: "searchCer"
         }
       ]
