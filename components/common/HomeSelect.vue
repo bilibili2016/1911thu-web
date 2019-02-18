@@ -11,7 +11,7 @@ import { store as persistStore } from "~/lib/core/store";
 import { home } from "~/lib/v1_sdk/index";
 export default {
   props: ["categoryArr", "projectArr"],
-  data () {
+  data() {
     return {
       changeActive: "",
       pages: [],
@@ -32,14 +32,14 @@ export default {
           id: "school"
         },
         {
-          title: "证书查询33",
+          title: "证书查询",
           id: "searchCer"
         }
       ]
     };
   },
   methods: {
-    handleClick (item, index) {
+    handleClick(item, index) {
       let path = "";
       switch (item.id) {
         case "index":
@@ -65,7 +65,7 @@ export default {
           break;
       }
     },
-    changeHeaderActive () {
+    changeHeaderActive() {
       let pathName = window.location.pathname;
 
       //初始化名师智库默认选中学院分类
@@ -120,7 +120,7 @@ export default {
       }
     },
     // 学院列表
-    vipGoodsList () {
+    vipGoodsList() {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           this.item2 = response.data.vipGoodsList;
@@ -129,7 +129,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     this.vipGoodsList();
     this.changeHeaderActive();
   },
