@@ -28,7 +28,11 @@ import { store as persistStore } from '~/lib/core/store'
 import { mapGetters, mapActions } from 'vuex'
 import { encryption } from '~/lib/util/helper'
 export default {
+<<<<<<< HEAD
   data() {
+=======
+  data () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入原密码'))
@@ -88,7 +92,11 @@ export default {
   methods: {
     ...mapActions('auth', ['signOut']),
     // 提交修改密码
+<<<<<<< HEAD
     submitForm(formName) {
+=======
+    submitForm (formName) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.$refs[formName].validate(valid => {
         if (valid) {
           let tmp = {
@@ -129,8 +137,13 @@ export default {
         }
       })
     },
+<<<<<<< HEAD
     forget() {
       this.$router.push('/auth/forgotPassword')
+=======
+    forget () {
+      this.$router.push('/auth/forgotpassword')
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     }
   }
 }

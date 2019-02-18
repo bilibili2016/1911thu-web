@@ -25,21 +25,37 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { formatTime } from '~/lib/util/helper'
+=======
+import { formatTime, checkURL } from '~/lib/util/helper'
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
 export default {
   props: ['newsList'],
   methods: {
     //新闻详情页
+<<<<<<< HEAD
     newsDetail(news) {
       this.$router.push('/home/news/' + news.id)
     },
     //转换时间格式(格式二)
     changeTime(time) {
+=======
+    newsDetail (news) {
+      news.type == '3' ? window.open(checkURL(news.media_link)) : this.$router.push("/home/news/" + news.id)
+    },
+    //转换时间格式(格式二)
+    changeTime (time) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       return formatTime(time)
     }
   }
 }
 </script>
 <style scoped lang="scss">
+<<<<<<< HEAD
 @import '~assets/style/news/list';
+=======
+@import "~assets/style/news/list";
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
 </style>

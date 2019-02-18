@@ -1,7 +1,11 @@
 <template>
   <div class="clearfix">
     <span class="topCenter topCode" @click="addEcg">兑换码</span>
+<<<<<<< HEAD
     <span class="hrin topCenter" @click="handleLink('/other/activePages/institutional')">
+=======
+    <span class="hrin topCenter" @click="handleLink('/other/activePages/Institutional')">
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       单位入口
       <i></i>
     </span>
@@ -49,7 +53,11 @@ export default {
     },
     addClass () {
       let pathName = window.location.pathname
+<<<<<<< HEAD
       if (pathName == '/other/activePages/institutional') {
+=======
+      if (pathName == '/other/activePages/Institutional') {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
         document.getElementsByClassName('hrin')[0].classList.add('active')
       } else {
         document.getElementsByClassName('hrin')[0].classList.remove('active')

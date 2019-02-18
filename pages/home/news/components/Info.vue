@@ -16,11 +16,19 @@
 <script>
 export default {
   props: ['infoArticle', 'linkfive'],
+<<<<<<< HEAD
   data() {
     return {}
   },
   methods: {
     selectDetail(course) {
+=======
+  data () {
+    return {}
+  },
+  methods: {
+    selectDetail (course) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.$router.push('/home/news/' + course.id)
     }
   }

@@ -1,4 +1,5 @@
 .noData {
+<<<<<<< HEAD
   text-align: center;
   padding-bottom: 50px;
   img {
@@ -19,3 +20,40 @@
     height: 274px;
   }
 }
+=======
+    text-align: center;
+    padding-bottom: 50px;
+    img {
+        margin-top: 50px;
+    }
+    h4 {
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        color: #999;
+        font-size: 20px;
+    }
+}
+
+//购物车限制图片大小
+.shopCartNoData.noData {
+    img {
+        width: 316px;
+        height: 274px;
+    }
+}
+
+//证书查询
+.searchCer {
+    .bottom {
+        .noData {
+            padding-bottom: 0;
+            img {
+                width: 210px;
+                height: 210px;
+                margin-top: -30px;
+            }
+        }
+    }
+}
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72

@@ -10,9 +10,15 @@
       <div class="back-to-ceiling hasColor customStyleOne" v-show="visible">
         <span></span>
         <div class="showCode">
+<<<<<<< HEAD
           <i></i>
           <h4>1911学堂官方微信</h4>
           <p>微信号：XUETANG_1911</p>
+=======
+          <img src="http://static-image.1911edu.com/attentionWechat2.jpg" alt="">
+          <h4>1911学堂官方微信</h4>
+          <p>公众号：XUETANG_1911</p>
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
         </div>
       </div>
     </transition>
@@ -57,9 +63,15 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { store as persistStore } from '~/lib/core/store'
 import { mapActions, mapGetters } from 'vuex'
 import { open } from '@/lib/util/helper'
+=======
+import { store as persistStore } from "~/lib/core/store";
+import { mapActions, mapGetters } from "vuex";
+import { open } from "@/lib/util/helper";
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
 /* eslint-disable */
 export default {
   props: [
@@ -77,18 +89,29 @@ export default {
     //     default: 'fade'
     //   }
     // },
+<<<<<<< HEAD
     'data'
   ],
   data () {
+=======
+    "data"
+  ],
+  data() {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     return {
       dialogVisible: false,
       visibilityHeight: 400,
       backPosition: 0,
+<<<<<<< HEAD
       transitionName: 'fade',
+=======
+      transitionName: "fade",
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       showNotLogin: false,
       visible: false,
       move: true,
       interval: null,
+<<<<<<< HEAD
       ceilSrc: 'http://static-image.1911edu.com/home_backtop11.png',
       wxSrc: 'http://static-image.1911edu.com/home_backtop22.png',
       qqSrc: 'http://static-image.1911edu.com/home_backtop22.png',
@@ -134,11 +157,59 @@ export default {
     // 我要选课
     checkCourse () {
       if (persistStore.get('token')) {
+=======
+      ceilSrc: "http://static-image.1911edu.com/home_backtop11.png",
+      wxSrc: "http://static-image.1911edu.com/home_backtop22.png",
+      qqSrc: "http://static-image.1911edu.com/home_backtop22.png",
+      topSrc: "http://static-image.1911edu.com/home_backtop03.png",
+      completeTask:
+        "https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003072"
+    };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  },
+  computed: {
+    ...mapGetters("auth", ["isAuthenticated"])
+  },
+  methods: {
+    handleScroll() {
+      this.visible = window.pageYOffset > this.visibilityHeight;
+      // this.visible = true
+    },
+    showTips(show) {
+      this.showNotLogin = show;
+    },
+    //跳转到自定制项目
+    goCustomerProject() {
+      if (persistStore.get("token")) {
+        this.$router.push({
+          path: "/project/customerProject",
+          query: {
+            sid: "",
+            edit: 1
+          }
+        });
+      } else {
+        this.$bus.$emit("loginShow");
+      }
+    },
+    // 我要选课
+    checkCourse() {
+      if (persistStore.get("token")) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
         // this.goLink('/course/chooselesson')
         // 整合后的跳转
 
         window.open(
           window.location.origin +
+<<<<<<< HEAD
           '/course/category' +
           '?cid=' +
           '0' +
@@ -182,13 +253,65 @@ export default {
       return (-c / 2) * (--t * (t - 2) - 1) + b
     },
     handleopen () {
+=======
+            "/course/category" +
+            "?cid=" +
+            "0" +
+            "&cp=" +
+            "0" +
+            "&xid=1" +
+            "&pids=" +
+            "0"
+        );
+        // this.showNotLogin = false
+      } else {
+        // this.showNotLogin = true
+        this.$bus.$emit("loginShow");
+      }
+    },
+    backToTop() {
+      if (this.move) {
+        const start = window.pageYOffset;
+        let i = 0;
+        this.interval = setInterval(() => {
+          const next = Math.floor(
+            this.easeInOutQuad(10 * i, start, -start, 500)
+          );
+          if (next <= this.backPosition) {
+            window.scrollTo(0, this.backPosition);
+            clearInterval(this.interval);
+            this.move = true;
+          } else {
+            this.move = false;
+            window.scrollTo(0, next);
+          }
+          i++;
+        }, 16.7);
+      }
+    },
+    goLink(item) {
+      this.$router.push(item);
+    },
+    easeInOutQuad(t, b, c, d) {
+      if ((t /= d / 2) < 1) return (c / 2) * t * t + b;
+      return (-c / 2) * (--t * (t - 2) - 1) + b;
+    },
+    handleopen() {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       // window.open('http://wpa.qq.com/msgrd?v=3&uin=2844916043&site=qq&menu=yes')
       // window.open(
       //   'https://cschat-ccs.aliyun.com/index.htm?tntInstId=_12Acz7A&scene=SCE00003068#/'
       // )
+<<<<<<< HEAD
       this.dialogVisible = true
     }
   }
 }
+=======
+      this.dialogVisible = true;
+    }
+  }
+};
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
 </script>
 

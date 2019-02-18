@@ -4,7 +4,11 @@
     <div class="start forgot">
       <div class="lrFrame">
         <div class="logo" @click="goHome">
+<<<<<<< HEAD
           <img src="http://static-image.1911edu.com/1911-logo.png" alt="">
+=======
+          <img src="http://static-image.1911edu.com/1911-logo-big.png" alt="">
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
         </div>
         <div class="pwd">
           <span>忘记密码</span>
@@ -50,7 +54,11 @@ import { mapActions } from "vuex";
 import { auth } from "~/lib/v1_sdk/index";
 import { encryption, message, Trim } from "~/lib/util/helper";
 export default {
+<<<<<<< HEAD
   data() {
+=======
+  data () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     return {
       showPwd: false,
       pwdType: "password",
@@ -112,7 +120,11 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["forgetPasswordAjax"]),
+<<<<<<< HEAD
     changePwd() {
+=======
+    changePwd () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       if (this.showPwd) {
         this.showPwd = false;
         this.pwdType = "password";
@@ -122,7 +134,11 @@ export default {
       }
     },
     // 验证手机号是否存在
+<<<<<<< HEAD
     verifyRgTel() {
+=======
+    verifyRgTel () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       auth.verifyPhone(this.fpData).then(response => {
         if (response.status === 0) {
           message(this, "error", "您的手机号还未注册！");
@@ -138,7 +154,11 @@ export default {
         }
       });
     },
+<<<<<<< HEAD
     forgetPassword() {
+=======
+    forgetPassword () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.fpData.code = String(this.fpData.code);
       this.fpData.password = String(this.fpData.password);
       if (!validatePhone(this.fpData.phones)) {
@@ -166,7 +186,11 @@ export default {
         }
       });
     },
+<<<<<<< HEAD
     async handleGetCode() {
+=======
+    async handleGetCode () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       if (!this.captchaDisable) {
         auth.smsCodes(this.fpData).then(response => {
           let types = response.status === 0 ? "success" : "error";
@@ -188,20 +212,35 @@ export default {
         });
       }
     },
+<<<<<<< HEAD
     goHome() {
       this.$router.push("/");
     },
     otherLogin() {
+=======
+    goHome () {
+      this.$router.push("/");
+    },
+    otherLogin () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.goHome();
       this.$bus.$emit("loginShow", true);
     }
   },
+<<<<<<< HEAD
   beforeRouteEnter(to, from, next) {
+=======
+  beforeRouteEnter (to, from, next) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
+<<<<<<< HEAD
   beforeRouteLeave(to, from, next) {
+=======
+  beforeRouteLeave (to, from, next) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     this.$bus.$emit("headerFooterShow");
     next();
   }

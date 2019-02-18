@@ -1,5 +1,6 @@
 <template>
   <!-- 登录注册 -->
+<<<<<<< HEAD
   <div
     class="start"
     v-show="start"
@@ -98,10 +99,37 @@
             class="otherLogin"
             @click="wechatLogined"
           >其它方式登录</div>
+=======
+  <div class="start" v-show="start">
+    <div class="bgt"></div>
+    <!-- @click="close" -->
+    <div class="lrFrame" v-show="lrFrame">
+      <i class="el-icon-close closelrFrom" @click="close"></i>
+      <el-tabs v-model="activeName" @tab-click="handleClick" v-loading="loadLogin">
+        <el-tab-pane label="登录" name="login">
+          <!-- 登录 表单-->
+          <!-- 账号密码登录-->
+          <el-form :model="loginData" status-icon :rules="loginRules" ref="loginData" class="demo-ruleForm" @keyup.enter.native="signIns('loginData')" v-if="mobileloginmsg === false">
+            <v-passwordlogin :loginData="loginData" :mobileloginmsg="mobileloginmsg" :isloginClick="isloginClick" @changePwd="changePwd" @forget="forget" @mobilelogin="mobilelogin" @signIns="signIns"></v-passwordlogin>
+          </el-form>
+          <!-- 手机验证码登录-->
+          <el-form :model="registerMobileData" status-icon :rules="loginDXRules" ref="loginDatamobile" class="demo-ruleForm telLogin" v-if="mobileloginmsg === true">
+            <v-codelogin :mobileloginmsg="mobileloginmsg" :registerMobileData="registerMobileData" :codeClick="codeClick" :bindTelData="bindTelData" :isloginClick="isloginClick" @handleMobileGetCode="handleMobileGetCode" @mobilelogin="mobilelogin" @signInsMobile="signInsMobile" @forget="forget"></v-codelogin>
+          </el-form>
+          <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
+        </el-tab-pane>
+        <!-- 注册 -->
+        <el-tab-pane label="注册" name="register">
+          <el-form :model="registerData" status-icon :rules="registRules" id="registerData" ref="registerData" class="demo-ruleForm">
+            <v-register :registerData="registerData" :codeClick="codeClick" :isClick="isClick" :isloading="isloading" :bindTelData="bindTelData" @userProtocol="userProtocol" @verifyRgTel="verifyRgTel" @signUp="signUp"></v-register>
+          </el-form>
+          <div class="otherLogin" @click="wechatLogined">其它方式登录</div>
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
         </el-tab-pane>
       </el-tabs>
     </div>
     <!-- 微信登录 -->
+<<<<<<< HEAD
     <div
       class="lrFrame wechatLogin"
       v-show="wechatLogin"
@@ -145,6 +173,20 @@
           src="http://static-image.1911edu.com/bindingSuccess.png"
           alt
         >
+=======
+    <div class="lrFrame wechatLogin" v-show="wechatLogin">
+      <i class="el-icon-back wechatBack" @click="back"></i>
+      <i class="el-icon-close closeWechat" @click="close"></i>
+      <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
+        <v-wechatlogin :bindTelData="bindTelData" @loginWechat="loginWechat" @verifyRgTelWX="verifyRgTelWX"></v-wechatlogin>
+      </el-form>
+      <div class="scanCode" v-show="scanCodeShow">
+        <h4 class="clearfix"></h4>
+        <div class="wxchatIMG" id="wxchatIMG"></div>
+      </div>
+      <div class="bindSuccess" v-show="bindSuccessShow">
+        <img src="http://static-image.1911edu.com/bindingSuccess.png" alt>
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
         <h5>手机账号绑定成功</h5>
         <p>返回登录 3S</p>
       </div>
@@ -174,7 +216,11 @@ export default {
     "v-codelogin": CodeLogin,
     "v-passwordlogin": PasswordLogin
   },
+<<<<<<< HEAD
   data() {
+=======
+  data () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     var validatePass = (rule, value, callback) => {
       if (!/^[A-Za-z0-9]+$/.test(value)) {
         callback(new Error("密码只能输入数字、字母"));
@@ -470,7 +516,11 @@ export default {
       "setPwd"
     ]),
     //清除计时操作
+<<<<<<< HEAD
     clearTime() {
+=======
+    clearTime () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       clearInterval(this.codeInterval);
       this.bindTelData.getCode = "获取验证码";
       this.bindTelData.seconds = 30;
@@ -478,7 +528,11 @@ export default {
       this.codeClick = false;
     },
     // 验证手机登录还是账号密码登录
+<<<<<<< HEAD
     mobilelogin() {
+=======
+    mobilelogin () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       //切换时清除计时器
       this.clearTime();
       this.mobileloginmsg = !this.mobileloginmsg;
@@ -487,7 +541,11 @@ export default {
       this.emptyForm();
     },
     // 登录显示card
+<<<<<<< HEAD
     async loginCardShow() {
+=======
+    async loginCardShow () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.closeWechat();
       this.start = true;
       this.lrFrame = this.start;
@@ -496,7 +554,11 @@ export default {
       this.mobileloginmsg = false;
     },
     // 注册显示card
+<<<<<<< HEAD
     rigisterCardShow() {
+=======
+    rigisterCardShow () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.closeWechat();
       this.start = true;
       this.lrFrame = true;
@@ -508,7 +570,11 @@ export default {
       }
     },
     //微信登录
+<<<<<<< HEAD
     wechatLogined() {
+=======
+    wechatLogined () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.lrFrame = false;
       this.wechatLogin = true;
       this.scanCodeShow = true; //微信扫码
@@ -521,7 +587,11 @@ export default {
       clearInterval(this.codeInterval);
     },
     // 注册时候获取验证码 this.registerData
+<<<<<<< HEAD
     async handleGetCode(data) {
+=======
+    async handleGetCode (data) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       if (this.bindTelData.seconds === 30) {
         if (this.bindTelData.captchaDisable === false) {
           auth.smsCodes(data).then(response => {
@@ -548,7 +618,11 @@ export default {
       }
     },
     // 手机验证码 登录时候
+<<<<<<< HEAD
     async handleMobileGetCode() {
+=======
+    async handleMobileGetCode () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       if (
         !/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.registerMobileData.phones)
       ) {
@@ -583,7 +657,11 @@ export default {
       }
     },
     // 验证手机号是否存在
+<<<<<<< HEAD
     verifyRgTel() {
+=======
+    verifyRgTel () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.codeClick = true;
       if (this.errorTel.tel === this.registerData.phones) {
         message(this, "error", this.errorTel.msg);
@@ -610,7 +688,11 @@ export default {
       }
     },
     // 验证手机号是否已经绑定了微信
+<<<<<<< HEAD
     verifyRgTelWX() {
+=======
+    verifyRgTelWX () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       if (this.bindTelData.seconds === 30) {
         if (!/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.bindTelData.phones)) {
           message(this, "error", "请输入正确的手机号！");
@@ -628,7 +710,11 @@ export default {
       }
     },
     // 注册完登录 请求
+<<<<<<< HEAD
     alreadySignin(formName) {
+=======
+    alreadySignin (formName) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.loginData.phonenum = this.registerData.phones;
       this.loginData.password = this.registerData.passwords;
       this.loginData.ectpwd = encryption(this.registerData.passwords);
@@ -646,7 +732,11 @@ export default {
       });
     },
     // 注册 请求
+<<<<<<< HEAD
     signUp(formName) {
+=======
+    signUp (formName) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.isloading = true;
       this.isClick = true;
       this.registerData.ectpwd = encryption(this.registerData.passwords);
@@ -679,7 +769,11 @@ export default {
       });
     },
     // 账号密码 登录 请求
+<<<<<<< HEAD
     signIns(formName) {
+=======
+    signIns (formName) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.isloginClick = true;
       this.isloading = false;
       this.loginData.ectpwd = encryption(this.loginData.password);
@@ -709,7 +803,11 @@ export default {
       this.move();
     },
     // 手机验证码 登录
+<<<<<<< HEAD
     signInsMobile(formName) {
+=======
+    signInsMobile (formName) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.isloginClick = true;
       this.isloading = false;
       this.$refs[formName].validate(valid => {
@@ -738,7 +836,11 @@ export default {
       this.move();
     },
     // 从微信拉取二维码
+<<<<<<< HEAD
     async wxLogin() {
+=======
+    async wxLogin () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       var link = window.location.origin;
       if (link === "http://www.1911edu.com") {
         link = "http://api.1911edu.com/Wapi/Index/wxBack";
@@ -758,7 +860,11 @@ export default {
       }, 1000);
     },
     // 微信绑定手机号
+<<<<<<< HEAD
     async loginWechat() {
+=======
+    async loginWechat () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.loadLogin = true;
       try {
         if (this.bindTelData.phones === "") {
@@ -790,7 +896,11 @@ export default {
       });
     },
     //获取微信登录是否已经绑定
+<<<<<<< HEAD
     getWXAccredit() {
+=======
+    getWXAccredit () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       // 判断当前网址是否已经变更
       if (this.$route.path !== this.currentURL) {
         this.closeWechat();
@@ -826,12 +936,21 @@ export default {
       });
     },
     // 忘记密码
+<<<<<<< HEAD
     forget() {
       this.$router.push("/auth/forgotPassword");
       this.close();
     },
     // 改变密码显示隐藏
     changePwd() {
+=======
+    forget () {
+      this.$router.push("/auth/forgotpassword");
+      this.close();
+    },
+    // 改变密码显示隐藏
+    changePwd () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       if (this.loginData.showPwd) {
         this.loginData.showPwd = false;
         this.loginData.pwdType = "password";
@@ -841,12 +960,20 @@ export default {
       }
     },
     // 微信扫码返回上一步
+<<<<<<< HEAD
     back() {
+=======
+    back () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.close();
       this.loginCardShow();
     },
     // 关闭登录注册
+<<<<<<< HEAD
     close() {
+=======
+    close () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.move();
       this.start = false;
       this.lrFrame = false;
@@ -859,7 +986,11 @@ export default {
       clearInterval(this.getwxtime);
     },
     // 关闭微信绑定
+<<<<<<< HEAD
     closeWechat() {
+=======
+    closeWechat () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.move();
       this.start = false;
       this.lrFrame = false;
@@ -870,7 +1001,11 @@ export default {
       this.emptyWechatForm();
     },
     // 清空表单
+<<<<<<< HEAD
     emptyForm() {
+=======
+    emptyForm () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.loginData.phonenum = "";
       this.loginData.password = "";
       this.loginData.pwdType = "password";
@@ -892,7 +1027,11 @@ export default {
       this.registerMobileData.companyCodes = "";
     },
     // 清空微信表单
+<<<<<<< HEAD
     emptyWechatForm() {
+=======
+    emptyWechatForm () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       (this.bindTelData.phones = ""),
         (this.bindTelData.codes = ""),
         (this.bindTelData.seconds = 30),
@@ -903,6 +1042,7 @@ export default {
         (this.bindTelData.checked = false);
     },
     // 切换登录注册清空表单
+<<<<<<< HEAD
     handleClick(tab, event) {
       this.emptyForm();
     },
@@ -913,25 +1053,50 @@ export default {
     // 禁止页面滑动
     stop() {
       var mo = function(e) {
+=======
+    handleClick (tab, event) {
+      this.emptyForm();
+    },
+    // 登陆成功获取用户信息
+    getUserInfo () {
+      this.$bus.$emit("getUserInfo");
+    },
+    // 禁止页面滑动
+    stop () {
+      var mo = function (e) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
         e.preventDefault();
       };
       document.body.style.overflow = "hidden";
       document.addEventListener("touchmove", mo, false); //禁止页面滑动
     },
     /***取消滑动限制***/
+<<<<<<< HEAD
     move() {
       var mo = function(e) {
+=======
+    move () {
+      var mo = function (e) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
         e.preventDefault();
       };
       document.body.style.overflow = "auto"; //出现滚动条
       document.removeEventListener("touchmove", mo, false);
     },
     // 打开用户注册协议
+<<<<<<< HEAD
     userProtocol() {
       window.open(window.location.origin + "/other/activePages/userProtocol");
     },
     // 判断当前页面路由-是否登录后刷新当前页面
     refresh() {
+=======
+    userProtocol () {
+      window.open(window.location.origin + "/other/activePages/userProtocol");
+    },
+    // 判断当前页面路由-是否登录后刷新当前页面
+    refresh () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       let pathName = window.location.pathname;
       if (pathName === "/course/coursedetail") {
         this.$bus.$emit("reCourseData");
@@ -945,7 +1110,11 @@ export default {
       }
     }
   },
+<<<<<<< HEAD
   mounted() {
+=======
+  mounted () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     let me = this;
     this.$bus.$on("loginShow", data => {
       this.loginCardShow();
@@ -959,10 +1128,17 @@ export default {
   },
   watch: {
     // 监测登陆注册切换时清除注册获取验证码定时器
+<<<<<<< HEAD
     activeName() {
       this.clearTime();
     },
     "registerData.checked"(val, oldVal) {
+=======
+    activeName () {
+      this.clearTime();
+    },
+    "registerData.checked" (val, oldVal) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       if (val) {
         this.isClick = false;
         this.isHasClass = false;

@@ -2,6 +2,7 @@
   <div>
     <template v-if="config.banner_type === 'news' || config.banner_type === 'outNews'">
       <div class="news-banner">
+<<<<<<< HEAD
         <img
           :src="bannerImg"
           alt
@@ -10,15 +11,23 @@
           v-if="config.banner_type === 'news'"
           class="newLsit-desc"
         >
+=======
+        <img :src="bannerImg" alt>
+        <div v-if="config.banner_type === 'news'" class="newLsit-desc">
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
           <p class="title">NEWS</p>
           <span class="line"></span>
           <p class="small-title">学堂资讯</p>
           <p class="desc">School Information</p>
         </div>
+<<<<<<< HEAD
         <div
           v-if="config.banner_type === 'outNews'"
           class="newLsit-desc"
         >
+=======
+        <div v-if="config.banner_type === 'outNews'" class="newLsit-desc">
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
           <p class="title">NEWS</p>
           <span class="line"></span>
           <p class="small-title">媒体报道</p>
@@ -27,12 +36,17 @@
       </div>
     </template>
     <template v-if="config.banner_type === 'famousList'">
+<<<<<<< HEAD
       <div class="famousTeacher"></div>
+=======
+      <div class="famousTeacher" id="famousTeacher"></div>
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     </template>
 
     <template v-if="config.banner_type === 'profile'">
       <div class="profile-banner">
         <div class="center-box">
+<<<<<<< HEAD
           <img
             :class="{noImg :!userInfo.head_img,topImg:userInfo.head_img}"
             :src="userInfo.head_img"
@@ -47,6 +61,12 @@
                 @change="add_img"
                 accept="image/png, image/gif, image/jpeg"
               >
+=======
+          <img :class="{noImg :!userInfo.head_img,topImg:userInfo.head_img}" :src="userInfo.head_img">
+          <div class="up-user-avtor" v-show="isShowUpAvtor">
+            <div class="upload-img">
+              <input type="file" @change="add_img" accept="image/png, image/gif, image/jpeg">
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
             </div>
             <div class="mask">
               <span>更换图片</span>
@@ -59,6 +79,7 @@
             <p class="nickName">{{userInfo.nick_name}}</p>
             <!-- <p class="companyName">{{userInfo.company_name}}</p> -->
             <p class="vipCard">
+<<<<<<< HEAD
               <span
                 v-for="(vip,index) in userInfo.vipPrivateList"
                 :key="index"
@@ -74,6 +95,11 @@
                     slot="reference"
                     @click="goVipInfo(vip)"
                   >
+=======
+              <span v-for="(vip,index) in userInfo.vipPrivateList" :key="index">
+                <el-popover placement="bottom-start" :title="vip.title" width="180" trigger="hover" :content="'剩余'+(vip.expire_days)+'天'">
+                  <el-button slot="reference" @click="goVipInfo(vip)">
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
                     <img :src="vip.vip_icon">
                   </el-button>
                 </el-popover>
@@ -102,7 +128,11 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
+<<<<<<< HEAD
   data() {
+=======
+  data () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
     return {
       time: {
         hour: null,
@@ -116,14 +146,22 @@ export default {
     };
   },
   watch: {
+<<<<<<< HEAD
     userInfo() {
+=======
+    userInfo () {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       // 已学习时长
       this.changeTime(this.userInfo.study_curriculum_time);
     }
   },
   methods: {
     ...mapActions("auth", ["signOut"]),
+<<<<<<< HEAD
     add_img(event) {
+=======
+    add_img (event) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -141,7 +179,11 @@ export default {
         });
       };
     },
+<<<<<<< HEAD
     goVipInfo(vip) {
+=======
+    goVipInfo (vip) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.$router.push({
         path: "/home/vip/vipPage",
         query: {
@@ -150,7 +192,11 @@ export default {
         }
       });
     },
+<<<<<<< HEAD
     changeTime(timing) {
+=======
+    changeTime (timing) {
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       this.time.hour = parseInt(timing / 3600);
       this.time.minutes = parseInt(
         (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
@@ -162,7 +208,11 @@ export default {
           parseInt(
             (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
           )) *
+<<<<<<< HEAD
           60
+=======
+        60
+>>>>>>> 13be612483a95378d68e5c85629442e070cbfd72
       );
     }
   }
