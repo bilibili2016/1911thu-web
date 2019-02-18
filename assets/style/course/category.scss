@@ -1,0 +1,200 @@
+.center {
+	width: 1100px;
+	margin: 0 auto;
+
+	.header {
+		height: 84px;
+		.rightPages {
+			line-height: 84px;
+			.el-switch {
+				margin-right: 10px;
+			}
+		}
+	}
+}
+
+.banner {
+	width: 100%;
+	height: auto;
+	background: rgba(235, 231, 237, 1);
+	.center {
+		width: 1100px;
+		margin: 0 auto;
+		// min-height: 500px;
+		&.category {
+			padding-bottom: 20px;
+		}
+		.college {
+			height: 78px;
+			border-bottom: 1px rgba(232, 214, 247, 1) solid;
+			& > li {
+				display: inline-block;
+				height: 78px;
+				line-height: 78px;
+			}
+			ul {
+				width: 1050px;
+				display: inline-block;
+				vertical-align: top;
+				li {
+					list-style: none;
+					display: inline-block;
+					line-height: 78px;
+					font-size: 14px;
+					padding-right: 17px;
+					cursor: pointer;
+					span {
+						// padding: 10px 20px;
+						background-color: #773084;
+					}
+					&:hover {
+						.el-button {
+							background-color: #5f068d;
+							color: #fff;
+						}
+					}
+				}
+			}
+			.title {
+				font-size: 14px;
+				color: rgba(34, 34, 34, 1);
+			}
+		}
+		.classification {
+			& > li {
+				display: inline-block;
+				height: 50px;
+				line-height: 50px;
+			}
+			ul {
+				width: 1050px;
+				display: inline-block;
+				vertical-align: top;
+				li {
+					list-style: none;
+					display: inline-block;
+					line-height: 50px;
+					font-size: 14px;
+					padding-right: 17px;
+					cursor: pointer;
+					span {
+						background-color: #773084;
+					}
+					&:hover {
+						.el-button {
+							background-color: #5f068d;
+							color: #fff;
+						}
+					}
+				}
+			}
+		}
+		.carlist {
+			height: 1400px;
+			// min-height: 320px;
+		}
+		.el-button {
+			font-weight: 400;
+		}
+	}
+}
+
+.header {
+	.pages {
+		float: right;
+		margin-top: 26px;
+	}
+}
+
+.bgs {
+	.el-button {
+		background-color: #773084;
+		color: #fff;
+		border: none;
+	}
+}
+
+.tabStyle {
+	width: 121px;
+	display: inline-block;
+}
+
+.switch {
+	margin-top: 30px;
+	float: right;
+	.el-switch__label {
+		color: #888;
+	}
+}
+
+.allChecked {
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border-radius: 6px;
+	color: #fff;
+	position: fixed;
+	top: 500px;
+	left: 93%; // margin-left: 300px;
+	background: url('http://static-image.1911edu.com/allChecked.png');
+	background-size: cover;
+	z-index: 9;
+	cursor: pointer;
+}
+
+.classList {
+	width: 1272px;
+	margin: 0 auto;
+	position: fixed;
+	top: 190px;
+	left: 50%;
+	margin-left: -636px;
+	z-index: 1;
+	ul {
+		width: 95px;
+		border-radius: 6px;
+		background-color: #773084;
+		color: #fff;
+		font-size: 14px;
+		position: absolute;
+		left: -20px;
+		top: 0;
+		text-align: center;
+		overflow: hidden;
+		li {
+			height: 76px;
+			line-height: 76px;
+			cursor: pointer;
+			// transition: all 300ms;
+			span {
+				width: 100%;
+				height: 100%;
+				padding: 0 5px;
+				&.checked {
+					background-color: #773084;
+				}
+			}
+			&:hover {
+				color: #fafafa;
+			}
+			&:nth-child(2) {
+				line-height: 76px;
+			}
+			&:nth-child(3) {
+				line-height: 76px;
+			}
+		}
+	}
+}
+.noMsg {
+	min-height: 500px;
+}
+
+.btnBg {
+	.el-button {
+		background-color: #773084;
+		color: #fff;
+		border: none;
+	}
+}
