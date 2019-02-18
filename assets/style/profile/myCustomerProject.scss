@@ -1,0 +1,86 @@
+.customer-add {
+  position: relative;
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+  .add-icon {
+    position: absolute;
+    left: -25px;
+    top: 18px;
+    color: #773084;
+    font-size: 22px;
+    margin-right: 5px;
+  }
+}
+
+.cusProject {
+  padding: 40px 40px 40px 45px;
+  .card-list .itemBox {
+    height: 240px !important;
+    border-bottom: none !important;
+    .line-icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10;
+      .onlineIcon {
+        width: 60px;
+        height: 28px;
+      }
+      .offlineIcon {
+        width: 100px;
+        height: 28px;
+      }
+    }
+    .el-row {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .item {
+      position: relative;
+      .itemBox-name {
+        padding-top: 10px;
+      }
+      .operate {
+        position: absolute;
+        right: 5px;
+        bottom: 0;
+        span {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          margin-right: 20px;
+          &:last-child {
+            margin-right: 0;
+          }
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .buied {
+        position: absolute;
+        right: 5px;
+        bottom: 0;
+        font-size: 14px;
+        color: #06bb09;
+        cursor: pointer;
+      }
+    }
+    &:hover {
+      .el-row {
+        .item {
+          .itemBox-name {
+            color: #5f068d;
+          }
+        }
+      }
+    }
+  }
+}
+.my-customerProject {
+  .el-card.is-always-shadow {
+    box-shadow: none !important;
+  }
+}

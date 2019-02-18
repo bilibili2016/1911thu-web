@@ -1,0 +1,21 @@
+.topBar {
+  height: 60px;
+  line-height: 60px;
+  background-color: #ebe7ed;
+  padding: 0 30px;
+  font-size: 16px;
+  color: #222;
+  span.fr {
+    color: #773084;
+    font-size: 14px;
+  }
+  .goBack {
+    cursor: pointer;
+  }
+  .editOutline {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-bottom: -6px;
+  }
+}
