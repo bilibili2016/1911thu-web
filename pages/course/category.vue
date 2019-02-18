@@ -44,6 +44,7 @@ import { store as persistStore } from "~/lib/core/store";
 import { openUrl, matchSplits, setTitle } from "~/lib/util/helper";
 import List from "@/pages/course/components/List";
 import Filter from "@/pages/course/components/Filter";
+
 export default {
   components: {
     "v-card": CustomCard,
