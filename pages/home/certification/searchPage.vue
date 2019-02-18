@@ -72,8 +72,14 @@ export default {
     },
     //查询证书
     searchCer() {
+      let reg = /^\d+$/;
       try {
         if (Trim(this.searchForm.number) === "") throw "请输入证书编号";
+        if (
+          Trim(this.searchForm.number).length != 14 ||
+          !reg.test(this.searchForm.number)
+        )
+          throw "请输入正确的证书编号";
         if (Trim(this.searchForm.name) === "") throw "请输入您的姓名";
         if (Trim(this.searchForm.code) === "") throw "请输入验证码";
       } catch (err) {
