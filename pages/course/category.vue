@@ -3,7 +3,7 @@
     <!-- 顶部list -->
     <div>
       <!-- :loadList="loadList" -->
-      <!-- <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectCid="selectCid" @selectPid="selectPid"></v-list> -->
+      <v-list :cidData="cidData" :pidData="pidData" :cidBg="cidBg" :pidBg="pidBg" @selectCid="selectCid" @selectPid="selectPid"></v-list>
     </div>
     <div class="center category-style">
       <!-- 选择全部 最新和最热 -->
