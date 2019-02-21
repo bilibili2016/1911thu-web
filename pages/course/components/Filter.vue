@@ -3,27 +3,11 @@
     <div class="classification">
       <div class="clsTitle clearfix">
         <div class="fl hotBtn clearfix">
-          <el-tabs
-            v-model="activeName"
-            @tab-click="selectActiveTab"
-          >
-            <el-tab-pane
-              label="学院全部课程"
-              name="first"
-            ></el-tab-pane>
-            <el-tab-pane
-              label="学院最新课程"
-              name="second"
-            ></el-tab-pane>
-            <el-tab-pane
-              label="学院最热课程"
-              name="third"
-            ></el-tab-pane>
-            <el-tab-pane
-              v-if="cid!=0"
-              label="学院专家组介绍"
-              name="four"
-            ></el-tab-pane>
+          <el-tabs v-model="activeName" @tab-click="selectActiveTab">
+            <el-tab-pane label="学院全部课程" name="first"></el-tab-pane>
+            <el-tab-pane label="学院最新课程" name="second"></el-tab-pane>
+            <el-tab-pane label="学院最热课程" name="third"></el-tab-pane>
+            <el-tab-pane v-if="cid!=0" label="学院专家组介绍" name="four"></el-tab-pane>
           </el-tabs>
         </div>
         <!-- <div class="fr rightPages">
