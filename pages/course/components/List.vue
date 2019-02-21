@@ -13,7 +13,7 @@
           </ul>
         </div>
         <!-- 课程不展示 -->
-        <div class="classification" v-show="cp == 1">
+        <div class="classification">
           <!-- v-if="!loadList" -->
           <li class="title">分类：</li>
           <ul>
@@ -31,7 +31,7 @@
 import { mapState, mapActions } from 'vuex'
 export default {
   props: ['cidData', 'pidData', 'cidBg', 'pidBg', 'loadList'],
-  data() {
+  data () {
     return {
       cid: null,
       pid: '0',
@@ -42,15 +42,15 @@ export default {
   },
   methods: {
     // 大类 单个
-    selectCid(item, index) {
+    selectCid (item, index) {
       this.$emit('selectCid', item, index)
     },
     // 小类 单个
-    selectPid(items, index) {
+    selectPid (items, index) {
       this.$emit('selectPid', items, index)
     }
   },
-  mounted() {
+  mounted () {
     this.cid = window.location.search.split('&')[0].split('=')[1]
 
     this.pid = window.location.search.split('&')[3].split('=')[1]
@@ -68,5 +68,5 @@ export default {
 
 <style scoped lang="scss">
 // 因兼容问题暂时组件引入
-@import '~assets/style/course/category';
+@import "~assets/style/course/category";
 </style>
