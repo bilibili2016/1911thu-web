@@ -221,14 +221,10 @@ export default {
           this.categoryListData = res.data.categoryList;
           this.handleData(this.allData, res);
           this.loadList = false;
-          console.log(persistStore.get("cid"), "ppp");
-
           if (persistStore.get("cid") >= 0) {
             let CID = persistStore.get("cid");
             for (var i = 0; i < this.categoryListData.length; i++) {
               if (this.categoryListData[i].id == CID) {
-                console.log(444);
-
                 //从课程分类页跳转过来的 cid
                 this.$bus.$emit("selectChange", this.categoryListData[i]);
               }
