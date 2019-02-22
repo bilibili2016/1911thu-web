@@ -4,6 +4,9 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 const _69f81487 = () => import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */).then(m => m.default || m)
 const _1b62cf17 = () => import('../pages/profile/index.vue' /* webpackChunkName: "pages/profile/index" */).then(m => m.default || m)
 const _3eb1e902 = () => import('../pages/project/projectDetail.vue' /* webpackChunkName: "pages/project/projectDetail" */).then(m => m.default || m)
@@ -153,6 +156,7 @@ const _135bb60f = () => import('../pages/home/news/_detail.vue' /* webpackChunkN
 const _9d1f8974 = () => import('../pages/course/list/_courselist.vue' /* webpackChunkName: "pages/course/list/_courselist" */).then(m => m.default || m)
 const _66b4c8f5 = () => import('../pages/home/teacher/_Info.vue' /* webpackChunkName: "pages/home/teacher/_Info" */).then(m => m.default || m)
 const _76ca02fd = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
+<<<<<<< HEAD
 =======
 const _121a4c47 = () => import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */).then(m => m.default || m)
 const _01587f57 = () => import('../pages/profile/index.vue' /* webpackChunkName: "pages/profile/index" */).then(m => m.default || m)
@@ -304,6 +308,8 @@ const _4592c8f4 = () => import('../pages/course/list/_courselist.vue' /* webpack
 const _97f97e96 = () => import('../pages/home/teacher/_Info.vue' /* webpackChunkName: "pages/home/teacher/_Info" */).then(m => m.default || m)
 const _06d81986 = () => import('../pages/index.vue' /* webpackChunkName: "pages/index" */).then(m => m.default || m)
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 
 
 
@@ -365,77 +371,78 @@ export function createRouter () {
     routes: [
 		{
 			path: "/home",
-			component: _121a4c47,
+			component: _69f81487,
 			name: "home"
 		},
 		{
 			path: "/profile",
-			component: _01587f57,
+			component: _1b62cf17,
 			name: "profile"
 		},
 		{
 			path: "/project/projectDetail",
-			component: _1f087bbf,
+			component: _3eb1e902,
 			name: "project-projectDetail"
 		},
 		{
 			path: "/course/category",
-			component: _69347b1d,
+			component: _29e9dadd,
 			name: "course-category"
 		},
 		{
 			path: "/course/detail",
-			component: _7d1a2aa0,
+			component: _49058b20,
 			name: "course-detail"
 		},
 		{
 			path: "/auth/Register",
-			component: _64ea3eb5,
+			component: _7ef48e75,
 			name: "auth-Register"
 		},
 		{
 			path: "/auth/passwordLogin",
-			component: _e4b0e2e8,
+			component: _405916cc,
 			name: "auth-passwordLogin"
 		},
 		{
 			path: "/project/projectPlayer",
-			component: _4c8d9362,
+			component: _c95073e2,
 			name: "project-projectPlayer",
 			children: [
 				{
 					path: "playerTop",
-					component: _00250318,
+					component: _3f6b5e34,
 					name: "project-projectPlayer-playerTop"
 				},
 				{
 					path: "player",
-					component: _8a3a125e,
+					component: _3c772f11,
 					name: "project-projectPlayer-player"
 				},
 				{
 					path: "CourseList",
-					component: _043a012e,
+					component: _a3bdd0ae,
 					name: "project-projectPlayer-CourseList"
 				},
 				{
 					path: "evaluate",
-					component: _17ff52ee,
+					component: _61677ec9,
 					name: "project-projectPlayer-evaluate"
 				},
 				{
 					path: "playerBottom",
-					component: _734390dc,
+					component: _0c5c991c,
 					name: "project-projectPlayer-playerBottom"
 				}
 			]
 		},
 		{
 			path: "/project/customerProject",
-			component: _76ee7c90,
+			component: _4b281c50,
 			name: "project-customerProject"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/course/courseDetail",
 			component: _0fa46fab,
@@ -445,38 +452,44 @@ export function createRouter () {
 			component: _9c815e72,
 			name: "auth-Login"
 >>>>>>> dev
+=======
+			path: "/course/courseDetail",
+			component: _0fa46fab,
+			name: "course-courseDetail"
+>>>>>>> origin/dev
 		},
 		{
 			path: "/shop/payResult",
-			component: _7751e431,
+			component: _c2dce71e,
 			name: "shop-payResult"
 		},
 		{
 			path: "/shop/shoppingcart",
-			component: _2a7c456c,
+			component: _d94e95a8,
 			name: "shop-shoppingcart"
 		},
 		{
 			path: "/shop/affirmOrder",
-			component: _5f413277,
+			component: _95906a92,
 			name: "shop-affirmOrder"
 		},
 		{
 			path: "/auth/wechatLogin",
-			component: _58834be1,
+			component: _a30c37be,
 			name: "auth-wechatLogin"
 		},
 		{
 			path: "/shop/wePay",
-			component: _025553c6,
+			component: _5a331c06,
 			name: "shop-wePay"
 		},
 		{
 			path: "/shop/paypublic",
-			component: _d7cc2746,
+			component: _894cd6c6,
 			name: "shop-paypublic"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 			path: "/course/coursedetail",
@@ -507,8 +520,10 @@ export function createRouter () {
 		},
 		{
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 			path: "/auth/forgotpassword",
-			component: _380814a0,
+			component: _f1091520,
 			name: "auth-forgotpassword"
 		},
 		{
@@ -518,11 +533,14 @@ export function createRouter () {
 		},
 		{
 			path: "/auth/codeLogin",
-			component: _e79e4b0c,
+			component: _991efa8c,
 			name: "auth-codeLogin"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/home/news/outNews",
 			component: _6a06b140,
 			name: "home-news-outNews"
@@ -531,6 +549,7 @@ export function createRouter () {
 			path: "/profile/pages/myCollege",
 			component: _baeae676,
 			name: "profile-pages-myCollege"
+<<<<<<< HEAD
 =======
 			path: "/backend/public/header",
 			component: _095edbba,
@@ -541,14 +560,19 @@ export function createRouter () {
 			component: _8f7aa484,
 			name: "other-activePages-Institutional"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/shop/wepay/qrcode",
-			component: _1c7d5387,
+			component: _f54c7972,
 			name: "shop-wepay-qrcode"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/profile/pages/myTicket",
 			component: _0c527e64,
 			name: "profile-pages-myTicket"
@@ -607,6 +631,7 @@ export function createRouter () {
 			path: "/backend/news/newsInfo",
 			component: _033679cd,
 			name: "backend-news-newsInfo"
+<<<<<<< HEAD
 =======
 			path: "/other/activePages/faceteach",
 			component: _e85cb59a,
@@ -662,14 +687,19 @@ export function createRouter () {
 			component: _d44b34d8,
 			name: "project-components-ProjectEvaluate"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/profile/pages/myHome",
-			component: _ba78193e,
+			component: _6f346ba1,
 			name: "profile-pages-myHome"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/course/components/Filter",
 			component: _59e40862,
 			name: "course-components-Filter"
@@ -698,6 +728,7 @@ export function createRouter () {
 			path: "/project/components/CustomerPop",
 			component: _f29705d6,
 			name: "project-components-CustomerPop"
+<<<<<<< HEAD
 =======
 			path: "/shop/affirmorder/backShopCart",
 			component: _95a15436,
@@ -723,14 +754,19 @@ export function createRouter () {
 			component: _2a84717c,
 			name: "project-components-ShortList"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/project/components/CommonProblems",
-			component: _57098d26,
+			component: _2c00292d,
 			name: "project-components-CommonProblems"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/course/components/CardPlayer",
 			component: _92bf750a,
 			name: "course-components-CardPlayer"
@@ -784,6 +820,7 @@ export function createRouter () {
 			path: "/other/activePages/Institutional",
 			component: _107ee504,
 			name: "other-activePages-Institutional"
+<<<<<<< HEAD
 =======
 			path: "/home/teacher/famous",
 			component: _3a1e19ba,
@@ -829,14 +866,19 @@ export function createRouter () {
 			component: _74343748,
 			name: "home-components-homecourse"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/home/teacher/orderTeacher",
-			component: _e12dcf48,
+			component: _3bb9c81c,
 			name: "home-teacher-orderTeacher"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/home/components/homecourse",
 			component: _51f97f88,
 			name: "home-components-homecourse"
@@ -905,6 +947,7 @@ export function createRouter () {
 			path: "/home/news/payDetail",
 			component: _24d8d578,
 			name: "home-news-payDetail"
+<<<<<<< HEAD
 =======
 			path: "/profile/pages/myCollege",
 			component: _635e25f6,
@@ -970,14 +1013,19 @@ export function createRouter () {
 			component: _16af7270,
 			name: "backend-course-courseDetail"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/backend/public/footer",
-			component: _4bc3a39e,
+			component: _c886841e,
 			name: "backend-public-footer"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/shop/affirmorder/backShopCart",
 			component: _662225a5,
 			name: "shop-affirmorder-backShopCart"
@@ -996,6 +1044,7 @@ export function createRouter () {
 			path: "/home/news/list",
 			component: _6b4258e2,
 			name: "home-news-list"
+<<<<<<< HEAD
 =======
 			path: "/backend/project/projectDetail",
 			component: _50fc7104,
@@ -1021,13 +1070,16 @@ export function createRouter () {
 			component: _6bf792f4,
 			name: "shop-shopCart-tableHeader"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/profile/pages/myCustomerProject",
-			component: _4d527e6e,
+			component: _18d4a089,
 			name: "profile-pages-myCustomerProject"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 			path: "/project/components/CustomerPop",
@@ -1051,11 +1103,14 @@ export function createRouter () {
 		},
 		{
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 			path: "/shop/wepay/payType",
-			component: _49cf8d4e,
+			component: _e46c7cce,
 			name: "shop-wepay-payType"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/other/activePages/degree",
 			component: _3c13dc21,
@@ -1065,14 +1120,22 @@ export function createRouter () {
 			component: _b9c1a962,
 			name: "home-news-list"
 >>>>>>> dev
+=======
+			path: "/other/activePages/degree",
+			component: _3c13dc21,
+			name: "other-activePages-degree"
+>>>>>>> origin/dev
 		},
 		{
 			path: "/profile/pages/myInfo",
-			component: _6b4c38a0,
+			component: _d26b4820,
 			name: "profile-pages-myInfo"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/profile/pages/myExamine",
 			component: _4b642d8f,
 			name: "profile-pages-myExamine"
@@ -1131,6 +1194,7 @@ export function createRouter () {
 			path: "/home/news/info",
 			component: _f67600c2,
 			name: "home-news-info"
+<<<<<<< HEAD
 =======
 			path: "/project/components/Detail",
 			component: _1f95ac02,
@@ -1181,10 +1245,12 @@ export function createRouter () {
 			component: _c4d64b84,
 			name: "profile-components-mycode-Conversion"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/profile/components/common/noMsg",
-			component: _76191efa,
+			component: _94d2028c,
 			name: "profile-components-common-noMsg"
 		},
 		{
@@ -1194,10 +1260,11 @@ export function createRouter () {
 		},
 		{
 			path: "/profile/components/mycode/BindIng",
-			component: _37358a26,
+			component: _3bea2aad,
 			name: "profile-components-mycode-BindIng"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 			path: "/home/teacher/components/teacherCategory",
@@ -1211,12 +1278,17 @@ export function createRouter () {
 		},
 		{
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 			path: "/profile/components/myexamine/info",
-			component: _45c60ce6,
+			component: _c56a06b4,
 			name: "profile-components-myexamine-info"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/profile/components/myticket/ticketRules",
 			component: _2e91fd5c,
 			name: "profile-components-myticket-ticketRules"
@@ -1240,6 +1312,7 @@ export function createRouter () {
 			path: "/backend/project/components/ProjectCourse",
 			component: _051abab1,
 			name: "backend-project-components-ProjectCourse"
+<<<<<<< HEAD
 =======
 			path: "/backend/project/components/OfflineDesc",
 			component: _53546631,
@@ -1265,14 +1338,19 @@ export function createRouter () {
 			component: _60f65be2,
 			name: "backend-course-components-teacherIntro"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/profile/components/myticket/detailPopup",
-			component: _12fd9722,
+			component: _557fb6e2,
 			name: "profile-components-myticket-detailPopup"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/home/teacher/components/Card",
 			component: _7e91305e,
 			name: "home-teacher-components-Card"
@@ -1326,6 +1404,7 @@ export function createRouter () {
 			path: "/profile/components/common/CardTab",
 			component: _0dcd5fff,
 			name: "profile-components-common-CardTab"
+<<<<<<< HEAD
 =======
 			path: "/backend/project/components/CommonProblems",
 			component: _60786f32,
@@ -1366,14 +1445,19 @@ export function createRouter () {
 			component: _280ff30e,
 			name: "backend-course-components-Line"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/profile/components/common/ListTab",
-			component: _b215021e,
+			component: _030b229e,
 			name: "profile-components-common-ListTab"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/profile/components/mysetting/updatePassword",
 			component: _ebacdfa6,
 			name: "profile-components-mysetting-updatePassword"
@@ -1407,6 +1491,7 @@ export function createRouter () {
 			path: "/backend/course/components/teacherIntro",
 			component: _af408b62,
 			name: "backend-course-components-teacherIntro"
+<<<<<<< HEAD
 =======
 			path: "/profile/components/myticket/ticketOrder",
 			component: _0a841c69,
@@ -1442,14 +1527,19 @@ export function createRouter () {
 			component: _6c7b26fc,
 			name: "profile-components-myexamine-answerQuestion"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/backend/course/components/Card",
-			component: _b6be38d6,
+			component: _12080bd5,
 			name: "backend-course-components-Card"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/profile/components/common/Card",
 			component: _583aa134,
 			name: "profile-components-common-Card"
@@ -1463,6 +1553,7 @@ export function createRouter () {
 			path: "/profile/components/myexamine/reviewing",
 			component: _5f64227c,
 			name: "profile-components-myexamine-reviewing"
+<<<<<<< HEAD
 =======
 			path: "/backend/project/components/ProjectCourse",
 			component: _114e3b1e,
@@ -1478,13 +1569,16 @@ export function createRouter () {
 			component: _bcc361b8,
 			name: "profile-components-common-CustomerCard"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/home/news/components/Info",
-			component: _4aaeea86,
+			component: _1200cb74,
 			name: "home-news-components-Info"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/profile/components/mycollege/collegeList",
 			component: _f7786e7a,
@@ -1494,24 +1588,32 @@ export function createRouter () {
 			component: _91a37498,
 			name: "profile-components-common-List"
 >>>>>>> dev
+=======
+			path: "/profile/components/mycollege/collegeList",
+			component: _f7786e7a,
+			name: "profile-components-mycollege-collegeList"
+>>>>>>> origin/dev
 		},
 		{
 			path: "/profile/components/myexamine/viewCertificate",
-			component: _57b76eaa,
+			component: _f759b22c,
 			name: "profile-components-myexamine-viewCertificate"
 		},
 		{
 			path: "/profile/components/mysetting/showPersonal",
-			component: _cc1113f4,
+			component: _4470a5c6,
 			name: "profile-components-mysetting-showPersonal"
 		},
 		{
 			path: "/profile/components/myexamine/certificateList",
-			component: _7d9fe24d,
+			component: _ab88cae6,
 			name: "profile-components-myexamine-certificateList"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/profile/components/mycode/invitation",
 			component: _7a893f61,
 			name: "profile-components-mycode-invitation"
@@ -1520,6 +1622,7 @@ export function createRouter () {
 			path: "/profile/components/myticket/statusPopup",
 			component: _5c8a0461,
 			name: "profile-components-myticket-statusPopup"
+<<<<<<< HEAD
 =======
 			path: "/profile/components/myexamine/submitPapers",
 			component: _fd1efb52,
@@ -1530,14 +1633,19 @@ export function createRouter () {
 			component: _2cbc221e,
 			name: "profile-components-common-search"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/home/news/components/List",
-			component: _df6e8314,
+			component: _3c996e36,
 			name: "home-news-components-List"
 		},
 		{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/dev
 			path: "/profile/components/myexamine/simulationExam",
 			component: _c63e6a84,
 			name: "profile-components-myexamine-simulationExam"
@@ -1576,6 +1684,7 @@ export function createRouter () {
 			path: "/profile/components/myinfo/Info",
 			component: _3a1c5475,
 			name: "profile-components-myinfo-Info"
+<<<<<<< HEAD
 =======
 			path: "/profile/components/myorder/DataPick",
 			component: _07ff4276,
@@ -1616,13 +1725,16 @@ export function createRouter () {
 			component: _ecf82f22,
 			name: "backend-project-components-ProjectEvaluate"
 >>>>>>> dev
+=======
+>>>>>>> origin/dev
 		},
 		{
 			path: "/profile/components/myexamine/intro",
-			component: _60249a64,
+			component: _0d84bab8,
 			name: "profile-components-myexamine-intro"
 		},
 		{
+<<<<<<< HEAD
 <<<<<<< HEAD
 			path: "/profile/components/myticket/ticketOrder",
 			component: _4d063c29,
@@ -1632,25 +1744,30 @@ export function createRouter () {
 			component: _05bdb272,
 			name: "profile-components-myticket-ticketPopup"
 >>>>>>> dev
+=======
+			path: "/profile/components/myticket/ticketOrder",
+			component: _4d063c29,
+			name: "profile-components-myticket-ticketOrder"
+>>>>>>> origin/dev
 		},
 		{
 			path: "/home/news/:detail?",
-			component: _ab017362,
+			component: _135bb60f,
 			name: "home-news-detail"
 		},
 		{
 			path: "/course/list/:courselist?",
-			component: _4592c8f4,
+			component: _9d1f8974,
 			name: "course-list-courselist"
 		},
 		{
 			path: "/home/teacher/:Info?",
-			component: _97f97e96,
+			component: _66b4c8f5,
 			name: "home-teacher-Info"
 		},
 		{
 			path: "/",
-			component: _06d81986,
+			component: _76ca02fd,
 			name: "index"
 		}
     ],
