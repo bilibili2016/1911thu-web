@@ -66,6 +66,7 @@ export default {
   data() {
     return {
       isHidden: false,
+      scrollBottom: "",
       scrollTop: "",
       isBig: false,
       // 顶部列表
@@ -478,13 +479,23 @@ export default {
       this.isBig = wWidth < 1420 ? false : true;
     },
     scroll() {
-      this.scrollTop =
+      this.scrollBottom =
         document.documentElement.scrollTop || document.body.scrollTop;
-      if (this.scrollTop > 80) {
-        this.isHidden = true;
+      if (this.scrollTop <= this.scrollBottom) {
+        //下滑
+        if (this.scrollTop > 80) {
+          this.isHidden = true;
+        } else {
+          this.isHidden = false;
+        }
       } else {
+        //上滑
         this.isHidden = false;
       }
+
+      setTimeout(() => {
+        this.scrollTop = this.scrollBottom;
+      }, 0);
     }
   },
   mounted() {
