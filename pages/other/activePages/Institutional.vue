@@ -4,9 +4,7 @@
       <img src="http://static-image.1911edu.com/hrentry-pic5.png" alt>
       <div class="top-text">
         <h1 class="top-h1">1911学堂</h1>
-        <p
-          class="top-desc"
-        >1911学堂根据各政府机关和企业事业单位的需求，量身定制系统、权威、实用的教育培训整体解决方案。在满足学员学习需求的同时，更能助力各单位实现组织的发展战略及目标。</p>
+        <p class="top-desc">1911学堂根据各政府机关和企业事业单位的需求，量身定制系统、权威、实用的教育培训整体解决方案。在满足学员学习需求的同时，更能助力各单位实现组织的发展战略及目标。</p>
 
         <!-- <div class="top-button" @click="handleScroll">
           填写联系方式，免费申请课程体验。
@@ -29,17 +27,13 @@
             </div>
             <div class="second text clearfix">
               <div class="left">混合式学习模式</div>
-              <div
-                class="right"
-              >1911学堂以提升学习效能为目标导向，结合线上学习人机交互的技术优势以及线下学习人文互动的情感优势，基于学员的学习场景，研发了“线上+线下”混合式学习模式。
+              <div class="right">1911学堂以提升学习效能为目标导向，结合线上学习人机交互的技术优势以及线下学习人文互动的情感优势，基于学员的学习场景，研发了“线上+线下”混合式学习模式。
                 <div class="con-shadow"></div>
               </div>
             </div>
             <div class="third text clearfix">
               <div class="left">“知识即服务”运营模式</div>
-              <div
-                class="right"
-              >1911学堂，是一个以“知识即服务”（KaaS）为运营模式的互联网终身教育平台，作为知识加工者和传播者，以知识为链条连接知识生产者和知识应用者，为学习者提供全链条服务。
+              <div class="right">1911学堂，是一个以“知识即服务”（KaaS）为运营模式的互联网终身教育平台，作为知识加工者和传播者，以知识为链条连接知识生产者和知识应用者，为学习者提供全链条服务。
                 <div class="con-shadow"></div>
               </div>
             </div>
@@ -54,14 +48,9 @@
             <div>标准内训项目</div>
           </div>
           <div class="con">
-            <div
-              class="text"
-            >1911学堂“线上+线下”混合式学习模式，充分发挥线上线下两种优势，线上学习可以让学员在移动端及PC端随时随地便捷学习；线下学习更加注重人文互动即师生互动、生生互动。</div>
+            <div class="text">1911学堂“线上+线下”混合式学习模式，充分发挥线上线下两种优势，线上学习可以让学员在移动端及PC端随时随地便捷学习；线下学习更加注重人文互动即师生互动、生生互动。</div>
           </div>
-          <div
-            class="button"
-            @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0&vid=-1')"
-          >点击查看</div>
+          <div class="button" @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0&vid=-1')">点击查看</div>
         </div>
         <div class="course-right courseCon clearfix">
           <div class="img">
@@ -69,7 +58,7 @@
             <div>委托定制项目</div>
           </div>
           <div class="con">
-            <div class="text">贵单位可在学堂自行选择在线学院，并提出线下学习具体的内容需求，形成定制式、个性化、针对性的人才培养规划及培训项目设置方案。</div>
+            <div class="text">贵单位可在1911学堂自行选择在线学院，并提出线下学习具体的内容需求，形成定制式、个性化、针对性的人才培养规划及培训项目设置方案。</div>
           </div>
           <div class="button" @click="goCustomerProject">开始自定制</div>
         </div>
@@ -126,25 +115,13 @@
           <div>
             <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
               <el-form-item label prop="companyname">
-                <el-autocomplete
-                  class="inline-input"
-                  placeholder="请输入您的单位名称"
-                  v-model="company.companyname"
-                  :fetch-suggestions="querySearchAsync"
-                  :trigger-on-focus="false"
-                  @select="handleSelect"
-                ></el-autocomplete>
+                <el-autocomplete class="inline-input" placeholder="请输入您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
               </el-form-item>
               <el-form-item label prop="person">
                 <el-input v-model="company.person" placeholder="请输入联系人姓名"></el-input>
               </el-form-item>
               <el-form-item label prop="date">
-                <el-date-picker
-                  v-model="company.date"
-                  format="yyyy 年 MM 月 dd 日"
-                  value-format="yyyy-MM-dd"
-                  placeholder="请选择回访日期"
-                ></el-date-picker>
+                <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="请选择回访日期"></el-date-picker>
               </el-form-item>
               <el-form-item label prop="time" class="timeLabel">
                 <el-radio v-model="company.time" label="上午（09:00-11:30）">上午（09:00-11:30）</el-radio>
@@ -156,12 +133,7 @@
               <el-form-item label prop="codes">
                 <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
                 <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
-                <el-button
-                  :disabled="codeClick"
-                  class="code"
-                  @click="handleGetCode"
-                  style="border:none;line-height:0"
-                >{{company.getCode}}</el-button>
+                <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
@@ -191,7 +163,7 @@ export default {
   watch: {
     $route: "fetchDate"
   },
-  data () {
+  data() {
     var validatePhone = (rule, value, callback) => {
       if (!/^[A-Za-z0-9]+$/.test(value)) {
         callback(new Error("密码只能输入数字、字母"));
@@ -342,8 +314,8 @@ export default {
     ...mapState("auth", ["token"])
   },
   methods: {
-    fetchDate () { },
-    handleScroll () {
+    fetchDate() {},
+    handleScroll() {
       window.scrollTo(0, this.buttonFormTop);
       // if (this.move) {
 
@@ -360,7 +332,7 @@ export default {
       //   }, 0.01)
       // }
     },
-    companyPost (formName) {
+    companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           // if (this.company.date == '' || this.company.time == '') {
@@ -402,14 +374,14 @@ export default {
         }
       });
     },
-    handleSelect (item) { },
-    closeRecommend () {
+    handleSelect(item) {},
+    closeRecommend() {
       this.recommend = false;
       document.getElementsByTagName("body")[0].style.padding = "0";
     },
-    querySearch (queryString, cb) { },
+    querySearch(queryString, cb) {},
     // 获取验证码 this.registerData
-    async handleGetCode (data) {
+    async handleGetCode(data) {
       this.codeClick = true;
       if (
         this.company.phones === "" ||
@@ -449,7 +421,7 @@ export default {
         });
       }
     },
-    pageScroll () {
+    pageScroll() {
       let totalHeight;
       let topImgHeight;
       if (this.$refs.topImg) {
@@ -469,10 +441,10 @@ export default {
         this.istopBottom = false;
       }
     },
-    handleSelect (item) {
+    handleSelect(item) {
       this.company.companyname = item.company_name;
     },
-    querySearchAsync (queryString, cb) {
+    querySearchAsync(queryString, cb) {
       //搜索单位
       queryString = queryString.replace(/^\s+|\s+$/g, "");
       if (queryString === "") {
@@ -486,7 +458,7 @@ export default {
       clearTimeout(this.timeout);
       cb(results);
     },
-    createStateFilter (queryString) {
+    createStateFilter(queryString) {
       return state => {
         return (
           state.company_name
@@ -496,7 +468,7 @@ export default {
       };
     },
     //搜索单位 接口
-    searchCompanyList () {
+    searchCompanyList() {
       if (this.company.companyname === "") {
         return false;
       } else {
@@ -512,12 +484,12 @@ export default {
         });
       }
     },
-    handleLink (url) {
+    handleLink(url) {
       persistStore.set("cid", 0);
       this.$router.push(url);
     },
     //跳转到自定制项目
-    goCustomerProject () {
+    goCustomerProject() {
       if (persistStore.get("token")) {
         this.$router.push({
           path: "/project/customerProject",
@@ -531,7 +503,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     setTitle("单位入口-1911学堂");
     this.company.userID = this.token;
     // this.$bus.$emit('bannerShow', true)
@@ -548,16 +520,16 @@ export default {
 
     this.buttonFormTop = this.$refs.buttonForm.offsetTop;
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit("bannerImg", false);
     });
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     this.$bus.$emit("bannerImg", false);
-    next(vm => { });
+    next(vm => {});
   },
-  deactivated () {
+  deactivated() {
     window.removeEventListener("scroll", this.pageScroll);
   }
 };

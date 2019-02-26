@@ -80,6 +80,15 @@ html {
     margin: 0;
 }
 
+//关于我们
+.homeUs {
+    // tab切换
+    .el-tabs--left .el-tabs__header.is-left {
+        width: 160px;
+        margin: 0;
+    }
+}
+
 .el-tabs--left .el-tabs__nav-wrap.is-left {
     margin: 0;
 }
