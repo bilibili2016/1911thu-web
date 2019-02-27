@@ -4,7 +4,7 @@
       <h1 class="clearfix">
         <span class="title">{{title}}
         </span>
-        <span class="fr moredata" @click="handleLinkMore">查看更多</span>
+        <span class="fr moredata" @click="handleLinkMore">查看更多></span>
       </h1>
     </el-row>
   </div>
@@ -12,16 +12,16 @@
 
 <script>
 export default {
-  props: ['title', 'link'],
+  props: ["title", "link"],
   methods: {
     handleLinkMore() {
-      this.$router.push(this.link)
+      this.$router.push(this.link);
     }
   }
-}
+};
 </script>
 <style scoped lang="scss">
-@import '~assets/style/components/title.scss';
+@import "~assets/style/components/title.scss";
 </style>
 
 

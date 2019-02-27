@@ -5,14 +5,20 @@
     <v-discount v-if="bannerMsg" @closeBanner="closeBanner"></v-discount>
     <div class="main">
       <div class="header-fl clearfix" :class="{big:isBig}">
+        <!-- logo -->
         <v-logo @handleLink="handleLink"></v-logo>
-        <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr"></v-homeselect>
+        <!-- 头部导航 -->
+        <v-homeselect :projectArr="projectArr" :categoryArr="categoryArr" @addEcg="handleAddEcg"></v-homeselect>
       </div>
       <div class="header-fr clearfix" :class="{big:isBig}">
+        <!-- 搜索 -->
         <v-search @handleSearch="handleSearch"></v-search>
-        <v-enter class="HREntry" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter>
+        <!-- 兑换码、单位入口 -->
+        <!-- <v-enter class="HREntry" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @addEcg="handleAddEcg"></v-enter> -->
+        <!-- 登录、注册 未登录状态-->
         <v-lrbtn v-if="!isShowLRBtn" @login="login" @register="register"></v-lrbtn>
-        <v-headerimg v-else :data="user" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
+        <!-- 头像 已登录状态 -->
+        <v-headerimg v-else :data="user" :isShowLRBtn="isShowLRBtn" @handleLink="handleLink" @handleLinkProfile="handleLinkProfile" @handleSignOut="handleSignOut"></v-headerimg>
       </div>
       <v-code v-show="bindForm.isBind" :bindForm="bindForm" @detection="handleDetection" @closeEcg="handleCloseEcg"></v-code>
       <v-login></v-login>

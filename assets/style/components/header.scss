@@ -28,16 +28,15 @@ body {
         position: relative;
         .header-fl {
             white-space: nowrap;
-            width: 690px;
+            width: 800px;
             height: 80px;
-            padding: 12px 0;
             position: absolute;
             left: 0;
             top: 0;
             &.big {
-                width: 790px;
+                width: 960px;
                 .headerPage {
-                    .item {
+                    .nav {
                         margin-right: 30px;
                         &:first-child {
                             margin-left: 50px;
@@ -51,16 +50,17 @@ body {
             right: 0;
             top: 0;
             white-space: nowrap;
-            width: 360px;
+            width: 180px;
             height: 100%;
             &.big {
-                width: 360px;
+                width: 180px;
             }
         }
         .headerLogo {
             width: 146px;
             height: 56px;
             cursor: pointer;
+            margin-top: 12px;
             img {
                 width: 146px;
                 height: 42px;
@@ -72,11 +72,13 @@ body {
             color: #222;
         }
         .headerPage {
-            .item {
+            .nav {
+                position: relative;
                 float: left;
                 cursor: pointer;
                 font-size: 16px;
-                line-height: 56px;
+                height: 80px;
+                line-height: 80px;
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
                 margin-right: 15px;
@@ -86,10 +88,21 @@ body {
                 &:last-child {
                     margin-right: 0;
                 }
+                .navInner {
+                    line-height: 56px;
+                    margin-top: 12px;
+                }
                 &.active,
                 &:hover {
-                    border-bottom: 2px solid #773084;
-                    color: #773084;
+                    .navInner {
+                        border-bottom: 2px solid #773084;
+                        color: #773084;
+                    }
+                    .subPages {
+                        opacity: 1;
+                        display: block;
+                        z-index: 999;
+                    }
                 }
             }
         }
@@ -218,14 +231,116 @@ body {
                     }
                 }
             }
-            .shoppingCart {
+            span:hover {
+                color: #773084;
+            }
+            .downLoad {
                 display: inline-block;
-                padding: 0;
-                width: auto;
-                margin: -2px 0 0 20px;
                 position: relative;
                 cursor: pointer;
-                vertical-align: top;
+                height: 43px;
+                width: 30px;
+                text-align: right;
+                .phone {
+                    display: inline-block;
+                    width: 14px;
+                    height: 20px;
+                    margin-top: -2px;
+                    cursor: pointer;
+                    background: url('http://static-image.1911edu.com/phone.png') no-repeat;
+                    background-size: contain;
+                    transition: all 300ms;
+                    &:hover {
+                        background: url('http://static-image.1911edu.com/phone2.png') no-repeat;
+                        background-size: contain;
+                    }
+                }
+            }
+        }
+        .lrBtn {
+            float: left;
+            margin-left: 20px;
+            margin-top: 33px;
+            span {
+                font-size: 16px;
+                cursor: pointer;
+                transition: all 300ms;
+                &:hover {
+                    color: #773084;
+                }
+            }
+        }
+        .downApp {
+            opacity: 0;
+            display: none;
+            transition: all 300ms;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 4px;
+            box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
+            text-align: center;
+            position: absolute;
+            left: 120px;
+            top: -40px;
+            z-index: -1;
+            width: 120px;
+            height: 120px;
+            .changeType {
+                margin-top: 10px;
+                width: 150px;
+                text-align: center;
+                span {
+                    display: inline-block;
+                    width: 100%;
+                    padding: 0 0 0 15px;
+                    color: #050223;
+                    font-size: 14px;
+                }
+            }
+        }
+        .subPages {
+            opacity: 0;
+            display: none;
+            width: 120px;
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 80px;
+            z-index: -1;
+            // border-radius: 4px;
+            // overflow: hidden;
+            transition: all 300ms;
+            background-color: #fff;
+            box-shadow: 0px 5px 12px rgba(198, 194, 210, 0.28);
+            li {
+                position: relative;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                font-size: 14px;
+                color: #332a51;
+                cursor: pointer;
+                transition: all 300ms;
+                &:hover {
+                    background-color: #eee;
+                    color: #773084;
+                }
+            }
+            li.scanCode {
+                &:hover .downApp {
+                    opacity: 1;
+                    display: block;
+                    z-index: 999;
+                }
+            }
+        }
+        .rightContent {
+            .shoppingCart {
+                float: left;
+                padding: 0;
+                width: 20px;
+                position: relative;
+                cursor: pointer;
+                margin: 30px 20px 0 20px;
                 span {
                     width: 20px;
                     height: 20px;
@@ -252,139 +367,31 @@ body {
                     overflow: hidden;
                 }
             }
-            span:hover {
-                color: #773084;
-            }
-            .downLoad {
-                display: inline-block;
+            .headImg {
+                height: 80px;
+                line-height: 80px;
                 position: relative;
                 cursor: pointer;
-                height: 43px;
-                width: 30px;
-                text-align: right;
-                &:hover .downApp {
+                float: left;
+                &:hover .subPages {
                     opacity: 1;
                     display: block;
-                    z-index: 999;
+                    z-index: 200;
                 }
-                .phone {
-                    display: inline-block;
-                    width: 14px;
-                    height: 20px;
-                    margin-top: -2px;
-                    cursor: pointer;
-                    background: url('http://static-image.1911edu.com/phone.png') no-repeat;
-                    background-size: contain;
-                    transition: all 300ms;
-                    &:hover {
-                        background: url('http://static-image.1911edu.com/phone2.png') no-repeat;
-                        background-size: contain;
-                    }
-                }
-                .downApp {
-                    opacity: 0;
-                    display: none;
-                    transition: all 300ms;
-                    background: rgba(255, 255, 255, 1);
-                    border-radius: 4px;
-                    box-shadow: 0px 0px 12px rgba(198, 194, 210, 0.28);
-                    padding: 15px;
-                    text-align: center;
-                    position: absolute;
-                    right: -10px;
-                    top: 40px;
-                    z-index: -1;
-                    .qrcode {
-                        width: 150px;
-                        height: 150px;
-                    }
-                    .changeType {
-                        margin-top: 10px;
-                        width: 150px;
-                        text-align: center;
-                        span {
-                            display: inline-block;
-                            width: 100%;
-                            padding: 0 0 0 15px;
-                            color: #050223;
-                            font-size: 14px;
-                        }
-                    }
-                }
-            }
-        }
-        .lrBtn {
-            float: left;
-            margin-left: 20px;
-            margin-top: 33px;
-            // height: 80px;
-            // margin-top: 32px;
-            // padding-top: 2px;
-            // line-height: 80px;
-            span {
-                // width: 40px;
-                // height: 34px;
-                // line-height: 34px;
-                // text-align: center;
-                font-size: 16px;
-                cursor: pointer;
-                transition: all 300ms;
-                &:hover {
-                    color: #773084;
-                }
-            }
-        }
-        .headImg {
-            height: 100%;
-            line-height: 100%;
-            position: relative;
-            cursor: pointer;
-            float: left;
-            margin-left: 20px;
-            padding-left: 10px;
-            &:hover .subPages {
-                opacity: 1;
-                display: block;
-                z-index: 999;
-            }
-            span {
-                width: 34px;
-                height: 34px;
-                background-color: #eee;
-                border-radius: 50%;
-                margin-top: 27px;
                 img {
                     width: 34px;
                     height: 34px;
                     border-radius: 20px;
+                    vertical-align: middle;
                 }
-            }
-            .subPages {
-                opacity: 0;
-                display: none;
-                width: 120px;
-                position: absolute;
-                right: 0;
-                top: 80px;
-                z-index: -1;
-                // border-radius: 4px;
-                overflow: hidden;
-                transition: all 300ms;
-                background-color: #fff;
-                box-shadow: 0px 5px 12px rgba(198, 194, 210, 0.28);
-                li {
-                    height: 40px;
-                    line-height: 40px;
-                    text-align: center;
-                    font-size: 14px;
-                    color: #332a51;
-                    cursor: pointer;
-                    transition: all 300ms;
-                    &:hover {
-                        background-color: #eee;
-                        color: #773084;
-                    }
-                }
+                // span {
+                //     width: 34px;
+                //     height: 34px;
+                //     background-color: #eee;
+                //     border-radius: 50%;
+                //     margin-top: 23px;
+                //     vertical-align: middle;
+                // }
             }
         }
     }
@@ -605,14 +612,14 @@ body {
 }
 
 .headerBoxShow {
-    top: 0
+    top: 0;
 }
 
 .headerBoxHidden {
     top: -80px;
 }
 
-.mobile .headerBox .main .headerPage .item {
+.mobile .headerBox .main .headerPage .nav {
     font-size: 14px;
 }
 

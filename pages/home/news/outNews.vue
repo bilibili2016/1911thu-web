@@ -1,24 +1,16 @@
 <template>
   <div class="outNews">
-    <el-row class="center">
-      <v-title
-        :title="title"
-        :link="link"
-      ></v-title>
-      <div class="newsItems clearfix">
-        <div
-          class="item"
-          v-for="(item,index) in outNewsListData"
-          :key="index"
-          @click="handleLink(item.media_link)"
-        >
-          <img
-            :src="item.picture"
-            alt=""
-          >
+    <div class="outCenter">
+      <el-row class="center">
+        <v-title :title="title" :link="link"></v-title>
+        <div class="newsItems clearfix">
+          <div class="item" v-for="(item,index) in outNewsListData" :key="index" @click="handleLink(item.media_link)">
+            <img :src="item.picture" alt="">
+          </div>
         </div>
-      </div>
-    </el-row>
+      </el-row>
+    </div>
+
   </div>
 </template>
 
