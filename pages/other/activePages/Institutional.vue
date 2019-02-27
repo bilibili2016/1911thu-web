@@ -55,7 +55,7 @@
         <div class="course-right courseCon clearfix">
           <div class="img">
             <img src="http://static-image.1911edu.com/institutional-icon2.png" alt>
-            <div>委托定制项目</div>
+            <div>自定制项目</div>
           </div>
           <div class="con">
             <div class="text">贵单位可在1911学堂自行选择在线学院，并提出线下学习具体的内容需求，形成定制式、个性化、针对性的人才培养规划及培训项目设置方案。</div>

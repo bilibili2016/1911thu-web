@@ -2,13 +2,14 @@
   <div class="headerPage clearfix">
     <div class="nav" :class="{active:changeActive==item.id}" v-for="(item,index) in navList" :key="index" @click="handleClick(item)">
       <div class="navInner">{{item.title}} <i v-if="item.childList" class="el-icon-arrow-down"></i></div>
-      <ul v-if="item.childList" class="subPages">
-        <li :class="{scanCode:child.id=='download'}" v-for="(child,index) in item.childList" :key="'child'+index" @click="handleClick(item,child)">
+      <ul v-if="item.childList" class="subPages" ref="subIndex">
+        <li :class="{scanCode:child.id=='download'}" v-for="(child,index) in item.childList" :key="'child'+index" @click="handleClick(item,child,index)">
           {{child.title}}
-          <qrcode v-if="child.id=='download'" class="downApp clearfix" :value="downloadAppURL" :options="{ size: 150 }"></qrcode>
-
+          <div class="downApp clearfix">
+            <qrcode v-if="child.id=='download'" class="" :value="downloadAppURL" :options="{ size: 150 }"></qrcode>
+            <p class="changeType">扫一扫下载APP</p>
+          </div>
         </li>
-
       </ul>
 
     </div>
@@ -90,7 +91,14 @@ export default {
     };
   },
   methods: {
-    handleClick(item, child) {
+    handleClick(item, child, index) {
+      if (index != undefined) {
+        document.getElementsByClassName("");
+        let subLen = this.$refs.subIndex;
+        for (let i = 0; i < subLen.length; i++) {
+          // subLen[i].style.opacity = 0;
+        }
+      }
       if (item.link == "" && !child) {
         return false;
       }
@@ -131,38 +139,38 @@ export default {
         case "/":
           this.changeActive = "index";
           break;
+        //关于我们
+        case "/other/pages/homeUs":
+          this.changeActive = "adoutUs";
+          break;
+        //在线学院
+        case "/home/vip/vipPage":
+        case "/course/category":
+          this.changeActive = "onlineCollege";
+          break;
+        //单位内训
+        case "/other/activePages/Institutional":
+          this.changeActive = "unit";
+          break;
         //名师智库
         case "/home/teacher/list":
         case "/home/teacher/orderTeacher":
         case "/home/teacher/beTeacher":
-        case "/home/teacher/list/":
-        case "/home/teacher/orderTeacher/":
-        case "/home/teacher/beTeacher/":
           this.changeActive = "teacher";
           break;
         //城市分校
         case "/home/citySchool/schoolIntro":
         case "/home/citySchool/submitSuccess":
-        case "/home/citySchool/schoolIntro/":
-        case "/home/citySchool/submitSuccess/":
           this.changeActive = "school";
           break;
         //课程分类
         case "/course/category":
-        case "/course/category/":
           this.changeActive = matchSplits("vid");
-          break;
-        //学院
-        case "/home/vip/vipPage":
-        case "/home/vip/vipPage/":
-          this.changeActive = matchSplits("id");
           break;
         //证书查询
         case "/home/certification/searchPage":
         case "/home/certification/viewPage":
-        case "/home/certification/searchPage/":
-        case "/home/certification/viewPage/":
-          this.changeActive = "searchCer";
+          this.changeActive = "service";
           break;
         default:
           this.changeActive = -1;

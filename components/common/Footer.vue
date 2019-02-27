@@ -4,9 +4,9 @@
       <div class="logo fl">
         <i></i>
       </div>
-      <div class="companyInfo fl">
+      <!-- <div class="companyInfo fl">
         <span @click="handleLink('first')">关于我们</span>
-      </div>
+      </div> -->
       <div class="copyright fr">
         <p class="one">一九一一未来教育科技（北京）有限公司 版权所有</p>
         <p class="two">京ICP备18040329号 | &nbsp;&nbsp;
@@ -18,15 +18,15 @@
 </template>
 
 <script>
-import { open } from '@/lib/util/helper'
+import { open } from "@/lib/util/helper";
 export default {
   methods: {
     handleLink() {
-      this.$router.push('/other/pages/homeUs')
+      this.$router.push("/other/pages/homeUs");
     },
     handleClick() {
-      window.open('http://static-image.1911edu.com/licence.jpg')
+      window.open("http://static-image.1911edu.com/licence.jpg");
     }
   }
-}
+};
 </script>

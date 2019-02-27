@@ -5,7 +5,7 @@
       <p>内容+认证+服务+技术</p>
     </div>
     <div class="left">
-      <el-carousel :interval="4000" indicator-position="outside" @change="setActiveItem">
+      <el-carousel :interval="4000" indicator-position="outside" @change="setActiveItem" arrow="never">
         <el-carousel-item class="clearfix" v-for="(item,index) in leftCar" :key="index">
           <div class="newsLi">
             <div class="info">
@@ -23,7 +23,7 @@
     </div>
     <div class="right">
       <!-- <v-carousel :config="configRight" :coreData="rightCar"></v-carousel> -->
-      <el-carousel class="coreRight" :autoplay='autoplayFlag' :interval="4000" ref="coreRightCarousel" indicator-position="none">
+      <el-carousel class="coreRight" :autoplay='autoplayFlag' :interval="4000" ref="coreRightCarousel" indicator-position="none" arrow="never">
         <el-carousel-item v-for="(item,index) in rightCar" :key="index">
           <img class="rightImg" :src="item.imgUrl">
         </el-carousel-item>
