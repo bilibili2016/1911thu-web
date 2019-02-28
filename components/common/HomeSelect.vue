@@ -144,8 +144,15 @@ export default {
           break;
         //在线学院
         case "/home/vip/vipPage":
-        case "/course/category":
           this.changeActive = "onlineCollege";
+
+          break;
+        case "/course/category":
+          if (matchSplits("cp") == 0) {
+            this.changeActive = "onlineCollege";
+          } else {
+            this.changeActive = -1;
+          }
           break;
         //单位内训
         case "/other/activePages/Institutional":
