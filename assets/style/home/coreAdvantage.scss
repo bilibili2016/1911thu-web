@@ -1,8 +1,12 @@
 .coreAdvantage {
-	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-wrap: nowrap;
+
 	.top {
 		width: 50%;
 		height: 200px;
+
 		h1 {
 			float: right;
 			width: 75%;
@@ -12,6 +16,7 @@
 			margin-bottom: 20px;
 			padding-top: 90px;
 		}
+
 		p {
 			float: right;
 			width: 75%;
@@ -19,15 +24,22 @@
 			color: #555;
 		}
 	}
+
 	.left {
-		float: left;
-		width: 50%;
+		flex: 1;
 	}
+
 	.right {
-		position: absolute;
-		right: 0;
-		top: 0;
+		flex: 1;
+		position: relative;
 		width: 50%;
 		height: 625px;
+
+		.rightCon {
+			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
 	}
 }
