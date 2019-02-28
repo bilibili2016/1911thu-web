@@ -146,8 +146,10 @@ export default {
           this.isShowBtn = true;
         }
         this.$nextTick(() => {
-          document.getElementById("leftCon").style.minHeight =
-            document.getElementById("rightCon").clientHeight + "px";
+          if (document.getElementById("leftCon")) {
+            document.getElementById("leftCon").style.minHeight =
+              document.getElementById("rightCon").clientHeight + "px";
+          }
         });
       });
     },
