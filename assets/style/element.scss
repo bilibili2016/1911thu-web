@@ -4,7 +4,11 @@
 /* 默认的 Element 无法满足需要时，就在下面进行扩展，建议扩展方式仍然参考 Element 的风格 */
 
 /* Button */
-
+.el-container {
+	width: 1920px;
+	margin: 0 auto;
+	overflow: hidden;
+}
 html {
 	font-family: Arial, '微软雅黑';
 }
@@ -1766,10 +1770,10 @@ input::-webkit-credentials-auto-fill-button {
 				overflow-x: hidden;
 			}
 			.el-carousel__item {
-				width: 950px;
+				width: 960px;
 			}
 			.rightImg {
-				width: 950px;
+				width: 960px;
 				height: 625px;
 				margin: 0 auto;
 			}

@@ -105,7 +105,7 @@ export default {
     setCarousel() {
       if (document.getElementsByClassName("coreCarousel")) {
         let carouselImg = document.getElementsByClassName("coreCarousel");
-        let marginLeft = (950 - this.windowWidth) / 2;
+        let marginLeft = (960 - this.windowWidth) / 2;
         for (var i = 0; i < carouselImg.length; i++) {
           carouselImg[i].style.marginLeft = -marginLeft + "px";
         }
