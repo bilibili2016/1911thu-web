@@ -1435,13 +1435,13 @@ input:-webkit-autofill {
 //单位入口页
 .allInfo {
 	.bottomForm .el-form .el-button.el-button--primary {
-		border: none;
+		// border: none;
 	}
 	.el-form-item.is-error .el-input__inner,
 	.el-form-item.is-error .el-input__inner:focus,
 	.el-form-item.is-error .el-textarea__inner,
 	.el-form-item.is-error .el-textarea__inner:focus {
-		border: none;
+		// border: none;
 	}
 }
 

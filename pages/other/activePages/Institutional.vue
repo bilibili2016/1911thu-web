@@ -40,107 +40,71 @@
           </div>
         </div>
       </div>
-      <div class="course serviceDetails clearfix">
-        <h3>1911学堂混合式项目</h3>
-        <div class="course-left courseCon clearfix">
-          <div class="img">
-            <img src="http://static-image.1911edu.com/institutional-icon3.png" alt>
-            <div>标准内训项目</div>
-          </div>
-          <div class="con">
-            <div class="text">1911学堂“线上+线下”混合式学习模式，充分发挥线上线下两种优势，线上学习可以让学员在移动端及PC端随时随地便捷学习；线下学习更加注重人文互动即师生互动、生生互动。</div>
-          </div>
-          <div class="button" @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0&vid=-1')">点击查看</div>
-        </div>
-        <div class="course-right courseCon clearfix">
-          <div class="img">
-            <img src="http://static-image.1911edu.com/institutional-icon2.png" alt>
-            <div>自定制项目</div>
-          </div>
-          <div class="con">
-            <div class="text">贵单位可在1911学堂自行选择在线学院，并提出线下学习具体的内容需求，形成定制式、个性化、针对性的人才培养规划及培训项目设置方案。</div>
-          </div>
-          <div class="button" @click="goCustomerProject">开始自定制</div>
-        </div>
-      </div>
-      <!-- <div class="course serviceDetails clearfix">
-        <h3 style="padding-top:0px;">1911学堂顾问式指导</h3>
-        <div class="course-left courseCon clearfix">
-          <div class="img">
-            <img
-              src="http://static-image.1911edu.com/institutional-icon4.png"
-              alt=""
-            >
-            <div>顾问式</div>
-          </div>
-          <div class="con">
-            <div class="text">
-              您可从学堂数千名导师中遴选最符合贵单位需求的专家教授，为您提供顾问式指导，真正做到学习需求与专家内容的智能匹配，实现“请进来、沉下去”的培训效果。
+      <div class="course  clearfix">
+        <div class="serviceDetails">
+          <h3>1911学堂混合式项目</h3>
+          <div class="clearfix">
+            <div class="course-left courseCon clearfix">
+              <div class="img">
+                <img src="http://static-image.1911edu.com/institutional-icon3.png" alt>
+                <div>标准内训项目</div>
+              </div>
+              <div class="con">
+                <div class="text">1911学堂“线上+线下”混合式学习模式，充分发挥线上线下两种优势，线上学习可以让学员在移动端及PC端随时随地便捷学习；线下学习更加注重人文互动即师生互动、生生互动。</div>
+              </div>
+              <div class="button" @click="handleLink('/course/category?cid=0&cp=1&xid=0&pids=0&vid=-1')">点击查看</div>
+            </div>
+            <div class="course-right courseCon clearfix">
+              <div class="img">
+                <img src="http://static-image.1911edu.com/institutional-icon2.png" alt>
+                <div>自定制项目</div>
+              </div>
+              <div class="con">
+                <div class="text">贵单位可在1911学堂自行选择在线学院，并提出线下学习具体的内容需求，形成定制式、个性化、针对性的人才培养规划及培训项目设置方案。</div>
+              </div>
+              <div class="button" @click="goCustomerProject">开始自定制</div>
             </div>
           </div>
-          <div
-            class="button"
-            @click="handleLink('/home/teacher/list')"
-          >
-            点击查看
-          </div>
-        </div>
-        <div class="course-left courseCon clearfix">
-          <div class="img">
-            <img
-              src="http://static-image.1911edu.com/institutional-icon1.png"
-              alt=""
-            >
-            <div>导师合作</div>
-          </div>
-          <div class="con">
-            <div class="text">
-              如学堂导师库中没有符合贵单位需求的导师，您可将您需要的授课名称及合作方式告知我们，1911学堂将根据您的需求匹配最适合的专家教授。
-            </div>
-          </div>
-          <div
-            class="button"
-            @click="handleScroll"
-          >
-            立即咨询
-          </div>
-        </div>
-      </div>-->
-      <div class="bottomForm" id="buttom" ref="buttonForm">
-        <img class="buttom-bg" src="http://static-image.1911edu.com/hrentry-bg.png" alt>
-        <div class="word">
-          <p class="word-desc1">若您想进一步了解、体验我们的培训项目，烦请留下您的联系方式，我们将在预约时间内与您联系。期待为您提供更好的教育体验。</p>
-          <!-- <p class="word-desc2"> -->
-          <!-- <i class="word-desc-bg"></i>您也可以拨打咨询电话：18516821911</p> -->
-          <div>
-            <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-              <el-form-item label prop="companyname">
-                <el-autocomplete class="inline-input" placeholder="请输入您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
-              </el-form-item>
-              <el-form-item label prop="person">
-                <el-input v-model="company.person" placeholder="请输入联系人姓名"></el-input>
-              </el-form-item>
-              <el-form-item label prop="date">
-                <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="请选择回访日期"></el-date-picker>
-              </el-form-item>
-              <el-form-item label prop="time" class="timeLabel">
-                <el-radio v-model="company.time" label="上午（09:00-11:30）">上午（09:00-11:30）</el-radio>
-                <el-radio v-model="company.time" label="下午（13:00-17:30）">下午（13:00-17:30）</el-radio>
-              </el-form-item>
-              <el-form-item label prop="phones">
-                <el-input v-model="company.phones" placeholder="请输入联系人手机号"></el-input>
-              </el-form-item>
-              <el-form-item label prop="codes">
-                <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
-                <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
-                <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
-              </el-form-item>
-              <el-form-item>
+          <div class="word">
+            <p class="word-desc1">期待为您创造更好的教育体验！</p>
+            <p class="word-desc2">
+              <i class="el-icon-phone-outline"></i>
+              您也可以拨打咨询电话：010-62701911</p>
+            <p class="word-desc3">如果您希望对1911学堂课程及培训项目了解更多，请填写以下信息，我们会在90分钟内与您联系，</p>
+            <div>
+              <el-form :model="company" :rules="rules" ref="ruleForm" class="demo-ruleForm">
+                <el-form-item label prop="companyname">
+                  <el-autocomplete class="inline-input" placeholder="请输入您的单位名称" v-model="company.companyname" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+                </el-form-item>
+                <el-form-item label prop="person">
+                  <el-input v-model="company.person" placeholder="请输入联系人姓名"></el-input>
+                </el-form-item>
+                <el-form-item label prop="date">
+                  <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="请选择回访日期"></el-date-picker>
+                </el-form-item>
+                <el-form-item label prop="time" class="timeLabel">
+                  <el-radio v-model="company.time" label="上午（09:00-11:30）">上午（09:00-11:30）</el-radio>
+                  <el-radio v-model="company.time" label="下午（13:00-17:30）">下午（13:00-17:30）</el-radio>
+                </el-form-item>
+                <el-form-item label prop="phones">
+                  <el-input v-model="company.phones" placeholder="请输入联系人手机号"></el-input>
+                </el-form-item>
+                <el-form-item label prop="codes">
+                  <el-input v-model="company.codes" placeholder="请输入验证码"></el-input>
+                  <!-- <span class="code" @click="handleGetCode">{{company.getCode}}</span> -->
+                  <el-button :disabled="codeClick" class="code" @click="handleGetCode" style="border:none;line-height:0">{{company.getCode}}</el-button>
+                </el-form-item>
                 <el-button type="primary" @click="companyPost('ruleForm')">提交</el-button>
-              </el-form-item>
-            </el-form>
+
+              </el-form>
+            </div>
           </div>
         </div>
+
+      </div>
+
+      <div class="bottomForm" id="buttom" ref="buttonForm">
+
       </div>
     </div>
 
@@ -177,7 +141,6 @@ export default {
       backPosition: 0,
       move: true,
       interval: null,
-      buttonFormTop: "",
       headerHeight: "",
       scroll: "",
       istopFixed: false,
@@ -315,23 +278,6 @@ export default {
   },
   methods: {
     fetchDate() {},
-    handleScroll() {
-      window.scrollTo(0, this.buttonFormTop);
-      // if (this.move) {
-
-      //   this.interval = setInterval(() => {
-      //     this.backPosition += 50
-      //     if (this.backPosition > this.buttonFormTop) {
-      //       this.move = true
-      //       this.backPosition = 0
-      //       clearInterval(this.interval)
-      //     } else {
-      //       this.move = false
-      //       window.scrollTo(0, this.backPosition)
-      //     }
-      //   }, 0.01)
-      // }
-    },
     companyPost(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -504,7 +450,7 @@ export default {
     }
   },
   mounted() {
-    setTitle("单位入口-1911学堂");
+    setTitle("单位内训-1911学堂");
     this.company.userID = this.token;
     // this.$bus.$emit('bannerShow', true)
     window.addEventListener("scroll", this.pageScroll);
@@ -517,8 +463,6 @@ export default {
         "recommend"
       )[0].offsetHeight;
     }
-
-    this.buttonFormTop = this.$refs.buttonForm.offsetTop;
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
