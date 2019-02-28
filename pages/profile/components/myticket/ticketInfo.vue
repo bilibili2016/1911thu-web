@@ -293,7 +293,6 @@ export default {
           this.ticketInfo.contentId = this.invoicecon.contentId
           this.ticketInfo.content = this.invoicecon.content
           this.changeData(this.ticketInfo)
-          this.$emit('onTicket')
           this.closeForm()
         }
       })
@@ -311,7 +310,6 @@ export default {
           this.invoiceInfo.contentId = this.invoicecon.contentId
           this.invoiceInfo.content = this.invoicecon.content
           this.changeData(this.invoiceInfo)
-          this.$emit('onTicket')
           this.closeForm()
         }
       })

@@ -1,12 +1,13 @@
 <template>
   <!-- 学堂资讯 -->
   <div class="home-info bg-none">
+    <div class="line"></div>
     <el-row class="info-center center">
       <v-title :title="title" :link="link"></v-title>
+
       <div v-loading="load" class="newsUl clearfix">
         <!-- 左边新闻轮播 -->
         <!-- <v-carousel :swiperData="infoDesc" :config="configCarousel"></v-carousel> -->
-
         <div class="newsCarousel fl">
           <div class="newsLi" @click="goDetail(outNewData)">
             <div class="newImg">
@@ -20,7 +21,11 @@
         <div class="info-list">
           <div v-for="(card,index) in newsListData" :index="index" :key="card.id" class="info" v-if="index>0">
             <div class="info-box clearfix" @click="goDetail(card)">
-              <img class="titleImg fl" :src="card.picture" alt="">
+              <div class="time">
+                <p class="day">{{changeTime(card.create_time).substring(5,10)}}</p>
+                <p class="year">{{changeTime(card.create_time).substring(0,4)}}</p>
+              </div>
+              <!-- <img class="titleImg fl" :src="card.picture" alt=""> -->
               <div class="fl">
                 <h4 :title="card.title">{{card.title}}</h4>
                 <p>{{card.introduce}}</p>
@@ -40,7 +45,7 @@ import CustomCard from "@/components/card/Card.vue";
 import CustomInfo from "@/pages/home/news/components/Info.vue";
 import CustomTitle from "@/components/common/Title.vue";
 import Carousel from "@/components/common/Carousel.vue";
-import { checkURL } from '@/lib/util/helper'
+import { checkURL, timestampToYMD } from "@/lib/util/helper";
 export default {
   components: {
     "v-card": CustomCard,
@@ -49,7 +54,7 @@ export default {
     "v-carousel": Carousel
   },
   props: ["newsListData", "outNewData", "linkfive", "link", "title"],
-  data () {
+  data() {
     return {
       infoDescs: null,
       infoArticles: null,
@@ -60,8 +65,13 @@ export default {
     };
   },
   methods: {
-    goDetail (news) {
-      news.type == '3' ? window.open(checkURL(news.media_link)) : this.$router.push("/home/news/" + news.id)
+    changeTime(time) {
+      return timestampToYMD(time);
+    },
+    goDetail(news) {
+      news.type == "3"
+        ? window.open(checkURL(news.media_link))
+        : this.$router.push("/home/news/" + news.id);
     }
   }
 };

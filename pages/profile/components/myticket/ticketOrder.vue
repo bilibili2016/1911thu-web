@@ -74,11 +74,11 @@
       </div>
       <v-nomsg class="noOrder " v-else :config="noMsgTwl"></v-nomsg>
       <!-- 发票弹框 第一步：填写发票信息-->
-      <v-ticketinfo v-if="showInvoice" @onTicket="onTicket" @handleClose="close" @closeForm="closeForm"></v-ticketinfo>
+      <v-ticketinfo v-if="showInvoice" @handleClose="close" @closeForm="closeFirst"></v-ticketinfo>
       <!-- 发票弹框 第二步：确认发票信息并提交-->
-      <v-ticket v-if="showTicket" @handleClose="close" @handBack="handBack" @closeForm="closeForm"></v-ticket>
+      <v-ticket v-if="showTicket" @handleClose="close" @handBack="handBack" @closeForm="closeSecond"></v-ticket>
       <!-- 发票弹框 第三步：确认发票信息并提交-->
-      <v-comfirm :price="orderPrice" :checkedArr="checkedArr" @getUnTicketData="getUnTicketData" @chengeItem="chengeItem" @goBack="goBack" @backFirst="handBack"></v-comfirm>
+      <v-comfirm :price="orderPrice" :checkedArr="checkedArr" @getUnTicketData="getUnTicketData" @chengeItem="chengeItem" @goBack="showSecond" @backFirst="handBack"></v-comfirm>
     </div>
   </div>
 </template>
@@ -232,30 +232,32 @@ export default {
     chengeItem () {
       this.$emit("chengeItem");
     },
-    // 开纸质发票 提交发票的时候 返回
-    goBack () {
-      this.onTicket();
-    },
-    // 展示开发票第二步
-    onTicket () {
+    // 开纸质发票 提交发票的时候 返回 展示开发票第二步
+    showSecond () {
       this.showTicket = true
     },
-    // 关闭表单
+    // 关闭表单 清数据
     close () {
       IEPopup("pane-tab-eighth", "relative", 1);
       this.showInvoice = false;
       this.showTicket = false
       persistStore.set("invoiceData", '')
     },
-    // 关闭表单 不清除缓存
-    closeForm () {
+    // 关闭第一步 展示第二步 不清除缓存
+    closeFirst () {
       IEPopup("pane-tab-eighth", "relative", 1);
       this.showInvoice = false;
+      this.showTicket = true
     },
-    // 返回第一步
+    // 关闭第二步 返回第一步
     handBack () {
       this.showInvoice = true
       this.showTicket = false
+    },
+    // 关闭第二步 展示第三部 不清除缓存（内部判断）
+    closeSecond () {
+      IEPopup("pane-tab-eighth", "relative", 1);
+      this.showTicket = false;
     },
     //课程详情
     goCourseInfo (item, index) {

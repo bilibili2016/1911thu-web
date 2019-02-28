@@ -1,20 +1,20 @@
 <template>
   <div>
-    <el-main class="home">
+    <el-main class="home" style="padding-bottom:20px;">
       <!-- 头部导航 -->
-      <v-carousel :items="bannerData" v-loading="bannerLoading" :config="configCarousel"></v-carousel>
+      <v-carousel class="topCarousel" :items="bannerData" v-loading="bannerLoading" :config="configCarousel"></v-carousel>
       <!-- 干部网络学院 -->
-      <v-course :config="configOne" :data="cadreCourseList" :title="cadreCollegeTitle" :link="cadreCollegeMore" class="index-course bgfff" v-if="cadreCourseList.length>0"></v-course>
+      <!-- <v-course :config="configOne" :data="cadreCourseList" :title="cadreCollegeTitle" :link="cadreCollegeMore" class="index-course bgfff" v-if="cadreCourseList.length>0"></v-course> -->
       <!-- 在线商学院 -->
-      <v-course :config="configOne" :data="commercialCourseList" :title="commercialCollegeTitle" :link="commercialCollegeMore" class="index-course bgf8f8fd" v-if="commercialCourseList.length>0"></v-course>
+      <!-- <v-course :config="configOne" :data="commercialCourseList" :title="commercialCollegeTitle" :link="commercialCollegeMore" class="index-course bgf8f8fd" v-if="commercialCourseList.length>0"></v-course> -->
       <!-- 最新课程 -->
       <!-- <v-course :config="configOne" :data="newData" :title="newcoursetitle" :link="linknewcourse" class="index-course bgfff"></v-course> -->
       <!-- 免费专区 -->
-      <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgfff" v-if="freeData.length>0"></v-course>
+      <!-- <v-course :config="configZero" :data="freeData" :title="freecoursetitle" :link="linkfreecourse" class="index-free bgfff" v-if="freeData.length>0"></v-course> -->
       <!-- 精品好课 -->
       <!-- <v-course :config="classicConfig" :data="classicData" :title="classiccoursetitle" :link="linkclassiccourse" class="index-goodcourse bgfff"></v-course> -->
       <!-- 互动式项目 -->
-      <v-course v-if="projectData.length>0" :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgf8f8fd"></v-course>
+      <!-- <v-course v-if="projectData.length>0" :config="projectConfig" v-loading="projectLoading" :data="projectData" :title="newprojecttitle" :link="linknewproject" class="index-project bgf8f8fd"></v-course> -->
       <!-- <v-free :config="configZero" :freeData="freeData" :title="freecoursetitle" :link="linkfreecourse"></v-free> -->
       <!-- 名师智库 -->
       <!-- <v-famous :teachers="teachers" :title="famoustitle" :link="linkfamouscourse"></v-famous> -->
@@ -22,6 +22,9 @@
       <!-- <v-famous :teachers="teachers" :titleFore="titleFore"></v-famous> -->
       <!-- 学堂资讯 -->
       <v-info v-if="newsListData.length" v-loading="infoLoading" :newsListData="newsListData" :outNewData="outNewData" :infoTwo="infoTwo" :infoOne="infoOne" :title="infotitle" :link="linkinfo" class="index-new bgfff"></v-info>
+      <!-- 核心优势 -->
+      <v-core></v-core>
+      <!-- 媒体报道 -->
       <v-outnews v-if="outNewsListData.length" v-loading="outNewsLoading" :outNewsListData="outNewsListData" :title="outNewsTitle" :link="outNewsLink" class="index-outNews bgf8f8fd"></v-outnews>
       <v-backtotop :data="showCheckedCourse"></v-backtotop>
     </el-main>
@@ -32,6 +35,7 @@
 import Carousel from "@/components/common/Carousel.vue";
 import Info from "@/pages/home/news/info.vue";
 import outNews from "@/pages/home/news/outNews.vue";
+import Core from "@/pages/home/core/coreAdvantage.vue";
 
 import BackToTop from "@/components/common/BackToTop.vue";
 import HomeCourse from "@/pages/home/components/homecourse.vue";
@@ -44,7 +48,8 @@ export default {
     "v-info": Info,
     "v-backtotop": BackToTop,
     "v-course": HomeCourse,
-    "v-outnews": outNews
+    "v-outnews": outNews,
+    "v-core": Core
   },
   data() {
     return {
@@ -178,7 +183,7 @@ export default {
       },
       outNewsForm: {
         page: 1,
-        limits: 10,
+        limits: 8,
         type: 2,
         isRecommend: 1
       }
@@ -214,7 +219,7 @@ export default {
 
           //设置banner溢出居中显示
           this.$nextTick(() => {
-            let imgArr = document.getElementsByClassName("el-carousel__item");
+            let imgArr = document.getElementsByClassName("elCarouselItem");
             if (this.windowWidth <= 1920) {
               let marginLeft = (1920 - this.windowWidth) / 2;
               for (var i = 0; i < imgArr.length; i++) {
@@ -327,4 +332,11 @@ export default {
   }
 };
 </script>
+<style scoped lang="scss">
+.home {
+  background: url("http://static-image.1911edu.com/home-bottom.png") no-repeat
+    center bottom;
+  background-size: 100% 564px;
+}
+</style>
 

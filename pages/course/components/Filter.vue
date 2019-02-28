@@ -10,13 +10,13 @@
             <el-tab-pane v-if="cid!=0" label="学院专家组介绍" name="four"></el-tab-pane>
           </el-tabs>
         </div>
-        <div class="fl hotBtn clearfix" v-else>
-          <el-tabs v-model="activeName" @tab-click="selectActiveTab">
+        <div class="fl hotBtn clearfix" v-else style="margin-top:20px;">
+          <!-- <el-tabs v-model="activeName" @tab-click="selectActiveTab">
             <el-tab-pane label="学院全部项目" name="first"></el-tab-pane>
             <el-tab-pane label="学院最新项目" name="second"></el-tab-pane>
             <el-tab-pane label="学院最热项目" name="third"></el-tab-pane>
             <el-tab-pane v-if="cid!=0" label="学院专家组介绍" name="four"></el-tab-pane>
-          </el-tabs>
+          </el-tabs> -->
         </div>
         <!-- <div class="fr rightPages">
           <span v-show="hideSwitch">
@@ -34,17 +34,17 @@ import { matchSplits } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
-  data () {
+  data() {
     return {
       activeName: "first",
       onOff: "true",
       hideSwitch: true,
       cid: "",
-      cp: ''
+      cp: ""
     };
   },
   methods: {
-    selectActiveTab (tab) {
+    selectActiveTab(tab) {
       if (tab.name == "four") {
         persistStore.set("cid", matchSplits("cid"));
         this.$router.push("/home/teacher/list");
@@ -53,7 +53,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.cid = matchSplits("cid");
     this.cp = matchSplits("cp");
   }

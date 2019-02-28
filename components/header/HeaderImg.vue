@@ -1,19 +1,25 @@
 <template>
-  <div class="headImg">
-    <span>
+  <div class="rightContent">
+    <div class="shoppingCart" v-if="isShowLRBtn" @click="handleLink('/shop/shoppingcart')">
+      <span class="cartIcon"></span>
+      <i v-if="productsNum>0">{{productsNum}}</i>
+    </div>
+    <div class="headImg">
       <img :src="data.userImg" alt="" @click="handleLinkProfile('tab-first')">
-    </span>
-    <!-- 个人中心下拉框 -->
-    <ul class="subPages">
-      <li v-for="(item,index) in subPagesData" :key="index" @click="handleLinkProfile(item.link)">{{item.text}}</li>
-      <li @click="handleSignOut">退出</li>
-    </ul>
+      <!-- 个人中心下拉框 -->
+      <ul class="subPages">
+        <li v-for="(item,index) in subPagesData" :key="index" @click="handleLinkProfile(item.link)">{{item.text}}</li>
+        <li @click="handleSignOut">退出</li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
+
 export default {
-  props: ["data"],
+  props: ["data", "isShowLRBtn"],
   data() {
     return {
       subPagesData: [
@@ -64,7 +70,13 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapState("auth", ["productsNum"])
+  },
   methods: {
+    handleLink(data) {
+      this.$emit("handleLink", data);
+    },
     handleLinkProfile(data) {
       this.$emit("handleLinkProfile", data);
       let obj = {

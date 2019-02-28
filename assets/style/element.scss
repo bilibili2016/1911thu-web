@@ -3,7 +3,6 @@
 
 /* 默认的 Element 无法满足需要时，就在下面进行扩展，建议扩展方式仍然参考 Element 的风格 */
 
-
 /* Button */
 
 html {
@@ -36,7 +35,6 @@ html {
     color: #222;
   }
 }
-
 
 /* Menu */
 
@@ -83,6 +81,16 @@ html {
 .el-tabs--left .el-tabs__header.is-left {
   width: 180px;
   margin: 0;
+}
+
+//关于我们
+.homeUs {
+
+  // tab切换
+  .el-tabs--left .el-tabs__header.is-left {
+    width: 160px;
+    margin: 0;
+  }
 }
 
 .el-tabs--left .el-tabs__nav-wrap.is-left {
@@ -1251,35 +1259,6 @@ html {
       margin-right: 7px;
     }
   }
-
-  .operation.el-form-item .el-form-item__content {
-    margin-left: 0 !important;
-  }
-
-  .invoiceInfo {
-    .el-form-item__label {
-      line-height: 36px;
-    }
-
-    .el-form-item__content {
-      line-height: 36px;
-
-      .el-input__inner {
-        height: 36px;
-        line-height: 36px;
-      }
-    }
-
-    .ticketReception {
-      .province {
-        .el-select {
-          .el-input {
-            width: 160px;
-          }
-        }
-      }
-    }
-  }
 }
 
 // 头部分类切换-鼠标悬浮小手状态
@@ -1672,14 +1651,14 @@ input:-webkit-autofill {
 //单位入口页
 .allInfo {
   .bottomForm .el-form .el-button.el-button--primary {
-    border: none;
+    // border: none;
   }
 
   .el-form-item.is-error .el-input__inner,
   .el-form-item.is-error .el-input__inner:focus,
   .el-form-item.is-error .el-textarea__inner,
   .el-form-item.is-error .el-textarea__inner:focus {
-    border: none;
+    // border: none;
   }
 }
 
@@ -1943,6 +1922,102 @@ input::-webkit-credentials-auto-fill-button {
   p {
     span {
       display: inherit !important;
+    }
+  }
+}
+
+//首页-核心优势轮播图
+.coreAdvantage {
+  .left {
+    .el-carousel {
+      width: 100%;
+      height: 365px;
+
+      .el-carousel__item {
+        width: 100%;
+        height: 100%;
+      }
+
+      .el-carousel__container {
+        position: relative;
+        height: 300px;
+        background-color: #773086;
+      }
+
+      .newsLi {
+        // position: relative;
+        float: right;
+        width: 75%;
+        color: #fff;
+
+        h4 {
+          font-size: 24px;
+          padding-top: 50px;
+          margin-bottom: 30px;
+        }
+
+        .line {
+          width: 90px;
+          height: 1px;
+          background-color: #fff;
+        }
+
+        .text {
+          margin-top: 30px;
+
+          p {
+            line-height: 36px;
+            font-size: 18px;
+          }
+        }
+
+        .index {
+          position: absolute;
+          right: 50px;
+          bottom: -35px;
+          font-size: 158px;
+          color: #fff;
+          opacity: .2;
+          font-weight: bold;
+        }
+      }
+
+      .el-carousel__indicator {
+        width: 10px;
+        height: 10px;
+        margin-right: 10px;
+
+        .el-carousel__button {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: #dcdcdc;
+        }
+
+        &.is-active {
+          .el-carousel__button {
+            background-color: #773086;
+          }
+        }
+      }
+    }
+  }
+
+  .right {
+    .el-carousel.coreRight {
+      width: 100%;
+      height: 625px;
+      overflow-x: inherit;
+
+      .el-carousel__container {
+        height: 100%;
+        overflow-x: hidden;
+      }
+
+      .rightImg {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
