@@ -1,11 +1,12 @@
 <template>
   <div class="coreAdvantage clearfix">
-    <div class="top">
-      <h1>核心优势</h1>
-      <p>内容+认证+服务+技术</p>
-    </div>
+
     <div class="left">
-      <el-carousel :interval="4000" indicator-position="outside" @change="setActiveItem" arrow="never">
+      <div class="top">
+        <h1>核心优势</h1>
+        <p>内容+认证+服务+技术</p>
+      </div>
+      <el-carousel :interval="4000000" indicator-position="outside" @change="setActiveItem" arrow="never">
         <el-carousel-item class="clearfix" v-for="(item,index) in leftCar" :key="index">
           <div class="newsLi">
             <div class="info">
@@ -21,11 +22,13 @@
       </el-carousel>
     </div>
     <div class="right">
-      <el-carousel class="coreRight " :autoplay='autoplayFlag' :interval="4000" ref="coreRightCarousel" indicator-position="none" arrow="never">
-        <el-carousel-item class="coreCarousel" v-for="(item,index) in rightCar" :key="index">
-          <img class="rightImg" :src="item.imgUrl">
-        </el-carousel-item>
-      </el-carousel>
+      <div class="rightCon">
+        <el-carousel class="coreRight " :autoplay='autoplayFlag' :interval="4000000" ref="coreRightCarousel" indicator-position="none" arrow="never">
+          <el-carousel-item class="" v-for="(item,index) in rightCar" :key="index">
+            <img class="rightImg coreCarousel" :src="item.imgUrl">
+          </el-carousel-item>
+        </el-carousel>
+      </div>
     </div>
   </div>
 </template>
@@ -105,9 +108,11 @@ export default {
     setCarousel() {
       if (document.getElementsByClassName("coreCarousel")) {
         let carouselImg = document.getElementsByClassName("coreCarousel");
-        let marginLeft = (960 - this.windowWidth) / 2;
-        for (var i = 0; i < carouselImg.length; i++) {
-          carouselImg[i].style.marginLeft = -marginLeft + "px";
+        if (this.windowWidth <= 950) {
+          let marginLeft = (950 - this.windowWidth) / 2;
+          for (var i = 0; i < carouselImg.length; i++) {
+            carouselImg[i].style.marginLeft = -marginLeft + "px";
+          }
         }
       }
     }
