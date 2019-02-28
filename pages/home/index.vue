@@ -219,11 +219,13 @@ export default {
 
           //设置banner溢出居中显示
           this.$nextTick(() => {
-            let imgArr = document.getElementsByClassName("elCarouselItem");
-            if (this.windowWidth <= 1920) {
-              let marginLeft = (1920 - this.windowWidth) / 2;
-              for (var i = 0; i < imgArr.length; i++) {
-                imgArr[i].style.marginLeft = -marginLeft + "px";
+            if (document.getElementsByClassName("elCarouselItem")) {
+              let imgArr = document.getElementsByClassName("elCarouselItem");
+              if (this.windowWidth <= 1920) {
+                let marginLeft = (1920 - this.windowWidth) / 2;
+                for (var i = 0; i < imgArr.length; i++) {
+                  imgArr[i].style.marginLeft = -marginLeft + "px";
+                }
               }
             }
           });

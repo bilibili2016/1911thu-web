@@ -4,7 +4,11 @@
 /* 默认的 Element 无法满足需要时，就在下面进行扩展，建议扩展方式仍然参考 Element 的风格 */
 
 /* Button */
-
+.el-container {
+	width: 100%;
+	max-width: 1920px;
+	margin: 0 auto;
+}
 html {
   font-family: Arial, '微软雅黑';
 }
@@ -1928,6 +1932,7 @@ input::-webkit-credentials-auto-fill-button {
 
 //首页-核心优势轮播图
 .coreAdvantage {
+<<<<<<< HEAD
   .left {
     .el-carousel {
       width: 100%;
@@ -2020,4 +2025,105 @@ input::-webkit-credentials-auto-fill-button {
       }
     }
   }
+=======
+	.left {
+		.el-carousel {
+			width: 100%;
+			height: 365px;
+			max-width: 950px;
+			float: right;
+
+			.el-carousel__item {
+				width: 100%;
+				height: 100%;
+			}
+
+			.el-carousel__container {
+				position: relative;
+				height: 300px;
+				background-color: #773086;
+			}
+
+			.newsLi {
+				// position: relative;
+				float: right;
+				width: 75%;
+				color: #fff;
+
+				h4 {
+					font-size: 24px;
+					padding-top: 50px;
+					margin-bottom: 30px;
+				}
+
+				.line {
+					width: 90px;
+					height: 1px;
+					background-color: #fff;
+				}
+
+				.text {
+					margin-top: 30px;
+
+					p {
+						line-height: 36px;
+						font-size: 18px;
+					}
+				}
+
+				.index {
+					position: absolute;
+					right: 50px;
+					bottom: -35px;
+					font-size: 158px;
+					color: #fff;
+					opacity: .2;
+					font-weight: bold;
+				}
+			}
+
+			.el-carousel__indicator {
+				width: 10px;
+				height: 10px;
+				margin-right: 10px;
+
+				.el-carousel__button {
+					width: 10px;
+					height: 10px;
+					border-radius: 50%;
+					background-color: #dcdcdc;
+				}
+
+				&.is-active {
+					.el-carousel__button {
+						background-color: #773086;
+					}
+				}
+			}
+		}
+	}
+
+	.right {
+		.el-carousel.coreRight {
+			width: 100%;
+			height: 625px;
+			overflow-x: inherit;
+
+			.el-carousel__container {
+				height: 100%;
+				overflow-x: hidden;
+
+				.el-carousel__item {
+					//   text-align: center;
+				}
+			}
+
+			.rightImg {
+				width: 950px;
+				// width: 100%;
+				height: 100%;
+			}
+		}
+	}
+>>>>>>> dev
 }
