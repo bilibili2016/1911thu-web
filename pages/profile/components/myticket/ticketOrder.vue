@@ -4,11 +4,7 @@
     <div>
       <div v-if="ticketOrderData.length>0">
         <!-- 发票订单列表 -->
-        <div
-          class="orderList"
-          v-for="(courseList, index ) in ticketOrderData"
-          :key="index"
-        >
+        <div class="orderList" v-for="(courseList, index ) in ticketOrderData" :key="index">
           <div class="topBar clearfix">
             <span class="fl">订单号：{{courseList.order_sn}}</span>
             <span class="fr">{{exchangeTime(courseList.create_time)}}</span>
@@ -17,108 +13,43 @@
             <div class="content">
               <!-- 发票 -->
               <div class="orderChecked">
-                <input
-                  type="checkbox"
-                  class="el-checkbox singleCheckbox"
-                  ref="checkbox"
-                  :id="courseList.id"
-                  @change="handleSelectSingle(courseList)"
-                >
-                <label
-                  :for="courseList.id"
-                  class="el-checkbox-label"
-                ></label>
+                <input type="checkbox" class="el-checkbox singleCheckbox" ref="checkbox" :id="courseList.id" @change="handleSelectSingle(courseList)">
+                <label :for="courseList.id" class="el-checkbox-label"></label>
               </div>
               <div class="course">
                 <!-- 课程列表 -->
-                <div
-                  class="courseOne"
-                  v-if="courseList.orderCurriculumList.length && index<3"
-                  v-for="(course,index) in courseList.orderCurriculumList"
-                  :key="course.id"
-                >
-                  <img
-                    @click="goCourseInfo(course)"
-                    class="fl"
-                    :src="course.picture"
-                    alt=""
-                  >
+                <div class="courseOne" v-if="courseList.orderCurriculumList.length && index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="course.id">
+                  <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
                   <div class="fl">
-                    <h4
-                      @click="goCourseInfo(course)"
-                      :title="course.title"
-                    >{{course.title}}</h4>
+                    <h4 @click="goCourseInfo(course)" :title="course.title">{{course.title}}</h4>
                     <h6>{{course.curriculum_time}}学时</h6>
                   </div>
                 </div>
                 <!-- 项目列表 -->
-                <div
-                  class="courseOne"
-                  v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)"
-                  v-for="(project,index) in courseList.orderProjectList"
-                  :key="index"
-                >
+                <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="index">
                   <div class="courseImg">
                     <!-- 项目图标 -->
-                    <img
-                      v-if="project.project_type==2"
-                      class="project-img"
-                      src="http://static-image.1911edu.com/p5.png"
-                      alt=""
-                    >
-                    <img
-                      v-else
-                      class="project-img"
-                      src="http://static-image.1911edu.com/p4.png"
-                      alt=""
-                    >
-                    <img
-                      @click="goProjrctInfo(project,project.project_type)"
-                      class="fl"
-                      :src="project.picture"
-                      alt=""
-                    >
+                    <img v-if="project.project_type==2" class="project-img" src="http://static-image.1911edu.com/p5.png" alt="">
+                    <img v-else class="project-img" src="http://static-image.1911edu.com/p4.png" alt="">
+                    <img @click="goProjrctInfo(project,project.project_type)" class="fl" :src="project.picture" alt="">
                   </div>
                   <div class="fl">
-                    <h4
-                      @click="goProjrctInfo(project,project.project_type)"
-                      :title="project.title"
-                    >{{project.title}}</h4>
+                    <h4 @click="goProjrctInfo(project,project.project_type)" :title="project.title">{{project.title}}</h4>
                     <h6>{{project.curriculum_time}}学时</h6>
                   </div>
                 </div>
                 <!-- vip列表 -->
-                <div
-                  class="courseOne"
-                  v-if="courseList.orderVipList.length && index<3"
-                  v-for="(vip,index) in courseList.orderVipList"
-                  :key="vip.id"
-                >
-                  <img
-                    @click="goVipInfo(vip)"
-                    class="fl"
-                    :src="vip.picture"
-                    alt=""
-                  >
+                <div class="courseOne" v-if="courseList.orderVipList.length && index<3" v-for="(vip,index) in courseList.orderVipList" :key="vip.id">
+                  <img @click="goVipInfo(vip)" class="fl" :src="vip.picture" alt="">
                   <div class="fl">
-                    <h4
-                      @click="goVipInfo(vip)"
-                      :title="vip.title"
-                    >{{vip.title}}</h4>
+                    <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
                   </div>
                 </div>
-                <div
-                  class="more"
-                  v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3"
-                  @click="selectPayApply(courseList)"
-                >
+                <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList)">
                   查看更多>
                 </div>
               </div>
-              <div
-                class="price height"
-                :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}"
-              >
+              <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
                 <p>￥{{courseList.order_amount}}</p>
               </div>
 
@@ -126,20 +57,10 @@
           </div>
         </div>
         <!-- 定位用 -->
-        <div
-          class="bottomPosition"
-          if="bottomPosition"
-        ></div>
-        <div
-          class="bottomBar"
-          id="bottomBar"
-          ref="bottomBar"
-        >
+        <div class="bottomPosition" if="bottomPosition"></div>
+        <div class="bottomBar" id="bottomBar" ref="bottomBar">
           <span class="fl">
-            <el-checkbox
-              v-model="checkMsg "
-              @change="handleSelectAll"
-            ></el-checkbox>
+            <el-checkbox v-model="checkMsg " @change="handleSelectAll"></el-checkbox>
             全选
           </span>
           <span class="money ">
@@ -148,30 +69,16 @@
               <i>￥{{orderPrice}}</i>
             </strong>
           </span>
-          <span
-            class="next "
-            @click="showIoc"
-          >下一步</span>
+          <span class="next " @click="showIoc">下一步</span>
         </div>
       </div>
-      <v-nomsg
-        class="noOrder "
-        v-else
-        :config="noMsgTwl"
-      ></v-nomsg>
+      <v-nomsg class="noOrder " v-else :config="noMsgTwl"></v-nomsg>
       <!-- 发票弹框 第一步：填写发票信息-->
-      <v-ticket
-        v-show="showInvoice"
-        :checkedArr="checkedArr"
-        @handleClose="close"
-      ></v-ticket>
+      <v-ticketinfo v-if="showInvoice" @onTicket="onTicket" @handleClose="close" @closeForm="closeForm"></v-ticketinfo>
       <!-- 发票弹框 第二步：确认发票信息并提交-->
-      <v-comfirm
-        :price="orderPrice"
-        @getUnTicketData="getUnTicketData"
-        @chengeItem="chengeItem"
-        @goBack="goBack"
-      ></v-comfirm>
+      <v-ticket v-if="showTicket" @handleClose="close" @handBack="handBack" @closeForm="closeForm"></v-ticket>
+      <!-- 发票弹框 第三步：确认发票信息并提交-->
+      <v-comfirm :price="orderPrice" :checkedArr="checkedArr" @getUnTicketData="getUnTicketData" @chengeItem="chengeItem" @goBack="goBack" @backFirst="handBack"></v-comfirm>
     </div>
   </div>
 </template>
@@ -181,22 +88,25 @@ import { ticketorder } from "~/lib/v1_sdk/index";
 import { timestampToTime, open, IEPopup } from "@/lib/util/helper";
 import { mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
-import TicketPop from "@/pages/profile/components/myticket/ticketPopup";
+// import TicketPop from "@/pages/profile/components/myticket/ticketPopup";
+import TicketInfo from "@/pages/profile/components/myticket/ticketInfo";
+import TicketReception from "@/pages/profile/components/myticket/ticketReception";
 import TicketConfirm from "@/pages/profile/components/myticket/ticketConfirm";
 import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 export default {
   props: ["orderData"],
   watch: {
-    orderData() {
+    orderData () {
       this.ticketOrderData = this.orderData;
     }
   },
   components: {
-    "v-ticket": TicketPop,
+    "v-ticketinfo": TicketInfo,
+    "v-ticket": TicketReception,
     "v-comfirm": TicketConfirm,
     "v-nomsg": NoMsg
   },
-  data() {
+  data () {
     return {
       noMsgTwl: {
         type: "myTicket",
@@ -212,7 +122,7 @@ export default {
       checkedArr: [],
       checkMsg: false,
       showInvoice: false,
-
+      showTicket: false,
       kidForm: {
         kids: ""
       },
@@ -221,13 +131,13 @@ export default {
         kid: 0,
         bid: "",
         page: 0
-      }
+      },
     };
   },
   methods: {
     ...mapActions("auth", ["setGid", "setKid"]),
     // 选择要开发票的订单
-    handleSelectSingle(item) {
+    handleSelectSingle (item) {
       let itemIndex = this.checkedArr.indexOf(item.id);
       if (itemIndex >= 0) {
         //未选中
@@ -253,7 +163,7 @@ export default {
       }
     },
     // 全选
-    handleSelectAll(val) {
+    handleSelectAll (val) {
       var checkboxList = document.getElementsByClassName("singleCheckbox");
 
       if (val) {
@@ -284,11 +194,11 @@ export default {
       this.orderNum = this.checkedArr.length;
     },
     // 展示修改发票信息弹框
-    showIoc() {
+    showIoc () {
       if (this.checkedArr.length > 0) {
         IEPopup("pane-tab-eighth", "-ms-page", 0);
-        this.showInvoice = true;
-        // this.getTicket()
+        // this.showInvoice = true;
+        this.getLastTicket()
       } else {
         this.$message({
           showClose: true,
@@ -297,9 +207,19 @@ export default {
         });
       }
     },
+    // 获取上一次开发票的记录
+    getLastTicket () {
+      ticketorder.getLastTicket().then(res => {
+        if (res.status == 0) {
+          this.$bus.$emit("showConfirm", res.data, true);
+        } else {
+          this.showInvoice = true;
+        }
+      })
+    },
 
     //未开发票列表
-    getUnTicketData() {
+    getUnTicketData () {
       ticketorder.orderNotInvoice().then(response => {
         this.ticketOrderData = response.data.orderList;
         var checkboxList = document.getElementsByClassName("singleCheckbox");
@@ -308,23 +228,37 @@ export default {
         }
       });
     },
-    // 切换到兑换详情
-    chengeItem() {
+    // 切换到开票历史
+    chengeItem () {
       this.$emit("chengeItem");
     },
     // 开纸质发票 提交发票的时候 返回
-    goBack() {
-      this.showIoc();
+    goBack () {
+      this.onTicket();
+    },
+    // 展示开发票第二步
+    onTicket () {
+      this.showTicket = true
     },
     // 关闭表单
-    close() {
+    close () {
       IEPopup("pane-tab-eighth", "relative", 1);
-
-      this.showInfo = false;
+      this.showInvoice = false;
+      this.showTicket = false
+      persistStore.set("invoiceData", '')
+    },
+    // 关闭表单 不清除缓存
+    closeForm () {
+      IEPopup("pane-tab-eighth", "relative", 1);
       this.showInvoice = false;
     },
+    // 返回第一步
+    handBack () {
+      this.showInvoice = true
+      this.showTicket = false
+    },
     //课程详情
-    goCourseInfo(item, index) {
+    goCourseInfo (item, index) {
       this.kidForm.kids = item.id;
 
       this.courseUrl.kid = item.id;
@@ -332,7 +266,7 @@ export default {
       // this.$router.push(`/course/coursedetail?kid=${item.id}&bid=&page=0`)
     },
     //项目详情
-    goProjrctInfo(item, type) {
+    goProjrctInfo (item, type) {
       if (type === "1") {
         this.$router.push(`/project/projectdetail?kid=${item.id}&type=1`);
       } else {
@@ -340,7 +274,7 @@ export default {
       }
     },
     // Vip详情
-    goVipInfo(vip) {
+    goVipInfo (vip) {
       this.$router.push({
         path: "/home/vip/vipPage",
         query: {
@@ -350,21 +284,21 @@ export default {
       });
     },
     //列表详情
-    selectPayApply(item, type) {
+    selectPayApply (item, type) {
       persistStore.set("order", item.id);
       this.$emit("goTicketDetail", false);
     },
     // 时间戳转日期格式
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToTime(time);
     },
     //根据列表长度计算高度
-    computedHeight(len) {
+    computedHeight (len) {
       let height = len > 3 ? 3 * 140 + 60 : len * 140;
       return height;
     },
     //计算项目列表显示数量
-    computedLength(course, project, index) {
+    computedLength (course, project, index) {
       let projectLength = course.length > 3 ? 0 : 3 - course.length;
       if (index < projectLength) {
         return true;
@@ -373,7 +307,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.ticketOrderData = this.orderData;
     this.$bus.$on("CloseAllChecked", data => {
       this.handleSelectAll(false);

@@ -1,65 +1,32 @@
 <template>
   <div class="invoiceTicket">
-    <div
-      class="invoiceInfo"
-      ref="invoiceInfo"
-    >
+    <div class="invoiceInfo" ref="invoiceInfo">
       <h3 class="clearfix">发票信息
-        <i
-          class="el-icon-close fr"
-          @click="close"
-        ></i>
+        <i class="el-icon-close fr" @click="close"></i>
       </h3>
       <div class="header">
-        <span
-          :class="{checked:choose=='1'?true:false}"
-          @click="chooseTicket('1')"
-        >普通发票
+        <span :class="{checked:choose=='1'?true:false}" @click="chooseTicket('1')">普通发票
           <i></i>
         </span>
-        <span
-          :class="{checked:choose=='2'?true:false}"
-          @click="chooseTicket('2')"
-        >增值税专用发票
+        <span :class="{checked:choose=='2'?true:false}" @click="chooseTicket('2')">增值税专用发票
           <i></i>
         </span>
       </div>
-      <div
-        class="invoiceForm"
-        v-show="choose=='1'"
-      >
+      <div class="invoiceForm" v-show="choose=='1'">
         <div class="formLi clearfix">
           <p class="fl">发票抬头</p>
-          <h6
-            @click="chooseCompany('1')"
-            :class="ticketForm.saveioc === false?'fr check':'fr'"
-          >个人</h6>
+          <h6 @click="chooseCompany('1')" :class="ticketForm.saveioc === false?'fr check':'fr'">个人</h6>
         </div>
         <div class="formLi clearfix">
           <p class="fl"></p>
-          <p
-            @click="chooseCompany('2')"
-            :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'"
-          >
-            <input
-              type="text"
-              v-model="ticketForm.companyname"
-              placeholder="新增单位发票抬头"
-            >
+          <p @click="chooseCompany('2')" :class="ticketForm.saveioc === true?'fr addInvoice check':'fr addInvoice'">
+            <input type="text" v-model="ticketForm.companyname" placeholder="新增单位发票抬头">
           </p>
         </div>
-        <div
-          class="formLi clearfix"
-          v-show="ticketForm.saveioc"
-        >
+        <div class="formLi clearfix" v-show="ticketForm.saveioc">
           <p class="fl">纳税人识别号</p>
           <p class="fr">
-            <input
-              type="text"
-              v-model="ticketForm.number"
-              @change="retfNumber"
-              placeholder="请输入纳税人识别号"
-            >
+            <input type="text" v-model="ticketForm.number" @change="retfNumber" placeholder="请输入纳税人识别号">
           </p>
           <p class="word parent">
             <i class="el-icon-warning"> </i>政府、事业单位选填，企业必填
@@ -68,10 +35,7 @@
         <div class="formLi clearfix">
           <p class="fl">发票内容</p>
           <p class="fr radioBtn">
-            <el-radio-group
-              v-model="ticketForm.radio"
-              @change="isTicket"
-            >
+            <el-radio-group v-model="ticketForm.radio" @change="isTicket">
               <el-radio :label="1">培训费
                 <i></i>
               </el-radio>
@@ -80,100 +44,50 @@
               </el-radio>
             </el-radio-group>
           </p>
-          <p
-            class="word"
-            v-show="!ticketForm.isRadio"
-          >
+          <p class="word" v-show="!ticketForm.isRadio">
             <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">收票人姓名</p>
           <p class="fr">
-            <input
-              type="text"
-              v-model="ticketForm.name"
-              placeholder="请输入收票人姓名"
-            >
+            <input type="text" v-model="ticketForm.name" placeholder="请输入收票人姓名">
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">收票人手机</p>
           <p class="fr">
-            <input
-              type="text"
-              v-model="ticketForm.tel"
-              placeholder="请输入收票人手机号"
-            >
+            <input type="text" v-model="ticketForm.tel" placeholder="请输入收票人手机号">
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">收票人省份</p>
           <p class="fr province">
-            <el-select
-              v-model="ticketForm.province"
-              placeholder="省"
-              @change="changeTicketp"
-            >
-              <el-option
-                :label="p.label"
-                :value="p.value"
-                v-for="(p,index) in province"
-                :key="'prov'+index"
-              ></el-option>
+            <el-select v-model="ticketForm.province" placeholder="省" @change="changeTicketp">
+              <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
             </el-select>
-            <el-select
-              v-model="ticketForm.city"
-              placeholder="市"
-              @change="changeTickeCity"
-            >
-              <el-option
-                :label="p.label"
-                :value="p.value"
-                v-for="(p,index) in city"
-                :key="'city'+index"
-              ></el-option>
+            <el-select v-model="ticketForm.city" placeholder="市" @change="changeTickeCity">
+              <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
             </el-select>
-            <el-select
-              v-model="ticketForm.area"
-              placeholder="区"
-            >
-              <el-option
-                :label="p.label"
-                :value="p.value"
-                v-for="(p,index) in area"
-                :key="'area'+index"
-              ></el-option>
+            <el-select v-model="ticketForm.area" placeholder="区">
+              <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
             </el-select>
           </p>
         </div>
         <div class="formLi clearfix">
           <p class="fl">详细地址</p>
           <p class="fr">
-            <input
-              type="text"
-              v-model="ticketForm.address"
-              placeholder="请输入收票人的详细地址"
-            >
+            <input type="text" v-model="ticketForm.address" placeholder="请输入收票人的详细地址">
           </p>
         </div>
         <p class="smallTip">发票将在订单提交之后5个工作日内寄出</p>
         <div class="operation">
-          <span
-            class="a"
-            @click="addInvoiceBefor"
-          >下一步</span>
+          <span class="a" @click="addInvoiceBefor">下一步</span>
           <span @click="close">取消</span>
         </div>
       </div>
-      <div
-        class="invoiceForm zzTicket"
-        v-show="choose=='2'"
-      >
-        <div
-          class="stepOne"
-          v-show="stepOne"
-        >
+      <div class="invoiceForm zzTicket" v-show="choose=='2'">
+        <div class="stepOne" v-show="stepOne">
           <div class="formLi clearfix">
             <p class="fl">开票方式</p>
             <p class="fr readyOrderTicket">
@@ -185,10 +99,7 @@
           <div class="formLi clearfix">
             <p class="fl">发票内容</p>
             <p class="fr radioBtn">
-              <el-radio-group
-                v-model="zzTicketForm.radio"
-                @change="iszzTicket"
-              >
+              <el-radio-group v-model="zzTicketForm.radio" @change="iszzTicket">
                 <el-radio :label="1">培训费
                   <i></i>
                 </el-radio>
@@ -197,10 +108,7 @@
                 </el-radio>
               </el-radio-group>
             </p>
-            <p
-              class="word"
-              v-show="!zzTicketForm.isRadio"
-            >
+            <p class="word" v-show="!zzTicketForm.isRadio">
               <i class="el-icon-warning"> </i>3个工作日内会有工作人员联系您确认发票内容信息，请您留意电话，感谢支持！
             </p>
           </div>
@@ -219,10 +127,7 @@
             <span @click="close">取消</span>
           </div>
         </div>
-        <div
-          class="stepTwo"
-          v-show="stepTwo"
-        >
+        <div class="stepTwo" v-show="stepTwo">
           <div class="formLi clearfix">
             <p class="fl">开票方式</p>
             <p class="fr readyOrderTicket">
@@ -244,22 +149,11 @@
             <p class="fl">
               <i>*</i>单位名称</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.companyname"
-                @change="reCompanyname"
-                placeholder="请输入单位名称"
-              >
-              <span
-                class="tips"
-                v-show="tipsCompanyname&&companyname"
-              >
+              <input type="text" v-model="zzTicketForm.companyname" @change="reCompanyname" placeholder="请输入单位名称">
+              <span class="tips" v-show="tipsCompanyname&&companyname">
                 <i class="el-icon-success"></i>
               </span>
-              <span
-                class="tips"
-                v-show="!tipsCompanyname&&companyname"
-              >
+              <span class="tips" v-show="!tipsCompanyname&&companyname">
                 <i class="el-icon-warning"></i>单位名称不正确！</span>
             </p>
           </div>
@@ -267,22 +161,11 @@
             <p class="fl">
               <i>*</i>纳税人识别号</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.number"
-                @change="reNumber"
-                placeholder="请输入纳税人识别号"
-              >
-              <span
-                class="tips"
-                v-show="tipsNumber&&number"
-              >
+              <input type="text" v-model="zzTicketForm.number" @change="reNumber" placeholder="请输入纳税人识别号">
+              <span class="tips" v-show="tipsNumber&&number">
                 <i class="el-icon-success"></i>
               </span>
-              <span
-                class="tips"
-                v-show="!tipsNumber&&number"
-              >
+              <span class="tips" v-show="!tipsNumber&&number">
                 <i class="el-icon-warning"></i>纳税人识别号不正确！</span>
             </p>
           </div>
@@ -290,22 +173,11 @@
             <p class="fl">
               <i>*</i>注册地址</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.zcadd"
-                @change="reZcadd"
-                placeholder="请输入注册地址"
-              >
-              <span
-                class="tips"
-                v-show="tipsZcadd&&zcadd"
-              >
+              <input type="text" v-model="zzTicketForm.zcadd" @change="reZcadd" placeholder="请输入注册地址">
+              <span class="tips" v-show="tipsZcadd&&zcadd">
                 <i class="el-icon-success"></i>
               </span>
-              <span
-                class="tips"
-                v-show="!tipsZcadd&&zcadd"
-              >
+              <span class="tips" v-show="!tipsZcadd&&zcadd">
                 <i class="el-icon-warning"></i>注册地址不能为空！</span>
             </p>
           </div>
@@ -313,22 +185,11 @@
             <p class="fl">
               <i>*</i>联系电话</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.phones"
-                @change="rePhone"
-                placeholder="请输入联系电话"
-              >
-              <span
-                class="tips"
-                v-show="tipsPhones&&phones"
-              >
+              <input type="text" v-model="zzTicketForm.phones" @change="rePhone" placeholder="请输入联系电话">
+              <span class="tips" v-show="tipsPhones&&phones">
                 <i class="el-icon-success"></i>
               </span>
-              <span
-                class="tips"
-                v-show="!tipsPhones&&phones"
-              >
+              <span class="tips" v-show="!tipsPhones&&phones">
                 <i class="el-icon-warning"></i>联系电话不正确！</span>
             </p>
           </div>
@@ -336,22 +197,11 @@
             <p class="fl">
               <i>*</i>开户银行</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.bank"
-                @change="reBank"
-                placeholder="请输入开户银行"
-              >
-              <span
-                class="tips"
-                v-show="tipsBank&&bank"
-              >
+              <input type="text" v-model="zzTicketForm.bank" @change="reBank" placeholder="请输入开户银行">
+              <span class="tips" v-show="tipsBank&&bank">
                 <i class="el-icon-success"></i>
               </span>
-              <span
-                class="tips"
-                v-show="!tipsBank&&bank"
-              >
+              <span class="tips" v-show="!tipsBank&&bank">
                 <i class="el-icon-warning"></i>开户银行不能为空！</span>
             </p>
           </div>
@@ -359,22 +209,11 @@
             <p class="fl">
               <i>*</i>银行账号</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.account"
-                @change="reAccount"
-                placeholder="请输入银行账号"
-              >
-              <span
-                class="tips"
-                v-show="tipsAccount&&account"
-              >
+              <input type="text" v-model="zzTicketForm.account" @change="reAccount" placeholder="请输入银行账号">
+              <span class="tips" v-show="tipsAccount&&account">
                 <i class="el-icon-success"></i>
               </span>
-              <span
-                class="tips"
-                v-show="!tipsAccount&&account"
-              >
+              <span class="tips" v-show="!tipsAccount&&account">
                 <i class="el-icon-warning"></i>银行账号不正确！</span>
             </p>
           </div>
@@ -383,10 +222,7 @@
             <span @click="nextStep('stepOne')">返回</span>
           </div>
         </div>
-        <div
-          class="stepThree"
-          v-show="stepThree"
-        >
+        <div class="stepThree" v-show="stepThree">
           <div class="formLi clearfix">
             <p class="fl">开票方式</p>
             <p class="fr readyOrderTicket">
@@ -407,78 +243,37 @@
           <div class="formLi clearfix">
             <p class="fl">收票人姓名</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.name"
-                placeholder="请输入收票人姓名"
-              >
+              <input type="text" v-model="zzTicketForm.name" placeholder="请输入收票人姓名">
             </p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">收票人手机</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.tel"
-                placeholder="请输入收票人手机号"
-              >
+              <input type="text" v-model="zzTicketForm.tel" placeholder="请输入收票人手机号">
             </p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">收票人省份</p>
             <p class="fr province">
-              <el-select
-                v-model="zzTicketForm.province"
-                placeholder="省"
-                @change="changezzTicketp"
-              >
-                <el-option
-                  :label="p.label"
-                  :value="p.value"
-                  v-for="(p,index) in zzprovince"
-                  :key="'prov'+index"
-                ></el-option>
+              <el-select v-model="zzTicketForm.province" placeholder="省" @change="changezzTicketp">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzprovince" :key="'prov'+index"></el-option>
               </el-select>
-              <el-select
-                v-model="zzTicketForm.city"
-                placeholder="市"
-                @change="changezzTickeCity"
-              >
-                <el-option
-                  :label="p.label"
-                  :value="p.value"
-                  v-for="(p,index) in zzcity"
-                  :key="'city'+index"
-                ></el-option>
+              <el-select v-model="zzTicketForm.city" placeholder="市" @change="changezzTickeCity">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzcity" :key="'city'+index"></el-option>
               </el-select>
-              <el-select
-                v-model="zzTicketForm.area"
-                placeholder="区"
-              >
-                <el-option
-                  :label="p.label"
-                  :value="p.value"
-                  v-for="(p,index) in zzarea"
-                  :key="'area'+index"
-                ></el-option>
+              <el-select v-model="zzTicketForm.area" placeholder="区">
+                <el-option :label="p.label" :value="p.value" v-for="(p,index) in zzarea" :key="'area'+index"></el-option>
               </el-select>
             </p>
           </div>
           <div class="formLi clearfix">
             <p class="fl">详细地址</p>
             <p class="fr">
-              <input
-                type="text"
-                v-model="zzTicketForm.address"
-                placeholder="请输入收票人的详细地址"
-              >
+              <input type="text" v-model="zzTicketForm.address" placeholder="请输入收票人的详细地址">
             </p>
           </div>
           <div class="operation">
-            <span
-              class="333"
-              @click="addZZTicketBefore"
-            >下一步</span>
+            <span class="333" @click="addZZTicketBefore">下一步</span>
             <span @click="nextStep('stepTwo')">返回</span>
           </div>
         </div>
@@ -495,7 +290,7 @@ import { Trim, IEPopup } from "~/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 export default {
   props: ["checkedArr"],
-  data() {
+  data () {
     return {
       ticketType: {
         type: "ticket"
@@ -640,7 +435,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid", "setKid"]),
     // 验证普通发票 中的纳税人识别号
-    retfNumber() {
+    retfNumber () {
       // if (
       //   Trim(this.ticketForm.number) == '' ||
       //   !/^[A-Z0-9]+$/.test(this.ticketForm.number)
@@ -688,7 +483,7 @@ export default {
       }
     },
     // 验证增值税发票 中的纳税人识别号
-    reCompanyname() {
+    reCompanyname () {
       if (Trim(this.zzTicketForm.companyname) == "") {
         this.tipsCompanyname = false;
         this.companyname = true;
@@ -698,7 +493,7 @@ export default {
       }
     },
     // 验证增值税发票 中的纳税人识别号
-    reNumber() {
+    reNumber () {
       if (
         Trim(this.zzTicketForm.number) == "" ||
         !/^[A-Z0-9]+$/.test(this.zzTicketForm.number)
@@ -720,7 +515,7 @@ export default {
       }
     },
     // 验证增值税发票 注册地址
-    reZcadd() {
+    reZcadd () {
       if (Trim(this.zzTicketForm.zcadd) == "") {
         this.tipsZcadd = false;
         this.zcadd = true;
@@ -730,7 +525,7 @@ export default {
       }
     },
     // 验证增值税发票 注册地址
-    reBank() {
+    reBank () {
       if (Trim(this.zzTicketForm.bank) == "") {
         this.tipsBank = false;
         this.bank = true;
@@ -740,7 +535,7 @@ export default {
       }
     },
     // 添加增值税发票验证
-    addZZTicketBefore() {
+    addZZTicketBefore () {
       if (
         Trim(this.zzTicketForm.number) == "" ||
         !/^[A-Za-z0-9]+$/.test(this.zzTicketForm.number)
@@ -808,7 +603,7 @@ export default {
       this.addInvoiceInfo();
     },
     // 验证增值税发票 中的联系电话
-    rePhone() {
+    rePhone () {
       if (
         Trim(this.zzTicketForm.phones) == "" ||
         !/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(
@@ -823,7 +618,7 @@ export default {
       }
     },
     // 验证增值税发票 中的银行卡号
-    reAccount() {
+    reAccount () {
       // !/^[0-9 ]+$/.test(this.zzTicketForm.account)
       if (
         Trim(this.zzTicketForm.account) == "" ||
@@ -837,7 +632,7 @@ export default {
       }
     },
     // 切换发票内容
-    isTicket(item) {
+    isTicket (item) {
       if (item === 2) {
         this.ticketForm.isRadio = false;
         this.ticketForm.others = "其他";
@@ -847,25 +642,25 @@ export default {
       }
     },
     // 切换普通发票下的省
-    changeTicketp(v) {
+    changeTicketp (v) {
       this.ticketForm.city = "";
       this.ticketForm.area = "";
     },
     //切换普通发票下的市
-    changeTickeCity() {
+    changeTickeCity () {
       this.ticketForm.area = "";
     },
     // 切换增值税发票下的省
-    changezzTicketp(v) {
+    changezzTicketp (v) {
       this.zzTicketForm.city = "";
       this.zzTicketForm.area = "";
     },
     //切换增值税发票下的市
-    changezzTickeCity() {
+    changezzTickeCity () {
       this.zzTicketForm.area = "";
     },
     // 切换增值税发票内容
-    iszzTicket(item) {
+    iszzTicket (item) {
       if (item === 2) {
         this.zzTicketForm.isRadio = false;
         this.zzTicketForm.others = "其他";
@@ -875,7 +670,7 @@ export default {
       }
     },
     //普通发票、个人发票 验证
-    addInvoiceBefor() {
+    addInvoiceBefor () {
       if (this.invoiceForm.types == "2") {
         if (Trim(this.ticketForm.companyname) == "") {
           this.$message({
@@ -985,7 +780,7 @@ export default {
       this.addInvoiceInfo();
     },
     //根据省市区列表 摘出对应省市区
-    getRegion(data, val) {
+    getRegion (data, val) {
       let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
@@ -1002,9 +797,9 @@ export default {
       return tmp;
     },
     // 根据省编码循环省名字
-    getProvince(arr, val) {
+    getProvince (arr, val) {
       var province = "";
-      arr.forEach(function(v, i) {
+      arr.forEach(function (v, i) {
         if (v.region_code === val) {
           province = v.name;
         }
@@ -1012,9 +807,9 @@ export default {
       return province;
     },
     // 根据市编码循环市名字
-    getCity(arr, val) {
+    getCity (arr, val) {
       var city = "";
-      arr.forEach(function(v, i) {
+      arr.forEach(function (v, i) {
         if (v.region_code === val) {
           city = v.name;
         }
@@ -1022,9 +817,9 @@ export default {
       return city;
     },
     // 根据区编码循环区名字
-    getArea(arr, val) {
+    getArea (arr, val) {
       var area = "";
-      arr.forEach(function(v, i) {
+      arr.forEach(function (v, i) {
         if (v.region_code === val) {
           area = v.name;
         }
@@ -1032,7 +827,7 @@ export default {
       return area;
     },
     // 获取三级联动省市县列表
-    getRegionList() {
+    getRegionList () {
       ticketorder.getRegionList({ region_code: "" }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
@@ -1045,7 +840,7 @@ export default {
       });
     },
     // 切换普通发票/增值税发票
-    chooseTicket(v) {
+    chooseTicket (v) {
       if (v === "1") {
         this.choose = "1";
         this.invoiceForm.types = "1";
@@ -1058,7 +853,7 @@ export default {
       this.getTicket();
     },
     // 增值税发票 下一步
-    nextStep(item) {
+    nextStep (item) {
       if (item === "stepOne") {
         this.stepOne = true;
         this.stepTwo = false;
@@ -1146,7 +941,7 @@ export default {
       }
     },
     // 普通发票 选择个人/企业
-    chooseCompany(v) {
+    chooseCompany (v) {
       if (v === "1") {
         this.ticketForm.saveioc = false;
         this.invoiceForm.types = "1";
@@ -1157,7 +952,7 @@ export default {
       this.getTicket();
     },
     // 添加发票信息
-    addInvoiceInfo() {
+    addInvoiceInfo () {
       if (this.choose === "1") {
         this.ticketForm.orderID = this.checkedArr;
         if (this.ticketForm.isRadio) {
@@ -1181,7 +976,7 @@ export default {
 
         this.$emit("handleClose");
 
-        IEPopup("pane-tab-eighth", "relative",1);
+        IEPopup("pane-tab-eighth", "relative", 1);
         this.$bus.$emit("showConfirm", this.ticketForm);
       } else {
         this.zzTicketForm.orderID = this.checkedArr;
@@ -1205,13 +1000,13 @@ export default {
         );
         this.nextStep("stepOne");
         this.$emit("handleClose");
-        IEPopup("pane-tab-eighth", "relative",1);
+        IEPopup("pane-tab-eighth", "relative", 1);
 
         this.$bus.$emit("showConfirm", this.zzTicketForm);
       }
     },
     // 获取发票信息
-    getTicket() {
+    getTicket () {
       ticketorder.getLastTicket(this.invoiceForm).then(res => {
         if (res.status === 0) {
           if (res.data.type == "1" || res.data.type == "2") {
@@ -1272,50 +1067,50 @@ export default {
       });
     },
     // 关闭表单
-    close() {
+    close () {
       this.$emit("handleClose");
       // this.showInfo = false
       // this.showInvoice = false
     }
   },
-  mounted() {
+  mounted () {
     this.getRegionList();
     this.getTicket();
   },
   watch: {
-    province(val) {
+    province (val) {
       this.city = this.getRegion(val, this.ticketForm.province);
       this.area = this.getRegion(this.city, this.ticketForm.city);
     },
-    "ticketForm.province"(val, oldval) {
+    "ticketForm.province" (val, oldval) {
       if (!this.province && this.province.length == 0) {
         this.getRegionList();
       }
       this.city = this.getRegion(this.province, val);
     },
-    "ticketForm.city"(val, oldval) {
+    "ticketForm.city" (val, oldval) {
       if (!this.city && this.city.length == 0) {
         this.getRegionList();
       }
       this.area = this.getRegion(this.city, val);
     },
-    zzprovince(val) {
+    zzprovince (val) {
       this.zzcity = this.getRegion(val, this.zzTicketForm.province);
       this.zzarea = this.getRegion(this.zzcity, this.zzTicketForm.city);
     },
-    "zzTicketForm.province"(val, oldval) {
+    "zzTicketForm.province" (val, oldval) {
       if (!this.zzprovince && this.zzprovince.length == 0) {
         this.getRegionList();
       }
       this.zzcity = this.getRegion(this.zzprovince, val);
     },
-    "zzTicketForm.city"(val, oldval) {
+    "zzTicketForm.city" (val, oldval) {
       if (!this.zzcity && this.zzcity.length == 0) {
         this.getRegionList();
       }
       this.zzarea = this.getRegion(this.zzcity, val);
     },
-    address(val) {
+    address (val) {
       if (val) {
         persistStore.set("address", val);
       }
