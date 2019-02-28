@@ -19,12 +19,10 @@
           </div>
         </el-carousel-item>
       </el-carousel>
-      <!-- <v-carousel :config="configLeft" :coreData="leftCar"></v-carousel> -->
     </div>
     <div class="right">
-      <!-- <v-carousel :config="configRight" :coreData="rightCar"></v-carousel> -->
-      <el-carousel class="coreRight" :autoplay='autoplayFlag' :interval="4000" ref="coreRightCarousel" indicator-position="none" arrow="never">
-        <el-carousel-item v-for="(item,index) in rightCar" :key="index">
+      <el-carousel class="coreRight " :autoplay='autoplayFlag' :interval="4000" ref="coreRightCarousel" indicator-position="none" arrow="never">
+        <el-carousel-item class="coreCarousel" v-for="(item,index) in rightCar" :key="index">
           <img class="rightImg" :src="item.imgUrl">
         </el-carousel-item>
       </el-carousel>
@@ -33,19 +31,11 @@
 </template>
 
 <script>
-import Carousel from "@/components/common/Carousel.vue";
 export default {
   data() {
     return {
+      windowWidth: "",
       autoplayFlag: true,
-      configLeft: {
-        carousel: "coreLeft",
-        flag: "left"
-      },
-      configRight: {
-        carousel: "coreRight",
-        flag: "right"
-      },
       leftCar: [
         {
           title: "名师智库，内容为王",
@@ -107,14 +97,24 @@ export default {
       ]
     };
   },
-  components: {
-    "v-carousel": Carousel
-  },
   methods: {
     setActiveItem(index) {
       this.$refs.coreRightCarousel.setActiveItem(index);
       this.autoplayFlag = false;
+    },
+    setCarousel() {
+      if (document.getElementsByClassName("coreCarousel")) {
+        let carouselImg = document.getElementsByClassName("coreCarousel");
+        let marginLeft = (950 - this.windowWidth) / 2;
+        for (var i = 0; i < carouselImg.length; i++) {
+          carouselImg[i].style.marginLeft = -marginLeft + "px";
+        }
+      }
     }
+  },
+  mounted() {
+    this.windowWidth = document.documentElement.clientWidth / 2;
+    this.setCarousel();
   }
 };
 </script>

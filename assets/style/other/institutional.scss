@@ -338,7 +338,7 @@
 
 	.course {
 		background-color: rgba(0, 0, 0, 0);
-		padding-bottom: 60px;
+		padding-bottom: 85px;
 		background: url('http://static-image.1911edu.com/hrentry-bg.png') no-repeat center bottom;
 		background-size: 100% 450px;
 
@@ -480,6 +480,9 @@
 						margin: 0 auto;
 						margin-top: 30px;
 						border-color: none !important;
+						&:hover {
+							background-color: rgba(126, 48, 143, .8);
+						}
 					}
 					.el-autocomplete {
 						width: 340px;

@@ -1765,9 +1765,13 @@ input::-webkit-credentials-auto-fill-button {
 				height: 100%;
 				overflow-x: hidden;
 			}
+			.el-carousel__item {
+				width: 950px;
+			}
 			.rightImg {
-				width: 100%;
-				height: 100%;
+				width: 950px;
+				height: 625px;
+				margin: 0 auto;
 			}
 		}
 	}
