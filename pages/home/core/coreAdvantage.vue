@@ -2,11 +2,11 @@
   <div class="coreAdvantage clearfix">
 
     <div class="left">
-      <div class="top">
+      <div class="top coreTop">
         <h1>核心优势</h1>
         <p>内容+认证+服务+技术</p>
       </div>
-      <el-carousel :interval="4000000" indicator-position="outside" @change="setActiveItem" arrow="never">
+      <el-carousel class="coreLeft" :interval="4000" indicator-position="outside" @change="setActiveItem" arrow="never">
         <el-carousel-item class="clearfix" v-for="(item,index) in leftCar" :key="index">
           <div class="newsLi">
             <div class="info">
@@ -23,7 +23,7 @@
     </div>
     <div class="right">
       <div class="rightCon">
-        <el-carousel class="coreRight " :autoplay='autoplayFlag' :interval="4000000" ref="coreRightCarousel" indicator-position="none" arrow="never">
+        <el-carousel class="coreRight " :autoplay='autoplayFlag' :interval="4000" ref="coreRightCarousel" indicator-position="none" arrow="never">
           <el-carousel-item class="" v-for="(item,index) in rightCar" :key="index">
             <img class="rightImg coreCarousel" :src="item.imgUrl">
           </el-carousel-item>
@@ -115,11 +115,25 @@ export default {
           }
         }
       }
+    },
+    setWidth() {
+      this.windowWidth = document.documentElement.clientWidth / 2;
+      let rightHeight = this.windowWidth * 0.66;
+      let topHeight = this.windowWidth * 0.21;
+      let leftHeight = this.windowWidth * 0.45;
+      document.getElementsByClassName("coreRight")[0].style.height =
+        rightHeight > 625 ? 625 : rightHeight + "px";
+      document.getElementsByClassName("coreTop")[0].style.height =
+        topHeight > 200 ? 200 : topHeight + "px";
+      document.getElementsByClassName("coreLeft")[0].style.height =
+        leftHeight > 425 ? 425 : leftHeight + "px";
     }
   },
   mounted() {
     this.windowWidth = document.documentElement.clientWidth / 2;
-    this.setCarousel();
+    // this.setCarousel();
+    this.setWidth();
+    window.addEventListener("resize", this.setWidth);
   }
 };
 </script>
