@@ -2033,3 +2033,13 @@ input::-webkit-credentials-auto-fill-button {
     }
   }
 }
+
+.invoiceInfo {
+  .province {
+    .el-select {
+      .el-input {
+        width: 160px;
+      }
+    }
+  }
+}
