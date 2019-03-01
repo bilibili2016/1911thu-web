@@ -121,12 +121,14 @@ export default {
       let rightHeight = this.windowWidth * 0.66;
       let topHeight = this.windowWidth * 0.21;
       let leftHeight = this.windowWidth * 0.45;
+      console.log(rightHeight);
+
       document.getElementsByClassName("coreRight")[0].style.height =
-        rightHeight > 625 ? 625 : rightHeight + "px";
+        (rightHeight > 625 ? 625 : rightHeight) + "px";
       document.getElementsByClassName("coreTop")[0].style.height =
-        topHeight > 200 ? 200 : topHeight + "px";
+        (topHeight > 200 ? 200 : topHeight) + "px";
       document.getElementsByClassName("coreLeft")[0].style.height =
-        leftHeight > 425 ? 425 : leftHeight + "px";
+        (leftHeight > 425 ? 425 : leftHeight) + "px";
     }
   },
   mounted() {
