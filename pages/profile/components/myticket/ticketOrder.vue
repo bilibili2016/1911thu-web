@@ -233,6 +233,7 @@ export default {
     },
     // 开纸质发票 提交发票的时候 返回 展示开发票第二步
     showSecond () {
+      IEPopup("pane-tab-eighth", "-ms-page", 0);
       this.showTicket = true
     },
     // 关闭表单 清数据
