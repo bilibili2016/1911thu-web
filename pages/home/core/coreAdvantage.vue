@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       windowWidth: "",
       autoplayFlag: true,
@@ -101,11 +101,11 @@ export default {
     };
   },
   methods: {
-    setActiveItem(index) {
+    setActiveItem (index) {
       this.$refs.coreRightCarousel.setActiveItem(index);
       this.autoplayFlag = false;
     },
-    setCarousel() {
+    setCarousel () {
       if (document.getElementsByClassName("coreCarousel")) {
         let carouselImg = document.getElementsByClassName("coreCarousel");
         if (this.windowWidth <= 950) {
@@ -116,12 +116,11 @@ export default {
         }
       }
     },
-    setWidth() {
+    setWidth () {
       this.windowWidth = document.documentElement.clientWidth / 2;
       let rightHeight = this.windowWidth * 0.66;
       let topHeight = this.windowWidth * 0.21;
       let leftHeight = this.windowWidth * 0.45;
-      console.log(rightHeight);
 
       document.getElementsByClassName("coreRight")[0].style.height =
         (rightHeight > 625 ? 625 : rightHeight) + "px";
@@ -131,7 +130,7 @@ export default {
         (leftHeight > 425 ? 425 : leftHeight) + "px";
     }
   },
-  mounted() {
+  mounted () {
     this.windowWidth = document.documentElement.clientWidth / 2;
     // this.setCarousel();
     this.setWidth();
