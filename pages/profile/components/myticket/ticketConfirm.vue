@@ -6,9 +6,9 @@
       </h3>
       <!-- 电子发票 普通发票  个人  单位 -->
       <div class="ticketBox" v-if="ticketForm.select==1">
-        <p>发票类型：电子发票</p>
+        <p>发票类型：普通发票</p>
         <p v-if="ticketForm.invoiceType ==2">发票抬头：个人</p>
-        <p v-else>发票抬头：{{ticketForm.companyname}}</p>
+        <p v-else>发票抬头：{{ticketForm.invoicename}}</p>
         <p v-if="ticketForm.invoiceType ==1">纳税人识别号：{{ticketForm.number}}</p>
         <p>发票内容：{{ticketForm.content}}</p>
         <p>联系邮箱：{{ticketForm.email}}</p>
@@ -20,7 +20,7 @@
       <div class="ticketBox" v-if="ticketForm.select!=1&&ticketForm.types ==1">
         <p>发票类型：普通发票</p>
         <p v-if="ticketForm.invoiceType ==2">发票抬头：个人</p>
-        <p v-else>发票抬头：{{ticketForm.companyname}}</p>
+        <p v-else>发票抬头：{{ticketForm.invoicename}}</p>
         <p v-if="ticketForm.invoiceType ==1">纳税人识别号：{{ticketForm.number}}</p>
         <p>发票内容：{{ticketForm.content}}</p>
         <p>收件人：{{ticketForm.name}}</p>
@@ -32,7 +32,7 @@
       <!-- 纸质发票  增值税发票   -->
       <div class="ticketBox" v-if="ticketForm.select!=1&&ticketForm.types ==2">
         <p>发票类型：增值税专用发票</p>
-        <p>发票抬头：{{ticketForm.companyname}}</p>
+        <p>单位名称：{{ticketForm.companyname}}</p>
         <p>税号：{{ticketForm.number}}</p>
         <p>注册地址：{{ticketForm.zcadd}}</p>
         <p>联系电话：{{ticketForm.telephone}}</p>
@@ -118,9 +118,9 @@ export default {
       if (data.send_type == 1) {
         if (data.invoice_type == 1) {
           this.ticketForm.number = data.invoice_number
-          this.ticketForm.companyname = data.company_name
+          this.ticketForm.invoicename = data.invoice_name
         } else {
-          this.ticketForm.companyname = '个人'
+          this.ticketForm.invoicename = '个人'
         }
         this.ticketForm.invoiceType = data.invoice_type
         this.ticketForm.email = data.email
@@ -128,10 +128,10 @@ export default {
       if (data.send_type != 1 && data.type == 1) {
         this.ticketForm.invoiceType = data.invoice_type
         if (data.invoice_type == 1) {
-          this.ticketForm.companyname = data.company_name
+          this.ticketForm.invoicename = data.invoice_name
           this.ticketForm.number = data.invoice_number
         } else {
-          this.ticketForm.companyname = '个人'
+          this.ticketForm.invoicename = '个人'
         }
         this.ticketForm.name = data.consignee
         this.ticketForm.province_name = data.province_name

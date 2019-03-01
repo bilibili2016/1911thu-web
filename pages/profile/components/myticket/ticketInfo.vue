@@ -34,8 +34,8 @@
             <el-radio label="2">个人</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="" prop="companyname" v-if="ticketInfo.invoiceType==1">
-          <el-input v-model="ticketInfo.companyname" placeholder="请输入单位发票抬头"></el-input>
+        <el-form-item label="" prop="invoicename" v-if="ticketInfo.invoiceType==1">
+          <el-input v-model="ticketInfo.invoicename" placeholder="请输入单位发票抬头"></el-input>
         </el-form-item>
         <el-form-item label="纳税人识别号" prop="number" v-if="ticketInfo.invoiceType==1">
           <el-input v-model="ticketInfo.number" placeholder="请输入纳税人识别号"></el-input>
@@ -157,7 +157,7 @@ export default {
         contentId: '', // 发票内容id
         content: '', // 发票内容id
         invoiceType: '1', // 发票抬头 ：单位 | 个人
-        companyname: "", // 单位名称
+        invoicename: "", // 发票抬头名称
         number: '',  // 纳税人识别号
         person: '', // 个人抬头，没啥用
       },
@@ -176,7 +176,7 @@ export default {
       flag: false,
       invoiceData: {},
       rules: {
-        companyname: [
+        invoicename: [
           {
             required: true,
             message: "请输入单位发票抬头",
@@ -264,9 +264,9 @@ export default {
     // 切换单位 | 个人
     changeType (v) {
       if (v == 1) {
-        this.ticketInfo.companyname = ''
+        this.ticketInfo.invoicename = ''
       } else {
-        this.ticketInfo.companyname = '个人'
+        this.ticketInfo.invoicename = '个人'
       }
       this.$refs['ticketInfo'].clearValidate();
     },
@@ -343,7 +343,7 @@ export default {
         this.invoicecon.contentId = data.contentId
         this.invoicecon.content = data.content
         this.ticketInfo.invoiceType = data.invoiceType
-        this.ticketInfo.companyname = data.companyname
+        this.ticketInfo.invoicename = data.invoicename
         this.ticketInfo.number = data.number
         this.ticketInfo.person = data.person
       } else {
