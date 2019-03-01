@@ -13,8 +13,8 @@
           <el-input v-model="electronicData.phone" placeholder="请输入您的手机号"></el-input>
         </el-form-item>
         <el-form-item class="operation">
-          <el-button type="primary" @click="submitElectronic('electronicData')" round>下一步</el-button>
           <el-button @click="handBack" round>返回</el-button>
+          <el-button type="primary" @click="submitElectronic('electronicData')" round>下一步</el-button>
         </el-form-item>
       </el-form>
       <el-form :model="mailData" :rules="mailRules" label-width="135px" ref="mailData" class="ticketReception" v-show="!flag">
@@ -39,8 +39,8 @@
           <el-input v-model="mailData.address" placeholder="请输入详细地址"></el-input>
         </el-form-item>
         <el-form-item class="operation">
-          <el-button type="primary" @click="submitMail('mailData')" round>下一步</el-button>
           <el-button @click="handBack" round>返回</el-button>
+          <el-button type="primary" @click="submitMail('mailData')" round>下一步</el-button>
         </el-form-item>
       </el-form>
     </div>

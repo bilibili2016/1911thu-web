@@ -44,8 +44,8 @@
           <el-input v-model="ticketInfo.person" placeholder="个人" readonly></el-input>
         </el-form-item>
         <el-form-item class="operation">
-          <el-button type="primary" @click="ticketSubmit('ticketInfo')" round>下一步</el-button>
           <el-button @click="close" round>取消</el-button>
+          <el-button type="primary" @click="ticketSubmit('ticketInfo')" round>下一步</el-button>
         </el-form-item>
       </el-form>
 
@@ -69,8 +69,8 @@
           <el-input v-model="invoiceInfo.account" placeholder="请输入银行账号"></el-input>
         </el-form-item>
         <el-form-item class="operation">
-          <el-button type="primary" @click="invoiceSubmit('invoiceInfo')" round>下一步</el-button>
           <el-button @click="close" round>取消</el-button>
+          <el-button type="primary" @click="invoiceSubmit('invoiceInfo')" round>下一步</el-button>
         </el-form-item>
       </el-form>
     </div>
