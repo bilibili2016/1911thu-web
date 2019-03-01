@@ -197,7 +197,6 @@ export default {
     showIoc () {
       if (this.checkedArr.length > 0) {
         IEPopup("pane-tab-eighth", "-ms-page", 0);
-        // this.showInvoice = true;
         this.getLastTicket()
       } else {
         this.$message({
@@ -245,12 +244,12 @@ export default {
     },
     // 关闭第一步 展示第二步 不清除缓存
     closeFirst () {
-      IEPopup("pane-tab-eighth", "relative", 1);
       this.showInvoice = false;
       this.showTicket = true
     },
     // 关闭第二步 返回第一步
     handBack () {
+      IEPopup("pane-tab-eighth", "-ms-page", 0);
       this.showInvoice = true
       this.showTicket = false
     },

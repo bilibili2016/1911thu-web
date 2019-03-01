@@ -176,7 +176,6 @@ export default {
         this.isHistory = false
         this.ticketForm = persistStore.get("invoiceData")
       }
-      IEPopup("pane-tab-eighth", "-ms-page", 0);
       this.confirmInvoice = true;
     });
   }
