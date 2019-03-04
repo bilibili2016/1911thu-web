@@ -2064,9 +2064,8 @@ input::-webkit-credentials-auto-fill-button {
 				}
 			}
 			.rightImg {
-				// width: 950px;
+				max-width: 950px;
 				width: 100%;
-				// height: 100%;
 			}
 		}
 	}
