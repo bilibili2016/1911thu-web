@@ -510,6 +510,18 @@
 									color: #999;
 								}
 							}
+							@media screen and (max-width: 1024px) {
+								.el-radio {
+									color: #777;
+									font-size: 12px;
+									.el-radio__label {
+										padding-left: 4px;
+									}
+									.el-radio + .el-radio {
+										margin-left: 10px !important;
+									}
+								}
+							}
 						}
 						&:nth-child(2n + 2) {
 							margin-right: 0;
@@ -550,6 +562,11 @@
 				.timeLabel {
 					.el-radio + .el-radio {
 						margin-left: 15px;
+					}
+					@media screen and (max-width: 1024px) {
+						.el-radio + .el-radio {
+							margin-left: 10px;
+						}
 					}
 					.el-radio {
 						.el-radio__inner {
