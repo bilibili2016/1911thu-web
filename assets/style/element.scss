@@ -2012,6 +2012,22 @@ input::-webkit-credentials-auto-fill-button {
 						font-size: 140px;
 					}
 				}
+				@media screen and (max-width: 1024px) {
+					h4 {
+						font-size: 18px;
+						padding-top: 7%;
+						margin-bottom: 4%;
+					}
+					.text {
+						p {
+							font-size: 14px;
+							line-height: 22px;
+						}
+					}
+					.index {
+						font-size: 140px;
+					}
+				}
 			}
 
 			.el-carousel__indicator {
