@@ -501,8 +501,11 @@
 							}
 
 							.el-radio {
+								float: left;
 								color: #777;
 								font-size: 14px;
+								margin-top: 10px;
+								display: inherit;
 								.el-radio__label {
 									padding-left: 6px;
 								}

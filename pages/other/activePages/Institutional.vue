@@ -82,7 +82,7 @@
                 <el-form-item label prop="date">
                   <el-date-picker v-model="company.date" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" placeholder="请选择回访日期"></el-date-picker>
                 </el-form-item>
-                <el-form-item label prop="time" class="timeLabel">
+                <el-form-item label prop="time" class="timeLabel clearfix">
                   <el-radio v-model="company.time" label="上午（09:00-11:30）">上午（09:00-11:30）</el-radio>
                   <el-radio v-model="company.time" label="下午（13:00-17:30）">下午（13:00-17:30）</el-radio>
                 </el-form-item>
