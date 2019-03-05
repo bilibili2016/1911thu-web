@@ -79,7 +79,7 @@
 
 <script>
 import { ticketorder } from "~/lib/v1_sdk/index";
-import { message } from "@/lib/util/helper";
+import { message, Trim } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 export default {
   data () {
@@ -91,9 +91,7 @@ export default {
     };
     var validateNumber = (rule, value, callback) => {
       if (this.ticketInfo.invoiceType == 1) {
-        if (value == '') {
-          callback(new Error("请输入正确的纳税人识别号！"));
-        } else {
+        if (Trim(value)) {
           if (value.length == 15 || value.length == 18 || value.length == 20) {
           } else {
             callback(new Error("请输入正确的纳税人识别号！"));
@@ -198,10 +196,9 @@ export default {
         }],
         number: [{
           required: true,
-          message: "请输入纳税人识别号",
+          message: "请输入纳税人识别号！",
           trigger: ["blur"]
-        },
-        {
+        }, {
           validator: validateNumber,
           trigger: ["blur"]
         }],

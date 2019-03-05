@@ -159,7 +159,7 @@ export default {
       }
       // 电子发票 普通发票  单位
       if (this.ticketForm.select == 1 && this.ticketForm.invoiceType == 1) {
-        this.ergodicData(this.datatTwo)
+        this.ergodicData(this.dataTwo)
       }
       // 纸质发票 普通发票  个人
       if (this.ticketForm.select == 2 && this.ticketForm.types == 1 && this.ticketForm.invoiceType == 2) {
