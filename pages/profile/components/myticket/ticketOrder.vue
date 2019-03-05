@@ -88,7 +88,6 @@ import { ticketorder } from "~/lib/v1_sdk/index";
 import { timestampToTime, open, IEPopup } from "@/lib/util/helper";
 import { mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
-// import TicketPop from "@/pages/profile/components/myticket/ticketPopup";
 import TicketInfo from "@/pages/profile/components/myticket/ticketInfo";
 import TicketReception from "@/pages/profile/components/myticket/ticketReception";
 import TicketConfirm from "@/pages/profile/components/myticket/ticketConfirm";

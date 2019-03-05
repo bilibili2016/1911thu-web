@@ -166,6 +166,7 @@ export default {
     handBack () {
       this.$emit("handBack");
     },
+    // 点击下一步，保存数据 电子
     submitElectronic (data) {
       this.$refs[data].validate(valid => {
         if (valid) {
@@ -173,10 +174,12 @@ export default {
           //  设置填写内容保存到缓存里
           this.invoiceData = Object.assign(persistStore.get("invoiceData"), this.electronicData);
           persistStore.set("invoiceData", this.invoiceData)
+          //  进入到提交信息开发票页
           this.$bus.$emit("showConfirm", this.electronicData);
         }
       })
     },
+    // 点击下一步，保存数据 纸质
     submitMail (data) {
       this.$refs[data].validate(valid => {
         if (valid) {
@@ -184,6 +187,7 @@ export default {
           //   设置填写内容保存到缓存里
           this.invoiceData = Object.assign(persistStore.get("invoiceData"), this.mailData);
           persistStore.set("invoiceData", this.invoiceData)
+          //  进入到提交信息开发票页
           this.$bus.$emit("showConfirm", this.mailData);
         }
       })
@@ -268,10 +272,11 @@ export default {
       }
       if (data.select == 1) {
         this.electronicData.email = data.email
-        this.electronicData.phone = data.phone
+        data.email ? this.electronicData.phone = data.phone : this.electronicData.phone = ''
+
       } else {
         this.mailData.name = data.name
-        this.mailData.phone = data.phone
+        data.name ? this.mailData.phone = data.phone : this.mailData.phone = ''
         this.mailData.province = data.province
         this.mailData.province_name = data.province_name
         this.mailData.city = data.city

@@ -29,10 +29,10 @@
             <div>发票内容：{{data.content}}</div>
             <div v-if="data.invoice_type==1">纳税人识别号：{{data.invoice_number}}</div>
             <div v-if="data.type==2">单位名称：{{data.company_name}}</div>
-            <div v-if="data.type==2">注册地址：{{data.company_address}}</div>
-            <div v-if="data.type==2">联系电话：{{data.company_phone}}</div>
-            <div v-if="data.type==2">开户银行：{{data.bank_name}}</div>
-            <div v-if="data.type==2">银行账号：{{data.bank_card}}</div>
+            <div v-if="data.type==2||data.invoice_type==1">注册地址：{{data.company_address}}</div>
+            <div v-if="data.type==2||data.invoice_type==1">联系电话：{{data.company_phone}}</div>
+            <div v-if="data.type==2||data.invoice_type==1">开户银行：{{data.bank_name}}</div>
+            <div v-if="data.type==2||data.invoice_type==1">银行账号：{{data.bank_card}}</div>
           </div>
         </div>
       </div>
