@@ -49,7 +49,7 @@
       <div class="confirm">
         <span v-if="isHistory" @click="backFirst" class="back">编辑</span>
         <span v-else @click="back" class="back">返回</span>
-        <span @click="confirm">提交</span>
+        <span @click="traverseData">提交</span>
       </div>
     </div>
   </div>
@@ -66,13 +66,124 @@ export default {
       tip: "邮费：全部免邮费。",
       confirmInvoice: false,
       ticketForm: {},
+      invoiceForm: {},
+      dataOne: { // 电子发票 普通发票  个人
+        select: '', // 电子发票 | 普通发票
+        types: '', // 普通发票 | 增值税发票
+        invoiceType: '', // 个人 | 企业
+        content: '', // 发票内容
+        contentId: '',// 发票内容ID
+        invoicename: '个人', // 发票抬头
+        email: '', // 联系邮箱
+        phone: '',  // 联系电话
+      },
+      dataTwo: { // 电子发票 普通发票  单位
+        select: '',
+        types: '',
+        invoiceType: '',
+        content: '',
+        contentId: '',
+        invoicename: '',
+        number: '',
+        email: '',
+        phone: '',
+      },
+      dataThree: {// 纸质发票  普通发票  个人
+        select: '',
+        types: '',
+        invoiceType: '',
+        content: '',
+        contentId: '',
+
+        invoicename: '个人',
+        name: '',
+        phone: '',
+        province_name: '',
+        city_name: '',
+        area_name: '',
+        province: '',
+        city: '',
+        area: '',
+        address: ''
+      },
+      dataFour: {// 纸质发票  普通发票  单位
+        select: '', // 电子发票 | 普通发票
+        types: '', // 普通发票 | 增值税发票
+        invoiceType: '', // 个人 | 企业
+        content: '', // 发票内容
+        contentId: '',// 发票内容ID
+
+        invoicename: '',
+        number: '',
+        name: '',
+        phone: '',
+        province_name: '',
+        city_name: '',
+        area_name: '',
+        province: '',
+        city: '',
+        area: '',
+        address: ''
+      },
+      dataFive: {// 纸质发票  增值税发票
+        select: '', // 电子发票 | 普通发票
+        types: '', // 普通发票 | 增值税发票
+        content: '', // 发票内容
+        contentId: '',// 发票内容ID
+
+        companyname: '',
+        number: '',
+        zcadd: '',
+        telephone: '',
+        bank: '',
+        account: '',
+
+        name: '',
+        phone: '',
+        province_name: '',
+        city_name: '',
+        area_name: '',
+        province: '',
+        city: '',
+        area: '',
+        address: '',
+      },
       isHistory: false,
     };
   },
   methods: {
-    confirm () {
-      this.ticketForm.orderID = this.checkedArr;
-      ticketorder.addInvoiceInfo(this.ticketForm).then(res => {
+    traverseData () {
+      // 电子发票 普通发票  个人
+      if (this.ticketForm.select == 1 && this.ticketForm.invoiceType == 2) {
+        this.ergodicData(this.dataOne)
+      }
+      // 电子发票 普通发票  单位
+      if (this.ticketForm.select == 1 && this.ticketForm.invoiceType == 1) {
+        this.ergodicData(this.datatTwo)
+      }
+      // 纸质发票 普通发票  个人
+      if (this.ticketForm.select == 2 && this.ticketForm.types == 1 && this.ticketForm.invoiceType == 2) {
+        this.ergodicData(this.dataThree)
+      }
+      // 纸质发票 普通发票  单位
+      if (this.ticketForm.select == 2 && this.ticketForm.types == 1 && this.ticketForm.invoiceType == 1) {
+        this.ergodicData(this.dataFour)
+      }
+      // 纸质发票 增值税发票
+      if (this.ticketForm.select == 2 && this.ticketForm.types == 2) {
+        this.ergodicData(this.dataFive)
+      }
+
+    },
+    ergodicData (data) {
+      for (const key in data) {
+        data[key] = this.ticketForm[key]
+      }
+      this.confirm(data)
+    },
+    confirm (data) {
+      data.orderID = this.checkedArr;
+      ticketorder.addInvoiceInfo(data).then(res => {
         if (res.status === 0) {
           this.$message({
             showClose: true,

@@ -156,7 +156,7 @@ export default {
         types: '', //普通发票 | 增值税发票
         contentId: '', // 发票内容id
         content: '', // 发票内容id
-        invoiceType: '1', // 发票抬头 ：单位 | 个人
+        invoiceType: '2', // 发票抬头 ：单位 | 个人
         invoicename: "", // 发票抬头名称
         number: '',  // 纳税人识别号
         person: '', // 个人抬头，没啥用
@@ -253,8 +253,7 @@ export default {
     // 开具发票的类型：电子发票 | 纸质发票
     selectTicket (v) {
       this.select = v
-      v == 1 ? this.invoiceArr = this.invoiceArr1 : this.invoiceArr = this.invoiceArr2
-      this.invoiceForm.types = ''
+      v == 1 ? (this.invoiceArr = this.invoiceArr1, this.invoiceForm.types = '1') : (this.invoiceArr = this.invoiceArr2, this.invoiceForm.types = '')
     },
     // 清除切换发票类型的时候的表单验证
     typeChange () {
