@@ -43,6 +43,18 @@
         <el-form-item label="" prop="number" v-else>
           <el-input v-model="ticketInfo.person" placeholder="个人" readonly></el-input>
         </el-form-item>
+        <el-form-item label="注册地址" prop="zcadd" v-if="showCompany">
+          <el-input v-model="ticketInfo.zcadd" placeholder="请输入注册地址"></el-input>
+        </el-form-item>
+        <el-form-item label="联系电话" prop="telephone" v-if="showCompany">
+          <el-input v-model="ticketInfo.telephone" placeholder="请输入联系电话"></el-input>
+        </el-form-item>
+        <el-form-item label="开户银行" prop="bank" v-if="showCompany">
+          <el-input v-model="ticketInfo.bank" placeholder="请输入开户银行"></el-input>
+        </el-form-item>
+        <el-form-item label="银行账号" prop="account" v-if="showCompany">
+          <el-input v-model="ticketInfo.account" placeholder="请输入银行账号"></el-input>
+        </el-form-item>
         <el-form-item class="operation">
           <el-button @click="close" round>取消</el-button>
           <el-button type="primary" @click="ticketSubmit('ticketInfo')" round>下一步</el-button>
@@ -158,6 +170,10 @@ export default {
         invoicename: "", // 发票抬头名称
         number: '',  // 纳税人识别号
         person: '', // 个人抬头，没啥用
+        telephone: '', //联系电话
+        zcadd: '', // 联系地址
+        bank: '',   // 银行
+        account: '', // 银行账号
       },
       invoiceInfo: {
         select: '', //电子发票|纸质发票
@@ -172,6 +188,7 @@ export default {
         account: '', // 银行账号
       },
       flag: false,
+      showCompany: false,
       invoiceData: {},
       rules: {
         invoicename: [
@@ -187,6 +204,19 @@ export default {
             trigger: ["blur"]
           }
         ],
+        zcadd: {
+
+        },
+        telephone: {
+          validator: validateTel,
+          trigger: ["blur"]
+        },
+        bank: {
+
+        },
+        account: {
+
+        }
       },
       addRules: {
         companyname: [{
@@ -261,7 +291,9 @@ export default {
     changeType (v) {
       if (v == 1) {
         this.ticketInfo.invoicename = ''
+        this.showCompany = true
       } else {
+        this.showCompany = false
         this.ticketInfo.invoicename = '个人'
       }
       this.$refs['ticketInfo'].clearValidate();
@@ -340,8 +372,17 @@ export default {
         this.invoicecon.content = data.content
         this.ticketInfo.invoiceType = data.invoiceType
         this.ticketInfo.invoicename = data.invoicename
-        this.ticketInfo.number = data.number
         this.ticketInfo.person = data.person
+        if (this.ticketInfo.invoiceType == 1) {
+          this.showCompany = true
+          this.ticketInfo.number = data.number
+          this.ticketInfo.zcadd = data.zcadd
+          this.ticketInfo.telephone = data.telephone
+          this.ticketInfo.bank = data.bank
+          this.ticketInfo.account = data.account
+        } else {
+          this.showCompany = false
+        }
       } else {
         this.invoiceInfo.select = data.select
         this.select = data.select

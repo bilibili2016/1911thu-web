@@ -11,6 +11,11 @@
         <p v-else>发票抬头：{{ticketForm.invoicename}}</p>
         <p v-if="ticketForm.invoiceType ==1">纳税人识别号：{{ticketForm.number}}</p>
         <p>发票内容：{{ticketForm.content}}</p>
+        <p v-if="ticketForm.invoiceType ==1">注册地址：{{ticketForm.zcadd}}</p>
+        <p v-if="ticketForm.invoiceType ==1">联系电话：{{ticketForm.telephone}}</p>
+        <p v-if="ticketForm.invoiceType ==1">开户银行：{{ticketForm.bank}}</p>
+        <p v-if="ticketForm.invoiceType ==1">银行账号：{{ticketForm.account}}</p>
+
         <p>联系邮箱：{{ticketForm.email}}</p>
         <p>联系电话：{{ticketForm.phone}}</p>
         <p>发票金额：{{price}}元</p>
@@ -23,6 +28,11 @@
         <p v-else>发票抬头：{{ticketForm.invoicename}}</p>
         <p v-if="ticketForm.invoiceType ==1">纳税人识别号：{{ticketForm.number}}</p>
         <p>发票内容：{{ticketForm.content}}</p>
+        <p v-if="ticketForm.invoiceType ==1">注册地址：{{ticketForm.zcadd}}</p>
+        <p v-if="ticketForm.invoiceType ==1">联系电话：{{ticketForm.telephone}}</p>
+        <p v-if="ticketForm.invoiceType ==1">开户银行：{{ticketForm.bank}}</p>
+        <p v-if="ticketForm.invoiceType ==1">银行账号：{{ticketForm.account}}</p>
+
         <p>收件人：{{ticketForm.name}}</p>
         <p>联系电话：{{ticketForm.phone}}</p>
         <p>所在地区：{{ticketForm.province_name}}{{ticketForm.city_name}}{{ticketForm.area_name}}</p>
@@ -33,11 +43,12 @@
       <div class="ticketBox" v-if="ticketForm.select!=1&&ticketForm.types ==2">
         <p>发票类型：增值税专用发票</p>
         <p>单位名称：{{ticketForm.companyname}}</p>
-        <p>税号：{{ticketForm.number}}</p>
         <p>注册地址：{{ticketForm.zcadd}}</p>
         <p>联系电话：{{ticketForm.telephone}}</p>
         <p>开户银行：{{ticketForm.bank}}</p>
         <p>银行账号：{{ticketForm.account}}</p>
+        <p>税号：{{ticketForm.number}}</p>
+
         <p>发票内容：{{ticketForm.content}}</p>
         <p>收件人：{{ticketForm.name}}</p>
         <p>联系电话：{{ticketForm.phone}}</p>
@@ -85,6 +96,10 @@ export default {
         contentId: '',
         invoicename: '',
         number: '',
+        zcadd: '',
+        telephone: '',
+        bank: '',
+        account: '',
         email: '',
         phone: '',
       },
@@ -112,7 +127,10 @@ export default {
         invoiceType: '', // 个人 | 企业
         content: '', // 发票内容
         contentId: '',// 发票内容ID
-
+        zcadd: '',
+        telephone: '',
+        bank: '',
+        account: '',
         invoicename: '',
         number: '',
         name: '',
@@ -230,6 +248,10 @@ export default {
         if (data.invoice_type == 1) {
           this.ticketForm.number = data.invoice_number
           this.ticketForm.invoicename = data.invoice_name
+          this.ticketForm.zcadd = data.company_address
+          this.ticketForm.telephone = data.company_phone
+          this.ticketForm.bank = data.bank_name
+          this.ticketForm.account = data.bank_card
         } else {
           this.ticketForm.invoicename = '个人'
         }
@@ -241,6 +263,10 @@ export default {
         if (data.invoice_type == 1) {
           this.ticketForm.invoicename = data.invoice_name
           this.ticketForm.number = data.invoice_number
+          this.ticketForm.zcadd = data.company_address
+          this.ticketForm.telephone = data.company_phone
+          this.ticketForm.bank = data.bank_name
+          this.ticketForm.account = data.bank_card
         } else {
           this.ticketForm.invoicename = '个人'
         }
