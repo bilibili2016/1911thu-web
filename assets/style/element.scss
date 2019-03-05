@@ -2069,10 +2069,27 @@ input::-webkit-credentials-auto-fill-button {
   }
 }
 
-.ticketReception {
-  .province {
-    .el-input {
-      width: 160px;
+.invoiceInfo {
+  .el-form-item__label {
+    line-height: 36px;
+  }
+
+  .el-form-item__content {
+    line-height: 36px;
+
+    .el-input__inner {
+      height: 36px;
+      line-height: 36px;
+    }
+  }
+
+  .ticketReception {
+    .province {
+      .el-select {
+        .el-input {
+          width: 160px;
+        }
+      }
     }
   }
 }
