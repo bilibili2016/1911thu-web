@@ -464,7 +464,7 @@
 					}
 				}
 				.el-form {
-					width: 710px;
+					width: 730px;
 					margin: 0 auto;
 					display: flex;
 					flex-wrap: wrap;
@@ -485,26 +485,45 @@
 						}
 					}
 					.el-autocomplete {
-						width: 340px;
+						width: 350px;
 						.el-input__inner {
-							width: 340px;
+							width: 350px;
 						}
 					}
 					.el-form-item {
-						width: 340px;
+						width: 350px;
 						margin-right: 30px;
+						white-space: nowrap;
 						.el-form-item__content {
 							text-align: left;
 							.el-date-editor.el-input,
 							.el-date-editor.el-input__inner {
-								width: 340px;
+								width: 350px;
 							}
 
 							.el-radio {
+								float: left;
 								color: #777;
 								font-size: 14px;
+								margin-top: 10px;
+								display: inherit;
+								.el-radio__label {
+									padding-left: 6px;
+								}
 								.el-radio__input.is-checked + .el-radio__label {
 									color: #999;
+								}
+							}
+							@media screen and (max-width: 1024px) {
+								.el-radio {
+									color: #777;
+									font-size: 12px;
+									.el-radio__label {
+										padding-left: 4px;
+									}
+									.el-radio + .el-radio {
+										margin-left: 10px !important;
+									}
 								}
 							}
 						}
@@ -546,7 +565,12 @@
 				}
 				.timeLabel {
 					.el-radio + .el-radio {
-						margin-left: 20px;
+						margin-left: 15px;
+					}
+					@media screen and (max-width: 1024px) {
+						.el-radio + .el-radio {
+							margin-left: 10px;
+						}
 					}
 					.el-radio {
 						.el-radio__inner {

@@ -1981,7 +1981,7 @@ input::-webkit-credentials-auto-fill-button {
         .index {
           position: absolute;
           right: 50px;
-          bottom: -35px;
+          bottom: -20px;
           font-size: 158px;
           color: #fff;
           opacity: .2;
@@ -2019,6 +2019,25 @@ input::-webkit-credentials-auto-fill-button {
 
           .index {
             font-size: 140px;
+          }
+        }
+
+        @media screen and (max-width: 1024px) {
+          h4 {
+            font-size: 18px;
+            padding-top: 7%;
+            margin-bottom: 4%;
+          }
+
+          .text {
+            p {
+              font-size: 14px;
+              line-height: 22px;
+            }
+          }
+
+          .index {
+            font-size: 130px;
           }
         }
       }
@@ -2061,9 +2080,8 @@ input::-webkit-credentials-auto-fill-button {
       }
 
       .rightImg {
-        // width: 950px;
+        max-width: 950px;
         width: 100%;
-        // height: 100%;
       }
     }
   }
