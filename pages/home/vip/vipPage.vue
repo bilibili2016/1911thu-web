@@ -1,6 +1,6 @@
 <template>
   <div class="VIP-con">
-    <div class="vipBanner" :class="{netWork:vipDetailData.id=='2',online:vipDetailData.id=='3'}"></div>
+    <div class="vipBanner" :class="{netWork:vipInfo.en_title=='cadreCollege',online:vipInfo.en_title=='commercialCollege'}"></div>
     <div class="con-detail" v-for="(collegeCon,index) in collegeArr" :key="index">
       <div class="con-one clearfix">
         <div class="oneDIV clearfix">
@@ -72,7 +72,7 @@
         <p class="text">学员优惠 惊喜不断</p>
         <p class="desc">
           学员只需
-          <span class="p-one">{{collegeCon.conFive.priceOne}}元</span>
+          <span class="p-one">{{parseInt(vipInfo.present_price)}}元</span>
           即可加入1911学堂{{collegeCon.title}}，学习价值{{collegeCon.conFive.priceFive}}元的学院全部课程，
           <span class="p-one">学籍有效期一年。</span>
         </p>
@@ -86,13 +86,13 @@
           </span>
           <span>
             学费为
-            <i class="p-two">{{collegeCon.conFive.priceFour}}</i>元/年
+            <i class="p-two">{{parseInt(vipInfo.present_price)}}</i>元/年
           </span>
         </p>
       </div>
       <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
         <div class="btn-con">
-          <span class="text">学费{{vipInfo.present_price}}元/年</span>
+          <span class="text">学费{{parseInt(vipInfo.present_price)}}元/年</span>
           <div class="btn-item">
             <!-- 是会员 -->
             <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
@@ -106,7 +106,7 @@
       </div>
     </div>
     <!-- 会员购买弹窗 -->
-    <v-vipbuy :vipPopShow="vipPopShow" :vipId="vipDetailData.id" @changeVipShow="changeVipShow"></v-vipbuy>
+    <v-vipbuy v-if="vipPopShow" :vipPopShow="vipPopShow" :vipInfo="vipInfo" @changeVipShow="changeVipShow"></v-vipbuy>
   </div>
 </template>
 <script>
@@ -117,7 +117,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import VipBuy from "@/components/common/VipBuy.vue";
 
 export default {
-  data () {
+  data() {
     return {
       onlineImg: "http://static-image.1911edu.com/online-con.png",
       networkImg: "http://static-image.1911edu.com/network-con.png",
@@ -249,7 +249,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid"]),
     //查看课程
-    lookCourse () {
+    lookCourse() {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -262,7 +262,7 @@ export default {
       });
     },
     //立即购买
-    buyVip () {
+    buyVip() {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -270,11 +270,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow (val) {
+    changeVipShow(val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate () {
+    identificate() {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -285,16 +285,23 @@ export default {
       }
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
           setTitle(this.vipInfo.title + "-1911学堂");
+          if (this.vipInfo.en_title == "cadreCollege") {
+            //'cadreCollege' 在线干部学院
+            this.collegeArr = this.networkCon;
+          } else if (this.vipInfo.en_title == "commercialCollege") {
+            //'commercialCollege' 在线商学院
+            this.collegeArr = this.onlineCon;
+          }
         }
       });
     },
     //
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -307,23 +314,18 @@ export default {
         this.bottom = false;
       }
     },
-    init () {
+    init() {
       this.relativeID = matchSplits("cid");
-      this.vipDetailData.id = matchSplits("id"); //2:干部网络学院  3:在线商学院
-      if (this.vipDetailData.id == "2") {
-        this.collegeArr = this.networkCon;
-      } else {
-        this.collegeArr = this.onlineCon;
-      }
+      this.vipDetailData.id = matchSplits("id");
     }
   },
   watch: {
-    $route (v, oldv) {
+    $route(v, oldv) {
       this.init();
       this.vipDetail();
     }
   },
-  mounted () {
+  mounted() {
     this.init();
     this.vipDetail();
     // 寛高设置
