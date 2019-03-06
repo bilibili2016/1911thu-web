@@ -467,7 +467,8 @@ export default {
       },
       userInfo: {
         head_img: "http://static-image.1911edu.com/defaultHeadImg.jpg"
-      }
+      },
+      getHistory: true,
     };
   },
   computed: {
@@ -731,18 +732,24 @@ export default {
       this.unfinishedOrderLoad = true;
       this.pagemsg9.page = val;
       this.tickethistoryForm.pages = val;
-      profileHome.tickethistory(this.tickethistoryForm).then(response => {
-        if (response.status === 100008) {
-          this.responseData.res = response;
-          this.$router.push("/");
-          return false;
-        } else if (response.status === 0) {
-          this.historyOrderData = response.data.invoiceList;
-          IEPopup("pane-tab-eighth", "relative", 1);
-
-          this.unfinishedOrderLoad = false;
-        }
-      });
+      if (this.getHistory) {
+        this.getHistory = false
+        profileHome.tickethistory(this.tickethistoryForm).then(response => {
+          if (response.status === 100008) {
+            this.responseData.res = response;
+            this.$router.push("/");
+            this.getHistory = true
+            return false;
+          } else if (response.status === 0) {
+            this.historyOrderData = response.data.invoiceList;
+            IEPopup("pane-tab-eighth", "relative", 1);
+            this.getHistory = true
+            this.unfinishedOrderLoad = false;
+          } else {
+            this.getHistory = true
+          }
+        });
+      }
     },
     // 我的发票 tab切换 更新数据
     handleTicketTabChange (item) {

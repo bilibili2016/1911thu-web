@@ -17,17 +17,14 @@
 import { mapActions } from 'vuex'
 export default {
   props: ['courseList'],
-  data() {
+  data () {
     return {}
   },
   methods: {
     ...mapActions('auth', ['setIsCollection']),
-    handleLinkTeacher(item) {
+    handleLinkTeacher (item) {
       this.$emit('handleLinkTeacher', item.teacher_id)
     }
   }
 }
 </script>
-
-<style scoped>
-</style>

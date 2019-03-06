@@ -212,7 +212,7 @@ export default {
           this.close();
           this.$emit("chengeItem");
           this.$emit("getUnTicketData");
-          this.$bus.$emit("historyOrderDataChange", 1);
+          this.$bus.$emit("historyOrderDataChange");
         } else {
           this.$message({
             showClose: true,

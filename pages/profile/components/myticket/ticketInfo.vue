@@ -95,6 +95,14 @@ import { message, Trim } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 export default {
   data () {
+    var validateTelephone = (rule, value, callback) => {
+      if (Trim(value)) {
+        if (!/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(value)) {
+          callback(new Error("请输入正确的联系电话！"));
+        }
+      }
+      callback();
+    };
     var validateTel = (rule, value, callback) => {
       if (!/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(value)) {
         callback(new Error("请输入正确的联系电话！"));
@@ -208,7 +216,7 @@ export default {
 
         },
         telephone: {
-          validator: validateTel,
+          validator: validateTelephone,
           trigger: ["blur"]
         },
         bank: {
