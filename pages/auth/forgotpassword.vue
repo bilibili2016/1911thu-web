@@ -16,9 +16,18 @@
             <!-- 手机号 -->
             <el-input v-model="fpData.phones" placeholder="请输入您的手机号"></el-input>
           </el-form-item>
+          <el-form-item prop="code" class="clearfix" style="display:none">
+            <!-- 验证码 -->
+            <el-input class="captcha" placeholder="请输入短信验证码"></el-input>
+          </el-form-item>
+          <el-form-item prop="password" style="display:none">
+            <!-- 密码 -->
+            <el-input :type="pwdType" placeholder="8-16位密码，包含字母、数字、标点符号等"></el-input>
+          </el-form-item>
+
           <el-form-item prop="code" class="clearfix">
             <!-- 验证码 -->
-            <el-input class="captcha" v-model.number="fpData.code" placeholder="请输入短信验证码"></el-input>
+            <el-input class="captcha" v-model.number="fpData.code" placeholder="请输入短信验证码" autocomplete="new-input"></el-input>
             <div class="getCode" @click="verifyRgTel">{{fpData.getCode}}</div>
           </el-form-item>
           <el-form-item prop="password">
@@ -34,6 +43,29 @@
         <div class="returnLogin" @click="otherLogin">返回登录 <i class="otherLoginIcon"></i></div>
 
       </div>
+      <!-- 忘记密码 -->
+      <el-form :model="fpData" status-icon :rules="formRules" ref="fpData" class="demo-ruleForm">
+        <el-form-item prop="phones">
+          <!-- 手机号 -->
+          <el-input v-model="fpData.phones" placeholder="请输入您的手机号"></el-input>
+        </el-form-item>
+        <el-form-item prop="code" class="clearfix">
+          <!-- 验证码 -->
+          <el-input class="captcha" v-model.number="fpData.code" placeholder="请输入短信验证码"></el-input>
+          <div class="getCode" @click="verifyRgTel">{{fpData.getCode}}</div>
+        </el-form-item>
+        <el-form-item prop="password">
+          <input :type="pwdType" v-model="fpData.password" class="hideInput" autocomplete='new-password'>
+          <!-- 密码 -->
+          <el-input :type="pwdType" v-model="fpData.password" placeholder="8-16位密码，包含字母、数字、标点符号等"></el-input>
+          <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
+        </el-form-item>
+        <el-row>
+          <el-button @click.native="forgetPassword()">提交</el-button>
+        </el-row>
+      </el-form>
+      <div class="returnLogin" @click="otherLogin">返回登录 <i class="otherLoginIcon"></i></div>
+
     </div>
   </div>
 </template>
@@ -50,10 +82,15 @@ import { mapActions } from "vuex";
 import { auth } from "~/lib/v1_sdk/index";
 import { encryption, message, Trim } from "~/lib/util/helper";
 export default {
-  data () {
+  data() {
     return {
       showPwd: false,
       pwdType: "password",
+      position: {
+        tel: "",
+        code: "",
+        pwd: ""
+      },
       fpData: {
         seconds: 30,
         phones: null,
@@ -112,7 +149,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["forgetPasswordAjax"]),
-    changePwd () {
+    changePwd() {
       if (this.showPwd) {
         this.showPwd = false;
         this.pwdType = "password";
@@ -122,23 +159,25 @@ export default {
       }
     },
     // 验证手机号是否存在
-    verifyRgTel () {
-      auth.verifyPhone(this.fpData).then(response => {
-        if (response.status === 0) {
-          message(this, "error", "您的手机号还未注册！");
-          this.bindTelData.captchaDisable = true;
-        } else if (response.status === 100100) {
-          message(this, "error", response.msg);
-          this.bindTelData.captchaDisable = true;
-        } else {
-          if (this.bindTelData.seconds === 30) {
-            this.bindTelData.captchaDisable = false;
-            this.handleGetCode(this.registerData);
+    verifyRgTel() {
+      if (!this.captchaDisable) {
+        auth.verifyPhone(this.fpData).then(response => {
+          if (response.status === 0) {
+            message(this, "error", "您的手机号还未注册！");
+            this.bindTelData.captchaDisable = true;
+          } else if (response.status === 100100) {
+            message(this, "error", response.msg);
+            this.bindTelData.captchaDisable = true;
+          } else {
+            if (this.bindTelData.seconds === 30) {
+              this.bindTelData.captchaDisable = false;
+              this.handleGetCode(this.registerData);
+            }
           }
-        }
-      });
+        });
+      }
     },
-    forgetPassword () {
+    forgetPassword() {
       this.fpData.code = String(this.fpData.code);
       this.fpData.password = String(this.fpData.password);
       if (!validatePhone(this.fpData.phones)) {
@@ -166,8 +205,9 @@ export default {
         }
       });
     },
-    async handleGetCode () {
+    async handleGetCode() {
       if (!this.captchaDisable) {
+        this.captchaDisable = true;
         auth.smsCodes(this.fpData).then(response => {
           let types = response.status === 0 ? "success" : "error";
           message(this, types, response.msg);
@@ -184,24 +224,33 @@ export default {
                 this.fpData.getCode = --this.fpData.seconds + "秒后重新发送";
               }
             }, 1000);
+          } else {
+            this.captchaDisable = false;
           }
         });
       }
     },
-    goHome () {
+    goHome() {
       this.$router.push("/");
     },
-    otherLogin () {
+    otherLogin() {
       this.goHome();
       this.$bus.$emit("loginShow", true);
     }
   },
-  beforeRouteEnter (to, from, next) {
+  mounted() {
+    this.$nextTick(() => {
+      this.fpData.phones = "";
+      this.fpData.code = "";
+      this.fpData.password = "";
+    });
+  },
+  beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     this.$bus.$emit("headerFooterShow");
     next();
   }
