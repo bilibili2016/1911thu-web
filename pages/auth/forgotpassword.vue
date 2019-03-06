@@ -47,7 +47,7 @@ import { mapActions } from "vuex";
 import { auth } from "~/lib/v1_sdk/index";
 import { encryption, message, Trim } from "~/lib/util/helper";
 export default {
-  data () {
+  data() {
     return {
       showPwd: false,
       pwdType: "password",
@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["forgetPasswordAjax"]),
-    changePwd () {
+    changePwd() {
       if (this.showPwd) {
         this.showPwd = false;
         this.pwdType = "password";
@@ -124,6 +124,7 @@ export default {
       }
     },
     // 验证手机号是否存在
+<<<<<<< .merge_file_tFRVF4
     verifyRgTel () {
       if (!this.captchaDisable) {
         auth.verifyPhone(this.fpData).then(response => {
@@ -138,11 +139,25 @@ export default {
               this.bindTelData.captchaDisable = false;
               this.handleGetCode(this.registerData);
             }
+=======
+    verifyRgTel() {
+      auth.verifyPhone(this.fpData).then(response => {
+        if (response.status === 0) {
+          message(this, "error", "您的手机号还未注册！");
+          this.bindTelData.captchaDisable = true;
+        } else if (response.status === 100100) {
+          message(this, "error", response.msg);
+          this.bindTelData.captchaDisable = true;
+        } else {
+          if (this.bindTelData.seconds === 30) {
+            this.bindTelData.captchaDisable = false;
+            this.handleGetCode(this.registerData);
+>>>>>>> .merge_file_I9iECY
           }
         });
       }
     },
-    forgetPassword () {
+    forgetPassword() {
       this.fpData.code = String(this.fpData.code);
       this.fpData.password = String(this.fpData.password);
       if (!validatePhone(this.fpData.phones)) {
@@ -170,7 +185,7 @@ export default {
         }
       });
     },
-    async handleGetCode () {
+    async handleGetCode() {
       if (!this.captchaDisable) {
         this.captchaDisable = true;
         auth.smsCodes(this.fpData).then(response => {
@@ -195,14 +210,15 @@ export default {
         });
       }
     },
-    goHome () {
+    goHome() {
       this.$router.push("/");
     },
-    otherLogin () {
+    otherLogin() {
       this.goHome();
       this.$bus.$emit("loginShow", true);
     }
   },
+<<<<<<< .merge_file_tFRVF4
   mounted () {
 
     this.$nextTick(() => {
@@ -212,11 +228,20 @@ export default {
     });
   },
   beforeRouteEnter (to, from, next) {
+=======
+  mounted() {
+    // setTimeout(() => {
+    //   this.$refs["fpData"].resetFields();
+    //   this.$refs["fpData"].clearValidate();
+    // }, 1000);
+  },
+  beforeRouteEnter(to, from, next) {
+>>>>>>> .merge_file_I9iECY
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     this.$bus.$emit("headerFooterShow");
     next();
   }
