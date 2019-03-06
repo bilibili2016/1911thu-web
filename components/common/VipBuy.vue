@@ -20,7 +20,6 @@
             <span class="inputText"><input type="text" v-model="vipData.number" @focus="handleFocus" @blur="changeNumber"></span>
             <span class="numBtn add" @click="addNumber">+</span>
           </div>
-
         </div>
         <!-- <div class="studyFee">学费：入学学费{{vipInfo.present_price}}元/人</div> -->
         <div class="btn">
@@ -42,7 +41,7 @@
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 
 export default {
-  props: ["vipId", "vipPopShow"],
+  props: ["vipPopShow", "vipInfo"],
   data() {
     return {
       pageText: "",
@@ -112,16 +111,17 @@ export default {
     handleConfirm() {
       this.$router.push(
         "/shop/affirmorder?id=" +
-          this.vipId +
+          this.vipInfo.id +
           "&type=2&num=" +
           this.vipData.number
       );
     },
     init() {
-      this.vipData.id = matchSplits("id"); //2:干部网络学院  3:在线商学院
-      if (this.vipData.id == 2) {
+      this.vipData.id = matchSplits("id");
+
+      if (this.vipInfo.en_title == "cadreCollege") {
         this.pageText = "在线干部学院";
-      } else {
+      } else if (this.vipInfo.en_title == "commercialCollege") {
         this.pageText = "在线商学院";
       }
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="VIP-con">
-    <div class="vipBanner" :class="{netWork:vipDetailData.id=='2',online:vipDetailData.id=='3'}"></div>
+    <div class="vipBanner" :class="{netWork:vipInfo.en_title=='cadreCollege',online:vipInfo.en_title=='commercialCollege'}"></div>
     <div class="con-detail" v-for="(collegeCon,index) in collegeArr" :key="index">
       <div class="con-one clearfix">
         <div class="oneDIV clearfix">
@@ -106,7 +106,7 @@
       </div>
     </div>
     <!-- 会员购买弹窗 -->
-    <v-vipbuy :vipPopShow="vipPopShow" :vipId="vipDetailData.id" @changeVipShow="changeVipShow"></v-vipbuy>
+    <v-vipbuy v-if="vipPopShow" :vipPopShow="vipPopShow" :vipInfo="vipInfo" @changeVipShow="changeVipShow"></v-vipbuy>
   </div>
 </template>
 <script>
@@ -290,6 +290,13 @@ export default {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
           setTitle(this.vipInfo.title + "-1911学堂");
+          if (this.vipInfo.en_title == "cadreCollege") {
+            //'cadreCollege' 在线干部学院
+            this.collegeArr = this.networkCon;
+          } else if (this.vipInfo.en_title == "commercialCollege") {
+            //'commercialCollege' 在线商学院
+            this.collegeArr = this.onlineCon;
+          }
         }
       });
     },
@@ -309,12 +316,7 @@ export default {
     },
     init() {
       this.relativeID = matchSplits("cid");
-      this.vipDetailData.id = matchSplits("id"); //2:干部网络学院  3:在线商学院
-      if (this.vipDetailData.id == "2") {
-        this.collegeArr = this.networkCon;
-      } else {
-        this.collegeArr = this.onlineCon;
-      }
+      this.vipDetailData.id = matchSplits("id");
     }
   },
   watch: {
