@@ -99,7 +99,7 @@
             <!-- 不是会员 -->
             <span v-if="!vipInfo.vipPrivate" class="button" @click="lookCourse">查看学院课程</span>
 
-            <span class="button" @click="buyVip">申请入学</span>
+            <span class="button joinStudy" @click="buyVip">申请入学</span>
             <span class="button" @click="identificate">申请证书</span>
           </div>
         </div>
