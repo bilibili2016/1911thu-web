@@ -52,9 +52,9 @@ export default {
       showPwd: false,
       pwdType: "password",
       position: {
-        tel: '',
-        code: '',
-        pwd: ''
+        tel: "",
+        code: "",
+        pwd: ""
       },
       fpData: {
         seconds: 30,
@@ -124,8 +124,7 @@ export default {
       }
     },
     // 验证手机号是否存在
-<<<<<<< .merge_file_tFRVF4
-    verifyRgTel () {
+    verifyRgTel() {
       if (!this.captchaDisable) {
         auth.verifyPhone(this.fpData).then(response => {
           if (response.status === 0) {
@@ -139,20 +138,6 @@ export default {
               this.bindTelData.captchaDisable = false;
               this.handleGetCode(this.registerData);
             }
-=======
-    verifyRgTel() {
-      auth.verifyPhone(this.fpData).then(response => {
-        if (response.status === 0) {
-          message(this, "error", "您的手机号还未注册！");
-          this.bindTelData.captchaDisable = true;
-        } else if (response.status === 100100) {
-          message(this, "error", response.msg);
-          this.bindTelData.captchaDisable = true;
-        } else {
-          if (this.bindTelData.seconds === 30) {
-            this.bindTelData.captchaDisable = false;
-            this.handleGetCode(this.registerData);
->>>>>>> .merge_file_I9iECY
           }
         });
       }
@@ -218,25 +203,14 @@ export default {
       this.$bus.$emit("loginShow", true);
     }
   },
-<<<<<<< .merge_file_tFRVF4
-  mounted () {
-
+  mounted() {
     this.$nextTick(() => {
-      this.fpData.phones = ''
-      this.fpData.code = ''
-      this.fpData.password = ''
+      this.fpData.phones = "";
+      this.fpData.code = "";
+      this.fpData.password = "";
     });
   },
-  beforeRouteEnter (to, from, next) {
-=======
-  mounted() {
-    // setTimeout(() => {
-    //   this.$refs["fpData"].resetFields();
-    //   this.$refs["fpData"].clearValidate();
-    // }, 1000);
-  },
   beforeRouteEnter(to, from, next) {
->>>>>>> .merge_file_I9iECY
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
