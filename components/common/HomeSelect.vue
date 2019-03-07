@@ -24,7 +24,7 @@ import { getNetwork } from "@/lib/util/helper";
 
 export default {
   props: ["categoryArr", "projectArr"],
-  data() {
+  data () {
     return {
       changeActive: "",
       pages: [],
@@ -90,7 +90,7 @@ export default {
     };
   },
   methods: {
-    handleClick(item, child, index) {
+    handleClick (item, child, index) {
       if (index != undefined) {
         document.getElementsByClassName("");
         let subLen = this.$refs.subIndex;
@@ -103,13 +103,25 @@ export default {
       }
       //学院
       if (item.id == "onlineCollege") {
-        this.$router.push({
-          path: "/home/vip/vipPage",
-          query: {
-            id: child.id,
-            cid: child.category_id
-          }
-        });
+        console.log(child);
+
+        if (child.en_title == 'cadreCollege' || child.en_title == 'commercialCollege') {
+          this.$router.push({
+            path: "/home/vip/vipPage",
+            query: {
+              id: child.id,
+              cid: child.category_id
+            }
+          });
+        } else {
+          this.$router.push({
+            path: "/home/vip/collegeInfo",
+            query: {
+              id: child.id,
+              cid: child.category_id
+            }
+          });
+        }
       } else if (item.id == "service") {
         //服务支持
         if (child.id == "code") {
@@ -122,7 +134,7 @@ export default {
         this.$router.push(item.link);
       }
     },
-    changeHeaderActive() {
+    changeHeaderActive () {
       let pathName = window.location.pathname;
       //初始化名师智库默认选中学院分类
       if (
@@ -184,7 +196,7 @@ export default {
       }
     },
     // 学院列表
-    vipGoodsList() {
+    vipGoodsList () {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           this.navList[2].childList = response.data.vipGoodsList;
@@ -192,7 +204,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     this.vipGoodsList();
     this.changeHeaderActive();
     if (getNetwork()) {
@@ -206,7 +218,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-// @import '~assets/style/components/tabs';
-</style>

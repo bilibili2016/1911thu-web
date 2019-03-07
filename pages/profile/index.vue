@@ -454,7 +454,7 @@ export default {
       responseData: { type: true, res: "" },
       examineListForm: {
         page: 1,
-        limit: 5
+        limit: 10
       },
       collegeListForm: {
         page: 1,
