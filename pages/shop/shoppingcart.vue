@@ -136,7 +136,7 @@
             <span class="person">购买人数：</span>
             <!-- onselectstart方法为禁止多次点击选中文本 -->
             <span class="number clearfix" unselectable="on" onselectstart="return false;">
-              <span class="fl minus" style="color:#93999F" v-if="numForm.number<=1">
+              <span class="fl minus" style="color:#93999F;cursor:not-allowed" v-if=" numForm.number<=1">
                 <i>-</i>
               </span>
               <span class="fl minus" v-else @click="delNumber">

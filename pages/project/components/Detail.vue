@@ -58,18 +58,10 @@
         <!-- <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div> -->
         <!-- <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div> -->
         <div v-if="projectType.types==2">
-          <div
-            v-if="projectDetail.is_creator"
-            class="addShoppingCart"
-            @click="handleBuy(projectDetail.id)"
-          >立即支付</div>
+          <div v-if="projectDetail.is_creator" class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即支付</div>
         </div>
         <div v-else>
-          <div
-            v-if="projectDetail.study_type === '1'"
-            class="addShoppingCart"
-            @click="goodsNmber"
-          >加入购物车</div>
+          <div v-if="projectDetail.study_type === '1'" class="addShoppingCart" @click="goodsNmber">加入购物车</div>
           <div v-else class="addShoppingCart" @click="handleBuy(projectDetail.id)">立即支付</div>
         </div>
       </div>
@@ -78,30 +70,30 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import BreadCrumb from '@/components/common/BreadCrumb.vue'
-import Collection from '@/components/common/Collection.vue'
-import { projectdetail } from '@/lib/v1_sdk/index'
-import { store as persistStore } from '~/lib/core/store'
-import { open, matchSplits } from '@/lib/util/helper'
+import { mapActions, mapGetters } from "vuex";
+import BreadCrumb from "@/components/common/BreadCrumb.vue";
+import Collection from "@/components/common/Collection.vue";
+import { projectdetail } from "@/lib/v1_sdk/index";
+import { store as persistStore } from "~/lib/core/store";
+import { open, matchSplits } from "@/lib/util/helper";
 export default {
   components: {
-    'v-breadcrumb': BreadCrumb,
-    'v-collection': Collection
+    "v-breadcrumb": BreadCrumb,
+    "v-collection": Collection
   },
-  props: ['projectDetail', 'projectType'],
-  data () {
+  props: ["projectDetail", "projectType"],
+  data() {
     return {
       project: {
-        projectId: '1'
+        projectId: "1"
       },
-      patternArr: ['线上', '混合', '互动'],
+      patternArr: ["线上", "混合", "互动"],
       BreadCrumb: {
-        type: 'projectDetail',
+        type: "projectDetail",
         home: true,
         // project: '分类列表',
         position: false, //是否显示当前位置
-        text: '项目详情'
+        text: "项目详情"
       },
       collectMsg: {
         types: 2,
@@ -109,110 +101,110 @@ export default {
       },
       shoppingForm: {
         type: 2,
-        cartid: ''
+        cartid: ""
       },
       currentType: 1
-    }
+    };
   },
   computed: {
-    ...mapGetters('auth', ['isAuthenticated'])
+    ...mapGetters("auth", ["isAuthenticated"])
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum']),
+    ...mapActions("auth", ["setProductsNum"]),
     // 跳转到项目播放页
-    goProjectPlayer () {
-      if (persistStore.get('token')) {
+    goProjectPlayer() {
+      if (persistStore.get("token")) {
         let urlLink = {
-          base: '/project/projectPlayer',
-          kid: matchSplits('kid'),
-          type: matchSplits('type')
-        }
-        open(urlLink)
+          base: "/project/projectPlayer",
+          kid: matchSplits("kid"),
+          type: matchSplits("type")
+        };
+        open(urlLink);
       } else {
-        this.$bus.$emit('loginShow', true)
+        this.$bus.$emit("loginShow", true);
       }
     },
     // 判断购物车数量
-    goodsNmber () {
-      if (!persistStore.get('token')) {
-        this.$bus.$emit('loginShow', true)
-        return false
+    goodsNmber() {
+      if (!persistStore.get("token")) {
+        this.$bus.$emit("loginShow", true);
+        return false;
       }
-      if (persistStore.get('productsNum') < 70) {
-        this.addShoppingCart()
+      if (persistStore.get("productsNum") < 70) {
+        this.addShoppingCart();
       } else {
-        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
-          confirmButtonText: '确定',
+        this.$alert("您的购物车已满，建议您先去结算或清理", "温馨提示", {
+          confirmButtonText: "确定",
           callback: action => {
-            this.$router.push('/shop/shoppingcart')
+            this.$router.push("/shop/shoppingcart");
           }
-        })
+        });
       }
     },
     // 项目加入购物车
-    addShoppingCart () {
-      if (!persistStore.get('token')) {
-        this.$bus.$emit('loginShow', true)
-        return false
+    addShoppingCart() {
+      if (!persistStore.get("token")) {
+        this.$bus.$emit("loginShow", true);
+        return false;
       }
-      this.shoppingForm.cartid = this.project.projectId
+      this.shoppingForm.cartid = this.project.projectId;
       projectdetail.addShopCart(this.shoppingForm).then(res => {
         if (res.status === 0) {
           // 添加购物车成功
           this.setProductsNum({
             pn: Number(res.data.curriculumNumber)
-          })
+          });
         } else {
           this.$message({
             showClose: true,
-            type: 'info',
+            type: "info",
             message: res.msg
-          })
+          });
         }
-        this.$router.push('/shop/shoppingcart')
-      })
+        this.$router.push("/shop/shoppingcart");
+      });
     },
-    handleLine (id) {
+    handleLine(id) {
       this.$router.push({
-        path: '/project/projectdetail',
+        path: "/project/projectdetail",
         query: {
           kid: id,
           type: 1
         }
-      })
+      });
     },
     // 立即购买
-    handleBuy (id) {
-      if (!persistStore.get('token')) {
-        this.$bus.$emit('loginShow', true)
-        return false
+    handleBuy(id) {
+      if (!persistStore.get("token")) {
+        this.$bus.$emit("loginShow", true);
+        return false;
       }
       this.$router.push({
-        path: '/shop/affirmorder',
+        path: "/shop/affirmorder",
         query: { id: id, type: 1 }
-      })
+      });
     }
   },
   watch: {
     // 检测数据中的收藏 数据过来慢
-    projectDetail (val, old) {
+    projectDetail(val, old) {
       if (val.is_Collection) {
-        this.collectMsg.isCollect = 1
+        this.collectMsg.isCollect = 1;
       } else {
-        this.collectMsg.isCollect = 0
+        this.collectMsg.isCollect = 0;
       }
     }
   },
-  mounted () {
-    this.project.projectId = matchSplits('kid')
-    this.currentType = matchSplits('type')
-    if (this.currentType === '1') {
-      this.BreadCrumb.text = '项目详情'
+  mounted() {
+    this.project.projectId = matchSplits("kid");
+    this.currentType = matchSplits("type");
+    if (this.currentType === "1") {
+      this.BreadCrumb.text = "项目详情";
     } else {
-      this.BreadCrumb.text = '定制项目详情'
+      this.BreadCrumb.text = "定制项目详情";
     }
   }
-}
+};
 </script>
 <style lang="scss">
 @import "~assets/style/project/detail.scss";
