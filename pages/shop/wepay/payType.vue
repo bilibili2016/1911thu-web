@@ -34,6 +34,7 @@
     <div class="fk fr" @click="showRpt">
       我有疑问，需要反馈?
     </div>
+    <v-dialog v-if="showDialog" :dialog="dialogInfo"></v-dialog>
   </div>
 </template>
 
@@ -41,10 +42,17 @@
 import { store as persistStore } from "~/lib/core/store";
 import { timestampToTime, matchSplits } from "~/lib/util/helper";
 import { wepay } from "@/lib/v1_sdk/index";
+import Dialog from "@/components/common/Dialog.vue";
+
 export default {
   props: ["orderDetail", "codeData", "listData"],
+  components: {
+    "v-dialog": Dialog
+  },
   data() {
     return {
+      showDialog: false,
+      dialogInfo: {},
       wechatPay: "http://static-image.1911edu.com/wxp.png",
       zfbPay: "http://static-image.1911edu.com/zfb.png",
       orderType: "",
@@ -74,39 +82,41 @@ export default {
   watch: {
     orderDetail(val) {
       if (val.order_amount > 5000 && val.order_amount < 500000) {
-        this.$alert(
-          "您的订单支付金额超过5000元，建议您通过对公转账方式进行支付，感谢配合！",
-          "温馨提示",
-          {
-            closeOnHashChange: true,
-            confirmButtonText: "确定",
-            beforeClose: (action, instance, done) => {
-              console.log(action, "kkk");
-
-              done(); // 就是它!
-            },
-            callback: action => {}
-          }
-        );
+        this.showDialog = true;
+        this.dialogInfo.info =
+          "您的订单支付金额超过5000元，建议您通过对公转账方式进行支付，感谢配合！";
+        // this.$alert(
+        //   "您的订单支付金额超过5000元，建议您通过对公转账方式进行支付，感谢配合！",
+        //   "温馨提示",
+        //   {
+        //     closeOnHashChange: true,
+        //     confirmButtonText: "确定",
+        //     callback: action => {}
+        //   }
+        // );
         this.wxMsg = false;
         this.zfbMsg = false;
         this.pubMsg = true;
         this.wechatPay = "http://static-image.1911edu.com/wxp.png";
         this.zfbPay = "http://static-image.1911edu.com/zfb.png";
       } else if (val.order_amount >= 500000) {
-        this.$alert(
-          "您的订单支付金额超过50万元，请通过对公转账方式进行支付，感谢配合！",
-          "温馨提示",
-          {
-            confirmButtonText: "确定",
-            callback: action => {}
-          }
-        );
+        this.showDialog = true;
+        this.dialogInfo.info =
+          "您的订单支付金额超过50万元，请通过对公转账方式进行支付，感谢配合！";
+        // this.$alert(
+        //   "您的订单支付金额超过50万元，请通过对公转账方式进行支付，感谢配合！",
+        //   "温馨提示",
+        //   {
+        //     confirmButtonText: "确定",
+        //     callback: action => {}
+        //   }
+        // );
         this.selectPub();
         this.isWSW = true;
         this.wechatPay = "http://static-image.1911edu.com/wxpUnclick.png";
         this.zfbPay = "http://static-image.1911edu.com/zfbUnclick.png";
       } else {
+        this.showDialog = false;
         this.wechatPay = "http://static-image.1911edu.com/wxp.png";
         this.zfbPay = "http://static-image.1911edu.com/zfb.png";
         this.isWSW = false;
