@@ -18,6 +18,7 @@
 
         <p>联系邮箱：{{ticketForm.email}}</p>
         <p>联系电话：{{ticketForm.phone}}</p>
+        <p>备注：{{ticketForm.note}}</p>
         <p>发票金额：{{price}}元</p>
       </div>
 
@@ -37,6 +38,7 @@
         <p>联系电话：{{ticketForm.phone}}</p>
         <p>所在地区：{{ticketForm.province_name}}{{ticketForm.city_name}}{{ticketForm.area_name}}</p>
         <p>详细地址：{{ticketForm.address}}</p>
+        <p>备注：{{ticketForm.note}}</p>
         <p>发票金额：{{price}}元</p>
       </div>
       <!-- 纸质发票  增值税发票   -->
@@ -54,6 +56,7 @@
         <p>联系电话：{{ticketForm.phone}}</p>
         <p>所在地区：{{ticketForm.province_name}}{{ticketForm.city_name}}{{ticketForm.area_name}}</p>
         <p>详细地址：{{ticketForm.address}}</p>
+        <p>备注：{{ticketForm.note}}</p>
         <p>发票金额：{{price}}元</p>
       </div>
       <!-- <p class="tips">{{tip}}</p> -->
@@ -87,6 +90,7 @@ export default {
         invoicename: '个人', // 发票抬头
         email: '', // 联系邮箱
         phone: '',  // 联系电话
+        note: '',
       },
       dataTwo: { // 电子发票 普通发票  单位
         select: '',
@@ -102,6 +106,7 @@ export default {
         account: '',
         email: '',
         phone: '',
+        note: '',
       },
       dataThree: {// 纸质发票  普通发票  个人
         select: '',
@@ -119,7 +124,8 @@ export default {
         province: '',
         city: '',
         area: '',
-        address: ''
+        address: '',
+        note: '',
       },
       dataFour: {// 纸质发票  普通发票  单位
         select: '', // 电子发票 | 普通发票
@@ -141,7 +147,8 @@ export default {
         province: '',
         city: '',
         area: '',
-        address: ''
+        address: '',
+        note: '',
       },
       dataFive: {// 纸质发票  增值税发票
         select: '', // 电子发票 | 普通发票
@@ -165,6 +172,7 @@ export default {
         city: '',
         area: '',
         address: '',
+        note: '',
       },
       isHistory: false,
     };
@@ -298,6 +306,7 @@ export default {
       this.ticketForm.phone = data.phone
       this.ticketForm.content = data.content
       this.ticketForm.contentId = data.content_type
+      this.ticketForm.note = data.remake
       persistStore.set("invoiceData", this.ticketForm)
     },
   },

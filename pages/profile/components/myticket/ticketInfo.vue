@@ -37,8 +37,9 @@
         <el-form-item label="" prop="invoicename" v-if="ticketInfo.invoiceType==1">
           <el-input v-model="ticketInfo.invoicename" placeholder="请输入单位发票抬头"></el-input>
         </el-form-item>
-        <el-form-item label="纳税人识别号" prop="number" v-if="ticketInfo.invoiceType==1">
+        <el-form-item label="纳税人识别号" prop="number" v-if="ticketInfo.invoiceType==1" class="number">
           <el-input v-model="ticketInfo.number" placeholder="请输入纳税人识别号"></el-input>
+          <span class="tip">政府、事业单位选填，企业必填</span>
         </el-form-item>
         <el-form-item label="" prop="number" v-else>
           <el-input v-model="ticketInfo.person" placeholder="个人" readonly></el-input>
@@ -55,13 +56,16 @@
         <el-form-item label="银行账号" prop="account" v-if="showCompany">
           <el-input v-model="ticketInfo.account" placeholder="请输入银行账号"></el-input>
         </el-form-item>
+        <el-form-item label="备注">
+          <el-input v-model="ticketInfo.note" placeholder="请输入备注信息"></el-input>
+        </el-form-item>
         <el-form-item class="operation">
           <el-button @click="close" round>取消</el-button>
           <el-button type="primary" @click="ticketSubmit('ticketInfo')" round>下一步</el-button>
         </el-form-item>
       </el-form>
 
-      <el-form :model="invoiceInfo" :rules="addRules" label-width="135px" class="psnForm" ref="invoiceInfo" v-show="invoiceForm.types==2">
+      <el-form :model="invoiceInfo" :rules="addRules" label-width="135px" ref="invoiceInfo" v-show="invoiceForm.types==2">
         <el-form-item label="单位名称" prop="companyname">
           <el-input v-model="invoiceInfo.companyname" placeholder="请输入单位名称"></el-input>
         </el-form-item>
@@ -79,6 +83,9 @@
         </el-form-item>
         <el-form-item label="银行账号" prop="account">
           <el-input v-model="invoiceInfo.account" placeholder="请输入银行账号"></el-input>
+        </el-form-item>
+        <el-form-item label="备注">
+          <el-input v-model="invoiceInfo.note" placeholder="请输入备注信息"></el-input>
         </el-form-item>
         <el-form-item class="operation">
           <el-button @click="close" round>取消</el-button>
@@ -178,6 +185,7 @@ export default {
         invoicename: "", // 发票抬头名称
         number: '',  // 纳税人识别号
         person: '', // 个人抬头，没啥用
+        note: '', //备注
         telephone: '', //联系电话
         zcadd: '', // 联系地址
         bank: '',   // 银行
@@ -194,6 +202,7 @@ export default {
         zcadd: '', // 联系地址
         bank: '',   // 银行
         account: '', // 银行账号
+        note: '', //备注
       },
       flag: false,
       showCompany: false,
@@ -381,6 +390,7 @@ export default {
         this.ticketInfo.invoiceType = data.invoiceType
         this.ticketInfo.invoicename = data.invoicename
         this.ticketInfo.person = data.person
+        this.ticketInfo.note = data.note
         if (this.ticketInfo.invoiceType == 1) {
           this.showCompany = true
           this.ticketInfo.number = data.number
@@ -411,6 +421,7 @@ export default {
         this.invoiceInfo.zcadd = data.zcadd
         this.invoiceInfo.bank = data.bank
         this.invoiceInfo.account = data.account
+        this.invoiceInfo.note = data.note
       }
     },
   },

@@ -33,6 +33,7 @@
             <div v-if="data.type==2||data.invoice_type==1">联系电话：{{data.company_phone}}</div>
             <div v-if="data.type==2||data.invoice_type==1">开户银行：{{data.bank_name}}</div>
             <div v-if="data.type==2||data.invoice_type==1">银行账号：{{data.bank_card}}</div>
+            <div>备注：{{data.remake}}</div>
           </div>
         </div>
       </div>

@@ -82,6 +82,12 @@
           padding: 20px 0 0;
         }
 
+        .psnForm {
+          .el-form-item:first-child {
+            margin-bottom: 5px;
+          }
+        }
+
         .el-form-item__content {
           .el-input {
             width: 300px;
@@ -89,7 +95,7 @@
         }
 
         .el-form-item {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
         }
 
         .ticketReception {
@@ -133,6 +139,17 @@
             &:hover {
               border: none;
             }
+          }
+        }
+
+        .number {
+          position: relative;
+
+          .tip {
+            color: red;
+            position: absolute;
+            left: 315px;
+            top: 0;
           }
         }
       }
