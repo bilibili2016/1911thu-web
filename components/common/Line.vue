@@ -49,6 +49,8 @@
         </span>
       </div>
     </div>
+    <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
+
   </div>
 </template>
 
@@ -57,13 +59,20 @@ import { store as persistStore } from "~/lib/core/store";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { auth, line } from "~/lib/v1_sdk/index";
 import { message, matchSplits, open } from "~/lib/util/helper";
+import Dialog from "@/components/common/Dialog.vue";
+
 export default {
   props: ["catalogs", "privileMsg", "config", "changeImg"],
+  components: {
+    "v-dialog": Dialog
+  },
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
   data() {
     return {
+      showDialog: false,
+      dialogInfo: {},
       curriculumcartids: {
         cartid: null
       },
@@ -100,13 +109,13 @@ export default {
       if (persistStore.get("productsNum") < 70) {
         this.addShopCart();
       } else {
-        this.$alert("您的购物车已满，建议您先去结算或清理", "温馨提示", {
-          confirmButtonText: "确定",
-          callback: action => {
-            this.$router.push("/shop/shoppingcart");
-          }
-        });
+        this.showDialog = true;
+        this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
+    },
+    closeDialog() {
+      this.showDialog = false;
+      this.$router.push("/shop/shoppingcart");
     },
     addShopCart() {
       line.addShopCart(this.curriculumcartids).then(response => {
