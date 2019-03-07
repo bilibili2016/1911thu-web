@@ -145,13 +145,6 @@ export default {
       this.showReportBug = false;
     }
   },
-  beforeRouteLeave(to, from, next) {
-    console.log(6666);
-    document.getElementsByClassName(
-      "el-message-box__wrapper"
-    )[0].style.display = "none";
-    next();
-  },
   mounted() {
     if (persistStore.get("token")) {
       this.getPayList();

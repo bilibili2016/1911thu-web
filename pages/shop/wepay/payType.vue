@@ -80,11 +80,6 @@ export default {
           {
             closeOnHashChange: true,
             confirmButtonText: "确定",
-            beforeClose: (action, instance, done) => {
-              console.log(action, "kkk");
-
-              done(); // 就是它!
-            },
             callback: action => {}
           }
         );
