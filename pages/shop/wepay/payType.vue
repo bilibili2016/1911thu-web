@@ -34,7 +34,7 @@
     <div class="fk fr" @click="showRpt">
       我有疑问，需要反馈?
     </div>
-    <v-dialog v-if="showDialog" :dialog="dialogInfo"></v-dialog>
+    <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
   </div>
 </template>
 
@@ -85,15 +85,7 @@ export default {
         this.showDialog = true;
         this.dialogInfo.info =
           "您的订单支付金额超过5000元，建议您通过对公转账方式进行支付，感谢配合！";
-        // this.$alert(
-        //   "您的订单支付金额超过5000元，建议您通过对公转账方式进行支付，感谢配合！",
-        //   "温馨提示",
-        //   {
-        //     closeOnHashChange: true,
-        //     confirmButtonText: "确定",
-        //     callback: action => {}
-        //   }
-        // );
+
         this.wxMsg = false;
         this.zfbMsg = false;
         this.pubMsg = true;
@@ -103,20 +95,14 @@ export default {
         this.showDialog = true;
         this.dialogInfo.info =
           "您的订单支付金额超过50万元，请通过对公转账方式进行支付，感谢配合！";
-        // this.$alert(
-        //   "您的订单支付金额超过50万元，请通过对公转账方式进行支付，感谢配合！",
-        //   "温馨提示",
-        //   {
-        //     confirmButtonText: "确定",
-        //     callback: action => {}
-        //   }
-        // );
+
         this.selectPub();
         this.isWSW = true;
         this.wechatPay = "http://static-image.1911edu.com/wxpUnclick.png";
         this.zfbPay = "http://static-image.1911edu.com/zfbUnclick.png";
       } else {
         this.showDialog = false;
+
         this.wechatPay = "http://static-image.1911edu.com/wxp.png";
         this.zfbPay = "http://static-image.1911edu.com/zfb.png";
         this.isWSW = false;
@@ -124,6 +110,10 @@ export default {
     }
   },
   methods: {
+    //关闭dialog提示框
+    closeDialog() {
+      this.showDialog = false;
+    },
     showRpt() {
       this.$emit("showRpt");
     },
