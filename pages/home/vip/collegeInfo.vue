@@ -197,6 +197,7 @@ export default {
           this.screeningImg(res.data.vipGoodsDetail)
           setTitle(this.vipInfo.title + "-1911学堂");
         } else {
+          message(this, 'error', res.msg)
           this.noCollege = false
           this.$router.push("/");
         }
