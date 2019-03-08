@@ -184,6 +184,7 @@ export default {
       this.collegeArr.forEach((v) => {
         if (v.title == data.en_title) {
           this.collegeImg = v.url
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.setWidth()
         }
       })
@@ -197,6 +198,7 @@ export default {
           this.screeningImg(res.data.vipGoodsDetail)
           setTitle(this.vipInfo.title + "-1911学堂");
         } else {
+          message(this, 'error', res.msg)
           this.noCollege = false
           this.$router.push("/");
         }
