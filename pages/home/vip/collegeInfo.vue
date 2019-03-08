@@ -184,7 +184,6 @@ export default {
       this.collegeArr.forEach((v) => {
         if (v.title == data.en_title) {
           this.collegeImg = v.url
-          document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.setWidth()
         }
       })
@@ -219,6 +218,7 @@ export default {
           this.arr[i].style.marginLeft = -this.width + 'px';
         }
         this.loading = false
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       })
     },
     // 底部操作栏动态
