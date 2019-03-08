@@ -4,7 +4,7 @@
       <div class="imgList" v-loading="loading">
         <img class="collegeImg" v-for="(url,index) in collegeImg" :key="index" :src="url" alt="">
       </div>
-      <div class="con-detail">
+      <div class="con-detail" v-if="flag">
         <div class="con-five">
           <h4 class="college-title">
             <span>学院学费</span>
@@ -68,6 +68,7 @@ export default {
   },
   data () {
     return {
+      flag: false,
       vipInfo: '',
       collegeImg: '',
       vipPopShow: false,
@@ -115,6 +116,14 @@ export default {
             'http://static-image.1911edu.com/college_edu1.jpg',
             'http://static-image.1911edu.com/college_edu2.jpg',
             'http://static-image.1911edu.com/college_edu3.jpg',
+          ]
+        },
+        {
+          title: 'newsCollege',
+          url: [
+            'http://static-image.1911edu.com/college_news1.png',
+            'http://static-image.1911edu.com/college_news2.png',
+            'http://static-image.1911edu.com/college_news3.png',
           ]
         }
       ],
