@@ -2116,3 +2116,21 @@ input::-webkit-credentials-auto-fill-button {
     }
   }
 }
+
+.dialogPop {
+	.el-dialog {
+		border-radius: 4px;
+		.el-dialog__header {
+			padding-left: 20px;
+			padding-bottom: 10px;
+		}
+		.el-dialog__body {
+			padding: 10px 20px;
+			line-height: 24px;
+		}
+		.el-button {
+			width: 150px;
+			border-radius: 6px;
+		}
+	}
+}

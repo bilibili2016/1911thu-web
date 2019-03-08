@@ -1,135 +1,106 @@
 <template>
-  <div class="exam clearfix">
-    <div class="examTitle clearfix">
-      <div class="title-left">
-        <span class="title">{{title}}</span>
-      </div>
-      <div class="title-right">
-        <span class="overtime">
-          剩余时间：
-          <i>{{minute}}</i>分
-          <i>{{second}}</i>秒
-        </span>
-      </div>
-    </div>
-    <div class="examLeft fl">
-      <div class="problem">
-        <h3 v-if="questionCurrent.type==1">单选题</h3>
-        <h3 v-if="questionCurrent.type==2">多选题</h3>
-        <h4>{{questionCurrent.number}}.{{questionCurrent.title}}</h4>
-        <div v-if="questionCurrent.type==1">
-          <el-radio
-            v-for="(option,index) in selectArr"
-            :key="index"
-            v-model="selectRadio"
-            :label="option.option_key"
-            :disabled="showResult"
-            @change="shangeRadio"
-          >{{option.option_key}}.{{option.option_value}}</el-radio>
+  <div>
+    <div class="exam clearfix">
+      <div class="examTitle clearfix">
+        <div class="title-left">
+          <span class="title">{{title}}</span>
         </div>
-
-        <el-checkbox-group
-          v-if="questionCurrent.type==2"
-          v-model="selectIndex"
-          @change="selectOption"
-        >
-          <el-checkbox
-            v-for="(option,index) in selectArr"
-            :key="index"
-            :label="option.option_key"
-            :disabled="showResult"
-          >{{option.option_key}}.{{option.option_value}}</el-checkbox>
-        </el-checkbox-group>
-      </div>
-      <div class="result">
-        <p class="success" v-if="showResult&&questionCurrent.is_right==1">
-          <i class="el-icon-success"></i>答对啦！
-        </p>
-        <p class="error" v-if="showResult&&questionCurrent.is_right==2">
-          <i class="el-icon-error"></i>答错啦！
-        </p>
-        <p class="analysis">解析：</p>
-        <p class="countTime" v-if="isShowTime">
-          自动跳转到下一题倒计时：
-          <span>{{showTime}}s</span>
-        </p>
-      </div>
-      <div class="commitBtn">
-        <span
-          class="preAnswer"
-          :class="{unclick:JSON.stringify(questionPre)=='{}',btnClick:JSON.stringify(questionPre)!='{}'}"
-          @click="preAnswer"
-        >上一题</span>
-        <span
-          class="nextAnswer"
-          :class="{unclick:JSON.stringify(questionNext)=='{}',btnClick:JSON.stringify(questionNext)!='{}'}"
-          @click="nextAnswer"
-        >下一题</span>
-
-        <div class="btn-submit" v-if="answerNum == questionNum"></div>
-        <div class="btn-submit" v-else>
-          <span v-if="isOver||questionCurrent.is_right!=0" class="isOver">提交</span>
-          <!-- :class="{disable:questionCurrent.is_right!=0}" -->
-          <span v-else @click="answer">提交</span>
-        </div>
-      </div>
-    </div>
-    <div class="examRight fr">
-      <div class="progress">
-        <h3>当前进度</h3>
-        <p>{{answerNum}} / {{questionNum}}</p>
-        <el-progress :stroke-width="10" color="#3FBABE" :show-text="false" :percentage="percent"></el-progress>
-      </div>
-      <div class="displayCard">
-        <h3>答题卡</h3>
-        <ul class="cardList">
-          <li
-            v-for="(li,index) in questionCard"
-            :key="index"
-            @click="selectQuestion(li)"
-            :class="[{bgColor: selectItem==li.id},{success:li.is_right==1&&selectItem!=li.id},{error:li.is_right==2&&selectItem!=li.id}]"
-          >{{li.number}}</li>
-        </ul>
-      </div>
-      <div class="commitBtn">
-        <span v-if="isOver" class="isOver">交卷</span>
-        <span v-else @click="commitExam">交卷</span>
-      </div>
-    </div>
-    <div class="shadow" v-if="showShadow">
-      <div class="popup" v-if="showShadow">
-        <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i>
-        <p class="grade smile" v-if="testPaper.doYouPass">
-          <img src="~assets/images/smile.png" class="fl" alt>
-          <span>{{testPaper.answerScoreSum}}分</span>
-          <span>成绩合格！</span>
-        </p>
-        <p class="grade cry" v-else>
-          <img src="~assets/images/cry.png" class="fl" alt>
-          <span>{{testPaper.answerScoreSum}}分</span>
-          <span>成绩不合格！</span>
-        </p>
-        <p class="clearfix subjectNumber">
-          <span class="fl">
-            未答题数：
-            <i>{{testPaper.notAnswerTotal}}</i>
+        <div class="title-right">
+          <span class="overtime">
+            剩余时间：
+            <i>{{minute}}</i>分
+            <i>{{second}}</i>秒
           </span>
-          <span class="fr">
-            错题数：
-            <i>{{testPaper.answerErrorTotal}}</i>
-          </span>
-        </p>
-        <p v-if="isOver" class="noTime">考试时间已到，请交卷！</p>
-        <div class="sdwBtn">
-          <span class="gonow" @click="examination">现在交卷</span>
-          <span
-            class="continue"
-            v-if="testPaper.notAnswerTotal>0&&!isOver"
-            @click="closeChadow"
-          >继续答题</span>
+        </div>
+      </div>
+      <div class="examLeft fl">
+        <div class="problem">
+          <h3 v-if="questionCurrent.type==1">单选题</h3>
+          <h3 v-if="questionCurrent.type==2">多选题</h3>
+          <h4>{{questionCurrent.number}}.{{questionCurrent.title}}</h4>
+          <div v-if="questionCurrent.type==1">
+            <el-radio v-for="(option,index) in selectArr" :key="index" v-model="selectRadio" :label="option.option_key" :disabled="showResult" @change="shangeRadio">{{option.option_key}}.{{option.option_value}}</el-radio>
+          </div>
+
+          <el-checkbox-group v-if="questionCurrent.type==2" v-model="selectIndex" @change="selectOption">
+            <el-checkbox v-for="(option,index) in selectArr" :key="index" :label="option.option_key" :disabled="showResult">{{option.option_key}}.{{option.option_value}}</el-checkbox>
+          </el-checkbox-group>
+        </div>
+        <div class="result">
+          <p class="success" v-if="showResult&&questionCurrent.is_right==1">
+            <i class="el-icon-success"></i>答对啦！
+          </p>
+          <p class="error" v-if="showResult&&questionCurrent.is_right==2">
+            <i class="el-icon-error"></i>答错啦！
+          </p>
+          <p class="analysis">解析：</p>
+          <p class="countTime" v-if="isShowTime">
+            自动跳转到下一题倒计时：
+            <span>{{showTime}}s</span>
+          </p>
+        </div>
+        <div class="commitBtn">
+          <span class="preAnswer" :class="{unclick:JSON.stringify(questionPre)=='{}',btnClick:JSON.stringify(questionPre)!='{}'}" @click="preAnswer">上一题</span>
+          <span class="nextAnswer" :class="{unclick:JSON.stringify(questionNext)=='{}',btnClick:JSON.stringify(questionNext)!='{}'}" @click="nextAnswer">下一题</span>
+
+          <div class="btn-submit" v-if="answerNum == questionNum"></div>
+          <div class="btn-submit" v-else>
+            <span v-if="isOver||questionCurrent.is_right!=0" class="isOver">提交</span>
+            <!-- :class="{disable:questionCurrent.is_right!=0}" -->
+            <span v-else @click="answer">提交</span>
+          </div>
+        </div>
+      </div>
+      <div class="examRight fr">
+        <div class="progress">
+          <h3>当前进度</h3>
+          <p>{{answerNum}} / {{questionNum}}</p>
+          <el-progress :stroke-width="10" color="#3FBABE" :show-text="false" :percentage="percent"></el-progress>
+        </div>
+        <div class="displayCard">
+          <h3>答题卡</h3>
+          <ul class="cardList">
+            <li v-for="(li,index) in questionCard" :key="index" @click="selectQuestion(li)" :class="[{bgColor: selectItem==li.id},{success:li.is_right==1&&selectItem!=li.id},{error:li.is_right==2&&selectItem!=li.id}]">{{li.number}}</li>
+          </ul>
+        </div>
+        <div class="commitBtn">
+          <span v-if="isOver" class="isOver">交卷</span>
+          <span v-else @click="commitExam">交卷</span>
+        </div>
+      </div>
+      <div class="shadow" v-if="showShadow">
+        <div class="popup" v-if="showShadow">
+          <i class="el-icon-close" v-if="!isOver" @click="closeChadow"></i>
+          <p class="grade smile" v-if="testPaper.doYouPass">
+            <img src="~assets/images/smile.png" class="fl" alt>
+            <span>{{testPaper.answerScoreSum}}分</span>
+            <span>成绩合格！</span>
+          </p>
+          <p class="grade cry" v-else>
+            <img src="~assets/images/cry.png" class="fl" alt>
+            <span>{{testPaper.answerScoreSum}}分</span>
+            <span>成绩不合格！</span>
+          </p>
+          <p class="clearfix subjectNumber">
+            <span class="fl">
+              未答题数：
+              <i>{{testPaper.notAnswerTotal}}</i>
+            </span>
+            <span class="fr">
+              错题数：
+              <i>{{testPaper.answerErrorTotal}}</i>
+            </span>
+          </p>
+          <p v-if="isOver" class="noTime">考试时间已到，请交卷！</p>
+          <div class="sdwBtn">
+            <span class="gonow" @click="examination">现在交卷</span>
+            <span class="continue" v-if="testPaper.notAnswerTotal>0&&!isOver" @click="closeChadow">继续答题</span>
+          </div>
         </div>
       </div>
     </div>
+    <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
+
   </div>
 </template>
 
@@ -138,9 +109,13 @@ import { mapActions } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { examine } from "~/lib/v1_sdk/index";
 import { message, matchSplits, setTitle } from "@/lib/util/helper";
+import Dialog from "@/components/common/Dialog.vue";
+
 export default {
-  data () {
+  data() {
     return {
+      showDialog: false,
+      dialogInfo: {},
       isOver: false,
       title: "",
       selectRadio: "",
@@ -178,25 +153,28 @@ export default {
       timer: ""
     };
   },
+  components: {
+    "v-dialog": Dialog
+  },
   methods: {
     ...mapActions("auth", ["setGid"]),
     // 选择选项
-    shangeRadio (val) {
+    shangeRadio(val) {
       this.examForm.selectId = [];
       this.examForm.selectId.push(val);
     },
     // 选择选项
-    selectOption (option) {
+    selectOption(option) {
       this.examForm.selectId = this.selectIndex;
     },
     // 切换问题
-    selectQuestion (item) {
+    selectQuestion(item) {
       this.closeCountDown();
       this.examForm.questionId = item.id;
       this.changeToken();
     },
     // 提交当前问题
-    answer () {
+    answer() {
       if (this.examForm.selectId.length == 0) {
         message(this, "error", "请先选择问题答案");
         return false;
@@ -221,23 +199,24 @@ export default {
           }
         });
       } else {
-        this.$alert("您已登录其他账号，无法继续考试！", "温馨提示", {
-          confirmButtonText: "确定",
-          callback: action => {
-            this.$router.push("/");
-          }
-        });
+        this.showDialog = true;
+        this.dialogInfo.info = "您已登录其他账号，无法继续考试！";
       }
     },
+    //关闭dialog提示框
+    closeDialog() {
+      this.showDialog = false;
+      this.$router.push("/");
+    },
     // 倒计时跳转下一题
-    countDown () {
+    countDown() {
       this.isShowTime = true;
       this.timer = setInterval(() => {
         this.showTime < 1 ? this.nextAnswer() : this.showTime--;
       }, 1000);
     },
     // 关闭倒计时
-    closeCountDown () {
+    closeCountDown() {
       if (this.timer) {
         clearInterval(this.timer);
       }
@@ -245,7 +224,7 @@ export default {
       this.showTime = 5;
     },
     // 上一题
-    preAnswer () {
+    preAnswer() {
       this.closeCountDown();
       if (this.questionPre != [] && this.questionPre.id) {
         this.examForm.questionId = this.questionPre.id;
@@ -255,7 +234,7 @@ export default {
       }
     },
     // 下一题
-    nextAnswer () {
+    nextAnswer() {
       this.closeCountDown();
       if (this.questionNext != [] && this.questionNext.id) {
         this.examForm.questionId = this.questionNext.id;
@@ -265,7 +244,7 @@ export default {
       }
     },
     // 交卷确认信息
-    commitExam () {
+    commitExam() {
       this.closeCountDown();
       if (
         persistStore.get("token") != "" &&
@@ -280,16 +259,12 @@ export default {
           }
         });
       } else {
-        this.$alert("您已登录其他账号，无法继续考试！", "温馨提示", {
-          confirmButtonText: "确定",
-          callback: action => {
-            this.$router.push("/");
-          }
-        });
+        this.showDialog = true;
+        this.dialogInfo.info = "您已登录其他账号，无法继续考试！";
       }
     },
     // 提交考试
-    examination () {
+    examination() {
       clearInterval(this.interval);
       examine.addSubmitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
@@ -306,11 +281,11 @@ export default {
       });
     },
     // 关闭弹框
-    closeChadow () {
+    closeChadow() {
       this.showShadow = false;
     },
     // 转换时间格式
-    changeTime (time) {
+    changeTime(time) {
       if (time <= 0) {
         clearInterval(this.interval);
         this.commitExam();
@@ -323,8 +298,8 @@ export default {
         this.second > 0
           ? this.second--
           : this.minute > 0
-            ? (this.minute-- , (this.second = 59))
-            : (this.minute = 0);
+          ? (this.minute--, (this.second = 59))
+          : (this.minute = 0);
         if (this.second == 0 && this.minute == 0) {
           clearInterval(this.interval);
           this.commitExam();
@@ -333,7 +308,7 @@ export default {
       }, 1000);
     },
     // 获取试题
-    questionsDetail () {
+    questionsDetail() {
       examine.questionsDetail(this.examForm).then(response => {
         if (response.status == 0) {
           this.setAssignment(response);
@@ -345,13 +320,13 @@ export default {
       });
     },
     // 跳转个人中心
-    goProfile (item) {
+    goProfile(item) {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
     },
     // 赋值
-    setAssignment (response) {
+    setAssignment(response) {
       this.title = response.data.exam_name;
       this.questionCurrent = response.data.questionCurrent;
       this.selectArr = response.data.questionCurrent.option;
@@ -380,23 +355,19 @@ export default {
       this.changeTime(response.data.surplus_time);
     },
     // 登录账号被替换
-    changeToken () {
+    changeToken() {
       if (
         persistStore.get("token") != "" &&
         persistStore.get("examToken") === persistStore.get("token")
       ) {
         this.questionsDetail();
       } else {
-        this.$alert("您已登录其他账号，无法继续考试！", "温馨提示", {
-          confirmButtonText: "确定",
-          callback: action => {
-            this.$router.push("/");
-          }
-        });
+        this.showDialog = true;
+        this.dialogInfo.info = "您已登录其他账号，无法继续考试！";
       }
     }
   },
-  mounted () {
+  mounted() {
     setTitle("考试中心-1911学堂");
 
     if (window.location.search) {
@@ -415,13 +386,13 @@ export default {
     }
   },
   // 进入路由隐藏header和footer
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
   // 出路由显示header和footer
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     this.$bus.$emit("headerFooterShow");
     persistStore.set("examToken", "");
     next();

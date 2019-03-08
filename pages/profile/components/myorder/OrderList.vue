@@ -67,19 +67,28 @@
         </div>
       </div>
     </div>
+    <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
+
   </div>
 </template>
 
 <script>
-import { timestampToTime } from '@/lib/util/helper'
-import { order } from '~/lib/v1_sdk/index'
-import { mapActions } from 'vuex'
-import { store as persistStore } from '~/lib/core/store'
-import { message, open } from '@/lib/util/helper'
+import { timestampToTime } from "@/lib/util/helper";
+import { order } from "~/lib/v1_sdk/index";
+import { mapActions } from "vuex";
+import { store as persistStore } from "~/lib/core/store";
+import { message, open } from "@/lib/util/helper";
+import Dialog from "@/components/common/Dialog.vue";
+
 export default {
-  props: ['data', 'config'],
+  props: ["data", "config"],
+  components: {
+    "v-dialog": Dialog
+  },
   data() {
     return {
+      showDialog: false,
+      dialogInfo: {},
       orderForm: {
         pages: 1,
         limits: 20,
@@ -87,145 +96,145 @@ export default {
         ids: null
       },
       kidForm: {
-        kid: ''
+        kid: ""
       },
-      responseData: { type: true, res: '' },
+      responseData: { type: true, res: "" },
       courseUrl: {
-        base: '/course/coursedetail',
+        base: "/course/coursedetail",
         kid: 0,
-        bid: '',
+        bid: "",
         page: 0
       }
-    }
+    };
   },
   methods: {
-    ...mapActions('auth', ['setGid', 'setKid']),
+    ...mapActions("auth", ["setGid", "setKid"]),
     detection() {
-      this.$emit('detection')
+      this.$emit("detection");
     },
     //根据列表长度计算高度
     computedHeight(len) {
-      let height = len > 3 ? 3 * 140 + 60 + 'px' : len * 140 + 'px'
-      return height
+      let height = len > 3 ? 3 * 140 + 60 + "px" : len * 140 + "px";
+      return height;
     },
     //计算项目列表显示数量
     computedLength(course, project, index) {
-      let projectLength = course.length > 3 ? 0 : 3 - course.length
+      let projectLength = course.length > 3 ? 0 : 3 - course.length;
       if (index < projectLength) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
     },
     //取消订单
     cancelOrder(id) {
-      this.orderForm.ids = id
+      this.orderForm.ids = id;
       order.cancelOrder(this.orderForm).then(response => {
         if (response.status === 0) {
-          this.$emit('handleUpdate', true)
-          message(this, 'success', '订单已取消！')
+          this.$emit("handleUpdate", true);
+          message(this, "success", "订单已取消！");
         } else if (response.status === 100008) {
-          this.responseData.res = response
-          this.$bus.$emit('reLoginAlertPop', this.responseData)
-          return false
+          this.responseData.res = response;
+          this.$bus.$emit("reLoginAlertPop", this.responseData);
+          return false;
         } else {
-          message(this, 'error', response.msg)
+          message(this, "error", response.msg);
         }
-      })
+      });
     },
     //去支付
     goPay(id, courseList) {
       if (courseList.orderVipList.length > 0) {
         this.$router.push({
-          path: '/shop/wepay',
+          path: "/shop/wepay",
           query: {
             order: id,
             type: 2
           }
-        })
-        return false
+        });
+        return false;
       } else {
         this.$router.push({
-          path: '/shop/wepay',
+          path: "/shop/wepay",
           query: {
             order: id,
             type: 1
           }
-        })
+        });
       }
     },
     // 判断购物车数量
     goodsNmber(id) {
-      if (persistStore.get('productsNum') < 70) {
-        this.addCart(id)
+      if (persistStore.get("productsNum") < 1) {
+        this.addCart(id);
       } else {
-        this.$alert('您的购物车已满，建议您先去结算或清理', '温馨提示', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$router.push('/shop/shoppingcart')
-          }
-        })
+        this.showDialog = true;
+        this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
+    },
+    closeDialog() {
+      this.showDialog = false;
+      this.$router.push("/shop/shoppingcart");
     },
     //加入购物车
     addCart(id) {
-      this.orderForm.ids = id
+      this.orderForm.ids = id;
       order.buyAgain(this.orderForm).then(response => {
         if (response.status === 0) {
-          this.$router.push('/shop/shoppingCart')
+          this.$router.push("/shop/shoppingCart");
         } else {
-          message(this, 'error', response.msg)
+          message(this, "error", response.msg);
         }
-      })
+      });
     },
     //直接购买
     goAffirmorder(id, num) {
       // VIP需要传递购买份数
       if (num) {
         this.$router.push({
-          path: '/shop/affirmorder',
+          path: "/shop/affirmorder",
           query: { id: id, type: 2, num: num }
-        })
+        });
       } else {
         this.$router.push({
-          path: '/shop/affirmorder',
+          path: "/shop/affirmorder",
           query: { id: id, type: 1 }
-        })
+        });
       }
     },
     //去购物车
     goShopping(courseList) {
-      if (courseList.order_type == '1') {
+      if (courseList.order_type == "1") {
         //课程
-        this.goodsNmber(courseList.id)
-      } else if (courseList.order_type == '2') {
+        this.goodsNmber(courseList.id);
+      } else if (courseList.order_type == "2") {
         //项目
-        if (courseList.project_type == '1') {
+        if (courseList.project_type == "1") {
           //标准项目
-          if (courseList.orderProjectList[0].study_type == '1') {
+          if (courseList.orderProjectList[0].study_type == "1") {
             //线上
-            this.goodsNmber(courseList.id)
+            this.goodsNmber(courseList.id);
           } else {
             //混合 互动
-            this.goAffirmorder(courseList.orderProjectList[0].id)
+            this.goAffirmorder(courseList.orderProjectList[0].id);
           }
         } else {
           //定制项目
-          this.goAffirmorder(courseList.orderProjectList[0].id)
+          this.goAffirmorder(courseList.orderProjectList[0].id);
         }
-      } else if (courseList.order_type == '3') {
+      } else if (courseList.order_type == "3") {
         //vip会员
         this.goAffirmorder(
           courseList.orderVipList[0].id,
           courseList.orderVipList[0].pay_number
-        )
+        );
       }
     },
     //课程详情
     goCourseInfo(item, index) {
-      this.kidForm.kids = item.id
-      this.courseUrl.kid = item.id
-      open(this.courseUrl)
+      this.kidForm.kids = item.id;
+      this.courseUrl.kid = item.id;
+      open(this.courseUrl);
 
       // this.$router.push({
       //   path: '/course/coursedetail',
@@ -239,44 +248,44 @@ export default {
     //项目详情
     goProjrctInfo(item) {
       this.$router.push({
-        path: '/project/projectdetail',
+        path: "/project/projectdetail",
         query: {
           kid: item.id,
           type: item.project_type
         }
-      })
+      });
     },
     // Vip详情
     goVipInfo(vip) {
       this.$router.push({
-        path: '/home/vip/vipPage',
+        path: "/home/vip/vipPage",
         query: {
           id: vip.id,
           cid: vip.category_id
         }
-      })
+      });
     },
     //列表详情
     selectPayApply(item, type) {
-      persistStore.set('order', item.id)
-      if (type == 'order') {
-        this.$bus.$emit('goOrderDetail', true)
-      } else if (type == 'ticket') {
+      persistStore.set("order", item.id);
+      if (type == "order") {
+        this.$bus.$emit("goOrderDetail", true);
+      } else if (type == "ticket") {
         // this.$bus.$emit('goTicketDetail', false)
-        this.$bus.$emit('goOrderDetail', false)
+        this.$bus.$emit("goOrderDetail", false);
       }
     },
     // 时间戳转日期格式
     exchangeTime(time) {
-      return timestampToTime(time)
+      return timestampToTime(time);
     }
   },
   mounted() {
-    if (persistStore.get('orderDetail')) {
-      this.$bus.$emit('goOrderDetail', true)
-      persistStore.set('orderDetail', false)
+    if (persistStore.get("orderDetail")) {
+      this.$bus.$emit("goOrderDetail", true);
+      persistStore.set("orderDetail", false);
     }
   }
-}
+};
 </script>
 

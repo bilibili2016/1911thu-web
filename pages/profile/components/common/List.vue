@@ -21,7 +21,7 @@
 
               <!-- 已过期 -->
               <div v-else>
-                <el-button v-if="card.expire_day < 1&&card.overtime" type="primary" plain @click="addShopCarts(card,index)">
+                <el-button type="primary" v-if="card.expire_day < 1&&card.overtime" plain @click="addShopCarts(card,index)">
                   <span>加入购物车</span>
                 </el-button>
               </div>
@@ -105,6 +105,9 @@
         </div>
       </div>
     </template>
+
+    <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
+
   </div>
 </template>
 
@@ -112,11 +115,17 @@
 import { profileHome } from "~/lib/v1_sdk/index";
 import { store as persistStore } from "~/lib/core/store";
 import { open, matchSplits } from "@/lib/util/helper";
+import Dialog from "@/components/common/Dialog.vue";
 
 export default {
   props: ["config", "data"],
-  data () {
+  components: {
+    "v-dialog": Dialog
+  },
+  data() {
     return {
+      showDialog: false,
+      dialogInfo: {},
       readyImg: "http://static-image.1911edu.com/ready.png",
       overTimeImg: "http://static-image.1911edu.com/overtime.png",
       jinImg: "http://static-image.1911edu.com/jin.png",
@@ -140,47 +149,48 @@ export default {
     };
   },
   methods: {
-    study (item) {
+    study(item) {
       this.openDetail(item);
     },
     //继续学习
-    goonStudy (item) {
+    goonStudy(item) {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
       //从个人中心-我的课程-继续学习跳转到课程详情页默认播放
       window.open(
         window.location.origin +
-        "/course/coursedetail?kid=" +
-        item.id +
-        "&page=0&paly="
+          "/course/coursedetail?kid=" +
+          item.id +
+          "&page=0&paly="
       );
     },
-    openDetail (item) {
+    openDetail(item) {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
     },
-    goTeacherInfo (id) {
+    goTeacherInfo(id) {
       this.tidForm.tids = id * 1;
       this.$router.push("/home/teacher/" + this.tidForm.tids);
     },
     // 判断购物车数量
-    goodsNmber () {
+    goodsNmber() {
       if (persistStore.get("productsNum") < 70) {
         profileHome.addShopCart(this.curriculumcartids).then(response => {
           this.$router.push("/shop/shoppingcart");
         });
       } else {
-        this.$alert("您的购物车已满，建议您先去结算或清理", "温馨提示", {
-          confirmButtonText: "确定",
-          callback: action => {
-            this.$router.push("/shop/shoppingcart");
-          }
-        });
+        this.showDialog = true;
+        this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
     },
+    //关闭dialog提示框
+    closeDialog() {
+      this.showDialog = false;
+      this.$router.push("/shop/shoppingcart");
+    },
     // 已过期商品直接加入购物车
-    addShopCarts (item, index) {
+    addShopCarts(item, index) {
       this.curriculumcartids.cartid = item.id;
       this.curriculumcartids.type = 1;
       this.goodsNmber();
