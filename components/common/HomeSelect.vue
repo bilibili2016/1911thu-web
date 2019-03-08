@@ -156,6 +156,7 @@ export default {
           break;
         //在线学院
         case "/home/vip/vipPage":
+        case "/home/vip/collegeInfo":
           this.changeActive = "onlineCollege";
 
           break;

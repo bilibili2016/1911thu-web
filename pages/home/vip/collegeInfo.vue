@@ -1,59 +1,66 @@
 <template>
-  <div class="collegeInfo">
-    <div class="imgList" v-loading="loading">
-      <img class="collegeImg" v-for="(url,index) in collegeImg" :key="index" :src="url" alt="">
-    </div>
-    <div class="con-detail">
-      <div class="con-five">
-        <h4 class="college-title">
-          <span>学院学费</span>
-        </h4>
-        <p class="text">学员优惠 惊喜不断</p>
-        <p class="desc">
-          学员只需
-          <span class="p-one">{{parseInt(vipInfo.present_price)}}元</span>
-          即可加入1911学堂{{vipInfo.title}}，学习价值{{999999999}}元的学院全部课程，
-          <span class="p-one">学籍有效期一年。</span>
-        </p>
-        <p class="price">
-          <span>
-            <i class="p-two">{{999}}</i>门课程
-          </span>
-          <span>
-            共计
-            <i class="p-two">{{999}}</i>学时
-          </span>
-          <span>
-            学费为
-            <i class="p-two">{{parseInt(vipInfo.present_price)}}</i>元/年
-          </span>
-        </p>
+  <div>
+    <div class="collegeInfo" v-if="noCollege">
+      <div class="imgList" v-loading="loading">
+        <img class="collegeImg" v-for="(url,index) in collegeImg" :key="index" :src="url" alt="">
       </div>
-      <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
-        <div class="btn-con">
-          <span class="text">学费{{parseInt(vipInfo.present_price)}}元/年</span>
-          <div class="btn-item">
-            <!-- 是会员 -->
-            <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
-            <!-- 不是会员 -->
-            <span v-if="!vipInfo.vipPrivate" class="button" @click="lookCourse">查看学院课程</span>
+      <div class="con-detail">
+        <div class="con-five">
+          <h4 class="college-title">
+            <span>学院学费</span>
+          </h4>
+          <p class="text">学员优惠 惊喜不断</p>
+          <p class="desc">
+            学员只需
+            <span class="p-one">{{parseInt(vipInfo.present_price)}}元</span>
+            即可加入1911学堂{{vipInfo.title}}，学习价值{{999999999}}元的学院全部课程，
+            <span class="p-one">学籍有效期一年。</span>
+          </p>
+          <p class="price">
+            <span>
+              <i class="p-two">{{999}}</i>门课程
+            </span>
+            <span>
+              共计
+              <i class="p-two">{{999}}</i>学时
+            </span>
+            <span>
+              学费为
+              <i class="p-two">{{parseInt(vipInfo.present_price)}}</i>元/年
+            </span>
+          </p>
+        </div>
+        <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
+          <div class="btn-con">
+            <span class="text">学费{{parseInt(vipInfo.present_price)}}元/年</span>
+            <div class="btn-item">
+              <!-- 是会员 -->
+              <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
+              <!-- 不是会员 -->
+              <span v-if="!vipInfo.vipPrivate" class="button" @click="lookCourse">查看学院课程</span>
 
-            <span class="button joinStudy" @click="buyVip">申请入学</span>
-            <span class="button" @click="identificate">申请证书</span>
+              <span class="button joinStudy" @click="buyVip">申请入学</span>
+              <span class="button" @click="identificate">申请证书</span>
+            </div>
           </div>
         </div>
       </div>
+      <!-- 会员购买弹窗 -->
+      <v-vipbuy v-if="vipPopShow" :vipPopShow="vipPopShow" :vipInfo="vipInfo" @changeVipShow="changeVipShow"></v-vipbuy>
     </div>
-
-    <!-- 会员购买弹窗 -->
-    <v-vipbuy v-if="vipPopShow" :vipPopShow="vipPopShow" :vipInfo="vipInfo" @changeVipShow="changeVipShow"></v-vipbuy>
+    <div class="noCollege" v-else>
+      <img src="http://static-image.1911edu.com/noCollege.png" alt="">
+      <p>敬请期待...</p>
+    </div>
   </div>
+
 </template>
 
 <script>
 import { vip } from "@/lib/v1_sdk/index";
 import { store as persistStore } from "~/lib/core/store";
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
+import { mapState, mapActions, mapGetters } from "vuex";
 import VipBuy from "@/components/common/VipBuy.vue";
 export default {
   components: {
@@ -75,7 +82,6 @@ export default {
             'http://static-image.1911edu.com/college_Chinese3.jpg',
             'http://static-image.1911edu.com/college_Chinese4.jpg',
           ]
-
         },
         {
           title: 'healthCollege',
@@ -115,15 +121,20 @@ export default {
       vipDetailData: {
         id: ""
       },
+      gidForm: {
+        gids: null
+      },
       vipInfo: "",
       width: '',
       windowHeight: '',
       paperHeight: '',
       scrollTop: '',
-      arr: ''
+      arr: '',
+      noCollege: false,
     }
   },
   methods: {
+    ...mapActions("auth", ["setGid"]),
     //   查看课程
     lookCourse () {
       this.$router.push({
@@ -173,15 +184,23 @@ export default {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
+          this.noCollege = true
           this.screeningImg(res.data.vipGoodsDetail)
           setTitle(this.vipInfo.title + "-1911学堂");
         } else {
+          this.noCollege = false
           this.$router.push("/");
         }
       });
     },
     // 设置图片宽度
     setWidth () {
+      if (this.collegeImg.length == 0) {
+        this.noCollege = false
+        return false
+      } else {
+        this.noCollege = true
+      }
       this.width = (1920 - document.documentElement.clientWidth) / 2
       this.$nextTick(() => {
         this.arr = document.getElementsByClassName('collegeImg')
