@@ -79,7 +79,7 @@ import { store as persistStore } from "~/lib/core/store";
 import { open, checkURL } from "@/lib/util/helper";
 export default {
   props: ["items", "config", "swiperData", "coreData"],
-  data() {
+  data () {
     return {
       timer: null,
       showShadow: false,
@@ -99,18 +99,18 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setKid"]),
-    setActiveItem(index) {
+    setActiveItem (index) {
       // if (this.$refs.coreCarousel.$el.style.display == "none") {
       //   return false;
       // }
-      setTimeout(() => {
-        console.log(this.$refs.coreRightCarousel.$el, "pp");
-      }, 4000);
+      //   setTimeout(() => {
+      //     console.log(this.$refs.coreRightCarousel.$el, "pp");
+      //   }, 4000);
       this.$nextTick(() => {
         // this.$refs.elCarousel.setActiveItem(index);
       });
     },
-    handleLink(img) {
+    handleLink (img) {
       // jump_type = 0  普通跳转 根据jump_url地址跳转
       // jump_type = 1  跳转至课程详情 jump_id 课程id
       // jump_type = 2  跳转至项目详情 jump_id 项目id
@@ -131,10 +131,10 @@ export default {
         });
       }
     },
-    goDetail(news) {
+    goDetail (news) {
       this.$router.push("/home/news/" + news.id);
     },
-    setWidth() {
+    setWidth () {
       let Dwidth = document.body.clientWidth;
       if (document.getElementsByClassName("el-carousel").length != 0) {
         if (Dwidth > 1920) {
@@ -146,7 +146,7 @@ export default {
         }
       }
     },
-    playVideo(url) {
+    playVideo (url) {
       this.player.url = url;
       this.showShadow = true;
       this.$nextTick(() => {
@@ -154,12 +154,12 @@ export default {
       });
     },
     //暂停
-    pauseVideo() {
+    pauseVideo () {
       this.showShadow = false;
       this.$refs.video.pause();
     }
   },
-  mounted() {
+  mounted () {
     this.setWidth();
     window.onresize = () => {
       return (() => {
