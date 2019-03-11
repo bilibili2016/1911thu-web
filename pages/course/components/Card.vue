@@ -48,9 +48,9 @@
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
                 </div>
-                <div class="common-button">
+                <div class="common-button clearfix">
                   <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                  <el-button :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
+                  <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
                 </div>
               </div>
 
@@ -74,7 +74,7 @@
                     <el-rate disabled v-model="courseList.score"></el-rate>
                   </span>
                 </div>
-                <div class="common-button">
+                <div class="common-button clearfix">
                   <!-- 学习进度 -->
                   <div class="lineProgress">
                     <h5 class="clearfix">
@@ -87,8 +87,8 @@
                   <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
                   <div class="fr">
                     <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                    <el-button :class="{'studentFree':courseList.is_vip}" v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
-                    <el-button :class="{'studentFree':courseList.is_vip}" v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
+                    <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                    <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   </div>
                 </div>
               </div>
@@ -114,12 +114,12 @@
                   <span class="coins">¥ {{courseList.present_price}} </span>
                 </div>
                 <!-- 购买判断  未购买-->
-                <div class=" common-button " v-if="privileMsg==false">
+                <div class=" common-button clearfix" v-if="privileMsg==false">
                   <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
-                  <el-button v-if="courseList.is_free_video" type="primary " plain @click="freeStudy(courseList) ">立即试看</el-button>
+                  <el-button class="leftBtn" v-if="courseList.is_free_video" type="primary " plain @click="freeStudy(courseList) ">立即试看</el-button>
                 </div>
                 <!-- 购买判断  已购买-->
-                <div class=" common-button " v-if="privileMsg==true">
+                <div class="common-button clearfix" v-if="privileMsg==true">
                   <!-- 学习判断  已学习-->
                   <div v-if="courseList.is_study==1">
                     <div class="lineProgress">
@@ -133,18 +133,18 @@
                     <div class="fr">
                       <div v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100">
                         <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
-                        <el-button :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
+                        <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                       </div>
                       <div v-if="Number(courseList.percent)===100">
                         <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
-                        <el-button :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
+                        <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                       </div>
                     </div>
                   </div>
                   <!-- 学习判断  未学习-->
                   <div v-if="courseList.is_study==0">
-                    <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
-                    <el-button :class="{'studentFree':courseList.is_vip}" type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
+                    <el-button type="primary " plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
+                    <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
                   </div>
                 </div>
 
@@ -177,7 +177,7 @@ export default {
     ...mapGetters("auth", ["isAuthenticated"]),
     ...mapState("auth", ["token", "productsNum"])
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
@@ -204,13 +204,13 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
-    refreshData() {
+    refreshData () {
       this.$emit("refreshData");
     },
-    changePlayImg(img, id) {
+    changePlayImg (img, id) {
       this.$emit("changePlayImg", img, id);
     },
-    vipGoodsDetail(item) {
+    vipGoodsDetail (item) {
       this.$router.push({
         path: "/home/vip/vipPage",
         query: {
@@ -220,7 +220,7 @@ export default {
       });
     },
     // 免费试看
-    freeStudy(item) {
+    freeStudy (item) {
       if (persistStore.get("token")) {
         this.getDefaultCurriculumCatalogId(item);
       } else {
@@ -229,7 +229,7 @@ export default {
       }
     },
     // 获取默认小节 跳转 章节id和小节id
-    getDefaultCurriculumCatalogId(item) {
+    getDefaultCurriculumCatalogId (item) {
       this.courseUrl.kid = matchSplits("kid");
       this.courseUrl.bid = item.defaultCurriculumCatalog.id;
 
@@ -245,7 +245,7 @@ export default {
       this.$bus.$emit("reupdatecourse");
     },
     // 左侧播放按钮事件
-    handleImgPlay(item) {
+    handleImgPlay (item) {
       // 用户已登录
       if (persistStore.get("token")) {
         this.getDefaultCurriculumCatalogId(item);
@@ -255,7 +255,7 @@ export default {
       }
     },
     // 点击立即学习按钮
-    handleFreeNoneStudy(item) {
+    handleFreeNoneStudy (item) {
       // 当用户登录
       if (persistStore.get("token")) {
         // // 用户已经购买 以及 课程为免费 获取默认播放id
@@ -271,7 +271,7 @@ export default {
       }
     },
     // 用户 未购买的逻辑 点击加入购物车逻辑
-    handleAddShopCart(item) {
+    handleAddShopCart (item) {
       if (persistStore.get("token")) {
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
@@ -289,11 +289,11 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    closeCover() {
+    closeCover () {
       this.isShowCover = false;
     },
     // 判断购物车数量
-    goodsNmber(item) {
+    goodsNmber (item) {
       if (persistStore.get("productsNum") < 1) {
         this.addCourseShopCart(item);
       } else {
@@ -301,12 +301,12 @@ export default {
         this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
     },
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.$router.push("/shop/shoppingcart");
     },
     // 添加购物车函数
-    addCourseShopCart(item) {
+    addCourseShopCart (item) {
       this.curriculumcartids.cartid = item.id;
       category.addShopCart(this.curriculumcartids).then(response => {
         if (response.status == 0) {
@@ -321,7 +321,7 @@ export default {
         }
       });
     },
-    changeURLArg(url, arg, arg_val) {
+    changeURLArg (url, arg, arg_val) {
       var pattern = arg + "=([^&]*)";
       var replaceText = arg + "=" + arg_val;
       if (url.match(pattern)) {
@@ -338,7 +338,7 @@ export default {
       return url + "\n" + arg + "\n" + arg_val;
     }
   },
-  mounted() {
+  mounted () {
     this.whichPage = matchSplits("page");
     this.$bus.$on("closeCover", data => {
       this.closeCover();

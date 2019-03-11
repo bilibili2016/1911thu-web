@@ -50,7 +50,7 @@
     </div>
     <div class="noCollege" v-else>
       <img src="http://static-image.1911edu.com/noCollege.png" alt="">
-      <p>敬请期待...</p>
+      <p>正在筹备中，敬请期待...</p>
     </div>
   </div>
 
