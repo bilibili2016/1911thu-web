@@ -218,6 +218,7 @@ export default {
           this.arr[i].style.marginLeft = -this.width + 'px';
         }
         this.loading = false
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       })
     },
     // 底部操作栏动态
