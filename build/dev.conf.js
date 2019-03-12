@@ -25,10 +25,6 @@ config.analyze = {
 			async: true
 		},
 		{
-			src: 'http://js.1911edu.com/jquery.fly.min.js',
-			async: true
-		},
-		{
 			src: 'http://js.1911edu.com/aliplayer-h5-min.js',
 			async: true
 		},
