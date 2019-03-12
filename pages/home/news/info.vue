@@ -26,7 +26,7 @@
                 <p class="year">{{changeTime(card.create_time).substring(0,4)}}</p>
               </div>
               <!-- <img class="titleImg fl" :src="card.picture" alt=""> -->
-              <div class="fl">
+              <div class="fl infoRight">
                 <h4 :title="card.title">{{card.title}}</h4>
                 <p>{{card.introduce}}</p>
               </div>

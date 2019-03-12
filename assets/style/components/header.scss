@@ -133,8 +133,7 @@ body {
           }
 
           .subPages {
-            opacity: 1;
-            display: block;
+            max-height: 500px;
             z-index: 200;
           }
         }
@@ -371,15 +370,16 @@ body {
     }
 
     .subPages {
-      opacity: 0;
-      display: none;
+      // opacity: 0;
+      // display: none;
       width: 120px;
       position: absolute;
       right: 0;
       top: 80px;
       z-index: -1;
+      max-height: 0;
       // border-radius: 4px;
-      // overflow: hidden;
+      overflow: hidden;
       transition: all 300ms;
       background-color: #fff;
       box-shadow: 0px 5px 12px rgba(198, 194, 210, 0.28);
@@ -413,9 +413,9 @@ body {
       right: -18px;
     }
 
-    .subPages.college {
+    .nav .subPages.college {
       width: 150px;
-      right: -33px;
+      right: -35px;
     }
 
     .rightContent {
@@ -464,9 +464,10 @@ body {
         float: left;
 
         &:hover .subPages {
-          opacity: 1;
-          display: block;
+          // opacity: 1;
+          // display: block;
           z-index: 200;
+          max-height: 500px;
         }
 
         img {

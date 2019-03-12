@@ -163,7 +163,9 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { category } from "~/lib/v1_sdk/index";
-import { message, matchSplits, open } from "~/lib/util/helper";
+import { message, matchSplits, open, parabola } from "~/lib/util/helper";
+import { initAniamtion } from "~/lib/util/animation";
+
 import CardPlayer from "@/pages/course/components/CardPlayer";
 import Dialog from "@/components/common/Dialog.vue";
 
@@ -255,7 +257,7 @@ export default {
       }
     },
     // 点击立即学习按钮
-    handleFreeNoneStudy (item) {
+    handleFreeNoneStudy (item, event) {
       // 当用户登录
       if (persistStore.get("token")) {
         // // 用户已经购买 以及 课程为免费 获取默认播放id
@@ -263,7 +265,7 @@ export default {
           this.getDefaultCurriculumCatalogId(item);
         } else {
           // 用户未购买 点击 加入购物车按钮
-          this.handleAddShopCart(item);
+          this.handleAddShopCart(item, event);
         }
       } else {
         // 当用户未登录
@@ -271,8 +273,9 @@ export default {
       }
     },
     // 用户 未购买的逻辑 点击加入购物车逻辑
-    handleAddShopCart (item) {
+    handleAddShopCart (item, event) {
       if (persistStore.get("token")) {
+        // initAniamtion("cartNum",event);
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
           if (this.two_is_cart === 0) {
@@ -294,7 +297,7 @@ export default {
     },
     // 判断购物车数量
     goodsNmber (item) {
-      if (persistStore.get("productsNum") < 1) {
+      if (persistStore.get("productsNum") < 70) {
         this.addCourseShopCart(item);
       } else {
         this.showDialog = true;
