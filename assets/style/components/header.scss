@@ -31,14 +31,14 @@ body {
 
     .header-fl {
       white-space: nowrap;
-      width: 880px;
+      //   width: 880px;
       height: 80px;
       position: absolute;
       left: 0;
       top: 0;
 
       &.big {
-        width: 960px;
+        // width: 1055px;
 
         .headerPage {
           .nav {
@@ -76,6 +76,10 @@ body {
         height: 42px;
         margin-top: 7px;
       }
+    }
+
+    .headerPage {
+      display: flex;
     }
 
     .headerClass {
@@ -450,11 +454,11 @@ body {
           position: absolute;
           top: -8px;
           right: -8px;
-          width: 17px;
-          height: 17px;
-          line-height: 17px;
+          height: 16px;
+          line-height: 16px;
+          padding: 0 5px;
           text-align: center;
-          border-radius: 50%;
+          border-radius: 8px;
           background-color: #ff5f5f;
           color: #fff;
           font-size: 12px;
