@@ -308,10 +308,14 @@ export default {
         document.documentElement.scrollTop ||
         window.pageYOffset ||
         document.body.scrollTop;
+
       if (this.windowHeight - this.scrollTop - this.paperHeight <= 103) {
         this.bottom = true;
       } else {
         this.bottom = false;
+      }
+      if (this.scrollTop == 0) {
+        this.bottom = true;
       }
     },
     init() {
@@ -321,6 +325,7 @@ export default {
   },
   watch: {
     $route(v, oldv) {
+      window.scrollTo(0, 0);
       this.init();
       this.vipDetail();
     }
