@@ -1,20 +1,23 @@
 .searchList {
-  float: right;
-  width: 350px;
-  height: 35px;
-  line-height: 35px;
-  margin: 0 0 20px;
-  font-size: 0;
-  .el-input {
-    width: 290px;
-  }
-  .goSearch {
-    width: 60px;
-    background-color: #773084;
-    text-align: center;
-    color: #fff;
-    font-size: 24px;
-    vertical-align: top;
-    cursor: pointer;
-  }
+	float: right;
+	width: 350px;
+	height: 35px;
+	line-height: 35px;
+	margin: 0 0 20px;
+	font-size: 0;
+	.el-input {
+		width: 290px;
+	}
+	.goSearch {
+		width: 60px;
+		background-color: #773084;
+		text-align: center;
+		color: #fff;
+		font-size: 24px;
+		vertical-align: top;
+		cursor: pointer;
+		&:hover {
+			background-color: #5f068d;
+		}
+	}
 }

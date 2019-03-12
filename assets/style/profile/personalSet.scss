@@ -42,6 +42,9 @@
 					border: none;
 					&.submitAble {
 						background-color: #773084;
+						&:hover {
+							background-color: #5f068d;
+						}
 					}
 				}
 			}
@@ -124,6 +127,9 @@
 			background-color: #773084;
 			border: none;
 			border-radius: 28px;
+			&:hover {
+				background-color: #5f068d;
+			}
 		}
 		.el-form-item .el-input__validateIcon {
 			display: none;
