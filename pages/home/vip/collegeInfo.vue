@@ -194,6 +194,11 @@ export default {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
           this.noCollege = true
+          if (res.data.vipGoodsDetail.is_pay == 1) {
+            this.flag = true
+          } else {
+            this.flag = false
+          }
           this.screeningImg(res.data.vipGoodsDetail)
           setTitle(this.vipInfo.title + "-1911学堂");
         } else {
