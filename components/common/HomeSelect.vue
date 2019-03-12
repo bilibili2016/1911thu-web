@@ -219,7 +219,11 @@ export default {
     vipGoodsList () {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
-          this.navList[2].childList = response.data.vipGoodsList;
+          for (const key in this.navList) {
+            if (this.navList[key].id == "onlineCollege") {
+              this.navList[key].childList = response.data.vipGoodsList;
+            }
+          }
         }
       });
     }
