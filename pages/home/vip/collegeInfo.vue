@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="collegeInfo" v-if="noCollege">
-      <div class="imgList" v-loading="loading">
+    <div class="collegeInfo" v-if="noCollege" v-loading="loading">
+      <div class="imgList">
         <img class="collegeImg" v-for="(url,index) in collegeImg" :key="index" :src="url" alt="">
       </div>
       <div class="con-detail" v-if="flag">
@@ -139,7 +139,7 @@ export default {
       paperHeight: '',
       scrollTop: '',
       arr: '',
-      noCollege: false,
+      noCollege: true,
     }
   },
   methods: {
