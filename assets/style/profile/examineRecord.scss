@@ -58,7 +58,10 @@
 		// background-color: #5e068c;
 		border-radius: 20px;
 		cursor: pointer;
-
+		&:hover {
+			background-color: #773084;
+			color: #fff;
+		}
 		&.notExamine {
 			position: relative;
 			color: #fff;
@@ -80,6 +83,7 @@
 				padding: 0 10px;
 			}
 			&:hover {
+				opacity: 0.8;
 				.alertText {
 					display: block;
 				}
