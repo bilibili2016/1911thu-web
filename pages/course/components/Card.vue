@@ -170,7 +170,6 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { category } from "~/lib/v1_sdk/index";
 import { message, matchSplits, open, parabola } from "~/lib/util/helper";
-import { initAniamtion, init } from "~/lib/util/animation";
 
 import CardPlayer from "@/pages/course/components/CardPlayer";
 import Dialog from "@/components/common/Dialog.vue";
@@ -281,7 +280,6 @@ export default {
     // 用户 未购买的逻辑 点击加入购物车逻辑
     handleAddShopCart(item, event) {
       if (persistStore.get("token")) {
-        // initAniamtion("cartNum", event);
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
           if (this.two_is_cart === 0) {
@@ -348,7 +346,6 @@ export default {
     }
   },
   mounted() {
-    // init();
     this.whichPage = matchSplits("page");
     this.$bus.$on("closeCover", data => {
       this.closeCover();
