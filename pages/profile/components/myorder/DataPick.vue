@@ -6,7 +6,7 @@
         <i class="el-icon-search"></i>
       </span>
       <div class="hoverMore" @click="handleShow">
-        <span class="more" :class="{active:active}">更多筛选条件 <i class="el-icon-arrow-down"></i></span>
+        <span class="more" :class="{active:active}">{{active?'精简':'更多'}}筛选条件 <i class="el-icon-arrow-down"></i></span>
         <!-- <ul class="moreList">
           <li @click="handleShow" v-for="(item,index) in moreList" :key="index">{{item.name}}</li>
         </ul> -->
@@ -29,59 +29,59 @@
 </template>
 
 <script>
-import { message } from '@/lib/util/helper'
-import { timestampToYMD } from '@/lib/util/helper'
+import { message } from "@/lib/util/helper";
+import { timestampToYMD } from "@/lib/util/helper";
 
 export default {
-  props: ['orderNum'],
+  props: ["orderNum"],
   data() {
     return {
       active: false,
       isShowTime: false,
       searchDatas: [],
-      moreList: [{ name: '跟据下单日期搜索' }],
+      moreList: [{ name: "跟据下单日期搜索" }],
       searchType: 1,
       searchForm: {
-        startDay: '',
-        endDay: '',
-        searchWord: ''
+        startDay: "",
+        endDay: "",
+        searchWord: ""
       }
-    }
+    };
   },
   methods: {
     detection() {
-      this.searchDatas = []
+      this.searchDatas = [];
       if (this.searchForm.endDay < this.searchForm.startDay) {
-        message(this, 'error', '结束日期不能小于开始日期!')
-        return false
+        message(this, "error", "结束日期不能小于开始日期!");
+        return false;
       }
-      this.searchDatas.push(timestampToYMD(this.searchForm.startDay))
-      this.searchDatas.push(timestampToYMD(this.searchForm.endDay))
-      this.searchDatas.push(this.searchForm.searchWord)
+      this.searchDatas.push(timestampToYMD(this.searchForm.startDay));
+      this.searchDatas.push(timestampToYMD(this.searchForm.endDay));
+      this.searchDatas.push(this.searchForm.searchWord);
 
       this.$bus.$emit(
-        'searchDatas',
+        "searchDatas",
         this.searchDatas,
         this.searchType,
         this.orderNum
-      )
+      );
     },
     goSearch() {},
     handleShow() {
-      this.active = !this.active
-      this.isShowTime = !this.isShowTime
+      this.active = !this.active;
+      this.isShowTime = !this.isShowTime;
     }
   },
   mounted() {
-    this.$bus.$on('clearSearch', () => {
-      this.searchForm.startDay = ''
-      this.searchForm.endDay = ''
-      this.searchForm.searchWord = ''
-    })
+    this.$bus.$on("clearSearch", () => {
+      this.searchForm.startDay = "";
+      this.searchForm.endDay = "";
+      this.searchForm.searchWord = "";
+    });
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/profile/dataPick.scss';
+@import "~assets/style/profile/dataPick.scss";
 </style>

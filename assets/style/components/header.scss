@@ -413,6 +413,11 @@ body {
       right: -18px;
     }
 
+    .subPages.college {
+      width: 150px;
+      right: -33px;
+    }
+
     .rightContent {
       .shoppingCart {
         float: left;
@@ -438,17 +443,16 @@ body {
         i {
           position: absolute;
           top: -8px;
-          left: 9px;
-          padding: 0 5px;
-          height: 16px;
+          right: -8px;
+          width: 17px;
+          height: 17px;
           line-height: 17px;
           text-align: center;
-          border-radius: 8px;
+          border-radius: 50%;
           background-color: #ff5f5f;
           color: #fff;
           font-size: 12px;
           overflow: hidden;
-          transition: all .3s;
         }
       }
 
@@ -816,4 +820,5 @@ body {
 
 .mobile-login {
   width: 100px;
+  margin: 65px 0 0 -96px !important;
 }

@@ -296,6 +296,11 @@
 			position: relative;
 			height: 40px;
 			line-height: 40px;
+			.el-icon-question {
+				&:hover {
+					color: #773084;
+				}
+			}
 			.el-icon-question.styleAsk {
 				font-size: 20px;
 				margin-left: 10px;
@@ -303,6 +308,7 @@
 				color: #aaa;
 				vertical-align: middle;
 				&:hover {
+					color: #773084;
 					.descript-text {
 						display: block;
 						right: 633px;
@@ -405,8 +411,11 @@
 						cursor: pointer;
 						background: #eee;
 						&.active {
-							background-color: rgba(94, 6, 140, 1);
+							background-color: #773084;
 							color: #fff;
+							&:hover {
+								opacity: 0.8;
+							}
 						}
 					}
 				}
@@ -515,17 +524,26 @@
 				line-height: 40px;
 				text-align: center;
 				border-radius: 20px;
-				border: 1px solid #5e068c;
+				border: 1px solid #773084;
 				margin-right: 60px;
-				color: #5e068c;
+				color: #fff;
 				cursor: pointer;
+				background-color: #773084;
 				&:last-child {
 					margin-right: 0;
 				}
-				&.active,
-				&:hover {
-					background-color: #5f068d;
-					color: #fff;
+				&.save {
+					&:hover {
+						opacity: 0.8;
+					}
+				}
+				&.buy {
+					color: #773084;
+					background-color: #fff;
+					&:hover {
+						background-color: #773084;
+						color: #fff;
+					}
 				}
 			}
 		}
