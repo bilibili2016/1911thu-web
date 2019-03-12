@@ -65,7 +65,7 @@
           <img :src="collegeCon.conFour.img" alt>
         </div>
       </div>
-      <div class="con-five">
+      <div class="con-five" v-if="flag">
         <h4 class="college-title">
           <span>学院学费</span>
         </h4>
@@ -90,7 +90,7 @@
           </span>
         </p>
       </div>
-      <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
+      <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}" v-if="flag">
         <div class="btn-con">
           <span class="text">学费{{parseInt(vipInfo.present_price)}}元/年</span>
           <div class="btn-item">
@@ -117,11 +117,12 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import VipBuy from "@/components/common/VipBuy.vue";
 
 export default {
-  data() {
+  data () {
     return {
       onlineImg: "http://static-image.1911edu.com/online-con.png",
       networkImg: "http://static-image.1911edu.com/network-con.png",
       vipPopShow: false,
+      flag: false,
       relativeID: "",
       gidForm: {
         gids: null
@@ -249,7 +250,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid"]),
     //查看课程
-    lookCourse() {
+    lookCourse () {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -262,7 +263,7 @@ export default {
       });
     },
     //立即购买
-    buyVip() {
+    buyVip () {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -270,11 +271,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow(val) {
+    changeVipShow (val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate() {
+    identificate () {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -285,10 +286,15 @@ export default {
       }
     },
     //会员详情
-    vipDetail() {
+    vipDetail () {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
+          if (res.data.vipGoodsDetail.is_pay == 1) {
+            this.flag = true
+          } else {
+            this.flag = false
+          }
           setTitle(this.vipInfo.title + "-1911学堂");
           if (this.vipInfo.en_title == "cadreCollege") {
             //'cadreCollege' 在线干部学院
@@ -301,7 +307,7 @@ export default {
       });
     },
     //
-    addClass() {
+    addClass () {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -318,19 +324,19 @@ export default {
         this.bottom = true;
       }
     },
-    init() {
+    init () {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
     }
   },
   watch: {
-    $route(v, oldv) {
+    $route (v, oldv) {
       window.scrollTo(0, 0);
       this.init();
       this.vipDetail();
     }
   },
-  mounted() {
+  mounted () {
     this.init();
     this.vipDetail();
     // 寛高设置
