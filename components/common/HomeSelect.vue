@@ -24,7 +24,7 @@ import { getNetwork } from "@/lib/util/helper";
 
 export default {
   props: ["categoryArr", "projectArr"],
-  data() {
+  data () {
     return {
       changeActive: "",
       pages: [],
@@ -49,6 +49,16 @@ export default {
           title: "单位内训",
           id: "unit",
           link: "/other/activePages/Institutional"
+        },
+        {
+          title: "学位项目",
+          id: "project",
+          link: "/project/degreeProject"
+        },
+        {
+          title: "测评体系",
+          id: "system",
+          link: "/other/pages/system"
         },
         {
           title: "名师智库",
@@ -90,7 +100,7 @@ export default {
     };
   },
   methods: {
-    handleClick(item, child, index) {
+    handleClick (item, child, index) {
       if (index != undefined) {
         document.getElementsByClassName("");
         let subLen = this.$refs.subIndex;
@@ -103,8 +113,6 @@ export default {
       }
       //学院
       if (item.id == "onlineCollege") {
-        console.log(child);
-
         if (
           child.en_title == "cadreCollege" ||
           child.en_title == "commercialCollege"
@@ -137,7 +145,7 @@ export default {
         this.$router.push(item.link);
       }
     },
-    changeHeaderActive() {
+    changeHeaderActive () {
       let pathName = window.location.pathname;
       //初始化名师智库默认选中学院分类
       if (
@@ -174,6 +182,14 @@ export default {
         case "/other/activePages/Institutional":
           this.changeActive = "unit";
           break;
+        //测评体系
+        case "/other/pages/system":
+          this.changeActive = "system";
+          break;
+        //学位项目
+        case "/project/degreeProject":
+          this.changeActive = "project";
+          break;
         //名师智库
         case "/home/teacher/list":
         case "/home/teacher/orderTeacher":
@@ -200,7 +216,7 @@ export default {
       }
     },
     // 学院列表
-    vipGoodsList() {
+    vipGoodsList () {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           this.navList[2].childList = response.data.vipGoodsList;
@@ -208,7 +224,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     this.vipGoodsList();
     this.changeHeaderActive();
     if (getNetwork()) {
