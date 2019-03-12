@@ -1,7 +1,7 @@
 <template>
   <div class="rightContent">
-    <div class="shoppingCart" v-if="isShowLRBtn" @click="handleLink('/shop/shoppingcart')">
-      <span class="cartIcon" id="cartNum"></span>
+    <div class="shoppingCart" id="cartNum" v-if="isShowLRBtn" @click="handleLink('/shop/shoppingcart')">
+      <span class="cartIcon"></span>
       <i v-if="productsNum>0">{{productsNum}}</i>
     </div>
     <div class="headImg">

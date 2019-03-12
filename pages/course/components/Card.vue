@@ -49,7 +49,7 @@
                   </span>
                 </div>
                 <div class="common-button clearfix">
-                  <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
+                  <el-button type="primary " plain @click="handleAddShopCart(courseList,$event) ">加入购物车</el-button>
                   <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
                 </div>
               </div>
@@ -115,7 +115,7 @@
                 </div>
                 <!-- 购买判断  未购买-->
                 <div class=" common-button clearfix" v-if="privileMsg==false">
-                  <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
+                  <el-button type="primary " plain @click="handleFreeNoneStudy(courseList,$event) ">加入购物车</el-button>
                   <el-button class="leftBtn" v-if="courseList.is_free_video" type="primary " plain @click="freeStudy(courseList) ">立即试看</el-button>
                 </div>
                 <!-- 购买判断  已购买-->
@@ -154,6 +154,12 @@
         </div>
       </div>
     </div>
+    <!-- <div class="outercontent">
+      <div class="outer point-pre" myshow="hide">
+        <div class="inner"></div>
+      </div>
+    </div> -->
+
     <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
 
   </div>
@@ -164,7 +170,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { category } from "~/lib/v1_sdk/index";
 import { message, matchSplits, open, parabola } from "~/lib/util/helper";
-import { initAniamtion } from "~/lib/util/animation";
+import { initAniamtion, init } from "~/lib/util/animation";
 
 import CardPlayer from "@/pages/course/components/CardPlayer";
 import Dialog from "@/components/common/Dialog.vue";
@@ -179,7 +185,7 @@ export default {
     ...mapGetters("auth", ["isAuthenticated"]),
     ...mapState("auth", ["token", "productsNum"])
   },
-  data () {
+  data() {
     return {
       showDialog: false,
       dialogInfo: {},
@@ -206,13 +212,13 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
-    refreshData () {
+    refreshData() {
       this.$emit("refreshData");
     },
-    changePlayImg (img, id) {
+    changePlayImg(img, id) {
       this.$emit("changePlayImg", img, id);
     },
-    vipGoodsDetail (item) {
+    vipGoodsDetail(item) {
       this.$router.push({
         path: "/home/vip/vipPage",
         query: {
@@ -222,7 +228,7 @@ export default {
       });
     },
     // 免费试看
-    freeStudy (item) {
+    freeStudy(item) {
       if (persistStore.get("token")) {
         this.getDefaultCurriculumCatalogId(item);
       } else {
@@ -231,7 +237,7 @@ export default {
       }
     },
     // 获取默认小节 跳转 章节id和小节id
-    getDefaultCurriculumCatalogId (item) {
+    getDefaultCurriculumCatalogId(item) {
       this.courseUrl.kid = matchSplits("kid");
       this.courseUrl.bid = item.defaultCurriculumCatalog.id;
 
@@ -247,7 +253,7 @@ export default {
       this.$bus.$emit("reupdatecourse");
     },
     // 左侧播放按钮事件
-    handleImgPlay (item) {
+    handleImgPlay(item) {
       // 用户已登录
       if (persistStore.get("token")) {
         this.getDefaultCurriculumCatalogId(item);
@@ -257,7 +263,7 @@ export default {
       }
     },
     // 点击立即学习按钮
-    handleFreeNoneStudy (item, event) {
+    handleFreeNoneStudy(item, event) {
       // 当用户登录
       if (persistStore.get("token")) {
         // // 用户已经购买 以及 课程为免费 获取默认播放id
@@ -273,9 +279,9 @@ export default {
       }
     },
     // 用户 未购买的逻辑 点击加入购物车逻辑
-    handleAddShopCart (item, event) {
+    handleAddShopCart(item, event) {
       if (persistStore.get("token")) {
-        // initAniamtion("cartNum",event);
+        // initAniamtion("cartNum", event);
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
           if (this.two_is_cart === 0) {
@@ -292,11 +298,11 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    closeCover () {
+    closeCover() {
       this.isShowCover = false;
     },
     // 判断购物车数量
-    goodsNmber (item) {
+    goodsNmber(item) {
       if (persistStore.get("productsNum") < 70) {
         this.addCourseShopCart(item);
       } else {
@@ -304,12 +310,12 @@ export default {
         this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
     },
-    closeDialog () {
+    closeDialog() {
       this.showDialog = false;
       this.$router.push("/shop/shoppingcart");
     },
     // 添加购物车函数
-    addCourseShopCart (item) {
+    addCourseShopCart(item) {
       this.curriculumcartids.cartid = item.id;
       category.addShopCart(this.curriculumcartids).then(response => {
         if (response.status == 0) {
@@ -324,7 +330,7 @@ export default {
         }
       });
     },
-    changeURLArg (url, arg, arg_val) {
+    changeURLArg(url, arg, arg_val) {
       var pattern = arg + "=([^&]*)";
       var replaceText = arg + "=" + arg_val;
       if (url.match(pattern)) {
@@ -341,7 +347,8 @@ export default {
       return url + "\n" + arg + "\n" + arg_val;
     }
   },
-  mounted () {
+  mounted() {
+    // init();
     this.whichPage = matchSplits("page");
     this.$bus.$on("closeCover", data => {
       this.closeCover();
