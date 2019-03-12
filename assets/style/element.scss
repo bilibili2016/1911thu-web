@@ -2143,14 +2143,21 @@ input::-webkit-credentials-auto-fill-button {
 	left: 0px;
 	top: 0px;
 	transition: all 0.35s linear;
+	z-index: 1000;
 }
 .outer .inner {
 	width: 30px;
 	height: 30px;
-	background: red;
+	// background: red;
 	border-radius: 50%;
 	transition: all 0.35s cubic-bezier(.25, .1, .25, 1);
 	position: absolute;
+	img {
+		width: 100%;
+		height: 100%;
+		display: block;
+		border-radius: 50%;
+	}
 }
 .outer.point-pre {
 	display: none;

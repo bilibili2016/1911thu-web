@@ -1,70 +1,36 @@
 <template>
   <div class="newsDetail">
     <div class="news-banner">
-      <img
-        :src="bannerImg"
-        alt=""
-      >
+      <img :src="bannerImg" alt="">
     </div>
     <!-- 面包屑组件 -->
     <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
     <!-- 新闻内容 -->
     <div class="detail">
-      <div
-        class="newsContent"
-        v-loading='loading'
-      >
-        <div
-          class="viewArea"
-          ref="viewArea"
-        >
+      <div class="newsContent" v-loading='loading'>
+        <div class="viewArea" ref="viewArea">
           <h3>{{newsDetail.title}}</h3>
           <p class="time">{{newsDetail.create_time}}&nbsp;&nbsp;&nbsp;新闻来源：{{newsDetail.source}}</p>
           <!-- <h4 class="source" v-if="newsDetail.source">新闻来源：{{newsDetail.source}}</h4> -->
-          <div
-            class="newsInner"
-            v-html="newsDetail.content"
-          ></div>
-          <h5
-            class="author"
-            v-if="newsDetail.author"
-          >责任编辑：{{newsDetail.author}}</h5>
+          <div class="newsInner" v-html="newsDetail.content"></div>
+          <h5 class="author" v-if="newsDetail.author">责任编辑：{{newsDetail.author}}</h5>
 
-          <div
-            class="payBar"
-            v-if="isShowpayBar"
-          >
+          <!-- <div class="payBar" v-if="isShowpayBar">
             <div class="payDiv">
-              <span
-                class="btn"
-                @click.stop="handlepayNews"
-              >支付1元阅读更多</span>
+              <span class="btn" @click.stop="handlepayNews">支付1元阅读更多</span>
             </div>
             <div class="height"></div>
-          </div>
+          </div> -->
         </div>
 
         <div class="next clearfix">
-          <span
-            class="fl"
-            v-if="beforeNews"
-            @click="getNewInfoDetail(beforeNews.id)"
-          >上一篇&nbsp;&nbsp;&nbsp;&nbsp;{{beforeNews.title}}</span>
-          <span
-            class="fr"
-            v-if="afterNews"
-            @click="getNewInfoDetail(afterNews.id)"
-          >下一篇&nbsp;&nbsp;&nbsp;&nbsp;{{afterNews.title}}</span>
+          <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇&nbsp;&nbsp;&nbsp;&nbsp;{{beforeNews.title}}</span>
+          <span class="fr" v-if="afterNews" @click="getNewInfoDetail(afterNews.id)">下一篇&nbsp;&nbsp;&nbsp;&nbsp;{{afterNews.title}}</span>
         </div>
       </div>
     </div>
 
-    <v-pay
-      v-if="isShowpayPopup"
-      :payNewsDetail="payNewsDetail"
-      @requestNews="requestNews"
-      @closePop="closePop"
-    ></v-pay>
+    <!-- <v-pay v-if="isShowpayPopup" :payNewsDetail="payNewsDetail" @requestNews="requestNews" @closePop="closePop"></v-pay> -->
   </div>
 </template>
 
@@ -86,7 +52,7 @@ export default {
     return {
       nid: "",
       isShowpayPopup: false,
-      isShowpayBar: false,
+      // isShowpayBar: false,
       payNewsDetail: "",
       BreadCrumb: {
         type: "newsDetail",
@@ -155,13 +121,13 @@ export default {
             me.afterNews.title = "暂无";
           }
 
-          if (response.data.newDetail.news_power == "1") {
-            this.isShowpayBar = true;
-            this.$refs.viewArea.style.height = "500px";
-          } else {
-            this.isShowpayBar = false;
-            this.$refs.viewArea.style.height = "auto";
-          }
+          // if (response.data.newDetail.news_power == "1") {
+          //   this.isShowpayBar = true;
+          //   this.$refs.viewArea.style.height = "500px";
+          // } else {
+          //   this.isShowpayBar = false;
+          //   this.$refs.viewArea.style.height = "auto";
+          // }
 
           this.payNewsDetail = this.newsDetail;
 

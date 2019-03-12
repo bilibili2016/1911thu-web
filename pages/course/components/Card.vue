@@ -49,7 +49,7 @@
                   </span>
                 </div>
                 <div class="common-button clearfix">
-                  <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
+                  <el-button type="primary " plain @click="handleAddShopCart(courseList,$event) ">加入购物车</el-button>
                   <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">{{ isAuthenticated === false ? '立即学习': '开始学习'}}</el-button>
                 </div>
               </div>
@@ -115,7 +115,7 @@
                 </div>
                 <!-- 购买判断  未购买-->
                 <div class=" common-button clearfix" v-if="privileMsg==false">
-                  <el-button type="primary " plain @click="handleFreeNoneStudy(courseList) ">加入购物车</el-button>
+                  <el-button type="primary " plain @click="handleFreeNoneStudy(courseList,$event) ">加入购物车</el-button>
                   <el-button class="leftBtn" v-if="courseList.is_free_video" type="primary " plain @click="freeStudy(courseList) ">立即试看</el-button>
                 </div>
                 <!-- 购买判断  已购买-->
@@ -154,6 +154,12 @@
         </div>
       </div>
     </div>
+    <!-- <div class="outercontent">
+      <div class="outer point-pre" myshow="hide">
+        <div class="inner"></div>
+      </div>
+    </div> -->
+
     <v-dialog v-if="showDialog" :dialog="dialogInfo" @closeDialog="closeDialog"></v-dialog>
 
   </div>
@@ -164,7 +170,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { category } from "~/lib/v1_sdk/index";
 import { message, matchSplits, open, parabola } from "~/lib/util/helper";
-import { initAniamtion } from "~/lib/util/animation";
+import { initAniamtion, init } from "~/lib/util/animation";
 
 import CardPlayer from "@/pages/course/components/CardPlayer";
 import Dialog from "@/components/common/Dialog.vue";
@@ -342,6 +348,7 @@ export default {
     }
   },
   mounted() {
+    // init();
     this.whichPage = matchSplits("page");
     this.$bus.$on("closeCover", data => {
       this.closeCover();
