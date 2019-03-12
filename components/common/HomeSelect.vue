@@ -35,11 +35,6 @@ export default {
           link: "/"
         },
         {
-          title: "关于我们",
-          id: "adoutUs",
-          link: "/other/pages/homeUs"
-        },
-        {
           title: "在线学院",
           id: "onlineCollege",
           link: "",
@@ -91,7 +86,12 @@ export default {
               link: ""
             }
           ]
-        }
+        },
+        {
+          title: "关于我们",
+          id: "adoutUs",
+          link: "/other/pages/homeUs"
+        },
       ],
       downloadAppURL: "",
       downloadAppURL_test:
