@@ -138,6 +138,9 @@
 					&.cancelOrder {
 						color: #6d687f;
 						cursor: pointer;
+						&:hover {
+							color: #773084;
+						}
 					}
 					&.payReady {
 						color: #aaa;

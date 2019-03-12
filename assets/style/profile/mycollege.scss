@@ -92,11 +92,14 @@
 						line-height: 30px;
 						color: #fff;
 						font-size: 14px;
-						background-color: #6417a6;
+						background-color: #773084;
 						border-radius: 4px;
 						cursor: pointer;
 						margin-left: 20px;
 						margin-top: 70px;
+						&:hover {
+							background-color: #5f068d;
+						}
 					}
 				}
 			}

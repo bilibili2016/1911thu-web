@@ -1,156 +1,157 @@
-    .ticketInfo {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      background-color: rgba(0, 0, 0, 0.7);
-      z-index: 300;
-      display: flex;
-      align-items: center;
+.ticketInfo {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 300;
+	display: flex;
+	align-items: center;
 
-      .invoiceInfo {
-        width: 740px;
-        height: auto;
-        background-color: #fff;
-        border-radius: 10px;
-        overflow-y: auto;
-        margin: 0 auto;
+	.invoiceInfo {
+		width: 740px;
+		height: auto;
+		background-color: #fff;
+		border-radius: 10px;
+		overflow-y: auto;
+		margin: 0 auto;
 
-        h3 {
-          height: 58px;
-          line-height: 58px;
-          padding: 0 30px 0 40px;
-          font-size: 16px;
-          color: #222;
-          border-bottom: 1px solid #e8d6f7;
+		h3 {
+			height: 58px;
+			line-height: 58px;
+			padding: 0 30px 0 40px;
+			font-size: 16px;
+			color: #222;
+			border-bottom: 1px solid #e8d6f7;
 
-          i {
-            color: #773084;
-            font-size: 20px;
-            margin-top: 19px;
-            font-weight: 700;
-          }
-        }
+			i {
+				color: #773084;
+				font-size: 20px;
+				margin-top: 19px;
+				font-weight: 700;
+			}
+		}
 
-        h5 {
-          margin: 30px auto 0;
-          height: 40px;
-          line-height: 40px;
-          width: 650px;
-          background-color: #eee;
-          color: #773084;
-          padding: 0 20px 0;
-        }
+		h5 {
+			margin: 30px auto 0;
+			height: 40px;
+			line-height: 40px;
+			width: 650px;
+			background-color: #eee;
+			color: #773084;
+			padding: 0 20px 0;
+		}
 
-        .header {
-          padding-left: 53px;
-          margin-top: 14px;
+		.header {
+			padding-left: 53px;
+			margin-top: 14px;
 
-          span {
-            padding: 8px 21px;
-            border: 1px solid #641766;
-            transition: all 300ms;
-            font-size: 14px;
-            color: #222;
-            margin-right: 30px;
-            cursor: pointer;
+			span {
+				padding: 8px 21px;
+				border: 1px solid #641766;
+				transition: all 300ms;
+				font-size: 14px;
+				color: #222;
+				margin-right: 30px;
+				cursor: pointer;
 
-            &.checked {
-              background-color: #773084;
-              border-color: #773084;
-              color: #fff;
-              position: relative;
+				&.checked {
+					background-color: #773084;
+					border-color: #773084;
+					color: #fff;
+					position: relative;
 
-              &:after {
-                content: '';
-                position: absolute;
-                right: -1px;
-                bottom: -1px;
-                width: 24px;
-                height: 24px;
-                background: url('http://static-image.1911edu.com/ok.png') no-repeat;
-                background-size: contain;
-              }
-            }
-          }
-        }
+					&:after {
+						content: '';
+						position: absolute;
+						right: -1px;
+						bottom: -1px;
+						width: 24px;
+						height: 24px;
+						background: url('http://static-image.1911edu.com/ok.png') no-repeat;
+						background-size: contain;
+					}
+				}
+			}
+		}
 
-        .oneForm {
-          padding: 20px 0 0;
-        }
+		.oneForm {
+			padding: 20px 0 0;
+		}
 
-        .psnForm {
-          .el-form-item:first-child {
-            margin-bottom: 5px;
-          }
-        }
+		.psnForm {
+			.el-form-item:first-child {
+				margin-bottom: 5px;
+			}
+		}
 
-        .el-form-item__content {
-          .el-input {
-            width: 300px;
-          }
-        }
+		.el-form-item__content {
+			.el-input {
+				width: 300px;
+			}
+		}
 
-        .el-form-item {
-          margin-bottom: 10px;
-        }
+		.el-form-item {
+			margin-bottom: 10px;
+		}
 
-        .ticketReception {
-          padding: 30px 0 0;
+		.ticketReception {
+			padding: 30px 0 0;
 
-          .province {
-            .el-select {
-              margin-right: 20px;
+			.province {
+				.el-select {
+					margin-right: 20px;
 
-              .el-input {
-                width: 160px;
-              }
-            }
+					.el-input {
+						width: 160px;
+					}
+				}
+			}
+		}
 
-          }
-        }
+		.operation {
+			text-align: center;
+			font-size: 14px;
 
-        .operation {
-          text-align: center;
-          font-size: 14px;
+			.el-button {
+				width: 150px;
+				height: 34px;
+				line-height: 34px;
+				padding: 0;
+				border: none;
+				background-color: #773084;
+				color: #fff;
+				cursor: pointer;
+				border-radius: 6px;
+				transition: all 300ms;
 
-          .el-button {
-            width: 150px;
-            height: 34px;
-            line-height: 34px;
-            padding: 0;
-            border: none;
-            background-color: #773084;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 300ms;
+				&:hover {
+					border: none;
+					background-color: #5f068d;
+				}
+				&:first-child {
+					background-color: #dddddd;
+					color: #666;
+					margin-right: 30px;
+					&:hover {
+						opacity: 0.8;
+					}
+				}
+			}
+		}
 
-            &:first-child {
+		.number {
+			position: relative;
 
-              background-color: #dddddd;
-              color: #666;
-              margin-right: 30px;
-            }
-
-            &:hover {
-              border: none;
-            }
-          }
-        }
-
-        .number {
-          position: relative;
-
-          .tip {
-            color: red;
-            position: absolute;
-            left: 315px;
-            top: 0;
-          }
-        }
-      }
-    }
+			.tip {
+				color: red;
+				position: absolute;
+				left: 315px;
+				top: 0;
+			}
+		}
+	}
+}
