@@ -6,9 +6,13 @@
 </template>
 
 <script>
-export default {
+import { setTitle } from "~/lib/util/helper";
 
-}
+export default {
+  mounted() {
+    setTitle("测评体系-1911学堂");
+  }
+};
 </script>
 
 <style scoped lang="scss">
