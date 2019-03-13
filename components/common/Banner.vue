@@ -111,13 +111,25 @@ export default {
       };
     },
     goVipInfo (vip) {
-      this.$router.push({
-        path: "/home/vip/vipPage",
-        query: {
-          id: vip.id,
-          cid: vip.category_id
-        }
-      });
+      console.log(vip);
+
+      if (vip.en_title == 'cadreCollege' || vip.en_title == 'commercialCollege') {
+        this.$router.push({
+          path: "/home/vip/vipPage",
+          query: {
+            id: vip.id,
+            cid: vip.category_id
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/home/vip/collegeInfo",
+          query: {
+            id: vip.id,
+            cid: vip.category_id
+          }
+        });
+      }
     },
     changeTime (timing) {
       this.time.hour = parseInt(timing / 3600);
