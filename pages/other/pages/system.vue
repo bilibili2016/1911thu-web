@@ -9,7 +9,7 @@
 import { setTitle } from '~/lib/util/helper'
 export default {
   mounted () {
-    setTitle('测评体系')
+    setTitle('测评体系-1911学堂')
   },
 }
 </script>

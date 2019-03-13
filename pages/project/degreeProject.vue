@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import { setTitle } from '~/lib/util/helper'
+import { setTitle } from "~/lib/util/helper";
 export default {
-  mounted () {
-    setTitle('学位项目')
-  },
-}
+  mounted() {
+    setTitle("学位项目-1911学堂");
+  }
+};
 </script>
 
 <style scoped lang="scss">
