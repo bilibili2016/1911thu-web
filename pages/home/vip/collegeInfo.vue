@@ -13,16 +13,16 @@
           <p class="desc">
             学员只需
             <span class="p-one">{{parseInt(vipInfo.present_price)}}元</span>
-            即可加入1911学堂{{vipInfo.title}}，学习价值{{999999999}}元的学院全部课程，
+            即可加入1911学堂{{vipInfo.title}}，学习价值{{2000}}元的学院全部课程，
             <span class="p-one">学籍有效期一年。</span>
           </p>
           <p class="price">
             <span>
-              <i class="p-two">{{999}}</i>门课程
+              <i class="p-two">{{20}}</i>门课程
             </span>
             <span>
               共计
-              <i class="p-two">{{999}}</i>学时
+              <i class="p-two">{{50}}</i>学时
             </span>
             <span>
               学费为
@@ -66,64 +66,64 @@ export default {
   components: {
     "v-vipbuy": VipBuy
   },
-  data () {
+  data() {
     return {
       flag: false,
-      vipInfo: '',
-      collegeImg: '',
+      vipInfo: "",
+      collegeImg: "",
       vipPopShow: false,
       bottom: true,
       loading: true,
       collegeArr: [
         {
-          title: 'chineseCollege',
+          title: "chineseCollege",
           url: [
-            'http://static-image.1911edu.com/college_Chinese1.jpg',
-            'http://static-image.1911edu.com/college_Chinese2.jpg',
-            'http://static-image.1911edu.com/college_Chinese3.jpg',
-            'http://static-image.1911edu.com/college_Chinese4.jpg',
+            "http://static-image.1911edu.com/college_Chinese1.jpg",
+            "http://static-image.1911edu.com/college_Chinese2.jpg",
+            "http://static-image.1911edu.com/college_Chinese3.jpg",
+            "http://static-image.1911edu.com/college_Chinese4.jpg"
           ]
         },
         {
-          title: 'healthCollege',
+          title: "healthCollege",
           url: [
-            'http://static-image.1911edu.com/college_health1.jpg',
-            'http://static-image.1911edu.com/college_health2.jpg',
-            'http://static-image.1911edu.com/college_health3.jpg',
-            'http://static-image.1911edu.com/college_health4.jpg',
+            "http://static-image.1911edu.com/college_health1.jpg",
+            "http://static-image.1911edu.com/college_health2.jpg",
+            "http://static-image.1911edu.com/college_health3.jpg",
+            "http://static-image.1911edu.com/college_health4.jpg"
           ]
         },
         {
-          title: 'sportsCollege',
+          title: "sportsCollege",
           url: [
-            'http://static-image.1911edu.com/college_sports1.jpg',
-            'http://static-image.1911edu.com/college_sports2.jpg',
-            'http://static-image.1911edu.com/college_sports3.jpg',
-            'http://static-image.1911edu.com/college_sports4.jpg',
+            "http://static-image.1911edu.com/college_sports1.jpg",
+            "http://static-image.1911edu.com/college_sports2.jpg",
+            "http://static-image.1911edu.com/college_sports3.jpg",
+            "http://static-image.1911edu.com/college_sports4.jpg"
           ]
         },
         {
-          title: 'smartCollege',
+          title: "smartCollege",
           url: [
-            'http://static-image.1911edu.com/college_smart1.jpg',
-            'http://static-image.1911edu.com/college_smart2.jpg',
-            'http://static-image.1911edu.com/college_smart3.jpg',
+            "http://static-image.1911edu.com/college_smart1.jpg",
+            "http://static-image.1911edu.com/college_smart2.jpg",
+            "http://static-image.1911edu.com/college_smart3.jpg"
           ]
         },
         {
-          title: 'eduCollege',
+          title: "eduCollege",
           url: [
-            'http://static-image.1911edu.com/college_edu1.jpg',
-            'http://static-image.1911edu.com/college_edu2.jpg',
-            'http://static-image.1911edu.com/college_edu3.jpg',
+            "http://static-image.1911edu.com/college_edu1.jpg",
+            "http://static-image.1911edu.com/college_edu2.jpg",
+            "http://static-image.1911edu.com/college_edu3.jpg"
           ]
         },
         {
-          title: 'newsCollege',
+          title: "newsCollege",
           url: [
-            'http://static-image.1911edu.com/college_news1.png',
-            'http://static-image.1911edu.com/college_news2.png',
-            'http://static-image.1911edu.com/college_news3.png',
+            "http://static-image.1911edu.com/college_news1.png",
+            "http://static-image.1911edu.com/college_news2.png",
+            "http://static-image.1911edu.com/college_news3.png"
           ]
         }
       ],
@@ -134,18 +134,18 @@ export default {
         gids: null
       },
       vipInfo: "",
-      width: '',
-      windowHeight: '',
-      paperHeight: '',
-      scrollTop: '',
-      arr: '',
-      noCollege: true,
-    }
+      width: "",
+      windowHeight: "",
+      paperHeight: "",
+      scrollTop: "",
+      arr: "",
+      noCollege: true
+    };
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
     //   查看课程
-    lookCourse () {
+    lookCourse() {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -158,7 +158,7 @@ export default {
       });
     },
     //立即购买
-    buyVip () {
+    buyVip() {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -166,11 +166,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow (val) {
+    changeVipShow(val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate () {
+    identificate() {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -180,54 +180,54 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    screeningImg (data) {
-      this.collegeArr.forEach((v) => {
+    screeningImg(data) {
+      this.collegeArr.forEach(v => {
         if (v.title == data.en_title) {
-          this.collegeImg = v.url
-          this.setWidth()
+          this.collegeImg = v.url;
+          this.setWidth();
         }
-      })
+      });
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
-          this.noCollege = true
+          this.noCollege = true;
           if (res.data.vipGoodsDetail.is_pay == 1) {
-            this.flag = true
+            this.flag = true;
           } else {
-            this.flag = false
+            this.flag = false;
           }
-          this.screeningImg(res.data.vipGoodsDetail)
+          this.screeningImg(res.data.vipGoodsDetail);
           setTitle(this.vipInfo.title + "-1911学堂");
         } else {
-          message(this, 'error', res.msg)
-          this.noCollege = false
+          message(this, "error", res.msg);
+          this.noCollege = false;
           this.$router.push("/");
         }
       });
     },
     // 设置图片宽度
-    setWidth () {
+    setWidth() {
       if (this.collegeImg.length == 0) {
-        this.noCollege = false
-        return false
+        this.noCollege = false;
+        return false;
       } else {
-        this.noCollege = true
+        this.noCollege = true;
       }
-      this.width = (1920 - document.documentElement.clientWidth) / 2
+      this.width = (1920 - document.documentElement.clientWidth) / 2;
       this.$nextTick(() => {
-        this.arr = document.getElementsByClassName('collegeImg')
+        this.arr = document.getElementsByClassName("collegeImg");
         for (let i = 0; i < this.arr.length; i++) {
-          this.arr[i].style.marginLeft = -this.width + 'px';
+          this.arr[i].style.marginLeft = -this.width + "px";
         }
-        this.loading = false
+        this.loading = false;
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-      })
+      });
     },
     // 底部操作栏动态
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -240,12 +240,12 @@ export default {
         this.bottom = false;
       }
     },
-    init () {
+    init() {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
     }
   },
-  mounted () {
+  mounted() {
     this.init();
     this.vipDetail();
     // 寛高设置
@@ -253,12 +253,12 @@ export default {
     //   this.relativeID = matchSplits("cid");
   },
   watch: {
-    $route (v, oldv) {
+    $route(v, oldv) {
       this.init();
       this.vipDetail();
-    },
-  },
-}
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
 @import "~assets/style/home/college";
