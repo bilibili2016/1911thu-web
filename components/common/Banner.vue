@@ -71,7 +71,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data () {
+  data() {
     return {
       time: {
         hour: null,
@@ -85,14 +85,14 @@ export default {
     };
   },
   watch: {
-    userInfo () {
+    userInfo() {
       // 已学习时长
       this.changeTime(this.userInfo.study_curriculum_time);
     }
   },
   methods: {
     ...mapActions("auth", ["signOut"]),
-    add_img (event) {
+    add_img(event) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -110,16 +110,29 @@ export default {
         });
       };
     },
-    goVipInfo (vip) {
-      this.$router.push({
-        path: "/home/vip/vipPage",
-        query: {
-          id: vip.id,
-          cid: vip.category_id
-        }
-      });
+    goVipInfo(vip) {
+      if (
+        vip.en_title == "cadreCollege" ||
+        vip.en_title == "commercialCollege"
+      ) {
+        this.$router.push({
+          path: "/home/vip/vipPage",
+          query: {
+            id: vip.id,
+            cid: vip.category_id
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/home/vip/collegeInfo",
+          query: {
+            id: vip.id,
+            cid: vip.category_id
+          }
+        });
+      }
     },
-    changeTime (timing) {
+    changeTime(timing) {
       this.time.hour = parseInt(timing / 3600);
       this.time.minutes = parseInt(
         (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
@@ -131,7 +144,7 @@ export default {
           parseInt(
             (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
           )) *
-        60
+          60
       );
     }
   }
