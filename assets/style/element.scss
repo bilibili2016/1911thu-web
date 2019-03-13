@@ -1056,6 +1056,10 @@ html {
 		height: 60px;
 		font-size: 16px;
 		line-height: 60px;
+		&:hover {
+			background-color: #773084;
+			color: #fff;
+		}
 	}
 
 	.el-card__header {
@@ -1091,6 +1095,7 @@ html {
 	.el-tabs__item.is-active {
 		background-color: #773084;
 		color: #fff;
+		opacity: 1;
 	}
 
 	.personalSet {
@@ -2134,13 +2139,4 @@ input::-webkit-credentials-auto-fill-button {
 			border-radius: 6px;
 		}
 	}
-}
-
-.u-flyer {
-	display: block;
-	width: 50px;
-	height: 50px;
-	border-radius: 50px;
-	position: fixed;
-	z-index: 9999;
 }

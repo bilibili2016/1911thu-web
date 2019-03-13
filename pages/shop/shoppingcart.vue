@@ -14,9 +14,9 @@
           <div class="maintable">
             <!-- 课程全选 checkbox-->
             <!-- 无课程不显示全选 -->
-            <div class="select-all-course" v-if="this.courseList.length> 0">
+            <!-- <div class="select-all-course" v-if="this.courseList.length> 0">
               <el-checkbox v-model="selectAllCourse" @change="handleSelectCourseAll">课程</el-checkbox>
-            </div>
+            </div> -->
             <!-- 课程列表 start -->
             <!-- <v-list :config="courseType" :data="courseList" v-if="!isNoMsg"></v-list> -->
             <div class="tableBody" v-if="!isNoMsg">
