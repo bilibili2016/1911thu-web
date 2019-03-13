@@ -1,44 +1,44 @@
 .center {
-  width: 1100px;
-  margin: 0 auto;
+	width: 1100px;
+	margin: 0 auto;
 }
 
 .shadow {
-  box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+	box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
 }
 .pagination {
-  padding: 50px 0;
+	padding: 50px 0;
 }
 .fc14-888 {
-  font-size: 14px;
-  color: rgba(136, 136, 136, 1);
+	font-size: 14px;
+	color: rgba(136, 136, 136, 1);
 }
 
 .fc16-222 {
-  font-size: 16px;
-  color: rgba(34, 34, 34, 1);
+	font-size: 16px;
+	color: rgba(34, 34, 34, 1);
 }
 
 .flh-30 {
-  line-height: 30px;
+	line-height: 30px;
 }
 
 .bg {
-  background: #f8f8fd;
-  width: 100%;
+	background: #f8f8fd;
+	width: 100%;
 }
 
 .bg-none {
-  width: 100%;
-  background: #fff;
+	width: 100%;
+	background: #fff;
 }
 
 .color-2 {
-  color: rgba(176, 174, 184, 1);
+	color: rgba(176, 174, 184, 1);
 }
 
 .color-3 {
-  color: rgba(109, 104, 127, 1);
+	color: rgba(109, 104, 127, 1);
 }
 
 // rgba(176, 174, 184, 1) #B0AEB8
@@ -50,3 +50,13 @@
 // rgba(200, 151, 242, 1) #C897F2
 // rgba(100, 23, 166, 1) #773084
 // 12px 14px 15px 16px 18px
+
+//购物车飞入效果
+.u-flyer {
+	display: block;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	position: fixed;
+	z-index: 9999;
+}
