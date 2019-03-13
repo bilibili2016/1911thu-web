@@ -169,8 +169,13 @@
 import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { category } from "~/lib/v1_sdk/index";
-import { message, matchSplits, open, parabola } from "~/lib/util/helper";
-import { fly } from "~/lib/util/fly";
+import {
+  message,
+  matchSplits,
+  open,
+  parabola,
+  flyAnimation
+} from "~/lib/util/helper";
 
 import CardPlayer from "@/pages/course/components/CardPlayer";
 import Dialog from "@/components/common/Dialog.vue";
@@ -284,7 +289,7 @@ export default {
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
           if (this.two_is_cart === 0) {
-            this.flyAnimation(event);
+            flyAnimation(event, item.picture);
             this.goodsNmber(item);
           } else {
             message(this, "success", "您的课程已经在购物车里面");
@@ -298,24 +303,7 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    flyAnimation(event) {
-      var offset = $("#cartNum").offset();
-      var img = $(".courseImg").attr("src");
-      var flyer = $('<img class="u-flyer" src="' + img + '">');
-      flyer.fly({
-        start: {
-          left: event.pageX,
-          top: event.pageY
-        },
-        end: {
-          left: offset.left + 10,
-          top: offset.top + 10,
-          width: 0,
-          height: 0
-        },
-        onEnd: function() {}
-      });
-    },
+
     closeCover() {
       this.isShowCover = false;
     },
