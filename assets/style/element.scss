@@ -1056,9 +1056,18 @@ html {
 		height: 60px;
 		font-size: 16px;
 		line-height: 60px;
+	}
+	.el-tabs__item.is-left {
 		&:hover {
 			background-color: #773084;
 			color: #fff;
+		}
+	}
+
+	.el-tabs__item.is-top {
+		&:hover {
+			color: #773084;
+			border-bottom: 2px solid #773084;
 		}
 	}
 
