@@ -6,8 +6,11 @@
 </template>
 
 <script>
+import { setTitle } from '~/lib/util/helper'
 export default {
-
+  mounted () {
+    setTitle('学位项目')
+  },
 }
 </script>
 
