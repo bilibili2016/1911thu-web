@@ -71,7 +71,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data () {
+  data() {
     return {
       time: {
         hour: null,
@@ -85,14 +85,14 @@ export default {
     };
   },
   watch: {
-    userInfo () {
+    userInfo() {
       // 已学习时长
       this.changeTime(this.userInfo.study_curriculum_time);
     }
   },
   methods: {
     ...mapActions("auth", ["signOut"]),
-    add_img (event) {
+    add_img(event) {
       // var that = this
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
@@ -110,10 +110,11 @@ export default {
         });
       };
     },
-    goVipInfo (vip) {
-      console.log(vip);
-
-      if (vip.en_title == 'cadreCollege' || vip.en_title == 'commercialCollege') {
+    goVipInfo(vip) {
+      if (
+        vip.en_title == "cadreCollege" ||
+        vip.en_title == "commercialCollege"
+      ) {
         this.$router.push({
           path: "/home/vip/vipPage",
           query: {
@@ -131,7 +132,7 @@ export default {
         });
       }
     },
-    changeTime (timing) {
+    changeTime(timing) {
       this.time.hour = parseInt(timing / 3600);
       this.time.minutes = parseInt(
         (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
@@ -143,7 +144,7 @@ export default {
           parseInt(
             (parseFloat(timing / 3600.0) - parseInt(timing / 3600.0)) * 60
           )) *
-        60
+          60
       );
     }
   }
