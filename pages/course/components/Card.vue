@@ -6,8 +6,8 @@
         <el-card class="fl" :body-style="{ padding: '0px' }">
           <div class="goodplay" v-if="isShowCover">
             <div class="img-con">
-              <img v-if="whichPage==='0'" :src="courseList.picture" class="image">
-              <img v-else :src="courseList.teacher_picture" class="image">
+              <img v-if="whichPage==='0'" :src="courseList.picture" class="image courseImg">
+              <img v-else :src="courseList.teacher_picture" class="image courseImg">
             </div>
             <!-- <div class="mask">1</div> -->
 
@@ -19,7 +19,7 @@
               </div>
             </div>
           </div>
-          <v-player @changePlayImg="changePlayImg" @gobuy="handleAddShopCart(courseList)" @refreshData="refreshData"></v-player>
+          <v-player @changePlayImg="changePlayImg" @gobuy="handleAddShopCart(courseList,$event)" @refreshData="refreshData"></v-player>
         </el-card>
         <div class="particularss fr">
           <div class="currentclum">
@@ -86,7 +86,7 @@
                   <!-- 免费课程学习到100后显示再次学习 -->
                   <!-- 项目课程 详情 不展示按钮 config.card_type !== 'project-->
                   <div class="fr">
-                    <el-button type="primary " plain @click="handleAddShopCart(courseList) ">加入购物车</el-button>
+                    <el-button type="primary " plain @click="handleAddShopCart(courseList,$event) ">加入购物车</el-button>
                     <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                     <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" v-if="Number(courseList.percent)===100" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                   </div>
@@ -132,18 +132,18 @@
                     <!-- 学习到100后显示再次学习，否则显示继续学习 -->
                     <div class="fr">
                       <div v-if="Number(courseList.percent)>=0&&Number(courseList.percent)<100">
-                        <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
+                        <el-button type="primary" plain @click="handleAddShopCart(courseList,$event)">加入购物车</el-button>
                         <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">继续学习</el-button>
                       </div>
                       <div v-if="Number(courseList.percent)===100">
-                        <el-button type="primary" plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
+                        <el-button type="primary" plain @click="handleAddShopCart(courseList,$event)">加入购物车</el-button>
                         <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary" plain @click="handleFreeNoneStudy(courseList)">再次学习</el-button>
                       </div>
                     </div>
                   </div>
                   <!-- 学习判断  未学习-->
                   <div v-if="courseList.is_study==0">
-                    <el-button type="primary " plain @click="handleAddShopCart(courseList)">加入购物车</el-button>
+                    <el-button type="primary " plain @click="handleAddShopCart(courseList,$event)">加入购物车</el-button>
                     <el-button class="leftBtn" :class="{'studentFree':courseList.is_vip}" type="primary " plain @click="handleFreeNoneStudy(courseList)">开始学习</el-button>
                   </div>
                 </div>
@@ -170,6 +170,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 import { category } from "~/lib/v1_sdk/index";
 import { message, matchSplits, open, parabola } from "~/lib/util/helper";
+import { fly } from "~/lib/util/fly";
 
 import CardPlayer from "@/pages/course/components/CardPlayer";
 import Dialog from "@/components/common/Dialog.vue";
@@ -283,6 +284,7 @@ export default {
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
           if (this.two_is_cart === 0) {
+            this.flyAnimation(event);
             this.goodsNmber(item);
           } else {
             message(this, "success", "您的课程已经在购物车里面");
@@ -295,6 +297,24 @@ export default {
         // 当用户未登录
         this.$bus.$emit("loginShow", true);
       }
+    },
+    flyAnimation(event) {
+      var offset = $("#cartNum").offset();
+      var img = $(".courseImg").attr("src");
+      var flyer = $('<img class="u-flyer" src="' + img + '">');
+      flyer.fly({
+        start: {
+          left: event.pageX,
+          top: event.pageY
+        },
+        end: {
+          left: offset.left + 10,
+          top: offset.top + 10,
+          width: 0,
+          height: 0
+        },
+        onEnd: function() {}
+      });
     },
     closeCover() {
       this.isShowCover = false;
