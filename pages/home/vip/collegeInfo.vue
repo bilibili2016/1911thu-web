@@ -232,7 +232,7 @@ export default {
       }
       // 手机端动态设置margin 手动缩放zoom比例
       if (browserRedirect()) {
-        this.width = (1920 - document.documentElement.clientWidth) / 2 * 0.85;
+        this.width = (1920 - document.documentElement.clientWidth) / 2 * 0.81;
       } else {
         this.width = (1920 - document.documentElement.clientWidth) / 2;
 
