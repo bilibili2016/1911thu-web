@@ -80,37 +80,14 @@ export default {
       } else {
         if (type == "5") {
           //vip
-          if (
-            item.en_title == "cadreCollege" ||
-            item.en_title == "commercialCollege"
-          ) {
-            this.$router.push({
-              path: "/home/vip/vipPage",
-              query: {
-                id: item.curriculum_id,
-                cid: item.category_id,
-                title: item.en_title
-              }
-            });
-          } else {
-            this.$router.push({
-              path: "/home/vip/collegeInfo",
-              query: {
-                id: item.curriculum_id,
-                cid: item.category_id,
-                title: item.en_title
-              }
-            });
-          }
-
-          // this.$router.push({
-          //   path: "/home/vip/vipPage",
-          //   query: {
-          //     id: item.curriculum_id,
-          //     cid: item.category_id,
-          //   title: item.en_title
-          //   }
-          // });
+          this.$router.push({
+            path: "/home/vip/collegeInfo",
+            query: {
+              id: item.curriculum_id,
+              cid: item.category_id,
+              title: item.en_title
+            }
+          });
           return false;
         }
         if (type === "2") {

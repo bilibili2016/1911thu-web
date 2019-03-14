@@ -24,8 +24,8 @@
         </div>
 
         <div class="next clearfix">
-          <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇&nbsp;&nbsp;&nbsp;&nbsp;{{beforeNews.title}}</span>
-          <span class="fr" v-if="afterNews" @click="getNewInfoDetail(afterNews.id)">下一篇&nbsp;&nbsp;&nbsp;&nbsp;{{afterNews.title}}</span>
+          <span class="fl" v-if="beforeNews" @click="nextPage(beforeNews.id)">上一篇&nbsp;&nbsp;&nbsp;&nbsp;{{beforeNews.title}}</span>
+          <span class="fr" v-if="afterNews" @click="nextPage(afterNews.id)">下一篇&nbsp;&nbsp;&nbsp;&nbsp;{{afterNews.title}}</span>
         </div>
       </div>
     </div>
@@ -87,6 +87,9 @@ export default {
     },
     requestNews(flag) {
       this.getNewInfoDetail(this.nid, flag);
+    },
+    nextPage(id) {
+      this.$router.push(`/home/news/${id}`);
     },
     // 获取资讯详情
     getNewInfoDetail(id, flag) {

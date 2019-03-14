@@ -67,28 +67,14 @@ export default {
       }
     },
     goVipDetail(vip) {
-      if (
-        vip.en_title == "cadreCollege" ||
-        vip.en_title == "commercialCollege"
-      ) {
-        this.$router.push({
-          path: "/home/vip/vipPage",
-          query: {
-            id: vip.vip_goodsid,
-            cid: vip.category_id,
-            title: vip.en_title
-          }
-        });
-      } else {
-        this.$router.push({
-          path: "/home/vip/collegeInfo",
-          query: {
-            id: vip.vip_goodsid,
-            cid: vip.category_id,
-            title: vip.en_title
-          }
-        });
-      }
+      this.$router.push({
+        path: "/home/vip/collegeInfo",
+        query: {
+          id: vip.vip_goodsid,
+          cid: vip.category_id,
+          title: vip.en_title
+        }
+      });
     }
   }
 };
