@@ -1,9 +1,9 @@
 <template>
   <div class="headerPage clearfix">
-    <div class="nav" :class="{active:changeActive==item.id}" v-for="(item,index) in navList" :key="index" @click="handleClick(item)">
+    <div class="nav" :class="{active:changeActive==item.id}" v-for="(item,index) in navList" :key="index" @click="handleClick(item)" @mouseenter="isShowSub">
       <div class="navInner">{{item.title}} <i v-if="item.childList" class="el-icon-arrow-down"></i></div>
-      <ul v-if="item.childList" class="subPages" :class="{college:item.id == 'onlineCollege'}" ref="subIndex">
-        <li :class="{scanCode:child.id=='download'}" v-for="(child,index) in item.childList" :key="'child'+index" @click="handleClick(item,child,index)">
+      <ul v-if="item.childList" class="subPages" :class="{college:item.id == 'onlineCollege',subHidden:isHidden}" ref="subIndex">
+        <li :class="{scanCode:child.id=='download'}" v-for="(child,index) in item.childList" :key="'child'+index" @click.stop="handleLiClick(item,child,index)">
           {{child.title}}
           <div class="downApp clearfix">
             <qrcode v-if="child.id=='download'" class="" :value="downloadAppURL" :options="{ size: 150 }"></qrcode>
@@ -26,6 +26,7 @@ export default {
   props: ["categoryArr", "projectArr"],
   data() {
     return {
+      isHidden: false,
       changeActive: "",
       pages: [],
       navList: [
@@ -101,6 +102,10 @@ export default {
   },
   methods: {
     handleClick(item, child, index) {
+      this.isHidden = false;
+      this.handleLiClick(item, child, index);
+    },
+    handleLiClick(item, child, index) {
       if (index != undefined) {
         document.getElementsByClassName("");
         let subLen = this.$refs.subIndex;
@@ -133,7 +138,12 @@ export default {
         this.$router.push(item.link);
       }
     },
+    isShowSub() {
+      this.isHidden = false;
+    },
     changeHeaderActive() {
+      this.isHidden = true;
+
       let pathName = window.location.pathname;
       //初始化名师智库默认选中学院分类
       if (
