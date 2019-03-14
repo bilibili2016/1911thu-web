@@ -113,26 +113,27 @@ export default {
       }
       //学院
       if (item.id == "onlineCollege") {
-        if (
-          child.en_title == "cadreCollege" ||
-          child.en_title == "commercialCollege"
-        ) {
-          this.$router.push({
-            path: "/home/vip/vipPage",
-            query: {
-              id: child.id,
-              cid: child.category_id
-            }
-          });
-        } else {
-          this.$router.push({
-            path: "/home/vip/collegeInfo",
-            query: {
-              id: child.id,
-              cid: child.category_id
-            }
-          });
-        }
+        // if (
+        //   child.en_title == "cadreCollege" ||
+        //   child.en_title == "commercialCollege"
+        // ) {
+        //   this.$router.push({
+        //     path: "/home/vip/vipPage",
+        //     query: {
+        //       id: child.id,
+        //       cid: child.category_id
+        //     }
+        //   });
+        // } else {
+        this.$router.push({
+          path: "/home/vip/collegeInfo",
+          query: {
+            id: child.id,
+            cid: child.category_id,
+            title: child.en_title
+          }
+        });
+        // }
       } else if (item.id == "service") {
         //服务支持
         if (child.id == "code") {
