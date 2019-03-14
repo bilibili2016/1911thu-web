@@ -119,7 +119,8 @@ export default {
           path: "/home/vip/vipPage",
           query: {
             id: vip.id,
-            cid: vip.category_id
+            cid: vip.category_id,
+            title: vip.en_title
           }
         });
       } else {
@@ -127,7 +128,8 @@ export default {
           path: "/home/vip/collegeInfo",
           query: {
             id: vip.id,
-            cid: vip.category_id
+            cid: vip.category_id,
+            title: vip.en_title
           }
         });
       }

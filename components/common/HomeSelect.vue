@@ -24,7 +24,7 @@ import { getNetwork } from "@/lib/util/helper";
 
 export default {
   props: ["categoryArr", "projectArr"],
-  data () {
+  data() {
     return {
       changeActive: "",
       pages: [],
@@ -91,7 +91,7 @@ export default {
           title: "关于我们",
           id: "adoutUs",
           link: "/other/pages/homeUs"
-        },
+        }
       ],
       downloadAppURL: "",
       downloadAppURL_test:
@@ -100,7 +100,7 @@ export default {
     };
   },
   methods: {
-    handleClick (item, child, index) {
+    handleClick(item, child, index) {
       if (index != undefined) {
         document.getElementsByClassName("");
         let subLen = this.$refs.subIndex;
@@ -121,7 +121,8 @@ export default {
             path: "/home/vip/vipPage",
             query: {
               id: child.id,
-              cid: child.category_id
+              cid: child.category_id,
+              title: child.en_title
             }
           });
         } else {
@@ -129,7 +130,8 @@ export default {
             path: "/home/vip/collegeInfo",
             query: {
               id: child.id,
-              cid: child.category_id
+              cid: child.category_id,
+              title: child.en_title
             }
           });
         }
@@ -145,7 +147,7 @@ export default {
         this.$router.push(item.link);
       }
     },
-    changeHeaderActive () {
+    changeHeaderActive() {
       let pathName = window.location.pathname;
       //初始化名师智库默认选中学院分类
       if (
@@ -216,7 +218,7 @@ export default {
       }
     },
     // 学院列表
-    vipGoodsList () {
+    vipGoodsList() {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           for (const key in this.navList) {
@@ -228,7 +230,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     this.vipGoodsList();
     this.changeHeaderActive();
     if (getNetwork()) {
