@@ -276,28 +276,14 @@ export default {
           if (JSON.stringify(res.data.vipGoodsDetail) != "{}") {
             //绑定学院兑换码跳转到学院介绍页
             let vipGoodsDetail = res.data.vipGoodsDetail;
-            if (
-              vipGoodsDetail.en_title == "cadreCollege" ||
-              vipGoodsDetail.en_title == "commercialCollege"
-            ) {
-              this.$router.push({
-                path: "/home/vip/vipPage",
-                query: {
-                  id: vipGoodsDetail.vip_id,
-                  cid: vipGoodsDetail.category_id,
-                  title: vipGoodsDetail.en_title
-                }
-              });
-            } else {
-              this.$router.push({
-                path: "/home/vip/collegeInfo",
-                query: {
-                  id: vipGoodsDetail.vip_id,
-                  cid: vipGoodsDetail.category_id,
-                  title: vipGoodsDetail.en_title
-                }
-              });
-            }
+            this.$router.push({
+              path: "/home/vip/collegeInfo",
+              query: {
+                id: vipGoodsDetail.vip_id,
+                cid: vipGoodsDetail.category_id,
+                title: vipGoodsDetail.en_title
+              }
+            });
 
             this.$message({
               showClose: true,

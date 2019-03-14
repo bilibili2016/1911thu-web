@@ -24,7 +24,7 @@ import { getNetwork } from "@/lib/util/helper";
 
 export default {
   props: ["categoryArr", "projectArr"],
-  data () {
+  data() {
     return {
       changeActive: "",
       pages: [],
@@ -100,7 +100,7 @@ export default {
     };
   },
   methods: {
-    handleClick (item, child, index) {
+    handleClick(item, child, index) {
       if (index != undefined) {
         document.getElementsByClassName("");
         let subLen = this.$refs.subIndex;
@@ -113,28 +113,14 @@ export default {
       }
       //学院
       if (item.id == "onlineCollege") {
-        if (
-          child.en_title == "cadreCollege" ||
-          child.en_title == "commercialCollege"
-        ) {
-          this.$router.push({
-            path: "/home/vip/vipPage",
-            query: {
-              id: child.id,
-              cid: child.category_id,
-              title: child.en_title
-            }
-          });
-        } else {
-          this.$router.push({
-            path: "/home/vip/collegeInfo",
-            query: {
-              id: child.id,
-              cid: child.category_id,
-              title: child.en_title
-            }
-          });
-        }
+        this.$router.push({
+          path: "/home/vip/collegeInfo",
+          query: {
+            id: child.id,
+            cid: child.category_id,
+            title: child.en_title
+          }
+        });
       } else if (item.id == "service") {
         //服务支持
         if (child.id == "code") {
@@ -147,7 +133,7 @@ export default {
         this.$router.push(item.link);
       }
     },
-    changeHeaderActive () {
+    changeHeaderActive() {
       let pathName = window.location.pathname;
       //初始化名师智库默认选中学院分类
       if (
@@ -168,7 +154,6 @@ export default {
           this.changeActive = "adoutUs";
           break;
         //在线学院
-        case "/home/vip/vipPage":
         case "/home/vip/collegeInfo":
           this.changeActive = "onlineCollege";
 
@@ -218,7 +203,7 @@ export default {
       }
     },
     // 学院列表
-    vipGoodsList () {
+    vipGoodsList() {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           for (const key in this.navList) {
@@ -230,7 +215,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     this.vipGoodsList();
     this.changeHeaderActive();
     if (getNetwork()) {

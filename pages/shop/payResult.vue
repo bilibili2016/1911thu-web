@@ -177,25 +177,14 @@ export default {
     },
     college() {
       let VD = this.vipGoodsDetail;
-      if (VD.en_title == "cadreCollege" || VD.en_title == "commercialCollege") {
-        this.$router.push({
-          path: "/home/vip/vipPage",
-          query: {
-            id: VD.vip_id,
-            cid: VD.category_id,
-            title: VD.en_title
-          }
-        });
-      } else {
-        this.$router.push({
-          path: "/home/vip/collegeInfo",
-          query: {
-            id: VD.vip_id,
-            cid: VD.category_id,
-            title: VD.en_title
-          }
-        });
-      }
+      this.$router.push({
+        path: "/home/vip/collegeInfo",
+        query: {
+          id: VD.vip_id,
+          cid: VD.category_id,
+          title: VD.en_title
+        }
+      });
     },
     study() {
       this.$router.push({

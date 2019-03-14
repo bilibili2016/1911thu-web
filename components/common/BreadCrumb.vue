@@ -4,7 +4,7 @@
     <span v-show="config.position">当前位置：</span>
     <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
       <el-breadcrumb-item v-if="config.home" :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item v-if="!config.home&&config.type=='courseDetail'" :to="{ path: `/home/vip/vipPage?id=${config.vipID}&cid=${config.categoryId}&title=${config.enTitle}` }">{{config.category}}</el-breadcrumb-item>
+      <el-breadcrumb-item v-if="!config.home&&config.type=='courseDetail'" :to="{ path: `/home/vip/collegeInfo?id=${config.vipID}&cid=${config.categoryId}&title=${config.enTitle}` }">{{config.category}}</el-breadcrumb-item>
       <!-- 跳转到项目详情 -->
       <el-breadcrumb-item :to="{ path: '/project/projectdetail?kid='+config.projectId+'&type=1' }" v-if="config.projectCourse && config.text!=='定制项目详情'">{{config.project}}</el-breadcrumb-item>
       <!-- 跳转到项目分类列表 -->
@@ -16,40 +16,7 @@
 
 <script>
 export default {
-  props: ["config"],
-  data() {
-    return {
-      pathUrl: ""
-    };
-  },
-  methods: {
-    path() {
-      if (
-        this.config.enTitle == "cadreCollege" ||
-        this.config.enTitle == "commercialCollege"
-      ) {
-        this.pathUrl =
-          "/home/vip/vipPage?id=" +
-          this.config.vipID +
-          "&cid=" +
-          this.config.categoryId +
-          "&title=" +
-          this.config.enTitle;
-        this.pathUrl = `/home/vip/vipPage?id=${this.config.vipID}&cid=${
-          this.config.categoryId
-        }&title=${this.config.enTitle}`;
-      } else {
-        this.pathUrl = `/home/vip/collegeInfo?id=${this.config.vipID}&cid=${
-          this.config.categoryId
-        }&title=${this.config.enTitle}`;
-      }
-    }
-  },
-  mounted() {
-    if (this.config.type == "courseDetail") {
-      this.path();
-    }
-  }
+  props: ["config"]
 };
 </script>
 

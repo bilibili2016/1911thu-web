@@ -398,28 +398,14 @@ export default {
     //加入学院
     joinCollege() {
       let vip = this.vipGoodsDetail;
-      if (
-        vip.en_title == "cadreCollege" ||
-        vip.en_title == "commercialCollege"
-      ) {
-        this.$router.push({
-          path: "/home/vip/vipPage",
-          query: {
-            id: vip.id,
-            cid: vip.category_id,
-            title: vip.en_title
-          }
-        });
-      } else {
-        this.$router.push({
-          path: "/home/vip/collegeInfo",
-          query: {
-            id: vip.id,
-            cid: vip.category_id,
-            title: vip.en_title
-          }
-        });
-      }
+      this.$router.push({
+        path: "/home/vip/collegeInfo",
+        query: {
+          id: vip.id,
+          cid: vip.category_id,
+          title: vip.en_title
+        }
+      });
     },
     //关闭购买弹窗
     changeVipShow(val) {
