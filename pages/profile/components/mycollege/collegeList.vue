@@ -1,18 +1,8 @@
 <template>
   <div class="collegeLists">
-    <div
-      class="item clearfix"
-      v-for="(item,index) in collegeListData"
-      :key="index"
-    >
-      <div
-        class="item_left"
-        @click="goVipDetail(item)"
-      >
-        <img
-          :src="item.picture"
-          alt=""
-        >
+    <div class="item clearfix" v-for="(item,index) in collegeListData" :key="index">
+      <div class="item_left" @click="goVipDetail(item)">
+        <img :src="item.picture" alt="">
         <div class="collegeInfo">
           <p class="title">{{item.title}}</p>
           <p>
@@ -23,10 +13,7 @@
       </div>
       <div class="item_right">
         <div>
-          <span
-            class="btn"
-            @click="goCourseList(item)"
-          >去学习</span>
+          <span class="btn" @click="goCourseList(item)">去学习</span>
         </div>
       </div>
     </div>
@@ -50,9 +37,28 @@ export default {
   },
   methods: {
     goVipDetail(item) {
-      this.$router.push(
-        "/home/vip/vipPage?id=" + item.id + "&cid=" + item.category_id
-      );
+      if (
+        item.en_title == "cadreCollege" ||
+        item.en_title == "commercialCollege"
+      ) {
+        this.$router.push({
+          path: "/home/vip/vipPage",
+          query: {
+            id: item.id,
+            cid: item.category_id,
+            title: item.en_title
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/home/vip/collegeInfo",
+          query: {
+            id: item.id,
+            cid: item.category_id,
+            title: item.en_title
+          }
+        });
+      }
     },
     goCourseList(item) {
       this.$router.push(

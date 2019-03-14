@@ -23,11 +23,7 @@
         <div class="courseList">查看
           <div class="course">
             <span></span>
-            <p
-              v-for="(course,index) in code.orderCurriculumList"
-              :key="index"
-              @click="handleLink(course,code.type)"
-            >
+            <p v-for="(course,index) in code.orderCurriculumList" :key="index" @click="handleLink(course,code.type)">
               <i v-if="code.type==='2'">项目</i>
               <i v-if="code.type==='4'">自定制项目</i>
               {{course.title}}
@@ -35,27 +31,23 @@
           </div>
         </div>
       </div>
-      <v-nomsg
-        v-if="!invitationCodeList||invitationCodeList.length<1"
-        class="noCodes"
-        :config="noMsg"
-      ></v-nomsg>
+      <v-nomsg v-if="!invitationCodeList||invitationCodeList.length<1" class="noCodes" :config="noMsg"></v-nomsg>
     </div>
   </div>
 </template>
 
 <script>
-import { binding } from "~/lib/v1_sdk/index"
-import { timestampToYMD, open } from "@/lib/util/helper"
-import { mapState, mapGetters, mapActions } from "vuex"
-import { store as persistStore } from "~/lib/core/store"
-import NoMsg from "@/pages/profile/components/common/noMsg.vue"
+import { binding } from "~/lib/v1_sdk/index";
+import { timestampToYMD, open } from "@/lib/util/helper";
+import { mapState, mapGetters, mapActions } from "vuex";
+import { store as persistStore } from "~/lib/core/store";
+import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 export default {
   props: ["invitationCodeList"],
   components: {
     "v-nomsg": NoMsg
   },
-  data () {
+  data() {
     return {
       noMsgImg: "http://static-image.1911edu.com/noMsg.png",
       bindForm: {
@@ -80,21 +72,45 @@ export default {
   },
   methods: {
     // 跳转课程或项目详情
-    handleLink (item, type) {
+    handleLink(item, type) {
       if (item.type === "1") {
         //课程
-        this.courseUrl.kid = item.curriculum_id
-        open(this.courseUrl)
+        this.courseUrl.kid = item.curriculum_id;
+        open(this.courseUrl);
       } else {
         if (type == "5") {
           //vip
-          this.$router.push({
-            path: "/home/vip/vipPage",
-            query: {
-              id: item.curriculum_id,
-              cid: item.category_id
-            }
-          });
+          if (
+            item.en_title == "cadreCollege" ||
+            item.en_title == "commercialCollege"
+          ) {
+            this.$router.push({
+              path: "/home/vip/vipPage",
+              query: {
+                id: item.curriculum_id,
+                cid: item.category_id,
+                title: item.en_title
+              }
+            });
+          } else {
+            this.$router.push({
+              path: "/home/vip/collegeInfo",
+              query: {
+                id: item.curriculum_id,
+                cid: item.category_id,
+                title: item.en_title
+              }
+            });
+          }
+
+          // this.$router.push({
+          //   path: "/home/vip/vipPage",
+          //   query: {
+          //     id: item.curriculum_id,
+          //     cid: item.category_id,
+          //   title: item.en_title
+          //   }
+          // });
           return false;
         }
         if (type === "2") {
@@ -113,11 +129,11 @@ export default {
       }
     },
     // 时间戳转日期格式
-    exchangeTime (time) {
+    exchangeTime(time) {
       return timestampToYMD(time);
     },
     // 检测兑换码内是否包含已绑定的课程
-    detection () {
+    detection() {
       if (
         this.bindForm.courseId == "" ||
         !/^[A-Za-z0-9]+$/.test(this.bindForm.courseId)
@@ -163,7 +179,7 @@ export default {
       }
     },
     // 添加课程 绑定
-    doSubmit () {
+    doSubmit() {
       binding.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({
@@ -188,7 +204,7 @@ export default {
       });
     }
   },
-  mounted () { }
+  mounted() {}
 };
 </script>
 

@@ -1,37 +1,18 @@
 <template>
   <div>
-    <div
-      class="payResult"
-      v-if="collegePay"
-      v-loading="load"
-    >
-      <img
-        v-if="success"
-        src="http://static-image.1911edu.com/success.png"
-        alt
-      >
-      <img
-        v-else
-        src="http://static-image.1911edu.com/error.png"
-        alt
-      >
+    <div class="payResult" v-if="collegePay" v-loading="load">
+      <img v-if="success" src="http://static-image.1911edu.com/success.png" alt>
+      <img v-else src="http://static-image.1911edu.com/error.png" alt>
       <h4 v-if="success">支付成功！</h4>
       <h4 v-else>支付失败！</h4>
-      <div
-        class="restltMsg"
-        v-if="success"
-      >
+      <div class="restltMsg" v-if="success">
         <p>
           <span>订单：{{payCompleteData.order_sn}}</span>
           <span>|</span>
           <span>支付金额：￥{{payCompleteData.order_amount}}</span>
         </p>
       </div>
-      <div
-        class="restltWord"
-        v-if="!hasCode"
-        v-show="showMsg"
-      >
+      <div class="restltWord" v-if="!hasCode" v-show="showMsg">
         <h5>
           <!-- <span @click="handleChoiceCourse">继续选课</span> -->
           <span @click="handleLinkProfile('tab-fourth')">查看订单</span>
@@ -42,11 +23,7 @@
           </span>前往个人中心
         </div>
       </div>
-      <div
-        class="restltWord"
-        v-if="hasCode"
-        v-show="showMsg"
-      >
+      <div class="restltWord" v-if="hasCode" v-show="showMsg">
         <div class="tips">
           <p class="tips-one">您的兑换码已经生成</p>
           <p>
@@ -59,15 +36,8 @@
         </p>
       </div>
     </div>
-    <div
-      class="collegePay"
-      v-if="showCollegeResult"
-      v-loading="load"
-    >
-      <img
-        src="http://static-image.1911edu.com/collegePay.png"
-        alt
-      >
+    <div class="collegePay" v-if="showCollegeResult" v-loading="load">
+      <img src="http://static-image.1911edu.com/collegePay.png" alt>
       <p>欢迎您加入{{collegeText}}，成为1911学堂学员，</p>
       <p>您将在1911学堂开启为期一年的学习之旅，开始学习吧！</p>
       <div>
@@ -162,11 +132,12 @@ export default {
             this.showCollegeResult = true;
             this.vipGoodsDetail = response.data.vipGoodsDetail;
 
-            if (this.vipGoodsDetail.vip_id == 2) {
-              this.collegeText = "在线干部学院";
-            } else {
-              this.collegeText = "在线商学院";
-            }
+            this.collegeText = this.vipGoodsDetail.title;
+            // if (this.vipGoodsDetail.en_title == 2) {
+
+            // } else {
+            //   this.collegeText = "在线商学院";
+            // }
 
             return false;
           } else {
@@ -205,13 +176,26 @@ export default {
       this.$bus.$emit("selectProfileIndex", item);
     },
     college() {
-      this.$router.push({
-        path: "/home/vip/vipPage",
-        query: {
-          id: this.vipGoodsDetail.vip_id,
-          cid: this.vipGoodsDetail.category_id
-        }
-      });
+      let VD = this.vipGoodsDetail;
+      if (VD.en_title == "cadreCollege" || VD.en_title == "commercialCollege") {
+        this.$router.push({
+          path: "/home/vip/vipPage",
+          query: {
+            id: VD.vip_id,
+            cid: VD.category_id,
+            title: VD.en_title
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/home/vip/collegeInfo",
+          query: {
+            id: VD.vip_id,
+            cid: VD.category_id,
+            title: VD.en_title
+          }
+        });
+      }
     },
     study() {
       this.$router.push({

@@ -119,7 +119,7 @@ export default {
     "v-myexamine": myExamine,
     "v-mycollege": myCollege
   },
-  data () {
+  data() {
     return {
       orderType: {
         type: "order",
@@ -307,8 +307,8 @@ export default {
       },
       collegePagemsg: {
         page: 1,
-        pagesize: 5,
-        total: 5
+        pagesize: 10,
+        total: 10
       },
       studyProjectData: [],
       readyProjectData: [],
@@ -458,7 +458,7 @@ export default {
       },
       collegeListForm: {
         page: 1,
-        limit: 5
+        limit: 10
       },
       examineListData: [],
       collegeListData: [],
@@ -468,7 +468,7 @@ export default {
       userInfo: {
         head_img: "http://static-image.1911edu.com/defaultHeadImg.jpg"
       },
-      getHistory: true,
+      getHistory: true
     };
   },
   computed: {
@@ -483,11 +483,11 @@ export default {
      * @param pagenum 页码
      */
     // 我的消息空页面展示
-    isNoMyMsg (isShow) {
+    isNoMyMsg(isShow) {
       this.noMyMsg = isShow;
     },
     // 切换tab时保存tab的name 刷新就还是在这个tab
-    handleClick (item) {
+    handleClick(item) {
       if (persistStore.get("token")) {
         switch (item.name) {
           case "tab-first": //最近学习
@@ -550,7 +550,7 @@ export default {
       }
     },
     // 我的课程 commonmethods
-    handleMyCourseChange (status, pagenum) {
+    handleMyCourseChange(status, pagenum) {
       this.styleForm.types = status;
       this.styleForm.categoryId = 0;
       this.styleForm.pages = pagenum;
@@ -588,7 +588,7 @@ export default {
       });
     },
     // 我的课程-收藏
-    collectionPageChange (val) {
+    collectionPageChange(val) {
       this.pagecltcourse.page = val;
       this.collectionForm.pages = val;
       this.collectionForm.categoryId = 0;
@@ -605,13 +605,13 @@ export default {
       });
     },
     // 我的课程 首页 数据初始化
-    handleInitMyCourseData () {
+    handleInitMyCourseData() {
       this.myCourseDataArr.map(item => {
         this.handleMyCourseChange(item, 1);
       });
     },
     // 我的项目 commonmethods
-    handleMyProjectChange (status, pagenum) {
+    handleMyProjectChange(status, pagenum) {
       this.projectForm.types = status;
       this.projectForm.pages = pagenum;
       this.projectForm.limits = 12;
@@ -637,7 +637,7 @@ export default {
       });
     },
     // 我的项目-收藏
-    collectProjectPageChange (val) {
+    collectProjectPageChange(val) {
       this.projectPageReady.page = val;
       this.projectForm.pages = val;
       this.projectForm.types = 2;
@@ -655,13 +655,13 @@ export default {
       });
     },
     // 我的项目数据 页面初始化
-    handleInitMyProjectData () {
+    handleInitMyProjectData() {
       this.myProjectDataArr.map(item => {
         this.handleMyProjectChange(item, 1);
       });
     },
     // 我的订单 commonMethods
-    handleMyOrderChange (status, pagenum, flag) {
+    handleMyOrderChange(status, pagenum, flag) {
       if (flag) {
         //切换标签时默认清空搜索条件
         this.orderForm.startTime = "";
@@ -700,7 +700,7 @@ export default {
       });
     },
     // 我的订单数据 页面初始化
-    handleInitMyOrderData (type) {
+    handleInitMyOrderData(type) {
       if (type == true) {
         this.myOrderDataArr.map(item => {
           this.handleMyOrderChange(item, 1);
@@ -708,7 +708,7 @@ export default {
       }
     },
     // 我的发票 未开发票 分页切换
-    unTicketDataChange (val) {
+    unTicketDataChange(val) {
       this.allTicket = true;
       this.pagemsg8.page = val;
       this.orderNotInvoiceForm.pages = val;
@@ -728,31 +728,31 @@ export default {
       });
     },
     // 我的发票 开票历史 分页切换
-    historyOrderDataChange (val) {
+    historyOrderDataChange(val) {
       this.unfinishedOrderLoad = true;
       this.pagemsg9.page = val;
       this.tickethistoryForm.pages = val;
       if (this.getHistory) {
-        this.getHistory = false
+        this.getHistory = false;
         profileHome.tickethistory(this.tickethistoryForm).then(response => {
           if (response.status === 100008) {
             this.responseData.res = response;
             this.$router.push("/");
-            this.getHistory = true
+            this.getHistory = true;
             return false;
           } else if (response.status === 0) {
             this.historyOrderData = response.data.invoiceList;
             IEPopup("pane-tab-eighth", "relative", 1);
-            this.getHistory = true
+            this.getHistory = true;
             this.unfinishedOrderLoad = false;
           } else {
-            this.getHistory = true
+            this.getHistory = true;
           }
         });
       }
     },
     // 我的发票 tab切换 更新数据
-    handleTicketTabChange (item) {
+    handleTicketTabChange(item) {
       if (item === "1") {
         // 按订单开发票
         this.$bus.$emit("CloseAllChecked"); // 消除上次默认选中
@@ -763,12 +763,12 @@ export default {
       }
     },
     // 兑换码 搜索 兑换码列表
-    searchCodeList (data) {
+    searchCodeList(data) {
       this.codeListForm.ordersn = data;
       this.getCodeList();
     },
     // 兑换码 获取 兑换码列表
-    getCodeList () {
+    getCodeList() {
       this.allCode = true;
       profileHome.getCodeList(this.codeListForm).then(response => {
         if (response.status === 100008) {
@@ -783,12 +783,12 @@ export default {
       });
     },
     // 兑换码 兑换详情页的搜索
-    recordList (data) {
+    recordList(data) {
       this.getCodeListForm.code = data;
       this.getRecordList();
     },
     // 兑换码 管理子类切换
-    handleCourseCode (item) {
+    handleCourseCode(item) {
       if (item.name === "first") {
         this.getCodeList();
       }
@@ -800,7 +800,7 @@ export default {
       }
     },
     // 邀请记录--兑换详情
-    getRecordList () {
+    getRecordList() {
       profileHome.getRecordList(this.getCodeListForm).then(response => {
         if (response.status === 100008) {
           this.responseData.res = response;
@@ -813,7 +813,7 @@ export default {
       });
     },
     // 兑换码 获取已经添加的兑换码
-    getUsedInvitationCodeList () {
+    getUsedInvitationCodeList() {
       profileHome.getUsedInvitationCodeList().then(response => {
         if (response.status === 100008) {
           this.responseData.res = response;
@@ -825,7 +825,7 @@ export default {
       });
     },
     //获取发票详情
-    goTicketDetail (msg) {
+    goTicketDetail(msg) {
       this.orderForm.ids = persistStore.get("order");
       profileHome.curriculumPayApply(this.orderForm).then(response => {
         if (response.status === 0) {
@@ -843,11 +843,11 @@ export default {
       });
     },
     //发票详情-返回发票列表页
-    goTicketBack (val) {
+    goTicketBack(val) {
       this.showTicketList = true;
     },
     // 订单详情
-    curriculumPayApply (data) {
+    curriculumPayApply(data) {
       this.orderForm.ids = persistStore.get("order");
       this.detailMsg = true;
       profileHome.curriculumPayApply(this.orderForm).then(response => {
@@ -877,7 +877,7 @@ export default {
       });
     },
     //自定制项目
-    customerProjectList () {
+    customerProjectList() {
       this.customer = true;
       profileHome
         .customerProjectList(this.customerProjectForm)
@@ -894,7 +894,7 @@ export default {
         });
     },
     //自定制项目 分页
-    customerProjectChange (val) {
+    customerProjectChange(val) {
       this.customerPagemsg.page = val;
       this.customerProjectForm.pages = val;
       profileHome
@@ -910,7 +910,7 @@ export default {
         });
     },
     //删除自定制项目
-    deleteCustomerProject (id) {
+    deleteCustomerProject(id) {
       profileHome.deleteCustomerProject({ id }).then(response => {
         if (response.status == 0) {
           message(this, "success", "删除成功");
@@ -925,7 +925,7 @@ export default {
       });
     },
     // 初始化 bus 事件
-    initBusEvent () {
+    initBusEvent() {
       this.$bus.$on("selectProfileIndex", data => {
         this.activeTab = data;
       });
@@ -965,7 +965,7 @@ export default {
     },
 
     // 考试认证列表
-    examList () {
+    examList() {
       this.examineLoading = true;
       examine.examList(this.examineListForm).then(response => {
         if (response.status === 100008) {
@@ -980,14 +980,14 @@ export default {
       });
     },
     // 考试认证列表-分页
-    examineListChange (val) {
+    examineListChange(val) {
       this.examineLoading = true;
       this.examinePagemsg.page = val;
       this.examineListForm.page = val;
       this.examList();
     },
     // 我的学院列表
-    collegeList () {
+    collegeList() {
       this.collegeLoading = true;
       college.collegeList(this.collegeListForm).then(response => {
         if (response.status === 100008) {
@@ -1002,13 +1002,13 @@ export default {
       });
     },
     // 考试认证列表-分页
-    collegeListChange (val) {
+    collegeListChange(val) {
       this.collegeLoading = true;
       this.collegePagemsg.page = val;
       this.collegeListForm.page = val;
       this.collegeList();
     },
-    getUserInfo () {
+    getUserInfo() {
       banner.getUserInfo().then(res => {
         if (res.status === 0) {
           this.userInfo = res.data.userInfo;
@@ -1019,7 +1019,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     setTitle("个人中心-1911学堂");
     if (persistStore.get("token")) {
       this.getUserInfo();
@@ -1060,7 +1060,7 @@ export default {
       this.handleClick(data);
     });
   },
-  beforeDestroy () {
+  beforeDestroy() {
     this.$bus.$off("goOrderDetail");
     this.$bus.$off("searchDatas");
   }
