@@ -28,14 +28,14 @@ import { matchSplits, setTitle, message } from "@/lib/util/helper";
 import { mapState, mapActions, mapGetters } from "vuex";
 import VipBuy from "@/components/common/VipBuy.vue";
 
-import College from '@/pages/home/vip/components/College'
-import ChineseCollege from '@/pages/home/vip/components/ChineseCollege'
-import HealthCollege from '@/pages/home/vip/components/HealthCollege'
-import SportsCollege from '@/pages/home/vip/components/SportsCollege'
-import SmartCollege from '@/pages/home/vip/components/SmartCollege'
-import EduCollege from '@/pages/home/vip/components/EduCollege'
-import NewsCollege from '@/pages/home/vip/components/NewsCollege'
-import Info from '@/pages/home/vip/components/Info'
+import College from "@/pages/home/vip/components/College";
+import ChineseCollege from "@/pages/home/vip/components/ChineseCollege";
+import HealthCollege from "@/pages/home/vip/components/HealthCollege";
+import SportsCollege from "@/pages/home/vip/components/SportsCollege";
+import SmartCollege from "@/pages/home/vip/components/SmartCollege";
+import EduCollege from "@/pages/home/vip/components/EduCollege";
+import NewsCollege from "@/pages/home/vip/components/NewsCollege";
+import Info from "@/pages/home/vip/components/Info";
 export default {
   components: {
     "v-college": College,
@@ -48,11 +48,11 @@ export default {
     "v-info": Info,
     "v-vipbuy": VipBuy
   },
-  data () {
+  data() {
     return {
       flag: false,
       vipInfo: "",
-      collegeImg: ['', ''],
+      collegeImg: ["", ""],
       vipPopShow: false,
       bottom: true,
       loading: true,
@@ -72,7 +72,8 @@ export default {
             "http://static-image.1911edu.com/college_health1.jpg",
             "http://static-image.1911edu.com/college_health2.jpg",
             "http://static-image.1911edu.com/college_health3.jpg",
-            "http://static-image.1911edu.com/college_health4.jpg"
+            "http://static-image.1911edu.com/college_health4.jpg",
+            "http://static-image.1911edu.com/college_health5.jpg"
           ]
         },
         {
@@ -89,7 +90,8 @@ export default {
           url: [
             "http://static-image.1911edu.com/college_smart1.jpg",
             "http://static-image.1911edu.com/college_smart2.jpg",
-            "http://static-image.1911edu.com/college_smart3.jpg"
+            "http://static-image.1911edu.com/college_smart3.jpg",
+            "http://static-image.1911edu.com/college_smart4.jpg"
           ]
         },
         {
@@ -97,15 +99,17 @@ export default {
           url: [
             "http://static-image.1911edu.com/college_edu1.jpg",
             "http://static-image.1911edu.com/college_edu2.jpg",
-            "http://static-image.1911edu.com/college_edu3.jpg"
+            "http://static-image.1911edu.com/college_edu3.jpg",
+            "http://static-image.1911edu.com/college_edu4.jpg"
           ]
         },
         {
           title: "newsCollege",
           url: [
-            "http://static-image.1911edu.com/college_news1.png",
-            "http://static-image.1911edu.com/college_news2.png",
-            "http://static-image.1911edu.com/college_news3.png"
+            "http://static-image.1911edu.com/college_news1.jpg",
+            "http://static-image.1911edu.com/college_news2.jpg",
+            "http://static-image.1911edu.com/college_news3.jpg",
+            "http://static-image.1911edu.com/college_news4.jpg"
           ]
         }
       ],
@@ -122,13 +126,13 @@ export default {
       scrollTop: "",
       arr: "",
       noCollege: true,
-      title: '',
+      title: ""
     };
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
     //   查看课程
-    lookCourse () {
+    lookCourse() {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -141,7 +145,7 @@ export default {
       });
     },
     //立即购买
-    buyVip () {
+    buyVip() {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -149,11 +153,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow (val) {
+    changeVipShow(val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate () {
+    identificate() {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -163,7 +167,7 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    screeningImg (data) {
+    screeningImg(data) {
       this.collegeArr.forEach(v => {
         if (v.title == data.en_title) {
           this.collegeImg = v.url;
@@ -172,7 +176,7 @@ export default {
       });
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
@@ -183,8 +187,11 @@ export default {
           } else {
             this.flag = false;
           }
-          if (res.data.vipGoodsDetail.en_title == 'cadreCollege' || res.data.vipGoodsDetail.en_title == 'commercialCollege') {
-            this.loading = false
+          if (
+            res.data.vipGoodsDetail.en_title == "cadreCollege" ||
+            res.data.vipGoodsDetail.en_title == "commercialCollege"
+          ) {
+            this.loading = false;
           } else {
             this.screeningImg(res.data.vipGoodsDetail);
           }
@@ -197,7 +204,7 @@ export default {
       });
     },
     // 设置图片宽度
-    setWidth () {
+    setWidth() {
       if (this.collegeImg.length == 0) {
         this.noCollege = false;
         return false;
@@ -215,7 +222,7 @@ export default {
       this.loading = false;
     },
     // 底部操作栏动态
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -228,27 +235,26 @@ export default {
         this.bottom = false;
       }
     },
-    init () {
+    init() {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
       this.title = matchSplits("title");
     }
   },
-  mounted () {
-    this.loading = true,
-      this.init();
+  mounted() {
+    (this.loading = true), this.init();
     this.vipDetail();
     // 寛高设置
     window.addEventListener("scroll", this.addClass);
     //   this.relativeID = matchSplits("cid");
   },
   watch: {
-    $route (v, oldv) {
+    $route(v, oldv) {
       this.init();
       this.vipDetail();
     },
-    title () {
-      this.setWidth()
+    title() {
+      this.setWidth();
     }
   }
 };
