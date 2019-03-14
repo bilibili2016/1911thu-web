@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="collegeInfo" v-if="noCollege" v-loading="loading">
-      <v-college v-if="title=='cadreCollege'||title=='commercialCollege'" :vipInfo="vipInfo"></v-college>
+      <!-- <v-college v-if="title=='cadreCollege'||title=='commercialCollege'" :vipInfo="vipInfo"></v-college> -->
       <v-chineseCollege v-if="title=='chineseCollege'" :data="collegeImg"></v-chineseCollege>
       <v-healthCollege v-if="title=='healthCollege'" :data="collegeImg"></v-healthCollege>
       <v-sportsCollege v-if="title=='sportsCollege'" :data="collegeImg"></v-sportsCollege>
       <v-smartCollege v-if="title=='smartCollege'" :data="collegeImg"></v-smartCollege>
       <v-eduCollege v-if="title=='eduCollege'" :data="collegeImg"></v-eduCollege>
       <v-newsCollege v-if="title=='newsCollege'" :data="collegeImg"></v-newsCollege>
+      <v-businessCollege v-if="title=='commercialCollege'" :data="collegeImg"></v-businessCollege>
+      <v-leaderCollege v-if="title=='cadreCollege'" :data="collegeImg"></v-leaderCollege>
       <!-- 底部学院学费信息 -->
       <v-info v-if="flag" :vipInfo="vipInfo" @lookCourse="lookCourse" @buyVip="buyVip" @identificate="identificate"></v-info>
       <!-- 会员购买弹窗 -->
@@ -35,6 +37,9 @@ import SportsCollege from "@/pages/home/vip/components/SportsCollege";
 import SmartCollege from "@/pages/home/vip/components/SmartCollege";
 import EduCollege from "@/pages/home/vip/components/EduCollege";
 import NewsCollege from "@/pages/home/vip/components/NewsCollege";
+import BusinessCollege from "@/pages/home/vip/components/CommercialCollege";
+import LeaderCollege from "@/pages/home/vip/components/CadreCollege";
+
 import Info from "@/pages/home/vip/components/Info";
 export default {
   components: {
@@ -45,6 +50,8 @@ export default {
     "v-smartCollege": SmartCollege,
     "v-eduCollege": EduCollege,
     "v-newsCollege": NewsCollege,
+    "v-businessCollege": BusinessCollege,
+    "v-leaderCollege": LeaderCollege,
     "v-info": Info,
     "v-vipbuy": VipBuy
   },
@@ -110,6 +117,24 @@ export default {
             "http://static-image.1911edu.com/college_news2.jpg",
             "http://static-image.1911edu.com/college_news3.jpg",
             "http://static-image.1911edu.com/college_news4.jpg"
+          ]
+        },
+        {
+          title: "commercialCollege",
+          url: [
+            "http://static-image.1911edu.com/college_business1.jpg",
+            "http://static-image.1911edu.com/college_business2.jpg",
+            "http://static-image.1911edu.com/college_business3.jpg",
+            "http://static-image.1911edu.com/college_business4.jpg"
+          ]
+        },
+        {
+          title: "cadreCollege",
+          url: [
+            "http://static-image.1911edu.com/college_leader1.jpg",
+            "http://static-image.1911edu.com/college_leader2.jpg",
+            "http://static-image.1911edu.com/college_leader3.jpg",
+            "http://static-image.1911edu.com/college_leader4.jpg"
           ]
         }
       ],
@@ -187,14 +212,8 @@ export default {
           } else {
             this.flag = false;
           }
-          if (
-            res.data.vipGoodsDetail.en_title == "cadreCollege" ||
-            res.data.vipGoodsDetail.en_title == "commercialCollege"
-          ) {
-            this.loading = false;
-          } else {
-            this.screeningImg(res.data.vipGoodsDetail);
-          }
+          this.screeningImg(res.data.vipGoodsDetail);
+
           setTitle(this.vipInfo.title + "-1911学堂");
         } else {
           message(this, "error", res.msg);
