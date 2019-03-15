@@ -11,7 +11,7 @@
       <v-businessCollege v-if="title=='commercialCollege'" :data="collegeImg"></v-businessCollege>
       <v-leaderCollege v-if="title=='cadreCollege'" :data="collegeImg"></v-leaderCollege>
       <!-- 底部学院学费信息 -->
-      <v-info v-if="flag" :vipInfo="vipInfo" @lookCourse="lookCourse" @buyVip="buyVip" @identificate="identificate"></v-info>
+      <v-info :class="classObj" v-if="flag" :vipInfo="vipInfo" @lookCourse="lookCourse" @buyVip="buyVip" @identificate="identificate"></v-info>
       <!-- 会员购买弹窗 -->
       <v-vipbuy v-if="vipPopShow" :vipPopShow="vipPopShow" :vipInfo="vipInfo" @changeVipShow="changeVipShow"></v-vipbuy>
     </div>
@@ -26,7 +26,12 @@
 <script>
 import { vip } from "@/lib/v1_sdk/index";
 import { store as persistStore } from "~/lib/core/store";
-import { matchSplits, setTitle, message, browserRedirect } from "@/lib/util/helper";
+import {
+  matchSplits,
+  setTitle,
+  message,
+  browserRedirect
+} from "@/lib/util/helper";
 import { mapState, mapActions, mapGetters } from "vuex";
 import VipBuy from "@/components/common/VipBuy.vue";
 
@@ -55,7 +60,7 @@ export default {
     "v-info": Info,
     "v-vipbuy": VipBuy
   },
-  data () {
+  data() {
     return {
       flag: false,
       vipInfo: "",
@@ -154,10 +159,15 @@ export default {
       title: ""
     };
   },
+  computed: {
+    classObj() {
+      return this.title;
+    }
+  },
   methods: {
     ...mapActions("auth", ["setGid"]),
     //   查看课程
-    lookCourse () {
+    lookCourse() {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -170,7 +180,7 @@ export default {
       });
     },
     //立即购买
-    buyVip () {
+    buyVip() {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -178,11 +188,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow (val) {
+    changeVipShow(val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate () {
+    identificate() {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -192,7 +202,7 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    screeningImg (data) {
+    screeningImg(data) {
       this.collegeArr.forEach(v => {
         if (v.title == data.en_title) {
           this.collegeImg = v.url;
@@ -201,7 +211,7 @@ export default {
       });
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
@@ -223,7 +233,7 @@ export default {
       });
     },
     // 设置图片宽度
-    setWidth () {
+    setWidth() {
       if (this.collegeImg.length == 0) {
         this.noCollege = false;
         return false;
@@ -232,10 +242,9 @@ export default {
       }
       // 手机端动态设置margin 手动缩放zoom比例
       if (browserRedirect()) {
-        this.width = (1920 - document.documentElement.clientWidth) / 2 * 0.81;
+        this.width = ((1920 - document.documentElement.clientWidth) / 2) * 0.81;
       } else {
         this.width = (1920 - document.documentElement.clientWidth) / 2;
-
       }
       this.$nextTick(() => {
         this.arr = document.getElementsByClassName("collegeImg");
@@ -247,7 +256,7 @@ export default {
       this.loading = false;
     },
     // 底部操作栏动态
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -260,13 +269,13 @@ export default {
         this.bottom = false;
       }
     },
-    init () {
+    init() {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
       this.title = matchSplits("title");
     }
   },
-  mounted () {
+  mounted() {
     (this.loading = true), this.init();
     this.vipDetail();
     // 寛高设置
@@ -274,11 +283,11 @@ export default {
     //   this.relativeID = matchSplits("cid");
   },
   watch: {
-    $route (v, oldv) {
+    $route(v, oldv) {
       this.init();
       this.vipDetail();
     },
-    title () {
+    title() {
       this.setWidth();
     }
   }
