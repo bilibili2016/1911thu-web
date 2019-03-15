@@ -41,43 +41,44 @@ export default {
       autoplayFlag: true,
       leftCar: [
         {
-          title: "名师智库，内容为王",
+          title: "名师智库",
           textList: [
-            "已签约200名，未来1000余名；",
-            "四个来源：知名高校教授，500强高管，行业精英，政策智囊；",
-            "三条遴选标准：内容权威，通俗易懂，结合实践。"
+            "集结200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者",
+            "知名高校教授、500强企业高管、行业精英、政策智囊组成高端导师库"
           ],
           imgUrl: "http://static-image.1911edu.com/home-news1.png"
         },
         {
-          title: "权威机构，双证证书",
+          title: "内容体系",
           textList: [
-            "1.完成学习； 2.参加考试；",
-            "3.考核通过； 4.权威认证；",
-            "5.双证证书； 6.单位认可；",
-            "7.含金量高。"
+            "内容权威前沿，授课通俗易懂，理论结合实践",
+            "在线学院+单位内训+国际学位",
+            "“知识即服务”（KaaS）终身教育运营模式"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news2.png"
+          imgUrl: "http://static-image.1911edu.com/home-news5.png"
         },
         {
-          title: "教学服务与体验",
+          title: "人才测评",
           textList: [
-            "阶梯式人才成长规划路径；",
-            "完善的教学服务系统；",
-            "专业的教务团队；",
-            "高质量的后勤保障。"
+            "清华大学测评领域专家研发",
+            "“互联网+教育”人才测评体系新模式",
+            "了解学习需求，定位能力短板，制定个性化解决方案"
+          ],
+          imgUrl: "http://static-image.1911edu.com/home-news4.png"
+        },
+        {
+          title: "混合式教学",
+          textList: [
+            "在线学院+线下面授",
+            "交互式与社群化学习体验",
+            "PBL+案例教学法"
           ],
           imgUrl: "http://static-image.1911edu.com/home-news3.png"
         },
         {
-          title: "技术支持",
-          textList: [
-            "大数据学习需求诊断；",
-            "多元智能人才测评体系；",
-            "学习管理系统（LMS）；",
-            "人工智能考试系统。"
-          ],
-          imgUrl: "http://static-image.1911edu.com/home-news4.png"
+          title: "考试认证",
+          textList: ["在线人工智能考试系统", "清华大学等国内外知名院校证书"],
+          imgUrl: "http://static-image.1911edu.com/home-news2.png"
         }
       ],
       rightCar: [
@@ -87,15 +88,19 @@ export default {
         },
         {
           id: 2,
-          imgUrl: "http://static-image.1911edu.com/home-news2.png"
+          imgUrl: "http://static-image.1911edu.com/home-news5.png"
         },
         {
           id: 3,
-          imgUrl: "http://static-image.1911edu.com/home-news3.png"
+          imgUrl: "http://static-image.1911edu.com/home-news4.png"
         },
         {
           id: 4,
-          imgUrl: "http://static-image.1911edu.com/home-news4.png"
+          imgUrl: "http://static-image.1911edu.com/home-news3.png"
+        },
+        {
+          id: 5,
+          imgUrl: "http://static-image.1911edu.com/home-news2.png"
         }
       ]
     };
