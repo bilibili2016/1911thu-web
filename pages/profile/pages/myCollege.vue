@@ -7,25 +7,11 @@
           <span>我的学院</span>
         </div>
         <div class="listParent" v-loading="collegeLoading">
-          <div
-            class="collegeList"
-            :class="{ minheight : collegeLoading}"
-            v-loading="collegeLoading"
-            v-if="collegeListData.length > 0"
-          >
+          <div class="collegeList" :class="{ minheight : collegeLoading}" v-loading="collegeLoading" v-if="collegeListData.length > 0">
             <v-list :collegeListData="collegeListData"></v-list>
           </div>
           <div class="pagination" v-if="collegePagemsg.total>11&&collegeListData.length > 0">
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              :page-size="collegePagemsg.pagesize"
-              :pager-count="5"
-              :page-count="collegePagemsg.pagesize"
-              :current-page="collegePagemsg.page"
-              :total="collegePagemsg.total"
-              @current-change="examineListChange"
-            ></el-pagination>
+            <el-pagination background layout="prev, pager, next" :page-size="collegePagemsg.pagesize" :pager-count="5" :page-count="collegePagemsg.pagesize" :current-page="collegePagemsg.page" :total="collegePagemsg.total" @current-change="examineListChange"></el-pagination>
           </div>
           <!-- 空页面 -->
           <div class="content" v-if="collegeListData.length == 0&&!collegeLoading">
@@ -50,20 +36,20 @@ export default {
     "v-list": List,
     "v-nomsg": NoMsg
   },
-  data () {
+  data() {
     return {
       noMsg: {
         type: "myExamine",
-        text: "加入学院后才会有认证资格呦，快去加入吧！"
+        text: "加入学院后才会有认证资格呦，快去入学吧！"
       }
     };
   },
 
   methods: {
-    examineListChange () {
+    examineListChange() {
       this.$emit("examineListChange");
     }
   },
-  mounted () { }
+  mounted() {}
 };
 </script>
