@@ -469,4 +469,25 @@
 			background-size: contain;
 		}
 	}
+	.infoList {
+		position: relative;
+		i.infoAlert {
+			display: block;
+			position: absolute;
+			top: 10px;
+			left: 20px;
+			background-color: #ff5f5f;
+			color: #fff;
+			font-size: 12px;
+			overflow: hidden;
+			line-height: 20px;
+			min-height: 20px;
+			min-width: 20px;
+			vertical-align: middle;
+			text-align: center;
+			display: inline-block;
+			padding: 0px 3px;
+			border-radius: 0.75rem;
+		}
+	}
 }

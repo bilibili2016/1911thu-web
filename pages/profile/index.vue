@@ -40,8 +40,9 @@
         </el-tab-pane>
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
-          <span slot="label" class="tabList">
+          <span slot="label" class="tabList infoList">
             <i class="icon-message"></i> 我的消息
+            <!-- <i class="infoAlert">18</i> -->
           </span>
           <v-myinfo :noMyMsg="noMyMsg" :noMsgEle="noMsgEle" @isNoMyMsg="isNoMyMsg"></v-myinfo>
         </el-tab-pane>
