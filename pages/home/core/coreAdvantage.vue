@@ -4,7 +4,7 @@
     <div class="left">
       <div class="top coreTop">
         <h1>核心优势</h1>
-        <p>内容+认证+服务+技术</p>
+        <p>名师智库+内容体系+人才测评+混合式教学+考试认证</p>
       </div>
       <el-carousel class="coreLeft" :interval="4000" indicator-position="outside" @change="setActiveItem" arrow="never">
         <el-carousel-item class="clearfix" v-for="(item,index) in leftCar" :key="index">
@@ -49,7 +49,7 @@ export default {
           imgUrl: "http://static-image.1911edu.com/home-news1.png"
         },
         {
-          title: "内容体系",
+          title: "内容体系及运营模式",
           textList: [
             "内容权威前沿，授课通俗易懂，理论结合实践",
             "在线学院+单位内训+国际学位",
