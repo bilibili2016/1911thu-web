@@ -3,8 +3,8 @@
     <!-- 订单 -->
     <el-card v-if="showOrderList">
       <el-tabs class="orderCard" v-model="activeName" @tab-click="handleOrder">
-        <el-tab-pane name="orderFirst">
-          <span class="" slot="label">全部</span>
+        <el-tab-pane name="orderFirst" label="全部">
+          <!-- <span class="" slot="label">全部</span> -->
           <v-listtab :allOrderLoadAll="allOrderLoadAll" :order="orderZero" :data="allOrderData" :orderType="orderType" :pagemsg="pagemsg4" :noMsg="noMsgTen" @pageChange="getAllOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>
         </el-tab-pane>
         <el-tab-pane name="orderSecond">
@@ -13,15 +13,13 @@
           </span>
           <v-listtab :order="orderOne" :data="unfinishedOrderData" :orderType="orderType" :pagemsg="pagemsg5" :noMsg="noMsgTen" @pageChange="unfinishedOrderDataChange" @handleUpdate="handleUpdate()"></v-listtab>
         </el-tab-pane>
-        <el-tab-pane name="orderThird">
-          <span class="payOk" slot="label">已付款
-          </span>
+        <el-tab-pane name="orderThird" label="已付款">
+          <!-- <span class="payOk" slot="label">已付款</span> -->
           <v-listtab :order="orderTwo" :data="readyOrderData" :orderType="orderType" :pagemsg="pagemsg6" :noMsg="noMsgTen" @pageChange="getReadyOrderDataChange"></v-listtab>
 
         </el-tab-pane>
-        <el-tab-pane name="orderFour">
-          <span class="payOff" slot="label">已关闭
-          </span>
+        <el-tab-pane name="orderFour" label="已关闭">
+          <!-- <span class="payOff" slot="label">已关闭</span> -->
           <v-listtab :order="orderThree" :data="invalidOrderData" :orderType="orderType" :pagemsg="pagemsg7" :noMsg="noMsgTen" @pageChange="closedOrderDataChange"></v-listtab>
         </el-tab-pane>
       </el-tabs>
@@ -40,7 +38,7 @@ import DataPick from '@/pages/profile/components/myorder/DataPick'
 import ListTab from '@/pages/profile/components/common/ListTab.vue'
 export default {
   watch: {
-    searchDatas(data) {
+    searchDatas (data) {
       this.$bus.$emit('searchDatas', data)
     }
   },
@@ -77,7 +75,7 @@ export default {
     'allOrderLoadAll',
     'orderTotal'
   ],
-  data() {
+  data () {
     return {
       activeName: 'orderFirst',
       orderZero: '0',
@@ -86,49 +84,49 @@ export default {
       orderThree: '3'
     }
   },
-  mounted() {
+  mounted () {
     this.$bus.$on('activeOrder', data => {
       this.activeName = 'orderFirst'
     })
   },
   methods: {
-    getUpdateMsg(data) {
+    getUpdateMsg (data) {
       this.$emit('getUpdateMsg', data)
     },
-    getOrderDetail() {
+    getOrderDetail () {
       this.$emit('getOrderDetail')
     },
-    getAllOrderDataChange(val) {
+    getAllOrderDataChange (val) {
       this.$emit('getAllOrderDataChange', 0, val)
     },
-    unfinishedOrderDataChange(val) {
+    unfinishedOrderDataChange (val) {
       this.$emit('unfinishedOrderDataChange', 1, val)
     },
-    getReadyOrderDataChange(val) {
+    getReadyOrderDataChange (val) {
       this.$emit('getReadyOrderDataChange', 2, val)
     },
-    closedOrderDataChange(val) {
+    closedOrderDataChange (val) {
       this.$emit('closedOrderDataChange', 3, val)
     },
-    invalidOrderDataChange(val) {
+    invalidOrderDataChange (val) {
       this.$emit('invalidOrderDataChange', val)
     },
-    goBack(val) {
+    goBack (val) {
       this.$emit('goBack', val)
     },
-    goTicketBack(val) {
+    goTicketBack (val) {
       this.$emit('goTicketBack', val)
     },
-    pageChange(val) {
+    pageChange (val) {
       this.$emit('pageChange', val)
     },
-    handleUpdate() {
+    handleUpdate () {
       //取消订单 全部/未完成/已关闭都需要更新
       this.$emit('handleUpdate', 0, 1)
       this.$emit('handleUpdate', 1, 1)
       this.$emit('handleUpdate', 3, 1)
     },
-    handleOrder(item) {
+    handleOrder (item) {
       if (persistStore.get('token')) {
         switch (item.name) {
           case 'orderFirst':

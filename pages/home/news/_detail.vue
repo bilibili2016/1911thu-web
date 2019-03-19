@@ -48,7 +48,7 @@ export default {
     "v-breadcrumb": BreadCrumb,
     "v-pay": newsPay
   },
-  data() {
+  data () {
     return {
       nid: "",
       isShowpayPopup: false,
@@ -82,17 +82,18 @@ export default {
     };
   },
   methods: {
-    getMore(item) {
+    getMore (item) {
       this.$router.push(item);
     },
-    requestNews(flag) {
+    requestNews (flag) {
       this.getNewInfoDetail(this.nid, flag);
     },
-    nextPage(id) {
+    nextPage (id) {
+      if (!id) return;
       this.$router.push(`/home/news/${id}`);
     },
     // 获取资讯详情
-    getNewInfoDetail(id, flag) {
+    getNewInfoDetail (id, flag) {
       let me = this;
       if (!id) return;
       let newsId = {
@@ -143,7 +144,7 @@ export default {
       });
     },
     //支付新闻
-    handlepayNews() {
+    handlepayNews () {
       // this.handleSignOut();
       if (persistStore.get("token")) {
         this.isShowpayPopup = true;
@@ -152,11 +153,11 @@ export default {
       }
     },
     //关闭支付弹窗
-    closePop() {
+    closePop () {
       this.isShowpayPopup = false;
     }
   },
-  mounted() {
+  mounted () {
     this.nid = window.location.pathname.split("/")[3];
     this.getNewInfoDetail(this.nid);
     this.$bus.$on("renewsDetailData", data => {
