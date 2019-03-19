@@ -112,7 +112,7 @@ export default {
             "http://static-image.1911edu.com/college_edu1.jpg",
             "http://static-image.1911edu.com/college_edu2.jpg",
             "http://static-image.1911edu.com/college_edu3.jpg",
-            "http://static-image.1911edu.com/college_edu4.jpg"
+            "http://static-image.1911edu.com/college_edu6.jpg"
           ]
         },
         {
