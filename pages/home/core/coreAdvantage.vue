@@ -25,7 +25,7 @@
       <div class="rightCon">
         <el-carousel class="coreRight " :autoplay='autoplayFlag' :interval="4000" ref="coreRightCarousel" indicator-position="none" arrow="never">
           <el-carousel-item class="" v-for="(item,index) in rightCar" :key="index">
-            <img class="rightImg coreCarousel" :src="item.imgUrl">
+            <img class="rightImg coreCarousel" :src="item.imgUrl" @click="handleLink(item.detailLink)">
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -84,28 +84,41 @@ export default {
       rightCar: [
         {
           id: 1,
+          title: "名师智库",
+          detailLink: "/home/core/pages/teachers",
           imgUrl: "http://static-image.1911edu.com/home-news1.png"
         },
         {
           id: 2,
+          title: "内容体系及运营模式",
+          detailLink: "/home/core/pages/contentSystem",
           imgUrl: "http://static-image.1911edu.com/home-news5.png"
         },
         {
           id: 3,
+          title: "人才测评",
+          detailLink: "/home/core/pages/personEval",
           imgUrl: "http://static-image.1911edu.com/home-news4.png"
         },
         {
           id: 4,
+          title: "混合式教学",
+          detailLink: "/home/core/pages/hybridTeach",
           imgUrl: "http://static-image.1911edu.com/home-news3.png"
         },
         {
           id: 5,
+          title: "考试认证",
+          detailLink: "/home/core/pages/examAuth",
           imgUrl: "http://static-image.1911edu.com/home-news2.png"
         }
       ]
     };
   },
   methods: {
+    handleLink(link) {
+      this.$router.push(link);
+    },
     setActiveItem(index) {
       this.$refs.coreRightCarousel.setActiveItem(index);
       this.autoplayFlag = false;
@@ -158,5 +171,5 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import "~assets/style/home/coreAdvantage";
+@import "~assets/style/core/coreAdvantage";
 </style>
