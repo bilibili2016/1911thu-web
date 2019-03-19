@@ -110,6 +110,7 @@ export default {
     }
   },
   mounted() {
+    setTitle("证书查询-1911学堂");
     this.code();
   }
 };
