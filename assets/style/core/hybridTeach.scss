@@ -1,2 +1,163 @@
 .hybridTeach {
+  //   background-color: #000;
+
+  .banner {
+    width: 100%;
+    height: 560px;
+    text-align: center;
+
+    h4 {
+      font-size: 50px;
+      color: #fff;
+      font-weight: bold;
+      padding-top: 180px;
+    }
+
+    .line {
+      width: 110px;
+      height: 4px;
+      background-color: #fff;
+      margin: 0 auto;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+
+    .text {
+      font-size: 22px;
+      color: #fff;
+      line-height: 40px;
+    }
+  }
+
+  .introduce {
+    width: 1100px;
+    background: #fff;
+    box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    margin: -50px auto 0;
+    padding: 50px 32px;
+
+    p {
+      font-size: 22px;
+      line-height: 44px;
+      text-indent: 2em;
+
+      i {
+        text-indent: 0;
+        color: #4063B2;
+      }
+    }
+  }
+
+  .headline {
+    color: #222;
+    font-size: 36px;
+    text-align: center;
+    padding: 45px 0;
+  }
+
+  .contentText {
+    width: 1100px;
+    margin: 0 auto;
+    color: #222;
+    font-size: 18px;
+    line-height: 36px;
+
+    .topContent {
+      margin-bottom: 35px;
+    }
+
+    .tree {
+      width: 688px;
+      margin: 0 auto;
+      padding: 40px 36px;
+      background: rgba(64, 99, 178, 1);
+      box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .border {
+      width: 842px;
+      height: 150px;
+      border: 1px solid #4063b2;
+      position: relative;
+      margin: -60px auto 0;
+
+      &:after,
+      &:before {
+        content: '';
+        width: 1px;
+        height: 149px;
+        position: absolute;
+        top: 0;
+        background-color: #4063b2;
+      }
+
+      &:after {
+        left: 280px;
+      }
+
+      &:before {
+        right: 280px;
+      }
+    }
+
+    .treeList {
+      display: flex;
+      justify-content: space-around;
+      margin: -10px 0 50px;
+      position: relative;
+      background-color: #fff;
+
+      .listOne {
+        width: 260px;
+        height: 258px;
+        background: #fff;
+        box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.06);
+
+        h5 {
+          height: 60px;
+          line-height: 60px;
+          text-align: center;
+          font-size: 24px;
+          color: #fff;
+        }
+
+        p {
+          font-size: 18px;
+          padding: 35px 20px 0;
+        }
+
+        .orange {
+          background-color: #E99141;
+        }
+
+        .green {
+          background-color: #66B96D;
+        }
+
+        .red {
+          background-color: #E17979;
+        }
+
+        .blue {
+          background-color: #6B8BDB;
+        }
+      }
+    }
+  }
+
+  .bottomCon {
+    height: 476px;
+    background-color: #000;
+
+    p {
+      width: 1100px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: #fff;
+      line-height: 36px;
+    }
+  }
 }
