@@ -29,6 +29,12 @@
   </div>
 </template>
 <script>
+import { setTitle } from "~/lib/util/helper";
+export default {
+  mounted () {
+    setTitle("核心优势-考试认证-1911学堂");
+  },
+}
 </script>
 <style  scoped lang="scss">
 @import "~assets/style/core/examAuth";

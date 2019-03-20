@@ -46,6 +46,13 @@
   </div>
 </template>
 <script>
+import { setTitle } from "~/lib/util/helper";
+export default {
+  mounted () {
+    setTitle("核心优势-混合式教学-1911学堂");
+  }
+
+}
 </script>
 <style  scoped lang="scss">
 @import "~assets/style/core/hybridTeach";
