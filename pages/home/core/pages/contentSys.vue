@@ -25,7 +25,7 @@
               <p><i class="color">课程分小节：</i>根据成人学习过程中精力不易集中、学习时间零散等特点，将每门课程按照内在逻辑分成若干小节或以微视频形式呈现，一方面提高学员掌握学习时间的灵活度，学员可重点学习对自己更有帮助或启发的内容；另一方面，由于单个碎片内容的学习时间较短，保障了学习兴趣，学员在学习成效上对于知识的吸收率会有所提升。</p>
             </div>
           </div>
-          <div class="oneItem">
+          <div class="oneItem itemTwo">
             <div class="itemTitle">
               <em>2</em>模块化教学
             </div>
@@ -33,7 +33,7 @@
               <p>1911学堂运用模块化教学方式，依据适合的学习方式来切分知识或技能的模块的颗粒度大小。首先根据专业要求确定各模块应达到的知识结果和能力要求，各模块下设若干子模块，然后由教师根据不同专业的培养要求，合理安排学员参与相应若干子模块，进行多层次、多方向的学习训练，从而达到最优的教学效果。</p>
             </div>
           </div>
-          <div class="oneItem">
+          <div class="oneItem itemThree">
             <div class="itemTitle">
               <em>3</em>在线课程体系化
             </div>
@@ -50,7 +50,9 @@
       <div class="con-three">
         <h1 class="title">三、单位内训项目</h1>
         <div class="text clearfix">
-          <div class="left"></div>
+          <div class="left">
+            <img src="http://static-image.1911edu.com/contentSys-icon1.png" alt="">
+          </div>
           <div class="right">
             <p>根据各机构单位的需求，包括党政机关各组织部门，体育、教育、金融、军转、税务、司法等各系统，各类国企、民企、外企以及房地产、建筑施工、IT、物流、餐饮酒店等各行业的企业，1911学堂一方面研发相应的在线专业学院，另一方面设计专业的线下面授课程，针对性研发形成量身定制的混合式单位内训项目。相关单位的学习者，可通过学习相应在线学院的内容及线下面授的专业课程，协同实现组织战略发展目标与个人成长目标。</p>
           </div>
@@ -65,7 +67,7 @@
         </div>
       </div>
       <div class="con-five">
-        <h1>运营模式</h1>
+        <div class="font"></div>
         <div class="five-item">
           <h2>知识即服务</h2>
           <p>1911学堂，是一个以“知识即服务”（KaaS）为运营模式的互联网终身教育平台。</p>

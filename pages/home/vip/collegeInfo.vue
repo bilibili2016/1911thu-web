@@ -11,7 +11,7 @@
       <v-businessCollege v-if="title=='commercialCollege'" :data="collegeImg"></v-businessCollege>
       <v-leaderCollege v-if="title=='cadreCollege'" :data="collegeImg"></v-leaderCollege>
       <!-- 底部学院学费信息 -->
-      <v-info :class="classObj" v-if="flag" :vipInfo="vipInfo" @lookCourse="lookCourse" @buyVip="buyVip" @identificate="identificate"></v-info>
+      <v-info :class="title" v-if="flag" :vipInfo="vipInfo" @lookCourse="lookCourse" @buyVip="buyVip" @identificate="identificate"></v-info>
       <!-- 会员购买弹窗 -->
       <v-vipbuy v-if="vipPopShow" :vipPopShow="vipPopShow" :vipInfo="vipInfo" @changeVipShow="changeVipShow"></v-vipbuy>
     </div>
@@ -158,11 +158,6 @@ export default {
       noCollege: true,
       title: ""
     };
-  },
-  computed: {
-    classObj() {
-      return this.title;
-    }
   },
   methods: {
     ...mapActions("auth", ["setGid"]),

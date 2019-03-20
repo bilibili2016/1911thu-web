@@ -1,7 +1,6 @@
 <template>
-  <div class="noCollege">
+  <div class="system">
     <img src="http://static-image.1911edu.com/noCollege.png" alt="">
-    <p>正在筹备中，敬请期待...</p>
   </div>
 </template>
 
