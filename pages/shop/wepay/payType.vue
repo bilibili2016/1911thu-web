@@ -40,7 +40,7 @@
 
 <script>
 import { store as persistStore } from "~/lib/core/store";
-import { timestampToTime, matchSplits } from "~/lib/util/helper";
+import { timestampToTime, matchSplits, message } from "~/lib/util/helper";
 import { wepay } from "@/lib/v1_sdk/index";
 import Dialog from "@/components/common/Dialog.vue";
 
@@ -49,7 +49,7 @@ export default {
   components: {
     "v-dialog": Dialog
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
@@ -80,7 +80,7 @@ export default {
     };
   },
   watch: {
-    orderDetail(val) {
+    orderDetail (val) {
       if (val.order_amount > 5000 && val.order_amount < 500000) {
         this.showDialog = true;
         this.dialogInfo.info =
@@ -111,13 +111,13 @@ export default {
   },
   methods: {
     //关闭dialog提示框
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
     },
-    showRpt() {
+    showRpt () {
       this.$emit("showRpt");
     },
-    addPaySubmit() {
+    addPaySubmit () {
       this.wxMask = true;
       if (this.wxMsg === true) {
         this.$bus.$emit("showCode", this.codeData.code_url);
@@ -130,7 +130,7 @@ export default {
         this.$router.push("/shop/payPublic?orderID=" + urlLen);
       }
     },
-    getStatus() {
+    getStatus () {
       let cpyid = matchSplits("order");
       // let attachs = matchSplits('attach')
       this.payListForm.orderId = cpyid;
@@ -151,36 +151,38 @@ export default {
               this.$router.push({
                 path: "/shop/payResult" + "?order=" + cpyid
               });
+            } else if (response.status == 100007 || response.status == 100008) {
+              message(this, 'error', response.msg)
+              this.$router.push("/");
+              clearInterval(this.interval);
             } else {
-              if (response.status == 100007) {
-                this.$router.push("/");
-                this.$bus.$emit("loginShow", true);
-              }
+              message(this, 'error', response.msg)
+              clearInterval(this.interval);
             }
           });
         }
       }, 1000);
     },
-    selectWx() {
+    selectWx () {
       if (!this.isWSW) {
         this.wxMsg = true;
         this.zfbMsg = false;
         this.pubMsg = false;
       }
     },
-    selectZfb() {
+    selectZfb () {
       if (!this.isWSW) {
         this.wxMsg = false;
         this.zfbMsg = true;
         this.pubMsg = false;
       }
     },
-    selectPub() {
+    selectPub () {
       this.wxMsg = false;
       this.zfbMsg = false;
       this.pubMsg = true;
     },
-    time() {
+    time () {
       setInterval(data => {
         if (this.orderDetail.create_time) {
           let mss = new Date() - new Date(this.orderDetail.create_time * 1000);
@@ -188,7 +190,7 @@ export default {
         }
       }, 1000);
     },
-    MillisecondToDate(msd) {
+    MillisecondToDate (msd) {
       var time = 24 * 60 * 60 - parseFloat(msd) / 1000;
       if (null != time && "" != time) {
         if (time > 60 && time < 60 * 60) {
@@ -212,7 +214,7 @@ export default {
                 parseInt(
                   (parseFloat(time / 3600.0) - parseInt(time / 3600.0)) * 60
                 )) *
-                60
+              60
             ) +
             "秒";
         } else {
@@ -222,7 +224,7 @@ export default {
       this.restTime = time;
     }
   },
-  mounted() {
+  mounted () {
     //this.orderType 1:其他订单 2:vip订单
     this.orderType = matchSplits("type");
     this.$bus.$on("clearInterval", dat => {
