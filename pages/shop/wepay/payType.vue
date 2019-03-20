@@ -151,11 +151,10 @@ export default {
               this.$router.push({
                 path: "/shop/payResult" + "?order=" + cpyid
               });
-            } else if (response.status == 100007 || response.status == 100007) {
+            } else if (response.status == 100007 || response.status == 100008) {
               message(this, 'error', response.msg)
               this.$router.push("/");
               clearInterval(this.interval);
-              this.$bus.$emit("loginShow", true);
             } else {
               message(this, 'error', response.msg)
               clearInterval(this.interval);
