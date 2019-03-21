@@ -155,7 +155,7 @@ export default {
               message(this, 'error', response.msg)
               this.$router.push("/");
               clearInterval(this.interval);
-            } else {
+            } else if (response.status == 100100) {
               message(this, 'error', response.msg)
               clearInterval(this.interval);
             }
