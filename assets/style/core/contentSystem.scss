@@ -11,7 +11,7 @@
 			font-size: 50px;
 			color: #fff;
 			font-weight: bold;
-			padding-top: 180px;
+			padding-top: 130px;
 		}
 		.line {
 			width: 110px;
@@ -202,5 +202,11 @@
 				}
 			}
 		}
+	}
+}
+
+@media screen and (min-width: 375px) {
+	p {
+		line-height: 32px !important;
 	}
 }

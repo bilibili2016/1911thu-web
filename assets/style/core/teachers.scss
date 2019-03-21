@@ -109,3 +109,9 @@
 		}
 	}
 }
+
+@media screen and (min-width: 375px) {
+	p {
+		line-height: 32px !important;
+	}
+}
