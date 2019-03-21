@@ -32,6 +32,14 @@
 			}
 		}
 	}
+	@media screen and (min-width: 375px) {
+		.top {
+			width: 84%;
+			p {
+				font-size: 12px;
+			}
+		}
+	}
 
 	.left {
 		flex: 1;

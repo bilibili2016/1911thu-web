@@ -158,7 +158,7 @@
 						box-sizing: border-box;
 						.text {
 							float: left;
-							width: 580px;
+							width: 620px;
 							font-size: 18px;
 							line-height: 36px;
 							color: #1a3578;
@@ -180,7 +180,7 @@
 			width: 100%;
 			height: 320px;
 			background: url('http://static-image.1911edu.com/person-bg1.png') no-repeat;
-			background-size: 100% 320px;
+			background-size: cover;
 			padding-top: 50px;
 			.three {
 				width: 1140px;
@@ -188,7 +188,7 @@
 				border-radius: 20px;
 				margin: 0 auto;
 				background: url('http://static-image.1911edu.com/person-bg2.png') no-repeat;
-				background-size: 100% 205px;
+				background-size: cover;
 				padding: 60px 45px;
 				box-sizing: border-box;
 				p {

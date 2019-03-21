@@ -11,7 +11,7 @@
 			font-size: 50px;
 			color: #fff;
 			font-weight: bold;
-			padding-top: 180px;
+			padding-top: 130px;
 		}
 
 		.line {
@@ -97,7 +97,7 @@
 			&:after,
 			&:before {
 				content: '';
-				width: 1px;
+				width: 2px;
 				height: 149px;
 				position: absolute;
 				top: 0;
@@ -155,12 +155,19 @@
 					background-color: #6b8bdb;
 				}
 			}
+			@media screen and (min-width: 375px) {
+				.listOne {
+					height: 280px;
+				}
+			}
 		}
 	}
 
 	.bottomCon {
-		height: 476px;
+		// height: 476px;
+		padding-bottom: 50px;
 		background: url('http://static-image.1911edu.com/hybridTeach-bg.png') no-repeat;
+		background-size: cover;
 		h3 {
 			color: #fff;
 		}

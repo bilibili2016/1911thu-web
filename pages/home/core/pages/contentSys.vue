@@ -10,7 +10,7 @@
     </div>
     <div class="content">
       <div class="top">
-        <p> 1911学堂内容体系主要分为<i class="color">课程体系、在线学院、单位内训项目、国际学位项目</i>等四大板块，四个板块以<i class="color">“知识即服务”</i>为运营模式组合成系统的内容体系。</p>
+        <p> 1911学堂内容主要分为<i class="color">课程体系、在线学院、单位内训项目、国际学位项目</i>等四大板块，四个板块以<i class="color">“知识即服务”</i>为运营模式组合成系统的内容体系。</p>
       </div>
       <div class="con-one">
         <h1 class="title">一、课程体系</h1>
@@ -81,11 +81,10 @@
 <script>
 import { setTitle } from "~/lib/util/helper";
 export default {
-  mounted () {
+  mounted() {
     setTitle("核心优势-内容体系及运营模式-1911学堂");
   }
-
-}
+};
 </script>
 <style  scoped lang="scss">
 @import "~assets/style/core/contentSystem";

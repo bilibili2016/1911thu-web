@@ -1,6 +1,6 @@
 <template>
   <div class="system">
-    <img src="http://static-image.1911edu.com/noCollegeA.png" alt="">
+    <img src="http://static-image.1911edu.com/noCollegeB.png" alt="">
   </div>
 </template>
 
