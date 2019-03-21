@@ -32,12 +32,12 @@
 			}
 		}
 	}
-	@media screen and (min-width: 375px) {
+	@media screen and (max-width: 375px) {
 		.top {
 			width: 84%;
 		}
 		p {
-			font-size: 14px;
+			font-size: 12px;
 		}
 	}
 
