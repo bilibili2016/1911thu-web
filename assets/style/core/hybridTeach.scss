@@ -155,7 +155,7 @@
 					background-color: #6b8bdb;
 				}
 			}
-			@media screen and (min-width: 375px) {
+			@media only screen and (max-device-width: 375px) {
 				.listOne {
 					height: 280px;
 				}
