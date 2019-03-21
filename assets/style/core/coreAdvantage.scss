@@ -33,7 +33,7 @@
 			}
 		}
 	}
-	@media all and (orientation: portrait) {
+	@media only screen and (max-device-width: 375px) {
 		.top {
 			width: 84%;
 			p {

@@ -155,7 +155,7 @@
 					background-color: #6b8bdb;
 				}
 			}
-			@media all and (orientation: portrait) {
+			@media only screen and (max-device-width: 375px) {
 				.listOne {
 					height: 280px;
 				}

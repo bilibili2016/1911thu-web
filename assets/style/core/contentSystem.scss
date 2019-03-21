@@ -105,7 +105,7 @@
 					}
 				}
 
-				@media all and (orientation: portrait) {
+				@media only screen and (max-device-width: 375px) {
 					.oneItem {
 						height: 780px;
 						padding-top: 20px;
