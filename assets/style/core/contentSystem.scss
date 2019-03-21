@@ -105,9 +105,10 @@
 					}
 				}
 
-				@media screen and (min-width: 375px) {
+				@media screen and (max-width: 375px) {
 					.oneItem {
-						height: 760px;
+						height: 780px;
+						padding-top: 20px;
 					}
 				}
 				.itemTwo {
@@ -160,6 +161,7 @@
 		}
 		.con-four {
 			background: url('http://static-image.1911edu.com/contentSys-bg3.png') no-repeat;
+			background-size: cover;
 			padding: 60px 0;
 			.item {
 				width: 1100px;

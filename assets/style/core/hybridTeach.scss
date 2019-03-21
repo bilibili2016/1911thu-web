@@ -155,12 +155,19 @@
 					background-color: #6b8bdb;
 				}
 			}
+			@media screen and (max-width: 375px) {
+				.listOne {
+					height: 280px;
+				}
+			}
 		}
 	}
 
 	.bottomCon {
-		height: 476px;
+		// height: 476px;
+		padding-bottom: 50px;
 		background: url('http://static-image.1911edu.com/hybridTeach-bg.png') no-repeat;
+		background-size: cover;
 		h3 {
 			color: #fff;
 		}
@@ -172,11 +179,5 @@
 			line-height: 36px;
 			text-indent: 2em;
 		}
-	}
-}
-
-@media screen and (min-width: 375px) {
-	p {
-		line-height: 32px !important;
 	}
 }
