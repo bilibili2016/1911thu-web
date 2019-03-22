@@ -150,11 +150,9 @@
 </template>
 
 <script>
-export default {
-
-};
+export default {};
 </script>
 
 <style scoped lang="scss">
-@import "assets/style/home/healthCollege";
+@import "assets/style/college/healthCollege";
 </style>

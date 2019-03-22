@@ -106,10 +106,9 @@
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style scoped lang="scss">
-@import "assets/style/home/smartCollege";
+@import "assets/style/college/smartCollege";
 </style>
