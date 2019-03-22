@@ -5,7 +5,7 @@
       <h4>考试认证</h4>
       <p class="line"></p>
       <p class="text">在线人工智能考试系统</p>
-      <p class="text">清华大学等国内外知名院校证书</p>
+      <p class="text">知名高校证书</p>
     </div>
     <div class="hybridCon">
       <div class="introduce">

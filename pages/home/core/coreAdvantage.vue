@@ -77,7 +77,7 @@ export default {
         },
         {
           title: "考试认证",
-          textList: ["在线人工智能考试系统", "清华大学等国内外知名院校证书"],
+          textList: ["在线人工智能考试系统", "知名高校证书"],
           imgUrl: "http://static-image.1911edu.com/home-news2.png"
         }
       ],
@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     handleLink (link) {
-      this.$router.push(link);
+      //   this.$router.push(link);
     },
     setActiveItem (index) {
       this.$refs.coreRightCarousel.setActiveItem(index);
