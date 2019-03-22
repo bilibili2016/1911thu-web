@@ -135,7 +135,7 @@
           <div class="index clearfix">
             <div class="index-left">
               <p class="index-item"><span class="num">1.</span><span class="index-title">品牌授权：</span>授权当地使用1911学堂品牌办学</p>
-              <p class="index-item"><span class="num">2.</span><span class="index-title">认证证书：</span>清华大学相关部门的认证证书&nbsp;&nbsp;&nbsp;</p>
+              <p class="index-item"><span class="num">2.</span><span class="index-title">认证证书：</span>知名高校的认证证书&nbsp;&nbsp;&nbsp;</p>
               <p class="index-item"><span class="num">3.</span><span class="index-title">产品支撑：</span>线上课程全提供及技术平台支撑</p>
               <p class="index-item"><span class="num">4.</span><span class="index-title">业务指导：</span>全流程、全周期的业务指导培训</p>
             </div>

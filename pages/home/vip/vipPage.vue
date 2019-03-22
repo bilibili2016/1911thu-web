@@ -55,7 +55,7 @@
         <div class="four-text clearfix">
           <div class="four-left">
             <span class="circle"></span>
-            <span class="text">学员学习结束后可申请参加相关考试，考试通过者可获得清华大学相关部门或国内外其他知名院校颁发的认证证书及1911学堂结业证书。</span>
+            <span class="text">学员学习结束后可申请参加相关考试，考试通过者可获得国内外其他知名院校颁发的认证证书及1911学堂结业证书。</span>
           </div>
           <div class="four-right">
             <img src="http://static-image.1911edu.com/college-pic13.png" alt>
@@ -117,7 +117,7 @@ import { mapState, mapActions, mapGetters } from "vuex";
 import VipBuy from "@/components/common/VipBuy.vue";
 
 export default {
-  data () {
+  data() {
     return {
       onlineImg: "http://static-image.1911edu.com/online-con.png",
       networkImg: "http://static-image.1911edu.com/network-con.png",
@@ -155,7 +155,7 @@ export default {
                 "精品课程 量身打造",
                 "在线学习 自主安排",
                 "教学一体 高效互动",
-                "清华认证 权威性高"
+                "知名高校认证 权威性高"
               ],
               item2: [
                 "夯实党政管理的专业知识",
@@ -208,7 +208,7 @@ export default {
                 "精品课程 量身打造",
                 "在线学习 自主安排",
                 "教学一体 高效互动",
-                "清华认证 权威性高"
+                "知名高校认证 权威性高"
               ],
               item2: [
                 "夯实企业管理的专业知识",
@@ -250,7 +250,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid"]),
     //查看课程
-    lookCourse () {
+    lookCourse() {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -263,7 +263,7 @@ export default {
       });
     },
     //立即购买
-    buyVip () {
+    buyVip() {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -271,11 +271,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow (val) {
+    changeVipShow(val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate () {
+    identificate() {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -286,14 +286,14 @@ export default {
       }
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
           if (res.data.vipGoodsDetail.is_pay == 1) {
-            this.flag = true
+            this.flag = true;
           } else {
-            this.flag = false
+            this.flag = false;
           }
           setTitle(this.vipInfo.title + "-1911学堂");
           if (this.vipInfo.en_title == "cadreCollege") {
@@ -307,7 +307,7 @@ export default {
       });
     },
     //
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -324,19 +324,19 @@ export default {
         this.bottom = true;
       }
     },
-    init () {
+    init() {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
     }
   },
   watch: {
-    $route (v, oldv) {
+    $route(v, oldv) {
       window.scrollTo(0, 0);
       this.init();
       this.vipDetail();
     }
   },
-  mounted () {
+  mounted() {
     this.init();
     this.vipDetail();
     // 寛高设置
