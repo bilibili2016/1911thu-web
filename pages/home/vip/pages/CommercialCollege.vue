@@ -17,7 +17,7 @@
             <span class="right">各级各类企业中高层管理人员</span>
           </div>
           <div class="one-bottom">
-            <h4 class="college-title">
+            <h4 class="commer-title">
               <span>学习内容</span>
             </h4>
             <p class="pCss">1911学堂在线商学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。</p>
@@ -33,13 +33,13 @@
         </div>
       </div>
       <div class="commer-three">
-        <h4 class="college-title">
+        <h4 class="commer-title">
           <span>学习收获</span>
         </h4>
         <p class="pCss">通过1911学堂在线商学院课程的学习，学员们可以了解到金融，领导力与组织行为学，技术与运营管理，财务报告与控制，市场营销，创业型管理者，策略，商务、政府与全球化经济，领导力与企业责任等方面的知识和思维，逐渐进取成为优秀的管理者。</p>
       </div>
       <div class="commerWidth commer-four">
-        <h4 class="college-title">
+        <h4 class="commer-title">
           <span>考核认证</span>
         </h4>
         <div class="four-text clearfix">

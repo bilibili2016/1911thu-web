@@ -1,14 +1,131 @@
 <template>
-  <div class="imgList">
-    <img class="collegeImg" v-for="(url,index) in data" :key="index" :src="url" alt="">
+  <div class="chineseCollege">
+    <div class="chinese-banner"></div>
+    <div class="chinese-con">
+      <div class="chinese-one">
+        <p class="pCss">
+          上到 “两办国学传承18条” 的颁布，下到具有中国特色、中国风格、中国气派的文化产业兴盛流行，国学作为中华文化的核心，是中华文明传承数千年的密码。
+        </p>
+        <p class="pCss">
+          1911学堂在线国学院以中国传统文化为宏观框架和基本依托，传授中国古代文学的基础知识、专业理论和研究方法，并向各类机构提供系统性的教育培训解决方案，以提升学员的人文素养和洞察力，锻造思维与悟性，助其胜任文化、宣传、新闻、出版、管理等相关工作，推动党政、企业及教育等相关人员修齐治平、尊时守位、知常达变、开物成务，推动中华文化的伟大复兴和中国传统思想文化的现实落地。
+        </p>
+      </div>
+      <div class="chinese-two">
+        <div class="chineseWidth two-con">
+          <div class="chinese-title people"></div>
+          <div class="two-items clearfix">
+            <div class="item one">
+              <div class="people-icon"><img src="http://static-image.1911edu.com/chinese-icon2.png" alt=""></div>
+              <div class="people-text">全国各级各类党政机关与事业单位干部</div>
+            </div>
+            <div class="item two">
+              <div class="people-icon"><img src="http://static-image.1911edu.com/chinese-icon3.png" alt=""></div>
+              <div class="people-text">各级各类企业中高层管理人员</div>
+            </div>
+            <div class="item three">
+              <div class="people-icon"><img src="http://static-image.1911edu.com/chinese-icon4.png" alt=""></div>
+              <div class="people-text">各级各类学校校长、骨干教师</div>
+            </div>
+            <div class="item four">
+              <div class="people-icon"><img src="http://static-image.1911edu.com/chinese-icon5.png" alt=""></div>
+              <div class="people-text">对中国传统文化感兴趣的社会各界人士</div>
+            </div>
+          </div>
+          <div class="chinese-title content"></div>
+          <div class="second-items clearfix">
+            <div class="item" v-for="(item,index) in contentList" :key="index">
+              <i class="icon">{{1+index}}</i>
+              <span>{{item}}</span>
+            </div>
+          </div>
+          <div class="bottom">
+            <p class="pCss">1911学堂在线国学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。</p>
+          </div>
+        </div>
+      </div>
+      <div class="chinese-three">
+        <div class="chinese-title harvest"></div>
+        <p class="pCss">通过1911学堂在线国学院，可以学习到正确的修身做人之道、为人处事之道、知人用人之道、为官为政之道及治国理政之道和哲学之道，帮助自己树立起牢固正确的世界观、人生观、价值观，从而运用到执政从商之中，巩固领导事业的健康发展。</p>
+      </div>
+      <div class="chinese-four">
+        <div class="chinese-title test"></div>
+        <div class="four-text clearfix">
+          <div class="four-left">
+            <span class="circle"></span>
+            <span class="text">学员参加1911学堂在线国学院学习，学习结束后可申请参加相关考试，考核通过者将获得清华大学相关部门颁发的认证证书及1911学堂结业证书。</span>
+          </div>
+          <div class="four-right">
+            <img src="http://static-image.1911edu.com/chinese-pic5.png" alt>
+          </div>
+        </div>
+        <div class="four-certification">
+          <img src="http://static-image.1911edu.com/chinese-pic6.png" alt>
+        </div>
+      </div>
+      <!-- <div class="eduWidth edu-three">
+        <div class=" three-top">
+          <h4 class="edu-title"><span>学习内容</span></h4>
+          <div class=" three-items clearfix">
+            <div class="item" v-for="(item,index) in contentList" :key="index">
+              <i class="icon">{{1+index}}</i>
+              <span>{{item}}</span>
+            </div>
+          </div>
+          <div class="top-desc">
+            <p class="pCss">1911学堂在线教育学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。</p>
+          </div>
+        </div>
+        <div class="three-middle">
+          <h4 class="edu-title"><span>学习收获</span></h4>
+          <div class="clearfix">
+            <div class="middle-left"><img src="http://static-image.1911edu.com/edu-icon5.png" alt=""></div>
+            <div class="middle-right">
+              <p class="pCss">通过1911学堂在线教育学堂可以了解到互联网+时代下的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统、教学设施等发生的变化，以及互联网背景下基于社会需求的教育人才培养模式和管理方式等知识技能。</p>
+            </div>
+          </div>
+        </div>
+        <div class="three-bottom">
+          <h4 class="edu-title"><span>考核认证</span></h4>
+          <div class="three-text clearfix">
+            <div class="three-left">
+              <span class="circle"></span>
+              <span class="text">学员参加1911学堂在线教育学院学习，学习结束后可申请参加相关考试，考核通过者将获得清华大学相关部门颁发的认证证书及1911学堂结业证书。</span>
+            </div>
+            <div class="three-right">
+              <img src="http://static-image.1911edu.com/college-pic13.png" alt>
+            </div>
+          </div>
+          <div class="three-certification">
+            <img src="http://static-image.1911edu.com/edu-icon4.png" alt>
+          </div>
+        </div>
+      </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['data']
-}
+  data() {
+    return {
+      contentList: [
+        "国学概论",
+        "史学通论",
+        "儒学文化",
+        "道家智慧",
+        "孙子兵法",
+        "法家思想",
+        "佛学精要",
+        "易学概论",
+        "中医养生",
+        "民俗文化与民间信仰",
+        "传统文化艺术鉴赏"
+      ]
+    };
+  }
+};
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "~assets/style/college/chineseCollege";
 </style>
