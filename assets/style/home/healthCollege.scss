@@ -1,0 +1,301 @@
+.cadreCollege {
+  width: 100%;
+  padding: 0 0 20px;
+  background-color: #fff;
+  color: #222;
+
+  .vipBanner {
+    position: relative;
+    height: 660px;
+    margin: 0 auto;
+    background: url('http://static-image.1911edu.com/healthCollege_banner.png') no-repeat;
+    background-size: 1920px 660px;
+    background-position: center;
+  }
+
+  .container {
+    .intro {
+      width: 1100px;
+      height: 540px;
+      margin: 0 auto;
+      padding: 120px 70px 0;
+      position: relative;
+
+      &:before,
+      &:after {
+        content: '';
+        display: inline-block;
+        width: 102px;
+        height: 98px;
+        position: absolute;
+      }
+
+      &:before {
+        top: 50px;
+        left: 0;
+        background: url("http://static-image.1911edu.com/healthCollege_icon1.png") no-repeat;
+        background-size: cover;
+      }
+
+      &:after {
+        bottom: 60px;
+        right: 0;
+        background: url("http://static-image.1911edu.com/healthCollege_icon2.png") no-repeat;
+        background-size: cover;
+      }
+
+      p {
+        text-indent: 2em;
+        font-size: 18px;
+        line-height: 34px;
+        position: relative;
+      }
+    }
+
+    .studyInfo {
+      background: url("http://static-image.1911edu.com/healthCollege_bg1.png") no-repeat;
+      background-size: 1920px auto;
+      background-position: top;
+      padding-top: 62px;
+
+      .main {
+        width: 1100px;
+        margin: 0 auto;
+      }
+
+      h2 {
+        color: #0D52A1;
+        font-size: 36px;
+        text-align: center;
+
+        &:before,
+        &:after {
+          content: '';
+          display: inline-block;
+          width: 122px;
+          height: 44px;
+          vertical-align: middle;
+          margin: 0 25px;
+        }
+
+        &:before {
+          background: url("http://static-image.1911edu.com/healthCollege_icon3.png") no-repeat;
+          background-size: cover;
+          transform: rotateY(180deg)
+        }
+
+        &:after {
+          background: url("http://static-image.1911edu.com/healthCollege_icon3.png") no-repeat;
+          background-size: cover;
+        }
+
+
+        &.first {
+          color: #fff;
+
+          &:before {
+            background: url("http://static-image.1911edu.com/healthCollege_icon4.png") no-repeat;
+            background-size: cover;
+            transform: rotateY(180deg)
+          }
+
+          &:after {
+            background: url("http://static-image.1911edu.com/healthCollege_icon4.png") no-repeat;
+            background-size: cover;
+          }
+        }
+      }
+
+      .group {
+        width: 1100px;
+        height: 362px;
+        background: url("http://static-image.1911edu.com/healthCollege_teacher.png") no-repeat;
+        background-size: contain;
+        margin: 56px 0 86px;
+
+        .professor {
+          width: 750px;
+          color: #222;
+          margin-left: 308px;
+
+          h4 {
+            font-size: 36px;
+            line-height: 36px;
+            padding: 66px 0 38px;
+          }
+
+          p {
+            width: 730px;
+            font-size: 18px;
+            line-height: 36px;
+          }
+        }
+      }
+
+      .object {
+        margin-top: 85px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        div.clearfix {
+          width: 50%;
+          margin-bottom: 32px;
+
+          img {
+            width: 64px;
+            height: 64px;
+            margin-right: 28px;
+          }
+
+          div {
+            h5 {
+              color: #04A749;
+              font-size: 26px;
+              line-height: 36px;
+              margin-top: 12px;
+            }
+
+            p {
+              width: 395px;
+              margin-top: 24px;
+              font-size: 18px;
+              line-height: 30px;
+            }
+          }
+        }
+      }
+
+      .centerBg {
+        background: url("http://static-image.1911edu.com/healthCollege_bg2.png") no-repeat;
+        background-size: 1920px auto;
+        background-position: bottom;
+        padding: 89px 0 60px;
+        margin-bottom: 86px;
+        background-color: #FAFCFE;
+      }
+
+      .study {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 75px;
+
+        li {
+          width: 50%;
+          font-size: 20px;
+          line-height: 36px;
+          margin-bottom: 25px;
+
+          span {
+            margin-right: 10px;
+
+            &:first-child {
+              width: 42px;
+              height: 48px;
+              color: #fff;
+              line-height: 48px;
+              text-align: center;
+              background: url("http://static-image.1911edu.com/healthCollege_icon11.png") no-repeat;
+              background-size: cover;
+            }
+          }
+        }
+      }
+
+      .columns {
+        width: 1100px;
+        height: 190px;
+        padding: 45px 60px;
+        font-size: 21px;
+        color: #fff;
+        line-height: 41px;
+        text-indent: 2em;
+        margin: 40px 0 99px;
+        background: url("http://static-image.1911edu.com/healthCollege_icon12.png") no-repeat;
+        background-size: cover;
+      }
+
+      .harvest {
+        text-indent: 2em;
+        font-size: 20px;
+        line-height: 34px;
+        text-indent: 2em;
+        margin-top: 60px;
+
+        img {
+          width: 236px;
+          height: 224px;
+          margin-left: 60px;
+        }
+
+        p {
+          width: 690px;
+          margin-top: 42px;
+          font-size: 18px;
+          line-height: 36px;
+          text-indent: 2em;
+        }
+      }
+
+      .attestation {
+        width: 100%;
+        margin: 0 auto 40px;
+        padding-top: 40px;
+        background-color: #fff;
+
+        h2 {
+          margin: 0 auto 36px;
+        }
+
+        .clearfix {
+          width: 1025px;
+          margin: 0 auto;
+
+          .left {
+            width: 768px;
+            margin-right: 50px;
+            margin-top: 28px;
+
+            .circle {
+              display: inline-block;
+              width: 14px;
+              height: 14px;
+              margin: 13px 15px 0 14px;
+              background-color: #1A3B94;
+              vertical-align: top;
+            }
+
+            .text {
+              width: 723px;
+              display: inline-block;
+              font-size: 20px;
+              line-height: 34px;
+              vertical-align: top;
+            }
+          }
+
+          .right {
+            width: 172px;
+            height: 116px;
+
+            img {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .certification {
+        width: 1025px;
+        height: 723px;
+        margin: 0 auto;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

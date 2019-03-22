@@ -1,0 +1,306 @@
+.cadreCollege {
+  width: 100%;
+  padding: 0 0 20px;
+  background-color: #fff;
+  color: #222;
+
+  .vipBanner {
+    position: relative;
+    height: 660px;
+    margin: 0 auto;
+    background: url('http://static-image.1911edu.com/sportCollege_banner.png') no-repeat;
+    background-size: 1920px 660px;
+    background-position: center center;
+  }
+
+  .container {
+    background: url("http://static-image.1911edu.com/sportCollege_bg1.png") no-repeat;
+    background-position: center;
+
+    .main {
+      width: 1100px;
+      margin: 0 auto;
+    }
+
+    .intro {
+      width: 1100px;
+      height: 540px;
+      margin: 0 auto;
+      padding: 120px 70px 0;
+      position: relative;
+
+      &:before,
+      &:after {
+        content: '';
+        display: inline-block;
+        width: 74px;
+        height: 72px;
+        position: absolute;
+
+      }
+
+      &:before {
+        top: 50px;
+        left: 0;
+        background: url("http://static-image.1911edu.com/sportCollege_icon1.png") no-repeat;
+        background-size: cover;
+      }
+
+      &:after {
+        bottom: 60px;
+        right: 0;
+        background: url("http://static-image.1911edu.com/sportCollege_icon2.png") no-repeat;
+        background-size: cover;
+      }
+
+      p {
+        text-indent: 2em;
+        font-size: 18px;
+        line-height: 34px;
+        position: relative;
+      }
+    }
+
+    h2 {
+      color: #FC3E32;
+      height: 36px;
+      line-height: 36px;
+      font-size: 36px;
+      text-align: center;
+
+
+      &:before,
+      &:after {
+        content: '';
+        display: inline-block;
+        width: 150px;
+        height: 14px;
+        vertical-align: middle;
+      }
+
+      &:before {
+        background: url("http://static-image.1911edu.com/sportCollege_icon3.png") no-repeat;
+        background-size: cover;
+      }
+
+      &:after {
+        background: url("http://static-image.1911edu.com/sportCollege_icon4.png") no-repeat;
+        background-size: cover;
+      }
+    }
+
+    .group {
+      width: 1120px;
+      height: 345px;
+      background: url("http://static-image.1911edu.com/sportCollege_teacher.png") no-repeat;
+      background-size: contain;
+      background-position: 20px 0;
+      margin: 64px 0 87px;
+      padding-left: 20px;
+
+      .professor {
+        width: 810px;
+        color: #222;
+        margin-left: 264px;
+
+        h4 {
+          font-size: 36px;
+          line-height: 36px;
+          padding: 45px 0 38px;
+
+          &:before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 21px;
+            background-color: rgba(252, 62, 50, 0.4);
+
+          }
+        }
+
+        p {
+          width: 780px;
+          font-size: 18px;
+          line-height: 36px;
+        }
+      }
+    }
+
+    .object {
+      display: flex;
+      justify-content: space-around;
+      margin: 59px 0 96px;
+
+      div {
+        width: 310px;
+        height: 440px;
+        padding: 40px 21px 0;
+        color: #fff;
+
+        &.one {
+          background: url("http://static-image.1911edu.com/sportCollege_icon5.png") no-repeat;
+          background-size: cover;
+        }
+
+        &.two {
+          background: url("http://static-image.1911edu.com/sportCollege_icon6.png") no-repeat;
+          background-size: cover;
+        }
+
+        &.three {
+          background: url("http://static-image.1911edu.com/sportCollege_icon7.png") no-repeat;
+          background-size: cover;
+        }
+
+        h5 {
+          font-size: 26px;
+          line-height: 36px;
+          text-align: center;
+        }
+
+        img {
+          display: block;
+          width: 90px;
+          height: 90px;
+          margin: 30px auto 20px;
+        }
+
+        p {
+          font-size: 18px;
+          line-height: 30px;
+          text-indent: 2em;
+        }
+      }
+    }
+
+    .centerBg {
+      padding: 92px 0;
+      margin-bottom: 92px;
+      background: url("http://static-image.1911edu.com/sportCollege_bg2.png") no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .study {
+      width: 100%;
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+
+      li {
+        width: 25%;
+        font-size: 18px;
+        line-height: 50px;
+        margin-bottom: 20px;
+
+        span {
+          margin-right: 10px;
+
+          &:first-child {
+            width: 40px;
+            height: 40px;
+            color: #fff;
+            line-height: 40px;
+            text-align: center;
+            background: url("http://static-image.1911edu.com/sportCollege_icon11.png") no-repeat;
+            background-size: cover;
+          }
+        }
+      }
+    }
+
+    .columns {
+      width: 1100px;
+      height: 190px;
+      padding: 40px 60px 0;
+      font-size: 21px;
+      color: #fff;
+      line-height: 41px;
+      text-indent: 2em;
+      margin: 35px 0 72px;
+      background-color: #3951A8;
+      border-radius: 10px;
+    }
+
+    .harvest {
+      font-size: 18px;
+      line-height: 30px;
+      text-indent: 2em;
+      margin-top: 62px;
+
+      p {
+        width: 540px;
+        height: 310px;
+        padding: 60px 55px 0;
+        background: url("http://static-image.1911edu.com/sportCollege_study2.png") no-repeat;
+        background-size: cover;
+
+        &:first-child {
+          background: url("http://static-image.1911edu.com/sportCollege_study1.png") no-repeat;
+          background-size: cover;
+        }
+      }
+    }
+
+    .attestation {
+      width: 100%;
+      margin: 0 auto 40px;
+      padding-top: 40px;
+      background-color: #fff;
+
+      h2 {
+        margin: 0 auto 36px;
+      }
+
+      .clearfix {
+        width: 1025px;
+        margin: 0 auto;
+
+        .left {
+          width: 768px;
+          margin-right: 50px;
+          margin-top: 28px;
+
+          .circle {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin: 13px 15px 0 14px;
+            background-color: #FC3E32;
+            vertical-align: top;
+          }
+
+          .text {
+            width: 723px;
+            display: inline-block;
+            font-size: 20px;
+            line-height: 34px;
+            vertical-align: top;
+          }
+        }
+
+        .right {
+          width: 172px;
+          height: 116px;
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .certification {
+      width: 1025px;
+      height: 723px;
+      margin: 0 auto;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
