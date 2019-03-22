@@ -120,5 +120,5 @@ export default {};
 </script>
 
 <style scoped lang="scss">
-@import "assets/style/college/SportsCollege";
+@import "assets/style/college/sportsCollege";
 </style>
