@@ -116,11 +116,9 @@
 </template>
 
 <script>
-export default {
-
-};
+export default {};
 </script>
 
 <style scoped lang="scss">
-@import "assets/style/home/SportsCollege";
+@import "assets/style/college/SportsCollege";
 </style>
