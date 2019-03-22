@@ -55,7 +55,7 @@
         <div class="four-text clearfix">
           <div class="four-left">
             <span class="circle"></span>
-            <span class="text">学员学习结束后可申请参加相关考试，考试通过者可获得知名高校或国内外其他知名院校颁发的认证证书及1911学堂结业证书。</span>
+            <span class="text">学员学习结束后可申请参加相关考试，考试通过者可获得国内外其他知名院校颁发的认证证书及1911学堂结业证书。</span>
           </div>
           <div class="four-right">
             <img src="http://static-image.1911edu.com/college-pic13.png" alt>
