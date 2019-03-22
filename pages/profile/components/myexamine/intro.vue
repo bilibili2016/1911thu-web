@@ -2,20 +2,14 @@
   <!-- 认证资格介绍 -->
   <div class="examine-intro">
     <div class="examine-top">
-      <span
-        class="goBack"
-        @click="handleBack"
-      >
+      <span class="goBack" @click="handleBack">
         <i class="el-icon-arrow-left icon"></i>认证资格介绍
       </span>
     </div>
     <div class="examine-bottom">
-      <div class="one">1911学堂学员在学院完成学习后，即可参加在线认证考试，考试通过者将获得清华大学相关部门或国内外其他知名院校颁发的认证证书及1911学堂结业证书，证书均配有可在官方网站进行查询的唯一认证编码。</div>
+      <div class="one">1911学堂学员在学院完成学习后，即可参加在线认证考试，考试通过者将获得知名高校或国内外其他知名院校颁发的认证证书及1911学堂结业证书，证书均配有可在官方网站进行查询的唯一认证编码。</div>
       <div class="examineImg">
-        <img
-          src="http://static-image.1911edu.com/certification.png"
-          alt
-        >
+        <img src="http://static-image.1911edu.com/certification.png" alt>
       </div>
       <div class="ask">
         <p class="tit">1. 学时要求</p>
@@ -35,7 +29,7 @@
       </div>
       <div class="ask">
         <p class="tit">5. 颁发证书</p>
-        <p>学院将根据学员考试成绩颁发相应证书，分数大于60分，即可获得清华大学相关部门或国内外其他知名院校颁发的认证证书及1911学堂结业证书。</p>
+        <p>学院将根据学员考试成绩颁发相应证书，分数大于60分，即可获得知名高校或国内外其他知名院校颁发的认证证书及1911学堂结业证书。</p>
       </div>
       <div class="ask">
         <p class="tit">6. 有效期限</p>
@@ -43,41 +37,18 @@
       </div>
 
       <div class="examButton">
-        <div
-          class="examineBtn notExamine"
-          v-if="showBtn"
-        ><span>参加考试</span><span class="alertText">{{alertText}}</span></div>
-        <div
-          class="examineBtn"
-          v-else
-          @click="examRules('1')"
-        >参加考试</div>
-        <div
-          class="examineBtn"
-          v-if="showSimulationExam"
-          @click="examRules('2')"
-        >模拟考试</div>
-        <div
-          class="examineBtn notExamine"
-          v-else
-        >模拟考试
+        <div class="examineBtn notExamine" v-if="showBtn"><span>参加考试</span><span class="alertText">{{alertText}}</span></div>
+        <div class="examineBtn" v-else @click="examRules('1')">参加考试</div>
+        <div class="examineBtn" v-if="showSimulationExam" @click="examRules('2')">模拟考试</div>
+        <div class="examineBtn notExamine" v-else>模拟考试
           <span class="alertText">您已用尽2次模拟考试机会，不能再参加模拟考试。</span>
         </div>
         <!-- <p class="text">{{alertText}}</p> -->
       </div>
     </div>
-    <div
-      class="examRules"
-      v-if="showExamRules"
-    >
-      <div
-        class="rulesInfo"
-        v-loading="examRuleLoading"
-      >
-        <i
-          class="el-icon-close"
-          @click="closeRules"
-        ></i>
+    <div class="examRules" v-if="showExamRules">
+      <div class="rulesInfo" v-loading="examRuleLoading">
+        <i class="el-icon-close" @click="closeRules"></i>
         <h4>温馨提示</h4>
         <p>
           <span class="left">您参加考试的学院：</span>
