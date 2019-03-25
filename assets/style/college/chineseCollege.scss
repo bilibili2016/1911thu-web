@@ -121,6 +121,11 @@
 						color: #222;
 						vertical-align: middle;
 					}
+					@media only screen and (max-device-width: 375px) {
+						span {
+							font-size: 18px;
+						}
+					}
 				}
 			}
 			.bottom {

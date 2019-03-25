@@ -1,251 +1,252 @@
 .newsCollege {
-  .news-banner {
-    height: 660px;
-    background: url('http://static-image.1911edu.com/newsCo-banner.png') no-repeat;
-    background-position: center;
-    background-size: 1920px 660px;
-  }
+	.news-banner {
+		height: 660px;
+		background: url('http://static-image.1911edu.com/newsCo-banner.png') no-repeat;
+		background-position: center;
+		background-size: 1920px 660px;
+	}
 
-  .news-con {
-    background-color: #fff;
+	.news-con {
+		background-color: #fff;
 
-    .newsWidth {
-      width: 1100px;
-      margin: 0 auto;
-    }
+		.newsWidth {
+			width: 1100px;
+			margin: 0 auto;
+		}
 
-    .pCss {
-      font-size: 18px;
-      color: #fff;
-      line-height: 36px;
-      text-indent: 2em;
-      font-weight: bold;
-    }
+		.pCss {
+			font-size: 18px;
+			color: #fff;
+			line-height: 36px;
+			text-indent: 2em;
+			font-weight: bold;
+		}
 
-    .news-title {
-      font-size: 36px;
-      color: #275cbe;
-      font-weight: bold;
-      text-align: center;
-      margin: 50px 0 40px 0;
+		.news-title {
+			font-size: 36px;
+			color: #275cbe;
+			font-weight: bold;
+			text-align: center;
+			margin: 50px 0 40px 0;
 
-      &::after {
-        content: "";
-        display: block;
-        width: 245px;
-        height: 15px;
-        margin: 0 auto;
-        margin-top: -10px;
-        background: url("http://static-image.1911edu.com/newsCo-icon1.png") no-repeat;
-      }
-    }
+			&::after {
+				content: "";
+				display: block;
+				width: 245px;
+				height: 15px;
+				margin: 0 auto;
+				margin-top: -10px;
+				background: url("http://static-image.1911edu.com/newsCo-icon1.png") no-repeat;
+			}
+		}
 
-    .news-one {
-      background: url('http://static-image.1911edu.com/newsCo-bg1.png') no-repeat;
-      background-size: contain;
-      padding: 50px;
-      margin-top: 40px;
-    }
+		.news-one {
+			background: url('http://static-image.1911edu.com/newsCo-bg1.png') no-repeat;
+			background-size: contain;
+			padding: 45px 50px;
 
-    .news-two {
-      .two-text {
-        background: url("http://static-image.1911edu.com/newsCo-bg2.png") no-repeat;
-        background-size: cover;
+			margin-top: 40px;
+		}
 
-        .two-inner {
-          padding: 60px 0;
+		.news-two {
+			.two-text {
+				background: url("http://static-image.1911edu.com/newsCo-bg2.png") no-repeat;
+				background-size: cover;
 
-          .two-left {
-            float: left;
-            width: 240px;
-            height: 240px;
+				.two-inner {
+					padding: 60px 0;
 
-            img {
-              width: 100%;
-              margin-top: 30px;
-            }
-          }
+					.two-left {
+						float: left;
+						width: 240px;
+						height: 240px;
 
-          .two-right {
-            float: left;
-            width: 770px;
-            margin-left: 60px;
+						img {
+							width: 100%;
+							margin-top: 30px;
+						}
+					}
 
-            .professor {
-              font-size: 36px;
-              color: #fff;
-              font-weight: bold;
-            }
+					.two-right {
+						float: left;
+						width: 770px;
+						margin-left: 60px;
 
-            .intro {
-              font-size: 18px;
-              color: #fff;
-              line-height: 36px;
-              font-weight: bold;
-              margin-top: 38px;
-            }
-          }
-        }
-      }
-    }
+						.professor {
+							font-size: 36px;
+							color: #fff;
+							font-weight: bold;
+						}
 
-    .news-three {
-      width: 1050px;
-      margin: 0 auto;
-      padding-bottom: 70px;
+						.intro {
+							font-size: 18px;
+							color: #fff;
+							line-height: 36px;
+							font-weight: bold;
+							margin-top: 38px;
+						}
+					}
+				}
+			}
+		}
 
-      .three-items {
-        .item {
-          float: left;
-          width: 350px;
-          text-align: center;
+		.news-three {
+			width: 1050px;
+			margin: 0 auto;
+			padding-bottom: 70px;
 
-          .people-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto;
-            margin-bottom: 20px;
+			.three-items {
+				.item {
+					float: left;
+					width: 350px;
+					text-align: center;
 
-            img {
-              width: 100%;
-            }
-          }
+					.people-icon {
+						width: 64px;
+						height: 64px;
+						margin: 0 auto;
+						margin-bottom: 20px;
 
-          .people-text {
-            font-size: 20px;
-            color: #222;
-            text-align: center;
-          }
-        }
-      }
-    }
+						img {
+							width: 100%;
+						}
+					}
 
-    .news-four {
-      background: url('http://static-image.1911edu.com/newsCo-bg3.png') no-repeat;
-      background-size: cover;
-      padding: 70px 0;
+					.people-text {
+						font-size: 20px;
+						color: #222;
+						text-align: center;
+					}
+				}
+			}
+		}
 
-      .four-top {
-        .four-items {
-          .item {
-            float: left;
-            width: 275px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
+		.news-four {
+			background: url('http://static-image.1911edu.com/newsCo-bg3.png') no-repeat;
+			background-size: cover;
+			padding: 70px 0;
 
-            .icon {
-              display: inline-block;
-              width: 40px;
-              height: 40px;
-              font-size: 24px;
-              color: #fff;
-              text-align: center;
-              line-height: 40px;
-              vertical-align: middle;
-              margin-right: 10px;
-              background: url('http://static-image.1911edu.com/newsCo-icon6.png') no-repeat;
-              background-size: cover;
-            }
+			.four-top {
+				.four-items {
+					.item {
+						float: left;
+						width: 275px;
+						margin-bottom: 20px;
+						box-sizing: border-box;
 
-            span {
-              font-size: 20px;
-              color: #222;
-              vertical-align: middle;
-            }
+						.icon {
+							display: inline-block;
+							width: 40px;
+							height: 40px;
+							font-size: 24px;
+							color: #fff;
+							text-align: center;
+							line-height: 40px;
+							vertical-align: middle;
+							margin-right: 10px;
+							background: url('http://static-image.1911edu.com/newsCo-icon6.png') no-repeat;
+							background-size: cover;
+						}
 
-            &.two {
-              width: 370px;
-            }
+						span {
+							font-size: 20px;
+							color: #222;
+							vertical-align: middle;
+						}
 
-            &.four {
-              width: 180px;
-            }
-          }
-        }
-      }
+						&.two {
+							width: 360px;
+						}
 
-      .four-middle {
-        width: 1160px;
-        margin: 0 auto;
-        background: url('http://static-image.1911edu.com/newsCo-bg4.png') no-repeat;
-        background-size: cover;
-        padding: 70px 90px;
-        font-size: 20px;
-        line-height: 36px;
-        font-weight: bold;
-        color: #fff;
-        margin-top: 30px;
-      }
+						&.four {
+							width: 190px;
+						}
+					}
+				}
+			}
 
-      .four-bottom {
-        .four-desc {
-          width: 960px;
-          margin: 0 auto;
-          font-size: 20px;
-          color: #222;
-          line-height: 36px;
-          font-weight: 500;
-        }
-      }
-    }
+			.four-middle {
+				width: 1160px;
+				margin: 0 auto;
+				background: url('http://static-image.1911edu.com/newsCo-bg4.png') no-repeat;
+				background-size: cover;
+				padding: 70px 90px;
+				font-size: 20px;
+				line-height: 36px;
+				font-weight: bold;
+				color: #fff;
+				margin-top: 30px;
+			}
 
-    .news-five {
-      padding-bottom: 70px;
+			.four-bottom {
+				.four-desc {
+					width: 960px;
+					margin: 0 auto;
+					font-size: 20px;
+					color: #222;
+					line-height: 36px;
+					font-weight: 500;
+				}
+			}
+		}
 
-      .four-text {
-        width: 920px;
-        margin: 0 auto;
+		.news-five {
+			padding-bottom: 70px;
 
-        .four-left,
-        .four-right {
-          float: left;
-        }
+			.four-text {
+				width: 920px;
+				margin: 0 auto;
 
-        .four-left {
-          width: 690px;
-          margin-right: 50px;
-          margin-top: 26px;
+				.four-left,
+				.four-right {
+					float: left;
+				}
 
-          .circle {
-            width: 14px;
-            height: 14px;
-            background-color: #43a2ca;
-            margin-right: 15px;
-            display: inline-block;
-            vertical-align: top;
-            margin-top: 13px;
-          }
+				.four-left {
+					width: 690px;
+					margin-right: 50px;
+					margin-top: 26px;
 
-          .text {
-            width: 660px;
-            display: inline-block;
-            font-size: 20px;
-            line-height: 34px;
-            vertical-align: top;
-          }
-        }
+					.circle {
+						width: 14px;
+						height: 14px;
+						background-color: #43a2ca;
+						margin-right: 15px;
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 13px;
+					}
 
-        .four-right {
-          width: 172px;
-          height: 116px;
+					.text {
+						width: 660px;
+						display: inline-block;
+						font-size: 20px;
+						line-height: 34px;
+						vertical-align: top;
+					}
+				}
 
-          img {
-            width: 100%;
-            height: 100%;
-          }
-        }
-      }
+				.four-right {
+					width: 172px;
+					height: 116px;
 
-      .four-certification {
-        width: 997px;
-        height: 698px;
-        margin: 0 auto;
+					img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
 
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-    }
-  }
+			.four-certification {
+				width: 997px;
+				height: 698px;
+				margin: 0 auto;
+
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+	}
 }

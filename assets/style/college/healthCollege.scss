@@ -200,6 +200,12 @@
 							background-size: cover;
 						}
 					}
+					&.left {
+						width: 45%;
+					}
+					&.right {
+						width: 55%;
+					}
 				}
 			}
 

@@ -31,43 +31,43 @@
           </div>
           <h2>学习内容</h2>
           <ul class="study">
-            <li>
+            <li class="left">
               <span>1</span>
               <span>人工智能的发展历史现状和发展趋势</span>
             </li>
-            <li>
+            <li class="right">
               <span>6</span>
               <span>人工智能AI原理和核心技术解读</span>
             </li>
-            <li>
+            <li class="left">
               <span>2</span>
               <span>人工智能时代的产业趋势与商业机会</span>
             </li>
-            <li>
+            <li class="right">
               <span>7</span>
               <span>利用人工智能提升公共安全保障能力</span>
             </li>
-            <li>
+            <li class="left">
               <span>3</span>
               <span>人工智能在教育中的应用</span>
             </li>
-            <li>
+            <li class="right">
               <span>8</span>
               <span>人工智能领域军民创新资源共建共享</span>
             </li>
-            <li>
+            <li class="left">
               <span>4</span>
               <span>利用人工智能技术实现制造业转型升级</span>
             </li>
-            <li>
+            <li class="right">
               <span>9</span>
               <span>建设安全便捷的智能社会</span>
             </li>
-            <li>
+            <li class="left">
               <span>5</span>
               <span>大数据下的人工智能</span>
             </li>
-            <li>
+            <li class="right">
               <span>10</span>
               <span>人工智能对物流、金融、税务等行业的影响和挑战</span>
             </li>
