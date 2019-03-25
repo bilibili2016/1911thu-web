@@ -1,260 +1,260 @@
 .cadreCollege {
-  width: 100%;
-  background-color: #fff;
-  color: #222;
+	width: 100%;
+	background-color: #fff;
+	color: #222;
 
-  .vipBanner {
-    position: relative;
-    height: 420px;
-    margin: 0 auto;
-    background: url('http://static-image.1911edu.com/cadreCollege_banner.png') no-repeat;
-    background-size: 1920px 420px;
-    background-position: center center;
-  }
+	.vipBanner {
+		position: relative;
+		height: 420px;
+		margin: 0 auto;
+		background: url('http://static-image.1911edu.com/cadreCollege_banner.png') no-repeat;
+		background-size: 1920px 420px;
+		background-position: center center;
+	}
 
-  .container {
-    background: url("http://static-image.1911edu.com/cadreCollege_bg.png") no-repeat;
-    background-size: cover;
+	.container {
+		background: url("http://static-image.1911edu.com/cadreCollege_bg.png") no-repeat;
+		background-size: cover;
 
-    .intro {
-      width: 1100px;
-      // height: 540px;
-      margin: 0 auto;
-      padding: 120px 70px 0;
-      position: relative;
+		.intro {
+			width: 1100px;
+			// height: 540px;
+			margin: 0 auto;
+			padding: 120px 70px 0;
+			position: relative;
 
-      &:before,
-      &:after {
-        content: '';
-        display: inline-block;
-        width: 69px;
-        height: 43px;
-        position: absolute;
-        background: url("http://static-image.1911edu.com/cadreCollege_icon1.png") no-repeat;
-        background-size: cover;
-      }
+			&:before,
+			&:after {
+				content: '';
+				display: inline-block;
+				width: 69px;
+				height: 43px;
+				position: absolute;
+				background: url("http://static-image.1911edu.com/cadreCollege_icon1.png") no-repeat;
+				background-size: cover;
+			}
 
-      &:before {
-        top: 50px;
-        left: 0;
-      }
+			&:before {
+				top: 50px;
+				left: 0;
+			}
 
-      &:after {
-        bottom: 60px;
-        right: 0;
-      }
+			&:after {
+				bottom: 0;
+				right: 0;
+			}
 
-      p {
-        text-indent: 2em;
-        font-size: 18px;
-        line-height: 34px;
-        position: relative;
-      }
-    }
+			p {
+				text-indent: 2em;
+				font-size: 18px;
+				line-height: 34px;
+				position: relative;
+			}
+		}
 
-    .studyInfo {
-      // background: url("http://static-image.1911edu.com/cadreCollege_study.png") no-repeat;
-      // background-size: 1920px auto;
-      // background-position: top;
-      padding-bottom: 60px;
+		.studyInfo {
+			// background: url("http://static-image.1911edu.com/cadreCollege_study.png") no-repeat;
+			// background-size: 1920px auto;
+			// background-position: top;
+			padding-bottom: 60px;
 
-      .main {
-        width: 1100px;
-        margin: 0 auto;
-      }
+			.main {
+				width: 1100px;
+				margin: 0 auto;
+			}
 
-      h2 {
-        color: #f94c00;
-        font-size: 36px;
-        text-align: center;
-        font-weight: 700;
-        margin: 60px 0 50px 0;
-        font-weight: bold;
+			h2 {
+				color: #f94c00;
+				font-size: 36px;
+				text-align: center;
+				font-weight: 700;
+				margin: 60px 0 50px 0;
+				font-weight: bold;
 
-        &:before,
-        &:after {
-          content: '';
-          display: inline-block;
-          width: 50px;
-          height: 43px;
-          vertical-align: middle;
-          margin: 0 25px;
-        }
+				&:before,
+				&:after {
+					content: '';
+					display: inline-block;
+					width: 50px;
+					height: 43px;
+					vertical-align: middle;
+					margin: 0 25px;
+				}
 
-        &:before {
-          background: url("http://static-image.1911edu.com/cadreCollege_flag2.png") no-repeat;
-          background-size: cover;
-          transform: rotateY(180deg);
-        }
+				&:before {
+					background: url("http://static-image.1911edu.com/cadreCollege_flag2.png") no-repeat;
+					background-size: cover;
+					transform: rotateY(180deg);
+				}
 
-        &:after {
-          background: url("http://static-image.1911edu.com/cadreCollege_flag2.png") no-repeat;
-          background-size: cover;
-        }
+				&:after {
+					background: url("http://static-image.1911edu.com/cadreCollege_flag2.png") no-repeat;
+					background-size: cover;
+				}
 
-        &.first {
-          color: #fff;
+				&.first {
+					color: #fff;
 
-          &:before {
-            background: url("http://static-image.1911edu.com/cadreCollege_flag1.png") no-repeat;
-            background-size: cover;
-            transform: rotateY(180deg);
-          }
+					&:before {
+						background: url("http://static-image.1911edu.com/cadreCollege_flag1.png") no-repeat;
+						background-size: cover;
+						transform: rotateY(180deg);
+					}
 
-          &:after {
-            background: url("http://static-image.1911edu.com/cadreCollege_flag1.png") no-repeat;
-            background-size: cover;
-          }
-        }
-      }
+					&:after {
+						background: url("http://static-image.1911edu.com/cadreCollege_flag1.png") no-repeat;
+						background-size: cover;
+					}
+				}
+			}
 
-      .group {
-        height: 473px;
-        background: url("http://static-image.1911edu.com/cadreCollege_teacher.png") no-repeat;
-        background-size: cover;
+			.group {
+				height: 473px;
+				background: url("http://static-image.1911edu.com/cadreCollege_teacher.png") no-repeat;
+				background-size: cover;
 
-        h4 {
-          font-size: 36px;
-          line-height: 36px;
-          margin-bottom: 20px;
-          text-align: center;
-          padding-top: 230px;
-        }
+				h4 {
+					font-size: 36px;
+					line-height: 36px;
+					margin-bottom: 20px;
+					text-align: center;
+					padding-top: 230px;
+				}
 
-        p {
-          font-size: 18px;
-          line-height: 36px;
-          text-indent: 2em;
-          padding: 0 50px;
-        }
-      }
+				p {
+					font-size: 18px;
+					line-height: 36px;
+					text-indent: 2em;
+					padding: 0 50px;
+				}
+			}
 
-      .object {
-        height: 90px;
-        line-height: 90px;
-        margin-top: 55px;
-        background: url("http://static-image.1911edu.com/cadreCollege_object.png") no-repeat;
-        background-size: cover;
+			.object {
+				height: 90px;
+				line-height: 90px;
+				margin-top: 55px;
+				background: url("http://static-image.1911edu.com/cadreCollege_object.png") no-repeat;
+				background-size: cover;
 
-        .left {
-          width: 365px;
-          text-align: center;
-          vertical-align: middle;
-          color: #fff;
-          font-size: 34px;
-          font-weight: bold;
-        }
+				.left {
+					width: 365px;
+					text-align: center;
+					vertical-align: middle;
+					color: #fff;
+					font-size: 34px;
+					font-weight: bold;
+				}
 
-        .right {
-          width: 500px;
-          font-size: 24px;
-          vertical-align: middle;
-          margin-left: 80px;
-        }
-      }
+				.right {
+					width: 500px;
+					font-size: 24px;
+					vertical-align: middle;
+					margin-left: 80px;
+				}
+			}
 
-      .study {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+			.study {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
 
-        li {
-          width: 25%;
-          font-size: 18px;
-          line-height: 50px;
+				li {
+					width: 25%;
+					font-size: 18px;
+					line-height: 50px;
 
-          span {
-            margin-right: 10px;
+					span {
+						margin-right: 10px;
 
-            &:first-child {
-              width: 41px;
-              height: 39px;
-              color: #fff;
-              line-height: 39px;
-              text-align: center;
-              background: url("http://static-image.1911edu.com/cadreCollege_num.png") no-repeat;
-              background-size: cover;
-            }
-          }
-        }
-      }
+						&:first-child {
+							width: 41px;
+							height: 39px;
+							color: #fff;
+							line-height: 39px;
+							text-align: center;
+							background: url("http://static-image.1911edu.com/cadreCollege_num.png") no-repeat;
+							background-size: cover;
+						}
+					}
+				}
+			}
 
-      .columns {
-        width: 1100px;
-        height: 190px;
-        padding: 45px 60px;
-        font-size: 21px;
-        color: #fff;
-        line-height: 41px;
-        text-indent: 2em;
-        margin-top: 35px;
-        background: url("http://static-image.1911edu.com/cadreCollege_columns.png") no-repeat;
-        background-size: cover;
-      }
+			.columns {
+				width: 1100px;
+				height: 190px;
+				padding: 45px 60px;
+				font-size: 21px;
+				color: #fff;
+				line-height: 41px;
+				text-indent: 2em;
+				margin-top: 35px;
+				background: url("http://static-image.1911edu.com/cadreCollege_columns.png") no-repeat;
+				background-size: cover;
+			}
 
-      .harvest {
-        text-indent: 2em;
-        font-size: 20px;
-        line-height: 34px;
-        text-indent: 2em;
-        margin-bottom: 30px;
-      }
+			.harvest {
+				text-indent: 2em;
+				font-size: 20px;
+				line-height: 34px;
+				text-indent: 2em;
+				margin-bottom: 30px;
+			}
 
-      .attestation {
-        width: 900px;
-        margin: 0 auto 40px;
+			.attestation {
+				width: 900px;
+				margin: 0 auto 40px;
 
-        .left,
-        .right {
-          float: left;
-        }
+				.left,
+				.right {
+					float: left;
+				}
 
-        .left {
-          width: 670px;
-          margin-right: 50px;
-          margin-top: 26px;
+				.left {
+					width: 670px;
+					margin-right: 50px;
+					margin-top: 26px;
 
-          .circle {
-            width: 14px;
-            height: 14px;
-            background-color: #43a2ca;
-            margin-right: 15px;
-            display: inline-block;
-            vertical-align: top;
-            margin-top: 13px;
-          }
+					.circle {
+						width: 14px;
+						height: 14px;
+						background-color: #43a2ca;
+						margin-right: 15px;
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 13px;
+					}
 
-          .text {
-            width: 640px;
-            display: inline-block;
-            font-size: 20px;
-            line-height: 34px;
-            vertical-align: top;
-          }
-        }
+					.text {
+						width: 640px;
+						display: inline-block;
+						font-size: 20px;
+						line-height: 34px;
+						vertical-align: top;
+					}
+				}
 
-        .right {
-          width: 172px;
-          height: 116px;
+				.right {
+					width: 172px;
+					height: 116px;
 
-          img {
-            width: 100%;
-            height: 100%;
-          }
-        }
-      }
+					img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
 
-      .certification {
-        width: 989px;
-        height: 699px;
-        margin: 0 auto;
+			.certification {
+				width: 989px;
+				height: 699px;
+				margin: 0 auto;
 
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-    }
-  }
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+	}
 }

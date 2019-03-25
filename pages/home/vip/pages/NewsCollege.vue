@@ -55,7 +55,7 @@
               <i class="icon">2</i>
               <span>媒体沟通</span>
             </div>
-            <div class="item">
+            <div class="item three">
               <i class="icon">3</i>
               <span>战略传播</span>
             </div>
@@ -71,7 +71,7 @@
               <i class="icon">6</i>
               <span>媒体融合发展与转型升级</span>
             </div>
-            <div class="item">
+            <div class="item three">
               <i class="icon">7</i>
               <span>广告营销</span>
             </div>
@@ -120,7 +120,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       contentList: [
         "综合媒介素养",
