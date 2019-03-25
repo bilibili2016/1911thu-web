@@ -17,20 +17,22 @@
             <span class="right">各级各类企业中高层管理人员</span>
           </div>
           <div class="one-bottom">
-            <h4 class="commer-title">
-              <span>学习内容</span>
-            </h4>
-            <p class="pCss">1911学堂在线商学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。</p>
+
           </div>
         </div>
       </div>
       <div class="commer-two">
+        <h4 class="commer-title">
+          <span>学习内容</span>
+        </h4>
         <div class="two-items clearfix">
           <div class="item" v-for="(item,index) in studyList" :key="index">
             <i>{{index+1}}</i>
             <span>{{item}}</span>
           </div>
         </div>
+        <p class="pCss">1911学堂在线商学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。</p>
+
       </div>
       <div class="commer-three">
         <h4 class="commer-title">

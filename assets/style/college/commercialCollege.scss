@@ -112,10 +112,28 @@
 			}
 		}
 		.commer-two {
-			height: 405px;
+			// height: 405px;
 			background: url('http://static-image.1911edu.com/commer-bg2.png') no-repeat;
 			padding-top: 55px;
-
+			padding-bottom: 180px;
+			.commer-title {
+				margin-top: 0;
+				background-position: center;
+				span {
+					color: #fff;
+				}
+				&::before {
+					background: url('http://static-image.1911edu.com/commer-left.png') no-repeat;
+				}
+				&::after {
+					background: url('http://static-image.1911edu.com/commer-right.png') no-repeat;
+				}
+			}
+			.pCss {
+				width: 1100px;
+				margin: 0 auto;
+				color: #fff;
+			}
 			.two-items {
 				width: 1000px;
 				margin: 0 auto;
