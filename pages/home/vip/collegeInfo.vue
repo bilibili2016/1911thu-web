@@ -2,14 +2,14 @@
   <div>
     <div class="collegeInfo" v-if="noCollege" v-loading="loading">
       <!-- <v-college v-if="title=='cadreCollege'||title=='commercialCollege'" :vipInfo="vipInfo"></v-college> -->
-      <v-chineseCollege v-if="title=='chineseCollege'" :data="collegeImg"></v-chineseCollege>
-      <v-healthCollege v-if="title=='healthCollege'" :data="collegeImg"></v-healthCollege>
-      <v-sportsCollege v-if="title=='sportsCollege'" :data="collegeImg"></v-sportsCollege>
-      <v-smartCollege v-if="title=='smartCollege'" :data="collegeImg"></v-smartCollege>
-      <v-eduCollege v-if="title=='eduCollege'" :data="collegeImg"></v-eduCollege>
-      <v-newsCollege v-if="title=='newsCollege'" :data="collegeImg"></v-newsCollege>
-      <v-businessCollege v-if="title=='commercialCollege'" :data="collegeImg"></v-businessCollege>
-      <v-leaderCollege v-if="title=='cadreCollege'" :data="collegeImg"></v-leaderCollege>
+      <v-chineseCollege v-if="title=='chineseCollege'"></v-chineseCollege>
+      <v-healthCollege v-if="title=='healthCollege'"></v-healthCollege>
+      <v-sportsCollege v-if="title=='sportsCollege'"></v-sportsCollege>
+      <v-smartCollege v-if="title=='smartCollege'"></v-smartCollege>
+      <v-eduCollege v-if="title=='eduCollege'"></v-eduCollege>
+      <v-newsCollege v-if="title=='newsCollege'"></v-newsCollege>
+      <v-commercialCollege v-if="title=='commercialCollege'"></v-commercialCollege>
+      <v-cadreCollege v-if="title=='cadreCollege'"></v-cadreCollege>
       <!-- 底部学院学费信息 -->
       <v-info :class="title" v-if="flag" :vipInfo="vipInfo" @lookCourse="lookCourse" @buyVip="buyVip" @identificate="identificate"></v-info>
       <!-- 会员购买弹窗 -->
@@ -35,32 +35,32 @@ import {
 import { mapState, mapActions, mapGetters } from "vuex";
 import VipBuy from "@/components/common/VipBuy.vue";
 
-import College from "@/pages/home/vip/components/College";
-import ChineseCollege from "@/pages/home/vip/components/ChineseCollege";
-import HealthCollege from "@/pages/home/vip/components/HealthCollege";
-import SportsCollege from "@/pages/home/vip/components/SportsCollege";
-import SmartCollege from "@/pages/home/vip/components/SmartCollege";
-import EduCollege from "@/pages/home/vip/components/EduCollege";
-import NewsCollege from "@/pages/home/vip/components/NewsCollege";
-import BusinessCollege from "@/pages/home/vip/components/CommercialCollege";
-import LeaderCollege from "@/pages/home/vip/components/CadreCollege";
+// import College from "@/pages/home/vip/pages/College";
+import CadreCollege from "@/pages/home/vip/pages/CadreCollege";
+import ChineseCollege from "@/pages/home/vip/pages/ChineseCollege";
+import CommercialCollege from "@/pages/home/vip/pages/CommercialCollege";
+import EduCollege from "@/pages/home/vip/pages/EduCollege";
+import HealthCollege from "@/pages/home/vip/pages/HealthCollege";
+import NewsCollege from "@/pages/home/vip/pages/NewsCollege";
+import SmartCollege from "@/pages/home/vip/pages/SmartCollege";
+import SportsCollege from "@/pages/home/vip/pages/SportsCollege";
 
 import Info from "@/pages/home/vip/components/Info";
 export default {
   components: {
-    "v-college": College,
+    // "v-college": College,
     "v-chineseCollege": ChineseCollege,
     "v-healthCollege": HealthCollege,
     "v-sportsCollege": SportsCollege,
     "v-smartCollege": SmartCollege,
     "v-eduCollege": EduCollege,
     "v-newsCollege": NewsCollege,
-    "v-businessCollege": BusinessCollege,
-    "v-leaderCollege": LeaderCollege,
+    "v-commercialCollege": CommercialCollege,
+    "v-cadreCollege": CadreCollege,
     "v-info": Info,
     "v-vipbuy": VipBuy
   },
-  data() {
+  data () {
     return {
       flag: false,
       vipInfo: "",
@@ -162,7 +162,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid"]),
     //   查看课程
-    lookCourse() {
+    lookCourse () {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -175,7 +175,7 @@ export default {
       });
     },
     //立即购买
-    buyVip() {
+    buyVip () {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -183,11 +183,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow(val) {
+    changeVipShow (val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate() {
+    identificate () {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -197,7 +197,7 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    screeningImg(data) {
+    screeningImg (data) {
       this.collegeArr.forEach(v => {
         if (v.title == data.en_title) {
           this.collegeImg = v.url;
@@ -206,7 +206,7 @@ export default {
       });
     },
     //会员详情
-    vipDetail() {
+    vipDetail () {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
@@ -228,7 +228,7 @@ export default {
       });
     },
     // 设置图片宽度
-    setWidth() {
+    setWidth () {
       if (this.collegeImg.length == 0) {
         this.noCollege = false;
         return false;
@@ -253,7 +253,7 @@ export default {
       this.loading = false;
     },
     // 底部操作栏动态
-    addClass() {
+    addClass () {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -266,13 +266,13 @@ export default {
         this.bottom = false;
       }
     },
-    init() {
+    init () {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
       this.title = matchSplits("title");
     }
   },
-  mounted() {
+  mounted () {
     (this.loading = true), this.init();
     this.vipDetail();
     // 寛高设置
@@ -280,11 +280,11 @@ export default {
     //   this.relativeID = matchSplits("cid");
   },
   watch: {
-    $route(v, oldv) {
+    $route (v, oldv) {
       this.init();
       this.vipDetail();
     },
-    title() {
+    title () {
       this.setWidth();
     }
   }

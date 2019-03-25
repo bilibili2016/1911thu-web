@@ -24,7 +24,7 @@ import { getNetwork } from "@/lib/util/helper";
 
 export default {
   props: ["categoryArr", "projectArr"],
-  data() {
+  data () {
     return {
       isHidden: false,
       changeActive: "",
@@ -101,11 +101,11 @@ export default {
     };
   },
   methods: {
-    handleClick(item, child, index) {
+    handleClick (item, child, index) {
       this.isHidden = false;
       this.handleLiClick(item, child, index);
     },
-    handleLiClick(item, child, index) {
+    handleLiClick (item, child, index) {
       if (index != undefined) {
         document.getElementsByClassName("");
         let subLen = this.$refs.subIndex;
@@ -118,6 +118,8 @@ export default {
       }
       //学院
       if (item.id == "onlineCollege") {
+        console.log(item);
+
         this.$router.push({
           path: "/home/vip/collegeInfo",
           query: {
@@ -138,10 +140,10 @@ export default {
         this.$router.push(item.link);
       }
     },
-    isShowSub() {
+    isShowSub () {
       this.isHidden = false;
     },
-    changeHeaderActive() {
+    changeHeaderActive () {
       this.isHidden = true;
 
       let pathName = window.location.pathname;
@@ -213,7 +215,7 @@ export default {
       }
     },
     // 学院列表
-    vipGoodsList() {
+    vipGoodsList () {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           for (const key in this.navList) {
@@ -225,7 +227,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     this.vipGoodsList();
     this.changeHeaderActive();
     if (getNetwork()) {
