@@ -7,7 +7,7 @@
       </span>
     </div>
     <div class="examine-bottom">
-      <div class="one">1911学堂学员在学院完成学习后，即可参加在线认证考试，考试通过者将获得国内外其他知名院校颁发的认证证书及1911学堂结业证书，证书均配有可在官方网站进行查询的唯一认证编码。</div>
+      <div class="one">1911学堂学员在学院完成学习后，即可参加在线认证考试，考试通过者将获得国内外知名院校颁发的认证证书及1911学堂结业证书，证书均配有可在官方网站进行查询的唯一认证编码。</div>
       <div class="examineImg">
         <img src="http://static-image.1911edu.com/certification.png" alt>
       </div>
@@ -29,7 +29,7 @@
       </div>
       <div class="ask">
         <p class="tit">5. 颁发证书</p>
-        <p>学院将根据学员考试成绩颁发相应证书，分数大于60分，即可获得国内外其他知名院校颁发的认证证书及1911学堂结业证书。</p>
+        <p>学院将根据学员考试成绩颁发相应证书，分数大于60分，即可获得国内外知名院校颁发的认证证书及1911学堂结业证书。</p>
       </div>
       <div class="ask">
         <p class="tit">6. 有效期限</p>
@@ -84,7 +84,7 @@ import { examine } from "~/lib/v1_sdk/index";
 import { message, matchSplits, getNet, IEPopup } from "@/lib/util/helper";
 export default {
   props: ["vipID"],
-  data() {
+  data () {
     return {
       alertText: "",
       showBtn: true,
@@ -105,12 +105,12 @@ export default {
   },
   methods: {
     //  回到VIP列表页
-    handleBack() {
+    handleBack () {
       this.pageData.name = "list";
       this.$bus.$emit("whichShow", this.pageData);
     },
     // 考试规则弹框
-    examRules(type) {
+    examRules (type) {
       IEPopup("pane-tab-tenth", "-ms-page", 0);
       this.vipForm.vipId = this.vipID;
       this.vipForm.type = type;
@@ -131,13 +131,13 @@ export default {
       });
     },
     // 关闭规则弹框
-    closeRules() {
+    closeRules () {
       IEPopup("pane-tab-tenth", "relative", 1);
 
       this.showExamRules = false;
     },
     // 开始考试
-    handleExamine() {
+    handleExamine () {
       this.pageData.id = this.vipID;
       examine.createExamRecordQuestion(this.vipForm).then(response => {
         if (response.status == 100201) {
@@ -147,12 +147,12 @@ export default {
           if (this.vipForm.type == "1") {
             this.$router.push(
               "/profile/components/myexamine/answerQuestion?id=" +
-                response.data.exam_record_id
+              response.data.exam_record_id
             );
           } else {
             this.$router.push(
               "/profile/components/myexamine/simulationExam?id=" +
-                response.data.exam_record_id
+              response.data.exam_record_id
             );
           }
         } else {
@@ -166,7 +166,7 @@ export default {
       });
     },
     //验证考试权限
-    validateExamPrivilege() {
+    validateExamPrivilege () {
       this.vipForm.vipId = this.vipID;
       this.vipForm.type = "1";
       examine.validateExamPrivilege(this.vipForm).then(response => {
@@ -187,7 +187,7 @@ export default {
       });
     },
     // 验证模拟考试权限
-    validateSimulationExam() {
+    validateSimulationExam () {
       this.vipForm.vipId = this.vipID;
       this.vipForm.type = "2";
       examine.validateExamPrivilege(this.vipForm).then(response => {
@@ -199,7 +199,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     this.validateExamPrivilege();
     this.validateSimulationExam();
   }
