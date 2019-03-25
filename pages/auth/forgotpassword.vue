@@ -23,7 +23,7 @@
           <input :type="pwdType" v-model="fpData.password" class="hideInput" autocomplete='new-password'>
           <!-- 密码 -->
           <el-input :type="pwdType" v-model="fpData.password" placeholder="8-16位密码，包含字母、数字、标点符号等"></el-input>
-          <span :class="{hidePwd:!showPwd,showPwd:showPwd}" @click="changePwd" alt=""></span>
+          <span :class="{hidePwdEye:!showPwd,showPwdEye:showPwd}" @click="changePwd" alt=""></span>
         </el-form-item>
         <el-row>
           <el-button @click.native="forgetPassword()">提交</el-button>
@@ -46,7 +46,7 @@ import { mapActions } from "vuex";
 import { auth } from "~/lib/v1_sdk/index";
 import { encryption, message, Trim } from "~/lib/util/helper";
 export default {
-  data () {
+  data() {
     return {
       showPwd: false,
       pwdType: "password",
@@ -113,7 +113,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["forgetPasswordAjax"]),
-    changePwd () {
+    changePwd() {
       if (this.showPwd) {
         this.showPwd = false;
         this.pwdType = "password";
@@ -123,7 +123,7 @@ export default {
       }
     },
     // 验证手机号是否存在
-    verifyRgTel () {
+    verifyRgTel() {
       if (!this.captchaDisable) {
         auth.verifyPhone(this.fpData).then(response => {
           if (response.status === 0) {
@@ -141,7 +141,7 @@ export default {
         });
       }
     },
-    forgetPassword () {
+    forgetPassword() {
       this.fpData.code = String(this.fpData.code);
       this.fpData.password = String(this.fpData.password);
       if (!validatePhone(this.fpData.phones)) {
@@ -169,7 +169,7 @@ export default {
         }
       });
     },
-    async handleGetCode () {
+    async handleGetCode() {
       if (!this.captchaDisable) {
         this.captchaDisable = true;
         auth.smsCodes(this.fpData).then(response => {
@@ -194,20 +194,20 @@ export default {
         });
       }
     },
-    goHome () {
+    goHome() {
       this.$router.push("/");
     },
-    otherLogin () {
+    otherLogin() {
       this.goHome();
       this.$bus.$emit("loginShow", true);
     }
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(vm => {
       vm.$bus.$emit("headerFooterHide");
     });
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     this.$bus.$emit("headerFooterShow");
     next();
   }
