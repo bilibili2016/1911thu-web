@@ -2,9 +2,10 @@
   <div class="con-detail">
     <div class="con-five">
       <h4 class="college-title">
-        <span>学院学费</span>
+        <span v-if=" vipInfo.en_title!='chineseCollege'">学院学费</span>
+        <span v-else></span>
       </h4>
-      <p class="text">学员优惠 惊喜不断</p>
+      <p class=" text">学员优惠 惊喜不断</p>
       <p class="desc">
         学员只需
         <span class="p-one">{{parseInt(vipInfo.present_price)}}元</span>
@@ -44,27 +45,27 @@
 
 <script>
 export default {
-  props: ['vipInfo'],
-  data () {
+  props: ["vipInfo"],
+  data() {
     return {
-      windowHeight: '',
-      paperHeight: '',
-      scrollTop: '',
-      bottom: true,
-    }
+      windowHeight: "",
+      paperHeight: "",
+      scrollTop: "",
+      bottom: true
+    };
   },
   methods: {
-    lookCourse () {
-      this.$emit('lookCourse')
+    lookCourse() {
+      this.$emit("lookCourse");
     },
-    buyVip () {
-      this.$emit('buyVip')
+    buyVip() {
+      this.$emit("buyVip");
     },
-    identificate () {
-      this.$emit('identificate')
+    identificate() {
+      this.$emit("identificate");
     },
     // 底部操作栏动态
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -76,14 +77,13 @@ export default {
       } else {
         this.bottom = false;
       }
-    },
+    }
   },
-  mounted () {
+  mounted() {
     // 寛高设置
     window.addEventListener("scroll", this.addClass);
-  },
-
-}
+  }
+};
 </script>
 
 <style scoped>

@@ -63,10 +63,10 @@
       }
 
       h2 {
-        color: #0D52A1;
+        color: #0d52a1;
         font-size: 36px;
-        font-weight: 700;
         text-align: center;
+        font-weight: 700;
 
         &:before,
         &:after {
@@ -81,7 +81,7 @@
         &:before {
           background: url("http://static-image.1911edu.com/healthCollege_icon3.png") no-repeat;
           background-size: cover;
-          transform: rotateY(180deg)
+          transform: rotateY(180deg);
         }
 
         &:after {
@@ -89,14 +89,13 @@
           background-size: cover;
         }
 
-
         &.first {
           color: #fff;
 
           &:before {
             background: url("http://static-image.1911edu.com/healthCollege_icon4.png") no-repeat;
             background-size: cover;
-            transform: rotateY(180deg)
+            transform: rotateY(180deg);
           }
 
           &:after {
@@ -150,7 +149,7 @@
 
           div {
             h5 {
-              color: #04A749;
+              color: #04a749;
               font-size: 26px;
               line-height: 36px;
               margin-top: 12px;
@@ -172,7 +171,7 @@
         background-position: bottom;
         padding: 89px 0 60px;
         margin-bottom: 86px;
-        background-color: #FAFCFE;
+        background-color: #fafcfe;
       }
 
       .study {
@@ -262,7 +261,7 @@
               width: 14px;
               height: 14px;
               margin: 13px 15px 0 14px;
-              background-color: #1A3B94;
+              background-color: #1a3b94;
               vertical-align: top;
             }
 
