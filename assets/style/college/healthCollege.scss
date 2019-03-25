@@ -66,6 +66,7 @@
 				color: #0d52a1;
 				font-size: 36px;
 				text-align: center;
+				font-weight: 700;
 
 				&:before,
 				&:after {
@@ -198,12 +199,6 @@
 							background: url("http://static-image.1911edu.com/healthCollege_icon11.png") no-repeat;
 							background-size: cover;
 						}
-					}
-					&.left {
-						width: 45%;
-					}
-					&.right {
-						width: 55%;
 					}
 				}
 			}

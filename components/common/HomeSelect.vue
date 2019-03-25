@@ -118,8 +118,6 @@ export default {
       }
       //学院
       if (item.id == "onlineCollege") {
-        console.log(item);
-
         this.$router.push({
           path: "/home/vip/collegeInfo",
           query: {
