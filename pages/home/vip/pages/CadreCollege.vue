@@ -79,7 +79,7 @@
           <div class="attestation clearfix">
             <div class="left">
               <span class="circle"></span>
-              <span class="text">学员学习结束后可申请参加相关考试，考试通过者可获得知名高校颁发的认证证书及1911学堂结业证书。</span>
+              <span class="text">学员学习结束后可申请参加相关考试，考试通过者可获得1911学堂结业证书。</span>
             </div>
             <div class="right">
               <!-- <img src="http://static-image.1911edu.com/college-pic13.png" alt> -->

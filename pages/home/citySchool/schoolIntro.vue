@@ -135,7 +135,7 @@
           <div class="index clearfix">
             <div class="index-left">
               <p class="index-item"><span class="num">1.</span><span class="index-title">品牌授权：</span>授权当地使用1911学堂品牌办学</p>
-              <p class="index-item"><span class="num">2.</span><span class="index-title">认证证书：</span>知名高校的认证证书&nbsp;&nbsp;&nbsp;</p>
+              <p class="index-item"><span class="num">2.</span><span class="index-title">认证证书：</span>1911学堂结业证书&nbsp;&nbsp;&nbsp;</p>
               <p class="index-item"><span class="num">3.</span><span class="index-title">产品支撑：</span>线上课程全提供及技术平台支撑</p>
               <p class="index-item"><span class="num">4.</span><span class="index-title">业务指导：</span>全流程、全周期的业务指导培训</p>
             </div>
@@ -208,7 +208,7 @@ import { Trim, matchSplits, setTitle, message } from "@/lib/util/helper";
 import { personalset, school } from "~/lib/v1_sdk/index";
 
 export default {
-  data () {
+  data() {
     return {
       isClick: false,
       province: [],
@@ -231,10 +231,10 @@ export default {
     };
   },
   methods: {
-    handleLink (link) {
+    handleLink(link) {
       this.$router.push(link);
     },
-    provinceChange (val) {
+    provinceChange(val) {
       this.schoolForm.city_name = "";
       this.schoolForm.city = "";
       if (!this.province && this.province.length == 0) {
@@ -248,7 +248,7 @@ export default {
         }
       }
     },
-    cityChange (val) {
+    cityChange(val) {
       if (!this.city && this.city.length == 0) {
         this.getRegionList();
       }
@@ -260,7 +260,7 @@ export default {
       }
     },
     // 整理省市区
-    getRegion (data, val) {
+    getRegion(data, val) {
       let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
@@ -277,7 +277,7 @@ export default {
       return tmp;
     },
     // 获取省市区
-    getRegionList () {
+    getRegionList() {
       personalset.getRegionList({ region_code: "" }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
@@ -289,7 +289,7 @@ export default {
       });
     },
     //表单验证
-    validate () {
+    validate() {
       if (this.isClick) {
         return false;
       }
@@ -314,7 +314,7 @@ export default {
       this.applicationSchoolmaster();
     },
     //申请分校长
-    applicationSchoolmaster () {
+    applicationSchoolmaster() {
       school.doRecruit(this.schoolForm).then(res => {
         this.isClick = false;
         if (res.status == 0) {
@@ -326,7 +326,7 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     setTitle("城市分校-1911学堂");
     this.getRegionList();
   }

@@ -100,7 +100,7 @@
           <div class="clearfix">
             <div class="left fl">
               <span class="circle"></span>
-              <span class="text">学员参加1911学堂在线体育学院学习，学习结束后可申请参加相关考试，考核通过者将获得知名高校颁发的认证证书及1911学堂结业证书。</span>
+              <span class="text">学员参加1911学堂在线体育学院学习，学习结束后可申请参加相关考试，考核通过者将获得1911学堂结业证书。</span>
             </div>
             <div class="right fr">
               <img src="http://static-image.1911edu.com/cadreCollege_icon2.png" alt>

@@ -317,7 +317,7 @@
       <div class="listOne">
         <p class="title">学习认证</p>
         <div class="content">
-          <h5>完成全部课程并通过考核者，可获得由清华大学及相关合作单位颁发的认证证书。
+          <h5>完成全部课程并通过考核者，可获得1911学堂结业证书。
           </h5>
           <h5>1911学堂即将推出与国外高校合作的学位项目，学员在学堂所修课程的学分后期可转化为学位项目认可的学分。
           </h5>
@@ -363,270 +363,270 @@
 export default {
   data() {
     return {
-      tableOne: '1',
-      tableTwo: '1',
-      tableThree: '1',
+      tableOne: "1",
+      tableTwo: "1",
+      tableThree: "1",
       courseDataOne: [],
       courseDataTwo: [],
       courseDataThree: [],
       courseDataOnea: [
         {
-          title: '当前经济形势判断与区域经济发展',
-          teacher: '马晓河',
-          position: '国家发改委宏观院原副院长、研究员',
-          time: '1'
+          title: "当前经济形势判断与区域经济发展",
+          teacher: "马晓河",
+          position: "国家发改委宏观院原副院长、研究员",
+          time: "1"
         },
         {
-          title: '全球经济确定的和不确定的',
-          teacher: '朱民',
-          position: '清华大学国家金融研究院院长、国际货币基金组织前副总裁',
-          time: '1'
+          title: "全球经济确定的和不确定的",
+          teacher: "朱民",
+          position: "清华大学国家金融研究院院长、国际货币基金组织前副总裁",
+          time: "1"
         },
         {
-          title: '绿色经济与可持续发展',
-          teacher: '许小年',
-          position: '中欧国际工商学院经济学与金融学教授',
-          time: '0.5'
+          title: "绿色经济与可持续发展",
+          teacher: "许小年",
+          position: "中欧国际工商学院经济学与金融学教授",
+          time: "0.5"
         },
         {
-          title: '维护环境生态、发展绿色经济',
-          teacher: '任志强',
-          position: '华远集团原董事长',
-          time: '0.5'
+          title: "维护环境生态、发展绿色经济",
+          teacher: "任志强",
+          position: "华远集团原董事长",
+          time: "0.5"
         }
       ],
       courseDataOneb: [
         {
-          title: '深化供给侧结构性改革的思路与对策',
-          teacher: '李佐军',
-          position: '国务院发展研究中心资源与环境政策研究所副所长',
-          time: '2'
+          title: "深化供给侧结构性改革的思路与对策",
+          teacher: "李佐军",
+          position: "国务院发展研究中心资源与环境政策研究所副所长",
+          time: "2"
         },
         {
-          title: '中国实体经济的发展困局及破解思路',
-          teacher: '张俊伟',
-          position: '国务院发展研究中心宏观经济研究部研究室主任',
-          time: '3'
+          title: "中国实体经济的发展困局及破解思路",
+          teacher: "张俊伟",
+          position: "国务院发展研究中心宏观经济研究部研究室主任",
+          time: "3"
         },
         {
-          title: '新时期中国改革的新思路和新框架',
-          teacher: '刘元春',
-          position: '中国人民大学副校长',
-          time: '0.5'
+          title: "新时期中国改革的新思路和新框架",
+          teacher: "刘元春",
+          position: "中国人民大学副校长",
+          time: "0.5"
         },
         {
-          title: '我国资本市场制度的短板和解决之道',
-          teacher: '刘纪鹏',
-          position: '中国政法大学商学院院长',
-          time: '0.5'
+          title: "我国资本市场制度的短板和解决之道",
+          teacher: "刘纪鹏",
+          position: "中国政法大学商学院院长",
+          time: "0.5"
         },
         {
-          title: '中国经济的新二元结构',
-          teacher: '白重恩',
-          position: '清华大学经济管理学院教授',
-          time: '0.5'
+          title: "中国经济的新二元结构",
+          teacher: "白重恩",
+          position: "清华大学经济管理学院教授",
+          time: "0.5"
         }
       ],
       courseDataTwoa: [
         {
-          title: '领导者选拔任用中的政治素质问题',
-          teacher: '萧鸣政',
-          position: '北京大学政府管理学院行政管理系主任',
-          time: '0.5'
+          title: "领导者选拔任用中的政治素质问题",
+          teacher: "萧鸣政",
+          position: "北京大学政府管理学院行政管理系主任",
+          time: "0.5"
         },
         {
-          title: '组织部门如何选人识人用人',
-          teacher: '张国玉',
-          position: '国家行政学院政治学教研部副教授',
-          time: '2.5'
+          title: "组织部门如何选人识人用人",
+          teacher: "张国玉",
+          position: "国家行政学院政治学教研部副教授",
+          time: "2.5"
         },
         {
-          title: '领导干部执行力提升策略',
-          teacher: '宋世明',
-          position: '国家行政学院公共管理教研部教授',
-          time: '3'
+          title: "领导干部执行力提升策略",
+          teacher: "宋世明",
+          position: "国家行政学院公共管理教研部教授",
+          time: "3"
         },
         {
-          title: '完善行政问责制，提升政府执行力',
-          teacher: '李军鹏',
-          position: '国家行政学院公共管理教研部教授',
-          time: '2.5'
+          title: "完善行政问责制，提升政府执行力",
+          teacher: "李军鹏",
+          position: "国家行政学院公共管理教研部教授",
+          time: "2.5"
         },
         {
-          title: '大数据时代的人力资源管理',
-          teacher: '王通讯',
-          position: '中国人事科学院原院长、研究员',
-          time: '2.5'
+          title: "大数据时代的人力资源管理",
+          teacher: "王通讯",
+          position: "中国人事科学院原院长、研究员",
+          time: "2.5"
         },
         {
-          title: '新时代的领导人才素质',
-          teacher: '董克用',
-          position: '中国人民大学公共管理学院原院长',
-          time: '0.5'
+          title: "新时代的领导人才素质",
+          teacher: "董克用",
+          position: "中国人民大学公共管理学院原院长",
+          time: "0.5"
         }
       ],
       courseDataTwob: [
         {
-          title: '城市群规划应解决什么问题',
-          teacher: '仇保兴',
-          position: '国务院参事、住房和城乡建设部原副部长',
-          time: '0.5'
+          title: "城市群规划应解决什么问题",
+          teacher: "仇保兴",
+          position: "国务院参事、住房和城乡建设部原副部长",
+          time: "0.5"
         },
         {
-          title: '乡村振兴战略与智慧农业发展',
-          teacher: '李国祥',
-          position: '中国社科院农村发展研究所主任',
-          time: '0.5'
+          title: "乡村振兴战略与智慧农业发展",
+          teacher: "李国祥",
+          position: "中国社科院农村发展研究所主任",
+          time: "0.5"
         },
         {
-          title: '如何推进基层治理法治化',
-          teacher: '高其才',
-          position: '清华大学法学院教授',
-          time: '2.5'
+          title: "如何推进基层治理法治化",
+          teacher: "高其才",
+          position: "清华大学法学院教授",
+          time: "2.5"
         }
       ],
       courseDataTwoc: [
         {
-          title: '新常态下地方政府投融资平台转型发展问题及对策',
-          teacher: '赵全厚',
-          position: '财政部科研所金融研究室主任、研究员',
-          time: '2.5'
+          title: "新常态下地方政府投融资平台转型发展问题及对策",
+          teacher: "赵全厚",
+          position: "财政部科研所金融研究室主任、研究员",
+          time: "2.5"
         },
         {
-          title: '我国PPP项目实施的相关法律与政策实务',
-          teacher: '郑春贤',
-          position: '中国政法大学PPP研究中心教授',
-          time: '2.5'
+          title: "我国PPP项目实施的相关法律与政策实务",
+          teacher: "郑春贤",
+          position: "中国政法大学PPP研究中心教授",
+          time: "2.5"
         },
         {
-          title: '财政制度变异的内容和解决方法',
-          teacher: '郭庆旺',
-          position: '中国人民大学财政金融学院院长、教授',
-          time: '0.5'
+          title: "财政制度变异的内容和解决方法",
+          teacher: "郭庆旺",
+          position: "中国人民大学财政金融学院院长、教授",
+          time: "0.5"
         },
         {
-          title: '“政府与市场关系”的经济学思考',
-          teacher: '黄桂田',
-          position: '北京大学经济学院教授',
-          time: '0.5'
+          title: "“政府与市场关系”的经济学思考",
+          teacher: "黄桂田",
+          position: "北京大学经济学院教授",
+          time: "0.5"
         }
       ],
       courseDataTwod: [
         {
-          title: '工业机器人应用与发展思考',
-          teacher: '孙富春',
-          position: '清华大学计算机科学与技术系教授、博士生导师',
-          time: '3'
+          title: "工业机器人应用与发展思考",
+          teacher: "孙富春",
+          position: "清华大学计算机科学与技术系教授、博士生导师",
+          time: "3"
         },
         {
-          title: '“互联网+”时代的物联网产业发展',
-          teacher: '尹浩',
-          position: '中国科学院院士',
-          time: '1'
+          title: "“互联网+”时代的物联网产业发展",
+          teacher: "尹浩",
+          position: "中国科学院院士",
+          time: "1"
         },
         {
-          title: '打造大健康产业链 助力“健康中国2030” ',
-          teacher: '李玲',
-          position: '北京大学中国健康发展研究中心主任',
-          time: '2.5'
+          title: "打造大健康产业链 助力“健康中国2030” ",
+          teacher: "李玲",
+          position: "北京大学中国健康发展研究中心主任",
+          time: "2.5"
         },
         {
-          title: '中国大健康产业发展中的医养结合发展',
-          teacher: '郑静晨',
-          position: '中国工程院院士、原武警总医院院长',
-          time: '1'
+          title: "中国大健康产业发展中的医养结合发展",
+          teacher: "郑静晨",
+          position: "中国工程院院士、原武警总医院院长",
+          time: "1"
         },
         {
-          title: '“一带一路”的机遇与挑战',
-          teacher: '王义桅',
-          position: '中国人民大学国际关系学院教授',
-          time: '2'
+          title: "“一带一路”的机遇与挑战",
+          teacher: "王义桅",
+          position: "中国人民大学国际关系学院教授",
+          time: "2"
         },
         {
-          title: '“一带一路”倡议与财富管理市场投资机遇',
-          teacher: '朱光耀',
-          position: '财政部原副部长',
-          time: '0.5'
+          title: "“一带一路”倡议与财富管理市场投资机遇",
+          teacher: "朱光耀",
+          position: "财政部原副部长",
+          time: "0.5"
         }
       ],
       courseDataThreea: [
         {
-          title: '科学应对压力，维护身心健康',
-          teacher: '祝卓宏',
-          position: '中国科学院心理研究所教授',
-          time: '2.5'
+          title: "科学应对压力，维护身心健康",
+          teacher: "祝卓宏",
+          position: "中国科学院心理研究所教授",
+          time: "2.5"
         },
         {
-          title: '中华优秀传统文化的创造性转化与创新性发展',
-          teacher: '楼宇烈',
-          position: '北京大学哲学系教授',
-          time: '0.5'
+          title: "中华优秀传统文化的创造性转化与创新性发展",
+          teacher: "楼宇烈",
+          position: "北京大学哲学系教授",
+          time: "0.5"
         }
       ],
       courseDataThreeb: [
         {
-          title: '行政领导者公共形象设计与传播',
-          teacher: '刘庆龙',
-          position: '清华大学公共管理学院教授',
-          time: '2.5'
+          title: "行政领导者公共形象设计与传播",
+          teacher: "刘庆龙",
+          position: "清华大学公共管理学院教授",
+          time: "2.5"
         },
         {
-          title: '如何提高领导干部的说服力',
-          teacher: '吴德贵',
-          position: '中国人事科学院原副院长',
-          time: '3'
+          title: "如何提高领导干部的说服力",
+          teacher: "吴德贵",
+          position: "中国人事科学院原副院长",
+          time: "3"
         },
         {
-          title: '群体性事件应急处置策略',
-          teacher: '张小明',
-          position: '国家行政学院应急管理中心教授',
-          time: '2.5'
+          title: "群体性事件应急处置策略",
+          teacher: "张小明",
+          position: "国家行政学院应急管理中心教授",
+          time: "2.5"
         },
         {
-          title: '集体领导力的有效性',
-          teacher: '杨百寅',
-          position: '清华大学经济管理学院领导力与组织管理系主任',
-          time: '0.5'
+          title: "集体领导力的有效性",
+          teacher: "杨百寅",
+          position: "清华大学经济管理学院领导力与组织管理系主任",
+          time: "0.5"
         }
       ]
-    }
+    };
   },
   methods: {
     checkFirst(items) {
-      if (items === '1') {
-        this.courseDataOne = this.courseDataOnea
+      if (items === "1") {
+        this.courseDataOne = this.courseDataOnea;
       } else {
-        this.courseDataOne = this.courseDataOneb
+        this.courseDataOne = this.courseDataOneb;
       }
-      this.tableOne = items
+      this.tableOne = items;
     },
     checkSecond(items) {
-      if (items === '1') {
-        this.courseDataTwo = this.courseDataTwoa
-      } else if (items === '2') {
-        this.courseDataTwo = this.courseDataTwob
-      } else if (items === '3') {
-        this.courseDataTwo = this.courseDataTwoc
-      } else if (items === '4') {
-        this.courseDataTwo = this.courseDataTwod
+      if (items === "1") {
+        this.courseDataTwo = this.courseDataTwoa;
+      } else if (items === "2") {
+        this.courseDataTwo = this.courseDataTwob;
+      } else if (items === "3") {
+        this.courseDataTwo = this.courseDataTwoc;
+      } else if (items === "4") {
+        this.courseDataTwo = this.courseDataTwod;
       }
-      this.tableTwo = items
+      this.tableTwo = items;
     },
     checkThird(items) {
-      if (items === '1') {
-        this.courseDataThree = this.courseDataThreea
+      if (items === "1") {
+        this.courseDataThree = this.courseDataThreea;
       } else {
-        this.courseDataThree = this.courseDataThreeb
+        this.courseDataThree = this.courseDataThreeb;
       }
-      this.tableThree = items
+      this.tableThree = items;
     }
   },
   mounted() {
-    this.courseDataOne = this.courseDataOnea
-    this.courseDataTwo = this.courseDataTwoa
-    this.courseDataThree = this.courseDataThreea
+    this.courseDataOne = this.courseDataOnea;
+    this.courseDataTwo = this.courseDataTwoa;
+    this.courseDataThree = this.courseDataThreea;
   }
-}
+};
 </script>
 
 

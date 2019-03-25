@@ -103,7 +103,7 @@
         <div class="four-text clearfix">
           <div class="four-left">
             <span class="circle"></span>
-            <span class="text">学员参加1911学堂在线新闻传播学院学习，学习结束后可申请参加相关考试，考核通过者将获得中国传媒大学相关部门颁发的认证证书及1911学堂结业证书。</span>
+            <span class="text">学员参加1911学堂在线新闻传播学院学习，学习结束后可申请参加相关考试，考核通过者将获得1911学堂结业证书。</span>
           </div>
           <div class="four-right">
             <img src="http://static-image.1911edu.com/college-pic13.png" alt>

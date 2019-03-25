@@ -5,7 +5,7 @@
       <h4>考试认证</h4>
       <p class="line"></p>
       <p class="text">在线人工智能考试系统</p>
-      <p class="text">知名高校证书</p>
+      <p class="text">1911学堂结业证书</p>
     </div>
     <div class="hybridCon">
       <div class="introduce">
@@ -19,7 +19,7 @@
       <div class="bottomCon clearfix">
         <div class="fl">
           <h4>二、认证方式</h4>
-          <p>学员通过学习相关课程，并达到考试要求时即可通过1911学堂人工智能考试系统进行在线考试，考试通过者将获得清华大学相关部门或国内外其他知名院校颁发的认证证书及1911学堂结业证书，证书均配有可在官方网站进行查询的唯一认证编码。</p>
+          <p>学员通过学习相关课程，并达到考试要求时即可通过1911学堂人工智能考试系统进行在线考试，考试通过者将获得1911学堂结业证书，证书均配有可在官方网站进行查询的唯一认证编码。</p>
         </div>
         <div class="fr">
           <img src="http://static-image.1911edu.com/examAuth_bottom.png" alt="">
