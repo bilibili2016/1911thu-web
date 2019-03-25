@@ -2,7 +2,7 @@
   <div class="schoolIntro">
     <div class="schoolBanner">
       <h4>1911学堂城市分校校长招募计划</h4>
-      <p>1911学堂，一所源自清华、面向世界、致力于终身教育的互联网学校。1911学堂立足互联网时代的技术前沿，以信息化为核心，以大数据为基础，以服务人的终身学习为追求，大胆革新终身教育学习模式，积极探索“互联网+人工智能+教育”的智慧教学模式，全力打造终身学习教育的新业态，为学员提供“线上+线下”混合式学习服务，帮助每一位努力奋进的人实现理想、开创更好的未来。</p>
+      <p>1911学堂，一所致力于终身教育的互联网学校。1911学堂立足互联网时代的技术前沿，以信息化为核心，以大数据为基础，以服务人的终身学习为追求，大胆革新终身教育学习模式，积极探索“互联网+人工智能+教育”的智慧教学模式，全力打造终身学习教育的新业态，为学员提供“线上+线下”混合式学习服务，帮助每一位努力奋进的人实现理想、开创更好的未来。</p>
       <p>城市分校校长招募计划是1911学堂推动全球布局、实现多方共赢的重大战略举措。在1911学堂总部的支持下，各城市分校也将在办学中获得成长与收益：</p>
     </div>
     <div class="con-one">
@@ -12,7 +12,7 @@
             <img class="img1" src="http://static-image.1911edu.com/school-icon1.png" alt="">
           </p>
           <p class="title">品牌赋能</p>
-          <p class="text">1911学堂源自清华、面向世界，是终身教育领域的顶级品牌，有其巨大价值的赋能，将迅速提升自身影响力。</p>
+          <p class="text">1911学堂，是终身教育领域的顶级品牌，有其巨大价值的赋能，将迅速提升自身影响力。</p>
         </div>
         <div class="item">
           <p class="img-con ">
@@ -208,7 +208,7 @@ import { Trim, matchSplits, setTitle, message } from "@/lib/util/helper";
 import { personalset, school } from "~/lib/v1_sdk/index";
 
 export default {
-  data() {
+  data () {
     return {
       isClick: false,
       province: [],
@@ -231,10 +231,10 @@ export default {
     };
   },
   methods: {
-    handleLink(link) {
+    handleLink (link) {
       this.$router.push(link);
     },
-    provinceChange(val) {
+    provinceChange (val) {
       this.schoolForm.city_name = "";
       this.schoolForm.city = "";
       if (!this.province && this.province.length == 0) {
@@ -248,7 +248,7 @@ export default {
         }
       }
     },
-    cityChange(val) {
+    cityChange (val) {
       if (!this.city && this.city.length == 0) {
         this.getRegionList();
       }
@@ -260,7 +260,7 @@ export default {
       }
     },
     // 整理省市区
-    getRegion(data, val) {
+    getRegion (data, val) {
       let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
@@ -277,7 +277,7 @@ export default {
       return tmp;
     },
     // 获取省市区
-    getRegionList() {
+    getRegionList () {
       personalset.getRegionList({ region_code: "" }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
@@ -289,7 +289,7 @@ export default {
       });
     },
     //表单验证
-    validate() {
+    validate () {
       if (this.isClick) {
         return false;
       }
@@ -314,7 +314,7 @@ export default {
       this.applicationSchoolmaster();
     },
     //申请分校长
-    applicationSchoolmaster() {
+    applicationSchoolmaster () {
       school.doRecruit(this.schoolForm).then(res => {
         this.isClick = false;
         if (res.status == 0) {
@@ -326,7 +326,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     setTitle("城市分校-1911学堂");
     this.getRegionList();
   }

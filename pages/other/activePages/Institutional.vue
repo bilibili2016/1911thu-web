@@ -22,7 +22,7 @@
           <div class="con-text">
             <div class="first text clearfix">
               <div class="left">我们的理念</div>
-              <div class="right">源自清华、面向世界，博学笃行、人文日新。</div>
+              <div class="right">博学笃行、人文日新。</div>
               <div class="con-shadow"></div>
             </div>
             <div class="second text clearfix">
@@ -127,7 +127,7 @@ export default {
   watch: {
     $route: "fetchDate"
   },
-  data() {
+  data () {
     var validatePhone = (rule, value, callback) => {
       if (!/^[A-Za-z0-9]+$/.test(value)) {
         callback(new Error("密码只能输入数字、字母"));
@@ -277,8 +277,8 @@ export default {
     ...mapState("auth", ["token"])
   },
   methods: {
-    fetchDate() {},
-    companyPost(formName) {
+    fetchDate () { },
+    companyPost (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           // if (this.company.date == '' || this.company.time == '') {
@@ -320,14 +320,14 @@ export default {
         }
       });
     },
-    handleSelect(item) {},
-    closeRecommend() {
+    handleSelect (item) { },
+    closeRecommend () {
       this.recommend = false;
       document.getElementsByTagName("body")[0].style.padding = "0";
     },
-    querySearch(queryString, cb) {},
+    querySearch (queryString, cb) { },
     // 获取验证码 this.registerData
-    async handleGetCode(data) {
+    async handleGetCode (data) {
       this.codeClick = true;
       if (
         this.company.phones === "" ||
@@ -367,7 +367,7 @@ export default {
         });
       }
     },
-    pageScroll() {
+    pageScroll () {
       let totalHeight;
       let topImgHeight;
       if (this.$refs.topImg) {
@@ -387,10 +387,10 @@ export default {
         this.istopBottom = false;
       }
     },
-    handleSelect(item) {
+    handleSelect (item) {
       this.company.companyname = item.company_name;
     },
-    querySearchAsync(queryString, cb) {
+    querySearchAsync (queryString, cb) {
       //搜索单位
       queryString = queryString.replace(/^\s+|\s+$/g, "");
       if (queryString === "") {
@@ -404,7 +404,7 @@ export default {
       clearTimeout(this.timeout);
       cb(results);
     },
-    createStateFilter(queryString) {
+    createStateFilter (queryString) {
       return state => {
         return (
           state.company_name
@@ -414,7 +414,7 @@ export default {
       };
     },
     //搜索单位 接口
-    searchCompanyList() {
+    searchCompanyList () {
       if (this.company.companyname === "") {
         return false;
       } else {
@@ -430,12 +430,12 @@ export default {
         });
       }
     },
-    handleLink(url) {
+    handleLink (url) {
       persistStore.set("cid", 0);
       this.$router.push(url);
     },
     //跳转到自定制项目
-    goCustomerProject() {
+    goCustomerProject () {
       if (persistStore.get("token")) {
         this.$router.push({
           path: "/project/customerProject",
@@ -449,7 +449,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     setTitle("单位内训-1911学堂");
     this.company.userID = this.token;
     // this.$bus.$emit('bannerShow', true)
@@ -464,16 +464,16 @@ export default {
       )[0].offsetHeight;
     }
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit("bannerImg", false);
     });
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     this.$bus.$emit("bannerImg", false);
-    next(vm => {});
+    next(vm => { });
   },
-  deactivated() {
+  deactivated () {
     window.removeEventListener("scroll", this.pageScroll);
   }
 };
