@@ -19,7 +19,7 @@
 
 		.intro {
 			width: 1100px;
-			height: 540px;
+			// height: 540px;
 			margin: 0 auto;
 			padding: 120px 70px 0;
 			position: relative;
@@ -54,9 +54,9 @@
 		}
 
 		.studyInfo {
-			background: url("http://static-image.1911edu.com/cadreCollege_study.png") no-repeat;
-			background-size: 1920px auto;
-			background-position: top;
+			// background: url("http://static-image.1911edu.com/cadreCollege_study.png") no-repeat;
+			// background-size: 1920px auto;
+			// background-position: top;
 			padding-bottom: 60px;
 			.main {
 				width: 1100px;
@@ -67,7 +67,8 @@
 				color: #f94c00;
 				font-size: 36px;
 				text-align: center;
-				line-height: 120px;
+				// line-height: 120px;
+				margin: 60px 0 50px 0;
 
 				&:before,
 				&:after {
