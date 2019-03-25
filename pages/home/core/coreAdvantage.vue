@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     handleLink (link) {
-      //   this.$router.push(link);
+      this.$router.push(link);
     },
     setActiveItem (index) {
       this.$refs.coreRightCarousel.setActiveItem(index);
