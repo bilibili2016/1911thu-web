@@ -132,6 +132,12 @@
 					.pCss {
 						color: #fff;
 					}
+					@media only screen and (max-device-width: 375px) {
+						.pCss {
+							font-size: 16px;
+							line-height: 34px;
+						}
+					}
 				}
 			}
 			.three-middle {

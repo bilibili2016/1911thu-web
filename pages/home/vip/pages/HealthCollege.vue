@@ -68,51 +68,51 @@
           <div class="main">
             <h2>学习内容</h2>
             <ul class="study">
-              <li>
+              <li class="left">
                 <span>1</span>
                 <span>医疗卫生体系改革</span>
               </li>
-              <li>
+              <li class="right">
                 <span>7</span>
                 <span>大健康产业与中医药融合</span>
               </li>
-              <li>
+              <li class="left">
                 <span>2</span>
                 <span>大健康产业与养老产业发展</span>
               </li>
-              <li>
+              <li class="right">
                 <span>8</span>
                 <span>国家十三五规划与医药行业发展趋势</span>
               </li>
-              <li>
+              <li class="left">
                 <span>3</span>
                 <span>大健康产业互联网思维与营销</span>
               </li>
-              <li>
+              <li class="right">
                 <span>9</span>
                 <span>大健康与生态绿色农业融合发展</span>
               </li>
-              <li>
+              <li class="left">
                 <span>4</span>
                 <span>智慧医疗服务与大健康未来</span>
               </li>
-              <li>
+              <li class="right">
                 <span>10</span>
                 <span>从智能可穿戴、万物互联到全民健身的大数据服务</span>
               </li>
-              <li>
+              <li class="left">
                 <span>5</span>
                 <span>医药与医疗器械行业发展前景</span>
               </li>
-              <li>
+              <li class="right">
                 <span>11</span>
                 <span>健康产品制造</span>
               </li>
-              <li>
+              <li class="left">
                 <span>6</span>
                 <span>医养结合的大健康产业发展前景</span>
               </li>
-              <li>
+              <li class="right">
                 <span>12</span>
                 <span>大健康产业投融资</span>
               </li>

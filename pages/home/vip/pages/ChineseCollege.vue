@@ -62,51 +62,13 @@
           <img src="http://static-image.1911edu.com/chinese-pic6.png" alt>
         </div>
       </div>
-      <!-- <div class="eduWidth edu-three">
-        <div class=" three-top">
-          <h4 class="edu-title"><span>学习内容</span></h4>
-          <div class=" three-items clearfix">
-            <div class="item" v-for="(item,index) in contentList" :key="index">
-              <i class="icon">{{1+index}}</i>
-              <span>{{item}}</span>
-            </div>
-          </div>
-          <div class="top-desc">
-            <p class="pCss">1911学堂在线教育学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。</p>
-          </div>
-        </div>
-        <div class="three-middle">
-          <h4 class="edu-title"><span>学习收获</span></h4>
-          <div class="clearfix">
-            <div class="middle-left"><img src="http://static-image.1911edu.com/edu-icon5.png" alt=""></div>
-            <div class="middle-right">
-              <p class="pCss">通过1911学堂在线教育学堂可以了解到互联网+时代下的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统、教学设施等发生的变化，以及互联网背景下基于社会需求的教育人才培养模式和管理方式等知识技能。</p>
-            </div>
-          </div>
-        </div>
-        <div class="three-bottom">
-          <h4 class="edu-title"><span>考核认证</span></h4>
-          <div class="three-text clearfix">
-            <div class="three-left">
-              <span class="circle"></span>
-              <span class="text">学员参加1911学堂在线教育学院学习，学习结束后可申请参加相关考试，考核通过者将获得清华大学相关部门颁发的认证证书及1911学堂结业证书。</span>
-            </div>
-            <div class="three-right">
-              <img src="http://static-image.1911edu.com/college-pic13.png" alt>
-            </div>
-          </div>
-          <div class="three-certification">
-            <img src="http://static-image.1911edu.com/edu-icon4.png" alt>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       contentList: [
         "国学概论",
