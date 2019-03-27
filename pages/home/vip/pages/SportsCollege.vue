@@ -1,6 +1,6 @@
 <template>
-  <!-- 干部学院 -->
-  <div class="cadreCollege">
+  <!-- 体育学院 -->
+  <div class="sportCollege">
     <div class="vipBanner"></div>
     <div class="container">
       <div class="main">
@@ -39,50 +39,11 @@
         <div class="main">
           <h2>学习内容</h2>
           <ul class="study">
-            <li>
-              <span>1</span>
-              <span>体育行业发展</span>
+            <li v-for="(item,index) in conList" :key="index">
+              <span>{{1+index}}</span>
+              <span>{{item}}</span>
             </li>
-            <li>
-              <span>2</span>
-              <span>体育投融资</span>
-            </li>
-            <li>
-              <span>3</span>
-              <span>赛事组织</span>
-            </li>
-            <li>
-              <span>4</span>
-              <span>场馆运营</span>
-            </li>
-            <li>
-              <span>5</span>
-              <span>体育培训</span>
-            </li>
-            <li>
-              <span>6</span>
-              <span>体育营销及IP版权</span>
-            </li>
-            <li>
-              <span>7</span>
-              <span>电竞</span>
-            </li>
-            <li>
-              <span>8</span>
-              <span>“体育+” 融合发展</span>
-            </li>
-            <li>
-              <span>9</span>
-              <span>运动与健康</span>
-            </li>
-            <li>
-              <span>10</span>
-              <span>运动员职业转型</span>
-            </li>
-            <li>
-              <span>11</span>
-              <span>体育干部领导力提升</span>
-            </li>
+
           </ul>
           <div class="columns">
             1911学堂在线体育学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。
@@ -116,7 +77,25 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      conList: [
+        "体育行业发展",
+        "体育投融资",
+        "赛事组织",
+        "场馆运营",
+        "体育培训",
+        "体育营销及IP版权",
+        "电竞",
+        "“体育+” 融合发展",
+        "运动与健康",
+        "运动员职业转型",
+        "体育干部领导力提升"
+      ]
+    };
+  }
+};
 </script>
 
 <style scoped lang="scss">

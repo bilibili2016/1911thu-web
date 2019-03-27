@@ -1,6 +1,6 @@
 <template>
-  <!-- 干部学院 -->
-  <div class="cadreCollege">
+  <!-- 健康学院 -->
+  <div class="healthCollege">
     <div class="vipBanner"></div>
     <div class="container">
       <div class="intro">

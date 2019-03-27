@@ -1,292 +1,294 @@
 .smartCollege {
-	width: 100%;
-	padding: 0 0 20px;
-	background-color: #fff;
-	color: #222;
+  width: 100%;
+  padding: 0 0 20px;
+  background-color: #fff;
+  color: #222;
 
-	.vipBanner {
-		position: relative;
-		height: 660px;
-		margin: 0 auto;
-		background: url('http://static-image.1911edu.com/smartCollege_banner.png') no-repeat;
-		background-size: 1920px 660px;
-		background-position: center center;
-	}
+  .vipBanner {
+    position: relative;
+    height: 660px;
+    margin: 0 auto;
+    background: url('http://static-image.1911edu.com/smartCollege_banner.png') no-repeat;
+    background-size: 1920px 660px;
+    background-position: center center;
+  }
 
-	.container {
-		line-height: 36px;
-		background: url('http://static-image.1911edu.com/smartCollege_bg1.png') no-repeat;
-		background-position: right 0px;
+  .container {
+    line-height: 36px;
+    background: url('http://static-image.1911edu.com/smartCollege_bg1.png') no-repeat;
+    background-position: right 0px;
 
-		.intro {
-			width: 1100px;
-			margin: 68px auto;
-			font-size: 18px;
-			line-height: 36px;
-			padding: 90px 70px 100px;
-			background: url('http://static-image.1911edu.com/smartCollege_icon3.png') no-repeat;
-			background-size: 100% 100%;
+    .intro {
+      width: 1100px;
+      margin: 68px auto;
+      font-size: 18px;
+      line-height: 36px;
+      padding: 90px 70px 100px;
+      background: url('http://static-image.1911edu.com/smartCollege_icon3.png') no-repeat;
+      background-size: 100% 100%;
 
-			p {
-				text-indent: 2em;
-			}
-		}
+      p {
+        text-indent: 2em;
+      }
+    }
 
-		.studyInfo {
-			background: url("http://static-image.1911edu.com/smartCollege_teacherBg.png") no-repeat;
-			background-size: 1920px auto;
-			background-position: top;
+    .studyInfo {
+      background: url("http://static-image.1911edu.com/smartCollege_teacherBg.png") no-repeat;
+      background-size: 1920px auto;
+      background-position: top;
 
-			.main {
-				width: 1100px;
-				margin: 0 auto;
-				padding-top: 80px;
-			}
+      .main {
+        width: 1100px;
+        margin: 0 auto;
+        padding-top: 80px;
+      }
 
-			h2 {
-				color: #fff;
-				font-size: 36px;
-				height: 68px;
-				line-height: 68px;
-				text-align: center;
-				background: url("http://static-image.1911edu.com/smartCollege_bar.png") no-repeat;
-				background-position: center;
+      h2 {
+        color: #fff;
+        font-size: 36px;
+        height: 68px;
+        line-height: 68px;
+        text-align: center;
+        background: url("http://static-image.1911edu.com/smartCollege_bar.png") no-repeat;
+        background-position: center;
 
-				&.first {
-					color: #102693;
-					background: url("http://static-image.1911edu.com/smartCollege_title.png") no-repeat;
-					background-position: center;
-				}
+        &.first {
+          color: #102693;
+          background: url("http://static-image.1911edu.com/smartCollege_title.png") no-repeat;
+          background-position: center;
+        }
 
-				&.margin {
-					margin-top: 81px;
-				}
-			}
-		}
+        &.margin {
+          margin-top: 81px;
+        }
+      }
+    }
 
-		.group {
-			height: 417px;
+    .group {
+      height: 417px;
 
-			.fl {
-				width: 226px;
-				height: 226px;
-				margin-top: 112px;
-			}
+      .fl {
+        width: 226px;
+        height: 226px;
+        margin-top: 112px;
+      }
 
-			.fr {
-				width: 810px;
-				color: #fff;
+      .fr {
+        width: 810px;
+        color: #fff;
 
-				h4 {
-					font-size: 36px;
-					line-height: 36px;
-					margin: 97px 0 38px;
-				}
+        h4 {
+          font-size: 36px;
+          line-height: 36px;
+          margin: 97px 0 38px;
+        }
 
-				p {
-					font-size: 18px;
-					line-height: 36px;
-					text-indent: 2em;
-				}
-			}
-		}
+        p {
+          font-size: 18px;
+          line-height: 36px;
+          text-indent: 2em;
+        }
+      }
+    }
 
-		.leftBg {
-			background: url('http://static-image.1911edu.com/smartCollege_bg3.png') no-repeat;
-			background-size: 252px 519px;
-			background-position: 0 260px;
+    .leftBg {
+      background: url('http://static-image.1911edu.com/smartCollege_bg3.png') no-repeat;
+      background-size: 252px 519px;
+      background-position: 0 260px;
 
-			.object {
-				width: 1100px;
-				height: 286px;
-				position: relative;
-				margin: 50px auto 110px;
+      .object {
+        width: 1100px;
+        height: 286px;
+        position: relative;
+        margin: 50px auto 110px;
 
-				p {
-					position: absolute;
-					width: 485px;
-					height: 54px;
-					line-height: 54px;
-					font-size: 20px;
-					text-align: center;
-					border-radius: 27px;
-					color: #fff;
-					background-color: #102693;
+        p {
+          position: absolute;
+          width: 485px;
+          height: 54px;
+          line-height: 54px;
+          font-size: 20px;
+          text-align: center;
+          border-radius: 27px;
+          color: #fff;
+          background-color: #102693;
 
-					&.one {
-						left: 25px;
-						top: 0;
-					}
+          &.one {
+            left: 25px;
+            top: 0;
+          }
 
-					&.two {
-						right: 68px;
-						top: 37px;
-					}
+          &.two {
+            right: 68px;
+            top: 37px;
+          }
 
-					&.three {
-						left: 98px;
-						top: 113px;
-					}
+          &.three {
+            left: 98px;
+            top: 113px;
+          }
 
-					&.four {
-						right: 25px;
-						top: 158px;
-					}
+          &.four {
+            right: 25px;
+            top: 158px;
+          }
 
-					&.five {
-						top: 232px;
-						right: 275px;
-					}
-				}
-			}
+          &.five {
+            top: 232px;
+            right: 275px;
+          }
+        }
+      }
 
-			.study {
-				width: 1100px;
-				margin: 60px auto 0;
-				display: flex;
-				justify-content: space-between;
-				flex-wrap: wrap;
-				z-index: 2;
+      .study {
+        width: 1100px;
+        margin: 60px auto 0;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        z-index: 2;
 
-				li {
-					width: 50%;
-					height: 54px;
-					font-size: 20px;
-					line-height: 36px;
-					margin-bottom: 20px;
-					// overflow: hidden;
+        li {
+          width: 50%;
+          height: 54px;
+          font-size: 20px;
+          line-height: 36px;
+          margin-bottom: 20px;
+          // overflow: hidden;
 
-					span {
-						vertical-align: middle;
+          span {
+            vertical-align: middle;
 
-						&:first-child {
-							width: 51px;
-							height: 54px;
-							color: #fff;
-							line-height: 54px;
-							text-align: center;
-							background: url("http://static-image.1911edu.com/smartCollege_number.png") no-repeat;
-							background-size: cover;
-							margin-right: 16px;
-						}
-					}
-					&.left {
-						width: 45%;
-					}
-					&.right {
-						width: 55%;
-					}
-				}
-			}
-		}
+            &:first-child {
+              width: 51px;
+              height: 54px;
+              color: #fff;
+              line-height: 54px;
+              text-align: center;
+              background: url("http://static-image.1911edu.com/smartCollege_number.png") no-repeat;
+              background-size: cover;
+              margin-right: 16px;
+            }
+          }
 
-		.bottomBg {
-			background: url("http://static-image.1911edu.com/smartCollege_bg2.png") no-repeat;
-			background-size: 1920px 800px;
-			background-position: center;
-			padding-bottom: 87px;
+          &.left {
+            width: 45%;
+          }
 
-			.columns {
-				width: 1100px;
-				margin: 20px auto 59px;
+          &.right {
+            width: 55%;
+          }
+        }
+      }
+    }
 
-				p {
-					float: left;
-					width: 853px;
-					font-size: 18px;
-					line-height: 36px;
-					text-indent: 2em;
-					margin-top: 16px;
-					padding: 22px 75px 20px 35px;
-					color: #fff;
-					background: url("http://static-image.1911edu.com/smartCollege_icon2.png") no-repeat;
-					background-size: cover;
-				}
+    .bottomBg {
+      background: url("http://static-image.1911edu.com/smartCollege_bg2.png") no-repeat;
+      background-size: 1920px 800px;
+      background-position: center;
+      padding-bottom: 87px;
 
-				img {
-					float: right;
-					width: 167px;
-					height: 211px;
-				}
-			}
+      .columns {
+        width: 1100px;
+        margin: 20px auto 59px;
 
-			.harvest {
-				width: 1100px;
-				background: rgba(255, 255, 255, 1);
-				box-shadow: 0px 5px 32px 0px rgba(16, 38, 147, 0.11);
-				border-radius: 10px;
-				margin: 0 auto;
-				padding: 54px 0 34px;
+        p {
+          float: left;
+          width: 853px;
+          font-size: 18px;
+          line-height: 36px;
+          text-indent: 2em;
+          margin-top: 16px;
+          padding: 22px 75px 20px 35px;
+          color: #fff;
+          background: url("http://static-image.1911edu.com/smartCollege_icon2.png") no-repeat;
+          background-size: cover;
+        }
 
-				h2 {
-					margin: 0 0 50px;
-				}
+        img {
+          float: right;
+          width: 167px;
+          height: 211px;
+        }
+      }
 
-				p {
-					font-size: 18px;
-					line-height: 36px;
-					text-indent: 2em;
-					margin: 0 56px;
-				}
-			}
-		}
+      .harvest {
+        width: 1100px;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 5px 32px 0px rgba(16, 38, 147, 0.11);
+        border-radius: 10px;
+        margin: 0 auto;
+        padding: 54px 0 34px;
 
-		.attestation {
-			width: 100%;
-			margin: 0 auto 40px;
-			padding-top: 74px;
-			background-color: #fff;
+        h2 {
+          margin: 0 0 50px;
+        }
 
-			h2 {
-				margin: 0 auto 36px;
-			}
+        p {
+          font-size: 18px;
+          line-height: 36px;
+          text-indent: 2em;
+          margin: 0 56px;
+        }
+      }
+    }
 
-			.clearfix {
-				width: 1025px;
-				margin: 0 auto;
+    .attestation {
+      width: 100%;
+      // margin: 0 auto 40px;
+      padding-top: 74px;
+      background-color: #fff;
 
-				.left {
-					width: 768px;
-					margin-right: 50px;
-					margin-top: 28px;
+      h2 {
+        margin: 0 auto 36px;
+      }
 
-					.circle {
-						display: inline-block;
-						width: 14px;
-						height: 14px;
-						margin: 13px 15px 0 14px;
-						background-color: #102693;
-						vertical-align: top;
-					}
+      .clearfix {
+        width: 1025px;
+        margin: 0 auto;
 
-					.text {
-						width: 723px;
-						display: inline-block;
-						font-size: 20px;
-						line-height: 34px;
-						vertical-align: top;
-					}
-				}
+        .left {
+          width: 768px;
+          margin-right: 50px;
+          margin-top: 28px;
 
-				.right {
-					width: 172px;
-					height: 116px;
+          .circle {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin: 13px 15px 0 14px;
+            background-color: #102693;
+            vertical-align: top;
+          }
 
-					img {
-						width: 100%;
-					}
-				}
-			}
-		}
+          .text {
+            width: 723px;
+            display: inline-block;
+            font-size: 20px;
+            line-height: 34px;
+            vertical-align: top;
+          }
+        }
 
-		.certification {
-			width: 1000px;
-			height: 707px;
-			margin: 0 auto;
+        .right {
+          width: 172px;
+          height: 116px;
 
-			img {
-				width: 100%;
-			}
-		}
-	}
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .certification {
+      width: 1000px;
+      height: 707px;
+      margin: 0 auto;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
 }

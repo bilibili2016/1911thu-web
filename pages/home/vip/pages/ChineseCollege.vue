@@ -1,4 +1,5 @@
 <template>
+  <!-- 国学院 -->
   <div class="chineseCollege">
     <div class="chinese-banner"></div>
     <div class="chinese-con">
