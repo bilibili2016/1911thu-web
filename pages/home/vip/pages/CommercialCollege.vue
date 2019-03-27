@@ -1,4 +1,5 @@
 <template>
+  <!-- 商学院 -->
   <div class="commercialCollege">
     <div class="commer-banner"></div>
     <div class="commer-con">

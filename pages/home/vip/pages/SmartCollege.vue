@@ -1,4 +1,5 @@
 <template>
+  <!-- 人工智能 -->
   <div class="smartCollege">
     <div class="vipBanner"></div>
     <div class="container">

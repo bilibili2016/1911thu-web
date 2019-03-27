@@ -1,4 +1,5 @@
 <template>
+  <!-- 新闻学院 -->
   <div class="newsCollege">
     <div class="news-banner"></div>
     <div class="news-con">
@@ -119,24 +120,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      contentList: [
-        "综合媒介素养",
-        "媒体沟通",
-        "战略传播",
-        "舆论引导能力",
-        "媒介经营管理",
-        "媒体融合发展与转型升级",
-        "广告营销",
-        "传媒经济",
-        "公共关系",
-        "公益传播"
-      ]
-    };
-  }
-};
+export default {};
 </script>
 
 <style scoped lang="scss">

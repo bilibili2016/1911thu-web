@@ -1,4 +1,5 @@
 <template>
+  <!-- 教育学院 -->
   <div class="eduCollege">
     <div class="edu-banner"></div>
     <div class="edu-con">
