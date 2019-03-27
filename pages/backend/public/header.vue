@@ -42,14 +42,20 @@
 </template>
 
 <script>
-import { setPagesHeight, matchSplits, getQueryString, message, getNetwork } from "~/lib/util/helper";
+import {
+  setPagesHeight,
+  matchSplits,
+  getQueryString,
+  message,
+  getNetwork
+} from "~/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 import { auth, header, home } from "~/lib/v1_sdk/index";
 import { mapState, mapActions, mapGetters } from "vuex";
 import { validateSearch } from "~/lib/util/validate";
-import { } from "@/lib/util/helper";
+import {} from "@/lib/util/helper";
 export default {
-  data () {
+  data() {
     return {
       isBig: false,
       isShowInput: false,
@@ -80,7 +86,7 @@ export default {
         {
           title: "测评体系",
           id: "system",
-          link: "/other/pages/system"
+          link: "/home/core/pages/personEval"
         },
         {
           title: "名师智库",
@@ -127,17 +133,17 @@ export default {
     };
   },
   methods: {
-    handleClick () {
+    handleClick() {
       this.isHidden = false;
     },
-    isShowSub () {
+    isShowSub() {
       this.isHidden = false;
     },
-    showInput () {
+    showInput() {
       this.isShowInput = !this.isShowInput;
     },
     // 学院列表
-    vipGoodsList () {
+    vipGoodsList() {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           for (const key in this.navList) {
@@ -148,13 +154,13 @@ export default {
         }
       });
     },
-    resize () {
+    resize() {
       let wWidth = window.innerWidth;
       this.isBig = wWidth < 1420 ? false : true;
     }
   },
-  mounted () {
-    this.resize()
+  mounted() {
+    this.resize();
     window.addEventListener("resize", this.resize);
     this.vipGoodsList();
     if (getNetwork()) {
@@ -162,7 +168,7 @@ export default {
     } else {
       this.downloadAppURL = this.downloadAppURL_pro;
     }
-  },
+  }
 };
 </script>
 <style scoped lang="scss">
