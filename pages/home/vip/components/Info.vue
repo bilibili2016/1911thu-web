@@ -30,7 +30,7 @@
       <div class="btn-con">
         <span class="text">学费{{parseInt(vipInfo.present_price)}}元/年</span>
         <div class="btn-item">
-          <span class="button" @click="lookCourse">查看学院项目</span>
+          <!-- <span class="button" @click="lookCourse">查看学院项目</span> -->
 
           <!-- 是会员 -->
           <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
