@@ -5,10 +5,16 @@
       <i v-if="productsNum>0">{{productsNum}}</i>
     </div>
     <div class="headImg">
+      <span class="redInfo" v-if="infoNum !=0"></span>
       <img :src="data.userImg" alt="" @click="handleLinkProfile('tab-first')">
       <!-- 个人中心下拉框 -->
       <ul class="subPages">
-        <li v-for="(item,index) in subPagesData" :key="index" @click="handleLinkProfile(item.link)">{{item.text}}</li>
+        <li v-for="(item,index) in subPagesData" :key="index" @click="handleLinkProfile(item.link)">
+          {{item.text}}
+          <div v-if="item.alert">
+            <span v-if="infoNum!=0" class="redInfo"></span>
+          </div>
+        </li>
         <li @click="handleSignOut">退出</li>
       </ul>
     </div>
@@ -17,11 +23,13 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
+import { store as persistStore } from "~/lib/core/store";
 
 export default {
   props: ["data", "isShowLRBtn"],
   data() {
     return {
+      infoNum: "",
       subPagesData: [
         {
           link: "tab-first",
@@ -45,7 +53,8 @@ export default {
         },
         {
           link: "tab-fifth",
-          text: "我的消息"
+          text: "我的消息",
+          alert: true
         },
         {
           link: "tab-sixth",
@@ -87,7 +96,13 @@ export default {
     },
     handleSignOut() {
       this.$emit("handleSignOut");
+    },
+    getInfoNum() {
+      this.infoNum = persistStore.get("infoNUm");
     }
+  },
+  watch: {
+    $route: "getInfoNum"
   }
 };
 </script>

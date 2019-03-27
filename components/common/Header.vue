@@ -391,6 +391,8 @@ export default {
       } else if (res.status === 0) {
         this.getAll();
         persistStore.set("isSingleLogin", true);
+        persistStore.set("infoNUm", res.data.userInfo.unread_message_number);
+
         // 设置用户信息
         this.setUserInfo(res);
         // this.getClassifyList()
