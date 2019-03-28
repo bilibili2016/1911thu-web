@@ -29,14 +29,15 @@
       padding-bottom: 20px;
     }
 
-    .college {
-      height: 78px;
+    .firstLevel {
+      padding: 16px 0;
+      // height: 78px;
       border-bottom: 1px rgba(232, 214, 247, 1) solid;
 
       &>li {
         display: inline-block;
-        height: 78px;
-        line-height: 78px;
+        height: 45px;
+        line-height: 45px;
       }
 
       ul {
@@ -47,34 +48,38 @@
         li {
           list-style: none;
           display: inline-block;
-          line-height: 78px;
+          line-height: 45px;
           font-size: 14px;
           padding-right: 17px;
           // cursor: pointer;
+        }
+      }
 
-          // span {
-          //   background-color: #773084;
-          // }
+      ul.projrctCollege {
+        li {
+          span {
+            background-color: #773084;
+          }
 
-          // &:hover {
-          //   .el-button {
-          //     background-color: #5f068d;
-          //     color: #fff;
-          //   }
-          // }
-          img {
-            width: 35px;
-            height: 35px;
-            margin-right: 10px;
+          &:hover {
+            .el-button {
+              background-color: #5f068d;
+              color: #fff;
+            }
+          }
+        }
+      }
+
+      ul.courseCollege {
+        li {
+          span {
+            font-size: 14px;
+            color: #333;
             vertical-align: middle;
           }
 
-          span {
-            font-size: 22px;
-            font-weight: bold;
-            color: #222;
-            vertical-align: middle;
-
+          span.nameRight {
+            color: #773084;
           }
         }
       }
@@ -85,13 +90,14 @@
       }
     }
 
-    .classification {
+    .secondLevel {
       position: relative;
+      padding: 16px 0;
 
       &>li {
         display: inline-block;
-        height: 50px;
-        line-height: 50px;
+        height: 45px;
+        line-height: 45px;
       }
 
       ul {
@@ -102,7 +108,7 @@
         li {
           list-style: none;
           display: inline-block;
-          line-height: 50px;
+          line-height: 45px;
           font-size: 14px;
           padding-right: 17px;
           cursor: pointer;
@@ -244,7 +250,7 @@
 .projectRight {
   position: absolute;
   right: 0;
-  top: 10px;
+  top: 23px;
   padding: 8px 15px;
   background-color: #3c60c7;
   color: #fff;
