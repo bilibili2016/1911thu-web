@@ -1,7 +1,7 @@
 /* 公共样式 */
 
 html {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 body,
@@ -30,42 +30,42 @@ p,
 blockquote,
 th,
 td {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 html {}
 
 body {
-    margin: 0 auto;
-    background-color: #fff;
-    font-family: Arial, '微软雅黑';
-    color: #222;
-    -webkit-font-smoothing: antialiased;
+  margin: 0 auto;
+  background-color: #fff;
+  font-family: "PingFang SC", "微软雅黑", "Microsoft YaHei", Helvetica, "Helvetica Neue", Tahoma, Arial, sans-serif;
+  color: #222;
+  //   -webkit-font-smoothing: antialiased;
 }
 
 i {
-    font-style: normal;
+  font-style: normal;
 }
 
 a {
-    color: #222;
+  color: #222;
 }
 
 img {
-    border-style: none;
+  border-style: none;
 }
 
 a:hover,
 a:active,
 a:link,
 a:visited {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 ul,
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 p,
@@ -75,77 +75,77 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 span {
-    display: inline-block;
+  display: inline-block;
 }
 
 input,
 select {
-    outline: none;
-    border: none;
-    background-color: transparent;
-    -webkit-tap-highlight-color: transparent;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 select:focus {
-    outline: 0 none;
+  outline: 0 none;
 }
 
 textarea {
-    border: none;
-    background-color: transparent;
-    height: auto;
-    outline: none;
-    resize: none;
-    padding: 0;
+  border: none;
+  background-color: transparent;
+  height: auto;
+  outline: none;
+  resize: none;
+  padding: 0;
 }
 
 
 /* 清除浮动 */
 
 .clearfix:after {
-    content: '';
-    height: 0;
-    line-height: 0;
-    display: block;
-    visibility: hidden;
-    clear: both;
+  content: '';
+  height: 0;
+  line-height: 0;
+  display: block;
+  visibility: hidden;
+  clear: both;
 }
 
 .clearfix {
-    *zoom: 1;
+  *zoom: 1;
 }
 
 
 /* 部分文件的公共样式 */
 
 .fl {
-    float: left;
+  float: left;
 }
 
 .fr {
-    float: right;
+  float: right;
 }
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-    color: #999;
+  color: #999;
 }
 
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-    color: #999;
+  color: #999;
 }
 
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-    color: #999;
+  color: #999;
 }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-    color: #999;
+  color: #999;
 }
