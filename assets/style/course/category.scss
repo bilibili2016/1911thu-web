@@ -50,18 +50,31 @@
           line-height: 78px;
           font-size: 14px;
           padding-right: 17px;
-          cursor: pointer;
+          // cursor: pointer;
 
-          span {
-            // padding: 10px 20px;
-            background-color: #773084;
+          // span {
+          //   background-color: #773084;
+          // }
+
+          // &:hover {
+          //   .el-button {
+          //     background-color: #5f068d;
+          //     color: #fff;
+          //   }
+          // }
+          img {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+            vertical-align: middle;
           }
 
-          &:hover {
-            .el-button {
-              background-color: #5f068d;
-              color: #fff;
-            }
+          span {
+            font-size: 22px;
+            font-weight: bold;
+            color: #222;
+            vertical-align: middle;
+
           }
         }
       }

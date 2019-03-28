@@ -4,13 +4,15 @@
       <div class="center category-style">
         <div class="college">
           <!-- v-if="!loadList" -->
-          <li class="title" v-if="cp == 0">学院：</li>
+          <!-- <li class="title" v-if="cp == 0">学院：</li> -->
           <li class="title" v-if="cp == 1">学院分类：</li>
           <ul v-if="cp == 0">
             <li v-if="cid == item.id" v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
-              <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
+              <!-- <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button> -->
+              <img :src="item.picture" alt="">
+              <!-- <img src="http://static-image.1911edu.com/smart-icon.png" alt=""> -->
+              <span class="name">{{item.category_name}}</span>
             </li>
-
           </ul>
           <ul v-if="cp == 1">
             <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
