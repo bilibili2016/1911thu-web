@@ -203,7 +203,9 @@ export default {
       this.cidData = res.data.categoryList;
       this.cidData.unshift(data);
       for (let item of this.cidData) {
-        item.childList.unshift(this.allData);
+        if (item.childList) {
+          item.childList.unshift(this.allData);
+        }
       }
       this.loadList = false;
       for (let item of this.cidData) {

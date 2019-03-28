@@ -2,35 +2,46 @@
   <div>
     <div class="banner">
       <div class="center category-style">
-        <div class="college">
-          <!-- v-if="!loadList" -->
-          <!-- <li class="title" v-if="cp == 0">学院：</li> -->
-          <li class="title" v-if="cp == 1">学院分类：</li>
-          <ul v-if="cp == 0">
-            <li v-if="cid == item.id" v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
-              <!-- <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button> -->
-              <img :src="item.picture" alt="">
-              <!-- <img src="http://static-image.1911edu.com/smart-icon.png" alt=""> -->
-              <span class="name">{{item.category_name}}</span>
-            </li>
-          </ul>
-          <ul v-if="cp == 1">
-            <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
-              <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
-            </li>
-          </ul>
+        <!-- 课程分类 -->
+        <div class="courseCategory" v-if="cp == 0">
+          <div class="firstLevel">
+            <!-- <li class="title" v-if="cp == 0">学院：</li> -->
+            <ul class="courseCollege">
+              <li v-if="cid == item.id" v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
+                <!-- <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button> -->
+                <!-- <img :src="item.picture" alt=""> -->
+                <span class="name">{{item.category_name}}</span> > <span class="nameRight">课程列表</span>
+              </li>
+            </ul>
+          </div>
+          <div class="secondLevel">
+            <li class="title">分类：</li>
+            <ul>
+              <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid === items.id ? true : false }">
+                <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
+              </li>
+            </ul>
+          </div>
         </div>
-        <!-- 课程不展示 -->
-        <div class="classification">
-          <!-- v-if="!loadList" -->
-          <li class="title" v-if="cp == 0">分类：</li>
-          <li class="title" v-if="cp == 1">项目分类：</li>
-          <ul>
-            <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid === items.id ? true : false }">
-              <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
-            </li>
-          </ul>
-          <div v-if="cp == 1" class="projectRight" @click="handleProjectRight">前往自定制项目</div>
+        <!-- 项目分类 -->
+        <div class="projectCategory" v-if="cp == 1">
+          <div class="firstLevel">
+            <li class="title">学院分类：</li>
+            <ul class="projrctCollege">
+              <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
+                <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
+              </li>
+            </ul>
+          </div>
+          <div class="secondLevel">
+            <li class="title">项目分类：</li>
+            <ul>
+              <li v-for="(items,index) in projectCategory" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
+                <el-button @click="selectPid(items,index)">{{items.title}}</el-button>
+              </li>
+            </ul>
+            <div class="projectRight" @click="handleProjectRight">前往自定制项目</div>
+          </div>
         </div>
       </div>
     </div>
@@ -39,6 +50,8 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { matchSplits } from "@/lib/util/helper";
+
 export default {
   props: ["cidData", "pidData", "cidBg", "pidBg", "loadList"],
   data() {
@@ -46,8 +59,23 @@ export default {
       cid: null,
       pid: "0",
       cp: "",
+      vid: "",
       cindex: null,
-      cg: null
+      cg: null,
+      projectCategory: [
+        {
+          id: 0,
+          title: "全部"
+        },
+        {
+          id: 1,
+          title: "标准项目"
+        },
+        {
+          id: 2,
+          title: "已定制项目"
+        }
+      ]
     };
   },
   methods: {
@@ -64,11 +92,10 @@ export default {
     }
   },
   mounted() {
-    this.cid = window.location.search.split("&")[0].split("=")[1];
-
-    this.pid = window.location.search.split("&")[3].split("=")[1];
-    this.cp = window.location.search.split("&")[1].split("=")[1];
-
+    this.cid = matchSplits("cid");
+    this.pid = matchSplits("pids");
+    this.cp = matchSplits("cp");
+    this.vid = matchSplits("vid");
     this.$bus.$on("pid", data => {
       this.pid = data;
     });

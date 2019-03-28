@@ -45,10 +45,14 @@
 </template>
 
 <script>
+import { matchSplits } from "@/lib/util/helper";
+
 export default {
   props: ["vipInfo"],
   data() {
     return {
+      vid: "",
+      cid: "",
       windowHeight: "",
       paperHeight: "",
       scrollTop: "",
@@ -57,7 +61,9 @@ export default {
   },
   methods: {
     lookProject() {
-      this.$router.push("/course/category?cid=0&cp=1&xid=0&pids=0&vid=-1");
+      this.$router.push(
+        `/course/category?cid=${this.cid}&cp=1&xid=0&pids=0&vid=${this.vid}`
+      );
     },
     lookCourse() {
       this.$emit("lookCourse");
@@ -84,6 +90,9 @@ export default {
     }
   },
   mounted() {
+    this.vid = matchSplits("id");
+    this.cid = matchSplits("cid");
+
     // 寛高设置
     window.addEventListener("scroll", this.addClass);
   }
