@@ -28,7 +28,7 @@
               <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
             </li>
           </ul>
-          <div class="projectRight" @click="handleProjectRight">前往自定制项目</div>
+          <div v-if="cp == 1" class="projectRight" @click="handleProjectRight">前往自定制项目</div>
         </div>
       </div>
     </div>

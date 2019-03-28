@@ -34,7 +34,7 @@
         <div class="fl">项目名称：</div>
         <div class="fr">
           <el-input v-model.trim="projectForm.name" maxlength="30" placeholder="请输入项目名称"></el-input>
-          <span class="input-inner">不超过30字</span>
+          <span class="input-inner">还可以输入{{nameLength}}字</span>
         </div>
       </div>
       <div class="con-item desc clearfix">
@@ -42,7 +42,7 @@
         <div class="fr">
           <el-input type="textarea" v-model.trim="projectForm.desc" :rows="3" maxlength="500" placeholder="请输入项目简介" autosize></el-input>
         </div>
-        <span class="input-inner">不超过500字</span>
+        <span class="input-inner">还可以输入{{descLength}}字</span>
       </div>
       <div class="con-item obj clearfix">
         <div class="fl">培训对象：</div>
@@ -143,42 +143,6 @@
       <div class="con-detail">
         <div class="deatil-item clearfix">
           <div class="detail-title">选择学院</div>
-          <!-- <div class="itemCon">
-            <div class="item clearfix">
-              <div class="fl">学院分类：</div>
-              <div class="fr selectFr">
-                <div @click.stop="handleCollegeSelect">
-                  <el-input placeholder="请选择分类" v-model="projectForm.trainCollege" readonly></el-input>
-                  <span class="pull-down">
-                    <i class="el-icon-caret-bottom"></i>
-                  </span>
-                </div>
-                <div class="pull-down-text" v-if="isShowCollegeSelect">
-                  <ul>
-                    <li v-for="(item,index) in CategoryListData" :key="index" class="clearfix">{{item.category_name}}</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="item clearfix">
-              <div class="fl">课程分类：</div>
-              <div class="fr selectFr">
-                <div @click.stop="handleCourseSelect">
-                  <el-input placeholder="请选择分类" v-model="projectForm.trainCourse" readonly></el-input>
-                  <span class="pull-down">
-                    <i class="el-icon-caret-bottom"></i>
-                  </span>
-                </div>
-
-                <div class="pull-down-text" v-if="isShowCourseSelect">
-                  <ul v-if="courseCategoryData.length !=0">
-                    <li v-for=" (course,index) in courseCategoryData " :key="index " @click.stop="chooseCourse(course) ">{{course.category_name}}</li>
-                  </ul>
-                  <p v-else>请先选择学院分类</p>
-                </div>
-              </div>
-            </div>
-          </div>-->
           <div class="itemCon courseSearch">
             <div class="item clearfix">
               <div class="fl">学院分类：</div>
@@ -190,10 +154,6 @@
                   </span>
                   <div class="pull-down-text" v-if="isShowSearchSelect">
                     <div>
-                      <!-- <div class="search " @click.stop="handleFocus ">
-                        <input placeholder="请输入搜索内容" v-model="searchInput" type="text" v-on:input="handleSearchChange(searchInput)">
-                        <i class="el-icon-search "></i>
-                      </div>-->
                       <ul>
                         <li v-for="(item,index) in CategoryListData " :key="index " class="clearfix">
                           <div class="liChecked" @click.stop="chooseSearch(item) ">
@@ -212,10 +172,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="deatil-item clearfix" v-if="projectForm.styleRadio!=1">
-          <div class="detail-title ">选择线下课程</div>
-          <div class=" ">学堂会根据您的需求及所选线上课程内容，为您合理设计体系化的线下课程安排。</div>
-        </div>-->
         <div class="deatil-item clearfix" v-if="checkedCourseData.length !=0 ">
           <div class="detail-title">已选学院</div>
           <div class="deTable">
@@ -233,14 +189,6 @@
         <div class="deatil-item clearfix">
           <div class="detail-title">金额结算</div>
           <div class="deTable">
-            <!-- 线上课程 -->
-            <!-- <div class="deItem courseItem clearfix ">
-              <div class="courseTitle ">线上课程</div>
-              <div class="time "> </div>
-              <div class="price ">{{projectForm.onlinePrice.toFixed(2)}}元/人</div>
-              <div class="num ">x {{projectForm.trainNum}}人</div>
-              <div class="total ">= {{onlineTotalPrice.toFixed(2)}}元</div>
-            </div>-->
             <div class="deItem courseItem clearfix" v-for="(item,index) in checkedCourseData " :key="index ">
               <div class="courseTitle">{{item.title}}</div>
               <div class="time"></div>
@@ -348,6 +296,12 @@ export default {
     };
   },
   computed: {
+    nameLength() {
+      return 30 - this.projectForm.name.length;
+    },
+    descLength(desc) {
+      return 500 - this.projectForm.desc.length;
+    },
     //计算线下课程总价钱
     offlineTotalPrice() {
       this.projectForm.offlineTotalPrice =
