@@ -6,7 +6,7 @@
       <div class="proHeader-mask"></div>
       <img class="proHeader-img" :src="projectDetail.study_picture" alt="">
       <!-- 项目详情基本信息 -->
-      <v-detail :projectDetail="projectDetail" :projectType="project" class="proHeader-detail"></v-detail>
+      <v-detail :projectDetail="projectDetail" :projectType="project" @payment="payment" class="proHeader-detail"></v-detail>
     </div>
     <!-- 介绍 线上课程 线下课程说明 用户评价 常见问题-->
     <div class="proContent">
@@ -38,7 +38,9 @@
         </el-tab-pane>
       </el-tabs>
     </div>
+    <v-pay v-if="showPayment" @closePay="closePay"></v-pay>
   </div>
+
 </template>
 
 <script>
@@ -49,6 +51,7 @@ import Procourse from '@/pages/project/components/ProjectCourse'
 import Proevaluate from '@/pages/project/components/ProjectEvaluate'
 import Commonproblems from '@/pages/project/components/CommonProblems'
 import OfflineDesc from '@/pages/project/components/OfflineDesc'
+import Pay from '@/pages/project/components/Pay'
 import { store as persistStore } from '~/lib/core/store'
 import { message, matchSplits, setTitle } from '@/lib/util/helper'
 export default {
@@ -57,10 +60,12 @@ export default {
     'v-proevaluate': Proevaluate,
     'v-proproblems': Commonproblems,
     'v-detail': Detail,
-    'v-offlinedesc': OfflineDesc
+    'v-offlinedesc': OfflineDesc,
+    'v-pay': Pay
   },
-  data() {
+  data () {
     return {
+      showPayment: false,
       customerBanner:
         'http://static-image.1911edu.com/customer-detail-banner.png',
       projectDetailLoad: true,
@@ -106,8 +111,14 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
+    payment () {
+      this.showPayment = true
+    },
+    closePay () {
+      this.showPayment = false
+    },
     // 获取项目详情
-    getProjectInfo() {
+    getProjectInfo () {
       projectdetail.getProjectInfo(this.project).then(res => {
         if (res.status == 0) {
           this.projectDetail = res.data.curriculumProjectDetail
@@ -125,7 +136,7 @@ export default {
       })
     },
     // 获取项目评论
-    getEvaluateList() {
+    getEvaluateList () {
       this.evaluateForm.ids = matchSplits('kid')
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
         if (res.status == 0) {
@@ -137,7 +148,7 @@ export default {
       })
     },
     //评论分页
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.pagemsg.page = val
       this.evaluateForm.pages = val
       this.evaluateForm.limits = 3
@@ -151,7 +162,7 @@ export default {
       })
     }
   },
-  mounted() {
+  mounted () {
     this.project.projectId = matchSplits('kid')
     this.project.types = matchSplits('type')
     this.getProjectInfo()
@@ -164,10 +175,10 @@ export default {
       this.getProjectInfo()
     })
   },
-  updated() {
+  updated () {
     setTitle('项目详情-1911学堂')
   },
-  beforeRouteEnter(to, from, next) {
+  beforeRouteEnter (to, from, next) {
     next(vm => {
       vm.$bus.$emit('headerFooterShow')
     })
