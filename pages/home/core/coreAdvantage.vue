@@ -8,14 +8,16 @@
       </div>
       <el-carousel class="coreLeft" :interval="4000" indicator-position="outside" @change="setActiveItem" arrow="never">
         <el-carousel-item class="clearfix" v-for="(item,index) in leftCar" :key="index">
-          <div class="newsLi">
-            <div class="info">
-              <h4>{{item.title}}</h4>
-              <div class="line"></div>
-              <div class="text">
-                <p v-for="(text,index) in item.textList" :key="index">{{text}}</p>
+          <div class="leftItems" @click="handleLink(item.detailLink)">
+            <div class="newsLi">
+              <div class="info">
+                <h4>{{item.title}}</h4>
+                <div class="line"></div>
+                <div class="text">
+                  <p v-for="(text,index) in item.textList" :key="index">{{text}}</p>
+                </div>
+                <div class="index">0{{index+1}}</div>
               </div>
-              <div class="index">0{{index+1}}</div>
             </div>
           </div>
         </el-carousel-item>
@@ -46,7 +48,8 @@ export default {
             "集结200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者",
             "知名高校教授、500强企业高管、行业精英、政策智囊组成高端导师库"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news1.png"
+          imgUrl: "http://static-image.1911edu.com/home-news1.png",
+          detailLink: "/home/core/pages/teachers"
         },
         {
           title: "内容体系及运营模式",
@@ -55,7 +58,8 @@ export default {
             "在线学院+单位内训+国际学位",
             "“知识即服务”（KaaS）终身教育运营模式"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news5.png"
+          imgUrl: "http://static-image.1911edu.com/home-news5.png",
+          detailLink: "/home/core/pages/contentSys"
         },
         {
           title: "人才测评",
@@ -64,7 +68,8 @@ export default {
             "“互联网+教育”人才测评体系新模式",
             "了解学习需求，定位能力短板，制定个性化解决方案"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news4.png"
+          imgUrl: "http://static-image.1911edu.com/home-news4.png",
+          detailLink: "/home/core/pages/personEval"
         },
         {
           title: "混合式教学",
@@ -73,12 +78,14 @@ export default {
             "交互式与社群化学习体验",
             "PBL+案例教学法"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news3.png"
+          imgUrl: "http://static-image.1911edu.com/home-news3.png",
+          detailLink: "/home/core/pages/hybridTeach"
         },
         {
           title: "考试认证",
           textList: ["在线人工智能考试系统", "1911学堂结业证书"],
-          imgUrl: "http://static-image.1911edu.com/home-news2.png"
+          imgUrl: "http://static-image.1911edu.com/home-news2.png",
+          detailLink: "/home/core/pages/examAuth"
         }
       ],
       rightCar: [

@@ -18,6 +18,16 @@ body {
   white-space: nowrap;
   transition: all 500ms;
 
+  .redInfo {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    right: -6px;
+    top: 25px;
+  }
+
   .main {
     width: 90%;
     min-width: 1100px;
@@ -412,6 +422,11 @@ body {
           color: #773084;
           overflow: initial;
         }
+
+        span.redInfo {
+          top: 8px;
+          right: 24px;
+        }
       }
 
       li.scanCode {
@@ -471,6 +486,7 @@ body {
       }
 
       .headImg {
+        position: relative;
         height: 80px;
         line-height: 80px;
         position: relative;
@@ -495,6 +511,8 @@ body {
           border-radius: 20px;
           vertical-align: middle;
         }
+
+
       }
     }
   }

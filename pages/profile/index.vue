@@ -41,6 +41,7 @@
         <!-- 我的消息 -->
         <el-tab-pane class="my-info" name="tab-fifth">
           <span slot="label" class="tabList infoList">
+            <i class="redInfo" v-if="infoNum!=0"></i>
             <i class="icon-message"></i> 我的消息
             <!-- <i class="infoAlert">18</i> -->
           </span>
@@ -122,6 +123,7 @@ export default {
   },
   data() {
     return {
+      infoNum: "",
       orderType: {
         type: "order",
         showOrderList: false
@@ -514,7 +516,7 @@ export default {
             this.handleInitMyOrderData(true);
             break;
           case "tab-fifth": //我的消息
-            this.$bus.$emit("getInfo");
+            this.$bus.$emit("isShowList");
             break;
           case "tab-sixth": //个人设置
             this.$bus.$emit("activeSet");
@@ -1021,6 +1023,7 @@ export default {
     }
   },
   mounted() {
+    this.infoNum = persistStore.get("infoNUm");
     setTitle("个人中心-1911学堂");
     if (persistStore.get("token")) {
       this.getUserInfo();
