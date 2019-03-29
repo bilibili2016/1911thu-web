@@ -216,7 +216,7 @@ export default {
     handleGetCode () {
       this.payForm.ids = this.customId;
       this.payForm.type = 2;
-      this.payForm.number = persistStore.get("projectNumber")
+      this.payForm.number = matchSplits("pn")
       affirmOrder.getCode(this.payForm).then(res => {
         this.$router.push("/shop/wepay?order=" + res.data.order_id + "&type=1");
       });
@@ -264,7 +264,9 @@ export default {
       this.affirmOrder.type = "customOrder";
       this.loadGoods = true;
       this.curriculumForm.curriculumProjectId = val;
-      this.curriculumForm.number = persistStore.get("projectNumber");
+      if (window.location.search.indexOf("pn") >= 0) {
+        this.curriculumForm.number = matchSplits("pn")
+      }
       affirmOrder.customProject(this.curriculumForm).then(res => {
         this.loadGoods = false;
         if (res.status === 0) {

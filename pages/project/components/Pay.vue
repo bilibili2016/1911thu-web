@@ -26,7 +26,6 @@
 </template>
 <script>
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
-import { store as persistStore } from "~/lib/core/store";
 export default {
   data () {
     return {
@@ -91,10 +90,9 @@ export default {
     },
     //下一步
     handleConfirm () {
-      persistStore.set("projectNumber", this.projectData.number)
       this.$router.push({
         path: "/shop/affirmorder",
-        query: { id: this.projectData.kid, type: 1 }
+        query: { id: this.projectData.kid, type: 1, pn: this.projectData.number }
       });
     },
     init () {
