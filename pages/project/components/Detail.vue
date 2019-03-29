@@ -179,7 +179,14 @@ export default {
         this.$bus.$emit("loginShow", true);
         return false;
       }
-      this.$emit("payment");
+      if (this.currentType == 1) {
+        this.$emit("payment");
+      } else {
+        this.$router.push({
+          path: "/shop/affirmorder",
+          query: { id: this.projectData.kid, type: 2 }
+        });
+      }
     }
   },
   watch: {

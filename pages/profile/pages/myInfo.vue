@@ -28,25 +28,26 @@ export default {
     "v-nomsg": NoMsg
   },
   props: ["noMyMsg", "noMsgEle"],
-  data() {
+  data () {
     return {
       isShowDetail: false,
       detailData: ""
     };
   },
   methods: {
-    isNoMyMsg(flag) {
+    isNoMyMsg (flag) {
       this.$emit("isNoMyMsg", flag);
     },
-    goToInfoDetail(data) {
+    goToInfoDetail (data) {
       this.isShowDetail = true;
       this.detailData = data;
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
-    returnPage() {
+    returnPage () {
       this.isShowDetail = false;
     }
   },
-  mounted() {
+  mounted () {
     this.$bus.$on("isShowList", data => {
       this.isShowDetail = false;
     });
