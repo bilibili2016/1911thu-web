@@ -126,7 +126,8 @@ export default {
       },
       payForm: {
         ids: null,
-        type: null
+        type: null,
+        number: ''
       },
       vipForm: {
         vipId: "",
@@ -215,6 +216,7 @@ export default {
     handleGetCode () {
       this.payForm.ids = this.customId;
       this.payForm.type = 2;
+      this.payForm.number = persistStore.get("projectNumber")
       affirmOrder.getCode(this.payForm).then(res => {
         this.$router.push("/shop/wepay?order=" + res.data.order_id + "&type=1");
       });
@@ -303,11 +305,14 @@ export default {
 
       if (this.customId != -1) {
         if (this.orderType == 2) {
+          //   vip订单
           this.handleVipConfirm();
         } else {
+          // 项目订单
           this.handleGetCode();
         }
       } else {
+        //   课程提交订单
         this.handleSubmitOrder();
       }
     }
