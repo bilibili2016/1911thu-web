@@ -294,17 +294,6 @@ export default {
       } else {
         this.isFixed = false;
       }
-
-      // this.scroll = parseInt(
-      //   document.documentElement.scrollTop || document.body.scrollTop
-      // );
-      // let scrollIns = parseInt(this.scroll + this.windowHeight);
-
-      // if (this.scroll > 810) {
-      //   this.isFixed = true;
-      // } else {
-      //   this.isFixed = false;
-      // }
     }
   },
   mounted() {

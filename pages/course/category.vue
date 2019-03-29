@@ -228,10 +228,11 @@ export default {
     handleSelect(type, item, index) {
       if (type == "cidType") {
         this.selectCidItem = item.id;
-        this.selectPidItem = "0";
-        this.$bus.$emit("cid", item.id);
+        this.$bus.$emit("cid", item.id); //改变分类选中项（样式）
         this.categoryId = item.id;
         this.pidData = this.cidData[index];
+        //选择一级重置二级分类
+        this.selectPidItem = 0;
         this.categoryForm.type = 0;
       } else {
         this.selectCidItem = this.categoryId;
@@ -310,6 +311,7 @@ export default {
     getProjectCardList(itemCid, itemPid) {
       this.loadCourseAll = true;
       // this.setParamsPidCid(itemCid, itemPid);
+      //项目列表-二级分类：pid:0,用type区分
       this.categoryForm.cids = itemCid;
       this.categoryForm.pids = 0;
       this.categoryForm.type = itemPid;
