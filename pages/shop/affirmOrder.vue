@@ -216,7 +216,6 @@ export default {
     handleGetCode () {
       this.payForm.ids = this.customId;
       this.payForm.type = 2;
-      this.payForm.number = matchSplits("pn")
       if (window.location.search.indexOf("pn") >= 0) {
         this.payForm.number = matchSplits("pn")
       }
