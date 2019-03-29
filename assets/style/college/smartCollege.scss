@@ -179,6 +179,17 @@
             width: 52%;
           }
         }
+
+        @media only screen and (max-device-width: 375px) {
+          li.left {
+            width: 45%;
+            margin-left: 0
+          }
+
+          li.right {
+            width: 55%;
+          }
+        }
       }
     }
 
