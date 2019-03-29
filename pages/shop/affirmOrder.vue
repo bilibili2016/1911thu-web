@@ -217,6 +217,9 @@ export default {
       this.payForm.ids = this.customId;
       this.payForm.type = 2;
       this.payForm.number = matchSplits("pn")
+      if (window.location.search.indexOf("pn") >= 0) {
+        this.payForm.number = matchSplits("pn")
+      }
       affirmOrder.getCode(this.payForm).then(res => {
         this.$router.push("/shop/wepay?order=" + res.data.order_id + "&type=1");
       });
