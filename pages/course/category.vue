@@ -98,7 +98,7 @@ export default {
         sortBy: 0,
         pages: 1,
         limits: 12,
-        type: 0
+        type: null
       },
       type: "",
       categoryIndex: "",
@@ -312,6 +312,7 @@ export default {
       // this.setParamsPidCid(itemCid, itemPid);
       this.categoryForm.cids = itemCid;
       this.categoryForm.pids = 0;
+      this.categoryForm.type = itemPid;
 
       category.curriculumProjectList(this.categoryForm).then(res => {
         if (res.status === 0) {
