@@ -212,7 +212,7 @@ export default {
         }
       });
     },
-    // 自定义项目 提交订单
+    // 项目 提交订单->到支付页面
     handleGetCode () {
       this.payForm.ids = this.customId;
       this.payForm.type = 2;
@@ -259,7 +259,7 @@ export default {
         }
       });
     },
-    // 自定义项目确认订单
+    // 项目确认订单
     handleCustomProject (val) {
       this.affirmOrder.type = "customOrder";
       this.loadGoods = true;

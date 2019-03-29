@@ -184,7 +184,7 @@ export default {
       } else {
         this.$router.push({
           path: "/shop/affirmorder",
-          query: { id: this.projectData.kid, type: 2 }
+          query: { id: this.project.projectId, type: 1 }
         });
       }
     }
