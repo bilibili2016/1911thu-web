@@ -90,7 +90,7 @@ import { matchSplits, open, timestampToTime } from "~/lib/util/helper";
 
 export default {
   props: ["data", "config"],
-  data() {
+  data () {
     return {
       rest: "",
       _ordertimer: null,
@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
-    handleLinkDetail(item) {
+    handleLinkDetail (item) {
       // 判断当前页是否是在首页
       if (this.isIndex) {
         this.courseUrl.kid = item.id;
@@ -156,14 +156,14 @@ export default {
             path: "/project/projectdetail",
             query: {
               kid: item.id,
-              type: 1
+              type: item.type
             }
           });
         }
       }
     },
     // 我要选课 -选择课程
-    selCheckboxChange(item, index) {
+    selCheckboxChange (item, index) {
       this.$emit("selCheckboxChange", item); //改变全选按钮保存的数组值
       if (item.is_checked === false) {
         item.is_checked = false;
@@ -178,7 +178,7 @@ export default {
       }
     },
     // 判断购物车数量
-    goodsNmber() {
+    goodsNmber () {
       if (persistStore.get("productsNum") < 70) {
         this.addShopCart();
       } else {
@@ -191,7 +191,7 @@ export default {
       }
     },
     // 添加购物车
-    addShopCart() {
+    addShopCart () {
       card.addShopCart(this.curriculumcartids).then(response => {
         this.setProductsNum({
           pn: response.data.curriculumNumber
@@ -199,7 +199,7 @@ export default {
       });
     },
     // 取消勾选
-    delShopCart() {
+    delShopCart () {
       card.delCourseShopCart(this.curriculumcartids).then(response => {
         this.setProductsNum({
           pn: response.data.curriculumNumber
@@ -207,7 +207,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     // isIndex判断是否在首页 true在首页
     // cp类型决定当前列表的类型：0-课程；1-项目
     if (window.location.search.split("=")[2]) {
