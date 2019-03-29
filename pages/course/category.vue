@@ -97,7 +97,8 @@ export default {
         pids: null,
         sortBy: 0,
         pages: 1,
-        limits: 12
+        limits: 12,
+        type: 0
       },
       type: "",
       categoryIndex: "",
@@ -225,21 +226,24 @@ export default {
     },
     // 设置 cid pid 公共函数
     handleSelect(type, item, index) {
-      if (type === "cidType") {
+      if (type == "cidType") {
         this.selectCidItem = item.id;
         this.selectPidItem = "0";
         this.$bus.$emit("cid", item.id);
         this.categoryId = item.id;
         this.pidData = this.cidData[index];
+        this.categoryForm.type = 0;
       } else {
         this.selectCidItem = this.categoryId;
         this.selectPidItem = item.id;
         this.pidNumber = item.id;
+        this.categoryForm.type = item.id;
       }
       this.handelOpenUrl();
       this.categoryForm.pages = 1;
       this.pagemsg.page = 1;
       this.$bus.$emit("pid", this.selectPidItem);
+
       // 设置调取 card数据 ---
       this.handleSelectCard(this.selectCidItem, this.selectPidItem);
     },
@@ -305,7 +309,10 @@ export default {
     // 项目 card列表
     getProjectCardList(itemCid, itemPid) {
       this.loadCourseAll = true;
-      this.setParamsPidCid(itemCid, itemPid);
+      // this.setParamsPidCid(itemCid, itemPid);
+      this.categoryForm.cids = itemCid;
+      this.categoryForm.pids = 0;
+
       category.curriculumProjectList(this.categoryForm).then(res => {
         if (res.status === 0) {
           this.categoryData = res.data.curriculumProjectList;
