@@ -15,15 +15,15 @@
             <el-input v-model="examineInfo.name" placeholder="请输入姓名"></el-input>
           </div>
         </div>
-        <div class="items" clearfix>
+        <!-- <div class="items" clearfix>
           <el-form-item label="性别" prop="sex">
             <el-radio-group v-model="examineInfo.sex">
               <el-radio label="1">男</el-radio>
               <el-radio label="2">女</el-radio>
             </el-radio-group>
           </el-form-item>
-        </div>
-        <!-- <div class="items  clearfix">
+        </div> -->
+        <div class="items  clearfix">
           <div class="fl">您的手机号：</div>
           <div class="fr">
             <div v-if="phone==''">
@@ -35,19 +35,19 @@
               <el-input v-model="examineInfo.tel" placeholder="请输入手机号" readonly></el-input>
             </div>
           </div>
-        </div> -->
+        </div>
         <div class="items clearfix">
           <div class="fl">您的身份证号：</div>
           <div class="fr">
             <el-input v-model="examineInfo.idNumber" placeholder="请输入身份证号"></el-input>
           </div>
         </div>
-        <!-- <div class="items clearfix">
+        <div class="items clearfix">
           <div class="fl">您的单位名称：</div>
           <div class="fr">
             <el-input v-model="examineInfo.unit" placeholder="请输入单位名称"></el-input>
           </div>
-        </div> -->
+        </div>
 
         <div class="examine-btn " @click="handleNext">下一步</div>
       </div>

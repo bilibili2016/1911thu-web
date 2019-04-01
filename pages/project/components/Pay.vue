@@ -2,7 +2,7 @@
   <div class="projectPay">
     <div class="mask">
       <div class="vipPop">
-        <div class="pop-title">请选择参加项目人数</div>
+        <div class="pop-title">请选择参加项目的人数</div>
         <i class="el-icon-close" @click="handlePopClick"></i>
         <div class="num clearfix">
           <div class="numText">人数：</div>
