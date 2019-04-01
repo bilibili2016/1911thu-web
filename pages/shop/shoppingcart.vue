@@ -188,7 +188,7 @@ export default {
     "v-list": List,
     "v-nodata": NoData
   },
-  data() {
+  data () {
     return {
       pageType: {
         page: "shoppingCart",
@@ -272,7 +272,7 @@ export default {
   computed: {
     ...mapState("auth", ["token", "productsNum"]),
     ...mapGetters("auth", ["isAuthenticated"]),
-    prices() {
+    prices () {
       let p = (
         (Number(this.arraySum + this.projectArraySum) *
           10 *
@@ -281,7 +281,7 @@ export default {
       ).toFixed(2);
       return Math.abs(p);
     },
-    canSubmit() {
+    canSubmit () {
       if (
         this.addArray.curriculumcartid.length <= 0 &&
         this.projectAddArray.projectcartid.length <= 0
@@ -293,7 +293,7 @@ export default {
     }
   },
   watch: {
-    selectAll(val) {
+    selectAll (val) {
       if (this.isRest) {
         this.handleSelectAllChange(val);
       }
@@ -301,14 +301,15 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setProductsNum", "setKid"]),
-    goDetail(item) {
+    goDetail (item) {
       let kidForm = {
         kids: item.id
       };
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
     },
-    goProjectDetail(item) {
+    // 购物车暂时没项目
+    goProjectDetail (item) {
       this.$router.push({
         path: "/project/projectdetail",
         query: {
@@ -317,29 +318,29 @@ export default {
         }
       });
     },
-    loadAll() {
+    loadAll () {
       return [];
     },
-    showMsg() {
+    showMsg () {
       this.$message({
         message: "请您先选择课程哦",
         duration: 1000
       });
     },
     // 点击全选 课程 + 项目
-    handleSelectAll() {
+    handleSelectAll () {
       this.isRest = true;
     },
     // 点击全选 --- 课程
-    handleSelectCourseAll() {
+    handleSelectCourseAll () {
       this.handleSelectCourseAllChange(this.selectAllCourse);
     },
     // 点击全选 --- 项目
-    handleSelectProjectAll() {
+    handleSelectProjectAll () {
       this.handleSelectProjectAllChange(this.selectAllProject);
     },
     // 获取 购物车列表
-    shopCartList() {
+    shopCartList () {
       this.arraySum = 0;
       this.projectArraySum = 0;
       this.addArray.curriculumcartid = [];
@@ -447,7 +448,7 @@ export default {
       });
     },
     // 点击选中 取消课程的复选框   ----课程 单选
-    handleSelectChange(item, index) {
+    handleSelectChange (item, index) {
       let shopIndex = indexOf(this.addArray.curriculumcartid, item.id);
       if (shopIndex >= 0) {
         //未选中
@@ -505,7 +506,7 @@ export default {
       }
     },
     // 点击选中 项目的复选框   ---项目 单选
-    handleSelectProjectChange(item, index) {
+    handleSelectProjectChange (item, index) {
       let shopIndex = indexOf(this.projectAddArray.projectcartid, item.id);
       if (shopIndex >= 0) {
         //未选中
@@ -566,7 +567,7 @@ export default {
       }
     },
     // 点击选择全部  ---- 项目 +课程
-    handleSelectAllChange(val) {
+    handleSelectAllChange (val) {
       if (
         (this.courseList && this.courseList.length > 0) ||
         (this.projectList && this.projectList.length > 0)
@@ -590,12 +591,12 @@ export default {
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
           //全选
           if (this.courseList.length) {
-            shopcart.shopCartaddChecked(this.addArray).then(res => {});
+            shopcart.shopCartaddChecked(this.addArray).then(res => { });
           }
         } else {
           //全不选
 
-          shopcart.shopCartremoveChecked(this.removeArray).then(res => {});
+          shopcart.shopCartremoveChecked(this.removeArray).then(res => { });
         }
 
         // 项目部分 全选
@@ -622,20 +623,20 @@ export default {
           if (this.projectList.length) {
             shopcart
               .shopCartaddProjectChecked(this.projectAddArray)
-              .then(res => {});
+              .then(res => { });
           }
         } else {
           //全不选
 
           shopcart
             .shopCartremoveProjectChecked(this.removeProjectArray)
-            .then(res => {});
+            .then(res => { });
         }
       }
     },
 
     // 点击选择全部 ---- 课程
-    handleSelectCourseAllChange(val) {
+    handleSelectCourseAllChange (val) {
       if (this.courseList && this.courseList.length > 0) {
         // 课程部分全选
 
@@ -656,11 +657,11 @@ export default {
         if (this.addArray.curriculumcartid.length == this.courseList.length) {
           //全选
 
-          shopcart.shopCartaddChecked(this.addArray).then(res => {});
+          shopcart.shopCartaddChecked(this.addArray).then(res => { });
         } else {
           //全不选
 
-          shopcart.shopCartremoveChecked(this.removeArray).then(res => {});
+          shopcart.shopCartremoveChecked(this.removeArray).then(res => { });
         }
         // 设置整个全选按钮状态
 
@@ -676,7 +677,7 @@ export default {
       }
     },
     // 点击选择全部 ---- 项目
-    handleSelectProjectAllChange(val) {
+    handleSelectProjectAllChange (val) {
       if (this.projectList && this.projectList.length > 0) {
         // 项目部分 全选
         this.projectList.forEach(item => {
@@ -699,13 +700,13 @@ export default {
           //全选
           shopcart
             .shopCartaddProjectChecked(this.projectAddArray)
-            .then(res => {});
+            .then(res => { });
         } else {
           //全不选
 
           shopcart
             .shopCartremoveProjectChecked(this.removeProjectArray)
-            .then(res => {});
+            .then(res => { });
         }
       }
       // 设置整个全选按钮状态
@@ -720,7 +721,7 @@ export default {
         }
       }
     },
-    showCommit() {
+    showCommit () {
       // 去结算如果购物车数量是1就要判断，要结算的商品内是否存在学习中的课程
       // 否则的话就提醒如何绑定
       if (this.numForm.number == "1") {
@@ -747,7 +748,7 @@ export default {
                 });
                 // this.$router.push('/shop/affirmorder') //单个选择完后台记录状态，结算按钮就不用调接口
               })
-              .catch(() => {});
+              .catch(() => { });
           } else {
             this.$router.push({
               path: "/shop/affirmorder",
@@ -780,7 +781,7 @@ export default {
           });
       }
     },
-    delNumber() {
+    delNumber () {
       if (this.numForm.number <= 1) {
         this.numForm.number = 1;
         this.numForm.beforeNumber = 1;
@@ -790,21 +791,21 @@ export default {
       }
       this.changeCartNumber();
     },
-    addNumber() {
+    addNumber () {
       this.numForm.number++;
       this.numForm.beforeNumber++;
       this.changeCartNumber();
     },
-    moreNumber() {
+    moreNumber () {
       this.isShowAlert = true;
       this.alertText = "商品数量不能大于999";
     },
     // 购买人数输入框获取焦点记录当前数字
-    handleFocus() {
+    handleFocus () {
       this.lastNum = this.numForm.number;
     },
     // 购买人数输入框失去焦点
-    changeNumber() {
+    changeNumber () {
       let reg = /^[0-9]*$/;
       if (!reg.test(this.numForm.number)) {
         this.isShowAlert = true;
@@ -828,11 +829,11 @@ export default {
       this.changeCartNumber();
     },
     // 发送购物车的购买人数
-    changeCartNumber() {
-      shopcart.changeCartNumber(this.numForm).then(res => {});
+    changeCartNumber () {
+      shopcart.changeCartNumber(this.numForm).then(res => { });
     },
     // 删除课程  ---- 课程
-    handleDeleteCourse(item, index) {
+    handleDeleteCourse (item, index) {
       this.curriculumcartids.cartid = item.id;
       this.loding = true;
 
@@ -846,7 +847,7 @@ export default {
       });
     },
     // 删除 项目 ---- 项目
-    handleDeleteProject(item, index) {
+    handleDeleteProject (item, index) {
       this.projectcartids.cartid = item.id;
       this.loding = true;
 
@@ -860,7 +861,7 @@ export default {
       });
     },
     // 全选删除  --- 项目 + 课程
-    handleDeleteAll() {
+    handleDeleteAll () {
       this.deleteAllData.projectcartid = this.projectAddArray.projectcartid;
       this.deleteAllData.curriculumcartid = this.addArray.curriculumcartid;
       this.loding = true;
@@ -882,7 +883,7 @@ export default {
       });
     },
     //tableFooter根据页面滚动位置设置定位
-    addClass() {
+    addClass () {
       if (document.getElementById("computedHeight")) {
         var computedHeight = parseInt(
           document.getElementById("computedHeight").offsetTop + 170 //170:computedHeight本身的高、距离固定元素的下边距、header的高以及10px页面小的误差
@@ -899,11 +900,11 @@ export default {
       }
     },
     // 关闭超出限制弹窗
-    handlePopClick() {
+    handlePopClick () {
       this.isShowAlert = false;
     }
   },
-  updated() {
+  updated () {
     this.index++;
     if (this.index === 1 && document.getElementById("tableFooter")) {
       this.tableFooteroffsetTop =
@@ -917,10 +918,10 @@ export default {
       }
     }
   },
-  deactivated() {
+  deactivated () {
     window.removeEventListener("scroll", this.addClass);
   },
-  mounted() {
+  mounted () {
     setTitle("购物车-1911学堂");
     if (persistStore.get("token")) {
       // 获取购车列表

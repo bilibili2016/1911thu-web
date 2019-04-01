@@ -164,15 +164,15 @@ export default {
         this.$router.push("/shop/shoppingcart");
       });
     },
-    handleLine (id) {
-      this.$router.push({
-        path: "/project/projectdetail",
-        query: {
-          kid: id,
-          type: 1
-        }
-      });
-    },
+    // handleLine (id) {
+    //   this.$router.push({
+    //     path: "/project/projectdetail",
+    //     query: {
+    //       kid: id,
+    //       type: 1
+    //     }
+    //   });
+    // },
     // 立即购买
     handleBuy (id) {
       if (!persistStore.get("token")) {
@@ -184,6 +184,7 @@ export default {
       } else {
         this.$router.push({
           path: "/shop/affirmorder",
+          // type区分订单
           query: { id: this.project.projectId, type: 1 }
         });
       }

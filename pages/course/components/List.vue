@@ -54,7 +54,7 @@ import { matchSplits } from "@/lib/util/helper";
 
 export default {
   props: ["cidData", "pidData", "cidBg", "pidBg", "loadList"],
-  data() {
+  data () {
     return {
       cid: null,
       pid: "0",
@@ -72,7 +72,7 @@ export default {
           title: "标准项目"
         },
         {
-          id: 2,
+          id: 3,
           title: "已定制项目"
         }
       ]
@@ -80,18 +80,18 @@ export default {
   },
   methods: {
     // 大类 单个
-    selectCid(item, index) {
+    selectCid (item, index) {
       this.$emit("selectCid", item, index);
     },
     // 小类 单个
-    selectPid(items, index) {
+    selectPid (items, index) {
       this.$emit("selectPid", items, index);
     },
-    handleProjectRight() {
+    handleProjectRight () {
       this.$router.push("/project/customerProject?sid=&edit=1");
     }
   },
-  mounted() {
+  mounted () {
     this.cid = matchSplits("cid");
     this.pid = matchSplits("pids");
     this.cp = matchSplits("cp");

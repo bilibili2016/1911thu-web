@@ -29,10 +29,10 @@
     </div>
     <!-- 微信登录 -->
     <div class="lrFrame wechatLogin" v-show="wechatLogin">
-      <i class="el-icon-back wechatBack" @click="back"></i>
-      <i class="el-icon-close closeWechat" @click="close"></i>
+      <i class="el-icon-back wechatBack" @click="back" v-if="showBack"></i>
+      <i class="el-icon-close closeWechat" @click="close" v-if="showBack"></i>
       <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
-        <v-wechatlogin :bindTelData="bindTelData" @loginWechat="loginWechat" @verifyRgTelWX="verifyRgTelWX"></v-wechatlogin>
+        <v-wechatlogin :bindTelData="bindTelData" @loginWechat="loginWechat" @verifyRgTelWX="verifyRgTelWX" @validationTel="validationTel"></v-wechatlogin>
       </el-form>
       <div class="scanCode" v-show="scanCodeShow">
         <h4 class="clearfix"></h4>
@@ -49,7 +49,7 @@
 
 <script>
 import { store as persistStore } from "~/lib/core/store";
-import { auth, header } from "~/lib/v1_sdk/index";
+import { auth, header, personalset } from "~/lib/v1_sdk/index";
 import { mapState, mapActions, mapGetters } from "vuex";
 import {
   checkPhone,
@@ -90,6 +90,7 @@ export default {
     };
     return {
       isHasClass: true,
+      showBack: true,
       codeListForm: {
         pages: 1,
         limits: null
@@ -136,7 +137,8 @@ export default {
         companyCodes: "",
         captchaDisable: false,
         exist: false,
-        checked: false
+        checked: false,
+        bindType: 1 //loginType登陆后绑定手机号，1:微信登录,2:学号登录
       },
       getWXLoginImg: {
         time: 300,
@@ -415,6 +417,7 @@ export default {
       this.bindTelData.captchaDisable = false;
       clearInterval(this.codeInterval);
     },
+
     // 注册时候获取验证码 this.registerData
     async handleGetCode (data) {
       if (this.bindTelData.seconds === 30) {
@@ -422,7 +425,6 @@ export default {
           auth.smsCodes(data).then(response => {
             let types = response.status === 0 ? "success" : "error";
             message(this, types, response.msg);
-
             this.bindTelData.captchaDisable = true;
             this.bindTelData.getCode =
               this.bindTelData.seconds + "秒后重新发送";
@@ -518,6 +520,28 @@ export default {
           } else {
             this.bindTelData.captchaDisable = false;
             this.handleGetCode(this.bindTelData);
+          }
+        });
+      }
+    },
+    // 验证绑定学号的手机号是否存在
+    validationTel () {
+      if (this.bindTelData.bindType == 1) {
+        this.bindTelData.types = 1
+      } else {
+        this.bindTelData.types = 8
+      }
+      if (this.bindTelData.seconds == 30) {
+        auth.verifyPhone(this.bindTelData).then(response => {
+          if (response.status !== 0) {
+            message(this, "error", response.msg);
+            this.bindTelData.captchaDisable = true;
+            this.codeClick = false;
+          } else {
+            if (this.bindTelData.seconds === 30) {
+              this.bindTelData.captchaDisable = false;
+              this.handleGetCode(this.bindTelData);
+            }
           }
         });
       }
@@ -652,7 +676,7 @@ export default {
         this.getWXAccredit();
       }, 1000);
     },
-    // 微信绑定手机号
+    // 微信绑定手机号 + 学号绑定手机号
     async loginWechat () {
       this.loadLogin = true;
       try {
@@ -666,23 +690,38 @@ export default {
         message(this, "error", error);
         return false;
       }
-
-      auth.loginWechat(this.bindTelData).then(response => {
-        if (response.status === 0) {
-          message(this, "success", "登录成功");
-          this.tokenForm.tokens = response.data.token;
-          this.setToken(this.tokenForm);
-          this.getUserInfo();
-          this.$bus.$emit("updateCount"); //获取购物车数量
-          this.closeWechat();
-          this.close();
-          // 未登录后登陆后刷新当前页面
-          this.refresh();
-        } else {
-          message(this, "error", response.msg);
-        }
-        this.loadLogin = false;
-      });
+      if (this.bindTelData.bindType == 1) {
+        //   微信绑定手机号
+        auth.loginWechat(this.bindTelData).then(response => {
+          if (response.status === 0) {
+            message(this, "success", "登录成功");
+            this.tokenForm.tokens = response.data.token;
+            this.setToken(this.tokenForm);
+            this.getUserInfo();
+            this.$bus.$emit("updateCount"); //获取购物车数量
+            this.closeWechat();
+            this.close();
+            // 未登录后登陆后刷新当前页面
+            this.refresh();
+          } else {
+            message(this, "error", response.msg);
+          }
+          this.loadLogin = false;
+        });
+      } else {
+        //  学号绑定手机号
+        personalset.editPhone(this.bindTelData).then(res => {
+          if (res.status == 0) {
+            message(this, "success", "添加成功");
+            this.getUserInfo();
+            this.$bus.$emit("updateCount");
+            this.closeWechat();
+            this.close();
+          } else {
+            message(this, "error", res.msg);
+          }
+        });
+      }
     },
     //获取微信登录是否已经绑定
     getWXAccredit () {
@@ -707,6 +746,7 @@ export default {
         if (response.status === 100102) {
           this.scanCodeShow = false; //微信扫码
           this.bindTelShow = true;
+          this.bindTelData.bindType = 1;
           this.bindTelData.captchaDisable = true;
           this.bindTelData.openid = response.data.openid;
           clearInterval(this.getwxtime);
@@ -847,6 +887,15 @@ export default {
     });
     this.$bus.$on("registerShow", data => {
       this.rigisterCardShow();
+    });
+    // 学号登陆补充手机号
+    this.$bus.$on("supplementTel", data => {
+      this.closeWechat()
+      this.showBack = false
+      this.start = true
+      this.wechatLogin = true;
+      this.bindTelShow = true;
+      this.bindTelData.bindType = 2;
     });
     if (!this.token) {
       this.signOut();

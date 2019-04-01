@@ -22,7 +22,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data() {
+  data () {
     return {
       kidForm: {
         ids: null
@@ -35,25 +35,14 @@ export default {
     };
   },
   watch: {
-    vipGoodsList() {
+    vipGoodsList () {
       this.vipList = this.vipGoodsList;
     }
   },
   methods: {
     ...mapActions("auth", ["setKid"]),
-    // 跳转课程详情
-    goCourseDetail(item) {
-      this.$router.push({
-        path: "/course/detail",
-        query: {
-          kid: item.curriculum_id,
-          pid: this.projectId,
-          page: 0
-        }
-      });
-    },
     // 跳转到项目播放页
-    goProjectPlayer(course) {
+    goProjectPlayer (course) {
       if (persistStore.get("token")) {
         let urlLink = {
           base: "/project/projectPlayer",
@@ -66,7 +55,7 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    goVipDetail(vip) {
+    goVipDetail (vip) {
       this.$router.push({
         path: "/home/vip/collegeInfo",
         query: {

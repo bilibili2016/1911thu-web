@@ -47,7 +47,7 @@ export default {
   components: {
     "v-nomsg": NoMsg
   },
-  data() {
+  data () {
     return {
       noMsgImg: "http://static-image.1911edu.com/noMsg.png",
       bindForm: {
@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     // 跳转课程或项目详情
-    handleLink(item, type) {
+    handleLink (item, type) {
       if (item.type === "1") {
         //课程
         this.courseUrl.kid = item.curriculum_id;
@@ -92,7 +92,8 @@ export default {
         }
         if (type === "2") {
           //项目
-          this.type = 1; //this.type 跳转页面区分是标准项目（1）还是定制项目（2）
+          //this.type 跳转页面区分是标准项目（1）还是定制项目（2）
+          this.type = 1;
         } else {
           this.type = 2;
         }
@@ -106,11 +107,11 @@ export default {
       }
     },
     // 时间戳转日期格式
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToYMD(time);
     },
     // 检测兑换码内是否包含已绑定的课程
-    detection() {
+    detection () {
       if (
         this.bindForm.courseId == "" ||
         !/^[A-Za-z0-9]+$/.test(this.bindForm.courseId)
@@ -156,7 +157,7 @@ export default {
       }
     },
     // 添加课程 绑定
-    doSubmit() {
+    doSubmit () {
       binding.bindingCurriculumPrivate(this.bindForm).then(res => {
         if (res.status === 0) {
           this.$message({
@@ -181,7 +182,7 @@ export default {
       });
     }
   },
-  mounted() {}
+  mounted () { }
 };
 </script>
 

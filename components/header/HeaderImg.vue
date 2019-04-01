@@ -27,7 +27,7 @@ import { store as persistStore } from "~/lib/core/store";
 
 export default {
   props: ["data", "isShowLRBtn"],
-  data() {
+  data () {
     return {
       infoNum: "",
       subPagesData: [
@@ -83,10 +83,10 @@ export default {
     ...mapState("auth", ["productsNum"])
   },
   methods: {
-    handleLink(data) {
+    handleLink (data) {
       this.$emit("handleLink", data);
     },
-    handleLinkProfile(data) {
+    handleLinkProfile (data) {
       this.$emit("handleLinkProfile", data);
       let obj = {
         name: data
@@ -94,15 +94,18 @@ export default {
 
       this.$bus.$emit("handleHeadClick", obj);
     },
-    handleSignOut() {
+    handleSignOut () {
       this.$emit("handleSignOut");
     },
-    getInfoNum() {
+    getInfoNum () {
       this.infoNum = persistStore.get("infoNUm");
     }
   },
   watch: {
     $route: "getInfoNum"
+  },
+  mounted () {
+    this.getInfoNum();
   }
 };
 </script>
