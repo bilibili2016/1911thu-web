@@ -15,14 +15,16 @@
             <el-input v-model="examineInfo.name" placeholder="请输入姓名"></el-input>
           </div>
         </div>
-        <!-- <div class="items" clearfix>
-          <el-form-item label="性别" prop="sex">
+        <div class="items clearfix">
+          <div class="fl">性别：</div>
+          <div class="fr">
             <el-radio-group v-model="examineInfo.sex">
-              <el-radio label="1">男</el-radio>
-              <el-radio label="2">女</el-radio>
+              <el-radio :label="1">男</el-radio>
+              <el-radio :label="2">女</el-radio>
             </el-radio-group>
-          </el-form-item>
-        </div> -->
+          </div>
+
+        </div>
         <div class="items  clearfix">
           <div class="fl">您的手机号：</div>
           <div class="fr">
@@ -37,9 +39,9 @@
           </div>
         </div>
         <div class="items clearfix">
-          <div class="fl">您的身份证号：</div>
+          <div class="fl">您的生日：</div>
           <div class="fr">
-            <el-input v-model="examineInfo.idNumber" placeholder="请输入身份证号"></el-input>
+            <el-date-picker v-model="examineInfo.birthday" type="date" value-format="yyyy-MM-dd" placeholder="请输入您的生日"></el-date-picker>
           </div>
         </div>
         <div class="items clearfix">
@@ -68,7 +70,7 @@ export default {
         name: "", //姓名
         tel: "", //手机号
         code: "", //验证码
-        idNumber: "", //身份证号
+        birthday: '',//生日
         unit: "", //单位名称
         sex: 1 //性别
       },
@@ -136,7 +138,7 @@ export default {
     },
     handleNext () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
-      const IDreg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+
       try {
         if (Trim(this.examineInfo.name) === "") throw "请输入您的姓名";
         if (Trim(this.examineInfo.tel) === "") throw "请输入您的手机号码";
@@ -144,15 +146,12 @@ export default {
           throw "请输入验证码";
         if (!telReg.test(Trim(this.examineInfo.tel)) && this.phone == "")
           throw "请输入正确的手机号码";
-        if (Trim(this.examineInfo.idNumber) === "") throw "请输入您的身份证号";
-        if (!IDreg.test(Trim(this.examineInfo.idNumber)))
-          throw "请输入正确的身份证号";
+        if (Trim(this.examineInfo.birthday) === "") throw "请输入您的生日";
         if (Trim(this.examineInfo.unit) === "") throw "请输入您的单位名称";
       } catch (err) {
         message(this, "error", err);
         return false;
       }
-
       examine.saveExamUserInfo(this.examineInfo).then(res => {
         if (res.status == 0) {
           this.pageData.name = "intro";
@@ -196,7 +195,8 @@ export default {
     this.getUserInfo();
     this.examineInfo.name = "";
     this.examineInfo.tel = "";
-    this.examineInfo.idNumber = "";
+    this.examineInfo.birthday = "";
+    this.examineInfo.sex = 1;
     this.examineInfo.unit = "";
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }

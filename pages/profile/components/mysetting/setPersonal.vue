@@ -1,193 +1,64 @@
 <template>
   <div>
     <div>
-      <el-form
-        :model="psnForm"
-        :rules="rules"
-        ref="psnForm"
-        label-width="135px"
-        class="psnForm"
-      >
-        <el-form-item
-          label="学号"
-          prop="student_number"
-        >
-          <el-input
-            v-model="psnForm.student_number"
-            readonly
-          ></el-input>
+      <el-form :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
+        <el-form-item label="学号" prop="student_number">
+          <el-input v-model="psnForm.student_number" readonly></el-input>
         </el-form-item>
-        <el-form-item
-          label="昵称"
-          prop="nick_name"
-        >
+        <el-form-item label="昵称" prop="nick_name">
           <el-input v-model="psnForm.nick_name"></el-input>
         </el-form-item>
-        <el-form-item
-          label="性别"
-          prop="sex"
-        >
+        <el-form-item label="性别" prop="sex">
           <el-radio-group v-model="psnForm.sex">
             <el-radio label="1">男</el-radio>
             <el-radio label="2">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item
-          label="生日"
-          prop="birthday"
-        >
-          <el-date-picker
-            v-model="psnForm.birthday"
-            type="date"
-            value-format="yyyy-MM-dd"
-          ></el-date-picker>
+        <el-form-item label="生日" prop="birthday">
+          <el-date-picker v-model="psnForm.birthday" type="date" value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
-        <el-form-item
-          label="所在地区"
-          prop="province"
-        >
-          <el-select
-            v-model="psnForm.province_name"
-            placeholder="省"
-            @change="provinceChange"
-          >
-            <el-option
-              :label="p.label"
-              :value="p.value"
-              v-for="(p,index) in province"
-              :key="'prov'+index"
-            ></el-option>
+        <el-form-item label="所在地区" prop="province">
+          <el-select v-model="psnForm.province_name" placeholder="省" @change="provinceChange">
+            <el-option :label="p.label" :value="p.value" v-for="(p,index) in province" :key="'prov'+index"></el-option>
           </el-select>
-          <el-select
-            v-model="psnForm.city_name"
-            placeholder="市"
-            no-data-text="请先选择所在省份"
-            @change="cityChange"
-          >
-            <el-option
-              :label="p.label"
-              :value="p.value"
-              v-for="(p,index) in city"
-              :key="'city'+index"
-            ></el-option>
+          <el-select v-model="psnForm.city_name" placeholder="市" no-data-text="请先选择所在省份" @change="cityChange">
+            <el-option :label="p.label" :value="p.value" v-for="(p,index) in city" :key="'city'+index"></el-option>
           </el-select>
-          <el-select
-            v-model="psnForm.area_name"
-            placeholder="区"
-            no-data-text="请先选择所在城市"
-            @change="areaChange"
-          >
-            <el-option
-              :label="p.label"
-              :value="p.value"
-              v-for="(p,index) in area"
-              :key="'area'+index"
-            ></el-option>
+          <el-select v-model="psnForm.area_name" placeholder="区" no-data-text="请先选择所在城市" @change="areaChange">
+            <el-option :label="p.label" :value="p.value" v-for="(p,index) in area" :key="'area'+index"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item
-          label="职业"
-          prop="position"
-        >
-          <el-select
-            v-model="psnForm.position"
-            placeholder="请选择"
-            class="profession"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
+        <el-form-item label="职业" prop="position">
+          <el-select v-model="psnForm.position" placeholder="请选择" class="profession">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item
-          label="邮箱"
-          prop="email"
-        >
-          <el-input
-            v-model="psnForm.email"
-            maxlength="50"
-            placeholder="请输入您的邮箱地址"
-          ></el-input>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="psnForm.email" maxlength="50" placeholder="请输入您的邮箱地址"></el-input>
         </el-form-item>
-        <el-form-item
-          class="telForm"
-          disable
-          label="手机号"
-        >
-          <el-input
-            class="telephone"
-            v-model="psnForm.user_name"
-            disabled
-          ></el-input>
-          <span
-            v-if="psnForm.user_name==''"
-            @click="handleBindPhone"
-            class="teledit"
-          >
-            <img
-              src="~assets/images/binding.png"
-              alt
-            >绑定
+        <el-form-item class="telForm" disable label="手机号">
+          <el-input class="telephone" v-model="psnForm.user_name" disabled></el-input>
+          <span v-if="psnForm.user_name==''" @click="handleBindPhone" class="teledit">
+            <img src="~assets/images/binding.png" alt>绑定
           </span>
-          <span
-            v-else
-            class="teledit"
-            @click="modifyPhone"
-          >
-            <img
-              src="~assets/images/edit.png"
-              alt
-            >修改
+          <span v-else class="teledit" @click="modifyPhone">
+            <img src="~assets/images/edit.png" alt>修改
           </span>
         </el-form-item>
-        <el-form-item
-          label="单位名称"
-          v-if="hasCompany"
-          key="psnForm.company_name"
-        >
-          <el-input
-            v-model="psnForm.company_name"
-            maxlength="30"
-            placeholder="请输入您的单位名称"
-          ></el-input>
+        <el-form-item label="单位名称" v-if="hasCompany" key="psnForm.company_name">
+          <el-input v-model="psnForm.company_name" maxlength="30" placeholder="请输入您的单位名称"></el-input>
         </el-form-item>
-        <el-form-item
-          label="单位名称"
-          v-else
-        >
-          <el-input
-            v-model="psnForm.company_name"
-            maxlength="30"
-            placeholder="请输入您的单位名称"
-          ></el-input>
+        <el-form-item label="单位名称" v-else>
+          <el-input v-model="psnForm.company_name" maxlength="30" placeholder="请输入您的单位名称"></el-input>
         </el-form-item>
-        <el-form-item
-          size="large"
-          class="submit"
-        >
-          <el-button
-            type="primary"
-            class="submitAble"
-            @click="onSubmit('psnForm')"
-            round
-          >提交</el-button>
+        <el-form-item size="large" class="submit">
+          <el-button type="primary" class="submitAble" @click="onSubmit('psnForm')" round>提交</el-button>
         </el-form-item>
       </el-form>
     </div>
     <!-- 修改手机号弹窗 -->
-    <div
-      class="bindBg"
-      v-show="showBindBg"
-    >
-      <v-bindphone
-        :bindTelData="bindTelData"
-        :numPhone="psnForm.user_name"
-        @close="close"
-        @getUserData="getUserData"
-      ></v-bindphone>
+    <div class="bindBg" v-show="showBindBg">
+      <v-bindphone :bindTelData="bindTelData" :numPhone="psnForm.user_name" @close="close" @getUserData="getUserData"></v-bindphone>
     </div>
   </div>
 </template>
@@ -202,7 +73,7 @@ import { IEPopup } from "~/lib/util/helper";
 
 export default {
   props: ["data", "hasCompany"],
-  data() {
+  data () {
     var nickName = (rule, value, callback) => {
       if (!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
         callback(
@@ -323,7 +194,7 @@ export default {
     ...mapGetters("auth", ["isAuthenticated"])
   },
   methods: {
-    provinceChange(val) {
+    provinceChange (val) {
       this.psnForm.city_name = "";
       this.psnForm.area_name = "";
       this.psnForm.city = "";
@@ -339,7 +210,7 @@ export default {
         }
       }
     },
-    cityChange(val) {
+    cityChange (val) {
       this.psnForm.area_name = "";
       this.psnForm.area = "";
       if (!this.city && this.city.length == 0) {
@@ -354,7 +225,7 @@ export default {
         }
       }
     },
-    areaChange(val) {
+    areaChange (val) {
       for (let item of this.area) {
         if (val == item.region_code) {
           this.psnForm.area_name = item.name;
@@ -363,7 +234,7 @@ export default {
       }
     },
     // 整理省市区
-    getRegion(data, val) {
+    getRegion (data, val) {
       let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
@@ -380,7 +251,7 @@ export default {
       return tmp;
     },
     // 获取省市区
-    getRegionList() {
+    getRegionList () {
       personalset.getRegionList({ region_code: "" }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
@@ -392,7 +263,7 @@ export default {
       });
     },
     // 获取职业列表
-    getPositionList() {
+    getPositionList () {
       personalset.positionList().then(res => {
         let tmp = res.data;
         this.options = tmp.map(item => {
@@ -401,7 +272,7 @@ export default {
       });
     },
     // 提交个 人信息表单
-    onSubmit(formName) {
+    onSubmit (formName) {
       if (this.psnForm.province !== "") {
         if (this.psnForm.city === "" || this.psnForm.area === "") {
           this.$message({
@@ -429,22 +300,22 @@ export default {
         }
       });
     },
-    getUserData() {
+    getUserData () {
       this.$emit("getUserData");
     },
     //修改手机号
-    modifyPhone() {
+    modifyPhone () {
       IEPopup("pane-tab-sixth", "-ms-page", 0);
 
       this.showBindBg = true;
     },
     //关闭弹框
-    close() {
+    close () {
       IEPopup("pane-tab-sixth", "relative", 1);
       this.showBindBg = false;
     },
     //绑定手机号
-    handleBindPhone() {
+    handleBindPhone () {
       IEPopup("pane-tab-sixth", "-ms-page", 0);
 
       this.showBindBg = true;
@@ -452,15 +323,15 @@ export default {
     }
   },
   watch: {
-    data(val) {
+    data (val) {
       this.psnForm = this.data;
     },
-    province(val) {
+    province (val) {
       this.city = this.getRegion(val, this.psnForm.province);
       this.area = this.getRegion(this.city, this.psnForm.city);
     }
   },
-  mounted() {
+  mounted () {
     this.psnForm = this.data;
     if (persistStore.get("gid") && persistStore.get("gid") == "tab-sixth") {
       this.getPositionList();
