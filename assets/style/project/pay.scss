@@ -42,6 +42,14 @@
 
         p {
           line-height: 30px;
+
+          i {
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            border-bottom: 1px solid #000000;
+            cursor: pointer;
+          }
         }
       }
 

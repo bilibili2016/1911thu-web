@@ -391,17 +391,17 @@ export default {
       } else if (res.status === 0) {
         this.getAll();
         persistStore.set("isSingleLogin", true);
-        console.log(res.data.userInfo.unread_message_number, 'res.data.userInfo.unread_message_number');
-
         persistStore.set("infoNUm", res.data.userInfo.unread_message_number);
 
         // 设置用户信息
         this.setUserInfo(res);
         // this.getClassifyList()
         // 如果学号登陆 没有绑定手机号 先去绑定手机号
-        if (res.data.userInfo.user_name == '') {
-          this.$bus.$emit("supplementTel")
-        }
+        // if (res.data.userInfo.user_name == '') {
+        //   this.$bus.$emit("supplementTel")
+        // }
+        // 未读消息 小红点
+        this.$bus.$emit("getInfoNum");
       }
       this.pass = false;
     },

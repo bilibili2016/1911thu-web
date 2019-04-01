@@ -30,7 +30,7 @@
     <!-- 微信登录 -->
     <div class="lrFrame wechatLogin" v-show="wechatLogin">
       <i class="el-icon-back wechatBack" @click="back" v-if="showBack"></i>
-      <i class="el-icon-close closeWechat" @click="close" v-if="showBack"></i>
+      <i class="el-icon-close closeWechat" @click="close"></i>
       <el-form :model="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm" v-show="bindTelShow">
         <v-wechatlogin :bindTelData="bindTelData" @loginWechat="loginWechat" @verifyRgTelWX="verifyRgTelWX" @validationTel="validationTel"></v-wechatlogin>
       </el-form>

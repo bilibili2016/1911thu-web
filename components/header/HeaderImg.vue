@@ -101,11 +101,10 @@ export default {
       this.infoNum = persistStore.get("infoNUm");
     }
   },
-  watch: {
-    $route: "getInfoNum"
-  },
   mounted () {
-    this.getInfoNum();
+    this.$bus.$on("getInfoNum", data => {
+      this.getInfoNum();
+    });
   }
 };
 </script>
