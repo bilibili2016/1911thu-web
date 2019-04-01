@@ -128,28 +128,12 @@ export default {
       if (this.isIndex) {
         this.courseUrl.kid = item.id;
         open(this.courseUrl);
-        // this.$router.push({
-        //   path: '/course/coursedetail',
-        //   query: {
-        //     kid: item.id,
-        //     bid: '',
-        //     page: 0
-        //   }
-        // })
       } else {
         // 分类列表页
         if (this.cp === "0") {
           // 课程-转到课程详情
           this.courseUrl.kid = item.id;
           open(this.courseUrl);
-          // this.$router.push({
-          //   path: '/course/coursedetail',
-          //   query: {
-          //     kid: item.id,
-          //     bid: '',
-          //     page: 0
-          //   }
-          // })
         } else {
           // 项目-项目详情
           this.$router.push({

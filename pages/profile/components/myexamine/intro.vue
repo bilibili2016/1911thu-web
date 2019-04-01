@@ -38,7 +38,9 @@
 
       <div class="examButton">
         <div class="examineBtn notExamine" v-if="showBtn"><span>参加考试</span><span class="alertText">{{alertText}}</span></div>
-        <div class="examineBtn" v-else @click="examRules('1')">参加考试</div>
+        <div class="examineBtn" v-if="!showBtn && !isGoInfo" @click="examRules('1')">参加考试</div>
+        <div class="examineBtn" v-if="isGoInfo" @click="goInfo">参加考试</div>
+
         <div class="examineBtn" v-if="showSimulationExam" @click="examRules('2')">模拟考试</div>
         <div class="examineBtn notExamine" v-else>模拟考试
           <span class="alertText">您已用尽2次模拟考试机会，不能再参加模拟考试。</span>
@@ -46,7 +48,7 @@
         <!-- <p class="text">{{alertText}}</p> -->
       </div>
     </div>
-    <div class="examRules" v-if="showExamRules">
+    <!-- <div class="examRules" v-if="showExamRules">
       <div class="rulesInfo" v-loading="examRuleLoading">
         <i class="el-icon-close" @click="closeRules"></i>
         <h4>温馨提示</h4>
@@ -76,7 +78,7 @@
           <span @click="handleExamine">确定</span>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -86,6 +88,7 @@ export default {
   props: ["vipID"],
   data() {
     return {
+      isGoInfo: false,
       alertText: "",
       showBtn: true,
       showSimulationExam: false,
@@ -111,30 +114,35 @@ export default {
     },
     // 考试规则弹框
     examRules(type) {
-      IEPopup("pane-tab-tenth", "-ms-page", 0);
-      this.vipForm.vipId = this.vipID;
-      this.vipForm.type = type;
-      this.examRuleLoading = true;
-      examine.examRuleInfo(this.vipForm).then(response => {
-        if (response.status == 0) {
-          this.examRuleLoading = false;
-          this.examRuleInfo = response.data.examRuleInfo;
-          this.showExamRules = true;
-        } else {
-          this.$message({
-            showClose: true,
-            message: response.msg,
-            type: "error",
-            duration: 6000
-          });
-        }
-      });
+      this.$emit("examRulesPop", type);
+      // IEPopup("pane-tab-tenth", "-ms-page", 0);
+      // this.vipForm.vipId = this.vipID;
+      // this.vipForm.type = type;
+      // this.examRuleLoading = true;
+      // examine.examRuleInfo(this.vipForm).then(response => {
+      //   if (response.status == 0) {
+      //     this.examRuleLoading = false;
+      //     this.examRuleInfo = response.data.examRuleInfo;
+      //     this.showExamRules = true;
+      //   } else {
+      //     this.$message({
+      //       showClose: true,
+      //       message: response.msg,
+      //       type: "error",
+      //       duration: 6000
+      //     });
+      //   }
+      // });
     },
     // 关闭规则弹框
     closeRules() {
       IEPopup("pane-tab-tenth", "relative", 1);
-
       this.showExamRules = false;
+    },
+    goInfo() {
+      this.pageData.id = this.vipID;
+      this.pageData.name = "info";
+      this.$bus.$emit("whichShow", this.pageData);
     },
     // 开始考试
     handleExamine() {
@@ -171,18 +179,22 @@ export default {
       this.vipForm.type = "1";
       examine.validateExamPrivilege(this.vipForm).then(response => {
         if (response.status == 0) {
+          //能直接参加考试
           this.showBtn = false;
+          this.isGoInfo = false;
         } else if (response.status == 100008) {
+          //未登录状态
           this.responseData.res = response;
           this.$router.push("/");
-          return false;
+        } else if (response.status == 100201) {
+          //没有填写个人信息
+          this.showBtn = false;
+          this.isGoInfo = true;
         } else {
-          if (response.status == 100201) {
-            this.showBtn = false;
-          } else {
-            this.showBtn = true;
-            this.alertText = response.msg;
-          }
+          //其他 或 不能参加考试
+          this.showBtn = true;
+          this.alertText = response.msg;
+          this.isGoInfo = false;
         }
       });
     },
