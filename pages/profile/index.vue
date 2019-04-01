@@ -1023,7 +1023,7 @@ export default {
     }
   },
   mounted() {
-    this.infoNum = persistStore.get("infoNUm");
+    this.infoNum = persistStore.get("infoNum");
     setTitle("个人中心-1911学堂");
     if (persistStore.get("token")) {
       this.getUserInfo();
