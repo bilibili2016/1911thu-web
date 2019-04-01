@@ -239,7 +239,7 @@
 
               i {
                 display: inline-block;
-                width: 20px;
+                width: 19px;
                 position: absolute;
                 top: 4px;
                 left: 5px;
@@ -248,7 +248,23 @@
               }
 
               &.minus i {
+                left: 4px;
                 line-height: 16px;
+              }
+
+              &.add i {
+                line-height: 15px;
+              }
+
+              &.unClick {
+                color: #93999F;
+                cursor: not-allowed;
+                background: none;
+
+                i {
+                  left: 4px;
+
+                }
               }
             }
 
