@@ -4,8 +4,6 @@
       <div class="vipPop">
         <div class="pop-title">请选择参加项目人数</div>
         <i class="el-icon-close" @click="handlePopClick"></i>
-        <p>标准项目支持30-50人学习</p>
-        <p>如果贵单位学习人数不在此区间内，请前往<i>自定制项目</i></p>
         <div class="num clearfix">
           <div class="numText">人数：</div>
           <div class="numOpr">
@@ -15,6 +13,10 @@
             </span>
             <span :class="['numBtn',{'add':add}]" @click="addNumber" onselectstart="return false;">+</span>
           </div>
+        </div>
+        <div class="text">
+          <p>标准项目支持30-50人学习</p>
+          <p>如果贵单位学习人数不在此区间内，请前往<i>自定制项目</i></p>
         </div>
         <div class="btn">
           <!-- <span class="cancel" @click="handlePopClick">取消</span> -->
@@ -27,7 +29,7 @@
 <script>
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 export default {
-  data () {
+  data() {
     return {
       alertShow: false,
       sub: true,
@@ -36,40 +38,40 @@ export default {
       projectData: {
         kid: "",
         number: 30
-      },
+      }
     };
   },
   methods: {
     //关闭购买弹窗
-    handlePopClick () {
+    handlePopClick() {
       this.$emit("closePay");
     },
     //减
-    delNumber () {
+    delNumber() {
       if (this.projectData.number <= 31) {
         this.projectData.number = 30;
-        this.sub = true
+        this.sub = true;
       } else {
-        this.add = false
+        this.add = false;
         this.projectData.number--;
       }
     },
     //加
-    addNumber () {
+    addNumber() {
       if (this.projectData.number >= 49) {
-        this.add = true
-        this.projectData.number = 50
+        this.add = true;
+        this.projectData.number = 50;
       } else {
         this.projectData.number++;
-        this.sub = false
+        this.sub = false;
       }
     },
     // 购买人数输入框获取焦点记录当前数字
-    handleFocus () {
+    handleFocus() {
       this.lastNum = this.projectData.number;
     },
     // 购买人数输入框失去焦点
-    changeNumber () {
+    changeNumber() {
       let reg = /^[0-9]*$/;
       if (!reg.test(this.projectData.number)) {
         this.projectData.number = this.lastNum;
@@ -77,31 +79,35 @@ export default {
       }
       if (this.projectData.number <= 30) {
         this.projectData.number = 30;
-        this.sub = true
-        this.add = false
+        this.sub = true;
+        this.add = false;
       } else if (this.projectData.number >= 50) {
         this.projectData.number = 50;
-        this.sub = false
-        this.add = true
+        this.sub = false;
+        this.add = true;
       } else {
-        this.sub = false
-        this.add = false
+        this.sub = false;
+        this.add = false;
       }
     },
     //下一步
-    handleConfirm () {
+    handleConfirm() {
       this.$router.push({
         path: "/shop/affirmorder",
-        query: { id: this.projectData.kid, type: 1, pn: this.projectData.number }
+        query: {
+          id: this.projectData.kid,
+          type: 1,
+          pn: this.projectData.number
+        }
       });
     },
-    init () {
+    init() {
       this.projectData.kid = matchSplits("kid");
     }
   },
-  mounted () {
+  mounted() {
     this.init();
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
