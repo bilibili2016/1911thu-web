@@ -23,7 +23,6 @@
               <el-radio :label="2">女</el-radio>
             </el-radio-group>
           </div>
-
         </div>
         <div class="items  clearfix">
           <div class="fl">您的手机号：</div>

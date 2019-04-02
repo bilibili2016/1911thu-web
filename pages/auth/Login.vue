@@ -138,6 +138,7 @@ export default {
         captchaDisable: false,
         exist: false,
         checked: false,
+        flag: true,
         bindType: 1 //loginType登陆后绑定手机号，1:微信登录,2:学号登录
       },
       getWXLoginImg: {
@@ -421,7 +422,8 @@ export default {
     // 注册时候获取验证码 this.registerData
     async handleGetCode (data) {
       if (this.bindTelData.seconds === 30) {
-        if (this.bindTelData.captchaDisable === false) {
+        if (this.bindTelData.captchaDisable === false && this.bindTelData.flag) {
+          this.bindTelData.flag = false
           auth.smsCodes(data).then(response => {
             let types = response.status === 0 ? "success" : "error";
             message(this, types, response.msg);
@@ -435,9 +437,11 @@ export default {
                 this.bindTelData.captchaDisable = false;
                 this.codeClick = false;
                 clearInterval(this.codeInterval);
+                this.bindTelData.flag = true
               } else {
                 this.bindTelData.getCode =
                   --this.bindTelData.seconds + "秒后重新发送";
+                this.bindTelData.flag = false
               }
             }, 1000);
           });
