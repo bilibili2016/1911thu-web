@@ -43,7 +43,6 @@
           <span slot="label" class="tabList infoList">
             <i class="redInfo" v-if="infoNum!=0"></i>
             <i class="icon-message"></i> 我的消息
-            <!-- <i class="infoAlert">18</i> -->
           </span>
           <v-myinfo :noMyMsg="noMyMsg" :noMsgEle="noMsgEle" @isNoMyMsg="isNoMyMsg"></v-myinfo>
         </el-tab-pane>
@@ -1023,7 +1022,6 @@ export default {
     }
   },
   mounted() {
-    this.infoNum = persistStore.get("infoNum");
     setTitle("个人中心-1911学堂");
     if (persistStore.get("token")) {
       this.getUserInfo();
@@ -1062,6 +1060,11 @@ export default {
     }
     this.$bus.$on("handleHeadClick", data => {
       this.handleClick(data);
+    });
+
+    this.infoNum = persistStore.get("infoNum");
+    this.$bus.$on("profileInfoNum", data => {
+      this.infoNum = persistStore.get("infoNum");
     });
   },
   beforeDestroy() {
