@@ -1061,7 +1061,11 @@ export default {
     this.$bus.$on("handleHeadClick", data => {
       this.handleClick(data);
     });
+
     this.infoNum = persistStore.get("infoNum");
+    this.$bus.$on("profileInfoNum", data => {
+      this.infoNum = persistStore.get("infoNum");
+    });
   },
   beforeDestroy() {
     this.$bus.$off("goOrderDetail");

@@ -50,7 +50,15 @@ export default {
     },
     //更新消息状态
     updateStatus(data) {
-      info.updateMyInfo({ infoId: data.id }).then(res => {});
+      info.updateMyInfo({ infoId: data.id }).then(res => {
+        if (res.status == 0) {
+          let oldNum = persistStore.get("infoNum");
+          let newNum = oldNum > 0 ? oldNum - 1 : oldNum;
+          persistStore.set("infoNum", newNum);
+          this.$bus.$emit("profileInfoNum");
+          this.$bus.$emit("getInfoNum");
+        }
+      });
     },
     // 获取我的消息列表
     getInfo() {
