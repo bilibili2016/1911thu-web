@@ -1,11 +1,7 @@
 <template>
   <!-- 项目详情——问题 -->
   <div class="problems">
-    <div
-      class="qustion"
-      v-for="(qus,index) in problems"
-      :key="index"
-    >
+    <div class="qustion" v-for="(qus,index) in problems" :key="index">
       <h5>
         <span>Q{{index+1}}.</span>{{qus.qustion}}
       </h5>
@@ -16,7 +12,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       problems: [
         {
@@ -31,7 +27,7 @@ export default {
         {
           qustion: "证书怎么申请？",
           answer:
-            "学完本项目课程并考核通过者，可获得相应认证证书。考核权重为：视频观看学习完成度占50%，选择题测试占30%，讨论题互动发言量占20%。"
+            "学完本项目课程并考核通过者，可获得相应结业证书。"
         },
         {
           qustion: "该项目所学课程是否可以换算成学位项目的学分?",
