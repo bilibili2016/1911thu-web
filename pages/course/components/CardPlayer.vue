@@ -402,14 +402,9 @@ export default {
         message(this, "warning", "已经是最后一节了！");
       }
     },
-    // 点击播放器进行播放或暂停
+    //播放器播放之后 单机击播放器 进行播放或暂停
     playMedia (item) {
       clearTimeout(this.clickTime);
-      console.log(item, 'item');
-      console.log(item.srcElement, 'item');
-      console.log(item.srcElement.classList, 'item');
-      console.log(item.srcElement.className, 'item');
-
       this.clickTime = setTimeout(() => {
         // 如果点击的当前这个标签是 mediaPlayer 才执行
         var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
@@ -430,11 +425,13 @@ export default {
             }
           }
         } else {
-          if (this.player && IE && item.srcElement.className == '') {
-            if (this.playVideo) {
-              this.player.play();
-            } else {
-              this.player.pause();
+          if (this.player && IE) {
+            if (item.srcElement.className == '') {
+              if (this.playVideo) {
+                this.player.play();
+              } else {
+                this.player.pause();
+              }
             }
           } else if (this.player && item.path[1].id == "mediaPlayer") {
             if (this.playVideo) {
