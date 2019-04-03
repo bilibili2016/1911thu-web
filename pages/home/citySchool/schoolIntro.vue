@@ -176,13 +176,13 @@
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>姓名：</div>
             <div class="fr">
-              <el-input v-model="schoolForm.name" placeholder="请输入您的姓名"></el-input>
+              <el-input v-model="schoolForm.name" placeholder="请输入您的姓名" maxlength="10"></el-input>
             </div>
           </div>
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>电话：</div>
             <div class="fr">
-              <el-input v-model="schoolForm.tel" placeholder="请输入您的手机号"></el-input>
+              <el-input v-model="schoolForm.tel" placeholder="请输入您的手机号" maxlength="50"></el-input>
               <!-- <el-input class="tel" v-model="teacherForm.tel" placeholder="请填写手机号"></el-input> -->
               <!-- <el-input class="verification" v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input> -->
               <!-- <span class="code" @click="smsCodes">{{telCodes.getCode}}</span> -->
@@ -208,7 +208,7 @@ import { Trim, matchSplits, setTitle, message } from "@/lib/util/helper";
 import { personalset, school } from "~/lib/v1_sdk/index";
 
 export default {
-  data() {
+  data () {
     return {
       isClick: false,
       province: [],
@@ -231,10 +231,10 @@ export default {
     };
   },
   methods: {
-    handleLink(link) {
+    handleLink (link) {
       this.$router.push(link);
     },
-    provinceChange(val) {
+    provinceChange (val) {
       this.schoolForm.city_name = "";
       this.schoolForm.city = "";
       if (!this.province && this.province.length == 0) {
@@ -248,7 +248,7 @@ export default {
         }
       }
     },
-    cityChange(val) {
+    cityChange (val) {
       if (!this.city && this.city.length == 0) {
         this.getRegionList();
       }
@@ -260,7 +260,7 @@ export default {
       }
     },
     // 整理省市区
-    getRegion(data, val) {
+    getRegion (data, val) {
       let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
@@ -277,7 +277,7 @@ export default {
       return tmp;
     },
     // 获取省市区
-    getRegionList() {
+    getRegionList () {
       personalset.getRegionList({ region_code: "" }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
@@ -289,7 +289,7 @@ export default {
       });
     },
     //表单验证
-    validate() {
+    validate () {
       if (this.isClick) {
         return false;
       }
@@ -314,7 +314,7 @@ export default {
       this.applicationSchoolmaster();
     },
     //申请分校长
-    applicationSchoolmaster() {
+    applicationSchoolmaster () {
       school.doRecruit(this.schoolForm).then(res => {
         this.isClick = false;
         if (res.status == 0) {
@@ -326,7 +326,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     setTitle("城市分校-1911学堂");
     this.getRegionList();
   }
