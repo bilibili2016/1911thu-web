@@ -182,7 +182,7 @@
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>电话：</div>
             <div class="fr">
-              <el-input v-model="schoolForm.tel" placeholder="请输入您的手机号" maxlength="50"></el-input>
+              <el-input v-model="schoolForm.tel" placeholder="请输入您的手机号"></el-input>
               <!-- <el-input class="tel" v-model="teacherForm.tel" placeholder="请填写手机号"></el-input> -->
               <!-- <el-input class="verification" v-model="teacherForm.code" placeholder="请填写短信验证码"></el-input> -->
               <!-- <span class="code" @click="smsCodes">{{telCodes.getCode}}</span> -->
@@ -192,7 +192,7 @@
           <div class="con-item name clearfix">
             <div class="fl"><i class="red">*</i>邮箱：</div>
             <div class="fr">
-              <el-input v-model="schoolForm.email" placeholder="请输入您的邮箱"></el-input>
+              <el-input v-model="schoolForm.email" placeholder="请输入您的邮箱" maxlength="50"></el-input>
             </div>
           </div>
           <div class="submit">
