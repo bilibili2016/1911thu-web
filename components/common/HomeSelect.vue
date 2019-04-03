@@ -36,7 +36,7 @@ export default {
           link: "/"
         },
         {
-          title: "在线学院",
+          title: "全部学院",
           id: "onlineCollege",
           link: "",
           childList: []

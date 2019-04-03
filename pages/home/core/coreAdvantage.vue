@@ -49,7 +49,8 @@ export default {
             "知名高校教授、500强企业高管、行业精英、政策智囊组成高端导师库"
           ],
           imgUrl: "http://static-image.1911edu.com/home-news1.png",
-          detailLink: "/home/core/pages/teachers"
+          // detailLink: "/home/core/pages/teachers",
+          detailLink: ""
         },
         {
           title: "内容体系及运营模式",
@@ -59,7 +60,8 @@ export default {
             "“知识即服务”（KaaS）终身教育运营模式"
           ],
           imgUrl: "http://static-image.1911edu.com/home-news5.png",
-          detailLink: "/home/core/pages/contentSys"
+          // detailLink: "/home/core/pages/contentSys",
+          detailLink: ""
         },
         {
           title: "人才测评",
@@ -79,7 +81,8 @@ export default {
             "PBL+案例教学法"
           ],
           imgUrl: "http://static-image.1911edu.com/home-news3.png",
-          detailLink: "/home/core/pages/hybridTeach"
+          // detailLink: "/home/core/pages/hybridTeach",
+          detailLink: ""
         },
         {
           title: "考试认证",
@@ -92,13 +95,15 @@ export default {
         {
           id: 1,
           title: "名师智库",
-          detailLink: "/home/core/pages/teachers",
+          // detailLink: "/home/core/pages/teachers",
+          detailLink: "",
           imgUrl: "http://static-image.1911edu.com/home-news1.png"
         },
         {
           id: 2,
           title: "内容体系及运营模式",
-          detailLink: "/home/core/pages/contentSys",
+          // detailLink: "/home/core/pages/contentSys",
+          detailLink: "",
           imgUrl: "http://static-image.1911edu.com/home-news5.png"
         },
         {
@@ -110,7 +115,8 @@ export default {
         {
           id: 4,
           title: "混合式教学",
-          detailLink: "/home/core/pages/hybridTeach",
+          // detailLink: "/home/core/pages/hybridTeach",
+          detailLink: "",
           imgUrl: "http://static-image.1911edu.com/home-news3.png"
         },
         {
