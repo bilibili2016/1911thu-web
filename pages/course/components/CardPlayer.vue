@@ -406,13 +406,15 @@ export default {
     playMedia (item) {
       clearTimeout(this.clickTime);
       console.log(item, 'item');
+      console.log(item.srcElement, 'item');
+      console.log(item.srcElement.classList, 'item');
+      console.log(item.srcElement.className, 'item');
 
       this.clickTime = setTimeout(() => {
         // 如果点击的当前这个标签是 mediaPlayer 才执行
         var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
         var isFirefox = userAgent.indexOf("Firefox") > -1;
         var IE = '';
-        console.log(userAgent, 'userAgent');
         if (userAgent.indexOf('Trident') > -1 && userAgent.indexOf('rv:11') > -1) {
           IE = 'IE11';
         } else if (userAgent.indexOf('MSIE') > -1 && userAgent.indexOf('Trident') > -1) {
@@ -428,7 +430,7 @@ export default {
             }
           }
         } else {
-          if (IE) {
+          if (this.player && IE && item.srcElement.className == '') {
             if (this.playVideo) {
               this.player.play();
             } else {
