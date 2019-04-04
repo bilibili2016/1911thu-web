@@ -2096,13 +2096,19 @@ input::-webkit-credentials-auto-fill-button {
       top: 8px;
       left: 320px;
     }
+
+  }
+
+  .province .el-form-item__content .el-form-item__error {
+    top: 8px;
+    left: 480px;
   }
 
   .ticketReception {
     .province {
       .el-select {
         .el-input {
-          width: 160px;
+          width: 140px;
         }
       }
     }

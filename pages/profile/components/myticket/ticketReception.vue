@@ -73,8 +73,9 @@ export default {
     var validateProvince = (rule, value, callback) => {
       if (this.mailData.area_name == '') {
         callback(new Error("请选择您的所在地区！"));
+      } else {
+        callback();
       }
-      callback();
     }
     return {
       flag: true,
@@ -119,7 +120,7 @@ export default {
         ],
         province: [
           { required: true, message: "请选择您的所在地区！", trigger: "blur" },
-          { validator: validateProvince, trigger: "blur" }
+          { validator: validateProvince, trigger: "change" }
         ],
         address: [
           { required: true, message: "请输入您的详细地址", trigger: "blur" },
