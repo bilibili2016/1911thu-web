@@ -39,7 +39,7 @@
         </el-form-item>
         <el-form-item label="纳税人识别号" prop="number" v-if="ticketInfo.invoiceType==1" class="number">
           <el-input v-model="ticketInfo.number" placeholder="请输入纳税人识别号"></el-input>
-          <span class="tip">政府、事业单位选填，企业必填</span>
+          <p><span class="tip">政府、事业单位选填，企业必填</span></p>
         </el-form-item>
         <el-form-item label="" prop="number" v-else>
           <el-input v-model="ticketInfo.person" placeholder="个人" readonly></el-input>
@@ -56,7 +56,7 @@
         <el-form-item label="银行账号" prop="account" v-if="showCompany">
           <el-input v-model="ticketInfo.account" placeholder="请输入银行账号"></el-input>
         </el-form-item>
-        <el-form-item label="备注">
+        <el-form-item label="备注" prop="note">
           <el-input v-model="ticketInfo.note" placeholder="请输入备注信息"></el-input>
         </el-form-item>
         <el-form-item class="operation">
@@ -84,7 +84,7 @@
         <el-form-item label="银行账号" prop="account">
           <el-input v-model="invoiceInfo.account" placeholder="请输入银行账号"></el-input>
         </el-form-item>
-        <el-form-item label="备注">
+        <el-form-item label="备注" prop="note">
           <el-input v-model="invoiceInfo.note" placeholder="请输入备注信息"></el-input>
         </el-form-item>
         <el-form-item class="operation">
@@ -105,28 +105,58 @@ export default {
     var validateTelephone = (rule, value, callback) => {
       if (Trim(value)) {
         if (!/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(value)) {
-          callback(new Error("请输入正确的联系电话！"));
+          callback(new Error("请输入正确的联系电话"));
         }
       }
       callback();
     };
     var validateTel = (rule, value, callback) => {
       if (!/^((0\d{2,3}-?\d{7,8}$)|(1[35678]\d{9}))$/.test(value)) {
-        callback(new Error("请输入正确的联系电话！"));
+        callback(new Error("请输入正确的联系电话"));
       }
       callback();
     };
-    var validateNumber = (rule, value, callback) => {
+    var validateNumberT = (rule, value, callback) => {
       if (this.ticketInfo.invoiceType == 1) {
         if (Trim(value)) {
-          if (value.length == 15 || value.length == 18 || value.length == 20) {
+          if (/^[0-9a-zA-Z]*$/.test(value) && (value.length == 15 || value.length == 18 || value.length == 20)) {
           } else {
-            callback(new Error("请输入正确的纳税人识别号！"));
+            callback(new Error("请输入正确的纳税人识别号"));
           }
+        } else {
+          callback(new Error("请输入正确的纳税人识别号"));
+        }
+      }
+
+      callback();
+    };
+    var validateNumberI = (rule, value, callback) => {
+      if (this.invoiceForm.types == 2) {
+        if (/^[0-9a-zA-Z]*$/.test(value) && (value.length == 15 || value.length == 18 || value.length == 20)) {
+        } else {
+          callback(new Error("请输入正确的纳税人识别号"));
         }
       }
       callback();
     };
+    var validateAccountT = (rule, value, callback) => {
+      if (value != "") {
+        if (isNaN(Number(Trim(value)))) {
+          callback(new Error("请输入正确的开户银行账号"));
+        }
+      }
+      callback();
+    }
+    var validateAccountI = (rule, value, callback) => {
+      if (Trim(value)) {
+        if (!/\d/.test(value)) {
+          callback(new Error("请输入正确的开户银行账号"));
+        }
+      } else {
+        callback(new Error("请输入正确的开户银行账号"));
+      }
+      callback();
+    }
     return {
       select: 1,
       invoiceForm: {
@@ -213,40 +243,50 @@ export default {
             required: true,
             message: "请输入单位发票抬头",
             trigger: ["blur"]
-          }
-        ],
-        number: [
+          },
           {
-            validator: validateNumber,
-            trigger: ["blur"]
+            min: 2, max: 30, message: '字数不能超过30字', trigger: 'blur'
           }
         ],
-        zcadd: {
-
-        },
+        number: [{
+          validator: validateNumberT,
+          trigger: ["blur"]
+        }
+        ],
+        zcadd: [
+          {
+            max: 30, message: '字数不能超过30字', trigger: 'blur'
+          }
+        ],
         telephone: {
           validator: validateTelephone,
           trigger: ["blur"]
         },
-        bank: {
-
-        },
-        account: {
-
-        }
+        bank: [
+          { max: 50, message: "字数不能超过50字", trigger: "blur" },
+        ],
+        account: [
+          { validator: validateAccountT, trigger: ["blur"] },
+          { max: 50, message: "字数不能超过50字", trigger: "blur" },
+        ],
+        note: [
+          {
+            max: 65, message: '字数不能超过65字', trigger: "blur"
+          }
+        ]
       },
       addRules: {
-        companyname: [{
-          required: true,
-          message: "请输入单位名称",
-          trigger: ["blur"]
-        }],
+        companyname: [
+          { required: true, message: "请输入单位名称", trigger: ["blur"] },
+          { min: 2, message: ' ', trigger: 'blur' },
+          { max: 30, message: '字数不能超过30字', trigger: 'blur' }
+        ],
         number: [{
           required: true,
-          message: "请输入纳税人识别号！",
+          message: "请输入正确的纳税人识别号",
           trigger: ["blur"]
         }, {
-          validator: validateNumber,
+          validator: validateNumberI,
           trigger: ["blur"]
         }],
         telephone: [{
@@ -257,22 +297,24 @@ export default {
           validator: validateTel,
           trigger: ["blur"]
         }],
-        zcadd: [{
-          required: true,
-          message: "请输入注册地址",
-          trigger: ["blur"]
-        }],
-        bank: [{
-          required: true,
-          message: "请输入开户银行",
-          trigger: "blur"
-        }],
-        account: [{
-          required: true,
-          max: 50,
-          message: "请输入银行账号",
-          trigger: "blur"
-        }],
+        zcadd: [
+          { required: true, message: "请输入注册地址", trigger: ["blur"] },
+          { max: 30, message: '请输入正确的注册地址', trigger: 'blur' }
+        ],
+        bank: [
+          { required: true, message: "请输入开户银行", trigger: "blur" },
+          { max: 50, message: "字数不能超过50字", trigger: "blur" },
+        ],
+        account: [
+          { required: true, message: "请输入正确的开户银行账号", trigger: "blur" },
+          { validator: validateAccountI, trigger: ["blur"] },
+          { max: 50, message: "字数不能超过50字", trigger: "blur" },
+        ],
+        note: [
+          {
+            max: 65, message: '字数不能超过65字', trigger: 'blur'
+          }
+        ]
       }
     }
   },
