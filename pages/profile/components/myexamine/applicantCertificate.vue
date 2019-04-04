@@ -6,71 +6,33 @@
     <div class="conList clearfix">
       <div class="fl">收货人：</div>
       <div class="fr">
-        <el-input
-          v-model="perfileForm.name"
-          placeholder="请输入收货人姓名"
-        ></el-input>
+        <el-input v-model="perfileForm.name" placeholder="请输入收货人姓名"></el-input>
       </div>
     </div>
     <div class="conList clearfix">
       <div class="fl">手机号：</div>
       <div class="fr">
-        <el-input
-          v-model="perfileForm.tel"
-          placeholder="请输入手机号"
-        ></el-input>
+        <el-input v-model="perfileForm.tel" placeholder="请输入手机号"></el-input>
       </div>
     </div>
     <div class="conList clearfix">
       <div class="fl">所在地区：</div>
       <div class="fr">
-        <el-select
-          v-model="perfileForm.province_name"
-          placeholder="省"
-          @change="provinceChange"
-        >
-          <el-option
-            v-for="(p,index) in province"
-            :key="'prov'+index"
-            :label="p.label"
-            :value="p.value"
-          ></el-option>
+        <el-select v-model="perfileForm.province_name" placeholder="省" @change="provinceChange">
+          <el-option v-for="(p,index) in province" :key="'prov'+index" :label="p.label" :value="p.value"></el-option>
         </el-select>
-        <el-select
-          v-model="perfileForm.city_name"
-          placeholder="市"
-          no-data-text="请先选择所在省份"
-          @change="cityChange"
-        >
-          <el-option
-            v-for="(p,index) in city"
-            :key="'city'+index"
-            :label="p.label"
-            :value="p.value"
-          ></el-option>
+        <el-select v-model="perfileForm.city_name" placeholder="市" no-data-text="请先选择所在省份" @change="cityChange">
+          <el-option v-for="(p,index) in city" :key="'city'+index" :label="p.label" :value="p.value"></el-option>
         </el-select>
-        <el-select
-          v-model="perfileForm.area_name"
-          placeholder="区"
-          no-data-text="请先选择所在城市"
-          @change="areaChange"
-        >
-          <el-option
-            v-for="(p,index) in area"
-            :key="'area'+index"
-            :label="p.label"
-            :value="p.value"
-          ></el-option>
+        <el-select v-model="perfileForm.area_name" placeholder="区" no-data-text="请先选择所在城市" @change="areaChange">
+          <el-option v-for="(p,index) in area" :key="'area'+index" :label="p.label" :value="p.value"></el-option>
         </el-select>
       </div>
     </div>
     <div class="conList clearfix">
       <div class="fl">详细地址：</div>
       <div class="fr">
-        <el-input
-          v-model="perfileForm.add"
-          placeholder="请输入详细地址"
-        ></el-input>
+        <el-input v-model="perfileForm.add" placeholder="请输入详细地址"></el-input>
       </div>
     </div>
     <div class="applicantBtn">
@@ -252,6 +214,15 @@ export default {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
+    },
+    setHeight() {
+      let headerHeight = document.getElementsByClassName("headerBox")[0]
+        .offsetHeight;
+      let footerHeight = document.getElementsByClassName("footerBox")[0]
+        .offsetHeight;
+      let windowHeight = document.documentElement.clientHeight;
+      document.getElementsByClassName("applicant")[0].style.minHeight =
+        windowHeight - headerHeight - footerHeight + "px";
     }
   },
   watch: {
@@ -274,6 +245,7 @@ export default {
     } else {
       this.$router.push("/");
     }
+    this.setHeight();
   }
 };
 </script>

@@ -3,13 +3,15 @@
   height: 100%;
   background-color: #fafafa;
   margin: 0 auto;
-  padding-top: 30px;
+  padding-top: 50px;
   color: #222;
   text-align: center;
   box-sizing: border-box;
+
   .el-checkbox {
     margin: 40px 0 30px;
   }
+
   p {
     width: 970px;
     margin: 0 auto;
@@ -18,13 +20,16 @@
     color: #222222;
     text-align: center;
     margin-bottom: 80px;
+
     i {
       color: #ff5f5f;
     }
   }
+
   .conList {
     width: 1000px;
     margin: 0 auto 10px;
+
     .fl {
       width: 120px;
       height: 40px;
@@ -32,20 +37,25 @@
       font-size: 16px;
       text-align: right;
     }
+
     .fr {
       width: 880px;
       line-height: 40px;
       font-size: 16px;
       color: #222;
+
       .el-select {
         float: left;
         margin-right: 30px;
       }
     }
   }
+
   .applicantBtn {
     width: 400px;
     margin: 0 auto;
+    padding-bottom: 50px;
+
     span {
       width: 140px;
       height: 42px;
