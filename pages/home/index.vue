@@ -35,7 +35,8 @@
 import Carousel from "@/components/common/Carousel.vue";
 import Info from "@/pages/home/news/info.vue";
 import outNews from "@/pages/home/news/outNews.vue";
-import Core from "@/pages/home/core/coreAdvantage.vue";
+// import Core from "@/pages/home/core/coreAdvantage.vue";
+import Core from "@/pages/home/core/index.vue";
 
 import BackToTop from "@/components/common/BackToTop.vue";
 import HomeCourse from "@/pages/home/components/homecourse.vue";
@@ -51,7 +52,7 @@ export default {
     "v-outnews": outNews,
     "v-core": Core
   },
-  data () {
+  data() {
     return {
       outNewsLoading: false,
       bannerLoading: false,
@@ -192,10 +193,10 @@ export default {
   computed: {
     ...mapState("auth", [])
   },
-  created () { },
+  created() {},
   methods: {
     ...mapActions("auth", ["signOut"]),
-    getAll () {
+    getAll() {
       this.getBanner();
       //   this.getCollegeCourseList();
       //   免费课程列表
@@ -212,7 +213,7 @@ export default {
       // this.$bus.$emit('getClassifyList')
     },
     // 获取banner
-    getBanner () {
+    getBanner() {
       this.bannerLoading = true;
       home.getBannerList(this.itemsData).then(response => {
         if (response.status === 0) {
@@ -241,7 +242,7 @@ export default {
     //   })
     // },
     //获取项目列表
-    getProjectList () {
+    getProjectList() {
       this.projectLoading = true;
       home.getProjectList(this.projectForm).then(response => {
         if (response.status === 0) {
@@ -251,7 +252,7 @@ export default {
       });
     },
     // 获取免费课程列表
-    getFreeCourseList () {
+    getFreeCourseList() {
       home.getFreeCourseList(this.freeForm).then(response => {
         if (response.status === 0) {
           this.freeData = response.data.curriculumList;
@@ -259,7 +260,7 @@ export default {
       });
     },
     // 获取新上好课列表
-    getNewCourseList () {
+    getNewCourseList() {
       home.getNewCourseList(this.courseForm).then(response => {
         if (response.status === 0) {
           this.newData = response.data.curriculumList;
@@ -267,13 +268,13 @@ export default {
       });
     },
     // 获取精品好课列表
-    getClassicCourseList () {
+    getClassicCourseList() {
       home.getClassicCourseList(this.classicForm).then(response => {
         this.classicData = response.data.curriculumList;
       });
     },
     // 获取学院课程列表
-    getCollegeCourseList () {
+    getCollegeCourseList() {
       home.getCollegeCourseList().then(response => {
         if (response.status === 0) {
           // 干部学院
@@ -284,7 +285,7 @@ export default {
       });
     },
     // 学堂资讯
-    getNewsInfoList () {
+    getNewsInfoList() {
       this.infoLoading = true;
       news.getNewInfoList(this.newsInfoForm).then(response => {
         if (response.status === 0) {
@@ -295,7 +296,7 @@ export default {
       });
     },
     //获取媒体报道
-    getOutNewsList () {
+    getOutNewsList() {
       this.outNewsLoading = true;
       news.getNewInfoList(this.outNewsForm).then(response => {
         if (response.status === 0) {
@@ -305,19 +306,19 @@ export default {
       });
     },
     // 获取合作伙伴
-    getPartnerList () {
+    getPartnerList() {
       home.getPartnerList(this.partnerList).then(response => {
         this.partnerList.list = response.data.collaborationEnterpriseList;
       });
     },
     // 获取定制消息
-    getPointList () {
+    getPointList() {
       home.getPointList().then(response => {
         this.dingData = response.data.pointList;
       });
     }
   },
-  mounted () {
+  mounted() {
     document.getElementsByTagName("title")[0].innerText =
       "1911学堂-混合式终身教育提供者";
     this.windowWidth = document.documentElement.clientWidth;

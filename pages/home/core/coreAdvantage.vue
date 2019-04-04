@@ -1,6 +1,5 @@
 <template>
   <div class="coreAdvantage clearfix">
-
     <div class="left">
       <div class="top coreTop">
         <h1>核心优势</h1>
