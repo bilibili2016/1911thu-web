@@ -3,18 +3,19 @@
     <h2 class="core-title">核心优势</h2>
     <p class="desc">内容+认证+服务+技术</p>
     <div class="items">
-      <div class="item" v-for="(item,index) in coreItem" :key="index">
-        <img :src="item.img" alt="">
-        <p class="text">{{item.text}}</p>
-        <p class="intro">{{item.intro}}</p>
+      <div class="father" v-for="(item,index) in coreItem" :key="index">
+        <div class="item">
+          <img :src="item.img" alt="">
+          <p class="text">{{item.text}}</p>
+          <p class="intro">{{item.intro}}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
-  data() {
+  data () {
     return {
       windowWidth: "",
       autoplayFlag: true,
@@ -57,40 +58,6 @@ export default {
       ]
     };
   },
-  methods: {
-    handleLink(link) {
-      this.$router.push(link);
-    },
-    setActiveItem(index) {
-      this.$refs.coreRightCarousel.setActiveItem(index);
-      this.autoplayFlag = false;
-    },
-    setCarousel() {
-      if (document.getElementsByClassName("coreCarousel")) {
-        let carouselImg = document.getElementsByClassName("coreCarousel");
-        if (this.windowWidth <= 950) {
-          let marginLeft = (950 - this.windowWidth) / 2;
-          for (var i = 0; i < carouselImg.length; i++) {
-            carouselImg[i].style.marginLeft = -marginLeft + "px";
-          }
-        }
-      }
-    },
-    setWidth() {
-      this.windowWidth = document.documentElement.clientWidth / 2;
-      let rightHeight = this.windowWidth * 0.66;
-      let topHeight = this.windowWidth * 0.21;
-      let leftHeight = this.windowWidth * 0.45;
-
-      document.getElementsByClassName("coreRight")[0].style.height =
-        (rightHeight > 625 ? 625 : rightHeight) + "px";
-      document.getElementsByClassName("coreTop")[0].style.height =
-        (topHeight > 200 ? 200 : topHeight) + "px";
-      document.getElementsByClassName("coreLeft")[0].style.height =
-        (leftHeight > 425 ? 425 : leftHeight) + "px";
-    }
-  },
-  mounted() {}
 };
 </script>
 <style scoped lang="scss">
