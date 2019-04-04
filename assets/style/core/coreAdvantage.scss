@@ -149,6 +149,7 @@
         background: #fff url("http://static-image.1911edu.com/core-icon6.png") no-repeat right bottom;
         background-size: 71px 75px;
         opacity: 0;
+        z-index: -1;
       }
 
       &:hover {
