@@ -59,7 +59,7 @@ export default {
     "v-info": Info,
     "v-vipbuy": VipBuy
   },
-  data() {
+  data () {
     return {
       flag: false,
       vipInfo: "",
@@ -86,7 +86,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid"]),
     //   查看课程
-    lookCourse() {
+    lookCourse () {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -99,7 +99,7 @@ export default {
       });
     },
     //立即购买
-    buyVip() {
+    buyVip () {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -107,11 +107,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow(val) {
+    changeVipShow (val) {
       this.vipPopShow = false;
     },
     //申请认证
-    identificate() {
+    identificate () {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -122,7 +122,7 @@ export default {
       }
     },
     //会员详情
-    vipDetail() {
+    vipDetail () {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
@@ -142,7 +142,7 @@ export default {
       });
     },
     // 设置图片宽度
-    setWidth() {
+    setWidth () {
       if (this.collegeImg.length == 0) {
         this.noCollege = false;
         return false;
@@ -166,23 +166,23 @@ export default {
       });
       this.loading = false;
     },
-    init() {
+    init () {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
       this.title = matchSplits("title");
     }
   },
-  mounted() {
+  mounted () {
     this.loading = true;
     this.init();
     this.vipDetail();
   },
   watch: {
-    $route(v, oldv) {
+    $route (v, oldv) {
       this.init();
       this.vipDetail();
     },
-    title() {
+    title () {
       this.setWidth();
     }
   }
