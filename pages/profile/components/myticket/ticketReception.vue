@@ -73,8 +73,9 @@ export default {
     var validateProvince = (rule, value, callback) => {
       if (this.mailData.area_name == '') {
         callback(new Error("请选择您的所在地区！"));
+      } else {
+        callback();
       }
-      callback();
     }
     return {
       flag: true,
@@ -99,58 +100,31 @@ export default {
       },
       electronicRules: {
         email: [
-          {
-            required: true,
-            message: "请输入正确的邮箱地址",
-            trigger: ["blur"]
-          },
-          {
-            validator: validateEmail,
-            trigger: "blur"
-          }
+          { required: true, message: "请输入正确的邮箱地址", trigger: ["blur"] },
+          { max: 30, message: "字数不能超过30字", trigger: ["blur"] },
+          { validator: validateEmail, trigger: "blur" }
         ],
-        phone: [{
-          required: true,
-          validator: validateTel,
-          trigger: "blur"
-        }
+        phone: [
+          { required: true, validator: validateTel, trigger: "blur" },
+          { max: 30, message: "字数不能超过30字", trigger: ["blur"] },
         ],
       },
       mailRules: {
         name: [
-          {
-            required: true,
-            message: "请输入您的姓名",
-            trigger: "change"
-          }
+          { required: true, message: "请输入您的姓名", trigger: "change" },
+          { max: 30, message: "字数不能超过30字", trigger: ["blur"] },
         ],
         phone: [
-          {
-            required: true,
-            message: "请输入联系电话",
-            trigger: "blur"
-          }, {
-            validator: validateTel,
-            trigger: "blur"
-          }
+          { required: true, message: "请输入联系电话", trigger: "blur" },
+          { validator: validateTel, trigger: "blur" }
         ],
         province: [
-          {
-            required: true,
-            message: "请选择您的所在地区！",
-            trigger: "blur"
-          },
-          {
-            validator: validateProvince,
-            trigger: "blur"
-          }
+          { required: true, message: "请选择您的所在地区！", trigger: "blur" },
+          { validator: validateProvince, trigger: "change" }
         ],
         address: [
-          {
-            required: true,
-            message: "请输入您的详细地址",
-            trigger: "blur"
-          }
+          { required: true, message: "请输入您的详细地址", trigger: "blur" },
+          { max: 30, message: "字数不能超过30字", trigger: ["blur"] },
         ]
       },
     }
