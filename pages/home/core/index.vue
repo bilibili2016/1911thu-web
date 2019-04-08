@@ -4,7 +4,7 @@
     <p class="desc">内容+认证+服务+技术</p>
     <div class="items">
       <div class="item" v-for="(item,index) in coreItem" :key="index">
-        <img :src="item.img" alt="">
+        <img :class="'itemImg'+index" :src="item.img" alt="">
         <p class="text">{{item.text}}</p>
         <p class="intro">{{item.intro}}</p>
       </div>
