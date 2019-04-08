@@ -56,6 +56,8 @@
   </div>
 </template>
 <script>
+import { store as persistStore } from "~/lib/core/store";
+
 import { Trim, message, matchSplits, setTitle } from "~/lib/util/helper";
 import { header, auth, examine } from "~/lib/v1_sdk/index";
 
@@ -157,7 +159,12 @@ export default {
           this.pageData.id = this.vipID;
           this.vipForm.vipId = this.vipID;
           // this.createExamRecordQuestion();
-          this.$emit("examRulesPop", 1);
+          if (persistStore.get("info").isSave) {
+            persistStore.set("info", {});
+            this.$router.push("/profile/components/myexamine/reviewing");
+          } else {
+            this.$emit("examRulesPop", 1);
+          }
         } else {
           message(this, "error", res.msg);
         }

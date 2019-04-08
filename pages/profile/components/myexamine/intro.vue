@@ -51,6 +51,8 @@
   </div>
 </template>
 <script>
+import { store as persistStore } from "~/lib/core/store";
+
 import { examine } from "~/lib/v1_sdk/index";
 import { message, matchSplits, getNet, IEPopup } from "@/lib/util/helper";
 export default {
@@ -113,35 +115,6 @@ export default {
       this.pageData.name = "info";
       this.$bus.$emit("whichShow", this.pageData);
     },
-    // 开始考试
-    handleExamine() {
-      this.pageData.id = this.vipID;
-      examine.createExamRecordQuestion(this.vipForm).then(response => {
-        if (response.status == 100201) {
-          this.pageData.name = "info";
-          this.$bus.$emit("whichShow", this.pageData);
-        } else if (response.status == 0) {
-          if (this.vipForm.type == "1") {
-            this.$router.push(
-              "/profile/components/myexamine/answerQuestion?id=" +
-                response.data.exam_record_id
-            );
-          } else {
-            this.$router.push(
-              "/profile/components/myexamine/simulationExam?id=" +
-                response.data.exam_record_id
-            );
-          }
-        } else {
-          this.$message({
-            showClose: true,
-            message: response.msg,
-            type: "error",
-            duration: 6000
-          });
-        }
-      });
-    },
     //验证考试权限
     validateExamPrivilege() {
       this.vipForm.vipId = this.vipID;
@@ -181,6 +154,7 @@ export default {
     }
   },
   mounted() {
+    persistStore.set("info", {});
     this.validateExamPrivilege();
     this.validateSimulationExam();
   }
