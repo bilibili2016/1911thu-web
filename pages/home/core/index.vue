@@ -5,7 +5,7 @@
     <div class="items">
       <div class="father" v-for="(item,index) in coreItem" :key="index">
         <div class="item">
-          <img :src="item.img" alt="">
+          <img :src="item.img" alt="" :class="'itemImg'+index">
           <p class="text">{{item.text}}</p>
           <p class="intro">{{item.intro}}</p>
         </div>
@@ -15,7 +15,7 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       windowWidth: "",
       autoplayFlag: true,
@@ -57,7 +57,7 @@ export default {
         }
       ]
     };
-  },
+  }
 };
 </script>
 <style scoped lang="scss">
