@@ -134,7 +134,7 @@ export default {
       this.isShowInfo = false;
       this.isShowRecord = false;
       persistStore.set("whichIntro", "");
-    } else if (persistStore.get("info").isInfo) {
+    } else if (persistStore.get("info") && persistStore.get("info").isInfo) {
       //申请证书未填写个人信息-显示填写个人信息页
       this.isShowInfo = true;
       this.isShowIntro = false;

@@ -159,7 +159,7 @@ export default {
           this.pageData.id = this.vipID;
           this.vipForm.vipId = this.vipID;
           // this.createExamRecordQuestion();
-          if (persistStore.get("info").isSave) {
+          if (persistStore.get("info") && persistStore.get("info").isSave) {
             persistStore.set("info", {});
             this.$router.push("/profile/components/myexamine/reviewing");
           } else {
