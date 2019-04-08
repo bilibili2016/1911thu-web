@@ -9,7 +9,7 @@
       <v-intro class="intro" v-if="isShowIntro" :vipID="vipID" :unfinishedStudyTime="unfinishedStudyTime" @examRulesPop="examRulesPop"></v-intro>
       <!-- 考试记录 -->
       <v-record class="record" v-if="isShowRecord" :vipID="vipID"></v-record>
-      <!-- 考试试题信息 -->
+      <!-- 考试试题信息弹窗 -->
       <v-exampop v-if="isShowExamPop" :examRuleInfo="examRuleInfo" :examRuleLoading="examRuleLoading" @examQuestion="examQuestion" @closeRulesPop="closeRulesPop"></v-exampop>
     </el-card>
   </div>
@@ -42,7 +42,6 @@ export default {
       examRuleInfo: "",
       examRuleLoading: false,
       isShowExamPop: false,
-
       isShowList: true,
       isShowInfo: false,
       isShowIntro: false,
@@ -123,17 +122,25 @@ export default {
     }
   },
   mounted() {
+    //学院介绍页-申请证书按钮-显示考试介绍页
     if (
       persistStore.get("whichIntro") &&
       persistStore.get("whichIntro") != ""
     ) {
       this.vipID = persistStore.get("whichIntro");
+      this.isShowIntro = true;
       this.isShowList = false;
       this.isShowInfo = false;
-      this.isShowIntro = true;
       this.isShowRecord = false;
       persistStore.set("whichIntro", "");
+    } else if (persistStore.get("info")) {
+      this.isShowInfo = true;
+      this.isShowIntro = false;
+      this.isShowList = false;
+      this.isShowRecord = false;
+      persistStore.set("info", "");
     }
+
     this.$bus.$on("whichShow", data => {
       this.unfinishedStudyTime = data.unfinishedStudyTime; //剩余多少学时可以考试（介绍页展示）
       this.vipID = data.id;

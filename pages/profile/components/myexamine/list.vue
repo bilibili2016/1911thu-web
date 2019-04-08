@@ -4,11 +4,6 @@
       <span>申请证书</span>
     </div>
     <div class="certificateList" v-loading="examineLoading" :class="{ minheight : examineLoading}">
-      <!-- <v-list v-if="examineListData.length > 0" :exa
-import { examine } from "~/lib/v1_sdk/index";
-import { message } from "~/lib/util/helper";
-import { store as persistStore } from "~/lib/core/store";
-mineListData="examineListData"></v-list> -->
       <div class="lists" v-if="examineListData.length > 0">
         <div class="item clearfix" v-for="(item,index) in examineListData" :key="index">
           <div class="item_left" @click="goVipDetail(item)">

@@ -179,7 +179,6 @@ export default {
           if (!response.data.isApplyExamCertificate) {
             message(this, "error", "请查看考试记录，不能申请记录！");
             this.goProfile("tab-tenth");
-            this.$bus.$emit("whichShow", "list");
           }
         } else {
           message(this, "error", response.msg);
@@ -198,11 +197,14 @@ export default {
           this.$router.push("/profile/components/myexamine/reviewing");
         } else if (response.status == 100101 || response.status == 100102) {
           this.goProfile("tab-tenth");
-          this.$bus.$emit("whichShow", "info");
+          // this.$bus.$emit("whichShow", {
+          //   id: this.perfileForm.vipID,
+          //   name: "info"
+          // });
+          persistStore.set("info", true);
           message(this, "error", response.msg);
         } else if (response.status == 100103) {
           this.goProfile("tab-tenth");
-          this.$bus.$emit("whichShow", "list");
           message(this, "error", response.msg);
         } else {
           this.isClick = false;
