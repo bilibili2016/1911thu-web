@@ -122,11 +122,12 @@ export default {
     }
   },
   mounted() {
-    //学院介绍页-申请证书按钮-显示考试介绍页
+    //默认显示证书列表页
     if (
       persistStore.get("whichIntro") &&
       persistStore.get("whichIntro") != ""
     ) {
+      //学院介绍页-申请证书-显示考试介绍页
       this.vipID = persistStore.get("whichIntro");
       this.isShowIntro = true;
       this.isShowList = false;
@@ -134,6 +135,7 @@ export default {
       this.isShowRecord = false;
       persistStore.set("whichIntro", "");
     } else if (persistStore.get("info")) {
+      //申请证书未填写个人信息-显示填写个人信息页
       this.isShowInfo = true;
       this.isShowIntro = false;
       this.isShowList = false;
