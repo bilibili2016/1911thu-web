@@ -534,7 +534,7 @@ export default {
             break;
           case "tab-tenth": //考试认证
             this.examList();
-            this.$bus.$emit("whichShow", { id: "", name: "list" });
+            // this.$bus.$emit("whichShow", { id: "", name: "list" });
             break;
           case "tab-eleventh": //我的学院
             this.collegeList();

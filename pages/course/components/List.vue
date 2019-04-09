@@ -10,7 +10,7 @@
               <li v-if="cid == item.id" v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
                 <!-- <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button> -->
                 <!-- <img :src="item.picture" alt=""> -->
-                <span class="name">{{item.category_name}}</span> > <span class="nameRight">课程列表</span>
+                <span class="name" @click="handleCollegeLink(item)">{{item.category_name}}</span> > <span class="nameRight">课程列表</span>
               </li>
             </ul>
           </div>
@@ -54,7 +54,7 @@ import { matchSplits } from "@/lib/util/helper";
 
 export default {
   props: ["cidData", "pidData", "cidBg", "pidBg", "loadList"],
-  data () {
+  data() {
     return {
       cid: null,
       pid: "0",
@@ -79,19 +79,24 @@ export default {
     };
   },
   methods: {
+    handleCollegeLink(item) {
+      this.$router.push(
+        `/home/vip/collegeInfo?id=${this.vid}&cid=${item.id}&title=`
+      );
+    },
     // 大类 单个
-    selectCid (item, index) {
+    selectCid(item, index) {
       this.$emit("selectCid", item, index);
     },
     // 小类 单个
-    selectPid (items, index) {
+    selectPid(items, index) {
       this.$emit("selectPid", items, index);
     },
-    handleProjectRight () {
+    handleProjectRight() {
       this.$router.push("/project/customerProject?sid=&edit=1");
     }
   },
-  mounted () {
+  mounted() {
     this.cid = matchSplits("cid");
     this.pid = matchSplits("pids");
     this.cp = matchSplits("cp");

@@ -179,7 +179,6 @@ export default {
           if (!response.data.isApplyExamCertificate) {
             message(this, "error", "请查看考试记录，不能申请记录！");
             this.goProfile("tab-tenth");
-            this.$bus.$emit("whichShow", "list");
           }
         } else {
           message(this, "error", response.msg);
@@ -193,19 +192,22 @@ export default {
       }
       this.isClick = true;
       examine.addApplyCertificate(this.perfileForm).then(response => {
+        this.isClick = false;
         if (response.status == 0) {
           message(this, "success", "提交成功");
           this.$router.push("/profile/components/myexamine/reviewing");
-        } else if (response.status == 100101 || response.status == 100102) {
+        } else if (response.status == 100102) {
+          //证书获得者基本信息不完善
           this.goProfile("tab-tenth");
-          this.$bus.$emit("whichShow", "info");
-          message(this, "error", response.msg);
-        } else if (response.status == 100103) {
-          this.goProfile("tab-tenth");
-          this.$bus.$emit("whichShow", "list");
+          persistStore.set("info", { isInfo: true, isSave: true });
           message(this, "error", response.msg);
         } else {
-          this.isClick = false;
+          /**
+           * 已申请过证书
+           * 未获取到考试信息，请先进行考试
+           */
+          this.goProfile("tab-tenth");
+          message(this, "error", response.msg);
         }
       });
     },

@@ -2,37 +2,14 @@
   <div class="examine">
     <el-card class="changeNav">
       <!-- 列表 -->
-      <div class="list" v-if="isShowList">
-        <div class="top-con clearfix">
-          <span>申请证书</span>
-        </div>
-        <div class="certificateList" v-loading="examineLoading" :class="{ minheight : examineLoading}">
-          <v-list v-if="examineListData.length > 0" :examineListData="examineListData"></v-list>
-        </div>
-        <div class="pagination" v-if="examinePagemsg.total>11&&examineListData.length > 0">
-          <el-pagination background layout="prev, pager, next" :page-size="examinePagemsg.pagesize" :pager-count="5" :page-count="examinePagemsg.pagesize" :current-page="examinePagemsg.page" :total="examinePagemsg.total" @current-change="examineListChange"></el-pagination>
-        </div>
-        <!-- 空页面 -->
-        <div class="content">
-          <div v-if="examineListData.length == 0&&!examineLoading" class="noCourse" style="text-align:center;">
-            <img src="http://static-image.1911edu.com/VIP_null.png" alt>
-            <h4 style="margin-top:10px">学习学院里的课程才会有认证资格呦，快去入学吧～</h4>
-          </div>
-        </div>
-      </div>
+      <v-list class="list" v-if="isShowList" :examineListData="examineListData" :examinePagemsg="examinePagemsg" :examineLoading="examineLoading"></v-list>
       <!-- 个人信息填写 -->
-      <div class="info" v-if="isShowInfo">
-        <v-info :vipID="vipID" @examRulesPop="examRulesPop"></v-info>
-      </div>
+      <v-info class="info" v-if="isShowInfo" :vipID="vipID" @examRulesPop="examRulesPop"></v-info>
       <!-- 认证资格介绍 -->
-      <div class="intro" v-if="isShowIntro">
-        <v-intro :vipID="vipID" :unfinishedStudyTime="unfinishedStudyTime" @examRulesPop="examRulesPop"></v-intro>
-      </div>
+      <v-intro class="intro" v-if="isShowIntro" :vipID="vipID" :unfinishedStudyTime="unfinishedStudyTime" @examRulesPop="examRulesPop"></v-intro>
       <!-- 考试记录 -->
-      <div class="record" v-if="isShowRecord">
-        <v-record :vipID="vipID"></v-record>
-      </div>
-      <!-- 考试试题信息 -->
+      <v-record class="record" v-if="isShowRecord" :vipID="vipID"></v-record>
+      <!-- 考试试题信息弹窗 -->
       <v-exampop v-if="isShowExamPop" :examRuleInfo="examRuleInfo" :examRuleLoading="examRuleLoading" @examQuestion="examQuestion" @closeRulesPop="closeRulesPop"></v-exampop>
     </el-card>
   </div>
@@ -44,7 +21,7 @@ import { IEPopup } from "@/lib/util/helper";
 import { examine } from "~/lib/v1_sdk/index";
 
 import NoMsg from "@/pages/profile/components/common/noMsg.vue";
-import List from "@/pages/profile/components/myexamine/certificateList";
+import List from "@/pages/profile/components/myexamine/list";
 import Info from "@/pages/profile/components/myexamine/info";
 import Intro from "@/pages/profile/components/myexamine/intro";
 import Record from "@/pages/profile/components/myexamine/examineRecord";
@@ -65,7 +42,6 @@ export default {
       examRuleInfo: "",
       examRuleLoading: false,
       isShowExamPop: false,
-
       isShowList: true,
       isShowInfo: false,
       isShowIntro: false,
@@ -146,17 +122,27 @@ export default {
     }
   },
   mounted() {
+    //默认显示证书列表页
     if (
       persistStore.get("whichIntro") &&
       persistStore.get("whichIntro") != ""
     ) {
+      //学院介绍页-申请证书-显示考试介绍页
       this.vipID = persistStore.get("whichIntro");
+      this.isShowIntro = true;
       this.isShowList = false;
       this.isShowInfo = false;
-      this.isShowIntro = true;
       this.isShowRecord = false;
       persistStore.set("whichIntro", "");
+    } else if (persistStore.get("info") && persistStore.get("info").isInfo) {
+      //申请证书未填写个人信息-显示填写个人信息页
+      this.isShowInfo = true;
+      this.isShowIntro = false;
+      this.isShowList = false;
+      this.isShowRecord = false;
+      persistStore.set("info", { isInfo: false, isSave: true });
     }
+
     this.$bus.$on("whichShow", data => {
       this.unfinishedStudyTime = data.unfinishedStudyTime; //剩余多少学时可以考试（介绍页展示）
       this.vipID = data.id;
