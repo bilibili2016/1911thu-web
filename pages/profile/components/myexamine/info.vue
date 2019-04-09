@@ -160,7 +160,7 @@ export default {
           this.vipForm.vipId = this.vipID;
           // this.createExamRecordQuestion();
           if (persistStore.get("info") && persistStore.get("info").isSave) {
-            persistStore.set("info", {});
+            persistStore.set("info", "");
             this.$router.push("/profile/components/myexamine/reviewing");
           } else {
             this.$emit("examRulesPop", 1);

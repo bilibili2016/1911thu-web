@@ -154,7 +154,7 @@ export default {
     }
   },
   mounted() {
-    persistStore.set("info", {});
+    persistStore.set("info", "");
     this.validateExamPrivilege();
     this.validateSimulationExam();
   }
