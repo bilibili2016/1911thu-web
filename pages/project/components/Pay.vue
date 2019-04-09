@@ -29,7 +29,7 @@
 <script>
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 export default {
-  data () {
+  data() {
     return {
       alertShow: false,
       sub: true,
@@ -42,21 +42,21 @@ export default {
     };
   },
   methods: {
-    goCustom () {
+    goCustom() {
       this.$router.push({
-        path: '/project/customerProject',
+        path: "/project/customerProject",
         query: {
-          sid: '',
-          edit: '1'
+          sid: "",
+          edit: "1"
         }
-      })
+      });
     },
     //关闭购买弹窗
-    handlePopClick () {
+    handlePopClick() {
       this.$emit("closePay");
     },
     //减
-    delNumber () {
+    delNumber() {
       if (this.projectData.number <= 31) {
         this.projectData.number = 30;
         this.sub = true;
@@ -66,7 +66,7 @@ export default {
       }
     },
     //加
-    addNumber () {
+    addNumber() {
       if (this.projectData.number >= 49) {
         this.add = true;
         this.projectData.number = 50;
@@ -76,11 +76,11 @@ export default {
       }
     },
     // 购买人数输入框获取焦点记录当前数字
-    handleFocus () {
+    handleFocus() {
       this.lastNum = this.projectData.number;
     },
     // 购买人数输入框失去焦点
-    changeNumber () {
+    changeNumber() {
       let reg = /^[0-9]*$/;
       if (!reg.test(this.projectData.number)) {
         this.projectData.number = this.lastNum;
@@ -100,7 +100,7 @@ export default {
       }
     },
     //下一步
-    handleConfirm () {
+    handleConfirm() {
       this.$router.push({
         path: "/shop/affirmorder",
         query: {
@@ -110,11 +110,11 @@ export default {
         }
       });
     },
-    init () {
+    init() {
       this.projectData.kid = matchSplits("kid");
     }
   },
-  mounted () {
+  mounted() {
     this.init();
   }
 };
