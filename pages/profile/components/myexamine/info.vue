@@ -63,7 +63,7 @@ import { header, auth, examine } from "~/lib/v1_sdk/index";
 
 export default {
   props: ["vipID"],
-  data() {
+  data () {
     return {
       codeClick: true,
       phone: "",
@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     //获取验证码
-    getCode() {
+    getCode () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
 
       if (Trim(this.examineInfo.tel) === "") {
@@ -133,11 +133,11 @@ export default {
         }
       }
     },
-    handleBack() {
+    handleBack () {
       this.pageData.name = "list";
       this.$bus.$emit("whichShow", this.pageData);
     },
-    handleNext() {
+    handleNext () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
 
       try {
@@ -159,9 +159,11 @@ export default {
           this.pageData.id = this.vipID;
           this.vipForm.vipId = this.vipID;
           // this.createExamRecordQuestion();
-          if (persistStore.get("info") && persistStore.get("info").isSave) {
+          if (persistStore.get("info") && persistStore.get("info") != "") {
+            let recordId = persistStore.get("info")
             persistStore.set("info", "");
-            this.$router.push("/profile/components/myexamine/reviewing");
+            this.$router.push("/profile/components/myexamine/applicantCertificate?id=" + recordId + "&vipID=" + this.vipID)
+            // this.$router.push("/profile/components/myexamine/reviewing");
           } else {
             this.$emit("examRulesPop", 1);
           }
@@ -171,7 +173,7 @@ export default {
       });
     },
     // 开始考试  跳出考试信息
-    createExamRecordQuestion() {
+    createExamRecordQuestion () {
       examine.createExamRecordQuestion(this.vipForm).then(response => {
         if (response.status == 100201) {
           this.pageData.name = "info";
@@ -179,14 +181,14 @@ export default {
         } else if (response.status == 0) {
           this.$router.push(
             "/profile/components/myexamine/answerQuestion?id=" +
-              response.data.exam_record_id
+            response.data.exam_record_id
           );
         } else {
           message(this, "error", response.msg);
         }
       });
     },
-    getUserInfo() {
+    getUserInfo () {
       header.getUserInfo().then(res => {
         if (res.status == 0) {
           this.phone = Trim(res.data.userInfo.user_name);
@@ -197,7 +199,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     this.getUserInfo();
     this.examineInfo.name = "";
     this.examineInfo.tel = "";

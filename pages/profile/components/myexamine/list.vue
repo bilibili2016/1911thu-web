@@ -46,7 +46,7 @@
                 <div v-if="item.isDoingExamStatus==1">
                   <span class="btn btn_two" @click="viewRecord(item)">考试记录</span>
                   <span v-if="item.examRecordNum <3 && item.examRecordNum>0" class="btn btn_one" @click="gotoExamine(item)">参加考试</span>
-                  <span class="btn btn_three" @click="handleLink('/profile/components/myexamine/applicantCertificate?id='+item.exam_record_id+'&vipID='+item.id)">申请证书</span>
+                  <span class="btn btn_three" @click="validateExamPrivilege(item.exam_record_id,item.id)">申请证书</span>
                 </div>
                 <!-- 未申请过证书 或者 有考试机会，但考试的都不及格 -->
                 <div v-if="item.isDoingExamStatus==0">
@@ -78,16 +78,20 @@ import { store as persistStore } from "~/lib/core/store";
 
 export default {
   props: ["examineListData", "examinePagemsg", "examineLoading"],
-  data() {
+  data () {
     return {
       pageData: {
         id: "",
         name: ""
-      }
+      },
+      vipForm: {
+        vipId: "",
+        type: 1
+      },
     };
   },
   methods: {
-    goVipDetail(item) {
+    goVipDetail (item) {
       this.$router.push({
         path: "/home/vip/collegeInfo",
         query: {
@@ -98,22 +102,43 @@ export default {
       });
     },
     //去考试
-    gotoExamine(item) {
+    gotoExamine (item) {
       this.pageData.name = "intro";
       this.pageData.id = item.id;
       this.$bus.$emit("whichShow", this.pageData);
     },
     //查看考试记录
-    viewRecord(item) {
+    viewRecord (item) {
       this.pageData.id = item.id;
       this.pageData.name = "record";
       this.$bus.$emit("whichShow", this.pageData);
     },
     //审核中、申请证书、查看证书
-    handleLink(path) {
+    handleLink (path) {
       this.$router.push(path);
+    },
+    validateExamPrivilege (recordId, id) {
+      //验证考试权限
+      this.vipForm.vipId = id;
+      this.vipForm.type = "1";
+      examine.validateExamPrivilege(this.vipForm).then(response => {
+        if (response.status == 100201) {
+          //没有填写个人信息
+          message(this, "error", response.msg);
+          // 保存考试id  根据考试id判断 info页去哪
+          persistStore.set("info", recordId);
+          this.pageData.id = id;
+          this.pageData.name = "info";
+          this.$bus.$emit("whichShow", this.pageData);
+        } else {
+          this.handleLink("/profile/components/myexamine/applicantCertificate?id=" + recordId + "&vipID=" + id)
+        }
+      });
     }
-  }
+  },
+  mounted () {
+    persistStore.set("info", "");
+  },
 };
 </script>
 <style scoped lang="scss">

@@ -46,7 +46,7 @@ import { store as persistStore } from "~/lib/core/store";
 import { examine, personalset } from "~/lib/v1_sdk/index";
 import { Trim, message, matchSplits, getNet } from "@/lib/util/helper";
 export default {
-  data() {
+  data () {
     return {
       isClick: false,
       examForm: {
@@ -78,14 +78,14 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
-    IsNeedPaper(val) {
+    IsNeedPaper (val) {
       if (val) {
         this.perfileForm.needPaper = 2;
       } else {
         this.perfileForm.needPaper = 1;
       }
     },
-    handleNext() {
+    handleNext () {
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
       const IDreg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
       try {
@@ -104,7 +104,7 @@ export default {
       this.addApplyCertificate();
     },
     // 获取省市区
-    getRegionList() {
+    getRegionList () {
       personalset.getRegionList({ region_code: "" }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
@@ -115,7 +115,7 @@ export default {
         });
       });
     },
-    provinceChange(val) {
+    provinceChange (val) {
       this.perfileForm.city_name = "";
       this.perfileForm.area_name = "";
       this.perfileForm.city = "";
@@ -131,7 +131,7 @@ export default {
         }
       }
     },
-    cityChange(val) {
+    cityChange (val) {
       this.perfileForm.area_name = "";
       this.perfileForm.area = "";
       if (!this.city && this.city.length == 0) {
@@ -145,7 +145,7 @@ export default {
         }
       }
     },
-    areaChange(val) {
+    areaChange (val) {
       for (let item of this.area) {
         if (val == item.region_code) {
           this.perfileForm.area_name = item.name;
@@ -154,7 +154,7 @@ export default {
       }
     },
     // 整理省市区
-    getRegion(data, val) {
+    getRegion (data, val) {
       let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
@@ -171,7 +171,7 @@ export default {
       return tmp;
     },
     // 获取成绩信息
-    getPaperDetail() {
+    getPaperDetail () {
       examine.submitTestPaper(this.examForm).then(response => {
         if (response.status == 0) {
           this.testPaper = response.data;
@@ -186,7 +186,7 @@ export default {
       });
     },
     // 提交
-    addApplyCertificate() {
+    addApplyCertificate () {
       if (this.isClick) {
         return false;
       }
@@ -196,11 +196,6 @@ export default {
         if (response.status == 0) {
           message(this, "success", "提交成功");
           this.$router.push("/profile/components/myexamine/reviewing");
-        } else if (response.status == 100102) {
-          //证书获得者基本信息不完善
-          this.goProfile("tab-tenth");
-          persistStore.set("info", { isInfo: true, isSave: true });
-          message(this, "error", response.msg);
         } else {
           /**
            * 已申请过证书
@@ -212,12 +207,12 @@ export default {
       });
     },
     // 跳转个人中心
-    goProfile(item) {
+    goProfile (item) {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
     },
-    setHeight() {
+    setHeight () {
       let headerHeight = document.getElementsByClassName("headerBox")[0]
         .offsetHeight;
       let footerHeight = document.getElementsByClassName("footerBox")[0]
@@ -228,12 +223,12 @@ export default {
     }
   },
   watch: {
-    province(val) {
+    province (val) {
       this.city = this.getRegion(val, this.perfileForm.province);
       this.area = this.getRegion(this.city, this.perfileForm.city);
     }
   },
-  mounted() {
+  mounted () {
     if (persistStore.get("token")) {
       if (window.location.search) {
         this.perfileForm.vipID = matchSplits("vipID");
