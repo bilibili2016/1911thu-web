@@ -2,7 +2,7 @@
   <div :class="['collegeDetail',vipInfo.en_title]">
     <div class="courseList">
       <div class="title">{{vipInfo.title}}</div>
-      <v-card :data="categoryDataChoose" :config="config"></v-card>
+      <v-card :data="categoryData" :config="config"></v-card>
       <div class="more" @click="lookCourse">查看更多</div>
     </div>
     <v-info v-if="flag" :vipInfo="vipInfo" @buyVip="buyVip" @identificate="identificate"></v-info>
@@ -28,9 +28,10 @@ export default {
     return {
       vipPopShow: false,
       flag: true,
-      categoryDataChoose: [],
+      categoryData: [],
       vipInfo: '',
       loadCourse: true,
+      loadCourseAll: true,
       categoryForm: {
         cids: null,
         pids: 0,
@@ -90,14 +91,14 @@ export default {
         this.$bus.$emit("loginShow");
       }
     },
-    // 选课 card 列表
-    getCourseCardChooseList (itemCid, itemPid) {
-      this.loadCourse = true;
-      category.chooseCurriculumList(this.categoryForm).then(res => {
-        if (res.status === 0) {
-          this.categoryDataChoose = res.data.curriculumList;
+    // 课程 card 列表
+    getCourseCardList (itemCid, itemPid) {
+      this.loadCourseAll = true;
+      category.curriculumListNew(this.categoryForm).then(res => {
+        if (res.status == 0) {
+          this.categoryData = res.data.curriculumList;
         }
-        this.loadCourse = false;
+        this.loadCourseAll = false;
       });
     },
     //会员详情
@@ -122,7 +123,7 @@ export default {
   mounted () {
     this.categoryForm.cids = matchSplits('cid')
     this.vipDetailData.id = matchSplits("id");
-    this.getCourseCardChooseList()
+    this.getCourseCardList()
     this.vipDetail()
   }
 }

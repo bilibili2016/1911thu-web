@@ -14,7 +14,7 @@
         <div class="btn-con">
           <span class="button" @click="lookProject">混合式项目</span>
           <span class="button" @click="goVipDetail">在线学院</span>
-          <span class="button" @click="goLink('/project/degreeProject')">学位项目</span>
+          <span class="button" v-if="title!='chineseCollege'" @click="goLink('/project/degreeProject')">学位项目</span>
         </div>
       </div>
     </div>

@@ -194,11 +194,16 @@ export default {
   mounted () {
     // isIndex判断是否在首页 true在首页
     // cp类型决定当前列表的类型：0-课程；1-项目
-    if (window.location.search.split("=")[5]) {
+    // 先判断是不是在学院详情页 不是的话就是首页或者分类页
+    if (window.location.search.indexOf('title') > -1) {
       this.isIndex = false;
-      this.cp = matchSplits("cp");
     } else {
-      this.isIndex = true;
+      if (window.location.search.indexOf('cp') > -1) {
+        this.isIndex = false;
+        this.cp = matchSplits("cp");
+      } else {
+        this.isIndex = true;
+      }
     }
   }
 };
