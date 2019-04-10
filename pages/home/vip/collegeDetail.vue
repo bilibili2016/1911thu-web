@@ -2,7 +2,7 @@
   <div :class="['collegeDetail',vipInfo.en_title]">
     <div class="courseList">
       <div class="title">{{vipInfo.title}}</div>
-      <v-card :data="categoryData" :config="config"></v-card>
+      <v-card :data="categoryData" :config="config" v-loading="loadCourseAll"></v-card>
       <div class="more" @click="lookCourse">查看更多</div>
     </div>
     <v-info v-if="flag" :vipInfo="vipInfo" @buyVip="buyVip" @identificate="identificate"></v-info>
@@ -15,7 +15,7 @@ import CustomCard from "@/components/card/Card.vue";
 import Info from "@/pages/home/vip/components/Info";
 import VipBuy from "@/components/common/VipBuy.vue";
 import { matchSplits, setTitle } from "@/lib/util/helper";
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState, mapMutations } from "vuex";
 import { vip, category } from "~/lib/v1_sdk/index";
 import { store as persistStore } from "~/lib/core/store";
 export default {
@@ -50,12 +50,12 @@ export default {
         id: ""
       },
       gidForm: {
-        gids: ''
+        gids: ""
       }
-    }
+    };
   },
   methods: {
-    ...mapActions('auth', ['setGid']),
+    ...mapActions("auth", ["setGid"]),
     lookCourse () {
       this.$router.push({
         path: "/course/category",
@@ -118,15 +118,15 @@ export default {
           this.$router.push("/");
         }
       });
-    },
+    }
   },
   mounted () {
-    this.categoryForm.cids = matchSplits('cid')
+    this.categoryForm.cids = matchSplits("cid");
     this.vipDetailData.id = matchSplits("id");
     this.getCourseCardList()
     this.vipDetail()
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
