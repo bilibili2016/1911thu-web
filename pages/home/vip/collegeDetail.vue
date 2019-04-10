@@ -15,7 +15,7 @@ import CustomCard from "@/components/card/Card.vue";
 import Info from "@/pages/home/vip/components/Info";
 import VipBuy from "@/components/common/VipBuy.vue";
 import { matchSplits, setTitle } from "@/lib/util/helper";
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState, mapMutations } from "vuex";
 import { vip, category } from "~/lib/v1_sdk/index";
 import { store as persistStore } from "~/lib/core/store";
 export default {
@@ -24,12 +24,12 @@ export default {
     "v-info": Info,
     "v-vipbuy": VipBuy
   },
-  data () {
+  data() {
     return {
       vipPopShow: false,
       flag: true,
       categoryDataChoose: [],
-      vipInfo: '',
+      vipInfo: "",
       loadCourse: true,
       categoryForm: {
         cids: null,
@@ -49,13 +49,13 @@ export default {
         id: ""
       },
       gidForm: {
-        gids: ''
+        gids: ""
       }
-    }
+    };
   },
   methods: {
-    ...mapActions('auth', ['setGid']),
-    lookCourse () {
+    ...mapActions("auth", ["setGid"]),
+    lookCourse() {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -68,7 +68,7 @@ export default {
       });
     },
     //申请认证
-    identificate () {
+    identificate() {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -79,11 +79,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow (val) {
+    changeVipShow(val) {
       this.vipPopShow = false;
     },
     //立即购买
-    buyVip () {
+    buyVip() {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -91,7 +91,7 @@ export default {
       }
     },
     // 选课 card 列表
-    getCourseCardChooseList (itemCid, itemPid) {
+    getCourseCardChooseList(itemCid, itemPid) {
       this.loadCourse = true;
       category.chooseCurriculumList(this.categoryForm).then(res => {
         if (res.status === 0) {
@@ -101,7 +101,7 @@ export default {
       });
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
@@ -117,15 +117,15 @@ export default {
           this.$router.push("/");
         }
       });
-    },
+    }
   },
-  mounted () {
-    this.categoryForm.cids = matchSplits('cid')
+  mounted() {
+    this.categoryForm.cids = matchSplits("cid");
     this.vipDetailData.id = matchSplits("id");
-    this.getCourseCardChooseList()
-    this.vipDetail()
+    this.getCourseCardChooseList();
+    this.vipDetail();
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
