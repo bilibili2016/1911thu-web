@@ -10,9 +10,13 @@
       <v-commercialCollege v-if="title=='commercialCollege'"></v-commercialCollege>
       <v-cadreCollege v-if="title=='cadreCollege'"></v-cadreCollege>
       <!-- 底部学院学费信息 -->
-      <v-info :class="title" v-if="flag" :vipInfo="vipInfo" @lookCourse="lookCourse" @buyVip="buyVip" @identificate="identificate"></v-info>
-      <!-- 会员购买弹窗 -->
-      <v-vipbuy v-if="vipPopShow" :vipPopShow="vipPopShow" :vipInfo="vipInfo" @changeVipShow="changeVipShow"></v-vipbuy>
+      <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
+        <div class="btn-con">
+          <span class="button" @click="lookProject">混合式项目</span>
+          <span class="button" @click="goVipDetail">在线学院</span>
+          <span class="button" @click="goLink('/project/degreeProject')">学位项目</span>
+        </div>
+      </div>
     </div>
     <div class="noCollege" v-if="!noCollege">
       <img src="http://static-image.1911edu.com/noCollege.png" alt="">
@@ -24,17 +28,8 @@
 
 <script>
 import { vip } from "@/lib/v1_sdk/index";
-import { store as persistStore } from "~/lib/core/store";
-import {
-  matchSplits,
-  setTitle,
-  message,
-  browserRedirect
-} from "@/lib/util/helper";
+import { matchSplits, setTitle, message, browserRedirect } from "@/lib/util/helper";
 import { mapState, mapActions, mapGetters } from "vuex";
-import VipBuy from "@/components/common/VipBuy.vue";
-
-// import College from "@/pages/home/vip/pages/College";
 import CadreCollege from "@/pages/home/vip/pages/CadreCollege";
 import ChineseCollege from "@/pages/home/vip/pages/ChineseCollege";
 import CommercialCollege from "@/pages/home/vip/pages/CommercialCollege";
@@ -44,7 +39,6 @@ import NewsCollege from "@/pages/home/vip/pages/NewsCollege";
 import SmartCollege from "@/pages/home/vip/pages/SmartCollege";
 import SportsCollege from "@/pages/home/vip/pages/SportsCollege";
 
-import Info from "@/pages/home/vip/components/Info";
 export default {
   components: {
     // "v-college": College,
@@ -56,22 +50,14 @@ export default {
     "v-newsCollege": NewsCollege,
     "v-commercialCollege": CommercialCollege,
     "v-cadreCollege": CadreCollege,
-    "v-info": Info,
-    "v-vipbuy": VipBuy
   },
   data () {
     return {
-      flag: false,
-      vipInfo: "",
       collegeImg: ["", ""],
-      vipPopShow: false,
       bottom: true,
       loading: true,
       vipDetailData: {
         id: ""
-      },
-      gidForm: {
-        gids: null
       },
       vipInfo: "",
       width: "",
@@ -80,46 +66,29 @@ export default {
       scrollTop: "",
       arr: "",
       noCollege: true,
-      title: ""
+      title: "",
+      bottom: true
     };
   },
   methods: {
-    ...mapActions("auth", ["setGid"]),
-    //   查看课程
-    lookCourse () {
+    goVipDetail () {
       this.$router.push({
-        path: "/course/category",
+        path: "/home/vip/collegeDetail",
         query: {
-          cid: this.relativeID,
-          cp: 0,
-          pids: 0,
-          xid: 0,
-          vid: matchSplits("id")
+          id: this.vipInfo.id,
+          cid: this.vipInfo.category_id,
+          title: this.vipInfo.en_title
         }
       });
     },
-    //立即购买
-    buyVip () {
-      if (persistStore.get("token")) {
-        this.vipPopShow = true;
-      } else {
-        this.$bus.$emit("loginShow");
-      }
+    goLink (link) {
+      this.$router.push(link)
     },
-    //关闭购买弹窗
-    changeVipShow (val) {
-      this.vipPopShow = false;
-    },
-    //申请认证
-    identificate () {
-      if (persistStore.get("token")) {
-        this.gidForm.gids = "tab-tenth";
-        this.setGid(this.gidForm);
-        this.$router.push("/profile");
-        persistStore.set("whichIntro", matchSplits("id"));
-      } else {
-        this.$bus.$emit("loginShow", true);
-      }
+    // 跳转到项目分类
+    lookProject () {
+      this.$router.push(
+        `/course/category?cid=${this.relativeID}&cp=1&xid=0&pids=0&vid=${this.vipDetailData.id}`
+      );
     },
     //会员详情
     vipDetail () {
@@ -128,11 +97,6 @@ export default {
           this.vipInfo = res.data.vipGoodsDetail;
           this.title = res.data.vipGoodsDetail.en_title;
           this.noCollege = true;
-          if (res.data.vipGoodsDetail.is_pay == 1) {
-            this.flag = true;
-          } else {
-            this.flag = false;
-          }
           setTitle(this.vipInfo.title + "-1911学堂");
         } else {
           message(this, "error", res.msg);
@@ -166,6 +130,20 @@ export default {
       });
       this.loading = false;
     },
+    // 底部操作栏动态
+    addClass () {
+      this.windowHeight = document.body.scrollHeight;
+      this.paperHeight = document.documentElement.clientHeight;
+      this.scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
+      if (this.windowHeight - this.scrollTop - this.paperHeight < 100) {
+        this.bottom = true;
+      } else {
+        this.bottom = false;
+      }
+    },
     init () {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
@@ -176,6 +154,8 @@ export default {
     this.loading = true;
     this.init();
     this.vipDetail();
+    // 寛高设置
+    window.addEventListener("scroll", this.addClass);
   },
   watch: {
     $route (v, oldv) {
@@ -190,8 +170,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.collegeInfo {
-  width: 100%;
-  padding-bottom: 20px;
-}
+@import "~assets/style/college/collegeInfo";
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="con-detail collegeFee">
+  <div class="con-detail">
     <div class="con-five">
       <h4 class="college-title">
         <span v-if=" vipInfo.en_title!='chineseCollege'">学院学费</span>
@@ -30,12 +30,6 @@
       <div class="btn-con">
         <span class="text">学费{{parseInt(vipInfo.present_price)}}元/年</span>
         <div class="btn-item">
-          <span class="button" @click="lookProject">查看学院项目</span>
-          <!-- 是会员 -->
-          <span v-if="vipInfo.vipPrivate" class="button" @click="lookCourse">进入学院学习</span>
-          <!-- 不是会员 -->
-          <span v-if="!vipInfo.vipPrivate" class="button" @click="lookCourse">查看学院课程</span>
-
           <span class="button joinStudy" @click="buyVip">申请入学</span>
           <span class="button" @click="identificate">申请证书</span>
         </div>
@@ -49,7 +43,7 @@ import { matchSplits } from "@/lib/util/helper";
 
 export default {
   props: ["vipInfo"],
-  data() {
+  data () {
     return {
       vid: "",
       cid: "",
@@ -60,22 +54,14 @@ export default {
     };
   },
   methods: {
-    lookProject() {
-      this.$router.push(
-        `/course/category?cid=${this.cid}&cp=1&xid=0&pids=0&vid=${this.vid}`
-      );
-    },
-    lookCourse() {
-      this.$emit("lookCourse");
-    },
-    buyVip() {
+    buyVip () {
       this.$emit("buyVip");
     },
-    identificate() {
+    identificate () {
       this.$emit("identificate");
     },
     // 底部操作栏动态
-    addClass() {
+    addClass () {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -89,7 +75,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.vid = matchSplits("id");
     this.cid = matchSplits("cid");
 
@@ -99,6 +85,6 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-@import "assets/style/college/college";
+<style lang="scss">
+@import "~assets/style/college/info";
 </style>

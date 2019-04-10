@@ -55,7 +55,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data() {
+  data () {
     return {
       pageType: {
         page: "category",
@@ -161,7 +161,7 @@ export default {
     };
   },
   watch: {
-    isUpdate(val) {
+    isUpdate (val) {
       if (val) {
         this.getUserInfo();
       }
@@ -170,7 +170,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
     // 公共 获取list 方法
-    getHeaderList(type) {
+    getHeaderList (type) {
       if (type === "course") {
         this.loadList = true;
         category.childCategoryList().then(res => {
@@ -190,7 +190,7 @@ export default {
       }
     },
     // 处理全部的分类
-    makeData(arr, data) {
+    makeData (arr, data) {
       data.forEach((v, i) => {
         v.childList.forEach((v, i) => {
           if (i > 0) {
@@ -200,7 +200,7 @@ export default {
       });
     },
     // 处理数据 拼接全部数据
-    handleData(data, res) {
+    handleData (data, res) {
       this.cidData = res.data.categoryList;
       this.cidData.unshift(data);
       for (let item of this.cidData) {
@@ -217,7 +217,7 @@ export default {
       this.makeData(this.cidData[0].childList, res.data.categoryList);
       this.pidData = this.cidData[this.categoryIndex];
     },
-    handelOpenUrl() {
+    handelOpenUrl () {
       this.selectUrl.cid = this.selectCidItem;
       this.selectUrl.pids = this.selectPidItem;
       this.selectUrl.cp = this.cp;
@@ -225,7 +225,7 @@ export default {
       openUrl(this.selectUrl, this);
     },
     // 设置 cid pid 公共函数
-    handleSelect(type, item, index) {
+    handleSelect (type, item, index) {
       if (type == "cidType") {
         this.selectCidItem = item.id;
         this.$bus.$emit("cid", item.id); //改变分类选中项（样式）
@@ -248,7 +248,7 @@ export default {
       // 设置调取 card数据 ---
       this.handleSelectCard(this.selectCidItem, this.selectPidItem);
     },
-    handleSelectCard(selectCidItem, selectPidItem) {
+    handleSelectCard (selectCidItem, selectPidItem) {
       if (this.cp == "0") {
         if (this.xid == "0") {
           // 调取课程的数据
@@ -263,22 +263,22 @@ export default {
       }
     },
     // 学院 item
-    selectCid(item, index) {
+    selectCid (item, index) {
       this.isUrl = false;
       this.handleSelect("cidType", item, index);
     },
     // 分类 item
-    selectPid(item, index) {
+    selectPid (item, index) {
       this.isUrl = false;
       this.handleSelect("pidType", item, index);
     },
     // 点击cid pid 获取 card列表
-    setParamsPidCid(itemCid, itemPid) {
+    setParamsPidCid (itemCid, itemPid) {
       this.categoryForm.cids = itemCid;
       this.categoryForm.pids = itemPid;
     },
     // 课程 card 列表
-    getCourseCardList(itemCid, itemPid) {
+    getCourseCardList (itemCid, itemPid) {
       this.loadCourseAll = true;
       this.setParamsPidCid(itemCid, itemPid);
       category.curriculumListNew(this.categoryForm).then(res => {
@@ -291,7 +291,7 @@ export default {
       });
     },
     // 选课 card 列表
-    getCourseCardChooseList(itemCid, itemPid) {
+    getCourseCardChooseList (itemCid, itemPid) {
       this.loadCourse = true;
       this.setParamsPidCid(itemCid, itemPid);
       category.chooseCurriculumList(this.categoryForm).then(res => {
@@ -308,7 +308,7 @@ export default {
       });
     },
     // 项目 card列表
-    getProjectCardList(itemCid, itemPid) {
+    getProjectCardList (itemCid, itemPid) {
       this.loadCourseAll = true;
       // this.setParamsPidCid(itemCid, itemPid);
       //项目列表-二级分类：pid:0,用type区分
@@ -327,12 +327,12 @@ export default {
     },
 
     // 我要选课页面 点击全选
-    allChecked() {
+    allChecked () {
       this.idsForm.cartid = this.allCheckedId;
       this.changeData = this.allCheckedId;
       category.addShopCart(this.idsForm).then(response => {
         if (response.status === 0) {
-          this.categoryDataChoose.forEach(function(v, i, arr) {
+          this.categoryDataChoose.forEach(function (v, i, arr) {
             v.is_checked = true;
           });
           this.setProductsNum({
@@ -354,7 +354,7 @@ export default {
       });
     },
     // 点击 最新最热 筛选
-    selectActiveTab(item) {
+    selectActiveTab (item) {
       this.categoryForm.pages = 1;
       this.pagemsg.page = 1;
 
@@ -364,8 +364,8 @@ export default {
       item.name === "first"
         ? (this.categoryForm.sortBy = 0)
         : item.name === "second"
-        ? (this.categoryForm.sortBy = 1)
-        : (this.categoryForm.sortBy = 2);
+          ? (this.categoryForm.sortBy = 1)
+          : (this.categoryForm.sortBy = 2);
 
       if (this.cp == "0") {
         if (this.xid == "0") {
@@ -378,7 +378,7 @@ export default {
       }
     },
     // 点击 底部分页分页事件
-    handlePageChange(val) {
+    handlePageChange (val) {
       this.loadCourse = false;
       this.pagemsg.page = val;
       this.categoryForm.pages = val;
@@ -392,7 +392,7 @@ export default {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
     //处理单选
-    selCheckboxChange(val) {
+    selCheckboxChange (val) {
       if (val.is_checked === false) {
         //不勾选 增加全选值
         this.allCheckedId.push(val.id);
@@ -406,7 +406,7 @@ export default {
       }
     },
     // 初始化params参数
-    initParams() {
+    initParams () {
       // categoryId 学院 id
       this.categoryId = matchSplits("cid");
       // cp(1)项目 cp(0)
@@ -422,7 +422,7 @@ export default {
 
       this.vid = matchSplits("vid");
     },
-    initListCard() {
+    initListCard () {
       // cp(0) 课程 cp(1)项目
       if (this.cp == "0") {
         this.getHeaderList("course");
@@ -431,24 +431,24 @@ export default {
       }
       this.handleSelectCard(this.categoryId, this.pids);
     },
-    reload() {
+    reload () {
       if (this.isUrl) {
         location.reload();
       }
     }
   },
-  mounted() {
+  mounted () {
     this.initParams();
     this.initListCard();
   },
   watch: {
-    $route(v, oldv) {
+    $route (v, oldv) {
       if (v.query !== oldv.query) {
         this.reload();
       }
     }
   },
-  updated() {
+  updated () {
     if (matchSplits("cp") === "0") {
       //课程
       setTitle("全部课程-1911学堂");
