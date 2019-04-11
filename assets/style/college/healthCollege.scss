@@ -280,7 +280,8 @@
           margin-right: 30px;
           margin-bottom: 20px;
 
-          &:nth-child(3n+3) {
+          &:nth-child(3n+3),
+          &:last-child {
             margin-right: 0;
           }
         }
