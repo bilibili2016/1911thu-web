@@ -5,9 +5,9 @@
     <div class="container">
       <div class="main">
         <div class="intro">
-          <p>国务院 “46号文” 开启了中国体育产业的黄金时代，预计到2020年，我国体育产业产值将达到3万亿，2025年将达到5万亿，然而体育产业从业人员却存在数百万级的缺口。种种现象表明，我国急需既懂体育、又懂经营管理的复合型人才。</p>
-          <p>1911学堂在线体育学院拥有众多体育领域的资深导师，面向运动员、体育系统干部、体育产业经营管理人员三类人群，提供系统性的教育培训解决方案，旨在培养具有较高专业成绩、文化水平、社会适应能力及综合素质的人才；勤政廉政、奋发有为、善于推动体育事业科学发展的高素质党政人才；熟悉体育产业工作规律，具备市场运作、经营开发和产业管理能力的体育产业人才。</p>
-          <!-- <p>1911学堂与清华大学相关部门及专家教授成立横向课题，建立了在线体育学院专家组，共同开展学术课题、课程研发及认证合作。学院专家组对在线体育学院的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统等进行了充分论证与整体评估，并出具了课程认证与鉴定意见。</p> -->
+          <p>1911学堂携手清华大学体育部教授成立科研课题，聘任体育部教授担任专家组组长，专家组组长邀请30名左右体育领域专家组成1911学堂体育学院专家组，共同研发体育学院课程体系。</p>
+          <p>国务院“46号文”开启了中国体育产业的黄金时代，预计到2020年，我国体育产业产值将达到3万亿，2025年将达到5万亿，然而体育产业从业人员却存在数百万级的缺口。种种现象表明，我国急需既懂体育、又懂经营管理的复合型人才。</p>
+          <p>1911学堂体育学院，面向运动员、体育系统干部、体育产业经营管理人员三类人群，提供系统性的教育培训解决方案，旨在培养具有较高专业成绩、文化水平、社会适应能力及综合素质的人才；勤政廉政、奋发有为、善于推动体育事业科学发展的高素质党政人才；熟悉体育产业工作规律，具备市场运作、经营开发和产业管理能力的体育产业人才。</p>
         </div>
         <!-- <h2>专家组组长</h2>
         <div class="group">
@@ -37,7 +37,7 @@
       </div>
       <div class="centerBg">
         <div class="main">
-          <h2>学习内容</h2>
+          <!-- <h2>学习内容</h2>
           <ul class="study">
             <li v-for="(item,index) in conList" :key="index">
               <span>{{1+index}}</span>
@@ -52,16 +52,53 @@
           <div class="harvest clearfix">
             <p class="fl">运动员可以了解到未来职业发展趋势、提升未来职业发展能力，掌握运动科学基本知识、科学预防训练损伤和伤病康复，掌握创业实务知识、了解创业基本过程，提升创业技能，成功实现职业转型升级，从行业从业者成长为成功的行业领导者。</p>
             <p class="fr">体育系统干部与体育产业经营管理人员可以夯实体育管理的专业知识、提高果断科学的决策能力、增强统筹协调的组织才能、树立把握全局的战略思维、增加勇于开拓的创新精神、提升体育管理的人文素养。人员所在单位机构也将能够提升组织绩效，实现组织战略发展目标。</p>
+          </div> -->
+          <h2>业务产品</h2>
+          <div class="production">
+            <div class="item">
+              <img src="http://static-image.1911edu.com/production-sport.png" alt="">
+              <p>在线体育学院</p>
+            </div>
+            <div class="item">
+              <img src="http://static-image.1911edu.com/production-icon1.png" alt="">
+              <p>混合式标准项目</p>
+            </div>
+            <div class="item">
+              <img src="http://static-image.1911edu.com/production-icon2.png" alt="">
+              <p>
+                体育管理硕士（MSA）国际学位项目
+              </p>
+            </div>
+          </div>
+          <div class="main-text">
+            <p>1911学堂体育学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的体育产业单位内训项目。</p>
+          </div>
+          <h2>培养目标</h2>
+          <div class="target">
+            <p>1911学堂体育学院的培养目标是培养具有良好职业素养和较高业务能力、适应体育发展需求的体育人才队伍。</p>
+            <p>使运动员成为具有较高专业成绩、文化水平、社会适应能力及综合素质的人才；</p>
+            <p>使体育系统干部成为勤政廉政、奋发有为、善于推动体育事业科学发展的高素质党政人才；</p>
+            <p>使体育产业经营管理人员成为熟悉体育产业工作规律，具备市场运作、经营开发和产业管理能力的体育产业人才。</p>
           </div>
         </div>
       </div>
       <div class="main">
+        <h2>师资来源</h2>
+        <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
+        <div class="school">
+          <img src="http://static-image.1911edu.com/college_QH.png" alt="">
+          <img src="http://static-image.1911edu.com/college_BD.png" alt="">
+          <img src="http://static-image.1911edu.com/college_CU.png" alt="">
+          <img src="http://static-image.1911edu.com/college_TY.png" alt="">
+          <img src="http://static-image.1911edu.com/college_NYU.png" alt="">
+
+        </div>
         <h2>考核认证</h2>
         <div class="attestation">
           <div class="clearfix">
             <div class="left fl">
               <span class="circle"></span>
-              <span class="text">学员参加1911学堂在线体育学院学习，学习结束后可申请参加相关考试，考核通过者将获得1911学堂结业证书。</span>
+              <span class="text">学员参加1911学堂体育学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
             </div>
             <div class="right fr">
               <img src="http://static-image.1911edu.com/cadreCollege_icon2.png" alt>
