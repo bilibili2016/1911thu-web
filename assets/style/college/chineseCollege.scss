@@ -1,216 +1,334 @@
 .chineseCollege {
-	.chinese-banner {
-		height: 660px;
-		background: url('http://static-image.1911edu.com/chinese-banner.png') no-repeat;
-		background-position: center;
-		background-size: 1920px 660px;
-	}
-	.chinese-con {
-		.pCss {
-			font-size: 18px;
-			line-height: 36px;
-			font-weight: 500;
-			color: #222;
-			text-indent: 2em;
-		}
-		.chineseWidth {
-			width: 1100px;
-			margin: 0 auto;
-		}
-		.chinese-title {
-			width: 330px;
-			height: 65px;
-			margin: 90px auto 30px;
-		}
-		.chinese-title.people {
-			margin-top: 0;
-			background: url('http://static-image.1911edu.com/chinese-pic1.png') no-repeat;
-			background-size: cover;
-		}
-		.chinese-title.content {
-			background: url('http://static-image.1911edu.com/chinese-pic2.png') no-repeat;
-			background-size: cover;
-		}
-		.chinese-title.harvest {
-			background: url('http://static-image.1911edu.com/chinese-pic3.png') no-repeat;
-			background-size: cover;
-		}
-		.chinese-title.test {
-			margin-top: 80px;
-			background: url('http://static-image.1911edu.com/chinese-pic4.png') no-repeat;
-			background-size: cover;
-		}
-		.chinese-one {
-			padding: 100px 0 140px 0;
-			background: url('http://static-image.1911edu.com/chinese-bg1.png') no-repeat;
-			background-size: cover;
-			.pCss {
-				width: 980px;
-				margin: 0 auto;
-			}
-		}
-		.chinese-two {
-			padding: 70px 0 70px 0;
-			background: url('http://static-image.1911edu.com/chinese-bg2.png') no-repeat;
-			background-size: cover;
-			background-position: center;
-			.two-items {
-				background-size: 132px 126px;
-				background-position: top center;
-				position: relative;
-				width: 1100px;
-				height: 350px;
-				margin-top: 85px;
-				.item {
-					position: absolute;
-					text-align: center;
-					margin-bottom: 30px;
-					.people-icon {
-						width: 90px;
-						height: 95px;
-						margin: 0 auto;
-						margin-bottom: 20px;
-						img {
-							width: 100%;
-						}
-					}
-					.people-text {
-						font-size: 20px;
-						color: #222;
-						text-align: center;
-					}
-					&.one {
-						left: 0;
-						top: 0;
-					}
-					&.two {
-						right: 0;
-						top: 0;
-					}
-					&.three {
-						left: 200px;
-						bottom: 0;
-					}
-					&.four {
-						right: 100px;
-						bottom: 0;
-					}
-				}
-			}
-			.second-items {
-				.item {
-					float: left;
-					width: 275px;
-					margin-bottom: 20px;
-					box-sizing: border-box;
-					.icon {
-						display: inline-block;
-						width: 59px;
-						height: 57px;
-						font-size: 24px;
-						color: #222;
-						text-align: center;
-						line-height: 57px;
-						vertical-align: middle;
-						margin-right: 10px;
-						background: url('http://static-image.1911edu.com/chinese-icon1.png') no-repeat;
-						background-size: cover;
-					}
-					span {
-						font-size: 20px;
-						color: #222;
-						vertical-align: middle;
-					}
-					@media only screen and (max-device-width: 375px) {
-						span {
-							font-size: 18px;
-						}
-					}
-				}
-			}
-			.bottom {
-				padding: 45px 75px;
-				background-color: #fff;
-				box-shadow: 0px 0px 20px 0px rgba(175, 123, 87, 0.25);
-				border-radius: 10px;
-				margin-top: 40px;
-				.pCss {
-					color: #854837;
-				}
-			}
-		}
-		.chinese-three {
-			background: url('http://static-image.1911edu.com/chinese-bg3.png') no-repeat;
-			background-size: cover;
-			padding: 60px 0;
-			.chinese-title {
-				margin-top: 0;
-				margin-bottom: 60px;
-			}
-			.pCss {
-				width: 950px;
-				margin: 0 auto;
-				color: #fff;
-			}
-		}
-		.chinese-four {
-			background: url('http://static-image.1911edu.com/chinese-bg4.png') no-repeat;
-			background-size: cover;
-			padding: 0 0 80px 0;
-			.four-text {
-				width: 940px;
-				margin: 0 auto;
+  .chinese-banner {
+    height: 660px;
+    background: url('http://static-image.1911edu.com/chinese-banner.png') no-repeat;
+    background-position: center;
+    background-size: 1920px 660px;
+  }
 
-				.four-left,
-				.four-right {
-					float: left;
-				}
+  .chinese-con {
+    .pCss {
+      font-size: 18px;
+      line-height: 36px;
+      font-weight: 500;
+      color: #222;
+      text-indent: 2em;
+    }
 
-				.four-left {
-					width: 710px;
-					margin-right: 50px;
-					margin-top: 26px;
+    .chineseWidth {
+      width: 1100px;
+      margin: 0 auto;
+    }
 
-					.circle {
-						width: 14px;
-						height: 14px;
-						background-color: #854837;
-						margin-right: 15px;
-						display: inline-block;
-						vertical-align: top;
-						margin-top: 13px;
-					}
+    .chinese-title {
+      width: 330px;
+      height: 65px;
+      margin: 90px auto 30px;
+    }
 
-					.text {
-						width: 680px;
-						display: inline-block;
-						font-size: 20px;
-						line-height: 34px;
-						vertical-align: top;
-					}
-				}
+    .chinese-title.people {
+      margin-top: 0;
+      background: url('http://static-image.1911edu.com/chinese-pic1.png') no-repeat;
+      background-size: cover;
+    }
 
-				.four-right {
-					width: 172px;
-					height: 116px;
+    .chinese-title.content {
+      background: url('http://static-image.1911edu.com/chinese-pic2.png') no-repeat;
+      background-size: cover;
+    }
 
-					img {
-						width: 100%;
-						height: 100%;
-					}
-				}
-			}
+    .chinese-title.harvest {
+      background: url('http://static-image.1911edu.com/chinese-pic3.png') no-repeat;
+      background-size: cover;
+    }
 
-			.four-certification {
-				width: 1000px;
-				height: 707px;
-				margin: 0 auto;
+    .chinese-title.test {
+      margin-top: 80px;
+      background: url('http://static-image.1911edu.com/chinese-pic4.png') no-repeat;
+      background-size: cover;
+    }
 
-				img {
-					width: 100%;
-					height: 100%;
-				}
-			}
-		}
-	}
+    .chinese-title.proTitle {
+      background: url('http://static-image.1911edu.com/chinese-proTitle.png') no-repeat;
+      background-size: cover;
+    }
+
+    .chinese-title.target {
+      background: url('http://static-image.1911edu.com/chinese-targetTitle.png') no-repeat;
+      background-size: cover;
+    }
+
+    .chinese-title.teacher {
+      background: url('http://static-image.1911edu.com/chinese-teacherTitle.png') no-repeat;
+      background-size: cover;
+    }
+
+    .chinese-one {
+      padding: 100px 0 70px 0;
+      background: url('http://static-image.1911edu.com/chinese-bg1.png') no-repeat;
+      background-size: cover;
+
+      .pCss {
+        width: 980px;
+        margin: 0 auto;
+      }
+    }
+
+    .chinese-two {
+      padding: 70px 0 0 0;
+      background: url('http://static-image.1911edu.com/chinese-bg2.png') no-repeat;
+      background-size: cover;
+      background-position: center;
+
+      .two-items {
+        background-size: 132px 126px;
+        background-position: top center;
+        position: relative;
+        width: 1100px;
+        height: 350px;
+        margin-top: 85px;
+
+        .item {
+          position: absolute;
+          text-align: center;
+          margin-bottom: 30px;
+
+          .people-icon {
+            width: 90px;
+            height: 95px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+
+            img {
+              width: 100%;
+            }
+          }
+
+          .people-text {
+            font-size: 20px;
+            color: #222;
+            text-align: center;
+          }
+
+          &.one {
+            left: 0;
+            top: 0;
+          }
+
+          &.two {
+            right: 0;
+            top: 0;
+          }
+
+          &.three {
+            left: 200px;
+            bottom: 0;
+          }
+
+          &.four {
+            right: 100px;
+            bottom: 0;
+          }
+        }
+      }
+
+      // .second-items {
+      // 	.item {
+      // 		float: left;
+      // 		width: 275px;
+      // 		margin-bottom: 20px;
+      // 		box-sizing: border-box;
+      // 		.icon {
+      // 			display: inline-block;
+      // 			width: 59px;
+      // 			height: 57px;
+      // 			font-size: 24px;
+      // 			color: #222;
+      // 			text-align: center;
+      // 			line-height: 57px;
+      // 			vertical-align: middle;
+      // 			margin-right: 10px;
+      // 			background: url('http://static-image.1911edu.com/chinese-icon1.png') no-repeat;
+      // 			background-size: cover;
+      // 		}
+      // 		span {
+      // 			font-size: 20px;
+      // 			color: #222;
+      // 			vertical-align: middle;
+      // 		}
+      // 		@media only screen and (max-device-width: 375px) {
+      // 			span {
+      // 				font-size: 18px;
+      // 			}
+      // 		}
+      // 	}
+      // }
+      // .bottom {
+      // 	padding: 45px 75px;
+      // 	background-color: #fff;
+      // 	box-shadow: 0px 0px 20px 0px rgba(175, 123, 87, 0.25);
+      // 	border-radius: 10px;
+      // 	margin-top: 40px;
+      // 	.pCss {
+      // 		color: #854837;
+      // 	}
+      // }
+      .production {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        margin: 40px 0 0 0;
+
+        .item {
+          width: 208px;
+          text-align: center;
+          margin-right: 50px;
+
+          img {
+            display: block;
+            width: 66px;
+            height: 66px;
+            margin: 0 auto;
+          }
+
+          p {
+            font-size: 20px;
+            color: #222;
+            margin-top: 25px;
+            line-height: 34px;
+          }
+
+          &::last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .centerBg-text {
+        width: 1000px;
+        padding: 0 50px;
+        height: 80px;
+        background-color: #90563F;
+        transform: skewX(-20deg);
+        margin: 30px auto 70px;
+
+        p {
+          font-size: 18px;
+          color: #fff;
+          line-height: 80px;
+          text-align: center;
+          transform: skewX(20deg);
+
+        }
+      }
+
+    }
+
+    .chinese-three {
+      background: url('http://static-image.1911edu.com/chinese-bg3.png') no-repeat;
+      background-size: cover;
+      padding: 60px 0;
+
+      .chinese-title {
+        margin-top: 0;
+        margin-bottom: 60px;
+      }
+
+      .pCss {
+        width: 950px;
+        margin: 0 auto;
+        color: #fff;
+      }
+    }
+
+    .chinese-four {
+      background: url('http://static-image.1911edu.com/chinese-bg4.png') no-repeat;
+      // background-size: cover;
+      background-position: center bottom;
+      padding: 0 0 80px 0;
+
+      .teacherText {
+        text-align: center;
+        margin: 40px 0;
+        font-size: 20px;
+      }
+
+      .school {
+        width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+
+        img {
+          display: inline-block;
+          width: 345px;
+          height: 120px;
+          margin-right: 30px;
+          margin-bottom: 20px;
+
+          &:nth-child(3n+3) {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .four-text {
+        width: 940px;
+        margin: 0 auto;
+
+        .four-left,
+        .four-right {
+          float: left;
+        }
+
+        .four-left {
+          width: 710px;
+          margin-right: 50px;
+          margin-top: 26px;
+
+          .circle {
+            width: 14px;
+            height: 14px;
+            background-color: #854837;
+            margin-right: 15px;
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 13px;
+          }
+
+          .text {
+            width: 680px;
+            display: inline-block;
+            font-size: 20px;
+            line-height: 34px;
+            vertical-align: top;
+          }
+        }
+
+        .four-right {
+          width: 172px;
+          height: 116px;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      .four-certification {
+        width: 1000px;
+        height: 707px;
+        margin: 0 auto;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
 }
