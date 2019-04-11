@@ -55,7 +55,7 @@ export default {
     "v-paytype": PayType,
     "v-qrcode": Qrcode
   },
-  data() {
+  data () {
     return {
       showReportBug: false,
       wePay: {
@@ -86,19 +86,17 @@ export default {
     };
   },
   computed: {
-    // ...mapState('auth', ['kid']),
     ...mapGetters("auth", ["isAuthenticated"])
   },
   methods: {
-    ...mapActions("auth", ["setKid", "setProductsNum"]),
-    takeUp() {
+    takeUp () {
       this.takeupMsg = !this.takeupMsg;
     },
-    goLink(item) {
+    goLink (item) {
       this.$router.push(item);
     },
     // 获取订单id列表
-    getPayList(item) {
+    getPayList (item) {
       this.loading = true;
       this.payListForm.orderId = matchSplits("order");
       wepay.webPay(this.payListForm).then(response => {
@@ -116,7 +114,6 @@ export default {
           this.codeData.code_url = response.data.code_url;
           this.codeData.qr_code = response.data.qr_code;
           this.$bus.$emit("load", false);
-          this.shopCartList();
           if (item === "recode") {
             this.$bus.$emit("addPaySubmit");
           }
@@ -127,24 +124,16 @@ export default {
         }
       });
     },
-    shopCartList() {
-      wepay.shopCartList().then(response => {
-        let len = {
-          pn: response.data.curriculumCartList.length
-        };
-        this.setProductsNum(len);
-      });
-    },
     //打开问题弹窗
-    showRpt() {
+    showRpt () {
       this.showReportBug = true;
     },
     //关闭问题弹窗
-    closeReport() {
+    closeReport () {
       this.showReportBug = false;
     }
   },
-  mounted() {
+  mounted () {
     if (persistStore.get("token")) {
       this.getPayList();
     } else {
@@ -158,7 +147,7 @@ export default {
       this.getPayList(data);
     });
   },
-  updated() {
+  updated () {
     setTitle("支付中心-1911学堂");
   }
 };
