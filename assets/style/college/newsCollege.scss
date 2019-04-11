@@ -237,13 +237,19 @@
       .collegeList {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: center;
         margin-top: 40px;
 
         .oneImg {
           width: 344px;
           height: 120px;
           margin-bottom: 20px;
+          margin-right: 30px;
+
+          &:nth-child(3n),
+          &:nth-child(8) {
+            margin-right: 0;
+          }
         }
       }
     }
