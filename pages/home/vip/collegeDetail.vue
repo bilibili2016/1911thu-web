@@ -1,7 +1,8 @@
 <template>
   <div :class="['collegeDetail',vipInfo.en_title]">
     <div class="courseList">
-      <div class="title">{{vipInfo.title}}</div>
+      <div class="title" v-if="vipInfo.en_title!='chineseCollege'">{{vipInfo.title}}</div>
+      <div class="title" v-else></div>
       <v-card :data="categoryData" :config="config" v-loading="loadCourseAll"></v-card>
       <div class="more" @click="lookCourse">查看更多</div>
     </div>
