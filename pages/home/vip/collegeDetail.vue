@@ -1,7 +1,7 @@
 <template>
   <div :class="['collegeDetail',vipInfo.en_title]">
     <div class="courseList">
-      <div class="title" v-if="vipInfo.en_title!='chineseCollege'">{{vipInfo.title}}</div>
+      <div class="title" v-if="vipInfo.en_title!='chineseCollege'">{{vipInfo.category_name}}</div>
       <div class="title" v-else></div>
       <v-card :data="categoryData" :config="config" v-loading="loadCourseAll"></v-card>
       <div class="more" @click="lookCourse">查看更多</div>
@@ -112,7 +112,7 @@ export default {
           } else {
             this.flag = false;
           }
-          setTitle(this.vipInfo.title + "-1911学堂");
+          setTitle(this.vipInfo.category_name + "-1911学堂");
         } else {
           message(this, "error", res.msg);
           this.noCollege = false;

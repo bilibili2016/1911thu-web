@@ -9,7 +9,7 @@
       <p class="desc">
         学员只需
         <span class="p-one">{{parseInt(vipInfo.present_price)}}元</span>
-        即可加入1911学堂{{vipInfo.title}}，学习价值{{vipInfo.original_price}}元的学院全部课程，
+        即可加入1911学堂{{vipInfo.category_name}}，学习价值{{vipInfo.original_price}}元的学院全部课程，
         <span class="p-one">学籍有效期{{vipInfo.valid_days==365?'一年':vipInfo.valid_days+'天'}}。</span>
       </p>
       <p class="price">

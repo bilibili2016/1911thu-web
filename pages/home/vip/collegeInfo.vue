@@ -97,7 +97,7 @@ export default {
           this.vipInfo = res.data.vipGoodsDetail;
           this.title = res.data.vipGoodsDetail.en_title;
           this.noCollege = true;
-          setTitle(this.vipInfo.title + "-1911学堂");
+          setTitle(this.vipInfo.category_name + "-1911学堂");
         } else {
           message(this, "error", res.msg);
           this.noCollege = false;

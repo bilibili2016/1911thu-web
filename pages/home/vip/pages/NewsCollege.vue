@@ -4,14 +4,9 @@
     <div class="news-banner"></div>
     <div class="news-con">
       <div class="newsWidth news-one">
-        <p class="pCss">
-          媒介生态和传播技术的持续发展，带来了新闻传播行业的快速变革。近年来， “全媒”、 “融媒” 已经向 “智媒” 、 “浸媒” 升级迭代，智能化大潮正以迅猛之势影响着新闻传播行业的方方面面，传媒人需要不断领悟、适应、创造新的行业文化与发展模式。
-        </p>
-        <p class="pCss">
-          为助力新闻传播领域从业人员探索、顺应智媒时代变局，1911学堂在线新闻传播学院携手中国传媒大学、清华大学、人民大学以及知名业界机构的专家学者与智囊团队，秉承 “素质为本、实践为用” 的教学理念，有针对性的研发系统化的课程体系，提供多层次、高质量的数字化课程资源，培养兼备理论素养与实践经验的复合型人才。
-        </p>
-        <p class="pCss">
-          1911学堂与中国传媒大学相关部门及专家教授成立横向课题，建立了在线新闻传播学院专家组，共同开展学术课题、课程研发及认证合作。学院专家组对在线新闻传播学院的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统等进行了充分论证与整体评估，并出具了课程认证与鉴定意见。</p>
+        <p class="pCss">1911学堂携手中国传媒大学董关鹏教授成立科研课题，聘任董关鹏教授担任专家组组长，专家组组长邀请30名左右新闻传播领域专家组成1911学堂新闻传播学院专家组，共同研发新闻传播学院课程体系。</p>
+        <p class="pCss">介生态和传播技术的持续发展，带来了新闻传播行业的快速变革。近年来，“全媒”、“融媒”已经向“智媒”、“浸媒”升级迭代，智能化大潮正以迅猛之势影响着新闻传播行业的方方面面，传媒人需要不断领悟、适应、创造新的行业文化与发展模式。</p>
+        <p class="pCss">为助力新闻传播领域从业人员探索、顺应智媒时代变局， 1911学堂新闻传播学院秉承“素质为本、实践为用”的教学理念，有针对性的研发系统化的课程体系，提供多层次、高质量的数字化课程资源，培养兼备理论素养与实践经验的复合型人才。</p>
       </div>
       <div class="news-two">
         <h4 class="news-title">专家组组长</h4>
@@ -28,75 +23,37 @@
       <div class="news-three">
         <h4 class="news-title">面向人群</h4>
         <div class="three-items clearfix">
-          <div class="item">
-            <div class="people-icon"><img src="http://static-image.1911edu.com/newsCo-icon3.png" alt=""></div>
-            <div class="people-text">国家党政机关领导干部</div>
-          </div>
-          <div class="item">
-            <div class="people-icon"><img src="http://static-image.1911edu.com/newsCo-icon4.png" alt=""></div>
-            <div class="people-text">企事业单位中高层管理者与基层骨干</div>
-          </div>
-          <div class="item">
-            <div class="people-icon"><img src="http://static-image.1911edu.com/newsCo-icon5.png" alt=""></div>
-            <div class="people-text">各类传媒组织与社会机构
-            </div>
+          <div class="item" v-for="(item,index) in objectList" :key="index">
+            <div class="people-icon"><img :src="item.src" alt=""></div>
+            <div class="people-text">{{item.text}}</div>
           </div>
         </div>
-
+      </div>
+      <div class="product">
+        <h4 class="news-title">业务产品</h4>
+        <div class="one-bottom">
+          <div class="list">
+            <div v-for="(item,index) in productList" :key="index">
+              <img :src="item.src" alt="">
+              <p>{{item.text}}</p>
+            </div>
+          </div>
+          <div class="centerBar">
+            <p>1911学堂新闻传播学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的新闻系统单位内训项目。</p>
+          </div>
+        </div>
       </div>
       <div class="news-four">
-        <h4 class="news-title">学习内容</h4>
-        <div class="four-top">
-          <div class="newsWidth four-items clearfix">
-            <div class="item">
-              <i class="icon">1</i>
-              <span>综合媒介素养</span>
-            </div>
-            <div class="item two">
-              <i class="icon">2</i>
-              <span>媒体沟通</span>
-            </div>
-            <div class="item three">
-              <i class="icon">3</i>
-              <span>战略传播</span>
-            </div>
-            <div class="item four">
-              <i class="icon">4</i>
-              <span>舆论引导能力</span>
-            </div>
-            <div class="item">
-              <i class="icon">5</i>
-              <span>媒介经营管理</span>
-            </div>
-            <div class="item two">
-              <i class="icon">6</i>
-              <span>媒体融合发展与转型升级</span>
-            </div>
-            <div class="item three">
-              <i class="icon">7</i>
-              <span>广告营销</span>
-            </div>
-            <div class="item four">
-              <i class="icon">8</i>
-              <span>传媒经济</span>
-            </div>
-            <div class="item">
-              <i class="icon">9</i>
-              <span>公共关系</span>
-            </div>
-            <div class="item two">
-              <i class="icon">10</i>
-              <span>公益传播</span>
-            </div>
-
-          </div>
-        </div>
+        <h4 class="news-title">培养目标</h4>
         <div class="four-middle">
           1911学堂在线新闻传播学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。
         </div>
-        <div class="four-bottom">
-          <h4 class="news-title">学习收获</h4>
-          <p class="four-desc">在1911学堂在线新闻传播学院进行学习，可以了解到新闻传播的本质、移动互联网下新闻传播媒介变化、第五媒体的兴起和发展以及外来意识形态传播、互联网与新闻传播的关系等知识理念与传播思维导图，提升自身工作能力和思维广度与深度。</p>
+      </div>
+      <div class="college">
+        <h4 class="news-title">师资来源</h4>
+        <p>本学院授课师资来自以下及其他相关单位</p>
+        <div class="collegeList">
+          <img class="oneImg" v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
         </div>
       </div>
       <div class="news-five">
@@ -104,7 +61,7 @@
         <div class="four-text clearfix">
           <div class="four-left">
             <span class="circle"></span>
-            <span class="text">学员参加1911学堂在线新闻传播学院学习，学习结束后可申请参加相关考试，考核通过者将获得1911学堂结业证书。</span>
+            <span class="text">学员参加1911学堂新闻传播学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
           </div>
           <div class="four-right">
             <img src="http://static-image.1911edu.com/college-pic13.png" alt>
@@ -120,7 +77,50 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data () {
+    return {
+      productList: [
+        {
+          src: 'http://static-image.1911edu.com/production-news.png',
+          text: '线新闻传播学院'
+        },
+        {
+          src: 'http://static-image.1911edu.com/production-icon1.png',
+          text: '混合式标准项目'
+        },
+        {
+          src: 'http://static-image.1911edu.com/production-icon2.png',
+          text: '新闻与传播硕士（MJC）国际学位项目'
+        },
+      ],
+      objectList: [
+        {
+          src: 'http://static-image.1911edu.com/newsCo-icon3.png',
+          text: '国家党政机关领导干部'
+        },
+        {
+          src: 'http://static-image.1911edu.com/newsCo-icon4.png',
+          text: '企事业单位中高层管理者与基层骨干'
+        },
+        {
+          src: 'http://static-image.1911edu.com/newsCo-icon5.png',
+          text: '各类传媒组织与社会机构'
+        },
+      ],
+      collegeList: [
+        'http://static-image.1911edu.com/college_QH.png',
+        'http://static-image.1911edu.com/college_CD.png',
+        'http://static-image.1911edu.com/college_RD.png',
+        'http://static-image.1911edu.com/college_ZZF.png',
+        'http://static-image.1911edu.com/college_RSYJY.png',
+        'http://static-image.1911edu.com/college_ZGDX.png',
+        'http://static-image.1911edu.com/college_ZSCQ.png',
+        'http://static-image.1911edu.com/college_GJBQ.png',
+      ]
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
