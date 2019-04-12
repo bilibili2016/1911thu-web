@@ -141,8 +141,6 @@
         }
       }
 
-
-
       .target {
         p {
           width: 850px;
@@ -151,7 +149,6 @@
           line-height: 36px;
           color: #222;
         }
-
       }
 
       .study {
@@ -223,7 +220,7 @@
         .item {
           width: 205px;
           text-align: center;
-          margin: 0 30px;
+          margin-right: 50px;
 
           img {
             display: block;
@@ -238,12 +235,16 @@
             margin-top: 25px;
             line-height: 34px;
           }
+
+          &::last-child {
+            margin-right: 0;
+          }
         }
       }
 
       .leftBg-text {
         width: 1000px;
-        padding: 0 50px;
+        padding: 0 30px;
         height: 80px;
         background-color: #2F30E1;
         transform: skewX(-20deg);
@@ -255,7 +256,6 @@
           line-height: 80px;
           text-align: center;
           transform: skewX(20deg);
-
         }
       }
 
@@ -303,38 +303,174 @@
         }
       }
     }
+  }
+}
 
-    .teacher {
-      width: 1100px;
-      margin: 0 auto;
+.bottomBg {
+  background: url("http://static-image.1911edu.com/smartCollege_bg2.png") no-repeat;
+  background-size: 1920px 800px;
+  background-position: center -50px;
+  padding-bottom: 87px;
 
-      .teacherText {
-        text-align: center;
-        margin: 40px 0;
-        font-size: 20px;
+  .production {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    margin: 40px 0 30px 0;
+
+    .item {
+      width: 205px;
+      text-align: center;
+      margin: 0 30px;
+
+      img {
+        display: block;
+        width: 66px;
+        height: 66px;
+        margin: 0 auto;
       }
 
-      .school {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        flex-wrap: wrap;
-
-        img {
-          display: inline-block;
-          width: 345px;
-          height: 120px;
-          margin-right: 30px;
-          margin-bottom: 20px;
-
-          &:nth-child(3n+3),
-          &:last-child {
-            margin-right: 0;
-          }
-        }
+      p {
+        font-size: 20px;
+        color: #222;
+        margin-top: 25px;
+        line-height: 34px;
       }
     }
+  }
 
+  .leftBg-text {
+    width: 1000px;
+    padding: 0 50px;
+    height: 80px;
+    background-color: #2F30E1;
+    transform: skewX(-20deg);
+    margin: 30px auto 60px;
+
+    p {
+      font-size: 18px;
+      color: #fff;
+      line-height: 80px;
+      text-align: center;
+      transform: skewX(20deg);
+
+    }
+  }
+
+  .columns {
+    width: 1100px;
+    margin: 50px auto 0;
+
+    p {
+      float: left;
+      width: 853px;
+      font-size: 18px;
+      line-height: 36px;
+      text-indent: 2em;
+      margin-top: 16px;
+      padding: 22px 75px 20px 35px;
+      color: #fff;
+      background: url("http://static-image.1911edu.com/smartCollege_icon2.png") no-repeat;
+      background-size: cover;
+    }
+
+    img {
+      float: right;
+      width: 167px;
+      height: 211px;
+    }
+  }
+
+  .harvest {
+    width: 1100px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 5px 32px 0px rgba(16, 38, 147, 0.11);
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 54px 0 34px;
+
+    h2 {
+      margin: 0 0 50px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 36px;
+      text-indent: 2em;
+      margin: 0 56px;
+    }
+  }
+}
+
+.teacher {
+  width: 1100px;
+  margin: 0 auto;
+
+  .teacherText {
+    text-align: center;
+    margin: 40px 0;
+    font-size: 20px;
+  }
+
+  .school {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+
+    img {
+      display: inline-block;
+      width: 345px;
+      height: 120px;
+      margin-right: 30px;
+      margin-bottom: 20px;
+
+      &:nth-child(3n+3),
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+
+.attestation {
+  width: 100%;
+  // margin: 0 auto 40px;
+  padding-top: 74px;
+  background-color: #fff;
+
+  h2 {
+    margin: 0 auto 36px;
+  }
+
+  .clearfix {
+    width: 1025px;
+    margin: 0 auto;
+
+    .left {
+      width: 768px;
+      margin-right: 50px;
+      margin-top: 28px;
+
+      .circle {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        margin: 13px 15px 0 14px;
+        background-color: #102693;
+        vertical-align: top;
+      }
+
+      .text {
+        width: 723px;
+        display: inline-block;
+        font-size: 20px;
+        line-height: 34px;
+        vertical-align: top;
+      }
+    }
 
     .attestation {
       width: 100%;
