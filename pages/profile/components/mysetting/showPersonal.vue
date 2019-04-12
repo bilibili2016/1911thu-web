@@ -3,6 +3,10 @@
   <div class="psnInfo">
     <ul>
       <li>
+        <span>真实姓名：</span>
+        <span>{{psnForm.real_name}}</span>
+      </li>
+      <li>
         <span>学号：</span>
         <span>{{psnForm.student_number}}</span>
       </li>
@@ -44,32 +48,32 @@
 
 <script>
 export default {
-  props: ['psnForm'],
+  props: ["psnForm"],
   methods: {
     // 切换性别
     getSex(sex) {
       if (sex == 1) {
-        return '男'
+        return "男";
       } else if (sex == 2) {
-        return '女'
+        return "女";
       } else {
-        return '保密'
+        return "保密";
       }
     },
     // 格式化生日
     formatDate(date) {
-      if (date && date != '') {
-        let tmp = new Date(date)
-        let year = tmp.getFullYear()
-        let mon = tmp.getMonth() + 1
-        let day = tmp.getDate()
-        return year + '年' + mon + '月' + day + '日'
+      if (date && date != "") {
+        let tmp = new Date(date);
+        let year = tmp.getFullYear();
+        let mon = tmp.getMonth() + 1;
+        let day = tmp.getDate();
+        return year + "年" + mon + "月" + day + "日";
       } else {
-        return ''
+        return "";
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

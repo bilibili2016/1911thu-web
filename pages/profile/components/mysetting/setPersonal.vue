@@ -2,6 +2,9 @@
   <div>
     <div>
       <el-form :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
+        <el-form-item label="真实姓名" prop="nick_name">
+          <el-input v-model="psnForm.real_name" maxlength="20"></el-input>
+        </el-form-item>
         <el-form-item label="学号" prop="student_number">
           <el-input v-model="psnForm.student_number" readonly></el-input>
         </el-form-item>
@@ -55,6 +58,7 @@
           <el-button type="primary" class="submitAble" @click="onSubmit('psnForm')" round>提交</el-button>
         </el-form-item>
       </el-form>
+      <p class="alertText">您的个人信息与申请证书资料相关，请填写真实信息。</p>
     </div>
     <!-- 修改手机号弹窗 -->
     <div class="bindBg" v-show="showBindBg">
@@ -73,7 +77,7 @@ import { IEPopup } from "~/lib/util/helper";
 
 export default {
   props: ["data", "hasCompany"],
-  data () {
+  data() {
     var nickName = (rule, value, callback) => {
       if (!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(value)) {
         callback(
@@ -194,7 +198,7 @@ export default {
     ...mapGetters("auth", ["isAuthenticated"])
   },
   methods: {
-    provinceChange (val) {
+    provinceChange(val) {
       this.psnForm.city_name = "";
       this.psnForm.area_name = "";
       this.psnForm.city = "";
@@ -210,7 +214,7 @@ export default {
         }
       }
     },
-    cityChange (val) {
+    cityChange(val) {
       this.psnForm.area_name = "";
       this.psnForm.area = "";
       if (!this.city && this.city.length == 0) {
@@ -225,7 +229,7 @@ export default {
         }
       }
     },
-    areaChange (val) {
+    areaChange(val) {
       for (let item of this.area) {
         if (val == item.region_code) {
           this.psnForm.area_name = item.name;
@@ -234,7 +238,7 @@ export default {
       }
     },
     // 整理省市区
-    getRegion (data, val) {
+    getRegion(data, val) {
       let tmp = [];
       for (let item of data) {
         if (item.region_code == val) {
@@ -251,7 +255,7 @@ export default {
       return tmp;
     },
     // 获取省市区
-    getRegionList () {
+    getRegionList() {
       personalset.getRegionList({ region_code: "" }).then(res => {
         this.mapregionList = res.data.regionList;
         this.province = this.mapregionList.map(item => {
@@ -263,7 +267,7 @@ export default {
       });
     },
     // 获取职业列表
-    getPositionList () {
+    getPositionList() {
       personalset.positionList().then(res => {
         let tmp = res.data;
         this.options = tmp.map(item => {
@@ -272,7 +276,7 @@ export default {
       });
     },
     // 提交个 人信息表单
-    onSubmit (formName) {
+    onSubmit(formName) {
       if (this.psnForm.province !== "") {
         if (this.psnForm.city === "" || this.psnForm.area === "") {
           this.$message({
@@ -300,22 +304,22 @@ export default {
         }
       });
     },
-    getUserData () {
+    getUserData() {
       this.$emit("getUserData");
     },
     //修改手机号
-    modifyPhone () {
+    modifyPhone() {
       IEPopup("pane-tab-sixth", "-ms-page", 0);
 
       this.showBindBg = true;
     },
     //关闭弹框
-    close () {
+    close() {
       IEPopup("pane-tab-sixth", "relative", 1);
       this.showBindBg = false;
     },
     //绑定手机号
-    handleBindPhone () {
+    handleBindPhone() {
       IEPopup("pane-tab-sixth", "-ms-page", 0);
 
       this.showBindBg = true;
@@ -323,15 +327,15 @@ export default {
     }
   },
   watch: {
-    data (val) {
+    data(val) {
       this.psnForm = this.data;
     },
-    province (val) {
+    province(val) {
       this.city = this.getRegion(val, this.psnForm.province);
       this.area = this.getRegion(this.city, this.psnForm.city);
     }
   },
-  mounted () {
+  mounted() {
     this.psnForm = this.data;
     if (persistStore.get("gid") && persistStore.get("gid") == "tab-sixth") {
       this.getPositionList();
