@@ -2,7 +2,7 @@
   <div>
     <div>
       <el-form :model="psnForm" :rules="rules" ref="psnForm" label-width="135px" class="psnForm">
-        <el-form-item label="真实姓名" prop="nick_name">
+        <el-form-item label="真实姓名" prop="real_name">
           <el-input v-model="psnForm.real_name" maxlength="20"></el-input>
         </el-form-item>
         <el-form-item label="学号" prop="student_number">
@@ -121,6 +121,13 @@ export default {
         company_code: "" //所在公司名称
       },
       rules: {
+        real_name: [
+          {
+            required: true,
+            message: "请选择真实姓名",
+            trigger: "change"
+          }
+        ],
         nick_name: [
           { required: true, message: "昵称不能为空" },
           {
