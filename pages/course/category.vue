@@ -183,6 +183,9 @@ export default {
         this.loadList = true;
         category.getNewProject().then(res => {
           if (res.status === 0) {
+            for (let item of res.data.categoryList) {
+              item.category_name = item.category_name.replace('在线', '')
+            }
             this.handleData(this.allProjectData, res);
             this.loadList = false;
           }
