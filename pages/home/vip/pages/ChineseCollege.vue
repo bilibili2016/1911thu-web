@@ -103,7 +103,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       contentList: [
         "国学概论",
