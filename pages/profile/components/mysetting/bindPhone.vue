@@ -155,6 +155,7 @@ export default {
         } else {
           this.bindTelData.types = 4;
         }
+
         auth.smsCodes(this.bindTelData).then(response => {
           let types = response.status === 0 ? "success" : "error";
           message(this, types, response.msg);

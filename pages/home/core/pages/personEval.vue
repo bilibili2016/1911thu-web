@@ -64,23 +64,22 @@
           </div>
         </div>
       </div>
-      <div class="con-three">
+      <!-- <div class="con-three">
         <div class="three">
           <p>1911学堂人才测评体系用前沿和完善的技术方案，通过自动化处理、系统化对接、云端多地多时操作、大数据等技术，很好地将成功人士经验转化成为标准化的技术方案，从而有效的升级和再造培训人员的培养流程。
           </p>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 <script>
 import { setTitle } from "~/lib/util/helper";
 export default {
-  mounted () {
+  mounted() {
     setTitle("核心优势-人才测评-1911学堂");
   }
-
-}
+};
 </script>
 <style  scoped lang="scss">
 @import "~assets/style/core/personEval";

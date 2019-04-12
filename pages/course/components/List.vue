@@ -80,9 +80,18 @@ export default {
   },
   methods: {
     handleCollegeLink(item) {
-      this.$router.push(
-        `/home/vip/collegeInfo?id=${this.vid}&cid=${item.id}&title=`
-      );
+      this.$router.push({
+        path: "/home/vip/collegeDetail",
+        query: {
+          id: this.vid,
+          cid: item.id,
+          title: ""
+        }
+      });
+
+      // this.$router.push(
+      //   `/home/vip/collegeInfo?id=${this.vid}&cid=${item.id}&title=`
+      // );
     },
     // 大类 单个
     selectCid(item, index) {

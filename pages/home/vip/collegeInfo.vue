@@ -28,7 +28,12 @@
 
 <script>
 import { vip } from "@/lib/v1_sdk/index";
-import { matchSplits, setTitle, message, browserRedirect } from "@/lib/util/helper";
+import {
+  matchSplits,
+  setTitle,
+  message,
+  browserRedirect
+} from "@/lib/util/helper";
 import { mapState, mapActions, mapGetters } from "vuex";
 import CadreCollege from "@/pages/home/vip/pages/CadreCollege";
 import ChineseCollege from "@/pages/home/vip/pages/ChineseCollege";
@@ -49,9 +54,9 @@ export default {
     "v-eduCollege": EduCollege,
     "v-newsCollege": NewsCollege,
     "v-commercialCollege": CommercialCollege,
-    "v-cadreCollege": CadreCollege,
+    "v-cadreCollege": CadreCollege
   },
-  data () {
+  data() {
     return {
       collegeImg: ["", ""],
       bottom: true,
@@ -71,7 +76,7 @@ export default {
     };
   },
   methods: {
-    goVipDetail () {
+    goVipDetail() {
       this.$router.push({
         path: "/home/vip/collegeDetail",
         query: {
@@ -81,17 +86,19 @@ export default {
         }
       });
     },
-    goLink (link) {
-      this.$router.push(link)
+    goLink(link) {
+      this.$router.push(link);
     },
     // 跳转到项目分类
-    lookProject () {
+    lookProject() {
       this.$router.push(
-        `/course/category?cid=${this.relativeID}&cp=1&xid=0&pids=0&vid=${this.vipDetailData.id}`
+        `/course/category?cid=${this.relativeID}&cp=1&xid=0&pids=0&vid=${
+          this.vipDetailData.id
+        }`
       );
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
@@ -106,7 +113,7 @@ export default {
       });
     },
     // 设置图片宽度
-    setWidth () {
+    setWidth() {
       if (this.collegeImg.length == 0) {
         this.noCollege = false;
         return false;
@@ -131,7 +138,7 @@ export default {
       this.loading = false;
     },
     // 底部操作栏动态
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -144,13 +151,13 @@ export default {
         this.bottom = false;
       }
     },
-    init () {
+    init() {
       this.relativeID = matchSplits("cid");
       this.vipDetailData.id = matchSplits("id");
       this.title = matchSplits("title");
     }
   },
-  mounted () {
+  mounted() {
     this.loading = true;
     this.init();
     this.vipDetail();
@@ -158,11 +165,11 @@ export default {
     window.addEventListener("scroll", this.addClass);
   },
   watch: {
-    $route (v, oldv) {
+    $route(v, oldv) {
       this.init();
       this.vipDetail();
     },
-    title () {
+    title() {
       this.setWidth();
     }
   }
