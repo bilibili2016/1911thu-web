@@ -112,7 +112,7 @@ export default {
     },
     goVipInfo(vip) {
       this.$router.push({
-        path: "/home/vip/collegeInfo",
+        path: "/home/vip/collegeDetail",
         query: {
           id: vip.id,
           cid: vip.category_id,

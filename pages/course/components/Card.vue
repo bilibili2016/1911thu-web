@@ -230,7 +230,7 @@ export default {
     },
     vipGoodsDetail(item) {
       this.$router.push({
-        path: "/home/vip/collegeInfo",
+        path: "/home/vip/collegeDetail",
         query: {
           id: item.id,
           cid: item.category_id,

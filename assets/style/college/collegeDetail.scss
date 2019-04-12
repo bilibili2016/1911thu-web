@@ -167,7 +167,7 @@
         margin-bottom: 3px;
         background: url(http://static-image.1911edu.com/sportCollege_icon4.png) no-repeat;
         background-size: cover;
-        transform: rotate(180deg);
+        transform: rotateY(180deg);
       }
 
       &:after {
@@ -199,7 +199,6 @@
       &:before {
         transform: rotateY(180deg);
       }
-
     }
   }
 

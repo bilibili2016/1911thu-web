@@ -178,7 +178,7 @@ export default {
     college() {
       let VD = this.vipGoodsDetail;
       this.$router.push({
-        path: "/home/vip/collegeInfo",
+        path: "/home/vip/collegeDetail",
         query: {
           id: VD.vip_id,
           cid: VD.category_id,

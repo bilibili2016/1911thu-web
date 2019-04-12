@@ -277,7 +277,7 @@ export default {
             //绑定学院兑换码跳转到学院介绍页
             let vipGoodsDetail = res.data.vipGoodsDetail;
             this.$router.push({
-              path: "/home/vip/collegeInfo",
+              path: "/home/vip/collegeDetail",
               query: {
                 id: vipGoodsDetail.vip_id,
                 cid: vipGoodsDetail.category_id,
