@@ -4,14 +4,7 @@
     <i class="el-icon-back backPop" @click="back" v-show="!isFirstShow && isReturnShow"></i>
     <i class="el-icon-close closePop" @click="close"></i>
     <!-- 认证手机号码 -->
-    <el-form
-      v-show="isFirstShow"
-      :model="validataPhone"
-      ref="validataPhone"
-      status-icon
-      :rules="validataPhoneRules"
-      class="demo-ruleForm"
-    >
+    <el-form v-show="isFirstShow" :model="validataPhone" ref="validataPhone" status-icon :rules="validataPhoneRules" class="demo-ruleForm">
       <div class="formInner">
         <div class="first">
           <h4 class="clearfix">认证手机号码</h4>
@@ -29,14 +22,7 @@
       </div>
     </el-form>
     <!-- 修改手机号 -->
-    <el-form
-      v-show="!isFirstShow"
-      :model="bindTelData"
-      ref="bindTelData"
-      status-icon
-      :rules="bindwxRules"
-      class="demo-ruleForm"
-    >
+    <el-form v-show="!isFirstShow" :model="bindTelData" ref="bindTelData" status-icon :rules="bindwxRules" class="demo-ruleForm">
       <div class="formInner">
         <div class="two">
           <h4 class="clearfix">绑定手机</h4>
@@ -48,11 +34,7 @@
             <div class="getCode" @click="verifyRgTel">{{bindTelData.getCode}}</div>
           </el-form-item>
           <el-row>
-            <el-button
-              class="submit"
-              :disabled="!submitClick"
-              @click.native="submitPhone('bindTelData')"
-            >提交</el-button>
+            <el-button class="submit" :disabled="!submitClick" @click.native="submitPhone('bindTelData')">提交</el-button>
           </el-row>
         </div>
       </div>
@@ -67,7 +49,7 @@ import { message } from "~/lib/util/helper";
 
 export default {
   props: ["bindTelData", "numPhone"],
-  data () {
+  data() {
     return {
       codeInterval: null,
       isReturnShow: true,
@@ -113,18 +95,18 @@ export default {
     };
   },
   methods: {
-    back () {
+    back() {
       this.isFirstShow = true;
       this.initData();
     },
-    close () {
+    close() {
       this.$emit("close");
       this.isFirstShow = true;
       this.validataPhone.phones = "";
       this.initData();
     },
     //初始化数据
-    initData () {
+    initData() {
       this.bindTelData.phones = "";
       this.bindTelData.codes = "";
       clearInterval(this.codeInterval);
@@ -133,7 +115,7 @@ export default {
       this.codeClick = true;
     },
     //   下一步
-    nextStep (formName) {
+    nextStep(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           personalset.confirmPhoneByUser(this.validataPhone).then(res => {
@@ -147,7 +129,7 @@ export default {
       });
     },
     // 验证手机号是否存在
-    verifyRgTel () {
+    verifyRgTel() {
       if (this.bindTelData.seconds == 30 && this.codeClick) {
         this.codeClick = false;
         if (!/^[1][2,3,4,5,6,7,8,9][0-9]{9}$/.test(this.bindTelData.phones)) {
@@ -166,9 +148,13 @@ export default {
       }
     },
     //获取验证码
-    getCode () {
+    getCode() {
       if (this.bindTelData.seconds === 30) {
-        this.bindTelData.types = 4;
+        if (this.numPhone == "") {
+          this.bindTelData.types = 8;
+        } else {
+          this.bindTelData.types = 4;
+        }
         auth.smsCodes(this.bindTelData).then(response => {
           let types = response.status === 0 ? "success" : "error";
           message(this, types, response.msg);
@@ -188,7 +174,7 @@ export default {
       }
     },
     //提交
-    submitPhone (formName) {
+    submitPhone(formName) {
       if (this.submitClick) {
         this.submitClick = false;
         this.$refs[formName].validate(valid => {
@@ -197,7 +183,7 @@ export default {
             personalset.editPhone(this.bindTelData).then(res => {
               if (res.status == 0) {
                 message(this, "success", "绑定成功");
-                this.$emit('getUserData');
+                this.$emit("getUserData");
                 this.submitClick = true;
                 this.close();
               } else {
@@ -212,7 +198,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.$bus.$on("openTwo", () => {
       this.isFirstShow = false;
       this.isReturnShow = false;
