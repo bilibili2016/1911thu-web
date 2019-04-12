@@ -223,7 +223,7 @@
         .item {
           width: 205px;
           text-align: center;
-          margin-right: 50px;
+          margin: 0 30px;
 
           img {
             display: block;
@@ -237,10 +237,6 @@
             color: #222;
             margin-top: 25px;
             line-height: 34px;
-          }
-
-          &::last-child {
-            margin-right: 0;
           }
         }
       }
