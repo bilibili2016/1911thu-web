@@ -124,7 +124,7 @@ export default {
         real_name: [
           {
             required: true,
-            message: "请选择真实姓名",
+            message: "请填写真实姓名",
             trigger: "change"
           }
         ],
