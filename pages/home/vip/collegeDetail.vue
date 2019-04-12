@@ -25,12 +25,12 @@ export default {
     "v-info": Info,
     "v-vipbuy": VipBuy
   },
-  data () {
+  data() {
     return {
       vipPopShow: false,
       flag: true,
       categoryData: [],
-      vipInfo: '',
+      vipInfo: "",
       loadCourse: true,
       loadCourseAll: true,
       categoryForm: {
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid"]),
-    lookCourse () {
+    lookCourse() {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -70,7 +70,7 @@ export default {
       });
     },
     //申请认证
-    identificate () {
+    identificate() {
       if (persistStore.get("token")) {
         this.gidForm.gids = "tab-tenth";
         this.setGid(this.gidForm);
@@ -81,11 +81,11 @@ export default {
       }
     },
     //关闭购买弹窗
-    changeVipShow (val) {
+    changeVipShow(val) {
       this.vipPopShow = false;
     },
     //立即购买
-    buyVip () {
+    buyVip() {
       if (persistStore.get("token")) {
         this.vipPopShow = true;
       } else {
@@ -93,7 +93,7 @@ export default {
       }
     },
     // 课程 card 列表
-    getCourseCardList (itemCid, itemPid) {
+    getCourseCardList(itemCid, itemPid) {
       this.loadCourseAll = true;
       category.curriculumListNew(this.categoryForm).then(res => {
         if (res.status == 0) {
@@ -103,7 +103,7 @@ export default {
       });
     },
     //会员详情
-    vipDetail () {
+    vipDetail() {
       vip.vipGoodsDetail(this.vipDetailData).then(res => {
         if (res.status == 0) {
           this.vipInfo = res.data.vipGoodsDetail;
@@ -121,11 +121,11 @@ export default {
       });
     }
   },
-  mounted () {
+  mounted() {
     this.categoryForm.cids = matchSplits("cid");
     this.vipDetailData.id = matchSplits("id");
-    this.getCourseCardList()
-    this.vipDetail()
+    this.getCourseCardList();
+    this.vipDetail();
   }
 };
 </script>

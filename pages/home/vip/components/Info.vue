@@ -43,7 +43,7 @@ import { matchSplits } from "@/lib/util/helper";
 
 export default {
   props: ["vipInfo"],
-  data () {
+  data() {
     return {
       vid: "",
       cid: "",
@@ -54,14 +54,14 @@ export default {
     };
   },
   methods: {
-    buyVip () {
+    buyVip() {
       this.$emit("buyVip");
     },
-    identificate () {
+    identificate() {
       this.$emit("identificate");
     },
     // 底部操作栏动态
-    addClass () {
+    addClass() {
       this.windowHeight = document.body.scrollHeight;
       this.paperHeight = document.documentElement.clientHeight;
       this.scrollTop =
@@ -75,7 +75,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.vid = matchSplits("id");
     this.cid = matchSplits("cid");
 
