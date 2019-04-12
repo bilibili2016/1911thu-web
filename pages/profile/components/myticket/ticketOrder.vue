@@ -95,7 +95,7 @@ import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 export default {
   props: ["orderData"],
   watch: {
-    orderData () {
+    orderData() {
       this.ticketOrderData = this.orderData;
     }
   },
@@ -105,7 +105,7 @@ export default {
     "v-comfirm": TicketConfirm,
     "v-nomsg": NoMsg
   },
-  data () {
+  data() {
     return {
       noMsgTwl: {
         type: "myTicket",
@@ -136,7 +136,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid", "setKid"]),
     // 选择要开发票的订单
-    handleSelectSingle (item) {
+    handleSelectSingle(item) {
       let itemIndex = this.checkedArr.indexOf(item.id);
       if (itemIndex >= 0) {
         //未选中
@@ -162,7 +162,7 @@ export default {
       }
     },
     // 全选
-    handleSelectAll (val) {
+    handleSelectAll(val) {
       var checkboxList = document.getElementsByClassName("singleCheckbox");
 
       if (val) {
@@ -193,7 +193,7 @@ export default {
       this.orderNum = this.checkedArr.length;
     },
     // 展示修改发票信息弹框
-    showIoc () {
+    showIoc() {
       if (this.checkedArr.length > 0) {
         IEPopup("pane-tab-eighth", "-ms-page", 0);
         this.getLastTicket();
@@ -206,7 +206,7 @@ export default {
       }
     },
     // 获取上一次开发票的记录
-    getLastTicket () {
+    getLastTicket() {
       ticketorder.getLastTicket().then(res => {
         if (res.status == 0) {
           this.$bus.$emit("showConfirm", res.data, true);
@@ -217,7 +217,7 @@ export default {
     },
 
     //未开发票列表
-    getUnTicketData () {
+    getUnTicketData() {
       ticketorder.orderNotInvoice().then(response => {
         this.ticketOrderData = response.data.orderList;
         var checkboxList = document.getElementsByClassName("singleCheckbox");
@@ -227,39 +227,39 @@ export default {
       });
     },
     // 切换到开票历史
-    chengeItem () {
+    chengeItem() {
       this.$emit("chengeItem");
     },
     // 开纸质发票 提交发票的时候 返回 展示开发票第二步
-    showSecond () {
+    showSecond() {
       IEPopup("pane-tab-eighth", "-ms-page", 0);
       this.showTicket = true;
     },
     // 关闭表单 清数据
-    close () {
+    close() {
       IEPopup("pane-tab-eighth", "relative", 1);
       this.showInvoice = false;
       this.showTicket = false;
       persistStore.set("invoiceData", "");
     },
     // 关闭第一步 展示第二步 不清除缓存
-    closeFirst () {
+    closeFirst() {
       this.showInvoice = false;
       this.showTicket = true;
     },
     // 关闭第二步 返回第一步
-    handBack () {
+    handBack() {
       IEPopup("pane-tab-eighth", "-ms-page", 0);
       this.showInvoice = true;
       this.showTicket = false;
     },
     // 关闭第二步 展示第三部 不清除缓存（内部判断）
-    closeSecond () {
+    closeSecond() {
       IEPopup("pane-tab-eighth", "relative", 1);
       this.showTicket = false;
     },
     //课程详情
-    goCourseInfo (item, index) {
+    goCourseInfo(item, index) {
       this.kidForm.kids = item.id;
 
       this.courseUrl.kid = item.id;
@@ -267,13 +267,15 @@ export default {
       // this.$router.push(`/course/coursedetail?kid=${item.id}&bid=&page=0`)
     },
     //项目详情
-    goProjrctInfo (item) {
-      this.$router.push(`/project/projectdetail?kid=${item.id}&type=${item.project_type}`);
+    goProjrctInfo(item) {
+      this.$router.push(
+        `/project/projectdetail?kid=${item.id}&type=${item.project_type}`
+      );
     },
     // Vip详情
-    goVipInfo (vip) {
+    goVipInfo(vip) {
       this.$router.push({
-        path: "/home/vip/collegeInfo",
+        path: "/home/vip/collegeDetail",
         query: {
           id: vip.id,
           cid: vip.category_id,
@@ -282,21 +284,21 @@ export default {
       });
     },
     //列表详情
-    selectPayApply (item, type) {
+    selectPayApply(item, type) {
       persistStore.set("order", item.id);
       this.$emit("goTicketDetail", false);
     },
     // 时间戳转日期格式
-    exchangeTime (time) {
+    exchangeTime(time) {
       return timestampToTime(time);
     },
     //根据列表长度计算高度
-    computedHeight (len) {
+    computedHeight(len) {
       let height = len > 3 ? 3 * 140 + 60 : len * 140;
       return height;
     },
     //计算项目列表显示数量
-    computedLength (course, project, index) {
+    computedLength(course, project, index) {
       let projectLength = course.length > 3 ? 0 : 3 - course.length;
       if (index < projectLength) {
         return true;
@@ -305,7 +307,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.ticketOrderData = this.orderData;
     this.$bus.$on("CloseAllChecked", data => {
       this.handleSelectAll(false);

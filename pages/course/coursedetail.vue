@@ -11,7 +11,7 @@
         </div>
         <!-- 顶部的card -->
         <div class="main-header" v-loading="loadMsg">
-          <v-card  :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg" @refreshData="refreshData"></v-card>
+          <v-card :courseList="courseList" :config="config" :linkdata="linkseven" :privileMsg="privileMsg" :cardetails="courseList" @changePlayImg="changePlayImg" @refreshData="refreshData"></v-card>
         </div>
       </div>
       <div class="bottomCard">

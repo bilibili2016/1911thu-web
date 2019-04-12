@@ -78,7 +78,7 @@ import { store as persistStore } from "~/lib/core/store";
 
 export default {
   props: ["examineListData", "examinePagemsg", "examineLoading"],
-  data () {
+  data() {
     return {
       pageData: {
         id: "",
@@ -87,13 +87,13 @@ export default {
       vipForm: {
         vipId: "",
         type: 1
-      },
+      }
     };
   },
   methods: {
-    goVipDetail (item) {
+    goVipDetail(item) {
       this.$router.push({
-        path: "/home/vip/collegeInfo",
+        path: "/home/vip/collegeDetail",
         query: {
           id: item.id,
           cid: item.category_id,
@@ -102,22 +102,22 @@ export default {
       });
     },
     //去考试
-    gotoExamine (item) {
+    gotoExamine(item) {
       this.pageData.name = "intro";
       this.pageData.id = item.id;
       this.$bus.$emit("whichShow", this.pageData);
     },
     //查看考试记录
-    viewRecord (item) {
+    viewRecord(item) {
       this.pageData.id = item.id;
       this.pageData.name = "record";
       this.$bus.$emit("whichShow", this.pageData);
     },
     //审核中、申请证书、查看证书
-    handleLink (path) {
+    handleLink(path) {
       this.$router.push(path);
     },
-    validateExamPrivilege (recordId, id) {
+    validateExamPrivilege(recordId, id) {
       //验证考试权限
       this.vipForm.vipId = id;
       this.vipForm.type = "1";
@@ -131,14 +131,19 @@ export default {
           this.pageData.name = "info";
           this.$bus.$emit("whichShow", this.pageData);
         } else {
-          this.handleLink("/profile/components/myexamine/applicantCertificate?id=" + recordId + "&vipID=" + id)
+          this.handleLink(
+            "/profile/components/myexamine/applicantCertificate?id=" +
+              recordId +
+              "&vipID=" +
+              id
+          );
         }
       });
     }
   },
-  mounted () {
+  mounted() {
     persistStore.set("info", "");
-  },
+  }
 };
 </script>
 <style scoped lang="scss">
