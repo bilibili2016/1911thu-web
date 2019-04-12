@@ -4,10 +4,9 @@
     <div class="vipBanner"></div>
     <div class="container">
       <div class="intro">
-        <p>目前，大健康产业在发达国家的GDP占比均超过10%。预计到2020年，我国大健康产业将会占GDP的8%左右，到2030年，我国健康服务业总规模将达16万亿元。</p>
-        <p>随着大健康时代的到来，医药卫生事业正在实现由 “以治病为中心” 向 “以健康为中心” 的转变，高端养生保健人才缺口大，各细分的医疗健康产业都急需相应的人才。</p>
-        <p>1911学堂在线大健康学院集聚一批在医疗大数据、医疗人工智能、智慧健康、移动医疗、生物信息技术等领域的行业专家，面向大健康产业相关的党政机关与企事业单位人员提供系统性的教育培训解决方案，以培养覆盖全产业链条的大健康产业人才，包括政策制定及解读人才、机构管理型人才、企业经营型人才、产品推广型人才及健康管理人才等。</p>
-        <p>1911学堂与清华大学相关部门及专家教授成立横向课题，建立了在线大健康学院专家组，共同开展学术课题、课程研发及认证合作。学院专家组对在线大健康学院的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统等进行了充分论证与整体评估，并出具了课程认证与鉴定意见。</p>
+        <p>1911学堂携手清华大学药学院王钊教授成立科研课题，聘任王钊教授担任专家组组长，专家组组长邀请30名左右大健康领域专家组成1911学堂大健康学院专家组，共同研发大健康学院课程体系。学院专家组对大健康学院的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统等进行了充分论证与整体评估，并出具了课程认证与鉴定意见。</p>
+        <p>随着大健康时代的到来，医药卫生事业正在实现由“以治病为中心”向“以健康为中心”的转变，高端养生保健人才缺口大，各细分的医疗健康产业都急需相应的人才。</p>
+        <p>1911学堂集聚一批在医疗大数据、医疗人工智能、智慧健康、移动医疗、生物信息技术等领域的行业专家，面向大健康产业相关的党政机关与企事业单位人员提供系统性的教育培训解决方案，以培养覆盖全产业链条的大健康产业人才，包括政策制定及解读人才、机构管理型人才、企业经营型人才、产品推广型人才及健康管理人才等。</p>
       </div>
       <div class="studyInfo">
         <div class="main">
@@ -66,7 +65,7 @@
         </div>
         <div class="centerBg">
           <div class="main">
-            <h2>学习内容</h2>
+            <!-- <h2>学习内容</h2>
             <ul class="study">
               <li class="left">
                 <span>1</span>
@@ -116,15 +115,46 @@
                 <span>12</span>
                 <span>大健康产业投融资</span>
               </li>
-            </ul>
-            <div class="columns">
-              1911学堂在线大健康学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。
+            </ul> -->
+            <h2>业务产品</h2>
+            <div class="production">
+              <div class="item">
+                <img src="http://static-image.1911edu.com/production-health.png" alt="">
+                <p>在线大健康学院</p>
+              </div>
+              <div class="item">
+                <img src="http://static-image.1911edu.com/production-icon1.png" alt="">
+                <p>混合式标准项目</p>
+              </div>
+              <div class="item">
+                <img src="http://static-image.1911edu.com/production-icon2.png" alt="">
+                <p>健康管理硕士（MHA）国际学位项目</p>
+              </div>
             </div>
-            <h2>学习收获</h2>
+            <div class="centerBg-text">
+              <p>1911学堂大健康学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的健康产业单位内训项目。</p>
+            </div>
+            <h2>培养目标</h2>
+            <div class="columns">
+              1911学堂大健康学院的培养目标是全面助力大健康产业相关的机关与事业单位人员及企业管理者完善知识结构、提升认知水平，包括医药、医疗器械行业大中型企业高管，医疗投资、经营机构管理人员，卫生行政机构及医院医疗单位的干部管理人员，科研院所、行业协会负责人等，助力相关从业人员适应环境变化、跟上新时代的发展步伐。
+            </div>
+            <h2>师资来源</h2>
+            <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
+            <div class="school">
+              <img src="http://static-image.1911edu.com/college_QH.png" alt="">
+              <img src="http://static-image.1911edu.com/college_BD.png" alt="">
+              <img src="http://static-image.1911edu.com/college_ZKY.png" alt="">
+              <img src="http://static-image.1911edu.com/college_JFJYY.png" alt="">
+              <img src="http://static-image.1911edu.com/college_ZGYYXH.png" alt="">
+              <img src="http://static-image.1911edu.com/college_JBZX.png" alt="">
+              <img src="http://static-image.1911edu.com/college_YKY.png" alt="">
+              <img src="http://static-image.1911edu.com/college_WSYJZX.png" alt="">
+            </div>
+            <!-- <h2>学习收获</h2>
             <div class="harvest clearfix">
               <img class="fl" src="http://static-image.1911edu.com/healthCollege_icon13.png" alt="">
               <p class="fr">通过参加1911学堂在线大健康学院的学习，可以了解大健康产业及其与养老、医疗器械、中医药等行业相结合的发展趋势，掌握大健康产业知识及前沿的智能可穿戴、万物互联到全民健身的大数据服务，从而完善大健康相关知识结构、提升认知水平，适应环境变化、跟上新时代的发展步伐。</p>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="main">
@@ -133,7 +163,7 @@
             <div class="clearfix">
               <div class="left fl">
                 <span class="circle"></span>
-                <span class="text">学员参加1911学堂在线大健康学院学习，学习结束后可申请参加相关考试，考核通过者将获得1911学堂结业证书。</span>
+                <span class="text">学员参加1911学堂大健康学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
               </div>
               <div class="right fr">
                 <img src="http://static-image.1911edu.com/cadreCollege_icon2.png" alt>

@@ -1,115 +1,138 @@
 .examine {
-	.top-con {
-		height: 60px;
-		line-height: 60px;
-		border-bottom: 1px solid #e8d6f7;
-		padding-left: 30px;
-		font-size: 16px;
-		color: #222;
-	}
-	.certificateList {
-		min-height: 320px;
-		font-size: 16px;
-		color: #222;
-		.listTitle {
-			height: 60px;
-			line-height: 60px;
-			border-bottom: 1px solid #e8d6f7;
-			padding-left: 30px;
-		}
-		.lists {
-			padding: 0 30px;
-			.item {
-				width: 100%;
-				height: 160px;
-				border-bottom: 1px solid #eeeeee;
-				padding: 30px 0;
-				.item_left {
-					float: left;
-					height: 100px;
-					// vertical-align: middle;
-					img {
-						display: inline-block;
-						width: 160px;
-						height: 100px;
-						vertical-align: middle;
-						cursor: pointer;
-					}
-					.examInfo {
-						margin-left: 20px;
-						height: 100px;
-						line-height: 50px;
-						display: inline-block;
-						vertical-align: middle;
-						p {
-							width: 100%;
-							&.title {
-								cursor: pointer;
-							}
-							span {
-								color: #93999f;
-								font-size: 14px;
-								margin-right: 20px;
-								i {
-									display: inline-block;
-									width: 16px;
-									height: 16px;
-									vertical-align: middle;
-								}
-								.exam-study {
-									background: url('~assets/images/exam_study.png') no-repeat;
-									background-size: cover;
-									margin-bottom: 5px;
-								}
-								.exam-time {
-									background: url('~assets/images/icon_time.png') no-repeat;
-									background-size: cover;
-									margin-bottom: 3px;
-								}
-							}
-						}
-					}
-				}
-				.item_right {
-					float: right;
-					height: 100px;
-					.btn {
-						width: 110px;
-						height: 30px;
-						text-align: center;
-						line-height: 30px;
-						color: #fff;
-						font-size: 14px;
-						background-color: #773084;
-						border-radius: 4px;
-						cursor: pointer;
-						margin-left: 20px;
-						margin-top: 70px;
-						vertical-align: middle;
-						&:first-child {
-							margin-left: 0;
-						}
-						&:hover {
-							background-color: #5f068d;
-						}
-					}
-					.btn_two {
-						background-color: #fff;
-						color: #773084;
-						border: 1px solid #773084;
-						&:hover {
-							background-color: #5f068d;
-							color: #fff;
-						}
-					}
-					.btn_six {
-						background-color: #ccc;
-					}
-				}
-			}
-			.item:last-child {
-				border-bottom: none;
-			}
-		}
-	}
+  .top-con {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #e8d6f7;
+    padding-left: 30px;
+    font-size: 16px;
+    color: #222;
+  }
+
+
+}
+
+.certificateList {
+  min-height: 320px;
+  font-size: 16px;
+  color: #222;
+
+  .listTitle {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #e8d6f7;
+    padding-left: 30px;
+  }
+
+  .lists {
+    padding: 0 30px;
+
+    .item {
+      width: 100%;
+      height: 160px;
+      border-bottom: 1px solid #eeeeee;
+      padding: 30px 0;
+
+      .item_left {
+        float: left;
+        height: 100px;
+
+        // vertical-align: middle;
+        img {
+          display: inline-block;
+          width: 160px;
+          height: 100px;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+
+        .examInfo {
+          margin-left: 20px;
+          height: 100px;
+          line-height: 50px;
+          display: inline-block;
+          vertical-align: middle;
+
+          p {
+            width: 100%;
+
+            &.title {
+              cursor: pointer;
+            }
+
+            span {
+              color: #93999f;
+              font-size: 14px;
+              margin-right: 20px;
+
+              i {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                vertical-align: middle;
+              }
+
+              .exam-study {
+                background: url('~assets/images/exam_study.png') no-repeat;
+                background-size: cover;
+                margin-bottom: 5px;
+              }
+
+              .exam-time {
+                background: url('~assets/images/icon_time.png') no-repeat;
+                background-size: cover;
+                margin-bottom: 3px;
+              }
+            }
+          }
+        }
+      }
+
+      .item_right {
+        float: right;
+        height: 100px;
+
+        .btn {
+          width: 110px;
+          height: 30px;
+          text-align: center;
+          line-height: 30px;
+          color: #fff;
+          font-size: 14px;
+          background-color: #773084;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-left: 20px;
+          margin-top: 70px;
+          vertical-align: middle;
+
+          &:first-child {
+            margin-left: 0;
+          }
+
+          &:hover {
+            background-color: #5f068d;
+          }
+        }
+
+        .btn_two {
+          background-color: #fff;
+          color: #773084;
+          border: 1px solid #773084;
+
+          &:hover {
+            background-color: #5f068d;
+            color: #fff;
+          }
+        }
+
+        .btn_six {
+          background-color: #ccc;
+        }
+      }
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+  }
 }

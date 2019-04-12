@@ -15,7 +15,7 @@
 
   .container {
     background: url("http://static-image.1911edu.com/sportCollege_bg1.png") no-repeat;
-    background-position: center;
+    background-position: center -50px;
 
     .main {
       width: 1100px;
@@ -78,15 +78,15 @@
 
       &:before {
         margin-right: 20px;
-        margin-bottom: 3px;
+        margin-bottom: 5px;
         background: url("http://static-image.1911edu.com/sportCollege_icon3.png") no-repeat;
         background-size: cover;
+        transform: rotateX(180deg)
       }
 
       &:after {
         margin-left: 20px;
-        margin-bottom: 3px;
-
+        margin-bottom: 5px;
         background: url("http://static-image.1911edu.com/sportCollege_icon4.png") no-repeat;
         background-size: cover;
       }
@@ -188,7 +188,7 @@
     }
 
     .centerBg {
-      padding: 70px 0 90px 0;
+      padding: 70px 0;
       margin-bottom: 92px;
       background: url("http://static-image.1911edu.com/sportCollege_bg2.png") no-repeat;
       background-position: center;
@@ -199,71 +199,152 @@
       }
     }
 
-    .study {
-      width: 100%;
-      margin-top: 50px;
+    // .study {
+    //   width: 100%;
+    //   margin-top: 50px;
+    //   display: flex;
+    //   justify-content: space-between;
+    //   flex-wrap: wrap;
+    //   justify-content: flex-start;
+
+    //   li {
+    //     width: 25%;
+    //     font-size: 20px;
+    //     line-height: 50px;
+    //     margin-bottom: 20px;
+
+    //     span {
+    //       margin-right: 10px;
+
+    //       &:first-child {
+    //         width: 40px;
+    //         height: 40px;
+    //         color: #fff;
+    //         line-height: 40px;
+    //         text-align: center;
+    //         background: url("http://static-image.1911edu.com/sportCollege_icon11.png") no-repeat;
+    //         background-size: cover;
+    //         font-size: 24px;
+    //         font-weight: bold;
+    //       }
+    //     }
+    //   }
+    // }
+
+    // .columns {
+    //   width: 1100px;
+    //   padding: 40px 60px;
+    //   font-size: 21px;
+    //   color: #fff;
+    //   line-height: 41px;
+    //   text-indent: 2em;
+    //   margin: 35px 0 72px;
+    //   background-color: #3951a8;
+    //   border-radius: 10px;
+    // }
+
+    // .harvest {
+    //   font-size: 18px;
+    //   line-height: 30px;
+    //   text-indent: 2em;
+    //   margin-top: 62px;
+
+    //   p {
+    //     width: 540px;
+    //     // height: 310px;
+    //     padding: 60px 55px 97px 55px;
+    //     background: url("http://static-image.1911edu.com/sportCollege_study2.png") no-repeat;
+    //     background-size: cover;
+
+    //     &:first-child {
+    //       background: url("http://static-image.1911edu.com/sportCollege_study1.png") no-repeat;
+    //       background-size: cover;
+    //     }
+
+    //     &:last-child {
+    //       padding-bottom: 65px;
+    //     }
+    //   }
+    // }
+    .production {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
+      text-align: center;
       flex-wrap: wrap;
-      justify-content: flex-start;
 
-      li {
-        width: 25%;
-        font-size: 20px;
-        line-height: 50px;
-        margin-bottom: 20px;
+      .item {
+        width: 205px;
+        text-align: center;
+        margin-right: 50px;
 
-        span {
-          margin-right: 10px;
+        img {
+          display: block;
+          width: 66px;
+          height: 66px;
+          margin: 0 auto;
+        }
 
-          &:first-child {
-            width: 40px;
-            height: 40px;
-            color: #fff;
-            line-height: 40px;
-            text-align: center;
-            background: url("http://static-image.1911edu.com/sportCollege_icon11.png") no-repeat;
-            background-size: cover;
-            font-size: 24px;
-            font-weight: bold;
-          }
+        p {
+          font-size: 20px;
+          color: #222;
+          margin-top: 25px;
+          line-height: 34px;
+        }
+
+        &::last-child {
+          margin-right: 0;
         }
       }
     }
 
-    .columns {
-      width: 1100px;
-      padding: 40px 60px;
-      font-size: 21px;
-      color: #fff;
-      line-height: 41px;
-      text-indent: 2em;
-      margin: 35px 0 72px;
-      background-color: #3951a8;
-      border-radius: 10px;
-    }
-
-    .harvest {
-      font-size: 18px;
-      line-height: 30px;
-      text-indent: 2em;
-      margin-top: 62px;
+    .main-text {
+      width: 1000px;
+      height: 80px;
+      background-color: #2F30E1;
+      transform: skewX(-20deg);
+      margin: 30px 0 60px 0;
 
       p {
-        width: 540px;
-        // height: 310px;
-        padding: 60px 55px 97px 55px;
-        background: url("http://static-image.1911edu.com/sportCollege_study2.png") no-repeat;
-        background-size: cover;
+        font-size: 18px;
+        color: #fff;
+        line-height: 80px;
+        text-align: center;
+        transform: skewX(20deg);
 
-        &:first-child {
-          background: url("http://static-image.1911edu.com/sportCollege_study1.png") no-repeat;
-          background-size: cover;
-        }
+      }
+    }
 
+    .target {
+      text-align: center;
+      font-size: 18px;
+      line-height: 36px;
+      color: #222;
+    }
+
+    .teacherText {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 20px;
+    }
+
+    .school {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      flex-wrap: wrap;
+
+      img {
+        display: inline-block;
+        width: 345px;
+        height: 120px;
+        margin-right: 30px;
+        margin-bottom: 20px;
+
+        &:nth-child(3n+3),
         &:last-child {
-          padding-bottom: 65px;
+          margin-right: 0;
         }
+
       }
     }
 

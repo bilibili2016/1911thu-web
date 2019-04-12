@@ -4,15 +4,9 @@
     <div class="edu-banner"></div>
     <div class="edu-con">
       <div class="edu-one">
-        <p class="pCss">
-          随着《中国教育现代化2035》规划的出台，以及 “互联网+教育” 所带来影响的进一步深化，教育教学系统的结构和形态正在发生着变革与转型，这对互联网背景下的教育者能力和素质提出了越来越高的要求。
-        </p>
-        <p class="pCss">
-          为助力教育系统相关从业人员加快知识更新、转变思维方式、提高决策能力、改善管理模式，为我国教育事业培养更多高素质的人才， 1911学堂联合教育领域权威专家共同研发了在线教育学院。
-        </p>
-        <p class="pCss">
-          在线教育学院通过 “线上+线下” 的混合式教学服务，能够使中小学骨干教师创新教育理念，丰富教学方法，提升对教育教学活动的规划和实施能力；使校长及行政管理人员提高党建和教育管理水平，提升教育突发事件处置及应对能力。
-        </p>
+        <p class="pCss">随着《中国教育现代化2035》规划的出台，教育教学系统的结构和形态正在发生着变革与转型，这对当今时代教育者的能力和素质提出了越来越高的要求。</p>
+        <p class="pCss">为助力教育系统相关从业人员加快知识更新、转变思维方式、提高决策能力、改善管理模式，为我国教育事业培养更多高素质的人才，1911学堂联合教育领域权威专家共同研发了1911学堂教育学院，使中小学骨干教师创新教育理念，丰富教学方法，提升对教育教学活动的规划和实施能力；使校长及行政管理人员提高党建和教育管理水平，提升教育突发事件处置及应对能力。</p>
+        <p class="pCss">同时，为了助力大中小学生全面成长，教育学院还研发了面向中小学生的研学项目以及大学生学分认证项目。</p>
       </div>
       <div class="edu-two">
         <div class="two-con">
@@ -20,42 +14,45 @@
             <span>面向人群</span>
           </h4>
           <div class="two-items clearfix">
-            <div class="item">
-              <div class="people-icon"><img src="http://static-image.1911edu.com/edu-icon6.png" alt=""></div>
-              <div class="people-text">教育系统内的中小学校长</div>
-            </div>
-            <div class="item">
-              <div class="people-icon"><img src="http://static-image.1911edu.com/edu-icon7.png" alt=""></div>
-              <div class="people-text">骨干教师</div>
-            </div>
-            <div class="item">
-              <div class="people-icon"><img src="http://static-image.1911edu.com/edu-icon8.png" alt=""></div>
-              <div class="people-text">行政机构管理人员</div>
+            <div class="item" v-for="(item,index) in objectList" :key="index">
+              <div class="people-icon">
+                <img :src="item.src" alt=""></div>
+              <div class="people-text">{{item.text}}</div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="eduWidth edu-three">
-        <div class=" three-top">
-          <h4 class="edu-title"><span>学习内容</span></h4>
-          <div class=" three-items clearfix">
-            <div class="item" v-for="(item,index) in contentList" :key="index">
-              <i class="icon">{{1+index}}</i>
-              <span>{{item}}</span>
+      <div class="product">
+        <h4 class="edu-title">
+          <span>业务产品</span>
+        </h4>
+        <div class="one-bottom">
+          <div class="list">
+            <div v-for="(item,index) in productList" :key="index">
+              <img :src="item.src" alt="">
+              <p>{{item.text}}</p>
             </div>
           </div>
-          <div class="top-desc">
-            <p class="pCss">1911学堂在线教育学院的课程内容注重理论联系实际，教学过程中有丰富的教学设计及交互活动，能够充分满足学员的学习需求，从而有效提高学员发现问题、分析问题和解决问题的能力，有利于实现个人与社会的双重目标。</p>
+          <div class="centerBar">
+            <p>1911学堂教育学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的教育系统单位内训项目。</p>
           </div>
         </div>
-        <div class="three-middle">
-          <h4 class="edu-title"><span>学习收获</span></h4>
-          <div class="clearfix">
-            <div class="middle-left"><img src="http://static-image.1911edu.com/edu-icon5.png" alt=""></div>
-            <div class="middle-right">
-              <p class="pCss">通过1911学堂在线教育学堂可以了解到互联网+时代下的课程体系、授课师资、培养目标、技术平台、学习模式、测评体系、考试系统、教学设施等发生的变化，以及互联网背景下基于社会需求的教育人才培养模式和管理方式等知识技能。</p>
-            </div>
+      </div>
+      <div class="target">
+        <h4 class="edu-title">
+          <span>培养目标</span>
+        </h4>
+        <div class="centerBar">
+          1911学堂教育学院的培养目标是培养具有良好职业素养和较高业务能力、适应教育事业发展需求的教育管理人才队伍。通过“线上+线下”混合式学习模式，使中小学骨干教师创新教育教学理念、提升教学能力、丰富教学方法，提升对教育教学活动的规划和实施能力；使校长及行政管理人员提高党建和教育管理水平及教育突发事件舆情应对能力，从而助力教育系统相关从业人员适应环境变化、跟上新时代的发展步伐。
+        </div>
+      </div>
+
+      <div class="eduWidth edu-three">
+        <div class="college">
+          <h4 class="edu-title"><span>师资来源</span></h4>
+          <p>本学院授课师资来自以下及其他相关单位</p>
+          <div class="collegeList">
+            <img class="oneImg" v-for="(li,index) in collegeList" :key="index" :src="li" alt="">
           </div>
         </div>
         <div class="three-bottom">
@@ -63,7 +60,7 @@
           <div class="three-text clearfix">
             <div class="three-left">
               <span class="circle"></span>
-              <span class="text">学员参加1911学堂在线教育学院学习，学习结束后可申请参加相关考试，考核通过者将获得1911学堂结业证书。</span>
+              <span class="text">学员参加1911学堂教育学院在线学院或相关项目学习考核通过者将获得1911学堂结业证书。</span>
             </div>
             <div class="three-right">
               <img src="http://static-image.1911edu.com/college-pic13.png" alt>
@@ -80,7 +77,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       contentList: [
         "教育政策与宏观分析",
@@ -92,6 +89,53 @@ export default {
         "教学方法与策略",
         "教育管理的互联网思维",
         "科技创新与教育融合发展"
+      ],
+      objectList: [
+        {
+          src: 'http://static-image.1911edu.com/edu-icon1.png',
+          text: '大中小学生'
+        },
+        {
+          src: 'http://static-image.1911edu.com/edu-icon6.png',
+          text: '教育系统内的中小学校长'
+        },
+        {
+          src: 'http://static-image.1911edu.com/edu-icon7.png',
+          text: '骨干教师'
+        },
+        {
+          src: 'http://static-image.1911edu.com/edu-icon8.png',
+          text: '行政机构管理人员'
+        }
+      ],
+      productList: [
+        {
+          src: 'http://static-image.1911edu.com/production-edu.png',
+          text: '在线教育学院'
+        },
+        {
+          src: 'http://static-image.1911edu.com/production-icon1.png',
+          text: '混合式标准项目'
+        },
+        {
+          src: 'http://static-image.1911edu.com/production-icon2.png',
+          text: '教育硕士（MEd）国际学位项目'
+        },
+        {
+          src: 'http://static-image.1911edu.com/production-icon3.png',
+          text: '研学项目'
+        },
+        {
+          src: 'http://static-image.1911edu.com/production-icon4.png',
+          text: '学分认证项目'
+        },
+      ],
+      collegeList: [
+        'http://static-image.1911edu.com/college_QH.png',
+        'http://static-image.1911edu.com/college_BSD.png',
+        'http://static-image.1911edu.com/college_JYKY.png',
+        'http://static-image.1911edu.com/college_JYXH.png',
+        'http://static-image.1911edu.com/college_HDWYH.png',
       ]
     };
   }

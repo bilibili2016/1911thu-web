@@ -37,7 +37,7 @@ export default {
     "v-nomsg": NoMsg,
     "v-exampop": exampop
   },
-  data() {
+  data () {
     return {
       examRuleInfo: "",
       examRuleLoading: false,
@@ -60,15 +60,15 @@ export default {
   },
 
   methods: {
-    examineListChange() {
+    examineListChange () {
       this.$emit("examineListChange");
     },
     //关闭考试规则弹框
-    closeRulesPop() {
+    closeRulesPop () {
       this.isShowExamPop = false;
     },
     // 考试规则弹框
-    examRulesPop(type) {
+    examRulesPop (type) {
       IEPopup("pane-tab-tenth", "-ms-page", 0);
       this.vipForm.vipId = this.vipID;
       this.vipForm.type = type;
@@ -89,7 +89,7 @@ export default {
       });
     },
     // 开始考试，跳转正式或模拟试题页
-    examQuestion() {
+    examQuestion () {
       // this.pageData.id = this.vipID;
       examine.createExamRecordQuestion(this.vipForm).then(response => {
         // if (response.status == 100201) {
@@ -101,13 +101,13 @@ export default {
             //正式考试
             this.$router.push(
               "/profile/components/myexamine/answerQuestion?id=" +
-                response.data.exam_record_id
+              response.data.exam_record_id
             );
           } else {
             //模拟考试
             this.$router.push(
               "/profile/components/myexamine/simulationExam?id=" +
-                response.data.exam_record_id
+              response.data.exam_record_id
             );
           }
         } else {
@@ -121,7 +121,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     //默认显示证书列表页
     if (
       persistStore.get("whichIntro") &&
@@ -134,13 +134,6 @@ export default {
       this.isShowInfo = false;
       this.isShowRecord = false;
       persistStore.set("whichIntro", "");
-    } else if (persistStore.get("info") && persistStore.get("info").isInfo) {
-      //申请证书未填写个人信息-显示填写个人信息页
-      this.isShowInfo = true;
-      this.isShowIntro = false;
-      this.isShowList = false;
-      this.isShowRecord = false;
-      persistStore.set("info", { isInfo: false, isSave: true });
     }
 
     this.$bus.$on("whichShow", data => {

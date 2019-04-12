@@ -51,13 +51,11 @@
   </div>
 </template>
 <script>
-import { store as persistStore } from "~/lib/core/store";
-
 import { examine } from "~/lib/v1_sdk/index";
 import { message, matchSplits, getNet, IEPopup } from "@/lib/util/helper";
 export default {
   props: ["vipID"],
-  data() {
+  data () {
     return {
       isGoInfo: false,
       alertText: "",
@@ -79,12 +77,12 @@ export default {
   },
   methods: {
     //  回到VIP列表页
-    handleBack() {
+    handleBack () {
       this.pageData.name = "list";
       this.$bus.$emit("whichShow", this.pageData);
     },
     // 考试规则弹框
-    examRules(type) {
+    examRules (type) {
       this.$emit("examRulesPop", type);
       // IEPopup("pane-tab-tenth", "-ms-page", 0);
       // this.vipForm.vipId = this.vipID;
@@ -106,17 +104,17 @@ export default {
       // });
     },
     // 关闭规则弹框
-    closeRules() {
+    closeRules () {
       IEPopup("pane-tab-tenth", "relative", 1);
       this.showExamRules = false;
     },
-    goInfo() {
+    goInfo () {
       this.pageData.id = this.vipID;
       this.pageData.name = "info";
       this.$bus.$emit("whichShow", this.pageData);
     },
     //验证考试权限
-    validateExamPrivilege() {
+    validateExamPrivilege () {
       this.vipForm.vipId = this.vipID;
       this.vipForm.type = "1";
       examine.validateExamPrivilege(this.vipForm).then(response => {
@@ -141,7 +139,7 @@ export default {
       });
     },
     // 验证模拟考试权限
-    validateSimulationExam() {
+    validateSimulationExam () {
       this.vipForm.vipId = this.vipID;
       this.vipForm.type = "2";
       examine.validateExamPrivilege(this.vipForm).then(response => {
@@ -153,8 +151,7 @@ export default {
       });
     }
   },
-  mounted() {
-    persistStore.set("info", "");
+  mounted () {
     this.validateExamPrivilege();
     this.validateSimulationExam();
   }

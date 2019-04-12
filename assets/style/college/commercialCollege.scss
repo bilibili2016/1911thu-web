@@ -119,13 +119,57 @@
           margin-left: 80px;
         }
       }
+
+      .one-bottom {
+        .list {
+          display: flex;
+          justify-content: space-between;
+          text-align: center;
+
+          img {
+            width: 66px;
+            height: 66px;
+          }
+
+          p {
+            width: 210px;
+            font-size: 20px;
+            line-height: 34px;
+          }
+        }
+
+        .centerBar {
+          width: 1000px;
+          height: 80px;
+          line-height: 80px;
+          font-size: 18px;
+          color: #fff;
+          text-align: center;
+          margin: 20px auto 0;
+          background: #4862C7;
+          transform: skewX(-20deg);
+
+          p {
+            transform: skewX(20deg);
+          }
+        }
+
+      }
     }
 
     .commer-two {
       // height: 405px;
       background: url('http://static-image.1911edu.com/commer-bg2.png') no-repeat;
-      padding-top: 55px;
-      padding-bottom: 180px;
+      margin-top: -179px;
+      padding-top: 179px;
+      padding-bottom: 20px;
+
+      h5 {
+        margin: 28px 0 38px;
+        text-align: center;
+        font-size: 36px;
+        color: #fff;
+      }
 
       .commer-title {
         margin-top: 0;
@@ -156,21 +200,21 @@
 
         .item {
           float: left;
-          width: 330px;
-          margin-bottom: 30px;
+          width: 320px;
+          margin: 0 80px 30px;
 
           i {
             display: inline-block;
-            width: 41px;
-            height: 41px;
+            width: 30px;
+            height: 30px;
             text-align: center;
-            line-height: 41px;
+            line-height: 30px;
             font-size: 18px;
             color: #2537b7;
             background: #000;
             vertical-align: middle;
-            background: url('http://static-image.1911edu.com/commer-pic6.png') no-repeat;
-            background-size: cover;
+            border-radius: 50%;
+            background-color: #DEE2FC;
           }
 
           span {
@@ -190,9 +234,9 @@
       width: 1148px;
       height: 345px;
       margin: 0 auto;
-      margin-top: -140px;
       background: url('http://static-image.1911edu.com/commer-bg3.png') no-repeat;
       background-size: cover;
+      position: relative;
 
       h4.commer-title {
         margin-top: 0;
@@ -202,6 +246,30 @@
       p.pCss {
         width: 940px;
         margin: 0 auto;
+      }
+    }
+
+    .teacher {
+      width: 1100px;
+      margin: 0 auto;
+
+      p {
+        text-align: center;
+        font-size: 20px;
+        line-height: 34px;
+      }
+
+      .collegeList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 40px;
+
+        .oneImg {
+          width: 344px;
+          height: 120px;
+          margin-bottom: 20px;
+        }
       }
     }
 
@@ -225,7 +293,7 @@
           .circle {
             width: 14px;
             height: 14px;
-            background-color: #43a2ca;
+            background-color: #4856D0;
             margin-right: 15px;
             display: inline-block;
             vertical-align: top;
