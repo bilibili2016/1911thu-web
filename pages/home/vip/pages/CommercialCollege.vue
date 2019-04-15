@@ -82,20 +82,20 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       productList: [
         {
-          src: 'http://static-image.1911edu.com/production-commer.png',
-          text: '在线商学院'
+          src: "http://static-image.1911edu.com/production-commer.png",
+          text: "在线商学院"
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon1.png',
-          text: '混合式标准项目'
+          src: "http://static-image.1911edu.com/production-icon1.png",
+          text: "混合式标准项目"
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon2.png',
-          text: '教育硕士（MEd）国际学位项目'
+          src: "http://static-image.1911edu.com/production-icon2.png",
+          text: "教育硕士（MEd）国际学位项目"
         }
       ],
       studyList: [
@@ -104,15 +104,15 @@ export default {
         "提高果断科学的决策能力",
         "增加勇于开拓的创新精神",
         "增强统筹协调的组织才能",
-        "提升企业领导的人文素养",
+        "提升企业领导的人文素养"
       ],
       collegeList: [
-        'http://static-image.1911edu.com/college_QH.png',
-        'http://static-image.1911edu.com/college_BD.png',
-        'http://static-image.1911edu.com/college_ZZF.png',
-        'http://static-image.1911edu.com/college_RSYJY.png',
-        'http://static-image.1911edu.com/college_ZKY.png',
-        'http://static-image.1911edu.com/college_GJFGW.png',
+        "http://static-image.1911edu.com/college_QH.png",
+        "http://static-image.1911edu.com/college_BD.png",
+        "http://static-image.1911edu.com/college_ZZF.png",
+        "http://static-image.1911edu.com/college_RSYJY.png",
+        "http://static-image.1911edu.com/college_ZKY.png",
+        "http://static-image.1911edu.com/college_GJFGW.png"
       ]
     };
   }

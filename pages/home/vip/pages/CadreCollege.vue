@@ -54,7 +54,7 @@
           <div class="attestation clearfix">
             <div class="left">
               <span class="circle"></span>
-              <span class="text">学员参加1911学堂商学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
+              <span class="text">学员参加1911学堂干部学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
             </div>
             <div class="right">
               <img src="http://static-image.1911edu.com/cadreCollege_icon2.png" alt>
@@ -71,20 +71,20 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       productList: [
         {
-          src: 'http://static-image.1911edu.com/production-cadre.png',
-          text: '在线干部学院'
+          src: "http://static-image.1911edu.com/production-cadre.png",
+          text: "在线干部学院"
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon1.png',
-          text: '混合式标准项目'
+          src: "http://static-image.1911edu.com/production-icon1.png",
+          text: "混合式标准项目"
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon2.png',
-          text: '教育硕士（MEd）国际学位项目'
+          src: "http://static-image.1911edu.com/production-icon2.png",
+          text: "教育硕士（MEd）国际学位项目"
         }
       ],
       studyList: [
@@ -93,15 +93,15 @@ export default {
         "提高果断科学的决策能力",
         "增加勇于开拓的创新精神",
         "增强统筹协调的组织才能",
-        "提升党政管理的人文素养",
+        "提升党政管理的人文素养"
       ],
       collegeList: [
-        'http://static-image.1911edu.com/college_QH.png',
-        'http://static-image.1911edu.com/college_BD.png',
-        'http://static-image.1911edu.com/college_RD.png',
-        'http://static-image.1911edu.com/college_SKY.png',
-        'http://static-image.1911edu.com/college_ZKY.png',
-        'http://static-image.1911edu.com/college_ZGDX.png',
+        "http://static-image.1911edu.com/college_QH.png",
+        "http://static-image.1911edu.com/college_BD.png",
+        "http://static-image.1911edu.com/college_RD.png",
+        "http://static-image.1911edu.com/college_SKY.png",
+        "http://static-image.1911edu.com/college_ZKY.png",
+        "http://static-image.1911edu.com/college_ZGDX.png"
       ]
     };
   }
