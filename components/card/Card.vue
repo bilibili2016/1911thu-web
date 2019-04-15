@@ -129,20 +129,26 @@ export default {
         this.courseUrl.kid = item.id;
         open(this.courseUrl);
       } else {
-        // 分类列表页
-        if (this.cp === "0") {
+        if (window.location.search.indexOf('title') > -1) {
           // 课程-转到课程详情
           this.courseUrl.kid = item.id;
           open(this.courseUrl);
         } else {
-          // 项目-项目详情
-          this.$router.push({
-            path: "/project/projectdetail",
-            query: {
-              kid: item.id,
-              type: item.type
-            }
-          });
+          // 分类列表页
+          if (this.cp == "0") {
+            // 课程-转到课程详情
+            this.courseUrl.kid = item.id;
+            open(this.courseUrl);
+          } else {
+            // 项目-项目详情
+            this.$router.push({
+              path: "/project/projectdetail",
+              query: {
+                kid: item.id,
+                type: item.type
+              }
+            });
+          }
         }
       }
     },
