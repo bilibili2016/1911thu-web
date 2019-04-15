@@ -77,7 +77,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       contentList: [
         "教育政策与宏观分析",
@@ -92,50 +92,50 @@ export default {
       ],
       objectList: [
         {
-          src: 'http://static-image.1911edu.com/edu-icon1.png',
-          text: '大中小学生'
+          src: "http://static-image.1911edu.com/edu-icon1.png",
+          text: "大中小学生"
         },
         {
-          src: 'http://static-image.1911edu.com/edu-icon6.png',
-          text: '教育系统内的中小学校长'
+          src: "http://static-image.1911edu.com/edu-icon6.png",
+          text: "教育系统内的中小学校长"
         },
         {
-          src: 'http://static-image.1911edu.com/edu-icon7.png',
-          text: '骨干教师'
+          src: "http://static-image.1911edu.com/edu-icon7.png",
+          text: "骨干教师"
         },
         {
-          src: 'http://static-image.1911edu.com/edu-icon8.png',
-          text: '行政机构管理人员'
+          src: "http://static-image.1911edu.com/edu-icon8.png",
+          text: "行政机构管理人员"
         }
       ],
       productList: [
         {
-          src: 'http://static-image.1911edu.com/production-edu.png',
-          text: '在线教育学院'
+          src: "http://static-image.1911edu.com/production-edu.png",
+          text: "在线教育学院"
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon1.png',
-          text: '混合式标准项目'
+          src: "http://static-image.1911edu.com/production-icon1.png",
+          text: "混合式标准项目"
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon2.png',
-          text: '教育硕士（MEd）国际学位项目'
+          src: "http://static-image.1911edu.com/production-icon2.png",
+          text: "教育硕士（MEd）国际学位项目"
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon3.png',
-          text: '研学项目'
+          src: "http://static-image.1911edu.com/production-icon3.png",
+          text: "研学项目"
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon4.png',
-          text: '学分认证项目'
-        },
+          src: "http://static-image.1911edu.com/production-icon4.png",
+          text: "学分认证项目"
+        }
       ],
       collegeList: [
-        'http://static-image.1911edu.com/college_QH.png',
-        'http://static-image.1911edu.com/college_BSD.png',
-        'http://static-image.1911edu.com/college_JYKY.png',
-        'http://static-image.1911edu.com/college_JYXH.png',
-        'http://static-image.1911edu.com/college_HDWYH.png',
+        "http://static-image.1911edu.com/college_QH.png",
+        "http://static-image.1911edu.com/college_BSD.png",
+        "http://static-image.1911edu.com/college_JYKY.png",
+        "http://static-image.1911edu.com/college_JYXH.png",
+        "http://static-image.1911edu.com/college_HDWYH.png"
       ]
     };
   }
