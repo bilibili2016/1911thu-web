@@ -16,7 +16,7 @@
           <div v-if="famousList.length">
             <div class="teacherList">
               <div @click="getNewInfoList"></div>
-              <v-card :famousList="famousList" :config="config"></v-card>
+              <v-card :famousList="famousList" :config="config" @reservation="reservation"></v-card>
             </div>
             <div class="pagination" v-if="pagemsg.total>12">
               <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :pager-count="5" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
@@ -33,6 +33,7 @@
     <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn" style="cursor:pointer">
       <img src="http://static-image.1911edu.com/toDoTeacher-gif.gif" alt>
     </div>
+    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherInfo"></v-appointment>
   </div>
 </template>
 
@@ -42,6 +43,7 @@ import CustomCard from "@/pages/home/teacher/components/Card.vue";
 import { list } from "~/lib/v1_sdk/index";
 import Category from "@/pages/home/teacher/components/teacherCategory";
 import NoData from "@/components/common/NoData.vue";
+import Appointment from "@/pages/home/teacher/components/AppointmentTeacher";
 
 import { setTitle, matchSplits } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
@@ -51,7 +53,8 @@ export default {
     "v-card": CustomCard,
     "v-banner": CustomBanner,
     "v-category": Category,
-    "v-nodata": NoData
+    "v-nodata": NoData,
+    "v-appointment": Appointment,
   },
   data () {
     return {
@@ -109,10 +112,24 @@ export default {
         picture: "",
         short_name: "全部",
         teacherKindList: []
-      }
+      },
+      showAppointment: false,
+      teacherInfo: ''
     };
   },
   methods: {
+    reservation (teacher) {
+      if (persistStore.get("token")) {
+        this.teacherInfo = teacher
+        this.showAppointment = !this.showAppointment;
+      } else {
+        //   this.$router.push("/");
+        this.$bus.$emit("loginShow", true);
+      }
+    },
+    closeForm () {
+      this.showAppointment = !this.showAppointment;
+    },
     // 加入1911教师
     joinTeacher () {
       this.$router.push("/home/teacher/beTeacher");
