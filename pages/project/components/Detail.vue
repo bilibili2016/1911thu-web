@@ -2,9 +2,13 @@
   <div class="header-mask">
     <!-- 面包屑 收藏分享 -->
     <div class="main-crumb clearfix">
-      <!-- 面包屑组件 -->
-      <div class="fl">
-        <v-breadcrumb :config="BreadCrumb" class="BreadCrumb"></v-breadcrumb>
+      <!-- 面包屑 -->
+      <div class="breadCrumb">
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+          <el-breadcrumb-item :to="{ path: '/course/category?cid=0&cp=1&xid=0&pids=0&vid=' }">项目列表</el-breadcrumb-item>
+          <el-breadcrumb-item v-if='currentType==1'>项目详情</el-breadcrumb-item>
+          <el-breadcrumb-item v-else>定制项目详情</el-breadcrumb-item>
+        </el-breadcrumb>
       </div>
       <!-- 收藏分享 -->
       <!-- <div class="fr" v-if="projectType.types==1">
@@ -71,30 +75,21 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import Collection from "@/components/common/Collection.vue";
 import { projectdetail } from "@/lib/v1_sdk/index";
 import { store as persistStore } from "~/lib/core/store";
 import { open, matchSplits } from "@/lib/util/helper";
 export default {
   components: {
-    "v-breadcrumb": BreadCrumb,
     "v-collection": Collection
   },
   props: ["projectDetail", "projectType"],
-  data () {
+  data() {
     return {
       project: {
         projectId: "1"
       },
       patternArr: ["线上", "混合", "互动"],
-      BreadCrumb: {
-        type: "projectDetail",
-        home: true,
-        // project: '分类列表',
-        position: false, //是否显示当前位置
-        text: "项目详情"
-      },
       collectMsg: {
         types: 2,
         isCollect: 0
@@ -112,7 +107,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
     // 跳转到项目播放页
-    goProjectPlayer () {
+    goProjectPlayer() {
       if (persistStore.get("token")) {
         let urlLink = {
           base: "/project/projectPlayer",
@@ -125,7 +120,7 @@ export default {
       }
     },
     // 判断购物车数量
-    goodsNmber () {
+    goodsNmber() {
       if (!persistStore.get("token")) {
         this.$bus.$emit("loginShow", true);
         return false;
@@ -142,7 +137,7 @@ export default {
       }
     },
     // 项目加入购物车
-    addShoppingCart () {
+    addShoppingCart() {
       if (!persistStore.get("token")) {
         this.$bus.$emit("loginShow", true);
         return false;
@@ -174,7 +169,7 @@ export default {
     //   });
     // },
     // 立即购买
-    handleBuy (id) {
+    handleBuy(id) {
       if (!persistStore.get("token")) {
         this.$bus.$emit("loginShow", true);
         return false;
@@ -192,7 +187,7 @@ export default {
   },
   watch: {
     // 检测数据中的收藏 数据过来慢
-    projectDetail (val, old) {
+    projectDetail(val, old) {
       if (val.is_Collection) {
         this.collectMsg.isCollect = 1;
       } else {
@@ -200,14 +195,9 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.project.projectId = matchSplits("kid");
     this.currentType = matchSplits("type");
-    if (this.currentType === "1") {
-      this.BreadCrumb.text = "项目详情";
-    } else {
-      this.BreadCrumb.text = "定制项目详情";
-    }
   }
 };
 </script>

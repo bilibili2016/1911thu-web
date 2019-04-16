@@ -3,8 +3,14 @@
     <div class="news-banner">
       <img :src="bannerImg" alt="">
     </div>
-    <!-- 面包屑组件 -->
-    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+    <!-- 面包屑 -->
+    <div class="breadCrumb">
+      <span>当前位置：</span>
+      <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>新闻资讯</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <!-- 新闻内容 -->
     <div class="detail">
       <div class="newsContent" v-loading='loading'>
@@ -38,28 +44,20 @@
 import CustomBanner from "@/components/common/Banner.vue";
 import { news } from "~/lib/v1_sdk/index";
 import { timestampToTime, message } from "~/lib/util/helper";
-import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import newsPay from "@/pages/home/news/components/newsPay.vue";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
   components: {
     "v-banner": CustomBanner,
-    "v-breadcrumb": BreadCrumb,
     "v-pay": newsPay
   },
-  data () {
+  data() {
     return {
       nid: "",
       isShowpayPopup: false,
       // isShowpayBar: false,
       payNewsDetail: "",
-      BreadCrumb: {
-        type: "newsDetail",
-        home: true,
-        position: true, //是否显示当前位置
-        text: "新闻资讯"
-      },
       bannerImg: "http://static-image.1911edu.com/profile_banner03.png",
       newsDetail: {},
       loading: true,
@@ -82,18 +80,18 @@ export default {
     };
   },
   methods: {
-    getMore (item) {
+    getMore(item) {
       this.$router.push(item);
     },
-    requestNews (flag) {
+    requestNews(flag) {
       this.getNewInfoDetail(this.nid, flag);
     },
-    nextPage (id) {
+    nextPage(id) {
       if (!id) return;
       this.$router.push(`/home/news/${id}`);
     },
     // 获取资讯详情
-    getNewInfoDetail (id, flag) {
+    getNewInfoDetail(id, flag) {
       let me = this;
       if (!id) return;
       let newsId = {
@@ -144,7 +142,7 @@ export default {
       });
     },
     //支付新闻
-    handlepayNews () {
+    handlepayNews() {
       // this.handleSignOut();
       if (persistStore.get("token")) {
         this.isShowpayPopup = true;
@@ -153,11 +151,11 @@ export default {
       }
     },
     //关闭支付弹窗
-    closePop () {
+    closePop() {
       this.isShowpayPopup = false;
     }
   },
-  mounted () {
+  mounted() {
     this.nid = window.location.pathname.split("/")[3];
     this.getNewInfoDetail(this.nid);
     this.$bus.$on("renewsDetailData", data => {
