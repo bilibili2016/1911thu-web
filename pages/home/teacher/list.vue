@@ -33,17 +33,19 @@
     <div class="joinTeacher" @click="joinTeacher" v-show="isShowBtn" style="cursor:pointer">
       <img src="http://static-image.1911edu.com/toDoTeacher-gif.gif" alt>
     </div>
-    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherInfo"></v-appointment>
+    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherInfo" @goPay="goPay" :userInfo="userInfo"></v-appointment>
+    <v-pay v-if="showPay" @closePayed="closePayed" :userInfo="userInfo" :teacherInfo="teacherInfo" :orderId="orderId"></v-pay>
   </div>
 </template>
 
 <script>
 import CustomBanner from "@/components/common/Banner.vue";
 import CustomCard from "@/pages/home/teacher/components/Card.vue";
-import { list } from "~/lib/v1_sdk/index";
+import { list, banner } from "~/lib/v1_sdk/index";
 import Category from "@/pages/home/teacher/components/teacherCategory";
 import NoData from "@/components/common/NoData.vue";
 import Appointment from "@/pages/home/teacher/components/AppointmentTeacher";
+import Pay from "@/pages/home/teacher/components/Pay.vue";
 
 import { setTitle, matchSplits } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
@@ -55,6 +57,7 @@ export default {
     "v-category": Category,
     "v-nodata": NoData,
     "v-appointment": Appointment,
+    "v-pay": Pay,
   },
   data () {
     return {
@@ -114,24 +117,32 @@ export default {
         teacherKindList: []
       },
       showAppointment: false,
-      teacherInfo: ''
+      teacherInfo: '',
+      showPay: false,
+      userInfo: '',
+      orderId: ''
     };
   },
   methods: {
+    goPay (id) {
+      this.showPay = true
+      this.orderId = id
+    },
+    // 支付弹框关闭的回调
+    closePayed () {
+      this.showPay = !this.showPay
+    },
     reservation (teacher) {
       if (persistStore.get("token")) {
+        this.getUserInfo()
         this.teacherInfo = teacher
         this.showAppointment = !this.showAppointment;
-        document.getElementsByTagName("body")[0].style.overflowY = 'hidden'
       } else {
         this.$bus.$emit("loginShow", true);
       }
     },
     closeForm () {
       this.showAppointment = !this.showAppointment;
-      if (!this.showAppointment) {
-        document.getElementsByTagName("body")[0].style.overflowY = 'auto'
-      }
     },
     // 加入1911教师
     joinTeacher () {
@@ -306,6 +317,13 @@ export default {
       this.childList = this.categoryData[this.categoryIndex].childList;
       this.sortData = this.categoryData[this.categoryIndex].teacherKindList;
     },
+    getUserInfo () {
+      banner.getUserInfo().then(res => {
+        if (res.status === 0) {
+          this.userInfo = res.data.userInfo;
+        }
+      });
+    },
     addClass () {
       if (
         document.getElementById("rightCon") &&
@@ -322,6 +340,7 @@ export default {
   mounted () {
     setTitle("名师智库-1911学堂");
     this.getHeaderList();
+    this.getUserInfo()
     // this.initTeacherList();
     this.teacherCompanyList();
     this.introduce = this.initIntro;
