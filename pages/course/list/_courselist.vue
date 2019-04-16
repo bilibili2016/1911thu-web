@@ -1,37 +1,13 @@
 <template>
-  <div
-    class="goodLesson"
-    v-loading="loading"
-  >
-    <div
-      class="topImg"
-      :class="{
+  <div class="goodLesson" v-loading="loading">
+    <div class="topImg" :class="{
       projectImg:cidNumber==='0', courseImg:cidNumber==='1', goodCourseImg:cidNumber==='2', freeImg:cidNumber==='3',
-    }"
-    >
+    }">
     </div>
-    <!-- 面包屑组件 -->
-    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
     <div>
-      <v-card
-        :courseList="courseList"
-        :config="config"
-      ></v-card>
-      <div
-        class="pagination"
-        v-if="pageMsgs"
-      >
-        <el-pagination
-          :id="pagemsg.total"
-          v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize"
-          background
-          layout="prev, pager, next"
-          :page-size="pagemsg.pagesize"
-          :page-count="pagemsg.pagesize"
-          :current-page="pagemsg.page"
-          :total="pagemsg.total"
-          @current-change="selectPages"
-        ></el-pagination>
+      <v-card :courseList="courseList" :config="config"></v-card>
+      <div class="pagination" v-if="pageMsgs">
+        <el-pagination :id="pagemsg.total" v-show="pagemsg.total!='0' && pagemsg.total>pagemsg.pagesize" background layout="prev, pager, next" :page-size="pagemsg.pagesize" :page-count="pagemsg.pagesize" :current-page="pagemsg.page" :total="pagemsg.total" @current-change="selectPages"></el-pagination>
       </div>
     </div>
   </div>
@@ -40,12 +16,10 @@
 <script>
 import CustomCard from "@/pages/course/components/ListCard.vue";
 import { categorylist } from "~/lib/v1_sdk/index";
-import BreadCrumb from "@/components/common/BreadCrumb.vue";
 import { message, setTitle } from "~/lib/util/helper";
 export default {
   components: {
-    "v-card": CustomCard,
-    "v-breadcrumb": BreadCrumb
+    "v-card": CustomCard
   },
   data() {
     return {
@@ -53,12 +27,6 @@ export default {
       freeImg: "http://static-image.1911edu.com/banner-free.png",
       courseImg: "http://static-image.1911edu.com/banner-course.jpg",
       goodCourseImg: "http://static-image.1911edu.com/banner-goodCourse.png",
-      BreadCrumb: {
-        type: "goodlesson",
-        home: true,
-        position: true, //是否显示当前位置
-        text: ""
-      },
       config: {
         card_type: "goodlesson",
         teacher: false
@@ -112,7 +80,6 @@ export default {
           this.courseList = response.data.curriculumProjectList;
           this.pagemsg.total = Number(response.data.pageCount);
           this.coursename = "混合式项目";
-          this.BreadCrumb.text = this.coursename;
           this.pageMsgs = true;
         }
       });
@@ -126,7 +93,6 @@ export default {
           this.courseList = response.data.curriculumList;
           this.pagemsg.total = Number(response.data.pageCount);
           this.coursename = "最新课程";
-          this.BreadCrumb.text = this.coursename;
           this.pageMsgs = true;
         }
       });
@@ -142,7 +108,6 @@ export default {
             this.courseList = response.data.curriculumList;
             this.pagemsg.total = Number(response.data.pageCount);
             this.coursename = "精品好课";
-            this.BreadCrumb.text = this.coursename;
             this.pageMsgs = true;
           }
         });
@@ -156,7 +121,6 @@ export default {
           this.courseList = response.data.curriculumList;
           this.pagemsg.total = Number(response.data.pageCount);
           this.coursename = "限时免费";
-          this.BreadCrumb.text = this.coursename;
           this.pageMsgs = true;
         }
       });

@@ -1,34 +1,28 @@
 <template>
   <div class="newsDetail">
     <div class="news-banner">
-      <img
-        :src="bannerImg"
-        alt=""
-      >
+      <img :src="bannerImg" alt="">
     </div>
-    <!-- 面包屑组件 -->
-    <v-breadcrumb :config="BreadCrumb"></v-breadcrumb>
+    <!-- 面包屑 -->
+    <div class="breadCrumb">
+      <span>当前位置：</span>
+      <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>新闻资讯</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+
     <!-- 新闻内容 -->
     <div class="detail">
-      <div
-        class="newsContent"
-        v-loading='loading'
-      >
+      <div class="newsContent" v-loading='loading'>
         <h3>{{newsDetail.title}}</h3>
         <p class="time">{{newsDetail.create_time}}&nbsp;&nbsp;&nbsp;新闻来源：{{newsDetail.source}}</p>
         <!-- <h4 class="source" v-if="newsDetail.source">新闻来源：{{newsDetail.source}}</h4> -->
-        <div
-          class="newsInner"
-          v-html="newsDetail.content"
-        ></div>
+        <div class="newsInner" v-html="newsDetail.content"></div>
         <h5 class="author" v-if="newsDetail.author">责任编辑：{{newsDetail.author}}</h5>
         <div class="next clearfix">
-          <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)" >上一篇&nbsp;&nbsp;&nbsp;&nbsp;{{beforeNews.title}}</span>
-          <span
-            class="fr"
-            v-if="afterNews"
-            @click="getNewInfoDetail(afterNews.id)"
-          >下一篇&nbsp;&nbsp;&nbsp;&nbsp;{{afterNews.title}}</span>
+          <span class="fl" v-if="beforeNews" @click="getNewInfoDetail(beforeNews.id)">上一篇&nbsp;&nbsp;&nbsp;&nbsp;{{beforeNews.title}}</span>
+          <span class="fr" v-if="afterNews" @click="getNewInfoDetail(afterNews.id)">下一篇&nbsp;&nbsp;&nbsp;&nbsp;{{afterNews.title}}</span>
         </div>
       </div>
     </div>
@@ -39,20 +33,12 @@
 import CustomBanner from "@/components/common/Banner.vue";
 import { news } from "~/lib/v1_sdk/index";
 import { timestampToTime, message } from "~/lib/util/helper";
-import BreadCrumb from "@/components/common/BreadCrumb.vue";
 export default {
   components: {
-    "v-banner": CustomBanner,
-    "v-breadcrumb": BreadCrumb
+    "v-banner": CustomBanner
   },
   data() {
     return {
-      BreadCrumb: {
-        type: "newsDetail",
-        home: true,
-        position: true, //是否显示当前位置
-        text: "新闻资讯"
-      },
       bannerImg: "http://static-image.1911edu.com/profile_banner03.png",
       newsDetail: {},
       loading: true,
