@@ -27,11 +27,9 @@
       <div class="con-item name clearfix">
         <div class="fl">请选择咨询日期：</div>
         <div class="fr">
-          <!-- <el-date-picker v-model="teacherForm.appointmentDate" type="datetime" placeholder="选择日期时间" default-time="12:00" :picker-options="pickerOptions1">
-          </el-date-picker> -->
-          <el-date-picker v-model="teacherForm.appointmentDate" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期" :picker-options="pickerOptions1">
+          <el-date-picker v-model="teacherForm.appointmentDate" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期" :picker-options="pickerOptions">
           </el-date-picker>
-          <el-time-select v-model="teacherForm.appointmentTime" :picker-options="{start: '09:00',step: '01:00',end: '20:00'}" placeholder="选择时间">
+          <el-time-select v-model="teacherForm.appointmentTime" :picker-options="{start: '08:00',step: '01:00',end: '20:00'}" placeholder="选择时间">
           </el-time-select>
         </div>
       </div>
@@ -76,7 +74,7 @@ export default {
   props: ["teacherInfo", 'userInfo'],
   data () {
     return {
-      pickerOptions1: {
+      pickerOptions: {
         disabledDate (time) {
           return time.getTime() <= Date.now();
         }
@@ -161,11 +159,6 @@ export default {
       teacherInfo.teacherBespoke(this.teacherForm).then(response => {
         //不需要验证是否登录
         if (response.status === 0) {
-          message(
-            this,
-            "success",
-            "提交成功，我们的客服人员会尽快与您取得联系！"
-          );
           this.closeForm()
           this.$emit('goPay', response.data.id)
         } else {
@@ -173,9 +166,7 @@ export default {
         }
       });
     },
-  },
-  watch: {
-    userInfo () {
+    update () {
       this.teacherForm.name = this.userInfo.real_name
       this.teacherForm.tel = this.userInfo.user_name
       if (this.teacherForm.name) {
@@ -183,14 +174,15 @@ export default {
       }
     }
   },
+  watch: {
+    userInfo () {
+      this.update()
+    }
+  },
   mounted () {
     this.teacherForm.teacherName = this.teacherInfo.teacher_name
     this.teacherForm.teacherId = this.teacherInfo.id
-    this.teacherForm.name = this.userInfo.real_name
-    this.teacherForm.tel = this.userInfo.user_name
-    if (this.teacherForm.name) {
-      this.teacherForm.hasName = true
-    }
+    this.update()
   },
 
 }

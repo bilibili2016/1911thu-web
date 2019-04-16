@@ -11,7 +11,7 @@
           </div>
           <div>
             <p>咨询的导师：{{teacherInfo.teacher_name}}</p>
-            <p>咨询费用：0.01元</p>
+            <p>咨询费用：{{produceOrderInfo.price}}元</p>
           </div>
         </div>
         <div class="code">
@@ -29,7 +29,10 @@
             </div>
           </div>
         </div>
-        <div class="bottom"></div>
+        <div class="bottom">
+          <!-- <p>截止支付时间：{{endTime}}</p>
+          <p>倒计时：{{minute}}分{{second}}秒</p> -->
+        </div>
       </div>
       <!-- 支付成功 -->
       <div class="paySuccess" v-show="paySuccess">
@@ -37,8 +40,8 @@
         <img src="http://static-image.1911edu.com/success.png" alt>
         <h5>支付成功</h5>
         <div class="goodsTime">
-          <p>尊敬的学员，您预约的许成钢老师咨询服务将于</p>
-          <p>2019年3月29日10:00-10:30开始进行,</p>
+          <p>尊敬的学员，您预约的{{teacherInfo.teacher_name}}老师咨询服务将于</p>
+          <p>{{startTime}} ~ {{endTime}}开始进行,</p>
           <p>请准时进入直播间。</p>
         </div>
         <div class="goodsBtn">
@@ -61,12 +64,13 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 import VueQrcode from '@xkeshi/vue-qrcode'
 import { store as persistStore } from '~/lib/core/store'
 import { home, pay, wepay } from '~/lib/v1_sdk/index'
-import { matchSplits, getNet } from '@/lib/util/helper'
+import { matchSplits, getNet, timestampToTime } from '@/lib/util/helper'
 Vue.component(VueQrcode.name, VueQrcode)
 export default {
   props: ['config', 'userInfo', 'teacherInfo', 'orderId'],
   data () {
     return {
+      produceOrderInfo: '',
       pay: true,
       paySuccess: false,
       payError: false,
@@ -84,6 +88,11 @@ export default {
         gids: ''
       },
       socket: '',
+      startTime: '',
+      endTime: '',
+      minute: '',
+      second: '',
+      interval: ''
     }
   },
   computed: {
@@ -106,7 +115,29 @@ export default {
         this.alipay = response.data.qr_code
         this.loading = false
         this.flag = true
+        this.startTime = timestampToTime(response.data.produceOrderInfo.start_time)
+        this.endTime = timestampToTime(response.data.produceOrderInfo.end_time)
+        // this.changeTime(response.data.produceOrderInfo.end_time - Math.round(new Date() / 1000))
       })
+    },
+    // 转换时间格式
+    changeTime (time) {
+      if (time <= 0) {
+        clearInterval(this.interval);
+        return false;
+      }
+      this.minute = parseInt(time / 60);
+      this.second = time % 60;
+      this.interval = setInterval(() => {
+        this.second > 0
+          ? this.second--
+          : this.minute > 0
+            ? (this.minute-- , (this.second = 59))
+            : (this.minute = 0);
+        if (this.second == 0 && this.minute == 0) {
+          clearInterval(this.interval);
+        }
+      }, 1000);
     },
     getStatus () {
       let that = this
@@ -144,5 +175,5 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@import "~assets/style/components/pay.scss";
+@import "~assets/style/teacher/pay.scss";
 </style>
