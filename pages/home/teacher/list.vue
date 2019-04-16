@@ -122,13 +122,16 @@ export default {
       if (persistStore.get("token")) {
         this.teacherInfo = teacher
         this.showAppointment = !this.showAppointment;
+        document.getElementsByTagName("body")[0].style.overflowY = 'hidden'
       } else {
-        //   this.$router.push("/");
         this.$bus.$emit("loginShow", true);
       }
     },
     closeForm () {
       this.showAppointment = !this.showAppointment;
+      if (!this.showAppointment) {
+        document.getElementsByTagName("body")[0].style.overflowY = 'auto'
+      }
     },
     // 加入1911教师
     joinTeacher () {

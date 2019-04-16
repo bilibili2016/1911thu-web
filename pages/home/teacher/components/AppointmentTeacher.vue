@@ -9,13 +9,13 @@
       <div class="con-item name clearfix">
         <div class="fl">您的联系方式：</div>
         <div class="fr">
-          <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasName" placeholder="请填写您的联系方式"></el-input>
+          <el-input v-model="teacherForm.tel" :disabled="teacherForm.hasTel" placeholder="请填写您的联系方式"></el-input>
         </div>
       </div>
       <div class="con-item name clearfix">
-        <div class="fl">用户昵称：</div>
+        <div class="fl">真实姓名：</div>
         <div class="fr">
-          <el-input v-model="teacherForm.name" :disabled="teacherForm.hasTel" placeholder="请填写您的用户昵称"></el-input>
+          <el-input v-model="teacherForm.name" :disabled="teacherForm.hasName" placeholder="请填写您的用户昵称"></el-input>
         </div>
       </div>
       <div class="con-item name clearfix">
@@ -27,13 +27,10 @@
       <div class="con-item name clearfix">
         <div class="fl">请选择咨询日期：</div>
         <div class="fr">
+          <!-- <el-date-picker v-model="teacherForm.appointmentDate" type="datetime" placeholder="选择日期时间" default-time="12:00" :picker-options="pickerOptions1">
+          </el-date-picker> -->
           <el-date-picker v-model="teacherForm.appointmentDate" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期" :picker-options="pickerOptions1">
           </el-date-picker>
-        </div>
-      </div>
-      <div class="con-item name clearfix">
-        <div class="fl">请选择开始时间：</div>
-        <div class="fr">
           <el-time-select v-model="teacherForm.appointmentTime" :picker-options="{start: '09:00',step: '01:00',end: '20:00'}" placeholder="选择时间">
           </el-time-select>
         </div>
@@ -103,19 +100,19 @@ export default {
       timeLi: [
         {
           name: '0.5小时',
-          value: '1'
+          value: '1800'
         },
         {
           name: '1小时',
-          value: '2'
+          value: '3600'
         },
         {
           name: '1.5小时',
-          value: '3'
+          value: '5400'
         },
         {
           name: '2小时',
-          value: '4'
+          value: '7200'
         }
       ],
       userInfo: ''
@@ -131,27 +128,27 @@ export default {
     },
     //授课时长-分类-下拉选项点击
     chooseTime (val) {
-      this.teacherForm.courseTime = val.id;
+      this.teacherForm.courseTime = val.value;
       this.teacherForm.courseTimeName = val.name;
       this.isShowTime = false;
     },
     // 提交数据
     validate () {
-      const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
-      let time = this.teacherForm.appointmentDate + " " + this.teacherForm.appointmentTime
-      this.teacherForm.startTime = new Date(time).getTime();
+      //   const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
+      this.teacherForm.startTime = this.teacherForm.appointmentDate + " " + this.teacherForm.appointmentTime
+      //   this.teacherForm.startTime = new Date(time).getTime();
       try {
         if (Trim(this.teacherForm.tel) === "") throw "请填写手机号码";
-        if (!this.teacherForm.hasTel) {
-          if (!telReg.test(Trim(this.teacherForm.tel)))
-            throw "请填写正确的手机号码";
-        }
+        // if (!this.teacherForm.hasTel) {
+        //   if (!telReg.test(Trim(this.teacherForm.tel)))
+        //     throw "请填写正确的手机号码";
+        // }
         if (Trim(this.teacherForm.name) === "") throw "请填写姓名";
         if (this.teacherForm.appointmentDate === '')
           throw '请选择咨询日期'
         if (this.teacherForm.appointmentTime === '')
           throw '请选择开始时间'
-        if (this.teacherForm.courseTimeName === '') throw '请选择咨询时长'
+        if (this.teacherForm.courseTime === '') throw '请选择咨询时长'
         if (this.teacherForm.remark === '') throw '请简单描述您想要咨询的问题'
         if (!this.teacherForm.checked) throw '请先阅读《服务协议》'
       } catch (err) {

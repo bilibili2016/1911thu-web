@@ -9,11 +9,11 @@
 
   .content {
     width: 670px;
-    height: 670px;
     overflow-y: auto;
     position: fixed;
     left: 50%;
-    top: 0;
+    top: 50%;
+    margin-top: -340px;
     margin-left: -335px;
     background-color: #fff;
     border-radius: 10px;
@@ -34,7 +34,7 @@
       font-size: 14px;
       line-height: 24px;
       text-align: center;
-      padding: 20px 0;
+      padding: 10px 0;
     }
 
     i.el-icon-close {
@@ -91,7 +91,12 @@
         }
 
         .el-date-editor {
-          width: 430px;
+          width: 200px;
+          display: inline-block;
+
+          &:first-child {
+            margin-right: 30px;
+          }
         }
 
         &.selectFr {
@@ -211,7 +216,11 @@
         width: 550px;
         height: 65px;
         padding: 10px;
-        border: 1px solid #DDDDDD;
+        border: 1px solid #dcdfe6;
+
+        &::placeholder {
+          color: #c0c4cb;
+        }
       }
     }
 
