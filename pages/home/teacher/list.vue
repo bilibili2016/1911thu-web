@@ -340,7 +340,6 @@ export default {
   mounted () {
     setTitle("名师智库-1911学堂");
     this.getHeaderList();
-    this.getUserInfo()
     // this.initTeacherList();
     this.teacherCompanyList();
     this.introduce = this.initIntro;
