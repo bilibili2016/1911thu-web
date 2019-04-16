@@ -1,0 +1,164 @@
+.live {
+  width: 1100px;
+  margin: 0 auto;
+
+  .liveCon {
+    position: relative;
+    width: 100%;
+    height: 620px;
+    margin: 20px auto 30px;
+
+    .topBar,
+    .bottomBar {
+      width: 100%;
+      height: 76px;
+      background-color: #000;
+    }
+
+    .topBar {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .bottomBar {
+      line-height: 76px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding-right: 30px;
+      box-sizing: border-box;
+      text-align: right;
+      font-size: 16px;
+      color: #fff;
+
+      .time {}
+
+      .btn {
+        width: 150px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 14px;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+
+      .nearBtn {
+        background-color: #773084;
+
+        &:hover {
+          background-color: #5f068d;
+        }
+      }
+
+      .endBtn {
+        background-color: #666;
+
+        &:hover {
+          opacity: .7;
+        }
+      }
+    }
+
+    .pop {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      background-color: #fff;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .nearEnd {
+      display: none;
+      width: 414px;
+      height: 156px;
+      padding-top: 50px;
+
+      p {
+        width: 320px;
+        margin: 0 auto;
+        line-height: 36px;
+        font-size: 16px;
+        color: #222;
+      }
+
+      .el-icon-close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        color: #773084;
+        font-size: 24px;
+        font-weight: bold;
+      }
+    }
+
+    .end {
+      width: 414px;
+      height: 166px;
+      padding-top: 40px;
+
+      p {
+        font-size: 16px;
+        color: #222;
+      }
+
+      .btn {
+        padding: 12px 30px;
+        background-color: #773084;
+        cursor: pointer;
+        font-size: 14px;
+        color: #fff;
+        margin-top: 40px;
+        border-radius: 6px;
+
+        &:hover {
+          background-color: #5f068d;
+        }
+      }
+    }
+  }
+
+  .liveDetail {
+    background: #fff url('http://static-image.1911edu.com/live-bg2.png') no-repeat center top;
+    background-size: 100% 230px;
+    box-shadow: 0px 0px 36px 0px rgba(198, 194, 210, 0.36);
+    border-radius: 10px;
+    margin-bottom: 100px;
+    padding-bottom: 60px;
+
+    h1 {
+      font-size: 30px;
+      color: #fff;
+      margin: 60px 0;
+      padding-top: 60px;
+      text-align: center;
+    }
+
+    .detail-items {
+      .item {
+        background: url('http://static-image.1911edu.com/live-bg3.png') no-repeat;
+        background-size: contain;
+        width: 950px;
+        height: 56px;
+        line-height: 56px;
+        margin: 0 auto;
+        margin-bottom: 6px;
+        padding-left: 30px;
+        box-sizing: border-box;
+        font-size: 16px;
+        color: #fff;
+      }
+    }
+  }
+}
