@@ -144,24 +144,22 @@ export default {
       this.socket = new io(getNet())
       // 连接socket
       this.socket.on('connect', function () {
-        that.socket.emit('login', persistStore.get('token'))
+        that.socket.emit("login", persistStore.get("token"), "ordinaryUser");
       })
       // 支付推送来消息时
       this.socket.on('new_msg', function (msg) {
-        console.log(msg);
         //支付成功
         if (msg.pay_status == 0) {
-
-          this.pay = false;
-          this.paySuccess = true;
-          this.payError = false;
+          that.pay = false;
+          that.paySuccess = true;
+          that.payError = false;
           return false
         }
         //支付失败
         if (msg.pay_status == 100100) {
-          this.pay = false;
-          this.paySuccess = false;
-          this.payError = true;
+          that.pay = false;
+          that.paySuccess = false;
+          that.payError = true;
           return false
         }
       })
@@ -171,8 +169,8 @@ export default {
   },
   mounted () {
     this.codeForm.ids = this.orderId
-    this.getCode()
     this.getStatus()
+    this.getCode()
   }
 }
 </script>
