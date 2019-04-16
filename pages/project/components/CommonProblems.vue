@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       problems: [
         {
@@ -26,8 +26,7 @@ export default {
         },
         {
           qustion: "证书怎么申请？",
-          answer:
-            "学完本项目课程并考核通过者，可获得相应结业证书。"
+          answer: "学完本项目课程并考核通过者，可获得相应结业证书。"
         },
         {
           qustion: "该项目所学课程是否可以换算成学位项目的学分?",
@@ -40,8 +39,7 @@ export default {
         },
         {
           qustion: "购买之后还能退费吗？",
-          answer:
-            "线上课程属于虚拟产品，课程购买之后不予退费。谢谢谅解！线下课程可申请退费。"
+          answer: "线上课程属于虚拟产品，课程购买之后不予退费。"
         },
         {
           qustion: "对于项目还有其他问题，怎么办？",
