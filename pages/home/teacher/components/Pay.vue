@@ -67,9 +67,9 @@ export default {
   props: ['config', 'userInfo', 'teacherInfo', 'orderId'],
   data () {
     return {
-      pay: false,
+      pay: true,
       paySuccess: false,
-      payError: true,
+      payError: false,
       codeForm: {
         type: '4',
         ids: '',
