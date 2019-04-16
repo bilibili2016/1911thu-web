@@ -71,9 +71,9 @@
 
 <script>
 import { message, Trim } from "~/lib/util/helper";
-import { teacherInfo, banner } from "~/lib/v1_sdk/index";
+import { teacherInfo } from "~/lib/v1_sdk/index";
 export default {
-  props: ["teacherInfo"],
+  props: ["teacherInfo", 'userInfo'],
   data () {
     return {
       pickerOptions1: {
@@ -115,7 +115,6 @@ export default {
           value: '7200'
         }
       ],
-      userInfo: ''
     }
   },
   methods: {
@@ -168,31 +167,21 @@ export default {
             "提交成功，我们的客服人员会尽快与您取得联系！"
           );
           this.closeForm()
+          this.$emit('goPay', response.data.id)
         } else {
           message(this, "error", response.msg);
         }
       });
     },
-    getUserInfo () {
-      banner.getUserInfo().then(res => {
-        if (res.status === 0) {
-          this.userInfo = res.data.userInfo;
-          this.teacherForm.name = this.userInfo.real_name
-          this.teacherForm.tel = this.userInfo.user_name
-          if (this.teacherForm.name) {
-            this.teacherForm.hasName = true
-          }
-          //   if (this.teacherForm.tel) {
-          //     this.teacherForm.hasTel = true
-          //   }
-        }
-      });
-    }
   },
   mounted () {
     this.teacherForm.teacherName = this.teacherInfo.teacher_name
     this.teacherForm.teacherId = this.teacherInfo.id
-    this.getUserInfo()
+    this.teacherForm.name = this.userInfo.real_name
+    this.teacherForm.tel = this.userInfo.user_name
+    if (this.teacherForm.name) {
+      this.teacherForm.hasName = true
+    }
   },
 
 }
