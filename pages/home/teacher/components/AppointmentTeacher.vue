@@ -174,6 +174,15 @@ export default {
       });
     },
   },
+  watch: {
+    userInfo () {
+      this.teacherForm.name = this.userInfo.real_name
+      this.teacherForm.tel = this.userInfo.user_name
+      if (this.teacherForm.name) {
+        this.teacherForm.hasName = true
+      }
+    }
+  },
   mounted () {
     this.teacherForm.teacherName = this.teacherInfo.teacher_name
     this.teacherForm.teacherId = this.teacherInfo.id
