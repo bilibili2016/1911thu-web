@@ -27,7 +27,7 @@
       <div class="con-item name clearfix">
         <div class="fl">请选择咨询日期：</div>
         <div class="fr">
-          <el-date-picker v-model="teacherForm.appointmentDate" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期">
+          <el-date-picker v-model="teacherForm.appointmentDate" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期" :picker-options="pickerOptions1">
           </el-date-picker>
         </div>
       </div>
@@ -79,6 +79,11 @@ export default {
   props: ["teacherInfo"],
   data () {
     return {
+      pickerOptions1: {
+        disabledDate (time) {
+          return time.getTime() <= Date.now();
+        }
+      },
       teacherForm: {
         teacherId: "", //导师ID
         name: "", //姓名
@@ -137,8 +142,10 @@ export default {
       this.teacherForm.startTime = new Date(time).getTime();
       try {
         if (Trim(this.teacherForm.tel) === "") throw "请填写手机号码";
-        if (!telReg.test(Trim(this.teacherForm.tel)))
-          throw "请填写正确的手机号码";
+        if (!this.teacherForm.hasTel) {
+          if (!telReg.test(Trim(this.teacherForm.tel)))
+            throw "请填写正确的手机号码";
+        }
         if (Trim(this.teacherForm.name) === "") throw "请填写姓名";
         if (this.teacherForm.appointmentDate === '')
           throw '请选择咨询日期'
