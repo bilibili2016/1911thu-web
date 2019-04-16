@@ -92,7 +92,7 @@ export default {
         courseTimeName: "", //授课时长
         remark: "", //其他需求
         checked: false,
-        hasTel: false,
+        hasTel: true,
         hasName: false,
 
       },
@@ -182,9 +182,9 @@ export default {
           if (this.teacherForm.name) {
             this.teacherForm.hasName = true
           }
-          if (this.teacherForm.tel) {
-            this.teacherForm.hasTel = true
-          }
+          //   if (this.teacherForm.tel) {
+          //     this.teacherForm.hasTel = true
+          //   }
         }
       });
     }
