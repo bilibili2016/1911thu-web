@@ -158,7 +158,7 @@
                   </div>
 
                   <div class="fl">
-                    <h4>{{teacher.title}}</h4>
+                    <h4>{{teacher.title}}（{{teacher.teacher_name}}）</h4>
                   </div>
                 </div>
                 <div class="coursePrice">￥{{teacher.present_price}}</div>

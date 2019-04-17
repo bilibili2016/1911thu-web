@@ -13,7 +13,7 @@
             <div class="courseOne" v-if="courseList.orderCurriculumList.length&& index<3" v-for="(course,index) in courseList.orderCurriculumList" :key="'course'+index">
               <img @click="goCourseInfo(course)" class="fl" :src="course.picture" alt="">
               <div class="fl">
-                <h4 @click="goCourseInfo(course)" :title="course.title">{{course.title}}</h4>
+                <h4 @click="goCourseInfo(course)">{{course.title}}</h4>
                 <h6>{{course.curriculum_time}}学时</h6>
                 <!-- <p>导师：{{course.teacher_name}}</p> -->
               </div>
@@ -28,7 +28,7 @@
                 <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
               </div>
               <div class="fl">
-                <h4 @click="goProjrctInfo(project)" :title="project.title">{{project.title}}</h4>
+                <h4 @click="goProjrctInfo(project)">{{project.title}}</h4>
                 <h6>{{project.curriculum_time}}学时</h6>
               </div>
             </div>
@@ -36,14 +36,14 @@
             <div class="courseOne" v-if="courseList.orderVipList.length" v-for="(vip,index) in courseList.orderVipList" :key="'vip'+index">
               <img @click="goVipInfo(vip)" class="fl" :src="vip.picture" alt="">
               <div class="fl">
-                <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
+                <h4 @click="goVipInfo(vip)">{{vip.title}}</h4>
               </div>
             </div>
             <!-- 预约教师列表 -->
             <div class="courseOne" v-if="courseList.orderTeacherBespokeList.length" v-for="(teacher,index) in courseList.orderTeacherBespokeList" :key="'teacher'+index">
               <img @click="goTeacherInfo(teacher)" class="fl" :src="teacher.picture" alt="">
               <div class="fl">
-                <h4 @click="goTeacherInfo(teacher)" :title="teacher.title">{{teacher.title}}</h4>
+                <h4 @click="goTeacherInfo(teacher)">{{teacher.title}}（{{teacher.teacher_name}}）</h4>
               </div>
             </div>
             <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
