@@ -24,7 +24,7 @@
         </el-tab-pane>
       </el-tabs>
     </el-card>
-    <v-detail v-else @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :projectList="projectList" :vipList="vipList" :config="orderType" v-loading="detailMsg"></v-detail>
+    <v-detail v-else @goBack="goBack" @goTicketBack="goTicketBack" :orderDetail="orderDetail" :bankInfo="bankInfo" :courseList="courseList" :teacherBespokeList="teacherBespokeList" :projectList="projectList" :vipList="vipList" :config="orderType" v-loading="detailMsg"></v-detail>
   </div>
 </template>
 
@@ -32,9 +32,7 @@
 import { store as persistStore } from '~/lib/core/store'
 
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
-import Order from '@/pages/profile/components/myorder/OrderList'
 import Detail from '@/pages/profile/components/common/Detail'
-import DataPick from '@/pages/profile/components/myorder/DataPick'
 import ListTab from '@/pages/profile/components/common/ListTab.vue'
 export default {
   watch: {
@@ -44,9 +42,7 @@ export default {
   },
   components: {
     'v-nomsg': NoMsg,
-    'v-order': Order,
     'v-detail': Detail,
-    'v-datapick': DataPick,
     'v-listtab': ListTab
   },
   props: [
@@ -65,6 +61,7 @@ export default {
     'bankInfo',
     'courseList',
     'projectList',
+    'teacherBespokeList',
     'vipList',
     'orderType',
     'detailMsg',

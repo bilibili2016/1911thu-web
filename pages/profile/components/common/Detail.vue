@@ -42,9 +42,7 @@
                   </div>
                   <div class="info-fr">
                     <span>支付时间：</span>
-                    <span
-                      v-show="!(JSON.stringify(orderDetail) === '{}')"
-                    >{{changeTime(orderDetail.pay_time)}}</span>
+                    <span v-show="!(JSON.stringify(orderDetail) === '{}')">{{changeTime(orderDetail.pay_time)}}</span>
                   </div>
                 </div>
               </div>
@@ -88,9 +86,7 @@
         <!-- 商品信息 -->
         <div class="goods bodyItem">
           <!-- 课程、vip、课程+项目、线上项目-->
-          <div
-            v-if="orderDetail.order_type === '1' ||orderDetail.order_type === '3' || (orderDetail.order_type === '2'&&courseList.length!=0)  || (orderDetail.order_type === '2'&&orderDetail.project_type === '1' &&orderDetail.study_type =='1')"
-          >
+          <div v-if="orderDetail.order_type === '1' ||orderDetail.order_type === '3' ||orderDetail.order_type === '4'|| (orderDetail.order_type === '2'&&courseList.length!=0)  || (orderDetail.order_type === '2'&&orderDetail.project_type === '1' &&orderDetail.study_type =='1')">
             <div class="top">
               <span class="lf">商品信息</span>
               <span class="lm">单价</span>
@@ -98,12 +94,7 @@
             </div>
             <div class="bottom">
               <!-- 课程 -->
-              <div
-                class="bottom-item clearfix"
-                v-if="courseList.length"
-                v-for="(course,index) in courseList"
-                :key="'course'+index"
-              >
+              <div class="bottom-item clearfix" v-if="courseList.length" v-for="(course,index) in courseList" :key="'course'+index">
                 <div class="courseInfo clearfix">
                   <div class="bottomImg">
                     <img class :src="course.picture" alt>
@@ -122,12 +113,7 @@
                 </div>
               </div>
               <!-- 线上项目 -->
-              <div
-                class="bottom-item clearfix"
-                v-if="projectList.length"
-                v-for="(project,index) in projectList"
-                :key="'project'+index"
-              >
+              <div class="bottom-item clearfix" v-if="projectList.length" v-for="(project,index) in projectList" :key="'project'+index">
                 <div class="courseInfo clearfix">
                   <div class="bottomImg">
                     <!-- 项目图标 -->
@@ -148,12 +134,7 @@
                 </div>
               </div>
               <!-- vip -->
-              <div
-                class="bottom-item clearfix"
-                v-if="vipList.length"
-                v-for="(vip,index) in vipList"
-                :key="'vip'+index"
-              >
+              <div class="bottom-item clearfix" v-if="vipList.length" v-for="(vip,index) in vipList" :key="'vip'+index">
                 <div class="courseInfo clearfix">
                   <div class="bottomImg">
                     <img class :src="vip.picture" alt>
@@ -164,6 +145,23 @@
                   </div>
                 </div>
                 <div class="coursePrice">￥{{vip.present_price}}</div>
+                <div class="courseOperation">
+                  <i class="el-icon-close"></i>
+                  {{orderDetail.pay_number}}
+                </div>
+              </div>
+              <!-- 老师预约订单 -->
+              <div class="bottom-item clearfix" v-if="teacherBespokeList.length" v-for="(teacher,index) in teacherBespokeList" :key="'teacher'+index">
+                <div class="courseInfo clearfix">
+                  <div class="bottomImg">
+                    <img class :src="teacher.picture" alt>
+                  </div>
+
+                  <div class="fl">
+                    <h4>{{teacher.title}}</h4>
+                  </div>
+                </div>
+                <div class="coursePrice">￥{{teacher.present_price}}</div>
                 <div class="courseOperation">
                   <i class="el-icon-close"></i>
                   {{orderDetail.pay_number}}
@@ -189,28 +187,14 @@
               </div>
             </div>
             <div class="bottom">
-              <div
-                class="bottom-item customerProjectDetail clearfix"
-                v-for="(project,index) in projectList"
-                :key="'cus'+index"
-              >
+              <div class="bottom-item customerProjectDetail clearfix" v-for="(project,index) in projectList" :key="'cus'+index">
                 <div class="projectInfo">
                   <div class="bottomImg">
                     <!-- 项目图标 -->
                     <!-- 标准 -->
-                    <img
-                      v-if="orderDetail.project_type==='1'"
-                      class="project-img"
-                      :src="projectImg"
-                      alt
-                    >
+                    <img v-if="orderDetail.project_type==='1'" class="project-img" :src="projectImg" alt>
                     <!-- 定制 -->
-                    <img
-                      v-if="orderDetail.project_type==='2'"
-                      class="project-img"
-                      :src="customerProjectImg"
-                      alt
-                    >
+                    <img v-if="orderDetail.project_type==='2'" class="project-img" :src="customerProjectImg" alt>
                     <img class :src="project.picture" alt>
                   </div>
                   <div class="fl">
@@ -269,7 +253,8 @@ export default {
     'bankInfo',
     'orderDetail',
     'projectList',
-    'vipList'
+    'vipList',
+    'teacherBespokeList'
   ],
   data () {
     return {

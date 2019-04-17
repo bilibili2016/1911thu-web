@@ -39,17 +39,24 @@
                 <h4 @click="goVipInfo(vip)" :title="vip.title">{{vip.title}}</h4>
               </div>
             </div>
+            <!-- 预约教师列表 -->
+            <div class="courseOne" v-if="courseList.orderTeacherBespokeList.length" v-for="(teacher,index) in courseList.orderTeacherBespokeList" :key="'teacher'+index">
+              <img @click="goTeacherInfo(teacher)" class="fl" :src="teacher.picture" alt="">
+              <div class="fl">
+                <h4 @click="goTeacherInfo(teacher)" :title="teacher.title">{{teacher.title}}</h4>
+              </div>
+            </div>
             <div class="more" v-if="(courseList.orderCurriculumList.length+courseList.orderProjectList.length)>3" @click="selectPayApply(courseList,config.type)">
               查看更多>
             </div>
           </div>
-          <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
+          <div class="price height" :style="{height:computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
             <p>￥{{courseList.order_amount}}</p>
             <!-- 订单 -->
             <p v-if="config.type=='order'" class="detail" @click="selectPayApply(courseList,config.type)">订单详情</p>
           </div>
           <!-- 订单 -->
-          <div v-show="config.type=='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length)}">
+          <div v-show="config.type=='order'" class="status height" :style="{height: computedHeight(courseList.orderCurriculumList.length+courseList.orderProjectList.length+courseList.orderVipList.length+courseList.orderTeacherBespokeList.length)}">
             <p class="cancelOrder" v-if="courseList.pay_status == '1'" @click="cancelOrder(courseList.id)">取消订单</p>
             <p class="payReady payed" v-if="courseList.pay_status == '2' || courseList.pay_status == '6'">已支付</p>
             <p class="cancelOrder" v-if="courseList.pay_status == '5'" style="cursor: inherit">审核中</p>
@@ -85,7 +92,7 @@ export default {
   components: {
     "v-dialog": Dialog
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
@@ -109,16 +116,16 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid", "setKid"]),
-    detection() {
+    detection () {
       this.$emit("detection");
     },
     //根据列表长度计算高度
-    computedHeight(len) {
+    computedHeight (len) {
       let height = len > 3 ? 3 * 140 + 60 + "px" : len * 140 + "px";
       return height;
     },
     //计算项目列表显示数量
-    computedLength(course, project, index) {
+    computedLength (course, project, index) {
       let projectLength = course.length > 3 ? 0 : 3 - course.length;
       if (index < projectLength) {
         return true;
@@ -127,7 +134,7 @@ export default {
       }
     },
     //取消订单
-    cancelOrder(id) {
+    cancelOrder (id) {
       this.orderForm.ids = id;
       order.cancelOrder(this.orderForm).then(response => {
         if (response.status === 0) {
@@ -143,7 +150,7 @@ export default {
       });
     },
     //去支付
-    goPay(id, courseList) {
+    goPay (id, courseList) {
       if (courseList.orderVipList.length > 0) {
         this.$router.push({
           path: "/shop/wepay",
@@ -164,7 +171,7 @@ export default {
       }
     },
     // 判断购物车数量
-    goodsNmber(id) {
+    goodsNmber (id) {
       if (persistStore.get("productsNum") < 1) {
         this.addCart(id);
       } else {
@@ -172,12 +179,12 @@ export default {
         this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
     },
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.$router.push("/shop/shoppingcart");
     },
     //加入购物车
-    addCart(id) {
+    addCart (id) {
       this.orderForm.ids = id;
       order.buyAgain(this.orderForm).then(response => {
         if (response.status === 0) {
@@ -188,7 +195,7 @@ export default {
       });
     },
     //直接购买
-    goAffirmorder(id, num) {
+    goAffirmorder (id, num) {
       // VIP需要传递购买份数
       if (num) {
         this.$router.push({
@@ -203,7 +210,7 @@ export default {
       }
     },
     //去购物车
-    goShopping(courseList) {
+    goShopping (courseList) {
       if (courseList.order_type == "1") {
         //课程
         this.goodsNmber(courseList.id);
@@ -231,7 +238,7 @@ export default {
       }
     },
     //课程详情
-    goCourseInfo(item, index) {
+    goCourseInfo (item, index) {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
@@ -246,7 +253,7 @@ export default {
       // })
     },
     //项目详情
-    goProjrctInfo(item) {
+    goProjrctInfo (item) {
       this.$router.push({
         path: "/project/projectdetail",
         query: {
@@ -256,7 +263,7 @@ export default {
       });
     },
     // Vip详情
-    goVipInfo(vip) {
+    goVipInfo (vip) {
       this.$router.push({
         path: "/home/vip/collegeDetail",
         query: {
@@ -266,8 +273,12 @@ export default {
         }
       });
     },
+    goTeacherInfo (teacher) {
+      console.log(teacher);
+
+    },
     //列表详情
-    selectPayApply(item, type) {
+    selectPayApply (item, type) {
       persistStore.set("order", item.id);
       if (type == "order") {
         this.$bus.$emit("goOrderDetail", true);
@@ -277,11 +288,11 @@ export default {
       }
     },
     // 时间戳转日期格式
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToTime(time);
     }
   },
-  mounted() {
+  mounted () {
     if (persistStore.get("orderDetail")) {
       this.$bus.$emit("goOrderDetail", true);
       persistStore.set("orderDetail", false);
