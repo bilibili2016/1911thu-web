@@ -29,8 +29,10 @@
   </div>
 </template>
 <script>
+import { live } from "~/lib/v1_sdk/index";
+
 export default {
-  data () {
+  data() {
     return {
       isOver: false,
       nearEnd: false,
@@ -40,18 +42,27 @@ export default {
         "3、请问报名缴费后多久可以上课？",
         "4、报名缴费后可以退款吗？"
       ],
+      studengtInfo: {
+        appointId: "",
+        userId: ""
+      },
       aliPlayer: {
         id: "mediaPlayer", //播放器id
         width: "100%",
         height: "100%",
         autoplay: false, //自动播放
         vid: "", //点播播放的两个参数之一
-        playauth: "", //点播播放的两个参数之二
-      },
+        playauth: "" //点播播放的两个参数之二
+      }
     };
   },
   methods: {
-
+    getdefaultPlayerInfo() {
+      live.teacherBespokeInfo().then();
+    }
+  },
+  mounted() {
+    this.getdefaultPlayerInfo();
   }
 };
 </script>
