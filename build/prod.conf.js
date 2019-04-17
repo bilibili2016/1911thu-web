@@ -38,6 +38,10 @@ config.sentry = {
     async: true
   },
   {
+    src: '//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js',
+    async: true
+  },
+  {
     src: 'http://js.1911edu.com/socket.io.js',
     async: true
   }

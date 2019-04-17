@@ -16,7 +16,7 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <span @click="goLive">进入直播</span>
+            <span @click="goLive(teacher)">进入直播</span>
           </div>
         </div>
       </li>
@@ -35,7 +35,7 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <span @click="goLive">进入直播</span>
+            <span @click="goLive(teacher)">进入直播</span>
           </div>
         </div>
       </li>
@@ -50,18 +50,29 @@ export default {
   props: ['teacherData', 'config'],
   data () {
     return {
-      time: ''
+      time: '',
+      jsFile: '//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js'
     }
   },
   methods: {
     goLive (teacher) {
-      this.$router.push('/live/teacherLive')
+
+      this.$router.push(`/live/teacherLive?id=${teacher.id}`)
       //   this.$router.push('/live/studentLive')
+    },
+    creatPlayer () {
+      let script = document.createElement('script');
+      script.type = "text/javascript";
+      script.src = this.jsFile;
+      document.body.appendChild(script);
     },
     changeTime (time) {
       return timestampToTime(time)
     }
-  }
+  },
+  mounted () {
+    this.creatPlayer()
+  },
 }
 </script>
 
