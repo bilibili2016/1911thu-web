@@ -38,36 +38,36 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-    <v-pay v-if="showPayment" @closePay="closePay"></v-pay>
+    <v-pay v-if="showPayment" :projectDetail="projectDetail" @closePay="closePay"></v-pay>
   </div>
 
 </template>
 
 <script>
-import { projectdetail, projectplayer } from '@/lib/v1_sdk/index'
-import { mapActions, mapGetters } from 'vuex'
-import Detail from '@/pages/project/components/Detail'
-import Procourse from '@/pages/project/components/ProjectCourse'
-import Proevaluate from '@/pages/project/components/ProjectEvaluate'
-import Commonproblems from '@/pages/project/components/CommonProblems'
-import OfflineDesc from '@/pages/project/components/OfflineDesc'
-import Pay from '@/pages/project/components/Pay'
-import { store as persistStore } from '~/lib/core/store'
-import { message, matchSplits, setTitle } from '@/lib/util/helper'
+import { projectdetail, projectplayer } from "@/lib/v1_sdk/index";
+import { mapActions, mapGetters } from "vuex";
+import Detail from "@/pages/project/components/Detail";
+import Procourse from "@/pages/project/components/ProjectCourse";
+import Proevaluate from "@/pages/project/components/ProjectEvaluate";
+import Commonproblems from "@/pages/project/components/CommonProblems";
+import OfflineDesc from "@/pages/project/components/OfflineDesc";
+import Pay from "@/pages/project/components/Pay";
+import { store as persistStore } from "~/lib/core/store";
+import { message, matchSplits, setTitle } from "@/lib/util/helper";
 export default {
   components: {
-    'v-procourse': Procourse,
-    'v-proevaluate': Proevaluate,
-    'v-proproblems': Commonproblems,
-    'v-detail': Detail,
-    'v-offlinedesc': OfflineDesc,
-    'v-pay': Pay
+    "v-procourse": Procourse,
+    "v-proevaluate": Proevaluate,
+    "v-proproblems": Commonproblems,
+    "v-detail": Detail,
+    "v-offlinedesc": OfflineDesc,
+    "v-pay": Pay
   },
-  data () {
+  data() {
     return {
       showPayment: false,
       customerBanner:
-        'http://static-image.1911edu.com/customer-detail-banner.png',
+        "http://static-image.1911edu.com/customer-detail-banner.png",
       projectDetailLoad: true,
       inlineLoad: true,
       evaluateDataLoad: true,
@@ -77,18 +77,18 @@ export default {
         isCollect: 0,
         types: 2
       },
-      activeName: 'first',
+      activeName: "first",
       loadMsg: false,
       addCollectionForm: {
-        curriculumId: '',
+        curriculumId: "",
         types: 2
       },
       project: {
-        projectId: '1',
+        projectId: "1",
         types: 1
       },
       projectDetail: {
-        study_type: '2'
+        study_type: "2"
       },
       pagemsg: {
         page: 1,
@@ -98,91 +98,91 @@ export default {
       evaluateForm: {
         pages: 1,
         limits: 3,
-        ids: '',
+        ids: "",
         types: 2,
         isRecommend: 2
       },
       evaluateInfo: {},
       evaluateData: []
-    }
+    };
   },
   computed: {
-    ...mapGetters('auth', ['isAuthenticated'])
+    ...mapGetters("auth", ["isAuthenticated"])
   },
   methods: {
-    ...mapActions('auth', ['setProductsNum', 'setKid', 'setNid', 'setTid']),
-    payment () {
-      this.showPayment = true
+    ...mapActions("auth", ["setProductsNum", "setKid", "setNid", "setTid"]),
+    payment() {
+      this.showPayment = true;
     },
-    closePay () {
-      this.showPayment = false
+    closePay() {
+      this.showPayment = false;
     },
     // 获取项目详情
-    getProjectInfo () {
+    getProjectInfo() {
       projectdetail.getProjectInfo(this.project).then(res => {
         if (res.status == 0) {
-          this.projectDetail = res.data.curriculumProjectDetail
-          this.projectDetail.score = Number(this.projectDetail.score)
-          this.projectDetailLoad = false
-          this.inlineLoad = false
+          this.projectDetail = res.data.curriculumProjectDetail;
+          this.projectDetail.score = Number(this.projectDetail.score);
+          this.projectDetailLoad = false;
+          this.inlineLoad = false;
           if (res.data.curriculumProjectDetail.is_Collection) {
-            this.collectMsg.isCollect = 1
+            this.collectMsg.isCollect = 1;
           } else {
-            this.collectMsg.isCollect = 0
+            this.collectMsg.isCollect = 0;
           }
         } else if (res.status == 100100) {
-          message(this, 'error', res.msg)
+          message(this, "error", res.msg);
         }
-      })
+      });
     },
     // 获取项目评论
-    getEvaluateList () {
-      this.evaluateForm.ids = matchSplits('kid')
+    getEvaluateList() {
+      this.evaluateForm.ids = matchSplits("kid");
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
         if (res.status == 0) {
-          this.evaluateData = res.data.evaluateList
-          this.evaluateInfo = res.data.totalEvaluateInfo
-          this.evaluateDataLoad = false
-          this.pagemsg.total = res.data.pageCount
+          this.evaluateData = res.data.evaluateList;
+          this.evaluateInfo = res.data.totalEvaluateInfo;
+          this.evaluateDataLoad = false;
+          this.pagemsg.total = res.data.pageCount;
         }
-      })
+      });
     },
     //评论分页
-    handleCurrentChange (val) {
-      this.pagemsg.page = val
-      this.evaluateForm.pages = val
-      this.evaluateForm.limits = 3
-      this.evaluateForm.ids = matchSplits('kid')
+    handleCurrentChange(val) {
+      this.pagemsg.page = val;
+      this.evaluateForm.pages = val;
+      this.evaluateForm.limits = 3;
+      this.evaluateForm.ids = matchSplits("kid");
       projectdetail.getEvaluateList(this.evaluateForm).then(res => {
         if (res.status == 0) {
-          this.evaluateData = res.data.evaluateList
-          this.evaluateInfo = res.data.totalEvaluateInfo
-          this.evaluateDataLoad = false
+          this.evaluateData = res.data.evaluateList;
+          this.evaluateInfo = res.data.totalEvaluateInfo;
+          this.evaluateDataLoad = false;
         }
-      })
+      });
     }
   },
-  mounted () {
-    this.project.projectId = matchSplits('kid')
-    this.project.types = matchSplits('type')
-    this.getProjectInfo()
-    if (this.project.types === '1') {
-      this.getEvaluateList()
+  mounted() {
+    this.project.projectId = matchSplits("kid");
+    this.project.types = matchSplits("type");
+    this.getProjectInfo();
+    if (this.project.types === "1") {
+      this.getEvaluateList();
     }
 
-    this.problemLoad = false
-    this.$bus.$on('reProjectData', data => {
-      this.getProjectInfo()
-    })
+    this.problemLoad = false;
+    this.$bus.$on("reProjectData", data => {
+      this.getProjectInfo();
+    });
   },
-  updated () {
-    setTitle('项目详情-1911学堂')
+  updated() {
+    setTitle("项目详情-1911学堂");
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(vm => {
-      vm.$bus.$emit('headerFooterShow')
-    })
+      vm.$bus.$emit("headerFooterShow");
+    });
   }
-}
+};
 </script>
 

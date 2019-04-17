@@ -15,9 +15,10 @@
           </div>
         </div>
         <div class="text">
-          <p>标准项目支持30-50人学习</p>
+          <p>标准项目支持30-50人学习，每增加一人，需额外支付{{projectDetail.underline_price}}元</p>
           <p>如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p>
         </div>
+        <p>总价：{{totalPrice}}元</p>
         <div class="btn">
           <!-- <span class="cancel" @click="handlePopClick">取消</span> -->
           <span class="confirm" @click="handleConfirm">下一步</span>
@@ -29,6 +30,7 @@
 <script>
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 export default {
+  props: ["projectDetail"],
   data() {
     return {
       alertShow: false,
@@ -40,6 +42,28 @@ export default {
         number: 30
       }
     };
+  },
+  computed: {
+    totalPrice() {
+      let basePrice = parseFloat(this.projectDetail.present_price); //项目价钱
+      let type = this.projectDetail.price_method; //项目类型
+      let num = this.projectData.number; //购买人数
+      let onlinePrice = this.projectDetail.online_price; //学院价钱
+      let underlinePrice = this.projectDetail.underline_price; //线下价钱
+      let total; //总价钱
+
+      if (type == 1) {
+        //只增加线上学院钱数
+        total = basePrice + (num - 30) * onlinePrice;
+      } else if (type == 2) {
+        //只增加线下钱数
+        total = basePrice + (num - 30) * underlinePrice;
+      } else if (type == 3) {
+        //同时增加线上+线下
+        total = basePrice + (num - 30) * (underlinePrice + onlinePrice);
+      }
+      return total;
+    }
   },
   methods: {
     goCustom() {

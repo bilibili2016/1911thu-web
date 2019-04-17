@@ -95,7 +95,7 @@ export default {
         },
         {
           src: "http://static-image.1911edu.com/production-icon2.png",
-          text: "教育硕士（MEd）国际学位项目"
+          text: "工商管理硕士(MBA)"
         }
       ],
       studyList: [
