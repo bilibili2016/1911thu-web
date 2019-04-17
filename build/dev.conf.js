@@ -35,7 +35,7 @@ config.analyze = {
     async: true
   },
   {
-    src: '//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js',
+    src: 'http://js.1911edu.com/swfobject.js',
     async: true
   },
   {
