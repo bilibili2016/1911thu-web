@@ -81,6 +81,20 @@
           </span>
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
         </el-tab-pane>
+        <!-- 我的咨询 -->
+        <el-tab-pane class="my-course my-examine" name="tab-twelfth">
+          <span slot="label" class="tabList">
+            <i class="icon-examine"></i>&nbsp;我的咨询
+          </span>
+          <v-mystudent :data="teacherData"></v-mystudent>
+        </el-tab-pane>
+        <!-- 教师入口 -->
+        <el-tab-pane class="my-course my-examine" name="tab-thirteenth">
+          <span slot="label" class="tabList">
+            <i class="icon-examine"></i>&nbsp;教师入口
+          </span>
+          <v-myteacher :data="teacherData"></v-myteacher>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -104,6 +118,8 @@ import myTicket from "@/pages/profile/pages/myTicket";
 import myCustomerProject from "@/pages/profile/pages/myCustomerProject";
 import myExamine from "@/pages/profile/pages/myExamine";
 import myCollege from "@/pages/profile/pages/myCollege";
+import myStudent from "@/pages/profile/pages/myStudent";
+import myTeacher from "@/pages/profile/pages/myTeacher";
 
 export default {
   components: {
@@ -118,7 +134,9 @@ export default {
     "v-myticket": myTicket,
     "v-myCustomerProject": myCustomerProject,
     "v-myexamine": myExamine,
-    "v-mycollege": myCollege
+    "v-mycollege": myCollege,
+    "v-mystudent": myStudent,
+    "v-myteacher": myTeacher,
   },
   data () {
     return {
@@ -471,7 +489,8 @@ export default {
       userInfo: {
         head_img: "http://static-image.1911edu.com/defaultHeadImg.jpg"
       },
-      getHistory: true
+      getHistory: true,
+      teacherData: []
     };
   },
   computed: {
@@ -539,6 +558,12 @@ export default {
             break;
           case "tab-eleventh": //我的学院
             this.collegeList();
+            break;
+          case "tab-twelfth": //我的咨询
+            this.teacherBespokeListData();
+            break;
+          case "tab-thirteenth": //教师入口
+            this.teacherBespokeListData();
             break;
         }
         let gidForm = {
@@ -925,6 +950,19 @@ export default {
           return false;
         } else {
           message(this, "error", "删除失败");
+        }
+      });
+    },
+    // 获取预约老师列表
+    teacherBespokeListData () {
+      profileHome.teacherBespokeList().then(response => {
+        if (response.status == 0) {
+          this.teacherData = response.data.teacherBespokeList
+        } else if (response.status === 100008) {
+          this.$router.push("/");
+          return false;
+        } else {
+          message(this, "error", response.msg);
         }
       });
     },

@@ -4,13 +4,9 @@
       <div>
         <div class="topBar"></div>
         <img src="http://static-image.1911edu.com/live-bg1.png" alt="">
-        <div class="bottomBar" v-if="student">
+        <div id="mediaPlayer" ref="mediaPlayer"></div>
+        <div class="bottomBar">
           <span class="time">直播倒计时：20分15秒</span>
-        </div>
-        <div class="bottomBar clearfix" v-if="teacher">
-          <span class="time fl">直播倒计时：20分15秒</span>
-          <span class="btn nearBtn fr">结束直播</span>
-          <span class="btn endBtn fr">结束直播</span>
         </div>
       </div>
       <!-- 即将结束 -->
@@ -38,20 +34,24 @@ export default {
     return {
       isOver: false,
       nearEnd: false,
-      student: false,
-      teacher: true,
       question: [
         "1、远程班学习效果能保证吗？",
         "2、请问学完课程，将会获得什么？",
         "3、请问报名缴费后多久可以上课？",
         "4、报名缴费后可以退款吗？"
-      ]
+      ],
+      aliPlayer: {
+        id: "mediaPlayer", //播放器id
+        width: "100%",
+        height: "100%",
+        autoplay: false, //自动播放
+        vid: "", //点播播放的两个参数之一
+        playauth: "", //点播播放的两个参数之二
+      },
     };
   },
   methods: {
-    creatPlayer () {
 
-    }
   }
 };
 </script>

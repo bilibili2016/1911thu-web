@@ -4,10 +4,7 @@
       <div>
         <div class="topBar"></div>
         <img src="http://static-image.1911edu.com/live-bg1.png" alt="">
-        <div class="bottomBar" v-if="student">
-          <span class="time">直播倒计时：20分15秒</span>
-        </div>
-        <div class="bottomBar clearfix" v-if="teacher">
+        <div class="bottomBar clearfix">
           <span class="time fl">直播倒计时：20分15秒</span>
           <span class="btn nearBtn fr">结束直播</span>
           <span class="btn endBtn fr">结束直播</span>
@@ -38,8 +35,6 @@ export default {
     return {
       isOver: false,
       nearEnd: false,
-      student: false,
-      teacher: true,
       question: [
         "1、远程班学习效果能保证吗？",
         "2、请问学完课程，将会获得什么？",

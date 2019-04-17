@@ -30,7 +30,7 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      padding-right: 30px;
+      padding: 0 30px;
       box-sizing: border-box;
       text-align: right;
       font-size: 16px;
@@ -50,6 +50,7 @@
       }
 
       .nearBtn {
+        margin-top: 18px;
         background-color: #773084;
 
         &:hover {
@@ -58,6 +59,7 @@
       }
 
       .endBtn {
+        margin-top: 18px;
         background-color: #666;
 
         &:hover {
