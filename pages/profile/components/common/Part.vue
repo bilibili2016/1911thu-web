@@ -47,33 +47,22 @@
 import { timestampToTime } from "@/lib/util/helper";
 
 export default {
-  props: ['teacherData', 'config'],
+  props: ["teacherData", "config"],
   data () {
     return {
-      time: '',
-      jsFile: '//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js'
-    }
+      time: ""
+    };
   },
   methods: {
     goLive (teacher) {
-
-      this.$router.push(`/live/teacherLive?id=${teacher.id}`)
+      this.$router.push("/live/teacherLive?id=" + teacher.id);
       //   this.$router.push('/live/studentLive')
     },
-    creatPlayer () {
-      let script = document.createElement('script');
-      script.type = "text/javascript";
-      script.src = this.jsFile;
-      document.body.appendChild(script);
-    },
     changeTime (time) {
-      return timestampToTime(time)
+      return timestampToTime(time);
     }
-  },
-  mounted () {
-    this.creatPlayer()
-  },
-}
+  }
+};
 </script>
 
 <style scoped lang="scss">
