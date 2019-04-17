@@ -48,17 +48,17 @@ import { timestampToTime } from "@/lib/util/helper";
 
 export default {
   props: ["teacherData", "config"],
-  data() {
+  data () {
     return {
       time: ""
     };
   },
   methods: {
-    goLive(teacher) {
+    goLive (teacher) {
       this.$router.push("/live/teacherLive?id=" + teacher.id);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime(time) {
+    changeTime (time) {
       return timestampToTime(time);
     }
   }

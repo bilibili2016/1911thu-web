@@ -38,6 +38,10 @@ config.sentry = {
     async: true
   },
   {
+    src: 'http://js.1911edu.com/swfobject.js',
+    async: true
+  },
+  {
     src: 'http://js.1911edu.com/socket.io.js',
     async: true
   }
