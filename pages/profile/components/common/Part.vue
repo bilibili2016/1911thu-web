@@ -16,7 +16,7 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <span @click="goLive">进入直播</span>
+            <span @click="goLive(teacher)">进入直播</span>
           </div>
         </div>
       </li>
@@ -35,7 +35,7 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <span @click="goLive">进入直播</span>
+            <span @click="goLive(teacher)">进入直播</span>
           </div>
         </div>
       </li>
@@ -47,22 +47,22 @@
 import { timestampToTime } from "@/lib/util/helper";
 
 export default {
-  props: ['teacherData', 'config'],
-  data () {
+  props: ["teacherData", "config"],
+  data() {
     return {
-      time: ''
-    }
+      time: ""
+    };
   },
   methods: {
-    goLive (teacher) {
-      this.$router.push('/live/teacherLive')
+    goLive(teacher) {
+      this.$router.push("/live/teacherLive?id=" + teacher.id);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime (time) {
-      return timestampToTime(time)
+    changeTime(time) {
+      return timestampToTime(time);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">

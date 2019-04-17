@@ -48,8 +48,8 @@ export default {
       let basePrice = parseFloat(this.projectDetail.present_price); //项目价钱
       let type = this.projectDetail.price_method; //项目类型
       let num = this.projectData.number; //购买人数
-      let onlinePrice = this.projectDetail.online_price; //学院价钱
-      let underlinePrice = this.projectDetail.underline_price; //线下价钱
+      let onlinePrice = parseFloat(this.projectDetail.online_price); //学院价钱
+      let underlinePrice = parseFloat(this.projectDetail.underline_price); //线下价钱
       let total; //总价钱
 
       if (type == 1) {

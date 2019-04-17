@@ -82,19 +82,19 @@
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
         </el-tab-pane>
         <!-- 我的咨询 -->
-        <el-tab-pane class="my-course my-examine" name="tab-twelfth">
+        <!-- <el-tab-pane class="my-course my-examine" name="tab-twelfth">
           <span slot="label" class="tabList">
             <i class="icon-examine"></i>&nbsp;我的咨询
           </span>
           <v-mystudent :data="teacherData"></v-mystudent>
-        </el-tab-pane>
+        </el-tab-pane> -->
         <!-- 教师入口 -->
-        <el-tab-pane class="my-course my-examine" name="tab-thirteenth">
+        <!-- <el-tab-pane class="my-course my-examine" name="tab-thirteenth">
           <span slot="label" class="tabList">
             <i class="icon-examine"></i>&nbsp;教师入口
           </span>
           <v-myteacher :data="teacherData"></v-myteacher>
-        </el-tab-pane>
+        </el-tab-pane> -->
       </el-tabs>
     </div>
   </div>

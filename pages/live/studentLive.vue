@@ -3,8 +3,11 @@
     <div class="liveCon">
       <div>
         <div class="topBar"></div>
-        <img src="http://static-image.1911edu.com/live-bg1.png" alt="">
-        <div id="mediaPlayer" ref="mediaPlayer"></div>
+        <!-- <img src="http://static-image.1911edu.com/live-bg1.png" alt=""> -->
+        <div class="clearfix">
+          <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
+          <!-- <div class="pull" id="pullUrl" ref="pullUrl"></div> -->
+        </div>
         <div class="bottomBar">
           <span class="time">直播倒计时：20分15秒</span>
         </div>
@@ -30,6 +33,8 @@
 </template>
 <script>
 import { live } from "~/lib/v1_sdk/index";
+import { message, matchSplits } from "@/lib/util/helper";
+import PlayerError from "@/components/common/PlayerError.vue";
 
 export default {
   data() {
@@ -43,25 +48,67 @@ export default {
         "4、报名缴费后可以退款吗？"
       ],
       studengtInfo: {
-        appointId: "",
-        userId: ""
+        appointId: ""
       },
-      aliPlayer: {
+      pullPlay: "",
+      pullaliPlayer: {
         id: "mediaPlayer", //播放器id
+        source: "",
         width: "100%",
-        height: "100%",
-        autoplay: false, //自动播放
-        vid: "", //点播播放的两个参数之一
-        playauth: "" //点播播放的两个参数之二
+        height: "620px",
+        autoplay: true,
+        isLive: true,
+        rePlay: false,
+        playsinline: true,
+        preload: true,
+        controlBarVisibility: "hover",
+        useH5Prism: true
       }
     };
   },
   methods: {
     getdefaultPlayerInfo() {
-      live.teacherBespokeInfo().then();
+      live.teacherBespokeInfo(this.studengtInfo).then(res => {
+        if (res.status == 0) {
+          this.pullaliPlayer.source = res.data.pullUrl;
+          // this.pullaliPlayer.source =
+          //   "rtmp://pull.1911edu.com/1911xuetang/201800017?auth_key=1555501472-0-0-56ec4980ec520051da1ef6321596b5d4";
+          // 不存在 直接创建播放器
+          this.pullPlay = new Aliplayer(this.pullaliPlayer);
+          this.pullPlay.on("ready", this.readyPlay);
+          this.pullPlay.on("play", this.playerPlay);
+          this.pullPlay.on("ended", this.playerEnded);
+          this.pullPlay.on("error", this.playerError);
+          document.getElementsByClassName(
+            "prism-ErrorMessage"
+          )[0].style.display = "none";
+        }
+      });
+    },
+    // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
+    playerLoad() {
+      if (document.getElementsByClassName("prism-hide")[0]) {
+        document.getElementsByClassName("prism-hide")[0].className =
+          "prism-loading";
+      }
+    },
+    // 视频准备好之后执行
+    readyPlay() {
+      console.log("ready");
+    },
+    // 播放开始--启动计时器
+    playerPlay() {
+      console.log("playerPlay");
+    },
+    playerEnded() {
+      console.log("playerEnded");
+    },
+    playerError(error) {
+      console.log(error);
     }
   },
   mounted() {
+    this.studengtInfo.appointId = matchSplits("id");
     this.getdefaultPlayerInfo();
   }
 };

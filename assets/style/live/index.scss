@@ -7,6 +7,25 @@
     width: 100%;
     height: 620px;
     margin: 20px auto 30px;
+    background: url('http://static-image.1911edu.com/live-bg1.png') no-repeat;
+    background-size: cover;
+
+
+    .mediaCon {
+      float: left;
+      width: 100%;
+      height: 620px;
+
+      .prism-ErrorMessage {
+        display: none !important;
+      }
+    }
+
+    .pull {
+      float: left;
+      width: 50%;
+      height: 620px;
+    }
 
     .topBar,
     .bottomBar {
@@ -130,6 +149,8 @@
       }
     }
   }
+
+
 
   .liveDetail {
     background: #fff url('http://static-image.1911edu.com/live-bg2.png') no-repeat center top;
