@@ -56,7 +56,7 @@
               <p>混合式标准项目</p>
             </div>
             <div class="centerBg-text">
-              <p>1911学堂国学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的健康产业单位内训项目。</p>
+              <p>1911学堂国学院依据各单位提出的具体学习需求，形成定制式、个性化、针对性的国学类内训项目。</p>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       contentList: [
         "国学概论",

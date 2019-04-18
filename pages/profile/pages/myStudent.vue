@@ -19,33 +19,29 @@
 </template>
 
 <script>
-import { store as persistStore } from '~/lib/core/store'
-import NoMsg from '@/pages/profile/components/common/noMsg.vue'
-import Part from '@/pages/profile/components/common/Part.vue'
+import { store as persistStore } from "~/lib/core/store";
+import NoMsg from "@/pages/profile/components/common/noMsg.vue";
+import Part from "@/pages/profile/components/common/Part.vue";
 
 export default {
-  props: ['data'],
+  props: ["data"],
   components: {
-    'v-nomsg': NoMsg,
-    'v-part': Part,
+    "v-nomsg": NoMsg,
+    "v-part": Part
   },
-  data () {
+  data() {
     return {
-      activeName: 'first',
+      activeName: "first",
       config: {
-        isTeacher: true,
+        isTeacher: false
       }
-    }
+    };
   },
-  mounted () {
-
-  },
+  mounted() {},
   methods: {
-    handleActive (item) {
-
-    }
+    handleActive(item) {}
   }
-}
+};
 </script>
 
 <style scoped>
