@@ -55,7 +55,7 @@ import { message } from "~/lib/util/helper";
 import { list } from "~/lib/v1_sdk/index";
 export default {
   props: ["famousList"],
-  data () {
+  data() {
     return {
       teacher: {
         tid: ""
@@ -63,16 +63,16 @@ export default {
     };
   },
   methods: {
-    reservation (teacher) {
-      //   this.$router.push({
-      //     path: "/home/teacher/orderTeacher",
-      //     query: {
-      //       id: teacher.id
-      //     }
-      //   });
-      this.$emit('reservation', teacher)
+    reservation(teacher) {
+      // this.$router.push({
+      //   path: "/home/teacher/orderTeacher",
+      //   query: {
+      //     id: teacher.id
+      //   }
+      // });
+      this.$emit("reservation", teacher);
     },
-    handleLinkTeacherInfo (item) {
+    handleLinkTeacherInfo(item) {
       if (item.is_teachering) {
         this.$router.push("/home/teacher/" + item.id);
       }
