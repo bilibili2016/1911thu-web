@@ -84,7 +84,7 @@ export default {
         },
         {
           src: "http://static-image.1911edu.com/production-icon2.png",
-          text: "公共管理硕士(MBA)"
+          text: "公共管理硕士(MPA)"
         }
       ],
       studyList: [
