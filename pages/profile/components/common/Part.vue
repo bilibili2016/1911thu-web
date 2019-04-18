@@ -1,6 +1,6 @@
 <template>
   <div class="cardList">
-    <ul>
+    <ul v-if="teacherData.length!=0">
       <li v-if="!config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
         <div class="headImg">
           <img :src="teacher.picture" alt="">
@@ -40,26 +40,42 @@
         </div>
       </li>
     </ul>
+    <v-nomsg v-else :config="noMsg"></v-nomsg>
   </div>
 </template>
 
 <script>
 import { timestampToTime } from "@/lib/util/helper";
+import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 
 export default {
   props: ["teacherData", "config"],
-  data () {
+  components: {
+    "v-nomsg": NoMsg
+  },
+  data() {
     return {
+      noMsg: {
+        type: "myTeacher",
+        text: "您暂未加入任何学院，快去加入吧！"
+      },
       time: ""
     };
   },
   methods: {
-    goLive (teacher) {
+    goLive(teacher) {
       this.$router.push("/live?id=" + teacher.id);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime (time) {
+    changeTime(time) {
       return timestampToTime(time);
+    }
+  },
+  mounted() {
+    if (this.config.isTeacher) {
+      this.noMsg.text = "您暂时没有已预约的直播咨询。";
+    } else {
+      this.noMsg.text = "你暂时没有已预约的直播咨询，快去名师智库预约导师吧。";
     }
   }
 };
