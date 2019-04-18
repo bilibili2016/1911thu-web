@@ -55,12 +55,13 @@ export default {
         "4、报名缴费后可以退款吗？"
       ],
       teacherLiveInfo: {
-        appointId: '',
+        appointId: ""
       },
-      jsFile: '//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js',
+      jsFile:
+        "//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js",
       url: {
-        pushUrl: '',
-        pullUrl: ''
+        pushUrl: "",
+        pullUrl: ""
       },
       pullPlay: "",
       pullaliPlayer: {
@@ -86,7 +87,7 @@ export default {
         if (response.status == 0) {
           this.url = response.data
         } else {
-          message(this, 'error', response.msg)
+          message(this, "error", response.msg);
         }
       });
     },
@@ -103,7 +104,7 @@ export default {
     },
     //结束直播
     stop_play () {
-      swfobject.getObjectById('tblive').Stop();
+      swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.pause();
         this.pullPlay.dispose();
@@ -116,9 +117,6 @@ export default {
       swfobject.embedSWF("//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf", "tblive", 580, 430, "9.0", "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf?", {}, { quality: "high", allowFullScreen: "true", wmode: "transparent", menu: "true", allowScriptAccess: "always" });
     },
 
-
-
-
     creatPlayer (url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
@@ -127,9 +125,8 @@ export default {
       this.pullPlay.on("play", this.playerPlay);
       this.pullPlay.on("ended", this.playerEnded);
       this.pullPlay.on("error", this.playerError);
-      document.getElementsByClassName(
-        "prism-ErrorMessage"
-      )[0].style.display = "none";
+      document.getElementsByClassName("prism-ErrorMessage")[0].style.display =
+        "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
     playerLoad () {
