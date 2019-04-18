@@ -9,6 +9,12 @@
       </div>
 
       <div class="studyInfo">
+        <h2 class="first">专家组组长</h2>
+        <div class="group">
+          <img src="https://static-image.1911edu.com/cadreCollege_teacher.png" alt="">
+          <h4>彭凯平 教授</h4>
+          <p>现任清华大学社会科学学院院长、心理学系系主任。毕业于北京大学心理学系后留校任教。获美国密歇根大学心理学博士学位，美国加州大学伯克利分校心理学及东亚研究终身教职，曾任加州大学社会及人格心理学专业主任和美国心理学会科学领导委员会成员等国际职务。至今已发表300多篇学术期刊论文，出版中英文著作8部，多次获得重要学术奖项。</p>
+        </div>
         <div class="main">
           <div class="object">
             <span class="left">面向人群</span>
@@ -71,7 +77,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       productList: [
         {
