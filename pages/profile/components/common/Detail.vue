@@ -209,7 +209,7 @@
                   <!-- 线上课程学时 -->
                   <div class="item">{{project.curriculum_time}}学时</div>
                   <!-- 学习人数 -->
-                  <div class="item">{{project.pay_number}}人</div>
+                  <div class="item">{{orderDetail.pay_number}}人</div>
                   <!-- 线下课程学时 -->
                   <div class="item">{{project.offline_study_time}}学时</div>
                   <!-- 学习天数 -->
