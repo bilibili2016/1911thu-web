@@ -15,7 +15,11 @@
           </div>
         </div>
         <div class="text">
-          <p>标准项目支持30-50人学习，每增加一人，需额外支付{{projectDetail.underline_price}}元</p>
+          <p>标准项目支持30-50人学习，每增加一人，需额外支付
+            <span v-if="type==1">{{parseFloat(projectDetail.online_price)}}</span>
+            <span v-else-if="type==2">{{parseFloat(projectDetail.underline_price)}}</span>
+            <span v-else-if="type==3">{{parseFloat(projectDetail.online_price)+parseFloat(projectDetail.underline_price)}}</span>
+            元</p>
           <p>如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p>
         </div>
         <p>总价：{{totalPrice}}元</p>
@@ -40,25 +44,26 @@ export default {
       projectData: {
         kid: "",
         number: 30
-      }
+      },
+      type: ""
     };
   },
   computed: {
     totalPrice() {
       let basePrice = parseFloat(this.projectDetail.present_price); //项目价钱
-      let type = this.projectDetail.price_method; //项目类型
+      this.type = this.projectDetail.price_method; //项目类型
       let num = this.projectData.number; //购买人数
       let onlinePrice = parseFloat(this.projectDetail.online_price); //学院价钱
       let underlinePrice = parseFloat(this.projectDetail.underline_price); //线下价钱
       let total; //总价钱
 
-      if (type == 1) {
+      if (this.type == 1) {
         //只增加线上学院钱数
         total = basePrice + (num - 30) * onlinePrice;
-      } else if (type == 2) {
+      } else if (this.type == 2) {
         //只增加线下钱数
         total = basePrice + (num - 30) * underlinePrice;
-      } else if (type == 3) {
+      } else if (this.type == 3) {
         //同时增加线上+线下
         total = basePrice + (num - 30) * (underlinePrice + onlinePrice);
       }
