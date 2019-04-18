@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     goLive (teacher) {
-      this.$router.push("/live/teacherLive?id=" + teacher.id);
+      this.$router.push("/live?id=" + teacher.id);
       //   this.$router.push('/live/studentLive')
     },
     changeTime (time) {
