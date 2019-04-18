@@ -2,10 +2,16 @@
   <div class="live">
     <div class="liveCon">
       <div>
-        <div class="btn-start" @click="start_play">开始直播</div>
-        <div class="btn-end" @click="stop_play">结束直播</div>
-        <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
-        <div id="tblive"></div>
+        <div class="playInner" ref="playInner">
+          <div id="mediaPlayer" ref="mediaPlayer" class="mediaCon"></div>
+        </div>
+        <div class="self">
+          <div class="liveBtn">
+            <span @click="start_play">开始直播</span>
+            <span @click="stop_play">结束直播</span>
+          </div>
+          <div class="tblive" id="tblive"></div>
+        </div>
         <!-- <div class="topBar"></div>
         <img src="http://static-image.1911edu.com/live-bg1.png" alt="">
         <div class="bottomBar clearfix">
@@ -68,8 +74,10 @@ export default {
         playsinline: true,
         preload: true,
         controlBarVisibility: "hover",
-        useH5Prism: true
-      }
+        useH5Prism: true,
+        useFlashPrism: true
+      },
+      node: ''
     };
   },
   methods: {
@@ -77,8 +85,6 @@ export default {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
           this.url = response.data
-          //   创建推流播放器
-          this.newPlayer()
         } else {
           message(this, 'error', response.msg)
         }
@@ -86,21 +92,28 @@ export default {
     },
     //开始直播
     start_play () {
-      //   console.log(this.url.pullUrl);
-      swfobject.getObjectById('tblive').Start(this.url.pushUrl);
-      //   创建拉流播放器
-      this.creatPlayer(this.url)
+      if (swfobject) {
+        swfobject.getObjectById('tblive').Start(this.url.pushUrl);
+        //   创建拉流播放器
+        this.creatPlayer(this.url)
+      } else {
+        // 调用之前还没创建的话就再创建一下
+        this.newPlayer()
+      }
     },
     //结束直播
     stop_play () {
       swfobject.getObjectById('tblive').Stop();
       if (this.pullPlay) {
+        this.pullPlay.pause();
         this.pullPlay.dispose();
+        this.$refs.mediaPlayer.innerHTML = ""
+        this.$refs.playInner.appendChild(this.node);
       }
     },
     newPlayer () {
       // 创建播放器并传入参数
-      swfobject.embedSWF("http://static-image.1911edu.com/live-bg1.png", "tblive", 580, 430, "9.0", "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf?", {}, { quality: "high", allowFullScreen: "true", wmode: "transparent", menu: "true", allowScriptAccess: "always" });
+      swfobject.embedSWF("//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf", "tblive", 580, 430, "9.0", "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf?", {}, { quality: "high", allowFullScreen: "true", wmode: "transparent", menu: "true", allowScriptAccess: "always" });
     },
 
 
@@ -141,8 +154,11 @@ export default {
     }
   },
   mounted () {
+    this.node = this.$refs.mediaPlayer
     this.teacherLiveInfo.appointId = matchSplits('id')
     this.teacherBespokeInfo()
+    //   创建推流播放器
+    this.newPlayer()
 
   }
 };
