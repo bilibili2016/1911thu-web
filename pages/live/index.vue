@@ -38,7 +38,7 @@ import { live } from "~/lib/v1_sdk/index";
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 
 export default {
-  data () {
+  data() {
     return {
       isOver: false,
       nearEnd: false,
@@ -49,12 +49,13 @@ export default {
         "4、报名缴费后可以退款吗？"
       ],
       teacherLiveInfo: {
-        appointId: '',
+        appointId: ""
       },
-      jsFile: '//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js',
+      jsFile:
+        "//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js",
       url: {
-        pushUrl: '',
-        pullUrl: ''
+        pushUrl: "",
+        pullUrl: ""
       },
       pullPlay: "",
       pullaliPlayer: {
@@ -73,40 +74,52 @@ export default {
     };
   },
   methods: {
-    teacherBespokeInfo () {
+    teacherBespokeInfo() {
       live.teacherBespokeInfo(this.teacherLiveInfo).then(response => {
         if (response.status == 0) {
-          this.url = response.data
+          this.url = response.data;
           //   创建推流播放器
-          this.newPlayer()
+          this.newPlayer();
         } else {
-          message(this, 'error', response.msg)
+          message(this, "error", response.msg);
         }
       });
     },
     //开始直播
-    start_play () {
+    start_play() {
       //   console.log(this.url.pullUrl);
-      swfobject.getObjectById('tblive').Start(this.url.pushUrl);
+      swfobject.getObjectById("tblive").Start(this.url.pushUrl);
       //   创建拉流播放器
-      this.creatPlayer(this.url)
+      this.creatPlayer(this.url);
     },
     //结束直播
-    stop_play () {
-      swfobject.getObjectById('tblive').Stop();
+    stop_play() {
+      swfobject.getObjectById("tblive").Stop();
       if (this.pullPlay) {
         this.pullPlay.dispose();
       }
     },
-    newPlayer () {
+    newPlayer() {
       // 创建播放器并传入参数
-      swfobject.embedSWF("http://static-image.1911edu.com/live-bg1.png", "tblive", 580, 430, "9.0", "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf?", {}, { quality: "high", allowFullScreen: "true", wmode: "transparent", menu: "true", allowScriptAccess: "always" });
+      swfobject.embedSWF(
+        "http://static-image.1911edu.com/live-bg1.png",
+        "tblive",
+        580,
+        430,
+        "9.0",
+        "//g.alicdn.com/aliyun/aliyun-assets/0.0.6/swfobject/new/liveroom.swf?",
+        {},
+        {
+          quality: "high",
+          allowFullScreen: "true",
+          wmode: "transparent",
+          menu: "true",
+          allowScriptAccess: "always"
+        }
+      );
     },
 
-
-
-
-    creatPlayer (url) {
+    creatPlayer(url) {
       this.pullaliPlayer.source = url.pullUrl;
       // 不存在 直接创建播放器
       this.pullPlay = new Aliplayer(this.pullaliPlayer);
@@ -114,36 +127,34 @@ export default {
       this.pullPlay.on("play", this.playerPlay);
       this.pullPlay.on("ended", this.playerEnded);
       this.pullPlay.on("error", this.playerError);
-      document.getElementsByClassName(
-        "prism-ErrorMessage"
-      )[0].style.display = "none";
+      document.getElementsByClassName("prism-ErrorMessage")[0].style.display =
+        "none";
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad () {
+    playerLoad() {
       if (document.getElementsByClassName("prism-hide")[0]) {
         document.getElementsByClassName("prism-hide")[0].className =
           "prism-loading";
       }
     },
     // 视频准备好之后执行
-    readyPlay () {
+    readyPlay() {
       console.log("ready");
     },
     // 播放开始--启动计时器
-    playerPlay () {
+    playerPlay() {
       console.log("playerPlay");
     },
-    playerEnded () {
+    playerEnded() {
       console.log("playerEnded");
     },
-    playerError (error) {
+    playerError(error) {
       console.log(error);
     }
   },
-  mounted () {
-    this.teacherLiveInfo.appointId = matchSplits('id')
-    this.teacherBespokeInfo()
-
+  mounted() {
+    this.teacherLiveInfo.appointId = matchSplits("id");
+    this.teacherBespokeInfo();
   }
 };
 </script>
