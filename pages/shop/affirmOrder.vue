@@ -67,7 +67,7 @@ export default {
     "v-nodata": NoData,
     "v-backshopcart": backShopCart
   },
-  data () {
+  data() {
     return {
       isShowAlert: false,
       alertText: "",
@@ -119,7 +119,7 @@ export default {
       orderType: null,
       curriculumForm: {
         curriculumProjectId: null,
-        number: ''
+        number: ""
       },
       vipForm: {
         vipID: ""
@@ -127,7 +127,7 @@ export default {
       payForm: {
         ids: null,
         type: null,
-        number: ''
+        number: ""
       },
       vipForm: {
         vipId: "",
@@ -138,7 +138,7 @@ export default {
   },
   watch: {
     // 保留例子
-    "ticketForm.province" (val, oldval) {
+    "ticketForm.province"(val, oldval) {
       if (!this.province && this.province.length == 0) {
         this.getRegionList();
       }
@@ -147,11 +147,11 @@ export default {
   },
 
   methods: {
-    handlePopClick () {
+    handlePopClick() {
       this.isShowAlert = false;
     },
     //返回到上一页
-    handleConfirmClick () {
+    handleConfirmClick() {
       if (this.customId != -1) {
         if (this.orderType == 2) {
           this.$router.go(-1);
@@ -166,10 +166,10 @@ export default {
       }
     },
     // 报告问题
-    handleReport () {
+    handleReport() {
       this.showReportBug = true;
     },
-    closeReport () {
+    closeReport() {
       this.showReportBug = false;
       this.problem.content = "";
     },
@@ -195,11 +195,11 @@ export default {
     //   })
     // },
     // 返回购物车
-    handleLinkShopCart () {
+    handleLinkShopCart() {
       this.$router.push("/shop/shoppingcart");
     },
     // 点击提交订单
-    handleSubmitOrder (price) {
+    handleSubmitOrder(price) {
       affirmOrder.commitOrder().then(res => {
         if (res.status === 0) {
           this.$router.push("/shop/wepay?order=" + res.data.id + "&type=1");
@@ -213,27 +213,27 @@ export default {
       });
     },
     // 项目 提交订单->到支付页面
-    handleGetCode () {
+    handleGetCode() {
       this.payForm.ids = this.customId;
       this.payForm.type = 2;
       if (window.location.search.indexOf("pn") >= 0) {
-        this.payForm.number = matchSplits("pn")
+        this.payForm.number = matchSplits("pn");
       }
       affirmOrder.getCode(this.payForm).then(res => {
         this.$router.push("/shop/wepay?order=" + res.data.order_id + "&type=1");
       });
     },
     // vip提交订单
-    handleVipConfirm () {
+    handleVipConfirm() {
       this.vipForm.vipId = this.customId;
-      this.vipForm.number = matchSplits("num");
+      this.vipForm.number = matchSplits("pn");
 
       affirmOrder.addProduceOrderVip(this.vipForm).then(res => {
         this.$router.push("/shop/wepay?order=" + res.data.id + "&type=2");
       });
     },
     //获取商 品信息 列表
-    handleGoodsList () {
+    handleGoodsList() {
       this.loadGoods = true;
       affirmOrder.goodsList(this.addArray).then(res => {
         if (res.status === 0) {
@@ -254,7 +254,7 @@ export default {
             }
             this.pageType.text = `您没有正在进行的订单,${
               this.noMsg.backSeconds
-              }s后将会跳转到首页！`;
+            }s后将会跳转到首页！`;
             this.noMsg.backSeconds--;
           }, 1000);
           this.isNoMsg = true;
@@ -262,12 +262,12 @@ export default {
       });
     },
     // 项目确认订单
-    handleCustomProject (val) {
+    handleCustomProject(val) {
       this.affirmOrder.type = "customOrder";
       this.loadGoods = true;
       this.curriculumForm.curriculumProjectId = val;
       if (window.location.search.indexOf("pn") >= 0) {
-        this.curriculumForm.number = matchSplits("pn")
+        this.curriculumForm.number = matchSplits("pn");
       }
       affirmOrder.customProject(this.curriculumForm).then(res => {
         this.loadGoods = false;
@@ -281,7 +281,7 @@ export default {
       });
     },
     //vip确认订单
-    handleVip (val) {
+    handleVip(val) {
       this.affirmOrder.type = "vip";
       this.vipForm.vipID = val;
       this.loadGoods = true;
@@ -289,7 +289,7 @@ export default {
         this.loadGoods = false;
         if (res.status === 0) {
           this.curriculumLists = res.data.vipGoodsDetail;
-          this.orderinfo.curriculumSum = matchSplits("num");
+          this.orderinfo.curriculumSum = matchSplits("pn");
           this.orderinfo.price = res.data.vipGoodsDetail.present_price;
 
           this.orderinfo.nickName = persistStore.get("nickName");
@@ -299,7 +299,7 @@ export default {
       });
     },
     // 提交订单
-    handleSubmit (price) {
+    handleSubmit(price) {
       if (price > 10000000) {
         this.isShowAlert = true;
         this.alertText =
@@ -321,11 +321,11 @@ export default {
       }
     }
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     clearInterval(this.timer);
     next();
   },
-  mounted () {
+  mounted() {
     this.customId = matchSplits("id");
     if (this.customId == -1) {
       this.handleGoodsList();
@@ -340,7 +340,7 @@ export default {
       }
     }
   },
-  updated () {
+  updated() {
     setTitle("确认订单-1911学堂");
   }
 };

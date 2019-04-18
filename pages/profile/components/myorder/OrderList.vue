@@ -172,7 +172,7 @@ export default {
     },
     // 判断购物车数量
     goodsNmber(id) {
-      if (persistStore.get("productsNum") < 1) {
+      if (persistStore.get("productsNum") < 70) {
         this.addCart(id);
       } else {
         this.showDialog = true;
@@ -195,17 +195,21 @@ export default {
       });
     },
     //直接购买
-    goAffirmorder(id, num) {
-      // VIP需要传递购买份数
-      if (num) {
+    goAffirmorder(item, type) {
+      if (type == "vip") {
         this.$router.push({
           path: "/shop/affirmorder",
-          query: { id: id, type: 2, num: num }
+          query: { id: item.id, type: 2, pn: item.pay_number }
         });
-      } else {
+      } else if (type == "self") {
         this.$router.push({
           path: "/shop/affirmorder",
-          query: { id: id, type: 1 }
+          query: { id: item.id, type: 1 }
+        });
+      } else if (type == "project") {
+        this.$router.push({
+          path: "/shop/affirmorder",
+          query: { id: item.id, type: 1, pn: item.pay_number }
         });
       }
     },
@@ -223,18 +227,16 @@ export default {
             this.goodsNmber(courseList.id);
           } else {
             //混合 互动
-            this.goAffirmorder(courseList.orderProjectList[0].id);
+            this.goAffirmorder(courseList.orderProjectList[0], "project");
           }
         } else {
           //定制项目
-          this.goAffirmorder(courseList.orderProjectList[0].id);
+          this.goAffirmorder(courseList.orderProjectList[0], "self");
         }
       } else if (courseList.order_type == "3") {
-        //vip会员
-        this.goAffirmorder(
-          courseList.orderVipList[0].id,
-          courseList.orderVipList[0].pay_number
-        );
+        console.log(333);
+        //学院
+        this.goAffirmorder(courseList.orderVipList[0], "vip");
       }
     },
     //课程详情
