@@ -40,12 +40,13 @@
         <img src="http://static-image.1911edu.com/success.png" alt>
         <h5>支付成功</h5>
         <div class="goodsTime">
-          <p>尊敬的学员，您预约的{{teacherInfo.teacher_name}}老师咨询服务将于</p>
-          <p>{{startTime}} ~ {{endTime}}开始进行,</p>
-          <p>请准时进入直播间。</p>
+          <p>尊敬的学员，您预约的{{teacherInfo.teacher_name}}老师咨询服务</p>
+          <p>将于{{startTime}}-{{endTime}}开始进行,</p>
+          <p>请准时通过“名师智库”或者“个人中心-我的咨询”进入直播间。</p>
         </div>
         <div class="goodsBtn">
           <span @click="close">返回名师智库</span>
+          <!-- <span @click="lookAppointment">查看预约详情</span> -->
         </div>
       </div>
       <!-- 支付失败 -->
@@ -92,7 +93,10 @@ export default {
       endTime: '',
       minute: '',
       second: '',
-      interval: ''
+      interval: '',
+      gidForm: {
+        gids: ''
+      }
     }
   },
   computed: {
@@ -107,6 +111,11 @@ export default {
       this.payError = false;
       this.$emit('closePayed')
     },
+    lookAppointment () {
+      this.gidForm.gids = 'tab-twelfth';
+      this.setGid(this.gidForm);
+      this.$router.push("/profile");
+    },
     // 获取去二维码的方法
     getCode () {
       pay.getCode(this.codeForm).then(response => {
@@ -115,8 +124,14 @@ export default {
         this.alipay = response.data.qr_code
         this.loading = false
         this.flag = true
-        this.startTime = timestampToTime(response.data.produceOrderInfo.start_time)
-        this.endTime = timestampToTime(response.data.produceOrderInfo.end_time)
+        let arr = timestampToTime(response.data.produceOrderInfo.start_time).split('-');
+        let arr1 = arr[2].split(' ');
+        arr[0] = arr[0] + '年'
+        arr[1] = arr[1] + '月'
+        arr[2] = arr1[0] + '日'
+        arr[3] = arr1[1]
+        this.startTime = arr.join('');
+        this.endTime = timestampToTime(response.data.produceOrderInfo.end_time).split(' ')[1]
         // this.changeTime(response.data.produceOrderInfo.end_time - Math.round(new Date() / 1000))
       })
     },

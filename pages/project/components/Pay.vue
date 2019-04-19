@@ -20,7 +20,7 @@
             <span v-else-if="type==2">{{parseFloat(projectDetail.underline_price)}}</span>
             <span v-else-if="type==3">{{parseFloat(projectDetail.online_price)+parseFloat(projectDetail.underline_price)}}</span>
             元</p>
-          <p>如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p>
+          <!-- <p>如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p> -->
         </div>
         <p>总价：{{totalPrice}}元</p>
         <div class="btn">
@@ -35,7 +35,7 @@
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
 export default {
   props: ["projectDetail"],
-  data() {
+  data () {
     return {
       alertShow: false,
       sub: true,
@@ -49,7 +49,7 @@ export default {
     };
   },
   computed: {
-    totalPrice() {
+    totalPrice () {
       let basePrice = parseFloat(this.projectDetail.present_price); //项目价钱
       this.type = this.projectDetail.price_method; //项目类型
       let num = this.projectData.number; //购买人数
@@ -71,7 +71,7 @@ export default {
     }
   },
   methods: {
-    goCustom() {
+    goCustom () {
       this.$router.push({
         path: "/project/customerProject",
         query: {
@@ -81,11 +81,11 @@ export default {
       });
     },
     //关闭购买弹窗
-    handlePopClick() {
+    handlePopClick () {
       this.$emit("closePay");
     },
     //减
-    delNumber() {
+    delNumber () {
       if (this.projectData.number <= 31) {
         this.projectData.number = 30;
         this.sub = true;
@@ -95,21 +95,24 @@ export default {
       }
     },
     //加
-    addNumber() {
-      if (this.projectData.number >= 49) {
+    addNumber () {
+      // 限制最高人数50改为999
+      if (this.projectData.number >= 998) {
         this.add = true;
-        this.projectData.number = 50;
+        this.projectData.number = 999;
       } else {
         this.projectData.number++;
         this.sub = false;
       }
+      //   最高人数不做限制
+      //   this.projectData.number++;
     },
     // 购买人数输入框获取焦点记录当前数字
-    handleFocus() {
+    handleFocus () {
       this.lastNum = this.projectData.number;
     },
     // 购买人数输入框失去焦点
-    changeNumber() {
+    changeNumber () {
       let reg = /^[0-9]*$/;
       if (!reg.test(this.projectData.number)) {
         this.projectData.number = this.lastNum;
@@ -119,8 +122,9 @@ export default {
         this.projectData.number = 30;
         this.sub = true;
         this.add = false;
-      } else if (this.projectData.number >= 50) {
-        this.projectData.number = 50;
+        // 解除最高限制50
+      } else if (this.projectData.number >= 999) {
+        this.projectData.number = 999;
         this.sub = false;
         this.add = true;
       } else {
@@ -129,7 +133,7 @@ export default {
       }
     },
     //下一步
-    handleConfirm() {
+    handleConfirm () {
       this.$router.push({
         path: "/shop/affirmorder",
         query: {
@@ -139,11 +143,11 @@ export default {
         }
       });
     },
-    init() {
+    init () {
       this.projectData.kid = matchSplits("kid");
     }
   },
-  mounted() {
+  mounted () {
     this.init();
   }
 };
