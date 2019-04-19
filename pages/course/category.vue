@@ -295,6 +295,7 @@ export default {
         this.loadCourseAll = false;
       });
     },
+
     // 选课 card 列表
     getCourseCardChooseList(itemCid, itemPid) {
       this.loadCourse = true;

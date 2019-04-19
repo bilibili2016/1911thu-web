@@ -1,5 +1,5 @@
 <template>
-  <div class="footerBox">
+  <div class="footerBox" id="footer">
     <div class="main clearfix">
       <div class="logo fl">
         <i></i>
@@ -23,17 +23,19 @@
 import { open } from "@/lib/util/helper";
 export default {
   methods: {
-    handleLink () {
+    handleLink() {
       this.$router.push("/other/pages/homeUs");
     },
-    handleClickB () {
+    handleClickB() {
       window.open("http://static-image.1911edu.com/licence.jpg");
     },
-    handleClickA () {
-      window.open('http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802028321')
+    handleClickA() {
+      window.open(
+        "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802028321"
+      );
     },
-    handleClickC () {
-      window.open('http://static-image.1911edu.com/qualification.jpg')
+    handleClickC() {
+      window.open("http://static-image.1911edu.com/qualification.jpg");
     }
   }
 };
