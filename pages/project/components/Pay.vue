@@ -20,7 +20,7 @@
             <span v-else-if="type==2">{{parseFloat(projectDetail.underline_price)}}</span>
             <span v-else-if="type==3">{{parseFloat(projectDetail.online_price)+parseFloat(projectDetail.underline_price)}}</span>
             元</p>
-          <p>如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p>
+          <!-- <p>如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p> -->
         </div>
         <p>总价：{{totalPrice}}元</p>
         <div class="btn">
@@ -96,16 +96,16 @@ export default {
     },
     //加
     addNumber () {
-      // 限制最高人数50
-      //   if (this.projectData.number >= 49) {
-      //     this.add = true;
-      //     this.projectData.number = 50;
-      //   } else {
-      //     this.projectData.number++;
-      //     this.sub = false;
-      //   }
+      // 限制最高人数50改为999
+      if (this.projectData.number >= 998) {
+        this.add = true;
+        this.projectData.number = 999;
+      } else {
+        this.projectData.number++;
+        this.sub = false;
+      }
       //   最高人数不做限制
-      this.projectData.number++;
+      //   this.projectData.number++;
     },
     // 购买人数输入框获取焦点记录当前数字
     handleFocus () {
@@ -123,10 +123,10 @@ export default {
         this.sub = true;
         this.add = false;
         // 解除最高限制50
-        //   } else if (this.projectData.number >= 50) {
-        //     this.projectData.number = 50;
-        //     this.sub = false;
-        //     this.add = true;
+      } else if (this.projectData.number >= 999) {
+        this.projectData.number = 999;
+        this.sub = false;
+        this.add = true;
       } else {
         this.sub = false;
         this.add = false;
