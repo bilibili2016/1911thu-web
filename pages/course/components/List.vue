@@ -14,7 +14,7 @@
             </div>
             <div v-else>
               <li class="title firstTitle">学院分类：</li>
-              <ul class="courseCollege">
+              <ul class="courseCollege courseLists">
                 <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
                   <el-button @click="selectCid(item,index)">{{changeName(item.category_name)}}</el-button>
                 </li>
@@ -126,7 +126,6 @@ export default {
     this.$bus.$on("cid", data => {
       this.cid = data;
     });
-    console.log(this.pidData, "hhh");
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="coreIndex clearfix">
     <h2 class="core-title">核心优势</h2>
-    <p class="desc">内容+认证+服务+技术</p>
+    <!-- <p class="desc">内容+认证+服务+技术</p>  -->
     <div class="items">
       <div class="father" v-for="(item,index) in coreItem" :key="index">
         <div class="item">
