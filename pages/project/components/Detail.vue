@@ -57,7 +57,7 @@
         </div>
         <div class="price" v-else>
           <i>¥</i>
-          {{projectDetail.present_price}}/班
+          {{projectDetail.present_price}}起/班
         </div>
         <!-- <div class="study" v-if="!projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">立即试看</div> -->
         <!-- <div class="study" v-if="projectDetail.curriculumProjectPrivilege" @click="goProjectPlayer">开始学习</div> -->
@@ -84,7 +84,7 @@ export default {
     "v-collection": Collection
   },
   props: ["projectDetail", "projectType"],
-  data() {
+  data () {
     return {
       project: {
         projectId: "1"
@@ -107,7 +107,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
     // 跳转到项目播放页
-    goProjectPlayer() {
+    goProjectPlayer () {
       if (persistStore.get("token")) {
         let urlLink = {
           base: "/project/projectPlayer",
@@ -120,7 +120,7 @@ export default {
       }
     },
     // 判断购物车数量
-    goodsNmber() {
+    goodsNmber () {
       if (!persistStore.get("token")) {
         this.$bus.$emit("loginShow", true);
         return false;
@@ -137,7 +137,7 @@ export default {
       }
     },
     // 项目加入购物车
-    addShoppingCart() {
+    addShoppingCart () {
       if (!persistStore.get("token")) {
         this.$bus.$emit("loginShow", true);
         return false;
@@ -169,7 +169,7 @@ export default {
     //   });
     // },
     // 立即购买
-    handleBuy(id) {
+    handleBuy (id) {
       if (!persistStore.get("token")) {
         this.$bus.$emit("loginShow", true);
         return false;
@@ -187,7 +187,7 @@ export default {
   },
   watch: {
     // 检测数据中的收藏 数据过来慢
-    projectDetail(val, old) {
+    projectDetail (val, old) {
       if (val.is_Collection) {
         this.collectMsg.isCollect = 1;
       } else {
@@ -195,7 +195,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.project.projectId = matchSplits("kid");
     this.currentType = matchSplits("type");
   }

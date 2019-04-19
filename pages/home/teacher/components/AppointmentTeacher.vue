@@ -58,7 +58,7 @@
         <textarea placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.remark"></textarea>
       </div>
       <div class="agreement">
-        <el-checkbox v-model="teacherForm.checked">我已阅读并同意<i>《服务协议》</i></el-checkbox>
+        <el-checkbox v-model="teacherForm.checked">我已阅读并同意</el-checkbox><i @click="serviceAgreement">《服务协议》</i>
       </div>
       <div class="btns">
         <span class="btn save active " @click="validate">提交</span>
@@ -72,10 +72,10 @@ import { message, Trim } from "~/lib/util/helper";
 import { teacherInfo } from "~/lib/v1_sdk/index";
 export default {
   props: ["teacherInfo", "userInfo"],
-  data() {
+  data () {
     return {
       pickerOptions: {
-        disabledDate(time) {
+        disabledDate (time) {
           return time.getTime() <= Date.now();
         }
       },
@@ -115,21 +115,21 @@ export default {
     };
   },
   methods: {
-    closeForm() {
+    closeForm () {
       this.$emit("closeForm");
     },
     //授课时长 点击
-    handleCourseTimeClick() {
+    handleCourseTimeClick () {
       this.isShowTime = !this.isShowTime;
     },
     //授课时长-分类-下拉选项点击
-    chooseTime(val) {
+    chooseTime (val) {
       this.teacherForm.courseTime = val.value;
       this.teacherForm.courseTimeName = val.name;
       this.isShowTime = false;
     },
     // 提交数据
-    validate() {
+    validate () {
       //   const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
       this.teacherForm.startTime =
         this.teacherForm.appointmentDate +
@@ -155,7 +155,7 @@ export default {
       this.appointmentTeacher();
     },
     // 提交预约导师
-    appointmentTeacher() {
+    appointmentTeacher () {
       teacherInfo.teacherBespoke(this.teacherForm).then(response => {
         //不需要验证是否登录
         if (response.status === 0) {
@@ -166,20 +166,24 @@ export default {
         }
       });
     },
-    update() {
+    update () {
       this.teacherForm.name = this.userInfo.real_name;
       this.teacherForm.tel = this.userInfo.user_name;
       if (this.teacherForm.name) {
         this.teacherForm.hasName = true;
       }
+    },
+    serviceAgreement () {
+      console.log(123123123123);
+
     }
   },
   watch: {
-    userInfo() {
+    userInfo () {
       this.update();
     }
   },
-  mounted() {
+  mounted () {
     this.teacherForm.teacherName = this.teacherInfo.teacher_name;
     this.teacherForm.teacherId = this.teacherInfo.id;
     this.update();
