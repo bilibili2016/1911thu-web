@@ -29,7 +29,7 @@ export default {
     "v-nomsg": NoMsg,
     "v-part": Part
   },
-  data() {
+  data () {
     return {
       activeName: "first",
       config: {
@@ -37,15 +37,16 @@ export default {
       }
     };
   },
-  mounted() {},
+  mounted () { },
   methods: {
-    handleActive(item) {}
+    handleActive (item) {
+      console.log(item.$attrs);
+
+      this.getTeacherData()
+    },
+    getTeacherData (data) {
+      this.$emit('getTeacherData', data)
+    }
   }
 };
 </script>
-
-<style scoped>
-.minheight {
-  min-height: 400px;
-}
-</style>

@@ -8,7 +8,7 @@
         <div class="info clearfix">
           <div class="fl">
             <img :src="teacher.picture" alt="">
-            <span>1911同学201800013</span>
+            <span>老师姓名</span>
           </div>
           <div class="fr">{{teacher.use_time/60}}min</div>
         </div>
@@ -59,7 +59,7 @@ export default {
   components: {
     "v-nomsg": NoMsg
   },
-  data() {
+  data () {
     return {
       noMsg: {
         type: "myTeacher",
@@ -69,18 +69,18 @@ export default {
     };
   },
   methods: {
-    handleTeacher() {
+    handleTeacher () {
       this.$router.push("/home/teacher/list");
     },
-    goLive(teacher) {
+    goLive (teacher) {
       this.$router.push("/live?id=" + teacher.id);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime(time) {
+    changeTime (time) {
       return timestampToTime(time);
     }
   },
-  mounted() {
+  mounted () {
     if (this.config.isTeacher) {
       this.noMsg.text = "您暂时没有已预约的直播咨询。";
     } else {

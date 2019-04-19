@@ -42,14 +42,13 @@ export default {
   },
   methods: {
     handleActive (item) {
+      console.log(item.$attrs);
 
+      this.getTeacherData()
+    },
+    getTeacherData (data) {
+      this.$emit('getTeacherData', data)
     }
   }
 }
 </script>
-
-<style scoped>
-.minheight {
-  min-height: 400px;
-}
-</style>
