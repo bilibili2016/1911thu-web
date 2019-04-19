@@ -92,6 +92,11 @@ export default {
           title: "关于我们",
           id: "adoutUs",
           link: "/other/pages/homeUs"
+        },
+        {
+          title: "课程中心",
+          id: "courseCenter",
+          link: "/course/category?cid=0&cp=0&pids=0&xid=0&vid=-1"
         }
       ],
       downloadAppURL: "",
@@ -169,8 +174,10 @@ export default {
 
           break;
         case "/course/category":
-          if (matchSplits("cp") == 0) {
+          if (matchSplits("cp") == 0 && matchSplits("vid") != -1) {
             this.changeActive = "onlineCollege";
+          } else if (matchSplits("cp") == 0 && matchSplits("vid") == -1) {
+            this.changeActive = "courseCenter";
           } else {
             this.changeActive = -1;
           }

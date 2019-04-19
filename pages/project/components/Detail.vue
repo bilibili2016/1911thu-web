@@ -5,7 +5,7 @@
       <!-- 面包屑 -->
       <div class="breadCrumb">
         <el-breadcrumb separator-class="el-icon-arrow-right" class="main-crumbs">
-          <el-breadcrumb-item :to="{ path: '/course/category?cid=0&cp=1&xid=0&pids=0&vid=' }">项目列表</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/course/category?cid=0&cp=1&xid=0&pids=0&vid=-1' }">项目列表</el-breadcrumb-item>
           <el-breadcrumb-item v-if='currentType==1'>项目详情</el-breadcrumb-item>
           <el-breadcrumb-item v-else>定制项目详情</el-breadcrumb-item>
         </el-breadcrumb>

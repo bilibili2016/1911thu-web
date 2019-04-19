@@ -2,7 +2,7 @@
   <div>
     <div class="classification">
       <div class="clsTitle clearfix">
-        <div class="fl hotBtn clearfix" v-if="cp==0">
+        <div class="fl hotBtn clearfix" v-if="cp==0 && vid!=-1">
           <el-tabs v-model="activeName" @tab-click="selectActiveTab">
             <el-tab-pane label="学院全部课程" name="first"></el-tab-pane>
             <el-tab-pane label="学院最新课程" name="second"></el-tab-pane>
@@ -40,7 +40,8 @@ export default {
       onOff: "true",
       hideSwitch: true,
       cid: "",
-      cp: ""
+      cp: "",
+      vid: ""
     };
   },
   methods: {
@@ -56,6 +57,7 @@ export default {
   mounted() {
     this.cid = matchSplits("cid");
     this.cp = matchSplits("cp");
+    this.vid = matchSplits("vid");
   }
 };
 </script>

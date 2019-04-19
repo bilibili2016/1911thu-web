@@ -5,19 +5,26 @@
         <!-- 课程分类 -->
         <div class="courseCategory" v-if="cp == 0">
           <div class="firstLevel">
-            <!-- <li class="title" v-if="cp == 0">学院：</li> -->
-            <ul class="courseCollege">
-              <li v-if="cid == item.id" v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
-                <!-- <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button> -->
-                <!-- <img :src="item.picture" alt=""> -->
-                <span class="name" @click="handleCollegeLink(item)">{{item.category_name}}</span> > <span class="nameRight">课程列表</span>
-              </li>
-            </ul>
+            <div v-if="vid!=-1 && vid!=''">
+              <ul class="courseCollege">
+                <li v-if="cid == item.id" v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid === item.id ? true : false }">
+                  <span class="name" @click="handleCollegeLink(item)">{{item.category_name}}</span> > <span class="nameRight">课程列表</span>
+                </li>
+              </ul>
+            </div>
+            <div v-else>
+              <li class="title firstTitle">学院分类：</li>
+              <ul class="courseCollege">
+                <li v-for="(item,index) in cidData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
+                  <el-button @click="selectCid(item,index)">{{changeName(item.category_name)}}</el-button>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="secondLevel">
-            <li class="title">分类：</li>
+            <li class="title">课程领域：</li>
             <ul>
-              <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid === items.id ? true : false }">
+              <li v-for="(items,index) in pidData.childList" :index="index" :key="index" :class="{btnBg: pid == items.id ? true : false }">
                 <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
               </li>
             </ul>
@@ -79,6 +86,9 @@ export default {
     };
   },
   methods: {
+    changeName(name) {
+      return name.replace("在线", "");
+    },
     handleCollegeLink(item) {
       this.$router.push({
         path: "/home/vip/collegeDetail",
@@ -116,6 +126,7 @@ export default {
     this.$bus.$on("cid", data => {
       this.cid = data;
     });
+    console.log(this.pidData, "hhh");
   }
 };
 </script>
