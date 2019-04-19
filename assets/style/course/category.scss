@@ -90,6 +90,17 @@
         }
       }
 
+      ul.courseLists {
+        li {
+          &:hover {
+            .el-button {
+              background-color: #5f068d;
+              color: #fff;
+            }
+          }
+        }
+      }
+
       .title {
         font-size: 14px;
         color: rgba(34, 34, 34, 1);
