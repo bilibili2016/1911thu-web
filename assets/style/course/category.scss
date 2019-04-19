@@ -34,7 +34,8 @@
       // height: 78px;
       border-bottom: 1px rgba(232, 214, 247, 1) solid;
 
-      &>li {
+      &>li,
+      .firstTitle {
         display: inline-block;
         height: 45px;
         line-height: 45px;

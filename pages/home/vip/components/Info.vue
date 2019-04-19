@@ -8,7 +8,7 @@
       <p class=" text">学员优惠 惊喜不断</p>
       <p class="desc">
         学员只需
-        <span class="p-one">{{parseInt(vipInfo.present_price)}}元</span>
+        <span class="p-one">{{parseFloat(vipInfo.present_price)}}元</span>
         即可加入1911学堂{{vipInfo.category_name}}，学习价值{{vipInfo.original_price}}元的学院全部课程，
         <span class="p-one">学籍有效期{{vipInfo.valid_days==365?'一年':vipInfo.valid_days+'天'}}。</span>
       </p>
@@ -22,13 +22,13 @@
         </span>
         <span>
           学费为
-          <i class="p-two">{{parseInt(vipInfo.present_price)}}</i>元/年
+          <i class="p-two">{{parseFloat(vipInfo.present_price)}}</i>元/年
         </span>
       </p>
     </div>
     <div class="btns clearfix" ref="btns" :class="{fixedBottom:!bottom,bottomHeight:bottom}">
       <div class="btn-con">
-        <span class="text">学费{{parseInt(vipInfo.present_price)}}元/年</span>
+        <span class="text">学费{{parseFloat(vipInfo.present_price)}}元/年</span>
         <div class="btn-item">
           <span class="button joinStudy" @click="buyVip">申请入学</span>
           <span class="button" @click="identificate">申请证书</span>

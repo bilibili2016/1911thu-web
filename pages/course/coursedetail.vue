@@ -394,8 +394,10 @@ export default {
     //加入学院
     joinCollege() {
       let vip = this.vipGoodsDetail;
+      // this.$bus.$emit("scrollBottom");
+      persistStore.set("scroll", true);
       this.$router.push({
-        path: "/home/vip/collegeInfo",
+        path: "/home/vip/collegeDetail",
         query: {
           id: vip.id,
           cid: vip.category_id,

@@ -98,9 +98,20 @@ export default {
       category.curriculumListNew(this.categoryForm).then(res => {
         if (res.status == 0) {
           this.categoryData = res.data.curriculumList;
+          this.$nextTick(() => {
+            this.scrollBottom();
+          });
         }
         this.loadCourseAll = false;
       });
+    },
+    scrollBottom() {
+      if (persistStore.get("scroll")) {
+        var ele = document.getElementById("footer");
+        document.body.scrollTop = document.documentElement.scrollTop =
+          ele.offsetTop;
+        persistStore.set("scroll", false);
+      }
     },
     //会员详情
     vipDetail() {
@@ -126,6 +137,8 @@ export default {
     this.vipDetailData.id = matchSplits("id");
     this.getCourseCardList();
     this.vipDetail();
+    // this.scrollBottom();
+    // this.$bus.$on("scrollBottom");
   }
 };
 </script>
