@@ -160,10 +160,10 @@ export default {
           link: "tab-tenth",
           text: "申请证书"
         },
-        {
-          link: "tab-twelfth",
-          text: "我的咨询"
-        },
+        // {
+        //   link: "tab-twelfth",
+        //   text: "我的咨询"
+        // },
         // {
         //   link: "tab-thirteenth",
         //   text: "教师入口"
@@ -472,16 +472,16 @@ export default {
         this.user.userType = this.userInfo.user_type;
       }
       //   当前用户是教师但最后一项不是教师  添加
-      if (this.user.userType == '4' && this.subPagesData[this.subPagesData.length - 1].text != '教师入口') {
-        this.subPagesData.push({
-          link: "tab-thirteenth",
-          text: "教师入口"
-        })
-      }
+      //   if (this.user.userType == '4' && this.subPagesData[this.subPagesData.length - 1].text != '教师入口') {
+      //     this.subPagesData.push({
+      //       link: "tab-thirteenth",
+      //       text: "教师入口"
+      //     })
+      //   }
       //   当前用户不是教师但最后一项是教师  删除
-      if (this.user.userType != '4' && this.subPagesData[this.subPagesData.length - 1].text == '教师入口') {
-        this.subPagesData.pop()
-      }
+      //   if (this.user.userType != '4' && this.subPagesData[this.subPagesData.length - 1].text == '教师入口') {
+      //     this.subPagesData.pop()
+      //   }
     },
     // 个人中心 用户头像
     getUserInfo () {
