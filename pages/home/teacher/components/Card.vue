@@ -64,13 +64,13 @@ export default {
   },
   methods: {
     reservation(teacher) {
-      // this.$router.push({
-      //   path: "/home/teacher/orderTeacher",
-      //   query: {
-      //     id: teacher.id
-      //   }
-      // });
-      this.$emit("reservation", teacher);
+      this.$router.push({
+        path: "/home/teacher/orderTeacher",
+        query: {
+          id: teacher.id
+        }
+      });
+      // this.$emit("reservation", teacher);
     },
     handleLinkTeacherInfo(item) {
       if (item.is_teachering) {
