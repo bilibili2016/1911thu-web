@@ -1,16 +1,17 @@
 .policyPrograme {
   width: 100%;
   height: auto;
-  background: url('http://static-image.1911edu.com/program-big-bg.png')
-    no-repeat;
+  background: url('https://static-image.1911edu.com/program-big-bg.png') no-repeat;
   background-size: 100% 100%;
+
   .banner {
     position: relative;
     width: 100%;
     height: 500px;
-    background: url('http://static-image.1911edu.com/program-bg.jpg') no-repeat;
+    background: url('https://static-image.1911edu.com/program-bg.jpg') no-repeat;
     background-size: 100% 100%;
     z-index: 0;
+
     .text {
       width: 770px;
       height: 150px;
@@ -20,23 +21,27 @@
       right: 0;
       bottom: 0;
       margin: auto;
+
       .line {
         width: 192px;
         height: 1px;
         background-color: #ffaa07;
         margin-bottom: 10px;
       }
+
       .desc {
         font-size: 32px;
         color: #ffaa07;
         letter-spacing: 13px;
         margin: 0 35px;
       }
+
       .small-title {
         text-align: center;
         margin-bottom: -50px;
         color: #ffaa07;
       }
+
       .title-bg {
         font-size: 72px;
         color: #ffaa07;
@@ -48,31 +53,38 @@
       }
     }
   }
+
   .title {
     text-align: center;
     margin: 0 0 40px 0;
     padding-top: 30px;
+
     .titlt-icon-left {
       width: 22px;
       height: 36px;
     }
+
     .titlt-icon-right {
       width: 38px;
       height: 62px;
       margin-bottom: -17px;
     }
+
     .text {
       font-size: 30px;
       color: #222;
       margin: 0 20px;
     }
   }
+
   .item {
     margin-bottom: 30px;
+
     .left {
       float: left;
       width: 20px;
       margin-right: 20px;
+
       .down {
         position: relative;
         display: inline-block;
@@ -81,6 +93,7 @@
         background-color: #d0a04e;
         border-radius: 50%;
       }
+
       .up {
         width: 8px;
         height: 8px;
@@ -89,20 +102,24 @@
         margin: 6px;
       }
     }
+
     .right {
       float: left;
     }
   }
+
   .content-one {
     position: relative;
     width: 100%;
     height: 2730px;
+
     .content-inner {
       position: absolute;
       top: -30px;
       left: 0;
       right: 0;
     }
+
     .program-bg {
       width: 1100px;
       height: 444px;
@@ -111,12 +128,14 @@
       margin: 0 auto;
       z-index: 10;
       padding: 0 38px 50px 38px;
+
       .desc {
         font-size: 16px;
         color: #222;
         line-height: 32px;
       }
     }
+
     .study-info {
       width: 1100px;
       height: 288px;
@@ -124,27 +143,33 @@
       margin-top: 30px;
       background: rgba(255, 255, 255, 1);
       box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+
       .info {
         margin: 0 auto;
         width: 900px;
         padding-top: 20px; // text-align: center;
+
         .item {
           float: left;
           width: 170px;
           height: 110px;
           text-align: center;
           margin-right: 70px;
+
           &:last-child {
             margin-right: 0;
           }
+
           img {
             margin-bottom: 23px;
           }
+
           p {
             font-size: 16px;
             color: #222;
           }
         }
+
         .item-one,
         .item-two {
           img {
@@ -152,12 +177,14 @@
             height: 62px;
           }
         }
+
         .item-three {
           img {
             width: 82px;
             height: 59px;
           }
         }
+
         .item-four {
           img {
             width: 60px;
@@ -166,6 +193,7 @@
         }
       }
     }
+
     .teach-info {
       width: 1100px;
       height: 555px;
@@ -174,14 +202,17 @@
       box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
       margin: 0 auto;
       margin-top: 40px;
+
       .item {
         .right {
           width: 920px;
+
           .title-con {
             font-size: 18px;
             color: #000;
             margin-bottom: 15px;
           }
+
           .text {
             font-size: 16px;
             line-height: 32px;
@@ -189,29 +220,36 @@
         }
       }
     }
+
     .other-info {
       width: 1100px;
       margin: 0 auto;
+
       .study-content {
         width: 1100px;
         margin: 0 auto;
+
         .info {
           .left {
             .down {
               background-color: #3646c9;
             }
+
             .up {
               background-color: #ffaa07;
             }
           }
+
           .right {
             width: 300px;
+
             .title-con {
               font-size: 18px;
               color: #fff;
               font-weight: 500;
               margin-bottom: 20px;
             }
+
             .text {
               color: #fff;
               font-size: 16px;
@@ -219,6 +257,7 @@
             }
           }
         }
+
         .info1 {
           float: left;
           width: 450px;
@@ -228,6 +267,7 @@
           border-radius: 16px;
           padding: 30px 80px 30px 30px;
           margin-right: 20px;
+
           .item {
             .right {
               .title-con {
@@ -236,6 +276,7 @@
             }
           }
         }
+
         .info2 {
           float: left;
           width: 630px;
@@ -244,17 +285,21 @@
           color: #fff;
           border-radius: 16px;
           padding: 30px;
+
           .item {
             .left {
               .down {
                 background-color: #ffaa07;
               }
+
               .up {
                 background-color: #3632c7;
               }
             }
+
             .right {
               width: 530px;
+
               .title-con {
                 color: #ffaa07;
               }
@@ -263,18 +308,21 @@
         }
       }
     }
+
     .distinctive {
       width: 100%;
       height: 520px;
       margin-top: 30px;
       padding-top: 70px;
       background-color: #ffaa07;
+
       .lietOne {
         width: 1100px;
         height: 170px;
         margin: 0 auto 51px;
         border-radius: 16px;
         background-color: #fff;
+
         .dttImg img {
           width: 80px;
           height: 80px;
@@ -282,15 +330,19 @@
           border-radius: 50%;
           box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
         }
+
         h4 {
           padding: 20px 10px 10px;
           color: #3751c9;
           font-size: 18px;
         }
+
         .inner {
           clear: both;
+
           ul {
             padding: 0 49px 0 86px;
+
             li {
               float: left;
               width: 480px;
@@ -302,28 +354,35 @@
         }
       }
     }
+
     .course {
       width: 100%;
       text-align: center;
       padding-top: 40px;
+
       .course-info {
         color: #222;
         font-size: 16px;
         margin-bottom: 50px;
       }
+
       .course-item {
         width: 1100px;
         margin: 0 auto;
+
         .item {
           float: left;
           width: 270px;
           margin-right: 90px;
+
           &:first-child {
             margin-left: 60px;
           }
+
           &:last-child {
             margin-right: 0;
           }
+
           .num {
             float: left;
             width: 30px;
@@ -332,6 +391,7 @@
             font-weight: 700;
             margin-right: 10px;
           }
+
           .desc {
             float: left;
             width: 230px;
@@ -345,27 +405,31 @@
       }
     }
   }
+
   .system {
     padding-bottom: 60px;
-    background: url('http://static-image.1911edu.com/inlineBg.png') center top
-        no-repeat,
-      url('http://static-image.1911edu.com/underLineBg.png') center bottom
-        no-repeat;
+    background: url('https://static-image.1911edu.com/inlineBg.png') center top no-repeat,
+      url('https://static-image.1911edu.com/underLineBg.png') center bottom no-repeat;
     background-size: contain;
+
     .studyCourse .title .text {
       color: #fff;
     }
+
     .table {
       width: 1100px;
       margin: 30px auto 0;
+
       table {
         border: none;
         background-color: #fff;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
+
         th {
           border: none;
         }
+
         td {
           width: 25%;
           height: 120px;
@@ -376,15 +440,17 @@
           font-size: 18px;
           border-left: 2px solid #ebecf0;
           border-bottom: 2px solid #ebecf0;
+
           &:last-child {
             border-right: 2px solid #ebecf0;
           }
         }
+
         .titleOne {
           height: 95px;
-          background: url('http://static-image.1911edu.com/systemBorderBg1.png')
-            no-repeat;
+          background: url('https://static-image.1911edu.com/systemBorderBg1.png') no-repeat;
           background-size: cover;
+
           th {
             border-top-right-radius: 10px;
             border-top-left-radius: 10px;
@@ -394,13 +460,16 @@
             font-size: 24px;
           }
         }
+
         .titleTwo {
           height: 68px;
           background-color: #f7f1ff;
+
           th {
             color: #222;
             cursor: pointer;
             border-bottom: 2px solid transparent;
+
             &.checked {
               background-color: #e8d7ff;
               color: #773084;
@@ -408,29 +477,34 @@
             }
           }
         }
+
         .titleThree {
           height: 68px;
           background-color: #f4f5f6;
           text-align: center;
+
           th {
             border-left: 2px solid #ebecf0;
             border-bottom: 2px solid #ebecf0;
             border-top: 2px solid #ebecf0;
+
             &:last-child {
               border-right: 2px solid #ebecf0;
             }
           }
         }
       }
+
       &.tableTwo {
         .titleOne {
           height: 95px;
-          background: url('http://static-image.1911edu.com/systemBorderBg2.png')
-            no-repeat;
+          background: url('https://static-image.1911edu.com/systemBorderBg2.png') no-repeat;
           background-size: cover;
         }
+
         .titleTwo {
           background-color: #ffeee5;
+
           th {
             width: 1100px;
             border: none;
@@ -438,6 +512,7 @@
             line-height: 68px;
             cursor: pointer;
             border-bottom: 2px solid transparent;
+
             &.checked {
               background-color: #ffbfa1;
               color: #ff4401;
@@ -446,18 +521,21 @@
           }
         }
       }
+
       &.tableThree {
         .titleOne {
           width: 100%;
           height: 95px;
-          background: url('http://static-image.1911edu.com/systemBorderBg3.png')
-            no-repeat;
+          background: url('https://static-image.1911edu.com/systemBorderBg3.png') no-repeat;
           background-size: cover;
         }
+
         .titleTwo {
           background-color: #eefff8;
+
           th {
             border-bottom: 2px solid transparent;
+
             &.checked {
               background-color: #b9efd7;
               color: #189565;
@@ -466,36 +544,42 @@
           }
         }
       }
+
       p {
         font-size: 18px;
         padding: 20px 0;
         color: #999;
       }
     }
+
     .studyCourse {
       width: 1100px;
       margin: 0 auto;
+
       .studyInfo {
         width: 1100px;
         padding: 40px;
         background: rgba(255, 255, 255, 1);
         box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+
         h5 {
           margin-bottom: 20px;
+
           .studyTitle {
             margin-right: 20px;
             width: 150px;
             padding-right: 24px;
             text-align: right;
-            background: url('http://static-image.1911edu.com/studyTitleBg.png')
-              no-repeat;
+            background: url('https://static-image.1911edu.com/studyTitleBg.png') no-repeat;
             background-size: contain;
           }
+
           span {
             font-size: 18px;
             line-height: 32px;
           }
         }
+
         p {
           font-size: 18px;
           color: #222;
@@ -504,6 +588,7 @@
       }
     }
   }
+
   .companyInfo {
     width: 1100px;
     margin: 0 auto;
@@ -511,11 +596,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
     .listOne {
       width: 534px;
       margin-bottom: 38px;
       background: rgba(255, 255, 255, 1);
       box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+
       .title {
         width: 100%;
         height: 80px;
@@ -527,8 +614,10 @@
         text-align: center;
         background-color: #ffaa07;
       }
+
       .content {
         padding: 30px 26px 12px 20px;
+
         h5,
         p {
           text-indent: 2em;
@@ -536,21 +625,26 @@
           color: rgba(34, 34, 34, 1);
           line-height: 32px;
         }
+
         p {
           text-indent: 0;
         }
       }
+
       &:nth-child(2) .title {
         background-color: #f88e4a;
       }
+
       &:nth-child(3) .title {
         background-color: #4f86ed;
       }
+
       &:nth-child(4) .title {
         background-color: #8f53d2;
       }
     }
   }
+
   .callMe {
     width: 710px;
     height: 90px;
@@ -562,6 +656,7 @@
     background-color: #8f53d2;
     position: relative;
     text-align: center;
+
     span {
       width: 710px;
       height: 90px;
@@ -573,6 +668,7 @@
       top: -7px;
       left: 0;
     }
+
     img {
       width: 42px;
       height: 64px;

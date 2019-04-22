@@ -1,183 +1,190 @@
 .hybridTeach {
-	//   background-color: #000;
+  //   background-color: #000;
 
-	.banner {
-		width: 100%;
-		height: 560px;
-		text-align: center;
-		background: url('http://static-image.1911edu.com/hybridTeach-banner.png') no-repeat;
-		background-position: center;
-		h4 {
-			font-size: 50px;
-			color: #fff;
-			font-weight: bold;
-			padding-top: 130px;
-		}
+  .banner {
+    width: 100%;
+    height: 560px;
+    text-align: center;
+    background: url('https://static-image.1911edu.com/hybridTeach-banner.png') no-repeat;
+    background-position: center;
 
-		.line {
-			width: 110px;
-			height: 4px;
-			background-color: #fff;
-			margin: 0 auto;
-			margin-top: 30px;
-			margin-bottom: 40px;
-		}
+    h4 {
+      font-size: 50px;
+      color: #fff;
+      font-weight: bold;
+      padding-top: 130px;
+    }
 
-		.text {
-			font-size: 22px;
-			color: #fff;
-			line-height: 40px;
-		}
-	}
-	.hybridCon {
-		background: url('http://static-image.1911edu.com/core-bg.png') repeat-y;
-	}
-	.introduce {
-		position: relative;
-		width: 1100px;
-		background: #fff;
-		box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.08);
-		border-radius: 10px;
-		margin: -50px auto 0;
-		padding: 50px 32px;
-		z-index: 20;
-		p {
-			font-size: 22px;
-			line-height: 44px;
-			text-indent: 2em;
+    .line {
+      width: 110px;
+      height: 4px;
+      background-color: #fff;
+      margin: 0 auto;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
 
-			i {
-				text-indent: 0;
-				color: #4063b2;
-			}
-		}
-	}
+    .text {
+      font-size: 22px;
+      color: #fff;
+      line-height: 40px;
+    }
+  }
 
-	.headline {
-		color: #222;
-		font-size: 36px;
-		text-align: center;
-		padding: 45px 0;
-		font-weight: 500;
-	}
+  .hybridCon {
+    background: url('https://static-image.1911edu.com/core-bg.png') repeat-y;
+  }
 
-	.contentText {
-		width: 1100px;
-		margin: 0 auto;
-		color: #222;
-		font-size: 18px;
-		line-height: 36px;
+  .introduce {
+    position: relative;
+    width: 1100px;
+    background: #fff;
+    box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    margin: -50px auto 0;
+    padding: 50px 32px;
+    z-index: 20;
 
-		.topContent {
-			text-indent: 2em;
-			margin-bottom: 35px;
-			font-weight: 500;
-		}
+    p {
+      font-size: 22px;
+      line-height: 44px;
+      text-indent: 2em;
 
-		.tree {
-			width: 688px;
-			margin: 0 auto;
-			padding: 40px 36px;
-			background: rgba(64, 99, 178, 1);
-			box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
-			position: relative;
-			text-indent: 2em;
-			color: #fff;
-			z-index: 1;
-		}
+      i {
+        text-indent: 0;
+        color: #4063b2;
+      }
+    }
+  }
 
-		.border {
-			width: 842px;
-			height: 150px;
-			border: 2px solid #4063b2;
-			border-bottom: none;
-			position: relative;
-			margin: -60px auto 0;
+  .headline {
+    color: #222;
+    font-size: 36px;
+    text-align: center;
+    padding: 45px 0;
+    font-weight: 500;
+  }
 
-			&:after,
-			&:before {
-				content: '';
-				width: 2px;
-				height: 149px;
-				position: absolute;
-				top: 0;
-				background-color: #4063b2;
-			}
+  .contentText {
+    width: 1100px;
+    margin: 0 auto;
+    color: #222;
+    font-size: 18px;
+    line-height: 36px;
 
-			&:after {
-				left: 280px;
-			}
+    .topContent {
+      text-indent: 2em;
+      margin-bottom: 35px;
+      font-weight: 500;
+    }
 
-			&:before {
-				right: 280px;
-			}
-		}
+    .tree {
+      width: 688px;
+      margin: 0 auto;
+      padding: 40px 36px;
+      background: rgba(64, 99, 178, 1);
+      box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
+      position: relative;
+      text-indent: 2em;
+      color: #fff;
+      z-index: 1;
+    }
 
-		.treeList {
-			display: flex;
-			justify-content: space-around;
-			margin: -10px 0 50px;
-			position: relative;
+    .border {
+      width: 842px;
+      height: 150px;
+      border: 2px solid #4063b2;
+      border-bottom: none;
+      position: relative;
+      margin: -60px auto 0;
 
-			.listOne {
-				width: 260px;
-				height: 258px;
-				background: #fff;
-				box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.06);
+      &:after,
+      &:before {
+        content: '';
+        width: 2px;
+        height: 149px;
+        position: absolute;
+        top: 0;
+        background-color: #4063b2;
+      }
 
-				h5 {
-					height: 60px;
-					line-height: 60px;
-					text-align: center;
-					font-size: 24px;
-					color: #fff;
-				}
+      &:after {
+        left: 280px;
+      }
 
-				p {
-					font-size: 18px;
-					padding: 35px 20px 0;
-					text-indent: 2em;
-				}
+      &:before {
+        right: 280px;
+      }
+    }
 
-				.orange {
-					background-color: #e99141;
-				}
+    .treeList {
+      display: flex;
+      justify-content: space-around;
+      margin: -10px 0 50px;
+      position: relative;
 
-				.green {
-					background-color: #66b96d;
-				}
+      .listOne {
+        width: 260px;
+        height: 258px;
+        background: #fff;
+        box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.06);
 
-				.red {
-					background-color: #e17979;
-				}
+        h5 {
+          height: 60px;
+          line-height: 60px;
+          text-align: center;
+          font-size: 24px;
+          color: #fff;
+        }
 
-				.blue {
-					background-color: #6b8bdb;
-				}
-			}
-			@media only screen and (max-device-width: 375px) {
-				.listOne {
-					height: 280px;
-				}
-			}
-		}
-	}
+        p {
+          font-size: 18px;
+          padding: 35px 20px 0;
+          text-indent: 2em;
+        }
 
-	.bottomCon {
-		// height: 476px;
-		padding-bottom: 50px;
-		background: url('http://static-image.1911edu.com/hybridTeach-bg.png') no-repeat;
-		background-size: cover;
-		h3 {
-			color: #fff;
-		}
-		p {
-			width: 1100px;
-			margin: 0 auto;
-			font-size: 18px;
-			color: #fff;
-			line-height: 36px;
-			text-indent: 2em;
-		}
-	}
+        .orange {
+          background-color: #e99141;
+        }
+
+        .green {
+          background-color: #66b96d;
+        }
+
+        .red {
+          background-color: #e17979;
+        }
+
+        .blue {
+          background-color: #6b8bdb;
+        }
+      }
+
+      @media only screen and (max-device-width: 375px) {
+        .listOne {
+          height: 280px;
+        }
+      }
+    }
+  }
+
+  .bottomCon {
+    // height: 476px;
+    padding-bottom: 50px;
+    background: url('https://static-image.1911edu.com/hybridTeach-bg.png') no-repeat;
+    background-size: cover;
+
+    h3 {
+      color: #fff;
+    }
+
+    p {
+      width: 1100px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: #fff;
+      line-height: 36px;
+      text-indent: 2em;
+    }
+  }
 }

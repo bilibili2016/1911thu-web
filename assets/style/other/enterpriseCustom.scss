@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   background-color: #fff;
-  background: url('http://static-image.1911edu.com/enter-bg.png') no-repeat;
+  background: url('https://static-image.1911edu.com/enter-bg.png') no-repeat;
   background-size: 100% 100%;
   background-attachment: fixed;
   z-index: 10;
@@ -12,22 +12,25 @@
     height: 420px;
     width: 100%;
     overflow: hidden;
-    background: url('http://static-image.1911edu.com/enter-top-img.png')
-      no-repeat;
+    background: url('https://static-image.1911edu.com/enter-top-img.png') no-repeat;
     background-size: 100% 100%;
     display: table;
     z-index: 90;
+
     .top-con {
       display: table-cell;
       vertical-align: middle;
       text-align: center;
+
       .top-title {
         font-size: 46px;
         color: #fff;
       }
+
       .line {
         text-align: center;
         margin: 30px 0;
+
         span {
           display: inline-block;
           width: 60px;
@@ -35,12 +38,14 @@
           background-color: #915ede;
         }
       }
+
       .top-desc {
         font-size: 18px;
         color: #fff;
         line-height: 30px;
       }
     }
+
     img {
       width: 1920px;
       height: 360px;
@@ -50,6 +55,7 @@
       margin-left: -960px;
     }
   }
+
   .serviceImg_bottom {
     position: absolute;
     bottom: 0;
@@ -66,6 +72,7 @@
     position: relative;
     z-index: 20;
     padding-bottom: 70px;
+
     h2 {
       font-size: 36px;
       color: #222;
@@ -74,6 +81,7 @@
 
     .service-list {
       position: relative;
+
       .service-line {
         position: absolute;
         left: 550px;
@@ -84,6 +92,7 @@
         background: rgba(233, 233, 233, 1);
         z-index: 20;
       }
+
       .service-item {
         position: relative;
         float: left;
@@ -95,6 +104,7 @@
         margin-right: 1px;
         // border-left: 2px solid rgba(255, 255, 255, 0);
         z-index: 1;
+
         .top-line {
           position: absolute;
           top: 0;
@@ -104,6 +114,7 @@
           background: rgba(145, 94, 222, 1);
           transition: all 300ms;
         }
+
         .line-inner {
           position: absolute;
           left: 0;
@@ -115,28 +126,34 @@
           transition: all 300ms;
           // z-index: -1；;
         }
+
         .item-title {
           font-size: 22px;
           color: #333;
+
           .item-index {
             font-size: 34px;
             color: #ccc;
             margin-right: 10px;
           }
         }
+
         .item-desc {
           font-size: 16px;
           color: #666;
           margin-top: 30px;
         }
+
         &:hover {
           background-color: #fff;
           box-shadow: 15px 15px 38px rgba(198, 194, 210, 0.28);
           -webkit-box-shadow: 15px 15px 38px rgba(198, 194, 210, 0.28);
           -moz-box-shadow: 15px 15px 38px rgba(198, 194, 210, 0.28);
+
           .line-inner {
             bottom: 210px;
           }
+
           .item-title {
             .item-index {
               color: #915ede;

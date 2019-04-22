@@ -1,107 +1,121 @@
 .projectDetail {
-    padding: 0 0 100px;
-    position: relative;
-    background: url('http://static-image.1911edu.com/pro_detailbg.png') no-repeat;
+  padding: 0 0 100px;
+  position: relative;
+  background: url('https://static-image.1911edu.com/pro_detailbg.png') no-repeat;
+  background-position: top center;
+  background-size: 100% 440px;
+
+  .bg-banner {
+    width: 100%;
+    height: 440px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-filter: blur(5px);
+    /* Chrome, Opera */
+    -moz-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+  }
+
+  .proHeader {
+    width: 1100px;
+    height: 490px;
+    margin: 0 auto;
+    // background: url('https://static-image.1911edu.com/pro_banner.png') no-repeat;
     background-position: top center;
-    background-size: 100% 440px;
-    .bg-banner {
+    background-size: 100% 390px;
+    box-shadow: 0px 8px 21px 0px rgba(39, 0, 77, 0.07);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
+    position: relative;
+
+    .proHeader-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 390px;
+      z-index: 1;
+    }
+
+    .proHeader-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      z-index: 10;
+      background: url("https://static-image.1911edu.com/project-mask.png") no-repeat;
+      background-size: 1100px 80px;
+    }
+
+    .header-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 490px;
+    }
+
+    h1 {
+      margin: 0;
+      padding-top: 75px;
+      font-size: 46px;
+      color: #fff;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 24px;
+      height: 30px;
+      line-height: 30px;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .proHeader-detail {
+      z-index: 20;
+    }
+  }
+
+  .proContent {
+    clear: both;
+    padding-top: 40px;
+
+    .proTab {
+      width: 1130px;
+      margin: 0 auto;
+      padding: 0 15px;
+
+      .detail {
+        font-size: 16px;
         width: 100%;
-        height: 440px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        -webkit-filter: blur(5px);
-        /* Chrome, Opera */
-        -moz-filter: blur(5px);
-        -ms-filter: blur(5px);
-        filter: blur(5px);
+        box-shadow: 0px 0px 21px rgba(39, 0, 77, 0.07);
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+
+        img {
+          max-width: 100%;
+          margin-top: -3px;
+        }
+      }
+
+      .introduction {
+        font-size: 16px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 30px;
+        line-height: 30px;
+        box-shadow: 0px 0px 21px rgba(39, 0, 77, 0.07);
+      }
     }
-    .proHeader {
-        width: 1100px;
-        height: 490px;
-        margin: 0 auto;
-        // background: url('http://static-image.1911edu.com/pro_banner.png') no-repeat;
-        background-position: top center;
-        background-size: 100% 390px;
-        box-shadow: 0px 8px 21px 0px rgba(39, 0, 77, 0.07);
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-        overflow: hidden;
-        position: relative;
-        .proHeader-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 390px;
-            z-index: 1;
-        }
-        .proHeader-mask {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            z-index: 10;
-            background: url("http://static-image.1911edu.com/project-mask.png") no-repeat;
-            background-size: 1100px 80px;
-        }
-        .header-mask {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 490px;
-        }
-        h1 {
-            margin: 0;
-            padding-top: 75px;
-            font-size: 46px;
-            color: #fff;
-            text-align: center;
-        }
-        h3 {
-            font-size: 24px;
-            height: 30px;
-            line-height: 30px;
-            margin-top: 30px;
-            color: #fff;
-            text-align: center;
-        }
-        .proHeader-detail {
-            z-index: 20;
-        }
+
+    .el-tabs__content {
+      margin-top: 30px !important;
     }
-    .proContent {
-        clear: both;
-        padding-top: 40px;
-        .proTab {
-            width: 1130px;
-            margin: 0 auto;
-            padding: 0 15px;
-            .detail {
-                font-size: 16px;
-                width: 100%;
-                box-shadow: 0px 0px 21px rgba(39, 0, 77, 0.07);
-                padding: 30px;
-                border-radius: 10px;
-                margin-bottom: 30px;
-                img {
-                    max-width: 100%;
-                    margin-top: -3px;
-                }
-            }
-            .introduction {
-                font-size: 16px;
-                background-color: #fff;
-                border-radius: 10px;
-                padding: 30px;
-                line-height: 30px;
-                box-shadow: 0px 0px 21px rgba(39, 0, 77, 0.07);
-            }
-        }
-        .el-tabs__content {
-            margin-top: 30px !important;
-        }
-    }
+  }
 }

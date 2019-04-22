@@ -1,549 +1,635 @@
 .affirmOrder {
-	width: 100%;
-	position: relative;
-	.main {
-		margin-top: -50px;
-	}
-	.contain {
-		padding-bottom: 70px;
-		// background: url('http://static-image.1911edu.com/orderBanners.png') no-repeat;
-		// background-position: top center;
-		// background-size: 100%;
-	}
-	h3 {
-		width: 1100px;
-		margin: 0 auto;
-		color: #773084;
-		font-size: 24px;
-		padding: 0 30px;
-		line-height: 88px;
-		height: 88px;
-		// cursor: inherit
-	}
-	.buyType {
-		width: 1100px;
-		padding: 0 30px;
-		background: rgba(255, 255, 255, 1);
-		border-radius: 6px;
-		box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-		margin: 0 auto 40px;
-		h4 {
-			color: #222;
-			font-size: 16px;
-			line-height: 58px;
-		}
-		.buy {
-			padding-bottom: 20px;
-			span {
-				width: 88px;
-				height: 34px;
-				line-height: 34px;
-				border-radius: 6px;
-				margin-right: 15px;
-				color: #222;
-				font-size: 14px;
-				cursor: pointer;
-				text-align: center;
-				position: relative;
-				overflow: hidden;
-				border: 1px solid #773084;
-				transition: all 300ms;
-				border: 1px #773084 solid;
-				&.checked {
-					background-color: #773084;
-					border: none;
-					color: #fff;
-					&:before {
-						content: url(http://static-image.1911edu.com/checked.png);
-						width: 32px;
-						height: 32px;
-						position: absolute;
-						right: 0;
-						bottom: 0;
-					}
-				}
-			}
-		}
-		.company {
-			border-top: 1px solid #e8d6f7;
-			span.addCompany {
-				color: #773084;
-				font-size: 16px;
-				cursor: pointer;
-			}
-			.cpnInfo {
-				p {
-					color: #6d687f;
-					font-size: 14px;
-					padding: 0 0 10px; // padding-left: 10px;
-				}
-				p:last-child {
-					padding-bottom: 20px;
-				}
-				p.addcp {
-					text-align: center;
-				}
-				.cpnInfoLi {
-					font-size: 16px;
-					color: #6d687f;
-					span {
-						margin-right: 45px;
-					}
-				}
-			}
-		}
-	}
-	.goodsList {
-		width: 1100px;
-		margin: 0 auto; // margin-top: 100px;
-		.goods {
-			width: 1100px;
-			margin: 0 auto;
-		}
-		.invoiceMsg {
-			margin: 0 30px;
-			h4 {
-				height: 75px;
-				line-height: 75px;
-				font-size: 14px;
-				color: #222;
-				font-weight: 700;
-				span {
-					font-size: 12px;
-					color: #222;
-					width: 345px;
-					height: 60px;
-					line-height: 60px;
-					text-align: right;
-					padding-right: 20px;
-					font-weight: 400;
-					background: url('http://static-image.1911edu.com/ticketTips.png') no-repeat;
-				}
-			}
-			.invoice {
-				line-height: 52px;
-				font-size: 14px;
-				color: #888;
-				&.noTicket {
-					border-bottom: 1px solid #e8d6f7;
-				}
-				.changeInvoice {
-					color: #773084;
-					cursor: pointer;
-					vertical-align: top;
-				}
-				.choose {
-					margin-right: 30px;
-				}
-			}
-			.ticketInfo {
-				width: 1100px;
-				margin-left: -30px;
-				padding: 10px 30px;
-				background-color: #fff;
-				border: 1px solid #e8d6f7;
-				p {
-					line-height: 30px;
-					font-size: 14px;
-				}
-			}
-		}
-	}
+  width: 100%;
+  position: relative;
+
+  .main {
+    margin-top: -50px;
+  }
+
+  .contain {
+    padding-bottom: 70px;
+    // background: url('https://static-image.1911edu.com/orderBanners.png') no-repeat;
+    // background-position: top center;
+    // background-size: 100%;
+  }
+
+  h3 {
+    width: 1100px;
+    margin: 0 auto;
+    color: #773084;
+    font-size: 24px;
+    padding: 0 30px;
+    line-height: 88px;
+    height: 88px;
+    // cursor: inherit
+  }
+
+  .buyType {
+    width: 1100px;
+    padding: 0 30px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+    margin: 0 auto 40px;
+
+    h4 {
+      color: #222;
+      font-size: 16px;
+      line-height: 58px;
+    }
+
+    .buy {
+      padding-bottom: 20px;
+
+      span {
+        width: 88px;
+        height: 34px;
+        line-height: 34px;
+        border-radius: 6px;
+        margin-right: 15px;
+        color: #222;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #773084;
+        transition: all 300ms;
+        border: 1px #773084 solid;
+
+        &.checked {
+          background-color: #773084;
+          border: none;
+          color: #fff;
+
+          &:before {
+            content: url('https://static-image.1911edu.com/checked.png');
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+          }
+        }
+      }
+    }
+
+    .company {
+      border-top: 1px solid #e8d6f7;
+
+      span.addCompany {
+        color: #773084;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .cpnInfo {
+        p {
+          color: #6d687f;
+          font-size: 14px;
+          padding: 0 0 10px; // padding-left: 10px;
+        }
+
+        p:last-child {
+          padding-bottom: 20px;
+        }
+
+        p.addcp {
+          text-align: center;
+        }
+
+        .cpnInfoLi {
+          font-size: 16px;
+          color: #6d687f;
+
+          span {
+            margin-right: 45px;
+          }
+        }
+      }
+    }
+  }
+
+  .goodsList {
+    width: 1100px;
+    margin: 0 auto; // margin-top: 100px;
+
+    .goods {
+      width: 1100px;
+      margin: 0 auto;
+    }
+
+    .invoiceMsg {
+      margin: 0 30px;
+
+      h4 {
+        height: 75px;
+        line-height: 75px;
+        font-size: 14px;
+        color: #222;
+        font-weight: 700;
+
+        span {
+          font-size: 12px;
+          color: #222;
+          width: 345px;
+          height: 60px;
+          line-height: 60px;
+          text-align: right;
+          padding-right: 20px;
+          font-weight: 400;
+          background: url('https://static-image.1911edu.com/ticketTips.png') no-repeat;
+        }
+      }
+
+      .invoice {
+        line-height: 52px;
+        font-size: 14px;
+        color: #888;
+
+        &.noTicket {
+          border-bottom: 1px solid #e8d6f7;
+        }
+
+        .changeInvoice {
+          color: #773084;
+          cursor: pointer;
+          vertical-align: top;
+        }
+
+        .choose {
+          margin-right: 30px;
+        }
+      }
+
+      .ticketInfo {
+        width: 1100px;
+        margin-left: -30px;
+        padding: 10px 30px;
+        background-color: #fff;
+        border: 1px solid #e8d6f7;
+
+        p {
+          line-height: 30px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
 }
 
 .invoiceShadow {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0;
-	background-color: rgba(0, 0, 0, 0.6);
-	z-index: 100;
-	.invoiceInfo {
-		width: 740px;
-		height: auto;
-		background-color: #fff;
-		border-radius: 10px;
-		position: absolute;
-		top: 60px;
-		left: 50%;
-		overflow-y: auto;
-		margin-left: -360px;
-		.header {
-			padding-left: 53px;
-			margin-top: 14px;
-			span {
-				padding: 8px 21px;
-				border: 1px solid #641766;
-				transition: all 300ms;
-				font-size: 14px;
-				color: #222;
-				margin-right: 30px;
-				cursor: pointer;
-				&.checked {
-					background-color: #773084;
-					border-color: #773084;
-					color: #fff;
-					position: relative;
-					&:after {
-						content: '';
-						position: absolute;
-						right: -1px;
-						bottom: -1px;
-						width: 24px;
-						height: 24px;
-						background: url('http://static-image.1911edu.com/ok.png') no-repeat;
-						background-size: contain;
-					}
-				}
-			}
-		}
-		h3 {
-			height: 58px;
-			line-height: 58px;
-			padding: 0 30px 0 40px;
-			font-size: 16px;
-			color: #222;
-			border-bottom: 1px solid #e8d6f7;
-			i {
-				color: #773084;
-				font-size: 20px;
-				margin-top: 19px;
-				font-weight: 700;
-			}
-		}
-		.invoiceForm {
-			width: 550px;
-			margin: 0 auto;
-			font-size: 14px;
-			margin-top: 16px;
-			.formLi {
-				margin-bottom: 15px;
-				p {
-					line-height: 34px;
-					input {
-						width: 420px;
-						height: 34px;
-						border: 1px solid #bbbbbb;
-						padding: 0 10px;
-					}
-					&.fl {
-						width: 100px;
-						font-size: 14px;
-						color: #222;
-						text-align: right;
-						i {
-							color: #ff5f5f;
-						}
-					}
-					&.fr {
-						width: 420px;
-						height: 34px;
-						&.addInvoice {
-							border: 1px solid #bbbbbb;
-							transition: all 300ms;
-							input {
-								border: none;
-								width: 370px;
-							}
-							span {
-								color: #773084;
-								cursor: pointer;
-							}
-						}
-						&.readyOrderTicket span {
-							width: 134px;
-							height: 34px;
-							line-height: 34px;
-							text-align: center;
-							background-color: #773084;
-							color: #fff;
-							position: relative;
-							i {
-								position: absolute;
-								right: 0;
-								bottom: 0;
-								width: 24px;
-								height: 24px;
-								background: url('http://static-image.1911edu.com/ok.png') no-repeat;
-								background-size: contain;
-							}
-						}
-					}
-					&.radioBtn {
-						i {
-							display: none;
-							position: absolute;
-							right: 0;
-							bottom: 0;
-							width: 24px;
-							height: 24px;
-							background: url('http://static-image.1911edu.com/ok.png') no-repeat;
-							background-size: contain;
-						}
-						span {
-							width: 88px;
-							height: 32px;
-							line-height: 32px;
-							text-align: center;
-							border-radius: 6px;
-							margin-right: 30px;
-							cursor: pointer;
-							border: 1px solid #773084;
-							&.checked {
-								background-color: #773084;
-								border-color: #773084;
-								color: #fff;
-							}
-						}
-					}
-					&.word {
-						clear: both;
-						color: #888;
-						margin-left: 130px;
-						input {
-							margin-top: 10px;
-						}
-						i {
-							color: #ff5f5f;
-						}
-					}
-					&.province {
-						input {
-							width: 120px;
-							margin-right: 20px;
-						}
-						.el-input__suffix {
-							right: 25px;
-						}
-					}
-				}
-				h6.fr {
-					width: 420px;
-					height: 34px;
-					line-height: 34px;
-					padding: 0 10px;
-					color: #222;
-					border: 1px solid #bbbbbb;
-					transition: all 300ms;
-				}
-				h5 {
-					padding-left: 130px;
-					color: #773084;
-					cursor: pointer;
-					margin-bottom: 10px;
-				}
-				&.clearfix .check {
-					border: 2px solid #773084 !important;
-					position: relative;
-				}
-				.step {
-					span {
-						padding: 8px 15px;
-						color: #aaa;
-						border: 1px solid#ddd;
-						&.stepCheck {
-							color: #222;
-							border: 1px solid #773084;
-						}
-					}
-					i {
-						display: inline-block;
-						width: 20px;
-						height: 1px;
-						margin: 0 10px;
-						vertical-align: middle;
-						background-color: #773084;
-					}
-				}
-				.smallTip {
-					font-size: 14px;
-					color: #888;
-					text-align: center;
-				}
-			}
-			&.zzTicket {
-				// width: 610px;
-				.stepTwo {
-					width: 610px;
-					.formLi {
-						p {
-							&.fl {
-								width: 110px;
-							}
-							&.fr {
-								width: 480px;
-								height: 34px;
-								span.tips {
-									margin-left: 10px;
-									color: #ff5f5f;
-									i {
-										margin-right: 5px;
-									}
-									.el-icon-success {
-										color: #00ba11;
-									}
-								}
-							}
-							input {
-								width: 290px;
-							}
-						}
-					}
-				}
-				.stepThree {
-					width: 540px;
-					margin: 0 auto;
-					input {
-						width: 320px;
-					}
-				}
-			}
-			.smallTip {
-				color: #888;
-				text-align: center;
-				padding-bottom: 10px;
-			}
-		}
-		.operation {
-			text-align: center;
-			padding: 8px 0 19px;
-			font-size: 14px;
-			span {
-				width: 150px;
-				height: 34px;
-				line-height: 34px;
-				background-color: #dddddd;
-				color: #666;
-				cursor: pointer;
-				border-radius: 6px;
-				transition: all 300ms;
-				&:first-child {
-					background-color: #773084;
-					color: #fff;
-					margin-right: 30px;
-					&:hover {
-						background-color: #5f068d;
-					}
-				}
-			}
-		}
-	}
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+
+  .invoiceInfo {
+    width: 740px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    overflow-y: auto;
+    margin-left: -360px;
+
+    .header {
+      padding-left: 53px;
+      margin-top: 14px;
+
+      span {
+        padding: 8px 21px;
+        border: 1px solid #641766;
+        transition: all 300ms;
+        font-size: 14px;
+        color: #222;
+        margin-right: 30px;
+        cursor: pointer;
+
+        &.checked {
+          background-color: #773084;
+          border-color: #773084;
+          color: #fff;
+          position: relative;
+
+          &:after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            bottom: -1px;
+            width: 24px;
+            height: 24px;
+            background: url('https://static-image.1911edu.com/ok.png') no-repeat;
+            background-size: contain;
+          }
+        }
+      }
+    }
+
+    h3 {
+      height: 58px;
+      line-height: 58px;
+      padding: 0 30px 0 40px;
+      font-size: 16px;
+      color: #222;
+      border-bottom: 1px solid #e8d6f7;
+
+      i {
+        color: #773084;
+        font-size: 20px;
+        margin-top: 19px;
+        font-weight: 700;
+      }
+    }
+
+    .invoiceForm {
+      width: 550px;
+      margin: 0 auto;
+      font-size: 14px;
+      margin-top: 16px;
+
+      .formLi {
+        margin-bottom: 15px;
+
+        p {
+          line-height: 34px;
+
+          input {
+            width: 420px;
+            height: 34px;
+            border: 1px solid #bbbbbb;
+            padding: 0 10px;
+          }
+
+          &.fl {
+            width: 100px;
+            font-size: 14px;
+            color: #222;
+            text-align: right;
+
+            i {
+              color: #ff5f5f;
+            }
+          }
+
+          &.fr {
+            width: 420px;
+            height: 34px;
+
+            &.addInvoice {
+              border: 1px solid #bbbbbb;
+              transition: all 300ms;
+
+              input {
+                border: none;
+                width: 370px;
+              }
+
+              span {
+                color: #773084;
+                cursor: pointer;
+              }
+            }
+
+            &.readyOrderTicket span {
+              width: 134px;
+              height: 34px;
+              line-height: 34px;
+              text-align: center;
+              background-color: #773084;
+              color: #fff;
+              position: relative;
+
+              i {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 24px;
+                height: 24px;
+                background: url('https://static-image.1911edu.com/ok.png') no-repeat;
+                background-size: contain;
+              }
+            }
+          }
+
+          &.radioBtn {
+            i {
+              display: none;
+              position: absolute;
+              right: 0;
+              bottom: 0;
+              width: 24px;
+              height: 24px;
+              background: url('https://static-image.1911edu.com/ok.png') no-repeat;
+              background-size: contain;
+            }
+
+            span {
+              width: 88px;
+              height: 32px;
+              line-height: 32px;
+              text-align: center;
+              border-radius: 6px;
+              margin-right: 30px;
+              cursor: pointer;
+              border: 1px solid #773084;
+
+              &.checked {
+                background-color: #773084;
+                border-color: #773084;
+                color: #fff;
+              }
+            }
+          }
+
+          &.word {
+            clear: both;
+            color: #888;
+            margin-left: 130px;
+
+            input {
+              margin-top: 10px;
+            }
+
+            i {
+              color: #ff5f5f;
+            }
+          }
+
+          &.province {
+            input {
+              width: 120px;
+              margin-right: 20px;
+            }
+
+            .el-input__suffix {
+              right: 25px;
+            }
+          }
+        }
+
+        h6.fr {
+          width: 420px;
+          height: 34px;
+          line-height: 34px;
+          padding: 0 10px;
+          color: #222;
+          border: 1px solid #bbbbbb;
+          transition: all 300ms;
+        }
+
+        h5 {
+          padding-left: 130px;
+          color: #773084;
+          cursor: pointer;
+          margin-bottom: 10px;
+        }
+
+        &.clearfix .check {
+          border: 2px solid #773084 !important;
+          position: relative;
+        }
+
+        .step {
+          span {
+            padding: 8px 15px;
+            color: #aaa;
+            border: 1px solid#ddd;
+
+            &.stepCheck {
+              color: #222;
+              border: 1px solid #773084;
+            }
+          }
+
+          i {
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+            margin: 0 10px;
+            vertical-align: middle;
+            background-color: #773084;
+          }
+        }
+
+        .smallTip {
+          font-size: 14px;
+          color: #888;
+          text-align: center;
+        }
+      }
+
+      &.zzTicket {
+
+        // width: 610px;
+        .stepTwo {
+          width: 610px;
+
+          .formLi {
+            p {
+              &.fl {
+                width: 110px;
+              }
+
+              &.fr {
+                width: 480px;
+                height: 34px;
+
+                span.tips {
+                  margin-left: 10px;
+                  color: #ff5f5f;
+
+                  i {
+                    margin-right: 5px;
+                  }
+
+                  .el-icon-success {
+                    color: #00ba11;
+                  }
+                }
+              }
+
+              input {
+                width: 290px;
+              }
+            }
+          }
+        }
+
+        .stepThree {
+          width: 540px;
+          margin: 0 auto;
+
+          input {
+            width: 320px;
+          }
+        }
+      }
+
+      .smallTip {
+        color: #888;
+        text-align: center;
+        padding-bottom: 10px;
+      }
+    }
+
+    .operation {
+      text-align: center;
+      padding: 8px 0 19px;
+      font-size: 14px;
+
+      span {
+        width: 150px;
+        height: 34px;
+        line-height: 34px;
+        background-color: #dddddd;
+        color: #666;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: all 300ms;
+
+        &:first-child {
+          background-color: #773084;
+          color: #fff;
+          margin-right: 30px;
+
+          &:hover {
+            background-color: #5f068d;
+          }
+        }
+      }
+    }
+  }
 }
 
 .information {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0;
-	background-color: rgba(0, 0, 0, 0.6);
-	z-index: 100;
-	.info {
-		position: absolute;
-		top: 100px;
-		left: 50%;
-		margin-left: -227px;
-		width: 454px;
-		height: auto;
-		border-radius: 10px;
-		background-color: #fff;
-		.infoTitle h4 {
-			border-bottom: 1px solid #e8d6f7;
-			height: 76px;
-			text-align: center;
-			line-height: 76px; // padding-left: 50px;
-			color: #773084;
-		}
-		.companyInfo {
-			.el-form-item {
-				height: 50px;
-				margin: 20px 0 10px;
-			}
-			.el-form-item__content {
-				.el-button {
-					width: 264px;
-					height: 40px;
-					border-radius: 6px;
-					margin-left: -80px;
-					background-color: #773084;
-					color: #fff;
-				}
-			}
-			.code {
-				span {
-					float: right;
-					width: 118px;
-					height: 40px;
-					line-height: 40px;
-					text-align: center;
-					border-radius: 6px;
-					background-color: #eee;
-					color: #773084;
-					font-size: 12px;
-					cursor: pointer;
-				}
-			}
-		}
-	}
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+
+  .info {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    margin-left: -227px;
+    width: 454px;
+    height: auto;
+    border-radius: 10px;
+    background-color: #fff;
+
+    .infoTitle h4 {
+      border-bottom: 1px solid #e8d6f7;
+      height: 76px;
+      text-align: center;
+      line-height: 76px; // padding-left: 50px;
+      color: #773084;
+    }
+
+    .companyInfo {
+      .el-form-item {
+        height: 50px;
+        margin: 20px 0 10px;
+      }
+
+      .el-form-item__content {
+        .el-button {
+          width: 264px;
+          height: 40px;
+          border-radius: 6px;
+          margin-left: -80px;
+          background-color: #773084;
+          color: #fff;
+        }
+      }
+
+      .code {
+        span {
+          float: right;
+          width: 118px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          border-radius: 6px;
+          background-color: #eee;
+          color: #773084;
+          font-size: 12px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 
 .alertMask {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	left: 0;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.4);
-	z-index: 999;
-	.alertPop {
-		width: 500px;
-		height: 325px;
-		position: absolute;
-		top: 50px;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		margin: auto;
-		border-radius: 10px;
-		background-color: #fff;
-		text-align: center;
-		.el-icon-close {
-			position: absolute;
-			right: 20px;
-			top: 20px;
-			font-size: 24px;
-			font-weight: 600;
-			color: #773084;
-			z-index: 3;
-			cursor: pointer;
-		}
-		img {
-			display: inline-block;
-			width: 90px;
-			height: 90px;
-			margin-top: 60px;
-		}
-		p {
-			font-size: 16px;
-			color: #222;
-			margin: 30px 0 40px 0;
-		}
-		.el-button {
-			width: 150px;
-			height: 40px;
-			background-color: #5b20a0;
-			border-radius: 5px;
-			// line-height: 40px;
-			text-align: center;
-			color: #fff;
-			cursor: pointer;
-		}
-	}
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+
+  .alertPop {
+    width: 500px;
+    height: 325px;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: center;
+
+    .el-icon-close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 24px;
+      font-weight: 600;
+      color: #773084;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    img {
+      display: inline-block;
+      width: 90px;
+      height: 90px;
+      margin-top: 60px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #222;
+      margin: 30px 0 40px 0;
+    }
+
+    .el-button {
+      width: 150px;
+      height: 40px;
+      background-color: #5b20a0;
+      border-radius: 5px;
+      // line-height: 40px;
+      text-align: center;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
 }

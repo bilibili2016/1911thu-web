@@ -1,13 +1,16 @@
 .newOrFreeCourseList {
   width: 1100px;
   margin: 0 auto;
+
   .boxshadow-none {
     position: relative;
   }
+
   .el-card {
     width: 360px;
     height: 230px;
     border-radius: 0;
+
     .el-card__body {
       img {
         width: 360px;
@@ -15,22 +18,26 @@
       }
     }
   }
+
   .course {
     width: 100%;
     padding: 32px 0;
     border-bottom: 1px solid #eee;
     transition: all 300ms;
+
     // border-radius: 6px;
     // background-color: #fff;
     // box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
     .el-card.is-always-shadow {
       box-shadow: none;
     }
+
     .el-card {
       // width: 400px;
       // height: 392px;
       font-size: 0;
       position: relative;
+
       .img-wrap {
         width: 400px;
         height: 260px;
@@ -41,15 +48,18 @@
           height: 100%;
         }
       }
-      & > img {
+
+      &>img {
         width: 400px;
         height: 260px;
       }
+
       .personInfo {
         width: 100%;
         height: 132px;
         background-color: #773084;
         cursor: pointer;
+
         img {
           float: left;
           width: 70px;
@@ -57,16 +67,19 @@
           border-radius: 50%;
           margin: 31px 26px;
         }
+
         h5,
         p {
           float: left;
           width: 274px;
           color: #fff;
         }
+
         h5 {
           margin-top: 41px;
           font-size: 18px;
         }
+
         p {
           font-weight: 400;
           height: 36px;
@@ -74,6 +87,7 @@
           font-size: 14px;
         }
       }
+
       .play-btn {
         width: 76px;
         height: 76px;
@@ -86,12 +100,15 @@
         cursor: pointer;
       }
     }
+
     .goodplay {
       position: relative;
+
       .image {
         width: 480px;
         height: 312px;
       }
+
       .mask {
         position: absolute;
         top: 0;
@@ -101,27 +118,33 @@
         background: rgba(100, 23, 166, 1);
         opacity: 0.5;
       }
+
       .playBtn-detail {
         width: 76px;
         height: 76px;
         margin-left: 30px;
         margin-top: -10px;
+
         img {
           cursor: pointer;
         }
       }
     }
+
     .particulars {
       width: 720px;
+
       .no-comment {
         height: 120px;
         background-color: rgba(250, 250, 250, 1);
         overflow: hidden;
+
         .comment-img {
           width: 48px;
           height: 44px;
           margin: 22px auto 13px;
         }
+
         .comment-text {
           font-size: 14px;
           color: rgba(136, 136, 136, 1);
@@ -129,9 +152,11 @@
           margin: 0 auto;
         }
       }
+
       .currentclum {
         padding-left: 20px;
         margin-right: 22px;
+
         // margin-bottom: 40px;
         h4 {
           font-size: 18px;
@@ -140,9 +165,11 @@
           cursor: pointer;
           line-height: 26px;
         }
+
         h4:hover {
           color: #5f068d;
         }
+
         .small-title {
           font-size: 14px;
           color: #93999f;
@@ -153,6 +180,7 @@
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
         }
+
         .title-desc {
           height: 56px;
           overflow: hidden;
@@ -161,6 +189,7 @@
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
         }
+
         p {
           font-size: 14px;
           line-height: 28px;
@@ -168,14 +197,17 @@
           cursor: pointer;
         }
       }
+
       .comment {
         height: 134px;
         margin-top: 5px;
         padding: 0 40px 10px;
         background-color: #fafafa;
         color: #888;
+
         h5 {
           line-height: 40px;
+
           .itemBox-rate {
             display: inline-block;
             height: 40px;
@@ -184,6 +216,7 @@
             vertical-align: middle;
           }
         }
+
         p {
           font-size: 14px;
           color: #888888;
@@ -195,6 +228,7 @@
           -webkit-box-orient: vertical;
         }
       }
+
       .bordernone {
         border: none;
         padding-top: 0px;
@@ -202,6 +236,7 @@
         color: rgba(34, 34, 34, 1);
         line-height: 30px;
         padding: 0px 40px;
+
         p {
           overflow: hidden;
           text-overflow: ellipsis;
@@ -210,25 +245,30 @@
           -webkit-box-orient: vertical;
         }
       }
+
       .study {
         padding: 20px 22px 0 20px;
+
         // height: 50px;
         // line-height: 42px;
         .coin {
           // color: #ff4400;
           // font-size: 18px;
           margin-bottom: 10px;
+
           // padding-left: 20px;
           span {
             color: #ff4400;
             font-size: 18px;
           }
         }
+
         .coin.free {
           span {
             font-size: 16px;
             color: #222;
           }
+
           .freetext {
             padding: 5px 12px;
             background-color: #ff4400;
@@ -238,9 +278,11 @@
             margin-right: 10px;
           }
         }
+
         .mfree {
           color: #222;
         }
+
         .common-button {
           p.goStudy {
             width: 140px;
@@ -250,6 +292,7 @@
             border: 1px solid #773084;
             overflow: hidden;
             font-size: 0;
+
             span {
               margin: 0;
               height: 34px;
@@ -257,9 +300,11 @@
               font-size: 14px;
               color: #773084;
               cursor: pointer;
+
               &.fl {
                 width: 88px;
               }
+
               &.fr {
                 width: 50px;
                 background-color: #773084;
@@ -267,11 +312,13 @@
             }
           }
         }
+
         span {
           font-size: 14px;
           color: #888888;
           // margin-top: 21px;
           display: inline-block;
+
           &:nth-child(3) {
             width: 140px;
             height: 36px;
@@ -282,12 +329,14 @@
             border-radius: 18px;
             cursor: pointer;
           }
+
           img {
             width: 14px;
             height: 14px;
             vertical-align: middle;
           }
         }
+
         .common-button-half {
           width: 56px;
           height: 40px;
@@ -296,35 +345,42 @@
           border-top-right-radius: 20px;
           border-bottom-right-radius: 20px;
           transition: all 300ms;
+
           span {
             width: 20px;
             height: 20px;
             margin: 10px 0 10px 15px;
-            background: url('http://static-image.1911edu.com/shopcard.png')
-              no-repeat;
+            background: url('https://static-image.1911edu.com/shopcard.png') no-repeat;
             background-size: contain;
           }
+
           &:hover {
             background: #5f068d;
           }
         }
+
         .common-button-half-right {
           margin-top: -26px;
           transition: all 300ms;
+
           .el-button {
             width: 144px;
             border-radius: 21px;
             line-height: 1.2;
             background-color: rgba(255, 255, 255, 0);
           }
+
           .el-button--primary {
             border-color: #773084;
+
             span {
               color: #773084;
             }
+
             &:hover {
               color: #fff !important;
               background-color: #5f068d;
+
               &.is-plain {
                 border-color: #5f068d;
               }
@@ -332,26 +388,31 @@
           }
         }
       }
+
       .common-button-half {
         img {
           width: 20px !important;
           height: 20px !important;
         }
+
         .el-button {
           padding: 9px 16px;
           border: 1px #773084 solid;
           border-left: none;
         }
       }
+
       .date {
         color: rgba(136, 136, 136, 1);
         font-size: 14px;
       }
+
       .time {
         color: rgba(136, 136, 136, 1);
         font-size: 14px;
         margin: 10px 40px;
       }
+
       .more {
         color: #773084;
         font-size: 14px;
@@ -359,14 +420,17 @@
         cursor: pointer;
       }
     }
+
     .particularss {
       width: 510px;
       margin-right: 30px;
+
       .currentclum {
         font-size: 16px;
         color: rgba(34, 34, 34, 1);
         line-height: 0px;
         cursor: pointer;
+
         .tg {
           color: #ff5f5f;
           font-size: 14px;
@@ -374,6 +438,7 @@
           padding-bottom: 20px;
           padding-top: 10px;
         }
+
         h4 {
           font-size: 18px;
           color: #222;
@@ -384,26 +449,32 @@
           text-overflow: ellipsis;
           white-space: nowrap;
         }
+
         h4:hover {
           color: #5f068d;
           cursor: pointer;
         }
+
         .clum {
           height: 25px;
+
           .coursenum {
             padding: 0;
           }
         }
+
         .coursenum {
           width: auto;
           line-height: 25px;
           padding-top: 12px;
           cursor: pointer;
+
           span {
             display: inline-block;
             margin-right: 15px;
           }
         }
+
         .coins {
           float: right;
           color: #ff5f5f;
@@ -411,17 +482,21 @@
           font-size: 16px;
           padding-right: 20px;
         }
+
         .rate {
           padding-top: 14px;
         }
+
         p {
           font-size: 14px;
           line-height: 30px;
           color: #222;
         }
+
         span {
           font-size: 14px;
           color: #888888;
+
           &:nth-child(2) {
             width: 140px;
             height: 36px;
@@ -431,28 +506,33 @@
             border-radius: 18px;
             cursor: pointer;
           }
+
           img {
             width: 14px;
             height: 14px;
             // vertical-align: middle;
           }
         }
+
         .itemBox-info {
           font-size: 14px;
           color: rgba(176, 174, 184, 1);
           line-height: 0px;
           margin: 0px 0px 0px 15px;
+
           .itemBox-num {
             font-size: 12px;
             color: rgba(176, 174, 184, 1);
             line-height: 0px;
             padding-left: 8px;
             width: 160px;
+
             img {
               width: 12px;
               height: 12px;
               margin: 0px 5px;
             }
+
             .itemBox-rate {
               // display: inline;
               font-size: 12px;
@@ -462,14 +542,17 @@
           }
         }
       }
+
       .comment {
         height: 134px;
         margin-top: 40px;
         padding: 0 40px 10px;
         background-color: #fafafa;
         color: #888;
+
         h5 {
           line-height: 40px;
+
           .itemBox-rate {
             display: inline-block;
             height: 40px;
@@ -478,17 +561,20 @@
             vertical-align: middle;
           }
         }
+
         p {
           font-size: 14px;
           color: #888888;
           line-height: 30px;
         }
       }
+
       .study {
         // height: 50px;
         // padding: 30px 40px 0;
         padding: 20px 0 0 0;
         border-top: 1px rgba(232, 214, 247, 1) solid; // margin-top: 65px;
+
         p {
           font-size: 14px;
           color: rgba(34, 34, 34, 1);
@@ -501,18 +587,23 @@
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
+
           &.soldOut {
             text-decoration: underline;
           }
         }
+
         h4 {
           float: left;
           color: #222;
+
           p {
             margin: 0;
+
             &:first-child {
               font-size: 20px;
             }
+
             &:last-child {
               font-size: 14px;
             }
@@ -525,19 +616,23 @@
           color: #773084;
           font-weight: 400;
           transition: all 300ms;
+
           &:hover {
             color: #fff;
             border-color: #5f068d;
           }
         }
+
         &.bought {
           .common-button .is-plain {
             margin-top: 30px;
           }
+
           .lineProgress {
             clear: both;
             width: 100%;
             padding-top: 45px;
+
             h5 {
               width: 100%;
               line-height: 30px;
@@ -545,11 +640,13 @@
               font-size: 14px;
               color: #666;
             }
+
             .el-progress-bar {
               .el-progress-bar__outer {
                 height: 14px;
                 background-color: #ffdb5f;
               }
+
               .el-progress-bar__inner {
                 background-color: #773084;
               }
@@ -558,6 +655,7 @@
         }
       }
     }
+
     &:hover {
       background-color: #fff;
       box-shadow: 0 8px 35px rgba(0, 0, 0, 0.08);
@@ -571,23 +669,28 @@
         }
       }
     }
+
     .Newtime {
       width: 131px;
       float: right;
       font-size: 22px;
       margin-top: 19px;
       color: #888888;
+
       .timeDetail {
         margin-bottom: 92px;
       }
+
       .timeLink {
         cursor: pointer;
       }
+
       .line {
         width: 1px;
         height: 22px;
         background: rgba(229, 229, 229, 1);
       }
+
       img {
         display: inline-block;
         width: 25px;
@@ -601,6 +704,7 @@
   .courseImg {
     position: relative;
   }
+
   .project-img {
     width: 70px !important;
     height: 30px !important;

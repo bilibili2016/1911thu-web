@@ -1,20 +1,22 @@
 .orderTeacher {
   padding-top: 40px;
   background-color: #f7f9fb;
+
   .order-topImg {
     width: 1100px;
     height: 445px;
     margin: 0 auto;
     overflow: hidden;
-    background: url('http://static-image.1911edu.com/beTeacher_banner1.png')
-      no-repeat 0 0;
+    background: url('https://static-image.1911edu.com/beTeacher_banner1.png') no-repeat 0 0;
     padding: 20px;
     position: relative;
+
     h4 {
       color: #fff;
       font-size: 32px;
       text-align: center;
       margin-top: 36px;
+
       &:after,
       &:before {
         content: '';
@@ -27,6 +29,7 @@
         vertical-align: middle;
       }
     }
+
     .wordBox {
       width: 1010px;
       padding: 30px 20px;
@@ -39,12 +42,15 @@
       background-color: #fff;
       overflow: hidden;
       border-radius: 20px;
+
       // 预约导师
       .wordInfo {
+
         // width: 1010px;
         // padding: 30px 20px;
         .word-item {
           height: auto;
+
           // margin-bottom: 10px;
           .fl {
             float: left;
@@ -55,12 +61,14 @@
             font-size: 16px;
             color: #222;
             margin-right: 20px;
+
             .red {
               color: #ff5f5f;
               vertical-align: sub;
               display: inline-block;
             }
           }
+
           .fr {
             float: left;
             width: 830px;
@@ -69,8 +77,10 @@
             color: #222;
           }
         }
+
         .word-item.teacherForm {
           margin-top: -10px;
+
           .fr {
             position: relative;
             width: 750px;
@@ -79,20 +89,24 @@
             padding: 15px 25px;
             font-size: 14px;
             line-height: 28px;
+
             .courseForm {
               color: #6417a6;
             }
+
             .info {
               width: 225px;
               border-right: 1px solid;
               margin-top: 30px;
             }
+
             .code {
               position: absolute;
               right: 300px;
               top: 60px;
               width: 185px;
               text-align: center;
+
               // height: 80px;
               img {
                 display: block;
@@ -100,6 +114,7 @@
                 height: 80px;
                 margin: 0 auto;
               }
+
               span {
                 display: block;
               }
@@ -109,6 +124,7 @@
       }
     }
   }
+
   .con {
     .tip {
       text-align: center;
@@ -117,6 +133,7 @@
       margin: 40px 0 30px 0;
       padding-top: 40px;
     }
+
     .dataPickSpan {
       margin: 0 30px;
     }
@@ -125,10 +142,12 @@
       .divClick {
         display: inline-block;
       }
+
       .pull-down {
         left: 281px !important;
       }
     }
+
     .content {
       .con-info {
         padding-bottom: 40px;
@@ -136,15 +155,18 @@
         box-shadow: 0px 3px 36px 0px rgba(198, 194, 210, 0.36);
         border-radius: 10px;
       }
+
       .con-item {
         .fr {
           .tel {
             width: 320px;
           }
+
           .verification {
             width: 320px;
             margin-left: 45px;
           }
+
           .code {
             background-color: #eee;
             border-radius: 6px;
