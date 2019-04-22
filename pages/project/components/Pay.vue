@@ -14,13 +14,20 @@
             <span :class="['numBtn',{'add':add}]" @click="addNumber" onselectstart="return false;">+</span>
           </div>
         </div>
-        <div class="text">
-          <p>标准项目支持30-50人学习，每增加一人，需额外支付
+        <div class="text" v-if="this.projectDetail.is_max_number == '1'">
+          <p>标准项目支持30-{{this.projectDetail.max_number}}人学习，每增加一人，需额外支付
             <span v-if="type==1">{{parseFloat(projectDetail.online_price)}}</span>
             <span v-else-if="type==2">{{parseFloat(projectDetail.underline_price)}}</span>
             <span v-else-if="type==3">{{parseFloat(projectDetail.online_price)+parseFloat(projectDetail.underline_price)}}</span>
             元</p>
-          <p v-if="this.projectDetail.is_max_number == '1'">如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p>
+          <p>如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p>
+        </div>
+        <div class="text" v-else>
+          <p>标准项目学习人数30人起，每增加一人，需额外支付
+            <span v-if="type==1">{{parseFloat(projectDetail.online_price)}}</span>
+            <span v-else-if="type==2">{{parseFloat(projectDetail.underline_price)}}</span>
+            <span v-else-if="type==3">{{parseFloat(projectDetail.online_price)+parseFloat(projectDetail.underline_price)}}</span>
+            元</p>
         </div>
         <p>总价：{{totalPrice}}元</p>
         <div class="btn">
@@ -97,8 +104,6 @@ export default {
     //加
     addNumber () {
       // 限制最高人数50改为999
-      console.log(this.projectDetail.is_max_number);
-
       if (this.projectDetail.is_max_number == '1') {
         this.maxNumber(this.projectDetail.max_number)
       } else {
