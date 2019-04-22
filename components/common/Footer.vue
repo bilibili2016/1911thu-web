@@ -23,18 +23,18 @@
 import { open } from "@/lib/util/helper";
 export default {
   methods: {
-    handleLink() {
+    handleLink () {
       this.$router.push("/other/pages/homeUs");
     },
-    handleClickB() {
+    handleClickB () {
       window.open("http://static-image.1911edu.com/licence.jpg");
     },
-    handleClickA() {
+    handleClickA () {
       window.open(
         "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802028321"
       );
     },
-    handleClickC() {
+    handleClickC () {
       window.open("http://static-image.1911edu.com/qualification.jpg");
     }
   }

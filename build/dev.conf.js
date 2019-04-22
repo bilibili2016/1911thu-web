@@ -27,6 +27,7 @@ config.analyze = {
   // 	async: true
   // },
   {
+    //   2019年4月22号上午更新的七牛云2.8.1版本
     src: 'http://js.1911edu.com/aliplayer-h5-min.js',
     async: true
   },
