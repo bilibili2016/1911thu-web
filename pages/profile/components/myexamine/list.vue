@@ -65,7 +65,7 @@
     <!-- 空页面 -->
     <div class="content">
       <div v-if="examineListData.length == 0&&!examineLoading" class="noCourse" style="text-align:center;">
-        <img src="http://static-image.1911edu.com/VIP_null.png" alt>
+        <img src="https://static-image.1911edu.com/VIP_null.png" alt>
         <h4 style="margin-top:10px">学习学院里的课程才会有认证资格呦，快去入学吧～</h4>
       </div>
     </div>
@@ -78,7 +78,7 @@ import { store as persistStore } from "~/lib/core/store";
 
 export default {
   props: ["examineListData", "examinePagemsg", "examineLoading"],
-  data() {
+  data () {
     return {
       pageData: {
         id: "",
@@ -91,7 +91,7 @@ export default {
     };
   },
   methods: {
-    goVipDetail(item) {
+    goVipDetail (item) {
       this.$router.push({
         path: "/home/vip/collegeDetail",
         query: {
@@ -102,22 +102,22 @@ export default {
       });
     },
     //去考试
-    gotoExamine(item) {
+    gotoExamine (item) {
       this.pageData.name = "intro";
       this.pageData.id = item.id;
       this.$bus.$emit("whichShow", this.pageData);
     },
     //查看考试记录
-    viewRecord(item) {
+    viewRecord (item) {
       this.pageData.id = item.id;
       this.pageData.name = "record";
       this.$bus.$emit("whichShow", this.pageData);
     },
     //审核中、申请证书、查看证书
-    handleLink(path) {
+    handleLink (path) {
       this.$router.push(path);
     },
-    validateExamPrivilege(recordId, id) {
+    validateExamPrivilege (recordId, id) {
       //验证考试权限
       this.vipForm.vipId = id;
       this.vipForm.type = "1";
@@ -133,15 +133,15 @@ export default {
         } else {
           this.handleLink(
             "/profile/components/myexamine/applicantCertificate?id=" +
-              recordId +
-              "&vipID=" +
-              id
+            recordId +
+            "&vipID=" +
+            id
           );
         }
       });
     }
   },
-  mounted() {
+  mounted () {
     persistStore.set("info", "");
   }
 };

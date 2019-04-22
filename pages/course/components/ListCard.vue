@@ -5,7 +5,7 @@
       <el-card class="fl " :body-style="{ padding: '0px' } ">
         <div class="courseImg">
           <!-- 项目图标 -->
-          <img v-if="cidNumber==='0'" class="project-img" src="http://static-image.1911edu.com/p4.png" alt="">
+          <img v-if="cidNumber==='0'" class="project-img" src="https://static-image.1911edu.com/p4.png" alt="">
           <!-- 老师封面 -->
           <img v-if="!teacherImg" :src="course.teacher_picture " class="image" alt=" ">
           <!-- 课程封面 -->
@@ -71,7 +71,7 @@ export default {
   components: {
     "v-dialog": Dialog
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
@@ -99,7 +99,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setKid", "setProductsNum"]),
     // 点击跳转课程详情页
-    handleLinkCourseDetail(item) {
+    handleLinkCourseDetail (item) {
       if (this.cidNumber === "2") {
         this.page = 1;
       } else {
@@ -117,7 +117,7 @@ export default {
       // })
     },
     // 设置购物车中 is_cart 改变
-    handleChangeIsCart(item) {
+    handleChangeIsCart (item) {
       for (let i of this.courseList) {
         if (i === item) {
           i.is_cart = 1;
@@ -125,7 +125,7 @@ export default {
       }
     },
     // 添加购物车
-    handleAddShopCart(item, cart) {
+    handleAddShopCart (item, cart) {
       if (this.cidNumber === "0") {
         //项目
         this.curriculumcartids.type = 2;
@@ -152,7 +152,7 @@ export default {
       }
     },
     // 立即购买
-    goBuy(item) {
+    goBuy (item) {
       if (persistStore.get("token")) {
         this.$router.push({
           path: "/shop/affirmorder",
@@ -163,7 +163,7 @@ export default {
       }
     },
     // 判断购物车数量
-    goodsNmber(item) {
+    goodsNmber (item) {
       if (persistStore.get("productsNum") < 70) {
         this.addCourseShopCart(item);
       } else {
@@ -171,12 +171,12 @@ export default {
         this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
     },
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.$router.push("/shop/shoppingcart");
     },
     // 添加购物车函数
-    addCourseShopCart(item) {
+    addCourseShopCart (item) {
       this.curriculumcartids.cartid = item.id;
       category.addShopCart(this.curriculumcartids).then(response => {
         let len = Number(this.productsNum) + 1;
@@ -191,7 +191,7 @@ export default {
       });
     },
     // 判断是否为老师页面
-    isTeacherPage() {
+    isTeacherPage () {
       if (window.location.pathname.split("/")[3] === "2") {
         this.teacherImg = false;
       } else {
@@ -199,7 +199,7 @@ export default {
       }
     },
     //课程详情
-    courseInfo(item, index) {
+    courseInfo (item, index) {
       if (this.cidNumber === "0") {
         // 项目-项目详情
         this.$router.push({
@@ -229,7 +229,7 @@ export default {
         // })
       }
     },
-    changeManey(money) {
+    changeManey (money) {
       if (money >= 10000) {
         return money / 10000 + "万";
       } else {
@@ -237,7 +237,7 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.isTeacherPage();
     this.cidNumber = window.location.pathname.split("/")[3];
   }

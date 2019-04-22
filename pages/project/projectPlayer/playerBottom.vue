@@ -2,7 +2,7 @@
   <div class="playBottom clearfix">
     <span class="fl usePhone">手机观看
       <div class="ewCode">
-        <img src="http://static-image.1911edu.com/attentionWechat2.png" alt="">
+        <img src="https://static-image.1911edu.com/attentionWechat2.png" alt="">
         <i></i>
       </div>
     </span>
@@ -29,10 +29,10 @@ export default {
     'v-collection': Collection
   },
   methods: {
-    showRpt() {
+    showRpt () {
       this.$emit('showRpt')
     },
-    showElt() {
+    showElt () {
       this.$emit('showElt')
     }
   }

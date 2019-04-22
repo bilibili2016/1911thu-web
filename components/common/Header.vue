@@ -100,10 +100,10 @@ export default {
       bgMsg: false,
       isShowLRBtn: false,
       user: {
-        userImg: "http://static-image.1911edu.com/defaultHeadImg.jpg",
+        userImg: "https://static-image.1911edu.com/defaultHeadImg.jpg",
         userType: ''
       },
-      QRcode: "http://static-image.1911edu.com/wechatLogin.png",
+      QRcode: "https://static-image.1911edu.com/wechatLogin.png",
 
       gidForm: {
         gids: null

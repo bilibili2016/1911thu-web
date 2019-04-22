@@ -29,8 +29,8 @@
                 <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="index">
                   <div class="courseImg">
                     <!-- 项目图标 -->
-                    <img v-if="project.project_type==2" class="project-img" src="http://static-image.1911edu.com/p5.png" alt="">
-                    <img v-else class="project-img" src="http://static-image.1911edu.com/p4.png" alt="">
+                    <img v-if="project.project_type==2" class="project-img" src="https://static-image.1911edu.com/p5.png" alt="">
+                    <img v-else class="project-img" src="https://static-image.1911edu.com/p4.png" alt="">
                     <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
                   </div>
                   <div class="fl">
@@ -121,7 +121,7 @@ export default {
       ticketType: {
         type: "ticket"
       },
-      noMsgImg: "http://static-image.1911edu.com/noMsg.png",
+      noMsgImg: "https://static-image.1911edu.com/noMsg.png",
       orderPrice: 0,
       orderNum: 0,
       ticketOrderData: [],

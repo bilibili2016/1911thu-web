@@ -22,8 +22,8 @@
             <div class="courseOne" v-if="computedLength(courseList.orderCurriculumList,courseList.orderProjectList,index)" v-for="(project,index) in courseList.orderProjectList" :key="'project'+index">
               <div class="courseImg">
                 <!-- 项目图标 -->
-                <img v-if="project.project_type==2" class="project-img" src="http://static-image.1911edu.com/p5.png" alt="">
-                <img v-else class="project-img" src="http://static-image.1911edu.com/p4.png" alt="">
+                <img v-if="project.project_type==2" class="project-img" src="https://static-image.1911edu.com/p5.png" alt="">
+                <img v-else class="project-img" src="https://static-image.1911edu.com/p4.png" alt="">
 
                 <img @click="goProjrctInfo(project)" class="fl" :src="project.picture" alt="">
               </div>
@@ -92,7 +92,7 @@ export default {
   components: {
     "v-dialog": Dialog
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
@@ -116,16 +116,16 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setGid", "setKid"]),
-    detection() {
+    detection () {
       this.$emit("detection");
     },
     //根据列表长度计算高度
-    computedHeight(len) {
+    computedHeight (len) {
       let height = len > 3 ? 3 * 140 + 60 + "px" : len * 140 + "px";
       return height;
     },
     //计算项目列表显示数量
-    computedLength(course, project, index) {
+    computedLength (course, project, index) {
       let projectLength = course.length > 3 ? 0 : 3 - course.length;
       if (index < projectLength) {
         return true;
@@ -134,7 +134,7 @@ export default {
       }
     },
     //取消订单
-    cancelOrder(id) {
+    cancelOrder (id) {
       this.orderForm.ids = id;
       order.cancelOrder(this.orderForm).then(response => {
         if (response.status === 0) {
@@ -150,7 +150,7 @@ export default {
       });
     },
     //去支付
-    goPay(id, courseList) {
+    goPay (id, courseList) {
       if (courseList.orderVipList.length > 0) {
         this.$router.push({
           path: "/shop/wepay",
@@ -171,7 +171,7 @@ export default {
       }
     },
     // 判断购物车数量
-    goodsNmber(id) {
+    goodsNmber (id) {
       if (persistStore.get("productsNum") < 70) {
         this.addCart(id);
       } else {
@@ -179,12 +179,12 @@ export default {
         this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
     },
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.$router.push("/shop/shoppingcart");
     },
     //加入购物车
-    addCart(id) {
+    addCart (id) {
       this.orderForm.ids = id;
       order.buyAgain(this.orderForm).then(response => {
         if (response.status === 0) {
@@ -195,7 +195,7 @@ export default {
       });
     },
     //直接购买
-    goAffirmorder(item, type) {
+    goAffirmorder (item, type) {
       if (type == "vip") {
         this.$router.push({
           path: "/shop/affirmorder",
@@ -214,7 +214,7 @@ export default {
       }
     },
     //去购物车
-    goShopping(courseList) {
+    goShopping (courseList) {
       if (courseList.order_type == "1") {
         //课程
         this.goodsNmber(courseList.id);
@@ -240,7 +240,7 @@ export default {
       }
     },
     //课程详情
-    goCourseInfo(item, index) {
+    goCourseInfo (item, index) {
       this.kidForm.kids = item.id;
       this.courseUrl.kid = item.id;
       open(this.courseUrl);
@@ -255,7 +255,7 @@ export default {
       // })
     },
     //项目详情
-    goProjrctInfo(item) {
+    goProjrctInfo (item) {
       this.$router.push({
         path: "/project/projectdetail",
         query: {
@@ -265,7 +265,7 @@ export default {
       });
     },
     // Vip详情
-    goVipInfo(vip) {
+    goVipInfo (vip) {
       this.$router.push({
         path: "/home/vip/collegeDetail",
         query: {
@@ -275,11 +275,11 @@ export default {
         }
       });
     },
-    goTeacherInfo(teacher) {
+    goTeacherInfo (teacher) {
       console.log(teacher);
     },
     //列表详情
-    selectPayApply(item, type) {
+    selectPayApply (item, type) {
       persistStore.set("order", item.id);
       if (type == "order") {
         this.$bus.$emit("goOrderDetail", true);
@@ -289,11 +289,11 @@ export default {
       }
     },
     // 时间戳转日期格式
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToTime(time);
     }
   },
-  mounted() {
+  mounted () {
     if (persistStore.get("orderDetail")) {
       this.$bus.$emit("goOrderDetail", true);
       persistStore.set("orderDetail", false);

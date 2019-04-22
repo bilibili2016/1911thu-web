@@ -50,8 +50,8 @@ export default {
         curriculumType: 1,
         seek: 0
       },
-      playImg: "http://static-image.1911edu.com/playImg.gif",
-      pauseImg: "http://static-image.1911edu.com/video.png",
+      playImg: "https://static-image.1911edu.com/playImg.gif",
+      pauseImg: "https://static-image.1911edu.com/video.png",
       playerPreviousForm: {
         curriculumId: "",
         catalogId: ""

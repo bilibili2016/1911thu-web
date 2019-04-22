@@ -28,10 +28,10 @@ export default {
     "v-card": CustomCard,
     "v-banner": CustomBanner
   },
-  data() {
+  data () {
     return {
       load: true,
-      bannerImg: "http://static-image.1911edu.com/newList-bg.png",
+      bannerImg: "https://static-image.1911edu.com/newList-bg.png",
       linksix: "/news/detail",
       configs: {
         banner_type: "news"
@@ -51,12 +51,12 @@ export default {
       }
     };
   },
-  mounted() {
+  mounted () {
     this.getNewInfoList();
     setTitle("学堂资讯-1911学堂");
   },
   methods: {
-    getNewInfoList() {
+    getNewInfoList () {
       this.newsInfoForm.pages = 1;
       this.newsInfoForm.limits = 6;
       news.getNewInfoList(this.newsInfoForm).then(response => {
@@ -67,7 +67,7 @@ export default {
         }
       });
     },
-    selectPages(val) {
+    selectPages (val) {
       this.newsInfoForm.pages = val;
       this.pagemsg.page = val;
       this.newsInfoForm.limits = this.pagemsg.pagesize;

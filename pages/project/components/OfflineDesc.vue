@@ -1,25 +1,13 @@
 <template>
   <div class="offlineDesc">
     <!-- 普通项目的线下课程介绍 -->
-    <div
-      v-if="project.types==='1'"
-      class="normal"
-    >
-      <div
-        v-if="data.offline_content"
-        v-html="data.offline_content"
-      ></div>
+    <div v-if="project.types==='1'" class="normal">
+      <div v-if="data.offline_content" v-html="data.offline_content"></div>
       <!-- 无数据 -->
-      <v-nodata
-        :pageType="pageType"
-        v-else
-      ></v-nodata>
+      <v-nodata :pageType="pageType" v-else></v-nodata>
     </div>
     <!-- 自定义项目的线下课程介绍 -->
-    <div
-      v-if="project.types==='2'"
-      class="unormal"
-    >
+    <div v-if="project.types==='2'" class="unormal">
       <div class="time">
         {{data.offline_days}}天线下课程，共{{data.offline_study_time}}学时
       </div>
@@ -50,12 +38,12 @@ export default {
   components: {
     "v-nodata": NoData
   },
-  data() {
+  data () {
     return {
       pageType: {
         page: "offlineDesc",
         text: "暂无线下课程介绍！",
-        imgUrl: "http://static-image.1911edu.com/noMsg.png"
+        imgUrl: "https://static-image.1911edu.com/noMsg.png"
       }
     };
   }

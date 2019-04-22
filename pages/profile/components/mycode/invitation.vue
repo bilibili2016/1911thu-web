@@ -58,14 +58,14 @@ export default {
   components: {
     'v-search': Search
   },
-  data() {
+  data () {
     return {
       placeHolder: '请输入订单号',
       noCodes: true,
       number: '0',
       searchType: 2,
       orderNum: 0,
-      noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
+      noMsgImg: 'https://static-image.1911edu.com/noMsg.png',
       gidForm: {
         gids: ''
       }
@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['setGid']),
-    handleMyOrder(item) {
+    handleMyOrder (item) {
       this.gidForm.gids = 'tab-fourth'
       this.setGid(this.gidForm)
       this.$router.push('/profile')
@@ -85,10 +85,10 @@ export default {
         this.orderNum
       )
     },
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToYMD(time)
     },
-    search(data) {
+    search (data) {
       this.$emit('searchOrder', data)
     }
   }

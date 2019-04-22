@@ -39,10 +39,10 @@ export default {
     'v-nomsg': NoMsg,
     'v-search': Search
   },
-  data() {
+  data () {
     return {
       placeHolder: '请输入兑换码',
-      noMsgImg: 'http://static-image.1911edu.com/noMsg.png',
+      noMsgImg: 'https://static-image.1911edu.com/noMsg.png',
       noMsg: {
         type: 'myCode',
         text: '抱歉，您现在还没有兑换码~'
@@ -50,10 +50,10 @@ export default {
     }
   },
   methods: {
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToYMD(time)
     },
-    search(data) {
+    search (data) {
       this.$emit('goSearch', data)
     }
   }
@@ -61,5 +61,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~assets/style/profile/conversion.scss';
+@import "~assets/style/profile/conversion.scss";
 </style>

@@ -13,7 +13,7 @@
           <div class="tblive" id="tblive"></div>
         </div>
         <!-- <div class="topBar"></div>
-        <img src="http://static-image.1911edu.com/live-bg1.png" alt="">
+        <img src="https://static-image.1911edu.com/live-bg1.png" alt="">
         <div class="bottomBar clearfix">
           <span class="time fl">直播倒计时：20分15秒</span>
           <span class="btn nearBtn fr">结束直播</span>

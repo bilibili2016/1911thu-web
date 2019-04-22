@@ -5,9 +5,9 @@
       <el-card shadow="never " body-style="padding: 0; " class="itemBox">
         <div>
           <!-- <div class="line-icon">
-            <img v-if="item.study_type==='1'" class="onlineIcon" src="http://static-image.1911edu.com/online-icon.png" alt="">
-            <img v-if="item.study_type==='2'" class="onlineIcon" src="http://static-image.1911edu.com/mixture-icon.png" alt="">
-            <img v-if="item.study_type==='3'" class="onlineIcon" src="http://static-image.1911edu.com/interaction-icon.png" alt="">
+            <img v-if="item.study_type==='1'" class="onlineIcon" src="https://static-image.1911edu.com/online-icon.png" alt="">
+            <img v-if="item.study_type==='2'" class="onlineIcon" src="https://static-image.1911edu.com/mixture-icon.png" alt="">
+            <img v-if="item.study_type==='3'" class="onlineIcon" src="https://static-image.1911edu.com/interaction-icon.png" alt="">
           </div> -->
           <div class="bgImgs " @click="gotoDetail(item)">
             <img :src="item.picture" alt=" ">
@@ -20,8 +20,8 @@
               <div class="deputyTitleOverTime">{{exchangeTime(item.create_time)}}</div>
               <!-- 自定义项目下单和已经够买的，不可以修改和删除 -->
               <div class="operate" v-if="item.is_edit==='1'">
-                <span @click="editCustomerProject(item)"><img src="http://static-image.1911edu.com/edit-icon.png" alt=""></span>
-                <span @click="deleteCustomerProject(item)"><img src="http://static-image.1911edu.com/delete-icon.png" alt=""></span>
+                <span @click="editCustomerProject(item)"><img src="https://static-image.1911edu.com/edit-icon.png" alt=""></span>
+                <span @click="deleteCustomerProject(item)"><img src="https://static-image.1911edu.com/delete-icon.png" alt=""></span>
               </div>
               <!-- 暂不显示已够买字段 -->
               <!-- <div v-else class="buied" @click="handleBuied">已购买</div> -->
@@ -40,7 +40,7 @@ export default {
   props: ['customerProjectListData'],
   methods: {
     //跳转项目详情页
-    gotoDetail(item) {
+    gotoDetail (item) {
       this.$router.push({
         path: '/project/projectdetail',
         query: {
@@ -50,7 +50,7 @@ export default {
       })
     },
     //编辑
-    editCustomerProject(item) {
+    editCustomerProject (item) {
       this.$router.push({
         path: '/project/customerProject',
         query: {
@@ -60,11 +60,11 @@ export default {
       })
     },
     //删除
-    deleteCustomerProject(item) {
+    deleteCustomerProject (item) {
       this.$emit('deleteCustomerProject', item.id)
     },
     //已购买
-    handleBuied() {
+    handleBuied () {
       message(
         this,
         'warning',
@@ -72,12 +72,12 @@ export default {
       )
     },
     // 时间戳转日期格式
-    exchangeTime(time) {
+    exchangeTime (time) {
       return timestampToYMD(time)
     }
   }
 }
 </script>
 <style scoped lang="scss">
-@import '~assets/style/profile/card';
+@import "~assets/style/profile/card";
 </style>

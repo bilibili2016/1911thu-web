@@ -12,7 +12,7 @@
         <h4 class="news-title">专家组组长</h4>
         <div class="two-text">
           <div class="newsWidth two-inner clearfix">
-            <div class="img two-left"><img src="http://static-image.1911edu.com/newsCo-icon2.png" alt=""></div>
+            <div class="img two-left"><img src="https://static-image.1911edu.com/newsCo-icon2.png" alt=""></div>
             <div class="two-right">
               <div class="professor">董关鹏 教授</div>
               <div class="intro">资深公共关系学者。先后毕业于北京大学、剑桥大学和杜伦大学，在清华大学、哈佛大学执教和从事研究十余年。现任中国公共关系协会副会长、常务理事，中国传媒大学教授、博士生导师、媒介与公共事务研究院院长、培训学院院长。兼任国务院新闻办公室新闻发布评估专家小组成员、国务院食品安全委员会专家委员会委员、国家核应急专家委员会委员、国家行政学院兼职教授、中央社会主义学院客座教授、最高人民法院司法传播特聘专家、最高人民检察院中国检察官学院兼职教授等。</div>
@@ -64,11 +64,11 @@
             <span class="text">学员参加1911学堂新闻传播学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
           </div>
           <div class="four-right">
-            <img src="http://static-image.1911edu.com/college-pic13.png" alt>
+            <img src="https://static-image.1911edu.com/college-pic13.png" alt>
           </div>
         </div>
         <div class="four-certification">
-          <img src="http://static-image.1911edu.com/newsCo-icon8.png" alt>
+          <img src="https://static-image.1911edu.com/newsCo-icon8.png" alt>
         </div>
       </div>
 
@@ -82,41 +82,41 @@ export default {
     return {
       productList: [
         {
-          src: 'http://static-image.1911edu.com/production-news.png',
+          src: 'https://static-image.1911edu.com/production-news.png',
           text: '线新闻传播学院'
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon1.png',
+          src: 'https://static-image.1911edu.com/production-icon1.png',
           text: '混合式标准项目'
         },
         {
-          src: 'http://static-image.1911edu.com/production-icon2.png',
+          src: 'https://static-image.1911edu.com/production-icon2.png',
           text: '新闻与传播硕士（MJC）国际学位项目'
         },
       ],
       objectList: [
         {
-          src: 'http://static-image.1911edu.com/newsCo-icon3.png',
+          src: 'https://static-image.1911edu.com/newsCo-icon3.png',
           text: '国家党政机关领导干部'
         },
         {
-          src: 'http://static-image.1911edu.com/newsCo-icon4.png',
+          src: 'https://static-image.1911edu.com/newsCo-icon4.png',
           text: '企事业单位中高层管理者与基层骨干'
         },
         {
-          src: 'http://static-image.1911edu.com/newsCo-icon5.png',
+          src: 'https://static-image.1911edu.com/newsCo-icon5.png',
           text: '各类传媒组织与社会机构'
         },
       ],
       collegeList: [
-        'http://static-image.1911edu.com/college_QH.png',
-        'http://static-image.1911edu.com/college_CD.png',
-        'http://static-image.1911edu.com/college_RD.png',
-        'http://static-image.1911edu.com/college_ZZF.png',
-        'http://static-image.1911edu.com/college_RSYJY.png',
-        'http://static-image.1911edu.com/college_ZGDX.png',
-        'http://static-image.1911edu.com/college_ZSCQ.png',
-        'http://static-image.1911edu.com/college_GJBQ.png',
+        'https://static-image.1911edu.com/college_QH.png',
+        'https://static-image.1911edu.com/college_CD.png',
+        'https://static-image.1911edu.com/college_RD.png',
+        'https://static-image.1911edu.com/college_ZZF.png',
+        'https://static-image.1911edu.com/college_RSYJY.png',
+        'https://static-image.1911edu.com/college_ZGDX.png',
+        'https://static-image.1911edu.com/college_ZSCQ.png',
+        'https://static-image.1911edu.com/college_GJBQ.png',
       ]
     }
   }

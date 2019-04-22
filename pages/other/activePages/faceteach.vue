@@ -45,13 +45,13 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      faceImg: 'http://static-image.1911edu.com/faceteach-bg.png',
-      cenImg: 'http://static-image.1911edu.com/ccenter.png'
+      faceImg: 'https://static-image.1911edu.com/faceteach-bg.png',
+      cenImg: 'https://static-image.1911edu.com/ccenter.png'
     }
   },
-  mounted() {}
+  mounted () { }
 }
 </script>
 

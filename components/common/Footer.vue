@@ -27,7 +27,7 @@ export default {
       this.$router.push("/other/pages/homeUs");
     },
     handleClickB () {
-      window.open("http://static-image.1911edu.com/licence.jpg");
+      window.open("https://static-image.1911edu.com/licence.jpg");
     },
     handleClickA () {
       window.open(
@@ -35,7 +35,7 @@ export default {
       );
     },
     handleClickC () {
-      window.open("http://static-image.1911edu.com/qualification.jpg");
+      window.open("https://static-image.1911edu.com/qualification.jpg");
     }
   }
 };

@@ -70,7 +70,7 @@ const config = {
       // {
       //   rel: 'icon',
       //   type: 'image/x-icon',
-      //   href: 'http://static-image.1911edu.com/favicon.png'
+      //   href: 'https://static-image.1911edu.com/favicon.png'
       // }
       // 需要直接加载的 CSS
     ]

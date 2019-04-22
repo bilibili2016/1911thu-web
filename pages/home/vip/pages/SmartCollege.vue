@@ -12,7 +12,7 @@
         <div class="main">
           <h2 class="first">专家组组长</h2>
           <div class="group clearfix">
-            <img class="fl" src="http://static-image.1911edu.com/smartCollege_teacher.png" alt="">
+            <img class="fl" src="https://static-image.1911edu.com/smartCollege_teacher.png" alt="">
             <div class="fr">
               <h4>孙富春 教授</h4>
               <p>清华大学计算机科学与技术系教授、博士生导师，校科研院院长助理，国家863计划专家组成员，兼任大连海事大学讲座教授、博士生导师，国际刊物《IEEE Trans. On Neural Networks》《Soft Computing》和《International Journal of Computational Intelligence Systems》编委，IEEE控制系统学会国际会议编委会编委，IEEE控制系统学会智能控制技术委员会委员。在清华大学计算机应用专业获博士学位，并于清华大学自动化系从事博士后研究，后在计算机科学与技术系工作至今。</p>
@@ -77,15 +77,15 @@
           <h2>业务产品</h2>
           <div class="production">
             <div class="item">
-              <img src="http://static-image.1911edu.com/smart-production.png" alt="">
+              <img src="https://static-image.1911edu.com/smart-production.png" alt="">
               <p>在线人工智能学院</p>
             </div>
             <div class="item">
-              <img src="http://static-image.1911edu.com/production-icon1.png" alt="">
+              <img src="https://static-image.1911edu.com/production-icon1.png" alt="">
               <p>混合式标准项目</p>
             </div>
             <div class="item">
-              <img src="http://static-image.1911edu.com/production-icon2.png" alt="">
+              <img src="https://static-image.1911edu.com/production-icon2.png" alt="">
               <p>
                 国际学位项目
               </p>
@@ -97,7 +97,7 @@
           <h2>培养目标</h2>
           <div class="columns clearfix">
             <p>1911学堂人工智能学院的培养目标是培养复合型人才，特别是贯通人工智能理论、方法、技术、产品与应用等的纵向复合型人才，以及掌握“人工智能+”经济、社会、管理、标准、法律等的横向复合型人才。</p>
-            <img src="http://static-image.1911edu.com/smartCollege_icon1.png" alt="">
+            <img src="https://static-image.1911edu.com/smartCollege_icon1.png" alt="">
           </div>
           <!-- <div class="harvest">
             <h2>学习收获</h2>
@@ -108,11 +108,11 @@
           <h2>师资来源</h2>
           <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
           <div class="school">
-            <img src="http://static-image.1911edu.com/college_QH.png" alt="">
-            <img src="http://static-image.1911edu.com/college_BD.png" alt="">
-            <img src="http://static-image.1911edu.com/college_ZKY.png" alt="">
-            <img src="http://static-image.1911edu.com/college_XXYJY.png" alt="">
-            <img src="http://static-image.1911edu.com/college_GYXX.png" alt="">
+            <img src="https://static-image.1911edu.com/college_QH.png" alt="">
+            <img src="https://static-image.1911edu.com/college_BD.png" alt="">
+            <img src="https://static-image.1911edu.com/college_ZKY.png" alt="">
+            <img src="https://static-image.1911edu.com/college_XXYJY.png" alt="">
+            <img src="https://static-image.1911edu.com/college_GYXX.png" alt="">
           </div>
         </div>
         <div class="attestation">
@@ -124,12 +124,12 @@
               <span class="text">学员参加1911学堂人工智能学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
             </div>
             <div class="right fr">
-              <img src="http://static-image.1911edu.com/cadreCollege_icon2.png" alt>
+              <img src="https://static-image.1911edu.com/cadreCollege_icon2.png" alt>
             </div>
           </div>
 
           <div class="certification">
-            <img src="http://static-image.1911edu.com/smartCollege_certificate.png" alt>
+            <img src="https://static-image.1911edu.com/smartCollege_certificate.png" alt>
           </div>
         </div>
 

@@ -6,7 +6,7 @@
     </div>
     <div class="system" v-else>
       <div class="noData">
-        <img src="http://static-image.1911edu.com/noMsg.png" alt>
+        <img src="https://static-image.1911edu.com/noMsg.png" alt>
         <p>暂无线上课程！</p>
       </div>
     </div>
@@ -22,7 +22,7 @@ export default {
   computed: {
     ...mapGetters("auth", ["isAuthenticated"])
   },
-  data() {
+  data () {
     return {
       kidForm: {
         ids: null
@@ -35,14 +35,14 @@ export default {
     };
   },
   watch: {
-    vipGoodsList() {
+    vipGoodsList () {
       this.vipList = this.vipGoodsList;
     }
   },
   methods: {
     ...mapActions("auth", ["setKid"]),
     // 跳转到项目播放页
-    goProjectPlayer(course) {
+    goProjectPlayer (course) {
       if (persistStore.get("token")) {
         let urlLink = {
           base: "/project/projectPlayer",
@@ -55,7 +55,7 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    goVipDetail(vip) {
+    goVipDetail (vip) {
       this.$router.push({
         path: "/home/vip/collegeDetail",
         query: {

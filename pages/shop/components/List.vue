@@ -137,42 +137,42 @@ import { matchSplits } from '~/lib/util/helper'
 
 export default {
   props: ['config', 'data'],
-  data() {
+  data () {
     return {
       orderType: '',
-      projectImg: 'http://static-image.1911edu.com/p4.png'
+      projectImg: 'https://static-image.1911edu.com/p4.png'
     }
   },
   methods: {
     // 点击选中 取消课程的复选框   ----课程 单选
-    handleSelectChange(course, index) {
+    handleSelectChange (course, index) {
       this.$bus.$emit('handleSelectChange', { course, index })
     },
-    goDetail(course, index) {
+    goDetail (course, index) {
       this.$bus.$emit('goDetail', { course, index })
     },
     // 删除课程  ---- 课程
-    handleDeleteCourse(course, index) {
+    handleDeleteCourse (course, index) {
       this.$bus.$emit('handleDeleteCourse', { course, index })
     },
     // 点击选中 项目的复选框   ---项目 单选
-    handleSelectProjectChange(project, index) {
+    handleSelectProjectChange (project, index) {
       this.$bus.$emit('handleSelectProjectChange', { project, index })
     },
-    goProjectDetail(project, index) {
+    goProjectDetail (project, index) {
       this.$bus.$emit('goProjectDetail', { project, index })
     },
     // 删除 项目 ---- 项目
-    handleDeleteProject(project, index) {
+    handleDeleteProject (project, index) {
       this.$bus.$emit('handleDeleteProject', { project, index })
     }
   },
-  mounted() {
+  mounted () {
     // this.orderType（用来控制展开列表页面字段的显隐）  1:其他订单 2:vip订单
     this.orderType = matchSplits('type')
   }
 }
 </script>
 <style lang="scss" scoped>
-@import '~assets/style/shop/card.scss';
+@import "~assets/style/shop/card.scss";
 </style>

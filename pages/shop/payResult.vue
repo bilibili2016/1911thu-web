@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="payResult" v-if="collegePay" v-loading="load">
-      <img v-if="success" src="http://static-image.1911edu.com/success.png" alt>
-      <img v-else src="http://static-image.1911edu.com/error.png" alt>
+      <img v-if="success" src="https://static-image.1911edu.com/success.png" alt>
+      <img v-else src="https://static-image.1911edu.com/error.png" alt>
       <h4 v-if="success">支付成功！</h4>
       <h4 v-else>支付失败！</h4>
       <div class="restltMsg" v-if="success">
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="collegePay" v-if="showCollegeResult" v-loading="load">
-      <img src="http://static-image.1911edu.com/collegePay.png" alt>
+      <img src="https://static-image.1911edu.com/collegePay.png" alt>
       <p>欢迎您加入{{collegeText}}，成为1911学堂学员，</p>
       <p>您将在1911学堂开启为期一年的学习之旅，开始学习吧！</p>
       <div>
@@ -54,7 +54,7 @@ import { payResult } from "@/lib/v1_sdk/index";
 import { banBackSpace, matchSplits, message } from "@/lib/util/helper";
 import { store as persistStore } from "~/lib/core/store";
 export default {
-  data() {
+  data () {
     return {
       collegeText: "",
       success: true,
@@ -80,7 +80,7 @@ export default {
   methods: {
     ...mapActions("auth", ["setGid"]),
     // 继续选课
-    handleChoiceCourse() {
+    handleChoiceCourse () {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -93,7 +93,7 @@ export default {
       });
     },
     // 点击查看订单
-    handleLinkProfile(item) {
+    handleLinkProfile (item) {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       this.$router.push("/profile");
@@ -106,7 +106,7 @@ export default {
         }
       });
     },
-    payComplete() {
+    payComplete () {
       this.payCompleteForm.orderId = matchSplits("order");
       payResult.payComplete(this.payCompleteForm).then(response => {
         if (response.status == 0) {
@@ -168,14 +168,14 @@ export default {
         }
       });
     },
-    goLink(item) {
+    goLink (item) {
       this.gidForm.gids = item;
       this.setGid(this.gidForm);
       clearInterval(this.interval);
       this.$router.push("/profile");
       this.$bus.$emit("selectProfileIndex", item);
     },
-    college() {
+    college () {
       let VD = this.vipGoodsDetail;
       this.$router.push({
         path: "/home/vip/collegeDetail",
@@ -186,7 +186,7 @@ export default {
         }
       });
     },
-    study() {
+    study () {
       this.$router.push({
         path: "/course/category",
         query: {
@@ -199,14 +199,14 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     // window.history.go(-1)
     this.ref = this.$route.query.ref;
     this.payComplete();
     this.link = this.$route.path;
     //禁止浏览器的后退
     history.pushState(null, null, document.URL);
-    window.addEventListener("popstate", function() {
+    window.addEventListener("popstate", function () {
       history.pushState(null, null, document.URL);
     });
   }

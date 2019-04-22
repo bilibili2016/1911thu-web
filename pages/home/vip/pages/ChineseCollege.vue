@@ -17,19 +17,19 @@
           <div class="chinese-title people"></div>
           <div class="two-items clearfix">
             <div class="item one">
-              <div class="people-icon"><img src="http://static-image.1911edu.com/chinese-icon2.png" alt=""></div>
+              <div class="people-icon"><img src="https://static-image.1911edu.com/chinese-icon2.png" alt=""></div>
               <div class="people-text">全国各级各类党政机关与事业单位干部</div>
             </div>
             <div class="item two">
-              <div class="people-icon"><img src="http://static-image.1911edu.com/chinese-icon3.png" alt=""></div>
+              <div class="people-icon"><img src="https://static-image.1911edu.com/chinese-icon3.png" alt=""></div>
               <div class="people-text">各级各类企业中高层管理人员</div>
             </div>
             <div class="item three">
-              <div class="people-icon"><img src="http://static-image.1911edu.com/chinese-icon4.png" alt=""></div>
+              <div class="people-icon"><img src="https://static-image.1911edu.com/chinese-icon4.png" alt=""></div>
               <div class="people-text">各级各类学校校长、骨干教师</div>
             </div>
             <div class="item four">
-              <div class="people-icon"><img src="http://static-image.1911edu.com/chinese-icon5.png" alt=""></div>
+              <div class="people-icon"><img src="https://static-image.1911edu.com/chinese-icon5.png" alt=""></div>
               <div class="people-text">对中国传统文化感兴趣的社会各界人士</div>
             </div>
           </div>
@@ -48,11 +48,11 @@
           <div class="chinese-title proTitle"></div>
           <div class="production">
             <div class="item">
-              <img src="http://static-image.1911edu.com/chinese-pro1.png" alt="">
+              <img src="https://static-image.1911edu.com/chinese-pro1.png" alt="">
               <p>在线国学院</p>
             </div>
             <div class="item">
-              <img src="http://static-image.1911edu.com/chinese-pro2.png" alt="">
+              <img src="https://static-image.1911edu.com/chinese-pro2.png" alt="">
               <p>混合式标准项目</p>
             </div>
             <div class="centerBg-text">
@@ -75,11 +75,11 @@
         <div class="chinese-title teacher"></div>
         <p class="teacherText">本学院授课师资来自以下及其他相关单位</p>
         <div class="school">
-          <img src="http://static-image.1911edu.com/college_BD.png" alt="">
-          <img src="http://static-image.1911edu.com/college_BSD.png" alt="">
-          <img src="http://static-image.1911edu.com/college_RD.png" alt="">
-          <img src="http://static-image.1911edu.com/college_ZGDX.png" alt="">
-          <img src="http://static-image.1911edu.com/college_ZGYYXY.png" alt="">
+          <img src="https://static-image.1911edu.com/college_BD.png" alt="">
+          <img src="https://static-image.1911edu.com/college_BSD.png" alt="">
+          <img src="https://static-image.1911edu.com/college_RD.png" alt="">
+          <img src="https://static-image.1911edu.com/college_ZGDX.png" alt="">
+          <img src="https://static-image.1911edu.com/college_ZGYYXY.png" alt="">
 
         </div>
         <!-- 考核认证 -->
@@ -90,11 +90,11 @@
             <span class="text">学员参加1911学堂国学院在线学院或相关项目学习，考核通过者将获得1911学堂结业证书。</span>
           </div>
           <div class="four-right">
-            <img src="http://static-image.1911edu.com/chinese-pic5.png" alt>
+            <img src="https://static-image.1911edu.com/chinese-pic5.png" alt>
           </div>
         </div>
         <div class="four-certification">
-          <img src="http://static-image.1911edu.com/chinese-pic6.png" alt>
+          <img src="https://static-image.1911edu.com/chinese-pic6.png" alt>
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       contentList: [
         "国学概论",

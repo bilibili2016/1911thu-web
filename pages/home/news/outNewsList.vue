@@ -36,10 +36,10 @@ export default {
   components: {
     "v-banner": CustomBanner
   },
-  data() {
+  data () {
     return {
       load: true,
-      bannerImg: "http://static-image.1911edu.com/newList-bg.png",
+      bannerImg: "https://static-image.1911edu.com/newList-bg.png",
       configs: {
         banner_type: "outNews"
       },
@@ -57,12 +57,12 @@ export default {
       }
     };
   },
-  mounted() {
+  mounted () {
     this.getOutNewInfoList();
     setTitle("媒体报道-1911学堂");
   },
   methods: {
-    getOutNewInfoList() {
+    getOutNewInfoList () {
       this.outNewsForm.page = 1;
       this.outNewsForm.limits = 20;
       news.getNewInfoList(this.outNewsForm).then(response => {
@@ -73,7 +73,7 @@ export default {
         }
       });
     },
-    selectPages(val) {
+    selectPages (val) {
       this.outNewsForm.page = val;
       this.pagemsg.page = val;
       this.outNewsForm.limits = this.pagemsg.pagesize;
@@ -83,7 +83,7 @@ export default {
       });
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
-    handleLink(link) {
+    handleLink (link) {
       window.open(link);
     }
   }

@@ -2,7 +2,7 @@
   <!-- 无数据 -->
   <div class="content">
     <div class="noCourse">
-      <img v-if="config.type=='myCollege'" src="http://static-image.1911edu.com/VIP_null.png" alt="">
+      <img v-if="config.type=='myCollege'" src="https://static-image.1911edu.com/VIP_null.png" alt="">
       <img v-else :src="noMsgImg" alt="">
       <h4>{{config.text}}</h4>
     </div>
@@ -12,9 +12,9 @@
 <script>
 export default {
   props: ["config"],
-  data() {
+  data () {
     return {
-      noMsgImg: "http://static-image.1911edu.com/noMsg.png"
+      noMsgImg: "https://static-image.1911edu.com/noMsg.png"
     };
   }
 };

@@ -37,9 +37,9 @@ export default {
   components: {
     "v-banner": CustomBanner
   },
-  data() {
+  data () {
     return {
-      bannerImg: "http://static-image.1911edu.com/profile_banner03.png",
+      bannerImg: "https://static-image.1911edu.com/profile_banner03.png",
       newsDetail: {},
       loading: true,
       afterNews: {
@@ -61,11 +61,11 @@ export default {
     };
   },
   methods: {
-    getMore(item) {
+    getMore (item) {
       this.$router.push(item);
     },
     // 获取资讯详情
-    getNewInfoDetail(id) {
+    getNewInfoDetail (id) {
       let me = this;
       if (!id) return;
       let newsId = {
@@ -101,7 +101,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     let nid = window.location.pathname.split("/")[3];
     this.getNewInfoDetail(nid);
   }

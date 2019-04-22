@@ -42,7 +42,7 @@
     </ul>
     <div class="content" v-else>
       <div class="noCourse">
-        <img src="http://static-image.1911edu.com/noMsg.png" alt="">
+        <img src="https://static-image.1911edu.com/noMsg.png" alt="">
         <h4 v-if="config.isTeacher">您暂时没有已预约的直播咨询。</h4>
         <h4 v-else>你暂时没有已预约的直播咨询，快去<span class="link" @click="handleTeacher">名师智库</span>预约导师吧。</h4>
       </div>

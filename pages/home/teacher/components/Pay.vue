@@ -37,7 +37,7 @@
       <!-- 支付成功 -->
       <div class="paySuccess" v-show="paySuccess">
         <i @click="close" class="el-icon-close fr"></i>
-        <img src="http://static-image.1911edu.com/success.png" alt>
+        <img src="https://static-image.1911edu.com/success.png" alt>
         <h5>支付成功</h5>
         <div class="goodsTime">
           <p>尊敬的学员，您预约的{{teacherInfo.teacher_name}}老师咨询服务</p>
@@ -52,7 +52,7 @@
       <!-- 支付失败 -->
       <div class="payError" v-show="payError">
         <i @click="close" class="el-icon-close fr"></i>
-        <img src="http://static-image.1911edu.com/error.png" alt>
+        <img src="https://static-image.1911edu.com/error.png" alt>
         <h5>支付失败</h5>
       </div>
     </div>

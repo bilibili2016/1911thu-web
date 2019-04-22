@@ -9,28 +9,28 @@
       <div class="earnings clearfix">
         <div class="item">
           <p class="img-con ">
-            <img class="img1" src="http://static-image.1911edu.com/school-icon1.png" alt="">
+            <img class="img1" src="https://static-image.1911edu.com/school-icon1.png" alt="">
           </p>
           <p class="title">品牌赋能</p>
           <p class="text">1911学堂，是终身教育领域的顶级品牌，有其巨大价值的赋能，将迅速提升自身影响力。</p>
         </div>
         <div class="item">
           <p class="img-con ">
-            <img class="img2" src="http://static-image.1911edu.com/school-icon2.png" alt="">
+            <img class="img2" src="https://static-image.1911edu.com/school-icon2.png" alt="">
           </p>
           <p class="title">资源共享</p>
           <p class="text">城市分校将共享1911学堂课程、导师及行业资源，各地政府、企业与全球名校资源，快速成长为专业领先机构。</p>
         </div>
         <div class="item">
           <p class="img-con ">
-            <img class="img3" src="http://static-image.1911edu.com/school-icon3.png" alt="">
+            <img class="img3" src="https://static-image.1911edu.com/school-icon3.png" alt="">
           </p>
           <p class="title">合作拓展</p>
           <p class="text">加入1911学堂全球布局，与其他城市分校形成跨地域、跨行业的庞大合作网络体系，创造未来发展的新机遇。</p>
         </div>
         <div class="item">
           <p class="img-con ">
-            <img class="img4" src="http://static-image.1911edu.com/school-icon4.png" alt="">
+            <img class="img4" src="https://static-image.1911edu.com/school-icon4.png" alt="">
           </p>
           <p class="title">丰厚回报</p>
           <p class="text">1911学堂为各城市分校设计了极具市场竞争力的收益方案，通过深度换位思考，最大程度保障城市分校权益。</p>
@@ -38,7 +38,7 @@
       </div>
       <div class="cooperation clearfix">
         <div class="co-img">
-          <img src="http://static-image.1911edu.com/school-icon5.png" alt="">
+          <img src="https://static-image.1911edu.com/school-icon5.png" alt="">
         </div>
         <div class="desc">
           <div class="desc-con one">
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="middle">
-            <img src="http://static-image.1911edu.com/school-icon7.png" alt="">
+            <img src="https://static-image.1911edu.com/school-icon7.png" alt="">
           </div>
           <div class="right">
             <div class="item">
@@ -122,7 +122,7 @@
           </div>
         </div>
         <h4 class="title">申请流程</h4>
-        <img src="http://static-image.1911edu.com/school-icon11.png" alt="" class="process">
+        <img src="https://static-image.1911edu.com/school-icon11.png" alt="" class="process">
         <div class="deadline clearfix">
           <div class="left"><span class="inner">合作期限</span></div>
           <div class="right">

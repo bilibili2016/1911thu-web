@@ -21,12 +21,12 @@ export default {
   components: {
     "v-card": CustomCard
   },
-  data() {
+  data () {
     return {
-      projectImg: "http://static-image.1911edu.com/banner-project.png",
-      freeImg: "http://static-image.1911edu.com/banner-free.png",
-      courseImg: "http://static-image.1911edu.com/banner-course.jpg",
-      goodCourseImg: "http://static-image.1911edu.com/banner-goodCourse.png",
+      projectImg: "https://static-image.1911edu.com/banner-project.png",
+      freeImg: "https://static-image.1911edu.com/banner-free.png",
+      courseImg: "https://static-image.1911edu.com/banner-course.jpg",
+      goodCourseImg: "https://static-image.1911edu.com/banner-goodCourse.png",
       config: {
         card_type: "goodlesson",
         teacher: false
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     // 获取最新课程列表
-    getCourseList() {
+    getCourseList () {
       if (this.cidNumber === "0") {
         this.getProjectList();
       } else if (this.cidNumber === "1") {
@@ -72,7 +72,7 @@ export default {
       }
     },
     //获取最新项目列表
-    getProjectList() {
+    getProjectList () {
       this.loading = true;
       categorylist.getProjectList(this.newsCurriculumForm).then(response => {
         if (response.status === 0) {
@@ -85,7 +85,7 @@ export default {
       });
     },
     // 最新课程列表
-    getNewCourseList() {
+    getNewCourseList () {
       this.loading = true;
       categorylist.getNewCourseList(this.newsCurriculumForm).then(response => {
         if (response.status === 0) {
@@ -98,7 +98,7 @@ export default {
       });
     },
     // 获取经典课程列表
-    getClassicCourseList() {
+    getClassicCourseList () {
       this.loading = true;
       categorylist
         .getClassicCourseList(this.newsCurriculumForm)
@@ -113,7 +113,7 @@ export default {
         });
     },
     // 获取最新课程列表
-    getFreeCourseList() {
+    getFreeCourseList () {
       this.loading = true;
       categorylist.getFreeCourseList(this.newsCurriculumForm).then(response => {
         if (response.status === 0) {
@@ -126,7 +126,7 @@ export default {
       });
     },
     // 点击下面分页按钮
-    selectPages(val) {
+    selectPages (val) {
       this.newsCurriculumForm.pages = val;
       this.pagemsg.page = val;
       this.newsCurriculumForm.limits = this.pagemsg.pagesize;
@@ -134,7 +134,7 @@ export default {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
     },
     // 下拉查看更多
-    getMoreData() {
+    getMoreData () {
       if (this.pageCount === this.courseList.length) {
         message(this, "error", "没有更多课程了！");
       } else {
@@ -143,7 +143,7 @@ export default {
       }
     },
     // 监听下拉刷新方法 -- 暂时不用
-    downRefresh() {
+    downRefresh () {
       window.addEventListener("scroll", () => {
         var scrollTop =
           document.documentElement.scrollTop || document.body.scrollTop;
@@ -162,15 +162,15 @@ export default {
     },
 
     // 初始化所有方法
-    initAll() {
+    initAll () {
       this.getCourseList();
     }
   },
-  mounted() {
+  mounted () {
     this.cidNumber = window.location.pathname.split("/")[3];
     this.initAll();
   },
-  updated() {
+  updated () {
     if (this.cidNumber == "0") {
       setTitle("混合式项目-1911学堂");
     } else if (this.cidNumber == "1") {

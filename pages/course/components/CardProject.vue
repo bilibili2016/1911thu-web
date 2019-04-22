@@ -43,9 +43,9 @@ export default {
     'v-player': CardPlayer
   },
   props: ['courseList', 'privileMsg', 'config'],
-  data() {
+  data () {
     return {
-      playImg: 'http://static-image.1911edu.com/play.png'
+      playImg: 'https://static-image.1911edu.com/play.png'
     }
   }
 }

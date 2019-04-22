@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       windowWidth: "",
       autoplayFlag: true,
@@ -47,7 +47,7 @@ export default {
             "集结200余位学术造诣深厚、教学经验丰富、具有国际视野的专家学者",
             "知名高校教授、500强企业高管、行业精英、政策智囊组成高端导师库"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news1.png",
+          imgUrl: "https://static-image.1911edu.com/home-news1.png",
           // detailLink: "/home/core/pages/teachers",
           detailLink: ""
         },
@@ -58,7 +58,7 @@ export default {
             "在线学院+单位内训+国际学位",
             "“知识即服务”（KaaS）终身教育运营模式"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news5.png",
+          imgUrl: "https://static-image.1911edu.com/home-news5.png",
           // detailLink: "/home/core/pages/contentSys",
           detailLink: ""
         },
@@ -69,7 +69,7 @@ export default {
             "“互联网+教育”人才测评体系新模式",
             "了解学习需求，定位能力短板，制定个性化解决方案"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news4.png",
+          imgUrl: "https://static-image.1911edu.com/home-news4.png",
           detailLink: "/home/core/pages/personEval"
         },
         {
@@ -79,14 +79,14 @@ export default {
             "交互式与社群化学习体验",
             "PBL+案例教学法"
           ],
-          imgUrl: "http://static-image.1911edu.com/home-news3.png",
+          imgUrl: "https://static-image.1911edu.com/home-news3.png",
           // detailLink: "/home/core/pages/hybridTeach",
           detailLink: ""
         },
         {
           title: "考试认证",
           textList: ["在线人工智能考试系统", "1911学堂结业证书"],
-          imgUrl: "http://static-image.1911edu.com/home-news2.png",
+          imgUrl: "https://static-image.1911edu.com/home-news2.png",
           detailLink: "/home/core/pages/examAuth"
         }
       ],
@@ -96,46 +96,46 @@ export default {
           title: "名师智库",
           // detailLink: "/home/core/pages/teachers",
           detailLink: "",
-          imgUrl: "http://static-image.1911edu.com/home-news1.png"
+          imgUrl: "https://static-image.1911edu.com/home-news1.png"
         },
         {
           id: 2,
           title: "内容体系及运营模式",
           // detailLink: "/home/core/pages/contentSys",
           detailLink: "",
-          imgUrl: "http://static-image.1911edu.com/home-news5.png"
+          imgUrl: "https://static-image.1911edu.com/home-news5.png"
         },
         {
           id: 3,
           title: "人才测评",
           detailLink: "/home/core/pages/personEval",
-          imgUrl: "http://static-image.1911edu.com/home-news4.png"
+          imgUrl: "https://static-image.1911edu.com/home-news4.png"
         },
         {
           id: 4,
           title: "混合式教学",
           // detailLink: "/home/core/pages/hybridTeach",
           detailLink: "",
-          imgUrl: "http://static-image.1911edu.com/home-news3.png"
+          imgUrl: "https://static-image.1911edu.com/home-news3.png"
         },
         {
           id: 5,
           title: "考试认证",
           detailLink: "/home/core/pages/examAuth",
-          imgUrl: "http://static-image.1911edu.com/home-news2.png"
+          imgUrl: "https://static-image.1911edu.com/home-news2.png"
         }
       ]
     };
   },
   methods: {
-    handleLink(link) {
+    handleLink (link) {
       this.$router.push(link);
     },
-    setActiveItem(index) {
+    setActiveItem (index) {
       this.$refs.coreRightCarousel.setActiveItem(index);
       this.autoplayFlag = false;
     },
-    setCarousel() {
+    setCarousel () {
       if (document.getElementsByClassName("coreCarousel")) {
         let carouselImg = document.getElementsByClassName("coreCarousel");
         if (this.windowWidth <= 950) {
@@ -146,7 +146,7 @@ export default {
         }
       }
     },
-    setWidth() {
+    setWidth () {
       this.windowWidth = document.documentElement.clientWidth / 2;
       let rightHeight = this.windowWidth * 0.66;
       let topHeight = this.windowWidth * 0.21;
@@ -160,7 +160,7 @@ export default {
         (leftHeight > 425 ? 425 : leftHeight) + "px";
     }
   },
-  mounted() {
+  mounted () {
     this.windowWidth = document.documentElement.clientWidth / 2;
     // this.setCarousel();
     this.setWidth();

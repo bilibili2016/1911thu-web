@@ -1,23 +1,12 @@
 <template>
   <div class="main">
     <div class="personalSet">
-      <img
-        class="person-edit"
-        src="http://static-image.1911edu.com/edit-info.png"
-        @click="changeCard()"
-        v-if="!hasPersonalInfo&&showIcon"
-      >
+      <img class="person-edit" src="https://static-image.1911edu.com/edit-info.png" @click="changeCard()" v-if="!hasPersonalInfo&&showIcon">
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <!-- 填写个人信息 -->
         <el-tab-pane label="基础信息" name="first">
           <!-- 设置个人信息 -->
-          <v-setPer
-            v-if="hasPersonalInfo"
-            :data="psnForm"
-            :hasCompany="hasCompany"
-            @changeStatus="changeStatus"
-            @getUserData="getUserData"
-          ></v-setPer>
+          <v-setPer v-if="hasPersonalInfo" :data="psnForm" :hasCompany="hasCompany" @changeStatus="changeStatus" @getUserData="getUserData"></v-setPer>
           <!-- 展示个人信息 -->
           <v-showPer v-if="showInfo" :psnForm="psnForm"></v-showPer>
         </el-tab-pane>
@@ -29,7 +18,7 @@
     </div>
     <transition name="fade">
       <div class="success" v-show="updateSuccess">
-        <img src="http://static-image.1911edu.com/bindingSuccess.png">
+        <img src="https://static-image.1911edu.com/bindingSuccess.png">
         <p>恭喜您操作成功</p>
       </div>
     </transition>

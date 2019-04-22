@@ -165,7 +165,7 @@
     <div class="alertMask" v-show="isShowAlert">
       <div class="alertPop">
         <i class="el-icon-close" @click="handlePopClick"></i>
-        <img src="http://static-image.1911edu.com/alert.png" alt="">
+        <img src="https://static-image.1911edu.com/alert.png" alt="">
         <p>{{alertText}}</p>
         <el-button @click="handlePopClick">知道了</el-button>
       </div>
@@ -193,9 +193,9 @@ export default {
       pageType: {
         page: "shoppingCart",
         text: "您的购物车为空，快去逛逛吧！",
-        imgUrl: "http://static-image.1911edu.com/shopCart-empty.png"
+        imgUrl: "https://static-image.1911edu.com/shopCart-empty.png"
       },
-      noMsg: "http://static-image.1911edu.com/shopCart-empty.png",
+      noMsg: "https://static-image.1911edu.com/shopCart-empty.png",
       lastNum: "",
       isShowAlert: false,
       alertText: "商品数量不能大于999",
@@ -256,7 +256,7 @@ export default {
       projectList: "",
       selectAllCourse: "",
       selectAllProject: "",
-      projectImg: "http://static-image.1911edu.com/p4.png",
+      projectImg: "https://static-image.1911edu.com/p4.png",
       deleteAllData: {
         projectcartid: [],
         curriculumcartid: []

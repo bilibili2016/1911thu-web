@@ -23,7 +23,7 @@ export default {
     'v-error': PlayerError
   },
   props: ['playerForm', 'isloaded', 'playerInner', 'isFreeCourse', 'bought'],
-  data() {
+  data () {
     return {
       isTrySee: false,
       isTrySeeTime: 0,
@@ -41,8 +41,8 @@ export default {
         catalogId: ''
       },
       index: 0,
-      playImg: 'http://static-image.1911edu.com/playImg.gif',
-      pauseImg: 'http://static-image.1911edu.com/video.png',
+      playImg: 'https://static-image.1911edu.com/playImg.gif',
+      pauseImg: 'https://static-image.1911edu.com/video.png',
       autoplay: false,
       aliPlayer: {
         id: 'mediaPlayer', //播放器id
@@ -90,22 +90,22 @@ export default {
     ...mapActions('auth', ['signOut']),
     ...mapMutations('auth', ['setClosePay']),
     // 直接去购买
-    gobuy() {
+    gobuy () {
       this.$emit('gobuy')
     },
-    closeTip() {
+    closeTip () {
       this.isTrySee = false
     },
     // 播放参数  wobsocket 播放器创建
-    getPlayerInfo() {
+    getPlayerInfo () {
       let that = this
       this.socket = new io(getNet())
       // 连接socket
-      this.socket.on('connect', function() {
+      this.socket.on('connect', function () {
         that.socket.emit('login', persistStore.get('token'))
       })
       // 支付推送来消息时
-      this.socket.on('new_msg', function(msg) {
+      this.socket.on('new_msg', function (msg) {
         //支付成功
         if (msg.pay_status == '0') {
           that.$bus.$emit('payResult', true)
@@ -117,7 +117,7 @@ export default {
         }
       })
       // 断线重连
-      this.socket.on('reconnect', function(msg) {})
+      this.socket.on('reconnect', function (msg) { })
       // 获取播放url
       projectplayer.getPlayerInfos(this.playerForm).then(response => {
         if (response.status === 0) {
@@ -188,14 +188,14 @@ export default {
       })
     },
     // 隐藏播放按钮，放出loading--解决网慢的时候播放按钮暴露--ready之后恢复原貌
-    playerLoad() {
+    playerLoad () {
       if (document.getElementsByClassName('prism-hide')[0]) {
         document.getElementsByClassName('prism-hide')[0].className =
           'prism-loading'
       }
     },
     // 播放器加载完成后
-    readyPlay() {
+    readyPlay () {
       clearInterval(this.playLoading)
       this.playerLoad()
       this.loadingFlag = true
@@ -214,7 +214,7 @@ export default {
       this.keyboard()
     },
     // 播放开始--启动计时器
-    playerPlay() {
+    playerPlay () {
       this.playVideo = false
       clearInterval(this.playLoading)
       let that = this
@@ -261,7 +261,7 @@ export default {
       this.changePlayImg(this.playImg, this.playerForm.catalogId)
     },
     // 播放暂停暂停事件--停止icon跳动，socket停止记录播放时长
-    playerPause() {
+    playerPause () {
       this.playVideo = true
       this.player.pause()
       this.changePlayImg(this.pauseImg, this.playerForm.catalogId)
@@ -269,7 +269,7 @@ export default {
       this.socket.emit('watchRecordingTime_disconnect')
     },
     // 视频播放的时候拖动进度条触发--完成拖拽 参数返回拖拽点的时间
-    changeSeek(time) {
+    changeSeek (time) {
       // 未购买&&试看的课程 && 拖动时间 > 试看时间   直接停止
       if (
         !this.bought &&
@@ -283,7 +283,7 @@ export default {
       }
     },
     // 视频播放完成之后--未购买：弹出快捷支付框，已购买：播放下一小节
-    playerEnded() {
+    playerEnded () {
       this.playVideo = true
       clearInterval(this.interval)
       // 未购买且试看
@@ -311,12 +311,12 @@ export default {
       }
     },
     // 播放器报错
-    playerError(error) {
+    playerError (error) {
       this.showError = true
       this.errorMsg = error.paramData.display_msg
     },
     // 试看的课程方法
-    preview(freeTime, currentTime) {
+    preview (freeTime, currentTime) {
       /**
        * 1、试看时长_freeTime
        * 2、当前播放时长_currentTime
@@ -331,7 +331,7 @@ export default {
       }
     },
     // 切换上一小节按钮
-    previousVideo() {
+    previousVideo () {
       if (this.playerPreviousForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerPreviousForm.curriculumId
         this.playerForm.catalogId = this.playerPreviousForm.catalogId
@@ -343,7 +343,7 @@ export default {
       }
     },
     // 切换下一小节按钮
-    nextVideo() {
+    nextVideo () {
       if (this.playerNextForm.curriculumId !== '') {
         this.playerForm.curriculumId = this.playerNextForm.curriculumId
         this.playerForm.catalogId = this.playerNextForm.catalogId
@@ -355,7 +355,7 @@ export default {
       }
     },
     // 点击小节播放
-    handleCourse(item) {
+    handleCourse (item) {
       if (this.playerForm.catalogId === item.id) {
         return false
       }
@@ -366,23 +366,23 @@ export default {
       this.getPlayerInfo()
     },
     // 切换播放gif
-    changePlayImg(img, id) {
+    changePlayImg (img, id) {
       this.$emit('changePlayImg', img, id)
     },
     // 播放视频
-    isPlay() {
+    isPlay () {
       if (this.player) {
         this.player.play()
       }
     },
     // 暂停视频
-    isPause() {
+    isPause () {
       if (this.player) {
         this.player.pause()
       }
     },
     // 点击播放器进行播放或暂停
-    playMedia(item) {
+    playMedia (item) {
       clearTimeout(this.clickTime)
       this.clickTime = setTimeout(() => {
         // 如果点击的当前这个标签是 mediaPlayer 才执行
@@ -408,7 +408,7 @@ export default {
       }, 300)
     },
     // 双击视频 全屏
-    dblclick(item) {
+    dblclick (item) {
       clearTimeout(this.clickTime)
       // 检测播放器是否存在
       // console.log(item)
@@ -427,7 +427,7 @@ export default {
       }
     },
     //  播放器进入全屏事件
-    fullScreenTrue() {
+    fullScreenTrue () {
       document.getElementsByClassName(
         'prism-big-play-btn'
       )[0].style.visibility = 'visible'
@@ -435,7 +435,7 @@ export default {
       this.fullScreen = true
     },
     //  播放器退出全屏事件
-    exitFullScreen() {
+    exitFullScreen () {
       document.getElementsByClassName(
         'prism-big-play-btn'
       )[0].style.visibility = 'hidden'
@@ -443,9 +443,9 @@ export default {
       exitScreen()
     },
     // 增加空格，上下左右键盘操作视频
-    keyboard() {
+    keyboard () {
       let man = this
-      window.onkeydown = function(e) {
+      window.onkeydown = function (e) {
         // 空格 播放暂停
         if (e.keyCode == 32) {
           if (man.player) {
@@ -471,29 +471,29 @@ export default {
       }
     },
     // 快退
-    speedRetreat() {
+    speedRetreat () {
       this.player.seek(this.player.getCurrentTime() * 1 - 5)
     },
     // 快进
-    speedAdvance() {
+    speedAdvance () {
       if (this.player.getDuration() - this.player.getCurrentTime() > 5) {
         this.player.seek(this.player.getCurrentTime() * 1 + 5)
       }
     },
     // 音量增加
-    volumeUp() {
+    volumeUp () {
       let volum = this.player.getVolume()
       volum = volum > 0.9 ? 1 : volum + 0.1
       this.player.setVolume(volum)
     },
     // 音量减小
-    volumeDown() {
+    volumeDown () {
       let volum = this.player.getVolume()
       volum = volum < 0.1 ? 0 : volum - 0.1
       this.player.setVolume(volum)
     },
     // 关闭支付二维码、重新获取播放参数
-    closePayed() {
+    closePayed () {
       this.aliPlayer.autoplay = false
       this.index = 0
       this.player.seek(0)
@@ -501,7 +501,7 @@ export default {
       this.setClosePay({ closePay: false })
     },
     // 改 原播放按钮
-    action() {
+    action () {
       if (!this.player) return
       if (
         this.player.getStatus() == 'pause' ||
@@ -519,23 +519,23 @@ export default {
     }
   },
   watch: {
-    isloaded(val, old) {
+    isloaded (val, old) {
       if (val) {
         // this.lookAt = this.isLookAt
         this.getPlayerInfo()
         this.$emit('falseLoaded')
       }
     },
-    playerInner(val, old) {
+    playerInner (val, old) {
       this.$refs.playInner.style.height = val + 'px'
     },
-    closePay(val) {
+    closePay (val) {
       if (val) {
         this.closePayed()
       }
     }
   },
-  mounted() {
+  mounted () {
     this.projectForm.ids = matchSplits('kid')
     this.$bus.$on('clickCatalog', data => {
       this.handleCourse(data)

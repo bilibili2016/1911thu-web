@@ -41,22 +41,22 @@ export default {
   components: {
     'v-nodata': NoData
   },
-  data() {
+  data () {
     return {
       pageType: {
         page: 'projectEvaluate',
         text: '还没有评论，快去抢沙发！',
-        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
+        imgUrl: 'https://static-image.1911edu.com/noMsg.png'
       }
     }
   },
   methods: {
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.$emit('handleCurrentChange', val)
     }
   }
 }
 </script>
 <style scoped lang="scss">
-@import '~assets/style/project/projectEvaluate.scss';
+@import "~assets/style/project/projectEvaluate.scss";
 </style>

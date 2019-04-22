@@ -190,18 +190,18 @@ export default {
     ...mapState("auth", ["token", "productsNum"])
   },
   watch: {
-    courseList(val) {
+    courseList (val) {
       this.blankImg = val.picture;
     }
   },
-  data() {
+  data () {
     return {
       showDialog: false,
       dialogInfo: {},
       whichPage: "",
       isShowCover: true,
-      playImg: "http://static-image.1911edu.com/play.png",
-      blankImg: "http://static-image.1911edu.com/blank.png",
+      playImg: "https://static-image.1911edu.com/play.png",
+      blankImg: "https://static-image.1911edu.com/blank.png",
       two_is_cart: 0,
       curriculumcartids: {
         cartid: null,
@@ -222,13 +222,13 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["setProductsNum"]),
-    refreshData() {
+    refreshData () {
       this.$emit("refreshData");
     },
-    changePlayImg(img, id) {
+    changePlayImg (img, id) {
       this.$emit("changePlayImg", img, id);
     },
-    vipGoodsDetail(item) {
+    vipGoodsDetail (item) {
       this.$router.push({
         path: "/home/vip/collegeDetail",
         query: {
@@ -239,7 +239,7 @@ export default {
       });
     },
     // 免费试看
-    freeStudy(item) {
+    freeStudy (item) {
       if (persistStore.get("token")) {
         this.getDefaultCurriculumCatalogId(item);
       } else {
@@ -248,7 +248,7 @@ export default {
       }
     },
     // 获取默认小节 跳转 章节id和小节id
-    getDefaultCurriculumCatalogId(item) {
+    getDefaultCurriculumCatalogId (item) {
       this.courseUrl.kid = matchSplits("kid");
       this.courseUrl.bid = item.defaultCurriculumCatalog.id;
 
@@ -264,7 +264,7 @@ export default {
       this.$bus.$emit("reupdatecourse");
     },
     // 左侧播放按钮事件
-    handleImgPlay(item) {
+    handleImgPlay (item) {
       // 用户已登录
       if (persistStore.get("token")) {
         this.getDefaultCurriculumCatalogId(item);
@@ -274,7 +274,7 @@ export default {
       }
     },
     // 点击立即学习按钮
-    handleFreeNoneStudy(item, event) {
+    handleFreeNoneStudy (item, event) {
       // 当用户登录
       if (persistStore.get("token")) {
         // // 用户已经购买 以及 课程为免费 获取默认播放id
@@ -290,7 +290,7 @@ export default {
       }
     },
     // 用户 未购买的逻辑 点击加入购物车逻辑
-    handleAddShopCart(item, event) {
+    handleAddShopCart (item, event) {
       if (persistStore.get("token")) {
         // 第一次点击 没有 在购物车
         if (item.is_cart === 0) {
@@ -309,7 +309,7 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    flyAnimation(event, imgUrl) {
+    flyAnimation (event, imgUrl) {
       var offset = $("#cartNum").offset();
       var flyer = $('<img class="u-flyer" src="' + imgUrl + '">');
       flyer.fly({
@@ -323,14 +323,14 @@ export default {
           width: 0,
           height: 0
         },
-        onEnd: function() {}
+        onEnd: function () { }
       });
     },
-    closeCover() {
+    closeCover () {
       this.isShowCover = false;
     },
     // 判断购物车数量
-    goodsNmber(item) {
+    goodsNmber (item) {
       if (persistStore.get("productsNum") < 70) {
         this.addCourseShopCart(item);
       } else {
@@ -338,12 +338,12 @@ export default {
         this.dialogInfo.info = "您的购物车已满，建议您先去结算或清理";
       }
     },
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.$router.push("/shop/shoppingcart");
     },
     // 添加购物车函数
-    addCourseShopCart(item) {
+    addCourseShopCart (item) {
       this.curriculumcartids.cartid = item.id;
       category.addShopCart(this.curriculumcartids).then(response => {
         if (response.status == 0) {
@@ -358,7 +358,7 @@ export default {
         }
       });
     },
-    changeURLArg(url, arg, arg_val) {
+    changeURLArg (url, arg, arg_val) {
       var pattern = arg + "=([^&]*)";
       var replaceText = arg + "=" + arg_val;
       if (url.match(pattern)) {
@@ -375,7 +375,7 @@ export default {
       return url + "\n" + arg + "\n" + arg_val;
     }
   },
-  mounted() {
+  mounted () {
     this.whichPage = matchSplits("page");
 
     this.$bus.$on("closeCover", data => {

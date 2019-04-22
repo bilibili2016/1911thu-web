@@ -34,12 +34,12 @@ export default {
     'v-card': CustomCard,
     'v-nodata': NoData
   },
-  data() {
+  data () {
     return {
       pageType: {
         page: 'teacher/_info',
         text: '暂无在教的课程',
-        imgUrl: 'http://static-image.1911edu.com/noMsg.png'
+        imgUrl: 'https://static-image.1911edu.com/noMsg.png'
       },
       config: {
         card_type: 'profile',
@@ -51,25 +51,25 @@ export default {
       tidForm: {
         tids: null
       },
-      teacherBg: 'http://static-image.1911edu.com/teacher_bannerBG.png',
+      teacherBg: 'https://static-image.1911edu.com/teacher_bannerBG.png',
       loading: false
     }
   },
   methods: {
-    getTeacherInfo() {
+    getTeacherInfo () {
       teacherInfo.getTeacherInfo(this.tidForm).then(response => {
         this.teacherData = response.data.teacherInfo
         this.loading = false
       })
     },
-    getTeacherCourse() {
+    getTeacherCourse () {
       teacherInfo.getTeacherCourse(this.tidForm).then(response => {
         this.teacherCourse = response.data.curriculumList
         this.loading = false
       })
     }
   },
-  mounted() {
+  mounted () {
     let tid = window.location.pathname.split('/')[3]
     this.tidForm.tids = tid
     this.loading = true

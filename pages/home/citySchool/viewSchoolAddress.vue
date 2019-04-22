@@ -55,13 +55,13 @@ export default {
   components: {
     'v-nodata': NoData
   },
-  data() {
+  data () {
     return {
       loading: false,
       pageType: {
         page: 'schoolAddress',
         text: '该城市暂无1911学堂分校，欢迎您申请城市分校。',
-        imgUrl: 'http://static-image.1911edu.com/noSearch.png'
+        imgUrl: 'https://static-image.1911edu.com/noSearch.png'
       },
       pagemsg: {
         page: 1,
@@ -86,11 +86,11 @@ export default {
   },
   methods: {
     //立即申请
-    handleApplication() {
+    handleApplication () {
       this.$router.push('/home/citySchool/schoolApplication')
     },
     //获取分校地址列表
-    headmasterList() {
+    headmasterList () {
       this.loading = true
       school.headmasterList(this.addressForm).then(res => {
         if (res.status == 0) {
@@ -101,20 +101,20 @@ export default {
       })
     },
     //搜索
-    handleSearch() {
+    handleSearch () {
       this.addressForm.page = 1
       this.pagemsg.page = 1
       this.addressForm.limit = 10
       this.headmasterList()
     },
-    selectPages(val) {
+    selectPages (val) {
       this.addressForm.page = val
       this.pagemsg.page = val
       this.addressForm.limit = this.pagemsg.pagesize
       this.headmasterList()
     },
     //选择区域
-    regionChange(val) {
+    regionChange (val) {
       this.addressForm.province_name = ''
       this.addressForm.province = ''
       this.addressForm.city_name = ''
@@ -133,14 +133,14 @@ export default {
       })
     },
     //获取区域列表
-    getRegionList() {
+    getRegionList () {
       school.getRegionList().then(res => {
         if (res.status == 0) {
           this.region = res.data.regionList
         }
       })
     },
-    provinceChange(val) {
+    provinceChange (val) {
       this.addressForm.city_name = ''
       this.addressForm.city = ''
       // if (!this.province && this.province.length == 0) {
@@ -154,7 +154,7 @@ export default {
         }
       }
     },
-    cityChange(val) {
+    cityChange (val) {
       // if (!this.city && this.city.length == 0) {
       //   this.getRegionList()
       // }
@@ -166,7 +166,7 @@ export default {
       }
     },
     // 整理省市区
-    getRegion(data, val) {
+    getRegion (data, val) {
       let tmp = []
       for (let item of data) {
         if (item.region_code == val) {
@@ -183,7 +183,7 @@ export default {
       return tmp
     }
   },
-  mounted() {
+  mounted () {
     setTitle('城市分校校址-1911学堂')
     this.getRegionList()
     this.headmasterList()
@@ -191,5 +191,5 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@import '~assets/style/citySchool/viewSchoolAddress.scss';
+@import "~assets/style/citySchool/viewSchoolAddress.scss";
 </style>
