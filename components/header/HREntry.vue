@@ -31,8 +31,8 @@ export default {
   data () {
     return {
       downloadAppURL: '',
-      downloadAppURL_test: 'http://ceshiapi.1911edu.com/Api/v1_1/AppH5/appDownload',
-      downloadAppURL_pro: 'http://api.1911edu.com/Api/v1_1/AppH5/appDownload',
+      downloadAppURL_test: 'https://ceshiapi.1911edu.com/Api/v1_1/AppH5/appDownload',
+      downloadAppURL_pro: 'https://api.1911edu.com/Api/v1_1/AppH5/appDownload',
     }
   },
   computed: {

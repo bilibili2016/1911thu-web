@@ -98,8 +98,6 @@ export default {
       },
       players: "",
       player: "",
-      ceshiUrl: "http://ceshi.1911edu.com",
-      localUrl: "http://localhost:8080",
       seconds: 500000,
       nextCatalogId: "", //下一小节的播放id
       link: "",

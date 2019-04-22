@@ -663,11 +663,11 @@ export default {
     // 从微信拉取二维码
     async wxLogin () {
       var link = window.location.origin;
-      if (link === "http://www.1911edu.com") {
-        link = "http://api.1911edu.com/Wapi/Index/wxBack";
+      if (link === "https://www.1911edu.com") {
+        link = "https://api.1911edu.com/Wapi/Index/wxBack";
         this.WxLogin.appid = "wx60c7f5b807077a7b";
       } else {
-        link = "http://ceshiapi.1911edu.com/Wapi/Index/wxBack";
+        link = "https://ceshiapi.1911edu.com/Wapi/Index/wxBack";
         this.WxLogin.appid = "wxefa2295aae13fe2e";
       }
       this.WxLogin.redirect_uri = encodeURIComponent(link);

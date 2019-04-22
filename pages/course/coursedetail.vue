@@ -142,11 +142,6 @@ export default {
       defaultCatalogId: "",
       tagGroup: "",
       reTagBtn: [],
-      configShare: {
-        url: "http://www.1911edu.com/",
-        sites: ["qzone", "qq", "weibo", "wechat"],
-        source: "http://www.1911edu.com/"
-      },
       sumUserStart: 0,
       changeImg: {
         img: "",
