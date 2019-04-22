@@ -3,7 +3,7 @@
     <div class="changePwd">
       <el-form :model="changePwd" status-icon :rules="pwdRules" ref="changePwd" label-width="135px" class="demo-ruleForm" autoComplete="off">
         <input type="password" class="hideInput">
-        <el-form-item label="原密码" prop="oldPass" id="onlyForm">
+        <el-form-item label="原密码：" prop="oldPass" id="onlyForm">
           <el-input type="password" name="noauto" v-model="changePwd.oldPass" auto-complete="off" id="onlyOne" placeholder="请输入您的当前密码"></el-input>
         </el-form-item>
         <el-form-item label="新密码：" prop="newPass" class="margin">
@@ -37,7 +37,7 @@ export default {
   components: {
     "v-dialog": Dialog
   },
-  data() {
+  data () {
     var validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入原密码"));
@@ -99,7 +99,7 @@ export default {
   methods: {
     ...mapActions("auth", ["signOut"]),
     // 提交修改密码
-    submitForm(formName) {
+    submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           let tmp = {
@@ -136,13 +136,13 @@ export default {
       });
     },
     //关闭dialog提示框
-    closeDialog() {
+    closeDialog () {
       this.showDialog = false;
       this.signOut();
       this.$bus.$emit("loginShow", true);
       this.$router.push("/");
     },
-    forget() {
+    forget () {
       this.$router.push("/auth/forgotpassword");
     }
   }
