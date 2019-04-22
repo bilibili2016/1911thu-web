@@ -82,19 +82,19 @@
           <v-myexamine :examineListData="examineListData" :examineLoading="examineLoading" :examinePagemsg="examinePagemsg" @examineListChange="examineListChange"></v-myexamine>
         </el-tab-pane>
         <!-- 我的咨询 -->
-        <!-- <el-tab-pane class="my-course my-examine" name="tab-twelfth">
+        <el-tab-pane class="my-course my-examine" name="tab-twelfth">
           <span slot="label" class="tabList">
             <i class="icon-examine"></i>&nbsp;我的咨询
           </span>
-          <v-mystudent :data="teacherData"></v-mystudent>
-        </el-tab-pane> -->
+          <v-mystudent :data="teacherData" @getTeacherData="getTeacherData"></v-mystudent>
+        </el-tab-pane>
         <!-- 教师入口 -->
-        <!-- <el-tab-pane class="my-course my-examine" name="tab-thirteenth">
+        <el-tab-pane class="my-course my-examine" name="tab-thirteenth" v-if="userInfo.user_type=='4'">
           <span slot="label" class="tabList">
             <i class="icon-examine"></i>&nbsp;教师入口
           </span>
-          <v-myteacher :data="teacherData"></v-myteacher>
-        </el-tab-pane> -->
+          <v-myteacher :data="teacherData" @getTeacherData="getTeacherData"></v-myteacher>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -490,7 +490,12 @@ export default {
         head_img: "http://static-image.1911edu.com/defaultHeadImg.jpg"
       },
       getHistory: true,
-      teacherData: []
+      teacherData: [],
+      teacherBespokeData: {
+        type: "",
+        page: "",
+        limit: ""
+      }
     };
   },
   computed: {
@@ -952,6 +957,11 @@ export default {
           message(this, "error", "删除失败");
         }
       });
+    },
+    // 我的咨询和老师入口tab切换
+    getTeacherData(item) {
+      // this.teacherBespokeData
+      // this.teacherBespokeListData()
     },
     // 获取预约老师列表
     teacherBespokeListData() {

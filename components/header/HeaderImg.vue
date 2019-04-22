@@ -26,65 +26,10 @@ import { mapState, mapGetters } from "vuex";
 import { store as persistStore } from "~/lib/core/store";
 
 export default {
-  props: ["data", "isShowLRBtn"],
+  props: ["data", "isShowLRBtn", "subPagesData"],
   data() {
     return {
-      infoNum: "",
-      subPagesData: [
-        {
-          link: "tab-first",
-          text: "最近学习"
-        },
-        {
-          link: "tab-eleventh",
-          text: "我的学院"
-        },
-        {
-          link: "tab-second",
-          text: "我的课程"
-        },
-        {
-          link: "tab-third",
-          text: "我的项目"
-        },
-        {
-          link: "tab-fourth",
-          text: "我的订单"
-        },
-        {
-          link: "tab-fifth",
-          text: "我的消息",
-          alert: true
-        },
-        {
-          link: "tab-sixth",
-          text: "个人设置"
-        },
-        {
-          link: "tab-seventh",
-          text: "兑换码管理"
-        },
-        {
-          link: "tab-eighth",
-          text: "发票管理"
-        },
-        {
-          link: "tab-ninth",
-          text: "自定制项目"
-        },
-        {
-          link: "tab-tenth",
-          text: "申请证书"
-        }
-        // {
-        //   link: "tab-twelfth",
-        //   text: "我的咨询"
-        // },
-        // {
-        //   link: "tab-thirteenth",
-        //   text: "教师入口"
-        // }
-      ]
+      infoNum: ""
     };
   },
   computed: {
