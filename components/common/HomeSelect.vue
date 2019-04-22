@@ -24,7 +24,7 @@ import { getNetwork } from "@/lib/util/helper";
 
 export default {
   props: ["categoryArr", "projectArr"],
-  data() {
+  data () {
     return {
       isHidden: false,
       changeActive: "",
@@ -62,6 +62,11 @@ export default {
           link: "/home/teacher/list"
         },
         {
+          title: "课程中心",
+          id: "courseCenter",
+          link: "/course/category?cid=0&cp=0&pids=0&xid=0&vid=-1"
+        },
+        {
           title: "城市分校",
           id: "school",
           link: "/home/citySchool/schoolIntro"
@@ -87,17 +92,13 @@ export default {
               link: ""
             }
           ]
-        },
-        {
-          title: "关于我们",
-          id: "adoutUs",
-          link: "/other/pages/homeUs"
-        },
-        {
-          title: "课程中心",
-          id: "courseCenter",
-          link: "/course/category?cid=0&cp=0&pids=0&xid=0&vid=-1"
         }
+        // {
+        //   title: "关于我们",
+        //   id: "adoutUs",
+        //   link: "/other/pages/homeUs"
+        // },
+
       ],
       downloadAppURL: "",
       downloadAppURL_test:
@@ -106,11 +107,11 @@ export default {
     };
   },
   methods: {
-    handleClick(item, child, index) {
+    handleClick (item, child, index) {
       this.isHidden = false;
       this.handleLiClick(item, child, index);
     },
-    handleLiClick(item, child, index) {
+    handleLiClick (item, child, index) {
       if (index != undefined) {
         document.getElementsByClassName("");
         let subLen = this.$refs.subIndex;
@@ -143,10 +144,10 @@ export default {
         this.$router.push(item.link);
       }
     },
-    isShowSub() {
+    isShowSub () {
       this.isHidden = false;
     },
-    changeHeaderActive() {
+    changeHeaderActive () {
       this.isHidden = true;
 
       let pathName = window.location.pathname;
@@ -220,7 +221,7 @@ export default {
       }
     },
     // 学院列表
-    vipGoodsList() {
+    vipGoodsList () {
       home.vipGoodsList().then(response => {
         if (response.status === 0) {
           for (const key in this.navList) {
@@ -232,7 +233,7 @@ export default {
       });
     }
   },
-  mounted() {
+  mounted () {
     this.vipGoodsList();
     this.changeHeaderActive();
     if (getNetwork()) {

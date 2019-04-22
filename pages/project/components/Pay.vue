@@ -20,7 +20,7 @@
             <span v-else-if="type==2">{{parseFloat(projectDetail.underline_price)}}</span>
             <span v-else-if="type==3">{{parseFloat(projectDetail.online_price)+parseFloat(projectDetail.underline_price)}}</span>
             元</p>
-          <!-- <p>如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p> -->
+          <p v-if="this.projectDetail.is_max_number == '1'">如果贵单位学习人数不在此区间内，请前往<i @click="goCustom">自定制项目</i></p>
         </div>
         <p>总价：{{totalPrice}}元</p>
         <div class="btn">
@@ -97,15 +97,24 @@ export default {
     //加
     addNumber () {
       // 限制最高人数50改为999
-      if (this.projectData.number >= 998) {
+      console.log(this.projectDetail.is_max_number);
+
+      if (this.projectDetail.is_max_number == '1') {
+        this.maxNumber(this.projectDetail.max_number)
+      } else {
+        this.maxNumber(999)
+      }
+      //   最高人数不做限制
+      //   this.projectData.number++;
+    },
+    maxNumber (number) {
+      if (this.projectData.number >= number - 1) {
         this.add = true;
-        this.projectData.number = 999;
+        this.projectData.number = number;
       } else {
         this.projectData.number++;
         this.sub = false;
       }
-      //   最高人数不做限制
-      //   this.projectData.number++;
     },
     // 购买人数输入框获取焦点记录当前数字
     handleFocus () {
@@ -118,13 +127,19 @@ export default {
         this.projectData.number = this.lastNum;
         return false;
       }
-      if (this.projectData.number <= 30) {
-        this.projectData.number = 30;
+      if (this.projectDetail.is_max_number == '1') {
+        this.inputNumber(30, this.projectDetail.max_number)
+      } else {
+        this.inputNumber(30, 999)
+      }
+    },
+    inputNumber (min, max) {
+      if (this.projectData.number <= min) {
+        this.projectData.number = min;
         this.sub = true;
         this.add = false;
-        // 解除最高限制50
-      } else if (this.projectData.number >= 999) {
-        this.projectData.number = 999;
+      } else if (this.projectData.number >= max) {
+        this.projectData.number = max;
         this.sub = false;
         this.add = true;
       } else {

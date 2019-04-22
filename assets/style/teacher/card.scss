@@ -78,7 +78,6 @@
       .preparation {
         background-color: #cccccc;
         color: #fff;
-        cursor: default;
         border-color: #ccc;
 
         &:hover {
@@ -88,7 +87,6 @@
       }
 
       .unBook {
-        cursor: inherit;
         background-color: #ccc;
         border-color: #ccc;
         color: #fff;
@@ -161,7 +159,7 @@
         .preparation {
           background-color: #cccccc;
           color: #fff;
-          cursor: default;
+          cursor: not-allowed;
           border-color: #ccc;
 
           &:hover {
@@ -171,7 +169,7 @@
         }
 
         .unBook {
-          cursor: inherit;
+          cursor: not-allowed;
           background-color: #ccc;
           border-color: #ccc;
           color: #fff;
