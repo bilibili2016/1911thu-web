@@ -88,11 +88,11 @@ export default {
             }
           ]
         },
-        {
-          title: "关于我们",
-          id: "adoutUs",
-          link: "/other/pages/homeUs"
-        },
+        // {
+        //   title: "关于我们",
+        //   id: "adoutUs",
+        //   link: "/other/pages/homeUs"
+        // },
         {
           title: "课程中心",
           id: "courseCenter",
