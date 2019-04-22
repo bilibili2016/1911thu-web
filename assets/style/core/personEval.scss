@@ -1,203 +1,234 @@
 .personEval {
-	.banner {
-		width: 100%;
-		height: 560px;
-		text-align: center;
-		background: url('http://static-image.1911edu.com/person-banner.png') no-repeat;
-		background-position: center;
-		z-index: 1;
-		h4 {
-			font-size: 50px;
-			color: #fff;
-			font-weight: bold;
-			padding-top: 180px;
-		}
-		.line {
-			width: 110px;
-			height: 4px;
-			background-color: #fff;
-			margin: 0 auto;
-			margin-top: 30px;
-			margin-bottom: 40px;
-		}
-		.text {
-			font-size: 22px;
-			color: #fff;
-			line-height: 40px;
-		}
-	}
-	.con {
-		background: url('http://static-image.1911edu.com/core-bg.png') no-repeat;
-		.con-one {
-			width: 1100px;
-			margin: 0 auto;
-			padding-bottom: 40px;
-			padding-top: 60px;
-			p {
-				text-indent: 2em;
-				font-size: 18px;
-				color: #222;
-				line-height: 36px;
-			}
-			.left {
-				float: left;
-				width: 438px;
-				margin-right: 50px;
-				text-align: center;
-				img {
-					display: block;
-					width: 415px;
-					margin: 0 auto;
-					padding-top: 20px;
-				}
-			}
-			.right {
-				float: left;
-				width: 612px;
-			}
-		}
-		.con-two {
-			background-color: #fff;
-			padding-bottom: 50px;
-			.two-detail {
-				width: 1025px;
-				margin: 0 auto;
-				padding-top: 50px;
-				.details {
-					.left {
-						float: left;
-						width: 65px;
-						height: 175px;
-						background-color: #5f6cba;
-						border-radius: 4px;
-						text-align: center;
-						color: #fff;
-						margin-right: 20px;
-						font-size: 18px;
-						span {
-							display: inline-block;
-							width: 20px;
-							height: 80px;
-							margin-top: 47px;
-						}
-					}
-					.right {
-						float: left;
-						width: 940px;
-						.item {
-							float: left;
-							width: 220px;
-							height: 78px;
-							border-radius: 4px;
-							background-color: #e8eaf5;
-							text-align: center;
+  .banner {
+    width: 100%;
+    height: 560px;
+    text-align: center;
+    background: url('https://static-image.1911edu.com/person-banner.png') no-repeat;
+    background-position: center;
+    z-index: 1;
 
-							color: #1a3578;
-							font-size: 18px;
-							margin: 0 20px 20px 0;
-							&:nth-child(4n + 4) {
-								margin-right: 0;
-							}
-						}
-					}
-				}
-				.detail-one {
-					.right {
-						div.item {
-							line-height: 78px;
-						}
-					}
-				}
-				.detail-two {
-					.right {
-						div.item {
-							height: 175px;
-							text-align: center;
-							&.icon1 {
-								background-color: #e4f3fd;
-								img {
-									display: block;
-									width: 56px;
-									height: 55px;
-									margin: 36px auto 28px;
-								}
-							}
-							&.icon2 {
-								background-color: #fef8e3;
-								img {
-									display: block;
-									width: 56px;
-									height: 56px;
-									margin: 35px auto 28px;
-								}
-							}
-							&.icon3 {
-								background-color: #f8e5ec;
-								img {
-									display: block;
-									width: 62px;
-									height: 49px;
-									margin: 39px auto 31px;
-								}
-							}
-							&.icon4 {
-								background-color: #dadfff;
-								padding: 60px 10px;
-								line-height: 36px;
-							}
-						}
-					}
-				}
-				.detail-three {
-					.right {
-						// width: 100%;
-						height: 175px;
-						border-radius: 4px;
-						background-color: #dadfff;
+    h4 {
+      font-size: 50px;
+      color: #fff;
+      font-weight: bold;
+      padding-top: 180px;
+    }
 
-						box-sizing: border-box;
-						.text {
-							float: left;
-							width: 620px;
-							font-size: 18px;
-							line-height: 36px;
-							color: #1a3578;
-							text-indent: 2em;
-							padding: 60px 0 0 55px;
-						}
-						img {
-							width: 190px;
-							height: 155px;
-							float: left;
-							margin-left: 50px;
-							margin-top: 20px;
-						}
-					}
-				}
-			}
-		}
-		.con-three {
-			width: 100%;
-			height: 320px;
-			background: url('http://static-image.1911edu.com/person-bg1.png') no-repeat;
-			background-size: cover;
-			padding-top: 50px;
-			.three {
-				width: 1140px;
-				height: 205px;
-				border-radius: 20px;
-				margin: 0 auto;
-				background: url('http://static-image.1911edu.com/person-bg2.png') no-repeat;
-				background-size: cover;
-				padding: 60px 45px;
-				box-sizing: border-box;
-				p {
-					text-indent: 2em;
-					font-size: 18px;
-					color: #222;
-					line-height: 36px;
-				}
-			}
-		}
-	}
+    .line {
+      width: 110px;
+      height: 4px;
+      background-color: #fff;
+      margin: 0 auto;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+
+    .text {
+      font-size: 22px;
+      color: #fff;
+      line-height: 40px;
+    }
+  }
+
+  .con {
+    background: url('https://static-image.1911edu.com/core-bg.png') no-repeat;
+
+    .con-one {
+      width: 1100px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+      padding-top: 60px;
+
+      p {
+        text-indent: 2em;
+        font-size: 18px;
+        color: #222;
+        line-height: 36px;
+      }
+
+      .left {
+        float: left;
+        width: 438px;
+        margin-right: 50px;
+        text-align: center;
+
+        img {
+          display: block;
+          width: 415px;
+          margin: 0 auto;
+          padding-top: 20px;
+        }
+      }
+
+      .right {
+        float: left;
+        width: 612px;
+      }
+    }
+
+    .con-two {
+      background-color: #fff;
+      padding-bottom: 50px;
+
+      .two-detail {
+        width: 1025px;
+        margin: 0 auto;
+        padding-top: 50px;
+
+        .details {
+          .left {
+            float: left;
+            width: 65px;
+            height: 175px;
+            background-color: #5f6cba;
+            border-radius: 4px;
+            text-align: center;
+            color: #fff;
+            margin-right: 20px;
+            font-size: 18px;
+
+            span {
+              display: inline-block;
+              width: 20px;
+              height: 80px;
+              margin-top: 47px;
+            }
+          }
+
+          .right {
+            float: left;
+            width: 940px;
+
+            .item {
+              float: left;
+              width: 220px;
+              height: 78px;
+              border-radius: 4px;
+              background-color: #e8eaf5;
+              text-align: center;
+
+              color: #1a3578;
+              font-size: 18px;
+              margin: 0 20px 20px 0;
+
+              &:nth-child(4n + 4) {
+                margin-right: 0;
+              }
+            }
+          }
+        }
+
+        .detail-one {
+          .right {
+            div.item {
+              line-height: 78px;
+            }
+          }
+        }
+
+        .detail-two {
+          .right {
+            div.item {
+              height: 175px;
+              text-align: center;
+
+              &.icon1 {
+                background-color: #e4f3fd;
+
+                img {
+                  display: block;
+                  width: 56px;
+                  height: 55px;
+                  margin: 36px auto 28px;
+                }
+              }
+
+              &.icon2 {
+                background-color: #fef8e3;
+
+                img {
+                  display: block;
+                  width: 56px;
+                  height: 56px;
+                  margin: 35px auto 28px;
+                }
+              }
+
+              &.icon3 {
+                background-color: #f8e5ec;
+
+                img {
+                  display: block;
+                  width: 62px;
+                  height: 49px;
+                  margin: 39px auto 31px;
+                }
+              }
+
+              &.icon4 {
+                background-color: #dadfff;
+                padding: 60px 10px;
+                line-height: 36px;
+              }
+            }
+          }
+        }
+
+        .detail-three {
+          .right {
+            // width: 100%;
+            height: 175px;
+            border-radius: 4px;
+            background-color: #dadfff;
+
+            box-sizing: border-box;
+
+            .text {
+              float: left;
+              width: 620px;
+              font-size: 18px;
+              line-height: 36px;
+              color: #1a3578;
+              text-indent: 2em;
+              padding: 60px 0 0 55px;
+            }
+
+            img {
+              width: 190px;
+              height: 155px;
+              float: left;
+              margin-left: 50px;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .con-three {
+      width: 100%;
+      height: 320px;
+      background: url('https://static-image.1911edu.com/person-bg1.png') no-repeat;
+      background-size: cover;
+      padding-top: 50px;
+
+      .three {
+        width: 1140px;
+        height: 205px;
+        border-radius: 20px;
+        margin: 0 auto;
+        background: url('https://static-image.1911edu.com/person-bg2.png') no-repeat;
+        background-size: cover;
+        padding: 60px 45px;
+        box-sizing: border-box;
+
+        p {
+          text-indent: 2em;
+          font-size: 18px;
+          color: #222;
+          line-height: 36px;
+        }
+      }
+    }
+  }
 }

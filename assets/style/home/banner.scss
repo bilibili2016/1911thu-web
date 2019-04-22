@@ -1,313 +1,313 @@
 .el-main {
-	padding: 0;
+  padding: 0;
 }
 
 .el-carousel__item h3 {
-	color: #475669;
-	font-size: 14px;
-	opacity: 0.75;
-	line-height: 200px;
-	margin: 0;
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
 }
 
 .banner {
-	width: 100%;
-	position: relative;
-	height: 420px;
-	background-color: #fff;
+  width: 100%;
+  position: relative;
+  height: 420px;
+  background-color: #fff;
 
-	.el-carousel {
-		margin: 0 auto;
-	}
+  .el-carousel {
+    margin: 0 auto;
+  }
 
-	.el-carousel__item {
-		width: 1920px;
-		// margin-left: -300px;
-	}
+  .el-carousel__item {
+    width: 1920px;
+    // margin-left: -300px;
+  }
 
-	.el-carousel__item .bannerImg {
-		width: 1920px;
-		height: 420px;
-		margin: 0 auto;
-		cursor: pointer;
-	}
+  .el-carousel__item .bannerImg {
+    width: 1920px;
+    height: 420px;
+    margin: 0 auto;
+    cursor: pointer;
+  }
 
-	.el-carousel__item h3 {
-		color: #475669;
-		font-size: 18px;
-		opacity: 0.75;
-		line-height: 300px;
-		margin: 0;
-	}
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+  }
 
-	.el-carousel__item:nth-child(2n) {
-		background-color: #99a9bf;
-	}
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
 
-	.el-carousel__item:nth-child(2n + 1) {
-		background-color: #d3dce6;
-	}
+  .el-carousel__item:nth-child(2n + 1) {
+    background-color: #d3dce6;
+  }
 
-	.classify {
-		width: auto; //1100px
-		margin: 0 auto;
-		position: absolute;
-		top: 0;
-		left: 50%;
-		margin-left: -550px;
-		z-index: 2;
+  .classify {
+    width: auto; //1100px
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -550px;
+    z-index: 2;
 
-		.starters {
-			width: 178px;
-			height: 420px;
-			background-color: rgba(100, 23, 166, 0.9);
-			position: relative;
+    .starters {
+      width: 178px;
+      height: 420px;
+      background-color: rgba(100, 23, 166, 0.9);
+      position: relative;
 
-			.classItem {
-				.tabs-title {
-					width: 178px;
-					height: 70px;
-					line-height: 70px;
-					text-align: center;
-					color: #e9d0ff;
-					font-size: 16px;
-					cursor: pointer;
-					transition: all 300ms;
-				}
+      .classItem {
+        .tabs-title {
+          width: 178px;
+          height: 70px;
+          line-height: 70px;
+          text-align: center;
+          color: #e9d0ff;
+          font-size: 16px;
+          cursor: pointer;
+          transition: all 300ms;
+        }
 
-				&:hover .tabs-title {
-					color: #5f068d;
-					background: rgba(233, 208, 255, 1);
-				}
+        &:hover .tabs-title {
+          color: #5f068d;
+          background: rgba(233, 208, 255, 1);
+        }
 
-				.tabs-content {
-					position: absolute;
-					left: 178px;
-					top: 0;
-					width: 922px;
-					height: 420px;
-					padding: 25px 0 25px 42px;
-					overflow-y: auto;
-					background-color: #fff;
-					z-index: 2;
+        .tabs-content {
+          position: absolute;
+          left: 178px;
+          top: 0;
+          width: 922px;
+          height: 420px;
+          padding: 25px 0 25px 42px;
+          overflow-y: auto;
+          background-color: #fff;
+          z-index: 2;
 
-					.subClass {
-						font-size: 14px;
-						line-height: 34px;
+          .subClass {
+            font-size: 14px;
+            line-height: 34px;
 
-						h4 {
-							width: 100%;
-							line-height: 30px;
-							color: #773084;
-							cursor: pointer;
+            h4 {
+              width: 100%;
+              line-height: 30px;
+              color: #773084;
+              cursor: pointer;
 
-							span {
-								width: 82%;
-								margin-left: 40px;
+              span {
+                width: 82%;
+                margin-left: 40px;
 
-								i {
-									display: inline-block;
-									width: 100%;
-									height: 1px;
-									margin-bottom: 6px;
-									background-color: #e8d6f7;
-								}
-							}
-						}
+                i {
+                  display: inline-block;
+                  width: 100%;
+                  height: 1px;
+                  margin-bottom: 6px;
+                  background-color: #e8d6f7;
+                }
+              }
+            }
 
-						p {
-							span {
-								margin-right: 20px;
-								cursor: pointer;
+            p {
+              span {
+                margin-right: 20px;
+                cursor: pointer;
 
-								&:hover {
-									color: #5f068d;
-								}
-							}
-						}
-					}
+                &:hover {
+                  color: #5f068d;
+                }
+              }
+            }
+          }
 
-					.courseMsg {
-						width: 100%;
-						height: 193px;
-						padding: 20px 0;
-						background-color: #f7fafc;
-						display: flex;
-						flex-wrap: wrap;
-						position: absolute;
-						bottom: 0;
-						left: 0;
+          .courseMsg {
+            width: 100%;
+            height: 193px;
+            padding: 20px 0;
+            background-color: #f7fafc;
+            display: flex;
+            flex-wrap: wrap;
+            position: absolute;
+            bottom: 0;
+            left: 0;
 
-						.courseOne {
-							width: 414px;
-							margin: 0 0 20px 44px;
-							height: 66px;
-							cursor: pointer;
+            .courseOne {
+              width: 414px;
+              margin: 0 0 20px 44px;
+              height: 66px;
+              cursor: pointer;
 
-							img {
-								width: 104px;
-								height: 66px;
-								border-radius: 6px;
-								margin-right: 10px;
-								overflow: hidden;
-							}
+              img {
+                width: 104px;
+                height: 66px;
+                border-radius: 6px;
+                margin-right: 10px;
+                overflow: hidden;
+              }
 
-							h5 {
-								line-height: 34px;
-								width: 300px;
-								overflow: hidden;
-								white-space: nowrap;
-								text-overflow: ellipsis;
-							}
+              h5 {
+                line-height: 34px;
+                width: 300px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
 
-							p {
-								color: #666;
-								line-height: 28px;
-								font-size: 14px;
-								overflow: hidden;
-								white-space: nowrap;
-								text-overflow: ellipsis;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+              p {
+                color: #666;
+                line-height: 28px;
+                font-size: 14px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
-	.customization {
-		width: 1100px;
-		position: absolute;
-		bottom: 30px;
-		left: 50%;
-		margin-left: -550px;
-		z-index: 3;
+  .customization {
+    width: 1100px;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -550px;
+    z-index: 3;
 
-		div.pro {
-			width: 350px;
-			height: 112px;
-			border-radius: 5px;
-			background-color: #efefef;
-			cursor: pointer;
+    div.pro {
+      width: 350px;
+      height: 112px;
+      border-radius: 5px;
+      background-color: #efefef;
+      cursor: pointer;
 
-			&:hover {
-				background-color: #f1e9f8;
-			}
+      &:hover {
+        background-color: #f1e9f8;
+      }
 
-			.con {
-				margin-right: 20px;
-			}
+      .con {
+        margin-right: 20px;
+      }
 
-			img {
-				width: 50px;
-				height: 50px;
-				margin: 31px 16px;
-			}
+      img {
+        width: 50px;
+        height: 50px;
+        margin: 31px 16px;
+      }
 
-			i.fl {
-				display: inline-block;
-				width: 56px;
-				height: 56px;
-				margin: 22px 13px;
-			}
+      i.fl {
+        display: inline-block;
+        width: 56px;
+        height: 56px;
+        margin: 22px 13px;
+      }
 
-			&:first-child i {
-				// background: url("http://static-image.1911edu.com/pro1.png") no-repeat;
-				background-size: contain;
-			}
+      &:first-child i {
+        // background: url("https://static-image.1911edu.com/pro1.png") no-repeat;
+        background-size: contain;
+      }
 
-			&:nth-child(2) i {
-				// background: url("http://static-image.1911edu.com/pro2.png") no-repeat;
-				background-size: contain;
-			}
+      &:nth-child(2) i {
+        // background: url("https://static-image.1911edu.com/pro2.png") no-repeat;
+        background-size: contain;
+      }
 
-			&:nth-child(3) i {
-				// background: url("http://static-image.1911edu.com/pro3.png") no-repeat;
-				background-size: contain;
-			}
+      &:nth-child(3) i {
+        // background: url("https://static-image.1911edu.com/pro3.png") no-repeat;
+        background-size: contain;
+      }
 
-			div {
-				width: 235px;
+      div {
+        width: 235px;
 
-				h5 {
-					color: #222; // line-height: 40px;
-					margin: 19px 0px 12px 0px;
+        h5 {
+          color: #222; // line-height: 40px;
+          margin: 19px 0px 12px 0px;
 
-					&:hover {
-						color: #5f068d;
-					}
-				}
+          &:hover {
+            color: #5f068d;
+          }
+        }
 
-				p {
-					color: #666;
-					font-size: 12px;
-					line-height: 25px;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					display: -webkit-box;
-					line-clamp: 2;
-					box-orient: vertical;
-				}
-			}
-		}
-	}
+        p {
+          color: #666;
+          font-size: 12px;
+          line-height: 25px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          line-clamp: 2;
+          box-orient: vertical;
+        }
+      }
+    }
+  }
 
-	.videoDiv {
-		position: relative;
-		height: 420px;
-		margin: 0 auto;
+  .videoDiv {
+    position: relative;
+    height: 420px;
+    margin: 0 auto;
 
-		.playImg {
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			margin: auto;
-			width: 76px;
-			height: 76px;
-			transition: all 3000ms;
-			z-index: 20;
-			cursor: pointer;
-		}
-	}
+    .playImg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 76px;
+      height: 76px;
+      transition: all 3000ms;
+      z-index: 20;
+      cursor: pointer;
+    }
+  }
 }
 
 .shadow {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, .6);
-	z-index: 30;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .6);
+  z-index: 30;
 
-	.videoBox {
-		position: absolute;
-		top: 120px;
-		left: 50%;
-		margin-left: -380px;
-		width: 760px;
-		height: 450px;
-	}
+  .videoBox {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    margin-left: -380px;
+    width: 760px;
+    height: 450px;
+  }
 
-	.el-icon-close {
-		position: absolute;
-		right: 0;
-		font-size: 26px;
-		top: 0;
-		color: #fff;
-		font-weight: 700;
-	}
+  .el-icon-close {
+    position: absolute;
+    right: 0;
+    font-size: 26px;
+    top: 0;
+    color: #fff;
+    font-weight: 700;
+  }
 
-	.video {
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		margin-left: -360px;
-		width: 720px;
-		height: 420px;
-	}
+  .video {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -360px;
+    width: 720px;
+    height: 420px;
+  }
 }

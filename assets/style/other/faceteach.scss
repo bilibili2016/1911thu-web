@@ -8,44 +8,51 @@
       width: 721px;
       height: 528px;
     }
+
     .banner-img {
       width: 100%;
       height: 420px;
       position: relative;
       display: table;
-      background: url(http://static-image.1911edu.com/faceteach-bg.png)
-        no-repeat;
+      background: url('https://static-image.1911edu.com/faceteach-bg.png') no-repeat;
       background-size: 100% 100%;
+
       .banner-img {
         width: 100%;
         height: 420px;
       }
+
       .text {
         display: table-cell;
         vertical-align: middle;
         padding-left: 500px;
+
         // text-align: center;
         .text-desc1 {
           font-size: 46px;
           color: #fff;
         }
+
         .text-line {
           width: 80px;
           height: 8px;
           background: #3630cc;
           margin: 55px 0 22px 0;
         }
+
         .text-desc2 {
           font-size: 22px;
           color: #fff;
           margin-bottom: 30px;
         }
+
         .text-desc3 {
           font-size: 22px;
           color: #fff;
         }
       }
     }
+
     // .center {
     //   position: relative;
     //   .text {
@@ -95,67 +102,83 @@
       margin: 0 auto;
       padding: 140px 0px;
       position: relative;
+
       .fz-one {
         font-size: 24px;
         color: rgba(34, 34, 34, 1);
         line-height: 39px;
       }
+
       .fz-two {
         font-size: 14px;
         color: rgba(34, 34, 34, 1);
         line-height: 30px;
       }
+
       .one {
         position: absolute;
         top: 190px;
         left: -152px;
       }
+
       .right-one {
         text-indent: 199px;
       }
+
       .two {
         position: absolute;
         top: 304px;
         left: -162px;
       }
+
       .hw {
         width: 178px;
       }
+
       .right-two {
         text-indent: 75px;
       }
+
       .three {
         position: absolute;
         top: 492px;
         left: -136px;
       }
+
       .hw-two {
         width: 264px;
       }
+
       .right-three {
         text-indent: 140px;
       }
+
       .four {
         position: absolute;
         top: 163px;
         left: 598px;
       }
+
       .hw-three {
         width: 329px;
       }
+
       .five {
         position: absolute;
         top: 345px;
         left: 677px;
       }
+
       .hw-five {
         width: 240px;
       }
+
       .six {
         position: absolute;
         top: 515px;
         left: 716px;
       }
+
       .hw-six {
         width: 203px;
       }

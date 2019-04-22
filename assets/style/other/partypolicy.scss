@@ -2,20 +2,22 @@
   .project {
     background-color: #fff;
     padding-bottom: 100px;
+
     .distinctive {
       width: 100%;
       height: 570px;
       padding-top: 102px;
-      background: url('http://static-image.1911edu.com/distinctiveBg.png')
-        no-repeat;
+      background: url('https://static-image.1911edu.com/distinctiveBg.png') no-repeat;
       background-position: top center;
       background-size: cover;
+
       .lietOne {
         width: 1100px;
         height: 170px;
         margin: 0 auto 51px;
         border-radius: 16px;
         background-color: #fff;
+
         .dttImg img {
           width: 80px;
           height: 80px;
@@ -23,15 +25,19 @@
           border-radius: 50%;
           box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
         }
+
         h4 {
           padding: 20px 10px 10px;
           color: #d0a04e;
           font-size: 18px;
         }
+
         .inner {
           clear: both;
+
           ul {
             padding: 0 49px 0 86px;
+
             li {
               float: left;
               width: 480px;
@@ -43,46 +49,51 @@
         }
       }
     }
+
     .system {
-      background: url('http://static-image.1911edu.com/systemBg.png') no-repeat;
+      background: url('https://static-image.1911edu.com/systemBg.png') no-repeat;
       background-position: center 115px;
       background-size: cover;
+
       .courseSystem {
         width: 1100px;
         margin: 0 auto;
+
         h3 {
           font-size: 30px;
           color: #222;
           padding: 60px 0;
           text-align: center;
+
           &::before {
             content: ' ';
             margin: 0 5px;
             display: inline-block;
-            background: url('http://static-image.1911edu.com/beauty_left.png')
-              no-repeat;
+            background: url('https://static-image.1911edu.com/beauty_left.png') no-repeat;
             background-size: cover;
             width: 20px;
             height: 34px;
             vertical-align: middle;
           }
+
           &::after {
             content: ' ';
             margin: 0 5px;
             display: inline-block;
-            background: url('http://static-image.1911edu.com/beauty_right.png')
-              no-repeat;
+            background: url('https://static-image.1911edu.com/beauty_right.png') no-repeat;
             background-size: cover;
             width: 26px;
             height: 40px;
             vertical-align: middle;
           }
         }
-        & > p {
+
+        &>p {
           font-size: 18px;
           line-height: 32px;
           text-align: center;
         }
+
         .mode {
           width: 1100px;
           margin: 0 auto;
@@ -91,16 +102,16 @@
           padding: 100px 40px 90px;
           display: flex;
           justify-content: space-around;
-          background: url('http://static-image.1911edu.com/modeBg.png')
-            no-repeat;
+          background: url('https://static-image.1911edu.com/modeBg.png') no-repeat;
           background-size: contain;
+
           .modeCenter {
             width: 290px;
             height: 314px;
             padding: 103px 60px 114px;
-            background: url('http://static-image.1911edu.com/modeCenter.png')
-              no-repeat;
+            background: url('https://static-image.1911edu.com/modeCenter.png') no-repeat;
             background-size: cover;
+
             p {
               width: 170px;
               text-align: center;
@@ -109,6 +120,7 @@
               line-height: 36px;
             }
           }
+
           .modeTop {
             width: 300px;
             height: 92px;
@@ -118,6 +130,7 @@
             margin-bottom: 106px;
             box-shadow: 9px 0px 16px rgba(100, 23, 166, 0.1);
           }
+
           .modeBottom {
             width: 300px;
             height: 92px;
@@ -126,6 +139,7 @@
             padding: 11px 0;
             box-shadow: 9px 0px 16px rgba(100, 23, 166, 0.1);
           }
+
           .modeList div {
             span.fl {
               width: 42px;
@@ -138,6 +152,7 @@
               background: rgba(100, 23, 166, 1);
               color: #fff;
             }
+
             span.fr {
               width: 220px;
               margin-right: 44px;
@@ -147,30 +162,35 @@
           }
         }
       }
+
       .studyCourse {
         width: 1100px;
         margin: 0 auto;
+
         .studyInfo {
           width: 1100px;
           padding: 40px;
           background: rgba(255, 255, 255, 1);
           box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+
           h5 {
             margin-bottom: 20px;
+
             .studyTitle {
               margin-right: 20px;
               width: 150px;
               padding-right: 24px;
               text-align: right;
-              background: url('http://static-image.1911edu.com/studyTitleBg.png')
-                no-repeat;
+              background: url('https://static-image.1911edu.com/studyTitleBg.png') no-repeat;
               background-size: contain;
             }
+
             span {
               font-size: 18px;
               line-height: 32px;
             }
           }
+
           p {
             font-size: 18px;
             color: #222;
@@ -178,17 +198,21 @@
           }
         }
       }
+
       .table {
         width: 1100px;
         margin: 30px auto 0;
+
         table {
           border: none;
           background-color: #fff;
           border-top-right-radius: 10px;
           border-top-left-radius: 10px;
+
           th {
             border: none;
           }
+
           td {
             width: 25%;
             height: 120px;
@@ -199,15 +223,17 @@
             font-size: 18px;
             border-left: 2px solid #ebecf0;
             border-bottom: 2px solid #ebecf0;
+
             &:last-child {
               border-right: 2px solid #ebecf0;
             }
           }
+
           .titleOne {
             height: 95px;
-            background: url('http://static-image.1911edu.com/systemBorderBg1.png')
-              no-repeat;
+            background: url('https://static-image.1911edu.com/systemBorderBg1.png') no-repeat;
             background-size: cover;
+
             th {
               border-top-right-radius: 10px;
               border-top-left-radius: 10px;
@@ -217,13 +243,16 @@
               font-size: 24px;
             }
           }
+
           .titleTwo {
             height: 68px;
             background-color: #f7f1ff;
+
             th {
               color: #222;
               cursor: pointer;
               border-bottom: 2px solid transparent;
+
               &.checked {
                 background-color: #e8d7ff;
                 color: #773084;
@@ -231,29 +260,34 @@
               }
             }
           }
+
           .titleThree {
             height: 68px;
             background-color: #f4f5f6;
             text-align: center;
+
             th {
               border-left: 2px solid #ebecf0;
               border-bottom: 2px solid #ebecf0;
               border-top: 2px solid #ebecf0;
+
               &:last-child {
                 border-right: 2px solid #ebecf0;
               }
             }
           }
         }
+
         &.tableTwo {
           .titleOne {
             height: 95px;
-            background: url('http://static-image.1911edu.com/systemBorderBg2.png')
-              no-repeat;
+            background: url('https://static-image.1911edu.com/systemBorderBg2.png') no-repeat;
             background-size: cover;
           }
+
           .titleTwo {
             background-color: #ffeee5;
+
             th {
               width: 1100px;
               border: none;
@@ -261,6 +295,7 @@
               line-height: 68px;
               cursor: pointer;
               border-bottom: 2px solid transparent;
+
               &.checked {
                 background-color: #ffbfa1;
                 color: #ff4401;
@@ -269,18 +304,21 @@
             }
           }
         }
+
         &.tableThree {
           .titleOne {
             width: 100%;
             height: 95px;
-            background: url('http://static-image.1911edu.com/systemBorderBg3.png')
-              no-repeat;
+            background: url('https://static-image.1911edu.com/systemBorderBg3.png') no-repeat;
             background-size: cover;
           }
+
           .titleTwo {
             background-color: #eefff8;
+
             th {
               border-bottom: 2px solid transparent;
+
               &.checked {
                 background-color: #b9efd7;
                 color: #189565;
@@ -289,6 +327,7 @@
             }
           }
         }
+
         p {
           font-size: 14px;
           padding: 20px 0;
@@ -296,12 +335,13 @@
         }
       }
     }
+
     .underLine {
-      background: url('http://static-image.1911edu.com/underLineBg.png')
-        no-repeat;
+      background: url('https://static-image.1911edu.com/underLineBg.png') no-repeat;
       background-position: bottom center;
       background-size: contain;
     }
+
     .companyInfo {
       width: 1100px;
       margin: 0 auto;
@@ -309,11 +349,13 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+
       .listOne {
         width: 534px;
         margin-bottom: 38px;
         background: rgba(255, 255, 255, 1);
         box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+
         .title {
           width: 100%;
           height: 80px;
@@ -324,8 +366,10 @@
           text-align: center;
           background-color: #ffaa07;
         }
+
         .content {
           padding: 30px 26px 12px 20px;
+
           h5,
           p {
             text-indent: 2em;
@@ -333,21 +377,26 @@
             color: rgba(34, 34, 34, 1);
             line-height: 32px;
           }
+
           p {
             text-indent: 0;
           }
         }
+
         &:nth-child(2) .title {
           background-color: #f88e4a;
         }
+
         &:nth-child(3) .title {
           background-color: #4f86ed;
         }
+
         &:nth-child(4) .title {
           background-color: #8f53d2;
         }
       }
     }
+
     .callMe {
       width: 710px;
       height: 90px;
@@ -359,6 +408,7 @@
       background-color: #8f53d2;
       position: relative;
       text-align: center;
+
       span {
         width: 710px;
         height: 90px;
@@ -370,6 +420,7 @@
         top: -7px;
         left: 0;
       }
+
       img {
         width: 42px;
         height: 64px;
@@ -384,9 +435,10 @@
     position: relative;
     width: 100%;
     height: 500px;
-    background: url('http://static-image.1911edu.com/policy-bg1.png') no-repeat;
+    background: url('https://static-image.1911edu.com/policy-bg1.png') no-repeat;
     background-size: 100% 100%;
     z-index: 0;
+
     .text {
       width: 730px;
       height: 150px;
@@ -396,21 +448,25 @@
       right: 0;
       bottom: 0;
       margin: auto;
+
       .line {
         width: 132px;
         height: 2px;
         background-color: #fff;
         margin-bottom: 10px;
       }
+
       .desc {
         font-size: 32px;
         color: #fff;
         letter-spacing: 8px;
         margin: 0 35px;
       }
+
       .small-title {
         text-align: center;
       }
+
       .title {
         font-size: 72px;
         color: #fff;
@@ -423,15 +479,18 @@
   .title {
     text-align: center;
     margin: 30px 0 40px 0;
+
     .titlt-icon-left {
       width: 22px;
       height: 36px;
     }
+
     .titlt-icon-right {
       width: 38px;
       height: 62px;
       margin-bottom: -17px;
     }
+
     .text {
       font-size: 30px;
       color: #222;
@@ -441,10 +500,12 @@
 
   .item {
     margin-bottom: 30px;
+
     .left {
       float: left;
       width: 20px;
       margin-right: 20px;
+
       .down {
         position: relative;
         display: inline-block;
@@ -453,6 +514,7 @@
         background-color: #d0a04e;
         border-radius: 50%;
       }
+
       .up {
         width: 8px;
         height: 8px;
@@ -461,6 +523,7 @@
         margin: 6px;
       }
     }
+
     .right {
       float: left;
     }
@@ -471,6 +534,7 @@
     width: 100%;
     height: 780px;
     background-color: #fff;
+
     .program-bg {
       position: absolute;
       top: -30px;
@@ -483,6 +547,7 @@
       margin: 0 auto;
       z-index: 10;
       padding: 0 38px 50px 38px; //   margin-top: -30px;
+
       //   text-align: center;
       .desc {
         font-size: 16px;
@@ -490,6 +555,7 @@
         line-height: 32px;
       }
     }
+
     .study-info {
       position: absolute;
       top: 444px;
@@ -500,27 +566,33 @@
       margin: 0 auto; //   margin-top: 444px;
       background: rgba(255, 255, 255, 1);
       box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
+
       .info {
         margin: 0 auto;
         width: 900px;
         padding-top: 20px; // text-align: center;
+
         .item {
           float: left;
           width: 170px;
           height: 110px;
           text-align: center;
           margin-right: 70px;
+
           &:last-child {
             margin-right: 0;
           }
+
           img {
             margin-bottom: 23px;
           }
+
           p {
             font-size: 16px;
             color: #222;
           }
         }
+
         .item-one,
         .item-two {
           img {
@@ -528,12 +600,14 @@
             height: 62px;
           }
         }
+
         .item-three {
           img {
             width: 82px;
             height: 59px;
           }
         }
+
         .item-four {
           img {
             width: 60px;
@@ -547,12 +621,14 @@
   .content-two {
     width: 100%;
     height: 860px;
-    background: url('http://static-image.1911edu.com/policy-bg2.png') no-repeat;
+    background: url('https://static-image.1911edu.com/policy-bg2.png') no-repeat;
     background-size: 100% 100%;
+
     .top-con {
       width: 890px;
       margin: 0 auto; //   text-align: center;
       padding-top: 30px;
+
       .desc {
         font-size: 16px;
         line-height: 32px;
@@ -561,6 +637,7 @@
         text-align: center;
       }
     }
+
     .teach-info {
       width: 1100px;
       height: 555px;
@@ -569,14 +646,17 @@
       box-shadow: 2px 8px 30px rgba(100, 23, 166, 0.1);
       margin: 0 auto;
       margin-top: 40px;
+
       .item {
         .right {
           width: 920px;
+
           .title-con {
             font-size: 18px;
             color: #000;
             margin-bottom: 15px;
           }
+
           .text {
             font-size: 16px;
             line-height: 32px;
@@ -590,26 +670,32 @@
     width: 100%;
     height: 800px;
     background-color: #fff;
+
     .study-info {
       width: 1100px;
       margin: 0 auto;
+
       .info {
         .left {
           .down {
             background-color: #fff;
           }
+
           .up {
             background-color: #d0a04e;
           }
         }
+
         .right {
           width: 300px;
+
           .title-con {
             font-size: 18px;
             color: #fff;
             font-weight: 500;
             margin-bottom: 20px;
           }
+
           .text {
             color: #fff;
             font-size: 16px;
@@ -617,6 +703,7 @@
           }
         }
       }
+
       .info1 {
         float: left;
         width: 450px;
@@ -626,6 +713,7 @@
         padding: 30px 80px 30px 30px;
         margin-right: 20px;
       }
+
       .info2 {
         float: left;
         width: 630px;
@@ -633,40 +721,49 @@
         background: rgba(100, 23, 166, 1);
         border-radius: 16px;
         padding: 30px;
+
         .item {
           .left {
             .up {
               background-color: #773084;
             }
           }
+
           .right {
             width: 530px;
           }
         }
       }
     }
+
     .course {
       width: 100%;
       text-align: center;
       padding-top: 40px;
+
       .course-info {
         color: #222;
         font-size: 16px;
         margin-bottom: 50px;
       }
+
       .course-item {
         width: 1100px;
         margin: 0 auto;
+
         .item {
           float: left;
           width: 270px;
           margin-right: 90px;
+
           &:first-child {
             margin-left: 60px;
           }
+
           &:last-child {
             margin-right: 0;
           }
+
           .num {
             float: left;
             width: 30px;
@@ -675,6 +772,7 @@
             font-weight: 700;
             margin-right: 10px;
           }
+
           .desc {
             float: left;
             width: 230px;

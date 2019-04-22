@@ -26,23 +26,23 @@ config.sentry = {
     async: true
   },
   {
-    src: 'http://js.1911edu.com/jquery-1.11.3.min.js',
+    src: 'https://js.1911edu.com/jquery-1.11.3.min.js',
     async: true
   },
   {
-    src: 'http://js.1911edu.com/aliplayer-h5-min.js',
+    src: 'https://js.1911edu.com/aliplayer-h5-min.js',
     async: true
   },
   {
-    src: 'http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
+    src: 'https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js',
     async: true
   },
   {
-    src: 'http://js.1911edu.com/swfobject.js',
+    src: 'https://js.1911edu.com/swfobject.js',
     async: true
   },
   {
-    src: 'http://js.1911edu.com/socket.io.js',
+    src: 'https://js.1911edu.com/socket.io.js',
     async: true
   }
 ]),

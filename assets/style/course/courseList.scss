@@ -1,6 +1,7 @@
 .goodLesson {
   background-color: #fafafa;
   padding-bottom: 40px;
+
   .topImg {
     position: relative;
     height: 300px;
@@ -8,30 +9,31 @@
     overflow: hidden;
     z-index: 90;
   }
+
   .goodCourseImg {
-    background: url('http://static-image.1911edu.com/banner-goodCourse.png')
-      no-repeat;
+    background: url('https://static-image.1911edu.com/banner-goodCourse.png') no-repeat;
     background-size: 1920px 300px;
     background-position: center center;
   }
+
   .courseImg {
-    background: url('http://static-image.1911edu.com/banner-course.jpg')
-      no-repeat;
+    background: url('https://static-image.1911edu.com/banner-course.jpg') no-repeat;
     background-size: 1920px 300px;
     background-position: center center;
   }
+
   .freeImg {
-    background: url('http://static-image.1911edu.com/banner-free.png')
-      no-repeat;
+    background: url('https://static-image.1911edu.com/banner-free.png') no-repeat;
     background-size: 1920px 300px;
     background-position: center center;
   }
+
   .projectImg {
-    background: url('http://static-image.1911edu.com/banner-project.png')
-      no-repeat;
+    background: url('https://static-image.1911edu.com/banner-project.png') no-repeat;
     background-size: 1920px 300px;
     background-position: center center;
   }
+
   .listbreadcrumb {
     width: 1100px;
     margin: 0 auto;

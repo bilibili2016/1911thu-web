@@ -1,77 +1,90 @@
 .wepay {
-	.checkedCourse-wepay {
-		position: relative;
-		.banner {
-			height: 148px;
-			background-image: url('http://static-image.1911edu.com/orderBanners.png');
-			background-size: 100%;
-			div {
-				font-size: 24px;
-				font-family: '微软雅黑', 'Microsoft Yahei' !important;
-				color: rgba(143, 74, 203, 1);
-				line-height: 110px;
-				width: 1100px;
-				margin: 0 auto;
-			}
-		}
-		.main {
-			width: 1100px;
-			margin: 0 auto;
-			padding: 0px 0;
-			margin-top: -50px;
-			.company {
-				width: 1100px;
-				height: auto;
-				margin-bottom: 60px;
-				background: rgba(255, 255, 255, 1);
-				border-radius: 6px;
-				box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
-				overflow: hidden;
-				.title {
-					height: 60px;
-					line-height: 60px;
-					width: 1036px;
-					border-bottom: 1px rgba(232, 214, 247, 1) solid;
-					margin: 0 auto;
-					span.fl {
-						color: #332a51;
-						font-size: 16px;
-					}
-					span.fr {
-						color: #888888;
-						font-size: 14px;
-						cursor: pointer;
-						.el-icon-arrow-down {
-							transition: all 400ms;
-						}
-						&:hover {
-							color: #773084;
-						}
-					}
-					span.active {
-						.el-icon-arrow-down {
-							transform: rotate(-180deg);
-						}
-					}
-				}
-				.content {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					.height {
-						height: auto;
-						font-size: 16px;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						flex-direction: column;
-					}
-					.price {
-						width: 130px;
-						color: #ff5f5f;
-					}
-				}
-			}
-		}
-	}
+  .checkedCourse-wepay {
+    position: relative;
+
+    .banner {
+      height: 148px;
+      background-image: url('https://static-image.1911edu.com/orderBanners.png');
+      background-size: 100%;
+
+      div {
+        font-size: 24px;
+        font-family: '微软雅黑', 'Microsoft Yahei' !important;
+        color: rgba(143, 74, 203, 1);
+        line-height: 110px;
+        width: 1100px;
+        margin: 0 auto;
+      }
+    }
+
+    .main {
+      width: 1100px;
+      margin: 0 auto;
+      padding: 0px 0;
+      margin-top: -50px;
+
+      .company {
+        width: 1100px;
+        height: auto;
+        margin-bottom: 60px;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 6px;
+        box-shadow: 0px 0px 14px rgba(198, 194, 210, 0.36);
+        overflow: hidden;
+
+        .title {
+          height: 60px;
+          line-height: 60px;
+          width: 1036px;
+          border-bottom: 1px rgba(232, 214, 247, 1) solid;
+          margin: 0 auto;
+
+          span.fl {
+            color: #332a51;
+            font-size: 16px;
+          }
+
+          span.fr {
+            color: #888888;
+            font-size: 14px;
+            cursor: pointer;
+
+            .el-icon-arrow-down {
+              transition: all 400ms;
+            }
+
+            &:hover {
+              color: #773084;
+            }
+          }
+
+          span.active {
+            .el-icon-arrow-down {
+              transform: rotate(-180deg);
+            }
+          }
+        }
+
+        .content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .height {
+            height: auto;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+          }
+
+          .price {
+            width: 130px;
+            color: #ff5f5f;
+          }
+        }
+      }
+    }
+  }
 }
