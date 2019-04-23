@@ -7,8 +7,8 @@
         </div>
         <div class="info clearfix">
           <div class="fl">
-            <img :src="teacher.picture" alt="">
-            <span>老师姓名</span>
+            <img :src="teacher.teacher_head_img" alt="">
+            <span>{{teacher.teacher_name}}</span>
           </div>
           <div class="fr">{{teacher.use_time/60}}min</div>
         </div>
@@ -16,7 +16,11 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <span @click="goLive(teacher)">进入直播</span>
+            <span class="begin" @click="goLive(teacher)">进入直播</span>
+            <!-- <span class="soon" @click="goLive(teacher)">进入直播</span>
+            <span class="wait" @click="goLive(teacher)">进入直播</span>
+            <span class="efficacy" @click="goLive(teacher)">进入直播</span>
+            <span class="end" @click="goLive(teacher)">进入直播</span> -->
           </div>
         </div>
       </li>

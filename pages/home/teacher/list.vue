@@ -246,6 +246,21 @@ export default {
         }
       });
     },
+    // Wapi/Teacher/teacherTagsList
+    // 教师标签列表(名称智库筛选)
+    teacherTagsList () {
+      list.teacherTagsList().then(res => {
+        if (res.status === 0) {
+          console.log(res.data);
+
+          //   this.teacherTagsList = res.data.teacherCompanyList;
+          //   this.teacherTagsList.unshift({
+          //     company_name: "全部",
+          //     id: 0
+          //   });
+        }
+      });
+    },
     // 公共 获取list 方法
     getHeaderList () {
       this.loadList = true;
@@ -342,6 +357,7 @@ export default {
     this.getHeaderList();
     // this.initTeacherList();
     this.teacherCompanyList();
+    this.teacherTagsList();
     this.introduce = this.initIntro;
     window.addEventListener("scroll", this.addClass);
     this.fixedTop = this.$refs["rightCon"].getBoundingClientRect().top;

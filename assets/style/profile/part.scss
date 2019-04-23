@@ -1,5 +1,5 @@
 .cardList {
-  padding: 50px 41px 0 44px;
+  padding: 50px 38px 0;
 
   ul {
     display: flex;
@@ -7,15 +7,15 @@
     flex-wrap: wrap;
 
     li {
-      margin: 0 30px 50px 0;
+      margin: 0 20px 50px 0;
 
       &:nth-child(3n+3) {
         margin-right: 0;
       }
 
       .headImg {
-        width: 250px;
-        height: 200px;
+        width: 260px;
+        height: 170px;
         background-color: #ccc;
 
         img {
@@ -26,21 +26,36 @@
 
       .info {
         .fl {
-          line-height: 34px;
+          margin-top: 14px;
 
           img {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             vertical-align: middle;
-            background-color: blue;
+            background-color: #ccc;
             margin-right: 5px;
+          }
+
+          span {
+            display: inline-block;
+            max-width: 160px;
+            height: 16px;
+            overflow: hidden;
+            vertical-align: middle;
           }
         }
 
         .fr {
-          line-height: 34px;
+          line-height: 20px;
+          height: 20px;
+          padding: 0 5px;
+          font-size: 12px;
+          border-radius: 10px;
+          background-color: #FB6E52;
+          color: #fff;
+          margin-top: 18px;
         }
 
         p {
@@ -53,24 +68,53 @@
 
       .time {
         line-height: 30px;
+        color: #93999F;
+        font-size: 13px;
       }
 
       .btn {
+        margin-top: 15px;
+
         .fl {
-          font-size: 20px;
-          line-height: 40px;
-          color: #ff0000;
+          font-size: 14px;
+          line-height: 26px;
+          color: #1C1F21;
         }
 
         .fr {
           span {
-            width: 120px;
-            height: 40px;
-            line-height: 40px;
+            width: 80px;
+            height: 26px;
+            line-height: 26px;
             text-align: center;
-            color: #fff;
-            background-color: #ff0000;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 12px;
+
+            &.begin {
+              background-color: #844490;
+              color: #fff;
+            }
+
+            &.soon {
+              border: 1px solid rgba(132, 68, 144, 1);
+              color: #844490;
+            }
+
+            &.wait {
+              background-color: #F5A623;
+              color: #fff;
+            }
+
+            &.efficacy {
+              background-color: #844490;
+              color: #fff;
+            }
+
+            &.end {
+              border: 1px solid #87868B;
+              color: #87868B;
+            }
           }
         }
       }
