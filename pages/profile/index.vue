@@ -492,6 +492,7 @@ export default {
       getHistory: true,
       teacherData: [],
       teacherBespokeData: {
+        statusType: 1,
         type: 1,
         page: 1,
         limit: 21
@@ -565,12 +566,16 @@ export default {
             this.collegeList();
             break;
           case "tab-twelfth": //我的咨询
-            this.$bus.$emit("activeStudent", "first");
-            this.teacherBespokeListData();
+            this.getTeacherData({
+              statusType: 1,
+              type: 1
+            })
             break;
           case "tab-thirteenth": //教师入口
-            this.$bus.$emit("activeTeacher", "first");
-            this.teacherBespokeListData();
+            this.getTeacherData({
+              statusType: 1,
+              type: 2
+            })
             break;
         }
         let gidForm = {
@@ -961,8 +966,9 @@ export default {
       });
     },
     // 我的咨询和老师入口tab切换
-    getTeacherData (item) {
-      this.teacherBespokeData.type = item
+    getTeacherData (data) {
+      this.teacherBespokeData.type = data.type
+      this.teacherBespokeData.statusType = data.statusType
       this.teacherBespokeListData()
     },
     // 获取预约老师列表

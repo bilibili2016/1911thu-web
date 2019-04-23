@@ -34,18 +34,17 @@ export default {
       activeName: "first",
       config: {
         isTeacher: false
+      },
+      getData: {
+        statusType: 1,
+        type: 1
       }
     };
   },
-  mounted () {
-    this.$bus.$on("activeStudent", data => {
-      this.activeName = data
-      this.getTeacherData(data)
-    })
-  },
   methods: {
     handleActive (item) {
-      this.getTeacherData(item.$attrs.value)
+      this.getData.statusType = item.$attrs.value
+      this.getTeacherData(this.getData)
     },
     getTeacherData (data) {
       this.$emit('getTeacherData', data)

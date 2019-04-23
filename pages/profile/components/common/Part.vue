@@ -8,7 +8,7 @@
         <div class="info clearfix">
           <div class="fl">
             <img :src="teacher.teacher_head_img" alt="">
-            <span>{{teacher.teacher_name}}</span>
+            <span>{{teacher.teacher_user_name}}</span>
           </div>
           <div class="fr">{{teacher.use_time/60}}min</div>
         </div>
@@ -16,11 +16,11 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <span class="begin" @click="goLive(teacher)">进入直播</span>
-            <!-- <span class="soon" @click="goLive(teacher)">进入直播</span>
-            <span class="wait" @click="goLive(teacher)">进入直播</span>
-            <span class="efficacy" @click="goLive(teacher)">进入直播</span>
-            <span class="end" @click="goLive(teacher)">进入直播</span> -->
+            <!-- <span v-if="teacher.result_status == 2" class="begin" @click="goLive(teacher)">进入直播</span> -->
+            <span v-if="teacher.result_status == 2" class="soon" @click="goLive(teacher)">即将开始</span>
+            <span v-if="teacher.result_status == 1" class="wait" @click="goLive(teacher)">等待确认</span>
+            <span v-if="teacher.result_status == 3" class="efficacy" @click="goLive(teacher)">已失效</span>
+            <span v-if="teacher.result_status == 4" class="end" @click="goLive(teacher)">已结束</span>
           </div>
         </div>
       </li>
@@ -30,8 +30,8 @@
         </div>
         <div class="info clearfix">
           <div class="fl">
-            <img :src="teacher.picture" alt="">
-            <span>1911同学201800013</span>
+            <img :src="teacher.user_head_img" alt="">
+            <span>{{teacher.user_name}}</span>
           </div>
           <div class="fr">{{teacher.use_time/60}}min</div>
         </div>
@@ -39,7 +39,11 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <span @click="goLive(teacher)">进入直播</span>
+            <!-- <span v-if="teacher.result_status == 2" class="begin" @click="goLive(teacher)">进入直播</span> -->
+            <span v-if="teacher.result_status == 2" class="soon" @click="goLive(teacher)">即将开始</span>
+            <span v-if="teacher.result_status == 1" class="wait" @click="goLive(teacher)">等待确认</span>
+            <span v-if="teacher.result_status == 3" class="efficacy" @click="goLive(teacher)">已失效</span>
+            <span v-if="teacher.result_status == 4" class="end" @click="goLive(teacher)">已结束</span>
           </div>
         </div>
       </li>
