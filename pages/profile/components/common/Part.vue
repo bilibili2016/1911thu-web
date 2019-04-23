@@ -73,7 +73,8 @@ export default {
         type: "myTeacher",
         text: "您暂未加入任何学院，快去加入吧！"
       },
-      time: ""
+      time: "",
+      type: 1
     };
   },
   methods: {
@@ -81,7 +82,12 @@ export default {
       this.$router.push("/home/teacher/list");
     },
     goLive (teacher) {
-      this.$router.push("/live?id=" + teacher.id);
+      if (this.config.isTeacher) {
+        this.type = 2
+      } else {
+        this.tyoe = 1
+      }
+      this.$router.push(`/live?id=${teacher.id}&type=${this.type}`);
       //   this.$router.push('/live/studentLive')
     },
     changeTime (time) {
