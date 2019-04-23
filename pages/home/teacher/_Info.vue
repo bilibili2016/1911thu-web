@@ -51,8 +51,8 @@ export default {
     return {
       showAppointment: false,
       showPay: false,
-      orderId: '',
-      userInfo: '',
+      orderId: "",
+      userInfo: "",
       pageType: {
         page: "teacher/_info",
         text: "暂无在教的课程",
