@@ -114,8 +114,13 @@ export default {
     },
     //预约导师
     handleAppoint () {
-      this.showAppointment = true;
-      this.getUserInfo();
+      if (persistStore.get("token")) {
+        this.showAppointment = true;
+        this.getUserInfo();
+      } else {
+        this.$bus.$emit("loginShow", true);
+      }
+
     }
   },
   mounted () {
