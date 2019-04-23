@@ -213,7 +213,7 @@
 <script>
 import { store as persistStore } from "~/lib/core/store";
 import { Trim, message, matchSplits, setTitle } from "~/lib/util/helper";
-import { auth, list, banner } from "~/lib/v1_sdk/index";
+import { auth, list } from "~/lib/v1_sdk/index";
 
 export default {
   data() {
@@ -419,7 +419,7 @@ export default {
       this.imgForm.FILESS = [];
       reader.onloadend = () => {
         this.imgForm.FILESS.push(reader.result);
-        banner.uploadHeadImg(this.imgForm).then(res => {
+        list.leafletsUpload(this.imgForm).then(res => {
           if (res.status == 0) {
             this.teacherForm.studentCard = res.data.full_path;
             this.isShowImg = !this.isShowImg;
