@@ -1,29 +1,33 @@
 <template>
-  <div class="teacher home-teacher" v-loading="loading">
-    <div class="tcInfo">
-      <!-- <img :src="teacherBg" alt=""> -->
-      <div class="bg-text">
-        <div class="left-teacher">
-          <img :src="teacherData.head_img" alt="">
-          <span class="btn">预约导师</span>
-        </div>
-        <div class="desc">
-          <h4>{{teacherData.teacher_name}}</h4>
-          <h5>{{teacherData.graduate}}</h5>
-          <h6>{{teacherData.content}}</h6>
-        </div>
-      </div>
-    </div>
-    <div class="courseList">
-      <div v-if="teacherCourse.length!=0">
-        <h3>在教的课程</h3>
-        <div class="list">
-          <v-card v-if="teacherCourse.length" :data="teacherCourse" :config="config"></v-card>
+  <div>
+    <div class="teacher home-teacher" v-loading="loading">
+      <div class="tcInfo">
+        <!-- <img :src="teacherBg" alt=""> -->
+        <div class="bg-text">
+          <div class="left-teacher">
+            <img :src="teacherData.head_img" alt="">
+            <span class="btn" @click="handleAppoint">预约导师</span>
+          </div>
+          <div class="desc">
+            <h4>{{teacherData.teacher_name}}</h4>
+            <h5>{{teacherData.graduate}}</h5>
+            <h6>{{teacherData.content}}</h6>
+          </div>
         </div>
       </div>
-      <!-- 无数据 -->
-      <v-nodata v-else :pageType="pageType"></v-nodata>
+      <div class="courseList">
+        <div v-if="teacherCourse.length!=0">
+          <h3>在教的课程</h3>
+          <div class="list">
+            <v-card v-if="teacherCourse.length" :data="teacherCourse" :config="config"></v-card>
+          </div>
+        </div>
+        <!-- 无数据 -->
+        <v-nodata v-else :pageType="pageType"></v-nodata>
+      </div>
     </div>
+
+    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherInfo" @goPay="goPay" :userInfo="userInfo"></v-appointment>
 
   </div>
 </template>
@@ -33,14 +37,17 @@ import { teacherInfo } from "~/lib/v1_sdk/index";
 import { mapState, mapActions, mapGetters } from "vuex";
 import CustomCard from "@/components/card/Card.vue";
 import NoData from "@/components/common/NoData.vue";
+import Appointment from "@/pages/home/teacher/components/AppointmentTeacher";
 
 export default {
   components: {
     "v-card": CustomCard,
-    "v-nodata": NoData
+    "v-nodata": NoData,
+    "v-appointment": Appointment
   },
   data() {
     return {
+      showAppointment: false,
       pageType: {
         page: "teacher/_info",
         text: "暂无在教的课程",
@@ -72,7 +79,9 @@ export default {
         this.teacherCourse = response.data.curriculumList;
         this.loading = false;
       });
-    }
+    },
+    //预约导师
+    handleAppoint() {}
   },
   mounted() {
     let tid = window.location.pathname.split("/")[3];
