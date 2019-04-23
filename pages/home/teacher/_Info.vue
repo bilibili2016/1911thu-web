@@ -26,9 +26,7 @@
         <v-nodata v-else :pageType="pageType"></v-nodata>
       </div>
     </div>
-
-    <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherInfo" @goPay="goPay" :userInfo="userInfo"></v-appointment>
-
+    <!-- <v-appointment v-if="showAppointment" @closeForm="closeForm" :teacherInfo="teacherInfo" @goPay="goPay" :userInfo="userInfo"></v-appointment> -->
   </div>
 </template>
 
