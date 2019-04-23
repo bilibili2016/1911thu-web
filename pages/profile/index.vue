@@ -84,14 +84,14 @@
         <!-- 我的咨询 -->
         <el-tab-pane class="my-course my-examine" name="tab-twelfth">
           <span slot="label" class="tabList">
-            <i class="icon-examine"></i>&nbsp;我的咨询
+            <i class="icon-student"></i>&nbsp;我的咨询
           </span>
           <v-mystudent :data="teacherData" @getTeacherData="getTeacherData"></v-mystudent>
         </el-tab-pane>
         <!-- 教师入口  -->
         <el-tab-pane class="my-course my-examine" name="tab-thirteenth" v-if="userInfo.user_type=='4'">
           <span slot="label" class="tabList">
-            <i class="icon-examine"></i>&nbsp;教师入口
+            <i class="icon-teacher"></i>&nbsp;教师入口
           </span>
           <v-myteacher :data="teacherData" @getTeacherData="getTeacherData"></v-myteacher>
         </el-tab-pane>
@@ -492,9 +492,9 @@ export default {
       getHistory: true,
       teacherData: [],
       teacherBespokeData: {
-        type: "",
-        page: "",
-        limit: ""
+        type: 1,
+        page: 1,
+        limit: 21
       }
     };
   },
@@ -565,9 +565,11 @@ export default {
             this.collegeList();
             break;
           case "tab-twelfth": //我的咨询
+            this.$bus.$emit("activeStudent", "first");
             this.teacherBespokeListData();
             break;
           case "tab-thirteenth": //教师入口
+            this.$bus.$emit("activeTeacher", "first");
             this.teacherBespokeListData();
             break;
         }
@@ -960,14 +962,17 @@ export default {
     },
     // 我的咨询和老师入口tab切换
     getTeacherData (item) {
-      // this.teacherBespokeData
-      // this.teacherBespokeListData()
+      this.teacherBespokeData.type = item
+      this.teacherBespokeListData()
     },
     // 获取预约老师列表
     teacherBespokeListData () {
-      profileHome.teacherBespokeList().then(response => {
+      profileHome.teacherBespokeList(this.teacherBespokeData).then(response => {
         if (response.status == 0) {
           this.teacherData = response.data.teacherBespokeList;
+          this.teacherBespokeData.type = 1
+          this.teacherBespokeData.page = 1
+          this.teacherBespokeData.limit = 21
         } else if (response.status === 100008) {
           this.$router.push("/");
           return false;
