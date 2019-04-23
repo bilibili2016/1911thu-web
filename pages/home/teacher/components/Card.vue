@@ -8,11 +8,12 @@
           <p class="name">{{teacher.teacher_name}}</p>
           <p class="position">{{teacher.graduate}}</p>
           <p class="operate">
-            <span class="btn" v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
+            <span class="btn">查看导师详情</span>
+            <!-- <span class="btn" v-if="teacher.is_teachering" @click.stop="handleLinkTeacherInfo(teacher)">已开课</span>
             <span class="btn preparation" v-else>筹备中</span>
 
             <span class="btn" v-if="teacher.is_meet ==1" @click.stop="reservation(teacher)">预约导师</span>
-            <span v-if="teacher.is_meet ==0" class="btn unBook">预约导师</span>
+            <span v-if="teacher.is_meet ==0" class="btn unBook">预约导师</span> -->
           </p>
         </div>
         <div class="mask">
@@ -55,7 +56,7 @@ import { message } from "~/lib/util/helper";
 import { list } from "~/lib/v1_sdk/index";
 export default {
   props: ["famousList"],
-  data() {
+  data () {
     return {
       teacher: {
         tid: ""
@@ -63,7 +64,7 @@ export default {
     };
   },
   methods: {
-    reservation(teacher) {
+    reservation (teacher) {
       this.$router.push({
         path: "/home/teacher/orderTeacher",
         query: {
@@ -72,7 +73,7 @@ export default {
       });
       // this.$emit("reservation", teacher);
     },
-    handleLinkTeacherInfo(item) {
+    handleLinkTeacherInfo (item) {
       if (item.is_teachering) {
         this.$router.push("/home/teacher/" + item.id);
       }

@@ -11,7 +11,7 @@
         <v-part :teacherData="data" :config="config"></v-part>
       </el-tab-pane>
       <!-- 已失效 -->
-      <el-tab-pane label="已失效" name="fourth" value="4">
+      <el-tab-pane label="已失效" name="fourth" value="3">
         <v-part :teacherData="data" :config="config"></v-part>
       </el-tab-pane>
     </el-tabs>
@@ -37,12 +37,15 @@ export default {
       }
     };
   },
-  mounted () { },
+  mounted () {
+    this.$bus.$on("activeStudent", data => {
+      this.activeName = data
+      this.getTeacherData(data)
+    })
+  },
   methods: {
     handleActive (item) {
-      console.log(item.$attrs);
-
-      this.getTeacherData()
+      this.getTeacherData(item.$attrs.value)
     },
     getTeacherData (data) {
       this.$emit('getTeacherData', data)
