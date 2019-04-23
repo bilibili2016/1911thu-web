@@ -9,20 +9,25 @@
   padding: 0 35px;
 
   .title {
-    width: 85px;
+    width: 170px;
     line-height: 58px;
     display: inline-block;
     font-size: 16px;
     color: rgba(34, 34, 34, 1);
     text-align: justify;
     margin-right: 5px;
+    text-align: right;
   }
 
   .ulList {
-    width: 935px;
+    width: 855px;
     display: inline-block;
     vertical-align: top;
     padding-top: 21px;
+
+    &.identity {
+      padding-top: 14px;
+    }
 
     li {
       list-style: none;

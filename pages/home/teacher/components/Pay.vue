@@ -45,7 +45,7 @@
           <p>请准时通过“名师智库”或者“个人中心-我的咨询”进入直播间。</p>
         </div>
         <div class="goodsBtn">
-          <span @click="close">返回名师智库</span>
+          <span @click="close">导师详情</span>
           <!-- <span @click="lookAppointment">查看预约详情</span> -->
         </div>
       </div>

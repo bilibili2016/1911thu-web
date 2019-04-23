@@ -1,27 +1,39 @@
 <template>
   <div class="teacherContent">
     <div class="teacherCategory">
+
+      <div class="college" v-if="tagsList.length>0">
+        <h4 class="title">请先选择您的身份：</h4>
+        <ul class="ulList identity">
+          <el-checkbox-group v-model="identity" @change="selectTags">
+            <el-checkbox-button v-for="(item,index) in tagsList" :label="item.id" :key="index">{{item.tag_name}}</el-checkbox-button>
+          </el-checkbox-group>
+          <!-- <li v-for="(item,index) in tagsList" :index="index" :key="index" :class="{btnBg: identity == item.id ? true : false }">
+            <el-button @click="selectTags(item,index)">{{item.tag_name}}</el-button>
+          </li> -->
+        </ul>
+      </div>
       <div class="college" v-if="categoryData.length>0">
-        <h4 class="title">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;院：</h4>
+        <h4 class="title">通过学院找导师：</h4>
         <ul class="ulList">
           <li v-for="(item,index) in categoryData" :index="index" :key="index" :class="{btnBg: cid == item.id ? true : false }">
             <el-button @click="selectCid(item,index)">{{item.category_name}}</el-button>
           </li>
         </ul>
       </div>
-      <div class="classsfiy" v-if="sortData.length>0 && isTeacher">
-        <h4 class="title">导师介绍：</h4>
+      <!-- <div class="classsfiy" v-if="sortData.length>0 && isTeacher">
+        <h4 class="title">通过专家领域找导师：</h4>
         <ul class="ulList">
           <li v-for="(item,index) in sortData" :index="index" :key="index" :class="{btnBg: kid === item.id ? true : false }">
             <el-button @click="selectKid(item,index)">{{item.category_name}}</el-button>
           </li>
         </ul>
-      </div>
+      </div> -->
 
       <!-- 课程不展示 -->
       <div class="classification" :class="{isFirst:isFirst}" v-if="categoryData.length>0">
         <div class="inner">
-          <h4 class="title">专长领域：</h4>
+          <h4 class="title">通过专家领域找导师：</h4>
           <ul class="ulList">
             <li v-for="(items,index) in childList" :index="index" :key="index" :class="{btnBg: pid === items.id ? true : false }">
               <el-button @click="selectPid(items,index)">{{items.category_name}}</el-button>
@@ -30,7 +42,7 @@
         </div>
       </div>
       <div class="unit" v-if="unitData.length>0">
-        <h4 class="title">所在单位：</h4>
+        <h4 class="title">通过单位找导师：</h4>
         <ul class="ulList">
           <li v-for="(item,index) in unitData" :index="index" :key="index" :class="{btnBg: uid === item.id ? true : false }">
             <el-button @click="selectUid(item,index)">{{item.company_name}}</el-button>
@@ -45,7 +57,7 @@
 import { mapState, mapActions } from "vuex";
 import { list } from "~/lib/v1_sdk/index";
 export default {
-  props: ["unitData", "categoryData", "childList", "sortData"],
+  props: ["unitData", "categoryData", "childList", "sortData", "tagsList"],
   data () {
     return {
       isTeacher: false,
@@ -56,10 +68,14 @@ export default {
       uid: 0,
       kid: 0,
       cp: "",
-      categoryList: []
+      categoryList: [],
+      identity: []
     };
   },
   methods: {
+    selectTags () {
+      this.$emit("selectTags", this.identity);
+    },
     // 大类 单个
     selectCid (item, index) {
       if (item.id == 0) {
