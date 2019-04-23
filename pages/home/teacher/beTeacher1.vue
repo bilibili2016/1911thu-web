@@ -1,6 +1,6 @@
 <template>
   <!-- 导师招募 -->
-  <div>
+  <div class="teacherInfo">
     <div class="beTeacher" @click="documentHandler">
       <div class="topImg">
         <h4>诚聘导师</h4>
@@ -38,9 +38,8 @@
             <div class="con-item clearfix">
               <div class="fl"><i class="red">*</i>所在学校：</div>
               <div class="fr">
-                <el-select v-model="teacherForm.school" filterable placeholder="请选择">
-                  <el-option v-for="item in school" :key="item.value" :label="item.label" :value="item.value">
-                  </el-option>
+                <el-select v-model="teacherForm.school" filterable placeholder="请选择" @change="handleSelectChange">
+                  <el-option v-for="item in school" :key="item.name" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </div>
             </div>
@@ -58,9 +57,7 @@
                 <div class="fl"><i class="red">*</i>职称：</div>
                 <div class="fr">
                   <el-radio-group v-model="teacherForm.dutyName">
-                    <el-radio label="1">教授（研究院）</el-radio>
-                    <el-radio label="2">副教授（副研究员）</el-radio>
-                    <el-radio label="3">讲师</el-radio>
+                    <el-radio v-for="(item,index) in graduateList" :key="index" :label="item.id">{{item.name}}</el-radio>
                   </el-radio-group>
                 </div>
               </div>
@@ -115,14 +112,14 @@
                 <div :class="['fr',{'height':isShowFile}]">
                   <div class="load" v-show="isShowFile">
                     <div class="upload">
-                      <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept=".pdf, .doc, .docx">
+                      <input type="file" id="uploadFile" name="file" ref="files" @change="handleFileChange" accept=".pdf, .doc, .docx">
                     </div>
                     <div class="uploadMask">
                       <i class="el-icon-plus"></i>
                     </div>
                   </div>
                   <p class="uploadP" v-show="!isShowFile">
-                    <span>{{fileName}}</span>
+                    <span>{{uploadFileName}}</span>
                     <span class="deleteFile" @click="deleteFile">删除</span>
                   </p>
                 </div>
@@ -130,10 +127,9 @@
               <div class="con-item desc clearfix">
                 <div class="fl">其他信息：</div>
                 <div class="fr">
-                  <el-input type="textarea" v-model.trim="teacherForm.intro" :rows="3" maxlength="500" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
+                  <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="500" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
                   <span class="input-inner">还可以输入{{descLength}}字</span>
                 </div>
-
               </div>
             </div>
             <div class="student" v-if="teacherForm.identity==2">
@@ -141,9 +137,7 @@
                 <div class="fl"><i class="red">*</i>您的学历：</div>
                 <div class="fr">
                   <el-radio-group v-model="teacherForm.academic">
-                    <el-radio label="1">本科生</el-radio>
-                    <el-radio label="2">硕士生</el-radio>
-                    <el-radio label="3">博士生</el-radio>
+                    <el-radio v-for="item in educationList" :key="item.name" :label="item.id">{{item.name}}</el-radio>
                   </el-radio-group>
                 </div>
               </div>
@@ -170,28 +164,27 @@
               </div>
               <div class="con-item uploadFile clearfix">
                 <div class="fl"><i class="red">*</i>上传学生证：</div>
-                <div :class="['fr',{'height':isShowFile}]">
-                  <div class="load" v-show="isShowFile">
+                <div :class="['fr',{'height':isShowImg}]">
+                  <div class="load" v-show="isShowImg">
                     <div class="upload">
-                      <input type="file" id="file" name="file" ref="files" @change="handleFileChange" accept=".pdf, .doc, .docx">
+                      <input type="file" id="uploadImg" @change="add_img" accept="image/png, image/gif, image/jpeg">
                     </div>
                     <div class="uploadMask">
                       <i class="el-icon-plus"></i>
                     </div>
                   </div>
-                  <p class="uploadP" v-show="!isShowFile">
-                    <span>{{fileName}}</span>
-                    <span class="deleteFile" @click="deleteFile">删除</span>
+                  <p class="uploadP" v-show="!isShowImg">
+                    <span class="uploadImgs"><img :src="teacherForm.studentCard" alt=""></span>
+                    <span class="deleteImg" @click="deleteImg">删除</span>
                   </p>
                 </div>
               </div>
               <div class="con-item desc clearfix">
                 <div class="fl">其他信息：</div>
                 <div class="fr">
-                  <el-input type="textarea" v-model.trim="teacherForm.intro" :rows="3" maxlength="500" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
+                  <el-input type="textarea" v-model.trim="teacherForm.otherInfo" :rows="3" maxlength="500" placeholder="请输入您的其他信息，方便我们更多的了解您，还可以提高审核通过率哦！" autosize></el-input>
                   <span class="input-inner">还可以输入{{descLength}}字</span>
                 </div>
-
               </div>
             </div>
           </div>
@@ -201,41 +194,52 @@
         </div>
       </div>
     </div>
-    <div class="submitSuccess">
-      <div class="icon">
-        <img src="@/assets/images/submit-success.png" alt="">
+    <div class="successMask" v-if="isShowPop">
+      <div class="submitSuccess">
+        <div class="icon">
+          <img src="@/assets/images/submit-success.png" alt="">
+        </div>
+        <div class="alert">提交成功！</div>
+        <div class="desc">
+          <p v-if="teacherForm.identity==1">您是第{{submitted.applyTotal}}位提交申请的导师，已有{{submitted.successTotal}}位导师审批通过。</p>
+          <p v-if="teacherForm.identity==2">您是第{{submitted.applyTotal}}位提交申请的学生，已有{{submitted.successTotal}}位学生审批通过。</p>
+          <p>感谢您对1911学堂导师招募的关注，我们会在48小时内与您取得联系！</p>
+          <span class="btn" @click="returnList">返回名师智库</span>
+        </div>
       </div>
-      <div class="alert">提交成功！</div>
-      <div class="desc">感谢您对1911学堂城市分校的关注，我们会尽快与您取得联系！</div>
     </div>
   </div>
 </template>
 <script>
 import { store as persistStore } from "~/lib/core/store";
-
 import { Trim, message, matchSplits, setTitle } from "~/lib/util/helper";
-import { auth, list } from "~/lib/v1_sdk/index";
+import { auth, list, banner } from "~/lib/v1_sdk/index";
 
 export default {
   data() {
     return {
-      school: [{ id: 1, value: "清华大学" }, { id: 2, value: "北京大学" }],
+      isShowPop: false,
       codeInterval: null,
-      fileName: "",
+      uploadFileName: "",
+      uploadImgName: "",
       codeClick: true,
       isShowFile: true,
+      isShowImg: true,
       isClick: false,
       isOnlineChecked: false,
       isOfflineChecked: false,
       isShowArea: false,
       isShowAudiences: false,
       isShowForm: false,
+      submitted: {
+        applyTotal: "",
+        successTotal: ""
+      },
+      school: [],
+      educationList: [],
+      graduateList: [],
       fileList: [],
       offerService: [],
-      recipient: [],
-      offlineType: [],
-      onlineStatus: [],
-      courseType: [{ id: 1, name: "线上课程" }, { id: 2, name: "线下课程" }],
       teacherForm: {
         name: "", //姓名
         tel: "", //手机号
@@ -247,14 +251,16 @@ export default {
         direction: "", //擅长领域
         service: [], //合作形式
         consult: "", //是否提供咨询服务
-        intro: "", //个人简介
-        resume: "", //上传文件简历
         courseName: "", //授课名称
-        courseOnline: "", //课程形式-线上课程-分类
-        courseDesc: "", //课程简介
-        academic: "" //学历
+        resume: "", //上传文件简历
+        otherInfo: "", //其他信息
+        academic: "", //学历
+        studentCard: "" //学生证
       },
       fileForm: {
+        FILESS: []
+      },
+      imgForm: {
         FILESS: []
       },
       bindTelData: {
@@ -271,12 +277,35 @@ export default {
       }
     };
   },
+  watch: {
+    "teacherForm.identity"(newValue, oldValue) {
+      for (let key in this.teacherForm) {
+        if (
+          key == "name" ||
+          key == "tel" ||
+          key == "code" ||
+          key == "school" ||
+          key == "identity"
+        ) {
+        } else {
+          if (key == "service") {
+            this.teacherForm[key] = [];
+          } else {
+            this.teacherForm[key] = "";
+          }
+        }
+      }
+    }
+  },
   computed: {
     descLength(desc) {
-      return 500 - this.teacherForm.intro.length;
+      return 500 - this.teacherForm.otherInfo.length;
     }
   },
   methods: {
+    handleSelectChange(val) {
+      this.teacherForm.school = val;
+    },
     //课程形式-线上课程-分类点击
     handleFormClick() {
       this.isShowForm = !this.isShowForm;
@@ -347,17 +376,18 @@ export default {
     //删除上传的文件
     deleteFile() {
       this.isShowFile = true;
-      this.fileName = "";
+      this.uploadFileName = "";
     },
-    //处理文件上传
-    handleUpload(event) {
-      this.handleFileChange(event);
+    //删除上传图片
+    deleteImg() {
+      this.isShowImg = true;
+      this.uploadImgName = "";
     },
     //处理文件上传
     handleFileChange(event) {
       var reader = new FileReader();
       let imgFiles = event.target.files[0];
-      this.fileName = imgFiles.name;
+      this.uploadFileName = imgFiles.name;
       var formdata = new window.FormData();
       formdata.append("file", imgFiles);
       formdata.file = imgFiles;
@@ -376,15 +406,39 @@ export default {
         });
       };
     },
+    //处理图片上传
+    add_img(event) {
+      // var that = this
+      var reader = new FileReader();
+      let imgFiles = event.target.files[0];
+      this.uploadImgName = imgFiles.name;
+      var formdata = new window.FormData();
+      formdata.append("image", imgFiles);
+      formdata.image = imgFiles;
+      reader.readAsDataURL(imgFiles);
+      this.imgForm.FILESS = [];
+      reader.onloadend = () => {
+        this.imgForm.FILESS.push(reader.result);
+        banner.uploadHeadImg(this.imgForm).then(res => {
+          if (res.status == 0) {
+            this.teacherForm.studentCard = res.data.full_path;
+            this.isShowImg = !this.isShowImg;
+            event.target.value = "";
+          } else {
+            message(this, "error", res.msg);
+          }
+        });
+      };
+    },
     //选项信息
     getRecruitSelect() {
       list.getRecruitSelect().then(res => {
         //不需要验证是否登录
         if (res.status === 0) {
           this.offerService = res.data.offerService;
-          this.onlineStatus = res.data.onlineStatus;
-          this.offlineType = res.data.offlineType;
-          this.recipient = res.data.recipient;
+          this.school = res.data.schoolList;
+          this.educationList = res.data.education;
+          this.graduateList = res.data.graduate;
         } else {
           message(this, "error", res.msg);
         }
@@ -392,31 +446,33 @@ export default {
     },
     // 提交
     handleSubmit() {
-      list.submitBeTeacher(this.teacherForm).then(response => {
+      list.submitBeTeacher(this.teacherForm).then(res => {
         this.isClick = false;
         //不需要验证是否登录
-        if (response.status === 0) {
-          message(
-            this,
-            "success",
-            "提交成功，我们的客服人员会尽快与您取得联系！"
-          );
-          this.$router.push("/home/teacher/list");
+        if (res.status === 0) {
+          // message(
+          //   this,
+          //   "success",
+          //   "提交成功，我们的客服人员会尽快与您取得联系！"
+          // );
+          // this.$router.push("/home/teacher/list");
+          this.isShowPop = true;
+          this.submitted.applyTotal = res.data.applyTotal;
+          this.submitted.successTotal = res.data.successTotal;
         } else {
-          message(this, "error", response.msg);
+          message(this, "error", res.msg);
         }
       });
     },
     //表单验证
     validate() {
+      console.log(this.teacherForm);
       if (this.isClick) {
         return false;
       }
       this.isClick = true;
-      //   console.log(this.teacherForm)
       const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
       const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
-
       try {
         if (Trim(this.teacherForm.name) === "") throw "请填写姓名";
         if (Trim(this.teacherForm.tel) === "") throw "请填写手机号码";
@@ -430,7 +486,7 @@ export default {
         } else {
           if (this.teacherForm.academic === "") throw "请选择您的学历";
           if (this.teacherForm.consult === "") throw "请选择是否提供咨询服务";
-          // if (this.teacherForm.consult === "") throw "请上传学生证";
+          if (this.teacherForm.studentCard === "") throw "请上传学生证";
         }
         if (
           !emailReg.test(Trim(this.teacherForm.email)) &&
@@ -443,13 +499,15 @@ export default {
         return false;
       }
       this.handleSubmit();
+    },
+    returnList() {
+      this.$router.push("/home/teacher/list");
     }
   },
   mounted() {
     setTitle("导师招募-1911学堂");
     this.getRecruitSelect();
-
-    this.teacherForm.tel = persistStore.get("phone");
+    // this.teacherForm.tel = persistStore.get("phone");
   }
 };
 </script>
