@@ -38,22 +38,22 @@ export default {
       activeName: 'first',
       showUpdateTime: false,
       config: {
-        isTeacher: true,
+        isTeacher: true
       },
       getData: {
         statusType: 1,
         type: 2
       }
-    }
+    };
   },
   methods: {
     handleActive (item) {
-      this.getData.statusType = item.$attrs.value
-      this.getTeacherData(this.getData)
+      this.getData.statusType = item.$attrs.value;
+      this.getTeacherData(this.getData);
     },
     getTeacherData (data) {
-      this.$emit('getTeacherData', data)
+      this.$emit("getTeacherData", data);
     }
   }
-}
+};
 </script>
