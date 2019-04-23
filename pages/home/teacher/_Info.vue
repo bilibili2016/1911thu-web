@@ -6,7 +6,9 @@
         <div class="bg-text">
           <div class="left-teacher">
             <img :src="teacherData.head_img" alt="">
-            <span class="btn" @click="handleAppoint">预约导师</span>
+            <span class="btn" v-if="teacherData.is_meet==1" @click="handleAppoint">预约导师</span>
+            <span class="btn unBtn" v-else>预约导师</span>
+
           </div>
           <div class="desc">
             <h4>{{teacherData.teacher_name}}</h4>
@@ -47,7 +49,7 @@ export default {
     "v-appointment": Appointment,
     "v-pay": Pay
   },
-  data () {
+  data() {
     return {
       showAppointment: false,
       showPay: false,
@@ -73,18 +75,18 @@ export default {
     };
   },
   methods: {
-    goPay (id) {
+    goPay(id) {
       this.showPay = true;
       this.orderId = id;
     },
-    closeForm () {
+    closeForm() {
       this.showAppointment = !this.showAppointment;
     },
     // 支付弹框关闭的回调
-    closePayed () {
+    closePayed() {
       this.showPay = !this.showPay;
     },
-    reservation (teacher) {
+    reservation(teacher) {
       if (persistStore.get("token")) {
         this.getUserInfo();
         this.teacherInfo = teacher;
@@ -93,37 +95,36 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    getUserInfo () {
+    getUserInfo() {
       banner.getUserInfo().then(res => {
         if (res.status === 0) {
           this.userInfo = res.data.userInfo;
         }
       });
     },
-    getTeacherInfo () {
+    getTeacherInfo() {
       teacherInfo.getTeacherInfo(this.tidForm).then(response => {
         this.teacherData = response.data.teacherInfo;
         this.loading = false;
       });
     },
-    getTeacherCourse () {
+    getTeacherCourse() {
       teacherInfo.getTeacherCourse(this.tidForm).then(response => {
         this.teacherCourse = response.data.curriculumList;
         this.loading = false;
       });
     },
     //预约导师
-    handleAppoint () {
+    handleAppoint() {
       if (persistStore.get("token")) {
         this.showAppointment = true;
         this.getUserInfo();
       } else {
         this.$bus.$emit("loginShow", true);
       }
-
     }
   },
-  mounted () {
+  mounted() {
     let tid = window.location.pathname.split("/")[3];
     this.tidForm.tids = tid;
     this.loading = true;
