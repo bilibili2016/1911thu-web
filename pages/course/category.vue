@@ -456,8 +456,12 @@ export default {
   },
   updated() {
     if (matchSplits("cp") === "0") {
-      //课程
-      setTitle("全部课程-1911学堂");
+      if (matchSplits("vid") === "-1") {
+        setTitle("课程中心-1911学堂");
+      } else {
+        //课程
+        setTitle("全部课程-1911学堂");
+      }
     } else if (matchSplits("cp") === "1") {
       //项目
       setTitle("培训项目-1911学堂");
