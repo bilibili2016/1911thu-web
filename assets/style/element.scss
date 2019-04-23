@@ -3,7 +3,9 @@
 
 /* 默认的 Element 无法满足需要时，就在下面进行扩展，建议扩展方式仍然参考 Element 的风格 */
 
+
 /* Button */
+
 .el-container {
   width: 100%;
   max-width: 1920px;
@@ -40,6 +42,7 @@ html {
     color: #222;
   }
 }
+
 
 /* Menu */
 
@@ -1138,8 +1141,8 @@ html {
 
     .el-tabs__item {
       text-align: left;
-      // transition: all 360ms ease-in;
 
+      // transition: all 360ms ease-in;
       span {
         padding-left: 10px;
       }
@@ -1643,7 +1646,6 @@ input:-webkit-autofill {
 // .main-crumb .main-crumbs .el-breadcrumb__inner:hover {
 //   cursor: pointer;
 // }
-
 //单位入口页
 .allInfo {
   .bottomForm .el-form .el-button.el-button--primary {
@@ -1846,7 +1848,7 @@ input::-webkit-input-safebox-button {
 .beTeacher {
   .phone {
     .el-input {
-      width: 320px;
+      width: 295px;
       margin-right: 50px;
     }
 
@@ -2096,7 +2098,6 @@ input::-webkit-credentials-auto-fill-button {
       top: 8px;
       left: 320px;
     }
-
   }
 
   .province .el-form-item__content .el-form-item__error {
