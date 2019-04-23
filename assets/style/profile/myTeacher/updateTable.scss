@@ -1,0 +1,201 @@
+.updateTable {
+  padding: 30px 0;
+
+  .con-item {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 20px;
+
+    .fl {
+      width: 160px;
+      text-align: right;
+    }
+
+    .fr {
+      width: 680px;
+      margin-right: 40px;
+
+      .tel {
+        width: 320px;
+      }
+
+      .verification {
+        width: 320px;
+        margin-left: 45px;
+      }
+
+      .code {
+        background-color: #eee;
+        border-radius: 6px;
+        width: 130px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #773084;
+        margin-left: 45px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .el-date-editor {
+        width: 200px;
+        display: inline-block;
+
+        &:first-child {
+          margin-right: 30px;
+        }
+      }
+
+      &.selectFr {
+        width: 320px;
+        position: relative;
+        margin-right: 110px;
+
+        .el-input {
+          width: 320px;
+          height: 40px;
+          line-height: 40px;
+          cursor: pointer;
+
+          .el-input__inner {
+            padding-right: 40px;
+          }
+        }
+
+        .pull-down-text {
+          position: absolute;
+          top: 41px;
+          left: 0;
+          width: 320px;
+          max-height: 163px;
+          overflow-x: hidden;
+          overflow-y: scroll;
+          border: 1px solid #ddd;
+          margin-top: 1px;
+          color: #222;
+          transition: all 400ms ease;
+          background-color: #fff;
+          z-index: 20;
+
+          .search {
+            position: relative;
+            background-color: #ededed;
+
+            input {
+              width: 100%;
+              height: 40px;
+              line-height: 40px;
+              font-size: 14px;
+              border: none !important;
+              background-color: #ededed;
+              padding-left: 10px;
+            }
+
+            .el-icon-search {
+              position: absolute;
+              top: 12px;
+              right: 12px;
+            }
+          }
+
+          ul {
+            width: 100%;
+            cursor: pointer;
+            border-top: 1px solid #ddd;
+
+            li {
+              width: 100%;
+              height: 40px;
+              font-size: 14px;
+              padding-left: 10px;
+              line-height: 40px;
+              border-bottom: 1px solid #ddd;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              cursor: pointer;
+
+              &:hover {
+                background-color: #ededed;
+              }
+            }
+          }
+
+          p {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+            font-size: 14px;
+            color: #222;
+            text-align: left;
+          }
+        }
+
+        .pull-down {
+          position: absolute;
+          top: 1px;
+          right: 1px;
+          width: 38px;
+          height: 38px;
+          border-left: 1px solid #dddddd;
+          background-color: #ededed;
+
+          .el-icon-caret-bottom {
+            margin: 12px;
+          }
+        }
+      }
+    }
+
+  }
+
+  .textarea {
+    font-size: 14px;
+    line-height: 24px;
+    color: #000;
+    margin-bottom: 20px;
+
+    p {
+      width: 160px;
+      margin-bottom: 14px;
+      text-align: right;
+    }
+
+    textarea {
+      float: right;
+      width: 680px;
+      margin-right: 40px;
+      height: 65px;
+      padding: 10px;
+      border: 1px solid #dcdfe6;
+
+      &::placeholder {
+        color: #c0c4cb;
+      }
+    }
+  }
+
+  .btns {
+    padding: 50px 0 0;
+    margin: 0 auto;
+    text-align: center;
+
+    .btn {
+      width: 160px;
+      height: 42px;
+      line-height: 42px;
+      background-color: #773084;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 21px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 300ms;
+
+      &:hover {
+        background-color: #5f068d;
+      }
+    }
+  }
+}

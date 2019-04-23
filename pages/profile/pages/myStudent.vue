@@ -32,9 +32,9 @@ export default {
   props: ["data"],
   components: {
     "v-nomsg": NoMsg,
-    "v-part": Part
+    "v-part": Part,
   },
-  data() {
+  data () {
     return {
       activeName: "first",
       config: {
@@ -47,11 +47,11 @@ export default {
     };
   },
   methods: {
-    handleActive(item) {
+    handleActive (item) {
       this.getData.statusType = item.$attrs.value;
       this.getTeacherData(this.getData);
     },
-    getTeacherData(data) {
+    getTeacherData (data) {
       this.$emit("getTeacherData", data);
     }
   }

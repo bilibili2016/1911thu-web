@@ -4,7 +4,8 @@
     <el-tabs v-model="activeName" @tab-click="handleActive">
       <!-- 学习中 -->
       <el-tab-pane label="未开始" name="first" value="1">
-        <v-part :teacherData="data" :config="config"></v-part>
+        <!-- <v-part :teacherData="data" :config="config"></v-part> -->
+        <v-updateTime></v-updateTime>
       </el-tab-pane>
       <!-- 已完成 -->
       <el-tab-pane label="已完成" name="second" value="2">
@@ -12,7 +13,8 @@
       </el-tab-pane>
       <!-- 已失效 -->
       <el-tab-pane label="已失效" name="fourth" value="3">
-        <v-part :teacherData="data" :config="config"></v-part>
+        <!-- <v-part :teacherData="data" :config="config"></v-part> -->
+        <v-updateTime></v-updateTime>
       </el-tab-pane>
     </el-tabs>
   </el-card>
@@ -22,16 +24,19 @@
 import { store as persistStore } from '~/lib/core/store'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import Part from '@/pages/profile/components/common/Part.vue'
+import UpdateTime from '@/pages/profile/components/myteacher/updateTime.vue'
 
 export default {
   props: ["data"],
   components: {
     'v-nomsg': NoMsg,
     'v-part': Part,
+    'v-updateTime': UpdateTime,
   },
   data () {
     return {
       activeName: 'first',
+      showUpdateTime: false,
       config: {
         isTeacher: true,
       },
