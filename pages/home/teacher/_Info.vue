@@ -47,12 +47,12 @@ export default {
     "v-appointment": Appointment,
     "v-pay": Pay
   },
-  data () {
+  data() {
     return {
       showAppointment: false,
       showPay: false,
-      orderId: '',
-      userInfo: '',
+      orderId: "",
+      userInfo: "",
       pageType: {
         page: "teacher/_info",
         text: "暂无在教的课程",
@@ -73,18 +73,18 @@ export default {
     };
   },
   methods: {
-    goPay (id) {
+    goPay(id) {
       this.showPay = true;
       this.orderId = id;
     },
-    closeForm () {
+    closeForm() {
       this.showAppointment = !this.showAppointment;
     },
     // 支付弹框关闭的回调
-    closePayed () {
+    closePayed() {
       this.showPay = !this.showPay;
     },
-    reservation (teacher) {
+    reservation(teacher) {
       if (persistStore.get("token")) {
         this.getUserInfo();
         this.teacherInfo = teacher;
@@ -93,32 +93,37 @@ export default {
         this.$bus.$emit("loginShow", true);
       }
     },
-    getUserInfo () {
+    getUserInfo() {
       banner.getUserInfo().then(res => {
         if (res.status === 0) {
           this.userInfo = res.data.userInfo;
         }
       });
     },
-    getTeacherInfo () {
+    getTeacherInfo() {
       teacherInfo.getTeacherInfo(this.tidForm).then(response => {
         this.teacherData = response.data.teacherInfo;
         this.loading = false;
       });
     },
-    getTeacherCourse () {
+    getTeacherCourse() {
       teacherInfo.getTeacherCourse(this.tidForm).then(response => {
         this.teacherCourse = response.data.curriculumList;
         this.loading = false;
       });
     },
     //预约导师
-    handleAppoint () {
-      this.showAppointment = true;
-      this.getUserInfo();
+    handleAppoint() {
+      if (persistStore.get("token")) {
+        this.showAppointment = true;
+        this.getUserInfo();
+      } else {
+        this.$router.push("/");
+        this.$bus.$emit("loginShow", true);
+      }
     }
   },
-  mounted () {
+  mounted() {
     let tid = window.location.pathname.split("/")[3];
     this.tidForm.tids = tid;
     this.loading = true;
