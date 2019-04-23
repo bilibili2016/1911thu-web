@@ -39,6 +39,15 @@
                     color: #773084;
                 }
             }
+            .unBtn {
+                cursor: inherit;
+                background-color: #ccc;
+                border-color: #ccc;
+                &:hover {
+                    background-color: #ccc;
+                    color: #fff;
+                }
+            }
         }
         .desc {
             margin-left: 30px;
