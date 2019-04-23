@@ -60,13 +60,17 @@
     .con {
         margin-top: 20px;
         background-color: #f7f9fb;
-        .personal {
+        .con-outer {
             width: 1100px;
             margin: 0 auto;
             box-shadow: 0px 3px 36px 0px rgba(198, 194, 210, 0.36);
             border-radius: 10px;
-            padding-bottom: 20px;
+            padding-bottom: 40px;
             background-color: #fff;
+        }
+        .personal {
+            width: 1020px;
+            margin: 0 auto;
         }
         .tip {
             text-align: center;
@@ -86,11 +90,18 @@
             width: 1100px;
             margin: 0 auto;
             margin-top: 40px;
+            .teacher,
+            .student {
+                width: 1020px;
+                // margin: 0 auto;
+                background-color: #F7F9FB;
+                padding: 20px 0;
+            }
             .con-item {
                 height: auto;
                 margin-bottom: 20px;
                 .fl {
-                    width: 190px;
+                    width: 170px;
                     text-align: right;
                     line-height: 40px;
                     font-size: 16px;
@@ -105,7 +116,7 @@
                 }
                 .fr {
                     float: left;
-                    width: 850px;
+                    width: 810px;
                     position: relative;
                     color: #222;
                 }
