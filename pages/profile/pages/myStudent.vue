@@ -1,25 +1,25 @@
 <template>
   <!-- 我的咨询 -->
   <el-card class="changeNav">
-    <!-- <el-tabs v-model="activeName" @tab-click="handleActive">
-      未开始
+    <el-tabs v-model="activeName" @tab-click="handleActive">
+      <!-- 未开始 -->
       <el-tab-pane label="未开始" name="first" value="1">
         <v-part :teacherData="data" :config="config"></v-part>
       </el-tab-pane>
-      已完成
+      <!-- 已完成 -->
       <el-tab-pane label="已完成" name="second" value="2">
         <v-part :teacherData="data" :config="config"></v-part>
       </el-tab-pane>
-      已失效
+      <!-- 已失效 -->
       <el-tab-pane label="已失效" name="fourth" value="3">
         <v-part :teacherData="data" :config="config"></v-part>
       </el-tab-pane>
-    </el-tabs> -->
-    <div class="timeTable">
+    </el-tabs>
+    <!-- <div class="timeTable">
       <div class="top">
 
       </div>
-    </div>
+    </div> -->
   </el-card>
 </template>
 
@@ -58,5 +58,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "~assets/style/profile/myTeacher/timeTable";
+// @import "~assets/style/profile/myTeacher/timeTable";
 </style>
