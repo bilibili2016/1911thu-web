@@ -143,8 +143,8 @@ export default {
         //     throw "请填写正确的手机号码";
         // }
         if (Trim(this.teacherForm.name) === "") throw "请填写姓名";
-        if (this.teacherForm.appointmentDate === "") throw "请选择咨询日期";
-        if (this.teacherForm.appointmentTime === "") throw "请选择开始时间";
+        if (this.teacherForm.appointmentDate === "") throw "请选择咨询开始日期";
+        if (this.teacherForm.appointmentTime === "") throw "请选择咨询开始时间";
         if (this.teacherForm.courseTime === "") throw "请选择咨询时长";
         if (this.teacherForm.remark === "") throw "请简单描述您想要咨询的问题";
         if (!this.teacherForm.checked) throw "请先阅读《服务协议》";

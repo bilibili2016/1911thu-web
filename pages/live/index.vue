@@ -9,6 +9,7 @@
           <div class="liveBtn">
             <span @click="start_play">开始直播</span>
             <span @click="stop_play">结束直播</span>
+            <embed src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="1003" height="115">
           </div>
           <div class="tblive" id="tblive"></div>
         </div>
@@ -19,6 +20,7 @@
           <span class="btn nearBtn fr">结束直播</span>
           <span class="btn endBtn fr">结束直播</span>
         </div> -->
+
       </div>
       <!-- 即将结束 -->
       <div class="pop nearEnd" v-if="nearEnd">
@@ -55,7 +57,8 @@ export default {
         "4、报名缴费后可以退款吗？"
       ],
       teacherLiveInfo: {
-        appointId: ""
+        appointId: "",
+        type: ""
       },
       jsFile:
         "//g.alicdn.com/aliyun/aliyun-assets/0.0.3/swfobject/swfobject.js",
@@ -148,11 +151,14 @@ export default {
     },
     playerError (error) {
       console.log(error);
-    }
+    },
   },
   mounted () {
     this.node = this.$refs.mediaPlayer
     this.teacherLiveInfo.appointId = matchSplits('id')
+    this.teacherLiveInfo.type = matchSplits('type')
+
+    // window.open('http://www.adobe.com/go/getflashplayer_cn')
     this.teacherBespokeInfo()
     //   创建推流播放器
     this.newPlayer()
