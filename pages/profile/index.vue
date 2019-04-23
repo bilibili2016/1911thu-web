@@ -84,14 +84,14 @@
         <!-- 我的咨询 -->
         <el-tab-pane class="my-course my-examine" name="tab-twelfth">
           <span slot="label" class="tabList">
-            <i class="icon-examine"></i>&nbsp;我的咨询
+            <i class="icon-student"></i>&nbsp;我的咨询
           </span>
           <v-mystudent :data="teacherData" @getTeacherData="getTeacherData"></v-mystudent>
         </el-tab-pane>
         <!-- 教师入口  -->
         <el-tab-pane class="my-course my-examine" name="tab-thirteenth" v-if="userInfo.user_type=='4'">
           <span slot="label" class="tabList">
-            <i class="icon-examine"></i>&nbsp;教师入口
+            <i class="icon-teacher"></i>&nbsp;教师入口
           </span>
           <v-myteacher :data="teacherData" @getTeacherData="getTeacherData"></v-myteacher>
         </el-tab-pane>
