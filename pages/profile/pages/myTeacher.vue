@@ -2,7 +2,7 @@
   <!-- 教师入口 -->
   <el-card class="">
     <!-- 列表 -->
-    <v-list v-if="isShowList" :data="data"></v-list>
+    <v-list v-if="isShowList" :data="data" @getTeacherData="getTeacherData"></v-list>
     <!-- 预约时间表 -->
     <v-tabletime v-if="isShowTimeTable"></v-tabletime>
     <!-- 录入可预约的时间 -->
@@ -27,7 +27,7 @@ export default {
     "v-inputtime": inputTime,
     "v-updatetime": updateTime
   },
-  data() {
+  data () {
     return {
       isShowList: true,
       isShowTimeTable: false,
@@ -36,8 +36,12 @@ export default {
       timeID: ""
     };
   },
-  methods: {},
-  mounted() {
+  methods: {
+    getTeacherData (data) {
+      this.$emit("getTeacherData", data);
+    }
+  },
+  mounted () {
     this.$bus.$on("gotoURL", data => {
       this.isShowList = false;
       this.isShowTimeTable = false;

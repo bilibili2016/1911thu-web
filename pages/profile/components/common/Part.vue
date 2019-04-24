@@ -19,11 +19,11 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <!-- <span v-if="teacher.result_status == 2" class="begin" @click="goLive(teacher)">进入直播</span> -->
-            <span v-if="teacher.result_status == 2" class="soon" @click="goLive(teacher)">即将开始</span>
-            <span v-if="teacher.result_status == 1" class="wait" @click="goLive(teacher)">等待确认</span>
-            <span v-if="teacher.result_status == 3" class="efficacy" @click="goLive(teacher)">已失效</span>
-            <span v-if="teacher.result_status == 4" class="end" @click="goLive(teacher)">已结束</span>
+            <span v-if="teacher.result_status == 2" class="begin">等待预约确认</span>
+            <span v-if="teacher.result_status == 3" class="soon" @click="goLive(teacher)">等待开始</span>
+            <span v-if="(teacher.result_status == 3&&(teacher.start_time-teacher.service_time)/60<5)||(teacher.result_status == 3&&(teacher.end_time-teacher.service_time)/60<=50)" class="soon" @click="goLive(teacher)">进入直播</span>
+            <span v-if="teacher.result_status == 4" class="begin">已失效</span>
+            <span v-if="teacher.result_status == 6" class="begin">调整待确认</span>
           </div>
         </div>
       </li>
@@ -42,11 +42,11 @@
         <div class="btn clearfix">
           <div class="fl">￥{{teacher.price}}</div>
           <div class="fr">
-            <!-- <span v-if="teacher.result_status == 2" class="begin" @click="goLive(teacher)">进入直播</span> -->
-            <span v-if="teacher.result_status == 2" class="soon" @click="goLive(teacher)">即将开始</span>
-            <span v-if="teacher.result_status == 1" class="wait" @click="goLive(teacher)">等待确认</span>
-            <span v-if="teacher.result_status == 3" class="efficacy" @click="goLive(teacher)">已失效</span>
-            <span v-if="teacher.result_status == 4" class="end" @click="goLive(teacher)">已结束</span>
+            <span v-if="teacher.result_status == 2" class="begin">等待预约确认</span>
+            <span v-if="teacher.result_status == 3" class="soon" @click="goLive(teacher)">等待开始</span>
+            <span v-if="(teacher.result_status == 3&&(teacher.start_time-teacher.service_time)/60<5)||(teacher.result_status == 3&&(teacher.end_time-teacher.service_time)/60<=50)" class="soon" @click="goLive(teacher)">进入直播</span>
+            <span v-if="teacher.result_status == 4" class="begin">已失效</span>
+            <span v-if="teacher.result_status == 6" class="begin">调整待确认</span>
           </div>
         </div>
       </li>
@@ -70,7 +70,7 @@ export default {
   components: {
     "v-nomsg": NoMsg
   },
-  data() {
+  data () {
     return {
       noMsg: {
         type: "myTeacher",
@@ -81,10 +81,10 @@ export default {
     };
   },
   methods: {
-    handleTeacher() {
+    handleTeacher () {
       this.$router.push("/home/teacher/list");
     },
-    goLive(teacher) {
+    goLive (teacher) {
       if (this.config.isTeacher) {
         this.type = 2;
       } else {
@@ -93,11 +93,11 @@ export default {
       this.$router.push(`/live?id=${teacher.id}&type=${this.type}`);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime(time) {
+    changeTime (time) {
       return timestampToTime(time);
     }
   },
-  mounted() {
+  mounted () {
     if (this.config.isTeacher) {
       this.noMsg.text = "您暂时没有已预约的直播咨询。";
     } else {
