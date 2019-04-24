@@ -1,8 +1,8 @@
 <template>
-  <!-- 我的咨询 -->
-  <el-card class="changeNav">
+  <!-- 教师入口 -->
+  <el-card class="changeNav teacherList">
     <el-tabs v-model="activeName" @tab-click="handleActive">
-      <!-- 未开始 -->
+      <!-- 学习中 -->
       <el-tab-pane label="未开始" name="first" value="1">
         <v-part :teacherData="data" :config="config"></v-part>
       </el-tab-pane>
@@ -15,7 +15,7 @@
         <v-part :teacherData="data" :config="config"></v-part>
       </el-tab-pane>
     </el-tabs>
-
+    <div class="viewTimeTable" @click="viewTimeTable">查看预约时间表 > </div>
   </el-card>
 </template>
 
@@ -23,22 +23,25 @@
 import { store as persistStore } from "~/lib/core/store";
 import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 import Part from "@/pages/profile/components/common/Part.vue";
+import UpdateTime from "@/pages/profile/components/myteacher/updateTime.vue";
 
 export default {
   props: ["data"],
   components: {
     "v-nomsg": NoMsg,
-    "v-part": Part
+    "v-part": Part,
+    "v-updateTime": UpdateTime
   },
   data() {
     return {
       activeName: "first",
+      showUpdateTime: false,
       config: {
-        isTeacher: false
+        isTeacher: true
       },
       getData: {
         statusType: 1,
-        type: 1
+        type: 2
       }
     };
   },
@@ -49,7 +52,14 @@ export default {
     },
     getTeacherData(data) {
       this.$emit("getTeacherData", data);
+    },
+    //查看预约时间表
+    viewTimeTable() {
+      let obj = { name: "timeTable" };
+      this.$bus.$emit("gotoURL", obj);
     }
   }
 };
 </script>
+<style lang="scss" scoped>
+</style>

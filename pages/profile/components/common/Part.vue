@@ -1,5 +1,8 @@
 <template>
   <div class="cardList">
+    <div class="process">
+      <img src="https://static-image.1911edu.com/appoint-process.png" alt="">
+    </div>
     <ul v-if="teacherData.length!=0">
       <li v-if="!config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
         <div class="headImg">
@@ -67,7 +70,7 @@ export default {
   components: {
     "v-nomsg": NoMsg
   },
-  data () {
+  data() {
     return {
       noMsg: {
         type: "myTeacher",
@@ -78,23 +81,23 @@ export default {
     };
   },
   methods: {
-    handleTeacher () {
+    handleTeacher() {
       this.$router.push("/home/teacher/list");
     },
-    goLive (teacher) {
+    goLive(teacher) {
       if (this.config.isTeacher) {
-        this.type = 2
+        this.type = 2;
       } else {
-        this.tyoe = 1
+        this.tyoe = 1;
       }
       this.$router.push(`/live?id=${teacher.id}&type=${this.type}`);
       //   this.$router.push('/live/studentLive')
     },
-    changeTime (time) {
+    changeTime(time) {
       return timestampToTime(time);
     }
   },
-  mounted () {
+  mounted() {
     if (this.config.isTeacher) {
       this.noMsg.text = "您暂时没有已预约的直播咨询。";
     } else {
@@ -105,5 +108,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~assets/style/profile/part.scss";
+@import "~assets/style/profile/myTeacher/part.scss";
 </style>

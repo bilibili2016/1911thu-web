@@ -1,59 +1,46 @@
 <template>
   <!-- 教师入口 -->
   <el-card class="changeNav">
-    <el-tabs v-model="activeName" @tab-click="handleActive">
-      <!-- 学习中 -->
-      <el-tab-pane label="未开始" name="first" value="1">
-        <!-- <v-part :teacherData="data" :config="config"></v-part> -->
-        <v-updateTime></v-updateTime>
-      </el-tab-pane>
-      <!-- 已完成 -->
-      <el-tab-pane label="已完成" name="second" value="2">
-        <v-part :teacherData="data" :config="config"></v-part>
-      </el-tab-pane>
-      <!-- 已失效 -->
-      <el-tab-pane label="已失效" name="fourth" value="3">
-        <!-- <v-part :teacherData="data" :config="config"></v-part> -->
-        <v-updateTime></v-updateTime>
-      </el-tab-pane>
-    </el-tabs>
+    <!-- 列表 -->
+    <v-list v-if="isShowList" :data="data"></v-list>
+    <!-- 预约时间表 -->
+    <v-table v-if="isShowTimeTable"></v-table>
   </el-card>
 </template>
 
 <script>
-import { store as persistStore } from '~/lib/core/store'
-import NoMsg from '@/pages/profile/components/common/noMsg.vue'
-import Part from '@/pages/profile/components/common/Part.vue'
-import UpdateTime from '@/pages/profile/components/myteacher/updateTime.vue'
+import { store as persistStore } from "~/lib/core/store";
+import List from "@/pages/profile/components/myteacher/list.vue";
+import timeTable from "@/pages/profile/components/myteacher/timeTable.vue";
 
 export default {
   props: ["data"],
   components: {
-    'v-nomsg': NoMsg,
-    'v-part': Part,
-    'v-updateTime': UpdateTime,
+    "v-list": List,
+    "v-table": timeTable
   },
-  data () {
+  data() {
     return {
-      activeName: 'first',
-      showUpdateTime: false,
-      config: {
-        isTeacher: true
-      },
-      getData: {
-        statusType: 1,
-        type: 2
-      }
+      isShowList: true,
+      isShowTimeTable: false
     };
   },
-  methods: {
-    handleActive (item) {
-      this.getData.statusType = item.$attrs.value;
-      this.getTeacherData(this.getData);
-    },
-    getTeacherData (data) {
-      this.$emit("getTeacherData", data);
-    }
+  methods: {},
+  mounted() {
+    this.$bus.$on("gotoURL", data => {
+      this.isShowList = false;
+      this.isShowTimeTable = false;
+      switch (data.name) {
+        case "list":
+          this.isShowList = true;
+          break;
+        case "timeTable":
+          this.isShowTimeTable = true;
+          break;
+        default:
+          break;
+      }
+    });
   }
 };
 </script>
