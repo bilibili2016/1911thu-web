@@ -8,7 +8,7 @@
     <!-- 录入可预约的时间 -->
     <v-inputtime v-if="isShowInputTime"></v-inputtime>
     <!-- 修改时间 -->
-    <v-updatetime v-if="isShowUpdateTime"></v-updatetime>
+    <v-updatetime v-if="isShowUpdateTime" :timeID="timeID"></v-updatetime>
   </el-card>
 </template>
 
@@ -27,16 +27,17 @@ export default {
     "v-inputtime": inputTime,
     "v-updatetime": updateTime
   },
-  data () {
+  data() {
     return {
       isShowList: true,
       isShowTimeTable: false,
       isShowInputTime: false,
-      isShowUpdateTime: false
+      isShowUpdateTime: false,
+      timeID: ""
     };
   },
   methods: {},
-  mounted () {
+  mounted() {
     this.$bus.$on("gotoURL", data => {
       this.isShowList = false;
       this.isShowTimeTable = false;
@@ -54,6 +55,7 @@ export default {
           break;
         case "updateTime":
           this.isShowUpdateTime = true;
+          this.timeID = data.id;
           break;
         default:
           break;
