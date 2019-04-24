@@ -48,7 +48,7 @@
       </div>
       <div class="textarea clearfix">
         <p class="fl">咨询问题概述：</p>
-        <textarea placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.problems"></textarea>
+        <el-input type="textarea" disabled autosize v-model.trim="teacherForm.problems" :rows="3"></el-input>
       </div>
       <div class="textarea clearfix">
         <p class="fl">修改原因描述：</p>
@@ -76,11 +76,11 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       isShowPop: false,
       pickerOptions: {
-        disabledDate(time) {
+        disabledDate (time) {
           return time.getTime() <= Date.now();
         }
       },
@@ -119,14 +119,14 @@ export default {
       ]
     };
   },
-  mounted() {},
+  mounted () { },
   methods: {
-    handleGoTo(url) {
+    handleGoTo (url) {
       let obj = { name: url };
       this.$bus.$emit("gotoURL", obj);
     },
-    validate() {},
-    changeTime() {
+    validate () { },
+    changeTime () {
       this.selectTime = !this.selectTime;
     }
   }
