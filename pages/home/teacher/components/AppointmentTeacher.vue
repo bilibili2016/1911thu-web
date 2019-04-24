@@ -25,6 +25,21 @@
         </div>
       </div>
       <div class="con-item name clearfix">
+        <div class="fl">咨询时长：</div>
+        <div class="fr">
+          <el-input v-model="teacherForm.courseTimeName" disabled></el-input>
+        </div>
+      </div>
+      <div class="con-item name clearfix">
+        <div class="fl">请选择开始时间：</div>
+        <div class="fr">
+          <el-select v-model="teacherForm.startTime" placeholder="请选择开始时间">
+            <el-option v-for="item in timeList" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      </div>
+      <!-- <div class="con-item name clearfix">
         <div class="fl">请选择咨询日期：</div>
         <div class="fr">
           <el-date-picker v-model="teacherForm.appointmentDate" format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" placeholder="请选择开始日期" :picker-options="pickerOptions">
@@ -32,11 +47,15 @@
           <el-time-select v-model="teacherForm.appointmentTime" :picker-options="{start: '08:00',step: '01:00',end: '20:00'}" placeholder="请选择开始时间">
           </el-time-select>
         </div>
-      </div>
+      </div> -->
       <div class="con-item clearfix">
-        <div class="fl">请选择咨询时长：</div>
+        <div class="fl">请选择咨询的问题：</div>
         <div class="fr selectFr">
-          <div class="select-con ">
+          <el-select v-model="teacherForm.problems" multiple collapse-tags placeholder="请选择">
+            <el-option v-for="item in problems" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+          <!-- <div class="select-con ">
             <div class="divClick" @click.stop="handleCourseTimeClick">
               <span>
                 <el-input v-model="teacherForm.courseTimeName" placeholder="请选择咨询时长" readonly></el-input>
@@ -50,7 +69,7 @@
             <ul>
               <li v-for="(item,index) in timeLi" :key="index" @click.stop="chooseTime(item)">{{item.name}}</li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="textarea">
@@ -74,11 +93,6 @@ export default {
   props: ["teacherInfo", "userInfo"],
   data () {
     return {
-      pickerOptions: {
-        disabledDate (time) {
-          return time.getTime() <= Date.now();
-        }
-      },
       teacherForm: {
         teacherId: "", //导师ID
         name: "", //姓名
@@ -87,31 +101,66 @@ export default {
         appointmentDate: "", //预约开始时间
         appointmentTime: "", //预约结束时间
         startTime: "",
-        courseTimeName: "", //授课时长
+        courseTimeName: "50分钟", //授课时长
         remark: "", //其他需求
+        problems: "",
         checked: false,
         hasTel: true,
         hasName: false
       },
-      isShowTime: false,
-      timeLi: [
+      problems: [
         {
-          name: "0.5小时",
-          value: "1800"
+          label: '问题一',
+          value: '1',
         },
         {
-          name: "1小时",
-          value: "3600"
+          label: '问题二',
+          value: '2',
         },
         {
-          name: "1.5小时",
-          value: "5400"
+          label: '问题三',
+          value: '3',
         },
         {
-          name: "2小时",
-          value: "7200"
+          label: '问题四',
+          value: '4',
+        },
+        {
+          label: '问题5',
+          value: '5',
+        },
+        {
+          label: '问题6',
+          value: '6',
+        },
+        {
+          label: '问题7',
+          value: '7',
+        },
+        {
+          label: '问题8',
+          value: '8',
         }
-      ]
+      ],
+      timeList: [
+        {
+          value: "8",
+          label: "08:00"
+        },
+        {
+          value: "9",
+          label: "09:00"
+        },
+        {
+          value: "10",
+          label: "10:00"
+        },
+        {
+          value: "11",
+          label: "11:00"
+        },
+      ],
+      isShowTime: false,
     };
   },
   methods: {
