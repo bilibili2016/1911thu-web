@@ -1911,6 +1911,9 @@ input::-webkit-credentials-auto-fill-button {
             color: #222;
             cursor: pointer;
             z-index: 100;
+            &:hover {
+                color: #773084;
+            }
         }
     }
     .el-radio-group {

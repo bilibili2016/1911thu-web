@@ -7,6 +7,9 @@
         span {
             font-size: 16px;
             color: #222;
+            &:hover {
+                color: #773084;
+            }
         }
         .left {
             float: left;
@@ -28,6 +31,11 @@
             }
             span {
                 vertical-align: middle;
+            }
+            &:hover {
+                span {
+                    color: #773084;
+                }
             }
         }
     }
