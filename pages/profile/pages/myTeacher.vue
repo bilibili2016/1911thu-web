@@ -24,7 +24,7 @@
 import { store as persistStore } from '~/lib/core/store'
 import NoMsg from '@/pages/profile/components/common/noMsg.vue'
 import Part from '@/pages/profile/components/common/Part.vue'
-import UpdateTime from '@/pages/profile/components/myteacher/updateTime.vue'
+import UpdateTime from '@/pages/profile/components/myteacher/inputTime.vue'
 
 export default {
   props: ["data"],
