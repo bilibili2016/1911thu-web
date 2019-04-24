@@ -33,7 +33,8 @@
                 <span class="operate accept" @click="acceptInvite(item)">接受邀请</span>
                 <span class="operate update" @click="handleGoTo('updateTime',item)">申请修改时间</span>
               </div>
-              <span v-if="item.result_status==3">{{countDown(item)}}</span>
+              <!-- <span v-if="item.result_status==3">{{countDown(item)}}</span> -->
+              <span v-if="item.result_status==3">{{countDownSecond}}</span>
             </td>
           </tr>
         </table>
@@ -49,7 +50,7 @@ import { myTeacher } from "~/lib/v1_sdk/index";
 import { message, timestampToTime } from "~/lib/util/helper";
 
 export default {
-  data() {
+  data () {
     return {
       serviceTime: "",
       isLoading: true,
@@ -66,49 +67,56 @@ export default {
       },
       statusText: "",
       countDownSecond: "",
-      CDTimer: null
+      CDTimer: null,
     };
   },
   methods: {
-    countDown(val) {
-      // console.log(timestampToTime(parseInt(val.start_time)));
-      // console.log(timestampToTime(this.serviceTime));
-      //服务器的时间小于开始时间（直播未开始）
-      if (val.start_time > this.serviceTime) {
-        let timeDiff = val.start_time - this.serviceTime;
-        let minuteDiff = timeDiff / 60;
-        // console.log(minuteDiff);
-        this.countDownSecond = timeDiff;
-        if (minuteDiff <= 30) {
-          // console.log("进来了");
-          this.statusText = "即将开始";
-          this.CDTimer = setInterval(() => {
-            if (this.countDownSecond <= 0) {
-              //倒计时结束
-              clearInterval(this.CDTimer);
-              this.statusText = "进入直播";
-            } else {
-              this.countDownSecond = this.countDownSecond - 1;
-            }
-            console.log(this.countDownSecond);
-          }, 1000);
+    countDown (val) {
+      this.$nextTick(() => {
+        console.log('服务器的时间小于开始时间（直播未开始）');
+
+        //服务器的时间小于开始时间（直播未开始）
+        if (val.start_time > this.serviceTime) {
+          console.log(val.start_time, this.serviceTime);
+
+          let timeDiff = val.start_time - this.serviceTime;
+          let minuteDiff = timeDiff / 60;
+          this.countDownSecond = timeDiff;
+
+          if (minuteDiff <= 5000) {
+            console.log("进来了");
+            this.statusText = "即将开始";
+            this.CDTimer = setInterval(() => {
+              if (this.countDownSecond <= 0) {
+                // console.log(this.countDownSecond, '倒计时');
+                //倒计时结束
+                clearInterval(this.CDTimer);
+                this.statusText = "进入直播";
+              } else {
+                console.log(this.countDownSecond, '-1');
+                this.countDownSecond = this.countDownSecond - 1;
+              }
+            }, 1000);
+          } else {
+            this.statusText = "";
+          }
         } else {
-          this.statusText = "";
+          //大于（直播已开始）
+          if (this.serviceTime > val.end_time) {
+            //已经直播完
+            this.statusText = "已结束";
+          } else {
+            //正在直播
+            this.statusText = "进入直播";
+          }
         }
-      } else {
-        //大于（直播已开始）
-        if (this.serviceTime > val.end_time) {
-          //已经直播完
-          this.statusText = "已结束";
-        } else {
-          //正在直播
-          this.statusText = "进入直播";
-        }
-      }
-      return this.statusText;
+        console.log(this.statusText, 'statusText');
+        // return this.statusText;
+      });
+
     },
     //页面跳转
-    handleGoTo(url, item) {
+    handleGoTo (url, item) {
       let obj = { name: url };
       if (url == "updateTime") {
         obj.id = item.id;
@@ -117,13 +125,13 @@ export default {
       this.$bus.$emit("gotoURL", obj);
     },
     //翻页
-    timeListChange(val) {
+    timeListChange (val) {
       this.timeListForm.page = val;
       this.timeListForm.limit = 6;
       this.bespokeTimeList();
     },
     //预约时间列表
-    bespokeTimeList() {
+    bespokeTimeList () {
       myTeacher.bespokeTimeList(this.timeListForm).then(res => {
         if (res.status == 0) {
           clearInterval(this.CDTimer);
@@ -135,7 +143,7 @@ export default {
       });
     },
     //接受邀请
-    acceptInvite(item) {
+    acceptInvite (item) {
       myTeacher.acceptInvitation({ id: item.id }).then(res => {
         if (res.status == 0) {
           message(this, "success", res.msg);
@@ -145,12 +153,12 @@ export default {
         }
       });
     },
-    clear() {
+    clear () {
       clearInterval(this.CDTimer);
       this.countDownSecond = 0;
     }
   },
-  mounted() {
+  mounted () {
     clearInterval(this.CDTimer);
     this.bespokeTimeList();
   }
