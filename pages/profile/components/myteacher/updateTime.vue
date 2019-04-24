@@ -171,6 +171,7 @@ export default {
           let data = res.data.bespokeDetail;
           this.updateTimeForm.name = data.real_name;
           this.updateTimeForm.startTime = data.start_time;
+          this.updateTimeForm.problems = data.remark;
           this.appointTimeList = res.data.otherTimeList;
         }
       });
