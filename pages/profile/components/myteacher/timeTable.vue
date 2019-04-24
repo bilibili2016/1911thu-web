@@ -1,8 +1,8 @@
 <template>
   <div class="timeTable">
     <div class="top clearfix">
-      <div class="left"><span>教师入口 > </span> <span> 预约时间表</span></div>
-      <div class="right" @click="handleInputTime"> <img src="https://static-image.1911edu.com/myTeacher-icon1.png" alt=""> <span class="right">录入可预约时间</span></div>
+      <div class="left"><span @click="handleGoTo('list')">教师入口 > </span> <span> 预约时间表</span></div>
+      <div class="right" @click="handleGoTo('inputTime')"> <img src="https://static-image.1911edu.com/myTeacher-icon1.png" alt=""> <span class="right">录入可预约时间</span></div>
     </div>
     <div class="table">
       <div class="con">
@@ -23,7 +23,7 @@
             <td class="unconfirmed">未确认</td>
             <td>
               <span class="operate accept">接受邀请</span>
-              <span class="operate update" @click="updateTime">申请修改时间</span>
+              <span class="operate update" @click="handleGoTo('updateTime')">申请修改时间</span>
             </td>
           </tr>
           <tr>
@@ -58,13 +58,8 @@
 <script>
 export default {
   methods: {
-    handleInputTime() {
-      let obj = { name: "inputTime" };
-      this.$bus.$emit("gotoURL", obj);
-    },
-    //申请修改时间
-    updateTime() {
-      let obj = { name: "updateTime" };
+    handleGoTo(url) {
+      let obj = { name: url };
       this.$bus.$emit("gotoURL", obj);
     }
   }
