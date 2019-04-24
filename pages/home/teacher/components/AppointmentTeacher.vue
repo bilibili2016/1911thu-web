@@ -134,7 +134,6 @@ export default {
     update () {
       this.teacherForm.name = this.userInfo.real_name;
       this.teacherForm.tel = this.userInfo.user_name;
-      this.teacherBespokeInfo()
       if (this.teacherForm.name) {
         this.teacherForm.hasName = true;
       }
@@ -162,6 +161,7 @@ export default {
     this.teacherForm.teacherName = this.teacherInfo.teacher_name;
     this.teacherForm.teacherId = this.teacherInfo.id;
     this.update();
+    this.teacherBespokeInfo()
   }
 };
 </script>
