@@ -33,8 +33,20 @@
                 <span class="operate accept" @click="acceptInvite(item)">接受邀请</span>
                 <span class="operate update" @click="handleGoTo('updateTime',item)">申请修改时间</span>
               </div>
-              <!-- <span v-if="item.result_status==3">{{countDown(item)}}</span> -->
-              <span v-if="item.result_status==3">{{countDownSecond}}</span>
+              <<<<<<< HEAD <!-- <span v-if="item.result_status==3">{{countDown(item)}}</span> -->
+                <span v-if="item.result_status==3">{{countDownSecond}}</span>
+                =======
+                <div v-if="item.result_status==3">
+                  <div v-if="item.start_time >=serviceTime">
+                    <span v-if="(parseInt(item.start_time) - serviceTime)/60<=30">{{timeout(item,index)}}</span>
+                    <span v-else></span>
+                  </div>
+                  <div v-else>
+                    <span v-if="serviceTime > item.end_time">已结束</span>
+                    <span v-else>进入直播</span>
+                  </div>
+                </div>
+                >>>>>>> origin/dev
             </td>
           </tr>
         </table>
@@ -71,49 +83,23 @@ export default {
     };
   },
   methods: {
-    countDown (val) {
-      this.$nextTick(() => {
-        console.log('服务器的时间小于开始时间（直播未开始）');
-
-        //服务器的时间小于开始时间（直播未开始）
-        if (val.start_time > this.serviceTime) {
-          console.log(val.start_time, this.serviceTime);
-
-          let timeDiff = val.start_time - this.serviceTime;
-          let minuteDiff = timeDiff / 60;
-          this.countDownSecond = timeDiff;
-
-          if (minuteDiff <= 5000) {
-            console.log("进来了");
-            this.statusText = "即将开始";
-            this.CDTimer = setInterval(() => {
-              if (this.countDownSecond <= 0) {
-                // console.log(this.countDownSecond, '倒计时');
-                //倒计时结束
-                clearInterval(this.CDTimer);
-                this.statusText = "进入直播";
-              } else {
-                console.log(this.countDownSecond, '-1');
-                this.countDownSecond = this.countDownSecond - 1;
-              }
-            }, 1000);
-          } else {
-            this.statusText = "";
-          }
+    timeout (item) {
+      let timeDiff = item.start_time - this.serviceTime;
+      let minuteDiff = timeDiff / 60;
+      // console.log(minuteDiff, "minuteDiff");
+      this.countDownSecond = timeDiff;
+      this.statusText = "即将开始";
+      // clearInterval(this.CDTimer);
+      this.CDTimer = setInterval(() => {
+        if (this.countDownSecond <= 0) {
+          //倒计时结束
+          clearInterval(this.CDTimer);
+          this.statusText = "进入直播";
         } else {
-          //大于（直播已开始）
-          if (this.serviceTime > val.end_time) {
-            //已经直播完
-            this.statusText = "已结束";
-          } else {
-            //正在直播
-            this.statusText = "进入直播";
-          }
+          this.countDownSecond = this.countDownSecond - 1;
         }
-        console.log(this.statusText, 'statusText');
-        // return this.statusText;
-      });
-
+      }, 1000);
+      return this.statusText;
     },
     //页面跳转
     handleGoTo (url, item) {
@@ -121,7 +107,6 @@ export default {
       if (url == "updateTime") {
         obj.id = item.id;
       }
-
       this.$bus.$emit("gotoURL", obj);
     },
     //翻页
@@ -152,10 +137,13 @@ export default {
           message(this, "error", res.msg);
         }
       });
+<<<<<<< HEAD
     },
     clear () {
       clearInterval(this.CDTimer);
       this.countDownSecond = 0;
+=======
+>>>>>>> origin/dev
     }
   },
   mounted () {

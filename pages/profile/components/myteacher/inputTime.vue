@@ -15,7 +15,7 @@
     <div class="con-item">
       <div class="left">请选择可以预约的时间段：</div>
       <div class="right">
-        <el-time-select placeholder="起始时间" v-model="appointTimeForm.startTime" :picker-options="{start: '08:00',step: '01:00',end: '22:00'}">
+        <el-time-select placeholder="起始时间" v-model="appointTimeForm.startTime" :picker-options="{start: '08:00',step: '01:00',end: '22:00'}" @change="handleChange">
         </el-time-select>
         <span class="separated">----</span>
         <el-time-select placeholder="结束时间" v-model="appointTimeForm.endTime" :picker-options="{start: '08:00',step: '01:00',end: '22:00',minTime: appointTimeForm.startTime}">
@@ -52,6 +52,9 @@ export default {
     };
   },
   methods: {
+    handleChange() {
+      this.appointTimeForm.endTime = "";
+    },
     handleGoTo(url) {
       let obj = { name: url };
       this.$bus.$emit("gotoURL", obj);

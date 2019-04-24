@@ -106,6 +106,16 @@ export default {
       appointTimeList: []
     };
   },
+  watch: {
+    "updateTimeForm.timeType"(val) {
+      if (val == 1) {
+        this.updateTimeForm.appointmentDate = "";
+        this.updateTimeForm.appointmentTime = "";
+      } else {
+        this.updateTimeForm.nextTime = "";
+      }
+    }
+  },
   methods: {
     handleselectChange(val) {
       this.updateTimeForm.nextTime = val;
@@ -161,6 +171,7 @@ export default {
           let data = res.data.bespokeDetail;
           this.updateTimeForm.name = data.real_name;
           this.updateTimeForm.startTime = data.start_time;
+          this.updateTimeForm.problems = data.remark;
           this.appointTimeList = res.data.otherTimeList;
         }
       });
