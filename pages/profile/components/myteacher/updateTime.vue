@@ -106,6 +106,16 @@ export default {
       appointTimeList: []
     };
   },
+  watch: {
+    "updateTimeForm.timeType"(val) {
+      if (val == 1) {
+        this.updateTimeForm.appointmentDate = "";
+        this.updateTimeForm.appointmentTime = "";
+      } else {
+        this.updateTimeForm.nextTime = "";
+      }
+    }
+  },
   methods: {
     handleselectChange(val) {
       this.updateTimeForm.nextTime = val;
