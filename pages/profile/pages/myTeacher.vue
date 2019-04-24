@@ -1,10 +1,14 @@
 <template>
   <!-- 教师入口 -->
-  <el-card class="changeNav">
+  <el-card class="">
     <!-- 列表 -->
     <v-list v-if="isShowList" :data="data"></v-list>
     <!-- 预约时间表 -->
-    <v-table v-if="isShowTimeTable"></v-table>
+    <v-tabletime v-if="isShowTimeTable"></v-tabletime>
+    <!-- 录入可预约的时间 -->
+    <v-inputtime v-if="isShowInputTime"></v-inputtime>
+    <!-- 修改时间 -->
+    <v-updatetime v-if="isShowUpdateTime"></v-updatetime>
   </el-card>
 </template>
 
@@ -12,17 +16,23 @@
 import { store as persistStore } from "~/lib/core/store";
 import List from "@/pages/profile/components/myteacher/list.vue";
 import timeTable from "@/pages/profile/components/myteacher/timeTable.vue";
+import inputTime from "@/pages/profile/components/myteacher/inputTime.vue";
+import updateTime from "@/pages/profile/components/myteacher/updateTime.vue";
 
 export default {
   props: ["data"],
   components: {
     "v-list": List,
-    "v-table": timeTable
+    "v-tabletime": timeTable,
+    "v-inputtime": inputTime,
+    "v-updatetime": updateTime
   },
   data() {
     return {
       isShowList: true,
-      isShowTimeTable: false
+      isShowTimeTable: false,
+      isShowInputTime: false,
+      isShowUpdateTime: false
     };
   },
   methods: {},
@@ -30,12 +40,20 @@ export default {
     this.$bus.$on("gotoURL", data => {
       this.isShowList = false;
       this.isShowTimeTable = false;
+      this.isShowInputTime = false;
+      this.isShowUpdateTime = false;
       switch (data.name) {
         case "list":
           this.isShowList = true;
           break;
         case "timeTable":
           this.isShowTimeTable = true;
+          break;
+        case "inputTime":
+          this.isShowInputTime = true;
+          break;
+        case "updateTime":
+          this.isShowUpdateTime = true;
           break;
         default:
           break;

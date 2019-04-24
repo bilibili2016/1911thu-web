@@ -1,9 +1,9 @@
 <template>
   <div class="inputTime">
     <h4>
-      <span>教师入口 ></span>
-      <span> 预约时间表 ></span>
-      <span class="active">录入可预约时间</span>
+      <span @click="handleGoTo('list')">教师入口 ></span>
+      <span @click="handleGoTo('timeTable')"> 预约时间表 ></span>
+      <span class="active"> 录入可预约时间</span>
     </h4>
     <div class="con-item">
       <div class="left">请选择可以预约的日期：</div>
@@ -29,25 +29,29 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       pickerOptions: {
-        disabledDate (time) {
+        disabledDate(time) {
           return time.getTime() <= Date.now();
         }
       },
       teacherForm: {
-        date: '',
-        startTime: '',
-        endTime: ''
+        date: "",
+        startTime: "",
+        endTime: ""
       }
-    }
+    };
   },
   methods: {
-    validate () {
-
+    handleGoTo(url) {
+      let obj = { name: url };
+      this.$bus.$emit("gotoURL", obj);
+    },
+    validate() {
+      this.handleGoTo("timeTable");
     }
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>
