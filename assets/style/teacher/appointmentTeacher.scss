@@ -13,7 +13,7 @@
     position: fixed;
     left: 50%;
     top: 50%;
-    margin-top: -340px;
+    margin-top: -302px;
     margin-left: -335px;
     background-color: #fff;
     border-radius: 10px;
@@ -35,6 +35,7 @@
       line-height: 24px;
       text-align: center;
       padding: 10px 0;
+      margin-bottom: 20px;
     }
 
     i.el-icon-close {
@@ -47,18 +48,11 @@
       z-index: 3;
     }
 
-    h4 {
-      text-align: center;
-      line-height: 46px;
-      color: #FF5F5F;
-      font-size: 14px;
-    }
-
     .con-item {
-      width: 570px;
+      width: 550px;
       height: 35px;
       line-height: 35px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       .fl {
         width: 130px;
@@ -66,7 +60,7 @@
       }
 
       .fr {
-        width: 430px;
+        width: 400px;
 
         .tel {
           width: 320px;
@@ -99,8 +93,20 @@
           }
         }
 
+        .el-input {
+          height: 35px;
+          line-height: 35px;
+
+          .el-input__inner {
+            height: 35px;
+            line-height: 35px;
+          }
+        }
+
         .el-select {
-          width: 430px;
+          height: 35px;
+          line-height: 35px;
+          width: 400px;
         }
       }
     }
@@ -136,6 +142,12 @@
         font-size: 14px;
         font-weight: 500;
         cursor: pointer;
+      }
+
+      span.cost {
+        color: #FF5F5F;
+        font-size: 14px;
+        float: right;
       }
     }
 

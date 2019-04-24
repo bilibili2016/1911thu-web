@@ -5,7 +5,6 @@
       <i class="el-icon-close" @click="closeForm"></i>
       <p class="tips">亲爱的学员，欢迎您使用预约咨询服务，请选择您方便接收回复的时间段，<br>
         我们将会在此时间段通过视频直播的方式为您提供一对一的咨询服务！</p>
-      <h4>咨询费用每小时200元</h4>
       <div class="con-item name clearfix">
         <div class="fl">您的联系方式：</div>
         <div class="fr">
@@ -34,7 +33,7 @@
         <div class="fl">请选择开始时间：</div>
         <div class="fr">
           <el-select v-model="teacherForm.startTime" placeholder="请选择开始时间">
-            <el-option v-for="item in timeList" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in timeList" :key="item.id" :label="item.start_time" :value="item.id">
             </el-option>
           </el-select>
         </div>
@@ -48,36 +47,22 @@
           </el-time-select>
         </div>
       </div> -->
-      <div class="con-item clearfix">
+      <!-- <div class="con-item clearfix">
         <div class="fl">请选择咨询的问题：</div>
         <div class="fr selectFr">
           <el-select v-model="teacherForm.problems" multiple collapse-tags placeholder="请选择">
             <el-option v-for="item in problems" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
-          <!-- <div class="select-con ">
-            <div class="divClick" @click.stop="handleCourseTimeClick">
-              <span>
-                <el-input v-model="teacherForm.courseTimeName" placeholder="请选择咨询时长" readonly></el-input>
-              </span>
-              <span class="pull-down">
-                <i class="el-icon-caret-bottom"></i>
-              </span>
-            </div>
-          </div>
-          <div class="pull-down-text" v-if="isShowTime">
-            <ul>
-              <li v-for="(item,index) in timeLi" :key="index" @click.stop="chooseTime(item)">{{item.name}}</li>
-            </ul>
-          </div> -->
         </div>
-      </div>
+      </div> -->
       <div class="textarea">
         <p>请简单描述您想要咨询的问题</p>
         <textarea placeholder="请输入您想要咨询的问题，预约成功，导师将一对一解答。" v-model="teacherForm.remark"></textarea>
       </div>
       <div class="agreement">
         <el-checkbox v-model="teacherForm.checked">我已阅读并同意</el-checkbox><i @click="serviceAgreement">《服务协议》</i>
+        <span class="cost">咨询费用200元</span>
       </div>
       <div class="btns">
         <span class="btn save active " @click="validate">提交</span>
@@ -98,93 +83,25 @@ export default {
         name: "", //姓名
         tel: "", //手机号
         teacherName: "",
-        appointmentDate: "", //预约开始时间
-        appointmentTime: "", //预约结束时间
         startTime: "",
-        courseTimeName: "50分钟", //授课时长
+        courseTimeName: "50min", //授课时长
         remark: "", //其他需求
         problems: "",
         checked: false,
         hasTel: true,
         hasName: false
       },
-      problems: [
-        {
-          label: '问题一',
-          value: '1',
-        },
-        {
-          label: '问题二',
-          value: '2',
-        },
-        {
-          label: '问题三',
-          value: '3',
-        },
-        {
-          label: '问题四',
-          value: '4',
-        },
-        {
-          label: '问题5',
-          value: '5',
-        },
-        {
-          label: '问题6',
-          value: '6',
-        },
-        {
-          label: '问题7',
-          value: '7',
-        },
-        {
-          label: '问题8',
-          value: '8',
-        }
-      ],
-      timeList: [
-        {
-          value: "8",
-          label: "08:00"
-        },
-        {
-          value: "9",
-          label: "09:00"
-        },
-        {
-          value: "10",
-          label: "10:00"
-        },
-        {
-          value: "11",
-          label: "11:00"
-        },
-      ],
-      isShowTime: false,
+      problems: [],
+      timeList: [],
     };
   },
   methods: {
     closeForm () {
       this.$emit("closeForm");
     },
-    //授课时长 点击
-    handleCourseTimeClick () {
-      this.isShowTime = !this.isShowTime;
-    },
-    //授课时长-分类-下拉选项点击
-    chooseTime (val) {
-      this.teacherForm.courseTime = val.value;
-      this.teacherForm.courseTimeName = val.name;
-      this.isShowTime = false;
-    },
     // 提交数据
     validate () {
       //   const telReg = /^[1][2,3,4,5,6,7,8,9][0-9]{9}$/;
-      this.teacherForm.startTime =
-        this.teacherForm.appointmentDate +
-        " " +
-        this.teacherForm.appointmentTime;
-      //   this.teacherForm.startTime = new Date(time).getTime();
       try {
         if (Trim(this.teacherForm.tel) === "") throw "请填写手机号码";
         // if (!this.teacherForm.hasTel) {
@@ -192,9 +109,8 @@ export default {
         //     throw "请填写正确的手机号码";
         // }
         if (Trim(this.teacherForm.name) === "") throw "请填写姓名";
-        if (this.teacherForm.appointmentDate === "") throw "请选择咨询开始日期";
-        if (this.teacherForm.appointmentTime === "") throw "请选择咨询开始时间";
-        if (this.teacherForm.courseTime === "") throw "请选择咨询时长";
+        if (this.teacherForm.startTime === "") throw "请选择咨询开始时间";
+        // if (this.teacherForm.problems === "") throw "请选择您想要咨询的问题";
         if (this.teacherForm.remark === "") throw "请简单描述您想要咨询的问题";
         if (!this.teacherForm.checked) throw "请先阅读《服务协议》";
       } catch (err) {
@@ -218,13 +134,23 @@ export default {
     update () {
       this.teacherForm.name = this.userInfo.real_name;
       this.teacherForm.tel = this.userInfo.user_name;
+      this.teacherBespokeInfo()
       if (this.teacherForm.name) {
         this.teacherForm.hasName = true;
       }
     },
+    teacherBespokeInfo () {
+      teacherInfo.teacherBespokeInfo(this.teacherForm).then(response => {
+        //不需要验证是否登录
+        if (response.status === 0) {
+          this.timeList = response.data.timeList
+        } else {
+          message(this, "error", response.msg);
+        }
+      });
+    },
     serviceAgreement () {
       console.log(123123123123);
-
     }
   },
   watch: {

@@ -94,7 +94,7 @@ export default {
         appointmentDate: "", //预约开始时间
         appointmentTime: "", //预约结束时间
         startTime: "",
-        courseTimeName: "50分钟", //授课时长
+        courseTimeName: "50min", //授课时长
         describe: "",
         problems: "",
         nextTime: "",
