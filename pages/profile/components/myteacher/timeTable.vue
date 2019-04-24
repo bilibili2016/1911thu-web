@@ -33,20 +33,16 @@
                 <span class="operate accept" @click="acceptInvite(item)">接受邀请</span>
                 <span class="operate update" @click="handleGoTo('updateTime',item)">申请修改时间</span>
               </div>
-              <<<<<<< HEAD <!-- <span v-if="item.result_status==3">{{countDown(item)}}</span> -->
-                <span v-if="item.result_status==3">{{countDownSecond}}</span>
-                =======
-                <div v-if="item.result_status==3">
-                  <div v-if="item.start_time >=serviceTime">
-                    <span v-if="(parseInt(item.start_time) - serviceTime)/60<=30">{{timeout(item,index)}}</span>
-                    <span v-else></span>
-                  </div>
-                  <div v-else>
-                    <span v-if="serviceTime > item.end_time">已结束</span>
-                    <span v-else>进入直播</span>
-                  </div>
+              <div v-if="item.result_status==3">
+                <div v-if="item.start_time >=serviceTime">
+                  <span v-if="(parseInt(item.start_time) - serviceTime)/60<=30">{{timeout(item,index)}}</span>
+                  <span v-else></span>
                 </div>
-                >>>>>>> origin/dev
+                <div v-else>
+                  <span v-if="serviceTime > item.end_time">已结束</span>
+                  <span v-else>进入直播</span>
+                </div>
+              </div>
             </td>
           </tr>
         </table>
@@ -137,13 +133,6 @@ export default {
           message(this, "error", res.msg);
         }
       });
-<<<<<<< HEAD
-    },
-    clear () {
-      clearInterval(this.CDTimer);
-      this.countDownSecond = 0;
-=======
->>>>>>> origin/dev
     }
   },
   mounted () {
