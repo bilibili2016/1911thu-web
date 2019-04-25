@@ -14,8 +14,66 @@
     width: 100%;
 
     .left {
-      height: 100%;
-      display: none;
+      position: relative;
+
+      .playInner {
+        width: 100%;
+        height: 100%;
+        background: url('https://static-image.1911edu.com/live-bg1.png') no-repeat;
+        background-size: cover;
+        position: relative;
+
+        .mediaCon {
+          width: 100%;
+          height: 100%;
+          background: url('https://static-image.1911edu.com/live-bg1.png') no-repeat;
+          background-size: cover;
+
+          .prism-ErrorMessage {
+            display: none !important;
+          }
+        }
+      }
+
+      .index {
+        z-index: 30;
+      }
+
+      .self {
+        width: 100%;
+        padding: 20px 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        .tbliveDiv {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 580px;
+          height: 430px;
+          z-index: 10
+        }
+
+        .embedDiv {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-color: #626262;
+          z-index: 1
+        }
+      }
+
+      .time {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        background-color: rgba(0, 0, 0, .8);
+        border-radius: 5px;
+        padding: 10px 15px;
+        color: #fff;
+        font-size: 14px;
+      }
     }
 
     .right {
@@ -23,7 +81,7 @@
       position: absolute;
       right: 0;
       top: 0;
-      background-color: red;
+      z-index: 31;
 
       .problemBox {
         color: #fff;
@@ -61,70 +119,19 @@
           background-color: #00B383;
           cursor: pointer;
 
-          &:first-child {
+          &.begin {
             background-color: #666;
+            cursor: auto;
+          }
+
+          &.end {
+            background-color: #666;
+            cursor: auto;
           }
         }
       }
 
 
-    }
-
-    .index {
-      z-index: 30;
-    }
-
-    .playInner {
-      width: 1100px;
-      height: 620px;
-      margin: 0 auto;
-      background: url('https://static-image.1911edu.com/live-bg1.png') no-repeat;
-      background-size: cover;
-      position: relative;
-
-      .mediaCon {
-        width: 100%;
-        height: 620px;
-        background: url('https://static-image.1911edu.com/live-bg1.png') no-repeat;
-        background-size: cover;
-
-        .prism-ErrorMessage {
-          display: none !important;
-        }
-      }
-    }
-
-    .self {
-      width: 1100px;
-      margin: 0 auto;
-      padding: 20px 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-
-      .tbliveDiv {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 580px;
-        height: 430px;
-        z-index: 10
-      }
-
-      .embedDiv {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background-color: #626262;
-        z-index: 1
-      }
-
-      #tblive {
-        // float: right;
-        // position: absolute !important;
-        // top: 0;
-        // right: 0;
-      }
     }
 
     .pull {
@@ -230,7 +237,7 @@
       }
     }
 
-    .end {
+    .over {
       width: 414px;
       height: 166px;
       padding-top: 40px;
@@ -292,14 +299,12 @@
 
 .rightBtn {
   position: absolute;
-  right: 0;
-  top: 400px;
+  left: 0;
+  top: 0;
 
   .white {
     width: 60px;
     height: 70px;
-    background-color: #844490;
-    border-radius: 5px 0 0 5px;
     text-align: center;
     cursor: pointer;
 

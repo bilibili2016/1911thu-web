@@ -12,6 +12,7 @@
             </div>
             <embed ref="embedDiv" class="embedDiv" src="/images/zhansi.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="580" height="430" style="background-color:#626262">
           </div>
+          <div class="time">直播倒计时：20分15秒</div>
           <!-- <div class="topBar"></div>
         <img src="https://static-image.1911edu.com/live-bg1.png" alt="">
         <div class="bottomBar clearfix">
@@ -28,8 +29,10 @@
             </ul>
           </div>
           <div class="liveBtn clearfix">
-            <span class="fl" @click="start_play">开始直播</span>
-            <span class="fr" @click="stop_play">结束直播</span>
+            <span v-if="begin" class="fl" @click="start_play">开始直播</span>
+            <span v-else class="fl begin">开始直播</span>
+            <span v-if="end" class="fr" @click="stop_play">结束直播</span>
+            <span v-else class="fr end">结束直播</span>
           </div>
         </div>
         <!-- 即将结束 -->
@@ -38,30 +41,31 @@
           <p>尊敬的学员您好，本次的咨询时间即将结束，请您合理分配时间！</p>
         </div>
         <!-- 已结束 -->
-        <div class="pop end" v-if="isOver">
+        <div class="pop over" v-if="isOver">
           <p>本次一对一视频直播咨询服务已结束。</p>
           <span class="btn">返回个人中心</span>
         </div>
       </div>
-      <div class="liveDetail">
+      <!-- <div class="liveDetail">
         <h1>咨询问题大纲</h1>
         <div class="detail-items">
           <p class="item" v-for="(item,index) in question" :key="index">{{item}}</p>
         </div>
-      </div>
+      </div> -->
     </div>
-    <!-- <div class="rightBtn">
+    <div class="rightBtn">
       <div class="white" @click="handleClick">
         <img v-if="isShow" src="https://static-image.1911edu.com/live-white.png" alt="">
         <img v-else src="https://static-image.1911edu.com/live-yellow.png" alt="">
         <p :class="{yellow:!isShow}">我的图像</p>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
 import { live } from "~/lib/v1_sdk/index";
 import { matchSplits, setTitle, message } from "@/lib/util/helper";
+import { store as persistStore } from "~/lib/core/store";
 
 export default {
   data () {
@@ -70,6 +74,8 @@ export default {
       isShow: true,
       isOver: false,
       nearEnd: false,
+      begin: true,
+      end: true,
       question: [
         "1、远程班学习效果能保证吗？",
         "2、请问学完课程，将会获得什么？",
@@ -91,7 +97,7 @@ export default {
         id: "mediaPlayer", //播放器id
         source: "",
         width: "100%",
-        height: "620px",
+        height: "100%",
         autoplay: true,
         isLive: true,
         rePlay: false,
@@ -110,6 +116,9 @@ export default {
       if (document.body.clientHeight) {
         this.$nextTick(() => {
           const h = document.body.clientHeight
+          const w = document.body.clientWidth
+          this.width = document.body.clientWidth
+          this.$refs.left.style.width = w - 300 + 'px'
           this.$refs.left.style.height = h + 'px'
           this.$refs.right.style.height = h + 'px'
           this.$refs.ul.style.height = h - 80 - 90 + 'px'
@@ -124,6 +133,8 @@ export default {
         if (response.status == 0) {
           this.url = response.data;
         } else {
+          this.begin = false
+          this.end = false
           message(this, "error", response.msg);
         }
       });
@@ -209,6 +220,11 @@ export default {
     }
   },
   mounted () {
+    if (!persistStore.get('token')) {
+      this.$router.push('/')
+      this.$bus.$emit('loginShow', true)
+      return false
+    }
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
     this.teacherLiveInfo.type = matchSplits("type");
