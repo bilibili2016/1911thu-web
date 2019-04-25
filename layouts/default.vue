@@ -74,18 +74,23 @@ export default {
     }
   },
   mounted () {
-    document.getElementsByClassName("headerBox")[0].style.display = "inline";
-    document.getElementsByClassName("footerBox")[0].style.display = "inline";
+    if (document.getElementsByClassName("headerBox")[0]) {
+      document.getElementsByClassName("headerBox")[0].style.display = "inline";
+      document.getElementsByClassName("footerBox")[0].style.display = "inline";
+    }
     this.fetchUrl();
     setPagesHeight();
 
     // 进入路由隐藏header和footer
     this.$bus.$on("headerFooterHide", () => {
+      console.log(123123123);
+
       this.HFShow = false;
     });
 
     // 出路由显示header和footer
     this.$bus.$on("headerFooterShow", () => {
+      console.log('headerFooterShow');
       this.HFShow = true;
     });
 

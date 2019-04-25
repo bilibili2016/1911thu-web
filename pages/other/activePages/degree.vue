@@ -64,6 +64,7 @@
 <script>
 export default {
   mounted () {
+
     let headerHeight = document.getElementsByClassName('headerBox')[0]
       .offsetHeight
     let footerHeight = document.getElementsByClassName('footerBox')[0]

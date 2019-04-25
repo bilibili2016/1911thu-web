@@ -123,7 +123,8 @@ export default {
       showTime: 3,
       gidForm: {
         gids: 'tab-twelfth'
-      }
+      },
+      loadTime: "",
     };
   },
   methods: {
@@ -170,6 +171,7 @@ export default {
           this.end = false;
           message(this, "error", response.msg);
         }
+        this.$bus.$emit("headerFooterHide");
       });
     },
     justTime () {
@@ -226,7 +228,6 @@ export default {
     },
     //开始直播
     start_play () {
-
       if (swfobject) {
         swfobject.getObjectById("tblive").Start(this.url.pushUrl);
         //   创建拉流播放器
@@ -266,14 +267,23 @@ export default {
           allowScriptAccess: "always"
         }
       );
-      this.objLength = document.getElementById("tblive").children.length;
-      if (this.objLength == 0) {
-        this.$refs.embedDiv.style.zIndex = 10;
-      } else {
-        this.$refs.embedDiv.style.zIndex = 1;
-      }
+      //   this.objLength = document.getElementById("tblive").children.length;
+      //   if (this.objLength == 0) {
+      //     this.$refs.embedDiv.style.zIndex = 10;
+      //   } else {
+      //     this.$refs.embedDiv.style.zIndex = 1;
+      //   }
       //   推流播放器样式改写
       //   document.getElementsByTagName("object")[0].setAttribute('data', '');
+    },
+    load () {
+      this.loadtime = setInterval(() => {
+        this.objLength = document.getElementById("tblive").children.length;
+        if (this.objLength > 0) {
+          this.$refs.embedDiv.style.zIndex = 1;
+          clearInterval(this.loadtime)
+        }
+      }, 1000);
     },
     creatPlayer (url) {
       this.pullaliPlayer.source = url.pullUrl;
@@ -312,7 +322,10 @@ export default {
     if (!persistStore.get("token")) {
       this.$router.push("/");
       this.$bus.$emit("loginShow", true);
+      this.$bus.$emit("headerFooterShow");
       return false;
+    } else {
+      this.$bus.$emit("headerFooterHide");
     }
     this.node = this.$refs.mediaPlayer;
     this.teacherLiveInfo.appointId = matchSplits("id");
@@ -320,18 +333,23 @@ export default {
     this.resize();
     window.addEventListener("resize", this.resize);
 
-    // window.open('http://www.adobe.com/go/getflashplayer_cn')
     this.teacherBespokeInfo();
+    if (this.loadtime) {
+      clearInterval(this.loadtime)
+    }
     //   创建推流播放器
     this.newPlayer();
+    this.load()
+
+
   },
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      vm.$bus.$emit("headerFooterHide");
-    });
-  },
+  //   beforeRouteEnter (to, from, next) {
+  //     next(vm => {
+  //       vm.$bus.$emit("headerFooterHide");
+  //     });
+  //   },
   beforeRouteLeave (to, from, next) {
-    this.$bus.$emit("headerFooterShow");
+    // this.$bus.$emit("headerFooterShow");
     next();
   }
 };
