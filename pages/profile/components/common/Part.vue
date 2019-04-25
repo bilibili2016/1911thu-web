@@ -4,64 +4,67 @@
       <img class="student_pro" v-if="!config.isTeacher" src="https://static-image.1911edu.com/student-process.png" alt="">
       <img v-else src="https://static-image.1911edu.com/appoint-process.png" alt="">
     </div>
-    <ul v-if="teacherData.length!=0">
-      <li v-if="!config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
-        <div class="headImg" @click="handleDetail(teacher)">
-          <img :src="teacher.picture" alt="">
-        </div>
-        <div class="info clearfix">
-          <div class="fl">
-            <img :src="teacher.teacher_head_img" alt="">
-            <span>{{teacher.teacher_user_name}}</span>
+    <div v-if="teacherData.length!=0">
+      <ul>
+        <li v-if="!config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
+          <div class="headImg" @click="handleDetail(teacher)">
+            <img :src="teacher.picture" alt="">
           </div>
-          <div class="fr">{{teacher.use_time/60}}min</div>
-        </div>
-        <div class="time">预约开始时间：{{changeTime(teacher.start_time)}}</div>
-        <div class="btn clearfix">
-          <div class="fl">￥{{teacher.price}}</div>
-          <div class="fr">
-            <span v-if="teacher.result_status == 2" class="wait">等待预约确认</span>
-            <span v-if="teacher.result_status == 3">
-              <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
-              <span v-else>
-                <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
-                <span v-else class="end">已结束</span>
+          <div class="info clearfix">
+            <div class="fl">
+              <img :src="teacher.teacher_head_img" alt="">
+              <span>{{teacher.teacher_user_name}}</span>
+            </div>
+            <div class="fr">{{teacher.use_time/60}}min</div>
+          </div>
+          <div class="time">预约开始时间：{{changeTime(teacher.start_time)}}</div>
+          <div class="btn clearfix">
+            <div class="fl">￥{{teacher.price}}</div>
+            <div class="fr">
+              <span v-if="teacher.result_status == 2" class="wait">等待预约确认</span>
+              <span v-if="teacher.result_status == 3">
+                <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
+                <span v-else>
+                  <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
+                  <span v-else class="end">已结束</span>
+                </span>
               </span>
-            </span>
-            <span v-if="teacher.result_status == 4" class="efficacy">已失效</span>
-            <span v-if="teacher.result_status == 6" class="wait">调整待确认</span>
+              <span v-if="teacher.result_status == 4" class="efficacy">已失效</span>
+              <span v-if="teacher.result_status == 6" class="wait">调整待确认</span>
+            </div>
           </div>
-        </div>
-      </li>
-      <li v-if="config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
-        <div class="headImg" @click="handleDetail(teacher)">
-          <img :src="teacher.picture" alt="">
-        </div>
-        <div class="info clearfix">
-          <div class="fl">
-            <img :src="teacher.user_head_img" alt="">
-            <span>{{teacher.user_name}}</span>
+        </li>
+        <li v-if="config.isTeacher" v-for="(teacher,index) in teacherData " :key="index">
+          <div class="headImg" @click="handleDetail(teacher)">
+            <img :src="teacher.picture" alt="">
           </div>
-          <div class="fr">{{teacher.use_time/60}}min</div>
-        </div>
-        <div class="time">预约开始时间：{{changeTime(teacher.start_time)}}</div>
-        <div class="btn clearfix">
-          <div class="fl">￥{{teacher.price}}</div>
-          <div class="fr">
-            <span v-if="teacher.result_status == 2" class="wait">等待预约确认</span>
-            <span v-if="teacher.result_status == 3">
-              <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
-              <span v-else>
-                <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
-                <span v-else class="end">已结束</span>
+          <div class="info clearfix">
+            <div class="fl">
+              <img :src="teacher.user_head_img" alt="">
+              <span>{{teacher.user_name}}</span>
+            </div>
+            <div class="fr">{{teacher.use_time/60}}min</div>
+          </div>
+          <div class="time">预约开始时间：{{changeTime(teacher.start_time)}}</div>
+          <div class="btn clearfix">
+            <div class="fl">￥{{teacher.price}}</div>
+            <div class="fr">
+              <span v-if="teacher.result_status == 2" class="wait">等待预约确认</span>
+              <span v-if="teacher.result_status == 3">
+                <span v-if="(Number(teacher.start_time)-teacher.service_time)/60>5" class="soon" @click="goLive(teacher)">等待开始</span>
+                <span v-else>
+                  <span v-if="Number(teacher.end_time)-teacher.service_time>0" class="begin" @click="goLive(teacher)">进入直播</span>
+                  <span v-else class="end">已结束</span>
+                </span>
               </span>
-            </span>
-            <span v-if="teacher.result_status == 4" class="efficacy">已失效</span>
-            <span v-if="teacher.result_status == 6" class="wait">调整待确认</span>
+              <span v-if="teacher.result_status == 4" class="efficacy">已失效</span>
+              <span v-if="teacher.result_status == 6" class="wait">调整待确认</span>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+
+    </div>
     <div class="content" v-else>
       <div class="noCourse">
         <img src="https://static-image.1911edu.com/noMsg.png" alt="">
@@ -80,7 +83,7 @@ import NoMsg from "@/pages/profile/components/common/noMsg.vue";
 import Info from "@/pages/profile/components/common/appointInfo.vue";
 
 export default {
-  props: ["teacherData", "config"],
+  props: ["teacherData", "config", "teacherPagemsg"],
   components: {
     "v-nomsg": NoMsg,
     "v-appointinfo": Info
@@ -98,6 +101,7 @@ export default {
     };
   },
   methods: {
+
     closeDetailPop() {
       this.isShowDetail = false;
       IEPopup("pane-tab-twelfth", "relative", 1);
